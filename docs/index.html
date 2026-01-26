@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codex Caelestis | Precision Forensic Astrology</title>
+    <title>Judicial Astrology Engine | Precision Forensic Astrology</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -23,7 +23,7 @@
     <main class="container">
         <header>
             <div class="header-content">
-                <h1>CODEX CAELESTIS</h1>
+                <h1>JUDICIAL ASTROLOGY ENGINE</h1>
                 <div class="ornament"></div>
                 <p class="subtitle">Traditional Forensic Astrological Engine</p>
             </div>
@@ -32,6 +32,60 @@
         <div id="backendNotice" class="backend-notice hidden">
             <strong>Demo Mode:</strong> This GitHub Pages site is a static preview. Run the backend locally to calculate charts.
         </div>
+
+        <section class="feature-overview">
+            <h2 class="section-title">FEATURE OVERVIEW</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Nativity Forensics</h3>
+                    <p>Calculates sect, dignity, and condition for each planet, then renders a structured forensic report with house placement and delineations.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Temporal Audits</h3>
+                    <p>Annual, monthly, and daily profections with zodiacal releasing to show active periods and pivots in time.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Daily Oracle</h3>
+                    <p>Summarizes the day with your current chronocrator, lunar context, and the “secret key” trigger if present.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Forensic Forecast</h3>
+                    <p>Five-day outlook built from profections and critical medical transits.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Medical Advisory</h3>
+                    <p>Checks surgical safety based on Moon sign, malefic afflictions, eclipses, and crisis days.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Hermetic Lots</h3>
+                    <p>Computes lots like Spirit and Fortune and maps them to your long-term timing structure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Celestial Curia</h3>
+                    <p>Highlights fixed stars, parans, nodal contacts, and universal eclipse pressures.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Synastry</h3>
+                    <p>Compares two charts for structural fit, dependencies, and shared fate patterns.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Best Timing</h3>
+                    <p>Electional timing engine that scans for high-quality windows to act.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Yes/No Answers</h3>
+                    <p>Direct question answering with horary mechanics and verdict weighting.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>World Dashboard</h3>
+                    <p>Global sky snapshot with eclipses, fixed stars, and transiting planets.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Birth Time Correction</h3>
+                    <p>Traditional rectification methods to refine an uncertain birth time.</p>
+                </div>
+            </div>
+        </section>
 
         <section class="calculator-card">
             <form id="chartForm">
@@ -291,10 +345,10 @@
             </div>
             <nav class="tool-tabs">
                 <button class="tool-tab-btn active" data-tool="synastry">SYNASTRY</button>
-                <button class="tool-tab-btn" data-tool="kairos">KAIROS</button>
-                <button class="tool-tab-btn" data-tool="horary">HORARY ORACLE</button>
+                <button class="tool-tab-btn" data-tool="kairos">BEST TIMING</button>
+                <button class="tool-tab-btn" data-tool="horary">YES/NO ANSWERS</button>
                 <button class="tool-tab-btn" data-tool="world">WORLD DASHBOARD</button>
-                <button class="tool-tab-btn" data-tool="rectification">RECTIFICATION</button>
+                <button class="tool-tab-btn" data-tool="rectification">BIRTH TIME CORRECTION</button>
             </nav>
 
             <div class="tool-content active" id="synastryTool">
@@ -376,10 +430,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">FIND KAIROS</button>
+                    <button type="submit">FIND BEST TIMING</button>
                 </form>
                 <div id="kairosResults" class="tool-results">
-                    <p class="placeholder-text">Ask for the best hour to act.</p>
+                    <p class="placeholder-text">Find the best windows to act.</p>
                 </div>
             </div>
 
@@ -413,10 +467,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">CONSULT ORACLE</button>
+                    <button type="submit">GET YES/NO ANSWER</button>
                 </form>
                 <div id="horaryResults" class="tool-results">
-                    <p class="placeholder-text">Pose a question to receive a definitive answer.</p>
+                    <p class="placeholder-text">Ask a question to receive a direct answer.</p>
                 </div>
             </div>
 
@@ -465,10 +519,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">RUN RECTIFICATION</button>
+                    <button type="submit">CORRECT BIRTH TIME</button>
                 </form>
                 <div id="rectificationResults" class="tool-results">
-                    <p class="placeholder-text">Submit birth data to run Animodar and Trutina Hermetis.</p>
+                    <p class="placeholder-text">Submit birth data to estimate a more accurate birth time.</p>
                 </div>
             </div>
         </section>
