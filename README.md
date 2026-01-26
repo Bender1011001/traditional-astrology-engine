@@ -2,6 +2,8 @@
 
 Codex Caelestis is a high-precision astrological engine built for the reconstruction and analysis of traditional nativity and mundane data. It implements 135 core rules derived from Hellenistic and Medieval sources (Valens, Ptolemy, Dorotheus, Bonatti, and Lilly).
 
+Live site: https://bender1011001.github.io/astrology/
+
 ## Features
 
 ### 1. Forensic Nativity Analysis
