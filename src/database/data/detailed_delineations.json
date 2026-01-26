@@ -1,0 +1,144 @@
+{
+    "SUN": {
+        "GENERAL": "** The Sun represents authority, rulership, the father, conscious will and intention, the visible self and public persona, honor and dignity, life force and vitality, the capacity to command respect and attention, and the central organizing principle around which all other planetary energies arrange themselves[9][15][25][48]. with creative expression, kingly authority, and the initiation of action[3][5][9]. In domicile, the Sun achieves its full expression as the natural ruler of the chart, demanding recognition, exercising leadership, and organizing all activities around the central principle of self-assertion and public visibility. In exaltation, the Sun achieves heightened potency and clarity, possessing the courage and pioneering spirit to initiate new enterprises and establish leadership in untested domains. the Sun's natural authority is compromised by the sign's association with collective values, unconventional thinking, and the prioritization of group harmony over individual assertion. In fall, the Sun's directive will encounters the sign's natural tendency toward balance, weighing of alternatives, and partnership cooperation, resulting in a diminishment of the native's willful self- expression in favor of diplomatic negotiation.",
+        "SIGNS": {
+            "PIONEERING SPIRIT": "and direct assertion of will. In Taurus, the Sun's expression becomes stable,",
+            "PERSISTENT": "and focused on building lasting material security. In Gemini, the Sun becomes",
+            "RESTLESS": "communicative, and intellectually versatile, though potentially scattered. In Cancer, the",
+            "SUN'S AUTHORITY EXTENDS OVER THE EMOTIONAL REALM AND FAMILY DOMAINS. LEO (DOMICILE)": "the Sun",
+            "ACHIEVES FULL CREATIVE EXPRESSION AND NATURAL LEADERSHIP AUTHORITY. VIRGO": "the Sun's light",
+            "BECOMES ANALYTICAL": "practical, and focused on perfecting systems and methods. In Libra (fall),",
+            "THE SUN'S WILL ENCOUNTERS COMPROMISE AND THE DEMAND FOR BALANCE. SCORPIO": "the Sun",
+            "DESCENDS INTO HIDDEN REALMS OF POWER AND TRANSFORMATION. SAGITTARIUS": "the Sun achieves",
+            "EXPANDED VISION AND PHILOSOPHICAL AUTHORITY. CAPRICORN": "the Sun's expression becomes",
+            "STRUCTURED": "responsible, and focused on achieving lasting institutional power. In Aquarius",
+            "(DETRIMENT)": "the Sun's individual authority dissolves into collective concerns. In Pisces, the Sun's"
+        },
+        "HOUSES": {
+            "second": "the",
+            "third": "the Sun's authority becomes expressed through communication and",
+            "fourth": "the Sun's power becomes focused on family and",
+            "fifth": "the Sun achieves full creative expression and naturally attracts",
+            "sixth": "the Sun's expression becomes channeled into work and service.",
+            "seventh": "the Sun's will encounters partnership and the necessity of negotiating",
+            "eighth": "the Sun's power",
+            "ninth": "",
+            "tenth": "the Sun achieves illumination regarding distant lands and spiritual matters. In the tenth house",
+            "twelfth": "the Sun's light becomes obscured and its"
+        }
+    },
+    "MOON": {
+        "GENERAL": "** Saturn represents restriction and limitation, discipline and responsibility, time and aging, suffering and hardship, boundaries and structures, authority and law, death and endings, and the principle of contraction and condensation that creates form and materiality[9][15][25][48]. reflecting its association with structured authority, intellectual distance, and the balanced administration of justice[3][5][9]. In domicile in Capricorn, Saturn achieves structured, ambitious, and long-term focused expression. In domicile in Aquarius, Saturn achieves detached, innovative, and intellectually rebellious expression. In exaltation in Libra, Saturn achieves balanced, fair, and justly administered expression. \ufeff**Detriment and Fall:** Saturn is in detriment in Cancer and Leo and in fall in Aries[3][5]. In detriment in Cancer, Saturn's cold restriction encounters the sign's emotional warmth and need for security, resulting in emotional coldness and difficulty in family connection. In detriment in Leo, Saturn's limitation encounters the sign's demand for individual expression and recognition, resulting in inhibited creativity and difficulty in self-assertion. In fall in Aries, Saturn's caution encounters the sign's impulsive courage, resulting in cowardice or difficulty in initiating action despite the impulse to do so.",
+        "SIGNS": {
+            "QUICK TO REACT. TAURUS (EXALTATION)": "the Moon achieves stability and develops strong",
+            "ATTACHMENT TO MATERIAL SECURITY AND SENSORY COMFORT. GEMINI": "the Moon becomes restless,",
+            "COMMUNICATIVE": "and emotionally changeable. In Cancer (domicile), the Moon achieves full",
+            "EMOTIONAL EXPRESSION AND NATURAL CAPACITY TO NURTURE AND PROVIDE COMFORT. LEO": "the Moon",
+            "BECOMES PROUD": "generous with affection, and emotionally expressive. In Virgo, the Moon",
+            "EMOTIONAL PROBLEMS. LIBRA": "the Moon becomes relationship-focused and emotionally",
+            "DEPENDENT ON PARTNERSHIP. SCORPIO (FALL)": "the Moon's emotional expression becomes intense,",
+            "SECRETIVE": "and focused on deep investigation of hidden truths. In Sagittarius, Saturn becomes",
+            "AND EMOTIONALLY ADVENTUROUS. CAPRICORN (DETRIMENT)": "the Moon becomes emotionally",
+            "RESTRAINED AND FOCUSED ON ACHIEVING SECURITY THROUGH EXTERNAL ACCOMPLISHMENT. AQUARIUS": "the",
+            "MOON BECOMES DETACHED": "intellectualized, and emotionally unconventional. In Pisces, the Moon",
+            "CONFRONTATION. TAURUS": "Mercury becomes stable, practical, and focused on material",
+            "APPLICATIONS OF THOUGHT. GEMINI (DOMICILE)": "Mercury achieves full intellectual expression and",
+            "NATURAL FACILITY WITH LANGUAGE AND COMMUNICATION. CANCER": "Mercury becomes emotionally",
+            "CONNECTED TO THOUGHT AND PRONE TO MOODINESS IN INTELLECTUAL EXPRESSION. LEO": "Mercury",
+            "BECOMES DRAMATIC": "confident, and prone to grand pronouncements. In Virgo (domicile and",
+            "ANALYSIS. LIBRA": "Mercury becomes balanced, diplomatic, and concerned with presenting ideas",
+            "FAIRLY. SCORPIO": "Mercury becomes penetrating, secretive, and focused on uncovering hidden",
+            "TRUTHS. SAGITTARIUS (DETRIMENT)": "Mercury becomes expansive, philosophical, and prone to",
+            "OVERGENERALIZATION. CAPRICORN": "Mercury becomes practical, disciplined, and focused on",
+            "SYSTEMS OF LASTING VALUE. AQUARIUS": "Mercury becomes innovative, intellectual, and concerned",
+            "WITH ABSTRACT PRINCIPLES. PISCES (DETRIMENT AND FALL)": "Mercury becomes confused, imaginative,",
+            "PRONE TO SUDDEN ROMANTIC INTENSITY. TAURUS (DOMICILE)": "Venus achieves stable, sensuous, and",
+            "DEEPLY COMMITTED EXPRESSION. GEMINI": "Venus becomes light, flirtatious, and emotionally",
+            "CHANGEABLE IN MATTERS OF LOVE. CANCER": "Venus becomes emotionally protective, family-",
+            "FOCUSED": "and deeply attached to the home. In Leo, Venus becomes proud, generous, and prone",
+            "TO DRAMATIC EXPRESSIONS OF AFFECTION. VIRGO (FALL)": "Venus becomes critical, discriminating, and",
+            "EMOTIONALLY RESERVED. LIBRA (DOMICILE)": "Venus achieves balanced, partnership-focused, and",
+            "AESTHETICALLY REFINED EXPRESSION. SCORPIO (DETRIMENT)": "Venus becomes intensely passionate,",
+            "POSSESSIVE": "and secretive in matters of love. In Sagittarius, Venus becomes generous,",
+            "OPTIMISTIC": "and adventurous in matters of love and social connection. In Capricorn, Venus",
+            "BECOMES SERIOUS": "loyal, and focused on lasting commitment. In Aquarius, Venus becomes",
+            "UNCONVENTIONAL": "detached, and focused on friendship-based relationships. In Pisces (exaltation),",
+            "DIRECTNESS": "and pioneering initiative. In Taurus (detriment), Mars becomes slow, stubborn, and",
+            "POTENTIALLY EXPLOSIVE WHEN PROVOKED. GEMINI": "Mars becomes quick, argumentative, and prone",
+            "TO VERBAL CONFLICT. CANCER (FALL)": "Mars becomes defensive, emotionally combative, and prone",
+            "TO USING EMOTIONAL MEANS OF ASSERTION. LEO": "Mars becomes proud, generous with energy, and",
+            "PRONE TO DRAMATIC DISPLAYS OF COURAGE. VIRGO": "Mars becomes precise, critical, and focused on",
+            "TECHNICAL PERFECTION. LIBRA (DETRIMENT)": "Mars becomes indecisive, prone to internal conflict,",
+            "AND FRUSTRATED BY THE NEED FOR DIPLOMACY. SCORPIO (DOMICILE)": "Mars achieves hidden, strategic,",
+            "AND DEEPLY FOCUSED EXPRESSION. SAGITTARIUS": "Mars becomes expansive, adventurous, and",
+            "PRONE TO OVERCOMMITMENT. CAPRICORN (EXALTATION)": "Mars achieves disciplined, strategic, and",
+            "\ufeffLONG-TERM FOCUSED EXPRESSION. AQUARIUS": "Mars becomes rebellious, innovative, and focused",
+            "ON IDEOLOGICAL CONFLICT. PISCES": "Mars becomes confused, emotionally driven, and prone to",
+            "TO OVERCONFIDENCE. TAURUS": "Jupiter becomes generous with material resources and inclined",
+            "\ufeffTOWARD ACCUMULATION OF WEALTH. GEMINI (DETRIMENT)": "Jupiter becomes scattered in thought and",
+            "PRONE TO OVERCOMMITMENT. CANCER (EXALTATION)": "Jupiter achieves emotionally generous and",
+            "NURTURING EXPRESSION. LEO": "Jupiter becomes proud, generous, and prone to grand gestures. In",
+            "LIBRA": "Jupiter becomes diplomatic, justice-focused, and balanced in distribution of goods. In",
+            "TRUTH-SEEKING. CAPRICORN (FALL)": "Jupiter becomes restricted, practical, and focused on long-term",
+            "BUILDING DESPITE INTERNAL IMPULSES TOWARD EXPANSION. AQUARIUS": "Jupiter becomes innovative,",
+            "IDEALISTIC": "and focused on humanitarian concerns. In Pisces (domicile), Jupiter achieves",
+            "HESITATION DESPITE THE IMPULSE TOWARD ACTION. TAURUS": "Saturn becomes stable, persistent, and",
+            "FOCUSED ON LONG-TERM ACCUMULATION OF RESOURCES. GEMINI": "Saturn becomes serious,",
+            "DELIBERATE": "and prone to heavy thinking and communication. In Cancer (detriment), Saturn",
+            "BECOMES EMOTIONALLY COLD": "isolated, and difficulty in family connection. In Leo (detriment),",
+            "SATURN BECOMES INHIBITED CREATIVELY AND PRONE TO LOW SELF-ESTEEM. VIRGO": "Saturn becomes",
+            "METICULOUS": "analytical, and focused on systems perfection. In Libra (exaltation), Saturn achieves",
+            "BALANCED": "fair, and justly administered expression. In Scorpio, Saturn becomes strategic,",
+            "SERIOUS": "philosophical, and focused on structured spiritual systems. In Capricorn (domicile),",
+            "SATURN ACHIEVES FULL AMBITIOUS": "structured, and long-term focused expression. In Aquarius"
+        },
+        "HOUSES": {
+            "second": "Saturn's expression focuses",
+            "fourth": "Saturn's expression focuses on family restriction and heavy family karma. In",
+            "sixth": "Saturn's expression focuses on work discipline",
+            "seventh": "Saturn's expression focuses",
+            "eighth": "",
+            "ninth": "Jupiter achieves optimal",
+            "tenth": "Saturn achieves strong",
+            "twelfth": "Saturn",
+            "fifth": "Jupiter's expression focuses on creativity and good fortune in",
+            "eleventh": "Saturn's expression focuses on",
+            "third": "Saturn's"
+        }
+    },
+    "NODES": {
+        "MERCURY": {
+            "NORTH_NODE": "The \"Chattering Dragon.\"",
+            "SOUTH_NODE": "The \"Silent Monk.\" The"
+        },
+        "MARS": {
+            "NORTH_NODE": "Malefic + Amplification. A",
+            "SOUTH_NODE": "Malefic + Diminution. The"
+        },
+        "SATURN": {
+            "NORTH_NODE": "Malefic + Amplification.",
+            "SOUTH_NODE": "Malefic + Diminution. The"
+        }
+    },
+    "STARS": {
+        "REGULUS": {
+            "GLORY": "Regulus is the Stella Regia, the ultimate indicator of high rank, command, and nobility. It elevates the native far above their social station, granting interface with the elite. It promises victory in contests and the favor of the powerful. In the forensic context of 2025, the shift to Virgo suggests that \"Glory\" is now achieved through technical expertise, service, and systems management rather than sheer charismatic dominance.19 \u25cf",
+            "NEMESIS": "The myth of Regulus is linked to the Persian king Feridun, who divided his kingdom and then destroyed it through a war of vengeance. The Nemesis of Regulus is Retribution. If the native seeks revenge against enemies, or engages in petty vendettas, they will lose everything. The height of the fall is proportional to the height of the rise. To survive Regulus, one must rule without the desire to punish.22 3. Antares (The Watcher of the West)"
+        },
+        "ALDEBARAN": {
+            "GLORY": "Aldebaran is the star of the \"Merchant King\" and the \"Just Warrior.\" It grants immense energy, perseverance, and the ability to build structures or movements from the ground up. It indicates military preferment and success through \"new beginnings\" (East). In 2025, with Uranus transiting Gemini, Aldebaran will be activated, suggesting the rise of leaders in technology and communication who exhibit martial, aggressive traits.15 \u25cf",
+            "NEMESIS": "The specific condition for Aldebaran is Integrity. The native achieves greatness only if they maintain the moral high ground. If the native compromises their ethics, breaks a contract, or engages in deceit, the star withdraws its protection instantly. The fall is usually legal or reputational, described as an \"ordeal by fire\".17"
+        },
+        "ANTARES": {
+            "GLORY": "Antares generates extreme intensity. It is the star of the \"Strategic Genius\" and the \"Obsessive Driver.\" It grants success through a \"cleansing life-and-death experience.\" It is often found in the charts of military generals, surgeons, and those who deal with the macabre or the taboo. It indicates high eminence achieved through abrasive action and the courage to face the darkness.18 \u25cf",
+            "NEMESIS": "The Nemesis is destructive obsession. The native becomes addicted to the adrenaline of the struggle, making enemies where there are none, and burning out their physical vitality. The \"abrasion\" of Antares wears down the native\u2019s support system until they stand alone in a self-made hell. The forensic outcome is often a violent or sudden physiological collapse (heart/stroke) or a total strategic encirclement.18"
+        },
+        "FOMALHAUT": {
+            "GLORY": "Fomalhaut is unique among the Royals for its Venusian/Mercurial nature. It does not grant glory through war or command, but through Ideals, Art, and Charisma. It is the star of the Prophet, the Artist, and the Dreamer. It grants a name that survives death through a legacy of ideas. It is associated with the \"divine child\" and the birth of new paradigms.18 \u25cf",
+            "NEMESIS": "The condition of failure is the Corruption of the Dream. Fomalhaut demands absolute purity of motive. If the native uses their spiritual or artistic gift for mercenary ends, or if the \"dream\" is built on a lie, the star dissolves the reality. The fall is one of disillusionment, drug addiction, or fading into obscurity\u2014the \"sunken treasure\" that is never recovered.18"
+        },
+        "ALGOL": {
+            "DESCRIPTION": ": Anatomy of the Demon Star Beta Persei, known as Caput Algol or the Head of Medusa, is universally regarded in the Hellenistic and Medieval tradition as the most malevolent configuration in the heavens. Its variable magnitude (the \"blinking\" demon) was historically associated with the loss of control, the severing of the head, and the detachment of rationality from the body.8 Longitude (2025): 26\u00b030' Taurus.8 Forensic Delineation on Primary Significators (Lilly & Ancients) William Lilly and the Anonymous of 379 provide specific, often gruesome aphorisms regarding Algol. It is not merely a sign of \"bad luck\" but a specific indicator of violence and termination. 1. Effects on the Sun: \u25cb The Aphorism: Lilly states that if the Sun is with Caput Algol (26\u00b0 Taurus) and receives no aspect from a Fortune (Jupiter or Venus), or if the Sun is in the 8th 8 House, the native is threatened with beheading. \u25cb Forensic Interpretation: In the modern context, \"beheading\" translates to severe trauma to the head and neck, stroke, brain aneurysms, or judicial execution (capital punishment). \u25cb Culmination: If the Sun culminates (MC) with Algol, the body may be \"wounded or 8 torn to pieces whilst he is yet living\". This suggests death by mob violence, catastrophic industrial accidents, or explosions\u2014situations where the physical integrity of the form is obliterated. 2. Effects on the Moon: \u25cb The Aphorism: The Moon with Algol indicates \"losing one's head\" metaphorically. It signifies madness, hysteria, or being swept up in collective rages. \u25cb Violent Outcome: If the Moon is with Algol and an \"Infortune\" (Mars/Saturn) is with other violent stars (like Regulus or the stars of Aquarius), it can signify \"death by the 8 command of a Prince\" (state execution) or severe throat infections/suffocation. The Moon serves as the trigger for the latent violence of the configuration. 3. Effects on the Ascendant Ruler: \u25cb The Aphorism: If the Ruler of the Ascendant is conjunct Algol, it begets in the native 7 a \"dogged nature and violence\". \u25cb Mechanism: The native becomes the agent of their own destruction. They possess a \"murderous\" or self-destructive intent. Lilly notes that such a person \"procures 7 sudden death unto himselfe\". The violence is not just external; it is woven into the character (Manners) of the individual. 4. Effects on the Hyleg (Giver of Life): \u25cb The Hyleg: The Hyleg is the planet or point (Sun, Moon, Ascendant, or Part of Fortune) that carries the vital spirit of the native. It is the \"Apheta\" or Releaser of Life. \u25cb The Anareta (Destroyer): When Algol is conjunct the Hyleg, the star acts as the ultimate Anareta (Killing Planet). \u25cb The Override: This conjunction overrides the general promise of longevity given by other planets. Even if Jupiter trines the Hyleg, the conjunction with Algol acts as a \"latent timer\" for a violent end. The \"sudden, hard, vehement burst\" of the star 8 terminates the life force abruptly. Historical charts of mass casualty events, such as the Bubonic Plague, often show the Hyleg or Ascendant involving Algol, signifying \"piled up corpses\".31"
+        }
+    }
+}

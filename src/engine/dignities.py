@@ -1,0 +1,509 @@
+
+from typing import Dict, List, Tuple, Optional
+from .models import PlanetName, Sign, Sect, Chart, Planet
+from .reference_data import (
+    TRIPLICITY_RULERS as REF_TRIPLICITY,
+    SIGN_ELEMENTS,
+    EGYPTIAN_TERMS,
+    FACES_ORDER,
+    DOMICILES as REF_DOMICILES,
+    EXALTATIONS as REF_EXALTATIONS
+)
+
+class DignityCalculator:
+    # Scores
+    DOMICILE = 5
+    EXALTATION = 4
+    TRIPLICITY = 3
+    TERM = 2
+    FACE = 1
+    DETRIMENT = -5
+    FALL = -4
+
+    # Domiciles & Exaltations
+    DOMICILES = {
+        PlanetName.SUN: [Sign.LEO],
+        PlanetName.MOON: [Sign.CANCER],
+        PlanetName.MERCURY: [Sign.GEMINI, Sign.VIRGO],
+        PlanetName.VENUS: [Sign.TAURUS, Sign.LIBRA],
+        PlanetName.MARS: [Sign.ARIES, Sign.SCORPIO],
+        PlanetName.JUPITER: [Sign.SAGITTARIUS, Sign.PISCES],
+        PlanetName.SATURN: [Sign.CAPRICORN, Sign.AQUARIUS]
+    }
+
+    DETRIMENTS = {
+        PlanetName.SUN: [Sign.AQUARIUS],
+        PlanetName.MOON: [Sign.CAPRICORN],
+        PlanetName.MERCURY: [Sign.SAGITTARIUS, Sign.PISCES],
+        PlanetName.VENUS: [Sign.ARIES, Sign.SCORPIO],
+        PlanetName.MARS: [Sign.LIBRA, Sign.TAURUS],
+        PlanetName.JUPITER: [Sign.GEMINI, Sign.VIRGO],
+        PlanetName.SATURN: [Sign.CANCER, Sign.LEO]
+    }
+
+    EXALTATIONS = {
+        PlanetName.SUN: Sign.ARIES,
+        PlanetName.MOON: Sign.TAURUS,
+        PlanetName.MERCURY: Sign.VIRGO,
+        PlanetName.VENUS: Sign.PISCES,
+        PlanetName.MARS: Sign.CAPRICORN,
+        PlanetName.JUPITER: Sign.CANCER,
+        PlanetName.SATURN: Sign.LIBRA
+    }
+
+    FALLS = {
+        PlanetName.SUN: Sign.LIBRA,
+        PlanetName.MOON: Sign.SCORPIO,
+        PlanetName.MERCURY: Sign.PISCES,
+        PlanetName.VENUS: Sign.VIRGO,
+        PlanetName.MARS: Sign.CANCER,
+        PlanetName.JUPITER: Sign.CAPRICORN,
+        PlanetName.SATURN: Sign.ARIES
+    }
+
+    # Dorothean Triplicity (Day, Night, Participant)
+    TRIPLICITY_RULERS = {
+        "FIRE": (PlanetName.SUN, PlanetName.JUPITER, PlanetName.SATURN),
+        "EARTH": (PlanetName.VENUS, PlanetName.MOON, PlanetName.MARS),
+        "AIR": (PlanetName.SATURN, PlanetName.MERCURY, PlanetName.JUPITER),
+        "WATER": (PlanetName.VENUS, PlanetName.MARS, PlanetName.MOON)
+    }
+
+    ZODIAC_ELEMENTS = {
+        Sign.ARIES: "FIRE", Sign.LEO: "FIRE", Sign.SAGITTARIUS: "FIRE",
+        Sign.TAURUS: "EARTH", Sign.VIRGO: "EARTH", Sign.CAPRICORN: "EARTH",
+        Sign.GEMINI: "AIR", Sign.LIBRA: "AIR", Sign.AQUARIUS: "AIR",
+        Sign.CANCER: "WATER", Sign.SCORPIO: "WATER", Sign.PISCES: "WATER"
+    }
+
+    # Valens Egyptian Terms
+    # Using format: {SIGN: [(Planet, MaxDegree), ...]}
+    TERMS = {
+        Sign.ARIES: [("JUPITER", 6), ("VENUS", 12), ("MERCURY", 20), ("MARS", 25), ("SATURN", 30)],
+        Sign.TAURUS: [("VENUS", 8), ("MERCURY", 14), ("JUPITER", 22), ("SATURN", 27), ("MARS", 30)],
+        Sign.GEMINI: [("MERCURY", 6), ("JUPITER", 12), ("VENUS", 17), ("MARS", 24), ("SATURN", 30)],
+        Sign.CANCER: [("MARS", 7), ("VENUS", 13), ("MERCURY", 19), ("JUPITER", 26), ("SATURN", 30)],
+        Sign.LEO: [("JUPITER", 6), ("VENUS", 11), ("SATURN", 18), ("MERCURY", 24), ("MARS", 30)],
+        Sign.VIRGO: [("MERCURY", 7), ("VENUS", 17), ("JUPITER", 21), ("MARS", 28), ("SATURN", 30)],
+        Sign.LIBRA: [("SATURN", 6), ("MERCURY", 14), ("JUPITER", 21), ("VENUS", 28), ("MARS", 30)],
+        Sign.SCORPIO: [("MARS", 7), ("VENUS", 11), ("MERCURY", 19), ("JUPITER", 24), ("SATURN", 30)],
+        Sign.SAGITTARIUS: [("JUPITER", 12), ("VENUS", 17), ("MERCURY", 21), ("SATURN", 26), ("MARS", 30)],
+        Sign.CAPRICORN: [("MERCURY", 7), ("JUPITER", 14), ("VENUS", 22), ("SATURN", 26), ("MARS", 30)],
+        Sign.AQUARIUS: [("MERCURY", 7), ("VENUS", 13), ("JUPITER", 20), ("MARS", 25), ("SATURN", 30)],
+        Sign.PISCES: [("VENUS", 12), ("JUPITER", 16), ("MERCURY", 19), ("MARS", 28), ("SATURN", 30)]
+    }
+
+    # Chaldean Faces
+    FACES = {
+        Sign.ARIES: ["MARS", "SUN", "VENUS"],
+        Sign.TAURUS: ["MERCURY", "MOON", "SATURN"],
+        Sign.GEMINI: ["JUPITER", "MARS", "SUN"],
+        Sign.CANCER: ["VENUS", "MERCURY", "MOON"],
+        Sign.LEO: ["SATURN", "JUPITER", "MARS"],
+        Sign.VIRGO: ["SUN", "VENUS", "MERCURY"],
+        Sign.LIBRA: ["MOON", "SATURN", "JUPITER"],
+        Sign.SCORPIO: ["MARS", "SUN", "VENUS"],
+        Sign.SAGITTARIUS: ["MERCURY", "MOON", "SATURN"],
+        Sign.CAPRICORN: ["JUPITER", "MARS", "SUN"],
+        Sign.AQUARIUS: ["VENUS", "MERCURY", "MOON"],
+        Sign.PISCES: ["SATURN", "JUPITER", "MARS"]
+    }
+
+    CHALDEAN_ORDER = [
+        PlanetName.SATURN,
+        PlanetName.JUPITER,
+        PlanetName.MARS,
+        PlanetName.SUN,
+        PlanetName.VENUS,
+        PlanetName.MERCURY,
+        PlanetName.MOON
+    ]
+
+    # Almuten Figuris House Scores (Ibn Ezra)
+    ALMUTEN_HOUSE_SCORES = {
+        1: 12, 10: 12,
+        4: 11, 7: 11,
+        2: 10, 11: 10,
+        5: 9, 8: 9,
+        3: 8, 9: 8,
+        6: 7, 12: 7
+    }
+
+    # Planetary Joys (Traditional)
+    PLANETARY_JOYS = {
+        PlanetName.MERCURY: 1,
+        PlanetName.MOON: 3,
+        PlanetName.VENUS: 5,
+        PlanetName.MARS: 6,
+        PlanetName.SUN: 9,
+        PlanetName.JUPITER: 11,
+        PlanetName.SATURN: 12
+    }
+
+    # Average Speeds (Approximate degrees per day)
+    # Used for Accidental Dignity weighting
+    AVERAGE_SPEEDS = {
+        PlanetName.SUN: 0.9833,
+        PlanetName.MOON: 13.1764,
+        PlanetName.MERCURY: 0.9833,
+        PlanetName.VENUS: 1.2, # Varies, but 1.2 is often used as "fast" threshold
+        PlanetName.MARS: 0.524,
+        PlanetName.JUPITER: 0.0831,
+        PlanetName.SATURN: 0.0335
+    }
+
+    @classmethod
+    def get_house_number(cls, longitude: float, ascendant: float) -> int:
+        """Calculates Whole Sign house number."""
+        asc_sign_idx = int(ascendant / 30) % 12
+        p_sign_idx = int(longitude / 30) % 12
+        return ((p_sign_idx - asc_sign_idx) % 12) + 1
+
+    @classmethod
+    def get_monomoiria_ruler(cls, sign: Sign, degree: float) -> PlanetName:
+        """
+        Monomoiria (Degree Rulership):
+        First degree (0-1) is ruled by the Domicile Ruler,
+        then follow the Chaldean Order.
+        """
+        # Find domicile ruler of the sign
+        domicile_ruler = None
+        for planet, signs in cls.DOMICILES.items():
+            if sign in signs:
+                domicile_ruler = planet
+                break
+        
+        if not domicile_ruler:
+            return PlanetName.SATURN # Fallback
+
+        # Degree index 0-29
+        deg_idx = int(degree)
+        
+        # Chaldean order starting from domicile ruler
+        start_idx = cls.CHALDEAN_ORDER.index(domicile_ruler)
+        ruler_idx = (start_idx + deg_idx) % len(cls.CHALDEAN_ORDER)
+        return cls.CHALDEAN_ORDER[ruler_idx]
+
+    @classmethod
+    def check_hayz_halb(cls, planet_name: PlanetName, longitude: float, chart: Chart) -> Dict:
+        """
+        Hayz:
+            Diurnal Planet (Sun, Jup, Sat): Day chart, Above horizon, Masculine Sign.
+            Nocturnal Planet (Moon, Ven, Mar): Night chart, Below horizon, Feminine Sign.
+        Halb: Lesser condition (satisfies sect and either horizon or sign condition).
+        """
+        chart_sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+        is_diurnal = planet_name in [PlanetName.SUN, PlanetName.JUPITER, PlanetName.SATURN]
+        is_nocturnal = planet_name in [PlanetName.MOON, PlanetName.VENUS, PlanetName.MARS]
+        
+        # Masculine: Fire/Air. Feminine: Earth/Water.
+        sign_idx = int(longitude / 30) % 12
+        sign = list(Sign)[sign_idx]
+        element = cls.ZODIAC_ELEMENTS[sign]
+        is_masculine = element in ["FIRE", "AIR"]
+        
+        # Above horizon check (using house number for simplicity/consistency)
+        asc_sign_idx = int(chart.ascendant / 30) % 12
+        p_sign_idx = sign_idx
+        house_num = ((p_sign_idx - asc_sign_idx) % 12) + 1
+        is_above_horizon = house_num >= 7
+        
+        status = "None"
+        details = []
+        
+        sect_match = (chart_sect == Sect.DAY and is_diurnal) or (chart_sect == Sect.NIGHT and is_nocturnal)
+        horizon_match = (is_above_horizon if is_diurnal else not is_above_horizon)
+        sign_match = (is_masculine if is_diurnal else not is_masculine)
+        
+        if sect_match and horizon_match and sign_match:
+            status = "Hayz"
+            details.append("In Hayz (Sect, Horizon, and Sign match)")
+        elif sect_match and (horizon_match or sign_match):
+            status = "Halb"
+            details.append("In Halb (Sect match plus either Horizon or Sign)")
+        elif sect_match:
+            status = "In Sect"
+            details.append("Matches chart sect only")
+            
+        return {"status": status, "details": details}
+
+    @classmethod
+    def calculate_planet_dignity(cls, planet_name: PlanetName, longitude: float, chart_sect: Sect) -> Dict:
+        sign_idx = int(longitude / 30) % 12
+        sign = list(Sign)[sign_idx]
+        deg_in_sign = longitude % 30
+        
+        score = 0
+        details = []
+
+        # 1. Domicile (+5)
+        if sign in cls.DOMICILES.get(planet_name, []):
+            score += cls.DOMICILE
+            details.append("Domicile (+5)")
+        elif sign in cls.DETRIMENTS.get(planet_name, []):
+            score += cls.DETRIMENT
+            details.append("Detriment (-5)")
+
+        # 2. Exaltation (+4)
+        if cls.EXALTATIONS.get(planet_name) == sign:
+            score += cls.EXALTATION
+            details.append("Exaltation (+4)")
+        elif cls.FALLS.get(planet_name) == sign:
+            score += cls.FALL
+            details.append("Fall (-4)")
+
+        # 3. Triplicity (+3)
+        element = cls.ZODIAC_ELEMENTS[sign]
+        rulers = cls.TRIPLICITY_RULERS[element]
+        # Day, Night, Participant
+        is_ruler = False
+        if chart_sect == Sect.DAY and rulers[0] == planet_name:
+            is_ruler = True
+        elif chart_sect == Sect.NIGHT and rulers[1] == planet_name:
+            is_ruler = True
+        elif rulers[2] == planet_name:
+            is_ruler = True
+            
+        if is_ruler:
+            score += cls.TRIPLICITY
+            details.append("Triplicity (+3)")
+
+        # 4. Terms (+2)
+        term_rulers = cls.TERMS[sign]
+        for p_str, limit in term_rulers:
+            if deg_in_sign < limit:
+                if p_str == planet_name.value.upper():
+                    score += cls.TERM
+                    details.append("Term (+2)")
+                break
+
+        # 5. Face (+1)
+        face_idx = int(deg_in_sign / 10)
+        face_ruler = cls.FACES[sign][face_idx]
+        if face_ruler == planet_name.value.upper():
+            score += cls.FACE
+            details.append("Face (+1)")
+
+        # 6. Monomoiria
+        mono_ruler = cls.get_monomoiria_ruler(sign, deg_in_sign)
+        if mono_ruler == planet_name:
+            score += 1
+            details.append(f"Monomoiria (+1, Ruler: {mono_ruler.value})")
+        else:
+            details.append(f"Monomoiria Ruler: {mono_ruler.value}")
+
+        return {
+            "total_score": score,
+            "details": details,
+            "sign": sign.value,
+            "degree": deg_in_sign
+        }
+
+    @classmethod
+    def calculate_planetary_joy(cls, planet: Planet, house_num: int) -> int:
+        """
+        Check if a planet is in its 'Joy' house.
+        Mercury: 1st, Moon: 3rd, Venus: 5th, Mars: 6th, Sun: 9th, Jupiter: 11th, Saturn: 12th.
+        Add +2 points for being in Joy.
+        """
+        joy_house = cls.PLANETARY_JOYS.get(planet.name)
+        if joy_house == house_num:
+            return 2
+        return 0
+
+    @classmethod
+    def calculate_accidental_dignity(cls, planet: Planet, chart: Chart) -> Dict:
+        """
+        Implement a comprehensive scoring system for accidental dignity.
+        """
+        score = 0
+        details = []
+        
+        house_num = cls.get_house_number(planet.longitude, chart.ascendant)
+        
+        # 1. House Position
+        if house_num in [1, 4, 7, 10]:
+            score += 5
+            details.append(f"Angular House ({house_num}) (+5)")
+        elif house_num in [2, 5, 8, 11]:
+            score += 3
+            details.append(f"Succedent House ({house_num}) (+3)")
+        elif house_num in [3, 6, 9, 12]:
+            score += 1
+            details.append(f"Cadent House ({house_num}) (+1)")
+
+        # 2. Retrograde / Speed
+        if planet.speed < 0:
+            score -= 5
+            details.append("Retrograde (-5)")
+        else:
+            # Station Direct check: Very slow but positive speed
+            # Since we don't have historical data, we use a small threshold
+            if planet.speed < 0.01: # Threshold for station
+                score += 4
+                details.append("Station Direct (Estimated) (+4)")
+            
+            # Speed comparison
+            avg_speed = cls.AVERAGE_SPEEDS.get(planet.name, 0)
+            if planet.speed > avg_speed:
+                score += 2
+                details.append(f"Faster than average speed (+2, {planet.speed:.4f} > {avg_speed:.4f})")
+            elif planet.speed < avg_speed and planet.speed > 0:
+                score -= 2
+                details.append(f"Slower than average speed (-2, {planet.speed:.4f} < {avg_speed:.4f})")
+
+        # 3. Solar Relationship (Oriental/Occidental)
+        sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
+        if sun and planet.name != PlanetName.SUN:
+            # Oriental: Planet rises before Sun (smaller longitude)
+            is_oriental = (sun.longitude - planet.longitude) % 360 < 180
+            
+            if planet.name in [PlanetName.SATURN, PlanetName.JUPITER, PlanetName.MARS]:
+                if is_oriental:
+                    score += 2
+                    details.append("Superior Planet Oriental of Sun (+2)")
+            elif planet.name in [PlanetName.VENUS, PlanetName.MERCURY]:
+                if not is_oriental: # Occidental
+                    score += 2
+                    details.append("Inferior Planet Occidental of Sun (+2)")
+
+        # 4. Phase Visibility (Cazimi, Combust, Under Beams)
+        if sun and planet.name != PlanetName.SUN:
+            dist = abs(planet.longitude - sun.longitude)
+            if dist > 180: dist = 360 - dist
+            
+            if dist < (17/60): # Cazimi (17 mins)
+                score += 5
+                details.append("Cazimi (+5)")
+            elif dist <= 8:
+                score -= 5
+                details.append("Combust (-5)")
+            elif dist <= 15:
+                score -= 4
+                details.append("Under Beams (-4)")
+
+        # 5. Planetary Joy
+        joy_score = cls.calculate_planetary_joy(planet, house_num)
+        if joy_score > 0:
+            score += joy_score
+            details.append(f"Planetary Joy in {house_num}th House (+{joy_score})")
+
+        return {
+            "total_score": score,
+            "details": details,
+            "house": house_num
+        }
+
+    @classmethod
+    def get_essential_rulers(cls, longitude: float, chart_sect: Sect) -> Dict[str, PlanetName]:
+        """Returns the 5 essential dignity rulers for a given longitude."""
+        sign_idx = int(longitude / 30) % 12
+        sign = list(Sign)[sign_idx]
+        deg = longitude % 30
+        
+        # Domicile
+        domicile = REF_DOMICILES[sign]
+        
+        # Exaltation
+        exaltation = REF_EXALTATIONS.get(sign)
+        
+        # Triplicity
+        element = SIGN_ELEMENTS[sign]
+        triplicity = REF_TRIPLICITY[element][chart_sect]
+        
+        # Term
+        term = None
+        terms = EGYPTIAN_TERMS[sign]
+        for p, limit in terms:
+            if deg < limit:
+                term = p
+                break
+        
+        # Face
+        face_idx = int(deg / 10)
+        global_face_idx = (sign_idx * 3) + face_idx
+        face = FACES_ORDER[global_face_idx % len(FACES_ORDER)]
+        
+        return {
+            "domicile": domicile,
+            "exaltation": exaltation,
+            "triplicity": triplicity,
+            "term": term,
+            "face": face
+        }
+
+    @classmethod
+    def calculate_almuten_figuris(cls, chart: Chart, san_lon: float, pof_lon: Optional[float] = None) -> Dict:
+        """
+        Ibn Ezra System (Almuten Figuris):
+        5 Points: Sun, Moon, Ascendant, Part of Fortune, Pre-natal Syzygy (SAN).
+        - Essential dignities (5,4,3,2,1) summed for each planet across these points.
+        - Add Accidental Dignity points.
+        - Add House-based points (1/10: 12, 4/7: 11, 2/11: 10, 5/8: 9, 3/9: 8, 6/12: 7).
+        """
+        scores = {p: 0 for p in [
+            PlanetName.SUN, PlanetName.MOON, PlanetName.MERCURY,
+            PlanetName.VENUS, PlanetName.MARS, PlanetName.JUPITER, PlanetName.SATURN
+        ]}
+        
+        chart_sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+        sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
+        moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
+        
+        # Calculate Part of Fortune if not provided
+        # PoF = Asc + Moon - Sun (Day) or Asc + Sun - Moon (Night)
+        if pof_lon is None:
+            if chart_sect == Sect.DAY:
+                pof_lon = (chart.ascendant + moon.longitude - sun.longitude) % 360
+            else:
+                pof_lon = (chart.ascendant + sun.longitude - moon.longitude) % 360
+
+        points = [
+            ("Sun", sun.longitude),
+            ("Moon", moon.longitude),
+            ("Ascendant", chart.ascendant),
+            ("Part of Fortune", pof_lon),
+            ("SAN", san_lon)
+        ]
+        
+        # 1. Essential Dignities of the 5 points
+        for name, lon in points:
+            rulers = cls.get_essential_rulers(lon, chart_sect)
+            
+            scores[rulers["domicile"]] += 5
+            if rulers["exaltation"]:
+                scores[rulers["exaltation"]] += 4
+            scores[rulers["triplicity"]] += 3
+            scores[rulers["term"]] += 2
+            scores[rulers["face"]] += 1
+            
+        # 2. Add Accidental Dignity and House Points for each planet
+        planet_breakdown = {}
+        for planet in chart.planets:
+            if planet.name not in scores: continue
+            
+            # Accidental
+            acc_data = cls.calculate_accidental_dignity(planet, chart)
+            scores[planet.name] += acc_data["total_score"]
+            
+            # House Points (Specific to Almuten Figuris)
+            house_num = acc_data["house"]
+            house_pts = cls.ALMUTEN_HOUSE_SCORES.get(house_num, 0)
+            scores[planet.name] += house_pts
+            
+            planet_breakdown[planet.name.value] = {
+                "essential_from_points": scores[planet.name] - acc_data["total_score"] - house_pts,
+                "accidental_score": acc_data["total_score"],
+                "house_points": house_pts,
+                "total": scores[planet.name],
+                "house": house_num
+            }
+            
+        # Determine Winner
+        winner = max(scores, key=scores.get)
+        
+        return {
+            "almuten_figuris": winner.value,
+            "total_score": scores[winner],
+            "planet_breakdown": planet_breakdown
+        }

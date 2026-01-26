@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex Caelestis | Precision Forensic Astrology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+        <div class="stars-overlay"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <div class="header-content">
+                <h1>CODEX CAELESTIS</h1>
+                <div class="ornament"></div>
+                <p class="subtitle">Traditional Forensic Astrological Engine</p>
+            </div>
+        </header>
+
+        <div id="backendNotice" class="backend-notice hidden">
+            <strong>Demo Mode:</strong> This GitHub Pages site is a static preview. Run the backend locally to calculate charts.
+        </div>
+
+        <section class="calculator-card">
+            <form id="chartForm">
+                <div class="form-section">
+                    <h2 class="section-title">NATIVITY DETAILS</h2>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="date">DATE OF BIRTH</label>
+                            <input type="date" id="date" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="time">TIME OF BIRTH</label>
+                            <input type="time" id="time" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="city">CITY</label>
+                            <input type="text" id="city" placeholder="e.g. Rome" required autocomplete="off">
+                            <div id="citySuggestions" class="suggestions"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="state">STATE / COUNTRY</label>
+                            <input type="text" id="state" placeholder="e.g. Italy">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">TEMPORAL AUDIT (OPTIONAL)</h2>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="currentAge">CURRENT AGE</label>
+                            <input type="number" id="currentAge" placeholder="e.g. 32">
+                        </div>
+                        <div class="input-group">
+                            <label for="analysisDate">ANALYSIS DATE</label>
+                            <input type="date" id="analysisDate">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="calculateBtn">
+                    <span class="btn-text">CAST NATIVITY</span>
+                    <div class="btn-shimmer"></div>
+                </button>
+            </form>
+        </section>
+
+        <section id="results" class="results-hidden">
+            <div id="chartWheelContainer" class="chart-wheel-container">
+                <!-- SVG Chart Wheel rendered here -->
+            </div>
+            <nav class="result-tabs">
+                <button class="tab-btn active" data-tab="forensic">FORENSIC REPORT</button>
+                <button class="tab-btn" data-tab="fate">FATE TIMELINE</button>
+                <button class="tab-btn" data-tab="prediction">CHRONOCRATORS</button>
+                <button class="tab-btn" data-tab="oracle">DAILY ORACLE</button>
+                <button class="tab-btn" data-tab="forecast">FORENSIC FORECAST</button>
+                <button class="tab-btn" data-tab="medical">IATROMATHEMATICS</button>
+                <button class="tab-btn" data-tab="technical">TECHNICAL DATA</button>
+
+            </nav>
+
+            <div class="tab-content active" id="forensicTab">
+                <div id="mundaneContext" class="mundane-banner">
+                    <!-- Eclipses here -->
+                </div>
+
+                <div id="summaryGrid" class="summary-grid">
+                    <div id="lunarProfileCard" class="summary-card">
+                        <h4>LUNAR PROFILE</h4>
+                        <p class="placeholder-text">Cast a nativity to reveal the lunar profile.</p>
+                    </div>
+                    <div id="elementBalanceCard" class="summary-card">
+                        <h4>ELEMENTAL BALANCE</h4>
+                        <p class="placeholder-text">Elemental dominance appears here.</p>
+                    </div>
+                    <div id="universalEventsCard" class="summary-card">
+                        <h4>UNIVERSAL EVENTS</h4>
+                        <p class="placeholder-text">No eclipse ledger loaded.</p>
+                    </div>
+                    <div id="universalCausationCard" class="summary-card">
+                        <h4>UNIVERSAL CAUSATION</h4>
+                        <p class="placeholder-text">Awaiting overdrive audit.</p>
+                    </div>
+                </div>
+
+                <div id="soulGuardianSection" class="soul-guardian-section">
+                    <div id="soulGuardianCard" class="soul-guardian-card">
+                        <h3>ALMUTEN FIGURIS</h3>
+                        <p class="placeholder-text">Cast a nativity to reveal the Soul's Guardian.</p>
+                    </div>
+                    <div id="soulGuardianTeam" class="soul-guardian-card">
+                        <h3>SECT TEAMS</h3>
+                        <p class="placeholder-text">Constructive vs. Destructive forces appear here.</p>
+                    </div>
+                </div>
+
+                <div id="lotsSection" class="codex-section">
+                    <h3 class="section-divider">HERMETIC LOTS</h3>
+                    <div id="lotsGrid" class="lots-grid">
+                        <p class="placeholder-text">Lots will appear after calculation.</p>
+                    </div>
+                </div>
+
+                <div id="witnessSection" class="codex-section">
+                    <h3 class="section-divider">CELESTIAL CURIA</h3>
+                    <div class="witness-grid">
+                        <div class="witness-card">
+                            <h4>FIXED STARS & PARANS</h4>
+                            <div id="fixedStarList">
+                                <p class="placeholder-text">No stellar contacts logged.</p>
+                            </div>
+                        </div>
+                        <div class="witness-card">
+                            <h4>NODAL CONTACTS</h4>
+                            <div id="nodeList">
+                                <p class="placeholder-text">No nodal activations detected.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="forensicGrid" class="forensic-grid">
+                    <!-- Planet Forensic Cards here -->
+                </div>
+
+                <div id="horaryPhysicsSection" class="horary-section hidden">
+                    <h3 class="section-divider">SHADOW PHYSICS & INTERACTION</h3>
+                    <div id="horaryPhysicsList" class="horary-grid"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="fateTab">
+                <div class="fate-timeline-container">
+                    <div class="timeline-lot-selector">
+                        <button class="lot-btn active" data-lot="Spirit">LOT OF SPIRIT (Career/Will)</button>
+                        <button class="lot-btn" data-lot="Fortune">LOT OF FORTUNE (Body/Fate)</button>
+                    </div>
+                    <div id="fateTimelineAlert" class="fate-alert">
+                        <p class="placeholder-text">Cast a nativity to calculate your pivots.</p>
+                    </div>
+                    <div id="fateTimelineList" class="chapters-list">
+                        <!-- ZR Chapters rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="predictionTab">
+                <div class="prediction-grid">
+                    <div class="prediction-card">
+                        <h3>PROFICIONS</h3>
+                        <div id="profectionInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>ZODIACAL RELEASING</h3>
+                        <div id="zrInfo"></div>
+                    </div>
+                </div>
+                <div class="prediction-advanced-grid">
+                    <div class="prediction-card">
+                        <h3>FIRDARIA & MUNTHA</h3>
+                        <div id="firdariaInfo"></div>
+                        <div id="munthaInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>SOLAR RETURN</h3>
+                        <div id="solarReturnInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>SOLAR ARCS</h3>
+                        <div id="solarArcInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>LUNAR PHASE</h3>
+                        <div id="lunarPhaseInfo"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="oracleTab">
+                <div class="oracle-container">
+                    <div id="oracleContent" class="oracle-card-main">
+                        <!-- Daily Reading here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="forecastTab">
+                <div class="forecast-container">
+                    <h2 class="forecast-title">5-DAY FORENSIC PROJECTION</h2>
+                    <p class="forecast-subtitle">Based on Profections (Epembasis) and Medical Transits</p>
+                    <div id="forecastGrid" class="forecast-grid">
+                        <!-- 5-Day Forecast Cards here -->
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="tab-content" id="medicalTab">
+                <div class="medical-grid">
+                    <div class="medical-card">
+                        <h3>SURGERY ADVISORY</h3>
+                        <p class="medical-subtitle">Check eligibility based on current transits</p>
+                        <div class="medical-selector">
+                            <label>TARGET BODY PART</label>
+                            <select id="bodyPartSelect">
+                                <option value="Head">Head / Eyes</option>
+                                <option value="Neck">Neck / Throat</option>
+                                <option value="Shoulders">Hands / Lungs</option>
+                                <option value="Chest">Chest / Stomach</option>
+                                <option value="Heart">Heart / Back</option>
+                                <option value="Abdomen">Abdomen / Digestive</option>
+                                <option value="Kidneys">Kidneys / Back</option>
+                                <option value="Genitals">Reproductive / Excretory</option>
+                                <option value="Thighs">Thighs / Liver</option>
+                                <option value="Knees">Knees / Bones</option>
+                                <option value="Ankles">Ankles / Circulation</option>
+                                <option value="Feet">Feet / Lymphatic</option>
+                            </select>
+                        </div>
+                        <div id="surgeryResult" class="surgery-panel">
+                            <p class="placeholder-text">Cast a nativity to enable medical auditing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="technicalTab">
+                <div class="meta-section">
+                    <div id="metaInfo" class="meta-info"></div>
+                    <div id="anglesInfo" class="meta-info"></div>
+                </div>
+
+                <div class="data-split">
+                    <div class="planet-list-container">
+                        <h3>PLANETARY CUSPS</h3>
+                        <div id="planetList"></div>
+                    </div>
+
+                    <div class="house-list-container">
+                        <h3>HOUSE DIVISIONS</h3>
+                        <div id="houseList"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-hub">
+            <div class="tools-header">
+                <h2>DIVINATION TOOLS</h2>
+                <p class="tools-subtitle">Independent engines for timing, relationships, and world-state.</p>
+            </div>
+            <nav class="tool-tabs">
+                <button class="tool-tab-btn active" data-tool="synastry">SYNASTRY</button>
+                <button class="tool-tab-btn" data-tool="kairos">KAIROS</button>
+                <button class="tool-tab-btn" data-tool="horary">HORARY ORACLE</button>
+                <button class="tool-tab-btn" data-tool="world">WORLD DASHBOARD</button>
+                <button class="tool-tab-btn" data-tool="rectification">RECTIFICATION</button>
+            </nav>
+
+            <div class="tool-content active" id="synastryTool">
+                <form id="synastryForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>PERSON A</h3>
+                            <div class="input-group">
+                                <label for="synDateA">DATE OF BIRTH</label>
+                                <input type="date" id="synDateA" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synTimeA">TIME OF BIRTH</label>
+                                <input type="time" id="synTimeA" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synCityA">CITY</label>
+                                <input type="text" id="synCityA" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synStateA">STATE / COUNTRY</label>
+                                <input type="text" id="synStateA">
+                            </div>
+                        </div>
+                        <div class="tool-column">
+                            <h3>PERSON B</h3>
+                            <div class="input-group">
+                                <label for="synDateB">DATE OF BIRTH</label>
+                                <input type="date" id="synDateB" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synTimeB">TIME OF BIRTH</label>
+                                <input type="time" id="synTimeB" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synCityB">CITY</label>
+                                <input type="text" id="synCityB" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synStateB">STATE / COUNTRY</label>
+                                <input type="text" id="synStateB">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">CAST SYNASTRY</button>
+                </form>
+                <div id="synastryResults" class="tool-results">
+                    <p class="placeholder-text">Provide two charts to audit structural fit.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="kairosTool">
+                <form id="kairosForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>REQUEST</h3>
+                            <div class="input-group">
+                                <label for="kairosActivity">ACTIVITY</label>
+                                <input type="text" id="kairosActivity" placeholder="e.g. contract, marriage, surgery" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="kairosStartDate">START DATE</label>
+                                <input type="date" id="kairosStartDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="kairosHours">HOURS TO SCAN</label>
+                                <input type="number" id="kairosHours" value="168" min="24" max="336">
+                            </div>
+                        </div>
+                        <div class="tool-column">
+                            <h3>LOCATION</h3>
+                            <div class="input-group">
+                                <label for="kairosCity">CITY</label>
+                                <input type="text" id="kairosCity" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="kairosState">STATE / COUNTRY</label>
+                                <input type="text" id="kairosState">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">FIND KAIROS</button>
+                </form>
+                <div id="kairosResults" class="tool-results">
+                    <p class="placeholder-text">Ask for the best hour to act.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="horaryTool">
+                <form id="horaryForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>QUESTION</h3>
+                            <div class="input-group">
+                                <label for="horaryQuestion">YOUR QUESTION</label>
+                                <input type="text" id="horaryQuestion" placeholder="e.g. Will I get this house?" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="horaryDate">DATE</label>
+                                <input type="date" id="horaryDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="horaryTime">TIME</label>
+                                <input type="time" id="horaryTime">
+                            </div>
+                        </div>
+                        <div class="tool-column">
+                            <h3>LOCATION</h3>
+                            <div class="input-group">
+                                <label for="horaryCity">CITY</label>
+                                <input type="text" id="horaryCity" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="horaryState">STATE / COUNTRY</label>
+                                <input type="text" id="horaryState">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">CONSULT ORACLE</button>
+                </form>
+                <div id="horaryResults" class="tool-results">
+                    <p class="placeholder-text">Pose a question to receive a definitive answer.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="worldTool">
+                <form id="worldForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>WORLD SNAPSHOT</h3>
+                            <div class="input-group">
+                                <label for="worldDate">DATE (UTC)</label>
+                                <input type="date" id="worldDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="worldTime">TIME (UTC)</label>
+                                <input type="time" id="worldTime">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">REFRESH WORLD</button>
+                </form>
+                <div id="worldResults" class="tool-results">
+                    <p class="placeholder-text">Load the global astrology dashboard.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="rectificationTool">
+                <form id="rectificationForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>BIRTH DATA</h3>
+                            <div class="input-group">
+                                <label for="rectDate">DATE OF BIRTH</label>
+                                <input type="date" id="rectDate" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="rectTime">TIME OF BIRTH</label>
+                                <input type="time" id="rectTime" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="rectCity">CITY</label>
+                                <input type="text" id="rectCity" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="rectState">STATE / COUNTRY</label>
+                                <input type="text" id="rectState">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">RUN RECTIFICATION</button>
+                </form>
+                <div id="rectificationResults" class="tool-results">
+                    <p class="placeholder-text">Submit birth data to run Animodar and Trutina Hermetis.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
