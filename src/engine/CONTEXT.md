@@ -3,16 +3,34 @@
 ## Status
 - Core calculation and synthesis logic verified.
 - **Implemented**: Mundane Hierarchy (Eclipses to Ingresses), Horary Physics (Translation, Collection, etc.), Medical Astrology (Surgery & Crisis), Stellar Analysis (Parans), and Nodal Metabolic Phases.
+- **Temperament**: Full William Lilly calculation (Asc, Moon, Season, Phase).
+- **Lunar Mansions**: 28 Tropical Mansions (Picatrix) for electional intent.
+- **Vitality**: Hyleg & Alcocoden assessment (Bonatti) for lifespan analysis.
+- **Planetary Hours**: Traditional temporal hour calculation (Sunrise convention) with Chaldean ordering.
+- **Primary Directions**: Placidus Semi-Arc method specifically for directions to Angles.
+- **Reception Logic**: Computational framework for Unilateral and Mutual Reception with Strict/Standard modes.
+- **Prediction**: Added Active Transits (Outer Planet impacts), fully historical Zodiacal Releasing, and Time Lord auditing for past/future dates.
 - **Advanced Aspects**: Antiscia and Contra-antiscia integrated.
 
 ## Key Files
 - `chart_calculator.py`: Handles ephemeris calls and geocoding.
 - `logic.py`: Implements synthesis (Jones patterns, Sect, Audits, Universal Overrides).
 - `dignities.py`: Tables for Domicile, Exaltation, Triplicity, Terms, Faces.
+- `temperament.py`: Lilly's Temperament/Humoral calculation engine.
+- `mansions.py`: 28 Lunar Mansions calculator and electional database.
+- `hyleg.py`: Vitality and Longevity (Alcocoden) engine.
+- `planetary_hours.py`: Temporal hours and planetary ruler calculation.
+- `primary_directions.py`: Placidus proportional semi-arc calculations.
+- `reception.py`: Reception and Mutual Reception algorithm (Bonatti/Lilly).
 - `mundane.py`: Solar/Lunar eclipse calculators and World Hierarchy.
 - `horary.py`: Dynamics of aspect application and light movement.
 - `medical.py`: Traditional Iatromathematics protocol.
 - `electional.py`: Kairos engine for perfect timing (Electional Astrology).
+
+## Trap Diary
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| Crash in `azalt` calculation | `swisseph` constant mismatch (`SE_ECL2HOR` vs `ECL2HOR`) | Updated constant to `swe.ECL2HOR` in `chart_calculator.py` |
 
 ## Anti-Patterns
 - Do NOT use modern psychological labels alone; always provide the traditional deterministic grounding (Dignity score).

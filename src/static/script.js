@@ -12,6 +12,62 @@ if (backendNotice && IS_GH_PAGES && !API_BASE) {
     backendNotice.classList.remove("hidden");
 }
 
+// Help Modal Logic
+const helpBtn = document.getElementById("helpBtn");
+const modalOverlay = document.getElementById("modalOverlay");
+const modalBody = document.getElementById("modalBody");
+const modalClose = document.querySelector(".modal-close");
+
+if (helpBtn) {
+    helpBtn.addEventListener("click", () => {
+        modalBody.innerHTML = `
+            <div class="modal-header">
+                <h2>METHOD & TERMS</h2>
+                <div class="ornament"></div>
+            </div>
+            <div class="help-content">
+                <div class="help-item">
+                    <h3>ALMUTEN FIGURIS</h3>
+                    <p>Planet with the highest total dignity from Sun, Moon, Ascendant, Lot of Fortune, and Syzygy. Treated as the primary ruler of the chart.</p>
+                </div>
+                <div class="help-item">
+                    <h3>SOVEREIGN vs. CORRUPT</h3>
+                    <p><strong>Sovereign</strong>: Domicile or exaltation. Strong capacity to act.<br>
+                    <strong>Corrupt/Vagabond</strong>: Detriment, fall, or peregrine. Weak capacity to act.</p>
+                </div>
+                <div class="help-item">
+                    <h3>CHRONOCRATOR (TIME LORD)</h3>
+                    <p>Planet ruling the current period. Annual time lords are assigned by profections.</p>
+                </div>
+                <div class="help-item">
+                    <h3>EPITASIS</h3>
+                    <p>Day when the Lord of the Year equals the Lord of the Day.</p>
+                </div>
+                <div class="help-item">
+                    <h3>ZODIACAL RELEASING</h3>
+                    <p>Time-lord sequence from the Lots.
+                    <br><strong>Level 1:</strong> Long periods (years).
+                    <br><strong>Level 2:</strong> Sub-periods (months/years).
+                    <br><strong>Loosing of the Bond:</strong> Major pivot in the sequence.</p>
+                </div>
+            </div>
+        `;
+        modalOverlay.classList.remove("hidden");
+    });
+}
+
+if (modalClose) {
+    modalClose.addEventListener("click", () => {
+        modalOverlay.classList.add("hidden");
+    });
+}
+
+modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) {
+        modalOverlay.classList.add("hidden");
+    }
+});
+
 function apiUrl(path) {
     return `${API_BASE}${path}`;
 }
@@ -67,7 +123,7 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
 
     const btn = document.getElementById('calculateBtn');
     const originalText = btn.querySelector('.btn-text').textContent;
-    btn.querySelector('.btn-text').textContent = "CONSULTING THE STARS...";
+    btn.querySelector('.btn-text').textContent = "RUNNING ANALYSIS...";
     btn.disabled = true;
 
     const formData = {
@@ -88,7 +144,7 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
 
         if (!response.ok) {
             const err = await response.json();
-            throw new Error(err.detail || 'The heavens remain silent.');
+            throw new Error(err.detail || 'No response from engine.');
         }
 
         const result = await response.json();
@@ -117,7 +173,7 @@ cityInput.addEventListener('input', () => {
 
     debounceTimer = setTimeout(async () => {
         try {
-            const resp = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=5&type=city`);
+            const resp = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=5&osm_tag=place:city&osm_tag=place:town`);
             if (!resp.ok) return;
             const data = await resp.json();
             renderSuggestions(data.features || []);
@@ -173,7 +229,7 @@ function renderResults(data) {
                 <div><strong>LUNAR PHASE:</strong> ${summary.lunar_phase}</div>
                 <div><strong>JONES PATTERN:</strong> ${summary.jones_pattern}</div>
                 <div><strong>DOMINANT:</strong> ${dominant}</div>
-                ${events ? `<div><strong>UNIVERSAL:</strong> ${events}</div>` : ''}
+                ${events ? `<div><strong>ECLIPSE:</strong> ${events}</div>` : ''}
             </div>
         `;
         mundaneDiv.innerHTML = mundaneHTML;
@@ -183,9 +239,13 @@ function renderResults(data) {
     }
 
     renderSummaryExtras(data);
+    renderRuleLedger(data);
 
     // 1a. Soul Guardian
     renderSoulGuardian(data);
+    renderVitality(data);
+    renderMutualReceptions(data);
+    renderPrimaryDirections(data);
 
     // 1c. Hermetic Lots / Celestial Curia
     renderLots(data);
@@ -229,7 +289,12 @@ function renderResults(data) {
             const badgeClass = p.power_label.toLowerCase().includes('sovereign') ? 'badge-sovereign' :
                 p.power_label.toLowerCase().includes('corrupt') ? 'badge-corrupt' : 'badge-common';
 
-            let impactsHTML = p.impacts.map(i => `<div class="impact-alert"><strong>${i.cause}:</strong> ${i.effect}</div>`).join('');
+            let impactsHTML = p.impacts.map(i => `
+                <div class="impact-rule">
+                    <div class="rule-if">IF ${i.cause}</div>
+                    <div class="rule-then">THEN ${i.effect}</div>
+                </div>
+            `).join('');
 
             card.innerHTML = `
                 <div class="card-header">
@@ -239,15 +304,14 @@ function renderResults(data) {
                 <div class="card-body">
                     <p><strong>Status:</strong> ${p.sect_status}</p>
                     <p><strong>Position:</strong> ${formatLongitude(p.longitude)}</p>
+                    ${p.house_number ? `<p><strong>House:</strong> ${p.house_number}</p>` : ''}
                     <p class="planet-meta"><strong>Solar:</strong> ${p.solar_status || 'UNKNOWN'} | <strong>Medical:</strong> ${p.medical_region || 'Unknown'}</p>
                     ${p.medical_pathology ? `<p class="planet-meta">${p.medical_pathology}</p>` : ''}
                     ${impactsHTML}
-                    <div class="delineation-snippet">
-                        "${p.delineation_text}"
-                    </div>
+                    <div class="delineation-snippet">${p.delineation_text}</div>
                 </div>
                 <div class="card-footer">
-                    <button class="view-details" onclick='showDetails(${JSON.stringify(p).replace(/'/g, "&apos;")})'>EXAMINE CODEX</button>
+                    <button class="view-details" onclick='showDetails(${JSON.stringify(p).replace(/'/g, "&apos;")})'>VIEW RULES</button>
                 </div>
             `;
             forensicGrid.appendChild(card);
@@ -312,7 +376,7 @@ function renderResults(data) {
     // 6. Medical Check
     initMedicalCheck(data);
 
-    // 7. Daily Oracle
+    // 7. Daily Output
     renderOracle(data);
 
     // 8. Fate Timeline
@@ -324,50 +388,94 @@ function renderResults(data) {
 
 function renderSummaryExtras(data) {
     const lunarCard = document.getElementById('lunarProfileCard');
-    const elementCard = document.getElementById('elementBalanceCard');
+    const temperamentCard = document.getElementById('temperamentCard');
     const eventsCard = document.getElementById('universalEventsCard');
     const causeCard = document.getElementById('universalCausationCard');
 
     if (!data.forensic_report || !data.forensic_report.summary) {
-        if (lunarCard) lunarCard.innerHTML = `<h4>LUNAR PROFILE</h4><p class="placeholder-text">No summary available.</p>`;
-        if (elementCard) elementCard.innerHTML = `<h4>ELEMENTAL BALANCE</h4><p class="placeholder-text">No summary available.</p>`;
-        if (eventsCard) eventsCard.innerHTML = `<h4>UNIVERSAL EVENTS</h4><p class="placeholder-text">No summary available.</p>`;
-        if (causeCard) causeCard.innerHTML = `<h4>UNIVERSAL CAUSATION</h4><p class="placeholder-text">No summary available.</p>`;
+        if (lunarCard) lunarCard.innerHTML = `<h4>LUNAR PHASE</h4><p class="placeholder-text">No summary available.</p>`;
+        if (temperamentCard) temperamentCard.innerHTML = `<h4>TEMPERAMENT</h4><p class="placeholder-text">No summary available.</p>`;
+        if (eventsCard) eventsCard.innerHTML = `<h4>ECLIPSE EVENTS</h4><p class="placeholder-text">No summary available.</p>`;
+        if (causeCard) causeCard.innerHTML = `<h4>GLOBAL CAUSATION</h4><p class="placeholder-text">No summary available.</p>`;
         return;
     }
 
     const summary = data.forensic_report.summary;
 
     if (lunarCard) {
+        let mansionHTML = '';
+        if (summary.lunar_mansion) {
+            const m = summary.lunar_mansion;
+            mansionHTML = `
+                <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <div style="color: var(--gold); font-weight: bold; font-family: 'IBM Plex Mono', monospace;">MANSION ${m.mansion_id}: ${m.name.toUpperCase()}</div>
+                    <div style="font-size: 0.8em; margin-top: 0.3rem;">
+                         <span style="color: var(--success);">FOR:</span> ${m.intents_good.slice(0, 3).join(', ')}
+                    </div>
+                    <div style="font-size: 0.8em; margin-top: 0.1rem;">
+                         <span style="color: var(--danger);">AVOID:</span> ${m.intents_bad.slice(0, 3).join(', ')}
+                    </div>
+                </div>
+             `;
+        }
+
         lunarCard.innerHTML = `
-            <h4>LUNAR PROFILE</h4>
+            <h4>LUNAR PHASE</h4>
             <div class="summary-list">
-                <div><strong>Phase:</strong> ${summary.lunar_phase}</div>
-                <div>${summary.lunar_phase_profile || 'Profile unavailable.'}</div>
+                <div><strong>YOU ARE IN:</strong> ${summary.lunar_phase}</div>
+                <div style="margin-bottom: 0.2rem;">${summary.lunar_phase_profile || 'Profile unavailable.'}</div>
+                ${mansionHTML}
             </div>
         `;
     }
 
-    if (elementCard) {
-        const elements = summary.dominant_elements || [];
-        elementCard.innerHTML = `
-            <h4>ELEMENTAL BALANCE</h4>
-            <div class="summary-list">
-                ${elements.length ? elements.map(([el, count]) => `<div><strong>${el}:</strong> ${count}</div>`).join('') : '<div>No elemental data.</div>'}
-            </div>
-        `;
+    if (temperamentCard) {
+        if (summary.temperament) {
+            const t = summary.temperament;
+            const scores = t.scores || {};
+            const net = t.net_balance || {};
+            const scoreLine = (Object.keys(scores).length)
+                ? `<div><strong>Total:</strong> Hot ${scores.Hot ?? 0}, Cold ${scores.Cold ?? 0}, Moist ${scores.Moist ?? 0}, Dry ${scores.Dry ?? 0}</div>`
+                : '';
+            const netLine = (Object.keys(net).length)
+                ? `<div><strong>Net:</strong> Hot/Cold ${net.Hot_vs_Cold ?? 0}, Moist/Dry ${net.Moist_vs_Dry ?? 0}</div>`
+                : '';
+
+            temperamentCard.innerHTML = `
+                <h4>TEMPERAMENT</h4>
+                <div style="font-size: 0.9em; margin-bottom: 0.5rem; text-transform: uppercase; color: var(--gold);">
+                    <strong>YOU ARE: ${t.primary_temperament}</strong>
+                </div>
+                <div class="summary-list" style="margin-bottom: 0.5rem;">
+                    ${scoreLine}
+                    ${netLine}
+                </div>
+                <div class="summary-list" style="max-height: 120px; overflow-y: auto;">
+                    ${(t.breakdown || []).map(b => `<div>- ${b}</div>`).join('')}
+                </div>
+            `;
+        } else {
+            // Fallback to elements if temperament fails
+            const elements = summary.dominant_elements || [];
+            temperamentCard.innerHTML = `
+                <h4>TEMPERAMENT</h4>
+                <div class="summary-list">
+                    ${elements.length ? elements.map(([el, count]) => `<div><strong>${el}:</strong> ${count}</div>`).join('') : '<div>No data.</div>'}
+                </div>
+            `;
+        }
     }
 
     if (eventsCard) {
         const events = summary.universal_events || [];
         eventsCard.innerHTML = `
-            <h4>UNIVERSAL EVENTS</h4>
+            <h4>ECLIPSE EVENTS</h4>
             <div class="summary-list">
                 ${events.length ? events.map(e => {
-                    const degree = typeof e.degree === 'number' ? `${e.degree.toFixed(2)}°` : '';
-                    const duration = typeof e.duration_hours === 'number' ? `${e.duration_hours.toFixed(1)}h` : '';
-                    return `<div><strong>${e.type}</strong> ${degree} ${e.sign} ${duration ? `(${duration})` : ''}</div>`;
-                }).join('') : '<div>No eclipse activity detected.</div>'}
+            const degree = typeof e.degree === 'number' ? `${e.degree.toFixed(2)}°` : '';
+            const duration = typeof e.duration_hours === 'number' ? `${e.duration_hours.toFixed(1)}h` : '';
+            return `<div><strong>${e.type}</strong> ${degree} ${e.sign} ${duration ? `(${duration})` : ''}</div>`;
+        }).join('') : '<div>No eclipse activity detected.</div>'}
             </div>
         `;
     }
@@ -375,7 +483,7 @@ function renderSummaryExtras(data) {
     if (causeCard) {
         const causes = summary.universal_causation_audit || [];
         causeCard.innerHTML = `
-            <h4>UNIVERSAL CAUSATION</h4>
+            <h4>GLOBAL CAUSATION</h4>
             <div class="summary-list">
                 ${causes.length ? causes.map(c => `
                     <div class="summary-item">
@@ -387,6 +495,37 @@ function renderSummaryExtras(data) {
             </div>
         `;
     }
+}
+
+function renderRuleLedger(data) {
+    const ledger = document.getElementById('ruleLedgerList');
+    if (!ledger) return;
+
+    const rules = [];
+    if (data.forensic_report && Array.isArray(data.forensic_report.planets)) {
+        data.forensic_report.planets.forEach(p => {
+            (p.impacts || []).forEach(i => {
+                rules.push({
+                    planet: p.planet,
+                    cause: i.cause,
+                    effect: i.effect
+                });
+            });
+        });
+    }
+
+    if (!rules.length) {
+        ledger.innerHTML = '<p class="placeholder-text">Run analysis to generate rule trace.</p>';
+        return;
+    }
+
+    ledger.innerHTML = rules.slice(0, 24).map(r => `
+        <div class="rule-item">
+            <div class="rule-if">IF ${r.cause}</div>
+            <div class="rule-then">THEN ${r.effect}</div>
+            <div class="rule-source">${r.planet} evidence</div>
+        </div>
+    `).join('');
 }
 
 function renderLots(data) {
@@ -467,7 +606,7 @@ function renderAdvancedPrediction(data) {
 
     const adv = data.advanced_prediction;
     if (!adv) {
-        const msg = data.advanced_prediction_error || 'Advanced prediction unavailable.';
+        const msg = data.advanced_prediction_error || 'Advanced timing unavailable.';
         const placeholder = `<p class="placeholder-text">${msg}</p>`;
         if (firdariaDiv) firdariaDiv.innerHTML = placeholder;
         if (munthaDiv) munthaDiv.innerHTML = '';
@@ -483,11 +622,11 @@ function renderAdvancedPrediction(data) {
             firdariaDiv.innerHTML = `<p class="placeholder-text">${f.error}</p>`;
         } else {
             firdariaDiv.innerHTML = `
-                <div class="tool-result-detail"><strong>Major:</strong> ${f['Major Period']}</div>
-                <div class="tool-result-detail"><strong>Sub:</strong> ${f['Sub Period']}</div>
-                <div class="tool-result-detail"><strong>Major Range:</strong> ${f['Major Start']} to ${f['Major End']}</div>
-                <div class="tool-result-detail"><strong>Sub Range:</strong> ${f['Sub Start']} to ${f['Sub End']}</div>
-                <div class="tool-result-detail"><strong>Current Age:</strong> ${f['Current Age']}</div>
+                <div class="tool-result-detail"><strong>YOU ARE IN (MAJOR):</strong> ${f['Major Period']}</div>
+                <div class="tool-result-detail"><strong>YOU ARE IN (SUB):</strong> ${f['Sub Period']}</div>
+                <div class="tool-result-detail"><strong>MAJOR RANGE:</strong> ${f['Major Start']} to ${f['Major End']}</div>
+                <div class="tool-result-detail"><strong>SUB RANGE:</strong> ${f['Sub Start']} to ${f['Sub End']}</div>
+                <div class="tool-result-detail"><strong>CURRENT AGE:</strong> ${f['Current Age']}</div>
             `;
         }
     }
@@ -495,7 +634,7 @@ function renderAdvancedPrediction(data) {
     if (munthaDiv) {
         const m = adv.muntha || {};
         munthaDiv.innerHTML = m.sign ? `
-            <div class="tool-result-detail"><strong>Muntha:</strong> ${m.sign} (Age ${m.age})</div>
+            <div class="tool-result-detail"><strong>YOU HAVE (MUNTHA):</strong> ${m.sign} (Age ${m.age})</div>
         ` : '<p class="placeholder-text">Muntha unavailable.</p>';
     }
 
@@ -503,9 +642,9 @@ function renderAdvancedPrediction(data) {
         const sr = adv.solar_return_info || {};
         const natalSun = typeof sr.natal_sun_longitude === 'number' ? formatLongitude(sr.natal_sun_longitude) : 'Unknown';
         solarReturnDiv.innerHTML = sr.return_date ? `
-            <div class="tool-result-detail"><strong>Return Date:</strong> ${new Date(sr.return_date).toLocaleString()}</div>
-            <div class="tool-result-detail"><strong>Return JD:</strong> ${sr.return_jd.toFixed ? sr.return_jd.toFixed(4) : sr.return_jd}</div>
-            <div class="tool-result-detail"><strong>Natal Sun:</strong> ${natalSun}</div>
+            <div class="tool-result-detail"><strong>SOLAR RETURN:</strong> ${new Date(sr.return_date).toLocaleString()}</div>
+            <div class="tool-result-detail"><strong>RETURN JD:</strong> ${sr.return_jd.toFixed ? sr.return_jd.toFixed(4) : sr.return_jd}</div>
+            <div class="tool-result-detail"><strong>NATAL SUN:</strong> ${natalSun}</div>
         ` : '<p class="placeholder-text">Solar return unavailable.</p>';
     }
 
@@ -519,9 +658,17 @@ function renderAdvancedPrediction(data) {
     if (lunarPhaseDiv) {
         const lp = adv.lunar_phase || {};
         lunarPhaseDiv.innerHTML = lp.name ? `
-            <div class="tool-result-detail"><strong>${lp.name}</strong> (${lp.type || 'Phase'})</div>
+            <div class="tool-result-detail"><strong>LUNAR PHASE:</strong> ${lp.name} (${lp.type || 'Phase'})</div>
             <div class="tool-result-detail">${lp.profile || ''}</div>
         ` : '<p class="placeholder-text">Lunar phase profile unavailable.</p>';
+    }
+
+    const transitDiv = document.getElementById('transitInfo');
+    if (transitDiv) {
+        const transits = adv.transits || [];
+        transitDiv.innerHTML = transits.length ? transits.map(t => `
+            <div class="tool-result-detail"><strong>${t.transit}</strong> ${t.aspect} ${t.natal_planet} (${t.orb}°)</div>
+        `).join('') : '<p class="placeholder-text">No major outer planet transits.</p>';
     }
 }
 
@@ -543,7 +690,7 @@ function renderFateTimeline(data, lot) {
     const alert = document.getElementById('fateTimelineAlert');
     if (!data.forensic_report) {
         if (alert) {
-            alert.innerHTML = `<p class="placeholder-text">Cast a nativity to calculate your pivots.</p>`;
+            alert.innerHTML = `<p class="placeholder-text">Run analysis to calculate time windows.</p>`;
         }
         return;
     }
@@ -551,7 +698,7 @@ function renderFateTimeline(data, lot) {
     const timelineData = lot === 'Spirit' ? data.forensic_report.fate_timeline_spirit : data.forensic_report.fate_timeline_fortune;
 
     if (!timelineData) {
-        list.innerHTML = '<p class="placeholder-text">Fate Timeline unavailable for this Lot.</p>';
+        list.innerHTML = '<p class="placeholder-text">Time window data unavailable for this Lot.</p>';
         if (alert) {
             alert.innerHTML = `<p class="placeholder-text">No pivots detected for this Lot.</p>`;
         }
@@ -582,7 +729,7 @@ function renderFateTimeline(data, lot) {
             const tense = nextPivot ? 'On' : 'Most recent';
             alert.innerHTML = `
                 <strong>${label}</strong>
-                <div>${tense} ${pivot.date}: ${pivot.sign} pivot begins. Expect a structural shift.</div>
+                <div>${tense} ${pivot.date}: ${pivot.sign} pivot begins.</div>
             `;
         } else {
             alert.innerHTML = `<p class="placeholder-text">No pivots detected for this Lot.</p>`;
@@ -596,7 +743,7 @@ function renderFateTimeline(data, lot) {
         <div class="chapter-block">
             <div class="chapter-header">
                 <div class="chapter-title">
-                    CHAPTER IN ${chapter.sign.toUpperCase()}
+                    PERIOD IN ${chapter.sign.toUpperCase()}
                     <span class="chapter-years">${chapter.duration_years} YEARS</span>
                 </div>
                 <div class="p-dates">${chapter.start_date} to ${chapter.end_date}</div>
@@ -624,20 +771,20 @@ function renderFateTimeline(data, lot) {
 function renderOracle(data) {
     const div = document.getElementById('oracleContent');
     if (!data.forensic_report || !data.forensic_report.daily_oracle) {
-        div.innerHTML = `<p class="placeholder-text">Oracle requires a full Nativity calculation.</p>`;
+        div.innerHTML = `<p class="placeholder-text">Run a full nativity to generate daily output.</p>`;
         return;
     }
 
     const o = data.forensic_report.daily_oracle;
     div.innerHTML = `
-        <div class="oracle-mood-badge">${o.mood}</div>
+        <div class="oracle-mood-badge">CONDITION: ${o.mood}</div>
         <h3 class="oracle-title">${o.title}</h3>
         ${o.day_lord ? `<div class="oracle-day-lord">DAY LORD: ${o.day_lord}</div>` : ''}
         <p class="oracle-summary">${o.summary}</p>
         <div class="oracle-details">
             ${(o.details || []).map(d => `<div class="oracle-detail-item">${d}</div>`).join('')}
         </div>
-        ${o.secret_key ? `<div class="secret-key-alert">THE SECRET KEY IS ACTIVE - HIGH MAGNITUDE EVENTS LIKELY</div>` : ''}
+        ${o.secret_key ? `<div class="secret-key-alert">EPITASIS FLAG: ACTIVE</div>` : ''}
     `;
 }
 
@@ -648,12 +795,12 @@ function renderSoulGuardian(data) {
 
     if (!data.forensic_report || !data.forensic_report.soul_guardian || !data.forensic_report.soul_guardian.almuten) {
         card.innerHTML = `
-            <h3>ALMUTEN FIGURIS</h3>
-            <p class="placeholder-text">Cast a nativity to reveal the Soul's Guardian.</p>
+            <h3>PRIMARY RULER (ALMUTEN FIGURIS)</h3>
+            <p class="placeholder-text">Run analysis to compute the primary ruler.</p>
         `;
         teamCard.innerHTML = `
-            <h3>SECT TEAMS</h3>
-            <p class="placeholder-text">Constructive vs. Destructive forces appear here.</p>
+            <h3>SECT ALIGNMENT</h3>
+            <p class="placeholder-text">Sect alignment appears after calculation.</p>
         `;
         return;
     }
@@ -664,8 +811,8 @@ function renderSoulGuardian(data) {
     const topScores = sortedScores.slice(0, 5);
 
     card.innerHTML = `
-        <h3>ALMUTEN FIGURIS</h3>
-        <div class="guardian-title">${sg.almuten} in the Terms of ${sg.term_ruler}</div>
+        <h3>PRIMARY RULER (ALMUTEN FIGURIS)</h3>
+        <div class="guardian-title">YOU ARE RULED BY: ${sg.almuten} (Terms of ${sg.term_ruler})</div>
         <div class="guardian-job">${sg.job_description}</div>
         <div class="guardian-meta">Total Score: ${sg.total_score}</div>
         ${sg.prenatal_syzygy_lon ? `<div class="guardian-meta">Prenatal Syzygy: ${formatLongitude(sg.prenatal_syzygy_lon)}</div>` : ''}
@@ -683,8 +830,27 @@ function renderSoulGuardian(data) {
     const constructive = summary.constructive_team || [];
     const destructive = summary.destructive_team || [];
 
+    // Planetary Hours
+    const ph = summary.planetary_hours || {};
+    let hourHTML = '';
+    if (ph.hour_ruler) {
+        hourHTML = `
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9em;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                    <span>Day Ruler:</span>
+                    <span style="font-weight: bold;">${ph.day_ruler || 'Unknown'}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                    <span>Hour Ruler:</span>
+                    <span style="color: var(--gold); font-weight: bold;">${ph.hour_ruler || 'Unknown'}</span>
+                </div>
+                <div style="font-size: 0.8em; opacity: 0.7; text-align: right;">${ph.minutes_remaining ? Math.round(ph.minutes_remaining) + ' min left' : ''}</div>
+            </div>
+        `;
+    }
+
     teamCard.innerHTML = `
-        <h3>SECT TEAMS</h3>
+        <h3>SECT ALIGNMENT & DAY MASTERY</h3>
         <p class="tool-result-detail">${summary.team_note || ''}</p>
         <div class="tool-result-detail">Constructive Team</div>
         <div class="team-list">
@@ -694,13 +860,151 @@ function renderSoulGuardian(data) {
         <div class="team-list">
             ${destructive.length ? destructive.map(p => `<span class="team-pill destructive">${p}</span>`).join('') : '<span class="placeholder-text">None</span>'}
         </div>
+        ${hourHTML}
     `;
+}
+
+function renderVitality(data) {
+    const card = document.getElementById('vitalityCard');
+    if (!card) return;
+
+    if (!data.forensic_report || !data.forensic_report.vitality || !data.forensic_report.vitality.hyleg) {
+        card.innerHTML = `
+            <h3>VITALITY & LONGEVITY (HYLEG)</h3>
+            <p class="placeholder-text">Vitality analysis unavailable.</p>
+        `;
+        return;
+    }
+
+    const v = data.forensic_report.vitality;
+
+    // Create breakdown listing
+    const breakdownHTML = v.breakdown ? `
+        <div class="vitality-breakdown" style="margin-top: 1rem; font-size: 0.9em; background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 4px;">
+            <div style="color: var(--gold); margin-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.25rem;">CALCULATION LOG</div>
+            <ul style="list-style: none; padding: 0; margin: 0; max-height: 150px; overflow-y: auto;">
+                ${v.breakdown.map(l => `<li style="margin-bottom: 0.25rem;">${l}</li>`).join('')}
+            </ul>
+        </div>
+    ` : '';
+
+    card.innerHTML = `
+        <h3>VITALITY & LONGEVITY</h3>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
+            <div>
+                <span class="tool-result-label">YOU HAVE (HYLEG)</span>
+                <div class="tool-result-value">${v.hyleg.replace('Planet', '').replace('Angle', '')}</div>
+            </div>
+            <div>
+                <span class="tool-result-label">YOU HAVE (ALCOCODEN)</span>
+                <div class="tool-result-value">${v.alcocoden}</div>
+            </div>
+            <div>
+                <span class="tool-result-label">VITALITY INDEX</span>
+                <div class="tool-result-value" style="color: ${v.total_years > 50 ? 'var(--success)' : (v.total_years > 25 ? 'var(--gold)' : 'var(--danger)')};">
+                    ${v.total_years.toFixed(1)} YEARS
+                </div>
+                <div style="font-size: 0.8em; opacity: 0.8; margin-top: 5px; text-transform: uppercase;">${v.vitality_rating || ''}</div>
+            </div>
+        </div>
+        <div class="tool-result-detail">Method: Hyleg and Alcocoden years.</div>
+        ${breakdownHTML}
+    `;
+}
+
+function renderPrimaryDirections(data) {
+    const card = document.getElementById('pdCard');
+    if (!card) return;
+
+    // Check if we have primary directions data
+    const dirs = data.forensic_report ? data.forensic_report.primary_directions : [];
+    if (!dirs || dirs.length === 0) {
+        card.innerHTML = `
+            <h3>PRIMARY DIRECTIONS (PLACIDUS)</h3>
+            <p class="placeholder-text">No major directions found in relevant timeframe.</p>
+        `;
+        return;
+    }
+
+    // Sort logic handled in backend, but ensure.
+    // Display as a list/timeline
+    const listHTML = dirs.map(d => `
+        <div class="pd-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 0.5rem 0; font-size: 0.9em;">
+            <div style="flex: 2;">
+                <span class="pd-promittor" style="color: var(--gold); font-weight: bold;">${d.promittor}</span>
+                <span class="pd-aspect" style="opacity: 0.7; margin: 0 0.3rem;">${d.aspect === 'Conjunction' ? 'conj' : d.aspect === 'Opposition' ? 'opp' : d.aspect}</span>
+                <span class="pd-significator">${d.significator}</span>
+            </div>
+            <div style="flex: 1; text-align: right; opacity: 0.8;">
+                ${d.years.toFixed(1)} yrs
+            </div>
+            <div style="flex: 1; text-align: right; font-family: monospace; opacity: 0.6;">
+                Arc: ${d.arc.toFixed(1)}°
+            </div>
+        </div>
+    `).join('');
+
+    card.innerHTML = `
+        <h3>PRIMARY DIRECTIONS (PLACIDUS)</h3>
+        <p style="font-size: 0.8em; opacity: 0.7;">Method: Proportional semi-arc to angles (Asc/MC).</p>
+        <div class="pd-list" style="margin-top: 1rem; max-height: 250px; overflow-y: auto;">
+             ${listHTML}
+        </div>
+    `;
+}
+
+function renderMutualReceptions(data) {
+    // Inject into the Sect/Team card for mutual reception notes.
+    const card = document.getElementById('sectTeamCard');
+    if (!card) return;
+
+    const summary = data.forensic_report.summary || {};
+    const receptions = summary.mutual_receptions || [];
+
+    // Basic styling for reception pills
+    const pillStyle = `
+        display: inline-block; 
+        padding: 0.2rem 0.5rem; 
+        background: rgba(255, 215, 0, 0.1); 
+        border: 1px solid rgba(255, 215, 0, 0.3); 
+        border-radius: 4px; 
+        font-size: 0.8em; 
+        margin-right: 0.5rem; 
+        margin-bottom: 0.3rem; 
+        color: var(--gold);
+    `;
+
+    let content = '';
+    if (receptions.length > 0) {
+        content = `
+            <div class="tool-result-detail" style="margin-top: 1rem;">MUTUAL RECEPTION</div>
+            <div class="reception-list">
+                ${receptions.map(r => `
+                    <div style="${pillStyle}">
+                        <strong>${r.planet_a}</strong> ↔ <strong>${r.planet_b}</strong> 
+                        <span style="opacity: 0.7">(${r.type})</span>
+                    </div>
+                `).join('')}
+            </div>
+            <div style="font-size: 0.75em; opacity: 0.6; margin-top: 0.2rem;">
+                Mutual reception indicates shared rulership.
+            </div>
+        `;
+    } else {
+        content = `
+            <div class="tool-result-detail" style="margin-top: 1rem;">MUTUAL RECEPTION</div>
+            <div style="font-size: 0.8em; opacity: 0.6;">No mutual receptions detected.</div>
+        `;
+    }
+
+    // Append to existing content of the card
+    card.insertAdjacentHTML('beforeend', content);
 }
 
 function renderForecast(data) {
     const grid = document.getElementById('forecastGrid');
     if (!data.forensic_forecast) {
-        grid.innerHTML = `<p class="placeholder-text">Forecast data unavailable.</p>`;
+        grid.innerHTML = `<p class="placeholder-text">Five-day data unavailable.</p>`;
         return;
     }
 
@@ -711,7 +1015,7 @@ function renderForecast(data) {
                 <div class="lord-icon">${day.chronocrator.charAt(0)}</div>
                 <div class="lord-info">
                     <span class="lord-name">${day.chronocrator}</span>
-                    <span class="lord-sign">Lord of ${day.profection_sign}</span>
+                    <span class="lord-sign">Profection: ${day.profection_sign}</span>
                 </div>
             </div>
             <div class="forecast-mood">${day.mood}</div>
@@ -742,7 +1046,7 @@ function initMedicalCheck(data) {
                     <div class="status-icon">${res.safe ? '✓' : '⚠'}</div>
                     <div class="status-msg">
                         <h4>${res.safe ? 'FAVORABLE' : 'DANGEROUS'}</h4>
-                        <p>${res.safe ? 'No major celestial impediments for this operation.' : 'HEAVENLY PROHIBITION DETECTED'}</p>
+                        <p>${res.safe ? 'No major prohibitions found for this operation.' : 'PROHIBITION DETECTED'}</p>
                     </div>
                 </div>
                 ${res.reasons.length > 0 ? `
@@ -758,7 +1062,7 @@ function initMedicalCheck(data) {
                 </div>
             `;
         } catch (err) {
-            panel.innerHTML = `<p class="error">Failed to consult the medical codex.</p>`;
+            panel.innerHTML = `<p class="error">Medical check failed.</p>`;
         }
     };
 
@@ -778,7 +1082,7 @@ function renderChartWheel(data) {
         <defs>
             <radialGradient id="ringGrad" cx="50%" cy="50%" r="50%">
                 <stop offset="60%" stop-color="transparent" />
-                <stop offset="100%" stop-color="rgba(197, 160, 89, 0.15)" />
+                <stop offset="100%" stop-color="rgba(192, 112, 47, 0.15)" />
             </radialGradient>
             <filter id="glow">
                 <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -886,7 +1190,7 @@ function renderChartWheel(data) {
     });
 
     // Center Earth
-    svg += `<circle cx="${center}" cy="${center}" r="15" fill="var(--bg-deep)" stroke="var(--gold)" stroke-width="1" />`;
+    svg += `<circle cx="${center}" cy="${center}" r="15" fill="var(--bg-card)" stroke="var(--gold)" stroke-width="1" />`;
     svg += `<text x="${center}" y="${center}" fill="var(--gold)" font-size="8" text-anchor="middle" alignment-baseline="middle">TERRA</text>`;
 
     svg += `</svg>`;
@@ -903,19 +1207,19 @@ function renderPrediction(data) {
     const zrDiv = document.getElementById('zrInfo');
 
     if (!data.forensic_report || !data.forensic_report.prediction) {
-        profDiv.innerHTML = '<p class="placeholder-text">Provide Age/Analysis Date in the form to unlock Temporal Audits.</p>';
-        zrDiv.innerHTML = '<p class="placeholder-text">Zodiacal Releasing requires full birth data.</p>';
+        profDiv.innerHTML = '<p class="placeholder-text">Provide age and analysis date to compute time lords.</p>';
+        zrDiv.innerHTML = '<p class="placeholder-text">Full birth data required for zodiacal releasing.</p>';
         return;
     }
 
     const pred = data.forensic_report.prediction;
     profDiv.innerHTML = `
         <div class="prediction-item">
-            <p><strong>ANNUAL:</strong> ${pred.annual_profection.sign} (Lord: ${pred.annual_profection.lord_of_year})</p>
-            <p><strong>MONTHLY:</strong> ${pred.monthly_profection.continuous}</p>
+            <p><strong>YOU ARE IN (ANNUAL):</strong> ${pred.annual_profection.sign} | Lord: ${pred.annual_profection.lord_of_year}</p>
+            <p><strong>YOU ARE IN (MONTHLY):</strong> ${pred.monthly_profection.continuous}</p>
             <p><strong>MONTHLY (SALT):</strong> ${pred.monthly_profection.saltatory || 'Unavailable'}</p>
-            <p><strong>DAILY:</strong> ${pred.daily_profection.sign}</p>
-            <p><strong>SECRET KEY:</strong> ${pred.epitasis_days && pred.epitasis_days.length ? `Days ${pred.epitasis_days.join(', ')}` : 'None detected'}</p>
+            <p><strong>YOU ARE IN (DAILY):</strong> ${pred.daily_profection.sign}</p>
+            <p><strong>EPITASIS DAYS:</strong> ${pred.epitasis_days && pred.epitasis_days.length ? `Days ${pred.epitasis_days.join(', ')}` : 'None detected'}</p>
         </div>
     `;
 
@@ -953,7 +1257,7 @@ window.showDetails = (p) => {
     const body = document.getElementById('modalBody');
 
     body.innerHTML = `
-        <h2 style="font-family: Cinzel, serif; color: var(--gold); margin-bottom: 2rem;">${p.planet} IN THE TWELVE DOMAINS</h2>
+        <h2 style="font-family: 'Libre Baskerville', serif; color: var(--gold); margin-bottom: 2rem;">${p.planet} IN THE TWELVE DOMAINS</h2>
         <div class="modal-detail-section">
             <h4 style="color: var(--gold); letter-spacing: 2px;">JUDGMENT OF DIGNITY</h4>
             <p style="margin: 1rem 0;">The planet holds a score of <strong>${p.dignity_score}</strong> in the celestial hierarchy.</p>
@@ -969,14 +1273,14 @@ window.showDetails = (p) => {
         </div>
         <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 2rem 0;">
         <div class="modal-detail-section">
-            <h4 style="color: var(--gold); letter-spacing: 2px;">CODEX DELINEATION</h4>
-            <p style="font-family: Playfair Display, serif; font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+            <h4 style="color: var(--gold); letter-spacing: 2px;">RULE TEXT</h4>
+            <p style="font-family: 'IBM Plex Sans', sans-serif; font-size: 1.05rem; line-height: 1.7; margin-top: 1rem;">
                 ${p.delineation_text}
             </p>
         </div>
         <div class="modal-detail-section" style="margin-top: 2rem;">
             <h4 style="color: var(--gold); letter-spacing: 2px;">HOUSE PLACEMENT: ${p.house_number}</h4>
-            <p style="font-family: Playfair Display, serif; font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+            <p style="font-family: 'IBM Plex Sans', sans-serif; font-size: 1.05rem; line-height: 1.7; margin-top: 1rem;">
                 ${p.house_delineation_text}
             </p>
         </div>
@@ -1068,14 +1372,14 @@ function renderSynastry(data) {
             ${dependencies.length ? dependencies.map(d => `
                 <div class="tool-result-detail"><strong>${d.subject} ${d.planet}</strong> on ${d.target} (${d.type})</div>
                 <div class="tool-result-detail">${d.delineation}</div>
-            `).join('') : '<div class="tool-result-detail">No direct planet-to-fortune locks detected.</div>'}
+            `).join('') : '<div class="tool-result-detail">No dependency locks detected.</div>'}
         </div>
         <div class="tool-result-card">
-            <div class="tool-result-title">Shared Fate</div>
+            <div class="tool-result-title">Shared Indicators</div>
             ${shared.length ? shared.map(s => `
                 <div class="tool-result-detail"><strong>${s.type}:</strong> ${s.description}</div>
                 <div class="tool-result-detail">${s.delineation}</div>
-            `).join('') : '<div class="tool-result-detail">No Spirit handshakes or will-to-matter links detected.</div>'}
+            `).join('') : '<div class="tool-result-detail">No shared indicators detected.</div>'}
         </div>
     `;
 }
@@ -1171,7 +1475,7 @@ document.getElementById('horaryForm').addEventListener('submit', async (e) => {
         });
         if (!resp.ok) {
             const err = await resp.json();
-            throw new Error(err.detail || 'Horary oracle failed.');
+            throw new Error(err.detail || 'Horary engine failed.');
         }
         const result = await resp.json();
         renderHorary(result);
@@ -1199,10 +1503,10 @@ function renderHorary(data) {
             <div class="tool-result-detail">Conditions: ${oracle.positive_count} favorable | ${oracle.negative_count} adverse</div>
         </div>
         <div class="tool-result-card">
-            <div class="tool-result-title">Horary Physics</div>
+            <div class="tool-result-title">Horary Conditions</div>
             ${conditions.length ? conditions.map(c => `
                 <div class="tool-result-detail"><strong>${c.condition}</strong>${c.status ? ` (${c.status})` : ''}${formatHoraryCondition(c) ? `: ${formatHoraryCondition(c)}` : ''}</div>
-            `).join('') : '<div class="tool-result-detail">No applying physics detected between significators.</div>'}
+            `).join('') : '<div class="tool-result-detail">No applying contacts detected between significators.</div>'}
         </div>
     `;
 }
@@ -1404,4 +1708,114 @@ function renderRectification(data) {
         ${animodarHTML || '<div class="tool-result-card"><div class="tool-result-title">Animodar (Ptolemaic)</div><div class="tool-result-detail">No Animodar results returned.</div></div>'}
         ${trutinaHTML || '<div class="tool-result-card"><div class="tool-result-title">Trutina Hermetis</div><div class="tool-result-detail">No Trutina results returned.</div></div>'}
     `;
+}
+
+/* Engine Chat Logic */
+const askOracleBtn = document.getElementById('askOracleBtn');
+if (askOracleBtn) {
+    askOracleBtn.addEventListener('click', () => {
+        if (!currentResult) {
+            alert("Run a chart first.");
+            return;
+        }
+
+        modalBody.innerHTML = `
+            <style>
+                .chat-container { display: flex; flex-direction: column; height: 500px; }
+                .chat-history { flex: 1; overflow-y: auto; padding: 1rem; background: var(--bg-card); margin-bottom: 1rem; border: 1px solid var(--glass-border); border-radius: 4px; }
+                .chat-input-area { display: flex; gap: 0.5rem; }
+                #chatInput { flex: 1; padding: 0.8rem; background: var(--bg-card); border: 1px solid var(--glass-border); color: var(--text-main); font-family: 'IBM Plex Sans', sans-serif; }
+                #sendChatBtn { padding: 0 1.5rem; background: var(--gold); color: var(--bg-card); font-weight: 600; border: none; cursor: pointer; transition: all 0.2s ease; }
+                #sendChatBtn:hover { background: var(--gold-bright); }
+                .chat-message { margin-bottom: 1rem; padding: 0.8rem; border-radius: 4px; line-height: 1.5; font-size: 0.95rem; }
+                .chat-message.user { background: rgba(192, 112, 47, 0.12); border-left: 3px solid var(--gold); text-align: right; }
+                .chat-message.assistant { background: rgba(28, 108, 115, 0.08); border-left: 3px solid var(--purple); }
+                .chat-message.system { font-style: normal; opacity: 0.7; text-align: center; color: var(--text-muted); }
+                .chat-message.error { color: var(--danger); }
+            </style>
+            <div class="modal-header">
+                <h2>QUERY ENGINE (RULE TRACE)</h2>
+                <div class="ornament"></div>
+            </div>
+            <div class="chat-container">
+                <div id="chatHistory" class="chat-history">
+                    <div class="chat-message system">
+                        Engine ready. Ask about this nativity.
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Enter a question..." autocomplete="off">
+                    <button id="sendChatBtn">SEND</button>
+                </div>
+            </div>
+        `;
+        modalOverlay.classList.remove("hidden");
+
+        // Chat Logic binding
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendChatBtn');
+        const history = document.getElementById('chatHistory');
+
+        async function sendQuery() {
+            const query = chatInput.value.trim();
+            if (!query) return;
+
+            // Add user message
+            history.innerHTML += `<div class="chat-message user">${query}</div>`;
+            chatInput.value = '';
+            history.scrollTop = history.scrollHeight;
+
+            // Add loading
+            const loadingId = 'loading-' + Date.now();
+            history.innerHTML += `<div id="${loadingId}" class="chat-message system loading">Computing...</div>`;
+            history.scrollTop = history.scrollHeight;
+
+            // Prepare context (Forensic Report + Predictions)
+            const contextData = {
+                forensic: currentResult.forensic_report,
+                prediction: currentResult.advanced_prediction
+            };
+            const context = JSON.stringify(contextData, null, 2);
+
+            try {
+                const response = await fetch(apiUrl('/api/ask_oracle'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: query, context: context })
+                });
+
+                const data = await response.json();
+
+                // Remove loading
+                const loader = document.getElementById(loadingId);
+                if (loader) loader.remove();
+
+                // Add answer
+                let text = data.answer || "No response from engine.";
+                // Enhanced markdown parsing
+                text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                text = text.replace(/^\- (.*$)/gim, '• $1');
+                text = text.replace(/\n/g, '<br>');
+
+                history.innerHTML += `<div class="chat-message assistant">${text}</div>`;
+                history.scrollTop = history.scrollHeight;
+
+            } catch (err) {
+                const loader = document.getElementById(loadingId);
+                if (loader) loader.remove();
+                history.innerHTML += `<div class="chat-message system error">Connection lost: ${err.message}</div>`;
+            }
+        }
+
+        sendBtn.onclick = sendQuery;
+        chatInput.onkeypress = (e) => {
+            if (e.key === 'Enter') sendQuery();
+        };
+
+        // Focus input
+        setTimeout(() => chatInput.focus(), 100);
+    });
 }

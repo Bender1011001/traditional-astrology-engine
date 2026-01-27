@@ -46,6 +46,22 @@ Live site: https://bender1011001.github.io/astrology/
    ```
 4. Open your browser at `http://127.0.0.1:8000`.
 
+### Deployment & Domain Access
+
+To serve the application on `traditional-astrology.com` using Cloudflare Tunnel:
+
+1. **Start the Backend Server**:
+   ```bash
+   python src/api.py
+   ```
+
+2. **Start the Tunnel** (in a new terminal):
+   ```bash
+   cloudflared tunnel --config cloudflared_config.yml run
+   ```
+
+   *Note: Requires `cloudflared` installed and authenticated.*
+
 ## Architecture
 - `src/engine/`: Core algorithmic logic.
 - `src/database/data/`: Ingested codex delineations (JSON).

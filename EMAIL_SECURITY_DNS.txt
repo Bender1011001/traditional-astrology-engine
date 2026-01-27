@@ -1,0 +1,26 @@
+# Email Security & Spoofing Prevention Records
+# ------------------------------------------------------------------
+# Since 'cloudflared' strictly manages the tunnel connection, it cannot 
+# automatically create MX/TXT records for email security. 
+#
+# PLEASE ADD THESE RECORDS MANUALLY IN THE CLOUDFLARE DASHBOARD -> DNS
+# ------------------------------------------------------------------
+
+# 1. NULL MX RECORD (Prevents others from trying to send mail to your domain)
+Type: MX
+Name: @
+Mail Server: .
+Priority: 0
+
+# 2. SPF RECORD (Declares that NO server is authorized to send mail as you)
+Type: TXT
+Name: @
+Content: v=spf1 -all
+
+# 3. DMARC RECORD (Instructs receivers to instantly reject fake emails)
+Type: TXT
+Name: _dmarc
+Content: v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;
+
+# 4. DKIM (Optional generic placeholder, mostly handled by DMARC 'reject' above)
+# (Not strictly needed if SPF and DMARC are set to hard fail/reject)

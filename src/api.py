@@ -17,6 +17,7 @@ from engine.mundane import build_world_dashboard
 from engine.prediction import AdvancedPredictionEngine
 from engine.rectification import RectificationEngine
 from engine.chart_calculator import get_local_datetime_now
+from engine.chat_oracle import get_chat_response
 from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
@@ -25,7 +26,33 @@ import swisseph as swe
 import uvicorn
 import os
 
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
+
 app = FastAPI()
+
+# Security Headers Middleware
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["X-XSS-Protection"] = "1; mode=block"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://photon.komoot.io;"
+        return response
+
+app.add_middleware(SecurityHeadersMiddleware)
+
+# CORS Configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://traditional-astrology.com", "http://localhost:8000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 def result_to_model(res):
     model_planets = []
@@ -40,7 +67,8 @@ def result_to_model(res):
                 name=p_enum,
                 longitude=data["longitude"],
                 latitude=data.get("latitude", 0.0),
-                speed=data.get("speed", 0.0)
+                speed=data.get("speed", 0.0),
+                altitude=data.get("altitude", 0.0)
             )
         )
         if name == "Sun":
@@ -53,7 +81,10 @@ def result_to_model(res):
         ascendant=angles.get("Ascendant", 0.0),
         mc=angles.get("MC", 0.0),
         north_node=res.get("planets", {}).get("North_Node", {}).get("longitude", 0.0),
-        south_node=res.get("planets", {}).get("South_Node", {}).get("longitude", 0.0)
+        south_node=res.get("planets", {}).get("South_Node", {}).get("longitude", 0.0),
+        geo_lat=res.get("meta", {}).get("lat"),
+        geo_lon=res.get("meta", {}).get("lon"),
+        jd=res.get("meta", {}).get("julian_day")
     )
 
 class ChartRequest(BaseModel):
@@ -115,7 +146,7 @@ async def calculate_chart(request: ChartRequest):
             
         result["meta"]["analysis_jd"] = analysis_jd
 
-        audit_report = perform_forensic_audit(chart_model, result["meta"]["julian_day"], age=age, month=month, day=day, birth_date=bd)
+        audit_report = perform_forensic_audit(chart_model, result["meta"]["julian_day"], age=age, month=month, day=day, birth_date=bd, analysis_date=ad, analysis_jd=analysis_jd)
         result["forensic_report"] = audit_report
         
         # 5-Day Forecast
@@ -278,7 +309,17 @@ async def world_dashboard(request: WorldRequest):
     jd = swe.julday(dt.year, dt.month, dt.day, dt.hour + dt.minute/60.0 + dt.second/3600.0)
     dashboard = build_world_dashboard(jd)
     dashboard["timestamp"] = dt.isoformat() + "Z"
+    dashboard["timestamp"] = dt.isoformat() + "Z"
     return dashboard
+
+class OracleChatRequest(BaseModel):
+    query: str
+    context: str
+
+@app.post("/api/ask_oracle")
+async def ask_oracle(request: OracleChatRequest):
+    answer = get_chat_response(request.query, request.context)
+    return {"answer": answer}
 
 @app.post("/api/rectification")
 async def rectification(request: ChartRequest):

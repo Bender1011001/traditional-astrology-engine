@@ -372,7 +372,14 @@ def calculate_jones_pattern(longitudes: List[float]) -> str:
     if max_gap < 30: return "Splash"
     return "Splay/Seesaw"
 
-def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = None, month: int = 1, day: int = 1, birth_date: Optional[datetime] = None) -> Dict:
+from .temperament import TemperamentEngine
+from .mansions import LunarMansionEngine
+from .hyleg import HylegAlcocodenEngine
+from .planetary_hours import PlanetaryHourEngine
+from .primary_directions import PrimaryDirectionsEngine
+from .reception import ReceptionEngine, ReceptionMode
+
+def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = None, month: int = 1, day: int = 1, birth_date: Optional[datetime] = None, analysis_date: Optional[datetime] = None, analysis_jd: Optional[float] = None) -> Dict:
     sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
     
     sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
@@ -384,6 +391,57 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]: continue
         el = DignityCalculator.ZODIAC_ELEMENTS.get(p.sign)
         if el: elements[el] += 1
+
+    # Temperament Assessment (Lilly)
+    temperament = TemperamentEngine.calculate_temperament(chart)
+    
+    # Lunar Mansion (Picatrix)
+    lunar_mansion = LunarMansionEngine.get_lunar_mansion(moon.longitude) if moon else None
+
+    # Hyleg & Alcocoden (Vitality)
+    hyleg = HylegAlcocodenEngine.determine_hyleg(chart)
+    alcocoden = None
+    vitality_report = {}
+    if hyleg:
+        alcocoden = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart)
+        if alcocoden:
+            vitality_report = HylegAlcocodenEngine.calculate_lifespan(hyleg, alcocoden, chart)
+            
+    # Planetary Hours
+    hours_data = {}
+    # Use London Approx (51.5) if no geo provided, consistent with research examples
+    demo_lat = 51.5074
+    demo_lon = -0.1278
+    
+    if birth_date:
+        hours_data = PlanetaryHourEngine.calculate_hours(birth_date, demo_lat, demo_lon)
+
+    # Primary Directions (Placidus)
+    # Calculate directions to angles for next 100 years
+    primary_dirs = PrimaryDirectionsEngine.calculate_directions_to_angles(chart, demo_lat)
+    # Filter for reasonable life range (e.g. 0 to 100 years)
+    primary_dirs = [d for d in primary_dirs if 0 <= d.years <= 100]
+    # Serialize for JSON
+    primary_dirs_json = [{
+        "significator": d.significator,
+        "promittor": d.promittor,
+        "aspect": d.aspect,
+        "arc": round(d.arc, 2),
+        "years": round(d.years, 2),
+        "date_offset": d.date_offset,
+        "method": d.method
+    } for d in primary_dirs]
+
+    # Receptions (Lilly Mode Default)
+    receptions = ReceptionEngine.calculate_mutual_receptions(chart, ReceptionMode.STANDARD_LILLY)
+    receptions_json = [{
+        "planet_a": r.planet_a.value,
+        "planet_b": r.planet_b.value,
+        "type": r.type,
+        "score": r.strength_score,
+        "dignities_a_in_b": r.reception_a_in_b.dignities,
+        "dignities_b_in_a": r.reception_b_in_a.dignities
+    } for r in receptions]
 
     # Identify Teams
     constructive_team = []
@@ -397,6 +455,10 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     report = {
         "summary": {
             "sect": sect.value,
+            "temperament": temperament,
+            "lunar_mansion": lunar_mansion,
+            "planetary_hours": hours_data,
+            "mutual_receptions": receptions_json,
             "constructive_team": constructive_team,
             "destructive_team": destructive_team,
             "team_note": "Trust the energies/people of your Constructive Team; exercise caution with the Destructive Team.",
@@ -406,6 +468,8 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             "jones_pattern": calculate_jones_pattern([p.longitude for p in chart.planets if p.name.value in ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]]),
             "dominant_elements": sorted(elements.items(), key=lambda x: x[1], reverse=True)
         },
+        "vitality": vitality_report,
+        "primary_directions": primary_dirs_json,
         "soul_guardian": generate_soul_guardian_reading(chart, jd) if jd > 0 else {},
         "planets": [],
         "lots": calculate_all_lots(chart, sect),
@@ -414,7 +478,9 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     }
     
     # 6. Daily Oracle (Traditional Synthesized Forecast)
-    report["daily_oracle"] = generate_daily_oracle(chart, report, jd, age, month, day)
+    # Use analysis_jd if available (transits), else fall back to birth jd (though that's static)
+    oracle_jd = analysis_jd if analysis_jd else jd
+    report["daily_oracle"] = generate_daily_oracle(chart, report, oracle_jd, age, month, day)
 
     if jd > 0:
         report["summary"]["universal_events"] = get_recent_eclipses(jd)
@@ -429,7 +495,8 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     # Or Moon vs others.
     if age is not None:
         asc_sign_idx = int(chart.ascendant / 30) % 12
-        asc_lord = DignityCalculator.DOMICILES[list(Sign)[asc_sign_idx]][0]
+        essentials = DignityCalculator.get_essential_rulers(chart.ascendant, sect)
+        asc_lord = essentials["domicile"]
         annual_sign = calculate_profection_sign(list(Sign)[asc_sign_idx], age)
         loy_lord = get_lord_of_year(annual_sign)
         
@@ -448,7 +515,23 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         
         # Monthly
         monthly_sign_cont = calculate_monthly_profection(annual_sign, month, method='Continuous')
-        monthly_sign_salt = calculate_monthly_profection(annual_sign, month, method='Saltatory', natal_start_sign=asc_sign, age=age)
+        total_months = None
+        if birth_date and analysis_date:
+            total_months = (analysis_date.year - birth_date.year) * 12 + (analysis_date.month - birth_date.month)
+            if analysis_date.day < birth_date.day:
+                total_months -= 1
+            if total_months < 0:
+                total_months = 0
+        elif age is not None:
+            total_months = (age * 12) + (month - 1)
+        monthly_sign_salt = calculate_monthly_profection(
+            annual_sign,
+            month,
+            method='Saltatory',
+            natal_start_sign=asc_sign,
+            age=age,
+            total_months=total_months
+        )
         
         # Daily
         daily_sign = calculate_daily_profection(monthly_sign_cont, day)
@@ -490,7 +573,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             report["fate_timeline_spirit"] = calculate_zr_lifetime_map(spirit_sign, start_dt)
             
             # Also calculate current active periods for quick reference
-            now_dt = datetime.now()
+            now_dt = analysis_date if analysis_date else datetime.now()
             report["zodiacal_releasing"] = calculate_zr_periods(spirit_sign, start_dt, now_dt)
             
         if fortune_lon is not None:
@@ -524,14 +607,30 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
     natal_day_lord = next((p for p in natal_chart.planets if p.name == day_lord_name), None)
     
     # Current Moon (Transit)
-    m_res = swe.calc_ut(trans_jd, swe.MOON, swe.FLG_SWIEPH)[0]
+    try:
+        m_res = swe.calc_ut(trans_jd, swe.MOON, swe.FLG_SWIEPH)[0]
+    except swe.Error:
+        try:
+            m_res = swe.calc_ut(trans_jd, swe.MOON, swe.FLG_MOSEPH)[0]
+        except swe.Error:
+             # Moshier fallback failed. Use approximate position (0.0).
+             m_res = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     trans_moon_lon = m_res[0]
     trans_moon_sign = list(Sign)[int(trans_moon_lon / 30) % 12]
     
     # Check for Epitasis (Secret Key)
     # Is the Daily sign the sign where the LOY currently transits?
-    loy_trans_res = swe.calc_ut(trans_jd, getattr(swe, loy_name.value.upper(), 0), swe.FLG_SWIEPH)[0]
-    loy_trans_sign = list(Sign)[int(loy_trans_res[0] / 30) % 12]
+    p_id = getattr(swe, loy_name.value.upper(), 0)
+    try:
+        loy_trans_res = swe.calc_ut(trans_jd, p_id, swe.FLG_SWIEPH)[0]
+    except swe.Error:
+        try:
+            loy_trans_res = swe.calc_ut(trans_jd, p_id, swe.FLG_MOSEPH)[0]
+        except:
+            loy_trans_res = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    
+    loy_trans_lon = loy_trans_res[0]
+    loy_trans_sign = list(Sign)[int(loy_trans_lon / 30) % 12]
     
     is_epitasis = (day_sign == loy_trans_sign)
     

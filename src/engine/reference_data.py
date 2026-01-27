@@ -65,21 +65,29 @@ DETRIMENTS = {
     Sign.VIRGO: PlanetName.JUPITER,
 }
 
-# Triplicity Lords (Dorothean/Lilly - using Lilly's simplified commonly used ones or Dorothean? 
-# Only 1 ruler needed to score +3? Or does it need to be the primary ruler of the sect?
-# Lilly usually gives +3 if the planet is a triplicity ruler of the sign in the correct sect.
-# Let's assume generic Triplicity Rulers list.
-# Fire: Sun (Day), Jupiter (Night), Saturn (Participating)
-# Earth: Venus (Day), Moon (Night), Mars (Participating)
-# Air: Saturn (Day), Mercury (Night), Jupiter (Participating)
-# Water: Venus (Day), Mars (Night), Moon (Participating)
-# NOTE: User says "Implement the Weighted Scoring System (Ibn Ezra/Lilly)".
-TRIPLICITY_RULERS = {
-    "Fire": {Sect.DAY: PlanetName.SUN, Sect.NIGHT: PlanetName.JUPITER},
-    "Earth": {Sect.DAY: PlanetName.VENUS, Sect.NIGHT: PlanetName.MOON},
-    "Air": {Sect.DAY: PlanetName.SATURN, Sect.NIGHT: PlanetName.MERCURY},
-    "Water": {Sect.DAY: PlanetName.VENUS, Sect.NIGHT: PlanetName.MARS},
+# Dorothean Triplicity (Bonatti Mode)
+# Format: {Element: (Day, Night, Participant)}
+DOROTHEAN_TRIPLICITY = {
+    "Fire": (PlanetName.SUN, PlanetName.JUPITER, PlanetName.SATURN),
+    "Earth": (PlanetName.VENUS, PlanetName.MOON, PlanetName.MARS),
+    "Air": (PlanetName.SATURN, PlanetName.MERCURY, PlanetName.JUPITER),
+    "Water": (PlanetName.VENUS, PlanetName.MARS, PlanetName.MOON)
 }
+
+# Ptolemaic Triplicity (Lilly Mode)
+# Format: {Element: (Day, Night)} - No participant usually used in this mode
+PTOLEMAIC_TRIPLICITY = {
+    "Fire": (PlanetName.SUN, PlanetName.JUPITER),
+    "Earth": (PlanetName.VENUS, PlanetName.MOON),
+    "Air": (PlanetName.SATURN, PlanetName.MERCURY),
+    "Water": (PlanetName.MARS, PlanetName.MARS)
+}
+
+# Legacy Export for backward compatibility (defaults to Dorothean in original code? No, original had dict with Sect keys)
+# The original code had: "Fire": {Sect.DAY: PlanetName.SUN, Sect.NIGHT: PlanetName.JUPITER}, which looked like Ptolemaic actually, but with limited keys.
+# Actually previously it was referenced as TRIPLICITY_RULERS in dignities.py as tuple (Day, Night, Part).
+# Let's keep a generic TRIPLICITY_RULERS pointing to Dorothean as default if needed, but Receptions will pick specific.
+TRIPLICITY_RULERS = DOROTHEAN_TRIPLICITY
 
 SIGN_ELEMENTS = {
     Sign.ARIES: "Fire", Sign.LEO: "Fire", Sign.SAGITTARIUS: "Fire",
@@ -88,8 +96,7 @@ SIGN_ELEMENTS = {
     Sign.CANCER: "Water", Sign.SCORPIO: "Water", Sign.PISCES: "Water",
 }
 
-# Egyptian Terms (Bounds) - Upper bound degree per sign
-# Format: Sign -> List of (Planet, UpperDegree)
+# Egyptian Terms (Bounds)
 EGYPTIAN_TERMS = {
     Sign.ARIES: [(PlanetName.JUPITER, 6), (PlanetName.VENUS, 12), (PlanetName.MERCURY, 20), (PlanetName.MARS, 25), (PlanetName.SATURN, 30)],
     Sign.TAURUS: [(PlanetName.VENUS, 8), (PlanetName.MERCURY, 14), (PlanetName.JUPITER, 22), (PlanetName.SATURN, 27), (PlanetName.MARS, 30)],
@@ -105,9 +112,23 @@ EGYPTIAN_TERMS = {
     Sign.PISCES: [(PlanetName.VENUS, 12), (PlanetName.JUPITER, 16), (PlanetName.MERCURY, 19), (PlanetName.MARS, 28), (PlanetName.SATURN, 30)],
 }
 
+# Ptolemaic Terms (Lilly Mode)
+PTOLEMAIC_TERMS = {
+    Sign.ARIES: [(PlanetName.JUPITER, 6), (PlanetName.VENUS, 14), (PlanetName.MERCURY, 21), (PlanetName.MARS, 26), (PlanetName.SATURN, 30)],
+    Sign.TAURUS: [(PlanetName.VENUS, 8), (PlanetName.MERCURY, 15), (PlanetName.JUPITER, 22), (PlanetName.SATURN, 26), (PlanetName.MARS, 30)],
+    Sign.GEMINI: [(PlanetName.MERCURY, 7), (PlanetName.JUPITER, 14), (PlanetName.VENUS, 21), (PlanetName.SATURN, 25), (PlanetName.MARS, 30)],
+    Sign.CANCER: [(PlanetName.MARS, 6), (PlanetName.JUPITER, 13), (PlanetName.MERCURY, 20), (PlanetName.VENUS, 27), (PlanetName.SATURN, 30)],
+    Sign.LEO: [(PlanetName.JUPITER, 6), (PlanetName.VENUS, 13), (PlanetName.SATURN, 19), (PlanetName.MERCURY, 25), (PlanetName.MARS, 30)],
+    Sign.VIRGO: [(PlanetName.MERCURY, 7), (PlanetName.VENUS, 13), (PlanetName.JUPITER, 18), (PlanetName.SATURN, 24), (PlanetName.MARS, 30)],
+    Sign.LIBRA: [(PlanetName.SATURN, 6), (PlanetName.VENUS, 11), (PlanetName.JUPITER, 19), (PlanetName.MERCURY, 24), (PlanetName.MARS, 30)],
+    Sign.SCORPIO: [(PlanetName.MARS, 6), (PlanetName.VENUS, 14), (PlanetName.JUPITER, 21), (PlanetName.MERCURY, 27), (PlanetName.SATURN, 30)],
+    Sign.SAGITTARIUS: [(PlanetName.JUPITER, 8), (PlanetName.VENUS, 14), (PlanetName.MERCURY, 19), (PlanetName.SATURN, 25), (PlanetName.MARS, 30)],
+    Sign.CAPRICORN: [(PlanetName.VENUS, 6), (PlanetName.MERCURY, 12), (PlanetName.JUPITER, 19), (PlanetName.MARS, 25), (PlanetName.SATURN, 30)],
+    Sign.AQUARIUS: [(PlanetName.SATURN, 6), (PlanetName.MERCURY, 12), (PlanetName.VENUS, 20), (PlanetName.JUPITER, 25), (PlanetName.MARS, 30)],
+    Sign.PISCES: [(PlanetName.VENUS, 8), (PlanetName.JUPITER, 14), (PlanetName.MERCURY, 20), (PlanetName.MARS, 26), (PlanetName.SATURN, 30)],
+}
+
 # Faces (Chaldean Order) - 10 degrees each
-# Signs in standard order: Aries to Pisces
-# Rulers cycle: Mars, Sun, Venus, Mercury, Moon, Saturn, Jupiter...
 FACES_ORDER = [
     PlanetName.MARS, PlanetName.SUN, PlanetName.VENUS, # Aries
     PlanetName.MERCURY, PlanetName.MOON, PlanetName.SATURN, # Taurus
@@ -123,8 +144,6 @@ FACES_ORDER = [
     PlanetName.SATURN, PlanetName.JUPITER, PlanetName.MARS, # Pisces
 ]
 
-# Alcocoden Planetary Years (Lesser, Mean, Greater)
-# Source: Binder1_part_018.txt
 PLANETARY_YEARS = {
     PlanetName.SATURN: {"lesser": 30, "mean": 43.5, "greater": 57},
     PlanetName.JUPITER: {"lesser": 12, "mean": 45.5, "greater": 79},

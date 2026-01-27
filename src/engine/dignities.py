@@ -269,7 +269,12 @@ class DignityCalculator:
             details.append("Triplicity (+3)")
 
         # 4. Terms (+2)
-        term_rulers = cls.TERMS[sign]
+        try:
+            term_rulers = cls.TERMS[sign]
+        except KeyError as e:
+            print(f"DEBUG DIGNITY ERROR: Missing Terms key {sign}. Keys: {list(cls.TERMS.keys())}")
+            raise e
+            
         for p_str, limit in term_rulers:
             if deg_in_sign < limit:
                 if p_str == planet_name.value.upper():
@@ -409,7 +414,14 @@ class DignityCalculator:
         
         # Triplicity
         element = SIGN_ELEMENTS[sign]
-        triplicity = REF_TRIPLICITY[element][chart_sect]
+        trips = REF_TRIPLICITY[element]
+        # REF_TRIPLICITY is now a tuple (Day, Night, Part) in Dorothean mode
+        # or (Day, Night) in Ptolemaic.
+        # Assuming Dorothean structure from reference_data.py defaults
+        if chart_sect == Sect.DAY:
+            triplicity = trips[0]
+        else:
+            triplicity = trips[1]
         
         # Term
         term = None

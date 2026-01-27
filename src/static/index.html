@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judicial Astrology Engine | Precision Forensic Astrology</title>
+    <title>Judicial Astrology Rule Engine | Conditional Judgments</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,66 +23,68 @@
     <main class="container">
         <header>
             <div class="header-content">
-                <h1>JUDICIAL ASTROLOGY ENGINE</h1>
+                <h1>JUDICIAL ASTROLOGY RULE ENGINE</h1>
                 <div class="ornament"></div>
-                <p class="subtitle">Traditional Forensic Astrological Engine</p>
+                <p class="subtitle">Textual rules from traditional sources. Conditional judgments only.</p>
+                <button id="helpBtn" class="help-btn">METHOD & TERMS</button>
             </div>
         </header>
 
         <div id="backendNotice" class="backend-notice hidden">
-            <strong>Demo Mode:</strong> This GitHub Pages site is a static preview. Run the backend locally to calculate charts.
+            <strong>Demo Mode:</strong> This GitHub Pages site is a static preview. Run the backend locally to compute
+            rules.
         </div>
 
         <section class="feature-overview">
-            <h2 class="section-title">FEATURE OVERVIEW</h2>
+            <h2 class="section-title">RULE MODULES</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>Nativity Forensics</h3>
-                    <p>Calculates sect, dignity, and condition for each planet, then renders a structured forensic report with house placement and delineations.</p>
+                    <h3>Nativity Rules</h3>
+                    <p>Conditional rulings from sect, dignity, condition, and house placement.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Temporal Audits</h3>
-                    <p>Annual, monthly, and daily profections with zodiacal releasing to show active periods and pivots in time.</p>
+                    <h3>Temporal Rules</h3>
+                    <p>Annual, monthly, and daily profections with releasing to mark active periods.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Daily Oracle</h3>
-                    <p>Summarizes the day with your current chronocrator, lunar context, and the “secret key” trigger if present.</p>
+                    <h3>Daily Output</h3>
+                    <p>Daily statements from chronocrator, lunar phase, and epitasis flag.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Forensic Forecast</h3>
-                    <p>Five-day outlook built from profections and critical medical transits.</p>
+                    <h3>Five-Day Output</h3>
+                    <p>Five-day sequence from profections and medical transits.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Medical Advisory</h3>
-                    <p>Checks surgical safety based on Moon sign, malefic afflictions, eclipses, and crisis days.</p>
+                    <h3>Medical Constraints</h3>
+                    <p>Operative constraints from Moon sign, malefic afflictions, eclipses, and crisis days.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Hermetic Lots</h3>
-                    <p>Computes lots like Spirit and Fortune and maps them to your long-term timing structure.</p>
+                    <h3>Lots</h3>
+                    <p>Compute Lots of Spirit/Fortune and tie them to timing structure.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Celestial Curia</h3>
-                    <p>Highlights fixed stars, parans, nodal contacts, and universal eclipse pressures.</p>
+                    <h3>Fixed Stars & Nodes</h3>
+                    <p>Fixed star contacts, parans, nodal contacts, and eclipse pressure.</p>
                 </div>
                 <div class="feature-card">
                     <h3>Synastry</h3>
-                    <p>Compares two charts for structural fit, dependencies, and shared fate patterns.</p>
+                    <p>Two-chart structural fit, dependencies, and shared indicators.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Best Timing</h3>
-                    <p>Electional timing engine that scans for high-quality windows to act.</p>
+                    <h3>Electional Rules</h3>
+                    <p>Scan for viable windows to act.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Yes/No Answers</h3>
-                    <p>Direct question answering with horary mechanics and verdict weighting.</p>
+                    <h3>Horary Verdicts</h3>
+                    <p>Binary outcomes from horary mechanics and weighting.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>World Dashboard</h3>
-                    <p>Global sky snapshot with eclipses, fixed stars, and transiting planets.</p>
+                    <h3>World Rules</h3>
+                    <p>Global snapshot with eclipses, fixed stars, and transits.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Birth Time Correction</h3>
-                    <p>Traditional rectification methods to refine an uncertain birth time.</p>
+                    <h3>Rectification</h3>
+                    <p>Traditional rectification for uncertain birth time.</p>
                 </div>
             </div>
         </section>
@@ -90,7 +92,7 @@
         <section class="calculator-card">
             <form id="chartForm">
                 <div class="form-section">
-                    <h2 class="section-title">NATIVITY DETAILS</h2>
+                    <h2 class="section-title">INPUT DATA</h2>
                     <div class="form-row">
                         <div class="input-group">
                             <label for="date">DATE OF BIRTH</label>
@@ -118,7 +120,7 @@
                 </div>
 
                 <div class="form-section">
-                    <h2 class="section-title">TEMPORAL AUDIT (OPTIONAL)</h2>
+                    <h2 class="section-title">TIME PARAMETERS (OPTIONAL)</h2>
                     <div class="form-row">
                         <div class="input-group">
                             <label for="currentAge">CURRENT AGE</label>
@@ -132,7 +134,7 @@
                 </div>
 
                 <button type="submit" id="calculateBtn">
-                    <span class="btn-text">CAST NATIVITY</span>
+                    <span class="btn-text">RUN ANALYSIS</span>
                     <div class="btn-shimmer"></div>
                 </button>
             </form>
@@ -143,13 +145,14 @@
                 <!-- SVG Chart Wheel rendered here -->
             </div>
             <nav class="result-tabs">
-                <button class="tab-btn active" data-tab="forensic">FORENSIC REPORT</button>
-                <button class="tab-btn" data-tab="fate">FATE TIMELINE</button>
-                <button class="tab-btn" data-tab="prediction">CHRONOCRATORS</button>
-                <button class="tab-btn" data-tab="oracle">DAILY ORACLE</button>
-                <button class="tab-btn" data-tab="forecast">FORENSIC FORECAST</button>
-                <button class="tab-btn" data-tab="medical">IATROMATHEMATICS</button>
-                <button class="tab-btn" data-tab="technical">TECHNICAL DATA</button>
+                <button class="tab-btn active" data-tab="forensic">RULE OUTPUT</button>
+                <button class="tab-btn" data-tab="fate">TIME WINDOWS</button>
+                <button class="tab-btn" data-tab="prediction">TIME LORDS</button>
+                <button class="tab-btn" data-tab="oracle">DAILY OUTPUT</button>
+                <button class="tab-btn" data-tab="forecast">FIVE-DAY OUTPUT</button>
+                <button class="tab-btn" data-tab="medical">MEDICAL RULES</button>
+                <button class="tab-btn" data-tab="technical">RAW DATA</button>
+                <button id="askOracleBtn" class="tab-btn special-action">ASK ENGINE</button>
 
             </nav>
 
@@ -160,43 +163,64 @@
 
                 <div id="summaryGrid" class="summary-grid">
                     <div id="lunarProfileCard" class="summary-card">
-                        <h4>LUNAR PROFILE</h4>
-                        <p class="placeholder-text">Cast a nativity to reveal the lunar profile.</p>
+                        <h4>LUNAR PHASE</h4>
+                        <p class="placeholder-text">Run analysis to compute lunar phase.</p>
                     </div>
-                    <div id="elementBalanceCard" class="summary-card">
-                        <h4>ELEMENTAL BALANCE</h4>
-                        <p class="placeholder-text">Elemental dominance appears here.</p>
+                    <div id="temperamentCard" class="summary-card">
+                        <h4>TEMPERAMENT</h4>
+                        <p class="placeholder-text">Temperament pending calculation.</p>
                     </div>
                     <div id="universalEventsCard" class="summary-card">
-                        <h4>UNIVERSAL EVENTS</h4>
+                        <h4>ECLIPSE EVENTS</h4>
                         <p class="placeholder-text">No eclipse ledger loaded.</p>
                     </div>
                     <div id="universalCausationCard" class="summary-card">
-                        <h4>UNIVERSAL CAUSATION</h4>
-                        <p class="placeholder-text">Awaiting overdrive audit.</p>
+                        <h4>GLOBAL CAUSATION</h4>
+                        <p class="placeholder-text">Awaiting causation audit.</p>
+                    </div>
+                </div>
+
+                <div id="ruleLedgerSection" class="codex-section">
+                    <h3 class="section-divider">RULE TRACE</h3>
+                    <div id="ruleLedgerList" class="rule-ledger">
+                        <p class="placeholder-text">Run analysis to generate rule trace.</p>
                     </div>
                 </div>
 
                 <div id="soulGuardianSection" class="soul-guardian-section">
                     <div id="soulGuardianCard" class="soul-guardian-card">
-                        <h3>ALMUTEN FIGURIS</h3>
-                        <p class="placeholder-text">Cast a nativity to reveal the Soul's Guardian.</p>
+                        <h3>PRIMARY RULER (ALMUTEN FIGURIS)</h3>
+                        <p class="placeholder-text">Run analysis to compute the primary ruler.</p>
                     </div>
                     <div id="soulGuardianTeam" class="soul-guardian-card">
-                        <h3>SECT TEAMS</h3>
-                        <p class="placeholder-text">Constructive vs. Destructive forces appear here.</p>
+                        <h3>SECT ALIGNMENT</h3>
+                        <p class="placeholder-text">Sect alignment appears after calculation.</p>
+                    </div>
+                </div>
+
+                <div id="vitalitySection" class="soul-guardian-section" style="margin-top: 1rem;">
+                    <div id="vitalityCard" class="soul-guardian-card" style="width: 100%;">
+                        <h3>VITALITY & LONGEVITY (HYLEG)</h3>
+                        <p class="placeholder-text">Vitality analysis pending calculation.</p>
+                    </div>
+                </div>
+
+                <div id="primaryDirectionsSection" class="soul-guardian-section" style="margin-top: 1rem;">
+                    <div id="pdCard" class="soul-guardian-card" style="width: 100%;">
+                        <h3>PRIMARY DIRECTIONS (PLACIDUS)</h3>
+                        <p class="placeholder-text">Primary directions pending calculation.</p>
                     </div>
                 </div>
 
                 <div id="lotsSection" class="codex-section">
-                    <h3 class="section-divider">HERMETIC LOTS</h3>
+                    <h3 class="section-divider">LOT COMPUTATIONS</h3>
                     <div id="lotsGrid" class="lots-grid">
                         <p class="placeholder-text">Lots will appear after calculation.</p>
                     </div>
                 </div>
 
                 <div id="witnessSection" class="codex-section">
-                    <h3 class="section-divider">CELESTIAL CURIA</h3>
+                    <h3 class="section-divider">FIXED STARS & NODES</h3>
                     <div class="witness-grid">
                         <div class="witness-card">
                             <h4>FIXED STARS & PARANS</h4>
@@ -218,7 +242,7 @@
                 </div>
 
                 <div id="horaryPhysicsSection" class="horary-section hidden">
-                    <h3 class="section-divider">SHADOW PHYSICS & INTERACTION</h3>
+                    <h3 class="section-divider">HORARY CONDITIONS & INTERACTIONS</h3>
                     <div id="horaryPhysicsList" class="horary-grid"></div>
                 </div>
             </div>
@@ -226,11 +250,11 @@
             <div class="tab-content" id="fateTab">
                 <div class="fate-timeline-container">
                     <div class="timeline-lot-selector">
-                        <button class="lot-btn active" data-lot="Spirit">LOT OF SPIRIT (Career/Will)</button>
-                        <button class="lot-btn" data-lot="Fortune">LOT OF FORTUNE (Body/Fate)</button>
+                        <button class="lot-btn active" data-lot="Spirit">LOT OF SPIRIT (INTENT)</button>
+                        <button class="lot-btn" data-lot="Fortune">LOT OF FORTUNE (BODY/EVENTS)</button>
                     </div>
                     <div id="fateTimelineAlert" class="fate-alert">
-                        <p class="placeholder-text">Cast a nativity to calculate your pivots.</p>
+                        <p class="placeholder-text">Run analysis to calculate time windows.</p>
                     </div>
                     <div id="fateTimelineList" class="chapters-list">
                         <!-- ZR Chapters rendered here -->
@@ -267,6 +291,10 @@
                         <h3>LUNAR PHASE</h3>
                         <div id="lunarPhaseInfo"></div>
                     </div>
+                    <div class="prediction-card">
+                        <h3>ACTIVE TRANSITS</h3>
+                        <div id="transitInfo"></div>
+                    </div>
                 </div>
             </div>
 
@@ -280,8 +308,8 @@
 
             <div class="tab-content" id="forecastTab">
                 <div class="forecast-container">
-                    <h2 class="forecast-title">5-DAY FORENSIC PROJECTION</h2>
-                    <p class="forecast-subtitle">Based on Profections (Epembasis) and Medical Transits</p>
+                    <h2 class="forecast-title">5-DAY RULE OUTLOOK</h2>
+                    <p class="forecast-subtitle">Derived from profections and medical transits.</p>
                     <div id="forecastGrid" class="forecast-grid">
                         <!-- 5-Day Forecast Cards here -->
                     </div>
@@ -293,8 +321,8 @@
             <div class="tab-content" id="medicalTab">
                 <div class="medical-grid">
                     <div class="medical-card">
-                        <h3>SURGERY ADVISORY</h3>
-                        <p class="medical-subtitle">Check eligibility based on current transits</p>
+                        <h3>SURGERY CONSTRAINTS</h3>
+                        <p class="medical-subtitle">Constraints based on current transits.</p>
                         <div class="medical-selector">
                             <label>TARGET BODY PART</label>
                             <select id="bodyPartSelect">
@@ -313,7 +341,7 @@
                             </select>
                         </div>
                         <div id="surgeryResult" class="surgery-panel">
-                            <p class="placeholder-text">Cast a nativity to enable medical auditing.</p>
+                            <p class="placeholder-text">Run analysis to enable medical checks.</p>
                         </div>
                     </div>
                 </div>
@@ -340,15 +368,15 @@
 
         <section class="tools-hub">
             <div class="tools-header">
-                <h2>DIVINATION TOOLS</h2>
-                <p class="tools-subtitle">Independent engines for timing, relationships, and world-state.</p>
+                <h2>RULE TOOLS</h2>
+                <p class="tools-subtitle">Independent engines for timing, relationships, and world state.</p>
             </div>
             <nav class="tool-tabs">
                 <button class="tool-tab-btn active" data-tool="synastry">SYNASTRY</button>
                 <button class="tool-tab-btn" data-tool="kairos">BEST TIMING</button>
-                <button class="tool-tab-btn" data-tool="horary">YES/NO ANSWERS</button>
+                <button class="tool-tab-btn" data-tool="horary">HORARY VERDICT</button>
                 <button class="tool-tab-btn" data-tool="world">WORLD DASHBOARD</button>
-                <button class="tool-tab-btn" data-tool="rectification">BIRTH TIME CORRECTION</button>
+                <button class="tool-tab-btn" data-tool="rectification">RECTIFICATION</button>
             </nav>
 
             <div class="tool-content active" id="synastryTool">
@@ -393,10 +421,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">CAST SYNASTRY</button>
+                    <button type="submit">RUN SYNASTRY</button>
                 </form>
                 <div id="synastryResults" class="tool-results">
-                    <p class="placeholder-text">Provide two charts to audit structural fit.</p>
+                    <p class="placeholder-text">Provide two charts to compute synastry rules.</p>
                 </div>
             </div>
 
@@ -407,7 +435,8 @@
                             <h3>REQUEST</h3>
                             <div class="input-group">
                                 <label for="kairosActivity">ACTIVITY</label>
-                                <input type="text" id="kairosActivity" placeholder="e.g. contract, marriage, surgery" required>
+                                <input type="text" id="kairosActivity" placeholder="e.g. contract, marriage, surgery"
+                                    required>
                             </div>
                             <div class="input-group">
                                 <label for="kairosStartDate">START DATE</label>
@@ -430,10 +459,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">FIND BEST TIMING</button>
+                    <button type="submit">SCAN WINDOWS</button>
                 </form>
                 <div id="kairosResults" class="tool-results">
-                    <p class="placeholder-text">Find the best windows to act.</p>
+                    <p class="placeholder-text">Scan for viable windows to act.</p>
                 </div>
             </div>
 
@@ -444,7 +473,8 @@
                             <h3>QUESTION</h3>
                             <div class="input-group">
                                 <label for="horaryQuestion">YOUR QUESTION</label>
-                                <input type="text" id="horaryQuestion" placeholder="e.g. Will I get this house?" required>
+                                <input type="text" id="horaryQuestion" placeholder="e.g. Will I get this house?"
+                                    required>
                             </div>
                             <div class="input-group">
                                 <label for="horaryDate">DATE</label>
@@ -467,10 +497,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">GET YES/NO ANSWER</button>
+                    <button type="submit">GET VERDICT</button>
                 </form>
                 <div id="horaryResults" class="tool-results">
-                    <p class="placeholder-text">Ask a question to receive a direct answer.</p>
+                    <p class="placeholder-text">Ask a question to receive a binary verdict.</p>
                 </div>
             </div>
 
@@ -489,10 +519,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">REFRESH WORLD</button>
+                    <button type="submit">UPDATE WORLD DATA</button>
                 </form>
                 <div id="worldResults" class="tool-results">
-                    <p class="placeholder-text">Load the global astrology dashboard.</p>
+                    <p class="placeholder-text">Load global rule data.</p>
                 </div>
             </div>
 
@@ -519,10 +549,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">CORRECT BIRTH TIME</button>
+                    <button type="submit">ESTIMATE BIRTH TIME</button>
                 </form>
                 <div id="rectificationResults" class="tool-results">
-                    <p class="placeholder-text">Submit birth data to estimate a more accurate birth time.</p>
+                    <p class="placeholder-text">Submit birth data to estimate birth time.</p>
                 </div>
             </div>
         </section>

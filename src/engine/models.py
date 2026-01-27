@@ -40,6 +40,7 @@ class Planet:
     longitude: float  # 0-360 degrees
     latitude: float = 0.0
     speed: float = 0.0
+    altitude: float = 0.0
     
     @property
     def sign(self) -> Sign:
@@ -58,6 +59,9 @@ class Chart:
     mc: float = 0.0
     north_node: float = 0.0 
     south_node: float = 0.0
+    geo_lat: Optional[float] = None
+    geo_lon: Optional[float] = None
+    jd: Optional[float] = None
 
 class LotName(Enum):
     FORTUNE = "Fortune"

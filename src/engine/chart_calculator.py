@@ -109,6 +109,8 @@ def calculate_chart_data(date_str: str, time_str: str, city: str, state: str = "
 
     # Flags: SEFLG_SWIEPH (use Ephemeris), SEFLG_SPEED (calc speed)
     flags = swe.FLG_SWIEPH | swe.FLG_SPEED
+    topo_flags = flags | swe.FLG_TOPOCTR
+    swe.set_topo(lon, lat, 0)
 
     for name, pid in planets.items():
         try:
@@ -122,18 +124,12 @@ def calculate_chart_data(date_str: str, time_str: str, city: str, state: str = "
             else:
                 coords = res_full
 
-            # Calculate Altitude/Azimuth
-            # We need Topocentric positions for accurate altitude, but usually geocentric is close enough for simple day/night check?
-            # Better: swe.azalt(jd, swe.CALC_AR, geolon, geolat, height, atpress, attemp, lon, lat)
-            # We need the planet's ecliptic coordinates converted? 
-            # Actually swe.azalt takes the object's equatorial or ecliptic coordinates?
-            # Docs say: swe.azalt(tjd_ut, calc_flag, geopos, atpress, attemp, xin)
-            # xin is (lon, lat, dist)
-            
-            # Using Geocentric coordinates for input to azalt is acceptable for this level of precision.
-            xin = (coords[0], coords[1], coords[2])
+            # Calculate Altitude/Azimuth using topocentric position for accuracy.
+            topo_full = swe.calc_ut(jd, pid, topo_flags)
+            topo_coords = topo_full[0] if isinstance(topo_full[0], (list, tuple)) else topo_full
+            xin = (topo_coords[0], topo_coords[1], topo_coords[2])
             geopos = (lon, lat, 0) # lon, lat, height
-            azresult = swe.azalt(jd, swe.SE_ECL2HOR, geopos, 0, 0, xin)
+            azresult = swe.azalt(jd, swe.ECL2HOR, geopos, 0, 0, xin)
             # azresult returns (azimuth, true_altitude, apparent_altitude)
             
             altitude = azresult[1]

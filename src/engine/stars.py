@@ -1,5 +1,7 @@
 from dataclasses import dataclass
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Tuple
+import math
+import swisseph as swe
 from .models import Planet, Chart, PlanetName
 
 @dataclass
@@ -11,6 +13,7 @@ class FixedStar:
     glory: str = ""
     nemesis: str = ""
     orb: float = 1.0
+    swe_name: Optional[str] = None
 
 # 2025 Coordinates and forensic meanings derived from Binder1_part_030.txt
 STARS = [
@@ -20,7 +23,8 @@ STARS = [
         nature="Mars", 
         magnitude=1, 
         glory="Integrity, Honor, Moral Courage",
-        nemesis="Compromise of Integrity; Ruin through dishonesty"
+        nemesis="Compromise of Integrity; Ruin through dishonesty",
+        swe_name="Aldebaran"
     ),
     FixedStar(
         name="Regulus", 
@@ -28,7 +32,8 @@ STARS = [
         nature="Mars/Jupiter", 
         magnitude=1, 
         glory="Power, Command, Nobility",
-        nemesis="Revenge; Total fall from grace due to pettiness"
+        nemesis="Revenge; Total fall from grace due to pettiness",
+        swe_name="Regulus"
     ),
     FixedStar(
         name="Antares", 
@@ -36,7 +41,8 @@ STARS = [
         nature="Mars/Jupiter", 
         magnitude=1, 
         glory="Intensity, Bravery, Strategic Genius",
-        nemesis="Obsession; Self-destruction through mania"
+        nemesis="Obsession; Self-destruction through mania",
+        swe_name="Antares"
     ),
     FixedStar(
         name="Fomalhaut", 
@@ -44,7 +50,8 @@ STARS = [
         nature="Venus/Mercury", 
         magnitude=1, 
         glory="Charisma, Artistic/Spiritual Legacy",
-        nemesis="Corruption of Ideals; Dreaming without doing"
+        nemesis="Corruption of Ideals; Dreaming without doing",
+        swe_name="Fomalhaut"
     ),
     FixedStar(
         name="Caput Algol", 
@@ -53,7 +60,8 @@ STARS = [
         magnitude=2, 
         orb=2.5,
         glory="None (Pure Malefic)",
-        nemesis="Losing one's head, beheading, extreme violence"
+        nemesis="Losing one's head, beheading, extreme violence",
+        swe_name="Algol"
     ),
     FixedStar(
         name="Spica", 
@@ -61,7 +69,8 @@ STARS = [
         nature="Venus/Mars", 
         magnitude=1, 
         glory="Success through art, diplomacy, and intellect",
-        nemesis="None (Pure Benefic)"
+        nemesis="None (Pure Benefic)",
+        swe_name="Spica"
     ),
 ]
 
@@ -78,51 +87,139 @@ def get_shortest_dist(a: float, b: float) -> float:
     if d > 180: d = 360 - d
     return d
 
+def _normalize_deg(deg: float) -> float:
+    return deg % 360.0
+
+def _equatorial_to_ecliptic(ra: float, dec: float, epsilon: float) -> Tuple[float, float]:
+    ra_r = math.radians(ra)
+    dec_r = math.radians(dec)
+    eps_r = math.radians(epsilon)
+
+    sin_beta = math.sin(dec_r) * math.cos(eps_r) - math.cos(dec_r) * math.sin(eps_r) * math.sin(ra_r)
+    beta = math.asin(sin_beta)
+
+    y = math.sin(ra_r) * math.cos(eps_r) + math.tan(dec_r) * math.sin(eps_r)
+    x = math.cos(ra_r)
+    lam = math.atan2(y, x)
+
+    return (_normalize_deg(math.degrees(lam)), math.degrees(beta))
+
+def _ecliptic_to_equatorial(lon: float, lat: float, epsilon: float) -> Tuple[float, float]:
+    lon_r = math.radians(lon)
+    lat_r = math.radians(lat)
+    eps_r = math.radians(epsilon)
+
+    sin_dec = math.sin(eps_r) * math.sin(lon_r) * math.cos(lat_r) + math.cos(eps_r) * math.sin(lat_r)
+    dec_r = math.asin(sin_dec)
+    y = math.sin(lon_r) * math.cos(eps_r) - math.tan(lat_r) * math.sin(eps_r)
+    x = math.cos(lon_r)
+    ra_r = math.atan2(y, x)
+    return (_normalize_deg(math.degrees(ra_r)), math.degrees(dec_r))
+
+def _year_from_jd(jd: Optional[float]) -> Optional[int]:
+    if jd is None:
+        return None
+    y, m, d, h = swe.revjul(jd)
+    return int(y)
+
+def _precess_longitude(lon_2025: float, jd: Optional[float]) -> float:
+    year = _year_from_jd(jd)
+    if year is None:
+        return lon_2025
+    delta_years = year - 2025
+    return _normalize_deg(lon_2025 + (delta_years / 72.0))
+
+def _get_star_equatorial(star: FixedStar, jd: Optional[float]) -> Optional[Tuple[float, float]]:
+    if jd is None or not star.swe_name:
+        return None
+    try:
+        res = swe.fixstar(star.swe_name, jd)
+        coords = res[1] if isinstance(res[1], (list, tuple)) else res[0]
+        ra = coords[0]
+        dec = coords[1]
+        return (ra, dec)
+    except Exception:
+        return None
+
+def _get_star_longitude(star: FixedStar, jd: Optional[float]) -> float:
+    ra_dec = _get_star_equatorial(star, jd)
+    if ra_dec:
+        epsilon = 23.4392911
+        lon, _ = _equatorial_to_ecliptic(ra_dec[0], ra_dec[1], epsilon)
+        return lon
+    return _precess_longitude(star.longitude, jd)
+
+def _angles_for_body(ra: float, dec: float, ramc: float, lat: float, orb: float) -> List[str]:
+    hits = []
+    ha = (ramc - ra + 540.0) % 360.0 - 180.0
+
+    if abs(ha) <= orb:
+        hits.append("MC")
+    if abs(abs(ha) - 180.0) <= orb:
+        hits.append("IC")
+
+    try:
+        cos_h = -math.tan(math.radians(lat)) * math.tan(math.radians(dec))
+    except Exception:
+        cos_h = 2.0
+    if -1.0 <= cos_h <= 1.0:
+        h = math.degrees(math.acos(cos_h))
+        if abs(ha - (-h)) <= orb:
+            hits.append("ASC")
+        if abs(ha - h) <= orb:
+            hits.append("DSC")
+
+    return hits
+
 def calculate_parans(chart: Chart) -> List[StarContact]:
     """
     Detects stars rising, culminating, setting, or on the IC simultaneously with planets or angles.
     As per Binder1_part_030.txt, Parans prioritize visual synchronization over ecliptic longitude.
     """
     parans = []
-    
-    # Define Angles
-    angles = {
-        "ASC": chart.ascendant,
-        "MC": chart.mc,
-        "DSC": (chart.ascendant + 180) % 360,
-        "IC": (chart.mc + 180) % 360
-    }
-    
-    orb = 2.0 # Standard orb for Paran detection
-    
-    # 1. Check Planet-Star Parans
-    # A Paran occurs when a Planet is on one angle and a Star is on another (or the same) angle.
+    if chart.geo_lat is None or chart.jd is None:
+        return parans
+
+    orb = 2.0
+    epsilon = 23.4392911
+
+    # RAMC from MC (MC is ecliptic longitude)
+    ramc, _ = _ecliptic_to_equatorial(chart.mc, 0.0, epsilon)
+
+    # Planet angle hits
+    planet_hits = {}
     for planet in chart.planets:
-        p_long = planet.longitude
-        p_name = planet.name.value
-        
-        # Check if planet is on an angle
-        for p_angle_name, p_angle_long in angles.items():
-            if get_shortest_dist(p_long, p_angle_long) <= orb:
-                # If planet is angular, check if any star is ALSO angular
-                for star in STARS:
-                    for s_angle_name, s_angle_long in angles.items():
-                        if get_shortest_dist(star.longitude, s_angle_long) <= orb:
-                            msg = (
-                                f"PARAN: {star.name} is on {s_angle_name} while {p_name} is on {p_angle_name}. "
-                                f"Eminence Indicator. Nature: {star.nature}. Glory: {star.glory}."
-                            )
-                            parans.append(StarContact(
-                                star_name=star.name,
-                                planet_name=p_name,
-                                contact_type="PARAN",
-                                angle=s_angle_name,
-                                message=msg
-                            ))
-                            
-    # 2. Check Light-Angle Parans (Sun/Moon) - The "Dictators" of the Curia
-    # We already checked them in the loop above if they are in chart.planets
-    
+        ra_p, dec_p = _ecliptic_to_equatorial(planet.longitude, planet.latitude, epsilon)
+        hits = _angles_for_body(ra_p, dec_p, ramc, chart.geo_lat, orb)
+        if hits:
+            planet_hits[planet.name.value] = hits
+
+    if not planet_hits:
+        return parans
+
+    for star in STARS:
+        ra_dec = _get_star_equatorial(star, chart.jd)
+        if not ra_dec:
+            continue
+        s_hits = _angles_for_body(ra_dec[0], ra_dec[1], ramc, chart.geo_lat, orb)
+        if not s_hits:
+            continue
+
+        for p_name, p_hits in planet_hits.items():
+            for s_angle in s_hits:
+                for p_angle in p_hits:
+                    msg = (
+                        f"PARAN: {star.name} is on {s_angle} while {p_name} is on {p_angle}. "
+                        f"Eminence Indicator. Nature: {star.nature}. Glory: {star.glory}."
+                    )
+                    parans.append(StarContact(
+                        star_name=star.name,
+                        planet_name=p_name,
+                        contact_type="PARAN",
+                        angle=s_angle,
+                        message=msg
+                    ))
+
     return parans
 
 def check_fixed_stars(chart: Chart) -> List[StarContact]:
@@ -144,7 +241,8 @@ def check_fixed_stars(chart: Chart) -> List[StarContact]:
         p_name = planet.name.value
         
         for star in STARS:
-            dist = get_shortest_dist(p_long, star.longitude)
+            star_lon = _get_star_longitude(star, chart.jd)
+            dist = get_shortest_dist(p_long, star_lon)
             if dist <= star.orb:
                 # Skip if already identified as a Paran (to avoid redundancy, but note conjunction is still valid)
                 contact_type = "CONJUNCTION"
@@ -161,7 +259,8 @@ def check_fixed_stars(chart: Chart) -> List[StarContact]:
     angles = {"Ascendant": chart.ascendant, "Midheaven": chart.mc}
     for angle_name, angle_long in angles.items():
         for star in STARS:
-            dist = get_shortest_dist(angle_long, star.longitude)
+            star_lon = _get_star_longitude(star, chart.jd)
+            dist = get_shortest_dist(angle_long, star_lon)
             if dist <= star.orb:
                 all_contacts.append(StarContact(
                     star_name=star.name,
@@ -181,8 +280,10 @@ def check_fixed_stars(chart: Chart) -> List[StarContact]:
             planet = next((p for p in chart.planets if p.name == p_name_target), None)
             if planet:
                 # Check conjunction with either star
-                on_aldebaran = get_shortest_dist(planet.longitude, aldebaran.longitude) <= aldebaran.orb
-                on_antares = get_shortest_dist(planet.longitude, antares.longitude) <= antares.orb
+                al_lon = _get_star_longitude(aldebaran, chart.jd)
+                an_lon = _get_star_longitude(antares, chart.jd)
+                on_aldebaran = get_shortest_dist(planet.longitude, al_lon) <= aldebaran.orb
+                on_antares = get_shortest_dist(planet.longitude, an_lon) <= antares.orb
                 
                 if on_aldebaran or on_antares:
                     msg = (

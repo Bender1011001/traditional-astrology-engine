@@ -29,7 +29,7 @@ def calculate_profection_sign(ascendant_sign: Sign, age: int) -> Sign:
 def get_lord_of_year(profection_sign: Sign) -> PlanetName:
     return DOMICILES[profection_sign]
 
-def calculate_monthly_profection(annual_sign: Sign, month: int, method: str = 'Continuous', natal_start_sign: Sign = None, age: int = None) -> Sign:
+def calculate_monthly_profection(annual_sign: Sign, month: int, method: str = 'Continuous', natal_start_sign: Sign = None, age: int = None, total_months: int = None) -> Sign:
     """
     Implements Monthly Profection.
     - Continuous: 1 sign per month from the annual profection sign.
@@ -45,8 +45,9 @@ def calculate_monthly_profection(annual_sign: Sign, month: int, method: str = 'C
     elif method == 'Saltatory':
         if natal_start_sign is None or age is None:
             raise ValueError("Natal start sign and age required for Saltatory method")
-        # Total months lived up to this month in the current year
-        total_months = (age * 12) + (month - 1)
+        # Total months since birth; if not provided, fall back to whole-year months
+        if total_months is None:
+            total_months = (age * 12) + (month - 1)
         start_index = signs.index(natal_start_sign)
         target_index = (start_index + total_months) % 12
         return signs[target_index]
@@ -463,6 +464,49 @@ class AdvancedPredictionEngine:
         return calculate_all_lots(self.natal_chart, self.sect)
 
 
+    def get_active_transits(self, target_date: datetime):
+        """
+        Calculates active transits of outer planets (Jupiter to Pluto) to natal planets
+        for the target date.
+        """
+        # Calculate transiting positions
+        t_jd = swe.julday(target_date.year, target_date.month, target_date.day, 12.0)
+        
+        outer_planets = [
+            (swe.JUPITER, "Jupiter"),
+            (swe.SATURN, "Saturn"),
+            (swe.URANUS, "Uranus"),
+            (swe.NEPTUNE, "Neptune"),
+            (swe.PLUTO, "Pluto")
+        ]
+        
+        hits = []
+        
+        for pid, p_name in outer_planets:
+            res = swe.calc_ut(t_jd, pid, swe.FLG_SWIEPH)
+            t_lon = res[0][0]
+            
+            for natal_p in self.natal_chart.planets:
+                # Check major hard aspects (Conjunction, Square, Opposition)
+                diff = abs(t_lon - natal_p.longitude) % 360
+                dist = diff if diff <= 180 else 360 - diff
+                
+                aspect = None
+                orb = 3.0 # Wide orb for context
+                
+                if dist < orb: aspect = "Conjunct"
+                elif abs(dist - 90) < orb: aspect = "Square"
+                elif abs(dist - 180) < orb: aspect = "Opposition"
+                
+                if aspect:
+                    hits.append({
+                        "transit": p_name,
+                        "natal_planet": natal_p.name.value,
+                        "aspect": aspect,
+                        "orb": round(dist if aspect == "Conjunct" else abs(dist - (90 if aspect == "Square" else 180)), 2)
+                    })
+        return hits
+
     def get_prediction_report(self, target_date: datetime):
         age_years = (target_date - self.birth_date).days / 365.25
         
@@ -472,6 +516,7 @@ class AdvancedPredictionEngine:
                 {"planet": p.name.value, "longitude": round(p.longitude, 2)}
                 for p in self.get_solar_arcs(age_years)
             ],
+            "transits": self.get_active_transits(target_date),
             "muntha": self.get_muntha(int(age_years)),
             "lunar_phase": self.get_lunar_phase(),
             "solar_return_info": self.get_solar_return(target_date.year if target_date.month >= self.birth_date.month else target_date.year - 1)
