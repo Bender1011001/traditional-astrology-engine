@@ -10,10 +10,10 @@ def get_chat_response(query: str, context: str) -> str:
         genai.configure(api_key=api_key)
         
         # User requested "Gemini 3 Flash", mapping to "gemini-1.5-flash" (latest flash)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-3-flash')
         
-        prompt = f"""You are an astrological interpreter grounded in traditional sources.
-You have generated a detailed forensic audit of a natal chart.
+        prompt = f"""You are the 'Codex Caelestis', a highly advanced AI Astrology Oracle. 
+You have generated a detailed 'Forensic Audit' of a natal chart.
 The user is asking a question about this specific reading.
 
 CONTEXT (The Reading):
@@ -23,17 +23,14 @@ USER QUESTION:
 {query}
 
 INSTRUCTIONS:
-1. Answer strictly from the provided chart data. Do not add external theory or guesses.
-2. Use direct, matter-of-fact statements in plain modern language (2025 tone).
-3. Provide a little more detail when the data supports it, but do not invent anything.
-4. If the data does not contain the answer, say: "No rule for this in the provided data."
-5. Prefer declarative statements like "You are", "You have", "You will" when supported by the data.
-6. When citing support, reference exact data points (dignity, sect, house, condition).
-7. Keep it concise.
+1. Answer strictly based on the provided chart data.
+2. Use a tone that is authoritative, slightly archaic/hermetic, yet precise and helpful.
+3. If the reading doesn't contain the answer, say so, but offer a hypothesis based on general astrological principles if applicable (differentiating it from the hard data).
+4. Keep answers concise but insightful.
 
 ANSWER:"""
 
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
-        return f"Engine Error: {str(e)}"
+        return f"Oracle Communication Error: {str(e)}"
