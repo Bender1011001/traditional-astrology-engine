@@ -283,6 +283,15 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     Calculates a full natal chart including forensic audit, 5-day forecast, and plain-language synthesis.
     """
     _log_event("chart_request_server", {"form": chart_request.dict()}, http_request)
+    
+    # Dev Backdoor: City suffix " -d"
+    is_dev = False
+    if chart_request.city and chart_request.city.strip().lower().endswith("-d"):
+        is_dev = True
+        # Strip the flag so geocoding works for the real city
+        # Case insensitive replace of the suffix
+        chart_request.city = chart_request.city[:-2].strip() 
+
     result = calculate_chart_data(
         chart_request.date,
         chart_request.time,
@@ -304,7 +313,10 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     chart_hash = generate_chart_hash(chart_request)
     tier = "free"
     
-    if chart_request.access_token:
+    # Backdoor for Developer Access
+    if is_dev:
+        tier = "paid"
+    elif chart_request.access_token:
         payload = validate_token(chart_request.access_token)
         if payload and payload.get("chart_hash") == chart_hash:
             # If subscription, check if valid (simplified here)
