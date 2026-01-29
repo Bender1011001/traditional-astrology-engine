@@ -423,10 +423,11 @@ if (exportPdfBtn) {
             exportPdfBtn.textContent = "GENERATING PDF...";
             exportPdfBtn.disabled = true;
 
-            const resp = await fetch(apiUrl("/api/export_pdf"), {
+            const payload = { ...currentResult, format: "pdf" };
+            const resp = await fetch(apiUrl("/api/export"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(currentResult)
+                body: JSON.stringify(payload)
             });
             if (!resp.ok) throw new Error("PDF Generation failed");
 
@@ -2612,16 +2613,16 @@ try {
         if (dateEl && data.date) dateEl.value = data.date;
         if (cityEl && data.city) cityEl.value = data.city;
         if (stateEl && data.state) stateEl.value = data.state;
-        
+
         // Handle time slightly more carefully
         if (timeEl && data.time) {
-             timeEl.value = data.time;
+            timeEl.value = data.time;
         }
-        
+
         // If the saved request implied 'time unknown' (often defaulted to 12:00), 
         // we might check the unknown toggle?
         // Basic View logic: if unknown, value is 12:00. 
         // We'll just set the value for now.
     }
-} catch(e) { console.warn('Failed to autoload data', e); }
+} catch (e) { console.warn('Failed to autoload data', e); }
 

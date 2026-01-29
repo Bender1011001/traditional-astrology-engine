@@ -749,6 +749,23 @@ async def export_chart_data(request: dict):
     """
     Exports chart result as a CSV-friendly structure or simple text dump.
     """
+    export_format = request.get("format", "csv").lower()
+
+    if export_format == "pdf":
+        try:
+            # Reconstruct the full data structure if needed, or pass 'request' if it contains the full chart result
+            # The frontend should pass the full 'result' object as the request body.
+            generator = PDFReportGenerator(request)
+            pdf_buffer = generator.generate()
+            return StreamingResponse(
+                pdf_buffer,
+                media_type="application/pdf",
+                headers={"Content-Disposition": "attachment; filename=codex_caelestis_report.pdf"}
+            )
+        except Exception as e:
+            print(f"PDF Gen Error: {e}")
+            raise HTTPException(status_code=500, detail=f"PDF Generation Error: {str(e)}")
+
     # Simply returns a flattened version of the forensic report for researchers
     report = request.get("forensic_report", {})
     planets = report.get("planets", [])
@@ -778,12 +795,6 @@ async def export_chart_data(request: dict):
         content=output.getvalue(),
         media_type="text/csv",
         headers={"Content-Disposition": "attachment; filename=astrology_export.csv"}
-    )
-
-    return StreamingResponse(
-        pdf_buffer,
-        media_type="application/pdf",
-        headers={"Content-Disposition": "attachment; filename=codex_caelestis_report.pdf"}
     )
 
 @app.post("/api/create-checkout")
