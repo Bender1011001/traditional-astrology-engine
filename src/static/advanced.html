@@ -57,6 +57,10 @@
                 <nav class="header-actions" aria-label="Primary">
                     <button id="helpBtn" class="help-btn" type="button">METHOD & TERMS</button>
                     <button id="glossaryBtn" class="help-btn" type="button">GLOSSARY</button>
+                    <button id="loginBtn" class="help-btn" type="button" onclick="window.location.href='login.html'">LOG
+                        IN</button>
+                    <button id="registerBtn" class="help-btn" type="button"
+                        onclick="window.location.href='register.html'">REGISTER</button>
                     <button id="libraryBtn" class="help-btn" type="button">CHART LIBRARY</button>
                     <a class="help-btn" href="methodology.html">METHOD & SOURCES</a>
                     <a class="help-btn" href="index.html">BASIC VERSION</a>
@@ -252,6 +256,15 @@
             <div id="chartWheelContainer" class="chart-wheel-container">
                 <!-- SVG Chart Wheel rendered here -->
             </div>
+
+            <div class="results-toolbar"
+                style="display: flex; gap: 1rem; justify-content: flex-end; padding: 1rem 0; border-bottom: 1px solid var(--border-color);">
+                <button id="saveChartBtn" class="help-btn" type="button">SAVE TO LIBRARY</button>
+                <div class="divider-vertical" style="width: 1px; background: var(--border-color);"></div>
+                <button id="exportCsvBtn" class="help-btn" type="button">EXPORT CSV</button>
+                <button id="exportPdfBtn" class="help-btn" type="button">DOWNLOAD PDF</button>
+            </div>
+
             <nav class="result-tabs" role="tablist" aria-label="Result tabs">
                 <button class="tab-btn active" type="button" data-tab="forensic" id="tab-forensic" role="tab"
                     aria-controls="forensicTab" aria-selected="true">RULE OUTPUT</button>
@@ -465,11 +478,7 @@
                     <div id="anglesInfo" class="meta-info"></div>
                 </div>
 
-                <div class="meta-actions" style="margin-bottom: 1rem; display: flex; gap: 1rem;">
-                    <button id="saveChartBtn" class="help-btn" type="button">SAVE TO LIBRARY</button>
-                    <button id="exportCsvBtn" class="help-btn" type="button">EXPORT AS CSV</button>
-                    <button id="exportPdfBtn" class="help-btn" type="button">EXPORT AS PDF</button>
-                </div>
+
 
                 <div class="data-split">
                     <div class="planet-list-container">
