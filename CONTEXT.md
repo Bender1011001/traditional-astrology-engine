@@ -15,6 +15,7 @@
 - Vanilla JS, CSS (Glassmorphism)
 - Google Gemini Flash (Generative AI)
 - ReportLab (PDF Generation)
+- Geopy, TimezoneFinder, pytz (Location & Time)
 - Stripe (Payments)
 - PyJWT (Authentication)
 

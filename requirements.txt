@@ -5,3 +5,6 @@ requests
 stripe
 pyjwt
 reportlab
+geopy
+timezonefinder
+pytz
