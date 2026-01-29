@@ -2,10 +2,11 @@
 # Astrology Project
 
 ## Status
-- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics, Medical Iatromathematics, Antiscia, Forensic 5-Day Forecast (Epitasis), Generative AI Oracle, and premium UI.
+- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics, Medical Iatromathematics, Antiscia, Forensic 5-Day Forecast (Epitasis), Generative AI Oracle.
+- **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall).
 - **Database**: Comprehensive pre-1700s traditional astrology—20 JSON files, ~210KB total.
-- **Release Ready**: Version 1.1 (The Chronocrator Upgrade).
-- **Monetization**: Basic Stripe integration (Checkout, Webhook) and Frontend Paywall implemented.
+- **Release Ready**: Version 1.2 (The Aesthetic Upgrade).
+- **Monetization**: Stripe (One-time + Annual/Monthly Subscriptions).
 
 
 ## Tech Stack

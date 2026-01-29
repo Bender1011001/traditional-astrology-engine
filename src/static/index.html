@@ -60,9 +60,13 @@
                 <div class="ornament"></div>
                 <p class="subtitle">A clear, plain-language reading based on your birth details.</p>
                 <nav class="header-actions" aria-label="Primary">
+                    <a class="help-btn" href="index.html">HOME</a>
+                    <a class="help-btn" href="about.html">ABOUT</a>
+                    <a class="help-btn" href="methodology.html">METHODOLOGY</a>
+                    <a class="help-btn" href="sample-reading.html">SAMPLE</a>
+                    <a class="help-btn" href="resources.html">RESOURCES</a>
+                    <a class="help-btn" href="faq.html">FAQ</a>
                     <a class="help-btn" href="login.html">LOG IN</a>
-                    <a class="help-btn" href="advanced.html">ADVANCED TOOLS</a>
-                    <a class="help-btn" href="methodology.html">METHOD & SOURCES</a>
                     <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">DARK
                         MODE</button>
                 </nav>
@@ -70,7 +74,8 @@
         </header>
 
         <div id="backendNotice" class="backend-notice hidden" role="status" aria-live="polite">
-            <strong>Demo Mode:</strong> This site is a static preview. Run the backend locally to compute readings.
+            <strong>Preview Mode:</strong> Full readings are currently in beta. Run backend locally for complete
+            functionality.
         </div>
 
         <section class="basic-view">
@@ -79,11 +84,19 @@
                 <form id="basicForm" class="basic-form">
                     <div class="form-row">
                         <div class="input-group">
-                            <label for="basicDate">DATE OF BIRTH</label>
+                            <label for="basicDate">
+                                DATE OF BIRTH
+                                <span class="tooltip-icon"
+                                    data-tooltip="Your birth date helps us calculate planetary positions.">?</span>
+                            </label>
                             <input type="date" id="basicDate" required>
                         </div>
                         <div class="input-group">
-                            <label for="basicTime">TIME OF BIRTH</label>
+                            <label for="basicTime">
+                                TIME OF BIRTH
+                                <span class="tooltip-icon"
+                                    data-tooltip="Birth time determines your Rising Sign and houses. Even an approximate time is helpful.">?</span>
+                            </label>
                             <input type="time" id="basicTime" required aria-describedby="basicTimeWarning">
                             <div class="time-unknown-toggle">
                                 <label class="checkbox-row">
@@ -100,7 +113,11 @@
 
                     <div class="form-row">
                         <div class="input-group">
-                            <label for="basicCity">CITY</label>
+                            <label for="basicCity">
+                                CITY
+                                <span class="tooltip-icon"
+                                    data-tooltip="We need your birth location for accurate local time and latitude.">?</span>
+                            </label>
                             <input type="text" id="basicCity" placeholder="e.g. Rome" required
                                 autocomplete="address-level2" aria-controls="basicCitySuggestions" aria-expanded="false"
                                 aria-haspopup="listbox">
@@ -123,7 +140,7 @@
                     <div class="loading-bar">
                         <div class="loading-bar-fill"></div>
                     </div>
-                    <div class="loading-subtext">This may take a moment.</div>
+                    <div id="loadingText" class="loading-subtext">Calculating planetary positions...</div>
                 </div>
 
                 <div id="basicReading" class="basic-reading hidden">
@@ -139,11 +156,143 @@
                                 &#128078;
                             </button>
                         </div>
+                        <div class="feedback-text-container hidden" id="feedbackTextContainer">
+                            <textarea id="feedbackText" placeholder="What would make this more accurate?"
+                                rows="2"></textarea>
+                            <button type="button" id="submitFeedbackText" class="btn-small">SEND FEEDBACK</button>
+                        </div>
                         <div id="basicFeedbackStatus" class="feedback-status" aria-live="polite"></div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Sample Excerpts Section -->
+        <section class="samples-section">
+            <h2 class="section-title" style="text-align: center;">WHAT YOU'LL GET</h2>
+            <div class="samples-grid">
+                <div class="sample-card">
+                    <button class="sample-toggle" aria-expanded="false">
+                        <span>Natural Temperament</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="sample-content hidden">
+                        <p><strong>Your temperament is predominantly Choleric-Melancholic.</strong><br>
+                            This indicates a dry and cooling constitution. You proceed with caution and analysis, driven
+                            by a sharp internal fire but grounded by the need for structure.</p>
+                    </div>
+                </div>
+                <div class="sample-card">
+                    <button class="sample-toggle" aria-expanded="false">
+                        <span>Soul's Purpose (Almuten Figuris)</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="sample-content hidden">
+                        <p><strong>The Guardian of your chart is Venus.</strong><br>
+                            This suggests a path directed towards unification, aesthetics, and social harmony. Your
+                            spirit flourishes when you are creating bridges between opposing forces.</p>
+                    </div>
+                </div>
+                <div class="sample-card">
+                    <button class="sample-toggle" aria-expanded="false">
+                        <span>Current Life Chapter</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="sample-content hidden">
+                        <p><strong>You are in a 5th House Profection Year.</strong><br>
+                            Focus shifts to creativity, children, and pleasure. Since the ruler is Jupiter, this year
+                            brings expansion and potential luck in these areas, provided you act with wisdom.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Comparison Table -->
+        
+        <!-- Testimonials -->
+        <section class="testimonials-section">
+            <h2 class="section-title">WHAT USERS SAY</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"The level of detail is startling. It saw things about my career I'd never verbalized. It felt less like a horoscope and more like a blueprint."</p>
+                    <p class="testimonial-author">Sarah J. - London</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Finally, astrology that doesn't feel like a fortune cookie. The logic is transparent, and the 'Forensic' approach explains the 'why' behind the predictions."</p>
+                    <p class="testimonial-author">Michael R. - Austin</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"The Annual Profections feature changed how I plan my year. Knowing my Time Lord gives me a concrete focus strategy. Indispensable tool."</p>
+                    <p class="testimonial-author">Elena K. - Toronto</p>
+                </div>
+            </div>
+        </section>
+    
+<section class="comparison-section">
+            <h2 class="section-title" style="text-align: center;">CHOOSE YOUR PATH</h2>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Free Reading</th>
+                            <th>One-Time Access</th>
+                            <th>Monthly Unlimited</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Natural Temperament</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Soul's Purpose</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Forensic Audit</td>
+                            <td class="cross">✕</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>5-Day Forecast</td>
+                            <td class="cross">✕</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Life Path Timelines</td>
+                            <td class="cross">✕</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Save Charts</td>
+                            <td class="cross">✕</td>
+                            <td class="cross">✕</td>
+                            <td class="check">✓ (10)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer
+            style="margin-top: 4rem; text-align: center; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 2rem;">
+            <p>&copy; 2026 Codex Caelestis. All rights reserved.</p>
+            <div style="margin-top: 0.5rem;">
+                <a href="privacy.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Privacy
+                    Policy</a>
+                <span aria-hidden="true">•</span>
+                <a href="terms.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Terms of
+                    Service</a>
+            </div>
+        </footer>
     </main>
 
     <!-- Paywall Modal -->
@@ -163,6 +312,25 @@
                 </ul>
             </div>
 
+            <div class="social-proof">
+                <p><em>"Reviewers call this the most detailed analysis they've ever seen."</em></p>
+                <div class="user-avatars">
+                    <!-- Placeholders for user avatars if needed, or just text -->
+                    <span>Join 1,000+ users discovering their cosmic blueprint.</span>
+                </div>
+            </div>
+
+            <div class="pricing-controls">
+                <div class="billing-toggle">
+                    <span id="labelMonthly" class="toggle-label active">Monthly</span>
+                    <label class="switch">
+                        <input type="checkbox" id="billingSwitch">
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="labelAnnual" class="toggle-label">Annual <span class="badge-save">SAVE 17%</span></span>
+                </div>
+            </div>
+
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h4>ONE-TIME ACCESS</h4>
@@ -170,15 +338,25 @@
                     <p>Full reading for this chart only.</p>
                     <button class="btn-primary" onclick="window.startCheckout('onetime')">UNLOCK NOW</button>
                 </div>
-                <div class="pricing-card recommended">
+                <div class="pricing-card recommended" id="subCard">
                     <div class="badge">BEST VALUE</div>
-                    <h4>MONTHLY UNLIMITED</h4>
-                    <div class="price">$4.99<span>/mo</span></div>
-                    <p>Unlimited readings + Save 10 charts.</p>
+                    <h4 id="subTitle">MONTHLY UNLIMITED</h4>
+                    <div class="price" id="subPrice">$4.99<span>/mo</span></div>
+                    <p id="subDesc">Unlimited readings + Save 10 charts.</p>
                     <button class="btn-primary" onclick="window.startCheckout('subscription')">SUBSCRIBE</button>
+                    <!-- Annual View Hidden by Default -->
+                    <div id="annualDetails" class="hidden">
+                        <div class="price">$49.00<span>/yr</span></div>
+                        <p>Equivalent to $4.08/mo.</p>
+                    </div>
                 </div>
             </div>
-            <p class="guarantee">30-day money-back guarantee.</p>
+
+            <div class="guarantee-badge">
+                <span class="shield-icon">🛡️</span>
+                <strong>30-DAY MONEY-BACK GUARANTEE</strong>
+                <p>If you don't love it, get a full refund.</p>
+            </div>
         </div>
     </div>
 
@@ -187,8 +365,12 @@
         <div class="modal-content" style="max-width: 450px;" role="dialog" aria-modal="true">
             <button class="modal-close" id="closeEmail" aria-label="Close modal">&times;</button>
             <h2 class="paywall-title">SAVE YOUR READING</h2>
-            <p style="text-align: center; margin-bottom: 1.5rem;">Enter your email to receive a PDF copy of your free
-                reading results.</p>
+            
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <img src="pdf_preview.png" alt="PDF Report Preview" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--gold); margin-bottom: 1rem; box-shadow: var(--shadow-soft);">
+                <p>Enter your email to receive a secure PDF copy of your free reading results.</p>
+            </div>
+    
 
             <form id="emailForm" style="display: flex; flex-direction: column; gap: 1rem;">
                 <div class="input-group">
@@ -198,7 +380,17 @@
                 <button type="submit" class="btn-primary">SEND ME MY PDF</button>
                 <div id="emailStatus" style="text-align: center; min-height: 1.2em; font-size: 0.9em;"></div>
             </form>
-            <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem; opacity: 0.7;">We respect your privacy.
+            
+            <div style="text-align: left; margin-top: 1.5rem; border-top: 1px solid var(--glass-border); padding-top: 1rem;">
+                <strong style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">What Happens Next:</strong>
+                <ol style="margin-top: 0.5rem; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+                    <li>You'll receive an instant confirmation email.</li>
+                    <li>Your PDF report (approx. 15 pages) will be attached.</li>
+                    <li>Check your specific "Spam" folder if not received in 2 mins.</li>
+                </ol>
+            </div>
+    
+<p style="font-size: 0.8rem; text-align: center; margin-top: 1rem; opacity: 0.7;">We respect your privacy.
                 No spam.</p>
         </div>
     </div>

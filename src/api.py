@@ -988,6 +988,24 @@ async def create_checkout(checkout_request: CheckoutRequest):
                 cancel_url=checkout_request.cancel_url,
                 metadata={'chart_hash': chart_hash, 'tier': 'subscription'}
             )
+        elif checkout_request.tier == 'subscription_annual':
+            price_id = os.getenv("STRIPE_ANNUAL_PRICE_ID")
+            if not price_id:
+                 # Fallback for dev/demo if not set? Or error?
+                 # ideally error, but for robustness in demo let's reuse monthly or error clearly
+                 raise HTTPException(status_code=500, detail="Annual price ID not configured.")
+                 
+            session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[{
+                    'price': price_id,
+                    'quantity': 1,
+                }],
+                mode='subscription',
+                success_url=checkout_request.success_url + f'?session_id={{CHECKOUT_SESSION_ID}}',
+                cancel_url=checkout_request.cancel_url,
+                metadata={'chart_hash': chart_hash, 'tier': 'subscription_annual'}
+            )
         else:
              raise HTTPException(status_code=400, detail="Invalid tier.")
              
