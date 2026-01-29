@@ -450,8 +450,8 @@ Track conversion funnel:
 **DO NEXT (Week 1):**
 6. Email capture modal + SendGrid integration
 7. PDF generation + download endpoint
-8. Cache implementation (Redis or file-based)
-9. Rate limiting (IP-based)
+8. [x] Cache implementation (Redis or file-based)
+9. [x] Rate limiting (IP-based)
 10. Switch Stripe to live mode
 
 **DO LATER (Week 2+):**
