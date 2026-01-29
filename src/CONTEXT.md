@@ -1,17 +1,19 @@
 # [Engine/Logic]
 
 ## Status
-- **Working**: Basic planet models, simple dignity calculations (Dignity score), basic sect logic.
-- **Broken**: No Lots, No Fixed Stars, No Nodal Physics, No Profection Muntha logic.
+- **Working**: Planet models, dignity calculations, sect logic, Lots, Fixed Stars, Nodal Physics, Profections, Email Capture Service.
+- **Broken**: Rectification event-based logic (placeholder).
 
 ## Tech Stack
 - Python 3.9+ 
 - No external dependencies (pure math).
+- SendGrid / SMTP for emails.
 
 ## Key Files
 - `models.py` — Core data structures (Planet, Chart, Sect).
 - `logic.py` — The "Brain" of the forensic audit.
-- `calculations.py` — Math utils for dignity.
+- `api.py` — FastAPI backend endpoints.
+- `engine/email_service.py` — Email notification handler.
 - `main.py` — Entry point CLI.
 
 ## Architecture Quirks
