@@ -160,6 +160,63 @@ if (closePaywallBtn && paywallModal) {
     });
 }
 
+// Email Modal Logic
+const emailModal = document.getElementById("emailModal");
+const closeEmailBtn = document.getElementById("closeEmail");
+const emailForm = document.getElementById("emailForm");
+const emailStatus = document.getElementById("emailStatus");
+
+if (closeEmailBtn && emailModal) {
+    closeEmailBtn.addEventListener("click", () => {
+        emailModal.classList.add("hidden");
+    });
+    emailModal.addEventListener("click", (e) => {
+        if (e.target === emailModal) {
+            emailModal.classList.add("hidden");
+        }
+    });
+}
+
+if (emailForm) {
+    emailForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("captureEmail").value;
+        if (!email || !lastChartRequest) return;
+
+        emailStatus.textContent = "Sending...";
+        emailStatus.style.color = "var(--text-main)";
+
+        try {
+            const resp = await fetch(apiUrl("/api/capture_email"), {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: email,
+                    chart_request: lastChartRequest
+                })
+            });
+
+            if (!resp.ok) {
+                throw new Error("Failed to send.");
+            }
+
+            emailStatus.textContent = "Sent! Check your inbox.";
+            emailStatus.style.color = "var(--success)";
+            setTimeout(() => {
+                emailModal.classList.add("hidden");
+                emailStatus.textContent = "";
+                document.getElementById("captureEmail").value = "";
+            }, 2000);
+
+            logEvent("email_captured", { email: email }); // In real app, hash email for privacy log
+
+        } catch (err) {
+            emailStatus.textContent = "Error: " + err.message;
+            emailStatus.style.color = "var(--danger)";
+        }
+    });
+}
+
 window.startCheckout = async function (tier) {
     if (!lastChartRequest) {
         alert("Please generate a chart first.");
@@ -365,6 +422,24 @@ if (basicForm) {
                         `;
                         basicReadingBody.appendChild(teaser);
 
+                        // Add "Save PDF" button to the top or bottom?
+                        // Let's add it near the teaser or at the top of reading.
+                        // Actually, let's create a small toolbar.
+
+                        const actionsDiv = document.createElement("div");
+                        actionsDiv.style.textAlign = "center";
+                        actionsDiv.style.margin = "1rem 0";
+                        actionsDiv.innerHTML = `
+                             <button class="help-btn" onclick="document.getElementById('emailModal').classList.remove('hidden')">
+                                SAVE AS PDF 📥
+                            </button>
+                        `;
+                        // Insert after title
+                        const title = basicReading.querySelector(".basic-reading-title");
+                        if (title) {
+                            title.insertAdjacentElement('afterend', actionsDiv);
+                        }
+
                         // Show modal automatically after a slight delay
                         setTimeout(() => {
                             if (paywallModal) paywallModal.classList.remove("hidden");
@@ -490,7 +565,7 @@ if (basicCityInput && basicSuggestionsBox) {
 function renderBasicSuggestions(features) {
     if (!basicSuggestionsBox) return;
     basicSuggestionsBox.innerHTML = '';
-    
+
     if (!features || features.length === 0) {
         basicSuggestionsBox.style.display = 'none';
         if (basicCityInput) basicCityInput.setAttribute('aria-expanded', 'false');
@@ -502,24 +577,24 @@ function renderBasicSuggestions(features) {
         item.className = 'suggestion-item';
         item.setAttribute('role', 'option');
         item.id = 'city-option-' + index;
-        
+
         const city = f.properties.name;
         const state = f.properties.state || f.properties.country;
         const country = f.properties.country;
-        
+
         let label = city;
         if (state) label += ', ' + state;
         if (country && country !== state) label += ', ' + country;
 
         item.textContent = label;
-        
+
         item.onclick = () => {
             basicCityInput.value = city;
             const stateInput = document.getElementById('basicState');
             if (stateInput && state) {
                 stateInput.value = state;
             }
-            
+
             basicSuggestionsBox.style.display = 'none';
             basicCityInput.setAttribute('aria-expanded', 'false');
         };
