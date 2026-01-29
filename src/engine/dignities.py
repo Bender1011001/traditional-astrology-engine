@@ -5,6 +5,9 @@ from .reference_data import (
     TRIPLICITY_RULERS as REF_TRIPLICITY,
     SIGN_ELEMENTS,
     EGYPTIAN_TERMS,
+    PTOLEMAIC_TERMS,
+    DOROTHEAN_TRIPLICITY,
+    PTOLEMAIC_TRIPLICITY,
     FACES_ORDER,
     DOMICILES as REF_DOMICILES,
     EXALTATIONS as REF_EXALTATIONS
@@ -153,8 +156,30 @@ class DignityCalculator:
     }
 
     @classmethod
-    def get_house_number(cls, longitude: float, ascendant: float) -> int:
-        """Calculates Whole Sign house number."""
+    def get_house_number(cls, longitude: float, ascendant: float, houses: Optional[Dict[int, float]] = None) -> int:
+        """Calculates house number using provided cusps (if available), else Whole Sign."""
+        if houses:
+            if isinstance(houses, dict):
+                try:
+                    cusps = [houses[i] for i in range(1, 13)]
+                except KeyError:
+                    cusps = None
+            else:
+                cusps = list(houses)[:12]
+
+            if cusps and len(cusps) == 12:
+                lon = longitude % 360
+                for i in range(12):
+                    c1 = cusps[i] % 360
+                    c2 = cusps[(i + 1) % 12] % 360
+                    if c1 <= c2:
+                        if c1 <= lon < c2:
+                            return i + 1
+                    else:
+                        if lon >= c1 or lon < c2:
+                            return i + 1
+                return 1
+
         asc_sign_idx = int(ascendant / 30) % 12
         p_sign_idx = int(longitude / 30) % 12
         return ((p_sign_idx - asc_sign_idx) % 12) + 1
@@ -203,9 +228,7 @@ class DignityCalculator:
         is_masculine = element in ["FIRE", "AIR"]
         
         # Above horizon check (using house number for simplicity/consistency)
-        asc_sign_idx = int(chart.ascendant / 30) % 12
-        p_sign_idx = sign_idx
-        house_num = ((p_sign_idx - asc_sign_idx) % 12) + 1
+        house_num = cls.get_house_number(longitude, chart.ascendant, getattr(chart, "houses", None))
         is_above_horizon = house_num >= 7
         
         status = "None"
@@ -232,9 +255,12 @@ class DignityCalculator:
         sign_idx = int(longitude / 30) % 12
         sign = list(Sign)[sign_idx]
         deg_in_sign = longitude % 30
+        element = cls.ZODIAC_ELEMENTS[sign]
+        element_key = element.title() if element.isupper() else element
         
         score = 0
         details = []
+        conflicts = []
 
         # 1. Domicile (+5)
         if sign in cls.DOMICILES.get(planet_name, []):
@@ -253,20 +279,38 @@ class DignityCalculator:
             details.append("Fall (-4)")
 
         # 3. Triplicity (+3)
-        element = cls.ZODIAC_ELEMENTS[sign]
-        rulers = cls.TRIPLICITY_RULERS[element]
+        dorothean_rulers = DOROTHEAN_TRIPLICITY[element_key]
+        ptolemaic_rulers = PTOLEMAIC_TRIPLICITY[element_key]
         # Day, Night, Participant
-        is_ruler = False
-        if chart_sect == Sect.DAY and rulers[0] == planet_name:
-            is_ruler = True
-        elif chart_sect == Sect.NIGHT and rulers[1] == planet_name:
-            is_ruler = True
-        elif rulers[2] == planet_name:
-            is_ruler = True
+        is_ruler_dorothean = False
+        if chart_sect == Sect.DAY and dorothean_rulers[0] == planet_name:
+            is_ruler_dorothean = True
+        elif chart_sect == Sect.NIGHT and dorothean_rulers[1] == planet_name:
+            is_ruler_dorothean = True
+        elif dorothean_rulers[2] == planet_name:
+            is_ruler_dorothean = True
+
+        is_ruler_ptolemaic = False
+        if chart_sect == Sect.DAY and ptolemaic_rulers[0] == planet_name:
+            is_ruler_ptolemaic = True
+        elif chart_sect == Sect.NIGHT and ptolemaic_rulers[1] == planet_name:
+            is_ruler_ptolemaic = True
             
-        if is_ruler:
+        if is_ruler_dorothean:
             score += cls.TRIPLICITY
-            details.append("Triplicity (+3)")
+            details.append("Triplicity (Dorothean) (+3)")
+
+        dorothean_primary = dorothean_rulers[0] if chart_sect == Sect.DAY else dorothean_rulers[1]
+        ptolemaic_primary = ptolemaic_rulers[0] if chart_sect == Sect.DAY else ptolemaic_rulers[1]
+        if dorothean_primary != ptolemaic_primary:
+            conflicts.append(
+                f"Triplicity rulers differ: Dorothean {chart_sect.value}={dorothean_primary.value}, "
+                f"Ptolemaic {chart_sect.value}={ptolemaic_primary.value}"
+            )
+        if planet_name == dorothean_rulers[2] and not is_ruler_ptolemaic:
+            conflicts.append(
+                f"Triplicity participant: Dorothean adds {dorothean_rulers[2].value}; Ptolemaic has no participant"
+            )
 
         # 4. Terms (+2)
         try:
@@ -279,8 +323,31 @@ class DignityCalculator:
             if deg_in_sign < limit:
                 if p_str == planet_name.value.upper():
                     score += cls.TERM
-                    details.append("Term (+2)")
+                    details.append("Term (Egyptian) (+2)")
                 break
+
+        egyptian_term_ruler = None
+        egyptian_term_limit = None
+        for p_str, limit in EGYPTIAN_TERMS[sign]:
+            if deg_in_sign < limit:
+                egyptian_term_ruler = PlanetName[p_str] if isinstance(p_str, str) else p_str
+                egyptian_term_limit = limit
+                break
+
+        ptolemaic_term_ruler = None
+        ptolemaic_term_limit = None
+        for p_name, limit in PTOLEMAIC_TERMS[sign]:
+            if deg_in_sign < limit:
+                ptolemaic_term_ruler = p_name
+                ptolemaic_term_limit = limit
+                break
+
+        if egyptian_term_ruler and ptolemaic_term_ruler and egyptian_term_ruler != ptolemaic_term_ruler:
+            conflicts.append(
+                "Bounds differ: "
+                f"Egyptian={egyptian_term_ruler.value} (≤{egyptian_term_limit}°), "
+                f"Ptolemaic={ptolemaic_term_ruler.value} (≤{ptolemaic_term_limit}°)"
+            )
 
         # 5. Face (+1)
         face_idx = int(deg_in_sign / 10)
@@ -300,6 +367,35 @@ class DignityCalculator:
         return {
             "total_score": score,
             "details": details,
+            "conflicts": conflicts,
+            "variants": {
+                "triplicity": {
+                    "used": "Dorothean",
+                    "sect": chart_sect.value,
+                    "dorothean": {
+                        "day": dorothean_rulers[0].value,
+                        "night": dorothean_rulers[1].value,
+                        "participant": dorothean_rulers[2].value,
+                        "planet_is_ruler": is_ruler_dorothean
+                    },
+                    "ptolemaic": {
+                        "day": ptolemaic_rulers[0].value,
+                        "night": ptolemaic_rulers[1].value,
+                        "planet_is_ruler": is_ruler_ptolemaic
+                    }
+                },
+                "terms": {
+                    "used": "Egyptian",
+                    "egyptian": {
+                        "ruler": egyptian_term_ruler.value if egyptian_term_ruler else None,
+                        "limit": egyptian_term_limit
+                    },
+                    "ptolemaic": {
+                        "ruler": ptolemaic_term_ruler.value if ptolemaic_term_ruler else None,
+                        "limit": ptolemaic_term_limit
+                    }
+                }
+            },
             "sign": sign.value,
             "degree": deg_in_sign
         }
@@ -324,7 +420,7 @@ class DignityCalculator:
         score = 0
         details = []
         
-        house_num = cls.get_house_number(planet.longitude, chart.ascendant)
+        house_num = cls.get_house_number(planet.longitude, chart.ascendant, getattr(chart, "houses", None))
         
         # 1. House Position
         if house_num in [1, 4, 7, 10]:

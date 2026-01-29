@@ -1,0 +1,174 @@
+{
+  "description": "Annual Profections advance the Ascendant by one sign per year from birth. The ruler of the profected sign becomes the Lord of the Year.",
+  "house_meanings": {
+    "1": {
+      "ages": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        60,
+        72,
+        84
+      ],
+      "topic": "Self, body, health, new beginnings",
+      "activation": "The native themselves, their appearance, vitality, and personal initiatives"
+    },
+    "2": {
+      "ages": [
+        1,
+        13,
+        25,
+        37,
+        49,
+        61,
+        73,
+        85
+      ],
+      "topic": "Money, possessions, resources",
+      "activation": "Financial matters, acquisition, livelihood"
+    },
+    "3": {
+      "ages": [
+        2,
+        14,
+        26,
+        38,
+        50,
+        62,
+        74,
+        86
+      ],
+      "topic": "Siblings, neighbors, short journeys, communication",
+      "activation": "Local travel, kin, letters, news"
+    },
+    "4": {
+      "ages": [
+        3,
+        15,
+        27,
+        39,
+        51,
+        63,
+        75,
+        87
+      ],
+      "topic": "Home, parents, land, endings",
+      "activation": "Real estate, ancestry, the father, foundation"
+    },
+    "5": {
+      "ages": [
+        4,
+        16,
+        28,
+        40,
+        52,
+        64,
+        76,
+        88
+      ],
+      "topic": "Children, pleasure, creativity",
+      "activation": "Offspring, romance, artistic endeavors, enjoyment"
+    },
+    "6": {
+      "ages": [
+        5,
+        17,
+        29,
+        41,
+        53,
+        65,
+        77,
+        89
+      ],
+      "topic": "Illness, servants, labor, enemies",
+      "activation": "Health issues, employees, daily work, small animals"
+    },
+    "7": {
+      "ages": [
+        6,
+        18,
+        30,
+        42,
+        54,
+        66,
+        78,
+        90
+      ],
+      "topic": "Marriage, partnerships, open enemies",
+      "activation": "Spouse, business partners, lawsuits, known opponents"
+    },
+    "8": {
+      "ages": [
+        7,
+        19,
+        31,
+        43,
+        55,
+        67,
+        79,
+        91
+      ],
+      "topic": "Death, inheritance, fear, other people's money",
+      "activation": "Mortality, legacy, crisis, shared resources"
+    },
+    "9": {
+      "ages": [
+        8,
+        20,
+        32,
+        44,
+        56,
+        68,
+        80,
+        92
+      ],
+      "topic": "Travel, religion, philosophy, higher learning",
+      "activation": "Long journeys, foreign lands, spiritual matters, education"
+    },
+    "10": {
+      "ages": [
+        9,
+        21,
+        33,
+        45,
+        57,
+        69,
+        81,
+        93
+      ],
+      "topic": "Career, reputation, authority, the mother",
+      "activation": "Public standing, profession, honors, actions"
+    },
+    "11": {
+      "ages": [
+        10,
+        22,
+        34,
+        46,
+        58,
+        70,
+        82,
+        94
+      ],
+      "topic": "Friends, hopes, gifts from the king",
+      "activation": "Social networks, aspirations, benefactors"
+    },
+    "12": {
+      "ages": [
+        11,
+        23,
+        35,
+        47,
+        59,
+        71,
+        83,
+        95
+      ],
+      "topic": "Hidden enemies, sorrow, self-undoing, imprisonment",
+      "activation": "Secret foes, isolation, large animals, confinement"
+    }
+  },
+  "source": "Valens, Anthology; Abu Ma'shar"
+}

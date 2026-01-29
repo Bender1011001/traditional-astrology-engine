@@ -1,0 +1,172 @@
+{
+  "Lot of Fortune": {
+    "formula_day": "Ascendant + Moon - Sun",
+    "formula_night": "Ascendant + Sun - Moon",
+    "significations": [
+      "body",
+      "health",
+      "wealth",
+      "material fortune",
+      "livelihood"
+    ],
+    "house_topics": "The house containing Fortune becomes emphasized for material matters",
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Spirit": {
+    "formula_day": "Ascendant + Sun - Moon",
+    "formula_night": "Ascendant + Moon - Sun",
+    "significations": [
+      "soul",
+      "intellect",
+      "career",
+      "action",
+      "will"
+    ],
+    "house_topics": "The house containing Spirit shows where the native's will is directed",
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Eros": {
+    "formula_day": "Ascendant + Venus - Spirit",
+    "formula_night": "Ascendant + Spirit - Venus",
+    "significations": [
+      "love",
+      "desire",
+      "passion",
+      "sexuality",
+      "attraction"
+    ],
+    "house_topics": "Shows the nature of romantic attachments and desires",
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Necessity": {
+    "formula_day": "Ascendant + Fortune - Mercury",
+    "formula_night": "Ascendant + Mercury - Fortune",
+    "significations": [
+      "constraints",
+      "obligations",
+      "fate",
+      "bondage"
+    ],
+    "house_topics": "Shows areas of life where the native faces restrictions",
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Courage": {
+    "formula_day": "Ascendant + Fortune - Mars",
+    "formula_night": "Ascendant + Mars - Fortune",
+    "significations": [
+      "boldness",
+      "daring",
+      "action",
+      "initiative"
+    ],
+    "house_topics": "Shows where the native must take decisive action",
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Victory": {
+    "formula_day": "Ascendant + Jupiter - Spirit",
+    "formula_night": "Ascendant + Spirit - Jupiter",
+    "significations": [
+      "success",
+      "triumph",
+      "achievement",
+      "reputation"
+    ],
+    "house_topics": "Shows areas where the native can achieve victory",
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Nemesis": {
+    "formula_day": "Ascendant + Fortune - Saturn",
+    "formula_night": "Ascendant + Saturn - Fortune",
+    "significations": [
+      "downfall",
+      "enemies",
+      "hidden dangers",
+      "retribution"
+    ],
+    "house_topics": "Shows sources of hidden danger or cosmic retribution",
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Marriage (Men)": {
+    "formula": "Ascendant + Venus - Saturn",
+    "significations": [
+      "wife",
+      "marriage",
+      "partnerships"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Marriage (Women)": {
+    "formula": "Ascendant + Saturn - Venus",
+    "significations": [
+      "husband",
+      "marriage",
+      "partnerships"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Children": {
+    "formula": "Ascendant + Saturn - Jupiter",
+    "significations": [
+      "offspring",
+      "fertility",
+      "children"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of the Father": {
+    "formula_day": "Ascendant + Saturn - Sun",
+    "formula_night": "Ascendant + Sun - Saturn",
+    "significations": [
+      "father",
+      "paternal inheritance",
+      "authority figures"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of the Mother": {
+    "formula_day": "Ascendant + Moon - Venus",
+    "formula_night": "Ascendant + Venus - Moon",
+    "significations": [
+      "mother",
+      "maternal inheritance",
+      "nurturing"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Siblings": {
+    "formula": "Ascendant + Saturn - Jupiter",
+    "significations": [
+      "brothers",
+      "sisters",
+      "kin"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Death": {
+    "formula": "Ascendant + 8th House Cusp - Moon",
+    "significations": [
+      "manner of death",
+      "inheritance",
+      "transformation"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Basis": {
+    "formula": "Ascendant + Fortune - Spirit",
+    "significations": [
+      "foundation of life",
+      "core motivation",
+      "life's basis"
+    ],
+    "hellenistic_source": "Valens, Anthology"
+  },
+  "Lot of Exaltation": {
+    "formula": "Ascendant + 19° Aries - Sun",
+    "significations": [
+      "fame",
+      "eminence",
+      "distinction"
+    ],
+    "hellenistic_source": "Ptolemy, Tetrabiblos"
+  }
+}

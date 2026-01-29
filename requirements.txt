@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pyswisseph
+requests
+stripe
+pyjwt
+reportlab

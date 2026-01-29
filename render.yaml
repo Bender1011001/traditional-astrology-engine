@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: astrology-engine
+    env: docker
+    plan: free
+    buildCommand: docker build -t astrology .
+    startCommand: uvicorn src.api:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: STRIPE_SECRET_KEY
+        generateValue: false
+      - key: STRIPE_WEBHOOK_SECRET
+        generateValue: false
+      - key: JWT_SECRET
+        generateValue: true

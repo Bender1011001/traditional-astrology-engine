@@ -1,0 +1,112 @@
+{
+  "medical_disclaimer": "HISTORICAL AND EDUCATIONAL RESEARCH ONLY. NOT MEDICAL ADVICE. DO NOT USE FOR HEALTH DECISIONS.",
+  "signs_body_parts": {
+    "Aries": [
+      "head",
+      "face",
+      "brain"
+    ],
+    "Taurus": [
+      "neck",
+      "throat",
+      "thyroid"
+    ],
+    "Gemini": [
+      "shoulders",
+      "arms",
+      "hands",
+      "lungs"
+    ],
+    "Cancer": [
+      "chest",
+      "breasts",
+      "stomach"
+    ],
+    "Leo": [
+      "heart",
+      "spine",
+      "back"
+    ],
+    "Virgo": [
+      "intestines",
+      "bowels",
+      "digestive system"
+    ],
+    "Libra": [
+      "kidneys",
+      "lower back",
+      "skin"
+    ],
+    "Scorpio": [
+      "reproductive organs",
+      "bladder",
+      "colon"
+    ],
+    "Sagittarius": [
+      "hips",
+      "thighs",
+      "liver"
+    ],
+    "Capricorn": [
+      "knees",
+      "bones",
+      "teeth",
+      "skin"
+    ],
+    "Aquarius": [
+      "ankles",
+      "calves",
+      "circulation"
+    ],
+    "Pisces": [
+      "feet",
+      "lymphatic system",
+      "immune system"
+    ]
+  },
+  "planets_humors": {
+    "Sun": {
+      "humor": "Choleric",
+      "quality": "Hot and Dry",
+      "diseases": "fevers, heart conditions"
+    },
+    "Moon": {
+      "humor": "Phlegmatic",
+      "quality": "Cold and Moist",
+      "diseases": "fluid retention, mental instability"
+    },
+    "Mercury": {
+      "humor": "Mixed",
+      "quality": "Variable",
+      "diseases": "nervous disorders, speech impediments"
+    },
+    "Venus": {
+      "humor": "Phlegmatic/Sanguine",
+      "quality": "Cold and Moist",
+      "diseases": "venereal diseases, kidneys"
+    },
+    "Mars": {
+      "humor": "Choleric",
+      "quality": "Hot and Dry",
+      "diseases": "fevers, inflammations, wounds"
+    },
+    "Jupiter": {
+      "humor": "Sanguine",
+      "quality": "Hot and Moist",
+      "diseases": "liver, blood disorders, excess"
+    },
+    "Saturn": {
+      "humor": "Melancholic",
+      "quality": "Cold and Dry",
+      "diseases": "chronic conditions, bones, depression"
+    }
+  },
+  "critical_days": {
+    "description": "The Moon's aspects to her natal position mark critical days in illness",
+    "square_7th_day": "First crisis - square to natal Moon",
+    "opposition_14th_day": "Peak of illness - opposition to natal Moon",
+    "square_21st_day": "Second crisis - second square",
+    "conjunction_28th_day": "Resolution - return to natal position"
+  },
+  "source": "Galen; Culpeper; Lilly, Christian Astrology"
+}

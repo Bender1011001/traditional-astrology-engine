@@ -28,7 +28,7 @@ class HylegAlcocodenEngine:
     @staticmethod
     def _is_in_hylegical_house(planet: Planet, chart: Chart) -> bool:
         # Use Whole Sign house as a fallback; require above-horizon if altitude is available.
-        house = DignityCalculator.get_house_number(planet.longitude, chart.ascendant)
+        house = DignityCalculator.get_house_number(planet.longitude, chart.ascendant, getattr(chart, "houses", None))
         if house not in HylegAlcocodenEngine.HYLEGICAL_HOUSES:
             return False
         if planet.altitude is not None:
@@ -97,7 +97,7 @@ class HylegAlcocodenEngine:
         # 2. Check Lot of Fortune
         try:
             lot_fortune = calculate_lot_position(chart, LotName.FORTUNE, sect)
-            lot_house = DignityCalculator.get_house_number(lot_fortune, chart.ascendant)
+            lot_house = DignityCalculator.get_house_number(lot_fortune, chart.ascendant, getattr(chart, "houses", None))
             if lot_house in HylegAlcocodenEngine.HYLEGICAL_HOUSES:
                 if HylegAlcocodenEngine._has_aspect_from_ruler(lot_fortune, chart, sect):
                     return {"type": "Lot", "name": "Fortune", "longitude": lot_fortune, "candidate": "Fortune"}
@@ -160,7 +160,7 @@ class HylegAlcocodenEngine:
         p_obj = alcocoden["planet"]
         
         # 1. Determine Years Scale (Major, Mean, Minor)
-        house = DignityCalculator.get_house_number(p_obj.longitude, chart.ascendant)
+        house = DignityCalculator.get_house_number(p_obj.longitude, chart.ascendant, getattr(chart, "houses", None))
         dignity = DignityCalculator.calculate_planet_dignity(p_name, p_obj.longitude, Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT)
         dignity_score = dignity.get("total_score", 0)
         

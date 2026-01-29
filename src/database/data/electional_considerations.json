@@ -1,0 +1,40 @@
+{
+  "moon_conditions": {
+    "void_of_course": {
+      "definition": "Moon makes no applying aspects before leaving her sign",
+      "effect": "Nothing will come of the matter; avoid beginning anything",
+      "exception": "Unless Moon is in Cancer, Taurus, Sagittarius, or Pisces"
+    },
+    "via_combusta": {
+      "definition": "Moon between 15° Libra and 15° Scorpio",
+      "effect": "Extremely unfortunate; matters corrupted or destroyed",
+      "reason": "This region contains the Fall of the Sun and many malefic stars"
+    },
+    "moon_phases": {
+      "new_to_first_quarter": "Good for beginning new ventures",
+      "first_quarter_to_full": "Good for growth and expansion",
+      "full_to_last_quarter": "Good for completion and harvest",
+      "last_quarter_to_new": "Good for endings and release"
+    },
+    "lunar_mansions": "See lunar_mansions.json for election by mansion"
+  },
+  "planetary_hours": {
+    "description": "Each hour is ruled by a planet in Chaldean order",
+    "usage": "Begin matters under the hour of a planet favorable to the action",
+    "saturn_hour": "binding, restriction, agriculture, old people",
+    "jupiter_hour": "wealth, religion, legal matters, expansion",
+    "mars_hour": "war, surgery, competition, cutting",
+    "sun_hour": "authority, fathers, gold, public matters",
+    "venus_hour": "love, art, pleasure, women",
+    "mercury_hour": "commerce, writing, travel, communication",
+    "moon_hour": "the public, women, journeys, changes"
+  },
+  "general_rules": [
+    "Fortify the ruler of the matter and the Moon",
+    "Avoid malefics on the Ascendant or afflicting the Moon",
+    "Place benefics angular, malefics cadent",
+    "Ensure the applying aspects are favorable",
+    "Match the planetary hour to the nature of the business"
+  ],
+  "source": "Bonatti, Liber Astronomiae; Lilly, Christian Astrology"
+}

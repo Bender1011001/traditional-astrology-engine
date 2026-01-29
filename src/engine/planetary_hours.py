@@ -51,8 +51,8 @@ class PlanetaryHourEngine:
         # Let's use swe.rise_trans directly.
         # Planet Sun = 0
         
-        # flags = swe.CALC_RISE | swe.BIT_DISC_CENTER # Standard simplified
-        flags = swe.CALC_RISE | swe.BIT_DISC_CENTER | swe.BIT_FIXED_DISC_SIZE 
+        # Ephemeris flags are separate from rise/set calculation flags.
+        ephe_flags = swe.FLG_SWIEPH
         # NOTE: For planetary hours, standard topocentric rise is best.
         
         geopos = (lon, lat, 0)
@@ -64,12 +64,12 @@ class PlanetaryHourEngine:
         # Using 7 arguments: jd, planet, rsmi (calc flags), geopos, atpress, attemp, ephe_flags
         # Note: flags variable holds the ephemeris flags (FLG_SWIEPH)
         
-        res_rise = swe.rise_trans(jd_noon, swe.SUN, calc_rise, geopos, 0, 0, flags)
-        res_set = swe.rise_trans(jd_noon, swe.SUN, calc_set, geopos, 0, 0, flags)
+        res_rise = swe.rise_trans(jd_noon, swe.SUN, calc_rise, geopos, 0, 0, ephe_flags)
+        res_set = swe.rise_trans(jd_noon, swe.SUN, calc_set, geopos, 0, 0, ephe_flags)
         
         # Next Sunrise
         jd_tomorrow = jd_noon + 1
-        res_next_rise = swe.rise_trans(jd_tomorrow, swe.SUN, calc_rise, geopos, 0, 0, flags)
+        res_next_rise = swe.rise_trans(jd_tomorrow, swe.SUN, calc_rise, geopos, 0, 0, ephe_flags)
 
         # Convert simple JDs
         if len(res_rise) > 0: rise_jd = res_rise[1][0]

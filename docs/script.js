@@ -52,6 +52,27 @@ setLocalDateTime('horaryDate', 'horaryTime');
 setUtcDateTime('worldDate', 'worldTime');
 setUtcDateTime('kairosStartDate');
 
+const timeInput = document.getElementById("time");
+const timeUnknownToggle = document.getElementById("timeUnknown");
+const timeWarning = document.getElementById("timeWarning");
+
+function setTimeUnknownState(isUnknown) {
+    if (timeWarning) timeWarning.classList.toggle("hidden", !isUnknown);
+    if (timeInput) {
+        timeInput.required = !isUnknown;
+        if (isUnknown && !timeInput.value) {
+            timeInput.value = "12:00";
+        }
+    }
+}
+
+if (timeUnknownToggle) {
+    timeUnknownToggle.addEventListener("change", (e) => {
+        setTimeUnknownState(e.target.checked);
+    });
+    setTimeUnknownState(timeUnknownToggle.checked);
+}
+
 // Tab Logic
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -70,9 +91,11 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
     btn.querySelector('.btn-text').textContent = "CONSULTING THE STARS...";
     btn.disabled = true;
 
+    const isTimeUnknown = timeUnknownToggle ? timeUnknownToggle.checked : false;
+    const timeValue = timeInput ? timeInput.value : "";
     const formData = {
         date: document.getElementById('date').value,
-        time: document.getElementById('time').value,
+        time: isTimeUnknown && !timeValue ? "12:00" : timeValue,
         city: document.getElementById('city').value,
         state: document.getElementById('state').value,
         age: document.getElementById('currentAge').value ? parseInt(document.getElementById('currentAge').value) : null,

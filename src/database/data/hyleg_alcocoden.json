@@ -1,0 +1,70 @@
+{
+  "description": "The Hyleg (Apheta, 'giver of life') and Alcocoden (Kadhkhudah, 'giver of years') system for determining vitality and estimating lifespan.",
+  "source": "Ptolemy, Tetrabiblos; Vettius Valens, Anthology; Dorotheus of Sidon; Guido Bonatti, Liber Astronomiae",
+  
+  "hyleg_selection": {
+    "description": "The Hyleg is the principal life indicator, selected from a strict hierarchy of candidates.",
+    "order_day_chart": ["Sun", "Moon", "Ascendant", "Part of Fortune", "Prenatal Lunation"],
+    "order_night_chart": ["Moon", "Sun", "Ascendant", "Part of Fortune", "Prenatal Lunation"],
+    "hylegical_houses": [1, 7, 9, 10, 11],
+    "five_degree_rule": "A planet within 5° before a cusp is counted as being in that house if in the same sign.",
+    "requirements": [
+      "Must be in a hylegical house (1, 7, 9, 10, or 11)",
+      "Must be aspected by one of its essential dignity rulers",
+      "Must not be significantly afflicted (combust, retrograde with malefic, etc.)"
+    ]
+  },
+  
+  "alcocoden_determination": {
+    "description": "The Alcocoden is the planet that rules the Hyleg's position through essential dignity and aspects the Hyleg.",
+    "dignity_points": {
+      "domicile": 5,
+      "exaltation": 4,
+      "triplicity": 3,
+      "term": 2,
+      "face": 1
+    },
+    "requirement": "Must aspect the Hyleg via Ptolemaic aspect (conjunction, sextile, square, trine, opposition)",
+    "highest_points_wins": "The planet with the highest dignity points becomes the Alcocoden"
+  },
+  
+  "planetary_years": {
+    "description": "The planetary periods used in lifespan calculation. Angular = Major, Succedent = Mean, Cadent = Minor.",
+    "Sun": {"minor": 19, "mean": 69.5, "major": 120},
+    "Moon": {"minor": 25, "mean": 66.5, "major": 108},
+    "Mercury": {"minor": 20, "mean": 48, "major": 76},
+    "Venus": {"minor": 8, "mean": 45, "major": 82},
+    "Mars": {"minor": 15, "mean": 40.5, "major": 66},
+    "Jupiter": {"minor": 12, "mean": 45.5, "major": 79},
+    "Saturn": {"minor": 30, "mean": 43.5, "major": 57}
+  },
+  
+  "calculation_method": {
+    "step_1": "Determine the Hyleg using the hierarchical selection process",
+    "step_2": "Identify the Alcocoden as the strongest ruler of the Hyleg's position that aspects the Hyleg",
+    "step_3": "Select planetary period scale based on Alcocoden's house position (Angular=Major, Succedent=Mean, Cadent=Minor)",
+    "step_4": "Add benefic aspect contributions (Jupiter/Venus minor years + months of mean years)",
+    "step_5": "Subtract malefic aspect contributions (Mars/Saturn minor years + months of mean years)",
+    "step_6": "Apply condition modifiers for weak/retrograde/combust planets",
+    "result": "Final result represents potential lifespan, not certain death prediction"
+  },
+  
+  "differentia_system": {
+    "first_differentia": "Strong Hyleg in essential dignity, well-aspected - robust vitality",
+    "second_differentia": "Moderate Hyleg, mixed aspects - average vitality", 
+    "third_differentia": "No valid Hyleg, or Hyleg severely afflicted - vulnerable vitality"
+  },
+  
+  "critical_periods": {
+    "description": "Periods when vitality may be challenged based on planetary minor years",
+    "saturn_ages": [30, 60, 90],
+    "mars_ages": [15, 30, 45, 60],
+    "interpretation": "These ages represent potential health challenges, not certain death"
+  },
+  
+  "modern_application": {
+    "focus": "Health vulnerability assessment rather than death prediction",
+    "use": "Identifies periods when native should be attentive to health and well-being",
+    "transits": "Challenging aspects to Alcocoden often coincide with health crises"
+  }
+}

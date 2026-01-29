@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 class Sect(Enum):
     DAY = "Day"
@@ -62,6 +62,8 @@ class Chart:
     geo_lat: Optional[float] = None
     geo_lon: Optional[float] = None
     jd: Optional[float] = None
+    houses: Optional[Dict[int, float]] = None
+    house_system: Optional[str] = None
 
 class LotName(Enum):
     FORTUNE = "Fortune"

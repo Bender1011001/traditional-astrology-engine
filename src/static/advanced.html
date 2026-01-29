@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Astrology Rule Engine & Calculator | Codex Caelestis</title>
+    <meta name="description"
+        content="Professional-grade traditional astrology calculator. Includes Annual Profections, Zodiacal Releasing, Firdaria, Primary Directions, and detailed forensic rule analysis.">
+    <meta name="keywords"
+        content="astrology calculator, zodiacal releasing calculator, annual profections, primary directions, firdaria, traditional astrology software, forensic astrology">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#f4efe6">
+    <link rel="canonical" href="https://traditional-astrology.com/advanced.html">
+    <meta property="og:title" content="Codex Caelestis Rule Engine">
+    <meta property="og:description"
+        content="Professional-grade traditional astrology calculator. Includes Annual Profections, Zodiacal Releasing, Firdaria, Primary Directions, and detailed forensic rule analysis.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://traditional-astrology.com/advanced.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Codex Caelestis Rule Engine">
+    <meta name="twitter:description"
+        content="Professional-grade traditional astrology calculator. Includes Annual Profections, Zodiacal Releasing, Firdaria, Primary Directions, and detailed forensic rule analysis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260128n">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Codex Caelestis Advanced Engine",
+            "url": "https://traditional-astrology.com/advanced.html",
+            "applicationCategory": "AstrologyTool",
+            "description": "Advanced computational engine for traditional astrology techniques including Zodiacal Releasing, Profections, and Dignity analysis.",
+            "featureList": "Nativity Rules, Temporal Rules, Medical Constraints, Synastry, Electional Rules, Rectification"
+        }
+    </script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+        <div class="stars-overlay"></div>
+    </div>
+
+    <main id="main" class="container">
+        <header>
+            <div class="header-content">
+                <h1>JUDICIAL ASTROLOGY RULE ENGINE</h1>
+                <div class="ornament"></div>
+                <p class="subtitle">Textual rules from traditional sources. Conditional judgments only.</p>
+                <nav class="header-actions" aria-label="Primary">
+                    <button id="helpBtn" class="help-btn" type="button">METHOD & TERMS</button>
+                    <button id="glossaryBtn" class="help-btn" type="button">GLOSSARY</button>
+                    <button id="libraryBtn" class="help-btn" type="button">CHART LIBRARY</button>
+                    <a class="help-btn" href="methodology.html">METHOD & SOURCES</a>
+                    <a class="help-btn" href="index.html">BASIC VERSION</a>
+                    <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">DARK
+                        MODE</button>
+                </nav>
+            </div>
+        </header>
+
+        <div id="backendNotice" class="backend-notice hidden" role="status" aria-live="polite">
+            <strong>Demo Mode:</strong> This GitHub Pages site is a static preview. Run the backend locally to compute
+            rules.
+        </div>
+
+        <section class="feature-overview">
+            <h2 class="section-title">RULE MODULES</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Nativity Rules</h3>
+                    <p>Conditional rulings from sect, dignity, condition, and house placement.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Temporal Rules</h3>
+                    <p>Annual, monthly, and daily profections with releasing to mark active periods.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Daily Output</h3>
+                    <p>Daily statements from chronocrator, lunar phase, and epitasis flag.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Five-Day Output</h3>
+                    <p>Five-day sequence from profections and medical transits.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Medical Constraints</h3>
+                    <p>Operative constraints from Moon sign, malefic afflictions, eclipses, and crisis days.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Lots</h3>
+                    <p>Compute Lots of Spirit/Fortune and tie them to timing structure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Fixed Stars & Nodes</h3>
+                    <p>Fixed star contacts, parans, nodal contacts, and eclipse pressure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Synastry</h3>
+                    <p>Two-chart structural fit, dependencies, and shared indicators.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Electional Rules</h3>
+                    <p>Scan for viable windows to act.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Horary Verdicts</h3>
+                    <p>Binary outcomes from horary mechanics and weighting.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>World Rules</h3>
+                    <p>Global snapshot with eclipses, fixed stars, and transits.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Rectification</h3>
+                    <p>Traditional rectification for uncertain birth time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="calculator-card">
+            <form id="chartForm">
+                <div class="form-section">
+                    <h2 class="section-title">INPUT DATA</h2>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="date">DATE OF BIRTH</label>
+                            <input type="date" id="date" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="time">TIME OF BIRTH</label>
+                            <input type="time" id="time" required aria-describedby="timeWarning">
+                            <div class="time-unknown-toggle">
+                                <label class="checkbox-row">
+                                    <input type="checkbox" id="timeUnknown">
+                                    <span>Time unknown</span>
+                                </label>
+                            </div>
+                            <div id="timeWarning" class="time-unknown-warning hidden" role="alert">
+                                <strong>Warning:</strong> Without a birth time, Ascendant/MC, houses, lots, and
+                                time-based techniques are unreliable. We will default to 12:00 local time.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="timeRangeStart">TIME RANGE START (OPTIONAL)</label>
+                            <input type="time" id="timeRangeStart">
+                        </div>
+                        <div class="input-group">
+                            <label for="timeRangeEnd">TIME RANGE END (OPTIONAL)</label>
+                            <input type="time" id="timeRangeEnd">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="timeRangeSamples">RANGE SAMPLES (OPTIONAL)</label>
+                            <input type="number" id="timeRangeSamples" min="3" max="120" value="12">
+                        </div>
+                        <div class="input-group"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="city">CITY</label>
+                            <input type="text" id="city" placeholder="e.g. Rome" required autocomplete="address-level2"
+                                aria-controls="citySuggestions" aria-expanded="false" aria-haspopup="listbox">
+                            <div id="citySuggestions" class="suggestions" role="listbox"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="state">STATE / COUNTRY</label>
+                            <input type="text" id="state" placeholder="e.g. Italy" autocomplete="address-level1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="zodiacSystem">ZODIAC</label>
+                            <select id="zodiacSystem">
+                                <option value="tropical" selected>Tropical</option>
+                                <option value="sidereal">Sidereal</option>
+                            </select>
+                        </div>
+                        <div class="input-group" id="ayanamsaGroup">
+                            <label for="ayanamsa">AYANAMSA</label>
+                            <select id="ayanamsa">
+                                <option value="lahiri" selected>Lahiri</option>
+                                <option value="fagan_bradley">Fagan-Bradley</option>
+                                <option value="krishnamurti">Krishnamurti</option>
+                                <option value="raman">Raman</option>
+                                <option value="hipparchos">Hipparchos</option>
+                                <option value="true_citra">True Citra</option>
+                                <option value="true_revati">True Revati</option>
+                                <option value="suryasiddhanta">Surya Siddhanta</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="houseSystem">HOUSE SYSTEM</label>
+                            <select id="houseSystem">
+                                <option value="placidus" selected>Placidus</option>
+                                <option value="whole_sign">Whole Sign</option>
+                                <option value="regiomontanus">Regiomontanus</option>
+                                <option value="alcabitius">Alcabitius</option>
+                                <option value="campanus">Campanus</option>
+                                <option value="porphyry">Porphyry</option>
+                                <option value="equal">Equal</option>
+                                <option value="koch">Koch</option>
+                                <option value="topocentric">Topocentric</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="checkbox-row">
+                                <input type="checkbox" id="compareHouseSystems">
+                                <span>Compare house systems</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">TIME PARAMETERS (OPTIONAL)</h2>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="currentAge">CURRENT AGE</label>
+                            <input type="number" id="currentAge" placeholder="e.g. 32">
+                        </div>
+                        <div class="input-group">
+                            <label for="analysisDate">ANALYSIS DATE</label>
+                            <input type="date" id="analysisDate">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="calculateBtn">
+                    <span class="btn-text">RUN ANALYSIS</span>
+                    <div class="btn-shimmer"></div>
+                </button>
+            </form>
+        </section>
+
+        <section id="results" class="results-hidden">
+            <div id="chartWheelContainer" class="chart-wheel-container">
+                <!-- SVG Chart Wheel rendered here -->
+            </div>
+            <nav class="result-tabs" role="tablist" aria-label="Result tabs">
+                <button class="tab-btn active" type="button" data-tab="forensic" id="tab-forensic" role="tab"
+                    aria-controls="forensicTab" aria-selected="true">RULE OUTPUT</button>
+                <button class="tab-btn" type="button" data-tab="fate" id="tab-fate" role="tab" aria-controls="fateTab"
+                    aria-selected="false">TIME WINDOWS</button>
+                <button class="tab-btn" type="button" data-tab="prediction" id="tab-prediction" role="tab"
+                    aria-controls="predictionTab" aria-selected="false">TIME LORDS</button>
+                <button class="tab-btn" type="button" data-tab="oracle" id="tab-oracle" role="tab"
+                    aria-controls="oracleTab" aria-selected="false">PLAIN READING</button>
+                <button class="tab-btn" type="button" data-tab="forecast" id="tab-forecast" role="tab"
+                    aria-controls="forecastTab" aria-selected="false">FIVE-DAY OUTPUT</button>
+                <button class="tab-btn" type="button" data-tab="medical" id="tab-medical" role="tab"
+                    aria-controls="medicalTab" aria-selected="false">MEDICAL RULES</button>
+                <button class="tab-btn" type="button" data-tab="technical" id="tab-technical" role="tab"
+                    aria-controls="technicalTab" aria-selected="false">RAW DATA</button>
+            </nav>
+
+            <div class="tab-content active" id="forensicTab" role="tabpanel" aria-labelledby="tab-forensic">
+                <div id="mundaneContext" class="mundane-banner">
+                    <!-- Eclipses here -->
+                </div>
+
+                <div id="summaryGrid" class="summary-grid">
+                    <div id="lunarProfileCard" class="summary-card">
+                        <h4>LUNAR PHASE</h4>
+                        <p class="placeholder-text">Run analysis to compute lunar phase.</p>
+                    </div>
+                    <div id="temperamentCard" class="summary-card">
+                        <h4>TEMPERAMENT</h4>
+                        <p class="placeholder-text">Temperament pending calculation.</p>
+                    </div>
+                    <div id="universalEventsCard" class="summary-card">
+                        <h4>ECLIPSE EVENTS</h4>
+                        <p class="placeholder-text">No eclipse ledger loaded.</p>
+                    </div>
+                    <div id="universalCausationCard" class="summary-card">
+                        <h4>GLOBAL CAUSATION</h4>
+                        <p class="placeholder-text">Awaiting causation audit.</p>
+                    </div>
+                </div>
+
+                <div id="ruleLedgerSection" class="codex-section">
+                    <h3 class="section-divider">RULE TRACE</h3>
+                    <div id="ruleLedgerList" class="rule-ledger" aria-live="polite">
+                        <p class="placeholder-text">Run analysis to generate rule trace.</p>
+                    </div>
+                </div>
+
+                <div id="soulGuardianSection" class="soul-guardian-section">
+                    <div id="soulGuardianCard" class="soul-guardian-card">
+                        <h3>PRIMARY RULER (ALMUTEN FIGURIS)</h3>
+                        <p class="placeholder-text">Run analysis to compute the primary ruler.</p>
+                    </div>
+                    <div id="soulGuardianTeam" class="soul-guardian-card">
+                        <h3>SECT ALIGNMENT</h3>
+                        <p class="placeholder-text">Sect alignment appears after calculation.</p>
+                    </div>
+                </div>
+
+                <div id="vitalitySection" class="soul-guardian-section" style="margin-top: 1rem;">
+                    <div id="vitalityCard" class="soul-guardian-card" style="width: 100%;">
+                        <h3>VITALITY & LONGEVITY (HYLEG)</h3>
+                        <p class="placeholder-text">Vitality analysis pending calculation.</p>
+                    </div>
+                </div>
+
+                <div id="primaryDirectionsSection" class="soul-guardian-section" style="margin-top: 1rem;">
+                    <div id="pdCard" class="soul-guardian-card" style="width: 100%;">
+                        <h3>PRIMARY DIRECTIONS (PLACIDUS)</h3>
+                        <p class="placeholder-text">Primary directions pending calculation.</p>
+                    </div>
+                </div>
+
+                <div id="lotsSection" class="codex-section">
+                    <h3 class="section-divider">LOT COMPUTATIONS</h3>
+                    <div id="lotsGrid" class="lots-grid" aria-live="polite">
+                        <p class="placeholder-text">Lots will appear after calculation.</p>
+                    </div>
+                </div>
+
+                <div id="witnessSection" class="codex-section">
+                    <h3 class="section-divider">FIXED STARS & NODES</h3>
+                    <div class="witness-grid">
+                        <div class="witness-card">
+                            <h4>FIXED STARS & PARANS</h4>
+                            <div id="fixedStarList" aria-live="polite">
+                                <p class="placeholder-text">No stellar contacts logged.</p>
+                            </div>
+                        </div>
+                        <div class="witness-card">
+                            <h4>NODAL CONTACTS</h4>
+                            <div id="nodeList" aria-live="polite">
+                                <p class="placeholder-text">No nodal activations detected.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="forensicGrid" class="forensic-grid">
+                    <!-- Planet Forensic Cards here -->
+                </div>
+
+                <div id="horaryPhysicsSection" class="horary-section hidden">
+                    <h3 class="section-divider">HORARY CONDITIONS & INTERACTIONS</h3>
+                    <div id="horaryPhysicsList" class="horary-grid"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="fateTab" role="tabpanel" aria-labelledby="tab-fate">
+                <div class="fate-timeline-container">
+                    <div class="timeline-lot-selector">
+                        <button class="lot-btn active" data-lot="Spirit">LOT OF SPIRIT (INTENT)</button>
+                        <button class="lot-btn" data-lot="Fortune">LOT OF FORTUNE (BODY/EVENTS)</button>
+                    </div>
+                    <div id="fateTimelineAlert" class="fate-alert">
+                        <p class="placeholder-text">Run analysis to calculate time windows.</p>
+                    </div>
+                    <div id="fateTimelineList" class="chapters-list">
+                        <!-- ZR Chapters rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="predictionTab" role="tabpanel" aria-labelledby="tab-prediction">
+                <div class="prediction-grid">
+                    <div class="prediction-card">
+                        <h3>PROFICIONS</h3>
+                        <div id="profectionInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>ZODIACAL RELEASING</h3>
+                        <div id="zrInfo"></div>
+                    </div>
+                </div>
+                <div class="prediction-advanced-grid">
+                    <div class="prediction-card">
+                        <h3>FIRDARIA & MUNTHA</h3>
+                        <div id="firdariaInfo"></div>
+                        <div id="munthaInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>SOLAR RETURN</h3>
+                        <div id="solarReturnInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>SOLAR ARCS</h3>
+                        <div id="solarArcInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>LUNAR PHASE</h3>
+                        <div id="lunarPhaseInfo"></div>
+                    </div>
+                    <div class="prediction-card">
+                        <h3>ACTIVE TRANSITS</h3>
+                        <div id="transitInfo"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="oracleTab" role="tabpanel" aria-labelledby="tab-oracle">
+                <div class="oracle-container">
+                    <div id="oracleContent" class="oracle-card-main" aria-live="polite">
+                        <!-- Daily Reading here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="forecastTab" role="tabpanel" aria-labelledby="tab-forecast">
+                <div class="forecast-container">
+                    <h2 class="forecast-title">5-DAY RULE OUTLOOK</h2>
+                    <p class="forecast-subtitle">Derived from profections and medical transits.</p>
+                    <div id="forecastGrid" class="forecast-grid" aria-live="polite">
+                        <!-- 5-Day Forecast Cards here -->
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="tab-content" id="medicalTab" role="tabpanel" aria-labelledby="tab-medical">
+                <div class="medical-grid">
+                    <div class="medical-card">
+                        <h3>SURGERY CONSTRAINTS</h3>
+                        <p class="medical-subtitle">Constraints based on current transits.</p>
+                        <div class="medical-selector">
+                            <label>TARGET BODY PART</label>
+                            <select id="bodyPartSelect">
+                                <option value="Head">Head / Eyes</option>
+                                <option value="Neck">Neck / Throat</option>
+                                <option value="Shoulders">Hands / Lungs</option>
+                                <option value="Chest">Chest / Stomach</option>
+                                <option value="Heart">Heart / Back</option>
+                                <option value="Abdomen">Abdomen / Digestive</option>
+                                <option value="Kidneys">Kidneys / Back</option>
+                                <option value="Genitals">Reproductive / Excretory</option>
+                                <option value="Thighs">Thighs / Liver</option>
+                                <option value="Knees">Knees / Bones</option>
+                                <option value="Ankles">Ankles / Circulation</option>
+                                <option value="Feet">Feet / Lymphatic</option>
+                            </select>
+                        </div>
+                        <div id="surgeryResult" class="surgery-panel" aria-live="polite">
+                            <p class="placeholder-text">Run analysis to enable medical checks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="technicalTab" role="tabpanel" aria-labelledby="tab-technical">
+                <div class="meta-section">
+                    <div id="metaInfo" class="meta-info"></div>
+                    <div id="anglesInfo" class="meta-info"></div>
+                </div>
+
+                <div class="meta-actions" style="margin-bottom: 1rem; display: flex; gap: 1rem;">
+                    <button id="saveChartBtn" class="help-btn" type="button">SAVE TO LIBRARY</button>
+                    <button id="exportCsvBtn" class="help-btn" type="button">EXPORT AS CSV</button>
+                    <button id="exportPdfBtn" class="help-btn" type="button">EXPORT AS PDF</button>
+                </div>
+
+                <div class="data-split">
+                    <div class="planet-list-container">
+                        <h3>PLANETARY CUSPS</h3>
+                        <div id="planetList"></div>
+                    </div>
+
+                    <div class="house-list-container">
+                        <h3>HOUSE DIVISIONS</h3>
+                        <div id="houseList"></div>
+                    </div>
+                </div>
+                <div class="house-systems-compare">
+                    <h3>HOUSE SYSTEMS COMPARISON</h3>
+                    <div id="houseSystemsCompare"></div>
+                </div>
+                <div class="time-sensitivity">
+                    <h3>TIME RANGE SENSITIVITY</h3>
+                    <div id="timeSensitivity"></div>
+                    <div id="timeDistribution"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-hub">
+            <div class="tools-header">
+                <h2>RULE TOOLS</h2>
+                <p class="tools-subtitle">Independent engines for timing, relationships, and world state.</p>
+            </div>
+            <nav class="tool-tabs" role="tablist" aria-label="Rule tools">
+                <button class="tool-tab-btn active" type="button" data-tool="synastry" id="tool-synastry" role="tab"
+                    aria-controls="synastryTool" aria-selected="true">SYNASTRY</button>
+                <button class="tool-tab-btn" type="button" data-tool="kairos" id="tool-kairos" role="tab"
+                    aria-controls="kairosTool" aria-selected="false">BEST TIMING</button>
+                <button class="tool-tab-btn" type="button" data-tool="horary" id="tool-horary" role="tab"
+                    aria-controls="horaryTool" aria-selected="false">HORARY VERDICT</button>
+                <button class="tool-tab-btn" type="button" data-tool="world" id="tool-world" role="tab"
+                    aria-controls="worldTool" aria-selected="false">WORLD DASHBOARD</button>
+                <button class="tool-tab-btn" type="button" data-tool="rectification" id="tool-rectification" role="tab"
+                    aria-controls="rectificationTool" aria-selected="false">RECTIFICATION</button>
+            </nav>
+
+            <div class="tool-content active" id="synastryTool" role="tabpanel" aria-labelledby="tool-synastry">
+                <form id="synastryForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>PERSON A</h3>
+                            <div class="input-group">
+                                <label for="synDateA">DATE OF BIRTH</label>
+                                <input type="date" id="synDateA" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synTimeA">TIME OF BIRTH</label>
+                                <input type="time" id="synTimeA" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synCityA">CITY</label>
+                                <input type="text" id="synCityA" required autocomplete="address-level2">
+                            </div>
+                            <div class="input-group">
+                                <label for="synStateA">STATE / COUNTRY</label>
+                                <input type="text" id="synStateA" autocomplete="address-level1">
+                            </div>
+                        </div>
+                        <div class="tool-column">
+                            <h3>PERSON B</h3>
+                            <div class="input-group">
+                                <label for="synDateB">DATE OF BIRTH</label>
+                                <input type="date" id="synDateB" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synTimeB">TIME OF BIRTH</label>
+                                <input type="time" id="synTimeB" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="synCityB">CITY</label>
+                                <input type="text" id="synCityB" required autocomplete="address-level2">
+                            </div>
+                            <div class="input-group">
+                                <label for="synStateB">STATE / COUNTRY</label>
+                                <input type="text" id="synStateB" autocomplete="address-level1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">RUN SYNASTRY</button>
+                </form>
+                <div id="synastryResults" class="tool-results">
+                    <p class="placeholder-text">Provide two charts to compute synastry rules.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="kairosTool" role="tabpanel" aria-labelledby="tool-kairos">
+                <form id="kairosForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>REQUEST</h3>
+                            <div class="input-group">
+                                <label for="kairosActivity">ACTIVITY</label>
+                                <input type="text" id="kairosActivity" placeholder="e.g. contract, marriage, surgery"
+                                    required>
+                            </div>
+                            <div class="input-group">
+                                <label for="kairosStartDate">START DATE</label>
+                                <input type="date" id="kairosStartDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="kairosHours">HOURS TO SCAN</label>
+                                <input type="number" id="kairosHours" value="168" min="24" max="336">
+                            </div>
+                        </div>
+                        <div class="tool-column">
+                            <h3>LOCATION</h3>
+                            <div class="input-group">
+                                <label for="kairosCity">CITY</label>
+                                <input type="text" id="kairosCity" required autocomplete="address-level2">
+                            </div>
+                            <div class="input-group">
+                                <label for="kairosState">STATE / COUNTRY</label>
+                                <input type="text" id="kairosState" autocomplete="address-level1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">SCAN WINDOWS</button>
+                </form>
+                <div id="kairosResults" class="tool-results">
+                    <p class="placeholder-text">Scan for viable windows to act.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="horaryTool" role="tabpanel" aria-labelledby="tool-horary">
+                <form id="horaryForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>QUESTION</h3>
+                            <div class="input-group">
+                                <label for="horaryQuestion">YOUR QUESTION</label>
+                                <input type="text" id="horaryQuestion" placeholder="e.g. Will I get this house?"
+                                    required>
+                            </div>
+                            <div class="input-group">
+                                <label for="horaryDate">DATE</label>
+                                <input type="date" id="horaryDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="horaryTime">TIME</label>
+                                <input type="time" id="horaryTime">
+                            </div>
+                        </div>
+                        <div class="tool-column">
+                            <h3>LOCATION</h3>
+                            <div class="input-group">
+                                <label for="horaryCity">CITY</label>
+                                <input type="text" id="horaryCity" required autocomplete="address-level2">
+                            </div>
+                            <div class="input-group">
+                                <label for="horaryState">STATE / COUNTRY</label>
+                                <input type="text" id="horaryState" autocomplete="address-level1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">GET VERDICT</button>
+                </form>
+                <div id="horaryResults" class="tool-results">
+                    <p class="placeholder-text">Ask a question to receive a binary verdict.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="worldTool" role="tabpanel" aria-labelledby="tool-world">
+                <form id="worldForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>WORLD SNAPSHOT</h3>
+                            <div class="input-group">
+                                <label for="worldDate">DATE (UTC)</label>
+                                <input type="date" id="worldDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="worldTime">TIME (UTC)</label>
+                                <input type="time" id="worldTime">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">UPDATE WORLD DATA</button>
+                </form>
+                <div id="worldResults" class="tool-results">
+                    <p class="placeholder-text">Load global rule data.</p>
+                </div>
+            </div>
+
+            <div class="tool-content" id="rectificationTool" role="tabpanel" aria-labelledby="tool-rectification">
+                <form id="rectificationForm" class="tool-form">
+                    <div class="tool-grid">
+                        <div class="tool-column">
+                            <h3>BIRTH DATA</h3>
+                            <div class="input-group">
+                                <label for="rectDate">DATE OF BIRTH</label>
+                                <input type="date" id="rectDate" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="rectTime">TIME OF BIRTH</label>
+                                <input type="time" id="rectTime" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="rectCity">CITY</label>
+                                <input type="text" id="rectCity" required autocomplete="address-level2">
+                            </div>
+                            <div class="input-group">
+                                <label for="rectState">STATE / COUNTRY</label>
+                                <input type="text" id="rectState" autocomplete="address-level1">
+                            </div>
+                            <div class="input-group">
+                                <label>RECTIFICATION METHODS</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-row">
+                                        <input type="checkbox" id="rectMethodAnimodar" checked>
+                                        <span>Animodar (Ptolemaic)</span>
+                                    </label>
+                                    <label class="checkbox-row">
+                                        <input type="checkbox" id="rectMethodTrutina" checked>
+                                        <span>Trutina Hermetis</span>
+                                    </label>
+                                    <label class="checkbox-row disabled">
+                                        <input type="checkbox" id="rectMethodEvent" disabled>
+                                        <span>Event-based (coming soon)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">ESTIMATE BIRTH TIME</button>
+                </form>
+                <div id="rectificationResults" class="tool-results">
+                    <p class="placeholder-text">Submit birth data to estimate birth time.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-label="Method and terms">
+            <button class="modal-close" type="button" aria-label="Close modal">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js?v=20260128n"></script>
+</body>
+
+</html>

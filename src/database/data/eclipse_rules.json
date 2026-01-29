@@ -1,0 +1,25 @@
+{
+  "solar_eclipse": {
+    "general": "Solar eclipses affect kings, leaders, and public matters",
+    "duration_rule": "Each hour of eclipse duration = 1 year of effect (Ptolemy)",
+    "timing": "Effects begin when a planet transits the eclipse degree",
+    "chorography": "The sign determines which region/country is affected",
+    "malefic_presence": "Mars or Saturn on eclipse degree intensifies negative effects"
+  },
+  "lunar_eclipse": {
+    "general": "Lunar eclipses affect the populace, women, and common matters",
+    "duration_rule": "Each hour of eclipse duration = 1 month of effect",
+    "timing": "Effects are more immediate than solar eclipses",
+    "health": "Lunar eclipses particularly affect bodily health and fluids"
+  },
+  "personal_activation": {
+    "angular_eclipse": "Eclipse on natal Angle (ASC/MC/DSC/IC) = major life change",
+    "luminary_eclipse": "Eclipse on natal Sun or Moon = health crisis or identity shift",
+    "malefic_eclipse": "Eclipse on natal malefic = activation of that planet's worst significations"
+  },
+  "remediation": {
+    "namburbi": "Babylonian ritual to dissolve eclipse omens",
+    "substitute_king": "Ancient practice of appointing a temporary ruler during eclipses"
+  },
+  "source": "Ptolemy, Tetrabiblos; Mesopotamian Enuma Anu Enlil"
+}

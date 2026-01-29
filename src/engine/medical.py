@@ -7,7 +7,19 @@ from .calculations import calculate_solar_proximity
 class MedicalAstrology:
     """
     Implements traditional Medical Astrology (Iatromathematics) protocols.
-    Note: Based on historical tradition for educational purposes.
+    
+    CRITICAL MEDICAL DISCLAIMER:
+    This module is for HISTORICAL AND EDUCATIONAL RESEARCH PURPOSES ONLY. 
+    Traditional 'Iatromathematics' and 'Surgery Rules' are artifacts of 
+    pre-modern history and DO NOT constitute medical advice. 
+    
+    Under no circumstances should this software be used to:
+    1. Diagnose, treat, or prevent any medical condition.
+    2. Schedule or postpone surgical procedures.
+    3. Replace the advice of a qualified healthcare professional.
+    
+    The authors and contributors accept NO LIABILITY for any health-related 
+    decisions made based on the output of this module.
     """
     
     MELOTHESIA = {

@@ -3,7 +3,7 @@ import swisseph as swe
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
 from .models import Sign, PlanetName, Planet
-from .stars import STARS, get_shortest_dist
+from .stars import STARS, get_shortest_dist, get_star_longitude
 
 # Chorography mapping from Binder1_part_001.txt
 CHOROGRAPHY = {
@@ -374,7 +374,8 @@ def get_active_fixed_stars(jd: float) -> List[Dict]:
     planets = get_transiting_planets(jd)
     for planet in planets:
         for star in STARS:
-            dist = get_shortest_dist(planet.longitude, star.longitude)
+            star_lon = get_star_longitude(star, jd)
+            dist = get_shortest_dist(planet.longitude, star_lon)
             if dist <= star.orb:
                 active.append({
                     "star": star.name,

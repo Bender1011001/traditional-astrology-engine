@@ -46,6 +46,11 @@ Live site: https://bender1011001.github.io/astrology/
    ```
 4. Open your browser at `http://127.0.0.1:8000`.
 
+### API Documentation
+The API is self-documenting via FastAPI. Once the server is running, you can access:
+- **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
 ### Deployment & Domain Access
 
 To serve the application on `traditional-astrology.com` using Cloudflare Tunnel:
@@ -68,4 +73,8 @@ To serve the application on `traditional-astrology.com` using Cloudflare Tunnel:
 - `src/static/`: Premium Glassmorphic UI.
 
 ## License
-Educational Use Only. Forensic outcomes based on historical tradition.
+MIT License. See [LICENSE](LICENSE) for details.
+
+### Medical Disclaimer
+Portions of this software deal with historical medical astrology (Iatromathematics). This content is provided for **historical and educational research purposes only**. It is **NOT medical advice**. Under no circumstances should any information provided by this software be used to make health decisions or schedule medical procedures. Always consult a qualified medical professional for health concerns.
+

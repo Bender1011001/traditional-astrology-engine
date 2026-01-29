@@ -26,6 +26,9 @@
                 <h1>JUDICIAL ASTROLOGY ENGINE</h1>
                 <div class="ornament"></div>
                 <p class="subtitle">Traditional Forensic Astrological Engine</p>
+                <div class="header-actions">
+                    <a class="help-btn" href="methodology.html">METHOD & SOURCES</a>
+                </div>
             </div>
         </header>
 
@@ -100,6 +103,16 @@
                         <div class="input-group">
                             <label for="time">TIME OF BIRTH</label>
                             <input type="time" id="time" required>
+                            <div class="time-unknown-toggle">
+                                <label class="checkbox-row">
+                                    <input type="checkbox" id="timeUnknown">
+                                    <span>Time unknown</span>
+                                </label>
+                            </div>
+                            <div id="timeWarning" class="time-unknown-warning hidden">
+                                <strong>Warning:</strong> Without a birth time, Ascendant/MC, houses, lots, and
+                                time-based techniques are unreliable. We will default to 12:00 local time.
+                            </div>
                         </div>
                     </div>
 

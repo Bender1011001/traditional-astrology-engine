@@ -9,7 +9,14 @@ def calculate_sect(sun_altitude: float) -> Sect:
 
 def get_triplicity_ruler(sign: Sign, sect: Sect) -> PlanetName:
     element = SIGN_ELEMENTS[sign]
-    return TRIPLICITY_RULERS[element][sect]
+    rulers = TRIPLICITY_RULERS[element]
+    # Support both dict-based and tuple-based triplicity tables.
+    if isinstance(rulers, dict):
+        return rulers[sect]
+    # Tuple/list: (Day, Night, [Participant])
+    if sect == Sect.DAY:
+        return rulers[0]
+    return rulers[1]
 
 def get_term_ruler(sign: Sign, degree: float) -> PlanetName:
     terms = EGYPTIAN_TERMS[sign]

@@ -397,6 +397,99 @@ NEGATIVE_CONDITIONS = {
     "Refranation"
 }
 
+CONDITION_WEIGHTS = {
+    "Direct Application": 4,
+    "Translation of Light": 3,
+    "Collection of Light": 3,
+    "Mutual Reception": 2,
+    "Reception": 1,
+    "Antiscia": 1,
+    "Contra-antiscia": -1,
+    "Prohibition": -4,
+    "Refranation": -3
+}
+
+BENEFICS = {PlanetName.JUPITER, PlanetName.VENUS}
+MALEFICS = {PlanetName.MARS, PlanetName.SATURN}
+DIURNAL = {PlanetName.SUN, PlanetName.JUPITER, PlanetName.SATURN}
+NOCTURNAL = {PlanetName.MOON, PlanetName.VENUS, PlanetName.MARS}
+
+def get_sect_score(planet_name: PlanetName, chart_sect: Sect) -> int:
+    if chart_sect == Sect.DAY:
+        if planet_name in DIURNAL:
+            return 2
+        if planet_name in NOCTURNAL:
+            return -2
+    else:
+        if planet_name in NOCTURNAL:
+            return 2
+        if planet_name in DIURNAL:
+            return -2
+    return 0
+
+def get_nature_score(planet_name: PlanetName) -> int:
+    if planet_name in BENEFICS:
+        return 2
+    if planet_name in MALEFICS:
+        return -2
+    return 0
+
+def score_significator(planet: Planet, chart: Chart) -> Dict[str, int | str | List[str]]:
+    chart_sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+    essential = DignityCalculator.calculate_planet_dignity(planet.name, planet.longitude, chart_sect)
+    accidental = DignityCalculator.calculate_accidental_dignity(planet, chart)
+    hayz = DignityCalculator.check_hayz_halb(planet.name, planet.longitude, chart)
+
+    hayz_bonus = 0
+    if hayz["status"] == "Hayz":
+        hayz_bonus = 3
+    elif hayz["status"] == "Halb":
+        hayz_bonus = 2
+    elif hayz["status"] == "In Sect":
+        hayz_bonus = 1
+
+    sect_score = get_sect_score(planet.name, chart_sect)
+    nature_score = get_nature_score(planet.name)
+
+    total = (
+        essential["total_score"]
+        + accidental["total_score"]
+        + sect_score
+        + nature_score
+        + hayz_bonus
+    )
+
+    return {
+        "planet": planet.name.value,
+        "essential_score": essential["total_score"],
+        "essential_details": essential["details"],
+        "variant_notes": essential.get("conflicts", []),
+        "variant_details": essential.get("variants", {}),
+        "accidental_score": accidental["total_score"],
+        "accidental_details": accidental["details"],
+        "sect_score": sect_score,
+        "nature_score": nature_score,
+        "hayz_status": hayz["status"],
+        "hayz_details": hayz["details"],
+        "total_score": total
+    }
+
+def score_conditions(conditions: List[Dict]) -> Dict[str, int | List[Dict]]:
+    breakdown = []
+    total = 0
+    for condition in conditions:
+        name = condition.get("condition")
+        weight = CONDITION_WEIGHTS.get(name, 0)
+        total += weight
+        breakdown.append({
+            "condition": name,
+            "weight": weight
+        })
+    return {
+        "total_score": total,
+        "breakdown": breakdown
+    }
+
 def select_quesited_house(question: str) -> Dict[str, str | int]:
     q = (question or "").lower()
     for house, label, keywords in KEYWORD_HOUSES:
@@ -408,25 +501,33 @@ def get_house_sign(asc_sign_idx: int, house_num: int) -> Sign:
     signs = list(Sign)
     return signs[(asc_sign_idx + (house_num - 1)) % 12]
 
-def evaluate_horary_conditions(conditions: List[Dict]) -> Dict[str, str | int]:
+def evaluate_horary_conditions(conditions: List[Dict], condition_score: int, strength_score: int) -> Dict[str, str | int]:
     pos = [c for c in conditions if c.get("condition") in POSITIVE_CONDITIONS]
     neg = [c for c in conditions if c.get("condition") in NEGATIVE_CONDITIONS]
+    total_score = condition_score + strength_score
 
-    if pos and neg:
-        verdict = "Struggle, then success"
-        weight = "Mixed"
-    elif pos:
+    if total_score >= 6:
         verdict = "Yes"
         weight = "Favorable"
-    else:
+    elif total_score >= 2:
+        verdict = "Struggle, then success" if pos and neg else "Yes"
+        weight = "Mixed"
+    elif total_score <= -6:
         verdict = "No"
         weight = "Blocked"
+    elif total_score <= -2:
+        verdict = "No"
+        weight = "Mixed"
+    else:
+        verdict = "Unclear"
+        weight = "Mixed"
 
     return {
         "verdict": verdict,
         "weight": weight,
         "positive_count": len(pos),
-        "negative_count": len(neg)
+        "negative_count": len(neg),
+        "total_score": total_score
     }
 
 def build_horary_oracle(question: str, chart: Chart) -> Dict:
@@ -439,7 +540,21 @@ def build_horary_oracle(question: str, chart: Chart) -> Dict:
     quesited_ruler = DOMICILES[quesited_sign]
 
     conditions = analyze_horary_physics(querent_ruler, quesited_ruler, chart)
-    verdict_data = evaluate_horary_conditions(conditions)
+    querent_planet = next((p for p in chart.planets if p.name == querent_ruler), None)
+    quesited_planet = next((p for p in chart.planets if p.name == quesited_ruler), None)
+    querent_strength = score_significator(querent_planet, chart) if querent_planet else None
+    quesited_strength = score_significator(quesited_planet, chart) if quesited_planet else None
+    condition_score = score_conditions(conditions)
+
+    strength_total = 0
+    if querent_strength:
+        strength_total += querent_strength["total_score"]
+    if quesited_strength:
+        strength_total += quesited_strength["total_score"]
+    if querent_strength and quesited_strength:
+        strength_total = int(round(strength_total / 2))
+
+    verdict_data = evaluate_horary_conditions(conditions, condition_score["total_score"], strength_total)
 
     return {
         "question": question,
@@ -453,5 +568,11 @@ def build_horary_oracle(question: str, chart: Chart) -> Dict:
         "verdict": verdict_data["verdict"],
         "verdict_weight": verdict_data["weight"],
         "positive_count": verdict_data["positive_count"],
-        "negative_count": verdict_data["negative_count"]
+        "negative_count": verdict_data["negative_count"],
+        "condition_score": condition_score["total_score"],
+        "condition_breakdown": condition_score["breakdown"],
+        "strength_score": strength_total,
+        "querent_strength": querent_strength,
+        "quesited_strength": quesited_strength,
+        "total_score": verdict_data["total_score"]
     }

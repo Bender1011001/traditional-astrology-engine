@@ -12,3 +12,5 @@ venv/
 *.log
 .cloudflared/
 cloudflared_config.yml
+logs/
+cloudflared.log

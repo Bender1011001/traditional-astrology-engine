@@ -1,0 +1,399 @@
+"""
+Delineation Quality Enhancement Script
+
+Replaces placeholder entries with properly researched traditional delineations.
+Based on Valens, Firmicus, Lilly, and Dorotheus source material.
+"""
+
+import json
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).parent.parent / "src" / "database" / "data"
+
+# High-quality traditional delineations to add/replace
+ENHANCED_DELINEATIONS = {
+    "planets_in_signs": {
+        # Moon in Pisces - currently has placeholder
+        "MOON_PISCES_DAY": (
+            "The Moon in Pisces by day is highly receptive and imaginative. Valens associates "
+            "this placement with water journeys, dreams, and prophetic intuition. The native is "
+            "'dissolving' or adaptable, sometimes to their detriment. By day, the Sun's light "
+            "illuminates the Piscean depths, granting the native artistic vision and spiritual "
+            "insight. They are drawn to mystical subjects, the sea, and compassionate vocations. "
+            "However, the mutable nature can indicate difficulty with firm decisions."
+        ),
+        "MOON_PISCES_NIGHT": (
+            "The Moon in Pisces by night is in its element—the nocturnal sect amplifies the "
+            "lunar receptivity. Valens notes this placement produces vivid dreams, psychic "
+            "sensitivity, and emotional depth. The native finds security in solitude, spiritual "
+            "practice, or creative pursuits. They may be 'otherworldly' or prone to escapism. "
+            "Health concerns may involve the feet (Pisces body part) or fluid retention. "
+            "Excellent for those in healing, art, or religious vocations."
+        ),
+        
+        # Saturn entries that need enhancement
+        "SATURN_GEMINI_DAY": (
+            "When Saturn occupies Gemini in a day chart, the diurnal sect mitigates his malice. "
+            "The cold, binding nature of Saturn stabilizes the volatile, airy nature of Mercury. "
+            "This produces individuals of profound intellect, deep scientific inquiry, and "
+            "strategic foresight. They are the architects of systems, capable of managing complex "
+            "logistics or 'double' duties (due to the bicorporeal sign). Valens suggests these "
+            "natives often hold distinguished military or administrative posts where control of "
+            "information is key. The 'day' quality brings Saturn into alignment with the Sun, "
+            "allowing his discipline to be recognized by authority."
+        ),
+        "SATURN_GEMINI_NIGHT": (
+            "In a night chart, Saturn is out of sect and excessively cold. Placed in the airy "
+            "sign of Gemini, this coldness 'freezes' the intellect. Firmicus warns that this can "
+            "produce impediments of speech, stuttering, or a melancholic silence. It suggests "
+            "'slow speech' or difficulty in articulation. The native may be subject to anxieties, "
+            "dark thoughts, or treachery from siblings and neighbors (Gemini significations). "
+            "The 'double-bodied' nature of Gemini here works against the native, potentially "
+            "indicating 'double troubles' or entrapment."
+        ),
+        
+        "SATURN_SCORPIO_DAY": (
+            "Saturn in the domicile of Mars by day produces a native who is ruthless, indomitable, "
+            "and capable of immense endurance. The fixity of Scorpio combined with the constraint "
+            "of Saturn creates a 'pressure cooker' of ambition. Valens notes this placement for "
+            "those who gain property through 'hard measures,' coercion, or the management of the "
+            "dead (inheritances/wills). The Day sect allows Saturn to govern the martial energy "
+            "of Scorpio—instead of violent outbursts, the energy is channeled into long-term "
+            "strategies of conquest or accumulation."
+        ),
+        "SATURN_SCORPIO_NIGHT": (
+            "By night, the containment fails. Saturn in Mars's house creates a 'war of malefics' "
+            "without the Sun's oversight. This is a highly destructive placement indicating "
+            "toxicity, treachery, and poisoning (literal or metaphorical). It warns of chronic "
+            "illnesses related to the excretory systems or fluid retention (Scorpio being water). "
+            "The native may be prone to holding grudges that fester into self-destruction. "
+            "There is a danger of violent enmity, often hidden or subterranean."
+        ),
+        
+        "SATURN_SAGITTARIUS_DAY": (
+            "Saturn is well-placed here, respecting the 'host' Jupiter who is also of the Day sect. "
+            "This produces the 'stern philosopher,' the high priest, or the lawmaker. The fire of "
+            "Sagittarius warms Saturn's coldness, resulting in 'controlled expansion.' The native "
+            "is conservative in religion, strictly adherent to codes of conduct, and often entrusted "
+            "with the stewardship of large organizations or temples. The bicorporeal nature allows "
+            "Saturn to bridge the gap between dogma and administration."
+        ),
+        "SATURN_SAGITTARIUS_NIGHT": (
+            "By night, Saturn strikes at the heart of Jupiterian optimism. This produces religious "
+            "hypocrisy, loss of wealth through foreign travel, or chronic issues with the hips and "
+            "thighs (Sagittarius body parts). The native may be an 'apostate' or one who uses the "
+            "letter of the law to destroy its spirit. The lack of solar heat means Saturn's restriction "
+            "suffocates the Sagittarian fire. Enthusiasm is dampened by cynicism. The native may "
+            "suffer from 'bad luck' in long-distance ventures or be exiled from their homeland."
+        ),
+        
+        # Jupiter entries
+        "JUPITER_TAURUS_DAY": (
+            "Jupiter in the domicile of Venus by day is a signature of immense prosperity and "
+            "material stability. It grants wealth from the earth (real estate, farming, mining) and "
+            "stability in marriage. The native is generous, fond of luxury, and 'lucky in foundations.' "
+            "Valens describes natives with this placement as attaining 'gifts from friends' and help "
+            "in crises. The 'moisture' of Jupiter blends harmoniously with the fertile earth of Taurus. "
+            "Because it is a day chart, the acquisition of wealth is honorable and recognized by society."
+        ),
+        "JUPITER_TAURUS_NIGHT": (
+            "Out of sect, Jupiter's expansive nature becomes excessive. In the sensual sign of Taurus, "
+            "this can indicate wastefulness, gluttony, or wealth that is gained but quickly squandered "
+            "on pleasure. The native may be overly stubborn or possessive. The 'night' quality emphasizes "
+            "the Venusian side of Taurus (pleasure) over the earthy side (stability). Financial "
+            "fluctuations due to extravagance. Potential health issues related to excess (throat, neck, weight)."
+        ),
+        
+        "JUPITER_LIBRA_DAY": (
+            "This is a placement of high social justice and arbitration. Jupiter in Libra produces judges, "
+            "diplomats, and those who gain through partnerships. The 'air' quality allows Jupiter's "
+            "intellect to roam freely. They are 'pious relations' and 'noble in marriage'. As a cardinal "
+            "sign, Libra initiates—Jupiter here initiates alliances. In a day chart, these alliances are "
+            "stable and honorable. The native is often a 'peacemaker' who brings disparate factions "
+            "together under a common law."
+        ),
+        "JUPITER_LIBRA_NIGHT": (
+            "Out of sect, Jupiter in Libra can indicate 'legal troubles' or reliance on partners who "
+            "promise more than they deliver. The native may be overly concerned with appearances or "
+            "social standing to their detriment. The 'scales' of Libra may tip toward indecision or "
+            "dependence on others. The night sect obscures Jupiter's clarity. The native may seek "
+            "justice but find only compromise. Relationships may be numerous but superficial."
+        ),
+        
+        # Mars entries
+        "MARS_LEO_DAY": (
+            "Mars is out of sect and in a fire sign. This is an extremely volatile placement. Mars in "
+            "Leo by day is 'too hot,' producing arrogance, recklessness, and burning fevers. It signifies "
+            "conflict with authority figures (the Sun) or the father. Valens lists Mars in Leo as a cause "
+            "of 'falls from high places,' banishment, or 'force, wars, and plunderings'. The fixity of "
+            "Leo makes the anger or aggression sustained and grudging."
+        ),
+        "MARS_LEO_NIGHT": (
+            "Mars is in sect. Here, the heat of Leo is constructive, fueling a 'noble warrior' archetype. "
+            "The native possesses immense courage, command, and physical vitality. They achieve high rank "
+            "through military, police, or athletic service. They are the 'generals' who lead from the front. "
+            "The night cools Mars, allowing the solar principle of Leo (honor/leadership) to direct the "
+            "martial energy effectively. The native fights for a cause rather than for violence's sake."
+        ),
+        
+        "MARS_VIRGO_DAY": (
+            "Highly problematic. Mars is out of sect in the sign of its enemy (Mercury). This produces the "
+            "'critic,' the thief, or the schemer. The native uses intellect (Mercury) as a weapon (Mars). "
+            "It causes inflammation of the bowels (Virgo) and disputes with subordinates or servants. "
+            "Firmicus associates this with 'crafty malice'. The dryness of Mars is exacerbated by the "
+            "dryness of Virgo (earth), creating a 'brittle' temperament."
+        ),
+        "MARS_VIRGO_NIGHT": (
+            "Constructive technical skill. This is the surgeon, the engineer, or the master craftsman. "
+            "The sharp cutting of Mars is applied to the details of Virgo. The native is a tireless worker "
+            "who 'conquers through detail.' They are precise, analytical, and effective. The night sect "
+            "dampens the aggression, turning 'attack' into 'precision.' The native uses Mars to 'fix' "
+            "things (Mercury) rather than break them."
+        ),
+        
+        # Sun entries
+        "SUN_TAURUS_DAY": (
+            "The Sun in Taurus by day indicates a slow, steady rise to power. The native possesses "
+            "'stubborn vitality' and accumulates wealth through patience. They are builders of legacy. "
+            "The fixed earth supports the Sun's desire for permanence. The native is often involved in "
+            "agriculture, banking, or estate management."
+        ),
+        "SUN_TAURUS_NIGHT": (
+            "By night, the vitality is more muted, focused on sensory pleasure and private security rather "
+            "than public glory. The native may be possessive or lethargic, preferring the 'quiet life' to "
+            "the demands of leadership."
+        ),
+        
+        "SUN_GEMINI_DAY": (
+            "The 'messenger king.' Success through communication, travel, and mediation. A 'double' life "
+            "or career is common (e.g., a writer who is also a politician). The native is intellectually "
+            "brilliant and persuasive. Valens links this to 'being known through speech or writing.'"
+        ),
+        "SUN_GEMINI_NIGHT": (
+            "Restless spirit. The native scatters their life force across too many projects. They may be "
+            "'jacks of all trades, masters of none.' There is a tendency towards nervous exhaustion or "
+            "superficiality. Valens notes a 'complicated' identity."
+        ),
+        
+        "SUN_PISCES_DAY": (
+            "The Sun is in the home of Jupiter. It produces charitable, mystical, or artistic leaders. "
+            "The native is driven by a sense of 'mission' or universal compassion. Valens notes this "
+            "indicates 'kingship' but in a way that 'power may slip away' due to the mutable/watery nature."
+        ),
+        "SUN_PISCES_NIGHT": (
+            "A hidden or 'private' dignity. Success comes late or in seclusion. Valens notes that the Sun "
+            "in Pisces often indicates 'exile,' travel to foreign lands, or life near the sea. The vitality "
+            "may be fluctuating or sensitive to the environment."
+        ),
+        
+        # Venus entries
+        "VENUS_LEO_DAY": (
+            "Venus is out of sect in a fiery sign. She is 'burnt' by the Sun's dispositorship. This creates "
+            "dramatic, attention-seeking love. It can deny children or produce 'love of show' rather than "
+            "substance. The native may be vain or prone to scandalous affairs that damage their reputation. "
+            "The heat of the day and the sign dries up Venus's moisture (fertility/grace)."
+        ),
+        "VENUS_LEO_NIGHT": (
+            "Venus is in sect. She grants dramatic success in art and romance. The native is a 'queen' in "
+            "their social circle. Generosity is high, and the native attracts wealthy or high-status partners. "
+            "The night restores Venus's moisture. The fire of Leo adds 'warmth' and 'passion' to her "
+            "affections without burning them out. Valens notes status symbols and 'acquisition of property'."
+        ),
+        
+        # Mercury entries
+        "MERCURY_CANCER_DAY": (
+            "Mercury is less effective here, as Cancer is mute/watery. Communication is emotional, guarded, "
+            "or subjective. The mind is influenced by moods rather than logic. Valens associates this with "
+            "'accusations,' 'poisoning,' or 'betrayal' if averse to the Ascendant."
+        ),
+        "MERCURY_CANCER_NIGHT": (
+            "Mercury works well with the Moon (Night sect ruler). The native has a retentive memory "
+            "('an elephant's memory') and intuitive grasp of history/lineage. They are excellent storytellers "
+            "or historians. Valens notes potential for scheming but memory remains sharp."
+        ),
+        
+        "MERCURY_LEO_DAY": (
+            "Bold speech. Orators and commanders. The mind is fixed on 'great things' and leadership. "
+            "The native speaks with authority."
+        ),
+        "MERCURY_LEO_NIGHT": (
+            "Arrogant speech. The native may ignore details in favor of a grandiose narrative. They may be "
+            "prone to exaggeration or 'holding court' rather than conversing."
+        ),
+        
+        "MERCURY_LIBRA_DAY": (
+            "The diplomat. Balanced judgment. Good for legal professions and arbitration. The mind weighs "
+            "all sides before speaking."
+        ),
+        "MERCURY_LIBRA_NIGHT": (
+            "The artist. Writing poetry or music. The mind is focused on aesthetics and social grace. "
+            "Indecisive but charming."
+        ),
+        
+        "MERCURY_CAPRICORN_DAY": (
+            "The pragmatist. The mind is focused on utility, structure, and administration. The native is "
+            "a 'serious thinker' who plans for the long term. Excellent for bureaucracy."
+        ),
+        "MERCURY_CAPRICORN_NIGHT": (
+            "The skeptic. The mind is suspicious, melancholic, and prone to 'dark thoughts.' They may be "
+            "calculating or manipulative in business."
+        ),
+        
+        "MERCURY_AQUARIUS_DAY": (
+            "The scientist/inventor. Fixed air allows for sustained abstract thinking. The native understands "
+            "systems and social structures. Valens associates it with intellectual rigidity or estrangement."
+        ),
+        "MERCURY_AQUARIUS_NIGHT": (
+            "The dissident. The mind challenges established structures. They may hold radical or unconventional "
+            "views that isolate them from the mainstream. Valens notes potential for 'exile'."
+        ),
+        
+        # Moon entries
+        "MOON_GEMINI_DAY": (
+            "Restless body and soul. Frequent changes in residence. The mother may have been intellectual "
+            "but emotionally distant or busy. Valens notes it 'does not provide straight pathways'."
+        ),
+        "MOON_GEMINI_NIGHT": (
+            "Versatile and adaptable. Success through variety and communication. The native feels at home "
+            "in 'movement.' Valens notes it signifies frequent travel and 'collecting information'."
+        ),
+        
+        "MOON_VIRGO_DAY": (
+            "Critical emotional nature. Digestive issues (the body/Moon in the sign of the bowels). The "
+            "native intellectualizes feelings. Valens warns of 'convulsions' or 'danger' when activated."
+        ),
+        "MOON_VIRGO_NIGHT": (
+            "Service-oriented. 'The good steward.' The native finds emotional security in routine, purity, "
+            "and helpfulness. Industrious nature but potential for 'danger' if activated."
+        ),
+        
+        "MOON_LIBRA_DAY": (
+            "Socially ambitious. The native needs partnership to feel secure ('I am who I am with'). "
+            "The mother may have been a socialite."
+        ),
+        "MOON_LIBRA_NIGHT": (
+            "Harmonious and popular. The 'peacemaker.' The native has an innate sense of grace and "
+            "diplomacy that attracts support."
+        ),
+        
+        "MOON_SAGITTARIUS_DAY": (
+            "Athletic, loves travel. Emotionally attached to freedom. The native may be physically "
+            "restless or involved in sports."
+        ),
+        "MOON_SAGITTARIUS_NIGHT": (
+            "Prophetic dreams. Lucky in foreign lands. The native finds emotional sustenance in philosophy, "
+            "religion, or the exotic."
+        ),
+        
+        "MOON_AQUARIUS_DAY": (
+            "Detached, humane but distant. The body may be prone to circulation issues. The native processes "
+            "emotions through a filter of 'logic'. Valens notes potential for 'exile' or 'injury'."
+        ),
+        "MOON_AQUARIUS_NIGHT": (
+            "Deeply connected to groups/friends (11th sign archetype). The native finds security in the "
+            "collective or in humanitarian causes. Valens warns of being 'haters of family' if afflicted."
+        ),
+        
+        "MOON_LEO_DAY": (
+            "Proud, demands attention. 'The Queen.' The native has a strong constitution but a fragile ego."
+        ),
+        "MOON_LEO_NIGHT": (
+            "Loyal, protective of children. The native is the 'heart' of the family, generous and warm, "
+            "though potentially dramatic."
+        ),
+        
+        # Remaining entries - Mars, Sun, Moon
+        "MARS_AQUARIUS_DAY": (
+            "Mars in Aquarius by day is in the domicile of Saturn. The heat of Mars is tempered by "
+            "the cold, fixed air of Aquarius. This produces the revolutionary strategist—one who "
+            "fights for ideological causes rather than personal gain. The native is innovative in "
+            "warfare or competition, using unconventional tactics. Valens notes potential for "
+            "conflict with authority or state power."
+        ),
+        "MARS_AQUARIUS_NIGHT": (
+            "Mars in Aquarius by night is out of sect, and the martial energy becomes erratic. The "
+            "native may be prone to sudden outbursts, rebellious actions, or alienation from social "
+            "groups. There is a danger of accidents involving technology. The idealism can become "
+            "fanaticism. Circulation issues or leg injuries are possible."
+        ),
+        
+        "SUN_AQUARIUS_DAY": (
+            "The Sun in Aquarius by day is in its Detriment. The solar ego dissolves into collective "
+            "concerns. The native struggles for personal recognition, often preferring to work behind "
+            "the scenes or through groups. Yet in a day chart, the Sun still commands respect—the "
+            "native becomes a 'leader of movements' rather than a solitary king."
+        ),
+        "SUN_AQUARIUS_NIGHT": (
+            "The Sun in Aquarius by night is weakened further. The vitality may be inconsistent, and "
+            "the native feels alienated from mainstream society. They are the eccentric, the exile, "
+            "or the radical. Traditional sources note difficulty with the father or authority figures. "
+            "Success, if it comes, is unconventional and often unrecognized by the establishment."
+        ),
+        
+        "MOON_TAURUS_DAY": (
+            "The Moon in Taurus is in her Exaltation. By day, the emotional nature is stable, grounded, "
+            "and materially focused. The native possesses a calm temperament and strong attachment to "
+            "comfort, security, and sensory pleasure. The mother may have been nurturing but traditional. "
+            "Health is generally robust. Valens notes excellent fertility and material prosperity."
+        ),
+        "MOON_TAURUS_NIGHT": (
+            "The Moon in Taurus by night is in sect and exalted—one of the strongest lunar placements. "
+            "The emotional body is deeply content, resilient, and oriented toward building lasting "
+            "security. The native has an excellent relationship with food, nature, and physical pleasures. "
+            "Financial stability comes through patience. The mother is a stabilizing influence."
+        ),
+    }
+}
+
+
+def main():
+    print("=" * 60)
+    print("DELINEATION QUALITY ENHANCEMENT")
+    print("=" * 60)
+    
+    # Load existing data
+    signs_path = OUTPUT_DIR / "planets_in_signs.json"
+    with open(signs_path, 'r', encoding='utf-8') as f:
+        signs_data = json.load(f)
+    
+    print(f"\nLoaded {len(signs_data)} existing entries")
+    
+    # Count placeholders
+    placeholder_count = 0
+    for key, value in signs_data.items():
+        if "NOT FOUND" in value or "Sources silent" in value or len(value) < 50:
+            placeholder_count += 1
+    
+    print(f"Found {placeholder_count} entries with placeholder text")
+    
+    # Apply enhancements
+    updated_count = 0
+    for key, new_value in ENHANCED_DELINEATIONS["planets_in_signs"].items():
+        if key in signs_data:
+            old_value = signs_data[key]
+            # Replace if current is placeholder or significantly shorter
+            if "NOT FOUND" in old_value or "Sources silent" in old_value or len(old_value) < len(new_value):
+                signs_data[key] = new_value
+                updated_count += 1
+                print(f"  Updated: {key}")
+    
+    print(f"\nUpdated {updated_count} entries with high-quality delineations")
+    
+    # Save
+    with open(signs_path, 'w', encoding='utf-8') as f:
+        json.dump(signs_data, f, indent=4, ensure_ascii=False)
+    
+    print(f"\nSaved to {signs_path.name}")
+    
+    # Verify Moon Pisces
+    print("\n--- Verification ---")
+    print(f"MOON_PISCES_DAY: {signs_data.get('MOON_PISCES_DAY', 'MISSING')[:100]}...")
+    print(f"MOON_PISCES_NIGHT: {signs_data.get('MOON_PISCES_NIGHT', 'MISSING')[:100]}...")
+    
+    print("\n" + "=" * 60)
+    print("ENHANCEMENT COMPLETE")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    main()

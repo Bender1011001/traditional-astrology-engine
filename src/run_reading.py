@@ -1,6 +1,7 @@
 import sys
 import os
 from datetime import datetime
+import swisseph as swe
 
 # Adjust path to include "src"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -20,11 +21,20 @@ def map_to_planet_name(k):
     except:
         return None
 
-def generate_report_local(chart: Chart, age: int):
+def generate_report_local(chart: Chart, birth_date: datetime, analysis_date: datetime, analysis_jd: float, age: int):
     print("=== CODEX CAELESTIS: UNIVERSAL CAUSATION AUDIT ===\n")
     print("FINAL VERIFIED REPORT\n")
     
-    audit = perform_forensic_audit(chart, age=age, birth_date=datetime(1996, 8, 13, 7, 18))
+    audit = perform_forensic_audit(
+        chart,
+        chart.jd or 0.0,
+        age=age,
+        month=analysis_date.month,
+        day=analysis_date.day,
+        birth_date=birth_date,
+        analysis_date=analysis_date,
+        analysis_jd=analysis_jd
+    )
     summary = audit["summary"]
     
     print(f"SECT: {summary['sect']} | CONSTRUCTIVE: {', '.join(summary['constructive_team'])}")
@@ -47,8 +57,8 @@ def generate_report_local(chart: Chart, age: int):
     # Soul Guardian
     if "soul_guardian" in audit and audit["soul_guardian"]:
         sg = audit["soul_guardian"]
-        print(f"  SOUL GUARDIAN: {sg.get('guardian_name')} ({sg.get('guardian_planet')})")
-        print(f"  Role: {sg.get('hierarchy_role')}")
+        print(f"  SOUL GUARDIAN: {sg.get('almuten')} | Term Ruler: {sg.get('term_ruler')}")
+        print(f"  Role: {sg.get('job_description')}")
         
     # Planetary Hours
     if "planetary_hours" in summary and summary["planetary_hours"]:
@@ -152,11 +162,8 @@ def generate_report_local(chart: Chart, age: int):
     # 4. Primary Directions
     if "primary_directions" in audit and audit["primary_directions"]:
         print("SECTION 4: PRIMARY DIRECTIONS (Directions to Angles)")
-        # Show specific hits near current age (32)?
-        # Or just list the next few?
-        # User asked for a reading.
-        # Let's show directions active around Age 29-30 (Saturn Return) or current age 29 (1996 -> 2025 is 29).
-        year_now = 29.5
+        # Show hits near current age.
+        year_now = age
         hits = [d for d in audit["primary_directions"] if year_now - 2 < d['years'] < year_now + 5]
         if hits:
             for h in hits:
@@ -231,14 +238,29 @@ def run_reading(date_str, time_str, city, state):
         jd=data["meta"].get("julian_day")
     )
     
-    # Calculate Age
-    birth_year = int(date_str.split("-")[0])
-    current_year = datetime.now().year
-    age = current_year - birth_year
+    # Birth datetime (local, naive)
+    try:
+        birth_dt = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
+    except ValueError:
+        birth_dt = datetime.now()
+
+    # Analysis datetime (now)
+    analysis_dt = datetime.now()
+
+    # Calculate completed years
+    age = analysis_dt.year - birth_dt.year - ((analysis_dt.month, analysis_dt.day) < (birth_dt.month, birth_dt.day))
+
+    # Analysis JD for transit-based sections
+    analysis_jd = swe.julday(
+        analysis_dt.year,
+        analysis_dt.month,
+        analysis_dt.day,
+        analysis_dt.hour + analysis_dt.minute / 60.0 + analysis_dt.second / 3600.0
+    )
     
     # Generate Report
     try:
-        generate_report_local(chart, age)
+        generate_report_local(chart, birth_dt, analysis_dt, analysis_jd, age)
     except Exception:
         import traceback
         traceback.print_exc()

@@ -1,5 +1,6 @@
 
 from typing import Optional, Dict, List
+import re
 from datetime import datetime
 from .models import Planet, Chart, Sect, PlanetName, Sign
 from .lots import calculate_all_lots
@@ -13,7 +14,7 @@ from .prediction import (
     calculate_zr_periods,
     calculate_zr_lifetime_map
 )
-from .stars import check_fixed_stars
+from .stars import check_fixed_stars, get_fixed_star_meta
 from .nodes import analyze_nodes
 from .dignities import DignityCalculator
 from .calculations import calculate_lunar_phase, calculate_prenatal_syzygy
@@ -34,6 +35,71 @@ PLANET_ESSENCES = {
     PlanetName.JUPITER: "Expansion and Wisdom",
     PlanetName.SATURN: "Structural Integrity and Responsibility"
 }
+
+RULE_SOURCE_MAP = {
+    "Bonatti Consideration 5": ["Bonatti, Liber Astronomiae, Consideration 5 (Void of Course)"],
+    "Bonatti Consideration 30": ["Bonatti, Liber Astronomiae, Consideration 30 (Planet at 29°)"],
+    "Bonatti Consideration 141": ["Bonatti, Liber Astronomiae, Consideration 141 (Significator in Ascendant)"],
+    "Via Combusta": ["Traditional doctrine (Lilly, Christian Astrology, p. 115)"],
+    "Combustion": ["Traditional doctrine (Ptolemy, Tetrabiblos I.24; Lilly, CA, p. 113)"],
+    "Besiegement": ["Traditional doctrine (Lilly, Christian Astrology, p. 114)"],
+    "Antiscia": ["Firmicus Maternus, Mathesis II.30", "Lilly, CA, p. 90"],
+    "Melothesia": ["Manilius, Astronomica IV", "Culpeper, English Physician"],
+    "Sect/Hayz/Halb": ["Ptolemy, Tetrabiblos III.3", "Dorotheus, Carmen Astrologicum I.1"],
+    "Universal Overdrive": ["Ptolemy, Tetrabiblos II.1"],
+    "Universal Causation": ["Ptolemy, Tetrabiblos II.8"],
+    "Mundane Rank 4 > Natal Particulars": ["Traditional mundane hierarchy (Ptolemy, Tetrabiblos II.3)"],
+    "Aries Ingress": ["Traditional mundane ingress doctrine (Bonatti, Liber Astronomiae, VIII)"]
+}
+
+def _extract_sources(text: Optional[str]) -> List[str]:
+    if not text:
+        return []
+    matches = re.findall(r"\(([^)]+)\)", text)
+    return [m.strip() for m in matches if m.strip()]
+
+def _resolve_sources(cause: Optional[str], rule_text: Optional[str]) -> List[str]:
+    sources = []
+    sources.extend(_extract_sources(rule_text))
+    if not sources and rule_text in RULE_SOURCE_MAP:
+        sources.extend(RULE_SOURCE_MAP[rule_text])
+    if cause:
+        for key, refs in RULE_SOURCE_MAP.items():
+            if key in cause:
+                sources.extend(refs)
+                break
+    deduped = []
+    for src in sources:
+        if src not in deduped:
+            deduped.append(src)
+    return deduped
+
+def _estimate_confidence(sources: List[str], conflicts: List[str], base: int = 70) -> int:
+    score = base
+    # Increase confidence with more sources
+    if sources:
+        score += min(15, 5 * len(sources))
+    else:
+        score -= 15 # No direct source attribution
+
+    # Deduct for internal conflicts in the tradition
+    if conflicts:
+        score -= min(30, 10 * len(conflicts))
+    
+    # Check for widespread consensus (heuristic)
+    consensus_sources = ["Ptolemy", "Lilly", "Valens", "Bonatti", "Dorotheus"]
+    source_str = " ".join(sources)
+    consensus_hits = sum(1 for cs in consensus_sources if cs in source_str)
+    if consensus_hits >= 3:
+        score += 10
+    
+    if score < 15: score = 15
+    if score > 98: score = 98
+    return score
+
+def _slugify(value: str) -> str:
+    cleaned = re.sub(r"[^a-z0-9]+", "-", (value or "").lower()).strip("-")
+    return cleaned or "rule"
 
 TERM_METHODS = {
     PlanetName.SUN: "Radiance and Authority",
@@ -210,6 +276,8 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
         "sect_status": "Neutral",
         "dignity_score": 0,
         "dignity_details": [],
+        "dignity_conflicts": [],
+        "dignity_variants": {},
         "power_label": "Average",
         "solar_status": "FREE",
         "impacts": [],
@@ -265,13 +333,42 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
     dignity = DignityCalculator.calculate_planet_dignity(planet.name, planet.longitude, chart_sect)
     result["dignity_score"] = dignity["total_score"]
     result["dignity_details"] = dignity["details"]
+    result["dignity_conflicts"] = dignity.get("conflicts", [])
+    result["dignity_variants"] = dignity.get("variants", {})
     
-    # Labeling logic
-    score = dignity["total_score"]
-    if score >= 5: result["power_label"] = "Sovereign"
-    elif score >= 2: result["power_label"] = "High Authority"
-    elif score <= -4: result["power_label"] = "Vagabond/Corrupt"
-    else: result["power_label"] = "Commoner/Average"
+    # 11. Accidental Dignity (Lilly Style)
+    acc_dignity = DignityCalculator.calculate_accidental_dignity(planet, chart)
+    result["accidental_score"] = acc_dignity["total_score"]
+    result["accidental_details"] = acc_dignity["details"]
+    
+    # 12. Performance Index (Rule Weighting)
+    # Weighting: Essential (0.6) + Accidental (0.4)
+    essential_norm = (dignity["total_score"] + 5) / 15.0 
+    accidental_norm = (acc_dignity["total_score"] + 10) / 25.0
+    performance_index = (essential_norm * 0.6) + (accidental_norm * 0.4)
+    result["performance_index"] = round(performance_index, 2)
+    
+    # Refined Power Labeling
+    if performance_index >= 0.8: result["power_label"] = "Imperial (Unstoppable)"
+    elif performance_index >= 0.65: result["power_label"] = "Sovereign (Resourceful)"
+    elif performance_index >= 0.5: result["power_label"] = "Stable (Functional)"
+    elif performance_index >= 0.35: result["power_label"] = "Debilitated (Struggling)"
+    elif performance_index >= 0.2: result["power_label"] = "Vagabond (Corrupt/Empty)"
+    else: result["power_label"] = "Cursed (Actively Harmful)"
+
+    # Conflict Resolution Note
+    if dignity["total_score"] > 3 and acc_dignity["total_score"] < -3:
+        result["impacts"].append({
+            "cause": "Clashing Dignity",
+            "effect": "A 'Prisoner of Fortune': The planet has high theoretical power but lacks the means to express it due to accidental affliction.",
+            "rule": "Traditional hierarchy of Essential vs Accidental performance."
+        })
+    elif dignity["total_score"] < -3 and acc_dignity["total_score"] > 5:
+        result["impacts"].append({
+            "cause": "Clashing Dignity",
+            "effect": "An 'Elevated Scoundrel': The planet is inherently weak/malefic but occupies a position of accidental power. It may act boldly but with poor judgment.",
+            "rule": "Traditional hierarchy of Essential vs Accidental performance."
+        })
         
     # 4. Solar Conditions
     sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
@@ -320,9 +417,7 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
             
     # Consideration 141: Significator in the Ascendant
     # (Checking if planet is in 1st House)
-    asc_sign_idx = int(chart.ascendant / 30) % 12
-    p_sign_idx = int(planet.longitude / 30) % 12
-    house_num = ((p_sign_idx - asc_sign_idx) % 12) + 1
+    house_num = DignityCalculator.get_house_number(planet.longitude, chart.ascendant, getattr(chart, "houses", None))
     result["house_number"] = house_num
     
     if house_num == 1:
@@ -409,9 +504,9 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             
     # Planetary Hours
     hours_data = {}
-    # Use London Approx (51.5) if no geo provided, consistent with research examples
-    demo_lat = 51.5074
-    demo_lon = -0.1278
+    # Use chart geo if available; otherwise fallback to London (research default).
+    demo_lat = chart.geo_lat if chart.geo_lat is not None else 51.5074
+    demo_lon = chart.geo_lon if chart.geo_lon is not None else -0.1278
     
     if birth_date:
         hours_data = PlanetaryHourEngine.calculate_hours(birth_date, demo_lat, demo_lon)
@@ -474,6 +569,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         "planets": [],
         "lots": calculate_all_lots(chart, sect),
         "stars": check_fixed_stars(chart),
+        "fixed_star_meta": get_fixed_star_meta(),
         "nodes": analyze_nodes(chart)
     }
     
@@ -489,6 +585,123 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     for planet in chart.planets:
         planet_data = analyze_planet_forensic(planet, chart, jd)
         report["planets"].append(planet_data)
+
+    rule_ledger = []
+    rule_counts = {}
+
+    def _unique_rule_id(base: str) -> str:
+        count = rule_counts.get(base, 0) + 1
+        rule_counts[base] = count
+        return f"{base}-{count}" if count > 1 else base
+
+    for planet_data in report["planets"]:
+        planet_label = planet_data.get("planet", "Planet")
+        base_trace = [
+            f"Planet: {planet_label}",
+            f"Sign: {planet_data.get('sign')}",
+            f"Longitude: {planet_data.get('longitude'):.2f}°" if isinstance(planet_data.get("longitude"), (int, float)) else "Longitude: —",
+            f"House: {planet_data.get('house_number')}"
+        ]
+
+        dignity_details = planet_data.get("dignity_details", [])
+        if dignity_details:
+            conflicts = planet_data.get("dignity_conflicts", [])
+            sources = ["Dorotheus, Carmen Astrologicum I", "Ptolemy, Tetrabiblos I"]
+            rule_id = _unique_rule_id(f"{planet_label.lower()}-{_slugify('dignity')}")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "Essential Dignity",
+                "condition": f"{planet_label} in {planet_data.get('sign')}",
+                "judgment": f"Dignity score {planet_data.get('dignity_score')}: " + "; ".join(dignity_details),
+                "sources": sources,
+                "confidence": _estimate_confidence(sources, conflicts, base=72),
+                "conflicts": conflicts,
+                "trace": base_trace + [f"Details: {detail}" for detail in dignity_details]
+            })
+
+            # Educational: Flag source divergence specifically
+            if conflicts:
+                rule_ledger.append({
+                    "id": _unique_rule_id(f"{planet_label.lower()}-divergence"),
+                    "category": "Traditional Divergence",
+                    "condition": f"Source Clashes for {planet_label}",
+                    "judgment": "Authorities disagree: " + " | ".join(conflicts),
+                    "sources": ["Ptolemy", "Dorotheus", "Egyptian Codex"],
+                    "confidence": 50, # Divergence reduces objective certainty
+                    "conflicts": conflicts,
+                    "trace": base_trace + ["Reason: Contradiction in primary source traditions"]
+                })
+
+        for impact in planet_data.get("impacts", []):
+            cause = impact.get("cause") or "Condition"
+            effect = impact.get("effect") or ""
+            sources = _resolve_sources(cause, impact.get("rule"))
+            rule_id = _unique_rule_id(f"{planet_label.lower()}-{_slugify(cause)}")
+            trace = base_trace[:]
+            if impact.get("rule"):
+                trace.append(f"Rule: {impact.get('rule')}")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "Condition",
+                "condition": f"{planet_label}: {cause}",
+                "judgment": effect,
+                "sources": sources,
+                "confidence": _estimate_confidence(sources, [], base=70),
+                "conflicts": [],
+                "trace": trace
+            })
+
+        planet_text = planet_data.get("delineation_text") or ""
+        if planet_text and "Delineation not found" not in planet_text:
+            sources = _extract_sources(planet_text)
+            rule_id = _unique_rule_id(f"{planet_label.lower()}-{_slugify('planet-delineation')}")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "Planet Delineation",
+                "condition": f"{planet_label} in {planet_data.get('sign')}",
+                "judgment": planet_text,
+                "sources": sources,
+                "confidence": _estimate_confidence(sources, [], base=68),
+                "conflicts": [],
+                "trace": base_trace + ["Source: planet delineation library"]
+            })
+
+        house_text = planet_data.get("house_delineation_text") or ""
+        if house_text and "Delineation not found" not in house_text:
+            sources = _extract_sources(house_text)
+            rule_id = _unique_rule_id(f"{planet_label.lower()}-{_slugify('house-delineation')}")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "House Delineation",
+                "condition": f"{planet_label} in House {planet_data.get('house_number')}",
+                "judgment": house_text,
+                "sources": sources,
+                "confidence": _estimate_confidence(sources, [], base=68),
+                "conflicts": [],
+                "trace": base_trace + ["Source: house delineation library"]
+            })
+
+    lunar_mansion = report.get("summary", {}).get("lunar_mansion")
+    if lunar_mansion:
+        mansion_name = lunar_mansion.get("name")
+        mansion_id = lunar_mansion.get("mansion_id")
+        sources = lunar_mansion.get("source_refs", [])
+        rule_id = _unique_rule_id(f"lunar-mansion-{mansion_id}")
+        rule_ledger.append({
+            "id": rule_id,
+            "category": "Lunar Mansion",
+            "condition": f"Moon in Mansion {mansion_id} ({mansion_name})",
+            "judgment": "Applied lunar mansion intents for operational guidance.",
+            "sources": sources,
+            "confidence": _estimate_confidence(sources, [], base=75),
+            "conflicts": [],
+            "trace": [
+                f"Mansion: {mansion_name}",
+                f"Range: {lunar_mansion.get('start_lon_deg')}°–{lunar_mansion.get('end_lon_deg')}°"
+            ]
+        })
+
+    report["rule_ledger"] = rule_ledger
 
     # 7. Horary Physics (Synthesis of Significators)
     # We analyze physics between the Lord of the 1st and the Lord of the Year (if age provided)
@@ -510,11 +723,14 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         asc_sign_idx = int(chart.ascendant / 30) % 12
         asc_sign = list(Sign)[asc_sign_idx]
         
-        annual_sign = calculate_profection_sign(asc_sign, age)
+        signs = list(Sign)
+        annual_index = (asc_sign_idx + age) % 12
+        annual_sign = signs[annual_index]
         loy_name = get_lord_of_year(annual_sign)
         
         # Monthly
-        monthly_sign_cont = calculate_monthly_profection(annual_sign, month, method='Continuous')
+        monthly_cont_index = (annual_index + (month - 1)) % 12
+        monthly_sign_cont = signs[monthly_cont_index]
         total_months = None
         if birth_date and analysis_date:
             total_months = (analysis_date.year - birth_date.year) * 12 + (analysis_date.month - birth_date.month)
@@ -524,24 +740,37 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 total_months = 0
         elif age is not None:
             total_months = (age * 12) + (month - 1)
-        monthly_sign_salt = calculate_monthly_profection(
-            annual_sign,
-            month,
-            method='Saltatory',
-            natal_start_sign=asc_sign,
-            age=age,
-            total_months=total_months
-        )
+        monthly_salt_index = (asc_sign_idx + (total_months or 0)) % 12
+        monthly_sign_salt = signs[monthly_salt_index]
         
         # Daily
-        daily_sign = calculate_daily_profection(monthly_sign_cont, day)
+        daily_rate = 7 / 3
+        daily_steps = int((day - 1) / daily_rate)
+        daily_index = (monthly_cont_index + daily_steps) % 12
+        daily_sign = signs[daily_index]
         
         # Epitasis (needs transiting LoY)
         # Find the LoY in the current chart (assuming 'chart' contains transits)
         loy_planet = next((p for p in chart.planets if p.name == loy_name), None)
         epitasis_days = []
-        if loy_planet:
+        loy_trans_sign = None
+        loy_trans_source = None
+        if analysis_jd:
+            pid = getattr(swe, loy_name.value.upper(), None)
+            if pid is not None:
+                try:
+                    loy_trans_res = swe.calc_ut(analysis_jd, pid, swe.FLG_SWIEPH)[0]
+                    loy_trans_lon = loy_trans_res[0]
+                    loy_trans_sign = list(Sign)[int(loy_trans_lon / 30) % 12]
+                    loy_trans_source = "transit"
+                except swe.Error:
+                    loy_trans_sign = None
+        if loy_trans_sign:
+            epitasis_days = calculate_epitasis_days(monthly_sign_cont, loy_trans_sign)
+        elif loy_planet:
             epitasis_days = calculate_epitasis_days(monthly_sign_cont, loy_planet.sign)
+            loy_trans_sign = loy_planet.sign
+            loy_trans_source = "natal"
             
         report["prediction"] = {
             "age": age,
@@ -558,7 +787,53 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             "daily_profection": {
                 "sign": daily_sign.value
             },
-            "epitasis_days": epitasis_days
+            "epitasis_days": epitasis_days,
+            "calculation_steps": {
+                "annual_profection": {
+                    "formula": "(asc_index + age) mod 12",
+                    "asc_sign": asc_sign.value,
+                    "asc_index": asc_sign_idx,
+                    "age": age,
+                    "target_index": annual_index,
+                    "result_sign": annual_sign.value
+                },
+                "lord_of_year": {
+                    "formula": "domicile(annual_sign)",
+                    "annual_sign": annual_sign.value,
+                    "lord_of_year": loy_name.value
+                },
+                "monthly_profection": {
+                    "continuous": {
+                        "formula": "(annual_index + (month - 1)) mod 12",
+                        "annual_index": annual_index,
+                        "month": month,
+                        "target_index": monthly_cont_index,
+                        "result_sign": monthly_sign_cont.value
+                    },
+                    "saltatory": {
+                        "formula": "(asc_index + total_months) mod 12",
+                        "asc_index": asc_sign_idx,
+                        "total_months": total_months or 0,
+                        "target_index": monthly_salt_index,
+                        "result_sign": monthly_sign_salt.value
+                    }
+                },
+                "daily_profection": {
+                    "formula": "steps = floor((day - 1) / (7/3)); sign = (monthly_index + steps) mod 12",
+                    "day": day,
+                    "rate_days_per_sign": daily_rate,
+                    "steps": daily_steps,
+                    "monthly_index": monthly_cont_index,
+                    "target_index": daily_index,
+                    "result_sign": daily_sign.value
+                },
+                "epitasis": {
+                    "formula": "daily_sign == transiting_lord_of_year_sign",
+                    "transiting_loy_sign": loy_trans_sign.value if loy_trans_sign else None,
+                    "source": loy_trans_source,
+                    "matching_days": epitasis_days
+                }
+            }
         }
         
         # 8. Zodiacal Releasing (Fate Timeline)
@@ -593,14 +868,22 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
     asc_sign_idx = int(natal_chart.ascendant / 30) % 12
     asc_sign = list(Sign)[asc_sign_idx]
     
-    # Rulers
-    ann_sign = calculate_profection_sign(asc_sign, age)
+    sect = Sect.DAY if natal_chart.sun_altitude > 0 else Sect.NIGHT
+
+    # Rulers (with explicit indices for trace)
+    signs = list(Sign)
+    annual_index = (asc_sign_idx + age) % 12
+    ann_sign = signs[annual_index]
     loy_name = get_lord_of_year(ann_sign)
     
-    mon_sign = calculate_monthly_profection(ann_sign, month)
+    monthly_index = (annual_index + (month - 1)) % 12
+    mon_sign = signs[monthly_index]
     mon_lord = get_lord_of_year(mon_sign)
     
-    day_sign = calculate_daily_profection(mon_sign, float(day))
+    daily_rate = 7 / 3
+    daily_steps = int((day - 1) / daily_rate)
+    daily_index = (monthly_index + daily_steps) % 12
+    day_sign = signs[daily_index]
     day_lord_name = get_lord_of_year(day_sign)
     
     # Find conditions of these Lords in the NATAL chart (the "Promise")
@@ -641,12 +924,49 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
         "mood": "Neutral",
         "summary": "",
         "details": [],
-        "secret_key": is_epitasis
+        "secret_key": is_epitasis,
+        "calculation_steps": {
+            "annual_profection": {
+                "formula": "(asc_index + age) mod 12",
+                "asc_sign": asc_sign.value,
+                "asc_index": asc_sign_idx,
+                "age": age,
+                "target_index": annual_index,
+                "result_sign": ann_sign.value
+            },
+            "lord_of_year": {
+                "formula": "domicile(annual_sign)",
+                "annual_sign": ann_sign.value,
+                "lord_of_year": loy_name.value
+            },
+            "monthly_profection": {
+                "formula": "(annual_index + (month - 1)) mod 12",
+                "annual_index": annual_index,
+                "month": month,
+                "target_index": monthly_index,
+                "result_sign": mon_sign.value
+            },
+            "daily_profection": {
+                "formula": "steps = floor((day - 1) / (7/3)); sign = (monthly_index + steps) mod 12",
+                "day": day,
+                "rate_days_per_sign": daily_rate,
+                "steps": daily_steps,
+                "monthly_index": monthly_index,
+                "target_index": daily_index,
+                "result_sign": day_sign.value
+            },
+            "epitasis": {
+                "formula": "daily_sign == transiting_lord_of_year_sign",
+                "transiting_loy_sign": loy_trans_sign.value,
+                "transiting_loy_longitude": loy_trans_lon,
+                "matching": is_epitasis
+            }
+        }
     }
     
     # 1. Determine Mood based on Day Lord's Natal Strength
     if natal_day_lord:
-        dignity = DignityCalculator.calculate_planet_dignity(natal_day_lord.name, natal_day_lord.longitude, report["summary"]["sect"])
+        dignity = DignityCalculator.calculate_planet_dignity(natal_day_lord.name, natal_day_lord.longitude, sect)
         score = dignity["total_score"]
         if score >= 4: forecast["mood"] = "EXALTED"
         elif score <= -3: forecast["mood"] = "LABORIOUS"
@@ -658,9 +978,14 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
     summary_text += f"{day_lord_name.value}, who holds the keys to this domain in your nativity, is currently {forecast['mood'].lower()}."
     
     if is_epitasis:
-        summary_text += " WARNING: The Secret Key (Epitasis) is active. The Lord of the Year has entered the Daily Domain. Events today carry the weight of your entire year's promise."
+        summary_text += " WARNING: The Secret Key (Epitasis) active. The Lord of the Year has entered the Daily Domain. Events today carry the weight of your entire year's promise."
     
     forecast["summary"] = summary_text
+    forecast["tradition_note"] = (
+        "This oracle is derived using pre-1700s symbolic 'Profection' techniques and physical 'Transit' analysis. "
+        "It provides a lens for psychological and situational reflection based on historical tradition, "
+        "not a literal or deterministic prediction of future events."
+    )
     
     # 3. Moon's Message
     moon_msg = f"The Lunar Mirror is in {trans_moon_sign.value}. "

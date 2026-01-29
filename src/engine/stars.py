@@ -4,6 +4,10 @@ import math
 import swisseph as swe
 from .models import Planet, Chart, PlanetName
 
+FIXED_STAR_EPOCH = 2025
+FIXED_STAR_CATALOG = "Swiss Ephemeris fixed star catalog (swe.fixstar) when available; fallback to traditional longitudes."
+FIXED_STAR_PRECESSION = "Swiss Ephemeris JD positions when available; fallback linear precession of 1° per 72 years from 2025 epoch."
+
 @dataclass
 class FixedStar:
     name: str
@@ -74,6 +78,13 @@ STARS = [
     ),
 ]
 
+def get_fixed_star_meta() -> Dict[str, str]:
+    return {
+        "catalog": FIXED_STAR_CATALOG,
+        "epoch": str(FIXED_STAR_EPOCH),
+        "precession": FIXED_STAR_PRECESSION
+    }
+
 @dataclass
 class StarContact:
     star_name: str
@@ -89,6 +100,20 @@ def get_shortest_dist(a: float, b: float) -> float:
 
 def _normalize_deg(deg: float) -> float:
     return deg % 360.0
+
+def _get_obliquity_deg(jd: Optional[float]) -> float:
+    if jd is None:
+        return 23.4392911
+    try:
+        res = swe.calc_ut(jd, swe.ECL_NUT)
+        coords = res[0] if isinstance(res[0], (list, tuple)) else res
+        if isinstance(coords, (list, tuple)) and len(coords) > 1:
+            return coords[1]
+        if isinstance(coords, (list, tuple)) and coords:
+            return coords[0]
+    except Exception:
+        pass
+    return 23.4392911
 
 def _equatorial_to_ecliptic(ra: float, dec: float, epsilon: float) -> Tuple[float, float]:
     ra_r = math.radians(ra)
@@ -126,7 +151,7 @@ def _precess_longitude(lon_2025: float, jd: Optional[float]) -> float:
     year = _year_from_jd(jd)
     if year is None:
         return lon_2025
-    delta_years = year - 2025
+    delta_years = year - FIXED_STAR_EPOCH
     return _normalize_deg(lon_2025 + (delta_years / 72.0))
 
 def _get_star_equatorial(star: FixedStar, jd: Optional[float]) -> Optional[Tuple[float, float]]:
@@ -144,10 +169,13 @@ def _get_star_equatorial(star: FixedStar, jd: Optional[float]) -> Optional[Tuple
 def _get_star_longitude(star: FixedStar, jd: Optional[float]) -> float:
     ra_dec = _get_star_equatorial(star, jd)
     if ra_dec:
-        epsilon = 23.4392911
+        epsilon = _get_obliquity_deg(jd)
         lon, _ = _equatorial_to_ecliptic(ra_dec[0], ra_dec[1], epsilon)
         return lon
     return _precess_longitude(star.longitude, jd)
+
+def get_star_longitude(star: FixedStar, jd: Optional[float]) -> float:
+    return _get_star_longitude(star, jd)
 
 def _angles_for_body(ra: float, dec: float, ramc: float, lat: float, orb: float) -> List[str]:
     hits = []
@@ -181,7 +209,7 @@ def calculate_parans(chart: Chart) -> List[StarContact]:
         return parans
 
     orb = 2.0
-    epsilon = 23.4392911
+    epsilon = _get_obliquity_deg(chart.jd)
 
     # RAMC from MC (MC is ecliptic longitude)
     ramc, _ = _ecliptic_to_equatorial(chart.mc, 0.0, epsilon)
