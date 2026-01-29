@@ -104,7 +104,7 @@ def get_chat_response(query: str, context: str) -> str:
     except Exception as e:
         return f"Oracle Communication Error: {str(e)}"
 
-def explain_reading_in_plain_terms(reading_context: str) -> str:
+def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> str:
     context = (reading_context or "").strip()
     if not context:
         return ""
@@ -127,13 +127,20 @@ def explain_reading_in_plain_terms(reading_context: str) -> str:
         "IMPORTANT: Always maintain a probabilistic and symbolic tone. Avoid saying 'You will X' or 'This means Y will happen'. Instead, use 'This suggests a theme of X' or 'The traditional archetypes point toward Y'."
     )
 
-    questions = [
-        f"Explain this in regular terms:\n\n{context}",
-        "what else can you tell me?",
-        "what else",
-        "anything else?",
-        "is that all?"
-    ]
+    if tier == 'free':
+        # Free Tier: Single iteration, focused on Temperament/Character only.
+        questions = [
+            f"Explain the user's Natural Temperament and Core Character based on this data. Keep it concise (under 300 words). Do NOT analyze life paths, forecasting, or hidden architecture yet.\n\n{context}"
+        ]
+    else:
+        # Paid Tier: Full analysis loop (5 iterations)
+        questions = [
+            f"Explain this in regular terms (Full Comprehensive Report):\n\n{context}",
+            "what else can you tell me (Life Path & Social)?",
+            "what else (Hidden Architecture/Financial)?",
+            "anything else (Forecasting/Timeline)?",
+            "is that all (Final Summary)?"
+        ]
 
     messages = [{"role": "system", "content": system_prompt}]
     responses = []
@@ -142,7 +149,10 @@ def explain_reading_in_plain_terms(reading_context: str) -> str:
         messages.append({"role": "user", "content": question})
         response = _openrouter_request(messages, temperature, max_tokens)
         if not response or response.startswith("Oracle Communication Error") or response.startswith("Error:"):
-            return ""
+            # If error on first attempt, return empty. If later, return what we have.
+            if len(responses) == 0:
+                return ""
+            break
         responses.append(response)
         messages.append({"role": "assistant", "content": response})
 

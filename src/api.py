@@ -417,7 +417,7 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
             # If free, append a system note to the context for the LLM?
             # Or truncate the generated reading.
             
-            plain_reading = explain_reading_in_plain_terms(plain_context)
+            plain_reading = explain_reading_in_plain_terms(plain_context, tier=tier)
             if plain_reading:
                 result["plain_reading"] = plain_reading
         except Exception as pe:
