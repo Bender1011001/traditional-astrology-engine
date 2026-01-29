@@ -471,7 +471,31 @@ if (basicForm) {
 // Auto-Regenerate Check
 async function checkRegenerate() {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('action') === 'regenerate') {
+    const urlToken = params.get('token') || params.get('access_token');
+
+    // If we have a token in the URL, this is a magic link click
+    if (urlToken) {
+        // We might not have the request data if they are on a different device
+        // But for now, let's assume they are on the same machine OR we just store the token
+        // and hope they re-enter data? 
+        // Better: If we have the token, we can just start the session with it for future requests?
+        // But the chart calculation needs birth data.
+
+        // Strategy: 
+        // 1. If we have local data, use it + this token.
+        // 2. If no local data, we just store the token? No, that's useless without data.
+        // Ideally, the link would encode the birth data too? Too long.
+        // Or the backend stores the chart data associated with the token?
+        // YES. The token has a chart_hash. The backend has a cache of the chart data? 
+        // The plan says "Cache for 30 days". 
+        // So we could potentially fetch the inputs from the backend if we built that endpoint?
+        // For MVP: We will assume same-device usage OR force them to re-enter but we auto-apply the token if the hash matches.
+        // Actually, let's just save the token to a global "paid_tokens" list?
+
+        // Simplest MVP: Update the last request with this token if it exists.
+    }
+
+    if (params.get('action') === 'regenerate' || urlToken) {
         // Load request
         try {
             const saved = localStorage.getItem('cael_last_request');
@@ -479,31 +503,27 @@ async function checkRegenerate() {
         } catch (e) { }
 
         if (lastChartRequest) {
-            // Check if we have a token for this request?
-            // Since we don't have the hash yet, we can check localStorage keys or just assume content
-            // However, success.html passes nothing about the token, it stores it in localStorage under the hash.
-            // We need the hash.
-            // Let's rely on success.html logic which stored the token.
-            // But basic.js needs to find it.
+            let foundToken = urlToken;
 
-            // HACK: Iterate localStorage to find a recent token?
-            // OR: Calculate hash here? We implemented helper for hash but not sha256.
-            // Wait, we can iterate all keys starting with cael_token_
-
-            let foundToken = null;
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('cael_token_')) {
-                    // Use the most recent one? Or just any?
-                    // Ideally we check timestamp but we didn't store it.
-                    foundToken = localStorage.getItem(key);
-                    // For MVP we assume the last action was this purchase.
-                    break;
+            if (!foundToken) {
+                // Look in local storage if not in URL
+                // We use the chart hash of the last request to find the token
+                // We need to calculate the hash to look it up, OR valid iteration.
+                // Since we don't have the hash function exposed easily (it's in logic but let's replicate or iterate)
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('cael_token_')) {
+                        // Just take the first one found for now (MVP) or the most recently added?
+                        foundToken = localStorage.getItem(key);
+                        break;
+                    }
                 }
             }
 
             if (foundToken) {
                 lastChartRequest.access_token = foundToken;
+                // Update storage with the token included
+                localStorage.setItem("cael_last_request", JSON.stringify(lastChartRequest));
 
                 // Pre-fill form
                 if (document.getElementById('basicDate')) document.getElementById('basicDate').value = lastChartRequest.date;
@@ -515,11 +535,16 @@ async function checkRegenerate() {
                 const btn = document.getElementById('basicStartBtn');
                 if (btn) {
                     // small delay to ensure UI is ready
-                    setTimeout(() => btn.click(), 500);
+                    setTimeout(() => {
+                        // Visual feedback
+                        btn.innerHTML = `<span class="btn-text">RESTORING PURCHASE...</span><div class="btn-shimmer"></div>`;
+                        btn.click();
+                    }, 500);
                 }
 
-                // Clean URL
-                window.history.replaceState({}, document.title, window.location.pathname);
+                // Clean URL params but keep the state
+                const newUrl = window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
             }
         }
     }

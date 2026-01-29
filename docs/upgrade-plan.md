@@ -415,16 +415,16 @@ Track conversion funnel:
 ## SUCCESS METRICS (Week 1-4)
 
 ### Week 1 Goals:
-- [ ] Payment button live
-- [ ] Stripe processing works (test mode)
-- [ ] Paywall shows after free content
-- [ ] PDF export functional
+- [x] Payment button live
+- [x] Stripe processing works (test mode)
+- [x] Paywall shows after free content
+- [x] PDF export functional
 - [ ] Track: 10+ free readings generated
 
 ### Week 2 Goals:
 - [ ] Switch Stripe to live mode
 - [ ] First paying customer
-- [ ] Email capture working
+- [x] Email capture working
 - [ ] Track: 50+ free readings, 1-5 paid conversions
 
 ### Week 3 Goals:

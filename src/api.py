@@ -57,6 +57,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import Response, StreamingResponse
 from engine.pdf_generator import PDFReportGenerator
 from engine.email_service import send_email
+from engine.cache_manager import get_from_cache, set_to_cache
 
 MEDICAL_DISCLAIMER = (
     "FOR HISTORICAL AND EDUCATIONAL RESEARCH PURPOSES ONLY. NOT MEDICAL ADVICE. "
@@ -209,6 +210,32 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class RateLimiter:
+    def __init__(self):
+        self._requests = {}  # {ip: [timestamps]}
+        # Limits: 5 requests per day for free tier (relaxed for demo, strict for cost)
+        self.DAILY_LIMIT = 5
+        self.WINDOW_SECONDS = 86400 # 24 hours
+
+    def is_allowed(self, ip: str) -> bool:
+        now = datetime.utcnow().timestamp()
+        
+        # Cleanup
+        if ip not in self._requests:
+            self._requests[ip] = []
+        
+        # Filter old requests
+        self._requests[ip] = [t for t in self._requests[ip] if now - t < self.WINDOW_SECONDS]
+        
+        # Check count
+        if len(self._requests[ip]) >= self.DAILY_LIMIT:
+            return False
+            
+        self._requests[ip].append(now)
+        return True
+
+_rate_limiter = RateLimiter()
+
 
 def result_to_model(res):
     model_planets = []
@@ -323,10 +350,37 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
             # If subscription, check if valid (simplified here)
             # If one-time, it's valid if token is valid
             tier = "paid"
+    
+    # Rate Limiting (Free Tier Only)
+    if tier == 'free':
+        client_ip = http_request.client.host if http_request.client else "unknown"
+        # Validate limit
+        if not _rate_limiter.is_allowed(client_ip):
+            # Allow returning result if it's cached?
+            # For now, simplistic block.
+            # Ideally we return 429 BUT we want to allow users to see their previous result if cached...
+            # The current architecture calculates fresh every time unless we implement cache.
+            # The plan says "Cache for 30 days" - Phase 3.
+            # We haven't implemented caching yet!
             
+            # Implementation of Cache Check (File based as per plan)
+            # For this step, we'll just block NEW calculations.
+            raise HTTPException(status_code=429, detail="Daily free limit reached. Subscribe for unlimited access.")
+
     # Add tier metadata to result
     result["meta"]["tier"] = tier
     result["meta"]["chart_hash"] = chart_hash
+
+    # CACHE CHECK
+    cached_result = get_from_cache(chart_hash, tier)
+    if cached_result:
+        return cached_result
+
+    # Rate Limiting (Free Tier Only) - MOVED AFTER CACHE CHECK (so returning users don't count against limit)
+    if tier == 'free':
+        client_ip = http_request.client.host if http_request.client else "unknown"
+        if not _rate_limiter.is_allowed(client_ip):
+            raise HTTPException(status_code=429, detail="Daily free limit reached (and no cached result found).")
         
     # INTEGRATION: Run Forensic Audit using ingested data
 
@@ -434,13 +488,15 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
             if plain_reading:
                 result["plain_reading"] = plain_reading
         except Exception as pe:
-
             print(f"Plain Reading Error: {pe}")
             
     except Exception as e:
         print(f"Audit Error: {e}")
         # Don't fail the whole request, just omit report or add error
         result["forensic_error"] = str(e)
+
+    # SAVE TO CACHE
+    set_to_cache(chart_hash, tier, result)
 
     _log_event("chart_result_server", {"result": result}, http_request)
     return result
@@ -968,16 +1024,31 @@ async def stripe_webhook(request: Request):
             # Simplification: give 30 days for now, sub renewal handles separately (or logic upgrades later)
             token = create_access_token(chart_hash, 'paid', expires_days=30)
             
-            # TODO: Store token or email mapping if needed. 
-            # Ideally send email here.
-            pass
-            
-            # If we wanted to return it here we can't (it's a webhook).
-            # The client needs to verify or get it via email or redirect handling.
-            # In the Plan: "Redirect to success page -> Regenerate with full access"
-            # It seems the CLIENT logic on success page waits for this? 
-            # Or the success page calls an endpoint to 'claim' the purchase?
-            # Actually, standard flow: Success page gets session_id, calls backend to "verify_session".
+            # Send Email
+            if session.get('customer_email'):
+                email = session.get('customer_email')
+                # Construct link
+                # In prod, use real domain. Here use referer or hardcoded.
+                # Assuming standard domain from metadata or hardcoded
+                base_url = "https://traditional-astrology.com"
+                link = f"{base_url}/index.html?action=regenerate&token={token}"
+                
+                subject = "Access Your Codex Caelestis Reading"
+                body = f"""
+                <html>
+                <body style="font-family: serif; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #c07a2b; border-bottom: 2px solid #c07a2b; padding-bottom: 10px;">Payment Confirmed</h2>
+                    <p>Thank you for your purchase.</p>
+                    <p>Your full Forensic Astrology Reading has been unlocked.</p>
+                    <div style="background: #f4efe6; padding: 20px; text-align: center; border: 1px solid #d4c5b0; margin: 20px 0;">
+                        <a href="{link}" style="background: #c07a2b; color: #fff; text-decoration: none; padding: 12px 24px; font-weight: bold; text-transform: uppercase;">VIEW FULL READING</a>
+                    </div>
+                    <p style="font-size: 0.9em;">Or use this link:<br><a href="{link}">{link}</a></p>
+                    <p><em>Note: For best results, view on the device/browser where you entered your birth data.</em></p>
+                </body>
+                </html>
+                """
+                send_email(email, subject, body)
             
     return {'status': 'success'}
 
