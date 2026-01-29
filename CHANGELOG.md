@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+### Hotfix - 2026-01-29
+- **Cache Busting**: Updated static asset version strings to ensure immediate propagation of Phase 3 UI changes.
+
 ## [1.2.0] - 2026-01-29
 
 ### Added
