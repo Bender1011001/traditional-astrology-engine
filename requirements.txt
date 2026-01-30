@@ -8,3 +8,6 @@ reportlab
 geopy
 timezonefinder
 pytz
+
+python-multipart
+email-validator
