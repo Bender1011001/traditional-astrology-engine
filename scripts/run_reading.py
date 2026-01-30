@@ -25,6 +25,8 @@ load_dotenv(os.path.abspath(os.path.join(os.path.dirname(__file__), '../.env')))
 from engine.chart_calculator import calculate_chart_data
 from engine.logic import perform_forensic_audit
 from engine.models import Chart, Planet, PlanetName
+from engine.forensic_forecast import calculate_5_day_forecast
+from engine.prediction import AdvancedPredictionEngine
 
 def result_to_model(res):
     model_planets = []
@@ -110,6 +112,30 @@ def main():
         analysis_date=now, 
         analysis_jd=analysis_jd
     )
+
+    # PAID FEATURES
+    print("Calculating 5-Day Forecast (Paid)...")
+    try:
+        forecast_data = calculate_5_day_forecast(chart_model, jd, now)
+        audit_report["forensic_forecast"] = forecast_data
+    except Exception as e:
+        print(f"Forecast Error: {e}")
+        audit_report["forensic_forecast_error"] = str(e)
+    
+    print("Calculating Advanced Prediction (Paid)...")
+    try:
+        predictor = AdvancedPredictionEngine(
+            chart_model,
+            birth_date,
+            jd,
+            result["meta"]["lat"],
+            result["meta"]["lon"]
+        )
+        prediction_report = predictor.get_prediction_report(now)
+        audit_report["advanced_prediction"] = prediction_report
+    except Exception as e:
+        print(f"Advanced Prediction Error: {e}")
+        audit_report["advanced_prediction_error"] = str(e)
 
     output_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../reading_output.json'))
     with open(output_path, 'w', encoding='utf-8') as f:

@@ -132,7 +132,7 @@
         "type": "Solar Eclipse",
         "jd": 2450191.442529276,
         "longitude": 28.186331008828358,
-        "duration_hours": 58804594.08417618,
+        "duration_hours": 2.4000000000000004,
         "sign": "Aries",
         "degree": 28.186331008828358
       },
@@ -147,7 +147,7 @@
     ],
     "lunar_phase": "Balsamic",
     "lunar_phase_profile": "The Prophet/The Seed-Man. Introverted, Future-Oriented, Distillation and Release.",
-    "jones_pattern": "Splay/Seesaw",
+    "jones_pattern": "Bucket",
     "dominant_elements": [
       [
         "FIRE",
@@ -166,7 +166,17 @@
         1
       ]
     ],
-    "universal_causation_audit": []
+    "universal_causation_audit": [],
+    "hemispheres": {
+      "East": 6,
+      "West": 6,
+      "North": 6,
+      "South": 6
+    },
+    "hemisphere_focus": {
+      "orientation": "Other-Oriented (West)",
+      "visibility": "Private/Subjective (North)"
+    }
   },
   "vitality": {},
   "primary_directions": [
@@ -370,6 +380,16 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Heart, spine, back, circulation. Risk of Heart disease, spinal issues, blood pressure"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Moon",
+          "effect": "",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Pluto",
+          "effect": "MALIFIC SIEGE: Hard aspect from Pluto (Destructive). Creates destruction, conflict, or failure.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "\"The Sun... Rules: Leo.\" 15 \"The Sun... indicates authority over the masses, the father, the master.\" 13",
@@ -432,6 +452,16 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Heart, spine, back, circulation. Risk of Heart disease, spinal issues, blood pressure"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Sun",
+          "effect": "",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Trine w/ Saturn",
+          "effect": "FLOW: Easy aspect from Saturn. Structural support and regulated energy.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "Proud, demands attention. 'The Queen.' The native has a strong constitution but a fragile ego.",
@@ -497,6 +527,11 @@
         {
           "cause": "Bonatti Consideration 141",
           "effect": "PERFECTION WITHOUT EFFORT: Significator in the Ascendant. High capacity for manifestation."
+        },
+        {
+          "cause": "Aspect: Sextile w/ Mars",
+          "effect": "MITIGATED THREAT: Easy aspect from Mars. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "\"Mercury rules Gemini and Virgo.\" 15 \"Mercury in Virgo... is in his Exaltation and Domicile.\" 28 Condition: Peregrine.",
@@ -561,6 +596,21 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Chest, stomach, breasts, diaphragm, lymphatic system. Risk of Dyspepsia, gastric ulcers, lymphatic stasis"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Mars",
+          "effect": "Afflicted by conjunction with Mars. Energy is oppressed or inflamed.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Jupiter",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Saturn",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "\"Venus in Cancer... more likely to be married a few times and be promiscuous.\" 24",
@@ -628,6 +678,26 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Chest, stomach, breasts, diaphragm, lymphatic system. Risk of Dyspepsia, gastric ulcers, lymphatic stasis"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Mercury",
+          "effect": "MITIGATED THREAT: Easy aspect from Mars. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Venus",
+          "effect": "Afflicted by conjunction with Mars. Energy is oppressed or inflamed.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Jupiter",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Saturn",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "\"Mars has his fall in Cancer.\" 12 \"Mars in Cancer... apt to scandal and drunkenness.\" [Lilly General Context]. \"The presence, in the sign of Cancer, of al-qahh\u0101r\u0101n... produces earthquakes.\" 14 Condition: Peregrine.",
@@ -696,6 +766,21 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Knees, joints, bones, teeth, skin. Risk of Arthritis, bone density issues, skin ailments"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Venus",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Mars",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Saturn",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "\"Jupiter in Capricorn [is in] his Fall.\" 12 \"Jupiter in Capricorn... signifies the tapeinoma [depression/fall].\" 19 Condition: Peregrine. Dorotheus, Carmen 18",
@@ -767,6 +852,36 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Head, face, brain, eyes, teeth. Risk of Headaches, fevers, eye issues"
+        },
+        {
+          "cause": "Aspect: Trine w/ Moon",
+          "effect": "FLOW: Easy aspect from Saturn. Structural support and regulated energy.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Venus",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Mars",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Jupiter",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Uranus",
+          "effect": "MITIGATED THREAT: Easy aspect from Uranus. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Trine w/ Pluto",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "\"Saturn in 1 11 Aries... is in his Fall.\" 9 \"Saturn in Aries, ascending, means in some cases the state of the body, and in others, the general working of the soul... or possessions, and sometimes can mean friends... or the quality of one's death.\" 10 \"Now Aries indicates that he is skillful, with much hair, of good stature, his gaze directed at the earth... with foul speech.\" 11 (Note: Dorotheus context implies Saturnian modification of Aries). Condition: Peregrine.",
@@ -828,6 +943,16 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Shins, calves, ankles, circulatory system. Risk of Lower leg issues, circulatory sluggishness"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Saturn",
+          "effect": "MITIGATED THREAT: Easy aspect from Uranus. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Pluto",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "Delineation not found in Codex.",
@@ -886,6 +1011,11 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Knees, joints, bones, teeth, skin. Risk of Arthritis, bone density issues, skin ailments"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Pluto",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "Delineation not found in Codex.",
@@ -944,6 +1074,26 @@
         {
           "cause": "Melothesia",
           "effect": "Anatomical Governance: Liver, hips, thighs, sciatic nerve. Risk of Liver disorders, hip issues, sciatica"
+        },
+        {
+          "cause": "Aspect: Square w/ Sun",
+          "effect": "MALIFIC SIEGE: Hard aspect from Pluto (Destructive). Creates destruction, conflict, or failure.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Trine w/ Saturn",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Uranus",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Neptune",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         }
       ],
       "delineation_text": "Delineation not found in Codex.",
@@ -1146,7 +1296,7 @@
     "mood": "WEAK",
     "summary": "Today, the chronocrator of your life shifts into the domain of Aquarius. Saturn, who holds the keys to this domain in your nativity, is currently weak.",
     "details": [
-      "The Lunar Mirror is in Gemini. "
+      "The Lunar Mirror is in Cancer. "
     ],
     "secret_key": false,
     "calculation_steps": {
@@ -1172,7 +1322,7 @@
       },
       "daily_profection": {
         "formula": "steps = floor((day - 1) / (7/3)); sign = (monthly_index + steps) mod 12",
-        "day": 29,
+        "day": 30,
         "rate_days_per_sign": 2.3333333333333335,
         "steps": 12,
         "monthly_index": 10,
@@ -1182,7 +1332,7 @@
       "epitasis": {
         "formula": "daily_sign == transiting_lord_of_year_sign",
         "transiting_loy_sign": "Pisces",
-        "transiting_loy_longitude": 358.43171732594084,
+        "transiting_loy_longitude": 358.4485863561579,
         "matching": false
       }
     },
@@ -1244,6 +1394,42 @@
         "Sign: Leo",
         "Longitude: 141.10\u00b0",
         "House: 12"
+      ]
+    },
+    {
+      "id": "sun-aspect-conjunction-w-moon",
+      "category": "Condition",
+      "condition": "Sun: Aspect: Conjunction w/ Moon",
+      "judgment": "",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Sun",
+        "Sign: Leo",
+        "Longitude: 141.10\u00b0",
+        "House: 12",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "sun-aspect-square-w-pluto",
+      "category": "Condition",
+      "condition": "Sun: Aspect: Square w/ Pluto",
+      "judgment": "MALIFIC SIEGE: Hard aspect from Pluto (Destructive). Creates destruction, conflict, or failure.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Sun",
+        "Sign: Leo",
+        "Longitude: 141.10\u00b0",
+        "House: 12",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
       ]
     },
     {
@@ -1335,6 +1521,42 @@
       ]
     },
     {
+      "id": "moon-aspect-conjunction-w-sun",
+      "category": "Condition",
+      "condition": "Moon: Aspect: Conjunction w/ Sun",
+      "judgment": "",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Moon",
+        "Sign: Leo",
+        "Longitude: 133.25\u00b0",
+        "House: 12",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "moon-aspect-trine-w-saturn",
+      "category": "Condition",
+      "condition": "Moon: Aspect: Trine w/ Saturn",
+      "judgment": "FLOW: Easy aspect from Saturn. Structural support and regulated energy.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Moon",
+        "Sign: Leo",
+        "Longitude: 133.25\u00b0",
+        "House: 12",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
       "id": "moon-planet-delineation",
       "category": "Planet Delineation",
       "condition": "Moon in Leo",
@@ -1422,6 +1644,24 @@
         "Sign: Virgo",
         "Longitude: 167.18\u00b0",
         "House: 1"
+      ]
+    },
+    {
+      "id": "mercury-aspect-sextile-w-mars",
+      "category": "Condition",
+      "condition": "Mercury: Aspect: Sextile w/ Mars",
+      "judgment": "MITIGATED THREAT: Easy aspect from Mars. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mercury",
+        "Sign: Virgo",
+        "Longitude: 167.18\u00b0",
+        "House: 1",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
       ]
     },
     {
@@ -1517,6 +1757,60 @@
         "Sign: Cancer",
         "Longitude: 95.54\u00b0",
         "House: 11"
+      ]
+    },
+    {
+      "id": "venus-aspect-conjunction-w-mars",
+      "category": "Condition",
+      "condition": "Venus: Aspect: Conjunction w/ Mars",
+      "judgment": "Afflicted by conjunction with Mars. Energy is oppressed or inflamed.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Venus",
+        "Sign: Cancer",
+        "Longitude: 95.54\u00b0",
+        "House: 11",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "venus-aspect-opposition-w-jupiter",
+      "category": "Condition",
+      "condition": "Venus: Aspect: Opposition w/ Jupiter",
+      "judgment": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Venus",
+        "Sign: Cancer",
+        "Longitude: 95.54\u00b0",
+        "House: 11",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "venus-aspect-square-w-saturn",
+      "category": "Condition",
+      "condition": "Venus: Aspect: Square w/ Saturn",
+      "judgment": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Venus",
+        "Sign: Cancer",
+        "Longitude: 95.54\u00b0",
+        "House: 11",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
       ]
     },
     {
@@ -1632,6 +1926,78 @@
       ]
     },
     {
+      "id": "mars-aspect-sextile-w-mercury",
+      "category": "Condition",
+      "condition": "Mars: Aspect: Sextile w/ Mercury",
+      "judgment": "MITIGATED THREAT: Easy aspect from Mars. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mars",
+        "Sign: Cancer",
+        "Longitude: 102.52\u00b0",
+        "House: 11",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "mars-aspect-conjunction-w-venus",
+      "category": "Condition",
+      "condition": "Mars: Aspect: Conjunction w/ Venus",
+      "judgment": "Afflicted by conjunction with Mars. Energy is oppressed or inflamed.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mars",
+        "Sign: Cancer",
+        "Longitude: 102.52\u00b0",
+        "House: 11",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "mars-aspect-opposition-w-jupiter",
+      "category": "Condition",
+      "condition": "Mars: Aspect: Opposition w/ Jupiter",
+      "judgment": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mars",
+        "Sign: Cancer",
+        "Longitude: 102.52\u00b0",
+        "House: 11",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "mars-aspect-square-w-saturn",
+      "category": "Condition",
+      "condition": "Mars: Aspect: Square w/ Saturn",
+      "judgment": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mars",
+        "Sign: Cancer",
+        "Longitude: 102.52\u00b0",
+        "House: 11",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
       "id": "mars-planet-delineation",
       "category": "Planet Delineation",
       "condition": "Mars in Cancer",
@@ -1743,6 +2109,60 @@
         "Sign: Capricorn",
         "Longitude: 278.51\u00b0",
         "House: 5"
+      ]
+    },
+    {
+      "id": "jupiter-aspect-opposition-w-venus",
+      "category": "Condition",
+      "condition": "Jupiter: Aspect: Opposition w/ Venus",
+      "judgment": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Jupiter",
+        "Sign: Capricorn",
+        "Longitude: 278.51\u00b0",
+        "House: 5",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "jupiter-aspect-opposition-w-mars",
+      "category": "Condition",
+      "condition": "Jupiter: Aspect: Opposition w/ Mars",
+      "judgment": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Jupiter",
+        "Sign: Capricorn",
+        "Longitude: 278.51\u00b0",
+        "House: 5",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "jupiter-aspect-square-w-saturn",
+      "category": "Condition",
+      "condition": "Jupiter: Aspect: Square w/ Saturn",
+      "judgment": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Jupiter",
+        "Sign: Capricorn",
+        "Longitude: 278.51\u00b0",
+        "House: 5",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
       ]
     },
     {
@@ -1880,6 +2300,114 @@
       ]
     },
     {
+      "id": "saturn-aspect-trine-w-moon",
+      "category": "Condition",
+      "condition": "Saturn: Aspect: Trine w/ Moon",
+      "judgment": "FLOW: Easy aspect from Saturn. Structural support and regulated energy.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Aries",
+        "Longitude: 6.85\u00b0",
+        "House: 8",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "saturn-aspect-square-w-venus",
+      "category": "Condition",
+      "condition": "Saturn: Aspect: Square w/ Venus",
+      "judgment": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Aries",
+        "Longitude: 6.85\u00b0",
+        "House: 8",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "saturn-aspect-square-w-mars",
+      "category": "Condition",
+      "condition": "Saturn: Aspect: Square w/ Mars",
+      "judgment": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Aries",
+        "Longitude: 6.85\u00b0",
+        "House: 8",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "saturn-aspect-square-w-jupiter",
+      "category": "Condition",
+      "condition": "Saturn: Aspect: Square w/ Jupiter",
+      "judgment": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Aries",
+        "Longitude: 6.85\u00b0",
+        "House: 8",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "saturn-aspect-sextile-w-uranus",
+      "category": "Condition",
+      "condition": "Saturn: Aspect: Sextile w/ Uranus",
+      "judgment": "MITIGATED THREAT: Easy aspect from Uranus. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Aries",
+        "Longitude: 6.85\u00b0",
+        "House: 8",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "saturn-aspect-trine-w-pluto",
+      "category": "Condition",
+      "condition": "Saturn: Aspect: Trine w/ Pluto",
+      "judgment": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Aries",
+        "Longitude: 6.85\u00b0",
+        "House: 8",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
       "id": "saturn-planet-delineation",
       "category": "Planet Delineation",
       "condition": "Saturn in Aries",
@@ -1975,6 +2503,42 @@
       ]
     },
     {
+      "id": "uranus-aspect-sextile-w-saturn",
+      "category": "Condition",
+      "condition": "Uranus: Aspect: Sextile w/ Saturn",
+      "judgment": "MITIGATED THREAT: Easy aspect from Uranus. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Uranus",
+        "Sign: Aquarius",
+        "Longitude: 301.85\u00b0",
+        "House: 5",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "uranus-aspect-sextile-w-pluto",
+      "category": "Condition",
+      "condition": "Uranus: Aspect: Sextile w/ Pluto",
+      "judgment": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Uranus",
+        "Sign: Aquarius",
+        "Longitude: 301.85\u00b0",
+        "House: 5",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
       "id": "neptune-dignity",
       "category": "Essential Dignity",
       "condition": "Neptune in Capricorn",
@@ -2012,6 +2576,24 @@
       ]
     },
     {
+      "id": "neptune-aspect-sextile-w-pluto",
+      "category": "Condition",
+      "condition": "Neptune: Aspect: Sextile w/ Pluto",
+      "judgment": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Neptune",
+        "Sign: Capricorn",
+        "Longitude: 295.69\u00b0",
+        "House: 5",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
       "id": "pluto-dignity",
       "category": "Essential Dignity",
       "condition": "Pluto in Sagittarius",
@@ -2046,6 +2628,78 @@
         "Sign: Sagittarius",
         "Longitude: 240.34\u00b0",
         "House: 4"
+      ]
+    },
+    {
+      "id": "pluto-aspect-square-w-sun",
+      "category": "Condition",
+      "condition": "Pluto: Aspect: Square w/ Sun",
+      "judgment": "MALIFIC SIEGE: Hard aspect from Pluto (Destructive). Creates destruction, conflict, or failure.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Pluto",
+        "Sign: Sagittarius",
+        "Longitude: 240.34\u00b0",
+        "House: 4",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "pluto-aspect-trine-w-saturn",
+      "category": "Condition",
+      "condition": "Pluto: Aspect: Trine w/ Saturn",
+      "judgment": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Pluto",
+        "Sign: Sagittarius",
+        "Longitude: 240.34\u00b0",
+        "House: 4",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "pluto-aspect-sextile-w-uranus",
+      "category": "Condition",
+      "condition": "Pluto: Aspect: Sextile w/ Uranus",
+      "judgment": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Pluto",
+        "Sign: Sagittarius",
+        "Longitude: 240.34\u00b0",
+        "House: 4",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
+      ]
+    },
+    {
+      "id": "pluto-aspect-sextile-w-neptune",
+      "category": "Condition",
+      "condition": "Pluto: Aspect: Sextile w/ Neptune",
+      "judgment": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+      "sources": [
+        "Binder1/Traditional"
+      ],
+      "confidence": 75,
+      "conflicts": [],
+      "trace": [
+        "Planet: Pluto",
+        "Sign: Sagittarius",
+        "Longitude: 240.34\u00b0",
+        "House: 4",
+        "Rule: Modification of Rays by Sect (Binder1/Traditional)"
       ]
     },
     {
@@ -2189,7 +2843,7 @@
   "prediction": {
     "age": 29,
     "month": 1,
-    "day": 29,
+    "day": 30,
     "annual_profection": {
       "sign": "Aquarius",
       "lord_of_year": "Saturn"
@@ -2237,7 +2891,7 @@
       },
       "daily_profection": {
         "formula": "steps = floor((day - 1) / (7/3)); sign = (monthly_index + steps) mod 12",
-        "day": 29,
+        "day": 30,
         "rate_days_per_sign": 2.3333333333333335,
         "steps": 12,
         "monthly_index": 10,
@@ -3574,5 +4228,150 @@
         }
       ]
     }
-  ]
+  ],
+  "forensic_forecast": [
+    {
+      "date": "2026-01-30",
+      "display_date": "Friday, Jan 30",
+      "chronocrator": "Jupiter",
+      "profection_sign": "Pisces",
+      "epitasis": true,
+      "medical": [],
+      "mood": "Standard",
+      "summary": "The 'Jupiter' domain is active. TRANSIT ALERT: High Stakes (Epitasis) enabled."
+    },
+    {
+      "date": "2026-01-31",
+      "display_date": "Saturday, Jan 31",
+      "chronocrator": "Mars",
+      "profection_sign": "Aries",
+      "epitasis": false,
+      "medical": [],
+      "mood": "Standard",
+      "summary": "The 'Mars' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-01",
+      "display_date": "Sunday, Feb 01",
+      "chronocrator": "Mars",
+      "profection_sign": "Aries",
+      "epitasis": false,
+      "medical": [],
+      "mood": "Standard",
+      "summary": "The 'Mars' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-02",
+      "display_date": "Monday, Feb 02",
+      "chronocrator": "Mars",
+      "profection_sign": "Aries",
+      "epitasis": false,
+      "medical": [],
+      "mood": "Standard",
+      "summary": "The 'Mars' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-03",
+      "display_date": "Tuesday, Feb 03",
+      "chronocrator": "Venus",
+      "profection_sign": "Taurus",
+      "epitasis": false,
+      "medical": [],
+      "mood": "Standard",
+      "summary": "The 'Venus' domain is active. Flow is consistent with the annual cycle."
+    }
+  ],
+  "advanced_prediction": {
+    "firdaria": {
+      "Major Period": "Mercury",
+      "Sub Period": "Venus",
+      "Major Start": "2014-08-13",
+      "Major End": "2027-08-13",
+      "Sub Start": "2025-10-04",
+      "Sub End": "2027-08-13",
+      "Current Age": 29.46
+    },
+    "solar_arcs": [
+      {
+        "planet": "Sun",
+        "longitude": 170.56
+      },
+      {
+        "planet": "Moon",
+        "longitude": 162.71
+      },
+      {
+        "planet": "Mercury",
+        "longitude": 196.65
+      },
+      {
+        "planet": "Venus",
+        "longitude": 125.0
+      },
+      {
+        "planet": "Mars",
+        "longitude": 131.98
+      },
+      {
+        "planet": "Jupiter",
+        "longitude": 307.97
+      },
+      {
+        "planet": "Saturn",
+        "longitude": 36.32
+      },
+      {
+        "planet": "Uranus",
+        "longitude": 331.32
+      },
+      {
+        "planet": "Neptune",
+        "longitude": 325.16
+      },
+      {
+        "planet": "Pluto",
+        "longitude": 269.8
+      },
+      {
+        "planet": "North_Node",
+        "longitude": 219.96
+      },
+      {
+        "planet": "South_Node",
+        "longitude": 39.96
+      }
+    ],
+    "transits": [
+      {
+        "transit": "Uranus",
+        "natal_planet": "Pluto",
+        "aspect": "Opposition",
+        "orb": 2.87
+      },
+      {
+        "transit": "Pluto",
+        "natal_planet": "Uranus",
+        "aspect": "Conjunct",
+        "orb": 1.8
+      }
+    ],
+    "muntha": {
+      "sign": "Aquarius",
+      "age": 29
+    },
+    "lunar_phase": {
+      "name": "Balsamic",
+      "angle_range": [
+        315,
+        360
+      ],
+      "profile": "The Prophet/The Seed-Man. Introverted, Future-Oriented, Distillation and Release.",
+      "type": "Release"
+    },
+    "solar_return_info": {
+      "return_jd": 2460901.1021206966,
+      "return_date": "2025-08-13T14:27:03.228183",
+      "natal_sun_longitude": 141.09660888669535
+    }
+  }
 }

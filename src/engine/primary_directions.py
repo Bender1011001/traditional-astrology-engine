@@ -1,7 +1,9 @@
 import math
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
+import swisseph as swe
 from .models import Chart, Planet, PlanetName, Sect
+from .dignities import DignityCalculator
 
 @dataclass
 class DirectionResult:
@@ -75,18 +77,14 @@ class PrimaryDirectionsEngine:
         (For Northern Hemisphere logic implies positive AD for North Dec)
         """
         ad = cls.calculate_ad(dec, geo_lat)
-        dsa = 90.0 + ad
-        nsa = 90.0 - ad
+        dsa = 90 + ad
+        nsa = 90 - ad
         return (dsa, nsa)
 
     @classmethod
     def calculate_md(cls, ra: float, ramc: float) -> float:
         """
         Meridian Distance (RA - RAMC).
-        Normalized to -180 to +180 for "Least Distance" logic?
-        Or strict RA - RAMC % 360.
-        Placidus usually uses the distance to the *nearest* meridian.
-        Let's perform standard substraction and normalize.
         """
         md = (ra - ramc) % 360.0
         if md > 180:
@@ -94,231 +92,164 @@ class PrimaryDirectionsEngine:
         return md
 
     @classmethod
-    def get_proportional_distance(cls, ra: float, dec: float, ramc: float, geo_lat: float) -> Tuple[float, float]:
+    def calculate_current_distributor(cls, chart: Chart, age_years: float, geo_lat: float) -> Dict:
         """
-        Calculates Proportional Distance (0.0 - 1.0) and the Semi-Arc used.
-        Returns (PropDist, SemiArc).
+        Calculates the current 'Distributor' (Term Ruler of Directed Ascendant).
+        Algorithm:
+        1. Calculate Arc = Age (Ptolemy Key).
+        2. Direct the Ascendant by this Arc (OA_Dir = OA_Radical + Arc).
+        3. Convert OA_Dir back to Zodiacal Longitude.
+        4. Find the Term Ruler of that Longitude.
         """
-        # Meridian Distance
-        md = (ra - ramc)
-        # Normalize MD to determine Quadrant?
-        # Standard:
-        # 10th House (MC to Asc): Western, Above Horizon
-        # 7th House (Desc to IC): Western, Below Horizon
-        # ...
+        arc = cls.ptolemy_key(age_years)
         
-        # We need to know if the point is Above or Below horizon
-        # Check standard Geometric logic:
-        # Determine OA of Ascendant
-        # If RA is between OA_Asc and OA_Desc, etc?
-        # Simpler: Check MD.
-        pass
-        # To strictly determine Above/Below horizon using just RA/Dec/RAMC/Lat:
-        # Calculate Local Sidereal Time (LST) ~ RAMC.
-        # Hour Angle (HA) = LST - RA
-        # Altitude formula...
-        # Simplified:
-        #  HA = RAMC - RA
-        #  If Abs(HA) < DSA, Above Horizon. Else Below.
+        # 1. Get Natal OA of Ascendant
+        # We can simulate this by calculating the RAMC that would put the Ascendant at the horizon + Arc?
+        # NO. Directing the Ascendant:
+        # OA_Asc_Dir = OA_Asc_Natal + Arc.
+        # Then find the Ecliptic point that has this OA.
+        # This point is the Ascendant of a chart with RAMC' = RAMC_Natal + Arc.
         
-        dsa, nsa = cls.calculate_semi_arcs(dec, geo_lat)
+        # Get Natal RAMC (RA of MC)
+        mc_lon = chart.mc
+        # swe.house_pos calculates house cusps. We need the reverse or just use houses() with modified Time?
+        # Simpler: Get RAMC from MC Longitude.
+        mc_ra, _ = cls.ecliptic_to_equatorial(mc_lon, 0.0)
         
-        # Distance from Meridian (Upper)
-        dist_upper = abs(cls.calculate_md(ra, ramc))
+        # Directed RAMC
+        ramc_directed = (mc_ra + arc) % 360.0
         
-        # Check if above horizon
-        # Note: MD is distance from Upper Meridian (MC).
-        # If dist_upper < DSA, it is Above Horizon.
-        # If dist_upper > DSA, it is Below Horizon?
-        # Yes, DSA is the half-arc from Rise to Set (crossing MC).
-        
-        is_above = dist_upper < dsa
-        
-        if is_above:
-            # Proportional Dist from MC
-            # Using Placidus definition: MD / SA
-            # Usually range -1 (Rise) to 0 (MC) to +1 (Set)?
-            # Or 0 (MC) to 1 (Horizon).
-            # Let's standardize: Ratio from Meridian.
-            ratio = dist_upper / dsa
-            # Distinguish East/West?
-            # If RA > RAMC (0-180), West.
-            # If RA < RAMC (0-180), East.
+        # Calculate new Ascendant for this RAMC
+        # swe.houses_armc(armc, lat, eps, hsys) - armc is in deg
+        try:
+            # armc is RAMC.
+            cusps, ascmc = swe.houses_armc(ramc_directed, geo_lat, cls.EPSILON, b'P')
+            asc_directed_lon = ascmc[0]
             
-            # Text implies: PropDist used for diff.
-            # Let's return signed PropDist.
-            # East is negative (rising to MC), West is positive (setting from MC).
+            # Get Term Ruler
+            sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+            dignities = DignityCalculator.get_essential_rulers(asc_directed_lon, sect)
+            term_ruler = dignities["term"]
             
-            diff = (ra - ramc)
-            # Normalize diff -180 to 180
-            if diff > 180: diff -= 360
-            elif diff < -180: diff += 360
-            
-            # If distinct East/West
-            pd = diff / dsa
-            return (pd, dsa)
-        else:
-            # Below Horizon
-            # Use distance from IC.
-            # IC = RAMC + 180
-            ic = (ramc + 180) % 360
-            
-            diff = (ra - ic)
-            if diff > 180: diff -= 360
-            elif diff < -180: diff += 360
-            
-            pd = diff / nsa
-            # This PD is relative to IC.
-            # We must coordinate systems.
-            # Placidus Mundane Position:
-            # MC = 0
-            # Asc = -1 (East Horizon) ?? Or +1?
-            # Standard "Mundane position":
-            # MC=0, Asc=3, IC=6, Desc=9?
-            # Let's stick to the Text's Formula:
-            # "Arc = (PropDist_P - PropDist_S) * SA_P"
-            # This implies PD must be continuous or handled by quadrant.
-            
-            # Let's use the 0-4 quadrant system or similar.
-            # But the formula suggests raw ratio.
-            
-            # Alternative: Calculate Arc to Angle explicitly for Angles.
-            # For planets: Calculate Time.
-            
-            # Let's try to return the raw ratio from the UPPER meridian, keeping arc continuity?
-            # No, text examples use simple subtraction.
-            
-            # Let's stick to simple Arc to Angle first for reliability, as text says "Intermediate points...".
-            # If we assume directions TO ANGLES:
-            # Arc = OA_P - OA_Asc (for Asc direction)
-            # Arc = (RA_P - RA_M) - ...
-            
-            # Let's assume this Engine will primarily calculate Directions TO ANGLES (Asc/MC) as priority.
-            # And Planet-to-Planet later.
-            
-            return (0.0, 0.0) # Placeholder
+            return {
+                "type": "Distributor (Term Ruler)",
+                "planet": term_ruler.value if hasattr(term_ruler, "value") else str(term_ruler),
+                "directed_ascendant_deg": asc_directed_lon,
+                "arc": arc,
+                "description": f"The Directed Ascendant is at {asc_directed_lon:.2f}°, in the Terms of {term_ruler.value if hasattr(term_ruler, 'value') else term_ruler}."
+            }
+        except Exception as e:
+            return {"error": str(e)}
 
     @classmethod
     def calculate_directions_to_angles(cls, chart: Chart, geo_lat: float) -> List[DirectionResult]:
         """
-        Calculates directions of all planets to Conjunction/Opposition of Asc/MC.
+        Calculates directions of all planets to Conjunction/Opposition/Square/Trine/Sextile of Asc/MC.
         """
         results = []
         
         # 1. Chart Properties
-        ramc = chart.mc # Is chart.mc in RA or Ecliptic Longitude?
-        # Usually models.py stores MC as Ecliptic Longitude!
-        # We need RAMC!
-        # If we have MC Longitude, we can convert to RA (Lat=0).
-        # MC is always on Ecliptic? Yes. And Latitude=0.
-        
         mc_ra, _ = cls.ecliptic_to_equatorial(chart.mc, 0.0)
-        
-        # Ascendant RA?
-        asc_ra, _ = cls.ecliptic_to_equatorial(chart.ascendant, 0.0)
-        # Note: Ascendant OA is defined as RAMC + 90.
         oa_asc = (mc_ra + 90.0) % 360.0
         
         # 2. Iterate Planets (Promittors)
         promittors = chart.planets
         
+        # Define Aspects to Check
+        # (Name, Angle, IsHard)
+        aspects_to_check = [
+            ("Conjunction", 0, True),
+            ("Sextile", 60, False),
+            ("Square", 90, True),
+            ("Trine", 120, False),
+            ("Opposition", 180, True)
+        ]
+        
         for p in promittors:
             if p.name in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
             
-            # Calculate Promittor Coordinates
-            # Note: Using Natal Latitude!
-            ra_p, dec_p = cls.ecliptic_to_equatorial(p.longitude, p.latitude)
-            
-            # Calculate AD, OA, OD
-            ad_p = cls.calculate_ad(dec_p, geo_lat)
-            oa_p = (ra_p - ad_p) % 360.0 # Eastern
-            od_p = (ra_p + ad_p) % 360.0 # Western (Setting)
-            
-            # 3. Direct to Ascendant (Conjunction)
-            # Promittor coming to Ascendant (Rising)
-            # Arc = OA_Promittor - OA_Asc
-            arc_asc = (oa_p - oa_asc)
-            # Normalize simple arc (traditional usually positive for future?)
-            # Valid arcs are 0 to 100 degrees (approx 100 years).
-            # If negative, it implies it happened in past (converse?) or far future?
-            # We usually look for arcs > 0.
-            # If arc < 0: arc += 360? No, that's 300+ years.
-            
-            # Placidus Directions usually measured forward (Direct).
-            # So if OA_P > OA_Asc, it will arrive later?
-            # Wait. Primary Motion is East to West (Rotation).
-            # So RA/OA increases towards East?
-            # RAMC increases with time!
-            # So OA_Asc increases with time.
-            # If OA_P > OA_Asc, then OA_Asc will "catch up" to OA_P?
-            # Yes. So Arc = OA_P - OA_Asc.
-            
-            if 0 < arc_asc < 100:
-                results.append(DirectionResult(
-                    significator="Ascendant",
-                    promittor=p.name.value,
-                    aspect="Conjunction",
-                    arc=arc_asc,
-                    years=cls.ptolemy_key(arc_asc),
-                    date_offset=cls.format_years(arc_asc),
-                    method="Placidus/Ptolemy"
-                ))
+            # CHECK ALL ASPECTS TO ASCENDANT
+            for asp_name, asp_angle, _ in aspects_to_check:
+                # Directed Asc moves forward (OA increases).
+                # Hit occurs when OA_Asc_Dir = OA_Promittor (plus aspect?).
+                # For aspect P to Asc:
+                # Arc = OA(P + aspect) - OA_Asc ??
+                # Or Arc = OA(P) - OA(Asc + aspect) ??
+                # Traditionally: Arc = OA(Promittor's Aspect Point) - OA(Significator).
+                # But Promittor has latitude. The aspect point is on the Ecliptic (usually).
+                # "Planets directed to angles with latitude" involves finding the point on the sphere.
+                # Simplified (Mundane): 
+                # Conjunction: Arc = OA_P - OA_Asc
+                # Sextile: Arc = OA(P_Sextile_Point) - OA_Asc? 
+                # Actually, standard practice for primary directions to angles often treats the aspect as an angle in the Mundane Sphere (Semi-Arc).
+                # BUT simpler logic (Zodiacal Aspects directed to Angle):
+                # 1. Find Longitude of Promittor.
+                # 2. Add aspect (e.g. +60, -60). 
+                # 3. Find RA/Dec of that zodiacal degree (Lat=0).
+                # 4. Find OA of that degree.
+                # 5. Arc = OA_Point - OA_Asc.
                 
-            # 4. Direct to Midheaven (Conjunction)
-            # Promittor coming to MC (Culminating)
-            # Arc = RA_Promittor - RAMC
-            arc_mc = (ra_p - mc_ra)
-            # Normalize
-            if diff := (ra_p - mc_ra):
-                 # Handle wrapping nicely?
-                 # If RA_P = 10, RAMC = 350. Arc = 20? 
-                 # 10 - 350 = -340. += 360 = 20. Correct.
-                 pass
-            
-            arc_mc = (ra_p - mc_ra) % 360.0
-            if 0 < arc_mc < 100:
-                results.append(DirectionResult(
-                    significator="Midheaven",
-                    promittor=p.name.value,
-                    aspect="Conjunction",
-                    arc=arc_mc,
-                    years=cls.ptolemy_key(arc_mc),
-                    date_offset=cls.format_years(arc_mc),
-                    method="Placidus/Ptolemy"
-                ))
+                # Let's do Zodiacal Aspects (Lat=0 for the aspect point)
+                aspect_lons = []
+                if asp_angle == 0:
+                    aspect_lons = [(p.longitude, "Conjunction")]
+                elif asp_angle == 180:
+                    aspect_lons = [((p.longitude + 180) % 360, "Opposition")]
+                else:
+                    aspect_lons = [
+                        ((p.longitude + asp_angle) % 360, f"{asp_name} (Dexter)"),
+                        ((p.longitude - asp_angle) % 360, f"{asp_name} (Sinister)")
+                    ]
+                
+                for lon_pt, name_pt in aspect_lons:
+                     # Calculate OA of this aspect point (Lat 0 assumed for aspects usually)
+                     ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0)
+                     ad_pt = cls.calculate_ad(dec_pt, geo_lat)
+                     oa_pt = (ra_pt - ad_pt) % 360.0
+                     
+                     arc = oa_pt - oa_asc
+                     # Normalize 
+                     if arc < 0: arc += 360
+                     
+                     if 0 < arc < 100:
+                         results.append(DirectionResult(
+                            significator="Ascendant",
+                            promittor=p.name.value,
+                            aspect=name_pt,
+                            arc=arc,
+                            years=cls.ptolemy_key(arc),
+                            date_offset=cls.format_years(arc),
+                            method="Placidus/Zodiacal"
+                        ))
 
-            # 5. Opposition to Ascendant (Setting) = Conjunction to Descendant
-            # Arc = OD_Promittor - OD_Desc
-            # OD_Desc = RAMC - 90
-            od_desc = (mc_ra - 90.0) % 360.0
-            arc_desc = (od_p - od_desc) % 360.0
-            
-            if 0 < arc_desc < 100:
-                 results.append(DirectionResult(
-                    significator="Ascendant",
-                    promittor=p.name.value,
-                    aspect="Opposition",
-                    arc=arc_desc,
-                    years=cls.ptolemy_key(arc_desc),
-                    date_offset=cls.format_years(arc_desc),
-                    method="Placidus/Ptolemy"
-                ))
-            
-            # 6. Opposition to MC (IC)
-            # Arc = RA - RA_IC
-            ra_ic = (mc_ra + 180.0) % 360.0
-            arc_ic = (ra_p - ra_ic) % 360.0
-            
-            if 0 < arc_ic < 100:
-                results.append(DirectionResult(
-                    significator="Midheaven",
-                    promittor=p.name.value,
-                    aspect="Opposition",
-                    arc=arc_ic,
-                    years=cls.ptolemy_key(arc_ic),
-                    date_offset=cls.format_years(arc_ic),
-                    method="Placidus/Ptolemy"
-                ))
+            # CHECK ALL ASPECTS TO MC
+            # Arc = RA(Promittor Aspect Point) - RAMC
+            for asp_name, asp_angle, _ in aspects_to_check:
+                aspect_lons = []
+                if asp_angle == 0:
+                    aspect_lons = [(p.longitude, "Conjunction")]
+                elif asp_angle == 180:
+                    aspect_lons = [((p.longitude + 180) % 360, "Opposition")]
+                else:
+                    aspect_lons = [
+                        ((p.longitude + asp_angle) % 360, f"{asp_name} (Dexter)"),
+                        ((p.longitude - asp_angle) % 360, f"{asp_name} (Sinister)")
+                    ]
+                
+                for lon_pt, name_pt in aspect_lons:
+                     ra_pt, _ = cls.ecliptic_to_equatorial(lon_pt, 0.0)
+                     arc = (ra_pt - mc_ra) % 360.0
+                     
+                     if 0 < arc < 100:
+                         results.append(DirectionResult(
+                            significator="Midheaven",
+                            promittor=p.name.value,
+                            aspect=name_pt,
+                            arc=arc,
+                            years=cls.ptolemy_key(arc),
+                            date_offset=cls.format_years(arc),
+                            method="Placidus/Zodiacal"
+                        ))
 
         return sorted(results, key=lambda x: x.years)
 
@@ -332,4 +263,3 @@ class PrimaryDirectionsEngine:
         y = int(years)
         m = int((years - y) * 12)
         return f"{y}y {m}m"
-

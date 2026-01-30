@@ -20,6 +20,7 @@ from .dignities import DignityCalculator
 from .calculations import calculate_lunar_phase, calculate_prenatal_syzygy
 from .mundane import get_recent_eclipses, check_eclipse_impact, check_universal_causation_dec2025, MundaneEngine
 from .horary import analyze_horary_physics, calculate_antiscia
+from .aspects import AspectEngine, AspectType
 from database.db_manager import DelineationLibrary
 import swisseph as swe
 
@@ -293,9 +294,15 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
         for ec in eclipses:
             impact = check_eclipse_impact(planet.longitude, ec["longitude"])
             if impact:
+                remedy = ""
+                if planet.name == PlanetName.SUN:
+                    remedy = " REMEDY (Sun): The Native must 'abdicate' a visible role to let the Universal wave pass (Substitute King)."
+                elif planet.name == PlanetName.MOON:
+                    remedy = " REMEDY (Moon): Secure the physical vessel/body. Elect a 'scapegoat' object or talisman to absorb the charge."
+
                 result["impacts"].append({
                     "cause": f"Universal Overdrive: {ec['type']}",
-                    "effect": impact,
+                    "effect": f"{impact}.{remedy}",
                     "rule": "Universal overrides Particular (Ptolemy, Tetrabiblos Book II)"
                 })
         
@@ -305,9 +312,13 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
             # Check if this universal cause (eclipse) hits the planet
             impact = check_eclipse_impact(planet.longitude, uc["longitude"])
             if impact:
+                remedy = ""
+                if planet.name in [PlanetName.SUN, PlanetName.MOON]:
+                    remedy = " REMEDY: Apply Substitute King Protocol. Voluntarily undertake a 'ritual' difficulty to satisfy the generated omen."
+                
                 result["impacts"].append({
                     "cause": f"Universal Causation: {uc['cause']}",
-                    "effect": f"SUSPENDED NATAL PROMISE: {impact}",
+                    "effect": f"SUSPENDED NATAL PROMISE: {impact}.{remedy}",
                     "rule": uc['rule']
                 })
         
@@ -439,6 +450,18 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
                 "rule": "Antiscia provides a 'mirror' strength regardless of ecliptic aspect."
             })
 
+    # 11. Ptolemaic Aspects (with Sect Modification)
+    all_aspects = AspectEngine.calculate_aspects(chart)
+    my_aspects = [a for a in all_aspects if a.planet_a == planet.name or a.planet_b == planet.name]
+    for asp in my_aspects:
+        # Determine the other planet
+        other_name = asp.planet_b if asp.planet_a == planet.name else asp.planet_a
+        result["impacts"].append({
+            "cause": f"Aspect: {asp.type.value} w/ {other_name.value}",
+            "effect": asp.text,
+            "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        })
+
     # 9. Textual Delineations
     sect_str = "DAY" if chart_sect == Sect.DAY else "NIGHT"
     key = f"{planet.name.value.upper()}_{planet.sign.value.upper()}_{sect_str}"
@@ -450,20 +473,41 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
     
     return result
 
-def calculate_jones_pattern(longitudes: List[float]) -> str:
+def calculate_occupied_arc(longitudes: List[float]) -> float:
+    if not longitudes: return 0.0
     longs = sorted(longitudes)
-    # Find max gap
     max_gap = 0
     for i in range(len(longs)):
         gap = (longs[(i+1)%len(longs)] - longs[i]) % 360
         if gap > max_gap:
             max_gap = gap
-    
-    occupied_arc = 360 - max_gap
+    return 360 - max_gap
+
+def calculate_jones_pattern(longitudes: List[float]) -> str:
+    occupied_arc = calculate_occupied_arc(longitudes)
     
     if occupied_arc <= 120: return "Bundle"
     if occupied_arc <= 185: return "Bowl"
+    
+    # Check for Bucket: A Bowl (>180 arc generally) + 1 Handle
+    # If we remove one planet, does the rest fit in a Bowl (<180)?
+    longs = sorted(longitudes)
+    for i in range(len(longs)):
+        subset = longs[:i] + longs[i+1:]
+        sub_arc = calculate_occupied_arc(subset)
+        if sub_arc <= 180:
+            return "Bucket"
+
     if occupied_arc <= 240: return "Locomotive"
+    
+    # Recalculate max gap for final checks
+    max_gap = 0
+    longs = sorted(longitudes)
+    for i in range(len(longs)):
+        gap = (longs[(i+1)%len(longs)] - longs[i]) % 360
+        if gap > max_gap:
+            max_gap = gap
+
     if max_gap < 30: return "Splash"
     return "Splay/Seesaw"
 
@@ -527,6 +571,11 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         "method": d.method
     } for d in primary_dirs]
 
+    # Calculate Master Time-Lord (The Distributor)
+    distributor_data = {}
+    if age is not None:
+        distributor_data = PrimaryDirectionsEngine.calculate_current_distributor(chart, float(age), demo_lat)
+
     # Receptions (Lilly Mode Default)
     receptions = ReceptionEngine.calculate_mutual_receptions(chart, ReceptionMode.STANDARD_LILLY)
     receptions_json = [{
@@ -565,6 +614,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         },
         "vitality": vitality_report,
         "primary_directions": primary_dirs_json,
+        "primary_direction_distributor": distributor_data,
         "soul_guardian": generate_soul_guardian_reading(chart, jd) if jd > 0 else {},
         "planets": [],
         "lots": calculate_all_lots(chart, sect),
@@ -585,6 +635,26 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     for planet in chart.planets:
         planet_data = analyze_planet_forensic(planet, chart, jd)
         report["planets"].append(planet_data)
+
+    # 13. Macroscopic Analysis (Hemispheres/Quadrants) post-planet processing
+    # Requires house numbers from planet data
+    hemi = {"East": 0, "West": 0, "North": 0, "South": 0}
+    # East: 10,11,12,1,2,3 | West: 4,5,6,7,8,9
+    # South (Day/Visible): 7,8,9,10,11,12 | North (Night/Hidden): 1,2,3,4,5,6
+    
+    for p in report["planets"]:
+         h = p.get("house_number", 0)
+         if h in [10, 11, 12, 1, 2, 3]: hemi["East"] += 1
+         else: hemi["West"] += 1
+         
+         if h in [7, 8, 9, 10, 11, 12]: hemi["South"] += 1
+         else: hemi["North"] += 1
+         
+    report["summary"]["hemispheres"] = hemi
+    report["summary"]["hemisphere_focus"] = {
+        "orientation": "Self-Determination (East)" if hemi["East"] > hemi["West"] else "Other-Oriented (West)",
+        "visibility": "Public/Objective (South)" if hemi["South"] > hemi["North"] else "Private/Subjective (North)"
+    }
 
     rule_ledger = []
     rule_counts = {}
@@ -700,6 +770,54 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 f"Range: {lunar_mansion.get('start_lon_deg')}°–{lunar_mansion.get('end_lon_deg')}°"
             ]
         })
+
+    # NEW: Check Angles (Ascendant/Midheaven) for Universal Overrides (Binder1 Step 2 Linkage Test)
+    if jd > 0:
+        angle_eclipses = get_recent_eclipses(jd)
+        dec_audit = check_universal_causation_dec2025(jd)
+        
+        # Combine sources
+        all_universal_events = []
+        for e in angle_eclipses:
+            all_universal_events.append({
+                "cause": f"Universal Overdrive: {e['type']}", 
+                "longitude": e["longitude"],
+                "rule": "Universal overrides Particular (Ptolemy, Tetrabiblos II)"
+            })
+        for d in dec_audit:
+            all_universal_events.append(d)
+
+        angles_map = {
+            "Ascendant": chart.ascendant,
+            "Midheaven": chart.mc
+        }
+
+        for angle_name, angle_lon in angles_map.items():
+            for univ in all_universal_events:
+                impact = check_eclipse_impact(angle_lon, univ["longitude"])
+                if impact:
+                    remedy = ""
+                    if angle_name == "Midheaven":
+                        remedy = "REMEDY: Abdicate visible power/career role. Undertake a 'Substitute' difficult project to absorb the 10th House blow."
+                    elif angle_name == "Ascendant":
+                        remedy = "REMEDY: Change personal appearance or name. Adopt a 'low profile' or 'Farmer' persona to let the wave pass."
+                    
+                    rule_id = _unique_rule_id(f"{angle_name.lower()}-universal-override")
+                    rule_ledger.append({
+                        "id": rule_id,
+                        "category": "Universal Override",
+                        "condition": f"{angle_name} impacted by {univ['cause']}",
+                        "judgment": f"DIRECT HIT: {impact}. The Native is conscripted by the Universal Event. {remedy}",
+                        "sources": ["Ptolemy, Tetrabiblos II", "Mesopotamian Substitute King Ritual"],
+                        "confidence": 95,
+                        "conflicts": [],
+                        "trace": [
+                            "Step 2: Linkage Test (Binder1)",
+                            f"Universal Cause > Particular Cause", 
+                            f"Eclipse at {univ['longitude']:.2f}", 
+                            f"Angle at {angle_lon:.2f}"
+                        ]
+                    })
 
     report["rule_ledger"] = rule_ledger
 

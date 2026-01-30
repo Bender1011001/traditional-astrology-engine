@@ -116,7 +116,13 @@ class MundaneEngine:
             # Use absolute difference to be safe, though end should be > start
             start_t = res_sol[1][1]
             end_t = res_sol[1][4]
-            duration_days = abs(end_t - start_t)
+            
+            if start_t > 0 and end_t > 0:
+                duration_days = abs(end_t - start_t)
+            else:
+                # Fallback if contacts are not fully defined (e.g. partial only, or calculation limits)
+                duration_days = 0.10 # Approx 2.4 hours as standard fallback
+            
             duration_hours = duration_days * 24.0
 
             res_pos = swe.calc_ut(tjd_sol, swe.SUN, swe.FLG_SWIEPH)
