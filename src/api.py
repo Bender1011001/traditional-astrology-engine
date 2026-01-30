@@ -354,18 +354,11 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     # Rate Limiting (Free Tier Only)
     if tier == 'free':
         client_ip = http_request.client.host if http_request.client else "unknown"
-        # Validate limit
-        if not _rate_limiter.is_allowed(client_ip):
-            # Allow returning result if it's cached?
-            # For now, simplistic block.
-            # Ideally we return 429 BUT we want to allow users to see their previous result if cached...
-            # The current architecture calculates fresh every time unless we implement cache.
-            # The plan says "Cache for 30 days" - Phase 3.
-            # We haven't implemented caching yet!
-            
-            # Implementation of Cache Check (File based as per plan)
-            # For this step, we'll just block NEW calculations.
-            raise HTTPException(status_code=429, detail="Daily free limit reached. Subscribe for unlimited access.")
+        # Whitelist localhost for internal calls (e.g. email capture)
+        if client_ip != "127.0.0.1":
+            # Validate limit
+            if not _rate_limiter.is_allowed(client_ip):
+                raise HTTPException(status_code=429, detail="Daily free limit reached. Subscribe for unlimited access.")
 
     # Add tier metadata to result
     result["meta"]["tier"] = tier
@@ -377,9 +370,10 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
         return cached_result
 
     # Rate Limiting (Free Tier Only) - MOVED AFTER CACHE CHECK (so returning users don't count against limit)
+    # Rate Limiting (Free Tier Only) - MOVED AFTER CACHE CHECK (so returning users don't count against limit)
     if tier == 'free':
         client_ip = http_request.client.host if http_request.client else "unknown"
-        if not _rate_limiter.is_allowed(client_ip):
+        if client_ip != "127.0.0.1" and not _rate_limiter.is_allowed(client_ip):
             raise HTTPException(status_code=429, detail="Daily free limit reached (and no cached result found).")
         
     # INTEGRATION: Run Forensic Audit using ingested data
@@ -428,38 +422,47 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
             
         result["meta"]["analysis_jd"] = analysis_jd
 
+        # Cost Optimization:
+        # 1. Forensic Audit (Cheap CPU, required for frontend "Temperament"): RUN FOR ALL
         audit_report = perform_forensic_audit(chart_model, result["meta"]["julian_day"], age=age, month=month, day=day, birth_date=bd, analysis_date=ad, analysis_jd=analysis_jd)
         result["forensic_report"] = audit_report
         
-        # 5-Day Forecast
-        try:
-            forecast_data = calculate_5_day_forecast(chart_model, result["meta"]["julian_day"], ad)
-            result["forensic_forecast"] = forecast_data
-        except Exception as fe:
-            print(f"Forecast Error: {fe}")
-            result["forensic_forecast_error"] = str(fe)
+        # 2. Forecasting (Not used in free UI): SKIP FOR FREE
+        if tier != 'free':
+            try:
+                forecast_data = calculate_5_day_forecast(chart_model, result["meta"]["julian_day"], ad)
+                result["forensic_forecast"] = forecast_data
+            except Exception as fe:
+                print(f"Forecast Error: {fe}")
+                result["forensic_forecast_error"] = str(fe)
+        else:
+             result["forensic_forecast"] = None
 
         # Advanced Prediction (Firdaria, Solar Return, Arcs, Muntha, Lunar Phase)
-        try:
-            birth_dt = None
+        # SKIP FOR FREE
+        if tier != 'free':
             try:
-                birth_dt = datetime.fromisoformat(result["meta"]["utc_time"])
-            except Exception:
-                birth_dt = bd
-            if birth_dt and birth_dt.tzinfo is not None:
-                birth_dt = birth_dt.replace(tzinfo=None)
-            if birth_dt:
-                predictor = AdvancedPredictionEngine(
-                    chart_model,
-                    birth_dt,
-                    result["meta"]["julian_day"],
-                    result["meta"]["lat"],
-                    result["meta"]["lon"]
-                )
-                result["advanced_prediction"] = predictor.get_prediction_report(ad)
-        except Exception as pe:
-            print(f"Advanced Prediction Error: {pe}")
-            result["advanced_prediction_error"] = str(pe)
+                birth_dt = None
+                try:
+                    birth_dt = datetime.fromisoformat(result["meta"]["utc_time"])
+                except Exception:
+                    birth_dt = bd
+                if birth_dt and birth_dt.tzinfo is not None:
+                    birth_dt = birth_dt.replace(tzinfo=None)
+                if birth_dt:
+                    predictor = AdvancedPredictionEngine(
+                        chart_model,
+                        birth_dt,
+                        result["meta"]["julian_day"],
+                        result["meta"]["lat"],
+                        result["meta"]["lon"]
+                    )
+                    result["advanced_prediction"] = predictor.get_prediction_report(ad)
+            except Exception as pe:
+                print(f"Advanced Prediction Error: {pe}")
+                result["advanced_prediction_error"] = str(pe)
+        else:
+            result["advanced_prediction"] = None
 
         # Plain-language reading (internal LLM)
         try:
@@ -870,7 +873,7 @@ async def capture_email(req: EmailCaptureRequest):
     # This also applies the tier logic based on any access_token in chart_request
     try:
         # Mock request object for logging params
-        dummy_req = Request(scope={"type": "http"})
+        dummy_req = Request(scope={"type": "http", "client": ("127.0.0.1", 0)})
         result = await calculate_chart(req.chart_request, dummy_req)
         
         # 2. Generate PDF
@@ -968,7 +971,14 @@ async def create_checkout(checkout_request: CheckoutRequest):
                 mode='payment',
                 success_url=checkout_request.success_url + f'?session_id={{CHECKOUT_SESSION_ID}}',
                 cancel_url=checkout_request.cancel_url,
-                metadata={'chart_hash': chart_hash, 'tier': 'onetime'}
+                metadata={
+                    'chart_hash': chart_hash, 
+                    'tier': 'onetime',
+                    'date': checkout_request.chart_request.date,
+                    'time': checkout_request.chart_request.time,
+                    'city': checkout_request.chart_request.city,
+                    'state': checkout_request.chart_request.state
+                }
             )
         elif checkout_request.tier == 'subscription':
             # Note: Requires a price ID from Stripe Dashboard
@@ -986,7 +996,14 @@ async def create_checkout(checkout_request: CheckoutRequest):
                 mode='subscription',
                 success_url=checkout_request.success_url + f'?session_id={{CHECKOUT_SESSION_ID}}',
                 cancel_url=checkout_request.cancel_url,
-                metadata={'chart_hash': chart_hash, 'tier': 'subscription'}
+                metadata={
+                    'chart_hash': chart_hash, 
+                    'tier': 'subscription',
+                    'date': checkout_request.chart_request.date,
+                    'time': checkout_request.chart_request.time,
+                    'city': checkout_request.chart_request.city,
+                    'state': checkout_request.chart_request.state
+                }
             )
         elif checkout_request.tier == 'subscription_annual':
             price_id = os.getenv("STRIPE_ANNUAL_PRICE_ID")
@@ -1004,7 +1021,14 @@ async def create_checkout(checkout_request: CheckoutRequest):
                 mode='subscription',
                 success_url=checkout_request.success_url + f'?session_id={{CHECKOUT_SESSION_ID}}',
                 cancel_url=checkout_request.cancel_url,
-                metadata={'chart_hash': chart_hash, 'tier': 'subscription_annual'}
+                metadata={
+                    'chart_hash': chart_hash, 
+                    'tier': 'subscription_annual',
+                    'date': checkout_request.chart_request.date,
+                    'time': checkout_request.chart_request.time,
+                    'city': checkout_request.chart_request.city,
+                    'state': checkout_request.chart_request.state
+                }
             )
         else:
              raise HTTPException(status_code=400, detail="Invalid tier.")
@@ -1034,22 +1058,22 @@ async def stripe_webhook(request: Request):
         session = event['data']['object']
         metadata = session.get('metadata', {})
         chart_hash = metadata.get('chart_hash')
-        tier = metadata.get('tier', 'onetime')
+        # tier = metadata.get('tier', 'onetime') 
         
         if chart_hash:
-            # Generate token
-            # For one-time: 30 days. For sub: maybe longer or check sub status. 
-            # Simplification: give 30 days for now, sub renewal handles separately (or logic upgrades later)
             token = create_access_token(chart_hash, 'paid', expires_days=30)
             
             # Send Email
             if session.get('customer_email'):
                 email = session.get('customer_email')
-                # Construct link
-                # In prod, use real domain. Here use referer or hardcoded.
-                # Assuming standard domain from metadata or hardcoded
+                
+                # Check for birth data in metadata (Cross-Device Fix)
+                query_params = f"action=regenerate&token={token}"
+                if metadata.get('date'):
+                    query_params += f"&date={metadata.get('date')}&time={metadata.get('time')}&city={metadata.get('city')}&state={metadata.get('state')}"
+                
                 base_url = "https://traditional-astrology.com"
-                link = f"{base_url}/index.html?action=regenerate&token={token}"
+                link = f"{base_url}/index.html?{query_params}"
                 
                 subject = "Access Your Codex Caelestis Reading"
                 body = f"""
@@ -1062,11 +1086,51 @@ async def stripe_webhook(request: Request):
                         <a href="{link}" style="background: #c07a2b; color: #fff; text-decoration: none; padding: 12px 24px; font-weight: bold; text-transform: uppercase;">VIEW FULL READING</a>
                     </div>
                     <p style="font-size: 0.9em;">Or use this link:<br><a href="{link}">{link}</a></p>
-                    <p><em>Note: For best results, view on the device/browser where you entered your birth data.</em></p>
+                    <p><em>Note: This link includes your encrypted session data and can be opened on any device.</em></p>
                 </body>
                 </html>
                 """
                 send_email(email, subject, body)
+    
+    elif event['type'] == 'invoice.payment_succeeded':
+        invoice = event['data']['object']
+        # Handle subscription renewal
+        if invoice.get('subscription'):
+            try:
+                sub = stripe.Subscription.retrieve(invoice['subscription'])
+                metadata = sub.get('metadata', {})
+                chart_hash = metadata.get('chart_hash')
+                
+                if chart_hash:
+                    # Extend access for another period
+                    token = create_access_token(chart_hash, 'paid', expires_days=32)
+                    
+                    if invoice.get('customer_email'):
+                        email = invoice.get('customer_email')
+                        
+                        # Cross-Device Fix
+                        query_params = f"action=regenerate&token={token}"
+                        if metadata.get('date'):
+                            query_params += f"&date={metadata.get('date')}&time={metadata.get('time')}&city={metadata.get('city')}&state={metadata.get('state')}"
+                            
+                        base_url = "https://traditional-astrology.com"
+                        link = f"{base_url}/index.html?{query_params}"
+                        
+                        subject = "Your Subscription Renewed - Codex Caelestis"
+                        body = f"""
+                        <html>
+                        <body style="font-family: serif; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 20px;">
+                            <h2 style="color: #c07a2b; border-bottom: 2px solid #c07a2b; padding-bottom: 10px;">Subscription Renewed</h2>
+                            <p>Your subscription has successfully renewed.</p>
+                            <div style="background: #f4efe6; padding: 20px; text-align: center; border: 1px solid #d4c5b0; margin: 20px 0;">
+                                <a href="{link}" style="background: #c07a2b; color: #fff; text-decoration: none; padding: 12px 24px; font-weight: bold; text-transform: uppercase;">ACCESS READING</a>
+                            </div>
+                        </body>
+                        </html>
+                        """
+                        send_email(email, subject, body)
+            except Exception as e:
+                print(f"Renewal Error: {e}")
             
     return {'status': 'success'}
 

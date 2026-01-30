@@ -4,13 +4,20 @@ import hashlib
 from datetime import datetime
 from typing import Optional, Dict, Any
 
-CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database", "cache")
+# Use /tmp for ephemeral caching on serverless platforms (Heroku/Render)
+import tempfile
+CACHE_DIR = os.getenv("CACHE_DIR", os.path.join(tempfile.gettempdir(), "astrology_cache"))
 
 class CacheManager:
     def __init__(self, cache_dir: str = CACHE_DIR):
         self.cache_dir = cache_dir
         if not os.path.exists(self.cache_dir):
-            os.makedirs(self.cache_dir, exist_ok=True)
+            try:
+                os.makedirs(self.cache_dir, exist_ok=True)
+            except OSError:
+                # Fallback to local temp if permission denied (rare in /tmp)
+                self.cache_dir = os.path.join(tempfile.gettempdir(), "astrology_cache")
+                os.makedirs(self.cache_dir, exist_ok=True)
 
     def _get_path(self, chart_hash: str, tier: str) -> str:
         # Separate cache by tier because free != paid content

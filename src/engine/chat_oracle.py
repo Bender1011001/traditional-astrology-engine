@@ -3,7 +3,7 @@ import json
 import urllib.request
 import urllib.error
 
-def _openrouter_request(messages, temperature, max_tokens):
+def _openrouter_request(messages, temperature, max_tokens, top_p=None):
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         return "Error: OPENROUTER_API_KEY environment variable not found. Please set it in your environment."
@@ -31,6 +31,8 @@ def _openrouter_request(messages, temperature, max_tokens):
             "temperature": temperature,
             "max_tokens": max_tokens
         }
+        if top_p is not None:
+            payload["top_p"] = top_p
 
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(base_url, data=data, headers=headers, method="POST")
@@ -74,6 +76,8 @@ def get_chat_response(query: str, context: str) -> str:
     try:
         temperature = float(os.getenv("OPENROUTER_TEMPERATURE", "0.4"))
         max_tokens = int(os.getenv("OPENROUTER_MAX_TOKENS", "800"))
+        # Default top_p to 0.9 for chat to allow some creativity but kept in check
+        top_p = float(os.getenv("OPENROUTER_TOP_P", "0.9"))
 
         system_prompt = (
             "You are the 'Codex Caelestis', a highly advanced AI Astrology Oracle. "
@@ -100,7 +104,7 @@ def get_chat_response(query: str, context: str) -> str:
             {"role": "user", "content": user_prompt}
         ]
 
-        return _openrouter_request(messages, temperature, max_tokens)
+        return _openrouter_request(messages, temperature, max_tokens, top_p=top_p)
     except Exception as e:
         return f"Oracle Communication Error: {str(e)}"
 
@@ -113,8 +117,11 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
     if len(context) > max_chars:
         context = context[:max_chars]
 
-    temperature = float(os.getenv("OPENROUTER_PLAIN_TEMPERATURE", os.getenv("OPENROUTER_TEMPERATURE", "0.4")))
+    # Use a lower default temperature for plain readings to ensure reproducibility
+    temperature = float(os.getenv("OPENROUTER_PLAIN_TEMPERATURE", "0.2"))
     max_tokens = int(os.getenv("OPENROUTER_PLAIN_MAX_TOKENS", os.getenv("OPENROUTER_MAX_TOKENS", "800")))
+    # Tighter top_p for explanation consistency
+    top_p = float(os.getenv("OPENROUTER_PLAIN_TOP_P", "0.85"))
 
     system_prompt = (
         "You are a plain-language astrology interpreter. "
@@ -124,7 +131,8 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
         "Avoid jargon. If you must use a technical term, define it in one short clause. "
         "Use short paragraphs, clear cause-and-effect phrasing, and a calm, practical tone. "
         "Do not mention you are an AI and do not mention JSON. "
-        "IMPORTANT: Always maintain a probabilistic and symbolic tone. Avoid saying 'You will X' or 'This means Y will happen'. Instead, use 'This suggests a theme of X' or 'The traditional archetypes point toward Y'."
+        "IMPORTANT: Always maintain a probabilistic and symbolic tone. Avoid saying 'You will X' or 'This means Y will happen'. Instead, use 'This suggests a theme of X' or 'The traditional archetypes point toward Y'. "
+        "CRITICAL: Be deterministic. Given the same input data, produce the exact same structure and explanation."
     )
 
     if tier == 'free':
@@ -147,7 +155,7 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
 
     for question in questions:
         messages.append({"role": "user", "content": question})
-        response = _openrouter_request(messages, temperature, max_tokens)
+        response = _openrouter_request(messages, temperature, max_tokens, top_p=top_p)
         if not response or response.startswith("Oracle Communication Error") or response.startswith("Error:"):
             # If error on first attempt, return empty. If later, return what we have.
             if len(responses) == 0:

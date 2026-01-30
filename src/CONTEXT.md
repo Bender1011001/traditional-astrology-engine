@@ -8,6 +8,7 @@
 - Python 3.9+ 
 - No external dependencies (pure math).
 - SendGrid / SMTP for emails.
+- File-based Caching (/tmp for serverless capability).
 
 ## Key Files
 - `models.py` — Core data structures (Planet, Chart, Sect).
@@ -27,6 +28,7 @@
 |-------|-------|-----|
 | Inaccurate Dignity | Using Ptyolemaic Terms | Use Egyptian Terms (Valens) as per Binder 1. |
 | Lots Calculation | Ignoring Sect Reversal | Implement strict `if sect == NIGHT: swap(A, B)` logic. |
+| Rate Limit Localhost | Internal calls from email capture were getting blocked | Whitelist 127.0.0.1 in RateLimiter logic. |
 
 ## Anti-Patterns
 - Do NOT use modern psychological interpretations (e.g., "Soul Growth" for Nodes).

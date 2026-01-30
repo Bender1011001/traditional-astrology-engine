@@ -20,6 +20,12 @@
 - Stripe (Payments)
 - PyJWT (Authentication)
 
+## AI Configuration
+- **Model**: Google Gemini Flash (via OpenRouter)
+- **Reproducibility**: Enforced via `temperature=0.2` and `top_p=0.85` for plain readings.
+- **System Prompts**: Strict adherence to chart data and deterministic output structure.
+
+
 
 ## Database Inventory (src/database/data/)
 

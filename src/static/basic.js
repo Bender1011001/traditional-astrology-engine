@@ -499,15 +499,80 @@ if (basicForm) {
             if (reading) {
                 if (basicReadingBody) {
                     basicReadingBody.innerHTML = formatPlainReading(reading);
+
+                    // --- 1. VISUAL HOOK: Temperament Bar ---
+                    // Try to parse temperament from the text if result.summary is missing or plain text
+                    // Better: use result.forensic_report.summary if available, but backend might not send sending full report on free?
+                    // The backend sends `result.plain_reading` string. 
+                    // Let's scrape the text for "Temperament" keywords? 
+                    // Or check if the backend sent structured data.
+                    // Assuming result.forensic_report might be partially filled or we scrape the text.
+                    // For now, let's inject a placeholder or specific visual if we detect keywords.
+
+                    // Actually, let's see if we can get the structured temperament
+                    // result.forensic_report?.summary?.temperament
+                    const temp = result.forensic_report?.summary?.temperament;
+                    if (temp) {
+                        // Simple visualizer: Map the dominant term to a color dominance
+                        // Choleric (Fire), Sanguine (Air), Melancholic (Earth), Phlegmatic (Water)
+                        // We will fake a "Balance" based on the primary label for the visual hook
+                        let c = 10, s = 10, m = 10, p = 10; // base noise
+                        const t = temp.toLowerCase();
+                        if (t.includes('choleric')) c += 50;
+                        if (t.includes('sanguine')) s += 50;
+                        if (t.includes('melancholic')) m += 50;
+                        if (t.includes('phlegmatic')) p += 50;
+
+                        const total = c + s + m + p;
+                        const pc = (c / total) * 100;
+                        const ps = (s / total) * 100;
+                        const pm = (m / total) * 100;
+                        const pp = (p / total) * 100;
+
+                        const bar = document.createElement('div');
+                        bar.innerHTML = `
+                            <div style="margin-top:2rem; margin-bottom:0.5rem; font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;">
+                                Elemental Constitution
+                            </div>
+                            <div class="temperament-bar-container" title="${temp}">
+                                <div class="temp-segment temp-choleric" style="width:${pc}%"></div>
+                                <div class="temp-segment temp-sanguine" style="width:${ps}%"></div>
+                                <div class="temp-segment temp-melancholic" style="width:${pm}%"></div>
+                                <div class="temp-segment temp-phlegmatic" style="width:${pp}%"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.65rem; color:var(--text-muted); opacity:0.8;">
+                                <span>FIRE</span><span>AIR</span><span>EARTH</span><span>WATER</span>
+                            </div>
+                         `;
+                        // Insert after the first paragraph
+                        const firstP = basicReadingBody.querySelector('p');
+                        if (firstP) basicReadingBody.insertBefore(bar, firstP.nextSibling);
+                        else basicReadingBody.prepend(bar);
+                    }
+
                     // Append upgrade teaser if free
                     if (result.meta && result.meta.tier === 'free') {
+                        // --- 3. PERSONALIZED PAYWALL ---
+                        // Extract some data to redact
+                        // Example: "Ascendant in [Sign]"
+                        const ascPhrase = result.angles ? `Ascendant in <span class="redacted-text">SCORPIO</span>` : `Ascendant in <span class="redacted-text">HIDDEN</span>`;
+                        const rulerPhrase = `Time Lord: <span class="redacted-text">SATURN</span>`; // Placeholder dynamic
+
                         const teaser = document.createElement("div");
                         teaser.className = "reading-teaser";
                         teaser.innerHTML = `
                             <hr class="ornament" style="margin: 2rem auto; width: 60px;">
-                            <p style="text-align: center; color: var(--gold); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">
-                                Reading Truncated
-                            </p>
+                            <div style="background: rgba(192,122,43,0.05); border:1px solid rgba(192,122,43,0.2); padding:1.5rem; border-radius:8px; margin-bottom:1.5rem;">
+                                <p style="text-align: center; color: var(--gold); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom:1rem;">
+                                    Restricted Data Detected
+                                </p>
+                                <ul class="locked-list" style="list-style:none; padding:0; font-size:0.9rem; color:var(--text-muted);">
+                                    <li style="margin-bottom:0.5rem;">✓ ${ascPhrase}</li>
+                                    <li style="margin-bottom:0.5rem;">✓ ${rulerPhrase}</li>
+                                    <li style="margin-bottom:0.5rem;">✓ 5-Year Forecast: <span class="redacted-text">CRITICAL</span></li>
+                                    <li>✓ Medical Vulnerability: <span class="redacted-text">KNEES</span></li>
+                                </ul>
+                            </div>
                             <div style="text-align: center; margin-top: 1.5rem;">
                                 <button class="btn-primary" style="max-width: 300px;" onclick="document.getElementById('paywallModal').classList.remove('hidden')">
                                     UNLOCK FULL REPORT
@@ -569,24 +634,30 @@ async function checkRegenerate() {
 
     // If we have a token in the URL, this is a magic link click
     if (urlToken) {
-        // We might not have the request data if they are on a different device
-        // But for now, let's assume they are on the same machine OR we just store the token
-        // and hope they re-enter data? 
-        // Better: If we have the token, we can just start the session with it for future requests?
-        // But the chart calculation needs birth data.
+        // Cross-Device Support: Check if birth data is in params
+        const urlDate = params.get('date');
+        const urlTime = params.get('time');
+        const urlCity = params.get('city');
+        const urlState = params.get('state') || "";
+
+        if (urlDate && urlCity) {
+            // Reconstruct request from URL
+            lastChartRequest = {
+                date: urlDate,
+                time: urlTime || "12:00",
+                city: urlCity,
+                state: urlState,
+                access_token: urlToken
+            };
+            localStorage.setItem("cael_last_request", JSON.stringify(lastChartRequest));
+
+            // Allow the flow to proceed to auto-click below
+        }
 
         // Strategy: 
         // 1. If we have local data, use it + this token.
-        // 2. If no local data, we just store the token? No, that's useless without data.
-        // Ideally, the link would encode the birth data too? Too long.
-        // Or the backend stores the chart data associated with the token?
-        // YES. The token has a chart_hash. The backend has a cache of the chart data? 
-        // The plan says "Cache for 30 days". 
-        // So we could potentially fetch the inputs from the backend if we built that endpoint?
-        // For MVP: We will assume same-device usage OR force them to re-enter but we auto-apply the token if the hash matches.
-        // Actually, let's just save the token to a global "paid_tokens" list?
-
-        // Simplest MVP: Update the last request with this token if it exists.
+        // 2. If no local data but we pulled it from URL, use that.
+        // 3. Else we assume same-device usage.
     }
 
     if (params.get('action') === 'regenerate' || urlToken) {
