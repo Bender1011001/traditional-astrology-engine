@@ -15,3 +15,6 @@ cloudflared_config.yml
 logs/
 cloudflared.log
 users.json
+users.db
+*.sqlite
+

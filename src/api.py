@@ -188,23 +188,46 @@ def _build_plain_reading_context(report: dict, advanced_prediction: Optional[dic
 
     return json.dumps(context, ensure_ascii=True, indent=2)
 
-def _client_meta(http_request: Request) -> dict:
-    client_host = http_request.client.host if http_request.client else None
-    return {
-        "ip": client_host,
-        "user_agent": http_request.headers.get("user-agent"),
-        "referer": http_request.headers.get("referer")
-    }
 
-def _log_event(event_type: str, payload: dict, http_request: Request, session_id: str | None = None, ts: str | None = None) -> None:
-    record = {
-        "ts": ts or datetime.utcnow().isoformat() + "Z",
-        "event_type": event_type,
-        "session_id": session_id,
-        "payload": payload,
-        "client": _client_meta(http_request)
-    }
-    _append_jsonl("events.jsonl", record)
+# Request Logging Middleware
+class RequestLoggingMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        start_time = time.time()
+        
+        # Log Request
+        client_ip = request.client.host if request.client else "unknown"
+        user_agent = request.headers.get("user-agent", "unknown")
+        method = request.method
+        path = request.url.path
+        
+        ActivityLogger.log_activity(
+            "request_received", 
+            ip=client_ip, 
+            details={
+                "method": method, 
+                "path": path, 
+                "user_agent": user_agent
+            }
+        )
+        
+        response = await call_next(request)
+        
+        # Log Response
+        process_time = time.time() - start_time
+        
+        ActivityLogger.log_activity(
+            "request_completed",
+            ip=client_ip,
+            details={
+                "method": method, 
+                "path": path, 
+                "status_code": response.status_code,
+                "duration_sec": round(process_time, 4)
+            }
+        )
+        
+        return response
+
 
 # Security Headers Middleware
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
@@ -217,7 +240,44 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://photon.komoot.io;"
         return response
 
+app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
+
+# Telemetry Endpoint for Frontend
+class TelemetryEvent(BaseModel):
+    event_type: str
+    element_id: Optional[str] = None
+    url: str
+    data: Optional[dict] = None
+
+@app.post("/api/log/telemetry")
+async def log_telemetry(event: TelemetryEvent, request: Request):
+    """
+    Log frontend events (clicks, errors, navigation).
+    """
+    client_ip = request.client.host if request.client else "unknown"
+    
+    # Try to extract user ID from token if present
+    auth_header = request.headers.get("Authorization")
+    user_id = "guest"
+    if auth_header and auth_header.startswith("Bearer "):
+        token = auth_header.split(" ")[1]
+        payload = validate_token(token)
+        if payload and "d" in payload and "user_id" in payload["d"]:
+            user_id = payload["d"]["user_id"]
+
+    ActivityLogger.log_activity(
+        f"frontend_{event.event_type}",
+        user_id=user_id,
+        ip=client_ip,
+        details={
+            "element": event.element_id,
+            "url": event.url,
+            "data": event.data
+        }
+    )
+    return {"status": "logged"}
+
 
 # CORS Configuration
 # Configurable via CORS_ORIGINS env var (comma-separated list)
@@ -1373,7 +1433,17 @@ async def verify_checkout_session(session_id: str):
              tier = metadata.get('tier', 'onetime')
              
              if chart_hash:
-                 token = create_access_token(chart_hash, 'paid', expires_days=30)
+                 # Extract birth data from metadata to ensure stateless restoration
+                 session_data = {
+                    'date': metadata.get('date'),
+                    'time': metadata.get('time'),
+                    'city': metadata.get('city'),
+                    'state': metadata.get('state')
+                 }
+                 # Only include if we actually have the data
+                 data_payload = session_data if session_data.get('date') else None
+                 
+                 token = create_access_token(chart_hash, 'paid', expires_days=30, data=data_payload)
                  return {"access_token": token, "chart_hash": chart_hash}
                  
         raise HTTPException(status_code=400, detail="Payment not completed.")

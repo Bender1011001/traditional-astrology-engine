@@ -672,16 +672,36 @@ async function checkRegenerate() {
 
             if (!foundToken) {
                 // Look in local storage if not in URL
-                // We use the chart hash of the last request to find the token
-                // We need to calculate the hash to look it up, OR valid iteration.
-                // Since we don't have the hash function exposed easily (it's in logic but let's replicate or iterate)
                 for (let i = 0; i < localStorage.length; i++) {
                     const key = localStorage.key(i);
                     if (key.startsWith('cael_token_')) {
-                        // Just take the first one found for now (MVP) or the most recently added?
                         foundToken = localStorage.getItem(key);
                         break;
                     }
+                }
+            }
+
+            if (!lastChartRequest && foundToken) {
+                // Fallback: Try to restore session data from token via API
+                try {
+                    const resp = await fetch(apiUrl(`/api/restore_session?token=${foundToken}`));
+                    if (resp.ok) {
+                        const sessionData = await resp.json();
+                        // Normalize data structure
+                        if (sessionData && sessionData.date && sessionData.city) {
+                            lastChartRequest = {
+                                date: sessionData.date,
+                                time: sessionData.time || "12:00",
+                                city: sessionData.city,
+                                state: sessionData.state || "",
+                                access_token: foundToken
+                            };
+                            // Save recovered session
+                            localStorage.setItem("cael_last_request", JSON.stringify(lastChartRequest));
+                        }
+                    }
+                } catch (e) {
+                    console.error("Session restore failed", e);
                 }
             }
 

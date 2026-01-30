@@ -6,6 +6,55 @@ const SIGNS = [
 ];
 
 const API_BASE = window.CAEL_API_BASE || "";
+function apiUrl(path) { return `${API_BASE}${path}`; }
+
+// === TELEMETRY & LOGGING ===
+async function logTelemetry(eventType, elementId = null, data = null) {
+    try {
+        const payload = {
+            event_type: eventType,
+            element_id: elementId,
+            url: window.location.href,
+            data: data
+        };
+        const token = localStorage.getItem('cael_auth_token');
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        // Use sendBeacon if available for better reliability on page unload
+        // But sendBeacon doesn't support custom headers easily for Bearer token in some older contexts,
+        // so we'll stick to fetch. keepalive: true helps.
+        fetch(apiUrl("/api/log/telemetry"), {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(payload),
+            keepalive: true
+        }).catch(() => { });
+    } catch (e) { }
+}
+
+// Track Clicks
+document.addEventListener('click', (e) => {
+    const target = e.target.closest('button, a, .clickable, input[type="submit"], .nav-link');
+    if (target) {
+        let label = target.innerText ? target.innerText.substring(0, 30) : (target.id || target.className);
+        logTelemetry('click', target.id, {
+            tag: target.tagName,
+            label: label,
+            classes: target.className
+        });
+    }
+});
+
+// Track JS Errors
+window.addEventListener('error', (e) => {
+    logTelemetry('js_error', null, {
+        message: e.message,
+        filename: e.filename,
+        lineno: e.lineno
+    });
+});
+// ==========================
 const IS_GH_PAGES = window.location.hostname.endsWith("github.io");
 const backendNotice = document.getElementById("backendNotice");
 if (backendNotice && IS_GH_PAGES && !API_BASE) {

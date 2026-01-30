@@ -93,7 +93,11 @@
 - Uses a custom "Egyptian Terms" system found in the binder which includes Sun and Moon.
 - Implements "Universal Overdrive" logic where mundane events (eclipses) prioritize over natal placements.
 - All planet-in-sign delineations have Day/Night sect variations.
-- **User Authentication**: Uses PBKDF2 password hashing (100k iterations), JWT tokens for sessions, and JSON file storage (can be upgraded to PostgreSQL later).
+- **User Authentication**: Uses PBKDF2 password hashing (100k iterations), JWT tokens for sessions, and **SQLAlchemy** (SQLite local / PostgreSQL prod).
+- **Total Logging Architecture**: 
+  - **Backend**: `RequestLoggingMiddleware` captures all requests/responses/timings.
+  - **Frontend**: Telemetry system captures clicks/errors and sends them to `/api/log/telemetry`.
+  - **Storage**: JSON-structured logs with rotation in `logs/astrology_engine.jsonl`.
 
 ## Trap Diary
 | Issue | Cause | Fix |
