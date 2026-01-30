@@ -156,7 +156,8 @@
             </form>
             <div class="auth-links">
                 <p>Already have an account? <a href="resources.html">RESOURCES</a>
-                    <a class="help-btn" href="login.html">Log In</a></p>
+                    <a class="help-btn" href="login.html">Log In</a>
+                </p>
             </div>
             <div id="authMessage"
                 style="text-align: center; margin-top: 1rem; color: var(--danger); min-height: 1.5em;"></div>
@@ -164,23 +165,74 @@
     </main>
 
     <script>
+        const API_BASE = window.CAEL_API_BASE || "";
+        function apiUrl(path) { return `${API_BASE}${path}`; }
+
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const msg = document.getElementById('authMessage');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
 
-            msg.textContent = "Processing...";
+            const name = document.getElementById('fullname').value;
+            const email = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                msg.textContent = "Passwords do not match.";
+                msg.style.color = "var(--danger)";
+                return;
+            }
+
+            // Validate password strength
+            if (password.length < 8) {
+                msg.textContent = "Password must be at least 8 characters.";
+                msg.style.color = "var(--danger)";
+                return;
+            }
+
+            msg.textContent = "Creating your account...";
             msg.style.color = "var(--text-muted)";
+            submitBtn.disabled = true;
 
             try {
-                await new Promise(r => setTimeout(r, 1000));
+                const resp = await fetch(apiUrl('/api/auth/register'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, name })
+                });
 
-                msg.textContent = "Registration is currently invite-only.";
-                msg.style.color = "var(--gold)";
+                const data = await resp.json();
+
+                if (!resp.ok) {
+                    throw new Error(data.detail || 'Registration failed.');
+                }
+
+                // Store auth token and user data (user is logged in after registration)
+                localStorage.setItem('cael_auth_token', data.token);
+                localStorage.setItem('cael_user', JSON.stringify(data.user));
+
+                msg.textContent = "Account created! Redirecting...";
+                msg.style.color = "var(--success)";
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1000);
+
             } catch (err) {
-                msg.textContent = "Connection error.";
+                msg.textContent = err.message || "Connection error.";
                 msg.style.color = "var(--danger)";
+                submitBtn.disabled = false;
             }
         });
+
+        // Check if already logged in
+        const existingToken = localStorage.getItem('cael_auth_token');
+        if (existingToken) {
+            document.getElementById('authMessage').textContent = "You are already logged in.";
+            document.getElementById('authMessage').style.color = "var(--gold)";
+        }
 
         const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         if (prefersDark || localStorage.getItem("cael_theme") === "dark") {

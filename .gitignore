@@ -14,3 +14,4 @@ venv/
 cloudflared_config.yml
 logs/
 cloudflared.log
+users.json

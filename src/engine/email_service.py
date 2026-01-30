@@ -86,13 +86,20 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
             logging.error(f"SMTP Error: {e}")
             return False
 
-    # 3. Dev Mode (Log to Console)
-    print("="*60)
-    print(f"MOCK EMAIL TO: {to_email}")
-    print(f"SUBJECT: {subject}")
-    print("-" * 20)
-    print(html_content) # Truncate if too long?
-    if attachment_bytes:
-        print(f"[Attachment: {attachment_name} ({len(attachment_bytes)} bytes)]")
-    print("="*60)
-    return True
+    # 3. Dev Mode / No Provider Configured
+    logging.warning(f"EMAIL NOT SENT (no provider configured): To={to_email}, Subject={subject}")
+    logging.warning("Configure SENDGRID_API_KEY or SMTP_HOST/SMTP_USER to enable email delivery.")
+    
+    # In development, log the content for debugging
+    if os.getenv("DEBUG_EMAIL", "").lower() in ("1", "true"):
+        print("="*60)
+        print(f"MOCK EMAIL TO: {to_email}")
+        print(f"SUBJECT: {subject}")
+        print("-" * 20)
+        print(html_content[:500] + "..." if len(html_content) > 500 else html_content)
+        if attachment_bytes:
+            print(f"[Attachment: {attachment_name} ({len(attachment_bytes)} bytes)]")
+        print("="*60)
+    
+    # Return False to indicate email was NOT sent in production
+    return False

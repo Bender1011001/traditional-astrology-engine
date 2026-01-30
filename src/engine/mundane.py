@@ -130,7 +130,7 @@ class MundaneEngine:
                 "sign": list(Sign)[int(lon / 30) % 12],
                 "degree": lon % 30
             })
-        except:
+        except Exception:
             pass
 
         # Lunar Eclipse (Previous)
@@ -165,7 +165,7 @@ class MundaneEngine:
                 "sign": list(Sign)[int(lon / 30) % 12],
                 "degree": lon % 30
             })
-        except:
+        except Exception:
             pass
 
         return results

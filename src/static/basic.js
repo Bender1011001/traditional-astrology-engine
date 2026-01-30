@@ -460,8 +460,8 @@ if (basicForm) {
         }
 
         const birthYear = new Date(payload.date).getFullYear();
-        if (birthYear < 1900 || birthYear > 2026) {
-            alert("Please enter a birth year between 1900 and 2026.");
+        if (birthYear < 1900 || birthYear > 2030) {
+            alert("Please enter a birth year between 1900 and 2030.");
             return;
         }
 
@@ -742,7 +742,7 @@ if (basicCityInput && basicSuggestionsBox) {
                 const data = await resp.json();
                 renderBasicSuggestions(data.features || []);
             } catch (err) {
-                console.error('Autocomplete error', err);
+                // Silent fail - autocomplete is non-critical
             } finally {
                 basicCityInput.classList.remove('loading-input');
             }

@@ -166,31 +166,57 @@
     </main>
 
     <script>
+        const API_BASE = window.CAEL_API_BASE || "";
+        function apiUrl(path) { return `${API_BASE}${path}`; }
+
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const msg = document.getElementById('authMessage');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
 
             msg.textContent = "Authenticating...";
             msg.style.color = "var(--text-muted)";
+            submitBtn.disabled = true;
 
             try {
-                // Mock for now or implement API
-                // const resp = await fetch('/api/login', ...);
-                await new Promise(r => setTimeout(r, 1000));
+                const resp = await fetch(apiUrl('/api/auth/login'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
 
-                // Simulating "Not yet implemented" or "Success" depending on if I implement backend
-                // For now, I'll show a message that it's coming soon as per Plan.
-                // Or if I really want to impress, I can implement a check.
+                const data = await resp.json();
 
-                msg.textContent = "Accounts system coming soon. Please use 'Guest' access.";
-                msg.style.color = "var(--gold)";
+                if (!resp.ok) {
+                    throw new Error(data.detail || 'Login failed.');
+                }
+
+                // Store auth token and user data
+                localStorage.setItem('cael_auth_token', data.token);
+                localStorage.setItem('cael_user', JSON.stringify(data.user));
+
+                msg.textContent = "Login successful! Redirecting...";
+                msg.style.color = "var(--success)";
+
+                setTimeout(() => {
+                location.href = "index.html";
+                }, 1000);
+
             } catch (err) {
-                msg.textContent = "Connection error.";
+                msg.textContent = err.message || "Connection error.";
                 msg.style.color = "var(--danger)";
+                submitBtn.disabled = false;
             }
         });
+
+        // Check if already logged in
+        const existingToken = localStorage.getItem('cael_auth_token');
+        if (existingToken) {
+            document.getElementById('authMessage').textContent = "You are already logged in.";
+            document.getElementById('authMessage').style.color = "var(--gold)";
+        }
 
         // Dark mode init
         const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;

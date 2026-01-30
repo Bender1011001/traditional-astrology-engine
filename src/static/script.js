@@ -469,7 +469,7 @@ cityInput.addEventListener('input', () => {
             const data = await resp.json();
             renderSuggestions(data.features || []);
         } catch (err) {
-            console.error("Autocomplete error", err);
+            // Silent fail - autocomplete is non-critical
         }
     }, 300);
 });
@@ -2509,7 +2509,7 @@ function getLibrary() {
         const raw = localStorage.getItem(STORAGE_KEY);
         return raw ? JSON.parse(raw) : [];
     } catch (e) {
-        console.error('Library parse error', e);
+        // Silent fail for library parsing
         return [];
     }
 }

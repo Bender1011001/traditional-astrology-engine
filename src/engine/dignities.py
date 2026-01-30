@@ -1,4 +1,5 @@
 
+import logging
 from typing import Dict, List, Tuple, Optional
 from .models import PlanetName, Sign, Sect, Chart, Planet
 from .reference_data import (
@@ -316,7 +317,7 @@ class DignityCalculator:
         try:
             term_rulers = cls.TERMS[sign]
         except KeyError as e:
-            print(f"DEBUG DIGNITY ERROR: Missing Terms key {sign}. Keys: {list(cls.TERMS.keys())}")
+            logging.warning(f"Dignity calculation error - missing Terms key: {sign}")
             raise e
             
         for p_str, limit in term_rulers:

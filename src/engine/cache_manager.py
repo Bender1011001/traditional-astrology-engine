@@ -1,7 +1,7 @@
 import os
 import json
 import hashlib
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 
 # Use /tmp for ephemeral caching on serverless platforms (Heroku/Render)
@@ -51,7 +51,7 @@ class CacheManager:
 
     def set(self, chart_hash: str, tier: str, payload: Dict[str, Any], ttl_days: int = 30) -> None:
         path = self._get_path(chart_hash, tier)
-        expires = (datetime.utcnow().replace(microsecond=0) + datetime.timedelta(days=ttl_days)).isoformat()
+        expires = (datetime.utcnow().replace(microsecond=0) + timedelta(days=ttl_days)).isoformat()
         
         data = {
             "created": datetime.utcnow().isoformat(),

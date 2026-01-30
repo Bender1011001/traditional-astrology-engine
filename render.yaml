@@ -13,3 +13,11 @@ services:
         sync: false
       - key: JWT_SECRET
         generateValue: true
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: SENDER_EMAIL
+        value: noreply@traditional-astrology.com
+      - key: SITE_BASE_URL
+        value: https://traditional-astrology.com

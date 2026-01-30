@@ -1,4 +1,5 @@
 from enum import Enum
+import logging
 from typing import Dict, List, Optional, Tuple, Set
 from dataclasses import dataclass
 from .models import PlanetName, Chart, Planet, Sect, Sign
@@ -56,12 +57,7 @@ class ReceptionEngine:
         try:
             terms = EGYPTIAN_TERMS[sign] if mode == ReceptionMode.STRICT_BONATTI else PTOLEMAIC_TERMS[sign]
         except KeyError:
-            print(f"DEBUG TERM ERROR: Missing key {sign} in Terms dict.")
-            # Print keys for debugging
-            if mode == ReceptionMode.STRICT_BONATTI:
-                print(f"Egyptian keys: {list(EGYPTIAN_TERMS.keys())}")
-            else:
-                print(f"Ptolemaic keys: {list(PTOLEMAIC_TERMS.keys())}")
+            logging.warning(f"Terms key not found for sign: {sign}")
             raise
             
         for p, limit in terms:
@@ -110,7 +106,7 @@ class ReceptionEngine:
                 dignities.append("Triplicity")
                 score += 3
         except KeyError as e:
-            print(f"DEBUG RECEPTION ERROR: Key {e} | Sign: {sign} | Dicts involved: DOMICILES keys={list(DOMICILES.keys())}, SIGN_ELEMENTS keys={list(SIGN_ELEMENTS.keys())}")
+            logging.warning(f"Reception calculation error - missing key: {e}")
             raise e
             
         term_ruler = cls._get_term_ruler(sign, degree, mode)

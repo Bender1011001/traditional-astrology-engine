@@ -2,10 +2,10 @@
 # Astrology Project
 
 ## Status
-- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics, Medical Iatromathematics, Antiscia, Forensic 5-Day Forecast (Epitasis), Generative AI Oracle.
+- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics, Medical Iatromathematics, Antiscia, Forensic 5-Day Forecast (Epitasis), Generative AI Oracle, User Accounts & Authentication.
 - **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall).
 - **Database**: Comprehensive pre-1700s traditional astrology—20 JSON files, ~210KB total.
-- **Release Ready**: Version 1.2 (The Aesthetic Upgrade).
+- **Release Ready**: Version 1.3 (User Accounts).
 - **Monetization**: Stripe (One-time + Annual/Monthly Subscriptions).
 
 
@@ -82,6 +82,7 @@
 - `src/engine/pdf_generator.py` — PDF report generation engine.
 - `src/database/db_manager.py` — Loader for Codex delineations.
 - `src/engine/chat_oracle.py` — RAG interface for chart Q&A.
+- `src/engine/user_auth.py` — User authentication & accounts module.
 - `scripts/extract_all_traditional_data.py` — Comprehensive data extraction.
 
 ## Data Sources
@@ -92,6 +93,7 @@
 - Uses a custom "Egyptian Terms" system found in the binder which includes Sun and Moon.
 - Implements "Universal Overdrive" logic where mundane events (eclipses) prioritize over natal placements.
 - All planet-in-sign delineations have Day/Night sect variations.
+- **User Authentication**: Uses PBKDF2 password hashing (100k iterations), JWT tokens for sessions, and JSON file storage (can be upgraded to PostgreSQL later).
 
 ## Trap Diary
 | Issue | Cause | Fix |
@@ -101,11 +103,34 @@
 | 500 Server Error in Chart Calc | `swisseph` constant mismatch | Updated constant to `swe.ECL2HOR` |
 | Negative Vitality Score | Hyleg calculation without floor | Added safety clamp (min 5 years) |
 | Placeholder Delineations | Moon Pisces had "NOT FOUND" text | Enhanced via enhance_delineations.py |
+| Cache Manager Crash | `datetime.timedelta` undefined (wrong import) | Fixed import to `from datetime import datetime, timedelta` |
+| Double Rate Limit | Free users counted twice per request | Removed duplicate check before cache lookup |
+| Email Fake Success | Dev mode returned `True` without sending | Returns `False` + logs warning when not configured |
+| Hardcoded URLs | Base URL was hardcoded in email links | Added `SITE_BASE_URL` env var |
+| CORS Inflexibility | Hardcoded CORS origins | Added `CORS_ORIGINS` env var with sensible defaults |
+| Console.error in Prod | JS errors visible to users | Silenced non-critical console outputs |
+| Bare `except:` clauses | Catches all exceptions including system exits | Changed to `except Exception:` for safer handling |
+| Stub Login/Register | Pages showed "coming soon" | Implemented full auth system with user_auth.py |
+
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
 - Do not use Day/Night delineations interchangeably—sect matters
 - Do not ignore sect when calculating triplicities or Firdaria
+- Do not hardcode URLs—use `SITE_BASE_URL` environment variable
+- Do not use bare `except:` clauses—always catch specific exceptions
+
+## Environment Variables (Production)
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `STRIPE_SECRET_KEY` | Yes | Stripe live secret key |
+| `STRIPE_WEBHOOK_SECRET` | Yes | Stripe webhook signing secret |
+| `JWT_SECRET` | Yes | Secret for signing JWT tokens (auto-generated on Render) |
+| `OPENROUTER_API_KEY` | Yes | OpenRouter API key for AI readings |
+| `SENDGRID_API_KEY` | Yes* | SendGrid API key for email (*or configure SMTP) |
+| `SENDER_EMAIL` | Yes | From address for outgoing emails |
+| `SITE_BASE_URL` | No | Base URL for links in emails (default: https://traditional-astrology.com) |
+| `CORS_ORIGINS` | No | Comma-separated allowed origins (default: production + localhost) |
 
 ## Build / Verify
 ```bash

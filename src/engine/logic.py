@@ -909,7 +909,7 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
     except swe.Error:
         try:
             loy_trans_res = swe.calc_ut(trans_jd, p_id, swe.FLG_MOSEPH)[0]
-        except:
+        except Exception:
             loy_trans_res = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     
     loy_trans_lon = loy_trans_res[0]

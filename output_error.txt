@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "E:\code.projects\astrology\src\engine\chart_calculator.py", line 137, in <module>
-    print(calculate_chart_data("2023-10-27", "12:00", "New York", "NY"))
-          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\code.projects\astrology\src\engine\chart_calculator.py", line 102, in calculate_chart_data
-    "distance": res[2],
-                ~~~^^^
-IndexError: tuple index out of range

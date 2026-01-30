@@ -97,7 +97,7 @@ class ElectionalEngine:
             cusps, ascmc = swe.houses(jd, lat, lon, b'P')
             asc = ascmc[0]
             mc = ascmc[1]
-        except:
+        except Exception:
             # Fallback for extreme latitudes
             asc = 0.0
             mc = 0.0

@@ -58,6 +58,10 @@ from starlette.responses import Response, StreamingResponse
 from engine.pdf_generator import PDFReportGenerator
 from engine.email_service import send_email
 from engine.cache_manager import get_from_cache, set_to_cache
+from engine.user_auth import get_user_manager
+from engine.logger import configure_logging, ActivityLogger
+import logging
+import time
 
 MEDICAL_DISCLAIMER = (
     "FOR HISTORICAL AND EDUCATIONAL RESEARCH PURPOSES ONLY. NOT MEDICAL ADVICE. "
@@ -78,10 +82,17 @@ app = FastAPI(
     },
 )
 
+# Initialize centralized logging
+configure_logging()
+
 # --- PAYMENT CONFIGURATION ---
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 JWT_SECRET = os.getenv('JWT_SECRET', 'development-secret-key-change-me')
+if JWT_SECRET == 'development-secret-key-change-me':
+    logging.warning("CRITICAL SECURITY WARNING: Using default JWT_SECRET. Set JWT_SECRET env var in production!")
+
+SITE_BASE_URL = os.getenv('SITE_BASE_URL', 'https://traditional-astrology.com')
 
 if STRIPE_SECRET_KEY:
     stripe.api_key = STRIPE_SECRET_KEY
@@ -209,9 +220,14 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 app.add_middleware(SecurityHeadersMiddleware)
 
 # CORS Configuration
+# Configurable via CORS_ORIGINS env var (comma-separated list)
+_default_origins = [SITE_BASE_URL, "http://localhost:8000", "http://127.0.0.1:8000"]
+_env_origins = os.getenv('CORS_ORIGINS', '').split(',')
+_cors_origins = [o.strip() for o in _env_origins if o.strip()] or _default_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://traditional-astrology.com", "http://localhost:8000"],
+    allow_origins=_cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -357,14 +373,7 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
             # If one-time, it's valid if token is valid
             tier = "paid"
     
-    # Rate Limiting (Free Tier Only)
-    if tier == 'free':
-        client_ip = http_request.client.host if http_request.client else "unknown"
-        # Whitelist localhost for internal calls (e.g. email capture)
-        if client_ip != "127.0.0.1":
-            # Validate limit
-            if not _rate_limiter.is_allowed(client_ip):
-                raise HTTPException(status_code=429, detail="Daily free limit reached. Subscribe for unlimited access.")
+    # Rate limiting is checked AFTER cache lookup to avoid penalizing returning users
 
     # Add tier metadata to result
     result["meta"]["tier"] = tier
@@ -394,7 +403,7 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
         if chart_request.analysis_date:
             try:
                 ad = datetime.strptime(chart_request.analysis_date, "%Y-%m-%d")
-            except:
+            except ValueError:
                 ad = datetime.now()
         else:
             ad = datetime.now()
@@ -403,7 +412,7 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
         bd = None
         try:
             bd = datetime.strptime(chart_request.date, "%Y-%m-%d")
-        except:
+        except ValueError:
             bd = None
 
         # If age not provided, calculate it from birth date
@@ -827,6 +836,154 @@ async def restore_session(token: str):
     # Return the embedded birth data
     return data
 
+# ==================== USER AUTHENTICATION ====================
+
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    name: str = ""
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+class ChangePasswordRequest(BaseModel):
+    old_password: str
+    new_password: str
+
+@app.post("/api/auth/register")
+async def register_user(request: RegisterRequest):
+    """
+    Register a new user account.
+    """
+    user_manager = get_user_manager()
+    result = user_manager.create_user(
+        email=request.email,
+        password=request.password,
+        name=request.name
+    )
+    
+    if not result["success"]:
+        raise HTTPException(status_code=400, detail=result["message"])
+    
+    # Create auth token for immediate login
+    user = result["user"]
+    token = create_access_token(
+        chart_hash=f"user_{user['id']}", 
+        tier=user["subscription_tier"],
+        expires_days=7,
+        data={"user_id": user["id"], "email": user["email"]}
+    )
+    
+    return {
+        "success": True,
+        "message": "Account created successfully.",
+        "user": user,
+        "token": token
+    }
+
+@app.post("/api/auth/login")
+async def login_user(request: LoginRequest):
+    """
+    Authenticate user and return a session token.
+    """
+    user_manager = get_user_manager()
+    result = user_manager.authenticate(
+        email=request.email,
+        password=request.password
+    )
+    
+    if not result["success"]:
+        raise HTTPException(status_code=401, detail=result["message"])
+    
+    user = result["user"]
+    token = create_access_token(
+        chart_hash=f"user_{user['id']}", 
+        tier=user["subscription_tier"],
+        expires_days=7,
+        data={"user_id": user["id"], "email": user["email"]}
+    )
+    
+    return {
+        "success": True,
+        "message": "Login successful.",
+        "user": user,
+        "token": token
+    }
+
+@app.get("/api/auth/me")
+async def get_current_user(token: str):
+    """
+    Get current user profile from token.
+    """
+    payload = validate_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid or expired token.")
+    
+    data = payload.get("d")
+    if not data or "user_id" not in data:
+        raise HTTPException(status_code=401, detail="Token is not a user session token.")
+    
+    user_manager = get_user_manager()
+    user = user_manager.get_user_by_id(data["user_id"])
+    
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found.")
+    
+    return {"success": True, "user": user}
+
+@app.post("/api/auth/change-password")
+async def change_user_password(request: ChangePasswordRequest, token: str):
+    """
+    Change user's password.
+    """
+    payload = validate_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid or expired token.")
+    
+    data = payload.get("d")
+    if not data or "email" not in data:
+        raise HTTPException(status_code=401, detail="Token is not a user session token.")
+    
+    user_manager = get_user_manager()
+    result = user_manager.change_password(
+        email=data["email"],
+        old_password=request.old_password,
+        new_password=request.new_password
+    )
+    
+    if not result["success"]:
+        raise HTTPException(status_code=400, detail=result["message"])
+    
+    return {"success": True, "message": result["message"]}
+
+@app.post("/api/auth/save-chart")
+async def save_chart_to_account(token: str, chart_hash: str, chart_meta: dict = None):
+    """
+    Save a chart to the user's account.
+    """
+    payload = validate_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid or expired token.")
+    
+    data = payload.get("d")
+    if not data or "email" not in data:
+        raise HTTPException(status_code=401, detail="Token is not a user session token.")
+    
+    user_manager = get_user_manager()
+    success = user_manager.save_chart(
+        email=data["email"],
+        chart_hash=chart_hash,
+        chart_meta=chart_meta or {}
+    )
+    
+    if not success:
+        raise HTTPException(status_code=400, detail="Failed to save chart.")
+    
+    return {"success": True, "message": "Chart saved to account."}
+
+# ==================== END USER AUTHENTICATION ====================
+
 @app.post("/api/export")
 async def export_chart_data(request: dict):
     """
@@ -1132,8 +1289,7 @@ async def stripe_webhook(request: Request):
                 if metadata.get('date'):
                     query_params += f"&date={metadata.get('date')}&time={metadata.get('time')}&city={metadata.get('city')}&state={metadata.get('state')}"
                 
-                base_url = "https://traditional-astrology.com"
-                link = f"{base_url}/index.html?{query_params}"
+                link = f"{SITE_BASE_URL}/index.html?{query_params}"
                 
                 subject = "Access Your Codex Caelestis Reading"
                 body = f"""
@@ -1181,8 +1337,7 @@ async def stripe_webhook(request: Request):
                         if metadata.get('date'):
                             query_params += f"&date={metadata.get('date')}&time={metadata.get('time')}&city={metadata.get('city')}&state={metadata.get('state')}"
                             
-                        base_url = "https://traditional-astrology.com"
-                        link = f"{base_url}/index.html?{query_params}"
+                        link = f"{SITE_BASE_URL}/index.html?{query_params}"
                         
                         subject = "Your Subscription Renewed - Codex Caelestis"
                         body = f"""
