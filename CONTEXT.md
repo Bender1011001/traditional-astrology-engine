@@ -2,7 +2,7 @@
 # Astrology Project
 
 ## Status
-- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics, Medical Iatromathematics, Antiscia, Forensic 5-Day Forecast (Epitasis), Generative AI Oracle, User Accounts & Authentication.
+- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics, Medical Iatromathematics, Classical Mechanics (Antiscia, Dodecatemoria, Planetary Hours), Forensic 5-Day Forecast (Epitasis), Generative AI Oracle, User Accounts & Authentication.
 - **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall).
 - **Database**: Comprehensive pre-1700s traditional astrology—20 JSON files, ~210KB total.
 - **Release Ready**: Version 1.3 (User Accounts).
@@ -78,6 +78,7 @@
 - `src/database/data/glossary.json` — Astrological definitions.
 - `src/engine/chart_calculator.py` — Core astronomical logic.
 - `src/engine/logic.py` — Forensic audit and synthesis engine.
+- `src/engine/classical_mechanics.py` — Antiscia, Dodecatemoria, Planetary Hours engine.
 - `src/engine/dignities.py` — Essential dignity engine based on "Missing Codex".
 - `src/engine/pdf_generator.py` — PDF report generation engine.
 - `src/database/db_manager.py` — Loader for Codex delineations.

@@ -12,8 +12,13 @@
 - **Prediction**: Added Active Transits (Outer Planet impacts), fully historical Zodiacal Releasing, and Time Lord auditing for past/future dates.
 - **Advanced Aspects**: Antiscia and Contra-antiscia integrated.
 
+- **Advanced Mechanics**: Hermetic Lots (Fortune/Spirit + 5 Planets), Almuten Figuris (Ibn Ezra scoring), Monomoiria (Zoidion & Trigonal), and Doryphory (Spear-Bearer) analysis.
+- **Improved Horary**: Added Frustration, strict Moiety orbs, and enhanced Perfection/Denial logic.
+
 ## Key Files
-- `chart_calculator.py`: Handles ephemeris calls and geocoding.
+- `chart_calculator.py`: Handles ephemeris calls and geocoding, now integrates Advanced Mechanics.
+- `advanced_mechanics.py`: **New**. Hermetic Lots, Almuten, Doryphory, Monomoiria engines.
+- `horary.py`: Dynamics of aspect application, light movement (Translation, Collection), and Perfection/Denial (Prohibition, Frustration).
 - `logic.py`: Implements synthesis (Jones patterns, Sect, Audits, Universal Overrides).
 - `dignities.py`: Tables for Domicile, Exaltation, Triplicity, Terms, Faces.
 - `temperament.py`: Lilly's Temperament/Humoral calculation engine.
@@ -23,7 +28,6 @@
 - `primary_directions.py`: Placidus proportional semi-arc calculations.
 - `reception.py`: Reception and Mutual Reception algorithm (Bonatti/Lilly).
 - `mundane.py`: Solar/Lunar eclipse calculators and World Hierarchy.
-- `horary.py`: Dynamics of aspect application and light movement.
 - `medical.py`: Traditional Iatromathematics protocol.
 - `electional.py`: Kairos engine for perfect timing (Electional Astrology).
 

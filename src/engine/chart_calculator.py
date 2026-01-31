@@ -9,8 +9,11 @@ import time
 
 # Classical Imports
 from src.engine.classical_mechanics import ClassicalMechanicsEngine
-from src.engine.models import Sign, PlanetName
+from src.engine.models import Sign, PlanetName, Chart, Planet
 from src.engine.reference_data import DOMICILES
+from src.engine.advanced_mechanics import (
+    HermeticLotEngine, MonomoiriaEngine, AlmutenEngine, DoryphoryEngine
+)
 
 # Initialize Geocoder
 _ua_base = os.getenv("NOMINATIM_USER_AGENT", "astrology_app/1.0")
@@ -517,6 +520,131 @@ def calculate_chart_data(
                  }
         except Exception as e_classical:
             results["classical_error"] = str(e_classical)
+
+        # --- Advanced Mechanics Integration ---
+        try:
+            # 1. Reconstruct Chart Object
+            chart_planets = []
+            sun_alt = 0.0
+            
+            for pname, pdata in results["planets"].items():
+                if pname == "South_Node": continue # Skip computed SN for now, model handles explicit planets usually? Or add it?
+                # Using key matching
+                try:
+                    enum_name = PlanetName[pname.upper()]
+                except KeyError:
+                    # Try manual mapping or skip
+                    if pname == "North_Node": enum_name = PlanetName.NORTH_NODE
+                    else: continue
+                
+                p_obj = Planet(
+                    name=enum_name,
+                    longitude=pdata["longitude"],
+                    latitude=pdata.get("latitude", 0),
+                    speed=pdata.get("speed", 0),
+                    altitude=pdata.get("altitude", 0)
+                )
+                chart_planets.append(p_obj)
+                
+                if pname == "Sun":
+                    sun_alt = pdata.get("altitude", 0)
+
+            # Create Chart
+            chart_obj = Chart(
+                sun_altitude=sun_alt,
+                planets=chart_planets,
+                ascendant=ascmc[0],
+                mc=ascmc[1],
+                geo_lat=lat,
+                geo_lon=lon,
+                jd=jd,
+                houses={i+1: c for i, c in enumerate(cusps)}
+            )
+            
+            # 2. Hermetic Lots
+            lots_data = HermeticLotEngine.calculate_all_lots(chart_obj)
+            if "classical" not in results: results["classical"] = {}
+            results["classical"]["hermetic_lots"] = lots_data
+            
+            # 3. Almuten Figuris
+            day_lord_enum = None
+            hour_lord_enum = None
+            if "classical" in results and "planetary_hours" in results["classical"]:
+                 ph = results["classical"]["planetary_hours"]
+                 dl = ph.get("day_lord")
+                 hl = ph.get("hour_lord")
+                 # Convert to Enum, handling possible string mismatches
+                 try:
+                     if dl: day_lord_enum = PlanetName(dl)
+                     if hl: hour_lord_enum = PlanetName(hl)
+                 except ValueError:
+                     pass # Maybe "Sun" vs "Sun" mismatch? usually match.
+
+            almuten_data = AlmutenEngine.calculate_almuten(chart_obj, day_lord_enum, hour_lord_enum)
+            results["classical"]["almuten_figuris"] = {
+                "winner": almuten_data.winner.value,
+                "scores": {k: {
+                    "total": v.total_score,
+                    "essential": v.essential_score,
+                    "house": v.house_score,
+                    "day_hour": v.day_hour_score,
+                    "breakdown": v.breakdown
+                } for k, v in almuten_data.scores.items()},
+                "hylegs": almuten_data.hylegs
+            }
+            
+            # 4. Doryphory
+            doryphory_list = DoryphoryEngine.check_doryphory(chart_obj)
+            for d_instance in doryphory_list:
+                p_key = d_instance.planet.value.title() # "Jupiter"
+                # Map naming if needed e.g., North_Node -> North_Node
+                if p_key == "North_node": p_key = "North_Node" # Title case quirk?
+                if p_key not in results["planets"]:
+                    # Try uppercase? No, results uses keys like "Jupiter"
+                    pass
+                
+                target_keys = [p_key]
+                if p_key == "North_Node": target_keys = ["North_Node"]
+                
+                for k in target_keys:
+                    if k in results["planets"]:
+                        if "classical" not in results["planets"][k]: results["planets"][k]["classical"] = {}
+                        if "doryphory" not in results["planets"][k]["classical"]:
+                            results["planets"][k]["classical"]["doryphory"] = []
+                        
+                        results["planets"][k]["classical"]["doryphory"].append({
+                            "type": d_instance.type,
+                            "luminary": d_instance.related_luminary,
+                            "score": d_instance.score
+                        })
+
+            # 5. Monomoiria
+            is_day = (sun_alt >= 0)
+            sun_p = next((p for p in chart_planets if p.name == PlanetName.SUN), None)
+            moon_p = next((p for p in chart_planets if p.name == PlanetName.MOON), None)
+            
+            if sun_p and moon_p:
+                sun_sign_idx = int(sun_p.longitude / 30)
+                moon_sign_idx = int(moon_p.longitude / 30)
+                sun_sign = list(Sign)[sun_sign_idx]
+                moon_sign = list(Sign)[moon_sign_idx]
+                
+                for pname, pdata in results["planets"].items():
+                    lon_val = pdata["longitude"]
+                    z_ruler = MonomoiriaEngine.get_zoidion_monomoiria(lon_val)
+                    t_ruler = MonomoiriaEngine.get_trigonal_monomoiria(lon_val, is_day, sun_sign, moon_sign)
+                    
+                    if "classical" not in pdata: pdata["classical"] = {}
+                    pdata["classical"]["monomoiria"] = {
+                        "zoidion_ruler": z_ruler.value,
+                        "trigonal_ruler": t_ruler.value
+                    }
+                    results["planets"][pname] = pdata
+
+        except Exception as e_adv:
+            results["advanced_error"] = str(e_adv)
+            import traceback
+            results["advanced_error_trace"] = traceback.format_exc()
 
     except Exception as e:
         results["error_houses"] = str(e)

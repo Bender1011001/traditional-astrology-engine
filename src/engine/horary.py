@@ -1,20 +1,7 @@
 from typing import List, Dict, Optional, Tuple
 from .models import Planet, Chart, PlanetName, Sign, Sect
-from .reference_data import DOMICILES
+from .reference_data import DOMICILES, MOIETIES, PLANET_SECTS
 from .dignities import DignityCalculator
-
-TRADITIONAL_ORBS = {
-    PlanetName.SUN: 15.0,
-    PlanetName.MOON: 12.0,
-    PlanetName.MERCURY: 7.0,
-    PlanetName.VENUS: 7.0,
-    PlanetName.MARS: 8.0,
-    PlanetName.JUPITER: 9.0,
-    PlanetName.SATURN: 9.0,
-    PlanetName.URANUS: 5.0,
-    PlanetName.NEPTUNE: 5.0,
-    PlanetName.PLUTO: 5.0
-}
 
 MAJOR_ASPECTS = {
     "Conjunction": 0,
@@ -25,9 +12,13 @@ MAJOR_ASPECTS = {
 }
 
 def get_moiety_orb(p1_name: PlanetName, p2_name: PlanetName) -> float:
-    orb1 = TRADITIONAL_ORBS.get(p1_name, 5.0)
-    orb2 = TRADITIONAL_ORBS.get(p2_name, 5.0)
-    return (orb1 + orb2) / 2.0
+    """
+    Returns the sum of moieties (radii) for the two planets.
+    Aspect occurs if dist <= moiety1 + moiety2.
+    """
+    orb1 = MOIETIES.get(p1_name, 5.0)
+    orb2 = MOIETIES.get(p2_name, 5.0)
+    return orb1 + orb2
 
 def get_aspect_distance(lon1: float, lon2: float, aspect_angle: float) -> float:
     """
@@ -53,9 +44,11 @@ def is_applying(p1: Planet, p2: Planet, aspect_angle: float) -> bool:
     
     # If distance is positive and rel_speed is positive, they are closing.
     # If distance is negative and rel_speed is negative, they are closing.
-    if dist > 0 and rel_speed > 0 and dist < get_moiety_orb(p1.name, p2.name):
+    moiety_sum = get_moiety_orb(p1.name, p2.name)
+    
+    if dist > 0 and rel_speed > 0 and dist < moiety_sum:
         return True
-    if dist < 0 and rel_speed < 0 and abs(dist) < get_moiety_orb(p1.name, p2.name):
+    if dist < 0 and rel_speed < 0 and abs(dist) < moiety_sum:
         return True
     return False
 
@@ -78,8 +71,9 @@ def check_translation_of_light(p1: Planet, p2: Planet, chart: Chart) -> Optional
             rel_speed = trans.speed - p1.speed
             # Separating: dist > 0 and rel_speed < 0 (trans was at angle, now past it)
             # Or dist < 0 and rel_speed > 0
-            if (dist > 0 and rel_speed < 0 and abs(dist) < get_moiety_orb(trans.name, p1.name)) or \
-               (dist < 0 and rel_speed > 0 and abs(dist) < get_moiety_orb(trans.name, p1.name)):
+            moiety_sum = get_moiety_orb(trans.name, p1.name)
+            if (dist > 0 and rel_speed < 0 and abs(dist) < moiety_sum) or \
+               (dist < 0 and rel_speed > 0 and abs(dist) < moiety_sum):
                 sep_from_p1 = True
                 break
         
@@ -208,12 +202,54 @@ def check_prohibition(p1: Planet, p2: Planet, chart: Chart) -> Optional[Dict]:
                         }
     return None
 
+def check_frustration(p1: Planet, p2: Planet, chart: Chart) -> Optional[Dict]:
+    """
+    Frustration: p1 applies to p2, but p2 applies to p3 before p1 reaches p2.
+    """
+    # 1. Check if p1 applies to p2
+    main_aspect = None
+    main_angle = 0
+    main_dist = 0
+    for name, angle in MAJOR_ASPECTS.items():
+        if is_applying(p1, p2, angle):
+            main_aspect = name
+            main_angle = angle
+            main_dist = abs(get_aspect_distance(p1.longitude, p2.longitude, angle))
+            break
+            
+    if not main_aspect:
+        return None
+        
+    rel_speed_main = abs(p1.speed - p2.speed)
+    if rel_speed_main == 0: return None
+    time_to_main = main_dist / rel_speed_main
+    
+    # 2. Check if p2 applies to any p3
+    for p3 in chart.planets:
+        if p3.name == p1.name or p3.name == p2.name: 
+            continue
+            
+        # Does p2 apply to p3?
+        for name, angle in MAJOR_ASPECTS.items():
+            if is_applying(p2, p3, angle):
+                dist_p2_p3 = abs(get_aspect_distance(p2.longitude, p3.longitude, angle))
+                rel_speed_p2_p3 = abs(p2.speed - p3.speed)
+                if rel_speed_p2_p3 == 0: continue
+                time_to_frustrate = dist_p2_p3 / rel_speed_p2_p3
+                
+                if time_to_frustrate < time_to_main:
+                    return {
+                        "condition": "Frustration",
+                        "frustrator": p3.name.value,
+                        "ignoring_planet": p2.name.value,
+                        "details": f"{p2.name.value} joins {p3.name.value} ({time_to_frustrate:.2f}) before {p1.name.value} reaches it ({time_to_main:.2f}).",
+                        "status": "Active"
+                    }
+    return None
+
 def check_refranation(p1: Planet, p2: Planet) -> Optional[Dict]:
     """
     Refranation: p1 applies to p2, but turns retrograde (or p2 turns) before completion.
-    Actually, in a static chart, we check if they are very close to stationing.
-    Or more simply, if p1 is already retrograde and moving away? No, that's not applying.
-    Refranation is when it *will* turn. Without ephemeris, we can check if speed is very low.
     """
     main_aspect = None
     for name, angle in MAJOR_ASPECTS.items():
@@ -225,7 +261,6 @@ def check_refranation(p1: Planet, p2: Planet) -> Optional[Dict]:
         return None
         
     # If speed is very low (less than 10% of average), it might be stationing
-    # This is a heuristic without full ephemeris lookup
     avg_speeds = {
         PlanetName.SUN: 0.9833,
         PlanetName.MOON: 13.1764,
@@ -236,19 +271,15 @@ def check_refranation(p1: Planet, p2: Planet) -> Optional[Dict]:
         PlanetName.SATURN: 0.0335
     }
     
-    for p in [p1, p2]:
-        avg = avg_speeds.get(p.name, 0.1)
-        if 0 < p.speed < (avg * 0.05): # Very slow, likely to turn retrograde
+    # Check p1 (usually faster)
+    avg = avg_speeds.get(p1.name, 0.1)
+    if 0 < p1.speed < (avg * 0.1): # 10% threshold for caution
              return {
                 "condition": "Refranation",
-                "planet": p.name.value,
+                "planet": p1.name.value,
                 "status": "Potential",
-                "details": f"{p.name.value} is moving very slowly ({p.speed:.4f}) and may station before completing aspect."
+                "details": f"{p1.name.value} is moving very slowly ({p1.speed:.4f}) and may station before completing aspect."
             }
-        if p.speed < 0:
-            # If it's already retrograde, is_applying would have accounted for it 
-            # (it would only return True if it's applying *while* retrograde)
-            pass
 
     return None
 
@@ -273,7 +304,7 @@ def check_mutual_reception(p1: Planet, p2: Planet, chart: Chart) -> Optional[Dic
     if p2_pos_rulers["exaltation"] == p1.name: reception_2_to_1.append("Exaltation")
     
     if reception_1_to_2 and reception_2_to_1:
-        return {
+         return {
             "condition": "Mutual Reception",
             "p1": p1.name.value,
             "p2": p2.name.value,
@@ -297,12 +328,6 @@ def check_mutual_reception(p1: Planet, p2: Planet, chart: Chart) -> Optional[Dic
     return None
 
 def calculate_antiscia(longitude: float) -> Tuple[float, float]:
-    """
-    Calculates Antiscia and Contra-antiscia.
-    Antiscia reflects across the Solstice axis (Cancer/Capricorn).
-    Formula: Antiscia = 180 - Longitude.
-    Contra-antiscia is the opposite (Longitude reflected across Eqinox axis).
-    """
     antiscia = (180 - longitude) % 360
     contra_antiscia = (antiscia + 180) % 360
     return antiscia, contra_antiscia
@@ -341,15 +366,19 @@ def analyze_horary_physics(p1_name: PlanetName, p2_name: PlanetName, chart: Char
     prohibition = check_prohibition(p1, p2, chart)
     if prohibition: conditions.append(prohibition)
     
-    # 5. Refranation
+    # 5. Frustration (New)
+    frustration = check_frustration(p1, p2, chart)
+    if frustration: conditions.append(frustration)
+    
+    # 6. Refranation
     refranation = check_refranation(p1, p2)
     if refranation: conditions.append(refranation)
     
-    # 6. Mutual Reception (Mitigation)
+    # 7. Mutual Reception (Mitigation)
     reception = check_mutual_reception(p1, p2, chart)
     if reception: conditions.append(reception)
 
-    # 7. Antiscia / Contra-antiscia
+    # 8. Antiscia / Contra-antiscia
     a1, ca1 = calculate_antiscia(p1.longitude)
     orb = 1.0 # Standard orb for Antiscia
     
@@ -358,7 +387,7 @@ def analyze_horary_physics(p1_name: PlanetName, p2_name: PlanetName, chart: Char
     if diff_a <= orb:
         conditions.append({
             "condition": "Antiscia",
-            "details": f"{p2.name.value} is on the Antiscia of {p1.name.value}. Hidden connection/shadow mirror.",
+            "details": f"{p2.name.value} is on the Antiscia of {p1.name.value}. Hidden connection.",
             "status": "Active"
         })
 
@@ -367,7 +396,7 @@ def analyze_horary_physics(p1_name: PlanetName, p2_name: PlanetName, chart: Char
     if diff_ca <= orb:
         conditions.append({
             "condition": "Contra-antiscia",
-            "details": f"{p2.name.value} is on the Contra-antiscia of {p1.name.value}. Open opposition via reflection.",
+            "details": f"{p2.name.value} is on the Contra-antiscia of {p1.name.value}.",
             "status": "Active"
         })
     
@@ -394,7 +423,9 @@ POSITIVE_CONDITIONS = {
 
 NEGATIVE_CONDITIONS = {
     "Prohibition",
-    "Refranation"
+    "Refranation",
+    "Frustration",
+    "Contra-antiscia"
 }
 
 CONDITION_WEIGHTS = {
@@ -406,7 +437,8 @@ CONDITION_WEIGHTS = {
     "Antiscia": 1,
     "Contra-antiscia": -1,
     "Prohibition": -4,
-    "Refranation": -3
+    "Refranation": -3,
+    "Frustration": -4
 }
 
 BENEFICS = {PlanetName.JUPITER, PlanetName.VENUS}
@@ -416,22 +448,16 @@ NOCTURNAL = {PlanetName.MOON, PlanetName.VENUS, PlanetName.MARS}
 
 def get_sect_score(planet_name: PlanetName, chart_sect: Sect) -> int:
     if chart_sect == Sect.DAY:
-        if planet_name in DIURNAL:
-            return 2
-        if planet_name in NOCTURNAL:
-            return -2
+        if planet_name in DIURNAL: return 2
+        if planet_name in NOCTURNAL: return -2
     else:
-        if planet_name in NOCTURNAL:
-            return 2
-        if planet_name in DIURNAL:
-            return -2
+        if planet_name in NOCTURNAL: return 2
+        if planet_name in DIURNAL: return -2
     return 0
 
 def get_nature_score(planet_name: PlanetName) -> int:
-    if planet_name in BENEFICS:
-        return 2
-    if planet_name in MALEFICS:
-        return -2
+    if planet_name in BENEFICS: return 2
+    if planet_name in MALEFICS: return -2
     return 0
 
 def score_significator(planet: Planet, chart: Chart) -> Dict[str, int | str | List[str]]:
@@ -441,12 +467,9 @@ def score_significator(planet: Planet, chart: Chart) -> Dict[str, int | str | Li
     hayz = DignityCalculator.check_hayz_halb(planet.name, planet.longitude, chart)
 
     hayz_bonus = 0
-    if hayz["status"] == "Hayz":
-        hayz_bonus = 3
-    elif hayz["status"] == "Halb":
-        hayz_bonus = 2
-    elif hayz["status"] == "In Sect":
-        hayz_bonus = 1
+    if hayz["status"] == "Hayz": hayz_bonus = 3
+    elif hayz["status"] == "Halb": hayz_bonus = 2
+    elif hayz["status"] == "In Sect": hayz_bonus = 1
 
     sect_score = get_sect_score(planet.name, chart_sect)
     nature_score = get_nature_score(planet.name)
@@ -463,14 +486,8 @@ def score_significator(planet: Planet, chart: Chart) -> Dict[str, int | str | Li
         "planet": planet.name.value,
         "essential_score": essential["total_score"],
         "essential_details": essential["details"],
-        "variant_notes": essential.get("conflicts", []),
-        "variant_details": essential.get("variants", {}),
         "accidental_score": accidental["total_score"],
         "accidental_details": accidental["details"],
-        "sect_score": sect_score,
-        "nature_score": nature_score,
-        "hayz_status": hayz["status"],
-        "hayz_details": hayz["details"],
         "total_score": total
     }
 
@@ -547,10 +564,8 @@ def build_horary_oracle(question: str, chart: Chart) -> Dict:
     condition_score = score_conditions(conditions)
 
     strength_total = 0
-    if querent_strength:
-        strength_total += querent_strength["total_score"]
-    if quesited_strength:
-        strength_total += quesited_strength["total_score"]
+    if querent_strength: strength_total += querent_strength["total_score"]
+    if quesited_strength: strength_total += quesited_strength["total_score"]
     if querent_strength and quesited_strength:
         strength_total = int(round(strength_total / 2))
 
@@ -567,12 +582,6 @@ def build_horary_oracle(question: str, chart: Chart) -> Dict:
         "conditions": conditions,
         "verdict": verdict_data["verdict"],
         "verdict_weight": verdict_data["weight"],
-        "positive_count": verdict_data["positive_count"],
-        "negative_count": verdict_data["negative_count"],
-        "condition_score": condition_score["total_score"],
-        "condition_breakdown": condition_score["breakdown"],
         "strength_score": strength_total,
-        "querent_strength": querent_strength,
-        "quesited_strength": quesited_strength,
         "total_score": verdict_data["total_score"]
     }
