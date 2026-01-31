@@ -363,11 +363,17 @@
                 </div>
             </div>
 
+
             <div class="guarantee-badge">
                 <span class="shield-icon">🛡️</span>
                 <strong>30-DAY MONEY-BACK GUARANTEE</strong>
                 <p>If you don't love it, get a full refund.</p>
             </div>
+
+            <p style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 1rem;">
+                By continuing, you adhere to our <a href="terms.html" target="_blank"
+                    style="color: inherit; text-decoration: underline;">Terms of Service</a>.
+            </p>
         </div>
     </div>
 
@@ -394,6 +400,16 @@
                     <label for="captureEmail">EMAIL ADDRESS</label>
                     <input type="email" id="captureEmail" required placeholder="you@example.com">
                 </div>
+
+                <div class="checkbox-row" style="align-items: flex-start; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                    <input type="checkbox" id="emailConsent" required style="margin-top: 0.3rem;">
+                    <label for="emailConsent"
+                        style="font-size: 0.8rem; line-height: 1.4; color: var(--text-muted); cursor: pointer;">
+                        I agree to the <a href="privacy.html" target="_blank" style="color: var(--gold);">Privacy
+                            Policy</a> and consent to receive emails about my reading.
+                    </label>
+                </div>
+
                 <button type="submit" class="btn-primary">SEND ME MY PDF</button>
                 <div id="emailStatus" style="text-align: center; min-height: 1.2em; font-size: 0.9em;"></div>
             </form>

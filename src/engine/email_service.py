@@ -11,6 +11,25 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
     If neither is configured, logs the email content to console (dev mode).
     """
     
+    # 1. Append Compliance Footer if not present
+    if "<footer" not in html_content and "unsubscribe" not in html_content.lower():
+        footer = """
+        <div style="margin-top: 30px; font-size: 0.75em; color: #666; border-top: 1px solid #eee; padding-top: 10px; text-align: center;">
+            <p>You received this email because you requested a reading on <a href="https://traditional-astrology.com" style="color: #666;">traditional-astrology.com</a>.</p>
+            <p>
+                <a href="https://traditional-astrology.com/privacy.html" style="color: #666;">Privacy Policy</a> | 
+                <a href="https://traditional-astrology.com/terms.html" style="color: #666;">Terms of Service</a>
+            </p>
+            <p>To unsubscribe, please rely to this email with "UNSUBSCRIBE".</p>
+        </div>
+        """
+        # Insert before </body> if present, otherwise append
+        if "</body>" in html_content:
+            html_content = html_content.replace("</body>", footer + "</body>")
+        else:
+            html_content += footer
+
+    
     # 1. Try SendGrid
     sendgrid_key = os.getenv("SENDGRID_API_KEY")
     sender_email = os.getenv("SENDER_EMAIL", "noreply@codexcaelestis.com")
