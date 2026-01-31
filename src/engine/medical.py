@@ -157,36 +157,10 @@ class MedicalAstrology:
     @staticmethod
     def calculate_critical_days(decumbiture_jd: float) -> List[Dict]:
         """
-        Calculates 7th, 14th, and 21st day 'crisis' points from onset of illness.
-        These are the moments when the Moon squares, opposes, and squares again its initial position.
+        Calculates 7th, 14th, and 21st day 'crisis' points using the DecumbitureEngine.
         """
-        moon_start_res = swe.calc_ut(decumbiture_jd, swe.MOON, swe.FLG_SWIEPH)[0]
-        moon_start_lon = moon_start_res[0]
-        
-        crisis_days = []
-        targets = [90, 180, 270]
-        labels = ["First Crisis (Square)", "Second Crisis (Opposition)", "Third Crisis (Square)"]
-        
-        for i, target in enumerate(targets):
-            # Moon moves ~13.17 deg/day. Target day is approx target / 13.17
-            approx_jd = decumbiture_jd + (target / 13.17)
-            
-            # Refine
-            curr_jd = approx_jd
-            for _ in range(5):
-                m_curr = swe.calc_ut(curr_jd, swe.MOON, swe.FLG_SWIEPH)[0][0]
-                diff = (m_curr - moon_start_lon) % 360
-                err = (target - diff + 180) % 360 - 180
-                curr_jd += err / 13.17
-            
-            crisis_days.append({
-                "label": labels[i],
-                "jd": curr_jd,
-                "date": swe.revjul(curr_jd),
-                "moon_longitude": swe.calc_ut(curr_jd, swe.MOON, swe.FLG_SWIEPH)[0][0]
-            })
-            
-        return crisis_days
+        from .decumbiture import DecumbitureEngine
+        return DecumbitureEngine.calculate_critical_days(decumbiture_jd)
 
     @staticmethod
     def calculate_remediation_window(jd_start: float, duration_days: int = 30) -> List[Dict]:

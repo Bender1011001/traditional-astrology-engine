@@ -78,15 +78,19 @@ class KakosisEngine:
     @staticmethod
     def _check_overcoming(planet: Planet, chart: Chart, sect: Sect) -> List[MaltreatmentCondition]:
         """
-        The 10th sign from the planet is the position of 'Superiority'. 
-        If a Malefic is there, it dominates the planet.
+        The 10th sign from the planet is the position of 'Superiority' (Dexter). 
+        The 4th sign is 'Sinister' (weaker, but still relevant in some texts, often ignored in strict Kakosis).
+        If a Malefic is in the 10th, it dominates the planet.
         """
         res = []
         p_idx = KakosisEngine.get_zodiac_index(planet.sign)
         
-        # 10th sign relative to planet (inclusive count). 
-        # 1=Aries, 10=Capricorn. Index + 9.
+        # 10th sign relative to planet (Dexter Square)
+        # 1=Aries ... 10=Capricorn. Index + 9.
         tenth_idx = (p_idx + 9) % 12
+        
+        # 4th sign relative to planet (Sinister Square) - Optional, but Valens mentions it as less specific.
+        # We will focus on the 10th as the primary "Overcoming" definition.
         
         for potential_malefic in chart.planets:
             if potential_malefic.name not in KakosisEngine.MALEFICS:
@@ -95,18 +99,15 @@ class KakosisEngine:
             m_idx = KakosisEngine.get_zodiac_index(potential_malefic.sign)
             
             if m_idx == tenth_idx:
-                # Malefic is Overcoming
-                # Check degree (Bonification/Maltreatment often relies on degrees in Hellenistic)
-                # But widely, the sign position allows the 'claim'.
-                
-                # Refinement: Is it a degree-based square?
-                msg = f"Overcome by {potential_malefic.name.value} in the 10th sign/Superior Square."
+                # Malefic is Overcoming (Dexter/Right)
+                msg = f"Overcome by {potential_malefic.name.value} in the 10th sign (Superior/Dexter Square)."
                 sev = 8
                 if KakosisEngine.is_malefic_for_sect(potential_malefic.name, sect):
                     msg += " (Aggravated by Sect)"
                     sev = 10
                 
                 res.append(MaltreatmentCondition("Overcoming", potential_malefic.name, msg, sev))
+                
         return res
 
     @staticmethod
@@ -119,17 +120,21 @@ class KakosisEngine:
             if m.name not in KakosisEngine.MALEFICS: continue
             
             if KakosisEngine.get_zodiac_index(m.sign) == opp_idx:
-                # Check degree orb (say 10 deg widely)
+                # Check degree orb (say 12 deg for moiety-ish checks or just sign based)
                 dist = abs(m.longitude - (planet.longitude + 180) % 360) 
                 if dist > 180: dist = 360 - dist
                 
-                # Widely considering sign opposition as maltreatment basis, but usually needs orb
-                if dist < 12: # Standard moiery orb
-                     res.append(MaltreatmentCondition(
-                         "Opposition", m.name, 
-                         f"Opposed by {m.name.value} ({int(dist)}° orb).", 
-                         9 if KakosisEngine.is_malefic_for_sect(m.name, sect) else 7
-                     ))
+                # Malefics opposing by sign is bad, but tighter orb is worse.
+                msg = f"Opposed by {m.name.value}."
+                sev = 7
+                if dist < 12: 
+                     msg += f" (Within {int(dist)}° orb)"
+                     sev += 1
+                
+                if KakosisEngine.is_malefic_for_sect(m.name, sect):
+                    sev += 1
+                
+                res.append(MaltreatmentCondition("Opposition", m.name, msg, sev))
         return res
 
     @staticmethod
@@ -137,7 +142,6 @@ class KakosisEngine:
         """
         Besiegement (Perischeisis): 
         Bodily: Planet is situated between the two Malefics (Mars and Saturn).
-        Ray: Separating from one, applying to the other (not fully implemented here).
         """
         mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
         saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
@@ -154,11 +158,11 @@ class KakosisEngine:
         dist_mars = get_shortest_dist(planet.longitude, mars.longitude)
         dist_saturn = get_shortest_dist(planet.longitude, saturn.longitude)
         
-        # Check if between (one positive, one negative distance, meaning they are on opposite sides)
+        # Check if between (one positive, one negative distance)
         # And within orb (e.g. 15 degrees total besiegement span)
         if (dist_mars * dist_saturn < 0) and (abs(dist_mars) + abs(dist_saturn) < 15):
              return [MaltreatmentCondition(
-                 "Besiegement", PlanetName.SATURN, # Blame both?
+                 "Besiegement", PlanetName.SATURN, # Blame both
                  f"Besieged (Bodily) between Mars and Saturn (Orb: {int(abs(dist_mars) + abs(dist_saturn))}°).",
                  10
              )]
@@ -170,6 +174,7 @@ class KakosisEngine:
         """
         Aktinobolia: Typically a square where the Malefic is 'looking ahead' at the planet,
         or simply a tight hard aspect.
+        Here we treat it as a tight degree-based square (approx 3 deg).
         """
         res = []
         for m in chart.planets:
@@ -192,6 +197,7 @@ class KakosisEngine:
     def _check_adherence(planet: Planet, chart: Chart, sect: Sect) -> List[MaltreatmentCondition]:
         """
         Kollesis: Applying to conjunction within orb (usually 3 degrees).
+        Strict definition: Use speed to determine application.
         """
         res = []
         for m in chart.planets:
@@ -201,26 +207,46 @@ class KakosisEngine:
             diff = abs(m.longitude - planet.longitude)
             if diff > 180: diff = 360 - diff
             
-            if diff < 10: # Wide conjunction
-                # Check applying/separating.
-                # Simplistic: If planet is faster and behind malefic (less longitude), it's applying.
-                # Or if planet is slower and ahead of malefic.
-                # Moon (Fastest) always applies to planets ahead of it.
+            if diff < 6: # Orb frame
+                # Check applying/separating using relative speed
+                # Relative speed = Speed(Planet) - Speed(Malefic)
+                # If Planet is faster (>0 rel speed), it must be 'behind' (lesser longitude) to be applying.
+                # If Planet is slower (retrograde?), logic holds (speed is negative).
                 
-                # Assume Planet moves direct.
-                # If Planet < Malefic (and diff < 10), Planet is chasing Malefic => Applying.
+                # Let's simplify:
+                # Effective velocity of P relative to M
+                # If P moves 1 deg/day and M moves 0.1, P closes gap by 0.9/day.
                 
-                # Normalize longs
-                p_lon = planet.longitude
-                m_lon = m.longitude
+                # We need to norm longitude distance relative to movement.
+                # Determine 'Lead' and 'Chase'.
                 
-                # Check direction (assuming standard zodiacal order)
-                # If p_lon = 10, m_lon = 15. P applies to M.
+                # Current separation vector
+                # If M is at 10, P is at 8. Target is 10. Gap is +2.
+                # We need P's speed > M's speed? Not necessarily, P could be Rx.
+                
+                # Distance P to M (M - P)
+                d_lon = m.longitude - planet.longitude
+                if d_lon > 180: d_lon -= 360
+                elif d_lon < -180: d_lon += 360
+                
+                # Relative speed (how much d_lon changes per day)
+                # change = (Speed_M - Speed_P)
+                # But typically we view it as: P is applying to M if P is catching up.
+                
+                rel_speed = planet.speed - m.speed
+                
+                # If d_lon is positive (M ahead of P), we need P to be faster (rel_speed > 0) to catch up.
+                # If d_lon is negative (M behind P), we need P to be slower or Rx (rel_speed < 0) to "back into" or M to catch up? 
+                # Adherence usually implies the lighter planet applying to the heavier.
+                # So P (Light) -> M (Heavy).
+                
                 is_applying = False
-                if (m_lon - p_lon) % 360 < 15:
-                    is_applying = True
+                if d_lon > 0 and rel_speed > 0: is_applying = True # P chasing M
+                if d_lon < 0 and rel_speed < 0: is_applying = True # P Rx into M or M chasing P?
                 
-                if is_applying and diff < 3: # Tight adherence
+                # Check MOIETY/ORB for Adherence - usually very tight (3 deg)
+                if is_applying and diff < 3:
+                     state = "Applying"
                      res.append(MaltreatmentCondition(
                         "Adherence", m.name,
                         f"Adhering (Applying Conjunction) to {m.name.value} within {round(diff,1)}°.",

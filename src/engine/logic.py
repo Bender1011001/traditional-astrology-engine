@@ -30,6 +30,7 @@ from .primary_directions import PrimaryDirectionsEngine
 from .reception import ReceptionEngine, ReceptionMode
 from .rectification import RectificationEngine
 from .kakosis import KakosisEngine
+from .decumbiture import DecumbitureEngine
 import swisseph as swe
 
 # Initialize Library
@@ -1267,3 +1268,33 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
     # For now, let's just use what's available.
     
     return forecast
+
+def analyze_decumbiture_chart(chart: Chart, decumbiture_jd: Optional[float] = None) -> Dict:
+    """
+    Analyzes a Decumbiture chart (moment of illness) using Iatromathematical protocols.
+    """
+    if decumbiture_jd is None:
+        decumbiture_jd = chart.jd
+        
+    # Format Date
+    y, m, d, h = swe.revjul(decumbiture_jd)
+    date_str = f"{y:04d}-{m:02d}-{d:02d} {int(h):02d}:{int((h%1)*60):02d}"
+
+    # 1. Critical Days
+    critical_days = DecumbitureEngine.calculate_critical_days(decumbiture_jd)
+    
+    # 2. Moon Distemper
+    moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+    distemper = DecumbitureEngine.analyze_distemper(moon.sign) if moon else {}
+    
+    # 3. Prognosis
+    prognosis = DecumbitureEngine.check_prognosis(chart)
+    
+    return {
+        "analysis_type": "Decumbiture / Medical Crisis",
+        "onset_date": date_str,
+        "distemper": distemper,
+        "critical_days": critical_days,
+        "prognosis": prognosis,
+        "historical_note": "Calculated using 16th-century Iatromathematical protocols (Decumbiture)."
+    }
