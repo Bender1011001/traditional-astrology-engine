@@ -1,0 +1,322 @@
+﻿Computational Architecture for Traditional Astrological Prognostication: A Technical Reconstruction of Hellenistic, Arabic, and Renaissance Algorithms
+1. Introduction: The Algorithmic Imperative in Astrological Reconstruction
+The reconstruction of traditional astrological systems for computational engines requires more than the digitization of lookup tables; it demands the translation of metaphysical axioms into rigorous mathematical logic. The historical trajectory of astrology—from the observational empiricism of the Hellenistic era (Vettius Valens) through the synthesis of the Arabic Golden Age (Bonatti, Abu Ma’shar) to the rationalized structures of the Renaissance (Morin, Lilly)—presents a complex layered architecture of predictive hierarchies. A robust astrology engine must synthesize these traditions, resolving the contradictions between the zodiacal (ecliptic) framework and the mundane (local horizon) framework.
+This report specifies the mathematical formulas, boolean logic chains, and interpretative protocols necessary to build the final synthesis layers of such an engine. The focus is on the high-precision calculation of the Mundane Speculum using Placidian semi-arc theory, the hierarchical processing of Solar Returns via Jean-Baptiste Morin’s "Theory of Determination," the temporal unfolding of Secondary Progressions, the forensic application of Hermetic Lots, and the medical timing of Decumbiture. Each module is designed to operate as a discrete computational object while feeding into a unified predictive output.
+________________
+2. The Mundane Speculum: Placidian Algorithms and Primary Directions
+The foundation of high-precision predictive modeling, particularly for Primary Directions and the rigorous evaluation of planetary strength, lies in the Mundane Speculum. Unlike the zodiacal framework, which locates planets via celestial longitude (  ) and latitude (  ) along the ecliptic, the mundane framework locates bodies relative to the local observer's horizon and meridian.1 This shift from a 2D zodiacal map to a 3D local sphere allows for the calculation of in mundo aspects and the semi-arc partitions characteristic of the Placidus system.
+2.1 Coordinate Transformations: Ecliptic to Equatorial
+The first stage of the computational pipeline involves converting the planet's ecliptic coordinates into the equatorial coordinate system (Right Ascension and Declination). This is a prerequisite for all semi-arc calculations because the diurnal rotation of the Earth—which drives Primary Directions—is measured along the equator, not the ecliptic.3
+Inputs:
+*    (Lambda): Celestial Longitude of the planet.
+*    (Beta): Celestial Latitude of the planet.
+*    (Epsilon): Obliquity of the Ecliptic. For modern epochs, this can be calculated dynamically, but for standard J2000.0, it is approximately   .
+Mathematical Protocol:
+   1. Declination (  ):
+The declination measures the angular distance of the planet north or south of the celestial equator.
+  
+Algorithmic Note: The result of    must be handled to respect the quadrants, although declination is naturally bounded between    and   .6
+   2. Right Ascension (  ):
+The Right Ascension measures the distance along the equator from the vernal point.
+  
+Algorithmic Note: A standard atan function is insufficient due to quadrant ambiguity. The engine must utilize the atan2(y, x) function, where    is the numerator and    is the denominator, to return the correct angle in the range $
+2.2 The Placidian Semi-Arc Integration
+The defining feature of the Placidus system—and the source of its computational complexity—is the Semi-Arc. Placidus de Titis (17th Century) proposed that the "house" of a planet is defined by the time it takes to travel from the horizon to the meridian.9
+A planet’s Diurnal Semi-Arc (DSA) is the arc (in Right Ascension) it traverses from the Eastern Horizon to the Midheaven (MC). The Nocturnal Semi-Arc (NSA) is the arc from the Western Horizon to the Imum Coeli (IC).
+Calculation of Ascensional Difference (AD):
+The AD is the difference between the planet's rising time at the equator (Right Ascension) and its rising time at the local latitude. It is a function of the local geographic latitude (  ) and the planet's declination (  ).
+  
+
+Constraint Logic: If the planet’s declination is such that   , the planet is circumpolar (never rising or never setting). The engine must flag these bodies as having no valid semi-arc for horizon-based directions, although they still possess meridian transit points.11
+Semi-Arc Derivation:
+      * Diurnal Semi-Arc (DSA):
+  
+  
+      * Nocturnal Semi-Arc (NSA):
+  
+This simple subtraction holds because the total diurnal arc is always    (12 hours) on the equator, modified by the AD.12
+2.3 The Pole of the Planet (  )
+In Primary Directions, specifically those directed "under the pole of the significator" (as codified by Placidus and later Kuehr), one must calculate the Pole of the planet. The Pole represents the "effective latitude" at which the planet is positioned relative to the horizon and meridian. It is not a static geographic coordinate but a dynamic variable dependent on the planet's mundane position.14
+The Logic of the Pole:
+         * If a planet is exactly on the Horizon (Ascendant/Descendant), its Pole is equal to the Geographic Latitude (  ).
+         * If a planet is exactly on the Meridian (MC/IC), its Pole is    (acting as if it were on the equator).
+         * For any intermediate position, the Pole is a proportional value derived from its distance from the meridian.
+Formula for the Pole:
+To find the Pole (  ) of a planet, we use the ratio of its Meridian Distance (  ) to its Semi-Arc (  ). The    is the absolute difference between the Right Ascension of the Midheaven (  ) and the Right Ascension of the Planet (  ), normalized to the lower meridian if necessary.
+  
+
+Verification:
+            * If    (on MC),   .
+            * If    (on Asc),   .
+            * This formula ensures a smooth interpolation of the polar elevation as the planet traverses the quadrant.16
+2.4 Mundane Position and In-Mundo Aspects
+One of the most advanced features of a Renaissance/Baroque engine is the calculation of In-Mundo Aspects. Unlike zodiacal aspects, which measure angular distance along the ecliptic (longitude), mundane aspects measure distance along the "time" axis of the diurnal rotation. Two planets are in mundane conjunction not when they share the same longitude, but when they share the same proportional distance along their respective semi-arcs.2
+Algorithm for Mundane Position (  ):
+We standardize the mundane sphere to   , where the MC is   , the Ascendant is    (or   ), the IC is   , and the Descendant is   . (Note: Conventions vary; some set Asc to   . The engine must define a consistent coordinate system).
+For a planet in the South-East Quadrant (10th, 11th, 12th houses):
+  
+
+For a planet in the North-East Quadrant (1st, 2nd, 3rd houses):
+  
+
+(Where RAMOA is the RA of the Meridian of Oblique Ascension, effectively the IC + 180 or similar anchor. A simpler approach uses distance from MC/IC).
+Simplified Proportionality Logic:
+A planet    aspects planet    by mundane square (  ) if:
+  
+
+This captures relationships that do not exist in the zodiac. For example, a planet at    Aries and another at    Leo are zodiacally square (approx.    difference). However, due to differences in declination and ascension times, they might be visually separated by    in the sky (mundane), or conversely, two planets trine in the zodiac could be square in mundo. The engine must flag Mundane Aspects as "Physical/Concrete" manifestations vs. "Zodiacal Aspects" as "Psychological/Intentional" influences.18
+________________
+3. Solar Returns: Morin’s Hierarchical Determination Logic
+The interpretation of Solar Returns (SR) in modern software is often flawed because it treats the SR chart as an independent radix. The reconstructed protocol, based on Jean-Baptiste Morin’s Astrologia Gallica, Book 23, enforces a strict dependency on the Natal Chart. The algorithm must calculate the SR not as a standalone entity but as a "filter" or "trigger" for the Nativity.20
+3.1 The Overlay Logic Chain
+Morin’s primary axiom is: The Solar Return cannot produce what the Nativity does not promise. The computational engine must therefore "score" the potential of the SR based on natal overlaps.
+Algorithm:
+               1. Natal House Overlay:
+Identify which Natal House cusp (  ) aligns with the Solar Return Ascendant (  ).
+                  * Condition: If    falls in Natal 10th House (  ), the year’s vitality (1st) is determined by Career (10th).
+                  * Condition: If    falls in Natal 12th House, the year is flagged for ISOLATION_RISK.
+                  * Condition: If    falls in Natal 8th House, the year is flagged for CRISIS_RISK or FINANCIAL_TRANSFORMATION.21
+                     2. Planetary Recursion:
+For every planet    in the SR:
+                        * Identify its SR Position (House/Sign).
+                        * Identify its Natal Rulership.
+                        * Synthesis Rule:    acts in the SR House according to the nature of the Natal House it rules.
+                        * Example: SR Mars in SR 2nd House (Money). Natal Mars rules Natal 6th House (Illness/Service).
+                        * Output: "Expenditure (2nd) caused by Illness (6th) or Service/Employees."
+3.2 The Lord of the Year (Annual Profections)
+To prevent contradictory signals (e.g., SR Jupiter is strong, but the year is difficult), the engine must integrate Annual Profections to identify the Lord of the Year (LoY). The LoY acts as the "Gain knob" for the Solar Return.23
+Calculation Protocol:
+                           1. Calculate Profection Sign:
+  
+(Using Whole Sign logic for the profection count, derived from Hellenistic/Valens usage).
+                           2. Identify LoY: The Domicile Ruler of   .
+                           3. Weighting Algorithm:
+                              * Locate the LoY in the Solar Return.
+                              * Score: +10 if Angular in SR.
+                              * Score: -10 if Cadent or Combust in SR.
+                              * Score: +5 if Aspecting the    in the SR.
+                              * Logic: If the LoY is weak in the SR chart, the promises of the Profection (e.g., a "10th House Year") will fail to materialize or manifest with difficulty. The LoY overrides the SR Ascendant ruler in importance.26
+3.3 The 6th vs. 12th House Illness Controversy (Morin vs. Tradition)
+A crucial "switch" in the engine settings involves the definition of illness. Standard tradition (Ptolemy/Lilly) assigns illness to the 6th House. Morin, however, argued vehemently that the 6th House signifies "servants and small animals" but not illness. He assigned illness primarily to the 12th House (as the cause of death/suffering) and the 8th House (death itself).22
+Configuration Option: MORIN_ILLNESS_LOGIC = TRUE/FALSE
+                                 * True: Engine scans 12th House for disease indicators.
+                                 * False: Engine scans 6th House (Standard).
+                                 * Historical Insight: Morin reasoned that the 12th is the house of "self-undoing" and "suffering," which aligns closer to the existential experience of severe illness than the 6th (which opposes the 12th).
+________________
+4. Secondary Progressions: Temporal Mechanics and Stations
+Secondary Progressions (one day after birth = one year of life) require precise ephemeris interpolation. While the Progressed Sun and Moon are standard, the Progressed Stations of Mercury represent a high-value predictive signal often missed by basic software.
+4.1 The Mercury Station Algorithm
+The Progressed Station of Mercury is a "once-in-a-lifetime" event for many, signifying a complete reversal of mental orientation (e.g., switching careers, adopting a new philosophy, entering/exiting a period of introspection).28
+Algorithmic Detection:
+                                 1. Scan Window: Iterate through the ephemeris from Birth_Date to Birth_Date + 100 days.
+                                 2. Velocity Check: Calculate daily velocity   .
+                                    * Station Retrograde (SR): When    shifts from    to   .
+                                    * Station Direct (SD): When    shifts from    to   .
+                                       3. Timing Mapping: Map the "Day of Station" (  ) to the "Year of Life" (  ).
+  
+                                       4. Orb of Influence (The "Grind"):
+Unlike a transit which is fleeting, a Secondary Progressed station involves the planet moving extremely slowly (less than    per day) for an extended period.
+                                          * Rule: The event window opens when Mercury enters within 0°05' of the station degree and closes when it exits this orb. In secondary time, this can represent a 2 to 3-year period of intense psychological recalibration.31
+                                          * Interpretation:
+                                          * SR: Internalization of intellect, editing, review, silencing of public voice.
+                                          * SD: Release of works, publication, clarity, externalization of voice.
+4.2 The Progressed Moon and Primary Triggers
+A vital synthesis rule from the Renaissance tradition is that Secondary Progressions act as triggers for Primary Directions.1
+Logic Chain:
+                                          1. Primary Direction (Background): A Primary Direction (e.g., Ascendant directed to Square Mars) is active for a long arc (e.g., 2 years). It sets the potential for an event (e.g., injury).
+                                          2. Secondary Trigger (Foreground): The event manifests on the specific day/month when the Secondary Progressed Moon forms a hard aspect (Conjunction, Square, Opposition) to the Promissor of the Primary Direction (Mars).
+                                          3. Engine Output: "Primary Direction [Asc sq Mars] active. Trigger Event likely during when SP Moon transits."
+________________
+5. Forensic Lots: Calculations and Verification Rules
+Forensic astrology, used for locating stolen items, identifying criminals, or assessing bankruptcy risk, relies on Lots (Arabic Parts). The calculation of these points is highly sensitive to the Sect (Day/Night) of the chart, and authors differ on the formulas. The engine must support distinct "Modes" for Valens, Paulus, and Bonatti.33
+5.1 Lot of Debt and Bankruptcy
+This Lot is critical for financial risk assessment. It synthesizes the position of Mercury (accounting/commerce) and Saturn (restriction/loss).
+Formulas:
+                                          * Standard (Bonatti/Hermetic):
+  
+(Usually reversed by Night):   . Rationale: Mercury is the significator of commerce; Saturn is the significator of debt and restriction. The distance between them, projected from the Ascendant (the native), shows where the "restriction of commerce" lies.35
+Interpretative Flag:
+                                             * If Lot of Debt is conjunct Mars (cutting) or the Lord of the 8th (bankruptcy): HIGH_RISK_INSOLVENCY.
+                                             * If Lot of Debt is conjunct Jupiter: DEBT_IS_MANAGEABLE or "Gain through using other people's money (leverage)."
+5.2 Lot of Theft
+Used in horary and forensic charts to identify the thief and the location of stolen goods.
+Formulas:
+                                             * Lilly/Bonatti:
+  
+(Reverse by Night):   .
+Rationale: Mars is the thief (taker), Mercury is the goods (movable/cunning).
+Verification Protocol (Radicality Check):
+Lilly provides a specific rule to verify if the chart is "radical" (fit for judgment) regarding theft.
+                                                * Condition: The Lot of Theft must be in the Sign of the Lord of the 7th House (The Thief) OR conjunct the Lord of the 7th OR conjunct the 7th House Cusp.
+                                                * Boolean Output: If TRUE, the chart accurately depicts the theft. If FALSE, the item may be merely lost, not stolen.37
+Location Logic:
+                                                * Water Sign: Kitchen, bathroom, near river/lake.
+                                                * Fire Sign: Near chimney, oven, ironworks, upper rooms.
+                                                * Earth Sign: Basement, garden, on the floor.
+                                                * Air Sign: Upper levels, eaves, bedrooms.
+5.3 Lot of Accusation (Nemesis vs. Accusation)
+Confusion exists between the Lot of Accusation and the Lot of Nemesis. The engine must distinguish them.
+                                                * Lot of Accusation (Firmicus/Valens):
+  
+(Day formula). Night:   .39 Use: Legal trouble, slander, police involvement.
+                                                * Lot of Nemesis (Valens - Anthologies):
+  
+  
+Note: Valens derives Nemesis from the Lot of Fortune (a lunar lot), linking it to "Chance misfortune" or "burden of fate" rather than active malice (Mars).40
+5.4 The Valens vs. Paulus Divergence on Eros and Necessity
+For Zodiacal Releasing, the correct Lots must be selected. There are two traditions:
+
+
+Lot
+	Valens Formula (Abstract)
+	Paulus Formula (Planetary)
+	Usage Recommendation
+	Eros
+	Asc + Spirit - Fortune
+	Asc + Venus - Spirit
+	Use Valens for Spirit-Releasing; Use Paulus for Relationship analysis.41
+	Necessity
+	Asc + Fortune - Spirit
+	Asc + Mercury - Fortune
+	Use Valens for Spirit-Releasing; Use Paulus for Constraint analysis.
+	Insight: Valens' method creates a symmetrical geometry where Eros and Necessity are the "children" of Fortune and Spirit. Paulus' method anchors them to Venus (Desire) and Mercury (Contention/Necessity), making them "Planetary Lots".33
+________________
+6. Essential Dignity and Term Systems (Bounds)
+The Terms (or Bounds) are unequal divisions of zodiac signs ruled by the five non-luminaries. They represent the "rules of engagement" or the specific modal constraints of a planet.
+6.1 System Comparison Table
+The engine must incorporate lookup tables for all three historical systems.
+
+
+Sign
+	Egyptian (Valens/Dorotheus)
+	Ptolemaic (Tetrabiblos)
+	Chaldean (Babylonian/Decan-based)
+	Aries
+	Jup(6), Ven(6), Mer(8), Mar(5), Sat(5)
+	Jup(6), Ven(8), Mer(7), Mar(5), Sat(4)
+	Jup(8), Ven(7), Sat(6), Mer(5), Mar(4)
+	Taurus
+	Ven(8), Mer(6), Jup(8), Sat(5), Mar(3)
+	Ven(8), Mer(7), Jup(7), Sat(2), Mar(6)
+	Ven(8), Sat(7), Mer(6), Mar(5), Jup(4)
+	Gemini
+	Mer(6), Jup(6), Ven(5), Mar(7), Sat(6)
+	Mer(7), Jup(6), Ven(7), Mar(6), Sat(4)
+	Sat(8), Mer(7), Mar(6), Jup(5), Ven(4)
+	Rationale
+	Arbitrary/Lost logic. Used in Hellenistic techniques.
+	Rationalized by rulership/triplicity/exaltation logic.
+	Sequence based on Chaldean Order (Jup-Ven-Sat-Mer-Mar). Degrees count down 8-7-6-5-4.
+	Source
+	43
+	44
+	43
+	6.2 Selection Logic
+                                                   * Egyptian Terms: Mandatory for Primary Directions (Distributor) and Zodiacal Releasing. These were the standard for Valens and the source material for these techniques.
+                                                   * Ptolemaic Terms: Mandatory for Medieval/Renaissance Dignity Scoring (e.g., Lilly's point system). Ptolemy criticized the Egyptian terms as inconsistent, creating his own "rational" table which became standard in Europe.43
+                                                   * Chaldean Terms: Rarely used for dignity, but significant in astrological magic and decans.
+________________
+7. Medical Astrology: Decumbiture Protocols
+Decumbiture charts are cast for the moment the patient takes to their bed. They function as a "horary of the disease."
+7.1 The 16-Day Critical Period Algorithm
+The Moon is the "Hand of the Clock" in decumbiture. Its motion relative to its initial position (  ) defines the Critical Days (Crisis points).48
+Algorithm:
+                                                   1. Input: Longitude of Moon at Decumbiture (  ).
+                                                   2. Calculated Crisis Points:
+                                                      * Day 7 (First Crisis): Moon reaches First Square (  ).
+                                                      * Day 14 (Second Crisis): Moon reaches Opposition (  ).
+                                                      * Day 21 (Third Crisis): Moon reaches Second Square (  ).
+                                                         3. Prognosis Logic:
+                                                         * Calculate the exact time the Moon reaches these degrees.
+                                                         * Check Inter-planetary Aspects: If the Moon, at the moment of the critical square, is aspected by Jupiter or Venus (Benefics), the crisis leads to recovery.
+                                                         * If aspected by Saturn or Mars (Malefics), the crisis leads to death or chronic entrenchment.
+                                                         * Note: The 16-day limit is often cited because acute diseases usually resolve (cure or death) within two lunar quarters.
+7.2 The Moon-Mercury Interference Rule
+A specific aphorism warns against trusting the physician or the patient's account under certain configurations.
+Rule: "If the Moon applies to an opposition of Mercury, or is in square to Mercury, it disturbs the imaginative faculty, causing delirium, incorrect diagnosis, or confusion.".50
+Engine Flag:
+                                                         * Condition: IsAspect(Moon, Mercury, Square) OR IsAspect(Moon, Mercury, Opposition).
+                                                         * Output: WARNING_DIAGNOSTIC_CONFUSION. The physician should rely on physical signs (urine, pulse) rather than the patient's verbal report, as Mercury (Speech/Mind) is disconnected from Luna (Body).
+________________
+8. Remediation: Planetary Charity and Monomoiria
+The final layer involves mitigating negative forecasts using metaphysical protocols.
+8.1 Monomoiria (Degree Rulers)
+While Terms rule large sections, Monomoiria rule individual degrees. This allows for "micro-targeting" remediation.
+Algorithm (Paul of Alexandria):
+The ruler of the first degree of a sign is the Ruler of the Sign (or Triplicity Lord, depending on version). Subsequent degrees follow the Chaldean Order (Saturn -> Jupiter -> Mars -> Sun -> Venus -> Mercury -> Moon).
+                                                         * Application: If a planet is in a malefic Term (e.g., Saturn bounds), but the Monomoiria ruler of that specific degree is Jupiter, the remediation engine suggests invoking Jupiter to "bypass" the Saturnine blockage.52
+8.2 Planetary Charity
+This technique, derived from Harranian and Indian sources, suggests specific donations to mitigate planetary affliction.
+Logic Matrix:
+                                                         * Afflicted Mars:
+                                                         * Problem: Inflammation, conflict, fever.
+                                                         * Charity: Donate to soldiers/veterans, donate blood, buy knives/tools for a butcher or cook (Mars professions).
+                                                         * Afflicted Saturn:
+                                                         * Problem: Melancholy, obstruction, chronic cold.
+                                                         * Charity: Feed crows/black animals, donate to the elderly, clean latrines or old ruins (Saturnine locations).
+                                                         * Afflicted Mercury:
+                                                         * Problem: Anxiety, slander, theft.
+                                                         * Charity: Donate books to students, support scribes, feed parrots/smart birds.54
+________________
+9. Conclusion
+This specification outlines a computational engine capable of replicating the "Art" of traditional astrology through the rigorous application of "Science." By integrating the 3D geometry of the Placidian Mundane Speculum, the hierarchical logic of Morin’s Solar Returns, and the precise timing of Secondary Progressions and Critical Days, the system transcends simple chart generation. It becomes a diagnostic and predictive tool that honors the mathematical complexity of the Hellenistic and Renaissance traditions.
+Summary of Key Computational Primitives:
+                                                         1. Semi-Arc (  ):   .
+                                                         2. Mundane Position (  ): Proportional distance along    relative to MC/Asc.
+                                                         3. Profection Lord:   .
+                                                         4. Lot of Debt:    (Reversed by Night).
+                                                         5. Critical Day (  ):   .
+Works cited
+                                                            1. Primary and Secondary Progressions — A-Stories - Astro Stories, accessed January 30, 2026, https://www.jeanmarcpierson.com/astro-blog/2023/9/16/primary-and-secondary-progressions
+                                                            2. How to Verify that In Mundo Aspect Lines and In Mundo Midpoint Lines Are Correct, accessed January 30, 2026, https://youtu.be/wiXUJBlwDcw
+                                                            3. Celestial Sphere - Right Ascension and Declination - YouTube, accessed January 30, 2026, https://www.youtube.com/watch?v=X-qzt4gibvg
+                                                            4. Chapter 2: Reference Systems - NASA Science, accessed January 30, 2026, https://science.nasa.gov/learn/basics-of-space-flight/chapter2-2/
+                                                            5. Right Ascension and Declination Coordinates — Orbital Mechanics & Astrodynamics, accessed January 30, 2026, https://orbital-mechanics.space/classical-orbital-elements/right-ascension-declination.html
+                                                            6. Computing planetary positions - a tutorial with worked examples - Stjarnhimlen.se, accessed January 30, 2026, https://stjarnhimlen.se/comp/tutorial.html
+                                                            7. Ep. 313 Transcript: House Division Calculations in Astrology Explained, accessed January 30, 2026, https://theastrologypodcast.com/transcripts/ep-313-transcript-house-division-calculations-in-astrology-explained/
+                                                            8. Why Was Placidus the Most Popular House System in Astrology? - YouTube, accessed January 30, 2026, https://www.youtube.com/watch?v=TlI-DcttQso
+                                                            9. Aspects in Mundo - Kepler College Library Services, accessed January 30, 2026, https://library.keplercollege.org/aspects-in-mundo/
+                                                            10. The Placidus House Division Formulas For Astrology | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/70479439/The-Placidus-House-Division-Formulas-for-Astrology
+                                                            11. How to find the arc length of a semicircle using calculus. - YouTube, accessed January 30, 2026, https://www.youtube.com/watch?v=7rKLqIOh_KU
+                                                            12. The Grammar of Astrology - Containing All Things Necessary For Calculating A Nativity by Common Arithmetic - Scribd, accessed January 30, 2026, https://www.scribd.com/document/793114787/The-Grammar-of-Astrology-Containing-All-Things-Necessary-for-Calculating-a-Nativity-by-Common-Arithmetic
+                                                            13. ASTRO-RESEARCH CENTER ' ZENITH ', accessed January 30, 2026, https://alabe.com/Manual_placidus5_1.pdf
+                                                            14. Pole Height in Primary Directions - Swisseph - Groups.io, accessed January 30, 2026, https://groups.io/g/swisseph/topic/pole_height_in_primary/27495462
+                                                            15. Pole Height in Primary Directions - Groups.io, accessed January 30, 2026, https://groups.io/g/swisseph/message/4814
+                                                            16. Aspects in Mundo - AstroApp, accessed January 30, 2026, https://astroapp.com/help/1/allAspMundoW.html
+                                                            17. Makransky Primarydirections - 2 | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/41581638/Makransky-primarydirections-2
+                                                            18. Astrologia Gallica Book - Jean-Baptiste Morin - Google Books, accessed January 30, 2026, https://books.google.com/books/about/Astrologia_Gallica_Book.html?id=SZlr29Xo1igC
+                                                            19. Morin - Solar and Lunar Returns Astrologia Gallica Book 23 | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/395769989/Morin-Solar-and-Lunar-Returns-Astrologia-Gallica-Book-23
+                                                            20. Ep. 449 Transcript: Jean-Baptiste Morin's Astrology, accessed January 30, 2026, https://theastrologypodcast.com/transcripts/ep-449-transcript-jean-baptiste-morins-astrology/
+                                                            21. Profection & Solar Return - Sage Asita, accessed January 30, 2026, http://www.sageasita.com/profection--solar-return.html
+                                                            22. Monthly profections: When does the year start? : r/Advancedastrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/yad0o9/monthly_profections_when_does_the_year_start/
+                                                            23. How do you use solar returns in conjunction with annual profections? - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/jrnqjk/how_do_you_use_solar_returns_in_conjunction_with/
+                                                            24. Solar Return Lords and Houses (Natal, Profection and Return) : r/astrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/astrology/comments/17xanmc/solar_return_lords_and_houses_natal_profection/
+                                                            25. What is the difference between a Solar Return chart and an Annual Profection year? - Reddit, accessed January 30, 2026, https://www.reddit.com/r/astrology/comments/qzsxrm/what_is_the_difference_between_a_solar_return/
+                                                            26. Secondary Progressions: Planets Stationing Retrograde or Direct - YouTube, accessed January 30, 2026, https://www.youtube.com/watch?v=m-E6LsFled4
+                                                            27. Astro Diary: Notes on Secondary Progressions – Mercury - Jessica Davidson – Astrologer, accessed January 30, 2026, https://jessicadavidson.co.uk/2022/01/17/astro-diary-notes-on-secondary-progressions-mercury/
+                                                            28. Ep. 342 Transcript: Planetary Stations in Secondary Progressions - The Astrology Podcast, accessed January 30, 2026, https://theastrologypodcast.com/transcripts/ep-342-transcript-planetary-stations-in-secondary-progressions/
+                                                            29. The Light & Shadow of Mercury in Secondary Progressions - Sched, accessed January 30, 2026, https://static.sched.com/hosted_files/uac2018/c5/Light%20and%20Shadow%20of%20Mercury%20in%20Progressions.pdf
+                                                            30. Ep. 144 Transcript: Secondary Progressions: Every Day Symbolizes A Year, accessed January 30, 2026, https://theastrologypodcast.com/transcripts/ep-144-transcript-secondary-progressions-every-day-symbolizes-a-year/
+                                                            31. The Four Birth Deities: The Lots of Fortune, Spirit, Eros and Necessity - Orphic Astrology, accessed January 30, 2026, https://orphicastrology.com/lots/four-birth-deities
+                                                            32. Meaning of “Parts of” or “lots” in astrology and the difference between dorotheus and valens : r/Advancedastrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/1pejvz8/meaning_of_parts_of_or_lots_in_astrology_and_the/
+                                                            33. Dreamhouse: Attic: Roof: Astro: Lots: List - umich.edu, accessed January 30, 2026, http://www-personal.umich.edu/~pfa/dreamhouse/attic/lots/lotslist.html
+                                                            34. ARABIC PARTS FORMULAS - Planets In Astrology - Scribd, accessed January 30, 2026, https://pt.scribd.com/document/455588654/ARABIC-PARTS-FORMULAS-Astrology
+                                                            35. Horary Astrology: Finding a Thief | PDF | Theft - Scribd, accessed January 30, 2026, https://www.scribd.com/document/528507523/William-Lilly-Fish-Stollen-By-John-Frawley
+                                                            36. William Lilly - Christian Astrology 1647 (Volume 1) | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/75655407/William-Lilly-Christian-Astrology-1647-Volume-1
+                                                            37. The Lots | PDF | Astrology | Translations - Scribd, accessed January 30, 2026, https://www.scribd.com/document/597110239/The-Lots
+                                                            38. Zodiacal Releasing from the Lot of Nemesis: A Case Study - Patrick Watson, accessed January 30, 2026, https://patrickwatsonastrology.com/zodiacal-releasing-from-the-lot-of-nemesis-a-case-study/
+                                                            39. Does anyone else find that their Lot of Eros is different on Astro.com vs Astroseek? - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/arakpr/does_anyone_else_find_that_their_lot_of_eros_is/
+                                                            40. Ep. 433 Transcript: The Lot of Fortune and Spirit in Astrology, accessed January 30, 2026, https://theastrologypodcast.com/transcripts/ep-433-transcript-the-lot-of-fortune-and-spirit-in-astrology/
+                                                            41. More on the Terms or Bounds | Altair Astrology - WordPress.com, accessed January 30, 2026, https://altairastrology.wordpress.com/2009/03/01/more-on-the-terms-or-bounds/
+                                                            42. Resources for learning the bounds, decans, and terms (Chaldean, Egyptian and traditional?) : r/Advancedastrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/1m8jbbt/resources_for_learning_the_bounds_decans_and/
+                                                            43. LacusCurtius • Ptolemy, Tetrabiblos, — Book I, §§ 4‑24, accessed January 30, 2026, https://penelope.uchicago.edu/thayer/e/roman/texts/ptolemy/tetrabiblos/1b*.html
+                                                            44. Alexander Jones and John Steele. "A New Discovery of a Component of Greek Astrology in Babylonian Tablets: The “Terms”. - CORE, accessed January 30, 2026, https://core.ac.uk/download/pdf/323218339.pdf
+                                                            45. The Transmission of Ptolemy's Terms: An Historical Overview, Comparison and Interpretation - Culture and Cosmos, accessed January 30, 2026, http://www.cultureandcosmos.org/pdfs/11/11_Houlding_Ptolemy_Vol11.pdf
+                                                            46. Critical Days — Medieval Astrology Guide, accessed January 30, 2026, https://www.medievalastrologyguide.com/critical-days
+                                                            47. Semeiotica uranica, or, An astrological judgment of diseases from the decumbiture of the sick (1) from Aven Ezra by the way of introduction, (2) from Noel Duret by way of direction, accessed January 30, 2026, https://quod.lib.umich.edu/e/eebo/A35396.0001.001/1:10.2.9?rgn=div3;view=fulltext
+                                                            48. Need help with interpreting moon-mercury opposition : r/horary - Reddit, accessed January 30, 2026, https://www.reddit.com/r/horary/comments/1pdd0jm/need_help_with_interpreting_moonmercury_opposition/
+                                                            49. SOLAR WRITER REPORT Lee Lehman's Decumbiture Report for Aggie's Chemotherapy - Astrolabe, accessed January 30, 2026, https://alabe.com/Chemother.PDF
+                                                            50. Canon of Monomoiria of Paulus Alexandinus - RASA School of Astrology, accessed January 30, 2026, https://rasa.ws/rasa-library-menu-page/rasa-library-menu-journals/news-by-degrees-v12/canon-of-monomoiria-of-paulus-alexandinus/
+                                                            51. Paulus Alexandrinus - Wikipedia, accessed January 30, 2026, https://en.wikipedia.org/wiki/Paulus_Alexandrinus
+                                                            52. Remediating… Mercury - HéloAstro, accessed January 30, 2026, https://www.heloastro.com/blog/remediating-mercury
+                                                            53. Astrological Remediation: A Guide to Planetary Charity, accessed January 30, 2026, https://www.melpriestley.ca/astrological-remediation-planetary-charity/

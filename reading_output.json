@@ -126,6 +126,86 @@
     "destructive_team": [
       "Mars"
     ],
+    "maltreatments": {
+      "Venus": [
+        {
+          "type": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign/Superior Square. (Aggravated by Sect)",
+          "severity": 10
+        },
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Saturn",
+          "description": "Struck by Saturn via tight square (1\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "Mars": [
+        {
+          "type": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign/Superior Square. (Aggravated by Sect)",
+          "severity": 10
+        },
+        {
+          "type": "Adherence",
+          "malefic": "Mars",
+          "description": "Adhering (Applying Conjunction) to Mars within 0.0\u00b0.",
+          "severity": 9
+        }
+      ],
+      "Jupiter": [
+        {
+          "type": "Opposition",
+          "malefic": "Mars",
+          "description": "Opposed by Mars (4\u00b0 orb).",
+          "severity": 9
+        },
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Saturn",
+          "description": "Struck by Saturn via tight square (1\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "Saturn": [
+        {
+          "type": "Adherence",
+          "malefic": "Saturn",
+          "description": "Adhering (Applying Conjunction) to Saturn within 0.0\u00b0.",
+          "severity": 9
+        }
+      ],
+      "North_Node": [
+        {
+          "type": "Overcoming",
+          "malefic": "Mars",
+          "description": "Overcome by Mars in the 10th sign/Superior Square. (Aggravated by Sect)",
+          "severity": 10
+        },
+        {
+          "type": "Opposition",
+          "malefic": "Saturn",
+          "description": "Opposed by Saturn (3\u00b0 orb).",
+          "severity": 9
+        },
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Mars",
+          "description": "Struck by Mars via tight square (2\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "South_Node": [
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Mars",
+          "description": "Struck by Mars via tight square (2\u00b0 orb).",
+          "severity": 8
+        }
+      ]
+    },
     "team_note": "Trust the energies/people of your Constructive Team; exercise caution with the Destructive Team.",
     "universal_events": [
       {
@@ -151,19 +231,19 @@
     "dominant_elements": [
       [
         "FIRE",
-        4
+        0
       ],
       [
         "EARTH",
-        2
-      ],
-      [
-        "WATER",
-        2
+        0
       ],
       [
         "AIR",
-        1
+        0
+      ],
+      [
+        "WATER",
+        0
       ]
     ],
     "universal_causation_audit": [],
@@ -184,82 +264,307 @@
       "significator": "Midheaven",
       "promittor": "Pluto",
       "aspect": "Opposition",
-      "arc": 6.14,
-      "years": 6.14,
-      "date_offset": "6y 1m",
-      "method": "Placidus/Ptolemy"
+      "arc": 3.41,
+      "years": 3.41,
+      "date_offset": "3y 4m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Uranus",
+      "aspect": "Trine (Dexter)",
+      "arc": 5.0,
+      "years": 5.0,
+      "date_offset": "4y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Venus",
+      "aspect": "Sextile (Dexter)",
+      "arc": 5.03,
+      "years": 5.03,
+      "date_offset": "5y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Jupiter",
+      "aspect": "Trine (Sinister)",
+      "arc": 8.71,
+      "years": 8.71,
+      "date_offset": "8y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Sextile (Dexter)",
+      "arc": 10.26,
+      "years": 10.26,
+      "date_offset": "10y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mars",
+      "aspect": "Sextile (Dexter)",
+      "arc": 13.68,
+      "years": 13.68,
+      "date_offset": "13y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Moon",
+      "aspect": "Sextile (Sinister)",
+      "arc": 17.08,
+      "years": 17.08,
+      "date_offset": "17y 0m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Ascendant",
       "promittor": "Mercury",
       "aspect": "Conjunction",
-      "arc": 19.7,
-      "years": 19.7,
-      "date_offset": "19y 8m",
-      "method": "Placidus/Ptolemy"
+      "arc": 19.45,
+      "years": 19.45,
+      "date_offset": "19y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mercury",
+      "aspect": "Square (Sinister)",
+      "arc": 21.32,
+      "years": 21.32,
+      "date_offset": "21y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Sun",
+      "aspect": "Sextile (Sinister)",
+      "arc": 25.55,
+      "years": 25.55,
+      "date_offset": "25y 6m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Neptune",
+      "aspect": "Trine (Sinister)",
+      "arc": 29.94,
+      "years": 29.94,
+      "date_offset": "29y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Pluto",
+      "aspect": "Sextile (Sinister)",
+      "arc": 35.66,
+      "years": 35.66,
+      "date_offset": "35y 7m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Uranus",
+      "aspect": "Trine (Sinister)",
+      "arc": 37.53,
+      "years": 37.53,
+      "date_offset": "37y 6m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Midheaven",
       "promittor": "Venus",
       "aspect": "Conjunction",
-      "arc": 41.12,
-      "years": 41.12,
-      "date_offset": "41y 1m",
-      "method": "Placidus/Ptolemy"
+      "arc": 41.28,
+      "years": 41.28,
+      "date_offset": "41y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Venus",
+      "aspect": "Square (Dexter)",
+      "arc": 42.07,
+      "years": 42.07,
+      "date_offset": "42y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Square (Dexter)",
+      "arc": 42.71,
+      "years": 42.71,
+      "date_offset": "42y 8m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Ascendant",
       "promittor": "Saturn",
       "aspect": "Opposition",
-      "arc": 42.85,
-      "years": 42.85,
-      "date_offset": "42y 10m",
-      "method": "Placidus/Ptolemy"
+      "arc": 43.68,
+      "years": 43.68,
+      "date_offset": "43y 8m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Midheaven",
       "promittor": "Jupiter",
       "aspect": "Opposition",
-      "arc": 44.52,
-      "years": 44.52,
+      "arc": 44.51,
+      "years": 44.51,
       "date_offset": "44y 6m",
-      "method": "Placidus/Ptolemy"
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Jupiter",
+      "aspect": "Square (Sinister)",
+      "arc": 45.72,
+      "years": 45.72,
+      "date_offset": "45y 8m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Midheaven",
       "promittor": "Mars",
       "aspect": "Conjunction",
-      "arc": 48.91,
-      "years": 48.91,
+      "arc": 48.85,
+      "years": 48.85,
       "date_offset": "48y 10m",
-      "method": "Placidus/Ptolemy"
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mars",
+      "aspect": "Square (Dexter)",
+      "arc": 50.67,
+      "years": 50.67,
+      "date_offset": "50y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Moon",
+      "aspect": "Sextile (Dexter)",
+      "arc": 51.57,
+      "years": 51.57,
+      "date_offset": "51y 6m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mercury",
+      "aspect": "Sextile (Sinister)",
+      "arc": 53.87,
+      "years": 53.87,
+      "date_offset": "53y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Sun",
+      "aspect": "Sextile (Dexter)",
+      "arc": 61.28,
+      "years": 61.28,
+      "date_offset": "61y 3m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Midheaven",
       "promittor": "Neptune",
       "aspect": "Opposition",
-      "arc": 62.82,
-      "years": 62.82,
-      "date_offset": "62y 9m",
-      "method": "Placidus/Ptolemy"
+      "arc": 62.92,
+      "years": 62.92,
+      "date_offset": "62y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Neptune",
+      "aspect": "Square (Sinister)",
+      "arc": 67.0,
+      "years": 67.0,
+      "date_offset": "66y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Pluto",
+      "aspect": "Trine (Sinister)",
+      "arc": 67.78,
+      "years": 67.78,
+      "date_offset": "67y 9m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Midheaven",
       "promittor": "Uranus",
       "aspect": "Opposition",
-      "arc": 69.49,
-      "years": 69.49,
-      "date_offset": "69y 5m",
-      "method": "Placidus/Ptolemy"
+      "arc": 69.35,
+      "years": 69.35,
+      "date_offset": "69y 4m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Trine (Dexter)",
+      "arc": 74.49,
+      "years": 74.49,
+      "date_offset": "74y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Uranus",
+      "aspect": "Square (Sinister)",
+      "arc": 74.67,
+      "years": 74.67,
+      "date_offset": "74y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Venus",
+      "aspect": "Trine (Dexter)",
+      "arc": 79.28,
+      "years": 79.28,
+      "date_offset": "79y 3m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Midheaven",
       "promittor": "Moon",
       "aspect": "Conjunction",
-      "arc": 79.72,
-      "years": 79.72,
-      "date_offset": "79y 8m",
-      "method": "Placidus/Ptolemy"
+      "arc": 80.96,
+      "years": 80.96,
+      "date_offset": "80y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Jupiter",
+      "aspect": "Sextile (Sinister)",
+      "arc": 83.0,
+      "years": 83.0,
+      "date_offset": "83y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mars",
+      "aspect": "Trine (Dexter)",
+      "arc": 88.03,
+      "years": 88.03,
+      "date_offset": "88y 0m",
+      "method": "Placidus/Zodiacal"
     },
     {
       "significator": "Midheaven",
@@ -268,9 +573,52 @@
       "arc": 88.73,
       "years": 88.73,
       "date_offset": "88y 8m",
-      "method": "Placidus/Ptolemy"
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Moon",
+      "aspect": "Square (Dexter)",
+      "arc": 88.94,
+      "years": 88.94,
+      "date_offset": "88y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mercury",
+      "aspect": "Sextile (Dexter)",
+      "arc": 93.88,
+      "years": 93.88,
+      "date_offset": "93y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Pluto",
+      "aspect": "Square (Sinister)",
+      "arc": 97.66,
+      "years": 97.66,
+      "date_offset": "97y 7m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Sun",
+      "aspect": "Square (Dexter)",
+      "arc": 98.78,
+      "years": 98.78,
+      "date_offset": "98y 9m",
+      "method": "Placidus/Zodiacal"
     }
   ],
+  "primary_direction_distributor": {
+    "type": "Distributor (Term Ruler)",
+    "planet": "Mars",
+    "directed_ascendant_deg": 174.92854016461612,
+    "arc": 29.0,
+    "description": "The Directed Ascendant is at 174.93\u00b0, in the Terms of Mars."
+  },
   "soul_guardian": {
     "almuten": "Sun",
     "term_ruler": "Mercury",
@@ -338,7 +686,7 @@
       "dignity_score": 9,
       "dignity_details": [
         "Domicile (+5)",
-        "Triplicity (Dorothean) (+3)",
+        "Triplicity (Day) (+3)",
         "Monomoiria (+1, Ruler: Sun)"
       ],
       "dignity_conflicts": [],
@@ -367,6 +715,10 @@
           "ptolemaic": {
             "ruler": "Mercury",
             "limit": 25
+          },
+          "chaldean": {
+            "ruler": "Saturn",
+            "limit": 26
           }
         }
       },
@@ -439,6 +791,10 @@
           "ptolemaic": {
             "ruler": "Saturn",
             "limit": 19
+          },
+          "chaldean": {
+            "ruler": "Jupiter",
+            "limit": 15
           }
         }
       },
@@ -514,6 +870,10 @@
           "ptolemaic": {
             "ruler": "Jupiter",
             "limit": 18
+          },
+          "chaldean": {
+            "ruler": "Saturn",
+            "limit": 21
           }
         }
       },
@@ -555,13 +915,11 @@
       "sect_status": "None",
       "dignity_score": 5,
       "dignity_details": [
-        "Triplicity (Dorothean) (+3)",
+        "Triplicity (Day) (+3)",
         "Face (+1)",
         "Monomoiria (+1, Ruler: Venus)"
       ],
-      "dignity_conflicts": [
-        "Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars"
-      ],
+      "dignity_conflicts": [],
       "dignity_variants": {
         "triplicity": {
           "used": "Dorothean",
@@ -573,9 +931,9 @@
             "planet_is_ruler": true
           },
           "ptolemaic": {
-            "day": "Mars",
+            "day": "Venus",
             "night": "Mars",
-            "planet_is_ruler": false
+            "planet_is_ruler": true
           }
         },
         "terms": {
@@ -587,6 +945,10 @@
           "ptolemaic": {
             "ruler": "Mars",
             "limit": 6
+          },
+          "chaldean": {
+            "ruler": "Mercury",
+            "limit": 8
           }
         }
       },
@@ -635,10 +997,7 @@
         "Fall (-4)",
         "Monomoiria Ruler: Venus"
       ],
-      "dignity_conflicts": [
-        "Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars",
-        "Bounds differ: Egyptian=Venus (\u226413\u00b0), Ptolemaic=Jupiter (\u226413\u00b0)"
-      ],
+      "dignity_conflicts": [],
       "dignity_variants": {
         "triplicity": {
           "used": "Dorothean",
@@ -650,9 +1009,9 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Mars",
+            "day": "Venus",
             "night": "Mars",
-            "planet_is_ruler": true
+            "planet_is_ruler": false
           }
         },
         "terms": {
@@ -664,6 +1023,10 @@
           "ptolemaic": {
             "ruler": "Jupiter",
             "limit": 13
+          },
+          "chaldean": {
+            "ruler": "Mars",
+            "limit": 15
           }
         }
       },
@@ -725,9 +1088,7 @@
         "Face (+1)",
         "Monomoiria (+1, Ruler: Jupiter)"
       ],
-      "dignity_conflicts": [
-        "Bounds differ: Egyptian=Jupiter (\u226414\u00b0), Ptolemaic=Mercury (\u226412\u00b0)"
-      ],
+      "dignity_conflicts": [],
       "dignity_variants": {
         "triplicity": {
           "used": "Dorothean",
@@ -753,6 +1114,10 @@
           "ptolemaic": {
             "ruler": "Mercury",
             "limit": 12
+          },
+          "chaldean": {
+            "ruler": "Jupiter",
+            "limit": 15
           }
         }
       },
@@ -800,15 +1165,13 @@
       "sign": "Aries",
       "longitude": 6.85287842536086,
       "sect_status": "Hayz",
-      "dignity_score": -1,
+      "dignity_score": -3,
       "dignity_details": [
         "Fall (-4)",
-        "Triplicity (Dorothean) (+3)",
+        "Triplicity (Participant) (+1)",
         "Monomoiria Ruler: Jupiter"
       ],
-      "dignity_conflicts": [
-        "Triplicity participant: Dorothean adds Saturn; Ptolemaic has no participant"
-      ],
+      "dignity_conflicts": [],
       "dignity_variants": {
         "triplicity": {
           "used": "Dorothean",
@@ -834,6 +1197,10 @@
           "ptolemaic": {
             "ruler": "Venus",
             "limit": 14
+          },
+          "chaldean": {
+            "ruler": "Jupiter",
+            "limit": 8
           }
         }
       },
@@ -893,7 +1260,7 @@
         "Retrograde (-5)",
         "Superior Planet Oriental of Sun (+2)"
       ],
-      "performance_index": 0.32,
+      "performance_index": 0.24,
       "medical_region": "Head, face, brain, eyes, teeth",
       "medical_pathology": "Headaches, fevers, eye issues"
     },
@@ -906,9 +1273,7 @@
       "dignity_details": [
         "Monomoiria Ruler: Jupiter"
       ],
-      "dignity_conflicts": [
-        "Bounds differ: Egyptian=Mercury (\u22647\u00b0), Ptolemaic=Saturn (\u22646\u00b0)"
-      ],
+      "dignity_conflicts": [],
       "dignity_variants": {
         "triplicity": {
           "used": "Dorothean",
@@ -934,6 +1299,10 @@
           "ptolemaic": {
             "ruler": "Saturn",
             "limit": 6
+          },
+          "chaldean": {
+            "ruler": "Jupiter",
+            "limit": 8
           }
         }
       },
@@ -1002,6 +1371,10 @@
           "ptolemaic": {
             "ruler": "Saturn",
             "limit": 30
+          },
+          "chaldean": {
+            "ruler": "Saturn",
+            "limit": 26
           }
         }
       },
@@ -1065,6 +1438,10 @@
           "ptolemaic": {
             "ruler": "Jupiter",
             "limit": 8
+          },
+          "chaldean": {
+            "ruler": "Mercury",
+            "limit": 8
           }
         }
       },
@@ -1118,9 +1495,7 @@
       "dignity_details": [
         "Monomoiria Ruler: Saturn"
       ],
-      "dignity_conflicts": [
-        "Bounds differ: Egyptian=Mercury (\u226414\u00b0), Ptolemaic=Venus (\u226411\u00b0)"
-      ],
+      "dignity_conflicts": [],
       "dignity_variants": {
         "triplicity": {
           "used": "Dorothean",
@@ -1146,6 +1521,10 @@
           "ptolemaic": {
             "ruler": "Venus",
             "limit": 11
+          },
+          "chaldean": {
+            "ruler": "Saturn",
+            "limit": 15
           }
         }
       },
@@ -1204,6 +1583,10 @@
           "ptolemaic": {
             "ruler": "Venus",
             "limit": 14
+          },
+          "chaldean": {
+            "ruler": "Venus",
+            "limit": 15
           }
         }
       },
@@ -1242,7 +1625,10 @@
     "Father": 17.25769616057235,
     "Mother": 189.2082352232689,
     "Courage": 192.6328888202182,
-    "Nemesis": 288.2997322034351
+    "Nemesis": 288.2997322034351,
+    "Debt": 351.1716627201446,
+    "Theft": 86.83850610336148,
+    "Accusation": 247.16827000512373
   },
   "stars": [
     {
@@ -1293,8 +1679,8 @@
   "daily_oracle": {
     "title": "ORACLE OF THE AQUARIUS DOMAIN",
     "day_lord": "Saturn",
-    "mood": "WEAK",
-    "summary": "Today, the chronocrator of your life shifts into the domain of Aquarius. Saturn, who holds the keys to this domain in your nativity, is currently weak.",
+    "mood": "LABORIOUS",
+    "summary": "Today, the chronocrator of your life shifts into the domain of Aquarius. Saturn, who holds the keys to this domain in your nativity, is currently laborious.",
     "details": [
       "The Lunar Mirror is in Cancer. "
     ],
@@ -1332,7 +1718,7 @@
       "epitasis": {
         "formula": "daily_sign == transiting_lord_of_year_sign",
         "transiting_loy_sign": "Pisces",
-        "transiting_loy_longitude": 358.4485863561579,
+        "transiting_loy_longitude": 358.54098336805185,
         "matching": false
       }
     },
@@ -1343,7 +1729,7 @@
       "id": "sun-dignity",
       "category": "Essential Dignity",
       "condition": "Sun in Leo",
-      "judgment": "Dignity score 9: Domicile (+5); Triplicity (Dorothean) (+3); Monomoiria (+1, Ruler: Sun)",
+      "judgment": "Dignity score 9: Domicile (+5); Triplicity (Day) (+3); Monomoiria (+1, Ruler: Sun)",
       "sources": [
         "Dorotheus, Carmen Astrologicum I",
         "Ptolemy, Tetrabiblos I"
@@ -1356,7 +1742,7 @@
         "Longitude: 141.10\u00b0",
         "House: 12",
         "Details: Domicile (+5)",
-        "Details: Triplicity (Dorothean) (+3)",
+        "Details: Triplicity (Day) (+3)",
         "Details: Monomoiria (+1, Ruler: Sun)"
       ]
     },
@@ -1700,45 +2086,21 @@
       "id": "venus-dignity",
       "category": "Essential Dignity",
       "condition": "Venus in Cancer",
-      "judgment": "Dignity score 5: Triplicity (Dorothean) (+3); Face (+1); Monomoiria (+1, Ruler: Venus)",
+      "judgment": "Dignity score 5: Triplicity (Day) (+3); Face (+1); Monomoiria (+1, Ruler: Venus)",
       "sources": [
         "Dorotheus, Carmen Astrologicum I",
         "Ptolemy, Tetrabiblos I"
       ],
-      "confidence": 72,
-      "conflicts": [
-        "Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars"
-      ],
+      "confidence": 82,
+      "conflicts": [],
       "trace": [
         "Planet: Venus",
         "Sign: Cancer",
         "Longitude: 95.54\u00b0",
         "House: 11",
-        "Details: Triplicity (Dorothean) (+3)",
+        "Details: Triplicity (Day) (+3)",
         "Details: Face (+1)",
         "Details: Monomoiria (+1, Ruler: Venus)"
-      ]
-    },
-    {
-      "id": "venus-divergence",
-      "category": "Traditional Divergence",
-      "condition": "Source Clashes for Venus",
-      "judgment": "Authorities disagree: Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars",
-      "sources": [
-        "Ptolemy",
-        "Dorotheus",
-        "Egyptian Codex"
-      ],
-      "confidence": 50,
-      "conflicts": [
-        "Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars"
-      ],
-      "trace": [
-        "Planet: Venus",
-        "Sign: Cancer",
-        "Longitude: 95.54\u00b0",
-        "House: 11",
-        "Reason: Contradiction in primary source traditions"
       ]
     },
     {
@@ -1854,11 +2216,8 @@
         "Dorotheus, Carmen Astrologicum I",
         "Ptolemy, Tetrabiblos I"
       ],
-      "confidence": 62,
-      "conflicts": [
-        "Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars",
-        "Bounds differ: Egyptian=Venus (\u226413\u00b0), Ptolemaic=Jupiter (\u226413\u00b0)"
-      ],
+      "confidence": 82,
+      "conflicts": [],
       "trace": [
         "Planet: Mars",
         "Sign: Cancer",
@@ -1866,29 +2225,6 @@
         "House: 11",
         "Details: Fall (-4)",
         "Details: Monomoiria Ruler: Venus"
-      ]
-    },
-    {
-      "id": "mars-divergence",
-      "category": "Traditional Divergence",
-      "condition": "Source Clashes for Mars",
-      "judgment": "Authorities disagree: Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars | Bounds differ: Egyptian=Venus (\u226413\u00b0), Ptolemaic=Jupiter (\u226413\u00b0)",
-      "sources": [
-        "Ptolemy",
-        "Dorotheus",
-        "Egyptian Codex"
-      ],
-      "confidence": 50,
-      "conflicts": [
-        "Triplicity rulers differ: Dorothean Day=Venus, Ptolemaic Day=Mars",
-        "Bounds differ: Egyptian=Venus (\u226413\u00b0), Ptolemaic=Jupiter (\u226413\u00b0)"
-      ],
-      "trace": [
-        "Planet: Mars",
-        "Sign: Cancer",
-        "Longitude: 102.52\u00b0",
-        "House: 11",
-        "Reason: Contradiction in primary source traditions"
       ]
     },
     {
@@ -2038,10 +2374,8 @@
         "Dorotheus, Carmen Astrologicum I",
         "Ptolemy, Tetrabiblos I"
       ],
-      "confidence": 72,
-      "conflicts": [
-        "Bounds differ: Egyptian=Jupiter (\u226414\u00b0), Ptolemaic=Mercury (\u226412\u00b0)"
-      ],
+      "confidence": 82,
+      "conflicts": [],
       "trace": [
         "Planet: Jupiter",
         "Sign: Capricorn",
@@ -2051,28 +2385,6 @@
         "Details: Term (Egyptian) (+2)",
         "Details: Face (+1)",
         "Details: Monomoiria (+1, Ruler: Jupiter)"
-      ]
-    },
-    {
-      "id": "jupiter-divergence",
-      "category": "Traditional Divergence",
-      "condition": "Source Clashes for Jupiter",
-      "judgment": "Authorities disagree: Bounds differ: Egyptian=Jupiter (\u226414\u00b0), Ptolemaic=Mercury (\u226412\u00b0)",
-      "sources": [
-        "Ptolemy",
-        "Dorotheus",
-        "Egyptian Codex"
-      ],
-      "confidence": 50,
-      "conflicts": [
-        "Bounds differ: Egyptian=Jupiter (\u226414\u00b0), Ptolemaic=Mercury (\u226412\u00b0)"
-      ],
-      "trace": [
-        "Planet: Jupiter",
-        "Sign: Capricorn",
-        "Longitude: 278.51\u00b0",
-        "House: 5",
-        "Reason: Contradiction in primary source traditions"
       ]
     },
     {
@@ -2203,45 +2515,21 @@
       "id": "saturn-dignity",
       "category": "Essential Dignity",
       "condition": "Saturn in Aries",
-      "judgment": "Dignity score -1: Fall (-4); Triplicity (Dorothean) (+3); Monomoiria Ruler: Jupiter",
+      "judgment": "Dignity score -3: Fall (-4); Triplicity (Participant) (+1); Monomoiria Ruler: Jupiter",
       "sources": [
         "Dorotheus, Carmen Astrologicum I",
         "Ptolemy, Tetrabiblos I"
       ],
-      "confidence": 72,
-      "conflicts": [
-        "Triplicity participant: Dorothean adds Saturn; Ptolemaic has no participant"
-      ],
+      "confidence": 82,
+      "conflicts": [],
       "trace": [
         "Planet: Saturn",
         "Sign: Aries",
         "Longitude: 6.85\u00b0",
         "House: 8",
         "Details: Fall (-4)",
-        "Details: Triplicity (Dorothean) (+3)",
+        "Details: Triplicity (Participant) (+1)",
         "Details: Monomoiria Ruler: Jupiter"
-      ]
-    },
-    {
-      "id": "saturn-divergence",
-      "category": "Traditional Divergence",
-      "condition": "Source Clashes for Saturn",
-      "judgment": "Authorities disagree: Triplicity participant: Dorothean adds Saturn; Ptolemaic has no participant",
-      "sources": [
-        "Ptolemy",
-        "Dorotheus",
-        "Egyptian Codex"
-      ],
-      "confidence": 50,
-      "conflicts": [
-        "Triplicity participant: Dorothean adds Saturn; Ptolemaic has no participant"
-      ],
-      "trace": [
-        "Planet: Saturn",
-        "Sign: Aries",
-        "Longitude: 6.85\u00b0",
-        "House: 8",
-        "Reason: Contradiction in primary source traditions"
       ]
     },
     {
@@ -2450,38 +2738,14 @@
         "Dorotheus, Carmen Astrologicum I",
         "Ptolemy, Tetrabiblos I"
       ],
-      "confidence": 72,
-      "conflicts": [
-        "Bounds differ: Egyptian=Mercury (\u22647\u00b0), Ptolemaic=Saturn (\u22646\u00b0)"
-      ],
+      "confidence": 82,
+      "conflicts": [],
       "trace": [
         "Planet: Uranus",
         "Sign: Aquarius",
         "Longitude: 301.85\u00b0",
         "House: 5",
         "Details: Monomoiria Ruler: Jupiter"
-      ]
-    },
-    {
-      "id": "uranus-divergence",
-      "category": "Traditional Divergence",
-      "condition": "Source Clashes for Uranus",
-      "judgment": "Authorities disagree: Bounds differ: Egyptian=Mercury (\u22647\u00b0), Ptolemaic=Saturn (\u22646\u00b0)",
-      "sources": [
-        "Ptolemy",
-        "Dorotheus",
-        "Egyptian Codex"
-      ],
-      "confidence": 50,
-      "conflicts": [
-        "Bounds differ: Egyptian=Mercury (\u22647\u00b0), Ptolemaic=Saturn (\u22646\u00b0)"
-      ],
-      "trace": [
-        "Planet: Uranus",
-        "Sign: Aquarius",
-        "Longitude: 301.85\u00b0",
-        "House: 5",
-        "Reason: Contradiction in primary source traditions"
       ]
     },
     {
@@ -2711,38 +2975,14 @@
         "Dorotheus, Carmen Astrologicum I",
         "Ptolemy, Tetrabiblos I"
       ],
-      "confidence": 72,
-      "conflicts": [
-        "Bounds differ: Egyptian=Mercury (\u226414\u00b0), Ptolemaic=Venus (\u226411\u00b0)"
-      ],
+      "confidence": 82,
+      "conflicts": [],
       "trace": [
         "Planet: North_Node",
         "Sign: Libra",
         "Longitude: 190.49\u00b0",
         "House: 2",
         "Details: Monomoiria Ruler: Saturn"
-      ]
-    },
-    {
-      "id": "north_node-divergence",
-      "category": "Traditional Divergence",
-      "condition": "Source Clashes for North_Node",
-      "judgment": "Authorities disagree: Bounds differ: Egyptian=Mercury (\u226414\u00b0), Ptolemaic=Venus (\u226411\u00b0)",
-      "sources": [
-        "Ptolemy",
-        "Dorotheus",
-        "Egyptian Codex"
-      ],
-      "confidence": 50,
-      "conflicts": [
-        "Bounds differ: Egyptian=Mercury (\u226414\u00b0), Ptolemaic=Venus (\u226411\u00b0)"
-      ],
-      "trace": [
-        "Planet: North_Node",
-        "Sign: Libra",
-        "Longitude: 190.49\u00b0",
-        "House: 2",
-        "Reason: Contradiction in primary source traditions"
       ]
     },
     {
@@ -4368,6 +4608,23 @@
       "profile": "The Prophet/The Seed-Man. Introverted, Future-Oriented, Distillation and Release.",
       "type": "Release"
     },
+    "mercury_stations": [
+      {
+        "type": "Station Retrograde",
+        "day_after_birth": 22,
+        "age": 22,
+        "date": "1996-09-04",
+        "longitude": 183.48287202287864
+      },
+      {
+        "type": "Station Direct",
+        "day_after_birth": 45,
+        "age": 45,
+        "date": "1996-09-27",
+        "longitude": 169.06405828000698
+      }
+    ],
+    "sp_moon_triggers": [],
     "solar_return_info": {
       "return_jd": 2460901.1021206966,
       "return_date": "2025-08-13T14:27:03.228183",

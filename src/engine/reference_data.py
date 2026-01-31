@@ -128,6 +128,23 @@ PTOLEMAIC_TERMS = {
     Sign.PISCES: [(PlanetName.VENUS, 8), (PlanetName.JUPITER, 14), (PlanetName.MERCURY, 20), (PlanetName.MARS, 26), (PlanetName.SATURN, 30)],
 }
 
+# Chaldean Terms (Babylonian Order) - 8, 7, 6, 5, 4 degrees
+# Sequence: Jup, Ven, Sat, Mer, Mar (The standard planetary week order/descent)
+CHALDEAN_TERMS = {
+    Sign.ARIES: [(PlanetName.JUPITER, 8), (PlanetName.VENUS, 15), (PlanetName.SATURN, 21), (PlanetName.MERCURY, 26), (PlanetName.MARS, 30)],
+    Sign.TAURUS: [(PlanetName.VENUS, 8), (PlanetName.SATURN, 15), (PlanetName.MERCURY, 21), (PlanetName.MARS, 26), (PlanetName.JUPITER, 30)],
+    Sign.GEMINI: [(PlanetName.SATURN, 8), (PlanetName.MERCURY, 15), (PlanetName.MARS, 21), (PlanetName.JUPITER, 26), (PlanetName.VENUS, 30)],
+    Sign.CANCER: [(PlanetName.MERCURY, 8), (PlanetName.MARS, 15), (PlanetName.JUPITER, 21), (PlanetName.VENUS, 26), (PlanetName.SATURN, 30)],
+    Sign.LEO: [(PlanetName.MARS, 8), (PlanetName.JUPITER, 15), (PlanetName.VENUS, 21), (PlanetName.SATURN, 26), (PlanetName.MERCURY, 30)],
+    Sign.VIRGO: [(PlanetName.JUPITER, 8), (PlanetName.VENUS, 15), (PlanetName.SATURN, 21), (PlanetName.MERCURY, 26), (PlanetName.MARS, 30)],
+    Sign.LIBRA: [(PlanetName.VENUS, 8), (PlanetName.SATURN, 15), (PlanetName.MERCURY, 21), (PlanetName.MARS, 26), (PlanetName.JUPITER, 30)],
+    Sign.SCORPIO: [(PlanetName.SATURN, 8), (PlanetName.MERCURY, 15), (PlanetName.MARS, 21), (PlanetName.JUPITER, 26), (PlanetName.VENUS, 30)],
+    Sign.SAGITTARIUS: [(PlanetName.MERCURY, 8), (PlanetName.MARS, 15), (PlanetName.JUPITER, 21), (PlanetName.VENUS, 26), (PlanetName.SATURN, 30)],
+    Sign.CAPRICORN: [(PlanetName.MARS, 8), (PlanetName.JUPITER, 15), (PlanetName.VENUS, 21), (PlanetName.SATURN, 26), (PlanetName.MERCURY, 30)],
+    Sign.AQUARIUS: [(PlanetName.JUPITER, 8), (PlanetName.VENUS, 15), (PlanetName.SATURN, 21), (PlanetName.MERCURY, 26), (PlanetName.MARS, 30)],
+    Sign.PISCES: [(PlanetName.VENUS, 8), (PlanetName.SATURN, 15), (PlanetName.MERCURY, 21), (PlanetName.MARS, 26), (PlanetName.JUPITER, 30)],
+}
+
 # Faces (Chaldean Order) - 10 degrees each
 FACES_ORDER = [
     PlanetName.MARS, PlanetName.SUN, PlanetName.VENUS, # Aries

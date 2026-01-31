@@ -8,16 +8,16 @@ import os
 import time
 
 # Classical Imports
-from src.engine.classical_mechanics import ClassicalMechanicsEngine
-from src.engine.models import Sign, PlanetName, Chart, Planet
-from src.engine.reference_data import DOMICILES
-from src.engine.advanced_mechanics import (
+from .classical_mechanics import ClassicalMechanicsEngine
+from .models import Sign, PlanetName, Chart, Planet
+from .reference_data import DOMICILES
+from .advanced_mechanics import (
     HermeticLotEngine, MonomoiriaEngine, AlmutenEngine, DoryphoryEngine,
     DodecatemoriaEngine
 )
-from src.engine.reception import ReceptionEngine, ReceptionMode
-from src.engine.kakosis import KakosisEngine
-from src.engine.aspects import AspectEngine
+from .reception import ReceptionEngine, ReceptionMode
+from .kakosis import KakosisEngine
+from .aspects import AspectEngine
 
 # Initialize Geocoder
 _ua_base = os.getenv("NOMINATIM_USER_AGENT", "astrology_app/1.0")

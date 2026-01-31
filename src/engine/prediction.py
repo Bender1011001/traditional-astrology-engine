@@ -1,3 +1,4 @@
+from typing import List, Dict, Optional
 from .models import Sign, PlanetName, Sect, Chart, Planet
 from .reference_data import DOMICILES
 import math
@@ -414,6 +415,74 @@ class AdvancedPredictionEngine:
         self.lat = lat
         self.lon = lon
         self.sect = Sect.DAY if natal_chart.sun_altitude > 0 else Sect.NIGHT
+        self.epsilon = 23.4392911
+
+    def get_mercury_stations(self) -> List[Dict]:
+        """
+        Scans ephemeris from birth to 100 days after to find progressed Mercury stations.
+        Rule: 1 day = 1 year.
+        """
+        stations = []
+        prev_speed = None
+        
+        # Flags for search
+        for day in range(100):
+            jd = self.birth_jd + day
+            res = swe.calc_ut(jd, swe.MERCURY, swe.FLG_SWIEPH | swe.FLG_SPEED)
+            speed = res[0][3]
+            
+            if prev_speed is not None:
+                # Check for zero-crossing
+                if prev_speed > 0 and speed <= 0:
+                    stations.append({
+                        "type": "Station Retrograde",
+                        "day_after_birth": day,
+                        "age": day,
+                        "date": (self.birth_date + timedelta(days=day)).strftime("%Y-%m-%d"),
+                        "longitude": res[0][0]
+                    })
+                elif prev_speed < 0 and speed >= 0:
+                    stations.append({
+                        "type": "Station Direct",
+                        "day_after_birth": day,
+                        "age": day,
+                        "date": (self.birth_date + timedelta(days=day)).strftime("%Y-%m-%d"),
+                        "longitude": res[0][0]
+                    })
+            prev_speed = speed
+        return stations
+
+    def get_sp_moon_triggers(self, target_date: datetime) -> List[Dict]:
+        """
+        Calculates Progressed Moon position and checks for hits to Primary Direction promissors.
+        """
+        age_years = (target_date - self.birth_date).days / 365.25
+        progressed_jd = self.birth_jd + age_years
+        
+        res = swe.calc_ut(progressed_jd, swe.MOON, swe.FLG_SWIEPH)
+        sp_moon_lon = res[0][0]
+        
+        triggers = []
+        # Check hard aspects to natal planets (Conjunction, Square, Opposition)
+        for p in self.natal_chart.planets:
+            diff = abs(sp_moon_lon - p.longitude) % 360
+            dist = diff if diff <= 180 else 360 - diff
+            
+            aspect = None
+            if dist < 1.0: aspect = "Conjunct"
+            elif abs(dist - 90) < 1.0: aspect = "Square"
+            elif abs(dist - 180) < 1.0: aspect = "Opposition"
+            
+            if aspect:
+                triggers.append({
+                    "type": "Secondary Progressed Moon Trigger",
+                    "aspect": aspect,
+                    "target": p.name.value,
+                    "age": round(age_years, 2),
+                    "note": f"SP Moon {aspect} natal {p.name.value} acts as high-intensity trigger for primary directions."
+                })
+        return triggers
+
         
     def get_firdaria(self, target_date: datetime):
         return calculate_firdaria(self.sect, self.birth_date, target_date)
@@ -519,5 +588,7 @@ class AdvancedPredictionEngine:
             "transits": self.get_active_transits(target_date),
             "muntha": self.get_muntha(int(age_years)),
             "lunar_phase": self.get_lunar_phase(),
+            "mercury_stations": self.get_mercury_stations(),
+            "sp_moon_triggers": self.get_sp_moon_triggers(target_date),
             "solar_return_info": self.get_solar_return(target_date.year if target_date.month >= self.birth_date.month else target_date.year - 1)
         }

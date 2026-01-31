@@ -113,6 +113,36 @@ def calculate_lot_position(chart: Chart, lot_name: LotName, sect: Sect) -> float
         else:
             return normalize_degree(asc + venus - moon)
             
+    if lot_name == LotName.DEBT:
+        # Day: Asc + Saturn - Mercury
+        # Night: Asc + Mercury - Saturn
+        saturn = get_planet_pos(chart, PlanetName.SATURN)
+        mercury = get_planet_pos(chart, PlanetName.MERCURY)
+        if sect == Sect.DAY:
+            return normalize_degree(asc + saturn - mercury)
+        else:
+            return normalize_degree(asc + mercury - saturn)
+
+    if lot_name == LotName.THEFT:
+        # Day: Asc + Mars - Mercury
+        # Night: Asc + Mercury - Mars
+        mars = get_planet_pos(chart, PlanetName.MARS)
+        mercury = get_planet_pos(chart, PlanetName.MERCURY)
+        if sect == Sect.DAY:
+            return normalize_degree(asc + mars - mercury)
+        else:
+            return normalize_degree(asc + mercury - mars)
+
+    if lot_name == LotName.ACCUSATION:
+        # Day: Asc + Mars - Saturn
+        # Night: Asc + Saturn - Mars
+        mars = get_planet_pos(chart, PlanetName.MARS)
+        saturn = get_planet_pos(chart, PlanetName.SATURN)
+        if sect == Sect.DAY:
+            return normalize_degree(asc + mars - saturn)
+        else:
+            return normalize_degree(asc + saturn - mars)
+            
     return 0.0
 
 def calculate_all_lots(chart: Chart, sect: Sect) -> Dict[str, float]:

@@ -9,6 +9,7 @@ class AspectType(Enum):
     SEXTILE = "Sextile"
     SQUARE = "Square"
     TRINE = "Trine"
+    OPPOSITION = "Opposition"
 @dataclass
 class Aspect:
     planet_a: PlanetName

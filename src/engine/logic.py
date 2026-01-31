@@ -2,7 +2,7 @@
 from typing import Optional, Dict, List
 import re
 from datetime import datetime
-from .models import Planet, Chart, Sect, PlanetName, Sign
+from .models import Planet, Chart, Sect, PlanetName, Sign, LotName
 from .lots import calculate_all_lots
 from .prediction import (
     calculate_profection_sign,
@@ -275,7 +275,7 @@ def is_void_of_course(moon_lon: float, chart_planets: List[Planet]) -> bool:
                     return False # Found an aspect before sign end
     return True
 
-def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Dict:
+def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0, speculum_data: Optional[Dict] = None) -> Dict:
     chart_sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
     
     result = {
@@ -470,6 +470,28 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0) -> Di
             "rule": "Modification of Rays by Sect (Binder1/Traditional)"
         })
 
+    # 13. In-Mundo Aspects (Special Forensic Layer)
+    if speculum_data and planet.name.value in speculum_data:
+        my_m_pos = speculum_data[planet.name.value].mundane_pos
+        for other_name, other_spec in speculum_data.items():
+            if other_name == planet.name.value: continue
+            
+            m_dist = abs(my_m_pos - other_spec.mundane_pos)
+            # Handle circular wrap at 12/1
+            if m_dist > 6.0: m_dist = 12.0 - m_dist
+            
+            m_aspect = None
+            if m_dist < 0.1: m_aspect = "Mundane Conjunction"
+            elif abs(m_dist - 3.0) < 0.1: m_aspect = "Mundane Square"
+            elif abs(m_dist - 6.0) < 0.1: m_aspect = "Mundane Opposition"
+            
+            if m_aspect:
+                result["impacts"].append({
+                    "cause": f"In-Mundo Aspect: {m_aspect} w/ {other_name}",
+                    "effect": "PHYSICAL MANIFESTATION: This aspect exists in 'local space' even if hidden in the zodiac.",
+                    "rule": "Placidian In-Mundo Theory (Day-hour proportionality)"
+                })
+
     # 9. Textual Delineations
     sect_str = "DAY" if chart_sect == Sect.DAY else "NIGHT"
     key = f"{planet.name.value.upper()}_{planet.sign.value.upper()}_{sect_str}"
@@ -532,11 +554,33 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
     moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
     
+    # Use chart geo if available; otherwise fallback to London (research default).
+    demo_lat = chart.geo_lat if chart.geo_lat is not None else 51.5074
+    demo_lon = chart.geo_lon if chart.geo_lon is not None else -0.1278
+
+    # Master Speculum (Placidus Mundane Positions) - Moved up for planet forensic analysis
+    # Actually, swisseph houses_armc returns (cusps, ascmc). ascmc[1] is RAMC.
+    # But wait, RAMC is usually just RA of MC.
+    mc_ra, _ = PrimaryDirectionsEngine.ecliptic_to_equatorial(chart.mc, 0.0)
+    ramc = mc_ra
+    
+    speculum_data = {}
+    for p in chart.planets:
+        speculum_data[p.name.value] = PrimaryDirectionsEngine.get_full_speculum(p, ramc, demo_lat)
+
+    # Planet Forensic analysis
+    planet_forensics = []
+    for p in chart.planets:
+        if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
+            continue
+        p_res = analyze_planet_forensic(p, chart, jd, speculum_data=speculum_data)
+        planet_forensics.append(p_res)
+
     # Elemental Balance
     elements = {"FIRE": 0, "EARTH": 0, "AIR": 0, "WATER": 0}
-    for p in chart.planets:
-        if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]: continue
-        el = DignityCalculator.ZODIAC_ELEMENTS.get(p.sign)
+    for p_data in planet_forensics: # Use processed planet data
+        # if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]: continue # Already filtered
+        el = DignityCalculator.ZODIAC_ELEMENTS.get(p_data["sign"]) # Get sign from processed data
         if el: elements[el] += 1
 
     # Temperament Assessment (Lilly)
@@ -584,7 +628,19 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     if age is not None:
         distributor_data = PrimaryDirectionsEngine.calculate_current_distributor(chart, float(age), demo_lat)
 
+    # Master Speculum (Placidus Mundane Positions)
+    ramc = PrimaryDirectionsEngine._to_deg(swe.houses_armc(chart.jd, demo_lat, 23.43929, b'P')[1][1]) if chart.jd else 0.0
+    # Actually, swisseph houses_armc returns (cusps, ascmc). ascmc[1] is RAMC.
+    # But wait, RAMC is usually just RA of MC.
+    mc_ra, _ = PrimaryDirectionsEngine.ecliptic_to_equatorial(chart.mc, 0.0)
+    ramc = mc_ra
+    
+    speculum_data = {}
+    for p in chart.planets:
+        speculum_data[p.name.value] = PrimaryDirectionsEngine.get_full_speculum(p, ramc, demo_lat)
+
     # Receptions (Lilly Mode Default)
+    # ...
     receptions = ReceptionEngine.calculate_mutual_receptions(chart, ReceptionMode.STANDARD_LILLY)
     receptions_json = [{
         "planet_a": r.planet_a.value,
@@ -598,6 +654,24 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     # Identify Teams
     constructive_team = []
     destructive_team = []
+    
+    # Forensic Lots
+    from .lots import calculate_all_lots
+    all_lots = calculate_all_lots(chart, sect)
+    
+    forensic_lots_report = {
+        "Debt/Bankruptcy": {
+            "longitude": all_lots.get(LotName.DEBT.value),
+            "verification": "Check if conjunct Mars or L8"
+        },
+        "Theft": {
+            "longitude": all_lots.get(LotName.THEFT.value),
+            "verification": "Lilly Rule: Lot in sign of L7?"
+        },
+        "Accusation": {
+            "longitude": all_lots.get(LotName.ACCUSATION.value)
+        }
+    }
     for p in chart.planets:
         if is_benefic_of_sect(p.name, sect):
             constructive_team.append(p.name.value)

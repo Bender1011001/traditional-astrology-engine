@@ -132,6 +132,29 @@ class MedicalAstrology:
         }
 
     @staticmethod
+    def check_moon_mercury_interference(moon_lon: float, mercury_lon: float) -> Optional[Dict]:
+        """
+        Moon-Mercury Interference Rule (Doc p. 235):
+        'If the Moon applies to an opposition of Mercury, or is in square to Mercury, it disturbs the imaginative faculty, causing delirium...'
+        """
+        diff = abs(moon_lon - mercury_lon) % 360
+        if diff > 180: diff = 360 - diff
+        
+        if abs(diff - 90) < 8:
+            return {
+                "type": "WARNING: Diagnostic Confusion",
+                "condition": "Moon square Mercury",
+                "details": "High risk of delirium or incorrect diagnosis. Rely on physical signs over patient's report."
+            }
+        elif abs(diff - 180) < 8:
+            return {
+                "type": "WARNING: Diagnostic Confusion",
+                "condition": "Moon opposition Mercury",
+                "details": "Speech/Mind disconnected from Body. Warning of confusion or unreliable symptoms."
+            }
+        return None
+
+    @staticmethod
     def calculate_critical_days(decumbiture_jd: float) -> List[Dict]:
         """
         Calculates 7th, 14th, and 21st day 'crisis' points from onset of illness.

@@ -75,3 +75,6 @@ class LotName(Enum):
     MOTHER = "Mother"
     COURAGE = "Courage"
     NEMESIS = "Nemesis"
+    DEBT = "Debt"
+    THEFT = "Theft"
+    ACCUSATION = "Accusation"

@@ -15,6 +15,18 @@ class DirectionResult:
     date_offset: str # "X years Y months"
     method: str
 
+@dataclass
+class MundaneSpeculum:
+    planet: str
+    ra: float
+    dec: float
+    ad: float
+    dsa: float
+    nsa: float
+    md: float
+    pole: float
+    mundane_pos: float # Equivalent to a 1-12 house coordinate (Proportional distance)
+
 class PrimaryDirectionsEngine:
     """
     Implements Primary Directions using Placidus (Semi-Arc) and Regiomontanus methods.
@@ -90,6 +102,73 @@ class PrimaryDirectionsEngine:
         if md > 180:
             md -= 360
         return md
+
+    @classmethod
+    def calculate_pole(cls, md: float, sa: float, geo_lat: float) -> float:
+        """
+        Calculates the Pole of the planet (Placidus/Kuehr).
+        tan(Pole) = (MD / SA) * tan(GeoLat)
+        """
+        if sa == 0: return 0.0
+        ratio = abs(md) / sa
+        tan_pole = ratio * math.tan(cls._to_rad(geo_lat))
+        return cls._to_deg(math.atan(tan_pole))
+
+    @classmethod
+    def calculate_mundane_position(cls, ra: float, dec: float, ramc: float, geo_lat: float) -> float:
+        """
+        Calculates the 1-12 'proportional house position'.
+        Standardized: MC=10.0, Asc=1.0, IC=4.0, Dsc=7.0.
+        Uses Semi-Arc proportionality.
+        """
+        md = cls.calculate_md(ra, ramc)
+        dsa, nsa = cls.calculate_semi_arcs(dec, geo_lat)
+        
+        # Determine Quadrant
+        is_above = abs(md) < dsa
+        is_east = md < 0 # Simplified: RA_Planet < RA_MC? 
+        # (Actually md is ra-ramc. If ra < ramc, md < 0 -> East of Meridian)
+
+        if is_above:
+            # 7-10 (West) or 10-1 (East)
+            ratio = abs(md) / dsa # 0 at MC, 1.0 at Horiz
+            if is_east:
+                # 10 to 1 (Houses 10, 11, 12)
+                # MC = 10.0, Asc = 13.0 (or 1.0)
+                return 10.0 + (ratio * 3.0)
+            else:
+                # 10 to 7 (Houses 10, 9, 8, 7)
+                return 10.0 - (ratio * 3.0)
+        else:
+            # 1-4 (East) or 4-7 (West)
+            # Distance from IC
+            raic = (ramc + 180) % 360
+            md_ic = cls.calculate_md(ra, raic)
+            ratio = abs(md_ic) / nsa # 0 at IC, 1.0 at Horiz
+            if is_east:
+                # 4 to 1
+                return 4.0 - (ratio * 3.0)
+            else:
+                # 4 to 7
+                return 4.0 + (ratio * 3.0)
+
+    @classmethod
+    def get_full_speculum(cls, planet: Planet, ramc: float, geo_lat: float) -> MundaneSpeculum:
+        ra, dec = cls.ecliptic_to_equatorial(planet.longitude, planet.latitude)
+        ad = cls.calculate_ad(dec, geo_lat)
+        dsa, nsa = cls.calculate_semi_arcs(dec, geo_lat)
+        md = cls.calculate_md(ra, ramc)
+        
+        is_above = abs(md) < dsa
+        sa = dsa if is_above else nsa
+        
+        pole = cls.calculate_pole(md, sa, geo_lat)
+        m_pos = cls.calculate_mundane_position(ra, dec, ramc, geo_lat)
+        
+        return MundaneSpeculum(
+            planet=planet.name.value,
+            ra=ra, dec=dec, ad=ad, dsa=dsa, nsa=nsa, md=md, pole=pole, mundane_pos=m_pos
+        )
 
     @classmethod
     def calculate_current_distributor(cls, chart: Chart, age_years: float, geo_lat: float) -> Dict:
