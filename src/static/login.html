@@ -169,53 +169,82 @@
         const API_BASE = window.CAEL_API_BASE || "";
         function apiUrl(path) { return `${API_BASE}${path}`; }
 
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const msg = document.getElementById('authMessage');
-            const submitBtn = e.target.querySelector('button[type="submit"]');
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const status = document.getElementById('authMessage');
 
-            msg.textContent = "Authenticating...";
-            msg.style.color = "var(--text-muted)";
-            submitBtn.disabled = true;
+                status.textContent = "Authenticating...";
+                status.style.color = "var(--text-muted)"; // Changed from var(--text-main) to match existing style
 
-            try {
-                const resp = await fetch(apiUrl('/api/auth/login'), {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
+                try {
+                    const resp = await fetch(apiUrl('/api/auth/login'), {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
 
-                const data = await resp.json();
+                    const contentType = resp.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        const data = await resp.json();
+                        if (!resp.ok) {
+                            throw new Error(data.detail || 'Login failed');
+                        }
 
-                if (!resp.ok) {
-                    throw new Error(data.detail || 'Login failed.');
+                        // Success
+                        localStorage.setItem('cael_auth_token', data.token);
+                        localStorage.setItem('cael_user', JSON.stringify(data.user));
+
+                        status.textContent = "Success! Redirecting...";
+                        status.style.color = "var(--success)";
+
+                        setTimeout(() => {
+                            window.location.href = "index.html";
+                        }, 1000);
+                    } else {
+                        // Not JSON - likely a 404 or 500 HTML page
+                        const text = await resp.text();
+                        console.error("Server returned non-JSON response:", text);
+                        throw new Error(`Server Error (Status ${resp.status}). Please try again later.`);
+                    }
+                } catch (err) {
+                    status.textContent = err.message;
+                    status.style.color = "var(--danger)";
                 }
+            });
+        }
 
-                // Store auth token and user data
-                localStorage.setItem('cael_auth_token', data.token);
-                localStorage.setItem('cael_user', JSON.stringify(data.user));
+        function checkExistingToken() {
+            const token = localStorage.getItem('cael_auth_token');
+            if (token) {
+                let email = 'User';
+                try {
+                    const userJson = localStorage.getItem('cael_user');
+                    if (userJson) {
+                        const user = JSON.parse(userJson);
+                        email = user.email || 'User';
+                    }
+                } catch (e) { }
 
-                msg.textContent = "Login successful! Redirecting...";
-                msg.style.color = "var(--success)";
+                const title = document.querySelector('.auth-title');
+                if (title) title.textContent = "WELCOME BACK";
 
-                setTimeout(() => {
-                location.href = "index.html";
-                }, 1000);
-
-            } catch (err) {
-                msg.textContent = err.message || "Connection error.";
-                msg.style.color = "var(--danger)";
-                submitBtn.disabled = false;
+                const form = document.getElementById('loginForm');
+                if (form) {
+                    form.innerHTML = `
+                        <p style="text-align:center; margin-bottom: 2rem;">You are currently logged in as <strong>${email}</strong>.</p>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <a href="index.html" class="btn-primary" style="text-decoration: none; text-align:center; padding: 1rem; background: var(--primary); color: var(--surface); display:block; font-family: 'Space Mono', monospace; text-transform:uppercase;">Go to Home</a>
+                            <button onclick="logout()" class="help-btn" style="border-color: var(--danger); color: var(--danger); width: 100%;">Log Out</button>
+                        </div>
+                    `;
+                }
+                const links = document.querySelector('.auth-links');
+                if (links) links.style.display = 'none';
             }
-        });
-
-        // Check if already logged in
-        const existingToken = localStorage.getItem('cael_auth_token');
-        if (existingToken) {
-            document.getElementById('authMessage').textContent = "You are already logged in.";
-            document.getElementById('authMessage').style.color = "var(--gold)";
         }
 
         // Dark mode init
@@ -223,7 +252,11 @@
         if (prefersDark || localStorage.getItem("cael_theme") === "dark") {
             document.documentElement.setAttribute("data-theme", "dark");
         }
+        // checkExistingToken() is expected to be in basic.js or defined elsewhere.
+        // If it's not, this call will cause an error. Assuming it's in basic.js.
+        checkExistingToken();
     </script>
+    <script src="basic.js?v=20260129polish"></script>
 </body>
 
 </html>

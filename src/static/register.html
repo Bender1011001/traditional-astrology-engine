@@ -155,9 +155,7 @@
                 <button type="submit">Create Account</button>
             </form>
             <div class="auth-links">
-                <p>Already have an account? <a href="resources.html">RESOURCES</a>
-                    <a class="help-btn" href="login.html">Log In</a>
-                </p>
+                <p>Already have an account? <a href="login.html">Log In</a></p>
             </div>
             <div id="authMessage"
                 style="text-align: center; margin-top: 1rem; color: var(--danger); min-height: 1.5em;"></div>
@@ -203,22 +201,28 @@
                     body: JSON.stringify({ email, password, name })
                 });
 
-                const data = await resp.json();
+                const contentType = resp.headers.get("content-type");
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    const data = await resp.json();
+                    if (!resp.ok) {
+                        throw new Error(data.detail || 'Registration failed.');
+                    }
 
-                if (!resp.ok) {
-                    throw new Error(data.detail || 'Registration failed.');
+                    // Store auth token and user data (user is logged in after registration)
+                    localStorage.setItem('cael_auth_token', data.token);
+                    localStorage.setItem('cael_user', JSON.stringify(data.user));
+
+                    msg.textContent = "Account created! Redirecting...";
+                    msg.style.color = "var(--success)";
+
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 1000);
+                } else {
+                    const text = await resp.text();
+                    console.error("Server returned non-JSON response:", text);
+                    throw new Error(`Server Error (Status ${resp.status}). Please try again later.`);
                 }
-
-                // Store auth token and user data (user is logged in after registration)
-                localStorage.setItem('cael_auth_token', data.token);
-                localStorage.setItem('cael_user', JSON.stringify(data.user));
-
-                msg.textContent = "Account created! Redirecting...";
-                msg.style.color = "var(--success)";
-
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 1000);
 
             } catch (err) {
                 msg.textContent = err.message || "Connection error.";
@@ -239,6 +243,7 @@
             document.documentElement.setAttribute("data-theme", "dark");
         }
     </script>
+    <script src="basic.js?v=20260129polish"></script>
 </body>
 
 </html>

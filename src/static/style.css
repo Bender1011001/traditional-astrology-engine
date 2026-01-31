@@ -325,6 +325,17 @@ h1 {
     background: rgba(192, 122, 43, 0.1);
 }
 
+.logout-btn-nav {
+    color: var(--danger) !important;
+    border-color: rgba(182, 68, 47, 0.3) !important;
+}
+
+.logout-btn-nav:hover {
+    background: rgba(182, 68, 47, 0.1) !important;
+    border-color: var(--danger) !important;
+    color: var(--danger) !important;
+}
+
 .mode-toggle {
     display: flex;
     justify-content: center;

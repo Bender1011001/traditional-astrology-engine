@@ -243,6 +243,25 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
 
+# --- GLOBAL EXCEPTION HANDLERS ---
+from fastapi.exceptions import RequestValidationError
+from starlette.responses import JSONResponse
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=422,
+        content={"success": False, "detail": str(exc.errors()), "body": str(exc.body)},
+    )
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logging.exception(f"Unhandled Exception on {request.method} {request.url.path}")
+    return JSONResponse(
+        status_code=500,
+        content={"success": False, "detail": "Internal Server Error. Please contact support."},
+    )
+
 # Telemetry Endpoint for Frontend
 class TelemetryEvent(BaseModel):
     event_type: str
