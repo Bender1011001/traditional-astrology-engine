@@ -153,3 +153,19 @@ PLANETARY_YEARS = {
     PlanetName.MERCURY: {"lesser": 20, "mean": 48, "greater": 76},
     PlanetName.MOON: {"lesser": 25, "mean": 66.5, "greater": 108},
 }
+
+# Planetary Moieties (Half-Orbs) - Lilly CA p. 57
+MOIETIES = {
+    PlanetName.SATURN: 5.0,  # Orb 10 -> Moiety 5
+    PlanetName.JUPITER: 4.5, # Orb 9 -> Moiety 4.5
+    PlanetName.MARS: 3.5,    # Orb 7 (sometimes 7.30) -> Moiety 3.5
+    PlanetName.SUN: 7.5,     # Orb 15 -> Moiety 7.5
+    PlanetName.VENUS: 3.5,   # Orb 7 -> Moiety 3.5
+    PlanetName.MERCURY: 3.5, # Orb 7 -> Moiety 3.5
+    PlanetName.MOON: 6.0,    # Orb 12 -> Moiety 6
+    PlanetName.URANUS: 2.5,  # Modern: 5 deg orb
+    PlanetName.NEPTUNE: 2.5,
+    PlanetName.PLUTO: 2.5,
+    PlanetName.NORTH_NODE: 0.0,
+    PlanetName.SOUTH_NODE: 0.0,
+}

@@ -1,9 +1,9 @@
 const API_BASE = window.CAEL_API_BASE || "";
 const IS_GH_PAGES = window.location.hostname.endsWith("github.io");
 const backendNotice = document.getElementById("backendNotice");
-if (backendNotice && IS_GH_PAGES && !API_BASE) {
-    backendNotice.classList.remove("hidden");
-}
+// if (backendNotice && IS_GH_PAGES && !API_BASE) {
+//     backendNotice.classList.remove("hidden");
+// }
 
 const LOG_ENABLED = !IS_GH_PAGES || API_BASE;
 const LOG_SESSION_KEY = "cael_session_id";
@@ -98,6 +98,27 @@ function initTheme() {
 
 initTheme();
 updateAuthUI();
+
+// Set Copyright Year
+const yearEl = document.getElementById("copyrightYear");
+if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+}
+
+// Form Validation Visuals
+document.querySelectorAll('input[required]').forEach(input => {
+    input.addEventListener('blur', () => {
+        if (!input.value) {
+            input.style.borderColor = 'var(--danger)';
+        } else {
+            input.style.borderColor = '';
+        }
+    });
+    input.addEventListener('input', () => {
+        if (input.value) input.style.borderColor = '';
+    });
+});
+
 
 if (themeToggle) {
     themeToggle.addEventListener("click", () => {
@@ -669,7 +690,13 @@ if (basicForm) {
 
         } catch (error) {
             logEvent("basic_chart_error", { message: error.message || String(error) });
-            alert(error.message);
+            if (basicReadingBody) {
+                basicReadingBody.innerHTML = `<div class="impact-alert" role="alert">
+                    <strong>Error:</strong> ${escapeHtml(error.message)}
+                    <br><br>Please check your birth data and try again.
+                </div>`;
+            }
+            if (basicReading) basicReading.classList.remove("hidden");
         } finally {
             setBasicLoading(false);
         }
@@ -891,7 +918,7 @@ if (billingSwitch) {
 
             // Update Card Content
             if (subPrice) subPrice.innerHTML = '$49.00<span>/yr</span>';
-            if (subDesc) subDesc.textContent = 'Billed annually. Save 17%.';
+            if (subDesc) subDesc.textContent = 'Billed annually. Save 18%.';
             if (annualDetails) annualDetails.classList.remove('hidden');
         } else {
             labelAnnual.classList.remove('active');

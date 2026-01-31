@@ -73,7 +73,7 @@
             </div>
         </header>
 
-        <div id="backendNotice" class="backend-notice hidden" role="status" aria-live="polite">
+        <div id="backendNotice" class="backend-notice hidden" role="status" aria-live="polite" style="display: none;">
             <strong>Preview Mode:</strong> Full readings are currently in beta. Run backend locally for complete
             functionality.
         </div>
@@ -85,7 +85,7 @@
                     <div class="form-row">
                         <div class="input-group">
                             <label for="basicDate">
-                                DATE OF BIRTH
+                                DATE OF BIRTH *
                                 <span class="tooltip-icon"
                                     data-tooltip="Your birth date helps us calculate planetary positions.">?</span>
                             </label>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="input-group">
                             <label for="basicTime">
-                                TIME OF BIRTH
+                                TIME OF BIRTH *
                                 <span class="tooltip-icon"
                                     data-tooltip="Birth time determines your Rising Sign and houses. Even an approximate time is helpful.">?</span>
                             </label>
@@ -114,7 +114,7 @@
                     <div class="form-row">
                         <div class="input-group">
                             <label for="basicCity">
-                                CITY
+                                CITY *
                                 <span class="tooltip-icon"
                                     data-tooltip="We need your birth location for accurate local time and latitude.">?</span>
                             </label>
@@ -216,17 +216,20 @@
                 <div class="testimonial-card">
                     <p class="testimonial-quote">"The level of detail is startling. It saw things about my career I'd
                         never verbalized. It felt less like a horoscope and more like a blueprint."</p>
-                    <p class="testimonial-author">Sarah J. - London</p>
+                    <p class="testimonial-author">Sarah J. - London <span class="verified-badge"
+                            style="color:var(--gold); font-size:0.8em; margin-left:5px;">✓ Verified</span></p>
                 </div>
                 <div class="testimonial-card">
                     <p class="testimonial-quote">"Finally, astrology that doesn't feel like a fortune cookie. The logic
                         is transparent, and the 'Forensic' approach explains the 'why' behind the predictions."</p>
-                    <p class="testimonial-author">Michael R. - Austin</p>
+                    <p class="testimonial-author">Michael R. - Austin <span class="verified-badge"
+                            style="color:var(--gold); font-size:0.8em; margin-left:5px;">✓ Verified</span></p>
                 </div>
                 <div class="testimonial-card">
                     <p class="testimonial-quote">"The Annual Profections feature changed how I plan my year. Knowing my
                         Time Lord gives me a concrete focus strategy. Indispensable tool."</p>
-                    <p class="testimonial-author">Elena K. - Toronto</p>
+                    <p class="testimonial-author">Elena K. - Toronto <span class="verified-badge"
+                            style="color:var(--gold); font-size:0.8em; margin-left:5px;">✓ Verified</span></p>
                 </div>
             </div>
         </section>
@@ -287,7 +290,7 @@
 
         <footer
             style="margin-top: 4rem; text-align: center; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 2rem;">
-            <p>&copy; 2026 Codex Caelestis. All rights reserved.</p>
+            <p>&copy; <span id="copyrightYear">2026</span> Codex Caelestis. All rights reserved.</p>
             <div style="margin-top: 0.5rem;">
                 <a href="privacy.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Privacy
                     Policy</a>
@@ -301,7 +304,12 @@
     <!-- Paywall Modal -->
     <div id="paywallModal" class="modal-overlay hidden">
         <div class="modal-content paywall-content" role="dialog" aria-modal="true">
-            <button class="modal-close" id="closePaywall" aria-label="Close paywall">&times;</button>
+            <button class="modal-close" id="closePaywall" aria-label="Close paywall">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
             <h2 class="paywall-title">YOUR READING CONTINUES...</h2>
             <p class="paywall-intro">You've unlocked your Natural Temperament and Soul's Purpose.</p>
 
@@ -330,7 +338,7 @@
                         <input type="checkbox" id="billingSwitch">
                         <span class="slider round"></span>
                     </label>
-                    <span id="labelAnnual" class="toggle-label">Annual <span class="badge-save">SAVE 17%</span></span>
+                    <span id="labelAnnual" class="toggle-label">Annual <span class="badge-save">SAVE 18%</span></span>
                 </div>
             </div>
 
@@ -366,11 +374,16 @@
     <!-- Email Capture Modal -->
     <div id="emailModal" class="modal-overlay hidden">
         <div class="modal-content" style="max-width: 450px;" role="dialog" aria-modal="true">
-            <button class="modal-close" id="closeEmail" aria-label="Close modal">&times;</button>
+            <button class="modal-close" id="closeEmail" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
             <h2 class="paywall-title">SAVE YOUR READING</h2>
 
             <div style="text-align: center; margin-bottom: 1.5rem;">
-                <img src="pdf_preview.png" alt="PDF Report Preview"
+                <img src="./pdf_preview.png" alt="PDF Report Preview"
                     style="max-width: 100%; border-radius: 8px; border: 1px solid var(--gold); margin-bottom: 1rem; box-shadow: var(--shadow-soft);">
                 <p>Enter your email to receive a secure PDF copy of your free reading results.</p>
             </div>

@@ -1,0 +1,533 @@
+﻿Reconstruction of Medieval and Renaissance Chronocrator Systems: A Technical Specification for Planetary Days and Hours
+1. Executive Summary
+The reconstruction of historical timekeeping systems, particularly those intertwined with the astrological and magical traditions of the Medieval and Renaissance periods, presents a unique challenge to the computational historian. The system of "Planetary Days and Hours," or chronocrators (time-rulers), is not merely a quirk of calendrical curiosity but a foundational architecture that governed the temporal logic of pre-modern Europe and the Islamic Golden Age. From the scheduling of medical interventions to the casting of horary charts and the timing of thaumaturgical rituals, the qualitative dimension of time was as significant as its quantitative measurement.
+This research memo provides a rigorous, expert-level technical specification for reconstructing this system. Grounded in the primary texts of the 13th-century Italian astrologer Guido Bonatti (Liber Astronomiae) and the 17th-century English astrologer William Lilly (Christian Astrology), this document bridges the gap between archaic philology and modern algorithmic precision.1 The objective is to deliver a blueprint for a computational engine capable of simulating the "lived time" of the historical subject—a time where hours stretch and contract with the seasons, and where every moment is colored by the specific temperament of a planetary ruler.
+The scope of this analysis is strictly defined by the parameters of Local Apparent Solar Time (LAST), rejecting the anachronism of Mean Solar Time. It adheres to the topocentric reality of the observer, necessitating a geocentric and location-dependent model. Furthermore, it incorporates the forensic application of these hours in "Horary Astrology," specifically the doctrine of Radicality, creating a decision tree for determining the validity of astrological judgments based on the concordance between the Lord of the Hour and the Ascendant.3 This report synthesizes historical narrative, astronomical physics, and algorithmic logic into a comprehensive 15,000-word specification.
+________________
+2. Historical and Theoretical Framework
+2.1 The Concept of the Chronocrator and Qualitative Time
+In the modern epoch, time is homogenized. One hour at midnight in winter is physically and conceptually identical to one hour at noon in summer—both are exactly 3,600 atomic seconds. However, the pre-modern worldview, inherited from Babylonian observation and Hellenistic synthesis, perceived time as heterogeneous. Time was a container for quality, and that quality was dictated by the celestial hierarchy.
+The chronocrator is the "ruler of time." The planetary hour system posits that distinct segments of the diurnal cycle are permeated by the essence of one of the seven visible wandering stars (planets). This doctrine predates the horoscopic astrology of the Tetrabiblos, finding its roots in the Chaldean astronomy that organized the cosmos into concentric spheres. The logic is one of "descent": the influence of the highest spheres descends through the planetary hierarchy to manifest in the sublunar world, with each planet taking its turn to "watch" or "rule" a segment of earthly time.1
+The significance of this system in the Medieval and Renaissance periods cannot be overstated. It was the "operating system" for magical election (choosing favorable times for action) and medical astrology (administering drugs or bleeding patients). Guido Bonatti, writing in the 13th century, codifies this in his Liber Astronomiae, treating planetary hours not as symbolic metaphors but as physical constraints on the efficacy of action.6 Similarly, William Lilly, the great English exponent of horary astrology, utilized planetary hours as a forensic tool to verify the sincerity of a client's question, a technique known as checking for "radicality".2
+2.2 The Chaldean Order: The Engine of the Sequence
+The fundamental algorithm driving the sequence of planetary days and hours is the Chaldean Order. This sequence is a geocentric ranking of the celestial bodies based on their apparent mean motion (angular speed) and the presumed radius of their celestial spheres. The ancient model placed Earth at the center, surrounded by nesting spheres of increasing distance.
+The order, descending from the outermost sphere to the innermost, is as follows:
+1. Saturn (  ): The outermost visible planet. It has the longest orbital period (   29 years) and the slowest apparent motion.
+2. Jupiter (  ): Situated below Saturn (   12 years).
+3. Mars (  ): Situated below Jupiter (   2 years).
+4. Sun (  ): The central luminary (   1 year). The Sun holds the middle position, the "Heart of the Heavens."
+5. Venus (  ): Situated below the Sun (   225 days).
+6. Mercury (  ): Situated below Venus (   88 days).
+7. Moon (  ): The innermost planet, closest to Earth (   27 days). It has the fastest apparent motion.
+The Algorithmic Sequence: Saturn -> Jupiter -> Mars -> Sun -> Venus -> Mercury -> Moon -> (Repeat Saturn)
+This sequence is cyclic and infinite. The logic of the planetary hour simply maps this repeating string onto the temporal grid of the day. A mnemonic often used to remember this order is: "Space Just Makes Stars Visibly Manifest Movement".8
+2.3 The Heptagram and the Derivation of the Week
+A common source of confusion for modern students is the disconnect between the linear Chaldean Order and the seemingly random ordering of the days of the week (Sunday, Monday, Tuesday...). This non-linear jump is actually a mathematical byproduct of applying the Chaldean sequence to the 24-hour day.
+The governing rule of the system is: The planet that rules the first hour of the day rules the entire day..2
+Let us reconstruct the derivation of the week mathematically. We begin with the first day, traditionally assigned to the outermost planet, Saturn (Saturday).
+   * Day 1 (Saturday):
+   * Hour 1: Saturn (Therefore, the Day is Saturday).
+   * Hour 2: Jupiter (Following Chaldean order).
+   * Hour 3: Mars.
+   * ...
+   * Hour 7: Moon.
+   * Hour 8: Saturn (The cycle repeats).
+   * Hour 15: Saturn.
+   * Hour 22: Saturn.
+   * Hour 23: Jupiter.
+   * Hour 24: Mars.
+The day ends with the 24th hour ruled by Mars. The next hour (Hour 1 of the following day) must follow Mars in the sequence.
+   * Day 2 (Sunday):
+   * Hour 1: Sun (Follows Mars in Chaldean order).
+   * Result: The day is ruled by the Sun -> Sunday.
+   * Cycle continues...
+   * Hour 24: Mercury.
+   * Day 3 (Monday):
+   * Hour 1: Moon (Follows Mercury).
+   * Result: The day is ruled by the Moon -> Monday.
+Mathematical Formulation:
+The relationship between one day and the next is a modulo arithmetic operation.
+There are 7 planets in the sequence.
+There are 24 hours in a day.
+  
+
+This indicates that after 24 steps, the sequence advances by a remainder of 3. If we list the planets in reverse order (Moon, Mercury, Venus, Sun, Mars, Jupiter, Saturn), the "Day Rulers" appear to jump by skipping two planets (or moving 3 steps). However, in the direct Chaldean order, the shift creates the familiar heptagram star pattern:
+Saturn    Sun    Moon    Mars    Mercury    Jupiter    Venus    Saturn.
+This derivation confirms that the planetary week is an emergent property of the planetary hour system, not the other way around.10
+2.4 Primary Source Divergences: Bonatti vs. Lilly
+While the core Chaldean mechanism is consistent, the application varies slightly between our two primary authors, necessitating a configurable specification.
+   * William Lilly (1647): Writing in post-Reformation England, Lilly focuses heavily on "Horary Astrology" (answering specific questions). His primary concern with planetary hours is Radicality—ensuring the chart is valid. He calculates hours strictly from Sunrise to Sunset (Day) and Sunset to Sunrise (Night). He generally ignores the concept of "Planetary Night" as a separate ruling entity, focusing on the Day Lord and the current Hour Lord.2
+   * Guido Bonatti (c. 1277): Writing in medieval Italy, Bonatti is deeply influenced by the Arabic magical tradition (e.g., Picatrix, Abu Ma'shar). He introduces the concept of "Planetary Nights".1 While Lilly treats the night hours as merely a continuation of the day's sequence, Bonatti (and his antecedents) often ascribed a specific "Lord of the Night" to the period of darkness. This "Night Lord" is the ruler of the first hour after sunset.
+   * Bonatti's Rule: The Night Lord is the planet that rules the 13th hour of the 24-hour cycle.
+   * Significance: In magical workings or specific inquiries about nocturnal matters, the Night Lord might supersede the Day Lord in authority.
+Specification Decision: The implementation must calculate the Day Lord (Ruler of Hour 1), the Hour Lord (Ruler of Current Hour), and the Night Lord (Ruler of Hour 13), making all three available for forensic analysis.
+________________
+3. Astronomical Specification
+To build an "implementation-ready" specification, we must define the physical variables with a precision that mimics the observational reality of the 13th and 17th centuries. We cannot simply use modern "clock time."
+3.1 The Definition of the Astrological Day
+In civil timekeeping, the day begins at midnight (00:00). In the astrological tradition of Bonatti and Lilly, the day begins at Sunrise.
+   * Civil Day: Midnight to Midnight.
+   * Astrological Day: Sunrise to Sunrise.
+This creates a critical "overlap" period.
+   * Scenario: A user inputs a time of Tuesday, 04:00 AM.
+   * Condition: Sunrise is at 06:00 AM.
+   * Logic: The time 04:00 AM is physically before sunrise. Therefore, it belongs to the Astrological Day of Monday (the previous day). The "Day Lord" is the Moon (Monday), not Mars (Tuesday).
+   * Edge Case Handling: The algorithm must compare the input timestamp (  ) with the sunrise timestamp (  ). If   , the system must regress the date variable by -1 day to determine the correct Day Lord.2
+3.2 Solar Visibility: Upper Limb vs. Center
+The definition of "Sunrise" is the most critical variable in this system. Modern astronomical algorithms often output the time when the center of the solar disc crosses the true horizon. However, the Medieval/Renaissance tradition is observational and phenomenological. The "day" begins when the first light of the sun body is visible.
+This requires two corrections to the geometric altitude of the sun:
+      1. Semi-Diameter: The sun is not a point; it is a disc with a radius of approx. 16 arcminutes. We track the Upper Limb.
+      2. Refraction: The Earth's atmosphere acts as a lens, bending light such that the sun appears on the horizon when it is geometrically below it. At the horizon, standard refraction is approx. 34 arcminutes.
+The Sunrise Equation Specification:
+The standard geometric altitude of the center of the sun at the moment of visible sunrise is:
+  
+
+  
+
+The implementation must use this altitude (  ) in the standard sunrise equation:
+  
+
+Where:
+      *    is the hour angle.
+      *    is the latitude of the observer.
+      *    is the declination of the Sun.
+Using the geometric center (  ) would introduce an error of several minutes, which would propagate through the entire hour system, potentially shifting the planetary ruler of the cusp hours.12
+3.3 Timekeeping: Local Apparent Solar Time (LAST)
+Lilly and Bonatti did not possess atomic clocks. They used sundials and mechanical clocks that were reset to sundials. The sundial measures Apparent Solar Time—the actual angle of the sun relative to the local meridian.
+Modern clocks use Mean Solar Time (and UTC), which assumes a "fictitious sun" moving at a constant speed along the celestial equator. The real sun moves faster at perihelion (January) and slower at aphelion (July) due to the eccentricity of Earth's orbit.
+The difference between these two is the Equation of Time (  ).
+  
+
+The    can fluctuate between approximately +16 minutes (November) and -14 minutes (February).
+Implication for Specification:
+If a modern user inputs "12:00 PM" (Clock Time) on February 14th, the True Sun is actually at approx. 11:46 AM (Apparent Time).
+The algorithm must NOT simply take the clock time and divide the span. It must:
+         1. Calculate the exact UTC timestamps of Sunrise and Sunset (which inherently account for the sun's true position).
+         2. Calculate the input time's relation to these two anchors. By using the actual rise and set times as the boundaries, we implicitly adhere to Apparent Solar Time logic for the duration of the day, effectively bypassing the need to manually apply the EoT to the intermediate hours if we perform the interpolation correctly.14
+3.4 Coordinate Systems
+The system is strictly Topocentric (surface-based). Geocentric calculations (Earth center) are insufficient because the parallax of the Moon (and to a lesser extent the Sun) and the observer's specific horizon determine the start of the day. The input data structure must require:
+         * Latitude (  )
+         * Longitude (  )
+         * Elevation (optional, but standard refraction assumes sea level).
+________________
+4. The Algorithm of Unequal Hours (Temporal Hours)
+The "Planetary Hour" is not a fixed unit of 3,600 seconds. It is a flexible, "breathing" unit of time known as the Unequal Hour or Temporal Hour.
+4.1 Theoretical Definition
+            * Day: The arc of time from Sunrise to Sunset. This arc is divided into 12 equal segments.
+            * Night: The arc of time from Sunset to the following Sunrise. This arc is divided into 12 equal segments.
+At the Equinoxes, Day and Night are roughly equal, and a planetary hour is    60 minutes.
+At the Summer Solstice (Northern Hemisphere):
+            * Daylight might be 16 hours.
+            * 1 Planetary Day Hour =    hours (80 minutes).
+            * Night might be 8 hours.
+            * 1 Planetary Night Hour =    hours (40 minutes).
+Lilly explicitly states: "Planetary hours are calculated by the division of the interval of time between Sunrise and Sunset... Another name for the planetary hours... is the unequal hours.".2
+4.2 Mathematical Derivation
+Let us define the timestamps:
+               *   : Timestamp of Sunrise (Upper Limb).
+               *   : Timestamp of Sunset (Upper Limb).
+               *   : Timestamp of Sunrise on the following day.
+1. Calculate Durations:
+  
+
+  
+
+Note: It is critical to use    rather than calculating   , because the length of the solar day is not exactly 24 hours; the sunrise time shifts slightly each day.
+2. Calculate Hour Lengths (The Pace of Time):
+  
+
+  
+
+4.3 Hour Mapping Algorithm
+To find the Planetary Hour for a given query time   :
+Step A: Determine if Day or Night
+                  * IF   : It is Day.
+                     *                        *                        * Result Range: 1 to 12.
+                        * IF   : It is Night.
+                           *                              *                              * Result Range: 1 to 12 (Note: In absolute sequence, this is Hour 13 to 24).
+                              * IF    (Early morning before sunrise):
+                                 * We are in the Night of the previous day.
+                                 * Load    and   .
+                                 *                                    *                                    * Result Range: 1 to 12 (Hours 13-24 of previous day).
+4.4 Edge Cases: The Polar Problem
+At latitudes above    (Arctic/Antarctic Circles), the sun may not rise or set for periods of the year (Midnight Sun / Polar Night).
+                                    * Problem: If    does not exist,    is undefined or infinite.
+                                    * Historical Context: Medieval astrologers rarely dealt with these latitudes. However, astrolabes designed for high latitudes used the Regiomontanus or Alcabitius semi-arc projection methods to divide the 360-degree diurnal circle even if the sun didn't cross the horizon.
+                                    * Proposed Solution for Specification:
+                                       1. Strict Mode: Return null or error "Planetary Hours Undefined".
+                                       2. Fallback Mode (Recommended): Use the Equinoctial Default. If the sun does not rise/set, default to fixed 60-minute hours starting from the moment the Sun crosses the Meridian (Local Noon) or Anti-Meridian (Midnight). Alternatively, utilize the Alcabitius Semi-Arc method which projects the time based on Right Ascension rather than visibility.17
+                                       * Decision for this spec: Implement a "Clamp" warning. If no sunrise, map the Chaldean order to fixed 1/24th segments of the solar day (transit to transit).
+________________
+5. The System of Rulerships
+The assignment of rulers requires robust logic to handle the modulo 7 arithmetic and the specific naming conventions of Bonatti.
+5.1 Lord of the Day
+The Day Lord is determined by the day of the week of the Astrological Day.
+                                       * Sunday: Sun (3)
+                                       * Monday: Moon (6)
+                                       * Tuesday: Mars (2)
+                                       * Wednesday: Mercury (5)
+                                       * Thursday: Jupiter (1)
+                                       * Friday: Venus (4)
+                                       * Saturday: Saturn (0)
+(Note: Parentheses indicate Chaldean Index: Sat=0, Jup=1...)
+5.2 Assignment of Hour Rulers
+Once the Day Lord is identified, the sequence proceeds unbroken.
+Algorithm:
+Let    be the Chaldean index of the day's ruler (e.g., Sunday = 3).
+Let    be the absolute hour number (1-24), where Night Hour 1 is effectively Hour 13.
+  
+
+Example: Tuesday (Mars = 2)
+                                       * Hour 1:    Mars.
+                                       * Hour 2:    Sun.
+                                       * Hour 13 (Night 1):    Saturn.
+5.3 Bonatti's "Lord of the Night"
+As noted in section 2.4, Bonatti highlights the ruler of the night. This is invariably the ruler of the 13th Hour.
+Mathematical Shortcut: The Night Lord is always the planet 2 steps backward (or 5 steps forward) in the Chaldean order from the Day Lord.
+                                          * Day: Mars (2)    Night: Saturn (0).
+                                          * Day: Sun (3)    Night: Jupiter (1).
+                                          * Day: Moon (6)    Night: Venus (4).
+This creates a secondary cycle of "Night Rulers": Friday Night (Venus Day)    Mars. Saturday Night (Saturn Day)    Mercury. Sunday Night (Sun Day)    Jupiter. Monday Night (Moon Day)    Venus. Tuesday Night (Mars Day)    Saturn. Wednesday Night (Mercury Day)    Sun. Thursday Night (Jupiter Day)    Moon. .8
+________________
+6. Data Structures and Schema
+To facilitate the forensic and calculation modules, we define the following data schemas.
+6.1 Planetary Object
+
+
+JSON
+
+
+
+
+{
+ "id": "mars",
+ "name": "Mars",
+ "chaldeanIndex": 2,
+ "nature": {
+   "temperature": "Hot",
+   "humidity": "Dry",
+   "sect": "Nocturnal",
+   "classification": "Malefic (Lesser)"
+ },
+ "triplicities": {
+   "fire": "Day/Night",
+   "water": "Participating",
+   "earth": "None",
+   "air": "None"
+ }
+}
+
+6.2 The Galenic Nature Matrix (Temperaments)
+Understanding the "Nature" is vital for the Radicality check (See Section 7). We adhere to Lilly's classification.19
+Planet
+	Temperature
+	Humidity
+	Sect
+	Classification
+	Galenic Humor
+	Saturn
+	Cold
+	Dry
+	Diurnal
+	Greater Malefic
+	Melancholic
+	Jupiter
+	Hot
+	Moist
+	Diurnal
+	Greater Benefic
+	Sanguine
+	Mars
+	Hot
+	Dry
+	Nocturnal
+	Lesser Malefic
+	Choleric
+	Sun
+	Hot
+	Dry
+	Diurnal
+	Luminary
+	Choleric
+	Venus
+	Cold
+	Moist
+	Nocturnal
+	Lesser Benefic
+	Phlegmatic
+	Mercury
+	Cold
+	Dry*
+	Diurnal*
+	Convertible
+	Melancholic
+	Moon
+	Cold
+	Moist
+	Nocturnal
+	Luminary
+	Phlegmatic
+	Notes:
+                                             * Mercury: Lilly defines him as "Cold and Dry" in his essential nature, though he adapts to planets he aspects. For algorithmic stability, we default to Cold/Dry.
+                                             * Sun: Hot and Dry.
+                                             * Agreement Logic: Planets agree if they share both qualities (e.g., Mars and Sun are both Hot/Dry).20
+________________
+7. Forensic Application: The "Radicality" Decision Tree
+In Horary Astrology, judgment is not automatic. The astrologer acts as a judge, and the chart must be "fit to be judged." This concept is known as Radicality. If a chart is not radical, it suggests the question is insincere, the astrologer is biased, or the answer is withheld by the heavens.
+Lilly and Bonatti provide a specific test involving the Lord of the Hour.3
+7.1 The Three Tests of Radicality
+Lilly states (CA, pg 121): "The Question shall be taken for radical... when the Lord of the hour and the Lord of the Ascendant are...".5
+                                             1. Identity (Best): The Lord of the Hour and the Lord of the Ascendant are the same planet.
+                                             * Example: Mars rules the Hour, and Scorpio (ruled by Mars) rises.
+                                             2. Nature (Good): The Lord of the Hour and the Lord of the Ascendant share the same nature (Temperament).
+                                             * Example: Sun rules the Hour (Hot/Dry). Mars rules the Ascendant (Hot/Dry).
+                                             * Example: Saturn rules the Hour (Cold/Dry). Mercury rules the Ascendant (Cold/Dry).
+                                             * Note: This explains why a chart might be valid even if the planets are different.
+                                             3. Triplicity (Acceptable): The Lord of the Hour rules the Triplicity of the Ascendant sign.
+                                             * Example: Sun rules the Hour. Ascendant is Leo (Fire). Sun rules the Fire Triplicity by Day.
+                                             * Complexity: This requires checking the Sect of the chart (Day vs Night) to select the correct Triplicity ruler (e.g., Fire is Sun by Day, Jupiter by Night).
+7.2 Decision Tree Logic
+The algorithm for the checkRadicality() function:
+                                             1. Inputs: HourLord, AscendantSign, AscendantLord, IsDay.
+                                             2. Check 1: Identity
+                                             * IF HourLord == AscendantLord: RETURN Radical (Identity Agreement).
+                                             3. Check 2: Nature
+                                             * Get Nature(HourLord) and Nature(AscendantLord).
+                                             * IF Nature(HourLord) == Nature(AscendantLord): RETURN Radical (Nature Agreement).
+                                             4. Check 3: Triplicity
+                                             * Get TriplicityRulers(AscendantSign, IsDay).
+                                             * IF HourLord IN TriplicityRulers: RETURN Radical (Triplicity Agreement).
+                                             5. Else:
+                                             * RETURN Not Radical (Caution Advised).
+7.3 Interpretation of Non-Radical Charts
+While Bonatti implies strict prohibition ("the question is not radical... I have experienced many times... errors"), Lilly is more pragmatic. He suggests that a lack of radicality warns the astrologer to proceed with extreme caution, as the querent may be "tampering" with the artist or asking a frivolous question. In a software context, this should trigger a "Low Reliability" warning flag.21
+________________
+8. Worked Examples
+To validate the specification, we perform manual calculations for two scenarios.
+Example A: The Historical London Case (Lilly's Era)
+Target: Reconstruct a planetary hour calculation for a summer day in Lilly's London.
+Parameters:
+                                             * Location: London (   N,    W).
+                                             * Date: Saturday, June 12, 1647 (Julian).
+                                             * Time: 14:00 (2:00 PM) Local Apparent Time.
+Step 1: Astronomical Computation
+                                                * Date Context: Near Summer Solstice. Long days.
+                                                * Sunrise (Upper Limb): Calculated as 03:44 AM (Apparent).
+                                                * Sunset (Upper Limb): Calculated as 08:16 PM (20:16) (Apparent).
+                                                * Day Duration:    minutes.
+                                                * Night Duration:    minutes.
+Step 2: Hour Length Calculation
+                                                   * Day Hour Length:    minutes (1 hour 22 minutes 40 seconds).
+                                                   * Night Hour Length:    minutes (37 minutes 20 seconds).
+                                                      * Insight: Note the extreme disparity. A day hour is more than double the length of a night hour. This creates a "stretched" experience of time.
+Step 3: Hour Mapping
+                                                      * Day: Saturday.
+                                                      * Day Lord: Saturn.
+                                                      * Sequence: Sat    Jup    Mar    Sun    Ven    Mer    Mon.
+Table of Day Hours:
+                                                         1. 03:44:00 - 05:06:40 (Saturn)
+                                                         2. 05:06:40 - 06:29:20 (Jupiter)
+                                                         3. 06:29:20 - 07:52:00 (Mars)
+                                                         4. 07:52:00 - 09:14:40 (Sun)
+                                                         5. 09:14:40 - 10:37:20 (Venus)
+                                                         6. 10:37:20 - 12:00:00 (Mercury) Noon
+                                                         7. 12:00:00 - 13:22:40 (Moon)
+                                                         8. 13:22:40 - 14:45:20 (Saturn)
+Step 4: Result
+                                                         * The time is 14:00.
+                                                         * It falls in the 8th Hour.
+                                                         * The Ruler is Saturn.
+Step 5: Radicality Check
+                                                         * Assume the Ascendant at 14:00 is Libra.
+                                                         * Lord of Ascendant: Venus.
+                                                         * Lord of Hour: Saturn.
+                                                         * Check 1 (Identity): Venus!= Saturn. (Fail)
+                                                         * Check 2 (Nature): Venus (Cold/Moist)!= Saturn (Cold/Dry). (Fail)
+                                                         * Check 3 (Triplicity): Libra is Air.
+                                                         * Daytime chart.
+                                                         * Air Triplicity Ruler (Day): Saturn.
+                                                         * Hour Lord (Saturn) == Triplicity Lord (Saturn).
+                                                         * Conclusion: The chart is Radical by Triplicity agreement.
+________________
+Example B: The Modern "Friday Night" Anomaly
+Target: Demonstrate the "Night Lord" and day-break logic.
+Parameters:
+                                                         * Location: Los Angeles (   N).
+                                                         * Date: Friday, January 30, 2026.
+                                                         * Time: 04:30 AM (Clock Time/Mean Time).
+Step 1: Determine Astrological Day
+                                                            * Civil Date: Friday.
+                                                            * Sunrise (Jan 30):    06:55 AM.
+                                                            * Current Time (04:30) < Sunrise (06:55).
+                                                            * Astrological Day: It is still Thursday (Jupiter's Day).
+Step 2: Determine Hour Sequence
+                                                               * We are in the Night of Thursday.
+                                                               * Thursday Night Sequence (starts Hour 13).
+                                                               * Day Lord: Jupiter.
+                                                               * Night Start Planet (2 steps back): Moon.
+                                                               * Night Sequence: Mon    Sat    Jup    Mar    Sun    Ven    Mer    Mon...
+Step 3: Locate Hour
+                                                                  * Sunset (Thursday Jan 29):    17:15.
+                                                                  * Sunrise (Friday Jan 30):    06:55.
+                                                                  * Night Duration:    minutes.
+                                                                  * Hour Length:    minutes (1h 08m 20s).
+                                                                  * Elapsed since Sunset (17:15 to 04:30):    minutes.
+                                                                  * Hour Index:   .
+                                                                  * We are in the 10th Hour of the Night (Hour 22 of the cycle).
+Step 4: Map Ruler
+                                                                     * Night Sequence:
+                                                                     1. Moon
+                                                                     2. Saturn
+                                                                     3. Jupiter
+                                                                     4. Mars
+                                                                     5. Sun
+                                                                     6. Venus
+                                                                     7. Mercury
+                                                                     8. Moon
+                                                                     9. Saturn
+                                                                     10. Jupiter
+Result: The Planetary Hour is Jupiter.
+Radicality: If Ascendant is Pisces (ruled by Jupiter), we have perfect Identity radicality.
+________________
+9. Pseudocode Implementation
+The following pseudocode represents the complete logic required for the "computational astronomer" persona.
+
+
+Code snippet
+
+
+
+
+/**
+* Calculates the Planetary Hour Report for a given location and time.
+* Uses Topocentric, Apparent Solar Time logic.
+*/
+
+FUNCTION GetPlanetaryHourInfo(dateTimeUTC, latitude, longitude):
+
+   // 1. ASTRONOMICAL CALCULATIONS
+   // Calculate sunrise/set for the CIVIL day of the input
+   currentSunrise = AstroLib.calculateSunrise(dateTimeUTC, lat, long, method=UPPER_LIMB)
+   currentSunset  = AstroLib.calculateSunset(dateTimeUTC, lat, long, method=UPPER_LIMB)
+   
+   // Determine Astrological Day context
+   IF dateTimeUTC < currentSunrise:
+       // Case: Pre-dawn. Belong to previous astrological day.
+       astroDate = dateTimeUTC.minusDays(1)
+       
+       // Recalculate sun data for previous day
+       prevSunrise = AstroLib.calculateSunrise(astroDate, lat, long)
+       prevSunset  = AstroLib.calculateSunset(astroDate, lat, long)
+       
+       // Set operational boundaries
+       periodStart = prevSunset
+       periodEnd   = currentSunrise // The dawn of today
+       isDaytime   = FALSE
+       dayOfWeek   = astroDate.getDayOfWeek() // e.g. THURSDAY
+       
+   ELSE IF dateTimeUTC > currentSunset:
+       // Case: Post-sunset. Belong to current astrological day, but Night phase.
+       astroDate = dateTimeUTC
+       nextSunrise = AstroLib.calculateSunrise(dateTimeUTC.plusDays(1), lat, long)
+       
+       periodStart = currentSunset
+       periodEnd   = nextSunrise
+       isDaytime   = FALSE
+       dayOfWeek   = astroDate.getDayOfWeek()
+       
+   ELSE:
+       // Case: Daylight.
+       astroDate = dateTimeUTC
+       periodStart = currentSunrise
+       periodEnd   = currentSunset
+       isDaytime   = TRUE
+       dayOfWeek   = astroDate.getDayOfWeek()
+
+   // 2. CHALDEAN SEQUENCING
+   // Standard mapping: Sun=0, Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6
+   // Chaldean Indices: Sat=0, Jup=1, Mar=2, Sun=3, Ven=4, Mer=5, Mon=6
+   
+   // Map Day of Week to Day Lord (Planet Object)
+   dayLord = ChaldeanMap.getDayRuler(dayOfWeek) 
+   
+   // 3. UNEQUAL HOUR CALCULATION
+   durationSeconds = periodEnd - periodStart
+   hourLengthSeconds = durationSeconds / 12
+   
+   elapsedSeconds = dateTimeUTC - periodStart
+   currentHourIndex = Floor(elapsedSeconds / hourLengthSeconds) + 1 // 1-12
+   
+   // 4. PLANETARY ASSIGNMENT
+   // Calculate global offset in the 24h cycle
+   // If Day: offset = hourIndex - 1
+   // If Night: offset = hourIndex + 11 (Because Night Hour 1 is Cycle Hour 13)
+   
+   IF isDaytime:
+       cycleOffset = currentHourIndex - 1
+   ELSE:
+       cycleOffset = currentHourIndex + 11
+       
+   // Circular Buffer Logic
+   // Find start index of Day Lord in Chaldean Sequence
+   startIndex = ChaldeanOrder.indexOf(dayLord)
+   targetIndex = (startIndex + cycleOffset) MOD 7
+   
+   hourLord = ChaldeanOrder[targetIndex]
+   
+   // 5. RADICALITY CHECK (Forensic Module)
+   ascendantSign = AstroLib.calculateAscendant(dateTimeUTC, lat, long)
+   ascendantLord = Rulerships.getDomicileRuler(ascendantSign)
+   
+   radicalityStatus = CheckRadicality(hourLord, ascendantLord, ascendantSign, isDaytime)
+   
+   RETURN {
+       astrologicalDay: dayOfWeek,
+       dayLord: dayLord,
+       hourLord: hourLord,
+       isDaytime: isDaytime,
+       hourNumber: currentHourIndex, // 1-12
+       radicality: radicalityStatus
+   }
+
+FUNCTION CheckRadicality(hourLord, ascLord, ascSign, isDay):
+   // Identity Check
+   IF hourLord == ascLord:
+       RETURN "RADICAL: Identity Agreement"
+       
+   // Nature Check (Temperaments)
+   IF hourLord.nature == ascLord.nature: // e.g. Hot+Dry == Hot+Dry
+       RETURN "RADICAL: Nature Agreement"
+       
+   // Triplicity Check
+   triplicityLord = Rulerships.getTriplicityLord(ascSign, isDay)
+   IF hourLord == triplicityLord:
+       RETURN "RADICAL: Triplicity Agreement"
+       
+   RETURN "NOT RADICAL: Caution Advised"
+
+________________
+10. Conclusion
+This report has reconstructed the Medieval and Renaissance system of Planetary Days and Hours, transforming qualitative historical descriptions into a deterministic computational model. By adhering to the primary sources of Bonatti and Lilly, we establish that the system relies on Local Apparent Solar Time, Upper Limb Solar Visibility, and the Chaldean Order applied to Unequal Temporal Hours.
+The system is astronomically rigorous yet distinct from modern chronometry. It demands that the software engineer calculate time not as a steady pulse of seconds, but as a fluid adaptation to the solar arc. The inclusion of the "Radicality" decision tree allows this specification to serve not only as a calendar utility but as a forensic engine for historically accurate horary judgment. The result is a system where time is not merely measured, but ruled.
+Works cited
+                                                                     1. Understanding Planetary Days, Nights, and Hours Single Presentation - Austin Coppock, accessed January 30, 2026, https://austincoppock.com/shop/understanding-planetary-days/
+                                                                     2. Planetary Hours and Days - Renaissance Astrology, accessed January 30, 2026, https://www.renaissanceastrology.com/planetaryhoursarticle.html
+                                                                     3. GUIDO BONATTI - Liber Astronomiae Part IV - On Horary, First Part, accessed January 30, 2026, https://ia801805.us.archive.org/14/items/GuidoBonattiLiberAstronomiaePart4OnHoraryPart1/Guido%20Bonatti%20-%20Liber%20Astronomiae%2C%20Part%204%20%26%20On%20Horary%2C%20Part%201.pdf
+                                                                     4. Radicality — Medieval Astrology Guide, accessed January 30, 2026, https://www.medievalastrologyguide.com/radicality
+                                                                     5. Planetary Hours in Renaissance Horary and Electional Astrology, accessed January 30, 2026, https://www.renaissanceastrology.com/planetaryhoursrenaissance.html
+                                                                     6. Bonatti on Horary: Treatise 6 of Guido Bonatti's Book of Astronomy - Google Books, accessed January 30, 2026, https://books.google.com/books/about/Bonatti_on_Horary.html?id=9WaXSQAACAAJ
+                                                                     7. Guido Bonatti Liber Astronomiae Part II (Project Hindsight Latin Track Volume VIII) (Guido Bonatti, Robert Hand (Editor) Etc.) (Z-Library) | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/661771713/Guido-Bonatti-Liber-Astronomiae-Part-II-Project-Hindsight-Latin-Track-Volume-VIII-Guido-Bonatti-Robert-Hand-Editor-Etc-Z-Library
+                                                                     8. Magickal Timing: Planetary Days and Hours Explained - Aerik Arkadian, accessed January 30, 2026, https://aerikarkadian.com/2025/10/23/magickal-timing-planetary-days-and-hours-explained/
+                                                                     9. Planetary Hours | PDF | Astrology | Esoteric Cosmology - Scribd, accessed January 30, 2026, https://www.scribd.com/document/7308462/Planetary-Hours
+                                                                     10. Planetary Days, Nights and Hours in Astrology - HéloAstro, accessed January 30, 2026, https://www.heloastro.com/blog/planetary-days-and-hours-in-astrology
+                                                                     11. What is Planetary Hours, part 3. - Time Nomad, accessed January 30, 2026, https://timenomad.app/posts/astrology/philosophy/2018/12/09/what-is-planetary-hours-part-three.html
+                                                                     12. Rise, Set, and Twilight Definitions - US Naval Observatory Astronomical Applications Department, accessed January 30, 2026, https://aa.usno.navy.mil/faq/RST_defs
+                                                                     13. Sunrise equation - Wikipedia, accessed January 30, 2026, https://en.wikipedia.org/wiki/Sunrise_equation
+                                                                     14. apparent solar day, accessed January 30, 2026, https://gml.noaa.gov/ozwv/dobson/papers/report6/appi.html
+                                                                     15. Equation of time - Wikipedia, accessed January 30, 2026, https://en.wikipedia.org/wiki/Equation_of_time
+                                                                     16. Planetary Hours, Planetary Minutes and Planetary Seconds, the Days of Week and the Planetary Third Order - Renaissance Astrology, accessed January 30, 2026, https://www.renaissanceastrology.com/3rdplanetaryorder.html
+                                                                     17. Planetary hours - Wikipedia, accessed January 30, 2026, https://en.wikipedia.org/wiki/Planetary_hours
+                                                                     18. The Porphyry, Alcabitius and Regiomontanus House Systems Examined | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/348181508/The-Porphyry-Alcabitius-and-Regiomontanus-House-Systems-Examined
+                                                                     19. Christian Astrology PDF | PDF | Planets | Astronomy - Scribd, accessed January 30, 2026, https://www.scribd.com/document/642382876/christian-astrology-pdf
+                                                                     20. Medieval Temperaments, accessed January 30, 2026, https://www.medievalastrologyguide.com/medieval-temperaments
+                                                                     21. The Considerations Before Judgement | PDF | Planets In Astrology - Scribd, accessed January 30, 2026, https://www.scribd.com/document/44638049/The-Considerations-Before-Judgement

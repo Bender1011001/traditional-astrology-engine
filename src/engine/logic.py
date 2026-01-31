@@ -22,6 +22,14 @@ from .mundane import get_recent_eclipses, check_eclipse_impact, check_universal_
 from .horary import analyze_horary_physics, calculate_antiscia
 from .aspects import AspectEngine, AspectType
 from database.db_manager import DelineationLibrary
+from .hyleg import HylegAlcocodenEngine
+from .temperament import TemperamentEngine
+from .mansions import LunarMansionEngine
+from .planetary_hours import PlanetaryHourEngine
+from .primary_directions import PrimaryDirectionsEngine
+from .reception import ReceptionEngine, ReceptionMode
+from .rectification import RectificationEngine
+from .kakosis import KakosisEngine
 import swisseph as swe
 
 # Initialize Library
@@ -596,6 +604,22 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         elif is_malefic_out_of_sect(p.name, sect):
             destructive_team.append(p.name.value)
 
+    # --- KAKOSIS (Maltreatment) AUDIT ---
+    maltreatment_report = {}
+    for p in chart.planets:
+        # Check all planets for maltreatment, though typically Lights/Angles are most critical
+        conditions = KakosisEngine.check_maltreatments(p, chart)
+        if conditions:
+            maltreatment_report[p.name.value] = [
+                {
+                    "type": c.type,
+                    "malefic": c.malefic.value,
+                    "description": c.description,
+                    "severity": c.severity
+                }
+                for c in conditions
+            ]
+
     report = {
         "summary": {
             "sect": sect.value,
@@ -605,6 +629,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             "mutual_receptions": receptions_json,
             "constructive_team": constructive_team,
             "destructive_team": destructive_team,
+            "maltreatments": maltreatment_report,  # Added Report field
             "team_note": "Trust the energies/people of your Constructive Team; exercise caution with the Destructive Team.",
             "universal_events": [],
             "lunar_phase": calculate_lunar_phase(sun.longitude, moon.longitude)[0] if sun and moon else "Unknown",

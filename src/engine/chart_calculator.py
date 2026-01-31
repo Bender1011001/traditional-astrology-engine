@@ -7,6 +7,11 @@ from datetime import datetime, timedelta
 import os
 import time
 
+# Classical Imports
+from src.engine.classical_mechanics import ClassicalMechanicsEngine
+from src.engine.models import Sign, PlanetName
+from src.engine.reference_data import DOMICILES
+
 # Initialize Geocoder
 _ua_base = os.getenv("NOMINATIM_USER_AGENT", "astrology_app/1.0")
 _ua_contact = os.getenv("NOMINATIM_CONTACT", "").strip()
@@ -397,6 +402,11 @@ def calculate_chart_data(
             # azresult returns (azimuth, true_altitude, apparent_altitude)
             
             altitude = azresult[1]
+            long_val = coords[0]
+
+            # --- Classical Calculations per Planet ---
+            antiscia = ClassicalMechanicsEngine.get_antiscia(long_val)
+            dodecatemorion = ClassicalMechanicsEngine.get_dodecatemorion(long_val)
 
             results["planets"][name] = {
                 "longitude": coords[0],
@@ -404,7 +414,22 @@ def calculate_chart_data(
                 "distance": coords[2],
                 "speed": coords[3],
                 "altitude": altitude,
-                "is_retrograde": coords[3] < 0
+                "is_retrograde": coords[3] < 0,
+                "classical": {
+                    "antiscia": {
+                        "longitude": antiscia.antiscia_lon,
+                        "sign": antiscia.antiscia_sign.value
+                    },
+                    "contra_antiscia": {
+                         "longitude": antiscia.contra_antiscia_lon,
+                         "sign": antiscia.contra_antiscia_sign.value
+                    },
+                    "dodecatemorion": {
+                        "longitude": dodecatemorion.longitude,
+                        "sign": dodecatemorion.sign.value,
+                        "term_ruler": dodecatemorion.term_ruler
+                    }
+                }
             }
         except swe.Error as e:
              # Fallback to Moshier if file missing
@@ -425,11 +450,25 @@ def calculate_chart_data(
     # Calculate South Node (180 degrees from North Node)
     if "North_Node" in results["planets"]:
         nn_lon = results["planets"]["North_Node"]["longitude"]
+        
+        sn_lon = (nn_lon + 180) % 360
+        antiscia_sn = ClassicalMechanicsEngine.get_antiscia(sn_lon)
+        
         results["planets"]["South_Node"] = {
-            "longitude": (nn_lon + 180) % 360,
+            "longitude": sn_lon,
             "latitude": -results["planets"]["North_Node"]["latitude"],
             "speed": results["planets"]["North_Node"]["speed"],
-            "is_retrograde": True # Nodes are usually Rx
+            "is_retrograde": True, # Nodes are usually Rx
+             "classical": {
+                    "antiscia": {
+                        "longitude": antiscia_sn.antiscia_lon,
+                        "sign": antiscia_sn.antiscia_sign.value
+                    },
+                    "contra_antiscia": {
+                         "longitude": antiscia_sn.contra_antiscia_lon,
+                         "sign": antiscia_sn.contra_antiscia_sign.value
+                    }
+            }
         }
 
 
@@ -448,6 +487,37 @@ def calculate_chart_data(
             "Ascendant": ascmc[0],
             "MC": ascmc[1]
         }
+        
+        # --- Planetary Hours / Radicality Calculation ---
+        try:
+            asc_deg = ascmc[0]
+            asc_idx = int(asc_deg / 30) % 12
+            asc_sign = list(Sign)[asc_idx]
+            
+            # DOMICILES is a dict {Sign: PlanetName}
+            # Ascendant Lord
+            asc_lord_enum = DOMICILES.get(asc_sign)
+            asc_lord_str = asc_lord_enum.value if asc_lord_enum else None
+            
+            # Calculate Hours
+            # We need utc_dt (datetime)
+            p_hours = ClassicalMechanicsEngine.get_planetary_hours(utc_dt, lat, lon, asc_sign, asc_lord_str)
+            
+            if p_hours:
+                 results["classical"] = {
+                     "planetary_hours": {
+                         "day_of_week": p_hours.day_of_week,
+                         "day_lord": p_hours.day_lord,
+                         "hour_lord": p_hours.hour_lord,
+                         "hour_number": p_hours.hour_number,
+                         "is_daytime": p_hours.is_daytime,
+                         "radicality": p_hours.radicality,
+                         "night_lord": p_hours.night_lord
+                     }
+                 }
+        except Exception as e_classical:
+            results["classical_error"] = str(e_classical)
+
     except Exception as e:
         results["error_houses"] = str(e)
 
