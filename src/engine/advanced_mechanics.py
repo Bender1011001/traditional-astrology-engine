@@ -509,7 +509,7 @@ class DodecatemoriaEngine:
         
         # Projection arc is degree * 12
         arc = deg_in_sign * 12.0
-        return (sign_start + arc) % 360.0
+        return (longitude + arc) % 360.0
 
     @staticmethod
     def calculate_dodecatemoria_paul(longitude: float) -> float:
@@ -521,9 +521,9 @@ class DodecatemoriaEngine:
         deg_in_sign = longitude % 30.0
         sign_start = (longitude // 30) * 30
         
-        # Projection arc is degree * 13
+        # Projection arc is degree * 13 (Cyclical variant)
         arc = deg_in_sign * 13.0
-        return (sign_start + arc) % 360.0
+        return (longitude + arc) % 360.0
 
     @staticmethod
     def get_dodecatemoria_data(chart: Chart, is_valens: bool = True) -> Dict[str, Dict]:

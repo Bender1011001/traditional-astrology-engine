@@ -350,6 +350,32 @@ class DignityCalculator:
         else:
             details.append(f"Monomoiria Ruler: {mono_ruler.value}")
 
+        # 7. Collect variant information for report
+        element = cls.ZODIAC_ELEMENTS.get(sign)
+        dorothean_rulers = cls.TRIPLICITY_RULERS.get(element)
+        ptolemaic_rulers = PTOLEMAIC_TRIPLICITY.get(element) # From reference_data
+        
+        is_ruler_dorothean = planet_name in (dorothean_rulers[0], dorothean_rulers[1])
+        is_ruler_ptolemaic = planet_name in (ptolemaic_rulers[0], ptolemaic_rulers[1]) if ptolemaic_rulers else False
+
+        egyptian_bounds = EGYPTIAN_TERMS.get(sign, [])
+        egyptian_term_ruler = None
+        egyptian_term_limit = 0
+        for p, limit in egyptian_bounds:
+            if deg_in_sign < limit:
+                egyptian_term_ruler = PlanetName[p.upper()] if isinstance(p, str) else p
+                egyptian_term_limit = limit
+                break
+
+        ptolemaic_bounds = PTOLEMAIC_TERMS.get(sign, [])
+        ptolemaic_term_ruler = None
+        ptolemaic_term_limit = 0
+        for p, limit in ptolemaic_bounds:
+            if deg_in_sign < limit:
+                ptolemaic_term_ruler = PlanetName[p.upper()] if isinstance(p, str) else p
+                ptolemaic_term_limit = limit
+                break
+
         return {
             "total_score": score,
             "details": details,
@@ -357,7 +383,7 @@ class DignityCalculator:
             "variants": {
                 "triplicity": {
                     "used": "Dorothean",
-                    "sect": chart_sect.value,
+                    "sect": sect.value,
                     "dorothean": {
                         "day": dorothean_rulers[0].value,
                         "night": dorothean_rulers[1].value,
@@ -365,8 +391,8 @@ class DignityCalculator:
                         "planet_is_ruler": is_ruler_dorothean
                     },
                     "ptolemaic": {
-                        "day": ptolemaic_rulers[0].value,
-                        "night": ptolemaic_rulers[1].value,
+                        "day": ptolemaic_rulers[0].value if ptolemaic_rulers else None,
+                        "night": ptolemaic_rulers[1].value if ptolemaic_rulers else None,
                         "planet_is_ruler": is_ruler_ptolemaic
                     }
                 },
