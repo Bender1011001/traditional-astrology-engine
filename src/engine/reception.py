@@ -137,7 +137,7 @@ class ReceptionEngine:
                           (a.planet_a == guest.name and a.planet_b == host.name) or
                           (a.planet_a == host.name and a.planet_b == guest.name)), None)
         
-        if rel_aspect and score > 0:
+        if rel_aspect and is_valid:
             # Traditional rule: Operative reception usually requires an APPLYING aspect.
             # Standard mode might be more liberal.
             if mode == ReceptionMode.STRICT_BONATTI:
@@ -168,7 +168,7 @@ class ReceptionEngine:
             host=host.name,
             dignities=dignities,
             score=score,
-            is_valid=(score > 0),
+            is_valid=is_valid,
             is_operative=is_operative,
             mode=mode.value,
             mitigation=mitigation

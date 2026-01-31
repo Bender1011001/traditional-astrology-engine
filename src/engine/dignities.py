@@ -302,59 +302,37 @@ class DignityCalculator:
 
         # 3. Triplicity (+3)
         element = cls.ZODIAC_ELEMENTS.get(sign)
-        dorothean_rulers = cls.TRIPLICITY_RULERS.get(element)
-        # Ptolemaic triplicity usually doesn't have a participant
-        # For simplicity, we can define it based on Dorothean but skipping participant for display
-        ptolemaic_rulers = (dorothean_rulers[0], dorothean_rulers[1]) if dorothean_rulers else None
-        
-        is_ruler_dorothean = False
-        if dorothean_rulers:
-            if (sect == Sect.DAY and planet_name == dorothean_rulers[0]) or \
-               (sect == Sect.NIGHT and planet_name == dorothean_rulers[1]):
+        rulers = cls.TRIPLICITY_RULERS.get(element)
+        if rulers:
+            # Day, Night, Participant
+            if (sect == Sect.DAY and planet_name == rulers[0]) or \
+               (sect == Sect.NIGHT and planet_name == rulers[1]):
                 score += cls.TRIPLICITY
                 details.append(f"Triplicity ({sect.value}) (+3)")
-                is_ruler_dorothean = True
-            elif planet_name == dorothean_rulers[2]:
+            elif planet_name == rulers[2]:
                 score += 1
                 details.append("Triplicity (Participant) (+1)")
-                is_ruler_dorothean = True
-        
-        is_ruler_ptolemaic = False
-        if ptolemaic_rulers:
-            if (sect == Sect.DAY and planet_name == ptolemaic_rulers[0]) or \
-               (sect == Sect.NIGHT and planet_name == ptolemaic_rulers[1]):
-                is_ruler_ptolemaic = True
 
         # 4. Terms (+2)
-        # We calculate all three to populate the variants dictionary
-        def get_term_info(table, s, d):
-            b = table.get(s)
-            if not b: return None, 0
-            for r, lim in b:
-                # Convert string ruler to PlanetName if necessary
-                ruler_name = r
-                if isinstance(r, str):
-                    ruler_name = PlanetName[r.upper()] if r.upper() in PlanetName.__members__ else None
-                if d < lim:
-                    return ruler_name, lim
-            return None, 0
-
-        egyptian_term_ruler, egyptian_term_limit = get_term_info(EGYPTIAN_TERMS, sign, deg_in_sign)
-        ptolemaic_term_ruler, ptolemaic_term_limit = get_term_info(PTOLEMAIC_TERMS, sign, deg_in_sign)
-        chaldean_term_ruler, chaldean_term_limit = get_term_info(CHALDEAN_TERMS, sign, deg_in_sign)
-
-        # Apply score based on the system in use
-        current_term_ruler = None
-        if term_system == TermSystem.EGYPTIAN:
-            current_term_ruler = egyptian_term_ruler
-        elif term_system == TermSystem.PTOLEMAIC:
-            current_term_ruler = ptolemaic_term_ruler
+        term_table = EGYPTIAN_TERMS
+        if term_system == TermSystem.PTOLEMAIC:
+            term_table = PTOLEMAIC_TERMS
         elif term_system == TermSystem.CHALDEAN:
-            current_term_ruler = chaldean_term_ruler
+            term_table = CHALDEAN_TERMS
 
-        if current_term_ruler == planet_name:
-            score += cls.TERM
-            details.append(f"Term ({term_system.value}) (+2)")
+        bounds = term_table.get(sign)
+        if bounds:
+            for ruler_val, limit in bounds:
+                # Convert string ruler to PlanetName if necessary
+                ruler_name = ruler_val
+                if isinstance(ruler_val, str):
+                    ruler_name = PlanetName[ruler_val.upper()] if ruler_val.upper() in PlanetName.__members__ else None
+                
+                if deg_in_sign < limit:
+                    if ruler_name == planet_name:
+                        score += cls.TERM
+                        details.append(f"Term ({term_system.value}) (+2)")
+                    break
 
         # 5. Face (+1)
         face_idx = int(deg_in_sign / 10)
@@ -379,21 +357,21 @@ class DignityCalculator:
             "variants": {
                 "triplicity": {
                     "used": "Dorothean",
-                    "sect": sect.value,
+                    "sect": chart_sect.value,
                     "dorothean": {
-                        "day": dorothean_rulers[0].value if dorothean_rulers else None,
-                        "night": dorothean_rulers[1].value if dorothean_rulers else None,
-                        "participant": dorothean_rulers[2].value if dorothean_rulers else None,
+                        "day": dorothean_rulers[0].value,
+                        "night": dorothean_rulers[1].value,
+                        "participant": dorothean_rulers[2].value,
                         "planet_is_ruler": is_ruler_dorothean
                     },
                     "ptolemaic": {
-                        "day": ptolemaic_rulers[0].value if ptolemaic_rulers else None,
-                        "night": ptolemaic_rulers[1].value if ptolemaic_rulers else None,
+                        "day": ptolemaic_rulers[0].value,
+                        "night": ptolemaic_rulers[1].value,
                         "planet_is_ruler": is_ruler_ptolemaic
                     }
                 },
                 "terms": {
-                    "used": term_system.value,
+                    "used": "Egyptian",
                     "egyptian": {
                         "ruler": egyptian_term_ruler.value if egyptian_term_ruler else None,
                         "limit": egyptian_term_limit
@@ -401,10 +379,6 @@ class DignityCalculator:
                     "ptolemaic": {
                         "ruler": ptolemaic_term_ruler.value if ptolemaic_term_ruler else None,
                         "limit": ptolemaic_term_limit
-                    },
-                    "chaldean": {
-                        "ruler": chaldean_term_ruler.value if chaldean_term_ruler else None,
-                        "limit": chaldean_term_limit
                     }
                 }
             },

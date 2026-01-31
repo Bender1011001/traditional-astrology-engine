@@ -2,7 +2,7 @@
 from typing import Optional, Dict, List
 import re
 from datetime import datetime
-from .models import Planet, Chart, Sect, PlanetName, Sign, LotName
+from .models import Planet, Chart, Sect, PlanetName, Sign
 from .lots import calculate_all_lots
 from .prediction import (
     calculate_profection_sign,
@@ -554,17 +554,17 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
     moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
     
-    # Use chart geo if available; otherwise fallback to London (research default).
-    demo_lat = chart.geo_lat if chart.geo_lat is not None else 51.5074
-    demo_lon = chart.geo_lon if chart.geo_lon is not None else -0.1278
-
     # Master Speculum (Placidus Mundane Positions) - Moved up for planet forensic analysis
+    ramc = PrimaryDirectionsEngine._to_deg(swe.houses_armc(chart.jd, demo_lat, 23.43929, b'P')[1][1]) if chart.jd else 0.0
     # Actually, swisseph houses_armc returns (cusps, ascmc). ascmc[1] is RAMC.
     # But wait, RAMC is usually just RA of MC.
     mc_ra, _ = PrimaryDirectionsEngine.ecliptic_to_equatorial(chart.mc, 0.0)
     ramc = mc_ra
     
     speculum_data = {}
+    # Use chart geo if available; otherwise fallback to London (research default).
+    demo_lat = chart.geo_lat if chart.geo_lat is not None else 51.5074
+    demo_lon = chart.geo_lon if chart.geo_lon is not None else -0.1278
     for p in chart.planets:
         speculum_data[p.name.value] = PrimaryDirectionsEngine.get_full_speculum(p, ramc, demo_lat)
 
