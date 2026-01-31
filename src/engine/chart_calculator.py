@@ -12,8 +12,12 @@ from src.engine.classical_mechanics import ClassicalMechanicsEngine
 from src.engine.models import Sign, PlanetName, Chart, Planet
 from src.engine.reference_data import DOMICILES
 from src.engine.advanced_mechanics import (
-    HermeticLotEngine, MonomoiriaEngine, AlmutenEngine, DoryphoryEngine
+    HermeticLotEngine, MonomoiriaEngine, AlmutenEngine, DoryphoryEngine,
+    DodecatemoriaEngine
 )
+from src.engine.reception import ReceptionEngine, ReceptionMode
+from src.engine.kakosis import KakosisEngine
+from src.engine.aspects import AspectEngine
 
 # Initialize Geocoder
 _ua_base = os.getenv("NOMINATIM_USER_AGENT", "astrology_app/1.0")
@@ -640,6 +644,69 @@ def calculate_chart_data(
                         "trigonal_ruler": t_ruler.value
                     }
                     results["planets"][pname] = pdata
+
+            # 6. Dodecatemoria (Twelfth-Parts)
+            dodeca_valens = DodecatemoriaEngine.get_dodecatemoria_data(chart_obj, is_valens=True)
+            dodeca_paul = DodecatemoriaEngine.get_dodecatemoria_data(chart_obj, is_valens=False)
+            
+            for pname, pdata in results["planets"].items():
+                if pname in dodeca_valens:
+                    if "classical" not in pdata: pdata["classical"] = {}
+                    pdata["classical"]["dodecatemoria"] = {
+                        "valens": dodeca_valens[pname],
+                        "paul": dodeca_paul[pname]
+                    }
+
+            # 7. Kakosis (Maltreatment)
+            kakosis_report = KakosisEngine.analyze_maltreatment(chart_obj)
+            for pname, report in kakosis_report.items():
+                planet_key = pname.value.title()
+                if planet_key == "North_Node": planet_key = "North_Node"
+                if planet_key in results["planets"]:
+                    if "classical" not in results["planets"][planet_key]: 
+                        results["planets"][planet_key]["classical"] = {}
+                    results["planets"][planet_key]["classical"]["kakosis"] = [
+                        {
+                            "condition": c.condition,
+                            "malefic": c.malefic.value if c.malefic else "None",
+                            "severity": c.severity,
+                            "details": c.details
+                        } for c in report
+                    ]
+
+            # 8. Receptions
+            strict_receptions = ReceptionEngine.calculate_mutual_receptions(chart_obj, ReceptionMode.STRICT_BONATTI)
+            standard_receptions = ReceptionEngine.calculate_mutual_receptions(chart_obj, ReceptionMode.STANDARD_LILLY)
+            
+            results["classical"]["receptions"] = {
+                "strict_bonatti": [
+                    {
+                        "planets": [m.planet_a.value, m.planet_b.value],
+                        "type": m.type,
+                        "score": m.strength_score
+                    } for m in strict_receptions
+                ],
+                "standard_lilly": [
+                    {
+                        "planets": [m.planet_a.value, m.planet_b.value],
+                        "type": m.type,
+                        "score": m.strength_score
+                    } for m in standard_receptions
+                ]
+            }
+
+            # 9. Aspects (Detailed with Moiety Orbs)
+            all_aspects = AspectEngine.calculate_aspects(chart_obj)
+            results["aspects"] = [
+                {
+                    "p1": a.planet_a.value,
+                    "p2": a.planet_b.value,
+                    "type": a.type.value,
+                    "orb": round(a.orb, 2),
+                    "is_applying": a.is_applying,
+                    "text": a.text
+                } for a in all_aspects
+            ]
 
         except Exception as e_adv:
             results["advanced_error"] = str(e_adv)

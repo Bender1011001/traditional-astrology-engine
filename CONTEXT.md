@@ -2,7 +2,7 @@
 # Astrology Project
 
 ## Status
-- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics, Medical Iatromathematics, Classical Mechanics (Antiscia, Dodecatemoria, Planetary Hours), Forensic 5-Day Forecast (Epitasis), Generative AI Oracle, User Accounts & Authentication.
+- **Working**: High-precision chart calculation, essential dignities, mundane events (Rank 1-4), textual delineations (Codex), complex forensic audit, Horary Physics (Frustration/Moiety), Medical Iatromathematics, Classical Mechanics (Antiscia, Dodecatemoria, Planetary Hours), Forensic 5-Day Forecast (Epitasis), Kakosis (Maltreatment), Almuten Figuris, Doryphory, Monomoiria (Zoidion/Trigonal), Pauline Rectification, Generative AI Oracle, User Accounts & Authentication.
 - **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall).
 - **Database**: Comprehensive pre-1700s traditional astrology—20 JSON files, ~210KB total.
 - **Release Ready**: Version 1.3 (User Accounts).

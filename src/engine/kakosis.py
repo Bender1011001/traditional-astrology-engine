@@ -135,13 +135,35 @@ class KakosisEngine:
     @staticmethod
     def _check_besiegement(planet: Planet, chart: Chart, sect: Sect) -> List[MaltreatmentCondition]:
         """
-        Planet is separating from one malefic and applying to another.
+        Besiegement (Perischeisis): 
+        Bodily: Planet is situated between the two Malefics (Mars and Saturn).
+        Ray: Separating from one, applying to the other (not fully implemented here).
         """
-        # Sort planets by longitude to find neighbors? 
-        # Besiegement is complex. Simplified "Ray" besiegement is hard.
-        # Bodily besiegement: Planet is between Mars and Saturn in the SAME sign or adjacent?.
-        # Classic definition: Separating from Malefic A, Applying to Malefic B.
-        return [] # TODO: Implement complex ray besiegement later if needed. Use logic.py's simplified check.
+        mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
+        saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
+        
+        if not mars or not saturn:
+            return []
+            
+        def get_shortest_dist(p_lon, target_lon):
+            diff = target_lon - p_lon
+            if diff > 180: diff -= 360
+            if diff < -180: diff += 360
+            return diff
+            
+        dist_mars = get_shortest_dist(planet.longitude, mars.longitude)
+        dist_saturn = get_shortest_dist(planet.longitude, saturn.longitude)
+        
+        # Check if between (one positive, one negative distance, meaning they are on opposite sides)
+        # And within orb (e.g. 15 degrees total besiegement span)
+        if (dist_mars * dist_saturn < 0) and (abs(dist_mars) + abs(dist_saturn) < 15):
+             return [MaltreatmentCondition(
+                 "Besiegement", PlanetName.SATURN, # Blame both?
+                 f"Besieged (Bodily) between Mars and Saturn (Orb: {int(abs(dist_mars) + abs(dist_saturn))}°).",
+                 10
+             )]
+             
+        return []
 
     @staticmethod
     def _check_striking_ray(planet: Planet, chart: Chart, sect: Sect) -> List[MaltreatmentCondition]:

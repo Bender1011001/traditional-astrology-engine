@@ -19,7 +19,9 @@ class Reception:
     dignities: List[str] # ["Domicile", "Term", etc]
     score: int
     is_valid: bool # Based on mode rules (e.g. Bonatti rejects single term)
+    is_operative: bool # True if there is an applying aspect (or any aspect in Standard mode?)
     mode: str
+    mitigation: str = "None"
 
 @dataclass
 class MutualReception:
@@ -119,29 +121,47 @@ class ReceptionEngine:
             dignities.append("Face")
             score += 1
 
-        # Validity Check (Bonatti Rules)
-        is_valid = False
-        if len(dignities) > 0:
-            if mode == ReceptionMode.STANDARD_LILLY:
-                is_valid = True
+        # Operative Check (Requires Aspect)
+        # We need to find if there is an aspect in the chart between these two
+        # For simplicity, we can pass aspects or calculate them here.
+        # Let's assume we want to know if it's functional.
+        
+        is_operative = False
+        mitigation = "None"
+        
+        # Check AspectEngine for connectivity
+        from .aspects import AspectEngine
+        all_aspects = AspectEngine.calculate_aspects(chart)
+        
+        rel_aspect = next((a for a in all_aspects if 
+                          (a.planet_a == guest.name and a.planet_b == host.name) or
+                          (a.planet_a == host.name and a.planet_b == guest.name)), None)
+        
+        if rel_aspect and is_valid:
+            # Traditional rule: Operative reception usually requires an APPLYING aspect.
+            # Standard mode might be more liberal.
+            if mode == ReceptionMode.STRICT_BONATTI:
+                if rel_aspect.is_applying:
+                    is_operative = True
             else:
-                # Bonatti Strict Rules
-                # Valid if Domicile OR Exaltation
-                # OR (Triplicity AND (Term OR Face))
-                # OR (Term AND Face)
-                has_major = "Domicile" in dignities or "Exaltation" in dignities
-                has_trip = "Triplicity" in dignities
-                has_term = "Term" in dignities
-                has_face = "Face" in dignities
+                is_operative = True # Standard allows separating but decreasingly effective
                 
-                if has_major:
-                    is_valid = True
-                elif has_trip and (has_term or has_face):
-                    is_valid = True
-                elif has_term and has_face:
-                    is_valid = True
-                else:
-                    is_valid = False
+        # Mitigation Logic (The "Save Roll")
+        # Rule: A received planet is protected or its debility is saved by the host.
+        if is_operative:
+            # Check guest condition (Detriment/Fall)
+            from .dignities import DignityCalculator
+            # This is a bit circular, but we can check the sign.
+            # (Wait, check if target_file is updated with recent changes first)
+            # Actually, we can check guest's total_score if we had it, 
+            # or just look it up.
+            
+            # Simplified Mitigation Detection
+            is_malefic = host.name in [PlanetName.MARS, PlanetName.SATURN]
+            if is_malefic:
+                mitigation = "Maleficence Neutralized (Host receives Guest)"
+            else:
+                mitigation = "Active Assistance"
 
         return Reception(
             guest=guest.name,
@@ -149,7 +169,9 @@ class ReceptionEngine:
             dignities=dignities,
             score=score,
             is_valid=is_valid,
-            mode=mode.value
+            is_operative=is_operative,
+            mode=mode.value,
+            mitigation=mitigation
         )
 
     @classmethod

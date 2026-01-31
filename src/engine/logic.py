@@ -776,6 +776,54 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 "trace": base_trace + ["Source: house delineation library"]
             })
 
+        # --- NEW: Monomoiria Audit ---
+        mon_data = planet_data.get("classical", {}).get("monomoiria")
+        if mon_data:
+            z_ruler = mon_data.get("zoidion_ruler")
+            t_ruler = mon_data.get("trigonal_ruler")
+            rule_id = _unique_rule_id(f"{planet_label.lower()}-monomoiria")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "Monomoiria",
+                "condition": f"{planet_label} Degree Ruler",
+                "judgment": f"Zoidion Ruler: {z_ruler}; Trigonal Ruler: {t_ruler}.",
+                "sources": ["Paul of Alexandria, Introduction, Ch. 5 & 32"],
+                "confidence": 85,
+                "conflicts": [],
+                "trace": base_trace + [f"Generative Rule: {z_ruler} (Zoidion), {t_ruler} (Trigonal)"]
+            })
+
+        # --- NEW: Dodecatemoria Audit ---
+        dod_data = planet_data.get("classical", {}).get("dodecatemoria")
+        if dod_data:
+            v_dod = dod_data.get("valens", {})
+            rule_id = _unique_rule_id(f"{planet_label.lower()}-dodecatemoria")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "Dodecatemoria",
+                "condition": f"{planet_label} 12th-Part",
+                "judgment": f"Projects to {v_dod.get('sign')} (Ruler: {v_dod.get('ruler')}, Term Ruler: {v_dod.get('term_ruler')}).",
+                "sources": ["Vettius Valens, Anthologies I.9"],
+                "confidence": 88,
+                "conflicts": [],
+                "trace": base_trace + [f"Projection: {v_dod.get('longitude'):.2f}°"]
+            })
+
+        # --- NEW: Kakosis (Maltreatment) Audit ---
+        kakosis = planet_data.get("classical", {}).get("kakosis", [])
+        for k in kakosis:
+            rule_id = _unique_rule_id(f"{planet_label.lower()}-kakosis")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "Maltreatment",
+                "condition": f"{planet_label}: {k['condition']}",
+                "judgment": k["details"],
+                "sources": ["Porphyry, Introduction", "Antiochus, Thesaurus"],
+                "confidence": 90,
+                "conflicts": [],
+                "trace": base_trace + [f"Severity: {k['severity']}/10", f"Malefic: {k['malefic']}"]
+            })
+
     lunar_mansion = report.get("summary", {}).get("lunar_mansion")
     if lunar_mansion:
         mansion_name = lunar_mansion.get("name")

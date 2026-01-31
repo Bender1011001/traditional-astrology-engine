@@ -491,3 +491,71 @@ class DoryphoryEngine:
                 ))
                 
         return instances
+
+# ==========================================
+# 5. DODECATEMORIA (The Twelfth-Part)
+# ==========================================
+
+class DodecatemoriaEngine:
+    @staticmethod
+    def calculate_dodecatemoria_valens(longitude: float) -> float:
+        """
+        Calculates the 12-fold Dodecatemoria (Valens/Standard).
+        Formula: Longitude + (DegreeInSign * 12).
+        Projects the sign's micro-zodiac onto the full zodiac.
+        """
+        deg_in_sign = longitude % 30.0
+        sign_start = (longitude // 30) * 30
+        
+        # Projection arc is degree * 12
+        arc = deg_in_sign * 12.0
+        return (sign_start + arc) % 360.0
+
+    @staticmethod
+    def calculate_dodecatemoria_paul(longitude: float) -> float:
+        """
+        Calculates the 13-fold Dodecatemoria (Paul of Alexandria).
+        Formula: Longitude + (DegreeInSign * 13).
+        Intended for 'Apokatastasis' (Cyclical Return).
+        """
+        deg_in_sign = longitude % 30.0
+        sign_start = (longitude // 30) * 30
+        
+        # Projection arc is degree * 13
+        arc = deg_in_sign * 13.0
+        return (sign_start + arc) % 360.0
+
+    @staticmethod
+    def get_dodecatemoria_data(chart: Chart, is_valens: bool = True) -> Dict[str, Dict]:
+        """
+        Calculates Dodecatemoria for all planets and return their signs and rulers.
+        """
+        results = {}
+        for p in chart.planets:
+            if is_valens:
+                lon = DodecatemoriaEngine.calculate_dodecatemoria_valens(p.longitude)
+                method = "Valens (x12)"
+            else:
+                lon = DodecatemoriaEngine.calculate_dodecatemoria_paul(p.longitude)
+                method = "Paul (x13)"
+                
+            sign = get_sign_from_lon(lon)
+            domicile = DOMICILES[sign]
+            
+            # Sub-dignity: Which Egyptian Term is it in?
+            term_ruler = "Unknown"
+            deg_in_sign = lon % 30
+            for term_p, limit in EGYPTIAN_TERMS[sign]:
+                if deg_in_sign < limit:
+                    term_ruler = term_p.value if hasattr(term_p, 'value') else str(term_p)
+                    break
+            
+            results[p.name.value] = {
+                "method": method,
+                "longitude": lon,
+                "sign": sign.value,
+                "ruler": domicile.value,
+                "term_ruler": term_ruler
+            }
+        return results
+

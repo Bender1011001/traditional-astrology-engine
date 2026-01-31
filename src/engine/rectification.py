@@ -264,5 +264,50 @@ class RectificationEngine:
                 "confidence": max(0, 100 - s["difference"] * 6)
             })
             
-        return sorted(results, key=lambda x: x["confidence"], reverse=True)[:3]
+    @staticmethod
+    def pauline_monomoiria_rectification(chart: Chart) -> List[Dict]:
+        """
+        Pauline Trigonal Monomoiria Rectification (Reconstructing Paul p. 30):
+        Protocol:
+        1. Identify the Sect Light (Sun by day, Moon by night).
+        2. Calculate the 'Trigonal Monomoiria' ruler of the Sect Light.
+        3. The Ascendant degree must have a 'sympathetic' relationship 
+           (usually being in the Monomoiria of the same planet, 
+           or the planet being in the Ascendant).
+        """
+        sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+        sect_light = next((p for p in chart.planets if p.name == (PlanetName.SUN if sect == Sect.DAY else PlanetName.MOON)), None)
+        
+        if not sect_light:
+            return []
+            
+        # Get Trigonal Monomoiria Ruler of Sect Light
+        from .advanced_mechanics import MonomoiriaEngine
+        light_ruler = MonomoiriaEngine.get_trigonal_monomoiria(sect_light.longitude, sect)
+        
+        # Current Ascendant Monomoiria ruler
+        asc_ruler = MonomoiriaEngine.get_trigonal_monomoiria(chart.ascendant, sect)
+        
+        results = []
+        is_matched = (light_ruler == asc_ruler)
+        
+        # Alternative: Is the light_ruler in the Ascendant sign?
+        asc_sign = list(Sign)[int(chart.ascendant / 30) % 12]
+        ruler_in_asc = False
+        ruler_planet = next((p for p in chart.planets if p.name == light_ruler), None)
+        if ruler_planet and list(Sign)[int(ruler_planet.longitude / 30) % 12] == asc_sign:
+            ruler_in_asc = True
+
+        results.append({
+            "method": "Pauline Monomoiria",
+            "sect_light": sect_light.name.value,
+            "monomoiria_ruler": light_ruler.value,
+            "asc_monomoiria_ruler": asc_ruler.value,
+            "is_matched": is_matched,
+            "ruler_in_ascendant": ruler_in_asc,
+            "suggestion": f"Adjust birth time so Ascendant degree is ruled by {light_ruler.value} (Monomoiria).",
+            "confidence": 85 if is_matched or ruler_in_asc else 40
+        })
+        
+        return results
 

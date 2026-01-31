@@ -12,8 +12,9 @@
 - **Prediction**: Added Active Transits (Outer Planet impacts), fully historical Zodiacal Releasing, and Time Lord auditing for past/future dates.
 - **Advanced Aspects**: Antiscia and Contra-antiscia integrated.
 
-- **Advanced Mechanics**: Hermetic Lots (Fortune/Spirit + 5 Planets), Almuten Figuris (Ibn Ezra scoring), Monomoiria (Zoidion & Trigonal), and Doryphory (Spear-Bearer) analysis.
+- **Advanced Mechanics**: Hermetic Lots (Fortune/Spirit + 5 Planets), Almuten Figuris (Ibn Ezra scoring), Monomoiria (Zoidion & Trigonal), Doryphory (Spear-Bearer), Kakosis (Maltreatment conditions), and Dodecatemoria (Valens/Paul methods).
 - **Improved Horary**: Added Frustration, strict Moiety orbs, and enhanced Perfection/Denial logic.
+- **Rectification**: Added Pauline Trigonal Monomoiria rectification protocol.
 
 ## Key Files
 - `chart_calculator.py`: Handles ephemeris calls and geocoding, now integrates Advanced Mechanics.
