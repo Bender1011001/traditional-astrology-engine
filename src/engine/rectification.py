@@ -111,7 +111,7 @@ class RectificationEngine:
         # Calculate Sun altitude at syzygy location
         geopos = (lon, lat, 0)
         xin = (sun_lon, sun_lat, sun_res[2])
-        azresult = swe.azalt(syz_jd, swe.SE_ECL2HOR, geopos, 0, 0, xin)
+        azresult = swe.azalt(syz_jd, swe.ECL2HOR, geopos, 0, 0, xin)
         sun_alt = azresult[1]
         syz_sect = Sect.DAY if sun_alt > 0 else Sect.NIGHT
         

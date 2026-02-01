@@ -127,3 +127,31 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
     
     # Return False to indicate email was NOT sent in production
     return False
+
+def render_template(template_name: str, context: dict) -> str:
+    """
+    Loads an HTML template from src/templates/email/ and replaces placeholders.
+    Args:
+        template_name: Filename (e.g., 'welcome.html')
+        context: Dictionary of values to replace {{ key }}
+    """
+    # robust path handling
+    try:
+        # Assuming src/engine/email_service.py structure
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        template_path = os.path.join(base_dir, "src", "templates", "email", template_name)
+        
+        with open(template_path, "r", encoding="utf-8") as f:
+            content = f.read()
+            
+        for key, value in context.items():
+            # Replace {{ key }}
+            content = content.replace(f"{{{{ {key} }}}}", str(value))
+            # Also try {{key}} just in case
+            content = content.replace(f"{{{{{key}}}}}", str(value))
+            
+        return content
+    except Exception as e:
+        logging.error(f"Error rendering template {template_name}: {e}")
+        # Return a basic fallback if template fails
+        return f"Error loading template. Context: {context}"

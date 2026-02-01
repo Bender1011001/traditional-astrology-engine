@@ -28,7 +28,7 @@ class JSONFormatter(logging.Formatter):
         if hasattr(record, "extra_data") and isinstance(record.extra_data, dict):
             log_obj.update(record.extra_data)
             
-        return json.dumps(log_obj)
+        return json.dumps(log_obj, default=str)
 
 def configure_logging(app_name="astrology_engine"):
     """

@@ -38,6 +38,7 @@ from .medical import MedicalAstrology
 from .electional import ElectionalEngine
 from .solar_return import SolarReturnEngine
 from .prediction import calculate_solar_return_jd
+from .advanced_mechanics import AlmutenEngine, DoryphoryEngine, MonomoiriaEngine
 import swisseph as swe
 
 # Initialize Library
@@ -622,7 +623,6 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     # --- KAKOSIS (Maltreatment) AUDIT ---
     maltreatment_report = {}
     for p in chart.planets:
-        # Check all planets for maltreatment, though typically Lights/Angles are most critical
         conditions = KakosisEngine.check_maltreatments(p, chart)
         if conditions:
             maltreatment_report[p.name.value] = [
@@ -634,6 +634,18 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 }
                 for c in conditions
             ]
+
+    # --- ADVANCED ENGINE SUITE ---
+    almuten_data = AlmutenEngine.calculate_almuten(chart)
+    doryphory_data = DoryphoryEngine.check_doryphory(chart)
+    rect_animodar = RectificationEngine.animodar_rectification(chart, chart.jd, demo_lat, demo_lon)
+    mundane_context = MundaneEngine(chart.jd, demo_lat, demo_lon).get_hierarchy_report()
+    
+    # 5-Day Forecast
+    forecast_5day = []
+    if birth_date:
+        from .forensic_forecast import calculate_5_day_forecast
+        forecast_5day = calculate_5_day_forecast(chart, chart.jd, datetime.now())
 
     # --- UNIVERSAL INTEGRATION START ---
     
@@ -731,13 +743,23 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         "primary_directions": primary_dirs_json,
         "primary_direction_distributor": distributor_data,
         "solar_return": solar_return_data,
-        "critical_days_infancy": critical_days[:5], # Just first 5 for birth analysis
+        "critical_days_infancy": critical_days[:5],
         "soul_guardian": generate_soul_guardian_reading(chart, jd) if jd > 0 else {},
         "planets": [],
         "lots": calculate_all_lots(chart, sect),
         "stars": check_fixed_stars(chart),
         "fixed_star_meta": get_fixed_star_meta(),
-        "nodes": analyze_nodes(chart)
+        "nodes": analyze_nodes(chart),
+        "advanced_mechanics": {
+            "almuten": {
+                "winner": almuten_data.winner.value if almuten_data else "Unknown",
+                "scores": {k: {"total": v.total_score, "breakdown": v.breakdown} for k, v in almuten_data.scores.items()} if almuten_data else {}
+            },
+            "doryphory": [{"planet": d.planet.value, "type": d.type, "target": d.related_luminary} for d in doryphory_data],
+            "rectification_animodar": rect_animodar,
+            "mundane_context": mundane_context
+        },
+        "forecast_5_day": forecast_5day
     }
     
     # 6. Daily Oracle (Traditional Synthesized Forecast)

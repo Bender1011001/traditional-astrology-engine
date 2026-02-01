@@ -1,0 +1,1744 @@
+{
+  "summary": {
+    "sect": "Day",
+    "temperament": {
+      "primary_temperament": "Choleric (Hot/Dry)",
+      "scores": {
+        "Hot": 3,
+        "Cold": 2,
+        "Moist": 2,
+        "Dry": 3
+      },
+      "net_balance": {
+        "Hot_vs_Cold": 1,
+        "Moist_vs_Dry": -1
+      },
+      "breakdown": [
+        "Ascendant in Aries: +{'Hot': 1, 'Dry': 1, 'Cold': 0, 'Moist': 0}",
+        "Asc Ruler (Mars) in Cancer: +{'Hot': 0, 'Dry': 0, 'Cold': 1, 'Moist': 1}",
+        "Moon in Leo: +{'Hot': 1, 'Dry': 1, 'Cold': 0, 'Moist': 0}",
+        "Moon Phase (LastQ-New): +{'Cold': 1, 'Moist': 1, 'Hot': 0, 'Dry': 0}",
+        "Season (Summer): +{'Hot': 1, 'Dry': 1, 'Cold': 0, 'Moist': 0}"
+      ]
+    },
+    "lunar_mansion": {
+      "mansion_id": 11,
+      "name": "Al-Zubrah",
+      "start_lon_deg": 128.571429,
+      "end_lon_deg": 141.428572,
+      "intents_good": [
+        "building and construction",
+        "renting lands",
+        "agriculture",
+        "marriage",
+        "putting on new garments",
+        "voyages and maritime trade",
+        "gaining by merchandise",
+        "redemption of captives"
+      ],
+      "intents_bad": [
+        "travel",
+        "employment"
+      ],
+      "source_refs": [
+        "Picatrix Bk I, Ch 4",
+        "Medieval Astrology Guide"
+      ]
+    },
+    "planetary_hours": {
+      "day_ruler": "Mars",
+      "hour_ruler": "Venus",
+      "hour_number_civil": 17,
+      "hour_number_phase": 5,
+      "phase": "NIGHT",
+      "minutes_remaining": 3.6017540842294693,
+      "next_hour_ruler": "Mercury"
+    },
+    "mutual_receptions": [
+      {
+        "planet_a": "Mars",
+        "planet_b": "Jupiter",
+        "type": "Pure Exaltation",
+        "score": 10,
+        "dignities_a_in_b": [
+          "Exaltation",
+          "Term"
+        ],
+        "dignities_b_in_a": [
+          "Exaltation"
+        ]
+      },
+      {
+        "planet_a": "Jupiter",
+        "planet_b": "Saturn",
+        "type": "Mixed",
+        "score": 8,
+        "dignities_a_in_b": [
+          "Domicile"
+        ],
+        "dignities_b_in_a": [
+          "Triplicity"
+        ]
+      },
+      {
+        "planet_a": "Moon",
+        "planet_b": "Jupiter",
+        "type": "Mixed",
+        "score": 7,
+        "dignities_a_in_b": [
+          "Triplicity",
+          "Face"
+        ],
+        "dignities_b_in_a": [
+          "Triplicity"
+        ]
+      },
+      {
+        "planet_a": "Venus",
+        "planet_b": "Jupiter",
+        "type": "Mixed",
+        "score": 7,
+        "dignities_a_in_b": [
+          "Exaltation"
+        ],
+        "dignities_b_in_a": [
+          "Triplicity"
+        ]
+      },
+      {
+        "planet_a": "Mercury",
+        "planet_b": "Jupiter",
+        "type": "Mixed",
+        "score": 4,
+        "dignities_a_in_b": [
+          "Term"
+        ],
+        "dignities_b_in_a": [
+          "Term"
+        ]
+      }
+    ],
+    "constructive_team": [
+      "Sun",
+      "Jupiter",
+      "Saturn"
+    ],
+    "destructive_team": [
+      "Mars"
+    ],
+    "maltreatments": {
+      "Venus": [
+        {
+          "type": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        },
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Saturn",
+          "description": "Struck by Saturn via tight square (1\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "Mars": [
+        {
+          "type": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        }
+      ],
+      "Jupiter": [
+        {
+          "type": "Opposition",
+          "malefic": "Mars",
+          "description": "Opposed by Mars. (Within 4\u00b0 orb)",
+          "severity": 9
+        },
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Saturn",
+          "description": "Struck by Saturn via tight square (1\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "Neptune": [
+        {
+          "type": "Opposition",
+          "malefic": "Mars",
+          "description": "Opposed by Mars.",
+          "severity": 8
+        }
+      ],
+      "North_Node": [
+        {
+          "type": "Overcoming",
+          "malefic": "Mars",
+          "description": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        },
+        {
+          "type": "Opposition",
+          "malefic": "Saturn",
+          "description": "Opposed by Saturn. (Within 3\u00b0 orb)",
+          "severity": 9
+        },
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Mars",
+          "description": "Struck by Mars via tight square (2\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "South_Node": [
+        {
+          "type": "Striking with a Ray",
+          "malefic": "Mars",
+          "description": "Struck by Mars via tight square (2\u00b0 orb).",
+          "severity": 8
+        }
+      ]
+    },
+    "team_note": "Trust the energies/people of your Constructive Team; exercise caution with the Destructive Team.",
+    "universal_events": [
+      {
+        "type": "Solar Eclipse",
+        "jd": 2450191.442529276,
+        "longitude": 28.186331008828358,
+        "duration_hours": 2.4000000000000004,
+        "sign": "Aries",
+        "degree": 28.186331008828358
+      },
+      {
+        "type": "Lunar Eclipse",
+        "jd": 2450177.5067755315,
+        "longitude": 194.537194169468,
+        "duration_hours": 3.5892350412905216,
+        "sign": "Libra",
+        "degree": 14.537194169467995
+      }
+    ],
+    "lunar_phase": "Balsamic",
+    "lunar_phase_profile": "The Prophet/The Seed-Man. Introverted, Future-Oriented, Distillation and Release.",
+    "jones_pattern": "Bucket",
+    "dominant_elements": [
+      [
+        "FIRE",
+        0
+      ],
+      [
+        "EARTH",
+        0
+      ],
+      [
+        "AIR",
+        0
+      ],
+      [
+        "WATER",
+        0
+      ]
+    ],
+    "chart_strength_rating": {
+      "score": -62,
+      "mood": "Dreadful",
+      "details": [
+        "Moon is Combust (Burned by Sun) - Critical Weakness",
+        "Ascendant Ruler (Mars) in Aries has Essential Dignity of -4 (x3)",
+        "Benefic Jupiter in 10th House (MC) - Success/Visibility",
+        "Malefic Saturn in 1st House - Obstruction"
+      ]
+    },
+    "universal_causation_audit": [],
+    "hemispheres": {
+      "East": 6,
+      "West": 6,
+      "North": 6,
+      "South": 6
+    },
+    "hemisphere_focus": {
+      "orientation": "Other-Oriented (West)",
+      "visibility": "Private/Subjective (North)"
+    }
+  },
+  "vitality": {
+    "hyleg": "Fortune",
+    "alcocoden": "Mars",
+    "base_years_type": "Minor",
+    "base_years": 15,
+    "total_years": 5.0,
+    "vitality_rating": "Cautionary (Requires strengthening)",
+    "breakdown": [
+      "Base: Minor Years of Mars (15) due to House 11 and dignity -4",
+      "Added 8.0 (Venus Conjunction)",
+      "Added 6.0 (Jupiter Opposition)",
+      "Subtracted 30.0 (Saturn Square)",
+      "Vitality score adjusted to minimum threshold."
+    ]
+  },
+  "medical_analysis": {
+    "constitutional_sign": "Aries",
+    "governed_body_part": "Head, Face, Eyes",
+    "distemper": {
+      "moon_sign": "Aries",
+      "element": "Fire",
+      "excess_humor": "Choleric (Yellow Bile)",
+      "palliative_nature": "Cooling and Moistening (e.g., Barley water, Cucumber)"
+    }
+  },
+  "primary_directions": [
+    {
+      "significator": "Midheaven",
+      "promittor": "Pluto",
+      "aspect": "Trine (Dexter)",
+      "arc": 0.31,
+      "years": 0.31,
+      "date_offset": "0y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Uranus",
+      "aspect": "Sextile (Dexter)",
+      "arc": 1.7,
+      "years": 1.7,
+      "date_offset": "1y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Venus",
+      "aspect": "Square (Sinister)",
+      "arc": 5.08,
+      "years": 5.08,
+      "date_offset": "5y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Conjunction",
+      "arc": 6.29,
+      "years": 6.29,
+      "date_offset": "6y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Jupiter",
+      "aspect": "Square (Dexter)",
+      "arc": 7.82,
+      "years": 7.82,
+      "date_offset": "7y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Neptune",
+      "aspect": "Opposition",
+      "arc": 10.05,
+      "years": 10.05,
+      "date_offset": "10y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mars",
+      "aspect": "Square (Sinister)",
+      "arc": 11.52,
+      "years": 11.52,
+      "date_offset": "11y 6m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Moon",
+      "aspect": "Trine (Sinister)",
+      "arc": 12.19,
+      "years": 12.19,
+      "date_offset": "12y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Pluto",
+      "aspect": "Trine (Sinister)",
+      "arc": 15.78,
+      "years": 15.78,
+      "date_offset": "15y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Uranus",
+      "aspect": "Opposition",
+      "arc": 17.67,
+      "years": 17.67,
+      "date_offset": "17y 7m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Sun",
+      "aspect": "Trine (Sinister)",
+      "arc": 19.49,
+      "years": 19.49,
+      "date_offset": "19y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Neptune",
+      "aspect": "Square (Dexter)",
+      "arc": 23.82,
+      "years": 23.82,
+      "date_offset": "23y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Saturn",
+      "aspect": "Trine (Dexter)",
+      "arc": 23.9,
+      "years": 23.9,
+      "date_offset": "23y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Uranus",
+      "aspect": "Square (Dexter)",
+      "arc": 29.68,
+      "years": 29.68,
+      "date_offset": "29y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Moon",
+      "aspect": "Conjunction",
+      "arc": 31.91,
+      "years": 31.91,
+      "date_offset": "31y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Venus",
+      "aspect": "Sextile (Sinister)",
+      "arc": 33.24,
+      "years": 33.24,
+      "date_offset": "33y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Jupiter",
+      "aspect": "Trine (Dexter)",
+      "arc": 36.13,
+      "years": 36.13,
+      "date_offset": "36y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mars",
+      "aspect": "Sextile (Sinister)",
+      "arc": 40.07,
+      "years": 40.07,
+      "date_offset": "40y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Moon",
+      "aspect": "Square (Sinister)",
+      "arc": 40.79,
+      "years": 40.79,
+      "date_offset": "40y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Sun",
+      "aspect": "Conjunction",
+      "arc": 41.75,
+      "years": 41.75,
+      "date_offset": "41y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mercury",
+      "aspect": "Trine (Sinister)",
+      "arc": 44.72,
+      "years": 44.72,
+      "date_offset": "44y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Sun",
+      "aspect": "Square (Sinister)",
+      "arc": 48.67,
+      "years": 48.67,
+      "date_offset": "48y 7m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Pluto",
+      "aspect": "Square (Sinister)",
+      "arc": 53.3,
+      "years": 53.3,
+      "date_offset": "53y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Neptune",
+      "aspect": "Trine (Dexter)",
+      "arc": 53.36,
+      "years": 53.36,
+      "date_offset": "53y 4m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Pluto",
+      "aspect": "Opposition",
+      "arc": 58.17,
+      "years": 58.17,
+      "date_offset": "58y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Uranus",
+      "aspect": "Trine (Dexter)",
+      "arc": 59.75,
+      "years": 59.75,
+      "date_offset": "59y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Venus",
+      "aspect": "Sextile (Dexter)",
+      "arc": 59.78,
+      "years": 59.78,
+      "date_offset": "59y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Jupiter",
+      "aspect": "Trine (Sinister)",
+      "arc": 63.47,
+      "years": 63.47,
+      "date_offset": "63y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Sextile (Dexter)",
+      "arc": 65.02,
+      "years": 65.02,
+      "date_offset": "65y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mars",
+      "aspect": "Sextile (Dexter)",
+      "arc": 68.44,
+      "years": 68.44,
+      "date_offset": "68y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Moon",
+      "aspect": "Sextile (Sinister)",
+      "arc": 71.83,
+      "years": 71.83,
+      "date_offset": "71y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mercury",
+      "aspect": "Conjunction",
+      "arc": 74.2,
+      "years": 74.2,
+      "date_offset": "74y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mercury",
+      "aspect": "Square (Sinister)",
+      "arc": 76.07,
+      "years": 76.07,
+      "date_offset": "76y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Sun",
+      "aspect": "Sextile (Sinister)",
+      "arc": 80.31,
+      "years": 80.31,
+      "date_offset": "80y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Neptune",
+      "aspect": "Trine (Sinister)",
+      "arc": 84.7,
+      "years": 84.7,
+      "date_offset": "84y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Pluto",
+      "aspect": "Sextile (Sinister)",
+      "arc": 90.41,
+      "years": 90.41,
+      "date_offset": "90y 4m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Uranus",
+      "aspect": "Trine (Sinister)",
+      "arc": 92.28,
+      "years": 92.28,
+      "date_offset": "92y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Venus",
+      "aspect": "Conjunction",
+      "arc": 96.03,
+      "years": 96.03,
+      "date_offset": "96y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Venus",
+      "aspect": "Square (Dexter)",
+      "arc": 96.82,
+      "years": 96.82,
+      "date_offset": "96y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Square (Dexter)",
+      "arc": 97.46,
+      "years": 97.46,
+      "date_offset": "97y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Saturn",
+      "aspect": "Opposition",
+      "arc": 98.44,
+      "years": 98.44,
+      "date_offset": "98y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Jupiter",
+      "aspect": "Opposition",
+      "arc": 99.26,
+      "years": 99.26,
+      "date_offset": "99y 3m",
+      "method": "Placidus/Zodiacal"
+    }
+  ],
+  "primary_direction_distributor": {
+    "type": "Distributor (Term Ruler)",
+    "planet": "Venus",
+    "directed_ascendant_deg": 130.92842337094456,
+    "arc": 29.0,
+    "description": "The Directed Ascendant is at 130.93\u00b0, in the Terms of Venus."
+  },
+  "solar_return": {
+    "sr_asc_in_natal_house": 1,
+    "lord_of_year": {
+      "name": "Mercury",
+      "weight": 0,
+      "details": []
+    },
+    "determinations": [
+      {
+        "planet": "Mercury",
+        "sr_house": 11,
+        "natal_houses_ruled": [],
+        "judgment": "Mercury acts in SR House 11 concerning matters of Natal Houses ."
+      },
+      {
+        "planet": "Venus",
+        "sr_house": 11,
+        "natal_houses_ruled": [],
+        "judgment": "Venus acts in SR House 11 concerning matters of Natal Houses ."
+      },
+      {
+        "planet": "Mars",
+        "sr_house": 2,
+        "natal_houses_ruled": [],
+        "judgment": "Mars acts in SR House 2 concerning matters of Natal Houses ."
+      },
+      {
+        "planet": "Jupiter",
+        "sr_house": 11,
+        "natal_houses_ruled": [],
+        "judgment": "Jupiter acts in SR House 11 concerning matters of Natal Houses ."
+      },
+      {
+        "planet": "Saturn",
+        "sr_house": 8,
+        "natal_houses_ruled": [],
+        "judgment": "Saturn acts in SR House 8 concerning matters of Natal Houses ."
+      },
+      {
+        "planet": "Uranus",
+        "sr_house": 10,
+        "natal_houses_ruled": [],
+        "judgment": "Uranus acts in SR House 10 concerning matters of Natal Houses ."
+      },
+      {
+        "planet": "Neptune",
+        "sr_house": 8,
+        "natal_houses_ruled": [],
+        "judgment": "Neptune acts in SR House 8 concerning matters of Natal Houses ."
+      },
+      {
+        "planet": "Pluto",
+        "sr_house": 5,
+        "natal_houses_ruled": [],
+        "judgment": "Pluto acts in SR House 5 concerning matters of Natal Houses ."
+      }
+    ],
+    "morin_axiom": "The Solar Return cannot produce what the Nativity does not promise.",
+    "year": 2025
+  },
+  "critical_days_infancy": [
+    {
+      "label": "Indication (Semi-Square)",
+      "jd": 2450312.852378685,
+      "date": "1996-08-17",
+      "days_from_onset": 3.8,
+      "severity": 4
+    },
+    {
+      "label": "First Crisis (Square)",
+      "jd": 2450316.438374143,
+      "date": "1996-08-20",
+      "days_from_onset": 7.3,
+      "severity": 8
+    },
+    {
+      "label": "Indication (Semi-Square)",
+      "jd": 2450319.7267981903,
+      "date": "1996-08-24",
+      "days_from_onset": 10.6,
+      "severity": 4
+    },
+    {
+      "label": "Full Crisis (Opposition)",
+      "jd": 2450322.7598830992,
+      "date": "1996-08-27",
+      "days_from_onset": 13.7,
+      "severity": 10
+    },
+    {
+      "label": "Indication (Semi-Square)",
+      "jd": 2450325.7645219024,
+      "date": "1996-08-30",
+      "days_from_onset": 16.7,
+      "severity": 4
+    }
+  ],
+  "soul_guardian": {
+    "almuten": "Sun",
+    "term_ruler": "Mercury",
+    "job_description": "You are ruled by a Sovereign Sun in the Terms of Mercury\u2014your soul's function is Sovereignty and Identity through Precision and Communication.",
+    "scores": {
+      "Sun": {
+        "essential_from_points": 31,
+        "accidental_score": -1,
+        "house_points": 7,
+        "total": 37,
+        "house": 12
+      },
+      "Moon": {
+        "essential_from_points": 0,
+        "accidental_score": -6,
+        "house_points": 7,
+        "total": 1,
+        "house": 12
+      },
+      "Mercury": {
+        "essential_from_points": 2,
+        "accidental_score": 11,
+        "house_points": 12,
+        "total": 25,
+        "house": 1
+      },
+      "Venus": {
+        "essential_from_points": 9,
+        "accidental_score": 1,
+        "house_points": 10,
+        "total": 20,
+        "house": 11
+      },
+      "Mars": {
+        "essential_from_points": 10,
+        "accidental_score": 7,
+        "house_points": 10,
+        "total": 27,
+        "house": 11
+      },
+      "Jupiter": {
+        "essential_from_points": 8,
+        "accidental_score": -2,
+        "house_points": 9,
+        "total": 15,
+        "house": 5
+      },
+      "Saturn": {
+        "essential_from_points": 3,
+        "accidental_score": 0,
+        "house_points": 9,
+        "total": 12,
+        "house": 8
+      }
+    },
+    "total_score": 37,
+    "prenatal_syzygy_lon": 127.53397667292568
+  },
+  "planets": [
+    {
+      "planet": "Sun",
+      "sign": "Leo",
+      "longitude": 141.09660888669535,
+      "sect_status": "Hayz",
+      "dignity_score": 9,
+      "dignity_details": [
+        "Domicile (+5)",
+        "Triplicity (Day) (+3)",
+        "Monomoiria (+1, Ruler: Sun)"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Sun",
+            "night": "Jupiter",
+            "participant": "Saturn",
+            "planet_is_ruler": true
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Mercury",
+            "limit": 24
+          },
+          "ptolemaic": {
+            "ruler": "Mercury",
+            "limit": 25
+          }
+        }
+      },
+      "power_label": "Sovereign (Resourceful)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Sect/Hayz/Halb",
+          "effect": "In Hayz (Sect, Horizon, and Sign match)"
+        },
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Heart, spine, back, circulation. Risk of Heart disease, spinal issues, blood pressure"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Moon",
+          "effect": "",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Pluto",
+          "effect": "MALIFIC SIEGE: Hard aspect from Pluto (Destructive). Creates destruction, conflict, or failure.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "\"The Sun... Rules: Leo.\" 15 \"The Sun... indicates authority over the masses, the father, the master.\" 13",
+      "house_number": 12,
+      "house_delineation_text": "Vitality obscured, hidden enemies, success in seclusion. (Valens/Firmicus)",
+      "accidental_score": -1,
+      "accidental_details": [
+        "Cadent House (12) (+1)",
+        "Slower than average speed (-2, 0.9607 < 0.9833)"
+      ],
+      "performance_index": 0.7,
+      "medical_region": "Heart, spine, back, circulation",
+      "medical_pathology": "Heart disease, spinal issues, blood pressure"
+    },
+    {
+      "planet": "Moon",
+      "sign": "Leo",
+      "longitude": 133.2463662716776,
+      "sect_status": "None",
+      "dignity_score": 0,
+      "dignity_details": [
+        "Monomoiria Ruler: Mars"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Sun",
+            "night": "Jupiter",
+            "participant": "Saturn",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Saturn",
+            "limit": 18
+          },
+          "ptolemaic": {
+            "ruler": "Saturn",
+            "limit": 19
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "COMBUST",
+      "impacts": [
+        {
+          "cause": "Combustion",
+          "effect": "NULL_RESULT: Planet is burned by the Sun."
+        },
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Heart, spine, back, circulation. Risk of Heart disease, spinal issues, blood pressure"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Sun",
+          "effect": "",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Trine w/ Saturn",
+          "effect": "FLOW: Easy aspect from Saturn. Structural support and regulated energy.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "Proud, demands attention. 'The Queen.' The native has a strong constitution but a fragile ego.",
+      "house_number": 12,
+      "house_delineation_text": "Sorrow, hidden enemies, or self-undoing. The native may feel isolated or confined. (Abu Ma'shar context).",
+      "accidental_score": -6,
+      "accidental_details": [
+        "Cadent House (12) (+1)",
+        "Slower than average speed (-2, 11.8623 < 13.1764)",
+        "Combust (-5)"
+      ],
+      "performance_index": 0.26,
+      "medical_region": "Heart, spine, back, circulation",
+      "medical_pathology": "Heart disease, spinal issues, blood pressure"
+    },
+    {
+      "planet": "Mercury",
+      "sign": "Virgo",
+      "longitude": 167.18264232712312,
+      "sect_status": "None",
+      "dignity_score": 9,
+      "dignity_details": [
+        "Domicile (+5)",
+        "Exaltation (+4)",
+        "Monomoiria Ruler: Jupiter"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Venus",
+            "night": "Moon",
+            "participant": "Mars",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Jupiter",
+            "limit": 21
+          },
+          "ptolemaic": {
+            "ruler": "Jupiter",
+            "limit": 18
+          }
+        }
+      },
+      "power_label": "Imperial (Unstoppable)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Abdomen, intestines, pancreas, spleen. Risk of Digestive disorders, intestinal issues"
+        },
+        {
+          "cause": "Bonatti Consideration 141",
+          "effect": "PERFECTION WITHOUT EFFORT: Significator in the Ascendant. High capacity for manifestation."
+        },
+        {
+          "cause": "Aspect: Sextile w/ Mars",
+          "effect": "MITIGATED THREAT: Easy aspect from Mars. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "\"Mercury rules Gemini and Virgo.\" 15 \"Mercury in Virgo... is in his Exaltation and Domicile.\" 28 Condition: Peregrine.",
+      "house_number": 1,
+      "house_delineation_text": "Mercury in the Ascendant... signifies the education of children... and is the giver of foresight and intelligence.\" 13",
+      "accidental_score": 11,
+      "accidental_details": [
+        "Angular House (1) (+5)",
+        "Faster than average speed (+2, 1.2620 > 0.9833)",
+        "Inferior Planet Occidental of Sun (+2)",
+        "Planetary Joy in 1th House (+2)"
+      ],
+      "performance_index": 0.9,
+      "medical_region": "Abdomen, intestines, pancreas, spleen",
+      "medical_pathology": "Digestive disorders, intestinal issues"
+    },
+    {
+      "planet": "Venus",
+      "sign": "Cancer",
+      "longitude": 95.53955767031555,
+      "sect_status": "None",
+      "dignity_score": 5,
+      "dignity_details": [
+        "Triplicity (Day) (+3)",
+        "Face (+1)",
+        "Monomoiria (+1, Ruler: Venus)"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Venus",
+            "night": "Mars",
+            "participant": "Moon",
+            "planet_is_ruler": true
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Mars",
+            "limit": 7
+          },
+          "ptolemaic": {
+            "ruler": "Mars",
+            "limit": 6
+          }
+        }
+      },
+      "power_label": "Stable (Functional)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Chest, stomach, breasts, diaphragm, lymphatic system. Risk of Dyspepsia, gastric ulcers, lymphatic stasis"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Mars",
+          "effect": "Afflicted by conjunction with Mars. Energy is oppressed or inflamed.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Jupiter",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Saturn",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "\"Venus in Cancer... more likely to be married a few times and be promiscuous.\" 24",
+      "house_number": 11,
+      "house_delineation_text": "Venus in the eleventh house gives friends who are artistic or women.\" Success through social connections. The native is \"socially graceful\".",
+      "accidental_score": 1,
+      "accidental_details": [
+        "Succedent House (11) (+3)",
+        "Slower than average speed (-2, 0.9054 < 1.2000)"
+      ],
+      "performance_index": 0.58,
+      "medical_region": "Chest, stomach, breasts, diaphragm, lymphatic system",
+      "medical_pathology": "Dyspepsia, gastric ulcers, lymphatic stasis"
+    },
+    {
+      "planet": "Mars",
+      "sign": "Cancer",
+      "longitude": 102.51972180857777,
+      "sect_status": "None",
+      "dignity_score": -4,
+      "dignity_details": [
+        "Fall (-4)",
+        "Monomoiria Ruler: Venus"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Venus",
+            "night": "Mars",
+            "participant": "Moon",
+            "planet_is_ruler": true
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Venus",
+            "limit": 13
+          },
+          "ptolemaic": {
+            "ruler": "Jupiter",
+            "limit": 13
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Clashing Dignity",
+          "effect": "An 'Elevated Scoundrel': The planet is inherently weak/malefic but occupies a position of accidental power. It may act boldly but with poor judgment.",
+          "rule": "Traditional hierarchy of Essential vs Accidental performance."
+        },
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Chest, stomach, breasts, diaphragm, lymphatic system. Risk of Dyspepsia, gastric ulcers, lymphatic stasis"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Mercury",
+          "effect": "MITIGATED THREAT: Easy aspect from Mars. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Conjunction w/ Venus",
+          "effect": "Afflicted by conjunction with Mars. Energy is oppressed or inflamed.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Jupiter",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Saturn",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "\"Mars has his fall in Cancer.\" 12 \"Mars in Cancer... apt to scandal and drunkenness.\" [Lilly General Context]. \"The presence, in the sign of Cancer, of al-qahh\u0101r\u0101n... produces earthquakes.\" 14 Condition: Peregrine.",
+      "house_number": 11,
+      "house_delineation_text": "\"Mars in the eleventh house causes strife among friends.\" Friends become enemies. It indicates conflict within groups or associations.",
+      "accidental_score": 7,
+      "accidental_details": [
+        "Succedent House (11) (+3)",
+        "Faster than average speed (+2, 0.6559 > 0.5240)",
+        "Superior Planet Oriental of Sun (+2)"
+      ],
+      "performance_index": 0.31,
+      "medical_region": "Chest, stomach, breasts, diaphragm, lymphatic system",
+      "medical_pathology": "Dyspepsia, gastric ulcers, lymphatic stasis"
+    },
+    {
+      "planet": "Jupiter",
+      "sign": "Capricorn",
+      "longitude": 278.50838961664203,
+      "sect_status": "In Sect",
+      "dignity_score": 0,
+      "dignity_details": [
+        "Fall (-4)",
+        "Term (Egyptian) (+2)",
+        "Face (+1)",
+        "Monomoiria (+1, Ruler: Jupiter)"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Venus",
+            "night": "Moon",
+            "participant": "Mars",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Jupiter",
+            "limit": 14
+          },
+          "ptolemaic": {
+            "ruler": "Mercury",
+            "limit": 12
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Sect/Hayz/Halb",
+          "effect": "Matches chart sect only"
+        },
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Knees, joints, bones, teeth, skin. Risk of Arthritis, bone density issues, skin ailments"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Venus",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Opposition w/ Mars",
+          "effect": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Saturn",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "\"Jupiter in Capricorn [is in] his Fall.\" 12 \"Jupiter in Capricorn... signifies the tapeinoma [depression/fall].\" 19 Condition: Peregrine. Dorotheus, Carmen 18",
+      "house_number": 5,
+      "house_delineation_text": "Jupiter in the fifth house promises happiness from children and great joy.\" The native will be honored through their offspring. It also indicates luck in \"finding things\" and general prosperity (speculation).",
+      "accidental_score": -2,
+      "accidental_details": [
+        "Succedent House (5) (+3)",
+        "Retrograde (-5)"
+      ],
+      "performance_index": 0.33,
+      "medical_region": "Knees, joints, bones, teeth, skin",
+      "medical_pathology": "Arthritis, bone density issues, skin ailments"
+    },
+    {
+      "planet": "Saturn",
+      "sign": "Aries",
+      "longitude": 6.85287842536086,
+      "sect_status": "Hayz",
+      "dignity_score": -3,
+      "dignity_details": [
+        "Fall (-4)",
+        "Triplicity (Participant) (+1)",
+        "Monomoiria Ruler: Jupiter"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Sun",
+            "night": "Jupiter",
+            "participant": "Saturn",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Venus",
+            "limit": 12
+          },
+          "ptolemaic": {
+            "ruler": "Venus",
+            "limit": 14
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Aries Ingress 1996",
+          "effect": "RANK 4 OVERRIDE: Planet is in the sign of the World's New Year. Natal strength is secondary to Mundane shift.",
+          "rule": "Mundane Rank 4 > Natal Particulars"
+        },
+        {
+          "cause": "Sect/Hayz/Halb",
+          "effect": "In Hayz (Sect, Horizon, and Sign match)"
+        },
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Head, face, brain, eyes, teeth. Risk of Headaches, fevers, eye issues"
+        },
+        {
+          "cause": "Aspect: Trine w/ Moon",
+          "effect": "FLOW: Easy aspect from Saturn. Structural support and regulated energy.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Venus",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Mars",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Square w/ Jupiter",
+          "effect": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Uranus",
+          "effect": "MITIGATED THREAT: Easy aspect from Uranus. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Trine w/ Pluto",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "\"Saturn in 1 11 Aries... is in his Fall.\" 9 \"Saturn in Aries, ascending, means in some cases the state of the body, and in others, the general working of the soul... or possessions, and sometimes can mean friends... or the quality of one's death.\" 10 \"Now Aries indicates that he is skillful, with much hair, of good stature, his gaze directed at the earth... with foul speech.\" 11 (Note: Dorotheus context implies Saturnian modification of Aries). Condition: Peregrine.",
+      "house_number": 8,
+      "house_delineation_text": "\"The worst places are the Dorotheus, Carmen 18 6th and 12th, while the 8th... are moderately bad.\" 18",
+      "accidental_score": 0,
+      "accidental_details": [
+        "Succedent House (8) (+3)",
+        "Retrograde (-5)",
+        "Superior Planet Oriental of Sun (+2)"
+      ],
+      "performance_index": 0.24,
+      "medical_region": "Head, face, brain, eyes, teeth",
+      "medical_pathology": "Headaches, fevers, eye issues"
+    },
+    {
+      "planet": "Uranus",
+      "sign": "Aquarius",
+      "longitude": 301.8529594538553,
+      "sect_status": "None",
+      "dignity_score": 0,
+      "dignity_details": [
+        "Monomoiria Ruler: Jupiter"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Saturn",
+            "night": "Mercury",
+            "participant": "Jupiter",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Mercury",
+            "limit": 7
+          },
+          "ptolemaic": {
+            "ruler": "Saturn",
+            "limit": 6
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Shins, calves, ankles, circulatory system. Risk of Lower leg issues, circulatory sluggishness"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Saturn",
+          "effect": "MITIGATED THREAT: Easy aspect from Uranus. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Pluto",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "Delineation not found in Codex.",
+      "house_number": 5,
+      "house_delineation_text": "Delineation not found for House placement.",
+      "accidental_score": -2,
+      "accidental_details": [
+        "Succedent House (5) (+3)",
+        "Retrograde (-5)"
+      ],
+      "performance_index": 0.33,
+      "medical_region": "Shins, calves, ankles, circulatory system",
+      "medical_pathology": "Lower leg issues, circulatory sluggishness"
+    },
+    {
+      "planet": "Neptune",
+      "sign": "Capricorn",
+      "longitude": 295.6936230785022,
+      "sect_status": "None",
+      "dignity_score": 0,
+      "dignity_details": [
+        "Monomoiria Ruler: Venus"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Venus",
+            "night": "Moon",
+            "participant": "Mars",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Saturn",
+            "limit": 26
+          },
+          "ptolemaic": {
+            "ruler": "Saturn",
+            "limit": 30
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Knees, joints, bones, teeth, skin. Risk of Arthritis, bone density issues, skin ailments"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Pluto",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "Delineation not found in Codex.",
+      "house_number": 5,
+      "house_delineation_text": "Delineation not found for House placement.",
+      "accidental_score": -2,
+      "accidental_details": [
+        "Succedent House (5) (+3)",
+        "Retrograde (-5)"
+      ],
+      "performance_index": 0.33,
+      "medical_region": "Knees, joints, bones, teeth, skin",
+      "medical_pathology": "Arthritis, bone density issues, skin ailments"
+    },
+    {
+      "planet": "Pluto",
+      "sign": "Sagittarius",
+      "longitude": 240.33650819932626,
+      "sect_status": "None",
+      "dignity_score": 0,
+      "dignity_details": [
+        "Monomoiria Ruler: Jupiter"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Sun",
+            "night": "Jupiter",
+            "participant": "Saturn",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Jupiter",
+            "limit": 12
+          },
+          "ptolemaic": {
+            "ruler": "Jupiter",
+            "limit": 8
+          }
+        }
+      },
+      "power_label": "Stable (Functional)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Liver, hips, thighs, sciatic nerve. Risk of Liver disorders, hip issues, sciatica"
+        },
+        {
+          "cause": "Aspect: Square w/ Sun",
+          "effect": "MALIFIC SIEGE: Hard aspect from Pluto (Destructive). Creates destruction, conflict, or failure.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Trine w/ Saturn",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Uranus",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        },
+        {
+          "cause": "Aspect: Sextile w/ Neptune",
+          "effect": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable.",
+          "rule": "Modification of Rays by Sect (Binder1/Traditional)"
+        }
+      ],
+      "delineation_text": "Delineation not found in Codex.",
+      "house_number": 4,
+      "house_delineation_text": "Delineation not found for House placement.",
+      "accidental_score": 11,
+      "accidental_details": [
+        "Angular House (4) (+5)",
+        "Station Direct (Estimated) (+4)",
+        "Faster than average speed (+2, 0.0017 > 0.0000)"
+      ],
+      "performance_index": 0.54,
+      "medical_region": "Liver, hips, thighs, sciatic nerve",
+      "medical_pathology": "Liver disorders, hip issues, sciatica"
+    },
+    {
+      "planet": "North_Node",
+      "sign": "Libra",
+      "longitude": 190.4915678360813,
+      "sect_status": "None",
+      "dignity_score": 0,
+      "dignity_details": [
+        "Monomoiria Ruler: Saturn"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Saturn",
+            "night": "Mercury",
+            "participant": "Jupiter",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Mercury",
+            "limit": 14
+          },
+          "ptolemaic": {
+            "ruler": "Venus",
+            "limit": 11
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Kidneys, bladder, lower back, veins. Risk of Renal issues, skin disorders, lumbar pain"
+        }
+      ],
+      "delineation_text": "Delineation not found in Codex.",
+      "house_number": 2,
+      "house_delineation_text": "Delineation not found for House placement.",
+      "accidental_score": -2,
+      "accidental_details": [
+        "Succedent House (2) (+3)",
+        "Retrograde (-5)"
+      ],
+      "performance_index": 0.33,
+      "medical_region": "Kidneys, bladder, lower back, veins",
+      "medical_pathology": "Renal issues, skin disorders, lumbar pain"
+    },
+    {
+      "planet": "South_Node",
+      "sign": "Aries",
+      "longitude": 10.491567836081288,
+      "sect_status": "None",
+      "dignity_score": 0,
+      "dignity_details": [
+        "Monomoiria Ruler: Mercury"
+      ],
+      "dignity_conflicts": [],
+      "dignity_variants": {
+        "triplicity": {
+          "used": "Dorothean",
+          "sect": "Day",
+          "dorothean": {
+            "day": "Sun",
+            "night": "Jupiter",
+            "participant": "Saturn",
+            "planet_is_ruler": false
+          },
+          "ptolemaic": {
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
+          }
+        },
+        "terms": {
+          "used": "Egyptian",
+          "egyptian": {
+            "ruler": "Venus",
+            "limit": 12
+          },
+          "ptolemaic": {
+            "ruler": "Venus",
+            "limit": 14
+          }
+        }
+      },
+      "power_label": "Vagabond (Corrupt/Empty)",
+      "solar_status": "FREE",
+      "impacts": [
+        {
+          "cause": "Aries Ingress 1996",
+          "effect": "RANK 4 OVERRIDE: Planet is in the sign of the World's New Year. Natal strength is secondary to Mundane shift.",
+          "rule": "Mundane Rank 4 > Natal Particulars"
+        },
+        {
+          "cause": "Melothesia",
+          "effect": "Anatomical Governance: Head, face, brain, eyes, teeth. Risk of Headaches, fevers, eye issues"
+        }
+      ],
+      "delineation_text": "Delineation not found in Codex.",
+      "house_number": 8,
+      "house_delineation_text": "Delineation not found for House placement.",
+      "accidental_score": -2,
+      "accidental_details": [
+        "Succedent House (8) (+3)",
+        "Retrograde (-5)"
+      ],
+      "performance_index": 0.33,
+      "medical_region": "Head, face, brain, eyes, teeth",
+      "medical_pathology": "Headaches, fevers, eye issues"
+    }
+  ],
+  "lots": {
+    "Fortune": 352.14975738498225,
+    "Spirit": 7.8502426150177484,
+    "Eros": 15.700485230035497,
+    "Necessity": 344.2995147699645,
+    "Victory": 270.6581470016243,
+    "Father": 225.75626953866552,
+    "Mother": 37.706808601362056,
+    "Courage": 249.63003557640448,
+    "Nemesis": 345.2968789596214,
+    "Debt": 199.67023609823775,
+    "Theft": 295.3370794814547,
+    "Accusation": 95.66684338321691
+  },
+  "stars": [],
+  "fixed_star_meta": {
+    "catalog": "Swiss Ephemeris fixed star catalog (swe.fixstar) when available; fallback to traditional longitudes.",
+    "epoch": "2025",
+    "precession": "Swiss Ephemeris JD positions when available; fallback linear precession of 1\u00b0 per 72 years from 2025 epoch."
+  },
+  "nodes": [
+    
