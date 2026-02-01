@@ -8,6 +8,7 @@ reportlab
 geopy
 timezonefinder
 pytz
+passlib[bcrypt]
 
 python-multipart
 email-validator

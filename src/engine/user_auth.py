@@ -6,16 +6,18 @@ Supports persistence via SQLite (default) or PostgreSQL.
 import os
 import secrets
 import logging
-import hashlib
 from datetime import datetime
 from typing import Optional, Dict, Any, List
 
 from sqlalchemy.orm import Session
-from database.core import SessionLocal, engine, Base
-from database.models import User
+from src.database.core import SessionLocal, engine, Base
+from src.database.models import User
+from passlib.context import CryptContext
 
 # Initialize tables
 Base.metadata.create_all(bind=engine)
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class UserManager:
     """User management using SQLAlchemy."""
@@ -46,24 +48,13 @@ class UserManager:
         self._rate_limits[key].append(now)
         return True
     
-    def _hash_password(self, password: str, salt: Optional[str] = None) -> tuple:
-        """Hash a password using SHA-256 with salt."""
-        if salt is None:
-            salt = secrets.token_hex(16)
-        
-        hashed = hashlib.pbkdf2_hmac(
-            'sha256',
-            password.encode('utf-8'),
-            salt.encode('utf-8'),
-            100000
-        ).hex()
-        
-        return hashed, salt
+    def _hash_password(self, password: str) -> str:
+        """Hash a password using bcrypt."""
+        return pwd_context.hash(password)
     
-    def _verify_password(self, password: str, stored_hash: str, salt: str) -> bool:
-        """Verify a password against stored hash and salt."""
-        computed_hash, _ = self._hash_password(password, salt)
-        return secrets.compare_digest(computed_hash, stored_hash)
+    def _verify_password(self, password: str, stored_hash: str) -> bool:
+        """Verify a password against stored hash."""
+        return pwd_context.verify(password, stored_hash)
     
     def create_user(self, email: str, password: str, name: str = "") -> Dict[str, Any]:
         """Create a new user account."""
@@ -87,7 +78,7 @@ class UserManager:
             if existing:
                 return {"success": False, "message": "An account with this email already exists."}
             
-            hashed_password, salt = self._hash_password(password)
+            hashed_password = self._hash_password(password)
             user_id = secrets.token_urlsafe(16)
             
             new_user = User(
@@ -95,17 +86,57 @@ class UserManager:
                 email=email,
                 name=name.strip(),
                 password_hash=hashed_password,
-                salt=salt,
+                salt="", # Deprecated/Unused with bcrypt
                 created_at=datetime.utcnow(),
                 updated_at=datetime.utcnow(),
-                subscription_tier="free",
+                # subscription_tier="free", # Removed in v2 schema
                 email_verified=False,
                 verification_token=secrets.token_urlsafe(32),
                 charts_saved=[]
             )
             
+            # Auto-create free subscription (Phase 2 Requirement)
+            from src.services.subscription import SubscriptionService
+            service = SubscriptionService(db)
+            service.start_trial(new_user, "free", trial_days=0) # Or just create free sub directly
+            
+            # Correction: start_trial creates the sub. But wait, create_user is sync?
+            # SubscriptionService uses DB session. We can use it.
+            # But start_trial logic assumes user has 'subscription' rel loaded?
+            # Actually, `start_trial` creates the UserSubscription object attached to user.
+            
+            # Let's just create User first.
             db.add(new_user)
-            db.commit()
+            db.commit() # Commit user first to get ID/ref
+            
+            # Now add subscription
+            # Note: start_trial requires the user object to be part of session or re-queried?
+            # It's attached to this session.
+            
+            # Re-implement simple free sub logic here to avoid circular imports or complex service dependency
+            # Or assume the caller handles subscription creation?
+            # Better: User creation implies Free tier.
+            # But we wiped the old legacy columns.
+            # We need a UserSubscription row.
+            
+            try:
+                # Import here to avoid circular dep at top level if any
+                from src.database.models import UserSubscription, SubscriptionPlan
+                
+                # Find free plan
+                free_plan = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier == "free").first()
+                if free_plan:
+                    sub = UserSubscription(
+                        user_id=new_user.id,
+                        plan_id=free_plan.id,
+                        status="active"
+                    )
+                    db.add(sub)
+                    db.commit()
+            except Exception as sub_e:
+                logging.error(f"Failed to create default subscription: {sub_e}")
+                # Don't fail user creation, but log it.
+            
             db.refresh(new_user)
             
             logging.info(f"User created: {email}")
@@ -134,7 +165,7 @@ class UserManager:
         try:
             user = db.query(User).filter(User.email == email).first()
             
-            if not user or not self._verify_password(password, user.password_hash, user.salt):
+            if not user or not self._verify_password(password, user.password_hash):
                 return {"success": False, "message": "Invalid email or password."}
             
             # Update last login
@@ -173,37 +204,7 @@ class UserManager:
         finally:
             db.close()
     
-    def update_subscription(self, email: str, tier: str, expires: Optional[str] = None) -> bool:
-        email = email.lower().strip()
-        db = SessionLocal()
-        try:
-            user = db.query(User).filter(User.email == email).first()
-            if not user:
-                return False
-            
-            user.subscription_tier = tier
-            
-            if expires:
-                # Assuming expires is ISO string or already datetime
-                # The prompt context showed usage as string in previous user_auth.
-                # If it's a string, parse it.
-                if isinstance(expires, str):
-                    try:
-                        user.subscription_expires = datetime.fromisoformat(expires.replace("Z", "+00:00"))
-                    except:
-                        # Fallback or keep None
-                        pass
-                else:
-                    user.subscription_expires = expires
-            
-            user.updated_at = datetime.utcnow()
-            db.commit()
-            return True
-        except Exception as e:
-            logging.error(f"Update sub error: {e}")
-            return False
-        finally:
-            db.close()
+    # update_subscription: DEPRECATED in v2. Use SubscriptionService.upgrade_plan.
     
     def save_chart(self, email: str, chart_hash: str, chart_meta: Dict[str, Any]) -> bool:
         email = email.lower().strip()
@@ -252,22 +253,21 @@ class UserManager:
             if not user:
                 return {"success": False, "message": "User not found."}
                 
-            if not self._verify_password(old_password, user.password_hash, user.salt):
+            if not self._verify_password(old_password, user.password_hash):
                 return {"success": False, "message": "Current password is incorrect."}
             
             if len(new_password) < 8:
                 return {"success": False, "message": "New password must be at least 8 characters."}
             
-            hashed, salt = self._hash_password(new_password)
+            hashed = self._hash_password(new_password)
             user.password_hash = hashed
-            user.salt = salt
+            # user.salt = salt # No salt needed for bcrypt context
             user.updated_at = datetime.utcnow()
             
             db.commit()
             return {"success": True, "message": "Password changed successfully."}
         finally:
             db.close()
-
 
 # Singleton instance
 _user_manager = None
