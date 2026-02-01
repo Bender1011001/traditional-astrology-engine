@@ -69,7 +69,7 @@
 - `glossary.json` — Traditional astrological terms
 
 ## Key Files
-- `src/api.py` — Entry point for the web server (Documentation at /docs).
+- `src/app.py` — Entry point for the web server (Documentation at /docs).
 - `src/static/basic.js` — Frontend logic including Paywall & Checkout.
 - `src/static/success.html` — Payment success redirection handler.
 - `LICENSE` — MIT License.
