@@ -116,6 +116,7 @@
 | Console.error in Prod | JS errors visible to users | Silenced non-critical console outputs |
 | Bare `except:` clauses | Catches all exceptions including system exits | Changed to `except Exception:` for safer handling |
 | Stub Login/Register | Pages showed "coming soon" | Implemented full auth system with user_auth.py |
+| Missing Function NameError | `_log_event` called but not defined in `api.py` | Restored missing helper function |
 
 
 ## Anti-Patterns (DO NOT)

@@ -141,6 +141,37 @@ def _append_jsonl(filename: str, record: dict) -> None:
         # Logging must never break the API.
         pass
 
+def _log_event(event_type: str, payload: dict, request: Request, session_id: str = None, ts: str = None):
+    """
+    Helper to log business events via ActivityLogger.
+    """
+    client_ip = request.client.host if request.client else "unknown"
+    
+    # Try to extract user ID from token if present
+    user_id = "guest"
+    auth_header = request.headers.get("Authorization")
+    if auth_header and auth_header.startswith("Bearer "):
+        try:
+            token = auth_header.split(" ")[1]
+            token_payload = validate_token(token)
+            if token_payload and "d" in token_payload and "user_id" in token_payload["d"]:
+                user_id = token_payload["d"]["user_id"]
+        except:
+            pass
+            
+    details = payload.copy()
+    if session_id:
+        details["session_id"] = session_id
+    if ts:
+        details["client_ts"] = ts
+        
+    ActivityLogger.log_activity(
+        event_type,
+        user_id=user_id,
+        ip=client_ip,
+        details=details
+    )
+
 def _build_plain_reading_context(report: dict, advanced_prediction: Optional[dict]) -> str:
     if not report:
         return ""
