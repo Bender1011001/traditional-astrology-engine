@@ -621,6 +621,7 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
                 result["plain_reading"] = plain_reading
         except Exception as pe:
             print(f"Plain Reading Error: {pe}")
+            result["plain_reading"] = f"Analysis Error: {str(pe)}"
             
     except Exception as e:
         print(f"Audit Error: {e}")
