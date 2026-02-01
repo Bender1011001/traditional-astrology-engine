@@ -131,7 +131,7 @@
         {
           "type": "Overcoming",
           "malefic": "Saturn",
-          "description": "Overcome by Saturn in the 10th sign/Superior Square. (Aggravated by Sect)",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
           "severity": 10
         },
         {
@@ -145,21 +145,15 @@
         {
           "type": "Overcoming",
           "malefic": "Saturn",
-          "description": "Overcome by Saturn in the 10th sign/Superior Square. (Aggravated by Sect)",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
           "severity": 10
-        },
-        {
-          "type": "Adherence",
-          "malefic": "Mars",
-          "description": "Adhering (Applying Conjunction) to Mars within 0.0\u00b0.",
-          "severity": 9
         }
       ],
       "Jupiter": [
         {
           "type": "Opposition",
           "malefic": "Mars",
-          "description": "Opposed by Mars (4\u00b0 orb).",
+          "description": "Opposed by Mars. (Within 4\u00b0 orb)",
           "severity": 9
         },
         {
@@ -169,25 +163,25 @@
           "severity": 8
         }
       ],
-      "Saturn": [
+      "Neptune": [
         {
-          "type": "Adherence",
-          "malefic": "Saturn",
-          "description": "Adhering (Applying Conjunction) to Saturn within 0.0\u00b0.",
-          "severity": 9
+          "type": "Opposition",
+          "malefic": "Mars",
+          "description": "Opposed by Mars.",
+          "severity": 8
         }
       ],
       "North_Node": [
         {
           "type": "Overcoming",
           "malefic": "Mars",
-          "description": "Overcome by Mars in the 10th sign/Superior Square. (Aggravated by Sect)",
+          "description": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
           "severity": 10
         },
         {
           "type": "Opposition",
           "malefic": "Saturn",
-          "description": "Opposed by Saturn (3\u00b0 orb).",
+          "description": "Opposed by Saturn. (Within 3\u00b0 orb)",
           "severity": 9
         },
         {
@@ -701,9 +695,9 @@
             "planet_is_ruler": true
           },
           "ptolemaic": {
-            "day": "Sun",
-            "night": "Jupiter",
-            "planet_is_ruler": true
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
           }
         },
         "terms": {
@@ -715,10 +709,6 @@
           "ptolemaic": {
             "ruler": "Mercury",
             "limit": 25
-          },
-          "chaldean": {
-            "ruler": "Saturn",
-            "limit": 26
           }
         }
       },
@@ -777,8 +767,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Sun",
-            "night": "Jupiter",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -791,10 +781,6 @@
           "ptolemaic": {
             "ruler": "Saturn",
             "limit": 19
-          },
-          "chaldean": {
-            "ruler": "Jupiter",
-            "limit": 15
           }
         }
       },
@@ -856,8 +842,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Venus",
-            "night": "Moon",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -870,10 +856,6 @@
           "ptolemaic": {
             "ruler": "Jupiter",
             "limit": 18
-          },
-          "chaldean": {
-            "ruler": "Saturn",
-            "limit": 21
           }
         }
       },
@@ -931,9 +913,9 @@
             "planet_is_ruler": true
           },
           "ptolemaic": {
-            "day": "Venus",
-            "night": "Mars",
-            "planet_is_ruler": true
+            "day": null,
+            "night": null,
+            "planet_is_ruler": false
           }
         },
         "terms": {
@@ -945,10 +927,6 @@
           "ptolemaic": {
             "ruler": "Mars",
             "limit": 6
-          },
-          "chaldean": {
-            "ruler": "Mercury",
-            "limit": 8
           }
         }
       },
@@ -1006,11 +984,11 @@
             "day": "Venus",
             "night": "Mars",
             "participant": "Moon",
-            "planet_is_ruler": false
+            "planet_is_ruler": true
           },
           "ptolemaic": {
-            "day": "Venus",
-            "night": "Mars",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1023,10 +1001,6 @@
           "ptolemaic": {
             "ruler": "Jupiter",
             "limit": 13
-          },
-          "chaldean": {
-            "ruler": "Mars",
-            "limit": 15
           }
         }
       },
@@ -1100,8 +1074,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Venus",
-            "night": "Moon",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1114,10 +1088,6 @@
           "ptolemaic": {
             "ruler": "Mercury",
             "limit": 12
-          },
-          "chaldean": {
-            "ruler": "Jupiter",
-            "limit": 15
           }
         }
       },
@@ -1180,11 +1150,11 @@
             "day": "Sun",
             "night": "Jupiter",
             "participant": "Saturn",
-            "planet_is_ruler": true
+            "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Sun",
-            "night": "Jupiter",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1197,10 +1167,6 @@
           "ptolemaic": {
             "ruler": "Venus",
             "limit": 14
-          },
-          "chaldean": {
-            "ruler": "Jupiter",
-            "limit": 8
           }
         }
       },
@@ -1285,8 +1251,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Saturn",
-            "night": "Mercury",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1299,10 +1265,6 @@
           "ptolemaic": {
             "ruler": "Saturn",
             "limit": 6
-          },
-          "chaldean": {
-            "ruler": "Jupiter",
-            "limit": 8
           }
         }
       },
@@ -1357,8 +1319,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Venus",
-            "night": "Moon",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1371,10 +1333,6 @@
           "ptolemaic": {
             "ruler": "Saturn",
             "limit": 30
-          },
-          "chaldean": {
-            "ruler": "Saturn",
-            "limit": 26
           }
         }
       },
@@ -1424,8 +1382,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Sun",
-            "night": "Jupiter",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1437,10 +1395,6 @@
           },
           "ptolemaic": {
             "ruler": "Jupiter",
-            "limit": 8
-          },
-          "chaldean": {
-            "ruler": "Mercury",
             "limit": 8
           }
         }
@@ -1507,8 +1461,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Saturn",
-            "night": "Mercury",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1521,10 +1475,6 @@
           "ptolemaic": {
             "ruler": "Venus",
             "limit": 11
-          },
-          "chaldean": {
-            "ruler": "Saturn",
-            "limit": 15
           }
         }
       },
@@ -1569,8 +1519,8 @@
             "planet_is_ruler": false
           },
           "ptolemaic": {
-            "day": "Sun",
-            "night": "Jupiter",
+            "day": null,
+            "night": null,
             "planet_is_ruler": false
           }
         },
@@ -1583,10 +1533,6 @@
           "ptolemaic": {
             "ruler": "Venus",
             "limit": 14
-          },
-          "chaldean": {
-            "ruler": "Venus",
-            "limit": 15
           }
         }
       },
@@ -1708,7 +1654,7 @@
       },
       "daily_profection": {
         "formula": "steps = floor((day - 1) / (7/3)); sign = (monthly_index + steps) mod 12",
-        "day": 30,
+        "day": 31,
         "rate_days_per_sign": 2.3333333333333335,
         "steps": 12,
         "monthly_index": 10,
@@ -1718,7 +1664,7 @@
       "epitasis": {
         "formula": "daily_sign == transiting_lord_of_year_sign",
         "transiting_loy_sign": "Pisces",
-        "transiting_loy_longitude": 358.54098336805185,
+        "transiting_loy_longitude": 358.6293116856507,
         "matching": false
       }
     },
@@ -3083,7 +3029,7 @@
   "prediction": {
     "age": 29,
     "month": 1,
-    "day": 30,
+    "day": 31,
     "annual_profection": {
       "sign": "Aquarius",
       "lord_of_year": "Saturn"
@@ -3131,7 +3077,7 @@
       },
       "daily_profection": {
         "formula": "steps = floor((day - 1) / (7/3)); sign = (monthly_index + steps) mod 12",
-        "day": 30,
+        "day": 31,
         "rate_days_per_sign": 2.3333333333333335,
         "steps": 12,
         "monthly_index": 10,
@@ -4471,16 +4417,6 @@
   ],
   "forensic_forecast": [
     {
-      "date": "2026-01-30",
-      "display_date": "Friday, Jan 30",
-      "chronocrator": "Jupiter",
-      "profection_sign": "Pisces",
-      "epitasis": true,
-      "medical": [],
-      "mood": "Standard",
-      "summary": "The 'Jupiter' domain is active. TRANSIT ALERT: High Stakes (Epitasis) enabled."
-    },
-    {
       "date": "2026-01-31",
       "display_date": "Saturday, Jan 31",
       "chronocrator": "Mars",
@@ -4519,6 +4455,16 @@
       "medical": [],
       "mood": "Standard",
       "summary": "The 'Venus' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-04",
+      "display_date": "Wednesday, Feb 04",
+      "chronocrator": "Venus",
+      "profection_sign": "Taurus",
+      "epitasis": false,
+      "medical": [],
+      "mood": "Standard",
+      "summary": "The 'Venus' domain is active. Flow is consistent with the annual cycle."
     }
   ],
   "advanced_prediction": {
@@ -4529,7 +4475,7 @@
       "Major End": "2027-08-13",
       "Sub Start": "2025-10-04",
       "Sub End": "2027-08-13",
-      "Current Age": 29.46
+      "Current Age": 29.47
     },
     "solar_arcs": [
       {
@@ -4546,15 +4492,15 @@
       },
       {
         "planet": "Venus",
-        "longitude": 125.0
+        "longitude": 125.01
       },
       {
         "planet": "Mars",
-        "longitude": 131.98
+        "longitude": 131.99
       },
       {
         "planet": "Jupiter",
-        "longitude": 307.97
+        "longitude": 307.98
       },
       {
         "planet": "Saturn",
@@ -4592,7 +4538,7 @@
         "transit": "Pluto",
         "natal_planet": "Uranus",
         "aspect": "Conjunct",
-        "orb": 1.8
+        "orb": 1.83
       }
     ],
     "muntha": {
@@ -4630,5 +4576,70 @@
       "return_date": "2025-08-13T14:27:03.228183",
       "natal_sun_longitude": 141.09660888669535
     }
-  }
+  },
+  "upcoming_transits_3mo": [
+    {
+      "transit": "Uranus",
+      "natal_planet": "Pluto",
+      "aspect": "Opposition",
+      "orb": 2.87,
+      "approx_date": "2026-02-01"
+    },
+    {
+      "transit": "Pluto",
+      "natal_planet": "Uranus",
+      "aspect": "Conjunct",
+      "orb": 1.86,
+      "approx_date": "2026-02-01"
+    },
+    {
+      "transit": "Jupiter",
+      "natal_planet": "Mars",
+      "aspect": "Conjunct",
+      "orb": 2.87,
+      "approx_date": "2026-02-25"
+    },
+    {
+      "transit": "Saturn",
+      "natal_planet": "Venus",
+      "aspect": "Square",
+      "orb": 2.79,
+      "approx_date": "2026-03-09"
+    },
+    {
+      "transit": "Saturn",
+      "natal_planet": "Saturn",
+      "aspect": "Conjunct",
+      "orb": 2.99,
+      "approx_date": "2026-03-18"
+    },
+    {
+      "transit": "Saturn",
+      "natal_planet": "Jupiter",
+      "aspect": "Square",
+      "orb": 2.77,
+      "approx_date": "2026-04-02"
+    },
+    {
+      "transit": "Neptune",
+      "natal_planet": "Venus",
+      "aspect": "Square",
+      "orb": 2.95,
+      "approx_date": "2026-04-11"
+    },
+    {
+      "transit": "Saturn",
+      "natal_planet": "North_Node",
+      "aspect": "Opposition",
+      "orb": 2.92,
+      "approx_date": "2026-04-17"
+    },
+    {
+      "transit": "Saturn",
+      "natal_planet": "South_Node",
+      "aspect": "Conjunct",
+      "orb": 2.92,
+      "approx_date": "2026-04-17"
+    }
+  ]
 }

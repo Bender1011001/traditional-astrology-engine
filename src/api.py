@@ -408,7 +408,7 @@ class ChartRequest(BaseModel):
     date: str
     time: str
     city: str
-    state: str = ""
+    state: Optional[str] = None
     age: Optional[int] = None
     analysis_date: Optional[str] = None
     house_system: Optional[str] = None

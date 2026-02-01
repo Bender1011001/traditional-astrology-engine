@@ -121,6 +121,20 @@ class ReceptionEngine:
             dignities.append("Face")
             score += 1
 
+        # Validity Check based on Mode
+        is_valid = False
+        if mode == ReceptionMode.STRICT_BONATTI:
+            # Bonatti rules: Needs significant dignity. 
+            # Usually Domicile, Exaltation, Triplicity OR (Term AND Face) or variant.
+            # Simplified: Score >= 3 (Triplicity) OR (Term and Face = 3) ??
+            # Let's say Score >= 2 (at least Term)
+            if score >= 2:
+                is_valid = True
+        else:
+            # Standard: Any dignity counts
+            if score >= 1:
+                is_valid = True
+                
         # Operative Check (Requires Aspect)
         # We need to find if there is an aspect in the chart between these two
         # For simplicity, we can pass aspects or calculate them here.

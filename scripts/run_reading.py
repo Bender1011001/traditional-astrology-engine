@@ -95,7 +95,10 @@ def main():
     
     jd = result["meta"]["julian_day"]
     birth_date = datetime.strptime(date_str, "%Y-%m-%d")
-    now = datetime.now()
+    
+    # User specified "tonight" as 2026-01-31. Using specific time roughly 9pm local
+    now = datetime(2026, 1, 31, 21, 13) 
+    
     age = now.year - birth_date.year - ((now.month, now.day) < (birth_date.month, birth_date.day))
     
     analysis_jd = swe.julday(now.year, now.month, now.day, now.hour + now.minute/60.0)
@@ -123,6 +126,7 @@ def main():
         audit_report["forensic_forecast_error"] = str(e)
     
     print("Calculating Advanced Prediction (Paid)...")
+    predictor = None
     try:
         predictor = AdvancedPredictionEngine(
             chart_model,
@@ -136,6 +140,31 @@ def main():
     except Exception as e:
         print(f"Advanced Prediction Error: {e}")
         audit_report["advanced_prediction_error"] = str(e)
+        
+    # NEW: 3-Month Lookahead
+    print("Calculating 3-Month Transit Lookahead...")
+    try:
+        if predictor:
+            upcoming_events = []
+            seen_events = set()
+            from datetime import timedelta
+            
+            # Check every 3 days for 90 days to catch major aspects entering orb
+            for d in range(1, 91, 3):
+                future_date = now + timedelta(days=d)
+                transits = predictor.get_active_transits(future_date)
+                for t in transits:
+                    # Create a unique key for the event
+                    event_key = f"{t['transit']}-{t['aspect']}-{t['natal_planet']}"
+                    if event_key not in seen_events:
+                        seen_events.add(event_key)
+                        t['approx_date'] = future_date.strftime("%Y-%m-%d")
+                        upcoming_events.append(t)
+            
+            audit_report["upcoming_transits_3mo"] = upcoming_events
+    except Exception as e:
+         print(f"Lookahead Error: {e}")
+         audit_report["upcoming_transits_error"] = str(e)
 
     output_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../reading_output.json'))
     with open(output_path, 'w', encoding='utf-8') as f:
