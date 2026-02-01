@@ -505,6 +505,10 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
 
     try:
         chart_model = result_to_model(result)
+        
+        # Initialize 'ad' to a safe default to prevent UnboundLocalError
+        # (Force Reload)
+        ad = datetime.now()
 
         # Prediction Params
         age = chart_request.age
