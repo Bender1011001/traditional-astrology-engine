@@ -56,3 +56,12 @@ class TelemetryEvent(BaseModel):
     element_id: Optional[str] = None
     url: str
     data: Optional[dict] = None
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    name: Optional[str] = ""

@@ -13,3 +13,6 @@ api_router.include_router(forensic.router, prefix="/forensic", tags=["forensic"]
 api_router.include_router(billing.router, prefix="/billing", tags=["billing"])
 api_router.include_router(telemetry.router, tags=["telemetry"])
 api_router.include_router(developer.router, prefix="/developer", tags=["developer"])
+
+from src.api.v1.endpoints import auth
+api_router.include_router(auth.router, prefix="/auth", tags=["auth"])

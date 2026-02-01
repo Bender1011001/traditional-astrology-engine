@@ -152,6 +152,17 @@
                     <label for="confirmPassword">Confirm Password</label>
                     <input type="password" id="confirmPassword" required>
                 </div>
+
+                <div
+                    style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                    <input type="checkbox" id="termsConsent" required style="margin-top: 0.2rem;">
+                    <label for="termsConsent" style="cursor: pointer; line-height: 1.4;">
+                        I agree to the <a href="terms.html" target="_blank" style="color: var(--gold);">Terms of
+                            Service</a> and <a href="privacy.html" target="_blank" style="color: var(--gold);">Privacy
+                            Policy</a>.
+                    </label>
+                </div>
+
                 <button type="submit">Create Account</button>
             </form>
             <div class="auth-links">
@@ -195,7 +206,7 @@
             submitBtn.disabled = true;
 
             try {
-                const resp = await fetch(apiUrl('/api/auth/register'), {
+                const resp = await fetch(apiUrl('/api/v1/auth/register'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password, name })

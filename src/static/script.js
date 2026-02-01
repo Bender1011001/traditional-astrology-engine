@@ -23,24 +23,13 @@ function updateAuthUI() {
     }
 
     if (token && loginLink) {
-        // Change to Logout
-        let userEmail = "";
-        try {
-            if (userJson) {
-                const user = JSON.parse(userJson);
-                userEmail = user.email ? user.email.split('@')[0].toUpperCase() : "";
-            }
-        } catch (e) { }
-
-        loginLink.textContent = userEmail ? `LOG OUT (${userEmail})` : "LOG OUT";
-        loginLink.href = "#";
-        loginLink.className = "help-btn logout-btn-nav";
-        loginLink.onclick = (e) => {
-            e.preventDefault();
-            logout();
-        };
-    } else if (!token && loginLink && loginLink.classList.contains('logout-btn-nav')) {
-        // Revert to Login (if logout happened in another tab/action)
+        // Change to Dashboard
+        loginLink.textContent = "DASHBOARD";
+        loginLink.href = "profile.html";
+        loginLink.className = "help-btn highlight-btn"; // Make it pop
+        loginLink.onclick = null;
+    } else if (!token && loginLink) {
+        // Revert to Login
         loginLink.textContent = "LOG IN";
         loginLink.href = "login.html";
         loginLink.className = "help-btn";
