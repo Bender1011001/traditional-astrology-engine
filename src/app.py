@@ -113,6 +113,15 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 # --- ROUTER MOUNT ---
 app.include_router(api_router, prefix="/api/v1")
+
+# --- STATIC FILES ---
+from fastapi.staticfiles import StaticFiles
+
+# Mount static files (HTML, CSS, JS)
+# We mount at the root ("/") to serve index.html by default.
+# NOTE: This must be mounted AFTER the API router to ensure API routes take precedence.
+static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 # Temporary legacy support or strict adherence? Plan says "No Legacy Support".
 # But to test locally easily without changing frontend immediately, I might want to mount at /api too?
 # Nah, let's stick to the plan.
