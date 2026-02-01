@@ -186,3 +186,39 @@ MOIETIES = {
     PlanetName.NORTH_NODE: 0.0,
     PlanetName.SOUTH_NODE: 0.0,
 }
+
+PLANET_ESSENCES = {
+    PlanetName.SUN: "Sovereignty and Identity",
+    PlanetName.MOON: "Emotional Synthesis and Adaptation",
+    PlanetName.MERCURY: "Analytical Mastery and Communication",
+    PlanetName.VENUS: "Harmony and Value Creation",
+    PlanetName.MARS: "Strategic Action and Drive",
+    PlanetName.JUPITER: "Expansion and Wisdom",
+    PlanetName.SATURN: "Structural Integrity and Responsibility"
+}
+
+TERM_METHODS = {
+    PlanetName.SUN: "Radiance and Authority",
+    PlanetName.MOON: "Receptivity and Fluency",
+    PlanetName.MERCURY: "Precision and Communication",
+    PlanetName.VENUS: "Grace and Relatability",
+    PlanetName.MARS: "Strategy and Fortitude",
+    PlanetName.JUPITER: "Growth and Principles",
+    PlanetName.SATURN: "Structure and Restraint"
+}
+
+RULE_SOURCE_MAP = {
+    "Bonatti Consideration 5": ["Bonatti, Liber Astronomiae, Consideration 5 (Void of Course)"],
+    "Bonatti Consideration 30": ["Bonatti, Liber Astronomiae, Consideration 30 (Planet at 29°)"],
+    "Bonatti Consideration 141": ["Bonatti, Liber Astronomiae, Consideration 141 (Significator in Ascendant)"],
+    "Via Combusta": ["Traditional doctrine (Lilly, Christian Astrology, p. 115)"],
+    "Combustion": ["Traditional doctrine (Ptolemy, Tetrabiblos I.24; Lilly, CA, p. 113)"],
+    "Besiegement": ["Traditional doctrine (Lilly, Christian Astrology, p. 114)"],
+    "Antiscia": ["Firmicus Maternus, Mathesis II.30", "Lilly, CA, p. 90"],
+    "Melothesia": ["Manilius, Astronomica IV", "Culpeper, English Physician"],
+    "Sect/Hayz/Halb": ["Ptolemy, Tetrabiblos III.3", "Dorotheus, Carmen Astrologicum I.1"],
+    "Universal Overdrive": ["Ptolemy, Tetrabiblos II.1"],
+    "Universal Causation": ["Ptolemy, Tetrabiblos II.8"],
+    "Mundane Rank 4 > Natal Particulars": ["Traditional mundane hierarchy (Ptolemy, Tetrabiblos II.3)"],
+    "Aries Ingress": ["Traditional mundane ingress doctrine (Bonatti, Liber Astronomiae, VIII)"]
+}

@@ -3,7 +3,7 @@ from src.engine.chart_calculator import calculate_chart_data
 from src.engine.logic import perform_forensic_audit
 from src.engine.forensic_forecast import calculate_5_day_forecast
 from src.engine.synastry import SynastryEngine
-# Add other imports as needed
+from src.engine.sovereign_engine import SovereignEngine
 
 async def calculate_chart_async(*args, **kwargs):
     """
@@ -16,6 +16,9 @@ async def perform_forensic_audit_async(*args, **kwargs):
 
 async def calculate_forecast_async(*args, **kwargs):
     return await run_in_threadpool(calculate_5_day_forecast, *args, **kwargs)
+
+async def generate_full_nativity_async(*args, **kwargs):
+    return await run_in_threadpool(SovereignEngine.generate_full_nativity, *args, **kwargs)
 
 class SynastryEngineAsync:
     def __init__(self):

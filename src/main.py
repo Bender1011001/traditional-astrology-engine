@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from engine.models import Planet, PlanetName, Sign, Chart, Sect
 from engine.logic import perform_forensic_audit
 from engine.reference_data import PLANETARY_YEARS
-from database.db_manager import DelineationLibrary
+from src.database.db_manager import DelineationLibrary
 
 def setup_ultimate_verification_chart():
     # 1. SETUP ANGLES for Paran Trigger

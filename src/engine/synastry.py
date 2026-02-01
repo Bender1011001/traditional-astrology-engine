@@ -1,6 +1,6 @@
 from typing import List, Dict, Any, Optional
 from .models import Chart, Planet, PlanetName, LotName, Sect
-from .lots import calculate_lot_position, normalize_degree
+from .lots import calculate_lot_position
 
 class SynastryEngine:
     ORB_SUCCESS = 3.0  # Tight orb for "Structural Fit"

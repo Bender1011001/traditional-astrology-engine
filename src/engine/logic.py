@@ -24,7 +24,7 @@ from .calculations import (
 from .mundane import get_recent_eclipses, check_eclipse_impact, check_universal_causation_dec2025, MundaneEngine
 from .horary import analyze_horary_physics, calculate_antiscia
 from .aspects import AspectEngine, AspectType
-from database.db_manager import DelineationLibrary
+from src.database.db_manager import DelineationLibrary
 from .hyleg import HylegAlcocodenEngine
 from .temperament import TemperamentEngine
 from .mansions import LunarMansionEngine
