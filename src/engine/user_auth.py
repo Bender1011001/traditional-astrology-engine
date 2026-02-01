@@ -113,29 +113,10 @@ class UserManager:
             # Note: start_trial requires the user object to be part of session or re-queried?
             # It's attached to this session.
             
-            # Re-implement simple free sub logic here to avoid circular imports or complex service dependency
-            # Or assume the caller handles subscription creation?
-            # Better: User creation implies Free tier.
-            # But we wiped the old legacy columns.
-            # We need a UserSubscription row.
-            
-            try:
-                # Import here to avoid circular dep at top level if any
-                from src.database.models import UserSubscription, SubscriptionPlan
-                
-                # Find free plan
-                free_plan = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier == "free").first()
-                if free_plan:
-                    sub = UserSubscription(
-                        user_id=new_user.id,
-                        plan_id=free_plan.id,
-                        status="active"
-                    )
-                    db.add(sub)
-                    db.commit()
-            except Exception as sub_e:
-                logging.error(f"Failed to create default subscription: {sub_e}")
-                # Don't fail user creation, but log it.
+            # Subscription is already handled by start_trial (or will be added here properly if needed in future)
+            # The previous code block here caused an IntegrityError by trying to insert a second subscription
+            # for the same user_id. We rely on start_trial or the calling logic to handle this.
+
             
             db.refresh(new_user)
             

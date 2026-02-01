@@ -17,7 +17,10 @@ from .prediction import (
 from .stars import check_fixed_stars, get_fixed_star_meta
 from .nodes import analyze_nodes
 from .dignities import DignityCalculator
-from .calculations import calculate_lunar_phase, calculate_prenatal_syzygy
+from .calculations import (
+    calculate_lunar_phase, calculate_prenatal_syzygy,
+    calculate_solar_status, is_in_via_combusta, is_besieged, is_void_of_course
+)
 from .mundane import get_recent_eclipses, check_eclipse_impact, check_universal_causation_dec2025, MundaneEngine
 from .horary import analyze_horary_physics, calculate_antiscia
 from .aspects import AspectEngine, AspectType
@@ -31,6 +34,10 @@ from .reception import ReceptionEngine, ReceptionMode
 from .rectification import RectificationEngine
 from .kakosis import KakosisEngine
 from .decumbiture import DecumbitureEngine
+from .medical import MedicalAstrology
+from .electional import ElectionalEngine
+from .solar_return import SolarReturnEngine
+from .prediction import calculate_solar_return_jd
 import swisseph as swe
 
 # Initialize Library
@@ -133,26 +140,7 @@ def is_malefic_out_of_sect(planet_name: PlanetName, chart_sect: Sect) -> bool:
     else:
         return planet_name == PlanetName.SATURN
 
-def is_besieged(planet: Planet, chart: Chart) -> bool:
-    mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
-    saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
-    
-    if not mars or not saturn or planet.name in [PlanetName.MARS, PlanetName.SATURN]:
-        return False
-        
-    def get_shortest_arc(p1_lon, p2_lon):
-        diff = p1_lon - p2_lon
-        if diff > 180: diff -= 360
-        if diff < -180: diff += 360
-        return diff
-    
-    dist_mars = get_shortest_arc(planet.longitude, mars.longitude)
-    dist_saturn = get_shortest_arc(planet.longitude, saturn.longitude)
-    
-    # Check if between
-    if (dist_mars * dist_saturn < 0) and (abs(dist_mars) + abs(dist_saturn) < 15):
-        return True
-    return False
+
 
 def generate_soul_guardian_reading(chart: Chart, jd: float) -> Dict:
     """
@@ -188,23 +176,7 @@ def generate_soul_guardian_reading(chart: Chart, jd: float) -> Dict:
         "prenatal_syzygy_lon": san_lon
     }
 
-def calculate_solar_status(planet: Planet, sun: Planet) -> str:
-    diff = abs(planet.longitude - sun.longitude)
-    if diff > 180: diff = 360 - diff
-    
-    if diff < 0.28: # 17 minutes
-        return "CAZIMI"
-    if diff < 8.0:
-        return "COMBUST"
-    if diff < 15.0:
-        return "UNDER_BEAMS"
-    return "FREE"
 
-def is_in_via_combusta(longitude: float) -> bool:
-    """
-    Via Combusta (The Burning Way): 15° Libra to 15° Scorpio (195° to 225°).
-    """
-    return 195.0 <= longitude <= 225.0
 
 def melothesia_check(planet_name: PlanetName, sign: Sign) -> Dict:
     """
@@ -241,40 +213,6 @@ def melothesia_check(planet_name: PlanetName, sign: Sign) -> Dict:
         res["pathology"] = specifics
         
     return res
-
-def is_void_of_course(moon_lon: float, chart_planets: List[Planet]) -> bool:
-    """
-    Bonatti Consideration 5: Void of Course Moon.
-    Simplified: No major aspect before leaving the sign (30° boundary).
-    """
-    moon_sign_idx = int(moon_lon / 30)
-    moon_pos_in_sign = moon_lon % 30
-    dist_to_end = 30 - moon_pos_in_sign
-    
-    major_aspects = [0, 60, 90, 120, 180]
-    
-    for p in chart_planets:
-        if p.name == PlanetName.MOON: continue
-        # Calculate distance to aspect
-        diff = (p.longitude - moon_lon) % 360
-        if diff > 180: diff = 360 - diff # Shortest distance
-        
-        # Check if Moon reaches an aspect with this planet before 30°
-        # This is a bit complex without full motion simulation, but we check if any
-        # planet is within the remaining degrees of the sign in terms of aspect.
-        # Actually, standard VOC is checking if the Moon *completes* any aspect.
-        # If the Moon is at 25 deg and another planet is at 28 deg of another sign,
-        # it will aspect it before leaving.
-        
-        for aspect in major_aspects:
-            # Distance from current moon to the aspect point of planet p
-            # Aspect point = p.longitude - aspect or p.longitude + aspect
-            for sign_mult in [-1, 1]:
-                target_lon = (p.longitude + (sign_mult * aspect)) % 360
-                dist_to_target = (target_lon - moon_lon) % 360
-                if dist_to_target < dist_to_end:
-                    return False # Found an aspect before sign end
-    return True
 
 def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0, speculum_data: Optional[Dict] = None) -> Dict:
     chart_sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
@@ -697,6 +635,75 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 for c in conditions
             ]
 
+    # --- UNIVERSAL INTEGRATION START ---
+    
+    # 1. Medical Astrology (Constitution)
+    asc_sign_idx = int(chart.ascendant / 30) % 12
+    asc_sign = list(Sign)[asc_sign_idx]
+    
+    medical_analysis = {
+        "constitutional_sign": asc_sign.value,
+        "governed_body_part": MedicalAstrology.get_body_part_for_sign(asc_sign),
+        "distemper": DecumbitureEngine.analyze_distemper(asc_sign) # Using Asc as proxy for 'Moon at onset' for natal constitution
+    }
+
+    # 2. Electional (Chart Strength / Rooting)
+    # We evaluate the natal chart as if it were an election to see how "rooted" the native is.
+    electional_engine = ElectionalEngine()
+    chart_strength = electional_engine.evaluate_chart(chart, activity="Life Root")
+    
+    # 3. Solar Return (Current or specific age)
+    solar_return_data = {}
+    if age is not None:
+        try:
+            current_yr = birth_date.year + age if birth_date else datetime.now().year
+            sr_jd = calculate_solar_return_jd(sun.longitude, chart.jd, current_yr)
+            
+            # Reconstruct SR Chart
+            # We need to calculate the full chart for the SR moment.
+            # Using the same location (traditional method) or current residence? 
+            # Logic typically defaults to birth location if not specified, or london. 
+            # We'll use chart.geo_lat/lon
+            
+            # Use chart_calculator logic? No, logic.py shouldn't depend on chart_calculator (circular).
+            # We can do a lightweight calculation here or assume prediction provides enough.
+            # SolarReturnEngine needs a Chart object.
+            
+            # Lightweight chart reconstruction for SR
+            sr_planets = []
+            flag_sr = swe.FLG_SWIEPH | swe.FLG_SPEED
+            for pname_enum in PlanetName:
+                if pname_enum in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
+                pid = getattr(swe, pname_enum.value.upper(), None)
+                if pid is None: continue
+                
+                res = swe.calc_ut(sr_jd, pid, flag_sr)[0]
+                sr_planets.append(Planet(name=pname_enum, longitude=res[0], latitude=res[1], speed=res[3]))
+                
+            # SR Houses
+            sr_cusps, sr_ascmc = swe.houses(sr_jd, chart.geo_lat, chart.geo_lon, b'P')
+            
+            sr_chart = Chart(
+                sun_altitude=0, # Need to calc real altitude if strict, but for SR logic mainly houses matter
+                planets=sr_planets,
+                ascendant=sr_ascmc[0],
+                mc=sr_ascmc[1],
+                houses={i+1: c for i, c in enumerate(sr_cusps)},
+                geo_lat=chart.geo_lat,
+                geo_lon=chart.geo_lon,
+                jd=sr_jd
+            )
+            
+            solar_return_data = SolarReturnEngine.analyze_solar_return(sr_chart, chart, age)
+            solar_return_data["year"] = current_yr
+            
+        except Exception as e:
+            solar_return_data = {"error": f"Failed to calculate Solar Return: {str(e)}"}
+
+    # 4. Decumbiture Principles (Vitality Crisis Checks)
+    # Calculating critical days from birth (Infant viability in tradition)
+    critical_days = DecumbitureEngine.calculate_critical_days(chart.jd)
+    
     report = {
         "summary": {
             "sect": sect.value,
@@ -706,17 +713,25 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             "mutual_receptions": receptions_json,
             "constructive_team": constructive_team,
             "destructive_team": destructive_team,
-            "maltreatments": maltreatment_report,  # Added Report field
+            "maltreatments": maltreatment_report,
             "team_note": "Trust the energies/people of your Constructive Team; exercise caution with the Destructive Team.",
             "universal_events": [],
             "lunar_phase": calculate_lunar_phase(sun.longitude, moon.longitude)[0] if sun and moon else "Unknown",
             "lunar_phase_profile": calculate_lunar_phase(sun.longitude, moon.longitude)[1] if sun and moon else "Unknown",
             "jones_pattern": calculate_jones_pattern([p.longitude for p in chart.planets if p.name.value in ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]]),
-            "dominant_elements": sorted(elements.items(), key=lambda x: x[1], reverse=True)
+            "dominant_elements": sorted(elements.items(), key=lambda x: x[1], reverse=True),
+            "chart_strength_rating": {
+                "score": chart_strength.get("total_score"),
+                "mood": chart_strength.get("mood"),
+                "details": chart_strength.get("details", [])
+            }
         },
         "vitality": vitality_report,
+        "medical_analysis": medical_analysis,
         "primary_directions": primary_dirs_json,
         "primary_direction_distributor": distributor_data,
+        "solar_return": solar_return_data,
+        "critical_days_infancy": critical_days[:5], # Just first 5 for birth analysis
         "soul_guardian": generate_soul_guardian_reading(chart, jd) if jd > 0 else {},
         "planets": [],
         "lots": calculate_all_lots(chart, sect),

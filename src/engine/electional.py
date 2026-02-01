@@ -2,8 +2,9 @@ from datetime import datetime, timedelta
 import swisseph as swe
 from typing import List, Dict, Optional
 from .models import Chart, Planet, PlanetName, Sign, Sect
-from .logic import is_void_of_course, calculate_solar_status, is_besieged
+from .calculations import is_void_of_course, calculate_solar_status, is_besieged
 from .dignities import DignityCalculator
+from .reference_data import DOMICILES as SIGN_RULERS
 from .chart_calculator import get_coordinates
 
 class ElectionalEngine:
@@ -31,7 +32,7 @@ class ElectionalEngine:
             
             # Calculate the chart for each hour
             chart = self._calculate_lightweight_chart(current_dt, lat, lon)
-            score_data = self._evaluate_chart(chart, activity)
+            score_data = self.evaluate_chart(chart, activity)
             
             results.append({
                 "time": current_dt.isoformat(),
@@ -88,7 +89,7 @@ class ElectionalEngine:
             if name == PlanetName.SUN:
                 xin = (res[0], res[1], res[2])
                 geopos = (lon, lat, 0)
-                az_res = swe.azalt(jd, swe.SE_ECL2HOR, geopos, 0, 0, xin)
+                az_res = swe.azalt(jd, swe.ECL2HOR, geopos, 0, 0, xin)
                 # az_res is (azimuth, true_alt, apparent_alt)
                 sun_alt = az_res[1]
                 
@@ -109,7 +110,7 @@ class ElectionalEngine:
             mc=mc
         )
 
-    def _evaluate_chart(self, chart: Chart, activity: str) -> Dict:
+    def evaluate_chart(self, chart: Chart, activity: str) -> Dict:
         score = 0
         details = []
         is_viable = True
@@ -144,7 +145,7 @@ class ElectionalEngine:
         # 2. Ascendant & Ruler Conditions
         asc_sign_idx = int(chart.ascendant / 30) % 12
         asc_sign = list(Sign)[asc_sign_idx]
-        asc_ruler_name = DignityCalculator.DOMICILES[asc_sign][0]
+        asc_ruler_name = SIGN_RULERS[asc_sign]
         asc_ruler = next((p for p in chart.planets if p.name == asc_ruler_name), None)
         
         if asc_ruler:

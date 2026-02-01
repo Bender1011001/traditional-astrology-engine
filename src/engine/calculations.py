@@ -195,3 +195,66 @@ def calculate_prenatal_syzygy(jd: float) -> float:
     # Final longitude
     res = swe.calc_ut(high, swe.SUN, swe.FLG_SWIEPH)
     return res[0][0]
+
+def calculate_solar_status(planet: Planet, sun: Planet) -> str:
+    diff = abs(planet.longitude - sun.longitude)
+    if diff > 180: diff = 360 - diff
+    
+    if diff < 0.28: # 17 minutes
+        return "CAZIMI"
+    if diff < 8.0:
+        return "COMBUST"
+    if diff < 15.0:
+        return "UNDER_BEAMS"
+    return "FREE"
+
+def is_in_via_combusta(longitude: float) -> bool:
+    """
+    Via Combusta (The Burning Way): 15° Libra to 15° Scorpio (195° to 225°).
+    """
+    return 195.0 <= longitude <= 225.0
+
+def is_besieged(planet: Planet, chart: Chart) -> bool:
+    mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
+    saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
+    
+    if not mars or not saturn or planet.name in [PlanetName.MARS, PlanetName.SATURN]:
+        return False
+        
+    def get_shortest_arc(p1_lon, p2_lon):
+        diff = p1_lon - p2_lon
+        if diff > 180: diff -= 360
+        if diff < -180: diff += 360
+        return diff
+    
+    dist_mars = get_shortest_arc(planet.longitude, mars.longitude)
+    dist_saturn = get_shortest_arc(planet.longitude, saturn.longitude)
+    
+    # Check if between
+    if (dist_mars * dist_saturn < 0) and (abs(dist_mars) + abs(dist_saturn) < 15):
+        return True
+    return False
+
+def is_void_of_course(moon_lon: float, chart_planets: list[Planet]) -> bool:
+    """
+    Bonatti Consideration 5: Void of Course Moon.
+    Simplified: No major aspect before leaving the sign (30° boundary).
+    """
+    moon_sign_idx = int(moon_lon / 30)
+    moon_pos_in_sign = moon_lon % 30
+    dist_to_end = 30 - moon_pos_in_sign
+    
+    major_aspects = [0, 60, 90, 120, 180]
+    
+    for p in chart_planets:
+        if p.name == PlanetName.MOON: continue
+        
+        for aspect in major_aspects:
+            for sign_mult in [-1, 1]:
+                target_lon = (p.longitude + (sign_mult * aspect)) % 360
+                dist_to_target = (target_lon - moon_lon) % 360
+                
+                # Check if this target is reached by forward motion within the sign
+                if dist_to_target < dist_to_end:
+                    return False 
+    return True

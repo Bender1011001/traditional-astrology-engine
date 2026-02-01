@@ -19,8 +19,8 @@ async def test_calculate_endpoint_free():
     from httpx import ASGITransport
     payload = {
         "name": "Test User",
-        "birth_date": "1990-01-01",
-        "birth_time": "12:00",
+        "date": "1990-01-01",
+        "time": "12:00",
         "city": "London",
         "state": "ENG",  # Required field
         "lat": 51.5,

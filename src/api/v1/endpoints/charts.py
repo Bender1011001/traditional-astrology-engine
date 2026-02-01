@@ -98,65 +98,6 @@ async def generate_chart_b2b(
     return result
 
 
-@router.post("/calculate", dependencies=[Depends(verify_quota)])
-async def calculate_chart(chart_request: ChartRequest, http_request: Request):
-    # Logic copied from original api.py to keep it functional, 
-    # but ideally should be in valid logic module. 
-    # For speed of refactor, keeping it local or importing if I extracted it.
-    # Wait, I didn't extract _build_plain_reading_context to utils.py.
-    # I should have? It's specific to chart reading synthesis.
-    
-    # ... (Logic from api.py lines 175-220)
-    # Re-implementing simplified version or TODO: Extract properly.
-    # For now, let's assume we import it or implement it. 
-    # Since I can't import from api.py (circular/legacy), I must implement it here.
-    
-    import json
-    if not report:
-        return ""
-
-    summary = report.get("summary", {}) if isinstance(report, dict) else {}
-    planets = []
-    for p in report.get("planets", []) if isinstance(report, dict) else []:
-        impacts = []
-        for impact in (p.get("impacts") or [])[:3]:
-            cause = impact.get("cause")
-            effect = impact.get("effect")
-            if cause or effect:
-                impacts.append(f"{cause}: {effect}".strip(": "))
-
-        planets.append({
-            "planet": p.get("planet"),
-            "sign": p.get("sign"),
-            "house": p.get("house_number"),
-            "power": p.get("power_label"),
-            "sect_status": p.get("sect_status"),
-            "delineation": p.get("delineation_text"),
-            "house_delineation": p.get("house_delineation_text"),
-            "impacts": impacts
-        })
-
-    context = {
-        "summary": {
-            "sect": summary.get("sect"),
-            "temperament": summary.get("temperament"),
-            "lunar_phase": summary.get("lunar_phase"),
-            "lunar_phase_profile": summary.get("lunar_phase_profile"),
-            "dominant_elements": summary.get("dominant_elements"),
-            "team_note": summary.get("team_note"),
-            "constructive_team": summary.get("constructive_team"),
-            "destructive_team": summary.get("destructive_team")
-        },
-        "soul_guardian": report.get("soul_guardian") if isinstance(report, dict) else None,
-        "daily_oracle": report.get("daily_oracle") if isinstance(report, dict) else None,
-        "vitality": report.get("vitality") if isinstance(report, dict) else None,
-        "planets": planets,
-        "lots": report.get("lots") if isinstance(report, dict) else None,
-        "prediction": report.get("prediction") if isinstance(report, dict) else None,
-        "advanced_prediction": advanced_prediction
-    }
-
-    return json.dumps(context, ensure_ascii=True, indent=2)
 
 
 @router.post("/calculate")
