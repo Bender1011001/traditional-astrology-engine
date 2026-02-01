@@ -98,8 +98,10 @@ async def run_ultimate_reading():
     output.append(f"  Humoral Bias: {temp.get('dominant_humor', 'N/A')} ({temp.get('temperament_type', 'N/A')})")
 
     # Rectification Animodar
-    animodar = RectificationEngine.animodar_rectification(chart_model, chart_model.jd, chart_model.geo_lat, chart_model.geo_lon)
-    output.append(f"  Rectification (Animodar): {animodar.get('degree_match', 'N/A')} deg alignment via {animodar.get('governing_planet')}")
+    animodar_list = RectificationEngine.animodar_rectification(chart_model, chart_model.jd, chart_model.geo_lat, chart_model.geo_lon)
+    if animodar_list:
+        res = animodar_list[0]
+        output.append(f"  Rectification (Animodar): {res.get('difference', 'N/A')} deg diff via {res.get('rectifying_planet')}")
     
     # II. PLANETARY FORENSICS (THE ENTIRE COUNCIL)
     output.append(f"\n[SECTION II: THE PLANETARY COUNCIL - EXHAUSTIVE CONDITION]")
@@ -149,6 +151,24 @@ async def run_ultimate_reading():
     output.append(f"  Doryphory Audit (Planetary Bodyguards):")
     for d in dory:
         output.append(f"    - {d.planet.value} is a {d.type} to the {d.related_luminary}")
+    
+    # Mundane Context (The World History)
+    mund_context = report.get("advanced_mechanics", {}).get("mundane_context", [])
+    output.append(f"  Mundane Hierarchy (The Era of Birth):")
+    
+    # Get Rank 2 (Great Conjunction)
+    gc_entry = next((e for e in mund_context if e.get("rank") == 2), {})
+    gc = gc_entry.get("data", {})
+    if gc:
+        # Note: Great Conjunction in mundane.py returns sign as string or sign value
+        sign_val = gc.get('sign')
+        output.append(f"    - GREAT CONJUNCTION: {gc.get('description')} in {sign_val}")
+    
+    # Get Rank 4 (Aries Ingress)
+    ingress_entry = next((e for e in mund_context if e.get("rank") == 4), {})
+    ing = ingress_entry.get("data", {})
+    if ing:
+        output.append(f"    - WORLD ENTRANCE: {ing.get('description')} (Sun at 0° Aries)")
 
     # IV. LORDS OF TIME (THE PREDICTIVE MATRIX)
     output.append(f"\n[SECTION IV: THE PREDICTIVE MATRIX (CHRONOCRATORS)]")
@@ -202,15 +222,24 @@ async def run_ultimate_reading():
     for d in report.get("critical_days_infancy", []):
         output.append(f"    - {d.get('date')} : {d.get('phase')} (Critical Day {d.get('day_number')})")
 
+    # VII. THE TEMPORAL FORECAST
+    output.append(f"\n[SECTION VII: THE TEMPORAL FORECAST (NEXT 5 DAYS)]")
+    for f in report.get("forecast_5_day", []):
+        output.append(f"  {f.get('display_date')} | Chronocrator: {f.get('chronocrator')}")
+        output.append(f"    - Mood: {f.get('mood')} | Status: {f.get('summary')}")
+        if f.get("medical"):
+            for m in f.get("medical"):
+                output.append(f"    ! Medical Alert: {m}")
+
     output.append("\n" + "#" * 100)
     output.append(" " * 38 + "END OF ULTIMATE FORENSIC DOSSIER")
     output.append("#" * 100 + "\n")
 
     # WRITE TO FINAL FILE
-    with open("ultimate_extraction_dossier.txt", "w", encoding="utf-8") as f:
+    with open("final_god_mode_dossier.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(output))
     
-    print(f"Ultimate Dossier generated: ultimate_extraction_dossier.txt ({len(output)} lines)")
+    print(f"Ultimate Dossier generated: final_god_mode_dossier.txt ({len(output)} lines)")
 
 if __name__ == "__main__":
     if sys.platform == "win32":

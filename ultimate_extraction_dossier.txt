@@ -1,5 +1,5 @@
 Traceback (most recent call last):
-  File "E:\code.projects\astrology\scripts\run_ultimate_forensic.py", line 219, in <module>
+  File "E:\code.projects\astrology\scripts\run_ultimate_forensic.py", line 221, in <module>
     asyncio.run(run_ultimate_reading())
     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\ProgramData\anaconda3\Lib\asyncio\runners.py", line 195, in run
@@ -11,7 +11,7 @@ Traceback (most recent call last):
   File "C:\ProgramData\anaconda3\Lib\asyncio\base_events.py", line 725, in run_until_complete
     return future.result()
            ~~~~~~~~~~~~~^^
-  File "E:\code.projects\astrology\scripts\run_ultimate_forensic.py", line 102, in run_ultimate_reading
-    output.append(f"  Rectification (Animodar): {animodar.get('degree_match', 'N/A')} deg alignment via {animodar.get('governing_planet')}")
-                                                 ^^^^^^^^^^^^
-AttributeError: 'list' object has no attribute 'get'
+  File "E:\code.projects\astrology\scripts\run_ultimate_forensic.py", line 212, in run_ultimate_reading
+    with open("ultimate_extraction_dossier.txt", "w", encoding="utf-8") as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'ultimate_extraction_dossier.txt'
