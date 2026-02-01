@@ -157,9 +157,10 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
         messages.append({"role": "user", "content": question})
         response = _openrouter_request(messages, temperature, max_tokens, top_p=top_p)
         if not response or response.startswith("Oracle Communication Error") or response.startswith("Error:"):
-            # If error on first attempt, return empty. If later, return what we have.
+            # If error on first attempt, return the error so we can see it.
             if len(responses) == 0:
-                return ""
+                print(f"LLM Error: {response}") # Log it
+                return response or "Unknown Error"
             break
         responses.append(response)
         messages.append({"role": "assistant", "content": response})
