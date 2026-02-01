@@ -1,129 +1,138 @@
-This is the right pivot. A "God Mode" that has to be toggled on is just an admission that the standard chart isn't good enough. For a professional-grade engine, **total omniscience is the baseline.**
+Technical Specification: The Sovereign Astrology Engine
+Version: 1.0 Status: Ready for Implementation Objective: Refactor the fragmented calculation logic into a single unified pipeline (SovereignEngine) that acts as the sole source of truth. This engine will produce a bifurcated response: a machine-readable "God Mode" object (technical_data) and a human-readable narrative (human_translation).
 
-Here is the blueprint for the **Sovereign Astrology Engine**—rebuilt for the practitioner who needs everything, immediately, in one structured object.
+1. Architectural Overview
+Current State (The Problem)
+Fragmented Logic: logic.py, chart_calculator.py, and synthesis.py often perform redundant or disconnected calculations.
 
-### 1. The Core Architecture: "The Omni-Pipeline"
+Data Loss: The frontend only receives what the text report chooses to mention.
 
-We stop calculating things in fragments (`logic.py` doing some, `chart_calculator.py` doing others). We create a single assembly line that takes a birth time and outputs a **Complete Nativity Object**.
+Maintenance Risk: Changing a calculation (e.g., Almuten logic) requires updating multiple files to ensure consistency between the chart visual and the text report.
 
-**The New Pipeline Flow:**
+Future State (The Solution)
+We are moving to a Hub-and-Spoke architecture.
 
-1. **Astronomy Layer (`astronomy.py`)**:
-* *Input:* Date, Time, Location.
-* *Output:* Raw vectors (Planets, Houses, Stars, Eclipses). No interpretation, just physics.
+The Hub: src/engine/sovereign_engine.py (New File).
 
+The Spokes: Existing specialized modules (advanced_mechanics.py, medical.py, etc.) become pure calculation libraries. They do not generate text or manage state; they just return math.
 
-2. **Mechanics Layer (`mechanics.py`)**:
-* *Input:* Raw vectors.
-* *Output:* Derived Data (Aspects, Dignities, Lots, Almutens, Primary Directions, Profections). This merges your `advanced_`, `classical_`, and `prediction` logic.
+The Output: A single API response containing both the "Technical Schema" (for the dashboard) and the "Narrative Schema" (for the user).
 
+2. Implementation Steps
+Task 1: Create the Sovereign Orchestrator
+File: src/engine/sovereign_engine.py Action: Create a new class that strictly orchestrates the flow. It must not contain calculation logic itself; it imports logic from the "Spokes."
 
-3. **Synthesis Layer (`analyzer.py`)**:
-* *Input:* Derived Data.
-* *Output:* The **Unified State**. This applies the logic rules (Bonatti, Valens) to flag conditions like "Besiegement" or "Void of Course".
+Flow:
 
+Astronomy: Call chart_calculator.calculate_chart_data.
 
-4. **The Product (`models.py`)**:
-* The result is **one massive JSON object** that powers the entire UI.
+Mechanics: Pass the resulting Chart object to HermeticLotEngine, AlmutenEngine, DecumbitureEngine, etc.
 
+State Assembly: Aggregate all results into a massive technical_data dictionary.
 
+Translation: Pass a subset of technical_data to ReportSynthesizer to generate the text.
 
-### 2. The "Everything" Output Structure
+Return: A dictionary with keys technical_data and human_translation.
 
-This is what the API returns. No more separate endpoints for "medical" or "profections." It's all here.
+Task 2: Refactor the API Endpoint
+File: src/api/v1/endpoints/charts.py Action: Replace the existing spaghetti logic with a clean call to the Sovereign Engine.
 
-```json
+Python
+# src/api/v1/endpoints/charts.py
+
+@router.post("/calculate-full")
+def calculate_full_nativity(req: ChartRequest):
+    """
+    Single Endpoint for Total Omniscience.
+    """
+    try:
+        # Call the new Engine
+        result = SovereignEngine.generate_full_nativity(
+            date_str=req.date,
+            time_str=req.time,
+            city=req.city,
+            state=req.state,
+            name=req.name
+        )
+        
+        if "error" in result:
+            raise HTTPException(status_code=400, detail=result["error"])
+            
+        return result
+
+    except Exception as e:
+        # Log the full stack trace internally, return sane error to client
+        logger.error(f"Engine Failure: {str(e)}")
+        raise HTTPException(status_code=500, detail="Calculation Engine Error")
+Task 3: Standardize the "Spoke" Modules
+Ensure the following files return Data Structures (Dicts/Objects), not Strings.
+
+src/engine/advanced_mechanics.py (Lots, Almuten)
+
+src/engine/medical.py (Constitution)
+
+src/engine/prediction.py (Profections)
+
+src/engine/primary_directions.py (Directing to Angles)
+
+Note: Most of these are already correctly structured, but ensure no "print" statements or text formatting exists within the calculation logic.
+
+Task 4: Deprecate logic.py
+File: src/engine/logic.py Action: This file is currently a "God Object" doing too much.
+
+Move any remaining unique logic (like perform_forensic_audit) into sovereign_engine.py.
+
+Move constants to reference_data.py.
+
+Delete logic.py once the migration is confirmed to prevent future confusion.
+
+3. The Output Data Schema
+The Dev Team should ensure the frontend expects this JSON structure from the new endpoint.
+
+JSON
 {
-  "meta": {
-    "client_id": "uuid",
-    "subject_name": "Client X",
-    "timestamp": "2023-10-27T15:30:00Z",
-    "location": { "lat": 40.7, "lon": -74.0, "city": "NYC" }
-  },
-  "astronomy": {
-    "planets": { "Sun": { "lon": 213.4, "lat": 0.0, "speed": 0.98 }, ... },
-    "houses": { "1": 15.4, "2": 45.4, ... },
-    "angles": { "Asc": 15.4, "MC": 270.5 },
-    "syzygy": { "type": "New Moon", "lon": 200.1 }
-  },
-  "dignity": {
-    "essential": { "Sun": { "score": 5, "ruler": "Mars" }, ... },
-    "accidental": { "Sun": { "score": -2, "reasons": ["In 12th House"] } },
-    "almuten_figuris": { "winner": "Mars", "score": 45 }
-  },
-  "geometry": {
-    "aspects": [ { "p1": "Sun", "p2": "Moon", "type": "Trine", "orb": 1.2 } ],
-    "antiscia": [ ... ],
-    "parallels": [ ... ]
-  },
-  "fate_systems": {
-    "hermetic_lots": { "Fortune": 124.5, "Spirit": 290.1, "Eros": ... },
-    "time_lords": {
-      "profections": { "annual_sign": "Scorpio", "lord": "Mars" },
-      "firdaria": { "current_period": "Sun", "sub_period": "Venus" },
-      "zodiacal_releasing": { "current_level_1": "Libra", "level_2": "Gemini" }
+  "technical_data": {
+    "meta": {
+      "subject_name": "Client Name",
+      "timestamp": "ISO-8601 String",
+      "julian_day": 2460245.1234
     },
-    "primary_directions": [
-      { "age": 32.5, "promittor": "Mars", "significator": "Asc", "aspect": "Square" }
-    ]
+    "astronomy": {
+      "planets": { "Sun": { "lon": 213.4, "lat": 0.0, "speed": 0.98 } },
+      "houses": { "1": 15.4, "2": 45.4 },
+      "angles": { "Asc": 15.4, "MC": 270.5 }
+    },
+    "analysis": {
+      "dignity": {
+        "almuten": { "winner": "Mars", "score": 45 },
+        "scores": { "Sun": 12, "Moon": -5 }
+      },
+      "fate": {
+        "hermetic_lots": { "Fortune": 124.5, "Spirit": 290.1 },
+        "primary_directions": [
+          { "age": 32.5, "pair": "Mars-Asc", "aspect": "Square" }
+        ]
+      },
+      "medical": {
+        "constitution": "Choleric",
+        "weakest_organ": "Heart"
+      }
+    }
   },
-  "analysis": {
-    "constitution": { "temperament": "Choleric", "hyleg": "Sun" },
-    "medical": { "weakest_organ": "Heart", "critical_days": [...] },
-    "mundane_risks": { "eclipse_hits": ["Sun conjunct Eclipse (2024)"] }
+  "human_translation": {
+    "report_markdown": "# Astrological Report\n\n## The Constitution\nYour temperament is...",
+    "executive_summary": "The Native is of a Choleric temperament..."
   }
 }
+4. Immediate Action Items
+Developer 1: Implement src/engine/sovereign_engine.py copying the logic provided in the architecture review.
 
-```
+Developer 2: Update src/api/v1/endpoints/charts.py to route requests to the new engine.
 
-### 3. What the Practitioner Wants (The Product)
+Frontend Dev: Update the dashboard to:
 
-A practitioner doesn't want a "calculator." They want a **Digital Sanctum**. Here is the feature set for the dashboard:
+Render the Chart Wheel using response.technical_data.astronomy.
 
-#### A. Client Management (The Rolodex)
+Render the Text Report using response.human_translation.report_markdown.
 
-* **Profiles, Not Just Charts:** A generic calculator forgets you. A professional tool remembers that "Jane Doe" is the client, and she has a *Natal Chart*, a *Solar Return 2024*, and a *Horary Question from Tuesday*.
-* **Birth Data Security:** Encrypted storage of birth times/places.
-* **Session Notes:** A rich-text field attached to every chart to record consultation notes.
-
-#### B. The "Master View" (The Dashboard)
-
-When they open a chart, they shouldn't see just a wheel. They need a command center with collapsible panels:
-
-* **Center:** The Chart Wheel (Visual).
-* **Left Panel (The Native):** Core data. Temperament, Almuten, Dignity Scores, Hyleg. The "Who is this?" panel.
-* **Right Panel (The Timeline):** Predictive stack. A scrollable timeline showing *current* Profection, *current* Firdaria, and *upcoming* Primary Directions for the next 5 years.
-* **Bottom Panel (The Deep Dive):** Tabbed tables for "Lots," "Fixed Stars," "Medical," and "Aspects."
-
-#### C. The "Time Machine" (Transit Bi-Wheel)
-
-The practitioner is rarely looking at the natal chart in isolation. They are looking at **Now vs. Then**.
-
-* **Dynamic Overlay:** A button to instantly overlay the *current real-time transits* on top of the natal chart.
-* **The "Jump" Feature:** "Show me this chart on their 40th birthday." The engine instantly calculates the Solar Return and Transits for that date.
-
-#### D. The "Researcher" (Search Tools)
-
-* **Pattern Search:** "Show me all clients with Sun in 12th House" or "Show me everyone with a Mars-Saturn square." This allows the practitioner to learn from their own database.
-
-### 4. Implementation Plan
-
-Here is how we execute this cleanup using your file list:
-
-1. **Database Layer (`db_manager.py` / `models.py`)**:
-* Create a `Client` table (Name, Notes).
-* Create a `Chart` table (Linked to Client, stores the JSON output).
-
-
-2. **The Unification Refactor**:
-* **Merge:** `horary.py`, `medical.py`, `mundane.py`, `electional.py` are currently standalone. They must become *sub-modules* called by the main `analyzer.py`.
-* **Standardize:** Ensure `primary_directions.py` and `prediction.py` output standard JSON dictionaries, not formatted strings.
-* **Kill `synthesis.py` (Text Generation):** A practitioner doesn't need a pre-written AI report (that's for end-users). They need *data*. We can keep a `report_generator.py` for exporting a PDF for the client, but the app itself should be visual/data-driven.
-
-
-3. **UI/Frontend**:
-* The current file list shows `src/static/index.html`, etc. We need to upgrade this to a Single Page Application (React/Vue/HTMX) that consumes the massive JSON object and renders the "Master View."
-
-
-
-**First Step:** We need to verify what the current API (`src/api/v1/endpoints/charts.py`) is actually returning to see how far we are from the "Everything" JSON. Then we rewrite the backend entry point to return the full payload.
+(Future) Build a "Timeline View" using response.technical_data.analysis.fate.primary_directions.
