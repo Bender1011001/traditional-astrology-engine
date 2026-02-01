@@ -1,6 +1,6 @@
 import pytest
-from engine.models import Sign, PlanetName
-from engine.medical import MedicalAstrology
+from src.engine.models import Sign, PlanetName
+from src.engine.medical import MedicalAstrology
 
 def test_melothesia():
     part = MedicalAstrology.get_body_part_for_sign(Sign.ARIES)

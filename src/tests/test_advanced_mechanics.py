@@ -1,6 +1,6 @@
 import pytest
-from engine.models import PlanetName, Sign, Planet, Chart
-from engine.advanced_mechanics import (
+from src.engine.models import PlanetName, Sign, Planet, Chart
+from src.engine.advanced_mechanics import (
     HermeticLotEngine, MonomoiriaEngine, AlmutenEngine, 
     DoryphoryEngine, DodecatemoriaEngine
 )

@@ -1,7 +1,7 @@
 import pytest
 import math
-from engine.models import PlanetName, Sign, Planet, Chart
-from engine.primary_directions import PrimaryDirectionsEngine
+from src.engine.models import PlanetName, Sign, Planet, Chart
+from src.engine.primary_directions import PrimaryDirectionsEngine
 
 def test_coordinate_conversion():
     # 0 Aries should be RA 0, Dec 0

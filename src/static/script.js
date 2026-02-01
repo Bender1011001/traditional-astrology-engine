@@ -626,6 +626,10 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
     const timeRangeStartInput = document.getElementById('timeRangeStart');
     const timeRangeEndInput = document.getElementById('timeRangeEnd');
     const timeRangeSamplesInput = document.getElementById('timeRangeSamples');
+
+    // Auth Token
+    const token = localStorage.getItem('cael_auth_token');
+
     const formData = {
         date: document.getElementById('date').value,
         time: isTimeUnknown && !timeValue ? "12:00" : timeValue,
@@ -639,7 +643,8 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
         ayanamsa: ayanamsaSelect ? ayanamsaSelect.value : null,
         time_range_start: timeRangeStartInput && timeRangeStartInput.value ? timeRangeStartInput.value : null,
         time_range_end: timeRangeEndInput && timeRangeEndInput.value ? timeRangeEndInput.value : null,
-        time_range_samples: timeRangeSamplesInput && timeRangeSamplesInput.value ? parseInt(timeRangeSamplesInput.value, 10) : null
+        time_range_samples: timeRangeSamplesInput && timeRangeSamplesInput.value ? parseInt(timeRangeSamplesInput.value, 10) : null,
+        access_token: token || null // Send token if logged in
     };
 
     logEvent("chart_request", { form: formData });

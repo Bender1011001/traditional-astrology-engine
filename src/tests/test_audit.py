@@ -1,10 +1,10 @@
 
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+# sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from engine.models import Chart, Planet, PlanetName, Sect
-from engine.logic import perform_forensic_audit
+from src.engine.models import Chart, Planet, PlanetName, Sect
+from src.engine.logic import perform_forensic_audit
 
 def test_audit():
     # Mock Data

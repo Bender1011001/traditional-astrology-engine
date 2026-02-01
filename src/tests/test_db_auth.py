@@ -4,9 +4,14 @@ import os
 import shutil
 
 # Setup paths
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sys
+import os
+import shutil
 
-from engine.user_auth import get_user_manager
+# Setup paths
+# sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.engine.user_auth import get_user_manager
 
 def test_auth_flow():
     # Use a fresh DB for test (users.db is created in cwd by default)

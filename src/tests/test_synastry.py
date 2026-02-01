@@ -1,5 +1,5 @@
-from engine.models import Chart, Planet, PlanetName, Sect
-from engine.synastry import SynastryEngine
+from src.engine.models import Chart, Planet, PlanetName, Sect
+from src.engine.synastry import SynastryEngine
 
 def test_synastry():
     # Person A: Sun at 0 Aries, Saturn at 10 Aries

@@ -1,6 +1,6 @@
 import pytest
-from engine.models import PlanetName, Sign, Planet, Chart, Sect
-from engine.hyleg import HylegAlcocodenEngine
+from src.engine.models import PlanetName, Sign, Planet, Chart, Sect
+from src.engine.hyleg import HylegAlcocodenEngine
 
 def create_vitality_chart(sun_lon, moon_lon, asc_lon, sun_alt):
     sun = Planet(name=PlanetName.SUN, longitude=sun_lon, altitude=sun_alt)
@@ -34,12 +34,12 @@ def test_hyleg_selection():
 
 def test_alcocoden_selection():
     chart = create_vitality_chart(10.0, 50.0, 5.0, 1.0)
-    hyleg = {"name": "Sun", "longitude": 10.0}
-    # Ruler of 10 Aries terms? Aries 0-6 is Jupiter.
+    hyleg = {"name": "Sun", "longitude": 5.0} # 5 Aries -> Jupiter Bound
+    # Ruler of 5 Aries terms is Jupiter (0-6).
     # If we put Jupiter in aspect...
-    # Let's adjust mock chart to have Jupiter aspecting 10 Aries.
+    # Let's adjust mock chart to have Jupiter aspecting 5 Aries.
     chart.planets = [p for p in chart.planets if p.name != PlanetName.JUPITER]
-    chart.planets.append(Planet(name=PlanetName.JUPITER, longitude=12.0)) # Conjunct 10 Aries
+    chart.planets.append(Planet(name=PlanetName.JUPITER, longitude=5.0)) # Conjunct 5 Aries
     
     alcocoden = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart)
     assert alcocoden is not None

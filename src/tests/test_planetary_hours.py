@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from engine.planetary_hours import PlanetaryHourEngine
+from src.engine.planetary_hours import PlanetaryHourEngine
 
 def test_planetary_hours_logic():
     # Mocking a date/time/loc

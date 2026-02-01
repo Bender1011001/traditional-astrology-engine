@@ -1,6 +1,8 @@
 import pytest
 from httpx import AsyncClient
-from api import app, create_access_token
+from httpx import AsyncClient
+from src.app import app
+from src.api.v1.auth import create_access_token
 import json
 
 @pytest.mark.asyncio
@@ -26,7 +28,7 @@ async def test_calculate_endpoint_free():
         "tz": "Europe/London"
     }
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
-        response = await ac.post("/api/calculate", json=payload)
+        response = await ac.post("/api/v1/calculate", json=payload)
         # Expected status 200 or 500 (if keys missing), but not 422
         assert response.status_code in [200, 500] 
 
@@ -35,7 +37,7 @@ async def test_auth_validate_session():
     # exchanging session_id (mock) for token
     from httpx import ASGITransport
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
-        response = await ac.get("/api/verify-checkout-session", params={"session_id": "mock_id"})
+        response = await ac.get("/api/v1/billing/verify-checkout-session", params={"session_id": "mock_id"})
         # Should be 400 since mock_id isn't real, but not 405 or 404
         assert response.status_code == 400 
 

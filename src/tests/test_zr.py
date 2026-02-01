@@ -1,7 +1,7 @@
 
 from datetime import datetime
-from engine.prediction import calculate_zr_lifetime_map
-from engine.models import Sign
+from src.engine.prediction import calculate_zr_lifetime_map
+from src.engine.models import Sign
 
 def test_zr():
     start_sign = Sign.PISCES

@@ -324,5 +324,45 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     # SAVE TO CACHE
     set_to_cache(chart_hash, tier, result)
 
+    # AUTO-SAVE FOR LOGGED IN USERS
+    if chart_request.access_token:
+        try:
+             # Re-validate to get user_id (payload already validated above but scoping)
+             payload = validate_token(chart_request.access_token)
+             if payload and "user_id" in payload:
+                 from src.database.core import SessionLocal
+                 from src.database.models import User
+                 from sqlalchemy.dialects.postgresql import JSONB
+
+                 db_session = SessionLocal()
+                 try:
+                     user = db_session.query(User).filter(User.id == payload["user_id"]).first()
+                     if user:
+                         # Append to charts_saved
+                         current_charts = user.charts_saved or []
+                         # Avoid duplicates logic?
+                         new_chart = {
+                             "chart_hash": chart_hash,
+                             "name": f"{chart_request.city}, {chart_request.date}", # Simple name
+                             "city": chart_request.city,
+                             "date": chart_request.date,
+                             "time": chart_request.time,
+                             "saved_at": datetime.utcnow().isoformat()
+                         }
+                         # Check if already exists by hash
+                         if not any(c.get("chart_hash") == chart_hash for c in current_charts):
+                            current_charts.append(new_chart)
+                            user.charts_saved = current_charts
+                            # Force update for mutable JSON field if needed, but assignment usually works
+                            from sqlalchemy.orm.attributes import flag_modified
+                            flag_modified(user, "charts_saved")
+                            db_session.commit()
+                 except Exception as db_err:
+                     print(f"Failed to auto-save chart: {db_err}")
+                 finally:
+                     db_session.close()
+        except Exception as e:
+            print(f"Auto-save error: {e}")
+
     _log_event("chart_result_server", {"result": result}, http_request)
     return result
