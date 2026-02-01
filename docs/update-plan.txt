@@ -1,254 +1,129 @@
-This revised plan focuses on a "clean break" implementation on a separate branch, discarding backward compatibility (e.g., no migration scripts for old data, no dual-column support). This allows for a cleaner, optimized database schema and codebase from the start.
+This is the right pivot. A "God Mode" that has to be toggled on is just an admission that the standard chart isn't good enough. For a professional-grade engine, **total omniscience is the baseline.**
 
-# Implementation Plan: Practitioner Tiers + B2B API (Clean Break)
+Here is the blueprint for the **Sovereign Astrology Engine**—rebuilt for the practitioner who needs everything, immediately, in one structured object.
 
-**Astrology SaaS Platform Monetization Upgrade**
+### 1. The Core Architecture: "The Omni-Pipeline"
 
-**Version:** 2.0 (Clean Branch / No Legacy Support)
-**Target:** $10k MRR
+We stop calculating things in fragments (`logic.py` doing some, `chart_calculator.py` doing others). We create a single assembly line that takes a birth time and outputs a **Complete Nativity Object**.
 
----
+**The New Pipeline Flow:**
 
-## Table of Contents
+1. **Astronomy Layer (`astronomy.py`)**:
+* *Input:* Date, Time, Location.
+* *Output:* Raw vectors (Planets, Houses, Stars, Eclipses). No interpretation, just physics.
 
-1. [Overview](https://www.google.com/search?q=%23overview)
-2. [Phase 1: Database & Configuration](https://www.google.com/search?q=%23phase-1-database--configuration)
-3. [Phase 2: API Architecture & Concurrency](https://www.google.com/search?q=%23phase-2-api-architecture--concurrency)
-4. [Phase 3: Subscription Logic & Quotas](https://www.google.com/search?q=%23phase-3-subscription-logic--quotas)
-5. [Phase 4: B2B API & Forensic Endpoints](https://www.google.com/search?q=%23phase-4-b2b-api--forensic-endpoints)
-6. [Phase 5: Billing & Trials](https://www.google.com/search?q=%23phase-5-billing--trials)
-7. [Phase 6: Launch Security](https://www.google.com/search?q=%23phase-6-launch-security)
 
----
+2. **Mechanics Layer (`mechanics.py`)**:
+* *Input:* Raw vectors.
+* *Output:* Derived Data (Aspects, Dignities, Lots, Almutens, Primary Directions, Profections). This merges your `advanced_`, `classical_`, and `prediction` logic.
 
-## Overview
 
-### Target State
+3. **Synthesis Layer (`analyzer.py`)**:
+* *Input:* Derived Data.
+* *Output:* The **Unified State**. This applies the logic rules (Bonatti, Valens) to flag conditions like "Besiegement" or "Void of Course".
 
-* **Architecture:** Modular FastAPI router structure (`src/api/v1/`) served by a main entry point.
-* **Concurrency:** Non-blocking execution of the synchronous calculation engine using FastAPI's threadpool.
-* **Database:** Optimized, normalized schema (dropping `User.subscription_tier` entirely in favor of `UserSubscription`).
-* **Configuration:** Robust environment variable management using `pydantic-settings`.
 
----
-
-## Phase 1: Database & Configuration
-
-### Step 1: Secure Configuration Management
-
-**Goal:** Replace the fragile `_load_dotenv` function in `src/api.py` with a robust configuration class.
-
-1. **Create `src/core/config.py`:**
-Use `pydantic-settings` to validate essential vars (`STRIPE_SECRET_KEY`, `JWT_SECRET`, `REDIS_URL`) on startup. Fail fast if missing.
-```python
-from pydantic_settings import BaseSettings
-
-class Settings(BaseSettings):
-    STRIPE_SECRET_KEY: str
-    STRIPE_WEBHOOK_SECRET: str
-    JWT_SECRET: str
-    REDIS_URL: str = "redis://localhost:6379"
-
-    class Config:
-        env_file = ".env"
-
-settings = Settings()
-
-```
+4. **The Product (`models.py`)**:
+* The result is **one massive JSON object** that powers the entire UI.
 
 
 
-### Step 2: Database Schema (Clean Slate)
+### 2. The "Everything" Output Structure
 
-**Goal:** Implement a strictly normalized schema without legacy columns.
+This is what the API returns. No more separate endpoints for "medical" or "profections." It's all here.
 
-1. **Update `src/database/models.py`:**
-* **Remove:** `User.subscription_tier`, `User.subscription_expires`.
-* **Add:** `SubscriptionPlan`, `UserSubscription`, `UsageRecord`, `ApiKey`.
-* **Refactor:** Ensure `User` model is clean and relies purely on the relationship to `UserSubscription`.
-
-
-```python
-from sqlalchemy import Column, String, DateTime, Integer, Boolean, ForeignKey, JSON, Numeric
-from sqlalchemy.orm import relationship
-from datetime import datetime
-import uuid
-from .core import Base
-
-class User(Base):
-    __tablename__ = "users"
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    email = Column(String, unique=True, nullable=False)
-    # ... other core user fields ...
-
-    # Relationship only - no legacy columns
-    subscription = relationship("UserSubscription", back_populates="user", uselist=False)
-    api_keys = relationship("ApiKey", back_populates="user")
-
-class SubscriptionPlan(Base):
-    __tablename__ = "subscription_plans"
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    tier = Column(String(20), unique=True, nullable=False) # e.g., 'practitioner'
-    chart_quota = Column(Integer, nullable=True) # None = unlimited
-    price_monthly = Column(Numeric(10, 2), nullable=False)
-    stripe_price_id_monthly = Column(String)
-    # ... features JSON ...
-
-class UserSubscription(Base):
-    __tablename__ = "user_subscriptions"
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String, ForeignKey("users.id"), unique=True)
-    plan_id = Column(String, ForeignKey("subscription_plans.id"))
-    status = Column(String(20), default="active")
-    stripe_customer_id = Column(String)
-    current_period_end = Column(DateTime)
-
-    user = relationship("User", back_populates="subscription")
-    plan = relationship("SubscriptionPlan")
+```json
+{
+  "meta": {
+    "client_id": "uuid",
+    "subject_name": "Client X",
+    "timestamp": "2023-10-27T15:30:00Z",
+    "location": { "lat": 40.7, "lon": -74.0, "city": "NYC" }
+  },
+  "astronomy": {
+    "planets": { "Sun": { "lon": 213.4, "lat": 0.0, "speed": 0.98 }, ... },
+    "houses": { "1": 15.4, "2": 45.4, ... },
+    "angles": { "Asc": 15.4, "MC": 270.5 },
+    "syzygy": { "type": "New Moon", "lon": 200.1 }
+  },
+  "dignity": {
+    "essential": { "Sun": { "score": 5, "ruler": "Mars" }, ... },
+    "accidental": { "Sun": { "score": -2, "reasons": ["In 12th House"] } },
+    "almuten_figuris": { "winner": "Mars", "score": 45 }
+  },
+  "geometry": {
+    "aspects": [ { "p1": "Sun", "p2": "Moon", "type": "Trine", "orb": 1.2 } ],
+    "antiscia": [ ... ],
+    "parallels": [ ... ]
+  },
+  "fate_systems": {
+    "hermetic_lots": { "Fortune": 124.5, "Spirit": 290.1, "Eros": ... },
+    "time_lords": {
+      "profections": { "annual_sign": "Scorpio", "lord": "Mars" },
+      "firdaria": { "current_period": "Sun", "sub_period": "Venus" },
+      "zodiacal_releasing": { "current_level_1": "Libra", "level_2": "Gemini" }
+    },
+    "primary_directions": [
+      { "age": 32.5, "promittor": "Mars", "significator": "Asc", "aspect": "Square" }
+    ]
+  },
+  "analysis": {
+    "constitution": { "temperament": "Choleric", "hyleg": "Sun" },
+    "medical": { "weakest_organ": "Heart", "critical_days": [...] },
+    "mundane_risks": { "eclipse_hits": ["Sun conjunct Eclipse (2024)"] }
+  }
+}
 
 ```
 
+### 3. What the Practitioner Wants (The Product)
 
-2. **Seed Script (`scripts/seed_fresh_db.py`):**
-* Create the standard plans (Free, Starter, Practitioner) directly.
-* No migration logic needed (users will start fresh or you can manually import/map if needed later).
+A practitioner doesn't want a "calculator." They want a **Digital Sanctum**. Here is the feature set for the dashboard:
+
+#### A. Client Management (The Rolodex)
+
+* **Profiles, Not Just Charts:** A generic calculator forgets you. A professional tool remembers that "Jane Doe" is the client, and she has a *Natal Chart*, a *Solar Return 2024*, and a *Horary Question from Tuesday*.
+* **Birth Data Security:** Encrypted storage of birth times/places.
+* **Session Notes:** A rich-text field attached to every chart to record consultation notes.
+
+#### B. The "Master View" (The Dashboard)
+
+When they open a chart, they shouldn't see just a wheel. They need a command center with collapsible panels:
+
+* **Center:** The Chart Wheel (Visual).
+* **Left Panel (The Native):** Core data. Temperament, Almuten, Dignity Scores, Hyleg. The "Who is this?" panel.
+* **Right Panel (The Timeline):** Predictive stack. A scrollable timeline showing *current* Profection, *current* Firdaria, and *upcoming* Primary Directions for the next 5 years.
+* **Bottom Panel (The Deep Dive):** Tabbed tables for "Lots," "Fixed Stars," "Medical," and "Aspects."
+
+#### C. The "Time Machine" (Transit Bi-Wheel)
+
+The practitioner is rarely looking at the natal chart in isolation. They are looking at **Now vs. Then**.
+
+* **Dynamic Overlay:** A button to instantly overlay the *current real-time transits* on top of the natal chart.
+* **The "Jump" Feature:** "Show me this chart on their 40th birthday." The engine instantly calculates the Solar Return and Transits for that date.
+
+#### D. The "Researcher" (Search Tools)
+
+* **Pattern Search:** "Show me all clients with Sun in 12th House" or "Show me everyone with a Mars-Saturn square." This allows the practitioner to learn from their own database.
+
+### 4. Implementation Plan
+
+Here is how we execute this cleanup using your file list:
+
+1. **Database Layer (`db_manager.py` / `models.py`)**:
+* Create a `Client` table (Name, Notes).
+* Create a `Chart` table (Linked to Client, stores the JSON output).
 
 
-
----
-
-## Phase 2: API Architecture & Concurrency
-
-### Step 1: Refactor Entry Point
-
-**Goal:** Break the monolith in `src/api.py` into a clean v1 structure.
-
-1. **Create `src/api/v1/router.py`:**
-This will hold the main `APIRouter` that aggregates sub-routers (auth, charts, billing).
-2. **Refactor `src/api.py` (The Shell):**
-Gut `src/api.py` completely. It should strictly import and mount the new structure.
-```python
-# src/api.py (Refactored)
-from fastapi import FastAPI
-from src.api.v1.router import api_router
-from src.core.config import settings
-
-app = FastAPI(title="Astrology Engine")
-
-# Mount the new modular router
-app.include_router(api_router, prefix="/api/v1")
-
-```
+2. **The Unification Refactor**:
+* **Merge:** `horary.py`, `medical.py`, `mundane.py`, `electional.py` are currently standalone. They must become *sub-modules* called by the main `analyzer.py`.
+* **Standardize:** Ensure `primary_directions.py` and `prediction.py` output standard JSON dictionaries, not formatted strings.
+* **Kill `synthesis.py` (Text Generation):** A practitioner doesn't need a pre-written AI report (that's for end-users). They need *data*. We can keep a `report_generator.py` for exporting a PDF for the client, but the app itself should be visual/data-driven.
 
 
-
-### Step 2: Fix Blocking Code (Async Wrapper)
-
-**Goal:** Prevent synchronous engine calls from blocking.
-
-1. **Create `src/services/engine_bridge.py`:**
-Use `run_in_threadpool` to safely execute the synchronous engine code.
-```python
-from fastapi.concurrency import run_in_threadpool
-from src.engine.chart_calculator import calculate_chart_data
-
-async def calculate_chart_async(chart_request):
-    """
-    Non-blocking wrapper for the CPU-bound chart calculation.
-    """
-    return await run_in_threadpool(
-        calculate_chart_data,
-        chart_request.date,
-        chart_request.time,
-        chart_request.city,
-        chart_request.state,
-        # ... pass all other arguments explicitly
-    )
-
-```
+3. **UI/Frontend**:
+* The current file list shows `src/static/index.html`, etc. We need to upgrade this to a Single Page Application (React/Vue/HTMX) that consumes the massive JSON object and renders the "Master View."
 
 
 
----
-
-## Phase 3: Subscription Logic & Quotas
-
-### Step 1: Comprehensive Quota Middleware
-
-**Goal:** Enforce quotas on all endpoints.
-
-1. **Create `src/middleware/quota.py`:**
-Since we dropped legacy columns, logic is simpler: strictly query `UserSubscription`.
-```python
-from fastapi import Depends, HTTPException
-from src.database.models import User
-from src.services.auth import get_current_user
-
-async def verify_quota(
-    resource: str = "chart", 
-    user: User = Depends(get_current_user)
-):
-    sub = user.subscription 
-    if not sub:
-         # Handle "no sub" case (e.g., default to free or error)
-         raise HTTPException(403, "No active subscription")
-
-    # Check usage vs sub.plan.chart_quota
-    # ...
-
-    return True
-
-```
-
-
-2. **Apply to Routers:**
-Apply `Depends(verify_quota)` to the entire charts router in `src/api/v1/endpoints/charts.py`.
-
----
-
-## Phase 4: B2B API & Forensic Endpoints
-
-### Step 1: API Key & Rate Limiting
-
-**Goal:** Support high-volume B2B clients using Redis.
-
-1. **Redis Rate Limiter (`src/core/ratelimit.py`):**
-Implement a limiter using `REDIS_URL`.
-2. **Forensic Endpoint (`src/api/v1/endpoints/forensic.py`):**
-Directly expose the audit logic from `src/engine/logic.py`, wrapped in threadpool.
-```python
-@router.post("/audit")
-async def run_audit(data: ChartData):
-    # reuse the engine bridge pattern
-    return await run_in_threadpool(perform_forensic_audit, data)
-
-```
-
-
-
----
-
-## Phase 5: Billing & Trials
-
-### Step 1: Stripe Service
-
-**Goal:** Centralize payment logic.
-
-1. **`src/services/billing.py`:**
-Handle `checkout.session.completed` and `invoice.payment_succeeded`.
-Update `UserSubscription` directly.
-
-### Step 2: Trial Scheduler
-
-**Goal:** Automate trial expiry.
-
-1. **`src/worker.py`:**
-Create a standalone script to periodically query expired trials in `UserSubscription` and downgrade them.
-
----
-
-## Phase 6: Launch Security
-
-1. **Secrets:** Ensure `src/core/config.py` is used everywhere.
-2. **Hashing:** Validate `src/engine/user_auth.py` uses `bcrypt` or `argon2`.
-3. **Dependencies:** Update `requirements.txt` to include `pydantic-settings`, `redis`, `alembic`.
+**First Step:** We need to verify what the current API (`src/api/v1/endpoints/charts.py`) is actually returning to see how far we are from the "Everything" JSON. Then we rewrite the backend entry point to return the full payload.

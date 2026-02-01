@@ -210,12 +210,29 @@ class PrimaryDirectionsEngine:
             dignities = DignityCalculator.get_essential_rulers(asc_directed_lon, sect)
             term_ruler = dignities["term"]
             
+            # Find the "Partner" (Participating Planet)
+            # The partner is the planet that aspects the directed degree,
+            # or the ruler of the sign if no aspect.
+            partner = dignities["domicile"]
+            partner_reason = "Domicile Ruler"
+            
+            for p in chart.planets:
+                diff = abs(p.longitude - asc_directed_lon)
+                if diff > 180: diff = 360 - diff
+                # Check major aspects (Conjunction, Sextile, Square, Trine, Opposition)
+                if diff < 3 or abs(diff - 60) < 3 or abs(diff - 90) < 3 or abs(diff - 120) < 3 or abs(diff - 180) < 3:
+                    partner = p.name
+                    partner_reason = f"Aspecting Planet ({p.name.value})"
+                    break
+
             return {
                 "type": "Distributor (Term Ruler)",
                 "planet": term_ruler.value if hasattr(term_ruler, "value") else str(term_ruler),
+                "partner": partner.value if hasattr(partner, "value") else str(partner),
+                "partner_reason": partner_reason,
                 "directed_ascendant_deg": asc_directed_lon,
                 "arc": arc,
-                "description": f"The Directed Ascendant is at {asc_directed_lon:.2f}°, in the Terms of {term_ruler.value if hasattr(term_ruler, 'value') else term_ruler}."
+                "description": f"The Directed Ascendant is at {asc_directed_lon:.2f}°, in the Terms of {term_ruler.value if hasattr(term_ruler, 'value') else term_ruler}. Partner: {partner.value if hasattr(partner, 'value') else partner} ({partner_reason})."
             }
         except Exception as e:
             return {"error": str(e)}

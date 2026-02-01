@@ -272,6 +272,17 @@ class DignityCalculator:
         conflicts = []
         score = 0
         
+        score_breakdown = {
+            "domicile": 0,
+            "exaltation": 0,
+            "triplicity": 0,
+            "term": 0,
+            "face": 0,
+            "monomoiria": 0,
+            "detriment": 0,
+            "fall": 0
+        }
+        
         # 1. Domicile (+5)
         is_domicile = False
         for p, signs in cls.DOMICILES.items():
@@ -281,6 +292,7 @@ class DignityCalculator:
         
         if is_domicile:
             score += cls.DOMICILE
+            score_breakdown["domicile"] = cls.DOMICILE
             details.append("Domicile (+5)")
         else:
             is_detriment = False
@@ -290,14 +302,17 @@ class DignityCalculator:
                     break
             if is_detriment:
                 score += cls.DETRIMENT
+                score_breakdown["detriment"] = cls.DETRIMENT
                 details.append("Detriment (-5)")
 
         # 2. Exaltation (+4)
         if cls.EXALTATIONS.get(planet_name) == sign:
             score += cls.EXALTATION
+            score_breakdown["exaltation"] = cls.EXALTATION
             details.append("Exaltation (+4)")
         elif cls.FALLS.get(planet_name) == sign:
             score += cls.FALL
+            score_breakdown["fall"] = cls.FALL
             details.append("Fall (-4)")
 
         # 3. Triplicity (+3)
@@ -308,9 +323,11 @@ class DignityCalculator:
             if (sect == Sect.DAY and planet_name == rulers[0]) or \
                (sect == Sect.NIGHT and planet_name == rulers[1]):
                 score += cls.TRIPLICITY
+                score_breakdown["triplicity"] = cls.TRIPLICITY
                 details.append(f"Triplicity ({sect.value}) (+3)")
             elif planet_name == rulers[2]:
                 score += 1
+                score_breakdown["triplicity"] = 1
                 details.append("Triplicity (Participant) (+1)")
 
         # 4. Terms (+2)
@@ -331,6 +348,7 @@ class DignityCalculator:
                 if deg_in_sign < limit:
                     if ruler_name == planet_name:
                         score += cls.TERM
+                        score_breakdown["term"] = cls.TERM
                         details.append(f"Term ({term_system.value}) (+2)")
                     break
 
@@ -340,12 +358,14 @@ class DignityCalculator:
         face_ruler_name = PlanetName[face_ruler_val.upper()] if isinstance(face_ruler_val, str) else face_ruler_val
         if face_ruler_name == planet_name:
             score += cls.FACE
+            score_breakdown["face"] = cls.FACE
             details.append("Face (+1)")
 
         # 6. Monomoiria
         mono_ruler = cls.get_monomoiria_ruler(sign, deg_in_sign)
         if mono_ruler == planet_name:
             score += 1
+            score_breakdown["monomoiria"] = 1
             details.append(f"Monomoiria (+1, Ruler: {mono_ruler.value})")
         else:
             details.append(f"Monomoiria Ruler: {mono_ruler.value}")
@@ -378,6 +398,7 @@ class DignityCalculator:
 
         return {
             "total_score": score,
+            "score_breakdown": score_breakdown,
             "details": details,
             "conflicts": conflicts,
             "variants": {
@@ -552,78 +573,3 @@ class DignityCalculator:
             "face": face
         }
 
-    @classmethod
-    def calculate_almuten_figuris(cls, chart: Chart, san_lon: float, pof_lon: Optional[float] = None) -> Dict:
-        """
-        Ibn Ezra System (Almuten Figuris):
-        5 Points: Sun, Moon, Ascendant, Part of Fortune, Pre-natal Syzygy (SAN).
-        - Essential dignities (5,4,3,2,1) summed for each planet across these points.
-        - Add Accidental Dignity points.
-        - Add House-based points (1/10: 12, 4/7: 11, 2/11: 10, 5/8: 9, 3/9: 8, 6/12: 7).
-        """
-        scores = {p: 0 for p in [
-            PlanetName.SUN, PlanetName.MOON, PlanetName.MERCURY,
-            PlanetName.VENUS, PlanetName.MARS, PlanetName.JUPITER, PlanetName.SATURN
-        ]}
-        
-        chart_sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
-        sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
-        moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
-        
-        # Calculate Part of Fortune if not provided
-        # PoF = Asc + Moon - Sun (Day) or Asc + Sun - Moon (Night)
-        if pof_lon is None:
-            if chart_sect == Sect.DAY:
-                pof_lon = (chart.ascendant + moon.longitude - sun.longitude) % 360
-            else:
-                pof_lon = (chart.ascendant + sun.longitude - moon.longitude) % 360
-
-        points = [
-            ("Sun", sun.longitude),
-            ("Moon", moon.longitude),
-            ("Ascendant", chart.ascendant),
-            ("Part of Fortune", pof_lon),
-            ("SAN", san_lon)
-        ]
-        
-        # 1. Essential Dignities of the 5 points
-        for name, lon in points:
-            rulers = cls.get_essential_rulers(lon, chart_sect)
-            
-            scores[rulers["domicile"]] += 5
-            if rulers["exaltation"]:
-                scores[rulers["exaltation"]] += 4
-            scores[rulers["triplicity"]] += 3
-            scores[rulers["term"]] += 2
-            scores[rulers["face"]] += 1
-            
-        # 2. Add Accidental Dignity and House Points for each planet
-        planet_breakdown = {}
-        for planet in chart.planets:
-            if planet.name not in scores: continue
-            
-            # Accidental
-            acc_data = cls.calculate_accidental_dignity(planet, chart)
-            scores[planet.name] += acc_data["total_score"]
-            
-            # House Points (Specific to Almuten Figuris)
-            house_num = acc_data["house"]
-            house_pts = cls.ALMUTEN_HOUSE_SCORES.get(house_num, 0)
-            scores[planet.name] += house_pts
-            
-            planet_breakdown[planet.name.value] = {
-                "essential_from_points": scores[planet.name] - acc_data["total_score"] - house_pts,
-                "accidental_score": acc_data["total_score"],
-                "house_points": house_pts,
-                "total": scores[planet.name],
-                "house": house_num
-            }
-            
-        # Determine Winner
-        winner = max(scores, key=scores.get)
-        
-        return {
-            "almuten_figuris": winner.value,
-            "total_score": scores[winner],
-            "planet_breakdown": planet_breakdown
-        }

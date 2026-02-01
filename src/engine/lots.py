@@ -1,152 +1,134 @@
-from typing import Dict
+from typing import Dict, Optional
 from .models import Chart, Sect, PlanetName, LotName
 
-def normalize_degree(deg: float) -> float:
-    while deg < 0:
-        deg += 360
-    while deg >= 360:
-        deg -= 360
-    return deg
-
-def get_planet_pos(chart: Chart, name: PlanetName) -> float:
-    planet = next((p for p in chart.planets if p.name == name), None)
-    if planet:
-        return planet.longitude
-    return 0.0
-
-def is_combust(chart: Chart, planet_name: PlanetName) -> bool:
-    sun_pos = get_planet_pos(chart, PlanetName.SUN)
-    planet_pos = get_planet_pos(chart, planet_name)
-    
-    diff = abs(planet_pos - sun_pos)
-    if diff > 180:
-        diff = 360 - diff
-    return diff < 15.0
+def calculate_lot(asc: float, a_lon: float, b_lon: float) -> float:
+    """
+    Generic Lot Formula: Asc + (B - A)
+    Vector from A to B projected from Asc.
+    """
+    return (asc + b_lon - a_lon) % 360.0
 
 def calculate_lot_position(chart: Chart, lot_name: LotName, sect: Sect) -> float:
-    asc = chart.ascendant
-    sun = get_planet_pos(chart, PlanetName.SUN)
-    moon = get_planet_pos(chart, PlanetName.MOON)
-    
-    # Base Lots First
-    fortune = 0.0
-    spirit = 0.0
-    
-    if sect == Sect.DAY:
-        fortune = normalize_degree(asc + moon - sun)
-        spirit = normalize_degree(asc + sun - moon)
-    else:
-        fortune = normalize_degree(asc + sun - moon)
-        spirit = normalize_degree(asc + moon - sun)
-        
-    if lot_name == LotName.FORTUNE:
-        return fortune
-    if lot_name == LotName.SPIRIT:
-        return spirit
-        
-    # Derived Lots
-    if lot_name == LotName.EROS:
-        # Day: Asc + Spirit - Fortune
-        # Night: Asc + Fortune - Spirit
-        if sect == Sect.DAY:
-            return normalize_degree(asc + spirit - fortune)
-        else:
-            return normalize_degree(asc + fortune - spirit)
-            
-    if lot_name == LotName.NECESSITY:
-        # Day: Asc + Fortune - Spirit
-        # Night: Asc + Spirit - Fortune
-        if sect == Sect.DAY:
-            return normalize_degree(asc + fortune - spirit)
-        else:
-            return normalize_degree(asc + spirit - fortune)
-            
-    if lot_name == LotName.VICTORY:
-        # Day: Asc + Jupiter - Spirit
-        # Night: Asc + Spirit - Jupiter
-        jupiter = get_planet_pos(chart, PlanetName.JUPITER)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + jupiter - spirit)
-        else:
-            return normalize_degree(asc + spirit - jupiter)
-            
-    if lot_name == LotName.FATHER:
-        # Day: Asc + Saturn - Sun
-        # Night: Asc + Sun - Saturn
-        # If Saturn is corrupted (within 15 deg of Sun), use Jupiter: Asc + Jupiter - Sun
-        if is_combust(chart, PlanetName.SATURN):
-            jupiter = get_planet_pos(chart, PlanetName.JUPITER)
-            return normalize_degree(asc + jupiter - sun)
-        
-        saturn = get_planet_pos(chart, PlanetName.SATURN)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + saturn - sun)
-        else:
-            return normalize_degree(asc + sun - saturn)
-
-    if lot_name == LotName.COURAGE:
-        # Day: Asc + Fortune - Mars
-        # Night: Asc + Mars - Fortune
-        fortune = calculate_lot_position(chart, LotName.FORTUNE, sect)
-        mars = get_planet_pos(chart, PlanetName.MARS)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + fortune - mars)
-        else:
-            return normalize_degree(asc + mars - fortune)
-
-    if lot_name == LotName.NEMESIS:
-        # Day: Asc + Fortune - Saturn
-        # Night: Asc + Saturn - Fortune
-        fortune = calculate_lot_position(chart, LotName.FORTUNE, sect)
-        saturn = get_planet_pos(chart, PlanetName.SATURN)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + fortune - saturn)
-        else:
-            return normalize_degree(asc + saturn - fortune)
-            
-    if lot_name == LotName.MOTHER:
-        # Day: Asc + Moon - Venus
-        # Night: Asc + Venus - Moon
-        venus = get_planet_pos(chart, PlanetName.VENUS)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + moon - venus)
-        else:
-            return normalize_degree(asc + venus - moon)
-            
-    if lot_name == LotName.DEBT:
-        # Day: Asc + Saturn - Mercury
-        # Night: Asc + Mercury - Saturn
-        saturn = get_planet_pos(chart, PlanetName.SATURN)
-        mercury = get_planet_pos(chart, PlanetName.MERCURY)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + saturn - mercury)
-        else:
-            return normalize_degree(asc + mercury - saturn)
-
-    if lot_name == LotName.THEFT:
-        # Day: Asc + Mars - Mercury
-        # Night: Asc + Mercury - Mars
-        mars = get_planet_pos(chart, PlanetName.MARS)
-        mercury = get_planet_pos(chart, PlanetName.MERCURY)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + mars - mercury)
-        else:
-            return normalize_degree(asc + mercury - mars)
-
-    if lot_name == LotName.ACCUSATION:
-        # Day: Asc + Mars - Saturn
-        # Night: Asc + Saturn - Mars
-        mars = get_planet_pos(chart, PlanetName.MARS)
-        saturn = get_planet_pos(chart, PlanetName.SATURN)
-        if sect == Sect.DAY:
-            return normalize_degree(asc + mars - saturn)
-        else:
-            return normalize_degree(asc + saturn - mars)
-            
-    return 0.0
+    """
+    Calculates the position of a specific lot.
+    """
+    all_lots = calculate_all_lots(chart, sect)
+    return all_lots.get(lot_name.value, 0.0)
 
 def calculate_all_lots(chart: Chart, sect: Sect) -> Dict[str, float]:
-    results = {}
-    for lot in LotName:
-        results[lot.value] = calculate_lot_position(chart, lot, sect)
-    return results
+    """
+    Calculates standard Arabic Parts and Forensic Lots.
+    Returns a dictionary mapping LotName values (strings) to longitudes.
+    """
+    # Get planetary positions
+    sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
+    moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+    mercury = next((p for p in chart.planets if p.name == PlanetName.MERCURY), None)
+    venus = next((p for p in chart.planets if p.name == PlanetName.VENUS), None)
+    mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
+    jupiter = next((p for p in chart.planets if p.name == PlanetName.JUPITER), None)
+    saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
+    
+    if not (sun and moon and mercury and venus and mars and jupiter and saturn):
+        return {} # Cannot calculate without Septener
+        
+    asc = chart.ascendant
+    is_day = (sect == Sect.DAY)
+    
+    lots = {}
+    
+    # 1. The Seven Hermetic Lots (Paulus Alexandrinus)
+    
+    # Fortune (Tyche): Moon vs Sun
+    # Day: Asc + Moon - Sun | Night: Asc + Sun - Moon
+    if is_day:
+        lots[LotName.FORTUNE.value] = calculate_lot(asc, sun.longitude, moon.longitude)
+    else:
+        lots[LotName.FORTUNE.value] = calculate_lot(asc, moon.longitude, sun.longitude)
+        
+    # Spirit (Daimon): Sun vs Moon (Reverse of Fortune)
+    # Day: Asc + Sun - Moon | Night: Asc + Moon - Sun
+    if is_day:
+        lots[LotName.SPIRIT.value] = calculate_lot(asc, moon.longitude, sun.longitude)
+    else:
+        lots[LotName.SPIRIT.value] = calculate_lot(asc, sun.longitude, moon.longitude)
+        
+    # For the remaining Hermetic Lots, they are anchored to Fortune or Spirit.
+    # We need the calculated values.
+    fort_lon = lots[LotName.FORTUNE.value]
+    spir_lon = lots[LotName.SPIRIT.value]
+    
+    # Necessity (Ananke): Mercury vs Fortune
+    # Day: Asc + Mercury - Fortune | Night: Asc + Fortune - Mercury
+    if is_day:
+        lots[LotName.NECESSITY.value] = calculate_lot(asc, fort_lon, mercury.longitude)
+    else:
+        lots[LotName.NECESSITY.value] = calculate_lot(asc, mercury.longitude, fort_lon)
+        
+    # Eros: Venus vs Spirit
+    # Day: Asc + Venus - Spirit | Night: Asc + Spirit - Venus
+    if is_day:
+        lots[LotName.EROS.value] = calculate_lot(asc, spir_lon, venus.longitude)
+    else:
+        lots[LotName.EROS.value] = calculate_lot(asc, venus.longitude, spir_lon)
+        
+    # Courage (Tolma): Mars vs Fortune
+    # Day: Asc + Mars - Fortune | Night: Asc + Fortune - Mars
+    if is_day:
+        lots[LotName.COURAGE.value] = calculate_lot(asc, fort_lon, mars.longitude)
+    else:
+        lots[LotName.COURAGE.value] = calculate_lot(asc, mars.longitude, fort_lon)
+        
+    # Victory (Nike): Jupiter vs Spirit
+    # Day: Asc + Jupiter - Spirit | Night: Asc + Spirit - Jupiter
+    if is_day:
+        lots[LotName.VICTORY.value] = calculate_lot(asc, spir_lon, jupiter.longitude)
+    else:
+        lots[LotName.VICTORY.value] = calculate_lot(asc, jupiter.longitude, spir_lon)
+        
+    # Nemesis: Saturn vs Fortune
+    # Day: Asc + Saturn - Fortune | Night: Asc + Fortune - Saturn
+    if is_day:
+        lots[LotName.NEMESIS.value] = calculate_lot(asc, fort_lon, saturn.longitude)
+    else:
+        lots[LotName.NEMESIS.value] = calculate_lot(asc, saturn.longitude, fort_lon)
+        
+    # 2. Forensic Lots (Traditional/Arabic)
+    
+    # Debt (Vettius Valens / Bonatti)
+    # Formula: Asc + Saturn - Mercury (Day), Asc + Mercury - Saturn (Night)
+    # Note: Some sources reverse this. We follow the standard malefic/mercury exchange.
+    if is_day:
+        lots[LotName.DEBT.value] = calculate_lot(asc, mercury.longitude, saturn.longitude)
+    else:
+        lots[LotName.DEBT.value] = calculate_lot(asc, saturn.longitude, mercury.longitude)
+        
+    # Theft
+    # Formula: Asc + Mars - Mercury (Day), Asc + Mercury - Mars (Night)
+    if is_day:
+        lots[LotName.THEFT.value] = calculate_lot(asc, mercury.longitude, mars.longitude)
+    else:
+        lots[LotName.THEFT.value] = calculate_lot(asc, mars.longitude, mercury.longitude)
+        
+    # Accusation (of Crimes/Police)
+    # Formula: Asc + Mars - Saturn (Day), Asc + Saturn - Mars (Night)
+    if is_day:
+        lots[LotName.ACCUSATION.value] = calculate_lot(asc, saturn.longitude, mars.longitude)
+    else:
+        lots[LotName.ACCUSATION.value] = calculate_lot(asc, mars.longitude, saturn.longitude)
+        
+    # Father (Standard)
+    # Day: Asc + Saturn - Sun | Night: Asc + Sun - Saturn
+    if is_day:
+        lots[LotName.FATHER.value] = calculate_lot(asc, sun.longitude, saturn.longitude)
+    else:
+        lots[LotName.FATHER.value] = calculate_lot(asc, saturn.longitude, sun.longitude)
+        
+    # Mother (Standard)
+    # Day: Asc + Moon - Venus | Night: Asc + Venus - Moon
+    if is_day:
+        lots[LotName.MOTHER.value] = calculate_lot(asc, venus.longitude, moon.longitude)
+    else:
+        lots[LotName.MOTHER.value] = calculate_lot(asc, moon.longitude, venus.longitude)
+        
+    return lots

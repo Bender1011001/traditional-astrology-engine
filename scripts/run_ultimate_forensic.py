@@ -16,6 +16,7 @@ from src.engine.prediction import calculate_firdaria, calculate_zr_lifetime_map,
 from src.engine.mansions import LunarMansionEngine
 from src.engine.rectification import RectificationEngine
 from src.engine.kakosis import KakosisEngine
+from src.engine.dignities import DignityCalculator
 from src.database.db_manager import DelineationLibrary
 
 async def run_ultimate_reading():
@@ -94,14 +95,34 @@ async def run_ultimate_reading():
     output.append(f"  Jones Pattern: {summary.get('jones_pattern')}")
     output.append(f"  Total Rooting: {summary.get('chart_strength_rating', {}).get('score')}/100")
     
-    temp = report.get("temperament", {})
-    output.append(f"  Humoral Bias: {temp.get('dominant_humor', 'N/A')} ({temp.get('temperament_type', 'N/A')})")
+    cs_rating = summary.get('chart_strength_rating', {})
+    output.append(f"  Chart Mood  : {cs_rating.get('mood')} - {cs_rating.get('details')[0] if cs_rating.get('details') else 'Stable'}")
+    
+    hemi = summary.get('hemispheres', {})
+    h_focus = summary.get('hemisphere_focus', {})
+    output.append(f"  Hemispheres : E({hemi.get('East')}) W({hemi.get('West')}) S({hemi.get('South')}) N({hemi.get('North')})")
+    output.append(f"  Soul Focus  : {h_focus.get('orientation')} | {h_focus.get('visibility')}")
+    
+    temp = report.get("summary", {}).get("temperament", {})
+    output.append(f"  Humoral Bias: {temp.get('primary_temperament', 'N/A')}")
 
     # Rectification Animodar
     animodar_list = RectificationEngine.animodar_rectification(chart_model, chart_model.jd, chart_model.geo_lat, chart_model.geo_lon)
     if animodar_list:
         res = animodar_list[0]
         output.append(f"  Rectification (Animodar): {res.get('difference', 'N/A')} deg diff via {res.get('rectifying_planet')}")
+
+    # SECTION I.B: VITALITY & LONGEVITY (The Medieval Core)
+    vit = report.get("vitality", {})
+    if vit:
+        output.append(f"\n[SECTION I.B: VITALITY & THE GIVER OF YEARS]")
+        output.append(f"  Hyleg (Giver of Life)  : {vit.get('hyleg')}")
+        output.append(f"  Alcocoden (Giver of Yrs): {vit.get('alcocoden')} ({vit.get('base_years_type')} Scale)")
+        output.append(f"  Theoretical Lifespan  : {vit.get('total_years'):.1f} years")
+        output.append(f"  Vitality Status       : {vit.get('vitality_rating')}")
+        output.append(f"  Forensic Breakdown     :")
+        for log in vit.get("breakdown", []):
+            output.append(f"    - {log}")
     
     # II. PLANETARY FORENSICS (THE ENTIRE COUNCIL)
     output.append(f"\n[SECTION II: THE PLANETARY COUNCIL - EXHAUSTIVE CONDITION]")
@@ -112,10 +133,32 @@ async def run_ultimate_reading():
         house = p.get("house_number")
         
         # Monomoiria (Lord of Degree)
-        mon = MonomoiriaEngine.get_zoidion_monomoiria(lon)
+        mon_data = p.get("classical", {}).get("monomoiria", {})
+        zoidion = mon_data.get("zoidion_ruler", "N/A")
+        trigonal = mon_data.get("trigonal_ruler", "N/A")
         
         output.append(f"\n  >> {name.upper()} in {sign} ({lon:.2f}°) | House {house}")
-        output.append(f"     Monomoiria (Lord of the Degree): {mon.value}")
+        output.append(f"     Monomoiria (Zoidion): {zoidion} | (Trigonal): {trigonal}")
+
+        # Dodecatemoria (Hidden Geometry)
+        dod_data = p.get("classical", {}).get("dodecatemoria", {})
+        if dod_data:
+            valens = dod_data.get("valens", {})
+            paul = dod_data.get("paul", {})
+            output.append(f"     Dodecatemoria (Valens): {valens.get('longitude', 0):.2f}° {valens.get('sign')} (Ruler: {valens.get('ruler')})")
+            output.append(f"     Dodecatemoria (Paul)  : {paul.get('longitude', 0):.2f}° {paul.get('sign')}")
+        
+        # Hayz/Halb
+        planet_obj = next((obj for obj in chart_model.planets if obj.name.value == name), None)
+        if planet_obj:
+             hayz_res = DignityCalculator.check_hayz_halb(planet_obj.name, planet_obj.longitude, chart_model)
+             output.append(f"     Temporal Nature: {hayz_res.get('status')} ({hayz_res.get('details')[0] if hayz_res.get('details') else 'N/A'})")
+
+        # Mundane Speculum (The 'Physics' of the placement)
+        spec = p.get("speculum", {})
+        if spec:
+            output.append(f"     Mundane Speculum: House Pos {p.get('mundane_house_pos', 0.0):.2f} | Pole {spec.get('pole', 0.0):.2f}° | RA {spec.get('ra', 0.0):.2f}°")
+
         output.append(f"     Condition Status: {p.get('power_label')} (Weighted Index: {p.get('performance_index')})")
         
         # Kakosis (Maltreatment)
@@ -140,11 +183,22 @@ async def run_ultimate_reading():
     # III. THE ADVANCED MECHANICS (THE ENGINE DEPTH)
     output.append(f"\n[SECTION III: ADVANCED MECHANICS & HIDDEN LAYERS]")
     
-    # Almuten Figuris
-    almuten = AlmutenEngine.calculate_almuten(chart_model)
-    san_lon, san_type = AlmutenEngine.calculate_prenatal_syzygy(chart_model.jd)
-    output.append(f"  Almuten Figuris (The Guardian): {almuten.winner.value}")
-    output.append(f"  Prenatal Syzygy (SAN): {san_lon:.2f}° ({san_type})")
+    # Soul Guardian (Almuten Figuris)
+    sg = report.get("soul_guardian", {})
+    if sg:
+        output.append(f"  ALMUTEN FIGURIS   : {sg.get('almuten')} (Term Ruler: {sg.get('term_ruler')})")
+        output.append(f"  SOUL JOB DESC.    : {sg.get('job_description')}")
+
+    # Almuten Scoreboard
+    al_data = report.get("advanced_mechanics", {}).get("almuten", {})
+    if al_data:
+        output.append(f"  DIGNITY SCOREBOARD:")
+        for p_al, score_al in al_data.get("scores", {}).items():
+            output.append(f"    - {p_al:8}: {score_al.get('total'):2}")
+
+    from src.engine.calculations import calculate_prenatal_syzygy
+    san_lon, san_type = calculate_prenatal_syzygy(chart_model.jd)
+    output.append(f"  Prenatal Syzygy   : {san_lon:.2f}° ({san_type})")
     
     # Doryphory (Bodyguards)
     dory = DoryphoryEngine.check_doryphory(chart_model)
@@ -152,19 +206,28 @@ async def run_ultimate_reading():
     for d in dory:
         output.append(f"    - {d.planet.value} is a {d.type} to the {d.related_luminary}")
     
+    # RECEPTIONS
+    recs = report.get("summary", {}).get("mutual_receptions", [])
+    if recs:
+        output.append(f"\n[SECTION III.B: MUTUAL RECEPTION AUDIT]")
+        for r in recs:
+            output.append(f"  - {r['planet_a']} <-> {r['planet_b']} | {r['type']} (Strength {r['score']})")
+            output.append(f"    - {r['planet_a']} in {r['planet_b']}'s {', '.join(r['dignities_a_in_b'])}")
+            output.append(f"    - {r['planet_b']} in {r['planet_a']}'s {', '.join(r['dignities_b_in_a'])}")
+
+    # THE TEAMS
+    output.append(f"\n[SECTION III.C: PLANETARY ALIGNMENTS (TEAMS)]")
+    output.append(f"  CONSTRUCTIVE TEAM  : {', '.join(summary.get('constructive_team', []))}")
+    output.append(f"  DESTRUCTIVE TEAM   : {', '.join(summary.get('destructive_team', []))}")
+    output.append(f"  CAUTION            : {summary.get('team_note')}")
+
     # Mundane Context (The World History)
     mund_context = report.get("advanced_mechanics", {}).get("mundane_context", [])
-    output.append(f"  Mundane Hierarchy (The Era of Birth):")
-    
-    # Get Rank 2 (Great Conjunction)
+    output.append(f"\n  Mundane Hierarchy (The Era of Birth):")
     gc_entry = next((e for e in mund_context if e.get("rank") == 2), {})
     gc = gc_entry.get("data", {})
     if gc:
-        # Note: Great Conjunction in mundane.py returns sign as string or sign value
-        sign_val = gc.get('sign')
-        output.append(f"    - GREAT CONJUNCTION: {gc.get('description')} in {sign_val}")
-    
-    # Get Rank 4 (Aries Ingress)
+        output.append(f"    - GREAT CONJUNCTION: {gc.get('description')} in {gc.get('sign')}")
     ingress_entry = next((e for e in mund_context if e.get("rank") == 4), {})
     ing = ingress_entry.get("data", {})
     if ing:
@@ -190,34 +253,93 @@ async def run_ultimate_reading():
         for period in zr_map[:8]: # Next ~8 periods
             output.append(f"    - {period['start_date']} | {period['sign']:12} ({period['duration_years']} years)")
 
+    # PROFECTIONS
+    prof = report.get("profections", {})
+    if prof:
+        output.append(f"\n[SECTION IV.B: PROFECTION CYCLES (THE SYMBOLIC CLOCK)]")
+        output.append(f"  Current Age      : {prof.get('current_age')}")
+        output.append(f"  LORD OF THE YEAR : {prof.get('lord_of_year')} (Annual Sign: {prof.get('annual_sign')})")
+        output.append(f"  Monthly Sign     : {prof.get('monthly_sign')} (Month {prof.get('target_month')})")
+        output.append(f"  Daily Sign       : {prof.get('daily_sign')} (Day {prof.get('target_day')})")
+
+    # DISTRIBUTOR
+    dist = report.get("primary_direction_distributor", {})
+    if dist:
+        output.append(f"\n[SECTION IV.C: THE DISTRIBUTOR (CHIEF OF FATE)]")
+        output.append(f"  Current Term Ruler: {dist.get('planet')}")
+        output.append(f"  Directed Asc. Lon : {dist.get('directed_ascendant_deg'):.2f}°")
+        output.append(f"  Arc of Direction  : {dist.get('arc'):.2f} degrees")
+        output.append(f"  Status            : {dist.get('description')}")
+
+    # PRIMARY DIRECTIONS HITS
+    p_dirs = report.get("primary_directions", [])
+    if p_dirs:
+        output.append(f"\n[SECTION IV.D: PRIMARY DIRECTION HITS (0-100 YEARS)]")
+        for d in p_dirs[:15]: # Show first 15 major hits
+            output.append(f"  - Age {d['years']:5.2f} ({d['date_offset']}): {d['promittor']:8} {d['aspect']:15} to {d['significator']}")
+
     # V. ARABIC LOTS & STELLAR CONTACTS
     output.append(f"\n[SECTION V: ARABIC LOTS & STELLAR SIGNATURES]")
+    
+    # Hermetic Lots
+    hermetic = report.get("hermetic_lots", {})
+    if hermetic:
+        output.append(f"  HERMETIC LOTS (Paulus Alexandrinus):")
+        for h_name, h_data in hermetic.items():
+            output.append(f"    - {h_name:10}: {h_data['longitude']:6.2f}° in {h_data['sign']} (House {h_data['house']})")
+
+    # Forensic Lots
+    forensic = report.get("forensic_lots", {})
+    if forensic:
+        output.append(f"  FORENSIC LOTS (Risk Assessment):")
+        for fname, fdata in forensic.items():
+            d = fdata.get("data")
+            if d:
+                output.append(f"    - {fname:15}: {d['longitude']:6.2f}° in {d['sign']} (House {d['house']})")
+                if fdata.get("verification"):
+                    output.append(f"      * Verification: {fdata.get('verification')}")
+
+    # Traditional Lots
     lots = report.get("lots", {})
-    for lname, llon in lots.items():
-        lsign = list(Sign)[int(llon / 30) % 12]
-        output.append(f"  - {lname:10}: {llon:6.2f}° in {lsign.value}")
+    if lots:
+        output.append(f"  TRADITIONAL LOTS:")
+        for lname, llon in lots.items():
+            if llon:
+                lsign = list(Sign)[int(llon / 30) % 12]
+                output.append(f"    - {lname:10}: {llon:6.2f}° in {lsign.value}")
         
     stars = report.get("stars", [])
     output.append(f"\n  Fixed Star Intersections:")
     for s in stars:
         output.append(f"    - {s.star_name} ({s.contact_type}) on {s.planet_name}: {s.message}")
 
-    # Iatromathematics section update
+    # VI. IATROMATHEMATICAL PROTOCOL (MEDICAL)
     med = report.get("medical_analysis", {})
     output.append(f"\n[SECTION VI: IATROMATHEMATICAL PROTOCOL (MEDICAL)]")
-    
-    # Lunar Mansion
     moon_lon = next(p.longitude for p in chart_model.planets if p.name == PlanetName.MOON)
     mansion = LunarMansionEngine.get_lunar_mansion(moon_lon)
     output.append(f"  Current Lunar Mansion: {mansion.get('mansion_id')} ({mansion.get('name')})")
     output.append(f"  Picatrix Intents (Good): {', '.join(mansion.get('intents_good', []))}")
     output.append(f"  Picatrix Intents (Bad) : {', '.join(mansion.get('intents_bad', []))}")
-    
     output.append(f"  Constitutional Mastery: {med.get('constitutional_sign')} rules the {med.get('governed_body_part')}")
     output.append(f"  Humoral Excess: {med.get('distemper', {}).get('excess_humor')}")
     output.append(f"  Palliative Care: {med.get('distemper', {}).get('palliative_nature')}")
     
-    # Critical Days
+    # Pathology Alerts
+    alerts = med.get("pathology_alerts", [])
+    if alerts:
+        output.append(f"  PATHOLOGY ALERTS:")
+        for alert in alerts:
+            output.append(f"    ! {alert.get('type')}: {alert.get('condition')} - {alert.get('details')}")
+
+    # Surgery Risk
+    surg = med.get("surgery_risk_analysis", {})
+    if surg:
+        safe_str = "SAFE" if surg.get("safe") else "RISKY"
+        output.append(f"  SURGERY RISK (Current): {safe_str}")
+        for reason in surg.get("reasons", []):
+            output.append(f"    - {reason}")
+
     output.append(f"\n  Critical Decumbiture Thresholds (Lunar Phases from Onset):")
     for d in report.get("critical_days_infancy", []):
         output.append(f"    - {d.get('date')} : {d.get('phase')} (Critical Day {d.get('day_number')})")
@@ -227,9 +349,20 @@ async def run_ultimate_reading():
     for f in report.get("forecast_5_day", []):
         output.append(f"  {f.get('display_date')} | Chronocrator: {f.get('chronocrator')}")
         output.append(f"    - Mood: {f.get('mood')} | Status: {f.get('summary')}")
-        if f.get("medical"):
-            for m in f.get("medical"):
-                output.append(f"    ! Medical Alert: {m}")
+
+    # VIII. SOLAR RETURN ANALYSIS
+    sr = report.get("solar_return", {})
+    if sr:
+        output.append(f"\n[SECTION VIII: SOLAR RETURN AUDIT (YEAR {sr.get('year')})]")
+        output.append(f"  Morin's Axiom: {sr.get('morin_axiom')}")
+        output.append(f"  SR Asc. in Natal : House {sr.get('sr_asc_in_natal_house')}")
+        loy_sr = sr.get("lord_of_year", {})
+        output.append(f"  LoY Performance  : {loy_sr.get('name')} (Weight: {loy_sr.get('weight')})")
+        for det_sr in loy_sr.get("details", []):
+            output.append(f"    ! {det_sr}")
+        output.append(f"  Key Determinations:")
+        for deter in sr.get("determinations", []):
+            output.append(f"    - {deter['judgment']}")
 
     output.append("\n" + "#" * 100)
     output.append(" " * 38 + "END OF ULTIMATE FORENSIC DOSSIER")

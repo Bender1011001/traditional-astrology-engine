@@ -124,6 +124,57 @@ class DecumbitureEngine:
         }
 
     @staticmethod
+    def analyze_natal_constitution(natal_chart: Chart) -> Dict:
+        """
+        Analyzes the baseline vitality and humoral balance from the Natal Chart.
+        """
+        asc_sign_idx = int(natal_chart.ascendant / 30) % 12
+        asc_sign = list(Sign)[asc_sign_idx]
+        
+        distemper = DecumbitureEngine.analyze_distemper(asc_sign)
+        
+        # Check Hyleg/Alcocoden for baseline vitality
+        hyleg_data = HylegAlcocodenEngine.determine_hyleg(natal_chart)
+        vitality_rating = "Stable"
+        if not hyleg_data:
+            vitality_rating = "Delicate (No clear Hyleg)"
+        
+        return {
+            "baseline_distemper": distemper,
+            "vitality_rating": vitality_rating,
+            "prone_regions": asc_sign.value,
+            "hyleg_found": hyleg_data.get("name") if hyleg_data else "None"
+        }
+
+    @staticmethod
+    def get_contra_indications(chart: Chart) -> List[str]:
+        """
+        Traditional Contra-Indications for treatment based on current planetary positions.
+        """
+        warnings = []
+        moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+        if not moon: return []
+
+        # Rule: Do not purge when Moon is in Aries (Head) or Taurus (Throat)
+        if moon.sign in [Sign.ARIES, Sign.TAURUS]:
+            warnings.append(f"Avoid emetics or purging while Moon is in {moon.sign.value} (Risk to upper body).")
+        
+        # Rule: Avoid surgery on body part ruled by Moon's sign
+        # (Handled in MedicalAstrology, but we can add specific humoral warnings here)
+        if moon.sign in [Sign.CANCER, Sign.SCORPIO, Sign.PISCES]:
+            warnings.append("Excessive moisture in the system; avoid treatments that increase phlegm.")
+
+        # Rule: Saturn aspecting Moon - avoid cold/dry treatments
+        saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
+        if saturn:
+            diff = abs(saturn.longitude - moon.longitude)
+            if diff > 180: diff = 360 - diff
+            if diff < 8 or abs(diff - 90) < 8 or abs(diff - 180) < 8:
+                warnings.append("Saturn afflicting Moon: Avoid cold/drying medicines; focus on warming/moistening.")
+
+        return warnings
+
+    @staticmethod
     def check_prognosis(chart: Chart) -> Dict:
         """
         Basic Decumbiture Prognosis rules.

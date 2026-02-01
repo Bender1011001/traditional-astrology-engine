@@ -1,9 +1,8 @@
-
 from typing import Optional, Dict, List
 import re
 from datetime import datetime
 from .models import Planet, Chart, Sect, PlanetName, Sign
-from .lots import calculate_all_lots
+from .lots import calculate_all_lots, LotName
 from .prediction import (
     calculate_profection_sign,
     get_lord_of_year,
@@ -12,7 +11,8 @@ from .prediction import (
     calculate_epitasis_days,
     calculate_firdaria,
     calculate_zr_periods,
-    calculate_zr_lifetime_map
+    calculate_zr_lifetime_map,
+    calculate_solar_return_jd
 )
 from .stars import check_fixed_stars, get_fixed_star_meta
 from .nodes import analyze_nodes
@@ -37,8 +37,11 @@ from .decumbiture import DecumbitureEngine
 from .medical import MedicalAstrology
 from .electional import ElectionalEngine
 from .solar_return import SolarReturnEngine
-from .prediction import calculate_solar_return_jd
-from .advanced_mechanics import AlmutenEngine, DoryphoryEngine, MonomoiriaEngine
+from .advanced_mechanics import (
+    AlmutenEngine, DoryphoryEngine, MonomoiriaEngine,
+    DodecatemoriaEngine, HermeticLotEngine
+)
+from .synthesis import ReportSynthesizer
 import swisseph as swe
 
 # Initialize Library
@@ -143,41 +146,6 @@ def is_malefic_out_of_sect(planet_name: PlanetName, chart_sect: Sect) -> bool:
 
 
 
-def generate_soul_guardian_reading(chart: Chart, jd: float) -> Dict:
-    """
-    Calculates the Almuten Figuris and generates a 'Life Job Description'.
-    """
-    sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
-    san_lon = calculate_prenatal_syzygy(jd)
-    almuten_data = DignityCalculator.calculate_almuten_figuris(chart, san_lon)
-    
-    winner_name = almuten_data["almuten_figuris"]
-    winner_enum = PlanetName(winner_name)
-    
-    # Get winner's position to find its terms
-    winner_planet = next((p for p in chart.planets if p.name == winner_enum), None)
-    if not winner_planet:
-        return almuten_data # Should not happen
-        
-    dignities = DignityCalculator.get_essential_rulers(winner_planet.longitude, sect)
-    term_ruler = dignities["term"]
-    
-    # Generate Job Description
-    essence = PLANET_ESSENCES.get(winner_enum, "Sovereignty and Depth")
-    method = TERM_METHODS.get(term_ruler, "Unique Pathways")
-    
-    job_description = f"You are ruled by a Sovereign {winner_name} in the Terms of {term_ruler.value}—your soul's function is {essence} through {method}."
-    
-    return {
-        "almuten": winner_name,
-        "term_ruler": term_ruler.value,
-        "job_description": job_description,
-        "scores": almuten_data["planet_breakdown"],
-        "total_score": almuten_data["total_score"],
-        "prenatal_syzygy_lon": san_lon
-    }
-
-
 
 def melothesia_check(planet_name: PlanetName, sign: Sign) -> Dict:
     """
@@ -232,7 +200,51 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0, specu
         "impacts": [],
         "delineation_text": "",
         "house_number": 0,
-        "house_delineation_text": ""
+        "house_delineation_text": "",
+        "classical": {}
+    }
+
+    # --- GOD MODE: Classical Geometry & Rulers ---
+    
+    # 1. Monomoiria (High-Precision Rulers)
+    # Need Sun/Moon signs for Trigonal calculation
+    sun_p = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
+    moon_p = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+    
+    if sun_p and moon_p:
+        zoidion_ruler = MonomoiriaEngine.get_zoidion_monomoiria(planet.longitude)
+        trigonal_ruler = MonomoiriaEngine.get_trigonal_monomoiria(
+            planet.longitude,
+            (chart_sect == Sect.DAY),
+            sun_p.sign,
+            moon_p.sign
+        )
+        
+        result["classical"]["monomoiria"] = {
+            "zoidion_ruler": zoidion_ruler.value,
+            "trigonal_ruler": trigonal_ruler.value
+        }
+
+    # 2. Dodecatemoria (Hidden Geometry)
+    dod_valens = DodecatemoriaEngine.calculate_dodecatemoria_valens(planet.longitude)
+    dod_paul = DodecatemoriaEngine.calculate_dodecatemoria_paul(planet.longitude)
+    
+    # Get details for Valens (Standard)
+    v_sign = list(Sign)[int(dod_valens / 30) % 12]
+    v_ruler = DignityCalculator.get_essential_rulers(dod_valens, chart_sect)["domicile"]
+    v_term = DignityCalculator.get_essential_rulers(dod_valens, chart_sect)["term"]
+    
+    result["classical"]["dodecatemoria"] = {
+        "valens": {
+            "longitude": dod_valens,
+            "sign": v_sign.value,
+            "ruler": v_ruler.value,
+            "term_ruler": v_term.value
+        },
+        "paul": {
+            "longitude": dod_paul,
+            "sign": list(Sign)[int(dod_paul / 30) % 12].value
+        }
     }
     
     # 1. Universal Overrides (Eclipses)
@@ -385,17 +397,29 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0, specu
             "effect": "PERFECTION WITHOUT EFFORT: Significator in the Ascendant. High capacity for manifestation."
         })
 
-    # 10. Antiscia Presence
+    # 10. Antiscia & Contra-Antiscia Presence
     ant, cant = calculate_antiscia(planet.longitude)
     for other in chart.planets:
         if other.name == planet.name: continue
-        dist = abs(other.longitude - ant) % 360
-        if dist > 180: dist = 360 - dist
-        if dist < 1.0:
+        
+        # Antiscia Check
+        dist_ant = abs(other.longitude - ant) % 360
+        if dist_ant > 180: dist_ant = 360 - dist_ant
+        if dist_ant < 1.0:
             result["impacts"].append({
                 "cause": "Antiscia",
-                "effect": f"SHADOW CONTACT with {other.name.value}. A hidden or occult influence exists.",
+                "effect": f"SHADOW CONTACT (Antiscia) with {other.name.value}. A hidden or occult influence exists.",
                 "rule": "Antiscia provides a 'mirror' strength regardless of ecliptic aspect."
+            })
+            
+        # Contra-Antiscia Check
+        dist_cant = abs(other.longitude - cant) % 360
+        if dist_cant > 180: dist_cant = 360 - dist_cant
+        if dist_cant < 1.0:
+            result["impacts"].append({
+                "cause": "Contra-Antiscia",
+                "effect": f"HIDDEN OPPOSITION (Contra-Antiscia) with {other.name.value}. A secret rivalry or balancing force.",
+                "rule": "Contra-Antiscia acts like a hidden opposition."
             })
 
     # 11. Ptolemaic Aspects (with Sect Modification)
@@ -412,7 +436,16 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0, specu
 
     # 13. In-Mundo Aspects (Special Forensic Layer)
     if speculum_data and planet.name.value in speculum_data:
-        my_m_pos = speculum_data[planet.name.value].mundane_pos
+        my_spec = speculum_data[planet.name.value]
+        result["speculum"] = {
+            "ra": my_spec.ra,
+            "dec": my_spec.dec,
+            "md": my_spec.md,
+            "pole": my_spec.pole
+        }
+        result["mundane_house_pos"] = my_spec.mundane_pos
+        
+        my_m_pos = my_spec.mundane_pos
         for other_name, other_spec in speculum_data.items():
             if other_name == planet.name.value: continue
             
@@ -481,12 +514,6 @@ def calculate_jones_pattern(longitudes: List[float]) -> str:
     if max_gap < 30: return "Splash"
     return "Splay/Seesaw"
 
-from .temperament import TemperamentEngine
-from .mansions import LunarMansionEngine
-from .hyleg import HylegAlcocodenEngine
-from .planetary_hours import PlanetaryHourEngine
-from .primary_directions import PrimaryDirectionsEngine
-from .reception import ReceptionEngine, ReceptionMode
 
 def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = None, month: int = 1, day: int = 1, birth_date: Optional[datetime] = None, analysis_date: Optional[datetime] = None, analysis_jd: Optional[float] = None) -> Dict:
     sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
@@ -494,15 +521,11 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
     moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
     
-    # Master Speculum (Placidus Mundane Positions) - Moved up for planet forensic analysis
-    
     # Use chart geo if available; otherwise fallback to London (research default).
     demo_lat = chart.geo_lat if chart.geo_lat is not None else 51.5074
     demo_lon = chart.geo_lon if chart.geo_lon is not None else -0.1278
     
-    ramc = PrimaryDirectionsEngine._to_deg(swe.houses_armc(chart.jd, demo_lat, 23.43929, b'P')[1][1]) if chart.jd else 0.0
-    # Actually, swisseph houses_armc returns (cusps, ascmc). ascmc[1] is RAMC.
-    # But wait, RAMC is usually just RA of MC.
+    # Master Speculum (Placidus Mundane Positions)
     mc_ra, _ = PrimaryDirectionsEngine.ecliptic_to_equatorial(chart.mc, 0.0)
     ramc = mc_ra
     
@@ -518,12 +541,16 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         p_res = analyze_planet_forensic(p, chart, jd, speculum_data=speculum_data)
         planet_forensics.append(p_res)
 
-    # Elemental Balance
+    # Elemental Balance - Fixed to use string keys
     elements = {"FIRE": 0, "EARTH": 0, "AIR": 0, "WATER": 0}
-    for p_data in planet_forensics: # Use processed planet data
-        # if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]: continue # Already filtered
-        el = DignityCalculator.ZODIAC_ELEMENTS.get(p_data["sign"]) # Get sign from processed data
-        if el: elements[el] += 1
+    # Create a string-keyed version of ZODIAC_ELEMENTS for lookup
+    zodiac_elements_str = {sign.value: element for sign, element in DignityCalculator.ZODIAC_ELEMENTS.items()}
+    
+    for p_data in planet_forensics:
+        sign_str = p_data["sign"]  # This is already a string like "Aries"
+        el = zodiac_elements_str.get(sign_str)
+        if el: 
+            elements[el] += 1
 
     # Temperament Assessment (Lilly)
     temperament = TemperamentEngine.calculate_temperament(chart)
@@ -539,13 +566,19 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         alcocoden = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart)
         if alcocoden:
             vitality_report = HylegAlcocodenEngine.calculate_lifespan(hyleg, alcocoden, chart)
+        else:
+            vitality_report = {
+                "hyleg": hyleg.get("name"),
+                "alcocoden": "None Found",
+                "base_years_type": "N/A",
+                "base_years": 0.0,
+                "total_years": 0.0,
+                "vitality_rating": "Critical/Indeterminate (No Alcocoden)",
+                "breakdown": [f"Hyleg identified as {hyleg.get('name')}.", "No suitable Alcocoden rulers aspect the Hyleg.", "This is traditionally seen as a sign of delicate vitality in early life."]
+            }
             
     # Planetary Hours
     hours_data = {}
-    # Use chart geo if available; otherwise fallback to London (research default).
-    demo_lat = chart.geo_lat if chart.geo_lat is not None else 51.5074
-    demo_lon = chart.geo_lon if chart.geo_lon is not None else -0.1278
-    
     if birth_date:
         hours_data = PlanetaryHourEngine.calculate_hours(birth_date, demo_lat, demo_lon)
 
@@ -554,35 +587,31 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     primary_dirs = PrimaryDirectionsEngine.calculate_directions_to_angles(chart, demo_lat)
     # Filter for reasonable life range (e.g. 0 to 100 years)
     primary_dirs = [d for d in primary_dirs if 0 <= d.years <= 100]
-    # Serialize for JSON
-    primary_dirs_json = [{
-        "significator": d.significator,
-        "promittor": d.promittor,
-        "aspect": d.aspect,
-        "arc": round(d.arc, 2),
-        "years": round(d.years, 2),
-        "date_offset": d.date_offset,
-        "method": d.method
-    } for d in primary_dirs]
+    # Serialize for JSON and identify active directions
+    primary_dirs_json = []
+    active_directions = []
+    for d in primary_dirs:
+        d_json = {
+            "significator": d.significator,
+            "promittor": d.promittor,
+            "aspect": d.aspect,
+            "arc": round(d.arc, 2),
+            "years": round(d.years, 2),
+            "date_offset": d.date_offset,
+            "method": d.method
+        }
+        primary_dirs_json.append(d_json)
+        
+        # Flag directions active within 1 year of current age
+        if age is not None and abs(d.years - age) <= 1.0:
+            active_directions.append(d_json)
 
     # Calculate Master Time-Lord (The Distributor)
     distributor_data = {}
     if age is not None:
         distributor_data = PrimaryDirectionsEngine.calculate_current_distributor(chart, float(age), demo_lat)
 
-    # Master Speculum (Placidus Mundane Positions)
-    ramc = PrimaryDirectionsEngine._to_deg(swe.houses_armc(chart.jd, demo_lat, 23.43929, b'P')[1][1]) if chart.jd else 0.0
-    # Actually, swisseph houses_armc returns (cusps, ascmc). ascmc[1] is RAMC.
-    # But wait, RAMC is usually just RA of MC.
-    mc_ra, _ = PrimaryDirectionsEngine.ecliptic_to_equatorial(chart.mc, 0.0)
-    ramc = mc_ra
-    
-    speculum_data = {}
-    for p in chart.planets:
-        speculum_data[p.name.value] = PrimaryDirectionsEngine.get_full_speculum(p, ramc, demo_lat)
-
     # Receptions (Lilly Mode Default)
-    # ...
     receptions = ReceptionEngine.calculate_mutual_receptions(chart, ReceptionMode.STANDARD_LILLY)
     receptions_json = [{
         "planet_a": r.planet_a.value,
@@ -597,23 +626,88 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     constructive_team = []
     destructive_team = []
     
-    # Forensic Lots
-    from .lots import calculate_all_lots, LotName
+    # Forensic Lots (Traditional/Arabic)
     all_lots = calculate_all_lots(chart, sect)
     
+    def enrich_lot(lon):
+        if lon is None: return None
+        sign_idx = int(lon / 30) % 12
+        sign = list(Sign)[sign_idx]
+        house = DignityCalculator.get_house_number(lon, chart.ascendant, getattr(chart, "houses", None))
+        return {"longitude": lon, "sign": sign.value, "house": house}
+
+    # Helper for lot-planet conjunctions
+    def check_lot_affliction(lot_lon, malefic_name, malefic_lon, orb=3.0):
+        if lot_lon is None: return False
+        dist = abs(lot_lon - malefic_lon) % 360
+        if dist > 180: dist = 360 - dist
+        return dist <= orb
+
+    mars_p = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
+    saturn_p = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
+    
+    debt_lot_lon = all_lots.get(LotName.DEBT.value)
+    theft_lot_lon = all_lots.get(LotName.THEFT.value)
+    accusation_lot_lon = all_lots.get(LotName.ACCUSATION.value)
+    father_lot_lon = all_lots.get(LotName.FATHER.value)
+    mother_lot_lon = all_lots.get(LotName.MOTHER.value)
+
     forensic_lots_report = {
         "Debt/Bankruptcy": {
-            "longitude": all_lots.get(LotName.DEBT.value),
-            "verification": "Check if conjunct Mars or L8"
+            "data": enrich_lot(debt_lot_lon),
+            "status": "AFFLICTED" if mars_p and check_lot_affliction(debt_lot_lon, "Mars", mars_p.longitude) else "Clear",
+            "verification": "Mars contact signifies aggressive debt or sudden bankruptcy."
         },
         "Theft": {
-            "longitude": all_lots.get(LotName.THEFT.value),
-            "verification": "Lilly Rule: Lot in sign of L7?"
+            "data": enrich_lot(theft_lot_lon),
+            "status": "AFFLICTED" if mars_p and check_lot_affliction(theft_lot_lon, "Mars", mars_p.longitude) else "Clear",
+            "verification": "Mars contact signifies loss through theft or violence."
         },
         "Accusation": {
-            "longitude": all_lots.get(LotName.ACCUSATION.value)
+            "data": enrich_lot(accusation_lot_lon),
+            "status": "AFFLICTED" if saturn_p and check_lot_affliction(accusation_lot_lon, "Saturn", saturn_p.longitude) else "Clear",
+            "verification": "Saturn contact signifies legal entrapment or false witness."
         }
     }
+
+    # Father Analysis
+    if father_lot_lon is not None:
+        f_sign = list(Sign)[int(father_lot_lon / 30) % 12]
+        f_ruler_name = DignityCalculator.get_essential_rulers(father_lot_lon, sect)["domicile"]
+        f_ruler = next((p for p in chart.planets if p.name == f_ruler_name), None)
+        f_status = "Neutral"
+        f_verif = f"Ruler {f_ruler_name.value} condition is average."
+        if f_ruler:
+            f_dignity = DignityCalculator.calculate_planet_dignity(f_ruler.name, f_ruler.longitude, sect)
+            f_score = f_dignity["total_score"]
+            if f_score >= 3:
+                f_status = "STRONG"
+                f_verif = f"Ruler {f_ruler_name.value} is well-dignified (Score: {f_score})."
+            elif f_score <= -3:
+                f_status = "WEAK"
+                f_verif = f"Ruler {f_ruler_name.value} is debilitated (Score: {f_score})."
+        forensic_lots_report["Father"] = {"data": enrich_lot(father_lot_lon), "status": f_status, "verification": f_verif}
+
+    # Mother Analysis
+    if mother_lot_lon is not None:
+        m_sign = list(Sign)[int(mother_lot_lon / 30) % 12]
+        m_ruler_name = DignityCalculator.get_essential_rulers(mother_lot_lon, sect)["domicile"]
+        m_ruler = next((p for p in chart.planets if p.name == m_ruler_name), None)
+        m_status = "Neutral"
+        m_verif = f"Ruler {m_ruler_name.value} condition is average."
+        if m_ruler:
+            m_dignity = DignityCalculator.calculate_planet_dignity(m_ruler.name, m_ruler.longitude, sect)
+            m_score = m_dignity["total_score"]
+            if m_score >= 3:
+                m_status = "STRONG"
+                m_verif = f"Ruler {m_ruler_name.value} is well-dignified (Score: {m_score})."
+            elif m_score <= -3:
+                m_status = "WEAK"
+                m_verif = f"Ruler {m_ruler_name.value} is debilitated (Score: {m_score})."
+        forensic_lots_report["Mother"] = {"data": enrich_lot(mother_lot_lon), "status": m_status, "verification": m_verif}
+
+    # Hermetic Lots (God Mode / Paulus Alexandrinus)
+    hermetic_lots = HermeticLotEngine.calculate_all_lots(chart)
     for p in chart.planets:
         if is_benefic_of_sect(p.name, sect):
             constructive_team.append(p.name.value)
@@ -641,6 +735,33 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
     rect_animodar = RectificationEngine.animodar_rectification(chart, chart.jd, demo_lat, demo_lon)
     mundane_context = MundaneEngine(chart.jd, demo_lat, demo_lon).get_hierarchy_report()
     
+    # Generate Soul Guardian Reading from Almuten Data
+    soul_guardian = {}
+    if almuten_data:
+        winner_enum = almuten_data.winner
+        winner_name = winner_enum.value
+        
+        # Get winner's position to find its terms
+        winner_planet = next((p for p in chart.planets if p.name == winner_enum), None)
+        if winner_planet:
+            dignities = DignityCalculator.get_essential_rulers(winner_planet.longitude, sect)
+            term_ruler = dignities["term"]
+            
+            # Generate Job Description
+            essence = PLANET_ESSENCES.get(winner_enum, "Sovereignty and Depth")
+            method = TERM_METHODS.get(term_ruler, "Unique Pathways")
+            
+            job_description = f"You are ruled by a Sovereign {winner_name} in the Terms of {term_ruler.value}—your soul's function is {essence} through {method}."
+            
+            soul_guardian = {
+                "almuten": winner_name,
+                "term_ruler": term_ruler.value,
+                "job_description": job_description,
+                "scores": {k: {"total": v.total_score, "breakdown": v.breakdown} for k, v in almuten_data.scores.items()},
+                "total_score": almuten_data.scores[winner_name].total_score,
+                "prenatal_syzygy_lon": almuten_data.hylegs.get("Syzygy", 0.0)
+            }
+
     # 5-Day Forecast
     forecast_5day = []
     if birth_date:
@@ -649,54 +770,84 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
 
     # --- UNIVERSAL INTEGRATION START ---
     
-    # 1. Medical Astrology (Constitution)
+    # 1. Medical Astrology (Constitution & Pathology)
     asc_sign_idx = int(chart.ascendant / 30) % 12
     asc_sign = list(Sign)[asc_sign_idx]
     
+    # Check for Moon-Mercury Interference
+    moon_merc_alert = None
+    if moon and next((p for p in chart.planets if p.name == PlanetName.MERCURY), None):
+        merc = next(p for p in chart.planets if p.name == PlanetName.MERCURY)
+        moon_merc_alert = MedicalAstrology.check_moon_mercury_interference(moon.longitude, merc.longitude)
+
+    # Check Surgery Risk for Ascendant Body Part (as a proxy for general vitality risk)
+    surgery_risk = MedicalAstrology.can_perform_surgery(
+        MedicalAstrology.get_body_part_for_sign(asc_sign),
+        chart.jd,
+        chart
+    )
+
     medical_analysis = {
         "constitutional_sign": asc_sign.value,
         "governed_body_part": MedicalAstrology.get_body_part_for_sign(asc_sign),
-        "distemper": DecumbitureEngine.analyze_distemper(asc_sign) # Using Asc as proxy for 'Moon at onset' for natal constitution
+        "distemper": DecumbitureEngine.analyze_distemper(asc_sign),
+        "pathology_alerts": [moon_merc_alert] if moon_merc_alert else [],
+        "surgery_risk_analysis": surgery_risk,
+        "natal_constitution": DecumbitureEngine.analyze_natal_constitution(chart),
+        "contra_indications": DecumbitureEngine.get_contra_indications(chart)
     }
 
     # 2. Electional (Chart Strength / Rooting)
-    # We evaluate the natal chart as if it were an election to see how "rooted" the native is.
     electional_engine = ElectionalEngine()
     chart_strength = electional_engine.evaluate_chart(chart, activity="Life Root")
     
     # 3. Solar Return (Current or specific age)
     solar_return_data = {}
-    if age is not None:
+    if age is not None and sun is not None:
         try:
             current_yr = birth_date.year + age if birth_date else datetime.now().year
             sr_jd = calculate_solar_return_jd(sun.longitude, chart.jd, current_yr)
-            
-            # Reconstruct SR Chart
-            # We need to calculate the full chart for the SR moment.
-            # Using the same location (traditional method) or current residence? 
-            # Logic typically defaults to birth location if not specified, or london. 
-            # We'll use chart.geo_lat/lon
-            
-            # Use chart_calculator logic? No, logic.py shouldn't depend on chart_calculator (circular).
-            # We can do a lightweight calculation here or assume prediction provides enough.
-            # SolarReturnEngine needs a Chart object.
             
             # Lightweight chart reconstruction for SR
             sr_planets = []
             flag_sr = swe.FLG_SWIEPH | swe.FLG_SPEED
             for pname_enum in PlanetName:
-                if pname_enum in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
-                pid = getattr(swe, pname_enum.value.upper(), None)
-                if pid is None: continue
+                if pname_enum in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: 
+                    continue
+                # Get the Swiss Ephemeris ID for the planet
+                swe_id_map = {
+                    PlanetName.SUN: swe.SUN,
+                    PlanetName.MOON: swe.MOON,
+                    PlanetName.MERCURY: swe.MERCURY,
+                    PlanetName.VENUS: swe.VENUS,
+                    PlanetName.MARS: swe.MARS,
+                    PlanetName.JUPITER: swe.JUPITER,
+                    PlanetName.SATURN: swe.SATURN,
+                    PlanetName.URANUS: swe.URANUS,
+                    PlanetName.NEPTUNE: swe.NEPTUNE,
+                    PlanetName.PLUTO: swe.PLUTO,
+                }
+                pid = swe_id_map.get(pname_enum)
+                if pid is None: 
+                    continue
                 
-                res = swe.calc_ut(sr_jd, pid, flag_sr)[0]
-                sr_planets.append(Planet(name=pname_enum, longitude=res[0], latitude=res[1], speed=res[3]))
+                try:
+                    res = swe.calc_ut(sr_jd, pid, flag_sr)[0]
+                    sr_sign_idx = int(res[0] / 30) % 12
+                    sr_planets.append(Planet(
+                        name=pname_enum, 
+                        longitude=res[0], 
+                        latitude=res[1], 
+                        speed=res[3]
+                    ))
+                except Exception:
+                    continue
                 
             # SR Houses
             sr_cusps, sr_ascmc = swe.houses(sr_jd, chart.geo_lat, chart.geo_lon, b'P')
             
             sr_chart = Chart(
-                sun_altitude=0, # Need to calc real altitude if strict, but for SR logic mainly houses matter
+                sun_altitude=0,
                 planets=sr_planets,
                 ascendant=sr_ascmc[0],
                 mc=sr_ascmc[1],
@@ -713,9 +864,34 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             solar_return_data = {"error": f"Failed to calculate Solar Return: {str(e)}"}
 
     # 4. Decumbiture Principles (Vitality Crisis Checks)
-    # Calculating critical days from birth (Infant viability in tradition)
     critical_days = DecumbitureEngine.calculate_critical_days(chart.jd)
     
+    # 5. Profection Cycles (Annual, Monthly, Daily)
+    profection_data = {}
+    if age is not None:
+        try:
+            # Annual
+            annual_sign = calculate_profection_sign(asc_sign, age)
+            loy = get_lord_of_year(annual_sign)
+            
+            # Monthly
+            monthly_sign = calculate_monthly_profection(annual_sign, month)
+            
+            # Daily
+            daily_sign = calculate_daily_profection(monthly_sign, float(day))
+            
+            profection_data = {
+                "annual_sign": annual_sign.value,
+                "lord_of_year": loy.value if hasattr(loy, "value") else str(loy),
+                "monthly_sign": monthly_sign.value,
+                "daily_sign": daily_sign.value,
+                "current_age": age,
+                "target_month": month,
+                "target_day": day
+            }
+        except Exception as e:
+            profection_data = {"error": f"Failed to calculate profections: {str(e)}"}
+
     report = {
         "summary": {
             "sect": sect.value,
@@ -741,12 +917,16 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         "vitality": vitality_report,
         "medical_analysis": medical_analysis,
         "primary_directions": primary_dirs_json,
+        "active_primary_directions": active_directions,
         "primary_direction_distributor": distributor_data,
+        "profections": profection_data,
         "solar_return": solar_return_data,
         "critical_days_infancy": critical_days[:5],
-        "soul_guardian": generate_soul_guardian_reading(chart, jd) if jd > 0 else {},
+        "soul_guardian": soul_guardian,
         "planets": [],
-        "lots": calculate_all_lots(chart, sect),
+        "lots": all_lots,
+        "hermetic_lots": hermetic_lots,
+        "forensic_lots": forensic_lots_report,
         "stars": check_fixed_stars(chart),
         "fixed_star_meta": get_fixed_star_meta(),
         "nodes": analyze_nodes(chart),
@@ -761,9 +941,11 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         },
         "forecast_5_day": forecast_5day
     }
+
+    # --- SYNTHESIS LAYER ---
+    report["dossier_text"] = ReportSynthesizer.synthesize(report)
     
     # 6. Daily Oracle (Traditional Synthesized Forecast)
-    # Use analysis_jd if available (transits), else fall back to birth jd (though that's static)
     oracle_jd = analysis_jd if analysis_jd else jd
     report["daily_oracle"] = generate_daily_oracle(chart, report, oracle_jd, age, month, day)
 
@@ -772,14 +954,11 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         report["summary"]["universal_causation_audit"] = check_universal_causation_dec2025(jd)
         
     for planet in chart.planets:
-        planet_data = analyze_planet_forensic(planet, chart, jd)
+        planet_data = analyze_planet_forensic(planet, chart, jd, speculum_data=speculum_data)
         report["planets"].append(planet_data)
 
-    # 13. Macroscopic Analysis (Hemispheres/Quadrants) post-planet processing
-    # Requires house numbers from planet data
+    # 13. Macroscopic Analysis (Hemispheres/Quadrants)
     hemi = {"East": 0, "West": 0, "North": 0, "South": 0}
-    # East: 10,11,12,1,2,3 | West: 4,5,6,7,8,9
-    # South (Day/Visible): 7,8,9,10,11,12 | North (Night/Hidden): 1,2,3,4,5,6
     
     for p in report["planets"]:
          h = p.get("house_number", 0)
@@ -828,7 +1007,6 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 "trace": base_trace + [f"Details: {detail}" for detail in dignity_details]
             })
 
-            # Educational: Flag source divergence specifically
             if conflicts:
                 rule_ledger.append({
                     "id": _unique_rule_id(f"{planet_label.lower()}-divergence"),
@@ -836,7 +1014,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                     "condition": f"Source Clashes for {planet_label}",
                     "judgment": "Authorities disagree: " + " | ".join(conflicts),
                     "sources": ["Ptolemy", "Dorotheus", "Egyptian Codex"],
-                    "confidence": 50, # Divergence reduces objective certainty
+                    "confidence": 50,
                     "conflicts": conflicts,
                     "trace": base_trace + ["Reason: Contradiction in primary source traditions"]
                 })
@@ -890,7 +1068,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 "trace": base_trace + ["Source: house delineation library"]
             })
 
-        # --- NEW: Monomoiria Audit ---
+        # Monomoiria Audit
         mon_data = planet_data.get("classical", {}).get("monomoiria")
         if mon_data:
             z_ruler = mon_data.get("zoidion_ruler")
@@ -907,7 +1085,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 "trace": base_trace + [f"Generative Rule: {z_ruler} (Zoidion), {t_ruler} (Trigonal)"]
             })
 
-        # --- NEW: Dodecatemoria Audit ---
+        # Dodecatemoria Audit
         dod_data = planet_data.get("classical", {}).get("dodecatemoria")
         if dod_data:
             v_dod = dod_data.get("valens", {})
@@ -920,10 +1098,10 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 "sources": ["Vettius Valens, Anthologies I.9"],
                 "confidence": 88,
                 "conflicts": [],
-                "trace": base_trace + [f"Projection: {v_dod.get('longitude'):.2f}°"]
+                "trace": base_trace + [f"Projection: {v_dod.get('longitude', 0):.2f}°"]
             })
 
-        # --- NEW: Kakosis (Maltreatment) Audit ---
+        # Kakosis (Maltreatment) Audit
         kakosis = planet_data.get("classical", {}).get("kakosis", [])
         for k in kakosis:
             rule_id = _unique_rule_id(f"{planet_label.lower()}-kakosis")
@@ -958,12 +1136,11 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
             ]
         })
 
-    # NEW: Check Angles (Ascendant/Midheaven) for Universal Overrides (Binder1 Step 2 Linkage Test)
+    # Check Angles for Universal Overrides
     if jd > 0:
         angle_eclipses = get_recent_eclipses(jd)
         dec_audit = check_universal_causation_dec2025(jd)
         
-        # Combine sources
         all_universal_events = []
         for e in angle_eclipses:
             all_universal_events.append({
@@ -1006,11 +1183,107 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                         ]
                     })
 
+    # Almuten Figuris Audit
+    if almuten_data:
+        winner = almuten_data.winner.value
+        total_score = almuten_data.scores[winner].total_score
+        rule_id = _unique_rule_id("almuten-figuris")
+        rule_ledger.append({
+            "id": rule_id,
+            "category": "Almuten Figuris",
+            "condition": "Chart Ruler Calculation",
+            "judgment": f"The Guardian of the Soul is {winner} (Score: {total_score}).",
+            "sources": ["Ibn Ezra, Book of Nativities", "Lilly, Christian Astrology"],
+            "confidence": 92,
+            "conflicts": [],
+            "trace": [
+                f"Winner: {winner}",
+                f"Essential Score: {almuten_data.scores[winner].essential_score}",
+                f"Accidental/House Score: {almuten_data.scores[winner].house_score}",
+                f"Day/Hour Score: {almuten_data.scores[winner].day_hour_score}"
+            ]
+        })
+
+    # Add Active Primary Directions to Ledger
+    for d in active_directions:
+        rule_id = _unique_rule_id(f"direction-{_slugify(d['promittor'])}-{_slugify(d['aspect'])}")
+        rule_ledger.append({
+            "id": rule_id,
+            "category": "Primary Direction",
+            "condition": f"Directed {d['significator']} to {d['aspect']} of {d['promittor']}",
+            "judgment": f"ACTIVE: Exact at age {d['years']} ({d['date_offset']}). Major life shift indicator.",
+            "sources": ["Ptolemy, Tetrabiblos III.10", "Placidus, Primum Mobile"],
+            "confidence": 90,
+            "conflicts": [],
+            "trace": [f"Arc: {d['arc']}°", f"Method: {d['method']}"]
+        })
+
+    # Add Fixed Star Contacts to Ledger
+    for star_contact in report["stars"]:
+        rule_id = _unique_rule_id(f"star-{_slugify(star_contact.star_name)}")
+        rule_ledger.append({
+            "id": rule_id,
+            "category": "Fixed Star",
+            "condition": f"{star_contact.star_name} {star_contact.contact_type} {star_contact.planet_name}",
+            "judgment": star_contact.message,
+            "sources": ["Anonymous of 379", "Ptolemy, Tetrabiblos", "Brady, Starlight"],
+            "confidence": 90,
+            "conflicts": [],
+            "trace": [f"Star: {star_contact.star_name}", f"Planet: {star_contact.planet_name}", f"Type: {star_contact.contact_type}"]
+        })
+
+    # Add Hermetic Lots to Ledger
+    for lot_key, lot_val in report["hermetic_lots"].items():
+        rule_id = _unique_rule_id(f"hermetic-lot-{_slugify(lot_key)}")
+        rule_ledger.append({
+            "id": rule_id,
+            "category": "Hermetic Lot",
+            "condition": f"Lot of {lot_key} in {lot_val['sign']} (House {lot_val['house']})",
+            "judgment": f"Ruler: {lot_val['ruler']}. Significance: Traditional Hermetic Lot of {lot_key}.",
+            "sources": ["Paulus Alexandrinus, Introduction", "Vettius Valens, Anthologies"],
+            "confidence": 85,
+            "conflicts": [],
+            "trace": [f"Lot: {lot_key}", f"Longitude: {lot_val['longitude']:.2f}°", f"Ruler: {lot_val['ruler']}"]
+        })
+
+    # Add Forensic Lot Analysis to Ledger
+    for lot_name, lot_info in forensic_lots_report.items():
+        # Add all forensic lots to ledger if they have a status other than "Clear" or if they are Father/Mother
+        if lot_info.get("status") != "Clear" or lot_name in ["Father", "Mother"]:
+            rule_id = _unique_rule_id(f"forensic-lot-{_slugify(lot_name)}")
+            rule_ledger.append({
+                "id": rule_id,
+                "category": "Forensic Lot",
+                "condition": f"Lot of {lot_name} Analysis",
+                "judgment": lot_info["verification"],
+                "sources": ["Guido Bonatti, Liber Astronomiae", "Vettius Valens, Anthologies"],
+                "confidence": 85,
+                "conflicts": [],
+                "trace": [f"Lot Position: {lot_info['data']['longitude']:.2f}°", f"Status: {lot_info['status']}"]
+            })
+
+    # Universal Integration: Check Eclipses vs Lots
+    if jd > 0:
+        eclipses = get_recent_eclipses(jd)
+        for ec in eclipses:
+            for lot_key, lot_lon in all_lots.items():
+                impact = check_eclipse_impact(lot_lon, ec["longitude"])
+                if impact:
+                    rule_id = _unique_rule_id(f"eclipse-lot-{_slugify(lot_key)}")
+                    rule_ledger.append({
+                        "id": rule_id,
+                        "category": "Universal Override",
+                        "condition": f"Lot of {lot_key} impacted by {ec['type']}",
+                        "judgment": f"SUSPENDED PROMISE: {impact}. The area of life governed by this Lot is under universal pressure.",
+                        "sources": ["Ptolemy, Tetrabiblos II"],
+                        "confidence": 92,
+                        "conflicts": [],
+                        "trace": [f"Eclipse at {ec['longitude']:.2f}°", f"Lot at {lot_lon:.2f}°"]
+                    })
+
     report["rule_ledger"] = rule_ledger
 
     # 7. Horary Physics (Synthesis of Significators)
-    # We analyze physics between the Lord of the 1st and the Lord of the Year (if age provided)
-    # Or Moon vs others.
     if age is not None:
         asc_sign_idx = int(chart.ascendant / 30) % 12
         essentials = DignityCalculator.get_essential_rulers(chart.ascendant, sect)
@@ -1055,13 +1328,21 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         daily_sign = signs[daily_index]
         
         # Epitasis (needs transiting LoY)
-        # Find the LoY in the current chart (assuming 'chart' contains transits)
         loy_planet = next((p for p in chart.planets if p.name == loy_name), None)
         epitasis_days = []
         loy_trans_sign = None
         loy_trans_source = None
         if analysis_jd:
-            pid = getattr(swe, loy_name.value.upper(), None)
+            swe_id_map = {
+                PlanetName.SUN: swe.SUN,
+                PlanetName.MOON: swe.MOON,
+                PlanetName.MERCURY: swe.MERCURY,
+                PlanetName.VENUS: swe.VENUS,
+                PlanetName.MARS: swe.MARS,
+                PlanetName.JUPITER: swe.JUPITER,
+                PlanetName.SATURN: swe.SATURN,
+            }
+            pid = swe_id_map.get(loy_name)
             if pid is not None:
                 try:
                     loy_trans_res = swe.calc_ut(analysis_jd, pid, swe.FLG_SWIEPH)[0]
@@ -1145,14 +1426,12 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
         spirit_lon = report["lots"].get("Spirit")
         fortune_lon = report["lots"].get("Fortune")
         
-        # Use provided birth_date or fallback to symbolic
         start_dt = birth_date if birth_date else datetime(2000, 1, 1)
         
         if spirit_lon is not None:
             spirit_sign = list(Sign)[int(spirit_lon / 30) % 12]
             report["fate_timeline_spirit"] = calculate_zr_lifetime_map(spirit_sign, start_dt)
             
-            # Also calculate current active periods for quick reference
             now_dt = analysis_date if analysis_date else datetime.now()
             report["zodiacal_releasing"] = calculate_zr_periods(spirit_sign, start_dt, now_dt)
             
@@ -1201,14 +1480,21 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
         try:
             m_res = swe.calc_ut(trans_jd, swe.MOON, swe.FLG_MOSEPH)[0]
         except swe.Error:
-             # Moshier fallback failed. Use approximate position (0.0).
-             m_res = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+            m_res = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     trans_moon_lon = m_res[0]
     trans_moon_sign = list(Sign)[int(trans_moon_lon / 30) % 12]
     
     # Check for Epitasis (Secret Key)
-    # Is the Daily sign the sign where the LOY currently transits?
-    p_id = getattr(swe, loy_name.value.upper(), 0)
+    swe_id_map = {
+        PlanetName.SUN: swe.SUN,
+        PlanetName.MOON: swe.MOON,
+        PlanetName.MERCURY: swe.MERCURY,
+        PlanetName.VENUS: swe.VENUS,
+        PlanetName.MARS: swe.MARS,
+        PlanetName.JUPITER: swe.JUPITER,
+        PlanetName.SATURN: swe.SATURN,
+    }
+    p_id = swe_id_map.get(loy_name, swe.SUN)
     try:
         loy_trans_res = swe.calc_ut(trans_jd, p_id, swe.FLG_SWIEPH)[0]
     except swe.Error:
@@ -1300,11 +1586,6 @@ def generate_daily_oracle(natal_chart: Chart, report: Dict, trans_jd: float, age
         moon_msg += "The Moon opposes your daily direction. Expect tension between your needs and the day's demands."
     
     forecast["details"].append(moon_msg)
-    
-    # 4. Planetary Years Context
-    major_firdaria = calculate_firdaria(report["summary"]["sect"], datetime.now(), datetime.now()) # Dummy usage just to show sub
-    # Actually logic.py already calculates firdaria context in real scenarios if integrated. 
-    # For now, let's just use what's available.
     
     return forecast
 

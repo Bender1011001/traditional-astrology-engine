@@ -75,13 +75,14 @@ class SolarReturnEngine:
             # Find Natal House Rulership (Whole Sign)
             # For each sign the planet rules, find which natal house it maps to
             ruled_natal_houses = []
-            for sign, ruler in DignityCalculator.DOMICILES.items():
-                if ruler == p.name:
-                    # Which natal house is this sign?
-                    # Start of sign lon
-                    sign_start = (list(Sign).index(sign)) * 30
-                    h_num = DignityCalculator.get_house_number(sign_start + 1.0, natal_chart.ascendant, natal_chart.houses)
-                    ruled_natal_houses.append(h_num)
+            
+            signs_ruled = DignityCalculator.DOMICILES.get(p.name, [])
+            for sign in signs_ruled:
+                # Which natal house is this sign?
+                # Start of sign lon
+                sign_start = (list(Sign).index(sign)) * 30
+                h_num = DignityCalculator.get_house_number(sign_start + 1.0, natal_chart.ascendant, natal_chart.houses)
+                ruled_natal_houses.append(h_num)
             
             determinations.append({
                 "planet": p.name.value,

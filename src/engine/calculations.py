@@ -1,115 +1,8 @@
+from typing import Tuple
 from .models import Planet, PlanetName, Sect, Sign, Chart
-from .reference_data import (
-    DOMICILES, EXALTATIONS, FALLS, DETRIMENTS, 
-    TRIPLICITY_RULERS, SIGN_ELEMENTS, EGYPTIAN_TERMS, FACES_ORDER
-)
-
 def calculate_sect(sun_altitude: float) -> Sect:
     return Sect.DAY if sun_altitude > 0 else Sect.NIGHT
 
-def get_triplicity_ruler(sign: Sign, sect: Sect) -> PlanetName:
-    element = SIGN_ELEMENTS[sign]
-    rulers = TRIPLICITY_RULERS[element]
-    # Support both dict-based and tuple-based triplicity tables.
-    if isinstance(rulers, dict):
-        return rulers[sect]
-    # Tuple/list: (Day, Night, [Participant])
-    if sect == Sect.DAY:
-        return rulers[0]
-    return rulers[1]
-
-def get_term_ruler(sign: Sign, degree: float) -> PlanetName:
-    terms = EGYPTIAN_TERMS[sign]
-    for planet, upper_bound in terms:
-        if degree < upper_bound:
-            return planet
-    return terms[-1][0] # Should not happen if degree < 30
-
-def get_face_ruler(sign: Sign, degree: float) -> PlanetName:
-    # Faces are 0-10, 10-20, 20-30
-    face_idx = int(degree // 10)
-    if face_idx > 2: face_idx = 2 # Handle exactly 30?
-    
-    # Calculate index in FACES_ORDER
-    # Aries is 0, 1, 2. Taurus is 3, 4, 5...
-    sign_list = list(Sign)
-    sign_idx = sign_list.index(sign)
-    global_face_idx = (sign_idx * 3) + face_idx
-    return FACES_ORDER[global_face_idx % len(FACES_ORDER)]
-
-def calculate_dignity_score(planet: Planet, chart_sect: Sect) -> tuple[int, list[str]]:
-    """
-    Returns (net_score, breakdown_list)
-    """
-    score = 0
-    breakdown = []
-    
-    pf = planet.name
-    sign = planet.sign
-    deg = planet.degree_in_sign
-    
-    # Positive Dignities
-    has_dignity = False
-    
-    if DOMICILES[sign] == pf:
-        score += 5
-        breakdown.append("Domicile (+5)")
-        has_dignity = True
-        
-    if EXALTATIONS.get(sign) == pf:
-        score += 4
-        breakdown.append("Exaltation (+4)")
-        has_dignity = True
-        
-    if get_triplicity_ruler(sign, chart_sect) == pf:
-        score += 3
-        breakdown.append("Triplicity (+3)")
-        has_dignity = True
-        
-    if get_term_ruler(sign, deg) == pf:
-        score += 2
-        breakdown.append("Term (+2)")
-        has_dignity = True
-        
-    if get_face_ruler(sign, deg) == pf:
-        score += 1
-        breakdown.append("Face (+1)")
-        has_dignity = True
-        
-    # Negative Dignities
-    if DETRIMENTS.get(sign) == pf:
-        score -= 5
-        breakdown.append("Detriment (-5)")
-        
-    if FALLS.get(sign) == pf:
-        score -= 4
-        breakdown.append("Fall (-4)")
-        
-    # Peregrine Check
-    if not has_dignity:
-        # Note: Some definitions say not peregrine if in mutual reception etc, but we stick to strict essential dignity here
-        score -= 5
-        breakdown.append("Peregrine (-5)")
-        
-    return score, breakdown
-
-def calculate_solar_proximity(planet: Planet, sun: Planet) -> str:
-    if planet.name == PlanetName.SUN:
-        return "N/A"
-        
-    # Simple distance calculation (ignoring 360 wrap logic for simplicity for now, but should fix)
-    dist = abs(planet.longitude - sun.longitude)
-    if dist > 180:
-        dist = 360 - dist
-        
-    if dist < (17/60): # 0 degrees 17 minutes
-        return "CAZIMI"
-    elif dist <= 8:
-        return "COMBUST"
-    elif dist <= 15:
-        return "UNDER_BEAMS"
-    else:
-        return "FREE"
 
 def calculate_lunar_phase(sun_lon: float, moon_lon: float) -> tuple[str, str]:
     """
@@ -137,64 +30,63 @@ def calculate_lunar_phase(sun_lon: float, moon_lon: float) -> tuple[str, str]:
 
 import swisseph as swe
 
-def calculate_prenatal_syzygy(jd: float) -> float:
+def calculate_prenatal_syzygy(jd_utc: float) -> tuple[float, str]:
     """
-    Finds the longitude of the last New Moon or Full Moon before the given JD.
-    Uses iterative refinement for precision.
+    Finds the position of the SAN (Syzygy Ante Nativitatem) using Iterative Newton-Raphson method.
+    Resolves to True Syzygy within acceptable tolerance (< 1 sec).
+    Returns (longitude, type) where type is "New" or "Full".
     """
-    curr_jd = jd
+    flags = swe.FLG_SWIEPH | swe.FLG_SPEED
     
-    def get_phase_diff(t):
-        res_s = swe.calc_ut(t, swe.SUN, swe.FLG_SWIEPH)
-        res_m = swe.calc_ut(t, swe.MOON, swe.FLG_SWIEPH)
-        return (res_m[0][0] - res_s[0][0]) % 360
-
-    # 1. Broad search: check every 2 hours going back for 31 days
-    step = 2.0 / 24.0
-    prev_jd = curr_jd
-    found_jd = None
+    # 1. Determine Target from Birth chart
+    res_sun = swe.calc_ut(jd_utc, swe.SUN, flags)
+    res_moon = swe.calc_ut(jd_utc, swe.MOON, flags)
     
-    for _ in range(int(31 / step)):
-        t1 = curr_jd - step
-        d1 = get_phase_diff(t1)
-        d_curr = get_phase_diff(curr_jd)
+    s_l = res_sun[0][0]
+    m_l = res_moon[0][0]
+    
+    phase = (m_l - s_l) % 360.0
+    
+    if phase < 180:
+        target_type = "New"
+        target_angle = 0.0
+    else:
+        target_type = "Full"
+        target_angle = 180.0
         
-        # New Moon crossing (near 0)
-        # Check if 0 is between d1 and d_curr
-        # Since it wraps, if d_curr < d1 and d1 > 350, it crossed 0.
-        if (d_curr < d1 and d1 > 350) or (d_curr < 180 and d1 > 180) or (d_curr > 180 and d1 < 180):
-            # Crossing found between t1 and curr_jd
-            found_jd = (t1, curr_jd)
-            break
-        curr_jd = t1
-
-    if not found_jd:
-        # Fallback to current sun position if not found (shouldn't happen)
-        return swe.calc_ut(jd, swe.SUN, swe.FLG_SWIEPH)[0][0]
-
-    # 2. Refine (Binary search for crossing)
-    low, high = found_jd
+    # 2. Newton-Raphson Search
+    t = jd_utc
+    # Initial guess: approximate backward by phase diff
+    # Avg rel speed ~12.19 deg/day
+    diff_est = phase - target_angle
+    if diff_est < 0: diff_est += 360
+    t -= (diff_est / 12.19)
+    
     for _ in range(15):
-        mid = (low + high) / 2
-        d_mid = get_phase_diff(mid)
-        # We target 0 or 180
-        # If we were looking for NM (near 0)
-        target = 0 if abs(get_phase_diff(high) - 0) < 90 or abs(get_phase_diff(high) - 360) < 90 else 180
+        r_sun = swe.calc_ut(t, swe.SUN, flags)
+        r_moon = swe.calc_ut(t, swe.MOON, flags)
         
-        if target == 0:
-            if d_mid > 180: # Wrapped
-                low = mid
-            else:
-                high = mid
-        else:
-            if d_mid < 180:
-                low = mid
-            else:
-                high = mid
-                
-    # Final longitude
-    res = swe.calc_ut(high, swe.SUN, swe.FLG_SWIEPH)
-    return res[0][0]
+        s_l, s_v = r_sun[0][0], r_sun[0][3]
+        m_l, m_v = r_moon[0][0], r_moon[0][3]
+        
+        curr_phase = (m_l - s_l) % 360.0
+        
+        # Delta = Current - Target
+        delta = curr_phase - target_angle
+        
+        # Unwrap
+        if delta > 180: delta -= 360
+        if delta < -180: delta += 360
+        
+        if abs(delta) < 0.00001:
+            # Result
+            final_lon = m_l if target_type == "Full" else s_l
+            return (final_lon, target_type)
+        
+        v_rel = m_v - s_v
+        t -= (delta / v_rel)
+        
+    return (s_l, target_type)
 
 def calculate_solar_status(planet: Planet, sun: Planet) -> str:
     diff = abs(planet.longitude - sun.longitude)

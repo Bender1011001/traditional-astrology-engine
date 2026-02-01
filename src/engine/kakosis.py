@@ -4,7 +4,7 @@ from .models import Planet, Chart, PlanetName, Sect, Sign
 
 @dataclass
 class MaltreatmentCondition:
-    type: str  # "Overcoming", "Besiegement", "Striking", "Adherence", "Opposition"
+    type: str  # "Overcoming", "Besiegement", "Striking", "Adherence", "Opposition", "Enclosure"
     malefic: PlanetName
     description: str
     severity: int  # 1-10
@@ -61,17 +61,25 @@ class KakosisEngine:
         conditions.extend(KakosisEngine._check_opposition(planet, chart, sect))
 
         # 3. BESIEGEMENT (Perischeisis)
-        # Trapped between two malefics (by body or ray)
+        # Trapped between two malefics (by body)
         conditions.extend(KakosisEngine._check_besiegement(planet, chart, sect))
+
+        # 4. ENCLOSURE (Perischeisis by Ray)
+        # Trapped between rays of malefics
+        conditions.extend(KakosisEngine._check_enclosure(planet, chart, sect))
         
-        # 4. STRIKING WITH A RAY (Aktinobolia)
+        # 5. STRIKING WITH A RAY (Aktinobolia)
         # Malefic casting a hard aspect (usually square/opp) degree-based
         # Overlap with Overcoming/Opp logic but specifically degree-based.
         conditions.extend(KakosisEngine._check_striking_ray(planet, chart, sect))
         
-        # 5. ADHERENCE (Kollesis) or CONNECTION (Sunaphe)
+        # 6. ADHERENCE (Kollesis) or CONNECTION (Sunaphe)
         # Applying to conjunction with a malefic
         conditions.extend(KakosisEngine._check_adherence(planet, chart, sect))
+
+        # 7. INTERVENTION (Mitigation)
+        # Check if a benefic breaks the maltreatment
+        conditions = KakosisEngine._apply_intervention(planet, chart, conditions)
 
         return conditions
 
@@ -170,11 +178,54 @@ class KakosisEngine:
         return []
 
     @staticmethod
+    def _check_enclosure(planet: Planet, chart: Chart, sect: Sect) -> List[MaltreatmentCondition]:
+        """
+        Enclosure (Perischeisis by Ray):
+        Planet is situated between the rays of two malefics.
+        Example: Mars at 0 Aries (Square to 0 Cancer), Saturn at 0 Libra (Square to 0 Cancer).
+        A planet at 0 Cancer is enclosed by rays.
+        """
+        res = []
+        mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
+        saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
+        
+        if not mars or not saturn:
+            return []
+
+        # Major aspect points for malefics
+        def get_aspect_points(p_lon):
+            return [(p_lon + deg) % 360 for deg in [0, 60, 90, 120, 180, 240, 270, 300]]
+
+        m_rays = get_aspect_points(mars.longitude)
+        s_rays = get_aspect_points(saturn.longitude)
+
+        def get_shortest_dist(p_lon, target_lon):
+            diff = target_lon - p_lon
+            if diff > 180: diff -= 360
+            if diff < -180: diff += 360
+            return diff
+
+        # Check if planet is between any pair of rays (one from Mars, one from Saturn)
+        # within a tight orb (e.g. 7 degrees total span)
+        for mr in m_rays:
+            for sr in s_rays:
+                d_m = get_shortest_dist(planet.longitude, mr)
+                d_s = get_shortest_dist(planet.longitude, sr)
+                
+                if (d_m * d_s < 0) and (abs(d_m) + abs(d_s) < 7):
+                    res.append(MaltreatmentCondition(
+                        "Enclosure", PlanetName.SATURN,
+                        f"Enclosed by rays of Mars and Saturn (Span: {round(abs(d_m)+abs(d_s), 1)}°).",
+                        9
+                    ))
+                    return res # One enclosure is enough
+        return res
+
+    @staticmethod
     def _check_striking_ray(planet: Planet, chart: Chart, sect: Sect) -> List[MaltreatmentCondition]:
         """
         Aktinobolia: Typically a square where the Malefic is 'looking ahead' at the planet,
         or simply a tight hard aspect.
-        Here we treat it as a tight degree-based square (approx 3 deg).
         """
         res = []
         for m in chart.planets:
@@ -184,12 +235,18 @@ class KakosisEngine:
             diff = abs(m.longitude - planet.longitude)
             if diff > 180: diff = 360 - diff
             
-            # Check for Square (90)
+            # Check for Square (90) or Opposition (180)
             if abs(diff - 90) < 3: # Tight square (3 deg)
                 res.append(MaltreatmentCondition(
                     "Striking with a Ray", m.name,
-                    f"Struck by {m.name.value} via tight square ({int(abs(diff-90))}° orb).",
+                    f"Struck by {m.name.value} via tight square ({round(abs(diff-90), 1)}° orb).",
                     8
+                ))
+            elif abs(diff - 180) < 3: # Tight opposition
+                res.append(MaltreatmentCondition(
+                    "Striking with a Ray", m.name,
+                    f"Struck by {m.name.value} via tight opposition ({round(abs(diff-180), 1)}° orb).",
+                    9
                 ))
         return res
 
@@ -253,3 +310,40 @@ class KakosisEngine:
                         9
                     ))
         return res
+
+    @staticmethod
+    def _apply_intervention(planet: Planet, chart: Chart, conditions: List[MaltreatmentCondition]) -> List[MaltreatmentCondition]:
+        """
+        Intervention: A benefic (Jupiter/Venus) casts a ray between the malefic and the victim,
+        or aspects the victim, breaking the maltreatment.
+        """
+        if not conditions:
+            return []
+
+        benefics = [p for p in chart.planets if p.name in KakosisEngine.BENEFICS]
+        if not benefics:
+            return conditions
+
+        # If a benefic is in conjunction, trine, or sextile to the planet, reduce severity
+        mitigated_conditions = []
+        for cond in conditions:
+            best_mitigation = 0
+            for b in benefics:
+                diff = abs(b.longitude - planet.longitude)
+                if diff > 180: diff = 360 - diff
+                
+                # Conjunction, Sextile, Trine
+                if diff < 5 or abs(diff - 60) < 5 or abs(diff - 120) < 5:
+                    # Mitigation found!
+                    mitigation = 3 if diff < 5 else 2
+                    if mitigation > best_mitigation:
+                        best_mitigation = mitigation
+            
+            if best_mitigation > 0:
+                cond.severity -= best_mitigation
+                cond.description += f" (Mitigated by Benefic Intervention: -{best_mitigation} severity)"
+                if cond.severity < 1: cond.severity = 1
+            
+            mitigated_conditions.append(cond)
+            
+        return mitigated_conditions

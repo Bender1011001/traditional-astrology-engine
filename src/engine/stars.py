@@ -19,43 +19,16 @@ class FixedStar:
     orb: float = 1.0
     swe_name: Optional[str] = None
 
-# 2025 Coordinates and forensic meanings derived from Binder1_part_030.txt
+# 2025 Coordinates and forensic meanings derived from Binder1_part_030.txt and traditional sources
 STARS = [
     FixedStar(
-        name="Aldebaran", 
-        longitude=70.133, # 10°08' Gemini
-        nature="Mars", 
-        magnitude=1, 
-        glory="Integrity, Honor, Moral Courage",
-        nemesis="Compromise of Integrity; Ruin through dishonesty",
-        swe_name="Aldebaran"
-    ),
-    FixedStar(
-        name="Regulus", 
-        longitude=150.167, # 00°10' Virgo
-        nature="Mars/Jupiter", 
-        magnitude=1, 
-        glory="Power, Command, Nobility",
-        nemesis="Revenge; Total fall from grace due to pettiness",
-        swe_name="Regulus"
-    ),
-    FixedStar(
-        name="Antares", 
-        longitude=250.100, # 10°06' Sagittarius
-        nature="Mars/Jupiter", 
-        magnitude=1, 
-        glory="Intensity, Bravery, Strategic Genius",
-        nemesis="Obsession; Self-destruction through mania",
-        swe_name="Antares"
-    ),
-    FixedStar(
-        name="Fomalhaut", 
-        longitude=334.200, # 04°12' Pisces
-        nature="Venus/Mercury", 
-        magnitude=1, 
-        glory="Charisma, Artistic/Spiritual Legacy",
-        nemesis="Corruption of Ideals; Dreaming without doing",
-        swe_name="Fomalhaut"
+        name="Alpheratz",
+        longitude=14.317, # 14°19' Aries
+        nature="Jupiter/Venus",
+        magnitude=2,
+        glory="Independence, Freedom, Love of movement",
+        nemesis="Restlessness, Lack of focus",
+        swe_name="Alpheratz"
     ),
     FixedStar(
         name="Caput Algol", 
@@ -68,6 +41,96 @@ STARS = [
         swe_name="Algol"
     ),
     FixedStar(
+        name="Alcyone",
+        longitude=60.167, # 00°10' Gemini
+        nature="Mars/Moon",
+        magnitude=3,
+        glory="Visionary insight, Spiritual depth",
+        nemesis="Blindness (physical or metaphorical), Sorrow",
+        swe_name="Alcyone"
+    ),
+    FixedStar(
+        name="Aldebaran", 
+        longitude=70.133, # 10°08' Gemini
+        nature="Mars", 
+        magnitude=1, 
+        glory="Integrity, Honor, Moral Courage",
+        nemesis="Compromise of Integrity; Ruin through dishonesty",
+        swe_name="Aldebaran"
+    ),
+    FixedStar(
+        name="Capella",
+        longitude=82.117, # 22°07' Gemini
+        nature="Mars/Mercury",
+        magnitude=1,
+        glory="Civic honors, Wealth, Public position",
+        nemesis="Inquisitiveness, Wastefulness",
+        swe_name="Capella"
+    ),
+    FixedStar(
+        name="Rigel",
+        longitude=77.100, # 17°06' Gemini
+        nature="Jupiter/Mars",
+        magnitude=1,
+        glory="Great fortune, Lasting honors, Inventive mind",
+        nemesis="Arrogance, Recklessness",
+        swe_name="Rigel"
+    ),
+    FixedStar(
+        name="Bellatrix",
+        longitude=81.117, # 21°07' Gemini
+        nature="Mars/Mercury",
+        magnitude=2,
+        glory="Military success, Quick decision making",
+        nemesis="Sudden dishonor, Accidents",
+        swe_name="Bellatrix"
+    ),
+    FixedStar(
+        name="Sirius",
+        longitude=104.333, # 14°20' Cancer
+        nature="Jupiter/Mars",
+        magnitude=1,
+        glory="Fame, Wealth, Guardianship",
+        nemesis="Danger from dogs, Excessive heat/passion",
+        swe_name="Sirius"
+    ),
+    FixedStar(
+        name="Castor",
+        longitude=110.350, # 20°21' Cancer
+        nature="Mercury",
+        magnitude=2,
+        glory="Intellectual brilliance, Sharp wit",
+        nemesis="Violence, Sudden loss",
+        swe_name="Castor"
+    ),
+    FixedStar(
+        name="Pollux",
+        longitude=113.367, # 23°22' Cancer
+        nature="Mars",
+        magnitude=1,
+        glory="Bravery, Audacity, Protection",
+        nemesis="Cruelty, Malice",
+        swe_name="Pollux"
+    ),
+    FixedStar(
+        name="Procyon",
+        longitude=116.117, # 26°07' Cancer
+        nature="Mercury/Mars",
+        magnitude=1,
+        glory="Rapid success, Activity",
+        nemesis="Sudden fall, Danger from bites",
+        swe_name="Procyon"
+    ),
+    FixedStar(
+        name="Regulus", 
+        longitude=150.167, # 00°10' Virgo
+        nature="Mars/Jupiter", 
+        magnitude=1, 
+        glory="Power, Command, Nobility",
+        nemesis="Revenge; Total fall from grace due to pettiness",
+        swe_name="Regulus"
+    ),
+    FixedStar(
         name="Spica", 
         longitude=204.067, # ~24 Libra (Adjusted for 2025)
         nature="Venus/Mars", 
@@ -75,6 +138,78 @@ STARS = [
         glory="Success through art, diplomacy, and intellect",
         nemesis="None (Pure Benefic)",
         swe_name="Spica"
+    ),
+    FixedStar(
+        name="Arcturus",
+        longitude=204.333, # 24°20' Libra
+        nature="Jupiter/Mars",
+        magnitude=1,
+        glory="Riches, Renown, Prosperity through travel",
+        nemesis="Legal troubles",
+        swe_name="Arcturus"
+    ),
+    FixedStar(
+        name="Alphecca",
+        longitude=222.350, # 12°21' Scorpio
+        nature="Venus/Mercury",
+        magnitude=2,
+        glory="Artistic talent, Dignity, Poetic mind",
+        nemesis="Scandal, Betrayal",
+        swe_name="Alphecca"
+    ),
+    FixedStar(
+        name="Antares", 
+        longitude=250.100, # 10°06' Sagittarius
+        nature="Mars/Jupiter", 
+        magnitude=1, 
+        glory="Intensity, Bravery, Strategic Genius",
+        nemesis="Obsession; Self-destruction through mania",
+        swe_name="Antares"
+    ),
+    FixedStar(
+        name="Vega",
+        longitude=285.383, # 15°23' Capricorn
+        nature="Venus/Mercury",
+        magnitude=1,
+        glory="Hopefulness, Refinement, Political power",
+        nemesis="Pretentiousness, Lasciviousness",
+        swe_name="Vega"
+    ),
+    FixedStar(
+        name="Altair",
+        longitude=292.017, # 02°01' Aquarius
+        nature="Mars/Jupiter",
+        magnitude=1,
+        glory="Boldness, Courage, Confidence",
+        nemesis="Guilt, Bloodshed",
+        swe_name="Altair"
+    ),
+    FixedStar(
+        name="Fomalhaut", 
+        longitude=334.200, # 04°12' Pisces
+        nature="Venus/Mercury", 
+        magnitude=1, 
+        glory="Charisma, Artistic/Spiritual Legacy",
+        nemesis="Corruption of Ideals; Dreaming without doing",
+        swe_name="Fomalhaut"
+    ),
+    FixedStar(
+        name="Deneb Adige",
+        longitude=335.333, # 05°20' Pisces
+        nature="Venus/Mercury",
+        magnitude=1,
+        glory="Intelligence, Quick learning, Fame",
+        nemesis="Naivety",
+        swe_name="Deneb"
+    ),
+    FixedStar(
+        name="Markab",
+        longitude=353.550, # 23°33' Pisces
+        nature="Mars/Mercury",
+        magnitude=2,
+        glory="Honors, Wealth, Ambition",
+        nemesis="Danger from fire/explosions",
+        swe_name="Markab"
     ),
 ]
 

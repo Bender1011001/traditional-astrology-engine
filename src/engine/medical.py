@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 import swisseph as swe
 from typing import List, Dict, Optional, Tuple
 from .models import PlanetName, Sign, Chart, Planet
-from .calculations import calculate_solar_proximity
 
 class MedicalAstrology:
     """
