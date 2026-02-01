@@ -28,41 +28,45 @@ def setup_products():
     print(f"Using Stripe Key: {api_key[:8]}...")
 
     try:
-        # 1. Create Monthly Product
-        print("\nCreating Monthly Subscription...")
-        monthly = stripe.Product.create(
-            name="Codex Caelestis - Pro Access (Monthly)",
-            description="Unlimited chart readings, full forensic reports, and 5-year forecasts.",
-        )
-        
-        monthly_price = stripe.Price.create(
-            unit_amount=499, # $4.99
-            currency="usd",
-            recurring={"interval": "month"},
-            product=monthly.id,
-        )
-        print(f"✅ Success! Monthly Price ID: {monthly_price.id}")
+        # --- D2C PLANS ---
 
-        # 2. Create Annual Product
-        print("\nCreating Annual Subscription...")
-        annual = stripe.Product.create(
-            name="Codex Caelestis - Pro Access (Annual)",
-            description="Unlimited access for 1 year. Save ~17%.",
-        )
-        
-        annual_price = stripe.Price.create(
-            unit_amount=4900, # $49.00
-            currency="usd",
-            recurring={"interval": "year"},
-            product=annual.id,
-        )
-        print(f"✅ Success! Annual Price ID: {annual_price.id}")
-        
+        # 1. Starter ($29/mo)
+        print("\nCreating Starter Plan ($29/mo)...")
+        starter = stripe.Product.create(name="Codex Caelestis - Starter", description="50 charts/mo, forensic audit, PDF export.")
+        starter_mo = stripe.Price.create(unit_amount=2900, currency="usd", recurring={"interval": "month"}, product=starter.id)
+        starter_yr = stripe.Price.create(unit_amount=29000, currency="usd", recurring={"interval": "year"}, product=starter.id)
+        print(f"✅ Starter IDs: {starter_mo.id} (Mo) / {starter_yr.id} (Yr)")
+
+        # 2. Practitioner ($149/mo)
+        print("\nCreating Practitioner Plan ($149/mo)...")
+        practitioner = stripe.Product.create(name="Codex Caelestis - Practitioner", description="Unlimited charts, commercial license, bulk upload.")
+        practitioner_mo = stripe.Price.create(unit_amount=14900, currency="usd", recurring={"interval": "month"}, product=practitioner.id)
+        practitioner_yr = stripe.Price.create(unit_amount=149000, currency="usd", recurring={"interval": "year"}, product=practitioner.id)
+        print(f"✅ Practitioner IDs: {practitioner_mo.id} (Mo) / {practitioner_yr.id} (Yr)")
+
+        # --- B2B API PLANS ---
+
+        # 3. Master ($299/mo)
+        print("\nCreating Master API Plan ($299/mo)...")
+        master = stripe.Product.create(name="Codex Caelestis - Master API", description="3,000 calls/mo, white-label.")
+        master_mo = stripe.Price.create(unit_amount=29900, currency="usd", recurring={"interval": "month"}, product=master.id)
+        master_yr = stripe.Price.create(unit_amount=299000, currency="usd", recurring={"interval": "year"}, product=master.id)
+        print(f"✅ Master IDs: {master_mo.id} (Mo) / {master_yr.id} (Yr)")
+
+        # 4. Agency ($799/mo)
+        print("\nCreating Agency API Plan ($799/mo)...")
+        agency = stripe.Product.create(name="Codex Caelestis - Agency API", description="30,000 calls/mo, SLA, dedicated support.")
+        agency_mo = stripe.Price.create(unit_amount=79900, currency="usd", recurring={"interval": "month"}, product=agency.id)
+        agency_yr = stripe.Price.create(unit_amount=799000, currency="usd", recurring={"interval": "year"}, product=agency.id)
+        print(f"✅ Agency IDs: {agency_mo.id} (Mo) / {agency_yr.id} (Yr)")
+
         print("\n" + "="*50)
-        print("COPY THESE LINES INTO YOUR .env FILE:")
+        print("UPDATE seed_fresh_db.py AND .env WITH THESE IDs:")
         print("="*50)
-        print(f"STRIPE_SUBSCRIPTION_PRICE_ID={monthly_price.id}")
-        print(f"STRIPE_ANNUAL_PRICE_ID={annual_price.id}")
+        print(f"STARTER_IDs:      {starter_mo.id} / {starter_yr.id}")
+        print(f"PRACTITIONER_IDs: {practitioner_mo.id} / {practitioner_yr.id}")
+        print(f"MASTER_IDs:       {master_mo.id} / {master_yr.id}")
+        print(f"AGENCY_IDs:       {agency_mo.id} / {agency_yr.id}")
         print("="*50)
 
     except Exception as e:

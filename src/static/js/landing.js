@@ -3,6 +3,16 @@ import { logEvent, SESSION_ID } from './telemetry.js';
 import { initTheme, setupThemeToggle, applyTheme } from './theme.js';
 import { updateAuthUI, logout } from './auth.js';
 import { escapeHtml, formatPlainReading, hashString } from './utils.js';
+import { setupPricing, initiateCheckout } from './pricing.js';
+
+// Expose globally for HTML onclicks
+window.initiateCheckout = (tier) => initiateCheckout(tier, getLastChartRequest());
+window.startCheckout = (tier) => {
+    // Adapter for paywall modal which uses startCheckout(tier)
+    // and might not have access to 'basic' reading data easily if we don't store it.
+    // We'll use the same helper.
+    initiateCheckout(tier, getLastChartRequest());
+};
 
 // Expose logout globally
 window.logout = logout;
@@ -34,8 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     setupBasicForm();
     setupModals();
     checkRegenerate();
+
     setupSamplesAndAccordions(); // Logic for accordions in index.html
+    setupPricing();
 });
+
+function getLastChartRequest() {
+    // Helper to get fresh value of lastChartRequest
+    // In strict mode modules, local vars aren't exported.
+    // We use the module-scope variable defined below.
+    return lastChartRequest;
+}
 
 function setupInputValidation() {
     document.querySelectorAll('input[required]').forEach(input => {
@@ -251,28 +270,9 @@ function setupModals() {
     }
     window.openEmailModal = () => { if (emailModal) emailModal.classList.remove('hidden'); };
 
-    // Checkout Logic
-    window.startCheckout = async (tier) => {
-        // ... Logic from basic.js ...
-        if (!lastChartRequest) { alert("Generate chart first."); return; }
-        try {
-            const btn = document.querySelector(`button[onclick="window.startCheckout('${tier}')"]`);
-            if (btn) btn.disabled = true;
-
-            const resp = await fetch(apiUrl("/api/create-checkout"), {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    tier: tier,
-                    chart_request: lastChartRequest,
-                    success_url: window.location.origin + "/success.html",
-                    cancel_url: window.location.href
-                })
-            });
-            const data = await resp.json();
-            if (data.checkout_url) window.location.href = data.checkout_url;
-        } catch (e) { alert("Checkout error: " + e.message); }
-    };
+    // Checkout Logic - DELEGATED to pricing.js
+    // window.startCheckout is already defined at top level to use pricing.js
+    // window.openPaywall is defined above
 
     // Email Form
     const emailForm = document.getElementById("emailForm");

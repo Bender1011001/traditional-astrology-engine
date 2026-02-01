@@ -83,13 +83,14 @@
             }
 
             try {
-                const response = await fetch(apiUrl(`/api/verify-checkout-session?session_id=${sessionId}`));
+                const response = await fetch(apiUrl(`/api/v1/billing/verify-checkout-session?session_id=${sessionId}`));
                 if (!response.ok) throw new Error("Verification failed");
 
                 const data = await response.json();
 
                 // Store token
                 localStorage.setItem(`cael_token_${data.chart_hash}`, data.access_token);
+                localStorage.setItem('cael_auth_token', data.access_token);
 
                 statusCard.innerHTML = `
                     <p style="color:var(--success); font-weight:600; margin-bottom:1rem;">Verified!</p>

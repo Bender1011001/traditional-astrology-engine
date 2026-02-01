@@ -48,7 +48,7 @@ class SubscriptionService:
         self.db.commit()
         return sub
 
-    def create_checkout_session(self, user: User, plan_tier: str, annual: bool = False, success_url: str = "", cancel_url: str = ""):
+    def create_checkout_session(self, user: User, plan_tier: str, annual: bool = False, success_url: str = "", cancel_url: str = "", chart_data: dict = None):
         plan = self.get_plan_by_tier(plan_tier)
         if not plan:
             raise ValueError("Invalid Plan")
@@ -56,6 +56,24 @@ class SubscriptionService:
         price_id = plan.stripe_price_id_annual if annual else plan.stripe_price_id_monthly
         if not price_id:
              raise ValueError("Plan not configured for this billing period")
+
+        metadata = {
+            "user_id": user.id,
+            "plan_tier": plan.tier,
+            "annual": str(annual)
+        }
+        
+        # Store chart data in metadata if provided (serialized)
+        if chart_data:
+            import json
+            # Minimal data to save space
+            minimal_data = {
+                "date": chart_data.get("date"),
+                "time": chart_data.get("time"),
+                "city": chart_data.get("city"),
+                "state": chart_data.get("state")
+            }
+            metadata["chart_data"] = json.dumps(minimal_data)
 
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -68,11 +86,7 @@ class SubscriptionService:
             cancel_url=cancel_url,
             customer_email=user.email,
             client_reference_id=user.id,
-            metadata={
-                "user_id": user.id,
-                "plan_tier": plan.tier,
-                "annual": str(annual)
-            },
+            metadata=metadata,
             subscription_data={
                 "metadata": {
                     "user_id": user.id,

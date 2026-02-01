@@ -36,9 +36,9 @@ def seed_plans():
                 api_quota=0,
                 price_monthly=29.00,
                 price_annual=290.00,
-                stripe_price_id_monthly="price_starter_monthly_placeholder",
-                stripe_price_id_annual="price_starter_annual_placeholder",
-                features={"audit": True, "forecasting": False, "advanced": False, "pdf_export": True}
+                stripe_price_id_monthly="price_1Sw58CC8BJritqvrOIMIuAXJ",
+                stripe_price_id_annual="price_1Sw58lC8BJritqvrJyFBgy98",
+                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": True}
             ),
             SubscriptionPlan(
                 tier="practitioner",
@@ -46,9 +46,9 @@ def seed_plans():
                 api_quota=0,
                 price_monthly=149.00,
                 price_annual=1490.00,
-                stripe_price_id_monthly="price_practitioner_monthly_placeholder",
-                stripe_price_id_annual="price_practitioner_annual_placeholder",
-                features={"audit": True, "forecasting": True, "advanced": True, "commercial": True, "bulk_upload": True}
+                stripe_price_id_monthly="price_1Sw58LC8BJritqvroIwC3kEM",
+                stripe_price_id_annual="price_1Sw58mC8BJritqvrWsCXUtqc",
+                features={"audit": True, "forecasting": True, "commercial": True, "bulk_upload": True, "templates": True}
             ),
             SubscriptionPlan(
                 tier="master",
@@ -56,9 +56,9 @@ def seed_plans():
                 api_quota=3000, # 100/day
                 price_monthly=299.00,
                 price_annual=2990.00,
-                stripe_price_id_monthly="price_master_monthly_placeholder",
-                stripe_price_id_annual="price_master_annual_placeholder",
-                features={"audit": True, "forecasting": True, "api_access": True, "white_label": True}
+                stripe_price_id_monthly="price_1Sw58UC8BJritqvr8oNM3sLX",
+                stripe_price_id_annual="price_1Sw58mC8BJritqvru65F49Nd",
+                features={"api_access": True, "white_label": True, "webhooks": True}
             ),
             SubscriptionPlan(
                 tier="agency",
@@ -66,9 +66,9 @@ def seed_plans():
                 api_quota=30000, # 1000/day
                 price_monthly=799.00,
                 price_annual=7990.00,
-                stripe_price_id_monthly="price_agency_monthly_placeholder",
-                stripe_price_id_annual="price_agency_annual_placeholder",
-                features={"audit": True, "api_access": True, "white_label": True, "sla": True, "dedicated_support": True}
+                stripe_price_id_monthly="price_1Sw58cC8BJritqvrZKoQOCzR",
+                stripe_price_id_annual="price_1Sw58mC8BJritqvrPqfyFdnJ",
+                features={"api_access": True, "white_label": True, "sla": True, "dedicated_support": True}
             )
         ]
         
