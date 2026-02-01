@@ -20,6 +20,13 @@
 - Stripe (Payments)
 - PyJWT (Authentication)
 
+## Deployment (Render)
+- **Platform**: Render.com (Web Service via Docker)
+- **Configuration**: `render.yaml` (Infrastructure as Code)
+- **Environment**: Docker container (Python 3.10-slim)
+- **Entry Point**: `uvicorn src.app:app` (defined in `Dockerfile`)
+- **Static Files**: Served by FastAPI via `src/app.py` mount (Single Service Architecture)
+
 ## AI Configuration
 - **Model**: Google Gemini Flash (via OpenRouter)
 - **Reproducibility**: Enforced via `temperature=0.2` and `top_p=0.85` for plain readings.
