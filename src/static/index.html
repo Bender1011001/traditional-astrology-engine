@@ -66,12 +66,69 @@
                     <a class="help-btn" href="sample-reading.html">SAMPLE</a>
                     <a class="help-btn" href="resources.html">RESOURCES</a>
                     <a class="help-btn" href="faq.html">FAQ</a>
-                    <a class="help-btn" href="login.html">LOG IN</a>
+                    <a class="help-btn" href="developer.html">API</a>
                     <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">DARK
                         MODE</button>
+                    <button id="pricingBtn" class="help-btn highlight-btn">PRICING</button>
                 </nav>
             </div>
         </header>
+
+        <!-- Pricing Modal -->
+        <div class="modal-overlay hidden" id="pricingModal">
+            <div class="modal-content pricing-modal-content">
+                <button class="modal-close" id="pricingClose">&times;</button>
+                <div class="modal-header">
+                    <h2>ROYAL ACCESS TIERS</h2>
+                    <div class="ornament"></div>
+                </div>
+
+                <div class="pricing-toggle-container">
+                    <span id="monthlyLabel" class="toggle-label active">Monthly</span>
+                    <label class="switch">
+                        <input type="checkbox" id="billingToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="annualLabel" class="toggle-label">Annual <span class="save-badge">SAVE 17%</span></span>
+                </div>
+
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>VAGABOND</h3>
+                        <div class="price">FREE</div>
+                        <ul>
+                            <li>15 Essential Charts / Day</li>
+                            <li>Traditional Mechanics</li>
+                            <li>Basic Forensic Audit</li>
+                        </ul>
+                        <button class="pricing-cta disabled" disabled>CURRENT TIER</button>
+                    </div>
+                    <div class="pricing-card highlight">
+                        <h3>SCHOLAR</h3>
+                        <div class="price">$<span id="price-starter">9</span><span id="period-starter">/mo</span></div>
+                        <ul>
+                            <li>50 Charts / Day</li>
+                            <li>5-Day Forensic Forecasts</li>
+                            <li>Advanced Prediction Engine</li>
+                            <li>AI Synthesis Access</li>
+                        </ul>
+                        <button class="pricing-cta" onclick="initiateCheckout('starter')">SUBSCRIBE</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>MAGUS</h3>
+                        <div class="price">$<span id="price-practitioner">29</span><span
+                                id="period-practitioner">/mo</span></div>
+                        <ul>
+                            <li>Unlimited Charts</li>
+                            <li>Commercial License</li>
+                            <li>Full Forensic Reports</li>
+                            <li>Priority Processing</li>
+                        </ul>
+                        <button class="pricing-cta" onclick="initiateCheckout('practitioner')">SUBSCRIBE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div id="backendNotice" class="backend-notice hidden" role="status" aria-live="polite">
             <strong>Preview Mode:</strong> Full readings are currently in beta. Run backend locally for complete

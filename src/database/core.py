@@ -3,8 +3,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+from src.core.config import settings
+
 # Priority: DATABASE_URL env var (Production), else local SQLite
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./users.db")
+DATABASE_URL = settings.DATABASE_URL
 
 # Fix for Render/Heroku 'postgres://' vs 'postgresql://' schema
 if DATABASE_URL.startswith("postgres://"):

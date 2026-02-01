@@ -72,7 +72,7 @@ async function logTelemetry(eventType, elementId = null, data = null) {
         // Use sendBeacon if available for better reliability on page unload
         // But sendBeacon doesn't support custom headers easily for Bearer token in some older contexts,
         // so we'll stick to fetch. keepalive: true helps.
-        fetch(apiUrl("/api/log/telemetry"), {
+        fetch(apiUrl("/api/v1/log/telemetry"), {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(payload),
@@ -123,7 +123,7 @@ if (glossaryBtn) {
         modalOverlay.classList.remove("hidden");
 
         try {
-            const resp = await fetch(apiUrl("/api/glossary"));
+            const resp = await fetch(apiUrl("/api/v1/glossary"));
             const glossary = await resp.json();
 
             let html = `
@@ -240,6 +240,207 @@ if (themeToggle) {
     });
 }
 
+// Pricing Modal Logic
+const pricingBtn = document.getElementById("pricingBtn");
+const pricingModal = document.getElementById("pricingModal");
+const pricingClose = document.getElementById("pricingClose");
+
+if (pricingBtn) {
+    pricingBtn.addEventListener("click", () => {
+        pricingModal.classList.remove("hidden");
+    });
+}
+if (pricingClose) {
+    pricingClose.addEventListener("click", () => {
+        pricingModal.classList.add("hidden");
+    });
+}
+if (pricingModal) {
+    pricingModal.addEventListener("click", (e) => {
+        if (e.target === pricingModal) pricingModal.classList.add("hidden");
+    });
+}
+
+
+// Checkout Logic
+async function initiateCheckout(tier) {
+    const token = localStorage.getItem('cael_auth_token');
+    if (!token) {
+        window.location.href = "login.html?redirect=pricing";
+        return;
+    }
+
+    const isAnnual = document.getElementById("billingToggle").checked;
+
+    // Create Checkout Session
+    try {
+        const resp = await fetch(apiUrl("/api/v1/billing/create-checkout-session"), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                tier: tier,
+                annual: isAnnual, // Pass annual flag
+                chart_request: {
+                    date: "2000-01-01", time: "12:00", city: "Rome", state: "Italy"
+                },
+                success_url: window.location.origin + "/index.html?session_id={CHECKOUT_SESSION_ID}",
+                cancel_url: window.location.origin + "/index.html"
+            })
+        });
+
+        if (!resp.ok) {
+            const err = await resp.json();
+            throw new Error(err.detail || "Checkout Failed");
+        }
+
+        const data = await resp.json();
+        if (data.url) {
+            window.location.href = data.url;
+        }
+
+    } catch (e) {
+        alert("Billing Error: " + e.message);
+    }
+}
+
+// Developer Portal Logic
+async function loadDeveloperData() {
+    const token = localStorage.getItem('cael_auth_token');
+    if (!token) {
+        window.location.href = "login.html?redirect=developer.html";
+        return;
+    }
+
+    // Load Stats
+    try {
+        const resp = await fetch(apiUrl("/api/v1/developer/usage"), {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+            document.getElementById("planTier").textContent = data.plan_tier.toUpperCase();
+            document.getElementById("callsUsed").textContent = data.api_calls_used;
+            document.getElementById("quotaLimit").textContent = data.quota || "∞";
+        }
+    } catch (e) {
+        console.error("Failed to load stats", e);
+    }
+
+    // Load Keys
+    loadApiKeys(token);
+}
+
+async function loadApiKeys(token) {
+    try {
+        const resp = await fetch(apiUrl("/api/v1/developer/keys"), {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        const keys = await resp.json();
+        const list = document.getElementById("keyList");
+        list.innerHTML = "";
+
+        keys.forEach(key => {
+            const li = document.createElement("li");
+            li.className = "key-item";
+            li.innerHTML = `
+                <div>
+                    <strong>${key.name}</strong>
+                    <div class="key-meta">Created: ${new Date(key.created_at).toLocaleDateString()}</div>
+                </div>
+                <div style="display:flex; align-items:center;">
+                    <code style="margin-right:15px; background:#000; padding:2px 5px;">${key.prefix}</code>
+                    <button class="danger-btn" onclick="revokeApiKey('${key.id}')">Revoke</button>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+    } catch (e) {
+        console.error("Failed to load keys", e);
+    }
+}
+
+async function createApiKey() {
+    const token = localStorage.getItem('cael_auth_token');
+    const name = document.getElementById("newKeyName").value;
+    if (!name) return alert("Please name your key");
+
+    try {
+        const resp = await fetch(apiUrl("/api/v1/developer/keys"), {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name })
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+            document.getElementById("newKeyDisplay").textContent = data.key;
+            document.getElementById("keyModal").classList.remove("hidden");
+            document.getElementById("newKeyName").value = "";
+            loadApiKeys(token); // Refresh list
+        } else {
+            alert("Failed to create key");
+        }
+    } catch (e) {
+        alert("Error creating key");
+    }
+}
+
+async function revokeApiKey(keyId) {
+    if (!confirm("Are you sure? This cannot be undone.")) return;
+
+    const token = localStorage.getItem('cael_auth_token');
+    try {
+        await fetch(apiUrl(`/api/v1/developer/keys/${keyId}`), {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        loadApiKeys(token);
+    } catch (e) {
+        alert("Error revoking key");
+    }
+}
+
+function closeKeyModal() {
+    document.getElementById("keyModal").classList.add("hidden");
+}
+window.loadDeveloperData = loadDeveloperData;
+window.createApiKey = createApiKey;
+window.revokeApiKey = revokeApiKey;
+window.closeKeyModal = closeKeyModal;
+const billingToggle = document.getElementById("billingToggle");
+if (billingToggle) {
+    billingToggle.addEventListener("change", function () {
+        const isAnnual = this.checked;
+        const period = isAnnual ? "/yr" : "/mo";
+
+        // Update DOM classes for styling
+        document.getElementById("monthlyLabel").classList.toggle("active", !isAnnual);
+        document.getElementById("annualLabel").classList.toggle("active", isAnnual);
+
+        // Update Prices
+        // Starter: 29/mo -> 290/yr
+        // Practitioner: 149/mo -> 1490/yr
+        // (Values from seed script)
+
+        if (isAnnual) {
+            document.getElementById("price-starter").textContent = "290";
+            document.getElementById("price-practitioner").textContent = "1490";
+        } else {
+            document.getElementById("price-starter").textContent = "29";
+            document.getElementById("price-practitioner").textContent = "149";
+        }
+
+        document.getElementById("period-starter").textContent = period;
+        document.getElementById("period-practitioner").textContent = period;
+    });
+}
+
 const timeInput = document.getElementById("time");
 const timeUnknownToggle = document.getElementById("timeUnknown");
 const timeWarning = document.getElementById("timeWarning");
@@ -301,7 +502,7 @@ function logEvent(eventType, payload = {}, options = {}) {
         payload,
         ts: new Date().toISOString()
     };
-    const url = apiUrl("/api/log_event");
+    const url = apiUrl("/api/v1/log_event");
     if (options.beacon && navigator.sendBeacon) {
         try {
             const blob = new Blob([JSON.stringify(body)], { type: "application/json" });
@@ -455,7 +656,7 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
     logEvent("chart_request", { form: formData });
 
     try {
-        const response = await fetch(apiUrl('/api/calculate'), {
+        const response = await fetch(apiUrl('/api/v1/calculate'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -488,7 +689,7 @@ if (exportCsvBtn) {
         }
 
         try {
-            const resp = await fetch(apiUrl("/api/export"), {
+            const resp = await fetch(apiUrl("/api/v1/export"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ forensic_report: currentResult.forensic_report })
@@ -522,7 +723,7 @@ if (exportPdfBtn) {
             exportPdfBtn.disabled = true;
 
             const payload = { ...currentResult, format: "pdf" };
-            const resp = await fetch(apiUrl("/api/export"), {
+            const resp = await fetch(apiUrl("/api/v1/export"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -650,7 +851,7 @@ if (oracleContent) {
             meta: oracleFeedbackContext.meta
         });
 
-        fetch(apiUrl("/api/reading_feedback"), {
+        fetch(apiUrl("/api/v1/reading_feedback"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -1815,7 +2016,7 @@ function initMedicalCheck(data) {
         const jd = data.meta.analysis_jd || data.meta.julian_day;
 
         try {
-            const resp = await fetch(apiUrl(`/api/surgery_check?body_part=${part}&jd=${jd}`));
+            const resp = await fetch(apiUrl(`/api/v1/surgery_check?body_part=${part}&jd=${jd}`));
             const res = await resp.json();
 
             panel.innerHTML = `
@@ -2141,7 +2342,7 @@ document.getElementById('synastryForm').addEventListener('submit', async (e) => 
     logEvent("tool_request", { tool: "synastry", payload });
 
     try {
-        const resp = await fetch(apiUrl('/api/synastry'), {
+        const resp = await fetch(apiUrl('/api/v1/synastry'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -2206,7 +2407,7 @@ document.getElementById('kairosForm').addEventListener('submit', async (e) => {
     logEvent("tool_request", { tool: "kairos", payload });
 
     try {
-        const resp = await fetch(apiUrl('/api/kairos'), {
+        const resp = await fetch(apiUrl('/api/v1/kairos'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -2282,7 +2483,7 @@ document.getElementById('horaryForm').addEventListener('submit', async (e) => {
     logEvent("tool_request", { tool: "horary", payload });
 
     try {
-        const resp = await fetch(apiUrl('/api/horary'), {
+        const resp = await fetch(apiUrl('/api/v1/horary'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -2380,7 +2581,7 @@ document.getElementById('worldForm').addEventListener('submit', async (e) => {
     logEvent("tool_request", { tool: "world", payload });
 
     try {
-        const resp = await fetch(apiUrl('/api/world'), {
+        const resp = await fetch(apiUrl('/api/v1/world'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -2420,7 +2621,7 @@ document.getElementById('rectificationForm').addEventListener('submit', async (e
     logEvent("tool_request", { tool: "rectification", payload });
 
     try {
-        const resp = await fetch(apiUrl('/api/rectification'), {
+        const resp = await fetch(apiUrl('/api/v1/rectification'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)

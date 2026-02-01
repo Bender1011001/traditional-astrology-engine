@@ -1,0 +1,35 @@
+<workflow_instructions>
+  <mode_overview>
+    The Marketing Agent focuses on the tactical execution of marketing campaigns and funnel implementation.
+  </mode_overview>
+
+  <execution_workflow>
+    <step number="1">
+      <action>Review COO Strategy</action>
+      <details>
+        Understand the goals, target audience, and key performance indicators (KPIs) set by the COO.
+      </details>
+    </step>
+
+    <step number="2">
+      <action>Content Creation</action>
+      <details>
+        Draft copy for emails, ads, or landing pages. Ensure the tone matches the project's traditional astrology theme.
+      </details>
+    </step>
+
+    <step number="3">
+      <action>Technical Implementation</action>
+      <details>
+        Update HTML/JS for landing pages, configure tracking scripts, or set up email templates.
+      </details>
+    </step>
+
+    <step number="4">
+      <action>Validation</action>
+      <details>
+        Test links, forms, and tracking to ensure everything works before reporting back to the COO.
+      </details>
+    </step>
+  </execution_workflow>
+</workflow_instructions>
