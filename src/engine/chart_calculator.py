@@ -42,17 +42,15 @@ def get_coordinates(city: str, state: str = "") -> tuple[float, float]:
             if location:
                 return location.latitude, location.longitude
             raise ValueError(f"Could not find location: {query}")
-        except (GeocoderTimedOut, GeocoderUnavailable) as e:
+        except (GeocoderTimedOut, GeocoderUnavailable, GeocoderServiceError) as e:
             last_error = e
             if attempt < _max_attempts:
                 time.sleep(_backoff_seconds * attempt)
                 continue
             raise ValueError(
-                f"Geocoding timed out after {_timeout}s. "
-                f"Try again or increase NOMINATIM_TIMEOUT."
+                f"Geocoding failed after {_timeout}s and {_max_attempts} attempts. "
+                f"Last error: {e}"
             ) from e
-        except GeocoderServiceError as e:
-            raise ValueError(f"Geocoding service error: {e}") from e
     raise ValueError(f"Geocoding failed: {last_error}")
 
 def get_julian_day(dt_utc: datetime) -> float:

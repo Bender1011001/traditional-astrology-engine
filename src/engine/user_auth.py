@@ -22,7 +22,29 @@ class UserManager:
     
     def __init__(self):
         # Tables are created at module level, but we could do it here too.
-        pass
+        # Simple in-memory rate limiter: {key: [(timestamp, count)]}
+        # Actually just store list of timestamps
+        self._rate_limits: Dict[str, List[datetime]] = {}
+        
+    def _check_rate_limit(self, key: str, limit: int = 5, window: int = 60) -> bool:
+        """
+        Check if action is allowed for key.
+        limit: max attempts
+        window: seconds
+        Returns True if allowed, False if blocked.
+        """
+        now = datetime.utcnow()
+        if key not in self._rate_limits:
+            self._rate_limits[key] = []
+            
+        # Prune old
+        self._rate_limits[key] = [t for t in self._rate_limits[key] if (now - t).total_seconds() < window]
+        
+        if len(self._rate_limits[key]) >= limit:
+            return False
+            
+        self._rate_limits[key].append(now)
+        return True
     
     def _hash_password(self, password: str, salt: Optional[str] = None) -> tuple:
         """Hash a password using SHA-256 with salt."""
@@ -46,6 +68,11 @@ class UserManager:
     def create_user(self, email: str, password: str, name: str = "") -> Dict[str, Any]:
         """Create a new user account."""
         email = email.lower().strip()
+        
+        # Rate Limit: 3 attempts per hour per email (prevents spam registration)
+        # Note: IP based limiting would be better here but we lack IP context
+        if not self._check_rate_limit(f"create:{email}", limit=3, window=3600):
+             return {"success": False, "message": "Too many account creation attempts. Please try again later."}
         
         if not email or "@" not in email or "." not in email.split("@")[-1]:
             return {"success": False, "message": "Invalid email address."}
@@ -97,6 +124,11 @@ class UserManager:
     def authenticate(self, email: str, password: str) -> Dict[str, Any]:
         """Authenticate a user."""
         email = email.lower().strip()
+        
+        # Rate Limit: 5 attempts per minute per email
+        if not self._check_rate_limit(f"auth:{email}", limit=5, window=60):
+            logging.warning(f"Rate limit exceeded for user: {email}")
+            return {"success": False, "message": "Too many login attempts. Please try again later."}
         
         db = SessionLocal()
         try:

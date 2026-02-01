@@ -3,7 +3,40 @@ import json
 import urllib.request
 import urllib.error
 
+import time
+
+class CircuitBreaker:
+    def __init__(self, failure_threshold=5, recovery_timeout=60):
+        self.failure_threshold = failure_threshold
+        self.recovery_timeout = recovery_timeout
+        self.failures = 0
+        self.last_failure_time = 0
+        self.state = "CLOSED" 
+
+    def allow_request(self):
+        if self.state == "OPEN":
+            if time.time() - self.last_failure_time > self.recovery_timeout:
+                self.state = "HALF_OPEN"
+                return True
+            return False
+        return True
+
+    def record_success(self):
+        self.failures = 0
+        self.state = "CLOSED"
+
+    def record_failure(self):
+        self.failures += 1
+        self.last_failure_time = time.time()
+        if self.failures >= self.failure_threshold:
+            self.state = "OPEN"
+
+_oracle_breaker = CircuitBreaker()
+
 def _openrouter_request(messages, temperature, max_tokens, top_p=None):
+    if not _oracle_breaker.allow_request():
+        return "Error: Circuit Breaker Open (Too many failures). info: The Oracle is currently meditating (service unavailable)."
+    
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         return "Error: OPENROUTER_API_KEY environment variable not found. Please set it in your environment."
@@ -42,12 +75,14 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
             result = json.loads(raw)
 
         if isinstance(result, dict) and "error" in result:
+            _oracle_breaker.record_failure()
             err = result.get("error", {})
             msg = err.get("message") if isinstance(err, dict) else str(err)
             return f"Oracle Communication Error: {msg}"
 
         choices = result.get("choices", []) if isinstance(result, dict) else []
         if not choices:
+            _oracle_breaker.record_failure()
             return "No response from engine."
 
         message = choices[0].get("message", {}) or {}
@@ -60,8 +95,11 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
                 elif isinstance(part, str):
                     parts.append(part)
             content = "".join(parts)
+            
+        _oracle_breaker.record_success()
         return str(content).strip() or "No response from engine."
     except urllib.error.HTTPError as e:
+        _oracle_breaker.record_failure()
         try:
             body = e.read().decode("utf-8")
             detail = json.loads(body)
@@ -70,6 +108,7 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
             msg = str(e)
         return f"Oracle Communication Error: {msg}"
     except Exception as e:
+        _oracle_breaker.record_failure()
         return f"Oracle Communication Error: {str(e)}"
 
 def get_chat_response(query: str, context: str) -> str:

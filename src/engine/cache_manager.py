@@ -6,7 +6,15 @@ from typing import Optional, Dict, Any
 
 # Use /tmp for ephemeral caching on serverless platforms (Heroku/Render)
 import tempfile
+import base64
 CACHE_DIR = os.getenv("CACHE_DIR", os.path.join(tempfile.gettempdir(), "astrology_cache"))
+
+try:
+    from cryptography.fernet import Fernet
+    _HAS_CRYPTO = True
+except ImportError:
+    _HAS_CRYPTO = False
+    print("WARNING: 'cryptography' library not found. Cache encryption disabled.")
 
 class CacheManager:
     def __init__(self, cache_dir: str = CACHE_DIR):
@@ -18,6 +26,39 @@ class CacheManager:
                 # Fallback to local temp if permission denied (rare in /tmp)
                 self.cache_dir = os.path.join(tempfile.gettempdir(), "astrology_cache")
                 os.makedirs(self.cache_dir, exist_ok=True)
+        
+        # Initialize Encryption
+        self.key = os.getenv("CACHE_ENCRYPTION_KEY")
+        if not self.key:
+             # Just a consistent fallback for dev, explicitly insecure but functional
+             # In prod, this SHOULD be set.
+             self.key = "change_me_in_production_env_var_to_32_bytes_base64"
+             
+        self.fernet = None
+        if _HAS_CRYPTO:
+            try:
+                # Ensure key is valid base64 url safe 32 bytes
+                # If the env var is just a string, we might need to hash it to get a key?
+                # Fernet requires 32 url-safe base64-encoded bytes.
+                # Let's derive a key if it's not proper.
+                if len(self.key) != 44 or not self.key.endswith("="):
+                     # Derive valid key from whatever string was provided
+                     k = hashlib.sha256(self.key.encode()).digest()
+                     self.key = base64.urlsafe_b64encode(k).decode()
+                
+                self.fernet = Fernet(self.key)
+            except Exception as e:
+                print(f"Encryption Init Error: {e}")
+                
+    def _encrypt(self, data: str) -> str:
+        if self.fernet:
+            return self.fernet.encrypt(data.encode()).decode()
+        return data
+
+    def _decrypt(self, data: str) -> str:
+        if self.fernet:
+            return self.fernet.decrypt(data.encode()).decode()
+        return data
 
     def _get_path(self, chart_hash: str, tier: str) -> str:
         # Separate cache by tier because free != paid content
@@ -37,7 +78,14 @@ class CacheManager:
 
         try:
             with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
+                content = f.read()
+            
+            try:
+                decrypted = self._decrypt(content)
+                data = json.loads(decrypted)
+            except Exception:
+                # Decryption failed or JSON error -> invalid cache
+                return None
             
             # Check expiry (30 days)
             expires = data.get("expires")
@@ -64,8 +112,10 @@ class CacheManager:
         }
         
         try:
+            json_str = json.dumps(data)
+            encrypted = self._encrypt(json_str)
             with open(path, "w", encoding="utf-8") as f:
-                json.dump(data, f)
+                f.write(encrypted)
         except Exception as e:
             print(f"Cache Write Error: {e}")
 

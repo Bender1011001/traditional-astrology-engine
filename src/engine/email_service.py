@@ -106,13 +106,18 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
             return False
 
     # 3. Dev Mode / No Provider Configured
-    logging.warning(f"EMAIL NOT SENT (no provider configured): To={to_email}, Subject={subject}")
+    masked_email = to_email
+    if "@" in to_email:
+        name, domain = to_email.split("@")
+        masked_email = f"{name[:2]}***@***{domain[-4:]}" if len(name) > 2 else f"***@***{domain[-4:]}"
+
+    logging.warning(f"EMAIL NOT SENT (no provider configured): To={masked_email}, Subject={subject}")
     logging.warning("Configure SENDGRID_API_KEY or SMTP_HOST/SMTP_USER to enable email delivery.")
     
     # In development, log the content for debugging
     if os.getenv("DEBUG_EMAIL", "").lower() in ("1", "true"):
         print("="*60)
-        print(f"MOCK EMAIL TO: {to_email}")
+        print(f"MOCK EMAIL TO: {to_email}") # Keep full email for explicit debug mode
         print(f"SUBJECT: {subject}")
         print("-" * 20)
         print(html_content[:500] + "..." if len(html_content) > 500 else html_content)
