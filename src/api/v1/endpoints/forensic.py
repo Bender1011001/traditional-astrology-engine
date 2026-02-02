@@ -1,8 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Request, HTTPException
 from src.engine.models import Chart
 from src.services.engine_bridge import perform_forensic_audit_async
 from src.api.v1.schemas import ChartRequest
 from src.api.v1.utils import result_to_model 
+from src.api.v1.middleware.auth import verify_api_key
+from src.api.v1.middleware.rate_limiting import enforce_rate_limit
 # Wait, perform_forensic_audit logic usually takes Chart object.
 # But `ChartRequest` is raw input. We need `calculate_chart_data` first to get positions?
 # The plan says: "Directly expose the audit logic ... wrapped in threadpool."
@@ -19,8 +21,19 @@ router = APIRouter()
 from src.services.engine_bridge import generate_full_nativity_async
 
 @router.post("/audit")
-async def run_audit(data: ChartRequest): 
-    # Directly call the Hub Engine
+async def run_audit(
+    data: ChartRequest,
+    request: Request,
+    auth_context: dict = Depends(verify_api_key)
+): 
+    # 1. Enforce Authentication
+    if not auth_context:
+        raise HTTPException(status_code=401, detail="X-API-Key required for forensic audit")
+
+    # 2. Enforce Rate Limit
+    await enforce_rate_limit(request, auth_context)
+
+    # 3. Directly call the Hub Engine
     result = await generate_full_nativity_async(
         date_str=data.date,
         time_str=data.time,

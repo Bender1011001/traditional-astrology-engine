@@ -1,8 +1,9 @@
 # [Engine/Logic]
 
 ## Status
-- **Working**: Planet models, dignity calculations, sect logic, Lots, Fixed Stars, Nodal Physics, Profections, Email Capture Service.
+- **Working**: Planet models, dignity calculations, sect logic, Lots, Fixed Stars, Nodal Physics, Profections, Email Capture Service, API V1 (Forensic Engine), Token-based Rate Limiting (Agency/Master).
 - **Broken**: Rectification event-based logic (placeholder).
+- **In-Progress**: API V2 structure established.
 
 ## Tech Stack
 - Python 3.9+ 
@@ -13,9 +14,10 @@
 ## Key Files
 - `models.py` — Core data structures (Planet, Chart, Sect).
 - `logic.py` — The "Brain" of the forensic audit.
-- `api.py` — FastAPI backend endpoints.
+- `app.py` — FastAPI entry point (V1/V2 routing).
+- `api/v1/schemas/forensic_v1.py` — Public contract for V1 output.
+- `api/v1/middleware/rate_limiting.py` — Token-bucket logic.
 - `engine/email_service.py` — Email notification handler.
-- `main.py` — Entry point CLI.
 
 ## Architecture Quirks
 - The system must adhere to **Forensic Astrology** principles (Valens/Bonatti).
@@ -28,7 +30,8 @@
 |-------|-------|-----|
 | Inaccurate Dignity | Using Ptyolemaic Terms | Use Egyptian Terms (Valens) as per Binder 1. |
 | Lots Calculation | Ignoring Sect Reversal | Implement strict `if sect == NIGHT: swap(A, B)` logic. |
-| Rate Limit Localhost | Internal calls from email capture were getting blocked | Whitelist 127.0.0.1 in RateLimiter logic. |
+| Rate Limit Localhost | Internal calls from email capture | Whitelist 127.0.0.1 in RateLimiter logic. |
+| Rate Limit Collisions | Multi-user IP sharing | Switched to `api_key_id` as primary key for B2B. |
 
 ## Anti-Patterns
 - Do NOT use modern psychological interpretations (e.g., "Soul Growth" for Nodes).

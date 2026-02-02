@@ -9,7 +9,7 @@ from pathlib import Path
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from src.engine.sovereign_engine import SovereignEngine
+from src.engine.forensic_engine import Auditor
 from src.engine.models import Planet, Chart, PlanetName, Sign, LotName, Sect
 
 class AstrologicalEncoder(json.JSONEncoder):
@@ -44,10 +44,10 @@ def main():
     output_path = Path(args.output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
 
-    print(f"[*] Initializing Sovereign Engine for {args.name}...")
+    print(f"[*] Initializing Forensic Engine for {args.name}...")
     
     # Generate data
-    result = SovereignEngine.generate_full_nativity(
+    result = Auditor.generate_full_nativity(
         date_str=args.date,
         time_str=args.time,
         city=args.city,
@@ -78,7 +78,7 @@ def main():
     generation_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     disclaimer = f"""---
 # ⚖️ PROFESSIONAL DISCLOSURE
-**Report Type**: Practitioner Nativity Audit (Sovereign Engine v1.0)
+**Report Type**: Practitioner Nativity Audit (Auditor v1.0)
 **Generated**: {generation_ts}
 **Status**: Forensic Grade / For Professional Use Only
 
@@ -89,7 +89,7 @@ This report utilizes historical astrological protocols (Ibn Ezra, Valens, Doroth
     # Enrich Technical Data with engine metadata
     if technical_data:
         technical_data["engine_metadata"] = {
-            "version": "1.0.0-sovereign",
+            "version": "1.1.0-forensic",
             "generation_time": generation_ts,
             "algorithms": ["Ibn Ezra Almuten", "Panaretos Lots", "Amplification/Greed Nodes"]
         }

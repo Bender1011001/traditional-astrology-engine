@@ -5,7 +5,10 @@ import logging
 
 from .models import Planet, Chart, Sect, PlanetName, Sign
 from .chart_calculator import calculate_chart_data
-from .advanced_mechanics import AlmutenEngine, HermeticLotEngine, DoryphoryEngine
+from .advanced_mechanics import AlmutenEngine, HermeticLotEngine, DoryphoryEngine, MonomoiriaEngine, DodecatemoriaEngine
+from .electional import ElectionalEngine
+from .solar_return import SolarReturnEngine
+from .planetary_hours import PlanetaryHourEngine
 from .kakosis import KakosisEngine
 from .medical import MedicalAstrology
 from .prediction import (
@@ -50,9 +53,9 @@ logger = logging.getLogger(__name__)
 # Initialize Library
 LIB = DelineationLibrary()
 
-class ForensicEngine:
+class Auditor:
     """
-    The Forensic Engine (Hub): The sole orchestrator for deep astrological auditing.
+    The Auditor (Hub): The sole orchestrator for deep astrological auditing.
     Replaces the legacy 'Sovereign Engine' terminology.
     Output: Bifurcated JSON (technical_data, human_translation).
     """
@@ -88,7 +91,7 @@ class ForensicEngine:
                 return {"error": raw_chart_data["error"]}
 
             # Reconstruct Chart Model
-            chart = ForensicEngine._rebuild_chart_model(raw_chart_data)
+            chart = Auditor._rebuild_chart_model(raw_chart_data)
             jd = raw_chart_data["meta"]["julian_day"]
             
             # Resolve Dates
@@ -103,26 +106,16 @@ class ForensicEngine:
             if birth_dt:
                 age = ans_date.year - birth_dt.year - ((ans_date.month, ans_date.day) < (birth_dt.month, birth_dt.day))
 
-            # 2. Analysis: Aggregate Specialized Engine Results
-            analysis = {}
-
-            # A. Dignity & Almuten
-            analysis["dignity"] = ForensicEngine._calculate_dignity_suite(chart)
-
-            # B. Fate & Prediction
-            analysis["fate"] = ForensicEngine._calculate_fate_suite(chart, birth_dt, ans_date)
-
-            # C. Medical
-            analysis["medical"] = ForensicEngine._calculate_medical_suite(chart)
-            
-            # D. Teams & Reception
-            analysis["teams"] = ForensicEngine._calculate_teams_and_reception(chart)
-
-            # E. Forensic Planet Analysis
-            planets_forensic = ForensicEngine._analyze_all_planets(chart, jd)
-
-            # F. Aspects
-            analysis["aspects"] = AspectEngine.calculate_aspects(chart)
+            # 2. Analysis: Aggregate Specialized Engine Results via Centralized Auditor
+            audit_results = Auditor.perform_audit(
+                chart=chart,
+                jd=jd,
+                birth_dt=birth_dt,
+                ans_date=ans_date,
+                age=age
+            )
+            analysis = audit_results["analysis"]
+            planets_forensic = audit_results["planets_forensic"]
 
             # 3. State Assembly: Assemble technical_data
             technical_data = {
@@ -147,7 +140,7 @@ class ForensicEngine:
             }
 
             # 4. Translation: Pass to ReportSynthesizer
-            legacy_report = ForensicEngine._map_to_legacy_report(technical_data, chart)
+            legacy_report = Auditor._map_to_legacy_report(technical_data, chart)
             human_translation = {
                 "report_markdown": ReportSynthesizer.synthesize(legacy_report),
                 "executive_summary": ReportSynthesizer._generate_executive_summary(legacy_report)
@@ -161,8 +154,125 @@ class ForensicEngine:
         except Exception as e:
             import traceback
             error_trace = traceback.format_exc()
-            logger.error(f"Forensic Engine Failure: {e}\n{error_trace}")
-            return {"error": f"Forensic Engine Failure: {str(e)}"}
+            logger.error(f"Auditor Failure: {e}\n{error_trace}")
+            return {"error": f"Auditor Failure: {str(e)}"}
+
+    @staticmethod
+    def perform_audit(
+        chart: Chart, 
+        jd: float, 
+        birth_dt: Optional[datetime] = None, 
+        ans_date: Optional[datetime] = None,
+        age: Optional[int] = None
+    ) -> Dict[str, Any]:
+        """
+        Exhaustive Architectural Audit of a Nativity.
+        Consolidates logic from perform_forensic_audit (logic.py).
+        """
+        ans_date = ans_date or datetime.now()
+        sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+        
+        # 1. Base Analysis
+        analysis = {}
+        analysis[ "dignity" ] = Auditor._calculate_dignity_suite(chart)
+        analysis[ "fate" ] = Auditor._calculate_fate_suite(chart, birth_dt, ans_date)
+        analysis[ "medical" ] = Auditor._calculate_medical_suite(chart)
+        analysis[ "teams" ] = Auditor._calculate_teams_and_reception(chart)
+        analysis[ "aspects" ] = AspectEngine.calculate_aspects(chart)
+        
+        # 2. Advanced Suites
+        analysis[ "advanced_mechanics" ] = {
+            "almuten": analysis[ "dignity" ][ "almuten" ],
+            "doryphory": Auditor._calculate_doryphory_details(chart),
+            "rectification_animodar": RectificationEngine.animodar_rectification(chart, jd, chart.geo_lat, chart.geo_lon),
+            "mundane_context": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).get_hierarchy_report()
+        }
+
+        # 3. Supplemental Layers
+        moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+        analysis[ "supplemental" ] = {
+            "lunar_mansion": LunarMansionEngine.get_lunar_mansion(moon.longitude) if moon else None,
+            "stars": Auditor._calculate_star_impacts(chart),
+            "nodes": Auditor._calculate_nodal_impacts(chart),
+            "elements": Auditor._calculate_elemental_balance(chart),
+            "hemispheres": Auditor._calculate_hemispheres(chart)
+        }
+
+        # 4. Temporal Layers
+        if birth_dt and age is not None:
+             analysis[ "solar_return" ] = Auditor._calculate_solar_return_summary(chart, birth_dt, age)
+        
+        # 5. Planetary Detail
+        planets_forensic = Auditor._analyze_all_planets(chart, jd)
+
+        return {
+            "analysis": analysis,
+            "planets_forensic": planets_forensic
+        }
+
+    @staticmethod
+    def _calculate_doryphory_details(chart: Chart) -> List[Dict]:
+        dory = DoryphoryEngine.check_doryphory(chart)
+        return [{"planet": d.planet.value, "type": d.type, "target": d.related_luminary} for d in dory]
+
+    @staticmethod
+    def _calculate_star_impacts(chart: Chart) -> List[Any]:
+        from .stars import check_fixed_stars
+        return check_fixed_stars(chart)
+
+    @staticmethod
+    def _calculate_nodal_impacts(chart: Chart) -> List[Any]:
+        from .nodes import analyze_nodes
+        return analyze_nodes(chart)
+
+    @staticmethod
+    def _calculate_elemental_balance(chart: Chart) -> Dict[str, int]:
+        elements = {"FIRE": 0, "EARTH": 0, "AIR": 0, "WATER": 0}
+        for p in chart.planets:
+            if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]: continue
+            sign_idx = int(p.longitude / 30) % 12
+            sign = list(Sign)[sign_idx]
+            el = DignityCalculator.ZODIAC_ELEMENTS.get(sign)
+            if el: elements[el] += 1
+        return elements
+
+    @staticmethod
+    def _calculate_hemispheres(chart: Chart) -> Dict:
+        hemi = {"East": 0, "West": 0, "North": 0, "South": 0}
+        for p in chart.planets:
+            if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]: continue
+            
+            # House-based hemisphere logic (Simple Whole Sign/Equal-ish proxy)
+            # 10,11,12,1,2,3 -> East
+            # 4,5,6,7,8,9 -> West
+            # 7,8,9,10,11,12 -> South (Above Horizon)
+            # 1,2,3,4,5,6 -> North (Below Horizon)
+            h = DignityCalculator.get_house_number(p.longitude, chart.ascendant, chart.houses)
+            if h in [10, 11, 12, 1, 2, 3]: hemi["East"] += 1
+            else: hemi["West"] += 1
+            
+            if h in [7, 8, 9, 10, 11, 12]: hemi["South"] += 1
+            else: hemi["North"] += 1
+            
+        return {
+            "counts": hemi,
+            "focus": {
+                "orientation": "Self-Determination (East)" if hemi["East"] > hemi["West"] else "Other-Oriented (West)",
+                "visibility": "Public/Objective (South)" if hemi["South"] > hemi["North"] else "Private/Subjective (North)"
+            }
+        }
+
+    @staticmethod
+    def _calculate_solar_return_summary(chart: Chart, birth_dt: datetime, age: int) -> Dict:
+        try:
+            current_yr = birth_dt.year + age
+            sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
+            sr_jd = calculate_solar_return_jd(sun.longitude, chart.jd, current_yr)
+            
+            # Simple wrapper to match expected logic
+            return SolarReturnEngine.analyze_solar_return_from_jd(chart, sr_jd, age, birth_dt)
+        except:
+            return {"error": "Solar Return calculation failed"}
 
     @staticmethod
     def _rebuild_chart_model(raw_data: Dict) -> Chart:
@@ -316,7 +426,7 @@ class ForensicEngine:
             if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
                 continue
             
-            p_data = ForensicEngine._analyze_single_planet(p, chart, jd, speculum)
+            p_data = Auditor._analyze_single_planet(p, chart, jd, speculum)
             results.append(p_data)
         return results
 
@@ -411,7 +521,7 @@ class ForensicEngine:
                 "almuten": analysis["dignity"]["almuten"]["winner"],
                 "job_description": f"Sovereign {analysis['dignity']['almuten']['winner']}"
             },
-            "vitality": {"vitality_rating": "Stable (Calculated by ForensicEngine)"},
+            "vitality": {"vitality_rating": "Stable (Calculated by Auditor)"},
             "medical_analysis": {
                 "governed_body_part": analysis["medical"]["constitution"],
                 "constitutional_sign": list(Sign)[int(chart.ascendant / 30) % 12].value,

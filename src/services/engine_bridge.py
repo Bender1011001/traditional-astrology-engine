@@ -2,7 +2,7 @@ from fastapi.concurrency import run_in_threadpool
 from src.engine.chart_calculator import calculate_chart_data
 from src.engine.forensic_forecast import calculate_5_day_forecast
 from src.engine.synastry import SynastryEngine
-from src.engine.forensic_engine import ForensicEngine
+from src.engine.forensic_engine import Auditor
 
 async def calculate_chart_async(*args, **kwargs):
     """
@@ -23,7 +23,7 @@ async def calculate_forecast_async(*args, **kwargs):
     return await run_in_threadpool(calculate_5_day_forecast, *args, **kwargs)
 
 async def generate_full_nativity_async(*args, **kwargs):
-    return await run_in_threadpool(ForensicEngine.generate_full_nativity, *args, **kwargs)
+    return await run_in_threadpool(Auditor.generate_full_nativity, *args, **kwargs)
 
 class SynastryEngineAsync:
     def __init__(self):

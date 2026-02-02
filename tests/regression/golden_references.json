@@ -1,0 +1,38 @@
+{
+    "napoleon_bonaparte": {
+        "name": "Napoleon Bonaparte",
+        "birth_data": {
+            "year": 1769,
+            "month": 8,
+            "day": 15,
+            "hour": 11.5,
+            "lat": 41.9267,
+            "lon": 8.7369
+        },
+        "expected_results": {
+            "ascendant_sign": "Scorpio",
+            "mc_sign": "Leo",
+            "almuten_figuris": "Venus",
+            "hyleg": "Sun",
+            "lord_of_year_age_30": "Mars"
+        }
+    },
+    "elizabeth_i": {
+        "name": "Elizabeth I",
+        "birth_data": {
+            "year": 1533,
+            "month": 9,
+            "day": 7,
+            "hour": 15.0,
+            "lat": 51.48,
+            "lon": 0.0
+        },
+        "expected_results": {
+            "ascendant_sign": "Capricorn",
+            "mc_sign": "Scorpio",
+            "almuten_figuris": "Saturn",
+            "hyleg": "Moon",
+            "lord_of_year_age_25": "Venus"
+        }
+    }
+}

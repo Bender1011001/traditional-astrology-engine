@@ -11,6 +11,67 @@ class SolarReturnEngine:
     """
 
     @staticmethod
+    def analyze_solar_return_from_jd(natal_chart: Chart, sr_jd: float, age: int, birth_dt: datetime) -> Dict:
+        """
+        Reconstructs the SR chart from JD and performs analysis.
+        """
+        import swisseph as swe
+        
+        # 1. Reconstruct SR Chart
+        sr_planets = []
+        flag_sr = swe.FLG_SWIEPH | swe.FLG_SPEED
+        for pname_enum in PlanetName:
+            if pname_enum in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: 
+                continue
+            
+            # Map PlanetName to Swiss Eph ID
+            swe_id_map = {
+                PlanetName.SUN: swe.SUN,
+                PlanetName.MOON: swe.MOON,
+                PlanetName.MERCURY: swe.MERCURY,
+                PlanetName.VENUS: swe.VENUS,
+                PlanetName.MARS: swe.MARS,
+                PlanetName.JUPITER: swe.JUPITER,
+                PlanetName.SATURN: swe.SATURN,
+                PlanetName.URANUS: swe.URANUS,
+                PlanetName.NEPTUNE: swe.NEPTUNE,
+                PlanetName.PLUTO: swe.PLUTO,
+            }
+            pid = swe_id_map.get(pname_enum)
+            if pid is None: continue
+            
+            try:
+                res = swe.calc_ut(sr_jd, pid, flag_sr)[0]
+                sr_planets.append(Planet(
+                    name=pname_enum, 
+                    longitude=res[0], 
+                    latitude=res[1], 
+                    speed=res[3]
+                ))
+            except:
+                continue
+        
+        # SR Houses
+        # Note: We use b'P' for Placidus, but Whole Sign 'W' is often preferred. 
+        # Using Placidus for the angles and house cusps as a default.
+        sr_cusps, sr_ascmc = swe.houses(sr_jd, natal_chart.geo_lat, natal_chart.geo_lon, b'P')
+        
+        sr_chart = Chart(
+            sun_altitude=0, # Not strictly needed for SR analysis logic as written
+            planets=sr_planets,
+            ascendant=sr_ascmc[0],
+            mc=sr_ascmc[1],
+            houses={i+1: c for i, c in enumerate(sr_cusps)},
+            geo_lat=natal_chart.geo_lat,
+            geo_lon=natal_chart.geo_lon,
+            jd=sr_jd
+        )
+        
+        res = SolarReturnEngine.analyze_solar_return(sr_chart, natal_chart, age)
+        res["year"] = birth_dt.year + age
+        return res
+
+    @staticmethod
     def analyze_solar_return(sr_chart: Chart, natal_chart: Chart, age: int) -> Dict:
         """
         Synthesizes the Solar Return by overlaying it on the Natal Chart.

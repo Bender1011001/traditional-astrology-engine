@@ -47,7 +47,7 @@ async def generate_chart_b2b(
         raise HTTPException(status_code=401, detail="Missing or invalid API Key")
 
     # 1. Enforce Rate Limit
-    await enforce_rate_limit(auth_context)
+    await enforce_rate_limit(request, auth_context)
 
     # 2. Check API Quota
     sub = auth_context['subscription']
@@ -141,7 +141,7 @@ async def calculate_full_nativity(req: ChartRequest, http_request: Request):
 async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     """
     Calculates a full natal chart including forensic audit, 5-day forecast, and plain-language synthesis.
-    Now refactored to use the SovereignEngine.
+    Now refactored to use the ForensicEngine via bridge.
     """
     _log_event("chart_request_server", {"form": chart_request.dict()}, http_request)
     
@@ -190,7 +190,7 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
 
     # Transform back to legacy format for UI compatibility if needed
     # (Actually the UI should probably be updated but let's keep it working for now)
-    # The SovereignEngine already packs what it can into a compatible-ish format.
+    # The ForensicEngine already packs what it can into a compatible-ish format.
     # Let's add the meta fields back for the frontend
     final_result = engine_result.get("technical_data", {})
     # Add human translation for the frontend to render

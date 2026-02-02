@@ -106,3 +106,13 @@ class ApiKey(Base):
     last_used = Column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="api_keys")
+
+class AstrologicalDelineation(Base):
+    __tablename__ = "astrological_delineations"
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    category = Column(String, nullable=False, index=True) # e.g., 'planets_in_signs'
+    key = Column(String, nullable=False, index=True)      # e.g., 'SATURN_ARIES_DAY'
+    content = Column(JSON, nullable=False)               # Stores text or structured JSON
+    is_manual_override = Column(Boolean, default=False)  # Flag to prevent auto-overwrite
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

@@ -6,6 +6,10 @@ import subprocess
 from datetime import datetime
 import logging
 
+from src.database.core import SessionLocal
+from src.database.models import AstrologicalDelineation
+from functools import lru_cache
+
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 
 def load_json_data(filename: str) -> Dict[str, Any]:
@@ -17,23 +21,52 @@ def load_json_data(filename: str) -> Dict[str, Any]:
 
 class DelineationLibrary:
     def __init__(self):
-        self.planets_in_signs = load_json_data('planets_in_signs.json')
-        self.planets_in_houses = load_json_data('planets_in_houses.json')
-        self.house_definitions = load_json_data('house_topoi.json') 
-        self.detailed = load_json_data('detailed_delineations.json')
+        # We still keep some static data or fallsbacks if needed, 
+        # but primary lookups will go to DB.
+        # Caching is handled at the method level or via an internal dict.
+        self._cache: Dict[str, Any] = {}
         
+    def _query_db(self, category: str, key: str) -> Any:
+        cache_key = f"{category}:{key}"
+        if cache_key in self._cache:
+            return self._cache[cache_key]
+        
+        db = SessionLocal()
+        try:
+            res = db.query(AstrologicalDelineation).filter(
+                AstrologicalDelineation.category == category,
+                AstrologicalDelineation.key == key
+            ).first()
+            if res:
+                self._cache[cache_key] = res.content
+                return res.content
+            return None
+        finally:
+            db.close()
+
     def get_planet_delineation(self, key: str) -> str:
-        return self.planets_in_signs.get(key, "Delineation not found in Codex.")
+        res = self._query_db('planets_in_signs', key)
+        if not res:
+            # Try ingested fallback
+            res = self._query_db('planets_in_signs_ingested', key)
+        return res if res else "Delineation not found in Codex."
 
     def get_detailed_profile(self, planet: str) -> Dict:
-        return self.detailed.get(planet.upper(), {})
+        res = self._query_db('detailed_delineations', planet.upper())
+        return res if res else {}
 
     def get_house_planet_delineation(self, key: str) -> str:
-        return self.planets_in_houses.get(key, "Delineation not found for House placement.")
+        res = self._query_db('planets_in_houses', key)
+        return res if res else "Delineation not found for House placement."
 
     def get_house_definition(self, house_num: int) -> str:
         key = f"HOUSE_{house_num}"
-        return self.house_definitions.get(key, "Unknown House")
+        res = self._query_db('house_topoi', key)
+        return res if res else "Unknown House"
+
+    def get_arbitrary_delineation(self, category: str, key: str) -> Any:
+        """Generic lookup for any category."""
+        return self._query_db(category, key)
 
 class DatabaseBackupManager:
     @staticmethod

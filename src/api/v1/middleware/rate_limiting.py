@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
 from datetime import datetime
 import redis
 from src.core.config import settings
@@ -43,29 +43,43 @@ class RateLimiter:
 
 rate_limiter = RateLimiter()
 
-async def enforce_rate_limit(auth_context: dict):
-    """Middleware to enforce rate limits for B2B clients"""
-    if not auth_context:
-        return # Skip if not B2B authenticated
-
-    user = auth_context['user']
-    plan = auth_context['plan']
+async def enforce_rate_limit(request: Request, auth_context: Optional[dict] = None):
+    """
+    Middleware to enforce rate limits.
+    Priority: API Key > User ID > Client IP
+    """
+    # 1. Identify the 'entity' to rate limit
+    limit_key = None
+    tier = 'free'
     
-    # Determine limit based on plan
-    limit = 60 # Default
-    if plan.tier == 'agency':
+    if auth_context:
+        # B2B / Authenticated Path
+        limit_key = auth_context.get('api_key_id') or f"user:{auth_context['user'].id}"
+        plan = auth_context.get('plan')
+        tier = plan.tier if plan else 'free'
+    else:
+        # Public / Guest Path (Fallback to IP)
+        limit_key = f"ip:{request.client.host if request.client else 'unknown'}"
+    
+    # 2. Determine limit based on plan/tier
+    # Agency: 1000 rpm, Master: 100 rpm, Basic/Free: 10 rpm
+    limit = 10 # Default for free/guests
+    if tier == 'agency':
         limit = 1000
-    elif plan.tier == 'master':
+    elif tier == 'master':
         limit = 100
+    elif tier == 'practitioner':
+        limit = 60
         
-    allowed, info = rate_limiter.check_rate_limit(user.id, limit)
+    allowed, info = rate_limiter.check_rate_limit(limit_key, limit)
     
     if not allowed:
         raise HTTPException(
             status_code=429,
             detail={
                 "error": "Rate limit exceeded",
-                "limit": info['limit']
+                "limit": info.get('limit', limit),
+                "retry_after": info.get('reset_at', 60)
             }
         )
     return info

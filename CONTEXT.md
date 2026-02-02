@@ -4,7 +4,7 @@
 - **Working**: Natal Forensic Engine (Dignities, Receptions, Kakosis), Mundane Speculum (Placidian Semi-Arc), Solar Return Determination (Morin), Secondary Progressions (Mercury Stations), Iatromathematics (Decumbiture/Crisis Days), Horary Physics (Denial of Perfection).
 - **Broken**: None.
 - **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall).
-- **Database**: Comprehensive pre-1700s traditional astrology—20 JSON files, ~210KB total.
+- **Database**: Comprehensive pre-1700s traditional astrology—Managed via `AstrologicalDelineation` database table (SQLAlchemy).
 - **Release Ready**: Version 1.3 (User Accounts).
 - **Monetization**: Stripe (One-time + Annual/Monthly Subscriptions).
 
@@ -34,7 +34,9 @@
 
 
 
-## Database Inventory (src/database/data/)
+## Database Inventory (SQLAlchemy: `astrological_delineations` table)
+
+The core delineations are now stored in the database to allow for manual fixes and persistent overrides. The `src/database/data/legacy/` directory contains the original JSON files.
 
 ### Natal Chart Delineations
 - `planets_in_signs.json` — 168 entries (7 planets × 12 signs × 2 sects)
@@ -92,6 +94,7 @@
 - `src/engine/chat_oracle.py` — RAG interface for chart Q&A.
 - `src/engine/user_auth.py` — User authentication & accounts module.
 - `scripts/extract_all_traditional_data.py` — Comprehensive data extraction.
+- `scripts/migrate_json_to_db.py` — Migrates JSON data to the SQLAlchemy database.
 
 ## Data Sources
 - `Binder1.txt` — Combined traditional source material (Valens, Firmicus, Lilly, Dorotheus).
@@ -149,6 +152,7 @@
 ```bash
 python src/tests/test_audit.py
 uvicorn src.api:app --reload
-python scripts/extract_all_traditional_data.py  # Regenerate all data
-python scripts/enhance_delineations.py  # Refresh delineation quality
+python scripts/extract_all_traditional_data.py  # Regenerate data to JSON
+python scripts/migrate_json_to_db.py           # Sync JSON data to Database
+python scripts/enhance_delineations.py         # Refresh delineation quality
 ```

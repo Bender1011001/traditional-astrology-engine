@@ -12,7 +12,8 @@ import logging
 import time
 
 from src.core.config import settings
-from src.api.v1.router import api_router
+from src.api.v1.router import api_router as v1_router
+from src.api.v2.router import v2_router
 from src.engine.logger import configure_logging, ActivityLogger
 
 # Initialize centralized logging
@@ -112,7 +113,8 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 # --- ROUTER MOUNT ---
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(v1_router, prefix="/api/v1")
+app.include_router(v2_router, prefix="/api/v2")
 
 # --- STATIC FILES ---
 from fastapi.staticfiles import StaticFiles
