@@ -63,3 +63,30 @@ async def read_users_me(current_user: User = Depends(get_current_user)):
     return {
         "user": current_user.to_dict()
     }
+
+@router.get("/restore_session")
+async def restore_session(token: str):
+    from src.api.v1.auth import validate_token
+    
+    try:
+        payload = validate_token(token)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid token")
+        
+    if not payload:
+            raise HTTPException(status_code=400, detail="Invalid token")
+    
+    # Check for nested data 'd'
+    data = payload.get("d", {})
+    if not isinstance(data, dict):
+         data = {}
+         
+    chart_input = data.get("chart_input")
+    # Also check top level just in case textual modification happened
+    if not chart_input:
+          chart_input = payload.get("chart_input")
+
+    if not chart_input:
+            raise HTTPException(status_code=404, detail="No session data found")
+            
+    return chart_input

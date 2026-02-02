@@ -508,6 +508,90 @@ const LOADING_MSGS = [
     "Generating your forensic report..."
 ];
 
+function renderForensicReport(report) {
+    if (!report) return "<p>Report generation failed. Please contact support.</p>";
+
+    let html = `
+    <div class="forensic-report-container">
+        <div class="report-header">
+            <h4>FORENSIC ASTROLOGICAL AUDIT</h4>
+            <div class="report-meta">
+                <span><strong>Date:</strong> ${new Date().toLocaleDateString()}</span>
+                <span><strong>Status:</strong> <span style="color:var(--success)">VERIFIED</span></span>
+            </div>
+        </div>
+    `;
+
+    // 1. Planetary Forensics
+    if (report.planets && report.planets.length > 0) {
+        html += `
+        <div class="report-section">
+            <h5 class="section-header">I. PLANETARY CONDITION</h5>
+            <div class="planet-grid">
+        `;
+        report.planets.forEach(p => {
+            const powerClass = (p.power_label === "Imperial" || p.power_label === "Royal") ? "high-power" :
+                (p.power_label === "Vagabond" || p.power_label === "Debilitated") ? "low-power" : "med-power";
+
+            html += `
+            <div class="planet-card ${powerClass}">
+                <div class="p-header">
+                    <span class="p-name">${p.planet}</span>
+                    <span class="p-score">${p.dignity_score}</span>
+                </div>
+                <div class="p-details">
+                    <div class="p-row"><span>Sign:</span> ${p.sign}</div>
+                    <div class="p-row"><span>House:</span> ${p.house_number}</div>
+                    <div class="p-row"><span>Power:</span> ${p.power_label}</div>
+                    <div class="p-row"><span>Sect:</span> ${p.sect_status}</div>
+                </div>
+            </div>`;
+        });
+        html += `</div></div>`;
+    }
+
+    // 2. Hidden Architecture (Lots)
+    if (report.lots) {
+        html += `
+        <div class="report-section">
+            <h5 class="section-header">II. HIDDEN ARCHITECTURE (LOTS)</h5>
+            <ul class="forensic-list">
+                <li><strong>Lot of Fortune:</strong> ${report.lots.fortune || "N/A"}</li>
+                <li><strong>Lot of Spirit:</strong> ${report.lots.spirit || "N/A"}</li>
+                <li><strong>Syzygy (Prenatal Moon):</strong> ${report.lots.syzygy || "N/A"}</li>
+            </ul>
+        </div>`;
+    }
+
+    // 3. Medical / Constitution
+    if (report.medical) {
+        html += `
+        <div class="report-section">
+            <h5 class="section-header">III. CONSTITUTION & VITALITY</h5>
+            <p><strong>Primary Temperament:</strong> ${report.medical.temperament || "Unknown"}</p>
+            <p><strong>Hyleg (Giver of Life):</strong> ${report.medical.hyleg || "Not found"}</p>
+            <p><strong>Alcocoden (Guardian):</strong> ${report.medical.alcocoden || "Not found"}</p>
+            <div class="disclaimer-box">
+                <small>* DISCLAIMER: This is a historical calculation only. Not medical advice.</small>
+            </div>
+        </div>`;
+    }
+
+    // 4. Forecast
+    if (report.forecast_text) {
+        html += `
+        <div class="report-section">
+            <h5 class="section-header">IV. SHORT-TERM FORECAST</h5>
+            <div class="forecast-text">
+                ${formatPlainReading(report.forecast_text)}
+            </div>
+        </div>`;
+    }
+
+    html += `</div>`; // Close container
+    return html;
+}
+
 function setBasicLoading(isLoading) {
     if (!basicLoading || !basicStartBtn) return;
     basicLoading.classList.toggle("hidden", !isLoading);
@@ -600,39 +684,42 @@ if (basicForm) {
             const reading = result.plain_reading || "";
             if (reading) {
                 if (basicReadingBody) {
-                    basicReadingBody.innerHTML = formatPlainReading(reading);
+                    if (result.meta && result.meta.tier !== 'free' && result.forensic_report) {
+                        basicReadingBody.innerHTML = renderForensicReport(result.forensic_report);
+                    } else {
+                        basicReadingBody.innerHTML = formatPlainReading(reading);
 
-                    // --- 1. VISUAL HOOK: Temperament Bar ---
-                    // Try to parse temperament from the text if result.summary is missing or plain text
-                    // Better: use result.forensic_report.summary if available, but backend might not send sending full report on free?
-                    // The backend sends `result.plain_reading` string. 
-                    // Let's scrape the text for "Temperament" keywords? 
-                    // Or check if the backend sent structured data.
-                    // Assuming result.forensic_report might be partially filled or we scrape the text.
-                    // For now, let's inject a placeholder or specific visual if we detect keywords.
+                        // --- 1. VISUAL HOOK: Temperament Bar ---
+                        // Try to parse temperament from the text if result.summary is missing or plain text
+                        // Better: use result.forensic_report.summary if available, but backend might not send sending full report on free?
+                        // The backend sends `result.plain_reading` string. 
+                        // Let's scrape the text for "Temperament" keywords? 
+                        // Or check if the backend sent structured data.
+                        // Assuming result.forensic_report might be partially filled or we scrape the text.
+                        // For now, let's inject a placeholder or specific visual if we detect keywords.
 
-                    // Actually, let's see if we can get the structured temperament
-                    // result.forensic_report?.summary?.temperament
-                    const temp = result.forensic_report?.summary?.temperament;
-                    if (temp) {
-                        // Simple visualizer: Map the dominant term to a color dominance
-                        // Choleric (Fire), Sanguine (Air), Melancholic (Earth), Phlegmatic (Water)
-                        // We will fake a "Balance" based on the primary label for the visual hook
-                        let c = 10, s = 10, m = 10, p = 10; // base noise
-                        const t = temp.toLowerCase();
-                        if (t.includes('choleric')) c += 50;
-                        if (t.includes('sanguine')) s += 50;
-                        if (t.includes('melancholic')) m += 50;
-                        if (t.includes('phlegmatic')) p += 50;
+                        // Actually, let's see if we can get the structured temperament
+                        // result.forensic_report?.summary?.temperament
+                        const temp = result.forensic_report?.summary?.temperament;
+                        if (temp) {
+                            // Simple visualizer: Map the dominant term to a color dominance
+                            // Choleric (Fire), Sanguine (Air), Melancholic (Earth), Phlegmatic (Water)
+                            // We will fake a "Balance" based on the primary label for the visual hook
+                            let c = 10, s = 10, m = 10, p = 10; // base noise
+                            const t = temp.toLowerCase();
+                            if (t.includes('choleric')) c += 50;
+                            if (t.includes('sanguine')) s += 50;
+                            if (t.includes('melancholic')) m += 50;
+                            if (t.includes('phlegmatic')) p += 50;
 
-                        const total = c + s + m + p;
-                        const pc = (c / total) * 100;
-                        const ps = (s / total) * 100;
-                        const pm = (m / total) * 100;
-                        const pp = (p / total) * 100;
+                            const total = c + s + m + p;
+                            const pc = (c / total) * 100;
+                            const ps = (s / total) * 100;
+                            const pm = (m / total) * 100;
+                            const pp = (p / total) * 100;
 
-                        const bar = document.createElement('div');
-                        bar.innerHTML = `
+                            const bar = document.createElement('div');
+                            bar.innerHTML = `
                             <div style="margin-top:2rem; margin-bottom:0.5rem; font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; font-weight:600;">
                                 Elemental Constitution
                             </div>
@@ -646,23 +733,23 @@ if (basicForm) {
                                 <span>FIRE</span><span>AIR</span><span>EARTH</span><span>WATER</span>
                             </div>
                          `;
-                        // Insert after the first paragraph
-                        const firstP = basicReadingBody.querySelector('p');
-                        if (firstP) basicReadingBody.insertBefore(bar, firstP.nextSibling);
-                        else basicReadingBody.prepend(bar);
-                    }
+                            // Insert after the first paragraph
+                            const firstP = basicReadingBody.querySelector('p');
+                            if (firstP) basicReadingBody.insertBefore(bar, firstP.nextSibling);
+                            else basicReadingBody.prepend(bar);
+                        }
 
-                    // Append upgrade teaser if free
-                    if (result.meta && result.meta.tier === 'free') {
-                        // --- 3. PERSONALIZED PAYWALL ---
-                        // Extract some data to redact
-                        // Example: "Ascendant in [Sign]"
-                        const ascPhrase = result.angles ? `Ascendant in <span class="redacted-text">SCORPIO</span>` : `Ascendant in <span class="redacted-text">HIDDEN</span>`;
-                        const rulerPhrase = `Time Lord: <span class="redacted-text">SATURN</span>`; // Placeholder dynamic
+                        // Append upgrade teaser if free
+                        if (result.meta && result.meta.tier === 'free') {
+                            // --- 3. PERSONALIZED PAYWALL ---
+                            // Extract some data to redact
+                            // Example: "Ascendant in [Sign]"
+                            const ascPhrase = result.angles ? `Ascendant in <span class="redacted-text">SCORPIO</span>` : `Ascendant in <span class="redacted-text">HIDDEN</span>`;
+                            const rulerPhrase = `Time Lord: <span class="redacted-text">SATURN</span>`; // Placeholder dynamic
 
-                        const teaser = document.createElement("div");
-                        teaser.className = "reading-teaser";
-                        teaser.innerHTML = `
+                            const teaser = document.createElement("div");
+                            teaser.className = "reading-teaser";
+                            teaser.innerHTML = `
                             <hr class="ornament" style="margin: 2rem auto; width: 60px;">
                             <div style="background: rgba(192,122,43,0.05); border:1px solid rgba(192,122,43,0.2); padding:1.5rem; border-radius:8px; margin-bottom:1.5rem;">
                                 <p style="text-align: center; color: var(--gold); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom:1rem;">
@@ -681,30 +768,31 @@ if (basicForm) {
                                 </button>
                             </div>
                         `;
-                        basicReadingBody.appendChild(teaser);
+                            basicReadingBody.appendChild(teaser);
 
-                        // Add "Save PDF" button to the top or bottom?
-                        // Let's add it near the teaser or at the top of reading.
-                        // Actually, let's create a small toolbar.
+                            // Add "Save PDF" button to the top or bottom?
+                            // Let's add it near the teaser or at the top of reading.
+                            // Actually, let's create a small toolbar.
 
-                        const actionsDiv = document.createElement("div");
-                        actionsDiv.style.textAlign = "center";
-                        actionsDiv.style.margin = "1rem 0";
-                        actionsDiv.innerHTML = `
+                            const actionsDiv = document.createElement("div");
+                            actionsDiv.style.textAlign = "center";
+                            actionsDiv.style.margin = "1rem 0";
+                            actionsDiv.innerHTML = `
                              <button class="help-btn" onclick="document.getElementById('emailModal').classList.remove('hidden')">
                                 SAVE AS PDF 📥
                             </button>
                         `;
-                        // Insert after title
-                        const title = basicReading.querySelector(".basic-reading-title");
-                        if (title) {
-                            title.insertAdjacentElement('afterend', actionsDiv);
-                        }
+                            // Insert after title
+                            const title = basicReading.querySelector(".basic-reading-title");
+                            if (title) {
+                                title.insertAdjacentElement('afterend', actionsDiv);
+                            }
 
-                        // Show modal automatically after a slight delay
-                        setTimeout(() => {
-                            if (paywallModal) paywallModal.classList.remove("hidden");
-                        }, 2500);
+                            // Show modal automatically after a slight delay
+                            setTimeout(() => {
+                                if (paywallModal) paywallModal.classList.remove("hidden");
+                            }, 2500);
+                        }
                     }
                 }
                 if (basicReading) basicReading.classList.remove("hidden");
@@ -792,7 +880,7 @@ async function checkRegenerate() {
             if (!lastChartRequest && foundToken) {
                 // Fallback: Try to restore session data from token via API
                 try {
-                    const resp = await fetch(apiUrl(`/api/restore_session?token=${foundToken}`));
+                    const resp = await fetch(apiUrl(`/api/v1/auth/restore_session?token=${foundToken}`));
                     if (resp.ok) {
                         const sessionData = await resp.json();
                         // Normalize data structure
@@ -949,15 +1037,15 @@ if (billingSwitch) {
             labelAnnual.classList.add('active');
 
             // Update Card Content
-            if (subPrice) subPrice.innerHTML = '$49.00<span>/yr</span>';
-            if (subDesc) subDesc.textContent = 'Billed annually. Save 18%.';
+            if (subPrice) subPrice.innerHTML = '$99.00<span>/yr</span>';
+            if (subDesc) subDesc.textContent = 'Billed annually. Save 17%.';
             if (annualDetails) annualDetails.classList.remove('hidden');
         } else {
             labelAnnual.classList.remove('active');
             labelMonthly.classList.add('active');
 
             // Revert
-            if (subPrice) subPrice.innerHTML = '$4.99<span>/mo</span>';
+            if (subPrice) subPrice.innerHTML = '$9.99<span>/mo</span>';
             if (subDesc) subDesc.textContent = 'Unlimited readings + Save 10 charts.';
             if (annualDetails) annualDetails.classList.add('hidden');
         }
