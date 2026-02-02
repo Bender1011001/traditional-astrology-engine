@@ -24,6 +24,7 @@ from .prediction import (
     calculate_solar_return_jd,
     calculate_epitasis_days
 )
+from src.database.db_manager import DelineationLibrary
 import re
 
 RULE_SOURCE_MAP_EXT = {
