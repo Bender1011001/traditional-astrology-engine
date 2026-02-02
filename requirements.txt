@@ -16,4 +16,6 @@ sqlalchemy
 psycopg2-binary
 
 pydantic-settings
+pydantic-settings
 redis
+mkdocs-material

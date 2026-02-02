@@ -36,6 +36,7 @@ from .dignities import DignityCalculator
 from .hyleg import HylegAlcocodenEngine
 from .temperament import TemperamentEngine
 from .mansions import LunarMansionEngine
+from .calculations import calculate_solar_status, is_besieged, is_in_via_combusta
 import re
 
 RULE_SOURCE_MAP_EXT = {
@@ -173,7 +174,8 @@ class Auditor:
                     }
                 },
                 "analysis": analysis,
-                "planets_forensic": planets_forensic
+                "planets_forensic": planets_forensic,
+                "rule_ledger": audit_results.get("rule_ledger", [])
             }
 
             # 4. Translation: Pass to ReportSynthesizer

@@ -52,7 +52,8 @@ def audit(date, time, city, state, name):
              return
 
         # Output Summary
-        analysis = result.get("analysis", {})
+        tech_data = result.get("technical_data", {})
+        analysis = tech_data.get("analysis", {})
         summary = {
             "Almuten": analysis.get("advanced_mechanics", {}).get("almuten", {}).get("winner"),
             "Hemisphere": analysis.get("supplemental", {}).get("hemispheres", {}).get("focus", {}).get("orientation"),
@@ -65,7 +66,7 @@ def audit(date, time, city, state, name):
         click.echo(f"Hemisphere Bias: {summary['Hemisphere']}")
         
         # Rule Ledger Summary
-        ledger = result.get("rule_ledger", [])
+        ledger = tech_data.get("rule_ledger", [])
         click.secho(f"\nRule Ledger Entries: {len(ledger)}", fg='yellow')
         
         # Show top 3 rules
@@ -83,24 +84,21 @@ def rehydrate():
     """Wipe database and re-seed with initial data."""
     click.secho("Rehydrating Database...", fg='magenta')
     
-    # 1. Reset Database
-    # This requires dropping tables or simple re-init.
-    # db_manager.init_db() creates tables if not exist. 
-    # To wipe, we might need a dedicated function or just drop all.
-    # For now, let's assume we just want to ensure schema is up to date and maybe seed delineate.
-    
     try:
-        init_db()
+        from src.scripts.seed_db import reset_db, seed_plans
+        
+        reset_db()
         click.secho("Schema Intialized.", fg='green')
         
-        # 2. Seed Delineations (if json files exist)
-        # from src.scripts.seed_delineations import seed_delineations
-        # seed_delineations()
+        seed_plans()
+        click.secho("Seed Data Populated.", fg='green')
         
         click.secho("Database Ready.", fg='green')
         
     except Exception as e:
          click.secho(f"Rehydration Failed: {e}", fg='red')
+         import traceback
+         traceback.print_exc()
 
 if __name__ == '__main__':
     cli()
