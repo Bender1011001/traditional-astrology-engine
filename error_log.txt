@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "E:\code.projects\astrology\src\scripts\omnibus.py", line 11, in <module>
+    from src.database.db_manager import init_db, SessionLocal
+ImportError: cannot import name 'init_db' from 'src.database.db_manager' (E:\code.projects\astrology\src\database\db_manager.py)

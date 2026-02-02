@@ -127,3 +127,9 @@ class DatabaseBackupManager:
         except Exception as e:
             logging.error(f"Backup failed: {e}")
             return f"Backup failed: {e}"
+
+def init_db():
+    from src.database.core import engine, Base
+    # Ensure models are imported so they are registered with Base
+    import src.database.models
+    Base.metadata.create_all(bind=engine)

@@ -25,6 +25,17 @@ from .prediction import (
     calculate_epitasis_days
 )
 from src.database.db_manager import DelineationLibrary
+from .primary_directions import PrimaryDirectionsEngine
+from .mundane import MundaneEngine, check_eclipse_impact, get_recent_eclipses
+from .rectification import RectificationEngine
+from .reception import ReceptionEngine, ReceptionMode
+from .stars import check_fixed_stars
+from .decumbiture import DecumbitureEngine
+from .aspects import AspectEngine
+from .dignities import DignityCalculator
+from .hyleg import HylegAlcocodenEngine
+from .temperament import TemperamentEngine
+from .mansions import LunarMansionEngine
 import re
 
 RULE_SOURCE_MAP_EXT = {
@@ -416,7 +427,7 @@ class Auditor:
         }
 
     @staticmethod
-    def _calculate_enhanced_profections(chart: Chart, birth_dt: datetime, ans_date: datetime, age: int) -> Dict:
+    def _calculate_enhanced_profections(chart: Chart, birth_dt: Optional[datetime], ans_date: datetime, age: int) -> Dict:
         if age is None: return {}
         asc_sign_idx = int(chart.ascendant / 30) % 12
         signs = list(Sign)
@@ -426,59 +437,208 @@ class Auditor:
         annual_sign = signs[annual_index]
         loy_name = get_lord_of_year(annual_sign)
         
-        # Monthly & Daily
-        # Determine total months
+        # Monthly & Daily Defaults
         month = 1
         day = 1
-        # Logic matches logic.py's implementation of deriving target month/day from dates
-        if birth_dt and ans_date:
-            # Simple approx logic: how many full months since birth month in current year?
-            # Actually logic.py calculated total_months then mod 12.
-            # But the 'month' param in perform_forensic_audit was explicit.
-            # Here we derive it if not provided. logic.py defaulted month=1.
-            # Let's derive it properly.
-            pass # Use passed age/dates or defaults
-            
-        # For parity, we'll calculate based on ans_date vs birth_dt if available
-        current_month_idx = 0 # default (1st month)
-        current_day_idx = 0 # default (1st day)
         
         if birth_dt and ans_date:
-             # Calculate months from last birthday
-             # This is tricky without a full dateutil, but let's approximate or use logic.py's method
-             m_diff = (ans_date.year - birth_dt.year) * 12 + (ans_date.month - birth_dt.month)
-             # This is total months.
-             # We need months into the current year (0-11)
-             current_month_idx = m_diff % 12
-             # Logic.py used "total_months" for continuous, but month param for saltatory?
-             # Logic.py: monthly_salt_index = (asc_sign_idx + (total_months or 0)) % 12
-             # Monthly Cont: (annual_index + (month - 1)) % 12
-             pass
+            try:
+                # Logic: Calculate profection month (1-12) and day (1-30)
+                m_diff = (ans_date.year - birth_dt.year) * 12 + (ans_date.month - birth_dt.month)
+                if ans_date.day < birth_dt.day:
+                    m_diff -= 1
+                month = (m_diff % 12) + 1
+                
+                day_diff = (ans_date.day - birth_dt.day)
+                if day_diff < 0: day_diff += 30
+                day = day_diff + 1
+            except:
+                pass
 
-        # Since perform_audit takes 'age' (int), 'birth_dt', 'ans_date', we should try to be precise.
-        # But logic.py took manual 'month' and 'day' args too.
-        # Auditor.perform_audit signature doesn't have month/day. 
-        # I should assume TODAY's month/day relative to birth if not provided.
+        # Monthly (Continuous)
+        monthly_cont_index = (annual_index + (month - 1)) % 12
+        monthly_sign_cont = signs[monthly_cont_index]
         
-        # ... Implementation simplified for brevity, following logic.py structure ...
-        # (Actually, calculating monthly/daily profections accurately requires more date math)
-        # For now, return the basics which AdvancedPredictionEngine likely already has, PLUS the epitasis.
+        # Monthly (Saltatory)
+        total_months = (age * 12) + (month - 1)
+        monthly_salt_index = (asc_sign_idx + total_months) % 12
+        monthly_sign_salt = signs[monthly_salt_index]
         
-        # Let's trust AdvancedPredictionEngine for the basic profections if it has them.
-        # logic.py says:
-        # report["prediction"] = { ... epitasis_days ... }
+        # Daily
+        daily_rate = 7 / 3
+        daily_steps = int((day - 1) / daily_rate)
+        daily_index = (monthly_cont_index + daily_steps) % 12
+        daily_sign = signs[daily_index]
         
-        # I'll re-implement the logic.py block here.
-        # Assuming birth_dt IS available.
-        
-        if not birth_dt: return {}
-        
-        # Calculate 'month' (1-12) and 'day' (1-30) relative to birth day
-        # This is strictly for the "Profection" perspective (birthday to birthday)
-        
-        # ... logic ...
-        
-        return {} # Placeholder to close the chunk properly, I will do full implementation in next chunk or refine.
+        # Epitasis
+        epitasis_days = []
+        loy_planet = next((p for p in chart.planets if p.name == loy_name), None)
+        if loy_planet:
+            epitasis_days = calculate_epitasis_days(monthly_sign_cont, loy_planet.sign)
+            
+        return {
+            "annual_sign": annual_sign.value,
+            "lord_of_year": loy_name.value,
+            "monthly_sign": {
+                "continuous": monthly_sign_cont.value,
+                "saltatory": monthly_sign_salt.value
+            },
+            "daily_sign": daily_sign.value,
+            "epitasis_days": epitasis_days,
+            "age": age, "month": month, "day": day
+        }
+
+    @staticmethod
+    def _generate_rule_ledger(
+        chart: Chart, 
+        planets_data: List[Dict], 
+        active_directions: List[Dict], 
+        stars: List[Any], 
+        hermetic_lots: Dict, 
+        forensic_lots: Dict, 
+        jd: float
+    ) -> List[Dict]:
+        """
+        Generates the Source of Truth Rule Ledger.
+        """
+        ledger = []
+        rule_counts = {}
+
+        def _uid(base):
+            c = rule_counts.get(base, 0) + 1
+            rule_counts[base] = c
+            return f"{base}-{c}" if c > 1 else base
+
+        # 1. Planets
+        for p_data in planets_data:
+            p_label = p_data.get("name", "Planet")
+            base_trace = [f"Planet: {p_label}", f"Sign: {p_data.get('sign')}"]
+            
+            # Dignity
+            dig = p_data.get("dignities", {})
+            if dig:
+                score = dig.get("total_score", 0)
+                ledger.append({
+                    "id": _uid(f"{p_label.lower()}-dignity"),
+                    "category": "Essential Dignity",
+                    "condition": f"{p_label} in {p_data.get('sign')}",
+                    "judgment": f"Score: {score}. " + ", ".join([f"{k}: {v}" for k,v in dig.get("breakdown", {}).items()]),
+                    "sources": ["Ptolemy, Tetrabiblos", "Dorotheus"],
+                    "confidence": 90,
+                    "conflicts": [],
+                    "trace": base_trace
+                })
+            
+            # Impacts
+            for imp in p_data.get("impacts", []):
+                cause = imp.get("cause")
+                effect = imp.get("effect")
+                sources = _resolve_sources(cause, "")
+                ledger.append({
+                    "id": _uid(f"{p_label.lower()}-{_slugify(cause)}"),
+                    "category": "Condition",
+                    "condition": f"{p_label}: {cause}",
+                    "judgment": effect,
+                    "sources": sources,
+                    "confidence": _estimate_confidence(sources, [], base=75),
+                    "conflicts": [],
+                    "trace": base_trace + [f"Cause: {cause}"]
+                })
+
+            # Delineation
+            if "delineation" in p_data:
+                 sources = _extract_sources(p_data["delineation"])
+                 ledger.append({
+                    "id": _uid(f"{p_label.lower()}-delineation"),
+                    "category": "Planet Delineation",
+                    "condition": f"{p_label} in {p_data.get('sign')}",
+                    "judgment": str(p_data["delineation"])[:150] + "...",
+                    "sources": sources,
+                    "confidence": 70,
+                    "conflicts": [],
+                    "trace": base_trace
+                 })
+                 
+            # Classical - Monomoiria/Dodecatemoria if available in future
+            if "classical" in p_data:
+                mono = p_data["classical"].get("monomoiria")
+                if mono:
+                    ledger.append({
+                        "id": _uid(f"{p_label.lower()}-monomoiria"),
+                        "category": "Monomoiria",
+                        "condition": f"{p_label} Degree Ruler",
+                        "judgment": f"Zoidion: {mono.get('zoidion_ruler')}",
+                        "sources": ["Paul of Alexandria"],
+                        "confidence": 85,
+                        "conflicts": [],
+                        "trace": base_trace
+                    })
+
+        # 2. Directions
+        for d in active_directions:
+            ledger.append({
+                "id": _uid(f"direction-{_slugify(str(d.get('promittor', '')))}-{_slugify(str(d.get('aspect', '')))}"),
+                "category": "Primary Direction",
+                "condition": f"Directed {d.get('significator')} to {d.get('promittor')}",
+                "judgment": f"Arc {d.get('arc')}: {d.get('aspect')}",
+                "sources": ["Ptolemy", "Placidus"],
+                "confidence": 85,
+                "conflicts": [],
+                "trace": [f"Year: {d.get('years')}"]
+            })
+
+        # 3. Stars
+        for s in stars:
+            s_name = s.star_name if hasattr(s, "star_name") else s.get("star_name")
+            p_name = s.planet_name if hasattr(s, "planet_name") else s.get("planet_name")
+            msg = s.message if hasattr(s, "message") else s.get("message")
+            ledger.append({
+                "id": _uid(f"star-{_slugify(str(s_name))}"),
+                "category": "Fixed Star",
+                "condition": f"{s_name} + {p_name}",
+                "judgment": msg,
+                "sources": ["Anonymous of 379", "Brady"],
+                "confidence": 90,
+                "conflicts": [],
+                "trace": []
+            })
+            
+        # 4. Forensic Lots
+        for k, v in forensic_lots.items():
+            if v.get("status") != "Clear":
+                 ledger.append({
+                    "id": _uid(f"lot-{_slugify(k)}"),
+                    "category": "Forensic Lot",
+                    "condition": f"Lot of {k}",
+                    "judgment": v.get("verification"),
+                    "sources": ["Bonatti", "Valens"],
+                    "confidence": 85,
+                    "conflicts": [],
+                    "trace": [f"Status: {v.get('status')}"]
+                 })
+
+        # 5. Eclipses
+        if jd > 0:
+            eclipses = get_recent_eclipses(jd)
+            for lot_name, lot_data in hermetic_lots.items():
+                lon = lot_data
+                if isinstance(lot_data, dict): lon = lot_data.get("longitude")
+                
+                if isinstance(lon, (int, float)):
+                    for ec in eclipses:
+                        if check_eclipse_impact(lon, ec["longitude"]):
+                             ledger.append({
+                                "id": _uid(f"eclipse-{_slugify(lot_name)}"),
+                                "category": "Universal Override",
+                                "condition": f"Eclipse impacting Lot of {lot_name}",
+                                "judgment": "Suspended Promise: Area under universal pressure.",
+                                "sources": ["Ptolemy II"],
+                                "confidence": 92,
+                                "conflicts": [],
+                                "trace": [f"Eclipse: {ec['date']}"]
+                             })
+
+        return ledger
         
     @staticmethod
     def _rebuild_chart_model(raw_data: Dict) -> Chart:
@@ -549,6 +709,24 @@ class Auditor:
         directions = PrimaryDirectionsEngine.calculate_directions_to_angles(chart, chart.geo_lat)
         distributor = PrimaryDirectionsEngine.calculate_current_distributor(chart, age_years, chart.geo_lat)
         
+        # Serialize and Filter Active (for Ledger)
+        p_dirs_json = []
+        active_dirs = []
+        for d in directions:
+            d_json = {
+                "significator": d.significator,
+                "promittor": d.promittor,
+                "aspect": d.aspect,
+                "arc": d.arc,
+                "years": d.years,
+                "date_offset": d.date_offset,
+                "method": d.method
+            }
+            p_dirs_json.append(d_json)
+            # Active if within 1 year of current age
+            if abs(d.years - age_years) <= 1.0:
+                 active_dirs.append(d_json)
+
         # 2. Advanced Prediction (Transits, Firdaria, Profections)
         predictor = AdvancedPredictionEngine(
             chart, bdt, chart.jd, chart.geo_lat, chart.geo_lon
@@ -557,25 +735,10 @@ class Auditor:
 
         return {
             "hermetic_lots": lots,
-            "primary_directions": [
-                {
-                    "significator": d.significator,
-                    "promittor": d.promittor,
-                    "aspect": d.aspect,
-                    "arc": d.arc,
-                    "years": d.years,
-                    "date_offset": d.date_offset,
-                    "method": d.method
-                } for d in directions
-            ],
+            "primary_directions": p_dirs_json,
             "primary_direction_distributor": distributor,
-            "profections": prediction_report.get("profections", {}), # This might be missing in predict report?
-            # Actually AdvancedPredictionEngine puts it in 'muntha' or 'profections'??? 
-            # Let's check AdvancedPredictionEngine.get_prediction_report again.
-            # It returns: firdaria, solar_arcs, transits, muntha, lunar_phase, mercury_stations, sp_moon_triggers, solar_return_info
-            # It does NOT return 'profections' key explicitly, it returns 'muntha'.
-            # But the legacy code expected 'profections'.
-            # I will map muntha to profections['muntha'] basically.
+            "active_directions": active_dirs,
+            "profections": prediction_report.get("profections", {}),
             "firdaria": prediction_report.get("firdaria", {}),
             "solar_return": prediction_report.get("solar_return_info", {}),
             "muntha": prediction_report.get("muntha", {}),
