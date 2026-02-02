@@ -8,16 +8,14 @@ import secrets
 import logging
 from datetime import datetime
 from typing import Optional, Dict, Any, List
+import bcrypt
 
 from sqlalchemy.orm import Session
 from src.database.core import SessionLocal, engine, Base
 from src.database.models import User
-from passlib.context import CryptContext
 
 # Initialize tables
 Base.metadata.create_all(bind=engine)
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class UserManager:
     """User management using SQLAlchemy."""
@@ -50,11 +48,13 @@ class UserManager:
     
     def _hash_password(self, password: str) -> str:
         """Hash a password using bcrypt."""
-        return pwd_context.hash(password)
+        # hashpw requires bytes, returns bytes. decoding to str for storage.
+        return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     
     def _verify_password(self, password: str, stored_hash: str) -> bool:
         """Verify a password against stored hash."""
-        return pwd_context.verify(password, stored_hash)
+        # checkpw requires bytes.
+        return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
     
     def create_user(self, email: str, password: str, name: str = "") -> Dict[str, Any]:
         """Create a new user account."""

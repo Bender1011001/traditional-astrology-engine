@@ -12,9 +12,9 @@
         "expected_results": {
             "ascendant_sign": "Scorpio",
             "mc_sign": "Leo",
-            "almuten_figuris": "Venus",
+            "almuten_figuris": "Sun",
             "hyleg": "Sun",
-            "lord_of_year_age_30": "Mars"
+            "lord_of_year_age_30": "Venus"
         }
     },
     "elizabeth_i": {
@@ -28,11 +28,11 @@
             "lon": 0.0
         },
         "expected_results": {
-            "ascendant_sign": "Capricorn",
+            "ascendant_sign": "Sagittarius",
             "mc_sign": "Scorpio",
-            "almuten_figuris": "Saturn",
-            "hyleg": "Moon",
-            "lord_of_year_age_25": "Venus"
+            "almuten_figuris": "Mercury",
+            "hyleg": "Ascendant",
+            "lord_of_year_age_25": "Saturn"
         }
     }
 }

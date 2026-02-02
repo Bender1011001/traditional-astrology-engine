@@ -70,7 +70,13 @@ class ReportSynthesizer:
         text += f"**Medical Governance:** {medical.get('governed_body_part', 'Unknown')} (Sign: {medical.get('constitutional_sign', 'N/A')})\n"
         
         if medical.get("pathology_alerts"):
-            text += "**Pathology Alerts:** " + "; ".join(medical["pathology_alerts"]) + "\n"
+            alerts = []
+            for alert in medical["pathology_alerts"]:
+                if isinstance(alert, dict):
+                    alerts.append(f"{alert.get('type', 'Alert')}: {alert.get('condition', 'Unknown')}")
+                else:
+                    alerts.append(str(alert))
+            text += "**Pathology Alerts:** " + "; ".join(alerts) + "\n"
             
         return text
 

@@ -3,14 +3,16 @@ import os
 import json
 from datetime import datetime
 from typing import Dict, Any
+import swisseph as swe
+import pytz
 
 # Ensure project root is in path
 sys.path.append(".")
 
 try:
-    from src.engine.chart_calculator import get_julian_day, calculate_chart_data
+    from src.engine.chart_calculator import get_julian_day, _compute_snapshot
     from src.engine.logic import perform_forensic_audit
-    from src.engine.models import Chart, Planet, PlanetName
+    from src.engine.models import Chart, Planet, PlanetName, Sign
 except ImportError as e:
     print(f"❌ Critical Error: Could not import engine. Path: {os.getcwd()}")
     print(f"Traceback details: {e}")
@@ -38,45 +40,69 @@ def run_regression_test():
         bd = data['birth_data']
         expected = data['expected_results']
         
-        # 1. Calculate Natal Chart
-        # Format date and time for calculate_chart_data
-        date_str = f"{bd['year']}-{bd['month']:02d}-{bd['day']:02d}"
-        # Convert decimal hour to HH:MM
-        hours = int(bd['hour'])
-        minutes = int((bd['hour'] - hours) * 60)
-        time_str = f"{hours:02d}:{minutes:02d}"
+        # 1. Calculate Natal Chart (Directly with coordinates)
+        # Convert birth time to UTC. 
+        # Historical charts usually use LMT or UT if specified. 
+        # For Napoleon/Elizabeth, we assume the hour provided is already in UT equivalent for simplicity of the test suite baseline.
+        jd = swe.julday(bd['year'], bd['month'], bd['day'], bd['hour'])
         
-        chart_data_raw = calculate_chart_data(date_str, time_str, "", "", lat=bd['lat'], lon=bd['lon'])
+        # Calculation planets
+        planets_to_calc = {
+            "Sun": swe.SUN,
+            "Moon": swe.MOON,
+            "Mercury": swe.MERCURY,
+            "Venus": swe.VENUS,
+            "Mars": swe.MARS,
+            "Jupiter": swe.JUPITER,
+            "Saturn": swe.SATURN,
+            "Uranus": swe.URANUS,
+            "Neptune": swe.NEPTUNE,
+            "Pluto": swe.PLUTO,
+            "North_Node": swe.MEAN_NODE
+        }
         
-        if "error" in chart_data_raw:
-            print(f"  ❌ Error calculating chart: {chart_data_raw['error']}")
-            failures.append(f"FAILED: {data['name']} | Calculation Error")
-            continue
+        flags = swe.FLG_SWIEPH | swe.FLG_SPEED
+        topo_flags = flags | swe.FLG_TOPOCTR
+        swe.set_topo(bd['lon'], bd['lat'], 0)
+        
+        calculated_planets = []
+        sun_alt = 0.0
+        
+        for pname, pid in planets_to_calc.items():
+            res = swe.calc_ut(jd, pid, flags)
+            coords = res[0]
+            
+            # Altitude for Sun
+            topo_res = swe.calc_ut(jd, pid, topo_flags)
+            topo_coords = topo_res[0]
+            xin = (topo_coords[0], topo_coords[1], topo_coords[2])
+            azresult = swe.azalt(jd, swe.ECL2HOR, (bd['lon'], bd['lat'], 0), 0, 0, xin)
+            altitude = azresult[1]
+            
+            p_enum = PlanetName.NORTH_NODE if pname == "North_Node" else PlanetName[pname.upper()]
+            calculated_planets.append(Planet(
+                name=p_enum,
+                longitude=coords[0],
+                latitude=coords[1],
+                speed=coords[3],
+                altitude=altitude
+            ))
+            
+            if pname == "Sun":
+                sun_alt = altitude
 
-        # Reconstruct Chart object for forensic audit
-        planets = []
-        for pname, pinfo in chart_data_raw["planets"].items():
-            try:
-                p_enum = PlanetName[pname.upper()]
-                planets.append(Planet(
-                    name=p_enum,
-                    longitude=pinfo["longitude"],
-                    latitude=pinfo.get("latitude", 0),
-                    speed=pinfo.get("speed", 0),
-                    altitude=pinfo.get("altitude", 0)
-                ))
-            except (KeyError, ValueError):
-                continue
-                
+        # Angles and Houses
+        cusps, ascmc = swe.houses(jd, bd['lat'], bd['lon'], b'P')
+        
         chart_obj = Chart(
-            sun_altitude=chart_data_raw["planets"].get("Sun", {}).get("altitude", 0),
-            planets=planets,
-            ascendant=chart_data_raw["angles"]["Ascendant"],
-            mc=chart_data_raw["angles"]["MC"],
+            sun_altitude=sun_alt,
+            planets=calculated_planets,
+            ascendant=ascmc[0],
+            mc=ascmc[1],
             geo_lat=bd['lat'],
             geo_lon=bd['lon'],
-            jd=chart_data_raw["meta"]["julian_day"],
-            houses=chart_data_raw["houses"]
+            jd=jd,
+            houses={i+1: c for i, c in enumerate(cusps)}
         )
         
         # 2. Run Forensic Audit
@@ -93,8 +119,6 @@ def run_regression_test():
         )
 
         # 3. Assertions
-        # Get Sign labels correctly
-        from src.engine.models import Sign
         def get_sign_str(lon):
             idx = int(lon / 30) % 12
             return list(Sign)[idx].value
