@@ -265,9 +265,10 @@ export function initMedicalCheck(data) {
 
 export function renderOracle(data) {
     const div = document.getElementById('oracleContent');
-    const plainReading = data.plain_reading || (data.forensic_report ? data.forensic_report.plain_reading : null);
-    if (div && plainReading) {
-        div.innerHTML = `<div class="oracle-plain-body">${formatPlainReading(plainReading)}</div>`;
+    // Prioritize the new hardened report_markdown
+    const content = data.report_markdown || data.plain_reading || (data.forensic_report ? data.forensic_report.plain_reading : null);
+    if (div && content) {
+        div.innerHTML = `<div class="oracle-plain-body">${formatPlainReading(content)}</div>`;
     }
 }
 

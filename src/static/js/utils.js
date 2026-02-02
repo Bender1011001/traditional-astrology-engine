@@ -17,11 +17,47 @@ export function formatLongitude(lon) {
     return `${d}° ${SIGNS[signIdx]} ${m}'`;
 }
 
+export function renderMarkdown(text) {
+    if (!text) return "";
+
+    // 1. Protection: Basic escaping of < and > (except those we might want to allow if any)
+    let html = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    // 2. Headers (### Header)
+    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+    // 3. Bold (**bold**)
+    html = html.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
+
+    // 4. Lists (- item)
+    html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
+    // Wrap lists in <ul>
+    // This is a bit tricky with regex only, but we can do a simple version:
+    // If a line starts with <li> and previous didn't, or vice-versa.
+    // For simplicity in Vanilla, we can just let it stay as <li> which browser handles okay-ish
+    // or we can wrap the whole block.
+
+    // 5. Horizontal Rules (---)
+    html = html.replace(/^---$/gim, '<hr class="ornament">');
+
+    // 6. Blockquotes (> quote)
+    html = html.replace(/^> (.*$)/gim, '<blockquote style="border-left: 2px solid var(--gold); padding-left: 1rem; margin-left: 0; font-style: italic;">$1</blockquote>');
+
+    // 7. Paragraphs & Line breaks
+    // Double newlines to <p>
+    const chunks = html.split(/\n\s*\n/);
+    return chunks.map(chunk => {
+        if (chunk.includes('<h') || chunk.includes('<hr') || chunk.includes('<li') || chunk.includes('<blockquote')) {
+            return chunk;
+        }
+        return `<p>${chunk.replace(/\n/g, "<br>")}</p>`;
+    }).join("");
+}
+
 export function formatPlainReading(text) {
-    const safe = escapeHtml(text);
-    const paragraphs = safe.split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
-    if (!paragraphs.length) return "";
-    return paragraphs.map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("");
+    return renderMarkdown(text);
 }
 
 export function hashString(value) {

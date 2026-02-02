@@ -1,26 +1,33 @@
-# Judicial Astrology Engine: Traditional Forensic Astrology Engine
+# Judicial Astrology Engine: The Sovereign Release
 
-Judicial Astrology Engine is a high-precision astrological engine built for the reconstruction and analysis of traditional nativity and mundane data. It implements 135 core rules derived from Hellenistic and Medieval sources (Valens, Ptolemy, Dorotheus, Bonatti, and Lilly).
+Judicial Astrology Engine is a high-precision, practitioner-grade astrological engine built for the reconstruction and analysis of traditional nativity and mundane data. It implements 135 core rules derived from Hellenistic and Medieval sources (Valens, Ptolemy, Dorotheus, Bonatti, and Ibn Ezra).
 
-Live site: https://bender1011001.github.io/astrology/
+Live site: [traditional-astrology.com](https://traditional-astrology.com)
 
-## Features
+## What's New: The Sovereign Release (v1.0)
+The Sovereign Release marks the graduation of the engine from a research project to a production tool for practitioners.
+
+- **Hardened Synthesis**: Fully aligned with traditional binder specifications, featuring the **Amplification/Greed Node Model** and narrative-driven geometric aspect interpretation.
+- **Advanced Mechanics**: Integrated **Almuten Figuris** (Ibn Ezra 12-point house scoring) and the **Panaretos Lot Protocol** (full Forensic Audits for the 7 Hermetic Lots).
+- **Professional CLI**: A new entry point for high-precision report generation (`src/scripts/generate_practitioner_report.py`).
+- **Audit-Grade Logic**: Every calculation now includes a **Kakosis (Maltreatment)** audit, checking for besiegement, combustion, and malefic intervention.
+
+## Core Features
 
 ### 1. Forensic Nativity Analysis
+- **Soul Guardian (Almuten Figuris)**: Detailed scoring based on Ibn Ezra's traditional protocols.
+- **Hermetic Lots**: Full implementation of the 7 Hermetic Lots with sect-based vector reversal.
 - **Constitutional Fitness**: Complete Sect, Hayz, and Halb filtering.
-- **Essential Dignity**: Full weighting for Domicile, Exaltation, Triplicity (Dorothean), Terms (Egyptian/Valens), and Face (Chaldean).
-- **Accidental Strength**: Combustion/Cazimi, Besiegement, Speed, and House Placement (Whole Sign).
+- **Accidental Strength**: Combustion/Cazimi, Besiegement, Speed, and House Placement (Whole Sign/Placidus/Regiomontanus).
 - **Shadow Physics**: Implementation of Antiscia and Contra-antiscia reflection.
 
 ### 2. Temporal Audits (Predictive)
-- **Profections**: Annual, Monthly (Continuous/Saltatory), and Daily profections.
-- **Zodiacal Releasing**: High-precision ZR up to Level 3, including 'Loosing of the Bond' logic.
-- **Chronocrators**: Firdaria periods with sub-period shifts.
+- **Chronocrators**: Firdaria periods, Profections (Annual/Monthly), and Zodiacal Releasing (Level 3).
+- **Time Lord Auditing**: Integrated historical timeline generation.
 
 ### 3. Mundane Hierarchy (Universal Causation)
 - **Eclipse Sophistication**: Quadrant-based timing of intensification and chorography (geographic impact).
 - **Great Conjunctions**: Historical tracking of Jupiter-Saturn cycles.
-- **Comet Logic**: Classification by color and tail direction for mundane disruption.
 - **Ingress Overrides**: Aries Ingress (Rank 4) logic overriding natal promises.
 
 ### 4. Iatromathematics (Medical)
@@ -35,37 +42,28 @@ Live site: https://bender1011001.github.io/astrology/
 - `fastapi` & `uvicorn`
 
 ### Installation
-1. Clone the repository.
+1. Clone the repository and initialize a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+   ```
 2. Install dependencies:
    ```bash
-   pip install fastapi uvicorn pyswisseph pydantic
+   pip install -r requirements.txt
    ```
-3. Run the application:
-   ```bash
-   python src/api.py
-   ```
-4. Open your browser at `http://127.0.0.1:8000`.
 
-### API Documentation
-The API is self-documenting via FastAPI. Once the server is running, you can access:
+### Running the Professional CLI
+Generate technical JSON data and a narrative Markdown report:
+```bash
+python src/scripts/generate_practitioner_report.py --name "Alexander Hamilton" --date "1755-01-11" --time "12:00" --city "Charlestown" --house_system "P"
+```
+
+### Running the Web API
+The API is self-documenting via FastAPI:
+```bash
+python src/api.py
+```
 - **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-- **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
-
-### Deployment & Domain Access
-
-To serve the application on `traditional-astrology.com` using Cloudflare Tunnel:
-
-1. **Start the Backend Server**:
-   ```bash
-   python src/api.py
-   ```
-
-2. **Start the Tunnel** (in a new terminal):
-   ```bash
-   cloudflared tunnel --config cloudflared_config.yml run
-   ```
-
-   *Note: Requires `cloudflared` installed and authenticated.*
 
 ## Architecture
 - `src/engine/`: Core algorithmic logic.

@@ -74,13 +74,34 @@ def main():
     json_path = output_path / json_filename
     md_path = output_path / md_filename
 
+    # Professional Polish: Header & Metadata
+    generation_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    disclaimer = f"""---
+# ⚖️ PROFESSIONAL DISCLOSURE
+**Report Type**: Practitioner Nativity Audit (Sovereign Engine v1.0)
+**Generated**: {generation_ts}
+**Status**: Forensic Grade / For Professional Use Only
+
+This report utilizes historical astrological protocols (Ibn Ezra, Valens, Dorotheus) and is intended for educational and professional research. It is NOT medical, legal, or financial advice.
+---
+"""
+    
+    # Enrich Technical Data with engine metadata
+    if technical_data:
+        technical_data["engine_metadata"] = {
+            "version": "1.0.0-sovereign",
+            "generation_time": generation_ts,
+            "algorithms": ["Ibn Ezra Almuten", "Panaretos Lots", "Amplification/Greed Nodes"]
+        }
+
     # Save JSON (The FULL COMPLETE TOTAL CHART)
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(technical_data, f, indent=4, cls=AstrologicalEncoder)
     
     # Save Markdown (The detailed translation)
     with open(md_path, "w", encoding="utf-8") as f:
-        f.write(human_translation.get("report_markdown", "# Failed to generate report"))
+        markdown_body = human_translation.get("report_markdown", "# Failed to generate report")
+        f.write(disclaimer + "\n" + markdown_body)
 
     print(f"[+] SUCCESS: Reports generated for {args.name}")
     print(f"    1. Technical Chart: {json_path}")
