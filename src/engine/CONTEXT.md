@@ -12,7 +12,8 @@
 - **Prediction**: Added Active Transits (Outer Planet impacts), fully historical Zodiacal Releasing, and Time Lord auditing for past/future dates.
 - **Advanced Aspects**: Antiscia and Contra-antiscia integrated.
 
-- **Advanced Mechanics**: Hermetic Lots (Fortune/Spirit + 5 Planets), Almuten Figuris (Ibn Ezra scoring), Monomoiria (Zoidion & Trigonal), Doryphory (Spear-Bearer), Kakosis (Maltreatment conditions), and Dodecatemoria (Valens/Paul methods).
+- **Advanced Mechanics**: Hermetic Lots (Fortune/Spirit + 5 Planets) with **Kakosis Status** (Maltreatment checks for Lot & Ruler), Almuten Figuris (Ibn Ezra scoring), Monomoiria (Zoidion & Trigonal), Doryphory (Spear-Bearer), and Dodecatemoria (Valens/Paul methods).
+- **Hardened Synthesis**: Research-aligned Node model (Amplification/Greed), narrative-driven geometric aspect interpretations, and icon-driven planetary protocols.
 - **Improved Horary**: Added Frustration, strict Moiety orbs, and enhanced Perfection/Denial logic.
 - **Rectification**: Added Pauline Trigonal Monomoiria rectification protocol.
 
@@ -31,6 +32,7 @@
 - `mundane.py`: Solar/Lunar eclipse calculators and World Hierarchy.
 - `medical.py`: Traditional Iatromathematics protocol.
 - `electional.py`: Kairos engine for perfect timing (Electional Astrology).
+- `src/scripts/generate_practitioner_report.py`: **Main Entry**. High-precision script for dual JSON/Markdown professional reports.
 
 ## Trap Diary
 | Issue | Cause | Fix |

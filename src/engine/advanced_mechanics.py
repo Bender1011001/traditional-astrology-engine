@@ -50,6 +50,8 @@ class HermeticLotEngine:
         Calculates the 7 Hermetic Lots as per Paulus Alexandrinus.
         Uses the centralized lots.py engine for calculation, then enriches with metadata.
         """
+        from .kakosis import KakosisEngine # Import here to avoid circular dependency
+        
         # 1. Calculate Raw Lots
         sect_enum = Sect.DAY if chart.sun_altitude >= 0 else Sect.NIGHT
         raw_lots = calculate_all_lots(chart, sect_enum)
@@ -91,12 +93,53 @@ class HermeticLotEngine:
                 sign = get_sign_from_lon(lon)
                 domicile = DOMICILES.get(sign)
                 house_num = get_house(lon)
+                ruler_name = domicile if domicile else "Unknown"
+                
+                # --- STATUS LOGIC (Kakosis) ---
+                status_messages = []
+                maltreatment_details = []
+                
+                # A. Check Lot Maltreatment (Virtual Planet)
+                # We create a dummy Planet object for the Lot
+                # Name it something distinct so Kakosis doesn't think it's a Malefic itself
+                lot_planet = Planet(
+                    name=PlanetName.NORTH_NODE, # Placeholder enum, name doesn't matter for target
+                    longitude=lon,
+                    speed=0.0
+                )
+                # Monkey-patch name for report clarity if needed, or just rely on 'Lot' context
+                # But Kakosis checks if 'planet.name' is a malefic. 
+                # North Node isn't in MALEFICS list, so it's safe as a target.
+
+                lot_conditions = KakosisEngine.check_maltreatments(lot_planet, chart)
+                
+                if lot_conditions:
+                    status_messages.append("Lot Maltreated")
+                    for c in lot_conditions:
+                        maltreatment_details.append(f"[Lot] {c.description}")
+
+                # B. Check Ruler Maltreatment
+                ruler_obj = next((p for p in chart.planets if p.name == ruler_name), None)
+                if ruler_obj:
+                    ruler_conditions = KakosisEngine.check_maltreatments(ruler_obj, chart)
+                    if ruler_conditions:
+                        status_messages.append("Ruler Maltreated")
+                        for c in ruler_conditions:
+                            maltreatment_details.append(f"[Ruler {ruler_name.value}] {c.description}")
+                
+                # Final Status String
+                if not status_messages:
+                    final_status = "Clear"
+                else:
+                    final_status = " / ".join(status_messages)
                 
                 final_lots[key] = {
                     "longitude": lon,
                     "sign": sign.value,
                     "house": house_num,
-                    "ruler": domicile.value if domicile else "Unknown"
+                    "ruler": ruler_name.value if hasattr(ruler_name, 'value') else str(ruler_name),
+                    "status": final_status,
+                    "maltreatment_details": maltreatment_details
                 }
             
         return final_lots

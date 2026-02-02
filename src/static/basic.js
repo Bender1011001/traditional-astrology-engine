@@ -24,6 +24,7 @@ function getSessionId() {
 }
 
 const SESSION_ID = getSessionId();
+let isAnnual = false;
 
 function apiUrl(path) {
     return `${API_BASE}${path}`;
@@ -299,12 +300,27 @@ if (emailForm) {
 }
 
 window.startCheckout = async function (tier) {
+    if (tier === 'subscription') tier = 'starter';
+
     if (!lastChartRequest) {
         alert("Please generate a chart first.");
         return;
     }
 
-    const btn = document.querySelector(`button[onclick="window.startCheckout('${tier}')"]`);
+    // Auth Check
+    const token = localStorage.getItem('cael_auth_token');
+    if (!token) {
+        // Redirect to login if not authenticated, as backend requires user
+        // Store intent in localStorage to resume after login
+        localStorage.setItem('cael_checkout_intent', JSON.stringify({ tier, isAnnual }));
+        window.location.href = "login.html?reason=checkout";
+        return;
+    }
+
+    // Try to find the button that triggered this, covering both naming conventions
+    const btn = document.querySelector(`button[onclick="window.startCheckout('${tier}')"]`) ||
+        document.querySelector(`button[onclick="initiateCheckout('${tier}')"]`);
+
     const originalText = btn ? btn.innerText : "";
     if (btn) {
         btn.innerText = "PROCESSING...";
@@ -314,25 +330,34 @@ window.startCheckout = async function (tier) {
     try {
         const payload = {
             tier: tier,
+            annual: isAnnual,
             chart_request: lastChartRequest,
             success_url: window.location.origin + "/success.html",
             cancel_url: window.location.href
         };
 
-        const response = await fetch(apiUrl("/api/create-checkout"), {
+        // Use correct API v1 endpoint
+        const response = await fetch(apiUrl("/api/v1/billing/create-checkout-session"), {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
             body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
             const err = await response.json();
+            if (response.status === 401) {
+                window.location.href = "login.html?reason=session_expired";
+                return;
+            }
             throw new Error(err.detail || "Checkout failed");
         }
 
         const data = await response.json();
-        if (data.checkout_url) {
-            window.location.href = data.checkout_url;
+        if (data.url) {
+            window.location.href = data.url;
         } else {
             throw new Error("No checkout URL returned");
         }
@@ -344,6 +369,9 @@ window.startCheckout = async function (tier) {
         }
     }
 };
+
+// Map HTML onclick calls to this function
+window.initiateCheckout = window.startCheckout;
 
 
 function setBasicTimeUnknownState(isUnknown) {
@@ -909,7 +937,7 @@ const subDesc = document.getElementById('subDesc');
 const labelMonthly = document.getElementById('labelMonthly');
 const labelAnnual = document.getElementById('labelAnnual');
 const annualDetails = document.getElementById('annualDetails');
-let isAnnual = false;
+// let isAnnual = false; // Moved to top
 
 if (billingSwitch) {
     billingSwitch.addEventListener('change', (e) => {
@@ -942,14 +970,8 @@ if (billingSwitch) {
 }
 
 // Override startCheckout to handle annual
-const originalStartCheckout = window.startCheckout;
-window.startCheckout = async function (tier) {
-    let finalTier = tier;
-    if (tier === 'subscription' && isAnnual) {
-        finalTier = 'subscription_annual';
-    }
-    await originalStartCheckout(finalTier);
-};
+// Override removed - logic integrated into main function
+
 
 
 // Sample Expanders

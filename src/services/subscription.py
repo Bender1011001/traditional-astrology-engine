@@ -75,25 +75,39 @@ class SubscriptionService:
             }
             metadata["chart_data"] = json.dumps(minimal_data)
 
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[{
+        mode = 'payment' if plan.tier == 'onetime' else 'subscription'
+        
+        session_kwargs = {
+            'payment_method_types': ['card'],
+            'line_items': [{
                 'price': price_id,
                 'quantity': 1,
             }],
-            mode='subscription',
-            success_url=success_url + "?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url=cancel_url,
-            customer_email=user.email,
-            client_reference_id=user.id,
-            metadata=metadata,
-            subscription_data={
+            'mode': mode,
+            'success_url': success_url + "?session_id={CHECKOUT_SESSION_ID}",
+            'cancel_url': cancel_url,
+            'customer_email': user.email,
+            'client_reference_id': user.id,
+            'metadata': metadata,
+        }
+
+        if mode == 'subscription':
+            session_kwargs['subscription_data'] = {
                 "metadata": {
                     "user_id": user.id,
                     "plan_tier": plan.tier
                 }
             }
-        )
+        else:
+            # For one-time payments, we might want invoice creation enabled to track it easily
+            session_kwargs['invoice_creation'] = {
+                'enabled': True,
+                'invoice_data': {
+                    'metadata': metadata
+                }
+            }
+
+        checkout_session = stripe.checkout.Session.create(**session_kwargs)
         return checkout_session
 
     def upgrade_plan(self, user: User, plan_tier: str, annual: bool = False):

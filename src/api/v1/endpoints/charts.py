@@ -12,6 +12,10 @@ from src.services.engine_bridge import (
     calculate_forecast_async,
     generate_full_nativity_async
 )
+import logging
+
+logger = logging.getLogger(__name__)
+
 from src.engine.cache_manager import get_from_cache, set_to_cache
 from src.engine.chat_oracle import explain_reading_in_plain_terms
 from src.engine.prediction import AdvancedPredictionEngine
@@ -104,7 +108,7 @@ async def generate_chart_b2b(
 @router.post("/calculate-full")
 async def calculate_full_nativity(req: ChartRequest, http_request: Request):
     """
-    Single Endpoint for Total Omniscience.
+    Single Endpoint for Comprehensive Forensic Audit.
     """
     _log_event("chart_full_request", {"form": req.dict()}, http_request)
     try:
@@ -195,6 +199,7 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     
     # Mock some legacy fields that script.js might expect
     final_result["forensic_report"] = engine_result["technical_data"]["analysis"]
+        
     final_result["meta"]["tier"] = tier
     final_result["meta"]["chart_hash"] = chart_hash
 

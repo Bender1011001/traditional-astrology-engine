@@ -24,6 +24,9 @@ class JSONFormatter(logging.Formatter):
             "line": record.lineno
         }
         
+        if record.exc_info:
+            log_obj["exception"] = self.formatException(record.exc_info)
+
         # Add extra fields if available
         if hasattr(record, "extra_data") and isinstance(record.extra_data, dict):
             log_obj.update(record.extra_data)

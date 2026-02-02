@@ -204,7 +204,7 @@ def analyze_planet_forensic(planet: Planet, chart: Chart, jd: float = 0.0, specu
         "classical": {}
     }
 
-    # --- GOD MODE: Classical Geometry & Rulers ---
+    # --- ADVANCED FORENSIC: Classical Geometry & Rulers ---
     
     # 1. Monomoiria (High-Precision Rulers)
     # Need Sun/Moon signs for Trigonal calculation
@@ -706,7 +706,7 @@ def perform_forensic_audit(chart: Chart, jd: float = 0.0, age: Optional[int] = N
                 m_verif = f"Ruler {m_ruler_name.value} is debilitated (Score: {m_score})."
         forensic_lots_report["Mother"] = {"data": enrich_lot(mother_lot_lon), "status": m_status, "verification": m_verif}
 
-    # Hermetic Lots (God Mode / Paulus Alexandrinus)
+    # Hermetic Lots (Advanced / Paulus Alexandrinus)
     hermetic_lots = HermeticLotEngine.calculate_all_lots(chart)
     for p in chart.planets:
         if is_benefic_of_sect(p.name, sect):

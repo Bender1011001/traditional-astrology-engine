@@ -50,10 +50,10 @@ logger = logging.getLogger(__name__)
 # Initialize Library
 LIB = DelineationLibrary()
 
-class SovereignEngine:
+class ForensicEngine:
     """
-    The Sovereign Engine (Hub): The sole orchestrator for all astrological logic.
-    Refactors fragmented logic into a single unified pipeline.
+    The Forensic Engine (Hub): The sole orchestrator for deep astrological auditing.
+    Replaces the legacy 'Sovereign Engine' terminology.
     Output: Bifurcated JSON (technical_data, human_translation).
     """
 
@@ -70,7 +70,7 @@ class SovereignEngine:
         analysis_date: Optional[datetime] = None
     ) -> Dict[str, Any]:
         """
-        Single Entry Point for Total Omniscience.
+        Single Entry Point for Comprehensive Forensic Audit.
         """
         try:
             # 1. Astronomy: Call chart_calculator
@@ -88,7 +88,7 @@ class SovereignEngine:
                 return {"error": raw_chart_data["error"]}
 
             # Reconstruct Chart Model
-            chart = SovereignEngine._rebuild_chart_model(raw_chart_data)
+            chart = ForensicEngine._rebuild_chart_model(raw_chart_data)
             jd = raw_chart_data["meta"]["julian_day"]
             
             # Resolve Dates
@@ -107,19 +107,19 @@ class SovereignEngine:
             analysis = {}
 
             # A. Dignity & Almuten
-            analysis["dignity"] = SovereignEngine._calculate_dignity_suite(chart)
+            analysis["dignity"] = ForensicEngine._calculate_dignity_suite(chart)
 
             # B. Fate & Prediction
-            analysis["fate"] = SovereignEngine._calculate_fate_suite(chart, birth_dt, ans_date)
+            analysis["fate"] = ForensicEngine._calculate_fate_suite(chart, birth_dt, ans_date)
 
             # C. Medical
-            analysis["medical"] = SovereignEngine._calculate_medical_suite(chart)
+            analysis["medical"] = ForensicEngine._calculate_medical_suite(chart)
             
             # D. Teams & Reception
-            analysis["teams"] = SovereignEngine._calculate_teams_and_reception(chart)
+            analysis["teams"] = ForensicEngine._calculate_teams_and_reception(chart)
 
             # E. Forensic Planet Analysis
-            planets_forensic = SovereignEngine._analyze_all_planets(chart, jd)
+            planets_forensic = ForensicEngine._analyze_all_planets(chart, jd)
 
             # F. Aspects
             analysis["aspects"] = AspectEngine.calculate_aspects(chart)
@@ -147,7 +147,7 @@ class SovereignEngine:
             }
 
             # 4. Translation: Pass to ReportSynthesizer
-            legacy_report = SovereignEngine._map_to_legacy_report(technical_data, chart)
+            legacy_report = ForensicEngine._map_to_legacy_report(technical_data, chart)
             human_translation = {
                 "report_markdown": ReportSynthesizer.synthesize(legacy_report),
                 "executive_summary": ReportSynthesizer._generate_executive_summary(legacy_report)
@@ -161,8 +161,8 @@ class SovereignEngine:
         except Exception as e:
             import traceback
             error_trace = traceback.format_exc()
-            logger.error(f"Sovereign Engine Failure: {e}\n{error_trace}")
-            return {"error": f"Sovereign Engine Failure: {str(e)}"}
+            logger.error(f"Forensic Engine Failure: {e}\n{error_trace}")
+            return {"error": f"Forensic Engine Failure: {str(e)}"}
 
     @staticmethod
     def _rebuild_chart_model(raw_data: Dict) -> Chart:
@@ -316,7 +316,7 @@ class SovereignEngine:
             if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
                 continue
             
-            p_data = SovereignEngine._analyze_single_planet(p, chart, jd, speculum)
+            p_data = ForensicEngine._analyze_single_planet(p, chart, jd, speculum)
             results.append(p_data)
         return results
 
@@ -411,7 +411,7 @@ class SovereignEngine:
                 "almuten": analysis["dignity"]["almuten"]["winner"],
                 "job_description": f"Sovereign {analysis['dignity']['almuten']['winner']}"
             },
-            "vitality": {"vitality_rating": "Stable (Calculated by SovereignEngine)"},
+            "vitality": {"vitality_rating": "Stable (Calculated by ForensicEngine)"},
             "medical_analysis": {
                 "governed_body_part": analysis["medical"]["constitution"],
                 "constitutional_sign": list(Sign)[int(chart.ascendant / 30) % 12].value,

@@ -6,6 +6,7 @@ class ChartRequest(BaseModel):
     time: str
     city: str
     state: Optional[str] = None
+    name: Optional[str] = None  # Added for Sovereign Engine
     age: Optional[int] = None
     analysis_date: Optional[str] = None
     house_system: Optional[str] = None

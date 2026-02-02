@@ -31,6 +31,16 @@ def seed_plans():
                 features={"audit": False, "forecasting": False, "advanced": False, "ai_readings": True}
             ),
             SubscriptionPlan(
+                tier="onetime",
+                chart_quota=0, # Not used for onetime as subscription
+                api_quota=0,
+                price_monthly=9.99,
+                price_annual=0.00,
+                stripe_price_id_monthly="price_PLACEHOLDER_ONETIME",
+                stripe_price_id_annual=None,
+                features={"audit": True, "forecasting": True, "details": True, "timeline": True}
+            ),
+            SubscriptionPlan(
                 tier="starter",
                 chart_quota=50,
                 api_quota=0,

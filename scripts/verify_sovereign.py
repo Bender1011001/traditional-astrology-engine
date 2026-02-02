@@ -54,10 +54,10 @@ def test_calculate_legacy():
         if response.status_code == 200:
             data = response.json()
             print("Keys in response:", list(data.keys()))
-            if "planets" in data and "report_markdown" in data:
-                print("SUCCESS: Legacy endpoint still returns required fields.")
+            if "astronomy" in data and "planets" in data["astronomy"] and "report_markdown" in data:
+                print("SUCCESS: Endpoint returns required fields (new schema).")
             else:
-                print("FAILURE: Legacy endpoint missing fields.")
+                print(f"FAILURE: Endpoint missing fields. Keys found: {list(data.keys())}")
         else:
             print(f"Error: {response.text}")
     except Exception as e:

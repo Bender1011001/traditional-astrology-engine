@@ -16,31 +16,31 @@ from src.services.engine_bridge import calculate_chart_async
 
 router = APIRouter()
 
+from src.services.engine_bridge import generate_full_nativity_async
+
 @router.post("/audit")
-async def run_audit(data: ChartRequest): # Reusing ChartRequest for simplicity
-    # 1. Calculate Chart
-    result = await calculate_chart_async(
-        data.date,
-        data.time,
-        data.city,
-        data.state,
-        data.house_system,
-        bool(data.compare_house_systems),
-        data.zodiac_system,
-        data.ayanamsa
+async def run_audit(data: ChartRequest): 
+    # Directly call the Hub Engine
+    result = await generate_full_nativity_async(
+        date_str=data.date,
+        time_str=data.time,
+        city=data.city,
+        state=data.state,
+        name=data.name or "Native",
+        house_system=data.house_system,
+        zodiac_system=data.zodiac_system,
+        ayanamsa=data.ayanamsa
     )
     
     if "error" in result:
         return {"error": result["error"]}
 
-    # 2. Convert to Model
-    chart_model = result_to_model(result)
+    # Return just the detailed forensic analysis part for this endpoint
+    # (or the whole thing if requested, but 'audit' implies the deep dive)
+    if "technical_data" in result and "planets_forensic" in result["technical_data"]:
+        return {
+            "forensic_report": result["technical_data"]["planets_forensic"],
+            "analysis": result["technical_data"]["analysis"]
+        }
     
-    # 3. Helpers for audit (age, etc) - simplfied for B2B API (maybe they provide age?)
-    age = data.age or 0
-    # Provide defaults to avoid crashing if logic needs them
-    
-    # 4. Audit
-    audit_report = await perform_forensic_audit_async(chart_model, result["meta"]["julian_day"], age=age)
-    
-    return audit_report
+    return result
