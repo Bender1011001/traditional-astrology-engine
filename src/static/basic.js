@@ -160,6 +160,60 @@ function logEvent(eventType, payload = {}, options = {}) {
     }).catch(() => { });
 }
 
+// === VIRAL SHARE ENGINE ===
+window.shareReading = async function () {
+    const btn = document.getElementById('shareBtn');
+    if (btn) btn.textContent = "GENERATING...";
+
+    // 1. Create the Social Card DOM if not exists
+    let card = document.getElementById('socialCard');
+    if (!card) {
+        card = document.createElement('div');
+        card.id = 'socialCard';
+        // Detailed styling for a high-converting social image
+        card.style.cssText = `
+            position: fixed; left: -9999px; top: 0; width: 1080px; height: 1080px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: #d4af37; font-family: 'Times New Roman', serif;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 60px; box-sizing: border-box; text-align: center; border: 20px solid #d4af37;
+        `;
+        document.body.appendChild(card);
+    }
+
+    // 2. Populate Data (Almuten or Temperament)
+    // We scrape the current view since we don't have the clean object easily accessible globally without refactor
+    // Actually we have lastChartRequest and maybe result in DOM?
+    // Let's scrape the basicReadingBody
+    const guardian = document.querySelector('.sample-content p strong') ?
+        document.querySelector('.sample-content p strong').innerText : "MY GUARDIAN";
+
+    card.innerHTML = `
+        <div style="font-size: 40px; text-transform: uppercase; letter-spacing: 0.2em; color: #888; margin-bottom: 40px;">CODEX CAELESTIS</div>
+        <div style="font-size: 140px; color: #fff; margin-bottom: 20px;">${guardian}</div>
+        <div style="width: 200px; height: 2px; background: #d4af37; margin: 40px 0;"></div>
+        <div style="font-size: 50px; color: #d4af37;">FORENSIC ASTROLOGY AUDIT</div>
+        <div style="font-size: 30px; color: #666; margin-top: auto;">traditional-astrology.com</div>
+    `;
+
+    // 3. Render
+    try {
+        const canvas = await html2canvas(card, { scale: 1, backgroundColor: null });
+
+        // 4. Download / Open
+        const link = document.createElement('a');
+        link.download = 'my-codex-audit.png';
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+
+        if (btn) btn.textContent = "SHARE RESULT";
+        logEvent("share_card_generated", { type: "basic" });
+    } catch (e) {
+        console.error("Share gen failed", e);
+        if (btn) btn.textContent = "ERROR";
+    }
+};
+
 function endSession(reason) {
     if (_sessionEnded) return;
     _sessionEnded = true;
@@ -393,6 +447,67 @@ if (basicTimeUnknown) {
 
 function resetBasicFeedback(context) {
     basicFeedbackContext = context || null;
+    // Check for Lot of Fortune Landing Page
+    const fortuneContainer = document.getElementById("lotResult");
+    if (fortuneContainer && result.technical_data) {
+        try {
+            const fortune = result.technical_data.analysis.fate.hermetic_lots.Fortune;
+            // Fortune data: { longitude, sign, house, ruler, status, maltreatment_details }
+
+            fortuneContainer.classList.remove("hidden");
+            fortuneContainer.innerHTML = `
+                <div class="basic-card highlight-border" style="margin-top: 2rem;">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <span class="category-tag">YOUR LOT OF FORTUNE</span>
+                        <h3 style="font-size: 2rem; margin: 0.5rem 0;">${fortune.sign} / House ${fortune.house}</h3>
+                    </div>
+                    
+                    <div class="horary-physics">
+                        <div class="physics-row">
+                            <span class="planet-name">Ruler</span>
+                            <span class="interaction-desc">${fortune.ruler}</span>
+                        </div>
+                         <div class="physics-row">
+                            <span class="planet-name">Condition</span>
+                            <span class="interaction-desc" style="color: ${fortune.status === 'Clear' ? 'var(--accent-gold)' : 'var(--danger)'}">
+                                ${fortune.status}
+                            </span>
+                        </div>
+                    </div>
+
+                    ${fortune.maltreatment_details && fortune.maltreatment_details.length > 0 ?
+                    `<div class="callout-box warning">
+                            <strong>Interference Detected:</strong>
+                            <ul class="clean-list">${fortune.maltreatment_details.map(d => `<li>${d}</li>`).join('')}</ul>
+                         </div>` :
+                    `<div class="callout-box">
+                            <p>No maltreatment detected. The path of fortune is unimpeded.</p>
+                         </div>`
+                }
+                    
+                    <div class="seo-upsell">
+                        <p>Knowing the Lot is step 1. Knowing its Ruler's condition is step 2.</p>
+                        <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FINANCIAL AUDIT</button>
+                    </div>
+
+                     <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn-secondary small share-btn" onclick="window.shareReading()">
+                            📸 SHARE RESULT
+                        </button>
+                    </div>
+                    
+                </div>
+            `;
+            fortuneContainer.scrollIntoView({ behavior: "smooth" });
+
+            // Hide default if present
+            if (basicReading) basicReading.classList.add("hidden");
+            return; // Stop standard rendering
+        } catch (e) {
+            console.error("Fortune extract error", e);
+        }
+    }
+
     if (!basicFeedback) return;
     basicFeedback.classList.toggle("hidden", !basicFeedbackContext);
     if (basicFeedbackStatus) basicFeedbackStatus.textContent = "";
@@ -588,6 +703,15 @@ function renderForensicReport(report) {
         </div>`;
     }
 
+    // 5. Share Button
+    html += `
+    <div style="text-align: center; margin-top: 2rem;">
+        <button id="shareBtn" class="help-btn" onclick="window.shareReading()" style="border: 1px solid var(--gold); padding: 10px 20px;">
+            📸 SHARE RESULT
+        </button>
+    </div>
+    `;
+
     html += `</div>`; // Close container
     return html;
 }
@@ -679,6 +803,125 @@ if (basicForm) {
             }
 
             const result = await response.json();
+
+            // Check for Lot of Fortune Landing Page (Special Render Loop)
+            const fortuneContainer = document.getElementById("lotResult");
+            if (fortuneContainer && result.technical_data) {
+                try {
+                    const fortune = result.technical_data.analysis.fate.hermetic_lots.Fortune;
+                    fortuneContainer.classList.remove("hidden");
+                    fortuneContainer.innerHTML = `
+                        <div class="basic-card highlight-border" style="margin-top: 2rem;">
+                            <div style="text-align: center; margin-bottom: 1.5rem;">
+                                <span class="category-tag">YOUR LOT OF FORTUNE</span>
+                                <h3 style="font-size: 2rem; margin: 0.5rem 0;">${fortune.sign} / House ${fortune.house}</h3>
+                            </div>
+                            
+                            <div class="horary-physics">
+                                <div class="physics-row">
+                                    <span class="planet-name">Ruler</span>
+                                    <span class="interaction-desc">${fortune.ruler}</span>
+                                </div>
+                                <div class="physics-row">
+                                    <span class="planet-name">Condition</span>
+                                    <span class="interaction-desc" style="color: ${fortune.status === 'Clear' ? 'var(--accent-gold)' : 'var(--danger)'}">
+                                        ${fortune.status}
+                                    </span>
+                                </div>
+                            </div>
+        
+                            ${fortune.maltreatment_details && fortune.maltreatment_details.length > 0 ?
+                            `<div class="callout-box warning">
+                                    <strong>Interference Detected:</strong>
+                                    <ul class="clean-list">${fortune.maltreatment_details.map(d => `<li>${d}</li>`).join('')}</ul>
+                                </div>` :
+                            `<div class="callout-box">
+                                    <p>No maltreatment detected. The path of fortune is unimpeded.</p>
+                                </div>`
+                        }
+                            
+                            <div class="seo-upsell">
+                                <p>Knowing the Lot is step 1. Knowing its Ruler's condition is step 2.</p>
+                                <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FINANCIAL AUDIT</button>
+                            </div>
+        
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <button class="btn-secondary small share-btn" onclick="window.shareReading()">
+                                    📸 SHARE RESULT
+                                </button>
+                            </div>
+                            
+                        </div>
+                    `;
+                    fortuneContainer.scrollIntoView({ behavior: "smooth" });
+
+                    // Stop standard rendering
+                    setBasicLoading(false);
+                    return;
+                } catch (e) {
+                    console.error("Fortune extract error", e);
+                }
+            }
+
+            // Check for Hyleg Landing Page (Special Render Loop)
+            const hylegContainer = document.getElementById("hylegResult");
+            if (hylegContainer && result.technical_data) {
+                try {
+                    const med = result.technical_data.analysis.medical;
+                    // med: { hyleg, alcocoden, vitality_rating, breakdown }
+
+                    hylegContainer.classList.remove("hidden");
+                    hylegContainer.innerHTML = `
+                        <div class="basic-card highlight-border" style="margin-top: 2rem;">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <span class="category-tag">VITALITY AUDIT</span>
+                            </div>
+                            
+                            <div class="horary-physics">
+                                <div class="physics-row">
+                                    <span class="planet-name">The Hyleg</span>
+                                    <span class="interaction-desc">${med.hyleg || "Not Found"}</span>
+                                </div>
+                                <div class="physics-row">
+                                    <span class="planet-name">The Alcocoden</span>
+                                    <span class="interaction-desc">${med.alcocoden || "Not Found"}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="vitality-badge" style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(0,0,0,0.2); border-radius: 4px;">
+                                <div style="font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Constitution Rating</div>
+                                <div style="font-size: 2rem; font-weight: 700; color: ${med.vitality_rating.includes('Superior') ? 'var(--success)' : 'var(--text-main)'};">
+                                    ${med.vitality_rating}
+                                </div>
+                            </div>
+
+                            <div class="disclaimer-text" style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-bottom: 1.5rem;">
+                                * Based on ${med.base_years_type} Years calculation.
+                            </div>
+        
+                            <div class="seo-upsell">
+                                <p>See the full forensic breakdown of your health and constitution.</p>
+                                <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FORENSIC REPORT</button>
+                            </div>
+
+                             <div style="text-align: center; margin-top: 1rem;">
+                                <button class="btn-secondary small share-btn" onclick="window.shareReading()">
+                                    📸 SHARE RESULT
+                                </button>
+                            </div>
+                            
+                        </div>
+                    `;
+                    hylegContainer.scrollIntoView({ behavior: "smooth" });
+
+                    // Stop standard rendering
+                    setBasicLoading(false);
+                    return;
+                } catch (e) {
+                    console.error("Hyleg extract error", e);
+                }
+            }
+
             logEvent("basic_chart_result", { result });
 
             const reading = result.plain_reading || "";
@@ -1057,8 +1300,99 @@ if (billingSwitch) {
     });
 }
 
-// Override startCheckout to handle annual
-// Override removed - logic integrated into main function
+
+
+// --- Viral Share Logic ---
+window.shareReading = async function () {
+    // 1. Identify Target Clone
+    // We want to screenshot the "Result Card" (basicReadingBody or specific result container)
+    let target = document.querySelector('.basic-card.highlight-border') || document.getElementById('basicReadingBody');
+    if (!target) return alert("Nothing to share yet!");
+
+    const btn = document.querySelector('.share-btn');
+    if (btn) btn.textContent = "GENERATING...";
+
+    try {
+        // 2. Generate Canvas
+        // Check if html2canvas is loaded? 
+        if (typeof html2canvas === 'undefined') {
+            // Lazy load script if needed, or assume included in head. 
+            // For now, let's assume it's in head or we alert.
+            await loadScript('https://html2canvas.hertzen.com/dist/html2canvas.min.js');
+        }
+
+        const canvas = await html2canvas(target, {
+            scale: 2,
+            backgroundColor: "#1a1a1a", // consistent dark theme
+            logging: false,
+            useCORS: true,
+            onclone: (doc) => {
+                // Add Watermark to the clone
+                const node = doc.querySelector('.basic-card') || doc.body.firstChild;
+                if (node) {
+                    const watermark = doc.createElement('div');
+                    watermark.innerHTML = "GENERATED BY <strong>CODEX CAELESTIS</strong>";
+                    watermark.style.position = "absolute";
+                    watermark.style.bottom = "10px";
+                    watermark.style.right = "10px";
+                    watermark.style.fontSize = "10px";
+                    watermark.style.color = "rgba(192, 122, 43, 0.5)";
+                    watermark.style.fontFamily = "Space Mono, monospace";
+                    target.appendChild(watermark);
+                    // Note: target here refers to the original DOM or clone?
+                    // html2canvas 'onclone' passes the CLONED doc. 
+                    // We should append to the element inside 'doc'.
+                    // Finding the element in clone:
+                    // Simplification: Just append to the container in clone
+                    const cloneContainer = doc.querySelector('.basic-card.highlight-border') || doc.getElementById('basicReadingBody');
+                    if (cloneContainer) {
+                        cloneContainer.style.position = "relative"; // ensure relative
+                        cloneContainer.appendChild(watermark);
+                    }
+                }
+            }
+        });
+
+        // 3. Convert to Blob/Image
+        const imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+
+        // 4. Web Share API or Download
+        const file = new File([imageBlob], "my-forensic-audit.png", { type: "image/png" });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+                title: 'My Forensic Astrology Audit',
+                text: 'I just realized my Almuten Figuris is keeping me alive. Check yours.',
+                files: [file]
+            });
+        } else {
+            // Fallback: Download
+            const link = document.createElement('a');
+            link.download = 'codex-audit.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            alert("Image saved! Share it manually.");
+        }
+
+        logEvent("viral_share_success", {});
+
+    } catch (e) {
+        console.error("Share failed", e);
+        alert("Could not generate image. Screenshot it manually!");
+    } finally {
+        if (btn) btn.textContent = "📸 SHARE RESULT";
+    }
+};
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+    });
+}
 
 
 
@@ -1230,6 +1564,65 @@ document.addEventListener('click', (e) => {
             if (el !== term) el.classList.remove('active');
         });
 
-        term.classList.toggle('active');
+    }
+});
+
+// --- Auto-Regenerate Logic (Post-Payment) ---
+document.addEventListener("DOMContentLoaded", async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("action") === "regenerate") {
+        console.log("Auto-regenerating report...");
+
+        const lastRequest = localStorage.getItem("cael_last_request");
+        // We use the generic auth token if specific hash token not found, 
+        // but ideally we find the specific one. 
+        // Since we don't know the hash yet, we try the general one or scan.
+        const authToken = localStorage.getItem("cael_auth_token");
+
+        if (lastRequest && authToken) {
+            const payload = JSON.parse(lastRequest);
+
+            // Re-populate form for visual consistency
+            if (document.getElementById("basicDate")) document.getElementById("basicDate").value = payload.date || "";
+            if (document.getElementById("basicTime")) document.getElementById("basicTime").value = payload.time || "";
+            if (document.getElementById("basicCity")) document.getElementById("basicCity").value = payload.city || "";
+            if (document.getElementById("basicState")) document.getElementById("basicState").value = payload.state || "";
+
+            // Trigger Fetch
+            setBasicLoading(true);
+            if (basicReading) basicReading.classList.add("hidden");
+            if (basicReadingBody) basicReadingBody.innerHTML = "";
+
+            try {
+                const response = await fetch(apiUrl("/api/calculate"), {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${authToken}`
+                    },
+                    body: lastRequest
+                });
+
+                if (!response.ok) throw new Error("regeneration failed");
+                const result = await response.json();
+
+                // Render Full Report
+                logEvent("paid_report_viewed", { tier: result.meta ? result.meta.tier : "unknown" });
+
+                basicReadingBody.innerHTML = renderForensicReport(result.technical_data.analysis);
+                if (basicReading) basicReading.classList.remove("hidden");
+
+                // Scroll to result
+                basicReading.scrollIntoView({ behavior: "smooth" });
+
+            } catch (e) {
+                console.error("Auto-gen error", e);
+                alert("Could not recover your session. Please click 'Calculate' again.");
+            } finally {
+                setBasicLoading(false);
+                // Clear param so refresh doesn't loop? 
+                // window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
     }
 });

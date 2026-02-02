@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5T7HPNKL7V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-5T7HPNKL7V');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lot of Fortune Calculator (Sect-Corrected) | Codex Caelestis</title>
+    <meta name="description"
+        content="Calculate your Lot of Fortune using the correct Hermetic formula. Most online calculators are wrong. Discover your financial destiny with forensic precision.">
+    <meta name="keywords"
+        content="Lot of Fortune, Part of Fortune, financial astrology, hermetic lots, astrology calculator, wealth astrology, sect astrology">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#f4efe6">
+    <link rel="canonical" href="https://traditional-astrology.com/lot-of-fortune.html">
+    <meta property="og:title" content="Lot of Fortune Calculator (Financial Destiny)">
+    <meta property="og:description"
+        content="Most calculations are wrong because they ignore Sect. Calculate your true Lot of Fortune here.">
+    <meta property="og:image" content="https://traditional-astrology.com/og-card.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://traditional-astrology.com/lot-of-fortune.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lot of Fortune Calculator">
+    <meta name="twitter:description"
+        content="Calculate your true financial potential with the sect-corrected Lot of Fortune.">
+    <meta name="twitter:image" content="https://traditional-astrology.com/og-card.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260129polish">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Lot of Fortune Calculator",
+      "url": "https://traditional-astrology.com/lot-of-fortune.html",
+      "description": "A forensic astrology calculator for the Hermetic Lot of Fortune, correcting for Day/Night sect differences.",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="stars-bg"></div>
+
+    <header class="glass-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="/" class="logo-link">CODEX CAELESTIS</a>
+            </div>
+            <div class="header-actions">
+                <a href="#calculator" class="btn-secondary small">CALCULATE NOW</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="landing-main">
+        <article class="seo-article">
+            <header class="article-header">
+                <span class="category-tag">Financial Astrology</span>
+                <h1>The Lot of Fortune</h1>
+                <p class="subtitle">Why 80% of Online Calculators Give You the Wrong Result</p>
+            </header>
+
+            <div class="content-block">
+                <p class="lead">
+                    In the Physics of Fate, money has a coordinate. The <strong>Lot of Fortune</strong> (<em>Pars
+                        Fortuna</em>) is the point in your chart where the Soul, the Body, and the Sun converge to
+                    indicate prosperity, material stability, and physical health.
+                </p>
+                <p>
+                    However, most modern tools use the same formula for everyone. This is a fundamental error. Ancient
+                    Hermetic doctrine dictates that the calculation must reverse based on <strong>Sect</strong> (Day vs.
+                    Night).
+                </p>
+
+                <div class="callout warning">
+                    <h3>The Sect Error</h3>
+                    <p>If you were born at night and use a standard calculator, you are likely calculating your <em>Lot
+                            of Spirit</em> instead of Fortune. This is why standard interpretations often fail.</p>
+                </div>
+            </div>
+
+            <section id="calculator" class="calculator-section">
+                <div class="calculator-card highlight-border">
+                    <div class="calc-header">
+                        <h2>Calculate Your True Fortune</h2>
+                        <p>Forensic-Grade Accuracy. Sect-Corrected.</p>
+                    </div>
+
+                    <form id="basicForm" class="basic-form" onsubmit="return false;">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="basicName">Name (For Report)</label>
+                                <input type="text" id="basicName" placeholder="e.g. John Doe">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="basicDate">Birth Date</label>
+                                <input type="date" id="basicDate" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="basicTime">Birth Time</label>
+                                <div class="time-input-wrapper">
+                                    <input type="time" id="basicTime" required>
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" id="basicTimeUnknown">
+                                        <label for="basicTimeUnknown" class="small-label">Unknown</label>
+                                    </div>
+                                </div>
+                                <span id="basicTimeWarning" class="field-warning hidden">
+                                    <i class="icon-warning"></i> Noon defaults used. Houses may be inaccurate.
+                                </span>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="basicCity">Birth City</label>
+                                <input type="text" id="basicCity" placeholder="e.g. London, UK" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="basicStartBtn" class="btn-primary full-width">
+                            REVEAL MY LOT OF FORTUNE
+                        </button>
+                    </form>
+
+                    <div id="basicLoading" class="loading-state hidden">
+                        <div class="spinner"></div>
+                        <p>Calculating Sect & Arc...</p>
+                    </div>
+
+                    <div id="lotResult" class="result-container hidden">
+                        <!-- JS injects specific result here -->
+                    </div>
+
+                    <div id="basicReading" class="hidden">
+                        <!-- Standard container hidden but needed for JS compatibility if we reuse logic -->
+                    </div>
+                </div>
+            </section>
+
+            <div class="content-block">
+                <h2>The Formulas</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>Day Chart</h4>
+                        <span class="condition">(Sun above Horizon)</span>
+                        <code class="math">ASC + Moon - Sun</code>
+                        <p>The arc from the Sun to the Moon is projected from the Ascendant.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>Night Chart</h4>
+                        <span class="condition">(Sun below Horizon)</span>
+                        <code class="math">ASC + Sun - Moon</code>
+                        <p>The arc from the Moon to the Sun is projected from the Ascendant.</p>
+                    </div>
+                </div>
+
+                <h3>What "Fortune" Really Means</h3>
+                <p>
+                    The Lot of Fortune is not just "luck." It represents the body's interaction with the physical world.
+                    It governs:
+                </p>
+                <ul>
+                    <li><strong>Acquisition</strong>: How you gain resources.</li>
+                    <li><strong>Health</strong>: The vitality of the physical vessel.</li>
+                    <li><strong>Chance</strong>: Events that happen <em>to</em> you, outside your control.</li>
+                </ul>
+            </div>
+
+            <div class="cta-block">
+                <h3>Want the Full Financial Audit?</h3>
+                <p>The Lot of Fortune is just one coordinate. The "Forensic Audit" analyzes the Ruler of the Lot, its
+                    House placement, and the condition of Jupiter to give a complete financial profile.</p>
+                <a href="/" class="btn-primary">GET THE FULL AUDIT</a>
+            </div>
+
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Codex Caelestis.</p>
+            <nav class="footer-nav">
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="methodology.html">Methodology</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="basic.js?v=fortune1"></script>
+</body>
+
+</html>

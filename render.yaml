@@ -2,7 +2,7 @@ services:
   - type: web
     name: astrology-engine
     env: docker
-    plan: free
+    plan: starter
     repo: https://github.com/Bender1011001/astrology # Updated to reflect user's likely repo structure if known, or generic. Actually best to omitting 'repo' defaults to current linked.
     envVars:
       - key: PORT
