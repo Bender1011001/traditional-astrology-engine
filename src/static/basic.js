@@ -307,48 +307,65 @@ if (closeEmailBtn && emailModal) {
 }
 
 if (emailForm) {
-    emailForm.addEventListener("submit", async (e) => {
+    emailForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const email = document.getElementById("captureEmail").value;
-        if (!lastChartRequest) return;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email || !emailRegex.test(email)) {
-            emailStatus.textContent = "Please enter a valid email address.";
-            emailStatus.style.color = "var(--danger)";
+        const email = document.getElementById('captureEmail').value;
+        const consent = document.getElementById('emailConsent').checked;
+        const statusDiv = document.getElementById('emailStatus');
+        const submitBtn = emailForm.querySelector('button[type="submit"]');
+
+        if (!email || !consent) {
+            statusDiv.textContent = "Please provide email and consent.";
+            statusDiv.style.color = "var(--danger)";
             return;
         }
 
+        if (!window.currentChartData) {
+            statusDiv.textContent = "No chart data found. Please calculate a chart first.";
+            statusDiv.style.color = "var(--danger)";
+            return;
+        }
 
-        emailStatus.textContent = "Sending...";
-        emailStatus.style.color = "var(--text-main)";
+        // Lock UI
+        submitBtn.disabled = true;
+        submitBtn.textContent = "SENDING...";
+        statusDiv.textContent = "";
 
         try {
-            const resp = await fetch(apiUrl("/api/capture_email"), {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            const response = await fetch(apiUrl('/api/v1/content/email-pdf'), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
                     email: email,
-                    chart_request: lastChartRequest
+                    consent: consent,
+                    chart_data: window.currentChartData
                 })
             });
 
-            if (!resp.ok) {
-                throw new Error("Failed to send.");
+            const res = await response.json();
+
+            if (response.ok) {
+                statusDiv.textContent = "PDF Sent! Check your inbox.";
+                statusDiv.style.color = "var(--success)";
+                setTimeout(() => {
+                    document.getElementById('emailModal').classList.add('hidden');
+                    emailForm.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "SEND ME MY PDF";
+                    statusDiv.textContent = "";
+                }, 3000);
+            } else {
+                throw new Error(res.detail || "Sending failed.");
             }
 
-            emailStatus.textContent = "Sent! Check your inbox.";
-            emailStatus.style.color = "var(--success)";
-            setTimeout(() => {
-                emailModal.classList.add("hidden");
-                emailStatus.textContent = "";
-                document.getElementById("captureEmail").value = "";
-            }, 2000);
-
-            logEvent("email_captured", { email: email }); // In real app, hash email for privacy log
-
         } catch (err) {
-            emailStatus.textContent = "Error: " + err.message;
-            emailStatus.style.color = "var(--danger)";
+            console.error(err);
+            statusDiv.textContent = "Error: " + err.message;
+            statusDiv.style.color = "var(--danger)";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "TRY AGAIN";
         }
     });
 }
@@ -803,6 +820,9 @@ if (basicForm) {
             }
 
             const result = await response.json();
+
+            // Expose for PDF/Email Modal
+            window.currentChartData = result;
 
             // Check for Lot of Fortune Landing Page (Special Render Loop)
             const fortuneContainer = document.getElementById("lotResult");
@@ -1626,3 +1646,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 });
+
+
