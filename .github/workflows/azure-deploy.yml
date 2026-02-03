@@ -8,7 +8,7 @@ on:
 
 env:
   ACR_NAME: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-  APP_NAME: ${{ secrets.AZURE_WEBAPP_NAME }} # Optional: Use secret or hardcode
+  APP_NAME: ${{ secrets.AZURE_WEBAPP_NAME }}
 
 jobs:
   build-and-deploy:
@@ -16,6 +16,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set lower case image tag
+        run: |
+          IMAGE_TAG=$(echo "${{ secrets.REGISTRY_LOGIN_SERVER }}/astrology-engine:latest" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
       - name: Log in to Azure Container Registry
         uses: azure/docker-login@v1
@@ -26,12 +31,11 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          IMAGE_TAG=$(echo "${{ secrets.REGISTRY_LOGIN_SERVER }}/astrology-engine:latest" | tr '[:upper:]' '[:lower:]')
-          docker build . -t $IMAGE_TAG
-          docker push $IMAGE_TAG
+          docker build . -t ${{ env.IMAGE_TAG }}
+          docker push ${{ env.IMAGE_TAG }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }} # e.g., 'astrology-engine'
-          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/astrology-engine:latest
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          images: ${{ env.IMAGE_TAG }}
