@@ -109,7 +109,7 @@ async def global_exception_handler(request: Request, exc: Exception):
     logging.exception(f"Unhandled Exception on {request.method} {request.url.path}")
     return JSONResponse(
         status_code=500,
-        content={"success": False, "detail": "Internal Server Error. Please contact support."},
+        content={"success": False, "detail": f"Internal Server Error: {str(exc)}"},
     )
 
 # --- ROUTER MOUNT ---
