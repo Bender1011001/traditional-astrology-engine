@@ -62,7 +62,16 @@ class LoginRequest(BaseModel):
     email: str
     password: str
 
+
 class RegisterRequest(BaseModel):
     email: str
     password: str
     name: Optional[str] = ""
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str
+

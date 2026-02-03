@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body
 from typing import Dict, Any
-from src.api.v1.schemas import LoginRequest, RegisterRequest
+from src.api.v1.schemas import LoginRequest, RegisterRequest, ForgotPasswordRequest, ResetPasswordRequest
 from src.engine.user_auth import get_user_manager
 from src.api.v1.auth import create_access_token, get_current_user
 from src.database.models import User
@@ -86,7 +86,45 @@ async def restore_session(token: str):
     if not chart_input:
           chart_input = payload.get("chart_input")
 
+
     if not chart_input:
             raise HTTPException(status_code=404, detail="No session data found")
             
     return chart_input
+
+@router.post("/forgot-password")
+async def forgot_password(request: ForgotPasswordRequest):
+    from src.engine.email_service import send_email, render_template
+    from src.core.config import settings
+
+    result = user_manager.create_password_reset_token(request.email)
+    
+    # Always return success to prevent email enumeration
+    if result["success"] and result["token"]:
+        token = result["token"]
+        reset_link = f"{settings.SITE_BASE_URL}/reset-password.html?token={token}"
+        
+        email_html = render_template("reset_password.html", {
+            "link": reset_link,
+            "email": request.email
+        })
+        
+        send_email(
+            to_email=request.email,
+            subject="Reset Your Password - Codex Caelestis",
+            html_content=email_html
+        )
+        
+    return {"success": True, "message": "If an account exists with this email, you will receive password reset instructions."}
+
+@router.post("/reset-password")
+async def reset_password(request: ResetPasswordRequest):
+    result = user_manager.reset_password_with_token(request.token, request.new_password)
+    
+    if not result["success"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=result["message"]
+        )
+        
+    return {"success": True, "message": "Password has been reset successfully."}

@@ -15,9 +15,15 @@ class User(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     last_login = Column(DateTime, nullable=True)
     
+
     # Verification
     email_verified = Column(Boolean, default=False)
     verification_token = Column(String, nullable=True)
+    
+    # Password Reset
+    reset_token = Column(String, nullable=True)
+    reset_token_expires = Column(DateTime, nullable=True)
+
 
     # Charts data (keeping as JSON for now for compatibility/simplicity as per notes)
     charts_saved = Column(JSON, default=list)

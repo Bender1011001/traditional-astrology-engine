@@ -265,10 +265,70 @@ class UserManager:
             # user.salt = salt # No salt needed for bcrypt context
             user.updated_at = datetime.utcnow()
             
+
             db.commit()
             return {"success": True, "message": "Password changed successfully."}
         finally:
             db.close()
+
+    def create_password_reset_token(self, email: str) -> Dict[str, Any]:
+        """Generate a password reset token for a user."""
+        email = email.lower().strip()
+        db = SessionLocal()
+        try:
+            user = db.query(User).filter(User.email == email).first()
+            if not user:
+                # Return success to prevent email enumeration, but with no token
+                return {"success": True, "token": None}
+            
+            token = secrets.token_urlsafe(32)
+            # Expires in 1 hour
+            expires = datetime.utcnow().replace(second=0, microsecond=0).timestamp() + 3600
+            
+            user.reset_token = token
+            user.reset_token_expires = datetime.fromtimestamp(expires)
+            db.commit()
+            
+            return {"success": True, "token": token}
+        except Exception as e:
+            logging.error(f"Create reset token error: {e}")
+            return {"success": False, "message": "Error creating reset token."}
+        finally:
+            db.close()
+
+    def reset_password_with_token(self, token: str, new_password: str) -> Dict[str, Any]:
+        """Reset password using a valid token."""
+        db = SessionLocal()
+        try:
+            user = db.query(User).filter(User.reset_token == token).first()
+            
+            if not user:
+                return {"success": False, "message": "Invalid or expired reset token."}
+            
+            # Check expiration
+            if user.reset_token_expires < datetime.utcnow():
+                return {"success": False, "message": "Reset token has expired."}
+            
+            if len(new_password) < 8:
+                return {"success": False, "message": "Password must be at least 8 characters."}
+            
+            # Reset password
+            hashed = self._hash_password(new_password)
+            user.password_hash = hashed
+            
+            # Clear token
+            user.reset_token = None
+            user.reset_token_expires = None
+            user.updated_at = datetime.utcnow()
+            
+            db.commit()
+            return {"success": True, "message": "Password reset successfully."}
+        except Exception as e:
+            logging.error(f"Reset password error: {e}")
+            return {"success": False, "message": "Error resetting password."}
+        finally:
+            db.close()
+
 
 # Singleton instance
 _user_manager = None
