@@ -146,7 +146,20 @@ class UserManager:
         try:
             user = db.query(User).filter(User.email == email).first()
             
-            if not user or not self._verify_password(password, user.password_hash):
+
+            if not user:
+                return {"success": False, "message": "Invalid email or password."}
+
+            try:
+                is_valid = self._verify_password(password, user.password_hash)
+            except ValueError as e:
+                logging.error(f"Auth error (invalid hash) for {email}: {e}")
+                is_valid = False
+            except Exception as e:
+                logging.error(f"Auth error for {email}: {e}")
+                is_valid = False
+            
+            if not is_valid:
                 return {"success": False, "message": "Invalid email or password."}
             
             # Update last login
@@ -165,6 +178,7 @@ class UserManager:
                 "success": True,
                 "user": user_data
             }
+
         finally:
             db.close()
     
@@ -231,10 +245,16 @@ class UserManager:
         db = SessionLocal()
         try:
             user = db.query(User).filter(User.email == email).first()
+
             if not user:
                 return {"success": False, "message": "User not found."}
                 
-            if not self._verify_password(old_password, user.password_hash):
+            try:
+                is_valid = self._verify_password(old_password, user.password_hash)
+            except Exception:
+                is_valid = False
+
+            if not is_valid:
                 return {"success": False, "message": "Current password is incorrect."}
             
             if len(new_password) < 8:
