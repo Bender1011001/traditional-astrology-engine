@@ -128,8 +128,8 @@ class UserManager:
             }
         except Exception as e:
             db.rollback()
-            logging.error(f"Create user error: {e}")
-            return {"success": False, "message": "Database error during registration."}
+            logging.error(f"Create user error: {str(e)}")
+            return {"success": False, "message": f"Database error during registration: {str(e)}"}
         finally:
             db.close()
     
