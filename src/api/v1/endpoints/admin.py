@@ -10,7 +10,7 @@ from src.scripts.apply_schema_patch import patch_database
 router = APIRouter()
 
 @router.get("/patch_db")
-async def trigger_patch_db(key: str = Query(..., description="Emergency Admin Key")):
+def trigger_patch_db(key: str = Query(..., description="Emergency Admin Key")):
     """
     Emergency endpoint to trigger database schema patch.
     """
