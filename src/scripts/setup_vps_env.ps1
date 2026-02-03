@@ -22,7 +22,23 @@ choco install cloudflared -y
 Import-Module $env:ProgramData\chocolatey\helpers\chocolateyProfile.psm1
 refreshenv
 
-# 3. Setup Python Virtual Environment (Optional but recommended, skipping for simplicity on dedicated VPS)
+# 3. Setup OpenSSH Server (For Remote Management)
+Write-Host "Setting up OpenSSH Server..." -ForegroundColor Yellow
+# Install OpenSSH (if not present)
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
+# Start Service
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
+
+# Open Firewall for SSH (Port 22)
+if (-not (Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue)) {
+    New-NetFirewallRule -Name 'OpenSSH-Server-In-TCP' -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+}
+
+Write-Host "SSH Server Configured. You can now SSH into this machine." -ForegroundColor Green
+
+# 4. Setup Python Virtual Environment (Optional but recommended, skipping for simplicity on dedicated VPS)
 # We will install directly to global python for this single-purpose server user
 Write-Host "Installing Python Dependencies..." -ForegroundColor Yellow
 pip install --upgrade pip
