@@ -14,8 +14,8 @@ from sqlalchemy.orm import Session
 from src.database.core import SessionLocal, engine, Base
 from src.database.models import User
 
-# Initialize tables
-Base.metadata.create_all(bind=engine)
+# Initialize tables - MOVED TO APP STARTUP to prevent hang
+# Base.metadata.create_all(bind=engine)
 
 class UserManager:
     """User management using SQLAlchemy."""

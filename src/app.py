@@ -27,6 +27,20 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+@app.on_event("startup")
+async def startup_event():
+    logging.info("Starting up... Initializing database tables.")
+    from src.database.core import engine, Base
+    from src.database.models import User # Ensure models are loaded
+    try:
+        # This will create tables if they don't exist
+        Base.metadata.create_all(bind=engine)
+        logging.info("Database tables initialized successfully.")
+    except Exception as e:
+        logging.error(f"Failed to initialize database tables: {e}")
+        # We don't exit here, let the app try to serve what it can 
+        # (or fail specifically on DB routes with clear errors)
+
 # --- MIDDLEWARE ---
 
 # Request Logging Middleware
