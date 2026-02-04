@@ -491,7 +491,7 @@ function logEvent(eventType, payload = {}, options = {}) {
         payload,
         ts: new Date().toISOString()
     };
-    const url = apiUrl("/api/v1/log_event");
+    const url = apiUrl("/api/v1/log/telemetry");
     if (options.beacon && navigator.sendBeacon) {
         try {
             const blob = new Blob([JSON.stringify(body)], { type: "application/json" });

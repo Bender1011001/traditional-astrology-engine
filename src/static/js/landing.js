@@ -171,7 +171,7 @@ function setupBasicForm() {
         logEvent("basic_chart_request", { form: payload });
 
         try {
-            const response = await fetch(apiUrl("/api/calculate"), {
+            const response = await fetch(apiUrl("/api/v1/calculate"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -282,10 +282,10 @@ function setupModals() {
             const email = document.getElementById("captureEmail").value;
             try {
                 document.getElementById("emailStatus").textContent = "Sending...";
-                await fetch(apiUrl("/api/capture_email"), {
+                await fetch(apiUrl("/api/v1/content/email-pdf"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email, chart_request: lastChartRequest })
+                    body: JSON.stringify({ email, chart_data: window.currentChartData, consent: true })
                 });
                 document.getElementById("emailStatus").textContent = "Sent!";
                 setTimeout(() => emailModal.classList.add('hidden'), 2000);
