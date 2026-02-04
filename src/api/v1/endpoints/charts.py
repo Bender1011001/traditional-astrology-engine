@@ -211,8 +211,15 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
             plain_reading = explain_reading_in_plain_terms(final_result["report_markdown"], tier=tier)
             if plain_reading:
                 final_result["plain_reading"] = plain_reading
+        
+        # Fallback for free tier or if LLM fails
+        if not final_result.get("plain_reading"):
+            final_result["plain_reading"] = final_result.get("executive_summary", "Reading unavailable. Please try again.")
+            
     except Exception as pe:
         logger.error(f"Plain Reading Failure: {pe}")
+        if not final_result.get("plain_reading"):
+            final_result["plain_reading"] = final_result.get("executive_summary", "Reading unavailable. Please try again.")
 
     # SAVE TO CACHE
     set_to_cache(chart_hash, tier, final_result)
