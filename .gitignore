@@ -38,6 +38,10 @@ full_extraction_dossier.txt
 ultimate_extraction_dossier.txt
 reading_full.txt
 reading_result.txt
+debug_*.py
+reproduce_*.py
+test_*.py
+!tests/
 *.md
 !README.md
 !ASTROLOGY.md
