@@ -98,16 +98,14 @@ class UserManager:
             # Auto-create free subscription (Phase 2 Requirement)
             from src.services.subscription import SubscriptionService
             service = SubscriptionService(db)
-            service.start_trial(new_user, "free", trial_days=0) # Or just create free sub directly
             
-            # Correction: start_trial creates the sub. But wait, create_user is sync?
-            # SubscriptionService uses DB session. We can use it.
-            # But start_trial logic assumes user has 'subscription' rel loaded?
-            # Actually, `start_trial` creates the UserSubscription object attached to user.
-            
-            # Let's just create User first.
+            # Add user to session first so start_trial can commit it as well
             db.add(new_user)
-            db.commit() # Commit user first to get ID/ref
+            
+            service.start_trial(new_user, "free", trial_days=0) 
+            
+            # Note: start_trial calls db.commit(), so we don't need another commit here
+            # for the user. It's all part of the same transaction context.
             
             # Now add subscription
             # Note: start_trial requires the user object to be part of session or re-queried?
