@@ -36,6 +36,15 @@ async def startup_event():
         # This will create tables if they don't exist
         Base.metadata.create_all(bind=engine)
         logging.info("Database tables initialized successfully.")
+        
+        # Auto-seed plans if missing (to prevent 'Plan free not found' errors)
+        try:
+            from src.scripts.seed_db import seed_plans
+            seed_plans()
+            logging.info("Database seeding checked/completed.")
+        except Exception as seed_err:
+            logging.error(f"Seeding during startup failed: {seed_err}")
+            
     except Exception as e:
         logging.error(f"Failed to initialize database tables: {e}")
         # We don't exit here, let the app try to serve what it can 
