@@ -127,7 +127,9 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Bare `except:` clauses | Catches all exceptions including system exits | Changed to `except Exception:` for safer handling |
 | Stub Login/Register | Pages showed "coming soon" | Implemented full auth system with user_auth.py |
 | Missing Function NameError | `_log_event` called but not defined in `api.py` | Restored missing helper function |
-
+| Azure DB Auth Failure | Used `astrology_admin` instead of `astroadmin` | Use `astroadmin` as defined in `setup_azure.ps1` |
+| ACR ImagePullFailure | Truncated Registry Password used in App Settings | Copy THE FULL 80+ CHAR password from ACR credentials |
+| Plan Not Found (Reg) | Database not seeded with standard plans | Added `seed_plans()` to app startup event |
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
