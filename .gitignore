@@ -41,6 +41,7 @@ reading_result.txt
 debug_*.py
 reproduce_*.py
 test_*.py
+test_credentials.txt
 !tests/
 *.md
 !README.md
