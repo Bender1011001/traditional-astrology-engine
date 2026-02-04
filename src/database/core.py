@@ -19,13 +19,24 @@ if "postgres" in DATABASE_URL and "localhost" not in DATABASE_URL and "127.0.0.1
         separator = "&" if "?" in DATABASE_URL else "?"
         DATABASE_URL += f"{separator}sslmode=require"
 
-engine = create_engine(
-    DATABASE_URL, 
-    connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {
-        "sslmode": "require",  # Redundant but safe for some drivers
-        "connect_timeout": 10   # Don't hang forever
+# Engine configuration for managed databases (Azure/Render)
+engine_kwargs = {
+    "pool_size": 5,
+    "max_overflow": 10,
+    "pool_timeout": 30,
+    "pool_recycle": 1800,
+}
+
+if "sqlite" in DATABASE_URL:
+    engine_kwargs = {"connect_args": {"check_same_thread": False}}
+else:
+    # Explicitly set SSL for Postgres
+    engine_kwargs["connect_args"] = {
+        "sslmode": "require",
+        "connect_timeout": 10
     }
-)
+
+engine = create_engine(DATABASE_URL, **engine_kwargs)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
