@@ -75,3 +75,13 @@ class ResetPasswordRequest(BaseModel):
     token: str
     new_password: str
 
+class ReadingFeedback(BaseModel):
+    reading_hash: str
+    vote: str
+    source: Optional[str] = "basic_reading"
+    birth: Optional[dict] = None
+    meta: Optional[dict] = None
+    time_unknown: Optional[bool] = False
+    session_id: Optional[str] = None
+    ts: Optional[str] = None
+

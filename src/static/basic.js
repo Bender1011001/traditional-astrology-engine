@@ -563,7 +563,7 @@ if (basicFeedback) {
             time_unknown: basicFeedbackContext.time_unknown
         });
 
-        fetch(apiUrl("/api/reading_feedback"), {
+        fetch(apiUrl("/api/v1/reading_feedback"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -808,7 +808,7 @@ if (basicForm) {
 
 
         try {
-            const response = await fetch(apiUrl("/api/calculate"), {
+            const response = await fetch(apiUrl("/api/v1/calculate"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)

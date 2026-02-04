@@ -23,12 +23,16 @@ export const SESSION_ID = getSessionId();
 export function logEvent(eventType, payload = {}, options = {}) {
     if (!LOG_ENABLED) return;
     const body = {
-        session_id: SESSION_ID,
         event_type: eventType,
-        payload,
-        ts: new Date().toISOString()
+        element_id: payload.element_id || null,
+        url: window.location.href,
+        data: {
+            ...payload,
+            session_id: SESSION_ID,
+            ts: new Date().toISOString()
+        }
     };
-    const url = apiUrl("/api/log_event");
+    const url = apiUrl("/api/v1/log/telemetry");
     if (options.beacon && navigator.sendBeacon) {
         try {
             const blob = new Blob([JSON.stringify(body)], { type: "application/json" });
