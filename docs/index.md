@@ -18,3 +18,4 @@ The Codex Caelestis engine is designed to go beyond "sun sign" horoscopes. It im
 *   [Core Concepts](concepts.md): Learn about the traditional mechanics (Kakosis, Almuten, etc.) powered by the engine.
 *   [Engine Reference](engine/architecture.md): Deep dive into the `Auditor` class and module architecture.
 *   [CLI Guide](cli.md): How to use the `omnibus.py` administrative tool.
+*   [Revenue Readiness Plan](monetization.md): COO plan to convert traffic into paid revenue.
