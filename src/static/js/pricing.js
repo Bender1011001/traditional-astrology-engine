@@ -3,14 +3,22 @@ import { apiUrl } from './api.js';
 export function setupPricing() {
     // Pricing Modal Logic
     const pricingBtn = document.getElementById("pricingBtn");
+    const pricingTriggers = document.querySelectorAll("[data-pricing-trigger]");
     const pricingModal = document.getElementById("pricingModal");
     const pricingClose = document.getElementById("pricingClose");
     const billingToggle = document.getElementById("billingToggle");
 
+    const openPricing = () => {
+        if (pricingModal) pricingModal.classList.remove("hidden");
+    };
+
     if (pricingBtn) {
-        pricingBtn.onclick = () => {
-            if (pricingModal) pricingModal.classList.remove("hidden");
-        };
+        pricingBtn.onclick = openPricing;
+    }
+    if (pricingTriggers.length) {
+        pricingTriggers.forEach((trigger) => {
+            trigger.addEventListener("click", openPricing);
+        });
     }
     if (pricingClose) {
         pricingClose.onclick = () => {
@@ -35,19 +43,13 @@ export function setupPricing() {
             if (aLabel) aLabel.classList.toggle("active", isAnnual);
 
             // Update Prices
-            // Scholar (Starter): 9.99/mo -> 99/yr
-            // Practitioner: 29/mo -> 290/yr
+            // Practitioner Access: 79/mo -> 790/yr
             const priceStarter = document.getElementById("price-starter");
-            const pricePractitioner = document.getElementById("price-practitioner");
 
-            if (priceStarter) priceStarter.textContent = isAnnual ? "99" : "9.99";
-            if (pricePractitioner) pricePractitioner.textContent = isAnnual ? "290" : "29";
+            if (priceStarter) priceStarter.textContent = isAnnual ? "790" : "79";
 
             const periodStarter = document.getElementById("period-starter");
-            const periodPractitioner = document.getElementById("period-practitioner");
-
             if (periodStarter) periodStarter.textContent = period;
-            if (periodPractitioner) periodPractitioner.textContent = period;
         };
     }
 }
