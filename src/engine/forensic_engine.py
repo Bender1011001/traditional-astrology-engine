@@ -24,10 +24,11 @@ from .prediction import (
     calculate_solar_return_jd,
     calculate_epitasis_days
 )
+from .decennials import DecennialEngine
+from .phasis import PhasisEngine
 from src.database.db_manager import DelineationLibrary
 from .primary_directions import PrimaryDirectionsEngine
 from .mundane import MundaneEngine, check_eclipse_impact, get_recent_eclipses
-from .rectification import RectificationEngine
 from .reception import ReceptionEngine, ReceptionMode
 from .stars import check_fixed_stars
 from .decumbiture import DecumbitureEngine
@@ -223,7 +224,6 @@ class Auditor:
         analysis[ "advanced_mechanics" ] = {
             "almuten": analysis[ "dignity" ][ "almuten" ],
             "doryphory": Auditor._calculate_doryphory_details(chart),
-            "rectification_animodar": RectificationEngine.animodar_rectification(chart, jd, chart.geo_lat, chart.geo_lon),
             "mundane_context": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).get_hierarchy_report()
         }
 
@@ -744,7 +744,8 @@ class Auditor:
             "firdaria": prediction_report.get("firdaria", {}),
             "solar_return": prediction_report.get("solar_return_info", {}),
             "muntha": prediction_report.get("muntha", {}),
-            "transits": prediction_report.get("transits", [])
+            "transits": prediction_report.get("transits", []),
+            "decennials": DecennialEngine.generate_decennials(chart, bdt) if bdt else []
         }
 
     @staticmethod
@@ -812,8 +813,15 @@ class Auditor:
             "sign": planet.sign.value,
             "dignities": DignityCalculator.calculate_planet_dignity(planet.name, planet.longitude, sect),
             "solar_status": calculate_solar_status(planet, sun),
+            "phasis": {
+                "phase": PhasisEngine.get_synodic_phase(planet, sun.longitude).value,
+                "is_visible": PhasisEngine.calculate_visibility(
+                    jd, chart.geo_lat, chart.geo_lon, 
+                    planet.name, planet.longitude, planet.latitude, sun.longitude
+                )
+            },
             "maltreatments": [
-                {"type": m.type, "malefic": m.malefic.value, "description": m.description}
+                {"condition": m.type, "malefic": m.malefic.value, "description": m.description, "severity": m.severity}
                 for m in KakosisEngine.check_maltreatments(planet, chart)
             ],
             "impacts": []
@@ -902,6 +910,7 @@ class Auditor:
             "primary_direction_distributor": analysis["fate"].get("primary_direction_distributor", {}),
             "profections": profections,
             "firdaria": analysis["fate"].get("firdaria", {}),
+            "decennials": analysis["fate"].get("decennials", []),
             "solar_return": analysis["fate"].get("solar_return", {}),
             "forensic_lots": analysis["fate"]["hermetic_lots"],
             "planets": tech_data["planets_forensic"],

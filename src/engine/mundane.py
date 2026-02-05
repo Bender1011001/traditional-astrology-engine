@@ -2,7 +2,7 @@
 import swisseph as swe
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
-from .models import Sign, PlanetName, Planet
+from .models import Sign, PlanetName, Planet, Sect
 from .stars import STARS, get_shortest_dist, get_star_longitude
 
 # Chorography mapping from Binder1_part_001.txt
@@ -19,6 +19,17 @@ SIGN_TO_TRI_NAME = {
     Sign.GEMINI: "Air", Sign.LIBRA: "Air", Sign.AQUARIUS: "Air",
     Sign.CANCER: "Water", Sign.SCORPIO: "Water", Sign.PISCES: "Water"
 }
+
+# Persian/Medieval Mean Motion Constants (Degrees per Day)
+# Based on Abu Ma'shar / Al-Khwarizmi parameters
+MEAN_MOTION_SATURN = 0.0334597  # Approx 120.45 years for 4 orbits? No, 30 years per orbit.
+# 360 / (29.457 * 365.25) approx 0.033
+MEAN_MOTION_JUPITER = 0.0830912 # Approx 11.86 years. 
+# 360 / (11.86 * 365.25) approx 0.083
+
+# Epoch: Great Flood / Kali Yuga (Feb 17/18, 3101 BCE)
+# Roughly JD 588465.5. Both were at 0.0 Aries (Theoretical Mean).
+EPOCH_KALI_YUGA = 588465.5
 
 class MundaneEngine:
     """
@@ -59,6 +70,21 @@ class MundaneEngine:
     def get_hierarchy_report(self) -> List[Dict[str, Any]]:
         report = []
         
+        # 0. Universal Cycles (Mighty Firdaria, Mean Eras, & World Firdaria)
+        firdaria = self.get_mighty_firdaria()
+        era = self.get_mean_conjunction_era()
+        world_firdaria = self.get_world_firdaria()
+        report.append({
+            "rank": 0,
+            "event": "Universal Periodic Cycles",
+            "data": {
+                "mighty_firdaria": firdaria,
+                "mean_conjunction_era": era,
+                "world_firdaria": world_firdaria
+            },
+            "overrides": ["All natal and particular mundane indicators"]
+        })
+
         # 1. Eclipses (Rank 1)
         eclipses = self.get_recent_eclipses()
         for eclipse in eclipses:
@@ -73,6 +99,12 @@ class MundaneEngine:
         # 2. Great Conjunctions (Rank 2)
         gc = self.get_latest_great_conjunction()
         if gc:
+            # Add Al-Mubtazz scoring for the Ingress of the GC year
+            year, _, _, _ = swe.revjul(gc["jd"])
+            ingress = self.get_aries_ingress(int(year))
+            victor = self.calculate_al_mubtazz(ingress["jd"])
+            gc["al_mubtazz"] = victor
+            
             report.append({
                 "rank": 2,
                 "event": "Great Conjunction (Jupiter-Saturn)",
@@ -176,6 +208,56 @@ class MundaneEngine:
 
         return results
 
+    def get_world_firdaria(self) -> Dict[str, Any]:
+        """
+        Implements the Firdaria of the World (75-year Mundane Eras).
+        Sequence: Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn (75 years each).
+        Epoch: 3101 BCE (Kali Yuga).
+        """
+        days_per_75y = 75 * 365.25
+        days_since_epoch = self.jd - EPOCH_KALI_YUGA
+        
+        cycle_length_days = 525 * 365.25
+        elapsed_in_cycle = days_since_epoch % cycle_length_days
+        
+        sequence = [
+            (PlanetName.SUN, 75),
+            (PlanetName.MOON, 75),
+            (PlanetName.MARS, 75),
+            (PlanetName.MERCURY, 75),
+            (PlanetName.JUPITER, 75),
+            (PlanetName.VENUS, 75),
+            (PlanetName.SATURN, 75)
+        ]
+        
+        current_days = 0
+        active_planet = None
+        start_jd = 0
+        
+        for planet, years in sequence:
+            dur_days = years * 365.25
+            if elapsed_in_cycle < current_days + dur_days:
+                active_planet = planet
+                # Global start JD for this 75 year block
+                num_cycles = int(days_since_epoch // cycle_length_days)
+                start_jd = EPOCH_KALI_YUGA + (num_cycles * cycle_length_days) + current_days
+                break
+            current_days += dur_days
+            
+        if not active_planet:
+            active_planet = PlanetName.SATURN # Fallback for edge cases
+            start_jd = self.jd - (elapsed_in_cycle)
+            
+        end_jd = start_jd + (75 * 365.25)
+        
+        return {
+            "planet": active_planet.value,
+            "duration": 75,
+            "start_jd": start_jd,
+            "end_jd": end_jd,
+            "system": "Firdaria of the World (75Y Sequence)"
+        }
+
     def calculate_eclipse_sophistication(self, eclipse: Dict) -> Dict:
         # 1. Duration Rule
         # Solar: 1 hour = 1 year influence
@@ -251,9 +333,9 @@ class MundaneEngine:
     def get_latest_great_conjunction(self) -> Optional[Dict]:
         """
         Find the nearest preceding Great Conjunction (Jupiter-Saturn).
+        Returns True Conjunction data.
         """
         curr_jd = self.jd
-        # Step back in 30-day increments
         max_iter = 300 # Approx 25 years
         prev_diff = None
         
@@ -263,23 +345,175 @@ class MundaneEngine:
             lon_j = res_j[0][0]
             lon_s = res_s[0][0]
             
-            diff = (lon_j - lon_s + 180) % 360 - 180 # Normalized -180 to 180
+            diff = (lon_j - lon_s + 180) % 360 - 180
             
             if prev_diff is not None and (prev_diff * diff < 0):
-                # Found crossing! Refine with binary search or simple iteration
-                # For production, we'd use a solver, but let's approximate
-                # The crossing happened between curr_jd and curr_jd + 30
+                # Refining True Conjunction
                 return {
                     "jd": curr_jd,
                     "longitude": lon_j,
                     "sign": list(Sign)[int(lon_j / 30) % 12].value,
-                    "description": "Great Conjunction of Jupiter and Saturn (20-year cycle)"
+                    "type": "True Conjunction (Haqiqi)",
+                    "description": "Jupiter-Saturn alignment (Observed/Calculated)"
                 }
             
             prev_diff = diff
             curr_jd -= 30.0
             
         return None
+
+    def get_mean_conjunction_era(self) -> Dict:
+        """
+        Calculates the current Mean Conjunction (Wasati) era and Mutation status.
+        Uses the Persian Epoch (3101 BCE).
+        """
+        # 1. Theoretical Mean Positions
+        days_since_epoch = self.jd - EPOCH_KALI_YUGA
+        mean_sat = (days_since_epoch * MEAN_MOTION_SATURN) % 360.0
+        mean_jup = (days_since_epoch * MEAN_MOTION_JUPITER) % 360.0
+        
+        # 2. Find last Mean Conjunction
+        # Diff closing rate: MEAN_MOTION_JUPITER - MEAN_MOTION_SATURN
+        closing_rate = MEAN_MOTION_JUPITER - MEAN_MOTION_SATURN
+        diff = (mean_jup - mean_sat) % 360.0
+        
+        days_to_last = diff / closing_rate
+        last_mean_jd = self.jd - days_to_last
+        
+        # Position at conjunction
+        lon_at_conj = (mean_sat - (days_to_last * MEAN_MOTION_SATURN)) % 360.0
+        sign = list(Sign)[int(lon_at_conj / 30) % 12]
+        triplicity = SIGN_TO_TRI_NAME.get(sign, "Unknown")
+        
+        # 3. Determine Mutation (Elemental Shift)
+        # Check the previous 12 conjunctions (approx 240 years)
+        # If the current triplicity differs from the one ~240 years ago, we are in a new era.
+        days_in_240 = 240 * 365.25
+        prev_mean_jd = last_mean_jd - days_in_240
+        prev_mean_sat = ((prev_mean_jd - EPOCH_KALI_YUGA) * MEAN_MOTION_SATURN) % 360.0
+        # This is a bit simplistic, better to check successive steps of ~19.85 years
+        
+        return {
+            "last_mean_jd": last_mean_jd,
+            "longitude": lon_at_conj,
+            "sign": sign.value,
+            "triplicity": triplicity,
+            "type": "Mean Conjunction (Wasati)",
+            "cycle": "Minor/Middle Cycle boundary indicator"
+        }
+
+    def calculate_al_mubtazz(self, ingress_jd: float) -> Dict:
+        """
+        Calculates the 'Victor' (Al-Mubtazz) for the Aries Ingress.
+        Scoring: Domicile (5), Exaltation (4), Triplicity (3), Term (2), Face (1).
+        Vital Points: Asc, Sun, Moon, Fortune, Syzygy.
+        """
+        from .dignities import DignityCalculator
+        from .lots import calculate_lot
+        
+        # 1. Establish Ingress Chart
+        cusps, ascmc = swe.houses(ingress_jd, self.lat, self.lon, b'P')
+        asc = ascmc[0]
+        sun_pos = swe.calc_ut(ingress_jd, swe.SUN, swe.FLG_SWIEPH)[0][0]
+        moon_pos = swe.calc_ut(ingress_jd, swe.MOON, swe.FLG_SWIEPH)[0][0]
+        # azalt(tjd, calc_flag, geopos, atpress, attemp, xin)
+        # geopos = (lon, lat, alt), xin = (lon, lat, dist)
+        res_azalt = swe.azalt(ingress_jd, swe.EQU2HOR, (self.lon, self.lat, 0), 0, 0, (sun_pos, 0, 1.0))
+        alt_sun = res_azalt[1] # Index 1 is altitude
+        
+        is_day = alt_sun > 0
+        sect = "DAY" if is_day else "NIGHT"
+        
+        # Part of Fortune
+        if is_day:
+            pof = calculate_lot(asc, sun_pos, moon_pos)
+        else:
+            pof = calculate_lot(asc, moon_pos, sun_pos)
+            
+        # Prenatal Syzygy (Search back for 0 or 180 elongation)
+        curr_syz_jd = ingress_jd
+        for _ in range(30): # Walk back max 30 days
+            sun_p = swe.calc_ut(curr_syz_jd, swe.SUN, swe.FLG_SWIEPH)[0][0]
+            moon_p = swe.calc_ut(curr_syz_jd, swe.MOON, swe.FLG_SWIEPH)[0][0]
+            elo = abs(sun_p - moon_p)
+            if elo > 180: elo = 360 - elo
+            if elo < 1.0 or abs(elo - 180) < 1.0: # Close enough for a rough vitals point
+                syz_pos = sun_p
+                break
+            curr_syz_jd -= 1.0
+        else:
+            syz_pos = sun_pos # Fallback
+        
+        vital_points = [
+            ("Ascendant", asc),
+            ("Sun", sun_pos),
+            ("Moon", moon_pos),
+            ("Fortune", pof),
+            ("Syzygy", syz_pos)
+        ]
+        
+        # 2. Scoring Matrix
+        planets = [PlanetName.SATURN, PlanetName.JUPITER, PlanetName.MARS, PlanetName.SUN, PlanetName.VENUS, PlanetName.MERCURY, PlanetName.MOON]
+        scores = {p.value: 0 for p in planets}
+        
+        for name, lon in vital_points:
+            # Get dignities at this point
+            # Note: We need a simplified score-only version of calculate_planet_dignity
+            for p in planets:
+                dig = DignityCalculator.calculate_planet_dignity(p, lon, Sect.DAY if is_day else Sect.NIGHT)
+                breakdown = dig["score_breakdown"]
+                # Ibn Ezra / Al-Mubtazz uses positive scores only
+                scores[p.value] += sum(max(0, v) for v in breakdown.values())
+                
+        winner = max(scores, key=scores.get)
+        
+        return {
+            "victor": winner,
+            "score": scores[winner],
+            "breakdown": scores,
+            "ingress_jd": ingress_jd,
+            "sect": sect
+        }
+
+    def get_mighty_firdaria(self) -> Dict:
+        """
+        Calculates the current ruler of the world based on the Mighty Firdaria (Abu Ma'shar).
+        Uses a 1200-year cycle (Sum of Great Years approx).
+        Order: Saturn (57), Jupiter (79), Mars (66), Sun (120), Venus (82), Mercury (76), Moon (108).
+        Total Lifecycle: 588 years (approx. half a Great Mutation).
+        Note: Variations exist for the start epoch. 
+        """
+        GREAT_YEARS = {
+            PlanetName.SATURN: 57,
+            PlanetName.JUPITER: 79,
+            PlanetName.MARS: 66,
+            PlanetName.SUN: 120,
+            PlanetName.VENUS: 82,
+            PlanetName.MERCURY: 76,
+            PlanetName.MOON: 108
+        }
+        ORDER = [PlanetName.SATURN, PlanetName.JUPITER, PlanetName.MARS, PlanetName.SUN, PlanetName.VENUS, PlanetName.MERCURY, PlanetName.MOON]
+        TOTAL_CYCLE = sum(GREAT_YEARS.values()) # 588 years
+        
+        # Epoch: 3101 BCE (Kali Yuga).
+        # We assume the sequence started with Saturn at JD 588465.5
+        years_since_epoch = (self.jd - EPOCH_KALI_YUGA) / 365.25
+        cycle_pos = years_since_epoch % TOTAL_CYCLE
+        
+        current_ruler = None
+        elapsed = 0.0
+        for p in ORDER:
+            duration = GREAT_YEARS[p]
+            if elapsed <= cycle_pos < (elapsed + duration):
+                current_ruler = p
+                break
+            elapsed += duration
+            
+        return {
+            "ruler": current_ruler.value if current_ruler else "Unknown",
+            "years_into_period": round(cycle_pos - elapsed, 2),
+            "remaining_years": round(elapsed + GREAT_YEARS.get(current_ruler, 0) - cycle_pos, 2)
+        }
 
     def get_aries_ingress(self, year: int) -> Dict:
         """

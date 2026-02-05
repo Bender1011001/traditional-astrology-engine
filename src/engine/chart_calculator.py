@@ -9,7 +9,7 @@ import time
 
 # Classical Imports
 from .classical_mechanics import ClassicalMechanicsEngine
-from .models import Sign, PlanetName, Chart, Planet
+from .models import Sign, PlanetName, Chart, Planet, PlanetaryPhase, SolarProximity
 from .reference_data import DOMICILES
 from .advanced_mechanics import (
     HermeticLotEngine, MonomoiriaEngine, AlmutenEngine, DoryphoryEngine,
@@ -18,6 +18,8 @@ from .advanced_mechanics import (
 from .reception import ReceptionEngine, ReceptionMode
 from .kakosis import KakosisEngine
 from .aspects import AspectEngine
+from .house_systems import AlcabitiusEngine
+from .phasis import PhasisEngine
 
 # Initialize Geocoder
 _ua_base = os.getenv("NOMINATIM_USER_AGENT", "astrology_app/1.0")
@@ -175,7 +177,12 @@ def _compute_snapshot(
             swe.set_sid_mode(ayanamsa_mode)
     sun = swe.calc_ut(jd, swe.SUN, flags)[0][0]
     moon = swe.calc_ut(jd, swe.MOON, flags)[0][0]
-    cusps, ascmc = swe.houses(jd, lat, lon, house_code.encode())
+    if house_code == 'B':
+        cusps_dict = AlcabitiusEngine.calculate_houses(jd, lat, lon)
+        _, ascmc = swe.houses(jd, lat, lon, b'W')
+        cusps = [cusps_dict[i] for i in range(1, 13)]
+    else:
+        cusps, ascmc = swe.houses(jd, lat, lon, house_code.encode())
     ayanamsa_deg = None
     if zodiac_code == "sidereal":
         try:
@@ -386,6 +393,11 @@ def calculate_chart_data(
     topo_flags = (swe.FLG_SWIEPH | swe.FLG_SPEED | swe.FLG_TOPOCTR)
     swe.set_topo(lon, lat, 0)
 
+    # Pre-calculate Sun for phasis reference
+    sun_raw = swe.calc_ut(jd, swe.SUN, flags)
+    sun_coords = sun_raw[0] if isinstance(sun_raw[0], (list, tuple)) else sun_raw
+    sun_lon = sun_coords[0]
+
     for name, pid in planets.items():
         try:
             # res is usually ((lon, lat, dist, spd_lon, spd_lat, spd_dist), rflag) or (lon, lat, ... rflag)
@@ -413,6 +425,37 @@ def calculate_chart_data(
             antiscia = ClassicalMechanicsEngine.get_antiscia(long_val)
             dodecatemorion = ClassicalMechanicsEngine.get_dodecatemorion(long_val)
 
+            # --- Phasis Calculation ---
+            phase_enum = None
+            prox_enum = None
+            is_vis = True
+            is_ori = False
+            
+            try:
+                # Need to map name to PlanetName enum
+                p_name_enum = None
+                try:
+                    p_name_enum = PlanetName[name.upper()]
+                except (KeyError, ValueError):
+                    if name == "North_Node": p_name_enum = PlanetName.NORTH_NODE
+                
+                if p_name_enum:
+                    is_ori = PhasisEngine.is_oriental(long_val, sun_lon)
+                    prox_enum = PhasisEngine.get_solar_proximity(long_val, sun_lon)
+                    
+                    # Create temporary Planet for phase logic
+                    temp_p = Planet(
+                        name=p_name_enum,
+                        longitude=long_val,
+                        latitude=coords[1],
+                        speed=coords[3],
+                        altitude=altitude
+                    )
+                    phase_enum = PhasisEngine.get_synodic_phase(temp_p, sun_lon)
+                    is_vis = PhasisEngine.calculate_visibility(jd, lat, lon, p_name_enum, long_val, coords[1], sun_lon)
+            except Exception as e_pha:
+                print(f"Phasis Error for {name}: {e_pha}")
+
             results["planets"][name] = {
                 "longitude": coords[0],
                 "latitude": coords[1],
@@ -433,6 +476,12 @@ def calculate_chart_data(
                         "longitude": dodecatemorion.longitude,
                         "sign": dodecatemorion.sign.value,
                         "term_ruler": dodecatemorion.term_ruler
+                    },
+                    "phasis": {
+                        "phase": phase_enum.value if phase_enum else None,
+                        "solar_proximity": prox_enum.value if prox_enum else None,
+                        "is_oriental": is_ori,
+                        "is_visible": is_vis
                     }
                 }
             }
@@ -539,12 +588,18 @@ def calculate_chart_data(
                     if pname == "North_Node": enum_name = PlanetName.NORTH_NODE
                     else: continue
                 
+                phas_data = pdata.get("classical", {}).get("phasis", {})
+                
                 p_obj = Planet(
                     name=enum_name,
                     longitude=pdata["longitude"],
                     latitude=pdata.get("latitude", 0),
                     speed=pdata.get("speed", 0),
-                    altitude=pdata.get("altitude", 0)
+                    altitude=pdata.get("altitude", 0),
+                    phase=PlanetaryPhase(phas_data["phase"]) if phas_data.get("phase") else None,
+                    solar_proximity=SolarProximity(phas_data["solar_proximity"]) if phas_data.get("solar_proximity") else None,
+                    is_oriental=phas_data.get("is_oriental", False),
+                    is_visible=phas_data.get("is_visible", True)
                 )
                 chart_planets.append(p_obj)
                 
@@ -656,19 +711,24 @@ def calculate_chart_data(
                     }
 
             # 7. Kakosis (Maltreatment)
-            kakosis_report = KakosisEngine.analyze_maltreatment(chart_obj)
-            for pname, report in kakosis_report.items():
-                planet_key = pname.value.title()
+            kakosis_report = {}
+            for p_obj in chart_obj.planets:
+                maltreatments = KakosisEngine.check_maltreatments(p_obj, chart_obj)
+                if maltreatments:
+                    kakosis_report[p_obj.name] = maltreatments
+
+            for pname_enum, report in kakosis_report.items():
+                planet_key = pname_enum.value.title()
                 if planet_key == "North_Node": planet_key = "North_Node"
                 if planet_key in results["planets"]:
                     if "classical" not in results["planets"][planet_key]: 
                         results["planets"][planet_key]["classical"] = {}
                     results["planets"][planet_key]["classical"]["kakosis"] = [
                         {
-                            "condition": c.condition,
+                            "condition": c.type,
                             "malefic": c.malefic.value if c.malefic else "None",
                             "severity": c.severity,
-                            "details": c.details
+                            "details": c.description
                         } for c in report
                     ]
 

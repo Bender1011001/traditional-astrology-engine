@@ -79,15 +79,9 @@ class HermeticLotEngine:
         # 2. Enrich with Metadata
         final_lots = {}
         
-        # Only process the 7 Hermetic Lots here
-        hermetic_keys = [
-            LotName.FORTUNE.value, LotName.SPIRIT.value,
-            LotName.NECESSITY.value, LotName.EROS.value,
-            LotName.COURAGE.value, LotName.VICTORY.value,
-            LotName.NEMESIS.value
-        ]
-        
-        for key in hermetic_keys:
+        # Process all available Lots from context
+        for lot_enum in LotName:
+            key = lot_enum.value
             if key in raw_lots:
                 lon = raw_lots[key]
                 sign = get_sign_from_lon(lon)

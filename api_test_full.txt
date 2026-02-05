@@ -1,0 +1,63 @@
+API Key: sk-or-v1-8...
+Model: google/gemini-3-pro-preview
+--- RAW API RESPONSE ---
+{
+  "id": "gen-1770225615-XqwHBMjjVXFvd2Pn1jVf",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3-pro-preview",
+  "object": "chat.completion",
+  "created": 1770225615,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "length",
+      "native_finish_reason": "MAX_TOKENS",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Defining the Goal**\n\nI've initially analyzed the user's simple request, recognizing the core intent as a greeting. Next, I'm working to define the appropriate persona and tone, considering the context. I need to determine the best response for the user, in this situation.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Defining the Goal**\n\nI've initially analyzed the user's simple request, recognizing the core intent as a greeting. Next, I'm working to define the appropriate persona and tone, considering the context. I need to determine the best response for the user, in this situation.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "EoMCCoACAb4+9vuEw//PBOwSQTK4buIek2DTiGWb2wObbeYDzx0ChYCptYmUqGo74R4d78RT/fvW5HuiLL0Gp3czJ4pD64cu8Kp4QdY7N2zql+pF2YfzrpiLHeneijCNmkPP7a1nDwCBbbDG3/xx2pGROHZ8J6iJtMZcqdeA4OykwfzoOms1kSFA7ML8cQUh0rAqOOCKT29X/N4uDZfv4L5OidUXvutHmNb+hu0FyLHlNCl6qywHlTd6gf2sN0n3WmvD96c8O0I7MKTd6lNESVsh7y6/666DElHpMum42llzTUOdDcaC+OHDuB68qfirUDObWhkSN5EHOIF120B24z/cn88Y4Q=="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3,
+    "completion_tokens": 47,
+    "total_tokens": 50,
+    "cost": 0.0005643,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00057,
+      "upstream_inference_prompt_cost": 6e-06,
+      "upstream_inference_completions_cost": 0.000564
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 47,
+      "image_tokens": 0
+    }
+  }
+}
+------------------------
+Content: 

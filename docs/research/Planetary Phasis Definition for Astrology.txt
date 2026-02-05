@@ -1,0 +1,267 @@
+﻿Technical Definitions and Computational Frameworks for Planetary Phasis in Hellenistic and Early Medieval Astrology
+1. Foundations of Planetary Phasis: Etymology, Ontology, and Observation
+The study of phasis—the visible appearances and disappearances of the wandering stars relative to the Sun—constitutes the bedrock of ancient sidereal science. In the technical corpus of Hellenistic and early Medieval astrology, planetary position was never merely a coordinate on the ecliptic longitude; it was a dynamic state of being defined by light. The Greek term phasis (φάσις) is etymologically derived from phainō (φαίνω), meaning "to bring to light," "to make to appear," or "to show." It shares a root with phanai (to speak), implying that a planet in phasis is not merely visible but possesses a voice, agency, and the capacity to effect change in the sublunary sphere. Conversely, a planet obscured by the solar glare was deemed silent, hidden, or chemically altered by the supreme fire of the luminary.
+To construct a comprehensive definition of planetary phasis suitable for computational implementation, one must transcend the simplified lookup tables of modern astrology and engage with the rigorous, often divergent, parameters laid out by the architects of the tradition: Claudius Ptolemy, Vettius Valens, Paul of Alexandria, Antiochus of Athens, and their medieval successors like Al-Biruni and Al-Qabisi. This reconstruction requires a synthesis of observational astronomy—specifically the phenomenon of Arcus Visionis—and the symbolic logic of the horoscope, where light equates to being.
+The ancient conception of the cosmos was geocentric and deeply phenomenological. The primary datum was not the planet's orbital node or mean anomaly, but its visibility to the naked eye. The Egyptians, whose decanal stars formed the prototype for later Hellenistic phase doctrines, tracked the heliacal rising of Sirius (Sothis) as the herald of the Nile flood.1 This observational priority transferred to the planets in the Babylonian horoscopic tradition, where the "synodic arc" or phase cycle became the measure of a planet's strength (dynamis).
+In Hellenistic astrology, a planet is considered "in phasis" primarily when it makes a heliacal rising—emerging from the Sun’s beams in the east before sunrise—or a heliacal setting—disappearing into the Sun’s beams in the west after sunset.2 However, the definition extends beyond these two boundary events to include the entire synodic cycle: stations, oppositions (acronychal risings), and solar conjunctions. The precise determination of these states relies on the Arcus Visionis (AV), a critical threshold representing the depression of the Sun below the horizon necessary for a planet to pierce the twilight glow.
+Unlike modern astrometry, which calculates visibility based on complex atmospheric extinction coefficients and variable magnitudes, ancient and medieval astrologers utilized standardized AV values. These values, while seemingly static, evolved significantly from the time of the Almagest to the Qanun al-Masudi, reflecting a refinement in observational precision and a shift in the theological understanding of planetary light. For the modern researcher or developer, implementing these concepts requires a decision-matrix that accounts for the variation in source texts, the distinct behaviors of superior and inferior planets, and the geometric nuances of "Oriental" versus "Occidental" placement.
+This report will dissect these variables, contrasting the theoretical models of Ptolemy with the empirical tables of the Babylonians and the synthesis of the Arab era, to provide a definitive computational standard for ancient planetary phasis.
+2. The Astronomical Mechanics of Visibility
+Before establishing the specific angular thresholds used in astrological texts, it is necessary to articulate the physical mechanism of visibility that these thresholds approximate. The visibility of a celestial body at the horizon is a function of contrast. As the Sun approaches the horizon from below, the sky luminance increases exponentially. For a planet to be detected by the human eye, its brightness (apparent magnitude) must exceed the background luminance of the twilight sky.
+The ancient parameter used to model this phenomenon is the Arcus Visionis (  ), or the arc of vision. Geometrically, this is defined as the vertical depression of the center of the Sun below the true horizon at the moment the planet is on the true horizon. If the Sun is depressed by an angle greater than   , the sky is sufficiently dark for the planet to be seen. If the solar depression is less than   , the twilight glare drowns out the planet's light.3
+This single parameter,   , effectively compresses several physical variables into one heuristic:
+1. Planetary Magnitude: Brighter objects require less solar depression to be visible. Venus, at magnitude -4.4, can be seen when the Sun is only roughly 5° below the horizon. Saturn, at magnitude +0.5 to +1.0, requires a much darker sky, typically 11° to 15° of solar depression.5
+2. Atmospheric Extinction: Light from a body on the horizon traverses a longer path through the Earth's atmosphere (airmass) than light from the zenith. This absorption and scattering reduce the apparent magnitude of the planet. Ptolemy and his successors implicitly incorporated an average extinction coefficient for the latitude of Alexandria or Babylon into their AV values.5
+3. Visual Acuity: The values assume a standard observer with good eyesight observing under clear conditions.
+A crucial distinction in the texts is between the geometric position and the apparent phenomenon. While modern astronomy distinguishes between the astronomical horizon and the visual horizon, Hellenistic texts often operate on ecliptic longitude differences converted into time (ascensional times) or vertical arcs. The most sophisticated ancient models, such as those in Ptolemy's Planetary Hypotheses, acknowledge that a planet's visibility is not uniform; it varies based on the planet's distance from Earth (affecting magnitude) and the angle of the ecliptic relative to the horizon.6
+The variability of planetary magnitude is particularly significant for Mars and the inferior planets (Venus and Mercury). Mars varies dramatically in brightness depending on its synodic cycle, being brightest at opposition (acronychal rising) and faintest near conjunction. Venus and Mercury, presenting phases like the Moon, also vary in illuminated fraction and distance. Ptolemy's later values attempt to account for these variations by assigning different AV thresholds for different phases, a level of detail often lost in simplified medieval tables.7
+For the computational implementation of Hellenistic astrology, one must choose between a "Physical Observation Model" (calculating true visual magnitude and extinction) and a "Textual Fidelity Model" (using the fixed AV values cited by the authors). Given the astrological premise that the tradition defines the meaning, the Textual Fidelity Model is generally preferred for horoscopic delineation, while the Physical Model is useful for historical reconstruction of what was actually seen. This report focuses on the Textual Fidelity Model, extracting the precise parameters defined by the astrological authorities.
+3. The Arcus Visionis: Textual and Empirical Thresholds
+The Arcus Visionis values are the constants in the algorithm of phasis. They serve as the boundary conditions for the state changes between visible and invisible. The historical record preserves several distinct sets of these values, reflecting the evolution of astronomical theory from the 2nd to the 11th centuries.
+3.1. The Ptolemaic Paradigm
+Claudius Ptolemy offers the most influential dataset, yet his values are not consistent across his works. This discrepancy suggests a continuous refinement of his theory.
+3.1.1. The Almagest Values
+In the Almagest (Book XIII, Chapter 7), Ptolemy presents AV values derived from observations of "first" and "last" visibilities. These are often considered the baseline for the mathematical astronomy of the era.
+Table 1: Arcus Visionis Values in the Almagest
+Planet
+	Arcus Visionis (γ)
+	Saturn
+	11°
+	Jupiter
+	10°
+	Mars
+	11.5°
+	Venus
+	5°
+	Mercury
+	10°
+	7
+These values assume a standard condition and do not account for the drastic changes in brightness for planets like Mars or Mercury. Notably, Mercury and Jupiter are assigned similar values (10°), a problematic simplification given Jupiter's piercing brightness versus Mercury's dimness near the horizon.3
+3.1.2. The Planetary Hypotheses and Handy Tables
+In his later works, the Planetary Hypotheses and the Handy Tables, Ptolemy revises these parameters. These revisions are critical for a precise definition of Hellenistic practice, as they likely reflect a mature "standard" intended for calculation rather than just theory.
+Table 2: Arcus Visionis in Planetary Hypotheses & Handy Tables
+
+
+Planet
+	Heliacal Rising/Setting (γ)
+	Acronychal Rising (γacron​)
+	Notes
+	Saturn
+	13°
+	~6.5°
+	Increased from 11° to account for low surface brightness.7
+	Jupiter
+	9°
+	~4.5°
+	Decreased from 10°, acknowledging high magnitude.7
+	Mars
+	14.5°
+	~7.25°
+	Significant increase from 11.5°, reflecting redness/extinction.7
+	Venus (Evening)
+	5°
+	N/A
+	For heliacal setting/rising in West.9
+	Venus (Morning)
+	7°
+	N/A
+	For heliacal rising/setting in East.9
+	Mercury
+	12°
+	N/A
+	Increased from 10° to reflect observational difficulty.7
+	Critical Insights:
+* Venusian Asymmetry: A sophisticated feature of the Planetary Hypotheses is the differentiation between Venus's evening and morning manifestations. The value is 5° for the evening and 7° for the morning.7 This asymmetry accounts for the varying distance and phase angle of Venus relative to Earth during its synodic cycle. An algorithm failing to distinguish these distinct thresholds would be historically inaccurate regarding Ptolemy's mature science.
+* Acronychal Values: Ptolemy explicitly notes that the arc required for acronychal rising (opposition) is approximately half that of heliacal rising. At opposition, superior planets are at their maximum brightness (closest approach to Earth and fully illuminated), requiring less solar depression to be visible against the eastern horizon at sunset.7
+* Mercury's Calibration: The shift from 10° to 12° for Mercury acknowledges the "haze" factor; Mercury is never seen far from the horizon, and its small disk is easily swallowed by atmospheric turbulence, requiring a darker sky for detection than the Almagest initially proposed.7
+3.2. The Criterion of Al-Biruni and Medieval Precision
+Entering the Medieval period, the preservation and refinement of these values passed to Islamic astronomers. Al-Biruni, in his Qanun al-Masudi, discusses the "limit of visibility" (ḥadd al-ru'ya) extensively. He contrasts the Ptolemaic values with those of the "Sindhind" (Indian) tradition and his own observations.
+Al-Biruni’s values are markedly more conservative, requiring greater solar depression. This suggests a desire for certainty—a planet must be unmistakably visible to be considered in phasis.
+Table 3: Medieval / Al-Biruni (Sindhind) AV Values
+Planet
+	Al-Biruni / Hindu AV
+	Schoch (1924) Limit (Modern Reconstruction)
+	Saturn
+	15°
+	10.5° - 13°
+	Jupiter
+	11°
+	7.4° - 9.3°
+	Mars
+	17°
+	14.2° - 15.5°
+	Venus
+	9°
+	5.2° - 5.8°
+	Mercury
+	13°
+	9.5° - 13.2°
+	3
+Comparative Analysis:
+The discrepancy between the Hellenistic (Ptolemy) and Medieval (Al-Biruni) values is significant. For Mars, the difference is 2.5° to 5.5° (11.5° vs 17°). This has profound implications for computational astrology: using Al-Biruni’s values extends the period of "Combustion" and "Under the Beams," effectively narrowing the window of planetary power.
+* Insight on Mars: The jump to 17° for Mars in the Al-Biruni tradition likely accounts for the planet's redness, which is more easily absorbed by the atmosphere (Rayleigh scattering affects blue light, but atmospheric dust affects all, and the visual contrast of red against a blue/purple twilight is lower than white light).
+* Computational Strategy: A robust system should allow the user to select the "Ptolemaic Mode" (Table 2) or the "Medieval/Biruni Mode" (Table 3), as the resulting delineation of planetary strength will differ. For a strict Hellenistic reconstruction, Table 2 (Planetary Hypotheses) is the gold standard.
+3.3. Modern Reconstructions: The Schoch Limit
+For context, modern archaeoastronomers like Carl Schoch have reconstructed the actual AV values based on Babylonian observations. Schoch's values are variable, depending on the magnitude of the planet at the specific event. For instance, Venus at Evening Last (EL) is magnitude -3.2 requiring an AV of 5.2°, while Mars at Morning First (MF) is magnitude +1.8 requiring 15.5°.4 These values confirm that Al-Biruni’s "conservative" values are often closer to the observational reality for dimmer phases, while Ptolemy’s values are idealized averages.
+4. Solar Proximity: The Zones of Insolation
+In the astrological narrative, as a planet approaches the Sun, it enters zones of increasing heat and obscuration. These zones are not merely about visibility but about the planet's agency and ability to manifest its significations. The tradition delineates three distinct zones: Under the Beams, Combustion, and Cazimi.
+4.1. Under the Beams (Hypaugos)
+The condition of being "Under the Beams" (hypaugos) is the state of being invisible due to the Sun's proximity, yet not close enough to be scorched.
+* Standard Definition: A planet is Under the Beams when it is within 15° of the Sun.11
+* Porphyry & Rhetorius: Both Porphyry and Rhetorius explicitly define this limit. Rhetorius equates "Under the Beams" with the range of 15 degrees, stating that planets in this zone are hidden and their powers internalized.11
+* Variable Definition: Some texts suggest the "Under the Beams" limit should match the specific AV of the planet (e.g., Saturn is under beams at 13°, Venus at 5°). However, for the purpose of chart interpretation (determining the Lord of the Nativity or planetary strength), the 15° heuristic is the standard "rule of thumb" in the Hellenistic tradition.11
+* Implication: A planet under the beams is often described as "hidden" or acting secretly. It loses its ability to witness the Ascendant effectively if the Sun intervenes.
+4.2. Combustion (Kaustis / Iḥtirāq)
+Combustion is a destructive state. The planet is not just hidden; it is overwhelmed, its distinct nature burned away by the solar fire.
+* Threshold: The consensus in the developed Medieval tradition (derived from earlier sources) is 8° from the Sun.12
+* Historical Nuance: In the earliest Hellenistic texts (e.g., Dorotheus, Valens), the distinction between "Under Beams" and "Combust" is often fluid, simply referring to invisibility. However, by the time of Rhetorius and the Arabic translations, the 8° limit became a hard boundary for "Combustion" proper.14
+* Effects: A combust planet is considered debilitated, erratic, or malefic. Its significations are destroyed or corrupted.
+4.3. Cazimi (In Corde Solis)
+The "Heart of the Sun" (Cazimi, from Arabic kaṣmīmī) is a zone of singular exception. At the exact center of the conjunction, the planet is no longer burned but sits on the throne of the King (the Sun), sharing in his power.
+* Precision Threshold: The strict definition is within 0° 16' (16 minutes of arc) or 0° 17' of the Sun’s center.11
+* Astronomical Basis: This value corresponds roughly to the apparent semi-diameter of the solar disc (~16'). A planet within this limit is astronomically "transiting" the solar disk (if nodes align) or is strictly conjoined in longitude within the solar body.
+* Source: The term cazimi and its specific minute-based definition appear in Rhetorius and are solidified in Medieval astrology (Al-Biruni). It is considered a state of immense strength ("bonification"), overriding the debility of combustion.14
+4.4. Mitigation: The Chariot (Harma)
+A planet within the danger zones (Combust or Under Beams) can be protected if it is in its own "Chariot" (Harma).
+* Definition: A planet is in its Chariot if it is located in its own Domicile, Exaltation, or Bounds (Terms) while being close to the Sun.11
+* Effect: The "Chariot" acts as a shield. The planet acts "secretly" or from a protected position rather than being destroyed. It retains its agency despite the solar proximity.
+5. The Synodic Cycle: Phase Enumeration and Meaning
+Phasis is not a binary state (visible/invisible) but a cyclical narrative. Hellenistic astrologers enumerated this cycle into specific stages, each carrying distinct prognostic meanings. The cycle differs for Superior Planets (Mars, Jupiter, Saturn) and Inferior Planets (Venus, Mercury) due to their heliocentric positions relative to Earth.
+5.1. The Superior Planet Cycle
+The Superiors are slower than the Sun. The Sun catches up to them, overtakes them, and moves past them.
+1. Conjunction: The planet is invisible, hidden behind the Sun.
+2. Heliacal Rising (Morning First - MF): The planet emerges from the Sun’s beams in the East, visible just before sunrise.
+   * Condition: Planet is Oriental. Solar Depression    AV (Table 2).
+   * Meaning: Birth, youth, high energy, moisture. The planet is "making a phasis" and is extremely powerful.2
+   3. Morning Station (First Station -   ): The planet slows and turns Retrograde.
+      * Geometry: ~120° elongation from Sun (varies by planet).
+      * Meaning: Intensification, internal processing, reversal of affairs.
+      4. Acronychal Rising (Opposition -   ): The planet rises in the East exactly as the Sun sets in the West.
+         * Geometry: 180° elongation.
+         * Visibility: Visible all night. This is the planet's point of maximum brightness (perigee).
+         * Terminological Note: Ancient texts often call this "Acronychal Rising" (Akronuktos), meaning "rising at nightfall." It corresponds to the astronomical opposition.18
+         5. Cosmic Setting: The planet sets in the West exactly as the Sun rises in the East.
+         * Definition: This marks the end of the Acronychal period. It is the "True Morning Setting".20 The planet is visible setting at dawn.
+         6. Evening Station (Second Station -   ): The planet turns Direct.
+         7. Heliacal Setting (Evening Last - EL): The planet is visible for the last time in the West after sunset, before being overtaken by the Sun’s beams.
+            * Condition: Planet is Occidental. Solar Depression    AV.
+            * Meaning: Old age, completion, weakness, dryness. The planet is "dying" into the Sun.2
+5.2. The Inferior Planet Cycle (Venus & Mercury)
+Venus and Mercury are tied to the Sun and never form an opposition. Their cycle is defined by two conjunctions: Inferior (Retrograde) and Superior (Direct).
+               1. Superior Conjunction: The planet is on the far side of the Sun, moving Direct. Invisible.
+               2. Heliacal Rising (Evening First - EF): The planet emerges in the West after Sunset. It becomes the "Evening Star" (Hesperos).
+               * Condition: Occidental. Elongation > AV (Evening value).
+               3. Maximum Elongation (Evening): Furthest distance from Sun in the West.
+               4. Evening Station (Retrograde Station): The planet turns Retrograde, beginning its descent toward the Sun.
+               5. Heliacal Setting (Evening Last - EL): The planet disappears in the West, entering the beams while Retrograde.
+               6. Inferior Conjunction: The planet passes between Earth and Sun. Potential for Cazimi.
+               * Note: This is the "New Venus" phase.
+               7. Heliacal Rising (Morning First - MF): The planet emerges in the East before Sunrise, still Retrograde or just turning Direct. It becomes the "Morning Star" (Phosphoros / Lucifer).
+               * Condition: Oriental. Elongation > AV (Morning value).
+               8. Morning Station (Direct Station): The planet turns Direct.
+               9. Maximum Elongation (Morning): Furthest distance from Sun in the East.
+               10. Heliacal Setting (Morning Last - ML): The planet disappears in the East, accelerating toward Superior Conjunction.
+5.3. Valens on Venusian Phases
+Vettius Valens provides specific interpretive nuances for Venus's phases. He associates the Morning Star (Oriental) phase with "desire, love, and heat," aligning it with the moist/hot nature of a fertile youth. Conversely, he links the Evening Star (Occidental) phase with "pure trades, paint, beauty, and dyeing," suggesting a more aesthetic, refined, but perhaps less biologically primal energy.21 This underscores that phasis is not just about strength, but about the quality of manifestation.
+6. Orientality and Occidentality: The Geometry of Sect
+A critical component of planetary strength, particularly regarding Sect (Hairesis), is the distinction between Oriental (Heos) and Occidental (Hesperios) placement. This concept causes confusion because it can refer to the horizon (Houses) or the Sun (Phase). In the context of Phasis and Sect, it strictly refers to the relationship with the Sun.
+6.1. Technical Definitions
+               * Oriental (Morning): A planet that rises before the Sun.
+               * Geometric Check: If the planet's longitude is less than the Sun's (e.g., Planet at 10° Aries, Sun at 20° Aries), it rises first. In a 360° circle, the Planet is between 0° and 180° behind the Sun in zodiacal order (or 0° to 180° "west" of the Sun).
+               * Visual: Visible in the East before dawn.
+               * Occidental (Evening): A planet that sets after the Sun.
+               * Geometric Check: If the planet's longitude is greater than the Sun's (e.g., Sun at 20° Aries, Planet at 5° Taurus), it sets later.
+               * Visual: Visible in the West after sunset.23
+6.2. Sect Interaction and Planetary Strength
+The Oriental/Occidental status modifies the "Sect" allegiance of the planets, particularly Mercury.
+               * Superior Planets (Mars, Jupiter, Saturn):
+               * They are strongest and most effective when Oriental (rising before the Sun). This mimics the solar, diurnal nature (emitting light).
+               * Ptolemy and Valens agree that Superiors are "bonified" by orientality.23
+               * Inferior Planets (Venus, Mercury):
+               * Mercury: Mercury is considered Diurnal when Oriental (Morning Star) and Nocturnal when Occidental (Evening Star). This phase switch is the primary determinant of Mercury's sect status in a chart.25
+               * Venus: Venus is generally considered stronger or more comfortable when Occidental (Evening Star), aligning with her Nocturnal sect nature (cool and moist). However, as noted in Section 5.3, Valens grants her active power ("heat") when Oriental.21
+6.3. Doryphory (Spear-bearing)
+The concept of Doryphory—bodyguards of the luminaries—relies on this distinction. In a Day chart (Sun), the Sun is protected by Oriental planets (rising before him). In a Night chart (Moon), the Moon is protected by Occidental planets (following her). This geometric locking of Phasis to Sect is central to Hellenistic chart weighting.
+7. Computational Framework and Implementation
+To implement a compliant engine for Planetary Phasis, the following algorithmic logic should be employed. This logic integrates the Ptolemaic/Valens definitions with the necessary computational geometry.
+Step 1: Ephemeris Calculation
+Calculate the True Geocentric Longitude (  ) and Latitude (  ) for the Sun (  ) and the Planet (  ) at the time of interest (  ).
+Step 2: Solar Elongation and Orientation
+Calculate the elongation    (normalized to 0-360).
+               * If    (or   ): Planet is Oriental (Rises before Sun).
+               * If   : Planet is Occidental (Sets after Sun).
+Step 3: Solar Proximity Check
+Determine the proximity status using the standard Hellenistic/Medieval thresholds.
+Table 4: Solar Proximity Logic
+Condition
+	Threshold (deg)
+	Logical Test
+	Cazimi
+	  
+ (17')
+	$
+	Combust
+	  
+
+	$0.283 <
+	Under Beams
+	  
+
+	$8.0 <
+	Free
+	  
+
+	$
+	Note: For "Chariot" mitigation, check if Planet is in its own Domicile, Exaltation, or Bounds while Combust/Under Beams.
+Step 4: Visibility Determination (The Phasis Check)
+This requires calculating the Arcus Visionis (  ). This is a vertical depression calculation, not longitudinal.
+Algorithm for Heliacal State:
+                  1. Retrieve AV Value (  ): Select the appropriate value from Table 2 (Ptolemaic) or Table 3 (Medieval) based on the user's desired tradition.
+                  2. Calculate Local Events:
+                     * Compute time of Planet Rise (  ) and Planet Set (  ).
+                     * At    (when Planet Altitude = 0), calculate the Sun's Altitude (  ).
+                     * At    (when Planet Altitude = 0), calculate the Sun's Altitude (  ).
+                        3. Apply Logic:
+                        * Heliacal Rising Condition: If Planet is Oriental AND   : VISIBLE (Morning Star).
+                        * Heliacal Setting Condition: If Planet is Occidental AND   : VISIBLE (Evening Star).
+                        * Note: The negative sign indicates depression below the horizon. If   , the Sun must be at -11° or lower.
+Step 5: Phase Identification (State Machine)
+Using the visibility data and elongation change (velocity), assign the specific phase:
+                           * If transitioning from Invisible to Visible (Oriental): Heliacal Rising (MF).
+                           * If transitioning from Visible to Invisible (Occidental): Heliacal Setting (EL).
+                           * If Oriental and Visible and Velocity    0: Morning Station.
+                           * If Visible and Elongation    180°: Acronychal Rising.
+8. Conclusion
+The computational definition of Planetary Phasis in Hellenistic and early Medieval astrology is a composite of geometry and observation. It is not sufficient to merely know where a planet is; one must know its relationship to the light. By adhering to the Arcus Visionis values of the Planetary Hypotheses (Table 2), defining Solar Proximity through the 15°/8°/17' zones (Table 4), and rigorously applying the Oriental/Occidental geometric check, a modern algorithm can faithfully reconstruct the "sky narrative" that guided astrologers for a millennium. This reconstruction reveals a dynamic cosmos where planets are not static data points, but actors stepping into and out of the light, speaking or falling silent in the presence of the Sun.
+________________
+Citations:
+1
+Works cited
+                              1. Understanding - Astronomical calculations - Heliacal rise of Sirius - IMCCE, accessed February 4, 2026, https://promenade.imcce.fr/en/pages6/724.html
+                              2. Heliacal risings and settings - Universal Workshop, accessed February 4, 2026, https://www.universalworkshop.com/heliacal-risings-and-settings/
+                              3. THE ARCUS VISIONES OF THE PLANETS ACCORDING TO DIFFERENT SOURCES - Astropolis, accessed February 4, 2026, https://astropolis.pl/applications/core/interface/file/attachment.php?id=118149
+                              4. Geniet: The criterion of Schoch, accessed February 4, 2026, http://www.archaeocosmology.org/eng/Schoch-criterion.htm
+                              5. Dependence of the arcus visionis on planetary magnitude as computed for... - ResearchGate, accessed February 4, 2026, https://www.researchgate.net/figure/Dependence-of-the-arcus-visionis-on-planetary-magnitude-as-computed-for-a-fixed-visual_fig4_254774771
+                              6. Almagest Book VIII: On the First and Last Visibilities of the Fixed Stars - Following Kepler, accessed February 4, 2026, https://jonvoisey.net/blog/2023/06/almagest-book-viii-on-the-first-and-last-visibilities/
+                              7. Planetary, Lunar, and Stellar Visibility - Sources of Computations and Cautions concerning Accuracy, accessed February 4, 2026, http://www.alcyone-ephemeris.info/plsv/documentation/accuracy.html
+                              8. Ptolemy's Canobic Inscription and Heliodorus' Observation Reports - SCIAMVS, accessed February 4, 2026, https://www.sciamvs.org/files/SCIAMVS_06_053-097_Jones.pdf
+                              9. An English Translation of Book One, Part A of the Planetary Hypotheses with Introduction and Commentary, accessed February 4, 2026, https://utoronto.scholaris.ca/bitstreams/a1d138bd-3e80-44ff-a910-c135e6f8507b/download
+                              10. Ptolemy Planetary Hypotheses (Goldstein) | PDF | Planets - Scribd, accessed February 4, 2026, https://www.scribd.com/document/925560886/Ptolemy-Planetary-Hypotheses-Goldstein
+                              11. Under the beams discrepancy? : r/astrology - Reddit, accessed February 4, 2026, https://www.reddit.com/r/astrology/comments/w4yl9m/under_the_beams_discrepancy/
+                              12. accessed February 4, 2026, https://www.scribd.com/document/320421556/Cazimi-Under-the-Sunbeams-Combust-the-Conjunctions-of-the-Sun-Journeys-in-the-Astral-Light#:~:text=under%20the%20sunbeams.-,Cazimi%20occurs%20when%20a%20planet%20is%20within%200%C2%B017,more%20spiritual%20realms%20focused%20internally.
+                              13. Combust - STA School of Traditional Astrology, accessed February 4, 2026, https://sta.co/portal/mod/glossary/showentry.php?eid=317
+                              14. Cazimi, Under The Sunbeams & Combust - The Conjunctions of The Sun - Journeys in The Astral Light | PDF | Mercury (Planet) - Scribd, accessed February 4, 2026, https://www.scribd.com/document/320421556/Cazimi-Under-the-Sunbeams-Combust-the-Conjunctions-of-the-Sun-Journeys-in-the-Astral-Light
+                              15. Trying to understand Combust/Cazimi planets : r/Advancedastrology - Reddit, accessed February 4, 2026, https://www.reddit.com/r/Advancedastrology/comments/1gj8ai1/trying_to_understand_combustcazimi_planets/
+                              16. Rhetorius of Egypt | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/713126441/Rhetorius-of-Egypt
+                              17. Under the Beams, Combustion and Cazimi - Juanita Benedicto, accessed February 4, 2026, https://juanitabenedicto.com/under-the-beams-combustion-and-cazimi/
+                              18. Antiochus of Athens - Roger Pearse, accessed February 4, 2026, https://www.roger-pearse.com/weblog/tag/antiochus-of-athens/
+                              19. Heliacal rising - Wikipedia, accessed February 4, 2026, https://en.wikipedia.org/wiki/Heliacal_rising
+                              20. Heliacal and Acronychal Risings and Settings, accessed February 4, 2026, http://www.geoastro.de/heliacal/
+                              21. Pratical Guide To Hellenistic Astrology Text | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/954653433/Pratical-Guide-to-Hellenistic-Astrology-Text
+                              22. Anthology of Vettius Valens I | PDF | Planets In Astrology - Scribd, accessed February 4, 2026, https://www.scribd.com/document/952984173/Anthology-of-Vettius-Valens-I
+                              23. Glossaries - STA School of Traditional Astrology, accessed February 4, 2026, https://sta.co/portal/mod/glossary/print.php?id=1229&mode=letter&hook=O&sortkey&sortorder&offset=0&pagelimit=10
+                              24. Glossary of terms - STA School of Traditional Astrology, accessed February 4, 2026, https://sta.co/portal/mod/glossary/view.php?id=1229&mode=letter&hook=O&sortkey=&sortorder=
+                              25. Astrology of sect - Wikipedia, accessed February 4, 2026, https://en.wikipedia.org/wiki/Astrology_of_sect
+                              26. The Zodiacal Riddle of Vettius Valens | The Classical Astrologer, accessed February 4, 2026, https://classicalastrologer.com/2019/02/18/14914/
+                              27. Ptolemy's Planetary Theory (PHD - Thesis) | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/925560526/Ptolemy-s-Planetary-Theory-PhD-Thesis
+                              28. Venus - Morning Star, Evening Star | PDF | Planets In Astrology - Scribd, accessed February 4, 2026, https://www.scribd.com/document/937055313/Venus-Morning-Star-Evening-Star

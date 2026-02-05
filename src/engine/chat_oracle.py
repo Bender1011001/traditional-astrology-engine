@@ -33,6 +33,20 @@ class CircuitBreaker:
 
 _oracle_breaker = CircuitBreaker()
 
+BINDER_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "Binder1.txt"))
+
+def _load_binder_context():
+    if not os.path.exists(BINDER_PATH):
+        return ""
+    try:
+        with open(BINDER_PATH, "r", encoding="utf-8") as f:
+            return f.read()
+    except Exception as e:
+        print(f"Error loading binder context: {e}")
+        return ""
+
+BINDER_CONTEXT = _load_binder_context()
+
 def _openrouter_request(messages, temperature, max_tokens, top_p=None):
     if not _oracle_breaker.allow_request():
         return "Error: Circuit Breaker Open (Too many failures). info: The Oracle is currently meditating (service unavailable)."
@@ -43,8 +57,9 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
 
     try:
         base_url = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1/chat/completions")
-        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3-flash-preview")
-        timeout = float(os.getenv("OPENROUTER_TIMEOUT", "30"))
+        # Default to gemini-pro-1.5 for better reasoning with large context
+        model = os.getenv("OPENROUTER_MODEL", "google/gemini-pro-1.5")
+        timeout = float(os.getenv("OPENROUTER_TIMEOUT", "120")) # Increased timeout for large context
 
         headers = {
             "Authorization": f"Bearer {api_key}",
@@ -78,15 +93,22 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
             _oracle_breaker.record_failure()
             err = result.get("error", {})
             msg = err.get("message") if isinstance(err, dict) else str(err)
+            print(f"OpenRouter Error Payload: {result}")
             return f"Oracle Communication Error: {msg}"
 
         choices = result.get("choices", []) if isinstance(result, dict) else []
         if not choices:
             _oracle_breaker.record_failure()
+            print(f"OpenRouter result (no choices): {result}")
             return "No response from engine."
 
         message = choices[0].get("message", {}) or {}
         content = message.get("content", "")
+        # Support for Thinking Models (e.g. Gemini 2.0 Thinking, Gemini 3 Preview)
+        # where output may be in 'reasoning'
+        if not content and "reasoning" in message:
+            content = message.get("reasoning", "")
+
         if isinstance(content, list):
             parts = []
             for part in content:
@@ -97,7 +119,7 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
             content = "".join(parts)
             
         _oracle_breaker.record_success()
-        return str(content).strip() or "No response from engine."
+        return str(content).strip() or "No response from engine. (Note: Engine may have filtered content or produced empty reasoning)"
     except urllib.error.HTTPError as e:
         _oracle_breaker.record_failure()
         try:
@@ -120,14 +142,13 @@ def get_chat_response(query: str, context: str) -> str:
 
         system_prompt = (
             "You are the 'Codex Caelestis', a highly advanced AI Astrology Oracle. "
-            "You have generated a detailed 'Forensic Audit' of a natal chart. "
-            "The user is asking a question about this specific reading.\n\n"
+            "You have access to the 'Binder1.txt' source material for traditional astrology.\n\n"
+            "SOURCE MATERIAL (Binder1.txt):\n"
+            f"{BINDER_CONTEXT[:50000]}... (TRUNCATED FOR SYSTEM PROMPT)\n\n" # We'll handle full context in the user message for better attention
             "INSTRUCTIONS:\n"
-            "1. Answer strictly based on the provided chart data.\n"
+            "1. Answer strictly based on the provided chart data and the traditional principles in the binder.\n"
             "2. Use a tone that is authoritative, slightly archaic/hermetic, yet precise and helpful.\n"
-            "3. If the reading doesn't contain the answer, say so, but offer a hypothesis based on general astrological principles if applicable (differentiating it from the hard data).\n"
-            "4. Keep answers concise but insightful.\n"
-            "5. FRAMEWORK: Always frame your answers as traditional symbolic analysis, not deterministic physical prediction. Use phrases like 'The tradition suggests...', 'Symbolically, this indicate...', or 'In the grammar of the heavens...'."
+            "3. FRAMEWORK: Always frame your answers as traditional symbolic analysis."
         )
 
         user_prompt = (
@@ -152,56 +173,85 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
     if not context:
         return ""
 
-    max_chars = int(os.getenv("PLAIN_READING_MAX_CHARS", "12000"))
+    # Increase max chars to handle the binder better if passed in turn 1
+    max_chars = int(os.getenv("PLAIN_READING_MAX_CHARS", "100000"))
     if len(context) > max_chars:
         context = context[:max_chars]
 
-    # Use a lower default temperature for plain readings to ensure reproducibility
     temperature = float(os.getenv("OPENROUTER_PLAIN_TEMPERATURE", "0.2"))
-    max_tokens = int(os.getenv("OPENROUTER_PLAIN_MAX_TOKENS", os.getenv("OPENROUTER_MAX_TOKENS", "800")))
-    # Tighter top_p for explanation consistency
+    max_tokens = int(os.getenv("OPENROUTER_PLAIN_MAX_TOKENS", "8000")) # Expanded for high-volume dossiers
     top_p = float(os.getenv("OPENROUTER_PLAIN_TOP_P", "0.85"))
 
     system_prompt = (
-        "You are a plain-language astrology interpreter. "
-        "Explain the reading in everyday terms for a general audience while going into as much detail as possible. "
-        "Make the explanation very understandable, concrete, and grounded in the provided material. "
-        "Use second-person language and favor frequent \"you\" statements. "
-        "Avoid jargon. If you must use a technical term, define it in one short clause. "
-        "Use short paragraphs, clear cause-and-effect phrasing, and a calm, practical tone. "
-        "Do not mention you are an AI and do not mention JSON. "
-        "IMPORTANT: Always maintain a probabilistic and symbolic tone. Avoid saying 'You will X' or 'This means Y will happen'. Instead, use 'This suggests a theme of X' or 'The traditional archetypes point toward Y'. "
-        "CRITICAL: Be deterministic. Given the same input data, produce the exact same structure and explanation."
+        "You are a master plain-language astrology interpreter and expert in the 'Binder1.txt' source material. "
+        "Your goal is to provide a massive, 20-page style forensic analysis of the provided chart. "
+        "Use second-person language ('you'). Maintain a professional, deep, and slightly authoritative tone. "
+        "Do NOT compress your knowledge. Be exhaustive."
     )
 
     if tier == 'free':
-        # Free Tier: Single iteration, focused on Temperament/Character only.
+        # Free Tier: Single iteration
         questions = [
-            f"Explain the user's Natural Temperament and Core Character based on this data. Keep it concise (under 300 words). Do NOT analyze life paths, forecasting, or hidden architecture yet.\n\n{context}"
+            f"Explain the user's Natural Temperament and Core Character based on this data and the Binder1 context. Keep it under 300 words.\n\nCHART DATA:\n{context}"
         ]
     else:
-        # Paid Tier: Full analysis loop (5 iterations)
+        # Paid Tier: High-Volume Multi-Module Interrogation
         questions = [
-            f"Explain this in regular terms (Full Comprehensive Report):\n\n{context}",
-            "what else can you tell me (Life Path & Social)?",
-            "what else (Hidden Architecture/Financial)?",
-            "anything else (Forecasting/Timeline)?",
-            "is that all (Final Summary)?"
+            f"REFERENCE MATERIAL (Binder1.txt):\n{BINDER_CONTEXT}\n\nCHART DATA:\n{context}\n\nTASK (Turn 1): Provide a foundational interpretation of core character, temperament, and soul architecture. Aim for at least 800 words, going into extreme detail on the hierarchies of causation.",
+            "TASK (Turn 2): Deep-dive into Professional & Social Destiny. Analyze career, wealth, and public status based on the Lot of Fortune, MC, and relevant ministers. Provide at least 800 words of tactical analysis.",
+            "TASK (Turn 3): Deep-dive into the Private Soul & Psychology. Analyze fears, hidden assets, and the subconscious houses (12th, 8th, 4th). Provide at least 800 words on the internal architecture.",
+            "TASK (Turn 4): Deep-dive into Relationships, Love, and Social Dynamics. Analyze partner choice and major interpersonal patterns. Aim for 800 words of relational mapping.",
+            "TASK (Turn 5): Forecasting & Universal Override. Analyze major upcoming triggers (2025-2030) and the interaction between natal particulars and universal causes. Provide 800 words of temporal mapping.",
+            "FINAL TASK: Synthesize the entire conversation into a massive, cohesive, premium Dossier for the customer. This MUST be a comprehensive manuscript (aiming for 5,000+ words). Use clear chapters, elaborate on every point discussed, and do not summarize. We need the full volume of your knowledge for this practitioner-grade report."
         ]
 
     messages = [{"role": "system", "content": system_prompt}]
     responses = []
 
-    for question in questions:
-        messages.append({"role": "user", "content": question})
-        response = _openrouter_request(messages, temperature, max_tokens, top_p=top_p)
+    responses = []
+    
+    # We use a token-efficient "chaining" pattern to avoid hitting daily limits.
+    # Turns 2-5 only see the Chart Data and the PREVIOUS answer.
+    # Turn 6 (Synthesis) sees all intermediate answers.
+    
+    chart_data_only = f"CHART DATA:\n{context}"
+    
+    for i, question in enumerate(questions):
+        print(f"Turn {i+1} of {len(questions)}...")
+        
+        if i == 0:
+            # Turn 1: Full Binder + Full Chart Data
+            current_messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": question}
+            ]
+        elif i < len(questions) - 1:
+            # Intermediate Turns: Chart Data + Previous Answer
+            current_messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": chart_data_only},
+                {"role": "assistant", "content": responses[-1]},
+                {"role": "user", "content": question}
+            ]
+        else:
+            # Final Synthesis: Aggregate all answers
+            current_messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": "The following are deep-dive analyses performed on the chart data. Synthesize them into the final dossier."}
+            ]
+            for j, resp in enumerate(responses):
+                current_messages.append({"role": "user", "content": f"Module {j+1} Analysis: {resp}"})
+            current_messages.append({"role": "user", "content": question})
+
+        response = _openrouter_request(current_messages, temperature, max_tokens, top_p=top_p)
+        
         if not response or response.startswith("Oracle Communication Error") or response.startswith("Error:"):
-            # If error on first attempt, return the error so we can see it.
             if len(responses) == 0:
-                print(f"LLM Error: {response}") # Log it
                 return response or "Unknown Error"
             break
+            
         responses.append(response)
-        messages.append({"role": "assistant", "content": response})
 
-    return "\n\n".join(r for r in responses if r).strip()
+    # Return the final synthesized document
+    return responses[-1].strip()
+

@@ -1,0 +1,405 @@
+﻿The Calculus of Fate: A Comprehensive Catalog and Analysis of Hellenistic and Persian Astrological Lots
+1. Introduction
+The history of horoscopic astrology is underpinned by a tension between the observation of physical celestial bodies and the calculation of immaterial, geometric points. These points, known in the Greek tradition as kleroi (Lots) and in the Arabic tradition as siham (Shares or Parts), represent a distinct metaphysical technology. Unlike planets, which possess mass and visible light, Lots are purely mathematical constructs—syntheses of planetary arcs projected onto the local horizon. They serve as phantom coordinates where specific topics (wealth, marriage, war, barley, wheat) are said to manifest in the life of the native.
+This report provides an exhaustive, source-faithful catalog and analysis of these Lots, restricting its scope to two foundational texts that bookend the transmission of this technique from Late Antiquity to the Islamic Golden Age: the Introductory Matters (Eisagogika) of the 4th-century Hellenistic astrologer Paulus Alexandrinus, and the Book of Instruction in the Elements of the Art of Astrology (Kitāb al-Tafhīm) by the 11th-century Persian polymath Abū al-Rayḥān al-Bīrūnī.
+While modern astrological practice has largely reduced this system to a single point—the Lot of Fortune—the historical reality is a vast, intricate algorithm of destiny. Paulus Alexandrinus presents the Lots as a "Hermetic" heptad, a closed system of seven planetary lots designed to map the soul's descent into matter and its volitional struggles.1 Seven centuries later, al-Bīrūnī documents an explosion of this technique, cataloging nearly a hundred lots that extend the mathematical logic to the minutiae of agrarian and social life, from the price of cotton to the fidelity of friends.2
+The following analysis treats these Lots primarily as mathematical constructions. By isolating the variables (Significator, Trigger, and Anchor) and analyzing the sect-based logic of their formulas, we reveal a sophisticated system of "celestial algebra" suitable for rigorous scholarly reference and computational modeling.
+________________
+2. Theoretical Framework and Computational Logic
+Before cataloging individual Lots, it is necessary to establish the computational and doctrinal framework that governs their construction in both the Hellenistic and Persian traditions.
+2.1 The Geometry of Projection
+Every Lot is constructed via a tripartite formula involving three points:
+1. Point A (Start): The trigger or cause.
+2. Point B (End): The significator or effect.
+3. Point C (Anchor): The point of projection (almost invariably the Ascendant).
+The formula calculates the arc distance from A to B (measured in the order of signs) and adds this arc to the longitude of C.
+  
+
+Note: If the result is negative, 360° is added. If it exceeds 360°, 360° is subtracted.
+This geometry is not arbitrary. It takes a "celestial phase" (the relationship between two planets) and grounds it in the "terrestrial moment" (the Ascendant). If the Sun and Moon are 90° apart in the sky, the Lot of Fortune will always be 90° from the Ascendant. The Lot thereby replicates the planetary aspect on the framework of the local horizon.
+2.2 The Doctrine of Sect (Hairesis)
+A critical distinction between modern simplifications and the source texts is the treatment of Sect—the distinction between Day charts (Sun above the horizon) and Night charts (Sun below the horizon).
+* Paulus Alexandrinus: Rigorously applies sect reversal. For Paulus, the "Diurnal" formula is valid only when the Sun is above the earth. At night, the formula reverses (   becomes   ) to reflect the change in the "sect light" (Luminary of the time).4
+* Al-Bīrūnī: Al-Bīrūnī affirms this necessity, criticizing those who neglect it. His catalog explicitly lists separate instructions for "Diurnal" and "Nocturnal" calculations, noting that for night births, "points 1 and 2 are interchanged".6
+2.3 Primary vs. Derived Variables
+The system is hierarchical.
+   * Primary Variables: The Ascendant, Sun, and Moon. These generate the two "Master Lots" (Fortune and Spirit).
+   * Derived Variables: The Lots of Fortune and Spirit themselves become variables in subsequent formulas. For example, the Lot of Eros in the Hermetic system is not derived from the Ascendant directly, but from the relationship between Spirit and Venus. This creates a dependency chain in computational modeling: Fortune and Spirit must be calculated before the planetary lots.7
+________________
+3. The Primary Lights: Fortune, Spirit, and the Foundation
+The core of the system in both Paulus and al-Bīrūnī rests on the relationship between the Sun (Sol) and the Moon (Luna). These are not merely points of wealth but represent the fundamental duality of human existence: the Body (Lunar/Fortune) and the Soul/Mind (Solar/Spirit).
+3.1 The Lot of Fortune (Kleros Tyches)
+
+
+Attribute
+	Detail
+	Source
+	Paulus (Ch. 23); al-Bīrūnī (Tafhīm v. 476) 1
+	Native Name
+	Tyche (Greek); Sahm al-sa‘āda (Arabic: Part of Happiness)
+	Concept
+	The physical body, material substance, happenstance, health, external circumstances.
+	Sect Sensitive
+	Yes (Both authors)
+	Mathematical Construction:
+   * Diurnal Formula:
+  
+   * Nocturnal Formula:
+  
+Rationale and Doctrine:
+      * Technical: The formula measures the elongation of the Moon from the Sun (the lunar phase). By projecting this arc from the Ascendant, the Lot locates the "Lunar Ascendant." It distributes the light of the Moon relative to the sunrise.
+      * Interpretive: Fortune represents Tyche—that which "befalls" the native without choice. It rules the body, sickness, and material acquisition. Paulus equates it to the "Moon's power" on earth.8 Al-Bīrūnī links it to "happiness" in the sense of material well-being and prosperity.6
+      * Lord of the Lot Protocol: The ruler of the sign of Fortune is the primary significator for material prosperity. If this Lord is in the 10th place from Fortune, it indicates eminent success (see Section 6).5
+3.2 The Lot of Spirit (Kleros Daimonos)
+
+
+Attribute
+	Detail
+	Source
+	Paulus (Ch. 23); al-Bīrūnī (Tafhīm v. 476) 6
+	Native Name
+	Daimon (Greek); Sahm al-ghayb (Arabic: Part of the Unseen/Spirit)
+	Concept
+	The mind, volition, career, soul, proairesis (choice), religion.
+	Sect Sensitive
+	Yes (Both authors)
+	Mathematical Construction:
+      * Diurnal Formula:
+  
+      * Nocturnal Formula:
+  
+Rationale and Doctrine:
+         * Technical: The arc is the same as Fortune but reversed. It measures the distance from the Moon to the Sun.
+         * Interpretive: Spirit represents Daimon—the "god within" or the intellect. It signifies what the native does (volition) rather than what they suffer (fortune). Paulus explicitly links it to "soul, temper, mindfulness, and every power".9 Al-Bīrūnī connects it to "religion" and "the unseen," highlighting its non-material nature.6
+3.3 The Lot of Basis (Kleros Baseos)
+
+
+Attribute
+	Detail
+	Source
+	Paulus (Ch. 23); Not explicitly primary in al-Bīrūnī's standard list.10
+	Native Name
+	Basis (Foundation)
+	Concept
+	The vital force, the foundation of the horoscope, the synthesis of Body and Soul.
+	Sect Sensitive
+	No (Depends on shortest arc)
+	Mathematical Construction:
+         * Universal Formula:
+         1. Calculate the absolute distance between Fortune (  ) and Spirit (  ).
+         2. If   , use the arc directly.
+         3. Formula:
+  
+         4. Alternate (Vector): If    is shortest, use   . If    is shortest, use   .
+Rationale and Doctrine:
+            * Technical: By always selecting the shortest arc, the Lot of Basis is geometrically forced to fall below the horizon (relative to the Ascendant-Descendant axis established by the Lights).
+            * Interpretive: It represents the "foundation" or "root" of the life force. Paulus calls it the "giver of breath" (pneuma) to the Ascendant.11 It is a point of stability and physical vitality, literally underpinning the chart.
+3.4 The Lot of Exaltation (Kleros Hypsomatos)
+
+
+Attribute
+	Detail
+	Source
+	Paulus (Ch. 23).5
+	Concept
+	Eminence, high rank, nobility, the specific "glory" of the nativity.
+	Sect Sensitive
+	Yes
+	Mathematical Construction:
+            * Diurnal Formula:
+  
+            * Nocturnal Formula:
+  
+Rationale and Doctrine:
+               * Technical: This is unique among lots as it uses fixed zodiacal degrees rather than planetary positions as the starting point.    Aries is the exaltation degree of the Sun;    Taurus is the exaltation degree of the Moon.
+               * Interpretive: It measures the distance of the Lights from their places of maximum dignity (Exaltation). It signifies the potential for the native to rise to high rank or "exalted" status. It is a measure of the "deviation from perfection"—the closer the luminary is to its exaltation, the closer this Lot is to the Ascendant.9
+________________
+4. The Hermetic Heptad: The Planetary Lots of Paulus
+Paulus Alexandrinus transmits a specific, closed system of seven Lots attributed to Hermes Trismegistus, known as the Panaretus. These are strictly "Planetary Lots," assigning one lot to each of the five non-luminary planets.
+Crucial Distinction: Unlike later Arabic simplifications (which often used simple    formulas), the Hermetic Lots of Paulus integrate the metaphysical variables of Fortune and Spirit into the planetary calculations. This binds the planets to the fundamental Soul/Body duality.
+4.1 The Lot of Necessity (Kleros Anankes) — Mercury
+                  * Source: Paulus Alexandrinus.12
+                  * Attribution: Mercury.
+Mathematical Construction:
+                  * Diurnal:
+  
+                  * Nocturnal:
+  
+                  * Note on Variance: This differs from Vettius Valens, who calculates Necessity using Spirit and Fortune. Paulus explicitly uses Mercury.13
+Rationale and Doctrine:
+                     * Why Mercury & Fortune? Fortune represents physical circumstances; Mercury represents the intellect and contest.
+                     * Meaning: Necessity signifies "constraints, submissions, struggles, and wars." It represents the intellect's struggle against material reality. It governs "enmities, hatreds, and condemnations".12 It is the "constraining" principle of Mercury—the logical inevitability of fate.
+4.2 The Lot of Eros (Kleros Erotos) — Venus
+                     * Source: Paulus Alexandrinus.12
+                     * Attribution: Venus.
+Mathematical Construction:
+                     * Diurnal:
+  
+                     * Nocturnal:
+  
+                     * Note on Variance: Critical divergence. Al-Bīrūnī and Valens often calculate the "Lot of Love" as   . Paulus’s "Lot of Eros" is distinct because it uses the planet Venus.6
+Rationale and Doctrine:
+                        * Why Venus & Spirit? Spirit represents Volition (Will); Venus represents Desire.
+                        * Meaning: Eros signifies "appetites and voluntative desires." It is the movement of the Will toward the object of pleasure. It governs "friendship, mutual favor," and erotic gratification.5 Unlike Fortune-based lots, this is Spirit-based, implying active pursuit of desire rather than passive receipt.
+4.3 The Lot of Courage (Kleros Tolmes) — Mars
+                        * Source: Paulus Alexandrinus.7
+                        * Attribution: Mars.
+Mathematical Construction:
+                        * Diurnal:
+  
+                        * Nocturnal:
+  
+Rationale and Doctrine:
+                           * Why Mars & Fortune? Mars is action/force; Fortune is the body.
+                           * Meaning: Courage becomes a cause of "boldness, treachery, might, and every villainy".7 It represents the application of force to material circumstances. Because it is Fortune-based (in the day), it often implies a reactive or circumstantial aggression rather than a purely voluntary one.
+4.4 The Lot of Victory (Kleros Nikes) — Jupiter
+                           * Source: Paulus Alexandrinus.9
+                           * Attribution: Jupiter.
+Mathematical Construction:
+                           * Diurnal:
+  
+                           * Nocturnal:
+  
+Rationale and Doctrine:
+                              * Why Jupiter & Spirit? Spirit is the Will; Jupiter is Grace/Abundance.
+                              * Meaning: Victory contributes to "trust, good expectation, contest, and every association".9 It is the Spirit-based counterpart to Courage. It represents the Will aligned with divine favor, resulting in success and "good hope."
+4.5 The Lot of Nemesis (Kleros Nemeseos) — Saturn
+                              * Source: Paulus Alexandrinus.15
+                              * Attribution: Saturn.
+Mathematical Construction:
+                              * Diurnal:
+  
+                              * Nocturnal:
+  
+Rationale and Doctrine:
+                                 * Why Saturn & Fortune? Saturn is Restriction/Time; Fortune is the Body.
+                                 * Meaning: Nemesis signifies "subterranean fates, everything ice-cold, impotence, exile, destruction, grief".15 It is the heavy hand of fate weighing upon the physical life. As a Fortune-based lot, it represents inescapable burdens, the "laws of consequence" that limit the native.
+________________
+5. The Persian Expansion: Al-Bīrūnī’s Catalog
+Writing in the 11th century, al-Bīrūnī documents a massive expansion of the Lot system. In the Tafhīm, the sparse spiritual lots of Paulus are joined by dozens of "Commodity Lots" and "Social Lots," reflecting the practical demands of medieval horary and mundane astrology. Al-Bīrūnī treats these mathematically, often grouping them by the planets involved.
+5.1 The "Social" Lots: Family and Relations
+Al-Bīrūnī refines the general significations of children and marriage into specific gendered and generational lots.
+5.1.1 Lot of Male Children
+                                 * Source: Al-Bīrūnī (Tafhīm).6
+                                 * Diurnal:
+  
+                                 * Nocturnal:
+  
+                                 * Rationale: Jupiter is the general significator of children; the Sun is the masculine luminary. Al-Bīrūnī notes a disagreement here, as "ancient scientists" (likely Dorotheus) used Saturn/Mars formulas, but he prefers the Jupiter/Sun synthesis for male offspring.
+5.1.2 Lot of Female Children
+                                    * Source: Al-Bīrūnī.3
+                                    * Diurnal:
+  
+                                    * Nocturnal:
+  
+                                    * Rationale: Combines the feminine benefic (Venus) with the feminine luminary (Moon).
+5.1.3 Lot of Friendship and Love (Sahm al-tahabbub)
+                                       * Source: Al-Bīrūnī.6
+                                       * Diurnal:
+  
+                                       * Nocturnal:
+  
+                                       * Conflict Note: This formula (  ) is mathematically identical to Valens's Lot of Eros, but al-Bīrūnī calls it "Friendship and Love." It is distinct from Paulus’s Venus-based Eros.
+                                       * Signification: Constancy in affairs, mutual benefit, and social cohesion.
+5.1.4 Lot of the Father
+                                          * Source: Al-Bīrūnī (citing Hermes).9
+                                          * Diurnal:
+  
+                                          * Nocturnal:
+  
+                                          * Rationale: Saturn and Sun are the diurnal/nocturnal fathers. The arc relates the two archetypes of authority.
+5.1.5 Lot of the Grandfather
+                                             * Source: Al-Bīrūnī.17
+                                             * Formula: Varied; Al-Bīrūnī discusses a "Lot of Grandparents" typically derived from the Lot of the Father moved to the 4th house logic, or
+  
+(implying the "father of the father").
+5.2 The "Commodity" Lots: Agrarian Calculus
+A distinctive feature of the Persian/Arabic tradition is the assignment of lots to specific crops. These formulas encode the "nature" of the commodity into planetary variables.
+5.2.1 Lot of Wheat (Hinta)
+                                                * Source: Al-Bīrūnī.3
+                                                * Diurnal:
+  
+                                                * Nocturnal:
+  
+                                                * Analytical Insight: This formula is identical to the Lot of Male Children. In a mundane context (ingress chart), it signifies Wheat (the "King of Crops," hence Sun/Jupiter). In a natal context, it signifies Sons. The interpretation depends entirely on the query context.
+5.2.2 Lot of Barley (Sha'ir)
+                                                   * Source: Al-Bīrūnī.18
+                                                   * Diurnal:
+  
+                                                   * Nocturnal:
+  
+                                                   * Rationale: Barley is a coarser, hardier grain than wheat, often harvested earlier. It is associated with the Moon (sustenance) but modified by Saturn (hard/cold/rustic), contrasting with the Solar/Jovial nature of Wheat.
+5.2.3 Lot of Rice (Aruz)
+                                                      * Source: Al-Bīrūnī.18
+                                                      * Diurnal:
+  
+                                                      * Nocturnal:
+  
+                                                      * Rationale: Rice requires heavy irrigation (Saturn ruling swamps/water retention) and provides abundance (Jupiter).
+5.2.4 Lot of Lentils and Iron
+                                                         * Source: Al-Bīrūnī.3
+                                                         * Diurnal:
+  
+                                                         * Nocturnal:
+  
+                                                         * Rationale: Mars rules iron and bitter tastes. Saturn rules dry legumes. The combination signifies hard, durable, or "black" crops and metals.
+5.3 The "Abstract" Qualities
+Al-Bīrūnī also lists lots for conditions of the soul and life, often renaming Hellenistic lots or providing variations.
+5.3.1 Lot of Poverty and Middling Intellect (Sahm al-faqr)
+                                                            * Source: Al-Bīrūnī.20
+                                                            * Diurnal:
+  
+                                                            * Nocturnal:
+  
+                                                            * Correlation: This is the reverse of Paulus’s Lot of Necessity. Al-Bīrūnī’s interpretation ("Poverty," "Middling Wit") aligns with the Hellenistic view of Necessity as "constraint" and "struggle." The Persian tradition specifically links this constraint to lack of strategic intelligence (Mercury).
+________________
+6. Interpretive Protocol: The Lord of the Lot
+A Lot is merely a point in the zodiac. Its power to act is entirely dependent on its Lord (Oikodespotes). Both Paulus and al-Bīrūnī adhere to a strict protocol for analyzing the Lord, which acts as the "Steward" of the Lot's topics.
+6.1 Identifying the Lord
+                                                               1. Calculate the longitude of the Lot.
+                                                               2. Identify the Domicile Ruler of that sign (e.g., Lot in Gemini    Mercury).
+                                                               3. Secondary: Al-Bīrūnī may also consider the Exaltation ruler or Term ruler, but the Domicile is the primary "Lord."
+6.2 The Condition of the Lord (Paulus Ch. 24)
+The standard of the Lord determines the quality of the Lot's manifestation.
+                                                                  1. Angularity (The Stakes):
+                                                                  * If the Lord is in an Angle (1st, 4th, 7th, 10th) or Succedent (5th, 11th) house, the lot is active, effective, and "loud."
+                                                                  * If the Lord is Cadent (3rd, 6th, 9th, 12th) or in "Declining" places, the lot is weak, obscure, or brings its topics through difficulty.11
+                                                                  2. The "10th Place" Rule (Eminence):
+                                                                  * This is the "Gold Standard" for the Lot of Fortune.
+                                                                  * Rule: If the Lord of Fortune is located in the 10th Sign counted from Fortune itself, the native attains exceptional eminence, power, and high office (praxis).
+                                                                  * Example: Fortune is in Aries. The 10th sign from Aries is Capricorn. If Mars (Lord of Aries) is in Capricorn, the condition is met. This is considered more powerful than the Lord being in the 10th house from the Ascendant.5
+                                                                  3. Witnessing and Maltreatment:
+                                                                  * Witnessing: The Lord must "see" (aspect) its own Lot. A Lord in aversion (unconjunct) to its Lot indicates that the topics of the Lot (e.g., wealth) slide away or cannot be managed by the native.
+                                                                  * Maltreatment: If the Lot or its Lord is squared/opposed by Malefics (Mars/Saturn) without the intervention of Benefics, the topic ends in ruin.
+                                                                  * Enclosure: Enclosure of the Lord by Benefics (Venus/Jupiter) is the highest protection.24
+6.3 Functional Roles
+                                                                  * The Lot is the Trigger: It signifies the topic (e.g., "Wheat" or "Marriage").
+                                                                  * The Lord is the Outcome: It signifies the result (e.g., "Abundant harvest" or "Difficult divorce").
+                                                                  * Synthesis: A Lot of Wheat in Taurus (fertile) with its Lord Venus in Virgo (fall/cadent) suggests a good potential crop (Taurus) that is ruined by poor management or pests (debilitated Lord).
+________________
+7. Comparative Analysis: Paulus vs. Al-Bīrūnī
+While sharing a common root, the two authors diverge in significant ways that affect computational modeling.
+Feature
+	Paulus Alexandrinus (Hellenistic)
+	Al-Bīrūnī (Persian/Arabic)
+	Scope
+	Focused on the "Hermetic Heptad" (7 Planetary Lots) + Lights.
+	Encyclopedic (97+ Lots), including commodities and specific relations.
+	Formula Logic
+	Complex interweaving of Fortune/Spirit/Planets.
+	Often simplifies to Asc + Planet A - Planet B (though retains Hermetic forms).
+	Lot of Eros
+	Uses Venus (  ).
+	Uses Spirit/Fortune (  ), calls it "Love & Friendship".
+	Lot of Necessity
+	Uses Mercury (  ).
+	Uses Mercury but calls it "Poverty/Middling Intellect".
+	Sect
+	Strict reversal logic is central to the "Tyche/Daimon" philosophy.
+	Maintains reversal but emphasizes practical application over philosophy.
+	Commodities
+	Absent.
+	Extensive (Wheat, Barley, Rice, etc.).
+	Primary Disagreement: The definition of the "Lot of Eros/Love."
+                                                                  * Software developers must distinguish between "Hermetic Eros" (Paulus) and "Lot of Friendship/Love" (Valens/Al-Bīrūnī). They are calculated differently and signify different nuances (Erotic Desire vs. Social Bond).
+________________
+8. Conclusion and Synthesis
+The system of Lots represents a "Shadow Zodiac"—a geometric overlay that personalizes the universal planetary positions.
+For the Hellenistic tradition (Paulus), Lots are a mechanism of the Soul's incarnation. By triangulating the Ascendant (Existence), the Sun (Spirit), and the Moon (Body), Paulus creates a map of "Necessity" and "Volition." The strict adherence to sect reversal underscores a dualistic worldview where Day and Night operate as fundamental metaphysical states.
+For the Persian tradition (al-Bīrūnī), the Lots become a mechanism of Universal Measurement. The expansion into commodities suggests a worldview where everything—from the soul's salvation to the price of lentils—is subject to the same celestial harmonic laws. The recurrence of formulas (e.g., Wheat = Male Children) indicates that al-Bīrūnī viewed the relationship between planets (e.g., Jupiter-Sun) as a fundamental archetype that manifests differently depending on the context (Agrarian vs. Familial).
+Recommendation for Computational Implementation:
+To model this system faithfully, software must:
+                                                                  1. Implement Sect as a Boolean Operator: Every formula must check is_day_chart before calculation.
+                                                                  2. Establish Dependency Trees: Calculate Fortune and Spirit first; pass them as variables to the Hermetic Lots.
+                                                                  3. Differentiate Homonyms: Distinctly label "Lot of Eros (Paulus)" and "Lot of Love (Al-Bīrūnī)" to avoid confusion.
+                                                                  4. Implement the 10th Place Logic: An automated analysis must check the condition of the Lord relative to the Lot's position, not just the Ascendant.
+By respecting these distinctions, one preserves the integrity of a technique that served for over a millennium as the primary tool for calculating the specificities of human fate.
+________________
+Key Formulas Summary Table
+Lot Name
+	Source
+	Day Formula
+	Night Formula
+	Signification
+	Fortune
+	Both
+	  
+
+	  
+
+	Body, Wealth
+	Spirit
+	Both
+	  
+
+	  
+
+	Soul, Career
+	Basis
+	Paulus
+	  
+
+	  
+
+	Foundation
+	Necessity
+	Paulus
+	  
+
+	  
+
+	Constraint, Struggle
+	Eros
+	Paulus
+	  
+
+	  
+
+	Desire, Appetite
+	Victory
+	Paulus
+	  
+
+	  
+
+	Success, Grace
+	Male Children
+	Al-Bīrūnī
+	  
+
+	  
+
+	Sons (or Wheat)
+	Friendship
+	Al-Bīrūnī
+	  
+
+	  
+
+	Love, Bonds
+	Works cited
+                                                                  1. Arabic parts - Wikipedia, accessed February 4, 2026, https://en.wikipedia.org/wiki/Arabic_parts
+                                                                  2. Reassessment of Islamic Astronomical Sciences, accessed February 4, 2026, http://www.ajbasweb.com/old/ajbas/2011/July-2011/99-105.pdf
+                                                                  3. Al Biruni - Parts | PDF | Teaching Methods & Materials - Scribd, accessed February 4, 2026, https://www.scribd.com/doc/212642540/Al-Biruni-parts
+                                                                  4. Brennan Theoretical Rationale | PDF | Social Science - Scribd, accessed February 4, 2026, https://www.scribd.com/doc/251474827/Brennan-Theoretical-Rationale
+                                                                  5. Ep. 433 Transcript: The Lot of Fortune and Spirit in Astrology, accessed February 4, 2026, https://theastrologypodcast.com/transcripts/ep-433-transcript-the-lot-of-fortune-and-spirit-in-astrology/
+                                                                  6. Astrology's Ancient Calculations | PDF | History | Religion & Spirituality - Scribd, accessed February 4, 2026, https://www.scribd.com/doc/136615945/123405965-Al-Biruni-Parts
+                                                                  7. What are the Hermetic Lots (Arabic Parts)? - Two Wander x Elysium Rituals, accessed February 4, 2026, https://www.twowander.com/blog/what-are-hermetic-lots-arabic-parts
+                                                                  8. Full text of "Pratical Guide To Hellenistic Astrology" - Internet Archive, accessed February 4, 2026, https://archive.org/stream/162899360praticalguidetohellenisticastrology/162899360-Pratical-Guide-to-Hellenistic-Astrology_djvu.txt
+                                                                  9. The Lot or Part of Fortune - Robert Hand | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/doc/297462676/The-Lot-or-Part-of-Fortune-Robert-Hand
+                                                                  10. The Lot or Part of Fortune Robert Hand PDF | PDF | Planets In Astrology - Scribd, accessed February 4, 2026, https://www.scribd.com/document/305891214/178526131-The-Lot-or-Part-of-Fortune-Robert-Hand-pdf
+                                                                  11. Paulus Alexandrinus Introductory Matters (Project Hindsight Greek Track Volume I) (Paulus Alexandrinus, Robert Hand (Editor) Etc.) (Z-Library) | PDF | Astrological Sign - Scribd, accessed February 4, 2026, https://www.scribd.com/document/807742809/Paulus-Alexandrinus-Introductory-Matters-Project-Hindsight-Greek-Track-Volume-I-Paulus-Alexandrinus-Robert-Hand-Editor-etc-Z-Library
+                                                                  12. 6 Ways You Can Actually Use Lots in Astrology (NSFW) - Patrick Watson, accessed February 4, 2026, https://patrickwatsonastrology.com/6-ways-you-can-actually-use-lots-in-astrology-nsfw/
+                                                                  13. The Four Birth Deities: The Lots of Fortune, Spirit, Eros and Necessity - Orphic Astrology, accessed February 4, 2026, https://orphicastrology.com/lots/four-birth-deities
+                                                                  14. Lot of Eros on Astro.com : r/Advancedastrology - Reddit, accessed February 4, 2026, https://www.reddit.com/r/Advancedastrology/comments/1fcsgti/lot_of_eros_on_astrocom/
+                                                                  15. Zodiacal Releasing from the Lot of Nemesis: A Case Study - Patrick Watson Astrology, accessed February 4, 2026, https://patrickwatsonastrology.com/zodiacal-releasing-from-the-lot-of-nemesis-a-case-study/
+                                                                  16. Al-Biruni - Parts | PDF | Teaching Methods & Materials - Scribd, accessed February 4, 2026, https://pt.scribd.com/document/123405965/Al-Biruni-Parts
+                                                                  17. Al Biruni | PDF | Astrology | Ptolemy - Scribd, accessed February 4, 2026, https://www.scribd.com/document/980830131/Al-Biruni
+                                                                  18. Al-Biruni - Parts | PDF | Teaching Methods & Materials - Scribd, accessed February 4, 2026, https://www.scribd.com/doc/123405965/Al-Biruni-Parts
+                                                                  19. THE MAKING OF AN ASTROLOGER IN FIFTEENTH-CENTURY FRANCE - SAS-Space, accessed February 4, 2026, https://sas-space.sas.ac.uk/9460/1/Helena%20Avelar%20de%20Carvalho%20-Warburg-PhD%20Thesis.pdf
+                                                                  20. The Lots | PDF | Astrology | Translations - Scribd, accessed February 4, 2026, https://www.scribd.com/document/597110239/The-Lots
+                                                                  21. Bonatti On Lots. | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/814422078/Bonatti-on-Lots
+                                                                  22. Twelfth Parts and The Astrology of Profession | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/463506470/Twelfth-Parts-and-the-Astrology-of-Profession
+                                                                  23. Endowment and Chance: The Lots of Fortune and Daimon - Brill, accessed February 4, 2026, https://brill.com/downloadpdf/book/9789004306219/B9789004306219_011.pdf
+                                                                  24. Ancient Astrology in Theory and Practice A Manual of Traditional Techniques, Volume II Delineating Planetary Meaning - Demetra George - Scribd, accessed February 4, 2026, https://it.scribd.com/document/766087434/Ancient-Astrology-in-Theory-and-Practice-a-Manual-of-Traditional-Techniques-Volume-II-Delineating-Planetary-Meaning-Demetra-George-Wizardforums-co
+                                                                  25. Astrology and the Authentic Self, accessed February 4, 2026, https://dn720003.ca.archive.org/0/items/demetra-george-astrology-and-the-authentic-self-integrating-traditional-and-modern-astrology/Demetra%20George%20-%20Astrology%20and%20the%20Authentic%20Self_%20Integrating%20Traditional%20and%20Modern%20Astrology.pdf

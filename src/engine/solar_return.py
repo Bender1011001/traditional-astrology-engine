@@ -3,6 +3,7 @@ from typing import Dict, List, Optional
 from .models import Chart, Planet, PlanetName, Sign, Sect
 from .prediction import calculate_profection_sign, get_lord_of_year
 from .dignities import DignityCalculator
+from .reference_data import DOMICILES
 
 class SolarReturnEngine:
     """
@@ -75,89 +76,97 @@ class SolarReturnEngine:
     def analyze_solar_return(sr_chart: Chart, natal_chart: Chart, age: int) -> Dict:
         """
         Synthesizes the Solar Return by overlaying it on the Natal Chart.
+        Uses Medieval 'Lord of the Year' (Ruler of the Revolution) logic.
         """
-        # 1. Overlay Logic: SR Ascendant in Natal House
-        sr_asc_lon = sr_chart.ascendant
-        # Which natal house does the SR Asc fall in?
-        natal_house_of_sr_asc = DignityCalculator.get_house_number(sr_asc_lon, natal_chart.ascendant, natal_chart.houses)
+        # 1. Muntha (Profected Ascendant)
+        # 1 sign per year from natal asc sign
+        natal_asc_sign_idx = int(natal_chart.ascendant / 30) % 12
+        muntha_sign_idx = (natal_asc_sign_idx + age) % 12
+        muntha_sign = list(Sign)[muntha_sign_idx]
+        muntha_lon = (muntha_sign_idx * 30.0) + (natal_chart.ascendant % 30)
         
-        # 2. Lord of the Year (LoY)
-        # Calculate profection sign from natal ascendant
-        natal_asc_idx = int(natal_chart.ascendant / 30) % 12
-        natal_asc_sign = list(Sign)[natal_asc_idx]
+        # Muntha position in SR Houses
+        muntha_sr_house = DignityCalculator.get_house_number(muntha_lon, sr_chart.ascendant, sr_chart.houses)
+        muntha_natal_house = DignityCalculator.get_house_number(muntha_lon, natal_chart.ascendant, natal_chart.houses)
         
-        prof_sign = calculate_profection_sign(natal_asc_sign, age)
-        loy_name = get_lord_of_year(prof_sign)
+        # 2. Lord of the Year (LoY) Candidates
+        # A. Ruler of Muntha
+        loy_muntha = DOMICILES[muntha_sign]
         
-        # 3. LoY Status in SR
-        loy_planet = next((p for p in sr_chart.planets if p.name == loy_name), None)
+        # B. Ruler of SR Ascendant
+        sr_asc_sign = list(Sign)[int(sr_chart.ascendant / 30) % 12]
+        loy_sr_asc = DOMICILES[sr_asc_sign]
+        
+        # C. Lord of the Profection (usually same as Muntha ruler)
+        # We select the Muntha Ruler as the primary 'Lord of the Year' per traditional standard
+        loy_name = loy_muntha
+        
+        # 3. LoY Assessment (Condition & Handover)
+        loy_sr_planet = next((p for p in sr_chart.planets if p.name == loy_name), None)
+        loy_natal_planet = next((p for p in natal_chart.planets if p.name == loy_name), None)
+        
         loy_weight = 0
         loy_details = []
         
-        if loy_planet:
-            # Weighting Algorithm
-            sr_house = DignityCalculator.get_house_number(loy_planet.longitude, sr_chart.ascendant, sr_chart.houses)
-            
-            # Angular in SR (+10)
-            if sr_house in [1, 4, 7, 10]:
-                loy_weight += 10
-                loy_details.append("Angular in SR (+10)")
-            # Cadent (-10)
-            elif sr_house in [3, 6, 9, 12]:
-                loy_weight -= 10
-                loy_details.append("Cadent in SR (-10)")
-            
-            # Combust check (Lilly 15 deg)
-            sun = next((p for p in sr_chart.planets if p.name == PlanetName.SUN), None)
-            if sun:
-                diff = abs(loy_planet.longitude - sun.longitude) % 360
-                if diff > 180: diff = 360 - diff
-                if diff < 15:
-                    loy_weight -= 10
-                    loy_details.append("Combust in SR (-10)")
-            
-            # Aspecting SR Ascendant (+5)
-            # (Simple degree based check for now)
-            asc_diff = abs(loy_planet.longitude - sr_chart.ascendant) % 360
-            if asc_diff > 180: asc_diff = 360 - asc_diff
-            if asc_diff < 8 or abs(asc_diff - 120) < 8 or abs(asc_diff - 60) < 8:
+        if loy_sr_planet:
+            # Rulership of SR Ascendant (+5 bonus if same)
+            if loy_name == loy_sr_asc:
                 loy_weight += 5
-                loy_details.append("Aspecting SR Ascendant (+5)")
+                loy_details.append("Ruler of SR Ascendant (+5)")
+                
+            # SR House Position
+            sr_h = DignityCalculator.get_house_number(loy_sr_planet.longitude, sr_chart.ascendant, sr_chart.houses)
+            if sr_h in [1, 4, 7, 10]:
+                loy_weight += 10
+                loy_details.append(f"Angular in SR (House {sr_h}) (+10)")
+            elif sr_h in [3, 6, 9, 12]:
+                loy_weight -= 10
+                loy_details.append(f"Cadent in SR (House {sr_h}) (-10)")
+                
+            # Essential Dignity in SR
+            # (Simplified check)
+            sr_sign = list(Sign)[int(loy_sr_planet.longitude / 30) % 12]
+            if sr_sign == muntha_sign:
+                loy_weight += 5
+                loy_details.append(f"In Muntha Sign in SR (+5)")
+                
+        # 4. Morin's Handover (Activation)
+        # Does the SR planet aspect its Natal position or the Natal Ascendant?
+        handover_active = False
+        if loy_sr_planet and loy_natal_planet:
+            diff = abs(loy_sr_planet.longitude - loy_natal_planet.longitude) % 360
+            dist = diff if diff <= 180 else 360 - diff
+            if dist < 8.0: # Conjunction activation
+                handover_active = True
+                loy_details.append("Natal Handover Active (SR Lord on Natal Position)")
 
-        # 4. Planetary Determinations
+        # 5. Planetary Determinations (Traditional Overlay)
         determinations = []
         for p in sr_chart.planets:
             if p.name in [PlanetName.SUN, PlanetName.MOON, PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]:
                 continue
             
-            # Find SR House
             sr_h = DignityCalculator.get_house_number(p.longitude, sr_chart.ascendant, sr_chart.houses)
-            
-            # Find Natal House Rulership (Whole Sign)
-            # For each sign the planet rules, find which natal house it maps to
-            ruled_natal_houses = []
-            
-            signs_ruled = DignityCalculator.DOMICILES.get(p.name, [])
-            for sign in signs_ruled:
-                # Which natal house is this sign?
-                # Start of sign lon
-                sign_start = (list(Sign).index(sign)) * 30
-                h_num = DignityCalculator.get_house_number(sign_start + 1.0, natal_chart.ascendant, natal_chart.houses)
-                ruled_natal_houses.append(h_num)
+            natal_h = DignityCalculator.get_house_number(p.longitude, natal_chart.ascendant, natal_chart.houses)
             
             determinations.append({
                 "planet": p.name.value,
                 "sr_house": sr_h,
-                "natal_houses_ruled": ruled_natal_houses,
-                "judgment": f"{p.name.value} acts in SR House {sr_h} concerning matters of Natal Houses {', '.join(map(str, ruled_natal_houses))}."
+                "natal_house_overlay": natal_h,
+                "judgment": f"{p.name.value} in SR House {sr_h} overlays Natal House {natal_h}."
             })
 
         return {
-            "sr_asc_in_natal_house": natal_house_of_sr_asc,
+            "muntha": {
+                "sign": muntha_sign.value,
+                "sr_house": muntha_sr_house,
+                "natal_house": muntha_natal_house
+            },
             "lord_of_year": {
                 "name": loy_name.value,
                 "weight": loy_weight,
-                "details": loy_details
+                "details": loy_details,
+                "handover_active": handover_active
             },
             "determinations": determinations,
             "morin_axiom": "The Solar Return cannot produce what the Nativity does not promise."
