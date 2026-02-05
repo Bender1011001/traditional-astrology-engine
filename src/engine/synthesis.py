@@ -108,11 +108,26 @@ class ReportSynthesizer:
             
         # Group aspects by planet to make it more narrative
         for asp in aspects:
-            p1 = asp.get("planet_a", "Unknown")
-            p2 = asp.get("planet_b", "Unknown")
-            type_ = asp.get("type", "Unknown")
-            orb = round(asp.get("orb", 0.0), 2)
-            apply_str = "Applying" if asp.get("is_applying") else "Separating"
+            # Handle both object and dict
+            if hasattr(asp, "planet_a"):
+                p1_raw = asp.planet_a
+                p2_raw = asp.planet_b
+                type_raw = asp.type
+                orb = round(asp.orb, 2)
+                is_applying = asp.is_applying
+                interp = asp.text
+            else:
+                p1_raw = asp.get("planet_a", "Unknown")
+                p2_raw = asp.get("planet_b", "Unknown")
+                type_raw = asp.get("type", "Unknown")
+                orb = round(asp.get("orb", 0.0), 2)
+                is_applying = asp.get("is_applying")
+                interp = asp.get("text", "")
+
+            p1 = p1_raw.value if hasattr(p1_raw, "value") else p1_raw
+            p2 = p2_raw.value if hasattr(p2_raw, "value") else p2_raw
+            type_ = type_raw.value if hasattr(type_raw, "value") else type_raw
+            apply_str = "Applying" if is_applying else "Separating"
             
             # Interpret the dynamic
             narrative = ""
@@ -121,12 +136,10 @@ class ReportSynthesizer:
             else:
                 narrative = f"The relationship between {p1} and {p2} is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts."
 
-            if asp.get("is_applying"):
+            if is_applying:
                 narrative += " This dynamic is **increasing in intensity** as the life progresses."
             else:
                 narrative += " This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance."
-
-            interp = asp.get("text", "")
             
             text += f"#### {p1} {type_} {p2} ({orb}°, {apply_str})\n"
             text += f"{narrative}\n"
@@ -148,7 +161,16 @@ class ReportSynthesizer:
         if receptions:
             text += "**Mutual Receptions:**\n"
             for r in receptions:
-                text += f"- {r.get('planet_a')} <-> {r.get('planet_b')} ({r.get('type')})\n"
+                # Handle both dict and object (Aspect-like)
+                if hasattr(r, "planet_a"):
+                    pa = r.planet_a.value if hasattr(r.planet_a, "value") else r.planet_a
+                    pb = r.planet_b.value if hasattr(r.planet_b, "value") else r.planet_b
+                    rt = r.type.value if hasattr(r.type, "value") else r.type
+                else:
+                    pa = r.get("planet_a")
+                    pb = r.get("planet_b")
+                    rt = r.get("type")
+                text += f"- {pa} <-> {pb} ({rt})\n"
                 
         return text
 

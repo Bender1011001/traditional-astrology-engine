@@ -20,6 +20,27 @@ class PlanetName(Enum):
     NORTH_NODE = "North_Node"
     SOUTH_NODE = "South_Node"
 
+class PlanetaryPhase(Enum):
+    UNDER_BEAMS = "Under the Beams"
+    COMBUST = "Combust"
+    CAZIMI = "Cazimi"
+    HELIACAL_RISING = "Heliacal Rising"
+    HELIACAL_SETTING = "Heliacal Setting"
+    MORNING_FIRST = "Morning First" # Same as heliacal rising for superiors
+    EVENING_FIRST = "Evening First"
+    EVENING_LAST = "Evening Last" # Same as heliacal setting for superiors
+    MORNING_LAST = "Morning Last"
+    STATION_RETROGRADE = "Station Retrograde"
+    STATION_DIRECT = "Station Direct"
+    OPPOSITION = "Opposition" # Acronychal Rising
+    FREE = "Free"
+
+class SolarProximity(Enum):
+    CAZIMI = "Cazimi"
+    COMBUST = "Combust"
+    UNDER_BEAMS = "Under the Beams"
+    FREE = "Free"
+
 class Sign(Enum):
     ARIES = "Aries"
     TAURUS = "Taurus"
@@ -41,6 +62,13 @@ class Planet:
     latitude: float = 0.0
     speed: float = 0.0
     altitude: float = 0.0
+    
+    # Phasis Data
+    phase: Optional[PlanetaryPhase] = None
+    solar_proximity: Optional[SolarProximity] = None
+    is_oriental: bool = False
+    in_chariot: bool = False
+    is_visible: bool = True
     
     @property
     def sign(self) -> Sign:
@@ -70,11 +98,37 @@ class LotName(Enum):
     SPIRIT = "Spirit"
     EROS = "Eros"
     NECESSITY = "Necessity"
-    VICTORY = "Victory"
-    FATHER = "Father"
-    MOTHER = "Mother"
     COURAGE = "Courage"
+    VICTORY = "Victory"
     NEMESIS = "Nemesis"
     DEBT = "Debt"
     THEFT = "Theft"
     ACCUSATION = "Accusation"
+    FATHER = "Father"
+    MOTHER = "Mother"
+    MARRIAGE_MEN = "Marriage_Men"
+    MARRIAGE_WOMEN = "Marriage_Women"
+    CHILDREN = "Children"
+    SIBLINGS = "Siblings"
+    FRIENDS = "Friends"
+    ENEMIES = "Enemies"
+    SICKNESS = "Sickness"
+    ASSETS = "Assets"
+    DEATH = "Death"
+    JOURNEYS = "Journeys"
+    COMMERCE = "Commerce"
+    BOLDNESS = "Boldness"
+    SUCCESS = "Success"
+    MISFORTUNE = "Misfortune"
+    LIFE = "Life"
+    WISDOM = "Wisdom"
+    ART = "Art"
+    BATTLES = "Battles"
+    FOUNDATION = "Foundation"
+    BASIS = "Basis"
+    EXALTATION = "Exaltation"
+    WHEAT = "Wheat"
+    BARLEY = "Barley"
+    RICE = "Rice"
+    LENTILS = "Lentils"
+    POVERTY = "Poverty"

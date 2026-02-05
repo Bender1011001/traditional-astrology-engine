@@ -14,7 +14,6 @@ from src.engine.models import Chart, Planet, PlanetName, Sign, Sect, LotName
 from src.engine.advanced_mechanics import DoryphoryEngine, MonomoiriaEngine, AlmutenEngine, HermeticLotEngine
 from src.engine.prediction import calculate_firdaria, calculate_zr_lifetime_map, calculate_zr_periods, FIRDARIA_DAY, FIRDARIA_NIGHT
 from src.engine.mansions import LunarMansionEngine
-from src.engine.rectification import RectificationEngine
 from src.engine.kakosis import KakosisEngine
 from src.engine.dignities import DignityCalculator
 from src.database.db_manager import DelineationLibrary
@@ -106,11 +105,6 @@ async def run_ultimate_reading():
     temp = report.get("summary", {}).get("temperament", {})
     output.append(f"  Humoral Bias: {temp.get('primary_temperament', 'N/A')}")
 
-    # Rectification Animodar
-    animodar_list = RectificationEngine.animodar_rectification(chart_model, chart_model.jd, chart_model.geo_lat, chart_model.geo_lon)
-    if animodar_list:
-        res = animodar_list[0]
-        output.append(f"  Rectification (Animodar): {res.get('difference', 'N/A')} deg diff via {res.get('rectifying_planet')}")
 
     # SECTION I.B: VITALITY & LONGEVITY (The Medieval Core)
     vit = report.get("vitality", {})
