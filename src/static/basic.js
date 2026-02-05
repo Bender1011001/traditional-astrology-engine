@@ -1300,7 +1300,7 @@ if (billingSwitch) {
             labelAnnual.classList.add('active');
 
             // Update Card Content
-            if (subPrice) subPrice.innerHTML = '$99.00<span>/yr</span>';
+            if (subPrice) subPrice.innerHTML = '$790<span>/yr</span>';
             if (subDesc) subDesc.textContent = 'Billed annually. Save 17%.';
             if (annualDetails) annualDetails.classList.remove('hidden');
         } else {
@@ -1308,8 +1308,8 @@ if (billingSwitch) {
             labelMonthly.classList.add('active');
 
             // Revert
-            if (subPrice) subPrice.innerHTML = '$9.99<span>/mo</span>';
-            if (subDesc) subDesc.textContent = 'Unlimited readings + Save 10 charts.';
+            if (subPrice) subPrice.innerHTML = '$79<span>/mo</span>';
+            if (subDesc) subDesc.textContent = 'Unlimited charts + Save 10 charts.';
             if (annualDetails) annualDetails.classList.add('hidden');
         }
 
@@ -1646,5 +1646,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 });
-
 
