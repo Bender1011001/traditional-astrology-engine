@@ -32,23 +32,37 @@ def run_full_reading(date_str, time_str, city, state):
 
     technical_data = result["technical_data"]
     
-    # 2. Prepare Context for LLM
+    # 2. Prepare Context for LLM - FULL Seven Pillars
     planets_context = []
     for p in technical_data.get("planets_forensic", []):
         planets_context.append({
             "planet": p.get("name"),
             "sign": p.get("sign"),
             "power": p.get("power_label"),
+            "phasis": p.get("phasis"),  # NEW: Solar Phasis
             "delineation": p.get("delineation"),
             "impacts": [f"{i.get('cause')}: {i.get('effect')}" for i in (p.get("impacts") or [])[:3]]
         })
 
+    fate_data = technical_data.get("analysis", {}).get("fate", {})
+    adv_mech = technical_data.get("analysis", {}).get("advanced_mechanics", {})
+
     context_json = json.dumps({
         "summary": technical_data.get("analysis", {}).get("teams"),
         "planets": planets_context,
-        "lots": technical_data.get("analysis", {}).get("fate", {}).get("hermetic_lots"),
-        "soul_guardian": technical_data.get("analysis", {}).get("advanced_mechanics", {}).get("almuten")
+        "lots": fate_data.get("hermetic_lots"),
+        "forensic_lots": technical_data.get("analysis", {}).get("forensic_lots"),
+        "soul_guardian": adv_mech.get("almuten"),
+        # The Seven Pillars:
+        "decennials": fate_data.get("decennials", [])[:3],  # First 3 major periods
+        "firdaria": fate_data.get("firdaria"),
+        "muntha": fate_data.get("muntha"),
+        "profections": fate_data.get("profections"),
+        "primary_directions": fate_data.get("primary_directions", [])[:5],  # Top 5 directions
+        "mundane_context": adv_mech.get("mundane_context"),
+        "solar_return": fate_data.get("solar_return")
     }, indent=2)
+
 
     # 3. Call Multi-Turn Synthesis
     print("Calling LLM (Multi-Turn Interrogation Sequence with Gemini 3 Pro Preview)...")

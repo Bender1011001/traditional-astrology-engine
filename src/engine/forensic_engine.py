@@ -637,7 +637,7 @@ class Auditor:
                                 "sources": ["Ptolemy II"],
                                 "confidence": 92,
                                 "conflicts": [],
-                                "trace": [f"Eclipse: {ec['date']}"]
+                                "trace": [f"Eclipse JD: {ec['jd']}"]
                              })
 
         return ledger
