@@ -224,8 +224,150 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     # SAVE TO CACHE
     set_to_cache(chart_hash, tier, final_result)
 
-    # AUTO-SAVE FOR LOGGED IN USERS skipped for brevity in this refactor pass,
-    # but theoretically should be kept if critical.
+    # AUTO-SAVE FOR LOGGED IN USERS
+    if chart_request.access_token:
+        try:
+            from src.engine.user_auth import get_user_manager
+            userManager = get_user_manager()
+            user_payload = validate_token(chart_request.access_token)
+            if user_payload and user_payload.get("sub"):
+                userManager.save_chart(
+                    email=user_payload["sub"],
+                    chart_hash=chart_hash,
+                    chart_meta={
+                        "name": chart_request.name or "Untitled Chart",
+                        "date": chart_request.date,
+                        "time": chart_request.time,
+                        "city": chart_request.city,
+                        "state": chart_request.state
+                    }
+                )
+        except Exception as save_err:
+            logger.error(f"Auto-save failed: {save_err}")
 
     _log_event("chart_result_server", {"result_keys": list(final_result.keys())}, http_request)
     return final_result
+
+
+# ============================================================================
+# USER CHART MANAGEMENT ENDPOINTS
+# ============================================================================
+
+from src.api.v1.auth import get_current_user
+from src.database.models import User
+from fastapi.responses import StreamingResponse
+
+
+@router.get("/saved")
+async def get_user_charts(current_user: User = Depends(get_current_user)):
+    """
+    Get all saved charts for the current user.
+    """
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    charts = current_user.charts_saved or []
+    return {"charts": charts}
+
+
+@router.get("/saved/{chart_index}")
+async def get_saved_chart(chart_index: int, current_user: User = Depends(get_current_user)):
+    """
+    Get a specific saved chart by index for the current user.
+    Returns the chart metadata which can be used to regenerate the full report.
+    """
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    charts = current_user.charts_saved or []
+    
+    if chart_index < 0 or chart_index >= len(charts):
+        raise HTTPException(status_code=404, detail="Chart not found")
+    
+    chart = charts[chart_index]
+    chart["index"] = chart_index
+    return {"chart": chart}
+
+
+@router.get("/saved/{chart_index}/pdf")
+async def download_chart_pdf(chart_index: int, current_user: User = Depends(get_current_user)):
+    """
+    Generate and download a PDF report for a saved chart.
+    """
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    charts = current_user.charts_saved or []
+    
+    if chart_index < 0 or chart_index >= len(charts):
+        raise HTTPException(status_code=404, detail="Chart not found")
+    
+    chart_meta = charts[chart_index]
+    
+    # Regenerate the chart data
+    try:
+        engine_result = await generate_full_nativity_async(
+            date_str=chart_meta.get("date", ""),
+            time_str=chart_meta.get("time", ""),
+            city=chart_meta.get("city", ""),
+            state=chart_meta.get("state", ""),
+            name=chart_meta.get("name", "Native"),
+            house_system=chart_meta.get("house_system", "W"),
+            zodiac_system=chart_meta.get("zodiac_system", "tropical"),
+            ayanamsa=chart_meta.get("ayanamsa")
+        )
+        
+        if "error" in engine_result:
+            raise HTTPException(status_code=400, detail=engine_result["error"])
+        
+        # Generate PDF
+        from src.engine.pdf_generator import PDFReportGenerator
+        
+        pdf_data = {
+            "meta": engine_result.get("technical_data", {}).get("meta", {}),
+            "forensic_report": engine_result.get("technical_data", {}).get("analysis", {}),
+            "plain_reading": engine_result.get("human_translation", {}).get("report_markdown", "")
+        }
+        
+        generator = PDFReportGenerator(pdf_data)
+        pdf_buffer = generator.generate()
+        
+        # Create filename from chart name or date
+        chart_name = chart_meta.get("name", "chart").replace(" ", "_")
+        filename = f"codex_caelestis_{chart_name}.pdf"
+        
+        return StreamingResponse(
+            pdf_buffer,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={filename}"}
+        )
+        
+    except Exception as e:
+        logger.error(f"PDF Generation Error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate PDF")
+
+
+@router.delete("/saved/{chart_index}")
+async def delete_saved_chart(
+    chart_index: int, 
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Delete a saved chart by index.
+    """
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    charts = current_user.charts_saved or []
+    
+    if chart_index < 0 or chart_index >= len(charts):
+        raise HTTPException(status_code=404, detail="Chart not found")
+    
+    # Remove the chart
+    charts.pop(chart_index)
+    current_user.charts_saved = charts
+    db.commit()
+    
+    return {"success": True, "message": "Chart deleted"}
+

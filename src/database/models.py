@@ -33,13 +33,27 @@ class User(Base):
     api_keys = relationship("ApiKey", back_populates="user")
 
     def to_dict(self):
+        sub_data = {
+            "status": "none",
+            "plan_name": "Free",
+            "current_period_end": None,
+            "is_trial": False
+        }
+        if self.subscription:
+            sub_data = {
+                "status": self.subscription.status,
+                "plan_name": self.subscription.plan.tier if self.subscription.plan else "Free",
+                "current_period_end": self.subscription.current_period_end.isoformat() if self.subscription.current_period_end else None,
+                "is_trial": self.subscription.status == "trial"
+            }
+
         return {
             "id": self.id,
             "email": self.email,
             "name": self.name,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "charts_saved": self.charts_saved or [],
-            "subscription": self.subscription.status if self.subscription else "none"
+            "subscription_details": sub_data
         }
 
 class SubscriptionPlan(Base):

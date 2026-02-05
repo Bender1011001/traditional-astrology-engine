@@ -1,6 +1,6 @@
 import { apiUrl } from './api.js';
 
-const IS_GH_PAGES = window.location.hostname.endsWith("github.io");
+const IS_GH_PAGES = false;
 const LOG_ENABLED = !IS_GH_PAGES || (window.CAEL_API_BASE || "");
 const LOG_SESSION_KEY = "cael_session_id";
 let _sessionEnded = false;
