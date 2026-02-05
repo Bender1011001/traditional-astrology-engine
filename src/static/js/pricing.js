@@ -35,12 +35,12 @@ export function setupPricing() {
             if (aLabel) aLabel.classList.toggle("active", isAnnual);
 
             // Update Prices
-            // Scholar (Starter): 9/mo -> 90/yr
-            // Magus (Practitioner): 29/mo -> 290/yr
+            // Scholar (Starter): 9.99/mo -> 99/yr
+            // Practitioner: 29/mo -> 290/yr
             const priceStarter = document.getElementById("price-starter");
             const pricePractitioner = document.getElementById("price-practitioner");
 
-            if (priceStarter) priceStarter.textContent = isAnnual ? "90" : "9";
+            if (priceStarter) priceStarter.textContent = isAnnual ? "99" : "9.99";
             if (pricePractitioner) pricePractitioner.textContent = isAnnual ? "290" : "29";
 
             const periodStarter = document.getElementById("period-starter");
