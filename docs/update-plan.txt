@@ -1,5 +1,5 @@
 Technical Specification: The Sovereign Astrology Engine
-Version: 1.0 Status: Ready for Implementation Objective: Refactor the fragmented calculation logic into a single unified pipeline (SovereignEngine) that acts as the sole source of truth. This engine will produce a bifurcated response: a machine-readable "God Mode" object (technical_data) and a human-readable narrative (human_translation).
+Version: 1.0 Status: Ready for Implementation Objective: Refactor the fragmented calculation logic into a single unified pipeline (SovereignEngine) that acts as the sole source of truth. This engine will produce a bifurcated response: a machine-readable detailed technical object (technical_data) and a human-readable narrative (human_translation).
 
 1. Architectural Overview
 Current State (The Problem)

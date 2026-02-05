@@ -363,10 +363,10 @@ async def run_ultimate_reading():
     output.append("#" * 100 + "\n")
 
     # WRITE TO FINAL FILE
-    with open("final_god_mode_dossier.txt", "w", encoding="utf-8") as f:
+    with open("final_detailed_dossier.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(output))
     
-    print(f"Ultimate Dossier generated: final_god_mode_dossier.txt ({len(output)} lines)")
+    print(f"Ultimate Dossier generated: final_detailed_dossier.txt ({len(output)} lines)")
 
 if __name__ == "__main__":
     if sys.platform == "win32":

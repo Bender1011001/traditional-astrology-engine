@@ -21,7 +21,7 @@ except ImportError as e:
 
 def run_regression_test():
     """
-    God Mode Regression Test Suite.
+    Detailed Report Regression Test Suite.
     Compares current engine output against 'Golden References' for historical charts.
     """
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -36,7 +36,7 @@ def run_regression_test():
 
     failures = []
 
-    print("🚀 Starting God Mode Verification (Regression Suite)\n")
+    print("🚀 Starting Detailed Report Verification (Regression Suite)\n")
 
     for key, data in golden_data.items():
         print(f"Checking: {data['name']}...")

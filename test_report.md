@@ -1,7 +1,7 @@
 # 100% System Audit Report
 
 ## Executive Summary
-The "God Mode" system audit has been completed. The codebase was analyzed for gaps, redundancies, and bugs. The system appears to be largely complete and functional, with all major "God Mode" features (Monomoiria, Dodecatemoria, Almuten Figuris, Hermetic Lots, Forensic Lots) implemented and verified.
+The detailed report system audit has been completed. The codebase was analyzed for gaps, redundancies, and bugs. The system appears to be largely complete and functional, with all major advanced features (Monomoiria, Dodecatemoria, Almuten Figuris, Hermetic Lots, Forensic Lots) implemented and verified.
 
 ## Findings
 
@@ -15,10 +15,10 @@ The "God Mode" system audit has been completed. The codebase was analyzed for ga
 
 ### 3. Humoral Bias "N/A" Issue
 - **Status**: Investigated.
-- **Analysis**: The `final_god_mode_dossier.txt` showed "Humoral Bias: N/A". Code analysis of `scripts/run_ultimate_forensic.py` confirms it correctly attempts to access `primary_temperament` from the `TemperamentEngine` output. The "N/A" result likely stems from a specific chart configuration or data missing during that specific run, rather than a logic error. `TemperamentEngine` is correctly implemented.
+- **Analysis**: The `final_detailed_dossier.txt` showed "Humoral Bias: N/A". Code analysis of `scripts/run_ultimate_forensic.py` confirms it correctly attempts to access `primary_temperament` from the `TemperamentEngine` output. The "N/A" result likely stems from a specific chart configuration or data missing during that specific run, rather than a logic error. `TemperamentEngine` is correctly implemented.
 
 ### 4. Test Verification
-- **Script**: `scripts/test_god_mode.py`
+- **Script**: `scripts/test_detailed_report.py`
 - **Result**: **PASS**
 - **Details**:
     - Lots (Fortune, Spirit, Debt, Theft, Accusation) verified.
@@ -28,7 +28,7 @@ The "God Mode" system audit has been completed. The codebase was analyzed for ga
     - Rule Ledger integration verified.
 
 ## Recommendations
-- **Documentation**: Update `plans/god_mode_technical_plan.md` to reflect that the implementation is complete.
+- **Documentation**: Update `plans/detailed_report_technical_plan.md` to reflect that the implementation is complete.
 - **Monitoring**: Keep an eye on "Humoral Bias" in future reports to ensure it populates correctly with valid chart data.
 
 ## Conclusion
