@@ -84,6 +84,27 @@ async def verify_checkout_session(session_id: str, db: Session = Depends(get_db)
         "tier": plan_tier
     }
 
+@router.post("/cancel-subscription")
+async def cancel_subscription(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """
+    Cancel the user's active subscription (auto-renew off).
+    """
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    try:
+        service = SubscriptionService(db)
+        sub = service.cancel_subscription(user, immediate=False)
+        return {
+            "success": True, 
+            "message": "Auto-renewal turned off. Access continues until " + sub.current_period_end.strftime("%Y-%m-%d")
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Failed to cancel subscription")
+
+
 @router.post("/webhook")
 async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
     payload = await request.body()

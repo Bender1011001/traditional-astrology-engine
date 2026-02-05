@@ -92,7 +92,7 @@ window.addEventListener('error', (e) => {
     });
 });
 // ==========================
-const IS_GH_PAGES = window.location.hostname.endsWith("github.io");
+const IS_GH_PAGES = false;
 const backendNotice = document.getElementById("backendNotice");
 if (backendNotice && IS_GH_PAGES && !API_BASE) {
     backendNotice.classList.remove("hidden");
@@ -104,6 +104,37 @@ const modalOverlay = document.getElementById("modalOverlay");
 const modalBody = document.getElementById("modalBody");
 const modalClose = document.querySelector(".modal-close");
 const themeToggle = document.getElementById("themeToggle");
+
+// === DASHBOARD AUTO-LOAD ===
+async function checkPendingChart() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('action') === 'load') {
+        const pending = sessionStorage.getItem('cael_pending_chart');
+        if (pending) {
+            const chart = JSON.parse(pending);
+            // Populate form
+            if (document.getElementById('date')) document.getElementById('date').value = chart.date || '';
+            if (document.getElementById('time')) document.getElementById('time').value = chart.time || '';
+            if (document.getElementById('city')) document.getElementById('city').value = chart.city || '';
+            if (document.getElementById('state')) document.getElementById('state').value = chart.state || '';
+            if (document.getElementById('name')) document.getElementById('name').value = chart.name || '';
+            if (document.getElementById('houseSystem')) document.getElementById('houseSystem').value = chart.house_system || 'W';
+            if (document.getElementById('currentAge') && chart.age) document.getElementById('currentAge').value = chart.age;
+
+            // Optional: Trigger calculation automatically
+            setTimeout(() => {
+                const form = document.getElementById('chartForm');
+                if (form) form.dispatchEvent(new Event('submit'));
+            }, 500);
+
+            sessionStorage.removeItem('cael_pending_chart');
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }
+}
+window.addEventListener('DOMContentLoaded', checkPendingChart);
+// ===========================
 
 const glossaryBtn = document.getElementById("glossaryBtn");
 if (glossaryBtn) {

@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-RCNDWN4XVN');
-</script>
+        gtag('config', 'G-RCNDWN4XVN');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Dashboard | Codex Caelestis</title>
@@ -165,6 +165,8 @@
                 </div>
                 <div>
                     <span id="subBadge" class="user-badge">Vagabond</span>
+                    <a href="index.html" class="help-btn" style="margin-right: 0.5rem; text-decoration: none;">NEW
+                        READING</a>
                     <button class="logout-btn" onclick="logout()">LOGOUT</button>
                 </div>
             </div>
@@ -183,6 +185,13 @@
                     Member since <span id="joinDate">...</span><br>
                     Current Plan: <span id="planName" style="color: var(--text);">...</span>
                 </p>
+                <div id="subscriptionManagement" class="hidden"
+                    style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                    <button id="cancelSubBtn" class="help-btn"
+                        style="border-color: var(--danger); color: var(--danger); font-size: 0.8rem;"
+                        onclick="cancelSubscription()">CANCEL AUTO-RENEW</button>
+                    <p id="cancelStatus" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;"></p>
+                </div>
             </div>
         </div>
     </main>
@@ -209,10 +218,16 @@
                 const user = data.user;
 
                 // Update UI
+                const sub = user.subscription_details;
                 document.getElementById('userEmail').textContent = user.email;
-                document.getElementById('subBadge').textContent = user.subscription_tier.toUpperCase();
-                document.getElementById('planName').textContent = user.subscription_tier.toUpperCase();
+                document.getElementById('subBadge').textContent = (sub.plan_name || "Vagabond").toUpperCase();
+                document.getElementById('planName').textContent = (sub.plan_name || "Vagabond").toUpperCase();
                 document.getElementById('joinDate').textContent = new Date(user.created_at).toLocaleDateString();
+
+                if (sub.current_period_end) {
+                    const expiryDate = new Date(sub.current_period_end).toLocaleDateString();
+                    document.getElementById('planName').innerHTML += ` (Renews: ${expiryDate})`;
+                }
 
                 renderCharts(user.charts_saved || []);
 
@@ -231,16 +246,76 @@
                 return;
             }
 
-            container.innerHTML = charts.map(chart => `
-                <div class="chart-card" onclick="alert('Load chart feature coming soon!')">
-                    <div class="chart-name">${chart.name || "Untitled Chart"}</div>
-                    <div class="chart-details">
-                        ${chart.city}, ${chart.date}<br>
-                        ${chart.time}
+            container.innerHTML = charts.map((chart, index) => `
+                <div class="chart-card">
+                    <div onclick="loadChart(${index})">
+                        <div class="chart-name">${chart.name || "Untitled Chart"}</div>
+                        <div class="chart-details">
+                            ${chart.city}, ${chart.date}<br>
+                            ${chart.time}
+                        </div>
+                        <div class="chart-meta">Saved: ${new Date(chart.saved_at).toLocaleDateString()}</div>
                     </div>
-                    <div class="chart-meta">Saved: ${new Date(chart.saved_at).toLocaleDateString()}</div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <button class="help-btn" style="font-size: 0.6rem; padding: 0.2rem 0.5rem;" onclick="downloadPdf(${index})">PDF</button>
+                        <button class="help-btn" style="font-size: 0.6rem; padding: 0.2rem 0.5rem; border-color: var(--danger); color: var(--danger);" onclick="deleteChart(${index})">DEL</button>
+                    </div>
                 </div>
             `).join('');
+        }
+
+        async function loadChart(index) {
+            const token = localStorage.getItem('cael_auth_token');
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}`), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error('Failed to load chart');
+                const data = await resp.json();
+                const chart = data.chart;
+
+                // Save to session storage for the calculator to pick up
+                sessionStorage.setItem('cael_pending_chart', JSON.stringify(chart));
+                window.location.href = 'index.html?action=load';
+            } catch (err) {
+                alert("Error loading chart: " + err.message);
+            }
+        }
+
+        async function downloadPdf(index) {
+            const token = localStorage.getItem('cael_auth_token');
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}/pdf`), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error('Failed to generate PDF');
+
+                const blob = await resp.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `report_${index}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } catch (err) {
+                alert("Error downloading PDF: " + err.message);
+            }
+        }
+
+        async function deleteChart(index) {
+            if (!confirm("Are you sure you want to delete this chart?")) return;
+            const token = localStorage.getItem('cael_auth_token');
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}`), {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error('Failed to delete chart');
+                loadProfile(); // Refresh
+            } catch (err) {
+                alert("Error deleting chart: " + err.message);
+            }
         }
 
         function logout() {

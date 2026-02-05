@@ -3,9 +3,7 @@ window.CAEL_CONFIG = {
 };
 
 // Auto-configure API Base for GitHub Pages
-if (window.location.hostname.endsWith("github.io")) {
+// Production API configuration
+if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
     window.CAEL_API_BASE = window.CAEL_CONFIG.renderUrl;
-    console.log("Environment: Production (GitHub Pages). Connected to Render Backend.");
-} else {
-    console.log("Environment: Local/Development. Expecting backend on same host or proxy.");
 }

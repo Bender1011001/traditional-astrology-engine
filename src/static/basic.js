@@ -1,5 +1,5 @@
 const API_BASE = window.CAEL_API_BASE || "";
-const IS_GH_PAGES = window.location.hostname.endsWith("github.io");
+const IS_GH_PAGES = false;
 const backendNotice = document.getElementById("backendNotice");
 if (backendNotice && IS_GH_PAGES && !API_BASE) {
     backendNotice.classList.remove("hidden");
