@@ -27,8 +27,6 @@ from src.engine.chart_calculator import calculate_chart_data, get_coordinates
 from src.engine.forensic_engine import Auditor
 from src.engine.electional import ElectionalEngine
 from src.engine.mundane import MundaneEngine
-from src.engine.horary import HoraryEngine
-from src.engine.planetary_hours import PlanetaryHourCalculator
 
 
 class AstrologyTools:
@@ -36,9 +34,6 @@ class AstrologyTools:
     
     def __init__(self):
         self.electional = ElectionalEngine()
-        self.mundane = MundaneEngine()
-        self.horary = HoraryEngine()
-        self.planetary_hour = PlanetaryHourCalculator()
     
     # =========================================================================
     # TOOL 1: CALCULATE CHART
@@ -89,35 +84,16 @@ class AstrologyTools:
     # =========================================================================
     def get_mundane_context(self, year: int, month: int = 1, day: int = 1) -> Dict:
         """Get mundane context: eclipses, great conjunctions, Firdaria."""
+        import swisseph as swe
         dt = datetime(year, month, day)
+        jd = swe.julday(year, month, day, 12.0)
+        engine = MundaneEngine(jd)
         return {
-            "eclipses": self.mundane.get_recent_eclipses(dt, years_back=1, years_forward=1),
-            "great_conjunctions": self.mundane.get_great_conjunctions(year - 20, year + 10),
-            "world_firdaria": self.mundane.get_world_firdaria(dt),
-            "mighty_firdaria": self.mundane.get_mighty_firdaria(dt)
+            "eclipses": engine.get_recent_eclipses(),
+            "great_conjunction": engine.get_latest_great_conjunction(),
+            "world_firdaria": engine.get_world_firdaria(),
+            "mighty_firdaria": engine.get_mighty_firdaria()
         }
-    
-    # =========================================================================
-    # TOOL 5: HORARY JUDGMENT
-    # =========================================================================
-    def horary_judgment(
-        self,
-        question: str,
-        city: str, state: str = "",
-        question_time: Optional[str] = None
-    ) -> Dict:
-        """Cast a horary chart and provide judgment."""
-        dt = datetime.fromisoformat(question_time) if question_time else datetime.now()
-        return self.horary.judge(question=question, question_dt=dt, city=city, state=state)
-    
-    # =========================================================================
-    # TOOL 6: PLANETARY HOUR
-    # =========================================================================
-    def get_planetary_hour(self, city: str, state: str = "", time: Optional[str] = None) -> Dict:
-        """Get the current planetary hour for a location."""
-        dt = datetime.fromisoformat(time) if time else datetime.now()
-        lat, lon = get_coordinates(city, state)
-        return self.planetary_hour.get_planetary_hour(dt, lat, lon)
     
     # =========================================================================
     # FORMATTED REPORTS
