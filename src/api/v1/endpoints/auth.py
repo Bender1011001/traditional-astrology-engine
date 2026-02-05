@@ -54,14 +54,19 @@ async def login(request: LoginRequest):
     }
 
 @router.get("/me")
-async def read_users_me(current_user: User = Depends(get_current_user)):
+async def read_users_me(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     if not current_user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
-    # Refresh to ensure we have latest charts
-    # Actually current_user is a DB model instance from get_current_user dependency
+    from src.services.subscription import SubscriptionService
+    sub_service = SubscriptionService(db)
+    usage = sub_service.get_usage_stats(current_user)
+    
+    user_dict = current_user.to_dict()
+    user_dict["usage"] = usage
+    
     return {
-        "user": current_user.to_dict()
+        "user": user_dict
     }
 
 @router.get("/restore_session")

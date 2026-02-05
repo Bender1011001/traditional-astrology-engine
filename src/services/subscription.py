@@ -266,3 +266,31 @@ class SubscriptionService:
         
         self.db.commit()
         return sub
+
+    def get_usage_stats(self, user: User):
+        sub = user.subscription
+        if not sub:
+            return {"charts": 0, "api": 0, "chart_limit": 1, "api_limit": 0}
+
+        plan = sub.plan
+        period_start = sub.current_period_start or datetime.utcnow().replace(day=1)
+        
+        from sqlalchemy import func
+        chart_usage = self.db.query(func.sum(UsageRecord.cost_credits)).filter(
+            UsageRecord.subscription_id == sub.id,
+            UsageRecord.resource_type == "chart",
+            UsageRecord.created_at >= period_start
+        ).scalar() or 0
+
+        api_usage = self.db.query(func.sum(UsageRecord.cost_credits)).filter(
+            UsageRecord.subscription_id == sub.id,
+            UsageRecord.resource_type == "api_call",
+            UsageRecord.created_at >= period_start
+        ).scalar() or 0
+
+        return {
+            "charts": int(chart_usage),
+            "api": int(api_usage),
+            "chart_limit": plan.chart_quota,
+            "api_limit": plan.api_quota
+        }

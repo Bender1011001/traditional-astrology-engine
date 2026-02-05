@@ -183,7 +183,8 @@
                 <h2 class="section-title">Account Details</h2>
                 <p style="font-size: 0.9rem; color: var(--text-muted);">
                     Member since <span id="joinDate">...</span><br>
-                    Current Plan: <span id="planName" style="color: var(--text);">...</span>
+                    Current Plan: <span id="planName" style="color: var(--text);">...</span><br>
+                    Usage (Cycle): <span id="usageStats" style="color: var(--text);">...</span>
                 </p>
                 <div id="subscriptionManagement" class="hidden"
                     style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
@@ -229,13 +230,63 @@
                     document.getElementById('planName').innerHTML += ` (Renews: ${expiryDate})`;
                 }
 
+                // Populate Usage
+                const usage = user.usage || { charts: 0, api: 0, chart_limit: 1, api_limit: 0 };
+                const chartLimit = usage.chart_limit === null ? "∞" : usage.chart_limit;
+                const apiLimit = usage.api_limit === null ? "∞" : usage.api_limit;
+
+                let usageText = `${usage.charts} / ${chartLimit} Charts`;
+                if (usage.api_limit > 0 || usage.api_limit === null) {
+                    usageText += ` | ${usage.api} / ${apiLimit} API Calls`;
+                }
+                document.getElementById('usageStats').textContent = usageText;
+
+                // Show/Hide Management Section
+                const mgmt = document.getElementById('subscriptionManagement');
+                if (sub.status === 'active' || sub.status === 'past_due' || sub.status === 'trial') {
+                    mgmt.classList.remove('hidden');
+                } else {
+                    mgmt.classList.add('hidden');
+                }
+
                 renderCharts(user.charts_saved || []);
 
             } catch (err) {
                 console.error(err);
-                if (confirm("Session expired. Please log in again.")) {
-                    logout();
+                localStorage.removeItem('cael_auth_token');
+                window.location.href = 'login.html';
+            }
+        }
+
+        async function cancelSubscription() {
+            if (!confirm("Are you sure you want to turn off auto-renewal? You will still have access until the end of your current period.")) return;
+
+            const btn = document.getElementById('cancelSubBtn');
+            const status = document.getElementById('cancelStatus');
+            btn.disabled = true;
+            status.textContent = "Cancelling...";
+
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl('/api/v1/billing/cancel-subscription'), {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const data = await resp.json();
+                if (resp.ok) {
+                    status.style.color = "var(--text-main)";
+                    status.textContent = data.message;
+                    btn.classList.add('hidden');
+                    // Reload profile after a short delay to see updated expiry info
+                    setTimeout(loadProfile, 2000);
+                } else {
+                    throw new Error(data.detail || "Cancellation failed");
                 }
+            } catch (err) {
+                status.style.color = "var(--danger)";
+                status.textContent = err.message;
+                btn.disabled = false;
             }
         }
 
