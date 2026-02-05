@@ -35,12 +35,19 @@ _oracle_breaker = CircuitBreaker()
 
 BINDER_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "Binder1.txt"))
 
+# Maximum chars for binder context (50K chars = ~12K tokens = ~$0.015 per call)
+MAX_BINDER_CHARS = int(os.getenv("MAX_BINDER_CHARS", "50000"))
+
 def _load_binder_context():
     if not os.path.exists(BINDER_PATH):
         return ""
     try:
         with open(BINDER_PATH, "r", encoding="utf-8") as f:
-            return f.read()
+            content = f.read()
+            if len(content) > MAX_BINDER_CHARS:
+                print(f"[COST] Truncating Binder1.txt from {len(content):,} to {MAX_BINDER_CHARS:,} chars")
+                content = content[:MAX_BINDER_CHARS] + "\n\n[...TRUNCATED FOR COST EFFICIENCY...]"
+            return content
     except Exception as e:
         print(f"Error loading binder context: {e}")
         return ""
@@ -58,7 +65,7 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
     try:
         base_url = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1/chat/completions")
         # Default to Gemini 3 Pro for best reasoning with large context
-        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3-pro-preview")
+        model = os.getenv("OPENROUTER_MODEL", "google/gemini-2.0-flash-001")  # Flash for cost efficiency
         timeout = float(os.getenv("OPENROUTER_TIMEOUT", "120")) # Increased timeout for large context
 
         headers = {
@@ -196,8 +203,10 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
         ]
     else:
         # Paid Tier: High-Volume Multi-Module Interrogation
+        # NOTE: We DO NOT send Binder1.txt anymore - the ForensicEngine output 
+        # already contains all interpreted data. The LLM just formats it.
         questions = [
-            f"REFERENCE MATERIAL (Binder1.txt):\n{BINDER_CONTEXT}\n\nCHART DATA:\n{context}\n\nTASK (Turn 1): Provide a foundational interpretation of core character, temperament, and soul architecture. Aim for at least 800 words, going into extreme detail on the hierarchies of causation.",
+            f"CHART DATA (pre-calculated by ForensicEngine):\n{context}\n\nTASK (Turn 1): Provide a foundational interpretation of core character, temperament, and soul architecture. Aim for at least 800 words, going into extreme detail on the hierarchies of causation. Use the data provided - it already contains dignities, lots, aspects, etc.",
             "TASK (Turn 2): Deep-dive into Professional & Social Destiny. Analyze career, wealth, and public status based on the Lot of Fortune, MC, and relevant ministers. Provide at least 800 words of tactical analysis.",
             "TASK (Turn 3): Deep-dive into the Private Soul & Psychology. Analyze fears, hidden assets, and the subconscious houses (12th, 8th, 4th). Provide at least 800 words on the internal architecture.",
             "TASK (Turn 4): Deep-dive into Relationships, Love, and Social Dynamics. Analyze partner choice and major interpersonal patterns. Aim for 800 words of relational mapping.",
