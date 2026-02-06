@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RCNDWN4XVN');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success | Codex Caelestis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Sora:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .success-container {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 1.5rem;
+        }
+
+        .order-status {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(192, 122, 43, 0.3);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+    </div>
+
+    <main class="success-container">
+        <div class="success-icon">✓</div>
+        <h1>PAYMENT SUCCESSFUL</h1>
+        <p class="subtitle" style="margin-top: 1rem;">Thank you for your purchase.</p>
+
+        <div id="statusCard" class="order-status">
+            <div class="spinner"></div>
+            <p>Verifying your order and generating your full forensic report...</p>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE = window.CAEL_API_BASE || "";
+        function apiUrl(path) { return `${API_BASE}${path}`; }
+
+        async function verifyAndRedirect() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+            const statusCard = document.getElementById('statusCard');
+
+            if (!sessionId) {
+                statusCard.innerHTML = "<p style='color:var(--danger)'>Error: No session ID found. Please contact support.</p>";
+                return;
+            }
+
+            try {
+                const response = await fetch(apiUrl(`/api/v1/billing/verify-checkout-session?session_id=${sessionId}`));
+                if (!response.ok) throw new Error("Verification failed");
+
+                const data = await response.json();
+
+                // Store token
+                localStorage.setItem(`cael_token_${data.chart_hash}`, data.access_token);
+                localStorage.setItem('cael_auth_token', data.access_token);
+
+                statusCard.innerHTML = `
+                    <p style="color:var(--success); font-weight:600; margin-bottom:1rem;">Verified!</p>
+                    <p>Redirecting to your full reading...</p>
+                `;
+
+                // Redirect back to index with token logic or let index handle it?
+                // For now, simpler: Go to a 'viewer' or just back to index and re-trigger?
+                // Index.html doesn't support reading from URL hash yet.
+                // WE MUST IMPLEMENT: re-fetching the reading with the token.
+
+                // Since this is a static site, we can redirect to index.html and store state in localStorage
+                // which we just did. Now we need index.html (basic.js) to know it should re-fetch.
+                // But we don't have the birth data here unless we passed it around or stored it.
+                // 'lastChartRequest' in basic.js is lost on page reload.
+
+                // HOWEVER, the chart_hash is key.
+                // We should probably redirect to a view that takes the chart_hash or token?
+                // The current architecture calculates on the fly.
+
+                // WORKAROUND:
+                // We ask the user to re-enter data? No, that's bad UX.
+                // The backend could return the Input Data in the verify step?
+                // But we didn't implement that in api.py verify_checkout_session.
+
+                // Let's just say "Please check your email" or "Return to home" for MVP if data is lost.
+                // Ideally, we stored the form data in localStorage before checkout?
+
+                setTimeout(() => {
+                    window.location.href = "index.html?action=regenerate";
+                }, 2000);
+
+            } catch (err) {
+                statusCard.innerHTML = `<p style='color:var(--danger)'>Verification failed: ${err.message}</p>`;
+            }
+        }
+
+        verifyAndRedirect();
+    </script>
+</body>
+
+</html>

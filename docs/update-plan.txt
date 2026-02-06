@@ -1,0 +1,138 @@
+Technical Specification: The Sovereign Astrology Engine
+Version: 1.0 Status: Ready for Implementation Objective: Refactor the fragmented calculation logic into a single unified pipeline (SovereignEngine) that acts as the sole source of truth. This engine will produce a bifurcated response: a machine-readable detailed technical object (technical_data) and a human-readable narrative (human_translation).
+
+1. Architectural Overview
+Current State (The Problem)
+Fragmented Logic: logic.py, chart_calculator.py, and synthesis.py often perform redundant or disconnected calculations.
+
+Data Loss: The frontend only receives what the text report chooses to mention.
+
+Maintenance Risk: Changing a calculation (e.g., Almuten logic) requires updating multiple files to ensure consistency between the chart visual and the text report.
+
+Future State (The Solution)
+We are moving to a Hub-and-Spoke architecture.
+
+The Hub: src/engine/sovereign_engine.py (New File).
+
+The Spokes: Existing specialized modules (advanced_mechanics.py, medical.py, etc.) become pure calculation libraries. They do not generate text or manage state; they just return math.
+
+The Output: A single API response containing both the "Technical Schema" (for the dashboard) and the "Narrative Schema" (for the user).
+
+2. Implementation Steps
+Task 1: Create the Sovereign Orchestrator
+File: src/engine/sovereign_engine.py Action: Create a new class that strictly orchestrates the flow. It must not contain calculation logic itself; it imports logic from the "Spokes."
+
+Flow:
+
+Astronomy: Call chart_calculator.calculate_chart_data.
+
+Mechanics: Pass the resulting Chart object to HermeticLotEngine, AlmutenEngine, DecumbitureEngine, etc.
+
+State Assembly: Aggregate all results into a massive technical_data dictionary.
+
+Translation: Pass a subset of technical_data to ReportSynthesizer to generate the text.
+
+Return: A dictionary with keys technical_data and human_translation.
+
+Task 2: Refactor the API Endpoint
+File: src/api/v1/endpoints/charts.py Action: Replace the existing spaghetti logic with a clean call to the Sovereign Engine.
+
+Python
+# src/api/v1/endpoints/charts.py
+
+@router.post("/calculate-full")
+def calculate_full_nativity(req: ChartRequest):
+    """
+    Single Endpoint for Total Omniscience.
+    """
+    try:
+        # Call the new Engine
+        result = SovereignEngine.generate_full_nativity(
+            date_str=req.date,
+            time_str=req.time,
+            city=req.city,
+            state=req.state,
+            name=req.name
+        )
+        
+        if "error" in result:
+            raise HTTPException(status_code=400, detail=result["error"])
+            
+        return result
+
+    except Exception as e:
+        # Log the full stack trace internally, return sane error to client
+        logger.error(f"Engine Failure: {str(e)}")
+        raise HTTPException(status_code=500, detail="Calculation Engine Error")
+Task 3: Standardize the "Spoke" Modules
+Ensure the following files return Data Structures (Dicts/Objects), not Strings.
+
+src/engine/advanced_mechanics.py (Lots, Almuten)
+
+src/engine/medical.py (Constitution)
+
+src/engine/prediction.py (Profections)
+
+src/engine/primary_directions.py (Directing to Angles)
+
+Note: Most of these are already correctly structured, but ensure no "print" statements or text formatting exists within the calculation logic.
+
+Task 4: Deprecate logic.py
+File: src/engine/logic.py Action: This file is currently a "God Object" doing too much.
+
+Move any remaining unique logic (like perform_forensic_audit) into sovereign_engine.py.
+
+Move constants to reference_data.py.
+
+Delete logic.py once the migration is confirmed to prevent future confusion.
+
+3. The Output Data Schema
+The Dev Team should ensure the frontend expects this JSON structure from the new endpoint.
+
+JSON
+{
+  "technical_data": {
+    "meta": {
+      "subject_name": "Client Name",
+      "timestamp": "ISO-8601 String",
+      "julian_day": 2460245.1234
+    },
+    "astronomy": {
+      "planets": { "Sun": { "lon": 213.4, "lat": 0.0, "speed": 0.98 } },
+      "houses": { "1": 15.4, "2": 45.4 },
+      "angles": { "Asc": 15.4, "MC": 270.5 }
+    },
+    "analysis": {
+      "dignity": {
+        "almuten": { "winner": "Mars", "score": 45 },
+        "scores": { "Sun": 12, "Moon": -5 }
+      },
+      "fate": {
+        "hermetic_lots": { "Fortune": 124.5, "Spirit": 290.1 },
+        "primary_directions": [
+          { "age": 32.5, "pair": "Mars-Asc", "aspect": "Square" }
+        ]
+      },
+      "medical": {
+        "constitution": "Choleric",
+        "weakest_organ": "Heart"
+      }
+    }
+  },
+  "human_translation": {
+    "report_markdown": "# Astrological Report\n\n## The Constitution\nYour temperament is...",
+    "executive_summary": "The Native is of a Choleric temperament..."
+  }
+}
+4. Immediate Action Items
+Developer 1: Implement src/engine/sovereign_engine.py copying the logic provided in the architecture review.
+
+Developer 2: Update src/api/v1/endpoints/charts.py to route requests to the new engine.
+
+Frontend Dev: Update the dashboard to:
+
+Render the Chart Wheel using response.technical_data.astronomy.
+
+Render the Text Report using response.human_translation.report_markdown.
+
+(Future) Build a "Timeline View" using response.technical_data.analysis.fate.primary_directions.

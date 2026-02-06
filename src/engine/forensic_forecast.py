@@ -1,0 +1,150 @@
+from datetime import datetime, timedelta
+import swisseph as swe
+from typing import List, Dict, Optional
+from .models import Sign, PlanetName, Chart, Planet
+from .prediction import (
+    calculate_profection_sign,
+    get_lord_of_year,
+    calculate_monthly_profection,
+    calculate_daily_profection
+)
+from .dignities import DignityCalculator
+
+def get_profection_timings(birth_date: datetime, target_date: datetime):
+    """
+    Calculates symbolic profection timing parameters based on 30-day month logic.
+    """
+    # Age (completed years)
+    age = target_date.year - birth_date.year - ((target_date.month, target_date.day) < (birth_date.month, birth_date.day))
+    
+    # Last birthday
+    last_birthday = datetime(target_date.year, birth_date.month, birth_date.day)
+    if last_birthday > target_date:
+        last_birthday = datetime(target_date.year - 1, birth_date.month, birth_date.day)
+        
+    days_since_birthday = (target_date - last_birthday).days
+    
+    # Valens/Traditional: 1 month = 30 days.
+    # Month in profection year (1-12)
+    profection_month = (days_since_birthday // 30) + 1
+    if profection_month > 12: profection_month = 12
+    
+    # Day in profection month (1-30)
+    profection_day = (days_since_birthday % 30) + 1
+    
+    return age, profection_month, float(profection_day)
+
+def calculate_5_day_forecast(natal_chart: Chart, birth_jd: float, start_date: datetime) -> List[Dict]:
+    forecast = []
+    
+    # 1. Birth Info
+    birth_y, birth_m, birth_d, birth_h = swe.revjul(birth_jd)
+    # Convert to datetime for logic
+    # Note: birth_h is fractional hour
+    hour = int(birth_h)
+    minute = int((birth_h - hour) * 60)
+    second = int(((birth_h - hour) * 60 - minute) * 60)
+    try:
+        birth_dt = datetime(int(birth_y), int(birth_m), int(birth_d), hour, minute, second)
+    except ValueError:
+        # Fallback if weird date
+        birth_dt = datetime(int(birth_y), int(birth_m), int(birth_d))
+        
+    # 2. Natal Constants
+    asc_sign_idx = int(natal_chart.ascendant / 30) % 12
+    asc_sign = list(Sign)[asc_sign_idx]
+    
+    # Flags for Swiss Ephemeris
+    flags = swe.FLG_SWIEPH
+    
+    for i in range(5):
+        target_date = start_date + timedelta(days=i)
+        age, prof_m, prof_d = get_profection_timings(birth_dt, target_date)
+        
+        # A. Profections
+        ann_sign = calculate_profection_sign(asc_sign, age)
+        loy_name = get_lord_of_year(ann_sign)
+        
+        mon_sign = calculate_monthly_profection(ann_sign, prof_m)
+        day_sign = calculate_daily_profection(mon_sign, prof_d)
+        day_lord_name = get_lord_of_year(day_sign)
+        
+        # B. Transits for this day (at Noon for general day feel)
+        target_jd = swe.julday(target_date.year, target_date.month, target_date.day, 12.0)
+        
+        # Transiting LoY
+        loy_pid = getattr(swe, loy_name.value.upper(), swe.SUN)
+        loy_trans_res = swe.calc_ut(target_jd, loy_pid, flags)[0]
+        loy_trans_lon = loy_trans_res[0]
+        loy_trans_sign = list(Sign)[int(loy_trans_lon / 30) % 12]
+        
+        # C. Epitasis Check
+        # Is the Daily Profection Sign the sign where the Lord of the Year is currently transiting?
+        is_epitasis = (day_sign == loy_trans_sign)
+        
+        # D. Medical Transits (Body Weather)
+        # Check Mars and Saturn hits to natal planets
+        mars_trans_lon = swe.calc_ut(target_jd, swe.MARS, flags)[0][0]
+        saturn_trans_lon = swe.calc_ut(target_jd, swe.SATURN, flags)[0][0]
+        
+        medical_alerts = []
+        for p in natal_chart.planets:
+            # Check Mars/Saturn hits
+            for t_name, t_lon in [("Mars", mars_trans_lon), ("Saturn", saturn_trans_lon)]:
+                diff = abs(t_lon - p.longitude) % 360
+                if diff > 180: diff = 360 - diff
+                
+                if diff < 2.0: # Close orb for forecast
+                    # Map sign to body part
+                    sign = p.sign
+                    body_part = {
+                        Sign.ARIES: "Head/Eyes",
+                        Sign.TAURUS: "Throat/Neck",
+                        Sign.GEMINI: "Lungs/Arms",
+                        Sign.CANCER: "Stomach/Chest",
+                        Sign.LEO: "Heart/Back",
+                        Sign.VIRGO: "Abdomen/Intestines",
+                        Sign.LIBRA: "Kidneys/Lumbar",
+                        Sign.SCORPIO: "Genitals/Excretory",
+                        Sign.SAGITTARIUS: "Hips/Thighs",
+                        Sign.CAPRICORN: "Knees/Bones",
+                        Sign.AQUARIUS: "Ankles/Circulation",
+                        Sign.PISCES: "Feet/Lymphatic"
+                    }.get(sign, "Universal")
+                    
+                    risk = "Inflammation/Stress" if t_name == "Mars" else "Obstruction/Coldness"
+                    alert = f"{t_name} is hitting your natal {p.name.value} in {sign.value}. "
+                    alert += f"Watch for {risk} in the {body_part} area."
+                    medical_alerts.append(alert)
+
+        # E. Mood & Dignity
+        # Mood based on Day Lord's status in NATAL chart
+        natal_day_lord = next((p for p in natal_chart.planets if p.name == day_lord_name), None)
+        mood = "Neutral"
+        if natal_day_lord:
+             # Use a simplified dignity or just the existing logic
+             # For speed, we check natal sign
+             sect = "DAY" if natal_chart.sun_altitude > 0 else "NIGHT"
+             # Actually we can just use the name
+             # Score it
+             score = 0
+             if natal_day_lord.sign == ann_sign: score += 2 # Year favoritism
+             # Simplified mood logic
+             if score > 0: mood = "Empowered"
+             else: mood = "Standard"
+
+        # F. Synthesis
+        day_data = {
+            "date": target_date.strftime("%Y-%m-%d"),
+            "display_date": target_date.strftime("%A, %b %d"),
+            "chronocrator": day_lord_name.value,
+            "profection_sign": day_sign.value,
+            "epitasis": is_epitasis,
+            "medical": medical_alerts,
+            "mood": mood,
+            "summary": f"The '{day_lord_name.value}' domain is active. " + 
+                       (f"TRANSIT ALERT: High Stakes (Epitasis) enabled." if is_epitasis else "Flow is consistent with the annual cycle.")
+        }
+        forecast.append(day_data)
+        
+    return forecast

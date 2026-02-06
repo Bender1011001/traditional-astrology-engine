@@ -1,0 +1,389 @@
+﻿The Micro-Cosmic Zodiac: A Technical and Historical Reconstruction of Dodecatemoria in the Works of Vettius Valens and Paul of Alexandria
+1. Introduction: The Fractal Geometry of Fate
+The study of Hellenistic astrology is, fundamentally, a study of precision. While the modern astrological gaze often rests on the broad strokes of sign placement and major aspect configurations, the ancient practitioner operated within a universe defined by granular, recursive subdivisions. Among these, the dodecatemoria (Greek: δωδεκατημόρια; "twelfth-parts") stand as a paramount technique, functioning not merely as a supplemental nuance but as a "secret" chart capable of revealing the latent destiny of a nativity. This report provides an exhaustive reconstruction of the dodecatemoria as articulated by two pivotal figures in the tradition: Vettius Valens (2nd century CE) and Paul of Alexandria (4th century CE).
+The divergence between these two authors—specifically regarding the mathematical algorithm for calculating these points—represents one of the most significant technical schisms in the history of horoscopic astrology. Valens, representing the earlier "Egyptian" stream, adheres to a 12-fold expansion rooted in sexagesimal symmetry. Paul of Alexandria, writing two centuries later, introduces a controversial 13-fold calculation, justified by a theoretical need for cyclical closure. To understand these techniques is to understand the struggle of the ancient mind to map the infinite complexity of human fate onto the finite grid of the zodiac.
+This analysis asserts that the dodecatemoria were not symbolic metaphors but rigorous mathematical projections used to:
+1. Rectify the Ascendant: By anchoring the physical incarnation to the fractal position of the Sun.
+2. Modify Essential Dignity: By projecting planets into specific Terms (Bounds) that could override their natal condition.
+3. Determine Outcome: By evaluating the "hidden" rulers of a chart which operate beneath the visible surface of the standard horoscope.
+We shall proceed by deconstructing the Babylonian origins of the technique, analyzing the primary texts of Valens and Paul with philological rigor, and finally establishing an implementation-grade computational model for modern reconstruction.
+1.1 The Babylonian Substrate and the "Micro-Zodiac"
+To grasp the logic of the Hellenistic dodecatemoria, one must look to Mesopotamia. The division of the 30-degree zodiacal sign into twelve subdivisions of 2.5 degrees is attested in cuneiform "micro-zodiac" texts, such as the Kalendertexte (Calendar Texts).1 In these tablets, specific degrees were linked not only to planetary gods but to iatromathematical ingredients—herbs, stones, and rituals used for medical therapy.2
+This historical context is crucial for interpreting Valens. When Valens speaks of a planet being "in the terms of Mars" via its dodecatemorion, he is tapping into a lineage where that specific 2.5-degree segment was ontologically "stained" or "flavored" by Martial qualities, perhaps even linking to specific bodily organs or maladies associated with Mars in the earlier tradition. The Hellenistic innovation was to systematize this into a geometric projection rather than a static lookup table.
+The Babylonian system implied a recursive universe: As above, so below; as in the sign, so in the twelfth-part. This fractal logic suggests that the macrocosm (the 30° sign) contains a complete hologram of the zodiac within it. Thus, the first 2.5° of Aries is a "micro-Aries," the next 2.5° is a "micro-Taurus," and so forth. This is the conceptual bedrock upon which Valens builds his elaborate system of rectification and dignity analysis.1
+________________
+2. Vettius Valens: The Orthodoxy of the 12-Fold Expansion
+Vettius Valens of Antioch is our most valuable witness to the working practices of 2nd-century astrology. Unlike Ptolemy, who attempted to sanitize astrology into Aristotelian physics, Valens presents the "messy," practical reality of the art, filled with hundreds of chart examples and complex algorithms. His Anthologies confirm that the dodecatemoria were central to his methodology, particularly for issues of life expectancy and the determination of the true Ascendant.
+2.1 The Mathematical Algorithm: The 12-Fold Expansion
+The standard method, employed by Valens, Dorotheus, and later firmicus Maternus, is the 12-fold expansion. The logic is linear and sexagesimal: if a sign has 30 degrees, and the zodiac has 360 degrees, mapping the sign to the circle requires a multiplication by 12 (  ).
+2.1.1 Formulation
+For a planet located at longitude    within a specific sign (where   ):
+1. Calculate the Total Arc of Projection (  ):
+  
+2. Determine the Absolute Longitude:
+The projected arc is added to the absolute longitude of the start of the sign containing the planet (  ).
+  
+This formula projects the planet forward from the cusp of its own sign.
+2.1.2 Operational Example: Saturn in Leo
+To verify this algorithm against the historical record, we look to a standard example found in the literature (often cited in relation to Firmicus but applicable to Valens' method) where Saturn is positioned at 17° Leo.4
+Step-by-Step Calculation:
+   1. Input Data:
+   * Planet: Saturn
+   * Sign: Leo (The 5th sign).
+   * Degree (  ): 17°.
+   * Sign Start (  ):    (since   ).
+      2. Compute Arc:
+  
+      3. Project:
+  
+      4. Convert to Zodiacal Coordinate:
+         *    corresponds to the sign of Aquarius (which spans    to   ).
+         * Degree within sign:   .
+Result: The dodecatemorion of Saturn is 24° Aquarius.
+Verification: The source text confirms: "For example, if Saturn were in 17 Leo, its 'dodecatemory' would be in 24 Aquarius".4 This precise match validates the 12-fold multiplication method as the standard technique used in the Valens/Firmicus lineage.
+2.2 The "Left Trine" and the Rectification of the Ascendant
+One of the most sophisticated applications of the dodecatemoria in Valens' Anthologies is the rectification of the birth chart. Valens was acutely aware of the imprecision of water clocks and sundials; thus, he devised astronomical checks to verify the Ascendant degree.
+In Anthologies Book I, Chapter 4, Valens introduces a technique relying on the dodecatemorion of the Sun.5
+2.2.1 The Theoretical Framework
+Valens posits a harmonic resonance between the "Light of the Time" (the Sun) and the "Helm of Life" (the Ascendant). He suggests that the Ascendant must fall in a sign that holds a specific geometric relationship to the micro-zodiacal position of the Sun.
+The Rule:
+            1. Calculate the dodecatemorion of the Sun (  ).
+            2. Identify the sign of the Left Trine relative to   . In the Hellenistic context, "left" refers to the sinister aspect—the sign that rises after the reference sign. This is the trine in zodiacal order (adding 120 degrees).
+            3. For Diurnal Nativities: The Ascendant should ideally be found in the sign of the Left Trine, the sign of the dodecatemorion itself, or the sign opposite the dodecatemorion.
+            4. For Nocturnal Nativities: The Ascendant is found in the signs opposite to those valid for the day (i.e., the Right Trine, etc.).5
+2.2.2 Case Analysis: Sun in Aquarius
+Valens provides a specific example: The Sun is at 22° Aquarius. 5
+Calculation:
+               1. Sun Position: 22° Aquarius.
+               2. Multiplication:   .
+               3. Projection:
+                  * Start of Aquarius:   .
+                  *   .
+                  * Modulo 360:   .
+                     4. Zodiacal Identification:
+                     *    falls in Libra (   to   ).
+                     * Specifically:    Libra.
+The Textual Anomaly (The "Scorpio" Problem): Here we encounter a critical discrepancy in the text or the transmission. The snippet 5 states: "The dodecatemoria of this point is in Scorpio." However, our 12-fold calculation yields Libra.
+Why does the text say Scorpio? There are three possibilities:
+                        1. Textual Corruption: The degree of the Sun might have been different in the original manuscript (e.g., 27° Aquarius would yield Scorpio).
+                        2. Inclusive Counting/Alternative Method: If Valens counted signs inclusively or used a different starting point, but this contradicts his standard practice.
+                        3. The 13-Fold Method: Let us test the Pauline method (multiplying by 13) on this Valens example.
+                        *   .
+                        *   .
+                        *   .
+                        *    falls in Scorpio (   to   ). Specifically, 16° Scorpio.
+Insight: This is a profound finding. The example attributed to Valens in this specific snippet matches the 13-fold calculation associated with Paul of Alexandria, not the 12-fold method Valens is typically said to use. This suggests either:
+                           * The 13-fold method was not invented by Paul but was a known variant utilized even in the 2nd century for specific techniques like rectification.
+                           * The manuscript tradition of Valens has been interpolated by later Pauline/Byzantine copyists who updated the calculations to match the "newer" 13-fold style.
+                           * The snippet text itself is from a section where Valens is citing an earlier source (like Nechepso/Petosiris) who used the 13-fold method.
+If we accept the text's assertion that the dodecatemorion is in Scorpio, the "Left Trine" logic follows:
+                           *    = Scorpio.
+                           * Left Trine (+120°) = Pisces.
+                           * Valens states: "The sign in trine to the left is Pisces. If the birth is during the day, the Ascendant will be Pisces...".5
+This confirms the internal consistency of the astrological logic (Scorpio    Pisces) even if the calculation method (12 vs 13) is ambiguous in this specific passage. For the modern reconstructionist, this highlights the necessity of testing both methods when working with Valens' rectification techniques, as the transmitted text may contain layers of varying methodology.
+2.3 Interpretation: The 12th House and the "Crisis" of the Dodecatemorion
+Valens places significant weight on the interaction between the natal houses and the projected dodecatemoria. A particularly dangerous configuration involves the 12th House, known as the Bad Spirit (Kakos Daimon).6
+The Rule of the 12th: If the dodecatemorion of a vital point (Sun, Moon, Ascendant) falls into the 12th House of the natal chart, it indicates "great injuries and calamities".6 The 12th House signifies enemies, slaves, weakness, and "pre-ascension" matter—things that obscure the life force.
+Example Application:
+                              * Natal Ascendant: 10° Gemini.
+                              * 12th House: Taurus.
+                              * Natal Moon: 5° Gemini.
+                              * Calculation:   .
+                              * Projection: Gemini (3rd sign) + 2 signs = Leo.
+                              * Result: The Moon's dodecatemorion is in Leo (the 3rd House). This is safe.
+                              * Counter-Example: If the Moon were at 28° Gemini.
+                                 *   .
+                                 *    is 11 signs + 6 degrees.
+                                 * Gemini + 11 signs = Taurus.
+                                 * Result: The Moon's dodecatemorion falls in Taurus, the natal 12th House.
+                                 * Interpretation: Even though the natal Moon is in the Ascendant (Gemini), its "substance" or "fractal root" is trapped in the 12th House of enemies and self-undoing. Valens would predict hidden psychological anguish, betrayal by subordinates, or chronic illness for such a native, contradicting the apparent strength of an angular Moon.
+This demonstrates the "override" capability of the dodecatemorion. It acts as a diagnostic tool for hidden pathologies in the chart.
+________________
+3. Paul of Alexandria and the 13-Fold Anomaly
+Writing in 378 CE, Paul of Alexandria presents a distinct methodology in his Eisagogika (Introduction). Chapter 22 of his work contains the explicit instruction to multiply by 13, a directive that has puzzled historians and astrologers alike.
+3.1 The Theory of Return (Apokatastasis)
+Paul's rationale, as elucidated by his commentator Olympiodorus (6th Century CE), is based on the concept of apokatastasis or return.
+The Critique of the 12-Fold: Olympiodorus writes: "Paulus claimed that multiplying by 12 is never returned to the same zoidion where the star is".1 In the 12-fold system, the 30th degree of a sign projects to the 360th degree of the circle, effectively reaching the end of the zodiacal loop relative to that sign. Paul, however, seems to have desired a system where the projection mechanism wrapped around to place the final degree of the sign back into the sign itself—or perhaps he was influenced by the harmonic theory where the 13th harmonic represents the start of the next octave.
+3.2 The Algorithm: The 13-Fold Expansion
+The Pauline formula is mathematically distinct and produces results that drift significantly from the Valens method as the degree increases.
+3.2.1 Formulation
+  
+
+  
+
+3.2.2 Comparative Divergence
+The divergence between the two methods is equal to the degree of the planet (  ).
+                                    * At 0°, they are identical (  ;   ).
+                                    * At 15°, they differ by 15 degrees.
+                                    * At 29°, they differ by 29 degrees (almost an entire sign).
+Table 1: Comparative Drift Analysis (Saturn in Leo)
+Natal Degree (λ)
+	Valens (×12) Arc
+	Valens Sign
+	Paul (×13) Arc
+	Paul Sign
+	Difference
+	Leo 5°
+	  
+
+	Libra 5°
+	  
+
+	Libra 10°
+	5°
+	Leo 15°
+	  
+
+	Aquarius 15°
+	  
+
+	Aquarius 30°
+	15°
+	Leo 17°
+	  
+
+	Aquarius 24°
+	  
+
+	Pisces 11°
+	17°
+	Leo 25°
+	  
+
+	Gemini 25°
+	  
+
+	Cancer 20°
+	25°
+	As shown in the table, for a planet at 17° Leo, the methods yield different signs entirely (Aquarius vs. Pisces). This is not a trivial nuance; it changes the ruler of the dodecatemorion from Saturn (Aquarius) to Jupiter (Pisces), and alters the Terms from Mars (in Aquarius) to Venus (in Pisces).
+3.3 Historical Reception and Modern Reconstruction
+The consensus among scholars like David Pingree and Robert Schmidt is that the 13-fold method is an anomaly, possibly a misunderstanding of the Babylonian inclusive counting method or a niche school's innovation that failed to gain traction.7 Olympiodorus himself contrasts Paul with "the ancients" (Egyptians) who used the 12-fold method.
+However, for a complete reconstruction, the modern practitioner must program both algorithms. The 13-fold method may have validity in specific techniques related to the "Monoiria" (single degree) fate or specific spiritual Lots, where the "return to source" logic (13 as the return to 1) is symbolically relevant.
+________________
+4. The Interpretive Hierarchy: Terms (Bounds) and Dignity
+The most powerful application of the dodecatemoria, regardless of the calculation method, is the evaluation of planetary strength through the system of Terms (Bounds).
+4.1 The Doctrine of the "Hidden Ruler"
+Valens teaches that a planet's visible zodiacal placement is merely its "body," while the dodecatemorion reveals its "spirit" or intention. If a planet is dignified in the natal chart (e.g., Venus in Taurus) but its dodecatemorion falls into a sign or Term where it is debilitated, the planet's promise will be unfulfilled or corrupted.
+4.2 The Egyptian Terms: The Master Key
+To reconstruct this technique, one must utilize the Egyptian Terms table, which divides each sign into 5 unequal segments. These were the terms used by Valens, distinct from the Ptolemaic terms used in later medieval astrology.9
+Table 2: The Egyptian Terms (Selected Signs)
+Note: Numbers indicate the ending degree of the term.
+Sign
+	Term 1
+	Term 2
+	Term 3
+	Term 4
+	Term 5
+	Aries
+	Jup (6°)
+	Ven (12°)
+	Mer (20°)
+	Mar (25°)
+	Sat (30°)
+	Taurus
+	Ven (8°)
+	Mer (14°)
+	Jup (22°)
+	Sat (27°)
+	Mar (30°)
+	Gemini
+	Mer (6°)
+	Jup (12°)
+	Ven (17°)
+	Mar (24°)
+	Sat (30°)
+	Cancer
+	Mar (7°)
+	Ven (13°)
+	Mer (19°)
+	Jup (26°)
+	Sat (30°)
+	Leo
+	Jup (6°)
+	Ven (11°)
+	Sat (18°)
+	Mer (24°)
+	Mar (30°)
+	Virgo
+	Mer (7°)
+	Ven (17°)
+	Jup (21°)
+	Mar (28°)
+	Sat (30°)
+	Libra
+	Sat (6°)
+	Ven (11°)
+	Jup (19°)
+	Mer (24°)
+	Mar (30°)
+	Scorpio
+	Mar (7°)
+	Ven (11°)
+	Mer (19°)
+	Jup (24°)
+	Sat (30°)
+	Sagitt.
+	Jup (12°)
+	Ven (17°)
+	Mer (21°)
+	Sat (26°)
+	Mar (30°)
+	Capric.
+	Mer (7°)
+	Jup (14°)
+	Ven (22°)
+	Sat (26°)
+	Mar (30°)
+	Aquar.
+	Mer (7°)
+	Ven (13°)
+	Jup (20°)
+	Mar (25°)
+	Sat (30°)
+	Pisces
+	Ven (12°)
+	Jup (16°)
+	Mer (19°)
+	Mar (28°)
+	Sat (30°)
+	4.3 Combinatorial Analysis: The Valens Logic
+Valens' approach to interpretation is combinatorial.11 He analyzes the pairing of the planet with the ruler of its dodecatemorion's Terms.
+Scenario A: Corruption of the Benefic
+                                       * Natal: Jupiter in Sagittarius (Domicile) at 28°.
+                                       * Calculation (12-fold):
+                                       *   .
+                                       * Sagittarius + 11 signs = Scorpio.
+                                       * Degree:    Scorpio.
+                                          * Term Analysis: 6° Scorpio is in the Terms of Mars (0-7°).
+                                          * Interpretation: Jupiter is potent by sign (Sagittarius) but its "fruit" is handed over to Mars. This indicates that the native's wealth or status (Jupiter) will be acquired through violence, military action, or contention (Mars), or may be lost due to impulsiveness. The beneficence is "stained" by blood or strife.
+Scenario B: Redemption of the Malefic
+                                          * Natal: Saturn in Leo (Detriment) at 5°.
+                                          * Calculation (12-fold):
+                                          *   .
+                                          * Leo + 2 signs = Libra.
+                                          * Degree: 0° Libra.
+                                             * Term Analysis: 0° Libra is in the Terms of Saturn (0-6°).
+                                             * Interpretation: Saturn is in Libra (Exaltation) and in its own Terms. This completely reverses the judgment of the natal Saturn in Leo. What appears as a weak, miserable Saturn in the natal chart is revealed via the dodecatemorion to possess hidden structural integrity and high dignity. The native may struggle early in life (Leo) but possesses a hidden reserve of discipline and authority (Libra/Saturn Term) that ensures long-term success.
+This technique provides the nuance often missing in rigid essential dignity scoring. It explains why a "bad" chart produces a successful life, or vice versa.
+________________
+5. Advanced Applications: Lots, Antiscia, and Aphesis
+Beyond simple planetary analysis, the dodecatemoria interact with the most advanced timing and structural techniques of Hellenistic astrology.
+5.1 Dodecatemoria of the Lots
+The Lots (Arabic Parts) are calculated points such as the Lot of Fortune (  ) and the Lot of Spirit (  ). Valens explicitly uses the dodecatemoria of these Lots to determine the "Lord of the Year" and critical periods.12
+If the Lot of Fortune represents the body and external circumstances, its dodecatemorion represents the manifestation or outcome of those circumstances.
+                                             * Technique: Calculate Lot of Fortune. Calculate its 12-fold dodecatemorion.
+                                             * Usage: If the Dodecatemorion of Fortune falls on the Natal Sun, it indicates a year of brilliance and recognition. If it falls on Natal Saturn, it indicates a year of physical decline or loss of resources.
+5.2 The "Third Chart": Antiscia
+Snippet 13 references Firmicus Maternus using Antiscia alongside Dodecatemoria. The Antiscion is the reflection of a planet across the solstice points (0° Cancer/0° Capricorn).
+                                             * Synthesis: A complete Hellenistic analysis involves three coordinates for every planet:
+                                             1. Natal Position: The visible body.
+                                             2. Dodecatemorion: The fractal essence/intention.
+                                             3. Antiscion: The "shadow" or connection to light/dark ratios.
+Valens focuses primarily on the first two, but advanced reconstruction requires awareness of the third.
+5.3 Aphesis (Zodiacal Releasing)
+While typically done from the Lot of Fortune, Valens hints that the "Aphetic places" (places that can support life) must be assessed using the dodecatemorion of the Ascendant.14 If the Ascendant's dodecatemorion falls in a "bad" place (6th, 8th, 12th houses), the vitality of the native is compromised, affecting the calculation of the total length of life.
+________________
+6. Implementation Strategy: Computational Logic
+For developers building astrological software to support these techniques, the following pseudo-code logic ensures historical accuracy.
+6.1 Standard (Valens) Algorithm
+
+
+Python
+
+
+
+
+def calculate_dodecatemorion_valens(planet_longitude):
+   """
+   Calculates the 12-fold dodecatemorion.
+   planet_longitude: float (0.0 to 360.0)
+   """
+   # 1. Determine position within sign
+   sign_index = int(planet_longitude / 30)
+   sign_start_degree = sign_index * 30
+   degree_in_sign = planet_longitude % 30
+
+   # 2. Calculate Arc of Projection (x12)
+   projected_arc = degree_in_sign * 12
+
+   # 3. Add to Start of Sign
+   absolute_dodec = (sign_start_degree + projected_arc) % 360
+
+   return absolute_dodec
+
+6.2 Pauline (13-Fold) Algorithm
+
+
+Python
+
+
+
+
+def calculate_dodecatemorion_paul(planet_longitude):
+   """
+   Calculates the 13-fold dodecatemorion.
+   """
+   sign_index = int(planet_longitude / 30)
+   sign_start_degree = sign_index * 30
+   degree_in_sign = planet_longitude % 30
+
+   # Multiplication by 13
+   projected_arc = degree_in_sign * 13
+
+   # Add to Start of Sign
+   absolute_dodec = (sign_start_degree + projected_arc) % 360
+
+   return absolute_dodec
+
+6.3 Term Lookup Logic
+The software must include a lookup table for Egyptian Terms.
+                                             * Input: Dodecatemorion Longitude.
+                                             * Process: Determine Sign    Check Degree against Term ranges    Return Term Ruler.
+                                             * Output: Ruler (e.g., "Mars").
+                                             * Evaluation: Compare Term Ruler nature (Malefic/Benefic) to Planet nature.
+________________
+7. Conclusion: The Reconstruction of Ancient Sight
+The dodecatemoria represent a lost dimension of astrological precision. For Vettius Valens, they were the mechanism by which the crude measurements of time and space were refined into a sharp image of destiny. They allowed the astrologer to see beyond the mask of the sign into the granular reality of the degree.
+While the 13-fold method of Paul of Alexandria stands as a fascinating theoretical variant, the weight of textual evidence and practical application favors the 12-fold expansion as the operational standard of the Hellenistic era. The reconstruction of this technique—specifically the integration of the dodecatemorion with the Egyptian Terms—restores a critical diagnostic tool to the modern astrologer's repertoire.
+By calculating these "twelfth-parts," we are not merely crunching numbers; we are recovering the "secret chart" that Valens claimed contained the "entire substance of the nativity." We move from a static view of the heavens to a dynamic, recursive vision where every degree contains a universe.
+Technical Summary Table
+Feature
+	Vettius Valens (Standard)
+	Paul of Alexandria (Variant)
+	Multiplier
+	12
+	13
+	Formula
+	  
+
+	  
+
+	Metaphysic
+	Micro-Zodiac (Fractal 12)
+	Cyclical Return (13th harmonic)
+	Key Use
+	Rectification (Sun), Terms Analysis
+	Conceptual Completeness
+	Historical Status
+	Orthodoxy ("The Egyptians")
+	Innovation/Anomaly
+	Term Interaction
+	Essential for Dignity/Outcome
+	Implicit but methodologically distinct
+	Final Recommendation for Practitioners:
+Use the 12-fold Valens method for all standard analysis, rectification, and dignity assessment. Reserve the 13-fold Paul method for experimental research into spiritual Lots or specific techniques involving the "return" of planetary periods, bearing in mind its outlier status in the tradition. The integration of Dodecatemoria into the Egyptian Terms should be considered a mandatory step in any serious Hellenistic delineation.
+Works cited
+                                                1. Twelfth-Parts | 1. Introducing the Dodecatemory of the Signs - Seven Stars Astrology, accessed January 30, 2026, https://sevenstarsastrology.com/twelfth-parts-introducingdodecatemory-signs/
+                                                2. The Babylonian Dodecatemoria and Calendar Texts: Inverse Schemes for Determining Position and Times for the Schematic Sun and Moon - Semantic Scholar, accessed January 30, 2026, https://pdfs.semanticscholar.org/fdfb/b29a61d29acd1ed872ea6c01801450b636d8.pdf
+                                                3. History of Dodecatemoria | PDF | Astrology - Scribd, accessed January 30, 2026, https://www.scribd.com/document/902671008/History-of-Dodecatemoria
+                                                4. Dodecatemoria - Firmicus | PDF | Saturn | Ancient Astronomy - Scribd, accessed January 30, 2026, https://www.scribd.com/document/463506551/Dodecatemoria-Firmicus
+                                                5. Anthology of Vettius Valens I | PDF | Planets In Astrology - Scribd, accessed January 30, 2026, https://www.scribd.com/document/952984173/Anthology-of-Vettius-Valens-I
+                                                6. Interpreting the Natal 12th House - Lincos Astrology, accessed January 30, 2026, https://www.lincosastrology.com/post/interpreting-the-natal-12th-house
+                                                7. Dodecatemoria/ninth parts : r/Advancedastrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/1owdmtf/dodecatemorianinth_parts/
+                                                8. Twelfth Parts 2 The Secret Second Chart - Scribd, accessed January 30, 2026, https://www.scribd.com/document/463506510/Twelfth-Parts-2-The-Secret-Second-Chart
+                                                9. Alexander Jones and John Steele. "A New Discovery of a Component of Greek Astrology in Babylonian Tablets: The “Terms”." ISAW Papers 1 (2011). - NYU, accessed January 30, 2026, http://dlib.nyu.edu/awdl/isaw/isaw-papers/1/
+                                                10. VETTIUS VALENS Anthologies - GitHub, accessed January 30, 2026, https://raw.githubusercontent.com/janegca/latex-valens/main/Valens-Anthologies-Annotated.pdf
+                                                11. The logic of planetary combination in Vettius Valens - Digital Library Technology Services, accessed January 30, 2026, http://dlib.nyu.edu/awdl/isaw/isaw-papers/24/
+                                                12. Twelve Easy Lessons for Beginners | 7. The Lots - Seven Stars Astrology, accessed January 30, 2026, https://sevenstarsastrology.com/twelve-easy-lessons-for-beginners-7-the-lots/
+                                                13. Twelfth-Parts | 2. The Secret Second Chart - Seven Stars Astrology, accessed January 30, 2026, https://sevenstarsastrology.com/twelfth-parts-2-secret-chart/
+                                                14. Platikos and moirikos: Ancient Horoscopic Practice in the Light of Vettius Valens' Anthologies in - Brill, accessed January 30, 2026, https://brill.com/view/journals/ijdp/4/1/article-p1_1.xml?language=en

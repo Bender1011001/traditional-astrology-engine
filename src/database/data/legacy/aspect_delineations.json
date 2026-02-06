@@ -1,0 +1,69 @@
+{
+  "aspects": {
+    "conjunction": {
+      "degrees": 0,
+      "orb": 10,
+      "nature": "Variable - depends on planets involved",
+      "keywords": [
+        "union",
+        "blending",
+        "intensification"
+      ],
+      "benefic_to_benefic": "Great fortune, mutual support, amplified benefits",
+      "malefic_to_malefic": "Intense difficulty, compounded challenges",
+      "benefic_to_malefic": "Mixed results; benefic may mitigate malefic or be corrupted by it"
+    },
+    "opposition": {
+      "degrees": 180,
+      "orb": 10,
+      "nature": "Malefic - separation, confrontation",
+      "keywords": [
+        "separation",
+        "confrontation",
+        "awareness",
+        "conflict"
+      ],
+      "day_chart_effect": "More visible, open conflicts; public disputes",
+      "night_chart_effect": "Hidden tensions, internal struggles",
+      "source_quote": "They are enemies by opposition of Houses"
+    },
+    "square": {
+      "degrees": 90,
+      "orb": 8,
+      "nature": "Malefic - friction, struggle",
+      "keywords": [
+        "friction",
+        "tension",
+        "action",
+        "crisis"
+      ],
+      "day_chart_effect": "Active, visible struggles requiring action",
+      "night_chart_effect": "Internal obstacles, psychological friction"
+    },
+    "trine": {
+      "degrees": 120,
+      "orb": 8,
+      "nature": "Benefic - harmony, ease",
+      "keywords": [
+        "harmony",
+        "flow",
+        "support",
+        "gifts"
+      ],
+      "day_chart_effect": "Public recognition, visible blessings",
+      "night_chart_effect": "Private contentment, inner peace"
+    },
+    "sextile": {
+      "degrees": 60,
+      "orb": 6,
+      "nature": "Benefic - opportunity, cooperation",
+      "keywords": [
+        "opportunity",
+        "communication",
+        "cooperation"
+      ],
+      "effect": "Weaker than trine but still beneficial; requires effort to activate"
+    }
+  },
+  "source": "Ptolemy, Tetrabiblos; Valens, Anthology; Lilly, Christian Astrology"
+}

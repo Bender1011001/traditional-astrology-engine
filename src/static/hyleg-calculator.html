@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RCNDWN4XVN');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyleg Calculator (Vitality & Longevity) | Codex Caelestis</title>
+    <meta name="description"
+        content="Calculate your Hyleg (Giver of Life) and Alcocoden (Giver of Years) using traditional medieval astrology. A forensic audit of constitutional vitality.">
+    <meta name="keywords"
+        content="Hyleg Calculator, Alcocoden Calculator, Giver of Life, medical astrology, medieval astrology, vitality astrology, Bonatti, Lilly">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#f4efe6">
+    <link rel="canonical" href="https://traditional-astrology.com/hyleg-calculator.html">
+    <meta property="og:title" content="Hyleg Calculator (Vitality Audit)">
+    <meta property="og:description"
+        content="Discover the planet that governs your physical vitality and constitution. Historical forensic astrology.">
+    <meta property="og:image" content="https://traditional-astrology.com/og-card.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://traditional-astrology.com/hyleg-calculator.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hyleg Calculator">
+    <meta name="twitter:description" content="Discover your Hyleg and Alcocoden.">
+    <meta name="twitter:image" content="https://traditional-astrology.com/og-card.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260202med">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Hyleg Calculator",
+      "url": "https://traditional-astrology.com/hyleg-calculator.html",
+      "description": "Calculates the Hyleg and Alcocoden for astrological vitality assessment.",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="stars-bg"></div>
+
+    <header class="glass-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="/" class="logo-link">CODEX CAELESTIS</a>
+            </div>
+            <div class="header-actions">
+                <a href="#calculator" class="btn-secondary small">CALCULATE VITALITY</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="landing-main">
+        <article class="seo-article">
+            <header class="article-header">
+                <span class="category-tag">Medical Astrology</span>
+                <h1 style="font-size: 2.8rem;">The Hyleg & Alcocoden</h1>
+                <p class="subtitle">The Medieval Calculus of Life Force</p>
+            </header>
+
+            <div class="content-block">
+                <div class="impact-alert" style="border-left-color: var(--danger);">
+                    <strong>HISTORICAL CONTEXT ONLY</strong>
+                    <p style="margin-top:0.5rem; font-size: 0.9rem;">
+                        This tool performs a calculation used by 12th-century astrologers (Bonatti, Valens) to estimate
+                        vitality and potential lifespan.
+                        <strong>It is not a medical diagnosis.</strong> It is a forensic analysis of the "Qi" or
+                        life-force in the chart.
+                    </p>
+                </div>
+
+                <p class="lead">
+                    In the hierarchy of the chart, two planets hold the keys to physical existence:
+                </p>
+                <ul class="clean-list" style="margin-bottom: 2rem;">
+                    <li><strong>The Hyleg (Giver of Life):</strong> The planet or point that represents the physical
+                        body and its resilience.</li>
+                    <li><strong>The Alcocoden (Giver of Years):</strong> The planet that "rules" the Hyleg and grants it
+                        time.</li>
+                </ul>
+            </div>
+
+            <section id="calculator" class="calculator-section">
+                <div class="calculator-card highlight-border" style="border-color: var(--text-muted);">
+                    <div class="calc-header">
+                        <h2>Vitality Audit</h2>
+                        <p>Identify your constitutional guardians.</p>
+                    </div>
+
+                    <form id="basicForm" class="basic-form" onsubmit="return false;">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="basicName">Name</label>
+                                <input type="text" id="basicName" placeholder="e.g. Jane Doe">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="basicDate">Birth Date</label>
+                                <input type="date" id="basicDate" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="basicTime">Birth Time</label>
+                                <div class="time-input-wrapper">
+                                    <input type="time" id="basicTime" required>
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" id="basicTimeUnknown">
+                                        <label for="basicTimeUnknown" class="small-label">Unknown</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="basicCity">Birth City</label>
+                                <input type="text" id="basicCity" placeholder="e.g. New York" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="basicStartBtn" class="btn-primary full-width">
+                            CALCULATE HYLEG
+                        </button>
+                    </form>
+
+                    <div id="basicLoading" class="loading-state hidden">
+                        <div class="spinner"></div>
+                        <p>Scanning Aphetic Places...</p>
+                    </div>
+
+                    <div id="hylegResult" class="result-container hidden">
+                        <!-- JS injects specific result here -->
+                    </div>
+
+                    <div id="basicReading" class="hidden">
+                        <!-- Standard container hidden -->
+                    </div>
+                </div>
+            </section>
+
+            <div class="content-block">
+                <h2>The Methodology</h2>
+                <p>
+                    This engine uses the <strong>Bonatti Method</strong>. We scan the "Aphetic Places" (1st, 10th, 11th,
+                    7th, 9th Houses) for the Sun (Day) or Moon (Night). If the Luminaries are not in these power zones,
+                    we look to the Ascendant, the Part of Fortune, or the Syzygy.
+                </p>
+                <p>
+                    Once the Hyleg is found, we look for its <strong>Alcocoden</strong>: the planet that has the most
+                    dignity in that degree <em>and aspects the Hyleg</em>. This relationship determines the "Vitality
+                    Rating."
+                </p>
+            </div>
+
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Codex Caelestis.</p>
+            <nav class="footer-nav">
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="basic.js?v=med1"></script>
+</body>
+
+</html>

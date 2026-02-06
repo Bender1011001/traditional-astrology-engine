@@ -1,0 +1,21 @@
+Auditor Failure: 'date'
+Traceback (most recent call last):
+  File "E:\code.projects\astrology\scripts\..\src\engine\forensic_engine.py", line 149, in generate_full_nativity
+    audit_results = Auditor.perform_audit(
+        chart=chart,
+    ...<3 lines>...
+        age=age
+    )
+  File "E:\code.projects\astrology\scripts\..\src\engine\forensic_engine.py", line 261, in perform_audit
+    rule_ledger = Auditor._generate_rule_ledger(
+        chart=chart,
+    ...<5 lines>...
+        jd=jd
+    )
+  File "E:\code.projects\astrology\scripts\..\src\engine\forensic_engine.py", line 640, in _generate_rule_ledger
+    "trace": [f"Eclipse: {ec['date']}"]
+                          ~~^^^^^^^^
+KeyError: 'date'
+
+--- STARTING FULL READING FOR 1996-08-13 07:18 Fairfield ---
+Audit Error: Auditor Failure: 'date'

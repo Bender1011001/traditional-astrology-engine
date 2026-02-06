@@ -1,0 +1,44 @@
+site_name: Codex Caelestis
+site_description: The Premier Judicial Astrology Engine
+site_url: https://codex-caelestis.com/docs
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Home: index.md
+  - Core Concepts: concepts.md
+  - Engine Reference:
+    - Architecture: engine/architecture.md
+    - Auditor: engine/auditor.md
+    - Rule Ledger: engine/rule_ledger.md
+    - Advanced Mechanics: engine/mechanics.md
+  - CLI Guide: cli.md
+  - Research: research.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html

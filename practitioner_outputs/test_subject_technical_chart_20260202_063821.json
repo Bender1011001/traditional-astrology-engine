@@ -1,0 +1,1812 @@
+{
+    "meta": {
+        "subject_name": "Test Subject",
+        "timestamp": "2026-02-02T06:38:21.247667",
+        "julian_day": 2447893.2083333335,
+        "city": "New York",
+        "coords": {
+            "lat": 40.7127281,
+            "lon": -74.0060152
+        },
+        "age": 36
+    },
+    "astronomy": {
+        "planets": {
+            "Sun": {
+                "longitude": 281.0266448163021,
+                "latitude": 2.0062390251214924e-05,
+                "distance": 0.9833250264923047,
+                "speed": 1.0194603009257137,
+                "altitude": 26.300531786921304,
+                "is_retrograde": false,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 258.9733551836979,
+                        "sign": "Sagittarius"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 78.97335518369789,
+                        "sign": "Gemini"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 42.319737795625315,
+                        "sign": "Taurus",
+                        "term_ruler": "Mercury"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Venus",
+                        "trigonal_ruler": "Jupiter"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 53.346382611927424,
+                            "sign": "Taurus",
+                            "ruler": "Venus",
+                            "term_ruler": "Saturn"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 64.37302742822953,
+                            "sign": "Gemini",
+                            "ruler": "Mercury",
+                            "term_ruler": "Mercury"
+                        }
+                    }
+                }
+            },
+            "Moon": {
+                "longitude": 336.07828534095154,
+                "latitude": 1.7138624817745831,
+                "distance": 0.002531030511568429,
+                "speed": 13.51168357052273,
+                "altitude": 19.0938590762308,
+                "is_retrograde": false,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 203.92171465904846,
+                        "sign": "Libra"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 23.92171465904846,
+                        "sign": "Aries"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 42.93942409141846,
+                        "sign": "Taurus",
+                        "term_ruler": "Mercury"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Saturn",
+                        "trigonal_ruler": "Sun"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 49.01770943237,
+                            "sign": "Taurus",
+                            "ruler": "Venus",
+                            "term_ruler": "Jupiter"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 55.095994773321536,
+                            "sign": "Taurus",
+                            "ruler": "Venus",
+                            "term_ruler": "Saturn"
+                        }
+                    }
+                }
+            },
+            "Mercury": {
+                "longitude": 295.60713402368356,
+                "latitude": 0.6958221074639086,
+                "distance": 0.7665912273237507,
+                "speed": -0.3358628783472712,
+                "altitude": 27.294132270571865,
+                "is_retrograde": true,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 244.39286597631644,
+                        "sign": "Sagittarius"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 64.39286597631644,
+                        "sign": "Gemini"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 217.28560828420268,
+                        "sign": "Scorpio",
+                        "term_ruler": "Venus"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Venus",
+                        "trigonal_ruler": "Jupiter"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 242.89274230788624,
+                            "sign": "Sagittarius",
+                            "ruler": "Jupiter",
+                            "term_ruler": "Jupiter"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 268.4998763315698,
+                            "sign": "Sagittarius",
+                            "ruler": "Jupiter",
+                            "term_ruler": "Mars"
+                        }
+                    }
+                }
+            },
+            "Venus": {
+                "longitude": 306.1937769488276,
+                "latitude": 1.9525247281247347,
+                "distance": 0.3046016218463865,
+                "speed": -0.1390526372342865,
+                "altitude": 27.58898949246222,
+                "is_retrograde": true,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 233.80622305117242,
+                        "sign": "Scorpio"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 53.806223051172424,
+                        "sign": "Taurus"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 14.325323385930915,
+                        "sign": "Aries",
+                        "term_ruler": "Mercury"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Moon",
+                        "trigonal_ruler": "Sun"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 20.51910033475849,
+                            "sign": "Aries",
+                            "ruler": "Mars",
+                            "term_ruler": "Mars"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 26.712877283586067,
+                            "sign": "Aries",
+                            "ruler": "Mars",
+                            "term_ruler": "Saturn"
+                        }
+                    }
+                }
+            },
+            "Mars": {
+                "longitude": 250.14671456889056,
+                "latitude": -0.0352204217807123,
+                "distance": 2.306399063065535,
+                "speed": 0.7038703361628688,
+                "altitude": 19.944695028249242,
+                "is_retrograde": false,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 289.85328543110944,
+                        "sign": "Capricorn"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 109.85328543110944,
+                        "sign": "Cancer"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 1.7605748266867067,
+                        "sign": "Aries",
+                        "term_ruler": "Jupiter"
+                    },
+                    "doryphory": [
+                        {
+                            "type": "Bodily/Oriental",
+                            "luminary": "Sun",
+                            "score": 10
+                        }
+                    ],
+                    "monomoiria": {
+                        "zoidion_ruler": "Venus",
+                        "trigonal_ruler": "Saturn"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 11.907289395577266,
+                            "sign": "Aries",
+                            "ruler": "Mars",
+                            "term_ruler": "Venus"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 22.054003964467825,
+                            "sign": "Aries",
+                            "ruler": "Mars",
+                            "term_ruler": "Mars"
+                        }
+                    }
+                }
+            },
+            "Jupiter": {
+                "longitude": 95.12072072739113,
+                "latitude": -0.11645362563402224,
+                "distance": 4.171938023694304,
+                "speed": -0.13436489555196812,
+                "altitude": -25.77523498850529,
+                "is_retrograde": true,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 84.87927927260887,
+                        "sign": "Gemini"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 264.87927927260887,
+                        "sign": "Sagittarius"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 151.44864872869357,
+                        "sign": "Virgo",
+                        "term_ruler": "Mercury"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Venus",
+                        "trigonal_ruler": "Mars"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 156.5693694560847,
+                            "sign": "Virgo",
+                            "ruler": "Mercury",
+                            "term_ruler": "Mercury"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 161.69009018347583,
+                            "sign": "Virgo",
+                            "ruler": "Mercury",
+                            "term_ruler": "Venus"
+                        }
+                    }
+                }
+            },
+            "Saturn": {
+                "longitude": 285.68216394680786,
+                "latitude": 0.2930470040707644,
+                "distance": 11.006846551160443,
+                "speed": 0.11828976200249136,
+                "altitude": 26.89260716982282,
+                "is_retrograde": false,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 254.31783605319214,
+                        "sign": "Sagittarius"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 74.31783605319214,
+                        "sign": "Gemini"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 98.18596736169434,
+                        "sign": "Cancer",
+                        "term_ruler": "Venus"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Jupiter",
+                        "trigonal_ruler": "Mercury"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 113.8681313085022,
+                            "sign": "Cancer",
+                            "ruler": "Moon",
+                            "term_ruler": "Jupiter"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 129.55029525531006,
+                            "sign": "Leo",
+                            "ruler": "Sun",
+                            "term_ruler": "Venus"
+                        }
+                    }
+                }
+            },
+            "Uranus": {
+                "longitude": 275.79797517402864,
+                "latitude": -0.270139911298294,
+                "distance": 20.359169023422577,
+                "speed": 0.059990604409726346,
+                "altitude": 25.479882792363775,
+                "is_retrograde": false,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 264.20202482597136,
+                        "sign": "Sagittarius"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 84.20202482597136,
+                        "sign": "Gemini"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 339.57570208834363,
+                        "sign": "Pisces",
+                        "term_ruler": "Venus"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Mercury",
+                        "trigonal_ruler": "Mars"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 345.37367726237227,
+                            "sign": "Pisces",
+                            "ruler": "Jupiter",
+                            "term_ruler": "Jupiter"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 351.1716524364009,
+                            "sign": "Pisces",
+                            "ruler": "Jupiter",
+                            "term_ruler": "Mars"
+                        }
+                    }
+                }
+            },
+            "Neptune": {
+                "longitude": 282.04601714093025,
+                "latitude": 0.8473322422628713,
+                "distance": 31.19349437112108,
+                "speed": 0.037903727002270425,
+                "altitude": 27.228687998967754,
+                "is_retrograde": false,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 257.95398285906975,
+                        "sign": "Sagittarius"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 77.95398285906975,
+                        "sign": "Gemini"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 54.55220569116295,
+                        "sign": "Taurus",
+                        "term_ruler": "Saturn"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Mercury",
+                        "trigonal_ruler": "Mars"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 66.5982228320932,
+                            "sign": "Gemini",
+                            "ruler": "Mercury",
+                            "term_ruler": "Jupiter"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 78.64423997302345,
+                            "sign": "Gemini",
+                            "ruler": "Mercury",
+                            "term_ruler": "Mars"
+                        }
+                    }
+                }
+            },
+            "Pluto": {
+                "longitude": 227.09884824063812,
+                "latitude": 15.28570366812667,
+                "distance": 30.20370016823635,
+                "speed": 0.027224553998728036,
+                "altitude": 25.372895395618787,
+                "is_retrograde": false,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 312.9011517593619,
+                        "sign": "Aquarius"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 132.90115175936188,
+                        "sign": "Leo"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 55.186178887657434,
+                        "sign": "Taurus",
+                        "term_ruler": "Saturn"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Mercury",
+                        "trigonal_ruler": "Saturn"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 72.28502712829555,
+                            "sign": "Gemini",
+                            "ruler": "Mercury",
+                            "term_ruler": "Venus"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 89.38387536893367,
+                            "sign": "Gemini",
+                            "ruler": "Mercury",
+                            "term_ruler": "Saturn"
+                        }
+                    }
+                }
+            },
+            "North_Node": {
+                "longitude": 318.42395025051525,
+                "latitude": 0.0,
+                "distance": 0.00256955528979999,
+                "speed": -0.0529618133117423,
+                "altitude": 23.436459292876865,
+                "is_retrograde": true,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 221.57604974948475,
+                        "sign": "Scorpio"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 41.57604974948475,
+                        "sign": "Taurus"
+                    },
+                    "dodecatemorion": {
+                        "longitude": 161.08740300618297,
+                        "sign": "Virgo",
+                        "term_ruler": "Venus"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Venus",
+                        "trigonal_ruler": "Jupiter"
+                    },
+                    "dodecatemoria": {
+                        "valens": {
+                            "method": "Valens (x12)",
+                            "longitude": 179.51135325669816,
+                            "sign": "Virgo",
+                            "ruler": "Mercury",
+                            "term_ruler": "Saturn"
+                        },
+                        "paul": {
+                            "method": "Paul (x13)",
+                            "longitude": 197.93530350721346,
+                            "sign": "Libra",
+                            "ruler": "Venus",
+                            "term_ruler": "Jupiter"
+                        }
+                    }
+                }
+            },
+            "South_Node": {
+                "longitude": 138.42395025051525,
+                "latitude": -0.0,
+                "speed": -0.0529618133117423,
+                "is_retrograde": true,
+                "classical": {
+                    "antiscia": {
+                        "longitude": 41.57604974948475,
+                        "sign": "Taurus"
+                    },
+                    "contra_antiscia": {
+                        "longitude": 221.57604974948475,
+                        "sign": "Scorpio"
+                    },
+                    "monomoiria": {
+                        "zoidion_ruler": "Saturn",
+                        "trigonal_ruler": "Jupiter"
+                    }
+                }
+            }
+        },
+        "houses": {
+            "1": 0.0,
+            "2": 30.0,
+            "3": 60.0,
+            "4": 90.0,
+            "5": 120.0,
+            "6": 150.0,
+            "7": 180.0,
+            "8": 210.0,
+            "9": 240.0,
+            "10": 270.0,
+            "11": 300.0,
+            "12": 330.0
+        },
+        "angles": {
+            "Asc": 20.664869062526854,
+            "MC": 281.10768022067276
+        }
+    },
+    "analysis": {
+        "dignity": {
+            "almuten": {
+                "winner": "Venus",
+                "score": 26,
+                "breakdown": {
+                    "Sun": 18,
+                    "Moon": 2,
+                    "Mercury": 18,
+                    "Venus": 26,
+                    "Mars": 24,
+                    "Jupiter": 18,
+                    "Saturn": 26
+                }
+            },
+            "doryphory": [
+                "Mars"
+            ]
+        },
+        "fate": {
+            "hermetic_lots": {
+                "Fortune": {
+                    "longitude": 75.71650958717629,
+                    "sign": "Gemini",
+                    "house": 3,
+                    "ruler": "Mercury",
+                    "status": "Lot Maltreated",
+                    "maltreatment_details": [
+                        "[Lot] Opposed by Mars. (Within 5\u00b0 orb)"
+                    ]
+                },
+                "Spirit": {
+                    "longitude": 325.61322853787743,
+                    "sign": "Aquarius",
+                    "house": 11,
+                    "ruler": "Saturn",
+                    "status": "Clear",
+                    "maltreatment_details": []
+                },
+                "Necessity": {
+                    "longitude": 240.55549349903413,
+                    "sign": "Sagittarius",
+                    "house": 9,
+                    "ruler": "Jupiter",
+                    "status": "Ruler Maltreated",
+                    "maltreatment_details": [
+                        "[Ruler Jupiter] Opposed by Saturn. (Within 10\u00b0 orb) (Mitigated by Benefic Intervention: -3 severity)"
+                    ]
+                },
+                "Eros": {
+                    "longitude": 1.245417473477005,
+                    "sign": "Aries",
+                    "house": 1,
+                    "ruler": "Mars",
+                    "status": "Lot Maltreated",
+                    "maltreatment_details": [
+                        "[Lot] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -2 severity)"
+                    ]
+                },
+                "Courage": {
+                    "longitude": 195.09507404424113,
+                    "sign": "Libra",
+                    "house": 7,
+                    "ruler": "Venus",
+                    "status": "Lot Maltreated",
+                    "maltreatment_details": [
+                        "[Lot] Enclosed by rays of Mars and Saturn (Span: 5.5\u00b0).",
+                        "[Lot] Struck by Saturn via tight square (0.6\u00b0 orb)."
+                    ]
+                },
+                "Victory": {
+                    "longitude": 150.17236125204056,
+                    "sign": "Virgo",
+                    "house": 6,
+                    "ruler": "Mercury",
+                    "status": "Clear",
+                    "maltreatment_details": []
+                },
+                "Nemesis": {
+                    "longitude": 230.63052342215843,
+                    "sign": "Scorpio",
+                    "house": 8,
+                    "ruler": "Mars",
+                    "status": "Clear",
+                    "maltreatment_details": []
+                }
+            },
+            "primary_directions": [
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Neptune",
+                    "aspect": "Conjunction",
+                    "arc": 1.0150427596012719,
+                    "years": 1.0150427596012719,
+                    "date_offset": "1y 0m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Mercury",
+                    "aspect": "Square (Dexter)",
+                    "arc": 3.0206274659319803,
+                    "years": 3.0206274659319803,
+                    "date_offset": "3y 0m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Saturn",
+                    "aspect": "Conjunction",
+                    "arc": 4.93569970197791,
+                    "years": 4.93569970197791,
+                    "date_offset": "4y 11m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Pluto",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 6.45701841227293,
+                    "years": 6.45701841227293,
+                    "date_offset": "6y 5m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Jupiter",
+                    "aspect": "Sextile (Sinister)",
+                    "arc": 9.085171792704557,
+                    "years": 9.085171792704557,
+                    "date_offset": "9y 1m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Uranus",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 9.53210715395641,
+                    "years": 9.53210715395641,
+                    "date_offset": "9y 6m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Moon",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 9.717750239157695,
+                    "years": 9.717750239157695,
+                    "date_offset": "9y 8m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Venus",
+                    "aspect": "Square (Dexter)",
+                    "arc": 9.794351346084806,
+                    "years": 9.794351346084806,
+                    "date_offset": "9y 9m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Sun",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 13.062323657342247,
+                    "years": 13.062323657342247,
+                    "date_offset": "13y 0m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Neptune",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 13.768090877945713,
+                    "years": 13.768090877945713,
+                    "date_offset": "13y 9m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Mercury",
+                    "aspect": "Conjunction",
+                    "arc": 15.503072828184088,
+                    "years": 15.503072828184088,
+                    "date_offset": "15y 6m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Saturn",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 16.336264913846968,
+                    "years": 16.336264913846968,
+                    "date_offset": "16y 4m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Pluto",
+                    "aspect": "Opposition",
+                    "arc": 17.359336366175526,
+                    "years": 17.359336366175526,
+                    "date_offset": "17y 4m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Mercury",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 23.795896988303028,
+                    "years": 23.795896988303028,
+                    "date_offset": "23y 9m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Venus",
+                    "aspect": "Conjunction",
+                    "arc": 26.495007785915163,
+                    "years": 26.495007785915163,
+                    "date_offset": "26y 5m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Mars",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 30.514865587849556,
+                    "years": 30.514865587849556,
+                    "date_offset": "30y 6m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Moon",
+                    "aspect": "Square (Dexter)",
+                    "arc": 32.491945753901916,
+                    "years": 32.491945753901916,
+                    "date_offset": "32y 5m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Venus",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 32.5930572128768,
+                    "years": 32.5930572128768,
+                    "date_offset": "32y 7m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Mars",
+                    "aspect": "Opposition",
+                    "arc": 36.1254552353465,
+                    "years": 36.1254552353465,
+                    "date_offset": "36y 1m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Pluto",
+                    "aspect": "Square (Dexter)",
+                    "arc": 37.47019248041482,
+                    "years": 37.47019248041482,
+                    "date_offset": "37y 5m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Jupiter",
+                    "aspect": "Trine (Sinister)",
+                    "arc": 54.872803729932286,
+                    "years": 54.872803729932286,
+                    "date_offset": "54y 10m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Uranus",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 55.51160968577659,
+                    "years": 55.51160968577659,
+                    "date_offset": "55y 6m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Moon",
+                    "aspect": "Conjunction",
+                    "arc": 55.775736704815586,
+                    "years": 55.775736704815586,
+                    "date_offset": "55y 9m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Mars",
+                    "aspect": "Square (Dexter)",
+                    "arc": 59.59257729914481,
+                    "years": 59.59257729914481,
+                    "date_offset": "59y 7m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Sun",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 60.41426303646108,
+                    "years": 60.41426303646108,
+                    "date_offset": "60y 4m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Neptune",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 61.364604450035415,
+                    "years": 61.364604450035415,
+                    "date_offset": "61y 4m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Jupiter",
+                    "aspect": "Conjunction",
+                    "arc": 61.703219766218695,
+                    "years": 61.703219766218695,
+                    "date_offset": "61y 8m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Uranus",
+                    "aspect": "Opposition",
+                    "arc": 62.47080523257681,
+                    "years": 62.47080523257681,
+                    "date_offset": "62y 5m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Moon",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 62.78950996033308,
+                    "years": 62.78950996033308,
+                    "date_offset": "62y 9m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Saturn",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 64.74214083714253,
+                    "years": 64.74214083714253,
+                    "date_offset": "64y 8m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Pluto",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 66.0534206509954,
+                    "years": 66.0534206509954,
+                    "date_offset": "66y 0m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Sun",
+                    "aspect": "Opposition",
+                    "arc": 68.50828489977796,
+                    "years": 68.50828489977796,
+                    "date_offset": "68y 6m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Neptune",
+                    "aspect": "Opposition",
+                    "arc": 69.70697253155727,
+                    "years": 69.70697253155727,
+                    "date_offset": "69y 8m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Mercury",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 73.88985324737132,
+                    "years": 73.88985324737132,
+                    "date_offset": "73y 10m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Saturn",
+                    "aspect": "Opposition",
+                    "arc": 74.0347757467449,
+                    "years": 74.0347757467449,
+                    "date_offset": "74y 0m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Pluto",
+                    "aspect": "Trine (Sinister)",
+                    "arc": 75.74144780402615,
+                    "years": 75.74144780402615,
+                    "date_offset": "75y 8m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Jupiter",
+                    "aspect": "Square (Sinister)",
+                    "arc": 82.62162477741276,
+                    "years": 82.62162477741276,
+                    "date_offset": "82y 7m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Uranus",
+                    "aspect": "Square (Dexter)",
+                    "arc": 83.2438859132829,
+                    "years": 83.2438859132829,
+                    "date_offset": "83y 2m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Venus",
+                    "aspect": "Sextile (Dexter)",
+                    "arc": 83.60765519645054,
+                    "years": 83.60765519645054,
+                    "date_offset": "83y 7m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Mercury",
+                    "aspect": "Opposition",
+                    "arc": 86.19288745860484,
+                    "years": 86.19288745860484,
+                    "date_offset": "86y 2m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Mars",
+                    "aspect": "Trine (Dexter)",
+                    "arc": 87.24625420380607,
+                    "years": 87.24625420380607,
+                    "date_offset": "87y 2m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Sun",
+                    "aspect": "Square (Dexter)",
+                    "arc": 88.05791172451512,
+                    "years": 88.05791172451512,
+                    "date_offset": "88y 0m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Neptune",
+                    "aspect": "Square (Dexter)",
+                    "arc": 88.9991276355625,
+                    "years": 88.9991276355625,
+                    "date_offset": "88y 11m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Midheaven",
+                    "promittor": "Saturn",
+                    "aspect": "Square (Dexter)",
+                    "arc": 92.36597933029037,
+                    "years": 92.36597933029037,
+                    "date_offset": "92y 4m",
+                    "method": "Placidus/Zodiacal"
+                },
+                {
+                    "significator": "Ascendant",
+                    "promittor": "Venus",
+                    "aspect": "Opposition",
+                    "arc": 99.53651947782319,
+                    "years": 99.53651947782319,
+                    "date_offset": "99y 6m",
+                    "method": "Placidus/Zodiacal"
+                }
+            ],
+            "primary_direction_distributor": {
+                "type": "Distributor (Term Ruler)",
+                "planet": "Jupiter",
+                "partner": "Mars",
+                "partner_reason": "Aspecting Planet (Mars)",
+                "directed_ascendant_deg": 70.10217729972678,
+                "arc": 36.0848733744011,
+                "description": "The Directed Ascendant is at 70.10\u00b0, in the Terms of Jupiter. Partner: Mars (Aspecting Planet (Mars))."
+            },
+            "profections": {},
+            "firdaria": {
+                "Major Period": "Moon",
+                "Sub Period": "Mars",
+                "Major Start": "2021-01-01",
+                "Major End": "2030-01-01",
+                "Sub Start": "2024-11-10",
+                "Sub End": "2026-02-22",
+                "Current Age": 36.08
+            },
+            "solar_return": {
+                "return_jd": 2461041.9495759523,
+                "return_date": "2026-01-01T10:47:23.362275",
+                "natal_sun_longitude": 281.0266448163021
+            },
+            "muntha": {
+                "sign": "Aries",
+                "age": 36
+            },
+            "transits": [
+                {
+                    "transit": "Jupiter",
+                    "natal_planet": "Saturn",
+                    "aspect": "Opposition",
+                    "orb": 1.51
+                },
+                {
+                    "transit": "Pluto",
+                    "natal_planet": "Venus",
+                    "aspect": "Conjunct",
+                    "orb": 2.45
+                }
+            ]
+        },
+        "medical": {
+            "constitution": "Head, Face, Eyes",
+            "distemper": {
+                "moon_sign": "Aries",
+                "element": "Fire",
+                "excess_humor": "Choleric (Yellow Bile)",
+                "palliative_nature": "Cooling and Moistening (e.g., Barley water, Cucumber)"
+            },
+            "surgery_risk": {
+                "safe": false,
+                "reasons": [
+                    "Square with Mars"
+                ],
+                "moon_sign": "Pisces",
+                "target_body_part": "Head, Face, Eyes",
+                "historical_context": "Based on the rule: 'Touch not with iron that part of the body ruled by the sign the Moon is transiting.' Extended with Eclipse and Crisis Day protocols."
+            }
+        },
+        "teams": {
+            "constructive_team": [
+                "Sun",
+                "Jupiter",
+                "Saturn"
+            ],
+            "destructive_team": [
+                "Mars"
+            ],
+            "receptions": [
+                {
+                    "planet_a": "Mars",
+                    "planet_b": "Jupiter",
+                    "type": "Mixed",
+                    "score": 13
+                },
+                {
+                    "planet_a": "Venus",
+                    "planet_b": "Saturn",
+                    "type": "Mixed",
+                    "score": 11
+                },
+                {
+                    "planet_a": "Moon",
+                    "planet_b": "Jupiter",
+                    "type": "Pure Domicile",
+                    "score": 10
+                },
+                {
+                    "planet_a": "Sun",
+                    "planet_b": "Mars",
+                    "type": "Mixed",
+                    "score": 8
+                },
+                {
+                    "planet_a": "Mercury",
+                    "planet_b": "Venus",
+                    "type": "Mixed",
+                    "score": 8
+                },
+                {
+                    "planet_a": "Moon",
+                    "planet_b": "Mars",
+                    "type": "Mixed",
+                    "score": 4
+                },
+                {
+                    "planet_a": "Moon",
+                    "planet_b": "Saturn",
+                    "type": "Mixed",
+                    "score": 4
+                },
+                {
+                    "planet_a": "Sun",
+                    "planet_b": "Mercury",
+                    "type": "Mixed",
+                    "score": 3
+                }
+            ]
+        },
+        "aspects": [
+            {
+                "planet_a": "Sun",
+                "planet_b": "Moon",
+                "type": "Sextile",
+                "orb": 4.948359475350571,
+                "is_applying": false,
+                "text": ""
+            },
+            {
+                "planet_a": "Sun",
+                "planet_b": "Jupiter",
+                "type": "Opposition",
+                "orb": 5.905924088910979,
+                "is_applying": true,
+                "text": "OVERINDULGENCE: Hard aspect from Jupiter. Too much of a good thing, or friction in achieving desires."
+            },
+            {
+                "planet_a": "Sun",
+                "planet_b": "Saturn",
+                "type": "Conjunction",
+                "orb": 4.655519130505752,
+                "is_applying": false,
+                "text": "Strengthened by Saturn. Structured discipline or drive is added."
+            },
+            {
+                "planet_a": "Sun",
+                "planet_b": "Uranus",
+                "type": "Conjunction",
+                "orb": 5.2286696422734735,
+                "is_applying": true,
+                "text": "Afflicted by conjunction with Uranus. Energy is oppressed or inflamed."
+            },
+            {
+                "planet_a": "Sun",
+                "planet_b": "Neptune",
+                "type": "Conjunction",
+                "orb": 1.0193723246281365,
+                "is_applying": false,
+                "text": "Afflicted by conjunction with Neptune. Energy is oppressed or inflamed."
+            },
+            {
+                "planet_a": "Sun",
+                "planet_b": "Pluto",
+                "type": "Sextile",
+                "orb": 6.07220342433601,
+                "is_applying": false,
+                "text": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable."
+            },
+            {
+                "planet_a": "Moon",
+                "planet_b": "Mars",
+                "type": "Square",
+                "orb": 4.068429227939021,
+                "is_applying": false,
+                "text": "MALIFIC SIEGE: Hard aspect from Mars (Destructive). Creates destruction, conflict, or failure."
+            },
+            {
+                "planet_a": "Moon",
+                "planet_b": "Jupiter",
+                "type": "Trine",
+                "orb": 0.9575646135604075,
+                "is_applying": true,
+                "text": "GIFT: Easy aspect from Jupiter. Natural talent, luck, and ease."
+            },
+            {
+                "planet_a": "Moon",
+                "planet_b": "Saturn",
+                "type": "Sextile",
+                "orb": 9.603878605856323,
+                "is_applying": false,
+                "text": "FLOW: Easy aspect from Saturn. Structural support and regulated energy."
+            },
+            {
+                "planet_a": "Moon",
+                "planet_b": "Uranus",
+                "type": "Sextile",
+                "orb": 0.2803101669229022,
+                "is_applying": true,
+                "text": "MITIGATED THREAT: Easy aspect from Uranus. The harm is lessened or manageable."
+            },
+            {
+                "planet_a": "Moon",
+                "planet_b": "Neptune",
+                "type": "Sextile",
+                "orb": 5.967731799978708,
+                "is_applying": false,
+                "text": "MITIGATED THREAT: Easy aspect from Neptune. The harm is lessened or manageable."
+            },
+            {
+                "planet_a": "Venus",
+                "planet_b": "Mars",
+                "type": "Sextile",
+                "orb": 3.9529376200629827,
+                "is_applying": true,
+                "text": "MITIGATED THREAT: Easy aspect from Mars. The harm is lessened or manageable."
+            },
+            {
+                "planet_a": "Jupiter",
+                "planet_b": "Uranus",
+                "type": "Opposition",
+                "orb": 0.6772544466375052,
+                "is_applying": true,
+                "text": "MALIFIC SIEGE: Hard aspect from Uranus (Destructive). Creates destruction, conflict, or failure."
+            },
+            {
+                "planet_a": "Jupiter",
+                "planet_b": "Neptune",
+                "type": "Opposition",
+                "orb": 6.925296413539115,
+                "is_applying": true,
+                "text": "MALIFIC SIEGE: Hard aspect from Neptune (Destructive). Creates destruction, conflict, or failure."
+            },
+            {
+                "planet_a": "Saturn",
+                "planet_b": "Neptune",
+                "type": "Conjunction",
+                "orb": 3.6361468058776154,
+                "is_applying": true,
+                "text": "Afflicted by conjunction with Neptune. Energy is oppressed or inflamed."
+            },
+            {
+                "planet_a": "Saturn",
+                "planet_b": "Pluto",
+                "type": "Sextile",
+                "orb": 1.416684293830258,
+                "is_applying": false,
+                "text": "MITIGATED THREAT: Easy aspect from Pluto. The harm is lessened or manageable."
+            }
+        ]
+    },
+    "planets_forensic": [
+        {
+            "name": "Sun",
+            "longitude": 281.0266448163021,
+            "sign": "Capricorn",
+            "dignities": {
+                "total_score": 0,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 0,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Monomoiria Ruler: Venus"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Venus",
+                            "night": "Moon",
+                            "participant": "Mars",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Jupiter",
+                            "limit": 14
+                        },
+                        "ptolemaic": {
+                            "ruler": "Mercury",
+                            "limit": 12
+                        }
+                    }
+                },
+                "sign": "Capricorn",
+                "degree": 11.02664481630211
+            },
+            "solar_status": "CAZIMI",
+            "maltreatments": [],
+            "impacts": [],
+            "delineation": "\"Sun in Capricorn... have a mixed mutual reception... from exaltation to rulership.\" 23 Condition: Detriment."
+        },
+        {
+            "name": "Moon",
+            "longitude": 336.07828534095154,
+            "sign": "Pisces",
+            "dignities": {
+                "total_score": 1,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 0,
+                    "triplicity": 1,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Triplicity (Participant) (+1)",
+                    "Monomoiria Ruler: Saturn"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Venus",
+                            "night": "Mars",
+                            "participant": "Moon",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Venus",
+                            "limit": 12
+                        },
+                        "ptolemaic": {
+                            "ruler": "Venus",
+                            "limit": 8
+                        }
+                    }
+                },
+                "sign": "Pisces",
+                "degree": 6.078285340951538
+            },
+            "solar_status": "FREE",
+            "maltreatments": [
+                {
+                    "type": "Overcoming",
+                    "malefic": "Mars",
+                    "description": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -2 severity)"
+                }
+            ],
+            "impacts": [],
+            "delineation": "The Moon in Pisces by day is highly receptive and imaginative. Valens associates this placement with water journeys, dreams, and prophetic intuition. The native is 'dissolving' or adaptable, sometimes to their detriment. By day, the Sun's light illuminates the Piscean depths, granting the native artistic vision and spiritual insight. They are drawn to mystical subjects, the sea, and compassionate vocations. However, the mutable nature can indicate difficulty with firm decisions."
+        },
+        {
+            "name": "Mercury",
+            "longitude": 295.60713402368356,
+            "sign": "Capricorn",
+            "dignities": {
+                "total_score": 0,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 0,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Monomoiria Ruler: Venus"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Venus",
+                            "night": "Moon",
+                            "participant": "Mars",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Saturn",
+                            "limit": 26
+                        },
+                        "ptolemaic": {
+                            "ruler": "Saturn",
+                            "limit": 30
+                        }
+                    }
+                },
+                "sign": "Capricorn",
+                "degree": 25.607134023683557
+            },
+            "solar_status": "UNDER_BEAMS",
+            "maltreatments": [],
+            "impacts": [],
+            "delineation": "The pragmatist. The mind is focused on utility, structure, and administration. The native is a 'serious thinker' who plans for the long term. Excellent for bureaucracy."
+        },
+        {
+            "name": "Venus",
+            "longitude": 306.1937769488276,
+            "sign": "Aquarius",
+            "dignities": {
+                "total_score": 1,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 0,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 1,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Face (+1)",
+                    "Monomoiria Ruler: Moon"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Saturn",
+                            "night": "Mercury",
+                            "participant": "Jupiter",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Mercury",
+                            "limit": 7
+                        },
+                        "ptolemaic": {
+                            "ruler": "Mercury",
+                            "limit": 12
+                        }
+                    }
+                },
+                "sign": "Aquarius",
+                "degree": 6.193776948827576
+            },
+            "solar_status": "FREE",
+            "maltreatments": [],
+            "impacts": [],
+            "delineation": "\"Venus in Aquarius... you are more likely to be a widow or virgin.\" 24"
+        },
+        {
+            "name": "Mars",
+            "longitude": 250.14671456889056,
+            "sign": "Sagittarius",
+            "dignities": {
+                "total_score": 0,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 0,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Monomoiria Ruler: Venus"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Sun",
+                            "night": "Jupiter",
+                            "participant": "Saturn",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Jupiter",
+                            "limit": 12
+                        },
+                        "ptolemaic": {
+                            "ruler": "Venus",
+                            "limit": 14
+                        }
+                    }
+                },
+                "sign": "Sagittarius",
+                "degree": 10.146714568890559
+            },
+            "solar_status": "FREE",
+            "maltreatments": [],
+            "impacts": [],
+            "delineation": "\"Mars in Sagittarius... would indicate difficulty concerning those placements.\" 18 Condition: Exaltation."
+        },
+        {
+            "name": "Jupiter",
+            "longitude": 95.12072072739113,
+            "sign": "Cancer",
+            "dignities": {
+                "total_score": 4,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 4,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Exaltation (+4)",
+                    "Monomoiria Ruler: Venus"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Venus",
+                            "night": "Mars",
+                            "participant": "Moon",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Mars",
+                            "limit": 7
+                        },
+                        "ptolemaic": {
+                            "ruler": "Mars",
+                            "limit": 6
+                        }
+                    }
+                },
+                "sign": "Cancer",
+                "degree": 5.120720727391131
+            },
+            "solar_status": "FREE",
+            "maltreatments": [
+                {
+                    "type": "Opposition",
+                    "malefic": "Saturn",
+                    "description": "Opposed by Saturn. (Within 10\u00b0 orb) (Mitigated by Benefic Intervention: -3 severity)"
+                }
+            ],
+            "impacts": [],
+            "delineation": "\"Jupiter has its exaltation in Cancer.\" 12 \"Jupiter in Cancer... signifies prosperity, salaries, great gifts, an abundance of crops.\" 13 Condition: Peregrine"
+        },
+        {
+            "name": "Saturn",
+            "longitude": 285.68216394680786,
+            "sign": "Capricorn",
+            "dignities": {
+                "total_score": 5,
+                "score_breakdown": {
+                    "domicile": 5,
+                    "exaltation": 0,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Domicile (+5)",
+                    "Monomoiria Ruler: Jupiter"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Venus",
+                            "night": "Moon",
+                            "participant": "Mars",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Venus",
+                            "limit": 22
+                        },
+                        "ptolemaic": {
+                            "ruler": "Jupiter",
+                            "limit": 19
+                        }
+                    }
+                },
+                "sign": "Capricorn",
+                "degree": 15.682163946807862
+            },
+            "solar_status": "COMBUST",
+            "maltreatments": [],
+            "impacts": [],
+            "delineation": "\"Saturn... its traditional domiciles are said to be Capricorn and Aquarius.\" 9 \"Saturn in Capricorn [observed station]... getting out of the sign towards Aquarius in which earthquakes are frequent.\" 14"
+        },
+        {
+            "name": "North_Node",
+            "longitude": 318.42395025051525,
+            "sign": "Aquarius",
+            "dignities": {
+                "total_score": 0,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 0,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Monomoiria Ruler: Venus"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Saturn",
+                            "night": "Mercury",
+                            "participant": "Jupiter",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Jupiter",
+                            "limit": 20
+                        },
+                        "ptolemaic": {
+                            "ruler": "Venus",
+                            "limit": 20
+                        }
+                    }
+                },
+                "sign": "Aquarius",
+                "degree": 18.423950250515247
+            },
+            "solar_status": "FREE",
+            "maltreatments": [],
+            "impacts": [],
+            "delineation": "Delineation not found in Codex."
+        },
+        {
+            "name": "South_Node",
+            "longitude": 138.42395025051525,
+            "sign": "Leo",
+            "dignities": {
+                "total_score": 0,
+                "score_breakdown": {
+                    "domicile": 0,
+                    "exaltation": 0,
+                    "triplicity": 0,
+                    "term": 0,
+                    "face": 0,
+                    "monomoiria": 0,
+                    "detriment": 0,
+                    "fall": 0
+                },
+                "details": [
+                    "Monomoiria Ruler: Saturn"
+                ],
+                "conflicts": [],
+                "variants": {
+                    "triplicity": {
+                        "used": "Dorothean",
+                        "sect": "Day",
+                        "dorothean": {
+                            "day": "Sun",
+                            "night": "Jupiter",
+                            "participant": "Saturn",
+                            "planet_is_ruler": false
+                        },
+                        "ptolemaic": {
+                            "day": null,
+                            "night": null,
+                            "planet_is_ruler": false
+                        }
+                    },
+                    "terms": {
+                        "used": "Egyptian",
+                        "egyptian": {
+                            "ruler": "Mercury",
+                            "limit": 24
+                        },
+                        "ptolemaic": {
+                            "ruler": "Saturn",
+                            "limit": 19
+                        }
+                    }
+                },
+                "sign": "Leo",
+                "degree": 18.423950250515247
+            },
+            "solar_status": "FREE",
+            "maltreatments": [],
+            "impacts": [],
+            "delineation": "Delineation not found in Codex."
+        }
+    ],
+    "engine_metadata": {
+        "version": "1.1.0-forensic",
+        "generation_time": "2026-02-02 06:38:21",
+        "algorithms": [
+            "Ibn Ezra Almuten",
+            "Panaretos Lots",
+            "Amplification/Greed Nodes"
+        ]
+    }
+}

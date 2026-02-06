@@ -1,0 +1,117 @@
+{
+  "description": "Firdaria divides life into planetary periods. Day charts begin with the Sun, Night charts begin with the Moon.",
+  "day_chart_order": [
+    {
+      "planet": "Sun",
+      "years": 10,
+      "age_start": 0,
+      "age_end": 10
+    },
+    {
+      "planet": "Venus",
+      "years": 8,
+      "age_start": 10,
+      "age_end": 18
+    },
+    {
+      "planet": "Mercury",
+      "years": 13,
+      "age_start": 18,
+      "age_end": 31
+    },
+    {
+      "planet": "Moon",
+      "years": 9,
+      "age_start": 31,
+      "age_end": 40
+    },
+    {
+      "planet": "Saturn",
+      "years": 11,
+      "age_start": 40,
+      "age_end": 51
+    },
+    {
+      "planet": "Jupiter",
+      "years": 12,
+      "age_start": 51,
+      "age_end": 63
+    },
+    {
+      "planet": "Mars",
+      "years": 7,
+      "age_start": 63,
+      "age_end": 70
+    },
+    {
+      "planet": "North Node",
+      "years": 3,
+      "age_start": 70,
+      "age_end": 73
+    },
+    {
+      "planet": "South Node",
+      "years": 2,
+      "age_start": 73,
+      "age_end": 75
+    }
+  ],
+  "night_chart_order": [
+    {
+      "planet": "Moon",
+      "years": 9,
+      "age_start": 0,
+      "age_end": 9
+    },
+    {
+      "planet": "Saturn",
+      "years": 11,
+      "age_start": 9,
+      "age_end": 20
+    },
+    {
+      "planet": "Jupiter",
+      "years": 12,
+      "age_start": 20,
+      "age_end": 32
+    },
+    {
+      "planet": "Mars",
+      "years": 7,
+      "age_start": 32,
+      "age_end": 39
+    },
+    {
+      "planet": "Sun",
+      "years": 10,
+      "age_start": 39,
+      "age_end": 49
+    },
+    {
+      "planet": "Venus",
+      "years": 8,
+      "age_start": 49,
+      "age_end": 57
+    },
+    {
+      "planet": "Mercury",
+      "years": 13,
+      "age_start": 57,
+      "age_end": 70
+    },
+    {
+      "planet": "North Node",
+      "years": 3,
+      "age_start": 70,
+      "age_end": 73
+    },
+    {
+      "planet": "South Node",
+      "years": 2,
+      "age_start": 73,
+      "age_end": 75
+    }
+  ],
+  "subperiods": "Each major period is divided into 7 subperiods ruled by each planet in Chaldean order",
+  "source": "Abu Ma'shar, On the Revolutions of the World-Years"
+}

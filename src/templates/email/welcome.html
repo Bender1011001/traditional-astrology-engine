@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Codex Caelestis</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #14110c;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #f3ede3;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #1e1a14;
+            border: 1px solid rgba(243, 237, 227, 0.14);
+        }
+
+        .header {
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(224, 163, 90, 0.2);
+        }
+
+        .logo {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: #e0a35a;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .content {
+            padding: 40px 30px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #e0a35a;
+            font-family: 'Georgia', serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #bdb4a7;
+            font-size: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #e0a35a, #c7823a);
+            color: #1b140b;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #6b6258;
+            border-top: 1px solid rgba(243, 237, 227, 0.14);
+        }
+
+        .footer a {
+            color: #6b6258;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="https://traditional-astrology.com" class="logo">Codex Caelestis</a>
+        </div>
+        <div class="content">
+            <h1>Welcome, {{ name }}</h1>
+            <p>You have successfully accessed the Codex. We are pleased to welcome you to a platform dedicated to the
+                precise and forensic study of the stars.</p>
+            <p>At Codex Caelestis, we move beyond the ambiguity of modern horoscopes. We utilize rigorous traditional
+                methodologies to decode the celestial mechanics that influence your life, providing actionable
+                intelligence and deep forensic insight.</p>
+            <p>The architecture of your fate awaits analysis.</p>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="{{ action_url }}" class="btn">Access Your Dashboard</a>
+            </div>
+        </div>
+        <footer class="footer">
+            <p>&copy; 2024 Codex Caelestis. All rights reserved.</p>
+            <p>
+                <a href="https://traditional-astrology.com/privacy.html">Privacy Policy</a> |
+                <a href="https://traditional-astrology.com/terms.html">Terms of Service</a>
+            </p>
+            <p>To unsubscribe, please reply to this email with "UNSUBSCRIBE".</p>
+        </footer>
+    </div>
+</body>
+
+</html>

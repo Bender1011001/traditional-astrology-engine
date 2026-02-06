@@ -1,0 +1,428 @@
+﻿The Decennial System in the Anthologiae of Vettius Valens: A Philological and Computational Reconstruction
+1. Introduction: The Architecture of Time in Hellenistic Astrology
+The Anthologiae of Vettius Valens, compiled in the mid-second century CE, stands as the most comprehensive surviving testament to the practical application of Hellenistic astrology. Unlike the theoretical formalism of Claudius Ptolemy, whose Tetrabiblos sought to rationalize astrology through Aristotelian natural philosophy, Valens presents a working system deeply rooted in the chaotic, fatalistic, and complex realities of professional practice. Central to Valens' predictive methodology is the doctrine of chronocrators, or "Time Lords"—planetary powers that take stewardship of the native’s life for specific durations, unfolding the natal promise through the dimension of time.
+Among the various time-lord systems detailed in the Anthologiae—which include Zodiacal Releasing (Aphesis), Quarters of the Moon, and Annual Profections—the system of Decennials (Greek: Dekateris or simply "The Division of Times") occupies a paramount position in Book IV. It is a continuous, planetary-period technique that partitions the life into broad chapters ("General Periods") of 10 years and 9 months, which are further subdivided into fractal micro-periods.
+This report provides an exhaustive technical analysis of the Decennial system as delineated explicitly in Valens' text, specifically distinguishing his original methodologies from later medieval glosses or modern psychological reinterpretations. The objective is to reconstruct the system with sufficient rigor to support the development of a high-precision computational model. The analysis proceeds from the astronomical and numerological foundations to the intricate logic of ruler determination (Apheta selection), sequence generation, and the specific definitions of the "year" used in calculation. By synthesizing the fragmented instructions found across Books II, III, and IV of the Anthologiae, we arrive at a coherent algorithm that reflects the deterministic complexity of Valens' worldview.
+2. Astronomical and Numerological Foundations
+To construct a valid computational model for the Decennials, one must first master the underlying numerical constants that govern the system. The Decennial technique is not based on the transit positions of planets in real-time, but rather on symbolic "planetary years" derived from synodic cycles. These values, known as the "Least" or "Minor" years, form the bedrock of the calculation.
+2.1 The Minor Years of the Planets
+In the Hellenistic tradition, each of the seven visible planets is assigned a specific harmonic duration representing its "Minor Period." These figures are neither arbitrary nor purely symbolic; they are approximations of the recurrence cycles required for a planet to return to a significant relationship with the Sun and the zodiacal degree.
+Valens employs the following set of values throughout the Anthologiae:
+
+
+Planet
+	Minor Years
+	Astronomical Basis
+	Saturn
+	30
+	The approximate sidereal period of Saturn (~29.5 years), rounded to the integer 30. This represents Saturn's return to the same zodiacal longitude.
+	Jupiter
+	12
+	The approximate sidereal period of Jupiter (~11.86 years), rounded to 12. Jupiter traverses one sign per year, completing the zodiac in 12 years.
+	Mars
+	15
+	Derived from the synodic recurrence where Mars returns to a similar relationship with the Sun and Zodiac (7 synodic periods + 15 years).
+	Sun
+	19
+	The Metonic Cycle, where 19 solar years equate almost exactly to 235 lunar months, synchronizing the solar and lunar calendars.
+	Venus
+	8
+	The famous "Pentagram of Venus," where 5 synodic cycles of Venus occur in exactly 8 solar years (  ).
+	Mercury
+	20
+	Approximately 63 synodic cycles of Mercury occur in 20 years, bringing it back to a similar elongation pattern.
+	Moon
+	25
+	Based on the Egyptian 25-year lunar cycle (309 lunations), utilized to reconcile lunar phases with the civil calendar.1
+	Total
+	129
+	The sum of the Minor Years (  ).
+	This summation—129—is not merely a total but a "universal constant" in Valens' system. It represents the theoretical maximum potential of the planetary system, a "Great Year" of the microcosm. The Decennial system is essentially a method of distributing this total potential (129) across the lifespan in fractal segments.2
+2.2 The Mathematical Derivation of the "Decennial"
+The term "Decennial" (implying ten years) is a slight misnomer that simplifies the actual duration. Valens derives the period length by mapping the total planetary potential (129 years) onto the structure of the zodiac (12 signs).
+The formula for the General Period (the major chapter of life) is:
+  
+
+  
+
+Converting the decimal fraction into months:
+  
+
+Thus, each General Period in the Decennial system lasts exactly 10 years and 9 months.1
+This derivation reveals the fractal elegance of the system:
+1. Macrocosm: The total cycle of all planets is 129 years.
+2. Microcosm (General Period): The duration of one planet's rule is 129 months.
+This "129 months" figure is the critical integer for computation. It simplifies the handling of dates, provided one adheres to the specific calendar definitions used by Valens.
+3. The Measurement of Time: The 360-Day Year
+A frequent source of error in modern astrological computation is the assumption that ancient "years" equate to the Gregorian solar year (365.2425 days). Philological evidence from the Anthologiae (particularly Books III and IV) indicates that for the internal distribution of time-lord periods, Valens often utilized a schematic or "Prophetic" year of 360 days, composed of 12 months of 30 days each.4
+3.1 The Alexandrian vs. The Schematic Calendar
+While Valens dates his charts using the Alexandrian calendar (which had 365 days plus a leap year, functionally identical to the Julian year), his algorithms for period distribution rely on the symmetry of the 360-degree circle.
+* The 360-Day Axiom: In the calculation of distributions (epimeris), Valens treats a "year" as 360 days and a "month" as 30 days.
+* The Conversion Problem: This creates a divergence between "Time-Lord Time" and "Civil Time."
+   * A General Period is 129 months.
+   * In the 360-day system:   .
+   * In the 365.25-day system:   .
+The discrepancy is significant (approx. 57 days per period). Which one did Valens use? Snippet 4 clarifies: "Valens uses 360-day system for calculating the distribution of days... but a 365 1/4 days for calculating the native's years."
+3.2 Implication for Computational Models
+For a rigorous "source-faithful" model, one must implement the calculation as follows:
+   1. Step 1: Calculate the duration of the period in Ideal Days (based on 30-day months).
+   * Major Period = 129 Ideal Months = 3870 Ideal Days.
+   2. Step 2: Apply this duration to the Civil Date of birth.
+   * Correction Logic: Some scholars (like Schmidt and Riley) suggest Valens allowed the 360-day periods to drift against the solar year, while others suggest a conversion factor. However, the most literal reading of the arithmetic examples in Book IV shows Valens simply adding the 30-day months cumulatively.
+   * Recommended Algorithm: To remain faithful to the text of Valens (who calculates in blocks of 360), the computational model should define the period as 3870 days. If the user desires synchronization with the solar year (as implied by the native's age in "solar years"), a conversion coefficient of    (  ) might be applied, but the primary technical definition remains the 360-day count.
+For the purpose of this report, we define the Standard Valens Period as 3870 days (  ). This ensures the fractal integrity where "months become days" (Level 3) without remainder errors.
+4. Initial Life Ruler Determination: The Apheta
+Unlike the Firdaria, which assigns the initial ruler based solely on the sect of the chart (Sun for day, Moon for night) in a fixed sequence, the Decennials require a specific planet to serve as the Apheta (Starter or Releaser). This planet initiates the sequence of General Periods.
+The determination of the Apheta is a hierarchical process involving the doctrine of Sect and the evaluation of Operative Places (Chrematistikos Topoi).
+4.1 The Doctrine of Operative Places (Chrematistikos)
+The term chrematistikos (often translated as "profitable," "busy," or "advantageous") refers to the capacity of a house (place) to support active engagement with the world. A planet in an inoperative place is "idle" and cannot serve as the primary Time Lord for the life, as it lacks the power to release the native's destiny.4
+The Hierarchy of Places (Whole Sign Houses):
+Valens identifies the following places as operative, in descending order of power:
+
+
+Rank
+	Place (House)
+	Greek Term
+	Rationale
+	1
+	1st (Ascendant)
+	Horoskopos
+	The helm of the life; the primary pivot.
+	2
+	10th (Midheaven)
+	Mesouranema
+	The place of action (praxis); the dominant angle.
+	3
+	11th
+	Agathos Daimon
+	The "Good Spirit"; succedent to the 10th; widely considered the most fortunate place.
+	4
+	7th
+	Dysis
+	The setting place; an angle, though opposing the life force (Ascendant), it is pivotal.
+	5
+	5th
+	Agathe Tyche
+	"Good Fortune"; trine to the Ascendant.
+	6
+	9th
+	Theos
+	"God"; trine to the Ascendant. Valens prefers this over the 4th in some longevity contexts.
+	7
+	4th
+	Hypogeion
+	The subterranean angle; pivotal but obscure.
+	Conditional
+	2nd, 8th
+	Epanaphora
+	Succedents. The 8th is often "idle," but Valens admits it if the ruler is strong. The 2nd is generally weak unless occupied by benefics.4
+	Inoperative
+	3rd, 6th, 12th
+	Apoklima
+	Cadent (declining) places. Planets here are unconnected to the Ascendant and generally disqualified from being the Apheta.
+	4.2 The Selection Algorithm
+The logic for selecting the Apheta follows a strict "stepping down" procedure (if... then... else...) 2:
+Step 1: The Sect Light
+      * Diurnal Chart: Examine the Sun. Is the Sun in an Operative Place?
+      * YES: The Sun is the Apheta. (Sequence starts with Sun).
+      * NO: Proceed to Step 2.
+      * Nocturnal Chart: Examine the Moon. Is the Moon in an Operative Place?
+      * YES: The Moon is the Apheta. (Sequence starts with Moon).
+      * NO: Proceed to Step 2.
+Step 2: The Contrary Light
+      * If the Sect Light is rejected, examine the Light of the contrary sect.
+      * Diurnal: Check the Moon. Is it Operative?
+      * Nocturnal: Check the Sun. Is it Operative?
+      * Note: Hephaistio and Valens both support checking the other light before abandoning the luminaries entirely. If the Contrary Light is well-placed (e.g., Moon in the 10th in a Day chart), it takes precedence over non-luminaries.
+Step 3: The Post-Ascendant Planet
+      * If both luminaries are inoperative (e.g., Sun in 12th, Moon in 6th), Valens instructs the astrologer to find the "First Star following the Ascendant in Zodiacal Order".2
+      * Mechanism: Scan the zodiac counter-clockwise from the Ascendant degree. The first planet encountered (regardless of whether it is benefic or malefic) becomes the Apheta.
+      * Rationale: This planet is the first to "rise" after the birth and thus holds the immediate claim to the life time.
+Step 4: The Ascendant
+      * In the extremely rare theoretical case where no planets are eligible (a condition difficult to meet given the inclusion of succedents), the Ascendant degree itself acts as the releaser.2 However, for Decennials, a planetary ruler is required to establish the sequence order. The "Post-Ascendant" rule usually satisfies this.
+4.3 Computational Logic for Apheta Selection
+The following logic block defines the Apheta selection for the computational model:
+DEFINE Operative_Houses = // Priority order can be strictly enforced or treated as a set
+DEFINE Chart_Sect = (Sun is Above Horizon)? "Day" : "Night"
+FUNCTION Select_Apheta(Sun, Moon, Ascendant, All_Planets):
+// 1. Check Sect Light
+IF (Chart_Sect == "Day" AND Sun.House IN Operative_Houses):
+RETURN Sun
+IF (Chart_Sect == "Night" AND Moon.House IN Operative_Houses):
+RETURN Moon
+
+
+
+
+
+
+// 2. Check Contrary Light
+IF (Chart_Sect == "Day" AND Moon.House IN Operative_Houses):
+   RETURN Moon
+IF (Chart_Sect == "Night" AND Sun.House IN Operative_Houses):
+   RETURN Sun
+
+// 3. Check Post-Ascendant
+// Sort planets by zodiacal degree relative to Ascendant (0 to 360)
+Sorted_Planets = Sort_Zodiacal_Distance(Ascendant, All_Planets)
+RETURN Sorted_Planets // The first planet found
+
+5. The Planetary Ruler Sequence: Zodiacal Topography
+Once the Apheta is identified, the Decennial system generates the sequence of General Time Lords. A distinctive feature of Valens' method—distinguishing it sharply from the Babylonian/Medieval Firdaria—is that the sequence is topographical rather than hierarchical.
+5.1 Zodiacal Order vs. Chaldean Order
+      * Chaldean Order: Used in Firdaria. Orders planets by speed/sphere: Saturn -> Jupiter -> Mars -> Sun -> Venus -> Mercury -> Moon. This order is fixed and independent of the chart positions.
+      * Zodiacal Order (Valens): Used in Decennials. Orders planets by their physical position in the zodiacal belt of the specific chart.2
+The Rule: The sequence proceeds from the Apheta to the next planet found in the zodiac in the order of signs (Counter-Clockwise: Aries    Taurus    Gemini...).
+Example Calculation:
+      * Chart Data: Ascendant (Virgo), Sun (Libra), Moon (Sagittarius), Saturn (Capricorn), Jupiter (Pisces), Mars (Aries), Venus (Gemini), Mercury (Cancer).
+      * Apheta Determination: Day chart. Sun in Libra (2nd house/succedent, or if 2nd is inoperative, check Moon). Let us assume Sun is accepted as Apheta for illustration.
+      * Sequence Generation:
+      1. Period 1: Sun (Libra)
+      2. Period 2: Moon (Sagittarius) — Next planet in zodiacal order.
+      3. Period 3: Saturn (Capricorn)
+      4. Period 4: Jupiter (Pisces)
+      5. Period 5: Mars (Aries)
+      6. Period 6: Venus (Gemini)
+      7. Period 7: Mercury (Cancer)
+This sequence is unique to the native. It maps the native's specific celestial "queue" onto the timeline of their life.
+5.2 The 75-Year Reset: The "Fourth Sign" Rule
+A complete cycle of 7 planets covers approximately 75 years (  ). Since human life can exceed this duration, Valens provides a rule for the renewal of the cycle.
+Unlike a simple loop back to the start (which would repeat Period 1), Valens employs a tetragonal shift or "Jump to the Fourth."
+The Reset Rule: Upon the completion of the 7th General Period, the sequence does not return to the Apheta. Instead, it restarts at the planet that is four places removed (counting inclusively) from the Apheta in the original sequence.2
+      * Logic:   . This corresponds to a square aspect (tetragon) in terms of sequence index, introducing a "change of mode" for the longevity of old age.
+      * Algorithm:
+         * Cycle 1 Sequence:   .
+         * Cycle 2 Start:   .
+         * Cycle 2 Sequence:   .
+This specific detail is often overlooked in simplified modern summaries but is essential for "source-faithful" implementation of Valens' longevity techniques.
+6. The Internal Distribution: Sub-Periods and Days
+The Decennial system is fractal. Each General Period (10y 9m) is a "Great Year" containing 129 "Great Months." The sub-periods (Distributions) distribute these months among the planets.
+6.1 Logic of Distribution (Epimeris)
+The General Ruler (Major Lord) presides over the entire 10y 9m chapter. However, the authority is delegated sequentially to Sub-Lords (Distributors).
+            1. Sequence: The Sub-Lord sequence follows the same Zodiacal Order established in the chart.
+            2. Starting Point: The General Ruler always takes the first sub-period for itself.2
+Example:
+            * General Ruler: Mars.
+            * Chart Sequence:... Mars    Venus    Mercury...
+            * Sub-Periods:
+               1. Mars (distributing to Mars)
+               2. Venus (distributing to Mars)
+               3. Mercury (distributing to Mars)
+               4. ...cycling through all 7.
+6.2 Duration of Sub-Periods
+The duration of each sub-period is determined by the Minor Years of the Sub-Lord, converted directly into Months (of 30 days).
+Sub-Lord
+	Minor Years
+	Duration (Months)
+	Duration (Days @ 30/mo)
+	Saturn
+	30
+	30
+	900
+	Jupiter
+	12
+	12
+	360
+	Mars
+	15
+	15
+	450
+	Sun
+	19
+	19
+	570
+	Venus
+	8
+	8
+	240
+	Mercury
+	20
+	20
+	600
+	Moon
+	25
+	25
+	750
+	TOTAL
+	129
+	129
+	3870
+	This table confirms the mathematical consistency: The sum of the sub-periods (129 months) exactly equals the duration of the General Period.
+6.3 Level 3: The Distribution of Days
+Valens alludes to a third level of division, the "Finer Division of Days".10 In this level, the Sub-Period (e.g., Saturn's 30 months) is further divided.
+               * Logic: The Sub-Lord takes the first slot.
+               * Duration: The "Days" are calculated using the same ratio. If 129 Years    129 Months, then 129 Months    129 Days? Or is it proportional?
+               * Source Ambiguity: The text in Book IV is less explicit on the exact arithmetic for Level 3 than for Levels 1 and 2. However, the most consistent reconstruction (mirrored in later texts like Hephaistio) applies the ratio:
+  
+Alternatively, Valens simply assigns days equal to the minor years in a continuous cycle, though this doesn't fill the period.
+                  * Recommendation for Model: Stick to Level 1 and Level 2 for the core report, as these are the robust, undisputed "Decennial" structures. Mention Level 3 as a recursive application of the same planetary proportions (  ) applied to the day count of the sub-period.
+7. Computational Model (Pseudo-Code)
+The following section translates the philological and astronomical rules into a structured algorithmic logic suitable for programming. This model assumes the use of a 360-day schematic year for internal calculations, converting to Julian dates only for output.
+7.1 Data Structures
+
+
+Code snippet
+
+
+
+
+STRUCT Planet {
+   Name: String
+   Longitude: Float (0-360)
+   House_Index: Integer (1-12, Whole Sign)
+   Minor_Years: Integer
+   Sect_Status: Boolean (In_Sect/Out_Sect)
+}
+
+CONSTANTS {
+   MINOR_YEARS = {
+       "Saturn": 30, "Jupiter": 12, "Mars": 15, 
+       "Sun": 19, "Venus": 8, "Mercury": 20, "Moon": 25
+   }
+   GENERAL_PERIOD_DAYS = 3870 // 129 months * 30 days
+}
+
+7.2 Step 1: Sorting and Sequence Generation
+
+
+Code snippet
+
+
+
+
+FUNCTION GetZodiacalSequence(Planets, Ascendant_Degree):
+   // Sort planets by longitude relative to 0 Aries
+   Sorted_List = Sort(Planets, by Longitude ascending)
+   
+   // Create the circular buffer starting from the Ascendant
+   // This establishes the "Zodiacal Queue" unique to the chart
+   Zodiacal_Queue =
+   FOR EACH Planet IN Sorted_List:
+       IF Planet.Longitude > Ascendant_Degree:
+           Add Planet to Zodiacal_Queue
+   FOR EACH Planet IN Sorted_List:
+       IF Planet.Longitude <= Ascendant_Degree:
+           Add Planet to Zodiacal_Queue
+           
+   RETURN Zodiacal_Queue
+
+7.3 Step 2: Apheta Selection
+
+
+Code snippet
+
+
+
+
+FUNCTION GetApheta(Chart_Sect, Sun, Moon, Zodiacal_Queue):
+   Operative_Houses =  // Priority list
+   
+   // 1. Check Sect Light
+   IF Chart_Sect == "Day" AND Sun.House IN Operative_Houses:
+       RETURN Sun
+   IF Chart_Sect == "Night" AND Moon.House IN Operative_Houses:
+       RETURN Moon
+           
+   // 2. Check Contrary Light
+   IF Chart_Sect == "Day" AND Moon.House IN Operative_Houses:
+       RETURN Moon
+   IF Chart_Sect == "Night" AND Sun.House IN Operative_Houses:
+       RETURN Sun
+           
+   // 3. Fallback: Post-Ascendant
+   // The first planet in the Zodiacal_Queue is strictly the one following the Ascendant
+   RETURN Zodiacal_Queue
+
+7.4 Step 3: Generating the Decennial Tree
+
+
+Code snippet
+
+
+
+
+FUNCTION GenerateDecennials(Apheta, Zodiacal_Queue, Birth_Date):
+   Current_Date = Birth_Date
+   Decennial_Report =
+   
+   // Align Sequence to Apheta
+   Start_Index = IndexOf(Apheta, Zodiacal_Queue)
+   Cycle1_Sequence = RotateList(Zodiacal_Queue, Start_Index)
+   
+   // CYCLE 1 (First ~75 Years)
+   FOR i FROM 0 TO 6:
+       Major_Lord = Cycle1_Sequence[i]
+       
+       Major_Obj = {
+           "Ruler": Major_Lord.Name,
+           "Start": Current_Date,
+           "End": AddDays(Current_Date, 3870), // Adding 10y 9m
+           "Sub_Periods":
+       }
+       
+       // Sub-Period Generation
+       // Sub-sequence starts with Major Lord
+       Sub_Start_Index = IndexOf(Major_Lord, Zodiacal_Queue)
+       Sub_Sequence = RotateList(Zodiacal_Queue, Sub_Start_Index)
+       
+       Sub_Date = Current_Date
+       FOR j FROM 0 TO 6:
+           Sub_Lord = Sub_Sequence[j]
+           Duration = Sub_Lord.Minor_Years * 30 // Days
+           
+           Sub_Obj = {
+               "Ruler": Sub_Lord.Name,
+               "Start": Sub_Date,
+               "End": AddDays(Sub_Date, Duration)
+           }
+           Add Sub_Obj to Major_Obj.Sub_Periods
+           Sub_Date = AddDays(Sub_Date, Duration)
+           
+       Add Major_Obj to Decennial_Report
+       Current_Date = AddDays(Current_Date, 3870)
+       
+   // CYCLE 2 (Reset Logic)
+   // Jump to 4th Planet in the original sequence
+   Cycle2_Start_Index = (Start_Index + 3) MOD 7 
+   Cycle2_Sequence = RotateList(Zodiacal_Queue, Cycle2_Start_Index)
+   
+   // Repeat loop for Cycle 2...
+   
+   RETURN Decennial_Report
+
+8. Interpretive Mechanics and Context
+The calculation of the Decennials is merely the scaffolding for the astrological judgment. Valens provides specific interpretive principles in Book IV that guide the delineation of these periods.
+8.1 Loosening of the Bond (Paradosis and Hypodoche)
+The transition between periods is the moment of greatest predictive weight. Valens uses the term Paradosis (transmission or handing over) to describe the Major Lord yielding control to the Sub-Lord, or one Major Lord yielding to the next.
+                     * The Transmitter (Paradidous): The outgoing planet (or the Major Lord).
+                     * The Receiver (Paralambanon): The incoming planet (or the Sub-Lord).
+Interpretive Rule: The quality of the period depends on the relationship between the Transmitter and the Receiver.
+                     * Harmonious: If the planets are of the same sect, or in aspect (trine/sextile), or share rulership (e.g., Venus to Jupiter), the handover is smooth, indicating prosperity and success.
+                     * Disharmonious: If the planets are of contrary natures (e.g., Mars to Saturn) or in aversion (unconnected signs), the handover precipitates crisis ("Upheavals," "dangers," "illness").3
+8.2 Integration with Natal State
+A critical divergence from modern "cookbook" astrology is Valens' insistence on the Natal State. A "Mars period" is not generically aggressive; it brings forth the specific promises of the natal Mars.
+                     * If natal Mars is in the 10th house (Career) and well-aspected, the Mars Decennial will be a peak career period.
+                     * If natal Mars is in the 12th house (Suffering) and afflicted, the Mars Decennial will activate those specific dormant difficulties.3
+This reinforces the determinism of the system: The Decennials do not create new events; they function as a clock hand pointing to pre-existing natal configurations, "triggering" them into manifestation.
+9. Conclusion
+The Decennial system of Vettius Valens is a masterpiece of Hellenistic astrological engineering. It synthesizes the numerological mysticism of the planetary years (129) with the spatial reality of the specific nativity (zodiacal order). By rejecting a "one-size-fits-all" sequence (like Firdaria) in favor of a chart-specific topographical queue, Valens creates a highly individualized model of time.
+For the modern researcher, the reconstruction of this system requires strict adherence to the 360-day year, the operative determination of the Apheta, and the specific reset logic after 75 years. These technical details, often smoothed over in simplified summaries, constitute the authentic "Valens method"—a rigorous, fatalistic, and geometrically elegant mechanism for mapping the human lifespan.
+________________
+Citations: .1
+Works cited
+                     1. How to Use Decennials in Astrology - Two Wander x Elysium Rituals, accessed February 4, 2026, https://www.twowander.com/blog/decennials-astrology
+                     2. Making Time out of Space: An Introduction to Planetary Periods - Astrolabe, accessed February 4, 2026, https://www.alabe.com/text/periods.html
+                     3. Arin Dosch Decennials An Ancient Timing Technique | PDF | Planets In Astrology - Scribd, accessed February 4, 2026, https://www.scribd.com/document/848193300/Arin-Dosch-Decennials-an-Ancient-Timing-Technique
+                     4. Decennials Ancient Timing Technique Beyond The Heaven PDF | PDF | Planets In Astrology, accessed February 4, 2026, https://www.scribd.com/document/422709215/Decennials-Ancient-Timing-Technique-Beyond-The-Heaven-1-pdf
+                     5. The Astrological Roots The Hellenistic Leg - Joseph Crane | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/669928737/The-Astrological-Roots-the-Hellenistic-Leg-Joseph-Crane
+                     6. Full text of "Pratical Guide To Hellenistic Astrology" - Internet Archive, accessed February 4, 2026, https://archive.org/stream/162899360praticalguidetohellenisticastrology/162899360-Pratical-Guide-to-Hellenistic-Astrology_djvu.txt
+                     7. Pratical Guide To Hellenistic Astrology Text | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/954653433/Pratical-Guide-to-Hellenistic-Astrology-Text
+                     8. Ep. 227 Transcript: Origins of the House Division Debate in Ancient Astrology, accessed February 4, 2026, https://theastrologypodcast.com/transcripts/ep-227-transcript-origins-of-the-house-division-debate-in-ancient-astrology/
+                     9. Astrological Roots The Hellenistic Legacy (Crane, Joseph) | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/848018352/Astrological-Roots-The-Hellenistic-Legacy-Crane-Joseph
+                     10. Vettius Valens, Anthology, Book 4. 1 - Better World Books, accessed February 4, 2026, https://www.betterworldbooks.com/product/detail/vettius-valens-anthology-book-4-1-9780998701516
+                     11. Valens IV | PDF | Space | Astrology - Scribd, accessed February 4, 2026, https://www.scribd.com/document/526245951/11-Valens-IV
+                     12. Vettius Valens - The Anthology, Book IV | PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/72500900/Vettius-Valens-The-Anthology-Book-IV
+                     13. Valens Confusion : r/Advancedastrology - Reddit, accessed February 4, 2026, https://www.reddit.com/r/Advancedastrology/comments/1q4avce/valens_confusion/
+                     14. Practical Guide To Hellenistic Astrology PDF - Scribd, accessed February 4, 2026, https://www.scribd.com/document/458766081/Practical-Guide-to-Hellenistic-Astrology-pdf
+                     15. Astrology and the Authentic Self, accessed February 4, 2026, https://dn720003.ca.archive.org/0/items/demetra-george-astrology-and-the-authentic-self-integrating-traditional-and-modern-astrology/Demetra%20George%20-%20Astrology%20and%20the%20Authentic%20Self_%20Integrating%20Traditional%20and%20Modern%20Astrology.pdf
+                     16. The Daimon in Hellenistic Astrology - Tarot Hermeneutics, accessed February 4, 2026, http://www.tarothermeneutics.com/tarotliterature/articles/daimon.pdf

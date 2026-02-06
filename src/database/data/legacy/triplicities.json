@@ -1,0 +1,46 @@
+{
+  "triplicities": {
+    "Fire": {
+      "signs": [
+        "Aries",
+        "Leo",
+        "Sagittarius"
+      ],
+      "day_ruler": "Sun",
+      "night_ruler": "Jupiter",
+      "participating_ruler": "Saturn"
+    },
+    "Earth": {
+      "signs": [
+        "Taurus",
+        "Virgo",
+        "Capricorn"
+      ],
+      "day_ruler": "Venus",
+      "night_ruler": "Moon",
+      "participating_ruler": "Mars"
+    },
+    "Air": {
+      "signs": [
+        "Gemini",
+        "Libra",
+        "Aquarius"
+      ],
+      "day_ruler": "Saturn",
+      "night_ruler": "Mercury",
+      "participating_ruler": "Jupiter"
+    },
+    "Water": {
+      "signs": [
+        "Cancer",
+        "Scorpio",
+        "Pisces"
+      ],
+      "day_ruler": "Venus",
+      "night_ruler": "Moon",
+      "participating_ruler": "Mars"
+    }
+  },
+  "source": "Dorotheus of Sidon; Ptolemy, Tetrabiblos",
+  "usage": "A planet as triplicity ruler gains +3 essential dignity points"
+}

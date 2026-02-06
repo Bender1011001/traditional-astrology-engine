@@ -1,0 +1,72 @@
+[
+    {
+        "name": "William Lilly",
+        "description": "The most famous English astrologer of the 17th century, author of Christian Astrology.",
+        "date": "1602-05-11",
+        "time": "02:00",
+        "city": "Diseworth",
+        "state": "",
+        "country": "UK",
+        "note": "Date adjusted to Gregorian (May 11, 1602) from Julian (April 30, 1602)."
+    },
+    {
+        "name": "Marsilio Ficino",
+        "description": "Renaissance philosopher and priest who pioneered the use of archetypal medical astrology.",
+        "date": "1433-10-19",
+        "time": "22:50",
+        "city": "Figline Valdarno",
+        "state": "",
+        "country": "Italy",
+        "note": "Birth data from historical records (October 19, 1433)."
+    },
+    {
+        "name": "Isaac Newton",
+        "description": "Polymath who studied the 'pristine knowledge' of the ancients, including alchemy and astrology.",
+        "date": "1643-01-04",
+        "time": "00:00",
+        "city": "Woolsthorpe",
+        "state": "",
+        "country": "UK",
+        "note": "Date adjusted to Gregorian (January 4, 1643) from Julian (December 25, 1642)."
+    },
+    {
+        "name": "Napoleon Bonaparte",
+        "description": "French military leader and emperor who conquered much of Europe.",
+        "date": "1769-08-15",
+        "time": "11:30",
+        "city": "Ajaccio",
+        "state": "",
+        "country": "France",
+        "note": "Birth data: August 15, 1769, 11:30 AM LMT."
+    },
+    {
+        "name": "Elizabeth I",
+        "description": "Queen of England and Ireland (1558-1603), the last monarch of the House of Tudor.",
+        "date": "1533-09-07",
+        "time": "15:00",
+        "city": "Greenwich",
+        "state": "",
+        "country": "UK",
+        "note": "Birth data: September 7, 1533, 3:00 PM LMT."
+    },
+    {
+        "name": "Queen Victoria",
+        "description": "Queen of the United Kingdom and Ireland, and Empress of India.",
+        "date": "1819-05-24",
+        "time": "04:15",
+        "city": "London",
+        "state": "",
+        "country": "UK",
+        "note": "Birth data: May 24, 1819, 4:15 AM LMT."
+    },
+    {
+        "name": "Abraham Lincoln",
+        "description": "16th President of the United States, led the nation through the American Civil War.",
+        "date": "1809-02-12",
+        "time": "06:54",
+        "city": "Hodgenville",
+        "state": "KY",
+        "country": "USA",
+        "note": "Birth data: February 12, 1809, 6:54 AM LMT."
+    }
+]

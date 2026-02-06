@@ -1,0 +1,294 @@
+{
+  "faces": {
+    "Aries_1": {
+      "sign": "Aries",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Mars",
+      "dignity_points": 1
+    },
+    "Aries_2": {
+      "sign": "Aries",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Sun",
+      "dignity_points": 1
+    },
+    "Aries_3": {
+      "sign": "Aries",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Venus",
+      "dignity_points": 1
+    },
+    "Taurus_1": {
+      "sign": "Taurus",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Mercury",
+      "dignity_points": 1
+    },
+    "Taurus_2": {
+      "sign": "Taurus",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Moon",
+      "dignity_points": 1
+    },
+    "Taurus_3": {
+      "sign": "Taurus",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Saturn",
+      "dignity_points": 1
+    },
+    "Gemini_1": {
+      "sign": "Gemini",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Jupiter",
+      "dignity_points": 1
+    },
+    "Gemini_2": {
+      "sign": "Gemini",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Mars",
+      "dignity_points": 1
+    },
+    "Gemini_3": {
+      "sign": "Gemini",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Sun",
+      "dignity_points": 1
+    },
+    "Cancer_1": {
+      "sign": "Cancer",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Venus",
+      "dignity_points": 1
+    },
+    "Cancer_2": {
+      "sign": "Cancer",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Mercury",
+      "dignity_points": 1
+    },
+    "Cancer_3": {
+      "sign": "Cancer",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Moon",
+      "dignity_points": 1
+    },
+    "Leo_1": {
+      "sign": "Leo",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Saturn",
+      "dignity_points": 1
+    },
+    "Leo_2": {
+      "sign": "Leo",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Jupiter",
+      "dignity_points": 1
+    },
+    "Leo_3": {
+      "sign": "Leo",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Mars",
+      "dignity_points": 1
+    },
+    "Virgo_1": {
+      "sign": "Virgo",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Sun",
+      "dignity_points": 1
+    },
+    "Virgo_2": {
+      "sign": "Virgo",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Venus",
+      "dignity_points": 1
+    },
+    "Virgo_3": {
+      "sign": "Virgo",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Mercury",
+      "dignity_points": 1
+    },
+    "Libra_1": {
+      "sign": "Libra",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Moon",
+      "dignity_points": 1
+    },
+    "Libra_2": {
+      "sign": "Libra",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Saturn",
+      "dignity_points": 1
+    },
+    "Libra_3": {
+      "sign": "Libra",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Jupiter",
+      "dignity_points": 1
+    },
+    "Scorpio_1": {
+      "sign": "Scorpio",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Mars",
+      "dignity_points": 1
+    },
+    "Scorpio_2": {
+      "sign": "Scorpio",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Sun",
+      "dignity_points": 1
+    },
+    "Scorpio_3": {
+      "sign": "Scorpio",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Venus",
+      "dignity_points": 1
+    },
+    "Sagittarius_1": {
+      "sign": "Sagittarius",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Mercury",
+      "dignity_points": 1
+    },
+    "Sagittarius_2": {
+      "sign": "Sagittarius",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Moon",
+      "dignity_points": 1
+    },
+    "Sagittarius_3": {
+      "sign": "Sagittarius",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Saturn",
+      "dignity_points": 1
+    },
+    "Capricorn_1": {
+      "sign": "Capricorn",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Jupiter",
+      "dignity_points": 1
+    },
+    "Capricorn_2": {
+      "sign": "Capricorn",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Mars",
+      "dignity_points": 1
+    },
+    "Capricorn_3": {
+      "sign": "Capricorn",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Sun",
+      "dignity_points": 1
+    },
+    "Aquarius_1": {
+      "sign": "Aquarius",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Venus",
+      "dignity_points": 1
+    },
+    "Aquarius_2": {
+      "sign": "Aquarius",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Mercury",
+      "dignity_points": 1
+    },
+    "Aquarius_3": {
+      "sign": "Aquarius",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Moon",
+      "dignity_points": 1
+    },
+    "Pisces_1": {
+      "sign": "Pisces",
+      "decan": 1,
+      "start_degree": 0,
+      "end_degree": 10,
+      "ruler": "Saturn",
+      "dignity_points": 1
+    },
+    "Pisces_2": {
+      "sign": "Pisces",
+      "decan": 2,
+      "start_degree": 10,
+      "end_degree": 20,
+      "ruler": "Jupiter",
+      "dignity_points": 1
+    },
+    "Pisces_3": {
+      "sign": "Pisces",
+      "decan": 3,
+      "start_degree": 20,
+      "end_degree": 30,
+      "ruler": "Mars",
+      "dignity_points": 1
+    }
+  },
+  "source": "Ptolemy, Tetrabiblos",
+  "usage": "A planet in its own face gains +1 essential dignity point"
+}

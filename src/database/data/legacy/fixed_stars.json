@@ -1,0 +1,204 @@
+{
+  "Regulus": {
+    "longitude_2000": "29°50' Leo",
+    "nature": "Mars/Jupiter",
+    "magnitude": 1.4,
+    "category": "Royal Star",
+    "watcher": "North",
+    "glory": "Power, military honors, worldly success, political preferment",
+    "nemesis": "Revenge - if the native seeks retribution, everything is lost",
+    "keywords": [
+      "kingship",
+      "command",
+      "ambition",
+      "glory"
+    ]
+  },
+  "Aldebaran": {
+    "longitude_2000": "09°47' Gemini",
+    "nature": "Mars",
+    "magnitude": 0.85,
+    "category": "Royal Star",
+    "watcher": "East",
+    "glory": "Merchant King, military commander, success through innovation",
+    "nemesis": "Integrity - dishonesty leads to complete downfall",
+    "keywords": [
+      "intelligence",
+      "eloquence",
+      "commerce",
+      "war"
+    ]
+  },
+  "Antares": {
+    "longitude_2000": "09°46' Sagittarius",
+    "nature": "Mars/Jupiter",
+    "magnitude": 1.0,
+    "category": "Royal Star",
+    "watcher": "West",
+    "glory": "Intensity, passion, success through sheer force of will",
+    "nemesis": "Obsession - burning out through excessive intensity",
+    "keywords": [
+      "intensity",
+      "passion",
+      "conflict",
+      "destruction"
+    ]
+  },
+  "Fomalhaut": {
+    "longitude_2000": "03°52' Pisces",
+    "nature": "Venus/Mercury",
+    "magnitude": 1.16,
+    "category": "Royal Star",
+    "watcher": "South",
+    "glory": "Sublime, artistic, mystical success, fame through idealism",
+    "nemesis": "Corruption - using spiritual gifts for material gain",
+    "keywords": [
+      "idealism",
+      "mysticism",
+      "art",
+      "dreams"
+    ]
+  },
+  "Algol": {
+    "longitude_2000": "26°10' Taurus",
+    "nature": "Saturn/Jupiter",
+    "magnitude": 2.1,
+    "category": "Violent",
+    "delineation": "The most evil star in the heavens. Danger of losing one's head, either literally or figuratively. Violence, decapitation, murder. On the Hyleg, threatens violent death.",
+    "keywords": [
+      "violence",
+      "danger",
+      "loss",
+      "beheading",
+      "passion"
+    ]
+  },
+  "Spica": {
+    "longitude_2000": "23°50' Libra",
+    "nature": "Venus/Mercury",
+    "magnitude": 1.0,
+    "category": "Benefic",
+    "delineation": "The most fortunate star. Boundless good fortune, riches that do not corrupt, success in art and science. Protection from violence.",
+    "keywords": [
+      "fortune",
+      "protection",
+      "art",
+      "science",
+      "wealth"
+    ]
+  },
+  "Vindemiatrix": {
+    "longitude_2000": "09°56' Libra",
+    "nature": "Saturn/Mercury",
+    "magnitude": 2.8,
+    "category": "Violent",
+    "delineation": "The Widow-maker. Danger to the spouse, widowhood, falsity, disgrace.",
+    "keywords": [
+      "widowhood",
+      "loss",
+      "spouse danger"
+    ]
+  },
+  "Caput Algol": {
+    "longitude_2000": "26°10' Taurus",
+    "nature": "Saturn/Jupiter",
+    "magnitude": 2.1,
+    "category": "Violent",
+    "delineation": "See Algol. The Demon's Head. Pile-up of misfortune.",
+    "keywords": [
+      "demon",
+      "violence",
+      "beheading"
+    ]
+  },
+  "Scheat": {
+    "longitude_2000": "29°22' Pisces",
+    "nature": "Mars/Mercury",
+    "magnitude": 2.4,
+    "category": "Violent",
+    "delineation": "Danger by water, shipwreck, drowning, imprisonment. Extreme misfortune.",
+    "keywords": [
+      "water",
+      "drowning",
+      "imprisonment",
+      "misfortune"
+    ]
+  },
+  "Betelgeuse": {
+    "longitude_2000": "28°45' Gemini",
+    "nature": "Mars/Mercury",
+    "magnitude": 0.5,
+    "category": "Benefic",
+    "delineation": "Martial honors, preferment, wealth. Quick gains that may not last.",
+    "keywords": [
+      "honors",
+      "wealth",
+      "military",
+      "fame"
+    ]
+  },
+  "Rigel": {
+    "longitude_2000": "16°50' Gemini",
+    "nature": "Jupiter/Mars",
+    "magnitude": 0.12,
+    "category": "Benefic",
+    "delineation": "Great wealth, splendor, renown, good fortune without nemesis.",
+    "keywords": [
+      "wealth",
+      "splendor",
+      "teaching",
+      "innovation"
+    ]
+  },
+  "Procyon": {
+    "longitude_2000": "25°47' Cancer",
+    "nature": "Mercury/Mars",
+    "magnitude": 0.38,
+    "category": "Mixed",
+    "delineation": "Quick rise but also quick fall. Petulance, violence, sudden success.",
+    "keywords": [
+      "quick rise",
+      "quick fall",
+      "violence",
+      "suddenness"
+    ]
+  },
+  "Sirius": {
+    "longitude_2000": "14°05' Cancer",
+    "nature": "Jupiter/Mars",
+    "magnitude": -1.46,
+    "category": "Benefic",
+    "delineation": "The Dog Star. High office, fame, honors, but danger from great dogs or wolves.",
+    "keywords": [
+      "fame",
+      "honors",
+      "passion",
+      "burning"
+    ]
+  },
+  "Pollux": {
+    "longitude_2000": "23°13' Cancer",
+    "nature": "Mars",
+    "magnitude": 1.14,
+    "category": "Violent",
+    "delineation": "Subtle, crafty, spirited, audacious. Danger of disgrace and ruin.",
+    "keywords": [
+      "craftiness",
+      "audacity",
+      "disgrace"
+    ]
+  },
+  "Castor": {
+    "longitude_2000": "20°14' Cancer",
+    "nature": "Mercury",
+    "magnitude": 1.58,
+    "category": "Mixed",
+    "delineation": "Intellectual, writes well, subject to sudden fame or notoriety.",
+    "keywords": [
+      "intellect",
+      "writing",
+      "twins",
+      "duality"
+    ]
+  }
+}

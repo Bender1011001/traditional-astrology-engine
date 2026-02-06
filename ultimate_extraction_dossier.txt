@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "E:\code.projects\astrology\scripts\run_ultimate_forensic.py", line 221, in <module>
+    asyncio.run(run_ultimate_reading())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ProgramData\anaconda3\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\ProgramData\anaconda3\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\ProgramData\anaconda3\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "E:\code.projects\astrology\scripts\run_ultimate_forensic.py", line 212, in run_ultimate_reading
+    with open("ultimate_extraction_dossier.txt", "w", encoding="utf-8") as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'ultimate_extraction_dossier.txt'

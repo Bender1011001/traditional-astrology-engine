@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RCNDWN4XVN');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | Codex Caelestis</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#f4efe6">
+    <link rel="stylesheet" href="style.css?v=20260129polish">
+    <style>
+        .dashboard-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            min-height: 60vh;
+        }
+
+        .dashboard-header {
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-welcome h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .dashboard-welcome p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .dashboard-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .chart-card:hover {
+            border-color: var(--gold);
+            background: var(--surface);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .chart-name {
+            font-weight: bold;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-details {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .chart-meta {
+            margin-top: 0.8rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            border: 1px dashed var(--border-color);
+        }
+
+        .user-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-family: 'Space Mono', monospace;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+        }
+
+        [data-theme="dark"] .chart-card {
+            background: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+        <div class="stars-overlay"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <nav class="header-actions">
+                <a class="help-btn" href="index.html">Home</a>
+                <a class="help-btn" href="pricing.html"
+                    onclick="document.getElementById('pricingModal').classList.remove('hidden'); return false;">Pricing</a>
+                <a class="help-btn" href="developer.html">API</a>
+            </nav>
+        </header>
+
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="dashboard-welcome">
+                    <h1>My Sanctum</h1>
+                    <p id="userEmail">Loading...</p>
+                </div>
+                <div>
+                    <span id="subBadge" class="user-badge">Vagabond</span>
+                    <a href="index.html" class="help-btn" style="margin-right: 0.5rem; text-decoration: none;">NEW
+                        READING</a>
+                    <button class="logout-btn" onclick="logout()">LOGOUT</button>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="section-title">Saved Charts</h2>
+                <div id="chartsList" class="charts-grid">
+                    <!-- Charts populated via JS -->
+                    <div class="empty-state">Loading your charts...</div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="section-title">Account Details</h2>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    Member since <span id="joinDate">...</span><br>
+                    Current Plan: <span id="planName" style="color: var(--text);">...</span><br>
+                    Usage (Cycle): <span id="usageStats" style="color: var(--text);">...</span>
+                </p>
+                <div id="subscriptionManagement" class="hidden"
+                    style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                    <button id="cancelSubBtn" class="help-btn"
+                        style="border-color: var(--danger); color: var(--danger); font-size: 0.8rem;"
+                        onclick="cancelSubscription()">CANCEL AUTO-RENEW</button>
+                    <p id="cancelStatus" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="basic.js?v=20260129polish"></script>
+    <script>
+        const API_BASE = window.CAEL_API_BASE || "";
+        function apiUrl(path) { return `${API_BASE}${path}`; }
+
+        async function loadProfile() {
+            const token = localStorage.getItem('cael_auth_token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const resp = await fetch(apiUrl('/api/v1/auth/me'), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!resp.ok) throw new Error('Failed to load profile');
+                const data = await resp.json();
+                const user = data.user;
+
+                // Update UI
+                const sub = user.subscription_details;
+                document.getElementById('userEmail').textContent = user.email;
+                document.getElementById('subBadge').textContent = (sub.plan_name || "Vagabond").toUpperCase();
+                document.getElementById('planName').textContent = (sub.plan_name || "Vagabond").toUpperCase();
+                document.getElementById('joinDate').textContent = new Date(user.created_at).toLocaleDateString();
+
+                if (sub.current_period_end) {
+                    const expiryDate = new Date(sub.current_period_end).toLocaleDateString();
+                    document.getElementById('planName').innerHTML += ` (Renews: ${expiryDate})`;
+                }
+
+                // Populate Usage
+                const usage = user.usage || { charts: 0, api: 0, chart_limit: 1, api_limit: 0 };
+                const chartLimit = usage.chart_limit === null ? "∞" : usage.chart_limit;
+                const apiLimit = usage.api_limit === null ? "∞" : usage.api_limit;
+
+                let usageText = `${usage.charts} / ${chartLimit} Charts`;
+                if (usage.api_limit > 0 || usage.api_limit === null) {
+                    usageText += ` | ${usage.api} / ${apiLimit} API Calls`;
+                }
+                document.getElementById('usageStats').textContent = usageText;
+
+                // Show/Hide Management Section
+                const mgmt = document.getElementById('subscriptionManagement');
+                if (sub.status === 'active' || sub.status === 'past_due' || sub.status === 'trial') {
+                    mgmt.classList.remove('hidden');
+                } else {
+                    mgmt.classList.add('hidden');
+                }
+
+                renderCharts(user.charts_saved || []);
+
+            } catch (err) {
+                console.error(err);
+                localStorage.removeItem('cael_auth_token');
+                window.location.href = 'login.html';
+            }
+        }
+
+        async function cancelSubscription() {
+            if (!confirm("Are you sure you want to turn off auto-renewal? You will still have access until the end of your current period.")) return;
+
+            const btn = document.getElementById('cancelSubBtn');
+            const status = document.getElementById('cancelStatus');
+            btn.disabled = true;
+            status.textContent = "Cancelling...";
+
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl('/api/v1/billing/cancel-subscription'), {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const data = await resp.json();
+                if (resp.ok) {
+                    status.style.color = "var(--text-main)";
+                    status.textContent = data.message;
+                    btn.classList.add('hidden');
+                    // Reload profile after a short delay to see updated expiry info
+                    setTimeout(loadProfile, 2000);
+                } else {
+                    throw new Error(data.detail || "Cancellation failed");
+                }
+            } catch (err) {
+                status.style.color = "var(--danger)";
+                status.textContent = err.message;
+                btn.disabled = false;
+            }
+        }
+
+        function renderCharts(charts) {
+            const container = document.getElementById('chartsList');
+            if (!charts || charts.length === 0) {
+                container.innerHTML = '<div class="empty-state">No charts saved yet. Generating a reading automatically saves it here.</div>';
+                return;
+            }
+
+            container.innerHTML = charts.map((chart, index) => `
+                <div class="chart-card">
+                    <div onclick="loadChart(${index})">
+                        <div class="chart-name">${chart.name || "Untitled Chart"}</div>
+                        <div class="chart-details">
+                            ${chart.city}, ${chart.date}<br>
+                            ${chart.time}
+                        </div>
+                        <div class="chart-meta">Saved: ${new Date(chart.saved_at).toLocaleDateString()}</div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <button class="help-btn" style="font-size: 0.6rem; padding: 0.2rem 0.5rem;" onclick="downloadPdf(${index})">PDF</button>
+                        <button class="help-btn" style="font-size: 0.6rem; padding: 0.2rem 0.5rem; border-color: var(--danger); color: var(--danger);" onclick="deleteChart(${index})">DEL</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadChart(index) {
+            const token = localStorage.getItem('cael_auth_token');
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}`), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error('Failed to load chart');
+                const data = await resp.json();
+                const chart = data.chart;
+
+                // Save to session storage for the calculator to pick up
+                sessionStorage.setItem('cael_pending_chart', JSON.stringify(chart));
+                window.location.href = 'index.html?action=load';
+            } catch (err) {
+                alert("Error loading chart: " + err.message);
+            }
+        }
+
+        async function downloadPdf(index) {
+            const token = localStorage.getItem('cael_auth_token');
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}/pdf`), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error('Failed to generate PDF');
+
+                const blob = await resp.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `report_${index}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } catch (err) {
+                alert("Error downloading PDF: " + err.message);
+            }
+        }
+
+        async function deleteChart(index) {
+            if (!confirm("Are you sure you want to delete this chart?")) return;
+            const token = localStorage.getItem('cael_auth_token');
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}`), {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error('Failed to delete chart');
+                loadProfile(); // Refresh
+            } catch (err) {
+                alert("Error deleting chart: " + err.message);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('cael_auth_token');
+            localStorage.removeItem('cael_user');
+            window.location.href = 'index.html';
+        }
+
+        loadProfile();
+    </script>
+</body>
+
+</html>

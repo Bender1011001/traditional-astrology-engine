@@ -1,0 +1,263 @@
+﻿The Doctrine of the Spear-Bearer: An Exhaustive Operational Reconstruction of Doryphory in Hellenistic Eminence Evaluation
+1. Introduction: The Celestial Bodyguard and the Architecture of Rank
+In the stratified cosmology of the Hellenistic world, the assessment of a nativity’s potential for axioma—rank, reputation, and social elevation—rests upon a rigorous evaluation of the luminaries and their attendant stars. The ancient astrologer did not view the chart as a democracy of influences, but as a celestial court where the Sun and Moon reigned as the King and Queen of the nativity. The primary metric for determining whether a specific nativity belonged to the "royal" class or the "common" class was the presence, condition, and configuration of the Doryphory (Greek: doryphoria, δορυφορία).
+Literally translating to "spear-bearing," the term is derived from the martial and political lexicon of the period. In the courts of the Achaemenid Empire and the later Macedonian dynasties, the doryphoroi were the elite corps of spear-bearing guards who flanked the sovereign. They were not merely protectors; they were symbols of legitimacy, power, and the capacity to project force. A King without his doryphoroi was vulnerable, undistinguished, and functionally powerless. In the astrological metaphor, a Luminary (Sun or Moon) without a corresponding planetary doryphory is akin to a monarch walking alone in the marketplace—potentially noble in essence, but lacking the apparatus of state to command the world.
+Despite its centrality in the texts of the foundational authors—Claudius Ptolemy, Vettius Valens, and Antiochus of Athens—the operational definition of doryphory has been obscured by centuries of transmission errors, terminological drift (particularly the conflation with the Arabic dusturiya), and conflicting modern reconstructions. The tension lies primarily between two schools of thought: the "optical-phasal" model championed by Ptolemy, which emphasizes the visible appearance of planets relative to the sunrise, and the "dynamical-aspectual" model of Valens, which emphasizes the casting of rays and the power of the angles (kentrons).
+This research report provides a comprehensive technical reconstruction of the doryphory doctrine. It synthesizes the primary source material into a coherent operational framework, resolving the contradictions between "bodily" attendance and "ray-casting" attendance. The objective is to provide the modern technical analyst with a precise, algorithmic definition that can be consistently applied in chart analysis or implemented in code, restoring the geometric and phasal logic of the Hellenistic original.
+The analysis proceeds through a detailed philological and technical audit of the definitions, the establishment of operational criteria including disqualifiers and allowable ranges, and the application of these rules to historical and modern case studies to demonstrate the judgment of eminence.
+________________
+2. Textual Reconstruction: The Primary Definitions and Theoretical Foundations
+To operationalize doryphory, one must first understand the "physics" of the ancient cosmos that underpinned the concept. The doryphoros was not merely a planet located nearby; it was a functionary performing a specific service. The nature of this service depends entirely on the sect of the chart and the specific luminary being guarded.
+2.1 The Ptolemaic Definition: The Phasal and Optical Model
+Claudius Ptolemy, in the Tetrabiblos (specifically Book III, Chapter 5 on "The Fortune of Dignity" and Book IV, Chapter 3 on "The Fortune of Parents"), provides the standard "phasal" definition of doryphory.1 Ptolemy’s logic is grounded in the cursus of the sun and the natural appearance of celestial bodies. He treats the doryphory as a visual phenomenon observable at the horizon.
+The Solar Doryphory (The Vanguard)
+For the Sun, Ptolemy defines the spear-bearers as Oriental (rising before the Sun). The Sun, as the diurnal luminary and the celestial King, requires a vanguard. In the hierarchy of a royal procession, the guards clear the path before the monarch arrives. Therefore, planets that rise in the East immediately prior to the sunrise act as his scouts and protectors.
+* Operational Key: Solar spear-bearers must have a zodiacal longitude less than the Sun (preceding degrees) but within a visible proximity, or constitute a "matutine" (morning) configuration.
+* The Matutine Condition: Ptolemy emphasizes that for the Sun, the attendants should be "matutine" stars. This refers to the inferior planets (Venus, Mercury) when they are morning stars, or the superior planets (Mars, Jupiter, Saturn) when they are rising heliacally or positioned in the quadrant preceding the Sun.
+The Lunar Doryphory (The Retinue)
+For the Moon, Ptolemy assigns Occidental (rising after the Sun/Moon) planets as spear-bearers. The Moon, as the nocturnal luminary and Queen, requires a retinue or a train to follow her. Unlike the Sun, whose blinding light demands a clearing of the way, the Moon’s softer light is supported by those who follow in her wake.
+* Operational Key: Lunar spear-bearers must have a zodiacal longitude greater than the Moon (following degrees) or constitute a "vespertine" (evening) configuration.
+* The Vespertine Condition: Ptolemy specifies that the Moon is attended by "vespertine" stars. This implies planets that set after the Moon or rise after the Moon, maintaining the rear guard.
+Ptolemy explicitly links the quality of the doryphory to the nature of the attending planets. Benefics (Jupiter, Venus) provide secure, legitimate, and benevolent rank; Malefics (Saturn, Mars) typically deny high rank or make it dangerous and tyrannical, unless they are essentially dignified.2 This distinction is critical: a doryphory of malefics is still a doryphory, but it changes the genre of the life story from "The Good King" to "The Tyrant" or "The Usurper."
+2.2 The Valentian Definition: Ray Theory and Angularity
+Vettius Valens, in his Anthology (Books II and III), offers a more granular and dynamic definition that incorporates the concept of aktinobolia (casting of rays) and the power of the angles (kentrons).3 Valens expands the definition beyond simple bodily proximity to include aspectual doryphory, introducing a complexity that allows for "action at a distance."
+Valens’ approach is less concerned with the purely visual appearance of the procession and more with the dynamics of power within the chart. He asks: Who is dominating whom? Who is supporting whom? This leads to the classification of spear-bearers into three distinct types, a reconstruction largely solidified by modern scholars like Demetra George and Robert Schmidt based on the texts of Valens and Antiochus.5
+Type 1: The Royal Exchange (Dignity to Dignity)
+This is the most potent and rare form of doryphory. It occurs when a planet is angular (in the 1st, 10th, 7th, or 4th house) and in its own domicile or exaltation, and another planet, also in its own domicile or exaltation, casts a ray into the degrees immediately preceding the angular planet.
+* Mechanism: This suggests a mutual support network between powerful, dignified planets. It is not just a guard protecting a king; it is an alliance between two sovereigns.
+* Example from Valens: Valens might describe a scenario where Mars is in Aries (Domicile) in the 10th House, and the Sun is in Leo (Domicile) casting a sextile or square into the degrees preceding Mars. This elevates the status of the angular planet significantly.
+Type 2: Aspectual Guarding (The Distant Spear)
+This applies specifically to the Luminaries. When the Sun or Moon is in an angle (specifically the 1st or 10th), a planet of the same sect (Diurnal for Sun, Nocturnal for Moon) casts a ray into the "guarding zone."
+* For the Sun: The ray must fall ahead of the Sun (into the preceding degrees).
+* For the Moon: The ray must fall behind the Moon (into the following degrees).
+* The Geometry of Protection: This relies on the concept that a planet can "project" its influence. If Jupiter is in Sagittarius and the Sun is in Aries, Jupiter casts a trine to Aries. If that trine falls in the degrees before the Sun, Jupiter is effectively "clearing the path" for the Sun via aspect, acting as a remote vanguard.
+Type 3: Bodily/Proximity Guarding
+This is the most common form found in texts like Ptolemy and is the standard "default" definition. A planet is bodily present in the same sign or the adjacent sign, adhering to the orientation rules (rising before Sun, rising after Moon).
+* Proximity: Valens often treats the Angle itself as the primary zone. If the Sun is in the 10th House, a planet in the 11th House (Succedent) rises before it and is a doryphoros. A planet in the 9th House (Cadent) rises after it (for the Sun) and is less effective, though still geometrically related.
+2.3 The Mechanism of Aktinobolia (Casting a Ray)
+A critical theoretical hurdle in defining doryphory is the mechanics of the "ray." In Hellenistic optical theory (extramission), the eye (or planet) sends out a ray. In astrology, this usually manifests as the "Dexter" (Right) aspect dominating the "Sinister" (Left) aspect.6
+However, for Doryphory, the logic is slightly adjusted to the concept of protection rather than domination.
+* Standard Domination: A planet in Aquarius "overcomes" a planet in Taurus via a dexter square. The planet in Aquarius is in the "superior" position because it rises first.
+* Doryphory Protection: The Sun needs a guard in front. A planet in Capricorn rises before a Sun in Aquarius. It is in the "preceding" position. Even though a planet in Capricorn is theoretically in a "weaker" zodiacal position (lower longitude) compared to Aquarius, in the context of diurnal motion, it leads the way.
+* Crucial Textual Insight (Rhetorius/Antiochus): "The one that follows is said to cast a ray to the one that leads... for the ray of fire itself hastens to those that follow while it is sending forth [a ray] to those that lead".7 This implies that the doryphoros must effectively cover the space surrounding the luminary.
+________________
+3. Operational Criteria: The Doryphory Algorithm
+To implement doryphory in a consistent analytical system (or code), we must translate the textual nuance into binary or conditional logic. The following criteria prioritize the "Bodily" (Type 3) and "Aspectual" (Type 2) definitions, as these are the standard for judging eminence in the majority of nativities.
+3.1 The Prerequisite Checklist
+Before identifying spear-bearers, the chart must be evaluated for fundamental eligibility. Not every chart has a doryphory; it is a mark of distinction.
+Step 1: Determine the Sect of the Chart
+* Day Chart (Diurnal): Sun is above the horizon (Ascendant/Descendant axis).
+   * Primary Luminary: Sun.
+   * Preferred Bodyguards: Diurnal planets (Saturn, Jupiter).
+* Night Chart (Nocturnal): Sun is below the horizon.
+   * Primary Luminary: Moon.
+   * Preferred Bodyguards: Nocturnal planets (Mars, Venus).
+* Neutral: Mercury adapts to the phase (Morning = Diurnal; Evening = Nocturnal).
+Step 2: Angularity of the Luminary
+* The Luminary (Sun or Moon) should ideally be angular (1st or 10th house are best; 7th and 4th are secondary).
+* The Succedent Exception: Doryphory can exist in succedent houses (11th, 5th), but its power is reduced to "Noble" rather than "Royal."
+* The Cadent Disqualifier: A doryphory in a cadent house (3rd, 6th, 9th, 12th) is generally considered ineffective for worldly rank. It may indicate "mental" eminence (a philosopher or scribe) or rank that is hidden/obscure.8
+3.2 The Solar Doryphory Criteria (The Vanguard)
+For a planet    to be a spear-bearer for the Sun   :
+1. Zodiacal Position:    must be in degrees preceding    in the order of signs.
+   * Logic:    (within limits).
+   * Example: Sun at    Aries. Eligible zone is roughly    Aries to    Aries, or the sign of Pisces.
+      2. Diurnal Rise:    must rise before the Sun. This constitutes "Oriental" appearance.
+      3. Maximum Range:    should generally be within one sign (30 degrees) or aspectual range. Bodily doryphory is strongest within the same sign or the sign immediately preceding.
+      4. Sect Alignment: Ideally,    is a diurnal planet (Jupiter, Saturn). If    is nocturnal (Venus, Mars), the doryphory is "out of sect" and less stable/effective, potentially indicating success followed by reversal.
+3.3 The Lunar Doryphory Criteria (The Retinue)
+For a planet    to be a spear-bearer for the Moon   :
+         1. Zodiacal Position:    must be in degrees following    in the order of signs.
+            * Logic:    (within limits).
+            * Example: Moon at    Aries. Eligible zone is roughly    Aries to    Aries, or the sign of Taurus.
+               2. Diurnal Rise:    must rise after the Moon. This constitutes "Occidental" appearance.
+               3. Maximum Range:    must be bodily visible or aspecting the "following" degrees.
+               4. Sect Alignment: Ideally,    is a nocturnal planet (Venus, Mars).
+3.4 Disqualifiers (The "Broken" Spear)
+A planet theoretically positioned to act as a spear-bearer may be disqualified or rendered destructive if certain conditions are met. These act as "filters" in the algorithm.
+                  * Combustion (Under the Beams):
+                  * The Solar Nuance: A planet rising too close to the Sun (within 15° or specifically 8°) is "under the beams" and debilitated. However, for Solar doryphory, the planet must be close to the Sun to be an attendant.
+                  * The Operational Rule: The ideal doryphory is a planet that has just made a Heliacal Rising (appearing as a morning star just before dawn, separated by ~15°+ from the Sun). If the planet is within 5-8° (Combust), it is "blinded" and cannot protect effectively. It represents a guard who is overwhelmed by the King's presence.
+                  * Status: Best = Heliacal Rise (>15° distance). Acceptable = Under Beams but Separating. Weak/Malefic = Combust (<8°).
+                  * Retrograde Motion:
+                  * A retrograde planet is moving against the zodiacal flow. In the context of a vanguard (Solar), a retrograde planet is effectively "retreating" or "defecting."
+                  * Valens' View: Retrograde benefics in doryphory may withhold their gifts or delay rank. Retrograde malefics in doryphory are actively destructive—they are treasonous guards who turn their spears against the sovereign.9
+                  * Ray Cutting / Maltreatment:
+                  * If the spear-bearer is intercepted by a ray from a Malefic (square/opposition) without mitigation, the guard is "struck down" and cannot perform their duty.
+________________
+4. Allowable Range & Measurement Standards
+The "Allowable Range" defines the tolerance for identifying doryphory. This is the parameters section for any code implementation or rigorous manual analysis.
+4.1 Bodily Doryphory (Type 3)
+This is the spatial proximity definition, relying on zodiacal longitude.
+                  * Metric: Zodiacal Longitude relative to the Luminary.
+                  * Solar Range: From    to   .
+                     * Strict View: The planet must be in the same sign or the adjacent preceding sign.
+                     * Lunar Range: From    to   .
+                        * Strict View: The planet must be in the same sign or the adjacent following sign.
+                        * Special Note for Moon: Some texts (Porphyry/George) imply a tighter orb for the Moon, often cited as within 7 degrees or at least within the same sign.5 This reflects the Moon's limited "orb of virtue" compared to the Sun.
+4.2 Aspectual Doryphory (Type 1 & 2)
+This relies on the "casting of rays" into the zone immediately preceding (Sun) or following (Moon) the luminary.
+                        * The Zone: The degrees of the sign immediately preceding the Sun (or following the Moon) are defined as the "Zone of Protection."
+                        * The Ray: A planet in Trine, Square, or Sextile to this Zone can act as a spear-bearer.
+                        * Example: Sun is at    Aries. The "Guard Zone" is the sign of Pisces (and specifically    Aries).
+                        * Scenario: A planet at    Leo (Trine to Aries) casts a ray to    Aries. Does this count?
+                        * Clarification: Valens prefers the ray to fall into the preceding degrees. If Jupiter is at    Sagittarius, it casts a trine to    Aries (which is preceding the Sun at    Aries). This is a valid Aspectual Solar Doryphory.
+                        * Rule: The aspectual ray must land in the longitude range defined in 4.1, even if the planet itself is physically distant. This allows for "remote guarding."
+4.3 Operational Decision Table
+The following table synthesizes the operational variables for determining valid Doryphory.
+Variable
+	Solar Doryphory Criteria
+	Lunar Doryphory Criteria
+	Operational Vector
+	Preceding (Lower Longitude)
+	Following (Higher Longitude)
+	Diurnal Motion
+	Rises Before Sun (Oriental)
+	Rises After Moon (Occidental)
+	Sect Preference
+	Diurnal (Saturn, Jupiter)
+	Nocturnal (Mars, Venus)
+	Orb (Bodily)
+	0° to -30° (approx 1 sign)
+	0° to +15° (approx 1/2 sign)
+	Orb (Aspectual)
+	Ray lands in Preceding Degrees
+	Ray lands in Following Degrees
+	Visible Phase
+	Matutine (Morning Star)
+	Vespertine (Evening Star)
+	Disqualifiers
+	Retrograde, Combust (<8°), Cadent
+	Retrograde, Under Beams, Cadent
+	________________
+5. Eminence and Judgment Impact
+The presence of doryphory is not merely a binary switch; it is a scalar variable that modifies the "amplitude" of the nativity’s promise. It serves as a multiplier for the inherent strength of the chart.
+5.1 The "King-Maker" Effect
+If the Luminaries are angular (1st/10th) and possess a complete, sect-aligned doryphory (e.g., Sun in 10th attended by Jupiter in the 9th or rising before it in the 10th), the nativity indicates Kingship, Imperial Rank, or (in modern terms) CEO/Head of State status. Valens and Ptolemy both agree that "brilliant fortune" is presaged by this configuration.2 The native is propelled by a force greater than themselves; the "entourage" carries them to power.
+5.2 The "Lieutenant" Effect
+If the Luminaries are succedent (e.g., 11th, 5th) but have strong doryphory, or if the doryphory planets themselves are not angular (e.g., Sun in 10th, Bodyguard in 9th), the native achieves Eminence, but subordinate to a higher power. They become powerful ministers, generals, or wealthy merchants—those who serve the King but possess their own staff and authority.
+5.3 The "Corrupt" Effect (Malefic Doryphory)
+If the spear-bearers are contrary to sect (e.g., Mars attending the Sun in a Day chart) or afflicted (retrograde/combust), the delineation shifts from "Good Fortune" to "Dramatic Intensity."
+                           * Interpretation: The native achieves rank but through tyranny, violence, or treachery. The "guards" are essentially mercenaries or thugs. The rank is unstable and liable to collapse (vicissitude).
+                           * Ptolemy's Warning: Ptolemy specifically notes that if malefics compose the doryphory, the estate is "unproductive and burthensome" or the native is subject to reversals.2 This was clearly seen in the chart of Nero.
+5.4 Fortune of Parents
+Doryphory is also used technically to judge the status of the parents, acting as a proxy for their social standing at the time of the native's birth.
+                           * Sun’s Doryphory: Indicates the status of the Father. A strong solar doryphory implies a distinguished or powerful father.
+                           * Moon’s Doryphory: Indicates the status of the Mother. A Moon attended by benefics suggests a mother of high breeding or wealth.
+________________
+6. Worked Examples
+To illustrate the operational definition, we apply the criteria to historical and modern nativities. These examples demonstrate the application of the checklist in real-world scenarios.
+6.1 Solar Case: Augustus Caesar (The Archetype)
+Historical Context: Augustus was the first Roman Emperor, establishing the Principate. His eminence is absolute, serving as the benchmark for the "Royal Nativity."
+                           * Chart Data: (Speculative/reconstructed from Suetonius/Manilius). Standard rectification places Sun in Libra (approx. September 23, 63 BC).
+                           * Configuration Analysis:
+                           * Sun: In Libra (Fall, but angular in 1st/10th depending on rising sign).
+                           * Solar Doryphory Check: We look for planets rising before the Sun (in Virgo/Leo).
+                           * Lunar Doryphory Check: The Moon was in Capricorn. Historical textual references (Manilius) emphasize Capricorn (Moon sign) as the source of his power.11 This suggests the eminence was driven by a Lunar Doryphory.
+                           * Lunar Analysis:
+                           * Moon: Capricorn.
+                           * Attendants: Planets rising after the Moon (Aquarius/Pisces).
+                           * Interpretation: The fact that Augustus issued coins with Capricorn (his Moon sign) rather than his Sun sign validates the importance of the Lunar configuration in his specific chart. The Moon in Capricorn, ruled by Saturn (Sect ruler in a likely Night chart or competing sect), provided the "gravitas" and enduring structure of his reign.
+6.2 Ambiguous Case: Bernie Sanders (The "Almost" King)
+Data: September 8, 1941. Birth time speculative (using 2:00 AM/Cancer Rising per Demetra George’s analysis).5
+                           * Sect: Night Chart (Sun in Virgo below horizon).
+                           * Luminary: The Moon is the Sect Light.
+                           * Moon Position: Aries (10th House - Angular). This angularity makes the Moon a prime candidate for doryphory assessment.
+                           * Criteria Check:
+                           * Target: Planets rising after the Moon (following degrees).
+                           * Candidate: Mars is located in Aries (23°). The Moon is at 14° Aries.
+                           * Geometric Check: Mars is in the following degrees (  ).
+                           * Bodily Check: Mars is in the same sign (Bodily Doryphory).
+                           * Dignity Check: Mars is the ruler of Aries (Domicile).
+                           * Sect Check: Mars is of the Sect (Nocturnal planet in Night chart).
+                              * Conclusion: This is a textbook Type 3 Lunar Doryphory (Bodily).
+                              * Interpretation: Mars (Warrior/Agitator) acts as the bodyguard for the Moon (The People). The native becomes a champion of the people (Moon) through fighting/agitation (Mars). The angularity (10th house) grants high visibility and prominence, explaining his status as a persistent, high-profile political figure ("The Tribune") rather than a hidden administrator.
+6.3 Modern "Wealth" Case: Mike Bloomberg
+Data: February 14, 1942. Sun in Aquarius.12
+                              * Configuration:
+                              * Sun: 25° Aquarius.
+                              * Potential Solar Bodyguards (Preceding Degrees):
+                              * Mercury (15° Aquarius)
+                              * Venus (6° Aquarius)
+                              * Moon (17° Aquarius)
+                              * Check: All these planets are in the same sign and have lower longitude than the Sun. They rise before the Sun.
+                              * Conclusion: Massive Solar Doryphory (Bodily).
+                              * Condition: Sun is attended by Moon, Mercury, and Venus.
+                              * Interpretation: A dense entourage. The containment of almost all visible planets within the doryphory zone of the Sun indicates immense accumulation of resources and authority. Even though some planets are out of sect (Venus/Moon in Day chart), the sheer density creates a "gravity well" of eminence, manifesting as extreme wealth and executive power.
+6.4 The "Corrupt" Case: Nero
+Data: December 15, 37 AD. Sun in Sagittarius (Ascendant).13
+                              * Configuration:
+                              * Sun is rising (Ascendant).
+                              * Mars: Mars is conjunct the Sun on the Ascendant.
+                              * Orb: Very close proximity.
+                              * Sect Violation: Mars is a Nocturnal planet. In a Day chart (Sunrise), Mars is the "out of sect malefic."
+                              * Analysis: Mars is acting as a spear-bearer (bodily conjunction/proximity), but it is a malefic contrary to the sect.
+                              * Interpretation: The "bodyguard" is a violent soldier who usurps or threatens the King. Nero’s power was defined by violence (Mars) and ultimately self-destruction. The doryphory exists—granting the rank of Emperor—but it is "malignant," ensuring that the reign is characterized by the negative qualities of the guard (Mars out of sect: cruelty, rashness, violence).
+________________
+7. Later Developments and Divergences
+The operational clarity of the Hellenistic doryphory degraded as astrology transmitted through the Persian and Arabic eras into the Latin Medieval tradition.
+                              * From Doryphory to Ductoria: The concept evolved into the Medieval Ductoria (Leading) or Dusturiya. While the core idea of "orientality" remained, the nuance of the "Guard Zone" and the specific sect requirements often faded.
+                              * Simplification: Later traditions often simplified doryphory to merely "Any planet rising before the Sun." This stripped the technique of its power to distinguish between a "King" and a "Commoner." The Hellenistic requirement for angularity and specific ray-casting (Type 1/Type 2) is crucial for the "Eminence" judgment and is often missing in later texts.
+                              * Reconstruction: Modern reconstruction (Schmidt/George) has been vital in restoring the Type 1 (Dignity-to-Dignity) definition, which explains charts where no bodily doryphory exists but high eminence is achieved.
+________________
+8. Source Mapping & Verification Table
+The following table maps the operational criteria to the specific Hellenistic source text to ensure the "Code" is historically grounded.
+Criteria
+	Ptolemy (Tetrabiblos)
+	Valens (Anthology)
+	Operational Status
+	Sun's Bodyguard
+	Oriental (Matutine)
+	Preceding degrees (casting ray)
+	Rise Before Sun
+	Moon's Bodyguard
+	Occidental (Vespertine)
+	Following degrees (casting ray)
+	Rise After Moon
+	Sect Requirement
+	Highly Emphasized
+	Mentioned but flexible
+	Critical for Quality
+	Allowable Orb
+	Phasal (Visible)
+	Ray-based (Aspectual)
+	Use 1 Sign / 30°
+	Angularity
+	Implied (for efficacy)
+	Explicit (Angles/Succedents)
+	Mandatory for High Rank
+	Retrograde
+	Weakness
+	Defective/Malfunction
+	Disqualifier
+	Modern Application
+	General Fortune
+	Rank/Eminence & Parents
+	Primary Eminence Metric
+	________________
+9. Conclusion: The Code of the Spear
+To operationalize Doryphory is to look for the "Celestial Entourage." It is not a subtle aspect; it is a visually dominant configuration where the Light of the chart is physically or optically supported by a retinue of planets.
+For the analyst or developer, the definition can be codified as:
+A planet    is a Doryphory for Luminary    if:
+                              1.    is the Sect Light (preferred).
+                              2.    is Angular or Succedent.
+                              3.    rises immediately before    (if   =Sun) or after    (if   =Moon).
+                              4.    is within 30 degrees of longitude (Bodily) OR casting a domal ray (Trine/Square/Sextile) into that 30-degree zone.
+                              5.    is Direct and not Combust (unless separating from Sun).
+When these conditions are met, the nativity possesses the "Spear-Bearer," marking the native not merely as a participant in fate, but as a leader within it—guarded, heralded, and authorized to command.
+________________
+End of Report
+Works cited
+                                 1. LacusCurtius • Ptolemy, Tetrabiblos, — Book IV, §§ 1‑4, accessed January 30, 2026, http://penelope.uchicago.edu/Thayer/E/Roman/Texts/Ptolemy/Tetrabiblos/4A*.html
+                                 2. Ptolemy's Tetrabiblos : or, Quadripartite : being four books of the influence of the stars, accessed January 30, 2026, https://archive.org/download/ptolemystetrabib00ptol/ptolemystetrabib00ptol.pdf
+                                 3. VETTIUS VALENS Anthologies - GitHub, accessed January 30, 2026, https://raw.githubusercontent.com/janegca/latex-valens/main/Valens-Anthologies-Annotated.pdf
+                                 4. Vettius Valens, Anthologies, Book III, accessed January 30, 2026, https://rjtx.hopto.org/sphaera/Vettius%20Valens%20Anthologiae_iii_2.pdf
+                                 5. Hellenistic Spear Bearers in the Chart of Bernie Sanders - Demetra George, accessed January 30, 2026, https://demetra-george.com/blog/bernie-sanders-spear-bearer/
+                                 6. Understanding Dexter and Dignities in Astrology | PDF | Solar System - Scribd, accessed January 30, 2026, https://www.scribd.com/document/267581146/Original-91Onwards-92
+                                 7. Astrological Compendium - Rhetorius The Egyptian | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/333213909/Astrological-Compendium-Rhetorius-the-Egyptian
+                                 8. Doryphory (Spearbearer) | PDF | Planets | Astrology - Scribd, accessed January 30, 2026, https://ru.scribd.com/document/249715774/doryphory-spearbearer
+                                 9. Combust_Retrograde - Jyotish Vidya, accessed January 30, 2026, https://www.jyotishvidya.com/combust_retrograde.htm
+                                 10. Is a planet in retrograde similar to a debilitated planet? : r/astrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/astrology/comments/18phb3q/is_a_planet_in_retrograde_similar_to_a/
+                                 11. Reading the Ancient Stars - Sulla Coins, accessed January 30, 2026, https://www.sullacoins.com/post/reading-the-ancient-stars
+                                 12. Doryphory (Spearbearer) | PDF | Planets | Astrology - Scribd, accessed January 30, 2026, https://www.scribd.com/document/249715774/doryphory-spearbearer
+                                 13. Neronian Astrological Charts - Humphry knipe, accessed January 30, 2026, https://humphryknipe.com/neroarticles/2017/4/7/neronian-astrological-charts

@@ -1,0 +1,326 @@
+﻿The Arbiter of Destiny: A Comprehensive Computational Specification for the Almuten Figuris and Lord of the Geniture in Medieval and Renaissance Astrology
+1. Introduction: The Algorithmic Search for the Master of the Chart
+In the vast and intricate architecture of pre-modern horoscopic astrology, no single calculation carries more weight—or more confusion—than the determination of the "Ruler of the Chart." For nearly two millennia, astrologers have operated under the premise that a specific celestial body in any given nativity exercises a predominant authority over the life, character, and destiny of the native. This planet is not merely a component of the chart; it is the chart’s executive officer, the proxy for the native’s will, and in certain traditions, the signifier of the soul’s guardian spirit.
+However, the methodology for identifying this "Master" has never been monolithic. As astrological traditions migrated from Hellenistic Egypt to the Abbasid Caliphate, and later to the Latin West, the algorithms for calculating this ruler evolved, bifurcating into two distinct technical specifications that are frequently conflated in modern practice. These are the Almuten Figuris (The Victor of the Figure), associated with the 12th-century scholar Abraham Ibn Ezra, and the Lord of the Geniture, codified by the 17th-century English astrologer William Lilly.
+This report serves as a definitive technical specification and historical analysis of these two competing models. It is designed for historians of science, data modelers, and advanced practitioners of traditional astrology who require an implementation-ready framework for reproducing these calculations. The distinction is not merely semantic; it is structural and philosophical. Ibn Ezra’s Almuten is a soteriological pointer, derived from a compound analysis of the "places of life," intended to identify the spiritual guardian of the native.1 William Lilly’s Lord of the Geniture is a psychological and behavioral index, derived from a net-strength assessment of the planets’ capacity to act, intended to describe the temperament and physical constitution.2
+To accurately model these systems, we must strip away the casual approximations of contemporary astrology and return to the primary source logic. We must treat these methodologies as what they historically were: complex data weighting algorithms designed to process multivariate astronomical data into a single, actionable output. This report will dissect the specific scoring metrics, the handling of essential and accidental dignities, and the precise definitions of the "Hylegical" points required for the Ezra calculation, contrasting them with the "Table of Fortitudes and Debilities" utilized by Lilly.
+2. Historical and Philosophical Frameworks
+To understand the divergence in calculation, one must first appreciate the divergent goals of the eras that produced them. The transition from the high medieval Arabic tradition to the early modern European tradition represents a shift from a Neoplatonic, spirit-centered model of the cosmos to a more Aristotelian, character-centered model.
+2.1 The Arabic Era: Abraham Ibn Ezra and the Soteriological Vector
+Abraham Ibn Ezra (c. 1089–1167) stands as a monumental figure in the transmission of Arabic astrological science to the Hebrew and Latin worlds. His Book of Nativities (Sefer ha-Moladot) articulates a view of the horoscope that is deeply concerned with the "management" of the soul's incarnation.3 In this context, the Almuten Figuris is not simply the strongest planet; it is the Captain of the Soul.
+The term Almuten derives from the Arabic al-mubtazz, meaning "the victor" or "the winner".1 This etymology reveals the competitive nature of the algorithm. The chart is viewed as a contested territory, with various planets claiming legal authority (dignity) over specific coordinates. The planet with the highest aggregated authority over the most vital points of the chart—the "Places of Life"—is declared the victor.
+This calculation was inextricably linked to the concept of the "Personal Daimon" or "Guardian Angel".5 In the Neoplatonic and Hermetic traditions influencing Ibn Ezra, the soul is guided into the sublunar sphere by a specific planetary force. Identifying the Almuten Figuris was the astrological method for naming this spirit, a practice that extended into theurgical rituals as seen in texts like the Picatrix.5 Thus, the Ezra calculation is weighted heavily toward essential dignity—intrinsic, zodiacal right to rule—rather than accidental circumstances. It asks: Who has the legal right to this soul?
+2.2 The Renaissance Era: William Lilly and the Psychological Vector
+Five centuries later, William Lilly (1602–1681) published Christian Astrology (1647), the first major astrological textbook in the English language. Writing during the English Civil War, Lilly was a pragmatist. While he inherited the Arabic techniques, his application was decidedly more focused on the immediate, tangible reality of the native’s life: their health, their manners, their social standing, and their mental acuity.2
+Lilly’s Lord of the Geniture moves away from the "Places of Life" methodology. Instead of asking which planet has legal authority over the soul, Lilly asks: Which planet is the most capable actor? This is a subtle but profound shift. A planet might have great legal authority (Essential Dignity) but be locked in a dark house or moving backward (Accidental Debility), rendering it ineffective. Conversely, a planet with moderate authority but tremendous positional strength might be the dominant force in the native's behavior.
+Lilly’s algorithm, therefore, introduces a complex system of "Accidental Dignities" and "Debilities," assigning positive and negative integers to conditions like retrogradation, combustion, speed, and house placement.8 It acts as a "Net Capability Score." It asks: Who is the strongest warrior on the field?
+2.3 The Conflation Problem
+Modern software and casual practitioners often use the terms interchangeably, or worse, apply Lilly’s scoring table to Ezra’s method, or vice versa. This creates a data model that corresponds to no historical reality. A rigorous specification must isolate these two logic streams. The Almuten Figuris (Ezra) utilizes a scoring system based on the 5 Hylegs and a 12-to-1 House Ranking. The Lord of the Geniture (Lilly) utilizes a scoring system based on Net Fortitudes/Debilities of the planets themselves. The following sections define these specifications in granular detail.
+3. Technical Specification A: The Almuten Figuris (Ibn Ezra)
+The calculation of the Almuten Figuris is a compound-derivative algorithm. It does not look at the planets directly; rather, it looks at the rulers of specific sensitive points. The logic is:
+1. Identify the 5 Hylegical Points (The "Givers of Life").
+2. Calculate the score of every planet that has dignity over these 5 points.
+3. Add points for the Ruler of the Day and Ruler of the Hour.
+4. Add points for the mundane house placement of the planets.
+5. The planet with the highest total score is the Almuten.
+3.1 Step 1: Determination of the Five Hylegical Points
+The first requirement is the precise astronomical location of the five points that represent the vital force of the native. Ibn Ezra explicitly lists these as: The Sun, the Moon, the Ascendant, the Part of Fortune, and the Prenatal Syzygy.2
+3.1.1 The Sun and Moon
+These are taken as the longitude of the luminaries at the exact moment of birth. No complex calculation is required other than standard ephemeris interpolation.
+3.1.2 The Ascendant (Horoskopos)
+This is the degree of the zodiac intersecting the eastern horizon at the specific location and time of birth. It represents the physical body and the moment of independent existence.
+3.1.3 The Part of Fortune (Pars Fortunae)
+The calculation of the Part of Fortune is critical and strictly dependent on the Sect of the chart (whether it is a Day birth or Night birth). Ibn Ezra and the Arabic tradition are emphatic on reversing the formula for night charts, a detail often missed in simplified modern accounts.10
+* Definition of Sect: A chart is a "Day Chart" if the geometric center of the Sun is above the horizon (Altitude > 0). It is a "Night Chart" if the Sun is below the horizon.
+* Day Formula:
+  
+* Night Formula:
+  
+Implementation Note: The resulting longitude must be normalized to the 0–360° circle. If the result is negative, add 360°.
+3.1.4 The Prenatal Syzygy (SAN - Syzygy Ante Nativitatem)
+This point represents the "cosmic mandate" prior to the soul's entry. It is the degree of the conjunction (New Moon) or opposition (Full Moon) that occurred most recently before the birth.1
+   * Logic:
+   1. Search backward in time from the birth timestamp.
+   2. Identify the first instance where the Sun and Moon are either conjunct (0°) or opposed (180°).
+   3. If New Moon: The Hylegical degree is the longitude of the Sun/Moon conjunction.
+   4. If Full Moon: The determination of the degree can be subtle. In the Ezra tradition, the standard practice is to take the position of the Luminary of the Time. If the Syzygy was a Full Moon during the day, use the Sun's degree. If at night, use the Moon's degree. However, simplified medieval models often default to the position of the Moon at the Full Moon, or simply the exact degree of the opposition axis where the light was increasing?
+   * Refined Specification: Most rigorous implementations of the Ezra method use the degree of the New Moon (if identifying a New Moon syzygy) or the degree of the Full Moon (specifically the Moon's position) if the syzygy was an opposition.
+   * Correction: 2 quotes Ezra: "the place of the conjunction or opposition." In medieval practice, the "place" of a Full Moon is strictly the position of the luminary that is above the earth, or the Moon? To ensure standardization, the Moon's longitude at the exact moment of the Syzygy is the most robust data point to use for the Almuten calculation, as the Moon transmits the light of the Sun to the sublunar sphere.
+3.2 Step 2: The Essential Dignity Scoring Matrix
+Once the five points are located (e.g., Sun at 15° Aries, Moon at 2° Taurus, etc.), the algorithm must score the planets that claim authority over them. This uses the 5-4-3-2-1 weighted system.
+For each of the 5 points, calculate:
+   1. Domicile Ruler: 5 points. (The landlord).
+   2. Exaltation Ruler: 4 points. (The honored guest).
+   3. Triplicity Rulers: 3 points. (The tribe).
+   4. Term (Bound) Ruler: 2 points. (The border control).
+   5. Face (Decan) Ruler: 1 point. (The countenance).
+3.2.1 The Triplicity Problem: Dorothean vs. Ptolemaic
+This is the single most common failure point in modern implementations. Ibn Ezra utilized the Dorothean Triplicity system, which assigns three rulers to each element (Day, Night, and Participating). In the Ezra calculation for Almuten Figuris, all three rulers typically receive points, or at least the Day and Night rulers are weighted heavily.11 This contrasts with the later Ptolemaic/Lilly method which often reduces this to a single ruler.
+   * Fire (Aries, Leo, Sag): Day: Sun | Night: Jupiter | Part: Saturn.
+   * Earth (Tau, Vir, Cap): Day: Venus | Night: Moon | Part: Mars.
+   * Air (Gem, Lib, Aqu): Day: Saturn | Night: Mercury | Part: Jupiter.
+   * Water (Can, Sco, Pis): Day: Venus | Night: Mars | Part: Moon.
+Scoring Rule: In the strict Zoller/Ezra implementation, each of the three rulers receives 3 points regardless of the chart sect. This reflects the "committee" nature of triplicity in the medieval mindset.11
+3.2.2 The Term System: Egyptian vs. Ptolemaic
+Ibn Ezra used the Egyptian Terms.11 Using Ptolemaic terms (as Lilly did later) will result in incorrect calculations for the Term ruler (2 points). The Egyptian terms are irregular and distinct from the logical curve of the Ptolemaic set.
+3.2.3 Example Calculation Loop
+If the Ascendant is at 10° Scorpio:
+   * Domicile: Mars (Ruler of Scorpio) gets +5.
+   * Exaltation: None (No planet exalted in Scorpio). Score 0.
+   * Triplicity (Water): Venus (+3), Mars (+3), Moon (+3).
+   * Term (Egyptian): 10° Scorpio falls in the term of Venus (7°-11°). Venus gets +2.
+   * Face: 10° Scorpio is the 2nd Decan (10-20). Sun rules the 2nd face of Scorpio. Sun gets +1.
+Note: In this single step, Mars accumulates 8 points (5 Domicile + 3 Triplicity), Venus accumulates 5 points (3 Triplicity + 2 Term), Moon 3, Sun 1. This process is repeated for all 5 Hylegs.
+3.3 Step 3: The Temporal Rulers (Day and Hour)
+This step acknowledges the specific time of birth. These are global points added to the planets' totals, not derived from the Hylegs.5
+   1. Lord of the Day: The planet ruling the day of the week.
+   * Score: +7 points.
+   * Calculation: Days begin at True Sunrise, not midnight. A birth on Tuesday at 4 AM (before sunrise) is technically a Monday birth (Day of the Moon).
+   2. Lord of the Hour: The planet ruling the planetary hour.
+   * Score: +6 points.
+   * Calculation: Divide the daylight period (Sunrise to Sunset) by 12 to get day-hour length. Divide night period (Sunset to Sunrise) by 12 for night-hour length. Assign rulers in the Chaldean Order (Saturn -> Jupiter -> Mars -> Sun -> Venus -> Mercury -> Moon).
+3.4 Step 4: The Mundane House Scoring (Ezra's Scale)
+The final component is the "Accidental Dignity" of the planets themselves. Ibn Ezra uses a specific, linear ranking system that differs entirely from Lilly's later table. This system awards points based on the planet's ability to "witness" the Ascendant and its angular strength.2
+The Ezra House Scale (12-Point System):
+House
+	Classification
+	Score
+	Logic
+	1st
+	Angular
+	12
+	The Helm of Life; most powerful.
+	10th
+	Angular
+	11
+	The Apex; second most powerful.
+	7th
+	Angular
+	10
+	Opposition to Ascendant; strong.
+	4th
+	Angular
+	9
+	Foundation; weakest angle but strong.
+	11th
+	Succedent
+	8
+	"Good Spirit"; fortunate.
+	5th
+	Succedent
+	7
+	"Good Fortune"; fortunate.
+	2nd
+	Succedent
+	6
+	"Gate of Hades"; support for 1st.
+	9th
+	Cadent
+	5
+	"God"; sun's joy; weak but spiritual.
+	8th
+	Succedent
+	4
+	"Idle Place"; associated with death.
+	3rd
+	Cadent
+	3
+	"Goddess"; moon's joy; weak.
+	12th
+	Cadent
+	2
+	"Bad Spirit"; very weak.
+	6th
+	Cadent
+	1
+	"Bad Fortune"; weakest.
+	   * Implementation Check: A planet in the 1st House receives 12 points added to its total. A planet in the 6th receives 1.
+   * House System: Ibn Ezra typically employed quadrant house systems (like Alcabitius). However, strictly applying this to Whole Sign Houses is a modern adaptation. For historical accuracy, use Alcabitius.
+3.5 The Final Summation and Interpretation
+The algorithm sums the results of Steps 2, 3, and 4.
+  
+
+The planet with the highest integer    is declared the Almuten Figuris.
+   * Interpretation: This planet is the "Guardian" of the nativity. It represents the spiritual intent and the "Master of the Soul."
+________________
+4. Technical Specification B: The Lord of the Geniture (William Lilly)
+We now turn to the 17th century. William Lilly’s Lord of the Geniture is often confused with the Almuten, but the methodology is radically different. Lilly’s method is a "Net Capability Assessment." It focuses on the planets' intrinsic strength (Essential Dignity) and their circumstantial ability to act (Accidental Dignity). It employs negative numbers (Debilities), allowing a planet to have a score of zero or less.8
+Lilly’s method does not use the 5 Hylegs. It evaluates the planets directly.
+4.1 The Essential Dignity and Debility Table
+For each of the seven planets, calculate a score based on its zodiacal position.
+Condition
+	Score
+	Definition
+	In Own Sign (Domicile)
+	+5
+	E.g., Mars in Aries.
+	Mutual Reception
+	+5
+	By House (e.g., Moon in Aries, Mars in Cancer). Lilly treats this as a potent strengthener.
+	Exaltation
+	+4
+	E.g., Sun in Aries.
+	Mutual Reception (Exalt)
+	+4
+	By Exaltation.
+	Triplicity
+	+3
+	Ptolemaic System: Only the primary rulers are usually scored, or the pair. Lilly often simplifies this to just "In Triplicity" = +3.
+	Term
+	+2
+	Ptolemaic Terms: Lilly used the Ptolemaic table, not Egyptian.
+	Face
+	+1
+	Chaldean Decan.
+	Detriment
+	-5
+	Opposite Sign (e.g., Mars in Libra).
+	Fall
+	-4
+	Opposite Exaltation (e.g., Sun in Libra).
+	Peregrine
+	-5
+	Having no essential dignity (not even Face). This is a severe debility.
+	4.2 The Accidental Dignity and Debility Table (The "Cheat Sheet")
+This is the heart of Lilly’s system. It evaluates the planet's condition in the mundane sphere. This table is extensive and specific.9
+4.2.1 House Placement (Lilly's Nonlinear Scale)
+Unlike Ezra’s 12-to-1 scale, Lilly groups houses by strength and assigns penalties.
+House Position
+	Score
+	Notes
+	1st or 10th
+	+5
+	Maximum Angularity.
+	7th, 4th, 11th
+	+4
+	Strong Angles and the Fortunate 11th.
+	2nd, 5th
+	+3
+	Succedent houses of substance/pleasure.
+	9th
+	+2
+	The best of the Cadent houses.
+	3rd
+	+1
+	Neutral Cadent.
+	12th
+	-5
+	Severe Debility ("The House of Self-Undoing").
+	8th or 6th
+	-2
+	Moderate Debility (Death and Sickness).
+	4.2.2 Motion and Velocity
+Lilly places great emphasis on the speed and direction of the planet.
+   * Direct: +4. Moving forward.
+   * Retrograde: -5. Moving backward. A major debility signifying corruption, delay, or internalize.
+   * Swift in Motion: +2. Moving faster than its average daily mean.
+   * Slow in Motion: -2. Moving slower than its average daily mean.
+4.2.3 Solar Phase (Combustion and Orientality)
+The relationship to the Sun is paramount in the Renaissance tradition.
+   * Cazimi (In the Heart of the Sun): +5.
+   * Definition: Within 0°17' (17 arcminutes) of the Sun's center. This is considered a point of immense brilliance and power.16
+   * Combust: -5.
+   * Definition: Between 0°17' and 8°30' of the Sun. The planet is "burnt up" and invisible. Its agency is destroyed.
+   * Under the Sun's Beams: -4.
+   * Definition: Between 8°30' and 17°00' of the Sun. A lesser form of combustion, but still debilitated.
+   * Orientality/Occidentality:
+   * Saturn, Jupiter, Mars: Stronger when Oriental (rising before the Sun).
+   * Oriental: +2
+   * Occidental: -2
+   * Mercury, Venus: Stronger when Occidental (rising after the Sun, acting as Evening Stars).
+   * Occidental: +2
+   * Oriental: -2
+   * Moon:
+   * Increasing in Light (New to Full): +2
+   * Decreasing in Light (Full to New): -2 (often equated to Occidental).
+4.2.4 Aspects and Besiegement
+   * Free from Combustion: +5. (Some tables list this explicitly; usually inherent in not being combust).
+   * Besieged:
+   * By Benefics (Jupiter/Venus): +6. If the planet is bodily situated between Jupiter and Venus.
+   * By Malefics (Saturn/Mars): -5 (or -6 in some versions). If the planet is situated between Saturn and Mars.
+   * Aspects to Benefics:
+   * Conjunct Jupiter/Venus: +5
+   * Trine Jupiter/Venus: +4
+   * Sextile Jupiter/Venus: +3
+   * Aspects to Malefics:
+   * Conjunct Saturn/Mars: -5
+   * Opposition Saturn/Mars: -4
+   * Square Saturn/Mars: -3
+4.2.5 Fixed Stars
+Lilly considers conjunctions with specific royal stars.17
+   * Conjunct Regulus (Lion's Heart): +6.
+   * Conjunct Spica (Virgin's Spike): +5.
+   * Conjunct Caput Algol (The Demon's Head): -5 (Note: A decapitating, malevolent influence).
+4.3 The Final Calculation
+The scores are tallied for each of the seven planets.
+  
+
+The planet with the highest algebraic sum (e.g., +42 vs +15 vs -5) is the Lord of the Geniture.
+   * Interpretation: This planet represents the native's capabilities, their temperament (choleric, phlegmatic, etc.), and their primary psychological drive. A strong Lord indicates a capable, robust individual; a weak Lord indicates a life of struggle or poor health.
+5. Implementation Strategy and Logic Handling
+For data modelers implementing these specifications, several edge cases and logical forks must be managed.
+5.1 Tie-Breaking Protocols
+In algorithmic systems, ties are inevitable.
+   * Ezra/Zoller Tie-Breaker: If two planets have the same Almuten score, precedence is given to the planet with the higher dignity score in the degree of the Ascendant. If still tied, look to the ruler of the Sun (Day) or Moon (Night).18
+   * Bonatti's Rule: In his 146 Considerations, Guido Bonatti advises checking the Lord of the Ascendant. If there is a tie, or if the scores are close, the Lord of the Ascendant takes precedence for matters of the body and life-force, while the Almuten takes precedence for matters of "profession and mastery".19
+   * Specification Recommendation: Implement a resolveTie() function that compares the AscendantDignityScore of the tied candidates. Return the winner.
+5.2 Handling of "Besiegement"
+The definition of besiegement varies.
+   * Strict Definition: A planet is bodily between two others in the same sign.
+   * Lilly's Definition: Lilly sometimes allows besiegement across sign boundaries if the orb is tight.
+   * Specification: Use the Bodily Besiegement rule within the same sign as the primary boolean check. If Planet.Longitude is > Malefic1.Longitude AND < Malefic2.Longitude (sorted by degree), apply the score.
+5.3 Data Object Structure (JSON Example)
+To standardize the output, the following JSON structure is recommended for the results of these calculations:
+
+
+JSON
+
+
+
+
+{
+ "calculation_type": "ALMUTEN_FIGURIS_EZRA",
+ "hylegs": {
+   "sun": { "long": 45.2, "dignities": {"domicile": "Venus",...} },
+   "moon": { "long": 12.5, "dignities": {...} },
+   "asc": { "long": 210.0, "dignities": {...} },
+   "pof": { "long": 185.3, "dignities": {...} },
+   "syzygy": { "long": 30.0, "dignities": {...} }
+ },
+ "scores": {
+   "Saturn": { "essential": 15, "house": 12, "day_hour": 0, "total": 27 },
+   "Jupiter": { "essential": 8, "house": 11, "day_hour": 7, "total": 26 },
+  ...
+ },
+ "winner": "Saturn"
+}
+
+6. Conclusion: Two Masters, One Chart
+The demand for a "Ruler of the Chart" is a demand for hierarchy in the chaotic data set of the heavens. This report has demonstrated that the Almuten Figuris of Ibn Ezra and the Lord of the Geniture of William Lilly are not interchangeable variables. They are distinct algorithms answering different questions.
+The Almuten Figuris is a summation of rights. It calculates who has the most legal authority over the life-granting points of the nativity, prioritizing the zodiacal condition (Essential Dignity) and a linear hierarchy of houses. It is the algorithm of the Soul's Guardian.
+The Lord of the Geniture is a summation of power. It calculates who is the most potent actor, prioritizing the "accidentals" of motion, solar phase, and angularity, while penalizing weakness. It is the algorithm of the Ego's Engine.
+For the historian or data modeler, the integrity of the emulation lies in the details: the use of Egyptian vs. Ptolemaic terms, the handling of the 12-point vs. +/-5-point house scales, and the specific definitions of the Hylegs. By adhering to the specifications outlined above, one ensures a faithful reproduction of these intellectual monuments of the medieval and Renaissance worlds.
+Citations
+1
+Works cited
+   1. What is an almuten anyway?, accessed January 30, 2026, https://almuten.co.uk/index.php/2021/10/10/what-is-an-almuten-anyway/
+   2. Ruler of the Chart - Medieval Astrology Guide, accessed January 30, 2026, https://www.medievalastrologyguide.com/ruler-of-the-chart
+   3. Abraham Ibn Ezra on nativities and continuous horoscopy : a parallel Hebrew-English critical edition of the book of nativities and the book of revolution - Olympic College, accessed January 30, 2026, https://sbctc-olympic.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991310680002816&context=L&vid=01STATEWA_OLYMPIC:OLYMPIC&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=sub%2Cexact%2C%20astrology%20
+   4. Guardian Daimon — Medieval Astrology Guide, accessed January 30, 2026, https://www.medievalastrologyguide.com/guardian-daimon
+   5. Holy Guardian Angel, Astrological Time Lords, Perfect Nature and the Almuten Figuris, accessed January 30, 2026, https://www.renaissanceastrology.com/guardianangel.html
+   6. Victors, Almutens, and the Holy Guardian Angel - Benjamin Dykes, accessed January 30, 2026, https://bendykes.com/product/victors-almutens-and-the-holy-guardian-angel/
+   7. Full text of "freemasonry and grimoires" - Internet Archive, accessed January 30, 2026, https://archive.org/stream/74248442SepherRezialHemelachTheBookOfTheAngelRezial/Grimoires/Picatrix/Christopher%20Warnock%20-%20The%20Picatrix%20-%20Selected%20Translations%20Edited%20with%20Commentary1_djvu.txt
+   8. Lilly's Table To Examine The Strength & Debility of Each Planet Essential Dignities Essential Debilities | PDF | Planets In Astrology - Scribd, accessed January 30, 2026, https://www.scribd.com/document/233508698/Astrology-data
+   9. Skyscript - Understanding Planetary Dignity and Debility - Part 5 - Assessing Dignity - Debility Through Point-Scoring | PDF | Astrological Sign | Solar System - Scribd, accessed January 30, 2026, https://www.scribd.com/document/946017483/Skyscript-Understanding-Planetary-Dignity-and-Debility-Part-5-Assessing-Dignity-Debility-Through-Point-scoring-2
+   10. Almuten Figuris Calculation : r/Advancedastrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/1q4j59v/almuten_figuris_calculation/
+   11. Medieval Astrology Foundation Course (Robert Zoller) (Z-Library) | PDF | Alchemy - Scribd, accessed January 30, 2026, https://www.scribd.com/document/665649574/Medieval-Astrology-Foundation-Course-Robert-Zoller-Z-Library
+   12. Almuten Figuris : r/Advancedastrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/jtpyv5/almuten_figuris/
+   13. Charlie Obert - Using Dignities in Astrology | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/548808146/Charlie-Obert-Using-Dignities-in-Astrology
+   14. Culpeper's Medicine: A Practice of Western Holistic Medicine New Edition [New edition] 9781848191211, 2013008481, 9781848191334, 9780857011138, 9780857010988, 1848191219 - DOKUMEN.PUB, accessed January 30, 2026, https://dokumen.pub/culpepers-medicine-a-practice-of-western-holistic-medicine-new-edition-new-edition-9781848191211-2013008481-9781848191334-9780857011138-9780857010988-1848191219.html
+   15. Astrology by Numbers: Early Modern Quantification of Planetary Power - Brill, accessed January 30, 2026, https://brill.com/display/book/9789004745322/BP000012.pdf
+   16. Book - 1647 - Lilly - An Introduction To Astrology Digested | PDF - Scribd, accessed January 30, 2026, https://www.scribd.com/document/751799676/Book-1647-Lilly-an-Introduction-to-Astrology-Digested
+   17. Christian Astrology, accessed January 30, 2026, http://ndl.ethernet.edu.et/bitstream/123456789/38984/1/31.pdf.pdf
+   18. Almuten Figuris - when 2 planets are equal? +Mercury Exalted in Scorpio? - Reddit, accessed January 30, 2026, https://www.reddit.com/r/Advancedastrology/comments/1bkq04l/almuten_figuris_when_2_planets_are_equal_mercury/
+   19. A Study of the 125th Consideration of Guido Bonatti - Spica Astrology, accessed January 30, 2026, https://www.spicastrology.com/a-study-of-the-125th-consideration-of-guido-bonatti/
+   20. The Almuten of the Ascendant : r/astrology - Reddit, accessed January 30, 2026, https://www.reddit.com/r/astrology/comments/15p6udx/the_almuten_of_the_ascendant/
+   21. Financial Significators in Traditional Astrology - Oner Doser - Illustrated, US, 2018 - The Cazimi Press - 9781934586464 - Scribd, accessed January 30, 2026, https://www.scribd.com/document/925898049/Financial-Significators-in-Traditional-Astrology-Oner-Doser-Illustrated-US-2018-The-Cazimi-Press-9781934586464-3a0d87fc4a2abe6e6fdf21

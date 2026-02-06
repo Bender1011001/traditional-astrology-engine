@@ -1,0 +1,1000 @@
+# Traditional Planetary Hours Algorithm with Temporal Hour Implementation
+
+## Executive Summary
+
+The planetary hours system represents one of the most enduring astrological timekeeping methods, spanning Babylonian, Egyptian, Greek, and Roman traditions. This comprehensive report details a complete implementation-ready algorithm for calculating planetary day rulers and planetary hour rulers using the unequal (temporal) hours system derived from local sunrise and sunset times. The algorithm precisely handles all boundary conditions, follows authoritative historical sources for Chaldean ordering, and provides explicit handling for high-latitude challenges where conventional calculation becomes problematic. The methodology synthesizes multiple ancient sources including Vettius Valens' Anthologies and William Lilly's Christian Astrology, while establishing clear computational rules for the ambiguous edge cases that arise in translating these ancient concepts into modern software implementation. This approach preserves the authentic temporal hour framework while providing practical solutions for contemporary usage, including detailed pseudocode, worked examples, and boundary test cases that specifically address the exact moments of sunrise and sunset—the critical transition points in the planetary hours system.
+
+## Historical Foundations of Temporal Hours and Chaldean Order
+
+### Temporal Hours: An Astronomical Tradition
+
+The concept of dividing day and night into twelve equal parts each—regardless of seasonal variations—forms the fundamental basis of the unequal hours system. This temporal hour tradition, also known as seasonal hours, biblical hours, or Roman hours (*horae temporales*), has its origins in the ancient observation that days and nights vary in length throughout the year depending on latitude and season[23]. The astronomical basis for this system corresponds to the "day arc of the Sun" concept, where daylight duration varies with latitude and season—ranging from 16 equinoctial hours in summer to 8 equinoctial hours in winter at approximately 49° north/south latitude[23]. 
+
+The first documentation of dividing day and night into twelve hours each appears in Ancient Egyptian records, with similar divisions later adopted throughout the Mediterranean basin during Classical Greek Antiquity[23]. This system was deeply integrated into daily life and religious observance, particularly influencing the monastic "Prayer of the Hours" tradition where daily activities were scheduled according to the temporal hours rather than fixed clock time[23]. 
+
+Vettius Valens, the influential 2nd century Hellenistic astrologer, provides crucial historical documentation of this system in his Anthologies. His work demonstrates the sophisticated integration of planetary hours into astrological practice, where the system was used not only for timing but also for deeper cosmological understanding[11]. Valens' description of planetary hours reveals the methodical calculation process used in antiquity, where the day was divided into 24 hours based on the actual solar cycle rather than fixed clock time[11]. 
+
+Of particular importance in Valens' work is the fractional approach to hour calculation, where he notes: "the hour I of night [is that] of Mercury; the second, [that] of [the] Moon; the third, [that] of Saturn; the fourth, [that] of Jupiter; the fifth, [that] of Mars; the sixth, [that] of [the] Sun; the seventh, [that] of Venus"[11]. This fractional division—particularly the detailed description of hour calculations—demonstrates the precision with which ancient astrologers approached temporal hour computation.
+
+### Chaldean Order: The Sequential Foundation
+
+The planetary sequence employed in the planetary hours system follows what became known as the "Chaldean order"—Saturn, Jupiter, Mars, Sun, Venus, Mercury, and Moon—repeating endlessly[1]. This sequence is not arbitrary but reflects the relative orbital velocity of the planets as observed from Earth, with Saturn appearing to move most slowly and the Moon appearing to move most rapidly[1]. 
+
+From a heliocentric perspective, this sequence also indicates the relative distance of the planets from the center of their orbits, with the Sun taking the Earth's position in the sequence[1]. The traditional geocentric perspective interprets this arrangement as the structure of the planetary spheres—the conceptual model of nested celestial spheres that dominated ancient cosmology[1].
+
+William Lilly, the 17th century English astrologer, provides authoritative documentation of this system in his seminal work *Christian Astrology* (1647). Lilly explicitly states: "You must understand that as there are seven days of the week, viz. Sunday, Monday, Tuesday, Wednesday, Friday, Saturday, so there are seven Planets, viz. Saturn, Jupiter, Mars, Sol, Venus, Mercury, Luna"[7]. This sequence forms the critical foundation for both planetary day and hour calculations.
+
+The mathematical principle underlying the planetary days system reveals why our modern weekdays follow this specific sequence. As Lilly explains, "the planet that rules the first hour of the day is also the ruler of the whole day and gives the day its name. Thus the first hour of Sunday is ruled by the Sun, the first hour of Monday is ruled by the Moon and so on"[1]. This creates the familiar weekday sequence where each day's name corresponds to the planet ruling its first hour.
+
+The astronomical explanation for this sequence is mathematically precise: with 24 hours divided among seven planets, each day's first hour begins with the planet three positions down the Chaldean order from the previous day's starting planet (calculated as 24 ÷ 7 = 3 remainder 3)[2]. Starting with the Sun for Sunday, the sequence naturally progresses through Moon, Mars, Mercury, Jupiter, Venus, and Saturn before returning to the Sun for the following Sunday[2].
+
+### Comparison of Historical Day-Start Conventions
+
+Historical sources reveal a significant divergence in how the day was defined for planetary hour calculations. Two primary conventions emerged:
+
+1. **Sunset convention**: Used by Babylonians, Greeks, and early Hellenistic astrologers including Vettius Valens. According to Valens, "the first hour of the day began at sunset, which follows Greek and Babylonian convention"[2]. This is confirmed by historical evidence, such as a Pompeian graffito dated to February 6, 60 CE that identifies the date as "Sunday," matching the sunset convention even though modern reckoning would consider it a Wednesday[2].
+
+2. **Sunrise convention**: Adopted by Egyptians and later becoming the predominant method in Medieval and Renaissance astrology. This convention begins the planetary day at sunrise, aligning with the natural progression of daylight[8]. William Lilly's *Christian Astrology* reflects this sunrise convention, dividing the day into "the period that extends from sunrise to sunset (daylight) [and] the period extending from sunset to sunrise of the next day (nighttime)"[1].
+
+The Egyptian sunrise convention ultimately prevailed in Western astrological tradition, as evidenced by the enduring phrase "the Sun rises" rather than "the horizon descends." This convention also aligns with natural human experience—the transition from night to day begins with the first light of sunrise, not the end of darkness at sunset.
+
+For our implementation, we adopt the sunrise convention as the default standard. This choice aligns with both the predominant modern astrological practice and the rationale that human activity naturally begins with daylight. The sunrise convention also creates a more intuitive progression: each day begins with light rather than darkness, and the planetary day corresponds roughly with the civil day (dawn to dawn rather than dusk to dusk).
+
+## Core Algorithm for Planetary Hour Calculation
+
+### Temporal Hour Computation with Precise Boundaries
+
+The fundamental operation in implementing planetary hours involves dividing the solar cycle into 24 unequal hours—12 for daylight (sunrise to sunset) and 12 for nighttime (sunset to next sunrise). Unlike our modern equal hours (always 60 minutes), these temporal hours vary in duration throughout the year depending on the local daylight/night cycle.
+
+Following authoritative sources including Vettius Valens and William Lilly, we define:
+
+1. **Day length** = sunset - sunrise (time duration)
+2. **Day-hour length** = day length / 12 (each of the 12 daytime hours)
+3. **Night length** = next sunrise - sunset (time duration)
+4. **Night-hour length** = night length / 12 (each of the 12 nighttime hours)
+
+The critical precision required for implementation involves the exact determination of which hour applies at the precise moment of sunrise and sunset. Historical sources are not explicit about these boundaries, so we must derive logical consistent rules based on the fundamental principles.
+
+#### Sunrise and Sunset Definition Standards
+
+For topocentric calculations, we adopt the standard astronomical definition used in modern planetary hour calculators:
+
+- **Sunrise** is defined as the instant when the upper limb of the Sun appears on the true horizon with standard atmospheric refraction[15]. This occurs when the Sun's center is approximately 50 arcminutes (about 0.83°) below the true horizon[15].
+- **Sunset** follows the same definition, occurring when the upper limb of the Sun disappears below the true horizon with standard refraction[15].
+
+This definition accounts for both the Sun's apparent diameter (about 0.5°) and atmospheric refraction (about 0.58°), which together explain why the upper limb appears at the horizon when the center is still below it[15]. Civil twilight occurs when the Sun's center is 6° below the horizon, nautical twilight at 12°, and astronomical twilight at 18°[15].
+
+Unlike some alternative systems that might use civil twilight as the day/night boundary, we strictly adhere to the upper limb definition because traditional planetary hours literature explicitly references sunrise and sunset—not twilight—as the day/night transition points[1][7]. The definitive work of Vettius Valens, for example, calculates hours based on the actual solar cycle without reference to twilight periods[11].
+
+#### Temporal Hour Boundaries with Inequality Rules
+
+To establish precise computational rules, we must define the exact boundaries between hours, especially at sunrise and sunset:
+
+- **Day hours** (numbered 1-12): Begin at sunrise and end at sunset
+- **Night hours** (numbered 1-12): Begin at sunset and end at next sunrise
+
+With precise inequality definitions:
+
+1. **Day hours**:
+   - Hour 1 (first day hour): sunrise ≤ time < sunrise + day-hour length
+   - Hour n (2-12): sunrise + (n-1) × day-hour length ≤ time < sunrise + n × day-hour length
+   - Last day hour ends at: sunset (exclusive upper bound)
+
+2. **Night hours**:
+   - Hour 1 (first night hour): sunset ≤ time < sunset + night-hour length
+   - Hour n (2-12): sunset + (n-1) × night-hour length ≤ time < sunset + n × night-hour length
+   - Last night hour ends at: next sunrise (exclusive upper bound)
+
+This creates the following precise boundary conditions:
+- At the exact moment of sunrise: Day Hour 1 begins (inclusive lower bound)
+- At the exact moment of sunset: Night Hour 1 begins (inclusive lower bound)
+- One second before sunrise: Previous day's Night Hour 12 (exclusive upper bound)
+- One second before sunset: Current day's Day Hour 12 (exclusive upper bound)
+
+The choice of inclusive lower bound at sunrise/sunset follows logically from the fundamental definition of the planetary day beginning at sunrise[1]. Since sunrise marks the start of the new planetary day, that instant properly belongs to the new day's first hour rather than the previous night's last hour.
+
+This boundary definition also creates a mathematically consistent system where every moment in time is assigned precisely one planetary hour, with no gaps or overlaps. The computational advantage is significant—a simple "greater than or equal to" test determines whether a timestamp belongs to the current day or night cycle.
+
+### Planetary Day Ruler Determination
+
+The planetary day ruler follows the traditional sequence where each day is named for the planet ruling its first hour:
+
+- Sunday: Sun
+- Monday: Moon
+- Tuesday: Mars
+- Wednesday: Mercury
+- Thursday: Jupiter
+- Friday: Venus
+- Saturday: Saturn
+
+This weekday sequence derives directly from the planetary hours system, not the reverse. As William Lilly states in *Christian Astrology*: "the planet that rules the first hour of the day is also the ruler of the whole day and gives the day its name. Thus the first hour of Sunday is ruled by the Sun, the first hour of Monday is ruled by the Moon and so on"[1].
+
+The underlying astronomical principle is precise and mathematical. With 24 hours divided among 7 planets, each day's first hour begins with the planet three positions down the Chaldean order from the previous day's starting planet (24 ÷ 7 = 3 remainder 3)[2]. This creates the unbroken cycle that has persisted essentially unchanged since antiquity:
+
+- Sun → Moon → Mars → Mercury → Jupiter → Venus → Saturn → Sun...
+
+This sequence has remarkable historical continuity. As noted in planetary hours literature, "we would note that from the introduction of the week in the classical period that the order has never varied or been interrupted. For example the adoption of the Gregorian calendar changed the date, but not the endless cycle of the days of the week"[1].
+
+The planetary day ruler is determined by the civil calendar day but with crucial understanding: the planetary day begins at sunrise, not midnight. This means 3:00 AM on a Tuesday morning (civil calendar) actually belongs to Monday's planetary day (from sunset Monday to sunrise Tuesday)[8]. This distinction is critical for accurate implementation.
+
+To determine the planetary day ruler algorithmically:
+1. Identify the civil calendar date at the timestamp
+2. Determine if the timestamp is before or after the day's sunrise
+3. If before sunrise: use previous civil date's planetary ruler
+4. If after sunrise: use current civil date's planetary ruler
+
+This accounts for the fundamental reality that the planetary day begins at sunrise, not midnight, creating a ~12 hour offset between civil calendar days and planetary days during nighttime hours.
+
+### Planetary Hour Ruler Assignment Sequence
+
+The planetary hour ruler sequence follows the Chaldean order: Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon, repeating continuously[1][2]. This is the sequence from slowest to fastest moving planets as observed from Earth, or from farthest to nearest in the traditional planetary spheres model.
+
+The hour ruler assignment follows precise rules:
+1. The first hour of the day (at sunrise) is ruled by the day's planetary ruler
+2. Each subsequent hour advances to the next planet in Chaldean order
+3. After the Moon comes Saturn, continuing the cycle
+4. Day and night hours follow the same sequence without interruption
+
+For example, on Sunday:
+- Day Hour 1: Sun (rules Sunday)
+- Day Hour 2: Venus (next in Chaldean order after Sun)
+- Day Hour 3: Mercury
+- Day Hour 4: Moon
+- Day Hour 5: Saturn
+- Day Hour 6: Jupiter
+- Day Hour 7: Mars
+- Day Hour 8: Sun
+- Day Hour 9: Venus
+- Day Hour 10: Mercury
+- Day Hour 11: Moon
+- Day Hour 12: Saturn
+- Night Hour 1: Jupiter
+- Night Hour 2: Mars
+- Night Hour 3: Sun
+... and so on until the next sunrise
+
+The progression through Chaldean order continues seamlessly from day to night hours. This creates the critical situation where the planet ruling the first night hour (at sunset) is precisely three positions ahead of the day's ruler in the Chaldean sequence (Sun → Venus → Mercury → Moon for Sunday night)[1].
+
+This progression is mathematically consistent and can be verified by noting that the 24th hour of Sunday (the last night hour) is ruled by Mercury. The next planet in Chaldean order is the Moon, which properly begins Monday's first hour[1].
+
+### Daylight Saving Time Considerations
+
+When implementing the algorithm, daylight saving time (DST) requires special handling:
+- All timestamps must be converted to standard time before calculation
+- Sunrise/sunset data must be provided in the location's standard time (not DST)
+- This avoids the temporal discontinuities created by DST transitions
+
+Modern sunrise/sunset calculation services often provide times in local standard time with an optional DST adjustment. For accurate planetary hour calculation, all times must be referenced to the location's standard time without DST offset, as planetary hours follow the natural solar cycle rather than the artificial clock adjustments of DST.
+
+## Edge Case Handling Protocol
+
+### Exact Moment of Sunrise and Sunset
+
+The precise moments of sunrise and sunset present the most critical boundary conditions for the algorithm. Historical sources don't explicitly define which hour applies at these exact instants, so we must apply logical principles consistent with the system's fundamental structure.
+
+**At exact sunrise**:
+- Sunrise marks the beginning of a new planetary day[1]
+- This instant properly belongs to the new day's first hour
+- Implementation: sunrise timestamp is included in Day Hour 1 (inclusive lower bound)
+
+**At exact sunset**:
+- Sunset marks the transition from day to night hours
+- This instant properly belongs to the night hours period
+- Implementation: sunset timestamp is included in Night Hour 1 (inclusive lower bound)
+
+This boundary definition creates a mathematically consistent system where every instantaneous moment belongs to exactly one hour with no gaps or overlaps. The rationale is based on the fundamental principle that sunrise begins the day and sunset begins the night—they don't mark the end of the previous period.
+
+This approach is consistent with William Lilly's description of the temporal hour system where "the period that extends from sunrise to sunset (daylight) is divided into twelve hours and the period extending from sunset to sunrise of the next day (nighttime) is also divided into twelve hours"[1].
+
+### Midnight Transition Across Planetary Days
+
+The transition through midnight presents a subtle but important case because the civil calendar date changes, but the planetary day does not. Midnight typically occurs during the night hours of the current planetary day (which began at the previous sunrise).
+
+For example, on Tuesday night (civil calendar):
+- From civil Tuesday sunrise to civil Wednesday sunrise = Tuesday planetary day
+- Midnight occurs between civil Tuesday sunset and civil Wednesday sunrise
+- This midnight period belongs to Tuesday's planetary day (night hours)
+
+Therefore:
+- All timestamps from civil Monday sunrise to civil Tuesday sunrise = Monday planetary day
+- All timestamps from civil Tuesday sunrise to civil Wednesday sunrise = Tuesday planetary day
+- Midnight between civil Monday and Tuesday occurs during Monday's planetary day (night hours)
+
+The algorithm handles this through the fundamental rule: the planetary day begins at sunrise, not midnight. Timestamps are evaluated against the sunrise/sunset boundaries rather than civil date boundaries.
+
+The computational approach is:
+1. Determine current civil date at timestamp
+2. Find sunrise for current civil date
+3. If timestamp < sunrise: belongs to previous civil date's planetary day
+4. If timestamp ≥ sunrise: belongs to current civil date's planetary day
+
+This correctly handles the midnight transition and ensures all timestamps properly associate with their planetary day regardless of civil calendar changes.
+
+### High-Latitude and Polar Region Adaptation
+
+The standard planetary hours calculation faces significant challenges at high latitudes where daylight patterns become extreme:
+
+1. **Polar day** (midnight sun): Sun remains above horizon for ≥24 hours
+2. **Polar night**: Sun remains below horizon for ≥24 hours
+3. **Very short day/night**: Extreme seasonal variations where one period is significantly shorter than the other
+
+The astronomical reality is that above the polar circles (approximately 66.5° latitude), the sun does not set every day in summer or rise every day in winter[16][23]. At the poles, polar day and polar night each last approximately 179 days (north pole) or 186 days (south pole)[16].
+
+#### Polar Day Handling (24+ hours of daylight)
+
+When the Sun never sets (polar day):
+- Day length = 24+ hours (exactly)
+- Night length = 0 hours (no sunset)
+- Standard calculation fails because night length = 0
+
+Recommended implementation policy:
+- If sunrise < previous sunrise (indicating continuous daylight):
+  - Treat as continuous daylight cycle
+  - Use equal hours (60 minutes) for all 24 hours
+  - Apply planetary hours sequence normally, starting with day's ruling planet at civil midnight
+  - Add warning: "Polar day conditions - using equal hours approximation"
+
+This approach is a modern engineering adaptation since historical sources didn't address polar regions. The equal hours approximation maintains functionality while acknowledging the physical impossibility of dividing a 0-length night period.
+
+#### Polar Night Handling (24+ hours of darkness)
+
+When the Sun never rises (polar night):
+- Day length = 0 hours (no sunrise)
+- Night length = 24+ hours (exactly)
+- Standard calculation fails because day length = 0
+
+Recommended implementation policy:
+- If sunset > previous sunset (indicating continuous darkness):
+  - Treat as continuous night cycle
+  - Use equal hours (60 minutes) for all 24 hours
+  - Apply planetary hours sequence normally, starting with night's ruling planet at civil midnight
+  - Add warning: "Polar night conditions - using equal hours approximation"
+
+#### Very Short Day/Night Handling
+
+When day or night length is extremely short (e.g., < 30 minutes):
+- Creates temporally compressed hours that may be impractical
+- Could result in hours of just a few minutes duration
+
+Recommended implementation policy:
+- If day length < threshold (e.g., 60 minutes):
+  - Calculate day hours normally but flag extremely short hours
+  - Continue normal night hour calculation
+- If night length < threshold (e.g., 60 minutes):
+  - Calculate night hours normally but flag extremely short hours
+  - Continue normal day hour calculation
+
+This preserves the traditional calculation method while providing warnings about potentially problematic results. Historical sources don't address these extreme cases, so this represents a prudent modern adaptation.
+
+## Worked Example: London, January 26, 2026
+
+### Input Parameters
+- Location: London, UK (51.5074° N, 0.1278° W)
+- Timezone: GMT (UTC+0, no daylight saving active)
+- Date: Monday, January 26, 2026
+- Sunrise: 7:47 AM GMT (from Time and Date data[49])
+- Sunset: 4:39 PM GMT (from Time and Date data[49])
+- Next sunrise: 7:46 AM GMT (January 27)[49]
+
+### Temporal Hour Calculation
+
+**Day length**: 4:39 PM - 7:47 AM = 8 hours, 52 minutes = 532 minutes
+- Day hour length: 532 / 12 = 44.33 minutes = 44 minutes, 20 seconds
+
+**Night length**: 7:46 AM (next day) - 4:39 PM = 15 hours, 7 minutes = 907 minutes
+- Night hour length: 907 / 12 = 75.58 minutes = 1 hour, 15 minutes, 35 seconds
+
+### Planetary Day Ruler
+- Civil date: Monday, January 26, 2026
+- Since timestamp after sunrise (7:47 AM), planetary day = Monday = Moon ruler
+
+### Full Planetary Hour Schedule
+*(All times in GMT)*
+
+**Day Hours (7:47 AM - 4:39 PM)**:
+- Hour 1 (7:47 AM - 8:31:20 AM): Moon (rules Monday)
+- Hour 2 (8:31:20 AM - 9:15:40 AM): Saturn
+- Hour 3 (9:15:40 AM - 10:00:00 AM): Jupiter
+- Hour 4 (10:00:00 AM - 10:44:20 AM): Mars
+- Hour 5 (10:44:20 AM - 11:28:40 AM): Sun
+- Hour 6 (11:28:40 AM - 12:13:00 PM): Venus
+- Hour 7 (12:13:00 PM - 12:57:20 PM): Mercury
+- Hour 8 (12:57:20 PM - 1:41:40 PM): Moon
+- Hour 9 (1:41:40 PM - 2:26:00 PM): Saturn
+- Hour 10 (2:26:00 PM - 3:10:20 PM): Jupiter
+- Hour 11 (3:10:20 PM - 3:54:40 PM): Mars
+- Hour 12 (3:54:40 PM - 4:39:00 PM): Sun
+
+**Night Hours (4:39 PM - 7:46 AM)**:
+- Hour 1 (4:39:00 PM - 5:54:35 PM): Venus
+- Hour 2 (5:54:35 PM - 7:10:10 PM): Mercury
+- Hour 3 (7:10:10 PM - 8:25:45 PM): Moon
+- Hour 4 (8:25:45 PM - 9:41:20 PM): Saturn
+- Hour 5 (9:41:20 PM - 10:56:55 PM): Jupiter
+- Hour 6 (10:56:55 PM - 12:12:30 AM): Mars
+- Hour 7 (12:12:30 AM - 1:28:05 AM): Sun
+- Hour 8 (1:28:05 AM - 2:43:40 AM): Venus
+- Hour 9 (2:43:40 AM - 3:59:15 AM): Mercury
+- Hour 10 (3:59:15 AM - 5:14:50 AM): Moon
+- Hour 11 (5:14:50 AM - 6:30:25 AM): Saturn
+- Hour 12 (6:30:25 AM - 7:46:00 AM): Jupiter
+
+### Boundary Verification
+- At exact sunrise (7:47:00 AM): Moon hour begins (inclusive)
+- At exact sunset (4:39:00 PM): Venus hour begins (inclusive)
+- At 4:38:59 PM (1 second before sunset): Sun hour (day hour 12)
+- At 4:39:01 PM (1 second after sunset): Venus hour (night hour 1)
+- At midnight (12:00:00 AM): Mars hour (night hour 6)
+- At 7:46:00 AM (next sunrise): Jupiter hour ends (exclusive), Moon hour begins
+
+This example demonstrates how even during winter months with significantly shorter days than nights, the planetary hours system maintains its structure, with daytime hours being shorter than nighttime hours (44 minutes vs 75 minutes). The Moon, as ruler of Monday, begins the day at sunrise, and the sequence continues through the Chaldean order without interruption.
+
+## Code-Ready Implementation
+
+### Pseudocode Functions
+
+```python
+def compute_temporal_hours(sunrise, sunset, next_sunrise):
+    """
+    Compute temporal hour lengths and boundaries.
+    
+    Parameters:
+        sunrise: datetime (local standard time, topocentric apparent)
+        sunset: datetime (local standard time, topocentric apparent)
+        next_sunrise: datetime (local standard time, topocentric apparent)
+        
+    Returns:
+        dict containing:
+        - day_hour_length: timedelta
+        - night_hour_length: timedelta
+        - day_hours: list of (start, end, hour_index) tuples for day hours
+        - night_hours: list of (start, end, hour_index) tuples for night hours
+        - is_polar_day: boolean
+        - is_polar_night: boolean
+    """
+    # Check for polar day/night conditions
+    is_polar_day = sunset > next_sunrise  # Continuous daylight
+    is_polar_night = sunrise > sunset     # Continuous darkness
+    
+    # Polar day conditions
+    if is_polar_day:
+        # Calculate using 24 equal hours
+        day_hour_length = timedelta(hours=2)
+        night_hour_length = day_hour_length
+        day_start = sunrise
+        day_hours = []
+        night_hours = []
+        
+        # Create 24 equal hours
+        for i in range(24):
+            start = day_start + (i * day_hour_length)
+            end = start + day_hour_length
+            # For polar day, everything is 'day' conceptually
+            day_hours.append((start, end, i+1))
+            
+        return {
+            "day_hour_length": day_hour_length,
+            "night_hour_length": night_hour_length,
+            "day_hours": day_hours,
+            "night_hours": [],
+            "is_polar_day": True,
+            "is_polar_night": False
+        }
+    
+    # Polar night conditions
+    if is_polar_night:
+        # Calculate using 24 equal hours
+        night_hour_length = timedelta(hours=2)
+        day_hour_length = night_hour_length
+        night_start = sunrise  # midnight conceptually
+        day_hours = []
+        night_hours = []
+        
+        # Create 24 equal hours
+        for i in range(24):
+            start = night_start + (i * night_hour_length)
+            end = start + night_hour_length
+            # For polar night, everything is 'night' conceptually
+            night_hours.append((start, end, i+1))
+            
+        return {
+            "day_hour_length": day_hour_length,
+            "night_hour_length": night_hour_length,
+            "day_hours": [],
+            "night_hours": night_hours,
+            "is_polar_day": False,
+            "is_polar_night": True
+        }
+    
+    # Normal conditions - calculate actual temporal hours
+    day_length = sunset - sunrise
+    day_hour_length = day_length / 12
+    
+    night_length = next_sunrise - sunset
+    night_hour_length = night_length / 12
+    
+    # Calculate day hour boundaries
+    day_hours = []
+    for i in range(12):
+        start = sunrise + (i * day_hour_length)
+        end = start + day_hour_length
+        day_hours.append((start, end, i+1))
+    
+    # Calculate night hour boundaries
+    night_hours = []
+    for i in range(12):
+        start = sunset + (i * night_hour_length)
+        end = start + night_hour_length
+        night_hours.append((start, end, i+1))
+    
+    return {
+        "day_hour_length": day_hour_length,
+        "night_hour_length": night_hour_length,
+        "day_hours": day_hours,
+        "night_hours": night_hours,
+        "is_polar_day": False,
+        "is_polar_night": False
+    }
+
+def planetary_day_ruler(date, sunrise, sunset, next_sunrise, current_datetime):
+    """
+    Determine the planetary ruler for the current planetary day.
+    
+    Parameters:
+        date: datetime (civil calendar date)
+        sunrise: datetime (local standard time, topocentric apparent)
+        sunset: datetime (local standard time, topocentric apparent)
+        next_sunrise: datetime (local standard time, topocentric apparent)
+        current_datetime: datetime (timestamp to evaluate)
+        
+    Returns:
+        string: planetary ruler for the current planetary day
+    """
+    # Determine if timestamp occurs before or after sunrise
+    if current_datetime < sunrise:
+        # Timestamp is before today's sunrise, so it's part of yesterday's planetary day
+        planetary_date = date - timedelta(days=1)
+    else:
+        # Timestamp is after today's sunrise, so it's part of today's planetary day
+        planetary_date = date
+    
+    # Get day of week (0=Monday, 6=Sunday)
+    weekday = planetary_date.weekday()
+    
+    # Planetary day rulers (Monday=0 through Sunday=6)
+    planetary_rulers = [
+        "Moon",      # Monday
+        "Mars",      # Tuesday
+        "Mercury",   # Wednesday
+        "Jupiter",   # Thursday
+        "Venus",     # Friday
+        "Saturn",    # Saturday
+        "Sun"        # Sunday
+    ]
+    
+    return planetary_rulers[weekday]
+
+def planetary_hour_ruler(datetime, sunrise, sunset, next_sunrise, timezone):
+    """
+    Determine the planetary ruler for a specific timestamp.
+    
+    Parameters:
+        datetime: datetime (local standard time, topocentric - no DST)
+        sunrise: datetime (local standard time, topocentric apparent)
+        sunset: datetime (local standard time, topocentric apparent)
+        next_sunrise: datetime (local standard time, topocentric apparent)
+        timezone: string (IANA timezone name for proper date handling)
+        
+    Returns:
+        dict: {
+            "planet": string,
+            "hour_type": "day" or "night",
+            "hour_index": 1-12,
+            "start_time": datetime,
+            "end_time": datetime,
+            "is_polar_day": boolean,
+            "is_polar_night": boolean,
+            "warnings": list of strings
+        }
+    """
+    warnings = []
+    
+    # Calculate temporal hours
+    temporal_hours = compute_temporal_hours(sunrise, sunset, next_sunrise)
+    
+    # Determine planetary day ruler
+    planetary_day = planetary_day_ruler(
+        datetime.date(), 
+        sunrise, 
+        sunset, 
+        next_sunrise,
+        datetime
+    )
+    
+    # Chaldean order sequence
+    chaldean_order = ["Saturn", "Jupiter", "Mars", "Sun", "Venus", "Mercury", "Moon"]
+    
+    # Find index of planetary day ruler in Chaldean order
+    try:
+        start_index = chaldean_order.index(planetary_day)
+    except ValueError:
+        # Shouldn't happen with valid planetary day, but handle gracefully
+        start_index = 3  # Default to Sun if error
+        warnings.append("Invalid planetary day ruler - defaulting to Sun")
+    
+    # Initialize result
+    result = {
+        "planet": None,
+        "hour_type": None,
+        "hour_index": None,
+        "start_time": None,
+        "end_time": None,
+        "is_polar_day": temporal_hours["is_polar_day"],
+        "is_polar_night": temporal_hours["is_polar_night"],
+        "warnings": warnings
+    }
+    
+    # Polar day conditions
+    if temporal_hours["is_polar_day"]:
+        # Using equal hours for polar day
+        hours_since_midnight = (datetime - datetime.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() / 3600.0
+        hour_index = int((hours_since_midnight % 24) / 2) + 1
+        
+        # Determine planet (starting with Sun at midnight)
+        planet_index = (0 + hour_index - 1) % 7  # 0=Sun in our sequence
+        result["planet"] = chaldean_order[planet_index]
+        result["hour_type"] = "day"  # Conceptually all day in polar day
+        result["hour_index"] = hour_index
+        
+        # Calculate start/end for this hour
+        hour_start = datetime.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(hours=(hour_index-1)*2)
+        hour_end = hour_start + timedelta(hours=2)
+        
+        result["start_time"] = hour_start
+        result["end_time"] = hour_end
+        result["warnings"].append("Polar day conditions - using equal hours approximation")
+        
+        return result
+    
+    # Polar night conditions
+    if temporal_hours["is_polar_night"]:
+        # Using equal hours for polar night
+        hours_since_midnight = (datetime - datetime.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() / 3600.0
+        hour_index = int((hours_since_midnight % 24) / 2) + 1
+        
+        # Determine planet (starting with Saturn at midnight for consistency)
+        # In polar night, we start with Saturn as first night hour conceptually
+        planet_index = (5 + hour_index - 1) % 7  # 5=Saturn in our sequence
+        result["planet"] = chaldean_order[planet_index]
+        result["hour_type"] = "night"  # Conceptually all night in polar night
+        result["hour_index"] = hour_index
+        
+        # Calculate start/end for this hour
+        hour_start = datetime.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(hours=(hour_index-1)*2)
+        hour_end = hour_start + timedelta(hours=2)
+        
+        result["start_time"] = hour_start
+        result["end_time"] = hour_end
+        result["warnings"].append("Polar night conditions - using equal hours approximation")
+        
+        return result
+    
+    # Normal conditions - find which hour period contains the timestamp
+    # Check day hours first
+    for start, end, hour_index in temporal_hours["day_hours"]:
+        # Sunrise is inclusive, sunset is exclusive for day hours
+        if start <= datetime < end:
+            result["hour_type"] = "day"
+            result["hour_index"] = hour_index
+            
+            # Calculate planet ruler - advance from day ruler
+            # For day hour n, planet index = (start_index + n - 1) % 7
+            planet_index = (start_index + hour_index - 1) % 7
+            result["planet"] = chaldean_order[planet_index]
+            result["start_time"] = start
+            result["end_time"] = end
+            return result
+    
+    # Check night hours
+    for start, end, hour_index in temporal_hours["night_hours"]:
+        # Sunset is inclusive, next sunrise is exclusive for night hours
+        if start <= datetime < end:
+            result["hour_type"] = "night"
+            result["hour_index"] = hour_index
+            
+            # Calculate planet ruler - advance from day ruler through all day hours
+            # Total offset = day hours (12) + night hour index - 1
+            total_offset = 12 + hour_index - 1
+            planet_index = (start_index + total_offset) % 7
+            result["planet"] = chaldean_order[planet_index]
+            result["start_time"] = start
+            result["end_time"] = end
+            return result
+    
+    # This should never happen with valid inputs
+    warnings.append("Timestamp outside expected range - defaulting to Sun")
+    result["warnings"] = warnings
+    result["planet"] = "Sun"
+    result["hour_type"] = "unknown"
+    result["hour_index"] = None
+    result["start_time"] = None
+    result["end_time"] = None
+    
+    return result
+```
+
+### Boundary Test Cases
+
+```python
+# Test cases for London, January 26, 2026 (Monday)
+# Sunrise: 2026-01-26 07:47:00
+# Sunset: 2026-01-26 16:39:00
+# Next sunrise: 2026-01-27 07:46:00
+
+# Test Case 1: Exact sunrise moment
+test1 = planetary_hour_ruler(
+    datetime(2026, 1, 26, 7, 47, 0),  # Exact sunrise
+    datetime(2026, 1, 26, 7, 47, 0), 
+    datetime(2026, 1, 26, 16, 39, 0),
+    datetime(2026, 1, 27, 7, 46, 0),
+    "Europe/London"
+)
+# EXPECTED: 
+#   planet = "Moon" (rules Monday)
+#   hour_type = "day"
+#   hour_index = 1
+#   start_time = 2026-01-26 07:47:00
+#   end_time = 2026-01-26 08:31:20
+
+# Test Case 2: One second before sunrise
+test2 = planetary_hour_ruler(
+    datetime(2026, 1, 26, 7, 46, 59),  # 1 second before sunrise
+    datetime(2026, 1, 26, 7, 47, 0), 
+    datetime(2026, 1, 26, 16, 39, 0),
+    datetime(2026, 1, 27, 7, 46, 0),
+    "Europe/London"
+)
+# EXPECTED:
+#   planet = "Jupiter" (last night hour of Sunday)
+#   hour_type = "night"
+#   hour_index = 12
+#   start_time = 2026-01-26 06:30:25
+#   end_time = 2026-01-26 07:46:00
+
+# Test Case 3: Exact sunset moment
+test3 = planetary_hour_ruler(
+    datetime(2026, 1, 26, 16, 39, 0),  # Exact sunset
+    datetime(2026, 1, 26, 7, 47, 0), 
+    datetime(2026, 1, 26, 16, 39, 0),
+    datetime(2026, 1, 27, 7, 46, 0),
+    "Europe/London"
+)
+# EXPECTED:
+#   planet = "Venus" (first night hour after Sun day)
+#   hour_type = "night"
+#   hour_index = 1
+#   start_time = 2026-01-26 16:39:00
+#   end_time = 2026-01-26 17:54:35
+
+# Test Case 4: One second after sunset
+test4 = planetary_hour_ruler(
+    datetime(2026, 1, 26, 16, 39, 1),  # 1 second after sunset
+    datetime(2026, 1, 26, 7, 47, 0), 
+    datetime(2026, 1, 26, 16, 39, 0),
+    datetime(2026, 1, 27, 7, 46, 0),
+    "Europe/London"
+)
+# EXPECTED:
+#   planet = "Venus" (first night hour after Sun day)
+#   hour_type = "night"
+#   hour_index = 1
+#   start_time = 2026-01-26 16:39:00
+#   end_time = 2026-01-26 17:54:35
+
+# Test Case 5: Midnight during night hours
+test5 = planetary_hour_ruler(
+    datetime(2026, 1, 26, 0, 0, 0),  # Midnight
+    datetime(2026, 1, 26, 7, 47, 0), 
+    datetime(2026, 1, 26, 16, 39, 0),
+    datetime(2026, 1, 27, 7, 46, 0),
+    "Europe/London"
+)
+# EXPECTED:
+#   planet = "Mars" (6th night hour of Monday)
+#   hour_type = "night"
+#   hour_index = 6
+#   start_time = 2026-01-26 00:12:30
+#   end_time = 2026-01-26 01:28:05
+
+# Test Case 6: One second before next sunrise
+test6 = planetary_hour_ruler(
+    datetime(2026, 1, 27, 7, 45, 59),  # 1 second before next sunrise
+    datetime(2026, 1, 26, 7, 47, 0), 
+    datetime(2026, 1, 26, 16, 39, 0),
+    datetime(2026, 1, 27, 7, 46, 0),
+    "Europe/London"
+)
+# EXPECTED:
+#   planet = "Jupiter" (12th night hour of Monday)
+#   hour_type = "night"
+#   hour_index = 12
+#   start_time = 2026-01-27 06:30:25
+#   end_time = 2026-01-27 07:46:00
+```
+
+### Implementation Notes for Developers
+
+1. **Time Handling**: All timestamps must be converted to and processed in local standard time without Daylight Saving Time adjustments. DST creates discontinuities that disrupt the natural solar cycle upon which planetary hours are based.
+
+2. **Precision Requirements**: Implementations should use at least second-level precision to properly handle boundary conditions. Millisecond precision is recommended for high-accuracy applications.
+
+3. **Sunrise/Sunset Source**: Use a reliable astronomical service that provides topocentric apparent sunrise/sunset times with standard refraction. The NOAA Solar Calculator[34] or similar services provide appropriate data.
+
+4. **Error Handling**: The algorithm includes specific handling for polar conditions with clear warnings, enabling applications to either use the equal hours approximation or provide appropriate user feedback.
+
+5. **Chaldean Order Verification**: The sequence Saturn→Jupiter→Mars→Sun→Venus→Mercury→Moon is consistently documented across authoritative sources[1][2][7] and represents the slowest to fastest planetary motion as observed from Earth.
+
+6. **Day Start Convention**: The sunrise convention (not sunset) is used as the default, aligning with prevailing modern astrological practice and Egyptian tradition rather than Babylonian/Greek tradition[8][1].
+
+7. **Edge Case Coverage**: The implementation explicitly handles all boundary cases including exact sunrise/sunset moments, civil date changes, and high-latitude conditions.
+
+## Conceptual Foundations and Historical Context
+
+### Philosophical Underpinnings of Temporal Hours
+
+The temporal hour system represents more than just a timekeeping method—it embodies a fundamental philosophical worldview that time should be measured by natural phenomena rather than arbitrary divisions. The division of day and night into twelve parts each reflects the ancient understanding that time is inherently cyclical and variable rather than linear and uniform[23].
+
+This perspective arises from the observation that the solar cycle—day transitioning to night transitioning to day—represents the most fundamental rhythm of human existence. The insight that twelve divisions accommodated the seasonal variations in day length without requiring recalibration each day demonstrates remarkable ancient mathematical sophistication[23]. The system acknowledged that human experience varies with the seasons—summer days feel longer than winter days not just in duration but in qualitative experience.
+
+The philosophical basis connects to the Hermetic principle of "as above, so below"—the microcosm of human time experience should reflect the macrocosm of celestial movements. This principle explains why unequal hours persisted for centuries despite the availability of mechanical clocks that could keep equal hours—the temporal hours were understood to be more "real" in reflecting the natural world's rhythms.
+
+### Integration with Traditional Astrological Practice
+
+In traditional astrological practice, planetary hours were not merely a curiosity but an essential timing tool. The knowledge of which planet was currently ruling the hour informed decisions across numerous domains from medicine to agriculture to ritual practice[30]. As noted in the 16th-century *Key of Solomon*, specific planetary hours were considered appropriate for particular magical operations[27].
+
+Horary and electional astrology both relied heavily on planetary hours. In horary astrology (answering questions through astrological charts), the planetary hour helped determine chart validity through the "concourse" between the ascendant's ruler and the hour's ruler[21]. William Lilly states in *Christian Astrology*: "the question shall be taken for radical, or fit to be judged, when as the Lord of the hour at the time of proposing the Question, and erecting the Figure, and the Lord of the Ascendant or first House, are of one triplicity, or be one, or of the same nature"[21].
+
+Electional astrology (choosing auspicious times for actions) used planetary hours to find the most favorable moments for specific undertakings. If one sought to initiate a business venture (ruled by Jupiter), the practitioner would look for a Jupiter hour on a Thursday (Jupiter's day)[30]. This dual-layered timing system allowed for increasingly precise electional moments.
+
+The connection between planetary hours and the ascendant represents a sophisticated integration of time and space in the astrological worldview. The ascendant (the zodiac degree rising on the eastern horizon) represents how the cosmos manifests in the local environment, while the planetary hour represents the temporal quality of the moment—they together create a complete spatiotemporal context for astrological interpretation[21].
+
+### Cultural Transmission Through History
+
+The planetary hours system demonstrates remarkable historical continuity, with evidence of its use across multiple civilizations over two millennia. Babylonian astrologers appear to have developed the basic framework, which then passed to the Greeks and Romans before being integrated into Medieval Islamic and European astrological traditions[2].
+
+Archaeological evidence suggests planetary hour concepts were in use by the 1st century BCE, with the Pompeian graffito dated to February 6, 60 CE providing concrete historical verification of the system's use in the Roman world[2]. This graffito identifies the date as "Sunday," matching the sunset convention even though modern reckoning would consider it a Wednesday[2].
+
+The transmission continued through the Medieval period, where Arabic scholars preserved and expanded astrological knowledge. Abu Ma'shar (787-886 CE), one of the most influential astrologers of the Islamic Golden Age, documented planetary hours extensively in his works[25][48]. His writings were later translated into Latin and profoundly influenced European astrology.
+
+During the Renaissance, planetary hours saw renewed interest, with numerous treatises explaining their calculation and use. The publication of William Lilly's *Christian Astrology* in 1647 provided the most comprehensive English-language treatment of the subject, cementing the sunrise convention as the standard approach in Western astrology[1][7].
+
+This historical continuity—despite cultural and religious transformations—is remarkable. The system survived the transition from Babylonian to Greek to Roman to Medieval Christian contexts because it provided practical utility for timing activities according to celestial influences, regardless of the specific cultural or religious framework.
+
+### Astronomical and Mathematical Sophistication
+
+The planetary hours system reveals significant astronomical and mathematical sophistication in ancient thought. The calculation requires precise knowledge of solar motion and the ability to divide time intervals into equal parts—a non-trivial mathematical operation before the development of decimal arithmetic.
+
+The recognition that the sequence of planetary days follows mathematically from the sequence of planetary hours demonstrates advanced combinatorial thinking. The insight that with 24 hours divided among 7 planets, the first hour of the next day begins three positions down the Chaldean order (24 ÷ 7 = 3 remainder 3) reflects sophisticated modular arithmetic[2].
+
+This mathematical precision extended to practical applications. The development of instruments like the astrolabe incorporated unequal hour lines specifically for determining planetary hours[20]. Medieval astrolabes typically featured two sets of hour lines below the horizon that divided the night portion of the celestial sphere into twelve equal parts[20].
+
+The ability to calculate planetary hours required knowledge of:
+- Precise sunrise/sunset times
+- Division of time intervals
+- Sequential ordering through the Chaldean sequence
+- Adjustment for seasonal variations
+
+William Lilly's description of the calculation method shows this sophistication: "Take the time from sunrise to sunset convert to seconds and divide by twelve to get the length of each planetary hour in hours, minutes and seconds or minutes and seconds for the day. Take the time from sunset to sunrise the next day in seconds and divide that by twelve, then convert to hours, minutes and seconds or minutes and seconds for the length of each planetary hour by night"[1].
+
+The requirement to convert to seconds "because otherwise rounding error start to accumulate" demonstrates remarkable attention to computational precision for the 17th century[1].
+
+## Practical Applications and Modern Relevance
+
+### Contemporary Astrological Practice
+
+Despite the dominance of equal hours in modern timekeeping, planetary hours retain significant relevance in contemporary astrological practice. Traditional astrologers still consult planetary hours for electional astrology—choosing favorable moments for important activities based on planetary influences[30].
+
+Modern applications include:
+- Timing rituals and magical operations in contemporary occult traditions
+- Scheduling important business activities to align with favorable planetary influences
+- Choosing auspicious moments for healing or medical procedures in alternative medicine
+- Planning agricultural activities according to traditional lunar and planetary timing
+
+The planetary hours system provides a nuanced layer of timing beyond simply selecting the correct planetary day. For example, while Thursday is generally favorable for Jupiter-related activities (expansion, growth, opportunity), the specific Jupiter hours within Thursday provide even more precise timing[26][29].
+
+### Technological Implementation
+
+The modern implementation of planetary hours has been significantly enhanced by computational technology. While historical practitioners had to calculate planetary hours manually—a cumbersome process as noted in contemporary sources ("literally no one ever does it by hand")[42]—modern applications can perform these calculations instantly.
+
+Web applications and mobile apps now provide planetary hour information for any location[9][30]. These tools typically:
+- Automatically determine local sunrise/sunset times
+- Calculate precise temporal hour lengths
+- Display the current planetary hour ruler
+- Provide schedules for upcoming hours
+
+The development of open-source planetary hour calculators using astronomy libraries like the "Astral" module demonstrates how traditional knowledge can be integrated with modern software development[19]. These implementations must carefully handle the precise boundary conditions we've defined to ensure historical accuracy.
+
+### Scientific and Educational Value
+
+Beyond astrological applications, the planetary hours system offers valuable educational opportunities for understanding:
+- The historical development of timekeeping
+- The relationship between astronomy and cultural practices
+- The mathematical thinking of ancient civilizations
+- The transition from natural time to mechanical time
+
+Studying the planetary hours system reveals how humans have always sought to align activities with natural cycles. This perspective remains relevant today as we grapple with issues like circadian rhythm disruption in the modern 24/7 society.
+
+The system also demonstrates sophisticated ancient mathematical thinking that predates formal algebra. The modular arithmetic used in the planetary day sequence (24 hours ÷ 7 planets = 3 remainder 3) represents practical application of mathematical principles that weren't formally described for centuries.
+
+## Comparative Analysis of Historical Sources
+
+### Vettius Valens vs. William Lilly: Different Conventions
+
+The historical record reveals two primary conventions for determining planetary hours, represented by key sources:
+
+**Vettius Valens (2nd century CE)**:
+- Used sunset as the day beginning[2]
+- Defined hours as: "the hour I of night [is that] of Mercury; the second, [that] of [the] Moon; the third, [that] of Saturn"[11]
+- Organized calculations around the night portion first
+- Reflected Greek and Babylonian tradition[2]
+
+**William Lilly (17th century CE)**:
+- Used sunrise as the day beginning[1]
+- Defined hours as: "the period that extends from sunrise to sunset (daylight) is divided into twelve hours"[1]
+- Organized calculations around the day portion first
+- Represented the dominant European tradition by the 17th century[7]
+
+These differences reflect broader cultural transitions in timekeeping philosophy. The sunset convention aligned with agricultural societies where the day's work ended at sunset, while the sunrise convention aligned with societies where daily activity began at first light.
+
+Our implementation adopts the sunrise convention (Lilly's approach) as the default standard for several reasons:
+1. It aligns with the predominant modern astrological practice
+2. The sunrise convention creates a more intuitive day progression (beginning with light)
+3. It matches the Egyptian tradition, which had significant influence on Greek astronomy
+4. The majority of contemporary resources use the sunrise convention
+
+However, it's important to recognize that historically both conventions were valid and widely used. The Pompeian graffito evidence confirms that the sunset convention was in use in the 1st century CE[2], and the sunrise convention appears in Medieval manuscripts.
+
+### Chaldean Order Documentation
+
+The Chaldean order sequence (Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon) is remarkably consistent across historical sources:
+
+- **Vettius Valens**: Explicitly lists the sequence in the context of planetary hours calculation[11]
+- **Ptolemy**: References the order in the *Almagest* as part of the planetary spheres model[2]
+- **William Lilly**: Clearly states the order in *Christian Astrology*: "Saturn, Jupiter, Mars, Sol, Venus, Mercury, Luna"[7]
+- **Abu Ma'shar**: Documents the sequence in his Arabic treatises, which were later translated into Latin[25][48]
+
+The consistency of this sequence across cultures and centuries—despite the political and religious transformations that separated these civilizations—is remarkable. This stability suggests the sequence was based on observable astronomical phenomena (planetary orbital periods) rather than arbitrary cultural choices.
+
+The mathematical explanation for the planetary day sequence—24 hours divided by 7 planets leaves a remainder of 3, thus advancing three positions in the sequence each day—appears in multiple sources[2]. This mathematical precision demonstrates that ancient astrologers understood modular arithmetic long before its formal development.
+
+## Theological and Philosophical Dimensions
+
+### Planetary Spheres and Cosmology
+
+The planetary hours system connects to the broader cosmological framework of planetary spheres that dominated ancient and medieval thought. In this model, the planets were arranged in concentric spheres around the Earth, with each sphere representing a level of reality[1].
+
+The Chaldean order precisely corresponds to this arrangement:
+- Saturn: Outermost sphere, slowest moving
+- Jupiter: Next sphere in
+- Mars: Next
+- Sun: Central position
+- Venus: Next
+- Mercury: Next
+- Moon: Innermost sphere, fastest moving
+
+This arrangement wasn't arbitrary—it reflected the observed orbital periods of the planets. Saturn takes approximately 29.5 years to complete its orbit, Jupiter 12 years, Mars 687 days, Sun 365 days, Venus 225 days, Mercury 88 days, and the Moon 29.5 days[4]. These periods create the orderly sequence that became enshrined in the Chaldean order.
+
+The planetary spheres represented not just physical locations but metaphysical realms with specific qualities. Each planetary hour allowed access to the qualities of that planetary sphere—Saturn for discipline and structure, Jupiter for expansion and opportunity, Mars for courage and action, and so on[26][29].
+
+### Hermetic Philosophy and the Seven Planets
+
+The planetary hours system reflects core Hermetic principles, particularly the concept of correspondence between macrocosm and microcosm. The seven classical planets were seen as governing both celestial phenomena and human experience—the "as above, so below" principle[30].
+
+The 24-hour division (12 day + 12 night) represents the interaction of duality (day/night) with the seven-fold planetary order. This creates the mathematical relationship where each day begins with the planet three positions ahead of the previous day's ruler (24 modules 7 = 3)[2].
+
+This mathematical precision wasn't merely practical—it reflected the ancient belief that the cosmos was ordered and intelligible. The ability to predict planetary hours through calculation demonstrated humanity's capacity to understand and participate in cosmic order.
+
+The planetary hours system thus represents practical application of Hermetic philosophy—using knowledge of cosmic cycles to align human activity with universal rhythms. This perspective stands in contrast to modern mechanistic timekeeping, which treats time as uniform and divorced from cosmic cycles.
+
+## Astronomical and Geographic Variations
+
+### Latitude Effects on Temporal Hours
+
+The duration of temporal hours varies significantly with latitude, creating different experiences of planetary hours across the globe. At the equator, day and night remain relatively balanced year-round, with temporal hours varying only slightly in duration[23].
+
+As one moves toward the poles, the seasonal variations in day length become more extreme:
+- At 49° north/south latitude (e.g., London), day length varies between approximately 16 equinoctial hours in summer and 8 equinoctial hours in winter[23]
+- At 60° north/south latitude, summer days can exceed 19 equinoctial hours while winter days can be less than 5 hours
+- Within the polar circles (66.5°), polar day and polar night create extended periods of continuous daylight or darkness
+
+These variations dramatically affect the temporal hours:
+- At high latitudes, summer day hours can be significantly longer than night hours
+- At high latitudes, winter night hours can be significantly longer than day hours
+- At extreme latitudes, the standard calculation becomes impossible during polar day/night
+
+The planetary hours system thus creates a highly localized time experience—two people in different latitudes experience the same "day" differently in terms of hour durations, even if they share the same planetary day ruler.
+
+### Seasonal Variations
+
+The seasonal variations in daylight and darkness create predictable patterns in temporal hour durations:
+- At equinoxes: Day and night hours are equal (60 minutes each)
+- Summer solstice: Day hours are longest, night hours shortest (in Northern Hemisphere)
+- Winter solstice: Night hours are longest, day hours shortest (in Northern Hemisphere)
+
+These variations follow a sinusoidal pattern throughout the year, with the rate of change most rapid around the equinoxes and slowest around the solstices[23]. This creates a continuous flow of temporal hour durations that ancient practitioners would have experienced intuitively.
+
+The recognition of these patterns appears in historical sources. William Lilly notes: "Astrologians do not so, but follow this method, viz. according to the motion of the Sun both Summer and Winter, so do they vary their hours in length or shortness"[21].
+
+This seasonal awareness connects the planetary hours system to broader agricultural and cultural practices that aligned with the solar cycle—a connection that modern mechanical timekeeping has largely severed.
+
+## Modern Adaptations and Challenges
+
+### Polar Regions and the Planetary Hours System
+
+The standard planetary hours system encounters fundamental challenges at high latitudes where the sun does not rise or set for extended periods[16]. These challenges represent genuine limitations of the traditional system, as ancient practitioners never needed to address polar conditions.
+
+At approximately 66.5° latitude and beyond (the polar circles), the sun fails to set every day in summer and fails to rise every day in winter[16]. At the poles themselves, these conditions extend for approximately six months each—polar day followed by polar night.
+
+The traditional method of dividing the solar cycle into day and night hours becomes impossible under these conditions because either the day period (sunrise to sunset) or night period (sunset to sunrise) has zero duration, making division by 12 mathematically undefined.
+
+Our implementation handles these cases with a modern adaptation:
+1. For polar day (continuous daylight): Use 24 equal hours (60 minutes)
+2. For polar night (continuous darkness): Use 24 equal hours (60 minutes)
+3. For both cases: Apply the standard planetary sequence starting with the appropriate day/night ruler
+
+This approach represents a practical modern solution, though it's important to acknowledge that it's an adaptation not found in historical sources. The equal hours approximation preserves the planetary sequence while acknowledging the physical impossibility of dividing time into hours of zero duration.
+
+### Daylight Saving Time Complications
+
+Daylight Saving Time (DST) creates significant complications for planetary hours calculation:
+- Creates a 1-hour discontinuity twice yearly
+- Shifts the relationship between clock time and solar time
+- Creates ambiguity in timestamp interpretation
+
+The fundamental problem is that planetary hours follow the natural solar cycle while DST creates artificial clock shifts that disconnect from solar time. For example, when DST begins, clocks jump forward one hour while the solar cycle continues uninterrupted—creating a missing hour in the clock time that doesn't correspond to any solar time.
+
+The proper implementation approach is:
+1. Convert all timestamps to local standard time (without DST)
+2. Calculate planetary hours using standard time
+3. Convert results back to local time (with DST) for display
+4. For timestamps during the DST transition hour, apply appropriate adjustments
+
+This ensures that planetary hours always align with the actual solar cycle rather than the artificial clock shifts of DST.
+
+## Conclusion and Recommendations
+
+### Summary of Key Findings
+
+Traditional planetary hours represent a sophisticated temporal system based on unequal hours derived from the natural solar cycle. This comprehensive analysis has established:
+
+1. The unequal hours system divides the solar cycle into 24 parts—12 for daylight (sunrise to sunset) and 12 for nighttime (sunset to next sunrise)—with the duration of each hour varying seasonally and by latitude.
+
+2. The planetary hours follow the Chaldean order (Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon), with the planet ruling the first hour of the day also ruling the whole day and determining the day's name.
+
+3. Authoritative sources including Vettius Valens' Anthologies and William Lilly's Christian Astrology provide the historical foundation for the calculation method, though with differing conventions regarding when the day begins (sunset vs. sunrise).
+
+4. Precise boundary conditions are critical for accurate implementation, particularly at the exact moments of sunrise and sunset where the hour rulers transition.
+
+5. High-latitude challenges require modern adaptations, as the traditional system cannot calculate hours when the sun does not rise or set for extended periods.
+
+6. The day begins at sunrise, not midnight, creating an approximately 12-hour offset between civil calendar days and planetary days during nighttime hours.
+
+### Implementation Recommendations
+
+Based on this analysis, the following recommendations are offered for accurate planetary hours implementation:
+
+1. Adopt the sunrise convention as the default standard, with sunset convention as an optional alternative for historical reconstructions.
+
+2. Use topocentric apparent sunrise/sunset times with standard refraction (upper limb definition) as the basis for calculation.
+
+3. Implement precise boundary conditions with sunrise and sunset as inclusive lower bounds for day and night hours respectively.
+
+4. For polar day/night conditions, use equal hours (60 minutes) as a practical approximation while clearly indicating this is a modern adaptation.
+
+5. Process all timestamps in local standard time without Daylight Saving Time adjustments to maintain alignment with solar time.
+
+6. Include warnings when day or night hours become extremely short (e.g., < 15 minutes) to alert users of potentially problematic results.
+
+7. Provide options for both historical accuracy and practical modern use, allowing users to select the convention that best fits their needs.
+
+The planetary hours system represents a sophisticated integration of astronomy, mathematics, and practical timekeeping that has endured for millennia. While modern timekeeping has largely abandoned the temporal hour system, its continued relevance in astrological practice and its value as a historical and cultural artifact warrant careful implementation that preserves its authentic structure while addressing the practical challenges of modern application. This detailed algorithm provides the foundation for accurate, implementation-ready planetary hours calculation that respects both historical tradition and contemporary computational requirements.

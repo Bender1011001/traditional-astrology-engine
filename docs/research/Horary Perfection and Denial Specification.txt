@@ -1,0 +1,306 @@
+﻿The Algorithms of Fate: A Formal Specification of Perfection and Denial in Horary Astrology
+1. Introduction: The Horary Chart as a Deterministic State Machine
+In the specialized domain of horary astrology, the celestial sphere is not treated as a chaotic or purely poetic expanse, but rather as a rigorous, logical mechanism—a finite state machine governed by deterministic rules of motion and interaction. When a practitioner casts a chart for a specific query, they are effectively initializing a simulation environment. The planets act as variable agents, the zodiacal signs function as state containers modifying those agents, and the houses serve as the topological domain mapping celestial coordinates to terrestrial contexts. The objective of the horary specialist, functioning much like a formal methods engineer, is to traverse the graph of planetary states to determine if a specific connection condition—termed "Perfection"—can be satisfied, or if the system logic dictates an exception or failure state, known as "Denial."
+This research report provides a comprehensive, programmatic specification of these mechanics. It eschews the vague mysticism often associated with popular astrology in favor of the precise, algorithmic definitions found in the primary source texts of the tradition, principally William Lilly’s Christian Astrology (1647), and his medieval antecedents such as Masha’allah and Guido Bonatti. We analyze the "Motion of Light" doctrines—Translation, Collection, Prohibition, Refranation, and Frustration—not merely as aphorisms, but as distinct computational subroutines that govern the flow of causality within the chart.
+The central premise of this specification is that the horary chart operates on a "Physics of Light." Light, in this context, is the information carrier—the signal transmitted by a Significator (a planet representing a person or event). The successful delivery of this signal from the Querent’s Significator to the Quesited’s Significator constitutes the "Perfection" of the matter. However, this signal is subject to interference, interception, diversion, and signal decay. The Motion of Light doctrines are the protocols that describe these signal behaviors. By rigorous application of these protocols, the astrologer derives a boolean output: True (the event happens) or False (the event is denied), often accompanied by a complex return value describing the manner of the outcome (e.g., "Yes, but with delay," or "No, because of a third party").
+1.1 The Ontological Primitives: Planets as Agents
+To understand the mechanics of perfection, one must first define the agents operating within the system. In the horary model, the seven visible planets (Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon) are the active variables. Each planet possesses a set of dynamic properties that determine its "privilege" or capacity to act within the algorithm.
+1. Longitude (  ): The precise position of the planet on the ecliptic (0° to 360°).
+2. Velocity (  ): The rate of change of longitude. This determines which planet is the "Applicant" (active) and which is the "Recipient" (passive).
+3. Moiety (  ): The radius of the planet's "Orb of Influence," representing the spatial tolerance for interactions.
+4. Dignity (  ): A composite score derived from the planet's sign position (Domicile, Exaltation, Triplicity, Term, Face), determining its "power" or "virtue."
+5. Motion State: Whether the planet is Direct, Retrograde, or Stationary.
+The interaction of these primitives creates the complex behaviors of Translation and Prohibition. For instance, a planet’s velocity is not constant; it accelerates and decelerates. A "Prohibition" logic gate may evaluate to True only because the interfering planet’s velocity allows it to intercept the target before the primary significator arrives. Thus, the system is dynamic, requiring calculating temporal trajectories rather than just static geometric relationships.
+________________
+2. The Geometry of Interaction: Orbs, Moiety, and the Aspectual Field
+Before any "Motion of Light" routine can be executed, the system must validate the existence of a connection path. In modern astrology, aspects are often treated as dimensionless vectors (lines) with an arbitrary tolerance (orb). In traditional horary mechanics, as formalized by Lilly and Bonatti, planets are treated as bodies with volumetric fields of influence. The logic of contact is governed by the theory of Moiety.
+2.1 The Theory of Moiety and Planetary Radii
+The term "Moiety" is derived from the Old French moitié, meaning half. It refers to the radius of the planet's orb—the distance from the planet's center to the edge of its effective field. An aspect is not a connection between two centers, but an overlapping of two fields.
+The condition for a "Platic" (wide) aspect—the initial state of connection—is met when the distance between the aspectual points of two planets is less than or equal to the sum of their moieties.
+Formula for Aspect Engagement:
+  
+
+Where    is the total diameter of the planet's sphere of virtue.
+Table 2.1: Specification of Planetary Orbs and Moieties
+
+
+Planetary Agent
+	Total Orb Diameter (Θ)
+	Moiety (Radius μ)
+	Rationale and Source Consistency
+	Saturn
+	  
+ -   
+	  
+ -   
+	Represents the heavy, leaden reach of the Greater Malefic. Lilly standardizes closer to 9°. 1
+	Jupiter
+	  
+
+	  
+
+	The Greater Benefic's field is equal to Saturn's in magnitude but opposite in polarity. 1
+	Mars
+	  
+ -   
+	  
+ -   
+	A sharper, more acute field of influence compared to the ponderous outer giants. 1
+	Sun
+	  
+ -   
+	  
+ -   
+	The dominant luminary. Its orb defines the zones of "Combustion" and "Under the Beams." 1
+	Venus
+	  
+
+	  
+
+	Matches Mars and Mercury, creating a standard "inner planet" interaction radius. 1
+	Mercury
+	  
+
+	  
+
+	Highly variable in visibility, but standardized in horary logic to 7°. 1
+	Moon
+	  
+ -   
+	  
+ -   
+	The primary translator. Its large orb ensures it maintains connectivity across sign boundaries. 1
+	Note on Variance: While Lilly standardizes these values in Christian Astrology (page 107), he acknowledges minor variations in older texts. The formal engineer treats these as system constants for the duration of the runtime (the judgment).
+2.2 The Handshake Protocol: Application vs. Separation
+The binary state of Application (Applicatio) versus Separation (Separatio) is the most critical logic gate in the system.
+   * Separation (  ): Occurs when the faster planet is moving away from the exact aspect of the slower planet.
+      * Logical Implication: The event has passed. The opportunity is closed. In a query about a future event, a separating aspect returns a value of False for perfection (unless a "Return of Light" occurs).
+      * Context: Separation contains the "memory" of the chart. It tells the analyst what just happened—the context of the question.
+      * Application (  ): Occurs when the faster planet is moving toward the exact aspect of the slower planet.
+         * Logical Implication: The event is pending. The energy is building. This is the domain of potential Perfection.
+         * Requirement: The application must be continuous. The state of application persists from the moment the moieties touch until the moment of exact partile perfection.
+Directional Vector:
+The flow of influence is strictly unidirectional in terms of initiation. The lighter (faster) planet applies to the heavier (slower) planet.
+         * Query: "Will I (Mercury) get the job (Saturn)?"
+         * Valid State: Mercury applies to Saturn. (The applicant petitions the boss).
+         * Invalid State: Saturn applies to Mercury. (This is physically impossible unless Saturn is Retrograde or Mercury is incredibly slow/stationary).
+This vector establishes the "Agency" of the chart. The faster planet represents the active party seeking the outcome. If the Querent is the faster planet, they must act. If the Quesited is the faster planet, the "thing" is coming to the Querent.2
+________________
+3. The Primary Routine: Perfection by Direct Application
+The baseline for a positive return value ("Yes") in a horary function is Perfection by Conjunction or Aspect. This is the "Happy Path" where no exceptions are thrown.
+3.1 The Conjunction: Synthesis of Identity
+The Bodily Conjunction is the strongest form of perfection. It is technically not an aspect (a "view") but a "synod" (a meeting).
+         * Logic:    and    occupy the same coordinate   .
+         * Outcome: The distinction between Subject and Object vanishes. The Querent has the Quesited.
+         * Nuance: If the Conjunction occurs in a sign where the applicant is dignified, the perfection is excellent. If in a sign where the applicant is debilitated, the perfection effectively "ruins" the applicant (e.g., "You get the job, but it destroys your health").
+3.2 Aspectual Perfection: Geometric Engagement
+When bodily union is impossible, the chart seeks connection via the polygonal harmonics of the circle.
+            1. The Sextile (  ) and Trine (  ):
+               * Logic: These aspects represent harmonic resonance. The path of resistance is near zero.
+               * Return Value: PERFECTION_EASY. The matter perfects with minimal effort.
+               2. The Square (  ) and Opposition (  ):
+                  * Logic: These aspects represent orthogonal tension and diametric conflict.
+                  * Return Value: PERFECTION_CONDITIONAL. The matter may perfect, but it requires "Labor," "Sorrow," or "Cost."
+                  * The Reception Modifier: For a Square or Opposition to result in a "Yes," the system essentially requires Reception. If Planet A applies to Planet B by Square, but Planet B receives A (e.g., B is in A's house), B "accepts" the tension. Without Reception, a Square/Opposition usually results in a Denial or a destructive Perfection ("Yes, but you will wish it were No").3
+________________
+4. Module A: Translation of Light (The Courier Protocol)
+When the primary routine (Direct Application) returns False (i.e., the significators are separating or not in aspect), the system executes the Translation of Light (Translatio Lucis) subroutine. This is a remedial protocol that utilizes a third agent to bridge the discontinuity between the primary variables.
+4.1 Functional Definition
+Lilly defines Translation as occurring when "a light Planet separates from a more weighty one, and presently joyns to another more heavy".2 The "Light Planet" (Translator,   ) acts as a data bus, carrying the state information ("Virtue") of the first planet (  ) and writing it to the second planet (  ).
+Formal Logic:
+Let    be the Significator of the Querent.
+Let    be the Significator of the Quesited.
+Let    be a planet swifter than both    and    (typically Moon, Mercury, Venus).
+Conditions for Valid Translation:
+                  1. Separation Event:    is separating from    (Aspect or Conjunction).
+                     * Constraint: The separation distance must be    Moiety(  ) + Moiety(  ). If    has moved too far, the signal has decayed.
+                        2. Application Event:    is applying to    (Aspect or Conjunction).
+                           * Constraint: The application must be current and continuous.
+                           3. Signal Integrity (No Interference):    must not perfect an aspect with any other planet (  ) between the separation from    and the perfection with   .
+                              * Exception: If    hits   , the light is "Cut Off" or delivered to    instead. This is a fatal error for the query unless    is also relevant to the context.5
+4.2 The Physics of "Carrying Virtue"
+The term "Translation of Virtue" is often used interchangeably with "Translation of Light." Formal analysis reveals a distinction in data typing.
+                                 * Light: The raw causal connection.    connects    to   .
+                                 * Virtue: The dignity/quality. If    is in the domicile of    (e.g., Moon in Aries, ruling planet Mars),    carries the full "Virtue" or authority of Mars. The message is "Official." If    is Peregrine (without dignity), the message is weak or the messenger is unreliable.
+Lilly’s Example (Christian Astrology, p. 107):
+                                    * Saturn (  ): 20° Aries.
+                                    * Mars (  ): 15° Aries.
+                                    * Mercury (  ): 16° Aries.
+                                       * Analysis: Mercury is faster than Mars and Saturn. Mercury has just passed Mars (Separating from 15°). Mercury is moving toward Saturn (Applying to 20°).
+                                       * Result: Mercury translates the light of Mars to Saturn.
+                                       * Interpretation: "If a thing be promised by Saturn, then such a man as is signified by Mercury shall procure the assistance of Mars...".6 The logic here is connective: Mercury weaves the separate strands of Mars and Saturn into a single knot.
+4.3 Handling Edge Cases in Translation
+                                       1. The "Void of Course" Exception: If the Translator is the Moon and she is Void of Course (making no applying aspect before leaving the sign), the Translation logic usually fails. The carrier signal is present, but the payload is empty.
+                                       * Lilly's Softening: Lilly suggests that a Void Moon in Cancer, Taurus, Sagittarius, or Pisces may still "perform," though with less vigor.2
+                                       2. The "Besieged" Translator: If    is separating from a Malefic and applying to a Malefic (Besieged), the mediator is under duress. The translation may occur, but the outcome is poisoned by the context of the mediator’s distress.7
+                                       3. Mutual Reception Bridge: If    translates between    and   , and    and    are in Mutual Reception by sign, the Translation is exceptionally powerful. The "Contract" is already written; the Translator merely delivers it for signature.
+________________
+5. Module B: Collection of Light (The Aggregator Protocol)
+Collection of Light (Collectio Lucis) is the topological inverse of Translation. While Translation describes a kinetic agent moving between nodes, Collection describes a static node attracting multiple agents.
+5.1 Functional Definition
+Collection activates when the primary significators (   and   ) are not in aspect and cannot connect directly. However, both    and    are applying to a third planet (  ), which is heavier (slower) than both.7
+Formal Logic:
+Let    be the Collector (e.g., Saturn, Jupiter, or the Superior Planet in the configuration).
+                                          1. Convergent Trajectory:    (Application) AND    (Application).
+                                          2. Ponderosity Constraint: Velocity(  ) < Velocity(  ) AND Velocity(  ) < Velocity(  ).
+                                          3. Result:    "collects" the light of    and    at the point of its own position.
+5.2 The Critical Dependency: Reception
+A significant divergence exists in the formal specification of Collection between the strict Arabic tradition (Masha'allah) and the later English tradition (Lilly), though deep analysis suggests they aim for the same logical integrity.
+                                             * The Masha'allah/Bonatti Specification: For Collection to yield a positive result, the Collector (  ) must be "Safe" and "Receptive." Specifically,    must receive both    and    in its dignities.
+                                                * Logic:    acts as a Host or a Judge. If    and    come to   ’s house,    must welcome them. If    does not receive them (i.e.,    and    are in signs where    has no dignity, or worse, is in Fall),    is an indifferent or hostile judge. The energy is collected but not resolved.
+                                                * Masha'allah's Example: In On Reception, a case of illness analyzes Venus and Mars. The logic relies heavily on the fact that the planets "committed their disposition" to a heavier planet that received them.8
+                                                   * The Lilly Specification: Lilly writes in Christian Astrology: "they both receive him in some of their essential dignities".9
+                                                   * Textual Analysis: This phrasing is ambiguous. "They both receive him" implies    and    receive   . However, the context of the examples often shows    receiving    and   .
+                                                   * Resolved Specification: The most robust rule for Collection is Mutual Interest. Either    must have dignity in the places of    and    (authorizing    to act on them), OR    and    must be in the dignities of    (submitting to   's authority).
+                                                   * Failure State: If    and    apply to    with no dignity reception,    represents an obstacle or a "dead end." The matter is brought to a third party who does nothing.
+5.3 Socio-Political Interpretation
+In the "Program code" of the chart, Collection represents the Delegation of Agency.
+The Querent (  ) and Quesited (  ) forfeit their ability to conclude the matter personally. They hand the "file" to   .
+                                                      * If    is a Benefic (Jupiter/Venus): The Arbitrator is just.
+                                                      * If    is a Malefic (Saturn/Mars): The Arbitrator is harsh or exacting.
+                                                      * If    is the Lord of the 10th (Judge/King): The matter is settled by a formal ruling.
+                                                      * If    is the Lord of the 4th (Father/End of Matter): The matter is settled by older family members or structural circumstances.
+________________
+6. Module C: Prohibition (The Interrupt Protocol)
+We now turn to the "Denial" routines. Prohibition (Prohibitio) is the active negation of a pending perfection. It is equivalent to a "Race Condition" in concurrent computing, where the output depends on the sequence of uncontrollable events.
+6.1 Functional Definition
+Prohibition occurs when two planets (   and   ) are applying to an aspect, but a third planet (  ) disrupts the connection before it can perfect. The "Light" of    is intercepted by    before it reaches   , or    reaches    before    does.2
+6.2 Mode I: Bodily Prohibition (The Physical Block)
+This occurs when the interfering planet (  ) is swifter than the applicant (  ).
+Algorithm:
+                                                         1. State:    applies to   .
+                                                         2. Interference:    is positioned between    and    (in longitude) or is approaching    from a different angle but with higher velocity.
+                                                         3. Calculation: Calculate    (Time to Perfection for   ) and    (Time to Perfection for   ).
+                                                         4. Condition: If   , then PROHIBITION.
+                                                         5. Result:    conjoins    first. The slot is taken.
+Lilly’s Example: Mars (  ) is at 7° Aries. Saturn (  ) is at 15° Aries. The Sun (  ) is at 6° Aries.
+                                                            * Analysis: The Sun is faster than Mars. The Sun will overtake Mars (Conjunction Sun-Mars) and then reach Saturn (Conjunction Sun-Saturn) before Mars can reach Saturn.
+                                                            * Outcome: The Sun prohibits Mars. The "burning" of Mars by the Sun (Combustion) destroys Mars's agency. Lilly calls this the "greatest misfortune".2
+6.3 Mode II: Prohibition by Aspect (The Remote Block)
+This occurs when the interference happens via geometric rays rather than bodily presence.
+Algorithm:
+                                                            1. State: Mars (  ) at 7° Aries applies to Conjunction with Saturn (  ) at 15° Aries.
+                                                            2. Interference: Sun (  ) is at 5° Gemini.
+                                                            3. Geometry: The Sun casts a Sextile (  ) to Aries. 5° Gemini sextiles 5° Aries.
+                                                            4. Dynamics: The Sun moves ~1°/day. Mars moves ~0.5°/day.
+                                                            5. Race: The Sun's sextile point moves through Aries faster than Mars's body. The Sun's sextile will hit Saturn (15° Aries) before Mars's body reaches 15° Aries.
+                                                            6. Result: Prohibition by Aspect. The Sun "cuts in" via a side channel.2
+6.4 Interpretative Logic
+The identity of planet    defines the cause of the failure.
+                                                               * If    = Lord 2: "Prohibited by lack of funds."
+                                                               * If    = Lord 3: "Prohibited by rumors, neighbors, or siblings."
+                                                               * If    = Lord 12: "Prohibited by secret enemies or self-sabotage."
+                                                               * If    = Retrograde: "Prohibited by a returning past issue."
+________________
+7. Module D: Frustration (The Divergent Protocol)
+Frustration (Frustratio) is a nuance of denial distinct from Prohibition. In Prohibition, the Applicant (  ) is blocked. In Frustration, the Target (  ) moves on.
+7.1 Functional Definition
+Lilly defines Frustration as: "A faster planet applies to a slower planet, but before the aspect can take place, the slower planet aspects a third planet".5
+Algorithm:
+                                                                  1. State:    (Fast) applies to    (Slow).
+                                                                  2. Dynamic Target:    is not stationary.    is applying to    (Slower).
+                                                                  3. Race:    completes aspect with    before    catches up to   .
+                                                                  4. Result: The light of    is "captured" or "stained" by   . By the time    arrives,    is no longer the same entity; it has formed a bond with   .
+Lilly's Proverb: "The Dogges quarrell, a third gets the Bone".2
+                                                                     * Scenario: A seeks B. B seeks C. B commits to C. A is left frustrated.
+7.2 The Logic of "Target Migration"
+Frustration is critical in relationship and business charts. It simulates the autonomy of the other party.
+                                                                     * Example: "Will I buy this house?" (  ).
+                                                                     * Chart: The House Significator (  ) applies to Saturn (  ).
+                                                                     * Frustration: The House is "frustrated" from the Buyer. The Seller (  ) sells to another person (  ) or decides to keep it (if    is Lord 4).
+                                                                     * Key Difference: In Prohibition, you are stopped from acting. In Frustration, you act, but the object of your desire is removed from the table.
+________________
+8. Module E: Refranation (The State Change Protocol)
+Refranation (Refranatio) is the internal failure mode. It represents a "Rollback" of the transaction due to a change in the internal state of one of the agents.
+8.1 Functional Definition
+"One planet applies to another, but the applying planet goes retrograde before completing the aspect".2
+Algorithm:
+                                                                        1. State:    applies to   . Distance is   .
+                                                                        2. Velocity Event:    drops to 0 (Stationary) then becomes negative (Retrograde).
+                                                                        3. Condition: This reversal happens before   .
+                                                                        4. Result: The aspect never perfects.    turns away.
+8.2 Interpretative Logic
+Refranation places the cause of denial squarely on the internal volition of the agent.
+                                                                           * If Lord 1 (Querent) Refranes: The Querent changes their mind, loses interest, or gets "cold feet."
+                                                                           * If Lord 7 (Quesited) Refranes: The Quesited backs out of the deal at the last minute.
+                                                                           * Nuance: Lilly notes, "nothing signifies by the former Conjunction will ever be effected." It is a total cancellation of the premise.2
+Sign-Boundary Refranation (The Modern-Traditional Extension):
+Some formalists extend Refranation to include changing signs. If    must change signs to perfect the aspect with   , the "terms" of the contract change.
+                                                                           * Example: Mars in Pisces applies to Venus in Aries. Mars must enter Aries to conjoin Venus.
+                                                                           * Analysis: When Mars enters Aries, he gains immense dignity (Domicile) but changes nature. The "weak" Mars that wanted Venus is gone; the "strong" Mars might not need her. This is a form of Refranation where the context expires.
+________________
+9. Integration: The Master Algorithm of Judgment
+Having defined the subroutines, we can now assemble the master function for judging the "Yes/No" outcome in a Horary Chart. This represents the synthesis of the formal methods engineer's approach.
+9.1 The Decision Tree Table
+The following table serves as the logic gate for determining the outcome based on planetary motion states.
+Step
+	Check Condition
+	Subroutine Triggered
+	Return Value (If True)
+	1
+	Is    applying to    (Direct)?
+	CHECK_IMPEDIMENT
+	Potential Perfection (Go to Step 2)
+	2
+	Does    intercept    or    before perfection?
+	PROHIBITION
+	DENIAL (External Block)
+	3
+	Does    join    before    joins   ?
+	FRUSTRATION
+	DENIAL (Target lost to 3rd party)
+	4
+	Does    turn Retrograde before perfection?
+	REFRANATION
+	DENIAL (Internal Cancellation)
+	5
+	If Step 1 is False (No Direct), does    separate    and apply   ?
+	TRANSLATION
+	PERFECTION (Via Mediator)
+	6
+	If Step 5 is False, do    &    both apply to   ?
+	COLLECTION
+	PERFECTION (Via Arbiter - Requires Reception)
+	7
+	Are    &    in Mutual Reception w/o aspect?
+	SYMPATHY
+	POSSIBLE (Uncoordinated success)
+	8
+	Default State
+	NO_PATH
+	DENIAL (Matter comes to nothing)
+	9.2 The Calculation of Time (The "When")
+Formal horary does not just predict if, but when. The timing is derived from the Distance to Perfection (  ).
+                                                                           * Formula:   .
+                                                                           * Scale: The scale (Days, Weeks, Months) is determined by the Sign Quality (Cardinal, Fixed, Mutable) and House Type (Angular, Succedent, Cadent).
+                                                                              * Cardinal + Angular: Hours/Days (Fastest).
+                                                                              * Fixed + Cadent: Months/Years (Slowest).
+                                                                              * Translation Timing: The timing is usually dictated by the Translator's motion, not the slow planets. The "Courier" sets the pace.
+9.3 Case Study Synthesis (Hypothetical)
+Query: "Will the merger proceed?"
+                                                                              * Significators: Lord 1 (Mercury) and Lord 7 (Jupiter).
+                                                                              * State: Mercury is at 10° Gemini. Jupiter is at 15° Virgo. (Square aspect).
+                                                                              * Analysis: Mercury applies to square Jupiter. (Tension/Conflict).
+                                                                              * Check Prohibition: Venus is at 12° Virgo. Mercury (fast) will square Venus (12°) before reaching Jupiter (15°).
+                                                                              * Prohibition Detected! Venus interferes.
+                                                                              * Correction: BUT, Venus is moving away? No, assume Venus is slow. Mercury hits Venus first. The merger is blocked by Venus (Lord 2? Money? Lord 11? Advisors?).
+                                                                              * Check Translation: The Moon is at 5° Pisces. She separates from Jupiter (Opposition) and applies to Mercury (Square).
+                                                                              * Path: Jupiter    Moon    Mercury.
+                                                                              * Translation Detected! The Moon translates light back from Jupiter to Mercury.
+                                                                              * Logic Conflict: The Prohibition (Venus) blocks the direct square. But the Translation (Moon) routes around it.
+                                                                              * Final Judgment: The direct merger meeting fails due to Venus (financial disagreement). However, a third party (Moon) who recently left the other company (Jupiter) comes to the Querent (Mercury) and brokers a side deal. The merger proceeds in a different form.
+________________
+10. Conclusion
+The "Perfection and Denial" mechanics of horary astrology constitute a sophisticated system of causal logic. Far from being a random collection of omens, the chart functions as a deterministic simulation of interacting agents. The "Motion of Light" doctrines—Translation, Collection, Prohibition, Frustration, and Refranation—act as the control structures (loops, interrupts, and conditionals) of this simulation.
+For the formal methods engineer, the horary chart is a solvable equation. By rigorously defining the Moieties (fields of influence), tracking the vectors of Application, and executing the subroutines of interference and mediation, one can derive a consistent, reproducible judgment. The system honors the complexity of human fate by acknowledging that while the shortest path (Direct Perfection) is desired, the universe often requires the circuitous routes of Translation and Collection, or imposes the hard stops of Prohibition and Refranation. The mastery of horary lies in the precise calculation of these celestial algorithms.
+Report End
+Works cited
+                                                                                 1. Let's talk about orbs : r/horary - Reddit, accessed January 30, 2026, https://www.reddit.com/r/horary/comments/1h5zx65/lets_talk_about_orbs/
+                                                                                 2. The Ptolemaic Aspects,Orbs and Perfection in Renaissance Astrology, accessed January 30, 2026, https://www.renaissanceastrology.com/aspects.html
+                                                                                 3. Christian Astrology PDF | PDF | Planets | Astronomy - Scribd, accessed January 30, 2026, https://www.scribd.com/document/642382876/christian-astrology-pdf
+                                                                                 4. Demonologia | Project Gutenberg - ReadingRoo.ms, accessed January 30, 2026, https://readingroo.ms/7/2/4/7/72476/72476-h/72476-h.htm
+                                                                                 5. Horary Rules | PDF | Astronomy - Scribd, accessed January 30, 2026, https://www.scribd.com/doc/88032748/Horary-Rules
+                                                                                 6. Mathematicks made easy, or, A mathematical dictionary explaining the terms of art and difficult phrases used in arithmetick, geometry, astronomy, astrology, and other mathematical sciences wherein the true meaning of the word is rendred, the nature of things signified discussed, and (where need requires) illustrated with apt figures and diagrams : with an appendix exactly containing the quantities of all sorts of weights and measures, the characters and meaning of the marks, symbols, or abbreviations commonly used in algebra and sundry other observables / by Joseph Moxon. | Early English Books Online - Digital Collections, accessed January 30, 2026, https://quod.lib.umich.edu/e/eebo/A51541.0001.001/1:5?rgn=div1;view=fulltext
+                                                                                 7. Glossary of terms - STA School of Traditional Astrology, accessed January 30, 2026, https://sta.co/portal/mod/glossary/view.php?id=1229&mode&hook=ALL&sortkey&sortorder&fullsearch=0&page=-1
+                                                                                 8. Masha'Allah, On ReceptionChapter IV A Question Concerning A Sick Person - Scribd, accessed January 30, 2026, https://www.scribd.com/document/48246946/Masha-Allah-On-ReceptionChapter-IV-a-Question-Concerning-a-Sick-Person
+                                                                                 9. Christian Astrology, Vol. 1 - William Lilly | PDF | Religion & Spirituality - Scribd, accessed January 30, 2026, https://www.scribd.com/doc/108678613/Christian-Astrology-Vol-1-William-Lilly
