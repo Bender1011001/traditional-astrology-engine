@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from src.api.v1.endpoints import charts, medical, synastry, electional, horary, mundane, telemetry, forensic, billing, developer
+from src.api.v1.endpoints import charts, medical, synastry, electional, horary, mundane, telemetry, forensic, billing, developer, owner
 
 api_router = APIRouter()
 
@@ -13,6 +13,7 @@ api_router.include_router(forensic.router, prefix="/forensic", tags=["forensic"]
 api_router.include_router(billing.router, prefix="/billing", tags=["billing"])
 api_router.include_router(telemetry.router, tags=["telemetry"])
 api_router.include_router(developer.router, prefix="/developer", tags=["developer"])
+api_router.include_router(owner.router, prefix="/owner", tags=["owner"])
 
 from src.api.v1.endpoints import content
 api_router.include_router(content.router, prefix="/content", tags=["content"])

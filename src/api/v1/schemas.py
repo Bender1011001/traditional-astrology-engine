@@ -75,6 +75,14 @@ class ResetPasswordRequest(BaseModel):
     token: str
     new_password: str
 
+class OwnerSubscriptionUpdateRequest(BaseModel):
+    user_id: str
+    plan_tier: str
+    status: Optional[str] = None
+    cancel_at_period_end: Optional[bool] = None
+    confirm_downgrade: Optional[bool] = False
+    current_period_end: Optional[str] = None
+
 class ReadingFeedback(BaseModel):
     reading_hash: str
     vote: str
@@ -84,4 +92,3 @@ class ReadingFeedback(BaseModel):
     time_unknown: Optional[bool] = False
     session_id: Optional[str] = None
     ts: Optional[str] = None
-
