@@ -45,13 +45,16 @@ window.showDetails = (p) => {
     const modal = document.getElementById('modalOverlay');
     const body = document.getElementById('modalBody');
     if (modal && body) {
+        const planetName = escapeHtml(p.planet);
+        const delineation = escapeHtml(p.delineation_text);
         body.innerHTML = `
-            <h2>${p.planet}</h2>
-            <p>${p.delineation_text}</p>
+            <h2>${planetName}</h2>
+            <p>${delineation}</p>
         `;
         modal.classList.remove('hidden');
     }
 };
+
 
 window.showDetailsByPlanet = (name, data) => {
     // This requires data to be passed or accessed globally

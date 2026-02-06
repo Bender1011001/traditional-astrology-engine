@@ -1,5 +1,5 @@
 import { renderToolError } from './ui.js';
-import { formatLongitude } from './utils.js';
+import { formatLongitude, escapeHtml } from './utils.js';
 import { currentResult } from './results-core.js'; // Helper to access shared state if needed
 
 export function renderSynastry(data) {

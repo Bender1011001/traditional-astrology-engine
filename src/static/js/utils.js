@@ -1,13 +1,45 @@
 import { SIGNS } from './config.js';
 
+/**
+ * Escape HTML special characters to prevent XSS attacks.
+ * Use this for ALL user-provided or API-provided data.
+ */
 export function escapeHtml(value) {
-    return String(value || "")
+    return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#39;");
 }
+
+/**
+ * Safe HTML template tag - automatically escapes interpolated values.
+ * Usage: safeHTML`<div>${userInput}</div>` 
+ * This is the preferred way to build HTML with dynamic data.
+ */
+export function safeHTML(strings, ...values) {
+    return strings.reduce((result, str, i) => {
+        const value = i < values.length ? escapeHtml(values[i]) : '';
+        return result + str + value;
+    }, '');
+}
+
+/**
+ * Sanitize an object's string values recursively for safe HTML insertion.
+ * Returns a new object with all string values escaped.
+ */
+export function sanitizeData(obj) {
+    if (typeof obj === 'string') return escapeHtml(obj);
+    if (typeof obj !== 'object' || obj === null) return obj;
+    if (Array.isArray(obj)) return obj.map(sanitizeData);
+    const result = {};
+    for (const [key, value] of Object.entries(obj)) {
+        result[key] = sanitizeData(value);
+    }
+    return result;
+}
+
 
 export function formatLongitude(lon) {
     let signIdx = Math.floor(lon / 30) % 12;

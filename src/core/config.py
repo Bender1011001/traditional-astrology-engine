@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     STRIPE_SECRET_KEY: str
     STRIPE_WEBHOOK_SECRET: str
     JWT_SECRET: str
+    ADMIN_SECRET_KEY: str  # Admin endpoint authentication
     DATABASE_URL: str = "sqlite:///./users.db"
     REDIS_URL: str = "redis://localhost:6379"
     SENDER_EMAIL: str

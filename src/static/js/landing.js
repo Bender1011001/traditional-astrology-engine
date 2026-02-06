@@ -210,7 +210,8 @@ function renderBasicReading(result, payload, timeUnknown) {
         // For now just appending text to save space
         const div = document.createElement('div');
         div.className = "temperament-badge";
-        div.innerHTML = `<strong>Dominant Temperament:</strong> ${temp}`;
+        const tempValue = typeof temp === 'string' ? escapeHtml(temp) : (temp.primary_temperament ? escapeHtml(temp.primary_temperament) : 'Unknown');
+        div.innerHTML = `<strong>Dominant Temperament:</strong> ${tempValue}`;
         basicReadingBody.prepend(div);
     }
 
