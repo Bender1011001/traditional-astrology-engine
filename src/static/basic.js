@@ -1,3 +1,8 @@
+const DEFAULT_RENDER_URL = "https://astrology-engine.onrender.com";
+if (!window.CAEL_API_BASE && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+    window.CAEL_API_BASE = DEFAULT_RENDER_URL;
+}
+
 const API_BASE = window.CAEL_API_BASE || "";
 const IS_GH_PAGES = false;
 const backendNotice = document.getElementById("backendNotice");
@@ -1646,4 +1651,3 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 });
-

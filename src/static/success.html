@@ -77,6 +77,7 @@
         </div>
     </main>
 
+    <script src="config.js"></script>
     <script>
         const API_BASE = window.CAEL_API_BASE || "";
         function apiUrl(path) { return `${API_BASE}${path}`; }
@@ -97,43 +98,48 @@
 
                 const data = await response.json();
 
-                // Store token
-                localStorage.setItem(`cael_token_${data.chart_hash}`, data.access_token);
-                localStorage.setItem('cael_auth_token', data.access_token);
+                if (data.access_token) {
+                    localStorage.setItem(`cael_token_${data.chart_hash}`, data.access_token);
+                    localStorage.setItem("cael_auth_token", data.access_token);
+                }
+
+                const chartRequest = data.chart_request || data.request || null;
+                if (chartRequest && chartRequest.date && chartRequest.city) {
+                    localStorage.setItem("cael_last_request", JSON.stringify(chartRequest));
+                } else if (data.access_token) {
+                    try {
+                        const restoreResp = await fetch(apiUrl(`/api/v1/auth/restore_session?token=${encodeURIComponent(data.access_token)}`));
+                        if (restoreResp.ok) {
+                            const sessionData = await restoreResp.json();
+                            if (sessionData && sessionData.date && sessionData.city) {
+                                localStorage.setItem("cael_last_request", JSON.stringify({
+                                    date: sessionData.date,
+                                    time: sessionData.time || "12:00",
+                                    city: sessionData.city,
+                                    state: sessionData.state || ""
+                                }));
+                            }
+                        }
+                    } catch (err) {
+                        console.warn("Session restore failed", err);
+                    }
+                }
 
                 statusCard.innerHTML = `
                     <p style="color:var(--success); font-weight:600; margin-bottom:1rem;">Verified!</p>
                     <p>Redirecting to your full reading...</p>
                 `;
 
-                // Redirect back to index with token logic or let index handle it?
-                // For now, simpler: Go to a 'viewer' or just back to index and re-trigger?
-                // Index.html doesn't support reading from URL hash yet.
-                // WE MUST IMPLEMENT: re-fetching the reading with the token.
-
-                // Since this is a static site, we can redirect to index.html and store state in localStorage
-                // which we just did. Now we need index.html (basic.js) to know it should re-fetch.
-                // But we don't have the birth data here unless we passed it around or stored it.
-                // 'lastChartRequest' in basic.js is lost on page reload.
-
-                // HOWEVER, the chart_hash is key.
-                // We should probably redirect to a view that takes the chart_hash or token?
-                // The current architecture calculates on the fly.
-
-                // WORKAROUND:
-                // We ask the user to re-enter data? No, that's bad UX.
-                // The backend could return the Input Data in the verify step?
-                // But we didn't implement that in api.py verify_checkout_session.
-
-                // Let's just say "Please check your email" or "Return to home" for MVP if data is lost.
-                // Ideally, we stored the form data in localStorage before checkout?
-
+                const tokenParam = data.access_token ? `&token=${encodeURIComponent(data.access_token)}` : "";
                 setTimeout(() => {
-                    window.location.href = "index.html?action=regenerate";
+                    window.location.href = `index.html?action=regenerate${tokenParam}`;
                 }, 2000);
 
             } catch (err) {
-                statusCard.innerHTML = `<p style='color:var(--danger)'>Verification failed: ${err.message}</p>`;
+                statusCard.innerHTML = `
+                    <p style='color:var(--danger); margin-bottom:1rem;'>Verification failed: ${err.message}</p>
+                    <a href="index.html" class="help-btn" style="text-decoration:none; display:inline-block;">Return to Home</a>
+                `;
             }
         }
 

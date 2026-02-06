@@ -5,6 +5,11 @@ const SIGNS = [
     "Sagittarius", "Capricorn", "Aquarius", "Pisces"
 ];
 
+const DEFAULT_RENDER_URL = "https://astrology-engine.onrender.com";
+if (!window.CAEL_API_BASE && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+    window.CAEL_API_BASE = DEFAULT_RENDER_URL;
+}
+
 const API_BASE = window.CAEL_API_BASE || "";
 function apiUrl(path) { return `${API_BASE}${path}`; }
 
@@ -2949,4 +2954,3 @@ try {
         // We'll just set the value for now.
     }
 } catch (e) { console.warn('Failed to autoload data', e); }
-
