@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body
 from typing import Dict, Any
+from sqlalchemy.orm import Session
 from src.api.v1.schemas import LoginRequest, RegisterRequest, ForgotPasswordRequest, ResetPasswordRequest
 from src.engine.user_auth import get_user_manager
 from src.api.v1.auth import create_access_token, get_current_user
 from src.database.models import User
+from src.database.session import get_db
 
 router = APIRouter()
 user_manager = get_user_manager()
