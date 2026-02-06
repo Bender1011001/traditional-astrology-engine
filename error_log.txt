@@ -1,6 +1,27 @@
 Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "E:\code.projects\astrology\src\scripts\omnibus.py", line 11, in <module>
-    from src.database.db_manager import init_db, SessionLocal
-ImportError: cannot import name 'init_db' from 'src.database.db_manager' (E:\code.projects\astrology\src\database\db_manager.py)
+  File "E:\code.projects\astrology\src\scripts\generate_premium_report.py", line 27, in <module>
+    from src.engine.forensic_engine import Auditor
+  File "E:\code.projects\astrology\src\engine\forensic_engine.py", line 29, in <module>
+    from src.database.db_manager import DelineationLibrary
+  File "E:\code.projects\astrology\src\database\db_manager.py", line 9, in <module>
+    from src.database.core import SessionLocal
+  File "E:\code.projects\astrology\src\database\core.py", line 6, in <module>
+    from src.core.config import settings
+  File "E:\code.projects\astrology\src\core\config.py", line 22, in <module>
+    settings = Settings()
+  File "C:\ProgramData\anaconda3\Lib\site-packages\pydantic_settings\main.py", line 194, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        **__pydantic_self__._settings_build_values(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<27 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\admin\AppData\Roaming\Python\Python313\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Settings
+ADMIN_SECRET_KEY
+  Field required [type=missing, input_value={'STRIPE_SECRET_KEY': 'sk...: 'fafs qurl ezrq hmnd'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing

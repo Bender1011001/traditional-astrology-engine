@@ -58,7 +58,7 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
     try:
         base_url = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1/chat/completions")
         # Default to Gemini 3 Pro for best reasoning with large context
-        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3-pro-preview")
+        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3-flash-preview")
         timeout = float(os.getenv("OPENROUTER_TIMEOUT", "120")) # Increased timeout for large context
 
         headers = {

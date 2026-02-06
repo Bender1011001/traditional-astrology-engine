@@ -1,8 +1,10 @@
 import sys
 import os
 
-# Ensure src is in path
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Ensure project root is in path
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
