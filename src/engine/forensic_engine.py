@@ -335,7 +335,8 @@ class Auditor:
             
             # Simple wrapper to match expected logic
             return SolarReturnEngine.analyze_solar_return_from_jd(chart, sr_jd, age, birth_dt)
-        except:
+        except Exception as e:
+            logger.error(f"Solar Return calculation failed: {e}")
             return {"error": "Solar Return calculation failed"}
 
     @staticmethod

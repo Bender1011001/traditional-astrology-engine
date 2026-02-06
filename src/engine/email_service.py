@@ -28,9 +28,8 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
             html_content = html_content.replace("</body>", footer + "</body>")
         else:
             html_content += footer
-
     
-    # 1. Try SendGrid
+    # 2. Try SendGrid
     sendgrid_key = os.getenv("SENDGRID_API_KEY")
     sender_email = os.getenv("SENDER_EMAIL", "noreply@codexcaelestis.com")
     
