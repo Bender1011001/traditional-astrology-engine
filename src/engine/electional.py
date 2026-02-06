@@ -155,15 +155,17 @@ class ElectionalEngine:
             score += r_score * 3 # Heavily weighted
             details.append(f"Ascendant Ruler ({asc_ruler_name.value}) in {asc_sign.value} has Essential Dignity of {r_score} (x3)")
             
-            # Ruler Solar Status
-            ruler_solar = calculate_solar_status(asc_ruler, sun)
-            if ruler_solar == "COMBUST":
-                score -= 35
-                details.append(f"Ascendant Ruler is Combust - Critical Weakness")
-                is_viable = False
-            elif ruler_solar == "CAZIMI":
-                score += 30
-                details.append(f"Ascendant Ruler is CAZIMI (In the Heart of Sun) - Supreme Power")
+            # Ruler Solar Status (ONLY if ruler is not the Sun itself)
+            if asc_ruler.name != PlanetName.SUN:
+                ruler_solar = calculate_solar_status(asc_ruler, sun)
+                if ruler_solar == "COMBUST":
+                    score -= 35
+                    details.append(f"Ascendant Ruler is Combust - Critical Weakness")
+                    is_viable = False
+                elif ruler_solar == "CAZIMI":
+                    score += 30
+                    details.append(f"Ascendant Ruler is CAZIMI (In the Heart of Sun) - Supreme Power")
+
 
         # 3. House Placements (Whole Sign)
         for p in chart.planets:
