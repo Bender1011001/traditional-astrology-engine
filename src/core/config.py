@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     SENDGRID_API_KEY: Optional[str] = None
     SITE_BASE_URL: str = "https://traditional-astrology.com"
     CORS_ORIGINS: str = "http://localhost:3000,https://traditional-astrology.com"
+    OWNER_EMAILS: str = ""
+    OWNER_BOOTSTRAP_KEY: str = ""
 
     class Config:
         env_file = ".env"

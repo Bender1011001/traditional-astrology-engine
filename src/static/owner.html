@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RCNDWN4XVN');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard | Codex Caelestis</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#f4efe6">
+    <link rel="stylesheet" href="style.css?v=20260129polish">
+    <style>
+        .owner-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            min-height: 70vh;
+        }
+
+        .owner-header {
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .owner-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .owner-header p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0.4rem 0 0;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filters input,
+        .filters select {
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            border: 1px solid var(--border-color);
+            padding: 0.9rem 1rem;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .summary-card h3 {
+            margin: 0;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .summary-card p {
+            margin: 0.4rem 0 0;
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .owner-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .owner-table th,
+        .owner-table td {
+            padding: 0.8rem 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .owner-table th {
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            font-size: 0.7rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-family: 'Space Mono', monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .badge.active {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .badge.past_due {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .badge.trial {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .badge.none {
+            border-color: var(--text-muted);
+            color: var(--text-muted);
+        }
+
+        .inline-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .inline-field select,
+        .inline-field input {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.7rem;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 0.4rem 0.7rem;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-family: 'Space Mono', monospace;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .action-btn.danger {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .notice {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            background: rgba(212, 175, 55, 0.08);
+            color: var(--text);
+            font-size: 0.75rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .utility-row {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .muted-text {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            background: rgba(0, 0, 0, 0.55);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            max-width: 440px;
+            width: 90%;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .modal-card h2 {
+            margin-top: 0;
+            color: var(--danger);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .modal-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .modal-card input {
+            width: 100%;
+            margin-top: 0.8rem;
+            padding: 0.6rem;
+            font-family: 'Space Mono', monospace;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+        <div class="stars-overlay"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <nav class="header-actions">
+                <a class="help-btn" href="index.html">Home</a>
+                <a class="help-btn" href="profile.html">My Dashboard</a>
+                <a class="help-btn" href="pricing.html">Pricing</a>
+            </nav>
+        </header>
+
+        <section class="owner-container">
+            <div class="owner-header">
+                <div>
+                    <h1>Owner Control Deck</h1>
+                    <p id="ownerIdentity">Authenticating...</p>
+                </div>
+                <div class="action-row">
+                    <button class="action-btn" onclick="refreshUsers()">Refresh</button>
+                    <button class="action-btn danger" onclick="logout()">Log Out</button>
+                </div>
+            </div>
+
+            <div class="notice">
+                All subscription changes are applied instantly. Downgrades and cancellations require a second
+                confirmation to prevent accidental removal of paid access.
+            </div>
+
+            <div class="summary-grid" id="summaryGrid">
+                <div class="summary-card">
+                    <h3>Total Accounts</h3>
+                    <p id="summaryTotal">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Active</h3>
+                    <p id="summaryActive">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Trial</h3>
+                    <p id="summaryTrial">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Past Due</h3>
+                    <p id="summaryPastDue">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Free</h3>
+                    <p id="summaryFree">—</p>
+                </div>
+            </div>
+
+            <div class="filters">
+                <input type="search" id="searchInput" placeholder="Search by email">
+                <select id="planFilter"></select>
+                <select id="statusFilter">
+                    <option value="">All statuses</option>
+                    <option value="active">Active</option>
+                    <option value="trial">Trial</option>
+                    <option value="past_due">Past due</option>
+                    <option value="canceled">Canceled</option>
+                </select>
+                <select id="paymentFilter">
+                    <option value="">All payment states</option>
+                    <option value="paid">Paid</option>
+                    <option value="open">Open</option>
+                    <option value="uncollectible">Uncollectible</option>
+                    <option value="void">Void</option>
+                    <option value="none">No invoice</option>
+                </select>
+            </div>
+
+            <div class="utility-row">
+                <button class="action-btn" onclick="exportCsv()">Export CSV</button>
+                <span class="muted-text" id="resultCount">0 results</span>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="owner-table">
+                    <thead>
+                        <tr>
+                            <th>Account</th>
+                            <th>Subscription</th>
+                            <th>Payment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ownerTableBody">
+                        <tr>
+                            <td colspan="4">Loading accounts...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal" id="confirmModal">
+        <div class="modal-card">
+            <h2>Confirm Downgrade</h2>
+            <p id="confirmMessage"></p>
+            <p>Type <strong>CONFIRM</strong> to proceed.</p>
+            <input type="text" id="confirmInput" placeholder="CONFIRM">
+            <div class="modal-actions">
+                <button class="action-btn" onclick="closeModal()">Cancel</button>
+                <button class="action-btn danger" id="confirmActionBtn" disabled>Confirm Change</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        const API_BASE = window.CAEL_API_BASE || "";
+        function apiUrl(path) { return `${API_BASE}${path}`; }
+
+        let plans = [];
+        let pendingDowngrade = null;
+        let lastUsers = [];
+
+        async function verifyOwner() {
+            const token = localStorage.getItem('cael_auth_token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return null;
+            }
+
+            const resp = await fetch(apiUrl('/api/v1/owner/verify'), {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!resp.ok) {
+                localStorage.removeItem('cael_auth_token');
+                window.location.href = 'login.html';
+                return null;
+            }
+            const data = await resp.json();
+            document.getElementById('ownerIdentity').textContent = `Signed in as ${data.email || 'Owner'}`;
+            return token;
+        }
+
+        async function loadPlans(token) {
+            const resp = await fetch(apiUrl('/api/v1/owner/plans'), {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await resp.json();
+            plans = data.plans || [];
+            const planFilter = document.getElementById('planFilter');
+            planFilter.innerHTML = '<option value="">All plans</option>' + plans.map(plan => `
+                <option value="${plan.tier}">${plan.tier.toUpperCase()}</option>
+            `).join('');
+        }
+
+        function formatDate(value) {
+            return value ? new Date(value).toLocaleDateString() : '—';
+        }
+
+        function statusBadge(status) {
+            const normalized = status || 'none';
+            return `<span class="badge ${normalized}">${normalized.replace('_', ' ')}</span>`;
+        }
+
+        async function loadUsers(token) {
+            const q = document.getElementById('searchInput').value.trim();
+            const planFilter = document.getElementById('planFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const paymentFilter = document.getElementById('paymentFilter').value;
+            const params = new URLSearchParams();
+            if (q) params.append('q', q);
+            if (planFilter) params.append('plan', planFilter);
+            if (statusFilter) params.append('status_filter', statusFilter);
+            if (paymentFilter) params.append('payment_status_filter', paymentFilter);
+
+            const resp = await fetch(apiUrl(`/api/v1/owner/users?${params.toString()}`), {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await resp.json();
+            lastUsers = data.users || [];
+            renderUsers(lastUsers);
+        }
+
+        function renderUsers(users) {
+            const body = document.getElementById('ownerTableBody');
+            document.getElementById('resultCount').textContent = `${users.length} results`;
+            if (!users.length) {
+                body.innerHTML = '<tr><td colspan="4">No accounts match your filters.</td></tr>';
+                updateSummary([]);
+                return;
+            }
+
+            updateSummary(users);
+            body.innerHTML = users.map(user => {
+                const currentPlan = user.subscription.plan_tier || 'free';
+                const status = user.subscription.status || 'none';
+                const paymentStatus = user.payment.status || 'none';
+                const cancelFlag = user.subscription.cancel_at_period_end ? 'Yes' : 'No';
+                const planOptions = plans.map(plan => `
+                    <option value="${plan.tier}" ${plan.tier === currentPlan ? 'selected' : ''}>${plan.tier.toUpperCase()}</option>
+                `).join('');
+
+                return `
+                    <tr>
+                        <td>
+                            <div><strong>${user.email}</strong></div>
+                            <div style="color: var(--text-muted); margin-top: 0.3rem;">
+                                Joined ${formatDate(user.created_at)}<br>
+                                Last login ${formatDate(user.last_login)}<br>
+                                Email verified: ${user.email_verified ? 'Yes' : 'No'}<br>
+                                Charts saved: ${user.charts_saved_count} · API keys: ${user.api_keys_count}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="inline-field">
+                                <div>${statusBadge(status)} · ${statusBadge(currentPlan)}</div>
+                                <div>Renews: ${formatDate(user.subscription.current_period_end)}</div>
+                                <div>Cancel at period end: ${cancelFlag}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="inline-field">
+                                <div>${statusBadge(paymentStatus)}</div>
+                                <div>Last invoice: ${formatDate(user.payment.invoice_date)}</div>
+                                <div>Paid: ${user.payment.amount_paid !== null ? '$' + user.payment.amount_paid.toFixed(2) : '—'}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="inline-field">
+                                <label>Plan</label>
+                                <select data-user="${user.id}" class="plan-select">
+                                    ${planOptions}
+                                </select>
+                            </div>
+                            <div class="inline-field" style="margin-top: 0.6rem;">
+                                <label>Status</label>
+                                <select data-user="${user.id}" class="status-select">
+                                    <option value="active" ${status === 'active' ? 'selected' : ''}>Active</option>
+                                    <option value="trial" ${status === 'trial' ? 'selected' : ''}>Trial</option>
+                                    <option value="past_due" ${status === 'past_due' ? 'selected' : ''}>Past Due</option>
+                                    <option value="canceled" ${status === 'canceled' ? 'selected' : ''}>Canceled</option>
+                                </select>
+                            </div>
+                            <div class="inline-field" style="margin-top: 0.6rem;">
+                                <label>Cancel at period end</label>
+                                <select data-user="${user.id}" class="cancel-select">
+                                    <option value="false" ${!user.subscription.cancel_at_period_end ? 'selected' : ''}>No</option>
+                                    <option value="true" ${user.subscription.cancel_at_period_end ? 'selected' : ''}>Yes</option>
+                                </select>
+                            </div>
+                            <div class="inline-field" style="margin-top: 0.6rem;">
+                                <label>Set period end (optional)</label>
+                                <input type="datetime-local" data-user="${user.id}" class="period-input">
+                            </div>
+                            <div class="action-row" style="margin-top: 0.8rem;">
+                                <button class="action-btn" onclick="submitUpdate('${user.id}', '${currentPlan}', '${status}')">Apply</button>
+                                <button class="action-btn" onclick="copyText('${user.id}')">Copy ID</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateSummary(users) {
+            const total = users.length;
+            const active = users.filter(user => user.subscription.status === 'active').length;
+            const trial = users.filter(user => user.subscription.status === 'trial').length;
+            const pastDue = users.filter(user => user.subscription.status === 'past_due').length;
+            const free = users.filter(user => user.subscription.plan_tier === 'free').length;
+            document.getElementById('summaryTotal').textContent = total;
+            document.getElementById('summaryActive').textContent = active;
+            document.getElementById('summaryTrial').textContent = trial;
+            document.getElementById('summaryPastDue').textContent = pastDue;
+            document.getElementById('summaryFree').textContent = free;
+        }
+
+        function openModal(message, onConfirm) {
+            pendingDowngrade = onConfirm;
+            const modal = document.getElementById('confirmModal');
+            const input = document.getElementById('confirmInput');
+            const messageEl = document.getElementById('confirmMessage');
+            const confirmBtn = document.getElementById('confirmActionBtn');
+            messageEl.textContent = message;
+            input.value = '';
+            confirmBtn.disabled = true;
+            modal.classList.add('active');
+            input.focus();
+            input.oninput = () => {
+                confirmBtn.disabled = input.value.trim().toUpperCase() !== 'CONFIRM';
+            };
+            confirmBtn.onclick = () => {
+                if (pendingDowngrade) pendingDowngrade();
+                closeModal();
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+            pendingDowngrade = null;
+        }
+
+        async function submitUpdate(userId, previousPlan, previousStatus) {
+            const token = localStorage.getItem('cael_auth_token');
+            const planSelect = document.querySelector(`.plan-select[data-user="${userId}"]`);
+            const statusSelect = document.querySelector(`.status-select[data-user="${userId}"]`);
+            const cancelSelect = document.querySelector(`.cancel-select[data-user="${userId}"]`);
+            const periodInput = document.querySelector(`.period-input[data-user="${userId}"]`);
+
+            const planTier = planSelect.value;
+            const status = statusSelect.value;
+            const cancelAtPeriodEnd = cancelSelect.value === 'true';
+            const periodValue = periodInput && periodInput.value ? new Date(periodInput.value).toISOString() : null;
+
+            const downgrading = previousPlan !== 'free' && (planTier === 'free' || status === 'canceled');
+            const proceed = async (confirmDowngrade) => {
+                const resp = await fetch(apiUrl('/api/v1/owner/subscription/update'), {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        plan_tier: planTier,
+                        status,
+                        cancel_at_period_end: cancelAtPeriodEnd,
+                        confirm_downgrade: confirmDowngrade,
+                        current_period_end: periodValue
+                    })
+                });
+
+                const data = await resp.json();
+                if (!resp.ok) {
+                    alert(data.detail || 'Update failed.');
+                    return;
+                }
+                await refreshUsers();
+            };
+
+            if (downgrading) {
+                openModal(
+                    `You are removing paid access for ${userId}. This will immediately cancel the subscription.`,
+                    () => proceed(true)
+                );
+                return;
+            }
+
+            await proceed(false);
+        }
+
+        function copyText(value) {
+            navigator.clipboard.writeText(value);
+        }
+
+        function exportCsv() {
+            if (!lastUsers.length) {
+                alert('No records to export.');
+                return;
+            }
+            const headers = [
+                'email',
+                'user_id',
+                'plan_tier',
+                'status',
+                'payment_status',
+                'current_period_end',
+                'cancel_at_period_end',
+                'charts_saved_count',
+                'api_keys_count',
+                'joined_at',
+                'last_login'
+            ];
+            const rows = lastUsers.map(user => [
+                user.email,
+                user.id,
+                user.subscription.plan_tier,
+                user.subscription.status,
+                user.payment.status,
+                user.subscription.current_period_end || '',
+                user.subscription.cancel_at_period_end ? 'true' : 'false',
+                user.charts_saved_count,
+                user.api_keys_count,
+                user.created_at || '',
+                user.last_login || ''
+            ]);
+            const csv = [headers, ...rows].map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'owner-users.csv';
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(url);
+            link.remove();
+        }
+
+        async function refreshUsers() {
+            const token = localStorage.getItem('cael_auth_token');
+            if (token) await loadUsers(token);
+        }
+
+        function logout() {
+            localStorage.removeItem('cael_auth_token');
+            localStorage.removeItem('cael_user');
+            window.location.href = 'index.html';
+        }
+
+        async function init() {
+            const token = await verifyOwner();
+            if (!token) return;
+            await loadPlans(token);
+            await loadUsers(token);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', () => refreshUsers());
+        document.getElementById('planFilter').addEventListener('change', () => refreshUsers());
+        document.getElementById('statusFilter').addEventListener('change', () => refreshUsers());
+        document.getElementById('paymentFilter').addEventListener('change', () => refreshUsers());
+
+        init();
+    </script>
+</body>
+
+</html>
