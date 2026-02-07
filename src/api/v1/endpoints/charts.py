@@ -40,8 +40,15 @@ async def generate_chart_b2b(
     db: Session = Depends(get_db)
 ):
     """
-    B2B API Endpoint: Generate Chart
-    Requires X-API-Key header.
+    B2B API Endpoint: Generate a high-throughput natal chart.
+    
+    Requires 'X-API-Key' header.
+    
+    Quotas:
+    - Apprentice: 5 reports/mo
+    - Practitioner: 25 reports/mo
+    - Master: 100 reports/mo
+    - Agency: Unlimited
     """
     if not auth_context:
         raise HTTPException(status_code=401, detail="Missing or invalid API Key")

@@ -22,7 +22,7 @@ def seed_plans():
         plans = [
             SubscriptionPlan(
                 tier="free",
-                chart_quota=10,
+                chart_quota=1, # First report free incentive
                 api_quota=0,
                 price_monthly=0.00,
                 price_annual=0.00,
@@ -32,53 +32,53 @@ def seed_plans():
             ),
             SubscriptionPlan(
                 tier="onetime",
-                chart_quota=0, # Not used for onetime as subscription
+                chart_quota=1, 
                 api_quota=0,
-                price_monthly=9.99,
+                price_monthly=197.00,
                 price_annual=0.00,
-                stripe_price_id_monthly="price_PLACEHOLDER_ONETIME",
+                stripe_price_id_monthly="price_1SxueOC8BJritqvrAt2YvNcn", # $197 B2C
                 stripe_price_id_annual=None,
                 features={"audit": True, "forecasting": True, "details": True, "timeline": True}
             ),
             SubscriptionPlan(
-                tier="starter",
-                chart_quota=50,
-                api_quota=0,
-                price_monthly=29.00,
-                price_annual=290.00,
-                stripe_price_id_monthly="price_1Sw58CC8BJritqvrOIMIuAXJ",
-                stripe_price_id_annual="price_1Sw58lC8BJritqvrJyFBgy98",
-                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": True}
+                tier="apprentice",
+                chart_quota=5,
+                api_quota=100, # Basic API access
+                price_monthly=147.00,
+                price_annual=1470.00,
+                stripe_price_id_monthly="price_1SxueOC8BJritqvrHz4dGn6k", # $147 Apprentice
+                stripe_price_id_annual=None, # TBD
+                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": False, "api_access": True}
             ),
             SubscriptionPlan(
                 tier="practitioner",
-                chart_quota=None, # Unlimited
-                api_quota=0,
-                price_monthly=149.00,
-                price_annual=1490.00,
-                stripe_price_id_monthly="price_1Sw58LC8BJritqvroIwC3kEM",
-                stripe_price_id_annual="price_1Sw58mC8BJritqvrWsCXUtqc",
-                features={"audit": True, "forecasting": True, "commercial": True, "bulk_upload": True, "templates": True}
+                chart_quota=25,
+                api_quota=500,
+                price_monthly=397.00,
+                price_annual=3970.00,
+                stripe_price_id_monthly="price_1SxuePC8BJritqvrMv1gjTkP", # $397 Practitioner
+                stripe_price_id_annual=None,
+                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": True, "api_access": True}
             ),
             SubscriptionPlan(
                 tier="master",
-                chart_quota=None,
-                api_quota=3000, # 100/day
-                price_monthly=299.00,
-                price_annual=2990.00,
-                stripe_price_id_monthly="price_1Sw58UC8BJritqvr8oNM3sLX",
-                stripe_price_id_annual="price_1Sw58mC8BJritqvru65F49Nd",
-                features={"api_access": True, "white_label": True, "webhooks": True}
+                chart_quota=100,
+                api_quota=2000,
+                price_monthly=797.00,
+                price_annual=7970.00,
+                stripe_price_id_monthly="price_1SxuePC8BJritqvr760gXP4R", # $797 Master
+                stripe_price_id_annual=None,
+                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": True, "api_access": True, "slack_support": True}
             ),
             SubscriptionPlan(
                 tier="agency",
-                chart_quota=None,
-                api_quota=30000, # 1000/day
-                price_monthly=799.00,
-                price_annual=7990.00,
-                stripe_price_id_monthly="price_1Sw58cC8BJritqvrZKoQOCzR",
-                stripe_price_id_annual="price_1Sw58mC8BJritqvrPqfyFdnJ",
-                features={"api_access": True, "white_label": True, "sla": True, "dedicated_support": True}
+                chart_quota=None, # Unlimited
+                api_quota=50000,
+                price_monthly=1297.00, # Example high tier
+                price_annual=12970.00,
+                stripe_price_id_monthly="price_1SxuelC8BJritqvr3LxqqItk", # $1297 Agency
+                stripe_price_id_annual=None,
+                features={"api_access": True, "white_label": True, "dedicated_support": True}
             )
         ]
         

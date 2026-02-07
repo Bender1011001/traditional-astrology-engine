@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer & Agent API | Traditional Astrology</title>
+    <link rel="stylesheet" href="style.css?v=20260218classical">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .code-block {
+            background: #1a1a1a;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            border: 1px solid #333;
+            margin: 1.5rem 0;
+        }
+
+        .json-key {
+            color: #9cdcfe;
+        }
+
+        .json-string {
+            color: #ce9178;
+        }
+
+        .json-num {
+            color: #b5cea8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="stars-overlay"></div>
+    </div>
+
+    <main class="container">
+        <header class="page-hero">
+            <h1>DEVELOPER / AGENT API</h1>
+            <div class="ornament"></div>
+            <p class="subtitle">Machine-readable natal intelligence for autonomous agents.</p>
+            <nav class="header-actions">
+                <a class="help-btn" href="index.html">Home</a>
+                <a class="help-btn" href="pricing.html">Pricing</a>
+            </nav>
+        </header>
+
+        <section class="basic-view">
+            <h2 class="section-title">THE DIGITAL SOUL PACKET</h2>
+            <p>The <b>Full Forensic Audit ($197)</b> includes a machine-readable <code>native.json</code> payload. This
+                file contains the raw parsed data from the Codex Caelestis engine, allowing you to integrate your chart
+                data into 3rd party AI agents like ChatGPT, Claude, or custom LLM workflows.</p>
+
+            <h3>Data Structure (native.json)</h3>
+            <div class="code-block">
+                {
+                <span class="json-key">"meta"</span>: {
+                <span class="json-key">"subject_name"</span>: <span class="json-string">"Native"</span>,
+                <span class="json-key">"age"</span>: <span class="json-num">29</span>,
+                <span class="json-key">"sect"</span>: <span class="json-string">"Day"</span>
+                },
+                <span class="json-key">"analysis"</span>: {
+                <span class="json-key">"almuten"</span>: {
+                <span class="json-key">"winner"</span>: <span class="json-string">"Jupiter"</span>,
+                <span class="json-key">"score"</span>: <span class="json-num">34</span>
+                },
+                <span class="json-key">"temperament"</span>: {
+                <span class="json-key">"primary"</span>: <span class="json-string">"Sanguine"</span>
+                }
+                },
+                <span class="json-key">"rule_ledger"</span>: [
+                {
+                <span class="json-key">"id"</span>: <span class="json-string">"jup-dignity"</span>,
+                <span class="json-key">"judgment"</span>: <span class="json-string">"Exalted in Cancer"</span>,
+                <span class="json-key">"sources"</span>: [<span class="json-string">"Ptolemy"</span>, <span
+                    class="json-string">"Lilly"</span>]
+                }
+                ]
+                }
+            </div>
+
+            <h3>Agent Integration License</h3>
+            <p>Purchase of the Full Forensic Audit grants you a perpetual, non-exclusive license to use the generated
+                JSON data in personal or commercial AI agents. You may upload this file to any LLM with a retrieval
+                context window to ask detailed questions about your chart condition and timing.</p>
+        </section>
+
+        <footer
+            style="margin-top: 4rem; text-align: center; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 2rem;">
+            <p>&copy; 2026 Codex Caelestis. Agent Portals Enabled.</p>
+        </footer>
+    </main>
+</body>
+
+</html>

@@ -8,10 +8,25 @@ import { setupPricing, initiateCheckout } from './pricing.js';
 // Expose globally for HTML onclicks
 window.initiateCheckout = (tier) => initiateCheckout(tier, getLastChartRequest());
 window.startCheckout = (tier) => {
-    // Adapter for paywall modal which uses startCheckout(tier)
-    // and might not have access to 'basic' reading data easily if we don't store it.
-    // We'll use the same helper.
     initiateCheckout(tier, getLastChartRequest());
+};
+window.switchPricing = (tier) => {
+    const b2c = document.getElementById('pricingB2C');
+    const b2b = document.getElementById('pricingB2B');
+    const btnC = document.getElementById('toggleB2C');
+    const btnB = document.getElementById('toggleB2B');
+
+    if (tier === 'b2c') {
+        b2c?.classList.remove('hidden');
+        b2b?.classList.add('hidden');
+        btnC?.classList.add('active');
+        btnB?.classList.remove('active');
+    } else {
+        b2c?.classList.add('hidden');
+        b2b?.classList.remove('hidden');
+        btnC?.classList.remove('active');
+        btnB?.classList.add('active');
+    }
 };
 
 // Expose logout globally
@@ -47,7 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupSamplesAndAccordions(); // Logic for accordions in index.html
     setupPricing();
+    setupPricingToggle();
 });
+
+function setupPricingToggle() {
+    // This is now handled by switchPricing() via onclick for robustness,
+    // but we can keep this for delegating data-target if we use it elsewhere.
+    const toggleBtns = document.querySelectorAll('[data-pricing-toggle]');
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-target');
+            window.switchPricing(target);
+        });
+    });
+}
 
 function getLastChartRequest() {
     // Helper to get fresh value of lastChartRequest

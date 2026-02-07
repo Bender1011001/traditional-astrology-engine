@@ -2009,8 +2009,39 @@ button:hover {
     border-top: 1px solid var(--glass-border);
 }
 
-.horary-section.hidden {
-    display: none;
+.hidden {
+    display: none !important;
+}
+
+.pricing-toggle-main {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3rem auto;
+    max-width: 500px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.toggle-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(192, 122, 43, 0.12);
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .section-divider {

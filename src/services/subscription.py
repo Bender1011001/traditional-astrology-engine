@@ -57,6 +57,14 @@ class SubscriptionService:
         if not price_id:
              raise ValueError("Plan not configured for this billing period")
 
+        # Dynamically check price type to avoid mode mismatch (Subscription vs Payment)
+        try:
+            stripe_price = stripe.Price.retrieve(price_id)
+            is_recurring = stripe_price.recurring is not None
+        except Exception as e:
+            # Fallback to tier name if Stripe retrieve fails
+            is_recurring = plan.tier not in ['onetime', 'CALIBRATION', 'FULL']
+
         metadata = {
             "user_id": user.id,
             "plan_tier": plan.tier,
@@ -75,7 +83,8 @@ class SubscriptionService:
             }
             metadata["chart_data"] = json.dumps(minimal_data)
 
-        mode = 'payment' if plan.tier == 'onetime' else 'subscription'
+        # Mode MUST match the price type
+        mode = 'subscription' if is_recurring else 'payment'
         
         session_kwargs = {
             'payment_method_types': ['card'],
@@ -84,6 +93,7 @@ class SubscriptionService:
                 'quantity': 1,
             }],
             'mode': mode,
+            'allow_promotion_codes': True,
             'success_url': success_url + "?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url': cancel_url,
             'customer_email': user.email,

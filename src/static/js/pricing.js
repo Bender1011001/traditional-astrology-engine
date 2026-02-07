@@ -70,10 +70,27 @@ export async function initiateCheckout(tier, chartRequest = null) {
     const isAnnual = billingToggle ? billingToggle.checked : false;
 
     // Use passed chartRequest or try fallback logic if needed. 
-    // The backend schemas say chart_request is optional but logical for 'onetime'.
-    // For subscriptions, chart_request isn't strictly needed for the sub itself but maybe for context?
-    // We'll use a dummy if null, or rely on backend handling optional.
-    const requestPayload = chartRequest || {
+    let requestPayload = chartRequest;
+
+    // For B2C (onetime), force validation of captured data
+    if (tier === 'onetime' && !requestPayload) {
+        if (window.dataCapturer) {
+            requestPayload = window.dataCapturer.getBirthData();
+        }
+
+        if (!requestPayload || !requestPayload.lat) {
+            alert("REQUIRED: Please enter your birth data and calculate the 'Preliminary Judgment' first. We need this data to generate your Premium Dossier.");
+            if (pricingModal) pricingModal.classList.add("hidden");
+            document.getElementById('calculate')?.scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+
+        const confirmed = confirm(`VALIDATION: Proceed with this data?\n\nDate: ${requestPayload.date}\nTime: ${requestPayload.time}\nCity: ${requestPayload.city}\n\nFinalizing payment will secure your 100+ page Forensic Audit.`);
+        if (!confirmed) return;
+    }
+
+    // Default fallback if still null (B2B might not need immediate chart data)
+    requestPayload = requestPayload || {
         date: "2000-01-01", time: "12:00", city: "Rome", state: "Italy"
     };
 

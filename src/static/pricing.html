@@ -8,30 +8,20 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-RCNDWN4XVN');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing & Access | Traditional Astrology</title>
-    <meta name="description"
-        content="Pricing structure for Codex Caelestis: preliminary judgment, single dossier, and practitioner access tiers.">
-    <meta name="robots" content="index,follow">
-    <meta name="theme-color" content="#f6f0e6">
-    <link rel="canonical" href="https://traditional-astrology.com/pricing.html">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260218classical">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&family=Space+Mono&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
     <div class="background-globes">
         <div class="globe globe-1"></div>
-        <div class="globe globe-2"></div>
         <div class="stars-overlay"></div>
     </div>
 
@@ -39,114 +29,106 @@
         <header class="page-hero">
             <h1>PRICING & ACCESS</h1>
             <div class="ornament"></div>
-            <p class="subtitle">Designed to protect the craft, reward commitment, and keep the work auditable.</p>
-            <nav class="header-actions" aria-label="Primary">
+            <p class="subtitle">Auditable judgments for skeptics and practitioners.</p>
+            <nav class="header-actions">
                 <a class="help-btn" href="index.html">Home</a>
-                <a class="help-btn" href="services.html">Services</a>
-                <a class="help-btn" href="pricing.html" aria-current="page">Pricing</a>
-                <a class="help-btn" href="booking.html">Booking</a>
                 <a class="help-btn" href="methodology.html">Methodology</a>
-                <a class="help-btn" href="about.html">About</a>
-                <a class="help-btn" href="resources.html">Resources</a>
-                <a class="help-btn" href="faq.html">FAQ</a>
-                <a class="help-btn" href="login.html">Log in</a>
+                <a class="help-btn" href="developers.html">Agent API</a>
             </nav>
         </header>
 
         <section class="basic-view">
-            <h2 class="section-title">ACCESS TIERS</h2>
-            <p class="section-subtitle">We offer a free preliminary judgment to confirm fit, then charge for deeper
-                calculations and archival access.</p>
-            <div class="offer-grid">
-                <div class="panel-card">
-                    <span class="pill-label">Preliminary</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$0</div>
-                        <ul>
-                            <li>Temperament judgment</li>
-                            <li>Chart ruler + key significators</li>
-                            <li>Explicit limitations</li>
+            <h2 class="section-title">THE AUDIT TIERS</h2>
+            <p class="section-subtitle">We offer a two-tier forensic auditing process to confirm accuracy and deliver
+                deep natal intelligence.</p>
+
+            <div class="offer-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- Tier 1: Calibration -->
+                <div class="panel-card" style="border-top: 4px solid #c07a2b; display: flex; flex-direction: column;">
+                    <!-- Tier 1: Calibration Audit -->
+                    <div class="pricing-card">
+                        <div class="tier-label">Essential Validation</div>
+                        <h3>Calibration Audit</h3>
+                        <div class="price">$27<span>/report</span></div>
+                        <p class="description">Proof of Accuracy (Past & Personality). A condensed structural inspection
+                            to validate the engine's precision.</p>
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> PDF Report Only</li>
+                            <li><i class="fas fa-check"></i> Sect & Almuten Figuris</li>
+                            <li><i class="fas fa-check"></i> Humoral Temperament</li>
+                            <li><i class="fas fa-check"></i> Past Retrodiction (Ages 12, 18, 24)</li>
+                            <li><i class="fas fa-check"></i> Annual Profection (Current)</li>
+                            <li class="locked"><i class="fas fa-lock"></i> No Mitigation Logic</li>
+                            <li class="locked"><i class="fas fa-lock"></i> No Future Forecasts</li>
                         </ul>
+                        <button class="btn btn-primary" onclick="startCheckout('CALIBRATION')">Get Calibration</button>
                     </div>
                 </div>
-                <div class="panel-card">
-                    <span class="pill-label">Single Dossier</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$49</div>
-                        <ul>
-                            <li>Full natal dossier</li>
-                            <li>Timing + lots analysis</li>
-                            <li>One chart only</li>
+
+                <!-- Tier 2: Full Forensic -->
+                <div class="panel-card"
+                    style="border-top: 4px solid #8e44ad; background: rgba(142, 68, 173, 0.03); display: flex; flex-direction: column;">
+                    <!-- Tier 2: Full Forensic Audit -->
+                    <div class="pricing-card featured">
+                        <div class="tier-label">Recommended</div>
+                        <h3>Full Forensic Audit + AI Source Code</h3>
+                        <div class="price">$197<span>/report</span></div>
+                        <p class="description">The complete Digital Soul packet. Full forensic analysis including all
+                            mitigations, forecasts, and raw data for AI Agent integration.</p>
+                        <ul class="features">
+                            <li><i class="fas fa-check"></i> <strong>Digital Soul Packet (PDF + JSON + MD)</strong></li>
+                            <li><i class="fas fa-check"></i> Includes Raw Data for AI Agents</li>
+                            <li><i class="fas fa-check"></i> License for ChatGPT/Claude Integration</li>
+                            <li><i class="fas fa-check"></i> Full Mitigation & Remediation</li>
+                            <li><i class="fas fa-check"></i> 10-Year Future Forecast</li>
+                            <li><i class="fas fa-check"></i> Topographical Audit (12 Houses)</li>
                         </ul>
-                    </div>
-                </div>
-                <div class="panel-card">
-                    <span class="pill-label">Practitioner Access</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$79/mo</div>
-                        <ul>
-                            <li>Unlimited charts</li>
-                            <li>Advanced timing modules</li>
-                            <li>Save 10 charts + priority recalcs</li>
-                        </ul>
+                        <button class="btn btn-primary" onclick="startCheckout('FULL')">Get Full Packet</button>
                     </div>
                 </div>
             </div>
-            <div class="hero-actions" style="justify-content: center; margin-top: 2rem;">
-                <a class="btn-primary" href="index.html#reading">Start with the preliminary judgment</a>
+
+            <div class="hero-actions" style="justify-content: center; margin-top: 3rem;">
+                <a class="btn-secondary" href="index.html#reading">Start with a Free Preliminary Judgment</a>
             </div>
         </section>
 
-        <section class="basic-view">
-            <h2 class="section-title">WHY THE PRICING IS STRUCTURED THIS WAY</h2>
-            <p class="section-subtitle">This is a traditional discipline. Pricing is designed to signal seriousness and
-                discourage casual browsing.</p>
+        <section class="basic-view" style="margin-top: 4rem;">
+            <h2 class="section-title">WHY THE TWO TIERS?</h2>
             <div class="criteria-grid">
                 <div class="panel-card">
-                    <h4>Commitment Escalation</h4>
-                    <p>We begin with a no-cost preliminary judgment so you can validate accuracy before investing in a
-                        full dossier.</p>
+                    <h4>The Skeptic's Entry</h4>
+                    <p>The $27 Calibration is designed for those who want to see the engine work on their past
+                        (Retrodiction) before committing to a full forecast.</p>
                 </div>
                 <div class="panel-card">
-                    <h4>Scarcity of Attention</h4>
-                    <p>Advanced reports require heavier computation and ongoing maintenance. Pricing protects system
-                        integrity and keeps the work sustainable.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>Professional Signaling</h4>
-                    <p>Clear, public pricing filters out low-intent traffic and attracts clients who value method and
-                        expertise.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="basic-view">
-            <h2 class="section-title">PAYMENT & SECURITY</h2>
-            <div class="two-column">
-                <div class="panel-card">
-                    <h4>Payment Processing</h4>
-                    <p>Payments are processed by Stripe. We do not store card numbers or sensitive payment details.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>Refund Policy</h4>
-                    <p>We offer a 30-day money-back guarantee for paid reports that do not meet the stated method
-                        standard.</p>
+                    <h4>Agent Readiness</h4>
+                    <p>The $197 tier provides the "Digital Soul" packet—machine-readable data files (JSON) that you can
+                        upload to personal AI agents (ChatGPT, Claude) for deep querying.</p>
                 </div>
             </div>
         </section>
 
         <footer
-            style="margin-top: 4rem; text-align: center; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 2rem;">
-            <p>&copy; 2026 Codex Caelestis. All rights reserved.</p>
-            <div style="margin-top: 0.5rem;">
-                <a href="privacy.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Privacy
-                    Policy</a>
-                <span aria-hidden="true">•</span>
-                <a href="terms.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Terms of
-                    Service</a>
-            </div>
+            style="margin-top: 5rem; text-align: center; padding-bottom: 3rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
+            <p>&copy; 2026 Codex Caelestis | <a href="developers.html" style="color: inherit;">Developer API</a> | <a
+                    href="terms.html" style="color: inherit;">Terms</a></p>
         </footer>
     </main>
+
+    <script>
+        function startCheckout(tier) {
+            // Placeholder logic: in production, this calls the API to create a checkout session
+            console.log("Starting checkout for tier:", tier);
+            const priceIds = {
+                'calibration': 'price_1SxwdNC8BJritqvrEik5MvuP',
+                'full': 'price_1SxwdOC8BJritqvrMhzG5C0x'
+            };
+            // Redirect or fetch from /api/v1/billing/create-checkout-session
+            window.location.href = `/checkout?tier=${tier}&price=${priceIds[tier]}`;
+        }
+    </script>
 </body>
 
 </html>

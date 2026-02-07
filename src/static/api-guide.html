@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Integration Guide | Codex Caelestis</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .guide-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-left: 3px solid var(--gold);
+            overflow-x: auto;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        code {
+            color: var(--gold-bright);
+        }
+
+        .endpoint-card {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .method {
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="guide-container">
+            <h1>Practitioner API Guide</h1>
+            <p>Welcome to the Codex Caelestis high-throughput engine. This guide provides implementation specs for B2B
+                partners.</p>
+
+            <section class="endpoint-card">
+                <h2>Authentication</h2>
+                <p>Include your API key in the headers of every request:</p>
+                <pre>X-API-Key: YOUR_SECRET_KEY</pre>
+            </section>
+
+            <section class="endpoint-card">
+                <h2>Endpoints</h2>
+                <h3><span class="method">POST</span> /api/v1/charts/generate</h3>
+                <p>Generate a structural audit for a specific nativity.</p>
+                <pre>
+{
+  "date": "1996-05-20",
+  "time": "14:30",
+  "city": "London",
+  "country": "UK",
+  "house_system": "W"
+}</pre>
+            </section>
+
+            <section class="endpoint-card">
+                <h2>Quotas & Rate Limits</h2>
+                <ul>
+                    <li><strong>Apprentice:</strong> 5 reports/mo | 1 request per second</li>
+                    <li><strong>Practitioner:</strong> 25 reports/mo | 5 requests per second</li>
+                    <li><strong>Master/Agency:</strong> 100+ reports/mo | 20 requests per second</li>
+                </ul>
+            </section>
+
+            <section class="endpoint-card">
+                <h2>Support</h2>
+                <p>For technical integration support or custom whitelabel solutions, contact
+                    <code>support@traditional-astrology.com</code>.</p>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

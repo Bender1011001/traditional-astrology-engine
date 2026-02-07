@@ -14,6 +14,16 @@ router = APIRouter()
 
 @router.post("/create-checkout-session")
 async def create_checkout_session(request: CheckoutRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """
+    Create a Stripe Checkout Session for a specific subscription tier.
+    
+    Supported Tiers:
+    - 'onetime': $197 Premium Dossier (B2C)
+    - 'apprentice': $147/mo (5 reports, basic API)
+    - 'practitioner': $397/mo (25 reports, priority API)
+    - 'master': $797/mo (100 reports, dedicated API)
+    - 'agency': $1297/mo (Unlimited reports, dedicated support)
+    """
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
         

@@ -134,6 +134,46 @@
             font-family: 'Space Mono', monospace;
         }
 
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(192, 122, 43, 0.05);
+            border: 1px solid var(--glass-border);
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            margin: 0.8rem 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gold);
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+
+        .roi-val {
+            display: block;
+            font-size: 2.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold-bright);
+        }
+
+        .quick-form-compact {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
         [data-theme="dark"] .chart-card {
             background: rgba(0, 0, 0, 0.2);
         }
@@ -168,6 +208,35 @@
                     <a href="index.html" class="help-btn" style="margin-right: 0.5rem; text-decoration: none;">NEW
                         READING</a>
                     <button class="logout-btn" onclick="logout()">LOGOUT</button>
+                </div>
+            </div>
+
+            <div id="practitionerUsage" class="dashboard-section hidden">
+                <h2 class="section-title">Quota & ROI</h2>
+                <div class="usage-grid">
+                    <div class="usage-item">
+                        <label
+                            style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-family: 'Space Mono', monospace;">Reports
+                            Cycle</label>
+                        <div class="progress-bar-container">
+                            <div id="chartProgressBar" class="progress-bar"></div>
+                        </div>
+                        <p id="chartUsageMsg" style="font-size: 0.75rem; color: var(--text-muted);"></p>
+                    </div>
+                    <div class="usage-item" id="apiUsageWrap">
+                        <label
+                            style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-family: 'Space Mono', monospace;">API
+                            Consumption</label>
+                        <div class="progress-bar-container">
+                            <div id="apiProgressBar" class="progress-bar"></div>
+                        </div>
+                        <p id="apiUsageMsg" style="font-size: 0.75rem; color: var(--text-muted);"></p>
+                    </div>
+                    <div class="usage-item" style="text-align: right;">
+                        <span id="roiTime" class="roi-val">0h</span>
+                        <p style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase;">Estimated
+                            Time Saved</p>
+                    </div>
                 </div>
             </div>
 
@@ -240,6 +309,26 @@
                     usageText += ` | ${usage.api} / ${apiLimit} API Calls`;
                 }
                 document.getElementById('usageStats').textContent = usageText;
+
+                // Update Progress Bars & ROI
+                if (usage.chart_limit > 0) {
+                    const chartPct = Math.min((usage.charts / usage.chart_limit) * 100, 100);
+                    document.getElementById('chartProgressBar').style.width = `${chartPct}%`;
+                    document.getElementById('chartUsageMsg').textContent = `${usage.charts} of ${usage.chart_limit} reports used this cycle.`;
+                    document.getElementById('practitionerUsage').classList.remove('hidden');
+                }
+
+                if (usage.api_limit > 0) {
+                    const apiPct = Math.min((usage.api / usage.api_limit) * 100, 100);
+                    document.getElementById('apiProgressBar').style.width = `${apiPct}%`;
+                    document.getElementById('apiUsageMsg').textContent = `${usage.api} of ${usage.api_limit} calls used.`;
+                    document.getElementById('apiUsageWrap').classList.remove('hidden');
+                } else {
+                    document.getElementById('apiUsageWrap').classList.add('hidden');
+                }
+
+                const hrsSaved = (usage.charts || 0) * 4;
+                document.getElementById('roiTime').textContent = `${hrsSaved}h`;
 
                 // Show/Hide Management Section
                 const mgmt = document.getElementById('subscriptionManagement');

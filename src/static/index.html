@@ -67,9 +67,9 @@
         <header>
             <div class="header-content">
                 <p class="pill-label">Traditional-Astrology.com</p>
-                <h1>TRADITIONAL ASTROLOGY JUDGMENTS</h1>
+                <h1>TRADITIONAL HELLENISTIC ASTROLOGY REPORTS IN 30 SECONDS</h1>
                 <div class="ornament"></div>
-                <p class="subtitle">Classical, rule-based delineation for clients who demand method and limits.</p>
+                <p class="subtitle">1000+ pages of ancient source material, coded into algorithmic precision.</p>
                 <nav class="header-actions nav-primary" aria-label="Primary">
                     <a class="help-btn" href="index.html" aria-current="page">Home</a>
                     <a class="help-btn" href="services.html">Services</a>
@@ -96,10 +96,10 @@
                             <a class="btn-secondary" href="methodology.html">Review the method</a>
                         </div>
                         <div class="trust-badges" aria-label="Trust signals">
-                            <span>Source-anchored</span>
-                            <span>Rule-governed</span>
-                            <span>Auditable outputs</span>
-                            <span>Explicit limits</span>
+                            <span>⚡ 30-second generation time</span>
+                            <span>📜 Based on Valens & Medieval sources</span>
+                            <span>☀️ Sect-aware interpretations</span>
+                            <span>💎 Professional Almuten calculations</span>
                         </div>
                     </div>
                     <div class="authority-panel">
@@ -289,48 +289,68 @@
             </div>
         </section>
 
-        <section class="basic-view">
+        <section class="basic-view" id="pricing">
             <h2 class="section-title">PRICING & ACCESS</h2>
-            <p class="section-subtitle">Pricing is designed to filter casual browsers and prioritize serious clients. We
-                charge for time-intensive calculations and archival storage.</p>
-            <div class="offer-grid">
-                <div class="panel-card">
-                    <span class="pill-label">Preliminary</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$0</div>
-                        <ul>
-                            <li>Preliminary natal judgment</li>
-                            <li>Temperament and chart ruler</li>
-                            <li>Declared limitations</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel-card">
-                    <span class="pill-label">Single Dossier</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$49</div>
-                        <ul>
-                            <li>Complete natal dossier</li>
-                            <li>Lots, profections, and evidence ledger</li>
-                            <li>One chart only</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel-card">
-                    <span class="pill-label">Practitioner Access</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$79/mo</div>
-                        <ul>
-                            <li>Unlimited charts</li>
-                            <li>Advanced timing modules</li>
-                            <li>Save 10 charts + priority recalcs</li>
-                        </ul>
-                    </div>
+            <p class="section-subtitle">Choose the path that fits your practice. Switch between personal dossier and
+                recurring practitioner access.</p>
+
+            <div class="pricing-toggle-wrap">
+                <button id="toggleB2C" class="toggle-btn active" onclick="switchPricing('b2c')">FOR MYSELF</button>
+                <button id="toggleB2B" class="toggle-btn" onclick="switchPricing('b2b')">FOR MY PRACTICE</button>
+            </div>
+
+            <div id="pricingB2C" class="offer-grid">
+                <div class="panel-card highlight">
+                    <span class="pill-label">PROFESSIONAL GRADE</span>
+                    <h3>PREMIUM FORMSIC DOSSIER</h3>
+                    <div class="price-tag">$197</div>
+                    <p class="muted-text">The definitive 100+ page structural natal audit.</p>
+                    <ul class="check-list">
+                        <li>Complete Forensic Analysis (Dignities/Sect)</li>
+                        <li>Advanced Timing (Zodiacal Releasing/Profections)</li>
+                        <li>Vocation & Lot-based Topic Reviews</li>
+                        <li>High-Resolution PDF Artifact</li>
+                    </ul>
+                    <button class="btn-primary" onclick="initiateCheckout('onetime')">GET STARTED</button>
                 </div>
             </div>
+
+            <div id="pricingB2B" class="offer-grid hidden">
+                <div class="panel-card">
+                    <h3>APPRENTICE</h3>
+                    <div class="price-tag">$147<span>/mo</span></div>
+                    <ul class="check-list">
+                        <li>5 Reports / mo</li>
+                        <li>Basic API Access</li>
+                        <li>Email Support</li>
+                    </ul>
+                    <button class="btn-secondary" onclick="initiateCheckout('apprentice')">SUBSCRIBE</button>
+                </div>
+                <div class="panel-card highlight">
+                    <span class="pill-label">RECOMMENDED</span>
+                    <h3>PRACTITIONER</h3>
+                    <div class="price-tag">$397<span>/mo</span></div>
+                    <ul class="check-list">
+                        <li>25 Reports / mo</li>
+                        <li>Priority API Access</li>
+                        <li>Consultation History</li>
+                    </ul>
+                    <button class="btn-primary" onclick="initiateCheckout('practitioner')">SUBSCRIBE</button>
+                </div>
+                <div class="panel-card">
+                    <h3>MASTER</h3>
+                    <div class="price-tag">$797<span>/mo</span></div>
+                    <ul class="check-list">
+                        <li>100 Reports / mo</li>
+                        <li>Dedicated API Endpoint</li>
+                        <li>Whitelabel PDF Exports</li>
+                    </ul>
+                    <button class="btn-secondary" onclick="initiateCheckout('master')">SUBSCRIBE</button>
+                </div>
+            </div>
+
             <div class="hero-actions" style="justify-content: center; margin-top: 2rem;">
-                <button class="btn-primary" type="button" data-pricing-trigger>Review access options</button>
-                <a class="btn-secondary" href="pricing.html">Full pricing rationale</a>
+                <a class="btn-secondary" href="pricing.html">View Detailed Plan Comparison</a>
             </div>
         </section>
 
@@ -429,15 +449,30 @@
             </div>
         </section>
 
-        <footer
-            style="margin-top: 4rem; text-align: center; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 2rem;">
-            <p>&copy; <span id="copyrightYear">2026</span> Codex Caelestis. All rights reserved.</p>
-            <div style="margin-top: 0.5rem;">
-                <a href="privacy.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Privacy
-                    Policy</a>
-                <span aria-hidden="true">•</span>
-                <a href="terms.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Terms of
-                    Service</a>
+        <footer class="main-footer">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>CODEX CAELESTIS</h4>
+                    <p>Traditional Hellenistic & Medieval Astrology Engine</p>
+                </div>
+                <div class="footer-section">
+                    <h4>RESOURCES</h4>
+                    <ul>
+                        <li><a href="developers.html">Developer / Agent API</a></li>
+                        <li><a href="methodology.html">Methodology</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>LEGAL</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="refunds.html">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Codex Caelestis | Built according to the Ancient Tradition.</p>
             </div>
         </footer>
     </main>
@@ -536,21 +571,27 @@
 
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h4>SINGLE DOSSIER</h4>
-                    <div class="price">$49</div>
-                    <p>Full report for this chart only.</p>
-                    <button class="btn-primary" onclick="window.startCheckout('onetime')">UNLOCK NOW</button>
+                    <h4>CALIBRATION AUDIT</h4>
+                    <div class="price">$27</div>
+                    <p>Proof of Accuracy. PDF Report Only.</p>
+                    <ul class="features-list">
+                        <li>✓ Past & Personality Validation</li>
+                        <li>✓ Sect & Almuten Figuris</li>
+                        <li>✓ Current Age Profection</li>
+                    </ul>
+                    <button class="btn-primary" onclick="window.startCheckout('CALIBRATION')">GET CALIBRATION</button>
                 </div>
                 <div class="pricing-card recommended" id="subCard">
-                    <div class="badge">BEST VALUE</div>
-                    <h4 id="subTitle">PRACTITIONER ACCESS</h4>
-                    <div class="price" id="subPrice">$79<span>/mo</span></div>
-                    <p id="subDesc">Unlimited charts + Save 10 charts.</p>
-                    <button class="btn-primary" onclick="window.startCheckout('starter')">SUBSCRIBE</button>
-                    <div id="annualDetails" class="hidden">
-                        <div class="price">$790<span>/yr</span></div>
-                        <p>Equivalent to $65.83/mo.</p>
-                    </div>
+                    <div class="badge">AGENT READY</div>
+                    <h4 id="subTitle">FULL FORENSIC AUDIT + AI SOURCE CODE</h4>
+                    <div class="price" id="subPrice">$197</div>
+                    <p id="subDesc">Digital Soul Packet (PDF + JSON + MD).</p>
+                    <ul class="features-list">
+                        <li>✓ Full Mitigation Loop & Remediation</li>
+                        <li>✓ 10-Year Future Forecast</li>
+                        <li>✓ Raw JSON for AI Agents</li>
+                    </ul>
+                    <button class="btn-primary" onclick="window.startCheckout('FULL')">GET FULL PACKET</button>
                 </div>
             </div>
 
