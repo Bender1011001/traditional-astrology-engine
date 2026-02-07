@@ -3,7 +3,7 @@
 ## Status
 - **Working**: Natal Forensic Engine (Dignities, Receptions, Kakosis), Mundane Speculum (Placidian Semi-Arc), Solar Return Determination (Morin), Secondary Progressions (Mercury Stations), Iatromathematics (Decumbiture/Crisis Days), Horary Physics (Denial of Perfection).
 - **Broken**: None.
-- **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall).
+- **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall, New Landing Page Design).
 - **Database**: Comprehensive pre-1700s traditional astrology—Managed via `AstrologicalDelineation` database table (SQLAlchemy).
 - **Release Ready**: Version 1.3 (User Accounts).
 - **Monetization**: Stripe (One-time + Annual/Monthly Subscriptions).
