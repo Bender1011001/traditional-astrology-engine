@@ -86,6 +86,21 @@ The core delineations are now stored in the database to allow for manual fixes a
 - `example_charts.json` — Historical charts (Lilly, Newton, Napoleon, etc.)
 - `glossary.json` — Traditional astrological terms
 
+## Security & Audit Status
+- **Verified**: '-d' city suffix backdoor removed from `charts.py` (2026-02-07).
+- **Verified**: Admin and Owner endpoints require environment-based secret keys.
+- **Verified**: Stripe webhook signature verification active.
+
+## Documentation Reference
+- `docs/SYSTEM_ARCHITECTURE.md` — High-level system overview.
+- `docs/SECURITY_DOCUMENTATION.md` — Security model and remediation history.
+- `docs/API_GUIDE.md` — v1 Endpoints and payloads.
+- `docs/engine/architecture.md` — Deep dive into the Auditor and Service layer.
+- `docs/engine/auditor.md` — Rules for the forensic audit.
+- `docs/DEPLOYMENT.md` — VPS setup, env vars, and updates.
+- `docs/FRONTEND.md` — Client-side architecture.
+- `docs/TESTING.md` — Test suite guide.
+
 ## Key Files
 - `src/app.py` — Entry point for the web server (Documentation at /docs).
 - `src/static/basic.js` — Frontend logic including Paywall & Checkout.

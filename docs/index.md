@@ -19,3 +19,6 @@ The Codex Caelestis engine is designed to go beyond "sun sign" horoscopes. It im
 *   [Engine Reference](engine/architecture.md): Deep dive into the `Auditor` class and module architecture.
 *   [CLI Guide](cli.md): How to use the `omnibus.py` administrative tool.
 *   [Revenue Readiness Plan](monetization.md): COO plan to convert traffic into paid revenue.
+*   [Deployment Guide](DEPLOYMENT.md): VPS setup and maintenance.
+*   [Frontend Architecture](FRONTEND.md): JS modules and UI logic.
+*   [Testing Strategy](TESTING.md): Running the pytest suite.

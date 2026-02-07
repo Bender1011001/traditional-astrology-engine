@@ -152,18 +152,9 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     """
     _log_event("chart_request_server", {"form": chart_request.dict()}, http_request)
     
-    # Dev Backdoor: City suffix " -d"
-    is_dev = False
-    if chart_request.city and chart_request.city.strip().lower().endswith("-d"):
-        is_dev = True
-        chart_request.city = chart_request.city[:-2].strip() 
-
-    # Tier Check
     chart_hash = generate_chart_hash(chart_request)
     tier = "free"
-    if is_dev:
-        tier = "paid"
-    elif chart_request.access_token:
+    if chart_request.access_token:
         payload = validate_token(chart_request.access_token)
         if payload and payload.get("chart_hash") == chart_hash:
             tier = "paid"
