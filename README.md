@@ -61,7 +61,7 @@ python src/scripts/generate_practitioner_report.py --name "Alexander Hamilton" -
 ### Running the Web API
 The API is self-documenting via FastAPI:
 ```bash
-python src/api.py
+uvicorn src.app:app --reload
 ```
 - **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
