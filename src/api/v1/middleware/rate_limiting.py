@@ -1,5 +1,6 @@
 from fastapi import HTTPException, Request
 from datetime import datetime
+import time
 import redis
 from src.core.config import settings
 from typing import Optional
@@ -9,6 +10,7 @@ class RateLimiter:
     
     def __init__(self):
         self.redis = None
+        self.memory_store = {} # Fallback
         if settings.REDIS_URL:
             try:
                 self.redis = redis.from_url(settings.REDIS_URL, decode_responses=True)
@@ -19,27 +21,47 @@ class RateLimiter:
         """
         Check if request is within rate limit
         """
-        if not self.redis:
-            return True, {"limit": limit_per_minute, "remaining": limit_per_minute, "reset_at": 0}
-
-        key = f"rate_limit:{user_id}:{datetime.utcnow().strftime('%Y%m%d%H%M')}"
+        if self.redis:
+            try:
+                # Redis Strategy
+                key = f"rate_limit:{user_id}:{datetime.utcnow().strftime('%Y%m%d%H%M')}"
+                current = self.redis.incr(key)
+                if current == 1:
+                    self.redis.expire(key, 60)
+                
+                allowed = current <= limit_per_minute
+                remaining = max(0, limit_per_minute - current)
+                return allowed, {
+                    "limit": limit_per_minute,
+                    "remaining": remaining,
+                    "reset_at": 60
+                }
+            except Exception as e:
+                print(f"Redis rate limit error: {e}. Falling back to memory.")
+                # Fall through to memory
         
-        try:
-            current = self.redis.incr(key)
-            if current == 1:
-                self.redis.expire(key, 60)
+        # In-Memory Strategy (Fallback)
+        # Simple window based on current minute
+        current_minute = int(time.time() / 60)
+        key = f"{user_id}:{current_minute}"
+        
+        # Cleanup old keys (naive garbage collection)
+        if len(self.memory_store) > 10000:
+            self.memory_store.clear()
             
-            allowed = current <= limit_per_minute
-            remaining = max(0, limit_per_minute - current)
-            
-            return allowed, {
-                "limit": limit_per_minute,
-                "remaining": remaining,
-                "reset_at": 60 # Seconds ttl
-            }
-        except Exception as e:
-            print(f"Rate limit error: {e}")
-            return True, {} # Fail open
+        current = self.memory_store.get(key, 0)
+        current += 1
+        self.memory_store[key] = current
+        
+        allowed = current <= limit_per_minute
+        remaining = max(0, limit_per_minute - current)
+        
+        return allowed, {
+            "limit": limit_per_minute,
+            "remaining": remaining,
+            "reset_at": 60,
+            "backend": "memory"
+        }
 
 rate_limiter = RateLimiter()
 
