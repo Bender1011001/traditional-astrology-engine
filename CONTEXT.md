@@ -1,6 +1,7 @@
 # Astrology Project
 
 ## Status
+
 - **Working**: Natal Forensic Engine (Dignities, Receptions, Kakosis), Mundane Speculum (Placidian Semi-Arc), Solar Return Determination (Morin), Secondary Progressions (Mercury Stations), Iatromathematics (Decumbiture/Crisis Days), Horary Physics (Denial of Perfection).
 - **Broken**: None.
 - **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall, New Landing Page Design).
@@ -10,6 +11,7 @@
 
 
 ## Tech Stack
+
 - Python 3.10+
 - FastAPI, Uvicorn
 - Swiss Ephemeris (`pyswisseph`)
@@ -20,10 +22,17 @@
 - Stripe (Payments)
 - PyJWT (Authentication)
 
-## Deployment (Render)
-- **Platform**: Render.com (Web Service via Docker)
-- **Configuration**: `render.yaml` (Infrastructure as Code)
-- **Environment**: Docker container (Python 3.10-slim)
+
+## Deployment (Azure)
+
+- **Platform**: Microsoft Azure (Web App for Containers)
+- **Orchestration**: `setup_azure.ps1` (initial) and `fix_azure_recommendations.ps1` (production upgrades)
+- **High Availability**: 
+  - **App Service**: Zone-redundant (S1 SKU)
+  - **Database**: PostgreSQL Flexible Server with Zone Redundant HA (General Purpose SKU)
+  - **Registry**: ACR Premium with Geo-replication (Central US <-> East US 2)
+- **Resilience**: Geo-redundant backups enabled for PostgreSQL.
+- **Monitoring**: Azure Service Health alerts configured for infrastructure events.
 - **Entry Point**: `uvicorn src.app:app` (defined in `Dockerfile`)
 - **Static Files**: Served by FastAPI via `src/app.py` mount (Single Service Architecture)
 
@@ -109,6 +118,10 @@ The core delineations are now stored in the database to allow for manual fixes a
   - **Backend**: `RequestLoggingMiddleware` captures all requests/responses/timings.
   - **Frontend**: Telemetry system captures clicks/errors and sends them to `/api/log/telemetry`.
   - **Storage**: JSON-structured logs with rotation in `logs/astrology_engine.jsonl`.
+- **SEO & Search Visibility**:
+  - **Canonical Domains**: All variants (www, http) are redirected to `https://traditional-astrology.com` via `CanonicalDomainMiddleware` to prevent indexing fragmentation.
+  - **Crawlability**: `robots.txt` explicitly allows public pages but protects `/api`, dashboard files, and auth flow files.
+  - **Internal Network**: Guide pages include "Related Guides" sections to ensure deep crawlability for search agents.
 
 ## Trap Diary
 | Issue | Cause | Fix |
@@ -130,6 +143,7 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Azure DB Auth Failure | Used `astrology_admin` instead of `astroadmin` | Use `astroadmin` as defined in `setup_azure.ps1` |
 | ACR ImagePullFailure | Truncated Registry Password used in App Settings | Copy THE FULL 80+ CHAR password from ACR credentials |
 | Plan Not Found (Reg) | Database not seeded with standard plans | Added `seed_plans()` to app startup event |
+| Indexing Blind Spot | Lack of canonicalization & authority signals | Added `CanonicalDomainMiddleware` and tuned `robots.txt` |
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py

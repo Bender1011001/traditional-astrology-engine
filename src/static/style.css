@@ -634,7 +634,57 @@ h1 {
     display: none;
 }
 
-/* Card Styling */
+/* Utility Classes for Inline Style Migration */
+.infobox-warm {
+    background: var(--bg-warm, #fcfaf7);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--gold);
+    margin-bottom: 2rem;
+}
+
+[data-theme="dark"] .infobox-warm {
+    background: rgba(224, 163, 90, 0.1);
+}
+
+.infobox-teal {
+    background: rgba(42, 127, 120, 0.08);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--purple);
+    margin-bottom: 2.5rem;
+}
+
+.grid-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.card-outline {
+    border: 1px solid var(--glass-border);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.footer-small {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding-bottom: 2rem;
+}
+
+.footer-small div {
+    margin-top: 0.5rem;
+}
+
+.footer-small a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+/* Page Specific Overrides */
 .calculator-card {
     background: var(--bg-card);
     border: 1px solid var(--glass-border);
@@ -4105,4 +4155,174 @@ input:checked+.slider:before {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2rem;
+}
+/* Utility Classes for HTML Fixes */
+.flex-toolbar {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.vertical-divider {
+    width: 1px;
+    background: var(--glass-border);
+}
+
+.mt-sm { margin-top: 0.5rem; }
+.mt-md { margin-top: 1rem; }
+.mt-lg { margin-top: 1.5rem; }
+.mt-xl { margin-top: 2rem; }
+.mt-xxl { margin-top: 4rem; }
+.mb-sm { margin-bottom: 0.5rem; }
+.mb-md { margin-bottom: 1rem; }
+.mb-lg { margin-bottom: 1.5rem; }
+.mb-xl { margin-bottom: 2rem; }
+
+.text-center { text-align: center; }
+.text-muted { color: var(--text-muted); }
+
+.w-full { width: 100%; }
+
+.font-h1 { font-size: 2.5rem; }
+
+/* Construction Banner Styles */
+.construction-banner {
+    background: rgba(42, 127, 120, 0.1);
+    border: 1px solid var(--purple);
+    color: var(--text-main);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.construction-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.construction-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.philosophy-section {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.philosophy-text {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.preview-footer {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding-bottom: 2rem;
+}
+
+.footer-links {
+    margin-top: 0.5rem;
+}
+
+.footer-link {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+/* Ensure shimmer works on span */
+.btn-shimmer {
+    display: block;
+}
+
+
+.policy-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    line-height: 1.6;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.tier-card-calibration {
+    border-top: 4px solid #c07a2b;
+    display: flex;
+    flex-direction: column;
+}
+
+.tier-card-full {
+    border-top: 4px solid #8e44ad;
+    background: rgba(142, 68, 173, 0.03);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pricing & Resources Utility Classes */
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.pricing-actions {
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.pricing-footer {
+    margin-top: 5rem;
+    text-align: center;
+    padding-bottom: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+}
+
+.resource-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.resource-item {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.resource-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.resource-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.resource-desc {
+    margin-bottom: 1rem;
+}
+
+.mt-4 { margin-top: 4rem; }
+
+.footer-nav {
+    margin-top: 0.5rem;
 }

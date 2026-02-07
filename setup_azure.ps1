@@ -28,7 +28,7 @@ Start-Sleep -Seconds 30
 
 
 # Generate a strong password
-$DB_PASS = -join ((33..126) | Get-Random -Count 16 | % {[char]$_})
+$DB_PASS = -join ((33..126) | Get-Random -Count 16 | ForEach-Object { [char]$_ })
 # Ensure password meets Azure complexity (3 categories)
 $DB_PASS = "A1!" + $DB_PASS 
 
@@ -44,7 +44,8 @@ Write-Host "====================="
 Write-Host "Checking Azure CLI..."
 try {
     az --version | Out-Null
-} catch {
+}
+catch {
     Write-Error "Azure CLI (az) is not installed. Please install it first."
     exit 1
 }
@@ -53,7 +54,8 @@ Write-Host "Checking Login Status..."
 try {
     $account = az account show --output json | ConvertFrom-Json
     Write-Host "Logged in as: $($account.user.name) (Subscription: $($account.name))"
-} catch {
+}
+catch {
     Write-Error "You are not logged in. Please run 'az login' first."
     exit 1
 }
@@ -64,13 +66,13 @@ Write-Host "`n1. Creating Resource Group..."
 az group create --name $RESOURCE_GROUP --location $LOCATION
 
 Write-Host "`n2. Creating Container Registry..."
+# Production: az acr create --resource-group $RESOURCE_GROUP --name $ACR_NAME --sku Premium --admin-enabled true
 az acr create --resource-group $RESOURCE_GROUP --name $ACR_NAME --sku Basic --admin-enabled true
 
 
 Write-Host "`n3. Creating App Service Plan (Linux)..."
-# Using F1 (Free) tier to avoid "Basic" quota limits. 
+# Production (Zone Redundant): az appservice plan create --name $PLAN_NAME --resource-group $RESOURCE_GROUP --sku S1 --is-linux --set zoneRedundant=true
 # Note: F1 has CPU limits (60 mins/day) and no Always On. 
-# If needed, upgrade to B1 in portal later.
 az appservice plan create --name $PLAN_NAME --resource-group $RESOURCE_GROUP --sku F1 --is-linux
 
 
@@ -79,6 +81,7 @@ Write-Host "`n4. Creating Web App..."
 az webapp create --resource-group $RESOURCE_GROUP --plan $PLAN_NAME --name $APP_NAME --deployment-container-image-name "$ACR_NAME.azurecr.io/astrology-engine:latest"
 
 Write-Host "`n5. Creating PostgreSQL Flexible Server (this takes a few minutes)..."
+# Production (HA + Geo-Backup): az postgres flexible-server create --resource-group $RESOURCE_GROUP --name $DB_SERVER_NAME --location $LOCATION --admin-user $DB_USER --admin-password $DB_PASS --sku-name Standard_D2s_v3 --tier GeneralPurpose --high-availability Enabled --geo-redundant-backup Enabled --public-access 0.0.0.0 --yes
 az postgres flexible-server create --resource-group $RESOURCE_GROUP --name $DB_SERVER_NAME --location $LOCATION --admin-user $DB_USER --admin-password $DB_PASS --sku-name Standard_B1ms --tier Burstable --public-access 0.0.0.0 --yes
 
 # --- Outputs ---

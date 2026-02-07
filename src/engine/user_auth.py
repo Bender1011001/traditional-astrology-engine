@@ -13,6 +13,7 @@ import bcrypt
 from sqlalchemy.orm import Session
 from src.database.core import SessionLocal, engine, Base
 from src.database.models import User
+from src.services.notifications import AdminNotificationService
 
 # Initialize tables - MOVED TO APP STARTUP to prevent hang
 # Base.metadata.create_all(bind=engine)
@@ -119,6 +120,12 @@ class UserManager:
             db.refresh(new_user)
             
             logging.info(f"User created: {email}")
+            
+            # Notify Admin
+            try:
+                AdminNotificationService.notify_account_created(email, name)
+            except Exception as e:
+                logging.error(f"Failed to send admin notification for account creation: {e}")
             
             return {
                 "success": True, 

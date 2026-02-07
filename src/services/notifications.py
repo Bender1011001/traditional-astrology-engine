@@ -1,0 +1,86 @@
+import os
+import logging
+from src.engine.email_service import send_email
+from src.core.config import settings
+
+class AdminNotificationService:
+    """
+    Service for sending notifications to site administrators.
+    """
+
+    @staticmethod
+    def _get_admin_emails():
+        """Returns a list of admin emails from settings."""
+        if not settings.OWNER_EMAILS:
+            return []
+        return [email.strip() for email in settings.OWNER_EMAILS.split(",") if email.strip()]
+
+    @staticmethod
+    def notify_account_created(user_email: str, user_name: str = ""):
+        """Notifies admin when a new account is created."""
+        admin_emails = AdminNotificationService._get_admin_emails()
+        if not admin_emails:
+            logging.warning("No OWNER_EMAILS configured for account creation notification.")
+            return
+
+        subject = f"New Account Created: {user_email}"
+        name_display = f" ({user_name})" if user_name else ""
+        html_content = f"""
+        <h2>New User Registration</h2>
+        <p>A new user has registered on <b>{settings.SITE_BASE_URL}</b>.</p>
+        <ul>
+            <li><b>Email:</b> {user_email}</li>
+            <li><b>Name:</b> {user_name or 'N/A'}</li>
+            <li><b>Time:</b> {logging.Formatter().formatTime(logging.LogRecord('', 0, '', 0, '', None, None), '%Y-%m-%d %H:%M:%S')}</li>
+        </ul>
+        """
+
+        for admin_email in admin_emails:
+            send_email(to_email=admin_email, subject=subject, html_content=html_content)
+
+    @staticmethod
+    def notify_purchase_completed(user_email: str, plan_tier: str, amount: float = 0.0, is_recurring: bool = False):
+        """Notifies admin when a purchase is completed."""
+        admin_emails = AdminNotificationService._get_admin_emails()
+        if not admin_emails:
+            logging.warning("No OWNER_EMAILS configured for purchase notification.")
+            return
+
+        purchase_type = "Subscription" if is_recurring else "One-time Purchase"
+        subject = f"New {purchase_type}: {plan_tier.upper()} - {user_email}"
+        
+        html_content = f"""
+        <h2>Payment Received</h2>
+        <p>A new {purchase_type.lower()} has been completed on <b>{settings.SITE_BASE_URL}</b>.</p>
+        <ul>
+            <li><b>User:</b> {user_email}</li>
+            <li><b>Tier:</b> {plan_tier.upper()}</li>
+            <li><b>Amount:</b> ${amount:.2f}</li>
+            <li><b>Type:</b> {purchase_type}</li>
+        </ul>
+        """
+
+        for admin_email in admin_emails:
+            send_email(to_email=admin_email, subject=subject, html_content=html_content)
+
+    @staticmethod
+    def notify_payment_failed(user_email: str, plan_tier: str, error_message: str = ""):
+        """Notifies admin when a payment fails."""
+        admin_emails = AdminNotificationService._get_admin_emails()
+        if not admin_emails:
+            return
+
+        subject = f"PAYMENT FAILED: {user_email}"
+        
+        html_content = f"""
+        <h2 style="color: red;">Payment Failure Notification</h2>
+        <p>A payment attempt failed for user <b>{user_email}</b>.</p>
+        <ul>
+            <li><b>Tier:</b> {plan_tier.upper()}</li>
+            <li><b>Error:</b> {error_message or 'Unknown error'}</li>
+        </ul>
+        <p>The user's subscription status has been updated to 'past_due'.</p>
+        """
+
+        for admin_email in admin_emails:
+            send_email(to_email=admin_email, subject=subject, html_content=html_content)

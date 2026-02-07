@@ -3,6 +3,7 @@ import stripe
 from sqlalchemy.orm import Session
 from src.database.models import User, UserSubscription, SubscriptionPlan, UsageRecord, Invoice
 from src.core.config import settings
+from src.services.notifications import AdminNotificationService
 
 if settings.STRIPE_SECRET_KEY:
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -205,6 +206,20 @@ class SubscriptionService:
         
         self.db.commit()
 
+        # Notify Admin
+        try:
+            amount = session.get("amount_total", 0) / 100.0
+            is_recurring = session.get("mode") == "subscription"
+            AdminNotificationService.notify_purchase_completed(
+                user_email=user.email,
+                plan_tier=plan_tier,
+                amount=amount,
+                is_recurring=is_recurring
+            )
+        except Exception as e:
+            import logging
+            logging.error(f"Failed to send admin notification for purchase: {e}")
+
     def _process_payment_succeeded(self, invoice: dict):
         # Log invoice
         user_id = None
@@ -218,6 +233,21 @@ class SubscriptionService:
                 sub.current_period_end = datetime.fromtimestamp(invoice.get("period_end"))
             self.db.commit()
             
+            # Notify Admin (recurring payment)
+            try:
+                user = sub.user
+                plan_tier = sub.plan.tier if sub.plan else "unknown"
+                amount = invoice.get("amount_paid", 0) / 100.0
+                AdminNotificationService.notify_purchase_completed(
+                    user_email=user.email,
+                    plan_tier=plan_tier,
+                    amount=amount,
+                    is_recurring=True
+                )
+            except Exception as e:
+                import logging
+                logging.error(f"Failed to send admin notification for recurring payment: {e}")
+
             # Create Invoice Record
             new_inv = Invoice(
                 user_id=sub.user_id,
@@ -238,6 +268,20 @@ class SubscriptionService:
         if sub:
             sub.status = "past_due"
             self.db.commit()
+            
+            # Notify Admin
+            try:
+                user = sub.user
+                plan_tier = sub.plan.tier if sub.plan else "unknown"
+                error_msg = invoice.get("last_payment_error", {}).get("message", "Payment failed")
+                AdminNotificationService.notify_payment_failed(
+                    user_email=user.email,
+                    plan_tier=plan_tier,
+                    error_message=error_msg
+                )
+            except Exception as e:
+                import logging
+                logging.error(f"Failed to send admin notification for payment failure: {e}")
 
     def _process_subscription_deleted(self, sub_data: dict):
         stripe_id = sub_data.get("id")

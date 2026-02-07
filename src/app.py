@@ -9,7 +9,7 @@ if ROOT_DIR not in sys.path:
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, RedirectResponse
 import logging
 import time
 
@@ -93,6 +93,19 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         
         return response
 
+# Domain Canonicalization Middleware
+class CanonicalDomainMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        host = request.headers.get("host", "")
+        # Redirect www.traditional-astrology.com and http to https://traditional-astrology.com
+        if host.startswith("www.") or request.url.scheme == "http":
+            canonical_host = host.replace("www.", "")
+            url = f"https://{canonical_host}{request.url.path}"
+            if request.url.query:
+                url += f"?{request.url.query}"
+            return RedirectResponse(url, status_code=301)
+        return await call_next(request)
+
 # Security Headers Middleware
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
@@ -108,6 +121,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 from src.api.v1.middleware.csrf import CSRFProtectionMiddleware
 
 app.add_middleware(RequestLoggingMiddleware)
+app.add_middleware(CanonicalDomainMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(CSRFProtectionMiddleware)
 

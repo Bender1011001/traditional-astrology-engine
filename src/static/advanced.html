@@ -13,7 +13,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Astrology Rule Engine & Calculator | Codex Caelestis</title>
+    <title>Advanced Astrology Rule Engine &amp; Calculator | Codex Caelestis</title>
     <meta name="description"
         content="Professional-grade traditional astrology calculator. Includes Annual Profections, Zodiacal Releasing, Firdaria, Primary Directions, and detailed forensic rule analysis.">
     <meta name="keywords"
@@ -109,7 +109,7 @@
                     <p>Compute Lots of Spirit/Fortune and tie them to timing structure.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Fixed Stars & Nodes</h3>
+                    <h3>Fixed Stars &amp; Nodes</h3>
                     <p>Fixed star contacts, parans, nodal contacts, and eclipse pressure.</p>
                 </div>
                 <div class="feature-card">
@@ -253,7 +253,7 @@
 
                 <button type="submit" id="calculateBtn">
                     <span class="btn-text">RUN ANALYSIS</span>
-                    <div class="btn-shimmer"></div>
+                    <span class="btn-shimmer"></span>
                 </button>
             </form>
         </section>
@@ -263,10 +263,9 @@
                 <!-- SVG Chart Wheel rendered here -->
             </div>
 
-            <div class="results-toolbar"
-                style="display: flex; gap: 1rem; justify-content: flex-end; padding: 1rem 0; border-bottom: 1px solid var(--border-color);">
+            <div class="results-toolbar flex-toolbar">
                 <button id="saveChartBtn" class="help-btn" type="button">SAVE TO LIBRARY</button>
-                <div class="divider-vertical" style="width: 1px; background: var(--border-color);"></div>
+                <div class="vertical-divider"></div>
                 <button id="exportCsvBtn" class="help-btn" type="button">EXPORT CSV</button>
                 <button id="exportPdfBtn" class="help-btn" type="button">DOWNLOAD PDF</button>
             </div>
@@ -330,15 +329,15 @@
                     </div>
                 </div>
 
-                <div id="vitalitySection" class="soul-guardian-section" style="margin-top: 1rem;">
-                    <div id="vitalityCard" class="soul-guardian-card" style="width: 100%;">
-                        <h3>VITALITY & LONGEVITY (HYLEG)</h3>
+                <div id="vitalitySection" class="soul-guardian-section mt-md">
+                    <div id="vitalityCard" class="soul-guardian-card w-full">
+                        <h3>VITALITY &amp; LONGEVITY (HYLEG)</h3>
                         <p class="placeholder-text">Vitality analysis pending calculation.</p>
                     </div>
                 </div>
 
-                <div id="primaryDirectionsSection" class="soul-guardian-section" style="margin-top: 1rem;">
-                    <div id="pdCard" class="soul-guardian-card" style="width: 100%;">
+                <div id="primaryDirectionsSection" class="soul-guardian-section mt-md">
+                    <div id="pdCard" class="soul-guardian-card w-full">
                         <h3>PRIMARY DIRECTIONS (PLACIDUS)</h3>
                         <p class="placeholder-text">Primary directions pending calculation.</p>
                     </div>
@@ -352,10 +351,10 @@
                 </div>
 
                 <div id="witnessSection" class="codex-section">
-                    <h3 class="section-divider">FIXED STARS & NODES</h3>
+                    <h3 class="section-divider">FIXED STARS &amp; NODES</h3>
                     <div class="witness-grid">
                         <div class="witness-card">
-                            <h4>FIXED STARS & PARANS</h4>
+                            <h4>FIXED STARS &amp; PARANS</h4>
                             <div id="fixedStarList" aria-live="polite">
                                 <p class="placeholder-text">No stellar contacts logged.</p>
                             </div>
@@ -374,7 +373,7 @@
                 </div>
 
                 <div id="horaryPhysicsSection" class="horary-section hidden">
-                    <h3 class="section-divider">HORARY CONDITIONS & INTERACTIONS</h3>
+                    <h3 class="section-divider">HORARY CONDITIONS &amp; INTERACTIONS</h3>
                     <div id="horaryPhysicsList" class="horary-grid"></div>
                 </div>
             </div>
@@ -382,8 +381,8 @@
             <div class="tab-content" id="fateTab" role="tabpanel" aria-labelledby="tab-fate">
                 <div class="fate-timeline-container">
                     <div class="timeline-lot-selector">
-                        <button class="lot-btn active" data-lot="Spirit">LOT OF SPIRIT (INTENT)</button>
-                        <button class="lot-btn" data-lot="Fortune">LOT OF FORTUNE (BODY/EVENTS)</button>
+                        <button class="lot-btn active" type="button" data-lot="Spirit">LOT OF SPIRIT (INTENT)</button>
+                        <button class="lot-btn" type="button" data-lot="Fortune">LOT OF FORTUNE (BODY/EVENTS)</button>
                     </div>
                     <div id="fateTimelineAlert" class="fate-alert">
                         <p class="placeholder-text">Run analysis to calculate time windows.</p>
@@ -407,7 +406,7 @@
                 </div>
                 <div class="prediction-advanced-grid">
                     <div class="prediction-card">
-                        <h3>FIRDARIA & MUNTHA</h3>
+                        <h3>FIRDARIA &amp; MUNTHA</h3>
                         <div id="firdariaInfo"></div>
                         <div id="munthaInfo"></div>
                     </div>
