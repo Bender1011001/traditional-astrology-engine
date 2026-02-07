@@ -5,6 +5,7 @@ from src.api.v1.auth import get_current_user, create_access_token
 from src.database.models import User
 from src.api.v1.schemas import CheckoutRequest
 from src.services.subscription import SubscriptionService
+from src.services.fulfillment import FulfillmentService
 from src.core.config import settings
 import stripe
 import json
@@ -44,7 +45,7 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/verify-checkout-session")
-async def verify_checkout_session(session_id: str, db: Session = Depends(get_db)):
+async def verify_checkout_session(session_id: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     try:
         session = stripe.checkout.Session.retrieve(session_id)
     except Exception:
@@ -69,14 +70,21 @@ async def verify_checkout_session(session_id: str, db: Session = Depends(get_db)
     if session.metadata.get("chart_data"):
         try:
             chart_data = json.loads(session.metadata.get("chart_data"))
-            # Generate a consistent hash from data? or just use user id?
-            # For compatibility with frontend expecting chart_hash:
-            # We'll use a dummy hash if we don't calculate it here.
-            # But frontend uses it to key the token.
-            pass 
         except: 
             pass
 
+    # TRIGGER FULFILLMENT (Background Task)
+    if chart_data and user_id:
+        user = service.db.query(User).filter(User.id == user_id).first()
+        if user and user.email:
+            background_tasks.add_task(
+                FulfillmentService.fulfill_order,
+                user_email=user.email,
+                user_name=user.name or "User",
+                chart_request=chart_data,
+                tier=plan_tier or "onetime"
+            )
+            
     # Create Token
     # We include user_id in data so get_current_user works
     access_token = create_access_token(

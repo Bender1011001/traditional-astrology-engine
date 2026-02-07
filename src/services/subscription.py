@@ -79,7 +79,8 @@ class SubscriptionService:
                 "date": chart_data.get("date"),
                 "time": chart_data.get("time"),
                 "city": chart_data.get("city"),
-                "state": chart_data.get("state")
+                "state": chart_data.get("state"),
+                "name": chart_data.get("name")
             }
             metadata["chart_data"] = json.dumps(minimal_data)
 
