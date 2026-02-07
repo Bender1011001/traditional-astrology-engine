@@ -89,7 +89,22 @@ export async function initiateCheckout(tier, chartRequest = null) {
         if (!confirmed) return;
     }
 
-    // Default fallback if still null (B2B might not need immediate chart data)
+    // Try to recover from localStorage if null
+    if (!requestPayload) {
+        try {
+            const saved = localStorage.getItem("cael_last_request");
+            if (saved) requestPayload = JSON.parse(saved);
+        } catch (e) { }
+    }
+
+    // Strict validation for detailed reports
+    if ((tier === 'onetime' || tier === 'calibration' || tier === 'full') && !requestPayload) {
+        alert("REQUIRED: Please enter your birth data on the Home page first so we know what to calculate.");
+        window.location.href = "index.html#reading";
+        return;
+    }
+
+    // Default fallback (Safe only for subscriptions that don't need immediate chart)
     requestPayload = requestPayload || {
         date: "2000-01-01", time: "12:00", city: "Rome", state: "Italy"
     };

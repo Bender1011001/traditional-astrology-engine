@@ -62,7 +62,8 @@
                             <li class="locked"><i class="fas fa-lock"></i> No Mitigation Logic</li>
                             <li class="locked"><i class="fas fa-lock"></i> No Future Forecasts</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="startCheckout('CALIBRATION')">Get Calibration</button>
+                        <button class="btn btn-primary" onclick="window.startCheckout('calibration')">Get
+                            Calibration</button>
                     </div>
                 </div>
 
@@ -84,7 +85,7 @@
                             <li><i class="fas fa-check"></i> 10-Year Future Forecast</li>
                             <li><i class="fas fa-check"></i> Topographical Audit (12 Houses)</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="startCheckout('FULL')">Get Full Packet</button>
+                        <button class="btn btn-primary" onclick="window.startCheckout('full')">Get Full Packet</button>
                     </div>
                 </div>
             </div>
@@ -117,17 +118,26 @@
         </footer>
     </main>
 
-    <script>
-        function startCheckout(tier) {
-            // Placeholder logic: in production, this calls the API to create a checkout session
-            console.log("Starting checkout for tier:", tier);
-            const priceIds = {
-                'calibration': 'price_1SxwdNC8BJritqvrEik5MvuP',
-                'full': 'price_1SxwdOC8BJritqvrMhzG5C0x'
-            };
-            // Redirect or fetch from /api/v1/billing/create-checkout-session
-            window.location.href = `/checkout?tier=${tier}&price=${priceIds[tier]}`;
-        }
+    <script type="module">
+        import { initiateCheckout, setupPricing } from './js/pricing.js';
+
+        // Expose to window for onclicks
+        window.startCheckout = (tier) => {
+            // pricing.js logic handles token/redirect
+            // We pass null for chartRequest because on the pricing page, we might not have a chart yet
+            // pricing.js handles validation for 'onetime' if data is missing, 
+            // but for 'calibration' it might be simpler?
+            // Actually, pricing.js initiateCheckout expects 'onetime' logic to check window.dataCapturer?
+            // On pricing.html, we don't have the form. 
+            // So simpler checkout? Or redirect to index?
+            // If the user clicks "Get Calibration" here, they assume they are buying it. 
+            // But we need birth data.
+            // initiateCheckout handles this by alerting if missing.
+
+            initiateCheckout(tier);
+        };
+
+        document.addEventListener('DOMContentLoaded', setupPricing);
     </script>
 </body>
 

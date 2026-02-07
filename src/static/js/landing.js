@@ -122,7 +122,7 @@ function setupUnknownTimeToggle() {
 let loadingInterval;
 const LOADING_MSGS = [
     "Calculating planetary positions...", "Analyzing essential dignities...",
-    "Applying traditional techniques...", "Examing Lot of Fortune...",
+    "Applying traditional techniques...", "Examining Lot of Fortune...",
     "Calculating Almuten Figuris...", "Generating your forensic report..."
 ];
 
@@ -269,7 +269,7 @@ function renderPaywallTeaser(container, result) {
              <p style="color:var(--gold); font-weight:bold;">PREMIUM DATA HIDDEN</p>
              <ul style="list-style:none; padding:0; font-size:0.9em;">
                 <li>${ascPhrase}</li>
-                <li>Time Lord: <span class="redacted-text">SATURN</span></li>
+                <li>Time Lord: <span class="redacted-text">HIDDEN</span></li>
              </ul>
              <button class="btn-primary" onclick="window.openPaywall()">UNLOCK FULL REPORT</button>
         </div>
