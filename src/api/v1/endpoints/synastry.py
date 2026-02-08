@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from src.api.v1.schemas import SynastryRequest
-from src.engine.chart_calculator import calculate_chart_data
+from src.engine.calculator.main import calculate_chart_data
 from src.api.v1.utils import result_to_model
 from src.services.engine_bridge import SynastryEngineAsync
 

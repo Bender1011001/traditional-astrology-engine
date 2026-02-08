@@ -23,7 +23,7 @@ sys.path.insert(0, ROOT_DIR)
 from dotenv import load_dotenv
 load_dotenv(os.path.join(ROOT_DIR, ".env"))
 
-from src.engine.chart_calculator import calculate_chart_data, get_coordinates
+from src.engine.calculator.main import calculate_chart_data, get_coordinates
 from src.engine.forensic_engine import Auditor
 from src.engine.electional import ElectionalEngine
 from src.engine.mundane import MundaneEngine

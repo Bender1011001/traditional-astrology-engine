@@ -1,5 +1,5 @@
 from fastapi.concurrency import run_in_threadpool
-from src.engine.chart_calculator import calculate_chart_data
+from src.engine.calculator.main import calculate_chart_data
 from src.engine.forensic_forecast import calculate_5_day_forecast
 from src.engine.synastry import SynastryEngine
 from src.engine.forensic_engine import Auditor

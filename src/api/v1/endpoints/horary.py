@@ -1,7 +1,7 @@
 from datetime import datetime
 from fastapi import APIRouter, HTTPException
 from src.api.v1.schemas import HoraryRequest
-from src.engine.chart_calculator import calculate_chart_data, get_local_datetime_now
+from src.engine.calculator.main import calculate_chart_data, get_local_datetime_now
 from src.engine.horary import build_horary_oracle
 from src.api.v1.utils import result_to_model
 

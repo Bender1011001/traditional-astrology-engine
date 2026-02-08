@@ -4,7 +4,7 @@ import swisseph as swe
 import logging
 
 from .models import Planet, Chart, Sect, PlanetName, Sign
-from .chart_calculator import calculate_chart_data
+from src.engine.calculator.main import calculate_chart_data
 from .advanced_mechanics import AlmutenEngine, HermeticLotEngine, DoryphoryEngine, MonomoiriaEngine, DodecatemoriaEngine
 from .electional import ElectionalEngine
 from .solar_return import SolarReturnEngine

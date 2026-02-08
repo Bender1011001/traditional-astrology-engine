@@ -5,7 +5,7 @@ from .models import Chart, Planet, PlanetName, Sign, Sect
 from .calculations import is_void_of_course, calculate_solar_status, is_besieged
 from .dignities import DignityCalculator
 from .reference_data import DOMICILES as SIGN_RULERS
-from .chart_calculator import get_coordinates
+from src.engine.calculator.main import get_coordinates
 
 class ElectionalEngine:
     """

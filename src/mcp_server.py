@@ -41,7 +41,7 @@ from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent
 
 # Astrology engine imports
-from src.engine.chart_calculator import ChartCalculator, get_coordinates
+from src.engine.calculator.main import ChartCalculator, get_coordinates
 from src.engine.forensic_engine import Auditor
 from src.engine.electional import ElectionalEngine
 from src.engine.decennials import DecennialEngine

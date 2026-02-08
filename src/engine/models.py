@@ -79,6 +79,10 @@ class Planet:
     def degree_in_sign(self) -> float:
         return self.longitude % 30
 
+    @property
+    def is_retrograde(self) -> bool:
+        return self.speed < 0
+
 @dataclass
 class Chart:
     sun_altitude: float # Degrees above/below horizon
