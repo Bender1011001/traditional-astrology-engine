@@ -97,8 +97,16 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
 class CanonicalDomainMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         host = request.headers.get("host", "")
+        
+        # Determine scheme, trusting X-Forwarded-Proto if present (for load balancers)
+        scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+
+        # Skip redirection for localhost to allow local development
+        if "localhost" in host or "127.0.0.1" in host:
+            return await call_next(request)
+
         # Redirect www.traditional-astrology.com and http to https://traditional-astrology.com
-        if host.startswith("www.") or request.url.scheme == "http":
+        if host.startswith("www.") or scheme == "http":
             canonical_host = host.replace("www.", "")
             url = f"https://{canonical_host}{request.url.path}"
             if request.url.query:
