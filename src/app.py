@@ -31,12 +31,15 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup_event():
+    print("DEBUG: Startup Event Triggered")
     logging.info("Starting up... Initializing database tables.")
     from src.database.core import engine, Base
     from src.database.models import User # Ensure models are loaded
     try:
+        print("DEBUG: Calling create_all()...")
         # This will create tables if they don't exist
         Base.metadata.create_all(bind=engine)
+        print("DEBUG: create_all() completed.")
         logging.info("Database tables initialized successfully.")
         
         # Auto-seed plans if missing (to prevent 'Plan free not found' errors)

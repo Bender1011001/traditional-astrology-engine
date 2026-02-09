@@ -8,12 +8,16 @@ class RateLimiter:
         # If REDIS_URL is default (localhost), it might fail if redis not running.
         # Fallback to in-memory? Plan says "Support high-volume B2B clients using Redis."
         # If we want robustness, we can try-except connect.
-        try:
-            self.redis = redis.from_url(settings.REDIS_URL, decode_responses=True)
-            self.redis.ping() # Test connection
-            self.use_redis = True
-        except Exception as e:
-            print(f"Redis connection failed: {e}. Falling back to in-memory.")
+        if settings.REDIS_URL:
+            try:
+                self.redis = redis.from_url(settings.REDIS_URL, decode_responses=True)
+                self.redis.ping() # Test connection
+                self.use_redis = True
+            except Exception as e:
+                print(f"Redis connection failed: {e}. Falling back to in-memory.")
+                self.use_redis = False
+                self._requests = {}
+        else:
             self.use_redis = False
             self._requests = {}
 

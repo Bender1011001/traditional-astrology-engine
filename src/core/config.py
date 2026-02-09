@@ -7,7 +7,9 @@ class Settings(BaseSettings):
     JWT_SECRET: str
     ADMIN_SECRET_KEY: str = ""  # Admin endpoint authentication
     DATABASE_URL: str = "sqlite:///./users.db"
-    REDIS_URL: str = "redis://localhost:6379"
+    DATABASE_URL: str = "sqlite:///./users.db"
+    REDIS_URL: Optional[str] = None
+    SENDER_EMAIL: str
     SENDER_EMAIL: str
     SENDGRID_API_KEY: Optional[str] = None
     SITE_BASE_URL: str = "https://traditional-astrology.com"

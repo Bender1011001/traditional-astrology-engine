@@ -19,6 +19,14 @@ if "postgres" in DATABASE_URL and "localhost" not in DATABASE_URL and "127.0.0.1
         separator = "&" if "?" in DATABASE_URL else "?"
         DATABASE_URL += f"{separator}sslmode=require"
 
+# Log connection attempt (masked)
+safe_url = DATABASE_URL
+if "@" in safe_url:
+    part1 = safe_url.split("@")[1]
+    print(f"DEBUG: Connecting to DB at {part1.split('?')[0]} with SSL={ 'sslmode' in safe_url }")
+else:
+    print(f"DEBUG: Connecting to Local/Sqlite DB")
+
 # Engine configuration for managed databases (Azure/Render)
 engine_kwargs = {
     "pool_size": 5,
@@ -33,7 +41,7 @@ else:
     # Explicitly set SSL for Postgres
     engine_kwargs["connect_args"] = {
         "sslmode": "require",
-        "connect_timeout": 10
+        "connect_timeout": 5  # Reduced timeout for faster failure debugging
     }
 
 engine = create_engine(DATABASE_URL, **engine_kwargs)
