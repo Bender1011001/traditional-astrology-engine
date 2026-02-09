@@ -41,7 +41,6 @@ async def run_audit(
         state=data.state,
         name=data.name or "Native",
         house_system=data.house_system,
-        house_system=data.house_system,
         zodiac_system=data.zodiac_system,
         ayanamsa=data.ayanamsa,
         node_type=data.node_type

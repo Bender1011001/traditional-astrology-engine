@@ -1,5 +1,6 @@
 import sys
 import os
+from datetime import datetime
 import pytz
 
 # Add project root to path
@@ -13,11 +14,11 @@ from src.engine.classical_mechanics import ClassicalMechanicsEngine
 def generate_shadow_report():
     # Target: A chart where a planet is weak but saved by hidden factors.
     # 2022-09-05: Venus in Virgo. Jupiter in Aries.
-    date = "2022-09-05"
-    time = "12:00"
+    dt_str = "2022-09-05 12:00"
+    dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M")
     
     calc = ChartCalculator()
-    chart = calc.calculate_chart(date, time, "London", "")
+    chart = calc.calculate_chart(dt, "London", "")
     
     venus = next(p for p in chart.planets if p.name == PlanetName.VENUS)
     jupiter = next(p for p in chart.planets if p.name == PlanetName.JUPITER)
@@ -38,7 +39,7 @@ def generate_shadow_report():
     print("="*60)
     
     print(f"\n[SURFACE ANALYSIS]")
-    print(f"Target: VENUS in {venus.sign.value} ({venus.position_in_sign:.2f}°)")
+    print(f"Target: VENUS in {venus.sign.value} ({venus.degree_in_sign:.2f}°)")
     print(f"Essential Dignity Score: {score}")
     print(f"Condition: {status}")
     print("Standard Judgment: Relational difficulty, scarcity.")
@@ -72,12 +73,17 @@ def generate_shadow_report():
         # Let's just print the Dodec result for now as proof.
         print("> ADVISORY: No strict Antiscia aspect found in this specific chart.")
     
-    print("\n[FINAL JUDGMENT]")
+    print("\n[ FINAL JUDGMENT ]")
     if dodec.sign.value in ["Taurus", "Libra", "Pisces"]:
-         print(f"Dodecatemoria in {dodec.sign.value} (Dignified) overrides surface weakness.")
-         print("Conclusion: Hidden resources found despite surface scarcity.")
+         print(f"CRITICAL FINDING: Dodecatemoria in {dodec.sign.value} (Venus's own signs).")
+         print("While the surface Venus appears weak, her 'seed' (Dodecatemorion) is highly dignified.")
+         print("Conclusion: Hidden quality exists that will emerge in the long term. Scarcity is an illusion.")
     else:
-         print("Conclusion: Condition remains severe.")
+         print("Conclusion: No hidden support found. Condition remains severely debility.")
+    
+    print("\n[ LOGIC NOTE ]")
+    print("Dodecatemoria represents the 'Micro-Sign' of the planet. Even if the 'Macro-Sign'\n"
+          "is hostile, a dignified Micro-Sign provides a safe haven for the planet's function.")
     
     print("="*60 + "\n")
 

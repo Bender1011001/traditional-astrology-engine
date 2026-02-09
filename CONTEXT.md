@@ -159,6 +159,7 @@ The core delineations are now stored in the database to allow for manual fixes a
 | ACR ImagePullFailure | Truncated Registry Password used in App Settings | Copy THE FULL 80+ CHAR password from ACR credentials |
 | Plan Not Found (Reg) | Database not seeded with standard plans | Added `seed_plans()` to app startup event |
 | Indexing Blind Spot | Lack of canonicalization & authority signals | Added `CanonicalDomainMiddleware` and tuned `robots.txt` |
+| SyntaxError: duplicate argument | Repeated `house_system` in method signature/calls | Cleansed signature and corrected API calls |
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py

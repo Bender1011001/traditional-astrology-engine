@@ -107,7 +107,6 @@ class Auditor:
         state: str = "",
         name: str = "Native",
         house_system: str = "W",
-        house_system: str = "W",
         zodiac_system: str = "tropical",
         ayanamsa: Optional[str] = None,
         node_type: str = "mean",

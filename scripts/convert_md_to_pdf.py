@@ -83,4 +83,10 @@ if __name__ == "__main__":
          chart_data["meta"]["time"] = "08:30"
          chart_data["meta"]["city"] = "Coyoacán"
 
+    elif "1996" in latest_file:
+         chart_data["meta"]["subject_name"] = "Subject (1996)"
+         chart_data["meta"]["date"] = "1996-08-13"
+         chart_data["meta"]["time"] = "07:18"
+         chart_data["meta"]["city"] = "Fairfield, CA"
+
     convert_md_to_pdf(latest_file)
