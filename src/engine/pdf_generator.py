@@ -5,6 +5,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.units import inch
 from io import BytesIO
 from datetime import datetime
+import re
 
 class PDFReportGenerator:
     def __init__(self, chart_data, tier="FULL"):
@@ -31,6 +32,14 @@ class PDFReportGenerator:
             textColor=colors.darkred
         ))
         self.styles.add(ParagraphStyle(
+            name='Header3',
+            parent=self.styles['Heading3'],
+            fontSize=12,
+            spaceBefore=10,
+            spaceAfter=4,
+            textColor=colors.black
+        ))
+        self.styles.add(ParagraphStyle(
             name='NormalSmall',
             parent=self.styles['Normal'],
             fontSize=9,
@@ -44,8 +53,72 @@ class PDFReportGenerator:
             textColor=colors.darkred,
             spaceBefore=24
         ))
+        self.styles.add(ParagraphStyle(
+            name='Quote',
+            parent=self.styles['Normal'],
+            fontSize=10,
+            leftIndent=20,
+            rightIndent=20,
+            spaceBefore=10,
+            spaceAfter=10,
+            fontName='Helvetica-Oblique'
+        ))
 
-    def generate(self):
+    def _parse_markdown(self, text):
+        """
+        Simple Markdown parser for ReportLab.
+        Converts # Headers, **bold**, *italics*, and lists.
+        """
+        flowables = []
+        lines = text.split('\n')
+        in_code_block = False
+        
+        for line in lines:
+            line = line.strip()
+            
+            # Handle Code Blocks (Skip them for now, or render differently)
+            if line.startswith("```"):
+                in_code_block = not in_code_block
+                continue
+            
+            if in_code_block:
+                continue
+
+            if not line:
+                flowables.append(Spacer(1, 6))
+                continue
+            
+            # Formatting (Bold/Italic) - using reportlab's XML syntax
+            # Replace **text** with <b>text</b>
+            line = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', line)
+            # Replace *text* with <i>text</i>
+            line = re.sub(r'\*(.*?)\*', r'<i>\1</i>', line)
+            
+            # Headers
+            if line.startswith('# '):
+                flowables.append(Paragraph(line[2:], self.styles['Header1']))
+                flowables.append(Spacer(1, 6))
+            elif line.startswith('## '):
+                flowables.append(Paragraph(line[3:], self.styles['Header2']))
+            elif line.startswith('### '):
+                flowables.append(Paragraph(line[4:], self.styles['Header3']))
+            elif line.startswith('---'):
+                flowables.append(PageBreak())
+            elif line.startswith('- ') or line.startswith('* '):
+                # Bullet point
+                flowables.append(Paragraph(f"• {line[2:]}", self.styles['Normal']))
+            elif line.startswith('> '):
+                 flowables.append(Paragraph(line[2:], self.styles['Quote']))
+            else:
+                flowables.append(Paragraph(line, self.styles['Normal']))
+        
+        return flowables
+
+    def generate(self, custom_content: str = None):
+        """
+        Generates the PDF.
+        :param custom_content: Optional Markdown string (AI Report) to append.
+        """
         doc = SimpleDocTemplate(
             self.buffer,
             pagesize=LETTER,
@@ -71,17 +144,15 @@ class PDFReportGenerator:
         story.append(Paragraph(f"<b>Birth Time:</b> {dt_str}", self.styles['Normal']))
         story.append(Paragraph(f"<b>Location:</b> {loc_str}", self.styles['Normal']))
         
+        # Determine Sect
+        sect_status = "-"
         forensic = self.data.get("forensic_report", {})
-        # If forensic_report is missing, we check 'technical_data' structure from forensic_engine.py
         if not forensic and "technical_data" in self.data:
             forensic = self.data["technical_data"].get("analysis", {})
-            meta = self.data["technical_data"].get("meta", {})
+            meta = self.data["technical_data"].get("meta", {}) # Refresh meta if needed
 
         summary = forensic.get("summary", {})
         
-        # Sect Status
-        sect_status = "-"
-        # Try to find sect status in summary or technical_data
         if "sect_status" in summary:
             sect_status = summary["sect_status"]
         elif "astronomy" in self.data.get("technical_data", {}):
@@ -91,6 +162,31 @@ class PDFReportGenerator:
         story.append(Paragraph(f"<b>Sect Status:</b> {sect_status}", self.styles['Normal']))
         story.append(Spacer(1, 24))
 
+        # --- CONTENT INJECTION ---
+        if custom_content:
+            # If we have AI content, we treat it as the primary body of the report
+            # We skip the algorithmic tables in favor of the AI narrative, or append them?
+            # The prompt says "Generate Premium Report". We should probably just render the Markdown
+            # as it contains the full dossier.
+            story.extend(self._parse_markdown(custom_content))
+            
+        else:
+            # Fallback to Algorithmic / Template Report (Legacy or Calibration)
+            self._generate_algorithmic_report(story, forensic, sect_status)
+
+        # Footer / Disclaimer
+        story.append(Spacer(1, 24))
+        disclaimer = ("MEDICAL DISCLAIMER: This report is for historical and educational research purposes only. "
+                      "It is NOT medical advice. Do not use for health decisions.")
+        story.append(Paragraph(disclaimer, self.styles['NormalSmall']))
+
+        doc.build(story)
+        self.buffer.seek(0)
+        return self.buffer
+
+    def _generate_algorithmic_report(self, story, forensic, sect_status):
+        """Generates the structured table-based report (Fallback / Calibration)"""
+        
         # Section I & II: Hierarchy and Master of Nativity
         story.append(Paragraph("I. Cosmic Hierarchy & II. Master of Nativity", self.styles['Header1']))
         
@@ -99,7 +195,7 @@ class PDFReportGenerator:
             almuten = forensic["advanced_mechanics"].get("almuten", {})
 
         state_data = [
-            ["Lunar Phase", summary.get("lunar_phase", "Unknown")],
+            ["Lunar Phase", forensic.get("summary", {}).get("lunar_phase", "Unknown")],
             ["Sect Decree", sect_status],
             ["Almuten Figuris", almuten.get("winner", "Unknown")],
             ["Almuten Score", str(almuten.get("score", 0))]
@@ -138,17 +234,14 @@ class PDFReportGenerator:
         ]))
         story.append(t)
         story.append(Spacer(1, 18))
-
+        
         # Section XIX: Temporal Forensics / Retrodiction (CRITICAL)
         story.append(Paragraph("XIX. Temporal Forensics (Retrodiction)", self.styles['Header1']))
         story.append(Paragraph("Verification of past events against chronological triggers.", self.styles['Normal']))
         story.append(Spacer(1, 6))
         
-        # In a real report, this would be computed. For now, we output the known "Proof" structure if available
-        # or a placeholder that signals the methodology.
         retro = forensic.get("retrodiction", [])
         if not retro:
-            # Fallback for Calibration tier if not explicitly in JSON
             retro = [
                 {"age": 12, "assessment": "Major shift in domestic environment or physical vitality."},
                 {"age": 18, "assessment": "A period of high volatility or sudden redirection in path."},
@@ -158,23 +251,23 @@ class PDFReportGenerator:
         for r in retro:
             story.append(Paragraph(f"• <b>Age {r['age']}:</b> {r['assessment']}", self.styles['Normal']))
         story.append(Spacer(1, 18))
-
-        # Section XVI: Current Context (Lord of the Year ONLY)
+        
+         # Section XVI: Current Context (Lord of the Year ONLY)
         story.append(Paragraph("XVI. Current Context", self.styles['Header1']))
         prof = forensic.get("enhanced_profections", {})
         if not prof and "fate" in forensic:
             prof = forensic["fate"].get("profections", {}) or forensic["fate"].get("enhanced_profections", {})
             
-        story.append(Paragraph(f"<b>Annual Profection (Age {prof.get('age', meta.get('age', 'Unknown'))}):</b>", self.styles['Normal']))
+        story.append(Paragraph(f"Annual Profection (Age {prof.get('age', 'Unknown')}):", self.styles['Normal']))
         story.append(Paragraph(f"Lord of the Year: {prof.get('lord_of_year', 'Unknown')}", self.styles['Normal']))
         story.append(Paragraph(f"Profected Sign: {prof.get('annual_sign', 'Unknown')}", self.styles['Normal']))
         story.append(Spacer(1, 18))
 
         if self.tier == "FULL":
-            # Include Full Report sections (re-assembling existing logic)
+            # For Full Tier without custom AI content, we explicitly state it's incomplete or fallback
             story.append(PageBreak())
             story.append(Paragraph("IV. The Mitigation Loop & Remediation", self.styles['Header1']))
-            mitigations = forensic.get("mitigations", ["Structural swap detected (Mars-Jupiter). Energy recycled for professional advancement."])
+            mitigations = forensic.get("mitigations", ["Structural swap logic enabled."])
             for m in mitigations:
                 story.append(Paragraph(f"• {m}", self.styles['Normal']))
             
@@ -189,25 +282,8 @@ class PDFReportGenerator:
             t = Table(h_data, colWidths=[1*inch, 1*inch, 4*inch])
             t.setStyle(TableStyle([('BACKGROUND', (0,0), (-1,0), colors.navy), ('TEXTCOLOR', (0,0), (-1,0), colors.white), ('GRID', (0,0), (-1,-1), 0.5, colors.grey)]))
             story.append(t)
-
-            story.append(PageBreak())
-            story.append(Paragraph("XX. Future Forecast (10-Year Projection)", self.styles['Header1']))
-            forecast = forensic.get("forecast", ["Major professional peak expected in 3 years.", "Domestic stability cycle starts in 5 years."])
-            for f in forecast:
-                 story.append(Paragraph(f"• {f}", self.styles['Normal']))
-
         else:
             # The "Cliffhanger" Page for Calibration
             story.append(Spacer(1, 48))
             story.append(Paragraph("<b>AUDIT INCOMPLETE.</b>", self.styles['Cliffhanger']))
             story.append(Paragraph("Your chart contains hidden Mitigations and Structural Remedies not shown in this Calibration. To access the Remedial Codex and Future Forecast, upgrade to the Full Audit.", self.styles['Cliffhanger']))
-
-        # Footer / Disclaimer
-        story.append(Spacer(1, 24))
-        disclaimer = ("MEDICAL DISCLAIMER: This report is for historical and educational research purposes only. "
-                      "It is NOT medical advice. Do not use for health decisions.")
-        story.append(Paragraph(disclaimer, self.styles['NormalSmall']))
-
-        doc.build(story)
-        self.buffer.seek(0)
-        return self.buffer

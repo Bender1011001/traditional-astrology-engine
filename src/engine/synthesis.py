@@ -231,6 +231,19 @@ class ReportSynthesizer:
             
             if name not in ["North_Node", "South_Node"]:
                 text += f"- **Essential Dignity:** `{total_score}` (Domicile: {dignity.get('domicile_ruler')}, Exaltation: {dignity.get('exaltation_ruler')})\n"
+                
+                # Peregrine Check
+                breakdown = dignity.get("score_breakdown", {})
+                essential_sum = (
+                    breakdown.get("domicile", 0) + 
+                    breakdown.get("exaltation", 0) + 
+                    breakdown.get("triplicity", 0) + 
+                    breakdown.get("term", 0) + 
+                    breakdown.get("face", 0)
+                )
+                if essential_sum == 0 and name not in ["North_Node", "South_Node"]:
+                    text += f"  - 🦅 **Peregrine (Wanderer):** This planet lacks essential dignity, behaving like a stranger in a foreign land without resources.\n"
+                
                 text += f"- **Solar Condition:** {solar_cond}\n"
             
             if maltreatments:

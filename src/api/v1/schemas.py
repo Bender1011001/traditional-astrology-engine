@@ -13,6 +13,7 @@ class ChartRequest(BaseModel):
     compare_house_systems: Optional[bool] = False
     zodiac_system: Optional[str] = None
     ayanamsa: Optional[str] = None
+    node_type: str = "mean" # "mean" or "true"
     rectification_methods: Optional[List[str]] = None
     time_range_start: Optional[str] = None
     time_range_end: Optional[str] = None

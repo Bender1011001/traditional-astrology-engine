@@ -107,8 +107,10 @@ class Auditor:
         state: str = "",
         name: str = "Native",
         house_system: str = "W",
+        house_system: str = "W",
         zodiac_system: str = "tropical",
         ayanamsa: Optional[str] = None,
+        node_type: str = "mean",
         analysis_date: Optional[datetime] = None
     ) -> Dict[str, Any]:
         """
@@ -123,7 +125,8 @@ class Auditor:
                 state=state,
                 house_system=house_system,
                 zodiac_system=zodiac_system,
-                ayanamsa=ayanamsa
+                ayanamsa=ayanamsa,
+                node_type=node_type,
             )
 
             if "error" in raw_chart_data:

@@ -52,44 +52,89 @@ export function setupPricing() {
             if (periodStarter) periodStarter.textContent = period;
         };
     }
+    }
+
+
+let pendingTier = null;
+
+export function setupDirectIntake() {
+    const intakeModal = document.getElementById("intakeModal");
+    const intakeClose = document.getElementById("intakeClose");
+    const intakeForm = document.getElementById("intakeForm");
+    const intakeTimeUnknown = document.getElementById("intakeTimeUnknown");
+    const intakeTime = document.getElementById("intakeTime");
+
+    if (intakeClose) {
+        intakeClose.onclick = () => {
+            if (intakeModal) intakeModal.classList.add("hidden");
+            pendingTier = null;
+        };
+    }
+
+    if (intakeTimeUnknown && intakeTime) {
+        intakeTimeUnknown.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                intakeTime.value = "12:00";
+                intakeTime.disabled = true;
+            } else {
+                intakeTime.disabled = false;
+            }
+        });
+    }
+
+    if (intakeForm) {
+        intakeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const date = document.getElementById("intakeDate").value;
+            const time = document.getElementById("intakeTime").value;
+            const city = document.getElementById("intakeCity").value;
+            const unknown = document.getElementById("intakeTimeUnknown")?.checked;
+
+            if (!date || !city) {
+                alert("Please enter birth date and city.");
+                return;
+            }
+
+            const payload = {
+                date: date,
+                time: (unknown || !time) ? "12:00" : time,
+                city: city,
+                state: "" // Optional for rough intake
+            };
+
+            // Save for persistence
+            localStorage.setItem("cael_last_request", JSON.stringify(payload));
+
+            // Hide modal
+            if (intakeModal) intakeModal.classList.add("hidden");
+
+            // Resume checkout
+            if (pendingTier) {
+                initiateCheckout(pendingTier, payload);
+                pendingTier = null;
+            } else {
+                // If somehow triggered without a tier, default to something or just stop
+                // But realistically pendingTier should be set.
+            }
+        });
+    }
 }
 
 export async function initiateCheckout(tier, chartRequest = null) {
     const token = localStorage.getItem('cael_auth_token');
+    
+    // Auth Check first
     if (!token) {
-        // Redirect to login, preserving intent
         window.location.href = `login.html?redirect=pricing&tier=${tier}`;
         return;
     }
 
-    // Determine annual status
-    // If billing toggle exists (Pricing Modal), use it.
-    // If not (Paywall Modal), strict logic or passed param? 
-    // For now, let's look for billingToggle first, else default to false (monthly) unless explicitly handled
     const billingToggle = document.getElementById("billingToggle");
     const isAnnual = billingToggle ? billingToggle.checked : false;
 
-    // Use passed chartRequest or try fallback logic if needed. 
     let requestPayload = chartRequest;
 
-    // For B2C (onetime), force validation of captured data
-    if (tier === 'onetime' && !requestPayload) {
-        if (window.dataCapturer) {
-            requestPayload = window.dataCapturer.getBirthData();
-        }
-
-        if (!requestPayload || !requestPayload.lat) {
-            alert("REQUIRED: Please enter your birth data and calculate the 'Preliminary Judgment' first. We need this data to generate your Premium Dossier.");
-            if (pricingModal) pricingModal.classList.add("hidden");
-            document.getElementById('calculate')?.scrollIntoView({ behavior: 'smooth' });
-            return;
-        }
-
-        const confirmed = confirm(`VALIDATION: Proceed with this data?\n\nDate: ${requestPayload.date}\nTime: ${requestPayload.time}\nCity: ${requestPayload.city}\n\nFinalizing payment will secure your 100+ page Forensic Audit.`);
-        if (!confirmed) return;
-    }
-
-    // Try to recover from localStorage if null
+    // 1. Try to get from localStorage if not passed
     if (!requestPayload) {
         try {
             const saved = localStorage.getItem("cael_last_request");
@@ -97,18 +142,22 @@ export async function initiateCheckout(tier, chartRequest = null) {
         } catch (e) { }
     }
 
-    // Strict validation for detailed reports
-    if ((tier === 'onetime' || tier === 'calibration' || tier === 'full') && !requestPayload) {
-        alert("REQUIRED: Please enter your birth data on the Home page first so we know what to calculate.");
-        window.location.href = "index.html#reading";
-        return;
+    // 2. If still missing, trigger Direct Intake Modal
+    if (!requestPayload) {
+        const intakeModal = document.getElementById("intakeModal");
+        if (intakeModal) {
+            pendingTier = tier; // Store user intent
+            intakeModal.classList.remove("hidden");
+            return; // Stop execution, wait for modal
+        } else {
+            // Fallback if modal missing (shouldn't happen if html updated)
+            alert("REQUIRED: Please enter your birth data on the Home page first.");
+            window.location.href = "index.html#reading";
+            return;
+        }
     }
 
-    // Default fallback (Safe only for subscriptions that don't need immediate chart)
-    requestPayload = requestPayload || {
-        date: "2000-01-01", time: "12:00", city: "Rome", state: "Italy"
-    };
-
+    // 3. Proceed with valid payload
     try {
         const resp = await fetch(apiUrl("/api/v1/billing/create-checkout-session"), {
             method: "POST",
@@ -128,7 +177,6 @@ export async function initiateCheckout(tier, chartRequest = null) {
         if (!resp.ok) {
             const err = await resp.json();
             if (resp.status === 401) {
-                // Token invalid
                 window.location.href = "login.html";
                 return;
             }

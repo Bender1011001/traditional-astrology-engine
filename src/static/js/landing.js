@@ -182,7 +182,11 @@ function setupBasicForm() {
             date: document.getElementById("basicDate").value,
             time: timeUnknown && !timeValue ? "12:00" : timeValue,
             city: document.getElementById("basicCity").value,
-            state: document.getElementById("basicState").value
+            time: timeUnknown && !timeValue ? "12:00" : timeValue,
+            city: document.getElementById("basicCity").value,
+            state: document.getElementById("basicState").value,
+            house_system: document.getElementById("houseSystem").value,
+            node_type: document.getElementById("nodeType").value
         };
 
         if (!payload.date || !payload.city || (!payload.time && !timeUnknown)) {

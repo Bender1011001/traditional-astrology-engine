@@ -41,7 +41,8 @@ class ChartCalculator:
         state: str = "",
         house_system: str | None = None,
         zodiac_system: str | None = None,
-        ayanamsa: str | None = None
+        ayanamsa: str | None = None,
+        node_type: str = "mean" # "mean" or "true"
     ) -> Chart:
         # 1. Geocoding
         lat, lon = get_coordinates(city, state)
@@ -96,7 +97,7 @@ class ChartCalculator:
             "Uranus": swe.URANUS,
             "Neptune": swe.NEPTUNE,
             "Pluto": swe.PLUTO,
-            "North_Node": swe.MEAN_NODE 
+            "North_Node": swe.TRUE_NODE if node_type == "true" else swe.MEAN_NODE
         }
 
         chart_planets = []
@@ -213,7 +214,8 @@ def calculate_chart_data(
     time_range_start: str | None = None,
     time_range_end: str | None = None,
     time_range_samples: int | None = None,
-    include_sensitivity: bool = True
+    include_sensitivity: bool = True,
+    node_type: str = "mean"
 ):
     """
     Calculate chart data for the given input.
@@ -228,7 +230,7 @@ def calculate_chart_data(
     calc = ChartCalculator()
     
     try:
-        chart = calc.calculate_chart(dt, city, state, house_system, zodiac_system, ayanamsa)
+        chart = calc.calculate_chart(dt, city, state, house_system, zodiac_system, ayanamsa, node_type)
     except Exception as e:
         return {"error": str(e)}
 
@@ -277,7 +279,8 @@ def calculate_chart_data(
             "zodiac_system": {
                  "code": zodiac_code,
                  "label": zodiac_label
-            }
+            },
+            "node_type": node_type
         },
         "planets": {},
         "houses": chart.houses,

@@ -1,9 +1,11 @@
 import logging
 import asyncio
 from datetime import datetime
+from starlette.concurrency import run_in_threadpool
 from src.services.engine_bridge import generate_full_nativity_async
 from src.engine.pdf_generator import PDFReportGenerator
 from src.engine.email_service import send_email, render_template
+from src.services.premium_generator import PremiumGenerator
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +35,7 @@ class FulfillmentService:
                 state=chart_request.get("state", ""),
                 name=chart_request.get("name", user_name),
                 # defaults
-                house_system="P",
+                house_system="W",  # Enforce Whole Sign for Premium Consistency
                 zodiac_system="T", 
                 ayanamsa="0"
             )
@@ -43,31 +45,49 @@ class FulfillmentService:
                 # TODO: Send "Sorry" email?
                 return
 
-            # 2. Generate PDF
-            logger.info("Generating PDF...")
-            # Detect tier for PDF branding
-            pdf_tier = "CALIBRATION" if tier.lower() == "calibration" else "FULL"
+            # 2. Generate Report Content (AI vs Algo)
+            pdf_tier = "FULL" # Default to FULL for standard flow, unless specified otherwise
+            custom_markdown = None
+            
+            # Check if this is a Calibration report
+            if tier.lower() == "calibration":
+                pdf_tier = "CALIBRATION"
+                logger.info("Generating Calibration Report (Algo only)...")
+            else:
+                # FULL / PREMIUM TIER -> Trigger AI
+                logger.info("Generating Premium AI Dossier (This may take time)...")
+                try:
+                    # Run LLM generation in threadpool to avoid blocking
+                    custom_markdown = await run_in_threadpool(
+                        PremiumGenerator.generate_premium_report_markdown, 
+                        chart_data
+                    )
+                except Exception as ai_error:
+                    logger.error(f"AI Generation Failed: {ai_error}")
+                    # Fallback to Algorithmic Full Report if AI fails
+                    custom_markdown = f"# Report Generation Issue\n\nWe encountered a disruption in the etheric link. The standardized algorithmic report follows below.\n\n---\n"
+
+            # 3. Generate PDF
+            logger.info("Rendering PDF...")
             
             # PDF Generator expects the full data object
             generator = PDFReportGenerator(chart_data, tier=pdf_tier)
-            pdf_buffer = generator.generate()
+            pdf_buffer = await run_in_threadpool(generator.generate, custom_content=custom_markdown)
             pdf_bytes = pdf_buffer.getvalue()
             
-            # 3. Send Email
+            # 4. Send Email
             logger.info(f"Sending email to {user_email}...")
             
             # Determine email template based on tier
             subject = "Your Astrology Report"
             if pdf_tier == "CALIBRATION":
                 subject = "Your Calibration Audit (Codex Caelestis)"
-                template = "order_calibration.html" # We need to ensure this exists or use logic
+                template = "order_calibration.html" 
             else:
                 subject = "Your Forensic Dossier (Codex Caelestis)"
                 template = "order_full.html"
 
             # Construct simple HTML if template doesn't exist yet (Safety first)
-            # But ideally we use render_template
-            
             html_content = f"""
             <h1>Your Report is Ready</h1>
             <p>Dear {user_name},</p>
@@ -81,16 +101,12 @@ class FulfillmentService:
             <p>Sincerely,<br>The Codex Caelestis Engine</p>
             """
             
-            # Try to use a better template if we can, but fallback to string above is safe
-            # Let's just use the string for now to guarantee it works without file dependencies
-            # We can upgrade to templates later.
-            
             success = send_email(
                 to_email=user_email,
                 subject=subject,
                 html_content=html_content,
                 attachment_bytes=pdf_bytes,
-                attachment_name=f"Codex_Report_{datetime.utcnow().strftime('%Y%m%d')}.pdf"
+                attachment_name=f"Codex_{pdf_tier}_{datetime.utcnow().strftime('%Y%m%d')}.pdf"
             )
             
             if success:
@@ -100,4 +116,3 @@ class FulfillmentService:
 
         except Exception as e:
             logger.exception(f"CRITICAL FULFILLMENT ERROR for {user_email}: {e}")
-

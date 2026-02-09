@@ -1,0 +1,2752 @@
+{
+  "summary": {
+    "sect": "Day",
+    "temperament": {
+      "moon_sign": "Leo",
+      "element": "Fire",
+      "excess_humor": "Choleric (Yellow Bile)",
+      "palliative_nature": "Cooling and Moistening (e.g., Barley water, Cucumber)"
+    },
+    "lunar_mansion": {
+      "mansion_id": 25,
+      "name": "Sa'd al-Akhbiyah",
+      "start_lon_deg": 308.571429,
+      "end_lon_deg": 321.428572,
+      "intents_good": [
+        "sieges",
+        "seeking fights",
+        "taking revenge on enemies",
+        "safety in travel (though causes delays)",
+        "fortifying buildings"
+      ],
+      "intents_bad": [
+        "marriage",
+        "planting",
+        "partnerships",
+        "purchasing animals",
+        "employment"
+      ],
+      "source_refs": [
+        "Picatrix Bk I, Ch 4",
+        "Medieval Astrology Guide"
+      ]
+    },
+    "mutual_receptions": [
+      {
+        "planet_a": "Venus",
+        "planet_b": "Mars",
+        "type": "Major Mixed",
+        "score": 9
+      },
+      {
+        "planet_a": "Mars",
+        "planet_b": "Jupiter",
+        "type": "Mixed",
+        "score": 7
+      },
+      {
+        "planet_a": "Mercury",
+        "planet_b": "Saturn",
+        "type": "Mixed",
+        "score": 5
+      },
+      {
+        "planet_a": "Mercury",
+        "planet_b": "Jupiter",
+        "type": "Mixed",
+        "score": 4
+      },
+      {
+        "planet_a": "Venus",
+        "planet_b": "Saturn",
+        "type": "Mixed",
+        "score": 3
+      }
+    ],
+    "constructive_team": [
+      "Sun",
+      "Jupiter",
+      "Saturn"
+    ],
+    "destructive_team": [
+      "Mars"
+    ],
+    "maltreatments": {
+      "Sun": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Mars",
+          "description": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        }
+      ],
+      "Moon": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        },
+        {
+          "condition": "Striking with a Ray",
+          "malefic": "Saturn",
+          "description": "Struck by Saturn via tight square (2.3\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "Mercury": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Mars",
+          "description": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        }
+      ],
+      "Jupiter": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)",
+          "severity": 7
+        }
+      ]
+    },
+    "hemispheres": {
+      "East": 3,
+      "West": 6,
+      "North": 2,
+      "South": 7
+    },
+    "hemisphere_focus": {
+      "orientation": "Other-Oriented (West)",
+      "visibility": "Public/Objective (South)"
+    }
+  },
+  "vitality": {
+    "vitality_rating": "Refer to Hyleg-Alcocoden Engine"
+  },
+  "medical_analysis": {
+    "constitution": "Heart, Upper Back, Spine",
+    "distemper": {
+      "moon_sign": "Leo",
+      "element": "Fire",
+      "excess_humor": "Choleric (Yellow Bile)",
+      "palliative_nature": "Cooling and Moistening (e.g., Barley water, Cucumber)"
+    },
+    "surgery_risk": {
+      "safe": false,
+      "reasons": [
+        "Square with Saturn"
+      ],
+      "moon_sign": "Aquarius",
+      "target_body_part": "Heart, Upper Back, Spine",
+      "historical_context": "Based on the rule: 'Touch not with iron that part of the body ruled by the sign the Moon is transiting.' Extended with Eclipse and Crisis Day protocols."
+    }
+  },
+  "primary_directions": [
+    {
+      "significator": "Midheaven",
+      "promittor": "Pluto",
+      "aspect": "Sextile (Sinister)",
+      "arc": 7.2400806715418256,
+      "years": 7.2400806715418256,
+      "date_offset": "7y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Moon",
+      "aspect": "Opposition",
+      "arc": 7.320274890879233,
+      "years": 7.320274890879233,
+      "date_offset": "7y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Saturn",
+      "aspect": "Square (Sinister)",
+      "arc": 10.162999553842639,
+      "years": 10.162999553842639,
+      "date_offset": "10y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Neptune",
+      "aspect": "Conjunction",
+      "arc": 11.109692662100997,
+      "years": 11.109692662100997,
+      "date_offset": "11y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Moon",
+      "aspect": "Square (Dexter)",
+      "arc": 12.947133731129831,
+      "years": 12.947133731129831,
+      "date_offset": "12y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mars",
+      "aspect": "Sextile (Dexter)",
+      "arc": 14.598524146219944,
+      "years": 14.598524146219944,
+      "date_offset": "14y 7m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Opposition",
+      "arc": 15.31903673089841,
+      "years": 15.31903673089841,
+      "date_offset": "15y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Neptune",
+      "aspect": "Square (Sinister)",
+      "arc": 16.11333511360514,
+      "years": 16.11333511360514,
+      "date_offset": "16y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Jupiter",
+      "aspect": "Opposition",
+      "arc": 16.67892542515503,
+      "years": 16.67892542515503,
+      "date_offset": "16y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Venus",
+      "aspect": "Trine (Dexter)",
+      "arc": 19.00210251078451,
+      "years": 19.00210251078451,
+      "date_offset": "19y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Jupiter",
+      "aspect": "Square (Dexter)",
+      "arc": 20.831581218203425,
+      "years": 20.831581218203425,
+      "date_offset": "20y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Uranus",
+      "aspect": "Sextile (Dexter)",
+      "arc": 23.07662055945029,
+      "years": 23.07662055945029,
+      "date_offset": "23y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mercury",
+      "aspect": "Square (Dexter)",
+      "arc": 28.65493792180581,
+      "years": 28.65493792180581,
+      "date_offset": "28y 7m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mercury",
+      "aspect": "Conjunction",
+      "arc": 31.240688946929836,
+      "years": 31.240688946929836,
+      "date_offset": "31y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Sun",
+      "aspect": "Square (Dexter)",
+      "arc": 33.04257042723816,
+      "years": 33.04257042723816,
+      "date_offset": "33y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Sun",
+      "aspect": "Conjunction",
+      "arc": 35.138481555814906,
+      "years": 35.138481555814906,
+      "date_offset": "35y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Pluto",
+      "aspect": "Sextile (Dexter)",
+      "arc": 36.56201299762188,
+      "years": 36.56201299762188,
+      "date_offset": "36y 6m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Moon",
+      "aspect": "Trine (Dexter)",
+      "arc": 44.4473675825966,
+      "years": 44.4473675825966,
+      "date_offset": "44y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mars",
+      "aspect": "Opposition",
+      "arc": 45.300698911966435,
+      "years": 45.300698911966435,
+      "date_offset": "45y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Saturn",
+      "aspect": "Sextile (Sinister)",
+      "arc": 46.144518165750156,
+      "years": 46.144518165750156,
+      "date_offset": "46y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mars",
+      "aspect": "Square (Dexter)",
+      "arc": 46.21724362087201,
+      "years": 46.21724362087201,
+      "date_offset": "46y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Neptune",
+      "aspect": "Sextile (Sinister)",
+      "arc": 47.83580995918973,
+      "years": 47.83580995918973,
+      "date_offset": "47y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Jupiter",
+      "aspect": "Trine (Dexter)",
+      "arc": 52.84378680887406,
+      "years": 52.84378680887406,
+      "date_offset": "52y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Venus",
+      "aspect": "Sextile (Dexter)",
+      "arc": 54.94093981861005,
+      "years": 54.94093981861005,
+      "date_offset": "54y 11m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Uranus",
+      "aspect": "Opposition",
+      "arc": 55.110376436223106,
+      "years": 55.110376436223106,
+      "date_offset": "55y 1m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Uranus",
+      "aspect": "Square (Dexter)",
+      "arc": 55.207294134418504,
+      "years": 55.207294134418504,
+      "date_offset": "55y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Mercury",
+      "aspect": "Trine (Dexter)",
+      "arc": 64.34722705312981,
+      "years": 64.34722705312981,
+      "date_offset": "64y 4m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Sun",
+      "aspect": "Trine (Dexter)",
+      "arc": 68.70292355804119,
+      "years": 68.70292355804119,
+      "date_offset": "68y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Pluto",
+      "aspect": "Conjunction",
+      "arc": 70.84977628481772,
+      "years": 70.84977628481772,
+      "date_offset": "70y 10m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Pluto",
+      "aspect": "Square (Dexter)",
+      "arc": 72.2097836480892,
+      "years": 72.2097836480892,
+      "date_offset": "72y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mars",
+      "aspect": "Trine (Dexter)",
+      "arc": 78.72096421089367,
+      "years": 78.72096421089367,
+      "date_offset": "78y 8m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Moon",
+      "aspect": "Trine (Sinister)",
+      "arc": 79.01661867941192,
+      "years": 79.01661867941192,
+      "date_offset": "79y 0m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Saturn",
+      "aspect": "Trine (Sinister)",
+      "arc": 79.47652966916931,
+      "years": 79.47652966916931,
+      "date_offset": "79y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Neptune",
+      "aspect": "Sextile (Dexter)",
+      "arc": 82.75429210260012,
+      "years": 82.75429210260012,
+      "date_offset": "82y 9m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Venus",
+      "aspect": "Square (Dexter)",
+      "arc": 87.18109528539752,
+      "years": 87.18109528539752,
+      "date_offset": "87y 2m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Uranus",
+      "aspect": "Trine (Dexter)",
+      "arc": 87.43628501739065,
+      "years": 87.43628501739065,
+      "date_offset": "87y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Jupiter",
+      "aspect": "Trine (Sinister)",
+      "arc": 88.27702171907313,
+      "years": 88.27702171907313,
+      "date_offset": "88y 3m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Ascendant",
+      "promittor": "Venus",
+      "aspect": "Opposition",
+      "arc": 90.59217851952187,
+      "years": 90.59217851952187,
+      "date_offset": "90y 7m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Mercury",
+      "aspect": "Sextile (Dexter)",
+      "arc": 95.47414514882865,
+      "years": 95.47414514882865,
+      "date_offset": "95y 5m",
+      "method": "Placidus/Zodiacal"
+    },
+    {
+      "significator": "Midheaven",
+      "promittor": "Sun",
+      "aspect": "Sextile (Dexter)",
+      "arc": 99.1970194018852,
+      "years": 99.1970194018852,
+      "date_offset": "99y 2m",
+      "method": "Placidus/Zodiacal"
+    }
+  ],
+  "primary_direction_distributor": {
+    "type": "Distributor (Term Ruler)",
+    "planet": "Mars",
+    "partner": "Mars",
+    "partner_reason": "Domicile Ruler",
+    "directed_ascendant_deg": 216.28669375091235,
+    "arc": 99.69062286105407,
+    "description": "The Directed Ascendant is at 216.29\u00b0, in the Terms of Mars. Partner: Mars (Domicile Ruler)."
+  },
+  "profections": {
+    "annual_sign": "Scorpio",
+    "lord_of_year": "Mars",
+    "monthly_sign": "Cancer",
+    "daily_sign": "Libra"
+  },
+  "prediction": {
+    "epitasis_days": [
+      20,
+      21
+    ],
+    "annual_profection": {
+      "lord_of_year": "Mars"
+    },
+    "monthly_profection": {
+      "continuous": "Cancer"
+    }
+  },
+  "solar_return": {
+    "muntha": {
+      "sign": "Scorpio",
+      "sr_house": 4,
+      "natal_house": 4
+    },
+    "lord_of_year": {
+      "name": "Mars",
+      "weight": 0,
+      "details": [],
+      "handover_active": false
+    },
+    "determinations": [
+      {
+        "planet": "Mercury",
+        "sr_house": 11,
+        "natal_house_overlay": 11,
+        "judgment": "Mercury in SR House 11 overlays Natal House 11."
+      },
+      {
+        "planet": "Venus",
+        "sr_house": 10,
+        "natal_house_overlay": 9,
+        "judgment": "Venus in SR House 10 overlays Natal House 9."
+      },
+      {
+        "planet": "Mars",
+        "sr_house": 2,
+        "natal_house_overlay": 1,
+        "judgment": "Mars in SR House 2 overlays Natal House 1."
+      },
+      {
+        "planet": "Jupiter",
+        "sr_house": 12,
+        "natal_house_overlay": 11,
+        "judgment": "Jupiter in SR House 12 overlays Natal House 11."
+      },
+      {
+        "planet": "Saturn",
+        "sr_house": 9,
+        "natal_house_overlay": 8,
+        "judgment": "Saturn in SR House 9 overlays Natal House 8."
+      },
+      {
+        "planet": "Uranus",
+        "sr_house": 11,
+        "natal_house_overlay": 10,
+        "judgment": "Uranus in SR House 11 overlays Natal House 10."
+      },
+      {
+        "planet": "Neptune",
+        "sr_house": 9,
+        "natal_house_overlay": 8,
+        "judgment": "Neptune in SR House 9 overlays Natal House 8."
+      },
+      {
+        "planet": "Pluto",
+        "sr_house": 7,
+        "natal_house_overlay": 6,
+        "judgment": "Pluto in SR House 7 overlays Natal House 6."
+      }
+    ],
+    "morin_axiom": "The Solar Return cannot produce what the Nativity does not promise.",
+    "year": 2025
+  },
+  "soul_guardian": {
+    "winner": "Sun",
+    "score": 29,
+    "breakdown": {
+      "Sun": 29,
+      "Moon": 10,
+      "Mercury": 18,
+      "Venus": 6,
+      "Mars": 11,
+      "Jupiter": 24,
+      "Saturn": 25
+    }
+  },
+  "planets": [
+    {
+      "name": "Sun",
+      "longitude": 70.44437139733053,
+      "sign": "Gemini",
+      "dignities": {
+        "total_score": 0,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 0,
+          "face": 0,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Monomoiria Ruler: Jupiter"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Saturn",
+              "night": "Mercury",
+              "participant": "Jupiter",
+              "planet_is_ruler": false
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Jupiter",
+              "limit": 12
+            },
+            "ptolemaic": {
+              "ruler": "Jupiter",
+              "limit": 14
+            }
+          }
+        },
+        "sign": "Gemini",
+        "degree": 10.444371397330528
+      },
+      "solar_status": "CAZIMI",
+      "phasis": {
+        "phase": "Cazimi",
+        "is_visible": true
+      },
+      "maltreatments": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Mars",
+          "description": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        }
+      ],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "Moon",
+      "longitude": 319.09835562956164,
+      "sign": "Aquarius",
+      "dignities": {
+        "total_score": 0,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 0,
+          "face": 0,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Monomoiria Ruler: Mercury"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Saturn",
+              "night": "Mercury",
+              "participant": "Jupiter",
+              "planet_is_ruler": false
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Jupiter",
+              "limit": 20
+            },
+            "ptolemaic": {
+              "ruler": "Venus",
+              "limit": 20
+            }
+          }
+        },
+        "sign": "Aquarius",
+        "degree": 19.098355629561638
+      },
+      "solar_status": "FREE",
+      "phasis": {
+        "phase": "Morning Last",
+        "is_visible": true
+      },
+      "maltreatments": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        },
+        {
+          "condition": "Striking with a Ray",
+          "malefic": "Saturn",
+          "description": "Struck by Saturn via tight square (2.3\u00b0 orb).",
+          "severity": 8
+        }
+      ],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "Mercury",
+      "longitude": 66.77866564021278,
+      "sign": "Gemini",
+      "dignities": {
+        "total_score": 5,
+        "score_breakdown": {
+          "domicile": 5,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 0,
+          "face": 0,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Domicile (+5)",
+          "Monomoiria Ruler: Venus"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Saturn",
+              "night": "Mercury",
+              "participant": "Jupiter",
+              "planet_is_ruler": true
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Jupiter",
+              "limit": 12
+            },
+            "ptolemaic": {
+              "ruler": "Mercury",
+              "limit": 7
+            }
+          }
+        },
+        "sign": "Gemini",
+        "degree": 6.778665640212779
+      },
+      "solar_status": "COMBUST",
+      "phasis": {
+        "phase": "Morning Last",
+        "is_visible": false
+      },
+      "maltreatments": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Mars",
+          "description": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+          "severity": 10
+        }
+      ],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "Venus",
+      "longitude": 28.750433784139524,
+      "sign": "Aries",
+      "dignities": {
+        "total_score": -4,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 0,
+          "face": 1,
+          "monomoiria": 0,
+          "detriment": -5,
+          "fall": 0
+        },
+        "details": [
+          "Detriment (-5)",
+          "Face (+1)",
+          "Monomoiria Ruler: Mars"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Sun",
+              "night": "Jupiter",
+              "participant": "Saturn",
+              "planet_is_ruler": false
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Saturn",
+              "limit": 30
+            },
+            "ptolemaic": {
+              "ruler": "Saturn",
+              "limit": 30
+            }
+          }
+        },
+        "sign": "Aries",
+        "degree": 28.750433784139524
+      },
+      "solar_status": "FREE",
+      "phasis": {
+        "phase": "Morning Last",
+        "is_visible": true
+      },
+      "maltreatments": [],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "Mars",
+      "longitude": 350.73156342641084,
+      "sign": "Pisces",
+      "dignities": {
+        "total_score": 3,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 2,
+          "face": 1,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Term (Egyptian) (+2)",
+          "Face (+1)",
+          "Monomoiria Ruler: Saturn"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Venus",
+              "night": "Mars",
+              "participant": "Moon",
+              "planet_is_ruler": true
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Mars",
+              "limit": 28
+            },
+            "ptolemaic": {
+              "ruler": "Mars",
+              "limit": 26
+            }
+          }
+        },
+        "sign": "Pisces",
+        "degree": 20.731563426410844
+      },
+      "solar_status": "FREE",
+      "phasis": {
+        "phase": "Free",
+        "is_visible": true
+      },
+      "maltreatments": [],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "Jupiter",
+      "longitude": 326.82576090346504,
+      "sign": "Aquarius",
+      "dignities": {
+        "total_score": 1,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 1,
+          "term": 0,
+          "face": 0,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Triplicity (Participant) (+1)",
+          "Monomoiria Ruler: Mercury"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Saturn",
+              "night": "Mercury",
+              "participant": "Jupiter",
+              "planet_is_ruler": false
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Saturn",
+              "limit": 30
+            },
+            "ptolemaic": {
+              "ruler": "Mars",
+              "limit": 30
+            }
+          }
+        },
+        "sign": "Aquarius",
+        "degree": 26.82576090346504
+      },
+      "solar_status": "FREE",
+      "phasis": {
+        "phase": "Station Direct",
+        "is_visible": true
+      },
+      "maltreatments": [
+        {
+          "condition": "Overcoming",
+          "malefic": "Saturn",
+          "description": "Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)",
+          "severity": 7
+        }
+      ],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "Saturn",
+      "longitude": 231.44164878410143,
+      "sign": "Scorpio",
+      "dignities": {
+        "total_score": 0,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 0,
+          "face": 0,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Monomoiria Ruler: Mars"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Venus",
+              "night": "Mars",
+              "participant": "Moon",
+              "planet_is_ruler": false
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Jupiter",
+              "limit": 24
+            },
+            "ptolemaic": {
+              "ruler": "Mercury",
+              "limit": 27
+            }
+          }
+        },
+        "sign": "Scorpio",
+        "degree": 21.44164878410143
+      },
+      "solar_status": "FREE",
+      "phasis": {
+        "phase": "Free",
+        "is_visible": true
+      },
+      "maltreatments": [],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "North_Node",
+      "longitude": 108.26719511099532,
+      "sign": "Cancer",
+      "dignities": {
+        "total_score": 0,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 0,
+          "face": 0,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Monomoiria Ruler: Sun"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Venus",
+              "night": "Mars",
+              "participant": "Moon",
+              "planet_is_ruler": false
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Mercury",
+              "limit": 19
+            },
+            "ptolemaic": {
+              "ruler": "Mercury",
+              "limit": 20
+            }
+          }
+        },
+        "sign": "Cancer",
+        "degree": 18.267195110995317
+      },
+      "solar_status": "FREE",
+      "phasis": {
+        "phase": "Evening Last",
+        "is_visible": true
+      },
+      "maltreatments": [],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    },
+    {
+      "name": "South_Node",
+      "longitude": 288.2671951109953,
+      "sign": "Capricorn",
+      "dignities": {
+        "total_score": 0,
+        "score_breakdown": {
+          "domicile": 0,
+          "exaltation": 0,
+          "triplicity": 0,
+          "term": 0,
+          "face": 0,
+          "monomoiria": 0,
+          "detriment": 0,
+          "fall": 0
+        },
+        "details": [
+          "Monomoiria Ruler: Venus"
+        ],
+        "conflicts": [],
+        "variants": {
+          "triplicity": {
+            "used": "Dorothean",
+            "sect": "Day",
+            "dorothean": {
+              "day": "Venus",
+              "night": "Moon",
+              "participant": "Mars",
+              "planet_is_ruler": false
+            },
+            "ptolemaic": {
+              "day": null,
+              "night": null,
+              "planet_is_ruler": false
+            }
+          },
+          "terms": {
+            "used": "Egyptian",
+            "egyptian": {
+              "ruler": "Venus",
+              "limit": 22
+            },
+            "ptolemaic": {
+              "ruler": "Jupiter",
+              "limit": 19
+            }
+          }
+        },
+        "sign": "Capricorn",
+        "degree": 18.267195110995317
+      },
+      "solar_status": "FREE",
+      "phasis": {
+        "phase": "Morning First",
+        "is_visible": true
+      },
+      "maltreatments": [],
+      "impacts": [],
+      "delineation": "Delineation not found in Codex."
+    }
+  ],
+  "lots": {
+    "Fortune": {
+      "longitude": 21.729574243701222,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Spirit": {
+      "longitude": 244.42160577923903,
+      "sign": "Sagittarius",
+      "house": 4,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Eros": {
+      "longitude": 277.40441801637064,
+      "sign": "Capricorn",
+      "house": 5,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Necessity": {
+      "longitude": 178.1246814079817,
+      "sign": "Virgo",
+      "house": 2,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Mars. (Within 7\u00b0 orb)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Courage": {
+      "longitude": 102.07757919417975,
+      "sign": "Cancer",
+      "house": 11,
+      "ruler": "Moon",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Moon] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Moon] Struck by Saturn via tight square (2.3\u00b0 orb)."
+      ]
+    },
+    "Victory": {
+      "longitude": 215.47974513569613,
+      "sign": "Scorpio",
+      "house": 3,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Nemesis": {
+      "longitude": 342.78766455187036,
+      "sign": "Pisces",
+      "house": 8,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Debt": {
+      "longitude": 297.73857315535884,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Theft": {
+      "longitude": 57.02848779766816,
+      "sign": "Taurus",
+      "house": 10,
+      "ruler": "Venus",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Saturn. (Within 5\u00b0 orb)"
+      ]
+    },
+    "Accusation": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Father": {
+      "longitude": 294.07286739824104,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Mother": {
+      "longitude": 63.42351185689222,
+      "sign": "Gemini",
+      "house": 10,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Marriage_Men": {
+      "longitude": 290.38437501150827,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Marriage_Women": {
+      "longitude": 202.72766816604803,
+      "sign": "Libra",
+      "house": 3,
+      "ruler": "Venus",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Children": {
+      "longitude": 29.456979517604623,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Siblings": {
+      "longitude": 228.45970213083373,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Adhering (Applying Conjunction) to Saturn within 3.0\u00b0."
+      ]
+    },
+    "Friends": {
+      "longitude": 25.395280000818957,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Enemies": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Sickness": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Assets": {
+      "longitude": 218.7717178920219,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Death": {
+      "longitude": 150.11773365979082,
+      "sign": "Virgo",
+      "house": 1,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Mars. (Mitigated by Benefic Intervention: -2 severity)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Journeys": {
+      "longitude": 66.30007473916855,
+      "sign": "Gemini",
+      "house": 10,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Commerce": {
+      "longitude": 129.4098842543524,
+      "sign": "Leo",
+      "house": 12,
+      "ruler": "Sun",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Sun] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Boldness": {
+      "longitude": 164.70879780831933,
+      "sign": "Virgo",
+      "house": 2,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Mars. (Within 6\u00b0 orb)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Success": {
+      "longitude": 29.456979517604623,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Misfortune": {
+      "longitude": 294.07286739824104,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Life": {
+      "longitude": 228.45970213083373,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Adhering (Applying Conjunction) to Saturn within 3.0\u00b0."
+      ]
+    },
+    "Wisdom": {
+      "longitude": 332.07831262469927,
+      "sign": "Pisces",
+      "house": 7,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Art": {
+      "longitude": 91.38165239827914,
+      "sign": "Cancer",
+      "house": 11,
+      "ruler": "Moon",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Moon] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Moon] Struck by Saturn via tight square (2.3\u00b0 orb)."
+      ]
+    },
+    "Battles": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Foundation": {
+      "longitude": 355.76762154700793,
+      "sign": "Pisces",
+      "house": 8,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Basis": {
+      "longitude": 355.76762154700793,
+      "sign": "Pisces",
+      "house": 8,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Exaltation": {
+      "longitude": 81.63121861413963,
+      "sign": "Gemini",
+      "house": 11,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Lot] Struck by Mars via tight square (0.9\u00b0 orb).",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Wheat": {
+      "longitude": 29.456979517604623,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Barley": {
+      "longitude": 220.73229685693033,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Rice": {
+      "longitude": 37.69147789210655,
+      "sign": "Taurus",
+      "house": 10,
+      "ruler": "Venus",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Saturn."
+      ]
+    },
+    "Lentils": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Poverty": {
+      "longitude": 88.0264986149586,
+      "sign": "Gemini",
+      "house": 11,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -2 severity)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    }
+  },
+  "hermetic_lots": {
+    "Fortune": {
+      "longitude": 21.729574243701222,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Spirit": {
+      "longitude": 244.42160577923903,
+      "sign": "Sagittarius",
+      "house": 4,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Eros": {
+      "longitude": 277.40441801637064,
+      "sign": "Capricorn",
+      "house": 5,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Necessity": {
+      "longitude": 178.1246814079817,
+      "sign": "Virgo",
+      "house": 2,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Mars. (Within 7\u00b0 orb)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Courage": {
+      "longitude": 102.07757919417975,
+      "sign": "Cancer",
+      "house": 11,
+      "ruler": "Moon",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Moon] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Moon] Struck by Saturn via tight square (2.3\u00b0 orb)."
+      ]
+    },
+    "Victory": {
+      "longitude": 215.47974513569613,
+      "sign": "Scorpio",
+      "house": 3,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Nemesis": {
+      "longitude": 342.78766455187036,
+      "sign": "Pisces",
+      "house": 8,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Debt": {
+      "longitude": 297.73857315535884,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Theft": {
+      "longitude": 57.02848779766816,
+      "sign": "Taurus",
+      "house": 10,
+      "ruler": "Venus",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Saturn. (Within 5\u00b0 orb)"
+      ]
+    },
+    "Accusation": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Father": {
+      "longitude": 294.07286739824104,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Mother": {
+      "longitude": 63.42351185689222,
+      "sign": "Gemini",
+      "house": 10,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Marriage_Men": {
+      "longitude": 290.38437501150827,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Marriage_Women": {
+      "longitude": 202.72766816604803,
+      "sign": "Libra",
+      "house": 3,
+      "ruler": "Venus",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Children": {
+      "longitude": 29.456979517604623,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Siblings": {
+      "longitude": 228.45970213083373,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Adhering (Applying Conjunction) to Saturn within 3.0\u00b0."
+      ]
+    },
+    "Friends": {
+      "longitude": 25.395280000818957,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Enemies": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Sickness": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Assets": {
+      "longitude": 218.7717178920219,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Death": {
+      "longitude": 150.11773365979082,
+      "sign": "Virgo",
+      "house": 1,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Mars. (Mitigated by Benefic Intervention: -2 severity)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Journeys": {
+      "longitude": 66.30007473916855,
+      "sign": "Gemini",
+      "house": 10,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Commerce": {
+      "longitude": 129.4098842543524,
+      "sign": "Leo",
+      "house": 12,
+      "ruler": "Sun",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Sun] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Boldness": {
+      "longitude": 164.70879780831933,
+      "sign": "Virgo",
+      "house": 2,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Mars. (Within 6\u00b0 orb)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Success": {
+      "longitude": 29.456979517604623,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Misfortune": {
+      "longitude": 294.07286739824104,
+      "sign": "Capricorn",
+      "house": 6,
+      "ruler": "Saturn",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Life": {
+      "longitude": 228.45970213083373,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Adhering (Applying Conjunction) to Saturn within 3.0\u00b0."
+      ]
+    },
+    "Wisdom": {
+      "longitude": 332.07831262469927,
+      "sign": "Pisces",
+      "house": 7,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Art": {
+      "longitude": 91.38165239827914,
+      "sign": "Cancer",
+      "house": 11,
+      "ruler": "Moon",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Moon] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Ruler Moon] Struck by Saturn via tight square (2.3\u00b0 orb)."
+      ]
+    },
+    "Battles": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Foundation": {
+      "longitude": 355.76762154700793,
+      "sign": "Pisces",
+      "house": 8,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Basis": {
+      "longitude": 355.76762154700793,
+      "sign": "Pisces",
+      "house": 8,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Exaltation": {
+      "longitude": 81.63121861413963,
+      "sign": "Gemini",
+      "house": 11,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+        "[Lot] Struck by Mars via tight square (0.9\u00b0 orb).",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    },
+    "Wheat": {
+      "longitude": 29.456979517604623,
+      "sign": "Aries",
+      "house": 9,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Barley": {
+      "longitude": 220.73229685693033,
+      "sign": "Scorpio",
+      "house": 4,
+      "ruler": "Mars",
+      "status": "Clear",
+      "maltreatment_details": []
+    },
+    "Rice": {
+      "longitude": 37.69147789210655,
+      "sign": "Taurus",
+      "house": 10,
+      "ruler": "Venus",
+      "status": "Lot Maltreated",
+      "maltreatment_details": [
+        "[Lot] Opposed by Saturn."
+      ]
+    },
+    "Lentils": {
+      "longitude": 252.36550465377954,
+      "sign": "Sagittarius",
+      "house": 5,
+      "ruler": "Jupiter",
+      "status": "Ruler Maltreated",
+      "maltreatment_details": [
+        "[Ruler Jupiter] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)"
+      ]
+    },
+    "Poverty": {
+      "longitude": 88.0264986149586,
+      "sign": "Gemini",
+      "house": 11,
+      "ruler": "Mercury",
+      "status": "Lot Maltreated / Ruler Maltreated",
+      "maltreatment_details": [
+        "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -2 severity)",
+        "[Ruler Mercury] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+      ]
+    }
+  },
+  "advanced_mechanics": {
+    "almuten": {
+      "winner": "Sun",
+      "score": 29,
+      "breakdown": {
+        "Sun": 29,
+        "Moon": 10,
+        "Mercury": 18,
+        "Venus": 6,
+        "Mars": 11,
+        "Jupiter": 24,
+        "Saturn": 25
+      }
+    },
+    "doryphory": [
+      {
+        "planet": "Mars",
+        "type": "Bodily/Occidental",
+        "target": "Moon"
+      },
+      {
+        "planet": "Jupiter",
+        "type": "Bodily/Occidental",
+        "target": "Moon"
+      }
+    ],
+    "mundane_context": [
+      {
+        "rank": 0,
+        "event": "Universal Periodic Cycles",
+        "data": {
+          "mighty_firdaria": {
+            "ruler": "Venus",
+            "years_into_period": 1.25,
+            "remaining_years": 80.75
+          },
+          "mean_conjunction_era": {
+            "last_mean_jd": 2423590.3702940675,
+            "longitude": 202.72762257841003,
+            "sign": "Libra",
+            "triplicity": "Air",
+            "type": "Mean Conjunction (Wasati)",
+            "cycle": "Minor/Middle Cycle boundary indicator"
+          },
+          "world_firdaria": {
+            "planet": "Jupiter",
+            "duration": 75,
+            "start_jd": 2423846.75,
+            "end_jd": 2451240.5,
+            "system": "Firdaria of the World (75Y Sequence)"
+          }
+        },
+        "overrides": [
+          "All natal and particular mundane indicators"
+        ]
+      },
+      {
+        "rank": 1,
+        "event": "Solar Eclipse",
+        "data": {
+          "duration_hours": 1.7254196181893349,
+          "influence_period": "1.73 years (20.71 months)",
+          "quadrant": "IC (Hidden/Root)",
+          "intensification": "Internal or foundational impact.",
+          "chorography_triplicity": "Earth",
+          "affected_regions": [
+            "Ethiopia",
+            "Southern Asia"
+          ]
+        },
+        "overrides": [
+          "Rank 2",
+          "Rank 3",
+          "Rank 4",
+          "Natal"
+        ]
+      },
+      {
+        "rank": 1,
+        "event": "Lunar Eclipse",
+        "data": {
+          "duration_hours": 0.96,
+          "influence_period": "0.08 years (0.96 months)",
+          "quadrant": "IC (Hidden/Root)",
+          "intensification": "Internal or foundational impact.",
+          "chorography_triplicity": "Fire",
+          "affected_regions": [
+            "Britain",
+            "Gaul",
+            "Germany"
+          ]
+        },
+        "overrides": [
+          "Rank 2",
+          "Rank 3",
+          "Rank 4",
+          "Natal"
+        ]
+      },
+      {
+        "rank": 2,
+        "event": "Great Conjunction (Jupiter-Saturn)",
+        "data": {
+          "jd": 2422928.2291666665,
+          "longitude": 173.5296559305406,
+          "sign": "Virgo",
+          "type": "True Conjunction (Haqiqi)",
+          "description": "Jupiter-Saturn alignment (Observed/Calculated)",
+          "al_mubtazz": {
+            "victor": "Venus",
+            "score": 18,
+            "breakdown": {
+              "Saturn": 10,
+              "Jupiter": 17,
+              "Mars": 14,
+              "Sun": 7,
+              "Venus": 18,
+              "Mercury": 6,
+              "Moon": 9
+            },
+            "ingress_jd": 2422769.6519293133,
+            "sect": "NIGHT"
+          }
+        },
+        "overrides": [
+          "Rank 3",
+          "Rank 4",
+          "Natal"
+        ]
+      },
+      {
+        "rank": 4,
+        "event": "Aries Ingress",
+        "data": {
+          "jd": 2424595.8664712477,
+          "longitude": 359.99077043812406,
+          "sign": "Aries",
+          "degree": 0.0,
+          "description": "Aries Ingress 1926"
+        },
+        "overrides": [
+          "Natal"
+        ]
+      }
+    ]
+  },
+  "aspects": [
+    {
+      "planet_a": "Sun",
+      "planet_b": "Moon",
+      "type": "Trine",
+      "orb": 8.653984232231096,
+      "is_applying": true,
+      "text": ""
+    },
+    {
+      "planet_a": "Sun",
+      "planet_b": "Mercury",
+      "type": "Conjunction",
+      "orb": 3.6657057571177347,
+      "is_applying": false,
+      "text": ""
+    },
+    {
+      "planet_a": "Sun",
+      "planet_b": "Mars",
+      "type": "Square",
+      "orb": 10.287192029080302,
+      "is_applying": false,
+      "text": "MALIFIC SIEGE: Hard aspect from Mars (Destructive). Creates destruction, conflict, or failure."
+    },
+    {
+      "planet_a": "Moon",
+      "planet_b": "Jupiter",
+      "type": "Conjunction",
+      "orb": 7.7274052739034005,
+      "is_applying": false,
+      "text": "Blessed by conjunction with Jupiter. Expansive or harmonious support."
+    },
+    {
+      "planet_a": "Moon",
+      "planet_b": "Saturn",
+      "type": "Square",
+      "orb": 2.343293154539765,
+      "is_applying": false,
+      "text": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction."
+    },
+    {
+      "planet_a": "Moon",
+      "planet_b": "Neptune",
+      "type": "Opposition",
+      "orb": 3.1243592050794007,
+      "is_applying": false,
+      "text": "MALIFIC SIEGE: Hard aspect from Neptune (Destructive). Creates destruction, conflict, or failure."
+    },
+    {
+      "planet_a": "Venus",
+      "planet_b": "Jupiter",
+      "type": "Sextile",
+      "orb": 1.9246728806745068,
+      "is_applying": true,
+      "text": "GIFT: Easy aspect from Jupiter. Natural talent, luck, and ease."
+    },
+    {
+      "planet_a": "Mars",
+      "planet_b": "Saturn",
+      "type": "Trine",
+      "orb": 0.7100853576905877,
+      "is_applying": false,
+      "text": "FLOW: Easy aspect from Saturn. Structural support and regulated energy."
+    },
+    {
+      "planet_a": "Jupiter",
+      "planet_b": "Saturn",
+      "type": "Square",
+      "orb": 5.384112119363635,
+      "is_applying": true,
+      "text": "CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction."
+    },
+    {
+      "planet_a": "Jupiter",
+      "planet_b": "Neptune",
+      "type": "Opposition",
+      "orb": 4.603046068824028,
+      "is_applying": true,
+      "text": "MALIFIC SIEGE: Hard aspect from Neptune (Destructive). Creates destruction, conflict, or failure."
+    },
+    {
+      "planet_a": "Saturn",
+      "planet_b": "Neptune",
+      "type": "Square",
+      "orb": 0.7810660505396072,
+      "is_applying": true,
+      "text": "MALIFIC SIEGE: Hard aspect from Neptune (Destructive). Creates destruction, conflict, or failure."
+    }
+  ],
+  "rule_ledger": [
+    {
+      "id": "sun-dignity",
+      "category": "Essential Dignity",
+      "condition": "Sun in Gemini",
+      "judgment": "Score: 0. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: Sun",
+        "Sign: Gemini"
+      ]
+    },
+    {
+      "id": "sun-delineation",
+      "category": "Planet Delineation",
+      "condition": "Sun in Gemini",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: Sun",
+        "Sign: Gemini"
+      ]
+    },
+    {
+      "id": "moon-dignity",
+      "category": "Essential Dignity",
+      "condition": "Moon in Aquarius",
+      "judgment": "Score: 0. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: Moon",
+        "Sign: Aquarius"
+      ]
+    },
+    {
+      "id": "moon-delineation",
+      "category": "Planet Delineation",
+      "condition": "Moon in Aquarius",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: Moon",
+        "Sign: Aquarius"
+      ]
+    },
+    {
+      "id": "mercury-dignity",
+      "category": "Essential Dignity",
+      "condition": "Mercury in Gemini",
+      "judgment": "Score: 5. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mercury",
+        "Sign: Gemini"
+      ]
+    },
+    {
+      "id": "mercury-delineation",
+      "category": "Planet Delineation",
+      "condition": "Mercury in Gemini",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mercury",
+        "Sign: Gemini"
+      ]
+    },
+    {
+      "id": "venus-dignity",
+      "category": "Essential Dignity",
+      "condition": "Venus in Aries",
+      "judgment": "Score: -4. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: Venus",
+        "Sign: Aries"
+      ]
+    },
+    {
+      "id": "venus-delineation",
+      "category": "Planet Delineation",
+      "condition": "Venus in Aries",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: Venus",
+        "Sign: Aries"
+      ]
+    },
+    {
+      "id": "mars-dignity",
+      "category": "Essential Dignity",
+      "condition": "Mars in Pisces",
+      "judgment": "Score: 3. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mars",
+        "Sign: Pisces"
+      ]
+    },
+    {
+      "id": "mars-delineation",
+      "category": "Planet Delineation",
+      "condition": "Mars in Pisces",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: Mars",
+        "Sign: Pisces"
+      ]
+    },
+    {
+      "id": "jupiter-dignity",
+      "category": "Essential Dignity",
+      "condition": "Jupiter in Aquarius",
+      "judgment": "Score: 1. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: Jupiter",
+        "Sign: Aquarius"
+      ]
+    },
+    {
+      "id": "jupiter-delineation",
+      "category": "Planet Delineation",
+      "condition": "Jupiter in Aquarius",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: Jupiter",
+        "Sign: Aquarius"
+      ]
+    },
+    {
+      "id": "saturn-dignity",
+      "category": "Essential Dignity",
+      "condition": "Saturn in Scorpio",
+      "judgment": "Score: 0. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Scorpio"
+      ]
+    },
+    {
+      "id": "saturn-delineation",
+      "category": "Planet Delineation",
+      "condition": "Saturn in Scorpio",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: Saturn",
+        "Sign: Scorpio"
+      ]
+    },
+    {
+      "id": "north_node-dignity",
+      "category": "Essential Dignity",
+      "condition": "North_Node in Cancer",
+      "judgment": "Score: 0. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: North_Node",
+        "Sign: Cancer"
+      ]
+    },
+    {
+      "id": "north_node-delineation",
+      "category": "Planet Delineation",
+      "condition": "North_Node in Cancer",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: North_Node",
+        "Sign: Cancer"
+      ]
+    },
+    {
+      "id": "south_node-dignity",
+      "category": "Essential Dignity",
+      "condition": "South_Node in Capricorn",
+      "judgment": "Score: 0. ",
+      "sources": [
+        "Ptolemy, Tetrabiblos",
+        "Dorotheus"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": [
+        "Planet: South_Node",
+        "Sign: Capricorn"
+      ]
+    },
+    {
+      "id": "south_node-delineation",
+      "category": "Planet Delineation",
+      "condition": "South_Node in Capricorn",
+      "judgment": "Delineation not found in Codex....",
+      "sources": [],
+      "confidence": 70,
+      "conflicts": [],
+      "trace": [
+        "Planet: South_Node",
+        "Sign: Capricorn"
+      ]
+    },
+    {
+      "id": "direction-sun-sextile-dexter",
+      "category": "Primary Direction",
+      "condition": "Directed Midheaven to Sun",
+      "judgment": "Arc 99.1970194018852: Sextile (Dexter)",
+      "sources": [
+        "Ptolemy",
+        "Placidus"
+      ],
+      "confidence": 85,
+      "conflicts": [],
+      "trace": [
+        "Year: 99.1970194018852"
+      ]
+    },
+    {
+      "id": "star-sirius",
+      "category": "Fixed Star",
+      "condition": "Sirius + Pluto",
+      "judgment": "CONJUNCT Sirius (Orb: 0.43\u00b0). Nature: Jupiter/Mars. Nemesis: Danger from dogs, Excessive heat/passion.",
+      "sources": [
+        "Anonymous of 379",
+        "Brady"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": []
+    },
+    {
+      "id": "star-castor",
+      "category": "Fixed Star",
+      "condition": "Castor + North_Node",
+      "judgment": "CONJUNCT Castor (Orb: 0.71\u00b0). Nature: Mercury. Nemesis: Violence, Sudden loss.",
+      "sources": [
+        "Anonymous of 379",
+        "Brady"
+      ],
+      "confidence": 90,
+      "conflicts": [],
+      "trace": []
+    },
+    {
+      "id": "lot-father",
+      "category": "Forensic Lot",
+      "condition": "Lot of Father",
+      "judgment": "Ruler Saturn condition is average.",
+      "sources": [
+        "Bonatti",
+        "Valens"
+      ],
+      "confidence": 85,
+      "conflicts": [],
+      "trace": [
+        "Status: Neutral"
+      ]
+    },
+    {
+      "id": "lot-mother",
+      "category": "Forensic Lot",
+      "condition": "Lot of Mother",
+      "judgment": "Ruler Mercury is well-dignified (Score: 5).",
+      "sources": [
+        "Bonatti",
+        "Valens"
+      ],
+      "confidence": 85,
+      "conflicts": [],
+      "trace": [
+        "Status: STRONG"
+      ]
+    },
+    {
+      "id": "eclipse-father",
+      "category": "Universal Override",
+      "condition": "Eclipse impacting Lot of Father",
+      "judgment": "Suspended Promise: Area under universal pressure.",
+      "sources": [
+        "Ptolemy II"
+      ],
+      "confidence": 92,
+      "conflicts": [],
+      "trace": [
+        "Eclipse JD: 2424529.7754008947"
+      ]
+    },
+    {
+      "id": "eclipse-marriage-men",
+      "category": "Universal Override",
+      "condition": "Eclipse impacting Lot of Marriage_Men",
+      "judgment": "Suspended Promise: Area under universal pressure.",
+      "sources": [
+        "Ptolemy II"
+      ],
+      "confidence": 92,
+      "conflicts": [],
+      "trace": [
+        "Eclipse JD: 2424529.7754008947"
+      ]
+    },
+    {
+      "id": "eclipse-commerce",
+      "category": "Universal Override",
+      "condition": "Eclipse impacting Lot of Commerce",
+      "judgment": "Suspended Promise: Area under universal pressure.",
+      "sources": [
+        "Ptolemy II"
+      ],
+      "confidence": 92,
+      "conflicts": [],
+      "trace": [
+        "Eclipse JD: 2424544.3889040765"
+      ]
+    },
+    {
+      "id": "eclipse-misfortune",
+      "category": "Universal Override",
+      "condition": "Eclipse impacting Lot of Misfortune",
+      "judgment": "Suspended Promise: Area under universal pressure.",
+      "sources": [
+        "Ptolemy II"
+      ],
+      "confidence": 92,
+      "conflicts": [],
+      "trace": [
+        "Eclipse JD: 2424529.7754008947"
+      ]
+    }
+  ],
+  "horary_physics": {
+    "significators": "Sun (L1) and Mars (LoY)",
+    "interactions": [
+      {
+        "condition": "Direct Application",
+        "aspect": "Square",
+        "status": "Active"
+      },
+      {
+        "condition": "Prohibition",
+        "intervener": "Mercury",
+        "target": "Sun",
+        "aspect": "Conjunction",
+        "status": "Active",
+        "details": "Mercury completes Conjunction with Sun before Mars completes Square with Sun"
+      }
+    ]
+  },
+  "dossier_text": "# EXECUTIVE SUMMARY: COMPREHENSIVE FORENSIC AUDIT\n**Soul Guardian (Almuten Figuris):** Unknown\n**Vitality Rating:** Refer to Hyleg-Alcocoden Engine\n**Core Function:** N/A\n\n\n## I. THE CONSTITUTION: HUMORAL & PHYSICAL BASELINE\n**Temperament:** Choleric (Yellow Bile)\n**Dominant Elements:** \n**Medical Governance:** Unknown (Sign: N/A)\n\n\n## II. SOVEREIGN POWER STRUCTURE\n**Constructive Team:** Sun, Jupiter, Saturn\n**Destructive Team:** Mars\n**Mutual Receptions:**\n- Venus <-> Mars (Major Mixed)\n- Mars <-> Jupiter (Mixed)\n- Mercury <-> Saturn (Mixed)\n- Mercury <-> Jupiter (Mixed)\n- Venus <-> Saturn (Mixed)\n\n\n## III. PLANETARY PROTOCOLS: THE INSTRUMENTS OF FATE\n---\n\n### Sun in Gemini (10.44\u00b0)\n- **Essential Dignity:** `0` (Domicile: None, Exaltation: None)\n- **Solar Condition:** \ud83d\udc51 CAZIMI (Heart of the Sun)\n- **MALTREATMENT (KAKOSIS):**\n  - \u26a0\ufe0f Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)\n\n> Delineation not found in Codex.\n\n---\n### Moon in Aquarius (19.1\u00b0)\n- **Essential Dignity:** `0` (Domicile: None, Exaltation: None)\n- **Solar Condition:** \u2705 Clear\n- **MALTREATMENT (KAKOSIS):**\n  - \u26a0\ufe0f Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)\n  - \u26a0\ufe0f Struck by Saturn via tight square (2.3\u00b0 orb).\n\n> Delineation not found in Codex.\n\n---\n### Mercury in Gemini (6.78\u00b0)\n- **Essential Dignity:** `5` (Domicile: None, Exaltation: None)\n- **Solar Condition:** \ud83d\udd25 COMBUST\n- **MALTREATMENT (KAKOSIS):**\n  - \u26a0\ufe0f Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)\n\n> Delineation not found in Codex.\n\n---\n### Venus in Aries (28.75\u00b0)\n- **Essential Dignity:** `-4` (Domicile: None, Exaltation: None)\n- **Solar Condition:** \u2705 Clear\n- **Status:** \u2728 No Maltreatment detected.\n\n> Delineation not found in Codex.\n\n---\n### Mars in Pisces (20.73\u00b0)\n- **Essential Dignity:** `3` (Domicile: None, Exaltation: None)\n- **Solar Condition:** \u2705 Clear\n- **Status:** \u2728 No Maltreatment detected.\n\n> Delineation not found in Codex.\n\n---\n### Jupiter in Aquarius (26.83\u00b0)\n- **Essential Dignity:** `1` (Domicile: None, Exaltation: None)\n- **Solar Condition:** \u2705 Clear\n- **MALTREATMENT (KAKOSIS):**\n  - \u26a0\ufe0f Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -3 severity)\n\n> Delineation not found in Codex.\n\n---\n### Saturn in Scorpio (21.44\u00b0)\n- **Essential Dignity:** `0` (Domicile: None, Exaltation: None)\n- **Solar Condition:** \u2705 Clear\n- **Status:** \u2728 No Maltreatment detected.\n\n> Delineation not found in Codex.\n\n---\n### North_Node in Cancer (18.27\u00b0)\n\n> HYPER-MANIFESTATION of domestic needs. An insatiable hunger for emotional security that can become smothering.\n\n---\n### South_Node in Capricorn (18.27\u00b0)\n\n> RELEASE of status-obsession. Releasing the cold pursuit of ambition. Detachment from the public mask.\n\n---\n\n\n## IV. HOUSE CUSPS (WHOLE SIGN / PLACIDUS)\n| House | Cusp |\n|---|---|\n\n\n\n## V. ASPECT ANALYSIS: THE GEOMETRY OF FATE\n---\n#### Sun Trine Moon (8.65\u00b0, Applying)\nThe relationship between Sun and Moon is **Harmonious**. Their energies support each other, creating a natural bypass for difficulties. This dynamic is **increasing in intensity** as the life progresses.\n\n#### Sun Conjunction Mercury (3.67\u00b0, Separating)\nThe relationship between Sun and Mercury is **Harmonious**. Their energies support each other, creating a natural bypass for difficulties. This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance.\n\n#### Sun Square Mars (10.29\u00b0, Separating)\nThe relationship between Sun and Mars is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts. This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance.\n\n> **Dossier Entry:** MALIFIC SIEGE: Hard aspect from Mars (Destructive). Creates destruction, conflict, or failure.\n\n#### Moon Conjunction Jupiter (7.73\u00b0, Separating)\nThe relationship between Moon and Jupiter is **Harmonious**. Their energies support each other, creating a natural bypass for difficulties. This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance.\n\n> **Dossier Entry:** Blessed by conjunction with Jupiter. Expansive or harmonious support.\n\n#### Moon Square Saturn (2.34\u00b0, Separating)\nThe relationship between Moon and Saturn is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts. This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance.\n\n> **Dossier Entry:** CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.\n\n#### Moon Opposition Neptune (3.12\u00b0, Separating)\nThe relationship between Moon and Neptune is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts. This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance.\n\n> **Dossier Entry:** MALIFIC SIEGE: Hard aspect from Neptune (Destructive). Creates destruction, conflict, or failure.\n\n#### Venus Sextile Jupiter (1.92\u00b0, Applying)\nThe relationship between Venus and Jupiter is **Harmonious**. Their energies support each other, creating a natural bypass for difficulties. This dynamic is **increasing in intensity** as the life progresses.\n\n> **Dossier Entry:** GIFT: Easy aspect from Jupiter. Natural talent, luck, and ease.\n\n#### Mars Trine Saturn (0.71\u00b0, Separating)\nThe relationship between Mars and Saturn is **Harmonious**. Their energies support each other, creating a natural bypass for difficulties. This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance.\n\n> **Dossier Entry:** FLOW: Easy aspect from Saturn. Structural support and regulated energy.\n\n#### Jupiter Square Saturn (5.38\u00b0, Applying)\nThe relationship between Jupiter and Saturn is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts. This dynamic is **increasing in intensity** as the life progresses.\n\n> **Dossier Entry:** CHALLENGE: Hard aspect from Saturn (Constructive). Demands hard work, resilience, and mastery through friction.\n\n#### Jupiter Opposition Neptune (4.6\u00b0, Applying)\nThe relationship between Jupiter and Neptune is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts. This dynamic is **increasing in intensity** as the life progresses.\n\n> **Dossier Entry:** MALIFIC SIEGE: Hard aspect from Neptune (Destructive). Creates destruction, conflict, or failure.\n\n#### Saturn Square Neptune (0.78\u00b0, Applying)\nThe relationship between Saturn and Neptune is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts. This dynamic is **increasing in intensity** as the life progresses.\n\n> **Dossier Entry:** MALIFIC SIEGE: Hard aspect from Neptune (Destructive). Creates destruction, conflict, or failure.\n\n\n\n## IV. THE FATE TIMELINE: CHRONOCRATORS & DIRECTIONS\n**Current Distributor (Master Time Lord):** Mars (Partner: Mars)\n**Status:** The Directed Ascendant is at 216.29\u00b0, in the Terms of Mars. Partner: Mars (Domicile Ruler).\n**Lord of the Year:** Mars (Annual Sign: Scorpio)\n\n\n## V. FORENSIC AUDIT: LIFE DOMAINS\n\n\n## VI. UNIVERSAL OVERRIDES: ACTS OF GOD\nNo major universal overrides active in this period.\n",
+  "forensic_forecast": [
+    {
+      "date": "2026-02-08",
+      "display_date": "Sunday, Feb 08",
+      "chronocrator": "Jupiter",
+      "profection_sign": "Sagittarius",
+      "epitasis": false,
+      "medical": [
+        "Saturn is hitting your natal Uranus in Pisces. Watch for Obstruction/Coldness in the Feet/Lymphatic area."
+      ],
+      "mood": "Standard",
+      "summary": "The 'Jupiter' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-09",
+      "display_date": "Monday, Feb 09",
+      "chronocrator": "Jupiter",
+      "profection_sign": "Sagittarius",
+      "epitasis": false,
+      "medical": [
+        "Saturn is hitting your natal Uranus in Pisces. Watch for Obstruction/Coldness in the Feet/Lymphatic area."
+      ],
+      "mood": "Standard",
+      "summary": "The 'Jupiter' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-10",
+      "display_date": "Tuesday, Feb 10",
+      "chronocrator": "Saturn",
+      "profection_sign": "Capricorn",
+      "epitasis": false,
+      "medical": [
+        "Saturn is hitting your natal Uranus in Pisces. Watch for Obstruction/Coldness in the Feet/Lymphatic area."
+      ],
+      "mood": "Empowered",
+      "summary": "The 'Saturn' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-11",
+      "display_date": "Wednesday, Feb 11",
+      "chronocrator": "Saturn",
+      "profection_sign": "Capricorn",
+      "epitasis": false,
+      "medical": [
+        "Saturn is hitting your natal Uranus in Pisces. Watch for Obstruction/Coldness in the Feet/Lymphatic area."
+      ],
+      "mood": "Empowered",
+      "summary": "The 'Saturn' domain is active. Flow is consistent with the annual cycle."
+    },
+    {
+      "date": "2026-02-12",
+      "display_date": "Thursday, Feb 12",
+      "chronocrator": "Saturn",
+      "profection_sign": "Capricorn",
+      "epitasis": false,
+      "medical": [
+        "Saturn is hitting your natal Uranus in Pisces. Watch for Obstruction/Coldness in the Feet/Lymphatic area."
+      ],
+      "mood": "Empowered",
+      "summary": "The 'Saturn' domain is active. Flow is consistent with the annual cycle."
+    }
+  ],
+  "advanced_prediction": {
+    "firdaria": {
+      "error": "Age exceeds Firdaria cycle (75 years)"
+    },
+    "solar_arcs": [
+      {
+        "planet": "Sun",
+        "longitude": 170.13
+      },
+      {
+        "planet": "Moon",
+        "longitude": 58.79
+      },
+      {
+        "planet": "Mercury",
+        "longitude": 166.47
+      },
+      {
+        "planet": "Venus",
+        "longitude": 128.44
+      },
+      {
+        "planet": "Mars",
+        "longitude": 90.42
+      },
+      {
+        "planet": "Jupiter",
+        "longitude": 66.52
+      },
+      {
+        "planet": "Saturn",
+        "longitude": 331.13
+      },
+      {
+        "planet": "Uranus",
+        "longitude": 98.69
+      },
+      {
+        "planet": "Neptune",
+        "longitude": 241.91
+      },
+      {
+        "planet": "Pluto",
+        "longitude": 203.08
+      },
+      {
+        "planet": "North_Node",
+        "longitude": 207.96
+      },
+      {
+        "planet": "South_Node",
+        "longitude": 27.96
+      }
+    ],
+    "transits": [
+      {
+        "transit": "Jupiter",
+        "natal_planet": "North_Node",
+        "aspect": "Conjunct",
+        "orb": 1.68
+      },
+      {
+        "transit": "Jupiter",
+        "natal_planet": "South_Node",
+        "aspect": "Opposition",
+        "orb": 1.68
+      },
+      {
+        "transit": "Saturn",
+        "natal_planet": "Uranus",
+        "aspect": "Conjunct",
+        "orb": 0.41
+      },
+      {
+        "transit": "Uranus",
+        "natal_planet": "Jupiter",
+        "aspect": "Square",
+        "orb": 0.64
+      },
+      {
+        "transit": "Neptune",
+        "natal_planet": "Uranus",
+        "aspect": "Conjunct",
+        "orb": 1.36
+      }
+    ],
+    "muntha": {
+      "sign": "Scorpio",
+      "age": 99
+    },
+    "lunar_phase": {
+      "name": "Disseminating",
+      "angle_range": [
+        225,
+        270
+      ],
+      "profile": "The Teacher/The Demonstrator. Sharing realized vision and values.",
+      "type": "Demonstration"
+    },
+    "mercury_stations": [
+      {
+        "type": "Station Retrograde",
+        "day_after_birth": 53,
+        "age": 53,
+        "date": "1926-07-24",
+        "longitude": 141.2461355007251
+      },
+      {
+        "type": "Station Direct",
+        "day_after_birth": 77,
+        "age": 77,
+        "date": "1926-08-17",
+        "longitude": 129.37822748578
+      }
+    ],
+    "sp_moon_triggers": [],
+    "solar_return_info": {
+      "return_jd": 2460827.15907089,
+      "return_date": "2025-05-31T15:49:03.724890",
+      "natal_sun_longitude": 70.44437139733053
+    }
+  }
+}

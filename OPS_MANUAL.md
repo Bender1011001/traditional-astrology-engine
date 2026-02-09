@@ -5,9 +5,9 @@
 
 ## 1. The Strategy (North Star)
 We are building a "Forensic Astrology" SaaS.
--   **Product**: Automated PDF Reports ($9.99 / $99.00).
+-   **Product**: Automated PDF Reports ($27.00 / $197.00).
 -   **USPs**: "Forensic Accuracy", "Sect-Corrected Algorithms", "Medieval Techniques".
--   **Economics**: 94% Margin. Volume game. Target: 22 sales/day.
+-   **Economics**: 94% Margin. Quality over Volume. Target: 5 sales/day.
 
 ## 2. Prime Directives (The "Red Lines")
 1.  **DO NOT GET USER SUED**: All claims must be defensible "entertainment" or "historical calculation". No medical/financial advice.
