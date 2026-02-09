@@ -23,10 +23,11 @@ def generate_shadow_report():
     jupiter = next(p for p in chart.planets if p.name == PlanetName.JUPITER)
     
     # 1. Surface Analysis
+    sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
     pd = DignityCalculator.calculate_planet_dignity(
         PlanetName.VENUS, 
         venus.longitude, 
-        chart.sect
+        sect
     )
     score = pd['total_score']
     status = "Weak"

@@ -29,11 +29,14 @@ def generate_receipt():
     # 2. Get Mars Data
     mars = next(p for p in chart_data.planets if p.name == "Mars")
     
+    # Calculate Sect
+    sect = Sect.DAY if chart_data.sun_altitude > 0 else Sect.NIGHT
+
     # 3. Calculate Dignity
     dignity_data = DignityCalculator.calculate_planet_dignity(
         planet_name=PlanetName.MARS,
         longitude=mars.longitude,
-        sect=chart_data.sect,
+        sect=sect,
         term_system="egyptian" # default
     )
     
@@ -43,7 +46,7 @@ def generate_receipt():
     print("\n" + "="*40)
     print(f"[AUDIT RECORD: {mars.name.upper()}]")
     print(f"Longitude: {mars.sign} {mars.position_in_sign:.1f}°")
-    print(f"Sect: {chart_data.sect.name}")
+    print(f"Sect: {sect.value}")
     print("-" * 40)
     
     # Essential Scores
