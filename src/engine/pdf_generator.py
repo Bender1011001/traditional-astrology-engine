@@ -1,11 +1,21 @@
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, Flowable
 from reportlab.lib.units import inch
 from io import BytesIO
 from datetime import datetime
 import re
+
+class HorizontalLine(Flowable):
+    def __init__(self, width=460):
+        Flowable.__init__(self)
+        self.width = width
+
+    def draw(self):
+        self.canv.setStrokeColor(colors.lightgrey)
+        self.canv.setLineWidth(1)
+        self.canv.line(0, 0, self.width, 0)
 
 class PDFReportGenerator:
     def __init__(self, chart_data, tier="FULL"):
@@ -96,6 +106,10 @@ class PDFReportGenerator:
             
             # Headers
             if line.startswith('# '):
+                # Special handling for "Part X" to force page break
+                if line.startswith('# Part'):
+                    flowables.append(PageBreak())
+                
                 flowables.append(Paragraph(line[2:], self.styles['Header1']))
                 flowables.append(Spacer(1, 6))
             elif line.startswith('## '):
@@ -103,7 +117,10 @@ class PDFReportGenerator:
             elif line.startswith('### '):
                 flowables.append(Paragraph(line[4:], self.styles['Header3']))
             elif line.startswith('---'):
-                flowables.append(PageBreak())
+                # Changed from PageBreak to HorizontalLine
+                flowables.append(Spacer(1, 6))
+                flowables.append(HorizontalLine())
+                flowables.append(Spacer(1, 6))
             elif line.startswith('- ') or line.startswith('* '):
                 # Bullet point
                 flowables.append(Paragraph(f"• {line[2:]}", self.styles['Normal']))

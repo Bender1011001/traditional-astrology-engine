@@ -220,6 +220,7 @@ class Auditor:
         analysis[ "fate" ] = Auditor._calculate_fate_suite(chart, birth_dt, ans_date)
         analysis[ "medical" ] = Auditor._calculate_medical_suite(chart)
         analysis[ "teams" ] = Auditor._calculate_teams_and_reception(chart)
+        analysis[ "temperament" ] = TemperamentEngine.calculate_temperament(chart)
         analysis[ "aspects" ] = AspectEngine.calculate_aspects(chart)
         
         # 2. Advanced Suites
