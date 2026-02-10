@@ -18,6 +18,7 @@ class FixedStar:
     nemesis: str = ""
     orb: float = 1.0
     swe_name: Optional[str] = None
+    mythology: Optional[str] = None
 
 # 2025 Coordinates and forensic meanings derived from Binder1_part_030.txt and traditional sources
 STARS = [
@@ -38,7 +39,8 @@ STARS = [
         orb=2.5,
         glory="None (Pure Malefic)",
         nemesis="Losing one's head, beheading, extreme violence",
-        swe_name="Algol"
+        swe_name="Algol",
+        mythology="Medusa's Head"
     ),
     FixedStar(
         name="Alcyone",
@@ -92,7 +94,8 @@ STARS = [
         magnitude=1,
         glory="Fame, Wealth, Guardianship",
         nemesis="Danger from dogs, Excessive heat/passion",
-        swe_name="Sirius"
+        swe_name="Sirius",
+        mythology="The Dog Star"
     ),
     FixedStar(
         name="Castor",
@@ -128,7 +131,8 @@ STARS = [
         magnitude=1, 
         glory="Power, Command, Nobility",
         nemesis="Revenge; Total fall from grace due to pettiness",
-        swe_name="Regulus"
+        swe_name="Regulus",
+        mythology="The Heart of the Lion"
     ),
     FixedStar(
         name="Spica", 
@@ -137,7 +141,8 @@ STARS = [
         magnitude=1, 
         glory="Success through art, diplomacy, and intellect",
         nemesis="None (Pure Benefic)",
-        swe_name="Spica"
+        swe_name="Spica",
+        mythology="The Wheat Sheaf of the Virgin"
     ),
     FixedStar(
         name="Arcturus",
@@ -164,7 +169,8 @@ STARS = [
         magnitude=1, 
         glory="Intensity, Bravery, Strategic Genius",
         nemesis="Obsession; Self-destruction through mania",
-        swe_name="Antares"
+        swe_name="Antares",
+        mythology="The Heart of the Scorpion"
     ),
     FixedStar(
         name="Vega",
@@ -227,6 +233,7 @@ class StarContact:
     contact_type: str # "CONJUNCTION" or "PARAN"
     angle: Optional[str] = None
     message: str = ""
+    mythology: Optional[str] = None
 
 def get_shortest_dist(a: float, b: float) -> float:
     d = abs(a - b)
@@ -380,7 +387,8 @@ def calculate_parans(chart: Chart) -> List[StarContact]:
                         planet_name=p_name,
                         contact_type="PARAN",
                         angle=s_angle,
-                        message=msg
+                        message=msg,
+                        mythology=star.mythology
                     ))
 
     return parans
@@ -415,7 +423,8 @@ def check_fixed_stars(chart: Chart) -> List[StarContact]:
                     star_name=star.name,
                     planet_name=p_name,
                     contact_type=contact_type,
-                    message=msg
+                    message=msg,
+                    mythology=star.mythology
                 ))
                 
     # 3. Check Angles (Asc/MC) for direct star presence
@@ -429,7 +438,8 @@ def check_fixed_stars(chart: Chart) -> List[StarContact]:
                     star_name=star.name,
                     planet_name=angle_name,
                     contact_type="ANGULAR_PRESENCE",
-                    message=f"STAR ON {angle_name.upper()}: {star.name}. Glory: {star.glory}. Nemesis: {star.nemesis}."
+                    message=f"STAR ON {angle_name.upper()}: {star.name}. Glory: {star.glory}. Nemesis: {star.nemesis}.",
+                    mythology=star.mythology
                 ))
                 
     # 4. Antares-Aldebaran Axis Alert (Violent Potential)

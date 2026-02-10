@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJNM5XVD');</script>
+    <!-- End Google Tag Manager -->
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
     <script>
@@ -70,6 +78,11 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="background-globes">
         <div class="globe globe-1"></div>
@@ -86,6 +99,7 @@
                 <p class="subtitle">Classical, rule-based delineation for clients who demand method and limits.</p>
                 <nav class="header-actions nav-primary" aria-label="Primary">
                     <a class="help-btn" href="index.html" aria-current="page">Home</a>
+                    <a class="help-btn" href="how-we-audit.html">How We Audit</a>
                     <a class="help-btn" href="services.html">Services</a>
                     <a class="help-btn" href="pricing.html">Pricing</a>
                     <a class="help-btn" href="booking.html">Booking</a>
@@ -96,36 +110,38 @@
                     <a class="help-btn" href="login.html">Log in</a>
                     <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">Dark
                         mode</button>
-                    <button id="pricingBtn" class="help-btn highlight-btn" data-pricing-trigger>Access</button>
+                    <button id="pricingBtn" class="help-btn highlight-btn" type="button" data-pricing-trigger>Access</button>
                 </nav>
-                <div class="hero-grid">
-                    <div class="hero-copy">
-                        <p class="lead">I’m a construction worker who dropped out of high school. I got curious about
-                            ancient math, researched 1,000 pages of source texts, and built this engine to test the
-                            logic. It
-                            renders forensic judgments from the Hellenistic corpus with precision.</p>
-                        <div class="hero-actions">
-                            <a class="btn-primary" href="#reading">Request your formal reading</a>
-                            <a class="btn-secondary" href="#origin-story">Read the origin story</a>
-                        </div>
-                        <div class="trust-badges" aria-label="Trust signals">
-                            <span>Source-anchored</span>
-                            <span>Rule-governed</span>
-                            <span>Auditable outputs</span>
-                            <span>Explicit limits</span>
-                        </div>
+                <div class="hero-value-block">
+                    <div class="hero-value-title">NOT AN AI CHATBOT.</div>
+                    <p class="hero-value-text">
+                        Every reading is a forensic audit — 47+ deterministic rules from Ptolemy, Valens, Bonatti, and Lilly, executed in strict order, with every judgment traceable to a named source.
+                    </p>
+                    <div class="hero-value-sub">
+                        No neural networks. No vague horoscopes. No hallucinations.<br>
+                        Swiss Ephemeris precision. Rule Ledger transparency. Sect always matters.
                     </div>
-                    <div class="authority-panel">
-                        <h3>Judgment, not psychology</h3>
-                        <p>We do not trade in modern self-help or archetypal coaching. This is astrology as a
-                            mathematical and interpretive craft: defined inputs, declared rules, and reproducible
-                            outputs.</p>
-                        <ul class="authority-list">
-                            <li>Seven visible planets only; no modern additions.</li>
-                            <li>Whole-sign houses as the principal structure.</li>
-                            <li>Essential dignity scoring with published weights.</li>
-                            <li>Clear boundaries on medical, legal, and financial claims.</li>
-                        </ul>
+                    <div class="hero-actions justify-center mt-8">
+                        <a class="btn-primary" href="#reading">Request a Forensic Audit</a>
+                        <a class="btn-secondary" href="how-we-audit.html">See How It Works</a>
+                    </div>
+                </div>
+
+                <div class="proof-strip">
+                    <div class="proof-card">
+                        <span class="proof-icon">📜</span>
+                        <div class="proof-title">Source Anchored</div>
+                        <p>Every judgment cites the specific Hellenistic or Medieval text it derives from.</p>
+                    </div>
+                    <div class="proof-card">
+                        <span class="proof-icon">🧮</span>
+                        <div class="proof-title">Deterministic</div>
+                        <p>The same birth data produces the exact same audit, every single time.</p>
+                    </div>
+                    <div class="proof-card">
+                        <span class="proof-icon">⚖️</span>
+                        <div class="proof-title">Rule Ledger</div>
+                        <p>We generate a precise JSON ledger of every condition met before writing a word.</p>
                     </div>
                 </div>
             </div>
@@ -208,7 +224,7 @@
 
                     <button type="submit" id="basicStartBtn">
                         <span class="btn-text">GENERATE PRELIMINARY JUDGMENT</span>
-                        <div class="btn-shimmer"></div>
+                        <span class="btn-shimmer"></span>
                     </button>
                 </form>
 
@@ -245,22 +261,21 @@
         </section>
 
         <!-- NEW ORIGIN STORY SECTION -->
-        <section id="origin-story" class="basic-view" style="background-color: #fff; padding: 4rem 1rem;">
-            <div class="container" style="max-width: 800px; margin: 0 auto;">
-                <h2 class="section-title" style="text-align: center;">I GOT CURIOUS ABOUT ANCIENT MATH</h2>
-                <div
-                    style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; line-height: 1.6; color: var(--text-dark);">
-                    <p style="margin-bottom: 1.5rem;">I'm a construction worker. I dropped out of high school. I don't
+        <section id="origin-story" class="extract-section section-white">
+            <div class="container max-w-800 mx-auto">
+                <h2 class="section-title text-center">I GOT CURIOUS ABOUT ANCIENT MATH</h2>
+                <div class="origin-story-text">
+                    <p class="mb-6">I'm a construction worker. I dropped out of high school. I don't
                         fit the typical profile of a software developer or an astrologer.</p>
-                    <p style="margin-bottom: 1.5rem;">But I have a habit of asking questions. I saw a mention that
+                    <p class="mb-6">But I have a habit of asking questions. I saw a mention that
                         traditional Hellenistic astrology wasn't just horoscopes, but a complex system of mathematical
                         calculations used 2,000 years ago.</p>
-                    <p style="margin-bottom: 1.5rem;">I got curious: <em>How did they calculate this by hand? Is the
+                    <p class="mb-6">I got curious: <em>How did they calculate this by hand? Is the
                             math consistent?</em></p>
-                    <p style="margin-bottom: 1.5rem;">So, I spent a month of nights and weekends researching. I read
+                    <p class="mb-6">So, I spent a month of nights and weekends researching. I read
                         1,000+ pages of source texts (Valens, Dorotheus, Medieval synthesis). Then, I wrote the code to
                         prove I understood the logic.</p>
-                    <p style="margin-bottom: 1.5rem;">The result is this engine. It performs the rigorous "Forensic
+                    <p class="mb-6">The result is this engine. It performs the rigorous "Forensic
                         Audit" calculations—Sect, Almuten, Mutual Receptions—that usually take a human hours to compute.
                     </p>
                     <p>I built this to answer my own question. But the results were so precise, I decided to open it up.
@@ -270,24 +285,56 @@
         </section>
 
         <!-- NEW PROOF SECTION -->
-        <section class="basic-view" style="background-color: var(--bg-warm); padding: 4rem 1rem;">
-            <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <section class="basic-view section-warm">
+            <div class="container max-w-800 mx-auto text-center">
                 <h2 class="section-title">PROOF IT WORKS: MY OWN CHART</h2>
                 <p class="section-subtitle">To test the engine, I ran my own birth data.</p>
-                <div class="panel-card"
-                    style="text-align: left; margin: 2rem auto; max-width: 700px; border: 1px solid var(--gold);">
-                    <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.6;">"I ran my chart and to me it
+                <div class="panel-card proof-quote-card">
+                    <p class="proof-quote-text">"I ran my chart and to me it
                         seems more accurate than what I thought was possible. I can't say if it works for everyone, but
                         after reading mine I decided to build all of this. The example you can look at is my chart."</p>
-                    <div style="text-align: center;">
-                        <a href="creator_chart_sample.pdf" class="btn-primary" target="_blank"
-                            style="text-decoration: none;">DOWNLOAD THE CREATOR'S FULL REPORT (PDF)</a>
+                    <div class="text-center">
+                        <a href="creator_chart_sample.pdf" class="btn-primary text-decoration-none" target="_blank">DOWNLOAD THE CREATOR'S FULL REPORT (PDF)</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="philosophy-section" style="margin-bottom: 3rem; text-align: center;">
+        <section class="basic-view bg-white py-16">
+            <div class="container max-w-800">
+                <h2 class="section-title text-center">WHY WE ARE NOT AN AI</h2>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Typical AI Astrology</th>
+                                <th>Codex Caelestis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Probabilistic</strong><br>Guesses the next word</td>
+                                <td><strong>Deterministic</strong><br>Executes rigid rules</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Black Box</strong><br>Unknown training data</td>
+                                <td><strong>Citation Audit</strong><br>Named source for every claim</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Inconsistent</strong><br>Answers vary each time</td>
+                                <td><strong>Reproducible</strong><br>Same data = Same result</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hallucinates</strong><br>Invents plausible falsehoods</td>
+                                <td><strong>Silence</strong><br>If no rule applies, we say nothing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="philosophy-section mb-12 text-center">
             <h2 class="section-title">WHO THIS IS FOR</h2>
             <p class="section-subtitle">We serve clients who want a technical evaluation of natal promise, planetary
                 condition, and timing. If you are seeking affirmation, therapeutic framing, or vague encouragement, this
@@ -331,12 +378,12 @@
                         is the foundation for all subsequent timing work.</p>
                 </div>
                 <div class="panel-card">
-                    <h4>Timing & Profections</h4>
+                    <h4>Timing &amp; Profections</h4>
                     <p>Annual profections, time lords, and event windows based on traditional timing techniques. Built
                         for year-level planning with explicit date ranges.</p>
                 </div>
                 <div class="panel-card">
-                    <h4>Advanced Lots & Topics</h4>
+                    <h4>Advanced Lots &amp; Topics</h4>
                     <p>Lots, financial architecture, vocational indicators, and health-related significations, with
                         strict disclaimers and bounded claims.</p>
                 </div>
@@ -344,7 +391,7 @@
         </section>
 
         <section class="basic-view">
-            <h2 class="section-title">PROCESS & ACCOUNTABILITY</h2>
+            <h2 class="section-title">PROCESS &amp; ACCOUNTABILITY</h2>
             <p class="section-subtitle">Traditional astrology requires discipline. We use a three-step flow that
                 protects method integrity and client clarity.</p>
             <div class="process-grid">
@@ -367,7 +414,7 @@
         </section>
 
         <section class="basic-view">
-            <h2 class="section-title">PRICING & ACCESS</h2>
+            <h2 class="section-title">PRICING &amp; ACCESS</h2>
             <p class="section-subtitle">Pricing is designed to filter casual browsers and prioritize serious clients. We
                 charge for time-intensive calculations and archival storage.</p>
             <div class="offer-grid">
@@ -405,17 +452,17 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-actions" style="justify-content: center; margin-top: 2rem;">
+            <div class="hero-actions justify-center mt-8">
                 <button class="btn-primary" type="button" data-pricing-trigger>Review access options</button>
                 <a class="btn-secondary" href="pricing.html">Full pricing rationale</a>
             </div>
         </section>
 
         <section class="samples-section">
-            <h2 class="section-title" style="text-align: center;">SAMPLE EVIDENCE</h2>
+            <h2 class="section-title text-center">SAMPLE EVIDENCE</h2>
             <div class="samples-grid">
                 <div class="sample-card">
-                    <button class="sample-toggle" aria-expanded="false">
+                    <button class="sample-toggle" type="button" aria-expanded="false">
                         <span>Temperament Judgment</span>
                         <span class="icon">+</span>
                     </button>
@@ -426,8 +473,8 @@
                     </div>
                 </div>
                 <div class="sample-card">
-                    <button class="sample-toggle" aria-expanded="false">
-                        <span>Chart Ruler & Agenda</span>
+                    <button class="sample-toggle" type="button" aria-expanded="false">
+                        <span>Chart Ruler &amp; Agenda</span>
                         <span class="icon">+</span>
                     </button>
                     <div class="sample-content hidden">
@@ -437,7 +484,7 @@
                     </div>
                 </div>
                 <div class="sample-card">
-                    <button class="sample-toggle" aria-expanded="false">
+                    <button class="sample-toggle" type="button" aria-expanded="false">
                         <span>Timing Window</span>
                         <span class="icon">+</span>
                     </button>
@@ -456,26 +503,23 @@
                 <div class="testimonial-card">
                     <p class="testimonial-quote">"The report was structured like a case file. Every claim had an origin,
                         and every limitation was explicit. This is the opposite of modern astrology fluff."</p>
-                    <p class="testimonial-author">A.N. — Oslo <span class="verified-badge"
-                            style="color:var(--gold); font-size:0.8em; margin-left:5px;">✓ Verified</span></p>
+                    <p class="testimonial-author">A.N. — Oslo <span class="verified-badge text-gold text-sm ml-1">✓ Verified</span></p>
                 </div>
                 <div class="testimonial-card">
                     <p class="testimonial-quote">"I work in finance and wanted method, not mysticism. The delineation
                         was disciplined and transparent about what could be judged."</p>
-                    <p class="testimonial-author">E.M. — New York <span class="verified-badge"
-                            style="color:var(--gold); font-size:0.8em; margin-left:5px;">✓ Verified</span></p>
+                    <p class="testimonial-author">E.M. — New York <span class="verified-badge text-gold text-sm ml-1">✓ Verified</span></p>
                 </div>
                 <div class="testimonial-card">
                     <p class="testimonial-quote">"The timing section was more rigorous than any reading I have
                         purchased. The rules were laid out and the conclusions followed."</p>
-                    <p class="testimonial-author">L.S. — Cambridge <span class="verified-badge"
-                            style="color:var(--gold); font-size:0.8em; margin-left:5px;">✓ Verified</span></p>
+                    <p class="testimonial-author">L.S. — Cambridge <span class="verified-badge text-gold text-sm ml-1">✓ Verified</span></p>
                 </div>
             </div>
         </section>
 
         <section class="comparison-section">
-            <h2 class="section-title" style="text-align: center;">WHAT IS REMOVED</h2>
+            <h2 class="section-title text-center">WHAT IS REMOVED</h2>
             <div class="comparison-table-wrapper">
                 <table class="comparison-table">
                     <thead>
@@ -506,16 +550,13 @@
             </div>
         </section>
 
-        <footer
-            style="margin-top: 4rem; text-align: center; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 2rem;">
+        <footer class="mt-4 text-center text-xs text-muted pb-8">
             <p>&copy; <span id="copyrightYear">2026</span> Codex Caelestis. Built by a Construction Worker with
                 Curiosity. All rights reserved.</p>
-            <div style="margin-top: 0.5rem;">
-                <a href="privacy.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Privacy
-                    Policy</a>
+            <div class="mt-2 text-inherit">
+                <a href="privacy.html" class="text-inherit mx-2">Privacy Policy</a>
                 <span aria-hidden="true">•</span>
-                <a href="terms.html" style="color: inherit; text-decoration: none; margin: 0 0.5rem;">Terms of
-                    Service</a>
+                <a href="terms.html" class="text-inherit mx-2">Terms of Service</a>
             </div>
         </footer>
     </main>
@@ -523,7 +564,7 @@
     <!-- Pricing Modal -->
     <div class="modal-overlay hidden" id="pricingModal">
         <div class="modal-content pricing-modal-content">
-            <button class="modal-close" id="pricingClose">&times;</button>
+            <button class="modal-close" id="pricingClose" type="button">&times;</button>
             <div class="modal-header">
                 <h2>ACCESS TIERS</h2>
                 <div class="ornament"></div>
@@ -547,25 +588,24 @@
                         <li>Declared limitations</li>
                         <li>One chart preview</li>
                     </ul>
-                    <button class="pricing-cta disabled" disabled>CURRENT TIER</button>
+                    <button class="pricing-cta disabled" type="button" disabled>CURRENT TIER</button>
                 </div>
                 <div class="pricing-card highlight">
                     <h3>PRACTITIONER ACCESS</h3>
                     <div class="price">$<span id="price-starter">147</span><span id="period-starter">/mo</span>
                     </div>
-                    <ul style="margin-bottom: 2rem;">
+                    <ul class="mb-8">
                         <li>5 Reports / month</li>
                         <li>Full dossiers + timing modules</li>
                         <li>Save 10 charts</li>
                         <li>Priority recalculation queue</li>
                     </ul>
-                    <button class="pricing-cta" onclick="initiateCheckout('starter')">SUBSCRIBE</button>
+                    <button class="pricing-cta" type="button" onclick="initiateCheckout('starter')">SUBSCRIBE</button>
                 </div>
             </div>
-            <div class="renewal-disclosure"
-                style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 1.5rem; line-height: 1.4; padding: 0 1rem;">
+            <div class="disclosure-text">
                 By subscribing, you agree to our <a href="terms.html" target="_blank"
-                    style="color: inherit; text-decoration: underline;">Terms</a> and authorize us to charge your
+                    class="text-decoration-underline text-inherit">Terms</a> and authorize us to charge your
                 payment method on a recurring basis (monthly or annually) until you cancel. You can cancel at any
                 time in your dashboard.
             </div>
@@ -575,7 +615,7 @@
     <!-- Paywall Modal -->
     <div id="paywallModal" class="modal-overlay hidden">
         <div class="modal-content paywall-content" role="dialog" aria-modal="true">
-            <button class="modal-close" id="closePaywall" aria-label="Close paywall">
+            <button class="modal-close" id="closePaywall" type="button" aria-label="Close paywall">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -587,8 +627,8 @@
             <div class="locked-features">
                 <h3>UNLOCK THE COMPLETE DOSSIER:</h3>
                 <ul class="locked-list">
-                    <li>✓ <strong>Timing & Profections</strong>: annual time-lord periods</li>
-                    <li>✓ <strong>Lots & Topic Analysis</strong>: vocation, resources, and health</li>
+                    <li>✓ <strong>Timing &amp; Profections</strong>: annual time-lord periods</li>
+                    <li>✓ <strong>Lots &amp; Topic Analysis</strong>: vocation, resources, and health</li>
                     <li>✓ <strong>Forensic Audit</strong>: essential dignity scoring</li>
                     <li>✓ <strong>Precision Window</strong>: 5-day forecast</li>
                 </ul>
@@ -617,14 +657,14 @@
                     <h4>COMPLETE FORENSIC AUDIT</h4>
                     <div class="price">$197</div>
                     <p>Full report for this chart only.</p>
-                    <button class="btn-primary" onclick="window.startCheckout('onetime')">UNLOCK NOW</button>
+                    <button class="btn-primary" type="button" onclick="window.startCheckout('onetime')">UNLOCK NOW</button>
                 </div>
                 <div class="pricing-card recommended" id="subCard">
                     <div class="badge">BEST VALUE</div>
                     <h4 id="subTitle">PRACTITIONER ACCESS</h4>
                     <div class="price" id="subPrice">$147<span>/mo</span></div>
                     <p id="subDesc">5 Reports / month.</p>
-                    <button class="btn-primary" onclick="window.startCheckout('starter')">SUBSCRIBE</button>
+                    <button class="btn-primary" type="button" onclick="window.startCheckout('starter')">SUBSCRIBE</button>
                     <div id="annualDetails" class="hidden">
                         <div class="price">$1470<span>/yr</span></div>
                         <p>Equivalent to $122.50/mo.</p>
@@ -632,20 +672,19 @@
                 </div>
             </div>
 
-            <div class="renewal-disclosure"
-                style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 1.5rem; line-height: 1.4; padding: 0 1rem;">
+            <div class="disclosure-text">
                 By subscribing, you agree to our <a href="terms.html" target="_blank"
-                    style="color: inherit; text-decoration: underline;">Terms</a> and authorize us to charge your
-                payment method on a recurring basis (monthly or annually) until you cancel. You can cancel at any time
-                in your dashboard.
+                    class="text-decoration-underline text-inherit">Terms</a> and authorize us to charge your
+                payment method on a recurring basis (monthly or annually) until you cancel. You can cancel at any
+                time in your dashboard.
             </div>
 
-            <div class="footer-nav" style="margin-top: 1rem; text-align: center; font-size: 0.75rem;">
-                <a href="privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy</a>
-                <span style="color: var(--text-muted); margin: 0 0.5rem;">•</span>
-                <a href="terms.html" style="color: var(--text-muted); text-decoration: none;">Terms</a>
-                <span style="color: var(--text-muted); margin: 0 0.5rem;">•</span>
-                <a href="sitemap.xml" style="color: var(--text-muted); text-decoration: none;">Sitemap</a>
+            <div class="mt-2 text-center text-xs text-muted">
+                <a href="privacy.html" class="text-inherit mx-2 text-decoration-none">Privacy</a>
+                <span aria-hidden="true">•</span>
+                <a href="terms.html" class="text-inherit mx-2 text-decoration-none">Terms</a>
+                <span aria-hidden="true">•</span>
+                <a href="sitemap.xml" class="text-inherit mx-2 text-decoration-none">Sitemap</a>
             </div>
 
             <div class="guarantee-badge">
@@ -654,25 +693,24 @@
                 <p>If you are dissatisfied with the methodical quality, request a refund.</p>
             </div>
 
-            <div
-                style="background: rgba(255, 0, 0, 0.05); border: 1px solid rgba(255, 0, 0, 0.1); padding: 0.75rem; border-radius: 4px; margin: 1rem 0; font-size: 0.75rem; color: var(--text-muted); text-align: left;">
-                <strong style="color: var(--danger); text-transform: uppercase;">Scope Disclaimer:</strong>
+            <div class="lock-disclaimer">
+                <strong>Scope Disclaimer:</strong>
                 This report is a traditional, algorithmic delineation for educational purposes. It is not medical,
                 legal, or financial advice, and it does not claim psychic certainty.
                 <strong>Medical astrology content is historical in nature only.</strong>
             </div>
 
-            <p style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 1rem;">
+            <p class="mt-4 text-center opacity-70 text-xs">
                 By continuing, you adhere to our <a href="terms.html" target="_blank"
-                    style="color: inherit; text-decoration: underline;">Terms of Service</a>.
+                    class="text-decoration-underline text-inherit">Terms of Service</a>.
             </p>
         </div>
     </div>
 
     <!-- Email Capture Modal -->
     <div id="emailModal" class="modal-overlay hidden">
-        <div class="modal-content" style="max-width: 450px;" role="dialog" aria-modal="true">
-            <button class="modal-close" id="closeEmail" aria-label="Close modal">
+        <div class="modal-content max-w-700" role="dialog" aria-modal="true" style="max-width: 450px;">
+            <button class="modal-close" id="closeEmail" type="button" aria-label="Close modal">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -680,45 +718,40 @@
             </button>
             <h2 class="paywall-title">ARCHIVE YOUR REPORT</h2>
 
-            <div style="text-align: center; margin-bottom: 1.5rem;">
-                <img src="./pdf_preview.png" alt="PDF Report Preview"
-                    style="max-width: 100%; border-radius: 8px; border: 1px solid var(--gold); margin-bottom: 1rem; box-shadow: var(--shadow-soft);">
+            <div class="text-center mb-6">
+                <img src="./pdf_preview.png" alt="PDF Report Preview" class="mb-4 shadow-soft border-gold rounded-md" style="max-width: 100%;">
                 <p>Enter your email to receive a secure PDF copy of your preliminary judgment.</p>
             </div>
 
-            <form id="emailForm" style="display: flex; flex-direction: column; gap: 1rem;">
+            <form id="emailForm" class="flex-column gap-4">
                 <div class="input-group">
                     <label for="captureEmail">EMAIL ADDRESS</label>
                     <input type="email" id="captureEmail" required placeholder="you@example.com">
                 </div>
 
-                <div class="checkbox-row" style="align-items: flex-start; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                    <input type="checkbox" id="emailConsent" required style="margin-top: 0.3rem;">
-                    <label for="emailConsent"
-                        style="font-size: 0.8rem; line-height: 1.4; color: var(--text-muted); cursor: pointer;">
-                        I agree to the <a href="privacy.html" target="_blank" style="color: var(--gold);">Privacy
+                <div class="checkbox-row items-start mb-2 mt-2">
+                    <input type="checkbox" id="emailConsent" required class="mt-2">
+                    <label for="emailConsent" class="text-sm leading-tight text-muted cursor-pointer">
+                        I agree to the <a href="privacy.html" target="_blank" class="text-gold">Privacy
                             Policy</a> and consent to receive emails about my report.
                     </label>
                 </div>
 
                 <button type="submit" class="btn-primary">SEND MY PDF</button>
-                <div id="emailStatus" style="text-align: center; min-height: 1.2em; font-size: 0.9em;"></div>
+                <div id="emailStatus" class="text-center" style="min-height: 1.2em; font-size: 0.9em;"></div>
             </form>
 
-            <div
-                style="text-align: left; margin-top: 1.5rem; border-top: 1px solid var(--glass-border); padding-top: 1rem;">
-                <strong
-                    style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">What
+            <div class="mt-6 pt-4 border-glass text-left">
+                <strong class="text-gold text-sm text-uppercase tracking-wide">What
                     Happens Next:</strong>
-                <ol
-                    style="margin-top: 0.5rem; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+                <ol class="mt-2 text-muted text-sm leading-relaxed" style="padding-left: 1.2rem;">
                     <li>You'll receive an instant confirmation email.</li>
                     <li>Your PDF report will be attached.</li>
                     <li>Check your specific spam folder if not received in 2 minutes.</li>
                 </ol>
             </div>
 
-            <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem; opacity: 0.7;">We respect your privacy.
+            <p class="text-center mt-4 opacity-70 text-sm">We respect your privacy.
                 No spam.</p>
         </div>
     </div>

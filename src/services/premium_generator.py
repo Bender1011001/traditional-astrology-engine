@@ -429,6 +429,13 @@ class PremiumGenerator:
         """
         logger.info("Starting Premium Report Generation (LLM Chain)")
 
+        # Enforce Deterministic Mythology
+        try:
+            cleaned_data = PremiumGenerator._enforce_star_mythology(chart_data)
+        except Exception as e:
+            logger.error(f"Failed to enforce star mythology: {e}")
+            cleaned_data = chart_data
+
         # Prepare System Prompt
         truncated_binder = BINDER_CONTEXT[:50000] if BINDER_CONTEXT else ""
         system_prompt = PREMIUM_SYSTEM_PROMPT.format(binder_context=truncated_binder)
@@ -437,7 +444,7 @@ class PremiumGenerator:
         all_responses = []
 
         # Convert chart data to JSON string for the prompt
-        chart_json = json.dumps(chart_data, indent=2, default=str)
+        chart_json = json.dumps(cleaned_data, indent=2, default=str)
 
         for i, prompt_template in enumerate(ITERATION_PROMPTS[:iterations]):
             logger.info(f"LLM Generation Iteration {i+1}/{iterations}...")
@@ -521,3 +528,58 @@ class PremiumGenerator:
             filtered_text = re.sub(pattern, replacement, filtered_text)
         
         return filtered_text
+
+    @staticmethod
+    def _enforce_star_mythology(chart_data: dict) -> dict:
+        """
+        Traverses the chart data to find StarContacts and replaces them with 
+        strict narrative strings to prevent LLM hallucination.
+        """
+        import copy
+        # Deep copy to avoid mutating the original object used by other services
+        data = copy.deepcopy(chart_data)
+        
+        try:
+            # Navigate to stars: technical_data -> analysis -> supplemental -> stars
+            tech = data.get("technical_data", {})
+            analysis = tech.get("analysis", {})
+            supp = analysis.get("supplemental", {})
+            stars = supp.get("stars", [])
+            
+            formatted_stars = []
+            
+            for star in stars:
+                # Handle both dicts and objects (dataclasses)
+                if isinstance(star, dict):
+                    s_name = star.get("star_name", "Unknown")
+                    p_name = star.get("planet_name", "Unknown")
+                    myth = star.get("mythology")
+                    msg = star.get("message", "")
+                else:
+                    # Assume dataclass or object
+                    s_name = getattr(star, "star_name", "Unknown")
+                    p_name = getattr(star, "planet_name", "Unknown")
+                    myth = getattr(star, "mythology", None)
+                    msg = getattr(star, "message", "")
+
+                # If mythology is present, enforce the rule
+                if myth:
+                    formatted_str = (
+                        f"STAR_RULE: {p_name} is on {s_name}. "
+                        f"REQUIRED_METAPHOR: '{myth}'. "
+                        f"KEYWORDS: {msg}."
+                    )
+                    formatted_stars.append(formatted_str)
+                else:
+                    # Keep original object/dict if no mythology strictly required, 
+                    # or format it loosely
+                    formatted_stars.append(star)
+            
+            # Replace the list
+            if formatted_stars:
+                supp["stars"] = formatted_stars
+                
+        except Exception as e:
+            logger.warning(f"Structure mismatch in _enforce_star_mythology: {e}")
+            
+        return data
