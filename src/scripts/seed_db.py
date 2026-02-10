@@ -7,84 +7,62 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
 
 from src.database.core import engine, Base, SessionLocal
 from src.database.models import SubscriptionPlan, User, UserSubscription
+from src.core.config import settings
 
 def seed_plans():
     db = SessionLocal()
     try:
-        # Check if plans exist
-        existing = db.query(SubscriptionPlan).count()
-        if existing > 0:
-            print("Plans already exist using new schema. Skipping.")
-            return
+        print("Ensuring Subscription Plans exist (upsert)...")
 
-        print("Seeding Subscription Plans...")
-        
-        plans = [
-            SubscriptionPlan(
-                tier="free",
-                chart_quota=1, # First report free incentive
-                api_quota=0,
-                price_monthly=0.00,
-                price_annual=0.00,
-                stripe_price_id_monthly=None,
-                stripe_price_id_annual=None,
-                features={"audit": False, "forecasting": False, "advanced": False, "ai_readings": True}
-            ),
-            SubscriptionPlan(
-                tier="onetime",
-                chart_quota=1, 
-                api_quota=0,
-                price_monthly=197.00,
-                price_annual=0.00,
-                stripe_price_id_monthly="price_1SxueOC8BJritqvrAt2YvNcn", # $197 B2C
-                stripe_price_id_annual=None,
-                features={"audit": True, "forecasting": True, "details": True, "timeline": True}
-            ),
-            SubscriptionPlan(
-                tier="apprentice",
-                chart_quota=5,
-                api_quota=100, # Basic API access
-                price_monthly=147.00,
-                price_annual=1470.00,
-                stripe_price_id_monthly="price_1SxueOC8BJritqvrHz4dGn6k", # $147 Apprentice
-                stripe_price_id_annual=None, # TBD
-                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": False, "api_access": True}
-            ),
-            SubscriptionPlan(
-                tier="practitioner",
-                chart_quota=25,
-                api_quota=500,
-                price_monthly=397.00,
-                price_annual=3970.00,
-                stripe_price_id_monthly="price_1SxuePC8BJritqvrMv1gjTkP", # $397 Practitioner
-                stripe_price_id_annual=None,
-                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": True, "api_access": True}
-            ),
-            SubscriptionPlan(
-                tier="master",
-                chart_quota=100,
-                api_quota=2000,
-                price_monthly=797.00,
-                price_annual=7970.00,
-                stripe_price_id_monthly="price_1SxuePC8BJritqvr760gXP4R", # $797 Master
-                stripe_price_id_annual=None,
-                features={"audit": True, "forecasting": True, "pdf_export": True, "priority": True, "api_access": True, "slack_support": True}
-            ),
-            SubscriptionPlan(
-                tier="agency",
-                chart_quota=None, # Unlimited
-                api_quota=50000,
-                price_monthly=1297.00, # Example high tier
-                price_annual=12970.00,
-                stripe_price_id_monthly="price_1SxuelC8BJritqvr3LxqqItk", # $1297 Agency
-                stripe_price_id_annual=None,
-                features={"api_access": True, "white_label": True, "dedicated_support": True}
-            )
+        desired = [
+            {
+                "tier": "free",
+                "chart_quota": None,  # The public demo is rate-limited; signed-in users are not hard-capped here.
+                "api_quota": 0,       # No API keys for free plan.
+                "price_monthly": 0.00,
+                "price_annual": 0.00,
+                "stripe_price_id_monthly": None,
+                "stripe_price_id_annual": None,
+                "features": {"api_access": False}
+            },
+            {
+                "tier": "practitioner",
+                "chart_quota": None,  # Unlimited calculations (per plan).
+                "api_quota": 100,     # API calls/day
+                "price_monthly": 147.00,
+                "price_annual": 1470.00,
+                "stripe_price_id_monthly": settings.STRIPE_PRICE_PRACTITIONER_MONTHLY or None,
+                "stripe_price_id_annual": settings.STRIPE_PRICE_PRACTITIONER_ANNUAL or None,
+                "features": {"api_access": True, "saved_charts_limit": 100}
+            },
+            {
+                "tier": "studio",
+                "chart_quota": None,  # Unlimited calculations (per plan).
+                "api_quota": None,    # Unlimited API calls/day
+                "price_monthly": 497.00,
+                "price_annual": 4970.00,
+                "stripe_price_id_monthly": settings.STRIPE_PRICE_STUDIO_MONTHLY or None,
+                "stripe_price_id_annual": settings.STRIPE_PRICE_STUDIO_ANNUAL or None,
+                "features": {"api_access": True, "saved_charts_limit": None, "seats": 5}
+            }
         ]
-        
-        db.add_all(plans)
+
+        for d in desired:
+            plan = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier == d["tier"]).first()
+            if not plan:
+                plan = SubscriptionPlan(tier=d["tier"])
+                db.add(plan)
+
+            plan.chart_quota = d["chart_quota"]
+            plan.api_quota = d["api_quota"]
+            plan.price_monthly = d["price_monthly"]
+            plan.price_annual = d["price_annual"]
+            plan.stripe_price_id_monthly = d["stripe_price_id_monthly"]
+            plan.stripe_price_id_annual = d["stripe_price_id_annual"]
+            plan.features = d["features"]
+
         db.commit()
-        print("Plans seeded successfully.")
+        print("Plans ensured successfully.")
         
     except Exception as e:
         print(f"Error seeding plans: {e}")

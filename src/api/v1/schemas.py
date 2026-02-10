@@ -21,7 +21,7 @@ class ChartRequest(BaseModel):
     access_token: Optional[str] = None
 
 class CheckoutRequest(BaseModel):
-    tier: str  # 'onetime' or 'subscription'
+    tier: str  # 'practitioner' | 'studio'
     chart_request: Optional[ChartRequest] = None # Make optional to fix subscription flow
     annual: Optional[bool] = False # New field
     success_url: str
@@ -68,6 +68,7 @@ class RegisterRequest(BaseModel):
     email: str
     password: str
     name: Optional[str] = ""
+    plan_tier: Optional[str] = None
 
 class ForgotPasswordRequest(BaseModel):
     email: str

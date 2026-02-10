@@ -17,6 +17,12 @@ async def create_api_key(
     db: Session = Depends(get_db)
 ):
     """Create a new API Key"""
+    sub = user.subscription
+    if not sub or not sub.plan or sub.status not in {"active", "trial"}:
+        raise HTTPException(status_code=403, detail="Subscription required to create API keys")
+    if sub.plan.tier not in {"practitioner", "studio"}:
+        raise HTTPException(status_code=403, detail="Upgrade required to create API keys")
+
     # Generate random key
     raw_key = "sk_live_" + secrets.token_hex(32)
     key_hash = hashlib.sha256(raw_key.encode()).hexdigest()
@@ -73,7 +79,7 @@ async def get_developer_usage(
         return {"api_calls_used": 0, "quota": 0}
         
     plan = sub.plan
-    period_start = sub.current_period_start or datetime.utcnow().replace(day=1)
+    period_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
     
     used = db.query(func.sum(UsageRecord.cost_credits)).filter(
         UsageRecord.subscription_id == sub.id,
@@ -84,5 +90,6 @@ async def get_developer_usage(
     return {
         "api_calls_used": used,
         "quota": plan.api_quota or 0,
+        "quota_period": "day",
         "plan_tier": plan.tier
     }

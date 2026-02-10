@@ -15,10 +15,12 @@ class SubscriptionService:
     def get_plan_by_tier(self, tier: str) -> SubscriptionPlan:
         return self.db.query(SubscriptionPlan).filter(SubscriptionPlan.tier == tier).first()
 
-    def start_trial(self, user: User, plan_tier: str, trial_days: int = 7):
+    def start_trial(self, user: User, plan_tier: str, trial_days: int = None):
         """
         Start a free trial without credit card.
         """
+        if trial_days is None:
+            trial_days = getattr(settings, "TRIAL_DAYS_DEFAULT", 14)
         plan = self.get_plan_by_tier(plan_tier)
         if not plan:
             raise ValueError(f"Plan {plan_tier} not found")
@@ -28,7 +30,9 @@ class SubscriptionService:
         # For now, allow clean slate.
         
         now = datetime.utcnow()
-        trial_end = now + timedelta(days=trial_days)
+        # For the free plan, we store an active baseline subscription (not a trial).
+        is_free = plan.tier == "free"
+        trial_end = None if is_free else (now + timedelta(days=trial_days))
 
         sub = user.subscription
         if not sub:
@@ -36,11 +40,11 @@ class SubscriptionService:
             self.db.add(sub)
         
         sub.plan_id = plan.id
-        sub.status = "trial"
-        sub.trial_start_date = now
-        sub.trial_end_date = trial_end
+        sub.status = "active" if is_free else "trial"
+        sub.trial_start_date = None if is_free else now
+        sub.trial_end_date = None if is_free else trial_end
         sub.current_period_start = now
-        sub.current_period_end = trial_end
+        sub.current_period_end = None if is_free else trial_end
         sub.cancel_at_period_end = False
         
         # Reset quota usage for new period
@@ -108,8 +112,19 @@ class SubscriptionService:
                 "metadata": {
                     "user_id": user.id,
                     "plan_tier": plan.tier
-                }
+                },
             }
+
+            # If the user is currently on an internal trial for the same tier, align Stripe billing start to trial end.
+            try:
+                sub = user.subscription
+                if sub and sub.status == "trial" and sub.trial_end_date and sub.trial_end_date > datetime.utcnow():
+                    # Only apply if they are checking out the same tier they're trialing.
+                    if sub.plan and sub.plan.tier == plan.tier:
+                        session_kwargs['subscription_data']["trial_end"] = int(sub.trial_end_date.timestamp())
+            except Exception:
+                # Non-fatal: proceed with normal checkout if trial alignment fails.
+                pass
         else:
             # For one-time payments, we might want invoice creation enabled to track it easily
             session_kwargs['invoice_creation'] = {
@@ -193,16 +208,32 @@ class SubscriptionService:
             self.db.add(sub)
 
         sub.plan_id = plan.id
-        sub.status = "active"
         sub.stripe_customer_id = stripe_cust_id
         sub.stripe_subscription_id = stripe_sub_id
-        sub.trial_end_date = None # End trial
         
         # Stripe sub details
         if stripe_sub_id:
-             stripe_sub = stripe.Subscription.retrieve(stripe_sub_id)
-             sub.current_period_start = datetime.fromtimestamp(stripe_sub.current_period_start)
-             sub.current_period_end = datetime.fromtimestamp(stripe_sub.current_period_end)
+            stripe_sub = stripe.Subscription.retrieve(stripe_sub_id)
+            sub.current_period_start = datetime.fromtimestamp(stripe_sub.current_period_start)
+            sub.current_period_end = datetime.fromtimestamp(stripe_sub.current_period_end)
+
+            # Preserve trial state if Stripe says we're trialing.
+            stripe_status = stripe_sub.get("status")
+            if stripe_status == "trialing":
+                sub.status = "trial"
+                trial_start = stripe_sub.get("trial_start")
+                trial_end = stripe_sub.get("trial_end")
+                sub.trial_start_date = datetime.fromtimestamp(trial_start) if trial_start else sub.trial_start_date
+                sub.trial_end_date = datetime.fromtimestamp(trial_end) if trial_end else sub.trial_end_date
+            else:
+                sub.status = "active"
+                sub.trial_start_date = None
+                sub.trial_end_date = None
+        else:
+            # No subscription object (e.g., misconfigured checkout). Mark active to avoid lockouts.
+            sub.status = "active"
+            sub.trial_start_date = None
+            sub.trial_end_date = None
         
         self.db.commit()
 
@@ -299,6 +330,14 @@ class SubscriptionService:
             status = sub_data.get("status")
             if status == "active":
                 sub.status = "active"
+            elif status == "trialing":
+                sub.status = "trial"
+                trial_start = sub_data.get("trial_start")
+                trial_end = sub_data.get("trial_end")
+                if trial_start:
+                    sub.trial_start_date = datetime.fromtimestamp(trial_start)
+                if trial_end:
+                    sub.trial_end_date = datetime.fromtimestamp(trial_end)
             elif status == "past_due":
                 sub.status = "past_due"
             self.db.commit()
@@ -328,19 +367,20 @@ class SubscriptionService:
             return {"charts": 0, "api": 0, "chart_limit": 1, "api_limit": 0}
 
         plan = sub.plan
-        period_start = sub.current_period_start or datetime.utcnow().replace(day=1)
+        chart_period_start = sub.current_period_start or datetime.utcnow().replace(day=1)
+        api_period_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
         
         from sqlalchemy import func
         chart_usage = self.db.query(func.sum(UsageRecord.cost_credits)).filter(
             UsageRecord.subscription_id == sub.id,
             UsageRecord.resource_type == "chart",
-            UsageRecord.created_at >= period_start
+            UsageRecord.created_at >= chart_period_start
         ).scalar() or 0
 
         api_usage = self.db.query(func.sum(UsageRecord.cost_credits)).filter(
             UsageRecord.subscription_id == sub.id,
             UsageRecord.resource_type == "api_call",
-            UsageRecord.created_at >= period_start
+            UsageRecord.created_at >= api_period_start
         ).scalar() or 0
 
         return {

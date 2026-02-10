@@ -17,22 +17,23 @@ router = APIRouter()
 async def create_checkout_session(request: CheckoutRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     Create a Stripe Checkout Session for a specific subscription tier.
-    
-    Supported Tiers:
-    - 'onetime': $197 Premium Dossier (B2C)
-    - 'apprentice': $147/mo (5 reports, basic API)
-    - 'practitioner': $397/mo (25 reports, priority API)
-    - 'master': $797/mo (100 reports, dedicated API)
-    - 'agency': $1297/mo (Unlimited reports, dedicated support)
+
+    Supported Tiers (B2B):
+    - 'practitioner': $147/mo (unlimited calculations, 100 API calls/day, 100 saved charts)
+    - 'studio': $497/mo (unlimited calculations, unlimited API, unlimited saved charts)
     """
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
+
+    tier = (request.tier or "").strip().lower()
+    if tier not in {"practitioner", "studio"}:
+        raise HTTPException(status_code=400, detail="Invalid tier")
         
     try:
         service = SubscriptionService(db)
         session = service.create_checkout_session(
             user=user,
-            plan_tier=request.tier, # 'tier' field from frontend
+            plan_tier=tier,
             annual=request.annual,
             success_url=request.success_url,
             cancel_url=request.cancel_url,
@@ -51,8 +52,9 @@ async def verify_checkout_session(session_id: str, background_tasks: BackgroundT
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid Session ID")
 
-    if session.payment_status != "paid":
-         raise HTTPException(status_code=400, detail="Payment not completed")
+    # Subscription checkouts with trials can complete without an immediate payment.
+    if session.payment_status not in {"paid", "no_payment_required"}:
+        raise HTTPException(status_code=400, detail="Payment not completed")
 
     user_id = session.metadata.get("user_id")
     plan_tier = session.metadata.get("plan_tier")
@@ -82,7 +84,7 @@ async def verify_checkout_session(session_id: str, background_tasks: BackgroundT
                 user_email=user.email,
                 user_name=user.name or "User",
                 chart_request=chart_data,
-                tier=plan_tier or "onetime"
+                tier=plan_tier or "practitioner"
             )
             
     # Create Token
@@ -121,6 +123,43 @@ async def cancel_subscription(user: User = Depends(get_current_user), db: Sessio
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to cancel subscription")
+
+
+@router.post("/start-trial")
+async def start_trial(
+    tier: str,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Start a no-card trial for an existing account.
+
+    Allowed tiers: practitioner, studio.
+    """
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+
+    tier_norm = (tier or "").strip().lower()
+    if tier_norm not in {"practitioner", "studio"}:
+        raise HTTPException(status_code=400, detail="Invalid tier")
+
+    # Don't allow overwriting a Stripe-managed subscription.
+    sub = user.subscription
+    if sub and sub.stripe_subscription_id and sub.status in {"active", "trial"}:
+        raise HTTPException(status_code=400, detail="Subscription already managed by Stripe. Use checkout instead.")
+
+    service = SubscriptionService(db)
+    try:
+        updated = service.start_trial(user, tier_norm)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {
+        "success": True,
+        "status": updated.status,
+        "plan_tier": updated.plan.tier if updated.plan else tier_norm,
+        "trial_end_date": updated.trial_end_date.isoformat() if updated.trial_end_date else None,
+    }
 
 
 @router.post("/webhook")

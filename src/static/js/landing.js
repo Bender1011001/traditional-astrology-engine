@@ -10,24 +10,6 @@ window.initiateCheckout = (tier) => initiateCheckout(tier, getLastChartRequest()
 window.startCheckout = (tier) => {
     initiateCheckout(tier, getLastChartRequest());
 };
-window.switchPricing = (tier) => {
-    const b2c = document.getElementById('pricingB2C');
-    const b2b = document.getElementById('pricingB2B');
-    const btnC = document.getElementById('toggleB2C');
-    const btnB = document.getElementById('toggleB2B');
-
-    if (tier === 'b2c') {
-        b2c?.classList.remove('hidden');
-        b2b?.classList.add('hidden');
-        btnC?.classList.add('active');
-        btnB?.classList.remove('active');
-    } else {
-        b2c?.classList.add('hidden');
-        b2b?.classList.remove('hidden');
-        btnC?.classList.remove('active');
-        btnB?.classList.add('active');
-    }
-};
 
 // Expose logout globally
 window.logout = logout;
@@ -56,25 +38,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inputs
     setupInputValidation();
     setupUnknownTimeToggle();
+    restorePendingChartFromDashboard();
     setupBasicForm();
     setupModals();
     checkRegenerate();
 
-    setupSamplesAndAccordions(); // Logic for accordions in index.html
+    setupSamplesAndAccordions(); // No-op on pages without samples
     setupPricing();
-    setupPricingToggle();
 });
 
-function setupPricingToggle() {
-    // This is now handled by switchPricing() via onclick for robustness,
-    // but we can keep this for delegating data-target if we use it elsewhere.
-    const toggleBtns = document.querySelectorAll('[data-pricing-toggle]');
-    toggleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.getAttribute('data-target');
-            window.switchPricing(target);
-        });
-    });
+function restorePendingChartFromDashboard() {
+    // If the user clicked a saved chart in the dashboard, it will be stored in sessionStorage.
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("action") !== "load") return;
+
+    try {
+        const raw = sessionStorage.getItem("cael_pending_chart");
+        if (!raw) return;
+        const chart = JSON.parse(raw);
+
+        const dateEl = document.getElementById("basicDate");
+        const timeEl = document.getElementById("basicTime");
+        const cityEl = document.getElementById("basicCity");
+        const stateEl = document.getElementById("basicState");
+        const houseEl = document.getElementById("houseSystem");
+
+        if (dateEl && chart.date) dateEl.value = chart.date;
+        if (timeEl && chart.time) timeEl.value = chart.time;
+        if (cityEl && chart.city) cityEl.value = chart.city;
+        if (stateEl && chart.state) stateEl.value = chart.state;
+        if (houseEl && chart.house_system) houseEl.value = chart.house_system;
+
+        lastChartRequest = {
+            date: chart.date,
+            time: chart.time || "12:00",
+            city: chart.city,
+            state: chart.state || "",
+            house_system: chart.house_system || "W",
+            node_type: chart.node_type || "mean"
+        };
+        localStorage.setItem("cael_last_request", JSON.stringify(lastChartRequest));
+
+        // Clear so refresh doesn't keep overwriting edits.
+        sessionStorage.removeItem("cael_pending_chart");
+    } catch (e) {
+        // Ignore restore errors
+    }
 }
 
 function getLastChartRequest() {
@@ -182,8 +191,6 @@ function setupBasicForm() {
             date: document.getElementById("basicDate").value,
             time: timeUnknown && !timeValue ? "12:00" : timeValue,
             city: document.getElementById("basicCity").value,
-            time: timeUnknown && !timeValue ? "12:00" : timeValue,
-            city: document.getElementById("basicCity").value,
             state: document.getElementById("basicState").value,
             house_system: document.getElementById("houseSystem").value,
             node_type: document.getElementById("nodeType").value
@@ -247,9 +254,9 @@ function renderBasicReading(result, payload, timeUnknown) {
         basicReadingBody.prepend(div);
     }
 
-    // Paywall Logic
+    // Upgrade CTA for free/demo users.
     if (result.meta && result.meta.tier === 'free') {
-        renderPaywallTeaser(basicReadingBody, result);
+        renderUpgradeCta(basicReadingBody);
     }
 
     if (basicReading) basicReading.classList.remove("hidden");
@@ -262,28 +269,20 @@ function renderBasicReading(result, payload, timeUnknown) {
     };
 }
 
-function renderPaywallTeaser(container, result) {
-    // ... Implement logic similar to basic.js (teaser + modal trigger) ...
-    // Using global function exposed or event dispatch
-    const ascPhrase = result.angles ? `Ascendant in <span class="redacted-text">HIDDEN</span>` : `Ascendant in <span class="redacted-text">HIDDEN</span>`;
-
+function renderUpgradeCta(container) {
     const div = document.createElement('div');
     div.innerHTML = `
-        <div style="margin-top:2rem; padding:1.5rem; background:rgba(192,122,43,0.05); border:1px solid rgba(192,122,43,0.2); border-radius:8px; text-align:center;">
-             <p style="color:var(--gold); font-weight:bold;">PREMIUM DATA HIDDEN</p>
-             <ul style="list-style:none; padding:0; font-size:0.9em;">
-                <li>${ascPhrase}</li>
-                <li>Time Lord: <span class="redacted-text">HIDDEN</span></li>
-             </ul>
-             <button class="btn-primary" onclick="window.openPaywall()">UNLOCK FULL REPORT</button>
-        </div>
-        <div style="text-align:center; margin-top:1rem;">
-            <button class="help-btn" onclick="window.openEmailModal()">SAVE AS PDF 📥</button>
+        <div class="lock-disclaimer" style="margin-top: 1.5rem;">
+            <strong>Practitioner Access:</strong>
+            Create an account to start a no-card trial (14 days) and unlock the full deterministic outputs, exports, and API access.
+            <div class="hero-actions" style="justify-content:center; margin-top: 1rem;">
+                <a class="btn-primary" href="signup.html?plan=practitioner">Start Practitioner Trial</a>
+                <a class="btn-secondary" href="signup.html?plan=studio">Start Studio Trial</a>
+                <a class="btn-secondary" href="profile.html">Go to Dashboard</a>
+            </div>
         </div>
     `;
     container.appendChild(div);
-
-    setTimeout(() => window.openPaywall(), 3500);
 }
 
 function setupModals() {

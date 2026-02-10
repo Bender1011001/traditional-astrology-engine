@@ -52,7 +52,7 @@ export function setupPricing() {
             if (periodStarter) periodStarter.textContent = period;
         };
     }
-    }
+}
 
 
 let pendingTier = null;
@@ -132,9 +132,9 @@ export async function initiateCheckout(tier, chartRequest = null) {
     const billingToggle = document.getElementById("billingToggle");
     const isAnnual = billingToggle ? billingToggle.checked : false;
 
+    // Chart request is optional for subscription checkout.
+    // If present, it will be attached to metadata for downstream workflows.
     let requestPayload = chartRequest;
-
-    // 1. Try to get from localStorage if not passed
     if (!requestPayload) {
         try {
             const saved = localStorage.getItem("cael_last_request");
@@ -142,22 +142,7 @@ export async function initiateCheckout(tier, chartRequest = null) {
         } catch (e) { }
     }
 
-    // 2. If still missing, trigger Direct Intake Modal
-    if (!requestPayload) {
-        const intakeModal = document.getElementById("intakeModal");
-        if (intakeModal) {
-            pendingTier = tier; // Store user intent
-            intakeModal.classList.remove("hidden");
-            return; // Stop execution, wait for modal
-        } else {
-            // Fallback if modal missing (shouldn't happen if html updated)
-            alert("REQUIRED: Please enter your birth data on the Home page first.");
-            window.location.href = "index.html#reading";
-            return;
-        }
-    }
-
-    // 3. Proceed with valid payload
+    // Proceed with checkout
     try {
         const resp = await fetch(apiUrl("/api/v1/billing/create-checkout-session"), {
             method: "POST",

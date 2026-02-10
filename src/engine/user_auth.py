@@ -57,7 +57,7 @@ class UserManager:
         # checkpw requires bytes.
         return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
     
-    def create_user(self, email: str, password: str, name: str = "") -> Dict[str, Any]:
+    def create_user(self, email: str, password: str, name: str = "", plan_tier: str = "") -> Dict[str, Any]:
         """Create a new user account."""
         email = email.lower().strip()
         
@@ -96,14 +96,20 @@ class UserManager:
                 charts_saved=[]
             )
             
-            # Auto-create free subscription (Phase 2 Requirement)
+            # Auto-create free subscription
             from src.services.subscription import SubscriptionService
             service = SubscriptionService(db)
             
             # Add user to session first so start_trial can commit it as well
             db.add(new_user)
             
-            service.start_trial(new_user, "free", trial_days=0) 
+            # Ensure a baseline subscription exists (free plan as active, not trial).
+            # We model paid trials separately on top of the free baseline.
+            service.start_trial(new_user, "free", trial_days=0)
+            # If a paid tier was requested, start a no-card trial for that tier (default 14 days).
+            requested = (plan_tier or "").strip().lower()
+            if requested in {"practitioner", "studio"}:
+                service.start_trial(new_user, requested)
             
             # Note: start_trial calls db.commit(), so we don't need another commit here
             # for the user. It's all part of the same transaction context.
@@ -213,35 +219,66 @@ class UserManager:
             user = db.query(User).filter(User.email == email).first()
             if not user:
                 return False
-            
-            # Important: Copy list to trigger SQLAlchemy mutation detection
-            charts = list(user.charts_saved) if user.charts_saved else []
-            
-            if not any(c.get("hash") == chart_hash for c in charts):
-                entry = {
-                    "hash": chart_hash,
-                    "saved_at": datetime.utcnow().isoformat(),
-                    **chart_meta
-                }
-                charts.append(entry)
-                
-                if len(charts) > 50:
-                    charts = charts[-50:]
-                
-                user.charts_saved = charts
-                user.updated_at = datetime.utcnow()
-                
-                # Flag modified just in case
-                from sqlalchemy.orm.attributes import flag_modified
-                flag_modified(user, "charts_saved")
-                
-                db.commit()
-            return True
+            return self._save_chart_for_user(db, user, chart_hash, chart_meta)
         except Exception as e:
             logging.error(f"Save chart error: {e}")
             return False
         finally:
             db.close()
+
+    def save_chart_by_user_id(self, user_id: str, chart_hash: str, chart_meta: Dict[str, Any]) -> bool:
+        db = SessionLocal()
+        try:
+            user = db.query(User).filter(User.id == user_id).first()
+            if not user:
+                return False
+            return self._save_chart_for_user(db, user, chart_hash, chart_meta)
+        except Exception as e:
+            logging.error(f"Save chart (user_id) error: {e}")
+            return False
+        finally:
+            db.close()
+
+    def _save_chart_for_user(self, db: Session, user: User, chart_hash: str, chart_meta: Dict[str, Any]) -> bool:
+        # Important: Copy list to trigger SQLAlchemy mutation detection
+        charts = list(user.charts_saved) if user.charts_saved else []
+
+        if any(c.get("hash") == chart_hash for c in charts):
+            return True
+
+        tier = "free"
+        try:
+            if user.subscription and user.subscription.plan:
+                tier = user.subscription.plan.tier or "free"
+        except Exception:
+            tier = "free"
+
+        # Saved charts limits (B2B): Practitioner 100, Studio unlimited, Free small cap.
+        limit = 10
+        if tier == "practitioner":
+            limit = 100
+        elif tier == "studio":
+            limit = None
+
+        if limit is not None and len(charts) >= limit:
+            logging.warning(f"Saved charts limit reached for {user.email}. Tier={tier} limit={limit}")
+            return False
+            
+        entry = {
+            "hash": chart_hash,
+            "saved_at": datetime.utcnow().isoformat(),
+            **chart_meta
+        }
+        charts.append(entry)
+
+        user.charts_saved = charts
+        user.updated_at = datetime.utcnow()
+
+        from sqlalchemy.orm.attributes import flag_modified
+        flag_modified(user, "charts_saved")
+
+        db.commit()
+        return True
     
     def change_password(self, email: str, old_password: str, new_password: str) -> Dict[str, Any]:
         email = email.lower().strip()

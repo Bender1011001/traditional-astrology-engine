@@ -202,12 +202,19 @@
 
     <main class="container">
         <header>
-            <nav class="header-actions">
-                <a class="help-btn" href="index.html">Home</a>
-                <a class="help-btn" href="pricing.html">Pricing</a>
-                <a class="help-btn" href="resources.html">Resources</a>
-                <a class="help-btn" id="ownerLink" href="owner.html" style="display: none;">Owner Tools</a>
-            </nav>
+            <nav class="header-actions" aria-label="Primary">
+  <a class="help-btn" href="index.html">Home</a>
+  <a class="help-btn" href="techniques.html">Techniques</a>
+  <a class="help-btn" href="documentation.html">Documentation</a>
+  <a class="help-btn" href="demo.html">Demo</a>
+  <a class="help-btn" href="index.html#pricing">Pricing</a>
+  <a class="help-btn" href="about.html">About</a>
+  <a class="help-btn" href="faq.html">FAQ</a>
+  <a class="help-btn" href="blog.html">Blog</a>
+  <a class="help-btn" href="login.html">Log in</a>
+  <a class="help-btn highlight-btn" href="signup.html">Start Free Trial</a>
+  <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+</nav>
         </header>
 
         <div class="dashboard-container">
@@ -218,8 +225,8 @@
                 </div>
                 <div>
                     <span id="subBadge" class="user-badge">Vagabond</span>
-                    <a href="index.html" class="help-btn" style="margin-right: 0.5rem; text-decoration: none;">NEW
-                        READING</a>
+                    <a href="demo.html" class="help-btn" style="margin-right: 0.5rem; text-decoration: none;">RUN
+                        CALCULATION</a>
                     <button class="logout-btn" onclick="logout()">LOGOUT</button>
                 </div>
             </div>
@@ -276,10 +283,45 @@
                     <p id="cancelStatus" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;"></p>
                 </div>
             </div>
+
+            <div class="dashboard-section">
+                <h2 class="section-title">Billing</h2>
+                <div class="panel-card">
+                    <p id="billingSummary" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                        Loading billing state...
+                    </p>
+                    <div id="billingActions" style="display:flex; flex-wrap:wrap; gap:0.75rem;">
+                        <button id="startTrialPractitionerBtn" class="help-btn" onclick="startTrialTier('practitioner')">START PRACTITIONER TRIAL</button>
+                        <button id="startTrialStudioBtn" class="help-btn" onclick="startTrialTier('studio')">START STUDIO TRIAL</button>
+                        <button id="subscribePractitionerBtn" class="help-btn highlight-btn" onclick="subscribeTier('practitioner')">SUBSCRIBE PRACTITIONER</button>
+                        <button id="subscribeStudioBtn" class="help-btn highlight-btn" onclick="subscribeTier('studio')">SUBSCRIBE STUDIO</button>
+                    </div>
+                    <p id="billingStatus" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;"></p>
+                </div>
+            </div>
+
+            <div id="apiKeysSection" class="dashboard-section">
+                <h2 class="section-title">API Keys</h2>
+                <div class="panel-card">
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        API keys are available on Practitioner and Studio plans. Keys are shown only once on creation.
+                    </p>
+                    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-top: 1rem;">
+                        <input id="apiKeyName" type="text" placeholder="Key name (e.g. My Client App)"
+                            style="flex: 1; min-width: 240px; padding: 0.6rem; border: 1px solid var(--glass-border); background: var(--bg-card);" />
+                        <button id="createApiKeyBtn" class="help-btn highlight-btn" onclick="createApiKey()">CREATE KEY</button>
+                    </div>
+                    <p id="apiKeyCreateStatus" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;"></p>
+
+                    <div style="margin-top: 1.25rem;">
+                        <div id="apiKeysList" class="criteria-grid"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <script src="basic.js?v=20260129polish"></script>
+    <script src="config.js"></script>
     <script>
         const API_BASE = window.CAEL_API_BASE || "";
         function apiUrl(path) { return `${API_BASE}${path}`; }
@@ -317,24 +359,30 @@
                 const chartLimit = usage.chart_limit === null ? "∞" : usage.chart_limit;
                 const apiLimit = usage.api_limit === null ? "∞" : usage.api_limit;
 
-                let usageText = `${usage.charts} / ${chartLimit} Charts`;
+                const savedCount = (user.charts_saved || []).length;
+                let savedLimit = 10;
+                const planLower = String(sub.plan_name || "free").toLowerCase();
+                if (planLower === "practitioner") savedLimit = 100;
+                if (planLower === "studio") savedLimit = "∞";
+
+                let usageText = `Saved charts: ${savedCount} / ${savedLimit}`;
                 if (usage.api_limit > 0 || usage.api_limit === null) {
-                    usageText += ` | ${usage.api} / ${apiLimit} API Calls`;
+                    usageText += ` | API calls today: ${usage.api} / ${apiLimit}`;
                 }
                 document.getElementById('usageStats').textContent = usageText;
 
                 // Update Progress Bars & ROI
-                if (usage.chart_limit > 0) {
+                if (usage.chart_limit !== null && usage.chart_limit > 0) {
                     const chartPct = Math.min((usage.charts / usage.chart_limit) * 100, 100);
                     document.getElementById('chartProgressBar').style.width = `${chartPct}%`;
                     document.getElementById('chartUsageMsg').textContent = `${usage.charts} of ${usage.chart_limit} reports used this cycle.`;
                     document.getElementById('practitionerUsage').classList.remove('hidden');
                 }
 
-                if (usage.api_limit > 0) {
-                    const apiPct = Math.min((usage.api / usage.api_limit) * 100, 100);
+                if (usage.api_limit === null || usage.api_limit > 0) {
+                    const apiPct = usage.api_limit === null ? 0 : Math.min((usage.api / usage.api_limit) * 100, 100);
                     document.getElementById('apiProgressBar').style.width = `${apiPct}%`;
-                    document.getElementById('apiUsageMsg').textContent = `${usage.api} of ${usage.api_limit} calls used.`;
+                    document.getElementById('apiUsageMsg').textContent = usage.api_limit === null ? `${usage.api} calls used today.` : `${usage.api} of ${usage.api_limit} calls used today.`;
                     document.getElementById('apiUsageWrap').classList.remove('hidden');
                 } else {
                     document.getElementById('apiUsageWrap').classList.add('hidden');
@@ -345,11 +393,19 @@
 
                 // Show/Hide Management Section
                 const mgmt = document.getElementById('subscriptionManagement');
-                if (sub.status === 'active' || sub.status === 'past_due' || sub.status === 'trial') {
+                if (sub.has_stripe_subscription && (sub.status === 'active' || sub.status === 'past_due' || sub.status === 'trial')) {
                     mgmt.classList.remove('hidden');
                 } else {
                     mgmt.classList.add('hidden');
                 }
+
+                const cancelBtn = document.getElementById('cancelSubBtn');
+                if (cancelBtn) {
+                    cancelBtn.classList.toggle('hidden', !sub.has_stripe_subscription || sub.cancel_at_period_end);
+                }
+
+                renderBilling(sub);
+                await loadApiKeys(sub);
 
                 renderCharts(user.charts_saved || []);
                 await checkOwnerAccess(token);
@@ -441,7 +497,7 @@
 
                 // Save to session storage for the calculator to pick up
                 sessionStorage.setItem('cael_pending_chart', JSON.stringify(chart));
-                window.location.href = 'index.html?action=load';
+                window.location.href = 'demo.html?action=load';
             } catch (err) {
                 alert("Error loading chart: " + err.message);
             }
@@ -489,8 +545,178 @@
             window.location.href = 'index.html';
         }
 
+        function renderBilling(sub) {
+            const summary = document.getElementById("billingSummary");
+            const status = document.getElementById("billingStatus");
+            const startP = document.getElementById("startTrialPractitionerBtn");
+            const startS = document.getElementById("startTrialStudioBtn");
+            const subP = document.getElementById("subscribePractitionerBtn");
+            const subS = document.getElementById("subscribeStudioBtn");
+
+            const plan = String(sub.plan_name || "free").toLowerCase();
+            const isTrial = !!sub.is_trial;
+            const trialEnds = sub.current_period_end ? new Date(sub.current_period_end).toLocaleDateString() : null;
+
+            if (summary) {
+                if (isTrial && trialEnds) {
+                    summary.textContent = `Trialing ${plan.toUpperCase()}. Trial ends on ${trialEnds}. You can subscribe now to keep uninterrupted access.`;
+                } else if (plan === "free") {
+                    summary.textContent = "You are on the Free plan. Start a no-card trial (14 days) to unlock practitioner features and API keys.";
+                } else {
+                    summary.textContent = `Plan: ${plan.toUpperCase()}.`;
+                }
+            }
+
+            if (status) status.textContent = "";
+
+            const canStartTrial = (plan === "free");
+            if (startP) startP.classList.toggle("hidden", !canStartTrial);
+            if (startS) startS.classList.toggle("hidden", !canStartTrial);
+
+            const canSubscribe = (plan === "practitioner" || plan === "studio" || canStartTrial || isTrial);
+            if (subP) subP.classList.toggle("hidden", !canSubscribe);
+            if (subS) subS.classList.toggle("hidden", !canSubscribe);
+        }
+
+        async function startTrialTier(tier) {
+            const status = document.getElementById("billingStatus");
+            const token = localStorage.getItem('cael_auth_token');
+            if (status) status.textContent = "Starting trial...";
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/billing/start-trial?tier=${encodeURIComponent(tier)}`), {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Failed to start trial");
+                if (status) status.textContent = `Trial started: ${String(data.plan_tier || tier).toUpperCase()}`;
+                setTimeout(loadProfile, 800);
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
+        async function subscribeTier(tier) {
+            const status = document.getElementById("billingStatus");
+            const token = localStorage.getItem('cael_auth_token');
+            if (status) status.textContent = "Opening checkout...";
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/billing/create-checkout-session`), {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        tier,
+                        annual: false,
+                        chart_request: null,
+                        success_url: window.location.origin + "/success.html?session_id={CHECKOUT_SESSION_ID}",
+                        cancel_url: window.location.href
+                    })
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Checkout failed");
+                if (data.url) window.location.href = data.url;
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
+        async function loadApiKeys(sub) {
+            const section = document.getElementById("apiKeysSection");
+            const list = document.getElementById("apiKeysList");
+            const status = document.getElementById("apiKeyCreateStatus");
+            if (!section || !list) return;
+
+            const plan = String(sub.plan_name || "free").toLowerCase();
+            const allowed = (plan === "practitioner" || plan === "studio") && (sub.status === "active" || sub.status === "trial");
+            section.classList.toggle("hidden", !allowed);
+            if (!allowed) return;
+
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl('/api/v1/developer/keys'), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error("Failed to load API keys");
+                const keys = await resp.json();
+                if (!Array.isArray(keys) || keys.length === 0) {
+                    list.innerHTML = '<div class="panel-card">No API keys yet.</div>';
+                    return;
+                }
+
+                list.innerHTML = keys.map(k => `
+                    <div class="panel-card">
+                        <h4 style="margin-bottom: 0.5rem;">${(k.name || "API Key")}</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">
+                            Created: ${k.created_at ? new Date(k.created_at).toLocaleDateString() : "N/A"}<br>
+                            Last used: ${k.last_used ? new Date(k.last_used).toLocaleDateString() : "Never"}<br>
+                            Prefix: ${k.prefix || "sk_live_..."}
+                        </p>
+                        <button class="help-btn" style="border-color: var(--danger); color: var(--danger); font-size: 0.8rem;" onclick="revokeApiKey('${k.id}')">REVOKE</button>
+                    </div>
+                `).join('');
+
+                if (status) status.textContent = "";
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
+        async function createApiKey() {
+            const status = document.getElementById("apiKeyCreateStatus");
+            const nameEl = document.getElementById("apiKeyName");
+            const btn = document.getElementById("createApiKeyBtn");
+            const name = (nameEl ? nameEl.value : "").trim();
+            if (!name) {
+                if (status) status.textContent = "Enter a key name.";
+                return;
+            }
+
+            if (btn) btn.disabled = true;
+            if (status) status.textContent = "Creating...";
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl('/api/v1/developer/keys'), {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ name })
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Failed to create key");
+
+                if (status) status.textContent = `Created. Copy now: ${data.key}`;
+                if (nameEl) nameEl.value = "";
+                setTimeout(loadProfile, 800);
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        async function revokeApiKey(id) {
+            if (!confirm("Revoke this API key? This cannot be undone.")) return;
+            const status = document.getElementById("apiKeyCreateStatus");
+            if (status) status.textContent = "Revoking...";
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl(`/api/v1/developer/keys/${id}`), {
+                    method: "DELETE",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Failed to revoke key");
+                setTimeout(loadProfile, 500);
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
         loadProfile();
     </script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>

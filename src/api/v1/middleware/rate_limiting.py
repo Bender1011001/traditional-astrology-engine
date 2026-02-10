@@ -83,13 +83,12 @@ async def enforce_rate_limit(request: Request, auth_context: Optional[dict] = No
         # Public / Guest Path (Fallback to IP)
         limit_key = f"ip:{request.client.host if request.client else 'unknown'}"
     
-    # 2. Determine limit based on plan/tier
-    # Agency: 1000 rpm, Master: 100 rpm, Basic/Free: 10 rpm
+    # 2. Determine limit based on plan/tier (requests/minute)
     limit = 10 # Default for free/guests
     if tier == 'agency':
         limit = 1000
-    elif tier == 'master':
-        limit = 100
+    elif tier == 'studio':
+        limit = 120
     elif tier == 'practitioner':
         limit = 60
         

@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import APIRouter, HTTPException, Request, Depends
 
 from src.api.v1.schemas import ChartRequest
-from src.api.v1.auth import validate_token
+from src.api.v1.auth import validate_token, get_current_user
 from src.api.v1.utils import generate_chart_hash, log_event, result_to_model
 from src.core.ratelimit import rate_limiter
 from src.services.engine_bridge import (
@@ -24,7 +24,7 @@ from src.middleware.quota import verify_quota
 from src.api.v1.middleware.auth import verify_api_key
 from src.api.v1.middleware.rate_limiting import enforce_rate_limit
 from src.database.core import get_db
-from src.database.models import UsageRecord
+from src.database.models import UsageRecord, User
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
@@ -45,10 +45,8 @@ async def generate_chart_b2b(
     Requires 'X-API-Key' header.
     
     Quotas:
-    - Apprentice: 5 reports/mo
-    - Practitioner: 25 reports/mo
-    - Master: 100 reports/mo
-    - Agency: Unlimited
+    - Practitioner: 100 API calls/day
+    - Studio: Unlimited API calls/day
     """
     if not auth_context:
         raise HTTPException(status_code=401, detail="Missing or invalid API Key")
@@ -56,12 +54,12 @@ async def generate_chart_b2b(
     # 1. Enforce Rate Limit
     await enforce_rate_limit(request, auth_context)
 
-    # 2. Check API Quota
+    # 2. Check API Quota (daily)
     sub = auth_context['subscription']
     plan = auth_context['plan']
     
     if plan.api_quota is not None:
-        period_start = sub.current_period_start or datetime.utcnow().replace(day=1)
+        period_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
         used = db.query(func.sum(UsageRecord.cost_credits)).filter(
             UsageRecord.subscription_id == sub.id,
             UsageRecord.resource_type == 'api_call',
@@ -69,7 +67,7 @@ async def generate_chart_b2b(
         ).scalar() or 0
         
         if used >= plan.api_quota:
-             raise HTTPException(status_code=429, detail="Monthly API quota exceeded")
+             raise HTTPException(status_code=429, detail="Daily API quota exceeded")
 
     # 3. Calculate Chart (Reuse existing logic or call bridge directly)
     # We'll call the bridge directly to avoid 'request' object dependency of logic above
@@ -145,7 +143,11 @@ async def calculate_full_nativity(req: ChartRequest, http_request: Request):
 
 
 @router.post("/calculate")
-async def calculate_chart(chart_request: ChartRequest, http_request: Request):
+async def calculate_chart(
+    chart_request: ChartRequest,
+    http_request: Request,
+    current_user: Optional[User] = Depends(get_current_user),
+):
     """
     Calculates a full natal chart including forensic audit, 5-day forecast, and plain-language synthesis.
     Now refactored to use the ForensicEngine via bridge.
@@ -154,7 +156,16 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     
     chart_hash = generate_chart_hash(chart_request)
     tier = "free"
-    if chart_request.access_token:
+    plan_tier = None
+
+    # Authenticated users with an active/trial subscription get full outputs.
+    if current_user and current_user.subscription and current_user.subscription.plan:
+        if current_user.subscription.status in {"active", "trial"} and current_user.subscription.plan.tier != "free":
+            tier = "paid"
+            plan_tier = current_user.subscription.plan.tier
+
+    # Legacy access token path (kept for backward compatibility).
+    if tier == "free" and chart_request.access_token:
         payload = validate_token(chart_request.access_token)
         if payload and payload.get("chart_hash") == chart_hash:
             tier = "paid"
@@ -200,6 +211,8 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
         
     final_result["meta"]["tier"] = tier
     final_result["meta"]["chart_hash"] = chart_hash
+    if plan_tier:
+        final_result["meta"]["plan_tier"] = plan_tier
 
     # LLM Optional Step (Plain Language Reading)
     try:
@@ -223,23 +236,23 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
     set_to_cache(chart_hash, tier, final_result)
 
     # AUTO-SAVE FOR LOGGED IN USERS
-    if chart_request.access_token:
+    if current_user:
         try:
             from src.engine.user_auth import get_user_manager
             userManager = get_user_manager()
-            user_payload = validate_token(chart_request.access_token)
-            if user_payload and user_payload.get("sub"):
-                userManager.save_chart(
-                    email=user_payload["sub"],
-                    chart_hash=chart_hash,
-                    chart_meta={
-                        "name": chart_request.name or "Untitled Chart",
-                        "date": chart_request.date,
-                        "time": chart_request.time,
-                        "city": chart_request.city,
-                        "state": chart_request.state
-                    }
-                )
+            userManager.save_chart_by_user_id(
+                user_id=current_user.id,
+                chart_hash=chart_hash,
+                chart_meta={
+                    "name": chart_request.name or "Untitled Chart",
+                    "date": chart_request.date,
+                    "time": chart_request.time,
+                    "city": chart_request.city,
+                    "state": chart_request.state,
+                    "house_system": chart_request.house_system or "W",
+                    "zodiac_system": chart_request.zodiac_system or "tropical",
+                }
+            )
         except Exception as save_err:
             logger.error(f"Auto-save failed: {save_err}")
 
@@ -251,8 +264,6 @@ async def calculate_chart(chart_request: ChartRequest, http_request: Request):
 # USER CHART MANAGEMENT ENDPOINTS
 # ============================================================================
 
-from src.api.v1.auth import get_current_user
-from src.database.models import User
 from fastapi.responses import StreamingResponse
 
 

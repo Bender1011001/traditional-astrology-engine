@@ -2,751 +2,382 @@
 <html lang="en">
 
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJNM5XVD');</script>
-    <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TJNM5XVD');</script>
+  <!-- End Google Tag Manager -->
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RCNDWN4XVN');
+  </script>
 
-        gtag('config', 'G-RCNDWN4XVN');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traditional Astrology Judgments | Codex Caelestis</title>
-    <meta name="description"
-        content="Traditional-Astrology.com delivers rule-based natal and timing judgments grounded in classical sources. Built by a Systems Architect to decode 2000-year-old math.">
-    <meta name="keywords"
-        content="traditional astrology, classical astrology, natal judgment, essential dignities, whole sign houses, profections, forensic astrology">
-    <meta name="google-site-verification" content="GwmYZITjYoKI_F5uVUOumtQLn_4xCrtZyXWdNdi7omQ">
-    <meta name="robots" content="index,follow">
-    <meta name="theme-color" content="#f6f0e6">
-    <link rel="canonical" href="https://traditional-astrology.com/">
-    <meta property="og:title" content="Traditional Astrology Judgments | Codex Caelestis">
-    <meta property="og:description"
-        content="Rule-based traditional astrology: natal promise, planetary condition, and timing techniques from classical sources.">
-    <meta property="og:image" content="https://traditional-astrology.com/og-card.png">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://traditional-astrology.com/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Traditional Astrology Judgments | Codex Caelestis">
-    <meta name="twitter:description"
-        content="Rule-based traditional astrology: natal promise, planetary condition, and timing techniques from classical sources.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260218classical">
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "Codex Caelestis",
-            "url": "https://traditional-astrology.com/",
-            "applicationCategory": "AstrologyApplication",
-            "operatingSystem": "Web",
-            "offers": {
-                "@type": "Offer",
-                "price": "197",
-                "priceCurrency": "USD"
-            },
-            "description": "Traditional astrology engine offering rule-based natal and timing judgments grounded in classical sources.",
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5.0",
-                "reviewCount": "3"
-            }
-        }
-    </script>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Codex Caelestis",
-            "url": "https://traditional-astrology.com/"
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traditional Astrology Calculation Engine | Codex Caelestis</title>
+  <meta name="description" content="Codex Caelestis is a deterministic traditional astrology calculation engine for professional practitioners. Advanced timing, lots, fixed stars, primary directions, and auditable rule-ledger exports." />
+  <meta name="keywords" content="traditional astrology software, parans, zodiacal releasing, primary directions, monomoiria, dodecatemoria, hermetic lots, forensic lots" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#f6f0e6" />
+  <link rel="canonical" href="https://traditional-astrology.com/" />
+
+  <meta property="og:title" content="Traditional Astrology Calculation Engine | Codex Caelestis" />
+  <meta property="og:description" content="Calculation infrastructure for serious practitioners: deterministic rules, Swiss Ephemeris precision, and an auditable rule ledger." />
+  <meta property="og:image" content="https://traditional-astrology.com/og-card.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://traditional-astrology.com/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260210b2b" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Codex Caelestis",
+      "url": "https://traditional-astrology.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Deterministic traditional astrology calculation engine for practitioners. Exports auditable rule ledgers and technical artifacts.",
+      "offers": {
+        "@type": "Offer",
+        "price": "147",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-    <a class="skip-link" href="#main">Skip to content</a>
-    <div class="background-globes">
-        <div class="globe globe-1"></div>
-        <div class="globe globe-2"></div>
-        <div class="stars-overlay"></div>
-    </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="background-globes">
+    <div class="globe globe-1"></div>
+    <div class="globe globe-2"></div>
+    <div class="stars-overlay"></div>
+  </div>
 
-    <main id="main" class="container">
-        <header>
-            <div class="header-content">
-                <p class="pill-label">Traditional-Astrology.com</p>
-                <h1>TRADITIONAL ASTROLOGY JUDGMENTS</h1>
-                <div class="ornament"></div>
-                <p class="subtitle">Classical, rule-based delineation for clients who demand method and limits.</p>
-                <nav class="header-actions nav-primary" aria-label="Primary">
-                    <a class="help-btn" href="index.html" aria-current="page">Home</a>
-                    <a class="help-btn" href="how-we-audit.html">How We Audit</a>
-                    <a class="help-btn" href="services.html">Services</a>
-                    <a class="help-btn" href="pricing.html">Pricing</a>
-                    <a class="help-btn" href="booking.html">Booking</a>
-                    <a class="help-btn" href="methodology.html">Methodology</a>
-                    <a class="help-btn" href="about.html">About</a>
-                    <a class="help-btn" href="resources.html">Resources</a>
-                    <a class="help-btn" href="faq.html">FAQ</a>
-                    <a class="help-btn" href="login.html">Log in</a>
-                    <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">Dark
-                        mode</button>
-                    <button id="pricingBtn" class="help-btn highlight-btn" type="button" data-pricing-trigger>Access</button>
-                </nav>
-                <div class="hero-value-block">
-                    <div class="hero-value-title">NOT AN AI CHATBOT.</div>
-                    <p class="hero-value-text">
-                        Every reading is a forensic audit — 47+ deterministic rules from Ptolemy, Valens, Bonatti, and Lilly, executed in strict order, with every judgment traceable to a named source.
-                    </p>
-                    <div class="hero-value-sub">
-                        No neural networks. No vague horoscopes. No hallucinations.<br>
-                        Swiss Ephemeris precision. Rule Ledger transparency. Sect always matters.
-                    </div>
-                    <div class="hero-actions justify-center mt-8">
-                        <a class="btn-primary" href="#reading">Request a Forensic Audit</a>
-                        <a class="btn-secondary" href="how-we-audit.html">See How It Works</a>
-                    </div>
-                </div>
+  <main id="main" class="container">
+    <header>
+      <div class="header-content">
+        <p class="pill-label">Traditional-Astrology.com</p>
+        <h1>TRADITIONAL ASTROLOGY CALCULATION ENGINE</h1>
+        <div class="ornament"></div>
+        <p class="subtitle">For serious practitioners who need advanced, deterministic technique coverage.</p>
 
-                <div class="proof-strip">
-                    <div class="proof-card">
-                        <span class="proof-icon">📜</span>
-                        <div class="proof-title">Source Anchored</div>
-                        <p>Every judgment cites the specific Hellenistic or Medieval text it derives from.</p>
-                    </div>
-                    <div class="proof-card">
-                        <span class="proof-icon">🧮</span>
-                        <div class="proof-title">Deterministic</div>
-                        <p>The same birth data produces the exact same audit, every single time.</p>
-                    </div>
-                    <div class="proof-card">
-                        <span class="proof-icon">⚖️</span>
-                        <div class="proof-title">Rule Ledger</div>
-                        <p>We generate a precise JSON ledger of every condition met before writing a word.</p>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <nav class="header-actions nav-primary" aria-label="Primary">
+          <a class="help-btn" href="index.html" aria-current="page">Home</a>
+          <a class="help-btn" href="techniques.html">Techniques</a>
+          <a class="help-btn" href="documentation.html">Documentation</a>
+          <a class="help-btn" href="demo.html">Demo</a>
+          <a class="help-btn" href="#pricing">Pricing</a>
+          <a class="help-btn" href="about.html">About</a>
+          <a class="help-btn" href="faq.html">FAQ</a>
+          <a class="help-btn" href="blog.html">Blog</a>
+          <a class="help-btn" href="login.html">Log in</a>
+          <a class="help-btn highlight-btn" href="signup.html">Start Free Trial</a>
+          <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+        </nav>
 
-        <section class="basic-view">
-            <h2 class="section-title" id="reading">REQUEST A FORMAL READING</h2>
-            <p class="section-subtitle">Submit verified birth data to receive a preliminary judgment. Accurate time and
-                location are required for angles, lots, and timing techniques. If your time is unknown, we will limit
-                the scope accordingly.</p>
-            <div class="basic-card">
-                <form id="basicForm" class="basic-form">
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="basicDate">
-                                DATE OF BIRTH *
-                                <span class="tooltip-icon"
-                                    data-tooltip="Your birth date anchors planetary positions.">?</span>
-                            </label>
-                            <input type="date" id="basicDate" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="basicTime">
-                                TIME OF BIRTH *
-                                <span class="tooltip-icon"
-                                    data-tooltip="Exact time is required for angles, houses, and lots.">?</span>
-                            </label>
-                            <input type="time" id="basicTime" required aria-describedby="basicTimeWarning">
-                            <div class="time-unknown-toggle">
-                                <label class="checkbox-row">
-                                    <input type="checkbox" id="basicTimeUnknown">
-                                    <span>Time unknown</span>
-                                </label>
-                            </div>
-                            <div id="basicTimeWarning" class="time-unknown-warning hidden" role="alert">
-                                <strong>Notice:</strong> Without a birth time, Ascendant/MC, houses, lots, and timing
-                                methods are omitted. We will default to 12:00 local time for planetary positions only.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="basicCity">
-                                CITY *
-                                <span class="tooltip-icon"
-                                    data-tooltip="Location is required for precise local time and latitude.">?</span>
-                            </label>
-                            <input type="text" id="basicCity" placeholder="e.g. Rome" required
-                                autocomplete="address-level2" aria-controls="basicCitySuggestions" aria-expanded="false"
-                                aria-haspopup="listbox">
-                            <div id="basicCitySuggestions" class="suggestions" role="listbox"></div>
-                        </div>
-                        <div class="input-group">
-                            <label for="basicState">STATE / COUNTRY</label>
-                            <input type="text" id="basicState" placeholder="e.g. Italy" autocomplete="address-level1">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="houseSystem">HOUSE SYSTEM</label>
-                            <select id="houseSystem">
-                                <option value="W" selected>Whole Sign (Traditional)</option>
-                                <option value="P">Placidus</option>
-                                <option value="B">Alcabitius</option>
-                                <option value="R">Regiomontanus</option>
-                                <option value="O">Porphyry</option>
-                                <option value="E">Equal</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="nodeType">NODE TYPE</label>
-                            <select id="nodeType">
-                                <option value="mean" selected>Mean Node</option>
-                                <option value="true">True Node</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit" id="basicStartBtn">
-                        <span class="btn-text">GENERATE PRELIMINARY JUDGMENT</span>
-                        <span class="btn-shimmer"></span>
-                    </button>
-                </form>
-
-                <div id="basicLoading" class="basic-loading hidden" role="status" aria-live="polite">
-                    <div class="loading-label">Rendering your judgment…</div>
-                    <div class="loading-bar">
-                        <div class="loading-bar-fill"></div>
-                    </div>
-                    <div id="loadingText" class="loading-subtext">Calculating planetary positions...</div>
-                </div>
-
-                <div id="basicReading" class="basic-reading hidden">
-                    <h3 class="basic-reading-title">PRELIMINARY JUDGMENT</h3>
-                    <div id="basicReadingBody" class="basic-reading-body" aria-live="polite"></div>
-                    <div id="basicFeedback" class="reading-feedback hidden">
-                        <div class="feedback-question">Was the judgment consistent with your record?</div>
-                        <div class="feedback-actions">
-                            <button type="button" class="feedback-btn" data-vote="up" aria-label="Thumbs up">
-                                &#128077;
-                            </button>
-                            <button type="button" class="feedback-btn" data-vote="down" aria-label="Thumbs down">
-                                &#128078;
-                            </button>
-                        </div>
-                        <div class="feedback-text-container hidden" id="feedbackTextContainer">
-                            <textarea id="feedbackText" placeholder="Where did the delineation diverge?"
-                                rows="2"></textarea>
-                            <button type="button" id="submitFeedbackText" class="btn-small">SEND FEEDBACK</button>
-                        </div>
-                        <div id="basicFeedbackStatus" class="feedback-status" aria-live="polite"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NEW ORIGIN STORY SECTION -->
-        <section id="origin-story" class="extract-section section-white">
-            <div class="container max-w-800 mx-auto">
-                <h2 class="section-title text-center">THE OUTSIDER STRATEGY</h2>
-                <div class="origin-story-text">
-                    <p class="mb-6">I am not an astrologer. I am a Systems Architect who reverse-engineered their rules.</p>
-                    <p class="mb-6">Astrologers often rely on "feeling" the chart. But I don't care about feelings. I care about <strong>Rule Validity</strong>.</p>
-                    <p class="mb-6">I approached Traditional Astrology as a data ingestion problem. I analyzed 2,000 years of source texts (Valens, Bonatti, Lilly) that most ignore, and I built this engine to enforce those rules strictly.</p>
-                    <p class="mb-6">The result is this engine. It performs the rigorous "Forensic
-                        Audit" calculations—Sect, Almuten, Mutual Receptions—without bias or hallucination.</p>
-                    <p>I didn't write the astrology. I compiled it.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- NEW PROOF SECTION -->
-        <section class="basic-view section-warm">
-            <div class="container max-w-800 mx-auto text-center">
-                <h2 class="section-title">PROOF IT WORKS: MY OWN CHART</h2>
-                <p class="section-subtitle">To test the engine, I ran my own birth data.</p>
-                <div class="panel-card proof-quote-card">
-                    <p class="proof-quote-text">"I ran my chart and to me it
-                        seems more accurate than what I thought was possible. I can't say if it works for everyone, but
-                        after reading mine I decided to build all of this. The example you can look at is my chart."</p>
-                    <div class="text-center">
-                        <a href="creator_chart_sample.pdf" class="btn-primary text-decoration-none" target="_blank">DOWNLOAD THE CREATOR'S FULL REPORT (PDF)</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="basic-view bg-white py-16">
-            <div class="container max-w-800">
-                <h2 class="section-title text-center">WHY WE ARE NOT AN AI</h2>
-                <div class="comparison-table-wrapper">
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Typical AI Astrology</th>
-                                <th>Codex Caelestis</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Probabilistic</strong><br>Guesses the next word</td>
-                                <td><strong>Deterministic</strong><br>Executes rigid rules</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Black Box</strong><br>Unknown training data</td>
-                                <td><strong>Citation Audit</strong><br>Named source for every claim</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Inconsistent</strong><br>Answers vary each time</td>
-                                <td><strong>Reproducible</strong><br>Same data = Same result</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Hallucinates</strong><br>Invents plausible falsehoods</td>
-                                <td><strong>Silence</strong><br>If no rule applies, we say nothing</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="philosophy-section mb-12 text-center">
-            <h2 class="section-title">WHO THIS IS FOR</h2>
-            <p class="section-subtitle">We serve clients who want a technical evaluation of natal promise, planetary
-                condition, and timing. If you are seeking affirmation, therapeutic framing, or vague encouragement, this
-                is not the correct venue.</p>
-            <div class="criteria-grid">
-                <div class="panel-card">
-                    <h4>Appropriate Clients</h4>
-                    <p>Professionals, practitioners, and serious students who value defined technique. We only need
-                        date, time, and place—no name required. Your data is used solely for chart calculation and
-                        is never sold.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>Not Accepted</h4>
-                    <p>Requests for life coaching, emotional counseling, or spiritual guidance. We do not attempt to
-                        replace medical, legal, or financial professionals.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>Evidence Standard</h4>
-                    <p>We provide citations, method notes, and limitations alongside every judgment so the work can be
-                        reviewed or disputed.</p>
-                </div>
-            </div>
-            <div class="intent-filter">
-                <strong>Before you proceed:</strong>
-                <ul>
-                    <li>You will be asked to confirm your birth data accuracy.</li>
-                    <li>We make no guarantees of outcomes, only delineation of traditional indications.</li>
-                    <li>Every paid report is bound by a documented method with no improvisation.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="basic-view">
-            <h2 class="section-title">SERVICE ARCHITECTURE</h2>
-            <p class="section-subtitle">Our offerings are structured as escalating layers of depth. Each layer follows
-                the same ruleset and expands the scope of timing and evidence.</p>
-            <div class="service-grid">
-                <div class="panel-card">
-                    <h4>Natal Judgment Dossier</h4>
-                    <p>Primary delineation of temperament, sect condition, chart ruler, and dominant significators. This
-                        is the foundation for all subsequent timing work.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>Timing &amp; Profections</h4>
-                    <p>Annual profections, time lords, and event windows based on traditional timing techniques. Built
-                        for year-level planning with explicit date ranges.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>Advanced Lots &amp; Topics</h4>
-                    <p>Lots, financial architecture, vocational indicators, and health-related significations, with
-                        strict disclaimers and bounded claims.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="basic-view">
-            <h2 class="section-title">PROCESS &amp; ACCOUNTABILITY</h2>
-            <p class="section-subtitle">Traditional astrology requires discipline. We use a three-step flow that
-                protects method integrity and client clarity.</p>
-            <div class="process-grid">
-                <div class="panel-card">
-                    <h4>1. Submit Verified Data</h4>
-                    <p>Birth date, exact time, and location are verified. If time is unknown, we formally restrict
-                        house-based techniques.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>2. Receive the Preliminary Judgment</h4>
-                    <p>We release an initial delineation with method notes, allowing you to evaluate fit and accuracy
-                        before deeper work.</p>
-                </div>
-                <div class="panel-card">
-                    <h4>3. Unlock Full Dossier</h4>
-                    <p>Paid access releases complete reports, timing logic, and the structured rule ledger used for
-                        every statement.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="basic-view">
-            <h2 class="section-title">PRICING &amp; ACCESS</h2>
-            <p class="section-subtitle">Pricing is designed to filter casual browsers and prioritize serious clients. We
-                charge for time-intensive calculations and archival storage.</p>
-            <div class="offer-grid">
-                <div class="panel-card">
-                    <span class="pill-label">Preliminary</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$0</div>
-                        <ul>
-                            <li>Preliminary natal judgment</li>
-                            <li>Temperament and chart ruler</li>
-                            <li>Declared limitations</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel-card">
-                    <span class="pill-label">Complete Forensic Audit</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$197</div>
-                        <ul>
-                            <li>Complete natal dossier</li>
-                            <li>Lots, profections, and evidence ledger</li>
-                            <li>One-time purchase</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel-card">
-                    <span class="pill-label">Practitioner Access</span>
-                    <div class="pricing-summary">
-                        <div class="price-tag">$147/mo</div>
-                        <ul>
-                            <li>5 Reports / month</li>
-                            <li>Advanced timing modules</li>
-                            <li>Priority recalcs</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-actions justify-center mt-8">
-                <button class="btn-primary" type="button" data-pricing-trigger>Review access options</button>
-                <a class="btn-secondary" href="pricing.html">Full pricing rationale</a>
-            </div>
-        </section>
-
-        <section class="samples-section">
-            <h2 class="section-title text-center">SAMPLE EVIDENCE</h2>
-            <div class="samples-grid">
-                <div class="sample-card">
-                    <button class="sample-toggle" type="button" aria-expanded="false">
-                        <span>Temperament Judgment</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="sample-content hidden">
-                        <p><strong>Temperament: Choleric-Melancholic.</strong><br>
-                            Ascendant in a dry sign, Mars in dignity, and Saturn configured to the luminaries indicate a
-                            constitution that is deliberate, cautious, and rigorous under pressure.</p>
-                    </div>
-                </div>
-                <div class="sample-card">
-                    <button class="sample-toggle" type="button" aria-expanded="false">
-                        <span>Chart Ruler &amp; Agenda</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="sample-content hidden">
-                        <p><strong>Chart ruler: Mercury in a superior position.</strong><br>
-                            Mercury dignified by triplicity and in a commanding house indicates a life shaped by
-                            analysis, teaching, and the management of information.</p>
-                    </div>
-                </div>
-                <div class="sample-card">
-                    <button class="sample-toggle" type="button" aria-expanded="false">
-                        <span>Timing Window</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="sample-content hidden">
-                        <p><strong>Annual profection to the 10th.</strong><br>
-                            The year is governed by Saturn, with a culminating period in late autumn. Professional
-                            obligations intensify and require long-range planning.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="testimonials-section">
-            <h2 class="section-title">CLIENT NOTES</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-quote">"The report was structured like a case file. Every claim had an origin,
-                        and every limitation was explicit. This is the opposite of modern astrology fluff."</p>
-                    <p class="testimonial-author">A.N. — Oslo <span class="verified-badge text-gold text-sm ml-1">✓ Verified</span></p>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-quote">"I work in finance and wanted method, not mysticism. The delineation
-                        was disciplined and transparent about what could be judged."</p>
-                    <p class="testimonial-author">E.M. — New York <span class="verified-badge text-gold text-sm ml-1">✓ Verified</span></p>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-quote">"The timing section was more rigorous than any reading I have
-                        purchased. The rules were laid out and the conclusions followed."</p>
-                    <p class="testimonial-author">L.S. — Cambridge <span class="verified-badge text-gold text-sm ml-1">✓ Verified</span></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="comparison-section">
-            <h2 class="section-title text-center">WHAT IS REMOVED</h2>
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Excluded Element</th>
-                            <th>Reason</th>
-                            <th>What We Use Instead</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Modern psychological framing</td>
-                            <td>Not part of the classical canon.</td>
-                            <td>Traditional significations + dignity scoring.</td>
-                        </tr>
-                        <tr>
-                            <td>Outer planets as primary rulers</td>
-                            <td>Not visible to the ancient craft.</td>
-                            <td>Septenary planets only.</td>
-                        </tr>
-                        <tr>
-                            <td>Vague affirmation language</td>
-                            <td>Undermines judgment discipline.</td>
-                            <td>Bounded claims with explicit limits.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <footer class="mt-4 text-center text-xs text-muted pb-8">
-            <p>&copy; <span id="copyrightYear">2026</span> Codex Caelestis. Built by a Systems Architect. All rights reserved.</p>
-            <div class="mt-2 text-inherit">
-                <a href="privacy.html" class="text-inherit mx-2">Privacy Policy</a>
-                <span aria-hidden="true">•</span>
-                <a href="terms.html" class="text-inherit mx-2">Terms of Service</a>
-            </div>
-        </footer>
-    </main>
-
-    <!-- Pricing Modal -->
-    <div class="modal-overlay hidden" id="pricingModal">
-        <div class="modal-content pricing-modal-content">
-            <button class="modal-close" id="pricingClose" type="button">&times;</button>
-            <div class="modal-header">
-                <h2>ACCESS TIERS</h2>
-                <div class="ornament"></div>
-            </div>
-
-            <div class="pricing-toggle-container">
-                <span id="monthlyLabel" class="toggle-label active">Monthly</span>
-                <label class="switch">
-                    <input type="checkbox" id="billingToggle">
-                    <span class="slider round"></span>
-                </label>
-                <span id="annualLabel" class="toggle-label">Annual <span class="save-badge">SAVE 17%</span></span>
-            </div>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>PRELIMINARY</h3>
-                    <div class="price">FREE</div>
-                    <ul>
-                        <li>Temperament + chart ruler</li>
-                        <li>Declared limitations</li>
-                        <li>One chart preview</li>
-                    </ul>
-                    <button class="pricing-cta disabled" type="button" disabled>CURRENT TIER</button>
-                </div>
-                <div class="pricing-card highlight">
-                    <h3>PRACTITIONER ACCESS</h3>
-                    <div class="price">$<span id="price-starter">147</span><span id="period-starter">/mo</span>
-                    </div>
-                    <ul class="mb-8">
-                        <li>5 Reports / month</li>
-                        <li>Full dossiers + timing modules</li>
-                        <li>Save 10 charts</li>
-                        <li>Priority recalculation queue</li>
-                    </ul>
-                    <button class="pricing-cta" type="button" onclick="initiateCheckout('starter')">SUBSCRIBE</button>
-                </div>
-            </div>
-            <div class="disclosure-text">
-                By subscribing, you agree to our <a href="terms.html" target="_blank"
-                    class="text-decoration-underline text-inherit">Terms</a> and authorize us to charge your
-                payment method on a recurring basis (monthly or annually) until you cancel. You can cancel at any
-                time in your dashboard.
-            </div>
+        <div class="hero-value-block">
+          <div class="hero-value-title">CALCULATION ENGINE, NOT AI CHATBOT.</div>
+          <p class="hero-value-text">
+            Swiss Ephemeris precision + deterministic traditional rules.
+            Every chart output includes an auditable Rule Ledger for practitioner verification.
+          </p>
+          <div class="hero-value-sub">
+            Parans. Zodiacal Releasing (L1/L2 + Loosing of the Bond). Primary Directions. Complete lot systems.
+            <br />
+            Sect always matters.
+          </div>
+          <div class="hero-actions justify-center mt-8">
+            <a class="btn-primary" href="techniques.html">See All Techniques</a>
+            <a class="btn-secondary" href="documentation.html">Technical Documentation</a>
+            <a class="btn-secondary" href="demo.html">Try Free Calculation</a>
+          </div>
         </div>
-    </div>
 
-    <!-- Paywall Modal -->
-    <div id="paywallModal" class="modal-overlay hidden">
-        <div class="modal-content paywall-content" role="dialog" aria-modal="true">
-            <button class="modal-close" id="closePaywall" type="button" aria-label="Close paywall">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <h2 class="paywall-title">FULL DOSSIER AVAILABLE</h2>
-            <p class="paywall-intro">Your preliminary judgment is complete. Unlock the full evidence ledger.</p>
-
-            <div class="locked-features">
-                <h3>UNLOCK THE COMPLETE DOSSIER:</h3>
-                <ul class="locked-list">
-                    <li>✓ <strong>Timing &amp; Profections</strong>: annual time-lord periods</li>
-                    <li>✓ <strong>Lots &amp; Topic Analysis</strong>: vocation, resources, and health</li>
-                    <li>✓ <strong>Forensic Audit</strong>: essential dignity scoring</li>
-                    <li>✓ <strong>Precision Window</strong>: 5-day forecast</li>
-                </ul>
-            </div>
-
-            <div class="social-proof">
-                <p><em>"The most methodical report I have received."</em></p>
-                <div class="user-avatars">
-                    <span>Trusted by professionals, practitioners, and researchers.</span>
-                </div>
-            </div>
-
-            <div class="pricing-controls">
-                <div class="billing-toggle">
-                    <span id="labelMonthly" class="toggle-label active">Monthly</span>
-                    <label class="switch">
-                        <input type="checkbox" id="billingSwitch">
-                        <span class="slider round"></span>
-                    </label>
-                    <span id="labelAnnual" class="toggle-label">Annual <span class="badge-save">SAVE 17%</span></span>
-                </div>
-            </div>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h4>COMPLETE FORENSIC AUDIT</h4>
-                    <div class="price">$197</div>
-                    <p>Full report for this chart only.</p>
-                    <button class="btn-primary" type="button" onclick="window.startCheckout('onetime')">UNLOCK NOW</button>
-                </div>
-                <div class="pricing-card recommended" id="subCard">
-                    <div class="badge">BEST VALUE</div>
-                    <h4 id="subTitle">PRACTITIONER ACCESS</h4>
-                    <div class="price" id="subPrice">$147<span>/mo</span></div>
-                    <p id="subDesc">5 Reports / month.</p>
-                    <button class="btn-primary" type="button" onclick="window.startCheckout('starter')">SUBSCRIBE</button>
-                    <div id="annualDetails" class="hidden">
-                        <div class="price">$1470<span>/yr</span></div>
-                        <p>Equivalent to $122.50/mo.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="disclosure-text">
-                By subscribing, you agree to our <a href="terms.html" target="_blank"
-                    class="text-decoration-underline text-inherit">Terms</a> and authorize us to charge your
-                payment method on a recurring basis (monthly or annually) until you cancel. You can cancel at any
-                time in your dashboard.
-            </div>
-
-            <div class="mt-2 text-center text-xs text-muted">
-                <a href="privacy.html" class="text-inherit mx-2 text-decoration-none">Privacy</a>
-                <span aria-hidden="true">•</span>
-                <a href="terms.html" class="text-inherit mx-2 text-decoration-none">Terms</a>
-                <span aria-hidden="true">•</span>
-                <a href="sitemap.xml" class="text-inherit mx-2 text-decoration-none">Sitemap</a>
-            </div>
-
-            <div class="guarantee-badge">
-                <span class="shield-icon">🛡️</span>
-                <strong>30-DAY MONEY-BACK GUARANTEE</strong>
-                <p>If you are dissatisfied with the methodical quality, request a refund.</p>
-            </div>
-
-            <div class="lock-disclaimer">
-                <strong>Scope Disclaimer:</strong>
-                This report is a traditional, algorithmic delineation for educational purposes. It is not medical,
-                legal, or financial advice, and it does not claim psychic certainty.
-                <strong>Medical astrology content is historical in nature only.</strong>
-            </div>
-
-            <p class="mt-4 text-center opacity-70 text-xs">
-                By continuing, you adhere to our <a href="terms.html" target="_blank"
-                    class="text-decoration-underline text-inherit">Terms of Service</a>.
-            </p>
+        <div class="proof-strip">
+          <div class="proof-card">
+            <span class="proof-icon">📜</span>
+            <div class="proof-title">Source Anchored</div>
+            <p>Every major judgment is traceable to named traditional sources in the rule ledger.</p>
+          </div>
+          <div class="proof-card">
+            <span class="proof-icon">🧮</span>
+            <div class="proof-title">Deterministic</div>
+            <p>Same inputs = same calculations. No probabilistic interpretation layer.</p>
+          </div>
+          <div class="proof-card">
+            <span class="proof-icon">⚙️</span>
+            <div class="proof-title">B2B Friendly</div>
+            <p>Designed for practitioner workflows: exports, integration paths, and repeatable results.</p>
+          </div>
         </div>
-    </div>
+      </div>
+    </header>
 
-    <!-- Email Capture Modal -->
-    <div id="emailModal" class="modal-overlay hidden">
-        <div class="modal-content max-w-700" role="dialog" aria-modal="true" style="max-width: 450px;">
-            <button class="modal-close" id="closeEmail" type="button" aria-label="Close modal">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <h2 class="paywall-title">ARCHIVE YOUR REPORT</h2>
-
-            <div class="text-center mb-6">
-                <img src="./pdf_preview.png" alt="PDF Report Preview" class="mb-4 shadow-soft border-gold rounded-md" style="max-width: 100%;">
-                <p>Enter your email to receive a secure PDF copy of your preliminary judgment.</p>
-            </div>
-
-            <form id="emailForm" class="flex-column gap-4">
-                <div class="input-group">
-                    <label for="captureEmail">EMAIL ADDRESS</label>
-                    <input type="email" id="captureEmail" required placeholder="you@example.com">
-                </div>
-
-                <div class="checkbox-row items-start mb-2 mt-2">
-                    <input type="checkbox" id="emailConsent" required class="mt-2">
-                    <label for="emailConsent" class="text-sm leading-tight text-muted cursor-pointer">
-                        I agree to the <a href="privacy.html" target="_blank" class="text-gold">Privacy
-                            Policy</a> and consent to receive emails about my report.
-                    </label>
-                </div>
-
-                <button type="submit" class="btn-primary">SEND MY PDF</button>
-                <div id="emailStatus" class="text-center" style="min-height: 1.2em; font-size: 0.9em;"></div>
-            </form>
-
-            <div class="mt-6 pt-4 border-glass text-left">
-                <strong class="text-gold text-sm text-uppercase tracking-wide">What
-                    Happens Next:</strong>
-                <ol class="mt-2 text-muted text-sm leading-relaxed" style="padding-left: 1.2rem;">
-                    <li>You'll receive an instant confirmation email.</li>
-                    <li>Your PDF report will be attached.</li>
-                    <li>Check your specific spam folder if not received in 2 minutes.</li>
-                </ol>
-            </div>
-
-            <p class="text-center mt-4 opacity-70 text-sm">We respect your privacy.
-                No spam.</p>
+    <section class="basic-view" id="unique-techniques">
+      <h2 class="section-title">TECHNIQUES OTHER SOFTWARE DOESN'T HAVE</h2>
+      <p class="section-subtitle">Advanced methods that are rarely implemented due to complexity, not importance.</p>
+      <div class="technique-grid">
+        <div class="panel-card">
+          <h4>✓ Parans (Paranatellonta)</h4>
+          <p>Fixed stars rising/culminating/setting with planets using spherical astronomy.</p>
         </div>
-    </div>
+        <div class="panel-card">
+          <h4>✓ ZR L1/L2 + Loosing of the Bond</h4>
+          <p>Full releasing engine including bond logic and structured period reporting.</p>
+        </div>
+        <div class="panel-card">
+          <h4>✓ Primary Directions (Placidus Semi-Arc)</h4>
+          <p>Direction arcs to angles and distributor logic for current periods.</p>
+        </div>
+        <div class="panel-card">
+          <h4>✓ Daily Profections</h4>
+          <p>Daily stepping layered over monthly and annual profections.</p>
+        </div>
+        <div class="panel-card">
+          <h4>✓ Monomoiria + Dodecatemoria</h4>
+          <p>Classical degree and subdivision systems for fine-grained technique work.</p>
+        </div>
+        <div class="panel-card">
+          <h4>✓ Complete Lots (Sect-Sensitive)</h4>
+          <p>Hermetic + forensic lots with night/day reversals enforced by the engine.</p>
+        </div>
+      </div>
+      <div class="hero-actions mt-8" style="justify-content:center;">
+        <a class="btn-secondary" href="techniques.html">View Complete Technique List →</a>
+      </div>
+    </section>
 
-    <script type="module" src="js/landing.js"></script>
+    <section class="basic-view" id="comparison">
+      <h2 class="section-title">CAPABILITY COMPARISON</h2>
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table" aria-label="Capability Comparison">
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Solar Fire</th>
+              <th>Astro Gold</th>
+              <th>Codex Caelestis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Annual Profections</td>
+              <td class="check">✓</td>
+              <td class="check">✓</td>
+              <td class="check">✓</td>
+            </tr>
+            <tr>
+              <td>Daily Profections</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+              <td class="check">✓</td>
+            </tr>
+            <tr>
+              <td>Zodiacal Releasing (L1/L2 + Bond)</td>
+              <td>Partial</td>
+              <td class="cross">✗</td>
+              <td class="check">✓</td>
+            </tr>
+            <tr>
+              <td>Parans (Paranatellonta)</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+              <td class="check">✓</td>
+            </tr>
+            <tr>
+              <td>Primary Directions (Placidus)</td>
+              <td class="check">✓</td>
+              <td>Partial</td>
+              <td class="check">✓</td>
+            </tr>
+            <tr>
+              <td>Monomoiria + Dodecatemoria</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+              <td class="check">✓</td>
+            </tr>
+            <tr>
+              <td>Rule Ledger Export (JSON)</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+              <td class="check">✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted text-sm" style="margin-top: 1rem;">
+        Note: Solar Fire and Astro Gold are strong standard tools. Codex Caelestis focuses on advanced traditional techniques with deterministic traceability.
+      </p>
+    </section>
+
+    <section class="basic-view" id="methodology">
+      <h2 class="section-title">DETERMINISTIC OUTPUTS</h2>
+      <p class="section-subtitle">We do not generate astrology with an LLM. We compute it.</p>
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table" aria-label="Methodology Comparison">
+          <thead>
+            <tr>
+              <th>Typical AI Astrology</th>
+              <th>Codex Caelestis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Probabilistic interpretation</td>
+              <td>Deterministic calculations</td>
+            </tr>
+            <tr>
+              <td>Opaque training data</td>
+              <td>Rule ledger with named sources</td>
+            </tr>
+            <tr>
+              <td>Inconsistent outputs</td>
+              <td>Reproducible outputs</td>
+            </tr>
+            <tr>
+              <td>Can hallucinate</td>
+              <td>Verifiable exports (JSON ledger)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lock-disclaimer">
+        <strong>Historical Use Only:</strong> Codex Caelestis provides traditional calculations and technical exports. No medical, legal, or financial advice.
+      </div>
+    </section>
+
+    <section class="basic-view" id="pricing">
+      <h2 class="section-title">PRACTITIONER PRICING</h2>
+      <p class="section-subtitle">No per-chart limits. Built for repeated professional use.</p>
+
+      <div class="offer-grid pricing-grid">
+        <div class="panel-card">
+          <div class="pricing-card recommended">
+            <div class="tier-label">Most Popular</div>
+            <h3>Practitioner</h3>
+            <div class="price">$147<span>/month</span></div>
+            <ul class="features">
+              <li><strong>Unlimited calculations</strong></li>
+              <li>Timing: Profections, Releasing, Firdaria, Primary Directions</li>
+              <li>Lots: Hermetic + Forensic, sect-sensitive reversals</li>
+              <li>Export rule ledgers (JSON)</li>
+              <li>API access (rate-limited)</li>
+            </ul>
+            <a class="btn-primary" href="signup.html?plan=practitioner">Start Free Trial</a>
+            <p class="trial-note">Trial provisioning in progress (account creation works today).</p>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="pricing-card">
+            <div class="tier-label">Best Value</div>
+            <h3>Studio</h3>
+            <div class="price">$497<span>/month</span></div>
+            <ul class="features">
+              <li>Everything in Practitioner</li>
+              <li>Multi-user access (seats)</li>
+              <li>Priority support</li>
+              <li>Higher API limits</li>
+              <li>White-label options (planned)</li>
+            </ul>
+            <a class="btn-primary" href="signup.html?plan=studio">Start Free Trial</a>
+            <p class="trial-note">Trial provisioning in progress (account creation works today).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="basic-view" id="target-audience">
+      <h2 class="section-title">WHO THIS IS FOR</h2>
+      <div class="criteria-grid">
+        <div class="panel-card">
+          <h4>Professional Astrologers</h4>
+          <p>You need repeatable calculations for advanced technique work and client workflows.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Serious Students</h4>
+          <p>Verify manual work and explore complex timing systems with deterministic outputs.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Schools and Teachers</h4>
+          <p>Demonstrate techniques consistently for cohorts and classroom use.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Researchers</h4>
+          <p>Export rule ledgers and structured calculations for analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="basic-view" id="final-cta">
+      <h2 class="section-title">START YOUR TRIAL</h2>
+      <p class="section-subtitle">Run the demo, inspect the outputs, and decide if it meets your professional standards.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a class="btn-primary" href="signup.html?plan=practitioner">Try Practitioner</a>
+        <a class="btn-primary" href="signup.html?plan=studio">Try Studio</a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-columns">
+        <div class="footer-col">
+          <h3>Product</h3>
+          <ul>
+            <li><a href="techniques.html">Techniques</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="demo.html">Try Demo</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:support@traditional-astrology.com">General Support</a></li>
+            <li><a href="mailto:enterprise@traditional-astrology.com">Enterprise Sales</a></li>
+            <li><a href="mailto:bugs@traditional-astrology.com">Report Bug</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="copyrightYear">2026</span> Codex Caelestis. Built by a Systems Architect. All rights reserved.</p>
+        <p class="footer-disclaimer">
+          Historical Use Only. Codex Caelestis provides traditional calculations and technical exports; it does not provide medical, legal, or financial advice.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
+

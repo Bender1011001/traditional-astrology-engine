@@ -46,17 +46,15 @@ async def verify_api_key(
 
         # Verify Subscription
         sub = user.subscription
-        if not sub or sub.status != "active":
+        if not sub or sub.status not in {"active", "trial"}:
              raise HTTPException(status_code=403, detail="No active subscription for this API key")
              
         # Check if plan allows API access?
-        if not sub.plan.api_quota and sub.plan.tier not in ['master', 'agency']:
-             # Strict B2B check
-             # But maybe they have a custom plan?
-             # For now, let's allow if they have quota or 'api_access' feature
-             features = sub.plan.features or {}
-             if not features.get('api_access') and not sub.plan.api_quota:
-                  raise HTTPException(status_code=403, detail="Plan does not support API access")
+        features = sub.plan.features or {}
+        if not features.get('api_access'):
+            # Legacy fallback: allow if an explicit quota is set (even if features were not migrated yet)
+            if not sub.plan.api_quota and sub.plan.tier not in {"agency"}:
+                raise HTTPException(status_code=403, detail="Plan does not support API access")
 
         return {
             "user": user,

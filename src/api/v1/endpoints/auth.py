@@ -12,7 +12,7 @@ user_manager = get_user_manager()
 
 @router.post("/register")
 async def register(request: RegisterRequest):
-    result = user_manager.create_user(request.email, request.password, request.name)
+    result = user_manager.create_user(request.email, request.password, request.name, plan_tier=request.plan_tier or "")
     if not result["success"]:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,

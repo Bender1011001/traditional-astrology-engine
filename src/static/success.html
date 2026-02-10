@@ -81,13 +81,13 @@
 
     <main class="success-container">
         <div class="success-icon">✓</div>
-        <h1>PAYMENT SUCCESSFUL</h1>
-        <p class="subtitle" style="margin-top: 1rem;">Thank you for your purchase.</p>
+        <h1>CHECKOUT COMPLETE</h1>
+        <p class="subtitle" style="margin-top: 1rem;">Your subscription is being activated.</p>
 
         <div id="statusCard" class="order-status">
             <div class="spinner"></div>
-            <p><strong>Payment Confirmed!</strong></p>
-            <p>Your full forensic dossier is being generated and will be <strong>emailed to you</strong> shortly.</p>
+            <p><strong>Verified!</strong></p>
+            <p>Redirecting you to your dashboard.</p>
             <p style="font-size: 0.9em; color: #888; margin-top: 10px;">Please do not close this tab until redirected.
             </p>
         </div>
@@ -119,36 +119,13 @@
                     localStorage.setItem("cael_auth_token", data.access_token);
                 }
 
-                const chartRequest = data.chart_request || data.request || null;
-                if (chartRequest && chartRequest.date && chartRequest.city) {
-                    localStorage.setItem("cael_last_request", JSON.stringify(chartRequest));
-                } else if (data.access_token) {
-                    try {
-                        const restoreResp = await fetch(apiUrl(`/api/v1/auth/restore_session?token=${encodeURIComponent(data.access_token)}`));
-                        if (restoreResp.ok) {
-                            const sessionData = await restoreResp.json();
-                            if (sessionData && sessionData.date && sessionData.city) {
-                                localStorage.setItem("cael_last_request", JSON.stringify({
-                                    date: sessionData.date,
-                                    time: sessionData.time || "12:00",
-                                    city: sessionData.city,
-                                    state: sessionData.state || ""
-                                }));
-                            }
-                        }
-                    } catch (err) {
-                        console.warn("Session restore failed", err);
-                    }
-                }
-
                 statusCard.innerHTML = `
                     <p style="color:var(--success); font-weight:600; margin-bottom:1rem;">Verified!</p>
-                    <p>Redirecting to your full reading...</p>
+                    <p>Redirecting to your dashboard...</p>
                 `;
 
-                const tokenParam = data.access_token ? `&token=${encodeURIComponent(data.access_token)}` : "";
                 setTimeout(() => {
-                    window.location.href = `index.html?action=regenerate${tokenParam}`;
+                    window.location.href = `profile.html`;
                 }, 2000);
 
             } catch (err) {

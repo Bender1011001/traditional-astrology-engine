@@ -107,6 +107,9 @@ class CanonicalDomainMiddleware(BaseHTTPMiddleware):
         # Skip redirection for localhost to allow local development
         if "localhost" in host or "127.0.0.1" in host:
             return await call_next(request)
+        # Skip for test/dev hosts (e.g. unit tests using base_url="http://test")
+        if host in {"test", "testserver"} or "." not in host:
+            return await call_next(request)
 
         # Redirect www.traditional-astrology.com and http to https://traditional-astrology.com
         if host.startswith("www.") or scheme == "http":
@@ -176,6 +179,28 @@ async def global_exception_handler(request: Request, exc: Exception):
 # --- ROUTER MOUNT ---
 app.include_router(v1_router, prefix="/api/v1")
 app.include_router(v2_router, prefix="/api/v2")
+
+# --- LEGACY PAGE REDIRECTS (B2C -> B2B) ---
+# Static files are mounted at "/" below; these routes must be declared first.
+@app.get("/booking.html", include_in_schema=False)
+async def legacy_booking_redirect():
+    return RedirectResponse(url="/signup.html", status_code=301)
+
+@app.get("/services.html", include_in_schema=False)
+async def legacy_services_redirect():
+    return RedirectResponse(url="/techniques.html", status_code=301)
+
+@app.get("/pricing.html", include_in_schema=False)
+async def legacy_pricing_redirect():
+    return RedirectResponse(url="/index.html#pricing", status_code=301)
+
+@app.get("/dashboard", include_in_schema=False)
+async def legacy_dashboard_redirect():
+    return RedirectResponse(url="/profile.html", status_code=301)
+
+@app.get("/dashboard/", include_in_schema=False)
+async def legacy_dashboard_slash_redirect():
+    return RedirectResponse(url="/profile.html", status_code=301)
 
 # --- STATIC FILES ---
 from fastapi.staticfiles import StaticFiles

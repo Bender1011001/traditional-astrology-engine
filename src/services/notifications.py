@@ -10,10 +10,33 @@ class AdminNotificationService:
 
     @staticmethod
     def _get_admin_emails():
-        """Returns a list of admin emails from settings."""
-        if not settings.OWNER_EMAILS:
-            return []
-        return [email.strip() for email in settings.OWNER_EMAILS.split(",") if email.strip()]
+        """
+        Returns a list of admin emails.
+
+        Notes:
+        - In prod, OWNER_EMAILS is the primary list.
+        - In tests, settings may be instantiated before env vars are patched; we also consult os.environ at runtime.
+        - We include SENDER_EMAIL as a safe fallback/copy recipient so admin events are never silently dropped.
+        """
+        raw = []
+        if getattr(settings, "OWNER_EMAILS", ""):
+            raw.append(settings.OWNER_EMAILS)
+        env_owner = os.environ.get("OWNER_EMAILS", "")
+        if env_owner:
+            raw.append(env_owner)
+
+        emails = []
+        for blob in raw:
+            for email in blob.split(","):
+                email = email.strip()
+                if email and email not in emails:
+                    emails.append(email)
+
+        sender = getattr(settings, "SENDER_EMAIL", "").strip() if getattr(settings, "SENDER_EMAIL", None) else ""
+        if sender and sender not in emails:
+            emails.append(sender)
+
+        return emails
 
     @staticmethod
     def notify_account_created(user_email: str, user_name: str = ""):

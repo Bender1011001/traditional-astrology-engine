@@ -44,7 +44,9 @@ class User(Base):
                 "status": self.subscription.status,
                 "plan_name": self.subscription.plan.tier if self.subscription.plan else "Free",
                 "current_period_end": self.subscription.current_period_end.isoformat() if self.subscription.current_period_end else None,
-                "is_trial": self.subscription.status == "trial"
+                "is_trial": self.subscription.status == "trial",
+                "cancel_at_period_end": bool(self.subscription.cancel_at_period_end),
+                "has_stripe_subscription": bool(self.subscription.stripe_subscription_id),
             }
 
         return {
