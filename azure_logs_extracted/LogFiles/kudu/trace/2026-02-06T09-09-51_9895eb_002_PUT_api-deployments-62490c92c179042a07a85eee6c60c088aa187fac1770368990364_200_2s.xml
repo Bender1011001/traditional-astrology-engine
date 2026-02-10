@@ -1,0 +1,6 @@
+<step title="Incoming Request" date="2026-02-06T09:09:51.679" instance="9895eb" url="/api/deployments/62490c92c179042a07a85eee6c60c088aa187fac1770368990364" method="PUT" type="request" pid="770,1,25" Host="astrology-engine-central-7387.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_389631fd66e7de5e495c31baba9cc6d2c22a4ed6e0fdf818d6431e11b3861640" Authorization="Bea..." Content-Type="application/json; charset=utf-8" Content-Length="320" X-ARR-LOG-ID="6de0dd51-da7e-46da-83d7-40674df46cfe" CLIENT-IP="20.171.55.48:54272" X-SITE-DEPLOYMENT-ID="astrology-engine-central-7387" WAS-DEFAULT-HOSTNAME="astrology-engine-central-7387.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/62490c92c179042a07a85eee6c60c088aa187fac1770368990364" X-Client-IP="20.171.55.48" X-Client-Port="54272" >
+  <step title="DeploymentService.Deploy(id)" date="2026-02-06T09:09:52.693" >
+    <step title="DeploymentService.Create(id)" date="2026-02-06T09:09:52.701" /><!-- duration: 1360ms -->
+  </step><!-- duration: 1376ms -->
+  <step title="Outgoing response" date="2026-02-06T09:09:54.150" type="response" statusCode="200" statusText="OK" /><!-- duration: 5ms -->
+</step><!-- duration: 2479ms -->

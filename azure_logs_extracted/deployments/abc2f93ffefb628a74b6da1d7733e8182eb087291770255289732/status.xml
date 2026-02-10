@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>abc2f93ffefb628a74b6da1d7733e8182eb087291770255289732</id>
+  <author>Bender1011001</author>
+  <deployer>GitHub</deployer>
+  <authorEmail />
+  <message>{"type":"Deployment","sha":"abc2f93ffefb628a74b6da1d7733e8182eb08729","repoName":"Bender1011001/astrology","actor":"Bender1011001","slotName":"production"}</message>
+  <progress />
+  <status>Success</status>
+  <statusText />
+  <lastSuccessEndTime>2026-02-05T01:34:53.3948961Z</lastSuccessEndTime>
+  <receivedTime>2026-02-05T01:34:53.3948961Z</receivedTime>
+  <startTime>2026-02-05T01:34:53.3948961Z</startTime>
+  <endTime>2026-02-05T01:34:53.3948961Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>True</is_readonly>
+  <buildSummary />
+</deployment>
