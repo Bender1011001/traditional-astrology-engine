@@ -106,10 +106,10 @@ The core delineations are now stored in the database to allow for manual fixes a
 - `src/static/basic.js` — Frontend logic including Paywall & Checkout.
 - `src/static/success.html` — Payment success redirection handler.
 - `LICENSE` — MIT License.
-
 - `CHANGELOG.md` — Project history and rule updates.
 - `src/database/data/glossary.json` — Astrological definitions.
 - `src/engine/chart_calculator.py` — Core astronomical logic.
+- `src/engine/calculate_advanced_mechanics.py` — Core math for electional/horary logic
 - `src/engine/logic.py` — Forensic audit and synthesis engine.
 - `src/engine/classical_mechanics.py` — Antiscia, Dodecatemoria, Planetary Hours engine.
 - `src/engine/dignities.py` — Essential dignity engine based on "Missing Codex".
@@ -159,6 +159,8 @@ The core delineations are now stored in the database to allow for manual fixes a
 | ACR ImagePullFailure | Truncated Registry Password used in App Settings | Copy THE FULL 80+ CHAR password from ACR credentials |
 | Plan Not Found (Reg) | Database not seeded with standard plans | Added `seed_plans()` to app startup event |
 | Indexing Blind Spot | Lack of canonicalization & authority signals | Added `CanonicalDomainMiddleware` and tuned `robots.txt` |
+| Crash on startup | SyntaxError in `forensic.py` | Removed duplicate argument |
+| CSP Violations on `/docs` | `SecurityHeadersMiddleware` blocking CDNs | Added `jsdelivr` and `tiangolo` to allow-list |
 | SyntaxError: duplicate argument | Repeated `house_system` in method signature/calls | Cleansed signature and corrected API calls |
 
 ## Anti-Patterns (DO NOT)
