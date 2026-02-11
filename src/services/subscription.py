@@ -91,6 +91,13 @@ class SubscriptionService:
 
         # Mode MUST match the price type
         mode = 'subscription' if is_recurring else 'payment'
+
+        # Stripe expects a literal "{CHECKOUT_SESSION_ID}" placeholder in the final URL.
+        # Some callers may already include it; avoid double-appending.
+        final_success_url = success_url or ""
+        if "{CHECKOUT_SESSION_ID}" not in final_success_url:
+            sep = "&" if "?" in final_success_url else "?"
+            final_success_url = f"{final_success_url}{sep}session_id={{CHECKOUT_SESSION_ID}}"
         
         session_kwargs = {
             'payment_method_types': ['card'],
@@ -100,7 +107,7 @@ class SubscriptionService:
             }],
             'mode': mode,
             'allow_promotion_codes': True,
-            'success_url': success_url + "?session_id={CHECKOUT_SESSION_ID}",
+            'success_url': final_success_url,
             'cancel_url': cancel_url,
             'customer_email': user.email,
             'client_reference_id': user.id,

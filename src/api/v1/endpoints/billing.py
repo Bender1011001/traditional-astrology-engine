@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, BackgroundTasks
 from sqlalchemy.orm import Session
 from src.database.core import get_db
 from src.api.v1.auth import get_current_user, create_access_token
-from src.database.models import User
+from src.database.models import SubscriptionPlan, User
 from src.api.v1.schemas import CheckoutRequest
 from src.services.subscription import SubscriptionService
 from src.services.fulfillment import FulfillmentService
@@ -12,6 +12,45 @@ import json
 
 
 router = APIRouter()
+
+@router.get("/plans")
+async def list_public_plans(db: Session = Depends(get_db)):
+    """
+    Public plan metadata for frontend gating (does NOT return Stripe secret data).
+
+    Purpose:
+    - Frontend can hide/disable tiers whose Stripe Price IDs are not configured.
+    """
+    tiers = ["practitioner", "studio"]
+    plans = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier.in_(tiers)).all()
+    by_tier = {p.tier: p for p in plans}
+
+    out = []
+    for tier in tiers:
+        p = by_tier.get(tier)
+        if not p:
+            out.append(
+                {
+                    "tier": tier,
+                    "price_monthly": None,
+                    "price_annual": None,
+                    "checkout_enabled_monthly": False,
+                    "checkout_enabled_annual": False,
+                }
+            )
+            continue
+
+        out.append(
+            {
+                "tier": p.tier,
+                "price_monthly": float(p.price_monthly) if p.price_monthly is not None else None,
+                "price_annual": float(p.price_annual) if p.price_annual is not None else None,
+                "checkout_enabled_monthly": bool(p.stripe_price_id_monthly),
+                "checkout_enabled_annual": bool(p.stripe_price_id_annual),
+            }
+        )
+
+    return {"plans": out}
 
 @router.post("/create-checkout-session")
 async def create_checkout_session(request: CheckoutRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):

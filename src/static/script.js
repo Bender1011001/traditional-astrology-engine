@@ -303,6 +303,7 @@ async function initiateCheckout(tier) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
@@ -311,7 +312,7 @@ async function initiateCheckout(tier) {
                 chart_request: {
                     date: "2000-01-01", time: "12:00", city: "Rome", state: "Italy"
                 },
-                success_url: window.location.origin + "/index.html?session_id={CHECKOUT_SESSION_ID}",
+                success_url: window.location.origin + "/success.html",
                 cancel_url: window.location.origin + "/index.html"
             })
         });

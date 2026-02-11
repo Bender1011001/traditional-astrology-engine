@@ -25,6 +25,11 @@ class BillingService:
         if not plan.stripe_price_id_monthly:
              raise ValueError("Plan not configured for billing")
 
+        final_success_url = success_url or ""
+        if "{CHECKOUT_SESSION_ID}" not in final_success_url:
+            sep = "&" if "?" in final_success_url else "?"
+            final_success_url = f"{final_success_url}{sep}session_id={{CHECKOUT_SESSION_ID}}"
+
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[{
@@ -32,7 +37,7 @@ class BillingService:
                 'quantity': 1,
             }],
             mode='subscription',
-            success_url=success_url + "?session_id={CHECKOUT_SESSION_ID}",
+            success_url=final_success_url,
             cancel_url=cancel_url,
             customer_email=user.email,
             client_reference_id=user.id,

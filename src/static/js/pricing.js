@@ -148,13 +148,14 @@ export async function initiateCheckout(tier, chartRequest = null) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 tier: tier,
                 annual: isAnnual,
                 chart_request: requestPayload,
-                success_url: window.location.origin + "/success.html?session_id={CHECKOUT_SESSION_ID}",
+                success_url: window.location.origin + "/success.html",
                 cancel_url: window.location.href
             })
         });

@@ -6,6 +6,9 @@ import time
 from datetime import UTC, datetime, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -162,6 +165,7 @@ def main():
     ap.add_argument("--platform", type=str, default=None, help="Filter by platform_primary (website/email/etc).")
     ap.add_argument("--cooldown-hours", type=int, default=168, help="Don't re-email same target within this window (default: 168h).")
     ap.add_argument("--postal-address", type=str, default=os.getenv("OUTREACH_POSTAL_ADDRESS", ""), help="Postal address for compliance footer.")
+    ap.add_argument("--email-domain", type=str, default=None, help="Filter by email domain (e.g. gmail.com).")
     ap.add_argument("--from-name", type=str, default=os.getenv("OUTREACH_FROM_NAME", "Traditional-Astrology.com"))
     ap.add_argument("--reply-to", type=str, default=os.getenv("OUTREACH_REPLY_TO", ""))
     args = ap.parse_args()
@@ -206,6 +210,10 @@ def main():
             email = extract_first_email(t.primary_contact or "") or extract_first_email(t.secondary_contact or "")
             if not email:
                 continue
+
+            if args.email_domain:
+                if not email.lower().strip().endswith(f"@{args.email_domain.strip().lower()}"):
+                    continue
 
             # Skip if recently emailed.
             recent = (
