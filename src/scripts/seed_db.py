@@ -14,6 +14,11 @@ def seed_plans():
     try:
         print("Ensuring Subscription Plans exist (upsert)...")
 
+        # Legacy env var fallback (older single-tier config).
+        # If present, treat it as Practitioner pricing so checkout works even if env names haven't been migrated yet.
+        legacy_pract_monthly = (getattr(settings, "STRIPE_SUBSCRIPTION_PRICE_ID", "") or "").strip() or None
+        legacy_pract_annual = (getattr(settings, "STRIPE_ANNUAL_PRICE_ID", "") or "").strip() or None
+
         desired = [
             {
                 "tier": "free",
@@ -31,8 +36,8 @@ def seed_plans():
                 "api_quota": 100,     # API calls/day
                 "price_monthly": 147.00,
                 "price_annual": 1470.00,
-                "stripe_price_id_monthly": settings.STRIPE_PRICE_PRACTITIONER_MONTHLY or None,
-                "stripe_price_id_annual": settings.STRIPE_PRICE_PRACTITIONER_ANNUAL or None,
+                "stripe_price_id_monthly": settings.STRIPE_PRICE_PRACTITIONER_MONTHLY or legacy_pract_monthly,
+                "stripe_price_id_annual": settings.STRIPE_PRICE_PRACTITIONER_ANNUAL or legacy_pract_annual,
                 "features": {"api_access": True, "saved_charts_limit": 100}
             },
             {

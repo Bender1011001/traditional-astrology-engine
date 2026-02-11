@@ -21,6 +21,10 @@ class Settings(BaseSettings):
     STRIPE_PRICE_STUDIO_MONTHLY: str = ""
     STRIPE_PRICE_STUDIO_ANNUAL: str = ""
 
+    # Legacy Stripe env var names (single-tier pricing). Used as fallback for Practitioner seeding.
+    STRIPE_SUBSCRIPTION_PRICE_ID: str = ""
+    STRIPE_ANNUAL_PRICE_ID: str = ""
+
     TRIAL_DAYS_DEFAULT: int = 14
 
     class Config:

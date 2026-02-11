@@ -56,6 +56,9 @@ def list_plans(
                 "price_annual": float(plan.price_annual) if plan.price_annual is not None else None,
                 "chart_quota": plan.chart_quota,
                 "api_quota": plan.api_quota,
+                # For verification/debug (not shown publicly; owner-only).
+                "stripe_price_id_monthly": plan.stripe_price_id_monthly,
+                "stripe_price_id_annual": plan.stripe_price_id_annual,
             }
             for plan in plans
         ]
