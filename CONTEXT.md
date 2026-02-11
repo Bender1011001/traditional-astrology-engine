@@ -8,6 +8,7 @@
 - **Database**: Comprehensive pre-1700s traditional astrology—Managed via `AstrologicalDelineation` database table (SQLAlchemy).
 - **Release Ready**: Version 1.3 (User Accounts).
 - **Monetization**: Stripe (One-time + Annual/Monthly Subscriptions).
+- **Outreach Automation**: Automated email outreach with throttling, cooldown tracking, and owner dashboard integration.
 
 
 ## Tech Stack
@@ -81,6 +82,11 @@ The core delineations are now stored in the database to allow for manual fixes a
 ### Electional Astrology
 - `electional_considerations.json` — Moon conditions, planetary hours, Bonatti rules
 
+### Outreach & Leads
+- `Lead` — Inbound marketing lead capture from website.
+- `OutreachTarget` — Curated list of people/shops for outbound contact.
+- `OutreachAttempt` — Logs of what was sent/attempted and when.
+
 ### Other
 - `house_topoi.json` — House significations
 - `example_charts.json` — Historical charts (Lilly, Newton, Napoleon, etc.)
@@ -117,6 +123,7 @@ The core delineations are now stored in the database to allow for manual fixes a
 - `src/database/db_manager.py` — Loader for Codex delineations.
 - `src/engine/chat_oracle.py` — RAG interface for chart Q&A.
 - `src/engine/user_auth.py` — User authentication & accounts module.
+- `scripts/outreach_run.py` — Automated outreach runner (email-only).
 - `scripts/extract_all_traditional_data.py` — Comprehensive data extraction.
 - `scripts/migrate_json_to_db.py` — Migrates JSON data to the SQLAlchemy database.
 
@@ -178,7 +185,12 @@ The core delineations are now stored in the database to allow for manual fixes a
 | `JWT_SECRET` | Yes | Secret for signing JWT tokens (auto-generated on Render) |
 | `OPENROUTER_API_KEY` | Yes | OpenRouter API key for AI readings |
 | `SENDGRID_API_KEY` | Yes* | SendGrid API key for email (*or configure SMTP) |
+| `SMTP_HOST` | Yes* | SMTP server host (*if not using SendGrid direct) |
+| `SMTP_PORT` | No | SMTP server port (default: 587) |
+| `SMTP_USER` | Yes* | SMTP username |
+| `SMTP_PASS` | Yes* | SMTP password |
 | `SENDER_EMAIL` | Yes | From address for outgoing emails |
+| `OUTREACH_POSTAL_ADDRESS` | Yes* | Postal address for CAN-SPAM compliance footer (*required for sends) |
 | `SITE_BASE_URL` | No | Base URL for links in emails (default: https://traditional-astrology.com) |
 | `CORS_ORIGINS` | No | Comma-separated allowed origins (default: production + localhost) |
 
