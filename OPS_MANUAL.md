@@ -38,9 +38,25 @@ We are building a "Forensic Astrology" SaaS.
 -   **Always** verify the `action=regenerate` logic in `basic.js` after editing that file.
 -   **Disclaimer**: Always maintain the "Historical Use Only" legal shield.
 
-## 5. Current Task List (Snapshot)
+## 5. Outbound Outreach (Growth)
+**Tool**: `scripts/outreach_run.py`
+-   **Protocol**: Dry-run first, check logs, then send limited batches.
+-   **Compliance**: `OUTREACH_POSTAL_ADDRESS` must be set in Environment Variables.
+-   **Throttling**: Max 40/hr (default). Minimum 25s gap between sends.
+-   **Commands**:
+    ```bash
+    # Dry-run
+    python scripts/outreach_run.py --limit 10
+    
+    # Live send
+    $env:OUTREACH_POSTAL_ADDRESS = "..."
+    python scripts/outreach_run.py --send --limit 5 --segment teacher
+    ```
+
+## 6. Current Task List (Snapshot)
 See `task.md` for live status.
 -   [x] Phase 4 (SEO) Complete.
+-   [x] Outreach Automation implemented.
 -   [ ] Phase 5 (Launch/Monitoring) In Progress.
     -   Active: Monitoring First Sale.
     -   Active: Verifying SEO Indexing.
