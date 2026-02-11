@@ -194,6 +194,12 @@
             color: var(--danger);
         }
 
+        .action-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--primary);
+        }
+
         .notice {
             padding: 0.8rem 1rem;
             border: 1px solid var(--border-color);
@@ -287,6 +293,7 @@
   <a class="help-btn" href="techniques.html">Techniques</a>
   <a class="help-btn" href="documentation.html">Documentation</a>
   <a class="help-btn" href="demo.html">Demo</a>
+  <a class="help-btn" href="gig-economy.html">Gig Economy</a>
   <a class="help-btn" href="index.html#pricing">Pricing</a>
   <a class="help-btn" href="about.html">About</a>
   <a class="help-btn" href="faq.html">FAQ</a>
@@ -314,70 +321,208 @@
                 confirmation to prevent accidental removal of paid access.
             </div>
 
-            <div class="summary-grid" id="summaryGrid">
-                <div class="summary-card">
-                    <h3>Total Accounts</h3>
-                    <p id="summaryTotal">—</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Active</h3>
-                    <p id="summaryActive">—</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Trial</h3>
-                    <p id="summaryTrial">—</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Past Due</h3>
-                    <p id="summaryPastDue">—</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Free</h3>
-                    <p id="summaryFree">—</p>
-                </div>
-            </div>
-
-            <div class="filters">
-                <input type="search" id="searchInput" placeholder="Search by email">
-                <select id="planFilter"></select>
-                <select id="statusFilter">
-                    <option value="">All statuses</option>
-                    <option value="active">Active</option>
-                    <option value="trial">Trial</option>
-                    <option value="past_due">Past due</option>
-                    <option value="canceled">Canceled</option>
-                </select>
-                <select id="paymentFilter">
-                    <option value="">All payment states</option>
-                    <option value="paid">Paid</option>
-                    <option value="open">Open</option>
-                    <option value="uncollectible">Uncollectible</option>
-                    <option value="void">Void</option>
-                    <option value="none">No invoice</option>
-                </select>
-            </div>
-
             <div class="utility-row">
-                <button class="action-btn" onclick="exportCsv()">Export CSV</button>
-                <span class="muted-text" id="resultCount">0 results</span>
+                <button id="tabAccountsBtn" class="action-btn active" type="button" onclick="showTab('accounts')">Accounts</button>
+                <button id="tabLeadsBtn" class="action-btn" type="button" onclick="showTab('leads')">Leads</button>
+                <button id="tabOutreachBtn" class="action-btn" type="button" onclick="showTab('outreach')">Outreach</button>
+                <span class="muted-text" id="kpiStamp" style="margin-left:auto;">KPI loading...</span>
             </div>
 
-            <div style="overflow-x: auto;">
-                <table class="owner-table">
-                    <thead>
-                        <tr>
-                            <th>Account</th>
-                            <th>Subscription</th>
-                            <th>Payment</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ownerTableBody">
-                        <tr>
-                            <td colspan="4">Loading accounts...</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="summary-grid" id="kpiGrid">
+                <div class="summary-card">
+                    <h3>Leads Today</h3>
+                    <p id="kpiLeadsToday">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Leads 7D</h3>
+                    <p id="kpiLeads7d">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Signups Today</h3>
+                    <p id="kpiSignupsToday">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Signups 7D</h3>
+                    <p id="kpiSignups7d">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Active Trials</h3>
+                    <p id="kpiTrials">—</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Active Paid</h3>
+                    <p id="kpiPaid">—</p>
+                </div>
+            </div>
+
+            <div id="accountsView">
+                <div class="summary-grid" id="summaryGrid">
+                    <div class="summary-card">
+                        <h3>Total Accounts</h3>
+                        <p id="summaryTotal">—</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Active</h3>
+                        <p id="summaryActive">—</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Trial</h3>
+                        <p id="summaryTrial">—</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Past Due</h3>
+                        <p id="summaryPastDue">—</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Free</h3>
+                        <p id="summaryFree">—</p>
+                    </div>
+                </div>
+
+                <div class="filters">
+                    <input type="search" id="searchInput" placeholder="Search by email">
+                    <select id="planFilter"></select>
+                    <select id="statusFilter">
+                        <option value="">All statuses</option>
+                        <option value="active">Active</option>
+                        <option value="trial">Trial</option>
+                        <option value="past_due">Past due</option>
+                        <option value="canceled">Canceled</option>
+                    </select>
+                    <select id="paymentFilter">
+                        <option value="">All payment states</option>
+                        <option value="paid">Paid</option>
+                        <option value="open">Open</option>
+                        <option value="uncollectible">Uncollectible</option>
+                        <option value="void">Void</option>
+                        <option value="none">No invoice</option>
+                    </select>
+                </div>
+
+                <div class="utility-row">
+                    <button class="action-btn" onclick="exportCsv()">Export CSV</button>
+                    <span class="muted-text" id="resultCount">0 results</span>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="owner-table">
+                        <thead>
+                            <tr>
+                                <th>Account</th>
+                                <th>Subscription</th>
+                                <th>Payment</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ownerTableBody">
+                            <tr>
+                                <td colspan="4">Loading accounts...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="leadsView" class="hidden">
+                <div class="filters">
+                    <input type="search" id="leadsSearchInput" placeholder="Search leads by email">
+                    <select id="leadsSegmentFilter">
+                        <option value="">All segments</option>
+                        <option value="pdf_seller">PDF seller</option>
+                        <option value="content_creator">Content creator</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="studio">Studio</option>
+                    </select>
+                    <select id="leadsLimit">
+                        <option value="50">50</option>
+                        <option value="200" selected>200</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                    </select>
+                </div>
+
+                <div class="utility-row">
+                    <button class="action-btn" onclick="refreshLeads()">Refresh Leads</button>
+                    <button class="action-btn" onclick="exportLeadsCsv()">Export Leads CSV</button>
+                    <span class="muted-text" id="leadsCount">0 leads</span>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="owner-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Segment</th>
+                                <th>Platform</th>
+                                <th>Volume</th>
+                                <th>Bottleneck</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody">
+                            <tr>
+                                <td colspan="6">Loading leads...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="outreachView" class="hidden">
+                <div class="filters">
+                    <input type="search" id="outreachSearchInput" placeholder="Search targets by name">
+                    <select id="outreachSegmentFilter">
+                        <option value="">All segments</option>
+                        <option value="pdf_seller">PDF seller</option>
+                        <option value="content_creator">Content creator</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="studio">Studio</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <select id="outreachPlatformFilter">
+                        <option value="">All platforms</option>
+                        <option value="website">Website</option>
+                        <option value="email">Email</option>
+                        <option value="etsy">Etsy</option>
+                        <option value="substack">Substack</option>
+                        <option value="patreon">Patreon</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select id="outreachLimit">
+                        <option value="50">50</option>
+                        <option value="200">200</option>
+                        <option value="500" selected>500</option>
+                        <option value="2000">2000</option>
+                    </select>
+                </div>
+
+                <div class="utility-row">
+                    <button class="action-btn" onclick="refreshOutreach()">Refresh Targets</button>
+                    <button class="action-btn" onclick="exportOutreachCsv()">Export Outreach CSV</button>
+                    <span class="muted-text" id="outreachCount">0 targets</span>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="owner-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Segment</th>
+                                <th>Platform</th>
+                                <th>Primary</th>
+                                <th>Secondary</th>
+                                <th>Notes</th>
+                                <th>Verified</th>
+                            </tr>
+                        </thead>
+                        <tbody id="outreachTableBody">
+                            <tr>
+                                <td colspan="7">Loading targets...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
     </main>
@@ -403,6 +548,29 @@
         let plans = [];
         let pendingDowngrade = null;
         let lastUsers = [];
+        let lastLeads = [];
+        let lastOutreach = [];
+        let activeTab = "accounts";
+
+        function showTab(name) {
+            activeTab = (name === "leads" || name === "outreach") ? name : "accounts";
+            const accountsView = document.getElementById("accountsView");
+            const leadsView = document.getElementById("leadsView");
+            const outreachView = document.getElementById("outreachView");
+            const btnA = document.getElementById("tabAccountsBtn");
+            const btnL = document.getElementById("tabLeadsBtn");
+            const btnO = document.getElementById("tabOutreachBtn");
+
+            if (accountsView) accountsView.classList.toggle("hidden", activeTab !== "accounts");
+            if (leadsView) leadsView.classList.toggle("hidden", activeTab !== "leads");
+            if (outreachView) outreachView.classList.toggle("hidden", activeTab !== "outreach");
+            if (btnA) btnA.classList.toggle("active", activeTab === "accounts");
+            if (btnL) btnL.classList.toggle("active", activeTab === "leads");
+            if (btnO) btnO.classList.toggle("active", activeTab === "outreach");
+
+            if (activeTab === "leads") refreshLeads();
+            if (activeTab === "outreach") refreshOutreach();
+        }
 
         async function verifyOwner() {
             const token = localStorage.getItem('cael_auth_token');
@@ -440,6 +608,15 @@
             return value ? new Date(value).toLocaleDateString() : '—';
         }
 
+        function escapeHtml(value) {
+            return String(value || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
         function statusBadge(status) {
             const normalized = status || 'none';
             return `<span class="badge ${normalized}">${normalized.replace('_', ' ')}</span>`;
@@ -475,6 +652,7 @@
 
             updateSummary(users);
             body.innerHTML = users.map(user => {
+                const email = escapeHtml(user.email);
                 const currentPlan = user.subscription.plan_tier || 'free';
                 const status = user.subscription.status || 'none';
                 const paymentStatus = user.payment.status || 'none';
@@ -486,7 +664,7 @@
                 return `
                     <tr>
                         <td>
-                            <div><strong>${user.email}</strong></div>
+                            <div><strong>${email}</strong></div>
                             <div style="color: var(--text-muted); margin-top: 0.3rem;">
                                 Joined ${formatDate(user.created_at)}<br>
                                 Last login ${formatDate(user.last_login)}<br>
@@ -684,6 +862,186 @@
             if (token) await loadUsers(token);
         }
 
+        async function loadKpis(token) {
+            const stamp = document.getElementById("kpiStamp");
+            try {
+                const resp = await fetch(apiUrl('/api/v1/owner/kpis'), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "KPI fetch failed");
+
+                document.getElementById("kpiLeadsToday").textContent = data.leads?.today ?? "—";
+                document.getElementById("kpiLeads7d").textContent = data.leads?.last_7d ?? "—";
+                document.getElementById("kpiSignupsToday").textContent = data.signups?.today ?? "—";
+                document.getElementById("kpiSignups7d").textContent = data.signups?.last_7d ?? "—";
+                document.getElementById("kpiTrials").textContent = data.subscriptions?.active_trials ?? "—";
+                document.getElementById("kpiPaid").textContent = data.subscriptions?.active_paid ?? "—";
+                if (stamp) stamp.textContent = `KPI as of ${new Date(data.now || Date.now()).toLocaleString()}`;
+            } catch (e) {
+                if (stamp) stamp.textContent = `KPI error: ${e.message}`;
+            }
+        }
+
+        async function loadLeads(token) {
+            const q = (document.getElementById('leadsSearchInput')?.value || "").trim();
+            const segment = (document.getElementById('leadsSegmentFilter')?.value || "").trim();
+            const limit = parseInt(document.getElementById('leadsLimit')?.value || "200", 10) || 200;
+            const params = new URLSearchParams();
+            params.append("limit", String(limit));
+            if (q) params.append("q", q);
+            if (segment) params.append("segment", segment);
+
+            const resp = await fetch(apiUrl(`/api/v1/owner/leads?${params.toString()}`), {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await resp.json();
+            if (!resp.ok) throw new Error(data.detail || "Lead fetch failed");
+            lastLeads = data.leads || [];
+            renderLeads(lastLeads);
+        }
+
+        function renderLeads(leads) {
+            const body = document.getElementById("leadsTableBody");
+            const count = document.getElementById("leadsCount");
+            if (count) count.textContent = `${leads.length} leads`;
+            if (!body) return;
+            if (!leads.length) {
+                body.innerHTML = '<tr><td colspan="6">No leads found.</td></tr>';
+                return;
+            }
+            body.innerHTML = leads.map(l => `
+                <tr>
+                    <td><strong>${escapeHtml(l.email || "—")}</strong></td>
+                    <td>${escapeHtml(l.segment || "—")}</td>
+                    <td>${escapeHtml(l.platform || "—")}</td>
+                    <td>${escapeHtml(l.volume || "—")}</td>
+                    <td>${escapeHtml(l.pain || "—")}</td>
+                    <td>${formatDate(l.created_at)}</td>
+                </tr>
+            `).join('');
+        }
+
+        async function refreshLeads() {
+            const token = localStorage.getItem('cael_auth_token');
+            if (!token) return;
+            try {
+                await loadLeads(token);
+            } catch (e) {
+                const body = document.getElementById("leadsTableBody");
+                if (body) body.innerHTML = `<tr><td colspan="6">Error: ${e.message}</td></tr>`;
+            }
+        }
+
+        function exportLeadsCsv() {
+            if (!lastLeads.length) {
+                alert('No leads to export.');
+                return;
+            }
+            const headers = ['email', 'segment', 'platform', 'volume', 'pain', 'url', 'created_at'];
+            const rows = lastLeads.map(l => [
+                l.email || '',
+                l.segment || '',
+                l.platform || '',
+                l.volume || '',
+                l.pain || '',
+                l.url || '',
+                l.created_at || ''
+            ]);
+            const csv = [headers, ...rows].map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'owner-leads.csv';
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(url);
+            link.remove();
+        }
+
+        async function loadOutreachTargets(token) {
+            const q = (document.getElementById('outreachSearchInput')?.value || "").trim();
+            const segment = (document.getElementById('outreachSegmentFilter')?.value || "").trim();
+            const platform = (document.getElementById('outreachPlatformFilter')?.value || "").trim();
+            const limit = parseInt(document.getElementById('outreachLimit')?.value || "500", 10) || 500;
+
+            const params = new URLSearchParams();
+            params.append("limit", String(limit));
+            if (q) params.append("q", q);
+            if (segment) params.append("segment", segment);
+            if (platform) params.append("platform_primary", platform);
+
+            const resp = await fetch(apiUrl(`/api/v1/owner/outreach-targets?${params.toString()}`), {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await resp.json();
+            if (!resp.ok) throw new Error(data.detail || "Outreach targets fetch failed");
+            lastOutreach = data.targets || [];
+            renderOutreach(lastOutreach);
+        }
+
+        function renderOutreach(targets) {
+            const body = document.getElementById("outreachTableBody");
+            const count = document.getElementById("outreachCount");
+            if (count) count.textContent = `${targets.length} targets`;
+            if (!body) return;
+            if (!targets.length) {
+                body.innerHTML = '<tr><td colspan="7">No targets found.</td></tr>';
+                return;
+            }
+            body.innerHTML = targets.map(t => `
+                <tr>
+                    <td><strong>${escapeHtml(t.name || "—")}</strong></td>
+                    <td>${escapeHtml(t.segment || "—")}</td>
+                    <td>${escapeHtml(t.platform_primary || "—")}</td>
+                    <td>${escapeHtml(t.primary_contact || "—")}</td>
+                    <td>${escapeHtml(t.secondary_contact || "—")}</td>
+                    <td>${escapeHtml(t.notes || "—")}</td>
+                    <td>${escapeHtml(t.last_verified || "—")}</td>
+                </tr>
+            `).join('');
+        }
+
+        async function refreshOutreach() {
+            const token = localStorage.getItem('cael_auth_token');
+            if (!token) return;
+            try {
+                await loadOutreachTargets(token);
+            } catch (e) {
+                const body = document.getElementById("outreachTableBody");
+                if (body) body.innerHTML = `<tr><td colspan="7">Error: ${escapeHtml(e.message)}</td></tr>`;
+            }
+        }
+
+        function exportOutreachCsv() {
+            if (!lastOutreach.length) {
+                alert('No targets to export.');
+                return;
+            }
+            const headers = ['name', 'segment', 'platform_primary', 'primary_contact', 'secondary_contact', 'notes', 'source', 'last_verified'];
+            const rows = lastOutreach.map(t => [
+                t.name || '',
+                t.segment || '',
+                t.platform_primary || '',
+                t.primary_contact || '',
+                t.secondary_contact || '',
+                t.notes || '',
+                t.source || '',
+                t.last_verified || ''
+            ]);
+            const csv = [headers, ...rows].map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'owner-outreach-targets.csv';
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(url);
+            link.remove();
+        }
+
         function logout() {
             localStorage.removeItem('cael_auth_token');
             localStorage.removeItem('cael_user');
@@ -695,12 +1053,21 @@
             if (!token) return;
             await loadPlans(token);
             await loadUsers(token);
+            await loadKpis(token);
+            showTab("accounts");
         }
 
         document.getElementById('searchInput').addEventListener('input', () => refreshUsers());
         document.getElementById('planFilter').addEventListener('change', () => refreshUsers());
         document.getElementById('statusFilter').addEventListener('change', () => refreshUsers());
         document.getElementById('paymentFilter').addEventListener('change', () => refreshUsers());
+        document.getElementById('leadsSearchInput').addEventListener('input', () => refreshLeads());
+        document.getElementById('leadsSegmentFilter').addEventListener('change', () => refreshLeads());
+        document.getElementById('leadsLimit').addEventListener('change', () => refreshLeads());
+        document.getElementById('outreachSearchInput').addEventListener('input', () => refreshOutreach());
+        document.getElementById('outreachSegmentFilter').addEventListener('change', () => refreshOutreach());
+        document.getElementById('outreachPlatformFilter').addEventListener('change', () => refreshOutreach());
+        document.getElementById('outreachLimit').addEventListener('change', () => refreshOutreach());
 
         init();
     </script>

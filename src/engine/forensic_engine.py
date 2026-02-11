@@ -218,7 +218,6 @@ class Auditor:
         analysis = {}
         analysis[ "dignity" ] = Auditor._calculate_dignity_suite(chart)
         analysis[ "fate" ] = Auditor._calculate_fate_suite(chart, birth_dt, ans_date)
-        analysis[ "medical" ] = Auditor._calculate_medical_suite(chart)
         analysis[ "teams" ] = Auditor._calculate_teams_and_reception(chart)
         analysis[ "temperament" ] = TemperamentEngine.calculate_temperament(chart)
         analysis[ "aspects" ] = AspectEngine.calculate_aspects(chart)
@@ -891,7 +890,7 @@ class Auditor:
         legacy = {
             "summary": {
                 "sect": Sect.DAY.value if chart.sun_altitude > 0 else Sect.NIGHT.value,
-                "temperament": analysis["medical"]["distemper"],
+                "temperament": analysis.get("temperament", {}),
                 "lunar_mansion": LunarMansionEngine.get_lunar_mansion(moon.longitude),
                 "mutual_receptions": teams["receptions"],
                 "constructive_team": teams["constructive_team"],
@@ -905,11 +904,6 @@ class Auditor:
                 "job_description": f"Sovereign {analysis['dignity']['almuten']['winner']}"
             },
             "vitality": {"vitality_rating": "Stable (Calculated by Auditor)"},
-            "medical_analysis": {
-                "governed_body_part": analysis["medical"]["constitution"],
-                "constitutional_sign": list(Sign)[int(chart.ascendant / 30) % 12].value,
-                "pathology_alerts": analysis["medical"].get("surgery_risk", {}).get("contra_indications", [])
-            },
             "primary_directions": analysis["fate"]["primary_directions"],
             "primary_direction_distributor": analysis["fate"].get("primary_direction_distributor", {}),
             "profections": profections,

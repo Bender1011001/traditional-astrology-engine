@@ -134,7 +134,9 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.googletagmanager.com https://cdn.jsdelivr.net; "
             "font-src 'self' https://fonts.gstatic.com; "
             "img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.doubleclick.net https://fastapi.tiangolo.com; "
-            "connect-src 'self' https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com;"
+            # NOTE: frontend may be hosted separately (e.g., GitHub Pages) and call the Render API origin.
+            # If frontend is served by this app, CSP must allow that API origin or fetch() will be blocked.
+            "connect-src 'self' https://astrology-engine.onrender.com https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com;"
         )
         return response
 

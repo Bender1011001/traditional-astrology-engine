@@ -107,3 +107,32 @@ class AdminNotificationService:
 
         for admin_email in admin_emails:
             send_email(to_email=admin_email, subject=subject, html_content=html_content)
+
+    @staticmethod
+    def notify_lead_captured(email: str, segment: str = "", platform: str = "", volume: str = "", pain: str = "", url: str = "", ua: str = ""):
+        """
+        Notifies admin when a marketing lead is captured.
+
+        This is intentionally minimal and operational. No medical, legal, or financial advice is involved.
+        """
+        admin_emails = AdminNotificationService._get_admin_emails()
+        if not admin_emails:
+            logging.warning("No OWNER_EMAILS configured for lead capture notification.")
+            return
+
+        subject = f"New Lead Captured: {email}"
+        html_content = f"""
+        <h2>New Lead Captured</h2>
+        <ul>
+            <li><b>Email:</b> {email}</li>
+            <li><b>Segment:</b> {segment or 'N/A'}</li>
+            <li><b>Platform:</b> {platform or 'N/A'}</li>
+            <li><b>Volume:</b> {volume or 'N/A'}</li>
+            <li><b>Bottleneck:</b> {pain or 'N/A'}</li>
+            <li><b>URL:</b> {url or 'N/A'}</li>
+            <li><b>User-Agent:</b> {ua or 'N/A'}</li>
+        </ul>
+        """
+
+        for admin_email in admin_emails:
+            send_email(to_email=admin_email, subject=subject, html_content=html_content)

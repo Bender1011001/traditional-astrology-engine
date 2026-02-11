@@ -17,7 +17,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 from src.engine.cache_manager import get_from_cache, set_to_cache
-from src.engine.chat_oracle import explain_reading_in_plain_terms
 from src.engine.prediction import AdvancedPredictionEngine
 from src.api.v1.utils import log_event as _log_event # Alias for compatibility or clarity
 from src.middleware.quota import verify_quota
@@ -214,23 +213,9 @@ async def calculate_chart(
     if plan_tier:
         final_result["meta"]["plan_tier"] = plan_tier
 
-    # LLM Optional Step (Plain Language Reading)
-    try:
-        if tier != 'free':
-            from src.engine.chat_oracle import explain_reading_in_plain_terms
-            # We'll need to wrap this if it's slow/heavy
-            plain_reading = explain_reading_in_plain_terms(final_result["report_markdown"], tier=tier)
-            if plain_reading:
-                final_result["plain_reading"] = plain_reading
-        
-        # Fallback for free tier or if LLM fails
-        if not final_result.get("plain_reading"):
-            final_result["plain_reading"] = final_result.get("executive_summary", "Reading unavailable. Please try again.")
-            
-    except Exception as pe:
-        logger.error(f"Plain Reading Failure: {pe}")
-        if not final_result.get("plain_reading"):
-            final_result["plain_reading"] = final_result.get("executive_summary", "Reading unavailable. Please try again.")
+    # Safety: do not run LLM/oracle interpretation in production API responses.
+    # Keep deterministic executive summary only.
+    final_result["plain_reading"] = final_result.get("executive_summary", "Reading unavailable. Please try again.")
 
     # SAVE TO CACHE
     set_to_cache(chart_hash, tier, final_result)
@@ -265,6 +250,11 @@ async def calculate_chart(
 # ============================================================================
 
 from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
+from typing import List as _List
+from io import BytesIO
+import zipfile
+import re
 
 
 @router.get("/saved")
@@ -332,14 +322,15 @@ async def download_chart_pdf(chart_index: int, current_user: User = Depends(get_
         # Generate PDF
         from src.engine.pdf_generator import PDFReportGenerator
         
+        report_md = engine_result.get("human_translation", {}).get("report_markdown", "") or ""
         pdf_data = {
             "meta": engine_result.get("technical_data", {}).get("meta", {}),
             "forensic_report": engine_result.get("technical_data", {}).get("analysis", {}),
-            "plain_reading": engine_result.get("human_translation", {}).get("report_markdown", "")
         }
-        
+
         generator = PDFReportGenerator(pdf_data)
-        pdf_buffer = generator.generate()
+        # Prefer the deterministic markdown report body (safer than medical/decisioning tables).
+        pdf_buffer = generator.generate(custom_content=report_md if report_md else None)
         
         # Create filename from chart name or date
         chart_name = chart_meta.get("name", "chart").replace(" ", "_")
@@ -379,4 +370,91 @@ async def delete_saved_chart(
     db.commit()
     
     return {"success": True, "message": "Chart deleted"}
+
+
+class BulkPdfRequest(BaseModel):
+    items: _List[ChartRequest]
+    filename_prefix: str = "codex_caelestis"
+
+
+def _safe_filename(s: str) -> str:
+    s = (s or "").strip().lower()
+    s = re.sub(r"[^a-z0-9._-]+", "_", s)
+    return s.strip("._-") or "report"
+
+
+@router.post("/bulk/pdf")
+async def bulk_generate_pdfs(
+    payload: BulkPdfRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Generate a ZIP of PDFs from a batch of ChartRequests.
+
+    Safety: authenticated users only; intended for professional use.
+    """
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+
+    sub = current_user.subscription
+    if not sub or not sub.plan or sub.status not in {"active", "trial"}:
+        raise HTTPException(status_code=403, detail="Active subscription required")
+    if sub.plan.tier not in {"practitioner", "studio"}:
+        raise HTTPException(status_code=403, detail="Upgrade required")
+
+    items = payload.items or []
+    if not items:
+        raise HTTPException(status_code=400, detail="No items provided")
+
+    max_items = 20 if sub.plan.tier == "practitioner" else 200
+    if len(items) > max_items:
+        raise HTTPException(status_code=400, detail=f"Too many items (max {max_items})")
+
+    zip_buf = BytesIO()
+    errors = []
+
+    with zipfile.ZipFile(zip_buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        for idx, it in enumerate(items, start=1):
+            try:
+                engine_result = await generate_full_nativity_async(
+                    date_str=it.date,
+                    time_str=it.time,
+                    city=it.city,
+                    state=it.state or "",
+                    name=it.name or "Native",
+                    house_system=it.house_system or "W",
+                    zodiac_system=it.zodiac_system or "tropical",
+                    ayanamsa=it.ayanamsa
+                )
+                if "error" in engine_result:
+                    raise ValueError(engine_result["error"])
+
+                report_md = engine_result.get("human_translation", {}).get("report_markdown", "") or ""
+                pdf_data = {
+                    "meta": engine_result.get("technical_data", {}).get("meta", {}),
+                    "forensic_report": engine_result.get("technical_data", {}).get("analysis", {}),
+                }
+                from src.engine.pdf_generator import PDFReportGenerator
+                gen = PDFReportGenerator(pdf_data)
+                pdf_buffer = gen.generate(custom_content=report_md if report_md else None)
+                pdf_bytes = pdf_buffer.getvalue()
+                gen.buffer.close()
+
+                name = _safe_filename(it.name or f"native_{idx}")
+                date_part = _safe_filename(it.date or "")
+                fn = f"{_safe_filename(payload.filename_prefix)}_{idx:03d}_{name}_{date_part}.pdf"
+                zf.writestr(fn, pdf_bytes)
+            except Exception as e:
+                errors.append(f"Item {idx}: {str(e)}")
+
+        if errors:
+            zf.writestr("errors.txt", "\n".join(errors) + "\n")
+
+    zip_buf.seek(0)
+    out_name = f"{_safe_filename(payload.filename_prefix)}_pdf_pack.zip"
+    return StreamingResponse(
+        zip_buf,
+        media_type="application/zip",
+        headers={"Content-Disposition": f"attachment; filename={out_name}"},
+    )
 

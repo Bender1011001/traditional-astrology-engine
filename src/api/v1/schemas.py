@@ -94,3 +94,21 @@ class ReadingFeedback(BaseModel):
     time_unknown: Optional[bool] = False
     session_id: Optional[str] = None
     ts: Optional[str] = None
+
+
+class LeadCapture(BaseModel):
+    """
+    Lightweight lead capture for marketing funnels.
+
+    Notes:
+    - We do NOT store sensitive birth data here.
+    - Historical Use Only disclaimer remains on-site; this endpoint is purely operational.
+    """
+
+    email: str
+    segment: Optional[str] = None  # pdf_seller | content_creator | teacher | studio
+    platform: Optional[str] = None
+    volume: Optional[str] = None
+    pain: Optional[str] = None
+    url: Optional[str] = None
+    ua: Optional[str] = None

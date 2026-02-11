@@ -154,6 +154,7 @@
   <a class="help-btn" href="techniques.html">Techniques</a>
   <a class="help-btn" href="documentation.html">Documentation</a>
   <a class="help-btn" href="demo.html">Demo</a>
+  <a class="help-btn" href="gig-economy.html">Gig Economy</a>
   <a class="help-btn" href="index.html#pricing">Pricing</a>
   <a class="help-btn" href="about.html">About</a>
   <a class="help-btn" href="faq.html">FAQ</a>
@@ -272,7 +273,8 @@
                     msg.style.color = "var(--success)";
 
                     setTimeout(() => {
-                        window.location.href = "index.html";
+                        // Go directly to dashboard so the user can start trial/checkout immediately.
+                        window.location.href = "profile.html";
                     }, 1000);
                 } else {
                     const text = await resp.text();

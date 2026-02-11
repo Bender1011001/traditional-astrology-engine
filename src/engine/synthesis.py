@@ -55,29 +55,19 @@ class ReportSynthesizer:
     @staticmethod
     def _generate_constitution(report: Dict) -> str:
         summary = report.get("summary", {})
-        medical = report.get("medical_analysis", {})
-        
-        # Temperament Fix
-        temp_data = summary.get('temperament', {})
+
+        # Temperament (non-medical, historical personality-qualities framing only)
+        temp_data = summary.get("temperament", {})
         if isinstance(temp_data, dict):
-            primary_temp = temp_data.get('primary_temperament', temp_data.get('excess_humor', 'Unknown'))
+            primary_temp = temp_data.get("primary_temperament", "Unknown")
         else:
             primary_temp = str(temp_data)
 
-        text = "## I. THE CONSTITUTION: HUMORAL & PHYSICAL BASELINE\n"
+        text = "## I. SECT & TEMPERAMENT (HISTORICAL)\n"
+        text += f"**Sect:** {summary.get('sect', 'Unknown')}\n"
         text += f"**Temperament:** {primary_temp}\n"
-        text += f"**Dominant Elements:** {', '.join([f'{k} ({v})' for k, v in summary.get('dominant_elements', [])])}\n"
-        text += f"**Medical Governance:** {medical.get('governed_body_part', 'Unknown')} (Sign: {medical.get('constitutional_sign', 'N/A')})\n"
-        
-        if medical.get("pathology_alerts"):
-            alerts = []
-            for alert in medical["pathology_alerts"]:
-                if isinstance(alert, dict):
-                    alerts.append(f"{alert.get('type', 'Alert')}: {alert.get('condition', 'Unknown')}")
-                else:
-                    alerts.append(str(alert))
-            text += "**Pathology Alerts:** " + "; ".join(alerts) + "\n"
-            
+        text += "\n"
+        text += "_Historical Use Only. This section is not medical advice, diagnosis, or treatment._\n"
         return text
 
     @staticmethod

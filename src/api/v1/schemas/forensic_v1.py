@@ -23,8 +23,8 @@ class ForensicPlanet(BaseModel):
 class ForensicAnalysis(BaseModel):
     dignity: Dict[str, Any]
     fate: Dict[str, Any]
-    medical: Dict[str, Any]
     teams: Dict[str, Any]
+    temperament: Optional[Dict[str, Any]] = None
     aspects: List[Dict[str, Any]]
 
 class AstronomyData(BaseModel):

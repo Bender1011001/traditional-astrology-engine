@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends, Header, HTTPException, status
@@ -8,7 +8,7 @@ from src.api.v1.auth import get_current_user
 from src.api.v1.schemas import OwnerSubscriptionUpdateRequest
 from src.core.config import settings
 from src.database.core import get_db
-from src.database.models import Invoice, SubscriptionPlan, User, UserSubscription
+from src.database.models import Invoice, Lead, OutreachTarget, SubscriptionPlan, User, UserSubscription
 
 router = APIRouter()
 
@@ -189,4 +189,134 @@ def update_subscription(
             "current_period_end": sub.current_period_end.isoformat() if sub.current_period_end else None,
             "cancel_at_period_end": sub.cancel_at_period_end,
         },
+    }
+
+
+@router.get("/leads")
+def list_leads(
+    owner: Optional[User] = Depends(require_owner),
+    db: Session = Depends(get_db),
+    limit: int = 200,
+    q: Optional[str] = None,
+    segment: Optional[str] = None,
+):
+    limit = max(1, min(int(limit or 200), 1000))
+    query = db.query(Lead)
+    if q:
+        qn = q.strip().lower()
+        if qn:
+            query = query.filter(Lead.email.ilike(f"%{qn}%"))
+    if segment:
+        seg = segment.strip().lower()
+        if seg:
+            query = query.filter(Lead.segment == seg)
+
+    leads = query.order_by(Lead.created_at.desc()).limit(limit).all()
+    return {
+        "leads": [
+            {
+                "id": l.id,
+                "email": l.email,
+                "segment": l.segment,
+                "platform": l.platform,
+                "volume": l.volume,
+                "pain": l.pain,
+                "url": l.url,
+                "created_at": l.created_at.isoformat() if l.created_at else None,
+            }
+            for l in leads
+        ]
+    }
+
+
+@router.get("/kpis")
+def owner_kpis(
+    owner: Optional[User] = Depends(require_owner),
+    db: Session = Depends(get_db),
+):
+    """
+    Minimal KPI snapshot for launch monitoring.
+
+    Notes:
+    - Derived from DB tables (users, subscriptions, leads).
+    - If you need Stripe-reconciled MRR, we will layer that on via invoice/subscription sync.
+    """
+    now = datetime.utcnow()
+    today_start = datetime(now.year, now.month, now.day)
+    week_start = now - timedelta(days=7)
+
+    leads_today = db.query(Lead).filter(Lead.created_at >= today_start).count()
+    leads_7d = db.query(Lead).filter(Lead.created_at >= week_start).count()
+
+    signups_today = db.query(User).filter(User.created_at >= today_start).count()
+    signups_7d = db.query(User).filter(User.created_at >= week_start).count()
+
+    # Trial and paid states are modeled on UserSubscription.status and plan tier.
+    active_trials = (
+        db.query(UserSubscription)
+        .outerjoin(SubscriptionPlan)
+        .filter(UserSubscription.status == "trial")
+        .filter(SubscriptionPlan.tier.in_(["practitioner", "studio"]))
+        .count()
+    )
+    active_paid = (
+        db.query(UserSubscription)
+        .outerjoin(SubscriptionPlan)
+        .filter(UserSubscription.status == "active")
+        .filter(SubscriptionPlan.tier.in_(["practitioner", "studio"]))
+        .count()
+    )
+
+    return {
+        "now": now.isoformat(),
+        "leads": {"today": leads_today, "last_7d": leads_7d},
+        "signups": {"today": signups_today, "last_7d": signups_7d},
+        "subscriptions": {"active_trials": active_trials, "active_paid": active_paid},
+    }
+
+
+@router.get("/outreach-targets")
+def list_outreach_targets(
+    owner: Optional[User] = Depends(require_owner),
+    db: Session = Depends(get_db),
+    limit: int = 500,
+    q: Optional[str] = None,
+    segment: Optional[str] = None,
+    platform_primary: Optional[str] = None,
+):
+    limit = max(1, min(int(limit or 500), 2000))
+    query = db.query(OutreachTarget)
+
+    if q:
+        qn = q.strip().lower()
+        if qn:
+            query = query.filter(OutreachTarget.name.ilike(f"%{qn}%"))
+
+    if segment:
+        seg = segment.strip().lower()
+        if seg:
+            query = query.filter(OutreachTarget.segment == seg)
+
+    if platform_primary:
+        pp = platform_primary.strip().lower()
+        if pp:
+            query = query.filter(OutreachTarget.platform_primary == pp)
+
+    targets = query.order_by(OutreachTarget.name.asc()).limit(limit).all()
+    return {
+        "targets": [
+            {
+                "id": t.id,
+                "name": t.name,
+                "segment": t.segment,
+                "platform_primary": t.platform_primary,
+                "primary_contact": t.primary_contact,
+                "secondary_contact": t.secondary_contact,
+                "notes": t.notes,
+                "source": t.source,
+                "last_verified": t.last_verified,
+                "created_at": t.created_at.isoformat() if t.created_at else None,
+            }
+            for t in targets
+        ]
     }

@@ -193,8 +193,10 @@ class PDFReportGenerator:
 
         # Footer / Disclaimer
         story.append(Spacer(1, 24))
-        disclaimer = ("MEDICAL DISCLAIMER: This report is for historical and educational research purposes only. "
-                      "It is NOT medical advice. Do not use for health decisions.")
+        disclaimer = (
+            "HISTORICAL USE ONLY: This report provides traditional calculations and technical exports. "
+            "It is not medical, legal, or financial advice. Do not use it to make health, legal, or investment decisions."
+        )
         story.append(Paragraph(disclaimer, self.styles['NormalSmall']))
 
         doc.build(story)
@@ -231,18 +233,16 @@ class PDFReportGenerator:
         story.append(t)
         story.append(Spacer(1, 18))
 
-        # Section III: Temperament
-        story.append(Paragraph("III. Temperament & Melothesia", self.styles['Header1']))
+        # Section III: Temperament (non-medical framing)
+        story.append(Paragraph("III. Temperament (Historical)", self.styles['Header1']))
         temp = forensic.get("temperament", {})
         if not temp and "summary" in forensic:
             temp = forensic["summary"].get("temperament", {})
-        
-        medical = forensic.get("medical", {})
-        
+
         temp_data = [
             ["Primary Temperament", temp.get("primary_temperament", "Unknown")],
-            ["Humoral Mixture", temp.get("humoral_mixture", "Unknown")],
-            ["Medical Melothesia", medical.get("constitution", "Unknown")]
+            ["Hot/Cold Balance", str((temp.get("net_balance") or {}).get("Hot_vs_Cold", "Unknown"))],
+            ["Moist/Dry Balance", str((temp.get("net_balance") or {}).get("Moist_vs_Dry", "Unknown"))],
         ]
         t = Table(temp_data, colWidths=[2*inch, 4*inch])
         t.setStyle(TableStyle([

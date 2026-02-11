@@ -138,3 +138,76 @@ class AstrologicalDelineation(Base):
     is_manual_override = Column(Boolean, default=False)  # Flag to prevent auto-overwrite
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+class Lead(Base):
+    """
+    Marketing lead capture (operational intake).
+
+    Safety:
+    - No birth data is stored here.
+    - This is strictly for product/market fit and outreach operations.
+    """
+
+    __tablename__ = "leads"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    email = Column(String, nullable=False, index=True)
+    segment = Column(String, nullable=True, index=True)
+    platform = Column(String, nullable=True)
+    volume = Column(String, nullable=True)
+    pain = Column(String, nullable=True)
+    url = Column(String, nullable=True)
+    ua = Column(String, nullable=True)
+    ip = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+
+
+class OutreachTarget(Base):
+    """
+    Outbound outreach targets (from research / manual compilation).
+
+    This is not inbound "lead capture" from the website; it's a curated list
+    of people/shops/platform identities we want to contact.
+    """
+
+    __tablename__ = "outreach_targets"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = Column(String, nullable=False, index=True)
+    segment = Column(String, nullable=True, index=True)  # teacher | content_creator | pdf_seller | studio | unknown
+    platform_primary = Column(String, nullable=True, index=True)  # etsy | substack | patreon | website | instagram | other
+    primary_contact = Column(String, nullable=True)
+    secondary_contact = Column(String, nullable=True)
+    notes = Column(String, nullable=True)
+    source = Column(String, nullable=True)  # e.g., docs/research/... file name
+    last_verified = Column(String, nullable=True)  # ISO date string (lightweight, avoids TZ issues)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+
+
+class OutreachAttempt(Base):
+    """
+    Tracks outbound outreach attempts (email only for now).
+
+    We intentionally separate this from inbound "Lead" capture:
+    - OutreachTarget: who we plan to contact
+    - OutreachAttempt: what we attempted/sent, and when
+    """
+
+    __tablename__ = "outreach_attempts"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    target_id = Column(String, ForeignKey("outreach_targets.id"), index=True)
+
+    channel = Column(String, nullable=False, default="email")  # email | etsy_message | instagram_dm | contact_form
+    to_addr = Column(String, nullable=True, index=True)
+    subject = Column(String, nullable=True)
+    template_id = Column(String, nullable=True)  # e.g., teacher_v1
+
+    status = Column(String, nullable=False, default="queued")  # queued | sent | failed | skipped
+    error_message = Column(String, nullable=True)
+
+    sent_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+
+    target = relationship("OutreachTarget")

@@ -306,21 +306,16 @@ function setupModals() {
     // window.startCheckout is already defined at top level to use pricing.js
     // window.openPaywall is defined above
 
-    // Email Form
+    // Email Form (disabled: avoid being an email relay / consent risk)
     const emailForm = document.getElementById("emailForm");
     if (emailForm) {
         emailForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById("captureEmail").value;
             try {
-                document.getElementById("emailStatus").textContent = "Sending...";
-                await fetch(apiUrl("/api/v1/content/email-pdf"), {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email, chart_data: window.currentChartData, consent: true })
-                });
-                document.getElementById("emailStatus").textContent = "Sent!";
-                setTimeout(() => emailModal.classList.add('hidden'), 2000);
+                const statusEl = document.getElementById("emailStatus");
+                if (statusEl) {
+                    statusEl.textContent = "Email delivery is disabled. Download PDFs from your dashboard (Profile).";
+                }
             } catch (e) {
                 document.getElementById("emailStatus").textContent = "Error.";
             }

@@ -45,6 +45,9 @@ test_*.py
 test_credentials.txt
 !tests/
 
+# Local secret dumps (never commit)
+secret_history.txt
+
 # Large documentation / reference material
 Binder1.txt
 binder_chunks/

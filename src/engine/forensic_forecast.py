@@ -81,43 +81,8 @@ def calculate_5_day_forecast(natal_chart: Chart, birth_jd: float, start_date: da
         # C. Epitasis Check
         # Is the Daily Profection Sign the sign where the Lord of the Year is currently transiting?
         is_epitasis = (day_sign == loy_trans_sign)
-        
-        # D. Medical Transits (Body Weather)
-        # Check Mars and Saturn hits to natal planets
-        mars_trans_lon = swe.calc_ut(target_jd, swe.MARS, flags)[0][0]
-        saturn_trans_lon = swe.calc_ut(target_jd, swe.SATURN, flags)[0][0]
-        
-        medical_alerts = []
-        for p in natal_chart.planets:
-            # Check Mars/Saturn hits
-            for t_name, t_lon in [("Mars", mars_trans_lon), ("Saturn", saturn_trans_lon)]:
-                diff = abs(t_lon - p.longitude) % 360
-                if diff > 180: diff = 360 - diff
-                
-                if diff < 2.0: # Close orb for forecast
-                    # Map sign to body part
-                    sign = p.sign
-                    body_part = {
-                        Sign.ARIES: "Head/Eyes",
-                        Sign.TAURUS: "Throat/Neck",
-                        Sign.GEMINI: "Lungs/Arms",
-                        Sign.CANCER: "Stomach/Chest",
-                        Sign.LEO: "Heart/Back",
-                        Sign.VIRGO: "Abdomen/Intestines",
-                        Sign.LIBRA: "Kidneys/Lumbar",
-                        Sign.SCORPIO: "Genitals/Excretory",
-                        Sign.SAGITTARIUS: "Hips/Thighs",
-                        Sign.CAPRICORN: "Knees/Bones",
-                        Sign.AQUARIUS: "Ankles/Circulation",
-                        Sign.PISCES: "Feet/Lymphatic"
-                    }.get(sign, "Universal")
-                    
-                    risk = "Inflammation/Stress" if t_name == "Mars" else "Obstruction/Coldness"
-                    alert = f"{t_name} is hitting your natal {p.name.value} in {sign.value}. "
-                    alert += f"Watch for {risk} in the {body_part} area."
-                    medical_alerts.append(alert)
 
-        # E. Mood & Dignity
+        # D. Mood & Dignity
         # Mood based on Day Lord's status in NATAL chart
         natal_day_lord = next((p for p in natal_chart.planets if p.name == day_lord_name), None)
         mood = "Neutral"
@@ -140,7 +105,6 @@ def calculate_5_day_forecast(natal_chart: Chart, birth_jd: float, start_date: da
             "chronocrator": day_lord_name.value,
             "profection_sign": day_sign.value,
             "epitasis": is_epitasis,
-            "medical": medical_alerts,
             "mood": mood,
             "summary": f"The '{day_lord_name.value}' domain is active. " + 
                        (f"TRANSIT ALERT: High Stakes (Epitasis) enabled." if is_epitasis else "Flow is consistent with the annual cycle.")

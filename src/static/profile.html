@@ -318,6 +318,22 @@
                     </div>
                 </div>
             </div>
+
+            <div id="bulkExportsSection" class="dashboard-section hidden">
+                <h2 class="section-title">Bulk PDF Pack (CSV)</h2>
+                <div class="panel-card">
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        Upload a CSV with headers: <code>name,date,time,city,state</code>.
+                        This generates a ZIP of PDFs. Historical Use Only; no medical, legal, or financial advice.
+                    </p>
+                    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-top: 1rem;">
+                        <input id="bulkCsvFile" type="file" accept=".csv,text/csv"
+                            style="flex: 1; min-width: 240px; padding: 0.6rem; border: 1px solid var(--glass-border); background: var(--bg-card);" />
+                        <button id="bulkGenerateBtn" class="help-btn highlight-btn" onclick="bulkGenerateZip()">GENERATE ZIP</button>
+                    </div>
+                    <p id="bulkStatus" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;"></p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -406,6 +422,7 @@
 
                 renderBilling(sub);
                 await loadApiKeys(sub);
+                renderBulkExports(sub);
 
                 renderCharts(user.charts_saved || []);
                 await checkOwnerAccess(token);
@@ -440,7 +457,12 @@
                 const token = localStorage.getItem('cael_auth_token');
                 const resp = await fetch(apiUrl('/api/v1/billing/cancel-subscription'), {
                     method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        // CSRF defense-in-depth: required for cross-origin POSTs.
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/json"
+                    }
                 });
 
                 const data = await resp.json();
@@ -585,7 +607,12 @@
             try {
                 const resp = await fetch(apiUrl(`/api/v1/billing/start-trial?tier=${encodeURIComponent(tier)}`), {
                     method: "POST",
-                    headers: { "Authorization": `Bearer ${token}` }
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        // CSRF defense-in-depth: required for cross-origin POSTs.
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/json"
+                    }
                 });
                 const data = await resp.json();
                 if (!resp.ok) throw new Error(data.detail || "Failed to start trial");
@@ -711,6 +738,114 @@
                 setTimeout(loadProfile, 500);
             } catch (e) {
                 if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
+        function renderBulkExports(sub) {
+            const section = document.getElementById("bulkExportsSection");
+            if (!section) return;
+            const plan = String(sub.plan_name || "free").toLowerCase();
+            const allowed = (plan === "practitioner" || plan === "studio") && (sub.status === "active" || sub.status === "trial");
+            section.classList.toggle("hidden", !allowed);
+        }
+
+        function parseCsv(text) {
+            // Minimal CSV parser: supports quoted fields, commas, and newlines.
+            const rows = [];
+            let row = [];
+            let cur = "";
+            let inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                const c = text[i];
+                const next = text[i + 1];
+                if (inQuotes) {
+                    if (c === '"' && next === '"') { cur += '"'; i++; continue; }
+                    if (c === '"') { inQuotes = false; continue; }
+                    cur += c;
+                    continue;
+                }
+                if (c === '"') { inQuotes = true; continue; }
+                if (c === ',') { row.push(cur); cur = ""; continue; }
+                if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ""; continue; }
+                if (c === '\r') { continue; }
+                cur += c;
+            }
+            if (cur.length || row.length) { row.push(cur); rows.push(row); }
+            return rows;
+        }
+
+        async function bulkGenerateZip() {
+            const status = document.getElementById("bulkStatus");
+            const btn = document.getElementById("bulkGenerateBtn");
+            const fileEl = document.getElementById("bulkCsvFile");
+            const token = localStorage.getItem("cael_auth_token");
+
+            if (!fileEl || !fileEl.files || !fileEl.files[0]) {
+                if (status) status.textContent = "Choose a CSV file first.";
+                return;
+            }
+
+            if (btn) btn.disabled = true;
+            if (status) status.textContent = "Parsing CSV...";
+
+            try {
+                const text = await fileEl.files[0].text();
+                const rows = parseCsv(text).filter(r => r.some(x => String(x || "").trim() !== ""));
+                if (rows.length < 2) throw new Error("CSV must include a header row and at least 1 data row.");
+
+                const header = rows[0].map(h => String(h || "").trim().toLowerCase());
+                const idxName = header.indexOf("name");
+                const idxDate = header.indexOf("date");
+                const idxTime = header.indexOf("time");
+                const idxCity = header.indexOf("city");
+                const idxState = header.indexOf("state");
+                if ([idxName, idxDate, idxTime, idxCity].some(i => i < 0)) {
+                    throw new Error("Missing required headers. Need: name,date,time,city,state");
+                }
+
+                const items = [];
+                for (let i = 1; i < rows.length; i++) {
+                    const r = rows[i];
+                    const item = {
+                        name: String(r[idxName] || "").trim() || "Native",
+                        date: String(r[idxDate] || "").trim(),
+                        time: String(r[idxTime] || "").trim(),
+                        city: String(r[idxCity] || "").trim(),
+                        state: String((idxState >= 0 ? r[idxState] : "") || "").trim(),
+                        house_system: "W",
+                        zodiac_system: "tropical"
+                    };
+                    if (!item.date || !item.time || !item.city) continue;
+                    items.push(item);
+                }
+
+                if (items.length === 0) throw new Error("No valid rows found (need date/time/city).");
+                if (status) status.textContent = `Generating ${items.length} PDFs...`;
+
+                const resp = await fetch(apiUrl("/api/v1/charts/bulk/pdf"), {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ items, filename_prefix: "client_reports" })
+                });
+
+                if (!resp.ok) {
+                    const data = await resp.json().catch(() => ({}));
+                    throw new Error(data.detail || "Bulk export failed");
+                }
+
+                const blob = await resp.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "client_reports_pdf_pack.zip";
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                if (status) status.textContent = "Downloaded ZIP.";
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            } finally {
+                if (btn) btn.disabled = false;
             }
         }
 

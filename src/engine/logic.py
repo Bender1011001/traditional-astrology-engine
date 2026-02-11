@@ -37,7 +37,7 @@ def perform_forensic_audit(
     fate = analysis.get("fate", {})
     supp = analysis.get("supplemental", {})
     adv = analysis.get("advanced_mechanics", {})
-    med = analysis.get("medical", {})
+    temp = analysis.get("temperament", {})
     teams = analysis.get("teams", {})
     
     # Reconstruct Profections structure from Enhanced Profections
@@ -55,7 +55,7 @@ def perform_forensic_audit(
     report = {
         "summary": {
             "sect": Sect.DAY.value if chart.sun_altitude > 0 else Sect.NIGHT.value,
-            "temperament": med.get("distemper"),
+            "temperament": temp,
             "lunar_mansion": supp.get("lunar_mansion"),
             "mutual_receptions": teams.get("receptions", []),
             "constructive_team": teams.get("constructive_team", []),
@@ -65,7 +65,6 @@ def perform_forensic_audit(
             "hemisphere_focus": hemispheres.get("focus")
         },
         "vitality": {"vitality_rating": "Refer to Hyleg-Alcocoden Engine"}, 
-        "medical_analysis": med,
         "primary_directions": fate.get("primary_directions", []),
         "primary_direction_distributor": fate.get("primary_direction_distributor", {}),
         "profections": profections, 
