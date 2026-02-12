@@ -11,7 +11,12 @@ class Settings(BaseSettings):
     SENDER_EMAIL: str
     SENDGRID_API_KEY: Optional[str] = None
     SITE_BASE_URL: str = "https://traditional-astrology.com"
-    CORS_ORIGINS: str = "http://localhost:3000,https://traditional-astrology.com"
+    CORS_ORIGINS: str = (
+        "http://localhost:3000,"
+        "https://traditional-astrology.com,"
+        "https://www.traditional-astrology.com,"
+        "https://astrology-engine-central-7387.azurewebsites.net"
+    )
     OWNER_EMAILS: str = ""
     OWNER_BOOTSTRAP_KEY: str = ""
 
