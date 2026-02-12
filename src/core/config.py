@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     STRIPE_ANNUAL_PRICE_ID: str = ""
 
     TRIAL_DAYS_DEFAULT: int = 14
+    # Revenue control:
+    # - "pilot": disable paid checkout globally while building product fit.
+    # - "live": enable paid checkout.
+    SALES_MODE: str = "pilot"
 
     class Config:
         env_file = ".env"

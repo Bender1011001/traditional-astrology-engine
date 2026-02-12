@@ -4,7 +4,7 @@ import hashlib
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 
-# Use /tmp for ephemeral caching on serverless platforms (Heroku/Render)
+# Use /tmp for ephemeral caching on serverless/container platforms
 import tempfile
 import base64
 CACHE_DIR = os.getenv("CACHE_DIR", os.path.join(tempfile.gettempdir(), "astrology_cache"))

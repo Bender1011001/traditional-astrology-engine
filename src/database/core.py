@@ -8,7 +8,7 @@ from src.core.config import settings
 # Priority: DATABASE_URL env var (Production), else local SQLite
 DATABASE_URL = settings.DATABASE_URL or "sqlite:///./users.db"
 
-# Fix for Render/Heroku 'postgres://' vs 'postgresql://' schema
+# Normalize legacy 'postgres://' URLs to SQLAlchemy-compatible 'postgresql://'
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
@@ -27,7 +27,7 @@ if "@" in safe_url:
 else:
     print(f"DEBUG: Connecting to Local/Sqlite DB")
 
-# Engine configuration for managed databases (Azure/Render)
+# Engine configuration for managed databases (Azure/Postgres)
 engine_kwargs = {
     "pool_size": 5,
     "max_overflow": 10,

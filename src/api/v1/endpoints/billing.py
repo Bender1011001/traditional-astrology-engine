@@ -13,6 +13,11 @@ import json
 
 router = APIRouter()
 
+
+def _checkout_globally_enabled() -> bool:
+    return str(getattr(settings, "SALES_MODE", "pilot")).strip().lower() == "live"
+
+
 @router.get("/plans")
 async def list_public_plans(db: Session = Depends(get_db)):
     """
@@ -26,6 +31,7 @@ async def list_public_plans(db: Session = Depends(get_db)):
     by_tier = {p.tier: p for p in plans}
 
     out = []
+    checkout_global = _checkout_globally_enabled()
     for tier in tiers:
         p = by_tier.get(tier)
         if not p:
@@ -43,14 +49,18 @@ async def list_public_plans(db: Session = Depends(get_db)):
         out.append(
             {
                 "tier": p.tier,
-                "price_monthly": float(p.price_monthly) if p.price_monthly is not None else None,
-                "price_annual": float(p.price_annual) if p.price_annual is not None else None,
-                "checkout_enabled_monthly": bool(p.stripe_price_id_monthly),
-                "checkout_enabled_annual": bool(p.stripe_price_id_annual),
-            }
-        )
+                    "price_monthly": float(p.price_monthly) if p.price_monthly is not None else None,
+                    "price_annual": float(p.price_annual) if p.price_annual is not None else None,
+                    "checkout_enabled_monthly": bool(p.stripe_price_id_monthly) and checkout_global,
+                    "checkout_enabled_annual": bool(p.stripe_price_id_annual) and checkout_global,
+                }
+            )
 
-    return {"plans": out}
+    return {
+        "plans": out,
+        "sales_mode": str(getattr(settings, "SALES_MODE", "pilot")).strip().lower(),
+        "checkout_globally_enabled": checkout_global,
+    }
 
 @router.post("/create-checkout-session")
 async def create_checkout_session(request: CheckoutRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -63,6 +73,11 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
     """
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
+    if not _checkout_globally_enabled():
+        raise HTTPException(
+            status_code=409,
+            detail="Checkout is disabled in pilot mode while Etsy workflow build-out is in progress.",
+        )
 
     tier = (request.tier or "").strip().lower()
     if tier not in {"practitioner", "studio"}:

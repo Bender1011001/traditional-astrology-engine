@@ -320,17 +320,30 @@
             </div>
 
             <div id="bulkExportsSection" class="dashboard-section hidden">
-                <h2 class="section-title">Bulk PDF Pack (CSV)</h2>
+                <h2 class="section-title">Etsy Batch Pack (CSV)</h2>
                 <div class="panel-card">
                     <p style="font-size: 0.85rem; color: var(--text-muted);">
-                        Upload a CSV with headers: <code>name,date,time,city,state</code>.
+                        Upload a CSV from your order workflow. Preferred headers:
+                        <code>name,date,time,city,state</code>.
+                        Etsy-style aliases are also accepted: <code>client_name,birth_date,birth_time,birth_place</code>.
                         This generates a ZIP of PDFs. Historical Use Only; no medical, legal, or financial advice.
                     </p>
                     <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-top: 1rem;">
                         <input id="bulkCsvFile" type="file" accept=".csv,text/csv"
                             style="flex: 1; min-width: 240px; padding: 0.6rem; border: 1px solid var(--glass-border); background: var(--bg-card);" />
-                        <button id="bulkGenerateBtn" class="help-btn highlight-btn" onclick="bulkGenerateZip()">GENERATE ZIP</button>
+                        <button id="bulkGenerateBtn" class="help-btn highlight-btn" onclick="bulkGenerateZip()">BUILD ZIP</button>
+                        <button id="bulkTemplateBtn" class="help-btn" onclick="downloadBulkTemplate()">DOWNLOAD CSV TEMPLATE</button>
                     </div>
+                    <div style="margin-top: 0.75rem; display:flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                        <label style="font-size: 0.8rem; color: var(--text-muted); display:flex; gap:0.4rem; align-items:center;">
+                            <input id="bulkTimeFallback" type="checkbox" checked />
+                            Use <code>12:00</code> if time is missing
+                        </label>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">
+                            Accepted dates: <code>YYYY-MM-DD</code>, <code>MM/DD/YYYY</code>; times: <code>HH:MM</code> or <code>H:MM AM/PM</code>.
+                        </span>
+                    </div>
+                    <p id="bulkPreview" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.6rem;"></p>
                     <p id="bulkStatus" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;"></p>
                 </div>
             </div>
@@ -341,6 +354,24 @@
     <script>
         const API_BASE = window.CAEL_API_BASE || "";
         function apiUrl(path) { return `${API_BASE}${path}`; }
+        let checkoutGloballyEnabled = true;
+        let checkoutSalesMode = "live";
+
+        async function loadBillingGate() {
+            try {
+                const resp = await fetch(apiUrl('/api/v1/billing/plans'));
+                const data = await resp.json();
+                if (!resp.ok) return;
+                if (typeof data.checkout_globally_enabled === 'boolean') {
+                    checkoutGloballyEnabled = data.checkout_globally_enabled;
+                }
+                if (data.sales_mode) {
+                    checkoutSalesMode = String(data.sales_mode).toLowerCase();
+                }
+            } catch (e) {
+                // Non-fatal; keep defaults.
+            }
+        }
 
         async function loadProfile() {
             const token = localStorage.getItem('cael_auth_token');
@@ -350,6 +381,7 @@
             }
 
             try {
+                await loadBillingGate();
                 const resp = await fetch(apiUrl('/api/v1/auth/me'), {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -580,7 +612,9 @@
             const trialEnds = sub.current_period_end ? new Date(sub.current_period_end).toLocaleDateString() : null;
 
             if (summary) {
-                if (isTrial && trialEnds) {
+                if (!checkoutGloballyEnabled) {
+                    summary.textContent = "Pilot build mode is active. Paid checkout is paused while Etsy workflow features are finalized.";
+                } else if (isTrial && trialEnds) {
                     summary.textContent = `Trialing ${plan.toUpperCase()}. Trial ends on ${trialEnds}. You can subscribe now to keep uninterrupted access.`;
                 } else if (plan === "free") {
                     summary.textContent = "You are on the Free plan. Start a no-card trial (14 days) to unlock practitioner features and API keys.";
@@ -589,15 +623,27 @@
                 }
             }
 
-            if (status) status.textContent = "";
+            if (status) {
+                status.textContent = !checkoutGloballyEnabled
+                    ? `Checkout disabled (${checkoutSalesMode} mode). Use trial and Etsy batch tooling while we finish build-out.`
+                    : "";
+            }
 
             const canStartTrial = (plan === "free");
             if (startP) startP.classList.toggle("hidden", !canStartTrial);
             if (startS) startS.classList.toggle("hidden", !canStartTrial);
 
             const canSubscribe = (plan === "practitioner" || plan === "studio" || canStartTrial || isTrial);
-            if (subP) subP.classList.toggle("hidden", !canSubscribe);
-            if (subS) subS.classList.toggle("hidden", !canSubscribe);
+            if (subP) {
+                subP.classList.toggle("hidden", !canSubscribe);
+                subP.disabled = !checkoutGloballyEnabled;
+                subP.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
+            }
+            if (subS) {
+                subS.classList.toggle("hidden", !canSubscribe);
+                subS.disabled = !checkoutGloballyEnabled;
+                subS.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
+            }
         }
 
         async function startTrialTier(tier) {
@@ -626,6 +672,10 @@
         async function subscribeTier(tier) {
             const status = document.getElementById("billingStatus");
             const token = localStorage.getItem('cael_auth_token');
+            if (!checkoutGloballyEnabled) {
+                if (status) status.textContent = "Checkout is paused in pilot mode while Etsy workflow features are being finalized.";
+                return;
+            }
             if (status) status.textContent = "Opening checkout...";
             try {
                 const resp = await fetch(apiUrl(`/api/v1/billing/create-checkout-session`), {
@@ -774,6 +824,23 @@
             return rows;
         }
 
+        function findHeaderIndex(header, aliases) {
+            for (const name of aliases) {
+                const idx = header.indexOf(String(name).trim().toLowerCase());
+                if (idx >= 0) return idx;
+            }
+            return -1;
+        }
+
+        function splitBirthPlace(raw) {
+            const value = String(raw || "").trim();
+            if (!value) return { city: "", state: "" };
+            const parts = value.split(",").map(s => s.trim()).filter(Boolean);
+            if (parts.length === 0) return { city: "", state: "" };
+            if (parts.length === 1) return { city: parts[0], state: "" };
+            return { city: parts[0], state: parts.slice(1).join(", ") };
+        }
+
         async function bulkGenerateZip() {
             const status = document.getElementById("bulkStatus");
             const btn = document.getElementById("bulkGenerateBtn");
@@ -794,24 +861,31 @@
                 if (rows.length < 2) throw new Error("CSV must include a header row and at least 1 data row.");
 
                 const header = rows[0].map(h => String(h || "").trim().toLowerCase());
-                const idxName = header.indexOf("name");
-                const idxDate = header.indexOf("date");
-                const idxTime = header.indexOf("time");
-                const idxCity = header.indexOf("city");
-                const idxState = header.indexOf("state");
-                if ([idxName, idxDate, idxTime, idxCity].some(i => i < 0)) {
-                    throw new Error("Missing required headers. Need: name,date,time,city,state");
+                const idxName = findHeaderIndex(header, ["name", "client_name", "full_name", "buyer_name"]);
+                const idxDate = findHeaderIndex(header, ["date", "birth_date", "dob"]);
+                const idxTime = findHeaderIndex(header, ["time", "birth_time"]);
+                const idxCity = findHeaderIndex(header, ["city", "birth_city", "place_city"]);
+                const idxState = findHeaderIndex(header, ["state", "birth_state", "province", "region", "country"]);
+                const idxPlace = findHeaderIndex(header, ["birth_place", "birth_location", "location", "place"]);
+                if ([idxName, idxDate, idxTime].some(i => i < 0) || (idxCity < 0 && idxPlace < 0)) {
+                    throw new Error(
+                        "Missing required headers. Need name/date/time and either city or birth_place. " +
+                        "Examples: name,date,time,city,state OR client_name,birth_date,birth_time,birth_place"
+                    );
                 }
 
                 const items = [];
                 for (let i = 1; i < rows.length; i++) {
                     const r = rows[i];
+                    const place = idxPlace >= 0 ? splitBirthPlace(r[idxPlace]) : { city: "", state: "" };
+                    const city = String((idxCity >= 0 ? r[idxCity] : "") || "").trim() || place.city;
+                    const state = String((idxState >= 0 ? r[idxState] : "") || "").trim() || place.state;
                     const item = {
-                        name: String(r[idxName] || "").trim() || "Native",
+                        name: String((idxName >= 0 ? r[idxName] : "") || "").trim() || "Native",
                         date: String(r[idxDate] || "").trim(),
                         time: String(r[idxTime] || "").trim(),
-                        city: String(r[idxCity] || "").trim(),
-                        state: String((idxState >= 0 ? r[idxState] : "") || "").trim(),
+                        city,
+                        state,
                         house_system: "W",
                         zodiac_system: "tropical"
                     };

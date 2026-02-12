@@ -13,7 +13,7 @@ The system is robust, well-structured, and exceptionally well-documented for a d
 ## 2. Architecture Summary
 - **Type**: Monolithic FastAPI Service using a Layered Architecture (API -> Bridge -> Engine -> DB).
 - **Core Value**: The `src/engine` directory contains sophisticated, domain-specific logic (Forensic Audit, Kakosis, Dignities) that is rare in open-source projects.
-- **Deployment**: containerized (Docker) and cloud-ready (Azure/Render compatible).
+- **Deployment**: containerized (Docker) and cloud-ready (Azure compatible).
 
 ## 3. Major Risks (Criticality: High to Low)
 1.  **Single Point of Failure (God Class)**: `src/engine/chart_calculator.py` is too large. Any bug here cripples the entire app.

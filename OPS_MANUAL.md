@@ -38,6 +38,31 @@ We are building a "Forensic Astrology" SaaS.
 -   **Always** verify the `action=regenerate` logic in `basic.js` after editing that file.
 -   **Disclaimer**: Always maintain the "Historical Use Only" legal shield.
 
+### C. Cost Control (No-User Mode)
+-   If active users are zero, park Azure to reduce burn:
+    ```powershell
+    .\scripts\downgrade_azure.ps1
+    ```
+-   To bring Azure back online for migration testing:
+    ```powershell
+    .\scripts\resume_azure.ps1
+    ```
+-   This script:
+  -   Downgrades ACR to `Basic`
+  -   Keeps App Service Plan at `B1` (minimum practical Linux tier)
+  -   Stops the Web App
+  -   Downgrades PostgreSQL to `Standard_B1ms`
+  -   Stops PostgreSQL compute
+-   Azure deploy pipeline is manual-only. To deploy, run GitHub Action `Build and Deploy to Azure` and set input `confirm_deploy=DEPLOY`.
+
+### D. Etsy Build-First Mode
+-   Keep checkout disabled while building Etsy workflow fit:
+    - `SALES_MODE=pilot`
+-   Enable checkout only after product readiness:
+    - `SALES_MODE=live`
+-   Public pricing gate is served by:
+    - `GET /api/v1/billing/plans`
+
 ## 5. Outbound Outreach (Growth)
 **Tool**: `scripts/outreach_run.py`
 -   **Protocol**: Dry-run first, check logs, then send limited batches.

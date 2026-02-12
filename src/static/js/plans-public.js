@@ -21,11 +21,27 @@ async function loadPlansAndGate() {
     const resp = await fetch(apiUrl("/api/v1/billing/plans"));
     const data = await resp.json();
     if (!resp.ok) return;
+
+    if (data && data.checkout_globally_enabled === false) {
+      const mode = String(data.sales_mode || "pilot").toLowerCase();
+      const reason = mode === "pilot"
+        ? "Pilot build mode: checkout is paused while Etsy workflow features are finalized."
+        : "Checkout is currently unavailable.";
+      setTierDisabled("practitioner", reason);
+      setTierDisabled("studio", reason);
+      return;
+    }
+
     const plans = Array.isArray(data.plans) ? data.plans : [];
     const byTier = {};
     plans.forEach((p) => {
       if (p && p.tier) byTier[String(p.tier).toLowerCase()] = p;
     });
+
+    const practitioner = byTier["practitioner"];
+    if (practitioner && !practitioner.checkout_enabled_monthly && !practitioner.checkout_enabled_annual) {
+      setTierDisabled("practitioner", "Practitioner checkout is not configured yet.");
+    }
 
     const studio = byTier["studio"];
     if (studio && !studio.checkout_enabled_monthly && !studio.checkout_enabled_annual) {
