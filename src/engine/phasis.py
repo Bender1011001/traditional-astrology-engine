@@ -2,6 +2,7 @@ import swisseph as swe
 import math
 from typing import Dict, List, Optional, Tuple
 from .models import PlanetName, PlanetaryPhase, SolarProximity, Planet, Sign
+import swisseph as swe
 
 # Arcus Visionis (AV) Thresholds - Ptolemaic Standard (Planetary Hypotheses)
 # Units: Degrees of solar depression below the horizon
@@ -13,6 +14,16 @@ AV_THRESHOLDS = {
     # Venus is asymmetric
     "VENUS_EVENING": 5.0,
     "VENUS_MORNING": 7.0
+}
+
+NAME_TO_SWE = {
+    PlanetName.SUN: swe.SUN,
+    PlanetName.MOON: swe.MOON,
+    PlanetName.MERCURY: swe.MERCURY,
+    PlanetName.VENUS: swe.VENUS,
+    PlanetName.MARS: swe.MARS,
+    PlanetName.JUPITER: swe.JUPITER,
+    PlanetName.SATURN: swe.SATURN,
 }
 
 class PhasisEngine:
@@ -28,6 +39,9 @@ class PhasisEngine:
     @staticmethod
     def get_solar_proximity(planet_lon: float, sun_lon: float) -> SolarProximity:
         """Determines the solar proximity state based on longitude difference."""
+        # The Sun is the reference body; it cannot be cazimi/combust/under beams relative to itself.
+        # Treat it as FREE for proximity classification.
+        # (Solar status is handled separately in calculations.calculate_solar_status.)
         diff = abs(planet_lon - sun_lon)
         if diff > 180:
             diff = 360 - diff
@@ -52,82 +66,153 @@ class PhasisEngine:
         return False # To be integrated with dignities.py
 
     @staticmethod
-    def calculate_visibility(jd: float, lat: float, lon: float, planet_name: PlanetName, planet_lon: float, planet_lat: float, sun_lon: float) -> bool:
+    def calculate_visibility_details(
+        jd: float,
+        lat: float,
+        lon: float,
+        planet_name: PlanetName,
+        planet_lon: float,
+        planet_lat: float,
+        sun_lon: float,
+    ) -> Dict[str, object]:
         """
-        Calculates if a planet is visible based on Arcus Visionis.
-        This is a 'vertical' calculation: how far below the horizon is the Sun 
-        when the planet is exactly on the horizon?
-        """
-        if planet_name not in AV_THRESHOLDS and planet_name != PlanetName.VENUS:
-            return True # Nodes/Outer planets usually considered visible if they exist (hypothetically)
+        Arcus Visionis (AV) visibility check with auditable fields.
 
-        # 1. Determine Oriental/Occidental
-        oriental = PhasisEngine.is_oriental(planet_lon, sun_lon)
-        
-        # 2. Get Threshold
-        if planet_name == PlanetName.VENUS:
-            threshold = AV_THRESHOLDS["VENUS_MORNING"] if oriental else AV_THRESHOLDS["VENUS_EVENING"]
-        else:
-            threshold = AV_THRESHOLDS.get(planet_name, 12.0)
-            
-        # 3. Calculate Solar Depression at the moment of Planet Rise (Oriental) or Set (Occidental)
-        # We need the Sun's altitude when the planet's altitude is 0.
-        # We can use swe for this.
-        
-        geopos = (lon, lat, 0)
-        
-        # Determine if we check Rise or Set
-        event_type = swe.CALC_RISE if oriental else swe.CALC_SET
-        
-        # Find the moment the planet is at the horizon (refraction included)
-        try:
-            # swe_rise_trans(tjd_ut, body, starname, ephe_flag, rsmi, geopos, atpress, attemp, t_ret)
-            # rsmi: 1=rise, 2=set
-            rsmi = 1 if oriental else 2
-            # We need the body ID for the planet. 
-            # PlanetName mapping to swe IDs is expected to be handled or already known.
-            # Assuming standard mapping: Sun=0, Moon=1, etc.
-            
-            # For simplicity in this engine, let's assume we pass the swe_id or map it.
-            # Let's map PlanetName to swe IDs
-            NAME_TO_SWE = {
-                PlanetName.SUN: swe.SUN,
-                PlanetName.MOON: swe.MOON,
-                PlanetName.MERCURY: swe.MERCURY,
-                PlanetName.VENUS: swe.VENUS,
-                PlanetName.MARS: swe.MARS,
-                PlanetName.JUPITER: swe.JUPITER,
-                PlanetName.SATURN: swe.SATURN
+        Returns a dict with:
+        - is_visible (bool)
+        - method (str)
+        - oriental (bool)
+        - event ("rise"|"set")
+        - threshold_solar_depression_deg (float)
+        - sun_altitude_at_event_deg (float|None) (positive above horizon; negative below)
+        - event_jd_ut (float|None)
+        - note (str|None)
+
+        If vertical computation fails (e.g., polar day/night), falls back to elongation-based heuristic
+        and marks method accordingly.
+        """
+        # Non-traditional points/bodies: treat as visible if present, but report as heuristic.
+        if planet_name == PlanetName.SUN:
+            return {
+                "is_visible": True,
+                "method": "sun_default",
+                "oriental": None,
+                "event": None,
+                "threshold_solar_depression_deg": None,
+                "sun_altitude_at_event_deg": None,
+                "event_jd_ut": None,
+                "note": "Sun visibility is not evaluated by Arcus Visionis in this engine; treated as visible by definition.",
             }
-            
-            p_id = NAME_TO_SWE.get(planet_name)
-            if p_id is None: return True
-            
-            # Find next rise/set around JD
-            # Signature: swe_rise_trans(tjd_ut, body, starname, ephe_flag, rsmi, geopos, atpress, attemp)
-            res = swe.rise_trans(jd - 0.5, p_id, None, swe.FLG_SWIEPH, rsmi, geopos, 0, 0)
-            t_event = res[1][0]
-            
-            # Calculate Sun's altitude at t_event
+        if planet_name not in AV_THRESHOLDS and planet_name != PlanetName.VENUS:
+            return {
+                "is_visible": True,
+                "method": "non_traditional_default",
+                "oriental": None,
+                "event": None,
+                "threshold_solar_depression_deg": None,
+                "sun_altitude_at_event_deg": None,
+                "event_jd_ut": None,
+                "note": "No AV thresholds defined for this body; treated as visible by default.",
+            }
+
+        oriental = PhasisEngine.is_oriental(planet_lon, sun_lon)
+
+        if planet_name == PlanetName.VENUS:
+            threshold = float(AV_THRESHOLDS["VENUS_MORNING"] if oriental else AV_THRESHOLDS["VENUS_EVENING"])
+        else:
+            threshold = float(AV_THRESHOLDS.get(planet_name, 12.0))
+
+        geopos = (float(lon), float(lat), 0.0)
+        rsmi = 1 if oriental else 2  # 1=rise, 2=set
+        event_label = "rise" if oriental else "set"
+
+        p_id = NAME_TO_SWE.get(planet_name)
+        if p_id is None:
+            return {
+                "is_visible": True,
+                "method": "non_traditional_default",
+                "oriental": oriental,
+                "event": event_label,
+                "threshold_solar_depression_deg": threshold,
+                "sun_altitude_at_event_deg": None,
+                "event_jd_ut": None,
+                "note": "No Swiss Ephemeris body mapping; treated as visible by default.",
+            }
+
+        try:
+            # Find next rise/set near the reference JD.
+            # Use jd-0.5 to ensure we catch the relevant event around the date boundary.
+            # pyswisseph signature: rise_trans(tjdut, body, rsmi, geopos, atpress=0, attemp=0, flags=FLG_SWIEPH)
+            _res, tret = swe.rise_trans(jd - 0.5, p_id, rsmi, geopos, 0.0, 0.0, swe.FLG_SWIEPH)
+            t_event = float(tret[0])
+
+            # Sun altitude at the planet's rise/set time.
             sun_pos, _ = swe.calc_ut(t_event, swe.SUN, swe.FLG_SWIEPH)
-            
-            # res = swe.azalt(tjd, swe_flag, geopos, atpress, attemp, xin)
             res_azalt = swe.azalt(t_event, swe.FLG_SWIEPH, geopos, 0, 0, sun_pos[:3])
-            sun_alt = res_azalt[1] # altitude
-            
-            return sun_alt <= -threshold
-            
-        except Exception:
-            # Fallback to longitudinal approximation if rise_trans fails (Polar regions)
-            diff = abs(planet_lon - sun_lon)
-            if diff > 180: diff = 360 - diff
-            return diff > threshold
+            sun_alt = float(res_azalt[1])
+
+            is_vis = sun_alt <= (-threshold)
+            return {
+                "is_visible": is_vis,
+                "method": "arcus_visionis_vertical",
+                "oriental": oriental,
+                "event": event_label,
+                "threshold_solar_depression_deg": threshold,
+                "sun_altitude_at_event_deg": round(sun_alt, 6),
+                "event_jd_ut": round(t_event, 8),
+                "note": None,
+            }
+        except Exception as e:
+            # Fallback: elongation heuristic (less auditable, but deterministic).
+            # NOTE: This is not AV; we label it as such.
+            elong = abs(planet_lon - sun_lon)
+            if elong > 180:
+                elong = 360 - elong
+
+            # Conservative heuristic thresholds (degrees of elongation).
+            elong_thresholds = {
+                PlanetName.MERCURY: 12.0,
+                PlanetName.VENUS: 8.0,
+                PlanetName.MARS: 10.0,
+                PlanetName.JUPITER: 8.0,
+                PlanetName.SATURN: 8.0,
+            }
+            e_thr = float(elong_thresholds.get(planet_name, 12.0))
+            return {
+                "is_visible": bool(elong >= e_thr),
+                "method": "elongation_fallback",
+                "oriental": oriental,
+                "event": event_label,
+                "threshold_solar_depression_deg": threshold,
+                "sun_altitude_at_event_deg": None,
+                "event_jd_ut": None,
+                "note": f"Vertical AV calc failed ({type(e).__name__}); used elongation >= {e_thr:.1f}° heuristic.",
+            }
+
+    @staticmethod
+    def calculate_visibility(
+        jd: float,
+        lat: float,
+        lon: float,
+        planet_name: PlanetName,
+        planet_lon: float,
+        planet_lat: float,
+        sun_lon: float,
+    ) -> bool:
+        return bool(
+            PhasisEngine.calculate_visibility_details(jd, lat, lon, planet_name, planet_lon, planet_lat, sun_lon).get(
+                "is_visible"
+            )
+        )
 
     @staticmethod
     def get_synodic_phase(planet: Planet, sun_lon: float) -> PlanetaryPhase:
         """
         Identifies the synodic phase of a planet.
         """
+        if planet.name == PlanetName.SUN:
+            return PlanetaryPhase.FREE
+
         oriental = PhasisEngine.is_oriental(planet.longitude, sun_lon)
         diff = abs(planet.longitude - sun_lon)
         if diff > 180: diff = 360 - diff

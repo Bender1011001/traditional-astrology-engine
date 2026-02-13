@@ -476,7 +476,7 @@ function resetBasicFeedback(context) {
                     
                     <div class="seo-upsell">
                         <p>Knowing the Lot is step 1. Knowing its Ruler's condition is step 2.</p>
-                        <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FINANCIAL AUDIT</button>
+                        <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FORENSIC AUDIT</button>
                     </div>
 
                      <div style="text-align: center; margin-top: 1rem;">
@@ -764,6 +764,18 @@ if (basicForm) {
             return;
         }
 
+        // Account required for readings.
+        const authToken = localStorage.getItem("cael_auth_token");
+        if (!authToken) {
+            try {
+                localStorage.setItem("cael_pending_reading", JSON.stringify(payload));
+                localStorage.setItem("cael_last_request", JSON.stringify(payload));
+                localStorage.setItem("cael_post_auth_redirect", window.location.href);
+            } catch (e) { }
+            window.location.href = "signup.html?reason=reading";
+            return;
+        }
+
         setBasicLoading(true);
         if (basicReading) basicReading.classList.add("hidden");
         if (basicReadingBody) basicReadingBody.innerHTML = "";
@@ -782,7 +794,10 @@ if (basicForm) {
         try {
             const response = await fetch(apiUrl("/api/v1/calculate"), {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authToken}`
+                },
                 body: JSON.stringify(payload)
             });
 
@@ -800,6 +815,7 @@ if (basicForm) {
             const fortuneContainer = document.getElementById("lotResult");
             if (fortuneContainer && result.technical_data) {
                 try {
+                    const promoUnlocked = !!(result.meta && result.meta.promo_unlocked);
                     const fortune = result.technical_data.analysis.fate.hermetic_lots.Fortune;
                     fortuneContainer.classList.remove("hidden");
                     fortuneContainer.innerHTML = `
@@ -832,10 +848,12 @@ if (basicForm) {
                                 </div>`
                         }
                             
+                            ${promoUnlocked ? "" : `
                             <div class="seo-upsell">
                                 <p>Knowing the Lot is step 1. Knowing its Ruler's condition is step 2.</p>
-                                <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FINANCIAL AUDIT</button>
+                                <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FORENSIC AUDIT</button>
                             </div>
+                            `}
         
                             <div style="text-align: center; margin-top: 1rem;">
                                 <button class="btn-secondary small share-btn" onclick="window.shareReading()">
@@ -859,6 +877,7 @@ if (basicForm) {
             const hylegContainer = document.getElementById("hylegResult");
             if (hylegContainer && result.technical_data) {
                 try {
+                    const promoUnlocked = !!(result.meta && result.meta.promo_unlocked);
                     const med = result.technical_data.analysis.medical;
                     // med: { hyleg, alcocoden, vitality_rating, breakdown }
 
@@ -891,10 +910,12 @@ if (basicForm) {
                                 * Based on ${med.base_years_type} Years calculation.
                             </div>
         
+                            ${promoUnlocked ? "" : `
                             <div class="seo-upsell">
-                                <p>See the full forensic breakdown of your health and constitution.</p>
+                                <p>See the full forensic breakdown of your traditional constitution and temperament.</p>
                                 <button class="btn-primary full-width" onclick="window.location.href='/'">UNLOCK FULL FORENSIC REPORT</button>
                             </div>
+                            `}
 
                              <div style="text-align: center; margin-top: 1rem;">
                                 <button class="btn-secondary small share-btn" onclick="window.shareReading()">
@@ -919,7 +940,10 @@ if (basicForm) {
             const reading = result.plain_reading || "";
             if (reading) {
                 if (basicReadingBody) {
-                    if (result.meta && result.meta.tier !== 'free' && result.forensic_report) {
+                    const promoUnlocked = !!(result.meta && result.meta.promo_unlocked);
+                    const unlocked = !!(result.meta && result.meta.tier !== 'free') || promoUnlocked;
+
+                    if (unlocked && result.forensic_report) {
                         basicReadingBody.innerHTML = renderForensicReport(result.forensic_report);
                     } else {
                         basicReadingBody.innerHTML = formatPlainReading(reading);
@@ -974,8 +998,8 @@ if (basicForm) {
                             else basicReadingBody.prepend(bar);
                         }
 
-                        // Append upgrade teaser if free
-                        if (result.meta && result.meta.tier === 'free') {
+                        // Append upgrade teaser if free (unless a promo is unlocking readings)
+                        if (result.meta && result.meta.tier === 'free' && !promoUnlocked) {
                             // --- 3. PERSONALIZED PAYWALL ---
                             // Extract some data to redact
                             // Example: "Ascendant in [Sign]"
@@ -994,7 +1018,7 @@ if (basicForm) {
                                     <li style="margin-bottom:0.5rem;">✓ ${ascPhrase}</li>
                                     <li style="margin-bottom:0.5rem;">✓ ${rulerPhrase}</li>
                                     <li style="margin-bottom:0.5rem;">✓ 5-Year Forecast: <span class="redacted-text">CRITICAL</span></li>
-                                    <li>✓ Medical Vulnerability: <span class="redacted-text">KNEES</span></li>
+                                    <li>✓ Body Correspondence: <span class="redacted-text">KNEES</span></li>
                                 </ul>
                             </div>
                             <div style="text-align: center; margin-top: 1.5rem;">
@@ -1458,7 +1482,7 @@ const GLOSSARY_TERMS = {
     "mundane": "Relating to worldly, earthly events rather than spiritual or psychological states. The 'real world' impact.",
     "profections": "A timing technique that advances the Ascendant one sign per year to identify the 'Time Lord' for that age.",
     "firdaria": "A Persian planetary period system where each planet rules a set number of years of life.",
-    "zodiacal releasing": "A Hellenistic timing technique using the Lots of Spirit/Fortune to map peak periods of career and health.",
+    "zodiacal releasing": "A Hellenistic timing technique using the Lots of Spirit/Fortune to map peak periods of career and bodily circumstance (traditional framing).",
     "lots": "Mathematical points derived from planetary positions (e.g., Lot of Fortune = Asc + Moon - Sun). Also called Arabic Parts.",
     "essential dignities": "The strength of a planet based on its zodiacal position (Rulership, Exaltation, Triplicity, Term, Face).",
     "sect": "The distinction between Day and Night charts, determining which planets are most constructive or difficult.",

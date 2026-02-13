@@ -274,7 +274,20 @@
                     msg.style.color = "var(--success)";
 
                     setTimeout(() => {
-                        // Go directly to dashboard so the user can start trial/checkout immediately.
+                        // If user was forced to register to generate a reading, return them there.
+                        try {
+                            const next = localStorage.getItem("cael_post_auth_redirect") || "";
+                            if (next) {
+                                localStorage.removeItem("cael_post_auth_redirect");
+                                const isRelative = next.startsWith("/") || /^[A-Za-z0-9_.\\-]+\\.html(\\?.*)?$/.test(next);
+                                const isSameOrigin = next.startsWith(window.location.origin);
+                                if (isRelative || isSameOrigin) {
+                                    window.location.href = next;
+                                    return;
+                                }
+                            }
+                        } catch (e) { }
+                        // Default: go to dashboard so the user can start trial/checkout immediately.
                         window.location.href = "profile.html";
                     }, 1000);
                 } else {

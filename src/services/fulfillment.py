@@ -33,12 +33,15 @@ class FulfillmentService:
                 time_str=chart_request.get("time", "12:00"),
                 city=chart_request.get("city"),
                 state=chart_request.get("state", ""),
-                name=chart_request.get("name", user_name),
-                # defaults
-                house_system="W",  # Enforce Whole Sign for Premium Consistency
-                zodiac_system="T", 
-                ayanamsa="0"
-            )
+                    name=chart_request.get("name", user_name),
+                    # defaults
+                    house_system="W",  # Enforce Whole Sign for Premium Consistency
+                    zodiac_system="T", 
+                    ayanamsa="0",
+                    # Optional medical timing input (historical use only)
+                    decumbiture_utc_iso=chart_request.get("decumbiture_utc_iso"),
+                    decumbiture_jd=chart_request.get("decumbiture_jd"),
+                )
             
             if "error" in chart_data:
                 logger.error(f"Fulfillment Calculation Failed: {chart_data['error']}")

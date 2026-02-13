@@ -217,6 +217,8 @@ class PrimaryDirectionsEngine:
             partner_reason = "Domicile Ruler"
             
             for p in chart.planets:
+                if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
+                    continue
                 diff = abs(p.longitude - asc_directed_lon)
                 if diff > 180: diff = 360 - diff
                 # Check major aspects (Conjunction, Sextile, Square, Trine, Opposition)
@@ -262,7 +264,11 @@ class PrimaryDirectionsEngine:
         ]
         
         for p in promittors:
-            if p.name in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
+            if p.name in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]:
+                continue
+            if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
+                # Non-traditional bodies should not be used as promittors in traditional primary directions.
+                continue
             
             # CHECK ALL ASPECTS TO ASCENDANT
             for asp_name, asp_angle, _ in aspects_to_check:
@@ -346,6 +352,82 @@ class PrimaryDirectionsEngine:
                             date_offset=cls.format_years(arc),
                             method="Placidus/Zodiacal"
                         ))
+
+        return sorted(results, key=lambda x: x.years)
+
+    @classmethod
+    def calculate_directions_to_point(
+        cls,
+        chart: Chart,
+        geo_lat: float,
+        target_lon: float,
+        target_label: str = "Point"
+    ) -> List[DirectionResult]:
+        """
+        Calculate zodiacal primary directions of promittors to a generic ecliptic point.
+
+        This is used for vitality auditing where the "Interfector" is the promittor (directed ray)
+        that strikes the Hyleg (significator).
+
+        Implementation note:
+        - Treats the significator as an ecliptic point (lat=0) for auditability and stability.
+        - This is a simplified "Placidus/Zodiacal" style direction: arc measured via OA.
+        """
+        results: List[DirectionResult] = []
+
+        # OA of significator point (lat 0)
+        ra_sig, dec_sig = cls.ecliptic_to_equatorial(cls._normalize_deg(target_lon), 0.0)
+        ad_sig = cls.calculate_ad(dec_sig, geo_lat)
+        oa_sig = (ra_sig - ad_sig) % 360.0
+
+        aspects_to_check = [
+            ("Conjunction", 0),
+            ("Sextile", 60),
+            ("Square", 90),
+            ("Trine", 120),
+            ("Opposition", 180),
+        ]
+
+        for p in chart.planets:
+            if p.name in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]:
+                continue
+            if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
+                continue
+
+            for asp_name, asp_angle in aspects_to_check:
+                aspect_lons = []
+                if asp_angle == 0:
+                    aspect_lons = [(p.longitude, "Conjunction")]
+                elif asp_angle == 180:
+                    aspect_lons = [((p.longitude + 180) % 360, "Opposition")]
+                else:
+                    aspect_lons = [
+                        ((p.longitude + asp_angle) % 360, f"{asp_name} (Dexter)"),
+                        ((p.longitude - asp_angle) % 360, f"{asp_name} (Sinister)"),
+                    ]
+
+                for lon_pt, name_pt in aspect_lons:
+                    ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0)
+                    ad_pt = cls.calculate_ad(dec_pt, geo_lat)
+                    oa_pt = (ra_pt - ad_pt) % 360.0
+
+                    arc = oa_pt - oa_sig
+                    if arc < 0:
+                        arc += 360.0
+
+                    # Practical range filter for report usefulness (0-100 years)
+                    if 0 < arc < 100:
+                        results.append(
+                            DirectionResult(
+                                significator=target_label,
+                                promittor=p.name.value,
+                                aspect=name_pt,
+                                arc=arc,
+                                years=cls.ptolemy_key(arc),
+                                date_offset=cls.format_years(arc),
+                                method="Placidus/Zodiacal",
+                            )
+                        )
 
         return sorted(results, key=lambda x: x.years)
 

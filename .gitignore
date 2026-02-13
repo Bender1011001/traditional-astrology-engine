@@ -17,6 +17,9 @@ cloudflared.log
 users.json
 users.db
 *.sqlite
+
+# Local docs scratchpad (do not commit)
+docs/celestial_curia_complete.md
 # Test & Practitioner Outputs
 alignment_final_verification/
 chart_outputs/

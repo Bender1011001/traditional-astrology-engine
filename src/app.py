@@ -44,7 +44,7 @@ async def startup_event():
         
         # Auto-seed plans if missing (to prevent 'Plan free not found' errors)
         try:
-            from src.scripts.seed_db import seed_plans
+            from src.services.db_seed import seed_plans
             seed_plans()
             logging.info("Database seeding checked/completed.")
         except Exception as seed_err:

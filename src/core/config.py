@@ -36,6 +36,13 @@ class Settings(BaseSettings):
     # - "live": enable paid checkout.
     SALES_MODE: str = "pilot"
 
+    # Promo control: temporarily unlock "individual" (non-premium) readings for free-tier users.
+    # - If enabled, the backend marks responses with meta.promo_unlocked=true.
+    # - Frontend can use this to disable paywall UI while keeping free-tier rate limits.
+    PROMO_FREE_INDIVIDUAL_READINGS: bool = False
+    # UTC date in YYYY-MM-DD. If set, promo is active only until end-of-day UTC on this date.
+    PROMO_FREE_INDIVIDUAL_READINGS_UNTIL: str = ""
+
     class Config:
         env_file = ".env"
         extra = "ignore"

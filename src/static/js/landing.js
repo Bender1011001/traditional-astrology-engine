@@ -45,7 +45,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupSamplesAndAccordions(); // No-op on pages without samples
     setupPricing();
+
+    // Promo/testing banner (public pages): show only when promo is active.
+    maybeShowPromoTestingBanner();
+
+    // If the user was redirected to signup/login, restore their pending reading inputs.
+    restorePendingReadingRequest();
 });
+
+function restorePendingReadingRequest() {
+    try {
+        const raw = localStorage.getItem("cael_pending_reading");
+        if (!raw) return;
+        const payload = JSON.parse(raw);
+        if (!payload || !payload.date || !payload.city) return;
+
+        const dateEl = document.getElementById("basicDate");
+        const timeEl = document.getElementById("basicTime");
+        const cityEl = document.getElementById("basicCity");
+        const stateEl = document.getElementById("basicState");
+        const houseEl = document.getElementById("houseSystem");
+        const nodeEl = document.getElementById("nodeType");
+
+        if (dateEl) dateEl.value = payload.date;
+        if (timeEl) timeEl.value = payload.time || "12:00";
+        if (cityEl) cityEl.value = payload.city;
+        if (stateEl) stateEl.value = payload.state || "";
+        if (houseEl && payload.house_system) houseEl.value = payload.house_system;
+        if (nodeEl && payload.node_type) nodeEl.value = payload.node_type;
+
+        lastChartRequest = payload;
+        // Do not auto-submit; user may want to verify inputs.
+        localStorage.removeItem("cael_pending_reading");
+    } catch (e) {
+        // Ignore restore errors
+    }
+}
+
+async function maybeShowPromoTestingBanner() {
+    const basicForm = document.getElementById("basicForm");
+    if (!basicForm) return;
+
+    try {
+        const resp = await fetch(apiUrl("/api/v1/meta"), { method: "GET" });
+        if (!resp.ok) return;
+        const data = await resp.json();
+
+        const promo = data && data.promo ? data.promo : {};
+        if (!promo.free_individual_readings) return;
+
+        const until = promo.free_individual_readings_until ? String(promo.free_individual_readings_until) : "";
+        const untilText = until ? ` (until ${escapeHtml(until)})` : "";
+
+        const banner = document.createElement("div");
+        banner.className = "construction-banner";
+        banner.style.marginBottom = "1rem";
+        banner.innerHTML = `
+            <div class="construction-title">Testing Window: Readings Are Free${untilText}</div>
+            <p class="construction-text">
+                We are running live testing. Individual readings will be free for a limited time, but you still need an account.
+                After you receive your result, tell us if it felt accurate or not.
+            </p>
+        `;
+
+        // Insert just above the form.
+        basicForm.parentElement.insertBefore(banner, basicForm);
+    } catch (e) {
+        // Silent fail: banner is non-critical.
+    }
+}
 
 function restorePendingChartFromDashboard() {
     // If the user clicked a saved chart in the dashboard, it will be stored in sessionStorage.
@@ -201,6 +269,19 @@ function setupBasicForm() {
             return;
         }
 
+        // Account required for readings.
+        const token = localStorage.getItem("cael_auth_token");
+        if (!token) {
+            // Persist the request so signup/login can resume.
+            try {
+                localStorage.setItem("cael_pending_reading", JSON.stringify(payload));
+                localStorage.setItem("cael_last_request", JSON.stringify(payload));
+                localStorage.setItem("cael_post_auth_redirect", window.location.href);
+            } catch (e) { }
+            window.location.href = "signup.html?reason=reading";
+            return;
+        }
+
         setBasicLoading(true);
         if (basicReading) basicReading.classList.add("hidden");
         if (basicReadingBody) basicReadingBody.innerHTML = "";
@@ -212,7 +293,10 @@ function setupBasicForm() {
         try {
             const response = await fetch(apiUrl("/api/v1/calculate"), {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
                 body: JSON.stringify(payload)
             });
 
@@ -239,6 +323,7 @@ function setupBasicForm() {
 function renderBasicReading(result, payload, timeUnknown) {
     const basicReadingBody = document.getElementById("basicReadingBody");
     const basicReading = document.getElementById("basicReading");
+    const basicFeedback = document.getElementById("basicFeedback");
 
     basicReadingBody.innerHTML = formatPlainReading(result.plain_reading);
 
@@ -254,8 +339,8 @@ function renderBasicReading(result, payload, timeUnknown) {
         basicReadingBody.prepend(div);
     }
 
-    // Upgrade CTA for free/demo users.
-    if (result.meta && result.meta.tier === 'free') {
+    // Upgrade CTA for free/demo users (skip during promo unlock).
+    if (result.meta && result.meta.tier === 'free' && !result.meta.promo_unlocked) {
         renderUpgradeCta(basicReadingBody);
     }
 
@@ -267,6 +352,65 @@ function renderBasicReading(result, payload, timeUnknown) {
         meta: result.meta,
         time_unknown: timeUnknown
     };
+
+    // Lightweight feedback widget (Accurate / Not accurate).
+    if (basicFeedback) {
+        basicFeedback.classList.remove("hidden");
+        basicFeedback.innerHTML = `
+            <div class="panel-card" style="margin-top: 1rem;">
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Testing feedback</div>
+                <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
+                    <button type="button" class="btn-secondary feedback-btn" data-vote="up">Accurate</button>
+                    <button type="button" class="btn-secondary feedback-btn" data-vote="down">Not accurate</button>
+                </div>
+                <div id="basicFeedbackStatus" class="text-muted" style="text-align:center; margin-top:0.5rem;"></div>
+            </div>
+        `;
+
+        const statusEl = document.getElementById("basicFeedbackStatus");
+        const buttons = basicFeedback.querySelectorAll(".feedback-btn");
+        buttons.forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                if (!basicFeedbackContext) return;
+                if (basicFeedback.dataset.submitted === "true") return;
+
+                basicFeedback.dataset.submitted = "true";
+                buttons.forEach((b) => (b.disabled = true));
+                const vote = btn.dataset.vote;
+                if (statusEl) statusEl.textContent = "Saving...";
+
+                logEvent("reading_feedback", {
+                    vote,
+                    source: "landing_reading",
+                    reading_hash: basicFeedbackContext.reading_hash,
+                    birth: basicFeedbackContext.birth,
+                    meta: basicFeedbackContext.meta,
+                    time_unknown: basicFeedbackContext.time_unknown
+                });
+
+                try {
+                    const saveResp = await fetch(apiUrl("/api/v1/reading_feedback"), {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            reading_hash: basicFeedbackContext.reading_hash,
+                            vote,
+                            source: "landing_reading",
+                            birth: basicFeedbackContext.birth,
+                            meta: basicFeedbackContext.meta,
+                            time_unknown: basicFeedbackContext.time_unknown,
+                            session_id: SESSION_ID,
+                            ts: new Date().toISOString()
+                        })
+                    });
+                    if (!saveResp.ok) throw new Error("Vote not saved.");
+                    if (statusEl) statusEl.textContent = "Saved. Thank you.";
+                } catch (e) {
+                    if (statusEl) statusEl.textContent = "Could not save feedback. Please try again later.";
+                }
+            });
+        });
+    }
 }
 
 function renderUpgradeCta(container) {

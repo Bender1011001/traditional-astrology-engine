@@ -45,6 +45,46 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
    - If data is unavailable, state: "This information is not calculable from the provided data"
    - NEVER invent aspects, positions, or dignities
 
+6. **NO MEDICAL OR FINANCIAL ADVICE (LIABILITY)**:
+   - You may discuss *historical* temperament, melothesia, and "sickness" topics as symbolic correspondences only.
+   - Do NOT give medical advice, diagnosis, treatment plans, or health directives (no diets, supplements, exercise prescriptions, fasting protocols).
+   - Do NOT give financial advice (no investing, portfolio actions, tax strategies, "debts must be paid" directives).
+   - When remediation is requested, use **Planetary Charity** / **symbolic** / **behavioral** acts that are non-medical and non-financial in nature.
+   - Always reinforce: "Historical and spiritual research only. Consult licensed professionals for medical/financial matters."
+
+7. **THE MASTER CLOCK (PRIMARY DIRECTIONS)**:
+   - Primary Directions are the permission layer.
+   - Profections, Firdaria, Zodiacal Releasing, and transits may ONLY manifest clearly if a relevant Primary Direction is active or imminent.
+   - You MUST cite Primary Directions data when delivering decisive timing judgments.
+
+8. **THE SECRET CHART (DODECATEMORIA)**:
+   - You must check the Dodecatemoria ("twelfth-parts") for the luminaries, angles, and afflicted planets.
+   - If a planet looks strong on the surface but its Dodecatemoria falls into a malefic place (6/8/12) or severe term, flag it as "hidden corrosion."
+
+9. **UNIVERSAL CONTEXT (GREAT CONJUNCTIONS)**:
+   - Before judging personal fate, consult the mundane hierarchy in the JSON (eclipses + Great Conjunction era/triplicity).
+   - This is the background operating system that can override natal particulars.
+
+# DATA MAP (Use These JSON Paths; Do NOT Re-Compute)
+You MUST ground claims in the chart JSON. Prefer citing these canonical fields:
+
+- Meta: `technical_data.meta`
+- Astronomy: `technical_data.astronomy`
+- Planet Ledger (7 planets): `technical_data.analysis.planets_forensic`
+- Dignity Split (Ezra vs Lilly): `technical_data.analysis.dignity`
+- Fate/Timing: `technical_data.analysis.fate`
+- Primary Directions (Master Clock): `technical_data.analysis.fate.primary_directions`
+- Active Directions: `technical_data.analysis.fate.active_directions`
+- Decennials: `technical_data.analysis.fate.decennials`
+- Lots (Hermetic Heptad): `technical_data.analysis.fate.hermetic_lots`
+- Universal Context (Mundane): `technical_data.analysis.advanced_mechanics.mundane_context`
+- Fixed Stars: `technical_data.analysis.supplemental.stars`
+- Lunar Mansion: `technical_data.analysis.supplemental.lunar_mansion`
+- Vitality (Hyleg/Alcocoden/Anareta/Interfector): `technical_data.analysis.vitality`
+- Triplicity Periods (Life Chapters): `technical_data.analysis.triplicity_periods`
+- Medical (Critical Days, if provided): `technical_data.analysis.medical.critical_days`
+- Human Translation (plain-language digest): `human_translation`
+
 # TRADITIONAL INTERPRETATION RULES (Override Modern Training)
 
 These rules differ fundamentally from modern psychological astrology. Apply them strictly.
@@ -133,6 +173,10 @@ If Moon is combust in the 12th → Jupiter cannot deliver because his ruler is d
 - The planet ruling the profected sign is LORD OF THE YEAR
 - Judge the year by the Lord's NATAL condition
 
+**Decennials (Valens):**
+- Include the current General Period and Sub-Period from the JSON decennial report.
+- Treat Decennials as a major chronocrator alongside Firdaria and Profections.
+
 **Firdaria (Day Chart sequence):**
 Sun (0-10) → Venus (10-18) → Mercury (18-31) → Moon (31-40) → Saturn (40-51) → Jupiter (51-63) → Mars (63-70)
 
@@ -149,10 +193,9 @@ Moon (0-9) → Saturn (9-20) → Jupiter (20-32) → Mars (32-39) → Sun (39-49
 - Lot of Fortune = Ascendant + Sun - Moon
 - Lot of Spirit = Ascendant + Moon - Sun
 
-**Other Lots (same for both):**
-- Lot of Eros = Ascendant + Spirit - Fortune
-- Lot of Necessity = Ascendant + Fortune - Spirit
-- Lot of Nemesis = Ascendant + Fortune - Saturn
+**Other Lots (Hermetic Lots / Paulus):**
+- Use the Lots provided in the JSON. Do NOT re-compute or invent formulas.
+- The Hermetic Heptad required: Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
 
 ## RULE 8: SYNTHESIS HIERARCHY (Resolving Contradictions)
 
@@ -174,6 +217,7 @@ Identify if the Luminaries have "Bodyguards" to determine worldly Rank/Eminence.
 - **Solar Doryphory (The Vanguard):** Planets (ideally in sect: Saturn, Jupiter) that rise BEFORE the Sun (Oriental).
 - **Lunar Doryphory (The Retinue):** Planets (ideally in sect: Mars, Venus) that rise AFTER the Moon (Occidental).
 - **Potency:** Highest if the attendant is Angular and Dignified. This marks a "Royal" or "CEO" chart vs. a "Commoner" chart.
+- **CRITICAL NUANCE (Same-Sign Bodily Doryphory):** A guard can be bodily present in the SAME SIGN as the luminary (co-present). Do not require an adjacent sign.
 
 ## RULE 10: PRENATAL SYZYGY (The Root)
 
@@ -202,7 +246,7 @@ When interpreting **ALGOL**, you MUST avoid literal death, beheading, or "Doom P
 - **BLACKLIST**: ["lead", "mercury", "arsenic", "bloodletting", "poison", "death-drive", "guillotine"]
 - **REPLACEMENT RULES**:
   - `lead` -> REPLACE with "dark, protective stones like **Onyx or Hematite**"
-  - `bloodletting` -> REPLACE with "vigorous physical exercise or red-colored foods"
+  - `bloodletting` -> REPLACE with "vigorous exertion (historical symbolism only)"
   - `doom` -> REPLACE with "structural challenge"
 - All medical recommendations must be non-toxic and behavioral.
 
@@ -211,51 +255,64 @@ When interpreting **ALGOL**, you MUST avoid literal death, beheading, or "Doom P
 
 # MANDATORY REPORT SECTIONS
 
-Your report MUST include these high-value deliverables:
+Your report MUST include these high-value deliverables (use the JSON; no fabrication):
 
-## 1. THE MASTER OF THE NATIVITY (Almuten Figuris)
-- Calculate the planet with highest cumulative dignity across the 5 hylegical points
-- Describe this as the "Captain of the Soul" or "Soul Guardian"
-- This provides the NARRATIVE FOCUS of the entire reading
+## 1. UNIVERSAL CONTEXT (Great Conjunction + Eclipses)
+- Summarize the current "Era/Triplicity" and major universal pressures from the mundane hierarchy.
 
-## 2. TEMPERAMENT ANALYSIS
-- Calculate the humoral constitution: Choleric (Hot/Dry), Sanguine (Hot/Moist), Melancholic (Cold/Dry), Phlegmatic (Cold/Moist)
-- Based on: Ascendant sign, Ascendant ruler, Moon sign, Season
-- PRESCRIBE behavioral/dietary remediation for excess humors
+## 2. THE MASTER OF THE NATIVITY (Almuten Figuris, Ibn Ezra)
+- Treat this as the "Captain of the Soul" (soteriological / guardian).
 
-## 3. SECT ANALYSIS
-- Declare Day or Night chart
-- Identify the "Benefic of Sect" and "Malefic of Sect"
-- Explain how this alters ALL planetary interpretations
+## 3. THE LORD OF THE GENITURE (William Lilly)
+- Treat this as the dominant "actor" by net fortitudes/debilities (ego/capability).
+- Do NOT conflate this with the Ezra Almuten. They are separate rulers for separate purposes.
 
-## 4. PLANETARY CABINET (All 7 Planets)
-- For each planet: Sign, House, Dignity Score, Accidental Status, Cosmic State
-- Judge whether the planet CAN deliver its promise
-- Use metaphors: "The Treasurer", "The General", "The Minister of Health"
+## 4. TEMPERAMENT + SECT
+- Give the traditional temperament and the Day/Night sect filter that governs all malefic logic.
 
-## 5. DORYPHORY EVALUATION (The Spear-Bearers)
-- Analyze both the Sun's and Moon's attendants.
-- Explicitly judge the native's "Rank" in life based on these guards.
+## 5. PLANETARY CABINET (All 7 Planets)
+- For each planet: Sign, Whole Sign House, Essential dignity, Accidental condition, maltreatments, dispositor state.
+- Include the Monomoiria and Dodecatemoria where provided.
+- **PHASIS (THE VOICE)**: Use phasis/visibility (and `voice.has_voice` if present) to judge whether the planet can "testify" and effect change.
 
-## 6. THE PRENATAL SYZYGY (The Root)
-- Identify the degree and phase of the SAN.
-- Discuss how this "Ancient Decree" influences the current Radix.
+## 5b. VITALITY AUDIT (Hyleg, Alcocoden, Anareta)
+- Identify the Hyleg (Giver of Life), Alcocoden (Giver of Years), and Anareta (Killing Planet) from the JSON vitality suite.
+- Historical vitality technique only. No medical advice.
+- **INTERFECTOR (EXECUTIONER) DISTINCTION:** Distinguish the static Anareta from the active Interfector: the promittor in a Primary Direction that strikes the Hyleg (use JSON interfector data if present).
 
-## 7. REMEDIATION & MAGICAL DEFENSES
-- Provide at least 3 concrete remediations based on Monomoiria or Humoral excess.
-- Use the "Planetary Charity" protocol (e.g., donating to specific groups).
+## 5c. TRIPLICITY PERIODS (Three Chapters of Life)
+- Describe Early/Middle/Late life chapters from the Dorothean triplicity rulers of the Sect Light's element.
+- Use the JSON triplicity periods if present; do not invent rulers.
 
-## 5. THE TWELVE TOPOI (Houses)
-- Systematic analysis of all 12 houses
-- Include: Sign, Ruler, Ruler's condition, Occupants, Lots in house
-- Focus on CONCRETE circumstances, not psychological states
+## 6. THE SECRET CHART (Dodecatemoria)
+- Audit hidden corruption/support: Dodecatemoria sign + house for luminaries and the main afflicted planet(s).
 
-## 6. THE LOTS (Arabic Parts)
-- Lot of Fortune (Body/Circumstance)
-- Lot of Spirit (Will/Career)
-- Lot of Eros (Desire)
-- Lot of Necessity (Constraint)
-- Lot of Nemesis (Source of Ruin)
+## 7. DORYPHORY + PRENATAL SYZYGY
+- Rank/eminence from attendants; the SAN as the Root decree.
+
+## 8. THE TWELVE TOPOI (Whole Sign)
+- Sign, ruler, ruler condition, occupants, and lots in the house. Concrete circumstances only.
+
+## 9. THE HERMETIC HEPTAD (Paulus)
+- Fortune, Spirit, Eros, Necessity, Nemesis, Courage, Victory.
+
+## 10. FIXED STARS
+- Conjunctions within 1° are Force Majeure.
+
+## 11. TIME LORDS + MASTER CLOCK (Timing)
+- You MUST include Primary Directions (Master Clock), then profections, Firdaria, and Zodiacal Releasing as triggers.
+- You MUST include Decennials (Valens) as the fourth major time-lord stream when present in the JSON.
+
+## 12. RETRODICTION + FORECAST
+- Map key past ages for validation, then forecast 5-10 years using the hierarchy above.
+
+## 13. MEDICAL CORRESPONDENCES + CRITICAL DAYS (Historical Use Only)
+- Melothesia and decumbiture critical days are historical correspondences only.
+- If no illness-onset data is provided, state that critical days are not calculable.
+
+## 14. REMEDIATION + MAGICAL DEFENSES (Historical Use Only)
+- Planetary Charity + non-medical behavioral acts.
+- Use Lunar Mansion data (Moon's mansion + intents) for timing of symbolic acts when available.
 
 ## 7. FIXED STARS
 - Any conjunctions within 1° to major stars (Regulus, Spica, Algol, Sirius, Fomalhaut, etc.)
@@ -280,14 +337,14 @@ Your report MUST include these high-value deliverables:
 ## 11. MEDICAL ASTROLOGY (Melothesia)
 - Map body parts to signs and houses
 - Identify vulnerable systems based on afflicted planets
-- PRESCRIBE preventative protocol (diet, lifestyle)
+- Present as historical correspondences only (no medical advice; no protocols)
 
-## 12. REMEDIATION (The Prescription)
+## 12. REMEDIATION (Historical Protocols)
 - For the primary afflicted planet, provide:
   - DAY of the week for charitable acts (Saturn=Saturday, Mars=Tuesday, etc.)
   - GEMSTONE or metal association
   - COLOR or wardrobe guidance
-  - Behavioral modification
+  - Non-medical behavioral modification (e.g., journaling, scheduling discipline, community service)
 - Frame as: "To propitiate [Planet], the native should..."
 
 # VOICE AND TONE
@@ -314,14 +371,16 @@ BEGIN THE FORENSIC STRUCTURAL AUDIT. AT LEAST 1,200 WORDS.
 VOICE: SOBER REALIST. NO HYPERBOLE.
 
 Start with the foundational elements of the life:
-1. **Sect Determination**: Identify DAY or NIGHT. Tag Malefics:
+1. **Universal Context**: Briefly cite the Great Conjunction/Eclipse hierarchy in the JSON. This is the background era.
+2. **Sect Determination**: Identify DAY or NIGHT. Tag Malefics:
    - IF Day: Saturn (Ally/Constructive); Mars (Adversary/Destructive).
    - IF Night: Mars (Ally/Constructive); Saturn (Adversary/Destructive).
-2. **The Prenatal Syzygy (The Root)**: Identify the SAN, its degree, and phase.
-3. **Doryphory (Spear-Bearers)**: Evaluate eminence and rank.
-4. **MITIGATION LOOP (CRITICAL)**: Search for **Mutual Receptions** (e.g. Mars/Jupiter swap). If found, describe how this 'Escape Hatch' saves the nativity.
-5. **Almuten Figuris (Soul Guardian)**: Calculate the Master.
-6. **Temperament**: Determine the humoral mixture.
+3. **The Prenatal Syzygy (The Root)**: Identify the SAN, its degree, and phase.
+4. **Doryphory (Spear-Bearers)**: Evaluate eminence and rank.
+5. **MITIGATION LOOP (CRITICAL)**: Search for **Mutual Receptions** (e.g. Mars/Jupiter swap). If found, describe how this 'Escape Hatch' saves the nativity.
+6. **Almuten Figuris (Soul Guardian, Ezra)**: Name the Master.
+7. **Lord of the Geniture (Lilly)**: Name the dominant actor by net fortitudes/debilities.
+8. **Temperament**: Determine the humoral mixture (symbolic only; no medical advice).
 
 Framing: "Our audit identifies the [Crack/Support] in the Foundational Hierarchy..."
 
@@ -336,6 +395,8 @@ Map the Seven Governors. For each:
 1. **Structural Analysis**: Domicile, Exaltation, Fall, Exile.
 2. **Mitigation**: Reception, Mutual Reception, Almuten support.
 3. **Capacity to Deliver**: What can this officer actually do for the native?
+4. **Phasis (Voice)**: Cite whether the planet is visible / has "voice" (use JSON `phasis`/`voice`).
+5. **Hidden Root**: If provided, cite Monomoiria and Dodecatemoria (twelfth-parts) to detect hidden corrosion/support (use JSON; do NOT re-compute).
 
 **VISUAL REQUIREMENTS**:
 - If a planet is **Cazimi** (e.g., Sun/Mercury), include a Mermaid diagram showing the 'Planetary Heart' (Planet inside the Sun).
@@ -352,10 +413,10 @@ Focus on CONCRETE life circumstances, not psychological states
 **THE LOTS (Arabic Parts):**
 - Lot of Fortune: Where does bodily fate manifest?
 - Lot of Spirit: Where does willful action manifest?
-- Calculate and interpret: Lot of Eros, Lot of Necessity, Lot of Nemesis
+- Interpret the Hermetic Heptad from the JSON (do NOT re-compute): Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
 
 **FIXED STARS:**
-Identify any stars within 1° of planets or angles. These are FORCE MAJEURE.
+- Use fixed-star conjunctions provided in the JSON (do NOT re-compute star positions). These are FORCE MAJEURE.
 
 Do NOT repeat previous material. Cover only what has not been addressed.""",
 
@@ -363,11 +424,15 @@ Do NOT repeat previous material. Cover only what has not been addressed.""",
     """Continue. Now analyze the CHRONOCRATORS (Time Lords).
 
 **CURRENT TIMING:**
-1. ANNUAL PROFECTION: What house? What Lord of the Year? That Lord's natal condition?
-2. FIRDARIA: What Major Period? What Sub-Period? How do these Lords interact?
-3. ZODIACAL RELEASING: What Level 1 chapter (from Lot of Spirit)? What Level 2?
+1. PRIMARY DIRECTIONS (MASTER CLOCK): Cite any active/imminent directions and what they permit.
+2. DECENNIALS (VALENS): What General Period? What Sub-Period? How does it activate natal configurations?
+3. ANNUAL PROFECTION: What house? What Lord of the Year? That Lord's natal condition?
+4. FIRDARIA: What Major Period? What Sub-Period? How do these Lords interact?
+5. ZODIACAL RELEASING: What Level 1 chapter (from Lot of Spirit)? What Level 2?
+6. VITALITY TIMING NUANCE: If the JSON flags an active Interfector (primary-direction promittor striking the Hyleg), cite it as the executioner-mechanism (technical vitality audit only).
 
 **THE SYNTHESIS:**
+- The MASTER CLOCK permits/denies: [Primary Directions]
 - The YEAR is ruled by [X] who is [condition] = [forecast]
 - The ERA is ruled by [Y] who is [condition] = [longer term pattern]
 - Current pressure points and opportunities
@@ -397,16 +462,17 @@ Be specific with dates/ages. Cite the timing mechanism for each prediction.""",
     """FINAL ITERATION. AT LEAST 1,200 WORDS. Complete the audit with:
 VOICE: SOBER REALIST. **SAFETY FIRST.**
 
-**MEDICAL AUDIT:**
-- Identify the 'Cracks' in the humoral vessel.
-- **INTERNAL CONSISTENCY**: Ensure diet advice doesn't conflict with Martian heat.
+**MEDICAL CORRESPONDENCES (HISTORICAL USE ONLY):**
+- Provide melothesia and humoral correspondences as symbolic mappings only.
+- If the JSON includes critical days (decumbiture), list them; otherwise state they are not calculable from natal data.
 
 **REMEDIAL CODEX (Planetary Charity):**
 - **SAFETY BLACKLIST ENFORCED**: NEVER suggest lead, mercury, or toxic metals.
 - **REPLACEMENTS**: 
   - IF Saturn mitigation: Use **Onyx or Hematite**, or service to the elderly.
-  - IF Mars/Blood: Use **Vigorous Exercise** or red foods.
+  - IF Mars/Blood imagery appears in the tradition: replace it with non-medical symbolic actions (e.g., disciplined exertion, honest conflict-resolution, charitable service on Mars's day).
 - Focus on charitable acts (donations) and behavioral shifts.
+- If Lunar Mansion data is present for the Moon, use the mansion intents as the electional "action verbs" for timing symbolic acts.
 
 **FINAL DECREE:**
 - Give a sum total judgment on the **Structural Integrity** of this Life.
@@ -516,10 +582,13 @@ class PremiumGenerator:
             r"(?i)\blead ingestion\b": "consumption of dark minerals",
             r"(?i)\buse of lead\b": "use of Onyx or Hematite",
             r"(?i)\bremedy of lead\b": "remedy of Onyx",
-            r"(?i)\bbloodletting\b": "vigorous physical exercise",
+            r"(?i)\bbloodletting\b": "vigorous exertion (historical symbolism only)",
             r"(?i)\barsenic\b": "structural challenge",
             r"(?i)\bguillotine\b": "professional setback",
             r"(?i)\bbeheading\b": "loss of reputation",
+            # Reduce "medical advice" surface area if it leaks through prompts.
+            r"(?i)\bthe prescription\b": "the protocol (historical use only)",
+            r"(?i)\bpreventative protocol\b": "historical correspondence (non-medical)",
         }
         
         import re

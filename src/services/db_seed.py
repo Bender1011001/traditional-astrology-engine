@@ -1,55 +1,57 @@
-import sys
-import os
-import uuid
+"""
+Database seeding helpers.
 
-# Ensure the project root is in the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+These used to live in `src/scripts/seed_db.py`. We keep them in a service module so
+the runtime app can import seeding without relying on a "scripts" folder.
+"""
+
+from __future__ import annotations
 
 from src.database.core import engine, Base, SessionLocal
-from src.database.models import SubscriptionPlan, User, UserSubscription
+from src.database.models import SubscriptionPlan
 from src.core.config import settings
 
-def seed_plans():
+
+def seed_plans() -> None:
     db = SessionLocal()
     try:
         print("Ensuring Subscription Plans exist (upsert)...")
 
         # Legacy env var fallback (older single-tier config).
-        # If present, treat it as Practitioner pricing so checkout works even if env names haven't been migrated yet.
         legacy_pract_monthly = (getattr(settings, "STRIPE_SUBSCRIPTION_PRICE_ID", "") or "").strip() or None
         legacy_pract_annual = (getattr(settings, "STRIPE_ANNUAL_PRICE_ID", "") or "").strip() or None
 
         desired = [
             {
                 "tier": "free",
-                "chart_quota": None,  # The public demo is rate-limited; signed-in users are not hard-capped here.
-                "api_quota": 0,       # No API keys for free plan.
+                "chart_quota": None,
+                "api_quota": 0,
                 "price_monthly": 0.00,
                 "price_annual": 0.00,
                 "stripe_price_id_monthly": None,
                 "stripe_price_id_annual": None,
-                "features": {"api_access": False}
+                "features": {"api_access": False},
             },
             {
                 "tier": "practitioner",
-                "chart_quota": None,  # Unlimited calculations (per plan).
-                "api_quota": 100,     # API calls/day
+                "chart_quota": None,
+                "api_quota": 100,
                 "price_monthly": 147.00,
                 "price_annual": 1470.00,
                 "stripe_price_id_monthly": settings.STRIPE_PRICE_PRACTITIONER_MONTHLY or legacy_pract_monthly,
                 "stripe_price_id_annual": settings.STRIPE_PRICE_PRACTITIONER_ANNUAL or legacy_pract_annual,
-                "features": {"api_access": True, "saved_charts_limit": 100}
+                "features": {"api_access": True, "saved_charts_limit": 100},
             },
             {
                 "tier": "studio",
-                "chart_quota": None,  # Unlimited calculations (per plan).
-                "api_quota": None,    # Unlimited API calls/day
+                "chart_quota": None,
+                "api_quota": None,
                 "price_monthly": 497.00,
                 "price_annual": 4970.00,
                 "stripe_price_id_monthly": settings.STRIPE_PRICE_STUDIO_MONTHLY or None,
                 "stripe_price_id_annual": settings.STRIPE_PRICE_STUDIO_ANNUAL or None,
-                "features": {"api_access": True, "saved_charts_limit": None, "seats": 5}
-            }
+                "features": {"api_access": True, "saved_charts_limit": None, "seats": 5},
+            },
         ]
 
         for d in desired:
@@ -68,19 +70,16 @@ def seed_plans():
 
         db.commit()
         print("Plans ensured successfully.")
-        
     except Exception as e:
         print(f"Error seeding plans: {e}")
         db.rollback()
     finally:
         db.close()
 
-def reset_db():
+
+def reset_db() -> None:
     print("Resetting Database (Clean Break)...")
-    # Dropping all tables to ensure clean slate for new schema
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     print("Database tables recreated.")
 
-if __name__ == "__main__":
-    seed_plans()

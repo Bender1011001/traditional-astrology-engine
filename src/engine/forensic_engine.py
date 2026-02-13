@@ -37,7 +37,8 @@ from .dignities import DignityCalculator
 from .hyleg import HylegAlcocodenEngine
 from .temperament import TemperamentEngine
 from .mansions import LunarMansionEngine
-from .calculations import calculate_solar_status, is_besieged, is_in_via_combusta
+from .geniture import LordOfGenitureEngine
+from .calculations import calculate_solar_status, is_besieged, is_in_via_combusta, format_longitude
 import re
 
 RULE_SOURCE_MAP_EXT = {
@@ -106,11 +107,15 @@ class Auditor:
         city: str,
         state: str = "",
         name: str = "Native",
+        latitude: Optional[float] = None,
+        longitude: Optional[float] = None,
         house_system: str = "W",
         zodiac_system: str = "tropical",
         ayanamsa: Optional[str] = None,
         node_type: str = "mean",
-        analysis_date: Optional[datetime] = None
+        analysis_date: Optional[datetime] = None,
+        decumbiture_jd: Optional[float] = None,
+        decumbiture_utc_iso: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         Single Entry Point for Comprehensive Forensic Audit.
@@ -122,6 +127,8 @@ class Auditor:
                 time_str=time_str,
                 city=city,
                 state=state,
+                latitude=latitude,
+                longitude=longitude,
                 house_system=house_system,
                 zodiac_system=zodiac_system,
                 ayanamsa=ayanamsa,
@@ -148,35 +155,65 @@ class Auditor:
                 age = ans_date.year - birth_dt.year - ((ans_date.month, ans_date.day) < (birth_dt.month, birth_dt.day))
 
             # 2. Analysis: Aggregate Specialized Engine Results via Centralized Auditor
+            # Optional: allow decumbiture critical days when an illness-onset JD is provided.
+            if decumbiture_jd is None and decumbiture_utc_iso:
+                try:
+                    ddt = datetime.fromisoformat(decumbiture_utc_iso.replace("Z", "+00:00"))
+                    # Convert to naive UTC for swe.julday if tz-aware
+                    if ddt.tzinfo is not None:
+                        ddt = ddt.astimezone(tz=None).replace(tzinfo=None)
+                    decumbiture_jd = swe.julday(ddt.year, ddt.month, ddt.day, ddt.hour + (ddt.minute / 60.0) + (ddt.second / 3600.0))
+                except Exception as e:
+                    logger.warning(f"Invalid decumbiture_utc_iso; ignoring. Error: {e}")
+                    decumbiture_jd = None
+
             audit_results = Auditor.perform_audit(
                 chart=chart,
                 jd=jd,
                 birth_dt=birth_dt,
                 ans_date=ans_date,
-                age=age
+                age=age,
+                decumbiture_jd=decumbiture_jd,
             )
             analysis = audit_results["analysis"]
             planets_forensic = audit_results["planets_forensic"]
+
+            # Ensure planetary forensic payload is available under analysis for prompt/Data Map stability.
+            # (Some callers only pass `technical_data.analysis` into an LLM, so keep this co-located.)
+            if isinstance(analysis, dict):
+                analysis["planets_forensic"] = planets_forensic
 
             # 3. State Assembly: Assemble technical_data
             technical_data = {
                 "meta": {
                     "subject_name": name,
-                    "timestamp": datetime.now().isoformat(),
+                    "generated_at": datetime.now().isoformat(),
+                    "analysis_date": ans_date.replace(microsecond=0).isoformat(),
                     "julian_day": jd,
-                    "city": city,
-                    "coords": {"lat": raw_chart_data["meta"]["lat"], "lon": raw_chart_data["meta"]["lon"]},
-                    "age": age
+                    "age": age,
+                    # Birth/location inputs (auditable). Preserve calculator meta verbatim so downstream
+                    # consumers can cite the actual birth date/time/location, timezone, and geocode source.
+                    "chart": raw_chart_data.get("meta", {}),
+                    # Back-compat convenience fields
+                    "birth_date": raw_chart_data.get("meta", {}).get("date"),
+                    "birth_time": raw_chart_data.get("meta", {}).get("time"),
+                    "city": raw_chart_data.get("meta", {}).get("city"),
+                    "state": raw_chart_data.get("meta", {}).get("state"),
+                    "lat": raw_chart_data.get("meta", {}).get("lat"),
+                    "lon": raw_chart_data.get("meta", {}).get("lon"),
+                    "timezone": raw_chart_data.get("meta", {}).get("timezone"),
+                    "utc_time": raw_chart_data.get("meta", {}).get("utc_time"),
                 },
                 "astronomy": {
                     "planets": raw_chart_data["planets"],
                     "houses": raw_chart_data["houses"],
                     "angles": {
-                        "Asc": raw_chart_data["angles"].get("Ascendant"),
-                        "MC": raw_chart_data["angles"].get("MC")
+                        "Ascendant": raw_chart_data["angles"].get("Ascendant"),
+                        "MC": raw_chart_data["angles"].get("MC"),
                     }
                 },
                 "analysis": analysis,
+                # Back-compat for older consumers. Prefer `technical_data.analysis.planets_forensic`.
                 "planets_forensic": planets_forensic,
                 "rule_ledger": audit_results.get("rule_ledger", [])
             }
@@ -205,7 +242,8 @@ class Auditor:
         jd: float, 
         birth_dt: Optional[datetime] = None, 
         ans_date: Optional[datetime] = None,
-        age: Optional[int] = None
+        age: Optional[int] = None,
+        decumbiture_jd: Optional[float] = None,
     ) -> Dict[str, Any]:
         """
         Exhaustive Architectural Audit of a Nativity.
@@ -216,11 +254,30 @@ class Auditor:
         
         # 1. Base Analysis
         analysis = {}
+        # Explicit sect payload so downstream prompts don't try to infer via houses/signs.
+        analysis["sect"] = {
+            "type": "DAY" if sect == Sect.DAY else "NIGHT",
+            "sun_altitude_deg": chart.sun_altitude,
+            "note": "Sect is determined by Sun altitude (above/below horizon), not by house labels."
+        }
         analysis[ "dignity" ] = Auditor._calculate_dignity_suite(chart)
         analysis[ "fate" ] = Auditor._calculate_fate_suite(chart, birth_dt, ans_date)
         analysis[ "teams" ] = Auditor._calculate_teams_and_reception(chart)
+        # For "Interfector" timing we need an approximate age in years.
+        age_years = None
+        if birth_dt and ans_date:
+            try:
+                age_years = max(0.0, (ans_date - birth_dt).days / 365.25)
+            except Exception:
+                age_years = None
+        if age_years is None and age is not None:
+            age_years = float(age)
+
+        analysis["vitality"] = Auditor._calculate_vitality_suite(chart, age_years=age_years)
+        analysis["triplicity_periods"] = Auditor._calculate_triplicity_periods(chart)
         analysis[ "temperament" ] = TemperamentEngine.calculate_temperament(chart)
         analysis[ "aspects" ] = AspectEngine.calculate_aspects(chart)
+        analysis["medical"] = Auditor._calculate_medical_suite(chart, decumbiture_jd=decumbiture_jd)
         
         # 2. Advanced Suites
         analysis[ "advanced_mechanics" ] = {
@@ -228,6 +285,73 @@ class Auditor:
             "doryphory": Auditor._calculate_doryphory_details(chart),
             "mundane_context": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).get_hierarchy_report()
         }
+
+        # 2b. Prenatal Syzygy + Natal Phase (auditable mechanics)
+        try:
+            import swisseph as swe
+            from .calculations import calculate_prenatal_syzygy_details
+            sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
+            moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
+            syz = calculate_prenatal_syzygy_details(chart.jd or 0.0)
+            syz_lon = float(syz["longitude"])
+            syz_type = str(syz["type"])
+            moon_sun_phase = float((moon.longitude - sun.longitude) % 360.0)  # 0..360 from Sun to Moon
+            # Minimal elongation (0..180): min(phase, 360-phase)
+            natal_elong = moon_sun_phase if moon_sun_phase <= 180.0 else (360.0 - moon_sun_phase)
+            is_waxing = moon_sun_phase < 180.0
+
+            def _jd_to_utc_iso(jd_ut: float) -> str:
+                y, m, d, h = swe.revjul(float(jd_ut))
+                hh = int(h)
+                mm_f = (h - hh) * 60.0
+                mm = int(mm_f)
+                ss = int(round((mm_f - mm) * 60.0))
+                if ss == 60:
+                    ss = 0
+                    mm += 1
+                if mm == 60:
+                    mm = 0
+                    hh = (hh + 1) % 24
+                return f"{int(y):04d}-{int(m):02d}-{int(d):02d}T{hh:02d}:{mm:02d}:{ss:02d}Z"
+
+            analysis["syzygy"] = {
+                "prenatal_syzygy": {
+                    "type": syz_type,
+                    "jd_ut": syz.get("jd_ut"),
+                    "datetime_utc": _jd_to_utc_iso(syz.get("jd_ut")) if syz.get("jd_ut") is not None else None,
+                    "sun_longitude": syz.get("sun_longitude"),
+                    "moon_longitude": syz.get("moon_longitude"),
+                    "longitude": syz_lon,
+                    "longitude_fmt": format_longitude(syz_lon),
+                    "next_syzygy": {
+                        "type": syz.get("next_syzygy", {}).get("type"),
+                        "jd_ut": syz.get("next_syzygy", {}).get("jd_ut"),
+                        "datetime_utc": _jd_to_utc_iso(syz.get("next_syzygy", {}).get("jd_ut"))
+                        if syz.get("next_syzygy", {}).get("jd_ut") is not None
+                        else None,
+                        "sun_longitude": syz.get("next_syzygy", {}).get("sun_longitude"),
+                        "moon_longitude": syz.get("next_syzygy", {}).get("moon_longitude"),
+                        "longitude": syz.get("next_syzygy", {}).get("longitude"),
+                        "longitude_fmt": format_longitude(syz.get("next_syzygy", {}).get("longitude", 0.0))
+                        if syz.get("next_syzygy", {}).get("longitude") is not None
+                        else None,
+                    },
+                    "note": syz.get("note"),
+                },
+                "natal_phase": {
+                    # Minimal elongation (0..180). This is what most users mean by "elongation".
+                    "moon_sun_elongation_deg": round(natal_elong, 6),
+                    "moon_sun_elongation_min_deg": round(natal_elong, 6),
+                    "moon_sun_phase_deg": round(moon_sun_phase, 6),
+                    "is_waxing": bool(is_waxing),
+                    "is_waning": bool(not is_waxing),
+                    "note_elongation": "moon_sun_elongation_* is the minimal separation in degrees (0..180). Do not derive alternate values (e.g., 180-elongation).",
+                    "note_phase": "moon_sun_phase_deg is measured from Sun to Moon (0..360). Waxing if <180; waning if >180.",
+                    "note": "Elongation at birth is a separate quantity from the prenatal syzygy type.",
+                },
+            }
+        except Exception:
+            analysis["syzygy"] = {"note": "Syzygy/phase not available."}
 
         # 3. Supplemental Layers
         moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
@@ -238,6 +362,21 @@ class Auditor:
             "elements": Auditor._calculate_elemental_balance(chart),
             "hemispheres": Auditor._calculate_hemispheres(chart)
         }
+
+        # Angle metadata (Whole Sign note): MC is an angle and may fall outside the 10th whole-sign house.
+        try:
+            asc_lon = float(chart.ascendant)
+            mc_lon = float(chart.mc)
+            asc_sign = list(Sign)[int(asc_lon / 30) % 12].value
+            mc_sign = list(Sign)[int(mc_lon / 30) % 12].value
+            mc_house_wsh = DignityCalculator.get_house_number(mc_lon, asc_lon, getattr(chart, "houses", None))
+            analysis["angles"] = {
+                "Ascendant": {"longitude": asc_lon, "longitude_fmt": format_longitude(asc_lon), "sign": asc_sign, "house_wsh": 1},
+                "Midheaven": {"longitude": mc_lon, "longitude_fmt": format_longitude(mc_lon), "sign": mc_sign, "house_wsh": mc_house_wsh},
+                "note": "Whole Sign Houses are used for house topics; MC is reported as an angle with its whole-sign house position."
+            }
+        except Exception:
+            analysis["angles"] = {"note": "Angle metadata unavailable."}
 
         # 4. Temporal Layers
         if birth_dt and age is not None:
@@ -279,12 +418,66 @@ class Auditor:
     @staticmethod
     def _calculate_doryphory_details(chart: Chart) -> List[Dict]:
         dory = DoryphoryEngine.check_doryphory(chart)
-        return [{"planet": d.planet.value, "type": d.type, "target": d.related_luminary} for d in dory]
+        sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
+        moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+        out: List[Dict] = []
+
+        def _same_sign(a: float, b: float) -> bool:
+            return int(a / 30.0) % 12 == int(b / 30.0) % 12
+
+        for d in dory:
+            p = next((pp for pp in chart.planets if pp.name == d.planet), None)
+            if not p:
+                continue
+
+            lum = sun if d.related_luminary == "Sun" else moon
+            lum_lon = float(lum.longitude) if lum else None
+            p_lon = float(p.longitude)
+
+            # Basic delta for auditability (not used for house judgment).
+            delta = None
+            if lum_lon is not None:
+                if d.related_luminary == "Sun":
+                    delta = float((lum_lon - p_lon) % 360.0)  # positive if planet precedes Sun
+                else:
+                    delta = float((p_lon - lum_lon) % 360.0)  # positive if planet follows Moon
+
+            out.append(
+                {
+                    "luminary": d.related_luminary,
+                    "guard": d.planet.value,
+                    "type": d.type,
+                    "score": d.score,
+                    "guard_longitude": p_lon,
+                    "guard_longitude_fmt": format_longitude(p_lon),
+                    "luminary_longitude": lum_lon,
+                    "luminary_longitude_fmt": format_longitude(lum_lon) if lum_lon is not None else None,
+                    "delta_deg": round(delta, 6) if delta is not None else None,
+                    "same_sign": _same_sign(p_lon, lum_lon) if lum_lon is not None else None,
+                    "note": "Doryphory instances are computed by DoryphoryEngine (Type 3 bodily rules + same-sign nuance).",
+                }
+            )
+
+        return out
 
     @staticmethod
     def _calculate_star_impacts(chart: Chart) -> List[Any]:
         from .stars import check_fixed_stars
-        return check_fixed_stars(chart)
+        contacts = check_fixed_stars(chart)
+        # Ensure JSON-serializable payload (avoid dataclass repr strings in reports).
+        try:
+            from dataclasses import is_dataclass, asdict
+            out = []
+            for c in contacts:
+                if is_dataclass(c):
+                    out.append(asdict(c))
+                elif isinstance(c, dict):
+                    out.append(c)
+                else:
+                    out.append({"value": str(c)})
+            return out
+        except Exception:
+            return [{"value": str(c)} for c in contacts]
 
     @staticmethod
     def _calculate_nodal_impacts(chart: Chart) -> List[Any]:
@@ -578,6 +771,20 @@ class Auditor:
                         "conflicts": [],
                         "trace": base_trace
                     })
+                dodec = p_data["classical"].get("dodecatemoria")
+                if dodec and isinstance(dodec, dict):
+                    val = dodec.get("valens") or {}
+                    if val:
+                        ledger.append({
+                            "id": _uid(f"{p_label.lower()}-dodecatemoria"),
+                            "category": "Dodecatemoria",
+                            "condition": f"{p_label} Twelfth-Part (Valens)",
+                            "judgment": f"{val.get('sign')} (House {val.get('house')})",
+                            "sources": ["Valens", "Paul of Alexandria"],
+                            "confidence": 80,
+                            "conflicts": [],
+                            "trace": base_trace
+                        })
 
         # 2. Directions
         for d in active_directions:
@@ -679,6 +886,7 @@ class Auditor:
     @staticmethod
     def _calculate_dignity_suite(chart: Chart) -> Dict:
         almuten_data = AlmutenEngine.calculate_almuten(chart)
+        geniture = LordOfGenitureEngine.calculate(chart)
         scores = {}
         winner = "Unknown"
         winner_score = 0
@@ -695,6 +903,7 @@ class Auditor:
                 "score": winner_score,
                 "breakdown": scores
             },
+            "lord_of_geniture": geniture,
             "doryphory": [d.planet.value for d in DoryphoryEngine.check_doryphory(chart)]
         }
 
@@ -725,7 +934,9 @@ class Auditor:
                 "arc": d.arc,
                 "years": d.years,
                 "date_offset": d.date_offset,
-                "method": d.method
+                "method": d.method,
+                "key": "Ptolemy (1 degree = 1 year)",
+                "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point).",
             }
             p_dirs_json.append(d_json)
             # Active if within 1 year of current age
@@ -752,17 +963,218 @@ class Auditor:
         }
 
     @staticmethod
-    def _calculate_medical_suite(chart: Chart) -> Dict:
+    def _calculate_medical_suite(chart: Chart, decumbiture_jd: Optional[float] = None) -> Dict:
         asc_sign = list(Sign)[int(chart.ascendant / 30) % 12]
         governed_part = MedicalAstrology.get_body_part_for_sign(asc_sign)
+        critical_days = None
+        critical_note = "Not calculable from natal data alone. Provide decumbiture (illness onset) date/time to compute."
+        if decumbiture_jd:
+            try:
+                critical_days = DecumbitureEngine.calculate_critical_days(decumbiture_jd)
+                critical_note = "Calculated from decumbiture (illness onset) Moon motion."
+            except Exception as e:
+                critical_days = None
+                critical_note = f"Critical days calculation failed: {e}"
         return {
             "constitution": governed_part,
             "distemper": DecumbitureEngine.analyze_distemper(asc_sign),
+            "critical_days": critical_days,
+            "critical_days_note": critical_note,
             "surgery_risk": MedicalAstrology.can_perform_surgery(
                 governed_part,
                 chart.jd,
                 chart
             )
+        }
+
+    @staticmethod
+    def _calculate_vitality_suite(chart: Chart, age_years: Optional[float] = None) -> Dict[str, Any]:
+        """
+        Vitality Trinity: Hyleg (giver of life), Alcocoden (giver of years), Anareta (killing planet).
+        Output is strictly technical for auditability.
+        """
+        hyleg = HylegAlcocodenEngine.determine_hyleg(chart)
+
+        alc_valens = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart, method="valens_term") if hyleg else None
+        alc_bonatti = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart, method="bonatti_points") if hyleg else None
+
+        # Keep both computations: different traditions can yield different alchochoden choices.
+        lifespan_valens = (
+            HylegAlcocodenEngine.calculate_lifespan(hyleg, alc_valens, chart)
+            if hyleg and alc_valens
+            else {"total_years": 0, "breakdown": ["No Alcocoden found (Valens term method)."]}
+        )
+        lifespan_bonatti = (
+            HylegAlcocodenEngine.calculate_lifespan(hyleg, alc_bonatti, chart)
+            if hyleg and alc_bonatti
+            else {"total_years": 0, "breakdown": ["No Alcocoden found (Bonatti/Lilly points method)."]}
+        )
+
+        # Sanity guard: if a computed "years" figure is less than the native's current age,
+        # it cannot be presented as a literal longevity value. Mark it invalid and scrub the number.
+        def _sanitize_years(label: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+            try:
+                if age_years is None:
+                    return payload
+                total = payload.get("total_years")
+                if total is None:
+                    return payload
+                total_f = float(total)
+                if total_f + 1e-9 < float(age_years):
+                    out = dict(payload)
+                    out["invalid_under_sanity"] = True
+                    out["total_years"] = None
+                    bd = list(out.get("breakdown") or [])
+                    # Redact numeric detail to prevent downstream consumers from presenting a bogus
+                    # "death age" that is already falsified by current age.
+                    try:
+                        import re
+                        bd = [re.sub(r"[-+]?\\d+(?:\\.\\d+)?", "[REDACTED]", str(x)) for x in bd]
+                    except Exception:
+                        bd = [str(x) for x in bd]
+                    bd.append(
+                        "SANITY: this method produced a years figure that is less than the native's current age. "
+                        "The numeric output has been scrubbed; do NOT read as length-of-life. "
+                        "Treat as a failed/misapplied variant or an early-life vulnerability indicator requiring rectification "
+                        "and primary-direction validation."
+                    )
+                    out["breakdown"] = bd
+                    return out
+            except Exception:
+                return payload
+            return payload
+
+        lifespan_valens = _sanitize_years("valens_term", lifespan_valens)
+        lifespan_bonatti = _sanitize_years("bonatti_points", lifespan_bonatti)
+
+        # Choose a default for downstream consumers (Bonatti tends to be more permissive/robust).
+        alc = alc_bonatti or alc_valens
+        lifespan = lifespan_bonatti if alc_bonatti else lifespan_valens
+        anareta = HylegAlcocodenEngine.determine_anareta(hyleg, chart) if hyleg else {"name": None, "reason": "No Hyleg available."}
+
+        # Interfector: active promittor direction striking the Hyleg (gold-standard distinction).
+        interfector = {"active": None, "candidates": [], "note": "Not calculated (missing hyleg or age)."}
+        try:
+            if hyleg and "longitude" in hyleg:
+                dirs = PrimaryDirectionsEngine.calculate_directions_to_point(
+                    chart=chart,
+                    geo_lat=chart.geo_lat,
+                    target_lon=hyleg["longitude"],
+                    target_label=f"Hyleg ({hyleg.get('name')})"
+                )
+                dirs_json = [
+                    {
+                        "significator": d.significator,
+                        "promittor": d.promittor,
+                        "aspect": d.aspect,
+                        "arc": d.arc,
+                        "years": d.years,
+                        "date_offset": d.date_offset,
+                        "method": d.method,
+                    }
+                    for d in dirs
+                ]
+                active = None
+                if age_years is not None and dirs:
+                    hard = [d for d in dirs_json if any(k in (d.get("aspect") or "") for k in ["Conjunction", "Square", "Opposition"])]
+                    # closest hard hit to current age
+                    if hard:
+                        active = min(hard, key=lambda x: abs((x.get("years") or 0) - age_years))
+                interfector = {
+                    "active": active,
+                    "candidates": dirs_json[:25],
+                    "note": "Interfector candidates are promittors by primary direction striking the Hyleg (zodiacal/OA method)."
+                }
+        except Exception as e:
+            interfector = {"active": None, "candidates": [], "note": f"Interfector calculation failed: {e}"}
+
+        alc_name = None
+        if alc and isinstance(alc, dict):
+            pn = alc.get("name")
+            alc_name = pn.value if hasattr(pn, "value") else (str(pn) if pn else None)
+
+        return {
+            "hyleg": hyleg,
+            "alcocoden": {"name": alc_name},
+            "alcocoden_methods": {
+                "valens_term": {
+                    "name": (alc_valens.get("name").value if hasattr(alc_valens.get("name"), "value") else str(alc_valens.get("name")))
+                    if isinstance(alc_valens, dict) and alc_valens.get("name") is not None
+                    else None,
+                    "details": alc_valens,
+                },
+                "bonatti_points": {
+                    "name": (alc_bonatti.get("name").value if hasattr(alc_bonatti.get("name"), "value") else str(alc_bonatti.get("name")))
+                    if isinstance(alc_bonatti, dict) and alc_bonatti.get("name") is not None
+                    else None,
+                    "details": alc_bonatti,
+                },
+                "note": "Multiple longevity traditions exist. This engine reports both Valens-term and Bonatti/Lilly-points candidates.",
+            },
+            "years_capacity": {
+                "default": lifespan,
+                "valens_term": lifespan_valens,
+                "bonatti_points": lifespan_bonatti,
+                "note": "Traditional years computations; not a literal life expectancy. Cross-validate with Primary Directions and documented accidents.",
+            },
+            "years_capacity_sanity": {
+                "age_years": age_years,
+                "valens_term_lt_age": (
+                    (lifespan_valens.get("total_years") is not None and float(lifespan_valens.get("total_years")) < float(age_years))
+                    if age_years is not None
+                    else None
+                ),
+                "bonatti_points_lt_age": (
+                    (lifespan_bonatti.get("total_years") is not None and float(lifespan_bonatti.get("total_years")) < float(age_years))
+                    if age_years is not None
+                    else None
+                ),
+                "note": "If a computed years figure is less than the native's current age, it cannot be read as a literal 'length of life'. Treat it as a failed/misapplied variant or as an early-life vulnerability indicator requiring rectification and primary-direction validation.",
+            },
+            "anareta": anareta,
+            "interfector": interfector,
+            "note": "Historical vitality/longevity technique. Not medical advice."
+        }
+
+    @staticmethod
+    def _calculate_triplicity_periods(chart: Chart) -> Dict[str, Any]:
+        """
+        Dorothean Triplicity Periods: life divided into three chapters ruled by the triplicity rulers
+        of the sect light's element (early/middle/late).
+        """
+        sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+        sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
+        moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+        sect_light = sun if sect == Sect.DAY else moon
+        if not sect_light:
+            return {"error": "Sect light not found."}
+
+        sign_idx = int(sect_light.longitude / 30) % 12
+        sign = list(Sign)[sign_idx]
+        element = DignityCalculator.ZODIAC_ELEMENTS.get(sign)
+        rulers = DignityCalculator.TRIPLICITY_RULERS.get(element) if element else None
+        if not rulers:
+            return {"error": "Triplicity rulers not available."}
+
+        # Dorothean tuple is (day, night, participant). Order differs by sect.
+        day_r, night_r, part_r = rulers[0], rulers[1], rulers[2]
+        if sect == Sect.DAY:
+            order = [day_r, night_r, part_r]
+        else:
+            order = [night_r, day_r, part_r]
+
+        return {
+            "sect": sect.value,
+            "sect_light": sect_light.name.value,
+            "sect_light_sign": sign.value,
+            "element": element,
+            "chapters": {
+                "early_life_ruler": order[0].value,
+                "middle_life_ruler": order[1].value,
+                "late_life_ruler": order[2].value,
+            },
+            "all_rulers": [r.value for r in order],
+            "method": "Dorothean Triplicity Periods (3 rulers: day/night/participant; ordered by sect)"
         }
 
     @staticmethod
@@ -782,6 +1194,23 @@ class Auditor:
                 if p.name in [PlanetName.MOON, PlanetName.VENUS, PlanetName.MARS]: constructive.append(p.name.value)
                 elif p.name in [PlanetName.SATURN]: destructive.append(p.name.value)
 
+        def _planet_sign(pn: PlanetName) -> str:
+            p = next((x for x in chart.planets if x.name == pn), None)
+            return p.sign.value if p else "Unknown"
+
+        def _rec_payload(r) -> Dict[str, object]:
+            # r is a Reception dataclass
+            return {
+                "guest": r.guest.value,
+                "host": r.host.value,
+                "dignities": list(r.dignities),
+                "score": r.score,
+                "is_valid": r.is_valid,
+                "is_operative": r.is_operative,
+                "mode": r.mode,
+                "mitigation": r.mitigation,
+            }
+
         return {
             "constructive_team": constructive,
             "destructive_team": destructive,
@@ -789,7 +1218,13 @@ class Auditor:
                 "planet_a": r.planet_a.value,
                 "planet_b": r.planet_b.value,
                 "type": r.type,
-                "score": r.strength_score
+                "score": r.strength_score,
+                # Make reception claims formally correct and auditable:
+                # A is "guest" in B's place; B receives A by dignities in that sign.
+                "a_in_b": _rec_payload(r.reception_a_in_b),
+                "b_in_a": _rec_payload(r.reception_b_in_a),
+                "planet_a_sign": _planet_sign(r.planet_a),
+                "planet_b_sign": _planet_sign(r.planet_b),
             } for r in receptions]
         }
 
@@ -809,26 +1244,117 @@ class Auditor:
     def _analyze_single_planet(planet: Planet, chart: Chart, jd: float, speculum: Dict) -> Dict:
         sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
         sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
-        
+        moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+        house_num = DignityCalculator.get_house_number(planet.longitude, chart.ascendant, getattr(chart, "houses", None))
+        essentials = DignityCalculator.get_essential_rulers(planet.longitude, sect)
+
+        # Monomoiria and Dodecatemoria are "secret chart" layers used for remediation and hidden condition checks.
+        asc_sign = list(Sign)[int(chart.ascendant / 30) % 12]
+        sun_sign = list(Sign)[int(sun.longitude / 30) % 12]
+        moon_sign = list(Sign)[int(moon.longitude / 30) % 12] if moon else asc_sign
+        is_day = sect == Sect.DAY
+
+        zoidion_mono = MonomoiriaEngine.get_zoidion_monomoiria(planet.longitude)
+        trigonal_mono = MonomoiriaEngine.get_trigonal_monomoiria(planet.longitude, is_day, sun_sign, moon_sign)
+
+        dodec_val_lon = DodecatemoriaEngine.calculate_dodecatemoria_valens(planet.longitude)
+        dodec_paul_lon = DodecatemoriaEngine.calculate_dodecatemoria_paul(planet.longitude)
+
+        def _dodec_payload(lon: float, method: str) -> Dict[str, object]:
+            s = list(Sign)[int(lon / 30) % 12]
+            h = DignityCalculator.get_house_number(lon, chart.ascendant, getattr(chart, "houses", None))
+            # Use Egyptian terms for consistency with the broader engine unless explicitly requested otherwise.
+            term_ruler = DignityCalculator.get_essential_rulers(lon, sect).get("term")
+            return {
+                "method": method,
+                "longitude": lon,
+                "sign": s.value,
+                "house": h,
+                "term_ruler": term_ruler.value if hasattr(term_ruler, "value") else str(term_ruler),
+            }
+
         result = {
             "name": planet.name.value,
             "longitude": planet.longitude,
+            "longitude_fmt": format_longitude(planet.longitude),
             "sign": planet.sign.value,
+            "house": house_num,
+            # Oriental/occidental is needed for phasis/doryphory and to prevent LLM contradictions.
+            # We compute it here rather than relying on Chart.Planet fields.
+            "is_oriental": PhasisEngine.is_oriental(planet.longitude, sun.longitude) if planet.name not in [PlanetName.SUN, PlanetName.MOON] else None,
+            "speed": planet.speed,
+            "retrograde": bool(planet.speed is not None and planet.speed < 0),
+            "dispositor": essentials.get("domicile").value if essentials.get("domicile") else None,
             "dignities": DignityCalculator.calculate_planet_dignity(planet.name, planet.longitude, sect),
+            "accidental": DignityCalculator.calculate_accidental_dignity(planet, chart),
             "solar_status": calculate_solar_status(planet, sun),
+            "solar_elongation_deg": round((((planet.longitude - sun.longitude) + 540.0) % 360.0) - 180.0, 6),
             "phasis": {
                 "phase": PhasisEngine.get_synodic_phase(planet, sun.longitude).value,
-                "is_visible": PhasisEngine.calculate_visibility(
-                    jd, chart.geo_lat, chart.geo_lon, 
-                    planet.name, planet.longitude, planet.latitude, sun.longitude
-                )
+                "visibility": None,
+                "is_visible": None,
+            },
+            "voice": {
+                # "Voice" is the report-layer framing: visible planets can testify.
+                "has_voice": None,
+                "note": "Derived from phasis visibility; visibility implies capacity to testify (traditional phasis doctrine)."
             },
             "maltreatments": [
                 {"condition": m.type, "malefic": m.malefic.value, "description": m.description, "severity": m.severity}
                 for m in KakosisEngine.check_maltreatments(planet, chart)
             ],
+            "classical": {
+                "monomoiria": {
+                    "zoidion_ruler": zoidion_mono.value,
+                    "trigonal_ruler": trigonal_mono.value,
+                },
+                "dodecatemoria": {
+                    "valens": _dodec_payload(dodec_val_lon, "Valens (x12)"),
+                    "paul": _dodec_payload(dodec_paul_lon, "Paul (x13)"),
+                },
+            },
             "impacts": []
         }
+
+        # Phasis visibility details (auditable)
+        try:
+            vis = PhasisEngine.calculate_visibility_details(
+                jd,
+                chart.geo_lat,
+                chart.geo_lon,
+                planet.name,
+                planet.longitude,
+                planet.latitude,
+                sun.longitude,
+            )
+            result["phasis"]["visibility"] = vis
+            result["phasis"]["is_visible"] = bool(vis.get("is_visible"))
+        except Exception:
+            result["phasis"]["visibility"] = {"note": "Visibility calculation failed."}
+            result["phasis"]["is_visible"] = None
+
+        # Populate voice flag after phasis computed
+        try:
+            result["voice"]["has_voice"] = bool(result.get("phasis", {}).get("is_visible"))
+        except Exception:
+            result["voice"]["has_voice"] = None
+
+        # Moon special-case: treat near-Sun condition as lunar phase/visibility, not "planetary combustion" rhetoric.
+        if planet.name == PlanetName.MOON:
+            try:
+                elong = abs(((planet.longitude - sun.longitude) + 540.0) % 360.0 - 180.0)
+                # "Visible" threshold is contextual; for audit, be conservative.
+                # If within ~12 degrees of Sun, treat as not visibly testifying.
+                if elong < 12.0:
+                    result["phasis"]["is_visible"] = False
+                    if isinstance(result["phasis"].get("visibility"), dict):
+                        result["phasis"]["visibility"]["is_visible"] = False
+                        result["phasis"]["visibility"]["method"] = "lunar_dark_override"
+                        result["phasis"]["visibility"]["note"] = "Moon within 12° of Sun: forced dark/obscured for testimony."
+                    result["voice"]["has_voice"] = False
+                    result["voice"]["note"] = "Moon within 12° of Sun: treated as dark/obscured for testimony (phase/visibility doctrine)."
+            except Exception:
+                pass
 
         # Besiegement
         if is_besieged(planet, chart):

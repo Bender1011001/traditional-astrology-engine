@@ -114,42 +114,98 @@ class HylegAlcocodenEngine:
         return {"type": "Fallback", "name": "Ascendant", "longitude": chart.ascendant, "candidate": "Ascendant"}
 
     @staticmethod
-    def determine_alcocoden(hyleg_data: Dict, chart: Chart) -> Dict:
+    def determine_alcocoden(hyleg_data: Dict, chart: Chart, method: str = "bonatti_points") -> Dict:
         """
         Determines the Alcocoden (Giver of Years).
-        Hellenistic-first: term (bound) ruler of the Hyleg degree that aspects the Hyleg.
+
+        Supported methods:
+        - "valens_term": strict bound/term ruler of the Hyleg degree (degree-based), must aspect the Hyleg.
+        - "bonatti_points": essential rulers scored (dom/exalt/trip/term/face), highest score that aspects the Hyleg.
+
+        Notes on aspect requirement:
+        - We first attempt a degree-based Ptolemaic aspect check with a generous orb.
+        - If no candidate qualifies (common when the Hyleg is an angle/degree), we fall back to
+          whole-sign aspect logic (0/60/90/120/180 by sign), which is consistent with
+          whole-sign framing used elsewhere in this project.
         """
         h_lon = hyleg_data["longitude"]
         sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
         
-        # Term (bound) ruler of the Hyleg degree
-        rulers = DignityCalculator.get_essential_rulers(h_lon, sect)
-        term_ruler = rulers.get("term")
-        if not term_ruler:
+        rulers = DignityCalculator.get_essential_rulers(h_lon, sect) or {}
+
+        # Bonatti-style points per dignity
+        weights = {"domicile": 5, "exaltation": 4, "triplicity": 3, "term": 2, "face": 1}
+
+        # Accumulate points for each potential ruler (or strict term only)
+        points: Dict[PlanetName, int] = {}
+        if method == "valens_term":
+            pn = rulers.get("term")
+            if pn is not None:
+                points[pn] = weights["term"]
+        else:
+            for dignity_key, w in weights.items():
+                pn = rulers.get(dignity_key)
+                if pn is None:
+                    continue
+                points[pn] = points.get(pn, 0) + w
+
+        # Resolve to candidates with planet objects
+        candidates = []
+        for pn, score in points.items():
+            p_obj = next((p for p in chart.planets if p.name == pn), None)
+            if not p_obj:
+                continue
+            candidates.append({"name": pn, "score": score, "planet": p_obj, "via": method})
+
+        if not candidates:
             return None
-        
-        cand_planet = next((p for p in chart.planets if p.name == term_ruler), None)
-        if not cand_planet:
+
+        def _degree_aspects(p_lon: float, target_lon: float, orb: float = 12.0) -> Optional[str]:
+            d = abs(p_lon - target_lon) % 360.0
+            if d > 180.0:
+                d = 360.0 - d
+            for a in [0, 60, 90, 120, 180]:
+                if abs(d - a) <= orb:
+                    return {0: "Conjunction", 60: "Sextile", 90: "Square", 120: "Trine", 180: "Opposition"}[a]
             return None
-        
-        diff = abs(cand_planet.longitude - h_lon) % 360
-        if diff > 180:
-            diff = 360 - diff
-        
-        is_aspect = False
-        for aspect in [0, 60, 90, 120, 180]:
-            if abs(diff - aspect) <= 12:
-                is_aspect = True
-                break
-        
-        if not is_aspect:
+
+        def _sign_aspects(p_lon: float, target_lon: float) -> Optional[str]:
+            ps = int(p_lon / 30.0) % 12
+            ts = int(target_lon / 30.0) % 12
+            diff = (ps - ts) % 12
+            mapping = {0: "Conjunction (Whole Sign)", 2: "Sextile (Whole Sign)", 3: "Square (Whole Sign)", 4: "Trine (Whole Sign)", 6: "Opposition (Whole Sign)"}
+            return mapping.get(diff)
+
+        # 1) Degree-orb aspect pass
+        orb_hits = []
+        for c in candidates:
+            asp = _degree_aspects(c["planet"].longitude, h_lon)
+            if asp:
+                c2 = dict(c)
+                c2["aspect"] = asp
+                c2["aspect_mode"] = "degree_orb"
+                orb_hits.append(c2)
+
+        if orb_hits:
+            best = max(orb_hits, key=lambda x: (x["score"],))
+            return best
+
+        # 2) Whole-sign fallback pass (explicitly marked)
+        sign_hits = []
+        for c in candidates:
+            asp = _sign_aspects(c["planet"].longitude, h_lon)
+            if asp:
+                c2 = dict(c)
+                c2["aspect"] = asp
+                c2["aspect_mode"] = "whole_sign"
+                sign_hits.append(c2)
+
+        if not sign_hits:
             return None
-        
-        return {
-            "name": term_ruler,
-            "score": 2,
-            "planet": cand_planet
-        }
+
+        best = max(sign_hits, key=lambda x: (x["score"],))
+        best["note"] = "No degree-orb aspect qualified; selected by whole-sign aspect fallback."
+        return best
 
     @staticmethod
     def calculate_lifespan(hyleg: Dict, alcocoden: Dict, chart: Chart) -> Dict:
@@ -177,11 +233,13 @@ class HylegAlcocodenEngine:
         logs = [f"Base: {years_type} Years of {p_name.value} ({base_years}) due to House {house} and dignity {dignity_score}"]
         total = base_years
         
-        # 2. Additions/Subtractions from Aspects
-        # Benefics (Jup, Ven) add their Minor years
-        # Malefics (Sat, Mars) subtract their Minor years
-        # Mercury/Sun/Moon can add/subtract depending on nature/sect?
-        # Simplified: Jup/Ven add, Sat/Mars subtract.
+        # 2. Additions/Subtractions from Aspects (Bonatti/Lilly-inspired heuristic)
+        #
+        # Many medieval presentations add/subtract in a mixed "years + months" manner:
+        # - Benefics can add their Minor Years + (Mean Years / 12) as years (months converted to years)
+        # - Malefics can subtract similarly, but typically only on hard aspects.
+        #
+        # This is still an approximation; we keep it auditable and conservative.
         
         for p in chart.planets:
             if p.name == p_name: continue
@@ -203,24 +261,23 @@ class HylegAlcocodenEngine:
                 if p.name not in HylegAlcocodenEngine.PLANETARY_YEARS:
                     continue
                     
-                years_val = HylegAlcocodenEngine.PLANETARY_YEARS[p.name]["minor"]
+                minor_y = float(HylegAlcocodenEngine.PLANETARY_YEARS[p.name]["minor"])
+                mean_y = float(HylegAlcocodenEngine.PLANETARY_YEARS[p.name]["mean"])
+                delta_full = minor_y + (mean_y / 12.0)
                 
                 if p.name in [PlanetName.JUPITER, PlanetName.VENUS]:
-                    # Benefics add (Conjunction, Trine, Sextile)
-                    # Squares/Oppositions might not add or add less.
-                    # Bonatti: Benefics always help unless very afflicted.
+                    # Benefics add: full help on soft aspects, partial on hard aspects.
                     if aspect_type in ["Conjunction", "Trine", "Sextile"]:
-                        mod = years_val
+                        mod = delta_full
                     elif aspect_type in ["Square", "Opposition"]:
-                         mod = years_val / 2 # Partial help
+                        mod = delta_full / 2.0
                          
                 elif p.name in [PlanetName.SATURN, PlanetName.MARS]:
-                    # Malefics subtract (Conj, Sq, Opp)
+                    # Malefics subtract: only on hard aspects.
                     if aspect_type in ["Conjunction", "Square", "Opposition"]:
-                        mod = -years_val
+                        # Treat squares as weaker than conjunction/opposition in this numeric heuristic.
+                        mod = -(delta_full / 2.0) if aspect_type == "Square" else -delta_full
                     elif aspect_type in ["Trine", "Sextile"]:
-                        mod = -years_val / 4 # Minimal harm? Or maybe helpful?
-                        # Malefics in good aspect usually just didn't harm.
                         mod = 0
                 
                 if mod != 0:
@@ -248,4 +305,54 @@ class HylegAlcocodenEngine:
             "total_years": total,
             "vitality_rating": rating,
             "breakdown": logs
+        }
+
+    @staticmethod
+    def determine_anareta(hyleg_data: Dict, chart: Chart) -> Dict:
+        """
+        Determines a plausible Anareta (Killing Planet) as a technical vitality indicator.
+
+        This is implemented as a conservative, auditable heuristic:
+        - Prefer Mars/Saturn (the malefics).
+        - Look for the closest hard contact (Conjunction/Square/Opposition) to the Hyleg degree.
+        - Return the strongest candidate with a tight orb.
+        """
+        if not hyleg_data or "longitude" not in hyleg_data:
+            return {"name": None, "reason": "No Hyleg available."}
+
+        h_lon = hyleg_data["longitude"]
+        malefics = [PlanetName.MARS, PlanetName.SATURN]
+
+        best = None
+        best_orb = 999.0
+        best_aspect = None
+
+        for pn in malefics:
+            p = next((pl for pl in chart.planets if pl.name == pn), None)
+            if not p:
+                continue
+            diff = abs(p.longitude - h_lon) % 360
+            if diff > 180:
+                diff = 360 - diff
+
+            # hard aspects
+            for asp, label, orb_allow in [(0, "Conjunction", 5.0), (90, "Square", 4.0), (180, "Opposition", 4.0)]:
+                orb = abs(diff - asp)
+                if orb <= orb_allow and orb < best_orb:
+                    best = p
+                    best_orb = orb
+                    best_aspect = label
+
+        if not best:
+            return {
+                "name": None,
+                "reason": "No tight hard aspect from Mars/Saturn to the Hyleg degree found."
+            }
+
+        return {
+            "name": best.name.value,
+            "longitude": best.longitude,
+            "aspect_to_hyleg": best_aspect,
+            "orb": round(best_orb, 2),
+            "reason": f"{best.name.value} makes a tight {best_aspect} to the Hyleg degree."
         }

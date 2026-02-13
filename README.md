@@ -9,7 +9,7 @@ The Sovereign Release marks the graduation of the engine from a research project
 
 - **Hardened Synthesis**: Fully aligned with traditional binder specifications, featuring the **Amplification/Greed Node Model** and narrative-driven geometric aspect interpretation.
 - **Advanced Mechanics**: Integrated **Almuten Figuris** (Ibn Ezra 12-point house scoring) and the **Panaretos Lot Protocol** (full Forensic Audits for the 7 Hermetic Lots).
-- **Professional CLI**: A new entry point for high-precision report generation (`src/scripts/generate_practitioner_report.py`).
+- **Premium CLI**: A single entry point for generating the premium forensic report (`src/scripts/generate_premium_report.py`).
 - **Audit-Grade Logic**: Every calculation now includes a **Kakosis (Maltreatment)** audit, checking for besiegement, combustion, and malefic intervention.
 
 ## Core Features
@@ -55,7 +55,7 @@ The Sovereign Release marks the graduation of the engine from a research project
 ### Running the Professional CLI
 Generate technical JSON data and a narrative Markdown report:
 ```bash
-python src/scripts/generate_practitioner_report.py --name "Alexander Hamilton" --date "1755-01-11" --time "12:00" --city "Charlestown" --house_system "P"
+python src/scripts/generate_premium_report.py --name "Alexander Hamilton" --date "1755-01-11" --time "12:00" --city "Charlestown" --state "MA"
 ```
 
 ### Running the Web API

@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
 from .models import Sign, PlanetName, Planet, Sect
 from .stars import STARS, get_shortest_dist, get_star_longitude
+from .calculations import format_longitude
 
 # Chorography mapping from Binder1_part_001.txt
 CHOROGRAPHY = {
@@ -148,6 +149,8 @@ class MundaneEngine:
             # Use absolute difference to be safe, though end should be > start
             start_t = res_sol[1][1]
             end_t = res_sol[1][4]
+            tot_start_t = res_sol[1][2] if len(res_sol[1]) > 2 else -1
+            tot_end_t = res_sol[1][3] if len(res_sol[1]) > 3 else -1
             
             if start_t > 0 and end_t > 0:
                 duration_days = abs(end_t - start_t)
@@ -156,6 +159,12 @@ class MundaneEngine:
                 duration_days = 0.10 # Approx 2.4 hours as standard fallback
             
             duration_hours = duration_days * 24.0
+            central_phase_minutes = None
+            if tot_start_t and tot_end_t and tot_start_t > 0 and tot_end_t > 0 and tot_end_t > tot_start_t:
+                # Swiss Ephemeris provides intermediate contacts; depending on the eclipse this may represent
+                # a "central" phase duration, not guaranteed "maximum totality". We record it but do not
+                # convert it into years of influence.
+                central_phase_minutes = (tot_end_t - tot_start_t) * 24.0 * 60.0
 
             res_pos = swe.calc_ut(tjd_sol, swe.SUN, swe.FLG_SWIEPH)
             lon = res_pos[0][0]
@@ -165,6 +174,7 @@ class MundaneEngine:
                 "jd": tjd_sol,
                 "longitude": lon,
                 "duration_hours": duration_hours,
+                "central_phase_minutes": central_phase_minutes,
                 "sign": list(Sign)[int(lon / 30) % 12],
                 "degree": lon % 30
             })
@@ -200,6 +210,7 @@ class MundaneEngine:
                 "jd": tjd_lun,
                 "longitude": lon,
                 "duration_hours": duration_hours,
+                "central_phase_minutes": None,
                 "sign": list(Sign)[int(lon / 30) % 12],
                 "degree": lon % 30
             })
@@ -259,15 +270,16 @@ class MundaneEngine:
         }
 
     def calculate_eclipse_sophistication(self, eclipse: Dict) -> Dict:
-        # 1. Duration Rule
-        # Solar: 1 hour = 1 year influence
-        # Lunar: 1 hour = 1 month influence
-        if eclipse["type"] == "Solar Eclipse":
-            influence_years = eclipse["duration_hours"]
-            influence_months = influence_years * 12
-        else:
-            influence_months = eclipse["duration_hours"]
-            influence_years = influence_months / 12.0
+        # 1. Duration / Influence Rule (conservatively handled)
+        # Different authors use different keys. The common modern reconstruction is:
+        # minutes of *totality* -> years of effect. We only compute an influence proxy when
+        # totality minutes are available; otherwise we leave it unset to avoid fake precision.
+        influence_years = None
+        influence_months = None
+        influence_note = (
+            "Influence period not computed. "
+            "Traditional keys vary by author; do not infer 'years of effect' from duration without a declared rule."
+        )
 
         # 2. Timing Rule (Quadrants of Intensification)
         # Calculate local chart for eclipse time
@@ -321,13 +333,29 @@ class MundaneEngine:
         tri_name = SIGN_TO_TRI_NAME.get(sign, "Unknown")
         regions = CHOROGRAPHY.get(tri_name, [])
 
+        y, m, d, _h = swe.revjul(eclipse["jd"])
+        date_utc = f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+
         return {
-            "duration_hours": eclipse["duration_hours"],
-            "influence_period": f"{influence_years:.2f} years ({influence_months:.2f} months)",
+            "jd": eclipse["jd"],
+            "date_utc": date_utc,
+            "longitude": eclipse["longitude"],
+            "sign": eclipse["sign"].value if hasattr(eclipse["sign"], "value") else str(eclipse["sign"]),
+            "degree": round(eclipse["degree"], 2),
+            "longitude_fmt": format_longitude(eclipse["longitude"]),
+            "house_quadrant": house_found,
+            # Intentionally suppressed: these event windows are easy to misread as "years of effect".
+            # Traditional influence keys vary by author and require explicit methodological choice.
+            "duration_hours": None,
+            "central_phase_minutes": None,
+            "influence_years": influence_years,
+            "influence_months": influence_months,
+            "influence_note": influence_note,
             "quadrant": quadrant,
             "intensification": intensification,
             "chorography_triplicity": tri_name,
-            "affected_regions": regions
+            "chorography_regions": regions,
+            "chorography_note": "Regions are traditional chorography mappings by triplicity, not modern visibility maps."
         }
 
     def get_latest_great_conjunction(self) -> Optional[Dict]:
@@ -335,32 +363,64 @@ class MundaneEngine:
         Find the nearest preceding Great Conjunction (Jupiter-Saturn).
         Returns True Conjunction data.
         """
-        curr_jd = self.jd
-        max_iter = 300 # Approx 25 years
-        prev_diff = None
-        
-        for _ in range(max_iter):
-            res_j = swe.calc_ut(curr_jd, swe.JUPITER, swe.FLG_SWIEPH)
-            res_s = swe.calc_ut(curr_jd, swe.SATURN, swe.FLG_SWIEPH)
-            lon_j = res_j[0][0]
-            lon_s = res_s[0][0]
-            
-            diff = (lon_j - lon_s + 180) % 360 - 180
-            
-            if prev_diff is not None and (prev_diff * diff < 0):
-                # Refining True Conjunction
-                return {
-                    "jd": curr_jd,
-                    "longitude": lon_j,
-                    "sign": list(Sign)[int(lon_j / 30) % 12].value,
-                    "type": "True Conjunction (Haqiqi)",
-                    "description": "Jupiter-Saturn alignment (Observed/Calculated)"
-                }
-            
-            prev_diff = diff
-            curr_jd -= 30.0
-            
-        return None
+        # Search backwards for the *closest preceding* conjunction in time.
+        # We detect the first time the Jupiter-Saturn separation enters a "near-conjunction" band,
+        # then refine locally to find the minimum separation.
+        start_jd = self.jd
+        step = 2.0
+        max_days = 80 * 365.25  # ~80 years back is plenty for typical use
+        trigger_sep = 5.0       # degrees
+
+        def _sep_at(jd: float) -> tuple[float, float, float]:
+            j_lon = swe.calc_ut(jd, swe.JUPITER, swe.FLG_SWIEPH)[0][0]
+            s_lon = swe.calc_ut(jd, swe.SATURN, swe.FLG_SWIEPH)[0][0]
+            delta = (j_lon - s_lon) % 360.0
+            sep = min(delta, 360.0 - delta)
+            return sep, j_lon, s_lon
+
+        traversed = 0.0
+        jd = start_jd
+        bracket_center = None
+        while traversed < max_days:
+            sep, _j, _s = _sep_at(jd)
+            if sep <= trigger_sep:
+                bracket_center = jd
+                break
+            jd -= step
+            traversed += step
+
+        if bracket_center is None:
+            return None
+
+        # Refine around the detected band. Conjunction proximity persists for months/years,
+        # so use a generous window.
+        refine_center = bracket_center
+        refine_window = 500.0  # days
+        refine_step = 0.05     # days (~1.2h)
+        jd = refine_center + refine_window
+        end = refine_center - refine_window
+        best = {"sep": 999.0, "jd": None, "lon_j": None, "lon_s": None}
+        while jd >= end:
+            sep, j_lon, s_lon = _sep_at(jd)
+            if sep < best["sep"]:
+                best = {"sep": sep, "jd": jd, "lon_j": j_lon, "lon_s": s_lon}
+            jd -= refine_step
+
+        conj_jd = best["jd"]
+        lon_j = best["lon_j"]
+        fmt = format_longitude(lon_j)
+        y, m, d, _h = swe.revjul(conj_jd)
+        return {
+            "jd": conj_jd,
+            "date_utc": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
+            "longitude": lon_j,
+            "longitude_fmt": fmt,
+            "sign": fmt["sign"],
+            "degree": fmt["deg_in_sign"],
+            "separation_deg": round(best["sep"], 6) if best["sep"] is not None else None,
+            "type": "Great Conjunction (Jupiter-Saturn)",
+            "description": "Computed by detecting the closest preceding conjunction band (sep<=5°) and minimizing separation locally.",
+        }
 
     def get_mean_conjunction_era(self) -> Dict:
         """
@@ -379,9 +439,11 @@ class MundaneEngine:
         
         days_to_last = diff / closing_rate
         last_mean_jd = self.jd - days_to_last
+        y, m, d, _h = swe.revjul(last_mean_jd)
         
         # Position at conjunction
         lon_at_conj = (mean_sat - (days_to_last * MEAN_MOTION_SATURN)) % 360.0
+        lon_fmt = format_longitude(lon_at_conj)
         sign = list(Sign)[int(lon_at_conj / 30) % 12]
         triplicity = SIGN_TO_TRI_NAME.get(sign, "Unknown")
         
@@ -395,7 +457,9 @@ class MundaneEngine:
         
         return {
             "last_mean_jd": last_mean_jd,
+            "date_utc": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
             "longitude": lon_at_conj,
+            "longitude_fmt": lon_fmt,
             "sign": sign.value,
             "triplicity": triplicity,
             "type": "Mean Conjunction (Wasati)",

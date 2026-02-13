@@ -10,7 +10,7 @@ from .config import (
     COMPARE_SYSTEMS, 
     HOUSE_SYSTEM_LABELS
 )
-from .geo import get_coordinates, get_timezone, get_local_datetime_now
+from .geo import get_coordinates, get_coordinates_with_meta, get_timezone, get_local_datetime_now
 from .time_utils import get_julian_day, _localize_with_historical_tz
 from .astronomy import get_planets_ut, get_houses, compare_house_systems_calc
 
@@ -39,13 +39,18 @@ class ChartCalculator:
         dt: datetime,
         city: str,
         state: str = "",
+        latitude: float | None = None,
+        longitude: float | None = None,
         house_system: str | None = None,
         zodiac_system: str | None = None,
         ayanamsa: str | None = None,
         node_type: str = "mean" # "mean" or "true"
     ) -> Chart:
-        # 1. Geocoding
-        lat, lon = get_coordinates(city, state)
+        # 1. Geocoding (or explicit override)
+        if latitude is not None and longitude is not None:
+            lat, lon = float(latitude), float(longitude)
+        else:
+            lat, lon = get_coordinates(city, state)
         
         # 2. Timezone
         tz_str = get_timezone(lat, lon)
@@ -207,6 +212,8 @@ def calculate_chart_data(
     time_str: str,
     city: str,
     state: str = "",
+    latitude: float | None = None,
+    longitude: float | None = None,
     house_system: str | None = None,
     compare_house_systems: bool = False,
     zodiac_system: str | None = None,
@@ -228,9 +235,30 @@ def calculate_chart_data(
          return {"error": f"Date parsing error: {str(e)}"}
          
     calc = ChartCalculator()
+
+    # Ensure we have explicit coordinates before calculating, so we only geocode once and can report the source.
+    geocode_meta = None
+    if latitude is None or longitude is None:
+        try:
+            lat_val, lon_val, geocode_meta = get_coordinates_with_meta(city, state)
+            latitude, longitude = lat_val, lon_val
+        except Exception as e:
+            return {"error": str(e)}
+    else:
+        geocode_meta = {"source": "override", "note": "Latitude/longitude provided directly to calculator."}
     
     try:
-        chart = calc.calculate_chart(dt, city, state, house_system, zodiac_system, ayanamsa, node_type)
+        chart = calc.calculate_chart(
+            dt,
+            city,
+            state,
+            latitude=latitude,
+            longitude=longitude,
+            house_system=house_system,
+            zodiac_system=zodiac_system,
+            ayanamsa=ayanamsa,
+            node_type=node_type,
+        )
     except Exception as e:
         return {"error": str(e)}
 
@@ -241,21 +269,21 @@ def calculate_chart_data(
     # Refactoring Calculator to return tuple (Chart, Meta) is cleaner but ChartCalculator.calculate_chart traditionally returns just Chart.
     # We will just re-fetch tz info for the meta report to be safe.
     
+    tz_str = "unknown"
+    tz_meta = {}
+    utc_dt = dt
+    house_code, house_label = normalize_house_system(house_system)
+    zodiac_code, zodiac_label = normalize_zodiac_system(zodiac_system)
+
+    # Re-derive timezone metadata from the chart coordinates (works even if geocoding was bypassed).
     try:
-        lat, lon = get_coordinates(city, state)
-        tz_str = get_timezone(lat, lon)
+        tz_str = get_timezone(chart.geo_lat, chart.geo_lon)
         local_tz = pytz.timezone(tz_str)
-        local_dt, utc_dt, tz_meta = _localize_with_historical_tz(local_tz, dt)
-        jd = get_julian_day(utc_dt)
-        house_code, house_label = normalize_house_system(house_system)
-        zodiac_code, zodiac_label = normalize_zodiac_system(zodiac_system)
-        ayanamsa_deg = None
-        if zodiac_code == "sidereal":
-             # We can't easily get the exact ayanamsa deg used by calc unless we duplicate logic or ask calc.
-             # We'll rely on global swisseph state potentially or just re-calc.
-             pass
+        _, utc_dt, tz_meta = _localize_with_historical_tz(local_tz, dt)
     except Exception:
-        pass # Should have been caught by calc.calculate_chart
+        # Keep best-effort defaults; chart.jd is still authoritative for calculations.
+        tz_str = tz_str or "unknown"
+        tz_meta = tz_meta or {}
         
     results = {
         "meta": {
@@ -265,6 +293,7 @@ def calculate_chart_data(
             "state": state,
             "lat": chart.geo_lat,
             "lon": chart.geo_lon,
+            "geocode": geocode_meta,
             "timezone": tz_str,
             "tz_abbrev": tz_meta.get("tz_abbrev"),
             "utc_offset_hours": tz_meta.get("utc_offset_hours"),

@@ -39,7 +39,6 @@ An automated PowerShell script is provided to bootstrap a fresh VPS.
 4.  **Database Seeding**:
     Initialize the database and seed subscription plans.
     ```bash
-    python -m src.scripts.omnibus rehydrate
     ```
 
 ## Running the Application
@@ -61,7 +60,7 @@ To update the application:
 
 2.  **Apply Database Migrations**:
     ```bash
-    python -m src.scripts.omnibus migrate
+    (Project note) Administrative maintenance commands were moved into service modules to keep `src/scripts/` minimal.
     ```
 
 3.  **Restart Server**:

@@ -159,7 +159,7 @@ docker run -p 8000:8000 --env-file .env codex-engine
 | `src/app.py` | **Main Web Server** | Production entry point. Initializes FastAPI, DB, and Middleware. |
 | `src/main.py` | **Testing/CLI Audit** | Runs a hardcoded "Universal Causation Audit" (Dev tool). |
 | `src/mcp_server.py` | **Agent Protocol** | Exposes engine via Model Context Protocol for AI agents. |
-| `src/scripts/generate_practitioner_report.py`| **CLI Report** | Generates full Markdown reports from command line. |
+| `src/scripts/generate_premium_report.py`| **CLI Report** | Generates premium Markdown reports from command line. |
 
 ## 4. Environment Variables
 See `.env.example` for full list.

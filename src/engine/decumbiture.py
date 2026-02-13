@@ -102,19 +102,19 @@ class DecumbitureEngine:
         if moon_sign in [Sign.ARIES, Sign.LEO, Sign.SAGITTARIUS]:
             element = "Fire"
             humor = "Choleric (Yellow Bile)"
-            treatment = "Cooling and Moistening (e.g., Barley water, Cucumber)"
+            treatment = "Cooling and Moistening (historical correspondence only)"
         elif moon_sign in [Sign.TAURUS, Sign.VIRGO, Sign.CAPRICORN]:
             element = "Earth"
             humor = "Melancholic (Black Bile)"
-            treatment = "Heating and Moistening (e.g., Ginger, warm baths)"
+            treatment = "Heating and Moistening (historical correspondence only)"
         elif moon_sign in [Sign.GEMINI, Sign.LIBRA, Sign.AQUARIUS]:
             element = "Air"
             humor = "Sanguine (Blood)"
-            treatment = "Cooling and Drying (e.g., Sour things, venting)"
+            treatment = "Cooling and Drying (historical correspondence only)"
         elif moon_sign in [Sign.CANCER, Sign.SCORPIO, Sign.PISCES]:
             element = "Water"
             humor = "Phlegmatic (Phlegm)"
-            treatment = "Heating and Drying (e.g., Pepper, Mustard, Sweating)"
+            treatment = "Heating and Drying (historical correspondence only)"
             
         return {
             "moon_sign": moon_sign.value,

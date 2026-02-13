@@ -32,7 +32,7 @@
 - `mundane.py`: Solar/Lunar eclipse calculators and World Hierarchy.
 - `medical.py`: Traditional Iatromathematics protocol.
 - `electional.py`: Kairos engine for perfect timing (Electional Astrology).
-- `src/scripts/generate_practitioner_report.py`: **Main Entry**. High-precision script for dual JSON/Markdown professional reports.
+- `src/scripts/generate_premium_report.py`: **Main Entry**. Premium forensic report generator (LLM synthesis over engine JSON).
 
 ## Trap Diary
 | Issue | Cause | Fix |

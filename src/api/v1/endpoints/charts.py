@@ -26,6 +26,7 @@ from src.database.core import get_db
 from src.database.models import UsageRecord, User
 from sqlalchemy.orm import Session
 from sqlalchemy import func
+from src.core.promo import free_individual_readings_promo_active
 
 router = APIRouter()
 
@@ -157,6 +158,10 @@ async def calculate_chart(
     tier = "free"
     plan_tier = None
 
+    # Account required for readings. Exception: a valid access token (legacy magic link / purchase restore).
+    if not current_user and not chart_request.access_token:
+        raise HTTPException(status_code=401, detail="Account required to generate readings.")
+
     # Authenticated users with an active/trial subscription get full outputs.
     if current_user and current_user.subscription and current_user.subscription.plan:
         if current_user.subscription.status in {"active", "trial"} and current_user.subscription.plan.tier != "free":
@@ -166,7 +171,11 @@ async def calculate_chart(
     # Legacy access token path (kept for backward compatibility).
     if tier == "free" and chart_request.access_token:
         payload = validate_token(chart_request.access_token)
-        if payload and payload.get("chart_hash") == chart_hash:
+        if not payload or payload.get("chart_hash") != chart_hash:
+            # No user + invalid token should not get a reading.
+            if not current_user:
+                raise HTTPException(status_code=401, detail="Invalid or expired access token. Please log in.")
+        else:
             tier = "paid"
     
     # Cache Check
@@ -210,6 +219,8 @@ async def calculate_chart(
         
     final_result["meta"]["tier"] = tier
     final_result["meta"]["chart_hash"] = chart_hash
+    # Promo: unlock individual readings for a limited time (UI decides how to gate).
+    final_result["meta"]["promo_unlocked"] = bool(free_individual_readings_promo_active())
     if plan_tier:
         final_result["meta"]["plan_tier"] = plan_tier
 

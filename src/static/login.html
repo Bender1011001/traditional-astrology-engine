@@ -248,6 +248,19 @@
                         status.style.color = "var(--success)";
 
                         setTimeout(() => {
+                            // If user was forced to log in to generate a reading, return them there.
+                            try {
+                                const next = localStorage.getItem("cael_post_auth_redirect") || "";
+                                if (next) {
+                                    localStorage.removeItem("cael_post_auth_redirect");
+                                    const isRelative = next.startsWith("/") || /^[A-Za-z0-9_.\\-]+\\.html(\\?.*)?$/.test(next);
+                                    const isSameOrigin = next.startsWith(window.location.origin);
+                                    if (isRelative || isSameOrigin) {
+                                        window.location.href = next;
+                                        return;
+                                    }
+                                }
+                            } catch (e) { }
                             window.location.href = "index.html";
                         }, 1000);
                     } else {

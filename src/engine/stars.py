@@ -37,8 +37,9 @@ STARS = [
         nature="Saturn/Mars", 
         magnitude=2, 
         orb=2.5,
-        glory="None (Pure Malefic)",
-        nemesis="Losing one's head, beheading, extreme violence",
+        glory="High-intensity eminence when handled with integrity",
+        # Avoid doom-porn / literal violence language in outputs (see Algol reframing rule).
+        nemesis="Loss of face; reputational collapse through rashness or loss of composure",
         swe_name="Algol",
         mythology="Medusa's Head"
     ),

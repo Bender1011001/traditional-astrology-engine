@@ -8,7 +8,7 @@ from datetime import datetime
 # Ensure the src directory is in the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
 
-from src.scripts.apply_schema_patch import patch_database
+from src.services.db_patch import patch_database
 from src.core.config import settings
 
 router = APIRouter()

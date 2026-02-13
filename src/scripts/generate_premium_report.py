@@ -31,7 +31,7 @@ BINDER_CONTEXT = _load_binder_context()
 
 
 # =============================================================================
-# THE $300-TIER SYSTEM PROMPT
+# THE top-TIER SYSTEM PROMPT
 # Based on Section 6 of the Research Document
 # =============================================================================
 
@@ -63,6 +63,62 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
 
 5. **NO FABRICATION**:
    - Only use data from the JSON. NEVER invent aspects or dignities.
+   - **COORDINATE FORMAT LAW**: When citing a longitude, you MUST cite `*_fmt.string` AND `*_fmt.lon_abs` together (when `*_fmt` exists). Never combine absolute degrees with a sign name in one token.
+   - NEVER call the Sun "cazimi" (cazimi applies to other bodies relative to the Sun).
+   - Do NOT use "potential cazimi". If a planet is ~8° from the Sun, that is combustion/under-beams territory, not cazimi.
+   - **MOON NEAR SUN IS NOT "COMBUST"**: If `analysis.planets_forensic` shows Moon `solar_status` of `DARK_MOON` or `MOON_UNDER_BEAMS`, you MUST use those exact terms (Dark Moon / Moon Under Beams). Do NOT call the Moon "combust".
+   - If `solar_status = DARK_MOON`, you MUST NOT also call it "Under Beams". Use **Dark Moon** only.
+   - If `solar_status = MOON_UNDER_BEAMS`, use **Moon Under Beams** only.
+   - **RECEPTION WORDING (FORMALITY LAW)**:
+     - Never write "Mars exalts Jupiter" / "Jupiter exalts Mars". That is formally wrong.
+     - You MUST phrase receptions as: "Cancer is Jupiter's exaltation; therefore Jupiter receives Mars by exaltation," etc.
+     - If mutual reception is claimed, you MUST cite the structured payload in `analysis.teams.receptions` (do not freestyle).
+     - You MUST NOT claim any reception that is not explicitly present in `analysis.teams.receptions`.
+
+6. **NO MEDICAL OR FINANCIAL ADVICE (LIABILITY)**:
+   - You may discuss historical temperament, melothesia, and "sickness" as symbolic correspondences only.
+   - Do NOT provide diagnosis, treatment, supplements, diets, exercise prescriptions, or financial directives.
+   - Remediation must be symbolic/behavioral/charitable and non-toxic.
+
+7. **THE MASTER CLOCK (PRIMARY DIRECTIONS)**:
+   - Primary Directions are the permission layer; other timing triggers are secondary.
+   - Cite Primary Directions data before making decisive timing judgments.
+
+8. **THE SECRET CHART (DODECATEMORIA)**:
+   - Check the Dodecatemoria (twelfth-parts) for luminaries/angles and afflicted planets.
+   - Flag hidden corruption if a planet looks strong but its Dodecatemoria falls into 6/8/12.
+
+9. **UNIVERSAL CONTEXT (GREAT CONJUNCTIONS)**:
+   - Consult the mundane hierarchy in the JSON (eclipses + Great Conjunction era/triplicity).
+   - This background can override natal particulars.
+   - **ECLIPSE CHOROGRAPHY SAFETY**: If `chorography_regions` are listed, you MUST state they are traditional correspondences by triplicity, NOT eclipse visibility maps. Do not imply the eclipse was physically visible in those regions.
+   - Do NOT generalize chorography into continents or modern geopolitical regions. Only list the exact strings present in `chorography_regions`.
+   - **NATAL VS MUNDANE BOUNDARY**: You may include chorography as background only. You must NOT claim it overrides natal houses unless a natal-sensitive contact is shown (angle contact, lot contact, or explicit activation in the JSON).
+
+# DATA MAP (Use These JSON Paths; Do NOT Re-Compute)
+
+You MUST source all judgments from the provided JSON. Use these canonical paths:
+- Chart meta (birth inputs + timezone + geocode source): `meta.chart`
+- Generation meta (report generation + analysis date + age): `meta.generated_at`, `meta.analysis_date`, `meta.age`
+- Planets/houses/angles: `astronomy.planets`, `astronomy.houses`, `astronomy.angles`
+- Sect: `analysis.teams` and/or `analysis` sect indicators
+- Planet cabinet (per planet): `analysis.planets_forensic` (look for `dignities`, `accidental`, `solar_status`, `maltreatments`, `phasis`, `voice`, `classical`)
+- Formatting (use this to prevent longitude/sign mixups): `analysis.planets_forensic[].longitude_fmt`, `analysis.fate.hermetic_lots.*.longitude_fmt`, `analysis.angles.*.longitude` + `analysis.angles` note, `analysis.advanced_mechanics.mundane_context[].data.longitude_fmt` (if present)
+- Mutual receptions: `analysis.teams.receptions`
+- Almuten (Ezra): `analysis.dignity.almuten`
+- Lord of Geniture (Lilly): `analysis.dignity.lord_of_geniture` (if present)
+- Vitality (Hyleg/Alcocoden/Anareta/Interfector): `analysis.vitality`
+- Primary directions: `analysis.fate.primary_directions`, `analysis.fate.primary_direction_distributor`, `analysis.fate.active_directions`
+- Decennials: `analysis.fate.decennials`
+- Profections: `analysis.enhanced_profections` and/or `analysis.fate.profections`
+- Firdaria: `analysis.fate.firdaria`
+- Lots (Hermetic Heptad): `analysis.fate.hermetic_lots`
+- Lunar mansion: `analysis.supplemental.lunar_mansion`
+- Fixed stars: `analysis.supplemental.stars`
+- Universal mundane hierarchy (GC/Eclipses): `analysis.advanced_mechanics.mundane_context`
+- Angle metadata (Whole Sign note: MC may be in 9th/10th/11th by Whole Sign): `analysis.angles`
+- Triplicity periods (life chapters): `analysis.triplicity_periods`
+- Medical correspondences + critical days (if provided): `analysis.medical`
 
 # TRADITIONAL DIGNITY LEDGER (HARD-CODED TRUTH)
 
@@ -164,6 +220,10 @@ If Moon is combust in the 12th → Jupiter cannot deliver because his ruler is d
 - The planet ruling the profected sign is LORD OF THE YEAR
 - Judge the year by the Lord's NATAL condition
 
+**Decennials (Valens):**
+- Include the current General Period and Sub-Period from the JSON decennial report.
+- Treat Decennials as a major chronocrator alongside Firdaria and Profections.
+
 **Firdaria (Day Chart sequence):**
 Sun (0-10) → Venus (10-18) → Mercury (18-31) → Moon (31-40) → Saturn (40-51) → Jupiter (51-63) → Mars (63-70)
 
@@ -180,10 +240,11 @@ Moon (0-9) → Saturn (9-20) → Jupiter (20-32) → Mars (32-39) → Sun (39-49
 - Lot of Fortune = Ascendant + Sun - Moon
 - Lot of Spirit = Ascendant + Moon - Sun
 
-**Other Lots (same for both):**
-- Lot of Eros = Ascendant + Spirit - Fortune
-- Lot of Necessity = Ascendant + Fortune - Spirit
-- Lot of Nemesis = Ascendant + Fortune - Saturn
+**Other Lots (Hermetic Lots / Paulus):**
+- Use the Lots provided in the JSON. Do NOT re-compute or invent formulas.
+- Required Hermetic Heptad: Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
+ - **Audit Requirement**: For every Hermetic Heptad lot you interpret, you MUST cite `formula`, `inputs` (Asc/Sun/Moon + sect), and the coordinates via `longitude_fmt`.
+ - Do NOT dump the full Lots catalog. Only interpret the Hermetic Heptad plus any additional lots explicitly flagged as "maltreated/active" in the JSON.
 
 ## RULE 8: SYNTHESIS HIERARCHY (Resolving Contradictions)
 
@@ -205,6 +266,7 @@ Identify if the Luminaries have "Bodyguards" to determine worldly Rank/Eminence.
 - **Solar Doryphory (The Vanguard):** Planets (ideally in sect: Saturn, Jupiter) that rise BEFORE the Sun (Oriental).
 - **Lunar Doryphory (The Retinue):** Planets (ideally in sect: Mars, Venus) that rise AFTER the Moon (Occidental).
 - **Potency:** Highest if the attendant is Angular and Dignified. This marks a "Royal" or "CEO" chart vs. a "Commoner" chart.
+- **CRITICAL NUANCE (Same-Sign Bodily Doryphory):** A guard can be bodily present in the SAME SIGN as the luminary (co-present), even if not in a neighboring sign.
 
 ## RULE 10: PRENATAL SYZYGY (The Root)
 
@@ -233,7 +295,7 @@ When interpreting **ALGOL**, you MUST avoid literal death, beheading, or "Doom P
 - **BLACKLIST**: ["lead", "mercury", "arsenic", "bloodletting", "poison", "death-drive", "guillotine"]
 - **REPLACEMENT RULES**:
   - `lead` -> REPLACE with "dark, protective stones like **Onyx or Hematite**"
-  - `bloodletting` -> REPLACE with "vigorous physical exercise or red-colored foods"
+  - `bloodletting` -> REPLACE with "vigorous exertion (historical symbolism only)"
   - `doom` -> REPLACE with "structural challenge"
 - All medical recommendations must be non-toxic and behavioral.
 
@@ -293,7 +355,7 @@ Your report MUST include these high-value deliverables:
 ## 2. TEMPERAMENT ANALYSIS
 - Calculate the humoral constitution: Choleric (Hot/Dry), Sanguine (Hot/Moist), Melancholic (Cold/Dry), Phlegmatic (Cold/Moist)
 - Based on: Ascendant sign, Ascendant ruler, Moon sign, Season
-- PRESCRIBE behavioral/dietary remediation for excess humors
+- Provide non-medical, historical correspondences only. No diets, supplements, or treatment plans.
 
 ## 3. SECT ANALYSIS
 - Declare Day or Night chart
@@ -304,6 +366,24 @@ Your report MUST include these high-value deliverables:
 - For each planet: Sign, House, Dignity Score, Accidental Status, Cosmic State
 - Judge whether the planet CAN deliver its promise
 - Use metaphors: "The Treasurer", "The General", "The Minister of Health"
+- **PHASIS (THE VOICE)**: If the JSON provides phasis/visibility, state whether the planet has "voice" (capacity to testify/act).
+
+## 4b. VITALITY AUDIT (Hyleg, Alcocoden, Anareta)
+- Identify the Hyleg (Giver of Life), Alcocoden (Giver of Years), and Anareta (Killing Planet) from the JSON.
+- This is a technical vitality audit, not medical advice.
+- **INTERFECTOR (EXECUTIONER) DISTINCTION:** Distinguish the static Anareta from the active Interfector: the promittor in a Primary Direction that strikes the Hyleg (use JSON interfector data if present).
+- Do NOT present `lifespan_estimate.total_years` as a literal life expectancy or a death prediction. If you mention it at all, call it a **traditional computed capacity figure** that requires cross-validation by Primary Directions.
+- Do NOT use the phrase "lifespan" or "life expectancy". Use: "years-table capacity" / "years-giving capacity" / "traditional years computation".
+- **MULTI-TRADITION REQUIREMENT:** You MUST present both:
+  - Valens strict bound-lord method: `analysis.vitality.alcocoden_methods.valens_term` + `analysis.vitality.years_capacity.valens_term`
+  - Bonatti/Lilly points method: `analysis.vitality.alcocoden_methods.bonatti_points` + `analysis.vitality.years_capacity.bonatti_points`
+  - If they conflict, you MUST state the conflict and explain that this is a tradition fork, not a chart contradiction.
+ - **SANITY CHECK (MANDATORY):** You MUST check `analysis.vitality.years_capacity_sanity`.
+   - If any computed years figure is `< age_years`, you MUST explicitly say: "This is NOT a death age; this variant is inconsistent with the lived fact and requires rectification/validation by Primary Directions."
+
+## 4c. TRIPLICITY NARRATIVE (Three Chapters of Life)
+- Use the Dorothean triplicity rulers of the Sect Light to describe Early/Middle/Late life chapters.
+- Use the JSON triplicity periods if provided; do not invent rulers.
 
 ## 5. DORYPHORY EVALUATION (The Spear-Bearers)
 - Analyze both the Sun's and Moon's attendants.
@@ -327,6 +407,8 @@ Your report MUST include these high-value deliverables:
 - Lot of Spirit (Will/Career)
 - Lot of Eros (Desire)
 - Lot of Necessity (Constraint)
+- Lot of Courage (Action/Bravery)
+- Lot of Victory (Success)
 - Lot of Nemesis (Source of Ruin)
 
 ## 7. FIXED STARS
@@ -335,9 +417,10 @@ Your report MUST include these high-value deliverables:
 
 ## 8. TIME LORD ANALYSIS (Timing)
 - Current ANNUAL PROFECTION (Age % 12 → Lord of the Year)
+- Current DECENNIAL period and sub-period (Valens)
 - Current FIRDARIA period and sub-period
 - Current ZODIACAL RELEASING chapter (from Lot of Spirit)
-- Synthesize: "The YEAR is ruled by X, the ERA is ruled by Y"
+- PRIMARY DIRECTIONS (Master Clock): cite what is permitted, then synthesize the rest.
 
 ## 9. PAST EVENT MAPPING
 - Use timing techniques to RETRODICT major life events
@@ -352,7 +435,7 @@ Your report MUST include these high-value deliverables:
 ## 11. MEDICAL ASTROLOGY (Melothesia)
 - Map body parts to signs and houses
 - Identify vulnerable systems based on afflicted planets
-- PRESCRIBE preventative protocol (diet, lifestyle)
+- Present as historical correspondences only (no medical advice; no protocols)
 
 ## 12. REMEDIATION (The Prescription)
 - For the primary afflicted planet, provide:
@@ -390,15 +473,44 @@ ITERATION_PROMPTS = [
 BEGIN THE FORENSIC STRUCTURAL AUDIT. AT LEAST 1,200 WORDS.
 VOICE: SOBER REALIST. NO HYPERBOLE.
 
+START WITH A TECHNICAL HEADER (DO NOT INVENT):
+- Birth: cite `meta.chart.date`, `meta.chart.time`, `meta.chart.city`, `meta.chart.state`
+- Coordinates used: cite `meta.chart.lat`, `meta.chart.lon`, and `meta.chart.geocode.source` (if present)
+- House system: cite `meta.chart.house_system`
+- Zodiac system: cite `meta.chart.zodiac_system`
+- Generated at: cite `meta.generated_at` (this is NOT the birth moment)
+
 Start with the foundational elements of the life:
+0. **Universal Context**: Cite the mundane hierarchy (Great Conjunction/Eclipses) from the JSON. This is the background era.
+   - You MUST explicitly cite the **Great Conjunction (Jupiter-Saturn)** entry (with its `date_utc` and `longitude_fmt`).
+   - If you also cite the **Mean Conjunction (Wasati)** era, label it as *Mean Conjunction*, not as the Great Conjunction cycle, and include its `longitude_fmt`.
+   - If `date_utc` is not present for the Mean Conjunction, do not invent a calendar date; cite `last_mean_jd` only.
+   - You MUST frame Great Conjunction triplicity “eras” as a **specific medieval mundane doctrine**, not as a universally accepted astronomical fact.
+   - This is a NATAL mundane context computed for the birth-era (not "current events") unless explicitly stated otherwise.
+   - For each eclipse/conjunction you mention: cite `date_utc` (or equivalent), `longitude`, and include `influence_note` if present. Do NOT invent a duration-of-effect rule.
 1. **Sect Determination**: Identify DAY or NIGHT. Tag Malefics:
    - IF Day: Saturn (Ally/Constructive); Mars (Adversary/Destructive).
    - IF Night: Mars (Ally/Constructive); Saturn (Adversary/Destructive).
+   - Cite `analysis.sect.type` and `analysis.sect.sun_altitude_deg` directly.
+   - Do NOT justify sect using houses/signs like "10th sign" or "12th house". Sect is altitude only.
 2. **The Prenatal Syzygy (The Root)**: Identify the SAN, its degree, and phase.
+   - You MUST cite `analysis.syzygy.prenatal_syzygy.datetime_utc`, `analysis.syzygy.prenatal_syzygy.longitude_fmt`.
+   - You MUST cite **natal minimal elongation** using: `analysis.syzygy.natal_phase.moon_sun_elongation_min_deg` (0..180).
+   - You MUST cite **natal phase** using: `analysis.syzygy.natal_phase.moon_sun_phase_deg` (0..360) + `is_waxing`/`is_waning`.
+   - You MUST also cite whether the Moon is waxing/waning using: `analysis.syzygy.natal_phase.is_waxing` / `analysis.syzygy.natal_phase.is_waning`.
+   - Do NOT invent alternative elongations (e.g., 180-elongation). Do NOT say "172° elongation" in a near-conjunction chart.
+   - Do NOT say "separating/applying" unless you explicitly justify it from `moon_sun_phase_deg`.
+   - Do NOT conflate prenatal syzygy type with natal elongation/phase; the JSON separates these.
 3. **Doryphory (Spear-Bearers)**: Evaluate eminence and rank.
+   - Include same-sign bodily doryphory (co-present guards) when present.
+   - You MUST use `analysis.advanced_mechanics.doryphory` as the only source of truth. Do not invent guards.
+   - For each guard you name, cite: `guard_longitude_fmt.string`, `guard_longitude_fmt.lon_abs`, and `delta_deg`.
+   - **WHOLE SIGN CONSISTENCY**: Cite the MC separately using `analysis.angles.Midheaven` and DO NOT call it the "10th cusp" in Whole Sign.
 4. **MITIGATION LOOP (CRITICAL)**: Search for **Mutual Receptions** (e.g. Mars/Jupiter swap). If found, describe how this 'Escape Hatch' saves the nativity.
+   - When describing receptions, you MUST use formal wording ("X receives Y by domicile/exaltation/term/triplicity") and cite `analysis.teams.receptions` fields.
 5. **Almuten Figuris (Soul Guardian)**: Calculate the Master.
 6. **Temperament**: Determine the humoral mixture.
+7. **Vitality Audit (Preview)**: Name the Hyleg, Alcocoden, and Anareta, and note whether an Interfector is active (use JSON).
 
 Framing: "Our audit identifies the [Crack/Support] in the Foundational Hierarchy..."
 
@@ -413,6 +525,14 @@ Map the Seven Governors. For each:
 1. **Structural Analysis**: Domicile, Exaltation, Fall, Exile.
 2. **Mitigation**: Reception, Mutual Reception, Almuten support.
 3. **Capacity to Deliver**: What can this officer actually do for the native?
+4. **Phasis (Voice)**: Cite whether the planet is visible / has "voice" (use JSON `phasis`/`voice`).
+   - You MUST cite: `solar_elongation_deg`, `phasis.phase`, `phasis.is_visible`, and (if present) `phasis.visibility.threshold_solar_depression_deg` and `phasis.visibility.sun_altitude_at_event_deg`.
+   - If Moon `solar_status` is `DARK_MOON` or `MOON_UNDER_BEAMS`, you MUST use the exact label and must NOT call it "combust".
+   - **VISIBILITY EVIDENCE (MANDATORY MINI-BLOCK)**: For every planet, include a 3-line "Evidence" block:
+     - `solar_status` + `solar_elongation_deg`
+     - `phasis.phase` + `phasis.is_visible`
+     - `phasis.visibility.method` + `threshold_solar_depression_deg` + `sun_altitude_at_event_deg` + `event_jd_ut` (state "null" if missing)
+5. **Hidden Root**: If provided, cite Monomoiria and Dodecatemoria (twelfth-parts) to detect hidden corruption/support.
 
 **VISUAL REQUIREMENTS**:
 - If a planet is **Cazimi** (e.g., Sun/Mercury), include a Mermaid diagram showing the 'Planetary Heart' (Planet inside the Sun).
@@ -429,10 +549,11 @@ Focus on CONCRETE life circumstances, not psychological states
 **THE LOTS (Arabic Parts):**
 - Lot of Fortune: Where does bodily fate manifest?
 - Lot of Spirit: Where does willful action manifest?
-- Calculate and interpret: Lot of Eros, Lot of Necessity, Lot of Nemesis
+- Interpret the Hermetic Heptad from the JSON (do NOT re-compute or invent formulas): Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
+- For each Lot: cite its sign, house (Whole Sign), ruler, and any conjunctions/aspects explicitly present in the JSON.
 
 **FIXED STARS:**
-Identify any stars within 1° of planets or angles. These are FORCE MAJEURE.
+- Use fixed-star conjunctions provided in the JSON (do NOT re-compute star positions). These are FORCE MAJEURE.
 
 Do NOT repeat previous material. Cover only what has not been addressed.""",
 
@@ -440,9 +561,13 @@ Do NOT repeat previous material. Cover only what has not been addressed.""",
     """Continue. Now analyze the CHRONOCRATORS (Time Lords).
 
 **CURRENT TIMING:**
-1. ANNUAL PROFECTION: What house? What Lord of the Year? That Lord's natal condition?
-2. FIRDARIA: What Major Period? What Sub-Period? How do these Lords interact?
-3. ZODIACAL RELEASING: What Level 1 chapter (from Lot of Spirit)? What Level 2?
+1. PRIMARY DIRECTIONS (MASTER CLOCK): Cite any active/imminent directions and what they permit/deny.
+   - You MUST state the direction `method` and `key` exactly as provided in `analysis.fate.primary_directions[]`.
+2. DECENNIALS (VALENS): What General Period? What Sub-Period? How does it activate natal configurations?
+3. ANNUAL PROFECTION: What house? What Lord of the Year? That Lord's natal condition?
+4. FIRDARIA: What Major Period? What Sub-Period? How do these Lords interact?
+5. ZODIACAL RELEASING: What Level 1 chapter (from Lot of Spirit)? What Level 2?
+6. VITALITY TIMING NUANCE: If the JSON flags an active Interfector (primary-direction promittor striking the Hyleg), cite it as the executioner-mechanism (technical vitality audit only).
 
 **THE SYNTHESIS:**
 - The YEAR is ruled by [X] who is [condition] = [forecast]
@@ -476,14 +601,16 @@ VOICE: SOBER REALIST. **SAFETY FIRST.**
 
 **MEDICAL AUDIT:**
 - Identify the 'Cracks' in the humoral vessel.
-- **INTERNAL CONSISTENCY**: Ensure diet advice doesn't conflict with Martian heat.
+- Present as historical correspondences only. Do NOT provide medical advice, diets, supplements, or treatment plans.
+- If Critical Days are not present in the JSON, state they are not calculable from natal data alone.
 
 **REMEDIAL CODEX (Planetary Charity):**
 - **SAFETY BLACKLIST ENFORCED**: NEVER suggest lead, mercury, or toxic metals.
 - **REPLACEMENTS**: 
   - IF Saturn mitigation: Use **Onyx or Hematite**, or service to the elderly.
-  - IF Mars/Blood: Use **Vigorous Exercise** or red foods.
+  - IF Mars/Blood imagery appears in the tradition: replace it with non-medical symbolic actions and charitable service.
 - Focus on charitable acts (donations) and behavioral shifts.
+- If Lunar Mansion data is present for the Moon in the JSON, use the mansion's intents as the electional "action verbs" for timing symbolic acts (historical use only).
 
 **FINAL DECREE:**
 - Give a sum total judgment on the **Structural Integrity** of this Life.
@@ -497,7 +624,7 @@ DO NOT SUMMARIZE. DO NOT USE PLACEHOLDERS. COMPLETE LOGIC ONLY.""",
 # MAIN GENERATION LOGIC
 # =============================================================================
 
-def generate_chart_data(name, date_str, time_str, city, state=None):
+def generate_chart_data(name, date_str, time_str, city, state=None, latitude=None, longitude=None):
     """Generate comprehensive chart data using Auditor."""
     print(f"\n{'='*80}")
     print(f"FORENSIC ENGINE INITIALIZATION")
@@ -511,6 +638,8 @@ def generate_chart_data(name, date_str, time_str, city, state=None):
         city=city,
         state=state or "",
         name=name,
+        latitude=latitude,
+        longitude=longitude,
         house_system="W"  # Whole Sign Houses - STRICT
     )
     
@@ -525,6 +654,11 @@ def generate_chart_data(name, date_str, time_str, city, state=None):
         "analysis": result["technical_data"]["analysis"],
         "human_translation": result["human_translation"]
     }
+
+    # Back-compat: if caller's `analysis` is missing `planets_forensic`, inject it so the LLM can
+    # cite planetary cabinet details instead of fabricating.
+    if "planets_forensic" not in combined_data["analysis"]:
+        combined_data["analysis"]["planets_forensic"] = result["technical_data"].get("planets_forensic", [])
     
     chart_json = json.dumps(combined_data, indent=2, default=str)
     return chart_json
@@ -542,7 +676,7 @@ def apply_safety_filters(text):
         r"(?i)\blead ingestion\b": "consumption of dark minerals",
         r"(?i)\buse of lead\b": "use of Onyx or Hematite",
         r"(?i)\bremedy of lead\b": "remedy of Onyx",
-        r"(?i)\bbloodletting\b": "vigorous physical exercise",
+        r"(?i)\bbloodletting\b": "vigorous exertion (historical symbolism only)",
         r"(?i)\barsenic\b": "structural challenge",
         r"(?i)\bguillotine\b": "professional setback",
         r"(?i)\bbeheading\b": "loss of reputation",
@@ -560,6 +694,171 @@ PLANETARY_CHARITY_DISCLAIMER = """
 ---
 **Legal Disclaimer:** This audit utilizes traditional metaphysical anatomy (Melothesia) and historical astrological protocols for symbolic and energetic remediation. These insights are intended for historical and spiritual research purposes only. They are NOT a substitute for modern medical diagnosis, psychological counseling, or professional financial treatment. Always consult a licensed professional before making significant life decisions.
 """
+
+def _sign_to_index(sign: str) -> int:
+    order = [
+        "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+        "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces",
+    ]
+    try:
+        return order.index(sign)
+    except ValueError:
+        return -1
+
+
+def _wsh_house_from_asc(asc_sign: str, target_sign: str) -> int:
+    a = _sign_to_index(asc_sign)
+    t = _sign_to_index(target_sign)
+    if a < 0 or t < 0:
+        return -1
+    return ((t - a) % 12) + 1
+
+
+def build_raw_data_appendix(chart_data: str) -> str:
+    """
+    Deterministic, non-LLM appendix so technical readers can audit claims.
+    Uses only the JSON payload we feed the LLM (no recomputation).
+    """
+    try:
+        parsed = json.loads(chart_data) if isinstance(chart_data, str) else (chart_data or {})
+    except Exception:
+        return ""
+
+    meta = (parsed or {}).get("meta", {}) or {}
+    chart_meta = meta.get("chart", {}) or {}
+    analysis = (parsed or {}).get("analysis", {}) or {}
+    angles = (analysis or {}).get("angles", {}) or {}
+    planets_forensic = (analysis or {}).get("planets_forensic", []) or []
+    mundane_ctx = (analysis or {}).get("advanced_mechanics", {}).get("mundane_context", {}) or {}
+    syzygy = (analysis or {}).get("syzygy", {}) or {}
+    sect = (analysis or {}).get("sect", {}) or {}
+    supp = (analysis or {}).get("supplemental", {}) or {}
+    stars = (supp or {}).get("stars", []) or []
+
+    asc_sign = (angles.get("Ascendant", {}) or {}).get("sign") or ""
+
+    def _fmt_lon(lon_fmt: dict) -> str:
+        if isinstance(lon_fmt, dict):
+            s = lon_fmt.get("string")
+            abs_lon = lon_fmt.get("lon_abs")
+            if s is not None and abs_lon is not None:
+                return f"{s} (lon_abs: {abs_lon:.6f})"
+            if s is not None:
+                return str(s)
+        return ""
+
+    # Angles block
+    asc = angles.get("Ascendant", {}) or {}
+    mc = angles.get("Midheaven", {}) or angles.get("MC", {}) or {}
+    ang_md = "### Raw Natal Data (Audit Appendix)\n\n"
+    ang_md += "**Angles (Whole Sign Topics; MC reported separately):**\n\n"
+    if asc:
+        ang_md += f"- Ascendant: {_fmt_lon(asc.get('longitude_fmt') or {})} | WSH house: {asc.get('house_wsh')}\n"
+    if mc:
+        ang_md += f"- Midheaven (MC): {_fmt_lon(mc.get('longitude_fmt') or {})} | WSH house: {mc.get('house_wsh')}\n"
+    if angles.get("note"):
+        ang_md += f"- Note: {angles.get('note')}\n"
+
+    # Sect block
+    if sect:
+        st = sect.get("type")
+        alt = sect.get("sun_altitude_deg")
+        if st is not None:
+            ang_md += "\n**Sect (as computed):**\n\n"
+            if alt is not None:
+                ang_md += f"- Sect: {st} | Sun altitude: {alt:.4f}°\n"
+            else:
+                ang_md += f"- Sect: {st}\n"
+
+    # Syzygy + phase block
+    if syzygy:
+        ang_md += "\n**Prenatal Syzygy + Natal Phase (separate layers):**\n\n"
+        san = (syzygy.get("san") or {}) if isinstance(syzygy.get("san"), dict) else {}
+        nxt = (syzygy.get("next_syzygy_after_birth") or {}) if isinstance(syzygy.get("next_syzygy_after_birth"), dict) else {}
+        if san:
+            ang_md += f"- SAN (Syzygia Ante Nativitatem): {san.get('datetime_utc')} | {_fmt_lon(san.get('longitude_fmt') or {})} | phase: {san.get('phase')}\n"
+        if nxt:
+            ang_md += f"- Next syzygy after birth: {nxt.get('datetime_utc')} | {_fmt_lon(nxt.get('longitude_fmt') or {})} | phase: {nxt.get('phase')}\n"
+        if syzygy.get("moon_sun_elongation_min_deg") is not None:
+            ang_md += f"- Natal elongation (min): {float(syzygy.get('moon_sun_elongation_min_deg')):.4f}°\n"
+
+    # Planet table
+    ang_md += "\n**Planets (Septener + Nodes; forensic fields):**\n\n"
+    ang_md += "| Body | Position | WSH House | Speed (deg/day) | Retro | Solar Status | Elong (deg) | Phasis | Visible | Voice |\n"
+    ang_md += "|---|---|---:|---:|---|---|---:|---|---|---|\n"
+
+    for p in planets_forensic:
+        name = p.get("name")
+        lon_fmt = p.get("longitude_fmt") or {}
+        pos = _fmt_lon(lon_fmt)
+        house = p.get("house")
+        speed = p.get("speed")
+        retro = p.get("retrograde")
+        solar_status = p.get("solar_status")
+        elong = p.get("solar_elongation_deg")
+        phasis = (p.get("phasis") or {}).get("phase")
+        is_visible = (p.get("phasis") or {}).get("is_visible")
+        has_voice = (p.get("voice") or {}).get("has_voice")
+
+        speed_s = f"{float(speed):.6f}" if speed is not None else ""
+        elong_s = f"{float(elong):.6f}" if elong is not None else ""
+        retro_s = "R" if retro else ""
+        vis_s = "true" if is_visible else ("false" if is_visible is not None else "")
+        voice_s = "true" if has_voice else ("false" if has_voice is not None else "")
+
+        ang_md += f"| {name} | {pos} | {house} | {speed_s} | {retro_s} | {solar_status} | {elong_s} | {phasis} | {vis_s} | {voice_s} |\n"
+
+    # Eclipses: show WSH mapping explicitly (no chorography-to-natal leap)
+    # Mundane context is currently a ranked list of entries. Pull eclipse entries out explicitly.
+    eclipses: list[dict] = []
+    if isinstance(mundane_ctx, list):
+        for it in mundane_ctx:
+            if not isinstance(it, dict):
+                continue
+            ev = it.get("event")
+            if ev in ("Solar Eclipse", "Lunar Eclipse"):
+                d = it.get("data") or {}
+                if isinstance(d, dict):
+                    eclipses.append({"type": ev, **d})
+    elif isinstance(mundane_ctx, dict):
+        # Back-compat if the schema ever changes.
+        eclipses = mundane_ctx.get("eclipses") or []
+
+    if eclipses and asc_sign:
+        ang_md += "\n**Eclipses (mundane context; WSH placement shown explicitly):**\n\n"
+        for e in eclipses:
+            lonf = e.get("longitude_fmt") or {}
+            esign = lonf.get("sign") or e.get("sign")
+            wsh = _wsh_house_from_asc(asc_sign, esign) if esign else -1
+            ang_md += f"- {e.get('type')}: {e.get('date_utc')} | {_fmt_lon(lonf)} | WSH house from Asc({asc_sign}): {wsh}\n"
+            note = e.get("chorography_note") or e.get("influence_note") or e.get("note")
+            if note:
+                ang_md += f"  - Note: {note}\n"
+
+    # Fixed stars: show orb + epoch if provided
+    if stars:
+        ang_md += "\n**Fixed Stars (as computed; show orb/epoch if present):**\n\n"
+        for s in stars:
+            try:
+                star = s.get("star") or s.get("name") or "Star"
+                body = s.get("body") or s.get("planet") or "Body"
+                orb = s.get("orb_deg")
+                epoch = s.get("epoch")
+                line = f"- {star} conjunct {body}"
+                if orb is not None:
+                    line += f" | orb: {float(orb):.4f}°"
+                if epoch:
+                    line += f" | epoch: {epoch}"
+                ang_md += line + "\n"
+            except Exception:
+                continue
+
+    # Vitality safety reminder for hostile readers
+    ang_md += "\n**Longevity/Vitality Guardrail:**\n\n"
+    ang_md += "- Any `years_capacity` numbers are treated as *technical vitality indicators* only, not a promised lifespan.\n"
+    ang_md += "- If a method’s `total_years` is `null` or flagged under sanity, that method is considered invalid for literal reading.\n"
+
+    return ang_md + "\n---\n\n"
 
 
 def run_premium_report(chart_data, output_file, iterations=6):
@@ -603,6 +902,25 @@ def run_premium_report(chart_data, output_file, iterations=6):
     
     # Assemble final document
     timestamp = datetime.now().strftime("%B %d, %Y at %I:%M %p")
+
+    # Pull auditable birth header fields from the JSON string.
+    birth_header = ""
+    try:
+        parsed = json.loads(chart_data) if isinstance(chart_data, str) else chart_data
+        chart_meta = (parsed or {}).get("meta", {}).get("chart", {}) or {}
+        geo_meta = chart_meta.get("geocode") or {}
+        birth_header = (
+            f"**Birth (Input):** {chart_meta.get('date')} {chart_meta.get('time')} | "
+            f"{chart_meta.get('city')}, {chart_meta.get('state')}  \n"
+            f"**Coordinates Used:** {chart_meta.get('lat')}, {chart_meta.get('lon')} "
+            f"(source: {geo_meta.get('source', 'unknown')})  \n"
+            f"**Timezone:** {chart_meta.get('timezone')} | **UTC:** {chart_meta.get('utc_time')}  \n"
+            f"**House System:** {((chart_meta.get('house_system') or {}).get('label'))} "
+            f"({(chart_meta.get('house_system') or {}).get('code')})  \n"
+            f"**Zodiac System:** {((chart_meta.get('zodiac_system') or {}).get('label'))}  \n"
+        )
+    except Exception:
+        birth_header = ""
     
     final_report = f"""# PREMIUM FORENSIC STRUCTURAL AUDIT
 ## Inspection of the Nativity
@@ -613,7 +931,12 @@ def run_premium_report(chart_data, output_file, iterations=6):
 
 ---
 
+{birth_header}
+
 """
+    # Deterministic appendix for auditability (no LLM involved).
+    final_report += build_raw_data_appendix(chart_data)
+
     for i, resp in enumerate(all_responses):
         final_report += f"# Part {i+1}\n\n{resp}\n\n---\n\n"
         
@@ -651,6 +974,8 @@ def main():
     parser.add_argument("--time", required=True, help="Birth time (HH:MM)")
     parser.add_argument("--city", required=True, help="Birth city")
     parser.add_argument("--state", default="", help="Birth state/region")
+    parser.add_argument("--lat", type=float, default=None, help="Optional latitude override (bypass geocoding)")
+    parser.add_argument("--lon", type=float, default=None, help="Optional longitude override (bypass geocoding)")
     parser.add_argument("--iterations", type=int, default=6, help="Number of iteration passes")
     parser.add_argument("--output-dir", default="premium_reports", help="Output directory")
     
@@ -659,7 +984,17 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
     
     # Generate chart data
-    chart_data = generate_chart_data(args.name, args.date, args.time, args.city, args.state)
+    # Generate chart data
+    # If lat/lon are provided, bypass geocoding (useful when providers rate-limit).
+    chart_data = generate_chart_data(
+        args.name,
+        args.date,
+        args.time,
+        args.city,
+        args.state,
+        latitude=args.lat,
+        longitude=args.lon,
+    )
     if not chart_data:
         return 1
     

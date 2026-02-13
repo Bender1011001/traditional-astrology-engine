@@ -1,11 +1,11 @@
 # CLI Guide: Omnibus Tool
 
-The `omnibus.py` script is the primary administrative interface for the Codex Caelestis environment. It unifies auditing, database management, and maintenance tasks.
+This project intentionally keeps `src/scripts/` minimal. The supported CLI entrypoint is the premium report generator.
 
 ## Usage
 
 ```bash
-python -m src.scripts.omnibus [COMMAND] [OPTIONS]
+python src/scripts/generate_premium_report.py --help
 ```
 
 ## Commands
@@ -22,7 +22,7 @@ Runs a forensic audit on a specific nativity.
 
 **Example:**
 ```bash
-python -m src.scripts.omnibus audit --name "Alexander Hamilton" --date "1755-01-11" --time "14:00" --city "Charlestown"
+python src/scripts/generate_premium_report.py --name "Alexander Hamilton" --date "1755-01-11" --time "14:00" --city "Charlestown" --state "MA"
 ```
 
 ### `rehydrate`
@@ -31,7 +31,7 @@ Resets the `users.db` database (removing all user data) and re-seeds it with def
 
 **Usage:**
 ```bash
-python -m src.scripts.omnibus rehydrate
+Administrative maintenance commands were moved into service modules (not scripts) to avoid a large scripts folder.
 ```
 *   Use `--yes` to bypass the confirmation prompt in automated environments.
 
@@ -39,5 +39,5 @@ python -m src.scripts.omnibus rehydrate
 Displays the current version of the Engine and Database schema.
 
 ```bash
-python -m src.scripts.omnibus version
+See `src/services/db_seed.py` and `src/services/db_patch.py` for DB maintenance helpers.
 ```

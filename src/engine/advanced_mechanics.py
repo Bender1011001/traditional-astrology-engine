@@ -12,6 +12,7 @@ from .reference_data import (
 from .lots import calculate_all_lots, LotName
 from .dignities import DignityCalculator
 from .calculations import calculate_prenatal_syzygy
+from .calculations import format_longitude
 
 def normalize_deg(deg: float) -> float:
     return deg % 360.0
@@ -78,6 +79,20 @@ class HermeticLotEngine:
 
         # 2. Enrich with Metadata
         final_lots = {}
+
+        # For forensic auditability: expose the core inputs once.
+        sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
+        moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
+        sect_enum = Sect.DAY if chart.sun_altitude >= 0 else Sect.NIGHT
+        is_day = (sect_enum == Sect.DAY)
+
+        inputs = {
+            "sect": "DAY" if is_day else "NIGHT",
+            "asc": chart.ascendant,
+            "sun": sun.longitude if sun else None,
+            "moon": moon.longitude if moon else None,
+            "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py.",
+        }
         
         # Process all available Lots from context
         for lot_enum in LotName:
@@ -127,13 +142,34 @@ class HermeticLotEngine:
                 else:
                     final_status = " / ".join(status_messages)
                 
+                # Minimal formula audit for the Hermetic Heptad (Paulus).
+                formula = None
+                if key == LotName.FORTUNE.value:
+                    formula = "Day: Asc + Moon - Sun | Night: Asc + Sun - Moon"
+                elif key == LotName.SPIRIT.value:
+                    formula = "Day: Asc + Sun - Moon | Night: Asc + Moon - Sun"
+                elif key == LotName.EROS.value:
+                    formula = "Day: Asc + Venus - Spirit | Night: Asc + Spirit - Venus"
+                elif key == LotName.NECESSITY.value:
+                    formula = "Day: Asc + Mercury - Fortune | Night: Asc + Fortune - Mercury"
+                elif key == LotName.COURAGE.value:
+                    formula = "Day: Asc + Mars - Fortune | Night: Asc + Fortune - Mars"
+                elif key == LotName.VICTORY.value:
+                    formula = "Day: Asc + Jupiter - Spirit | Night: Asc + Spirit - Jupiter"
+                elif key == LotName.NEMESIS.value:
+                    formula = "Day: Asc + Saturn - Fortune | Night: Asc + Fortune - Saturn"
+
                 final_lots[key] = {
                     "longitude": lon,
                     "sign": sign.value,
+                    "degree": round(lon % 30.0, 4),
+                    "longitude_fmt": format_longitude(lon),
                     "house": house_num,
                     "ruler": ruler_name.value if hasattr(ruler_name, 'value') else str(ruler_name),
                     "status": final_status,
-                    "maltreatment_details": maltreatment_details
+                    "maltreatment_details": maltreatment_details,
+                    "formula": formula,
+                    "inputs": inputs if formula else None,
                 }
             
         return final_lots
@@ -368,36 +404,75 @@ class DoryphoryEngine:
         sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
         moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
         
+        # Helper: sign check
+        def _same_sign(a_lon: float, b_lon: float) -> bool:
+            return int(a_lon / 30) % 12 == int(b_lon / 30) % 12
+
+        def _push_unique(inst: DoryphoryInstance):
+            key = (inst.planet, inst.type, inst.related_luminary)
+            if not hasattr(_push_unique, "_seen"):
+                _push_unique._seen = set()
+            if key in _push_unique._seen:
+                return
+            _push_unique._seen.add(key)
+            instances.append(inst)
+
         # Solar Doryphory (Rise Before Sun)
         # Check planets in range [SunLon - 30, SunLon]
         for p in chart.planets:
             if p.name in [PlanetName.SUN, PlanetName.MOON, PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
             
             diff = (sun.longitude - p.longitude) % 360
-            if 0 < diff < 35: # Within ~1 sign preceding
+            if 0 < diff <= 30.0: # Strict: within 1 sign (<= 30 degrees) preceding
                 # Check distance from sun (Combustion < 8)
                 if diff < 8:
                     continue # Combust guards are useless
                 
-                instances.append(DoryphoryInstance(
+                _push_unique(DoryphoryInstance(
                     planet=p.name,
                     type="Bodily/Oriental",
                     related_luminary="Sun",
                     score=10
                 ))
+
+            # Type 3 nuance: bodily co-presence in the same sign can count as doryphory
+            # even if the planet is not strictly preceding by longitude (e.g., Bernie Sanders case study).
+            # We still disqualify exact "blinded" proximity to the Sun (< 8°) as a functional guard.
+            if _same_sign(p.longitude, sun.longitude):
+                dist = abs(p.longitude - sun.longitude)
+                if dist > 180:
+                    dist = 360 - dist
+                if dist < 8:
+                    continue
+                _push_unique(DoryphoryInstance(
+                    planet=p.name,
+                    type="Bodily/Co-Present (Same Sign)",
+                    related_luminary="Sun",
+                    score=9
+                ))
         
         # Lunar Doryphory (Rise After Moon)
         # Check planets in range [MoonLon, MoonLon + 30]
         for p in chart.planets:
-             if p.name in [PlanetName.SUN, PlanetName.MOON, PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
-             
-             diff = (p.longitude - moon.longitude) % 360
-             if 0 < diff < 35:
-                 instances.append(DoryphoryInstance(
+            if p.name in [PlanetName.SUN, PlanetName.MOON, PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]:
+                continue
+
+            diff = (p.longitude - moon.longitude) % 360
+            if 0 < diff <= 30.0: # Strict: within 1 sign (<= 30 degrees) following
+                _push_unique(DoryphoryInstance(
                     planet=p.name,
                     type="Bodily/Occidental",
                     related_luminary="Moon",
                     score=10
+                ))
+
+            # Same-sign bodily doryphory for the Moon (common in Hellenistic reconstructions).
+            if _same_sign(p.longitude, moon.longitude):
+                _push_unique(DoryphoryInstance(
+                    planet=p.name,
+                    type="Bodily/Co-Present (Same Sign)",
+                    related_luminary="Moon",
+                    score=9
                 ))
                 
         return instances
