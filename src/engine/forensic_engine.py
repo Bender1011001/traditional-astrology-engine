@@ -276,7 +276,24 @@ class Auditor:
         analysis["vitality"] = Auditor._calculate_vitality_suite(chart, age_years=age_years)
         analysis["triplicity_periods"] = Auditor._calculate_triplicity_periods(chart)
         analysis[ "temperament" ] = TemperamentEngine.calculate_temperament(chart)
-        analysis[ "aspects" ] = AspectEngine.calculate_aspects(chart)
+        # Store a JSON-serializable aspects list for auditability, while keeping raw objects for any
+        # legacy consumers that expect dataclass instances.
+        _aspects_raw = AspectEngine.calculate_aspects(chart)
+        analysis["aspects_raw"] = _aspects_raw
+        try:
+            analysis["aspects"] = [
+                {
+                    "planet_a": asp.planet_a.value,
+                    "planet_b": asp.planet_b.value,
+                    "type": asp.type.value,
+                    "orb": float(asp.orb),
+                    "is_applying": bool(asp.is_applying),
+                    "text": asp.text,
+                }
+                for asp in _aspects_raw
+            ]
+        except Exception:
+            analysis["aspects"] = []
         analysis["medical"] = Auditor._calculate_medical_suite(chart, decumbiture_jd=decumbiture_jd)
         
         # 2. Advanced Suites
@@ -1268,6 +1285,7 @@ class Auditor:
             return {
                 "method": method,
                 "longitude": lon,
+                "longitude_fmt": format_longitude(lon),
                 "sign": s.value,
                 "house": h,
                 "term_ruler": term_ruler.value if hasattr(term_ruler, "value") else str(term_ruler),
@@ -1402,8 +1420,19 @@ class Auditor:
 
         # Format Aspects for Legacy Report
         formatted_aspects = []
-        if "aspects" in analysis:
-            for asp in analysis["aspects"]:
+        # Prefer raw dataclass aspects if present, otherwise accept dict payloads.
+        aspects_iter = analysis.get("aspects_raw") or analysis.get("aspects") or []
+        for asp in aspects_iter:
+            if isinstance(asp, dict):
+                formatted_aspects.append({
+                    "planet_a": asp.get("planet_a"),
+                    "planet_b": asp.get("planet_b"),
+                    "type": asp.get("type"),
+                    "orb": asp.get("orb"),
+                    "is_applying": asp.get("is_applying"),
+                    "text": asp.get("text", ""),
+                })
+            else:
                 formatted_aspects.append({
                     "planet_a": asp.planet_a.value,
                     "planet_b": asp.planet_b.value,

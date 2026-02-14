@@ -63,6 +63,8 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
 
 5. **NO FABRICATION**:
    - Only use data from the JSON. NEVER invent aspects or dignities.
+   - **ASPECT LOCK:** You may ONLY claim an aspect if it is present in `analysis.aspects` (with `type` + `orb`). If it is not listed there, you must not assert it.
+   - **NO "OVERCOMING/SUPERIOR" FREEHAND:** Do NOT use "overcoming", "superior square", "inferior square", "dexter/sinister", etc. unless the JSON explicitly provides a computed flag for it.
    - **COORDINATE FORMAT LAW**: When citing a longitude, you MUST cite `*_fmt.string` AND `*_fmt.lon_abs` together (when `*_fmt` exists). Never combine absolute degrees with a sign name in one token.
    - NEVER call the Sun "cazimi" (cazimi applies to other bodies relative to the Sun).
    - Do NOT use "potential cazimi". If a planet is ~8° from the Sun, that is combustion/under-beams territory, not cazimi.
@@ -119,6 +121,7 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 - Angle metadata (Whole Sign note: MC may be in 9th/10th/11th by Whole Sign): `analysis.angles`
 - Triplicity periods (life chapters): `analysis.triplicity_periods`
 - Medical correspondences + critical days (if provided): `analysis.medical`
+- Computed aspects (only source of aspect truth): `analysis.aspects`
 
 # TRADITIONAL DIGNITY LEDGER (HARD-CODED TRUTH)
 
@@ -166,6 +169,11 @@ These rules differ fundamentally from modern psychological astrology. Apply them
 | Fall | -4 | Opposite exaltation (dishonored) |
 
 **CRITICAL:** A planet with 0 or negative dignity CANNOT deliver its promise unless bonified by Jupiter or Venus.
+
+**SCORING INTEGRITY RULE:** If you cite numeric scores, you MUST use the engine's computed numbers:
+- Essential: `analysis.planets_forensic[].dignities.total_score` (plus `dignities.details`)
+- Accidental: `analysis.planets_forensic[].accidental.total_score` (plus `accidental.details`)
+You MUST NOT do manual arithmetic in prose, and you MUST NOT use the phrase "Total Fortitude".
 
 ## RULE 3: HOUSE MEANINGS (Concrete, Not Psychological)
 
@@ -244,6 +252,7 @@ Moon (0-9) → Saturn (9-20) → Jupiter (20-32) → Mars (32-39) → Sun (39-49
 - Use the Lots provided in the JSON. Do NOT re-compute or invent formulas.
 - Required Hermetic Heptad: Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
  - **Audit Requirement**: For every Hermetic Heptad lot you interpret, you MUST cite `formula`, `inputs` (Asc/Sun/Moon + sect), and the coordinates via `longitude_fmt`.
+ - **LOT HYGIENE:** Do NOT mention any Lot that is not present in `analysis.fate.hermetic_lots`.
  - Do NOT dump the full Lots catalog. Only interpret the Hermetic Heptad plus any additional lots explicitly flagged as "maltreated/active" in the JSON.
 
 ## RULE 8: SYNTHESIS HIERARCHY (Resolving Contradictions)
@@ -436,6 +445,7 @@ Your report MUST include these high-value deliverables:
 - Map body parts to signs and houses
 - Identify vulnerable systems based on afflicted planets
 - Present as historical correspondences only (no medical advice; no protocols)
+**SIGN vs HOUSE HYGIENE:** If you cite melothesia (e.g., "Virgo rules intestines"), label it as SIGN-based. Do not call it "6th house" unless you mean the 6th whole sign from the Ascendant.
 
 ## 12. REMEDIATION (The Prescription)
 - For the primary afflicted planet, provide:
@@ -751,6 +761,13 @@ def build_raw_data_appendix(chart_data: str) -> str:
     asc = angles.get("Ascendant", {}) or {}
     mc = angles.get("Midheaven", {}) or angles.get("MC", {}) or {}
     ang_md = "### Raw Natal Data (Audit Appendix)\n\n"
+    ang_md += "**Doctrine/Method Declaration (this run):**\n\n"
+    ang_md += "- Houses: Whole Sign Houses (topics) with MC reported as an angle (may fall in 9th/10th/11th by WSH).\n"
+    ang_md += "- Core planets for judgment: Septener (Sun..Saturn). Nodes are treated as modifiers.\n"
+    ang_md += "- Aspects: computed from `analysis.aspects` (engine orbs); node aspects are not computed by the aspect engine.\n"
+    ang_md += "- Receptions: computed from `analysis.teams.receptions` using `ReceptionMode.STANDARD_LILLY` with sect-gated Ptolemaic triplicity rights.\n"
+    ang_md += "- Dignities/terms: engine defaults to Dorothean triplicity for dignity variants and Egyptian terms for most rulership lookups (see per-planet `dignities.variants`).\n"
+    ang_md += "- Phasis/voice: `analysis.planets_forensic[].phasis` visibility details (arcus visionis) with a conservative lunar dark override for the Moon.\n"
     ang_md += "**Angles (Whole Sign Topics; MC reported separately):**\n\n"
     if asc:
         ang_md += f"- Ascendant: {_fmt_lon(asc.get('longitude_fmt') or {})} | WSH house: {asc.get('house_wsh')}\n"
@@ -773,14 +790,20 @@ def build_raw_data_appendix(chart_data: str) -> str:
     # Syzygy + phase block
     if syzygy:
         ang_md += "\n**Prenatal Syzygy + Natal Phase (separate layers):**\n\n"
-        san = (syzygy.get("san") or {}) if isinstance(syzygy.get("san"), dict) else {}
-        nxt = (syzygy.get("next_syzygy_after_birth") or {}) if isinstance(syzygy.get("next_syzygy_after_birth"), dict) else {}
-        if san:
-            ang_md += f"- SAN (Syzygia Ante Nativitatem): {san.get('datetime_utc')} | {_fmt_lon(san.get('longitude_fmt') or {})} | phase: {san.get('phase')}\n"
+        pre = (syzygy.get("prenatal_syzygy") or {}) if isinstance(syzygy.get("prenatal_syzygy"), dict) else {}
+        nxt = (pre.get("next_syzygy") or {}) if isinstance(pre.get("next_syzygy"), dict) else {}
+        phase = (syzygy.get("natal_phase") or {}) if isinstance(syzygy.get("natal_phase"), dict) else {}
+        if pre:
+            ang_md += f"- SAN (Syzygia Ante Nativitatem): {pre.get('datetime_utc')} | {_fmt_lon(pre.get('longitude_fmt') or {})} | type: {pre.get('type')}\n"
         if nxt:
-            ang_md += f"- Next syzygy after birth: {nxt.get('datetime_utc')} | {_fmt_lon(nxt.get('longitude_fmt') or {})} | phase: {nxt.get('phase')}\n"
-        if syzygy.get("moon_sun_elongation_min_deg") is not None:
-            ang_md += f"- Natal elongation (min): {float(syzygy.get('moon_sun_elongation_min_deg')):.4f}°\n"
+            ang_md += f"- Next syzygy after birth: {nxt.get('datetime_utc')} | {_fmt_lon(nxt.get('longitude_fmt') or {})} | type: {nxt.get('type')}\n"
+        if phase.get("moon_sun_elongation_deg") is not None:
+            ang_md += f"- Natal elongation (min, 0..180): {float(phase.get('moon_sun_elongation_deg')):.4f}°\n"
+        if phase.get("moon_sun_phase_deg") is not None:
+            ang_md += (
+                f"- Natal phase (Sun->Moon, 0..360): {float(phase.get('moon_sun_phase_deg')):.4f}°"
+                f" | waxing: {phase.get('is_waxing')} | waning: {phase.get('is_waning')}\n"
+            )
 
     # Planet table
     ang_md += "\n**Planets (Septener + Nodes; forensic fields):**\n\n"
@@ -835,23 +858,32 @@ def build_raw_data_appendix(chart_data: str) -> str:
             if note:
                 ang_md += f"  - Note: {note}\n"
 
-    # Fixed stars: show orb + epoch if provided
+    # Fixed stars: show whatever the engine computed (orb/epoch may be absent depending on method).
     if stars:
-        ang_md += "\n**Fixed Stars (as computed; show orb/epoch if present):**\n\n"
+        ang_md += "\n**Fixed Stars (as computed):**\n\n"
         for s in stars:
-            try:
-                star = s.get("star") or s.get("name") or "Star"
-                body = s.get("body") or s.get("planet") or "Body"
-                orb = s.get("orb_deg")
-                epoch = s.get("epoch")
-                line = f"- {star} conjunct {body}"
-                if orb is not None:
-                    line += f" | orb: {float(orb):.4f}°"
-                if epoch:
-                    line += f" | epoch: {epoch}"
-                ang_md += line + "\n"
-            except Exception:
+            if not isinstance(s, dict):
                 continue
+            star_name = s.get("star_name") or s.get("name") or s.get("star") or "Star"
+            body_name = s.get("planet_name") or s.get("body") or s.get("planet") or "Body"
+            contact = s.get("contact_type") or s.get("type") or "CONTACT"
+            msg = s.get("message")
+            line = f"- {star_name} | {contact} | body: {body_name}"
+            if msg:
+                line += f" | note: {msg}"
+            ang_md += line + "\n"
+
+    # Aspect ledger (computed; no freehand geometry)
+    aspects = (analysis or {}).get("aspects", []) or []
+    if isinstance(aspects, list) and aspects:
+        ang_md += "\n**Aspects (computed; cite these, do not invent):**\n\n"
+        for a in aspects:
+            if not isinstance(a, dict):
+                continue
+            ang_md += (
+                f"- {a.get('planet_a')} {a.get('type')} {a.get('planet_b')} "
+                f"| orb: {float(a.get('orb')):.4f}° | applying: {a.get('is_applying')}\n"
+            )
 
     # Vitality safety reminder for hostile readers
     ang_md += "\n**Longevity/Vitality Guardrail:**\n\n"

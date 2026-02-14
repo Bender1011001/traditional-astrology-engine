@@ -47,12 +47,10 @@ class ReceptionEngine:
         else:
             # Ptolemaic (Lilly)
             # Tuple (Day, Night)
-            rulers = PTOLEMAIC_TRIPLICITY[element]
-            # Lilly usually considers the primary ruler of the sect as the main lord, 
-            # but for reception, being "in the triplicity of X" usually implies X has rights.
-            # However, Ptolemaic table only has 2 rulers. 
-            # We return both.
-            return list(rulers)
+            day_ruler, night_ruler = PTOLEMAIC_TRIPLICITY[element]
+            # Sect-gated: in a Day chart, only the Day triplicity ruler has rights; in a Night chart,
+            # only the Night triplicity ruler has rights. Returning both causes false receptions.
+            return [day_ruler] if sect == Sect.DAY else [night_ruler]
 
     @staticmethod
     def _get_term_ruler(sign: Sign, degree: float, mode: ReceptionMode) -> Optional[PlanetName]:

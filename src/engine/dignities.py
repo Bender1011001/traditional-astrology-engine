@@ -511,10 +511,17 @@ class DignityCalculator:
                 details.append("Cazimi (+5)")
             elif dist <= 8:
                 score -= 5
-                details.append("Combust (-5)")
+                if planet.name == PlanetName.MOON:
+                    # Lunar near-Sun condition should be labeled as phase/visibility, not planetary combustion.
+                    details.append("Dark Moon (<=8° from Sun) (-5)")
+                else:
+                    details.append("Combust (-5)")
             elif dist <= 15:
                 score -= 4
-                details.append("Under Beams (-4)")
+                if planet.name == PlanetName.MOON:
+                    details.append("Moon Under Beams (8°-15° from Sun) (-4)")
+                else:
+                    details.append("Under Beams (-4)")
 
         # 5. Planetary Joy
         joy_score = cls.calculate_planetary_joy(planet, house_num)
