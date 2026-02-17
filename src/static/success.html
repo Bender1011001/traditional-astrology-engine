@@ -82,7 +82,7 @@
     <main class="success-container">
         <div class="success-icon">✓</div>
         <h1>CHECKOUT COMPLETE</h1>
-        <p class="subtitle" style="margin-top: 1rem;">Your subscription is being activated.</p>
+        <p class="subtitle" style="margin-top: 1rem;">Verifying your checkout.</p>
 
         <div id="statusCard" class="order-status">
             <div class="spinner"></div>
@@ -119,9 +119,12 @@
                     localStorage.setItem("cael_auth_token", data.access_token);
                 }
 
+                const tier = String(data.tier || "").toUpperCase();
+                const isReport = (tier === "CALIBRATION" || tier === "FULL");
+
                 statusCard.innerHTML = `
                     <p style="color:var(--success); font-weight:600; margin-bottom:1rem;">Verified!</p>
-                    <p>Redirecting to your dashboard...</p>
+                    <p>${isReport ? "Your report is being generated and will be emailed to you." : "Redirecting to your dashboard..."}</p>
                 `;
 
                 setTimeout(() => {

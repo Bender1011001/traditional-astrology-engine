@@ -27,6 +27,7 @@ from src.database.models import UsageRecord, User
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from src.core.promo import free_individual_readings_promo_active
+from src.core.config import settings
 
 router = APIRouter()
 
@@ -157,10 +158,7 @@ async def calculate_chart(
     chart_hash = generate_chart_hash(chart_request)
     tier = "free"
     plan_tier = None
-
-    # Account required for readings. Exception: a valid access token (legacy magic link / purchase restore).
-    if not current_user and not chart_request.access_token:
-        raise HTTPException(status_code=401, detail="Account required to generate readings.")
+    free_limit_state = None
 
     # Authenticated users with an active/trial subscription get full outputs.
     if current_user and current_user.subscription and current_user.subscription.plan:
@@ -168,14 +166,16 @@ async def calculate_chart(
             tier = "paid"
             plan_tier = current_user.subscription.plan.tier
 
-    # Legacy access token path (kept for backward compatibility).
-    if tier == "free" and chart_request.access_token:
-        payload = validate_token(chart_request.access_token)
-        if not payload or payload.get("chart_hash") != chart_hash:
-            # No user + invalid token should not get a reading.
-            if not current_user:
-                raise HTTPException(status_code=401, detail="Invalid or expired access token. Please log in.")
-        else:
+    # Chart-scoped paid access token path (single-reading purchases and legacy magic links).
+    token_candidate = (chart_request.access_token or "").strip()
+    if not token_candidate:
+        auth_header = http_request.headers.get("authorization") or http_request.headers.get("Authorization") or ""
+        if auth_header.startswith("Bearer "):
+            token_candidate = auth_header.split(" ", 1)[1].strip()
+
+    if tier == "free" and token_candidate:
+        token_payload = validate_token(token_candidate)
+        if token_payload and token_payload.get("chart_hash") == chart_hash:
             tier = "paid"
     
     # Cache Check
@@ -183,11 +183,23 @@ async def calculate_chart(
     if cached_result:
         return cached_result
 
-    # Rate Limiting (Free Tier Only)
+    # Free reading limit (Free Tier Only).
     if tier == 'free':
         client_ip = http_request.client.host if http_request.client else "unknown"
-        if client_ip != "127.0.0.1" and not rate_limiter.is_allowed(client_ip):
-            raise HTTPException(status_code=429, detail="Daily free limit reached.")
+        if client_ip != "127.0.0.1":
+            free_limit_state = rate_limiter.consume_free_reading(client_ip)
+            if not free_limit_state.get("allowed"):
+                free_limit = int(free_limit_state.get("limit") or getattr(settings, "FREE_SINGLE_READINGS_PER_IP", 3))
+                raise HTTPException(
+                    status_code=402,
+                    detail={
+                        "error": "payment_required",
+                        "message": f"Free limit reached: {free_limit} readings per IP. Additional readings are ${int(getattr(settings, 'SINGLE_READING_PRICE_USD', 20))} each.",
+                        "tier": "single_reading",
+                        "price_usd": int(getattr(settings, "SINGLE_READING_PRICE_USD", 20)),
+                        "free_limit": free_limit,
+                    },
+                )
 
     # Call the new Engine via bridge
     engine_result = await generate_full_nativity_async(
@@ -217,10 +229,14 @@ async def calculate_chart(
     # Mock some legacy fields that script.js might expect
     final_result["forensic_report"] = engine_result["technical_data"]["analysis"]
         
+    final_result.setdefault("meta", {})
     final_result["meta"]["tier"] = tier
     final_result["meta"]["chart_hash"] = chart_hash
     # Promo: unlock individual readings for a limited time (UI decides how to gate).
     final_result["meta"]["promo_unlocked"] = bool(free_individual_readings_promo_active())
+    if tier == "free" and free_limit_state is not None:
+        final_result["meta"]["free_reads_remaining"] = int(free_limit_state.get("remaining") or 0)
+        final_result["meta"]["free_reads_limit"] = int(free_limit_state.get("limit") or getattr(settings, "FREE_SINGLE_READINGS_PER_IP", 3))
     if plan_tier:
         final_result["meta"]["plan_tier"] = plan_tier
 

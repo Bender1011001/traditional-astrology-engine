@@ -21,33 +21,59 @@ class RateLimiter:
             self.use_redis = False
             self._requests = {}
 
-        self.DAILY_LIMIT = 5
-        self.WINDOW_SECONDS = 86400 # 24 hours
+        self.DAILY_LIMIT = max(0, int(getattr(settings, "FREE_SINGLE_READINGS_PER_IP", 3)))
+        self.WINDOW_SECONDS = max(60, int(getattr(settings, "FREE_SINGLE_READINGS_WINDOW_SECONDS", 86400)))
 
-    def is_allowed(self, ip: str) -> bool:
+    def consume_free_reading(self, ip: str) -> dict:
+        """
+        Consume one free reading credit for an IP and return limit status.
+        """
+        if self.DAILY_LIMIT <= 0:
+            return {"allowed": False, "count": 0, "remaining": 0, "limit": 0}
+
         if self.use_redis:
-            key = f"rate_limit:{ip}"
+            key = f"free_reading:{ip}"
             try:
-                # INCR returns new value
-                count = self.redis.incr(key)
+                count = int(self.redis.incr(key))
                 if count == 1:
                     self.redis.expire(key, self.WINDOW_SECONDS)
-                
-                if count > self.DAILY_LIMIT:
-                    return False
-                return True
+
+                allowed = count <= self.DAILY_LIMIT
+                remaining = max(0, self.DAILY_LIMIT - count)
+                return {
+                    "allowed": allowed,
+                    "count": count,
+                    "remaining": remaining,
+                    "limit": self.DAILY_LIMIT,
+                }
             except Exception:
-                # Redis failure during op?
-                return True # Fail open? Or closed?
-        else:
-            # In-memory fallback
-            now = datetime.utcnow().timestamp()
-            if ip not in self._requests:
-                self._requests[ip] = []
-            self._requests[ip] = [t for t in self._requests[ip] if now - t < self.WINDOW_SECONDS]
-            if len(self._requests[ip]) >= self.DAILY_LIMIT:
-                return False
-            self._requests[ip].append(now)
-            return True
+                # Fall back to in-memory on transient Redis failure.
+                pass
+
+        now = datetime.utcnow().timestamp()
+        if ip not in self._requests:
+            self._requests[ip] = []
+
+        self._requests[ip] = [t for t in self._requests[ip] if now - t < self.WINDOW_SECONDS]
+        current_count = len(self._requests[ip])
+        if current_count >= self.DAILY_LIMIT:
+            return {
+                "allowed": False,
+                "count": current_count,
+                "remaining": 0,
+                "limit": self.DAILY_LIMIT,
+            }
+
+        self._requests[ip].append(now)
+        new_count = len(self._requests[ip])
+        return {
+            "allowed": True,
+            "count": new_count,
+            "remaining": max(0, self.DAILY_LIMIT - new_count),
+            "limit": self.DAILY_LIMIT,
+        }
+
+    def is_allowed(self, ip: str) -> bool:
+        return bool(self.consume_free_reading(ip).get("allowed"))
 
 rate_limiter = RateLimiter()

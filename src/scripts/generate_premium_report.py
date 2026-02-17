@@ -19,6 +19,7 @@ import sys
 import json
 import argparse
 from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple
 
 # Setup paths
 sys.path.append(os.getcwd())
@@ -26,6 +27,10 @@ sys.path.append(os.path.join(os.getcwd(), "src"))
 
 from src.engine.forensic_engine import Auditor
 from src.engine.chat_oracle import _openrouter_request, _load_binder_context
+from src.engine.calculator.config import HOUSE_SYSTEM_LABELS, COMPARE_SYSTEMS
+from src.engine.dignities import DignityCalculator, TermSystem, TriplicityScheme
+from src.engine.models import PlanetName, Sect
+from src.engine.calculations import format_longitude
 
 BINDER_CONTEXT = _load_binder_context()
 
@@ -55,6 +60,7 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
 3. **SEPTENER ONLY (METRIC PURITY)**:
    - Base ALL primary judgments and house descriptions on the 7 visible planets (Sun through Saturn).
    - **OUTER PLANET SUPPRESSION**: Uranus, Neptune, and Pluto are NON-TRADITIONAL. You may ONLY mention them in a separate "Shadow Modifiers" section or as a brief footnote. Do NOT include them in the primary House description headers.
+   - **ASPECT PURITY:** For core judgment, you may ONLY use aspects from `analysis.aspects` (septener-only). If you mention outer-planet aspects, they must come from `analysis.aspects_shadow` and be explicitly labeled Shadow-only.
 
 4. **AUDITABILITY (Show Your Work)**:
    - CITE the astrological reason for EVERY judgment.
@@ -64,6 +70,7 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
 5. **NO FABRICATION**:
    - Only use data from the JSON. NEVER invent aspects or dignities.
    - **ASPECT LOCK:** You may ONLY claim an aspect if it is present in `analysis.aspects` (with `type` + `orb`). If it is not listed there, you must not assert it.
+   - **NODE ASPECTS PROHIBITED:** Do NOT claim node squares/oppositions/conjunctions unless a nodal contact is explicitly present in `analysis.supplemental.nodes`. Nodes are modifiers; the aspect engine does not compute node aspects for this report layer.
    - **NO "OVERCOMING/SUPERIOR" FREEHAND:** Do NOT use "overcoming", "superior square", "inferior square", "dexter/sinister", etc. unless the JSON explicitly provides a computed flag for it.
    - **COORDINATE FORMAT LAW**: When citing a longitude, you MUST cite `*_fmt.string` AND `*_fmt.lon_abs` together (when `*_fmt` exists). Never combine absolute degrees with a sign name in one token.
    - NEVER call the Sun "cazimi" (cazimi applies to other bodies relative to the Sun).
@@ -71,6 +78,7 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
    - **MOON NEAR SUN IS NOT "COMBUST"**: If `analysis.planets_forensic` shows Moon `solar_status` of `DARK_MOON` or `MOON_UNDER_BEAMS`, you MUST use those exact terms (Dark Moon / Moon Under Beams). Do NOT call the Moon "combust".
    - If `solar_status = DARK_MOON`, you MUST NOT also call it "Under Beams". Use **Dark Moon** only.
    - If `solar_status = MOON_UNDER_BEAMS`, use **Moon Under Beams** only.
+   - **HYLEG CONSISTENCY LAW:** If `analysis.vitality.hyleg.name` is present, you MUST NOT write "No Hyleg determined" anywhere in the report.
    - **RECEPTION WORDING (FORMALITY LAW)**:
      - Never write "Mars exalts Jupiter" / "Jupiter exalts Mars". That is formally wrong.
      - You MUST phrase receptions as: "Cancer is Jupiter's exaltation; therefore Jupiter receives Mars by exaltation," etc.
@@ -97,6 +105,11 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
    - Do NOT generalize chorography into continents or modern geopolitical regions. Only list the exact strings present in `chorography_regions`.
    - **NATAL VS MUNDANE BOUNDARY**: You may include chorography as background only. You must NOT claim it overrides natal houses unless a natal-sensitive contact is shown (angle contact, lot contact, or explicit activation in the JSON).
 
+10. **LUNAR MANSION HYGIENE (ELECTIONAL FOOTING)**:
+   - If you mention a lunar mansion, you MUST cite it from `analysis.supplemental.lunar_mansion`.
+   - You MUST NOT output "Lunar Mansion: None" if the JSON includes a mansion payload.
+   - Do not re-compute mansion spans from memory; use the JSON fields only.
+
 # DATA MAP (Use These JSON Paths; Do NOT Re-Compute)
 
 You MUST source all judgments from the provided JSON. Use these canonical paths:
@@ -109,7 +122,7 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 - Mutual receptions: `analysis.teams.receptions`
 - Almuten (Ezra): `analysis.dignity.almuten`
 - Lord of Geniture (Lilly): `analysis.dignity.lord_of_geniture` (if present)
-- Vitality (Hyleg/Alcocoden/Anareta/Interfector): `analysis.vitality`
+- Vitality (Hyleg/Alcocoden/Anareta + directed hits/anaretic windows): `analysis.vitality`
 - Primary directions: `analysis.fate.primary_directions`, `analysis.fate.primary_direction_distributor`, `analysis.fate.active_directions`
 - Decennials: `analysis.fate.decennials`
 - Profections: `analysis.enhanced_profections` and/or `analysis.fate.profections`
@@ -121,7 +134,9 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 - Angle metadata (Whole Sign note: MC may be in 9th/10th/11th by Whole Sign): `analysis.angles`
 - Triplicity periods (life chapters): `analysis.triplicity_periods`
 - Medical correspondences + critical days (if provided): `analysis.medical`
-- Computed aspects (only source of aspect truth): `analysis.aspects`
+- Computed core aspects (septener-only; only source of aspect truth): `analysis.aspects`
+- Computed shadow aspects (outers only; do not use in core judgment): `analysis.aspects_shadow`
+- Nodes (modifiers only; no aspect claims unless explicit contact is listed): `analysis.supplemental.nodes`
 
 # TRADITIONAL DIGNITY LEDGER (HARD-CODED TRUTH)
 
@@ -135,7 +150,10 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 | Jupiter | Sag / Pisces | Cancer | Gemini / Virgo | Capricorn |
 | Saturn | Cap / Aquarius | Libra | Cancer / Leo | Aries |
 
-**CRITICAL**: If a planet is NOT in its Domicile, Exaltation, Detriment, or Fall as listed above, it is **Peregrine** (or potentially supported by Triplicity/Term). You must NOT invent new detriments.
+**CRITICAL**:
+- The table above is only for domicile/exaltation/detriment/fall classification.
+- **Peregrine is NOT "not in domicile/exaltation."** Peregrine means **no essential dignity at all** (no domicile, exaltation, triplicity, term, or face) and not in detriment/fall.
+- When labeling a planet Peregrine, you MUST rely on the engine's computed dignity payload in `analysis.planets_forensic[].dignities` (details + totals). Do not infer peregrine status from the table alone.
 
 # TRADITIONAL INTERPRETATION RULES (Override Modern Training)
 
@@ -253,6 +271,9 @@ Moon (0-9) → Saturn (9-20) → Jupiter (20-32) → Mars (32-39) → Sun (39-49
 - Required Hermetic Heptad: Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
  - **Audit Requirement**: For every Hermetic Heptad lot you interpret, you MUST cite `formula`, `inputs` (Asc/Sun/Moon + sect), and the coordinates via `longitude_fmt`.
  - **LOT HYGIENE:** Do NOT mention any Lot that is not present in `analysis.fate.hermetic_lots`.
+ - **FORBIDDEN LOT NAMES (unless explicitly present in `analysis.fate.hermetic_lots`):**
+   - "Lot of Assets", "Lot of Debt", "Lot of Father", "Lot of Mother", "Lot of Accusation", "Lot of Sickness", "Lot of Life", etc.
+   - If you cannot point to it in `analysis.fate.hermetic_lots`, you MUST NOT name it.
  - Do NOT dump the full Lots catalog. Only interpret the Hermetic Heptad plus any additional lots explicitly flagged as "maltreated/active" in the JSON.
 
 ## RULE 8: SYNTHESIS HIERARCHY (Resolving Contradictions)
@@ -380,7 +401,11 @@ Your report MUST include these high-value deliverables:
 ## 4b. VITALITY AUDIT (Hyleg, Alcocoden, Anareta)
 - Identify the Hyleg (Giver of Life), Alcocoden (Giver of Years), and Anareta (Killing Planet) from the JSON.
 - This is a technical vitality audit, not medical advice.
-- **INTERFECTOR (EXECUTIONER) DISTINCTION:** Distinguish the static Anareta from the active Interfector: the promittor in a Primary Direction that strikes the Hyleg (use JSON interfector data if present).
+- **DIRECTED HITS & ANARETIC WINDOWS (TERMINOLOGY LAW):**
+  - Distinguish the static `analysis.vitality.anareta` (a tight malefic contact to the Hyleg degree) from the timing layer:
+  - Use `analysis.vitality.directed_hits_to_hyleg` as the technical list of primary-direction hits to the Hyleg degree.
+  - Use `analysis.vitality.anaretic_windows` ONLY for conservative windows where **Mars or Saturn** make a **hard** directed hit (Conjunction/Square/Opposition) to the Hyleg degree.
+  - Do NOT use "Executioner" language. Do NOT personify benefic/Almuten hits as killers.
 - Do NOT present `lifespan_estimate.total_years` as a literal life expectancy or a death prediction. If you mention it at all, call it a **traditional computed capacity figure** that requires cross-validation by Primary Directions.
 - Do NOT use the phrase "lifespan" or "life expectancy". Use: "years-table capacity" / "years-giving capacity" / "traditional years computation".
 - **MULTI-TRADITION REQUIREMENT:** You MUST present both:
@@ -520,7 +545,9 @@ Start with the foundational elements of the life:
    - When describing receptions, you MUST use formal wording ("X receives Y by domicile/exaltation/term/triplicity") and cite `analysis.teams.receptions` fields.
 5. **Almuten Figuris (Soul Guardian)**: Calculate the Master.
 6. **Temperament**: Determine the humoral mixture.
-7. **Vitality Audit (Preview)**: Name the Hyleg, Alcocoden, and Anareta, and note whether an Interfector is active (use JSON).
+7. **Vitality Audit (Preview)**: Name the Hyleg, Alcocoden, and Anareta, and note whether a hard directed hit or an anaretic window is active/near (use JSON).
+   - Use `analysis.vitality.directed_hits_to_hyleg.active_hard_hit` if present.
+   - If `analysis.vitality.anaretic_windows.candidates` contains Mars/Saturn hard hits, flag them as **anaretic windows** (technical only; not a death prediction).
 
 Framing: "Our audit identifies the [Crack/Support] in the Foundational Hierarchy..."
 
@@ -577,7 +604,8 @@ Do NOT repeat previous material. Cover only what has not been addressed.""",
 3. ANNUAL PROFECTION: What house? What Lord of the Year? That Lord's natal condition?
 4. FIRDARIA: What Major Period? What Sub-Period? How do these Lords interact?
 5. ZODIACAL RELEASING: What Level 1 chapter (from Lot of Spirit)? What Level 2?
-6. VITALITY TIMING NUANCE: If the JSON flags an active Interfector (primary-direction promittor striking the Hyleg), cite it as the executioner-mechanism (technical vitality audit only).
+6. VITALITY TIMING NUANCE: If the JSON flags directed hits/anaretic windows to the Hyleg degree, cite them as technical risk windows only (no "executioner" framing).
+   - REVISED: Use `analysis.vitality.directed_hits_to_hyleg` and `analysis.vitality.anaretic_windows` instead. Do NOT use "executioner" wording.
 
 **THE SYNTHESIS:**
 - The YEAR is ruled by [X] who is [condition] = [forecast]
@@ -634,7 +662,84 @@ DO NOT SUMMARIZE. DO NOT USE PLACEHOLDERS. COMPLETE LOGIC ONLY.""",
 # MAIN GENERATION LOGIC
 # =============================================================================
 
-def generate_chart_data(name, date_str, time_str, city, state=None, latitude=None, longitude=None):
+def _apply_dignity_overrides(
+    combined_data: Dict[str, Any],
+    triplicity_scheme: Optional[str] = None,
+    term_system: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Override `analysis.planets_forensic[].dignities` for report-generation doctrine testing.
+
+    This does NOT re-run the whole audit; it only recomputes essential dignity scoring with
+    selected triplicity/terms tables so the narrative layer can be compared.
+    """
+    analysis = combined_data.get("analysis") or {}
+    sect_type = (analysis.get("sect") or {}).get("type") or "DAY"
+    sect = Sect.DAY if sect_type == "DAY" else Sect.NIGHT
+
+    ts = None
+    if term_system:
+        raw = term_system.strip().lower()
+        if raw in ("egyptian", "egy"):
+            ts = TermSystem.EGYPTIAN
+        elif raw in ("ptolemaic", "ptol", "pt"):
+            ts = TermSystem.PTOLEMAIC
+
+    tr = None
+    if triplicity_scheme:
+        raw = triplicity_scheme.strip().lower()
+        if raw in ("dorothean", "doro", "dor"):
+            tr = TriplicityScheme.DOROTHEAN
+        elif raw in ("ptolemaic", "ptol", "pt", "ptolemaic_sect_gated", "ptolemaic-sect-gated"):
+            tr = TriplicityScheme.PTOLEMAIC_SECT_GATED
+
+    # Nothing to do.
+    if ts is None and tr is None:
+        return combined_data
+
+    pf = analysis.get("planets_forensic") or []
+    for p in pf:
+        try:
+            name = p.get("name")
+            if not name or name in ("North_Node", "South_Node"):
+                continue
+            lon = float(p.get("longitude") or 0.0)
+            pn = PlanetName(name)
+            variant = DignityCalculator.calculate_planet_dignity_variant(
+                planet_name=pn,
+                longitude=lon,
+                sect=sect,
+                term_system=ts or TermSystem.EGYPTIAN,
+                triplicity_scheme=tr or TriplicityScheme.DOROTHEAN,
+                include_monomoiria=True,
+            )
+            # Preserve the full original object but override what the prompt reads.
+            p["dignities"] = variant
+        except Exception:
+            continue
+
+    # Record doctrine choice for appendix display.
+    chart_meta = (combined_data.get("meta") or {}).get("chart") or {}
+    chart_meta["dignity_variant"] = {
+        "triplicity_scheme": (tr.value if tr else "Dorothean"),
+        "term_system": ((ts.value if ts else "Egyptian")),
+        "note": "This is a reporting doctrine override for comparison; it does not change computed positions/aspects.",
+    }
+
+    return combined_data
+
+
+def generate_chart_data(
+    name,
+    date_str,
+    time_str,
+    city,
+    state=None,
+    latitude=None,
+    longitude=None,
+    triplicity_scheme: Optional[str] = None,
+    term_system: Optional[str] = None,
+):
     """Generate comprehensive chart data using Auditor."""
     print(f"\n{'='*80}")
     print(f"FORENSIC ENGINE INITIALIZATION")
@@ -658,7 +763,7 @@ def generate_chart_data(name, date_str, time_str, city, state=None, latitude=Non
         return None
     
     # Combine all data for comprehensive LLM input
-    combined_data = {
+    combined_data: Dict[str, Any] = {
         "meta": result["technical_data"]["meta"],
         "astronomy": result["technical_data"]["astronomy"],
         "analysis": result["technical_data"]["analysis"],
@@ -669,9 +774,246 @@ def generate_chart_data(name, date_str, time_str, city, state=None, latitude=Non
     # cite planetary cabinet details instead of fabricating.
     if "planets_forensic" not in combined_data["analysis"]:
         combined_data["analysis"]["planets_forensic"] = result["technical_data"].get("planets_forensic", [])
+
+    combined_data = _apply_dignity_overrides(
+        combined_data,
+        triplicity_scheme=triplicity_scheme,
+        term_system=term_system,
+    )
     
     chart_json = json.dumps(combined_data, indent=2, default=str)
     return chart_json
+
+
+def generate_chart_data_object(
+    name: str,
+    date_str: str,
+    time_str: str,
+    city: str,
+    state: str = "",
+    latitude: Optional[float] = None,
+    longitude: Optional[float] = None,
+    house_system: str = "W",
+    triplicity_scheme: Optional[str] = None,
+    term_system: Optional[str] = None,
+) -> Optional[Dict[str, Any]]:
+    """
+    Deterministic chart-data payload (Python object) for method comparisons.
+    Avoids JSON stringification and avoids LLM calls.
+    """
+    result = Auditor.generate_full_nativity(
+        date_str=date_str,
+        time_str=time_str,
+        city=city,
+        state=state or "",
+        name=name,
+        latitude=latitude,
+        longitude=longitude,
+        house_system=house_system,
+    )
+    if not result or "error" in result:
+        return None
+
+    combined_data: Dict[str, Any] = {
+        "meta": result["technical_data"]["meta"],
+        "astronomy": result["technical_data"]["astronomy"],
+        "analysis": result["technical_data"]["analysis"],
+        "human_translation": result.get("human_translation"),
+    }
+    if "planets_forensic" not in combined_data["analysis"]:
+        combined_data["analysis"]["planets_forensic"] = result["technical_data"].get("planets_forensic", [])
+
+    combined_data = _apply_dignity_overrides(
+        combined_data,
+        triplicity_scheme=triplicity_scheme,
+        term_system=term_system,
+    )
+
+    return combined_data
+
+
+def _fmt_lon_simple(lon_abs: float) -> str:
+    try:
+        lonf = format_longitude(lon_abs) or {}
+        s = lonf.get("string")
+        la = lonf.get("lon_abs", lon_abs)
+        if s:
+            return f"{s} (lon_abs: {float(la):.6f})"
+        return f"{float(la):.6f}°"
+    except Exception:
+        return f"{lon_abs:.6f}°"
+
+
+def build_method_matrix_report(
+    name: str,
+    date_str: str,
+    time_str: str,
+    city: str,
+    state: str,
+    latitude: Optional[float],
+    longitude: Optional[float],
+    house_systems: List[str],
+) -> str:
+    """
+    Produce a side-by-side deterministic comparison across debated traditional methods:
+    - House systems (WSH vs quadrant systems) using Swiss Ephemeris / AlcabitiusEngine
+    - Dignity variants (Dorothean vs Ptolemaic triplicity; Egyptian vs Ptolemaic terms)
+    """
+    now = datetime.now()
+
+    # Base run (Whole Sign) for shared sign-based facts and dignity matrix.
+    base = generate_chart_data_object(
+        name=name,
+        date_str=date_str,
+        time_str=time_str,
+        city=city,
+        state=state,
+        latitude=latitude,
+        longitude=longitude,
+        house_system="W",
+    )
+    if not base:
+        return "Engine Failure: Could not generate base chart payload."
+
+    md = ""
+    md += "# METHOD MATRIX (TRADITIONAL VARIANTS)\n"
+    md += "## Same Nativity, Multiple Doctrines\n\n"
+    md += "---\n"
+    md += f"**Subject:** {name}\n\n"
+    md += f"**Birth (Input):** {date_str} {time_str} | {city}, {state}\n\n"
+    chart_meta = (base.get("meta") or {}).get("chart") or {}
+    geo_meta = chart_meta.get("geocode") or {}
+    md += (
+        f"**Coordinates Used:** {chart_meta.get('lat')}, {chart_meta.get('lon')} "
+        f"(source: {geo_meta.get('source', 'unknown')})\n\n"
+    )
+    md += f"**Generated At:** {now.isoformat()}\n\n"
+    md += "---\n\n"
+    md += (
+        "**Notice:** Traditional astrologers disagree on several doctrine forks. "
+        "This matrix shows what changes when you switch methods.\n\n"
+        "This is a technical comparison for historical/spiritual research only; it is not medical or financial advice.\n\n"
+        "---\n\n"
+    )
+
+    # 1) House systems comparison
+    md += "## 1) House Systems (Planet-in-House Differences)\n\n"
+    md += "This section compares house placements under multiple house systems.\n\n"
+
+    per_system: Dict[str, Dict[str, Any]] = {}
+    for code in house_systems:
+        payload = generate_chart_data_object(
+            name=name,
+            date_str=date_str,
+            time_str=time_str,
+            city=city,
+            state=state,
+            latitude=latitude,
+            longitude=longitude,
+            house_system=code,
+        )
+        if payload:
+            per_system[code] = payload
+
+    planet_rows = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "North_Node", "South_Node"]
+    headers = ["Body"] + [f"{HOUSE_SYSTEM_LABELS.get(c, c)} ({c})" for c in per_system.keys()]
+    md += "| " + " | ".join(headers) + " |\n"
+    md += "|" + "---|" * len(headers) + "\n"
+    for body in planet_rows:
+        row = [body]
+        for _, payload in per_system.items():
+            pf = (payload.get("analysis") or {}).get("planets_forensic") or []
+            entry = next((p for p in pf if p.get("name") == body), None)
+            if not entry:
+                row.append("-")
+                continue
+            house = entry.get("house") or (entry.get("accidental") or {}).get("house")
+            lonf = entry.get("longitude_fmt") or {}
+            pos = lonf.get("string") or _fmt_lon_simple(float(entry.get("longitude") or 0.0))
+            row.append(f"{pos} | H{house}")
+        md += "| " + " | ".join(row) + " |\n"
+
+    md += "\n**Angles per House System:**\n\n"
+    md += "| System | Ascendant | MC |\n|---|---|---|\n"
+    for code, payload in per_system.items():
+        ang = (payload.get("astronomy") or {}).get("angles") or {}
+        asc_lon = ang.get("Ascendant", {}).get("longitude") if isinstance(ang.get("Ascendant"), dict) else ang.get("Ascendant")
+        mc_lon = ang.get("MC", {}).get("longitude") if isinstance(ang.get("MC"), dict) else ang.get("MC")
+        asc_s = _fmt_lon_simple(float(asc_lon)) if asc_lon is not None else "(missing)"
+        mc_s = _fmt_lon_simple(float(mc_lon)) if mc_lon is not None else "(missing)"
+        md += f"| {HOUSE_SYSTEM_LABELS.get(code, code)} ({code}) | {asc_s} | {mc_s} |\n"
+
+    md += "\n---\n\n"
+
+    # 2) Dignity variants comparison (house-independent)
+    md += "## 2) Essential Dignity Variants (Triplicity/Terms)\n\n"
+    md += (
+        "This section recomputes **essential** dignity scores under common doctrine forks:\n\n"
+        "- Triplicity: Dorothean vs Ptolemaic (sect-gated)\n"
+        "- Terms: Egyptian vs Ptolemaic\n\n"
+        "The sign/degree is the same; only the dignity rules change.\n\n"
+    )
+
+    sect_type = ((base.get("analysis") or {}).get("sect") or {}).get("type") or "DAY"
+    sect = Sect.DAY if sect_type == "DAY" else Sect.NIGHT
+
+    pf_base = (base.get("analysis") or {}).get("planets_forensic") or []
+    core_planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]
+
+    md += "| Body | Position | Dorothean+Egyptian | Dorothean+PtolemaicTerms | Ptolemaic+Egyptian | Ptolemaic+PtolemaicTerms |\n"
+    md += "|---|---|---:|---:|---:|---:|\n"
+    for body in core_planets:
+        entry = next((p for p in pf_base if p.get("name") == body), None)
+        if not entry:
+            continue
+        lon = float(entry.get("longitude") or 0.0)
+        lonf = entry.get("longitude_fmt") or {}
+        pos = lonf.get("string") or _fmt_lon_simple(lon)
+        pn = PlanetName(body)
+
+        d_e = DignityCalculator.calculate_planet_dignity_variant(
+            pn, lon, sect, term_system=TermSystem.EGYPTIAN, triplicity_scheme=TriplicityScheme.DOROTHEAN, include_monomoiria=False
+        )["total_score"]
+        d_p = DignityCalculator.calculate_planet_dignity_variant(
+            pn, lon, sect, term_system=TermSystem.PTOLEMAIC, triplicity_scheme=TriplicityScheme.DOROTHEAN, include_monomoiria=False
+        )["total_score"]
+        p_e = DignityCalculator.calculate_planet_dignity_variant(
+            pn, lon, sect, term_system=TermSystem.EGYPTIAN, triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED, include_monomoiria=False
+        )["total_score"]
+        p_p = DignityCalculator.calculate_planet_dignity_variant(
+            pn, lon, sect, term_system=TermSystem.PTOLEMAIC, triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED, include_monomoiria=False
+        )["total_score"]
+
+        md += f"| {body} | {pos} | {d_e} | {d_p} | {p_e} | {p_p} |\n"
+
+    md += "\n---\n\n"
+
+    # 3) Timing payload snapshot (no priority claims)
+    md += "## 3) Timing Techniques (Engine Outputs; No Priority Assumed)\n\n"
+    md += "This section prints the engine’s timing outputs so you can decide which techniques you want to prioritize.\n\n"
+
+    analysis = base.get("analysis") or {}
+    fate = analysis.get("fate") or {}
+
+    # Some timing outputs may live outside `analysis.fate` depending on engine version.
+    timing_sources: List[Tuple[str, Any]] = []
+    timing_sources.extend([(k, fate.get(k)) for k in sorted(fate.keys())])
+    if "enhanced_profections" in analysis:
+        timing_sources.append(("enhanced_profections", analysis.get("enhanced_profections")))
+
+    printed = set()
+    for key, value in timing_sources:
+        if key in printed:
+            continue
+        printed.add(key)
+        if value in (None, {}, [], ""):
+            continue
+        blob = json.dumps(value, indent=2, default=str)
+        if len(blob) > 20000:
+            blob = blob[:20000] + "\n... [TRUNCATED]\n"
+        md += f"### {key}\n\n```json\n{blob}\n```\n\n"
+
+    return md
 
 
 def apply_safety_filters(text):
@@ -764,9 +1106,17 @@ def build_raw_data_appendix(chart_data: str) -> str:
     ang_md += "**Doctrine/Method Declaration (this run):**\n\n"
     ang_md += "- Houses: Whole Sign Houses (topics) with MC reported as an angle (may fall in 9th/10th/11th by WSH).\n"
     ang_md += "- Core planets for judgment: Septener (Sun..Saturn). Nodes are treated as modifiers.\n"
-    ang_md += "- Aspects: computed from `analysis.aspects` (engine orbs); node aspects are not computed by the aspect engine.\n"
+    ang_md += "- Aspects: `analysis.aspects` is septener-only (core). `analysis.aspects_shadow` contains aspects involving outer planets (shadow only). Node aspects are not computed by the aspect engine.\n"
     ang_md += "- Receptions: computed from `analysis.teams.receptions` using `ReceptionMode.STANDARD_LILLY` with sect-gated Ptolemaic triplicity rights.\n"
-    ang_md += "- Dignities/terms: engine defaults to Dorothean triplicity for dignity variants and Egyptian terms for most rulership lookups (see per-planet `dignities.variants`).\n"
+    # Dignity doctrine (for method comparisons)
+    dv = (((parsed or {}).get("meta") or {}).get("chart") or {}).get("dignity_variant") or {}
+    if dv:
+        ang_md += (
+            f"- Dignities/terms (override): triplicity = {dv.get('triplicity_scheme')}; terms = {dv.get('term_system')}. "
+            f"{dv.get('note')}\n"
+        )
+    else:
+        ang_md += "- Dignities/terms: engine defaults to Dorothean triplicity for dignity variants and Egyptian terms for most rulership lookups (see per-planet `dignities.variants`).\n"
     ang_md += "- Phasis/voice: `analysis.planets_forensic[].phasis` visibility details (arcus visionis) with a conservative lunar dark override for the Moon.\n"
     ang_md += "**Angles (Whole Sign Topics; MC reported separately):**\n\n"
     if asc:
@@ -878,6 +1228,17 @@ def build_raw_data_appendix(chart_data: str) -> str:
     if isinstance(aspects, list) and aspects:
         ang_md += "\n**Aspects (computed; cite these, do not invent):**\n\n"
         for a in aspects:
+            if not isinstance(a, dict):
+                continue
+            ang_md += (
+                f"- {a.get('planet_a')} {a.get('type')} {a.get('planet_b')} "
+                f"| orb: {float(a.get('orb')):.4f}° | applying: {a.get('is_applying')}\n"
+            )
+
+    shadow_aspects = (analysis or {}).get("aspects_shadow", []) or []
+    if isinstance(shadow_aspects, list) and shadow_aspects:
+        ang_md += "\n**Shadow Aspects (outer planets; do not use for core judgment):**\n\n"
+        for a in shadow_aspects:
             if not isinstance(a, dict):
                 continue
             ang_md += (
@@ -1010,10 +1371,37 @@ def main():
     parser.add_argument("--lon", type=float, default=None, help="Optional longitude override (bypass geocoding)")
     parser.add_argument("--iterations", type=int, default=6, help="Number of iteration passes")
     parser.add_argument("--output-dir", default="premium_reports", help="Output directory")
+    parser.add_argument("--matrix", action="store_true", help="Generate a deterministic multi-method comparison report (no LLM).")
+    parser.add_argument("--house-systems", default="", help="Comma-separated house system codes to compare (default: engine COMPARE_SYSTEMS).")
+    parser.add_argument("--triplicity", default="", help="Doctrine override for report comparison: dorothean or ptolemaic.")
+    parser.add_argument("--terms", default="", help="Doctrine override for report comparison: egyptian or ptolemaic.")
     
     args = parser.parse_args()
     
     os.makedirs(args.output_dir, exist_ok=True)
+
+    # Method-matrix mode: deterministic comparison across doctrine forks.
+    if args.matrix:
+        systems = [s.strip().upper() for s in (args.house_systems.split(",") if args.house_systems else []) if s.strip()]
+        if not systems:
+            systems = list(COMPARE_SYSTEMS)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        safe_name = args.name.replace(" ", "_").lower()
+        output_file = os.path.join(args.output_dir, f"{safe_name}_method_matrix_{timestamp}.md")
+        report = build_method_matrix_report(
+            name=args.name,
+            date_str=args.date,
+            time_str=args.time,
+            city=args.city,
+            state=args.state,
+            latitude=args.lat,
+            longitude=args.lon,
+            house_systems=systems,
+        )
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(report)
+        print(f"\n✓ METHOD MATRIX COMPLETE\n  Output: {output_file}\n")
+        return 0
     
     # Generate chart data
     # Generate chart data
@@ -1026,6 +1414,8 @@ def main():
         args.state,
         latitude=args.lat,
         longitude=args.lon,
+        triplicity_scheme=(args.triplicity or None),
+        term_system=(args.terms or None),
     )
     if not chart_data:
         return 1

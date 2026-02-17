@@ -49,9 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Promo/testing banner (public pages): show only when promo is active.
     maybeShowPromoTestingBanner();
 
+    // Restore any previously entered request.
+    restoreLastChartRequestFromStorage();
+
     // If the user was redirected to signup/login, restore their pending reading inputs.
     restorePendingReadingRequest();
+    maybeResumePendingCheckout();
 });
+
+function restoreLastChartRequestFromStorage() {
+    try {
+        const saved = localStorage.getItem("cael_last_request");
+        if (saved) lastChartRequest = JSON.parse(saved);
+    } catch (e) {
+        // Ignore restore errors
+    }
+}
 
 function restorePendingReadingRequest() {
     try {
@@ -103,7 +116,7 @@ async function maybeShowPromoTestingBanner() {
         banner.innerHTML = `
             <div class="construction-title">Testing Window: Readings Are Free${untilText}</div>
             <p class="construction-text">
-                We are running live testing. Individual readings will be free for a limited time, but you still need an account.
+                We are running live testing. Individual readings are free during this window.
                 After you receive your result, tell us if it felt accurate or not.
             </p>
         `;
@@ -159,6 +172,18 @@ function getLastChartRequest() {
     // In strict mode modules, local vars aren't exported.
     // We use the module-scope variable defined below.
     return lastChartRequest;
+}
+
+function maybeResumePendingCheckout() {
+    try {
+        const token = localStorage.getItem("cael_auth_token");
+        const pendingTier = (localStorage.getItem("cael_pending_checkout_tier") || "").trim();
+        if (!token || !pendingTier || !lastChartRequest) return;
+        localStorage.removeItem("cael_pending_checkout_tier");
+        initiateCheckout(pendingTier, lastChartRequest);
+    } catch (e) {
+        // Ignore resume errors
+    }
 }
 
 function setupInputValidation() {
@@ -269,18 +294,7 @@ function setupBasicForm() {
             return;
         }
 
-        // Account required for readings.
         const token = localStorage.getItem("cael_auth_token");
-        if (!token) {
-            // Persist the request so signup/login can resume.
-            try {
-                localStorage.setItem("cael_pending_reading", JSON.stringify(payload));
-                localStorage.setItem("cael_last_request", JSON.stringify(payload));
-                localStorage.setItem("cael_post_auth_redirect", window.location.href);
-            } catch (e) { }
-            window.location.href = "signup.html?reason=reading";
-            return;
-        }
 
         setBasicLoading(true);
         if (basicReading) basicReading.classList.add("hidden");
@@ -291,16 +305,36 @@ function setupBasicForm() {
         logEvent("basic_chart_request", { form: payload });
 
         try {
+            const headers = {
+                "Content-Type": "application/json"
+            };
+            if (token) headers["Authorization"] = `Bearer ${token}`;
+
             const response = await fetch(apiUrl("/api/v1/calculate"), {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
+                headers,
                 body: JSON.stringify(payload)
             });
 
-            if (!response.ok) throw new Error("Processing failed.");
+            if (!response.ok) {
+                let detail = null;
+                try {
+                    const errData = await response.json();
+                    detail = errData ? errData.detail : null;
+                } catch (e) {
+                    detail = null;
+                }
+
+                if (response.status === 402 && detail && detail.tier === "single_reading") {
+                    renderPaymentRequired(detail);
+                    return;
+                }
+
+                const message = typeof detail === "string"
+                    ? detail
+                    : (detail && detail.message) || "Processing failed.";
+                throw new Error(message);
+            }
 
             const result = await response.json();
             logEvent("basic_chart_result", { result });
@@ -339,9 +373,19 @@ function renderBasicReading(result, payload, timeUnknown) {
         basicReadingBody.prepend(div);
     }
 
-    // Upgrade CTA for free/demo users (skip during promo unlock).
-    if (result.meta && result.meta.tier === 'free' && !result.meta.promo_unlocked) {
-        renderUpgradeCta(basicReadingBody);
+    if (result.meta && result.meta.tier === 'free') {
+        const remaining = Number(result.meta.free_reads_remaining);
+        const limit = Number(result.meta.free_reads_limit);
+        if (Number.isFinite(remaining) && Number.isFinite(limit)) {
+            const note = document.createElement('div');
+            note.className = "lock-disclaimer";
+            note.style.marginTop = "1rem";
+            note.innerHTML = `
+                <strong>Free Usage:</strong> ${Math.max(0, Math.floor(remaining))} of ${Math.max(0, Math.floor(limit))} free readings remaining for this IP.
+                After that, single readings are $20 each.
+            `;
+            basicReadingBody.appendChild(note);
+        }
     }
 
     if (basicReading) basicReading.classList.remove("hidden");
@@ -413,20 +457,31 @@ function renderBasicReading(result, payload, timeUnknown) {
     }
 }
 
-function renderUpgradeCta(container) {
-    const div = document.createElement('div');
-    div.innerHTML = `
-        <div class="lock-disclaimer" style="margin-top: 1.5rem;">
-            <strong>Practitioner Access:</strong>
-            Create an account to start a no-card trial (14 days) and unlock the full deterministic outputs, exports, and API access.
+function renderPaymentRequired(detail) {
+    const basicReadingBody = document.getElementById("basicReadingBody");
+    const basicReading = document.getElementById("basicReading");
+    const basicFeedback = document.getElementById("basicFeedback");
+    if (!basicReadingBody || !basicReading) return;
+
+    const freeLimit = Number(detail?.free_limit || 3);
+    const priceUsd = Number(detail?.price_usd || 20);
+    const hasToken = !!localStorage.getItem("cael_auth_token");
+
+    basicReadingBody.innerHTML = `
+        <div class="lock-disclaimer" style="margin-top: 0.5rem;">
+            <strong>Free Limit Reached:</strong> You have used the ${freeLimit} free readings for this IP.
+            Additional single readings are $${priceUsd} each.
             <div class="hero-actions" style="justify-content:center; margin-top: 1rem;">
-                <a class="btn-primary" href="signup.html?plan=practitioner">Start Practitioner Trial</a>
-                <a class="btn-secondary" href="signup.html?plan=studio">Start Studio Trial</a>
-                <a class="btn-secondary" href="profile.html">Go to Dashboard</a>
+                <button type="button" class="btn-primary" onclick="startCheckout('single_reading')">Unlock This Reading ($${priceUsd})</button>
+                ${hasToken ? "" : `<a class="btn-secondary" href="login.html">Log In</a>`}
+            </div>
+            <div class="text-muted text-sm" style="margin-top: 0.75rem; text-align:center;">
+                Historical Use Only. No medical, legal, or financial advice.
             </div>
         </div>
     `;
-    container.appendChild(div);
+    basicReading.classList.remove("hidden");
+    if (basicFeedback) basicFeedback.classList.add("hidden");
 }
 
 function setupModals() {

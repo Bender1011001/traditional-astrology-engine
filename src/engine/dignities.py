@@ -1,6 +1,7 @@
 
 import logging
 from typing import Dict, List, Tuple, Optional
+from enum import Enum, auto
 from .models import PlanetName, Sign, Sect, Chart, Planet
 from .reference_data import (
     TRIPLICITY_RULERS as REF_TRIPLICITY,
@@ -14,8 +15,9 @@ from .reference_data import (
     DOMICILES as REF_DOMICILES,
     EXALTATIONS as REF_EXALTATIONS
 )
-
-from enum import Enum, auto
+class TriplicityScheme(Enum):
+    DOROTHEAN = "Dorothean"
+    PTOLEMAIC_SECT_GATED = "Ptolemaic (sect-gated)"
 
 class TermSystem(Enum):
     EGYPTIAN = "Egyptian"
@@ -29,6 +31,7 @@ class DignityCalculator:
     TRIPLICITY = 3
     TERM = 2
     FACE = 1
+    PEREGRINE = -5
     DETRIMENT = -5
     FALL = -4
 
@@ -431,6 +434,163 @@ class DignityCalculator:
             },
             "sign": sign.value,
             "degree": deg_in_sign
+        }
+
+    @classmethod
+    def calculate_planet_dignity_variant(
+        cls,
+        planet_name: PlanetName,
+        longitude: float,
+        sect: Sect,
+        term_system: TermSystem = TermSystem.EGYPTIAN,
+        triplicity_scheme: TriplicityScheme = TriplicityScheme.DOROTHEAN,
+        include_monomoiria: bool = True,
+    ) -> Dict:
+        """
+        Variant-capable essential dignity calculator.
+
+        This is used for method-comparison reporting where traditional authorities disagree on:
+        - Dorothean (day/night/participant) vs Ptolemaic (day/night) triplicity rulership
+        - Egyptian vs Ptolemaic bounds/terms
+
+        Notes:
+        - PTOLEMAIC_SECT_GATED: in Day charts only the Day triplicity ruler has rights; in Night charts
+          only the Night ruler. (Matches how receptions are sect-gated in STANDARD_LILLY mode.)
+        - `include_monomoiria` defaults True to match this engine's existing scoring behavior.
+        """
+        sign_idx = int(longitude / 30) % 12
+        sign = list(Sign)[sign_idx]
+        deg_in_sign = longitude % 30
+
+        details: List[str] = []
+        conflicts: List[str] = []
+        score = 0
+
+        score_breakdown = {
+            "domicile": 0,
+            "exaltation": 0,
+            "triplicity": 0,
+            "term": 0,
+            "face": 0,
+            "monomoiria": 0,
+            "detriment": 0,
+            "fall": 0,
+        }
+
+        # 1. Domicile (+5) / Detriment (-5)
+        is_domicile = any(p == planet_name and sign in signs for p, signs in cls.DOMICILES.items())
+        if is_domicile:
+            score += cls.DOMICILE
+            score_breakdown["domicile"] = cls.DOMICILE
+            details.append("Domicile (+5)")
+        else:
+            is_detriment = any(p == planet_name and sign in signs for p, signs in cls.DETRIMENTS.items())
+            if is_detriment:
+                score += cls.DETRIMENT
+                score_breakdown["detriment"] = cls.DETRIMENT
+                details.append("Detriment (-5)")
+
+        # 2. Exaltation (+4) / Fall (-4)
+        if cls.EXALTATIONS.get(planet_name) == sign:
+            score += cls.EXALTATION
+            score_breakdown["exaltation"] = cls.EXALTATION
+            details.append("Exaltation (+4)")
+        elif cls.FALLS.get(planet_name) == sign:
+            score += cls.FALL
+            score_breakdown["fall"] = cls.FALL
+            details.append("Fall (-4)")
+
+        # 3. Triplicity (+3) / participant (+1, Dorothean only)
+        element = cls.ZODIAC_ELEMENTS.get(sign)
+        if element:
+            if triplicity_scheme == TriplicityScheme.DOROTHEAN:
+                rulers = cls.TRIPLICITY_RULERS.get(element)
+                if rulers:
+                    if (sect == Sect.DAY and planet_name == rulers[0]) or (sect == Sect.NIGHT and planet_name == rulers[1]):
+                        score += cls.TRIPLICITY
+                        score_breakdown["triplicity"] = cls.TRIPLICITY
+                        details.append(f"Triplicity ({TriplicityScheme.DOROTHEAN.value}, {sect.value}) (+3)")
+                    elif len(rulers) >= 3 and planet_name == rulers[2]:
+                        score += 1
+                        score_breakdown["triplicity"] = 1
+                        details.append(f"Triplicity (Participant, {TriplicityScheme.DOROTHEAN.value}) (+1)")
+            else:
+                pt = PTOLEMAIC_TRIPLICITY.get(element)
+                if pt and len(pt) >= 2:
+                    day_ruler, night_ruler = pt[0], pt[1]
+                    if sect == Sect.DAY and planet_name == day_ruler:
+                        score += cls.TRIPLICITY
+                        score_breakdown["triplicity"] = cls.TRIPLICITY
+                        details.append(f"Triplicity ({TriplicityScheme.PTOLEMAIC_SECT_GATED.value}, Day) (+3)")
+                    elif sect == Sect.NIGHT and planet_name == night_ruler:
+                        score += cls.TRIPLICITY
+                        score_breakdown["triplicity"] = cls.TRIPLICITY
+                        details.append(f"Triplicity ({TriplicityScheme.PTOLEMAIC_SECT_GATED.value}, Night) (+3)")
+
+        # 4. Terms (+2)
+        term_table = EGYPTIAN_TERMS
+        if term_system == TermSystem.PTOLEMAIC:
+            term_table = PTOLEMAIC_TERMS
+        elif term_system == TermSystem.CHALDEAN:
+            term_table = CHALDEAN_TERMS
+
+        bounds = term_table.get(sign)
+        if bounds:
+            for ruler_val, limit in bounds:
+                ruler_name = ruler_val
+                if isinstance(ruler_val, str):
+                    ruler_name = PlanetName[ruler_val.upper()] if ruler_val.upper() in PlanetName.__members__ else None
+                if deg_in_sign < limit:
+                    if ruler_name == planet_name:
+                        score += cls.TERM
+                        score_breakdown["term"] = cls.TERM
+                        details.append(f"Term ({term_system.value}) (+2)")
+                    break
+
+        # 5. Face (+1)
+        face_idx = int(deg_in_sign / 10)
+        face_ruler_val = cls.FACES[sign][face_idx]
+        face_ruler_name = PlanetName[face_ruler_val.upper()] if isinstance(face_ruler_val, str) else face_ruler_val
+        if face_ruler_name == planet_name:
+            score += cls.FACE
+            score_breakdown["face"] = cls.FACE
+            details.append("Face (+1)")
+
+        # 6. Monomoiria (+1) [engine-specific add-on]
+        mono_ruler = cls.get_monomoiria_ruler(sign, deg_in_sign)
+        if include_monomoiria:
+            if mono_ruler == planet_name:
+                score += 1
+                score_breakdown["monomoiria"] = 1
+                details.append(f"Monomoiria (+1, Ruler: {mono_ruler.value})")
+            else:
+                details.append(f"Monomoiria Ruler: {mono_ruler.value}")
+
+        # 7. Peregrine (-5): no essential dignity at all (and not in detriment/fall scoring above)
+        if (
+            score_breakdown["domicile"] == 0
+            and score_breakdown["exaltation"] == 0
+            and score_breakdown["triplicity"] == 0
+            and score_breakdown["term"] == 0
+            and score_breakdown["face"] == 0
+            and score_breakdown["detriment"] == 0
+            and score_breakdown["fall"] == 0
+        ):
+            score += cls.PEREGRINE
+            details.append("Peregrine (-5)")
+
+        return {
+            "total_score": score,
+            "score_breakdown": score_breakdown,
+            "details": details,
+            "conflicts": conflicts,
+            "variants": {
+                "triplicity_scheme": triplicity_scheme.value,
+                "term_system": term_system.value,
+                "include_monomoiria": include_monomoiria,
+            },
+            "sign": sign.value,
+            "degree": deg_in_sign,
         }
 
     @classmethod

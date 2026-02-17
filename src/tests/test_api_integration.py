@@ -29,8 +29,8 @@ async def test_calculate_endpoint_free():
     }
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
         response = await ac.post("/api/v1/calculate", json=payload)
-        # Expected status 200 or 500 (if keys missing), but not 422
-        assert response.status_code in [200, 500] 
+        # Auth is required for readings. In test env we accept 401 (unauth) or 500 (missing runtime keys).
+        assert response.status_code in [401, 500]
 
 @pytest.mark.asyncio
 async def test_auth_validate_session():

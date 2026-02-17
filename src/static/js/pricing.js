@@ -125,12 +125,18 @@ export async function initiateCheckout(tier, chartRequest = null) {
     
     // Auth Check first
     if (!token) {
-        window.location.href = `login.html?redirect=pricing&tier=${tier}`;
+        try {
+            if (chartRequest) localStorage.setItem("cael_last_request", JSON.stringify(chartRequest));
+            localStorage.setItem("cael_pending_checkout_tier", String(tier || "").trim());
+            localStorage.setItem("cael_post_auth_redirect", window.location.href);
+        } catch (e) { }
+        window.location.href = `login.html?reason=checkout&tier=${tier}`;
         return;
     }
 
     const billingToggle = document.getElementById("billingToggle");
-    const isAnnual = billingToggle ? billingToggle.checked : false;
+    const subscriptionTier = tier === "practitioner" || tier === "studio";
+    const isAnnual = subscriptionTier && billingToggle ? billingToggle.checked : false;
 
     // Chart request is optional for subscription checkout.
     // If present, it will be attached to metadata for downstream workflows.

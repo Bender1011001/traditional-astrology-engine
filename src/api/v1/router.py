@@ -4,6 +4,7 @@ from src.api.v1.endpoints import charts, synastry, mundane, telemetry, forensic,
 api_router = APIRouter()
 
 api_router.include_router(charts.router, tags=["charts"])
+api_router.include_router(charts.router, prefix="/charts", tags=["charts"])
 api_router.include_router(synastry.router, tags=["synastry"])
 api_router.include_router(mundane.router, tags=["mundane"])
 api_router.include_router(forensic.router, prefix="/forensic", tags=["forensic"])

@@ -198,9 +198,11 @@ def get_coordinates(city: str, state: str = "") -> tuple[float, float]:
     Get latitude and longitude for a given city and state.
     """
     query_norm = _normalize_query(city, state)
-    cached = _cache_get(query_norm)
-    if cached:
-        return cached
+    # Tests should be deterministic: avoid using a persistent on-disk cache during pytest runs.
+    if not os.getenv("PYTEST_CURRENT_TEST"):
+        cached = _cache_get(query_norm)
+        if cached:
+            return cached
 
     query = f"{city}, {state}" if state else city
     last_error = None
@@ -248,9 +250,11 @@ def get_coordinates_with_meta(city: str, state: str = "") -> tuple[float, float,
     """
     query_norm = _normalize_query(city, state)
 
-    cached = _cache_get(query_norm)
-    if cached:
-        return cached[0], cached[1], {"source": "cache", "query_norm": query_norm}
+    # Tests should be deterministic: avoid using a persistent on-disk cache during pytest runs.
+    if not os.getenv("PYTEST_CURRENT_TEST"):
+        cached = _cache_get(query_norm)
+        if cached:
+            return cached[0], cached[1], {"source": "cache", "query_norm": query_norm}
 
     # Attempt Nominatim first (may be rate-limited).
     query = f"{city}, {state}" if state else city

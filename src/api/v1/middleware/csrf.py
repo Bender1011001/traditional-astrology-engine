@@ -25,7 +25,10 @@ CSRF_EXEMPT_PATHS: List[str] = [
     "/api/v1/auth/register",
     "/api/v1/auth/forgot-password",
     "/api/v1/auth/reset-password",
-    "/api/v1/stripe/webhook",  # Stripe webhooks have their own signature verification
+    # Stripe webhooks have their own signature verification.
+    "/api/v1/billing/webhook",
+    # Legacy/alternate webhook path (kept to avoid accidental lockouts).
+    "/api/v1/stripe/webhook",
     "/docs",
     "/redoc",
     "/openapi.json",

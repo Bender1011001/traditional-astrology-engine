@@ -276,24 +276,49 @@ class Auditor:
         analysis["vitality"] = Auditor._calculate_vitality_suite(chart, age_years=age_years)
         analysis["triplicity_periods"] = Auditor._calculate_triplicity_periods(chart)
         analysis[ "temperament" ] = TemperamentEngine.calculate_temperament(chart)
-        # Store a JSON-serializable aspects list for auditability, while keeping raw objects for any
-        # legacy consumers that expect dataclass instances.
+        # Store aspects in a JSON-serializable format for auditability.
+        # Split into "core" (septener-only) vs "shadow" (involving outer planets) to preserve metric purity.
         _aspects_raw = AspectEngine.calculate_aspects(chart)
         analysis["aspects_raw"] = _aspects_raw
+        core_names = {
+            PlanetName.SUN,
+            PlanetName.MOON,
+            PlanetName.MERCURY,
+            PlanetName.VENUS,
+            PlanetName.MARS,
+            PlanetName.JUPITER,
+            PlanetName.SATURN,
+        }
+        shadow_names = {PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO}
+
+        def _asp_to_dict(asp) -> Dict[str, Any]:
+            return {
+                "planet_a": asp.planet_a.value,
+                "planet_b": asp.planet_b.value,
+                "type": asp.type.value,
+                "orb": float(asp.orb),
+                "is_applying": bool(asp.is_applying),
+                "text": asp.text,
+            }
+
         try:
-            analysis["aspects"] = [
-                {
-                    "planet_a": asp.planet_a.value,
-                    "planet_b": asp.planet_b.value,
-                    "type": asp.type.value,
-                    "orb": float(asp.orb),
-                    "is_applying": bool(asp.is_applying),
-                    "text": asp.text,
-                }
-                for asp in _aspects_raw
-            ]
+            core = []
+            shadow = []
+            for asp in _aspects_raw:
+                a = asp.planet_a
+                b = asp.planet_b
+                if a in shadow_names or b in shadow_names:
+                    shadow.append(_asp_to_dict(asp))
+                elif a in core_names and b in core_names:
+                    core.append(_asp_to_dict(asp))
+                else:
+                    # Ignore nodes/unsupported bodies for the report layer.
+                    continue
+            analysis["aspects"] = core
+            analysis["aspects_shadow"] = shadow
         except Exception:
             analysis["aspects"] = []
+            analysis["aspects_shadow"] = []
         analysis["medical"] = Auditor._calculate_medical_suite(chart, decumbiture_jd=decumbiture_jd)
         
         # 2. Advanced Suites
@@ -1069,8 +1094,24 @@ class Auditor:
         lifespan = lifespan_bonatti if alc_bonatti else lifespan_valens
         anareta = HylegAlcocodenEngine.determine_anareta(hyleg, chart) if hyleg else {"name": None, "reason": "No Hyleg available."}
 
-        # Interfector: active promittor direction striking the Hyleg (gold-standard distinction).
-        interfector = {"active": None, "candidates": [], "note": "Not calculated (missing hyleg or age)."}
+        # Primary Directions "hits" to the Hyleg degree (technical).
+        #
+        # NOTE: Older report layers called this the "Interfector" and used "executioner" language.
+        # That wording is interpretive and causes confusion when benefics/Almuten are involved.
+        # We output a neutral payload and separately derive a conservative "anaretic windows" list.
+        directed_hits_to_hyleg = {"active_hard_hit": None, "candidates": [], "note": "Not calculated (missing hyleg or age)."}
+        anaretic_windows = {
+            "candidates": [],
+            "criteria": {
+                "promittors": ["Mars", "Saturn"],
+                "aspects": ["Conjunction", "Square", "Opposition"],
+            },
+            "note": (
+                "Anaretic windows are a conservative technical flag: malefic hard primary-direction hits "
+                "to the Hyleg degree. This is NOT a death prediction. Treat as a period requiring stricter "
+                "risk management and remediation (historical symbolism)."
+            ),
+        }
         try:
             if hyleg and "longitude" in hyleg:
                 dirs = PrimaryDirectionsEngine.calculate_directions_to_point(
@@ -1091,19 +1132,35 @@ class Auditor:
                     }
                     for d in dirs
                 ]
-                active = None
-                if age_years is not None and dirs:
-                    hard = [d for d in dirs_json if any(k in (d.get("aspect") or "") for k in ["Conjunction", "Square", "Opposition"])]
-                    # closest hard hit to current age
+
+                # Nearest hard hit to the native's current age (if age is known).
+                active_hard = None
+                if age_years is not None and dirs_json:
+                    hard = [
+                        d for d in dirs_json
+                        if (d.get("aspect") or "") in ["Conjunction", "Square", "Opposition"]
+                    ]
                     if hard:
-                        active = min(hard, key=lambda x: abs((x.get("years") or 0) - age_years))
-                interfector = {
-                    "active": active,
+                        active_hard = min(hard, key=lambda x: abs((x.get("years") or 0) - age_years))
+
+                directed_hits_to_hyleg = {
+                    "active_hard_hit": active_hard,
                     "candidates": dirs_json[:25],
-                    "note": "Interfector candidates are promittors by primary direction striking the Hyleg (zodiacal/OA method)."
+                    "note": (
+                        "Primary-direction promittors striking the Hyleg degree (zodiacal/OA method). "
+                        "This payload is technical; do not personify as an 'executioner'."
+                    ),
                 }
+
+                # Conservative anaretic windows: malefic hard hits only.
+                anaretic_windows["candidates"] = [
+                    d for d in dirs_json
+                    if (d.get("promittor") in ["Mars", "Saturn"])
+                    and (d.get("aspect") in ["Conjunction", "Square", "Opposition"])
+                ]
         except Exception as e:
-            interfector = {"active": None, "candidates": [], "note": f"Interfector calculation failed: {e}"}
+            directed_hits_to_hyleg = {"active_hard_hit": None, "candidates": [], "note": f"Primary-direction hit calculation failed: {e}"}
+            anaretic_windows["note"] = f"{anaretic_windows.get('note')} (Derivation failed: {e})"
 
         alc_name = None
         if alc and isinstance(alc, dict):
@@ -1149,7 +1206,14 @@ class Auditor:
                 "note": "If a computed years figure is less than the native's current age, it cannot be read as a literal 'length of life'. Treat it as a failed/misapplied variant or as an early-life vulnerability indicator requiring rectification and primary-direction validation.",
             },
             "anareta": anareta,
-            "interfector": interfector,
+            "directed_hits_to_hyleg": directed_hits_to_hyleg,
+            "anaretic_windows": anaretic_windows,
+            # Back-compat for existing prompts/consumers. Deprecated: prefer `directed_hits_to_hyleg`.
+            "interfector": {
+                "active": directed_hits_to_hyleg.get("active_hard_hit"),
+                "candidates": directed_hits_to_hyleg.get("candidates"),
+                "note": "DEPRECATED: use `directed_hits_to_hyleg`. Older layers used 'Interfector'/'Executioner' wording; avoid that framing.",
+            },
             "note": "Historical vitality/longevity technique. Not medical advice."
         }
 

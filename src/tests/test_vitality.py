@@ -41,7 +41,8 @@ def test_alcocoden_selection():
     chart.planets = [p for p in chart.planets if p.name != PlanetName.JUPITER]
     chart.planets.append(Planet(name=PlanetName.JUPITER, longitude=5.0)) # Conjunct 5 Aries
     
-    alcocoden = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart)
+    # Term/bound ruler selection (Valens-style): 5 Aries is in Jupiter's bounds.
+    alcocoden = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart, method="valens_term")
     assert alcocoden is not None
     assert alcocoden["name"] == PlanetName.JUPITER
 

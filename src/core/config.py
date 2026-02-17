@@ -30,11 +30,24 @@ class Settings(BaseSettings):
     STRIPE_SUBSCRIPTION_PRICE_ID: str = ""
     STRIPE_ANNUAL_PRICE_ID: str = ""
 
+    # One-time report pricing (B2C / audit purchase).
+    # If unset, the API may attempt a best-effort lookup by Product name in Stripe.
+    STRIPE_PRICE_CALIBRATION_ONETIME: str = ""
+    STRIPE_PRICE_FULL_ONETIME: str = ""
+    STRIPE_PRICE_SINGLE_READING_ONETIME: str = ""
+
+    # Public reading monetization:
+    # - First N free readings per IP per rolling window.
+    # - Additional readings require one-time purchase.
+    FREE_SINGLE_READINGS_PER_IP: int = 3
+    FREE_SINGLE_READINGS_WINDOW_SECONDS: int = 86400
+    SINGLE_READING_PRICE_USD: int = 20
+
     TRIAL_DAYS_DEFAULT: int = 14
     # Revenue control:
     # - "pilot": disable paid checkout globally while building product fit.
     # - "live": enable paid checkout.
-    SALES_MODE: str = "pilot"
+    SALES_MODE: str = "live"
 
     # Promo control: temporarily unlock "individual" (non-premium) readings for free-tier users.
     # - If enabled, the backend marks responses with meta.promo_unlocked=true.
