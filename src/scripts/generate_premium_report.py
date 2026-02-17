@@ -1420,6 +1420,7 @@ def main():
     if not chart_data:
         return 1
     
+    
     # Generate output filename
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     safe_name = args.name.replace(" ", "_").lower()

@@ -211,3 +211,27 @@ class OutreachAttempt(Base):
     created_at = Column(DateTime, default=datetime.utcnow, index=True)
 
     target = relationship("OutreachTarget")
+
+class GuestRequest(Base):
+    """
+    Tracks free reading usage by IP address.
+    """
+    __tablename__ = "guest_requests"
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    ip_address = Column(String, index=True, nullable=False)
+    request_type = Column(String, default="premium_guest") # 'basic', 'premium_guest'
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class AsyncReportTask(Base):
+    """
+    Tracks background generation of premium reports.
+    """
+    __tablename__ = "async_report_tasks"
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    status = Column(String, default="pending") # pending, processing, completed, failed
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    result_json = Column(JSON, nullable=True) # Store result or error
+    
+    # Metadata to re-identify the request
+    request_meta = Column(JSON, default=dict) # {name, date, city...}

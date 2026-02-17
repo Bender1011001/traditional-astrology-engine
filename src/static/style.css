@@ -477,6 +477,12 @@ h1 {
   }
 }
 
+/* Premium Report Styling */
+.premium-report-container h1 { font-family:var(--font-display); color:var(--gold); margin-top:2rem; }
+.premium-report-container h2 { font-family:var(--font-display); color:var(--text-main); margin-top:1.5rem; text-transform:uppercase; letter-spacing:0.1em; border-bottom:1px solid var(--gold); padding-bottom:0.5rem; }
+.premium-report-container h3 { font-family:var(--font-ui); font-weight:700; color:var(--text-muted); margin-top:1rem; }
+.premium-report-container p { margin-bottom:1rem; line-height:1.8; }
+
 .basic-reading {
   border-top: 1px solid var(--glass-border);
   padding-top: 2rem;
@@ -639,6 +645,9 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  opacity: 1 !important;
+  z-index: 100 !important;
+  position: relative;
 }
 
 .feedback-btn:hover {
