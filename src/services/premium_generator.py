@@ -7,8 +7,38 @@ from src.database.core import SessionLocal
 from src.database.models import AsyncReportTask
 from src.scripts.generate_premium_report import generate_chart_data, run_premium_report
 from src.engine.pdf_generator import PDFReportGenerator
+import os
+import tempfile
 
 logger = logging.getLogger(__name__)
+
+class PremiumGenerator:
+    @staticmethod
+    def generate_premium_report_markdown(chart_data: dict) -> str:
+        """
+        Generates the premium report markdown for a given chart data.
+        Executes the script logic (run_premium_report) safely.
+        """
+        # run_premium_report expects JSON string input
+        chart_data_json = json.dumps(chart_data)
+        
+        # Create temp file for output
+        with tempfile.NamedTemporaryFile(suffix=".md", delete=False) as tmp:
+            output_path = tmp.name
+            
+        try:
+            # We call the script logic. 
+            # Note: run_premium_report is sync, so this blocks. 
+            # Callers should run this in threadpool/executor.
+            run_premium_report(chart_data_json, output_path, iterations=6)
+            
+            with open(output_path, "r", encoding="utf-8") as f:
+                report_markdown = f.read()
+                
+            return report_markdown
+        finally:
+            if os.path.exists(output_path):
+                os.unlink(output_path)
 
 async def generate_premium_report_task(task_id: str, request_data: dict):
     """
@@ -28,9 +58,7 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         task.status = "processing"
         db.commit()
 
-        # 1. Generate Chart Data (Synchronous logic from script)
-        # We run this in a thread executor to avoid blocking the async event loop
-        # if it does heavy computation (which it does).
+        # 1. Generate Chart Data
         loop = asyncio.get_event_loop()
         
         chart_data_json = await loop.run_in_executor(
@@ -48,54 +76,18 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         if not chart_data_json:
             raise Exception("Failed to generate chart data")
 
-        # 2. Run Premium Report Logic (Multi-pass LLM)
-        # This writes to a file in the script, but we want to capture the output.
-        # We need to adapt run_premium_report or replicate its logic.
-        # For now, let's use a temporary file approach or refactor run_premium_report to return string.
-        # SINCE we are in a hurry, let's modify the script logic here to be inline or importable.
-        # Actually, run_premium_report writes to a file. Let's use a temp path.
+        # 2. Run Premium Report Logic via Class
+        chart_data = json.loads(chart_data_json)
         
-        # We will use the existing run_premium_report logic but capture the result.
-        # The existing script writes to a file. 
-        # Let's define a helper to run it and read the file back.
-        
-        import os
-        import tempfile
-        
-        with tempfile.NamedTemporaryFile(suffix=".md", delete=False) as tmp:
-            output_path = tmp.name
-            
-        await loop.run_in_executor(
+        report_markdown = await loop.run_in_executor(
             None,
-            lambda: run_premium_report(chart_data_json, output_path, iterations=6) # 6 iterations as per script default
+            lambda: PremiumGenerator.generate_premium_report_markdown(chart_data)
         )
         
-        with open(output_path, "r", encoding="utf-8") as f:
-            report_markdown = f.read()
-            
-        os.unlink(output_path) # Cleanup
-        
-        # 3. Generate PDF (Optional? The user just wants the report I think? 
-        # Actually the workflow says "Convert to PDF". The user likely wants a PDF download.)
-        # Let's convert to PDF using PDFReportGenerator.
-        
-        chart_data = json.loads(chart_data_json)
-        pdf_data = {
-            "meta": chart_data.get("meta", {}),
-            "forensic_report": chart_data.get("analysis", {}),
-        }
-        
-        generator = PDFReportGenerator(pdf_data)
-        pdf_buffer = generator.generate(custom_content=report_markdown)
-        
-        # We need to store this PDF somewhere. 
-        # For now, let's store the MARKDOWN in the database (it's text) and generate PDF on demand?
-        # OR store the PDF in a blob storage? 
-        # The simplest constraint-compatible way: Store Markdown in JSON result, generate PDF on GET /download.
-        
+        # 3. Store Result
         result_payload = {
             "report_markdown": report_markdown,
-            "chart_data": chart_data # Store the full calculated data too
+            "chart_data": chart_data
         }
         
         task.result_json = result_payload
@@ -110,3 +102,4 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         db.commit()
     finally:
         db.close()
+

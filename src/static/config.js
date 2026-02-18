@@ -13,9 +13,9 @@ window.CAEL_CONFIG = {
         host === "www.traditional-astrology.com" ||
         host.endsWith(".azurewebsites.net");
 
-    if (isLocal) {
-        // Local dev: same-origin API.
-        window.CAEL_API_BASE = "";
+    if (isLocal || host === "") {
+        // Local dev: point to local API server explicitly
+        window.CAEL_API_BASE = "http://localhost:8000";
         return;
     }
 
