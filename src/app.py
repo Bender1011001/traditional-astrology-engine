@@ -189,6 +189,11 @@ app.include_router(v2_router, prefix="/api/v2")
 
 # --- LEGACY PAGE REDIRECTS (B2C -> B2B) ---
 # Static files are mounted at "/" below; these routes must be declared first.
+@app.get("/developers.html", include_in_schema=False)
+async def legacy_developers_redirect():
+    """Redirect old developers.html to canonical developer.html."""
+    return RedirectResponse(url="/developer.html", status_code=301)
+
 @app.get("/booking.html", include_in_schema=False)
 async def legacy_booking_redirect():
     return RedirectResponse(url="/signup.html", status_code=301)
