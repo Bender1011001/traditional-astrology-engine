@@ -58,6 +58,16 @@ class Settings(BaseSettings):
     # UTC date in YYYY-MM-DD. If set, promo is active only until end-of-day UTC on this date.
     PROMO_FREE_INDIVIDUAL_READINGS_UNTIL: str = ""
 
+    # RapidAPI marketplace integration.
+    # - RAPIDAPI_PROXY_SECRET: The secret RapidAPI sends in X-RapidAPI-Proxy-Secret on every
+    #   proxied request. Set this in the RapidAPI Provider Dashboard > Security.
+    # - RAPIDAPI_MASTER_KEY: A single sk_live_* API key created in your dashboard specifically
+    #   for RapidAPI traffic. All RapidAPI subscribers are billed via RapidAPI; this key is
+    #   used server-side only to authenticate the forwarded request.
+    # Leave both blank until the RapidAPI listing is active.
+    RAPIDAPI_PROXY_SECRET: str = ""
+    RAPIDAPI_MASTER_KEY: str = ""
+
     class Config:
         env_file = ".env"
         extra = "ignore"
