@@ -537,20 +537,32 @@ function renderPaymentRequired(detail) {
     const hasToken = !!localStorage.getItem("cael_auth_token");
 
     basicReadingBody.innerHTML = `
-        <div class="lock-disclaimer" style="margin-top: 0.5rem;">
-            <strong>Free Limit Reached:</strong> You have used the ${freeLimit} free readings for this IP.
-            Additional single readings are $${priceUsd} each.
-            <div class="hero-actions" style="justify-content:center; margin-top: 1rem;">
-                <button type="button" class="btn-primary" onclick="startCheckout('single_reading')">Unlock This Reading ($${priceUsd})</button>
-                ${hasToken ? "" : `<a class="btn-secondary" href="login.html">Log In</a>`}
+        <div style="text-align:center; padding: 1.5rem 0 0.5rem;">
+            <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">You've used your ${freeLimit} free readings.</div>
+            <p class="text-muted" style="margin-bottom: 1.5rem; max-width: 420px; margin-left: auto; margin-right: auto;">
+                Get unlimited readings, full forensic reports, and PDF exports with a free 14-day trial — no credit card required.
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap: 0.75rem; align-items:center; max-width: 360px; margin: 0 auto;">
+                <a class="btn-primary" href="signup.html?tier=scholar" style="width:100%; text-align:center; display:block;">
+                    Start Free 14-Day Trial
+                </a>
+                <div class="text-muted text-sm">— or —</div>
+                <button type="button" class="btn-secondary" onclick="startCheckout('single_reading')" style="width:100%;">
+                    Unlock This Reading ($${priceUsd})
+                </button>
+                ${hasToken ? "" : `<a class="text-muted text-sm" href="login.html" style="margin-top:0.25rem;">Already have an account? Log in →</a>`}
             </div>
-            <div class="text-muted text-sm" style="margin-top: 0.75rem; text-align:center;">
+
+            <p class="text-muted text-sm" style="margin-top: 1.25rem;">
                 Historical Use Only. No medical, legal, or financial advice.
-            </div>
+            </p>
         </div>
     `;
     basicReading.classList.remove("hidden");
     if (basicFeedback) basicFeedback.classList.add("hidden");
+
+    logEvent("paywall_shown", { free_limit: freeLimit, price_usd: priceUsd });
 }
 
 function setupModals() {

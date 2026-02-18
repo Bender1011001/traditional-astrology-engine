@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     OWNER_BOOTSTRAP_KEY: str = ""
 
     # Pricing (B2B SaaS). Leave blank to disable checkout for that tier until configured.
+    STRIPE_PRICE_SCHOLAR_MONTHLY: str = ""
+    STRIPE_PRICE_SCHOLAR_ANNUAL: str = ""
     STRIPE_PRICE_PRACTITIONER_MONTHLY: str = ""
     STRIPE_PRICE_PRACTITIONER_ANNUAL: str = ""
     STRIPE_PRICE_STUDIO_MONTHLY: str = ""
