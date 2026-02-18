@@ -108,7 +108,7 @@ class UserManager:
             service.start_trial(new_user, "free", trial_days=0)
             # If a paid tier was requested, start a no-card trial for that tier (default 14 days).
             requested = (plan_tier or "").strip().lower()
-            if requested in {"practitioner", "studio"}:
+            if requested in {"scholar", "practitioner", "studio"}:
                 service.start_trial(new_user, requested)
             
             # Note: start_trial calls db.commit(), so we don't need another commit here
