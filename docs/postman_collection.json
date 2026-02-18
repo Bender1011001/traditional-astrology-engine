@@ -1,0 +1,244 @@
+{
+  "info": {
+    "name": "Codex Caelestis — Traditional Astrology API",
+    "description": "Traditional (pre-1700) Western astrology calculation engine. Powered by Swiss Ephemeris.\n\n## Setup\n1. Sign up at https://traditional-astrology.com/signup.html\n2. Start a free Practitioner trial (no card)\n3. Go to your dashboard > API Keys > Create Key\n4. Set the `X-API-Key` variable below to your key\n\n## Differentiators\n- Auditable rule ledger (every judgment cites Lilly, Bonatti, Ptolemy)\n- ZR Longevity L1/L2 + Loosing of the Bond\n- Traditional dignities, almuten, firdaria, profections\n- Bulk PDF ZIP for Etsy/client automation",
+    "_postman_id": "codex-caelestis-v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    }
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://traditional-astrology.com",
+      "type": "string",
+      "description": "API base URL"
+    },
+    {
+      "key": "api_key",
+      "value": "sk_live_YOUR_KEY_HERE",
+      "type": "string",
+      "description": "Your API key from the dashboard"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{api_key}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Natal Charts",
+      "item": [
+        {
+          "name": "Generate Natal Chart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "X-API-Key", "value": "{{api_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/charts/generate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "charts", "generate"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"1990-03-15\",\n  \"time\": \"14:32\",\n  \"city\": \"London\",\n  \"state\": \"England\",\n  \"name\": \"Jane Doe\",\n  \"house_system\": \"W\",\n  \"zodiac_system\": \"tropical\"\n}",
+              "options": {"raw": {"language": "json"}}
+            },
+            "description": "Generate a complete traditional natal chart.\n\nReturns:\n- Planetary positions with dignity scores (exaltation, triplicity, term, face, detriment, fall, peregrine)\n- Almuten figuris\n- Sect (day/night birth)\n- Firdaria sequence with dates\n- Annual profection year and lord\n- ZR Longevity L1/L2 indicators\n- Loosing of the Bond\n- Plain-language synthesis with source citations (Lilly, Bonatti, Ptolemy)\n\n**Required plan**: Practitioner or Studio"
+          },
+          "response": [
+            {
+              "name": "200 OK — Example Response",
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": "{\n  \"meta\": {\n    \"name\": \"Jane Doe\",\n    \"date\": \"1990-03-15\",\n    \"time\": \"14:32\",\n    \"city\": \"London\",\n    \"latitude\": 51.5074,\n    \"longitude\": -0.1278,\n    \"timezone\": \"Europe/London\",\n    \"house_system\": \"whole_sign\",\n    \"zodiac_system\": \"tropical\",\n    \"sect\": \"diurnal\"\n  },\n  \"planets\": {\n    \"sun\": {\"sign\": \"Pisces\", \"degree\": 24.7, \"house\": 9, \"dignity\": \"peregrine\", \"retrograde\": false},\n    \"moon\": {\"sign\": \"Scorpio\", \"degree\": 8.3, \"house\": 5, \"dignity\": \"triplicity\", \"retrograde\": false},\n    \"mercury\": {\"sign\": \"Pisces\", \"degree\": 10.2, \"house\": 9, \"dignity\": \"detriment_and_fall\", \"retrograde\": false},\n    \"venus\": {\"sign\": \"Aries\", \"degree\": 2.1, \"house\": 10, \"dignity\": \"detriment\", \"retrograde\": false},\n    \"mars\": {\"sign\": \"Capricorn\", \"degree\": 18.9, \"house\": 7, \"dignity\": \"exaltation\", \"retrograde\": false},\n    \"jupiter\": {\"sign\": \"Cancer\", \"degree\": 3.4, \"house\": 1, \"dignity\": \"exaltation\", \"retrograde\": false},\n    \"saturn\": {\"sign\": \"Capricorn\", \"degree\": 23.7, \"house\": 7, \"dignity\": \"domicile\", \"retrograde\": false}\n  },\n  \"almuten\": {\"planet\": \"Jupiter\", \"score\": 14},\n  \"sect\": \"diurnal\",\n  \"profections\": {\"year\": 36, \"house\": 1, \"lord\": \"Jupiter\"},\n  \"synthesis\": \"Jupiter rising in Cancer, its exaltation, is the almuten of the chart with 14 essential dignity points...\",\n  \"source_citations\": [\n    {\"rule\": \"Jupiter in Cancer: exaltation; planet in exaltation has great strength\", \"source\": \"William Lilly\", \"book\": \"Christian Astrology, Book I, p. 101\"}\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Calculate Chart (full, with forecast)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "X-API-Key", "value": "{{api_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/charts/calculate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "charts", "calculate"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"1990-03-15\",\n  \"time\": \"14:32\",\n  \"city\": \"London\",\n  \"state\": \"England\",\n  \"name\": \"Jane Doe\"\n}",
+              "options": {"raw": {"language": "json"}}
+            },
+            "description": "Full natal chart including 5-day planetary forecast and synthesis. Authenticated via Bearer token (for subscriber users) or X-API-Key (for B2B)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Synastry",
+      "item": [
+        {
+          "name": "Traditional Synastry Analysis",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "X-API-Key", "value": "{{api_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/synastry",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "synastry"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"person_a\": {\n    \"date\": \"1990-03-15\",\n    \"time\": \"14:32\",\n    \"city\": \"London\",\n    \"name\": \"Jane\"\n  },\n  \"person_b\": {\n    \"date\": \"1988-07-22\",\n    \"time\": \"09:15\",\n    \"city\": \"Paris\",\n    \"name\": \"John\"\n  }\n}",
+              "options": {"raw": {"language": "json"}}
+            },
+            "description": "Analyzes structural compatibility between two natal charts using traditional synastry rules.\n\nReturns:\n- Compatibility score (0–100)\n- Applying/separating aspects between charts\n- Mutual receptions\n- Reception analysis (does A's Moon receive B's Sun, etc.)\n- Plain-language compatibility judgment with citations\n\n**Required plan**: Practitioner or Studio"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "World / Mundane",
+      "item": [
+        {
+          "name": "World Dashboard",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "X-API-Key", "value": "{{api_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/world",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "world"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {"raw": {"language": "json"}}
+            },
+            "description": "Returns current global astrological conditions: ingresses, eclipses, planetary stations, mundane significators, and a world forecast.\n\n**Required plan**: Practitioner or Studio"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bulk PDF",
+      "item": [
+        {
+          "name": "Bulk PDF Generation (ZIP)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "X-API-Key", "value": "{{api_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/charts/bulk/pdf",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "charts", "bulk", "pdf"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"date\": \"1990-03-15\",\n      \"time\": \"14:32\",\n      \"city\": \"London\",\n      \"name\": \"Client A\"\n    },\n    {\n      \"date\": \"1985-11-02\",\n      \"time\": \"06:45\",\n      \"city\": \"New York\",\n      \"state\": \"NY\",\n      \"name\": \"Client B\"\n    }\n  ],\n  \"filename_prefix\": \"batch_reports\"\n}",
+              "options": {"raw": {"language": "json"}}
+            },
+            "description": "Submit up to 50 natal chart requests and receive a ZIP of PDF reports.\n\nPerfect for:\n- Etsy natal chart sellers processing order batches\n- Practitioners sending weekly/monthly client reports\n- Automated report delivery pipelines\n\n**Returns**: application/zip binary\n\n**Required plan**: Practitioner or Studio"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Forensic / Rectification",
+      "item": [
+        {
+          "name": "Forensic Audit / Birth-Time Rectification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "X-API-Key", "value": "{{api_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/forensic/audit",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "forensic", "audit"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"1990-03-15\",\n  \"time\": \"14:00\",\n  \"city\": \"London\",\n  \"name\": \"Jane Doe\",\n  \"time_range_start\": \"13:30\",\n  \"time_range_end\": \"15:00\",\n  \"time_range_samples\": 7\n}",
+              "options": {"raw": {"language": "json"}}
+            },
+            "description": "Runs a comprehensive forensic audit across a birth-time range.\n\nUses traditional primary directions to test candidate birth times against known life events. Returns probability scores for each candidate time.\n\n**Required plan**: Practitioner or Studio"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Developer / Key Management",
+      "item": [
+        {
+          "name": "Get Usage Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key": "X-API-Key", "value": "{{api_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/developer/usage",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "developer", "usage"]
+            },
+            "description": "Returns today's API call count and your plan quota."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"api_calls_used\": 12,\n  \"quota\": 100,\n  \"quota_period\": \"day\",\n  \"plan_tier\": \"practitioner\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
