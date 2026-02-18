@@ -1,4 +1,4 @@
-import { apiUrl } from './api.js';
+import { apiUrl, apiFetch } from './api.js';
 
 export function setupPricing() {
     // Pricing Modal Logic
@@ -150,7 +150,7 @@ export async function initiateCheckout(tier, chartRequest = null) {
 
     // Proceed with checkout
     try {
-        const resp = await fetch(apiUrl("/api/v1/billing/create-checkout-session"), {
+        const resp = await apiFetch("/api/v1/billing/create-checkout-session", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

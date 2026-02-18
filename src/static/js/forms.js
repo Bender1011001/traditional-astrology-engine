@@ -1,4 +1,4 @@
-import { apiUrl } from './api.js';
+import { apiUrl, apiFetch } from './api.js';
 import { logEvent } from './telemetry.js';
 import { renderResults } from './results-core.js';
 import { renderSynastry, renderKairos, renderHorary, renderWorld, renderRectification } from './results-tools.js';
@@ -37,7 +37,7 @@ export function setupForms() {
             logEvent("chart_request", { form: formData });
 
             try {
-                const response = await fetch(apiUrl('/api/calculate'), {
+                const response = await apiFetch('/api/calculate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
@@ -83,7 +83,7 @@ export function setupForms() {
             };
             logEvent("tool_request", { tool: "synastry", payload });
             try {
-                const resp = await fetch(apiUrl('/api/synastry'), {
+                const resp = await apiFetch('/api/synastry', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -111,7 +111,7 @@ export function setupForms() {
                 hours: parseInt(document.getElementById('kairosHours').value, 10) || 168
             };
             try {
-                const resp = await fetch(apiUrl('/api/kairos'), {
+                const resp = await apiFetch('/api/kairos', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -137,7 +137,7 @@ export function setupForms() {
                 time: document.getElementById('horaryTime').value || null
             };
             try {
-                const resp = await fetch(apiUrl('/api/horary'), {
+                const resp = await apiFetch('/api/horary', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -160,7 +160,7 @@ export function setupForms() {
                 time: document.getElementById('worldTime').value || null
             };
             try {
-                const resp = await fetch(apiUrl('/api/world'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const resp = await apiFetch('/api/world', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!resp.ok) throw new Error('World failed');
                 renderWorld(await resp.json());
             } catch (err) {
@@ -183,7 +183,7 @@ export function setupForms() {
                 rectification_methods: ['animodar', 'trutina_hermetis'] // Simplify for now
             };
             try {
-                const resp = await fetch(apiUrl('/api/rectification'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const resp = await apiFetch('/api/rectification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!resp.ok) throw new Error('Rect failed');
                 renderRectification(await resp.json());
             } catch (err) {

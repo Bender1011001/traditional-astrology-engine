@@ -1,4 +1,4 @@
-import { apiUrl } from './api.js';
+import { apiUrl, apiFetch } from './api.js';
 import { initTheme, setupThemeToggle } from './theme.js';
 
 function setStatus(el, msg, isError = false) {
@@ -8,7 +8,7 @@ function setStatus(el, msg, isError = false) {
 }
 
 async function submitLead(payload) {
-  const resp = await fetch(apiUrl('/api/v1/lead'), {
+  const resp = await apiFetch('/api/v1/lead', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),

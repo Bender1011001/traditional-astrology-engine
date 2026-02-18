@@ -27,6 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css?v=20260210b2b" />
+  <script src="config.js?v=20260212azure2"></script>
 </head>
 
 <body>
@@ -69,35 +70,20 @@
       </p>
 
       <div class="offer-grid pricing-grid">
-        <div class="panel-card">
+        <div class="panel-card" style="max-width: 500px; margin: 0 auto;">
           <div class="pricing-card recommended">
-            <div class="tier-label">Most Popular</div>
-            <h3>Practitioner</h3>
-            <div class="price">$147<span>/month</span></div>
+            <div class="tier-label">Historical Access</div>
+            <h3>Practitioner Reading</h3>
+            <div class="price">$0<span> / 3 readings</span></div>
             <ul class="features">
-              <li><strong>Unlimited calculations</strong></li>
-              <li>Timing: Profections, Releasing, Firdaria, Primary Directions</li>
-              <li>Lots: Hermetic + Forensic, sect-sensitive reversals</li>
-              <li>Export rule ledger (JSON)</li>
-              <li>API access (rate-limited)</li>
+              <li><strong>3 free premium readings per IP</strong></li>
+              <li>Unlimited technique access (ZR, Profections, etc)</li>
+              <li>Precision Swiss Ephemeris calculations</li>
+              <li>Auditable Rule Ledger (JSON export)</li>
+              <li>Subsequent readings: <strong>$20 each</strong></li>
             </ul>
-            <a class="btn-primary" href="register.html?plan=practitioner">Create Account</a>
-          </div>
-        </div>
-
-        <div class="panel-card">
-          <div class="pricing-card">
-            <div class="tier-label">Studio</div>
-            <h3>Studio</h3>
-            <div class="price">$497<span>/month</span></div>
-            <ul class="features">
-              <li>Everything in Practitioner</li>
-              <li>Multi-user access (seats)</li>
-              <li>Priority support</li>
-              <li>Higher API limits</li>
-              <li>White-label report options (planned)</li>
-            </ul>
-            <a class="btn-primary" data-tier-cta="studio" href="register.html?plan=studio">Create Account</a>
+            <a class="btn-primary" href="register.html">Create Account</a>
+            <p class="trial-note">No credit card required to start.</p>
           </div>
         </div>
       </div>

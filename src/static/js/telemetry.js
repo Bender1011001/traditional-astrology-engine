@@ -1,4 +1,4 @@
-import { apiUrl } from './api.js';
+import { apiUrl, apiFetch } from './api.js';
 
 const IS_GH_PAGES = false;
 const LOG_ENABLED = !IS_GH_PAGES || (window.CAEL_API_BASE || "");
@@ -42,7 +42,7 @@ export function logEvent(eventType, payload = {}, options = {}) {
             // Fallback to fetch
         }
     }
-    fetch(url, {
+    apiFetch("/api/v1/log/telemetry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -62,7 +62,7 @@ export async function logTelemetry(eventType, elementId = null, data = null) {
         const headers = { 'Content-Type': 'application/json' };
         if (token) headers['Authorization'] = `Bearer ${token}`;
 
-        fetch(apiUrl("/api/log/telemetry"), {
+        apiFetch("/api/v1/log/telemetry", {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(payload),

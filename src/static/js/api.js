@@ -1,5 +1,20 @@
 import { API_BASE } from './config.js';
 
+/**
+ * Builds a full API URL using the current Base.
+ */
 export function apiUrl(path) {
-    return `${API_BASE}${path}`;
+    const safePath = String(path || "").startsWith("/") ? path : `/${path || ""}`;
+    return `${API_BASE}${safePath}`;
+}
+
+/**
+ * Resilient fetch that uses the global fallback mechanism if available.
+ */
+export async function apiFetch(path, init) {
+    if (typeof window !== "undefined" && window.caelFetchWithFallback) {
+        return await window.caelFetchWithFallback(path, init);
+    }
+    // Fallback for environments where the global script isn't loaded (tests, etc)
+    return await fetch(apiUrl(path), init);
 }

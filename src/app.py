@@ -134,7 +134,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.googletagmanager.com https://cdn.jsdelivr.net; "
             "font-src 'self' https://fonts.gstatic.com; "
             "img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.doubleclick.net https://fastapi.tiangolo.com; "
-            "connect-src 'self' https://traditional-astrology.com https://astrology-engine-central-7387.azurewebsites.net https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com;"
+            "connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 https://traditional-astrology.com https://astrology-engine-central-7387.azurewebsites.net https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com;"
         )
         return response
 
@@ -147,13 +147,20 @@ app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(CSRFProtectionMiddleware)
 
 # CORS Configuration
-_default_origins = [settings.SITE_BASE_URL, "http://localhost:8000", "http://127.0.0.1:8000"]
-_env_origins = settings.CORS_ORIGINS.split(',')
-_cors_origins = [o.strip() for o in _env_origins if o.strip()] or _default_origins
+_default_origins = [
+    settings.SITE_BASE_URL, 
+    "http://localhost:8000", 
+    "http://127.0.0.1:8000",
+    "http://localhost:3000",
+    "null" # For file:// origins
+]
+_env_origins = settings.CORS_ORIGINS.split(',') if settings.CORS_ORIGINS else []
+_cors_origins = list(set(_default_origins + [o.strip() for o in _env_origins if o.strip()]))
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )

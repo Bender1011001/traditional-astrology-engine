@@ -1,7 +1,21 @@
 window.CAEL_CONFIG = {
     primaryApiUrl: "https://traditional-astrology.com",
-    fallbackApiUrl: "https://astrology-engine-central-7387.azurewebsites.net"
+    fallbackApiUrl: "https://astrology-engine-central-7387.azurewebsites.net",
+    signs: [
+        "Aries", "Taurus", "Gemini", "Cancer",
+        "Leo", "Virgo", "Libra", "Scorpio",
+        "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+    ]
 };
+
+(function handleSubdomainRedirect() {
+    const host = String(window.location.hostname || "").toLowerCase();
+    if (host === "www.traditional-astrology.com") {
+        console.warn("Redirecting from www to apex domain to avoid SSL/CORS issues.");
+        const newUrl = "https://traditional-astrology.com" + window.location.pathname + window.location.search;
+        window.location.replace(newUrl);
+    }
+})();
 
 (function configureApiBase() {
     if (window.CAEL_API_BASE) return;
@@ -15,7 +29,7 @@ window.CAEL_CONFIG = {
 
     if (isLocal || host === "") {
         // Local dev: point to local API server explicitly
-        window.CAEL_API_BASE = "http://localhost:8000";
+        window.CAEL_API_BASE = "http://127.0.0.1:8000";
         return;
     }
 

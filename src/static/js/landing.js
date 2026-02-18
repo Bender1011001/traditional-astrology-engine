@@ -1,4 +1,4 @@
-import { apiUrl } from './api.js';
+import { apiUrl, apiFetch } from './api.js';
 import { logEvent, SESSION_ID } from './telemetry.js';
 import { initTheme, setupThemeToggle, applyTheme } from './theme.js';
 import { updateAuthUI, logout } from './auth.js';
@@ -100,7 +100,7 @@ async function maybeShowPromoTestingBanner() {
     if (!basicForm) return;
 
     try {
-        const resp = await fetch(apiUrl("/api/v1/meta"), { method: "GET" });
+        const resp = await apiFetch("/api/v1/meta", { method: "GET" });
         if (!resp.ok) return;
         const data = await resp.json();
 
@@ -311,7 +311,7 @@ function setupBasicForm() {
 
         try {
              // 1. Request Premium Task
-             const response = await fetch(apiUrl("/api/v1/premium/guest/request"), {
+             const response = await apiFetch("/api/v1/premium/guest/request", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -348,7 +348,7 @@ async function pollPremiumStatus(taskId, payload, timeUnknown) {
     const loadingText = document.getElementById("loadingText");
     const pollInterval = setInterval(async () => {
         try {
-            const resp = await fetch(apiUrl(`/api/v1/premium/guest/status/${taskId}`));
+            const resp = await apiFetch(`/api/v1/premium/guest/status/${taskId}`);
             if (!resp.ok) throw new Error("Status check failed");
             
             const data = await resp.json();
@@ -502,7 +502,7 @@ function renderBasicReading(result, payload, timeUnknown) {
                 });
 
                 try {
-                    const saveResp = await fetch(apiUrl("/api/v1/reading_feedback"), {
+                    const saveResp = await apiFetch("/api/v1/reading_feedback", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
