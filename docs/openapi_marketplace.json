@@ -1,0 +1,520 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Codex Caelestis — Traditional Astrology API",
+    "description": "## Traditional Astrology Calculation Engine\n\nThe only production-grade API for **traditional (pre-1700) Western astrology**, powered by Swiss Ephemeris.\n\n### What makes this different\n- **Auditable rule ledger**: every judgment cites the source text (Lilly, Bonatti, Ptolemy)\n- **Zazen-Raman L1/L2 longevity** + **Loosing of the Bond** — unavailable in any competing API\n- Whole Sign, Alchabitius, Regiomontanus, Placidus, Porphyry house systems\n- Tropical + Sidereal (all major ayanamsas)\n- Traditional dignities, almuten, firdaria, profections, solar returns\n- Synastry structural fit analysis\n- Bulk PDF generation (ZIP) for Etsy/client-workflow use cases\n\n### Authentication\nAll B2B endpoints require an `X-API-Key` header.  \nKeys are provisioned from your dashboard at https://traditional-astrology.com/profile.html\n\n### Rate limits\n| Plan | Daily API calls | Price |\n|------|----------------|-------|\n| Practitioner | 100 / day | $29/mo |\n| Studio | Unlimited | $99/mo |\n\n### Base URL\n```\nhttps://traditional-astrology.com\n```\n\n### Support\nAPI issues: [api-support@traditional-astrology.com](mailto:api-support@traditional-astrology.com)  \nEnterprise / white-label: [enterprise@traditional-astrology.com](mailto:enterprise@traditional-astrology.com)",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Codex Caelestis API Support",
+      "email": "api-support@traditional-astrology.com",
+      "url": "https://traditional-astrology.com/documentation.html"
+    },
+    "license": {
+      "name": "Commercial",
+      "url": "https://traditional-astrology.com/terms.html"
+    },
+    "x-logo": {
+      "url": "https://traditional-astrology.com/logo.png",
+      "altText": "Codex Caelestis"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://traditional-astrology.com",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Natal Charts",
+      "description": "Compute natal charts with traditional dignity scoring, almuten, sect, and plain-language synthesis"
+    },
+    {
+      "name": "Synastry",
+      "description": "Traditional compatibility analysis between two nativity charts"
+    },
+    {
+      "name": "World / Mundane",
+      "description": "Global astrological events dashboard (ingresses, eclipses, mundane significators)"
+    },
+    {
+      "name": "Bulk / PDF",
+      "description": "Batch PDF generation — ideal for Etsy sellers and client-workflow automation"
+    },
+    {
+      "name": "Forensic / Rectification",
+      "description": "Birth-time rectification via traditional primary direction methods"
+    },
+    {
+      "name": "Developer",
+      "description": "API key management and usage stats"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "Your API key from https://traditional-astrology.com/profile.html"
+      }
+    },
+    "schemas": {
+      "ChartRequest": {
+        "type": "object",
+        "required": ["date", "time", "city"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date in YYYY-MM-DD format",
+            "example": "1990-03-15"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time in HH:MM (24h) format",
+            "example": "14:32"
+          },
+          "city": {
+            "type": "string",
+            "description": "Birth city (geocoded automatically via Photon/OSM)",
+            "example": "London"
+          },
+          "state": {
+            "type": "string",
+            "nullable": true,
+            "description": "State/province/country for disambiguation (recommended for US cities)",
+            "example": "England"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Native's name (included in PDF output)",
+            "example": "Jane Doe"
+          },
+          "house_system": {
+            "type": "string",
+            "nullable": true,
+            "default": "W",
+            "enum": ["W", "A", "R", "P", "B", "O"],
+            "description": "House system: W=Whole Sign (default), A=Alchabitius, R=Regiomontanus, P=Placidus, B=Porphyry, O=Koch"
+          },
+          "zodiac_system": {
+            "type": "string",
+            "nullable": true,
+            "default": "tropical",
+            "enum": ["tropical", "sidereal"],
+            "description": "Zodiac system"
+          },
+          "ayanamsa": {
+            "type": "string",
+            "nullable": true,
+            "description": "Ayanamsa for sidereal charts (e.g. 'lahiri', 'fagan_bradley', 'krishnamurti')"
+          },
+          "node_type": {
+            "type": "string",
+            "default": "mean",
+            "enum": ["mean", "true"],
+            "description": "Lunar node calculation method"
+          },
+          "analysis_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "Override the analysis date for timing calculations (YYYY-MM-DD). Defaults to today."
+          }
+        }
+      },
+      "SynastryRequest": {
+        "type": "object",
+        "required": ["person_a", "person_b"],
+        "properties": {
+          "person_a": {
+            "$ref": "#/components/schemas/ChartRequest"
+          },
+          "person_b": {
+            "$ref": "#/components/schemas/ChartRequest"
+          }
+        }
+      },
+      "BulkPdfRequest": {
+        "type": "object",
+        "required": ["items"],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Array of chart requests (max 50 per call)",
+            "items": {
+              "$ref": "#/components/schemas/ChartRequest"
+            }
+          },
+          "filename_prefix": {
+            "type": "string",
+            "description": "Prefix for filenames in the ZIP",
+            "example": "client_reports"
+          }
+        }
+      },
+      "NatalChartResponse": {
+        "type": "object",
+        "description": "Full natal chart response",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "date": {"type": "string"},
+              "time": {"type": "string"},
+              "city": {"type": "string"},
+              "latitude": {"type": "number"},
+              "longitude": {"type": "number"},
+              "timezone": {"type": "string"},
+              "julian_day": {"type": "number"},
+              "house_system": {"type": "string"},
+              "zodiac_system": {"type": "string"}
+            }
+          },
+          "planets": {
+            "type": "object",
+            "description": "Planetary positions with dignity scores",
+            "example": {
+              "sun": {
+                "sign": "Pisces",
+                "degree": 24.7,
+                "house": 9,
+                "dignity": "peregrine",
+                "speed": 1.01,
+                "retrograde": false
+              },
+              "moon": {
+                "sign": "Scorpio",
+                "degree": 8.3,
+                "house": 5,
+                "dignity": "triplicity",
+                "speed": 12.8,
+                "retrograde": false
+              }
+            }
+          },
+          "houses": {
+            "type": "object",
+            "description": "House cusps in degrees",
+            "example": {
+              "1": 105.2,
+              "2": 135.0,
+              "3": 165.0,
+              "4": 195.2
+            }
+          },
+          "almuten": {
+            "type": "object",
+            "description": "Almuten figuris — planet with most essential dignity points at the Ascendant degree",
+            "example": {
+              "planet": "Saturn",
+              "score": 11
+            }
+          },
+          "sect": {
+            "type": "string",
+            "enum": ["diurnal", "nocturnal"],
+            "description": "Sect of the chart (day or night birth)"
+          },
+          "dignities": {
+            "type": "object",
+            "description": "Essential dignity table for all seven traditional planets"
+          },
+          "forensic_audit": {
+            "type": "object",
+            "description": "L1/L2 longevity indicators, Loosing of the Bond, Hyleg, Alcoccoden"
+          },
+          "firdaria": {
+            "type": "array",
+            "description": "Full firdaria period sequence with dates"
+          },
+          "profections": {
+            "type": "object",
+            "description": "Annual profection year and lord"
+          },
+          "synthesis": {
+            "type": "string",
+            "description": "Plain-language synthesis paragraph citing source rules"
+          },
+          "source_citations": {
+            "type": "array",
+            "description": "Array of rule citations used to generate the synthesis",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rule": {"type": "string"},
+                "source": {"type": "string"},
+                "book": {"type": "string"}
+              }
+            },
+            "example": [
+              {
+                "rule": "Moon in 5th in Scorpio: nocturnal sect, in triplicity, applying to Mars",
+                "source": "William Lilly",
+                "book": "Christian Astrology, Book I, p. 88"
+              }
+            ]
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "detail": {"type": "string"}
+        }
+      }
+    }
+  },
+  "security": [
+    {"ApiKeyAuth": []}
+  ],
+  "paths": {
+    "/api/v1/charts/generate": {
+      "post": {
+        "tags": ["Natal Charts"],
+        "summary": "Generate natal chart (B2B)",
+        "description": "Generate a complete traditional natal chart. Returns planetary positions, dignity scores, almuten, sect, firdaria, profections, ZR longevity analysis, and a plain-language synthesis with source citations.\n\n**Required plan**: Practitioner or Studio\n\n**Quota**: Practitioner = 100 calls/day; Studio = unlimited",
+        "operationId": "generateChart",
+        "security": [{"ApiKeyAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/ChartRequest"},
+              "example": {
+                "date": "1990-03-15",
+                "time": "14:32",
+                "city": "London",
+                "state": "England",
+                "name": "Jane Doe",
+                "house_system": "W",
+                "zodiac_system": "tropical"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Full natal chart",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/NatalChartResponse"}
+              }
+            }
+          },
+          "401": {"description": "Missing or invalid API key"},
+          "403": {"description": "Plan upgrade required"},
+          "429": {"description": "Daily quota exceeded"},
+          "422": {"description": "Invalid request parameters"}
+        }
+      }
+    },
+    "/api/v1/synastry": {
+      "post": {
+        "tags": ["Synastry"],
+        "summary": "Traditional synastry analysis",
+        "description": "Analyzes structural compatibility between two nativity charts using traditional synastry rules. Returns reception analysis, applying/separating aspects, mutual receptions, and a plain-language compatibility judgment.\n\n**Required plan**: Practitioner or Studio",
+        "operationId": "calculateSynastry",
+        "security": [{"ApiKeyAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/SynastryRequest"},
+              "example": {
+                "person_a": {
+                  "date": "1990-03-15",
+                  "time": "14:32",
+                  "city": "London",
+                  "name": "Jane"
+                },
+                "person_b": {
+                  "date": "1988-07-22",
+                  "time": "09:15",
+                  "city": "Paris",
+                  "name": "John"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synastry analysis result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "compatibility_score": {"type": "number", "description": "0–100 compatibility score"},
+                    "judgment": {"type": "string", "description": "Plain-language compatibility judgment"},
+                    "aspects": {"type": "array"},
+                    "mutual_receptions": {"type": "array"},
+                    "source_citations": {"type": "array"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/world": {
+      "post": {
+        "tags": ["World / Mundane"],
+        "summary": "World / mundane astrological dashboard",
+        "description": "Returns current global astrological conditions: active ingresses, eclipses, planetary stations, mundane significators, and a plain-language world forecast.\n\n**Required plan**: Practitioner or Studio",
+        "operationId": "worldDashboard",
+        "security": [{"ApiKeyAuth": []}],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "date": {"type": "string", "description": "Analysis date (YYYY-MM-DD). Defaults to today."}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "World dashboard data"}
+        }
+      }
+    },
+    "/api/v1/charts/bulk/pdf": {
+      "post": {
+        "tags": ["Bulk / PDF"],
+        "summary": "Batch PDF generation (ZIP)",
+        "description": "Submit up to 50 natal chart requests and receive a ZIP of PDF reports. Ideal for Etsy sellers processing order batches or practitioners sending client reports.\n\n**Required plan**: Practitioner or Studio\n\n**Returns**: `application/zip` binary",
+        "operationId": "bulkPdf",
+        "security": [{"ApiKeyAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/BulkPdfRequest"},
+              "example": {
+                "items": [
+                  {"date": "1990-03-15", "time": "14:32", "city": "London", "name": "Client A"},
+                  {"date": "1985-11-02", "time": "06:45", "city": "New York", "state": "NY", "name": "Client B"}
+                ],
+                "filename_prefix": "batch_reports"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ZIP archive of PDF reports",
+            "content": {
+              "application/zip": {
+                "schema": {"type": "string", "format": "binary"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/forensic/audit": {
+      "post": {
+        "tags": ["Forensic / Rectification"],
+        "summary": "Forensic audit / birth-time rectification",
+        "description": "Runs a comprehensive forensic audit across a time range. Uses traditional primary directions to test candidate birth times against known life events. Returns probability scores for each candidate.\n\n**Required plan**: Practitioner or Studio",
+        "operationId": "forensicAudit",
+        "security": [{"ApiKeyAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/ChartRequest"}
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Rectification audit results with scored candidate times"}
+        }
+      }
+    },
+    "/api/v1/developer/keys": {
+      "post": {
+        "tags": ["Developer"],
+        "summary": "Create API key",
+        "description": "Create a new API key. The raw key is returned **only once** — store it immediately. Requires Bearer token (account login).",
+        "operationId": "createApiKey",
+        "security": [{"ApiKeyAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {"type": "string", "example": "My Production App"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New API key (shown once)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {"type": "string", "example": "sk_live_abc123..."},
+                    "name": {"type": "string"},
+                    "id": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Developer"],
+        "summary": "List API keys",
+        "description": "List all active API keys for your account.",
+        "operationId": "listApiKeys",
+        "security": [{"ApiKeyAuth": []}],
+        "responses": {
+          "200": {"description": "Array of API key metadata (raw keys are never returned after creation)"}
+        }
+      }
+    },
+    "/api/v1/developer/usage": {
+      "get": {
+        "tags": ["Developer"],
+        "summary": "Get API usage stats",
+        "description": "Returns today's API call count and your plan's daily quota.",
+        "operationId": "getDeveloperUsage",
+        "security": [{"ApiKeyAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Usage stats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "api_calls_used": {"type": "integer"},
+                    "quota": {"type": "integer", "description": "Daily quota (0 = unlimited)"},
+                    "quota_period": {"type": "string", "example": "day"},
+                    "plan_tier": {"type": "string", "example": "practitioner"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
