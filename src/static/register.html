@@ -220,7 +220,7 @@
                 const qp = params.get("plan") || params.get("tier");
                 const ls = localStorage.getItem("cael_selected_plan");
                 const raw = (qp || ls || "").toLowerCase().trim();
-                if (raw === "practitioner" || raw === "studio") return raw;
+                if (raw === "scholar" || raw === "practitioner" || raw === "studio") return raw;
             } catch (e) { }
             return null;
         }

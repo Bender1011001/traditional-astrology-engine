@@ -86,7 +86,7 @@ async def list_public_plans(db: Session = Depends(get_db)):
     Purpose:
     - Frontend can hide/disable tiers whose Stripe Price IDs are not configured.
     """
-    tiers = ["practitioner", "studio"]
+    tiers = ["scholar", "practitioner", "studio"]
     plans = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier.in_(tiers)).all()
     by_tier = {p.tier: p for p in plans}
 
@@ -220,7 +220,7 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
     # ----------------------------
     # Subscription tiers
     # ----------------------------
-    if tier not in {"practitioner", "studio"}:
+    if tier not in {"scholar", "practitioner", "studio"}:
         raise HTTPException(status_code=400, detail="Invalid tier")
         
     try:
@@ -337,7 +337,7 @@ async def start_trial(
         raise HTTPException(status_code=401, detail="Authentication required")
 
     tier_norm = (tier or "").strip().lower()
-    if tier_norm not in {"practitioner", "studio"}:
+    if tier_norm not in {"scholar", "practitioner", "studio"}:
         raise HTTPException(status_code=400, detail="Invalid tier")
 
     # Don't allow overwriting a Stripe-managed subscription.

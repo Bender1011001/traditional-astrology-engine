@@ -291,10 +291,12 @@
                         Loading billing state...
                     </p>
                     <div id="billingActions" style="display:flex; flex-wrap:wrap; gap:0.75rem;">
+                        <button id="startTrialScholarBtn" class="help-btn highlight-btn" onclick="startTrialTier('scholar')">START SCHOLAR TRIAL — FREE</button>
                         <button id="startTrialPractitionerBtn" class="help-btn" onclick="startTrialTier('practitioner')">START PRACTITIONER TRIAL</button>
                         <button id="startTrialStudioBtn" class="help-btn" onclick="startTrialTier('studio')">START STUDIO TRIAL</button>
-                        <button id="subscribePractitionerBtn" class="help-btn highlight-btn" onclick="subscribeTier('practitioner')">SUBSCRIBE PRACTITIONER</button>
-                        <button id="subscribeStudioBtn" class="help-btn highlight-btn" onclick="subscribeTier('studio')">SUBSCRIBE STUDIO</button>
+                        <button id="subscribeScholarBtn" class="help-btn" onclick="subscribeTier('scholar')">SUBSCRIBE SCHOLAR ($9.99/mo)</button>
+                        <button id="subscribePractitionerBtn" class="help-btn" onclick="subscribeTier('practitioner')">SUBSCRIBE PRACTITIONER ($29/mo)</button>
+                        <button id="subscribeStudioBtn" class="help-btn" onclick="subscribeTier('studio')">SUBSCRIBE STUDIO</button>
                     </div>
                     <p id="billingStatus" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;"></p>
                 </div>
@@ -602,8 +604,10 @@
         function renderBilling(sub) {
             const summary = document.getElementById("billingSummary");
             const status = document.getElementById("billingStatus");
+            const startSch = document.getElementById("startTrialScholarBtn");
             const startP = document.getElementById("startTrialPractitionerBtn");
             const startS = document.getElementById("startTrialStudioBtn");
+            const subSch = document.getElementById("subscribeScholarBtn");
             const subP = document.getElementById("subscribePractitionerBtn");
             const subS = document.getElementById("subscribeStudioBtn");
 
@@ -611,13 +615,17 @@
             const isTrial = !!sub.is_trial;
             const trialEnds = sub.current_period_end ? new Date(sub.current_period_end).toLocaleDateString() : null;
 
+            // Determine what tier the user intended when signing up
+            let selectedPlan = "";
+            try { selectedPlan = (localStorage.getItem("cael_selected_plan") || "").toLowerCase().trim(); } catch (e) {}
+
             if (summary) {
                 if (!checkoutGloballyEnabled) {
-                    summary.textContent = "Pilot build mode is active. Paid checkout is paused while Etsy workflow features are finalized.";
+                    summary.textContent = "Pilot build mode is active. Paid checkout is paused.";
                 } else if (isTrial && trialEnds) {
-                    summary.textContent = `Trialing ${plan.toUpperCase()}. Trial ends on ${trialEnds}. You can subscribe now to keep uninterrupted access.`;
+                    summary.textContent = `Trialing ${plan.toUpperCase()}. Trial ends ${trialEnds}. Subscribe now to keep uninterrupted access.`;
                 } else if (plan === "free") {
-                    summary.textContent = "You are on the Free plan. Start a no-card trial (14 days) to unlock practitioner features and API keys.";
+                    summary.textContent = "Start a free 14-day trial to unlock unlimited readings, PDF reports, and advanced timing techniques. No credit card required.";
                 } else {
                     summary.textContent = `Plan: ${plan.toUpperCase()}.`;
                 }
@@ -625,22 +633,34 @@
 
             if (status) {
                 status.textContent = !checkoutGloballyEnabled
-                    ? `Checkout disabled (${checkoutSalesMode} mode). Use trial and Etsy batch tooling while we finish build-out.`
+                    ? `Checkout disabled (${checkoutSalesMode} mode).`
                     : "";
             }
 
             const canStartTrial = (plan === "free");
-            if (startP) startP.classList.toggle("hidden", !canStartTrial);
-            if (startS) startS.classList.toggle("hidden", !canStartTrial);
+            const canSubscribe = (plan !== "free") || canStartTrial || isTrial;
 
-            const canSubscribe = (plan === "practitioner" || plan === "studio" || canStartTrial || isTrial);
+            // Trial buttons — show for free users; default to Scholar unless they chose practitioner/studio
+            if (startSch) {
+                const showSch = canStartTrial && selectedPlan !== "practitioner" && selectedPlan !== "studio";
+                startSch.classList.toggle("hidden", !showSch);
+            }
+            if (startP) startP.classList.toggle("hidden", !canStartTrial || selectedPlan === "scholar");
+            if (startS) startS.classList.toggle("hidden", !canStartTrial || selectedPlan !== "studio");
+
+            // Subscribe buttons — show relevant tier
+            if (subSch) {
+                subSch.classList.toggle("hidden", !canSubscribe || plan === "scholar" || plan === "practitioner" || plan === "studio");
+                subSch.disabled = !checkoutGloballyEnabled;
+                subSch.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
+            }
             if (subP) {
-                subP.classList.toggle("hidden", !canSubscribe);
+                subP.classList.toggle("hidden", !canSubscribe || selectedPlan === "scholar");
                 subP.disabled = !checkoutGloballyEnabled;
                 subP.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
             }
             if (subS) {
-                subS.classList.toggle("hidden", !canSubscribe);
+                subS.classList.toggle("hidden", !canSubscribe || selectedPlan !== "studio");
                 subS.disabled = !checkoutGloballyEnabled;
                 subS.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
             }

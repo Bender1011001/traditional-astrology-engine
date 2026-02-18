@@ -18,7 +18,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Start Free Trial | Codex Caelestis</title>
-  <meta name="description" content="Start a free trial of Codex Caelestis. Practitioner infrastructure for traditional astrology calculations, exports, and advanced timing techniques." />
+  <meta name="description" content="Start a free 14-day trial of Codex Caelestis. No credit card required. Unlimited traditional astrology calculations, full forensic reports, and advanced timing techniques." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#f6f0e6" />
   <link rel="canonical" href="https://traditional-astrology.com/signup.html" />
@@ -46,7 +46,7 @@
     <header class="page-hero">
       <h1>START YOUR FREE TRIAL</h1>
       <div class="ornament"></div>
-      <p class="subtitle">Built for professional astrologers, serious students, and research workflows.</p>
+      <p class="subtitle">14 days free. No credit card required. Cancel any time.</p>
       <nav class="header-actions" aria-label="Primary">
         <a class="help-btn" href="index.html">Home</a>
         <a class="help-btn" href="techniques.html">Techniques</a>
@@ -64,33 +64,61 @@
     </header>
 
     <section class="basic-view">
-      <h2 class="section-title">CHOOSE YOUR TIER</h2>
-      <p class="section-subtitle">
-        Start a 14-day no-card trial. Create an account, unlock practitioner features, and subscribe when ready.
-      </p>
+      <h2 class="section-title">CHOOSE YOUR PLAN</h2>
+      <p class="section-subtitle">Select a plan, then create your account. You will not be charged until your trial ends.</p>
 
-      <div class="offer-grid pricing-grid">
-        <div class="panel-card" style="max-width: 500px; margin: 0 auto;">
+      <div class="offer-grid pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+
+        <!-- Scholar -->
+        <div class="panel-card plan-option" data-tier="scholar" style="cursor:pointer;">
           <div class="pricing-card recommended">
-            <div class="tier-label">Historical Access</div>
-            <h3>Practitioner Reading</h3>
-            <div class="price">$0<span> / 3 readings</span></div>
+            <div class="tier-label">Most Popular</div>
+            <h3>Scholar</h3>
+            <div class="price">$9.99<span>/month</span></div>
             <ul class="features">
-              <li><strong>3 free premium readings per IP</strong></li>
-              <li>Unlimited technique access (ZR, Profections, etc)</li>
-              <li>Precision Swiss Ephemeris calculations</li>
-              <li>Auditable Rule Ledger (JSON export)</li>
-              <li>Subsequent readings: <strong>$20 each</strong></li>
+              <li><strong>Unlimited readings</strong></li>
+              <li>Full forensic reports (PDF export)</li>
+              <li>Zodiacal Releasing L1/L2 + Bond</li>
+              <li>Primary Directions, Parans, Firdaria</li>
+              <li>Saved chart history</li>
             </ul>
-            <a class="btn-primary" href="register.html">Create Account</a>
-            <p class="trial-note">No credit card required to start.</p>
+            <button class="btn-primary plan-select-btn" data-tier="scholar" type="button" style="width:100%;">
+              Select Scholar — Start Free Trial
+            </button>
+            <p class="trial-note">$9.99/mo after 14-day trial. Cancel any time.</p>
           </div>
         </div>
+
+        <!-- Practitioner -->
+        <div class="panel-card plan-option" data-tier="practitioner" style="cursor:pointer;">
+          <div class="pricing-card">
+            <div class="tier-label">For Professionals</div>
+            <h3>Practitioner</h3>
+            <div class="price">$29<span>/month</span></div>
+            <ul class="features">
+              <li><strong>Everything in Scholar</strong></li>
+              <li>B2B API access (100 calls/day)</li>
+              <li>Bulk chart processing</li>
+              <li>White-label PDF exports</li>
+              <li>Priority support</li>
+            </ul>
+            <button class="btn-secondary plan-select-btn" data-tier="practitioner" type="button" style="width:100%;">
+              Select Practitioner — Start Free Trial
+            </button>
+            <p class="trial-note">$29/mo after 14-day trial. Ideal for client workflows.</p>
+          </div>
+        </div>
+
       </div>
 
-      <div class="hero-actions mt-8" style="justify-content:center;">
-        <a class="btn-secondary" href="demo.html">Try Demo First</a>
-        <a class="btn-secondary" href="documentation.html">Read Technical Docs</a>
+      <p class="text-muted text-sm" style="text-align:center; margin-top: 1rem;">
+        Annual plans at 17% discount available after signup.
+        Need Studio / API access? <a href="mailto:enterprise@traditional-astrology.com">Contact us.</a>
+      </p>
+
+      <div class="hero-actions mt-8" style="justify-content:center; gap: 1rem; flex-wrap: wrap;">
+        <a class="btn-secondary" href="demo.html">Try Free Demo First</a>
+        <a class="btn-secondary" href="index.html#pricing">Compare Plans</a>
       </div>
 
       <div class="lock-disclaimer mt-8">
@@ -144,17 +172,64 @@
   </main>
 
   <script>
-    // Capture `?plan=` for later billing wiring.
     (function () {
+      // Capture ?tier= or ?plan= and store it
       try {
         const params = new URLSearchParams(window.location.search);
-        const plan = params.get('plan');
-        if (plan) localStorage.setItem('cael_selected_plan', plan);
+        const tier = (params.get('tier') || params.get('plan') || '').toLowerCase().trim();
+        if (tier) localStorage.setItem('cael_selected_plan', tier);
       } catch (e) { }
+
+      function highlightPlan(tier) {
+        document.querySelectorAll('.plan-option').forEach(function (card) {
+          card.style.outline = card.getAttribute('data-tier') === tier ? '2px solid var(--gold, #b07a2f)' : '';
+        });
+      }
+
+      function selectPlan(tier) {
+        try { localStorage.setItem('cael_selected_plan', tier); } catch (e) { }
+        highlightPlan(tier);
+        window.location.href = 'register.html?tier=' + encodeURIComponent(tier);
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        // Theme init
+        try {
+          const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (prefersDark || localStorage.getItem('cael_theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          }
+        } catch (e) { }
+
+        // Copyright year
+        const yearEl = document.getElementById('copyrightYear');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // Highlight pre-selected plan (e.g. arriving from index.html?tier=scholar)
+        try {
+          const saved = localStorage.getItem('cael_selected_plan');
+          if (saved) highlightPlan(saved);
+        } catch (e) { }
+
+        // Wire plan select buttons
+        document.querySelectorAll('.plan-select-btn').forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            selectPlan(btn.getAttribute('data-tier'));
+          });
+        });
+
+        // Clicking anywhere on the card also selects it
+        document.querySelectorAll('.plan-option').forEach(function (card) {
+          card.addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') return;
+            selectPlan(card.getAttribute('data-tier'));
+          });
+        });
+      });
     })();
   </script>
   <script type="module" src="js/main.js"></script>
-  <script type="module" src="js/plans-public.js"></script>
 </body>
 
 </html>
