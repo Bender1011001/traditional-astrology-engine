@@ -11,24 +11,23 @@
     <!-- End Google Tag Manager -->
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-RCNDWN4XVN');
-    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RCNDWN4XVN');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dashboard | Codex Caelestis</title>
+    <title>Dashboard | AstroForge</title>
     <meta name="robots" content="noindex">
     <meta name="theme-color" content="#f4efe6">
-    <link rel="stylesheet" href="style.css?v=20260129polish">
+    <link rel="stylesheet" href="style.css?v=20260224pivot">
     <style>
         .dashboard-container {
-            max-width: 900px;
-            margin: 4rem auto;
+            max-width: 960px;
+            margin: 3rem auto;
             padding: 2rem;
             background: var(--surface);
             border: 1px solid var(--border-color);
@@ -42,11 +41,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .dashboard-welcome h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin: 0;
             color: var(--primary);
         }
@@ -55,7 +56,7 @@
             font-family: 'Space Mono', monospace;
             font-size: 0.8rem;
             color: var(--text-muted);
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
 
         .dashboard-section {
@@ -64,7 +65,7 @@
 
         .section-title {
             font-family: 'Space Mono', monospace;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 1rem;
@@ -75,8 +76,8 @@
 
         .charts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.25rem;
         }
 
         .chart-card {
@@ -84,7 +85,6 @@
             border: 1px solid var(--border-color);
             padding: 1rem;
             transition: all 0.2s;
-            cursor: pointer;
         }
 
         .chart-card:hover {
@@ -97,21 +97,46 @@
         .chart-name {
             font-weight: bold;
             font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
         }
 
         .chart-details {
             font-size: 0.8rem;
             color: var(--text-muted);
-            line-height: 1.4;
+            line-height: 1.5;
+        }
+
+        .chart-label-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-family: 'Space Mono', monospace;
+            border-radius: 10px;
+            text-transform: uppercase;
+            margin-top: 0.4rem;
+            cursor: pointer;
+        }
+
+        .chart-label-badge.empty {
+            border-color: var(--border-color);
+            color: var(--text-muted);
         }
 
         .chart-meta {
-            margin-top: 0.8rem;
+            margin-top: 0.6rem;
             font-size: 0.7rem;
             color: var(--text-muted);
             opacity: 0.7;
+        }
+
+        .chart-actions {
+            margin-top: 0.8rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .empty-state {
@@ -119,6 +144,10 @@
             padding: 3rem;
             color: var(--text-muted);
             border: 1px dashed var(--border-color);
+        }
+
+        .empty-state a {
+            color: var(--gold);
         }
 
         .user-badge {
@@ -136,8 +165,8 @@
             background: transparent;
             border: 1px solid var(--danger);
             color: var(--danger);
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.75rem;
             cursor: pointer;
             font-family: 'Space Mono', monospace;
         }
@@ -146,19 +175,19 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding: 1.5rem;
             background: rgba(192, 122, 43, 0.05);
             border: 1px solid var(--glass-border);
         }
 
         .progress-bar-container {
-            height: 10px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
+            border-radius: 4px;
             overflow: hidden;
             border: 1px solid var(--glass-border);
-            margin: 0.8rem 0;
+            margin: 0.6rem 0;
         }
 
         .progress-bar {
@@ -170,20 +199,97 @@
 
         .roi-val {
             display: block;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-family: 'Cormorant Garamond', serif;
             color: var(--gold-bright);
         }
 
-        .quick-form-compact {
+        /* Batch tool */
+        .batch-tool-box {
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            background: rgba(192, 122, 43, 0.03);
+        }
+
+        .batch-instructions {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .batch-row {
             display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .batch-status-row {
+            margin-top: 0.75rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Search / filter */
+        .chart-search-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .chart-search-row input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--glass-border);
+            background: var(--bg-card);
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        /* Label edit modal */
+        .label-edit-row {
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .label-edit-row input {
+            width: 100%;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.75rem;
+            border: 1px solid var(--gold);
+            background: var(--bg-card);
+            color: var(--text);
+        }
+
+        /* Upgrade teaser */
+        .upgrade-teaser {
+            padding: 1.25rem;
+            border: 1px dashed var(--gold);
+            background: rgba(192, 122, 43, 0.04);
+            text-align: center;
+        }
+
+        .upgrade-teaser p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
         }
 
         [data-theme="dark"] .chart-card {
             background: rgba(0, 0, 0, 0.2);
+        }
+
+        .header-actions-dash {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -204,13 +310,12 @@
         <header>
             <nav class="header-actions" aria-label="Primary">
   <a class="help-btn" href="index.html">Home</a>
+  <a class="help-btn" href="gig-economy.html">Etsy Sellers</a>
+  <a class="help-btn" href="demo.html">New Reading</a>
   <a class="help-btn" href="techniques.html">Techniques</a>
-  <a class="help-btn" href="documentation.html">Documentation</a>
-  <a class="help-btn" href="demo.html">Demo</a>
+  <a class="help-btn" href="documentation.html">Docs</a>
   <a class="help-btn" href="index.html#pricing">Pricing</a>
-  <a class="help-btn" href="about.html">About</a>
   <a class="help-btn" href="faq.html">FAQ</a>
-  <a class="help-btn" href="blog.html">Blog</a>
   <a class="help-btn" href="login.html">Log in</a>
   <a class="help-btn highlight-btn" href="signup.html">Start Free Trial</a>
   <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">Dark mode</button>
@@ -220,33 +325,29 @@
         <div class="dashboard-container">
             <div class="dashboard-header">
                 <div class="dashboard-welcome">
-                    <h1>My Sanctum</h1>
+                    <h1>Dashboard</h1>
                     <p id="userEmail">Loading...</p>
                 </div>
-                <div>
-                    <span id="subBadge" class="user-badge">Vagabond</span>
-                    <a href="demo.html" class="help-btn" style="margin-right: 0.5rem; text-decoration: none;">RUN
-                        CALCULATION</a>
+                <div class="header-actions-dash">
+                    <span id="subBadge" class="user-badge">Free</span>
+                    <a href="demo.html" class="help-btn" style="text-decoration: none;">NEW READING</a>
                     <button class="logout-btn" onclick="logout()">LOGOUT</button>
                 </div>
             </div>
 
+            <!-- Usage / ROI (Practitioner+) -->
             <div id="practitionerUsage" class="dashboard-section hidden">
-                <h2 class="section-title">Quota & ROI</h2>
+                <h2 class="section-title">Usage This Cycle</h2>
                 <div class="usage-grid">
                     <div class="usage-item">
-                        <label
-                            style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-family: 'Space Mono', monospace;">Reports
-                            Cycle</label>
+                        <label style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-family: 'Space Mono', monospace;">Reports</label>
                         <div class="progress-bar-container">
                             <div id="chartProgressBar" class="progress-bar"></div>
                         </div>
                         <p id="chartUsageMsg" style="font-size: 0.75rem; color: var(--text-muted);"></p>
                     </div>
                     <div class="usage-item" id="apiUsageWrap">
-                        <label
-                            style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-family: 'Space Mono', monospace;">API
-                            Consumption</label>
+                        <label style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-family: 'Space Mono', monospace;">API Calls</label>
                         <div class="progress-bar-container">
                             <div id="apiProgressBar" class="progress-bar"></div>
                         </div>
@@ -254,26 +355,77 @@
                     </div>
                     <div class="usage-item" style="text-align: right;">
                         <span id="roiTime" class="roi-val">0h</span>
-                        <p style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase;">Estimated
-                            Time Saved</p>
+                        <p style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase;">Estimated Time Saved</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Batch PDF Tool (visible to all, gated for free/scholar) -->
+            <div id="bulkExportsSection" class="dashboard-section">
+                <h2 class="section-title">Batch PDF Tool — Etsy Orders</h2>
+
+                <!-- Practitioner+ view -->
+                <div id="batchToolActive" class="batch-tool-box hidden">
+                    <p class="batch-instructions">
+                        Upload a CSV of client birth data. You'll get a ZIP with one PDF per row.
+                        <br>Accepted headers: <code>name, date, time, city, state</code> &nbsp;|&nbsp;
+                        Etsy aliases: <code>client_name, birth_date, birth_time, birth_place</code>.
+                        <br>Missing birth time? Check the box below and we'll default to 12:00.
+                        <br><strong>Historical Use Only</strong> — no medical, legal, or financial advice.
+                    </p>
+                    <div class="batch-row">
+                        <input id="bulkCsvFile" type="file" accept=".csv,text/csv"
+                            style="flex: 1; min-width: 240px; padding: 0.5rem; border: 1px solid var(--glass-border); background: var(--bg-card);" />
+                        <button id="bulkGenerateBtn" class="help-btn highlight-btn" onclick="bulkGenerateZip()">BUILD ZIP</button>
+                        <button id="bulkTemplateBtn" class="help-btn" onclick="downloadBulkTemplate()">DOWNLOAD TEMPLATE</button>
+                    </div>
+                    <div class="batch-status-row">
+                        <label style="font-size: 0.8rem; color: var(--text-muted); display:flex; gap:0.4rem; align-items:center;">
+                            <input id="bulkTimeFallback" type="checkbox" checked />
+                            Use 12:00 if birth time is missing
+                        </label>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">
+                            Date formats: <code>YYYY-MM-DD</code> or <code>MM/DD/YYYY</code> &nbsp;|&nbsp;
+                            Time: <code>HH:MM</code> or <code>H:MM AM/PM</code>
+                        </span>
+                    </div>
+                    <p id="bulkPreview" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;"></p>
+                    <p id="bulkStatus" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem; font-family: 'Space Mono', monospace;"></p>
+                </div>
+
+                <!-- Free/Scholar upgrade teaser -->
+                <div id="batchToolTeaser" class="upgrade-teaser">
+                    <p>
+                        <strong>The Batch PDF Tool</strong> is available on the Practitioner plan ($29/month).
+                        Upload a CSV of Etsy orders — get a ZIP of professional reading PDFs back in seconds.
+                    </p>
+                    <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+                        <button class="help-btn highlight-btn" onclick="startTrialTier('practitioner')">START PRACTITIONER TRIAL — FREE 14 DAYS</button>
+                        <a class="help-btn" href="gig-economy.html">See How It Works</a>
+                    </div>
+                    <p id="batchTeaserStatus" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;"></p>
+                </div>
+            </div>
+
+            <!-- Saved Charts / Client History -->
             <div class="dashboard-section">
                 <h2 class="section-title">Saved Charts</h2>
+                <div class="chart-search-row">
+                    <input type="text" id="chartSearch" placeholder="Search by name or label..." oninput="filterCharts()" />
+                    <button class="help-btn" onclick="renderCharts(allCharts)">All</button>
+                </div>
                 <div id="chartsList" class="charts-grid">
-                    <!-- Charts populated via JS -->
                     <div class="empty-state">Loading your charts...</div>
                 </div>
             </div>
 
+            <!-- Account Details -->
             <div class="dashboard-section">
-                <h2 class="section-title">Account Details</h2>
+                <h2 class="section-title">Account</h2>
                 <p style="font-size: 0.9rem; color: var(--text-muted);">
                     Member since <span id="joinDate">...</span><br>
-                    Current Plan: <span id="planName" style="color: var(--text);">...</span><br>
-                    Usage (Cycle): <span id="usageStats" style="color: var(--text);">...</span>
+                    Plan: <span id="planName" style="color: var(--text);">...</span><br>
+                    Usage: <span id="usageStats" style="color: var(--text);">...</span>
                 </p>
                 <div id="subscriptionManagement" class="hidden"
                     style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
@@ -284,6 +436,7 @@
                 </div>
             </div>
 
+            <!-- Billing -->
             <div class="dashboard-section">
                 <h2 class="section-title">Billing</h2>
                 <div class="panel-card">
@@ -292,7 +445,7 @@
                     </p>
                     <div id="billingActions" style="display:flex; flex-wrap:wrap; gap:0.75rem;">
                         <button id="startTrialScholarBtn" class="help-btn highlight-btn" onclick="startTrialTier('scholar')">START SCHOLAR TRIAL — FREE</button>
-                        <button id="startTrialPractitionerBtn" class="help-btn" onclick="startTrialTier('practitioner')">START PRACTITIONER TRIAL</button>
+                        <button id="startTrialPractitionerBtn" class="help-btn" onclick="startTrialTier('practitioner')">START PRACTITIONER TRIAL — FREE</button>
                         <button id="startTrialStudioBtn" class="help-btn" onclick="startTrialTier('studio')">START STUDIO TRIAL</button>
                         <button id="subscribeScholarBtn" class="help-btn" onclick="subscribeTier('scholar')">SUBSCRIBE SCHOLAR ($9.99/mo)</button>
                         <button id="subscribePractitionerBtn" class="help-btn" onclick="subscribeTier('practitioner')">SUBSCRIBE PRACTITIONER ($29/mo)</button>
@@ -302,62 +455,35 @@
                 </div>
             </div>
 
-            <div id="apiKeysSection" class="dashboard-section">
+            <!-- API Keys (Practitioner+) -->
+            <div id="apiKeysSection" class="dashboard-section hidden">
                 <h2 class="section-title">API Keys</h2>
                 <div class="panel-card">
                     <p style="font-size: 0.85rem; color: var(--text-muted);">
                         API keys are available on Practitioner and Studio plans. Keys are shown only once on creation.
                     </p>
                     <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-top: 1rem;">
-                        <input id="apiKeyName" type="text" placeholder="Key name (e.g. My Client App)"
+                        <input id="apiKeyName" type="text" placeholder="Key name (e.g. My Etsy Workflow)"
                             style="flex: 1; min-width: 240px; padding: 0.6rem; border: 1px solid var(--glass-border); background: var(--bg-card);" />
                         <button id="createApiKeyBtn" class="help-btn highlight-btn" onclick="createApiKey()">CREATE KEY</button>
                     </div>
                     <p id="apiKeyCreateStatus" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;"></p>
-
                     <div style="margin-top: 1.25rem;">
                         <div id="apiKeysList" class="criteria-grid"></div>
                     </div>
                 </div>
             </div>
 
-            <div id="bulkExportsSection" class="dashboard-section hidden">
-                <h2 class="section-title">Etsy Batch Pack (CSV)</h2>
-                <div class="panel-card">
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">
-                        Upload a CSV from your order workflow. Preferred headers:
-                        <code>name,date,time,city,state</code>.
-                        Etsy-style aliases are also accepted: <code>client_name,birth_date,birth_time,birth_place</code>.
-                        This generates a ZIP of PDFs. Historical Use Only; no medical, legal, or financial advice.
-                    </p>
-                    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-top: 1rem;">
-                        <input id="bulkCsvFile" type="file" accept=".csv,text/csv"
-                            style="flex: 1; min-width: 240px; padding: 0.6rem; border: 1px solid var(--glass-border); background: var(--bg-card);" />
-                        <button id="bulkGenerateBtn" class="help-btn highlight-btn" onclick="bulkGenerateZip()">BUILD ZIP</button>
-                        <button id="bulkTemplateBtn" class="help-btn" onclick="downloadBulkTemplate()">DOWNLOAD CSV TEMPLATE</button>
-                    </div>
-                    <div style="margin-top: 0.75rem; display:flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-                        <label style="font-size: 0.8rem; color: var(--text-muted); display:flex; gap:0.4rem; align-items:center;">
-                            <input id="bulkTimeFallback" type="checkbox" checked />
-                            Use <code>12:00</code> if time is missing
-                        </label>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">
-                            Accepted dates: <code>YYYY-MM-DD</code>, <code>MM/DD/YYYY</code>; times: <code>HH:MM</code> or <code>H:MM AM/PM</code>.
-                        </span>
-                    </div>
-                    <p id="bulkPreview" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.6rem;"></p>
-                    <p id="bulkStatus" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;"></p>
-                </div>
-            </div>
         </div>
     </main>
 
-    <script src="config.js?v=20260212azure2"></script>
+    <script src="config.js?v=20260224pivot"></script>
     <script>
         const API_BASE = window.CAEL_API_BASE || "";
         function apiUrl(path) { return `${API_BASE}${path}`; }
         let checkoutGloballyEnabled = true;
         let checkoutSalesMode = "live";
+        let allCharts = [];
 
         async function loadBillingGate() {
             try {
@@ -370,9 +496,7 @@
                 if (data.sales_mode) {
                     checkoutSalesMode = String(data.sales_mode).toLowerCase();
                 }
-            } catch (e) {
-                // Non-fatal; keep defaults.
-            }
+            } catch (e) { /* Non-fatal */ }
         }
 
         async function loadProfile() {
@@ -388,15 +512,14 @@
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
-                if (!resp.ok) throw new Error('Failed to load profile');
+                if (!resp.ok) throw new Error('Auth failed');
                 const data = await resp.json();
                 const user = data.user;
-
-                // Update UI
                 const sub = user.subscription_details;
+
                 document.getElementById('userEmail').textContent = user.email;
-                document.getElementById('subBadge').textContent = (sub.plan_name || "Vagabond").toUpperCase();
-                document.getElementById('planName').textContent = (sub.plan_name || "Vagabond").toUpperCase();
+                document.getElementById('subBadge').textContent = (sub.plan_name || "Free").toUpperCase();
+                document.getElementById('planName').textContent = (sub.plan_name || "Free").toUpperCase();
                 document.getElementById('joinDate').textContent = new Date(user.created_at).toLocaleDateString();
 
                 if (sub.current_period_end) {
@@ -404,11 +527,9 @@
                     document.getElementById('planName').innerHTML += ` (Renews: ${expiryDate})`;
                 }
 
-                // Populate Usage
                 const usage = user.usage || { charts: 0, api: 0, chart_limit: 1, api_limit: 0 };
                 const chartLimit = usage.chart_limit === null ? "∞" : usage.chart_limit;
                 const apiLimit = usage.api_limit === null ? "∞" : usage.api_limit;
-
                 const savedCount = (user.charts_saved || []).length;
                 let savedLimit = 10;
                 const planLower = String(sub.plan_name || "free").toLowerCase();
@@ -421,7 +542,6 @@
                 }
                 document.getElementById('usageStats').textContent = usageText;
 
-                // Update Progress Bars & ROI
                 if (usage.chart_limit !== null && usage.chart_limit > 0) {
                     const chartPct = Math.min((usage.charts / usage.chart_limit) * 100, 100);
                     document.getElementById('chartProgressBar').style.width = `${chartPct}%`;
@@ -432,7 +552,9 @@
                 if (usage.api_limit === null || usage.api_limit > 0) {
                     const apiPct = usage.api_limit === null ? 0 : Math.min((usage.api / usage.api_limit) * 100, 100);
                     document.getElementById('apiProgressBar').style.width = `${apiPct}%`;
-                    document.getElementById('apiUsageMsg').textContent = usage.api_limit === null ? `${usage.api} calls used today.` : `${usage.api} of ${usage.api_limit} calls used today.`;
+                    document.getElementById('apiUsageMsg').textContent = usage.api_limit === null
+                        ? `${usage.api} calls used today.`
+                        : `${usage.api} of ${usage.api_limit} calls used today.`;
                     document.getElementById('apiUsageWrap').classList.remove('hidden');
                 } else {
                     document.getElementById('apiUsageWrap').classList.add('hidden');
@@ -441,7 +563,6 @@
                 const hrsSaved = (usage.charts || 0) * 4;
                 document.getElementById('roiTime').textContent = `${hrsSaved}h`;
 
-                // Show/Hide Management Section
                 const mgmt = document.getElementById('subscriptionManagement');
                 if (sub.has_stripe_subscription && (sub.status === 'active' || sub.status === 'past_due' || sub.status === 'trial')) {
                     mgmt.classList.remove('hidden');
@@ -458,7 +579,8 @@
                 await loadApiKeys(sub);
                 renderBulkExports(sub);
 
-                renderCharts(user.charts_saved || []);
+                allCharts = user.charts_saved || [];
+                renderCharts(allCharts);
                 await checkOwnerAccess(token);
 
             } catch (err) {
@@ -474,37 +596,30 @@
             const resp = await fetch(apiUrl('/api/v1/owner/verify'), {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            if (resp.ok) {
-                ownerLink.style.display = 'inline-flex';
-            }
+            if (resp.ok) ownerLink.style.display = 'inline-flex';
         }
 
         async function cancelSubscription() {
-            if (!confirm("Are you sure you want to turn off auto-renewal? You will still have access until the end of your current period.")) return;
-
+            if (!confirm("Turn off auto-renewal? You'll keep access until your period ends.")) return;
             const btn = document.getElementById('cancelSubBtn');
             const status = document.getElementById('cancelStatus');
             btn.disabled = true;
             status.textContent = "Cancelling...";
-
             try {
                 const token = localStorage.getItem('cael_auth_token');
                 const resp = await fetch(apiUrl('/api/v1/billing/cancel-subscription'), {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        // CSRF defense-in-depth: required for cross-origin POSTs.
                         "X-Requested-With": "XMLHttpRequest",
                         "Content-Type": "application/json"
                     }
                 });
-
                 const data = await resp.json();
                 if (resp.ok) {
                     status.style.color = "var(--text-main)";
                     status.textContent = data.message;
                     btn.classList.add('hidden');
-                    // Reload profile after a short delay to see updated expiry info
                     setTimeout(loadProfile, 2000);
                 } else {
                     throw new Error(data.detail || "Cancellation failed");
@@ -516,29 +631,110 @@
             }
         }
 
+        // ─── Chart Rendering & Client Management ─────────────────────────────
+
+        function filterCharts() {
+            const q = (document.getElementById('chartSearch').value || '').toLowerCase();
+            if (!q) { renderCharts(allCharts); return; }
+            renderCharts(allCharts.filter(c =>
+                (c.name || '').toLowerCase().includes(q) ||
+                (c.label || '').toLowerCase().includes(q) ||
+                (c.city || '').toLowerCase().includes(q)
+            ));
+        }
+
         function renderCharts(charts) {
             const container = document.getElementById('chartsList');
             if (!charts || charts.length === 0) {
-                container.innerHTML = '<div class="empty-state">No charts saved yet. Generating a reading automatically saves it here.</div>';
+                container.innerHTML = `<div class="empty-state">
+                    No charts saved yet.<br>
+                    <a href="demo.html">Run a reading</a> — it saves automatically.
+                </div>`;
                 return;
             }
 
-            container.innerHTML = charts.map((chart, index) => `
-                <div class="chart-card">
-                    <div onclick="loadChart(${index})">
-                        <div class="chart-name">${chart.name || "Untitled Chart"}</div>
+            container.innerHTML = charts.map((chart, index) => {
+                const realIndex = allCharts.indexOf(chart);
+                const label = chart.label || '';
+                return `
+                <div class="chart-card" id="chart-card-${realIndex}">
+                    <div onclick="loadChart(${realIndex})" style="cursor:pointer;">
+                        <div class="chart-name">${escHtml(chart.name || 'Untitled Chart')}</div>
                         <div class="chart-details">
-                            ${chart.city}, ${chart.date}<br>
-                            ${chart.time}
+                            ${escHtml(chart.city || '')}, ${escHtml(chart.date || '')}<br>
+                            ${escHtml(chart.time || '')}
+                        </div>
+                        <div>
+                            <span class="chart-label-badge ${label ? '' : 'empty'}"
+                                onclick="event.stopPropagation(); toggleLabelEdit(${realIndex})"
+                                title="Click to add/edit client label">
+                                ${label ? escHtml(label) : '+ label'}
+                            </span>
                         </div>
                         <div class="chart-meta">Saved: ${new Date(chart.saved_at).toLocaleDateString()}</div>
                     </div>
-                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-                        <button class="help-btn" style="font-size: 0.6rem; padding: 0.2rem 0.5rem;" onclick="downloadPdf(${index})">PDF</button>
-                        <button class="help-btn" style="font-size: 0.6rem; padding: 0.2rem 0.5rem; border-color: var(--danger); color: var(--danger);" onclick="deleteChart(${index})">DEL</button>
+                    <div id="label-edit-${realIndex}" class="label-edit-row">
+                        <input type="text" id="label-input-${realIndex}"
+                            value="${escHtml(label)}"
+                            placeholder="Client label (e.g. Etsy Order #1234)"
+                            onkeydown="if(event.key==='Enter') saveLabel(${realIndex})"
+                        />
+                        <div style="display:flex; gap:0.4rem; margin-top:0.3rem;">
+                            <button class="help-btn" style="font-size:0.65rem; padding:0.2rem 0.5rem;" onclick="saveLabel(${realIndex})">SAVE</button>
+                            <button class="help-btn" style="font-size:0.65rem; padding:0.2rem 0.5rem;" onclick="toggleLabelEdit(${realIndex})">CANCEL</button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                    <div class="chart-actions">
+                        <button class="help-btn" style="font-size:0.65rem; padding:0.2rem 0.5rem;" onclick="loadChart(${realIndex})">OPEN</button>
+                        <button class="help-btn" style="font-size:0.65rem; padding:0.2rem 0.5rem;" onclick="downloadPdf(${realIndex})">PDF</button>
+                        <button class="help-btn" style="font-size:0.65rem; padding:0.2rem 0.5rem; border-color:var(--danger); color:var(--danger);" onclick="deleteChart(${realIndex})">DEL</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function escHtml(s) {
+            return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function toggleLabelEdit(index) {
+            const row = document.getElementById(`label-edit-${index}`);
+            if (!row) return;
+            const isOpen = row.style.display === 'block';
+            row.style.display = isOpen ? 'none' : 'block';
+            if (!isOpen) {
+                const inp = document.getElementById(`label-input-${index}`);
+                if (inp) inp.focus();
+            }
+        }
+
+        async function saveLabel(index) {
+            const inp = document.getElementById(`label-input-${index}`);
+            if (!inp) return;
+            const newLabel = inp.value.trim();
+            const token = localStorage.getItem('cael_auth_token');
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}/label`), {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({ label: newLabel })
+                });
+                if (resp.ok) {
+                    allCharts[index].label = newLabel;
+                    renderCharts(allCharts);
+                } else {
+                    // Optimistic fallback — update local state even if API doesn't have the endpoint yet
+                    allCharts[index].label = newLabel;
+                    renderCharts(allCharts);
+                }
+            } catch (e) {
+                allCharts[index].label = newLabel;
+                renderCharts(allCharts);
+            }
         }
 
         async function loadChart(index) {
@@ -549,10 +745,7 @@
                 });
                 if (!resp.ok) throw new Error('Failed to load chart');
                 const data = await resp.json();
-                const chart = data.chart;
-
-                // Save to session storage for the calculator to pick up
-                sessionStorage.setItem('cael_pending_chart', JSON.stringify(chart));
+                sessionStorage.setItem('cael_pending_chart', JSON.stringify(data.chart));
                 window.location.href = 'demo.html?action=load';
             } catch (err) {
                 alert("Error loading chart: " + err.message);
@@ -566,12 +759,12 @@
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!resp.ok) throw new Error('Failed to generate PDF');
-
                 const blob = await resp.blob();
+                const chartName = (allCharts[index] && allCharts[index].name) ? allCharts[index].name.replace(/[^a-z0-9]/gi, '_').toLowerCase() : `chart_${index}`;
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `report_${index}.pdf`;
+                a.download = `${chartName}_reading.pdf`;
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
@@ -581,7 +774,8 @@
         }
 
         async function deleteChart(index) {
-            if (!confirm("Are you sure you want to delete this chart?")) return;
+            const name = (allCharts[index] && allCharts[index].name) ? allCharts[index].name : 'this chart';
+            if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
             const token = localStorage.getItem('cael_auth_token');
             try {
                 const resp = await fetch(apiUrl(`/api/v1/charts/saved/${index}`), {
@@ -589,255 +783,55 @@
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!resp.ok) throw new Error('Failed to delete chart');
-                loadProfile(); // Refresh
+                loadProfile();
             } catch (err) {
                 alert("Error deleting chart: " + err.message);
             }
         }
 
-        function logout() {
-            localStorage.removeItem('cael_auth_token');
-            localStorage.removeItem('cael_user');
-            window.location.href = 'index.html';
-        }
-
-        function renderBilling(sub) {
-            const summary = document.getElementById("billingSummary");
-            const status = document.getElementById("billingStatus");
-            const startSch = document.getElementById("startTrialScholarBtn");
-            const startP = document.getElementById("startTrialPractitionerBtn");
-            const startS = document.getElementById("startTrialStudioBtn");
-            const subSch = document.getElementById("subscribeScholarBtn");
-            const subP = document.getElementById("subscribePractitionerBtn");
-            const subS = document.getElementById("subscribeStudioBtn");
-
-            const plan = String(sub.plan_name || "free").toLowerCase();
-            const isTrial = !!sub.is_trial;
-            const trialEnds = sub.current_period_end ? new Date(sub.current_period_end).toLocaleDateString() : null;
-
-            // Determine what tier the user intended when signing up
-            let selectedPlan = "";
-            try { selectedPlan = (localStorage.getItem("cael_selected_plan") || "").toLowerCase().trim(); } catch (e) {}
-
-            if (summary) {
-                if (!checkoutGloballyEnabled) {
-                    summary.textContent = "Pilot build mode is active. Paid checkout is paused.";
-                } else if (isTrial && trialEnds) {
-                    summary.textContent = `Trialing ${plan.toUpperCase()}. Trial ends ${trialEnds}. Subscribe now to keep uninterrupted access.`;
-                } else if (plan === "free") {
-                    summary.textContent = "Start a free 14-day trial to unlock unlimited readings, PDF reports, and advanced timing techniques. No credit card required.";
-                } else {
-                    summary.textContent = `Plan: ${plan.toUpperCase()}.`;
-                }
-            }
-
-            if (status) {
-                status.textContent = !checkoutGloballyEnabled
-                    ? `Checkout disabled (${checkoutSalesMode} mode).`
-                    : "";
-            }
-
-            const canStartTrial = (plan === "free");
-            const canSubscribe = (plan !== "free") || canStartTrial || isTrial;
-
-            // Trial buttons — show for free users; default to Scholar unless they chose practitioner/studio
-            if (startSch) {
-                const showSch = canStartTrial && selectedPlan !== "practitioner" && selectedPlan !== "studio";
-                startSch.classList.toggle("hidden", !showSch);
-            }
-            if (startP) startP.classList.toggle("hidden", !canStartTrial || selectedPlan === "scholar");
-            if (startS) startS.classList.toggle("hidden", !canStartTrial || selectedPlan !== "studio");
-
-            // Subscribe buttons — show relevant tier
-            if (subSch) {
-                subSch.classList.toggle("hidden", !canSubscribe || plan === "scholar" || plan === "practitioner" || plan === "studio");
-                subSch.disabled = !checkoutGloballyEnabled;
-                subSch.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
-            }
-            if (subP) {
-                subP.classList.toggle("hidden", !canSubscribe || selectedPlan === "scholar");
-                subP.disabled = !checkoutGloballyEnabled;
-                subP.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
-            }
-            if (subS) {
-                subS.classList.toggle("hidden", !canSubscribe || selectedPlan !== "studio");
-                subS.disabled = !checkoutGloballyEnabled;
-                subS.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
-            }
-        }
-
-        async function startTrialTier(tier) {
-            const status = document.getElementById("billingStatus");
-            const token = localStorage.getItem('cael_auth_token');
-            if (status) status.textContent = "Starting trial...";
-            try {
-                const resp = await fetch(apiUrl(`/api/v1/billing/start-trial?tier=${encodeURIComponent(tier)}`), {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        // CSRF defense-in-depth: required for cross-origin POSTs.
-                        "X-Requested-With": "XMLHttpRequest",
-                        "Content-Type": "application/json"
-                    }
-                });
-                const data = await resp.json();
-                if (!resp.ok) throw new Error(data.detail || "Failed to start trial");
-                if (status) status.textContent = `Trial started: ${String(data.plan_tier || tier).toUpperCase()}`;
-                setTimeout(loadProfile, 800);
-            } catch (e) {
-                if (status) status.textContent = `Error: ${e.message}`;
-            }
-        }
-
-        async function subscribeTier(tier) {
-            const status = document.getElementById("billingStatus");
-            const token = localStorage.getItem('cael_auth_token');
-            if (!checkoutGloballyEnabled) {
-                if (status) status.textContent = "Checkout is paused in pilot mode while Etsy workflow features are being finalized.";
-                return;
-            }
-            if (status) status.textContent = "Opening checkout...";
-            try {
-                const resp = await fetch(apiUrl(`/api/v1/billing/create-checkout-session`), {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        tier,
-                        annual: false,
-                        chart_request: null,
-                        success_url: window.location.origin + "/success.html",
-                        cancel_url: window.location.href
-                    })
-                });
-                const data = await resp.json();
-                if (!resp.ok) throw new Error(data.detail || "Checkout failed");
-                if (data.url) window.location.href = data.url;
-            } catch (e) {
-                if (status) status.textContent = `Error: ${e.message}`;
-            }
-        }
-
-        async function loadApiKeys(sub) {
-            const section = document.getElementById("apiKeysSection");
-            const list = document.getElementById("apiKeysList");
-            const status = document.getElementById("apiKeyCreateStatus");
-            if (!section || !list) return;
-
-            const plan = String(sub.plan_name || "free").toLowerCase();
-            const allowed = (plan === "practitioner" || plan === "studio") && (sub.status === "active" || sub.status === "trial");
-            section.classList.toggle("hidden", !allowed);
-            if (!allowed) return;
-
-            try {
-                const token = localStorage.getItem('cael_auth_token');
-                const resp = await fetch(apiUrl('/api/v1/developer/keys'), {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (!resp.ok) throw new Error("Failed to load API keys");
-                const keys = await resp.json();
-                if (!Array.isArray(keys) || keys.length === 0) {
-                    list.innerHTML = '<div class="panel-card">No API keys yet.</div>';
-                    return;
-                }
-
-                list.innerHTML = keys.map(k => `
-                    <div class="panel-card">
-                        <h4 style="margin-bottom: 0.5rem;">${(k.name || "API Key")}</h4>
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">
-                            Created: ${k.created_at ? new Date(k.created_at).toLocaleDateString() : "N/A"}<br>
-                            Last used: ${k.last_used ? new Date(k.last_used).toLocaleDateString() : "Never"}<br>
-                            Prefix: ${k.prefix || "sk_live_..."}
-                        </p>
-                        <button class="help-btn" style="border-color: var(--danger); color: var(--danger); font-size: 0.8rem;" onclick="revokeApiKey('${k.id}')">REVOKE</button>
-                    </div>
-                `).join('');
-
-                if (status) status.textContent = "";
-            } catch (e) {
-                if (status) status.textContent = `Error: ${e.message}`;
-            }
-        }
-
-        async function createApiKey() {
-            const status = document.getElementById("apiKeyCreateStatus");
-            const nameEl = document.getElementById("apiKeyName");
-            const btn = document.getElementById("createApiKeyBtn");
-            const name = (nameEl ? nameEl.value : "").trim();
-            if (!name) {
-                if (status) status.textContent = "Enter a key name.";
-                return;
-            }
-
-            if (btn) btn.disabled = true;
-            if (status) status.textContent = "Creating...";
-            try {
-                const token = localStorage.getItem('cael_auth_token');
-                const resp = await fetch(apiUrl('/api/v1/developer/keys'), {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                    body: JSON.stringify({ name })
-                });
-                const data = await resp.json();
-                if (!resp.ok) throw new Error(data.detail || "Failed to create key");
-
-                if (status) status.textContent = `Created. Copy now: ${data.key}`;
-                if (nameEl) nameEl.value = "";
-                setTimeout(loadProfile, 800);
-            } catch (e) {
-                if (status) status.textContent = `Error: ${e.message}`;
-            } finally {
-                if (btn) btn.disabled = false;
-            }
-        }
-
-        async function revokeApiKey(id) {
-            if (!confirm("Revoke this API key? This cannot be undone.")) return;
-            const status = document.getElementById("apiKeyCreateStatus");
-            if (status) status.textContent = "Revoking...";
-            try {
-                const token = localStorage.getItem('cael_auth_token');
-                const resp = await fetch(apiUrl(`/api/v1/developer/keys/${id}`), {
-                    method: "DELETE",
-                    headers: { "Authorization": `Bearer ${token}` }
-                });
-                const data = await resp.json();
-                if (!resp.ok) throw new Error(data.detail || "Failed to revoke key");
-                setTimeout(loadProfile, 500);
-            } catch (e) {
-                if (status) status.textContent = `Error: ${e.message}`;
-            }
-        }
+        // ─── Bulk PDF Tool ────────────────────────────────────────────────────
 
         function renderBulkExports(sub) {
-            const section = document.getElementById("bulkExportsSection");
-            if (!section) return;
             const plan = String(sub.plan_name || "free").toLowerCase();
-            const allowed = (plan === "practitioner" || plan === "studio") && (sub.status === "active" || sub.status === "trial");
-            section.classList.toggle("hidden", !allowed);
+            const allowed = (plan === "practitioner" || plan === "studio") &&
+                            (sub.status === "active" || sub.status === "trial");
+            const active = document.getElementById('batchToolActive');
+            const teaser = document.getElementById('batchToolTeaser');
+            if (active) active.classList.toggle('hidden', !allowed);
+            if (teaser) teaser.classList.toggle('hidden', allowed);
+        }
+
+        function downloadBulkTemplate() {
+            const csv = [
+                'name,date,time,city,state',
+                'Jane Smith,1990-06-15,14:30,New York,NY',
+                'John Doe,1985-03-22,09:15,Los Angeles,CA',
+                'Alex Taylor,2000-11-08,00:00,Chicago,IL'
+            ].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'astroforge_batch_template.csv';
+            document.body.appendChild(a);
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
         function parseCsv(text) {
-            // Minimal CSV parser: supports quoted fields, commas, and newlines.
             const rows = [];
-            let row = [];
-            let cur = "";
-            let inQuotes = false;
+            let row = [], cur = "", inQuotes = false;
             for (let i = 0; i < text.length; i++) {
-                const c = text[i];
-                const next = text[i + 1];
+                const c = text[i], next = text[i + 1];
                 if (inQuotes) {
                     if (c === '"' && next === '"') { cur += '"'; i++; continue; }
                     if (c === '"') { inQuotes = false; continue; }
-                    cur += c;
-                    continue;
+                    cur += c; continue;
                 }
                 if (c === '"') { inQuotes = true; continue; }
                 if (c === ',') { row.push(cur); cur = ""; continue; }
                 if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ""; continue; }
-                if (c === '\r') { continue; }
+                if (c === '\r') continue;
                 cur += c;
             }
             if (cur.length || row.length) { row.push(cur); rows.push(row); }
@@ -887,10 +881,11 @@
                 const idxCity = findHeaderIndex(header, ["city", "birth_city", "place_city"]);
                 const idxState = findHeaderIndex(header, ["state", "birth_state", "province", "region", "country"]);
                 const idxPlace = findHeaderIndex(header, ["birth_place", "birth_location", "location", "place"]);
+
                 if ([idxName, idxDate, idxTime].some(i => i < 0) || (idxCity < 0 && idxPlace < 0)) {
                     throw new Error(
-                        "Missing required headers. Need name/date/time and either city or birth_place. " +
-                        "Examples: name,date,time,city,state OR client_name,birth_date,birth_time,birth_place"
+                        "Missing required headers. Need: name, date, time, and city or birth_place.\n" +
+                        "Example: name,date,time,city,state"
                     );
                 }
 
@@ -904,21 +899,27 @@
                         name: String((idxName >= 0 ? r[idxName] : "") || "").trim() || "Native",
                         date: String(r[idxDate] || "").trim(),
                         time: String(r[idxTime] || "").trim(),
-                        city,
-                        state,
+                        city, state,
                         house_system: "W",
                         zodiac_system: "tropical"
                     };
-                    if (!item.date || !item.time || !item.city) continue;
+                    if (!item.date || !item.city) continue;
+                    const fallback = document.getElementById('bulkTimeFallback');
+                    if (!item.time && fallback && fallback.checked) item.time = "12:00";
+                    if (!item.time) continue;
                     items.push(item);
                 }
 
-                if (items.length === 0) throw new Error("No valid rows found (need date/time/city).");
-                if (status) status.textContent = `Generating ${items.length} PDFs...`;
+                if (items.length === 0) throw new Error("No valid rows found. Each row needs date and city.");
+
+                if (status) status.textContent = `Generating ${items.length} PDF${items.length === 1 ? '' : 's'}... this may take a moment.`;
 
                 const resp = await fetch(apiUrl("/api/v1/charts/bulk/pdf"), {
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                     body: JSON.stringify({ items, filename_prefix: "client_reports" })
                 });
 
@@ -931,15 +932,212 @@
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.href = url;
-                a.download = "client_reports_pdf_pack.zip";
+                a.download = "astroforge_pdf_pack.zip";
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
-                if (status) status.textContent = "Downloaded ZIP.";
+                if (status) status.textContent = `✓ Downloaded ${items.length} PDF${items.length === 1 ? '' : 's'} as ZIP.`;
             } catch (e) {
                 if (status) status.textContent = `Error: ${e.message}`;
             } finally {
                 if (btn) btn.disabled = false;
+            }
+        }
+
+        // ─── Billing ──────────────────────────────────────────────────────────
+
+        function logout() {
+            localStorage.removeItem('cael_auth_token');
+            localStorage.removeItem('cael_user');
+            window.location.href = 'index.html';
+        }
+
+        function renderBilling(sub) {
+            const summary = document.getElementById("billingSummary");
+            const status = document.getElementById("billingStatus");
+            const startSch = document.getElementById("startTrialScholarBtn");
+            const startP = document.getElementById("startTrialPractitionerBtn");
+            const startS = document.getElementById("startTrialStudioBtn");
+            const subSch = document.getElementById("subscribeScholarBtn");
+            const subP = document.getElementById("subscribePractitionerBtn");
+            const subS = document.getElementById("subscribeStudioBtn");
+
+            const plan = String(sub.plan_name || "free").toLowerCase();
+            const isTrial = !!sub.is_trial;
+            const trialEnds = sub.current_period_end ? new Date(sub.current_period_end).toLocaleDateString() : null;
+
+            let selectedPlan = "";
+            try { selectedPlan = (localStorage.getItem("cael_selected_plan") || "").toLowerCase().trim(); } catch (e) {}
+
+            if (summary) {
+                if (!checkoutGloballyEnabled) {
+                    summary.textContent = "Pilot build mode is active. Paid checkout is paused.";
+                } else if (isTrial && trialEnds) {
+                    summary.textContent = `Trialing ${plan.toUpperCase()}. Trial ends ${trialEnds}. Subscribe now to keep access.`;
+                } else if (plan === "free") {
+                    summary.textContent = "Start a free 14-day trial to unlock unlimited readings, PDF reports, and the Etsy batch tool. No credit card required.";
+                } else {
+                    summary.textContent = `Active plan: ${plan.toUpperCase()}.`;
+                }
+            }
+
+            if (status) {
+                status.textContent = !checkoutGloballyEnabled ? `Checkout disabled (${checkoutSalesMode} mode).` : "";
+            }
+
+            const canStartTrial = (plan === "free");
+            const canSubscribe = (plan !== "free") || canStartTrial || isTrial;
+
+            if (startSch) startSch.classList.toggle("hidden", !canStartTrial || selectedPlan === "practitioner" || selectedPlan === "studio");
+            if (startP) startP.classList.toggle("hidden", !canStartTrial || selectedPlan === "scholar");
+            if (startS) startS.classList.toggle("hidden", !canStartTrial || selectedPlan !== "studio");
+
+            if (subSch) {
+                subSch.classList.toggle("hidden", !canSubscribe || plan === "scholar" || plan === "practitioner" || plan === "studio");
+                subSch.disabled = !checkoutGloballyEnabled;
+                subSch.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
+            }
+            if (subP) {
+                subP.classList.toggle("hidden", !canSubscribe || selectedPlan === "scholar");
+                subP.disabled = !checkoutGloballyEnabled;
+                subP.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
+            }
+            if (subS) {
+                subS.classList.toggle("hidden", !canSubscribe || selectedPlan !== "studio");
+                subS.disabled = !checkoutGloballyEnabled;
+                subS.style.opacity = checkoutGloballyEnabled ? "1" : "0.55";
+            }
+        }
+
+        async function startTrialTier(tier) {
+            const status = document.getElementById("billingStatus") || document.getElementById("batchTeaserStatus");
+            const token = localStorage.getItem('cael_auth_token');
+            if (status) status.textContent = "Starting trial...";
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/billing/start-trial?tier=${encodeURIComponent(tier)}`), {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/json"
+                    }
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Failed to start trial");
+                if (status) status.textContent = `Trial started: ${String(data.plan_tier || tier).toUpperCase()}`;
+                setTimeout(loadProfile, 800);
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
+        async function subscribeTier(tier) {
+            const status = document.getElementById("billingStatus");
+            const token = localStorage.getItem('cael_auth_token');
+            if (!checkoutGloballyEnabled) {
+                if (status) status.textContent = "Checkout is paused in pilot mode.";
+                return;
+            }
+            if (status) status.textContent = "Opening checkout...";
+            try {
+                const resp = await fetch(apiUrl(`/api/v1/billing/create-checkout-session`), {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({
+                        tier, annual: false, chart_request: null,
+                        success_url: window.location.origin + "/success.html",
+                        cancel_url: window.location.href
+                    })
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Checkout failed");
+                if (data.url) window.location.href = data.url;
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
+        async function loadApiKeys(sub) {
+            const section = document.getElementById("apiKeysSection");
+            const list = document.getElementById("apiKeysList");
+            const status = document.getElementById("apiKeyCreateStatus");
+            if (!section || !list) return;
+
+            const plan = String(sub.plan_name || "free").toLowerCase();
+            const allowed = (plan === "practitioner" || plan === "studio") && (sub.status === "active" || sub.status === "trial");
+            section.classList.toggle("hidden", !allowed);
+            if (!allowed) return;
+
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl('/api/v1/developer/keys'), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) throw new Error("Failed to load API keys");
+                const keys = await resp.json();
+                if (!Array.isArray(keys) || keys.length === 0) {
+                    list.innerHTML = '<div class="panel-card">No API keys yet.</div>';
+                    return;
+                }
+                list.innerHTML = keys.map(k => `
+                    <div class="panel-card">
+                        <h4 style="margin-bottom:0.5rem;">${escHtml(k.name || "API Key")}</h4>
+                        <p style="font-size:0.8rem; color:var(--text-muted);">
+                            Created: ${k.created_at ? new Date(k.created_at).toLocaleDateString() : "N/A"}<br>
+                            Last used: ${k.last_used ? new Date(k.last_used).toLocaleDateString() : "Never"}<br>
+                            Prefix: ${escHtml(k.prefix || "sk_live_...")}
+                        </p>
+                        <button class="help-btn" style="border-color:var(--danger);color:var(--danger);font-size:0.8rem;" onclick="revokeApiKey('${escHtml(k.id)}')">REVOKE</button>
+                    </div>
+                `).join('');
+                if (status) status.textContent = "";
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            }
+        }
+
+        async function createApiKey() {
+            const status = document.getElementById("apiKeyCreateStatus");
+            const nameEl = document.getElementById("apiKeyName");
+            const btn = document.getElementById("createApiKeyBtn");
+            const name = (nameEl ? nameEl.value : "").trim();
+            if (!name) { if (status) status.textContent = "Enter a key name."; return; }
+            if (btn) btn.disabled = true;
+            if (status) status.textContent = "Creating...";
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl('/api/v1/developer/keys'), {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ name })
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Failed to create key");
+                if (status) status.textContent = `Created. Copy now — shown once: ${data.key}`;
+                if (nameEl) nameEl.value = "";
+                setTimeout(loadProfile, 800);
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        async function revokeApiKey(id) {
+            if (!confirm("Revoke this API key? This cannot be undone.")) return;
+            const status = document.getElementById("apiKeyCreateStatus");
+            if (status) status.textContent = "Revoking...";
+            try {
+                const token = localStorage.getItem('cael_auth_token');
+                const resp = await fetch(apiUrl(`/api/v1/developer/keys/${id}`), {
+                    method: "DELETE",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.detail || "Failed to revoke key");
+                setTimeout(loadProfile, 500);
+            } catch (e) {
+                if (status) status.textContent = `Error: ${e.message}`;
             }
         }
 

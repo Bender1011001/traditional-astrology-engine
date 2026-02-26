@@ -361,7 +361,7 @@ async def download_chart_pdf(chart_index: int, current_user: User = Depends(get_
         
         # Create filename from chart name or date
         chart_name = chart_meta.get("name", "chart").replace(" ", "_")
-        filename = f"codex_caelestis_{chart_name}.pdf"
+        filename = f"astroforge_{chart_name}.pdf"
         
         return StreamingResponse(
             pdf_buffer,
@@ -399,9 +399,44 @@ async def delete_saved_chart(
     return {"success": True, "message": "Chart deleted"}
 
 
+class ChartLabelUpdate(BaseModel):
+    label: str = ""
+
+
+@router.patch("/saved/{chart_index}/label")
+async def update_chart_label(
+    chart_index: int,
+    payload: ChartLabelUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Update the client label / tag on a saved chart.
+    Used by the dashboard to organise Etsy orders and client work.
+    """
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+
+    charts = list(current_user.charts_saved or [])
+
+    if chart_index < 0 or chart_index >= len(charts):
+        raise HTTPException(status_code=404, detail="Chart not found")
+
+    # Sanitise: strip whitespace, cap at 80 chars
+    clean_label = (payload.label or "").strip()[:80]
+    charts[chart_index] = {**charts[chart_index], "label": clean_label}
+
+    # SQLAlchemy won't detect in-place mutation of JSON columns, so reassign
+    current_user.charts_saved = charts
+    db.add(current_user)
+    db.commit()
+
+    return {"success": True, "index": chart_index, "label": clean_label}
+
+
 class BulkPdfRequest(BaseModel):
     items: _List[ChartRequest]
-    filename_prefix: str = "codex_caelestis"
+    filename_prefix: str = "astroforge"
 
 
 def _safe_filename(s: str) -> str:

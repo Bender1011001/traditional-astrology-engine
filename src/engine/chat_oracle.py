@@ -141,7 +141,7 @@ def get_chat_response(query: str, context: str) -> str:
         top_p = float(os.getenv("OPENROUTER_TOP_P", "0.9"))
 
         system_prompt = (
-            "You are the 'Codex Caelestis', a highly advanced AI Astrology Oracle. "
+            "You are the 'AstroForge', a highly advanced AI Astrology Oracle. "
             "You have access to the 'Binder1.txt' source material for traditional astrology.\n\n"
             "SOURCE MATERIAL (Binder1.txt):\n"
             f"{BINDER_CONTEXT[:50000]}... (TRUNCATED FOR SYSTEM PROMPT)\n\n" # We'll handle full context in the user message for better attention

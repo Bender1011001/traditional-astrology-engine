@@ -148,7 +148,7 @@ class PDFReportGenerator:
         story = []
 
         # Title Page / Header
-        title_text = "Codex Caelestis: Calibration Audit" if self.tier == "CALIBRATION" else "Codex Caelestis: Forensic Astrology Report"
+        title_text = "AstroForge: Calibration Audit" if self.tier == "CALIBRATION" else "AstroForge: Forensic Astrology Report"
         story.append(Paragraph(title_text, self.styles['Title']))
         story.append(Spacer(1, 12))
 

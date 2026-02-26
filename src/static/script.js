@@ -765,7 +765,7 @@ if (exportPdfBtn) {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "codex_caelestis_report.pdf";
+            a.download = "astroforge_report.pdf";
             document.body.appendChild(a);
             a.click();
             a.remove();

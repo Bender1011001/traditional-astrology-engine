@@ -17,15 +17,15 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Traditional Astrology Calculation Engine | Codex Caelestis</title>
-  <meta name="description" content="Codex Caelestis is a deterministic traditional astrology calculation engine for professional practitioners. Advanced timing, lots, fixed stars, primary directions, and auditable rule-ledger exports." />
-  <meta name="keywords" content="traditional astrology software, parans, zodiacal releasing, primary directions, monomoiria, dodecatemoria, hermetic lots, forensic lots" />
+  <title>Astrology PDF Generator for Etsy Sellers & Practitioners | AstroForge</title>
+  <meta name="description" content="Generate professional natal chart reading PDFs in seconds. Upload your Etsy orders as a CSV and download a ZIP of client-ready PDF reports. Free to try — no account needed." />
+  <meta name="keywords" content="astrology PDF generator, natal chart PDF maker, astrology reading tool, Etsy astrology seller, birth chart PDF, astrology report software, natal chart generator" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#f6f0e6" />
   <link rel="canonical" href="https://traditional-astrology.com/" />
 
-  <meta property="og:title" content="Traditional Astrology Calculation Engine | Codex Caelestis" />
-  <meta property="og:description" content="Calculation infrastructure for serious practitioners: deterministic rules, Swiss Ephemeris precision, and an auditable rule ledger." />
+  <meta property="og:title" content="Astrology PDF Generator for Etsy Sellers & Practitioners | AstroForge" />
+  <meta property="og:description" content="Upload birth data, get professional astrology reading PDFs. Built for Etsy sellers: batch CSV upload → ZIP of client-ready reports." />
   <meta property="og:image" content="https://traditional-astrology.com/og-card.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://traditional-astrology.com/" />
@@ -33,32 +33,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260210b2b" />
-  <script src="config.js?v=20260212azure2"></script>
+  <link rel="stylesheet" href="style.css?v=20260224pivot" />
+  <script src="config.js?v=20260224pivot"></script>
 
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Codex Caelestis",
+      "name": "AstroForge",
       "url": "https://traditional-astrology.com/",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "Deterministic traditional astrology calculation engine for practitioners. Exports auditable rule ledgers and technical artifacts.",
+      "description": "Professional astrology PDF generator for Etsy sellers and practitioners. Upload birth data as CSV, generate a ZIP of client-ready natal chart reading PDFs.",
       "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "3 free readings, no signup required."
+        },
         {
           "@type": "Offer",
           "name": "Scholar",
           "price": "9.99",
           "priceCurrency": "USD",
-          "description": "Unlimited readings, full forensic reports, PDF export. 14-day free trial."
+          "description": "Unlimited readings, full PDF reports, saved chart history. 14-day free trial."
         },
         {
           "@type": "Offer",
           "name": "Practitioner",
           "price": "29.00",
           "priceCurrency": "USD",
-          "description": "Everything in Scholar plus B2B API access, white-label PDFs, and priority support."
+          "description": "Everything in Scholar plus bulk CSV upload, ZIP PDF packs, API access, and white-label exports."
         }
       ]
     }
@@ -80,222 +87,195 @@
   <main id="main" class="container">
     <header>
       <div class="header-content">
-        <p class="pill-label">Traditional-Astrology.com</p>
-        <h1>TRADITIONAL ASTROLOGY CALCULATION ENGINE</h1>
+        <p class="pill-label">AstroForge</p>
+        <h1>GENERATE PROFESSIONAL ASTROLOGY READING PDFs</h1>
         <div class="ornament"></div>
-        <p class="subtitle">For serious practitioners who need advanced, deterministic technique coverage.</p>
+        <p class="subtitle">For Etsy sellers, independent practitioners, and anyone delivering chart readings at scale.</p>
 
         <nav class="header-actions nav-primary" aria-label="Primary">
           <a class="help-btn" href="index.html" aria-current="page">Home</a>
+          <a class="help-btn" href="gig-economy.html">For Etsy Sellers</a>
+          <a class="help-btn" href="demo.html">Try Free</a>
           <a class="help-btn" href="techniques.html">Techniques</a>
-          <a class="help-btn" href="documentation.html">Documentation</a>
-          <a class="help-btn" href="demo.html">Demo</a>
-          <a class="help-btn" href="gig-economy.html">Gig Economy</a>
+          <a class="help-btn" href="documentation.html">Docs</a>
           <a class="help-btn" href="developer.html">API</a>
           <a class="help-btn" href="#pricing">Pricing</a>
-          <a class="help-btn" href="about.html">About</a>
-          <a class="help-btn" href="faq.html">FAQ</a>
           <a class="help-btn" href="blog.html">Blog</a>
+          <a class="help-btn" href="faq.html">FAQ</a>
           <a class="help-btn" href="login.html">Log in</a>
-          <a class="help-btn highlight-btn" href="signup.html">Get Started</a>
+          <a class="help-btn highlight-btn" href="signup.html">Get Started Free</a>
           <button id="themeToggle" class="help-btn theme-toggle" type="button" aria-pressed="false">Dark mode</button>
         </nav>
 
         <div class="hero-value-block">
-          <div class="hero-value-title">CALCULATION ENGINE, NOT AI CHATBOT.</div>
+          <div class="hero-value-title">BIRTH DATA IN. PROFESSIONAL PDF OUT.</div>
           <p class="hero-value-text">
-            Swiss Ephemeris precision + deterministic traditional rules.
-            Every chart output includes an auditable Rule Ledger for practitioner verification.
+            Enter a name, birth date, time, and place — AstroForge calculates a complete natal chart reading
+            and exports a professional PDF your clients can actually use.
+            No astrology knowledge required on your end.
           </p>
           <div class="hero-value-sub">
-            Parans. Zodiacal Releasing (L1/L2 + Loosing of the Bond). Primary Directions. Complete lot systems.
+            Selling readings on Etsy? Upload your orders as a CSV and download a ZIP of PDFs in one click.
             <br />
-            Sect always matters.
+            Running one-off readings? Try it free right now — no account needed.
           </div>
           <div class="hero-actions justify-center mt-8">
-            <a class="btn-primary" href="techniques.html">See All Techniques</a>
-            <a class="btn-secondary" href="documentation.html">Technical Documentation</a>
-            <a class="btn-secondary" href="demo.html">Try Free Calculation</a>
+            <a class="btn-primary" href="demo.html">Try Free — No Signup</a>
+            <a class="btn-secondary" href="gig-economy.html">Etsy Seller Workflow</a>
+            <a class="btn-secondary" href="signup.html">Start 14-Day Trial</a>
           </div>
         </div>
 
         <div class="proof-strip">
           <div class="proof-card">
+            <span class="proof-icon">⚡</span>
+            <div class="proof-title">Seconds per Report</div>
+            <p>Enter birth data and get a full PDF reading. No software to install, no manual chart building.</p>
+          </div>
+          <div class="proof-card">
+            <span class="proof-icon">📦</span>
+            <div class="proof-title">Batch for Etsy Orders</div>
+            <p>Upload a CSV of client birth data. Download a ZIP of PDFs ready to send — one per client.</p>
+          </div>
+          <div class="proof-card">
             <span class="proof-icon">📜</span>
-            <div class="proof-title">Source Anchored</div>
-            <p>Every major judgment is traceable to named traditional sources in the rule ledger.</p>
-          </div>
-          <div class="proof-card">
-            <span class="proof-icon">🧮</span>
-            <div class="proof-title">Deterministic</div>
-            <p>Same inputs = same calculations. No probabilistic interpretation layer.</p>
-          </div>
-          <div class="proof-card">
-            <span class="proof-icon">⚙️</span>
-            <div class="proof-title">B2B Friendly</div>
-            <p>Designed for practitioner workflows: exports, integration paths, and repeatable results.</p>
+            <div class="proof-title">Not AI Guesswork</div>
+            <p>Calculated from real ephemeris data using traditional techniques. Consistent, verifiable outputs every time.</p>
           </div>
         </div>
       </div>
     </header>
 
-    <section class="basic-view" id="unique-techniques">
-      <h2 class="section-title">TECHNIQUES OTHER SOFTWARE DOESN'T HAVE</h2>
-      <p class="section-subtitle">Advanced methods that are rarely implemented due to complexity, not importance.</p>
+    <section class="basic-view" id="how-it-works">
+      <h2 class="section-title">HOW IT WORKS</h2>
+      <p class="section-subtitle">Three steps from order to delivery.</p>
       <div class="technique-grid">
         <div class="panel-card">
-          <h4>✓ Parans (Paranatellonta)</h4>
-          <p>Fixed stars rising/culminating/setting with planets using spherical astronomy.</p>
+          <h4>1. Enter Birth Data</h4>
+          <p>Name, date, time, and place. That's it. Individual readings or bulk CSV upload for multiple clients at once.</p>
         </div>
         <div class="panel-card">
-          <h4>✓ ZR L1/L2 + Loosing of the Bond</h4>
-          <p>Full releasing engine including bond logic and structured period reporting.</p>
+          <h4>2. Engine Calculates</h4>
+          <p>Full natal chart, dignities, lots, aspects, timing techniques — all computed deterministically from real ephemeris data.</p>
         </div>
         <div class="panel-card">
-          <h4>✓ Primary Directions (Placidus Semi-Arc)</h4>
-          <p>Direction arcs to angles and distributor logic for current periods.</p>
-        </div>
-        <div class="panel-card">
-          <h4>✓ Daily Profections</h4>
-          <p>Daily stepping layered over monthly and annual profections.</p>
-        </div>
-        <div class="panel-card">
-          <h4>✓ Monomoiria + Dodecatemoria</h4>
-          <p>Classical degree and subdivision systems for fine-grained technique work.</p>
-        </div>
-        <div class="panel-card">
-          <h4>✓ Complete Lots (Sect-Sensitive)</h4>
-          <p>Hermetic + forensic lots with night/day reversals enforced by the engine.</p>
+          <h4>3. Download PDF</h4>
+          <p>A professional reading PDF is ready immediately. Bulk orders: one ZIP file containing a PDF for every client row in your CSV.</p>
         </div>
       </div>
       <div class="hero-actions mt-8" style="justify-content:center;">
-        <a class="btn-secondary" href="techniques.html">View Complete Technique List →</a>
+        <a class="btn-primary" href="demo.html">Run a Free Reading Now</a>
+        <a class="btn-secondary" href="gig-economy.html">See the Etsy Batch Workflow →</a>
       </div>
     </section>
 
-    <section class="basic-view" id="comparison">
-      <h2 class="section-title">CAPABILITY COMPARISON</h2>
-      <div class="comparison-table-wrapper">
-        <table class="comparison-table" aria-label="Capability Comparison">
-          <thead>
-            <tr>
-              <th>Technique</th>
-              <th>Solar Fire</th>
-              <th>Astro Gold</th>
-              <th>Codex Caelestis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Annual Profections</td>
-              <td class="check">✓</td>
-              <td class="check">✓</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Daily Profections</td>
-              <td class="cross">✗</td>
-              <td class="cross">✗</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Zodiacal Releasing (L1/L2 + Bond)</td>
-              <td>Partial</td>
-              <td class="cross">✗</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Parans (Paranatellonta)</td>
-              <td class="cross">✗</td>
-              <td class="cross">✗</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Primary Directions (Placidus)</td>
-              <td class="check">✓</td>
-              <td>Partial</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Monomoiria + Dodecatemoria</td>
-              <td class="cross">✗</td>
-              <td class="cross">✗</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Rule Ledger Export (JSON)</td>
-              <td class="cross">✗</td>
-              <td class="cross">✗</td>
-              <td class="check">✓</td>
-            </tr>
-          </tbody>
-        </table>
+    <section class="basic-view" id="what-you-get">
+      <h2 class="section-title">WHAT YOUR CLIENTS RECEIVE</h2>
+      <p class="section-subtitle">Professional reports that look like you spent hours — because the engine did.</p>
+      <div class="technique-grid">
+        <div class="panel-card">
+          <h4>Full Natal Chart Reading</h4>
+          <p>Planets, signs, houses, aspects, and essential dignities — presented in plain language your clients understand.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Timing &amp; Life Periods</h4>
+          <p>Annual profections, Firdaria, planetary periods — showing your clients what phase of life they are in right now.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Advanced Techniques</h4>
+          <p>Zodiacal Releasing, Primary Directions, Lots, Parans — techniques top practitioners charge a premium for.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Clean, Downloadable PDF</h4>
+          <p>Ready to send directly to your Etsy buyer, email, or deliver through any platform. No formatting work on your end.</p>
+        </div>
       </div>
-      <p class="text-muted text-sm" style="margin-top: 1rem;">
-        Note: Solar Fire and Astro Gold are strong standard tools. Codex Caelestis focuses on advanced traditional techniques with deterministic traceability.
-      </p>
     </section>
 
-    <section class="basic-view" id="methodology">
-      <h2 class="section-title">DETERMINISTIC OUTPUTS</h2>
-      <p class="section-subtitle">We do not generate astrology with an LLM. We compute it.</p>
+    <section class="basic-view" id="for-sellers">
+      <h2 class="section-title">BUILT FOR THE VOLUME SELLER</h2>
+      <p class="section-subtitle">If you sell readings on Etsy, Fiverr, or any platform, this is for you.</p>
+      <div class="criteria-grid">
+        <div class="panel-card">
+          <h4>Etsy PDF Sellers</h4>
+          <p>Take your Etsy order CSV, drop it in, get a ZIP of PDFs back. Stop doing this by hand for every order.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Independent Practitioners</h4>
+          <p>Run readings for individual clients in seconds. Save their charts, pull PDFs on demand.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Astrology Teachers</h4>
+          <p>Generate consistent chart examples for students. Every chart calculated the same way, every time.</p>
+        </div>
+        <div class="panel-card">
+          <h4>Studios &amp; Teams</h4>
+          <p>Standardize output across multiple practitioners. API access for custom integrations.</p>
+        </div>
+      </div>
+      <div class="hero-actions mt-8" style="justify-content:center;">
+        <a class="btn-secondary" href="gig-economy.html">See Etsy Seller Workflow →</a>
+      </div>
+    </section>
+
+    <section class="basic-view" id="not-ai">
+      <h2 class="section-title">NOT AI. ACTUALLY CALCULATED.</h2>
+      <p class="section-subtitle">Your clients deserve consistent, defensible readings — not hallucinated output.</p>
       <div class="comparison-table-wrapper">
         <table class="comparison-table" aria-label="Methodology Comparison">
           <thead>
             <tr>
-              <th>Typical AI Astrology</th>
-              <th>Codex Caelestis</th>
+              <th>AI Astrology Chatbots</th>
+              <th>AstroForge</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Probabilistic interpretation</td>
-              <td>Deterministic calculations</td>
+              <td>Makes up placements and timing</td>
+              <td>Calculated from Swiss Ephemeris data</td>
             </tr>
             <tr>
-              <td>Opaque training data</td>
-              <td>Rule ledger with named sources</td>
+              <td>Different output every time</td>
+              <td>Same birth data = same chart, every time</td>
             </tr>
             <tr>
-              <td>Inconsistent outputs</td>
-              <td>Reproducible outputs</td>
+              <td>Can't explain its reasoning</td>
+              <td>Every judgment traceable to named sources</td>
             </tr>
             <tr>
-              <td>Can hallucinate</td>
-              <td>Verifiable exports (JSON ledger)</td>
+              <td>No real astrology methodology</td>
+              <td>Traditional techniques from classical texts</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="lock-disclaimer">
-        <strong>Historical Use Only:</strong> Codex Caelestis provides traditional calculations and technical exports. No medical, legal, or financial advice.
+        <strong>Historical Use Only:</strong> AstroForge provides traditional calculations and technical exports. No medical, legal, or financial advice.
       </div>
     </section>
 
     <section class="basic-view" id="pricing">
       <h2 class="section-title">PRICING</h2>
-      <p class="section-subtitle">Start free. Upgrade when you need more.</p>
+      <p class="section-subtitle">Try free. Upgrade when your order volume demands it.</p>
 
       <div class="offer-grid pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
 
-        <!-- Free / Try it -->
         <div class="panel-card">
           <div class="pricing-card">
             <div class="tier-label">Try It</div>
             <h3>Free</h3>
             <div class="price">$0</div>
             <ul class="features">
-              <li><strong>3 free readings</strong> (no signup)</li>
+              <li><strong>3 free readings</strong> — no signup</li>
               <li>Full natal chart calculations</li>
-              <li>Sect, dignities, lots, aspects</li>
-              <li>Deterministic rule ledger</li>
+              <li>Dignities, lots, aspects</li>
+              <li>Preview the PDF output</li>
             </ul>
             <a class="btn-secondary" href="demo.html">Run Free Reading</a>
-            <p class="trial-note">No credit card required.</p>
+            <p class="trial-note">No credit card. No account needed.</p>
           </div>
         </div>
 
-        <!-- Scholar -->
         <div class="panel-card">
           <div class="pricing-card recommended">
             <div class="tier-label">Most Popular</div>
@@ -303,10 +283,9 @@
             <div class="price">$9.99<span>/month</span></div>
             <ul class="features">
               <li><strong>Unlimited readings</strong></li>
-              <li>Full forensic reports (PDF export)</li>
-              <li>Zodiacal Releasing L1/L2 + Bond</li>
-              <li>Primary Directions, Parans, Firdaria</li>
+              <li>Full PDF reports — download anytime</li>
               <li>Saved chart history</li>
+              <li>Zodiacal Releasing, Firdaria, Directions</li>
               <li>14-day free trial — no card needed</li>
             </ul>
             <a class="btn-primary" href="signup.html?tier=scholar">Start Free Trial</a>
@@ -314,68 +293,39 @@
           </div>
         </div>
 
-        <!-- Practitioner -->
         <div class="panel-card">
           <div class="pricing-card">
-            <div class="tier-label">For Professionals</div>
+            <div class="tier-label">For Etsy Sellers</div>
             <h3>Practitioner</h3>
             <div class="price">$29<span>/month</span></div>
             <ul class="features">
               <li><strong>Everything in Scholar</strong></li>
-              <li>B2B API access (100 calls/day)</li>
-              <li>Bulk chart processing</li>
+              <li><strong>Bulk CSV → ZIP PDF pack</strong></li>
+              <li>Client management &amp; labels</li>
+              <li>API access (100 calls/day)</li>
               <li>White-label PDF exports</li>
-              <li>Priority support</li>
               <li>14-day free trial — no card needed</li>
             </ul>
             <a class="btn-secondary" href="signup.html?tier=practitioner">Start Free Trial</a>
-            <p class="trial-note">Ideal for client workflows and Etsy/PDF sellers.</p>
+            <p class="trial-note">The Etsy seller plan. Pays for itself fast.</p>
           </div>
         </div>
 
       </div>
 
       <p class="text-muted text-sm" style="text-align:center; margin-top: 1.25rem;">
-        Annual plans available at 17% discount. Need API access for a team?
+        Annual plans at 17% discount. Need API access for a team?
         <a href="mailto:enterprise@traditional-astrology.com">Contact us for Studio pricing.</a>
       </p>
     </section>
 
-    <section class="basic-view" id="target-audience">
-      <h2 class="section-title">WHO THIS IS FOR</h2>
-      <div class="criteria-grid">
-        <div class="panel-card">
-          <h4>PDF Sellers</h4>
-          <p>Etsy-style workflows: high volume, tight delivery windows, repeatable deliverables.</p>
-        </div>
-        <div class="panel-card">
-          <h4>Professional Astrologers</h4>
-          <p>You need repeatable calculations for advanced technique work and client workflows.</p>
-        </div>
-        <div class="panel-card">
-          <h4>Serious Students</h4>
-          <p>Verify manual work and explore complex timing systems with deterministic outputs.</p>
-        </div>
-        <div class="panel-card">
-          <h4>Schools and Teachers</h4>
-          <p>Demonstrate techniques consistently for cohorts and classroom use.</p>
-        </div>
-        <div class="panel-card">
-          <h4>Researchers</h4>
-          <p>Export rule ledgers and structured calculations for analysis.</p>
-        </div>
-      </div>
-      <div class="hero-actions mt-8" style="justify-content:center;">
-        <a class="btn-secondary" href="gig-economy.html">See Gig Economy Workflow →</a>
-      </div>
-    </section>
-
     <section class="basic-view" id="final-cta">
-      <h2 class="section-title">START IN 30 SECONDS</h2>
-      <p class="section-subtitle">No account needed. Enter a birth date and run the engine.</p>
+      <h2 class="section-title">TRY IT IN 30 SECONDS</h2>
+      <p class="section-subtitle">Enter any birth date. See a full reading. No account, no credit card.</p>
       <div class="hero-actions" style="justify-content:center; gap: 1rem; flex-wrap: wrap;">
-        <a class="btn-primary" href="demo.html">Try Free Calculation</a>
-        <a class="btn-secondary" href="signup.html?tier=scholar">Start 14-Day Trial</a>
+        <a class="btn-primary" href="demo.html">Run a Free Reading</a>
+        <a class="btn-secondary" href="gig-economy.html">Etsy Seller Workflow</a>
+        <a class="btn-secondary" href="signup.html?tier=practitioner">Start Practitioner Trial</a>
       </div>
       <p class="text-muted text-sm" style="text-align:center; margin-top: 1rem;">
         Already have an account? <a href="login.html">Log in →</a>
@@ -387,11 +337,11 @@
         <div class="footer-col">
           <h3>Product</h3>
           <ul>
+            <li><a href="demo.html">Try Free</a></li>
+            <li><a href="gig-economy.html">Etsy Sellers</a></li>
             <li><a href="techniques.html">Techniques</a></li>
             <li><a href="documentation.html">Documentation</a></li>
-            <li><a href="gig-economy.html">Gig Economy</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="demo.html">Try Demo</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -408,22 +358,23 @@
           <ul>
             <li><a href="privacy.html">Privacy Policy</a></li>
             <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="refunds.html">Refunds</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h3>Contact</h3>
           <ul>
-            <li><a href="mailto:support@traditional-astrology.com">General Support</a></li>
-            <li><a href="mailto:enterprise@traditional-astrology.com">Enterprise Sales</a></li>
-            <li><a href="mailto:bugs@traditional-astrology.com">Report Bug</a></li>
+            <li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+            <li><a href="mailto:enterprise@traditional-astrology.com">Enterprise</a></li>
+            <li><a href="mailto:bugs@traditional-astrology.com">Report a Bug</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>© <span id="copyrightYear">2026</span> Codex Caelestis. Built by a Systems Architect. All rights reserved.</p>
+        <p>© <span id="copyrightYear">2026</span> AstroForge. All rights reserved.</p>
         <p class="footer-disclaimer">
-          Historical Use Only. Codex Caelestis provides traditional calculations and technical exports; it does not provide medical, legal, or financial advice.
+          Historical Use Only. AstroForge provides traditional calculations and technical exports; it does not provide medical, legal, or financial advice.
         </p>
       </div>
     </footer>

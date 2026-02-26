@@ -4,7 +4,6 @@ import src.api.v1.endpoints.premium as premium_endpoint
 
 api_router = APIRouter()
 
-api_router.include_router(charts.router, tags=["charts"])
 api_router.include_router(charts.router, prefix="/charts", tags=["charts"])
 api_router.include_router(synastry.router, tags=["synastry"])
 api_router.include_router(mundane.router, tags=["mundane"])

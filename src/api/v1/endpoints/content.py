@@ -38,7 +38,7 @@ async def email_pdf_report(
         # Immediate cleanup of generator buffer
         generator.buffer.close()
         
-        subject = "Your Forensic Astrology Report (Codex Caelestis)"
+        subject = "Your Forensic Astrology Report (AstroForge)"
         attachment_bytes = pdf_bytes
         attachment_name = "calibration_audit.pdf" if tier == "CALIBRATION" else "native_audit.pdf"
         
@@ -66,7 +66,7 @@ async def email_pdf_report(
                 
                 # 4. README (License & Integration)
                 readme = (
-                    "CODEX CAELESTIS: DIGITAL SOUL PACKET\n"
+                    "AstroForge: DIGITAL SOUL PACKET\n"
                     "====================================\n\n"
                     "This packet contains your Human Readable Audit (PDF) and Machine Readable Source Code (JSON).\n"
                     "LICENSED USE: You may upload the JSON file to personal AI agents (ChatGPT, Claude) to query your chart data.\n"
@@ -100,7 +100,7 @@ async def email_pdf_report(
             <br>
             <p><i>Veritas Filia Temporis</i><br>
             (Truth is the Daughter of Time)</p>
-            <p>— The Codex Caelestis Engine</p>
+            <p>— The AstroForge Engine</p>
         </body>
         </html>
         """

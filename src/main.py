@@ -48,7 +48,7 @@ def setup_ultimate_verification_chart():
     return Chart(sun_altitude=20.0, planets=planets, ascendant=asc, mc=mc, north_node=150.0)
 
 def generate_report(chart: Chart, age: int):
-    print("=== CODEX CAELESTIS: UNIVERSAL CAUSATION AUDIT ===\n")
+    print("=== AstroForge: UNIVERSAL CAUSATION AUDIT ===\n")
     print("FINAL VERIFIED REPORT\n")
     
     audit = perform_forensic_audit(chart, age=age)

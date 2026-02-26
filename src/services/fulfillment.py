@@ -84,10 +84,10 @@ class FulfillmentService:
             # Determine email template based on tier
             subject = "Your Astrology Report"
             if pdf_tier == "CALIBRATION":
-                subject = "Your Calibration Audit (Codex Caelestis)"
+                subject = "Your Calibration Audit (AstroForge)"
                 template = "order_calibration.html" 
             else:
-                subject = "Your Forensic Dossier (Codex Caelestis)"
+                subject = "Your Forensic Dossier (AstroForge)"
                 template = "order_full.html"
 
             # Construct simple HTML if template doesn't exist yet (Safety first)
@@ -101,7 +101,7 @@ class FulfillmentService:
             Location: {chart_request.get('city')}
             </p>
             <p>Please save this PDF to your device.</p>
-            <p>Sincerely,<br>The Codex Caelestis Engine</p>
+            <p>Sincerely,<br>The AstroForge Engine</p>
             """
             
             success = send_email(

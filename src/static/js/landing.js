@@ -376,36 +376,41 @@ function renderPremiumReading(result, payload, timeUnknown) {
     const basicFeedback = document.getElementById("basicFeedback");
 
     const htmlContent = parseMarkdown(result.report_markdown);
-    
+    const hasToken = !!localStorage.getItem("cael_auth_token");
+
     basicReadingBody.innerHTML = `
         <div class="premium-report-container">
             ${htmlContent}
         </div>
-        <div class="action-bar" style="text-align:center; margin-top:2rem;">
-            <button class="btn-primary" onclick="window.print()">Save to PDF</button>
+        <div class="action-bar" style="text-align:center; margin-top:1.5rem;">
+            <button class="btn-secondary" onclick="window.print()" style="font-size:0.85rem; opacity:0.7;">
+                Print / Save as PDF
+            </button>
         </div>
     `;
+
+    // Append upgrade CTA below the reading
+    basicReadingBody.appendChild(buildUpgradeCTA(hasToken));
 
     if (basicReading) basicReading.classList.remove("hidden");
 
     // Feedback
     if (basicFeedback) {
         basicFeedback.classList.remove("hidden");
-        // Re-use basic feedback logic or just show it
         basicFeedback.innerHTML = `
             <div class="panel-card" style="margin-top: 1rem;">
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">Testing feedback</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Was this accurate?</div>
                 <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
-                    <button type="button" class="btn-secondary feedback-btn" data-vote="up">Accurate</button>
+                    <button type="button" class="btn-secondary feedback-btn" data-vote="up">Yes, accurate</button>
                     <button type="button" class="btn-secondary feedback-btn" data-vote="down">Not accurate</button>
                 </div>
                 <div id="basicFeedbackStatus" class="text-muted" style="text-align:center; margin-top:0.5rem;"></div>
             </div>
         `;
-        // We'd need to re-attach listeners here if we want them to work for premium too.
-        // For simplicity, let's skip attaching listeners for this hotfix or duplicate the logic if needed.
-        // The user asked to *fix* usage, so let's just make sure it appears.
+        attachFeedbackListeners(basicFeedback, { birth: payload, time_unknown: timeUnknown, source: "premium_reading" });
     }
+
+    logEvent("premium_reading_shown", { has_token: hasToken });
 }
 
 function parseMarkdown(md) {
@@ -442,20 +447,25 @@ function renderBasicReading(result, payload, timeUnknown) {
         basicReadingBody.prepend(div);
     }
 
+    const hasToken = !!localStorage.getItem("cael_auth_token");
+
     if (result.meta && result.meta.tier === 'free') {
         const remaining = Number(result.meta.free_reads_remaining);
         const limit = Number(result.meta.free_reads_limit);
-        if (Number.isFinite(remaining) && Number.isFinite(limit)) {
+        if (Number.isFinite(remaining) && Number.isFinite(limit) && remaining > 0) {
             const note = document.createElement('div');
             note.className = "lock-disclaimer";
             note.style.marginTop = "1rem";
             note.innerHTML = `
-                <strong>Free Usage:</strong> ${Math.max(0, Math.floor(remaining))} of ${Math.max(0, Math.floor(limit))} free readings remaining for this IP.
-                After that, single readings are $20 each.
+                <strong>Free readings left:</strong> ${Math.max(0, Math.floor(remaining))} of ${Math.max(0, Math.floor(limit))}.
+                Start a free trial for unlimited readings + PDF exports.
             `;
             basicReadingBody.appendChild(note);
         }
     }
+
+    // Append upgrade CTA below the reading
+    basicReadingBody.appendChild(buildUpgradeCTA(hasToken));
 
     if (basicReading) basicReading.classList.remove("hidden");
 
@@ -471,59 +481,133 @@ function renderBasicReading(result, payload, timeUnknown) {
         basicFeedback.classList.remove("hidden");
         basicFeedback.innerHTML = `
             <div class="panel-card" style="margin-top: 1rem;">
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">Testing feedback</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Was this accurate?</div>
                 <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
-                    <button type="button" class="btn-secondary feedback-btn" data-vote="up">Accurate</button>
+                    <button type="button" class="btn-secondary feedback-btn" data-vote="up">Yes, accurate</button>
                     <button type="button" class="btn-secondary feedback-btn" data-vote="down">Not accurate</button>
                 </div>
                 <div id="basicFeedbackStatus" class="text-muted" style="text-align:center; margin-top:0.5rem;"></div>
             </div>
         `;
-
-        const statusEl = document.getElementById("basicFeedbackStatus");
-        const buttons = basicFeedback.querySelectorAll(".feedback-btn");
-        buttons.forEach((btn) => {
-            btn.addEventListener("click", async () => {
-                if (!basicFeedbackContext) return;
-                if (basicFeedback.dataset.submitted === "true") return;
-
-                basicFeedback.dataset.submitted = "true";
-                buttons.forEach((b) => (b.disabled = true));
-                const vote = btn.dataset.vote;
-                if (statusEl) statusEl.textContent = "Saving...";
-
-                logEvent("reading_feedback", {
-                    vote,
-                    source: "landing_reading",
-                    reading_hash: basicFeedbackContext.reading_hash,
-                    birth: basicFeedbackContext.birth,
-                    meta: basicFeedbackContext.meta,
-                    time_unknown: basicFeedbackContext.time_unknown
-                });
-
-                try {
-                    const saveResp = await apiFetch("/api/v1/reading_feedback", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            reading_hash: basicFeedbackContext.reading_hash,
-                            vote,
-                            source: "landing_reading",
-                            birth: basicFeedbackContext.birth,
-                            meta: basicFeedbackContext.meta,
-                            time_unknown: basicFeedbackContext.time_unknown,
-                            session_id: SESSION_ID,
-                            ts: new Date().toISOString()
-                        })
-                    });
-                    if (!saveResp.ok) throw new Error("Vote not saved.");
-                    if (statusEl) statusEl.textContent = "Saved. Thank you.";
-                } catch (e) {
-                    if (statusEl) statusEl.textContent = "Could not save feedback. Please try again later.";
-                }
-            });
-        });
+        attachFeedbackListeners(basicFeedback, basicFeedbackContext);
     }
+
+    logEvent("basic_reading_shown", { has_token: hasToken, tier: result.meta?.tier });
+}
+
+/**
+ * Builds a post-reading upgrade CTA block.
+ * - Guests: trial signup + one-time purchase option
+ * - Logged-in: link to dashboard to access PDF downloads
+ */
+function buildUpgradeCTA(hasToken) {
+    const el = document.createElement("div");
+    el.className = "upgrade-cta-block";
+    el.style.cssText = `
+        border: 1px solid var(--accent, #c9a84c);
+        border-radius: 8px;
+        padding: 1.75rem 1.5rem;
+        margin-top: 2rem;
+        text-align: center;
+        background: var(--card-bg, rgba(201,168,76,0.06));
+    `;
+
+    if (hasToken) {
+        // Logged-in user — send them to dashboard to download PDF
+        el.innerHTML = `
+            <div style="font-size:1.05rem; font-weight:700; margin-bottom:0.5rem; color:var(--accent,#c9a84c);">
+                📄 Download Your PDF Report
+            </div>
+            <p style="color:var(--text-muted,#aaa); margin-bottom:1.25rem; max-width:380px; margin-left:auto; margin-right:auto; font-size:0.9rem;">
+                Your chart is saved. Go to your dashboard to download the full PDF, manage saved charts, and run bulk exports.
+            </p>
+            <a class="btn-primary" href="profile.html"
+               style="display:inline-block; min-width:220px; text-align:center; padding:0.75rem 1.5rem;">
+                Go to Dashboard →
+            </a>
+        `;
+    } else {
+        // Guest — show free trial CTA + single-reading fallback
+        el.innerHTML = `
+            <div style="font-size:1.05rem; font-weight:700; margin-bottom:0.5rem; color:var(--accent,#c9a84c);">
+                📄 Get the Downloadable PDF Report
+            </div>
+            <p style="color:var(--text-muted,#aaa); margin-bottom:1.25rem; max-width:400px; margin-left:auto; margin-right:auto; font-size:0.9rem;">
+                Save and share this report as a professional PDF. Includes full dignities, time lords, predictive periods, and a cover page.
+                Unlimited readings + PDF exports included with every plan.
+            </p>
+            <div style="display:flex; flex-direction:column; gap:0.65rem; align-items:center; max-width:300px; margin:0 auto;">
+                <a class="btn-primary" href="signup.html?tier=scholar"
+                   style="width:100%; text-align:center; display:block; padding:0.8rem 1rem; font-weight:700;"
+                   onclick="logEvent && logEvent('upgrade_cta_click', {source:'post_reading', tier:'scholar'})">
+                    Start Free 14-Day Trial
+                </a>
+                <div style="font-size:0.78rem; color:var(--text-muted,#aaa);">No credit card required · Cancel anytime</div>
+                <div style="font-size:0.8rem; color:var(--text-muted,#aaa); margin:0.15rem 0;">— or —</div>
+                <button type="button" class="btn-secondary"
+                        onclick="startCheckout('single_reading')"
+                        style="width:100%; font-size:0.85rem;">
+                    Buy This Reading ($20)
+                </button>
+                <a href="login.html" style="font-size:0.78rem; color:var(--text-muted,#aaa); margin-top:0.1rem;">
+                    Already have an account? Log in →
+                </a>
+            </div>
+        `;
+    }
+
+    logEvent("upgrade_cta_shown", { has_token: hasToken });
+    return el;
+}
+
+/**
+ * Attaches feedback button listeners to a feedback container element.
+ * Extracted to avoid duplicating the AJAX + telemetry logic.
+ */
+function attachFeedbackListeners(feedbackEl, context) {
+    const statusEl = feedbackEl.querySelector("#basicFeedbackStatus");
+    const buttons = feedbackEl.querySelectorAll(".feedback-btn");
+
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            if (feedbackEl.dataset.submitted === "true") return;
+            feedbackEl.dataset.submitted = "true";
+            buttons.forEach((b) => (b.disabled = true));
+            const vote = btn.dataset.vote;
+            if (statusEl) statusEl.textContent = "Saving...";
+
+            const readingHash = context.reading_hash || (context.birth ? hashString(JSON.stringify(context.birth)) : "");
+            logEvent("reading_feedback", {
+                vote,
+                source: context.source || "landing_reading",
+                reading_hash: readingHash,
+                birth: context.birth,
+                meta: context.meta,
+                time_unknown: context.time_unknown
+            });
+
+            try {
+                const saveResp = await apiFetch("/api/v1/reading_feedback", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        reading_hash: readingHash,
+                        vote,
+                        source: context.source || "landing_reading",
+                        birth: context.birth,
+                        meta: context.meta,
+                        time_unknown: context.time_unknown,
+                        session_id: SESSION_ID,
+                        ts: new Date().toISOString()
+                    })
+                });
+                if (!saveResp.ok) throw new Error("Vote not saved.");
+                if (statusEl) statusEl.textContent = "Thank you for your feedback!";
+            } catch (e) {
+                if (statusEl) statusEl.textContent = "Could not save feedback.";
+            }
+        });
+    });
 }
 
 function renderPaymentRequired(detail) {

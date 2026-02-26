@@ -1,5 +1,5 @@
 """
-User Authentication Module for Codex Caelestis (SQLAlchemy Version).
+User Authentication Module for AstroForge (SQLAlchemy Version).
 Supports persistence via SQLite (default) or PostgreSQL.
 """
 

@@ -118,7 +118,7 @@ async def forgot_password(request: ForgotPasswordRequest):
         
         send_email(
             to_email=request.email,
-            subject="Reset Your Password - Codex Caelestis",
+            subject="Reset Your Password - AstroForge",
             html_content=email_html
         )
         
