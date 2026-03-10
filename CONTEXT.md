@@ -1,14 +1,15 @@
 # Astrology Project
 
 ## Status
-- **Working**: Astrological engine core, CI/CD pipeline, Azure deployment (SyntaxError resolved).
-- **Cost Optimized**: ACR (Basic), App Service (F1), PostgreSQL (Burstable B1ms). Geo-replication and HA disabled for cost control.
+- **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments).
 - **Broken**: None known.
-- **UI/UX**: Phase 2 Complete (Tooltips, FAQ, Comparison Table, Annual Plans, Analytics, Enhanced Paywall, New Landing Page Design).
+- **Business Model (B2C)**: Direct-to-consumer natal chart readings. No accounts, no subscriptions.
+  - **Free**: 3 premium readings per IP
+  - **$7**: Full natal chart reading (one-time Stripe payment)
+  - **$29**: Premium forensic deep-dive (one-time Stripe payment)
 - **Database**: Comprehensive pre-1700s traditional astrology—Managed via `AstrologicalDelineation` database table (SQLAlchemy).
-- **Release Ready**: Version 1.3 (User Accounts).
-- **Monetization**: Stripe (One-time + Annual/Monthly Subscriptions).
-- **Outreach Automation**: Automated email outreach with throttling, cooldown tracking, and owner dashboard integration.
+- **Release Ready**: Version 2.0 (B2C Consumer Readings).
+- **SEO**: Content pages (natal-charts, houses, aspects, etc.) kept for organic traffic with CTA banners → reading form.
 
 
 ## Tech Stack
@@ -109,8 +110,9 @@ The core delineations are now stored in the database to allow for manual fixes a
 
 ## Key Files
 - `src/app.py` — Entry point for the web server (Documentation at /docs).
-- `src/static/basic.js` — Frontend logic including Paywall & Checkout.
-- `src/static/success.html` — Payment success redirection handler.
+- `src/static/js/reading-app.js` — B2C reading flow (form → free/paid → poll → render).
+- `src/static/js/seo-bridge.js` — Injects new nav/CTA into legacy SEO content pages.
+- `src/api/v1/endpoints/guest_checkout.py` — Guest Stripe checkout (no auth, $7/$29).
 - `LICENSE` — MIT License.
 - `CHANGELOG.md` — Project history and rule updates.
 - `src/database/data/glossary.json` — Astrological definitions.
@@ -169,6 +171,9 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Crash on startup | SyntaxError in `forensic.py` | Removed duplicate argument |
 | CSP Violations on `/docs` | `SecurityHeadersMiddleware` blocking CDNs | Added `jsdelivr` and `tiangolo` to allow-list |
 | SyntaxError: duplicate argument | Repeated `house_system` in method signature/calls | Cleansed signature and corrected API calls |
+| High bounce rate | B2B SaaS pitch vs B2C search intent mismatch | Complete site redesign to consumer readings |
+| Zero conversions | Account signup friction | Removed all auth; guest-only checkout flow |
+| Stripe CSP blocked | Checkout domain not in Content-Security-Policy | Added checkout.stripe.com + js.stripe.com to CSP |
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
@@ -176,6 +181,9 @@ The core delineations are now stored in the database to allow for manual fixes a
 - Do not ignore sect when calculating triplicities or Firdaria
 - Do not hardcode URLs—use `SITE_BASE_URL` environment variable
 - Do not use bare `except:` clauses—always catch specific exceptions
+- Do NOT add login/signup/account requirements to the reading flow — it kills conversions
+- Do NOT add subscription/monthly pricing — one-time only for B2C
+- Do NOT use technical jargon ("forensic audit", "Swiss Ephemeris") in consumer-facing copy
 
 ## Environment Variables (Production)
 | Variable | Required | Description |
