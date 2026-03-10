@@ -130,11 +130,12 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         response.headers["Content-Security-Policy"] = (
             "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; "
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://js.stripe.com; "
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.googletagmanager.com https://cdn.jsdelivr.net; "
             "font-src 'self' https://fonts.gstatic.com; "
-            "img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.doubleclick.net https://fastapi.tiangolo.com; "
-            "connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 https://traditional-astrology.com https://astrology-engine-central-7387.azurewebsites.net https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com;"
+            "img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.doubleclick.net https://fastapi.tiangolo.com https://*.stripe.com; "
+            "connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 https://traditional-astrology.com https://astrology-engine-central-7387.azurewebsites.net https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com https://checkout.stripe.com https://api.stripe.com; "
+            "frame-src https://checkout.stripe.com https://js.stripe.com; "
         )
         return response
 
@@ -187,32 +188,40 @@ async def global_exception_handler(request: Request, exc: Exception):
 app.include_router(v1_router, prefix="/api/v1")
 app.include_router(v2_router, prefix="/api/v2")
 
-# --- LEGACY PAGE REDIRECTS (B2C -> B2B) ---
+# --- LEGACY PAGE REDIRECTS ---
+# All old B2B/auth/tool pages redirect to the main B2C index.
 # Static files are mounted at "/" below; these routes must be declared first.
-@app.get("/developers.html", include_in_schema=False)
-async def legacy_developers_redirect():
-    """Redirect old developers.html to canonical developer.html."""
-    return RedirectResponse(url="/developer.html", status_code=301)
+_LEGACY_REDIRECTS = [
+    # B2B / SaaS pages
+    "gig-economy.html", "developer.html", "developers.html",
+    "documentation.html", "api-guide.html",
+    # Auth pages
+    "login.html", "register.html", "signup.html", "profile.html",
+    "forgot-password.html", "reset-password.html",
+    # Old misc pages
+    "demo.html", "booking.html", "services.html", "pricing.html",
+    "blog.html", "about.html", "resources.html", "advanced.html",
+    "faq.html", "sample-reading.html", "preview.html",
+    "how-we-audit.html", "owner.html", "status.html", "success.html",
+]
 
-@app.get("/booking.html", include_in_schema=False)
-async def legacy_booking_redirect():
-    return RedirectResponse(url="/signup.html", status_code=301)
+for _page in _LEGACY_REDIRECTS:
+    _route_path = f"/{_page}"
+    def _make_redirect(page=_page):
+        async def _redirect():
+            return RedirectResponse(url="/#get-reading", status_code=301)
+        _redirect.__name__ = f"redirect_{page.replace('.', '_').replace('-', '_')}"
+        return _redirect
+    app.get(_route_path, include_in_schema=False)(_make_redirect())
 
-@app.get("/services.html", include_in_schema=False)
-async def legacy_services_redirect():
-    return RedirectResponse(url="/techniques.html", status_code=301)
-
-@app.get("/pricing.html", include_in_schema=False)
-async def legacy_pricing_redirect():
-    return RedirectResponse(url="/index.html#pricing", status_code=301)
-
+# Also catch dashboard paths
 @app.get("/dashboard", include_in_schema=False)
 async def legacy_dashboard_redirect():
-    return RedirectResponse(url="/profile.html", status_code=301)
+    return RedirectResponse(url="/", status_code=301)
 
 @app.get("/dashboard/", include_in_schema=False)
 async def legacy_dashboard_slash_redirect():
-    return RedirectResponse(url="/profile.html", status_code=301)
+    return RedirectResponse(url="/", status_code=301)
 
 # --- STATIC FILES ---
 from fastapi.staticfiles import StaticFiles

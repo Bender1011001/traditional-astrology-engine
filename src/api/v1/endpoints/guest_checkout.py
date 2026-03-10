@@ -1,0 +1,241 @@
+"""
+Guest Checkout Endpoint — No authentication required.
+
+Creates a Stripe Checkout Session for one-time readings.
+After payment success, the frontend polls the premium generation status
+to get the full reading.
+"""
+
+from fastapi import APIRouter, HTTPException, Request, Depends, BackgroundTasks
+from sqlalchemy.orm import Session
+from src.database.core import get_db
+from src.database.models import GuestRequest, AsyncReportTask
+from src.api.v1.schemas import ChartRequest
+from src.core.config import settings
+from src.services.premium_generator import generate_premium_report_task
+import stripe
+import json
+import logging
+import uuid
+
+logger = logging.getLogger(__name__)
+
+router = APIRouter()
+
+# Tier configuration — simple, no subscriptions
+TIERS = {
+    "full_reading": {
+        "price_cents": 700,
+        "product_name": "Full Natal Chart Reading",
+        "description": "Complete natal chart reading with timing, dignities, and personalized insights.",
+    },
+    "premium_audit": {
+        "price_cents": 2900,
+        "product_name": "Premium Forensic Audit",
+        "description": "20+ page deep-dive analysis with advanced timing, remediation, and 10-year forecast.",
+    },
+}
+
+# Free teaser: no limit — always allow the quick preview
+MAX_FREE_PREMIUM_PER_IP = 3
+
+
+def _get_or_create_stripe_price(tier_key: str) -> str:
+    """Get or create a Stripe Price ID for a tier. Caches in settings attributes."""
+    tier = TIERS[tier_key]
+    cache_attr = f"_stripe_price_cache_{tier_key}"
+    
+    # Check settings cache
+    cached = getattr(settings, cache_attr, None)
+    if cached:
+        return cached
+    
+    # Check env vars first
+    env_key = f"STRIPE_PRICE_{tier_key.upper()}"
+    env_val = (getattr(settings, env_key, "") or "").strip()
+    if env_val:
+        setattr(settings, cache_attr, env_val)
+        return env_val
+    
+    # Search Stripe for existing price
+    try:
+        prices = stripe.Price.search(
+            query=f'active:"true" metadata["tier"]:"{tier_key}"',
+            limit=1
+        )
+        if prices and prices.data:
+            price_id = prices.data[0].id
+            setattr(settings, cache_attr, price_id)
+            return price_id
+    except Exception:
+        pass
+    
+    # Create product + price
+    try:
+        product = stripe.Product.create(
+            name=tier["product_name"],
+            description=tier["description"],
+            metadata={"tier": tier_key}
+        )
+        price = stripe.Price.create(
+            product=product.id,
+            unit_amount=tier["price_cents"],
+            currency="usd",
+            metadata={"tier": tier_key}
+        )
+        price_id = price.id
+        setattr(settings, cache_attr, price_id)
+        logger.info(f"Created Stripe price {price_id} for tier {tier_key}")
+        return price_id
+    except Exception as e:
+        logger.error(f"Failed to create Stripe price for {tier_key}: {e}")
+        raise HTTPException(status_code=500, detail="Payment system configuration error.")
+
+
+@router.post("/checkout")
+async def guest_checkout(
+    request: Request,
+    tier: str,
+    date: str,
+    time: str,
+    city: str,
+    state: str = "",
+    name: str = "Guest",
+):
+    """
+    Create a Stripe Checkout Session for a guest (no account required).
+    After payment, the success page triggers premium generation.
+    """
+    tier_key = tier.strip().lower()
+    if tier_key not in TIERS:
+        raise HTTPException(status_code=400, detail=f"Invalid tier: {tier}. Use: {list(TIERS.keys())}")
+    
+    # Validate basic inputs
+    if not date or not city:
+        raise HTTPException(status_code=400, detail="Date and city are required.")
+    
+    stripe.api_key = getattr(settings, "STRIPE_SECRET_KEY", "") or ""
+    if not stripe.api_key:
+        raise HTTPException(status_code=500, detail="Payment system not configured.")
+    
+    price_id = _get_or_create_stripe_price(tier_key)
+    
+    # Generate a unique reference ID for this order
+    order_id = uuid.uuid4().hex[:12]
+    
+    chart_data = {
+        "date": date,
+        "time": time,
+        "city": city,
+        "state": state,
+        "name": name,
+    }
+    
+    # Build Stripe Checkout Session
+    origin = str(request.base_url).rstrip("/")
+    
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=[{"price": price_id, "quantity": 1}],
+            mode="payment",
+            allow_promotion_codes=True,
+            success_url=f"{origin}/?paid=true&session_id={{CHECKOUT_SESSION_ID}}&order={order_id}",
+            cancel_url=f"{origin}/#get-reading",
+            metadata={
+                "order_id": order_id,
+                "tier": tier_key,
+                "chart_data": json.dumps(chart_data),
+            },
+        )
+        return {"url": session.url, "session_id": session.id, "order_id": order_id}
+    except Exception as e:
+        logger.error(f"Stripe checkout creation failed: {e}")
+        raise HTTPException(status_code=500, detail="Could not create checkout session.")
+
+
+@router.post("/generate-paid")
+async def generate_paid_reading(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    session_id: str,
+    db: Session = Depends(get_db),
+):
+    """
+    After successful payment, verify the Stripe session and start premium generation.
+    Returns a task_id to poll for status.
+    """
+    stripe.api_key = getattr(settings, "STRIPE_SECRET_KEY", "") or ""
+    if not stripe.api_key:
+        raise HTTPException(status_code=500, detail="Payment system not configured.")
+    
+    # Verify payment
+    try:
+        session = stripe.checkout.Session.retrieve(session_id)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid session: {e}")
+    
+    if session.payment_status != "paid":
+        raise HTTPException(status_code=402, detail="Payment not completed.")
+    
+    # Extract chart data from metadata
+    chart_data_str = session.metadata.get("chart_data", "{}")
+    chart_data = json.loads(chart_data_str)
+    
+    if not chart_data.get("date") or not chart_data.get("city"):
+        raise HTTPException(status_code=400, detail="Chart data missing from session.")
+    
+    # Create async task
+    chart_request = ChartRequest(
+        date=chart_data["date"],
+        time=chart_data.get("time", "12:00"),
+        city=chart_data["city"],
+        state=chart_data.get("state", ""),
+        name=chart_data.get("name", "Guest"),
+    )
+    
+    task = AsyncReportTask(
+        status="pending",
+        request_meta=chart_request.dict()
+    )
+    db.add(task)
+    
+    # Record guest usage (for analytics)
+    client_ip = request.client.host if request.client else "unknown"
+    usage = GuestRequest(
+        ip_address=client_ip,
+        request_type=f"paid_{session.metadata.get('tier', 'unknown')}"
+    )
+    db.add(usage)
+    db.commit()
+    db.refresh(task)
+    
+    # Start background generation
+    background_tasks.add_task(
+        generate_premium_report_task,
+        task.id,
+        chart_request.dict()
+    )
+    
+    return {
+        "task_id": task.id,
+        "tier": session.metadata.get("tier", "unknown"),
+        "message": "Report generation started.",
+    }
+
+
+@router.get("/task-status/{task_id}")
+async def check_task_status(
+    task_id: str,
+    db: Session = Depends(get_db),
+):
+    """Poll the status of a reading generation task."""
+    task = db.query(AsyncReportTask).filter(AsyncReportTask.id == task_id).first()
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found.")
+    
+    return {
+        "task_id": task.id,
+        "status": task.status,
+        "result": task.result_json if task.status in ("completed", "failed") else None,
+    }

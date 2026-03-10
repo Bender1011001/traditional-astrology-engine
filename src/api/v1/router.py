@@ -15,6 +15,9 @@ api_router.include_router(owner.router, prefix="/owner", tags=["owner"])
 api_router.include_router(meta.router, tags=["meta"])
 api_router.include_router(premium_endpoint.router, prefix="/premium", tags=["premium"])
 
+from src.api.v1.endpoints import guest_checkout
+api_router.include_router(guest_checkout.router, prefix="/guest", tags=["guest"])
+
 from src.api.v1.endpoints import auth
 api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
 
