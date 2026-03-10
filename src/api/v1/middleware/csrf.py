@@ -29,6 +29,11 @@ CSRF_EXEMPT_PATHS: List[str] = [
     "/api/v1/billing/webhook",
     # Legacy/alternate webhook path (kept to avoid accidental lockouts).
     "/api/v1/stripe/webhook",
+    # Guest checkout endpoints (B2C, no auth, public-facing).
+    "/api/v1/guest/checkout",
+    "/api/v1/guest/generate-paid",
+    "/api/v1/premium/guest/request",
+    "/api/v1/reading_feedback",
     "/docs",
     "/redoc",
     "/openapi.json",
