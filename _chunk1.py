@@ -1,0 +1,11 @@
+import pathlib;NL=chr(10);BASE=pathlib.Path("validation/gauquelin");BASE.mkdir(parents=True,exist_ok=True)
+L=[]
+def a(s): L.append(s)
+a("from __future__ import annotations")
+a("")
+a('"""')
+a("01_parse_gauquelin.py - Gauquelin CURA data parser.")
+a("Data source: http://cura.free.fr/gauq/17archg.html")
+a("")
+a("CURA Fixed-Width Format: each data line (after headers) has:")
+a("  Cols  1-4   record number")
