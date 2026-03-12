@@ -33,7 +33,7 @@ class PrimaryDirectionsEngine:
     Focuses on Placidus as the 'gold standard' for intermediate points.
     """
 
-    # Obliquity of Ecliptic (Approx for J2000, or JNow could be passed)
+    # Obliquity of Ecliptic (J2000 fallback; prefer _get_obliquity(jd) for accuracy)
     EPSILON = 23.4392911
 
     @staticmethod
@@ -48,14 +48,26 @@ class PrimaryDirectionsEngine:
     def _normalize_deg(deg: float) -> float:
         return deg % 360.0
 
+    @staticmethod
+    def _get_obliquity(jd: float) -> float:
+        """Compute true obliquity of the ecliptic for a given Julian Day via Swiss Ephemeris."""
+        try:
+            res = swe.calc_ut(jd, swe.ECL_NUT)
+            coords = res[0] if isinstance(res[0], (list, tuple)) else res
+            return coords[0]  # true obliquity
+        except Exception:
+            return 23.4392911  # J2000 fallback
+
     @classmethod
-    def ecliptic_to_equatorial(cls, lon: float, lat: float) -> Tuple[float, float]:
+    def ecliptic_to_equatorial(cls, lon: float, lat: float, epsilon: float = None) -> Tuple[float, float]:
         """
         Converts Ecliptic (Lon, Lat) to Equatorial (RA, Dec).
+        If epsilon is None, uses the J2000 class constant.
         """
         lon_r = cls._to_rad(lon)
         lat_r = cls._to_rad(lat)
-        eps_r = cls._to_rad(cls.EPSILON)
+        eps = epsilon if epsilon is not None else cls.EPSILON
+        eps_r = cls._to_rad(eps)
 
         # sin(delta) = sin(eps)*sin(lon)*cos(lat) + cos(eps)*sin(lat)
         sin_dec = math.sin(eps_r) * math.sin(lon_r) * math.cos(lat_r) + \
@@ -191,9 +203,11 @@ class PrimaryDirectionsEngine:
         
         # Get Natal RAMC (RA of MC)
         mc_lon = chart.mc
+        # Compute obliquity from chart's Julian Day for accuracy
+        epsilon = cls._get_obliquity(chart.jd) if hasattr(chart, 'jd') and chart.jd else cls.EPSILON
         # swe.house_pos calculates house cusps. We need the reverse or just use houses() with modified Time?
         # Simpler: Get RAMC from MC Longitude.
-        mc_ra, _ = cls.ecliptic_to_equatorial(mc_lon, 0.0)
+        mc_ra, _ = cls.ecliptic_to_equatorial(mc_lon, 0.0, epsilon)
         
         # Directed RAMC
         ramc_directed = (mc_ra + arc) % 360.0
@@ -202,7 +216,7 @@ class PrimaryDirectionsEngine:
         # swe.houses_armc(armc, lat, eps, hsys) - armc is in deg
         try:
             # armc is RAMC.
-            cusps, ascmc = swe.houses_armc(ramc_directed, geo_lat, cls.EPSILON, b'P')
+            cusps, ascmc = swe.houses_armc(ramc_directed, geo_lat, epsilon, b'P')
             asc_directed_lon = ascmc[0]
             
             # Get Term Ruler
@@ -247,7 +261,8 @@ class PrimaryDirectionsEngine:
         results = []
         
         # 1. Chart Properties
-        mc_ra, _ = cls.ecliptic_to_equatorial(chart.mc, 0.0)
+        epsilon = cls._get_obliquity(chart.jd) if hasattr(chart, 'jd') and chart.jd else cls.EPSILON
+        mc_ra, _ = cls.ecliptic_to_equatorial(chart.mc, 0.0, epsilon)
         oa_asc = (mc_ra + 90.0) % 360.0
         
         # 2. Iterate Planets (Promittors)
@@ -305,7 +320,7 @@ class PrimaryDirectionsEngine:
                 
                 for lon_pt, name_pt in aspect_lons:
                      # Calculate OA of this aspect point (Lat 0 assumed for aspects usually)
-                     ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0)
+                     ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0, epsilon)
                      ad_pt = cls.calculate_ad(dec_pt, geo_lat)
                      oa_pt = (ra_pt - ad_pt) % 360.0
                      
@@ -339,7 +354,7 @@ class PrimaryDirectionsEngine:
                     ]
                 
                 for lon_pt, name_pt in aspect_lons:
-                     ra_pt, _ = cls.ecliptic_to_equatorial(lon_pt, 0.0)
+                     ra_pt, _ = cls.ecliptic_to_equatorial(lon_pt, 0.0, epsilon)
                      arc = (ra_pt - mc_ra) % 360.0
                      
                      if 0 < arc < 100:
@@ -375,8 +390,11 @@ class PrimaryDirectionsEngine:
         """
         results: List[DirectionResult] = []
 
+        # Compute obliquity from chart's Julian Day for accuracy
+        epsilon = cls._get_obliquity(chart.jd) if hasattr(chart, 'jd') and chart.jd else cls.EPSILON
+
         # OA of significator point (lat 0)
-        ra_sig, dec_sig = cls.ecliptic_to_equatorial(cls._normalize_deg(target_lon), 0.0)
+        ra_sig, dec_sig = cls.ecliptic_to_equatorial(cls._normalize_deg(target_lon), 0.0, epsilon)
         ad_sig = cls.calculate_ad(dec_sig, geo_lat)
         oa_sig = (ra_sig - ad_sig) % 360.0
 
@@ -407,7 +425,7 @@ class PrimaryDirectionsEngine:
                     ]
 
                 for lon_pt, name_pt in aspect_lons:
-                    ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0)
+                    ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0, epsilon)
                     ad_pt = cls.calculate_ad(dec_pt, geo_lat)
                     oa_pt = (ra_pt - ad_pt) % 360.0
 

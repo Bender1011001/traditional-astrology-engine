@@ -2,7 +2,6 @@ import swisseph as swe
 import math
 from typing import Dict, List, Optional, Tuple
 from .models import PlanetName, PlanetaryPhase, SolarProximity, Planet, Sign
-import swisseph as swe
 
 # Arcus Visionis (AV) Thresholds - Ptolemaic Standard (Planetary Hypotheses)
 # Units: Degrees of solar depression below the horizon

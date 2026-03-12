@@ -173,7 +173,7 @@ class HylegAlcocodenEngine:
             ps = int(p_lon / 30.0) % 12
             ts = int(target_lon / 30.0) % 12
             diff = (ps - ts) % 12
-            mapping = {0: "Conjunction (Whole Sign)", 2: "Sextile (Whole Sign)", 3: "Square (Whole Sign)", 4: "Trine (Whole Sign)", 6: "Opposition (Whole Sign)"}
+            mapping = {0: "Conjunction (Whole Sign)", 2: "Sextile (Whole Sign)", 3: "Square (Whole Sign)", 4: "Trine (Whole Sign)", 6: "Opposition (Whole Sign)", 8: "Trine (Whole Sign)", 9: "Square (Whole Sign)", 10: "Sextile (Whole Sign)"}
             return mapping.get(diff)
 
         # 1) Degree-orb aspect pass

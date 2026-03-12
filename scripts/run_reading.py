@@ -5,8 +5,10 @@ from datetime import datetime, date
 from dataclasses import is_dataclass, asdict
 import swisseph as swe
 
-# Add src to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+# Add src to path (engine.*) AND project root (src.engine.*)
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(_project_root, 'src'))
+sys.path.insert(0, _project_root)
 
 # Load .env manually
 def load_dotenv(path):
@@ -22,7 +24,7 @@ def load_dotenv(path):
 
 load_dotenv(os.path.abspath(os.path.join(os.path.dirname(__file__), '../.env')))
 
-from engine.chart_calculator import calculate_chart_data
+from engine.calculator import calculate_chart_data
 from engine.logic import perform_forensic_audit
 from engine.models import Chart, Planet, PlanetName
 from engine.forensic_forecast import calculate_5_day_forecast
@@ -96,8 +98,8 @@ def main():
     jd = result["meta"]["julian_day"]
     birth_date = datetime.strptime(date_str, "%Y-%m-%d")
     
-    # User specified "tonight" as 2026-01-31. Using specific time roughly 9pm local
-    now = datetime(2026, 1, 31, 21, 13) 
+    # Current analysis date
+    now = datetime(2026, 3, 3, 11, 0)
     
     age = now.year - birth_date.year - ((now.month, now.day) < (birth_date.month, birth_date.day))
     

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
 from .models import Sign, PlanetName, Planet, Sect
 from .stars import STARS, get_shortest_dist, get_star_longitude
-from .calculations import format_longitude
+from .calculations import format_longitude, calculate_prenatal_syzygy
 
 # Chorography mapping from Binder1_part_001.txt
 CHOROGRAPHY = {
@@ -494,19 +494,11 @@ class MundaneEngine:
         else:
             pof = calculate_lot(asc, moon_pos, sun_pos)
             
-        # Prenatal Syzygy (Search back for 0 or 180 elongation)
-        curr_syz_jd = ingress_jd
-        for _ in range(30): # Walk back max 30 days
-            sun_p = swe.calc_ut(curr_syz_jd, swe.SUN, swe.FLG_SWIEPH)[0][0]
-            moon_p = swe.calc_ut(curr_syz_jd, swe.MOON, swe.FLG_SWIEPH)[0][0]
-            elo = abs(sun_p - moon_p)
-            if elo > 180: elo = 360 - elo
-            if elo < 1.0 or abs(elo - 180) < 1.0: # Close enough for a rough vitals point
-                syz_pos = sun_p
-                break
-            curr_syz_jd -= 1.0
-        else:
-            syz_pos = sun_pos # Fallback
+        # Prenatal Syzygy — use precise Newton-Raphson solver from calculations module
+        try:
+            syz_pos, _syz_type = calculate_prenatal_syzygy(ingress_jd)
+        except Exception:
+            syz_pos = sun_pos  # Fallback
         
         vital_points = [
             ("Ascendant", asc),

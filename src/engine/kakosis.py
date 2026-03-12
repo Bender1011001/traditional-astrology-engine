@@ -18,15 +18,13 @@ class KakosisEngine:
     BENEFICS = [PlanetName.JUPITER, PlanetName.VENUS]
 
     @staticmethod
-    def get_zodiac_index(sign: str) -> int:
-        signs = [
-            Sign.ARIES, Sign.TAURUS, Sign.GEMINI, Sign.CANCER,
-            Sign.LEO, Sign.VIRGO, Sign.LIBRA, Sign.SCORPIO,
-            Sign.SAGITTARIUS, Sign.CAPRICORN, Sign.AQUARIUS, Sign.PISCES
-        ]
+    def get_zodiac_index(sign) -> int:
+        """Return 0-based zodiac index for a Sign enum or sign-name string."""
+        signs = list(Sign)
         try:
-            return signs.index(Sign(sign))
-        except ValueError:
+            s = sign if isinstance(sign, Sign) else Sign(sign)
+            return signs.index(s)
+        except (ValueError, KeyError):
             return -1
 
     @staticmethod

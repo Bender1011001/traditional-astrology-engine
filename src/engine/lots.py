@@ -110,20 +110,21 @@ def calculate_all_lots(chart: Chart, sect: Sect) -> Dict[str, float]:
     # Accusation (Legal Trouble)
     lots[LotName.ACCUSATION.value] = calculate_lot(asc, saturn.longitude, mars.longitude) if is_day else calculate_lot(asc, mars.longitude, saturn.longitude)
         
-    # Marriage (Men)
-    lots[LotName.MARRIAGE_MEN.value] = calculate_lot(asc, saturn.longitude, venus.longitude)
+    # Marriage (Men): Asc + Venus - Saturn (day) / reversed (night)
+    lots[LotName.MARRIAGE_MEN.value] = calculate_lot(asc, saturn.longitude, venus.longitude) if is_day else calculate_lot(asc, venus.longitude, saturn.longitude)
     
     # Siblings
     lots[LotName.SIBLINGS.value] = calculate_lot(asc, saturn.longitude, jupiter.longitude) if is_day else calculate_lot(asc, jupiter.longitude, saturn.longitude)
         
-    # Friends
-    lots[LotName.FRIENDS.value] = calculate_lot(asc, mercury.longitude, moon.longitude)
+    # Friends: Asc + Moon - Mercury (day) / reversed (night)
+    lots[LotName.FRIENDS.value] = calculate_lot(asc, mercury.longitude, moon.longitude) if is_day else calculate_lot(asc, moon.longitude, mercury.longitude)
     
-    # Enemies
-    lots[LotName.ENEMIES.value] = calculate_lot(asc, saturn.longitude, mars.longitude)
+    # Enemies: Asc + Mars - Saturn (day) / reversed (night)
+    lots[LotName.ENEMIES.value] = calculate_lot(asc, saturn.longitude, mars.longitude) if is_day else calculate_lot(asc, mars.longitude, saturn.longitude)
     
-    # Sickness
-    lots[LotName.SICKNESS.value] = calculate_lot(asc, saturn.longitude, mars.longitude)
+    # Sickness (Al-Biruni variant): Asc + Saturn - Mercury (day) / reversed (night)
+    # Distinct from Enemies; relates chronic affliction (Saturn) via bodily humours (Mercury)
+    lots[LotName.SICKNESS.value] = calculate_lot(asc, mercury.longitude, saturn.longitude) if is_day else calculate_lot(asc, saturn.longitude, mercury.longitude)
     
     # Assets (Substance)
     if chart.houses and 2 in chart.houses:

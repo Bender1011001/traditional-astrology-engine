@@ -73,4 +73,29 @@
     document.querySelectorAll('a[href="documentation.html"], a[href="api-guide.html"], a[href="blog.html"]').forEach(a => {
         a.href = "/";
     });
+
+    // 6. Clean up B2B-era footer columns
+    const footerCols = document.querySelectorAll(".footer-col");
+    footerCols.forEach(col => {
+        const heading = col.querySelector("h3");
+        if (!heading) return;
+        const title = heading.textContent.trim();
+
+        // Replace "Contact" column to remove Enterprise Sales
+        if (title === "Contact") {
+            col.querySelector("ul").innerHTML = `
+                <li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+                <li><a href="mailto:bugs@traditional-astrology.com">Report a Bug</a></li>
+            `;
+        }
+
+        // Replace "Product" column to remove developer-facing links
+        if (title === "Product") {
+            col.querySelector("ul").innerHTML = `
+                <li><a href="/#get-reading">Get a Reading</a></li>
+                <li><a href="techniques.html">Techniques</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+            `;
+        }
+    });
 })();

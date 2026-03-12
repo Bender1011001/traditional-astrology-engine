@@ -118,7 +118,7 @@ class DecennialEngine:
             
             for j in range(7):
                 sub_lord = sub_sequence[j]
-                duration_days = MINOR_YEARS[sub_lord.name] * 30 # Months converted to days
+                duration_days = MINOR_YEARS[sub_lord.name] * 30  # minor_years × 30-day months = sub-period in days
                 
                 major_period["sub_periods"].append({
                     "sub_lord": sub_lord.name.value,

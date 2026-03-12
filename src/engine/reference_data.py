@@ -80,7 +80,7 @@ PTOLEMAIC_TRIPLICITY = {
     "Fire": (PlanetName.SUN, PlanetName.JUPITER),
     "Earth": (PlanetName.VENUS, PlanetName.MOON),
     "Air": (PlanetName.SATURN, PlanetName.MERCURY),
-    "Water": (PlanetName.MARS, PlanetName.MARS)
+    "Water": (PlanetName.MARS, PlanetName.MOON)
 }
 
 # Legacy Export for backward compatibility (defaults to Dorothean in original code? No, original had dict with Sect keys)

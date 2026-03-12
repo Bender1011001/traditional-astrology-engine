@@ -1,123 +1,153 @@
-import asyncio
 import sys
 import os
 import json
-from datetime import datetime
+from datetime import datetime, date
+from dataclasses import is_dataclass, asdict
+import swisseph as swe
 
-# Setup paths
-sys.path.append(os.getcwd())
-sys.path.append(os.path.join(os.getcwd(), "src"))
+# Add src to path
+# Add project root to path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+# Load .env manually
+def load_dotenv(path):
+    if not os.path.exists(path):
+        return
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            os.environ[k.strip()] = v.strip().strip('"').strip("'")
+
+load_dotenv(os.path.abspath(os.path.join(os.path.dirname(__file__), '../.env')))
+
+from src.engine.calculator.main import calculate_chart_data
 from src.engine.logic import perform_forensic_audit
-from src.engine.chart_calculator import calculate_chart_data
-from src.engine.models import Chart, Planet, PlanetName, Sign
-from enum import Enum
+from src.engine.models import Chart, Planet, PlanetName
+from src.engine.forensic_forecast import calculate_5_day_forecast
+from src.engine.prediction import AdvancedPredictionEngine
+
+def result_to_model(res):
+    model_planets = []
+    sun_alt = 0.0
+    for name, data in res.get("planets", {}).items():
+        try:
+            p_enum = PlanetName(name)
+        except ValueError:
+            continue
+        model_planets.append(
+            Planet(
+                name=p_enum,
+                longitude=data["longitude"],
+                latitude=data.get("latitude", 0.0),
+                speed=data.get("speed", 0.0),
+                altitude=data.get("altitude", 0.0)
+            )
+        )
+        if name == "Sun":
+            sun_alt = data.get("altitude", 0.0)
+
+    angles = res.get("angles", {})
+    return Chart(
+        sun_altitude=sun_alt,
+        planets=model_planets,
+        ascendant=angles.get("Ascendant", 0.0),
+        mc=angles.get("MC", 0.0),
+        north_node=res.get("planets", {}).get("North_Node", {}).get("longitude", 0.0),
+        south_node=res.get("planets", {}).get("South_Node", {}).get("longitude", 0.0),
+        geo_lat=res.get("meta", {}).get("lat"),
+        geo_lon=res.get("meta", {}).get("lon"),
+        jd=res.get("meta", {}).get("julian_day"),
+        houses=res.get("houses"),
+        house_system=(res.get("meta", {}).get("house_system") or {}).get("code")
+    )
 
 def json_serial(obj):
-    """JSON serializer for objects not serializable by default json code"""
-    if isinstance(obj, Enum):
-        return obj.value
-    if isinstance(obj, datetime):
+    if isinstance(obj, (datetime, date)):
         return obj.isoformat()
-    raise TypeError(f"Type {type(obj)} not serializable")
+    if is_dataclass(obj):
+        return asdict(obj)
+    if hasattr(obj, 'value'): # Enum
+        return obj.value
+    raise TypeError (f"Type {type(obj)} not serializable")
 
-async def run_reading():
-    # User Inputs
+def main():
+    # User provided data
     date_str = "1996-08-13"
     time_str = "07:18"
     city = "Fairfield"
     state = "CA"
     
-    print(f"--- Running Universal Reading for {date_str} {time_str} at {city}, {state} ---")
+    print(f"Calculating chart for {date_str} {time_str} in {city}, {state}...")
     
-    # 1. Calculate Chart
-    chart_data = calculate_chart_data(
-        date_str=date_str, 
-        time_str=time_str, 
-        city=city,
-        state=state
+    result = calculate_chart_data(
+        date_str,
+        time_str,
+        city,
+        state
     )
     
-    if "error" in chart_data:
-        print(f"Error: {chart_data['error']}")
+    if "error" in result:
+        print(f"Error: {result['error']}")
         return
 
-    # 2. Reconstruct Chart Model
-    planets_dict = chart_data["planets"]
-    planet_objects = []
-    sun_alt = 0.0
+    chart_model = result_to_model(result)
     
-    for pname, pdata in planets_dict.items():
-        try:
-            p_enum = PlanetName(pname)
-            p_obj = Planet(
-                name=p_enum,
-                longitude=pdata["longitude"],
-                latitude=pdata.get("latitude", 0.0),
-                speed=pdata.get("speed", 0.0),
-                altitude=pdata.get("altitude", 0.0)
-            )
-            planet_objects.append(p_obj)
-            if p_enum == PlanetName.SUN:
-                sun_alt = pdata.get("altitude", 0.0)
-        except ValueError:
-            pass
-
-    houses_data = chart_data.get("houses", {})
-    chart_model = Chart(
-        sun_altitude=sun_alt,
-        planets=planet_objects,
-        ascendant=houses_data.get("ascendant", 0.0),
-        mc=houses_data.get("mc", 0.0),
-        north_node=planets_dict.get("North_Node", {}).get("longitude", 0.0),
-        south_node=(planets_dict.get("North_Node", {}).get("longitude", 0.0) + 180) % 360,
-        houses=houses_data,
-        jd=chart_data["meta"]["julian_day"],
-        geo_lat=chart_data["meta"]["lat"],
-        geo_lon=chart_data["meta"]["lon"]
-    )
+    jd = result["meta"]["julian_day"]
+    birth_date = datetime.strptime(date_str, "%Y-%m-%d")
     
-    # 3. Perform Forensic Audit
-    # age = Current age (approx 29)
-    report = perform_forensic_audit(
+    # Current date for analysis: 2026-02-08
+    now = datetime(2026, 2, 8, 13, 50) 
+    
+    age = now.year - birth_date.year - ((now.month, now.day) < (birth_date.month, birth_date.day))
+    
+    analysis_jd = swe.julday(now.year, now.month, now.day, now.hour + now.minute/60.0)
+    
+    print(f"Performing forensic audit (Age: {age})...")
+    
+    audit_report = perform_forensic_audit(
         chart_model, 
-        jd=chart_data["meta"]["julian_day"], 
-        age=29, 
-        birth_date=datetime(1996, 8, 13, 7, 18)
+        jd, 
+        age=age, 
+        month=now.month, 
+        day=now.day, 
+        birth_date=birth_date, 
+        analysis_date=now, 
+        analysis_jd=analysis_jd
     )
-    
-    # 4. Output Integrated Results
-    print("\n[UNIVERSAL INTEGRATION RESULTS]")
-    
-    print("\n1. MEDICAL ANALYSIS (Constitution)")
-    med = report.get("medical_analysis", {})
-    print(f"   Sign: {med.get('constitutional_sign')}")
-    print(f"   Governed Body Part: {med.get('governed_body_part')}")
-    print(f"   Humoral Distemper: {med.get('distemper')}")
-    
-    print("\n2. CHART STRENGTH (Electional Rooting)")
-    strength = report.get("summary", {}).get("chart_strength_rating", {})
-    print(f"   Score: {strength.get('score')}/100")
-    print(f"   Mood: {strength.get('mood')}")
-    print(f"   Key Detail: {strength.get('details', ['N/A'])[0] if strength.get('details') else 'N/A'}")
-    
-    print("\n3. SOLAR RETURN (Age 29)")
-    sr = report.get("solar_return", {})
-    if sr:
-        print(f"   Solar Return Year: {sr.get('year')}")
-        print(f"   Lord of the Year: {sr.get('lord_of_year', {}).get('planet')}")
-        print(f"   Condition: {sr.get('lord_of_year', {}).get('condition')}")
-        print(f"   Muntha Sign: {sr.get('muntha', {}).get('sign')}")
-    else:
-        print("   No SR data found.")
 
-    print("\n4. VITALITY CRISES (Infancy Decumbiture)")
-    critical = report.get("critical_days_infancy", [])
-    if critical:
-        first = critical[0]
-        print(f"   First Moon Crisis: {first.get('date')} ({first.get('phase')})")
+    # PAID FEATURES
+    print("Calculating 5-Day Forecast (Paid)...")
+    try:
+        forecast_data = calculate_5_day_forecast(chart_model, jd, now)
+        audit_report["forensic_forecast"] = forecast_data
+    except Exception as e:
+        print(f"Forecast Error: {e}")
+        audit_report["forensic_forecast_error"] = str(e)
     
-    print(f"\nFinal report generation successful.")
+    print("Calculating Advanced Prediction (Paid)...")
+    predictor = None
+    try:
+        predictor = AdvancedPredictionEngine(
+            chart_model,
+            birth_date,
+            jd,
+            result["meta"]["lat"],
+            result["meta"]["lon"]
+        )
+        prediction_report = predictor.get_prediction_report(now)
+        audit_report["advanced_prediction"] = prediction_report
+    except Exception as e:
+        print(f"Advanced Prediction Error: {e}")
+        audit_report["advanced_prediction_error"] = str(e)
+        
+    output_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../specific_reading_output.json'))
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(audit_report, f, default=json_serial, indent=2)
+        
+    print(f"Reading saved to {output_path}")
 
 if __name__ == "__main__":
-    asyncio.run(run_reading())
+    main()

@@ -1,5 +1,4 @@
 import swisseph as swe
-import swisseph as swe # Duplicate import, will use alias for clarity if needed but standard is swe
 
 ZODIAC_SYSTEM_LABELS = {
     "tropical": "Tropical",

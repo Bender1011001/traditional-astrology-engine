@@ -245,15 +245,14 @@ def _normalize_deg(deg: float) -> float:
     return deg % 360.0
 
 def _get_obliquity_deg(jd: Optional[float]) -> float:
+    """Return true obliquity of the ecliptic in degrees for the given Julian Day."""
     if jd is None:
         return 23.4392911
     try:
         res = swe.calc_ut(jd, swe.ECL_NUT)
         coords = res[0] if isinstance(res[0], (list, tuple)) else res
-        if isinstance(coords, (list, tuple)) and len(coords) > 1:
-            return coords[1]
-        if isinstance(coords, (list, tuple)) and coords:
-            return coords[0]
+        if isinstance(coords, (list, tuple)) and len(coords) > 0:
+            return coords[0]  # true obliquity (index 0); index 1 is mean obliquity
     except Exception:
         pass
     return 23.4392911
