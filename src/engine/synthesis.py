@@ -1,5 +1,6 @@
 from typing import Dict, List, Any
 from .models import PlanetName, Sect
+from .calculations import format_longitude
 
 class ReportSynthesizer:
     """
@@ -81,7 +82,8 @@ class ReportSynthesizer:
         cols = []
         for k in sorted_keys:
             val = houses[k]
-            cols.append(f"| {k} | {round(val, 2)}° |")
+            fmt = format_longitude(val)
+            cols.append(f"| {k} | {fmt['string']} |")
             
         text += "| House | Cusp |\n|---|---|\n" + "\n".join(cols) + "\n"
         return text
@@ -320,7 +322,9 @@ class ReportSynthesizer:
             text += "No major universal overrides active in this period.\n"
         else:
             for ev in events:
-                text += f"- **{ev.get('type')}:** {ev.get('longitude')}°. Impacting {ev.get('sign', 'N/A')}.\n"
+                lon = ev.get('longitude', 0)
+                fmt = format_longitude(lon) if isinstance(lon, (int, float)) else {"string": str(lon)}
+                text += f"- **{ev.get('type')}:** {fmt['string']}. Impacting {ev.get('sign', 'N/A')}.\n"
                 
         audit = report.get("summary", {}).get("universal_causation_audit", [])
         for a in audit:
