@@ -253,3 +253,67 @@ class PhasisEngine:
                 return PlanetaryPhase.EVENING_LAST
 
         return PlanetaryPhase.FREE
+
+    @staticmethod
+    def calculate_heliacal_events(jd: float, geo_lat: float, geo_lon: float) -> List[Dict]:
+        """
+        Calculates heliacal rising and setting dates for all traditional planets.
+        
+        Uses Swiss Ephemeris swe.heliacal_ut() which implements Schoch/Reingold
+        visibility algorithms based on arcus visionis.
+        
+        Heliacal Rising = first morning visibility after being hidden in Sun's rays.
+        Heliacal Setting = last evening visibility before disappearing into Sun's rays.
+        
+        These were crucial in Mesopotamian & Ptolemaic astrology for determining
+        planetary strength cycles (a planet near its heliacal rising is 'newly born'
+        and gaining power).
+        """
+        results = []
+        # swe.heliacal_ut requires:
+        # geopos: [lon, lat, alt, atm_press, atm_temp, humidity] (length 6)
+        # atmo: [pressure, temperature, humidity, meteo_range] (length 4)
+        # observer: [age, snellen, mono_bino, telescope_aperture, telescope_magnification, ???] (length 6)
+        geopos = [geo_lon, geo_lat, 0.0, 0.0, 0.0, 0.0]
+        atmo = [1013.25, 15.0, 50.0, 0.25]  # Standard atmosphere
+        observer = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  # Default observer
+
+        HELIACAL_PLANETS = [
+            PlanetName.SATURN,
+            PlanetName.JUPITER,
+            PlanetName.MARS,
+            PlanetName.VENUS,
+            PlanetName.MERCURY,
+        ]
+
+        for pname in HELIACAL_PLANETS:
+            entry = {"planet": pname.value, "heliacal_rising": None, "heliacal_setting": None}
+            obj_name = pname.value
+
+            try:
+                res_rise = swe.heliacal_ut(jd, geopos, atmo, observer, obj_name, swe.HELIACAL_RISING, 0)
+                if res_rise and len(res_rise) > 0:
+                    rise_jd = res_rise[0]
+                    y, m, d, h = swe.revjul(rise_jd)
+                    entry["heliacal_rising"] = {
+                        "jd": round(rise_jd, 4),
+                        "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
+                    }
+            except Exception:
+                pass
+
+            try:
+                res_set = swe.heliacal_ut(jd, geopos, atmo, observer, obj_name, swe.HELIACAL_SETTING, 0)
+                if res_set and len(res_set) > 0:
+                    set_jd = res_set[0]
+                    y, m, d, h = swe.revjul(set_jd)
+                    entry["heliacal_setting"] = {
+                        "jd": round(set_jd, 4),
+                        "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
+                    }
+            except Exception:
+                pass
+
+            results.append(entry)
+
+        return results

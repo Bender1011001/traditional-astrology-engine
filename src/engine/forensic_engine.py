@@ -402,7 +402,8 @@ class Auditor:
             "stars": Auditor._calculate_star_impacts(chart),
             "nodes": Auditor._calculate_nodal_impacts(chart),
             "elements": Auditor._calculate_elemental_balance(chart),
-            "hemispheres": Auditor._calculate_hemispheres(chart)
+            "hemispheres": Auditor._calculate_hemispheres(chart),
+            "heliacal_events": PhasisEngine.calculate_heliacal_events(chart.jd, chart.geo_lat, chart.geo_lon) if hasattr(chart, "jd") else []
         }
 
         # Angle metadata (Whole Sign note): MC is an angle and may fall outside the 10th whole-sign house.
