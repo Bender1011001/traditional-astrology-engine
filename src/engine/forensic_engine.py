@@ -1522,7 +1522,7 @@ class Auditor:
                 "almuten": analysis["dignity"]["almuten"]["winner"],
                 "job_description": f"Sovereign {analysis['dignity']['almuten']['winner']}"
             },
-            "vitality": {"vitality_rating": "Stable (Calculated by Auditor)"},
+            "vitality": analysis.get("vitality", {"vitality_rating": "Indeterminate"}),
             "primary_directions": analysis["fate"]["primary_directions"],
             "primary_direction_distributor": analysis["fate"].get("primary_direction_distributor", {}),
             "profections": profections,

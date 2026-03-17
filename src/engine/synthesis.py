@@ -48,8 +48,41 @@ class ReportSynthesizer:
         
         summary = "# EXECUTIVE SUMMARY: COMPREHENSIVE FORENSIC AUDIT\n"
         summary += f"**Soul Guardian (Almuten Figuris):** {soul_guardian.get('almuten', 'Unknown')}\n"
-        summary += f"**Vitality Rating:** {vitality.get('vitality_rating', 'Indeterminate')}\n"
         summary += f"**Core Function:** {soul_guardian.get('job_description', 'N/A')}\n"
+        
+        # Vitality Section — Hyleg/Alcocoden/Anareta
+        hyleg = vitality.get("hyleg", {})
+        alco = vitality.get("alcocoden", {})
+        years = vitality.get("years_capacity", {})
+        anareta = vitality.get("anareta", {})
+        
+        # Pick the best years estimate (valens_term preferred if valid, else default)
+        best_years = years.get("valens_term", years.get("default", {}))
+        rating = best_years.get("vitality_rating", vitality.get("vitality_rating", "Indeterminate"))
+        
+        summary += f"\n### Vitality Assessment (Historical Longevity Technique)\n"
+        summary += f"**Hyleg (Source of Life):** {hyleg.get('name', 'Unknown')} ({hyleg.get('type', '')})\n"
+        
+        if alco:
+            alco_name = alco.get("name")
+            if hasattr(alco_name, "value"):
+                alco_name = alco_name.value
+            alco_aspect = alco.get("aspect", "")
+            summary += f"**Alcocoden (Giver of Years):** {alco_name}"
+            if alco_aspect:
+                summary += f" via {alco_aspect}"
+            summary += "\n"
+        
+        if best_years.get("base_years"):
+            summary += f"**Years Capacity:** {best_years.get('base_years_type', '')} Years of {best_years.get('alcocoden', '')} = {best_years.get('base_years')}\n"
+        
+        summary += f"**Vitality Rating:** {rating}\n"
+        
+        if anareta.get("name"):
+            anareta_reason = anareta.get("reason", "")
+            summary += f"**Anareta (Destroyer):** {anareta.get('name')} — {anareta_reason}\n"
+        
+        summary += "\n_Historical Use Only. This section is not medical advice, diagnosis, or treatment._\n"
         
         return summary
 
