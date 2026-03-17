@@ -94,12 +94,32 @@ class ReportSynthesizer:
         temp_data = summary.get("temperament", {})
         if isinstance(temp_data, dict):
             primary_temp = temp_data.get("primary_temperament", "Unknown")
+            scores = temp_data.get("scores", {})
+            net = temp_data.get("net_balance", {})
         else:
             primary_temp = str(temp_data)
+            scores = {}
+            net = {}
 
         text = "## I. SECT & TEMPERAMENT (HISTORICAL)\n"
         text += f"**Sect:** {summary.get('sect', 'Unknown')}\n"
         text += f"**Temperament:** {primary_temp}\n"
+        
+        # Show humoral quality scores if available
+        if scores:
+            hot = scores.get("Hot", 0)
+            cold = scores.get("Cold", 0)
+            moist = scores.get("Moist", 0)
+            dry = scores.get("Dry", 0)
+            text += f"**Humoral Qualities:** Hot: {hot}, Cold: {cold}, Moist: {moist}, Dry: {dry}\n"
+            
+            if net:
+                hc = net.get("Hot_vs_Cold", 0)
+                md = net.get("Moist_vs_Dry", 0)
+                hc_str = f"Hot+{hc}" if hc > 0 else (f"Cold+{abs(hc)}" if hc < 0 else "Balanced")
+                md_str = f"Moist+{md}" if md > 0 else (f"Dry+{abs(md)}" if md < 0 else "Balanced")
+                text += f"**Net Balance:** {hc_str}, {md_str}\n"
+
         text += "\n"
         text += "_Historical Use Only. This section is not medical advice, diagnosis, or treatment._\n"
         return text
@@ -338,6 +358,39 @@ class ReportSynthesizer:
         if firdaria and "Major Period" in firdaria:
             current = firdaria
             text += f"**Firdaria:** {current.get('Major Period')} / {current.get('Sub Period')} (Phase: {current.get('Sub Start')} to {current.get('Sub End')})\n"
+
+        # Decennials (Valens)
+        decennials = report.get("decennials", [])
+        if decennials:
+            from datetime import datetime
+            now = datetime.now()
+            current_major = None
+            current_sub = None
+            for period in decennials:
+                try:
+                    start = datetime.fromisoformat(period["start_date"])
+                    end = datetime.fromisoformat(period["end_date"])
+                    if start <= now <= end:
+                        current_major = period
+                        # Find current sub-period
+                        for sp in period.get("sub_periods", []):
+                            sp_start = datetime.fromisoformat(sp["start_date"])
+                            sp_end = datetime.fromisoformat(sp["end_date"])
+                            if sp_start <= now <= sp_end:
+                                current_sub = sp
+                                break
+                        break
+                except (ValueError, KeyError):
+                    continue
+            
+            if current_major:
+                dec_str = f"**Decennials (Valens):** {current_major['major_lord']}"
+                if current_sub:
+                    dec_str += f" / {current_sub['sub_lord']}"
+                    dec_str += f" ({current_sub['start_date'][:10]} to {current_sub['end_date'][:10]})"
+                else:
+                    dec_str += f" ({current_major['start_date'][:10]} to {current_major['end_date'][:10]})"
+                text += dec_str + "\n"
 
         # Solar Return
         sr = report.get("solar_return", {})
