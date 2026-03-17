@@ -219,6 +219,75 @@ class MundaneEngine:
 
         return results
 
+    def eclipse_charts_for_native(self, natal_lat: float, natal_lon: float) -> List[Dict]:
+        """
+        Generates localized eclipse charts for the native's birth coordinates.
+        
+        For each recent eclipse (solar & lunar), this creates a chart with houses/angles
+        set for the eclipse moment at the native's location. This is used to determine:
+        - Which natal house the eclipse falls in (topics activated)
+        - The angularity of the eclipse (angular = strong effect)
+        - The ruler of the eclipse degree's condition in the nativity
+        
+        Ref: Ptolemy Tetrabiblos II, Abu Ma'shar On the Great Conjunctions.
+        """
+        eclipses = self.get_recent_eclipses()
+        results = []
+        
+        for ecl in eclipses:
+            eclipse_jd = ecl["jd"]
+            eclipse_lon = ecl["longitude"]
+            
+            try:
+                # Calculate houses at eclipse moment for native's location
+                cusps, ascmc = swe.houses(eclipse_jd, natal_lat, natal_lon, b'W')  # Whole Sign
+                ecl_asc = ascmc[0]
+                ecl_mc = ascmc[1]
+                
+                # Which house does the eclipse degree occupy?
+                ecl_sign_idx = int(eclipse_lon / 30) % 12
+                asc_sign_idx = int(ecl_asc / 30) % 12
+                eclipse_house = ((ecl_sign_idx - asc_sign_idx) % 12) + 1
+                
+                # Angular check (houses 1, 4, 7, 10)
+                is_angular = eclipse_house in [1, 4, 7, 10]
+                is_succedent = eclipse_house in [2, 5, 8, 11]
+                is_cadent = eclipse_house in [3, 6, 9, 12]
+                
+                # Angularity strength
+                if is_angular:
+                    strength = "Angular (STRONG)"
+                elif is_succedent:
+                    strength = "Succedent (Moderate)"
+                else:
+                    strength = "Cadent (Weak)"
+                
+                # Sign ruler of the eclipse degree
+                from .reference_data import DOMICILES
+                ecl_sign = list(Sign)[ecl_sign_idx]
+                sign_ruler = DOMICILES.get(ecl_sign)
+                
+                # Date formatting
+                y, m, d, h = swe.revjul(eclipse_jd)
+                
+                results.append({
+                    "type": ecl["type"],
+                    "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
+                    "eclipse_longitude": round(eclipse_lon, 4),
+                    "eclipse_sign": ecl_sign.value,
+                    "eclipse_degree": round(eclipse_lon % 30, 2),
+                    "native_asc_at_eclipse": round(ecl_asc, 4),
+                    "native_mc_at_eclipse": round(ecl_mc, 4),
+                    "eclipse_house": eclipse_house,
+                    "angularity": strength,
+                    "sign_ruler": sign_ruler.value if sign_ruler else "Unknown",
+                    "duration_hours": ecl.get("duration_hours"),
+                })
+            except Exception:
+                continue
+        
+        return results
+
     def get_world_firdaria(self) -> Dict[str, Any]:
         """
         Implements the Firdaria of the World (75-year Mundane Eras).

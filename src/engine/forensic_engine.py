@@ -325,7 +325,8 @@ class Auditor:
         analysis[ "advanced_mechanics" ] = {
             "almuten": analysis[ "dignity" ][ "almuten" ],
             "doryphory": Auditor._calculate_doryphory_details(chart),
-            "mundane_context": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).get_hierarchy_report()
+            "mundane_context": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).get_hierarchy_report(),
+            "eclipse_charts": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).eclipse_charts_for_native(chart.geo_lat, chart.geo_lon)
         }
 
         # 2b. Prenatal Syzygy + Natal Phase (auditable mechanics)
