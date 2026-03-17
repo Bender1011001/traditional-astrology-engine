@@ -310,24 +310,62 @@ class HylegAlcocodenEngine:
     @staticmethod
     def determine_anareta(hyleg_data: Dict, chart: Chart) -> Dict:
         """
-        Determines a plausible Anareta (Killing Planet) as a technical vitality indicator.
+        Determines the Anareta (Killing Planet / Destroyer of Life).
 
-        This is implemented as a conservative, auditable heuristic:
-        - Prefer Mars/Saturn (the malefics).
-        - Look for the closest hard contact (Conjunction/Square/Opposition) to the Hyleg degree.
-        - Return the strongest candidate with a tight orb.
+        Enhanced per Bonatti (Liber Astronomiae Tr. 8) and Lilly (CA pp. 537-541):
+        1. Mars and Saturn are primary Anareta candidates via hard aspect
+           (Conjunction, Square, Opposition) to the Hyleg degree.
+        2. The OUT-OF-SECT malefic is prioritized — it is the chart's most
+           destructive planet and thus the more likely Anareta.
+        3. The ruler of the 8th house cusp (House of Death) is also a candidate
+           if it makes a hard aspect to the Hyleg.
+        4. The descending degree (7th cusp / occidental horizon) is a classical
+           Anareta point, as it opposes the Ascendant (life).
+
+        Returns the strongest candidate with the tightest orb, with sect-based
+        tiebreaking.
         """
         if not hyleg_data or "longitude" not in hyleg_data:
             return {"name": None, "reason": "No Hyleg available."}
 
         h_lon = hyleg_data["longitude"]
-        malefics = [PlanetName.MARS, PlanetName.SATURN]
+        sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+
+        # Determine out-of-sect malefic (the worse one for this chart)
+        if sect == Sect.DAY:
+            oos_malefic = PlanetName.MARS   # Mars is worse by day
+            is_malefic = PlanetName.SATURN   # Saturn is in-sect by day
+        else:
+            oos_malefic = PlanetName.SATURN  # Saturn is worse by night
+            is_malefic = PlanetName.MARS     # Mars is in-sect by night
+
+        # Build candidate list: malefics + 8th house ruler
+        candidates = [PlanetName.MARS, PlanetName.SATURN]
+
+        # Add 8th house ruler if different from malefics
+        houses = getattr(chart, "houses", None) or {}
+        h8_cusp = houses.get(8, houses.get("8", None))
+        if h8_cusp is not None:
+            from .reference_data import DOMICILES
+            h8_sign = list(Sign)[int(h8_cusp / 30) % 12]
+            h8_ruler = DOMICILES.get(h8_sign)
+            if h8_ruler and h8_ruler not in candidates:
+                candidates.append(h8_ruler)
 
         best = None
         best_orb = 999.0
         best_aspect = None
+        best_is_oos = False   # out-of-sect flag for tiebreaking
+        best_source = ""
 
-        for pn in malefics:
+        # Hard aspect orbs — slightly generous for vitality (life/death matters)
+        HARD_ASPECTS = [
+            (0,   "Conjunction", 6.0),
+            (90,  "Square",      5.0),
+            (180, "Opposition",  5.0),
+        ]
+
+        for pn in candidates:
             p = next((pl for pl in chart.planets if pl.name == pn), None)
             if not p:
                 continue
@@ -335,24 +373,57 @@ class HylegAlcocodenEngine:
             if diff > 180:
                 diff = 360 - diff
 
-            # hard aspects
-            for asp, label, orb_allow in [(0, "Conjunction", 5.0), (90, "Square", 4.0), (180, "Opposition", 4.0)]:
+            is_oos = (pn == oos_malefic)
+
+            for asp, label, orb_allow in HARD_ASPECTS:
                 orb = abs(diff - asp)
-                if orb <= orb_allow and orb < best_orb:
-                    best = p
-                    best_orb = orb
-                    best_aspect = label
+                if orb <= orb_allow:
+                    # Prefer tighter orb; at equal orb, prefer out-of-sect malefic
+                    beats_current = False
+                    if orb < best_orb:
+                        beats_current = True
+                    elif abs(orb - best_orb) < 0.5 and is_oos and not best_is_oos:
+                        beats_current = True  # sect tiebreaker
+
+                    if beats_current:
+                        best = p
+                        best_orb = orb
+                        best_aspect = label
+                        best_is_oos = is_oos
+                        best_source = "malefic" if pn in [PlanetName.MARS, PlanetName.SATURN] else "8th_ruler"
+
+        # Also check the descending degree (7th cusp) as a classical Anareta point
+        desc_lon = (chart.ascendant + 180.0) % 360.0
+        desc_diff = abs(h_lon - desc_lon) % 360
+        if desc_diff > 180:
+            desc_diff = 360 - desc_diff
+        # Conjunction of Hyleg to 7th cusp within 3° is traditionally lethal
+        if desc_diff <= 3.0 and desc_diff < best_orb:
+            return {
+                "name": "Descendant (7th cusp)",
+                "longitude": desc_lon,
+                "aspect_to_hyleg": "Conjunction to Occidental Horizon",
+                "orb": round(desc_diff, 2),
+                "reason": "The Hyleg conjoins the Descendant — the occidental horizon is a classical Anareta point (the setting place)."
+            }
 
         if not best:
             return {
                 "name": None,
-                "reason": "No tight hard aspect from Mars/Saturn to the Hyleg degree found."
+                "reason": "No tight hard aspect from malefics or 8th-house ruler to the Hyleg degree found."
             }
+
+        sect_note = " (Out-of-sect malefic — primary troublemaker)" if best_is_oos else " (In-sect malefic)"
+        source_note = ""
+        if best_source == "8th_ruler":
+            source_note = " [Ruler of the 8th House of Death]"
 
         return {
             "name": best.name.value,
             "longitude": best.longitude,
             "aspect_to_hyleg": best_aspect,
             "orb": round(best_orb, 2),
-            "reason": f"{best.name.value} makes a tight {best_aspect} to the Hyleg degree."
+            "is_out_of_sect": best_is_oos,
+            "reason": f"{best.name.value} makes a tight {best_aspect} ({best_orb:.1f}°) to the Hyleg degree.{sect_note}{source_note}"
         }
+
