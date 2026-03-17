@@ -2,7 +2,7 @@ import math
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 import swisseph as swe
-from .models import Chart, Planet, PlanetName, Sect
+from .models import Chart, Planet, PlanetName, Sect, Sign
 from .dignities import DignityCalculator
 
 @dataclass
@@ -252,6 +252,99 @@ class PrimaryDirectionsEngine:
             }
         except Exception as e:
             return {"error": str(e)}
+
+    @classmethod
+    def calculate_circumambulations(cls, chart: Chart, geo_lat: float, max_years: int = 80) -> List[Dict]:
+        """
+        Circumambulations through the Bounds (Ptolemy Tetrabiblos III.10).
+
+        The master predictive technique of Ptolemaic astrology:
+        - Directs the Ascendant forward 1° per year (Ptolemy Key).
+        - At each year, records which Egyptian Term/Bound the directed Ascendant falls in.
+        - The term ruler is the 'Distributor' — the planet governing that period of life.
+        - When the Asc crosses from one bound to the next, there is a life transition.
+
+        Returns a year-by-year table of bound rulers, signs, and partner planets.
+        """
+        from .reference_data import EGYPTIAN_TERMS
+        from .calculations import format_longitude
+
+        epsilon = cls._get_obliquity(chart.jd) if hasattr(chart, 'jd') and chart.jd else cls.EPSILON
+        mc_ra, _ = cls.ecliptic_to_equatorial(chart.mc, 0.0, epsilon)
+        sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+
+        table = []
+        prev_ruler = None
+
+        for year in range(max_years + 1):
+            arc = cls.ptolemy_key(float(year))
+            ramc_dir = (mc_ra + arc) % 360.0
+
+            try:
+                _cusps, ascmc = swe.houses_armc(ramc_dir, geo_lat, epsilon, b'P')
+                asc_dir_lon = ascmc[0]
+            except Exception:
+                continue
+
+            # Determine which bound the directed Asc falls in
+            sign_idx = int(asc_dir_lon / 30) % 12
+            sign = list(Sign)[sign_idx]
+            deg_in_sign = asc_dir_lon % 30
+
+            terms_for_sign = EGYPTIAN_TERMS[sign]
+            bound_ruler = None
+            bound_start = 0
+            bound_end = 0
+            for ruler, end_deg in terms_for_sign:
+                if deg_in_sign < end_deg:
+                    bound_ruler = ruler
+                    bound_end = end_deg
+                    break
+                bound_start = end_deg
+
+            if not bound_ruler:
+                bound_ruler = terms_for_sign[-1][0]
+                bound_start = terms_for_sign[-2][1] if len(terms_for_sign) > 1 else 0
+                bound_end = 30
+
+            # Detect bound transitions
+            is_transition = (prev_ruler is not None and bound_ruler != prev_ruler)
+            prev_ruler = bound_ruler
+
+            # Partner: planet aspecting the directed degree or domicile ruler
+            dignities = DignityCalculator.get_essential_rulers(asc_dir_lon, sect)
+            partner = dignities.get("domicile")
+            partner_reason = "Domicile ruler"
+            for p in chart.planets:
+                if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO,
+                              PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]:
+                    continue
+                diff = abs(p.longitude - asc_dir_lon) % 360
+                if diff > 180:
+                    diff = 360 - diff
+                for asp_angle in [0, 60, 90, 120, 180]:
+                    if abs(diff - asp_angle) < 3.0:
+                        partner = p.name
+                        partner_reason = f"Aspecting ({p.name.value})"
+                        break
+                if partner != dignities.get("domicile"):
+                    break
+
+            fmt = format_longitude(asc_dir_lon)
+            entry = {
+                "age": year,
+                "directed_asc_lon": round(asc_dir_lon, 4),
+                "directed_asc_fmt": fmt["string"],
+                "sign": sign.value,
+                "bound_ruler": bound_ruler.value if hasattr(bound_ruler, "value") else str(bound_ruler),
+                "bound_range": f"{bound_start}°–{bound_end}°",
+                "partner": partner.value if hasattr(partner, "value") else str(partner),
+                "partner_reason": partner_reason,
+                "is_transition": is_transition,
+            }
+            table.append(entry)
+
+        return table
 
     @classmethod
     def calculate_directions_to_angles(cls, chart: Chart, geo_lat: float) -> List[DirectionResult]:

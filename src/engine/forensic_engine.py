@@ -995,6 +995,7 @@ class Auditor:
             "hermetic_lots": lots,
             "primary_directions": p_dirs_json,
             "primary_direction_distributor": distributor,
+            "circumambulations": PrimaryDirectionsEngine.calculate_circumambulations(chart, chart.geo_lat),
             "active_directions": active_dirs,
             "profections": prediction_report.get("profections", {}),
             "firdaria": prediction_report.get("firdaria", {}),
