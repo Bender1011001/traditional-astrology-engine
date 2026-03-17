@@ -20,17 +20,57 @@ def load_json_data(filename: str) -> Dict[str, Any]:
         return json.load(f)
 
 class DelineationLibrary:
+    """
+    Primary lookup goes to DB.  When nothing is found the library falls back to
+    the legacy JSON files in data/legacy/ so that delineation text is always
+    available — even before the DB has been seeded.
+    """
+
+    # Map DB category names → legacy JSON filenames
+    _LEGACY_FILES = {
+        "planets_in_signs":          "planets_in_signs.json",
+        "planets_in_signs_ingested": "planets_in_signs_ingested.json",
+        "planets_in_houses":         "planets_in_houses.json",
+        "house_topoi":               "house_topoi.json",
+        "detailed_delineations":     "detailed_delineations.json",
+        "aspect_delineations":       "aspect_delineations.json",
+        "profections":               "profections.json",
+        "lots_arabic_parts":         "lots_arabic_parts.json",
+        "lunar_mansions":            "lunar_mansions.json",
+        "fixed_stars":               "fixed_stars.json",
+    }
+
     def __init__(self):
-        # We still keep some static data or fallsbacks if needed, 
-        # but primary lookups will go to DB.
-        # Caching is handled at the method level or via an internal dict.
         self._cache: Dict[str, Any] = {}
-        
+        self._json_cache: Dict[str, Dict] = {}   # category → loaded json dict
+
+    def _load_legacy(self, category: str) -> Dict:
+        """Lazy-load a legacy JSON file and cache it."""
+        if category in self._json_cache:
+            return self._json_cache[category]
+        filename = self._LEGACY_FILES.get(category)
+        if not filename:
+            self._json_cache[category] = {}
+            return {}
+        legacy_dir = os.path.join(DATA_DIR, 'legacy')
+        path = os.path.join(legacy_dir, filename)
+        if os.path.exists(path):
+            try:
+                with open(path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                self._json_cache[category] = data
+                return data
+            except Exception:
+                self._json_cache[category] = {}
+                return {}
+        self._json_cache[category] = {}
+        return {}
+
     def _query_db(self, category: str, key: str) -> Any:
         cache_key = f"{category}:{key}"
         if cache_key in self._cache:
             return self._cache[cache_key]
-        
+
         db = SessionLocal()
         try:
             res = db.query(AstrologicalDelineation).filter(
@@ -40,10 +80,19 @@ class DelineationLibrary:
             if res:
                 self._cache[cache_key] = res.content
                 return res.content
-            return None
+        except Exception:
+            pass  # DB may not be available; fall through to legacy
         finally:
             db.close()
 
+        # Fallback: legacy JSON
+        legacy = self._load_legacy(category)
+        val = legacy.get(key)
+        if val is not None:
+            self._cache[cache_key] = val
+            return val
+        return None
+        
     def get_planet_delineation(self, key: str) -> str:
         res = self._query_db('planets_in_signs', key)
         if not res:
