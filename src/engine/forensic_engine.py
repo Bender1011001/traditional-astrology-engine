@@ -999,6 +999,7 @@ class Auditor:
 
         # 1. Primary Directions
         directions = PrimaryDirectionsEngine.calculate_directions_to_angles(chart, chart.geo_lat)
+        planet_directions = PrimaryDirectionsEngine.calculate_directions_to_planets(chart, chart.geo_lat)
         distributor = PrimaryDirectionsEngine.calculate_current_distributor(chart, age_years, chart.geo_lat)
         
         # Serialize and Filter Active (for Ledger)
@@ -1030,6 +1031,7 @@ class Auditor:
         return {
             "hermetic_lots": lots,
             "primary_directions": p_dirs_json,
+            "planet_to_planet_directions": [{"significator": d.significator, "promittor": d.promittor, "aspect": d.aspect, "arc": d.arc, "years": d.years, "date_offset": d.date_offset} for d in planet_directions],
             "primary_direction_distributor": distributor,
             "circumambulations": PrimaryDirectionsEngine.calculate_circumambulations(chart, chart.geo_lat),
             "active_directions": active_dirs,

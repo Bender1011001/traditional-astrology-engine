@@ -542,6 +542,74 @@ class PrimaryDirectionsEngine:
 
         return sorted(results, key=lambda x: x.years)
 
+    @classmethod
+    def calculate_directions_to_planets(cls, chart: Chart, geo_lat: float) -> List[DirectionResult]:
+        """
+        Directs each traditional planet to every other planet's natal position.
+        
+        This completes the primary directions suite:
+        - calculate_directions_to_angles: planets to Asc/MC
+        - calculate_directions_to_point: planets to arbitrary point (Hyleg)
+        - calculate_directions_to_planets: planets to each other
+        
+        Returns all planet-to-planet directions within 80 years.
+        """
+        results: List[DirectionResult] = []
+        traditional = [p for p in chart.planets 
+                       if p.name not in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE,
+                                         PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]]
+        
+        epsilon = cls._get_obliquity(chart.jd) if hasattr(chart, 'jd') and chart.jd else cls.EPSILON
+        
+        aspects_to_check = [
+            ("Conjunction", 0),
+            ("Square", 90),
+            ("Opposition", 180),
+        ]
+        
+        for sig in traditional:
+            # OA of the significator (the planet being aspected)
+            ra_sig, dec_sig = cls.ecliptic_to_equatorial(sig.longitude, 0.0, epsilon)
+            ad_sig = cls.calculate_ad(dec_sig, geo_lat)
+            oa_sig = (ra_sig - ad_sig) % 360.0
+            
+            for prom in traditional:
+                if prom.name == sig.name:
+                    continue
+                
+                for asp_name, asp_angle in aspects_to_check:
+                    if asp_angle == 0:
+                        aspect_lons = [(prom.longitude, "Conjunction")]
+                    elif asp_angle == 180:
+                        aspect_lons = [((prom.longitude + 180) % 360, "Opposition")]
+                    else:
+                        aspect_lons = [
+                            ((prom.longitude + asp_angle) % 360, f"{asp_name} (Dexter)"),
+                            ((prom.longitude - asp_angle) % 360, f"{asp_name} (Sinister)"),
+                        ]
+                    
+                    for lon_pt, name_pt in aspect_lons:
+                        ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0, epsilon)
+                        ad_pt = cls.calculate_ad(dec_pt, geo_lat)
+                        oa_pt = (ra_pt - ad_pt) % 360.0
+                        
+                        arc = oa_pt - oa_sig
+                        if arc < 0:
+                            arc += 360.0
+                        
+                        if 0 < arc < 80:
+                            results.append(DirectionResult(
+                                significator=sig.name.value,
+                                promittor=prom.name.value,
+                                aspect=name_pt,
+                                arc=arc,
+                                years=cls.ptolemy_key(arc),
+                                date_offset=cls.format_years(arc),
+                                method="Placidus/Zodiacal",
+                            ))
+
+        return sorted(results, key=lambda x: x.years)
+
     @staticmethod
     def ptolemy_key(arc: float) -> float:
         """1 degree = 1 year"""
