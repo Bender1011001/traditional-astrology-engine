@@ -711,15 +711,49 @@ class Auditor:
         daily_index = (monthly_cont_index + daily_steps) % 12
         daily_sign = signs[daily_index]
         
+        # LOY Natal Position — which house does the Lord of Year occupy?
+        loy_planet = next((p for p in chart.planets if p.name == loy_name), None)
+        loy_natal_house = None
+        loy_natal_sign = None
+        loy_retrograde = False
+        loy_dignities_summary = ""
+        if loy_planet:
+            loy_natal_house = DignityCalculator.get_house_number(
+                loy_planet.longitude, chart.ascendant, getattr(chart, "houses", None)
+            )
+            loy_natal_sign = signs[int(loy_planet.longitude / 30) % 12].value
+            loy_retrograde = getattr(loy_planet, "speed", 1.0) < 0
+            
+            # Essential dignity check
+            sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+            rulers = DignityCalculator.get_essential_rulers(loy_planet.longitude, sect)
+            if rulers.get("domicile") == loy_name:
+                loy_dignities_summary = "Domicile"
+            elif rulers.get("exaltation") == loy_name:
+                loy_dignities_summary = "Exaltation"
+            elif rulers.get("triplicity") == loy_name:
+                loy_dignities_summary = "Triplicity"
+            elif rulers.get("term") == loy_name:
+                loy_dignities_summary = "Term"
+            elif rulers.get("face") == loy_name:
+                loy_dignities_summary = "Face"
+            else:
+                loy_dignities_summary = "Peregrine"
+        
         # Epitasis
         epitasis_days = []
-        loy_planet = next((p for p in chart.planets if p.name == loy_name), None)
         if loy_planet:
             epitasis_days = calculate_epitasis_days(monthly_sign_cont, loy_planet.sign)
             
         return {
             "annual_sign": annual_sign.value,
             "lord_of_year": loy_name.value,
+            "lord_of_year_natal": {
+                "house": loy_natal_house,
+                "sign": loy_natal_sign,
+                "retrograde": loy_retrograde,
+                "dignity": loy_dignities_summary,
+            },
             "monthly_sign": {
                 "continuous": monthly_sign_cont.value,
                 "saltatory": monthly_sign_salt.value
