@@ -339,7 +339,9 @@ class ReportSynthesizer:
             for ev in events:
                 lon = ev.get('longitude', 0)
                 fmt = format_longitude(lon) if isinstance(lon, (int, float)) else {"string": str(lon)}
-                text += f"- **{ev.get('type')}:** {fmt['string']}. Impacting {ev.get('sign', 'N/A')}.\n"
+                sign_raw = ev.get('sign', 'N/A')
+                sign_str = sign_raw.value if hasattr(sign_raw, 'value') else str(sign_raw)
+                text += f"- **{ev.get('type')}:** {fmt['string']}. Impacting {sign_str}.\n"
                 
         audit = report.get("summary", {}).get("universal_causation_audit", [])
         for a in audit:
