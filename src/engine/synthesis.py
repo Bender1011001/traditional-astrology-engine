@@ -323,13 +323,27 @@ class ReportSynthesizer:
             sign = data.get("sign", "")
             ruler = data.get("ruler", "")
             
-            line = f"**{lot_name}:** {status}."
-            if "Maltreated" in status:
+            # Extract position data if available
+            lot_data = data.get("data", {})
+            lot_lon = lot_data.get("longitude")
+            lot_house = lot_data.get("house")
+            lot_sign = lot_data.get("sign", sign)
+            
+            # Format position
+            pos_str = ""
+            if lot_lon is not None:
+                fmt = format_longitude(lot_lon)
+                pos_str = f" [{fmt['string']}, House {lot_house}]" if lot_house else f" [{fmt['string']}]"
+            elif lot_sign:
+                pos_str = f" [in {lot_sign}]"
+            
+            line = f"**{lot_name}:**{pos_str} {status}."
+            if "Maltreated" in status or "maltreated" in status.lower():
                 details = data.get("maltreatment_details", [])
                 if details:
                     line += " " + " ".join(details)
-            else:
-                 line += f" (in {sign}, ruled by {ruler})"
+            elif ruler:
+                line += f" Ruled by {ruler}."
                  
             text += line + "\n"
             
