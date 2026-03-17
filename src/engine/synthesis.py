@@ -203,10 +203,25 @@ class ReportSynthesizer:
             }
         }
 
+        # Compute Ascendant sign index for Whole Sign house placement
+        asc_sign_idx = None
+        houses = report.get("houses", {})
+        if houses:
+            # First house cusp tells us the Ascendant sign
+            h1_cusp = houses.get("1", houses.get(1, 0))
+            asc_sign_idx = int(h1_cusp / 30) % 12
+
         for p in planets:
             name = p.get("name", "Unknown")
             sign = p.get("sign", "Unknown")
             lon = p.get("longitude", 0.0)
+
+            # Calculate Whole Sign house
+            ws_house = ""
+            if asc_sign_idx is not None:
+                planet_sign_idx = int(lon / 30) % 12
+                house_num = ((planet_sign_idx - asc_sign_idx) % 12) + 1
+                ws_house = f" — House {house_num}"
             
             dignity = p.get("dignities", {})
             total_score = dignity.get("total_score", 0)
@@ -219,7 +234,7 @@ class ReportSynthesizer:
             
             maltreatments = p.get("maltreatments", [])
             
-            text += f"### {name} in {sign} ({round(lon % 30, 2)}°)\n"
+            text += f"### {name} in {sign} ({round(lon % 30, 2)}°){ws_house}\n"
             
             if name not in ["North_Node", "South_Node"]:
                 text += f"- **Essential Dignity:** `{total_score}` (Domicile: {dignity.get('domicile_ruler')}, Exaltation: {dignity.get('exaltation_ruler')})\n"
