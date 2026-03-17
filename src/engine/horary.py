@@ -247,6 +247,70 @@ def check_frustration(p1: Planet, p2: Planet, chart: Chart) -> Optional[Dict]:
                     }
     return None
 
+def check_abscission(p1: Planet, p2: Planet, chart: Chart) -> Optional[Dict]:
+    """
+    Abscission of Light (Abscissio Luminis): A third planet interposes itself
+    bodily (by conjunction) between two applying significators, preventing
+    perfection by cutting the light path.
+    Ref: Bonatti, Liber Astronomiae Tr. 5; Lilly CA p.115.
+    Distinct from Prohibition, which works by aspect — Abscission works by
+    bodily interposition.
+    """
+    # 1. Find the primary applying aspect between p1 and p2
+    main_aspect = None
+    main_angle = 0
+    faster, slower = (p1, p2) if abs(p1.speed) >= abs(p2.speed) else (p2, p1)
+
+    for name, angle in MAJOR_ASPECTS.items():
+        if is_applying(faster, slower, angle):
+            main_aspect = name
+            main_angle = angle
+            break
+
+    if not main_aspect:
+        return None
+
+    # 2. Determine the zodiacal arc the faster planet must traverse
+    #    We check if any p3 sits bodily between the faster planet and the
+    #    target longitude (slower planet's position ± aspect angle).
+    target_lon = (slower.longitude + main_angle) % 360
+    arc_start = faster.longitude
+    arc_length = (target_lon - arc_start) % 360
+
+    if arc_length == 0 or arc_length > 180:
+        # Reverse direction
+        arc_start = faster.longitude
+        arc_length = (arc_start - target_lon) % 360
+        if arc_length == 0 or arc_length > 180:
+            return None
+
+    for p3 in chart.planets:
+        if p3.name == faster.name or p3.name == slower.name:
+            continue
+
+        # Check if p3 is bodily within the arc between faster and the target
+        dist_to_p3 = (p3.longitude - arc_start) % 360
+        if 0 < dist_to_p3 < arc_length:
+            # p3 is in the path — check if faster planet will conjunct p3 first
+            rel_speed_p3 = abs(faster.speed - p3.speed)
+            rel_speed_main = abs(faster.speed - slower.speed)
+            if rel_speed_p3 == 0 or rel_speed_main == 0:
+                continue
+
+            time_to_p3 = dist_to_p3 / rel_speed_p3
+            time_to_main = arc_length / rel_speed_main
+
+            if time_to_p3 < time_to_main:
+                return {
+                    "condition": "Abscission of Light",
+                    "cutter": p3.name.value,
+                    "faster": faster.name.value,
+                    "slower": slower.name.value,
+                    "details": f"{p3.name.value} interposes bodily between {faster.name.value} and {slower.name.value}, cutting the light before {main_aspect} perfects.",
+                    "status": "Active"
+                }
+    return None
+
 def check_refranation(p1: Planet, p2: Planet) -> Optional[Dict]:
     """
     Refranation: p1 applies to p2, but turns retrograde (or p2 turns) before completion.
@@ -370,15 +434,19 @@ def analyze_horary_physics(p1_name: PlanetName, p2_name: PlanetName, chart: Char
     frustration = check_frustration(p1, p2, chart)
     if frustration: conditions.append(frustration)
     
-    # 6. Refranation
+    # 6. Abscission of Light
+    abscission = check_abscission(p1, p2, chart)
+    if abscission: conditions.append(abscission)
+
+    # 7. Refranation
     refranation = check_refranation(p1, p2)
     if refranation: conditions.append(refranation)
     
-    # 7. Mutual Reception (Mitigation)
+    # 8. Mutual Reception (Mitigation)
     reception = check_mutual_reception(p1, p2, chart)
     if reception: conditions.append(reception)
 
-    # 8. Antiscia / Contra-antiscia
+    # 9. Antiscia / Contra-antiscia
     a1, ca1 = calculate_antiscia(p1.longitude)
     orb = 1.0 # Standard orb for Antiscia
     
@@ -425,6 +493,7 @@ NEGATIVE_CONDITIONS = {
     "Prohibition",
     "Refranation",
     "Frustration",
+    "Abscission of Light",
     "Contra-antiscia"
 }
 
