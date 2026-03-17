@@ -7,8 +7,8 @@ updated: 2026-03-16
 # Astrological Engine
 
 ## Resume
-- **Pick up at**: All 6 audit fixes applied and verified. Next: Horary Abscission of Light, Hyleg aspect-based Anareta.
-- **Last session**: Full 46-file audit completed (2026-03-16). 5 Critical (2 real), 10 Moderate, 8 Minor issues found. 6 fixes applied.
+- **Pick up at**: 11 total fixes applied. Next targets: Hyleg aspect-based Anareta, Lunar Mansions sidereal option, missing technique implementations.
+- **Last session**: Full 46-file audit completed (2026-03-16). 11 fixes applied and verified. Report quality significantly improved.
 - **Blocked on**: Nothing
 
 ## Status
@@ -28,7 +28,7 @@ updated: 2026-03-16
 - `forensic_engine.py`: Central hub/Auditor. Orchestrates all engines, produces bifurcated JSON output.
 - `dignities.py`: 5-tier essential dignities + accidental dignities, Hayz/Halb, Monomoiria.
 - `advanced_mechanics.py`: Hermetic Lots, Almuten Figuris, Doryphory, Dodecatemoria.
-- `horary.py`: Horary physics (Translation, Collection, Prohibition, Frustration, Refranation).
+- `horary.py`: Horary physics (Translation, Collection, Prohibition, Frustration, Abscission, Refranation).
 - `aspects.py`: Ptolemaic 5 aspects with applying/separating and sect-qualified interpretations.
 - `reception.py`: Bonatti Strict / Lilly Standard reception with mutual reception detection.
 - `temperament.py`: Lilly's humoral calculation (now includes inherent planetary natures).
@@ -61,6 +61,11 @@ updated: 2026-03-16
 | Bonatti reception too permissive | Threshold `>= 2` admitted bare Term reception | Changed to `>= 3` in `reception.py` |
 | Chariot always False | `check_chariot()` was a stub | Implemented using DignityCalculator in `phasis.py` |
 | Incomplete temperament | Missing inherent planetary natures in tally | Added `PLANET_NATURES` dict in `temperament.py` |
+| Abscission of Light missing | Horary only had 6 of 7 Bonatti conditions | Implemented `check_abscission()` in `horary.py` |
+| Delineations "not found" | DB not seeded, no JSON fallback | Added legacy JSON fallback to `db_manager.py` |
+| House cusps raw degrees | Report showed `150.0°` instead of sign names | Used `format_longitude()` in `synthesis.py` |
+| No house placement shown | Planet headers lacked house context | Added Whole Sign house calculation in `synthesis.py` |
+| Eclipse signs raw enums | Report showed `Sign.ARIES` instead of `Aries` | Extract `.value` from enum objects in `synthesis.py` |
 
 ## Anti-Patterns
 - Do NOT use modern psychological labels alone; always provide the traditional deterministic grounding (Dignity score).
