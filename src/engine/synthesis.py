@@ -233,8 +233,11 @@ class ReportSynthesizer:
             elif solar == "CAZIMI": solar_cond = "👑 CAZIMI (Heart of the Sun)"
             
             maltreatments = p.get("maltreatments", [])
+            is_retro = p.get("retrograde", False)
+            speed = p.get("speed", 0)
+            retro_glyph = " ℞" if is_retro else ""
             
-            text += f"### {name} in {sign} ({round(lon % 30, 2)}°){ws_house}\n"
+            text += f"### {name} in {sign} ({round(lon % 30, 2)}°){ws_house}{retro_glyph}\n"
             
             if name not in ["North_Node", "South_Node"]:
                 text += f"- **Essential Dignity:** `{total_score}` (Domicile: {dignity.get('domicile_ruler')}, Exaltation: {dignity.get('exaltation_ruler')})\n"
@@ -250,6 +253,10 @@ class ReportSynthesizer:
                 )
                 if essential_sum == 0 and name not in ["North_Node", "South_Node"]:
                     text += f"  - 🦅 **Peregrine (Wanderer):** This planet lacks essential dignity, behaving like a stranger in a foreign land without resources.\n"
+                
+                # Retrograde Check (Lilly: -5 accidental debility)
+                if is_retro:
+                    text += f"  - 🔄 **Retrograde** ({speed:.4f}°/day): Planet moves against the natural order. Accidental debility (-5 per Lilly).\n"
                 
                 text += f"- **Solar Condition:** {solar_cond}\n"
             
