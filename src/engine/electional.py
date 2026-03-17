@@ -142,6 +142,24 @@ class ElectionalEngine:
             details.append("Moon is Besieged (Trapped between Mars/Saturn) - Critical Weakness")
             is_viable = False
 
+        # Via Combusta (15° Libra to 15° Scorpio = 195° to 225°)
+        if 195.0 <= moon.longitude <= 225.0:
+            score -= 30
+            details.append("Moon in Via Combusta (Burning Way, 15° Lib – 15° Sco) - Critical Weakness")
+            is_viable = False
+
+        # Early Ascendant Degree (Bonatti Consideration 6: 0°-3°)
+        asc_deg_in_sign = chart.ascendant % 30
+        if asc_deg_in_sign < 3.0:
+            score -= 20
+            details.append(f"Ascendant at {asc_deg_in_sign:.1f}° (Bonatti #6: Too early to judge)")
+
+        # Late Ascendant Degree (Bonatti Consideration 7/30: 27°-30°)
+        if asc_deg_in_sign >= 27.0:
+            score -= 25
+            details.append(f"Ascendant at {asc_deg_in_sign:.1f}° (Bonatti #7/#30: Matter is past, don't begin)")
+            is_viable = False
+
         # 2. Ascendant & Ruler Conditions
         asc_sign_idx = int(chart.ascendant / 30) % 12
         asc_sign = list(Sign)[asc_sign_idx]

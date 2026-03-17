@@ -31,6 +31,18 @@ class TemperamentEngine:
         "Last Quarter to New": {"Cold": 1, "Moist": 1, "Hot": 0, "Dry": 0}
     }
 
+    # Inherent planetary natures per Lilly, Christian Astrology (1647), pp. 57-83.
+    # Each planet contributes its own temperamental nature to the tally.
+    PLANET_NATURES = {
+        PlanetName.SATURN:  {"Hot": 0, "Cold": 1, "Moist": 0, "Dry": 1},
+        PlanetName.JUPITER: {"Hot": 1, "Cold": 0, "Moist": 1, "Dry": 0},
+        PlanetName.MARS:    {"Hot": 1, "Cold": 0, "Moist": 0, "Dry": 1},
+        PlanetName.SUN:     {"Hot": 1, "Cold": 0, "Moist": 0, "Dry": 1},
+        PlanetName.VENUS:   {"Hot": 0, "Cold": 1, "Moist": 1, "Dry": 0},
+        PlanetName.MERCURY: {"Hot": 0, "Cold": 0, "Moist": 0, "Dry": 0},  # Variable; takes sign nature
+        PlanetName.MOON:    {"Hot": 0, "Cold": 1, "Moist": 1, "Dry": 0},
+    }
+
     @staticmethod
     def get_element_qualities(sign: Sign):
         element = DignityCalculator.ZODIAC_ELEMENTS[sign]
@@ -74,9 +86,8 @@ class TemperamentEngine:
         TemperamentEngine._add_qualities(tally, season_qual)
         details.append(f"Season ({season_name}): +{season_qual}")
 
-        # 6. Almuten of Ascendant (Simplified check for simple ruler, can be expanded to Almuten Figuris later)
-        # Using the Ruler (step 2) is often sufficient for basic calc, but Lilly adds planets aspecting Moon/Asc.
-        # We will add Planets oscillating the Moon (Conjunctions/Oppositions/Squares)
+        # 6. Planets aspecting Moon (sign element contribution)
+        # Lilly adds planets aspecting Moon/Asc as temperament modifiers.
         for p in chart.planets:
             if p.name in [PlanetName.MOON, PlanetName.SUN, PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
             
@@ -88,6 +99,18 @@ class TemperamentEngine:
                 p_qual = TemperamentEngine.get_element_qualities(p.sign)
                 TemperamentEngine._add_qualities(tally, p_qual)
                 details.append(f"Planet {p.name.value} aspecting Moon: +{p_qual}")
+
+        # 7. Inherent Planetary Natures (Lilly, CA pp. 57-83)
+        # Each significant planet contributes its own inherent Hot/Cold/Moist/Dry nature.
+        # Significant = Ascendant ruler, Moon, and planets aspecting Moon.
+        for p in chart.planets:
+            if p.name in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE,
+                          PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
+                continue
+            p_nature = TemperamentEngine.PLANET_NATURES.get(p.name)
+            if p_nature and any(v > 0 for v in p_nature.values()):
+                TemperamentEngine._add_qualities(tally, p_nature)
+                details.append(f"Planet {p.name.value} inherent nature: +{p_nature}")
 
         # Lilly's Calculation: Net Balance
         net_hot = tally["Hot"] - tally["Cold"]

@@ -1,4 +1,15 @@
+---
+project: astrology
+status: complete
+updated: 2026-03-14
+---
+
 # Astrology Project
+
+## Resume
+- **Pick up at**: [Review and update]
+- **Last session**: [Auto-migrated to CONTEXT v2]
+- **Blocked on**: Nothing
 
 ## Status
 - **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments).

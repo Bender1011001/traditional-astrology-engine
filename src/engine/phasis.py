@@ -57,12 +57,20 @@ class PhasisEngine:
     @staticmethod
     def check_chariot(planet_name: PlanetName, planet_lon: float, domiciles: Dict, terms: Dict) -> bool:
         """
-        A planet is in its chariot if it is in its own Domicile, Exaltation, or Bounds.
-        Note: Passing domiciles/terms as dicts for decoupled logic.
+        A planet is in its chariot if it is in its own Domicile, Exaltation, or Bounds (Terms).
+        Ref: Paulus Alexandrinus, Introduction to Astrology, Ch. 14.
         """
-        # Logic to be implemented or called from dignities.py
-        # For now, placeholder or base logic if dignities is too complex to pass
-        return False # To be integrated with dignities.py
+        from .dignities import DignityCalculator
+        from .models import Sect
+        # Use a neutral sect for essential ruler lookup (chariot doesn't depend on sect)
+        rulers = DignityCalculator.get_essential_rulers(planet_lon, Sect.DAY)
+        if rulers.get("domicile") == planet_name:
+            return True
+        if rulers.get("exaltation") == planet_name:
+            return True
+        if rulers.get("term") == planet_name:
+            return True
+        return False
 
     @staticmethod
     def calculate_visibility_details(

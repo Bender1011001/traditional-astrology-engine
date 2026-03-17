@@ -38,6 +38,7 @@ def format_longitude(lon: float) -> dict:
         "dms": {"deg": deg, "min": minute, "sec": second},
         "string": s,
     }
+
 def calculate_sect(sun_altitude: float) -> Sect:
     return Sect.DAY if sun_altitude > 0 else Sect.NIGHT
 
@@ -222,24 +223,39 @@ def is_besieged(planet: Planet, chart: Chart) -> bool:
 
 def is_void_of_course(moon_lon: float, chart_planets: list[Planet]) -> bool:
     """
-    Bonatti Consideration 5: Void of Course Moon.
-    Simplified: No major aspect before leaving the sign (30° boundary).
+    Bonatti Consideration 5 / Lilly CA p.112: Void of Course Moon.
+    The Moon is VoC if it completes no *applying* major aspect before leaving its sign.
+    Application requires: (1) target longitude ahead of Moon within the sign, AND
+    (2) Moon is closing the gap (relative speed positive toward the target).
     """
-    moon_sign_idx = int(moon_lon / 30)
+    moon = next((p for p in chart_planets if p.name == PlanetName.MOON), None)
+    if not moon:
+        return True  # No Moon data — treat as VoC for safety
+
+    moon_speed = moon.speed if moon.speed is not None else 13.0  # avg daily motion fallback
     moon_pos_in_sign = moon_lon % 30
     dist_to_end = 30 - moon_pos_in_sign
-    
+
     major_aspects = [0, 60, 90, 120, 180]
-    
+
     for p in chart_planets:
-        if p.name == PlanetName.MOON: continue
-        
+        if p.name == PlanetName.MOON:
+            continue
+
+        p_speed = p.speed if p.speed is not None else 0.0
+
         for aspect in major_aspects:
             for sign_mult in [-1, 1]:
                 target_lon = (p.longitude + (sign_mult * aspect)) % 360
                 dist_to_target = (target_lon - moon_lon) % 360
-                
-                # Check if this target is reached by forward motion within the sign
-                if dist_to_target < dist_to_end:
-                    return False 
+
+                # Target must be ahead of Moon and reachable before sign boundary
+                if 0 < dist_to_target < dist_to_end:
+                    # Application check: Moon must be closing the gap.
+                    # The aspect point moves with the planet, so closing speed =
+                    # Moon's speed minus the planet's speed.
+                    closing_speed = moon_speed - p_speed
+                    if closing_speed > 0:
+                        # Moon is applying — NOT void of course
+                        return False
     return True

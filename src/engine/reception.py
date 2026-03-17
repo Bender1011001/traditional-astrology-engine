@@ -126,7 +126,7 @@ class ReceptionEngine:
             # Usually Domicile, Exaltation, Triplicity OR (Term AND Face) or variant.
             # Simplified: Score >= 3 (Triplicity) OR (Term and Face = 3) ??
             # Let's say Score >= 2 (at least Term)
-            if score >= 2:
+            if score >= 3:
                 is_valid = True
         else:
             # Standard: Any dignity counts

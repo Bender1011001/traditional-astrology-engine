@@ -1,4 +1,15 @@
+---
+project: static
+status: complete
+updated: 2026-03-14
+---
+
 # Static Assets (B2C Readings Site)
+
+## Resume
+- **Pick up at**: [Review and update]
+- **Last session**: [Auto-migrated to CONTEXT v2]
+- **Blocked on**: Nothing
 
 ## Status
 - **Working**: Main landing/readings page (index.html), guest checkout flow, premium reading generation, Stripe one-time payments.
