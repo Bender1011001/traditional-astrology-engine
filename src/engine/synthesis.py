@@ -33,6 +33,9 @@ class ReportSynthesizer:
         # 7. The Fate Timeline
         sections.append(ReportSynthesizer._generate_fate_timeline(raw_report))
         
+        # 7b. Fixed Star Contacts
+        sections.append(ReportSynthesizer._generate_fixed_stars(raw_report))
+        
         # 8. Forensic Audit
         sections.append(ReportSynthesizer._generate_forensic_audit(raw_report))
         
@@ -336,6 +339,25 @@ class ReportSynthesizer:
                 
             text += "\n---\n"
             
+        return text
+
+    @staticmethod
+    def _generate_fixed_stars(report: Dict) -> str:
+        """Render fixed star contacts from the legacy report."""
+        stars = report.get("fixed_stars", [])
+        if not stars:
+            return ""
+        
+        text = "## FIXED STAR CONTACTS\n"
+        for s in stars:
+            star = s.get("star_name", "Unknown")
+            planet = s.get("planet_name", "Unknown")
+            msg = s.get("message", "")
+            myth = s.get("mythology", "")
+            text += f"**⭐ {star}** ({myth}) — conjunct {planet}\n"
+            if msg:
+                text += f"> {msg}\n"
+            text += "\n"
         return text
 
     @staticmethod

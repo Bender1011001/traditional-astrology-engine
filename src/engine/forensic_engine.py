@@ -1573,6 +1573,7 @@ class Auditor:
             "forensic_lots": analysis["fate"]["hermetic_lots"],
             "planets": tech_data["planets_forensic"],
             "houses": tech_data["astronomy"]["houses"],
-            "aspects": formatted_aspects
+            "aspects": formatted_aspects,
+            "fixed_stars": [{"star_name": s.star_name if hasattr(s, 'star_name') else s.get('star_name', ''), "planet_name": s.planet_name if hasattr(s, 'planet_name') else s.get('planet_name', ''), "message": s.message if hasattr(s, 'message') else s.get('message', ''), "mythology": s.mythology if hasattr(s, 'mythology') else s.get('mythology', '')} for s in analysis.get('supplemental', {}).get('stars', [])]
         }
         return legacy
