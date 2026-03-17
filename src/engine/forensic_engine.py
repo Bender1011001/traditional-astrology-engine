@@ -1505,21 +1505,23 @@ class Auditor:
         teams = analysis["teams"]
         moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
         
-        # Helper for Profections
-        muntha = analysis["fate"].get("muntha", {})
-        profections = {}
-        if muntha:
-            sign_name = muntha.get("sign")
-            from .reference_data import DOMICILES, Sign
-            try:
-                s = next(s for s in Sign if s.value == sign_name)
-                ruler = DOMICILES[s]
-                profections = {
-                    "lord_of_year": ruler.value if hasattr(ruler, "value") else str(ruler),
-                    "annual_sign": sign_name
-                }
-            except:
-                profections = {"lord_of_year": "Unknown", "annual_sign": sign_name}
+        # Helper for Profections — prefer enhanced_profections (has LOY natal info)
+        profections = analysis.get("enhanced_profections", {})
+        if not profections:
+            # Fallback to muntha-based construction
+            muntha = analysis["fate"].get("muntha", {})
+            if muntha:
+                sign_name = muntha.get("sign")
+                from .reference_data import DOMICILES, Sign
+                try:
+                    s = next(s for s in Sign if s.value == sign_name)
+                    ruler = DOMICILES[s]
+                    profections = {
+                        "lord_of_year": ruler.value if hasattr(ruler, "value") else str(ruler),
+                        "annual_sign": sign_name
+                    }
+                except Exception:
+                    profections = {"lord_of_year": "Unknown", "annual_sign": sign_name}
 
         # Format Aspects for Legacy Report
         formatted_aspects = []

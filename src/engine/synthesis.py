@@ -352,6 +352,10 @@ class ReportSynthesizer:
         prof = report.get("profections", {})
         if prof:
             text += f"**Lord of the Year:** {prof.get('lord_of_year')} (Annual Sign: {prof.get('annual_sign')})\n"
+            loy_natal = prof.get("lord_of_year_natal", {})
+            if loy_natal and loy_natal.get("house"):
+                rx_mark = " ℞" if loy_natal.get("retrograde") else ""
+                text += f"  → LOY in natal House {loy_natal['house']}, {loy_natal.get('sign', '')}{rx_mark} — {loy_natal.get('dignity', 'Unknown')}\n"
 
         # Firdaria
         firdaria = report.get("firdaria", {})
