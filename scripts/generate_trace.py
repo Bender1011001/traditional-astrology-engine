@@ -1211,11 +1211,88 @@ def render_html(trace: ComputationTrace) -> str:
         .hero h1 {{ color: #333; -webkit-text-fill-color: #333; }}
         .category-body.hidden {{ display: block !important; }}
     }}
+    
+    /* Controls */
+    .controls-bar {{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }}
+    
+    .search-input {{
+        flex: 1;
+        min-width: 200px;
+        padding: 0.7rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.2s;
+    }}
+    
+    .search-input:focus {{
+        border-color: var(--accent);
+        box-shadow: 0 0 12px var(--accent-glow);
+    }}
+    
+    .search-input::placeholder {{
+        color: var(--text-muted);
+    }}
+    
+    .controls-buttons {{
+        display: flex;
+        gap: 0.5rem;
+    }}
+    
+    .ctrl-btn {{
+        padding: 0.6rem 1rem;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-dim);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }}
+    
+    .ctrl-btn:hover {{
+        background: var(--surface-3);
+        border-color: var(--accent);
+        color: var(--text);
+    }}
+    
+    .scroll-top {{
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: 100;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }}
+    
+    .scroll-top:hover {{
+        background: var(--gold);
+    }}
 </style>
 </head>
 <body>
     <div class="hero">
-        <h1>⚙ Computation Trace</h1>
+        <h1>&#9881; Computation Trace</h1>
         <div class="subtitle">Every calculation step, verified and sourced</div>
         <div class="meta-line">
             <div class="meta-badge"><strong>{trace.subject_name}</strong></div>
@@ -1227,6 +1304,14 @@ def render_html(trace: ComputationTrace) -> str:
     </div>
     
     <div class="container">
+        <div class="controls-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search steps... (e.g. Sun, Domicile, Fortune)" oninput="filterSteps(this.value)">
+            <div class="controls-buttons">
+                <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
+                <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
+            </div>
+        </div>
+        
         <div class="toc">
             <h2>Table of Contents</h2>
             <ul>{toc_items}</ul>
@@ -1235,11 +1320,13 @@ def render_html(trace: ComputationTrace) -> str:
         {all_categories}
         
         <div class="footer">
-            <p>Traditional Astrology Engine — Computation Trace</p>
+            <p>Traditional Astrology Engine &mdash; Computation Trace</p>
             <p>All calculations use pre-1700 methods. Sources cited per step.</p>
             <p>Historical Use Only. Not medical, financial, or legal advice.</p>
         </div>
     </div>
+    
+    <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">&#8593;</button>
     
     <script>
         function toggleCategory(el) {{
@@ -1247,6 +1334,54 @@ def render_html(trace: ComputationTrace) -> str:
             const body = el.nextElementSibling;
             body.classList.toggle('hidden');
         }}
+        
+        function expandAll() {{
+            document.querySelectorAll('.category-title').forEach(el => {{
+                el.classList.remove('collapsed');
+                el.nextElementSibling.classList.remove('hidden');
+            }});
+        }}
+        
+        function collapseAll() {{
+            document.querySelectorAll('.category-title').forEach(el => {{
+                el.classList.add('collapsed');
+                el.nextElementSibling.classList.add('hidden');
+            }});
+        }}
+        
+        function filterSteps(query) {{
+            const q = query.toLowerCase().trim();
+            document.querySelectorAll('.step-card').forEach(card => {{
+                if (!q) {{
+                    card.style.display = '';
+                    return;
+                }}
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(q) ? '' : 'none';
+            }});
+            // Auto-expand categories that have visible cards
+            if (q) {{
+                document.querySelectorAll('.category-block').forEach(block => {{
+                    const visible = block.querySelectorAll('.step-card:not([style*="display: none"])');
+                    const title = block.querySelector('.category-title');
+                    const body = block.querySelector('.category-body');
+                    if (visible.length > 0) {{
+                        title.classList.remove('collapsed');
+                        body.classList.remove('hidden');
+                    }} else {{
+                        title.classList.add('collapsed');
+                        body.classList.add('hidden');
+                    }}
+                }});
+            }}
+        }}
+        
+        // Scroll-to-top button visibility
+        window.addEventListener('scroll', () => {{
+            const btn = document.getElementById('scrollTopBtn');
+            btn.style.opacity = window.scrollY > 500 ? '1' : '0';
+            btn.style.pointerEvents = window.scrollY > 500 ? 'auto' : 'none';
+        }});
     </script>
 </body>
 </html>'''
@@ -1270,7 +1405,7 @@ def main():
     print(f"{'='*70}")
     
     # 1. Calculate chart
-    print("\n[1/10] Calculating chart...")
+    print("\n[1/14] Calculating chart...")
     raw = calculate_chart_data(
         date_str=args.date, time_str=args.time,
         city=args.city, state=args.state, house_system="W"
