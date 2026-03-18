@@ -572,6 +572,209 @@ def trace_almuten(trace: ComputationTrace, chart: Chart):
     )
 
 
+def trace_fixed_stars(trace: ComputationTrace, chart: Chart):
+    """Trace fixed star contacts."""
+    contacts = check_fixed_stars(chart)
+    
+    if not contacts:
+        trace.add(
+            category=CAT_STARS,
+            technique="Fixed Star Survey",
+            inputs={"stars_checked": "21 Royal + Behenian stars"},
+            rule="Check all 21 cataloged fixed stars for ecliptic conjunction and paran (co-culmination) contacts with all 7 traditional planets and the Ascendant/MC angles.",
+            source="Ptolemy, Tetrabiblos I.9; Robson, Fixed Stars & Constellations",
+            calculation="No contacts found within orb for any star-planet pair.",
+            result="No fixed star contacts",
+        )
+        return
+    
+    for contact in contacts:
+        # Find the star data for enrichment
+        from src.engine.stars import STARS as STAR_CATALOG
+        star_data = next((s for s in STAR_CATALOG if s.name == contact.star_name), None)
+        
+        if contact.contact_type == "CONJUNCTION":
+            trace.add(
+                category=CAT_STARS,
+                technique=f"{contact.star_name} conjunct {contact.planet_name}",
+                inputs={
+                    "star": contact.star_name,
+                    "planet": contact.planet_name,
+                    "nature": star_data.nature if star_data else "Unknown",
+                    "magnitude": star_data.magnitude if star_data else "?",
+                },
+                rule=f"A fixed star conjunct a planet within orb ({star_data.orb if star_data else 1.0} deg) infuses the planet with the star's nature. First-magnitude stars are strongest.",
+                source="Ptolemy, Tetrabiblos I.9; Anonymous of 379",
+                calculation=contact.message,
+                result=f"Glory: {star_data.glory if star_data else '?'}. Nemesis: {star_data.nemesis if star_data else '?'}",
+                subsection="Ecliptic Conjunctions",
+            )
+        elif contact.contact_type == "PARAN":
+            trace.add(
+                category=CAT_STARS,
+                technique=f"Paran: {contact.star_name} / {contact.planet_name}",
+                inputs={
+                    "star": contact.star_name,
+                    "planet": contact.planet_name,
+                    "angle": contact.angle or "?",
+                },
+                rule="A Paran (paranatellonta) occurs when a star and planet are simultaneously on angular points (ASC, MC, DSC, IC). Parans are superior to ecliptic conjunctions for eminence.",
+                source="Ptolemy, Phaseis; Brady, Fixed Stars",
+                calculation=contact.message,
+                result=f"Paran at {contact.angle}: {contact.star_name} + {contact.planet_name}",
+                subsection="Parans (Co-Rising/Setting)",
+            )
+        elif contact.contact_type == "ANGULAR_PRESENCE":
+            trace.add(
+                category=CAT_STARS,
+                technique=f"{contact.star_name} on {contact.planet_name}",
+                inputs={"star": contact.star_name, "angle": contact.planet_name},
+                rule="A fixed star directly on the Ascendant or Midheaven is an indicator of eminence or notoriety, depending on the star's nature.",
+                source="Ptolemy, Tetrabiblos I.9; Robson",
+                calculation=contact.message,
+                result=f"Star on angle: {contact.star_name} on {contact.planet_name}",
+                subsection="Angular Stars",
+            )
+        elif contact.contact_type == "AXIS_ALERT":
+            trace.add(
+                category=CAT_STARS,
+                technique=f"Antares-Aldebaran Axis: {contact.planet_name}",
+                inputs={"planet": contact.planet_name},
+                rule="The Antares-Aldebaran axis (Royal Stars at 180 deg opposition) is a critical polarity. Moon or Mars on this axis signifies intense life themes around integrity vs. obsession.",
+                source="Ptolemy; Robson, Fixed Stars & Constellations",
+                calculation=contact.message,
+                result="Critical axis activated",
+                subsection="Axis Alerts",
+                notes="Historical Use Only. Traditional violent-death significations are noted for scholarly context, not predictive use.",
+            )
+
+
+def trace_reception(trace: ComputationTrace, chart: Chart):
+    """Trace reception and mutual reception."""
+    from src.engine.reception import ReceptionEngine, ReceptionMode
+    
+    mutuals = ReceptionEngine.calculate_mutual_receptions(chart, ReceptionMode.STANDARD_LILLY)
+    
+    if mutuals:
+        for mr in mutuals:
+            pa = mr.planet_a.value if hasattr(mr.planet_a, 'value') else str(mr.planet_a)
+            pb = mr.planet_b.value if hasattr(mr.planet_b, 'value') else str(mr.planet_b)
+            
+            trace.add(
+                category=CAT_RECEPTION,
+                technique=f"Mutual Reception: {pa} <-> {pb}",
+                inputs={
+                    "planet_a": pa,
+                    "planet_b": pb,
+                    "type": mr.type,
+                    "strength": mr.strength_score,
+                },
+                rule=f"Mutual Reception: {pa} is in {pb}'s dignity AND {pb} is in {pa}'s dignity. They support each other. Type: {mr.type}. A Pure Domicile mutual reception is the strongest (planets effectively swap signs).",
+                source="Bonatti, Liber Astronomiae; Lilly, Christian Astrology",
+                calculation=f"{pa} reception of {pb}: {', '.join(mr.reception_a_in_b.dignities)} (score {mr.reception_a_in_b.score}). {pb} reception of {pa}: {', '.join(mr.reception_b_in_a.dignities)} (score {mr.reception_b_in_a.score}). Combined: {mr.strength_score}.",
+                result=f"{mr.type} Mutual Reception (strength: {mr.strength_score})",
+                notes=f"Operative: A→B {'Yes' if mr.reception_a_in_b.is_operative else 'No'}, B→A {'Yes' if mr.reception_b_in_a.is_operative else 'No'}.",
+            )
+    else:
+        trace.add(
+            category=CAT_RECEPTION,
+            technique="Mutual Reception Survey",
+            inputs={"mode": "Standard (Lilly)"},
+            rule="Check all 21 planet-pairs for mutual reception (two planets each having dignity in the other's sign). None found.",
+            source="Bonatti, Liber Astronomiae; Lilly, Christian Astrology",
+            calculation="All 21 pairs checked — no mutual reception detected.",
+            result="No mutual receptions",
+        )
+
+
+def trace_firdaria(trace: ComputationTrace, chart: Chart, birth_date, target_date):
+    """Trace Firdaria periods."""
+    from src.engine.prediction import calculate_firdaria, FIRDARIA_DAY, FIRDARIA_NIGHT
+    
+    sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
+    fird = calculate_firdaria(sect, birth_date, target_date)
+    
+    if "error" in fird:
+        trace.add(
+            category=CAT_FIRDARIA,
+            technique="Firdaria",
+            inputs={"sect": "Day" if sect == Sect.DAY else "Night"},
+            rule="Firdaria divides life into planetary periods in sect-determined order.",
+            source="Abu Ma'shar, On the Revolutions of the Years",
+            calculation=f"Error: {fird['error']}",
+            result="Could not calculate",
+        )
+        return
+    
+    sequence = FIRDARIA_DAY if sect == Sect.DAY else FIRDARIA_NIGHT
+    order_str = " -> ".join([f"{p.value}({d}yr)" for p, d in sequence])
+    
+    trace.add(
+        category=CAT_FIRDARIA,
+        technique="Firdaria Period",
+        inputs={
+            "sect": "Day" if sect == Sect.DAY else "Night",
+            "current_age": fird.get("Current Age", "?"),
+        },
+        rule=f"{'Day' if sect == Sect.DAY else 'Night'} chart Firdaria sequence: {order_str}. Each major period is subdivided into 7 sub-periods (one per planet). The major lord sets the theme; the sub-lord modifies it.",
+        source="Abu Ma'shar, On the Revolutions of the Years of Nativities",
+        calculation=f"Age {fird.get('Current Age', '?')} falls in: Major = {fird.get('Major Period', '?')} ({fird.get('Major Start', '?')} to {fird.get('Major End', '?')}), Sub = {fird.get('Sub Period', '?')} ({fird.get('Sub Start', '?')} to {fird.get('Sub End', '?')}).",
+        result=f"Major: {fird.get('Major Period', '?')} / Sub: {fird.get('Sub Period', '?')}",
+        notes=f"The current Firdaria lord ({fird.get('Major Period', '?')}) should be cross-referenced with profections and transits for integrated timing.",
+    )
+
+
+def trace_decennials(trace: ComputationTrace, chart: Chart, birth_date, target_date):
+    """Trace Decennials (Valens chronocrator system)."""
+    apheta = DecennialEngine.select_apheta(chart)
+    apheta_name = apheta.name.value if hasattr(apheta.name, 'value') else str(apheta.name)
+    
+    is_day = chart.sun_altitude > 0
+    sect_light = "Sun" if is_day else "Moon"
+    
+    trace.add(
+        category=CAT_DECENNIALS,
+        technique="Apheta Selection (Decennial Releaser)",
+        inputs={"sect": "Day" if is_day else "Night", "sect_light": sect_light},
+        rule=f"{'Day' if is_day else 'Night'} chart: Check (1) Sect Light in operative houses (1,10,11,7,5,9,4), (2) Contrary Light in operative place, (3) Post-Ascendant planet. The first qualifying candidate is the Apheta — the starting planet for the Decennial sequence.",
+        source="Valens, Anthology IV.10-11",
+        calculation=f"Sect Light = {sect_light}. Checking operative houses... Selected: {apheta_name} at {_fmt(apheta.longitude)}.",
+        result=f"Apheta: {apheta_name}",
+    )
+    
+    # Get the zodiacal sequence
+    zod_seq = DecennialEngine.get_zodiacal_sequence(chart)
+    seq_str = ", ".join([f"{p.name.value}({_fmt(p.longitude)})" for p in zod_seq])
+    
+    trace.add(
+        category=CAT_DECENNIALS,
+        technique="Zodiacal Sequence",
+        inputs={"starting_from": "Ascendant"},
+        rule="Order all 7 traditional planets by zodiacal longitude starting from the Ascendant degree. This sequence determines the order of Decennial major periods.",
+        source="Valens, Anthology IV.10",
+        calculation=f"Ascendant at {_fmt(chart.ascendant)}. Ordering planets: {seq_str}.",
+        result=f"Sequence: {' -> '.join([p.name.value for p in zod_seq])}",
+    )
+    
+    # Calculate the actual decennial periods for current date
+    try:
+        periods = DecennialEngine.calculate_decennials(chart, birth_date, target_date)
+        if periods and not isinstance(periods, dict):
+            current = periods[-1] if isinstance(periods, list) else periods
+            if isinstance(current, dict):
+                trace.add(
+                    category=CAT_DECENNIALS,
+                    technique="Current Decennial Period",
+                    inputs={"target_date": str(target_date)},
+                    rule="Each planet's major period lasts its Minor Years. Sub-periods cycle through the remaining planets in zodiacal order, each lasting proportional years.",
+                    source="Valens, Anthology IV.10-11",
+                    calculation=f"Current period: {current}",
+                    result=f"Major: {current.get('major', '?')} / Sub: {current.get('sub', '?')}",
+                )
+    except Exception:
+        pass
+
+
 # ─── HTML Renderer ────────────────────────────────────────────────────────────
 
 def render_html(trace: ComputationTrace) -> str:
@@ -1088,33 +1291,45 @@ def main():
     age = now.year - birth_dt.year - ((now.month, now.day) < (birth_dt.month, birth_dt.day))
     
     # 2. Trace every category
-    print("[2/10] Tracing astronomical foundations...")
+    print("[2/14] Tracing astronomical foundations...")
     trace_astronomy(trace, raw, chart)
     
-    print("[3/10] Tracing sect determination...")
+    print("[3/14] Tracing sect determination...")
     trace_sect(trace, chart)
     
-    print("[4/10] Tracing essential dignities (5-tier per planet)...")
+    print("[4/14] Tracing essential dignities (5-tier per planet)...")
     trace_dignities(trace, chart)
     
-    print("[5/10] Tracing aspects...")
+    print("[5/14] Tracing aspects...")
     trace_aspects(trace, chart)
     
-    print("[6/10] Tracing lots / Arabic parts...")
+    print("[6/14] Tracing lots / Arabic parts...")
     trace_lots(trace, chart)
     
-    print("[7/10] Tracing kakosis (maltreatment conditions)...")
+    print("[7/14] Tracing kakosis (maltreatment conditions)...")
     trace_kakosis(trace, chart)
     
-    print("[8/10] Tracing vitality (Hyleg -> Alcocoden -> Anareta)...")
+    print("[8/14] Tracing vitality (Hyleg -> Alcocoden -> Anareta)...")
     trace_vitality(trace, chart)
     
-    print("[9/10] Tracing temperament, Almuten, profections...")
+    print("[9/14] Tracing temperament, Almuten, profections...")
     trace_temperament(trace, chart)
     trace_almuten(trace, chart)
     trace_profections(trace, chart, age)
     
-    print("[10/10] Rendering HTML...")
+    print("[10/14] Tracing fixed stars...")
+    trace_fixed_stars(trace, chart)
+    
+    print("[11/14] Tracing reception / mutual reception...")
+    trace_reception(trace, chart)
+    
+    print("[12/14] Tracing Firdaria...")
+    trace_firdaria(trace, chart, birth_dt, now)
+    
+    print("[13/14] Tracing Decennials...")
+    trace_decennials(trace, chart, birth_dt, now)
+    
+    print("[14/14] Rendering HTML...")
     
     # Output
     out_dir = os.path.join(os.path.dirname(__file__), '..', 'chart_outputs')
