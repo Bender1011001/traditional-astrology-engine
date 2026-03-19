@@ -309,6 +309,8 @@ class ReportSynthesizer:
                     dignity_labels.append(f"Term +{breakdown['term']}")
                 if breakdown.get("face", 0) > 0:
                     dignity_labels.append(f"Face +{breakdown['face']}")
+                if breakdown.get("monomoiria", 0) > 0:
+                    dignity_labels.append(f"Monomoiria +{breakdown['monomoiria']}")
                 if breakdown.get("detriment", 0) < 0:
                     dignity_labels.append(f"Detriment {breakdown['detriment']}")
                 if breakdown.get("fall", 0) < 0:
