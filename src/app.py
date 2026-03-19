@@ -201,7 +201,7 @@ _LEGACY_REDIRECTS = [
     # Old misc pages
     "demo.html", "booking.html", "services.html", "pricing.html",
     "blog.html", "about.html", "resources.html", "advanced.html",
-    "faq.html", "sample-reading.html", "preview.html",
+    "faq.html", "preview.html",
     "how-we-audit.html", "owner.html", "status.html", "success.html",
 ]
 

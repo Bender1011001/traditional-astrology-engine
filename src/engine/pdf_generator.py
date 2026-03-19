@@ -148,7 +148,7 @@ class PDFReportGenerator:
         story = []
 
         # Title Page / Header
-        title_text = "AstroForge: Calibration Audit" if self.tier == "CALIBRATION" else "AstroForge: Forensic Astrology Report"
+        title_text = "Traditional Astrology: Calibration Report" if self.tier == "CALIBRATION" else "Traditional Astrology Reading"
         story.append(Paragraph(title_text, self.styles['Title']))
         story.append(Spacer(1, 12))
 
@@ -253,7 +253,7 @@ class PDFReportGenerator:
         story.append(Spacer(1, 18))
         
         # Section XIX: Temporal Forensics / Retrodiction (CRITICAL)
-        story.append(Paragraph("XIX. Temporal Forensics (Retrodiction)", self.styles['Header1']))
+        story.append(Paragraph("XIX. Temporal Analysis (Retrodiction)", self.styles['Header1']))
         story.append(Paragraph("Verification of past events against chronological triggers.", self.styles['Normal']))
         story.append(Spacer(1, 6))
         

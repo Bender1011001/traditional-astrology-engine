@@ -6,7 +6,7 @@ from email.mime.application import MIMEApplication
 
 def send_b2b_welcome_email(to_email, tier, api_key):
     """Sends a welcome email to B2B users with their API Key and Quick Start guide."""
-    subject = f"Welcome to AstroForge | {tier.capitalize()} Tier Activated"
+    subject = f"Welcome to Traditional Astrology | {tier.capitalize()} Tier Activated"
     
     body = f"""
     Welcome to the Practice,
@@ -24,7 +24,7 @@ def send_b2b_welcome_email(to_email, tier, api_key):
     
     For technical support, simply reply to this email.
     
-    The AstroForge Practice
+    Traditional Astrology
     """
     
     _send_email(to_email, subject, body)

@@ -8,7 +8,7 @@ import { setupModals } from './modals.js';
 // We also need to expose library functions to window as they are called from HTML strings
 import './modals.js';
 
-console.log("Loading AstroForge Modules...");
+console.log("Loading Traditional Astrology Modules...");
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();

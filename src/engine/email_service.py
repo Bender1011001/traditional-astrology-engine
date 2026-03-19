@@ -48,7 +48,7 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
             
             data = {
                 "personalizations": [{"to": [{"email": to_email}]}],
-                "from": {"email": sender_email, "name": "AstroForge"},
+                "from": {"email": sender_email, "name": "Traditional Astrology"},
                 "subject": subject,
                 "content": [{"type": "text/html", "value": html_content}]
             }

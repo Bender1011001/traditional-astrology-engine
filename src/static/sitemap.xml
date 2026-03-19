@@ -3,7 +3,7 @@
   <!-- Primary page: the main product / traditional birth chart calculator -->
   <url>
     <loc>https://traditional-astrology.com/</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -35,7 +35,13 @@
   -->
   <url>
     <loc>https://traditional-astrology.com/natal-charts.html</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/sample-reading.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -65,19 +71,19 @@
   </url>
   <url>
     <loc>https://traditional-astrology.com/lot-of-fortune.html</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/almuten-figuris.html</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/hyleg-calculator.html</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -89,7 +95,7 @@
   </url>
   <url>
     <loc>https://traditional-astrology.com/methodology.html</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -84,24 +84,24 @@ class FulfillmentService:
             # Determine email template based on tier
             subject = "Your Astrology Report"
             if pdf_tier == "CALIBRATION":
-                subject = "Your Calibration Audit (AstroForge)"
+                subject = "Your Calibration Report (Traditional Astrology)"
                 template = "order_calibration.html" 
             else:
-                subject = "Your Forensic Dossier (AstroForge)"
+                subject = "Your Traditional Astrology Reading"
                 template = "order_full.html"
 
             # Construct simple HTML if template doesn't exist yet (Safety first)
             html_content = f"""
             <h1>Your Report is Ready</h1>
             <p>Dear {user_name},</p>
-            <p>Thank you for your patience. Your forensic astrology audit has been successfully generated and is attached to this email.</p>
+            <p>Thank you for your patience. Your traditional astrology reading has been successfully generated and is attached to this email.</p>
             <p><b>Report Details:</b><br>
             Name: {chart_request.get('name', user_name)}<br>
             Date: {chart_request.get('date')}<br>
             Location: {chart_request.get('city')}
             </p>
             <p>Please save this PDF to your device.</p>
-            <p>Sincerely,<br>The AstroForge Engine</p>
+            <p>Sincerely,<br>Traditional Astrology</p>
             """
             
             success = send_email(

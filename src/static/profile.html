@@ -20,10 +20,10 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | AstroForge</title>
+    <title>Dashboard | Traditional Astrology</title>
     <meta name="robots" content="noindex">
     <meta name="theme-color" content="#f4efe6">
-    <link rel="stylesheet" href="style.css?v=20260224pivot">
+    <link rel="stylesheet" href="style.css?v=20260319tooltip">
     <style>
         .dashboard-container {
             max-width: 960px;
@@ -812,7 +812,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'astroforge_batch_template.csv';
+            a.download = 'Traditional Astrology_batch_template.csv';
             document.body.appendChild(a);
             a.click();
             URL.revokeObjectURL(url);
@@ -932,7 +932,7 @@
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.href = url;
-                a.download = "astroforge_pdf_pack.zip";
+                a.download = "Traditional Astrology_pdf_pack.zip";
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);

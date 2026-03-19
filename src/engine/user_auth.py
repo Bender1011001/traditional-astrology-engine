@@ -1,5 +1,5 @@
 """
-User Authentication Module for AstroForge (SQLAlchemy Version).
+User Authentication Module for Traditional Astrology (SQLAlchemy Version).
 Supports persistence via SQLite (default) or PostgreSQL.
 """
 

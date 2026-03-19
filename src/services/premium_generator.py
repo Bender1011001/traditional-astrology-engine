@@ -69,7 +69,6 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
                 time_str=request_data.get("time"),
                 city=request_data.get("city"),
                 state=request_data.get("state"),
-                house_system=request_data.get("house_system", "W")
             )
         )
         
@@ -84,10 +83,29 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
             lambda: PremiumGenerator.generate_premium_report_markdown(chart_data)
         )
         
-        # 3. Store Result
+        # 3. Generate Computation Trace
+        computation_trace = None
+        try:
+            from src.engine.trace_generator import generate_trace
+            computation_trace = await loop.run_in_executor(
+                None,
+                lambda: generate_trace(
+                    date_str=request_data.get("date"),
+                    time_str=request_data.get("time"),
+                    city=request_data.get("city"),
+                    state=request_data.get("state", ""),
+                    name=request_data.get("name", "Native"),
+                )
+            )
+        except Exception as trace_err:
+            logger.warning(f"Trace generation failed (non-fatal): {trace_err}")
+            computation_trace = None
+
+        # 4. Store Result
         result_payload = {
             "report_markdown": report_markdown,
-            "chart_data": chart_data
+            "chart_data": chart_data,
+            "computation_trace": computation_trace,
         }
         
         task.result_json = result_payload

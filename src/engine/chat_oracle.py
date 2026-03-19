@@ -141,7 +141,7 @@ def get_chat_response(query: str, context: str) -> str:
         top_p = float(os.getenv("OPENROUTER_TOP_P", "0.9"))
 
         system_prompt = (
-            "You are the 'AstroForge', a highly advanced AI Astrology Oracle. "
+            "You are a highly advanced AI Astrology Oracle specializing in traditional Hellenistic and Medieval techniques. "
             "You have access to the 'Binder1.txt' source material for traditional astrology.\n\n"
             "SOURCE MATERIAL (Binder1.txt):\n"
             f"{BINDER_CONTEXT[:50000]}... (TRUNCATED FOR SYSTEM PROMPT)\n\n" # We'll handle full context in the user message for better attention
@@ -184,7 +184,7 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
 
     system_prompt = (
         "You are a master plain-language astrology interpreter and expert in the 'Binder1.txt' source material. "
-        "Your goal is to provide a massive, 20-page style forensic analysis of the provided chart. "
+        "Your goal is to provide a massive, 20-page style detailed analysis of the provided chart. "
         "Use second-person language ('you'). Maintain a professional, deep, and slightly authoritative tone. "
         "Do NOT compress your knowledge. Be exhaustive."
     )

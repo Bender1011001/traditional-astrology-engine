@@ -206,9 +206,11 @@ function showReading(result, freeRemaining) {
 
     const md = result?.report_markdown || "";
     const html = renderMarkdown(md);
+    const traceData = result?.computation_trace || null;
 
     content.innerHTML = `
         <div class="reading-body">${html}</div>
+        ${traceData ? buildTraceSection(traceData) : ''}
         ${buildPostReadingCTA(freeRemaining)}
         ${buildFeedbackWidget()}
     `;
@@ -218,7 +220,178 @@ function showReading(result, freeRemaining) {
 
     // Attach feedback handlers
     attachFeedbackHandlers(content);
+
+    // Attach trace interactivity
+    if (traceData) {
+        attachTraceHandlers(content);
+    }
 }
+
+// ─── Computation Trace Renderer ───
+function buildTraceSection(traceData) {
+    if (!traceData || !traceData.steps || traceData.steps.length === 0) return '';
+
+    const categories = traceData.categories || [];
+    const steps = traceData.steps || [];
+
+    const categoriesHtml = categories.map(cat => {
+        const catSteps = steps.filter(s => s.category === cat);
+        const catId = cat.replace(/[\W_]+/g, '-').toLowerCase();
+
+        // Group by subsection
+        const subsections = {};
+        catSteps.forEach(s => {
+            const key = s.subsection || '__main__';
+            if (!subsections[key]) subsections[key] = [];
+            subsections[key].push(s);
+        });
+
+        let stepsHtml = '';
+        for (const [subKey, subSteps] of Object.entries(subsections)) {
+            if (subKey !== '__main__') {
+                stepsHtml += `<h4 class="trace-subsection-header">${escapeHtml(subKey)}</h4>`;
+            }
+            subSteps.forEach(s => {
+                const inputsRows = Object.entries(s.inputs || {})
+                    .map(([k, v]) => `<tr><td class="trace-input-key">${escapeHtml(k)}</td><td class="trace-input-val">${escapeHtml(String(v))}</td></tr>`)
+                    .join('');
+                
+                const notesHtml = s.notes 
+                    ? `<div class="trace-step-notes"><strong>📝 Note:</strong> ${escapeHtml(s.notes)}</div>` 
+                    : '';
+
+                stepsHtml += `
+                    <div class="trace-step-card">
+                        <div class="trace-step-header" onclick="this.parentElement.classList.toggle('trace-expanded')">
+                            <span class="trace-step-num">Step ${s.step}</span>
+                            <span class="trace-step-technique">${escapeHtml(s.technique)}</span>
+                            <span class="trace-step-result-badge">${escapeHtml(String(s.result || ''))}</span>
+                            <span class="trace-step-chevron">▸</span>
+                        </div>
+                        <div class="trace-step-body">
+                            <div class="trace-section">
+                                <div class="trace-label">📥 Inputs</div>
+                                <table class="trace-inputs-table">${inputsRows}</table>
+                            </div>
+                            <div class="trace-section">
+                                <div class="trace-label">📜 Rule</div>
+                                <div class="trace-rule-text">${escapeHtml(s.rule || '')}</div>
+                                <div class="trace-source-tag">— ${escapeHtml(s.source || '')}</div>
+                            </div>
+                            <div class="trace-section">
+                                <div class="trace-label">🔢 Calculation</div>
+                                <div class="trace-calc-text">${escapeHtml(s.calculation || '')}</div>
+                            </div>
+                            <div class="trace-section trace-result-section">
+                                <div class="trace-label">✅ Result</div>
+                                <div class="trace-result-text">${escapeHtml(String(s.result || ''))}</div>
+                            </div>
+                            ${notesHtml}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        return `
+            <div class="trace-category-block" id="trace-${catId}">
+                <h3 class="trace-category-title" onclick="this.classList.toggle('trace-collapsed'); this.nextElementSibling.classList.toggle('trace-hidden')">
+                    <span class="trace-collapse-icon">▼</span>
+                    ${escapeHtml(cat)}
+                    <span class="trace-step-count">${catSteps.length} step${catSteps.length !== 1 ? 's' : ''}</span>
+                </h3>
+                <div class="trace-category-body trace-hidden">
+                    ${stepsHtml}
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    // Build TOC
+    const tocItems = categories.map(cat => {
+        const catId = cat.replace(/[\W_]+/g, '-').toLowerCase();
+        const count = steps.filter(s => s.category === cat).length;
+        return `<li><a href="#trace-${catId}" onclick="event.preventDefault(); const el = document.getElementById('trace-${catId}'); el.scrollIntoView({behavior:'smooth'}); const title = el.querySelector('.trace-category-title'); if(title.classList.contains('trace-collapsed')){title.click();}">${escapeHtml(cat)}</a> <span class="trace-toc-count">(${count})</span></li>`;
+    }).join('');
+
+    return `
+        <div class="trace-container" id="traceContainer">
+            <div class="trace-header" onclick="document.getElementById('traceBody').classList.toggle('trace-hidden'); this.classList.toggle('trace-open')">
+                <div class="trace-header-left">
+                    <span class="trace-header-icon">⚙</span>
+                    <div>
+                        <h2 class="trace-header-title">Show Our Work</h2>
+                        <p class="trace-header-subtitle">${traceData.total_steps} computation steps · ${categories.length} categories · ${Math.round(traceData.elapsed_ms || 0)}ms</p>
+                    </div>
+                </div>
+                <span class="trace-header-chevron">▸</span>
+            </div>
+            <div class="trace-body trace-hidden" id="traceBody">
+                <div class="trace-controls">
+                    <input type="text" class="trace-search" id="traceSearch" placeholder="Search steps... (e.g. Sun, Domicile, Fortune)" oninput="filterTraceSteps(this.value)">
+                    <div class="trace-buttons">
+                        <button class="trace-btn" onclick="expandAllTrace()">Expand All</button>
+                        <button class="trace-btn" onclick="collapseAllTrace()">Collapse All</button>
+                    </div>
+                </div>
+                <div class="trace-toc">
+                    <h4>Categories</h4>
+                    <ul>${tocItems}</ul>
+                </div>
+                ${categoriesHtml}
+                <div class="trace-footer">
+                    <p>All calculations use pre-1700 traditional methods. Sources cited per step.</p>
+                    <p>Historical Use Only. Not medical, financial, or legal advice.</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function attachTraceHandlers(container) {
+    // Search is handled via inline oninput — no additional setup needed
+}
+
+window.filterTraceSteps = function(query) {
+    const q = query.toLowerCase().trim();
+    document.querySelectorAll('.trace-step-card').forEach(card => {
+        if (!q) {
+            card.style.display = '';
+            return;
+        }
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+    });
+    // Auto-expand categories with visible steps
+    if (q) {
+        document.querySelectorAll('.trace-category-block').forEach(block => {
+            const visible = block.querySelectorAll('.trace-step-card:not([style*="display: none"])');
+            const title = block.querySelector('.trace-category-title');
+            const body = block.querySelector('.trace-category-body');
+            if (visible.length > 0) {
+                title.classList.remove('trace-collapsed');
+                body.classList.remove('trace-hidden');
+            } else {
+                title.classList.add('trace-collapsed');
+                body.classList.add('trace-hidden');
+            }
+        });
+    }
+};
+
+window.expandAllTrace = function() {
+    document.querySelectorAll('.trace-category-title').forEach(el => {
+        el.classList.remove('trace-collapsed');
+        el.nextElementSibling.classList.remove('trace-hidden');
+    });
+};
+
+window.collapseAllTrace = function() {
+    document.querySelectorAll('.trace-category-title').forEach(el => {
+        el.classList.add('trace-collapsed');
+        el.nextElementSibling.classList.add('trace-hidden');
+    });
+};
 
 function buildPostReadingCTA(freeRemaining) {
     // If paid or free remaining is negative (paid), don't show paywall

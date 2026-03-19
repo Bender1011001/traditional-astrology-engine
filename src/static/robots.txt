@@ -21,7 +21,6 @@ Disallow: /about.html
 Disallow: /resources.html
 Disallow: /advanced.html
 Disallow: /faq.html
-Disallow: /sample-reading.html
 Disallow: /preview.html
 Disallow: /success.html
 Disallow: /status.html

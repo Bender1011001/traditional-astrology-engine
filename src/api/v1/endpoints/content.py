@@ -38,7 +38,7 @@ async def email_pdf_report(
         # Immediate cleanup of generator buffer
         generator.buffer.close()
         
-        subject = "Your Forensic Astrology Report (AstroForge)"
+        subject = "Your Traditional Astrology Reading"
         attachment_bytes = pdf_bytes
         attachment_name = "calibration_audit.pdf" if tier == "CALIBRATION" else "native_audit.pdf"
         
@@ -50,7 +50,7 @@ async def email_pdf_report(
             
             zip_buffer = BytesIO()
             name = request.chart_data.get("meta", {}).get("subject_name", "Native")
-            attachment_name = f"Forensic_Packet_{name}.zip"
+            attachment_name = f"Reading_Packet_{name}.zip"
             
             with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
                 # 1. PDF
@@ -61,14 +61,14 @@ async def email_pdf_report(
                 zf.writestr("native.json", json_data)
                 
                 # 3. Markdown (Text Source)
-                md_content = request.chart_data.get("human_translation", {}).get("report_markdown", "# Forensic Audit")
+                md_content = request.chart_data.get("human_translation", {}).get("report_markdown", "# Astrology Reading")
                 zf.writestr("native.md", md_content)
                 
                 # 4. README (License & Integration)
                 readme = (
-                    "AstroForge: DIGITAL SOUL PACKET\n"
+                    "Traditional Astrology: DIGITAL READING PACKET\n"
                     "====================================\n\n"
-                    "This packet contains your Human Readable Audit (PDF) and Machine Readable Source Code (JSON).\n"
+                    "This packet contains your Human Readable Report (PDF) and Machine Readable Source Code (JSON).\n"
                     "LICENSED USE: You may upload the JSON file to personal AI agents (ChatGPT, Claude) to query your chart data.\n"
                     "The JSON includes sect status, planetary dignities, and holistic synchronization data."
                 )
@@ -76,20 +76,20 @@ async def email_pdf_report(
             
             attachment_bytes = zip_buffer.getvalue()
             zip_buffer.close()
-            subject = "Your Complete Forensic Audit Packet (Agent Ready)"
+            subject = "Your Complete Astrology Reading Packet (Agent Ready)"
         
         # ZERO LEAKAGE: If tier is CALIBRATION, ensure we HAVEN'T touched zip logic or JSON/MD delivery.
         # The variables 'json_data' and 'md_content' are scoped within the 'if tier == "FULL"' block.
 
         # Simple HTML body
-        upgrade_link = f'<p>For the full investigative dossier, inclusive of AI-ready JSON data and future forecasts, please consider unlocking the <a href="{settings.SITE_BASE_URL}">Full Forensic Report</a>.</p>' if tier == "CALIBRATION" else ""
+        upgrade_link = f'<p>For the full investigative report, inclusive of AI-ready JSON data and future forecasts, please consider unlocking the <a href="{settings.SITE_BASE_URL}">Full Reading</a>.</p>' if tier == "CALIBRATION" else ""
         
         html_content = f"""
         <html>
         <body style="font-family: 'Courier New', monospace; color: #333;">
             <h2 style="color: #c07a2b;">Your Codex Audit is Attached.</h2>
             <p>Greetings,</p>
-            <p>Attached is your secure {'PDF' if tier == 'CALIBRATION' else 'Forensic Packet'} for your recent astrological calculation.</p>
+            <p>Attached is your secure {'PDF' if tier == 'CALIBRATION' else 'Reading Packet'} for your recent astrological calculation.</p>
             <p><b>Configuration:</b><br>
                Tier: {tier}<br>
                House System: Placidus<br>
@@ -100,7 +100,7 @@ async def email_pdf_report(
             <br>
             <p><i>Veritas Filia Temporis</i><br>
             (Truth is the Daughter of Time)</p>
-            <p>— The AstroForge Engine</p>
+            <p>— Traditional Astrology</p>
         </body>
         </html>
         """

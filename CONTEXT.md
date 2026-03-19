@@ -1,23 +1,23 @@
 ---
 project: astrology
 status: complete
-updated: 2026-03-16
+updated: 2026-03-19
 ---
 
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Engine is at 100% traditional Western astrology coverage. Next: report integration, performance optimization, or new product tiers.
-- **Last session**: Implemented 6 new techniques (Circumambulations, Heliacal Rising/Setting, Eclipse Charts, ZR L3/L4, Primary Directions to Planets, LOY Natal Assessment). Verified 6 others already existed.
+- **Pick up at**: All consumer-facing pages rebranded. Computation Trace expanded. Glossary tooltip CSS fixed. CSS/JS cache busted to `?v=20260319tooltip`. Next: deploy to production.
+- **Last session**: Comprehensive branding overhaul: AstroForge → Traditional Astrology in ~30 HTML files + 2 JS files. Removed "forensic" from all indexed consumer pages (index, lot-of-fortune, hyleg, almuten, natal-charts, sample-reading). Updated share watermark, file names, upsell buttons. Fixed glossary tooltip CSS. Updated CSS/JS version strings for cache-busting. Added 4 computation trace categories.
 - **Blocked on**: Nothing
 
 ## Status
-- **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments).
+- **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments), Computation Trace ("Show Our Work") integrated.
 - **Broken**: None known.
 - **Business Model (B2C)**: Direct-to-consumer natal chart readings. No accounts, no subscriptions.
   - **Free**: 3 premium readings per IP
   - **$7**: Full natal chart reading (one-time Stripe payment)
-  - **$29**: Premium forensic deep-dive (one-time Stripe payment)
+  - **$29**: Premium in-depth analysis (one-time Stripe payment)
 - **Database**: Comprehensive pre-1700s traditional astrology—Managed via `AstrologicalDelineation` database table (SQLAlchemy).
 - **Release Ready**: Version 2.0 (B2C Consumer Readings).
 - **SEO**: Content pages (natal-charts, houses, aspects, etc.) kept for organic traffic with CTA banners → reading form.
@@ -121,8 +121,10 @@ The core delineations are now stored in the database to allow for manual fixes a
 
 ## Key Files
 - `src/app.py` — Entry point for the web server (Documentation at /docs).
-- `src/static/js/reading-app.js` — B2C reading flow (form → free/paid → poll → render).
+- `src/static/js/reading-app.js` — B2C reading flow (form → free/paid → poll → render). Includes `buildTraceSection()` for rendering computation trace.
 - `src/static/js/seo-bridge.js` — Injects new nav/CTA into legacy SEO content pages.
+- `src/engine/trace_generator.py` — Reusable trace module: generates JSON dict of all computation steps for any chart.
+- `src/services/premium_generator.py` — Background task for premium reports; includes computation trace generation (step 3).
 - `src/api/v1/endpoints/guest_checkout.py` — Guest Stripe checkout (no auth, $7/$29).
 - `LICENSE` — MIT License.
 - `CHANGELOG.md` — Project history and rule updates.
@@ -185,6 +187,7 @@ The core delineations are now stored in the database to allow for manual fixes a
 | High bounce rate | B2B SaaS pitch vs B2C search intent mismatch | Complete site redesign to consumer readings |
 | Zero conversions | Account signup friction | Removed all auth; guest-only checkout flow |
 | Stripe CSP blocked | Checkout domain not in Content-Security-Policy | Added checkout.stripe.com + js.stripe.com to CSP |
+| All free readings fail | `premium_generator.py` passed `house_system=` to `generate_chart_data()` which doesn't accept it | Removed the unsupported kwarg from the lambda call |
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
@@ -195,6 +198,14 @@ The core delineations are now stored in the database to allow for manual fixes a
 - Do NOT add login/signup/account requirements to the reading flow — it kills conversions
 - Do NOT add subscription/monthly pricing — one-time only for B2C
 - Do NOT use technical jargon ("forensic audit", "Swiss Ephemeris") in consumer-facing copy
+
+## Trap Diary
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| Glossary tooltip text rendered inline, garbling all reading text | `basic.js` creates `.glossary-tooltip-popup` elements but `style.css` had NO CSS rules for them — popups showed as visible text | Added 56 lines of tooltip CSS: `display:none` by default, shown on hover/active |
+| New static pages always redirect to index | `app.py` has `_LEGACY_REDIRECTS` list that 301-redirects listed pages BEFORE static file handler sees them | Remove the page from `_LEGACY_REDIRECTS` before it can be served as a static file |
+| Primary directions trace silently empty | `raw["meta"]` uses `lat` not `latitude` for geographic latitude | Use `.get("lat")` not `.get("latitude")` |
+| `house_system` kwarg in `generate_chart_data()` | `calculate_chart_data()` doesn't accept `house_system` as a kwarg — caused ALL free readings to fail silently | Remove the unsupported kwarg |
 
 ## Environment Variables (Production)
 | Variable | Required | Description |

@@ -7,15 +7,15 @@ updated: 2026-03-18
 # Astrological Engine
 
 ## Resume
-- **Pick up at**: Computation Trace v1 complete (91 steps, 10 categories). Next: add Fixed Stars, Firdaria, ZR, Primary Directions trace categories.
-- **Last session**: Built Computation Trace system (2026-03-18). 91 auditable computation steps rendered as self-contained HTML + JSON.
+- **Pick up at**: Branding overhaul complete (AstroForge→Traditional Astrology in all consumer-facing code). Computation Trace at 17 categories / 116+ steps. Next: deploy to production.
+- **Last session**: Deep backend branding cleanup. Updated fulfillment emails, PDF titles, SendGrid sender name, LLM prompts, email templates (4), API endpoints, chat oracle persona. Zero "AstroForge" remaining in src/.
 - **Blocked on**: Nothing
 
 ## Status
 - **AUDIT STATUS**: ✅ Comprehensive audit completed 2026-03-16. See `engine_audit_report.md` in artifacts.
 - **COMPUTATION TRACE**: ✅ Transparent audit trail system added 2026-03-18. See `trace.py` and `scripts/generate_trace.py`.
 - Core calculation and synthesis logic verified against source material (Ptolemy, Valens, Dorotheus, Bonatti, Lilly, Al-Biruni, Paulus Alexandrinus).
-- **Implemented**: 40+ traditional techniques spanning the full canon: Essential/Accidental Dignities, Sect, Hayz/Halb, Aspects, Reception (Bonatti/Lilly), Hermetic & Forensic Lots (40+), Kakosis (7 Conditions), Horary Physics, Profections, Zodiacal Releasing, Firdaria, Decennials, Primary Directions (Placidus), Distributor, Hyleg/Alcocoden, Almuten Figuris, Lord of Geniture, Monomoiria, Dodecatemoria, Doryphory, Antiscia, Fixed Stars (Parans), Lunar Mansions (Picatrix), Temperament (Lilly), Medical/Decumbiture, Mundane Hierarchy, Eclipses, Electional (Kairos), Planetary Hours, Solar Return, Solar Arcs, Phasis/Visibility, Synodic Phases, Prenatal Syzygy, Al-Mubtazz, Nodal Metabolic model.
+- **Implemented**: 40+ traditional techniques spanning the full canon: Essential/Accidental Dignities, Sect, Hayz/Halb, Aspects, Reception (Bonatti/Lilly), Hermetic Lots (40+), Kakosis (7 Conditions), Horary Physics, Profections, Zodiacal Releasing, Firdaria, Decennials, Primary Directions (Placidus), Distributor, Hyleg/Alcocoden, Almuten Figuris, Lord of Geniture, Monomoiria, Dodecatemoria, Doryphory, Antiscia, Fixed Stars (Parans), Lunar Mansions (Picatrix), Temperament (Lilly), Medical/Decumbiture, Mundane Hierarchy, Eclipses, Electional (Kairos), Planetary Hours, Solar Return, Solar Arcs, Phasis/Visibility, Synodic Phases, Prenatal Syzygy, Al-Mubtazz, Nodal Metabolic model.
 
 ### Audit Fixes Applied (2026-03-16)
 1. **temperament.py** — Added inherent planetary natures (PLANET_NATURES dict) per Lilly CA pp.57-83
@@ -28,13 +28,14 @@ updated: 2026-03-18
 ## Key Files
 - `forensic_engine.py`: Central hub/Auditor. Orchestrates all engines, produces bifurcated JSON output.
 - `trace.py`: ComputationTrace class — captures every calculation step (category, technique, inputs, rule, source, calculation, result) for transparent audit trail.
+- `trace_generator.py`: Reusable module that generates a full trace dict for any chart. Used by the web API (`premium_generator.py`) and can replace the standalone script.
 - `dignities.py`: 5-tier essential dignities + accidental dignities, Hayz/Halb, Monomoiria.
 - `advanced_mechanics.py`: Hermetic Lots, Almuten Figuris, Doryphory, Dodecatemoria.
 - `horary.py`: Horary physics (Translation, Collection, Prohibition, Frustration, Abscission, Refranation).
 - `aspects.py`: Ptolemaic 5 aspects with applying/separating and sect-qualified interpretations.
 - `reception.py`: Bonatti Strict / Lilly Standard reception with mutual reception detection.
 - `temperament.py`: Lilly's humoral calculation (now includes inherent planetary natures).
-- `lots.py`: Hermetic + Forensic Lots (40+) with kakosis checks.
+- `lots.py`: Hermetic Lots (40+) with kakosis checks.
 - `kakosis.py`: 7 Conditions of Maltreatment (Hellenistic).
 - `prediction.py`: Profections, Zodiacal Releasing, Firdaria, Solar Arc, Muntha, Transits.
 - `decennials.py`: Valens Decennials with reset logic.

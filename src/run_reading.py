@@ -22,7 +22,7 @@ def map_to_planet_name(k):
         return None
 
 def generate_report_local(chart: Chart, birth_date: datetime, analysis_date: datetime, analysis_jd: float, age: int):
-    print("=== AstroForge: UNIVERSAL CAUSATION AUDIT ===\n")
+    print("=== Traditional Astrology: UNIVERSAL CAUSATION AUDIT ===\n")
     print("FINAL VERIFIED REPORT\n")
     
     audit = perform_forensic_audit(
