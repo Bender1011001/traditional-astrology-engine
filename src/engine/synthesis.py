@@ -296,10 +296,28 @@ class ReportSynthesizer:
             text += f"### {name} in {sign} ({round(lon % 30, 2)}°){ws_house}{retro_glyph}\n"
             
             if name not in ["North_Node", "South_Node"]:
-                text += f"- **Essential Dignity:** `{total_score}` (Domicile: {dignity.get('domicile_ruler')}, Exaltation: {dignity.get('exaltation_ruler')})\n"
+                # Build human-readable dignity list from score_breakdown
+                breakdown = dignity.get("score_breakdown", {})
+                dignity_labels = []
+                if breakdown.get("domicile", 0) > 0:
+                    dignity_labels.append(f"Domicile +{breakdown['domicile']}")
+                if breakdown.get("exaltation", 0) > 0:
+                    dignity_labels.append(f"Exaltation +{breakdown['exaltation']}")
+                if breakdown.get("triplicity", 0) > 0:
+                    dignity_labels.append(f"Triplicity +{breakdown['triplicity']}")
+                if breakdown.get("term", 0) > 0:
+                    dignity_labels.append(f"Term +{breakdown['term']}")
+                if breakdown.get("face", 0) > 0:
+                    dignity_labels.append(f"Face +{breakdown['face']}")
+                if breakdown.get("detriment", 0) < 0:
+                    dignity_labels.append(f"Detriment {breakdown['detriment']}")
+                if breakdown.get("fall", 0) < 0:
+                    dignity_labels.append(f"Fall {breakdown['fall']}")
+                
+                dignity_str = ", ".join(dignity_labels) if dignity_labels else "Peregrine"
+                text += f"- **Essential Dignity:** `{total_score}` ({dignity_str})\n"
                 
                 # Peregrine Check
-                breakdown = dignity.get("score_breakdown", {})
                 essential_sum = (
                     breakdown.get("domicile", 0) + 
                     breakdown.get("exaltation", 0) + 
