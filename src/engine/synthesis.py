@@ -177,9 +177,26 @@ class ReportSynthesizer:
             type_ = type_raw.value if hasattr(type_raw, "value") else type_raw
             apply_str = "Applying" if is_applying else "Separating"
             
-            # Interpret the dynamic
+            # Classify the dynamic using traditional planet natures
+            MALEFICS = {"Mars", "Saturn", "Pluto"}
+            BENEFICS = {"Venus", "Jupiter"}
+            
             narrative = ""
-            if type_ in ["Conjunction", "Trine", "Sextile"]:
+            if type_ == "Conjunction":
+                # Conjunctions take on the nature of the planets involved
+                planets = {p1, p2}
+                has_malefic = bool(planets & MALEFICS)
+                has_benefic = bool(planets & BENEFICS)
+                
+                if has_malefic and not has_benefic:
+                    narrative = f"The conjunction of {p1} and {p2} is **Volatile**. The malefic nature dominates, intensifying destructive or challenging energies."
+                elif has_malefic and has_benefic:
+                    narrative = f"The conjunction of {p1} and {p2} is **Contested**. Benefic and malefic natures clash — the outcome depends on dignity, sect, and which planet is stronger."
+                elif has_benefic:
+                    narrative = f"The conjunction of {p1} and {p2} is **Amplifying**. Both benefic natures reinforce each other, enhancing positive significations."
+                else:
+                    narrative = f"The conjunction of {p1} and {p2} is **Neutral**. The dynamic depends on the condition and dignity of each planet."
+            elif type_ in ["Trine", "Sextile"]:
                 narrative = f"The relationship between {p1} and {p2} is **Harmonious**. Their energies support each other, creating a natural bypass for difficulties."
             else:
                 narrative = f"The relationship between {p1} and {p2} is **Frictional**. This creates tension that demands action, growth, and the resolution of internal conflicts."
