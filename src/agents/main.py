@@ -86,7 +86,7 @@ class AstroAgent:
         time_str = chart_data["meta"].get("time")
         try:
             birth_dt = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
-        except:
+        except (ValueError, TypeError):
             birth_dt = datetime.now()
 
         analysis_dt = datetime.now()

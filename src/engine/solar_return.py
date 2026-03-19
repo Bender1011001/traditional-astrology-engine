@@ -49,7 +49,7 @@ class SolarReturnEngine:
                     latitude=res[1], 
                     speed=res[3]
                 ))
-            except:
+            except Exception:
                 continue
         
         # SR Houses

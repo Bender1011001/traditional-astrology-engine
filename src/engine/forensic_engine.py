@@ -694,7 +694,7 @@ class Auditor:
                 day_diff = (ans_date.day - birth_dt.day)
                 if day_diff < 0: day_diff += 30
                 day = day_diff + 1
-            except:
+            except Exception:
                 pass
 
         # Monthly (Continuous)

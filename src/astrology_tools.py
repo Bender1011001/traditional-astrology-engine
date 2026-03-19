@@ -130,7 +130,7 @@ class AstrologyTools:
                 start_nice = start_dt.strftime("%b %d, %I:%M %p")
                 end_nice = end_dt.strftime("%b %d, %I:%M %p")
                 peak_nice = peak_dt.strftime("%b %d at %I:%M %p")
-            except:
+            except Exception:
                 start_nice, end_nice, peak_nice = start, end, peak
             
             # Mood emoji

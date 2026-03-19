@@ -1,5 +1,4 @@
 import hashlib
-import hashlib
 from datetime import datetime
 from fastapi import Request
 from src.engine.logger import ActivityLogger
@@ -30,7 +29,7 @@ def log_event(event_type: str, payload: dict, request: Request, session_id: str 
             token_payload = validate_token(token)
             if token_payload and "d" in token_payload and "user_id" in token_payload["d"]:
                 user_id = token_payload["d"]["user_id"]
-        except:
+        except Exception:
             pass
             
     details = payload.copy()

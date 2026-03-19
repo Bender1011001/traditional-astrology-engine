@@ -15,7 +15,7 @@ async def find_kairos(request: KairosRequest):
     if request.start_date:
         try:
             start_dt = datetime.strptime(request.start_date, "%Y-%m-%d")
-        except:
+        except (ValueError, TypeError):
             start_dt = datetime.now()
     else:
         start_dt = datetime.now()

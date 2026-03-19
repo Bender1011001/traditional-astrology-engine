@@ -18,7 +18,7 @@ def map_to_planet_name(k):
     if k == "SOUTH_NODE": return PlanetName.SOUTH_NODE
     try:
         return PlanetName[k]
-    except:
+    except KeyError:
         return None
 
 def generate_report_local(chart: Chart, birth_date: datetime, analysis_date: datetime, analysis_jd: float, age: int):
