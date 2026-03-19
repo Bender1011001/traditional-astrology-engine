@@ -1,18 +1,19 @@
 ---
 project: engine
 status: audited
-updated: 2026-03-16
+updated: 2026-03-18
 ---
 
 # Astrological Engine
 
 ## Resume
-- **Pick up at**: 11 total fixes applied. Next targets: Hyleg aspect-based Anareta, Lunar Mansions sidereal option, missing technique implementations.
-- **Last session**: Full 46-file audit completed (2026-03-16). 11 fixes applied and verified. Report quality significantly improved.
+- **Pick up at**: Computation Trace v1 complete (91 steps, 10 categories). Next: add Fixed Stars, Firdaria, ZR, Primary Directions trace categories.
+- **Last session**: Built Computation Trace system (2026-03-18). 91 auditable computation steps rendered as self-contained HTML + JSON.
 - **Blocked on**: Nothing
 
 ## Status
 - **AUDIT STATUS**: ✅ Comprehensive audit completed 2026-03-16. See `engine_audit_report.md` in artifacts.
+- **COMPUTATION TRACE**: ✅ Transparent audit trail system added 2026-03-18. See `trace.py` and `scripts/generate_trace.py`.
 - Core calculation and synthesis logic verified against source material (Ptolemy, Valens, Dorotheus, Bonatti, Lilly, Al-Biruni, Paulus Alexandrinus).
 - **Implemented**: 40+ traditional techniques spanning the full canon: Essential/Accidental Dignities, Sect, Hayz/Halb, Aspects, Reception (Bonatti/Lilly), Hermetic & Forensic Lots (40+), Kakosis (7 Conditions), Horary Physics, Profections, Zodiacal Releasing, Firdaria, Decennials, Primary Directions (Placidus), Distributor, Hyleg/Alcocoden, Almuten Figuris, Lord of Geniture, Monomoiria, Dodecatemoria, Doryphory, Antiscia, Fixed Stars (Parans), Lunar Mansions (Picatrix), Temperament (Lilly), Medical/Decumbiture, Mundane Hierarchy, Eclipses, Electional (Kairos), Planetary Hours, Solar Return, Solar Arcs, Phasis/Visibility, Synodic Phases, Prenatal Syzygy, Al-Mubtazz, Nodal Metabolic model.
 
@@ -26,6 +27,7 @@ updated: 2026-03-16
 
 ## Key Files
 - `forensic_engine.py`: Central hub/Auditor. Orchestrates all engines, produces bifurcated JSON output.
+- `trace.py`: ComputationTrace class — captures every calculation step (category, technique, inputs, rule, source, calculation, result) for transparent audit trail.
 - `dignities.py`: 5-tier essential dignities + accidental dignities, Hayz/Halb, Monomoiria.
 - `advanced_mechanics.py`: Hermetic Lots, Almuten Figuris, Doryphory, Dodecatemoria.
 - `horary.py`: Horary physics (Translation, Collection, Prohibition, Frustration, Abscission, Refranation).
@@ -52,6 +54,9 @@ updated: 2026-03-16
 - `calculations.py`: Core utilities (VoC, combustion, Via Combusta, besiegement, syzygy).
 - `synthesis.py`: Human-readable report generation.
 - `calculator/main.py`: Entry point for Swiss Ephemeris chart calculations.
+
+### Scripts
+- `scripts/generate_trace.py`: Generates Computation Trace (91 steps, 10 categories). Outputs self-contained HTML + JSON to `chart_outputs/`. Usage: `python scripts/generate_trace.py --date YYYY-MM-DD --time HH:MM --city City --state ST --name Name`
 
 ## Trap Diary
 | Issue | Cause | Fix |

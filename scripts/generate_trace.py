@@ -46,6 +46,7 @@ from src.engine.phasis import PhasisEngine
 from src.engine.primary_directions import PrimaryDirectionsEngine
 from src.engine.stars import check_fixed_stars
 from src.engine.mansions import LunarMansionEngine
+from src.engine.classical_mechanics import ClassicalMechanicsEngine, calculate_antiscia_points
 from src.engine.geniture import LordOfGenitureEngine
 from src.engine.calculations import (
     calculate_solar_status, is_besieged, is_in_via_combusta,
@@ -775,6 +776,88 @@ def trace_decennials(trace: ComputationTrace, chart: Chart, birth_date, target_d
         pass
 
 
+def trace_antiscia(trace: ComputationTrace, chart: Chart):
+    """Trace Antiscia (shadow points) and contra-antiscia contacts."""
+    shadow_aspects = ClassicalMechanicsEngine.check_shadow_aspects(chart.planets)
+    
+    if not shadow_aspects:
+        trace.add(
+            category=CAT_ASPECTS,
+            technique="Antiscia Survey",
+            inputs={"method": "Solstice Reflection"},
+            rule="Antiscia: Reflect each planet's longitude across the Cancer/Capricorn axis (0 deg Cap). Formula: antiscia = (360 - longitude) % 360. Contra-antiscia = antiscia + 180. If another planet falls on the shadow point within moiety-orb, a hidden connection exists.",
+            source="Ptolemy, Tetrabiblos; Lilly, Christian Astrology, pp.91-92",
+            calculation="Checked all 21 planet pairs. No antiscia or contra-antiscia aspects found within orb.",
+            result="No shadow aspects",
+            subsection="Antiscia (Shadow Points)",
+        )
+        return
+    
+    for sa in shadow_aspects:
+        quality = sa.get("quality", "?")
+        trace.add(
+            category=CAT_ASPECTS,
+            technique=f"{sa.get('type', 'Antiscia')}: {sa.get('planet_1', '?')} / {sa.get('planet_2', '?')}",
+            inputs={
+                "planet_1": sa.get("planet_1", "?"),
+                "planet_2": sa.get("planet_2", "?"),
+                "orb": f"{sa.get('orb', '?')} deg",
+                "partile": "Yes" if sa.get("partile") else "No",
+            },
+            rule=f"The {sa.get('type', 'Antiscia')} of {sa.get('planet_1', '?')} falls on {sa.get('planet_2', '?')}. {sa.get('type', '')} contacts indicate {'hidden support (solstice pair, equal day-length)' if 'Contra' not in sa.get('type', '') else 'hidden friction (equinoctial opposition)'}.",
+            source="Ptolemy, Tetrabiblos; Lilly, Christian Astrology, pp.91-92",
+            calculation=f"Orb: {sa.get('orb', '?')} deg. Partile (within 1 deg): {'Yes' if sa.get('partile') else 'No'}.",
+            result=f"{quality}: {sa.get('planet_1', '?')} / {sa.get('planet_2', '?')} ({sa.get('type', '?')})",
+            subsection="Antiscia (Shadow Points)",
+        )
+
+
+def trace_planetary_hours(trace: ComputationTrace, chart: Chart, raw: dict):
+    """Trace planetary hour calculation."""
+    from src.engine.reference_data import DOMICILES
+    
+    meta = raw.get("meta", {})
+    lat = meta.get("geo_lat", 0)
+    lon = meta.get("geo_lon", 0)
+    utc_str = meta.get("utc_time", "")
+    
+    try:
+        birth_dt = datetime.fromisoformat(utc_str.replace("Z", "+00:00")) if utc_str else None
+        if birth_dt and birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+        
+        if not birth_dt:
+            return
+        
+        # Get ASC sign for radicality check
+        asc_sign = _sign_of(chart.ascendant)
+        asc_lord = DOMICILES.get(asc_sign)
+        asc_lord_str = asc_lord.value if asc_lord else None
+        
+        hour_info = ClassicalMechanicsEngine.get_planetary_hours(
+            birth_dt, lat, lon, asc_sign, asc_lord_str
+        )
+        
+        if hour_info:
+            trace.add(
+                category=CAT_ASTRONOMY,
+                technique="Planetary Hour at Birth",
+                inputs={
+                    "datetime_utc": str(birth_dt),
+                    "latitude": lat,
+                    "longitude": lon,
+                },
+                rule="Calculate sunrise/sunset using Swiss Ephemeris. Divide the daytime (sunrise to sunset) into 12 unequal 'temporal hours', and similarly the nighttime. Each hour is ruled by a planet in Chaldean descending order (Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon) starting from the Day Lord. Radicality: the Hour Lord should match the Ascendant Lord.",
+                source="Lilly, Christian Astrology pp.31-32; Abu Ma'shar",
+                calculation=f"Day: {hour_info.day_of_week}, Day Lord: {hour_info.day_lord}. {'Daytime' if hour_info.is_daytime else 'Nighttime'} birth, Hour #{hour_info.hour_number} -> Hour Lord: {hour_info.hour_lord}. ASC Lord: {asc_lord_str or '?'}.",
+                result=f"Hour Lord: {hour_info.hour_lord} ({hour_info.radicality})",
+                subsection="Planetary Hours",
+                notes=f"Night Lord: {hour_info.night_lord}. A Radical chart (Hour Lord = ASC Lord) is considered more reliable for horary and electional purposes.",
+            )
+    except Exception:
+        pass
+
+
 # ─── HTML Renderer ────────────────────────────────────────────────────────────
 
 def render_html(trace: ComputationTrace) -> str:
@@ -1426,45 +1509,51 @@ def main():
     age = now.year - birth_dt.year - ((now.month, now.day) < (birth_dt.month, birth_dt.day))
     
     # 2. Trace every category
-    print("[2/14] Tracing astronomical foundations...")
+    print("[2/16] Tracing astronomical foundations...")
     trace_astronomy(trace, raw, chart)
+    trace_planetary_hours(trace, chart, raw)
     
-    print("[3/14] Tracing sect determination...")
+    print("[3/16] Tracing sect determination...")
     trace_sect(trace, chart)
     
-    print("[4/14] Tracing essential dignities (5-tier per planet)...")
+    print("[4/16] Tracing essential dignities (5-tier per planet)...")
     trace_dignities(trace, chart)
     
-    print("[5/14] Tracing aspects...")
+    print("[5/16] Tracing aspects...")
     trace_aspects(trace, chart)
     
-    print("[6/14] Tracing lots / Arabic parts...")
+    print("[6/16] Tracing antiscia (shadow points)...")
+    trace_antiscia(trace, chart)
+    
+    print("[7/16] Tracing lots / Arabic parts...")
     trace_lots(trace, chart)
     
-    print("[7/14] Tracing kakosis (maltreatment conditions)...")
+    print("[8/16] Tracing kakosis (maltreatment conditions)...")
     trace_kakosis(trace, chart)
     
-    print("[8/14] Tracing vitality (Hyleg -> Alcocoden -> Anareta)...")
+    print("[9/16] Tracing vitality (Hyleg -> Alcocoden -> Anareta)...")
     trace_vitality(trace, chart)
     
-    print("[9/14] Tracing temperament, Almuten, profections...")
+    print("[10/16] Tracing temperament, Almuten, profections...")
     trace_temperament(trace, chart)
     trace_almuten(trace, chart)
     trace_profections(trace, chart, age)
     
-    print("[10/14] Tracing fixed stars...")
+    print("[11/16] Tracing fixed stars...")
     trace_fixed_stars(trace, chart)
     
-    print("[11/14] Tracing reception / mutual reception...")
+    print("[12/16] Tracing reception / mutual reception...")
     trace_reception(trace, chart)
     
-    print("[12/14] Tracing Firdaria...")
+    print("[13/16] Tracing Firdaria...")
     trace_firdaria(trace, chart, birth_dt, now)
     
-    print("[13/14] Tracing Decennials...")
+    print("[14/16] Tracing Decennials...")
     trace_decennials(trace, chart, birth_dt, now)
     
-    print("[14/14] Rendering HTML...")
+    print("[15/16] Final assembly...")
+    
+    print("[16/16] Rendering HTML...")
     
     # Output
     out_dir = os.path.join(os.path.dirname(__file__), '..', 'chart_outputs')
