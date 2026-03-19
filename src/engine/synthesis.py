@@ -385,7 +385,7 @@ class ReportSynthesizer:
         if not stars:
             return ""
         
-        text = "## FIXED STAR CONTACTS\n"
+        text = "## VII. FIXED STAR CONTACTS\n"
         for s in stars:
             star = s.get("star_name", "Unknown")
             planet = s.get("planet_name", "Unknown")
@@ -399,7 +399,7 @@ class ReportSynthesizer:
 
     @staticmethod
     def _generate_fate_timeline(report: Dict) -> str:
-        text = "## IV. THE FATE TIMELINE: CHRONOCRATORS & DIRECTIONS\n"
+        text = "## VI. THE FATE TIMELINE: CHRONOCRATORS & DIRECTIONS\n"
         
         # Distributor
         dist = report.get("primary_direction_distributor", {})
@@ -464,7 +464,7 @@ class ReportSynthesizer:
 
     @staticmethod
     def _generate_forensic_audit(report: Dict) -> str:
-        text = "## V. FORENSIC AUDIT: LIFE DOMAINS\n"
+        text = "## VIII. FORENSIC AUDIT: LIFE DOMAINS\n"
         
         lots = report.get("forensic_lots", {})
         for lot_name, data in lots.items():
@@ -500,7 +500,7 @@ class ReportSynthesizer:
 
     @staticmethod
     def _generate_universal_overrides(report: Dict) -> str:
-        text = "## VI. UNIVERSAL OVERRIDES: ACTS OF GOD\n"
+        text = "## IX. UNIVERSAL OVERRIDES: ACTS OF GOD\n"
         
         events = report.get("summary", {}).get("universal_events", [])
         if not events:
