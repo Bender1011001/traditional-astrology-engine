@@ -1,4 +1,15 @@
+---
+project: engine
+status: unknown
+updated: 2026-03-14
+---
+
 # Astrological Engine
+
+## Resume
+- **Pick up at**: [Review and update]
+- **Last session**: [Auto-migrated to CONTEXT v2]
+- **Blocked on**: Nothing
 
 ## Status
 - Core calculation and synthesis logic verified.

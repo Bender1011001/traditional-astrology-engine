@@ -1,4 +1,15 @@
+---
+project: admiring-fermi
+status: complete
+updated: 2026-03-14
+---
+
 # Astrology Project
+
+## Resume
+- **Pick up at**: [Review and update]
+- **Last session**: [Auto-migrated to CONTEXT v2]
+- **Blocked on**: Nothing
 
 ## Status
 - **Working**: Astrological engine core, CI/CD pipeline, Azure deployment (SyntaxError resolved).

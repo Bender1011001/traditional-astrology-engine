@@ -1,4 +1,15 @@
+---
+project: static
+status: working
+updated: 2026-03-14
+---
+
 # Static Assets
+
+## Resume
+- **Pick up at**: [Review and update]
+- **Last session**: [Auto-migrated to CONTEXT v2]
+- **Blocked on**: Nothing
 
 ## Status
 - **Working**: Landing page (index.html), about page (about.html), methodology page (methodology.html), pricing, services, booking, and FAQ pages. JavaScript logic for landing (landing.js) and basic functionality (basic.js). CSS styling (style.css).

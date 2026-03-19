@@ -1,4 +1,15 @@
+---
+project: src
+status: wip
+updated: 2026-03-14
+---
+
 # [Engine/Logic]
+
+## Resume
+- **Pick up at**: [Review and update]
+- **Last session**: [Auto-migrated to CONTEXT v2]
+- **Blocked on**: Nothing
 
 ## Status
 - **Working**: Planet models, dignity calculations, sect logic, Lots, Fixed Stars, Nodal Physics, Profections, Email Capture Service, API V1 (Forensic Engine), Token-based Rate Limiting (Agency/Master).
