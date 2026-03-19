@@ -65,7 +65,7 @@ class MundaneEngine:
             "color": color,
             "tail_direction": tail_direction,
             "classification": classification,
-            "forensic_effect": f"Disruption in the direction of the {tail_direction} region."
+            "regional_effect": f"Disruption in the direction of the {tail_direction} region."
         })
 
     def get_hierarchy_report(self) -> List[Dict[str, Any]]:
