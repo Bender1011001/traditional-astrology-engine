@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: All consumer-facing pages rebranded. Computation Trace expanded. Glossary tooltip CSS fixed. CSS/JS cache busted to `?v=20260319tooltip`. Next: deploy to production.
-- **Last session**: Comprehensive branding overhaul: AstroForge → Traditional Astrology in ~30 HTML files + 2 JS files. Removed "forensic" from all indexed consumer pages (index, lot-of-fortune, hyleg, almuten, natal-charts, sample-reading). Updated share watermark, file names, upsell buttons. Fixed glossary tooltip CSS. Updated CSS/JS version strings for cache-busting. Added 4 computation trace categories.
+- **Pick up at**: Full branding overhaul complete (30+ HTML, 15+ Python, 4 email templates, 2 JS). Zero bare excepts in src/. All 63 tests passing. Next: deploy to production.
+- **Last session**: Deep backend branding: emails, PDFs, LLM prompts, auth, chat oracle, email templates all updated from AstroForge→Traditional Astrology. Eliminated all 7 bare excepts in src/. Updated sitemap.xml lastmod dates. Removed duplicate import. Committed.
 - **Blocked on**: Nothing
 
 ## Status
@@ -188,6 +188,9 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Zero conversions | Account signup friction | Removed all auth; guest-only checkout flow |
 | Stripe CSP blocked | Checkout domain not in Content-Security-Policy | Added checkout.stripe.com + js.stripe.com to CSP |
 | All free readings fail | `premium_generator.py` passed `house_system=` to `generate_chart_data()` which doesn't accept it | Removed the unsupported kwarg from the lambda call |
+| Glossary tooltip text rendered inline, garbling all reading text | `basic.js` creates `.glossary-tooltip-popup` elements but `style.css` had NO CSS rules for them — popups showed as visible text | Added 56 lines of tooltip CSS: `display:none` by default, shown on hover/active |
+| New static pages always redirect to index | `app.py` has `_LEGACY_REDIRECTS` list that 301-redirects listed pages BEFORE static file handler sees them | Remove the page from `_LEGACY_REDIRECTS` before it can be served as a static file |
+| Primary directions trace silently empty | `raw["meta"]` uses `lat` not `latitude` for geographic latitude | Use `.get("lat")` not `.get("latitude")` |
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
@@ -198,14 +201,6 @@ The core delineations are now stored in the database to allow for manual fixes a
 - Do NOT add login/signup/account requirements to the reading flow — it kills conversions
 - Do NOT add subscription/monthly pricing — one-time only for B2C
 - Do NOT use technical jargon ("forensic audit", "Swiss Ephemeris") in consumer-facing copy
-
-## Trap Diary
-| Issue | Cause | Fix |
-|-------|-------|-----|
-| Glossary tooltip text rendered inline, garbling all reading text | `basic.js` creates `.glossary-tooltip-popup` elements but `style.css` had NO CSS rules for them — popups showed as visible text | Added 56 lines of tooltip CSS: `display:none` by default, shown on hover/active |
-| New static pages always redirect to index | `app.py` has `_LEGACY_REDIRECTS` list that 301-redirects listed pages BEFORE static file handler sees them | Remove the page from `_LEGACY_REDIRECTS` before it can be served as a static file |
-| Primary directions trace silently empty | `raw["meta"]` uses `lat` not `latitude` for geographic latitude | Use `.get("lat")` not `.get("latitude")` |
-| `house_system` kwarg in `generate_chart_data()` | `calculate_chart_data()` doesn't accept `house_system` as a kwarg — caused ALL free readings to fail silently | Remove the unsupported kwarg |
 
 ## Environment Variables (Production)
 | Variable | Required | Description |
