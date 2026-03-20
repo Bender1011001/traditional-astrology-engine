@@ -150,139 +150,41 @@ CHALDEAN_ORDER = [
 def calculate_planetary_hours(dt: datetime, lat: float, lon: float, asc_sign: Sign = None, asc_lord: str = None) -> PlanetaryHourInfo:
     """
     Calculates the Planetary Hour and Radicality using the Unequal/Temporal Hour method.
-    Requires accurate Sunrise/Sunset from Swiss Ephemeris.
+
+    Delegates core sunrise/sunset calculation to PlanetaryHourEngine (which handles
+    the JD search correctly) and adds radicality assessment on top.
     """
-    
-    # 1. Astro Calculations
-    # jd is UTC
-    jd = swe.julday(dt.year, dt.month, dt.day, dt.hour + dt.minute/60.0 + dt.second/3600.0)
-    
-    geopos = (lon, lat, 0)
-    
-    # Rise/Set flags
-    # We want Upper Limb rising. swe.FLG_SWIEPH
-    
-    # Search for events around the specific day
-    # Strategy: Collect a sequence of events over 48 hours.
-    
-    start_search = jd - 1.5
-    
-    events = []
-    # Collect 4 rises and 4 sets starting from start_search
-    
-    t_iter = start_search
-    for _ in range(4):
-        # Find next rise (rsmi=0)
-        # Signature: (tjd, body, rsmi, geopos, press, temp, flags)
-        res = swe.rise_trans(t_iter, swe.SUN, 0, geopos, 0, 0, swe.FLG_SWIEPH)
-        t_rise = res[1][0]
-        events.append(('rise', t_rise))
-        
-        # Find next set (rsmi=1)
-        res = swe.rise_trans(t_iter, swe.SUN, 1, geopos, 0, 0, swe.FLG_SWIEPH)
-        t_set = res[1][0]
-        events.append(('set', t_set))
-        
-        # Advance iterator
-        t_iter = min(t_rise, t_set) + (1.0/24.0) 
-        
-    # Sort events by time
-    events.sort(key=lambda x: x[1])
-    
-    # Filter duplicates (if any) and invalid times
-    unique_events = []
-    last_t = -1.0
-    for etype, t in events:
-        if t > last_t + 0.001: # 1.5 min threshold
-            unique_events.append((etype, t))
-            last_t = t
-            
-    events = unique_events
-    
-    # Now find where JD sits
-    past_events = [e for e in events if e[1] <= jd]
-    
-    if not past_events:
-        return None 
-        
-    last_event = past_events[-1]
-    
-    if last_event[0] == 'rise':
-        is_day = True
-        period_start = last_event[1]
-        future_events = [e for e in events if e[1] > jd and e[0] == 'set']
-        period_end = future_events[0][1] if future_events else jd + 0.5
-        
-        # Astrological Day determination
-        # Weekday: (JD + 1.5) % 7. 0=Sun
-        day_idx = int((period_start + 1.5) % 7) 
-        
-    else: # Last event was Set
-        is_day = False
-        period_start = last_event[1]
-        future_events = [e for e in events if e[1] > jd and e[0] == 'rise']
-        period_end = future_events[0][1] if future_events else jd + 0.5
-        
-        # Astrological Day is the day of the PREVIOUS Rise
-        prev_rises = [e for e in past_events if e[0] == 'rise']
-        if prev_rises:
-             t_rise_prev = prev_rises[-1][1]
-        else:
-             # Fallback call if not found in list (shouldn't happen with adequate search range)
-             res = swe.rise_trans(period_start - 0.5, swe.SUN, 0, geopos, 0, 0, swe.FLG_SWIEPH)
-             t_rise_prev = res[1][0]
-             
-        day_idx = int((t_rise_prev + 1.5) % 7)
+    from .planetary_hours import PlanetaryHourEngine
 
-    # Standardize Rulership Map (0=Sunday)
-    RULERS = {
-        0: PlanetName.SUN,
-        1: PlanetName.MOON,
-        2: PlanetName.MARS,
-        3: PlanetName.MERCURY,
-        4: PlanetName.JUPITER,
-        5: PlanetName.VENUS,
-        6: PlanetName.SATURN
-    }
-    day_lord = RULERS[day_idx]
+    report = PlanetaryHourEngine.calculate_hours(dt, lat, lon)
+    if not report or "error" in report:
+        return None
 
-    # Calculate Hour
-    duration = period_end - period_start
-    hour_length = duration / 12.0
-    elapsed = jd - period_start
-    hour_idx_12 = int(elapsed / hour_length) + 1
-    if hour_idx_12 > 12: hour_idx_12 = 12
-    
-    # Absolute Hour (1-24)
-    abs_hour = hour_idx_12 if is_day else (hour_idx_12 + 12)
-    
-    # Chaldean Mapping
-    start_idx = CHALDEAN_ORDER.index(day_lord)
-    
-    # Sequence
-    steps = abs_hour - 1
-    current_idx = (start_idx + steps) % 7
-    hour_lord = CHALDEAN_ORDER[current_idx]
-    
-    # Night Lord (Ruler of Hour 13)
+    day_lord_name = PlanetName(report["day_ruler"])
+    hour_lord_name = PlanetName(report["hour_ruler"])
+    is_day = report["phase"] == "DAY"
+    hour_number = report["hour_number_civil"]
+
+    # Night lord: 13th hour from day lord in Chaldean order
+    start_idx = CHALDEAN_ORDER.index(day_lord_name)
     night_lord_idx = (start_idx + 12) % 7
     night_lord = CHALDEAN_ORDER[night_lord_idx]
-    
-    # Radicality Check
+
+    # Radicality check
     radicality = "Unknown"
     if asc_lord:
-        if hour_lord == PlanetName(asc_lord):
+        if hour_lord_name == PlanetName(asc_lord):
             radicality = "Radical (Identity)"
         elif asc_sign:
             radicality = "Caution (No Identity)"
         else:
             radicality = "Caution (No Identity)"
-            
+
     return PlanetaryHourInfo(
-        day_of_week=day_lord.value + "'s Day",
-        day_lord=day_lord.value,
-        hour_lord=hour_lord.value,
-        hour_number=abs_hour,
+        day_of_week=day_lord_name.value + "'s Day",
+        day_lord=day_lord_name.value,
+        hour_lord=hour_lord_name.value,
+        hour_number=hour_number,
         is_daytime=is_day,
         radicality=radicality,
         night_lord=night_lord.value
