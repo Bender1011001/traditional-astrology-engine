@@ -13,9 +13,9 @@ class Settings(BaseSettings):
     SITE_BASE_URL: str = "https://traditional-astrology.com"
     CORS_ORIGINS: str = (
         "http://localhost:3000,"
+        "http://localhost:8000,"
         "https://traditional-astrology.com,"
-        "https://www.traditional-astrology.com,"
-        "https://astrology-engine-central-7387.azurewebsites.net"
+        "https://www.traditional-astrology.com"
     )
     OWNER_EMAILS: str = ""
     OWNER_BOOTSTRAP_KEY: str = ""
