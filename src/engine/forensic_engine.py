@@ -166,7 +166,7 @@ class Auditor:
                         ddt = ddt.astimezone(tz=None).replace(tzinfo=None)
                     decumbiture_jd = swe.julday(ddt.year, ddt.month, ddt.day, ddt.hour + (ddt.minute / 60.0) + (ddt.second / 3600.0))
                 except Exception as e:
-                    logger.warning(f"Invalid decumbiture_utc_iso; ignoring. Error: {e}")
+                    logger.warning("Invalid decumbiture_utc_iso; ignoring. Error: %s", e)
                     decumbiture_jd = None
 
             audit_results = Auditor.perform_audit(
@@ -235,7 +235,7 @@ class Auditor:
         except Exception as e:
             import traceback
             error_trace = traceback.format_exc()
-            logger.error(f"Auditor Failure: {e}\n{error_trace}")
+            logger.error("Auditor Failure: %s\n%s", e, error_trace)
             return {"error": f"Auditor Failure: {str(e)}"}
 
     @staticmethod
@@ -577,7 +577,7 @@ class Auditor:
             # Simple wrapper to match expected logic
             return SolarReturnEngine.analyze_solar_return_from_jd(chart, sr_jd, age, birth_dt)
         except Exception as e:
-            logger.error(f"Solar Return calculation failed: {e}")
+            logger.error("Solar Return calculation failed: %s", e)
             return {"error": "Solar Return calculation failed"}
 
     @staticmethod

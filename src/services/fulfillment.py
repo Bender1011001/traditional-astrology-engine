@@ -22,7 +22,7 @@ class FulfillmentService:
         """
         Execute fulfillment flow. Should be run as a BackgroundTask.
         """
-        logger.info(f"Starting fulfillment for {user_email} (Tier: {tier})")
+        logger.info("Starting fulfillment for %s (Tier: %s)", user_email, tier)
         
         try:
             # 1. Calculate Chart Data
@@ -44,7 +44,7 @@ class FulfillmentService:
                 )
             
             if "error" in chart_data:
-                logger.error(f"Fulfillment Calculation Failed: {chart_data['error']}")
+                logger.error("Fulfillment Calculation Failed: %s", chart_data['error'])
                 # TODO: Send "Sorry" email?
                 return
 
@@ -66,7 +66,7 @@ class FulfillmentService:
                         chart_data
                     )
                 except Exception as ai_error:
-                    logger.error(f"AI Generation Failed: {ai_error}")
+                    logger.error("AI Generation Failed: %s", ai_error)
                     # Fallback to Algorithmic Full Report if AI fails
                     custom_markdown = f"# Report Generation Issue\n\nWe encountered a disruption in the etheric link. The standardized algorithmic report follows below.\n\n---\n"
 
@@ -79,7 +79,7 @@ class FulfillmentService:
             pdf_bytes = pdf_buffer.getvalue()
             
             # 4. Send Email
-            logger.info(f"Sending email to {user_email}...")
+            logger.info("Sending email to %s...", user_email)
             
             # Determine email template based on tier
             subject = "Your Astrology Report"
@@ -113,9 +113,9 @@ class FulfillmentService:
             )
             
             if success:
-                logger.info(f"Fulfillment successful for {user_email}")
+                logger.info("Fulfillment successful for %s", user_email)
             else:
-                logger.error(f"Email failed to send for {user_email}")
+                logger.error("Email failed to send for %s", user_email)
 
         except Exception as e:
-            logger.exception(f"CRITICAL FULFILLMENT ERROR for {user_email}: {e}")
+            logger.exception("CRITICAL FULFILLMENT ERROR for %s: %s", user_email, e)

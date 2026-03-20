@@ -139,7 +139,7 @@ def generate_trace(
         return trace.to_dict()
 
     except Exception as e:
-        logger.error(f"Trace generation failed: {e}", exc_info=True)
+        logger.error("Trace generation failed: %s", e, exc_info=True)
         return {
             "error": str(e),
             "steps": trace.to_dict().get("steps", []),
@@ -894,7 +894,7 @@ def _trace_decennials(trace: ComputationTrace, chart: Chart, birth_date, target_
             logger.debug("Current decennial period trace failed: %s", e)
 
     except Exception as e:
-        logger.warning(f"Decennial trace failed: {e}")
+        logger.warning("Decennial trace failed: %s", e)
 
 
 def _trace_lunar_mansions(trace: ComputationTrace, chart: Chart):
@@ -922,7 +922,7 @@ def _trace_lunar_mansions(trace: ComputationTrace, chart: Chart):
             notes=f"Good for: {good}. Avoid: {bad}." if good or bad else None,
         )
     except Exception as e:
-        logger.warning(f"Lunar mansion trace failed: {e}")
+        logger.warning("Lunar mansion trace failed: %s", e)
 
 
 def _trace_primary_directions(trace: ComputationTrace, chart: Chart, raw: dict):
@@ -959,7 +959,7 @@ def _trace_primary_directions(trace: ComputationTrace, chart: Chart, raw: dict):
                 notes=f"Method: {d.method}",
             )
     except Exception as e:
-        logger.warning(f"Primary directions trace failed: {e}")
+        logger.warning("Primary directions trace failed: %s", e)
 
 
 def _trace_doryphory(trace: ComputationTrace, chart: Chart):
@@ -992,7 +992,7 @@ def _trace_doryphory(trace: ComputationTrace, chart: Chart):
                 result=f"Score: {inst.score}/10",
             )
     except Exception as e:
-        logger.warning(f"Doryphory trace failed: {e}")
+        logger.warning("Doryphory trace failed: %s", e)
 
 
 def _trace_dodecatemoria(trace: ComputationTrace, chart: Chart):
@@ -1030,4 +1030,4 @@ def _trace_dodecatemoria(trace: ComputationTrace, chart: Chart):
                 result=f"{d['sign']} (ruler: {d['ruler']}, term: {d.get('term_ruler', '?')})",
             )
     except Exception as e:
-        logger.warning(f"Dodecatemoria trace failed: {e}")
+        logger.warning("Dodecatemoria trace failed: %s", e)

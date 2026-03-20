@@ -44,13 +44,13 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
     """
     Background task to generate a premium report.
     """
-    logger.info(f"Starting premium report generation for task {task_id}")
+    logger.info("Starting premium report generation for task %s", task_id)
     
     db: Session = SessionLocal()
     task = db.query(AsyncReportTask).filter(AsyncReportTask.id == task_id).first()
     
     if not task:
-        logger.error(f"Task {task_id} not found in DB")
+        logger.error("Task %s not found in DB", task_id)
         db.close()
         return
 
@@ -98,7 +98,7 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
                 )
             )
         except Exception as trace_err:
-            logger.warning(f"Trace generation failed (non-fatal): {trace_err}")
+            logger.warning("Trace generation failed (non-fatal): %s", trace_err)
             computation_trace = None
 
         # 4. Store Result
@@ -111,10 +111,10 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         task.result_json = result_payload
         task.status = "completed"
         db.commit()
-        logger.info(f"Task {task_id} completed successfully")
+        logger.info("Task %s completed successfully", task_id)
 
     except Exception as e:
-        logger.error(f"Task {task_id} failed: {e}")
+        logger.error("Task %s failed: %s", task_id, e)
         task.status = "failed"
         task.result_json = {"error": str(e)}
         db.commit()
