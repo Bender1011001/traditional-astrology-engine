@@ -2,7 +2,10 @@ from dataclasses import dataclass
 from typing import List, Optional, Dict, Tuple
 import math
 import swisseph as swe
+import logging
 from .models import Planet, Chart, PlanetName
+
+logger = logging.getLogger(__name__)
 
 FIXED_STAR_EPOCH = 2025
 FIXED_STAR_CATALOG = "Swiss Ephemeris fixed star catalog (swe.fixstar) when available; fallback to traditional longitudes."
@@ -253,8 +256,8 @@ def _get_obliquity_deg(jd: Optional[float]) -> float:
         coords = res[0] if isinstance(res[0], (list, tuple)) else res
         if isinstance(coords, (list, tuple)) and len(coords) > 0:
             return coords[0]  # true obliquity (index 0); index 1 is mean obliquity
-    except Exception:
-        pass
+    except Exception as e:
+        logger.debug("Obliquity calc failed: %s", e)
     return 23.4392911
 
 def _equatorial_to_ecliptic(ra: float, dec: float, epsilon: float) -> Tuple[float, float]:
@@ -305,7 +308,8 @@ def _get_star_equatorial(star: FixedStar, jd: Optional[float]) -> Optional[Tuple
         ra = coords[0]
         dec = coords[1]
         return (ra, dec)
-    except Exception:
+    except Exception as e:
+        logger.debug("Star equatorial lookup failed for %s: %s", star.swe_name, e)
         return None
 
 def _get_star_longitude(star: FixedStar, jd: Optional[float]) -> float:
@@ -330,7 +334,8 @@ def _angles_for_body(ra: float, dec: float, ramc: float, lat: float, orb: float)
 
     try:
         cos_h = -math.tan(math.radians(lat)) * math.tan(math.radians(dec))
-    except Exception:
+    except Exception as e:
+        logger.debug("Hour angle calc error: %s", e)
         cos_h = 2.0
     if -1.0 <= cos_h <= 1.0:
         h = math.degrees(math.acos(cos_h))
