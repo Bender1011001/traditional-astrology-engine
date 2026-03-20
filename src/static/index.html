@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260319tooltip" />
+  <link rel="stylesheet" href="style.css?v=20260319progress" />
   <script src="config.js?v=20260310b2c"></script>
 
   <script type="application/ld+json">
@@ -199,7 +199,21 @@
       <div class="loading-card">
         <div class="loading-spinner"></div>
         <p class="loading-text" id="loadingMessage">Calculating planetary positions...</p>
-        <p class="loading-sub">This takes about 30 seconds for the full premium reading.</p>
+        <!-- Step progress bar -->
+        <div class="loading-progress-bar" id="loadingProgressBar">
+          <div class="loading-progress-fill" id="loadingProgressFill"></div>
+        </div>
+        <div class="loading-steps" id="loadingSteps">
+          <span class="loading-step active" data-step="0">📍 Locate</span>
+          <span class="loading-step" data-step="1">🪐 Planets</span>
+          <span class="loading-step" data-step="2">☀️ Sect</span>
+          <span class="loading-step" data-step="3">⚖️ Dignities</span>
+          <span class="loading-step" data-step="4">🔮 Lots</span>
+          <span class="loading-step" data-step="5">🤝 Receptions</span>
+          <span class="loading-step" data-step="6">📆 Profections</span>
+          <span class="loading-step" data-step="7">✍️ Synthesis</span>
+        </div>
+        <p class="loading-sub" id="loadingElapsed">Elapsed: 0s — typically takes 30–60 seconds</p>
       </div>
     </section>
 
@@ -408,7 +422,7 @@
     </footer>
   </main>
 
-  <script type="module" src="js/reading-app.js?v=20260310b2c"></script>
+  <script type="module" src="js/reading-app.js?v=20260319progress"></script>
 </body>
 
 </html>

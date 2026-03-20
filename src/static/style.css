@@ -455,6 +455,68 @@ a:hover {
   color: var(--text-dim);
 }
 
+/* --- Loading Progress Bar --- */
+.loading-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  margin: 1.25rem 0 1rem;
+  overflow: hidden;
+}
+
+.loading-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), #e8b44a, var(--gold));
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+/* --- Loading Step Indicators --- */
+.loading-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.loading-step {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  transition: all 0.4s ease;
+  white-space: nowrap;
+}
+
+.loading-step.active {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.15);
+}
+
+.loading-step.complete {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.3);
+  background: rgba(74, 222, 128, 0.06);
+}
+
+@media (max-width: 600px) {
+  .loading-steps {
+    gap: 0.35rem;
+  }
+  .loading-step {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
 /* --- READING SECTION --- */
 .reading-section {
   padding: 2rem 1.5rem 4rem;

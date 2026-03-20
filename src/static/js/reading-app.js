@@ -12,6 +12,8 @@ import { apiFetch } from './api.js';
 
 // ─── State ───
 let chartPayload = null;
+let loadingStartTime = null;
+let elapsedTimerInterval = null;
 
 // ─── Loading Messages ───
 const LOADING_MSGS = [
@@ -123,6 +125,7 @@ function pollForCompletion(taskId, freeRemaining) {
     const interval = setInterval(async () => {
         attempts++;
         updateLoadingMessage(LOADING_MSGS[msgIdx % LOADING_MSGS.length]);
+        updateLoadingProgress(msgIdx % LOADING_MSGS.length);
         msgIdx++;
 
         if (attempts >= maxAttempts) {
@@ -562,6 +565,25 @@ function showLoading() {
     const readingSection = document.getElementById("readingSection");
     if (readingSection) readingSection.classList.add("hidden");
 
+    // Reset progress bar
+    const fill = document.getElementById("loadingProgressFill");
+    if (fill) fill.style.width = "0%";
+
+    // Reset step indicators
+    document.querySelectorAll(".loading-step").forEach((el, i) => {
+        el.classList.remove("active", "complete");
+        if (i === 0) el.classList.add("active");
+    });
+
+    // Start elapsed timer
+    loadingStartTime = Date.now();
+    const elapsedEl = document.getElementById("loadingElapsed");
+    if (elapsedTimerInterval) clearInterval(elapsedTimerInterval);
+    elapsedTimerInterval = setInterval(() => {
+        const secs = Math.floor((Date.now() - loadingStartTime) / 1000);
+        if (elapsedEl) elapsedEl.textContent = `Elapsed: ${secs}s — typically takes 30–60 seconds`;
+    }, 1000);
+
     // Scroll to loading
     loadingSection?.scrollIntoView({ behavior: "smooth" });
 }
@@ -572,6 +594,12 @@ function hideLoading() {
 
     const loadingSection = document.getElementById("loadingSection");
     if (loadingSection) loadingSection.classList.add("hidden");
+
+    // Stop elapsed timer
+    if (elapsedTimerInterval) {
+        clearInterval(elapsedTimerInterval);
+        elapsedTimerInterval = null;
+    }
 }
 
 function updateLoadingMessage(msg) {
@@ -583,6 +611,20 @@ function updateLoadingMessage(msg) {
             el.style.opacity = "1";
         }, 200);
     }
+}
+
+function updateLoadingProgress(stepIndex) {
+    const totalSteps = LOADING_MSGS.length;
+    const pct = Math.min(((stepIndex + 1) / totalSteps) * 100, 95); // Cap at 95% until complete
+    const fill = document.getElementById("loadingProgressFill");
+    if (fill) fill.style.width = pct + "%";
+
+    // Update step indicators
+    document.querySelectorAll(".loading-step").forEach((el, i) => {
+        el.classList.remove("active", "complete");
+        if (i < stepIndex) el.classList.add("complete");
+        else if (i === stepIndex) el.classList.add("active");
+    });
 }
 
 // ─── UI: Error ───
