@@ -64,7 +64,7 @@ def configure_logging(app_name="astrology_engine"):
     file_handler.setFormatter(JSONFormatter())
     logger.addHandler(file_handler)
     
-    logging.info(f"Logging initialized. Logs writing to {file_path}")
+    logging.info("Logging initialized. Logs writing to %s", file_path)
 
 # Activity Logger for User Actions
 class ActivityLogger:
@@ -79,5 +79,5 @@ class ActivityLogger:
             "ip": ip,
             "details": details or {}
         }
-        logging.info(f"ACTIVITY: {action} by {user_id}", extra={"extra_data": extra})
+        logging.info("ACTIVITY: %s by %s", action, user_id, extra={"extra_data": extra})
 
