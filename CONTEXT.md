@@ -7,9 +7,9 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Loading progress bar UI implemented (HTML + CSS + JS). Consumer-facing 'forensic' branding cleaned from 6 HTML pages. CSS cache-bust version bumped across 30+ HTML files. All 63 tests passing. Next: deploy to production, or visually verify loading bar in browser (free reading limit may block testing).
-- **Last session**: Added step progress bar, step indicators (8 steps: Locate→Synthesis), and elapsed timer to loading screen. Removed 'forensic' from consumer-facing meta tags, descriptions, and copy across techniques/signup/preview/advanced/methodology pages. Left internal DOM IDs and about.html narrative intact. Bumped CSS/JS cache versions.
-- **Blocked on**: Free reading limit blocks visual testing of loading bar. Consider adding a dev bypass.
+- **Pick up at**: Exception handling cleanup ~70% complete (13 bare excepts remaining from ~50). Loading UX and branding work fully done and tested. All 63 tests passing. Next: finish remaining 13 bare excepts in trace_generator, user_auth, scripts, API layer; deploy to production.
+- **Last session**: Completed loading progress bar UX. Cleaned 'forensic' from consumer-facing copy. Systematic bare-except elimination across engine/ (phasis, hyleg, forensic_engine, mundane, stars, calculator/main, calculator/geo, cache_manager, electional, geniture, solar_return, chat_oracle, db_manager). Added localhost dev bypass for premium reading limit.
+- **Blocked on**: Nothing currently blocked.
 
 ## Status
 - **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments), Computation Trace ("Show Our Work") integrated.
