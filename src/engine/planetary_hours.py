@@ -40,7 +40,8 @@ class PlanetaryHourEngine:
         # Ensure geopos is set
         swe.set_topo(lon, lat, 0)
         
-        # JD for noon
+        # JD for midnight (start of day) and noon
+        jd_midnight = swe.julday(date.year, date.month, date.day, 0.0)
         jd_noon = swe.julday(date.year, date.month, date.day, 12.0)
         
         # Calculate Rise/Set
@@ -64,12 +65,13 @@ class PlanetaryHourEngine:
         # Using 7 arguments: jd, planet, rsmi (calc flags), geopos, atpress, attemp, ephe_flags
         # Note: flags variable holds the ephemeris flags (FLG_SWIEPH)
         
-        res_rise = swe.rise_trans(jd_noon, swe.SUN, calc_rise, geopos, 0, 0, ephe_flags)
+        # Sunrise: search from midnight to find TODAY's sunrise (not tomorrow's)
+        res_rise = swe.rise_trans(jd_midnight, swe.SUN, calc_rise, geopos, 0, 0, ephe_flags)
+        # Sunset: search from noon (sunset always after noon)
         res_set = swe.rise_trans(jd_noon, swe.SUN, calc_set, geopos, 0, 0, ephe_flags)
         
-        # Next Sunrise
-        jd_tomorrow = jd_noon + 1
-        res_next_rise = swe.rise_trans(jd_tomorrow, swe.SUN, calc_rise, geopos, 0, 0, ephe_flags)
+        # Next Sunrise: search from today's noon
+        res_next_rise = swe.rise_trans(jd_noon, swe.SUN, calc_rise, geopos, 0, 0, ephe_flags)
 
         # Convert simple JDs
         if len(res_rise) > 0: rise_jd = res_rise[1][0]
@@ -145,9 +147,9 @@ class PlanetaryHourEngine:
         # Just use math from JD? 
         # (J + 1.5) % 7 -> gives 0 for Monday?
         # Standard: JD 0 = Mon Jan 1 4713 BC?
-        # Actually: (floor(jd + 1.5)) % 7. 0=Mon, ... 6=Sun.
+        # (floor(jd + 0.5)) % 7 gives: 0=Mon, 1=Tue, ..., 6=Sun.
         
-        wd_idx = int(rise + 1.5) % 7
+        wd_idx = int(rise + 0.5) % 7
         day_ruler = PlanetaryHourEngine.DAY_RULERS[wd_idx]
         
         # Hour Calculation
