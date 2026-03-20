@@ -3,6 +3,8 @@ from typing import Dict, List, Optional, Any
 import swisseph as swe
 import logging
 
+logger = logging.getLogger(__name__)
+
 from .models import Planet, Chart, Sect, PlanetName, Sign
 from src.engine.calculator.main import calculate_chart_data
 from .advanced_mechanics import AlmutenEngine, HermeticLotEngine, DoryphoryEngine, MonomoiriaEngine, DodecatemoriaEngine
@@ -268,7 +270,7 @@ class Auditor:
         if birth_dt and ans_date:
             try:
                 age_years = max(0.0, (ans_date - birth_dt).days / 365.25)
-            except Exception:
+            except Exception as e:
                 age_years = None
         if age_years is None and age is not None:
             age_years = float(age)
@@ -316,7 +318,7 @@ class Auditor:
                     continue
             analysis["aspects"] = core
             analysis["aspects_shadow"] = shadow
-        except Exception:
+        except Exception as e:
             analysis["aspects"] = []
             analysis["aspects_shadow"] = []
         analysis["medical"] = Auditor._calculate_medical_suite(chart, decumbiture_jd=decumbiture_jd)
@@ -393,7 +395,7 @@ class Auditor:
                     "note": "Elongation at birth is a separate quantity from the prenatal syzygy type.",
                 },
             }
-        except Exception:
+        except Exception as e:
             analysis["syzygy"] = {"note": "Syzygy/phase not available."}
 
         # 3. Supplemental Layers
@@ -419,7 +421,7 @@ class Auditor:
                 "Midheaven": {"longitude": mc_lon, "longitude_fmt": format_longitude(mc_lon), "sign": mc_sign, "house_wsh": mc_house_wsh},
                 "note": "Whole Sign Houses are used for house topics; MC is reported as an angle with its whole-sign house position."
             }
-        except Exception:
+        except Exception as e:
             analysis["angles"] = {"note": "Angle metadata unavailable."}
 
         # 4. Temporal Layers
@@ -520,7 +522,7 @@ class Auditor:
                 else:
                     out.append({"value": str(c)})
             return out
-        except Exception:
+        except Exception as e:
             return [{"value": str(c)} for c in contacts]
 
     @staticmethod
@@ -694,7 +696,7 @@ class Auditor:
                 day_diff = (ans_date.day - birth_dt.day)
                 if day_diff < 0: day_diff += 30
                 day = day_diff + 1
-            except Exception:
+            except Exception as e:
                 pass
 
         # Monthly (Continuous)
@@ -1111,7 +1113,7 @@ class Auditor:
                     try:
                         import re
                         bd = [re.sub(r"[-+]?\\d+(?:\\.\\d+)?", "[REDACTED]", str(x)) for x in bd]
-                    except Exception:
+                    except Exception as e:
                         bd = [str(x) for x in bd]
                     bd.append(
                         "SANITY: this method produced a years figure that is less than the native's current age. "
@@ -1121,7 +1123,7 @@ class Auditor:
                     )
                     out["breakdown"] = bd
                     return out
-            except Exception:
+            except Exception as e:
                 return payload
             return payload
 
@@ -1450,14 +1452,14 @@ class Auditor:
             )
             result["phasis"]["visibility"] = vis
             result["phasis"]["is_visible"] = bool(vis.get("is_visible"))
-        except Exception:
+        except Exception as e:
             result["phasis"]["visibility"] = {"note": "Visibility calculation failed."}
             result["phasis"]["is_visible"] = None
 
         # Populate voice flag after phasis computed
         try:
             result["voice"]["has_voice"] = bool(result.get("phasis", {}).get("is_visible"))
-        except Exception:
+        except Exception as e:
             result["voice"]["has_voice"] = None
 
         # Moon special-case: treat near-Sun condition as lunar phase/visibility, not "planetary combustion" rhetoric.
@@ -1474,7 +1476,7 @@ class Auditor:
                         result["phasis"]["visibility"]["note"] = "Moon within 12° of Sun: forced dark/obscured for testimony."
                     result["voice"]["has_voice"] = False
                     result["voice"]["note"] = "Moon within 12° of Sun: treated as dark/obscured for testimony (phase/visibility doctrine)."
-            except Exception:
+            except Exception as e:
                 pass
 
         # Besiegement
@@ -1520,7 +1522,7 @@ class Auditor:
                         "lord_of_year": ruler.value if hasattr(ruler, "value") else str(ruler),
                         "annual_sign": sign_name
                     }
-                except Exception:
+                except Exception as e:
                     profections = {"lord_of_year": "Unknown", "annual_sign": sign_name}
 
         # Format Aspects for Legacy Report
