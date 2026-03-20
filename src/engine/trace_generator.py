@@ -11,6 +11,8 @@ import logging
 from datetime import datetime
 from typing import Optional, Dict, Any
 
+logger = logging.getLogger(__name__)
+
 from .trace import (
     ComputationTrace,
     CAT_ASTRONOMY, CAT_SECT, CAT_DIGNITY, CAT_ACCIDENTAL,
@@ -234,8 +236,8 @@ def _trace_astronomy(trace: ComputationTrace, raw: dict, chart: Chart):
             calculation=f"Search backward from JD for last Sun-Moon conjunction (New) or opposition (Full). Found: {syz.get('type')} at {_fmt(syz.get('longitude', 0))}",
             result=f"{syz.get('type')} at {_fmt(syz.get('longitude', 0))}",
         )
-    except Exception:
-        pass
+    except Exception as e:
+        logger.debug("Prenatal syzygy trace failed: %s", e)
 
 
 def _trace_planetary_hours(trace: ComputationTrace, chart: Chart, raw: dict):
@@ -272,8 +274,8 @@ def _trace_planetary_hours(trace: ComputationTrace, chart: Chart, raw: dict):
                 result=f"Hour Lord: {hour_info.hour_lord} ({hour_info.radicality})",
                 subsection="Planetary Hours",
             )
-    except Exception:
-        pass
+    except Exception as e:
+        logger.debug("Planetary hours trace failed: %s", e)
 
 
 def _trace_sect(trace: ComputationTrace, chart: Chart):
@@ -888,8 +890,8 @@ def _trace_decennials(trace: ComputationTrace, chart: Chart, birth_date, target_
                         calculation=f"Current period: {current}",
                         result=f"Major: {current.get('major', '?')} / Sub: {current.get('sub', '?')}",
                     )
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Current decennial period trace failed: %s", e)
 
     except Exception as e:
         logger.warning(f"Decennial trace failed: {e}")

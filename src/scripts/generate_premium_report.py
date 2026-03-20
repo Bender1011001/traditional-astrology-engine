@@ -18,8 +18,11 @@ import os
 import sys
 import json
 import argparse
+import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 # Setup paths
 sys.path.append(os.getcwd())
@@ -715,7 +718,8 @@ def _apply_dignity_overrides(
             )
             # Preserve the full original object but override what the prompt reads.
             p["dignities"] = variant
-        except Exception:
+        except Exception as e:
+            logger.debug("Dignity variant calc failed for planet: %s", e)
             continue
 
     # Record doctrine choice for appendix display.
@@ -840,7 +844,8 @@ def _fmt_lon_simple(lon_abs: float) -> str:
         if s:
             return f"{s} (lon_abs: {float(la):.6f})"
         return f"{float(la):.6f}°"
-    except Exception:
+    except Exception as e:
+        logger.debug("Longitude formatting failed for %s: %s", lon_abs, e)
         return f"{lon_abs:.6f}°"
 
 
@@ -1073,7 +1078,8 @@ def build_raw_data_appendix(chart_data: str) -> str:
     """
     try:
         parsed = json.loads(chart_data) if isinstance(chart_data, str) else (chart_data or {})
-    except Exception:
+    except Exception as e:
+        logger.debug("Chart data JSON parse failed: %s", e)
         return ""
 
     meta = (parsed or {}).get("meta", {}) or {}
@@ -1312,7 +1318,8 @@ def run_premium_report(chart_data, output_file, iterations=6):
             f"({(chart_meta.get('house_system') or {}).get('code')})  \n"
             f"**Zodiac System:** {((chart_meta.get('zodiac_system') or {}).get('label'))}  \n"
         )
-    except Exception:
+    except Exception as e:
+        logger.debug("Birth header construction failed: %s", e)
         birth_header = ""
     
     final_report = f"""# PREMIUM NATAL CHART READING

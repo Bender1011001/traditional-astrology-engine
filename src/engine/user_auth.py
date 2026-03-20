@@ -7,6 +7,8 @@ import os
 import secrets
 import logging
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 from typing import Optional, Dict, Any, List
 import bcrypt
 
@@ -250,7 +252,8 @@ class UserManager:
         try:
             if user.subscription and user.subscription.plan:
                 tier = user.subscription.plan.tier or "free"
-        except Exception:
+        except Exception as e:
+            logger.debug("Tier lookup failed for user %s: %s", user.id, e)
             tier = "free"
 
         # Saved charts limits (B2B): Practitioner 100, Studio unlimited, Free small cap.
@@ -293,7 +296,8 @@ class UserManager:
                 
             try:
                 is_valid = self._verify_password(old_password, user.password_hash)
-            except Exception:
+            except Exception as e:
+                logger.debug("Password verification error for user %s: %s", user.id, e)
                 is_valid = False
 
             if not is_valid:

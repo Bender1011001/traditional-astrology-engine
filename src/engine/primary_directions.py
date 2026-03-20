@@ -2,8 +2,11 @@ import math
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 import swisseph as swe
+import logging
 from .models import Chart, Planet, PlanetName, Sect, Sign
 from .dignities import DignityCalculator
+
+logger = logging.getLogger(__name__)
 
 @dataclass
 class DirectionResult:
@@ -55,7 +58,8 @@ class PrimaryDirectionsEngine:
             res = swe.calc_ut(jd, swe.ECL_NUT)
             coords = res[0] if isinstance(res[0], (list, tuple)) else res
             return coords[0]  # true obliquity
-        except Exception:
+        except Exception as e:
+            logger.debug("Obliquity calc failed: %s", e)
             return 23.4392911  # J2000 fallback
 
     @classmethod
@@ -283,7 +287,8 @@ class PrimaryDirectionsEngine:
             try:
                 _cusps, ascmc = swe.houses_armc(ramc_dir, geo_lat, epsilon, b'P')
                 asc_dir_lon = ascmc[0]
-            except Exception:
+            except Exception as e:
+                logger.debug("Directed house calc failed for year %d: %s", year, e)
                 continue
 
             # Determine which bound the directed Asc falls in

@@ -1,6 +1,9 @@
 import redis
+import logging
 from datetime import datetime
 from src.core.config import settings
+
+logger = logging.getLogger(__name__)
 
 class RateLimiter:
     def __init__(self):
@@ -46,9 +49,8 @@ class RateLimiter:
                     "remaining": remaining,
                     "limit": self.DAILY_LIMIT,
                 }
-            except Exception:
-                # Fall back to in-memory on transient Redis failure.
-                pass
+            except Exception as e:
+                logger.debug("Redis rate limit check failed, using in-memory fallback: %s", e)
 
         now = datetime.utcnow().timestamp()
         if ip not in self._requests:

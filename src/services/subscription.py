@@ -1,9 +1,12 @@
 from datetime import datetime, timedelta
+import logging
 import stripe
 from sqlalchemy.orm import Session
 from src.database.models import User, UserSubscription, SubscriptionPlan, UsageRecord, Invoice
 from src.core.config import settings
 from src.services.notifications import AdminNotificationService
+
+logger = logging.getLogger(__name__)
 
 if settings.STRIPE_SECRET_KEY:
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -129,9 +132,8 @@ class SubscriptionService:
                     # Only apply if they are checking out the same tier they're trialing.
                     if sub.plan and sub.plan.tier == plan.tier:
                         session_kwargs['subscription_data']["trial_end"] = int(sub.trial_end_date.timestamp())
-            except Exception:
-                # Non-fatal: proceed with normal checkout if trial alignment fails.
-                pass
+            except Exception as e:
+                logger.debug("Trial alignment failed, proceeding with normal checkout: %s", e)
         else:
             # For one-time payments, we might want invoice creation enabled to track it easily
             session_kwargs['invoice_creation'] = {
@@ -255,8 +257,7 @@ class SubscriptionService:
                 is_recurring=is_recurring
             )
         except Exception as e:
-            import logging
-            logging.error(f"Failed to send admin notification for purchase: {e}")
+            logger.error("Failed to send admin notification for purchase: %s", e)
 
     def _process_payment_succeeded(self, invoice: dict):
         # Log invoice
@@ -283,8 +284,7 @@ class SubscriptionService:
                     is_recurring=True
                 )
             except Exception as e:
-                import logging
-                logging.error(f"Failed to send admin notification for recurring payment: {e}")
+                logger.error("Failed to send admin notification for recurring payment: %s", e)
 
             # Create Invoice Record
             new_inv = Invoice(
@@ -318,8 +318,7 @@ class SubscriptionService:
                     error_message=error_msg
                 )
             except Exception as e:
-                import logging
-                logging.error(f"Failed to send admin notification for payment failure: {e}")
+                logger.error("Failed to send admin notification for payment failure: %s", e)
 
     def _process_subscription_deleted(self, sub_data: dict):
         stripe_id = sub_data.get("id")
