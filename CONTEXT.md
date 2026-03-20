@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Exception handling cleanup COMPLETE (0 bare excepts in src/, was ~50). Loading UX and branding work fully done. All 63 tests passing. Fixed latent NameError bug in trace_generator.py. Next: deploy to production, or pick next improvement area.
-- **Last session**: Systematic bare-except elimination across entire src/ tree (22 files total). Added module loggers to every file. Fixed variable shadowing in chat_oracle.py. Fixed missing logger in trace_generator.py (would have been a NameError at runtime). Cleaned inline `import logging; logging.error()` in subscription.py.
+- **Pick up at**: Code quality sprint COMPLETE. Fixed critical planetary hours day-ruler bug (off-by-one). All 64 tests passing (was 63+1 skipped). Next: deploy to production, or pick next improvement area.
+- **Last session**: (1) Fixed planetary hours bugs: day ruler was off by one day [(JD+1.5)%7 to (JD+0.5)%7] and sunrise search from noon found tomorrow rise instead of today. (2) Eliminated all 50+ bare except blocks. (3) Converted all print() to logger and all f-string logger to %-format. (4) Fixed deprecated SQLAlchemy import. (5) Restored about.html/faq.html from 301 redirects + added to sitemap.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
