@@ -30,7 +30,7 @@ async def log_telemetry(event: TelemetryEvent, request: Request):
             if payload and "d" in payload and "user_id" in payload["d"]:
                 user_id = payload["d"]["user_id"]
         except Exception as e:
-            logging.debug(f"Telemetry token parse failed: {e}")
+            logging.debug("Telemetry token parse failed: %s", e)
 
     ActivityLogger.log_activity(
         f"frontend_{event.event_type}",
@@ -68,7 +68,7 @@ async def log_reading_feedback(feedback: ReadingFeedback, request: Request):
             if payload and "d" in payload and "user_id" in payload["d"]:
                 user_id = payload["d"]["user_id"]
         except Exception as e:
-            logging.debug(f"Feedback token parse failed: {e}")
+            logging.debug("Feedback token parse failed: %s", e)
 
     ActivityLogger.log_activity(
         "reading_feedback",
@@ -143,7 +143,7 @@ async def capture_lead(lead: LeadCapture, request: Request, db: Session = Depend
             db.commit()
     except Exception as e:
         # Non-fatal: we still logged to JSONL.
-        logging.error(f"Lead DB insert failed: {e}")
+        logging.error("Lead DB insert failed: %s", e)
         try:
             db.rollback()
         except Exception:
@@ -160,6 +160,6 @@ async def capture_lead(lead: LeadCapture, request: Request, db: Session = Depend
             ua=details["ua"],
         )
     except Exception as e:
-        logging.error(f"Lead capture notification failed: {e}")
+        logging.error("Lead capture notification failed: %s", e)
 
     return {"status": "ok"}

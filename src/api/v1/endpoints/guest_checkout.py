@@ -85,10 +85,10 @@ def _get_or_create_stripe_price(tier_key: str) -> str:
         )
         price_id = price.id
         setattr(settings, cache_attr, price_id)
-        logger.info(f"Created Stripe price {price_id} for tier {tier_key}")
+        logger.info("Created Stripe price %s for tier %s", price_id, tier_key)
         return price_id
     except Exception as e:
-        logger.error(f"Failed to create Stripe price for {tier_key}: {e}")
+        logger.error("Failed to create Stripe price for %s: %s", tier_key, e)
         raise HTTPException(status_code=500, detail="Payment system configuration error.")
 
 
@@ -150,7 +150,7 @@ async def guest_checkout(
         )
         return {"url": session.url, "session_id": session.id, "order_id": order_id}
     except Exception as e:
-        logger.error(f"Stripe checkout creation failed: {e}")
+        logger.error("Stripe checkout creation failed: %s", e)
         raise HTTPException(status_code=500, detail="Could not create checkout session.")
 
 

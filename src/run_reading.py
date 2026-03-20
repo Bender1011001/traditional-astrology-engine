@@ -261,7 +261,7 @@ def run_reading(date_str, time_str, city, state):
     # Generate Report
     try:
         generate_report_local(chart, birth_dt, analysis_dt, analysis_jd, age)
-    except Exception:
+    except Exception as e:
         import traceback
         traceback.print_exc()
 

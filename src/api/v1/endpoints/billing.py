@@ -57,7 +57,7 @@ def _lookup_onetime_price_id(*, product_name: str, unit_amount: int, currency: s
             except Exception:
                 continue
     except Exception as e:
-        logging.getLogger(__name__).error(f"Stripe price lookup failed: {e}")
+        logging.getLogger(__name__).error("Stripe price lookup failed: %s", e)
 
     _REPORT_PRICE_CACHE[cache_key] = None
     return None
@@ -243,7 +243,7 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
 async def verify_checkout_session(session_id: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     try:
         session = stripe.checkout.Session.retrieve(session_id)
-    except Exception:
+    except Exception as e:
         raise HTTPException(status_code=400, detail="Invalid Session ID")
 
     # Subscription checkouts with trials can complete without an immediate payment.

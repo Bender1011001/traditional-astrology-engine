@@ -77,7 +77,7 @@ async def restore_session(token: str):
     
     try:
         payload = validate_token(token)
-    except Exception:
+    except Exception as e:
         raise HTTPException(status_code=400, detail="Invalid token")
         
     if not payload:
