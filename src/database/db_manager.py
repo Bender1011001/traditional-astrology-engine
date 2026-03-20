@@ -6,6 +6,8 @@ import subprocess
 from datetime import datetime
 import logging
 
+logger = logging.getLogger(__name__)
+
 from src.database.core import SessionLocal
 from src.database.models import AstrologicalDelineation
 from functools import lru_cache
@@ -60,7 +62,8 @@ class DelineationLibrary:
                     data = json.load(f)
                 self._json_cache[category] = data
                 return data
-            except Exception:
+            except Exception as e:
+                logger.debug("Legacy JSON load failed for %s: %s", category, e)
                 self._json_cache[category] = {}
                 return {}
         self._json_cache[category] = {}
@@ -80,8 +83,8 @@ class DelineationLibrary:
             if res:
                 self._cache[cache_key] = res.content
                 return res.content
-        except Exception:
-            pass  # DB may not be available; fall through to legacy
+        except Exception as e:
+            logger.debug("DB query failed for %s:%s: %s", category, key, e)
         finally:
             db.close()
 

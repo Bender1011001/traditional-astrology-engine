@@ -2,11 +2,13 @@
 import swisseph as swe
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
+import logging
 from .models import Sign, PlanetName, Planet, Sect
 from .stars import STARS, get_shortest_dist, get_star_longitude
 from .calculations import format_longitude, calculate_prenatal_syzygy
 
 # Chorography mapping from Binder1_part_001.txt
+logger = logging.getLogger(__name__)
 CHOROGRAPHY = {
     "Fire": ["Britain", "Gaul", "Germany"],
     "Water": ["Africa", "Western Libya"],
@@ -178,8 +180,8 @@ class MundaneEngine:
                 "sign": list(Sign)[int(lon / 30) % 12],
                 "degree": lon % 30
             })
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Solar eclipse calc failed: %s", e)
 
         # Lunar Eclipse (Previous)
         try:
@@ -214,8 +216,8 @@ class MundaneEngine:
                 "sign": list(Sign)[int(lon / 30) % 12],
                 "degree": lon % 30
             })
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Lunar eclipse calc failed: %s", e)
 
         return results
 
@@ -283,7 +285,8 @@ class MundaneEngine:
                     "sign_ruler": sign_ruler.value if sign_ruler else "Unknown",
                     "duration_hours": ecl.get("duration_hours"),
                 })
-            except Exception:
+            except Exception as e:
+                logger.debug("Eclipse chart calc failed for %s: %s", ecl.get('type', 'unknown'), e)
                 continue
         
         return results
@@ -566,7 +569,8 @@ class MundaneEngine:
         # Prenatal Syzygy — use precise Newton-Raphson solver from calculations module
         try:
             syz_pos, _syz_type = calculate_prenatal_syzygy(ingress_jd)
-        except Exception:
+        except Exception as e:
+            logger.debug("Prenatal syzygy calc failed: %s", e)
             syz_pos = sun_pos  # Fallback
         
         vital_points = [
