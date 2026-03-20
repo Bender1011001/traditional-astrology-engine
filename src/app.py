@@ -200,8 +200,8 @@ _LEGACY_REDIRECTS = [
     "forgot-password.html", "reset-password.html",
     # Old misc pages
     "demo.html", "booking.html", "services.html", "pricing.html",
-    "blog.html", "about.html", "resources.html", "advanced.html",
-    "faq.html", "preview.html",
+    "blog.html", "resources.html", "advanced.html",
+    "preview.html",
     "how-we-audit.html", "owner.html", "status.html", "success.html",
 ]
 
