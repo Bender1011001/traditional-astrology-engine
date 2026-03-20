@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Exception handling cleanup ~70% complete (13 bare excepts remaining from ~50). Loading UX and branding work fully done and tested. All 63 tests passing. Next: finish remaining 13 bare excepts in trace_generator, user_auth, scripts, API layer; deploy to production.
-- **Last session**: Completed loading progress bar UX. Cleaned 'forensic' from consumer-facing copy. Systematic bare-except elimination across engine/ (phasis, hyleg, forensic_engine, mundane, stars, calculator/main, calculator/geo, cache_manager, electional, geniture, solar_return, chat_oracle, db_manager). Added localhost dev bypass for premium reading limit.
+- **Pick up at**: Exception handling cleanup COMPLETE (0 bare excepts in src/, was ~50). Loading UX and branding work fully done. All 63 tests passing. Fixed latent NameError bug in trace_generator.py. Next: deploy to production, or pick next improvement area.
+- **Last session**: Systematic bare-except elimination across entire src/ tree (22 files total). Added module loggers to every file. Fixed variable shadowing in chat_oracle.py. Fixed missing logger in trace_generator.py (would have been a NameError at runtime). Cleaned inline `import logging; logging.error()` in subscription.py.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
