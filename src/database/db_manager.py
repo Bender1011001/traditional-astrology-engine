@@ -174,10 +174,10 @@ class DatabaseBackupManager:
             
         except subprocess.CalledProcessError as e:
             err = e.stderr.decode() if e.stderr else str(e)
-            logging.error(f"Backup failed: {err}")
+            logging.error("Backup failed: %s", err)
             return f"Backup failed: {err}"
         except Exception as e:
-            logging.error(f"Backup failed: {e}")
+            logging.error("Backup failed: %s", e)
             return f"Backup failed: {e}"
 
 def init_db():

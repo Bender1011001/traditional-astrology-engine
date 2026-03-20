@@ -127,13 +127,13 @@ class UserManager:
             
             db.refresh(new_user)
             
-            logging.info(f"User created: {email}")
+            logging.info("User created: %s", email)
             
             # Notify Admin
             try:
                 AdminNotificationService.notify_account_created(email, name)
             except Exception as e:
-                logging.error(f"Failed to send admin notification for account creation: {e}")
+                logging.error("Failed to send admin notification for account creation: %s", e)
             
             return {
                 "success": True, 
@@ -141,7 +141,7 @@ class UserManager:
             }
         except Exception as e:
             db.rollback()
-            logging.error(f"Create user error: {str(e)}")
+            logging.error("Create user error: %s", e)
             return {"success": False, "message": f"Database error during registration: {str(e)}"}
         finally:
             db.close()
@@ -152,7 +152,7 @@ class UserManager:
         
         # Rate Limit: 5 attempts per minute per email
         if not self._check_rate_limit(f"auth:{email}", limit=5, window=60):
-            logging.warning(f"Rate limit exceeded for user: {email}")
+            logging.warning("Rate limit exceeded for user: %s", email)
             return {"success": False, "message": "Too many login attempts. Please try again later."}
         
         db = SessionLocal()
@@ -166,10 +166,10 @@ class UserManager:
             try:
                 is_valid = self._verify_password(password, user.password_hash)
             except ValueError as e:
-                logging.error(f"Auth error (invalid hash) for {email}: {e}")
+                logging.error("Auth error (invalid hash) for %s: %s", email, e)
                 is_valid = False
             except Exception as e:
-                logging.error(f"Auth error for {email}: {e}")
+                logging.error("Auth error for %s: %s", email, e)
                 is_valid = False
             
             if not is_valid:
@@ -179,7 +179,7 @@ class UserManager:
             user.last_login = datetime.utcnow()
             db.commit()
             
-            logging.info(f"User authenticated: {email}")
+            logging.info("User authenticated: %s", email)
             
             # Return dict with charts included
             user_data = user.to_dict()
@@ -223,7 +223,7 @@ class UserManager:
                 return False
             return self._save_chart_for_user(db, user, chart_hash, chart_meta)
         except Exception as e:
-            logging.error(f"Save chart error: {e}")
+            logging.error("Save chart error: %s", e)
             return False
         finally:
             db.close()
@@ -236,7 +236,7 @@ class UserManager:
                 return False
             return self._save_chart_for_user(db, user, chart_hash, chart_meta)
         except Exception as e:
-            logging.error(f"Save chart (user_id) error: {e}")
+            logging.error("Save chart (user_id) error: %s", e)
             return False
         finally:
             db.close()
@@ -264,7 +264,7 @@ class UserManager:
             limit = None
 
         if limit is not None and len(charts) >= limit:
-            logging.warning(f"Saved charts limit reached for {user.email}. Tier={tier} limit={limit}")
+            logging.warning("Saved charts limit reached for %s. Tier=%s limit=%s", user.email, tier, limit)
             return False
             
         entry = {
@@ -337,7 +337,7 @@ class UserManager:
             
             return {"success": True, "token": token}
         except Exception as e:
-            logging.error(f"Create reset token error: {e}")
+            logging.error("Create reset token error: %s", e)
             return {"success": False, "message": "Error creating reset token."}
         finally:
             db.close()
@@ -370,7 +370,7 @@ class UserManager:
             db.commit()
             return {"success": True, "message": "Password reset successfully."}
         except Exception as e:
-            logging.error(f"Reset password error: {e}")
+            logging.error("Reset password error: %s", e)
             return {"success": False, "message": "Error resetting password."}
         finally:
             db.close()

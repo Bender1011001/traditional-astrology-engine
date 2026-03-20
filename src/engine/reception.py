@@ -57,7 +57,7 @@ class ReceptionEngine:
         try:
             terms = EGYPTIAN_TERMS[sign] if mode == ReceptionMode.STRICT_BONATTI else PTOLEMAIC_TERMS[sign]
         except KeyError:
-            logging.warning(f"Terms key not found for sign: {sign}")
+            logging.warning("Terms key not found for sign: %s", sign)
             raise
             
         for p, limit in terms:
@@ -106,7 +106,7 @@ class ReceptionEngine:
                 dignities.append("Triplicity")
                 score += 3
         except KeyError as e:
-            logging.warning(f"Reception calculation error - missing key: {e}")
+            logging.warning("Reception calculation error - missing key: %s", e)
             raise e
             
         term_ruler = cls._get_term_ruler(sign, degree, mode)
