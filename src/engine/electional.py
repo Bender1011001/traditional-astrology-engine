@@ -1,7 +1,10 @@
 from datetime import datetime, timedelta
 import swisseph as swe
 from typing import List, Dict, Optional
+import logging
 from .models import Chart, Planet, PlanetName, Sign, Sect
+
+logger = logging.getLogger(__name__)
 from .calculations import is_void_of_course, calculate_solar_status, is_besieged
 from .dignities import DignityCalculator
 from .reference_data import DOMICILES as SIGN_RULERS
@@ -98,7 +101,8 @@ class ElectionalEngine:
             cusps, ascmc = swe.houses(jd, lat, lon, b'P')
             asc = ascmc[0]
             mc = ascmc[1]
-        except Exception:
+        except Exception as e:
+            logger.debug("House calc failed (extreme lat?): %s", e)
             # Fallback for extreme latitudes
             asc = 0.0
             mc = 0.0

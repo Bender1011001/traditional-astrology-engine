@@ -6,6 +6,9 @@ from typing import Dict, List, Optional, Tuple
 from .models import Chart, Planet, PlanetName, Sect, Sign
 from .dignities import DignityCalculator
 from .reference_data import DOMICILES, EXALTATIONS, PTOLEMAIC_TERMS, PTOLEMAIC_TRIPLICITY, SIGN_ELEMENTS, MOIETIES
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -61,7 +64,8 @@ class LordOfGenitureEngine:
         face_idx = int(deg // 10)
         try:
             face_val = DignityCalculator.FACES[sign][face_idx]
-        except Exception:
+        except Exception as e:
+            logger.debug("Face lookup failed for %s at %.1f°: %s", sign, deg, e)
             return None
         if isinstance(face_val, str):
             key = face_val.upper()

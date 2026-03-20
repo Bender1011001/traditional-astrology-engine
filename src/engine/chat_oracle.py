@@ -2,6 +2,9 @@ import os
 import json
 import urllib.request
 import urllib.error
+import logging
+
+logger = logging.getLogger(__name__)
 
 import time
 
@@ -126,8 +129,9 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
             body = e.read().decode("utf-8")
             detail = json.loads(body)
             msg = detail.get("error", {}).get("message", body)
-        except Exception:
-            msg = str(e)
+        except Exception as parse_err:
+            logger.debug("Error body parse failed: %s", parse_err)
+            msg = str(e)  # Use original HTTPError, not the parse error
         return f"Oracle Communication Error: {msg}"
     except Exception as e:
         _oracle_breaker.record_failure()

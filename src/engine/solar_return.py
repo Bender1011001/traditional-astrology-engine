@@ -1,6 +1,9 @@
 from datetime import datetime
 from typing import Dict, List, Optional
+import logging
 from .models import Chart, Planet, PlanetName, Sign, Sect
+
+logger = logging.getLogger(__name__)
 from .prediction import calculate_profection_sign, get_lord_of_year
 from .dignities import DignityCalculator
 from .reference_data import DOMICILES
@@ -49,7 +52,8 @@ class SolarReturnEngine:
                     latitude=res[1], 
                     speed=res[3]
                 ))
-            except Exception:
+            except Exception as e:
+                logger.debug("SR planet calc failed for %s: %s", pname_enum, e)
                 continue
         
         # SR Houses

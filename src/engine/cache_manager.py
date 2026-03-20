@@ -3,6 +3,9 @@ import json
 import hashlib
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Use /tmp for ephemeral caching on serverless/container platforms
 import tempfile
@@ -14,7 +17,7 @@ try:
     _HAS_CRYPTO = True
 except ImportError:
     _HAS_CRYPTO = False
-    print("WARNING: 'cryptography' library not found. Cache encryption disabled.")
+    logger.warning("'cryptography' library not found. Cache encryption disabled.")
 
 class CacheManager:
     def __init__(self, cache_dir: str = CACHE_DIR):
@@ -48,7 +51,7 @@ class CacheManager:
                 
                 self.fernet = Fernet(self.key)
             except Exception as e:
-                print(f"Encryption Init Error: {e}")
+                logger.warning("Encryption Init Error: %s", e)
                 
     def _encrypt(self, data: str) -> str:
         if self.fernet:
@@ -83,7 +86,8 @@ class CacheManager:
             try:
                 decrypted = self._decrypt(content)
                 data = json.loads(decrypted)
-            except Exception:
+            except Exception as e:
+                logger.debug("Cache decrypt/parse failed: %s", e)
                 # Decryption failed or JSON error -> invalid cache
                 return None
             
@@ -94,7 +98,8 @@ class CacheManager:
                 return None
                 
             return data["payload"]
-        except Exception:
+        except Exception as e:
+            logger.debug("Cache read failed: %s", e)
             return None
 
     def set(self, chart_hash: str, tier: str, payload: Dict[str, Any], ttl_days: int = 30) -> None:
@@ -117,7 +122,7 @@ class CacheManager:
             with open(path, "w", encoding="utf-8") as f:
                 f.write(encrypted)
         except Exception as e:
-            print(f"Cache Write Error: {e}")
+            logger.warning("Cache Write Error: %s", e)
 
 _cache = CacheManager()
 
