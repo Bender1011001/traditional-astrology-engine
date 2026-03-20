@@ -1,7 +1,10 @@
 import swisseph as swe
 import math
 from typing import Dict, List, Optional, Tuple
+import logging
 from .models import PlanetName, PlanetaryPhase, SolarProximity, Planet, Sign
+
+logger = logging.getLogger(__name__)
 
 # Arcus Visionis (AV) Thresholds - Ptolemaic Standard (Planetary Hypotheses)
 # Units: Degrees of solar depression below the horizon
@@ -299,8 +302,8 @@ class PhasisEngine:
                         "jd": round(rise_jd, 4),
                         "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
                     }
-            except Exception:
-                pass
+            except Exception as e:
+                logger.debug("Heliacal rising calc failed for %s: %s", pname.value, e)
 
             try:
                 res_set = swe.heliacal_ut(jd, geopos, atmo, observer, obj_name, swe.HELIACAL_SETTING, 0)
@@ -311,8 +314,8 @@ class PhasisEngine:
                         "jd": round(set_jd, 4),
                         "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
                     }
-            except Exception:
-                pass
+            except Exception as e:
+                logger.debug("Heliacal setting calc failed for %s: %s", pname.value, e)
 
             results.append(entry)
 
