@@ -34,7 +34,8 @@ async def request_premium_guest_reading(
     ).count()
     
     # Allow 3, so if count is 0, 1, 2 = OK. If 3, Reject.
-    if usage_count >= MAX_FREE_READINGS:
+    # Bypass for localhost to enable dev/testing.
+    if usage_count >= MAX_FREE_READINGS and client_ip != "127.0.0.1":
          raise HTTPException(
             status_code=402,
             detail={
