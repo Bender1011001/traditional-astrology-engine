@@ -11,6 +11,9 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 import pytz
+import logging
+
+logger = logging.getLogger(__name__)
 
 from src.engine.cache_manager import CACHE_DIR
 
@@ -44,7 +47,8 @@ def _load_geocode_cache() -> dict:
             return {}
         with open(_GEOCODE_CACHE_FILE, "r", encoding="utf-8") as f:
             return json.load(f) or {}
-    except Exception:
+    except Exception as e:
+        logger.debug("Geocode cache load failed: %s", e)
         return {}
 
 
@@ -55,7 +59,8 @@ def _save_geocode_cache(cache: dict) -> None:
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(cache, f)
         os.replace(tmp, _GEOCODE_CACHE_FILE)
-    except Exception:
+    except Exception as e:
+        logger.debug("Geocode cache save failed: %s", e)
         # Best-effort cache; never break chart calculation.
         return
 
@@ -77,7 +82,8 @@ def _cache_get(query_norm: str) -> tuple[float, float] | None:
             created_dt = datetime.fromisoformat(created)
             if created_dt < (datetime.utcnow() - timedelta(days=_GEOCODE_CACHE_TTL_DAYS)):
                 return None
-        except Exception:
+        except Exception as e:
+            logger.debug("Cache TTL parse failed: %s", e)
             return None
 
     lat = row.get("lat")
@@ -143,7 +149,8 @@ def _geocode_us_census(city: str, state: str) -> tuple[float, float] | None:
             lat = coords.get("y")
             if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
                 return float(lat), float(lon)
-    except Exception:
+    except Exception as e:
+        logger.debug("US Census geocoding failed: %s", e)
         return None
     return None
 
@@ -188,7 +195,8 @@ def _geocode_open_meteo(city: str, state: str = "") -> tuple[float, float] | Non
         lon = best.get("longitude")
         if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
             return float(lat), float(lon)
-    except Exception:
+    except Exception as e:
+        logger.debug("Open-Meteo geocoding failed: %s", e)
         return None
     return None
 

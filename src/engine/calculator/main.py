@@ -2,6 +2,9 @@ from datetime import datetime
 import pytz
 import swisseph as swe
 import traceback
+import logging
+
+logger = logging.getLogger(__name__)
 
 from .config import (
     normalize_house_system,
@@ -74,7 +77,8 @@ class ChartCalculator:
             swe.set_sid_mode(ayanamsa_mode)
             try:
                 ayanamsa_deg = swe.get_ayanamsa_ut(jd)
-            except Exception:
+            except Exception as e:
+                logger.debug("Ayanamsa calc failed: %s", e)
                 ayanamsa_deg = None
 
         # 6. Planet Calculations
@@ -280,7 +284,8 @@ def calculate_chart_data(
         tz_str = get_timezone(chart.geo_lat, chart.geo_lon)
         local_tz = pytz.timezone(tz_str)
         _, utc_dt, tz_meta = _localize_with_historical_tz(local_tz, dt)
-    except Exception:
+    except Exception as e:
+        logger.debug("Timezone re-derivation failed: %s", e)
         # Keep best-effort defaults; chart.jd is still authoritative for calculations.
         tz_str = tz_str or "unknown"
         tz_meta = tz_meta or {}
