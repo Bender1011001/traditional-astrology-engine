@@ -1,6 +1,9 @@
 from typing import Dict, List, Optional, Tuple
+import logging
 from .models import Chart, Planet, PlanetName, Sect, Sign
 from .dignities import DignityCalculator
+
+logger = logging.getLogger(__name__)
 
 class HylegAlcocodenEngine:
     """
@@ -101,8 +104,8 @@ class HylegAlcocodenEngine:
             if lot_house in HylegAlcocodenEngine.HYLEGICAL_HOUSES:
                 if HylegAlcocodenEngine._has_aspect_from_ruler(lot_fortune, chart, sect):
                     return {"type": "Lot", "name": "Fortune", "longitude": lot_fortune, "candidate": "Fortune"}
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Lot of Fortune Hyleg check failed: %s", e)
         
         # 3. Check Ascendant (Prevention of Asc Hyleg provided rulers aspect it)
         # Ascendant is usually valid if luminaries fail.
