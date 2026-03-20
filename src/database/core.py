@@ -1,7 +1,10 @@
 import os
+import logging
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+
+logger = logging.getLogger(__name__)
 
 from src.core.config import settings
 
@@ -23,9 +26,9 @@ if "postgres" in DATABASE_URL and "localhost" not in DATABASE_URL and "127.0.0.1
 safe_url = DATABASE_URL
 if "@" in safe_url:
     part1 = safe_url.split("@")[1]
-    print(f"DEBUG: Connecting to DB at {part1.split('?')[0]} with SSL={ 'sslmode' in safe_url }")
+    logger.info("Connecting to DB at %s with SSL=%s", part1.split('?')[0], 'sslmode' in safe_url)
 else:
-    print(f"DEBUG: Connecting to Local/Sqlite DB")
+    logger.info("Connecting to Local/Sqlite DB")
 
 # Engine configuration for managed databases (Azure/Postgres)
 engine_kwargs = {

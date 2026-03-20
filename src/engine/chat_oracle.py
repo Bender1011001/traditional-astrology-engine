@@ -45,7 +45,7 @@ def _load_binder_context():
         with open(BINDER_PATH, "r", encoding="utf-8") as f:
             return f.read()
     except Exception as e:
-        print(f"Error loading binder context: {e}")
+        logger.warning("Error loading binder context: %s", e)
         return ""
 
 BINDER_CONTEXT = _load_binder_context()
@@ -96,13 +96,13 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
             _oracle_breaker.record_failure()
             err = result.get("error", {})
             msg = err.get("message") if isinstance(err, dict) else str(err)
-            print(f"OpenRouter Error Payload: {result}")
+            logger.warning("OpenRouter Error Payload: %s", result)
             return f"Oracle Communication Error: {msg}"
 
         choices = result.get("choices", []) if isinstance(result, dict) else []
         if not choices:
             _oracle_breaker.record_failure()
-            print(f"OpenRouter result (no choices): {result}")
+            logger.warning("OpenRouter result (no choices): %s", result)
             return "No response from engine."
 
         message = choices[0].get("message", {}) or {}
@@ -221,7 +221,7 @@ def explain_reading_in_plain_terms(reading_context: str, tier: str = 'free') -> 
     chart_data_only = f"CHART DATA:\n{context}"
     
     for i, question in enumerate(questions):
-        print(f"Turn {i+1} of {len(questions)}...")
+        logger.info("Turn %d of %d...", i+1, len(questions))
         
         if i == 0:
             # Turn 1: Full Binder + Full Chart Data

@@ -17,7 +17,7 @@ class RateLimiter:
                 self.redis.ping() # Test connection
                 self.use_redis = True
             except Exception as e:
-                print(f"Redis connection failed: {e}. Falling back to in-memory.")
+                logger.warning("Redis connection failed: %s. Falling back to in-memory.", e)
                 self.use_redis = False
                 self._requests = {}
         else:

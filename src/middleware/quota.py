@@ -1,7 +1,10 @@
 from fastapi import Depends, HTTPException
+import logging
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 from src.database.core import get_db
 from src.database.models import User, UsageRecord, UserSubscription
 from src.api.v1.auth import get_current_user
@@ -72,4 +75,4 @@ async def verify_quota(
         db.add(new_record)
         db.commit()
     except Exception as e:
-        print(f"Failed to record usage: {e}")
+        logger.warning("Failed to record usage: %s", e)
