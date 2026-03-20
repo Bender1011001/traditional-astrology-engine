@@ -107,7 +107,7 @@ class ReceptionEngine:
                 score += 3
         except KeyError as e:
             logging.warning("Reception calculation error - missing key: %s", e)
-            raise e
+            raise
             
         term_ruler = cls._get_term_ruler(sign, degree, mode)
         if term_ruler == host.name:

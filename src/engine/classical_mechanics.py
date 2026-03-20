@@ -1,8 +1,6 @@
-from typing import Dict, List, Optional, Tuple, Literal
+from typing import Dict, List, Optional, Literal
 from dataclasses import dataclass
-import math
 from datetime import datetime
-import swisseph as swe
 from .models import Planet, PlanetName, Sign
 from .reference_data import DOMICILES, MOIETIES, EGYPTIAN_TERMS
 
