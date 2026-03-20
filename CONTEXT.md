@@ -7,9 +7,9 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Full branding overhaul complete (30+ HTML, 15+ Python, 4 email templates, 2 JS). Zero bare excepts in src/. All 63 tests passing. Next: deploy to production.
-- **Last session**: Deep backend branding: emails, PDFs, LLM prompts, auth, chat oracle, email templates all updated from AstroForge→Traditional Astrology. Eliminated all 7 bare excepts in src/. Updated sitemap.xml lastmod dates. Removed duplicate import. Committed.
-- **Blocked on**: Nothing
+- **Pick up at**: Loading progress bar UI implemented (HTML + CSS + JS). Consumer-facing 'forensic' branding cleaned from 6 HTML pages. CSS cache-bust version bumped across 30+ HTML files. All 63 tests passing. Next: deploy to production, or visually verify loading bar in browser (free reading limit may block testing).
+- **Last session**: Added step progress bar, step indicators (8 steps: Locate→Synthesis), and elapsed timer to loading screen. Removed 'forensic' from consumer-facing meta tags, descriptions, and copy across techniques/signup/preview/advanced/methodology pages. Left internal DOM IDs and about.html narrative intact. Bumped CSS/JS cache versions.
+- **Blocked on**: Free reading limit blocks visual testing of loading bar. Consider adding a dev bypass.
 
 ## Status
 - **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments), Computation Trace ("Show Our Work") integrated.
