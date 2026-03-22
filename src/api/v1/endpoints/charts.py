@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 from typing import Optional
 from fastapi import APIRouter, HTTPException, Request, Depends
 
@@ -60,7 +60,7 @@ async def generate_chart_b2b(
     plan = auth_context['plan']
     
     if plan.api_quota is not None:
-        period_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        period_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
         used = db.query(func.sum(UsageRecord.cost_credits)).filter(
             UsageRecord.subscription_id == sub.id,
             UsageRecord.resource_type == 'api_call',
@@ -96,7 +96,7 @@ async def generate_chart_b2b(
             user_id=auth_context['user'].id,
             resource_type='api_call',
             cost_credits=1,
-            created_at=datetime.utcnow()
+            created_at=datetime.now(timezone.utc)
         )
         db.add(new_record)
         db.commit()
@@ -116,7 +116,7 @@ async def calculate_full_nativity(req: ChartRequest, http_request: Request):
     """
     Single Endpoint for Comprehensive Forensic Audit.
     """
-    _log_event("chart_full_request", {"form": req.dict()}, http_request)
+    _log_event("chart_full_request", {"form": req.model_dump()}, http_request)
     try:
         # Call the new Engine via bridge
         result = await generate_full_nativity_async(
@@ -153,7 +153,7 @@ async def calculate_chart(
     Calculates a full natal chart including forensic audit, 5-day forecast, and plain-language synthesis.
     Now refactored to use the ForensicEngine via bridge.
     """
-    _log_event("chart_request_server", {"form": chart_request.dict()}, http_request)
+    _log_event("chart_request_server", {"form": chart_request.model_dump()}, http_request)
     
     chart_hash = generate_chart_hash(chart_request)
     tier = "free"

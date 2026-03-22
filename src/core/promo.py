@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, date
+from datetime import datetime, timezone, timezone, date
 
 from src.core.config import settings
 
@@ -26,6 +26,6 @@ def free_individual_readings_promo_active(now: datetime | None = None) -> bool:
         # Misconfigured date should fail closed.
         return False
 
-    now_d = (now or datetime.utcnow()).date()
+    now_d = (now or datetime.now(timezone.utc)).date()
     return now_d <= until_d
 

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 import secrets
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 
 router = APIRouter()
 
@@ -79,7 +79,7 @@ async def get_developer_usage(
         return {"api_calls_used": 0, "quota": 0}
         
     plan = sub.plan
-    period_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    period_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
     
     used = db.query(func.sum(UsageRecord.cost_credits)).filter(
         UsageRecord.subscription_id == sub.id,

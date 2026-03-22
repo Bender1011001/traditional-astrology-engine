@@ -1,7 +1,7 @@
 import os
 import json
 import hashlib
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timezone, timedelta
 from typing import Optional, Dict, Any
 import logging
 
@@ -93,7 +93,7 @@ class CacheManager:
             
             # Check expiry (30 days)
             expires = data.get("expires")
-            if expires and datetime.fromisoformat(expires) < datetime.utcnow():
+            if expires and datetime.fromisoformat(expires) < datetime.now(timezone.utc):
                 os.remove(path)
                 return None
                 
@@ -104,10 +104,10 @@ class CacheManager:
 
     def set(self, chart_hash: str, tier: str, payload: Dict[str, Any], ttl_days: int = 30) -> None:
         path = self._get_path(chart_hash, tier)
-        expires = (datetime.utcnow().replace(microsecond=0) + timedelta(days=ttl_days)).isoformat()
+        expires = (datetime.now(timezone.utc).replace(microsecond=0) + timedelta(days=ttl_days)).isoformat()
         
         data = {
-            "created": datetime.utcnow().isoformat(),
+            "created": datetime.now(timezone.utc).isoformat(),
             "expires": expires,
             # We store the full API response usually, or just the reading part?
             # The API returns chart_data + reading + meta. 

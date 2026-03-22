@@ -1,5 +1,5 @@
 import stripe
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timezone, timedelta
 from sqlalchemy.orm import Session
 from src.core.config import settings
 from src.database.models import User, UserSubscription, SubscriptionPlan
@@ -93,7 +93,7 @@ class BillingService:
         sub.plan_id = plan.id
         sub.stripe_customer_id = stripe_customer_id
         sub.status = "active"
-        sub.current_period_end = datetime.utcnow() + timedelta(days=30) # Approximate, webhook should update
+        sub.current_period_end = datetime.now(timezone.utc) + timedelta(days=30) # Approximate, webhook should update
         
         db.commit()
 

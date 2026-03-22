@@ -1,13 +1,13 @@
 import time
 import schedule
 from sqlalchemy.orm import Session
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 from src.database.core import SessionLocal
 from src.database.models import UserSubscription, SubscriptionPlan
 from src.services.subscription import SubscriptionService
 
 def run_trial_cleanup():
-    print(f"[{datetime.utcnow()}] Running Trial Cleanup...")
+    print(f"[{datetime.now(timezone.utc)}] Running Trial Cleanup...")
     db: Session = SessionLocal()
     try:
         service = SubscriptionService(db)
@@ -19,7 +19,7 @@ def run_trial_cleanup():
         # Find expired trials
         expired_subs = db.query(UserSubscription).filter(
             UserSubscription.status == 'trial',
-            UserSubscription.trial_end_date < datetime.utcnow()
+            UserSubscription.trial_end_date < datetime.now(timezone.utc)
         ).all()
 
         if not expired_subs:

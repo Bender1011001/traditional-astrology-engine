@@ -1,6 +1,6 @@
 import jwt
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timezone, timedelta
 from typing import Optional
 from fastapi import Header, HTTPException
 from src.core.config import settings
@@ -9,7 +9,7 @@ def create_access_token(chart_hash: str, tier: str, expires_days: int = 30, data
     payload = {
         'chart_hash': chart_hash,
         'tier': tier,
-        'exp': datetime.utcnow() + timedelta(days=expires_days)
+        'exp': datetime.now(timezone.utc) + timedelta(days=expires_days)
     }
     if data:
         payload['d'] = data

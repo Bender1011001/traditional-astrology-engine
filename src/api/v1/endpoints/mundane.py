@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 import swisseph as swe
 from fastapi import APIRouter, HTTPException
 from src.api.v1.schemas import WorldRequest
@@ -13,14 +13,14 @@ async def world_dashboard(request: WorldRequest):
     """
     dt = None
     if request.date or request.time:
-        date_str = request.date or datetime.utcnow().strftime("%Y-%m-%d")
+        date_str = request.date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
         time_str = request.time or "12:00"
         try:
             dt = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"Date parsing error: {str(e)}")
     else:
-        dt = datetime.utcnow()
+        dt = datetime.now(timezone.utc)
 
     jd = swe.julday(dt.year, dt.month, dt.day, dt.hour + dt.minute/60.0 + dt.second/3600.0)
     dashboard = build_world_dashboard(jd)

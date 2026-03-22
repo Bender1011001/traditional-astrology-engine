@@ -1,5 +1,5 @@
 from fastapi import HTTPException, Request
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 import time
 import redis
 from src.core.config import settings
@@ -24,7 +24,7 @@ class RateLimiter:
         if self.redis:
             try:
                 # Redis Strategy
-                key = f"rate_limit:{user_id}:{datetime.utcnow().strftime('%Y%m%d%H%M')}"
+                key = f"rate_limit:{user_id}:{datetime.now(timezone.utc).strftime('%Y%m%d%H%M')}"
                 current = self.redis.incr(key)
                 if current == 1:
                     self.redis.expire(key, 60)

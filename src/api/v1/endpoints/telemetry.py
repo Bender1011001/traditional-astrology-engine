@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timezone, timedelta
 
 from fastapi import APIRouter, Request, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -120,7 +120,7 @@ async def capture_lead(lead: LeadCapture, request: Request, db: Session = Depend
 
     # Persist to DB for KPI visibility + follow-up. De-dupe to reduce spam.
     try:
-        window_start = datetime.utcnow() - timedelta(hours=24)
+        window_start = datetime.now(timezone.utc) - timedelta(hours=24)
         existing = (
             db.query(Lead)
             .filter(Lead.email == email)

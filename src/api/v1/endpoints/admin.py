@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import sys
 import os
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 
 # Ensure the src directory is in the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
@@ -22,7 +22,7 @@ class AdminActionRequest(BaseModel):
 
 def _check_admin_rate_limit(ip: str, max_attempts: int = 5, window: int = 3600) -> bool:
     """Check if admin action is allowed for this IP (5 attempts per hour)"""
-    now = datetime.utcnow().timestamp()
+    now = datetime.now(timezone.utc).timestamp()
     
     if ip not in _admin_attempts:
         _admin_attempts[ip] = []
@@ -60,7 +60,7 @@ async def trigger_patch_db(request: Request, body: AdminActionRequest = Body(...
         raise HTTPException(status_code=403, detail="Forbidden")
     
     # AUDIT LOG: Log successful admin action
-    logger.info(f"ADMIN ACTION: Database patch triggered by IP {client_ip} at {datetime.utcnow()}")
+    logger.info(f"ADMIN ACTION: Database patch triggered by IP {client_ip} at {datetime.now(timezone.utc)}")
     
     try:
         patch_database()

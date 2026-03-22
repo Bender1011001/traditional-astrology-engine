@@ -1,6 +1,6 @@
 import redis
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 from src.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -52,7 +52,7 @@ class RateLimiter:
             except Exception as e:
                 logger.debug("Redis rate limit check failed, using in-memory fallback: %s", e)
 
-        now = datetime.utcnow().timestamp()
+        now = datetime.now(timezone.utc).timestamp()
         if ip not in self._requests:
             self._requests[ip] = []
 

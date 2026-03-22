@@ -1,0 +1,17 @@
+src\engine\calculator\main.py:        tz_str = get_timezone(chart.geo_lat, chart.geo_lon)
+src\engine\calculator\main.py:            "lat": chart.geo_lat,
+src\engine\forensic_engine.py:            "mundane_context": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).get_hierarchy_report(),
+src\engine\forensic_engine.py:            "eclipse_charts": MundaneEngine(jd, chart.geo_lat, chart.geo_lon).eclipse_charts_for_native(chart.geo_lat, chart.geo_lon)
+src\engine\forensic_engine.py:            "heliacal_events": PhasisEngine.calculate_heliacal_events(chart.jd, chart.geo_lat, chart.geo_lon) if hasattr(chart, "jd") else []
+src\engine\forensic_engine.py:        directions = PrimaryDirectionsEngine.calculate_directions_to_angles(chart, chart.geo_lat)
+src\engine\forensic_engine.py:        planet_directions = PrimaryDirectionsEngine.calculate_directions_to_planets(chart, chart.geo_lat)
+src\engine\forensic_engine.py:        distributor = PrimaryDirectionsEngine.calculate_current_distributor(chart, age_years, chart.geo_lat)
+src\engine\forensic_engine.py:            chart, bdt, chart.jd, chart.geo_lat, chart.geo_lon
+src\engine\forensic_engine.py:            "circumambulations": PrimaryDirectionsEngine.calculate_circumambulations(chart, chart.geo_lat),
+src\engine\forensic_engine.py:                    geo_lat=chart.geo_lat,
+src\engine\forensic_engine.py:                chart.geo_lat,
+src\engine\solar_return.py:        sr_cusps, sr_ascmc = swe.houses(sr_jd, natal_chart.geo_lat, natal_chart.geo_lon, b'P')
+src\engine\solar_return.py:            geo_lat=natal_chart.geo_lat,
+src\engine\stars.py:    if chart.geo_lat is None or chart.jd is None:
+src\engine\stars.py:        hits = _angles_for_body(ra_p, dec_p, ramc, chart.geo_lat, orb)
+src\engine\stars.py:        s_hits = _angles_for_body(ra_dec[0], ra_dec[1], ramc, chart.geo_lat, orb)

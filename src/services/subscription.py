@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timezone, timedelta
 import logging
 import stripe
 from sqlalchemy.orm import Session
@@ -32,7 +32,7 @@ class SubscriptionService:
         # Logic: If they ever had a trial, maybe block?
         # For now, allow clean slate.
         
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         # For the free plan, we store an active baseline subscription (not a trial).
         is_free = plan.tier == "free"
         trial_end = None if is_free else (now + timedelta(days=trial_days))
@@ -128,7 +128,7 @@ class SubscriptionService:
             # If the user is currently on an internal trial for the same tier, align Stripe billing start to trial end.
             try:
                 sub = user.subscription
-                if sub and sub.status == "trial" and sub.trial_end_date and sub.trial_end_date > datetime.utcnow():
+                if sub and sub.status == "trial" and sub.trial_end_date and sub.trial_end_date > datetime.now(timezone.utc):
                     # Only apply if they are checking out the same tier they're trialing.
                     if sub.plan and sub.plan.tier == plan.tier:
                         session_kwargs['subscription_data']["trial_end"] = int(sub.trial_end_date.timestamp())
@@ -295,7 +295,7 @@ class SubscriptionService:
                 amount_paid=invoice.get("amount_paid") / 100.0,
                 status=invoice.get("status"),
                 pdf_url=invoice.get("invoice_pdf"),
-                created_at=datetime.utcnow()
+                created_at=datetime.now(timezone.utc)
             )
             self.db.add(new_inv)
             self.db.commit()
@@ -373,8 +373,8 @@ class SubscriptionService:
             return {"charts": 0, "api": 0, "chart_limit": 1, "api_limit": 0}
 
         plan = sub.plan
-        chart_period_start = sub.current_period_start or datetime.utcnow().replace(day=1)
-        api_period_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        chart_period_start = sub.current_period_start or datetime.now(timezone.utc).replace(day=1)
+        api_period_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
         
         from sqlalchemy import func
         chart_usage = self.db.query(func.sum(UsageRecord.cost_credits)).filter(

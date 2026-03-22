@@ -9,7 +9,7 @@ import json
 import hashlib
 import urllib.parse
 import urllib.request
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import pytz
 import logging
 
@@ -80,7 +80,7 @@ def _cache_get(query_norm: str) -> tuple[float, float] | None:
     if created:
         try:
             created_dt = datetime.fromisoformat(created)
-            if created_dt < (datetime.utcnow() - timedelta(days=_GEOCODE_CACHE_TTL_DAYS)):
+            if created_dt < (datetime.now(timezone.utc) - timedelta(days=_GEOCODE_CACHE_TTL_DAYS)):
                 return None
         except Exception as e:
             logger.debug("Cache TTL parse failed: %s", e)
@@ -96,7 +96,7 @@ def _cache_get(query_norm: str) -> tuple[float, float] | None:
 def _cache_set(query_norm: str, lat: float, lon: float) -> None:
     cache = _load_geocode_cache()
     k = _cache_key(query_norm)
-    cache[k] = {"created": datetime.utcnow().replace(microsecond=0).isoformat(), "lat": float(lat), "lon": float(lon)}
+    cache[k] = {"created": datetime.now(timezone.utc).replace(microsecond=0).isoformat(), "lat": float(lat), "lon": float(lon)}
     _save_geocode_cache(cache)
 
 

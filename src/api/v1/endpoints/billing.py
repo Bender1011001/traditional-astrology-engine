@@ -184,7 +184,7 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
             final_success_url = f"{final_success_url}{sep}session_id={{CHECKOUT_SESSION_ID}}"
 
         # Minimal chart payload stored in metadata (keep Stripe metadata small).
-        cr = request.chart_request.dict() if request.chart_request else {}
+        cr = request.chart_request.model_dump() if request.chart_request else {}
         chart_min = {
             "date": cr.get("date"),
             "time": cr.get("time"),
@@ -231,7 +231,7 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
             annual=request.annual,
             success_url=request.success_url,
             cancel_url=request.cancel_url,
-            chart_data=request.chart_request.dict() if request.chart_request else None
+            chart_data=request.chart_request.model_dump() if request.chart_request else None
         )
         return {"sessionId": session.id, "url": session.url}
     except ValueError as e:

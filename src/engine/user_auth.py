@@ -6,7 +6,7 @@ Supports persistence via SQLite (default) or PostgreSQL.
 import os
 import secrets
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 
 logger = logging.getLogger(__name__)
 from typing import Optional, Dict, Any, List
@@ -36,7 +36,7 @@ class UserManager:
         window: seconds
         Returns True if allowed, False if blocked.
         """
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         if key not in self._rate_limits:
             self._rate_limits[key] = []
             
@@ -90,8 +90,8 @@ class UserManager:
                 name=name.strip(),
                 password_hash=hashed_password,
                 salt="", # Deprecated/Unused with bcrypt
-                created_at=datetime.utcnow(),
-                updated_at=datetime.utcnow(),
+                created_at=datetime.now(timezone.utc),
+                updated_at=datetime.now(timezone.utc),
                 # subscription_tier="free", # Removed in v2 schema
                 email_verified=False,
                 verification_token=secrets.token_urlsafe(32),
@@ -176,7 +176,7 @@ class UserManager:
                 return {"success": False, "message": "Invalid email or password."}
             
             # Update last login
-            user.last_login = datetime.utcnow()
+            user.last_login = datetime.now(timezone.utc)
             db.commit()
             
             logging.info("User authenticated: %s", email)
@@ -269,13 +269,13 @@ class UserManager:
             
         entry = {
             "hash": chart_hash,
-            "saved_at": datetime.utcnow().isoformat(),
+            "saved_at": datetime.now(timezone.utc).isoformat(),
             **chart_meta
         }
         charts.append(entry)
 
         user.charts_saved = charts
-        user.updated_at = datetime.utcnow()
+        user.updated_at = datetime.now(timezone.utc)
 
         from sqlalchemy.orm.attributes import flag_modified
         flag_modified(user, "charts_saved")
@@ -309,7 +309,7 @@ class UserManager:
             hashed = self._hash_password(new_password)
             user.password_hash = hashed
             # user.salt = salt # No salt needed for bcrypt context
-            user.updated_at = datetime.utcnow()
+            user.updated_at = datetime.now(timezone.utc)
             
 
             db.commit()
@@ -329,7 +329,7 @@ class UserManager:
             
             token = secrets.token_urlsafe(32)
             # Expires in 1 hour
-            expires = datetime.utcnow().replace(second=0, microsecond=0).timestamp() + 3600
+            expires = datetime.now(timezone.utc).replace(second=0, microsecond=0).timestamp() + 3600
             
             user.reset_token = token
             user.reset_token_expires = datetime.fromtimestamp(expires)
@@ -352,7 +352,7 @@ class UserManager:
                 return {"success": False, "message": "Invalid or expired reset token."}
             
             # Check expiration
-            if user.reset_token_expires < datetime.utcnow():
+            if user.reset_token_expires < datetime.now(timezone.utc):
                 return {"success": False, "message": "Reset token has expired."}
             
             if len(new_password) < 8:
@@ -365,7 +365,7 @@ class UserManager:
             # Clear token
             user.reset_token = None
             user.reset_token_expires = None
-            user.updated_at = datetime.utcnow()
+            user.updated_at = datetime.now(timezone.utc)
             
             db.commit()
             return {"success": True, "message": "Password reset successfully."}

@@ -3,7 +3,7 @@ import logging
 import sys
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 from logging.handlers import RotatingFileHandler
 
 # Ensure log directory exists
@@ -16,7 +16,7 @@ class JSONFormatter(logging.Formatter):
     """
     def format(self, record):
         log_obj = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "level": record.levelname,
             "message": record.getMessage(),
             "logger": record.name,
@@ -40,7 +40,9 @@ def configure_logging(app_name="astrology_engine"):
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     
-    # Clear existing handlers
+    # Clear and close existing handlers
+    for handler in logger.handlers:
+        handler.close()
     logger.handlers = []
     
     # 1. Console Handler (Standard Text)

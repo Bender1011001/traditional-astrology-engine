@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timezone, timedelta
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends, Header, HTTPException, status
@@ -168,7 +168,7 @@ def update_subscription(
         sub.stripe_customer_id = None
         sub.stripe_subscription_id = None
         sub.cancel_at_period_end = False
-        sub.current_period_end = datetime.utcnow()
+        sub.current_period_end = datetime.now(timezone.utc)
 
     if payload.current_period_end:
         try:
@@ -180,7 +180,7 @@ def update_subscription(
             ) from exc
         sub.current_period_end = parsed
 
-    sub.current_period_start = sub.current_period_start or datetime.utcnow()
+    sub.current_period_start = sub.current_period_start or datetime.now(timezone.utc)
     db.commit()
     db.refresh(sub)
 
@@ -244,7 +244,7 @@ def owner_kpis(
     - Derived from DB tables (users, subscriptions, leads).
     - If you need Stripe-reconciled MRR, we will layer that on via invoice/subscription sync.
     """
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     today_start = datetime(now.year, now.month, now.day)
     week_start = now - timedelta(days=7)
 

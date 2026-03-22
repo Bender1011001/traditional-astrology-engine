@@ -21,16 +21,10 @@ from src.engine.logger import configure_logging, ActivityLogger
 # Initialize centralized logging
 configure_logging()
 
-app = FastAPI(
-    title="Traditional Astrology Engine",
-    description="A high-precision engine for pre-1700s Traditional Astrology.",
-    version="2.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc"
-)
+from contextlib import asynccontextmanager
 
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     print("DEBUG: Startup Event Triggered")
     logging.info("Starting up... Initializing database tables.")
     from src.database.core import engine, Base
@@ -54,6 +48,17 @@ async def startup_event():
         logging.error(f"Failed to initialize database tables: {e}")
         # We don't exit here, let the app try to serve what it can 
         # (or fail specifically on DB routes with clear errors)
+    yield
+    # No specific shutdown logic implemented yet
+
+app = FastAPI(
+    title="Traditional Astrology Engine",
+    description="A high-precision engine for pre-1700s Traditional Astrology.",
+    version="2.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
 
 # --- MIDDLEWARE ---
 

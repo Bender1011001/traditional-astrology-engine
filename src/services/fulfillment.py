@@ -1,6 +1,6 @@
 import logging
 import asyncio
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 from starlette.concurrency import run_in_threadpool
 from src.services.engine_bridge import generate_full_nativity_async
 from src.engine.pdf_generator import PDFReportGenerator
@@ -109,7 +109,7 @@ class FulfillmentService:
                 subject=subject,
                 html_content=html_content,
                 attachment_bytes=pdf_bytes,
-                attachment_name=f"Codex_{pdf_tier}_{datetime.utcnow().strftime('%Y%m%d')}.pdf"
+                attachment_name=f"Codex_{pdf_tier}_{datetime.now(timezone.utc).strftime('%Y%m%d')}.pdf"
             )
             
             if success:

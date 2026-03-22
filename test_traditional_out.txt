@@ -1,0 +1,90 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-8.3.4, pluggy-1.5.0
+rootdir: E:\code.projects\astrology
+configfile: pytest.ini
+plugins: Faker-37.11.0, asyncio-1.2.0, cov-7.0.0, anyio-4.12.1, hydra-core-1.3.2, langsmith-0.6.6, mock-3.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 6 items
+
+src\tests\test_traditional_pillars.py FFFFF.                             [100%]
+
+================================== FAILURES ===================================
+___________________________ test_alcabitius_houses ____________________________
+
+test_case_1996 = {'error': "name 'timezone' is not defined"}
+
+    def test_alcabitius_houses(test_case_1996):
+        """Verify Alcabitius houses are calculated and match expected structure."""
+        houses = test_case_1996.get("houses")
+>       assert houses is not None
+E       assert None is not None
+
+src\tests\test_traditional_pillars.py:25: AssertionError
+_________________________ test_planetary_phasis_logic _________________________
+
+test_case_1996 = {'error': "name 'timezone' is not defined"}
+
+    def test_planetary_phasis_logic(test_case_1996):
+        """Verify Phasis engine correctly identifies Mercury's state."""
+        planets = test_case_1996.get("planets")
+>       mercury = planets.get("Mercury")
+E       AttributeError: 'NoneType' object has no attribute 'get'
+
+src\tests\test_traditional_pillars.py:33: AttributeError
+____________________________ test_solar_proximity _____________________________
+
+test_case_1996 = {'error': "name 'timezone' is not defined"}
+
+    def test_solar_proximity(test_case_1996):
+        """Verify Sun and Moon proximity (Moon is often combust)."""
+>       sun_lon = test_case_1996["planets"]["Sun"]["longitude"]
+E       KeyError: 'planets'
+
+src\tests\test_traditional_pillars.py:55: KeyError
+_______________________ test_decennial_apheta_selection _______________________
+
+test_case_1996 = {'error': "name 'timezone' is not defined"}
+
+    def test_decennial_apheta_selection(test_case_1996):
+        """Verify Decennial Apheta selection for the 1996 chart."""
+>       chart = Auditor._rebuild_chart_model(test_case_1996)
+
+src\tests\test_traditional_pillars.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw_data = {'error': "name 'timezone' is not defined"}
+
+    @staticmethod
+    def _rebuild_chart_model(raw_data: Dict) -> Chart:
+        planets = []
+>       for name, p_data in raw_data["planets"].items():
+E       KeyError: 'planets'
+
+src\engine\forensic_engine.py:938: KeyError
+___________________________ test_decennial_sequence ___________________________
+
+test_case_1996 = {'error': "name 'timezone' is not defined"}
+
+    def test_decennial_sequence(test_case_1996):
+        """Verify the 129-month cycle durations."""
+>       chart = Auditor._rebuild_chart_model(test_case_1996)
+
+src\tests\test_traditional_pillars.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw_data = {'error': "name 'timezone' is not defined"}
+
+    @staticmethod
+    def _rebuild_chart_model(raw_data: Dict) -> Chart:
+        planets = []
+>       for name, p_data in raw_data["planets"].items():
+E       KeyError: 'planets'
+
+src\engine\forensic_engine.py:938: KeyError
+=========================== short test summary info ===========================
+FAILED src/tests/test_traditional_pillars.py::test_alcabitius_houses - assert...
+FAILED src/tests/test_traditional_pillars.py::test_planetary_phasis_logic - A...
+FAILED src/tests/test_traditional_pillars.py::test_solar_proximity - KeyError...
+FAILED src/tests/test_traditional_pillars.py::test_decennial_apheta_selection
+FAILED src/tests/test_traditional_pillars.py::test_decennial_sequence - KeyEr...
+========================= 5 failed, 1 passed in 6.18s =========================

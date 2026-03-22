@@ -48,7 +48,7 @@ async def request_premium_guest_reading(
     # 2. Create Task
     task = AsyncReportTask(
         status="pending",
-        request_meta=chart_request.dict()
+        request_meta=chart_request.model_dump()
     )
     db.add(task)
     
@@ -65,7 +65,7 @@ async def request_premium_guest_reading(
     background_tasks.add_task(
         generate_premium_report_task, 
         task.id, 
-        chart_request.dict()
+        chart_request.model_dump()
     )
     
     return {

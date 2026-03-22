@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, DateTime, Integer, Boolean, ForeignKey, JSON, Numeric
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 import uuid
 from .core import Base
 
@@ -11,8 +11,8 @@ class User(Base):
     name = Column(String, default="")
     password_hash = Column(String, nullable=False)
     salt = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     last_login = Column(DateTime, nullable=True)
     
 
@@ -82,7 +82,7 @@ class UserSubscription(Base):
     # Dates
     trial_start_date = Column(DateTime, nullable=True) # New
     trial_end_date = Column(DateTime, nullable=True) # New
-    current_period_start = Column(DateTime, default=datetime.utcnow) # New
+    current_period_start = Column(DateTime, default=lambda: datetime.now(timezone.utc)) # New
     current_period_end = Column(DateTime, nullable=True)
     cancel_at_period_end = Column(Boolean, default=False) # New
 
@@ -100,7 +100,7 @@ class UsageRecord(Base):
     resource_id = Column(String, nullable=True) # ID of the resource used
     cost_credits = Column(Integer, default=1)
     metadata_json = Column(JSON, default=dict) # 'metadata' is reserved in some SQL
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     
     subscription = relationship("UserSubscription", back_populates="usage_records")
 
@@ -113,7 +113,7 @@ class Invoice(Base):
     amount_due = Column(Numeric(10, 2))
     amount_paid = Column(Numeric(10, 2))
     status = Column(String(20))
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     pdf_url = Column(String)
 
     subscription = relationship("UserSubscription", back_populates="invoices")
@@ -124,7 +124,7 @@ class ApiKey(Base):
     user_id = Column(String, ForeignKey("users.id"))
     key_hash = Column(String, unique=True, nullable=False)
     name = Column(String)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     last_used = Column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="api_keys")
@@ -136,8 +136,8 @@ class AstrologicalDelineation(Base):
     key = Column(String, nullable=False, index=True)      # e.g., 'SATURN_ARIES_DAY'
     content = Column(JSON, nullable=False)               # Stores text or structured JSON
     is_manual_override = Column(Boolean, default=False)  # Flag to prevent auto-overwrite
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
 
 class Lead(Base):
@@ -160,7 +160,7 @@ class Lead(Base):
     url = Column(String, nullable=True)
     ua = Column(String, nullable=True)
     ip = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
 
 
 class OutreachTarget(Base):
@@ -182,7 +182,7 @@ class OutreachTarget(Base):
     notes = Column(String, nullable=True)
     source = Column(String, nullable=True)  # e.g., docs/research/... file name
     last_verified = Column(String, nullable=True)  # ISO date string (lightweight, avoids TZ issues)
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
 
 
 class OutreachAttempt(Base):
@@ -208,7 +208,7 @@ class OutreachAttempt(Base):
     error_message = Column(String, nullable=True)
 
     sent_at = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
 
     target = relationship("OutreachTarget")
 
@@ -220,7 +220,7 @@ class GuestRequest(Base):
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     ip_address = Column(String, index=True, nullable=False)
     request_type = Column(String, default="premium_guest") # 'basic', 'premium_guest'
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 class AsyncReportTask(Base):
     """
@@ -229,8 +229,8 @@ class AsyncReportTask(Base):
     __tablename__ = "async_report_tasks"
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     status = Column(String, default="pending") # pending, processing, completed, failed
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     result_json = Column(JSON, nullable=True) # Store result or error
     
     # Metadata to re-identify the request

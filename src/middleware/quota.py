@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException
 import logging
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 
 logger = logging.getLogger(__name__)
 from src.database.core import get_db
@@ -49,7 +49,7 @@ async def verify_quota(
 
     # Check Usage if limit exists
     if limit is not None:
-        period_start = sub.current_period_start or datetime.utcnow().replace(day=1)
+        period_start = sub.current_period_start or datetime.now(timezone.utc).replace(day=1)
         
         used_credits = db.query(func.sum(UsageRecord.cost_credits)).filter(
             UsageRecord.subscription_id == sub.id,
@@ -70,7 +70,7 @@ async def verify_quota(
             user_id=user.id,
             resource_type=resource,
             cost_credits=1, # Default cost
-            created_at=datetime.utcnow()
+            created_at=datetime.now(timezone.utc)
         )
         db.add(new_record)
         db.commit()
