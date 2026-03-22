@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: 304 tests green, near-complete engine coverage. Remaining untested: `stars.py`, `horary.py`, `kakosis.py`, `phasis.py`, `mansions.py`, `medical.py`, `decumbiture.py`, `geniture.py`, `classical_mechanics.py`, `decennials.py`, `primary_directions.py`. Also: expand API integration tests.
-- **Last session**: Extended test coverage from 89 → 304 tests (+242%). New suites: `calculations.py` (33), `prediction.py` (37), `synthesis.py` (25), `dignities.py` (24), `temperament_nodes.py` (24), `aspects.py` (15), `lots.py` (15), `reception.py` (11), `mundane.py` (13), `electional.py` (7), `hyleg.py` (11), `trace.py`, `trace_generator.py`, `astrology_tools.py`, `logic.py`. Zero code quality issues remaining (no bare excepts, no debug prints, no TODOs).
+- **Pick up at**: 406 tests green. Remaining untested: `phasis.py`, `mansions.py`, `medical.py`, `decumbiture.py`, `classical_mechanics.py`, `decennials.py`, `primary_directions.py`. Also: expand API integration tests.
+- **Last session**: Extended test coverage from 89 → 406 tests (+356%). New suites: `calculations.py` (33), `prediction.py` (37), `synthesis.py` (25), `dignities.py` (24), `temperament_nodes.py` (24), `horary.py` (36), `stars.py` (25), `geniture.py` (24), `kakosis.py` (17), `aspects.py` (15), `lots.py` (15), `reception.py` (11), `mundane.py` (13), `electional.py` (7), `hyleg.py` (11). Zero code quality issues.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
