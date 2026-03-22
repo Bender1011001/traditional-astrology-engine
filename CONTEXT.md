@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: All 120 tests green, zero warnings. Consider adding integration-level tests or expanding edge-case coverage for `synthesis.py` and remaining low-coverage modules.
-- **Last session**: (1) Expanded test suite from 89 → 120 tests with new suites for `trace.py`, `trace_generator.py`, `astrology_tools.py`, `logic.py`, `mundane.py`, `electional.py`, and `hyleg.py`. (2) Replaced raw `print('DEBUG:')` statements in `app.py` with proper `logging.debug()` calls. (3) Removed stale comments from `app.py`. (4) All changes committed and pushed.
+- **Pick up at**: 203 tests green, all core engine modules now covered. Consider adding tests for `synthesis.py`, `lots.py`, `nodes.py`, `temperament.py`, `stars.py`, and integration-level tests.
+- **Last session**: Massive test coverage expansion (89 → 203 tests, +128%). Added new suites for: `calculations.py` (33), `dignities.py` (24), `aspects.py` (15), `reception.py` (11), `mundane.py` (13), `electional.py` (7), `hyleg.py` (11), `trace.py`, `trace_generator.py`, `astrology_tools.py`, `logic.py`. Also cleaned `app.py` (logging, stale comments). All pushed.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
