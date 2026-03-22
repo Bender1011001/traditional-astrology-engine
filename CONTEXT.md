@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: 203 tests green, all core engine modules now covered. Consider adding tests for `synthesis.py`, `lots.py`, `nodes.py`, `temperament.py`, `stars.py`, and integration-level tests.
-- **Last session**: Massive test coverage expansion (89 → 203 tests, +128%). Added new suites for: `calculations.py` (33), `dignities.py` (24), `aspects.py` (15), `reception.py` (11), `mundane.py` (13), `electional.py` (7), `hyleg.py` (11), `trace.py`, `trace_generator.py`, `astrology_tools.py`, `logic.py`. Also cleaned `app.py` (logging, stale comments). All pushed.
+- **Pick up at**: 304 tests green, near-complete engine coverage. Remaining untested: `stars.py`, `horary.py`, `kakosis.py`, `phasis.py`, `mansions.py`, `medical.py`, `decumbiture.py`, `geniture.py`, `classical_mechanics.py`, `decennials.py`, `primary_directions.py`. Also: expand API integration tests.
+- **Last session**: Extended test coverage from 89 → 304 tests (+242%). New suites: `calculations.py` (33), `prediction.py` (37), `synthesis.py` (25), `dignities.py` (24), `temperament_nodes.py` (24), `aspects.py` (15), `lots.py` (15), `reception.py` (11), `mundane.py` (13), `electional.py` (7), `hyleg.py` (11), `trace.py`, `trace_generator.py`, `astrology_tools.py`, `logic.py`. Zero code quality issues remaining (no bare excepts, no debug prints, no TODOs).
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
