@@ -70,22 +70,15 @@ def _deg_in_sign(lon: float) -> float:
     return lon % 30.0
 
 
-def generate_trace(
+def build_trace_object(
     date_str: str,
     time_str: str,
     city: str,
     state: str = "",
     name: str = "Native",
-) -> Dict[str, Any]:
+) -> ComputationTrace:
     """
-    Generate a complete computation trace for given birth data.
-    
-    Returns a JSON-serializable dict with:
-        - subject_name, birth_data, total_steps, categories
-        - steps: list of step dicts
-    
-    This runs all the same trace functions as the CLI script but 
-    returns the data for API consumption instead of writing files.
+    Generate a complete computation trace object for given birth data.
     """
     birth_label = f"{date_str} {time_str}, {city}, {state}" if state else f"{date_str} {time_str}, {city}"
     trace = ComputationTrace(subject_name=name, birth_data=birth_label)
@@ -98,7 +91,16 @@ def generate_trace(
         )
 
         if "error" in raw:
-            return {"error": raw["error"], "steps": [], "total_steps": 0, "categories": []}
+            trace.add(
+                category="Error",
+                technique="Chart Calculation",
+                inputs={},
+                rule="",
+                source="",
+                calculation=raw["error"],
+                result="Failed"
+            )
+            return trace
 
         chart = Auditor._rebuild_chart_model(raw)
         
@@ -136,18 +138,37 @@ def generate_trace(
         _trace_doryphory(trace, chart)
         _trace_dodecatemoria(trace, chart)
 
-        return trace.to_dict()
+        return trace
 
     except Exception as e:
         logger.error("Trace generation failed: %s", e, exc_info=True)
+        return trace
+
+
+def generate_trace(
+    date_str: str,
+    time_str: str,
+    city: str,
+    state: str = "",
+    name: str = "Native",
+) -> Dict[str, Any]:
+    """
+    Generate a complete computation trace for given birth data (Dict format).
+    """
+    trace = build_trace_object(date_str, time_str, city, state, name)
+    
+    # If there was an error added as a step, we can check for it
+    if trace.steps and trace.steps[0].category == "Error":
         return {
-            "error": str(e),
+            "error": trace.steps[0].calculation,
             "steps": trace.to_dict().get("steps", []),
-            "total_steps": len(trace.steps),
-            "categories": trace.categories,
+            "total_steps": 0,
+            "categories": [],
             "subject_name": name,
-            "birth_data": birth_label,
+            "birth_data": getattr(trace, 'birth_data', ''),
         }
+        
+    return trace.to_dict()
 
 
 # ─── Trace Functions ──────────────────────────────────────────────────────────

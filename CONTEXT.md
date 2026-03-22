@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Fixed SEO and indexing issues: improved CTR for traditional birth chart queries by updating titles/meta descriptions, and fixed sitemap vs robots.txt conflict for about/faq pages.
-- **Last session**: (1) Updated `index.html` and `natal-charts.html` SEO tags to target "The most complete & correct traditional birth chart reading using over 100 classical rules". (2) Removed `about.html` and `faq.html` from `robots.txt` disallow list, fixing a conflict where they were included in `sitemap.xml` but blocked from indexing.
+- **Pick up at**: Refactored `scripts/generate_trace.py` to use `src/engine/trace_generator.py` directly, resulting in massive code deduplication and full metric capability for CLI generated HTML reports. Added unit tests for `forensic_engine.py` (missing `test_audit.py`).
+- **Last session**: (1) Created `src/tests/test_audit.py` to test the Auditor `generate_full_nativity` endpoint. (2) Refactored `src/engine/trace_generator.py` to expose `build_trace_object` and refactored `scripts/generate_trace.py` resolving 800+ lines of duplicated code and finally exposing missing metrics like Doryphory and Dodecatemoria to the HTML trace output.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
