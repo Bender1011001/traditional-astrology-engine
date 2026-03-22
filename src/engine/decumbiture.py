@@ -179,7 +179,9 @@ class DecumbitureEngine:
         """
         Basic Decumbiture Prognosis rules.
         """
-        asc_ruler = HylegAlcocodenEngine.get_domicile_ruler(chart.ascendant)
+        from .reference_data import DOMICILES
+        asc_sign = list(Sign)[int(chart.ascendant / 30) % 12]
+        asc_ruler = DOMICILES.get(asc_sign)
         
         # Check Lord of Ascendant combustion
         loa = next((p for p in chart.planets if p.name == asc_ruler), None)
