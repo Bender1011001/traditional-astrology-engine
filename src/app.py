@@ -25,15 +25,14 @@ from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("DEBUG: Startup Event Triggered")
+    logging.debug("Startup event triggered")
     logging.info("Starting up... Initializing database tables.")
     from src.database.core import engine, Base
     from src.database.models import User # Ensure models are loaded
     try:
-        print("DEBUG: Calling create_all()...")
-        # This will create tables if they don't exist
+        logging.debug("Calling create_all()...")
         Base.metadata.create_all(bind=engine)
-        print("DEBUG: create_all() completed.")
+        logging.debug("create_all() completed.")
         logging.info("Database tables initialized successfully.")
         
         # Auto-seed plans if missing (to prevent 'Plan free not found' errors)
@@ -236,6 +235,3 @@ from fastapi.staticfiles import StaticFiles
 # NOTE: This must be mounted AFTER the API router to ensure API routes take precedence.
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
-# Temporary legacy support or strict adherence? Plan says "No Legacy Support".
-# But to test locally easily without changing frontend immediately, I might want to mount at /api too?
-# Nah, let's stick to the plan.
