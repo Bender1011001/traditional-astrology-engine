@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Monitor Google Search Console to see if the updated `index.html` meta description improves CTR for "traditional birth chart" searches ("the most complete and correct traditional astrology reading using over 100 classical rules...").
-- **Last session**: (1) Fixed all Python 3.12 deprecation warnings (`datetime.utcnow()` -> `datetime.now(timezone.utc)`). (2) Fixed all Pydantic V2 deprecation warnings (`.dict()` -> `.model_dump()`). (3) Verified all tests pass 100%. (4) Updated SEO metadata in `index.html` per user request.
+- **Pick up at**: Monitor Google Search Console to see if the updated `index.html` meta description improves CTR. Continue pushing test coverage closer to 100% for remaining edge files like `mundane.py`.
+- **Last session**: (1) Fixed Python 3.12/Pydantic V2 deprecation warnings. (2) Updated SEO metadata in `index.html`. (3) Added comprehensive unit test suites for previously untested files: `trace.py`, `trace_generator.py`, `astrology_tools.py`, and `logic.py`, significantly improving total test coverage and ensuring their stability.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
