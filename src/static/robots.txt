@@ -17,10 +17,8 @@ Disallow: /developers.html
 Disallow: /documentation.html
 Disallow: /api-guide.html
 Disallow: /blog.html
-Disallow: /about.html
 Disallow: /resources.html
 Disallow: /advanced.html
-Disallow: /faq.html
 Disallow: /preview.html
 Disallow: /success.html
 Disallow: /status.html

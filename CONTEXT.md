@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Code quality sprint COMPLETE. Fixed critical planetary hours day-ruler bug (off-by-one). All 64 tests passing (was 63+1 skipped). Next: deploy to production, or pick next improvement area.
-- **Last session**: (1) Fixed planetary hours bugs: day ruler was off by one day [(JD+1.5)%7 to (JD+0.5)%7] and sunrise search from noon found tomorrow rise instead of today. (2) Eliminated all 50+ bare except blocks. (3) Converted all print() to logger and all f-string logger to %-format. (4) Fixed deprecated SQLAlchemy import. (5) Restored about.html/faq.html from 301 redirects + added to sitemap.
+- **Pick up at**: Fixed SEO and indexing issues: improved CTR for traditional birth chart queries by updating titles/meta descriptions, and fixed sitemap vs robots.txt conflict for about/faq pages.
+- **Last session**: (1) Updated `index.html` and `natal-charts.html` SEO tags to target "The most complete & correct traditional birth chart reading using over 100 classical rules". (2) Removed `about.html` and `faq.html` from `robots.txt` disallow list, fixing a conflict where they were included in `sitemap.xml` but blocked from indexing.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
@@ -191,7 +191,7 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Glossary tooltip text rendered inline, garbling all reading text | `basic.js` creates `.glossary-tooltip-popup` elements but `style.css` had NO CSS rules for them — popups showed as visible text | Added 56 lines of tooltip CSS: `display:none` by default, shown on hover/active |
 | New static pages always redirect to index | `app.py` has `_LEGACY_REDIRECTS` list that 301-redirects listed pages BEFORE static file handler sees them | Remove the page from `_LEGACY_REDIRECTS` before it can be served as a static file |
 | Primary directions trace silently empty | `raw["meta"]` uses `lat` not `latitude` for geographic latitude | Use `.get("lat")` not `.get("latitude")` |
-
+| 31 pages not indexed in GSC, 5 indexed | `robots.txt` blocked `about.html` and `faq.html` despite them being in `sitemap.xml`, and correctly blocked B2B/auth pages | Removed `about.html` and `faq.html` from `robots.txt` disallow list |
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
 - Do not use Day/Night delineations interchangeably—sect matters
