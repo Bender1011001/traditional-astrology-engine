@@ -7,8 +7,8 @@ updated: 2026-03-19
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Refactored `scripts/generate_trace.py` to use `src/engine/trace_generator.py` directly, resulting in massive code deduplication and full metric capability for CLI generated HTML reports. Added unit tests for `forensic_engine.py` (missing `test_audit.py`).
-- **Last session**: (1) Created `src/tests/test_audit.py` to test the Auditor `generate_full_nativity` endpoint. (2) Refactored `src/engine/trace_generator.py` to expose `build_trace_object` and refactored `scripts/generate_trace.py` resolving 800+ lines of duplicated code and finally exposing missing metrics like Doryphory and Dodecatemoria to the HTML trace output.
+- **Pick up at**: Monitor Google Search Console to see if the updated `index.html` meta description improves CTR for "traditional birth chart" searches ("the most complete and correct traditional astrology reading using over 100 classical rules...").
+- **Last session**: (1) Fixed all Python 3.12 deprecation warnings (`datetime.utcnow()` -> `datetime.now(timezone.utc)`). (2) Fixed all Pydantic V2 deprecation warnings (`.dict()` -> `.model_dump()`). (3) Verified all tests pass 100%. (4) Updated SEO metadata in `index.html` per user request.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
