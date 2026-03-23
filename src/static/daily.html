@@ -817,7 +817,15 @@
 
             if (!res.ok) {
               const err = await res.json().catch(() => ({ detail: 'Server error' }));
-              throw new Error(err.detail || `HTTP ${res.status}`);
+              let msg = `HTTP ${res.status}`;
+              if (Array.isArray(err?.detail)) {
+                  msg = err.detail.map(d => `${d.loc ? d.loc.slice(-1)[0] : 'field'}: ${d.msg}`).join("; ");
+              } else if (typeof err?.detail === "string") {
+                  msg = err.detail;
+              } else if (err?.detail?.message) {
+                  msg = err.detail.message;
+              }
+              throw new Error(msg);
             }
 
             data = await res.json();
@@ -1111,7 +1119,17 @@
 
           if (!res.ok) {
             const err = await res.json().catch(() => ({ detail: 'Server error' }));
-            container.innerHTML = `<div class="week-loading">Error: ${err.detail || 'Could not load week view'}</div>`;
+            let msg = 'Could not load week view';
+            if (Array.isArray(err?.detail)) {
+                msg = err.detail.map(d => `${d.loc ? d.loc.slice(-1)[0] : 'field'}: ${d.msg}`).join("; ");
+            } else if (typeof err?.detail === "string") {
+                msg = err.detail;
+            } else if (err?.detail?.message) {
+                msg = err.detail.message;
+            } else if (err?.detail) {
+                msg = JSON.stringify(err.detail);
+            }
+            container.innerHTML = `<div class="week-loading">Error: ${msg}</div>`;
             return;
           }
 
