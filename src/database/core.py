@@ -29,10 +29,11 @@ if "@" in safe_url:
 else:
     logger.info("Connecting to Local/Sqlite DB")
 
-# Engine configuration for managed databases (Azure/Postgres)
+# Engine configuration optimized for Serverless/Cloud Run dynamic scaling
+# Hardcapping connection footprints so horizontal container scaling doesn't exhaust DB slots.
 engine_kwargs = {
-    "pool_size": 5,
-    "max_overflow": 10,
+    "pool_size": 2,
+    "max_overflow": 4,
     "pool_timeout": 30,
     "pool_recycle": 1800,
 }
