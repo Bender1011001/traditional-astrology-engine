@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJNM5XVD');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RCNDWN4XVN');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Navigator — Your Personal Cosmic Briefing | Traditional Astrology</title>
+  <meta name="description" content="Get your personal daily astrological briefing based on classical timing techniques: profections, firdaria, zodiacal releasing, transits, and actionable recommendations." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <link rel="canonical" href="https://traditional-astrology.com/daily.html" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Daily Navigator — Your Personal Cosmic Briefing" />
+  <meta property="og:description" content="Get your personal daily astrological briefing based on classical timing techniques: profections, firdaria, zodiacal releasing, transits, and actionable recommendations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://traditional-astrology.com/daily.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Daily Navigator — Personal Cosmic Briefing" />
+  <meta name="twitter:description" content="Classical timing techniques synthesized into one actionable daily briefing." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Daily Navigator — Personal Cosmic Briefing",
+    "description": "Free interactive tool that synthesizes classical astrological timing techniques (profections, firdaria, zodiacal releasing, transits, Moon condition) into one actionable daily briefing based on your birth chart.",
+    "url": "https://traditional-astrology.com/daily.html",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Traditional Astrology",
+      "url": "https://traditional-astrology.com"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260323daily" />
+  <script src="config.js?v=20260310b2c"></script>
+
+  <style>
+    /* ── Daily Navigator Specific Styles ─────────────────────────── */
+    .nav-hero {
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+    }
+    .nav-hero .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(212, 175, 55, 0.85);
+      margin-bottom: 1rem;
+    }
+    .nav-hero .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .nav-hero .hero-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Form Card ─────────────────────────────────────────────── */
+    .nav-form-card {
+      max-width: 560px;
+      margin: 2rem auto 3rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 2rem 2rem 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+    .nav-form-card .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 560px) {
+      .nav-form-card .form-grid { grid-template-columns: 1fr; }
+    }
+    .nav-form-card label {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .nav-form-card input {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .nav-form-card input:focus {
+      outline: none;
+      border-color: rgba(212,175,55,0.5);
+    }
+    .nav-form-card .btn-cta {
+      width: 100%;
+      margin-top: 1.25rem;
+    }
+    .nav-form-card .form-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.75rem;
+    }
+    .target-date-row {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: flex-end;
+      gap: 0.75rem;
+    }
+    .target-date-row .form-field { flex: 1; }
+    .target-date-row .btn-today {
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.25);
+      color: rgba(212,175,55,0.85);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .target-date-row .btn-today:hover {
+      background: rgba(212,175,55,0.22);
+    }
+
+    /* ── Briefing Results ──────────────────────────────────────── */
+    .briefing-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+    .briefing-date-banner {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .briefing-date-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .briefing-date-banner .subject-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(212,175,55,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Briefing panel cards */
+    .briefing-panel {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.3s ease;
+    }
+    .briefing-panel:hover {
+      border-color: rgba(212,175,55,0.25);
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .panel-icon {
+      font-size: 1.4rem;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(212,175,55,0.1);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .panel-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+    }
+    .panel-body strong {
+      color: rgba(212,175,55,0.9);
+      font-weight: 600;
+    }
+
+    /* Stat rows */
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .stat-value {
+      font-size: 0.95rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* Epitasis highlight */
+    .epitasis-active {
+      border-color: rgba(255, 165, 0, 0.4) !important;
+      background: rgba(255, 165, 0, 0.05) !important;
+    }
+    .epitasis-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #d4af37, #ff8c00);
+      color: #0a0a1a;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Recommendations */
+    .rec-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+    }
+    .rec-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+    }
+    .rec-list.do-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: rgba(212,175,55,0.8);
+    }
+    .rec-list.avoid-list li::before {
+      content: "⚠";
+      position: absolute;
+      left: 0;
+      color: rgba(255,120,80,0.8);
+    }
+
+    /* Transit pills */
+    .transit-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 0.4rem 0.75rem;
+      margin: 0.25rem 0.3rem 0.25rem 0;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .transit-pill.benefic { border-color: rgba(100,200,100,0.3); }
+    .transit-pill.malefic { border-color: rgba(255,100,80,0.3); }
+
+    /* Moon panel */
+    .moon-voc-warning {
+      display: inline-block;
+      background: rgba(255,165,0,0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(255,165,0,0.3);
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-left: 0.5rem;
+    }
+    .moon-phase-emoji {
+      font-size: 1.6rem;
+      margin-right: 0.3rem;
+      vertical-align: middle;
+    }
+
+    /* Forecast summary */
+    .forecast-summary {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    /* Urgency indicator */
+    .urgency-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+    .urgency-low { background: #4ade80; }
+    .urgency-moderate { background: #fbbf24; }
+    .urgency-high { background: #f87171; animation: pulse-glow 1.5s infinite; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 4px rgba(248,113,113,0.4); }
+      50% { box-shadow: 0 0 12px rgba(248,113,113,0.8); }
+    }
+
+    /* Disclaimer */
+    .disclaimer-bar {
+      text-align: center;
+      padding: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 2rem;
+    }
+
+    /* Loading */
+    .nav-loading {
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+    .nav-loading .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(212,175,55,0.15);
+      border-top-color: #d4af37;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .nav-loading p {
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.95rem;
+    }
+
+    /* Day navigation arrows */
+    .day-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .day-nav-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .day-nav-btn:hover {
+      background: rgba(212,175,55,0.1);
+      border-color: rgba(212,175,55,0.3);
+      color: rgba(212,175,55,0.9);
+    }
+    .day-nav-current {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    /* Upsell CTA */
+    .upsell-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      margin: 1.5rem 0;
+      background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(212,175,55,0.02));
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+    }
+    .upsell-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .upsell-card p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .upsell-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #c9a84c, #b8922f);
+      color: #0a0a1a;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.75rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .upsell-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Stars background -->
+  <div class="cosmos-bg">
+    <div class="stars-layer stars-sm"></div>
+    <div class="stars-layer stars-md"></div>
+    <div class="stars-layer stars-lg"></div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Birth Chart</a>
+      <a href="/daily.html" class="nav-link" style="color: rgba(212,175,55,0.9);">Daily Navigator</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO + FORM -->
+    <section class="nav-hero" id="navigator-top">
+      <p class="hero-eyebrow">Daily Navigator · Personal Cosmic Briefing</p>
+      <h1 class="hero-title">What Do the Stars<br>Say About <em>Your Day?</em></h1>
+      <p class="hero-subtitle">
+        Enter your birth details and we'll synthesize all classical timing techniques —
+        profections, firdaria, zodiacal releasing, and transits — into one actionable daily briefing.
+      </p>
+    </section>
+
+    <div class="nav-form-card" id="navFormCard">
+      <form id="navForm" autocomplete="on">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="navBirthDate">Date of Birth</label>
+            <input type="date" id="navBirthDate" name="birthDate" required />
+          </div>
+          <div class="form-field">
+            <label for="navBirthTime">Time of Birth</label>
+            <input type="time" id="navBirthTime" name="birthTime" required />
+          </div>
+          <div class="form-field">
+            <label for="navCity">City</label>
+            <input type="text" id="navCity" name="city" placeholder="e.g. Los Angeles" required autocomplete="address-level2" />
+          </div>
+          <div class="form-field">
+            <label for="navState">State / Country</label>
+            <input type="text" id="navState" name="state" placeholder="e.g. CA" autocomplete="address-level1" />
+          </div>
+        </div>
+        <div class="target-date-row">
+          <div class="form-field">
+            <label for="navTargetDate">Briefing Date</label>
+            <input type="date" id="navTargetDate" name="targetDate" />
+          </div>
+          <button type="button" class="btn-today" id="btnToday" title="Reset to today">Today</button>
+        </div>
+        <button type="submit" class="btn-cta" id="navSubmitBtn">
+          <span class="btn-text">✦ Get Briefing</span>
+          <span class="btn-loading hidden">Calculating your cosmic weather...</span>
+        </button>
+        <p class="form-note">Free — no account required. Historical use only.</p>
+      </form>
+    </div>
+
+    <!-- Loading State -->
+    <section class="nav-loading hidden" id="navLoading">
+      <div class="loading-spinner"></div>
+      <p>Aligning your natal chart with today's sky&hellip;</p>
+    </section>
+
+    <!-- Results -->
+    <section class="briefing-section hidden" id="briefingResults">
+      <!-- Dynamically populated by JS -->
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-icon">✦</span> Traditional Astrology
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refunds.html">Refunds</a>
+        <a href="mailto:support@traditional-astrology.com">Support</a>
+      </div>
+      <p class="footer-legal">
+        © 2026 Traditional Astrology. All rights reserved.<br>
+        For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const API_BASE = (window.APP_CONFIG && window.APP_CONFIG.API_BASE_URL)
+        ? window.APP_CONFIG.API_BASE_URL
+        : '';
+
+      const form = document.getElementById('navForm');
+      const formCard = document.getElementById('navFormCard');
+      const loadingSection = document.getElementById('navLoading');
+      const resultsSection = document.getElementById('briefingResults');
+      const submitBtn = document.getElementById('navSubmitBtn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const birthDate = document.getElementById('navBirthDate').value;
+        const birthTime = document.getElementById('navBirthTime').value;
+        const city = document.getElementById('navCity').value.trim();
+        const state = document.getElementById('navState').value.trim();
+        const targetDate = document.getElementById('navTargetDate').value;
+
+        if (!birthDate || !birthTime || !city) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+
+        // Show loading
+        submitBtn.querySelector('.btn-text').classList.add('hidden');
+        submitBtn.querySelector('.btn-loading').classList.remove('hidden');
+        submitBtn.disabled = true;
+        loadingSection.classList.remove('hidden');
+        resultsSection.classList.add('hidden');
+
+        const payload = {
+          date: birthDate,
+          time: birthTime,
+          city: city,
+          state: state,
+        };
+        if (targetDate) payload.target_date = targetDate;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/v1/charts/daily-briefing`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ detail: 'Server error' }));
+            throw new Error(err.detail || `HTTP ${res.status}`);
+          }
+
+          const data = await res.json();
+          renderBriefing(data);
+
+          // Track successful briefing generation in GA4
+          if (typeof gtag === 'function') {
+            gtag('event', 'daily_briefing_generated', {
+              event_category: 'daily_navigator',
+              target_date: targetDate || 'today',
+            });
+          }
+        } catch (err) {
+          alert('Error: ' + err.message);
+        } finally {
+          submitBtn.querySelector('.btn-text').classList.remove('hidden');
+          submitBtn.querySelector('.btn-loading').classList.add('hidden');
+          submitBtn.disabled = false;
+          loadingSection.classList.add('hidden');
+        }
+      });
+
+      function renderBriefing(data) {
+        const b = data.briefing;
+        resultsSection.classList.remove('hidden');
+
+        let html = '';
+
+        // Date banner
+        html += `
+          <div class="briefing-date-banner">
+            <h2>${b.display_date}</h2>
+            <p class="subject-name">Briefing for ${data.subject || 'Native'}</p>
+          </div>
+          <div class="day-nav">
+            <button class="day-nav-btn" id="dayPrev" title="Previous day">← Prev Day</button>
+            <span class="day-nav-current">${b.date}</span>
+            <button class="day-nav-btn" id="dayNext" title="Next day">Next Day →</button>
+          </div>
+        `;
+
+        // Forecast Summary
+        html += renderPanel('📜', 'Daily Forecast', `
+          <div class="forecast-summary">${formatMarkdown(b.forecast_summary)}</div>
+        `);
+
+        // Profections
+        const prof = b.profections;
+        html += renderPanel('📆', 'Profections', `
+          <div class="stat-row"><span class="stat-label">Age</span><span class="stat-value">${prof.age}</span></div>
+          <div class="stat-row"><span class="stat-label">Annual Sign</span><span class="stat-value"><strong>${prof.annual_sign}</strong></span></div>
+          <div class="stat-row"><span class="stat-label">Lord of the Year</span><span class="stat-value"><strong>${prof.lord_of_year}</strong> (natal ${prof.lord_of_year_natal_sign})</span></div>
+          <div class="stat-row"><span class="stat-label">Monthly Sign</span><span class="stat-value">${prof.monthly_sign} — ${prof.monthly_lord}</span></div>
+          <div class="stat-row"><span class="stat-label">Daily Sign</span><span class="stat-value"><strong>${prof.daily_sign}</strong></span></div>
+          <div class="stat-row"><span class="stat-label">Daily Lord</span><span class="stat-value">${prof.daily_lord}</span></div>
+          <div class="stat-row"><span class="stat-label">Theme</span><span class="stat-value" style="font-style:italic;color:rgba(212,175,55,0.75);">${prof.keywords}</span></div>
+        `);
+
+        // Firdaria
+        const fir = b.firdaria;
+        if (fir && !fir.error) {
+          html += renderPanel('🕰️', 'Firdaria Period', `
+            <div class="stat-row"><span class="stat-label">Major Period</span><span class="stat-value"><strong>${fir['Major Period'] || '?'}</strong></span></div>
+            <div class="stat-row"><span class="stat-label">Sub Period</span><span class="stat-value">${fir['Sub Period'] || '?'}</span></div>
+            ${fir['Period Start'] ? `<div class="stat-row"><span class="stat-label">Period</span><span class="stat-value">${fir['Period Start'] || ''} — ${fir['Period End'] || ''}</span></div>` : ''}
+          `);
+        }
+
+        // Zodiacal Releasing
+        const zr = b.zodiacal_releasing;
+        if (zr && zr['Level 1']) {
+          html += renderPanel('🌀', 'Zodiacal Releasing (Spirit)', `
+            <div class="stat-row"><span class="stat-label">Level 1</span><span class="stat-value"><strong>${zr['Level 1']}</strong></span></div>
+            <div class="stat-row"><span class="stat-label">Level 2</span><span class="stat-value">${zr['Level 2'] || '—'}</span></div>
+            ${zr['Level 3'] ? `<div class="stat-row"><span class="stat-label">Level 3</span><span class="stat-value">${zr['Level 3']}</span></div>` : ''}
+            ${zr['Status'] ? `<div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">${zr['Status']}</span></div>` : ''}
+          `);
+        }
+
+        // Moon Condition
+        if (b.moon) {
+          const m = b.moon;
+          let moonHtml = `
+            <div class="stat-row"><span class="stat-label">Sign</span><span class="stat-value"><span class="moon-phase-emoji">${m.phase_emoji}</span> <strong>${m.sign}</strong> (${m.degree}°)</span></div>
+            <div class="stat-row"><span class="stat-label">Phase</span><span class="stat-value">${m.phase}${m.void_of_course ? '<span class="moon-voc-warning">Void of Course</span>' : ''}</span></div>
+            <div class="stat-row"><span class="stat-label">Trend</span><span class="stat-value">${m.waxing ? 'Waxing — favorable for growth' : 'Waning — favorable for release'}</span></div>
+            <div class="stat-row"><span class="stat-label">Speed</span><span class="stat-value">${m.speed}°/day${m.fast ? ' (fast)' : ' (slow)'}</span></div>
+          `;
+          if (m.void_of_course) {
+            moonHtml += '<p style="margin-top:0.75rem;font-size:0.85rem;color:rgba(255,165,0,0.75);">⚠ The Moon is Void of Course — avoid starting new ventures, signing contracts, or making major decisions.</p>';
+          }
+          html += renderPanel('🌙', 'Moon Condition', moonHtml);
+        }
+
+        // Epitasis
+        const epi = b.epitasis;
+        const epiClass = epi.active ? 'epitasis-active' : '';
+        html += `<div class="briefing-panel ${epiClass}">
+          <div class="panel-header">
+            <div class="panel-icon">⚡</div>
+            <span class="panel-title">Epitasis</span>
+            ${epi.active ? '<span class="epitasis-badge">Active</span>' : ''}
+          </div>
+          <div class="panel-body">
+            <div class="stat-row"><span class="stat-label">LoY Transit Sign</span><span class="stat-value">${epi.lord_of_year_transiting_sign}</span></div>
+            <div class="stat-row"><span class="stat-label">Daily Prof. Sign</span><span class="stat-value">${epi.daily_profection_sign}</span></div>
+            <p style="margin-top:0.75rem;font-size:0.85rem;color:rgba(255,255,255,0.6);">${epi.note}</p>
+          </div>
+        </div>`;
+
+        // Transits
+        if (b.transits && b.transits.length > 0) {
+          let transitHtml = '<div style="display:flex;flex-wrap:wrap;gap:0.25rem;">';
+          for (const t of b.transits) {
+            const cls = t.nature === 'benefic' ? 'benefic' : 'malefic';
+            transitHtml += `<span class="transit-pill ${cls}">${t.brief} (${t.orb}°)</span>`;
+          }
+          transitHtml += '</div>';
+          html += renderPanel('🪐', 'Active Transits', transitHtml);
+        }
+
+        // Planetary Day
+        const pd = b.planetary_day;
+        html += renderPanel('☀️', 'Planetary Day', `
+          <div class="stat-row"><span class="stat-label">Weekday</span><span class="stat-value">${pd.weekday}</span></div>
+          <div class="stat-row"><span class="stat-label">Day Ruler</span><span class="stat-value"><strong>${pd.ruler}</strong></span></div>
+          <div class="stat-row"><span class="stat-label">Alignment</span><span class="stat-value" style="font-size:0.85rem;">${pd.alignment}</span></div>
+        `);
+
+        // Recommendations
+        const rec = b.recommendations;
+        const urgencyClass = 'urgency-' + rec.urgency;
+        let recHtml = `
+          <div class="stat-row"><span class="stat-label">Primary Time Lord</span><span class="stat-value"><strong>${rec.primary_time_lord}</strong></span></div>
+          <div class="stat-row"><span class="stat-label">Urgency</span><span class="stat-value"><span class="urgency-indicator ${urgencyClass}"></span>${rec.urgency.charAt(0).toUpperCase() + rec.urgency.slice(1)}</span></div>
+          <div class="stat-row"><span class="stat-label">Color</span><span class="stat-value">${rec.color}</span></div>
+          <div class="stat-row"><span class="stat-label">Gem</span><span class="stat-value">${rec.gem}</span></div>
+          <div class="stat-row"><span class="stat-label">Propitiation Day</span><span class="stat-value">${rec.propitiation_day}${rec.is_propitiation_day ? ' ← Today!' : ''}</span></div>
+          <h4 style="font-family:'Cormorant Garamond',serif;color:#fff;margin:1rem 0 0.5rem;font-size:1.05rem;">Do</h4>
+          <ul class="rec-list do-list">${rec.do.map(d => `<li>${d}</li>`).join('')}</ul>
+          <h4 style="font-family:'Cormorant Garamond',serif;color:#fff;margin:1rem 0 0.5rem;font-size:1.05rem;">Avoid</h4>
+          <ul class="rec-list avoid-list">${rec.avoid.map(a => `<li>${a}</li>`).join('')}</ul>
+        `;
+        html += renderPanel('🎯', 'Recommendations', recHtml);
+
+        // Upsell CTA
+        html += `
+          <div class="upsell-card">
+            <h3>✦ Want the Full Picture?</h3>
+            <p>Your daily briefing shows today's timing. A full natal chart reading reveals your lifelong patterns — dignities, house lords, sect analysis, primary directions, and more.</p>
+            <a href="/#get-reading" class="upsell-btn" onclick="if(typeof gtag==='function')gtag('event','upsell_click',{event_category:'daily_navigator',event_label:'full_reading_7'})">✦ Get Your Full Reading — $7</a>
+          </div>
+        `;
+
+        // Disclaimer
+        html += `<div class="disclaimer-bar">Historical Use Only — Not medical, financial, or legal advice. For entertainment and spiritual research purposes.</div>`;
+
+        resultsSection.innerHTML = html;
+
+        // Scroll to results
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Wire up prev/next day navigation
+        const currentDate = b.date; // YYYY-MM-DD
+        document.getElementById('dayPrev').addEventListener('click', () => shiftDay(currentDate, -1));
+        document.getElementById('dayNext').addEventListener('click', () => shiftDay(currentDate, +1));
+      }
+
+      function shiftDay(dateStr, delta) {
+        const d = new Date(dateStr + 'T12:00:00');
+        d.setDate(d.getDate() + delta);
+        const newDate = d.toISOString().slice(0, 10);
+        document.getElementById('navTargetDate').value = newDate;
+        // Auto-resubmit
+        form.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+
+      function renderPanel(icon, title, bodyHtml) {
+        return `
+          <div class="briefing-panel">
+            <div class="panel-header">
+              <div class="panel-icon">${icon}</div>
+              <span class="panel-title">${title}</span>
+            </div>
+            <div class="panel-body">${bodyHtml}</div>
+          </div>
+        `;
+      }
+
+      function formatMarkdown(text) {
+        if (!text) return '';
+        return text
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\n\n/g, '<br><br>')
+          .replace(/\n/g, '<br>');
+      }
+      // ── localStorage persistence for birth data ────────────────────
+      const STORAGE_KEY = 'daily_navigator_birth';
+
+      function loadSavedBirthData() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (!saved) return;
+          const d = JSON.parse(saved);
+          if (d.birthDate) document.getElementById('navBirthDate').value = d.birthDate;
+          if (d.birthTime) document.getElementById('navBirthTime').value = d.birthTime;
+          if (d.city) document.getElementById('navCity').value = d.city;
+          if (d.state) document.getElementById('navState').value = d.state;
+        } catch (e) { /* ignore corrupt storage */ }
+      }
+
+      function saveBirthData() {
+        try {
+          const data = {
+            birthDate: document.getElementById('navBirthDate').value,
+            birthTime: document.getElementById('navBirthTime').value,
+            city: document.getElementById('navCity').value,
+            state: document.getElementById('navState').value,
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (e) { /* storage full or blocked */ }
+      }
+
+      // ── Target date initialization ──────────────────────────────────
+      function setTargetToToday() {
+        const today = new Date().toISOString().slice(0, 10);
+        document.getElementById('navTargetDate').value = today;
+      }
+      setTargetToToday();
+      document.getElementById('btnToday').addEventListener('click', setTargetToToday);
+
+      // Load on page ready
+      loadSavedBirthData();
+
+      // Save after successful submit
+      form.addEventListener('submit', () => { saveBirthData(); }, true);
+    })();
+  </script>
+</body>
+
+</html>

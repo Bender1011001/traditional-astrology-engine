@@ -1,14 +1,14 @@
 ---
 project: astrology
 status: complete
-updated: 2026-03-19
+updated: 2026-03-23
 ---
 
 # Astrology Project
 
 ## Resume
-- **Pick up at**: 406 tests green. Remaining untested: `phasis.py`, `mansions.py`, `medical.py`, `decumbiture.py`, `classical_mechanics.py`, `decennials.py`, `primary_directions.py`. Also: expand API integration tests.
-- **Last session**: Extended test coverage from 89 → 406 tests (+356%). New suites: `calculations.py` (33), `prediction.py` (37), `synthesis.py` (25), `dignities.py` (24), `temperament_nodes.py` (24), `horary.py` (36), `stars.py` (25), `geniture.py` (24), `kakosis.py` (17), `aspects.py` (15), `lots.py` (15), `reception.py` (11), `mundane.py` (13), `electional.py` (7), `hyleg.py` (11). Zero code quality issues.
+- **Pick up at**: Daily Navigator fully feature-complete with analytics + upsell funnel. 510 tests green. 0 broken internal links. Consider: week-ahead multi-day view, email delivery, or PDF export.
+- **Last session**: Added GTM/GA4 tracking + custom events (daily_briefing_generated, upsell_click) to daily.html. Added JSON-LD WebApplication schema. Fixed 3 broken internal links (resources.html, advanced.html → techniques.html). Cross-linked Daily Navigator from houses.html, natal-charts.html, predictive-techniques.html, planetary-periods.html. Added target date picker, prev/next day nav, $7 upsell CTA, OG/Twitter meta tags. Moon VoC integrated into recommendations. Fixed SEO-stuffed heading.
 - **Blocked on**: Nothing currently blocked.
 
 ## Status
@@ -122,7 +122,6 @@ The core delineations are now stored in the database to allow for manual fixes a
 ## Key Files
 - `src/app.py` — Entry point for the web server (Documentation at /docs).
 - `src/static/js/reading-app.js` — B2C reading flow (form → free/paid → poll → render). Includes `buildTraceSection()` for rendering computation trace.
-- `src/static/js/seo-bridge.js` — Injects new nav/CTA into legacy SEO content pages.
 - `src/engine/trace_generator.py` — Reusable trace module: generates JSON dict of all computation steps for any chart.
 - `src/services/premium_generator.py` — Background task for premium reports; includes computation trace generation (step 3).
 - `src/api/v1/endpoints/guest_checkout.py` — Guest Stripe checkout (no auth, $7/$29).
@@ -131,7 +130,7 @@ The core delineations are now stored in the database to allow for manual fixes a
 - `src/database/data/glossary.json` — Astrological definitions.
 - `src/engine/chart_calculator.py` — Core astronomical logic.
 - `src/engine/calculate_advanced_mechanics.py` — Core math for electional/horary logic
-- `src/engine/logic.py` — Forensic audit and synthesis engine.
+- `src/engine/forensic_engine.py` — Forensic audit hub (replaced logic.py).
 - `src/engine/classical_mechanics.py` — Antiscia, Dodecatemoria, Planetary Hours engine.
 - `src/engine/dignities.py` — Essential dignity engine based on "Missing Codex".
 - `src/engine/pdf_generator.py` — PDF report generation engine.
@@ -141,6 +140,9 @@ The core delineations are now stored in the database to allow for manual fixes a
 - `scripts/outreach_run.py` — Automated outreach runner (email-only).
 - `scripts/extract_all_traditional_data.py` — Comprehensive data extraction.
 - `scripts/migrate_json_to_db.py` — Migrates JSON data to the SQLAlchemy database.
+- `src/engine/daily_navigator.py` — Daily Navigator engine: synthesizes all timing layers into one briefing.
+- `src/api/v1/endpoints/daily.py` — API endpoint for daily prediction briefings.
+- `src/static/daily.html` — Frontend page for the Daily Navigator.
 
 ## Data Sources
 - `Binder1.txt` — Combined traditional source material (Valens, Firmicus, Lilly, Dorotheus).
@@ -186,12 +188,16 @@ The core delineations are now stored in the database to allow for manual fixes a
 | SyntaxError: duplicate argument | Repeated `house_system` in method signature/calls | Cleansed signature and corrected API calls |
 | High bounce rate | B2B SaaS pitch vs B2C search intent mismatch | Complete site redesign to consumer readings |
 | Zero conversions | Account signup friction | Removed all auth; guest-only checkout flow |
+| SEO CTR penalty | JS DOM mutation left B2B traces for Googlebot | Baked consumer CTA UI directly into HTML and deleted seo-bridge.js |
 | Stripe CSP blocked | Checkout domain not in Content-Security-Policy | Added checkout.stripe.com + js.stripe.com to CSP |
 | All free readings fail | `premium_generator.py` passed `house_system=` to `generate_chart_data()` which doesn't accept it | Removed the unsupported kwarg from the lambda call |
 | Glossary tooltip text rendered inline, garbling all reading text | `basic.js` creates `.glossary-tooltip-popup` elements but `style.css` had NO CSS rules for them — popups showed as visible text | Added 56 lines of tooltip CSS: `display:none` by default, shown on hover/active |
 | New static pages always redirect to index | `app.py` has `_LEGACY_REDIRECTS` list that 301-redirects listed pages BEFORE static file handler sees them | Remove the page from `_LEGACY_REDIRECTS` before it can be served as a static file |
 | Primary directions trace silently empty | `raw["meta"]` uses `lat` not `latitude` for geographic latitude | Use `.get("lat")` not `.get("latitude")` |
 | 31 pages not indexed in GSC, 5 indexed | `robots.txt` blocked `about.html` and `faq.html` despite them being in `sitemap.xml`, and correctly blocked B2B/auth pages | Removed `about.html` and `faq.html` from `robots.txt` disallow list |
+| UnicodeEncodeError crashes pytest on Windows | Pytest captures `sys.stdout` but Windows default `cp1252` encoding crashes on emojis (🦅) output by `logger.py` | Added fallback `sys.stdout.reconfigure(encoding='utf-8', errors='replace')` to console handler in `logger.py` |
+| Silent cache failures for charts | `json.dumps()` in `CacheManager` crashed on `PlanetName` Enum objects | Added `default=str` kwargs to `json.dumps()` |
+| API integration tests failing on /calculate | Endpoint transitioned from returning legacy `astronomical` key to `astronomy` via `ForensicEngine` | Updated `test_api_integration.py` assertions to expect `astronomy` |
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
 - Do not use Day/Night delineations interchangeably—sect matters
