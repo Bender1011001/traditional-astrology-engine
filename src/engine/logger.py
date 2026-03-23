@@ -54,10 +54,17 @@ def configure_logging(app_name="astrology_engine"):
             pass
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(logging.INFO)
-    console_formatter = logging.Formatter(
-        '%(asctime)s - %(levelname)s - [%(module)s] - %(message)s'
-    )
-    console_handler.setFormatter(console_formatter)
+    
+    # Check if running in Google Cloud Run
+    if os.environ.get("K_SERVICE"):
+        # Use structured JSON logging for Cloud Logging ingestion
+        console_handler.setFormatter(JSONFormatter())
+    else:
+        # User readable text for local development
+        console_formatter = logging.Formatter(
+            '%(asctime)s - %(levelname)s - [%(module)s] - %(message)s'
+        )
+        console_handler.setFormatter(console_formatter)
     logger.addHandler(console_handler)
     
     # 2. File Handler (JSON Lines)
