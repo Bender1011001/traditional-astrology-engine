@@ -4,7 +4,7 @@ from src.database.core import get_db
 from src.database.models import ApiKey, User
 from src.core.config import settings
 import hashlib
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 from sqlalchemy.orm import Session
 
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)

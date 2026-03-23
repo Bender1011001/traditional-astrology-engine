@@ -3,7 +3,7 @@ import logging
 import sys
 import json
 import os
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 from logging.handlers import RotatingFileHandler
 
 # Ensure log directory exists
@@ -46,6 +46,12 @@ def configure_logging(app_name="astrology_engine"):
     logger.handlers = []
     
     # 1. Console Handler (Standard Text)
+    # Ensure Windows console doesn't choke on emojis
+    if sys.stdout.encoding.lower() not in ('utf-8', 'utf8'):
+        try:
+            sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        except AttributeError:
+            pass
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(logging.INFO)
     console_formatter = logging.Formatter(

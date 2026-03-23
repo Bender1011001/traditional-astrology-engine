@@ -1,6 +1,6 @@
 import jwt
 import logging
-from datetime import datetime, timezone, timezone, timedelta
+from datetime import datetime, timezone, timedelta
 from typing import Optional
 from fastapi import Header, HTTPException
 from src.core.config import settings

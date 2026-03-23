@@ -1,4 +1,4 @@
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 from typing import Optional
 from fastapi import APIRouter, HTTPException, Request, Depends
 
@@ -8,7 +8,6 @@ from src.api.v1.utils import generate_chart_hash, log_event, result_to_model
 from src.core.ratelimit import rate_limiter
 from src.services.engine_bridge import (
     calculate_chart_async,
-    perform_forensic_audit_async,
     calculate_forecast_async,
     generate_full_nativity_async
 )
@@ -101,7 +100,7 @@ async def generate_chart_b2b(
         db.add(new_record)
         db.commit()
     except Exception as e:
-        print(f"Usage recording failed: {e}")
+        logger.error("Usage recording failed: %s", e)
 
     # 5. Return Result (JSON)
     # Filter result for API response? 

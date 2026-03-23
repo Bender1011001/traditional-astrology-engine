@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone, timezone, date
+from datetime import datetime, timezone, date
 
 from src.core.config import settings
 

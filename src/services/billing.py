@@ -1,5 +1,5 @@
 import stripe
-from datetime import datetime, timezone, timezone, timedelta
+from datetime import datetime, timezone, timedelta
 from sqlalchemy.orm import Session
 from src.core.config import settings
 from src.database.models import User, UserSubscription, SubscriptionPlan
@@ -106,5 +106,5 @@ class BillingService:
         if sub:
             sub.status = "active"
             if stripe_pd:
-                sub.current_period_end = datetime.fromtimestamp(stripe_pd)
+                sub.current_period_end = datetime.fromtimestamp(stripe_pd, tz=timezone.utc)
             db.commit()

@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import sys
 import os
 import logging
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 
 # Ensure the src directory is in the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))

@@ -6,7 +6,7 @@ Supports persistence via SQLite (default) or PostgreSQL.
 import os
 import secrets
 import logging
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 from typing import Optional, Dict, Any, List

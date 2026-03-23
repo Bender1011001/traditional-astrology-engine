@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException
 import logging
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 from src.database.core import get_db

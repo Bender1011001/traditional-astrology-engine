@@ -1,3 +1,9 @@
+# .gcloudignore — reduce Cloud Build upload size
+# This file works like .gitignore for gcloud builds submit
+
+# Include the .gitignore rules
+#!include:.gitignore
+
 # Version control
 .git
 .gitignore
@@ -9,7 +15,7 @@
 .gemini
 .agents
 
-# Python
+# Python cache
 __pycache__
 *.pyc
 *.pyo
@@ -17,23 +23,19 @@ __pycache__
 .pytest_cache
 .mypy_cache
 
-# Build / Debug artifacts
+# Build artifacts
 *.log
 *.zip
 *.pdf
-*.txt
-!requirements.txt
-!LICENSE
 
 # Local dev
-.env
 *.db
 chart_outputs/
 docs/
-scripts/
+/scripts/
 mkdocs.yml
 
-# Test
+# Tests (not needed in Docker image)
 src/tests/
 pytest.ini
 
@@ -41,10 +43,11 @@ pytest.ini
 Binder1.txt
 sources_from_binder.txt
 
-# Deployment configs (not needed in image)
+# Deployment configs
 setup_azure.ps1
 setup_deployment.ps1
 cloudflared_config.yml
+env.yaml
 
 # Marketing / Documentation
 marketing_output.md
@@ -59,6 +62,5 @@ spec_v2_pricing_tiers.md
 technical_architecture_qa.md
 task.md
 
-# Cloud Run secrets
-env.yaml
-.gcloudignore
+# Node modules (if any)
+node_modules/

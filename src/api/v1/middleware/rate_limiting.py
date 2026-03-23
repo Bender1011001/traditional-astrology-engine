@@ -1,5 +1,5 @@
 from fastapi import HTTPException, Request
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 import time
 import redis
 from src.core.config import settings

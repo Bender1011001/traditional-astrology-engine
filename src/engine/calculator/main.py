@@ -247,6 +247,7 @@ def calculate_chart_data(
             lat_val, lon_val, geocode_meta = get_coordinates_with_meta(city, state)
             latitude, longitude = lat_val, lon_val
         except Exception as e:
+            logger.error(f"Geocoding error: {traceback.format_exc()}")
             return {"error": str(e)}
     else:
         geocode_meta = {"source": "override", "note": "Latitude/longitude provided directly to calculator."}
@@ -264,6 +265,7 @@ def calculate_chart_data(
             node_type=node_type,
         )
     except Exception as e:
+        logger.error(f"Chart calculation error: {traceback.format_exc()}")
         return {"error": str(e)}
 
     # Reconstruct Metadata for serialization
@@ -285,7 +287,7 @@ def calculate_chart_data(
         local_tz = pytz.timezone(tz_str)
         _, utc_dt, tz_meta = _localize_with_historical_tz(local_tz, dt)
     except Exception as e:
-        logger.debug("Timezone re-derivation failed: %s", e)
+        logger.debug(f"Timezone re-derivation failed: {traceback.format_exc()}")
         # Keep best-effort defaults; chart.jd is still authoritative for calculations.
         tz_str = tz_str or "unknown"
         tz_meta = tz_meta or {}

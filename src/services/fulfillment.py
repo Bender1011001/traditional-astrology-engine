@@ -1,6 +1,6 @@
 import logging
 import asyncio
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 from starlette.concurrency import run_in_threadpool
 from src.services.engine_bridge import generate_full_nativity_async
 from src.engine.pdf_generator import PDFReportGenerator
@@ -33,19 +33,30 @@ class FulfillmentService:
                 time_str=chart_request.get("time", "12:00"),
                 city=chart_request.get("city"),
                 state=chart_request.get("state", ""),
-                    name=chart_request.get("name", user_name),
-                    # defaults
-                    house_system="W",  # Enforce Whole Sign for Premium Consistency
-                    zodiac_system="T", 
-                    ayanamsa="0",
-                    # Optional medical timing input (historical use only)
-                    decumbiture_utc_iso=chart_request.get("decumbiture_utc_iso"),
-                    decumbiture_jd=chart_request.get("decumbiture_jd"),
-                )
+                name=chart_request.get("name", user_name),
+                # defaults
+                house_system="W",  # Enforce Whole Sign for Premium Consistency
+                zodiac_system="T", 
+                ayanamsa="0",
+                # Optional medical timing input (historical use only)
+                decumbiture_utc_iso=chart_request.get("decumbiture_utc_iso"),
+                decumbiture_jd=chart_request.get("decumbiture_jd"),
+            )
             
             if "error" in chart_data:
                 logger.error("Fulfillment Calculation Failed: %s", chart_data['error'])
-                # TODO: Send "Sorry" email?
+                error_html = f"""
+                <h1>Order Processing Delay</h1>
+                <p>Dear {user_name},</p>
+                <p>We received your order, but our engine encountered an astronomical calculation error specific to the coordinates or time provided.</p>
+                <p>Our team has been notified and we will manually generate your report or issue a full refund within 24 hours.</p>
+                <p>Sincerely,<br>Traditional Astrology</p>
+                """
+                send_email(
+                    to_email=user_email,
+                    subject="Update on Your Astrology Report Order",
+                    html_content=error_html
+                )
                 return
 
             # 2. Generate Report Content (AI vs Algo)

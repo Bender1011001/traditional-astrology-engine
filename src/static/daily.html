@@ -25,6 +25,13 @@
   <meta name="description" content="Get your personal daily astrological briefing based on classical timing techniques: profections, firdaria, zodiacal releasing, transits, and actionable recommendations." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0a0a1a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Astrology" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="canonical" href="https://traditional-astrology.com/daily.html" />
 
   <!-- Open Graph / Social -->
@@ -61,7 +68,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260323daily" />
+  <link rel="stylesheet" href="style.css?v=20260323weekview" />
   <script src="config.js?v=20260310b2c"></script>
 
   <style>
@@ -508,6 +515,140 @@
       color: #c9a84c;
       border-color: rgba(212,175,55,0.3);
     }
+
+    /* ── Week View ────────────────────────────────────────────── */
+    .week-toggle-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .week-toggle-btn {
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
+      color: rgba(212,175,55,0.85);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .week-toggle-btn:hover {
+      background: rgba(212,175,55,0.15);
+      border-color: rgba(212,175,55,0.4);
+    }
+    .week-toggle-btn.active {
+      background: rgba(212,175,55,0.2);
+      border-color: rgba(212,175,55,0.5);
+      color: #d4af37;
+    }
+    .week-strip {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1.5rem;
+    }
+    @media (max-width: 560px) {
+      .week-strip { grid-template-columns: repeat(4, 1fr); }
+    }
+    .week-day-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 0.6rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+    }
+    .week-day-card:hover {
+      border-color: rgba(212,175,55,0.35);
+      background: rgba(212,175,55,0.05);
+    }
+    .week-day-card.selected {
+      border-color: rgba(212,175,55,0.5);
+      background: rgba(212,175,55,0.08);
+      box-shadow: 0 0 12px rgba(212,175,55,0.15);
+    }
+    .week-day-card.best-day {
+      border-color: rgba(100,200,100,0.35);
+    }
+    .week-day-card.worst-day {
+      border-color: rgba(255,100,80,0.35);
+    }
+    .week-day-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .week-day-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .week-day-badges {
+      display: flex;
+      justify-content: center;
+      gap: 3px;
+      margin-top: 0.2rem;
+      min-height: 16px;
+    }
+    .week-badge {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .wb-epitasis { background: #ff8c00; }
+    .wb-voc { background: #fbbf24; }
+    .wb-challenging { background: #f87171; }
+    .wb-supportive { background: #4ade80; }
+    .week-transit-bar {
+      margin-top: 0.3rem;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .week-transit-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+    .fill-supportive { background: rgba(100,200,100,0.6); }
+    .fill-challenging { background: rgba(255,100,80,0.6); }
+    .week-overview-panel {
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(212,175,55,0.03);
+      border: 1px solid rgba(212,175,55,0.12);
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+    }
+    .week-overview-panel strong {
+      color: rgba(212,175,55,0.9);
+    }
+    .week-loading {
+      text-align: center;
+      padding: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
   </style>
 </head>
 
@@ -629,6 +770,9 @@
       const MAX_CACHE = 14;
       function cacheKey(payload) { return JSON.stringify(payload); }
 
+      // Track week view state
+      let weekViewOpen = false;
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -722,6 +866,10 @@
             <span class="day-nav-current">${b.date}</span>
             <button class="day-nav-btn" id="dayNext" title="Next day">Next Day →</button>
           </div>
+          <div class="week-toggle-row">
+            <button class="week-toggle-btn" id="weekViewToggle" title="Show 7-day overview">📅 View Week</button>
+          </div>
+          <div id="weekViewContainer" class="hidden"></div>
         `;
 
         // Forecast Summary
@@ -853,6 +1001,30 @@
         document.getElementById('dayPrev').addEventListener('click', () => shiftDay(currentDate, -1));
         document.getElementById('dayNext').addEventListener('click', () => shiftDay(currentDate, +1));
 
+        // Wire up week view toggle
+        const weekBtn = document.getElementById('weekViewToggle');
+        const weekContainer = document.getElementById('weekViewContainer');
+        weekBtn.addEventListener('click', () => {
+          if (!weekContainer.classList.contains('hidden')) {
+            weekContainer.classList.add('hidden');
+            weekBtn.classList.remove('active');
+            weekBtn.textContent = '📅 View Week';
+            weekViewOpen = false;
+            return;
+          }
+          weekBtn.classList.add('active');
+          weekBtn.textContent = '📅 Hide Week';
+          weekViewOpen = true;
+          loadWeekView(currentDate);
+        });
+
+        // Auto-reopen week view if it was open before navigation
+        if (weekViewOpen) {
+          weekBtn.classList.add('active');
+          weekBtn.textContent = '📅 Hide Week';
+          loadWeekView(currentDate);
+        }
+
         // Wire up share button
         document.getElementById('shareBriefing').addEventListener('click', () => {
           const sum = b.forecast_summary;
@@ -892,6 +1064,150 @@
         document.getElementById('navTargetDate').value = newDate;
         // Auto-resubmit
         form.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+
+      // ── Week View ──────────────────────────────────────────────
+      const weekCache = new Map();
+
+      async function loadWeekView(currentDateStr) {
+        const container = document.getElementById('weekViewContainer');
+        container.classList.remove('hidden');
+
+        // Compute Monday of the current date's week
+        const current = new Date(currentDateStr + 'T12:00:00');
+        const dayOfWeek = current.getDay(); // 0=Sun
+        const monday = new Date(current);
+        monday.setDate(current.getDate() - ((dayOfWeek + 6) % 7)); // shift to Monday
+        const startDate = monday.toISOString().slice(0, 10);
+
+        const birthDate = document.getElementById('navBirthDate').value;
+        const birthTime = document.getElementById('navBirthTime').value;
+        const city = document.getElementById('navCity').value.trim();
+        const state = document.getElementById('navState').value.trim();
+
+        const weekKey = `${birthDate}|${birthTime}|${city}|${state}|${startDate}`;
+
+        // Check week cache
+        if (weekCache.has(weekKey)) {
+          renderWeekStrip(weekCache.get(weekKey), currentDateStr);
+          return;
+        }
+
+        container.innerHTML = '<div class="week-loading">Loading week overview\u2026</div>';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/v1/charts/weekly-briefing`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              date: birthDate,
+              time: birthTime,
+              city: city,
+              state: state,
+              start_date: startDate,
+              days: 7,
+            }),
+          });
+
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ detail: 'Server error' }));
+            container.innerHTML = `<div class="week-loading">Error: ${err.detail || 'Could not load week view'}</div>`;
+            return;
+          }
+
+          const weekData = await res.json();
+          weekCache.set(weekKey, weekData);
+          renderWeekStrip(weekData, currentDateStr);
+
+          if (typeof gtag === 'function') {
+            gtag('event', 'weekly_briefing_loaded', {
+              event_category: 'daily_navigator',
+              start_date: startDate,
+            });
+          }
+        } catch (err) {
+          container.innerHTML = `<div class="week-loading">Error: ${err.message}</div>`;
+        }
+      }
+
+      function renderWeekStrip(weekData, selectedDate) {
+        const container = document.getElementById('weekViewContainer');
+        const overview = weekData.week_overview || {};
+        const days = weekData.days || [];
+        const heatmap = overview.transit_heatmap || [];
+
+        // Find max transit count for bar scaling
+        const maxTransits = Math.max(1, ...heatmap.map(h => h.total));
+
+        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        let stripHtml = '<div class="week-strip">';
+        for (let i = 0; i < days.length; i++) {
+          const day = days[i];
+          const briefing = day.briefing || {};
+          const dateStr = briefing.date || '?';
+          const dt = new Date(dateStr + 'T12:00:00');
+          const dayName = dayNames[dt.getDay()] || '?';
+          const dayNum = dt.getDate();
+          const selected = dateStr === selectedDate ? 'selected' : '';
+
+          // Badges
+          let badges = '';
+          if (briefing.epitasis && briefing.epitasis.active) {
+            badges += '<span class="week-badge wb-epitasis" title="Epitasis active"></span>';
+          }
+          if (briefing.moon && briefing.moon.void_of_course) {
+            badges += '<span class="week-badge wb-voc" title="Moon Void of Course"></span>';
+          }
+
+          // Transit bar
+          const hm = heatmap[i] || {};
+          const sup = hm.supportive || 0;
+          const cha = hm.challenging || 0;
+          const total = hm.total || 1;
+          const supPct = Math.round((sup / maxTransits) * 100);
+          const chaPct = Math.round((cha / maxTransits) * 100);
+
+          // Determine best/worst highlights
+          let extraClass = '';
+          if (overview.best_day && briefing.display_date === overview.best_day) {
+            extraClass = 'best-day';
+          }
+          if (overview.most_cautious_day && briefing.display_date === overview.most_cautious_day) {
+            extraClass = 'worst-day';
+          }
+
+          stripHtml += `
+            <div class="week-day-card ${selected} ${extraClass}" data-date="${dateStr}" title="${briefing.display_date || dateStr}">
+              <div class="week-day-name">${dayName}</div>
+              <div class="week-day-num">${dayNum}</div>
+              <div class="week-day-badges">${badges}</div>
+              <div class="week-transit-bar">
+                <div class="week-transit-fill fill-supportive" style="width:${supPct}%;display:inline-block;"></div>
+                <div class="week-transit-fill fill-challenging" style="width:${chaPct}%;display:inline-block;"></div>
+              </div>
+            </div>`;
+        }
+        stripHtml += '</div>';
+
+        // Overview summary
+        let overviewHtml = '';
+        if (overview.summary) {
+          overviewHtml = `<div class="week-overview-panel">${formatMarkdown(overview.summary)}</div>`;
+        }
+
+        container.innerHTML = stripHtml + overviewHtml;
+
+        // Wire up day card clicks to navigate to that day
+        container.querySelectorAll('.week-day-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const clickedDate = card.dataset.date;
+            if (clickedDate && clickedDate !== selectedDate) {
+              document.getElementById('navTargetDate').value = clickedDate;
+              form.dispatchEvent(new Event('submit', { cancelable: true }));
+            }
+          });
+        });
       }
 
       function renderPanel(icon, title, bodyHtml) {
@@ -953,6 +1269,62 @@
 
       // Save after successful submit
       form.addEventListener('submit', () => { saveBirthData(); }, true);
+    })();
+  </script>
+  <!-- PWA Install Banner -->
+  <div id="pwaInstallBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
+    background:linear-gradient(135deg,rgba(10,10,26,0.97),rgba(20,18,40,0.97));
+    border-top:1px solid rgba(212,175,55,0.25);backdrop-filter:blur(16px);
+    padding:0.85rem 1.25rem;font-family:'Inter',sans-serif;">
+    <div style="max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex:1;min-width:200px;">
+        <img src="/icons/icon-48x48.png" alt="" width="36" height="36" style="border-radius:8px;" />
+        <div>
+          <div style="color:#fff;font-size:0.9rem;font-weight:600;">Install Traditional Astrology</div>
+          <div style="color:rgba(255,255,255,0.5);font-size:0.78rem;">Add to home screen for quick access</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <button id="pwaInstallBtn" style="background:linear-gradient(135deg,#c9a84c,#b8922f);color:#0a0a1a;
+          border:none;padding:0.55rem 1.25rem;border-radius:8px;font-family:'Inter',sans-serif;
+          font-size:0.82rem;font-weight:700;cursor:pointer;">Install</button>
+        <button id="pwaInstallDismiss" style="background:none;border:none;color:rgba(255,255,255,0.4);
+          font-size:1.2rem;cursor:pointer;padding:0.25rem 0.5rem;" aria-label="Dismiss">&times;</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('[PWA] SW registered, scope:', reg.scope))
+            .catch(err => console.warn('[PWA] SW registration failed:', err));
+        });
+      }
+      let deferredPrompt = null;
+      const banner = document.getElementById('pwaInstallBanner');
+      const installBtn = document.getElementById('pwaInstallBtn');
+      const dismissBtn = document.getElementById('pwaInstallDismiss');
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (sessionStorage.getItem('pwa_dismissed')) return;
+        banner.style.display = 'block';
+      });
+      if (installBtn) installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (typeof gtag === 'function') gtag('event', 'pwa_install', { event_category: 'pwa', outcome });
+        deferredPrompt = null;
+        banner.style.display = 'none';
+      });
+      if (dismissBtn) dismissBtn.addEventListener('click', () => {
+        banner.style.display = 'none';
+        sessionStorage.setItem('pwa_dismissed', '1');
+      });
+      window.addEventListener('appinstalled', () => { banner.style.display = 'none'; });
     })();
   </script>
 </body>

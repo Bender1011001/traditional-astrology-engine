@@ -23,3 +23,7 @@ api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
 
 from src.api.v1.endpoints import admin
 api_router.include_router(admin.router, prefix="/admin", tags=["admin"])
+
+from src.api.v1.endpoints import daily
+api_router.include_router(daily.router, prefix="/charts", tags=["daily-navigator"])
+

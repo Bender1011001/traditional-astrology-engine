@@ -22,6 +22,13 @@
   <meta name="keywords" content="traditional birth chart, traditional astrology calculator, traditional natal chart, traditional astrology chart, traditional astrology birth chart, birth chart calculator, free natal chart, classical astrology" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0a0a1a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Astrology" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="canonical" href="https://traditional-astrology.com/" />
 
   <meta property="og:title" content="The Most Complete & Correct Traditional Birth Chart Reading" />
@@ -143,6 +150,7 @@
     </a>
     <div class="nav-links">
       <a href="#get-reading" class="nav-link">Get Your Reading</a>
+      <a href="/daily.html" class="nav-link">Daily Navigator</a>
       <a href="#how-it-works" class="nav-link">How It Works</a>
       <a href="#sample" class="nav-link">Sample</a>
       <a href="#pricing" class="nav-link">Pricing</a>
@@ -423,6 +431,94 @@
   </main>
 
   <script type="module" src="js/reading-app.js?v=20260319progress"></script>
+  <!-- PWA Install Banner -->
+  <div id="pwaInstallBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
+    background:linear-gradient(135deg,rgba(10,10,26,0.97),rgba(20,18,40,0.97));
+    border-top:1px solid rgba(212,175,55,0.25);backdrop-filter:blur(16px);
+    padding:0.85rem 1.25rem;font-family:'Inter',sans-serif;">
+    <div style="max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex:1;min-width:200px;">
+        <img src="/icons/icon-48x48.png" alt="" width="36" height="36" style="border-radius:8px;" />
+        <div>
+          <div style="color:#fff;font-size:0.9rem;font-weight:600;">Install Traditional Astrology</div>
+          <div style="color:rgba(255,255,255,0.5);font-size:0.78rem;">Add to home screen for quick access</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <button id="pwaInstallBtn" style="background:linear-gradient(135deg,#c9a84c,#b8922f);color:#0a0a1a;
+          border:none;padding:0.55rem 1.25rem;border-radius:8px;font-family:'Inter',sans-serif;
+          font-size:0.82rem;font-weight:700;cursor:pointer;transition:transform 0.2s;">Install</button>
+        <button id="pwaInstallDismiss" style="background:none;border:none;color:rgba(255,255,255,0.4);
+          font-size:1.2rem;cursor:pointer;padding:0.25rem 0.5rem;" aria-label="Dismiss">&times;</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // PWA Service Worker Registration + Install Prompt
+    (function() {
+      // Register service worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('[PWA] SW registered, scope:', reg.scope))
+            .catch(err => console.warn('[PWA] SW registration failed:', err));
+        });
+      }
+
+      // Custom install prompt
+      let deferredPrompt = null;
+      const banner = document.getElementById('pwaInstallBanner');
+      const installBtn = document.getElementById('pwaInstallBtn');
+      const dismissBtn = document.getElementById('pwaInstallDismiss');
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Don't show if user dismissed in this session
+        if (sessionStorage.getItem('pwa_dismissed')) return;
+
+        // Show the banner
+        banner.style.display = 'block';
+        banner.style.animation = 'slideUp 0.4s ease';
+      });
+
+      if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log('[PWA] Install outcome:', outcome);
+          if (typeof gtag === 'function') {
+            gtag('event', 'pwa_install', { event_category: 'pwa', outcome: outcome });
+          }
+          deferredPrompt = null;
+          banner.style.display = 'none';
+        });
+      }
+
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+          banner.style.display = 'none';
+          sessionStorage.setItem('pwa_dismissed', '1');
+        });
+      }
+
+      // Hide banner if already installed
+      window.addEventListener('appinstalled', () => {
+        banner.style.display = 'none';
+        deferredPrompt = null;
+        console.log('[PWA] App installed');
+      });
+    })();
+  </script>
+  <style>
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 </body>
 
 </html>

@@ -7,12 +7,11 @@ import swisseph as swe
 
 # Ensure project root is in path
 # Current file is in <ROOT>/tests/regression/
-ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
 try:
-    from src.engine.logic import perform_forensic_audit
     from src.engine.models import Chart, Planet, PlanetName, Sign
 except ImportError as e:
     print(f"❌ Critical Error: Could not import engine from {ROOT_DIR}")
@@ -111,27 +110,52 @@ def run_regression_test():
         if age_key:
             test_age = int(age_key[0].split("_")[-1])
             
-        audit = perform_forensic_audit(
+        from src.engine.forensic_engine import Auditor
+        audit_data = Auditor.perform_audit(
             chart_obj, 
             jd=chart_obj.jd, 
             age=test_age, 
-            birth_date=datetime(bd['year'], bd['month'], bd['day'])
+            birth_dt=datetime(bd['year'], bd['month'], bd['day'])
         )
+        audit = audit_data["analysis"]
+        print(f"DEBUG: VITALITY: {audit.get('vitality')}")
 
         # 3. Assertions
         def get_sign_str(lon):
             idx = int(lon / 30) % 12
             return list(Sign)[idx].value
 
+        def get_nested_val(data, *keys):
+            for k in keys:
+                if isinstance(data, dict):
+                    data = data.get(k)
+                else:
+                    return None
+            return data
+
+        # Use Almuten Engine to get Almuten Figuris
+        from src.engine.advanced_mechanics import AlmutenEngine
+        almuten_data = AlmutenEngine.calculate_almuten(chart_obj)
+        almuten_winner = almuten_data.winner.value if almuten_data and almuten_data.winner else None
+
+        actuals_hyleg = get_nested_val(audit, "vitality", "hyleg", "candidate") or get_nested_val(audit, "vitality", "hyleg")
+        
         actuals = {
             "ascendant_sign": get_sign_str(chart_obj.ascendant),
             "mc_sign": get_sign_str(chart_obj.mc),
-            "almuten_figuris": audit.get("soul_guardian", {}).get("almuten"),
-            "hyleg": audit.get("vitality", {}).get("hyleg")
+            "almuten_figuris": almuten_winner,
+            "hyleg": getattr(actuals_hyleg, "value", actuals_hyleg) if actuals_hyleg else None
         }
         
+        # fallback if hyleg is just a string or enum
+        if isinstance(actuals["hyleg"], dict):
+            hyleg_val = actuals["hyleg"].get("candidate")
+            actuals["hyleg"] = getattr(hyleg_val, "value", hyleg_val)
+        elif hasattr(actuals["hyleg"], "value"):
+            actuals["hyleg"] = actuals["hyleg"].value
+        
         if age_key:
-            actuals[age_key[0]] = audit.get("profections", {}).get("lord_of_year")
+            actuals[age_key[0]] = audit.get("enhanced_profections", {}).get("lord_of_year")
 
         for metric, exp_val in expected.items():
             act_val = actuals.get(metric)

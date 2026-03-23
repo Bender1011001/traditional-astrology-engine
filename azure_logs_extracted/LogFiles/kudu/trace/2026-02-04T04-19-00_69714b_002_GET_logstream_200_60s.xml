@@ -1,5 +1,0 @@
-<step title="Incoming Request" date="2026-02-04T04:19:00.007" instance="69714b" url="/logstream" method="GET" type="request" pid="770,1,16" Host="astrology-engine-central-7387.scm.azurewebsites.net" User-Agent="AZURECLI/2.80.0 (MSI)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="9c679783-0180-11f1-ad38-c85ea98d514e" X-ARR-LOG-ID="9c679783-0180-11f1-ad38-c85ea98d514e" CLIENT-IP="97.206.186.49:3889" X-SITE-DEPLOYMENT-ID="astrology-engine-central-7387" WAS-DEFAULT-HOSTNAME="astrology-engine-central-7387.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream" X-Client-IP="97.206.186.49" X-Client-Port="3889" >
-  <step title="LogStreamHandlerMiddleware.Invoke" date="2026-02-04T04:19:00.177" /><!-- duration: 132ms -->
-  <step title="Error occurred" date="2026-02-04T04:20:00.316" type="error" text="LogStreamManager: ProcessRequest end" /><!-- duration: 13ms -->
-  <step title="Outgoing response" date="2026-02-04T04:20:00.359" type="response" statusCode="200" statusText="OK" /><!-- duration: 17ms -->
-</step><!-- duration: 60372ms -->

@@ -18,3 +18,4 @@ psycopg2-binary
 pydantic-settings
 redis
 mkdocs-material
+cryptography

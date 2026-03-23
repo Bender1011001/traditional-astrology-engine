@@ -1,6 +1,6 @@
 window.CAEL_CONFIG = {
     primaryApiUrl: "https://traditional-astrology.com",
-    fallbackApiUrl: "https://astrology-engine-central-7387.azurewebsites.net",
+    fallbackApiUrl: "https://astrology-engine-jknswoor2a-uc.a.run.app",
     signs: [
         "Aries", "Taurus", "Gemini", "Cancer",
         "Leo", "Virgo", "Libra", "Scorpio",
@@ -25,7 +25,7 @@ window.CAEL_CONFIG = {
     const isFirstParty =
         host === "traditional-astrology.com" ||
         host === "www.traditional-astrology.com" ||
-        host.endsWith(".azurewebsites.net");
+        host.endsWith(".run.app");
 
     if (isLocal || host === "") {
         // Local dev: point to local API server explicitly

@@ -1,7 +1,7 @@
 import os
 import json
 import hashlib
-from datetime import datetime, timezone, timezone, timedelta
+from datetime import datetime, timezone, timedelta
 from typing import Optional, Dict, Any
 import logging
 
@@ -117,7 +117,7 @@ class CacheManager:
         }
         
         try:
-            json_str = json.dumps(data)
+            json_str = json.dumps(data, default=str)
             encrypted = self._encrypt(json_str)
             with open(path, "w", encoding="utf-8") as f:
                 f.write(encrypted)

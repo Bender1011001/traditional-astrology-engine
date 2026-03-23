@@ -21,6 +21,14 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a1a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Astrology" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>Sample Traditional Astrology Reading — See What You'll Get</title>
     <meta name="description"
         content="View a complete sample of a traditional astrology reading. See the exact planetary calculations, essential dignities, and timing techniques used in your personal natal chart.">
@@ -151,6 +159,15 @@
     </footer>
 
     <script src="basic.js?v=20260319brand"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('[PWA] SW registered, scope:', reg.scope))
+          .catch(err => console.warn('[PWA] SW registration failed:', err));
+      });
+    }
+  </script>
 </body>
 
 </html>

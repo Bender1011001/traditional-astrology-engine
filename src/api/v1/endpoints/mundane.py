@@ -1,4 +1,4 @@
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 import swisseph as swe
 from fastapi import APIRouter, HTTPException
 from src.api.v1.schemas import WorldRequest

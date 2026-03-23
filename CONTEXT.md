@@ -7,9 +7,9 @@ updated: 2026-03-23
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Daily Navigator fully feature-complete with analytics + upsell funnel. 510 tests green. 0 broken internal links. Consider: week-ahead multi-day view, email delivery, or PDF export.
-- **Last session**: Added GTM/GA4 tracking + custom events (daily_briefing_generated, upsell_click) to daily.html. Added JSON-LD WebApplication schema. Fixed 3 broken internal links (resources.html, advanced.html → techniques.html). Cross-linked Daily Navigator from houses.html, natal-charts.html, predictive-techniques.html, planetary-periods.html. Added target date picker, prev/next day nav, $7 upsell CTA, OG/Twitter meta tags. Moon VoC integrated into recommendations. Fixed SEO-stuffed heading.
-- **Blocked on**: Nothing currently blocked.
+- **Pick up at**: Site LIVE on Google Cloud Run (`astrology-engine-jknswoor2a-uc.a.run.app`). Custom domain mapping created — **DNS records need to be updated at registrar** to point `traditional-astrology.com` to Google's IPs (4x A records, 4x AAAA records). PWA install banner working. 514 tests green.
+- **Last session**: Deployed to Google Cloud Run (project `astrology-engine-prod`, region `us-central1`). Fixed critical CSP trailing-space bug that crashed h11 on every request. Removed stale Azure URL from connect-src. Added Cloud Run wildcard (`https://*.run.app`) to connect-src. Added `env.yaml` generator script + deploy script. Added PWA install banner (index.html + daily.html). Fixed SW cache-busting mismatch (removed query strings from APP_SHELL, added query-strip fallback in cacheFirst). Week view UI added to daily.html (7-day heatmap strip + overview panel). 
+- **Blocked on**: DNS propagation — user needs to update A/AAAA records at domain registrar.
 
 ## Status
 - **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments), Computation Trace ("Show Our Work") integrated.
@@ -198,6 +198,12 @@ The core delineations are now stored in the database to allow for manual fixes a
 | UnicodeEncodeError crashes pytest on Windows | Pytest captures `sys.stdout` but Windows default `cp1252` encoding crashes on emojis (🦅) output by `logger.py` | Added fallback `sys.stdout.reconfigure(encoding='utf-8', errors='replace')` to console handler in `logger.py` |
 | Silent cache failures for charts | `json.dumps()` in `CacheManager` crashed on `PlanetName` Enum objects | Added `default=str` kwargs to `json.dumps()` |
 | API integration tests failing on /calculate | Endpoint transitioned from returning legacy `astronomical` key to `astronomy` via `ForensicEngine` | Updated `test_api_integration.py` assertions to expect `astronomy` |
+| Daily Navigator crashes on dict planets/houses | `calculate_chart_data` returns planets as `{name: data}` dict and houses as `{int: cusp}` dict, but `_rebuild_chart_model` assumed list format | Added dict-handling branches for both planets and houses in `_rebuild_chart_model` |
+| Planet constructor rejects `sign` kwarg | `Planet.sign` is a computed `@property` from longitude, not a dataclass field | Removed `sign=` from `Planet()` constructor calls |
+| Chart constructor rejects `house_cusps` kwarg | `Chart` model uses `houses: Optional[Dict[int, float]]`, not `house_cusps: List[float]` | Changed to pass `houses=` dict instead |
+| CSP trailing space crashes h11 on Cloud Run | CSP header ending with `; ` (space after semicolon) causes `h11.LocalProtocolError: Illegal header value` on every request | Remove trailing space/semicolon from last CSP directive |
+| Root-level routes shadowed by StaticFiles mount | `app.mount("/", StaticFiles(html=True))` catches ALL paths before `@app.get("/healthz")` — returns 404 for HTML file not found | Use `/api/healthz` prefix so API router handles it before static mount |
+| `.gcloudignore` `scripts/` excludes `src/scripts/` | `scripts/` glob matches both root `scripts/` and `src/scripts/` — latter is needed by `premium_generator.py` import chain | Use `/scripts/` (root-only) in `.gcloudignore` |
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
 - Do not use Day/Night delineations interchangeably—sect matters

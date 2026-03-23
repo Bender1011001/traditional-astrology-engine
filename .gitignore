@@ -83,3 +83,6 @@ models_list.txt
 !src/**/*.md
 !.agent/**/*.md
 
+
+# Cloud Run env vars (contains secrets)
+env.yaml

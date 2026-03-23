@@ -1,6 +1,6 @@
 import redis
 import logging
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 from src.core.config import settings
 
 logger = logging.getLogger(__name__)

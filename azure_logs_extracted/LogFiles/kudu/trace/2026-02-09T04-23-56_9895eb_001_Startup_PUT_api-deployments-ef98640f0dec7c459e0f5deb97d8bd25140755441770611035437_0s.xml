@@ -1,3 +1,0 @@
-<step title="Startup Request" date="2026-02-09T04:23:56.811" instance="9895eb" url="/api/deployments/ef98640f0dec7c459e0f5deb97d8bd25140755441770611035437" method="PUT" type="request" pid="770,1,7" ScmType="LocalGit" >
-  <step title="Cleanup Xml Logs" date="2026-02-09T04:23:56.853" /><!-- duration: 68ms -->
-</step><!-- duration: 122ms -->

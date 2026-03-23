@@ -10,14 +10,7 @@ async def calculate_chart_async(*args, **kwargs):
     """
     return await run_in_threadpool(calculate_chart_data, *args, **kwargs)
 
-async def perform_forensic_audit_async(*args, **kwargs):
-    # Mapping legacy audit call to new Forensic Engine (subset)
-    # This might fail if arguments differ exactly, but ForensicEngine takes raw strings usually.
-    # Actually perform_forensic_audit took (chart, jd, ...).
-    # ForensicEngine.generate_full_nativity takes strings.
-    # We should probably DEPRECATE this function or wrap it correctly.
-    # For now, let's leave it as a placeholder or remove it if forensic.py is updated.
-    pass
+
 
 async def calculate_forecast_async(*args, **kwargs):
     return await run_in_threadpool(calculate_5_day_forecast, *args, **kwargs)

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 import secrets
 import hashlib
-from datetime import datetime, timezone, timezone
+from datetime import datetime, timezone
 
 router = APIRouter()
 

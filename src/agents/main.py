@@ -12,7 +12,6 @@ if project_root not in sys.path:
 
 from src.engine.chart_calculator import calculate_chart_data
 from src.engine.models import Chart, Planet, PlanetName, Sign
-from src.engine.logic import perform_forensic_audit
 from src.engine.chat_oracle import get_chat_response
 
 class AstroAgent:
@@ -99,14 +98,30 @@ class AstroAgent:
             analysis_dt.hour + analysis_dt.minute / 60.0 + analysis_dt.second / 3600.0
         )
 
-        return perform_forensic_audit(
+        from src.engine.forensic_engine import Auditor
+        
+        audit_data = Auditor.perform_audit(
             chart,
             chart.jd or 0.0,
-            age=age,
-            birth_date=birth_dt,
-            analysis_date=analysis_dt,
-            analysis_jd=analysis_jd
+            birth_dt=birth_dt,
+            ans_date=analysis_dt,
+            age=age
         )
+        
+        technical_data = {
+            "analysis": audit_data["analysis"],
+            "planets_forensic": audit_data["planets_forensic"],
+            "astronomy": {
+                "houses": chart.houses or {}
+            }
+        }
+        
+        legacy = Auditor._map_to_legacy_report(technical_data, chart)
+        legacy["rule_ledger"] = audit_data["rule_ledger"]
+        legacy["advanced_mechanics"] = audit_data["analysis"].get("advanced_mechanics")
+        legacy["horary_physics"] = audit_data["analysis"].get("horary_physics")
+        
+        return legacy
 
     def oracle(self, query: str, context_data: dict) -> str:
         """Consult the Chat Oracle with specific context."""

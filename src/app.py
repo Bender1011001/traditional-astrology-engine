@@ -114,6 +114,9 @@ class CanonicalDomainMiddleware(BaseHTTPMiddleware):
         # Skip for test/dev hosts (e.g. unit tests using base_url="http://test")
         if host in {"test", "testserver"} or "." not in host:
             return await call_next(request)
+        # Skip for Cloud Run URLs — they handle HTTPS natively
+        if host.endswith(".run.app"):
+            return await call_next(request)
 
         # Redirect www.traditional-astrology.com and http to https://traditional-astrology.com
         if host.startswith("www.") or scheme == "http":
@@ -132,15 +135,18 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["X-XSS-Protection"] = "1; mode=block"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-        response.headers["Content-Security-Policy"] = (
+        csp = (
             "default-src 'self'; "
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://js.stripe.com; "
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.googletagmanager.com https://cdn.jsdelivr.net; "
             "font-src 'self' https://fonts.gstatic.com; "
             "img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.doubleclick.net https://fastapi.tiangolo.com https://*.stripe.com; "
-            "connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 https://traditional-astrology.com https://astrology-engine-central-7387.azurewebsites.net https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com https://checkout.stripe.com https://api.stripe.com; "
+            "connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 https://traditional-astrology.com https://*.run.app https://photon.komoot.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com https://checkout.stripe.com https://api.stripe.com; "
             "frame-src https://checkout.stripe.com https://js.stripe.com; "
+            "worker-src 'self'; "
+            "manifest-src 'self'"
         )
+        response.headers["Content-Security-Policy"] = csp
         return response
 
 # CSRF Protection Middleware
@@ -191,6 +197,17 @@ async def global_exception_handler(request: Request, exc: Exception):
 # --- ROUTER MOUNT ---
 app.include_router(v1_router, prefix="/api/v1")
 app.include_router(v2_router, prefix="/api/v2")
+
+# --- HEALTH CHECK ---
+_startup_time = time.time()
+
+@app.get("/api/healthz", include_in_schema=False)
+async def healthz():
+    return {
+        "status": "healthy",
+        "version": app.version,
+        "uptime_seconds": round(time.time() - _startup_time, 1),
+    }
 
 # --- LEGACY PAGE REDIRECTS ---
 # All old B2B/auth/tool pages redirect to the main B2C index.
