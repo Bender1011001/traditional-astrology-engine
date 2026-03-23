@@ -112,7 +112,7 @@ def main():
 
         # Get the service URL
         print("\n\n📡 Service URL:")
-        run(f"gcloud run services describe {SERVICE_NAME} --region {REGION} --format 'value(status.url)'")
+        run(f'gcloud run services describe {SERVICE_NAME} --region {REGION} --format="value(status.url)"', check=False)
 
     print("\n\n✨ Deployment complete!")
 

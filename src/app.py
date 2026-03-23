@@ -149,12 +149,26 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["Content-Security-Policy"] = csp
         return response
 
+class CacheControlMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+        if request.method == "GET" and response.status_code == 200:
+            path = request.url.path
+            # Static assets cache aggressively
+            if any(path.endswith(ext) for ext in [".js", ".css", ".png", ".jpg", ".jpeg", ".ico", ".svg", ".woff2", ".webp"]):
+                response.headers["Cache-Control"] = "public, max-age=86400"
+            # HTML pages and root revalidate
+            elif path.endswith(".html") or path == "/" or path.startswith("/index"):
+                response.headers["Cache-Control"] = "public, max-age=300, must-revalidate"
+        return response
+
 # CSRF Protection Middleware
 from src.api.v1.middleware.csrf import CSRFProtectionMiddleware
 
 app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(CanonicalDomainMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(CacheControlMiddleware)
 app.add_middleware(CSRFProtectionMiddleware)
 
 # CORS Configuration
