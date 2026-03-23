@@ -480,6 +480,34 @@
       transform: translateY(-1px);
       box-shadow: 0 4px 20px rgba(212,175,55,0.3);
     }
+
+    /* Share button */
+    .share-row {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .share-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    .share-btn.copied {
+      color: #c9a84c;
+      border-color: rgba(212,175,55,0.3);
+    }
   </style>
 </head>
 
@@ -596,6 +624,11 @@
       const resultsSection = document.getElementById('briefingResults');
       const submitBtn = document.getElementById('navSubmitBtn');
 
+      // Session cache for instant prev/next day revisits
+      const briefingCache = new Map();
+      const MAX_CACHE = 14;
+      function cacheKey(payload) { return JSON.stringify(payload); }
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -626,18 +659,33 @@
         if (targetDate) payload.target_date = targetDate;
 
         try {
-          const res = await fetch(`${API_BASE}/api/v1/charts/daily-briefing`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          });
+          const key = cacheKey(payload);
+          let data;
 
-          if (!res.ok) {
-            const err = await res.json().catch(() => ({ detail: 'Server error' }));
-            throw new Error(err.detail || `HTTP ${res.status}`);
+          if (briefingCache.has(key)) {
+            data = briefingCache.get(key);
+          } else {
+            const res = await fetch(`${API_BASE}/api/v1/charts/daily-briefing`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+
+            if (!res.ok) {
+              const err = await res.json().catch(() => ({ detail: 'Server error' }));
+              throw new Error(err.detail || `HTTP ${res.status}`);
+            }
+
+            data = await res.json();
+
+            // Store in cache (evict oldest if full)
+            if (briefingCache.size >= MAX_CACHE) {
+              const oldest = briefingCache.keys().next().value;
+              briefingCache.delete(oldest);
+            }
+            briefingCache.set(key, data);
           }
 
-          const data = await res.json();
           renderBriefing(data);
 
           // Track successful briefing generation in GA4
@@ -789,6 +837,9 @@
           </div>
         `;
 
+        // Share button
+        html += `<div class="share-row"><button class="share-btn" id="shareBriefing">📋 Share This Briefing</button></div>`;
+
         // Disclaimer
         html += `<div class="disclaimer-bar">Historical Use Only — Not medical, financial, or legal advice. For entertainment and spiritual research purposes.</div>`;
 
@@ -801,6 +852,37 @@
         const currentDate = b.date; // YYYY-MM-DD
         document.getElementById('dayPrev').addEventListener('click', () => shiftDay(currentDate, -1));
         document.getElementById('dayNext').addEventListener('click', () => shiftDay(currentDate, +1));
+
+        // Wire up share button
+        document.getElementById('shareBriefing').addEventListener('click', () => {
+          const sum = b.summary;
+          const moon = b.moon;
+          const rec = b.recommendations;
+          const text = [
+            `✦ Daily Cosmic Briefing — ${b.date}`,
+            ``,
+            `☉ ${sum}`,
+            ``,
+            moon ? `🌙 Moon in ${moon.sign} (${moon.phase})${moon.void_of_course ? ' — Void of Course ⚠️' : ''}` : '',
+            `🎯 Primary Time Lord: ${rec.primary_time_lord}`,
+            `✅ Do: ${rec.do[0]}`,
+            `❌ Avoid: ${rec.avoid[0]}`,
+            ``,
+            `Get your free daily briefing → https://traditional-astrology.com/daily.html`,
+          ].filter(Boolean).join('\n');
+
+          if (navigator.share) {
+            navigator.share({ title: `Cosmic Briefing — ${b.date}`, text });
+          } else {
+            navigator.clipboard.writeText(text).then(() => {
+              const btn = document.getElementById('shareBriefing');
+              btn.textContent = '✓ Copied!';
+              btn.classList.add('copied');
+              setTimeout(() => { btn.textContent = '📋 Share This Briefing'; btn.classList.remove('copied'); }, 2000);
+            });
+          }
+          if (typeof gtag === 'function') gtag('event', 'share_briefing', { event_category: 'daily_navigator' });
+        });
       }
 
       function shiftDay(dateStr, delta) {
