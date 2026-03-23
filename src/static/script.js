@@ -694,8 +694,16 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
         });
 
         if (!response.ok) {
-            const err = await response.json();
-            throw new Error(err.detail || 'No response from engine.');
+            const err = await response.json().catch(() => ({}));
+            let msg = 'No response from engine.';
+            if (Array.isArray(err?.detail)) {
+                msg = err.detail.map(d => `${d.loc ? d.loc.slice(-1)[0] : 'field'}: ${d.msg}`).join("; ");
+            } else if (typeof err?.detail === "string") {
+                msg = err.detail;
+            } else if (err?.detail?.message) {
+                msg = err.detail.message;
+            }
+            throw new Error(msg);
         }
 
         const result = await response.json();

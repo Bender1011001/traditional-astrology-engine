@@ -105,7 +105,15 @@ async function requestFreeReading(payload) {
                 return;
             }
             const err = await resp.json().catch(() => ({}));
-            throw new Error(err?.detail?.message || err?.detail || "Request failed.");
+            let msg = "Request failed.";
+            if (Array.isArray(err?.detail)) {
+                msg = err.detail.map(d => `${d.loc ? d.loc.slice(-1)[0] : 'field'}: ${d.msg}`).join("; ");
+            } else if (typeof err?.detail === "string") {
+                msg = err.detail;
+            } else if (err?.detail?.message) {
+                msg = err.detail.message;
+            }
+            throw new Error(msg);
         }
 
         const data = await resp.json();
