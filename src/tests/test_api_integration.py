@@ -24,6 +24,15 @@ async def test_healthz_endpoint():
         assert "uptime_seconds" in data
         assert isinstance(data["uptime_seconds"], (int, float))
 
+
+@pytest.mark.asyncio
+async def test_custom_404_page():
+    """Verify non-existent paths return custom 404 page."""
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
+        response = await ac.get("/this-page-does-not-exist.html")
+        assert response.status_code == 404
+        assert "Lost Among the Stars" in response.text
+
 @pytest.mark.asyncio
 async def test_calculate_endpoint_free():
     payload = {

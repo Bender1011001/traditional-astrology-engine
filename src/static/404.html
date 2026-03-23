@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Lost Among the Stars | Traditional Astrology</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at 50% 20%, #1a1040 0%, #0a0a1a 60%, #050510 100%);
+      color: #e0d8c8;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+    /* Animated stars */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 90% 30%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 15% 50%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 85% 85%, rgba(255,255,255,0.4), transparent);
+      animation: twinkle 4s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+    }
+    .error-code {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(5rem, 15vw, 9rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #c9a84c 0%, #f5e6b8 40%, #c9a84c 60%, #a67c2e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: none;
+    }
+    .subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: #c9a84c;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .message {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(224, 216, 200, 0.75);
+      margin-bottom: 2.5rem;
+    }
+    .home-link {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #0a0a1a;
+      background: linear-gradient(135deg, #c9a84c, #f5e6b8, #c9a84c);
+      border-radius: 4px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .home-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(201, 168, 76, 0.35);
+    }
+    .nav-links {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: rgba(201, 168, 76, 0.7);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #c9a84c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="error-code">404</div>
+    <div class="subtitle">Lost Among the Stars</div>
+    <p class="message">
+      The celestial path you seek does not exist in this chart.
+      Perhaps the stars have realigned — return to the beginning
+      and consult the heavens anew.
+    </p>
+    <a href="/" class="home-link">Return to the Chart</a>
+    <div class="nav-links">
+      <a href="/daily.html">Daily Navigator</a>
+      <a href="/about.html">About</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/sample-reading.html">Sample Reading</a>
+    </div>
+  </div>
+</body>
+</html>
