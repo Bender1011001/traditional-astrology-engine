@@ -7,9 +7,13 @@ updated: 2026-03-23
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Site LIVE on Google Cloud Run (`astrology-engine-jknswoor2a-uc.a.run.app`). Custom domain mapping created — **DNS records need to be updated at Cloudflare** to point `traditional-astrology.com` to Google's IPs (4x A + 4x AAAA records, DNS-only/gray cloud). 516 tests green.
-- **Last session**: Deployed to Google Cloud Run. Fixed CSP trailing-space bug, StaticFiles route shadowing for healthz, CanonicalDomainMiddleware .run.app skip. Added custom 404 page (celestial theme, auto-served by Starlette). Enabled kaniko Docker layer caching (72hr TTL). Cleaned up all Azure artifacts. Updated deploy script to use env.yaml. PWA install banner working.
-- **Blocked on**: DNS update at Cloudflare — still resolving to old Azure IP `40.122.36.65`.
+- **Pick up at**: Site fully **LIVE and SECURE** on Google Cloud Run (`https://traditional-astrology.com`). DNS records successfully point to Google's IPs and Google trust certificates are verified. 516 tests green.
+- **Last session**: Validated DNS propagation and SSL certificate issuance. Deployed Phase 2 Continuous Improvements:
+  1. **Static Asset Edge Caching**: Added `CacheControlMiddleware` (`max-age=86400` for assets, `300` for HTML) to improve Lighthouse/Web Vitals.
+  2. **Graceful Error Parsing**: Updated `reading-app.js` and `script.js` to map and join FastAPI 422 array responses instead of displaying `[object Object]` alerts.
+  3. **Cloud Logging Observability**: Upgraded `ActivityLogger` to auto-detect `K_SERVICE` env var and swap to `JSONFormatter` on `sys.stdout` for native ingestion into Google Cloud Logging.
+  4. **UI Loading Feedback**: Fixed `submitBtn` so `.btn-loading` span automatically toggles visibility and hides `.btn-text` when calling the API, fixing stagnant button UI.
+- **Blocked on**: Nothing. The B2C pipeline, deployment, custom domains, monitoring, and PWA systems are entirely operational.
 
 ## Status
 - **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments), Computation Trace ("Show Our Work") integrated.
@@ -206,6 +210,8 @@ The core delineations are now stored in the database to allow for manual fixes a
 | CSP trailing space crashes h11 on Cloud Run | CSP header ending with `; ` (space after semicolon) causes `h11.LocalProtocolError: Illegal header value` on every request | Remove trailing space/semicolon from last CSP directive |
 | Root-level routes shadowed by StaticFiles mount | `app.mount("/", StaticFiles(html=True))` catches ALL paths before `@app.get("/healthz")` — returns 404 for HTML file not found | Use `/api/healthz` prefix so API router handles it before static mount |
 | `.gcloudignore` `scripts/` excludes `src/scripts/` | `scripts/` glob matches both root `scripts/` and `src/scripts/` — latter is needed by `premium_generator.py` import chain | Use `/scripts/` (root-only) in `.gcloudignore` |
+| Cloud Run logs show as text | Standard python `logging` writes text lines to `sys.stdout` which Cloud Logging doesn't parse | Check for `os.environ.get("K_SERVICE")` and inject a custom `JSONFormatter` into `StreamHandler` |
+| `[object Object]` on validation error | FastAPI 422 errors return `err.detail` as a list of dicts (`[{"loc": ..., "msg": ...}]`) which crashes `alert(err)` | Map the array to extract `{d.loc[x]}: {d.msg}` into a unified string |
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py
 - Do not use Day/Night delineations interchangeably—sect matters
