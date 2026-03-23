@@ -150,3 +150,34 @@ class TestDailyNavigatorEngine:
         assert isinstance(moon["void_of_course"], bool)
         assert isinstance(moon["waxing"], bool)
         assert 0 <= moon["degree"] < 30
+
+    def test_different_target_dates(self):
+        """Briefings for different dates should return different date fields and
+        potentially different Moon data, confirming date routing works."""
+        chart = _make_test_chart()
+        birth_dt = datetime(1990, 7, 15, 14, 0)
+        birth_jd = 2448090.0833
+
+        briefing_a = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, datetime(2026, 3, 20)
+        )
+        briefing_b = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, datetime(2026, 3, 25)
+        )
+
+        assert briefing_a["date"] == "2026-03-20"
+        assert briefing_b["date"] == "2026-03-25"
+        # Moon should differ across 5 days (it moves ~13°/day)
+        assert briefing_a["moon"]["sign"] != briefing_b["moon"]["sign"] or \
+               briefing_a["moon"]["degree"] != briefing_b["moon"]["degree"]
+
+    def test_recommendations_urgency_valid(self):
+        """Urgency must be one of the expected severity levels."""
+        chart = _make_test_chart()
+        birth_dt = datetime(1990, 7, 15, 14, 0)
+        birth_jd = 2448090.0833
+        target_date = datetime(2026, 3, 23)
+
+        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        rec = briefing["recommendations"]
+        assert rec["urgency"] in ("low", "moderate", "high", "critical")
