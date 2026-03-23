@@ -8,6 +8,7 @@ if ROOT_DIR not in sys.path:
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse, RedirectResponse
 import logging
@@ -166,6 +167,7 @@ class CacheControlMiddleware(BaseHTTPMiddleware):
 from src.api.v1.middleware.csrf import CSRFProtectionMiddleware
 
 app.add_middleware(RequestLoggingMiddleware)
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(CanonicalDomainMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(CacheControlMiddleware)
@@ -197,7 +199,8 @@ from fastapi.exceptions import RequestValidationError
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=422,
-        content={"success": False, "detail": str(exc.errors()), "body": str(exc.body)},
+        # Return the actual array instead of stringified python dicts
+        content={"success": False, "detail": exc.errors()},
     )
 
 @app.exception_handler(Exception)
