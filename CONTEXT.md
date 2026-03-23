@@ -7,9 +7,9 @@ updated: 2026-03-23
 # Astrology Project
 
 ## Resume
-- **Pick up at**: Site LIVE on Google Cloud Run (`astrology-engine-jknswoor2a-uc.a.run.app`). Custom domain mapping created — **DNS records need to be updated at registrar** to point `traditional-astrology.com` to Google's IPs (4x A records, 4x AAAA records). PWA install banner working. 514 tests green.
-- **Last session**: Deployed to Google Cloud Run (project `astrology-engine-prod`, region `us-central1`). Fixed critical CSP trailing-space bug that crashed h11 on every request. Removed stale Azure URL from connect-src. Added Cloud Run wildcard (`https://*.run.app`) to connect-src. Added `env.yaml` generator script + deploy script. Added PWA install banner (index.html + daily.html). Fixed SW cache-busting mismatch (removed query strings from APP_SHELL, added query-strip fallback in cacheFirst). Week view UI added to daily.html (7-day heatmap strip + overview panel). 
-- **Blocked on**: DNS propagation — user needs to update A/AAAA records at domain registrar.
+- **Pick up at**: Site LIVE on Google Cloud Run (`astrology-engine-jknswoor2a-uc.a.run.app`). Custom domain mapping created — **DNS records need to be updated at Cloudflare** to point `traditional-astrology.com` to Google's IPs (4x A + 4x AAAA records, DNS-only/gray cloud). 516 tests green.
+- **Last session**: Deployed to Google Cloud Run. Fixed CSP trailing-space bug, StaticFiles route shadowing for healthz, CanonicalDomainMiddleware .run.app skip. Added custom 404 page (celestial theme, auto-served by Starlette). Enabled kaniko Docker layer caching (72hr TTL). Cleaned up all Azure artifacts. Updated deploy script to use env.yaml. PWA install banner working.
+- **Blocked on**: DNS update at Cloudflare — still resolving to old Azure IP `40.122.36.65`.
 
 ## Status
 - **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments), Computation Trace ("Show Our Work") integrated.
@@ -36,18 +36,20 @@ updated: 2026-03-23
 - PyJWT (Authentication)
 
 
-## Deployment (Azure)
+## Deployment (Google Cloud Run)
 
-- **Platform**: Microsoft Azure (Web App for Containers)
-- **Orchestration**: `setup_azure.ps1` (initial) and `fix_azure_recommendations.ps1` (production upgrades)
-- **High Availability**: 
-  - **App Service**: Zone-redundant (S1 SKU)
-  - **Database**: PostgreSQL Flexible Server with Zone Redundant HA (General Purpose SKU)
-  - **Registry**: ACR Premium with Geo-replication (Central US <-> East US 2)
-- **Resilience**: Geo-redundant backups enabled for PostgreSQL.
-- **Monitoring**: Azure Service Health alerts configured for infrastructure events.
+- **Platform**: Google Cloud Run (managed, serverless containers)
+- **Project**: `astrology-engine-prod`
+- **Region**: `us-central1`
+- **Service URL**: `https://astrology-engine-jknswoor2a-uc.a.run.app`
+- **Custom Domain**: `traditional-astrology.com` (mapped, pending DNS)
+- **Resources**: 512Mi memory, 1 CPU, 0-3 instances, 300s timeout
+- **Build**: `gcloud builds submit` with kaniko caching (72hr TTL)
+- **Deploy**: `python scripts/deploy_cloudrun.py` or manual `gcloud run deploy --env-vars-file env.yaml`
 - **Entry Point**: `uvicorn src.app:app` (defined in `Dockerfile`)
 - **Static Files**: Served by FastAPI via `src/app.py` mount (Single Service Architecture)
+- **Health Check**: `GET /api/healthz` → `{"status": "healthy", "version": "2.0.0"}`
+- **Custom 404**: `src/static/404.html` (auto-served by Starlette StaticFiles)
 
 ## AI Configuration
 - **Model**: Google Gemini Flash (via OpenRouter)

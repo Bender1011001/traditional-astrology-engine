@@ -1,21 +1,23 @@
 """Build and deploy the astrology engine to Google Cloud Run.
 
 Usage:
-    python scripts/deploy_cloudrun.py [--build-only] [--deploy-only]
+    python scripts/deploy_cloudrun.py [--build-only] [--deploy-only] [--run-tests]
 
 Requires:
     - gcloud CLI authenticated
     - Project set to astrology-engine-prod
-    - .env file with required environment variables
+    - env.yaml with environment variables (generate via scripts/gen_env_yaml.py)
 """
 import subprocess
 import sys
 import os
+import time
 
 PROJECT_ID = "astrology-engine-prod"
 REGION = "us-central1"
 SERVICE_NAME = "astrology-engine"
 IMAGE = f"gcr.io/{PROJECT_ID}/{SERVICE_NAME}"
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def run(cmd: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -25,6 +27,7 @@ def run(cmd: str, check: bool = True) -> subprocess.CompletedProcess:
     print(f"{'='*60}")
     result = subprocess.run(
         cmd, shell=True, capture_output=False, text=True,
+        cwd=ROOT_DIR,
         env={**os.environ, "CLOUDSDK_CORE_DISABLE_PROMPTS": "1"},
     )
     if check and result.returncode != 0:
@@ -33,63 +36,62 @@ def run(cmd: str, check: bool = True) -> subprocess.CompletedProcess:
     return result
 
 
-def load_env_vars() -> dict:
-    """Load environment variables from .env file."""
-    env_vars = {}
-    env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
+def ensure_env_yaml():
+    """Ensure env.yaml exists, generating it from .env if needed."""
+    env_yaml_path = os.path.join(ROOT_DIR, "env.yaml")
+    env_path = os.path.join(ROOT_DIR, ".env")
+
+    if os.path.exists(env_yaml_path):
+        # Check if .env is newer than env.yaml
+        if os.path.exists(env_path):
+            env_mtime = os.path.getmtime(env_path)
+            yaml_mtime = os.path.getmtime(env_yaml_path)
+            if env_mtime > yaml_mtime:
+                print("   ⚠️  .env is newer than env.yaml — regenerating...")
+                run(f'python "{os.path.join(ROOT_DIR, "scripts", "gen_env_yaml.py")}"')
+        return
+
     if not os.path.exists(env_path):
-        print(f"ERROR: .env file not found at {env_path}")
+        print("ERROR: Neither env.yaml nor .env found. Cannot deploy.")
         sys.exit(1)
 
-    with open(env_path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#"):
-                continue
-            key, _, value = line.partition("=")
-            key = key.strip()
-            value = value.strip()
-            # Remove surrounding quotes if present
-            if len(value) >= 2 and value[0] == value[-1] and value[0] in ('"', "'"):
-                value = value[1:-1]
-            if key:
-                env_vars[key] = value
-    return env_vars
-
-
-def build_env_flag(env_vars: dict) -> str:
-    """Build the --set-env-vars flag for gcloud run deploy."""
-    pairs = []
-    for key, value in env_vars.items():
-        # Escape commas in values (gcloud uses comma as delimiter)
-        safe_value = value.replace(",", "\\,")
-        pairs.append(f"{key}={safe_value}")
-    return ",".join(pairs)
+    print("   📝 Generating env.yaml from .env...")
+    run(f'python "{os.path.join(ROOT_DIR, "scripts", "gen_env_yaml.py")}"')
 
 
 def main():
     args = sys.argv[1:]
     build_only = "--build-only" in args
     deploy_only = "--deploy-only" in args
+    run_tests = "--run-tests" in args
 
-    print(f"Project: {PROJECT_ID}")
-    print(f"Region:  {REGION}")
-    print(f"Service: {SERVICE_NAME}")
-    print(f"Image:   {IMAGE}")
+    print(f"\n🌟 Astrology Engine Deployment")
+    print(f"   Project: {PROJECT_ID}")
+    print(f"   Region:  {REGION}")
+    print(f"   Service: {SERVICE_NAME}")
+    print(f"   Image:   {IMAGE}")
+
+    # Step 0: Run tests (optional)
+    if run_tests:
+        print("\n\n🧪 STEP 0: Running tests...")
+        result = run("pytest src/tests/ -q --tb=short", check=False)
+        if result.returncode != 0:
+            print("❌ Tests failed! Aborting deployment.")
+            sys.exit(1)
+        print("✅ All tests passed.")
 
     # Step 1: Build and push image via Cloud Build
     if not deploy_only:
         print("\n\n🔨 STEP 1: Building Docker image via Cloud Build...")
+        start = time.time()
         run(f"gcloud builds submit --tag {IMAGE} --timeout=600")
-        print("✅ Image built and pushed successfully.")
+        elapsed = time.time() - start
+        print(f"✅ Image built and pushed in {elapsed:.0f}s.")
 
     # Step 2: Deploy to Cloud Run
     if not build_only:
         print("\n\n🚀 STEP 2: Deploying to Cloud Run...")
-        env_vars = load_env_vars()
-        print(f"   Loaded {len(env_vars)} environment variables from .env")
-
-        env_flag = build_env_flag(env_vars)
+        ensure_env_yaml()
 
         deploy_cmd = (
             f"gcloud run deploy {SERVICE_NAME} "
@@ -103,7 +105,7 @@ def main():
             f"--min-instances 0 "
             f"--max-instances 3 "
             f"--timeout 300 "
-            f'--set-env-vars "{env_flag}"'
+            f"--env-vars-file env.yaml"
         )
         run(deploy_cmd)
         print("✅ Deployed successfully!")
