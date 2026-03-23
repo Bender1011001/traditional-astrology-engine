@@ -557,7 +557,13 @@ function attachFeedbackHandlers(container) {
 // ─── UI: Loading State ───
 function showLoading() {
     const btn = document.getElementById("submitBtn");
-    if (btn) btn.disabled = true;
+    if (btn) {
+        btn.disabled = true;
+        const btnText = btn.querySelector(".btn-text");
+        const btnLoading = btn.querySelector(".btn-loading");
+        if (btnText) btnText.classList.add("hidden");
+        if (btnLoading) btnLoading.classList.remove("hidden");
+    }
 
     const loadingSection = document.getElementById("loadingSection");
     if (loadingSection) loadingSection.classList.remove("hidden");
@@ -590,7 +596,13 @@ function showLoading() {
 
 function hideLoading() {
     const btn = document.getElementById("submitBtn");
-    if (btn) btn.disabled = false;
+    if (btn) {
+        btn.disabled = false;
+        const btnText = btn.querySelector(".btn-text");
+        const btnLoading = btn.querySelector(".btn-loading");
+        if (btnText) btnText.classList.remove("hidden");
+        if (btnLoading) btnLoading.classList.add("hidden");
+    }
 
     const loadingSection = document.getElementById("loadingSection");
     if (loadingSection) loadingSection.classList.add("hidden");
