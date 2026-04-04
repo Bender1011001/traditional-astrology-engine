@@ -20,7 +20,7 @@ def normalize_deg(deg: float) -> float:
     return deg % 360.0
 
 def get_sign_from_lon(lon: float) -> Sign:
-    idx = int(lon / 30)
+    idx = int((lon % 360.0) / 30.0) % 12
     return list(Sign)[idx]
 
 def calculate_antiscia_points(longitude: float) -> AntisciaPoint:
@@ -91,9 +91,9 @@ class Dodecatemorion:
     term_nature: str 
     
 def get_egyptian_term_ruler(lon: float) -> str:
-    sign_idx = int(lon / 30)
+    sign_idx = int((lon % 360.0) / 30.0) % 12
     sign = list(Sign)[sign_idx]
-    deg_in_sign = lon % 30
+    deg_in_sign = lon % 30.0
     
     terms = EGYPTIAN_TERMS.get(sign, [])
     for ruler, limit in terms:
@@ -102,7 +102,7 @@ def get_egyptian_term_ruler(lon: float) -> str:
     return "Unknown"
 
 def calculate_dodecatemorion(longitude: float, method: Literal["Valens", "Paul"] = "Valens") -> Dodecatemorion:
-    sign_idx = int(longitude / 30)
+    sign_idx = int((longitude % 360.0) / 30.0) % 12
     sign_start = sign_idx * 30.0
     deg_in_sign = longitude % 30.0
     

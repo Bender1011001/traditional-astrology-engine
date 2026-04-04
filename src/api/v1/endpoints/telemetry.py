@@ -143,7 +143,7 @@ async def capture_lead(lead: LeadCapture, request: Request, db: Session = Depend
             db.commit()
     except Exception as e:
         # Non-fatal: we still logged to JSONL.
-        logging.error("Lead DB insert failed: %s", e)
+        logging.error("Lead DB insert failed: %s", repr(e), exc_info=True)
         try:
             db.rollback()
         except Exception:
@@ -160,6 +160,6 @@ async def capture_lead(lead: LeadCapture, request: Request, db: Session = Depend
             ua=details["ua"],
         )
     except Exception as e:
-        logging.error("Lead capture notification failed: %s", e)
+        logging.error("Lead capture notification failed: %s", repr(e), exc_info=True)
 
     return {"status": "ok"}

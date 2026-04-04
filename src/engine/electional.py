@@ -102,7 +102,7 @@ class ElectionalEngine:
             asc = ascmc[0]
             mc = ascmc[1]
         except Exception as e:
-            logger.debug("House calc failed (extreme lat?): %s", e)
+            logger.warning("House calc failed (extreme lat?): %s", repr(e), exc_info=True)
             # Fallback for extreme latitudes
             asc = 0.0
             mc = 0.0
@@ -132,11 +132,11 @@ class ElectionalEngine:
             
         # Combustion (The Sun's Curse)
         solar_status = calculate_solar_status(moon, sun)
-        if solar_status == "COMBUST":
+        if solar_status == "DARK_MOON":
             score -= 50
-            details.append("Moon is Combust (Burned by Sun) - Critical Weakness")
+            details.append("Moon is Combust/Dark (Burned by Sun) - Critical Weakness")
             is_viable = False
-        elif solar_status == "UNDER_BEAMS":
+        elif solar_status == "MOON_UNDER_BEAMS":
             score -= 15
             details.append("Moon is Under Beams - Weakness")
             

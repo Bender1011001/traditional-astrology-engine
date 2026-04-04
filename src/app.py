@@ -42,10 +42,10 @@ async def lifespan(app: FastAPI):
             seed_plans()
             logging.info("Database seeding checked/completed.")
         except Exception as seed_err:
-            logging.error(f"Seeding during startup failed: {seed_err}")
+            logging.error("Seeding during startup failed: %s", seed_err)
             
     except Exception as e:
-        logging.error(f"Failed to initialize database tables: {e}")
+        logging.error("Failed to initialize database tables: %s", e)
         # We don't exit here, let the app try to serve what it can 
         # (or fail specifically on DB routes with clear errors)
     yield
@@ -205,10 +205,10 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    logging.exception(f"Unhandled Exception on {request.method} {request.url.path}")
+    logging.exception("Unhandled Exception on %s %s", request.method, request.url.path)
     return JSONResponse(
         status_code=500,
-        content={"success": False, "detail": f"Internal Server Error: {str(exc)}"},
+        content={"success": False, "detail": "Internal Server Error"},
     )
 
 # --- ROUTER MOUNT ---

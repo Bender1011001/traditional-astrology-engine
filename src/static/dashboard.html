@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TJNM5XVD');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RCNDWN4XVN');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Traditional Astrology</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0a0a1a" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260401b">
+  
+  <style>
+    .dashboard-container {
+      max-width: 1000px;
+      margin: 8rem auto 4rem auto;
+      padding: 0 1.5rem;
+      min-height: 60vh;
+    }
+    
+    .dashboard-header {
+      margin-bottom: 3rem;
+    }
+    .dashboard-header h1 {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .dashboard-header p {
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .profile-card, .saved-charts-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before, .saved-charts-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.8rem;
+    }
+    
+    .profile-info {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+    .profile-info p {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .profile-info strong {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    
+    .logout-btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 0.8rem;
+      margin-top: 2rem;
+      background: rgba(200, 50, 50, 0.1);
+      border: 1px solid rgba(200, 50, 50, 0.3);
+      color: #ff8888;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .logout-btn:hover {
+      background: rgba(200, 50, 50, 0.2);
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .new-chart-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #c9a84c, #b8922f);
+      color: #0a0a1a;
+      font-weight: 700;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .new-chart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Stars background -->
+  <div class="cosmos-bg">
+      <div class="stars-layer stars-sm"></div>
+      <div class="stars-layer stars-md"></div>
+      <div class="stars-layer stars-lg"></div>
+      <div class="nebula nebula-1"></div>
+      <div class="nebula nebula-2"></div>
+  </div>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" class="nav-brand">
+        <span class="brand-icon">✦</span>
+        <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <div class="nav-links">
+        <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+        <a href="/daily.html" class="nav-link">Daily Navigator</a>
+        <a href="/#how-it-works" class="nav-link">How It Works</a>
+        <a href="/#sample" class="nav-link">Sample</a>
+        <a id="navAccountBtn" href="/dashboard.html" class="nav-link" aria-label="My Account">My Account</a>
+    </div>
+  </nav>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <h1 id="welcomeText">Welcome</h1>
+      <p>Manage your account and view your saved natal charts safely synced across your devices.</p>
+    </div>
+    
+    <div class="dashboard-grid">
+      <!-- Profile Column -->
+      <section class="profile-card">
+        <h2 class="card-title">Profile Data</h2>
+        <div class="profile-info">
+          <p><strong>Email</strong> <span id="userEmail">Loading...</span></p>
+          <p><strong>Status</strong> <span id="userPlan">Free tier</span></p>
+          <p><strong>Member since</strong> <span id="userJoined">--</span></p>
+        </div>
+        <button id="logoutBtn" class="logout-btn">Log Out</button>
+      </section>
+      
+      <!-- Charts Column -->
+      <section class="saved-charts-card">
+        <h2 class="card-title">Saved Charts</h2>
+        
+        <div class="empty-state">
+          <p>You haven't saved any natal charts yet to your account.</p>
+          <a href="/#get-reading" class="new-chart-btn">Generate Free Chart</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.8rem; margin-top: 4rem;">
+    <p>© 2026 Traditional Astrology · <a href="privacy.html" style="color: var(--text-muted);">Privacy</a> · <a href="terms.html" style="color: var(--text-muted);">Terms</a> · <a href="refunds.html" style="color: var(--text-muted);">Refunds</a></p>
+    <p style="margin-top: 0.5rem; font-size: 0.7rem;">For entertainment and historical study purposes only. Not medical, legal, or financial advice.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script type="module" src="js/api.js"></script>
+  <script type="module">
+    import { apiFetch } from './js/api.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('access_token');
+      if (!token) {
+        window.location.href = '/?auth=required';
+        return;
+      }
+
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('user_info');
+          window.location.href = '/';
+        });
+      }
+
+      // Fetch user data
+      try {
+        const response = await apiFetch('/api/v1/auth/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            localStorage.removeItem('access_token');
+            window.location.href = '/?auth=expired';
+          }
+          throw new Error('Failed to load profile');
+        }
+
+        const data = await response.json();
+        
+        // Populate profile
+        if (data.user) {
+          const user = data.user;
+          document.getElementById('userEmail').textContent = user.email || 'Unknown';
+          document.getElementById('welcomeText').textContent = user.name ? `Welcome back, ${user.name}` : 'Welcome back';
+          if (user.subscription_tier) {
+             document.getElementById('userPlan').textContent = user.subscription_tier === 'free' ? 'Free tier' : user.subscription_tier.toUpperCase();
+          }
+          if (user.created_at) {
+             document.getElementById('userJoined').textContent = new Date(user.created_at).toLocaleDateString();
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching dashboard data:', err);
+      }
+    });
+  </script>
+</body>
+</html>

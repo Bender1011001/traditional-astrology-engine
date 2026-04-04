@@ -86,31 +86,45 @@ class TemperamentEngine:
         TemperamentEngine._add_qualities(tally, season_qual)
         details.append(f"Season ({season_name}): +{season_qual}")
 
-        # 6. Planets aspecting Moon (sign element contribution)
+        # Keep track of which planets have a stake in the temperament
+        significant_planets = set()
+        if asc_ruler:
+            significant_planets.add(asc_ruler.name)
+        significant_planets.add(PlanetName.MOON)
+
+        # 6. Planets aspecting Moon or Ascendant (sign element contribution)
         # Lilly adds planets aspecting Moon/Asc as temperament modifiers.
         for p in chart.planets:
-            if p.name in [PlanetName.MOON, PlanetName.SUN, PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE]: continue
+            if p.name in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE, PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]: 
+                continue
             
-            # Check aspect to Moon (Orb 8)
-            diff = abs(p.longitude - moon.longitude) % 360
-            dist = diff if diff <= 180 else 360 - diff
-            
-            if dist <= 10 or abs(dist - 90) <= 8 or abs(dist - 180) <= 10:
-                p_qual = TemperamentEngine.get_element_qualities(p.sign)
-                TemperamentEngine._add_qualities(tally, p_qual)
-                details.append(f"Planet {p.name.value} aspecting Moon: +{p_qual}")
+            # Aspect to Moon
+            if p.name not in [PlanetName.MOON, PlanetName.SUN]: # Sun handled softly via Moon Phase and Season
+                diff = abs(p.longitude - moon.longitude) % 360
+                dist = diff if diff <= 180 else 360 - diff
+                if dist <= 10 or abs(dist - 60) <= 8 or abs(dist - 90) <= 8 or abs(dist - 120) <= 8 or abs(dist - 180) <= 10:
+                    p_qual = TemperamentEngine.get_element_qualities(p.sign)
+                    TemperamentEngine._add_qualities(tally, p_qual)
+                    details.append(f"Planet {p.name.value} aspecting Moon: +{p_qual}")
+                    significant_planets.add(p.name)
+
+            # Aspect to Ascendant
+            diff_asc = abs(p.longitude - chart.ascendant) % 360
+            dist_asc = diff_asc if diff_asc <= 180 else 360 - diff_asc
+            if dist_asc <= 10 or abs(dist_asc - 60) <= 8 or abs(dist_asc - 90) <= 8 or abs(dist_asc - 120) <= 8 or abs(dist_asc - 180) <= 10:
+                if p.name != PlanetName.SUN: # Sun sign handled in Season step
+                    p_qual_asc = TemperamentEngine.get_element_qualities(p.sign)
+                    TemperamentEngine._add_qualities(tally, p_qual_asc)
+                    details.append(f"Planet {p.name.value} aspecting Ascendant: +{p_qual_asc}")
+                significant_planets.add(p.name)
 
         # 7. Inherent Planetary Natures (Lilly, CA pp. 57-83)
-        # Each significant planet contributes its own inherent Hot/Cold/Moist/Dry nature.
-        # Significant = Ascendant ruler, Moon, and planets aspecting Moon.
-        for p in chart.planets:
-            if p.name in [PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE,
-                          PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
-                continue
-            p_nature = TemperamentEngine.PLANET_NATURES.get(p.name)
+        # Significant = Ascendant ruler, Moon, and planets aspecting Moon/Asc.
+        for pname in significant_planets:
+            p_nature = TemperamentEngine.PLANET_NATURES.get(pname)
             if p_nature and any(v > 0 for v in p_nature.values()):
                 TemperamentEngine._add_qualities(tally, p_nature)
-                details.append(f"Planet {p.name.value} inherent nature: +{p_nature}")
+                details.append(f"Planet {pname.value} inherent nature: +{p_nature}")
 
         # Lilly's Calculation: Net Balance
         net_hot = tally["Hot"] - tally["Cold"]

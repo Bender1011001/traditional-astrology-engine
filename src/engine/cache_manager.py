@@ -51,7 +51,7 @@ class CacheManager:
                 
                 self.fernet = Fernet(self.key)
             except Exception as e:
-                logger.warning("Encryption Init Error: %s", e)
+                logger.warning("Encryption Init Error: %s", repr(e), exc_info=True)
                 
     def _encrypt(self, data: str) -> str:
         if self.fernet:
@@ -87,7 +87,7 @@ class CacheManager:
                 decrypted = self._decrypt(content)
                 data = json.loads(decrypted)
             except Exception as e:
-                logger.debug("Cache decrypt/parse failed: %s", e)
+                logger.warning("Cache decrypt/parse failed: %s", repr(e), exc_info=True)
                 # Decryption failed or JSON error -> invalid cache
                 return None
             
@@ -99,7 +99,7 @@ class CacheManager:
                 
             return data["payload"]
         except Exception as e:
-            logger.debug("Cache read failed: %s", e)
+            logger.warning("Cache read failed: %s", repr(e), exc_info=True)
             return None
 
     def set(self, chart_hash: str, tier: str, payload: Dict[str, Any], ttl_days: int = 30) -> None:
@@ -122,7 +122,7 @@ class CacheManager:
             with open(path, "w", encoding="utf-8") as f:
                 f.write(encrypted)
         except Exception as e:
-            logger.warning("Cache Write Error: %s", e)
+            logger.warning("Cache Write Error: %s", repr(e), exc_info=True)
 
 _cache = CacheManager()
 

@@ -23,6 +23,11 @@ async def create_api_key(
     if sub.plan.tier not in {"practitioner", "studio"}:
         raise HTTPException(status_code=403, detail="Upgrade required to create API keys")
 
+    # Enforce API Key Storage Limits (Prevent Table Exhaustion)
+    existing_keys_count = db.query(ApiKey).filter(ApiKey.user_id == user.id).count()
+    if existing_keys_count >= 10:
+        raise HTTPException(status_code=400, detail="Maximum number of API keys (10) reached. Please revoke an existing key to create a new one.")
+
     # Generate random key
     raw_key = "sk_live_" + secrets.token_hex(32)
     key_hash = hashlib.sha256(raw_key.encode()).hexdigest()
@@ -30,7 +35,7 @@ async def create_api_key(
     new_key = ApiKey(
         user_id=user.id,
         key_hash=key_hash,
-        name=name
+        name=name[:100]  # Hard cap name length for physical column security
     )
     db.add(new_key)
     db.commit()

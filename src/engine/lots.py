@@ -49,19 +49,24 @@ def calculate_all_lots(chart: Chart, sect: Sect) -> Dict[str, float]:
     spir_lon = lots[LotName.SPIRIT.value]
     
     # Necessity (Ananke): Mercury vs Fortune
-    lots[LotName.NECESSITY.value] = calculate_lot(asc, fort_lon, mercury.longitude) if is_day else calculate_lot(asc, mercury.longitude, fort_lon)
+    # Historical logic: Day: Asc + Fortune - Mercury (From Mercury to Fortune)
+    lots[LotName.NECESSITY.value] = calculate_lot(asc, mercury.longitude, fort_lon) if is_day else calculate_lot(asc, fort_lon, mercury.longitude)
         
     # Eros: Venus vs Spirit
+    # Day: Asc + Venus - Spirit (From Spirit to Venus)
     lots[LotName.EROS.value] = calculate_lot(asc, spir_lon, venus.longitude) if is_day else calculate_lot(asc, venus.longitude, spir_lon)
         
     # Courage (Tolma): Mars vs Fortune
-    lots[LotName.COURAGE.value] = calculate_lot(asc, fort_lon, mars.longitude) if is_day else calculate_lot(asc, mars.longitude, fort_lon)
+    # Day: Asc + Fortune - Mars (From Mars to Fortune)
+    lots[LotName.COURAGE.value] = calculate_lot(asc, mars.longitude, fort_lon) if is_day else calculate_lot(asc, fort_lon, mars.longitude)
         
     # Victory (Nike): Jupiter vs Spirit
+    # Day: Asc + Jupiter - Spirit (From Spirit to Jupiter)
     lots[LotName.VICTORY.value] = calculate_lot(asc, spir_lon, jupiter.longitude) if is_day else calculate_lot(asc, jupiter.longitude, spir_lon)
         
     # Nemesis: Saturn vs Fortune
-    lots[LotName.NEMESIS.value] = calculate_lot(asc, fort_lon, saturn.longitude) if is_day else calculate_lot(asc, saturn.longitude, fort_lon)
+    # Day: Asc + Fortune - Saturn (From Saturn to Fortune)
+    lots[LotName.NEMESIS.value] = calculate_lot(asc, saturn.longitude, fort_lon) if is_day else calculate_lot(asc, fort_lon, saturn.longitude)
         
     # 2. Spiritual Foundation Lots (Paulus)
     

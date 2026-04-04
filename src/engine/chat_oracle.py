@@ -45,7 +45,7 @@ def _load_binder_context():
         with open(BINDER_PATH, "r", encoding="utf-8") as f:
             return f.read()
     except Exception as e:
-        logger.warning("Error loading binder context: %s", e)
+        logger.warning("Error loading binder context: %s", repr(e), exc_info=True)
         return ""
 
 BINDER_CONTEXT = _load_binder_context()

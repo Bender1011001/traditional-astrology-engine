@@ -1,0 +1,27 @@
+{
+    "strictures_against_judgment": {
+        "ascendant_early": {
+            "condition": "Ascendant < 3 degrees",
+            "meaning": "The matter is premature, not fully developed, or the querent may change their mind. It is too early to judge safely."
+        },
+        "ascendant_late": {
+            "condition": "Ascendant > 27 degrees",
+            "meaning": "The matter is already settled and too late to change. The die is cast, and the astrologer's intervention will have no effect."
+        },
+        "saturn_in_first": {
+            "condition": "Saturn in the 1st House",
+            "meaning": "The question is fundamentally damaged, difficult, or the querent is self-sabotaging or heavily restricted."
+        },
+        "saturn_in_seventh": {
+            "condition": "Saturn in the 7th House",
+            "meaning": "The astrologer's judgment may be impaired, subject to error, or the astrologer will face immense difficulty in delivering the judgment."
+        },
+        "moon_void_of_course": {
+            "condition": "Hellenistic Moon Void of Course",
+            "meaning": "The Moon completes no applying exact major aspects within the next 30 degrees. This implies nothing profound will come of the matter; things continue as they are with no resolution."
+        }
+    },
+    "besiegement": {
+        "meaning": "When a significator is bodily enclosed between Mars and Saturn with no benefic rays intervening, it represents a state of total constraint, danger, or being trapped by two evils."
+    }
+}

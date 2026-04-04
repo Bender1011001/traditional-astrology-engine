@@ -77,7 +77,7 @@ class FulfillmentService:
                         chart_data
                     )
                 except Exception as ai_error:
-                    logger.error("AI Generation Failed: %s", ai_error)
+                    logger.error("AI Generation Failed: %s", repr(ai_error), exc_info=True)
                     # Fallback to Algorithmic Full Report if AI fails
                     custom_markdown = f"# Report Generation Issue\n\nWe encountered a disruption in the etheric link. The standardized algorithmic report follows below.\n\n---\n"
 

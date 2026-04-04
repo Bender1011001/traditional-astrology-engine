@@ -181,14 +181,21 @@ class MedicalAstrology:
             malefic_intensity = 0
             reasons = []
             
-            # Malefics conjunct Luminaries
+            # Malefics afflicting Luminaries
             for mal in [("Mars", mars_res), ("Saturn", saturn_res)]:
                 for lum in [("Sun", sun_res), ("Moon", moon_res)]:
                     dist = abs(mal[1] - lum[1]) % 360
                     if dist > 180: dist = 360 - dist
+                    
                     if dist < 5:
                         malefic_intensity += 10
                         reasons.append(f"{mal[0]} conjunct {lum[0]}")
+                    elif abs(dist - 90) < 5:
+                        malefic_intensity += 8
+                        reasons.append(f"{mal[0]} square {lum[0]}")
+                    elif abs(dist - 180) < 5:
+                        malefic_intensity += 9
+                        reasons.append(f"{mal[0]} opposition {lum[0]}")
             
             # Mars square/opp Saturn
             m_s_dist = abs(mars_res - saturn_res) % 360

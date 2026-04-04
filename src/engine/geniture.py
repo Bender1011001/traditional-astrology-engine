@@ -65,7 +65,7 @@ class LordOfGenitureEngine:
         try:
             face_val = DignityCalculator.FACES[sign][face_idx]
         except Exception as e:
-            logger.debug("Face lookup failed for %s at %.1f°: %s", sign, deg, e)
+            logger.warning("Face lookup failed for %s at %.1f°: %s", sign, deg, repr(e), exc_info=True)
             return None
         if isinstance(face_val, str):
             key = face_val.upper()

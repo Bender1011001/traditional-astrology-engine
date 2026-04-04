@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Dict, List, Optional, Any
 import swisseph as swe
 import logging
+import traceback
 
 logger = logging.getLogger(__name__)
 
@@ -166,7 +167,7 @@ class Auditor:
                         ddt = ddt.astimezone(tz=None).replace(tzinfo=None)
                     decumbiture_jd = swe.julday(ddt.year, ddt.month, ddt.day, ddt.hour + (ddt.minute / 60.0) + (ddt.second / 3600.0))
                 except Exception as e:
-                    logger.warning("Invalid decumbiture_utc_iso; ignoring. Error: %s", e)
+                    logger.warning("Invalid decumbiture_utc_iso; ignoring. Error: %s", repr(e), exc_info=True)
                     decumbiture_jd = None
 
             audit_results = Auditor.perform_audit(
@@ -233,10 +234,8 @@ class Auditor:
             }
 
         except Exception as e:
-            import traceback
-            error_trace = traceback.format_exc()
-            logger.error("Auditor Failure: %s\n%s", e, error_trace)
-            return {"error": f"Auditor Failure: {str(e)}"}
+            logger.error("Auditor Failure: %s\n%s", repr(e), traceback.format_exc(), exc_info=True)
+            return {"error": "Critical Calculation Failure. Please contact support."}
 
     @staticmethod
     def perform_audit(
@@ -271,6 +270,7 @@ class Auditor:
             try:
                 age_years = max(0.0, (ans_date - birth_dt).days / 365.25)
             except Exception as e:
+                logger.warning("Failed to parse birth_dt and ans_date into age_years: %s", repr(e), exc_info=True)
                 age_years = None
         if age_years is None and age is not None:
             age_years = float(age)
@@ -319,6 +319,7 @@ class Auditor:
             analysis["aspects"] = core
             analysis["aspects_shadow"] = shadow
         except Exception as e:
+            logger.warning("Aspect parsing failed, falling back to empty lists: %s", repr(e), exc_info=True)
             analysis["aspects"] = []
             analysis["aspects_shadow"] = []
         analysis["medical"] = Auditor._calculate_medical_suite(chart, decumbiture_jd=decumbiture_jd)
@@ -396,6 +397,7 @@ class Auditor:
                 },
             }
         except Exception as e:
+            logger.warning("Syzygy/phase calculation failed: %s", repr(e), exc_info=True)
             analysis["syzygy"] = {"note": "Syzygy/phase not available."}
 
         # 3. Supplemental Layers
@@ -422,6 +424,7 @@ class Auditor:
                 "note": "Whole Sign Houses are used for house topics; MC is reported as an angle with its whole-sign house position."
             }
         except Exception as e:
+            logger.warning("Angle metadata extraction failed: %s", repr(e), exc_info=True)
             analysis["angles"] = {"note": "Angle metadata unavailable."}
 
         # 4. Temporal Layers
@@ -523,6 +526,7 @@ class Auditor:
                     out.append({"value": str(c)})
             return out
         except Exception as e:
+            logger.warning("Dataclass serialization of star contacts failed: %s", repr(e), exc_info=True)
             return [{"value": str(c)} for c in contacts]
 
     @staticmethod
@@ -577,7 +581,7 @@ class Auditor:
             # Simple wrapper to match expected logic
             return SolarReturnEngine.analyze_solar_return_from_jd(chart, sr_jd, age, birth_dt)
         except Exception as e:
-            logger.error("Solar Return calculation failed: %s", e)
+            logger.error("Solar Return calculation failed: %s", repr(e), exc_info=True)
             return {"error": "Solar Return calculation failed"}
 
     @staticmethod
@@ -697,6 +701,7 @@ class Auditor:
                 if day_diff < 0: day_diff += 30
                 day = day_diff + 1
             except Exception as e:
+                logger.warning("Monthly/daily profection age calculation failed: %s", repr(e), exc_info=True)
                 pass
 
         # Monthly (Continuous)
@@ -1114,6 +1119,7 @@ class Auditor:
                         import re
                         bd = [re.sub(r"[-+]?\\d+(?:\\.\\d+)?", "[REDACTED]", str(x)) for x in bd]
                     except Exception as e:
+                        logger.warning("Error redacting breakdown years: %s", repr(e), exc_info=True)
                         bd = [str(x) for x in bd]
                     bd.append(
                         "SANITY: this method produced a years figure that is less than the native's current age. "
@@ -1124,6 +1130,7 @@ class Auditor:
                     out["breakdown"] = bd
                     return out
             except Exception as e:
+                logger.warning("Sanity reduction step failed: %s", repr(e), exc_info=True)
                 return payload
             return payload
 
@@ -1453,6 +1460,7 @@ class Auditor:
             result["phasis"]["visibility"] = vis
             result["phasis"]["is_visible"] = bool(vis.get("is_visible"))
         except Exception as e:
+            logger.warning("Visibility calculation failed: %s", repr(e), exc_info=True)
             result["phasis"]["visibility"] = {"note": "Visibility calculation failed."}
             result["phasis"]["is_visible"] = None
 
@@ -1460,6 +1468,7 @@ class Auditor:
         try:
             result["voice"]["has_voice"] = bool(result.get("phasis", {}).get("is_visible"))
         except Exception as e:
+            logger.warning("Voice flag population failed: %s", repr(e), exc_info=True)
             result["voice"]["has_voice"] = None
 
         # Moon special-case: treat near-Sun condition as lunar phase/visibility, not "planetary combustion" rhetoric.
@@ -1477,6 +1486,7 @@ class Auditor:
                     result["voice"]["has_voice"] = False
                     result["voice"]["note"] = "Moon within 12° of Sun: treated as dark/obscured for testimony (phase/visibility doctrine)."
             except Exception as e:
+                logger.warning("Lunar phase override for visibility failed: %s", repr(e), exc_info=True)
                 pass
 
         # Besiegement
@@ -1523,6 +1533,7 @@ class Auditor:
                         "annual_sign": sign_name
                     }
                 except Exception as e:
+                    logger.warning("Profection extraction from muntha failed: %s", repr(e), exc_info=True)
                     profections = {"lord_of_year": "Unknown", "annual_sign": sign_name}
 
         # Format Aspects for Legacy Report

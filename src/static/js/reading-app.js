@@ -32,6 +32,39 @@ document.addEventListener("DOMContentLoaded", () => {
     setupForm();
     setupTimeUnknownToggle();
     checkForPaidReturn();
+
+    // Export & Share Handlers
+    const exportPdfBtn = document.getElementById('exportPdfBtn');
+    const shareChartBtn = document.getElementById('shareChartBtn');
+
+    if (exportPdfBtn) {
+        exportPdfBtn.addEventListener('click', () => {
+            window.print();
+        });
+    }
+
+    if (shareChartBtn) {
+        shareChartBtn.addEventListener('click', async () => {
+            const chartUrl = window.location.href;
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'My Traditional Astrology Chart',
+                        text: 'Check out my classical astrology reading!',
+                        url: chartUrl
+                    });
+                } catch (err) {
+                    console.log('Share error:', err);
+                }
+            } else {
+                navigator.clipboard.writeText(chartUrl).then(() => {
+                    const originalText = shareChartBtn.textContent;
+                    shareChartBtn.textContent = '✦ Copied to Clipboard!';
+                    setTimeout(() => { shareChartBtn.textContent = originalText; }, 2000);
+                });
+            }
+        });
+    }
 });
 
 // ─── Form Setup ───
@@ -160,8 +193,8 @@ function pollForCompletion(taskId, freeRemaining) {
                 hideLoading();
                 showError("Generation failed. Please try again.");
             }
-        } catch (e) {
-            console.error("Poll error:", e);
+        } catch (_) {
+            // Suppressed: non-critical poll error; retry will occur next interval
         }
     }, 5000);
 }
@@ -231,6 +264,12 @@ function showReading(result, freeRemaining) {
 
     // Attach feedback handlers
     attachFeedbackHandlers(content);
+
+    // Attach map actions visibility
+    const chartActions = document.getElementById("chartActions");
+    if (chartActions) {
+        chartActions.classList.remove("hidden");
+    }
 
     // Attach trace interactivity
     if (traceData) {

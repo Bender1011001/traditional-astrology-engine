@@ -18,7 +18,7 @@ def normalize_deg(deg: float) -> float:
     return deg % 360.0
 
 def get_sign_from_lon(lon: float) -> Sign:
-    idx = int(lon / 30)
+    idx = int((lon % 360.0) / 30) % 12
     return list(Sign)[idx]
 
 def get_sect(sun_alt: float) -> Literal["DAY", "NIGHT"]:
@@ -486,29 +486,29 @@ class DodecatemoriaEngine:
     def calculate_dodecatemoria_valens(longitude: float) -> float:
         """
         Calculates the 12-fold Dodecatemoria (Valens/Standard).
-        Formula: Longitude + (DegreeInSign * 12).
+        Formula: Sign_Start + (DegreeInSign * 12).
         Projects the sign's micro-zodiac onto the full zodiac.
         """
         deg_in_sign = longitude % 30.0
         sign_start = (longitude // 30) * 30
         
-        # Projection arc is degree * 12
+        # Projection arc is degree * 12 from the start of the sign
         arc = deg_in_sign * 12.0
-        return (longitude + arc) % 360.0
+        return (sign_start + arc) % 360.0
 
     @staticmethod
     def calculate_dodecatemoria_paul(longitude: float) -> float:
         """
         Calculates the 13-fold Dodecatemoria (Paul of Alexandria).
-        Formula: Longitude + (DegreeInSign * 13).
+        Formula: Sign_Start + (DegreeInSign * 13).
         Intended for 'Apokatastasis' (Cyclical Return).
         """
         deg_in_sign = longitude % 30.0
         sign_start = (longitude // 30) * 30
         
-        # Projection arc is degree * 13 (Cyclical variant)
+        # Projection arc is degree * 13 from the start of the sign
         arc = deg_in_sign * 13.0
-        return (longitude + arc) % 360.0
+        return (sign_start + arc) % 360.0
 
     @staticmethod
     def get_dodecatemoria_data(chart: Chart, is_valens: bool = True) -> Dict[str, Dict]:

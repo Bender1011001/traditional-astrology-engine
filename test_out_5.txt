@@ -1,0 +1,70 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-8.3.4, pluggy-1.5.0 -- C:\ProgramData\anaconda3\python.exe
+cachedir: .pytest_cache
+rootdir: E:\code.projects\astrology
+configfile: pytest.ini
+plugins: Faker-37.11.0, asyncio-1.2.0, cov-7.0.0, anyio-4.12.1, hydra-core-1.3.2, langsmith-0.6.6, mock-3.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 521 items / 479 deselected / 42 selected
+
+src/tests/test_advanced_pillars.py::test_horary_oracle_smoke PASSED      [  2%]
+src/tests/test_horary.py::test_moiety_orb PASSED                         [  4%]
+src/tests/test_horary.py::test_moiety_orb_nodes PASSED                   [  7%]
+src/tests/test_horary.py::test_aspect_distance_conjunction PASSED        [  9%]
+src/tests/test_horary.py::test_aspect_distance_square PASSED             [ 11%]
+src/tests/test_horary.py::test_is_applying_returns_bool PASSED           [ 14%]
+src/tests/test_horary.py::test_antiscia_0_degrees PASSED                 [ 16%]
+src/tests/test_horary.py::test_antiscia_90_degrees PASSED                [ 19%]
+src/tests/test_horary.py::test_antiscia_symmetry PASSED                  [ 21%]
+src/tests/test_horary.py::test_refranation_slow_planet PASSED            [ 23%]
+src/tests/test_horary.py::test_refranation_normal_speed PASSED           [ 26%]
+src/tests/test_horary.py::test_mutual_reception_domicile PASSED          [ 28%]
+src/tests/test_horary.py::test_quesited_house_career PASSED              [ 30%]
+src/tests/test_horary.py::test_quesited_house_money PASSED               [ 33%]
+src/tests/test_horary.py::test_quesited_house_health PASSED              [ 35%]
+src/tests/test_horary.py::test_quesited_house_relationship PASSED        [ 38%]
+src/tests/test_horary.py::test_quesited_house_default PASSED             [ 40%]
+src/tests/test_horary.py::test_house_sign_first PASSED                   [ 42%]
+src/tests/test_horary.py::test_house_sign_seventh PASSED                 [ 45%]
+src/tests/test_horary.py::test_sect_score_diurnal_day PASSED             [ 47%]
+src/tests/test_horary.py::test_sect_score_nocturnal_day PASSED           [ 50%]
+src/tests/test_horary.py::test_sect_score_mercury PASSED                 [ 52%]
+src/tests/test_horary.py::test_nature_score_benefic PASSED               [ 54%]
+src/tests/test_horary.py::test_nature_score_malefic PASSED               [ 57%]
+src/tests/test_horary.py::test_nature_score_neutral PASSED               [ 59%]
+src/tests/test_horary.py::test_score_conditions_positive PASSED          [ 61%]
+src/tests/test_horary.py::test_score_conditions_negative PASSED          [ 64%]
+src/tests/test_horary.py::test_score_conditions_empty PASSED             [ 66%]
+src/tests/test_horary.py::test_evaluate_strong_yes PASSED                [ 69%]
+src/tests/test_horary.py::test_evaluate_strong_no PASSED                 [ 71%]
+src/tests/test_horary.py::test_evaluate_unclear PASSED                   [ 73%]
+src/tests/test_horary.py::test_build_horary_oracle PASSED                [ 76%]
+src/tests/test_horary.py::test_analyze_horary_physics_returns_list PASSED [ 78%]
+src/tests/test_horary.py::test_analyze_horary_physics_missing_planet PASSED [ 80%]
+src/tests/test_horary.py::test_positive_conditions_set PASSED            [ 83%]
+src/tests/test_horary.py::test_negative_conditions_set PASSED            [ 85%]
+src/tests/test_horary.py::test_condition_weights_completeness PASSED     [ 88%]
+src/tests/test_horary_api.py::test_horary_rate_limit FAILED              [ 90%]
+src/tests/test_horary_perfections.py::test_void_of_course_hellenistic PASSED [ 92%]
+src/tests/test_horary_perfections.py::test_besiegement PASSED            [ 95%]
+src/tests/test_horary_perfections.py::test_besiegement_benefics PASSED   [ 97%]
+src/tests/test_horary_perfections.py::test_strictures PASSED             [100%]
+
+================================== FAILURES ===================================
+___________________________ test_horary_rate_limit ____________________________
+src\tests\test_horary_api.py:27: in test_horary_rate_limit
+    assert response.status_code == 200, f"Request {i+1} failed"
+E   AssertionError: Request 1 failed
+E   assert 429 == 200
+E    +  where 429 = <Response [429 Too Many Requests]>.status_code
+---------------------------- Captured stdout call -----------------------------
+2026-04-03 16:36:53,512 - INFO - [logger] - ACTIVITY: request_received by guest
+2026-04-03 16:36:53,565 - INFO - [logger] - ACTIVITY: request_completed by guest
+2026-04-03 16:36:53,567 - INFO - [_client] - HTTP Request: POST http://testserver/api/v1/horary "HTTP/1.1 429 Too Many Requests"
+------------------------------ Captured log call ------------------------------
+INFO     root:logger.py:97 ACTIVITY: request_received by guest
+INFO     root:logger.py:97 ACTIVITY: request_completed by guest
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/horary "HTTP/1.1 429 Too Many Requests"
+=========================== short test summary info ===========================
+FAILED src/tests/test_horary_api.py::test_horary_rate_limit - AssertionError:...
+================ 1 failed, 41 passed, 479 deselected in 2.34s =================

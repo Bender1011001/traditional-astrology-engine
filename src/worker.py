@@ -19,30 +19,37 @@ def run_trial_cleanup():
             logger.error("Free plan not found in DB. Cannot downgrade expired trials.")
             return
 
-        # Find expired trials
-        expired_subs = db.query(UserSubscription).filter(
-            UserSubscription.status == 'trial',
-            UserSubscription.trial_end_date < datetime.now(timezone.utc)
-        ).all()
-
-        if not expired_subs:
-            logger.info("No expired trials found.")
-            return
-
-        logger.info("Found %d expired trials. Downgrading...", len(expired_subs))
+        batch_size = 100
+        total_processed = 0
         
-        for sub in expired_subs:
-            logger.info("Downgrading User %s from trial to free plan.", sub.user_id)
-            sub.status = "active"
-            sub.plan_id = free_plan.id
-            sub.trial_end_date = None
+        while True:
+            # Find expired trials in batches to prevent memory OOM and DB locks
+            expired_subs = db.query(UserSubscription).filter(
+                UserSubscription.status == 'trial',
+                UserSubscription.trial_end_date < datetime.now(timezone.utc)
+            ).limit(batch_size).all()
+
+            if not expired_subs:
+                break
+
+            logger.info("Found %d expired trials in current batch. Downgrading...", len(expired_subs))
             
-        db.commit()
-        logger.info("Trial cleanup complete.")
+            for sub in expired_subs:
+                sub.status = "active"
+                sub.plan_id = free_plan.id
+                sub.trial_end_date = None
+                
+            db.commit()
+            total_processed += len(expired_subs)
+            
+        logger.info("Trial cleanup complete. Total downgraded: %d", total_processed)
         
     except Exception as e:
-        logger.exception("Error during trial cleanup: %s", e)
-        db.rollback()
+        logger.error("Error during trial cleanup: %s", repr(e), exc_info=True)
+        try:
+            db.rollback()
+        except Exception:
+            pass
     finally:
         db.close()
 

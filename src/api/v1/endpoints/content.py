@@ -117,5 +117,5 @@ async def email_pdf_report(
         return {"success": True, "detail": "Packet queued for delivery."}
 
     except Exception as e:
-        logging.error(f"Generation/Email Failed: {e}")
+        logging.error("Generation/Email Failed: %s", e)
         raise HTTPException(status_code=500, detail="Could not generate or send your audit.")

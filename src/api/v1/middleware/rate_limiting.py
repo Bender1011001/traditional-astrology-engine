@@ -4,6 +4,9 @@ import time
 import redis
 from src.core.config import settings
 from typing import Optional
+import logging
+
+logger = logging.getLogger(__name__)
 
 class RateLimiter:
     """Token bucket rate limiter using Redis"""
@@ -15,7 +18,7 @@ class RateLimiter:
             try:
                 self.redis = redis.from_url(settings.REDIS_URL, decode_responses=True)
             except Exception as e:
-                print(f"Redis connection failed: {e}")
+                logger.warning("Redis connection failed: %s", repr(e), exc_info=True)
 
     def check_rate_limit(self, user_id: str, limit_per_minute: int = 60) -> tuple[bool, dict]:
         """
@@ -37,7 +40,7 @@ class RateLimiter:
                     "reset_at": 60
                 }
             except Exception as e:
-                print(f"Redis rate limit error: {e}. Falling back to memory.")
+                logger.warning("Redis rate limit error: %s. Falling back to memory.", repr(e), exc_info=True)
                 # Fall through to memory
         
         # In-Memory Strategy (Fallback)

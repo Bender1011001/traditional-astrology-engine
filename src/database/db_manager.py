@@ -63,7 +63,7 @@ class DelineationLibrary:
                 self._json_cache[category] = data
                 return data
             except Exception as e:
-                logger.debug("Legacy JSON load failed for %s: %s", category, e)
+                logger.debug("Legacy JSON load failed for %s: %s", category, repr(e), exc_info=True)
                 self._json_cache[category] = {}
                 return {}
         self._json_cache[category] = {}
@@ -84,7 +84,7 @@ class DelineationLibrary:
                 self._cache[cache_key] = res.content
                 return res.content
         except Exception as e:
-            logger.debug("DB query failed for %s:%s: %s", category, key, e)
+            logger.debug("DB query failed for %s:%s: %s", category, key, repr(e), exc_info=True)
         finally:
             db.close()
 
@@ -177,7 +177,7 @@ class DatabaseBackupManager:
             logging.error("Backup failed: %s", err)
             return f"Backup failed: {err}"
         except Exception as e:
-            logging.error("Backup failed: %s", e)
+            logging.error("Backup failed: %s", repr(e), exc_info=True)
             return f"Backup failed: {e}"
 
 def init_db():

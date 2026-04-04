@@ -34,8 +34,14 @@ class HylegAlcocodenEngine:
         house = DignityCalculator.get_house_number(planet.longitude, chart.ascendant, getattr(chart, "houses", None))
         if house not in HylegAlcocodenEngine.HYLEGICAL_HOUSES:
             return False
+            
+        # House 1 (Ascendant) is naturally below the horizon, do not disqualify it under altitude rules.
+        if house == 1:
+            return True
+            
         if planet.altitude is not None:
             return planet.altitude > 0
+            
         return True
 
     @staticmethod
@@ -105,7 +111,7 @@ class HylegAlcocodenEngine:
                 if HylegAlcocodenEngine._has_aspect_from_ruler(lot_fortune, chart, sect):
                     return {"type": "Lot", "name": "Fortune", "longitude": lot_fortune, "candidate": "Fortune"}
         except Exception as e:
-            logger.debug("Lot of Fortune Hyleg check failed: %s", e)
+            logger.warning("Lot of Fortune Hyleg check failed: %s", repr(e), exc_info=True)
         
         # 3. Check Ascendant (Prevention of Asc Hyleg provided rulers aspect it)
         # Ascendant is usually valid if luminaries fail.

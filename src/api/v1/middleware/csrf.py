@@ -87,7 +87,7 @@ class CSRFProtectionMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
         
         # Log potential CSRF attempt
-        logger.warning(f"Potential CSRF attempt blocked: {request.method} {path} from {origin}")
+        logger.warning("Potential CSRF attempt blocked: %s %s from %s", request.method, path, origin)
         
         raise HTTPException(
             status_code=403,

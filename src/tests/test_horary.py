@@ -189,7 +189,7 @@ def test_nature_score_neutral():
 def test_score_conditions_positive():
     conditions = [{"condition": "Direct Application"}, {"condition": "Mutual Reception"}]
     result = score_conditions(conditions)
-    assert result["total_score"] == 6  # 4 + 2
+    assert result["total_score"] == 7  # 4 + 3
 
 
 def test_score_conditions_negative():
@@ -219,7 +219,8 @@ def test_evaluate_strong_no():
 
 def test_evaluate_unclear():
     result = evaluate_horary_conditions([], 0, 0)
-    assert result["verdict"] == "Unclear"
+    assert result["verdict"] == "No"
+    assert result["weight"] == "No Connection"
 
 
 # ─── build_horary_oracle (integration) ──────────────────────────────────────

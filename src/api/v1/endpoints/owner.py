@@ -69,11 +69,13 @@ def list_plans(
 def list_users(
     owner: Optional[User] = Depends(require_owner),
     db: Session = Depends(get_db),
+    limit: int = 1000,
     q: Optional[str] = None,
     plan: Optional[str] = None,
     status_filter: Optional[str] = None,
     payment_status_filter: Optional[str] = None,
 ):
+    limit = max(1, min(int(limit or 1000), 5000))
     query = db.query(User).outerjoin(UserSubscription).outerjoin(SubscriptionPlan)
 
     if q:
@@ -85,17 +87,20 @@ def list_users(
     if status_filter:
         query = query.filter(UserSubscription.status == status_filter)
 
-    users = query.order_by(User.created_at.desc()).all()
+    users = query.order_by(User.created_at.desc()).limit(limit).all()
+    user_ids = [u.id for u in users]
+    all_invoices = db.query(Invoice).filter(Invoice.user_id.in_(user_ids)).order_by(Invoice.created_at.desc()).all()
+    
+    latest_invoices = {}
+    for inv in all_invoices:
+        if inv.user_id not in latest_invoices:
+            latest_invoices[inv.user_id] = inv
+
     results = []
     for user in users:
         sub = user.subscription
         plan_name = sub.plan.tier if sub and sub.plan else "free"
-        last_invoice = (
-            db.query(Invoice)
-            .filter(Invoice.user_id == user.id)
-            .order_by(Invoice.created_at.desc())
-            .first()
-        )
+        last_invoice = latest_invoices.get(user.id)
 
         payment_status = last_invoice.status if last_invoice else "none"
         if payment_status_filter and payment_status != payment_status_filter:
@@ -245,7 +250,7 @@ def owner_kpis(
     - If you need Stripe-reconciled MRR, we will layer that on via invoice/subscription sync.
     """
     now = datetime.now(timezone.utc)
-    today_start = datetime(now.year, now.month, now.day)
+    today_start = datetime(now.year, now.month, now.day, tzinfo=timezone.utc)
     week_start = now - timedelta(days=7)
 
     leads_today = db.query(Lead).filter(Lead.created_at >= today_start).count()

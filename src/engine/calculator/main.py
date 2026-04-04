@@ -78,7 +78,7 @@ class ChartCalculator:
             try:
                 ayanamsa_deg = swe.get_ayanamsa_ut(jd)
             except Exception as e:
-                logger.debug("Ayanamsa calc failed: %s", e)
+                logger.warning("Ayanamsa calc failed: %s", repr(e), exc_info=True)
                 ayanamsa_deg = None
 
         # 6. Planet Calculations
@@ -247,7 +247,7 @@ def calculate_chart_data(
             lat_val, lon_val, geocode_meta = get_coordinates_with_meta(city, state)
             latitude, longitude = lat_val, lon_val
         except Exception as e:
-            logger.error(f"Geocoding error: {traceback.format_exc()}")
+            logger.error("Geocoding error", exc_info=True)
             return {"error": str(e)}
     else:
         geocode_meta = {"source": "override", "note": "Latitude/longitude provided directly to calculator."}
@@ -265,7 +265,7 @@ def calculate_chart_data(
             node_type=node_type,
         )
     except Exception as e:
-        logger.error(f"Chart calculation error: {traceback.format_exc()}")
+        logger.error("Chart calculation error", exc_info=True)
         return {"error": str(e)}
 
     # Reconstruct Metadata for serialization
@@ -287,7 +287,7 @@ def calculate_chart_data(
         local_tz = pytz.timezone(tz_str)
         _, utc_dt, tz_meta = _localize_with_historical_tz(local_tz, dt)
     except Exception as e:
-        logger.debug(f"Timezone re-derivation failed: {traceback.format_exc()}")
+        logger.debug("Timezone re-derivation failed", exc_info=True)
         # Keep best-effort defaults; chart.jd is still authoritative for calculations.
         tz_str = tz_str or "unknown"
         tz_meta = tz_meta or {}
@@ -511,4 +511,7 @@ def calculate_chart_data(
          hb, errs = compare_house_systems_calc(jd, lat, lon, systems, ayanamsa_deg)
          results["houses_by_system"] = hb
 
-    return results
+    try:
+        return results
+    finally:
+        swe.close()

@@ -158,7 +158,7 @@ class PhasisEngine:
 
             # Sun altitude at the planet's rise/set time.
             sun_pos, _ = swe.calc_ut(t_event, swe.SUN, swe.FLG_SWIEPH)
-            res_azalt = swe.azalt(t_event, swe.FLG_SWIEPH, geopos, 0, 0, sun_pos[:3])
+            res_azalt = swe.azalt(t_event, swe.ECL2HOR, geopos, 0, 0, sun_pos[:3])
             sun_alt = float(res_azalt[1])
 
             is_vis = sun_alt <= (-threshold)
@@ -303,7 +303,7 @@ class PhasisEngine:
                         "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
                     }
             except Exception as e:
-                logger.debug("Heliacal rising calc failed for %s: %s", pname.value, e)
+                logger.warning("Heliacal rising calc failed for %s: %s", pname.value, repr(e), exc_info=True)
 
             try:
                 res_set = swe.heliacal_ut(jd, geopos, atmo, observer, obj_name, swe.HELIACAL_SETTING, 0)
@@ -315,7 +315,7 @@ class PhasisEngine:
                         "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
                     }
             except Exception as e:
-                logger.debug("Heliacal setting calc failed for %s: %s", pname.value, e)
+                logger.warning("Heliacal setting calc failed for %s: %s", pname.value, repr(e), exc_info=True)
 
             results.append(entry)
 

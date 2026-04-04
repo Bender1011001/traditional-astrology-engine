@@ -163,7 +163,8 @@
       <a href="/daily.html" class="nav-link">Daily Navigator</a>
       <a href="#how-it-works" class="nav-link">How It Works</a>
       <a href="#sample" class="nav-link">Sample</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
+      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
     </div>
   </nav>
 
@@ -239,6 +240,10 @@
     <section class="reading-section hidden" id="readingSection">
       <div class="reading-card" id="readingContent">
         <!-- Dynamically filled by JS -->
+      </div>
+      <div class="chart-actions hidden" id="chartActions" style="display:flex; justify-content:center; gap:1rem; margin-top:2rem;">
+        <button id="exportPdfBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">✦ Export to PDF</button>
+        <button id="shareChartBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">✦ Share Chart</button>
       </div>
     </section>
 
@@ -440,6 +445,62 @@
     </footer>
   </main>
 
+  <!-- AUTH MODALS -->
+  <div id="authModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+      
+      <!-- Login View -->
+      <div id="loginView" class="auth-view">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-field">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" required autocomplete="username" />
+          </div>
+          <div class="form-field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-loading hidden">Signing In...</span>
+          </button>
+          <div id="loginError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p>
+        </div>
+      </div>
+
+      <!-- Register View -->
+      <div id="registerView" class="auth-view hidden">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-sub">Save your natal chart securely and access it anywhere.</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-field">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" required autocomplete="new-password" minlength="8" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-loading hidden">Creating...</span>
+          </button>
+          <div id="registerError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/auth.js?v=20260401b"></script>
   <script type="module" src="js/reading-app.js?v=20260319progress"></script>
   <!-- PWA Install Banner -->
   <div id="pwaInstallBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;

@@ -34,9 +34,9 @@ async def get_current_user_id(authorization: str = Header(None)) -> str:
     return "guest"
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from src.database.core import get_db
-from src.database.models import User
+from src.database.models import User, UserSubscription
 
 async def get_current_user(
     user_id: str = Depends(get_current_user_id),
@@ -44,5 +44,7 @@ async def get_current_user(
 ) -> Optional[User]:
     if user_id == "guest":
         return None
-    user = db.query(User).filter(User.id == user_id).first()
+    user = db.query(User).options(
+        joinedload(User.subscription).joinedload(UserSubscription.plan)
+    ).filter(User.id == user_id).first()
     return user

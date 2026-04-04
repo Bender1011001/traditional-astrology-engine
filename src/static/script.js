@@ -224,15 +224,16 @@ if (modalClose) {
     });
 }
 
-modalOverlay.addEventListener("click", (e) => {
-    if (e.target === modalOverlay) {
-        modalOverlay.classList.add("hidden");
-    }
-});
-
-function apiUrl(path) {
-    return `${API_BASE}${path}`;
+if (modalOverlay) {
+    modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.add("hidden");
+        }
+    });
 }
+
+// apiUrl already defined at line 14, removed duplicate
+
 
 function applyTheme(theme) {
     const value = theme === "dark" ? "dark" : "light";
@@ -351,8 +352,8 @@ async function loadDeveloperData() {
             document.getElementById("callsUsed").textContent = data.api_calls_used;
             document.getElementById("quotaLimit").textContent = data.quota || "∞";
         }
-    } catch (e) {
-        console.error("Failed to load stats", e);
+    } catch (_) {
+        // Suppressed: non-critical dev portal stats load
     }
 
     // Load Keys
@@ -383,8 +384,8 @@ async function loadApiKeys(token) {
             `;
             list.appendChild(li);
         });
-    } catch (e) {
-        console.error("Failed to load keys", e);
+    } catch (_) {
+        // Suppressed: non-critical key list load
     }
 }
 
@@ -594,7 +595,8 @@ function hashString(value) {
 }
 
 // Set default analysis date to today
-document.getElementById('analysisDate').value = new Date().toISOString().split('T')[0];
+const _analysisDateEl = document.getElementById('analysisDate');
+if (_analysisDateEl) _analysisDateEl.value = new Date().toISOString().split('T')[0];
 
 function setLocalDateTime(dateId, timeId) {
     const now = new Date();
@@ -647,7 +649,8 @@ resultTabs.forEach(btn => {
     });
 });
 
-document.getElementById('chartForm').addEventListener('submit', async (e) => {
+const chartForm = document.getElementById('chartForm');
+if (chartForm) chartForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const btn = document.getElementById('calculateBtn');
@@ -718,6 +721,7 @@ document.getElementById('chartForm').addEventListener('submit', async (e) => {
         btn.disabled = false;
     }
 });
+
 
 const exportCsvBtn = document.getElementById("exportCsvBtn");
 if (exportCsvBtn) {
@@ -791,7 +795,7 @@ const cityInput = document.getElementById('city');
 const suggestionsBox = document.getElementById('citySuggestions');
 let debounceTimer;
 
-cityInput.addEventListener('input', () => {
+if (cityInput) cityInput.addEventListener('input', () => {
     clearTimeout(debounceTimer);
     const query = cityInput.value;
     if (query.length < 3) {
@@ -2329,15 +2333,21 @@ window.showDetails = (p) => {
     modal.classList.remove('hidden');
 };
 
-document.querySelector('.modal-close').addEventListener('click', () => {
-    document.getElementById('modalOverlay').classList.add('hidden');
-});
-
-document.getElementById('modalOverlay').addEventListener('click', (e) => {
-    if (e.target.id === 'modalOverlay') {
+const _modalCloseBtn = document.querySelector('.modal-close');
+if (_modalCloseBtn) {
+    _modalCloseBtn.addEventListener('click', () => {
         document.getElementById('modalOverlay').classList.add('hidden');
-    }
-});
+    });
+}
+
+const _modalOverlayInner = document.getElementById('modalOverlay');
+if (_modalOverlayInner) {
+    _modalOverlayInner.addEventListener('click', (e) => {
+        if (e.target.id === 'modalOverlay') {
+            _modalOverlayInner.classList.add('hidden');
+        }
+    });
+}
 
 // Tool Tabs
 const toolTabs = Array.from(document.querySelectorAll('.tool-tab-btn'));
@@ -2361,7 +2371,8 @@ function renderToolError(containerId, message) {
 }
 
 // Synastry
-document.getElementById('synastryForm').addEventListener('submit', async (e) => {
+const synastryForm = document.getElementById('synastryForm');
+if (synastryForm) synastryForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const payload = {
         person_a: {
@@ -2433,7 +2444,8 @@ function renderSynastry(data) {
 }
 
 // Kairos
-document.getElementById('kairosForm').addEventListener('submit', async (e) => {
+const kairosForm = document.getElementById('kairosForm');
+if (kairosForm) kairosForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const payload = {
         activity: document.getElementById('kairosActivity').value,
@@ -2509,7 +2521,8 @@ function renderKairos(data) {
 }
 
 // Horary Oracle
-document.getElementById('horaryForm').addEventListener('submit', async (e) => {
+const horaryForm = document.getElementById('horaryForm');
+if (horaryForm) horaryForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const payload = {
         question: document.getElementById('horaryQuestion').value,
@@ -2610,7 +2623,8 @@ function formatHoraryCondition(c) {
 }
 
 // World Dashboard
-document.getElementById('worldForm').addEventListener('submit', async (e) => {
+const worldForm = document.getElementById('worldForm');
+if (worldForm) worldForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const payload = {
         date: document.getElementById('worldDate').value || null,
@@ -2639,7 +2653,8 @@ document.getElementById('worldForm').addEventListener('submit', async (e) => {
 });
 
 // Rectification
-document.getElementById('rectificationForm').addEventListener('submit', async (e) => {
+const rectificationForm = document.getElementById('rectificationForm');
+if (rectificationForm) rectificationForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const rectMethods = [];
     const rectAnimodar = document.getElementById('rectMethodAnimodar');
@@ -2962,4 +2977,4 @@ try {
         // Basic View logic: if unknown, value is 12:00. 
         // We'll just set the value for now.
     }
-} catch (e) { console.warn('Failed to autoload data', e); }
+} catch (_) { /* Suppressed: non-critical autofill */ }

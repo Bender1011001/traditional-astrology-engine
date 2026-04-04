@@ -373,7 +373,18 @@ class DignityCalculator:
         else:
             details.append(f"Monomoiria Ruler: {mono_ruler.value}")
 
-        # 7. Collect variant information for report
+        # 7. Peregrine (-5): No essential dignity of any kind
+        if (
+            score_breakdown["domicile"] == 0
+            and score_breakdown["exaltation"] == 0
+            and score_breakdown["triplicity"] == 0
+            and score_breakdown["term"] == 0
+            and score_breakdown["face"] == 0
+        ):
+            score += cls.PEREGRINE
+            details.append("Peregrine (-5)")
+
+        # 8. Collect variant information for report
         element = cls.ZODIAC_ELEMENTS.get(sign)
         dorothean_rulers = cls.TRIPLICITY_RULERS.get(element)
         ptolemaic_rulers = PTOLEMAIC_TRIPLICITY.get(element) # From reference_data
@@ -566,15 +577,13 @@ class DignityCalculator:
             else:
                 details.append(f"Monomoiria Ruler: {mono_ruler.value}")
 
-        # 7. Peregrine (-5): no essential dignity at all (and not in detriment/fall scoring above)
+        # 7. Peregrine (-5): No essential dignity of any kind
         if (
             score_breakdown["domicile"] == 0
             and score_breakdown["exaltation"] == 0
             and score_breakdown["triplicity"] == 0
             and score_breakdown["term"] == 0
             and score_breakdown["face"] == 0
-            and score_breakdown["detriment"] == 0
-            and score_breakdown["fall"] == 0
         ):
             score += cls.PEREGRINE
             details.append("Peregrine (-5)")
@@ -615,36 +624,48 @@ class DignityCalculator:
         
         house_num = cls.get_house_number(planet.longitude, chart.ascendant, getattr(chart, "houses", None))
         
-        # 1. House Position
-        if house_num in [1, 4, 7, 10]:
+        # 1. House Position (Lilly, CA p. 115)
+        if house_num in [1, 10]:
             score += 5
-            details.append(f"Angular House ({house_num}) (+5)")
-        elif house_num in [2, 5, 8, 11]:
+            details.append(f"In the {house_num}th House (+5)")
+        elif house_num in [4, 7, 11]:
+            score += 4
+            details.append(f"In the {house_num}th House (+4)")
+        elif house_num in [2, 5]:
             score += 3
-            details.append(f"Succedent House ({house_num}) (+3)")
-        elif house_num in [3, 6, 9, 12]:
+            details.append(f"In the {house_num}th House (+3)")
+        elif house_num == 9:
+            score += 2
+            details.append(f"In the {house_num}th House (+2)")
+        elif house_num == 3:
             score += 1
-            details.append(f"Cadent House ({house_num}) (+1)")
+            details.append(f"In the {house_num}th House (+1)")
+        elif house_num in [6, 8]:
+            score -= 2
+            details.append(f"In the {house_num}th House (-2, Malignant/Weak)")
+        elif house_num == 12:
+            score -= 5
+            details.append(f"In the {house_num}th House (-5, Malignant/Hidden)")
 
         # 2. Retrograde / Speed
-        if planet.speed < 0:
-            score -= 5
-            details.append("Retrograde (-5)")
-        else:
-            # Station Direct check: Very slow but positive speed
-            # Since we don't have historical data, we use a small threshold
-            if planet.speed < 0.01: # Threshold for station
-                score += 4
-                details.append("Station Direct (Estimated) (+4)")
-            
-            # Speed comparison
-            avg_speed = cls.AVERAGE_SPEEDS.get(planet.name, 0)
-            if planet.speed > avg_speed:
-                score += 2
-                details.append(f"Faster than average speed (+2, {planet.speed:.4f} > {avg_speed:.4f})")
-            elif planet.speed < avg_speed and planet.speed > 0:
-                score -= 2
-                details.append(f"Slower than average speed (-2, {planet.speed:.4f} < {avg_speed:.4f})")
+        if planet.name not in {PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE, PlanetName.SUN, PlanetName.MOON}:
+            if planet.speed < 0:
+                score -= 5
+                details.append("Retrograde (-5)")
+            else:
+                # Station Direct check: Very slow but positive speed
+                if planet.speed < 0.01: # Threshold for station
+                    score += 4
+                    details.append("Station Direct (Estimated) (+4)")
+                
+                # Speed comparison
+                avg_speed = cls.AVERAGE_SPEEDS.get(planet.name, 0)
+                if planet.speed > avg_speed:
+                    score += 2
+                    details.append(f"Faster than average speed (+2, {planet.speed:.4f} > {avg_speed:.4f})")
+                elif planet.speed < avg_speed and planet.speed > 0:
+                    score -= 2
+                    details.append(f"Slower than average speed (-2, {planet.speed:.4f} < {avg_speed:.4f})")
 
         # 3. Solar Relationship (Oriental/Occidental)
         sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
@@ -688,6 +709,32 @@ class DignityCalculator:
         if joy_score > 0:
             score += joy_score
             details.append(f"Planetary Joy in {house_num}th House (+{joy_score})")
+
+        # 6. Nodal Conjunctions
+        nn = next((p for p in chart.planets if p.name == PlanetName.NORTH_NODE), None)
+        sn = next((p for p in chart.planets if p.name == PlanetName.SOUTH_NODE), None)
+        if nn and planet.name not in {PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE}:
+            dnn = abs(planet.longitude - nn.longitude) % 360
+            if dnn > 180: dnn = 360 - dnn
+            if dnn <= 3.0:
+                score += 3
+                details.append("Conjunct North Node (+3)")
+        if sn and planet.name not in {PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE}:
+            dsn = abs(planet.longitude - sn.longitude) % 360
+            if dsn > 180: dsn = 360 - dsn
+            if dsn <= 3.0:
+                score -= 3
+                details.append("Conjunct South Node (-3)")
+                
+        # 7. Moon Phases (Waxing/Waning)
+        if planet.name == PlanetName.MOON and sun:
+            moon_phase_angle = (planet.longitude - sun.longitude) % 360
+            if 0 < moon_phase_angle <= 180:
+                score += 2
+                details.append("Moon is Waxing (+2)")
+            else:
+                score -= 2
+                details.append("Moon is Waning (-2)")
 
         return {
             "total_score": score,

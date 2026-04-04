@@ -4,13 +4,10 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 import logging
+import sys
+import threading
 
-def send_email(to_email: str, subject: str, html_content: str, attachment_bytes: bytes = None, attachment_name: str = "document.pdf") -> bool:
-    """
-    Sends an email using SMTP (if configured) or SendGrid (if configured).
-    If neither is configured, logs the email content to console (dev mode).
-    """
-    
+def _send_email_blocking(to_email: str, subject: str, html_content: str, attachment_bytes: bytes = None, attachment_name: str = "document.pdf") -> bool:
     # 1. Append Compliance Footer if not present
     if "<footer" not in html_content and "unsubscribe" not in html_content.lower():
         footer = """
@@ -23,7 +20,6 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
             <p>To unsubscribe, please rely to this email with "UNSUBSCRIBE".</p>
         </div>
         """
-        # Insert before </body> if present, otherwise append
         if "</body>" in html_content:
             html_content = html_content.replace("</body>", footer + "</body>")
         else:
@@ -34,9 +30,6 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
     sender_email = os.getenv("SENDER_EMAIL", "noreply@codexcaelestis.com")
     
     if sendgrid_key:
-        # Simple SendGrid implementation (using python-http-client or requests if library not found, 
-        # but here we'll stick to standard library if possible, or just mock it if we don't want to add deps)
-        # Actually, using requests is easier for SendGrid Web API.
         try:
             import requests
             import base64
@@ -62,19 +55,17 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
                     "disposition": "attachment"
                 }]
                 
-            response = requests.post("https://api.sendgrid.com/v3/mail/send", json=data, headers=headers)
+            response = requests.post("https://api.sendgrid.com/v3/mail/send", json=data, headers=headers, timeout=10)
             if response.status_code in (200, 201, 202):
                 return True
             else:
-                logging.error(f"SendGrid Error: {response.text}")
-                # Fallthrough to other methods or fail
+                logging.error("SendGrid Error: %s", response.text)
         except ImportError:
             logging.warning("Requests library not found, skipping SendGrid.")
-            pass
         except Exception as e:
-            logging.error(f"SendGrid Exception: {e}")
+            logging.error("SendGrid Exception: %s", repr(e), exc_info=True)
 
-    # 2. Try SMTP
+    # 3. Try SMTP
     smtp_host = os.getenv("SMTP_HOST")
     smtp_port = int(os.getenv("SMTP_PORT", "587"))
     smtp_user = os.getenv("SMTP_USER")
@@ -101,22 +92,20 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
             server.quit()
             return True
         except Exception as e:
-            logging.error(f"SMTP Error: {e}")
+            logging.error("SMTP Error: %s", repr(e), exc_info=True)
             return False
 
-    # 3. Dev Mode / No Provider Configured
+    # 4. Dev Mode / No Provider Configured
     masked_email = to_email
     if "@" in to_email:
         name, domain = to_email.split("@")
         masked_email = f"{name[:2]}***@***{domain[-4:]}" if len(name) > 2 else f"***@***{domain[-4:]}"
 
-    logging.warning(f"EMAIL NOT SENT (no provider configured): To={masked_email}, Subject={subject}")
-    logging.warning("Configure SENDGRID_API_KEY or SMTP_HOST/SMTP_USER to enable email delivery.")
+    logging.warning("EMAIL NOT SENT (no provider configured): To=%s, Subject=%s", masked_email, subject)
     
-    # In development, log the content for debugging
     if os.getenv("DEBUG_EMAIL", "").lower() in ("1", "true"):
         print("="*60)
-        print(f"MOCK EMAIL TO: {to_email}") # Keep full email for explicit debug mode
+        print(f"MOCK EMAIL TO: {to_email}")
         print(f"SUBJECT: {subject}")
         print("-" * 20)
         print(html_content[:500] + "..." if len(html_content) > 500 else html_content)
@@ -124,8 +113,23 @@ def send_email(to_email: str, subject: str, html_content: str, attachment_bytes:
             print(f"[Attachment: {attachment_name} ({len(attachment_bytes)} bytes)]")
         print("="*60)
     
-    # Return False to indicate email was NOT sent in production
     return False
+
+def send_email(to_email: str, subject: str, html_content: str, attachment_bytes: bytes = None, attachment_name: str = "document.pdf") -> bool:
+    """
+    Non-blocking wrapper that dispatches the email payload to a background thread.
+    Returns True indicating the dispatch was successfully enqueued.
+    """
+    if "pytest" in sys.modules:
+        return _send_email_blocking(to_email, subject, html_content, attachment_bytes, attachment_name)
+        
+    thread = threading.Thread(
+        target=_send_email_blocking,
+        args=(to_email, subject, html_content, attachment_bytes, attachment_name),
+        daemon=True
+    )
+    thread.start()
+    return True
 
 def render_template(template_name: str, context: dict) -> str:
     """
@@ -151,6 +155,6 @@ def render_template(template_name: str, context: dict) -> str:
             
         return content
     except Exception as e:
-        logging.error(f"Error rendering template {template_name}: {e}")
+        logging.error("Error rendering template %s: %s", template_name, e)
         # Return a basic fallback if template fails
         return f"Error loading template. Context: {context}"

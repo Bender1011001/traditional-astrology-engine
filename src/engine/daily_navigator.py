@@ -155,7 +155,7 @@ class DailyNavigator:
             else:
                 zr_block = {"note": "Lot of Spirit not calculable."}
         except Exception as e:
-            logger.debug("ZR calculation failed: %s", e)
+            logger.warning("ZR calculation failed: %s", repr(e), exc_info=True)
             zr_block = {"note": "ZR unavailable."}
 
         # ── 4. Active Transits ────────────────────────────────────────────

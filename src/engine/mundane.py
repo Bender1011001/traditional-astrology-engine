@@ -181,7 +181,7 @@ class MundaneEngine:
                 "degree": lon % 30
             })
         except Exception as e:
-            logger.debug("Solar eclipse calc failed: %s", e)
+            logger.warning("Solar eclipse calc failed: %s", repr(e), exc_info=True)
 
         # Lunar Eclipse (Previous)
         try:
@@ -217,7 +217,7 @@ class MundaneEngine:
                 "degree": lon % 30
             })
         except Exception as e:
-            logger.debug("Lunar eclipse calc failed: %s", e)
+            logger.warning("Lunar eclipse calc failed: %s", repr(e), exc_info=True)
 
         return results
 
@@ -286,7 +286,7 @@ class MundaneEngine:
                     "duration_hours": ecl.get("duration_hours"),
                 })
             except Exception as e:
-                logger.debug("Eclipse chart calc failed for %s: %s", ecl.get('type', 'unknown'), e)
+                logger.warning("Eclipse chart calc failed for %s: %s", ecl.get('type', 'unknown'), e)
                 continue
         
         return results
@@ -554,7 +554,7 @@ class MundaneEngine:
         moon_pos = swe.calc_ut(ingress_jd, swe.MOON, swe.FLG_SWIEPH)[0][0]
         # azalt(tjd, calc_flag, geopos, atpress, attemp, xin)
         # geopos = (lon, lat, alt), xin = (lon, lat, dist)
-        res_azalt = swe.azalt(ingress_jd, swe.EQU2HOR, (self.lon, self.lat, 0), 0, 0, (sun_pos, 0, 1.0))
+        res_azalt = swe.azalt(ingress_jd, swe.ECL2HOR, (self.lon, self.lat, 0), 0, 0, (sun_pos, 0, 1.0))
         alt_sun = res_azalt[1] # Index 1 is altitude
         
         is_day = alt_sun > 0
@@ -570,7 +570,7 @@ class MundaneEngine:
         try:
             syz_pos, _syz_type = calculate_prenatal_syzygy(ingress_jd)
         except Exception as e:
-            logger.debug("Prenatal syzygy calc failed: %s", e)
+            logger.warning("Prenatal syzygy calc failed: %s", repr(e), exc_info=True)
             syz_pos = sun_pos  # Fallback
         
         vital_points = [

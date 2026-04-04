@@ -59,12 +59,20 @@
 <h1>THE TWELVE HOUSES</h1>
 <div class="ornament"></div>
 <p class="subtitle">House meanings in traditional astrology, with history and practical use.</p>
-<nav aria-label="Primary" class="header-actions">
-  <a class="help-btn" href="/" style="background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; font-weight: 700;">✦ Get Your Reading</a>
-  <a class="help-btn" href="daily.html">Daily Navigator</a>
-  <a class="help-btn" href="/">Home</a>
-  <a class="help-btn" href="privacy.html">Privacy</a>
-</nav>
+<nav class="site-nav" aria-label="Main navigation" style="margin-top: 2rem;">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+      <a href="/daily.html" class="nav-link">Daily Navigator</a>
+      <a href="/#how-it-works" class="nav-link">How It Works</a>
+      <a href="/#sample" class="nav-link">Sample</a>
+      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+    </div>
+  </nav>
 </div>
 </header>
 <section class="basic-view">
@@ -187,5 +195,61 @@
       });
     }
   </script>
+  <!-- AUTH MODALS -->
+  <div id="authModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+      
+      <!-- Login View -->
+      <div id="loginView" class="auth-view">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-field">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" required autocomplete="username" />
+          </div>
+          <div class="form-field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-loading hidden">Signing In...</span>
+          </button>
+          <div id="loginError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p>
+        </div>
+      </div>
+
+      <!-- Register View -->
+      <div id="registerView" class="auth-view hidden">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-sub">Save your natal chart securely and access it anywhere.</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-field">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" required autocomplete="new-password" minlength="8" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-loading hidden">Creating...</span>
+          </button>
+          <div id="registerError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/auth.js?v=20260401b"></script>
 </body>
 </html>

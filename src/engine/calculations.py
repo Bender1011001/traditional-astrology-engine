@@ -246,16 +246,19 @@ def is_void_of_course(moon_lon: float, chart_planets: list[Planet]) -> bool:
 
         for aspect in major_aspects:
             for sign_mult in [-1, 1]:
+                # Target initial separation
                 target_lon = (p.longitude + (sign_mult * aspect)) % 360
                 dist_to_target = (target_lon - moon_lon) % 360
 
-                # Target must be ahead of Moon and reachable before sign boundary
-                if 0 < dist_to_target < dist_to_end:
-                    # Application check: Moon must be closing the gap.
-                    # The aspect point moves with the planet, so closing speed =
-                    # Moon's speed minus the planet's speed.
-                    closing_speed = moon_speed - p_speed
-                    if closing_speed > 0:
+                # Moon must be closing the gap.
+                closing_speed = moon_speed - p_speed
+                if closing_speed > 0 and dist_to_target > 0:
+                    # Calculate true intersection offset based on relative velocities
+                    time_to_perfect = dist_to_target / closing_speed
+                    moon_travel_dist = time_to_perfect * moon_speed
+                    
+                    # Aspect must mathematically perfect before the Moon leaves its current sign
+                    if moon_travel_dist < dist_to_end:
                         # Moon is applying — NOT void of course
                         return False
     return True

@@ -719,7 +719,7 @@ def _apply_dignity_overrides(
             # Preserve the full original object but override what the prompt reads.
             p["dignities"] = variant
         except Exception as e:
-            logger.debug("Dignity variant calc failed for planet: %s", e)
+            logger.debug("Dignity variant calc failed for planet: %s", repr(e), exc_info=True)
             continue
 
     # Record doctrine choice for appendix display.
@@ -1079,7 +1079,7 @@ def build_raw_data_appendix(chart_data: str) -> str:
     try:
         parsed = json.loads(chart_data) if isinstance(chart_data, str) else (chart_data or {})
     except Exception as e:
-        logger.debug("Chart data JSON parse failed: %s", e)
+        logger.debug("Chart data JSON parse failed: %s", repr(e), exc_info=True)
         return ""
 
     meta = (parsed or {}).get("meta", {}) or {}
@@ -1319,7 +1319,7 @@ def run_premium_report(chart_data, output_file, iterations=6):
             f"**Zodiac System:** {((chart_meta.get('zodiac_system') or {}).get('label'))}  \n"
         )
     except Exception as e:
-        logger.debug("Birth header construction failed: %s", e)
+        logger.debug("Birth header construction failed: %s", repr(e), exc_info=True)
         birth_header = ""
     
     final_report = f"""# PREMIUM NATAL CHART READING

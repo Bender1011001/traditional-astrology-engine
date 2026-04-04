@@ -41,18 +41,30 @@ def _normalize_query(city: str, state: str = "") -> str:
     return " ".join(query.split()).strip().lower()
 
 
+_MEM_GEO_CACHE = None
+
 def _load_geocode_cache() -> dict:
+    global _MEM_GEO_CACHE
+    if _MEM_GEO_CACHE is not None:
+        return _MEM_GEO_CACHE
+        
     try:
         if not os.path.exists(_GEOCODE_CACHE_FILE):
-            return {}
+            _MEM_GEO_CACHE = {}
+            return _MEM_GEO_CACHE
         with open(_GEOCODE_CACHE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f) or {}
+            data = json.load(f) or {}
+            _MEM_GEO_CACHE = data
+            return data
     except Exception as e:
-        logger.debug("Geocode cache load failed: %s", e)
-        return {}
+        logger.warning("Geocode cache load failed: %s", repr(e), exc_info=True)
+        _MEM_GEO_CACHE = {}
+        return _MEM_GEO_CACHE
 
 
 def _save_geocode_cache(cache: dict) -> None:
+    global _MEM_GEO_CACHE
+    _MEM_GEO_CACHE = cache
     try:
         os.makedirs(CACHE_DIR, exist_ok=True)
         tmp = _GEOCODE_CACHE_FILE + ".tmp"
@@ -60,7 +72,7 @@ def _save_geocode_cache(cache: dict) -> None:
             json.dump(cache, f)
         os.replace(tmp, _GEOCODE_CACHE_FILE)
     except Exception as e:
-        logger.debug("Geocode cache save failed: %s", e)
+        logger.warning("Geocode cache save failed: %s", repr(e), exc_info=True)
         # Best-effort cache; never break chart calculation.
         return
 
@@ -83,7 +95,7 @@ def _cache_get(query_norm: str) -> tuple[float, float] | None:
             if created_dt < (datetime.now(timezone.utc) - timedelta(days=_GEOCODE_CACHE_TTL_DAYS)):
                 return None
         except Exception as e:
-            logger.debug("Cache TTL parse failed: %s", e)
+            logger.warning("Cache TTL parse failed: %s", repr(e), exc_info=True)
             return None
 
     lat = row.get("lat")
@@ -150,7 +162,7 @@ def _geocode_us_census(city: str, state: str) -> tuple[float, float] | None:
             if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
                 return float(lat), float(lon)
     except Exception as e:
-        logger.debug("US Census geocoding failed: %s", e)
+        logger.warning("US Census geocoding failed: %s", repr(e), exc_info=True)
         return None
     return None
 
@@ -196,20 +208,28 @@ def _geocode_open_meteo(city: str, state: str = "") -> tuple[float, float] | Non
         if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
             return float(lat), float(lon)
     except Exception as e:
-        logger.debug("Open-Meteo geocoding failed: %s", e)
+        logger.warning("Open-Meteo geocoding failed: %s", repr(e), exc_info=True)
         return None
     return None
 
+
+_IN_MEMORY_GEO_CACHE = {}
 
 def get_coordinates(city: str, state: str = "") -> tuple[float, float]:
     """
     Get latitude and longitude for a given city and state.
     """
     query_norm = _normalize_query(city, state)
-    # Tests should be deterministic: avoid using a persistent on-disk cache during pytest runs.
+    
+    # 1. In-Memory Cache (Blazing fast for test suites and batched queries)
+    if query_norm in _IN_MEMORY_GEO_CACHE:
+        return _IN_MEMORY_GEO_CACHE[query_norm]
+
+    # 2. Persistent On-Disk Cache (bypassed in tests to prevent cross-run pollution)
     if not os.getenv("PYTEST_CURRENT_TEST"):
         cached = _cache_get(query_norm)
         if cached:
+            _IN_MEMORY_GEO_CACHE[query_norm] = cached
             return cached
 
     query = f"{city}, {state}" if state else city
@@ -219,6 +239,7 @@ def get_coordinates(city: str, state: str = "") -> tuple[float, float]:
             location = geolocator.geocode(query, exactly_one=True)
             if location:
                 lat, lon = float(location.latitude), float(location.longitude)
+                _IN_MEMORY_GEO_CACHE[query_norm] = (lat, lon)
                 _cache_set(query_norm, lat, lon)
                 return lat, lon
             raise ValueError(f"Could not find location: {query}")

@@ -59,7 +59,7 @@ class PrimaryDirectionsEngine:
             coords = res[0] if isinstance(res[0], (list, tuple)) else res
             return coords[0]  # true obliquity
         except Exception as e:
-            logger.debug("Obliquity calc failed: %s", e)
+            logger.warning("Obliquity calc failed: %s", repr(e), exc_info=True)
             return 23.4392911  # J2000 fallback
 
     @classmethod
@@ -129,6 +129,14 @@ class PrimaryDirectionsEngine:
         ratio = abs(md) / sa
         tan_pole = ratio * math.tan(cls._to_rad(geo_lat))
         return cls._to_deg(math.atan(tan_pole))
+
+    @classmethod
+    def _get_pole_and_hemisphere(cls, ra: float, dec: float, ramc: float, geo_lat: float) -> Tuple[float, bool]:
+        md = cls.calculate_md(ra, ramc)
+        dsa, nsa = cls.calculate_semi_arcs(dec, geo_lat)
+        sa = dsa if abs(md) < dsa else nsa
+        pole = cls.calculate_pole(md, sa, geo_lat)
+        return pole, md >= 0
 
     @classmethod
     def calculate_mundane_position(cls, ra: float, dec: float, ramc: float, geo_lat: float) -> float:
@@ -288,7 +296,7 @@ class PrimaryDirectionsEngine:
                 _cusps, ascmc = swe.houses_armc(ramc_dir, geo_lat, epsilon, b'P')
                 asc_dir_lon = ascmc[0]
             except Exception as e:
-                logger.debug("Directed house calc failed for year %d: %s", year, e)
+                logger.warning("Directed house calc failed for year %d: %s", year, repr(e), exc_info=True)
                 continue
 
             # Determine which bound the directed Asc falls in
@@ -490,11 +498,13 @@ class PrimaryDirectionsEngine:
 
         # Compute obliquity from chart's Julian Day for accuracy
         epsilon = cls._get_obliquity(chart.jd) if hasattr(chart, 'jd') and chart.jd else cls.EPSILON
+        ramc, _ = cls.ecliptic_to_equatorial(chart.mc, 0.0, epsilon)
 
-        # OA of significator point (lat 0)
+        # OA of significator point (lat 0) using its actual Pole
         ra_sig, dec_sig = cls.ecliptic_to_equatorial(cls._normalize_deg(target_lon), 0.0, epsilon)
-        ad_sig = cls.calculate_ad(dec_sig, geo_lat)
-        oa_sig = (ra_sig - ad_sig) % 360.0
+        pole_sig, is_east = cls._get_pole_and_hemisphere(ra_sig, dec_sig, ramc, geo_lat)
+        ad_sig = cls.calculate_ad(dec_sig, pole_sig)
+        oa_sig = (ra_sig - ad_sig) % 360.0 if is_east else (ra_sig + ad_sig) % 360.0
 
         aspects_to_check = [
             ("Conjunction", 0),
@@ -524,8 +534,8 @@ class PrimaryDirectionsEngine:
 
                 for lon_pt, name_pt in aspect_lons:
                     ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0, epsilon)
-                    ad_pt = cls.calculate_ad(dec_pt, geo_lat)
-                    oa_pt = (ra_pt - ad_pt) % 360.0
+                    ad_pt = cls.calculate_ad(dec_pt, pole_sig)
+                    oa_pt = (ra_pt - ad_pt) % 360.0 if is_east else (ra_pt + ad_pt) % 360.0
 
                     arc = oa_pt - oa_sig
                     if arc < 0:
@@ -565,6 +575,7 @@ class PrimaryDirectionsEngine:
                                          PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]]
         
         epsilon = cls._get_obliquity(chart.jd) if hasattr(chart, 'jd') and chart.jd else cls.EPSILON
+        ramc, _ = cls.ecliptic_to_equatorial(chart.mc, 0.0, epsilon)
         
         aspects_to_check = [
             ("Conjunction", 0),
@@ -573,10 +584,11 @@ class PrimaryDirectionsEngine:
         ]
         
         for sig in traditional:
-            # OA of the significator (the planet being aspected)
+            # OA of the significator (the planet being aspected) under its own Pole
             ra_sig, dec_sig = cls.ecliptic_to_equatorial(sig.longitude, 0.0, epsilon)
-            ad_sig = cls.calculate_ad(dec_sig, geo_lat)
-            oa_sig = (ra_sig - ad_sig) % 360.0
+            pole_sig, is_east = cls._get_pole_and_hemisphere(ra_sig, dec_sig, ramc, geo_lat)
+            ad_sig = cls.calculate_ad(dec_sig, pole_sig)
+            oa_sig = (ra_sig - ad_sig) % 360.0 if is_east else (ra_sig + ad_sig) % 360.0
             
             for prom in traditional:
                 if prom.name == sig.name:
@@ -595,8 +607,8 @@ class PrimaryDirectionsEngine:
                     
                     for lon_pt, name_pt in aspect_lons:
                         ra_pt, dec_pt = cls.ecliptic_to_equatorial(lon_pt, 0.0, epsilon)
-                        ad_pt = cls.calculate_ad(dec_pt, geo_lat)
-                        oa_pt = (ra_pt - ad_pt) % 360.0
+                        ad_pt = cls.calculate_ad(dec_pt, pole_sig)
+                        oa_pt = (ra_pt - ad_pt) % 360.0 if is_east else (ra_pt + ad_pt) % 360.0
                         
                         arc = oa_pt - oa_sig
                         if arc < 0:

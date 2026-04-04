@@ -38,7 +38,7 @@ async def run_audit(
     )
     
     if "error" in result:
-        return {"error": result["error"]}
+        raise HTTPException(status_code=400, detail=result["error"])
 
     # Return just the detailed forensic analysis part for this endpoint
     # (or the whole thing if requested, but 'audit' implies the deep dive)

@@ -1,11 +1,10 @@
-import { API_BASE } from './config.js';
-
 /**
  * Builds a full API URL using the current Base.
  */
 export function apiUrl(path) {
     const safePath = String(path || "").startsWith("/") ? path : `/${path || ""}`;
-    return `${API_BASE}${safePath}`;
+    const base = typeof window !== "undefined" ? window.CAEL_API_BASE : "";
+    return `${base}${safePath}`;
 }
 
 /**

@@ -257,7 +257,7 @@ def _get_obliquity_deg(jd: Optional[float]) -> float:
         if isinstance(coords, (list, tuple)) and len(coords) > 0:
             return coords[0]  # true obliquity (index 0); index 1 is mean obliquity
     except Exception as e:
-        logger.debug("Obliquity calc failed: %s", e)
+        logger.warning("Obliquity calc failed: %s", repr(e), exc_info=True)
     return 23.4392911
 
 def _equatorial_to_ecliptic(ra: float, dec: float, epsilon: float) -> Tuple[float, float]:
@@ -309,7 +309,7 @@ def _get_star_equatorial(star: FixedStar, jd: Optional[float]) -> Optional[Tuple
         dec = coords[1]
         return (ra, dec)
     except Exception as e:
-        logger.debug("Star equatorial lookup failed for %s: %s", star.swe_name, e)
+        logger.warning("Star equatorial lookup failed for %s: %s", star.swe_name, repr(e), exc_info=True)
         return None
 
 def _get_star_longitude(star: FixedStar, jd: Optional[float]) -> float:
@@ -335,7 +335,7 @@ def _angles_for_body(ra: float, dec: float, ramc: float, lat: float, orb: float)
     try:
         cos_h = -math.tan(math.radians(lat)) * math.tan(math.radians(dec))
     except Exception as e:
-        logger.debug("Hour angle calc error: %s", e)
+        logger.warning("Hour angle calc error: %s", repr(e), exc_info=True)
         cos_h = 2.0
     if -1.0 <= cos_h <= 1.0:
         h = math.degrees(math.acos(cos_h))

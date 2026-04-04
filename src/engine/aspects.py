@@ -96,10 +96,13 @@ class AspectEngine:
         
         rel_speed = p1.speed - p2.speed
         
-        # If distance is negative (behind) and closing (rel_speed > 0)
-        if dist < 0 and rel_speed > 0: return True
-        # If distance is positive (past) and closing (rel_speed < 0 - meaning p2 catching up or p1 retrograde?)
-        if dist > 0 and rel_speed < 0: return True
+        # If dist > 0, the gap is wider than the target aspect. To apply, the gap must be shrinking.
+        # This means p1 must be faster than p2 (p1 catching up to p2), so rel_speed > 0.
+        if dist > 0 and rel_speed > 0: return True
+        
+        # If dist < 0, the gap is narrower than the target aspect. To apply, the gap must be widening.
+        # This means p2 must be faster than p1 (p2 pulling away from p1), so rel_speed < 0.
+        if dist < 0 and rel_speed < 0: return True
         
         return False
 

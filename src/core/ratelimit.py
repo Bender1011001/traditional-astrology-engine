@@ -17,7 +17,7 @@ class RateLimiter:
                 self.redis.ping() # Test connection
                 self.use_redis = True
             except Exception as e:
-                logger.warning("Redis connection failed: %s. Falling back to in-memory.", e)
+                logger.warning("Redis connection failed: %s. Falling back to in-memory.", repr(e), exc_info=True)
                 self.use_redis = False
                 self._requests = {}
         else:
@@ -50,9 +50,24 @@ class RateLimiter:
                     "limit": self.DAILY_LIMIT,
                 }
             except Exception as e:
-                logger.debug("Redis rate limit check failed, using in-memory fallback: %s", e)
+                logger.warning("Redis rate limit check failed, using in-memory fallback: %s", repr(e), exc_info=True)
 
         now = datetime.now(timezone.utc).timestamp()
+        
+        # Memory Leak Prevention: Garbage collect stale IPs every 1000 requests
+        self._gc_counter = getattr(self, '_gc_counter', 0) + 1
+        if self._gc_counter > 1000:
+            stale_ips = []
+            for k, timestamps in self._requests.items():
+                active = [t for t in timestamps if now - t < self.WINDOW_SECONDS]
+                if not active:
+                    stale_ips.append(k)
+                else:
+                    self._requests[k] = active
+            for k in stale_ips:
+                del self._requests[k]
+            self._gc_counter = 0
+
         if ip not in self._requests:
             self._requests[ip] = []
 

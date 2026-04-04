@@ -7,6 +7,10 @@ from src.api.v1.auth import create_access_token, get_current_user
 from src.database.models import User
 from src.database.core import get_db
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 router = APIRouter()
 user_manager = get_user_manager()
 
@@ -26,6 +30,7 @@ async def register(request: RegisterRequest):
         tier=user.get("subscription_tier", "free"),
         data={"user_id": user["id"]}
     )
+    logger.info("New user registered: %s", request.email)
     
     return {
         "success": True,
@@ -48,6 +53,7 @@ async def login(request: LoginRequest):
         tier=user.get("subscription_tier", "free"),
         data={"user_id": user["id"]}
     )
+    logger.info("User logged in: %s", request.email)
     
     return {
         "success": True,
@@ -78,25 +84,25 @@ async def restore_session(token: str):
     try:
         payload = validate_token(token)
     except Exception as e:
+        logger.warning("Session restore failed with invalid token: %s", repr(e), exc_info=True)
         raise HTTPException(status_code=400, detail="Invalid token")
-        
+
     if not payload:
-            raise HTTPException(status_code=400, detail="Invalid token")
-    
+        raise HTTPException(status_code=400, detail="Invalid token")
+
     # Check for nested data 'd'
     data = payload.get("d", {})
     if not isinstance(data, dict):
-         data = {}
-         
+        data = {}
+
     chart_input = data.get("chart_input")
     # Also check top level just in case textual modification happened
     if not chart_input:
-          chart_input = payload.get("chart_input")
-
+        chart_input = payload.get("chart_input")
 
     if not chart_input:
-            raise HTTPException(status_code=404, detail="No session data found")
-            
+        raise HTTPException(status_code=404, detail="No session data found")
+
     return chart_input
 
 @router.post("/forgot-password")

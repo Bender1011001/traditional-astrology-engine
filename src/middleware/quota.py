@@ -75,4 +75,4 @@ async def verify_quota(
         db.add(new_record)
         db.commit()
     except Exception as e:
-        logger.warning("Failed to record usage: %s", e)
+        logger.warning("Failed to record usage: %s", repr(e), exc_info=True)

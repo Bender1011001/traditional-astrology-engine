@@ -67,8 +67,8 @@ def _get_or_create_stripe_price(tier_key: str) -> str:
             price_id = prices.data[0].id
             setattr(settings, cache_attr, price_id)
             return price_id
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning("Stripe price search failed for %s: %s", tier_key, repr(e), exc_info=True)
     
     # Create product + price
     try:
@@ -88,7 +88,7 @@ def _get_or_create_stripe_price(tier_key: str) -> str:
         logger.info("Created Stripe price %s for tier %s", price_id, tier_key)
         return price_id
     except Exception as e:
-        logger.error("Failed to create Stripe price for %s: %s", tier_key, e)
+        logger.error("Failed to create Stripe price for %s: %s", tier_key, repr(e), exc_info=True)
         raise HTTPException(status_code=500, detail="Payment system configuration error.")
 
 
@@ -150,7 +150,7 @@ async def guest_checkout(
         )
         return {"url": session.url, "session_id": session.id, "order_id": order_id}
     except Exception as e:
-        logger.error("Stripe checkout creation failed: %s", e)
+        logger.error("Stripe checkout creation failed: %s", repr(e), exc_info=True)
         raise HTTPException(status_code=500, detail="Could not create checkout session.")
 
 
@@ -173,7 +173,8 @@ async def generate_paid_reading(
     try:
         session = stripe.checkout.Session.retrieve(session_id)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Invalid session: {e}")
+        logger.error("Stripe session retrieval failed for %s: %s", session_id, repr(e), exc_info=True)
+        raise HTTPException(status_code=400, detail="Invalid or expired checkout session.")
     
     if session.payment_status != "paid":
         raise HTTPException(status_code=402, detail="Payment not completed.")

@@ -41,11 +41,26 @@ class UserManager:
             self._rate_limits[key] = []
             
         # Prune old
-        self._rate_limits[key] = [t for t in self._rate_limits[key] if (now - t).total_seconds() < window]
+        valid_times = [t for t in self._rate_limits[key] if (now - t).total_seconds() < window]
         
-        if len(self._rate_limits[key]) >= limit:
+        if not valid_times:
+            del self._rate_limits[key]
+            valid_times = []
+        else:
+            self._rate_limits[key] = valid_times
+            
+        # Periodic global garbage collection to prevent unbounded dictionary key growth
+        if len(self._rate_limits) > 5000:
+            for k in list(self._rate_limits.keys()):
+                self._rate_limits[k] = [t for t in self._rate_limits[k] if (now - t).total_seconds() < window]
+                if not self._rate_limits[k]:
+                    del self._rate_limits[k]
+        
+        if len(valid_times) >= limit:
             return False
             
+        if key not in self._rate_limits:
+            self._rate_limits[key] = []
         self._rate_limits[key].append(now)
         return True
     
@@ -142,7 +157,7 @@ class UserManager:
         except Exception as e:
             db.rollback()
             logging.error("Create user error: %s", e)
-            return {"success": False, "message": f"Database error during registration: {str(e)}"}
+            return {"success": False, "message": "A database error occurred during registration. Please try again."}
         finally:
             db.close()
     
@@ -253,15 +268,15 @@ class UserManager:
             if user.subscription and user.subscription.plan:
                 tier = user.subscription.plan.tier or "free"
         except Exception as e:
-            logger.debug("Tier lookup failed for user %s: %s", user.id, e)
+            logger.warning("Tier lookup failed for user %s: %s", user.id, repr(e), exc_info=True)
             tier = "free"
 
-        # Saved charts limits (B2B): Practitioner 100, Studio unlimited, Free small cap.
+        # Saved charts limits (B2B): Practitioner 100, Studio technically unlimited but capped to avoid JSON bombing.
         limit = 10
         if tier == "practitioner":
             limit = 100
         elif tier == "studio":
-            limit = None
+            limit = 10000
 
         if limit is not None and len(charts) >= limit:
             logging.warning("Saved charts limit reached for %s. Tier=%s limit=%s", user.email, tier, limit)
@@ -297,7 +312,7 @@ class UserManager:
             try:
                 is_valid = self._verify_password(old_password, user.password_hash)
             except Exception as e:
-                logger.debug("Password verification error for user %s: %s", user.id, e)
+                logger.warning("Password verification error for user %s: %s", user.id, repr(e), exc_info=True)
                 is_valid = False
 
             if not is_valid:
@@ -332,7 +347,7 @@ class UserManager:
             expires = datetime.now(timezone.utc).replace(second=0, microsecond=0).timestamp() + 3600
             
             user.reset_token = token
-            user.reset_token_expires = datetime.fromtimestamp(expires)
+            user.reset_token_expires = datetime.fromtimestamp(expires, tz=timezone.utc)
             db.commit()
             
             return {"success": True, "token": token}

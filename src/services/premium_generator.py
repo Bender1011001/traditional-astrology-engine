@@ -114,7 +114,7 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         logger.info("Task %s completed successfully", task_id)
 
     except Exception as e:
-        logger.error("Task %s failed: %s", task_id, e)
+        logger.error("Task %s failed: %s", task_id, repr(e), exc_info=True)
         task.status = "failed"
         task.result_json = {"error": str(e)}
         db.commit()

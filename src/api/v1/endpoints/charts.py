@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 from src.engine.cache_manager import get_from_cache, set_to_cache
 from src.engine.prediction import AdvancedPredictionEngine
-from src.api.v1.utils import log_event as _log_event # Alias for compatibility or clarity
+
 from src.middleware.quota import verify_quota
 from src.api.v1.middleware.auth import verify_api_key
 from src.api.v1.middleware.rate_limiting import enforce_rate_limit
@@ -82,7 +82,9 @@ async def generate_chart_b2b(
         chart_request.ayanamsa,
         chart_request.time_range_start,
         chart_request.time_range_end,
-        chart_request.time_range_samples
+        chart_request.time_range_samples,
+        latitude=getattr(chart_request, 'latitude', None),
+        longitude=getattr(chart_request, 'longitude', None)
     )
 
     if "error" in result:
@@ -100,7 +102,7 @@ async def generate_chart_b2b(
         db.add(new_record)
         db.commit()
     except Exception as e:
-        logger.error("Usage recording failed: %s", e)
+        logger.error("Usage recording failed: %s", repr(e), exc_info=True)
 
     # 5. Return Result (JSON)
     # Filter result for API response? 
@@ -115,7 +117,7 @@ async def calculate_full_nativity(req: ChartRequest, http_request: Request):
     """
     Single Endpoint for Comprehensive Forensic Audit.
     """
-    _log_event("chart_full_request", {"form": req.model_dump()}, http_request)
+    log_event("chart_full_request", {"form": req.model_dump()}, http_request)
     try:
         # Call the new Engine via bridge
         result = await generate_full_nativity_async(
@@ -126,19 +128,21 @@ async def calculate_full_nativity(req: ChartRequest, http_request: Request):
             name=req.name or "Native",
             house_system=req.house_system or "W",
             zodiac_system=req.zodiac_system or "tropical",
-            ayanamsa=req.ayanamsa
+            ayanamsa=req.ayanamsa,
+            latitude=getattr(req, 'latitude', None),
+            longitude=getattr(req, 'longitude', None)
         )
         
         if "error" in result:
-            _log_event("chart_full_error", {"error": result["error"]}, http_request)
+            log_event("chart_full_error", {"error": result["error"]}, http_request)
             raise HTTPException(status_code=400, detail=result["error"])
             
-        _log_event("chart_full_success", {"result_keys": list(result.keys())}, http_request)
+        log_event("chart_full_success", {"result_keys": list(result.keys())}, http_request)
         return result
 
     except Exception as e:
-        logger.error(f"Engine Failure: {str(e)}")
-        _log_event("chart_full_failure", {"error": str(e)}, http_request)
+        logger.error("Engine Failure: %s", repr(e), exc_info=True)
+        log_event("chart_full_failure", {"error": str(e)}, http_request)
         raise HTTPException(status_code=500, detail="Calculation Engine Error")
 
 
@@ -152,7 +156,7 @@ async def calculate_chart(
     Calculates a full natal chart including forensic audit, 5-day forecast, and plain-language synthesis.
     Now refactored to use the ForensicEngine via bridge.
     """
-    _log_event("chart_request_server", {"form": chart_request.model_dump()}, http_request)
+    log_event("chart_request_server", {"form": chart_request.model_dump()}, http_request)
     
     chart_hash = generate_chart_hash(chart_request)
     tier = "free"
@@ -213,7 +217,7 @@ async def calculate_chart(
     )
 
     if "error" in engine_result:
-        _log_event("chart_error_server", {"error": engine_result["error"]}, http_request)
+        log_event("chart_error_server", {"error": engine_result["error"]}, http_request)
         raise HTTPException(status_code=400, detail=engine_result["error"])
 
     # Transform back to legacy format for UI compatibility if needed
@@ -265,9 +269,9 @@ async def calculate_chart(
                 }
             )
         except Exception as save_err:
-            logger.error(f"Auto-save failed: {save_err}")
+            logger.error("Auto-save failed: %s", save_err)
 
-    _log_event("chart_result_server", {"result_keys": list(final_result.keys())}, http_request)
+    log_event("chart_result_server", {"result_keys": list(final_result.keys())}, http_request)
     return final_result
 
 
@@ -356,7 +360,8 @@ async def download_chart_pdf(chart_index: int, current_user: User = Depends(get_
 
         generator = PDFReportGenerator(pdf_data)
         # Prefer the deterministic markdown report body (safer than medical/decisioning tables).
-        pdf_buffer = generator.generate(custom_content=report_md if report_md else None)
+        from starlette.concurrency import run_in_threadpool
+        pdf_buffer = await run_in_threadpool(generator.generate, custom_content=report_md if report_md else None)
         
         # Create filename from chart name or date
         chart_name = chart_meta.get("name", "chart").replace(" ", "_")
@@ -369,7 +374,7 @@ async def download_chart_pdf(chart_index: int, current_user: User = Depends(get_
         )
         
     except Exception as e:
-        logger.error(f"PDF Generation Error: {e}")
+        logger.error("PDF Generation Error: %s", repr(e), exc_info=True)
         raise HTTPException(status_code=500, detail="Failed to generate PDF")
 
 
@@ -467,9 +472,10 @@ async def bulk_generate_pdfs(
     if not items:
         raise HTTPException(status_code=400, detail="No items provided")
 
-    max_items = 20 if sub.plan.tier == "practitioner" else 200
+    # Enforce horizontal processing timeouts. 50 items = ~45s of execution on geocache misses.
+    max_items = 20 if sub.plan.tier == "practitioner" else 50
     if len(items) > max_items:
-        raise HTTPException(status_code=400, detail=f"Too many items (max {max_items})")
+        raise HTTPException(status_code=400, detail=f"Too many items (max {max_items}) for immediate synchronous generation. Please reduce batch size to avoid gateway timeouts.")
 
     zip_buf = BytesIO()
     errors = []
@@ -497,9 +503,11 @@ async def bulk_generate_pdfs(
                 }
                 from src.engine.pdf_generator import PDFReportGenerator
                 gen = PDFReportGenerator(pdf_data)
-                pdf_buffer = gen.generate(custom_content=report_md if report_md else None)
+                from starlette.concurrency import run_in_threadpool
+                pdf_buffer = await run_in_threadpool(gen.generate, custom_content=report_md if report_md else None)
                 pdf_bytes = pdf_buffer.getvalue()
-                gen.buffer.close()
+                if hasattr(gen, 'buffer'):
+                    gen.buffer.close()
 
                 name = _safe_filename(it.name or f"native_{idx}")
                 date_part = _safe_filename(it.date or "")

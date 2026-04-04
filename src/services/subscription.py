@@ -70,7 +70,7 @@ class SubscriptionService:
             stripe_price = stripe.Price.retrieve(price_id)
             is_recurring = stripe_price.recurring is not None
         except Exception as e:
-            # Fallback to tier name if Stripe retrieve fails
+            logger.warning("Stripe price retrieval failed for %s, falling back to tier heuristic: %s", price_id, repr(e), exc_info=True)
             is_recurring = plan.tier not in ['onetime', 'CALIBRATION', 'FULL']
 
         metadata = {
@@ -133,7 +133,7 @@ class SubscriptionService:
                     if sub.plan and sub.plan.tier == plan.tier:
                         session_kwargs['subscription_data']["trial_end"] = int(sub.trial_end_date.timestamp())
             except Exception as e:
-                logger.debug("Trial alignment failed, proceeding with normal checkout: %s", e)
+                logger.warning("Trial alignment failed, proceeding with normal checkout: %s", repr(e), exc_info=True)
         else:
             # For one-time payments, we might want invoice creation enabled to track it easily
             session_kwargs['invoice_creation'] = {
@@ -223,8 +223,8 @@ class SubscriptionService:
         # Stripe sub details
         if stripe_sub_id:
             stripe_sub = stripe.Subscription.retrieve(stripe_sub_id)
-            sub.current_period_start = datetime.fromtimestamp(stripe_sub.current_period_start)
-            sub.current_period_end = datetime.fromtimestamp(stripe_sub.current_period_end)
+            sub.current_period_start = datetime.fromtimestamp(stripe_sub.current_period_start, tz=timezone.utc)
+            sub.current_period_end = datetime.fromtimestamp(stripe_sub.current_period_end, tz=timezone.utc)
 
             # Preserve trial state if Stripe says we're trialing.
             stripe_status = stripe_sub.get("status")
@@ -232,8 +232,8 @@ class SubscriptionService:
                 sub.status = "trial"
                 trial_start = stripe_sub.get("trial_start")
                 trial_end = stripe_sub.get("trial_end")
-                sub.trial_start_date = datetime.fromtimestamp(trial_start) if trial_start else sub.trial_start_date
-                sub.trial_end_date = datetime.fromtimestamp(trial_end) if trial_end else sub.trial_end_date
+                sub.trial_start_date = datetime.fromtimestamp(trial_start, tz=timezone.utc) if trial_start else sub.trial_start_date
+                sub.trial_end_date = datetime.fromtimestamp(trial_end, tz=timezone.utc) if trial_end else sub.trial_end_date
             else:
                 sub.status = "active"
                 sub.trial_start_date = None
@@ -257,7 +257,7 @@ class SubscriptionService:
                 is_recurring=is_recurring
             )
         except Exception as e:
-            logger.error("Failed to send admin notification for purchase: %s", e)
+            logger.error("Failed to send admin notification for purchase: %s", repr(e), exc_info=True)
 
     def _process_payment_succeeded(self, invoice: dict):
         # Log invoice
@@ -269,7 +269,7 @@ class SubscriptionService:
         if sub:
             sub.status = "active"
             if invoice.get("period_end"):
-                sub.current_period_end = datetime.fromtimestamp(invoice.get("period_end"))
+                sub.current_period_end = datetime.fromtimestamp(invoice.get("period_end"), tz=timezone.utc)
             self.db.commit()
             
             # Notify Admin (recurring payment)
@@ -284,15 +284,15 @@ class SubscriptionService:
                     is_recurring=True
                 )
             except Exception as e:
-                logger.error("Failed to send admin notification for recurring payment: %s", e)
+                logger.error("Failed to send admin notification for recurring payment: %s", repr(e), exc_info=True)
 
             # Create Invoice Record
             new_inv = Invoice(
                 user_id=sub.user_id,
                 subscription_id=sub.id,
                 stripe_invoice_id=invoice.get("id"),
-                amount_due=invoice.get("amount_due") / 100.0,
-                amount_paid=invoice.get("amount_paid") / 100.0,
+                amount_due=(invoice.get("amount_due") or 0) / 100.0,
+                amount_paid=(invoice.get("amount_paid") or 0) / 100.0,
                 status=invoice.get("status"),
                 pdf_url=invoice.get("invoice_pdf"),
                 created_at=datetime.now(timezone.utc)
@@ -311,14 +311,15 @@ class SubscriptionService:
             try:
                 user = sub.user
                 plan_tier = sub.plan.tier if sub.plan else "unknown"
-                error_msg = invoice.get("last_payment_error", {}).get("message", "Payment failed")
+                error_obj = invoice.get("last_payment_error") or {}
+                error_msg = error_obj.get("message", "Payment failed")
                 AdminNotificationService.notify_payment_failed(
                     user_email=user.email,
                     plan_tier=plan_tier,
                     error_message=error_msg
                 )
             except Exception as e:
-                logger.error("Failed to send admin notification for payment failure: %s", e)
+                logger.error("Failed to send admin notification for payment failure: %s", repr(e), exc_info=True)
 
     def _process_subscription_deleted(self, sub_data: dict):
         stripe_id = sub_data.get("id")
@@ -331,7 +332,9 @@ class SubscriptionService:
         stripe_id = sub_data.get("id")
         sub = self.db.query(UserSubscription).filter(UserSubscription.stripe_subscription_id == stripe_id).first()
         if sub:
-            sub.current_period_end = datetime.fromtimestamp(sub_data.get("current_period_end"))
+            period_end_ts = sub_data.get("current_period_end")
+            if period_end_ts is not None:
+                sub.current_period_end = datetime.fromtimestamp(period_end_ts, tz=timezone.utc)
             sub.cancel_at_period_end = sub_data.get("cancel_at_period_end")
             status = sub_data.get("status")
             if status == "active":
@@ -341,9 +344,9 @@ class SubscriptionService:
                 trial_start = sub_data.get("trial_start")
                 trial_end = sub_data.get("trial_end")
                 if trial_start:
-                    sub.trial_start_date = datetime.fromtimestamp(trial_start)
+                    sub.trial_start_date = datetime.fromtimestamp(trial_start, tz=timezone.utc)
                 if trial_end:
-                    sub.trial_end_date = datetime.fromtimestamp(trial_end)
+                    sub.trial_end_date = datetime.fromtimestamp(trial_end, tz=timezone.utc)
             elif status == "past_due":
                 sub.status = "past_due"
             self.db.commit()

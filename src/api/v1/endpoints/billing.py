@@ -13,6 +13,8 @@ import logging
 import hashlib
 
 
+logger = logging.getLogger(__name__)
+
 router = APIRouter()
 
 
@@ -54,7 +56,8 @@ def _lookup_onetime_price_id(*, product_name: str, unit_amount: int, currency: s
                 if (prod_name or "").strip() == product_name:
                     _REPORT_PRICE_CACHE[cache_key] = p.get("id")
                     return p.get("id")
-            except Exception:
+            except Exception as e:
+                logger.warning("Skipping price entry during lookup: %s", repr(e), exc_info=True)
                 continue
     except Exception as e:
         logging.getLogger(__name__).error("Stripe price lookup failed: %s", e)
@@ -109,12 +112,12 @@ async def list_public_plans(db: Session = Depends(get_db)):
         out.append(
             {
                 "tier": p.tier,
-                    "price_monthly": float(p.price_monthly) if p.price_monthly is not None else None,
-                    "price_annual": float(p.price_annual) if p.price_annual is not None else None,
-                    "checkout_enabled_monthly": bool(p.stripe_price_id_monthly) and checkout_global,
-                    "checkout_enabled_annual": bool(p.stripe_price_id_annual) and checkout_global,
-                }
-            )
+                "price_monthly": float(p.price_monthly) if p.price_monthly is not None else None,
+                "price_annual": float(p.price_annual) if p.price_annual is not None else None,
+                "checkout_enabled_monthly": bool(p.stripe_price_id_monthly) and checkout_global,
+                "checkout_enabled_annual": bool(p.stripe_price_id_annual) and checkout_global,
+            }
+        )
 
     return {
         "plans": out,
@@ -215,7 +218,8 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
             )
             return {"sessionId": session.id, "url": session.url}
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            logger.error("Stripe one-time checkout creation failed: %s", repr(e), exc_info=True)
+            raise HTTPException(status_code=500, detail="Failed to create checkout session")
 
     # ----------------------------
     # Subscription tiers
@@ -237,13 +241,15 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error("Stripe subscription checkout creation failed: %s", repr(e), exc_info=True)
+        raise HTTPException(status_code=500, detail="Failed to create checkout session")
 
 @router.get("/verify-checkout-session")
 async def verify_checkout_session(session_id: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     try:
         session = stripe.checkout.Session.retrieve(session_id)
     except Exception as e:
+        logger.warning("Invalid Stripe session retrieval for session_id=%s: %s", session_id, repr(e), exc_info=True)
         raise HTTPException(status_code=400, detail="Invalid Session ID")
 
     # Subscription checkouts with trials can complete without an immediate payment.
@@ -268,8 +274,8 @@ async def verify_checkout_session(session_id: str, background_tasks: BackgroundT
     if session.metadata.get("chart_data"):
         try:
             chart_data = json.loads(session.metadata.get("chart_data"))
-        except (TypeError, ValueError):
-            pass
+        except (TypeError, ValueError) as e:
+            logger.warning("Failed to parse chart_data from session metadata: %s", repr(e), exc_info=True)
     chart_hash = _chart_hash_from_chart_data(chart_data) or chart_hash
 
     # TRIGGER FULFILLMENT (Background Task) for report products only.
@@ -312,13 +318,15 @@ async def cancel_subscription(user: User = Depends(get_current_user), db: Sessio
     try:
         service = SubscriptionService(db)
         sub = service.cancel_subscription(user, immediate=False)
+        period_end_str = sub.current_period_end.strftime("%Y-%m-%d") if sub.current_period_end else "end of billing period"
         return {
             "success": True, 
-            "message": "Auto-renewal turned off. Access continues until " + sub.current_period_end.strftime("%Y-%m-%d")
+            "message": "Auto-renewal turned off. Access continues until " + period_end_str
         }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        logger.error("Subscription cancellation failed for user %s: %s", user.id if user else 'unknown', repr(e), exc_info=True)
         raise HTTPException(status_code=500, detail="Failed to cancel subscription")
 
 

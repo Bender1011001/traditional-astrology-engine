@@ -53,7 +53,7 @@ class SolarReturnEngine:
                     speed=res[3]
                 ))
             except Exception as e:
-                logger.debug("SR planet calc failed for %s: %s", pname_enum, e)
+                logger.warning("SR planet calc failed for %s: %s", pname_enum, repr(e), exc_info=True)
                 continue
         
         # SR Houses

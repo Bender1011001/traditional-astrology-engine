@@ -46,7 +46,7 @@ async def trigger_patch_db(request: Request, body: AdminActionRequest = Body(...
     
     # SECURITY: Rate limiting (5 attempts per hour per IP)
     if not _check_admin_rate_limit(client_ip):
-        logger.warning(f"ADMIN SECURITY: Rate limit exceeded for IP {client_ip}")
+        logger.warning("ADMIN SECURITY: Rate limit exceeded for IP %s", client_ip)
         raise HTTPException(status_code=429, detail="Too many admin requests. Try again later.")
     
     # SECURITY: Verify admin key from environment
@@ -56,17 +56,17 @@ async def trigger_patch_db(request: Request, body: AdminActionRequest = Body(...
         raise HTTPException(status_code=500, detail="Admin endpoint not configured")
     
     if body.key != admin_key:
-        logger.warning(f"ADMIN SECURITY: Invalid admin key attempt from IP {client_ip}")
+        logger.warning("ADMIN SECURITY: Invalid admin key attempt from IP %s", client_ip)
         raise HTTPException(status_code=403, detail="Forbidden")
     
     # AUDIT LOG: Log successful admin action
-    logger.info(f"ADMIN ACTION: Database patch triggered by IP {client_ip} at {datetime.now(timezone.utc)}")
+    logger.info("ADMIN ACTION: Database patch triggered by IP %s at %s", client_ip, datetime.now(timezone.utc))
     
     try:
         patch_database()
-        logger.info(f"ADMIN ACTION: Database patch completed successfully")
+        logger.info("ADMIN ACTION: Database patch completed successfully")
         return {"success": True, "message": "Database patch applied successfully."}
     except Exception as e:
-        logger.error(f"ADMIN ACTION: Database patch failed - {str(e)}")
+        logger.error("ADMIN ACTION: Database patch failed - %s", repr(e), exc_info=True)
         # SECURITY: Don't expose internal error details
         return {"success": False, "message": "Database patch encountered an error. Check server logs."}

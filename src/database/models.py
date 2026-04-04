@@ -94,26 +94,26 @@ class UserSubscription(Base):
 class UsageRecord(Base):
     __tablename__ = "usage_records"
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    subscription_id = Column(String, ForeignKey("user_subscriptions.id"))
-    user_id = Column(String, ForeignKey("users.id")) # Denormalized for query speed
-    resource_type = Column(String, nullable=False) # 'chart_generation', 'api_call'
+    subscription_id = Column(String, ForeignKey("user_subscriptions.id"), index=True)
+    user_id = Column(String, ForeignKey("users.id"), index=True) # Denormalized for query speed
+    resource_type = Column(String, nullable=False, index=True) # 'chart_generation', 'api_call'
     resource_id = Column(String, nullable=True) # ID of the resource used
     cost_credits = Column(Integer, default=1)
     metadata_json = Column(JSON, default=dict) # 'metadata' is reserved in some SQL
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
     
     subscription = relationship("UserSubscription", back_populates="usage_records")
 
 class Invoice(Base):
     __tablename__ = "invoices"
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String, ForeignKey("users.id"))
-    subscription_id = Column(String, ForeignKey("user_subscriptions.id"))
+    user_id = Column(String, ForeignKey("users.id"), index=True)
+    subscription_id = Column(String, ForeignKey("user_subscriptions.id"), index=True)
     stripe_invoice_id = Column(String)
     amount_due = Column(Numeric(10, 2))
     amount_paid = Column(Numeric(10, 2))
     status = Column(String(20))
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
     pdf_url = Column(String)
 
     subscription = relationship("UserSubscription", back_populates="invoices")
@@ -121,7 +121,7 @@ class Invoice(Base):
 class ApiKey(Base):
     __tablename__ = "api_keys"
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String, ForeignKey("users.id"))
+    user_id = Column(String, ForeignKey("users.id"), index=True)
     key_hash = Column(String, unique=True, nullable=False)
     name = Column(String)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
@@ -235,3 +235,15 @@ class AsyncReportTask(Base):
     
     # Metadata to re-identify the request
     request_meta = Column(JSON, default=dict) # {name, date, city...}
+
+class HoraryRateLimit(Base):
+    """
+    Tracks Horary tool usage by IP address per month (format: YYYY-MM).
+    """
+    __tablename__ = "horary_rate_limits"
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    ip_address = Column(String, index=True, nullable=False)
+    month_year = Column(String, index=True, nullable=False) # e.g. "2026-04"
+    request_count = Column(Integer, default=0)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))

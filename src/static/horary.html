@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horary Astrology QA | Traditional Astrology</title>
+  <meta name="description" content="Ask a focused question using strict historical Horary rules to receive a precise, mathematical judgment." />
+  
+  <meta name="theme-color" content="#0a0a1a" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js"></script>
+
+  <style>
+    .horary-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      resize: vertical;
+      min-height: 100px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+    
+    .verdict-box {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: rgba(20, 18, 40, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+    }
+    .verdict-title {
+      font-family: 'Cormorant Garamond', serif;
+      color: #c9a84c;
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .verdict-text {
+      text-align: center;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .trace-item {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .trace-item:last-child {
+      border-bottom: none;
+    }
+    .trace-label {
+      color: #b8922f;
+      font-weight: 600;
+      width: 150px;
+      display: inline-block;
+    }
+    .stricture-alert {
+      background: rgba(200, 50, 50, 0.1);
+      border: 1px solid rgba(200, 50, 50, 0.5);
+      color: #ff8888;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Stars background -->
+  <div class="cosmos-bg">
+    <div class="stars-layer stars-sm"></div>
+    <div class="stars-layer stars-md"></div>
+    <div class="stars-layer stars-lg"></div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+  </div>
+
+  <!-- Minimal navbar -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Natal Chart</a>
+      <a href="/daily.html" class="nav-link">Daily Navigator</a>
+      <a href="/horary.html" class="nav-link" style="color: #c9a84c;">Horary Oracle</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="get-reading">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Strict Classical Horary Engine</p>
+        <h1 class="hero-title">The Horary Oracle</h1>
+        <p class="hero-subtitle">
+          Ask exactly one focused question. The engine will erect a chart for your location at this exact moment, and judge it using mathematical pre-1700s physics (translation, collection, prohibition).
+        </p>
+      </div>
+
+      <div class="chart-form-card" id="chartFormCard">
+        <form id="horaryForm" autocomplete="off">
+          <div class="horary-grid">
+            <div class="form-field" style="grid-column: 1 / -1;">
+              <label for="question">Your Question</label>
+              <textarea id="question" name="question" placeholder="e.g. Will I get the job? Where are my keys?" required></textarea>
+            </div>
+            <div class="form-field">
+              <label for="horaryCity">Your Current City</label>
+              <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top:-0.5rem; margin-bottom: 0.5rem;">For mathematical accuracy, the chart must be erected for where you are *right now*.</p>
+              <input type="text" id="horaryCity" name="city" placeholder="e.g. London" required />
+            </div>
+            <div class="form-field">
+              <label for="horaryState">State / Country</label>
+              <input type="text" id="horaryState" name="state" placeholder="e.g. UK" />
+            </div>
+          </div>
+          <button type="submit" class="btn-cta" id="submitBtn">
+            <span class="btn-text">✦ Consult the Oracle</span>
+            <span class="btn-loading hidden">Judging...</span>
+          </button>
+          <p class="form-note">Limit: 5 questions per month.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Error/Loading states -->
+    <section class="loading-section hidden" id="errorSection">
+      <div class="loading-card" style="border-color: rgba(200, 50, 50, 0.5);">
+         <p id="errorMessage" style="color: #ff8888; font-weight:600; text-align:center;"></p>
+         <div style="text-align:center; margin-top:1rem;">
+             <button onclick="document.getElementById('errorSection').classList.add('hidden'); document.getElementById('chartFormCard').classList.remove('hidden');" class="btn-cta btn-cta-secondary" style="margin:0 auto;">Try Again</button>
+         </div>
+      </div>
+    </section>
+
+    <!-- Reading Output -->
+    <section class="reading-section hidden" id="readingSection">
+      <div class="reading-card" id="readingContent" style="padding: 1rem;">
+        <!-- Filled by JS -->
+      </div>
+      <div class="chart-actions" style="display:flex; justify-content:center; margin-top:2rem;">
+        <button id="askAnotherBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">✦ Ask Another Question</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/horary-app.js"></script>
+
+</body>
+</html>

@@ -134,8 +134,8 @@ async def daily_briefing(data: DailyBriefingRequest):
             node_type=data.node_type,
         )
     except Exception as e:
-        logger.error("Chart calculation failed for daily briefing: %s", e)
-        raise HTTPException(status_code=500, detail=f"Chart calculation error: {str(e)}")
+        logger.error("Chart calculation failed for daily briefing: %s", repr(e), exc_info=True)
+        raise HTTPException(status_code=500, detail="Chart calculation error. Please verify your input.")
 
     if "error" in raw_chart:
         raise HTTPException(status_code=400, detail=raw_chart["error"])
@@ -178,7 +178,7 @@ async def daily_briefing(data: DailyBriefingRequest):
         )
     except Exception as e:
         logger.exception("DailyNavigator failed: %s", e)
-        raise HTTPException(status_code=500, detail=f"Prediction engine error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Prediction engine error. Please try again.")
 
     return {
         "status": "success",
@@ -331,8 +331,8 @@ async def weekly_briefing(data: WeeklyBriefingRequest):
             node_type=data.node_type,
         )
     except Exception as e:
-        logger.error("Chart calculation failed for weekly briefing: %s", e)
-        raise HTTPException(status_code=500, detail=f"Chart calculation error: {str(e)}")
+        logger.error("Chart calculation failed for weekly briefing: %s", repr(e), exc_info=True)
+        raise HTTPException(status_code=500, detail="Chart calculation error. Please verify your input.")
 
     if "error" in raw_chart:
         raise HTTPException(status_code=400, detail=raw_chart["error"])

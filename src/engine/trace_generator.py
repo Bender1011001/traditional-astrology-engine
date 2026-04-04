@@ -258,7 +258,7 @@ def _trace_astronomy(trace: ComputationTrace, raw: dict, chart: Chart):
             result=f"{syz.get('type')} at {_fmt(syz.get('longitude', 0))}",
         )
     except Exception as e:
-        logger.debug("Prenatal syzygy trace failed: %s", e)
+        logger.warning("Prenatal syzygy trace failed: %s", repr(e), exc_info=True)
 
 
 def _trace_planetary_hours(trace: ComputationTrace, chart: Chart, raw: dict):
@@ -296,7 +296,7 @@ def _trace_planetary_hours(trace: ComputationTrace, chart: Chart, raw: dict):
                 subsection="Planetary Hours",
             )
     except Exception as e:
-        logger.debug("Planetary hours trace failed: %s", e)
+        logger.warning("Planetary hours trace failed: %s", repr(e), exc_info=True)
 
 
 def _trace_sect(trace: ComputationTrace, chart: Chart):
@@ -912,10 +912,10 @@ def _trace_decennials(trace: ComputationTrace, chart: Chart, birth_date, target_
                         result=f"Major: {current.get('major', '?')} / Sub: {current.get('sub', '?')}",
                     )
         except Exception as e:
-            logger.debug("Current decennial period trace failed: %s", e)
+            logger.warning("Current decennial period trace failed: %s", repr(e), exc_info=True)
 
     except Exception as e:
-        logger.warning("Decennial trace failed: %s", e)
+        logger.warning("Decennial trace failed: %s", repr(e), exc_info=True)
 
 
 def _trace_lunar_mansions(trace: ComputationTrace, chart: Chart):
@@ -943,7 +943,7 @@ def _trace_lunar_mansions(trace: ComputationTrace, chart: Chart):
             notes=f"Good for: {good}. Avoid: {bad}." if good or bad else None,
         )
     except Exception as e:
-        logger.warning("Lunar mansion trace failed: %s", e)
+        logger.warning("Lunar mansion trace failed: %s", repr(e), exc_info=True)
 
 
 def _trace_primary_directions(trace: ComputationTrace, chart: Chart, raw: dict):
@@ -980,7 +980,7 @@ def _trace_primary_directions(trace: ComputationTrace, chart: Chart, raw: dict):
                 notes=f"Method: {d.method}",
             )
     except Exception as e:
-        logger.warning("Primary directions trace failed: %s", e)
+        logger.warning("Primary directions trace failed: %s", repr(e), exc_info=True)
 
 
 def _trace_doryphory(trace: ComputationTrace, chart: Chart):
@@ -1013,7 +1013,7 @@ def _trace_doryphory(trace: ComputationTrace, chart: Chart):
                 result=f"Score: {inst.score}/10",
             )
     except Exception as e:
-        logger.warning("Doryphory trace failed: %s", e)
+        logger.warning("Doryphory trace failed: %s", repr(e), exc_info=True)
 
 
 def _trace_dodecatemoria(trace: ComputationTrace, chart: Chart):
@@ -1027,7 +1027,7 @@ def _trace_dodecatemoria(trace: ComputationTrace, chart: Chart):
             category=CAT_DIGNITY,
             technique="Dodecatemoria (Twelfth-Parts)",
             inputs={"method": "Valens (×12)", "planets_computed": len(data)},
-            rule="Each degree within a sign maps to 2.5° of a 'micro-zodiac'. Formula: Dodecatemorion = Longitude + (Degree-in-Sign × 12). The resulting sign and its ruler reveal a hidden layer of essential condition.",
+            rule="Each degree within a sign maps to 2.5° of a 'micro-zodiac'. Formula: Dodecatemorion = Sign_Start + (Degree-in-Sign × 12). The resulting sign and its ruler reveal a hidden layer of essential condition.",
             source="Vettius Valens, Anthology; Paulus Alexandrinus, Introductory Matters",
             calculation=f"Computed Dodecatemoria for {len(data)} planets using the Valens (×12) method.",
             result=f"{len(data)} twelfth-part projections",
@@ -1045,10 +1045,10 @@ def _trace_dodecatemoria(trace: ComputationTrace, chart: Chart):
                 category=CAT_DIGNITY,
                 technique=f"Dodecatemorion: {pname}",
                 inputs={"natal_longitude": natal_pos, "degree_in_sign": round(planet_obj.longitude % 30, 2) if planet_obj else "?"},
-                rule=f"Longitude + (Degree-in-Sign × 12) mod 360.",
+                rule="Sign_Start + (Degree-in-Sign × 12) mod 360.",
                 source="Vettius Valens, Anthology",
-                calculation=f"{natal_pos} → degree-in-sign = {planet_obj.longitude % 30:.2f}° × 12 = {(planet_obj.longitude % 30) * 12:.2f}° arc → projected to {_fmt(d['longitude'])} in {d['sign']}" if planet_obj else "?",
+                calculation=f"{natal_pos} → degree-in-sign = {planet_obj.longitude % 30:.2f}° × 12 = {(planet_obj.longitude % 30) * 12:.2f}° arc → projected from sign start to {_fmt(d['longitude'])} in {d['sign']}" if planet_obj else "?",
                 result=f"{d['sign']} (ruler: {d['ruler']}, term: {d.get('term_ruler', '?')})",
             )
     except Exception as e:
-        logger.warning("Dodecatemoria trace failed: %s", e)
+        logger.warning("Dodecatemoria trace failed: %s", repr(e), exc_info=True)

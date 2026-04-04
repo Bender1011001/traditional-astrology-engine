@@ -1,0 +1,21 @@
+ src/engine/advanced_mechanics.py  |  2 +-
+ src/engine/cache_manager.py       |  8 ++--
+ src/engine/calculator/geo.py      | 10 ++---
+ src/engine/calculator/main.py     |  8 ++--
+ src/engine/chat_oracle.py         |  2 +-
+ src/engine/classical_mechanics.py |  8 ++--
+ src/engine/daily_navigator.py     |  2 +-
+ src/engine/electional.py          |  8 ++--
+ src/engine/email_service.py       | 10 ++---
+ src/engine/forensic_engine.py     | 16 ++++++-
+ src/engine/geniture.py            |  2 +-
+ src/engine/horary.py              | 92 ++++++++++++++++++++++++++++++++++++++-
+ src/engine/hyleg.py               |  2 +-
+ src/engine/mundane.py             |  8 ++--
+ src/engine/phasis.py              |  4 +-
+ src/engine/primary_directions.py  |  4 +-
+ src/engine/solar_return.py        |  2 +-
+ src/engine/stars.py               |  6 +--
+ src/engine/trace_generator.py     | 16 +++----
+ src/engine/user_auth.py           |  8 ++--
+ 20 files changed, 160 insertions(+), 58 deletions(-)
