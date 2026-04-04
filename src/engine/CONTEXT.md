@@ -72,7 +72,7 @@ updated: 2026-03-18
 | House cusps raw degrees | Report showed `150.0°` instead of sign names | Used `format_longitude()` in `synthesis.py` |
 | No house placement shown | Planet headers lacked house context | Added Whole Sign house calculation in `synthesis.py` |
 | Eclipse signs raw enums | Report showed `Sign.ARIES` instead of `Aries` | Extract `.value` from enum objects in `synthesis.py` |
-
+| Stripe Checkout DoS 500 crashes | Stripe metadata values > 500 chars crashed API | Aggressively trunked chart_data strings in checkout serialization |
 ## Anti-Patterns
 - Do NOT use modern psychological labels alone; always provide the traditional deterministic grounding (Dignity score).
 - Do NOT ignore the Sect of the chart; it's the primary filter for Malefic/Benefic weighting.

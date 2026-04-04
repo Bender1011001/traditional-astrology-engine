@@ -84,11 +84,11 @@ class SubscriptionService:
             import json
             # Minimal data to save space
             minimal_data = {
-                "date": chart_data.get("date"),
-                "time": chart_data.get("time"),
-                "city": chart_data.get("city"),
-                "state": chart_data.get("state"),
-                "name": chart_data.get("name")
+                "date": str(chart_data.get("date") or "")[:20],
+                "time": str(chart_data.get("time") or "")[:20],
+                "city": str(chart_data.get("city") or "")[:100],
+                "state": str(chart_data.get("state") or "")[:50],
+                "name": str(chart_data.get("name") or "")[:100]
             }
             metadata["chart_data"] = json.dumps(minimal_data)
 

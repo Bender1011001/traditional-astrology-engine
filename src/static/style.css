@@ -18,18 +18,18 @@ html {
 }
 
 :root {
-  --bg-deep: #06060f;
-  --bg-surface: #0d0d1a;
-  --bg-card: rgba(18, 18, 40, 0.85);
-  --bg-card-hover: rgba(25, 25, 55, 0.9);
-  --bg-glass: rgba(255, 255, 255, 0.03);
-  --gold: #c9a84c;
-  --gold-light: #e6cc80;
-  --gold-glow: rgba(201, 168, 76, 0.25);
-  --gold-subtle: rgba(201, 168, 76, 0.08);
-  --text: #e8e4dc;
-  --text-muted: #8a8699;
-  --text-dim: #5a5670;
+  --bg-deep: #0c0b11;
+  --bg-surface: #14121a;
+  --bg-card: rgba(24, 22, 30, 0.85);
+  --bg-card-hover: rgba(30, 28, 40, 0.9);
+  --bg-glass: rgba(255, 255, 255, 0.02);
+  --gold: #bba27e;
+  --gold-light: #d6c3a2;
+  --gold-glow: rgba(187, 162, 126, 0.25);
+  --gold-subtle: rgba(187, 162, 126, 0.08);
+  --text: #e2dfd8;
+  --text-muted: #8d8a80;
+  --text-dim: #6b6860;
   --accent-purple: #7b68ee;
   --accent-blue: #4a90d9;
   --border: rgba(201, 168, 76, 0.12);

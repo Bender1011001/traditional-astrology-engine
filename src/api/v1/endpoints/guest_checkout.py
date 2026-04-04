@@ -124,11 +124,11 @@ async def guest_checkout(
     order_id = uuid.uuid4().hex[:12]
     
     chart_data = {
-        "date": date,
-        "time": time,
-        "city": city,
-        "state": state,
-        "name": name,
+        "date": str(date or "")[:20],
+        "time": str(time or "")[:20],
+        "city": str(city or "")[:100],
+        "state": str(state or "")[:50],
+        "name": str(name or "")[:100],
     }
     
     # Build Stripe Checkout Session
@@ -179,6 +179,16 @@ async def generate_paid_reading(
     if session.payment_status != "paid":
         raise HTTPException(status_code=402, detail="Payment not completed.")
     
+    # Check for Idempotency (prevent duplicate report tasks for the same session)
+    existing_task = db.query(AsyncReportTask).filter(AsyncReportTask.id == session_id).first()
+    if existing_task:
+        # If it already exists, someone double-clicked or reloaded the page. We silently accept it.
+        return {
+            "task_id": existing_task.id,
+            "tier": session.metadata.get("tier", "unknown"),
+            "message": "Report generation already in progress.",
+        }
+
     # Extract chart data from metadata
     chart_data_str = session.metadata.get("chart_data", "{}")
     chart_data = json.loads(chart_data_str)
@@ -196,6 +206,7 @@ async def generate_paid_reading(
     )
     
     task = AsyncReportTask(
+        id=session_id,  # Use Stripe session_id as the primary key for guaranteed 1:1 idempotency
         status="pending",
         request_meta=chart_request.model_dump()
     )

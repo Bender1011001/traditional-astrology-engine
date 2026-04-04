@@ -189,11 +189,11 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
         # Minimal chart payload stored in metadata (keep Stripe metadata small).
         cr = request.chart_request.model_dump() if request.chart_request else {}
         chart_min = {
-            "date": cr.get("date"),
-            "time": cr.get("time"),
-            "city": cr.get("city"),
-            "state": cr.get("state"),
-            "name": cr.get("name"),
+            "date": str(cr.get("date") or "")[:20],
+            "time": str(cr.get("time") or "")[:20],
+            "city": str(cr.get("city") or "")[:100],
+            "state": str(cr.get("state") or "")[:50],
+            "name": str(cr.get("name") or "")[:100],
         }
 
         try:

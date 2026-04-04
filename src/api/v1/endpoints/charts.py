@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional
-from fastapi import APIRouter, HTTPException, Request, Depends
-
+from fastapi import APIRouter, HTTPException, Request, Depends, BackgroundTasks
+from src.services.admin_notifier import archive_chart_output, notify_chart_created
 from src.api.v1.schemas import ChartRequest
 from src.api.v1.auth import validate_token, get_current_user
 from src.api.v1.utils import generate_chart_hash, log_event, result_to_model
@@ -113,7 +113,7 @@ async def generate_chart_b2b(
 
 
 @router.post("/calculate-full")
-async def calculate_full_nativity(req: ChartRequest, http_request: Request):
+async def calculate_full_nativity(req: ChartRequest, http_request: Request, background_tasks: BackgroundTasks):
     """
     Single Endpoint for Comprehensive Forensic Audit.
     """
@@ -137,6 +137,10 @@ async def calculate_full_nativity(req: ChartRequest, http_request: Request):
             log_event("chart_full_error", {"error": result["error"]}, http_request)
             raise HTTPException(status_code=400, detail=result["error"])
             
+        # Admin notification and archiving
+        background_tasks.add_task(archive_chart_output, req.model_dump(), result)
+        background_tasks.add_task(notify_chart_created, req.model_dump(), "full_nativity")
+        
         log_event("chart_full_success", {"result_keys": list(result.keys())}, http_request)
         return result
 
@@ -150,6 +154,7 @@ async def calculate_full_nativity(req: ChartRequest, http_request: Request):
 async def calculate_chart(
     chart_request: ChartRequest,
     http_request: Request,
+    background_tasks: BackgroundTasks,
     current_user: Optional[User] = Depends(get_current_user),
 ):
     """
@@ -270,6 +275,10 @@ async def calculate_chart(
             )
         except Exception as save_err:
             logger.error("Auto-save failed: %s", save_err)
+
+    # Admin notification and archiving
+    background_tasks.add_task(archive_chart_output, chart_request.model_dump(), final_result)
+    background_tasks.add_task(notify_chart_created, chart_request.model_dump(), tier)
 
     log_event("chart_result_server", {"result_keys": list(final_result.keys())}, http_request)
     return final_result
