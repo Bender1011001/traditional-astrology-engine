@@ -187,7 +187,11 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Missing Function NameError | `_log_event` called but not defined in `api.py` | Restored missing helper function |
 | Azure DB Auth Failure | Used `astrology_admin` instead of `astroadmin` | Use `astroadmin` as defined in `setup_azure.ps1` |
 | ACR ImagePullFailure | Truncated Registry Password used in App Settings | Copy THE FULL 80+ CHAR password from ACR credentials |
-| Plan Not Found (Reg) | Database not seeded with standard plans | Added `seed_plans()` to app startup event |
+| Plan Not Found (Reg) | Decennials | Apheta / Sequence | Confirmed correct. Zodiacal sequence (`(p.lon - asc) % 360`) correctly computes post-ascendant alignment. |
+| Stars | Parans & Hour Angles | Confirmed correct. Uses proper spherical astronomy (RA/Dec and Hour Angle offsets) for Asc/Desc/MC/IC intersection logic. |
+| Zodiacal Releasing | L4 Duration Drift | `prediction.py` L4 duration hardcoded to `0.208`. Replaced with `(2.5 / 12.0)` to eliminate mathematical drift across extensive calculations. |
+| Decumbiture | Critical Day Lunar Math | Confirmed correct. The Newton-Raphson implementation uses safely wrapped modulos handling up to 270 degrees perfectly without anti-particle trapping. |
+| Solar Return | Muntha Exact Degree | Confirmed correct. Muntha accurately maps to `(Sign * 30) + (Asc % 30)` for high-precision overlays. |
 | Indexing Blind Spot | Lack of canonicalization & authority signals | Added `CanonicalDomainMiddleware` and tuned `robots.txt` |
 | Crash on startup | SyntaxError in `forensic.py` | Removed duplicate argument |
 | CSP Violations on `/docs` | `SecurityHeadersMiddleware` blocking CDNs | Added `jsdelivr` and `tiangolo` to allow-list |

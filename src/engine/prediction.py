@@ -135,7 +135,7 @@ def calculate_zr_lifetime_map(start_sign: Sign, birth_date: datetime, years: int
             elif level == 3:
                 duration_days = raw_duration * 2.5   # ~2.5 days per unit (30/12)
             elif level == 4:
-                duration_days = raw_duration * 0.208  # ~5 hours per unit (2.5/12)
+                duration_days = raw_duration * (2.5 / 12.0)  # ~5 hours per unit (2.5/12)
             else:
                 break
             
