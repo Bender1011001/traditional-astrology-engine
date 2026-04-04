@@ -149,6 +149,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Horary Oracle / Question-answering tool -->
+  <url>
+    <loc>https://traditional-astrology.com/horary.html</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
 
 

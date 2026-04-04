@@ -11,3 +11,18 @@ if (!window.CAEL_API_BASE && window.location.hostname !== "localhost" && window.
 }
 
 export const API_BASE = window.CAEL_API_BASE || "";
+
+/**
+ * Safe event tracking wrapper. Sends to GA4 via gtag if available.
+ * @param {string} eventName - The event name (e.g. "horary_success")
+ * @param {object} [params] - Optional event parameters
+ */
+export function trackEvent(eventName, params) {
+    try {
+        if (typeof window.gtag === "function") {
+            window.gtag("event", eventName, params || {});
+        }
+    } catch (_) {
+        // Silently swallow — analytics should never break the app
+    }
+}

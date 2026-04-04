@@ -2,18 +2,91 @@
 <html lang="en">
 
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TJNM5XVD');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RCNDWN4XVN');
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Horary Astrology QA | Traditional Astrology</title>
-  <meta name="description" content="Ask a focused question using strict historical Horary rules to receive a precise, mathematical judgment." />
-  
+  <title>Free Horary Astrology Calculator | Ask the Oracle a Question</title>
+  <meta name="description" content="Free horary astrology calculator using strict pre-1700s classical rules. Ask a focused question and receive a mathematical judgment based on translation, collection, and prohibition — the same techniques used by William Lilly." />
+  <meta name="keywords" content="horary astrology, horary calculator, horary chart, ask a horary question, William Lilly horary, classical horary astrology, traditional horary, free horary reading" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://traditional-astrology.com/horary.html" />
+  <meta property="og:title" content="Free Horary Astrology Calculator | Ask the Oracle" />
+  <meta property="og:description" content="Free horary astrology calculator using strict pre-1700s classical rules. Ask a focused question and receive a mathematical judgment." />
+  <meta property="og:image" content="https://traditional-astrology.com/og-card.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://traditional-astrology.com/horary.html" />
+  <meta name="twitter:title" content="Free Horary Astrology Calculator | Ask the Oracle" />
+  <meta name="twitter:description" content="Free horary astrology calculator using strict pre-1700s classical rules. Ask a focused question and receive a mathematical judgment." />
+  <meta name="twitter:image" content="https://traditional-astrology.com/og-card.png" />
+
+  <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0a0a1a" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="canonical" href="https://traditional-astrology.com/horary.html" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="config.js"></script>
+  <link rel="stylesheet" href="style.css?v=20260404horary" />
+  <script src="config.js?v=20260404horary"></script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is horary astrology?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Horary astrology is a branch of traditional astrology that answers a specific question by erecting a chart for the exact moment the question is asked. Unlike natal astrology, horary focuses on one question at one moment and uses strict classical rules — significators, applying aspects, translations of light, and strictures against judgment — to deliver a concrete answer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does horary astrology work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When you ask a sincere question, our engine erects a chart for the exact moment and your current location using Regiomontanus houses. It identifies the Querent (you, from the 1st house) and the Quesited (the subject, from the relevant house), then checks for applying aspects, perfection conditions (translation, collection, mutual reception), and prohibitions to deliver a mathematical verdict."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are strictures against judgment in horary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Strictures are conditions that indicate the chart may not be fit for judgment — for example, if the Ascendant is in the early or late degrees of a sign, or Saturn is in the 7th house. Our engine checks for these strictures and reports them transparently, following the rules laid down by William Lilly and Guido Bonatti."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is horary astrology accurate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Horary astrology uses deterministic mathematical calculations — real planetary positions from the Swiss Ephemeris, precise house cusps, and documented rules of perfection. The technique has been practiced and documented for over 1,500 years. Our engine does not guess; it calculates according to classical rules and reports the results transparently."
+          }
+        }
+      ]
+    }
+  </script>
 
   <style>
     .horary-grid {
@@ -40,7 +113,7 @@
       background: rgba(255, 255, 255, 0.05);
       box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
     }
-    
+
     .verdict-box {
       margin-top: 2rem;
       padding: 2rem;
@@ -84,10 +157,74 @@
       border-radius: 8px;
       margin-bottom: 1rem;
     }
+
+    /* Horary-specific content styling */
+    .horary-explanation {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .horary-explanation .basic-card {
+      margin-bottom: 2rem;
+    }
+    .horary-principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .horary-principle-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .horary-principle-card:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+      transform: translateY(-2px);
+    }
+    .horary-principle-card h4 {
+      color: #c9a84c;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .horary-principle-card p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .question-examples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .question-example {
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 8px;
+      padding: 1rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .question-example:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+    }
   </style>
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <!-- Stars background -->
   <div class="cosmos-bg">
     <div class="stars-layer stars-sm"></div>
@@ -104,19 +241,24 @@
       <span class="brand-text">Traditional Astrology</span>
     </a>
     <div class="nav-links">
-      <a href="/" class="nav-link">Natal Chart</a>
-      <a href="/daily.html" class="nav-link">Daily Navigator</a>
+      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/horary.html" class="nav-link" style="color: #c9a84c;">Horary Oracle</a>
+      <a href="/daily.html" class="nav-link">Daily Navigator</a>
+      <a href="/#how-it-works" class="nav-link">How It Works</a>
+      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
     </div>
   </nav>
 
   <main>
+    <!-- HERO: The Oracle Form -->
     <section class="hero" id="get-reading">
       <div class="hero-content">
-        <p class="hero-eyebrow">Strict Classical Horary Engine</p>
+        <p class="hero-eyebrow">Strict Classical Horary Engine · Pre-1700s Rules · Free</p>
         <h1 class="hero-title">The Horary Oracle</h1>
         <p class="hero-subtitle">
-          Ask exactly one focused question. The engine will erect a chart for your location at this exact moment, and judge it using mathematical pre-1700s physics (translation, collection, prohibition).
+          Ask exactly one focused question. The engine will erect a chart for your location at this exact moment,
+          then judge it using mathematical pre-1700s techniques — translation, collection, prohibition, and mutual reception.
         </p>
       </div>
 
@@ -125,11 +267,11 @@
           <div class="horary-grid">
             <div class="form-field" style="grid-column: 1 / -1;">
               <label for="question">Your Question</label>
-              <textarea id="question" name="question" placeholder="e.g. Will I get the job? Where are my keys?" required></textarea>
+              <textarea id="question" name="question" placeholder="e.g. Will I get the job? Will the deal close? Should I move to this city?" required></textarea>
             </div>
             <div class="form-field">
               <label for="horaryCity">Your Current City</label>
-              <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top:-0.5rem; margin-bottom: 0.5rem;">For mathematical accuracy, the chart must be erected for where you are *right now*.</p>
+              <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top:-0.5rem; margin-bottom: 0.5rem;">For mathematical accuracy, the chart must be erected for where you are <em>right now</em>.</p>
               <input type="text" id="horaryCity" name="city" placeholder="e.g. London" required />
             </div>
             <div class="form-field">
@@ -139,9 +281,15 @@
           </div>
           <button type="submit" class="btn-cta" id="submitBtn">
             <span class="btn-text">✦ Consult the Oracle</span>
-            <span class="btn-loading hidden">Judging...</span>
+            <span class="btn-loading hidden">Judging the heavens...</span>
           </button>
-          <p class="form-note">Limit: 5 questions per month.</p>
+          <p class="form-note">Free — limit 5 questions per month. No account required.</p>
+
+          <div class="trust-signals" style="display:flex; justify-content:center; gap:1.5rem; margin-top:1.5rem; font-size:0.8rem; color:rgba(255,255,255,0.6); align-items:center;">
+            <span>📐 Regiomontanus houses</span>
+            <span>🔒 We <strong>never</strong> sell your data</span>
+            <span>📜 Classical Lilly-method rules</span>
+          </div>
         </form>
       </div>
     </section>
@@ -149,10 +297,10 @@
     <!-- Error/Loading states -->
     <section class="loading-section hidden" id="errorSection">
       <div class="loading-card" style="border-color: rgba(200, 50, 50, 0.5);">
-         <p id="errorMessage" style="color: #ff8888; font-weight:600; text-align:center;"></p>
-         <div style="text-align:center; margin-top:1rem;">
-             <button onclick="document.getElementById('errorSection').classList.add('hidden'); document.getElementById('chartFormCard').classList.remove('hidden');" class="btn-cta btn-cta-secondary" style="margin:0 auto;">Try Again</button>
-         </div>
+        <p id="errorMessage" style="color: #ff8888; font-weight:600; text-align:center;"></p>
+        <div style="text-align:center; margin-top:1rem;">
+          <button onclick="document.getElementById('errorSection').classList.add('hidden'); document.getElementById('chartFormCard').classList.remove('hidden');" class="btn-cta btn-cta-secondary" style="margin:0 auto;">Try Again</button>
+        </div>
       </div>
     </section>
 
@@ -165,9 +313,217 @@
         <button id="askAnotherBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">✦ Ask Another Question</button>
       </div>
     </section>
+
+    <!-- WHAT IS HORARY ASTROLOGY -->
+    <section class="section" id="what-is-horary">
+      <h2 class="section-heading">What Is Horary Astrology?</h2>
+      <p class="section-sub">The oldest question-answering technique in Western astrology.</p>
+      <div class="horary-explanation">
+        <div class="basic-card">
+          <p>Horary astrology is a branch of traditional astrology that answers a specific question by erecting a chart for the exact moment the question is sincerely asked. Unlike natal astrology — which maps your entire life from birth — horary focuses on <strong>one question, one moment, one answer</strong>.</p>
+          <p>The method was perfected by William Lilly in his 1647 masterwork <em>Christian Astrology</em>, though its roots trace back to the Arabic astrologers of the 8th–10th centuries (Masha'allah, Sahl ibn Bishr) and ultimately to the Hellenistic tradition. It remains the most empirically testable branch of astrology — you ask, the chart answers, and life confirms or denies.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section section-dark" id="how-horary-works">
+      <h2 class="section-heading">How the Oracle Works</h2>
+      <p class="section-sub">Three mathematical steps. No guessing.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Erect the Chart</h3>
+          <p>A Regiomontanus chart is cast for the exact moment you submit your question and your current geographic coordinates. Real ephemeris data — the same Swiss Ephemeris used by professional astrologers.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Identify Significators</h3>
+          <p>The Querent (you) is represented by the 1st house ruler. The Quesited (what you're asking about) is assigned to its natural house — 7th for relationships, 10th for career, 2nd for money, and so on. The Moon always co-signifies the Querent.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Judge Perfection</h3>
+          <p>The engine checks whether the significators are applying to aspect, translating light, collecting light, or being prohibited. It scores each condition mathematically and delivers a weighted verdict: Yes, No, or Uncertain.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY PRINCIPLES -->
+    <section class="section" id="principles">
+      <h2 class="section-heading">Key Horary Principles</h2>
+      <p class="section-sub">The classical rules that govern every judgment.</p>
+      <div class="horary-principles-grid">
+        <div class="horary-principle-card">
+          <h4>✦ Significators</h4>
+          <p>The Lord of the Ascendant represents you. The Lord of the relevant house represents what you're asking about. Aspects between them — or not — determine the outcome.</p>
+        </div>
+        <div class="horary-principle-card">
+          <h4>✦ Perfection</h4>
+          <p>If the significators are applying to a major aspect (conjunction, sextile, trine, square, opposition), the matter "perfects" — meaning the answer tends toward Yes. No applying aspect means No.</p>
+        </div>
+        <div class="horary-principle-card">
+          <h4>✦ Translation of Light</h4>
+          <p>A faster planet can carry the light from one significator to the other, acting as a go-between or intermediary. This is a classical mechanism for things coming together through a third party.</p>
+        </div>
+        <div class="horary-principle-card">
+          <h4>✦ Prohibition</h4>
+          <p>When a third planet aspects one of the significators before they can perfect, it "prohibits" — blocks — the outcome. Something or someone interferes.</p>
+        </div>
+        <div class="horary-principle-card">
+          <h4>✦ Strictures Against Judgment</h4>
+          <p>Certain chart conditions — early Ascendant, late Ascendant, Saturn in the 7th, void-of-course Moon — indicate the chart may not be fit for judgment. The engine checks and reports these transparently.</p>
+        </div>
+        <div class="horary-principle-card">
+          <h4>✦ Regiomontanus Houses</h4>
+          <p>Classical horary uses Regiomontanus house division, not whole sign. This was the standard for Lilly and the Renaissance horary tradition. House cusps are calculated from real astronomical data.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAMPLE QUESTIONS -->
+    <section class="section section-dark">
+      <h2 class="section-heading">What Can You Ask?</h2>
+      <p class="section-sub">Horary works best with clear, focused, yes-or-no questions about concrete situations.</p>
+      <div class="question-examples">
+        <div class="question-example">"Will I get the job I interviewed for?"</div>
+        <div class="question-example">"Should I move to this new city?"</div>
+        <div class="question-example">"Will the business deal close?"</div>
+        <div class="question-example">"Where are my lost keys?"</div>
+        <div class="question-example">"Will I hear back from them?"</div>
+        <div class="question-example">"Is this the right time to invest?"</div>
+      </div>
+      <div class="section-cta" style="margin-top: 2rem;">
+        <a href="#get-reading" class="btn-cta btn-cta-secondary">✦ Ask Your Question Now</a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <h2 class="section-heading">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>What is horary astrology?</summary>
+          <p>Horary astrology is a branch of traditional astrology that answers a specific question by erecting a chart for the exact moment the question is asked. It uses strict classical rules from William Lilly, Bonatti, and the Arabic tradition to deliver a concrete answer — not a personality reading, but a direct judgment about your question.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need my birth time for horary?</summary>
+          <p>No. Horary has nothing to do with your natal chart. The chart is erected for the moment you ask the question. You only need your current city so the engine can calculate precise house cusps and planetary positions for your location right now.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why only 5 questions per month?</summary>
+          <p>Classical tradition holds that a genuine horary question arises from real concern — you shouldn't ask the same question repeatedly or test the system with idle curiosity. The limit helps maintain the integrity of the practice and keeps the engine responsive for all users.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What are strictures against judgment?</summary>
+          <p>Strictures are chart conditions that indicate the question may not be answerable at this time — for example, if the Ascendant is in the first or last 3° of a sign, if Saturn afflicts the 7th house, or if the Moon is void of course. When strictures appear, the engine reports them honestly. The answer may still be given, but with a warning.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this AI-generated?</summary>
+          <p>The planetary positions, house cusps, and aspect calculations are 100% deterministic — computed from real astronomical data (Swiss Ephemeris). The judgment logic follows documented classical rules. AI is not used to generate the verdict. Every claim is auditable against the calculation data.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What house system does horary use?</summary>
+          <p>Classical horary astrology uses Regiomontanus house division, not whole sign houses. This was the standard for William Lilly and the Renaissance horary tradition. Our engine enforces Regiomontanus automatically for all horary charts.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section section-dark final-cta">
+      <h2 class="section-heading">Ready to Consult the Oracle?</h2>
+      <p class="section-sub">Ask your question and let the heavens answer. Classical horary — free, transparent, and mathematical.</p>
+      <a href="#get-reading" class="btn-cta">✦ Ask Your Question Now</a>
+      <p class="form-note" style="margin-top: 1rem;">Free — 5 questions per month. No account or email required.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="brand-icon">✦</span> Traditional Astrology
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="refunds.html">Refunds</a>
+          <a href="mailto:support@traditional-astrology.com">Support</a>
+        </div>
+        <p class="footer-legal">
+          © 2026 Traditional Astrology. All rights reserved.<br>
+          For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.
+        </p>
+      </div>
+    </footer>
   </main>
 
-  <script type="module" src="js/horary-app.js"></script>
+  <!-- AUTH MODALS -->
+  <div id="authModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
 
+      <!-- Login View -->
+      <div id="loginView" class="auth-view">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-field">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" required autocomplete="username" />
+          </div>
+          <div class="form-field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-loading hidden">Signing In...</span>
+          </button>
+          <div id="loginError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p>
+        </div>
+      </div>
+
+      <!-- Register View -->
+      <div id="registerView" class="auth-view hidden">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-sub">Save your charts securely and access them anywhere.</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-field">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" required autocomplete="new-password" minlength="8" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-loading hidden">Creating...</span>
+          </button>
+          <div id="registerError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/auth.js?v=20260404horary"></script>
+  <script type="module" src="js/horary-app.js?v=20260404horary"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('[PWA] SW registered, scope:', reg.scope))
+          .catch(err => console.warn('[PWA] SW registration failed:', err));
+      });
+    }
+  </script>
 </body>
+
 </html>
