@@ -1,0 +1,231 @@
+=== 404.html ===
+  .nav-links {
+  .nav-links a {
+  .nav-links a:hover {
+  <div class="nav-links">
+
+=== about.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== almuten-figuris.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== aspects.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== daily.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link" style="color: rgba(212,175,55,0.9);">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== dashboard.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navAccountBtn" href="/dashboard.html" class="nav-link" aria-label="My Account">My Account</a>
+
+=== faq.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== horary.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/horary.html" class="nav-link" style="color: #c9a84c;">Horary Oracle</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== houses.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== hyleg-calculator.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== index.html ===
+  <div class="nav-links">
+  <a href="#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/horary.html" class="nav-link">Horary Calculator</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="#how-it-works" class="nav-link">How It Works</a>
+  <a href="#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== lot-of-fortune.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== methodology.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== natal-charts.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== planetary-periods.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== predictive-techniques.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== privacy.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== refunds.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== sample-reading.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== techniques.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== terms.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== traditional-astrology-chart-interpretation.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== traditional-astrology-methodology.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== traditional-birth-chart-calculator.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== traditional-natal-chart-calculator.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+
+=== traditional-vs-modern-astrology.html ===
+  <div class="nav-links">
+  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+  <a href="/daily.html" class="nav-link">Daily Navigator</a>
+  <a href="/#how-it-works" class="nav-link">How It Works</a>
+  <a href="/#sample" class="nav-link">Sample</a>
+  <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+  <a id="navAccountBtn" href="#" class="nav-link hidden" aria-label="My Account">My Account</a>
+

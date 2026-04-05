@@ -204,15 +204,82 @@ a:hover {
 @media (max-width: 768px) {
   .site-nav {
     padding: 0.75rem 1rem;
+    flex-wrap: wrap;
   }
 
   .nav-links {
     display: none;
+    width: 100%;
+    flex-direction: column;
+    padding: 1rem 0 0.5rem 0;
+    gap: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex;
   }
 
   .nav-brand {
     font-size: 1.1rem;
   }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  z-index: 101;
+}
+
+.hamburger-icon, 
+.hamburger-icon::before, 
+.hamburger-icon::after {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--gold);
+  transition: all var(--transition);
+}
+
+.hamburger-icon {
+  position: relative;
+}
+
+.hamburger-icon::before, 
+.hamburger-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.hamburger-icon::before {
+  top: -8px;
+}
+
+.hamburger-icon::after {
+  top: 8px;
+}
+
+.mobile-menu-toggle.active .hamburger-icon {
+  background-color: transparent;
+}
+
+.mobile-menu-toggle.active .hamburger-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.mobile-menu-toggle.active .hamburger-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
 }
 
 /* --- HERO --- */

@@ -170,12 +170,13 @@
         <span class="brand-icon">✦</span>
         <span class="brand-text">Traditional Astrology</span>
     </a>
-    <div class="nav-links">
-        <a href="/#get-reading" class="nav-link">Get Your Reading</a>
-        <a href="/daily.html" class="nav-link">Daily Navigator</a>
-        <a href="/#how-it-works" class="nav-link">How It Works</a>
-        <a href="/#sample" class="nav-link">Sample</a>
-        <a id="navAccountBtn" href="/dashboard.html" class="nav-link" aria-label="My Account">My Account</a>
+        <div class="nav-links">
+      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+      <a href="/horary.html" class="nav-link">Horary Oracle</a>
+      <a href="/daily.html" class="nav-link">Daily Navigator</a>
+      <a href="/#how-it-works" class="nav-link">How It Works</a>
+      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
     </div>
   </nav>
 
@@ -271,5 +272,62 @@
       }
     });
   </script>
+
+  <!-- Auth Modals -->
+  <div id="authModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button id="closeAuthModal" class="btn-close" aria-label="Close Modal">&times;</button>
+      
+      <!-- Login View -->
+      <div id="loginView" class="auth-view">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Log in to view your chart history and active subscriptions.</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-field">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" name="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+          </div>
+          <div id="loginError" class="auth-error hidden"></div>
+          <button type="submit" class="btn-primary auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-loading hidden">...</span>
+          </button>
+        </form>
+        <p class="auth-switch">
+          Don't have an account? <a href="#" id="showRegisterView">Sign up</a>
+        </p>
+      </div>
+
+      <!-- Register View -->
+      <div id="registerView" class="auth-view hidden">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-subtitle">Register to save your chart history moving forward.</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-field">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" name="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" name="password" required placeholder="••••••••">
+          </div>
+          <div id="registerError" class="auth-error hidden"></div>
+          <button type="submit" class="btn-primary auth-submit">
+            <span class="btn-text">Register</span>
+            <span class="btn-loading hidden">...</span>
+          </button>
+        </form>
+        <p class="auth-switch">
+          Already have an account? <a href="#" id="showLoginView">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/auth.js?v=astro-v4"></script>
 </body>
 </html>

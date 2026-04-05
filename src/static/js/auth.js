@@ -1,8 +1,7 @@
 import { apiFetch } from './api.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const overlay = document.getElementById('authModalOverlay');
-  const closeBtn = document.getElementById('closeAuthModal');
+const overlay = document.getElementById('authModalOverlay');
+const closeBtn = document.getElementById('closeAuthModal');
   const loginBtn = document.getElementById('navLoginBtn');
   const accountBtn = document.getElementById('navAccountBtn');
   const loginView = document.getElementById('loginView');
@@ -124,4 +123,35 @@ document.addEventListener('DOMContentLoaded', () => {
       handleAuth('/api/v1/auth/register', email, pwd, regError, submitBtn);
     });
   }
-});
+
+  // Mobile Navigation Injection
+  const injectMobileNav = () => {
+    const navs = document.querySelectorAll('.site-nav');
+    navs.forEach(nav => {
+      if (!nav.querySelector('.mobile-menu-toggle')) {
+        const toggle = document.createElement('button');
+        toggle.className = 'mobile-menu-toggle';
+        toggle.setAttribute('aria-label', 'Toggle menu');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.innerHTML = '<span class="hamburger-icon"></span>';
+        
+        const navLinks = nav.querySelector('.nav-links');
+        if (navLinks) {
+          nav.insertBefore(toggle, navLinks);
+          
+          toggle.addEventListener('click', () => {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            toggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+          });
+        }
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectMobileNav);
+  } else {
+    injectMobileNav();
+  }

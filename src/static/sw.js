@@ -10,8 +10,8 @@
  * on subsequent visits, even offline.
  */
 
-const CACHE_NAME = "astro-v2";
-const RUNTIME_CACHE = "astro-runtime-v2";
+const CACHE_NAME = "astro-v4";
+const RUNTIME_CACHE = "astro-runtime-v4";
 
 // Core app shell — cached on install.
 // IMPORTANT: Do NOT include query-string cache busters here.
