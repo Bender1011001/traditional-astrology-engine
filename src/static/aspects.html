@@ -64,7 +64,10 @@
       <span class="brand-icon">✦</span>
       <span class="brand-text">Traditional Astrology</span>
     </a>
-        <div class="nav-links">
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger-icon"></span>
+    </button>
+    <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
       <a href="/daily.html" class="nav-link">Daily Navigator</a>
@@ -237,5 +240,25 @@
   </div>
 
   <script type="module" src="/js/auth.js?v=astro-v5"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var toggles = document.querySelectorAll('.mobile-menu-toggle');
+      toggles.forEach(function(toggle) {
+        // Only attach if not already attached to prevent duplicates if script runs twice
+        if (toggle.dataset.navAttached) return;
+        toggle.dataset.navAttached = 'true';
+        toggle.addEventListener('click', function() {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !expanded);
+          this.classList.toggle('active');
+          var navLinks = this.nextElementSibling;
+          if (navLinks && navLinks.classList.contains('nav-links')) {
+            navLinks.classList.toggle('active');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
