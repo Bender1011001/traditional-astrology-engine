@@ -56,33 +56,49 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Traditional Astrology",
+      "url": "https://traditional-astrology.com/",
+      "logo": "https://traditional-astrology.com/apple-touch-icon.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "andrew@traditional-astrology.com",
+        "contactType": "customer support"
+      },
+      "sameAs": []
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Traditional Birth Chart Calculator",
       "url": "https://traditional-astrology.com/",
       "applicationCategory": "LifestyleApplication",
       "operatingSystem": "Web",
-      "description": "Free traditional birth chart calculator — get a personal natal chart reading based on classical traditional astrology techniques.",
+      "description": "Free traditional birth chart calculator — get a personal natal chart reading based on classical traditional astrology techniques including Annual Profections, Zodiacal Releasing, and Firdaria.",
       "offers": [
         {
           "@type": "Offer",
           "name": "Free Birth Chart Preview",
           "price": "0",
           "priceCurrency": "USD",
-          "description": "Free natal chart overview with planet positions and key insights."
+          "description": "Free natal chart overview with planet positions and key dignity assessment."
         },
         {
           "@type": "Offer",
-          "name": "Full Reading",
-          "price": "7.00",
+          "name": "Calibration Reading",
+          "price": "27.00",
           "priceCurrency": "USD",
-          "description": "Complete natal chart reading with timing, dignities, and personalized insights."
+          "description": "Complete natal chart reading with timing techniques, dignities, and personalized insights."
         },
         {
           "@type": "Offer",
-          "name": "Premium Deep-Dive",
-          "price": "29.00",
+          "name": "Full Forensic Nativity",
+          "price": "197.00",
           "priceCurrency": "USD",
-          "description": "20+ page in-depth analysis with advanced timing techniques and remediation."
+          "description": "20+ page in-depth analysis using Zodiacal Releasing, Firdaria, Lots, and Primary Directions."
         }
       ]
     }
@@ -103,18 +119,42 @@
         },
         {
           "@type": "Question",
-          "name": "Do I need to know my birth time?",
+          "name": "What is Annual Profection in astrology?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For the most accurate reading, yes. Your birth time determines your rising sign, house placements, and timing techniques. If you don't know your time, we can still calculate your planetary positions, but the reading will be less detailed."
+            "text": "Annual Profections is a classical timing technique that advances your Ascendant one house per year. The house activated in any given year becomes your profected house, and its ruling planet becomes the Lord of the Year — the chief governor of major themes and events for that year. It's one of the most reliably predictive techniques in traditional astrology."
           }
         },
         {
           "@type": "Question",
-          "name": "How is this different from free astrology sites?",
+          "name": "What is Zodiacal Releasing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Most free sites give you a paragraph about your sun sign. We calculate your complete natal chart using real ephemeris data and interpret it using classical techniques — dignities, lots, profections, firdaria — the same methods professional traditional astrologers use."
+            "text": "Zodiacal Releasing is an advanced Hellenistic timing technique that divides your life into planetary periods based on the Lots of Spirit and Fortune. It identifies peak career periods, major life turning points called the 'Loosing of the Bond', and the overall narrative arc of your life. It was used by Vettius Valens in the 2nd century."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is traditional astrology different from modern astrology?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Modern astrology (post-1800s) focuses on psychological archetypes and personal growth. Traditional astrology makes specific, event-based predictions using a mathematical system of essential dignities, planetary sect (day/night), and time-lords. Traditional methods are more deterministic and auditable — every judgment follows a rule that can be cited."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Lot of Fortune?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Lot of Fortune (also called Pars Fortuna) is a calculated point in your birth chart derived from the positions of the Ascendant, Sun, and Moon. It represents your physical body, material condition, and the quality of fortune related to worldly matters. Its sign, house placement, and ruling planet reveal a great deal about your material circumstances and physical vitality."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to know my birth time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For the most accurate reading, yes. Your birth time determines your rising sign, house placements, and timing techniques like Annual Profections and Zodiacal Releasing. If you don't know your time, we can still calculate your planetary positions, but the reading will be less detailed."
           }
         },
         {
@@ -122,7 +162,7 @@
           "name": "Is this AI-generated?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The calculations are 100% deterministic — computed from real astronomical data, not generated by AI. The narrative interpretation uses AI to translate the technical data into readable language, but every fact in the reading comes from the verified calculation engine."
+            "text": "The calculations are 100% deterministic — computed from real astronomical data via the Swiss Ephemeris, not generated by AI. The narrative interpretation uses AI to translate the technical data into readable language, but every fact in the reading comes from the verified calculation engine."
           }
         },
         {
@@ -130,7 +170,7 @@
           "name": "Do I need an account?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Enter your birth details, get your reading. If you want the full PDF, you pay once through Stripe — no account, no password, no email required. We don't store your personal data."
+            "text": "No. Enter your birth details, get your reading. If you want the full PDF, you pay once through Stripe — no account, no password, no email required. We don't store your personal data unnecessarily."
           }
         }
       ]
@@ -165,6 +205,7 @@
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
       <a href="/daily.html" class="nav-link">Daily Navigator</a>
+      <a href="/case-studies.html" class="nav-link">Case Studies</a>
       <a href="/#how-it-works" class="nav-link">How It Works</a>
       <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
       <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>

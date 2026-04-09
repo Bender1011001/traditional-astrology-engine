@@ -121,7 +121,7 @@ function shakeForm() {
     });
 }
 
-// ─── Free Reading (Premium Guest) ───
+// ─── Free Reading (Instant) ───
 async function requestFreeReading(payload) {
     try {
         const resp = await apiFetch("/api/v1/premium/guest/request", {
@@ -150,7 +150,21 @@ async function requestFreeReading(payload) {
         }
 
         const data = await resp.json();
-        pollForCompletion(data.task_id, data.free_readings_remaining);
+
+        // Instant free reading (new flow) — no polling needed
+        if (data.instant && data.reading_html) {
+            hideLoading();
+            showFreeReading(data.reading_html, data.free_readings_remaining);
+            return;
+        }
+
+        // Legacy/paid flow — poll for completion
+        if (data.task_id) {
+            pollForCompletion(data.task_id, data.free_readings_remaining);
+            return;
+        }
+
+        throw new Error("Unexpected response format.");
     } catch (err) {
         hideLoading();
         showError(err.message);
@@ -242,7 +256,27 @@ async function generatePaidReading(sessionId) {
     }
 }
 
-// ─── UI: Show Reading ───
+// ─── UI: Show Free Reading (HTML, instant) ───
+function showFreeReading(readingHtml, freeRemaining) {
+    const section = document.getElementById("readingSection");
+    const content = document.getElementById("readingContent");
+    if (!section || !content) return;
+
+    content.innerHTML = `
+        ${readingHtml}
+        ${buildFeedbackWidget()}
+    `;
+
+    section.classList.remove("hidden");
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Attach feedback & action handlers
+    attachFeedbackHandlers(content);
+    const chartActions = document.getElementById("chartActions");
+    if (chartActions) chartActions.classList.remove("hidden");
+}
+
+// ─── UI: Show Paid Reading (Markdown, polled) ───
 function showReading(result, freeRemaining) {
     const section = document.getElementById("readingSection");
     const content = document.getElementById("readingContent");
@@ -262,19 +296,11 @@ function showReading(result, freeRemaining) {
     section.classList.remove("hidden");
     section.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    // Attach feedback handlers
     attachFeedbackHandlers(content);
-
-    // Attach map actions visibility
     const chartActions = document.getElementById("chartActions");
-    if (chartActions) {
-        chartActions.classList.remove("hidden");
-    }
+    if (chartActions) chartActions.classList.remove("hidden");
 
-    // Attach trace interactivity
-    if (traceData) {
-        attachTraceHandlers(content);
-    }
+    if (traceData) attachTraceHandlers(content);
 }
 
 // ─── Computation Trace Renderer ───

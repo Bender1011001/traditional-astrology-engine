@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Body
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status, Body
 from typing import Dict, Any
 from sqlalchemy.orm import Session
 from src.api.v1.schemas import LoginRequest, RegisterRequest, ForgotPasswordRequest, ResetPasswordRequest
@@ -6,6 +6,7 @@ from src.engine.user_auth import get_user_manager
 from src.api.v1.auth import create_access_token, get_current_user
 from src.database.models import User
 from src.database.core import get_db
+from src.services.admin_notifier import notify_user_registered
 
 import logging
 
@@ -15,27 +16,35 @@ router = APIRouter()
 user_manager = get_user_manager()
 
 @router.post("/register")
-async def register(request: RegisterRequest):
+async def register(request: RegisterRequest, background_tasks: BackgroundTasks):
     result = user_manager.create_user(request.email, request.password, request.name, plan_tier=request.plan_tier or "")
     if not result["success"]:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=result["message"]
         )
-    
+
     user = result["user"]
     # Auto-login: Create token
     access_token = create_access_token(
-        chart_hash="", # Not relevant for general user token
+        chart_hash="",  # Not relevant for general user token
         tier=user.get("subscription_tier", "free"),
         data={"user_id": user["id"]}
     )
     logger.info("New user registered: %s", request.email)
-    
+
+    # Discord notification — runs after response is sent, never blocks the caller.
+    background_tasks.add_task(
+        notify_user_registered,
+        email=request.email,
+        name=request.name or "",
+        plan_tier=user.get("subscription_tier", "free"),
+    )
+
     return {
         "success": True,
         "token": access_token,
-        "user": user
+        "user": user,
     }
 
 @router.post("/login")

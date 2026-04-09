@@ -19,9 +19,9 @@ updated: 2026-03-23
 - **Working**: Astrological engine core, B2C consumer reading site, guest checkout (Stripe one-time payments), Computation Trace ("Show Our Work") integrated.
 - **Broken**: None known.
 - **Business Model (B2C)**: Direct-to-consumer natal chart readings. No accounts, no subscriptions.
-  - **Free**: 3 premium readings per IP
-  - **$7**: Full natal chart reading (one-time Stripe payment)
-  - **$29**: Premium in-depth analysis (one-time Stripe payment)
+  - **Free**: 3 instant template-based readings per IP (no LLM, < 3s)
+  - **$7**: Full natal chart reading (LLM-generated, one-time Stripe payment)
+  - **$29**: Premium in-depth analysis (LLM-generated, one-time Stripe payment)
 - **Database**: Comprehensive pre-1700s traditional astrology—Managed via `AstrologicalDelineation` database table (SQLAlchemy).
 - **Release Ready**: Version 2.0 (B2C Consumer Readings).
 - **SEO**: Content pages (natal-charts, houses, aspects, etc.) kept for organic traffic with CTA banners → reading form.
@@ -129,7 +129,9 @@ The core delineations are now stored in the database to allow for manual fixes a
 - `src/app.py` — Entry point for the web server (Documentation at /docs).
 - `src/static/js/reading-app.js` — B2C reading flow (form → free/paid → poll → render). Includes `buildTraceSection()` for rendering computation trace.
 - `src/engine/trace_generator.py` — Reusable trace module: generates JSON dict of all computation steps for any chart.
-- `src/services/premium_generator.py` — Background task for premium reports; includes computation trace generation (step 3).
+- `src/services/free_reading_generator.py` — **Instant free reading**: Template-based, zero-LLM reading generator. Extracts Sun/Moon/Rising, sect, dignity scorecard, profections from `Auditor` data and renders consumer-friendly HTML.
+- `src/services/premium_generator.py` — Background task for LLM-generated premium reports (paid tiers only); includes computation trace generation (step 3).
+- `src/api/v1/endpoints/premium.py` — Free guest reading endpoint (instant) + paid reading polling endpoint.
 - `src/api/v1/endpoints/guest_checkout.py` — Guest Stripe checkout (no auth, $7/$29).
 - `LICENSE` — MIT License.
 - `CHANGELOG.md` — Project history and rule updates.
@@ -231,6 +233,8 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Dodecatemoria Harmonic Offset Corruption | `advanced_mechanics.py` superimposed its calculation arc against the planet's longitude (`longitude + arc`) rather than the start of the sign boundary (`sign_start + arc`), inadvertently boosting the formula by an entire N-harmonic factor (calculating x13 instead of Valens x12, and x14 instead of Paulus x13). | Repointed the mathematical projection vector to hinge entirely off `sign_start`, securing the intended classical geometric mapping to the micro-zodiac. |
 | Humoral Temperament Tally Dilution | `temperament.py` indiscriminately added the inherent nature of *all* 7 traditional planets to the humor tally instead of just the *significant* planets (Asc ruler, Moon, and planets aspecting the Moon/Asc), creating a homogeneous 'blob' temperament for all nativities. It was also missing 60° (Sextile) and 120° (Trine) aspects in its aspect detectors. | Restructured the routine to first compile a `significant_planets` set, added checking for Sextile/Trine/Ascendant aspects, and restricted the inherent nature tally to only iterate over the authorized set matching Lilly's specific workflow. |
 | Abscission False Collision & Hellenistic VoC Bug | `horary.py` `check_abscission` wrongly assumed that any physical interposition resulted in a collision cut, because it used `abs()` on the closing speed, failing to gate for when the interposing planet is moving away faster than the pursuer. Additionally, `check_void_of_course_hellenistic` judged the 30-degree boundary using static aspect distance rather than kinematic moon travel distance. | Swapped absolute speed comparison in Abscission to dynamic directional vector `closing_speed`, verifying true convergence over time. Implemented `v=d/t` kinematic time projection into the Hellenistic VoC checks. |
+| Cloudflare analytics wildly different from GSC | Cloudflare is DNS-only (grey cloud), not proxying. DNS resolves to Google IPs (216.239.x.x), `server: Google Frontend`. CF dashboard shows DNS query counts (bots, resolvers), not page views. | Confirmed architecture is correct as Google Cloud Run direct. GA4 + GSC is the real analytics stack. Removed orphaned `cloudflared_config.yml` and `.cloudflared/`. |
+| `www.traditional-astrology.com` times out | No DNS record configured for `www` subdomain in Cloudflare | Need to add CNAME record: `www` → `traditional-astrology.com` in Cloudflare DNS dashboard |
 
 ## Anti-Patterns (DO NOT)
 - Do not edit planets_in_signs.json manually without running enhance_delineations.py

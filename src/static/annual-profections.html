@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJNM5XVD');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-RCNDWN4XVN');
+  </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annual Profections Calculator | Find Your Lord of the Year</title>
+<meta content="Free annual profections calculator. Find your profected house and Lord of the Year for any age. Learn how traditional astrologers use annual profections for year-ahead timing." name="description"/>
+<meta content="#0a0a1a" name="theme-color"/>
+<link href="https://traditional-astrology.com/annual-profections.html" rel="canonical"/>
+<meta content="Annual Profections Calculator | Find Your Lord of the Year" property="og:title"/>
+<meta content="Free annual profections calculator. Find your profected house and Lord of the Year using classical traditional astrology techniques." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://traditional-astrology.com/annual-profections.html" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
+<meta content="https://traditional-astrology.com/og-card.png" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="style.css?v=mobilenav2" rel="stylesheet"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are annual profections?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Annual profections is a Hellenistic timing technique where the Ascendant advances one whole sign house per year of life. At age 0, the 1st house is activated. At age 1, the 2nd house. At age 12, you return to the 1st house. The planet that rules the activated sign becomes the Lord of the Year, governing the primary themes and events of that solar year."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate my annual profection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Take your current age and divide by 12. The remainder tells you which house is activated (0 = 1st house, 1 = 2nd house, etc.). If you are 33, then 33 divided by 12 = 2 remainder 9, so your 10th house is activated. The ruler of the sign on the cusp of that house is your Lord of the Year."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Lord of the Year in astrology?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Lord of the Year is the planet that rules the zodiac sign of your profected house for a given year. It becomes the chief governor of major themes and events. Its natal condition — dignity, house placement, and aspects — determines whether those themes manifest constructively or with difficulty."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do annual profections work with whole sign houses only?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Traditionally, annual profections use the Whole Sign House system, where each sign equals one house starting from the Ascendant sign. This is the method described by Vettius Valens and other Hellenistic authors. Some modern traditional astrologers adapt it for other house systems, but Whole Sign is the classical standard."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  /* Profections Calculator Widget */
+  .profection-calc {
+    background: linear-gradient(135deg, rgba(20, 18, 35, 0.95), rgba(15, 13, 28, 0.98));
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-card);
+  }
+
+  .profection-calc h3 {
+    font-family: var(--font-display);
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .calc-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .calc-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .calc-field label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .calc-field input, .calc-field select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1rem;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    min-width: 120px;
+  }
+
+  .calc-field input:focus, .calc-field select:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(212,175,55,0.2);
+  }
+
+  #calcBtn {
+    background: linear-gradient(135deg, var(--gold), #b8922f);
+    color: #0a0a1a;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  #calcBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(212,175,55,0.3);
+  }
+
+  .profection-result {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: var(--radius-md);
+    display: none;
+  }
+
+  .profection-result.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .result-grid { grid-template-columns: 1fr; }
+    .calc-form { flex-direction: column; align-items: center; }
+    .calc-field { width: 100%; }
+    .calc-field input, .calc-field select { width: 100%; }
+  }
+
+  .result-item {
+    padding: 1rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+
+  .result-item .label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .result-item .value {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-top: 0.25rem;
+  }
+
+  .result-interpretation {
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Profection Wheel Table */
+  .profection-wheel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .profection-wheel { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .wheel-cell {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .wheel-cell:hover {
+    border-color: var(--gold);
+    background: rgba(212,175,55,0.05);
+  }
+
+  .wheel-cell.active-year {
+    border-color: var(--gold);
+    background: rgba(212,175,55,0.1);
+    box-shadow: 0 0 15px rgba(212,175,55,0.15);
+  }
+
+  .wheel-cell .cell-house {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .wheel-cell .cell-ages {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--text);
+    margin-top: 0.2rem;
+  }
+
+  .wheel-cell .cell-planet {
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-top: 0.2rem;
+  }
+</style>
+</head>
+
+<body style="padding-top: 36px"><div id="seoCTABar">
+<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; text-align: center; padding: 0.5rem 1rem; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.85rem; font-weight: 600;">
+        ✦ See your full natal chart with profections 
+        <a href="/#get-reading" style="color: #0a0a1a; text-decoration: underline; margin-left: 0.4rem;">
+            Get your reading →
+        </a>
+</div>
+</div>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="background-globes">
+<div class="globe globe-1"></div>
+<div class="globe globe-2"></div>
+<div class="stars-overlay"></div>
+</div>
+<main class="container" id="main">
+<header>
+<div class="header-content">
+<h1>ANNUAL PROFECTIONS CALCULATOR</h1>
+<div class="ornament"></div>
+<p class="subtitle">Find your profected house and Lord of the Year using the classical Hellenistic timing technique.</p>
+<nav class="site-nav" aria-label="Main navigation" style="margin-top: 2rem;">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger-icon"></span>
+    </button>
+    <div class="nav-links">
+      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+      <a href="/horary.html" class="nav-link">Horary Oracle</a>
+      <a href="/daily.html" class="nav-link">Daily Navigator</a>
+      <a href="/case-studies.html" class="nav-link">Case Studies</a>
+      <a href="/#how-it-works" class="nav-link">How It Works</a>
+      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+    </div>
+  </nav>
+</div>
+</header>
+
+<!-- Interactive Calculator Widget -->
+<section class="basic-view">
+<div class="profection-calc">
+  <h3>✦ Calculate Your Profection</h3>
+  <div class="calc-form">
+    <div class="calc-field">
+      <label for="birthYear">Birth Year</label>
+      <input type="number" id="birthYear" placeholder="1990" min="1900" max="2026"/>
+    </div>
+    <div class="calc-field">
+      <label for="risingSign">Rising Sign</label>
+      <select id="risingSign">
+        <option value="Aries">Aries</option>
+        <option value="Taurus">Taurus</option>
+        <option value="Gemini">Gemini</option>
+        <option value="Cancer">Cancer</option>
+        <option value="Leo">Leo</option>
+        <option value="Virgo">Virgo</option>
+        <option value="Libra">Libra</option>
+        <option value="Scorpio">Scorpio</option>
+        <option value="Sagittarius">Sagittarius</option>
+        <option value="Capricorn">Capricorn</option>
+        <option value="Aquarius">Aquarius</option>
+        <option value="Pisces">Pisces</option>
+      </select>
+    </div>
+    <button id="calcBtn">Calculate</button>
+  </div>
+
+  <div class="profection-result" id="profResult">
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="label">Current Age</div>
+        <div class="value" id="resAge">—</div>
+      </div>
+      <div class="result-item">
+        <div class="label">Profected House</div>
+        <div class="value" id="resHouse">—</div>
+      </div>
+      <div class="result-item">
+        <div class="label">Profected Sign</div>
+        <div class="value" id="resSign">—</div>
+      </div>
+      <div class="result-item">
+        <div class="label">Lord of the Year</div>
+        <div class="value" id="resLord">—</div>
+      </div>
+    </div>
+    <div class="result-interpretation" id="resInterpretation"></div>
+  </div>
+</div>
+</section>
+
+<!-- Educational Content -->
+<section class="basic-view">
+<div class="basic-card">
+<h2 class="section-title">What Are Annual Profections?</h2>
+<p class="section-subtitle">Annual profections is a Hellenistic timing technique that assigns a different house — and its ruling planet — to each year of your life.</p>
+<p>The method is simple and powerful: starting from the Ascendant (1st house) at birth, you advance one house per year. At age 1, you reach the 2nd house. At age 12, you cycle back to the 1st house. This creates a repeating 12-year rhythm. The planet that rules the sign on the profected house becomes your <strong>Lord of the Year</strong>, the chief governor of that solar return year's themes.</p>
+<p>This technique appears in the works of <strong>Vettius Valens</strong> (2nd century CE), <strong>Abu Ma'shar</strong> (9th century CE), and was widely used throughout the medieval period. It is one of the most reliable predictive methods in the traditional astrologer's toolkit because it requires no specialized calculation — only the birth chart and the native's age.</p>
+</div>
+</section>
+
+<section class="basic-view">
+<div class="basic-card">
+<h2 class="section-title">The 12-Year Profection Wheel</h2>
+<p class="section-subtitle">Each house governs a domain of life. When profected, that domain becomes the primary theme of the year.</p>
+
+<div class="profection-wheel" id="profWheel">
+  <div class="wheel-cell" data-house="1">
+    <div class="cell-house">1st House</div>
+    <div class="cell-ages">0, 12, 24, 36, 48, 60</div>
+    <div class="cell-planet">Self & Body</div>
+  </div>
+  <div class="wheel-cell" data-house="2">
+    <div class="cell-house">2nd House</div>
+    <div class="cell-ages">1, 13, 25, 37, 49, 61</div>
+    <div class="cell-planet">Money & Resources</div>
+  </div>
+  <div class="wheel-cell" data-house="3">
+    <div class="cell-house">3rd House</div>
+    <div class="cell-ages">2, 14, 26, 38, 50, 62</div>
+    <div class="cell-planet">Siblings & Travel</div>
+  </div>
+  <div class="wheel-cell" data-house="4">
+    <div class="cell-house">4th House</div>
+    <div class="cell-ages">3, 15, 27, 39, 51, 63</div>
+    <div class="cell-planet">Home & Parents</div>
+  </div>
+  <div class="wheel-cell" data-house="5">
+    <div class="cell-house">5th House</div>
+    <div class="cell-ages">4, 16, 28, 40, 52, 64</div>
+    <div class="cell-planet">Children & Pleasure</div>
+  </div>
+  <div class="wheel-cell" data-house="6">
+    <div class="cell-house">6th House</div>
+    <div class="cell-ages">5, 17, 29, 41, 53, 65</div>
+    <div class="cell-planet">Health & Service</div>
+  </div>
+  <div class="wheel-cell" data-house="7">
+    <div class="cell-house">7th House</div>
+    <div class="cell-ages">6, 18, 30, 42, 54, 66</div>
+    <div class="cell-planet">Marriage & Contracts</div>
+  </div>
+  <div class="wheel-cell" data-house="8">
+    <div class="cell-house">8th House</div>
+    <div class="cell-ages">7, 19, 31, 43, 55, 67</div>
+    <div class="cell-planet">Death & Debt</div>
+  </div>
+  <div class="wheel-cell" data-house="9">
+    <div class="cell-house">9th House</div>
+    <div class="cell-ages">8, 20, 32, 44, 56, 68</div>
+    <div class="cell-planet">Philosophy & Faith</div>
+  </div>
+  <div class="wheel-cell" data-house="10">
+    <div class="cell-house">10th House</div>
+    <div class="cell-ages">9, 21, 33, 45, 57, 69</div>
+    <div class="cell-planet">Career & Reputation</div>
+  </div>
+  <div class="wheel-cell" data-house="11">
+    <div class="cell-house">11th House</div>
+    <div class="cell-ages">10, 22, 34, 46, 58, 70</div>
+    <div class="cell-planet">Friends & Hopes</div>
+  </div>
+  <div class="wheel-cell" data-house="12">
+    <div class="cell-house">12th House</div>
+    <div class="cell-ages">11, 23, 35, 47, 59, 71</div>
+    <div class="cell-planet">Enemies & Isolation</div>
+  </div>
+</div>
+</div>
+</section>
+
+<section class="basic-view">
+<div class="basic-card">
+<h2 class="section-title">How to Read Your Lord of the Year</h2>
+<p class="section-subtitle">The Lord of the Year becomes the most important planet for the year. Its natal condition determines the character of events.</p>
+<ul class="grid-container">
+  <li><strong>Dignified Lord of the Year:</strong> If the ruling planet is in its domicile, exaltation, or has strong triplicity dignity, the year tends to bring opportunities aligned with the activated house topics.</li>
+  <li><strong>Debilitated Lord of the Year:</strong> If the ruling planet is in detriment or fall, has no essential dignity, or is combust, the year may bring challenges, delays, or frustrations related to the house topics.</li>
+  <li><strong>Transits to the Lord:</strong> Major transits (especially Saturn, Jupiter, and eclipses) to your Lord of the Year during the profected year amplify or modify events significantly.</li>
+  <li><strong>House of the Lord:</strong> The natal house where the Lord of the Year sits reveals <em>where</em> the year's themes manifest. Example: Lord of the Year in the 10th house = career emphasis, regardless of which house is profected.</li>
+</ul>
+</div>
+</section>
+
+<section class="basic-view">
+<div class="basic-card">
+<h2 class="section-title">Example: A 10th House Profection Year (Age 33)</h2>
+<p class="section-subtitle">A practical demonstration of how profections apply to real life.</p>
+<p>At age 33, the native enters a 10th house profection year. The sign on the Midheaven (10th house cusp) determines the Lord of the Year. If the rising sign is Cancer, the 10th house sign is Aries, making the Lord of the Year <strong>Mars</strong>.</p>
+<p>The astrologer then examines Mars in the natal chart: What house is Mars in? Is Mars dignified? What aspects does Mars receive? If Mars is in the 7th house in Capricorn (exalted), the native may experience career advancement through partnerships, contracts, or the spouse's influence. If Mars is in the 12th house in Taurus (detriment), the career year may involve hidden enemies, institutional struggles, or burnout.</p>
+<p>This is why annual profections are so powerful: they narrow the focus to one planet per year, making the analysis precise and actionable.</p>
+</div>
+</section>
+
+<section class="basic-view">
+<div class="basic-card">
+<h2 class="section-title">Profections and Solar Returns</h2>
+<p class="section-subtitle">Traditional astrologers combine profections with the Solar Return chart for maximum predictive power.</p>
+<p>The Lord of the Year acts as a bridge between the natal chart and the Solar Return. When examining a Solar Return chart, the condition of the Lord of the Year in the return chart reveals how that year's themes will specifically unfold. If the natal Lord of the Year is well-placed in the Solar Return, it confirms a constructive year. If afflicted, it signals friction.</p>
+<p>This layered approach — profections + solar return + natal chart — is the gold standard of traditional annual prediction. Our full natal chart readings include this analysis automatically.</p>
+</div>
+</section>
+
+<section class="basic-view">
+<div class="basic-card" style="text-align:center;">
+<h2 class="section-title">Get Your Complete Profections Analysis</h2>
+<p class="section-subtitle">Our full reading calculates your Annual Profections, Firdaria, Zodiacal Releasing, and 12 more classical timing techniques — all in one comprehensive report.</p>
+<p style="margin-top:1rem;"><a class="help-btn" href="/#get-reading" style="background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; font-weight: 700; padding: 0.75rem 2rem; font-size: 1rem;">✦ Calculate Your Full Natal Chart — Free</a></p>
+</div>
+</section>
+
+<section class="basic-view">
+<div class="basic-card related-guides">
+<h2 class="section-title">Related Traditional Guides</h2>
+<ul class="grid-container">
+<li><a class="link-gold" href="planetary-periods.html">Planetary Periods & Time Lords</a> — Firdaria and other timing systems.</li>
+<li><a class="link-gold" href="lot-of-fortune.html">Lot of Fortune</a> — The Arabic Part that reveals material fortune.</li>
+<li><a class="link-gold" href="case-studies.html">Forensic Case Studies</a> — See these techniques applied to famous charts.</li>
+<li><a class="link-gold" href="daily.html">Daily Navigator</a> — See profections applied to your chart today.</li>
+<li><a class="link-gold" href="natal-charts.html">Natal Chart Guide</a> — The foundation of traditional judgment.</li>
+</ul>
+</div>
+</section>
+
+<footer class="site-footer">
+<div class="footer-columns">
+<div class="footer-col">
+<h3>Product</h3>
+<ul>
+    <li><a href="/#get-reading">Get a Reading</a></li>
+    <li><a href="techniques.html">Techniques</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+  </ul>
+</div>
+<div class="footer-col">
+<h3>Resources</h3>
+<ul>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="case-studies.html">Case Studies</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Legal</h3>
+<ul>
+<li><a href="privacy.html">Privacy Policy</a></li>
+<li><a href="terms.html">Terms of Service</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Contact</h3>
+<ul>
+    <li><a href="mailto:andrew@traditional-astrology.com">Support</a></li>
+  </ul>
+</div>
+</div>
+<div class="footer-bottom">
+  <p>© 2026 Traditional Astrology. All rights reserved.</p>
+  <p class="footer-disclaimer">For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.</p>
+</div>
+</footer>
+</main>
+<script src="basic.js"></script>
+
+<script>
+(function() {
+  var signs = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+  var rulers = {
+    'Aries': 'Mars', 'Taurus': 'Venus', 'Gemini': 'Mercury', 'Cancer': 'Moon',
+    'Leo': 'Sun', 'Virgo': 'Mercury', 'Libra': 'Venus', 'Scorpio': 'Mars',
+    'Sagittarius': 'Jupiter', 'Capricorn': 'Saturn', 'Aquarius': 'Saturn', 'Pisces': 'Jupiter'
+  };
+  var houseTopics = {
+    1: 'self, body, health, and personal identity',
+    2: 'money, possessions, and material resources',
+    3: 'siblings, neighbors, short journeys, and communication',
+    4: 'home, parents, roots, and foundations',
+    5: 'children, creativity, pleasure, and romance',
+    6: 'illness, servants, daily work, and routines',
+    7: 'marriage, partnerships, open enemies, and contracts',
+    8: 'death, inheritance, shared resources, and debt',
+    9: 'philosophy, religion, long journeys, and higher education',
+    10: 'career, public reputation, authority, and honors',
+    11: 'friends, alliances, hopes, and community',
+    12: 'hidden enemies, imprisonment, isolation, and self-undoing'
+  };
+
+  var ordinals = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th'];
+
+  document.getElementById('calcBtn').addEventListener('click', function() {
+    var birthYear = parseInt(document.getElementById('birthYear').value);
+    var rising = document.getElementById('risingSign').value;
+    if (!birthYear || birthYear < 1900 || birthYear > 2026) {
+      alert('Please enter a valid birth year between 1900 and 2026.');
+      return;
+    }
+
+    var currentYear = new Date().getFullYear();
+    var age = currentYear - birthYear;
+    if (age < 0) { alert('Birth year cannot be in the future.'); return; }
+
+    var houseIndex = age % 12;
+    var houseNum = houseIndex + 1;
+    var risingIdx = signs.indexOf(rising);
+    var profectedSignIdx = (risingIdx + houseIndex) % 12;
+    var profectedSign = signs[profectedSignIdx];
+    var lord = rulers[profectedSign];
+
+    document.getElementById('resAge').textContent = age;
+    document.getElementById('resHouse').textContent = ordinals[houseIndex] + ' House';
+    document.getElementById('resSign').textContent = profectedSign;
+    document.getElementById('resLord').textContent = lord;
+
+    var interp = 'At age ' + age + ', your chart has profected to the <strong>' + ordinals[houseIndex] + ' house</strong> (' + profectedSign + '). ';
+    interp += 'This activates themes of <strong>' + houseTopics[houseNum] + '</strong>. ';
+    interp += 'Your Lord of the Year is <strong>' + lord + '</strong>, the traditional ruler of ' + profectedSign + '. ';
+    interp += 'Pay attention to transits hitting natal ' + lord + ' this year — especially conjunctions, oppositions, and eclipses — as they will trigger major events related to these themes.';
+
+    document.getElementById('resInterpretation').innerHTML = interp;
+
+    var resultDiv = document.getElementById('profResult');
+    resultDiv.classList.add('active');
+    resultDiv.style.display = 'block';
+
+    // Highlight current house in the wheel
+    var cells = document.querySelectorAll('.wheel-cell');
+    cells.forEach(function(c) { c.classList.remove('active-year'); });
+    var activeCell = document.querySelector('.wheel-cell[data-house="' + houseNum + '"]');
+    if (activeCell) activeCell.classList.add('active-year');
+
+    // Scroll to results
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+})();
+</script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('[PWA] SW registered, scope:', reg.scope))
+          .catch(err => console.warn('[PWA] SW registration failed:', err));
+      });
+    }
+  </script>
+  <!-- AUTH MODALS -->
+  <div id="authModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+      
+      <!-- Login View -->
+      <div id="loginView" class="auth-view">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-field">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" required autocomplete="username" />
+          </div>
+          <div class="form-field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-loading hidden">Signing In...</span>
+          </button>
+          <div id="loginError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p>
+        </div>
+      </div>
+
+      <!-- Register View -->
+      <div id="registerView" class="auth-view hidden">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-sub">Save your natal chart securely and access it anywhere.</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-field">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" required autocomplete="new-password" minlength="8" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-loading hidden">Creating...</span>
+          </button>
+          <div id="registerError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var toggles = document.querySelectorAll('.mobile-menu-toggle');
+      toggles.forEach(function(toggle) {
+        if (toggle.dataset.navAttached) return;
+        toggle.dataset.navAttached = 'true';
+        toggle.addEventListener('click', function() {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !expanded);
+          this.classList.toggle('active');
+          var navLinks = this.nextElementSibling;
+          if (navLinks && navLinks.classList.contains('nav-links')) {
+            navLinks.classList.toggle('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

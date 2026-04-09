@@ -157,6 +157,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- Case Studies — E-E-A-T authority content -->
+  <url>
+    <loc>https://traditional-astrology.com/case-studies.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Annual Profections Calculator — high-intent tool page -->
+  <url>
+    <loc>https://traditional-astrology.com/annual-profections.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
 </urlset>
 
 

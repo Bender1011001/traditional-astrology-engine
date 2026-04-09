@@ -1,0 +1,69 @@
+{
+  "oracle": {
+    "question": "will I meet her before my birthday this year",
+    "querent_sign": "Scorpio",
+    "querent_ruler": "Mars",
+    "quesited_house": 7,
+    "quesited_label": "Relationships/Other",
+    "quesited_sign": "Taurus",
+    "quesited_ruler": "Venus",
+    "conditions": [
+      {
+        "condition": "Reception",
+        "giver": "Mars",
+        "receiver": "Venus",
+        "by": [
+          "Exaltation"
+        ],
+        "status": "Active"
+      },
+      {
+        "condition": "Minor Mutual Reception",
+        "p1": "Moon",
+        "p2": "Venus",
+        "p1_receives_p2_by": [
+          "Face"
+        ],
+        "p2_receives_p1_by": [
+          "Exaltation",
+          "Triplicity"
+        ],
+        "status": "Active",
+        "details": " [Moon as Co-Significator]"
+      }
+    ],
+    "strictures": [],
+    "verdict": "No",
+    "verdict_weight": "No Connection",
+    "strength_score": 16,
+    "total_score": 18
+  },
+  "positions": {
+    "Sun": "15.43 ? (Lon: 15.43)",
+    "Moon": "20.84 ? (Lon: 230.84)",
+    "Mercury": "17.71 ? (Lon: 347.71)",
+    "Venus": "6.83 ? (Lon: 36.83)",
+    "Mars": "26.41 ? (Lon: 356.41)",
+    "Jupiter": "16.08 ? (Lon: 106.08)",
+    "Saturn": "6.07 ? (Lon: 6.07)",
+    "Uranus": "28.95 ? (Lon: 58.95)",
+    "Neptune": "2.36 ? (Lon: 2.36)",
+    "Pluto": "5.28 ? (Lon: 305.28)",
+    "North_Node": "7.18 ? (Lon: 337.18)",
+    "South_Node": "7.18 ? (Lon: 157.18)"
+  },
+  "houses": {
+    "House 1": "18.05 Scorpio",
+    "House 2": "14.55 Sagittarius",
+    "House 3": "18.98 Capricorn",
+    "House 4": "27.63 Aquarius",
+    "House 5": "29.83 Pisces",
+    "House 6": "24.94 Aries",
+    "House 7": "18.05 Taurus",
+    "House 8": "14.55 Gemini",
+    "House 9": "18.98 Cancer",
+    "House 10": "27.63 Leo",
+    "House 11": "29.83 Virgo",
+    "House 12": "24.94 Libra"
+  }
+}

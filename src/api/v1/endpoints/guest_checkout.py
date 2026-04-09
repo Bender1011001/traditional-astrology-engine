@@ -13,6 +13,7 @@ from src.database.models import GuestRequest, AsyncReportTask
 from src.api.v1.schemas import ChartRequest
 from src.core.config import settings
 from src.services.premium_generator import generate_premium_report_task
+from src.services.admin_notifier import notify_chart_created
 import stripe
 import json
 import logging
@@ -227,6 +228,11 @@ async def generate_paid_reading(
         generate_premium_report_task,
         task.id,
         chart_request.model_dump()
+    )
+    background_tasks.add_task(
+        notify_chart_created,
+        chart_request.model_dump(),
+        f"Paid: {session.metadata.get('tier', 'unknown')}"
     )
     
     return {
