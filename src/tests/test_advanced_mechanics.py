@@ -86,11 +86,11 @@ def test_doryphory():
     assert merc_guard is not None
 
 def test_dodecatemoria():
-    # 10 Aries. Degree 10.
-    # Valens: 10 + 10*12 = 10 + 120 = 130 (Leo)
+    # 10 Aries. Degree-in-sign = 10.
+    # Valens: sign_start(0) + 10*12 = 0 + 120 = 120.0 (0° Leo)
     lon_v = DodecatemoriaEngine.calculate_dodecatemoria_valens(10.0)
-    assert lon_v == 130.0
+    assert lon_v == 120.0
     
-    # Paul: 10 + 10*13 = 10 + 130 = 140 (Leo)
+    # Paul: sign_start(0) + 10*13 = 0 + 130 = 130.0 (10° Leo)
     lon_p = DodecatemoriaEngine.calculate_dodecatemoria_paul(10.0)
-    assert lon_p == 140.0
+    assert lon_p == 130.0
