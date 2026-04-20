@@ -9,6 +9,7 @@
  */
 
 import { apiFetch } from './api.js';
+import { renderChartWheel } from './chart-graphics.js';
 
 // ─── State ───
 let chartPayload = null;
@@ -266,6 +267,17 @@ function showFreeReading(readingHtml, freeRemaining) {
         ${readingHtml}
         ${buildFeedbackWidget()}
     `;
+
+    // Render the natal chart wheel if data is embedded in the reading HTML
+    const wheelDataEl = content.querySelector('#chartWheelData');
+    if (wheelDataEl) {
+        try {
+            const wheelData = JSON.parse(wheelDataEl.textContent);
+            renderChartWheel(wheelData);
+        } catch (e) {
+            console.warn('Chart wheel render failed:', e);
+        }
+    }
 
     section.classList.remove("hidden");
     section.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -660,7 +672,7 @@ function showLoading() {
     if (elapsedTimerInterval) clearInterval(elapsedTimerInterval);
     elapsedTimerInterval = setInterval(() => {
         const secs = Math.floor((Date.now() - loadingStartTime) / 1000);
-        if (elapsedEl) elapsedEl.textContent = `Elapsed: ${secs}s — typically takes 30–60 seconds`;
+        if (elapsedEl) elapsedEl.textContent = `Calculating your chart... ${secs}s`;
     }, 1000);
 
     // Scroll to loading

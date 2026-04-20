@@ -3,13 +3,11 @@ from fastapi import APIRouter, HTTPException, Request, Depends, BackgroundTasks
 from sqlalchemy.orm import Session
 from src.database.core import get_db
 from src.database.models import GuestRequest, AsyncReportTask
-from src.services.premium_generator import generate_premium_report_task
 from src.services.free_reading_generator import generate_free_reading
 from src.services.admin_notifier import notify_chart_created
 from src.api.v1.schemas import ChartRequest
 from src.core.config import settings
 import logging
-import uuid
 
 logger = logging.getLogger(__name__)
 
@@ -67,37 +65,10 @@ async def request_premium_guest_reading(
 
     free_remaining = MAX_FREE_READINGS - (usage_count + 1)
 
-    # 3. First reading per IP gets a full PREMIUM LLM report (Background Task)
-    if usage_count == 0:
-        task_id = uuid.uuid4().hex
-        task = AsyncReportTask(
-            id=task_id,
-            status="pending",
-            request_meta=chart_request.model_dump()
-        )
-        db.add(task)
-        db.commit()
-        db.refresh(task)
-        
-        background_tasks.add_task(
-            generate_premium_report_task,
-            task.id,
-            chart_request.model_dump()
-        )
-        background_tasks.add_task(
-            notify_chart_created, 
-            chart_request.model_dump(), 
-            "Free Premium"
-        )
-        
-        return {
-            "status": "pending",
-            "task_id": task.id,
-            "free_readings_remaining": free_remaining,
-            "instant": False,
-        }
-
-    # 4. Subsequent free readings (2nd and 3rd) get the Instant Free Reading (no LLM)
+    # 3. ALL free readings get the Instant Free Reading (template-based, no LLM).
+    #    Premium LLM reports are reserved for paid tiers ($7/$29).
+    #    Previous approach routed first-time IPs to a slow LLM background task
+    #    that took 30-60+ seconds (or hung indefinitely), killing conversions.
     try:
         result = generate_free_reading(
             name=chart_request.name or "Guest",

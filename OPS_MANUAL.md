@@ -21,7 +21,7 @@ We are building a "Forensic Astrology" SaaS.
 
 ## 3. The Tech Stack (Business Critical)
 -   **Payment**: Stripe (Live Mode). Keys in `.env`.
--   **Hosting**: Render (Starter Plan).
+-   **Hosting**: Google Cloud Run (serverless containers).
 -   **Security**: CSP Headers hardened (GTM/GA Allowed).
 -   **SEO**: `sitemap.xml` indexes `/`, `/almuten-figuris.html`, `/lot-of-fortune.html`, `/hyleg-calculator.html`.
 -   **Retention**: Automated PDF Emailer (Stickiness Loop) Active.
@@ -39,21 +39,8 @@ We are building a "Forensic Astrology" SaaS.
 -   **Disclaimer**: Always maintain the "Historical Use Only" legal shield.
 
 ### C. Cost Control (No-User Mode)
--   If active users are zero, park Azure to reduce burn:
-    ```powershell
-    .\scripts\downgrade_azure.ps1
-    ```
--   To bring Azure back online for migration testing:
-    ```powershell
-    .\scripts\resume_azure.ps1
-    ```
--   This script:
-  -   Downgrades ACR to `Basic`
-  -   Keeps App Service Plan at `B1` (minimum practical Linux tier)
-  -   Stops the Web App
-  -   Downgrades PostgreSQL to `Standard_B1ms`
-  -   Stops PostgreSQL compute
--   Azure deploy pipeline is manual-only. To deploy, run GitHub Action `Build and Deploy to Azure` and set input `confirm_deploy=DEPLOY`.
+-   Google Cloud Run scales to zero automatically when idle — no manual parking needed.
+-   Deploy: `python scripts/deploy_cloudrun.py` or `gcloud run deploy --env-vars-file env.yaml`.
 
 ### D. Etsy Build-First Mode
 -   Keep checkout disabled while building Etsy workflow fit:

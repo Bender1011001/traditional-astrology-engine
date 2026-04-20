@@ -12,6 +12,7 @@ This module is the "hook" that converts a visitor into a paying customer.
 The free reading shows enough to be valuable, then CTAs toward $7/$29 tiers.
 """
 
+import json
 import logging
 from typing import Any, Dict, List, Optional
 from src.engine.forensic_engine import Auditor
@@ -267,6 +268,24 @@ def generate_free_reading(
         # Build dignity scorecard for the septener
         dignity_rows = _build_dignity_scorecard(planets_forensic, sect_type)
 
+        # Build chart wheel data for SVG rendering in the browser
+        try:
+            planets_for_wheel = {
+                p["name"]: {"longitude": float(p["longitude"]), "retrograde": p.get("retrograde", False)}
+                for p in planets_forensic
+                if p.get("name") and p.get("longitude") is not None
+            }
+            raw_houses = astronomy.get("houses", {})
+            houses_for_wheel = {str(k): float(v) for k, v in raw_houses.items() if v is not None}
+            chart_wheel_data = {
+                "planets": planets_for_wheel,
+                "houses": houses_for_wheel,
+                "angles": {"Ascendant": asc_lon},
+            }
+        except Exception as exc:
+            logger.warning("Chart wheel data build failed: %s", repr(exc))
+            chart_wheel_data = None
+
         # 3. Render HTML
         reading_html = _render_free_reading_html(
             name=name or "Guest",
@@ -285,6 +304,7 @@ def generate_free_reading(
             profections=profections,
             temperament=temperament,
             age=meta.get("age", 0),
+            chart_wheel_data=chart_wheel_data,
         )
 
         chart_summary = {
@@ -393,6 +413,7 @@ def _render_free_reading_html(
     profections: dict,
     temperament: dict,
     age: int,
+    chart_wheel_data: Optional[dict] = None,
 ) -> str:
     """Renders the complete free reading as an HTML fragment."""
 
@@ -400,6 +421,19 @@ def _render_free_reading_html(
     moon_data = MOON_IN_SIGN.get(moon_sign, {"title": moon_sign, "text": ""})
     rising_data = RISING_SIGN.get(rising_sign, {"title": rising_sign, "text": ""})
     sect_info = SECT_DESCRIPTIONS.get(sect_type, SECT_DESCRIPTIONS["DAY"])
+
+    # Chart wheel HTML (embedded JSON consumed by reading-app.js → renderChartWheel)
+    if chart_wheel_data:
+        wheel_json = json.dumps(chart_wheel_data, ensure_ascii=False)
+        chart_wheel_html = f"""
+        <div class="reading-section chart-wheel-section">
+            <h2 class="section-title">✦ Your Natal Chart</h2>
+            <div id="chartWheelContainer" class="chart-wheel-container"></div>
+            <script type="application/json" id="chartWheelData">{wheel_json}</script>
+        </div>
+        """
+    else:
+        chart_wheel_html = ""
 
     # Big Three header
     sun_glyph = SIGN_GLYPHS.get(sun_sign, "")
@@ -470,6 +504,9 @@ def _render_free_reading_html(
             <p class="reading-subtitle">Calculated using the Swiss Ephemeris · Whole Sign Houses · Traditional Methods</p>
         </div>
 
+        <!-- CHART WHEEL -->
+        {chart_wheel_html}
+
         <!-- THE BIG THREE -->
         <div class="big-three-grid">
             <div class="big-three-card">
@@ -532,18 +569,23 @@ def _render_free_reading_html(
         <!-- UPSELL CTA -->
         <div class="free-reading-cta">
             <div class="cta-divider"></div>
-            <h2 class="cta-title">This is your chart overview.</h2>
-            <p class="cta-subtitle">Your full reading includes 12 house analysis, Time Lord forecasting, fixed star interpretations, the Hermetic Lots, remediation prescriptions, and a complete 5-year forecast — all computed by the same engine that produced the data above.</p>
+            <h2 class="cta-title">Want to go deeper?</h2>
+            <p class="cta-subtitle">Your full reading adds the 12-house analysis, all eight Hermetic Lots, Fixed Star conjunctions, Firdaria time-lord periods, and a year-by-year forecast — everything computed from the same chart data above, in a downloadable PDF.</p>
+            <div class="cta-value-points" style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin:1.25rem 0; font-size:0.85rem; color:rgba(255,255,255,0.7);">
+                <span>📄 PDF you keep forever</span>
+                <span>⏱️ Ready in under a minute</span>
+                <span>🔒 No account needed</span>
+            </div>
             <div class="cta-buttons">
                 <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn">
-                    ✦ Get Your Full Reading — $7
+                    ✦ Get Full Reading — $7
                 </button>
                 <span class="btn-or">— or —</span>
                 <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn">
-                    Get Premium Deep-Dive — $29
+                    Complete Analysis — $29
                 </button>
             </div>
-            <p class="cta-fine-print">Secure payment via Stripe. No account required. Instant delivery.</p>
+            <p class="cta-fine-print">Secure payment via Stripe · No account needed · Instant PDF delivery</p>
         </div>
 
         <!-- DISCLAIMER -->

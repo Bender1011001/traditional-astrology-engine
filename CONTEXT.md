@@ -187,8 +187,8 @@ The core delineations are now stored in the database to allow for manual fixes a
 | Bare `except:` clauses | Catches all exceptions including system exits | Changed to `except Exception:` for safer handling |
 | Stub Login/Register | Pages showed "coming soon" | Implemented full auth system with user_auth.py |
 | Missing Function NameError | `_log_event` called but not defined in `api.py` | Restored missing helper function |
-| Azure DB Auth Failure | Used `astrology_admin` instead of `astroadmin` | Use `astroadmin` as defined in `setup_azure.ps1` |
-| ACR ImagePullFailure | Truncated Registry Password used in App Settings | Copy THE FULL 80+ CHAR password from ACR credentials |
+| Azure DB Auth Failure (legacy, migrated to Cloud Run) | Used `astrology_admin` instead of `astroadmin` | Migrated to Google Cloud Run — no longer applicable |
+| ACR ImagePullFailure (legacy, migrated to Cloud Run) | Truncated Registry Password used in App Settings | Migrated to Google Cloud Run — no longer applicable |
 | Plan Not Found (Reg) | Database not seeded with standard plans | Added `seed_plans()` to app startup event |
 | Decennials | Apheta / Sequence | Confirmed correct. Zodiacal sequence (`(p.lon - asc) % 360`) correctly computes post-ascendant alignment. |
 | Stars | Parans & Hour Angles | Confirmed correct. Uses proper spherical astronomy (RA/Dec and Hour Angle offsets) for Asc/Desc/MC/IC intersection logic. |

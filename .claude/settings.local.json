@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sqlite3 users.db \".tables\")",
+      "Bash(grep -E \"\\\\.\\(html|js|json\\)$\")",
+      "Bash(sqlite3 astrology.db \".tables\")",
+      "Bash(sqlite3 users.db \"SELECT COUNT\\(*\\) as total_users FROM users;\")",
+      "Bash(sqlite3 users.db \"SELECT name FROM sqlite_master WHERE type='table';\")",
+      "Bash(sqlite3 users.db \"SELECT COUNT\\(*\\) FROM guest_requests;\")",
+      "Bash(sqlite3 users.db \"SELECT COUNT\\(*\\) FROM usage_records;\")",
+      "Bash(sqlite3 users.db \"SELECT COUNT\\(*\\) FROM async_report_tasks;\")",
+      "Bash(sqlite3 users.db \"SELECT created_at FROM users ORDER BY created_at DESC LIMIT 3;\")"
+    ]
+  }
+}

@@ -20,10 +20,14 @@
   </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Traditional Natal Chart Reading — What Your Chart Reveals</title>
-<meta content="Discover what a traditional natal chart reveals about your life path, career, and timing. Classical reading based on Valens, Bonatti & Dorotheus — free preview." name="description"/>
+<title>Traditional Birth Chart Calculator — Free Classical Natal Chart Reading</title>
+<meta content="Free traditional birth chart calculator. Get your classical natal chart reading — planetary dignities, sect, profections, and timing forecast — in seconds. No account needed." name="description"/>
 <meta content="#f6f0e6" name="theme-color"/>
 <link href="https://traditional-astrology.com/natal-charts.html" rel="canonical"/>
+<link rel="alternate" hreflang="en" href="https://traditional-astrology.com/natal-charts.html"/>
+<link rel="alternate" hreflang="pt-BR" href="https://traditional-astrology.com/pt/natal-charts.html"/>
+<link rel="alternate" hreflang="sr-RS" href="https://traditional-astrology.com/sr/natal-charts.html"/>
+<link rel="alternate" hreflang="x-default" href="https://traditional-astrology.com/natal-charts.html"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
@@ -70,14 +74,7 @@
   <meta name="twitter:description" content="Discover what a traditional natal chart reveals about your life path, career, and timing. Free preview available."/>
   <meta name="twitter:image" content="https://traditional-astrology.com/og-card.png"/>
 </head>
-<body style="padding-top: 36px"><div id="seoCTABar">
-<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; text-align: center; padding: 0.5rem 1rem; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.85rem; font-weight: 600;">
-        ✦ Want to discover YOUR chart? 
-        <a href="/#get-reading" style="color: #0a0a1a; text-decoration: underline; margin-left: 0.4rem;">
-            Get your full natal chart reading →
-        </a>
-</div>
-</div>
+<body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
@@ -90,9 +87,9 @@
 <main class="container" id="main">
 <header>
 <div class="header-content">
-<h1>Traditional Birth Chart Calculator &amp; Reading</h1>
+<h1>Traditional Birth Chart Calculator</h1>
 <div class="ornament"></div>
-<p class="subtitle">Enter your birth details in the calculator above or discover the mechanics behind a classical traditional natal chart reading below.</p>
+<p class="subtitle">Enter your birth details below for a free classical natal chart reading — planetary positions, dignities, sect, and this year's timing forecast. No account required.</p>
 <nav class="site-nav" aria-label="Main navigation" style="margin-top: 2rem;">
     <a href="/" class="nav-brand">
       <span class="brand-icon">✦</span>
@@ -112,6 +109,79 @@
   </nav>
 </div>
 </header>
+
+<!-- ═══ CALCULATOR (embedded) ═══ -->
+<section class="hero" id="get-reading" style="padding-top:1rem; padding-bottom:0;">
+  <div class="chart-form-card" id="chartFormCard">
+    <form id="chartForm" autocomplete="on">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="birthDate">Date of Birth</label>
+          <input type="date" id="birthDate" name="birthDate" required />
+        </div>
+        <div class="form-field">
+          <label for="birthTime">Time of Birth</label>
+          <input type="time" id="birthTime" name="birthTime" required />
+          <label class="time-unknown-label">
+            <input type="checkbox" id="timeUnknown" />
+            <span>I don't know my birth time</span>
+          </label>
+        </div>
+        <div class="form-field">
+          <label for="birthCity">City</label>
+          <input type="text" id="birthCity" name="birthCity" placeholder="e.g. Los Angeles" required autocomplete="address-level2" />
+        </div>
+        <div class="form-field">
+          <label for="birthState">State / Country</label>
+          <input type="text" id="birthState" name="birthState" placeholder="e.g. CA or United Kingdom" autocomplete="address-level1" />
+        </div>
+      </div>
+      <button type="submit" class="btn-cta" id="submitBtn">
+        <span class="btn-text">✦ Reveal My Chart</span>
+        <span class="btn-loading hidden">Calculating your stars...</span>
+      </button>
+      <p class="form-note">Free · No account · No email · Results in seconds</p>
+      <div class="trust-signals" style="display:flex; justify-content:center; gap:1.5rem; margin-top:1rem; font-size:0.8rem; color:rgba(255,255,255,0.6); align-items:center;">
+        <span>🔒 We never sell your data.</span>
+        <span>🪐 Swiss Ephemeris · Whole Sign Houses</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Loading State (hidden by default) -->
+<section class="loading-section hidden" id="loadingSection">
+  <div class="loading-card">
+    <div class="loading-spinner"></div>
+    <p class="loading-text" id="loadingMessage">Calculating planetary positions...</p>
+    <div class="loading-progress-bar" id="loadingProgressBar">
+      <div class="loading-progress-fill" id="loadingProgressFill"></div>
+    </div>
+    <div class="loading-steps" id="loadingSteps">
+      <span class="loading-step active" data-step="0">📍 Locate</span>
+      <span class="loading-step" data-step="1">🪐 Planets</span>
+      <span class="loading-step" data-step="2">☀️ Sect</span>
+      <span class="loading-step" data-step="3">⚖️ Dignities</span>
+      <span class="loading-step" data-step="4">🔮 Lots</span>
+      <span class="loading-step" data-step="5">🤝 Receptions</span>
+      <span class="loading-step" data-step="6">📆 Profections</span>
+      <span class="loading-step" data-step="7">✍️ Synthesis</span>
+    </div>
+    <p class="loading-sub" id="loadingElapsed">Calculating your chart...</p>
+  </div>
+</section>
+
+<!-- Reading Output (hidden by default) -->
+<section class="reading-section hidden" id="readingSection">
+  <div class="reading-card" id="readingContent">
+    <!-- Dynamically filled by JS -->
+  </div>
+  <div class="chart-actions hidden" id="chartActions" style="display:flex; justify-content:center; gap:1rem; margin-top:2rem;">
+    <button id="exportPdfBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">✦ Export to PDF</button>
+    <button id="shareChartBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">✦ Share Chart</button>
+  </div>
+</section>
+
 <section class="basic-view">
 <div class="basic-card">
 <h2 class="section-title">What Is a Natal Chart?</h2>
@@ -229,6 +299,7 @@
 </footer>
 </main>
 <script src="basic.js"></script>
+<script type="module" src="/js/reading-app.js?v=astro-v5"></script>
 
   <script>
     if ('serviceWorker' in navigator) {

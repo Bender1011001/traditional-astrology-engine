@@ -1,0 +1,160 @@
+- generic [active] [ref=e1]:
+  - link "Ir para o conteúdo" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=e3]:
+    - generic [ref=e5]:
+      - heading "Calculadora de Mapa Astral Grátis" [level=1] [ref=e6]
+      - paragraph [ref=e7]: Insira seus dados de nascimento abaixo para uma leitura gratuita de carta natal clássica — posições planetárias, dignidades, seita e previsão de timing para este ano. Sem cadastro necessário.
+      - navigation "Navegação principal" [ref=e8]:
+        - link "✦ Traditional Astrology" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e10]: ✦
+          - generic [ref=e11]: Traditional Astrology
+        - generic [ref=e12]:
+          - link "English" [ref=e13] [cursor=pointer]:
+            - /url: /natal-charts.html
+          - link "Obter Leitura" [ref=e14] [cursor=pointer]:
+            - /url: /#get-reading
+          - link "Oráculo Horário" [ref=e15] [cursor=pointer]:
+            - /url: /horary.html
+          - link "Navegador Diário" [ref=e16] [cursor=pointer]:
+            - /url: /daily.html
+          - link "Entrar" [ref=e17] [cursor=pointer]:
+            - /url: "#"
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Data de Nascimento
+          - textbox "Data de Nascimento" [ref=e24]
+        - generic [ref=e25]:
+          - generic [ref=e26]: Hora de Nascimento
+          - textbox "Hora de Nascimento" [ref=e27]
+          - generic [ref=e28] [cursor=pointer]:
+            - checkbox "Não sei meu horário de nascimento" [ref=e29]
+            - generic [ref=e30]: Não sei meu horário de nascimento
+        - generic [ref=e31]:
+          - generic [ref=e32]: Cidade
+          - textbox "Cidade" [ref=e33]:
+            - /placeholder: ex. São Paulo
+        - generic [ref=e34]:
+          - generic [ref=e35]: Estado / País
+          - textbox "Estado / País" [ref=e36]:
+            - /placeholder: ex. SP ou Brasil
+      - button "✦ Revelar Meu Mapa" [ref=e37] [cursor=pointer]:
+        - generic [ref=e38]: ✦ Revelar Meu Mapa
+      - paragraph [ref=e39]: Grátis · Sem cadastro · Sem e-mail · Resultado em segundos
+      - generic [ref=e40]:
+        - generic [ref=e41]: 🔒 Seus dados nunca são vendidos.
+        - generic [ref=e42]: 🪐 Swiss Ephemeris · Casas em Signo Inteiro
+    - generic [ref=e44]:
+      - heading "O que é um Mapa Natal?" [level=2] [ref=e45]
+      - paragraph [ref=e46]: Um mapa natal (também chamado de carta natal ou mapa astral) é um retrato do céu para o momento exato e o local do nascimento. A astrologia tradicional o trata como um registro estruturado das circunstâncias de vida, talentos e desafios — não um teste de personalidade vago.
+      - paragraph [ref=e47]: Na prática tradicional, cada planeta, signo e casa contribui com um testemunho concreto. O Sol, a Lua e os planetas descrevem áreas da vida e a qualidade dos eventos, enquanto o Ascendente ancora o mapa como o caminho de vida do nativo. Isso faz da astrologia natal uma técnica fundamental para qualquer pessoa que busca uma leitura tradicional séria.
+    - generic [ref=e49]:
+      - heading "Raízes Históricas" [level=2] [ref=e50]
+      - paragraph [ref=e51]: A interpretação de carta natal surge na era helenística e continua pelas escolas árabe e renascentista.
+      - paragraph [ref=e52]: Autores clássicos como Doroteu, Valente e Ptolomeu estabeleceram um método que equilibra astronomia com regras claras de julgamento. Astrólogos medievais e renascentistas como Bonatti e Lilly refinaram essas regras em sistemas práticos que ainda são utilizados hoje. É por isso que os mapas natais tradicionais enfatizam técnicas verificáveis como dignidades, seita e governanças de casas.
+    - generic [ref=e54]:
+      - heading "Como Funciona um Mapa Astral Tradicional" [level=2] [ref=e55]
+      - paragraph [ref=e56]: Um astrólogo tradicional lê o mapa em camadas, começando pela estrutura e avançando para a síntese.
+      - list [ref=e57]:
+        - listitem [ref=e58]:
+          - strong [ref=e59]: "Ângulos e casas:"
+          - text: O Ascendente, o Meio do Céu e as doze casas mostram onde os temas de vida se desdobram — identidade, recursos, relacionamentos, carreira e legado.
+        - listitem [ref=e60]:
+          - strong [ref=e61]: "Planetas e dignidades:"
+          - text: Cada planeta opera com mais ou menos força dependendo do seu signo, triplicidade, termo e face. Isso é chamado de dignidade essencial.
+        - listitem [ref=e62]:
+          - strong [ref=e63]: "Seita e condição:"
+          - text: Mapas diurnos e noturnos determinam quais planetas estão em seita e, portanto, mais construtivos.
+        - listitem [ref=e64]:
+          - strong [ref=e65]: "Testemunho e síntese:"
+          - text: O astrólogo pondera múltiplos testemunhos para chegar a um julgamento coerente, em vez de depender de um único posicionamento.
+      - paragraph [ref=e66]: A leitura de mapa natal tradicional é cuidadosa, metódica e fundamentada em lógica repetível. Ela explica o "porquê" dos resultados e fornece um mapa de oportunidades e limitações.
+    - generic [ref=e68]:
+      - heading "O que Seu Mapa Astral Revela" [level=2] [ref=e69]
+      - paragraph [ref=e70]: Um exemplo breve mostra como o método permanece prático e tangível.
+      - paragraph [ref=e71]: Suponha que um mapa tem o governante do Ascendente na décima casa, dignificado e apoiado por Júpiter. Um astrólogo tradicional julgaria isso como forte evidência de autoridade profissional e reconhecimento público. Se o mesmo governante estiver enfraquecido por debilidade ou aflição, a previsão muda para atrasos, resultados de carreira instáveis ou dependência de patronos. Essa abordagem oferece expectativas claras em vez de linguagem vaga como "você pode sentir".
+    - generic [ref=e73]:
+      - 'heading "Técnicas de Timing: Profeções Anuais" [level=2] [ref=e74]'
+      - paragraph [ref=e75]: Uma das ferramentas mais poderosas da astrologia tradicional para previsão ano a ano.
+      - paragraph [ref=e76]: As profeções anuais fazem avançar o Ascendente natal uma casa por ano de vida. No seu aniversário, a casa ativada e seu governante tornam-se o foco do ano — revelando quais áreas da vida estarão em destaque, quais planetas serão "Senhor do Ano" e que tipo de eventos você pode esperar. Combinadas com períodos planetários (firdaria), as profeções fornecem uma cronologia precisa de capítulos da vida.
+    - generic [ref=e78]:
+      - heading "Por que os Mapas Natais Importam Hoje" [level=2] [ref=e79]
+      - paragraph [ref=e80]: A astrologia natal tradicional é útil para planejamento de vida, autoconhecimento e escolha do timing certo para decisões importantes.
+      - paragraph [ref=e81]: Clientes frequentemente buscam uma leitura de mapa natal para entender direção de carreira, padrões relacionais, dinâmicas familiares e temas de vida de longo prazo. Quando combinado com métodos de timing como profeções e períodos planetários, o mapa natal torna-se uma ferramenta prática de decisão — não apenas um espelho espiritual.
+      - paragraph [ref=e82]: Se você quer uma leitura de mapa natal transparente e baseada em fontes, nossa calculadora gratuita utiliza técnicas tradicionais que você pode verificar e revisitar ao longo do tempo.
+    - generic [ref=e83]:
+      - heading "Guias Relacionados" [level=2] [ref=e84]
+      - list [ref=e85]:
+        - listitem [ref=e86]:
+          - link "Calculadora de Profeções Anuais" [ref=e87] [cursor=pointer]:
+            - /url: /annual-profections.html
+          - text: — Encontre seu Senhor do Ano para qualquer idade.
+        - listitem [ref=e88]:
+          - link "Períodos Planetários e Firdaria" [ref=e89] [cursor=pointer]:
+            - /url: /planetary-periods.html
+          - text: — Aprenda como os capítulos de vida são divididos.
+        - listitem [ref=e90]:
+          - link "Navegador Diário" [ref=e91] [cursor=pointer]:
+            - /url: /daily.html
+          - text: — Veja profeções, firdaria e liberação zodiacal aplicados ao seu mapa.
+        - listitem [ref=e92]:
+          - link "As Doze Casas" [ref=e93] [cursor=pointer]:
+            - /url: /houses.html
+          - text: — Onde os eventos de vida se desdobram.
+        - listitem [ref=e94]:
+          - link "Aspectos Astrológicos" [ref=e95] [cursor=pointer]:
+            - /url: /aspects.html
+          - text: — Entendendo a geometria do céu.
+        - listitem [ref=e96]:
+          - link "English Version" [ref=e97] [cursor=pointer]:
+            - /url: /natal-charts.html
+          - text: — View this page in English.
+    - generic [ref=e98]:
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - heading "Produto" [level=3] [ref=e101]
+          - list [ref=e102]:
+            - listitem [ref=e103]:
+              - link "Obter Leitura" [ref=e104] [cursor=pointer]:
+                - /url: /#get-reading
+            - listitem [ref=e105]:
+              - link "Calculadora (EN)" [ref=e106] [cursor=pointer]:
+                - /url: /natal-charts.html
+            - listitem [ref=e107]:
+              - link "Preços" [ref=e108] [cursor=pointer]:
+                - /url: /index.html#pricing
+        - generic [ref=e109]:
+          - heading "Recursos" [level=3] [ref=e110]
+          - list [ref=e111]:
+            - listitem [ref=e112]:
+              - link "FAQ" [ref=e113] [cursor=pointer]:
+                - /url: /faq.html
+            - listitem [ref=e114]:
+              - link "Sobre" [ref=e115] [cursor=pointer]:
+                - /url: /about.html
+            - listitem [ref=e116]:
+              - link "Suporte" [ref=e117] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+        - generic [ref=e118]:
+          - heading "Legal" [level=3] [ref=e119]
+          - list [ref=e120]:
+            - listitem [ref=e121]:
+              - link "Política de Privacidade" [ref=e122] [cursor=pointer]:
+                - /url: /privacy.html
+            - listitem [ref=e123]:
+              - link "Termos de Serviço" [ref=e124] [cursor=pointer]:
+                - /url: /terms.html
+        - generic [ref=e125]:
+          - heading "Contato" [level=3] [ref=e126]
+          - list [ref=e127]:
+            - listitem [ref=e128]:
+              - link "Suporte" [ref=e129] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+            - listitem [ref=e130]:
+              - link "Reportar Bug" [ref=e131] [cursor=pointer]:
+                - /url: mailto:bugs@traditional-astrology.com
+      - generic [ref=e132]:
+        - paragraph [ref=e133]: © 2026 Traditional Astrology. Todos os direitos reservados.
+        - paragraph [ref=e134]: Para fins de entretenimento, pesquisa histórica e espiritual. Não constitui aconselhamento médico, jurídico ou financeiro.
