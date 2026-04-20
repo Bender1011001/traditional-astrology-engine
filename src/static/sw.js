@@ -10,8 +10,8 @@
  * on subsequent visits, even offline.
  */
 
-const CACHE_NAME = "astro-v4";
-const RUNTIME_CACHE = "astro-runtime-v4";
+const CACHE_NAME = "astro-v6";
+const RUNTIME_CACHE = "astro-runtime-v6";
 
 // Core app shell — cached on install.
 // IMPORTANT: Do NOT include query-string cache busters here.
@@ -22,8 +22,10 @@ const APP_SHELL = [
   "/daily.html",
   "/about.html",
   "/faq.html",
+  "/horary.html",
   "/style.css",
   "/config.js",
+  "/js/horary-app.js",
   "/manifest.json",
   "/favicon.ico",
   "/apple-touch-icon.png",

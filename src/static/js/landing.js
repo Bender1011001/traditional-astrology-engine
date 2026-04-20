@@ -4,6 +4,7 @@ import { initTheme, setupThemeToggle, applyTheme } from './theme.js';
 import { updateAuthUI, logout } from './auth.js';
 import { escapeHtml, formatPlainReading, hashString } from './utils.js';
 import { setupPricing, initiateCheckout } from './pricing.js';
+import { renderChartWheel } from './chart-graphics.js';
 
 // Expose globally for HTML onclicks
 window.initiateCheckout = (tier) => initiateCheckout(tier, getLastChartRequest());
@@ -330,6 +331,13 @@ function setupBasicForm() {
             }
 
             const data = await response.json();
+            
+            if (data.instant && data.reading_html) {
+                setBasicLoading(false);
+                renderInstantFreeReading(data, payload, timeUnknown);
+                return;
+            }
+
             const taskId = data.task_id;
             
             // 2. Poll for Completion
@@ -411,6 +419,52 @@ function renderPremiumReading(result, payload, timeUnknown) {
     }
 
     logEvent("premium_reading_shown", { has_token: hasToken });
+}
+
+function renderInstantFreeReading(data, payload, timeUnknown) {
+    const basicReadingBody = document.getElementById("basicReadingBody");
+    const basicReading = document.getElementById("basicReading");
+    const basicFeedback = document.getElementById("basicFeedback");
+    const hasToken = !!localStorage.getItem("cael_auth_token");
+
+    basicReadingBody.innerHTML = data.reading_html;
+
+    const wheelDataEl = basicReadingBody.querySelector('#chartWheelData');
+    if (wheelDataEl && typeof renderChartWheel === 'function') {
+        try {
+            const wheelData = JSON.parse(wheelDataEl.textContent);
+            renderChartWheel(wheelData);
+        } catch (e) {
+            console.warn('Chart wheel render failed:', e);
+        }
+    }
+
+    if (data.free_readings_remaining !== undefined && data.free_readings_remaining !== null) {
+        const note = document.createElement('div');
+        note.className = "lock-disclaimer";
+        note.style.marginTop = "1rem";
+        note.innerHTML = `<strong>Free readings left:</strong> ${data.free_readings_remaining} of 3.`;
+        basicReadingBody.appendChild(note);
+    }
+
+    if (basicReading) basicReading.classList.remove("hidden");
+
+    if (basicFeedback) {
+        basicFeedback.classList.remove("hidden");
+        basicFeedback.innerHTML = `
+            <div class="panel-card" style="margin-top: 1rem;">
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Was this accurate?</div>
+                <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
+                    <button type="button" class="btn-secondary feedback-btn" data-vote="up">👍 Yes, accurate</button>
+                    <button type="button" class="btn-secondary feedback-btn" data-vote="down">👎 Not accurate</button>
+                </div>
+                <div id="basicFeedbackStatus" class="text-muted" style="text-align:center; margin-top:0.5rem;"></div>
+            </div>
+        `;
+        attachFeedbackListeners(basicFeedback, { birth: payload, time_unknown: timeUnknown, source: "free_reading_instant" });
+    }
+
+    logEvent("free_reading_shown", { has_token: hasToken });
 }
 
 function parseMarkdown(md) {

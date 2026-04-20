@@ -4,19 +4,16 @@ from src.api.v1.schemas import HoraryRequest
 from src.engine.calculator.main import calculate_chart_data, get_local_datetime_now
 from src.engine.horary import build_horary_oracle
 from src.api.v1.utils import result_to_model
-from src.api.v1.middleware.horary_rate_limiter import enforce_horary_rate_limit
 
 router = APIRouter()
 
 @router.post("/horary")
 async def horary_oracle(
     payload: HoraryRequest,
-    request: Request,
-    rate_limit: bool = Depends(enforce_horary_rate_limit)
+    request: Request
 ):
     """
     Casts a Horary chart and provides an 'Oracle' interpretation for a specific question.
-    Rate limited to 5 per IP per month.
     """
     question = (payload.question or "").strip()
     if not question:

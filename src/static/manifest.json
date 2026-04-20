@@ -92,6 +92,18 @@
           "sizes": "96x96"
         }
       ]
+    },
+    {
+      "name": "Ask the Oracle",
+      "short_name": "Horary",
+      "url": "/horary.html",
+      "description": "Ask a specific horary astrology question",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
     }
   ]
 }

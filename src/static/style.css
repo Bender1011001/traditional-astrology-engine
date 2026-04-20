@@ -160,7 +160,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: calc(1rem + env(safe-area-inset-top, 0px)) 2rem 1rem 2rem;
   background: rgba(6, 6, 15, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -214,8 +214,15 @@ a:hover {
 
 @media (max-width: 768px) {
   .site-nav {
-    padding: 0.75rem 1rem;
+    padding: calc(0.75rem + env(safe-area-inset-top, 0px)) 1rem 0.75rem 1rem;
     flex-wrap: wrap;
+  }
+
+  /* Force clear the iOS status bar in PWA mode */
+  @media all and (display-mode: standalone) {
+    .site-nav {
+      padding-top: calc(48px + env(safe-area-inset-top, 0px)) !important;
+    }
   }
 
   .nav-links {
