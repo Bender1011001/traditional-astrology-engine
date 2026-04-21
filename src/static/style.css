@@ -218,13 +218,6 @@ a:hover {
     flex-wrap: wrap;
   }
 
-  /* Force clear the iOS status bar in PWA mode */
-  @media all and (display-mode: standalone) {
-    .site-nav {
-      padding-top: calc(48px + env(safe-area-inset-top, 0px)) !important;
-    }
-  }
-
   .nav-links {
     display: none !important;
     width: 100%;
@@ -243,6 +236,13 @@ a:hover {
 
   .mobile-menu-toggle {
     display: flex !important;
+  }
+}
+
+/* Force clear the iOS status bar in PWA mode */
+@media (max-width: 768px) and (display-mode: standalone) {
+  .site-nav {
+    padding-top: calc(48px + env(safe-area-inset-top, 0px)) !important;
   }
 }
 
