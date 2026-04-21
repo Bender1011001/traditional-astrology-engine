@@ -192,13 +192,15 @@
     <div class="nebula nebula-2"></div>
   </div>
 
-  <!-- Minimal navbar -->
+  <!-- Navbar -->
   <nav class="site-nav" aria-label="Main navigation">
     <a href="/" class="nav-brand">
       <span class="brand-icon">✦</span>
       <span class="brand-text">Traditional Astrology</span>
     </a>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <!-- Mobile: show a tiny CTA right in the bar -->
+    <a href="#get-reading" class="nav-mobile-cta" style="display:none;">Try Free ✦</a>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span class="hamburger-icon"></span>
     </button>
     <div class="nav-links">
@@ -206,22 +208,24 @@
       <a href="/horary.html" class="nav-link">Ask a Question</a>
       <a href="/daily.html" class="nav-link">Daily Planets</a>
       <a href="/case-studies.html" class="nav-link">Case Studies</a>
-      <a href="/#how-it-works" class="nav-link">How It Works</a>
       <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
       <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
+  <!-- Mobile menu backdrop -->
+  <div class="nav-backdrop" id="navBackdrop"></div>
 
   <main>
-    <!-- HERO: The form IS the hero -->
+    <!-- HERO -->
     <section class="hero" id="get-reading">
       <div class="hero-content">
-        <p class="hero-eyebrow">Free · Instant · No Account Required</p>
+        <p class="hero-eyebrow">✦ Free &nbsp;·&nbsp; Instant &nbsp;·&nbsp; No Account Required</p>
         <h1 class="hero-title">Your Birth Chart,<br><em>Properly Calculated.</em></h1>
         <p class="hero-subtitle">
-          Enter your birth details and get your complete natal chart reading in seconds —
-          Sun, Moon, Rising, planetary dignities, and this year's timing forecast.
-          The same methods classical astrologers have used for 2,000 years.
+          Enter your birth details and get a complete natal chart reading in seconds —
+          planetary dignities, timing forecast, and classical interpretation.
+          The same methods used for 2,000 years. Not generic sun-sign horoscopes.
         </p>
       </div>
 
@@ -241,7 +245,7 @@
               </label>
             </div>
             <div class="form-field">
-              <label for="birthCity">City</label>
+              <label for="birthCity">City of Birth</label>
               <input type="text" id="birthCity" name="birthCity" placeholder="e.g. Los Angeles" required autocomplete="address-level2" />
             </div>
             <div class="form-field">
@@ -250,16 +254,39 @@
             </div>
           </div>
           <button type="submit" class="btn-cta" id="submitBtn">
-            <span class="btn-text">✦ Reveal My Chart</span>
+            <span class="btn-text">✦ Reveal My Chart — It's Free</span>
             <span class="btn-loading hidden">Calculating your stars...</span>
           </button>
-          <p class="form-note">Free · No account · No email · Results in seconds</p>
+          <p class="form-note">No account · No email · Results in seconds</p>
 
-          <div class="trust-signals" style="display:flex; justify-content:center; gap:1.5rem; margin-top:1.5rem; font-size:0.8rem; color:rgba(255,255,255,0.6); align-items:center;">
-             <span>🔒 We never sell your data.</span>
-             <span>🪐 Swiss Ephemeris · Whole Sign Houses</span>
+          <div class="trust-bar">
+            <span class="trust-item"><span>🔒</span> We never sell your data</span>
+            <span class="trust-item"><span>🪐</span> Swiss Ephemeris accuracy</span>
+            <span class="trust-item"><span>✓</span> Whole Sign Houses</span>
           </div>
         </form>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF / STAT BAR -->
+    <section style="padding: 0 1.5rem 3.5rem; max-width: 1040px; margin: 0 auto;">
+      <div class="stat-bar">
+        <div class="stat-item">
+          <div class="stat-number">2,000+</div>
+          <div class="stat-label">Years of Technique</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">7</div>
+          <div class="stat-label">Classical Planets</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Deterministic Calculations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">$0</div>
+          <div class="stat-label">To Get Your Chart</div>
+        </div>
       </div>
     </section>
 
@@ -394,53 +421,53 @@
 
     <!-- PRICING -->
     <section class="section section-dark" id="pricing">
-      <h2 class="section-heading">Simple Pricing</h2>
-      <p class="section-sub">No subscriptions. No monthly fees. Pay once, keep forever.</p>
+      <h2 class="section-heading">Simple, One-Time Pricing</h2>
+      <p class="section-sub">No subscriptions. No monthly fees. Pay once, keep your reading forever.</p>
       <div class="pricing-grid">
         <div class="price-card">
-          <div class="price-badge">Free</div>
+          <div class="price-badge">Always Free</div>
           <h3>Chart Preview</h3>
           <div class="price-amount">$0</div>
+          <div class="price-period">No account required</div>
           <ul class="price-features">
-            <li>Planet positions & signs</li>
+            <li>Planet positions &amp; signs</li>
             <li>House placements</li>
             <li>Sect determination</li>
-            <li>Quick overview of your chart</li>
+            <li>Quick dignity overview</li>
           </ul>
-          <a href="#get-reading" class="btn-price">Get Free Preview</a>
-          <p class="price-note">No account needed. Instant.</p>
+          <a href="#get-reading" class="btn-price">Start Free →</a>
+          <p class="price-note">Instant. No email. No credit card.</p>
         </div>
         <div class="price-card price-card-featured">
           <div class="price-badge">Most Popular</div>
           <h3>Full Reading</h3>
           <div class="price-amount">$7</div>
+          <div class="price-period">One-time · No account needed</div>
           <ul class="price-features">
-            <li><strong>Everything in Free, plus:</strong></li>
             <li>Complete natal interpretation</li>
             <li>Essential dignity analysis</li>
-            <li>Timing techniques (profections, firdaria)</li>
-            <li>Lot of Fortune & key lots</li>
+            <li>Annual profections &amp; firdaria</li>
+            <li>Lot of Fortune &amp; key Arabic lots</li>
             <li>Downloadable PDF report</li>
           </ul>
           <a href="#get-reading" class="btn-price btn-price-primary">Get Full Reading — $7</a>
-          <p class="price-note">One-time payment. No account needed.</p>
+          <p class="price-note">Secure payment via Stripe.</p>
         </div>
         <div class="price-card">
           <div class="price-badge">Deep Dive</div>
           <h3>Complete Analysis</h3>
           <div class="price-amount">$29</div>
+          <div class="price-period">One-time · No account needed</div>
           <ul class="price-features">
-            <li><strong>Everything in Full, plus:</strong></li>
-            <li>20+ page in-depth analysis</li>
-            <li>Primary directions & decennials</li>
+            <li>20+ page in-depth report</li>
+            <li>Primary directions &amp; decennials</li>
             <li>Zodiacal releasing</li>
             <li>Medical correspondences</li>
-            <li>Remediation & charity protocols</li>
             <li>Fixed star analysis</li>
-            <li>10-year forecast</li>
+            <li>10-year timing forecast</li>
           </ul>
           <a href="#get-reading" class="btn-price">Get Complete Analysis — $29</a>
-          <p class="price-note">One-time payment. No account needed.</p>
+          <p class="price-note">Secure payment via Stripe.</p>
         </div>
       </div>
     </section>
@@ -652,20 +679,58 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var toggles = document.querySelectorAll('.mobile-menu-toggle');
-      toggles.forEach(function(toggle) {
-        // Only attach if not already attached to prevent duplicates if script runs twice
-        if (toggle.dataset.navAttached) return;
-        toggle.dataset.navAttached = 'true';
+      var toggle   = document.querySelector('.mobile-menu-toggle');
+      var navLinks = document.querySelector('.nav-links');
+      var backdrop = document.getElementById('navBackdrop');
+
+      // Show mobile CTA pill in nav bar below 820px
+      var mobileCta = document.querySelector('.nav-mobile-cta');
+      if (mobileCta) {
+        function syncMobileCta() {
+          mobileCta.style.display = window.innerWidth <= 820 ? 'inline-flex' : 'none';
+        }
+        syncMobileCta();
+        window.addEventListener('resize', syncMobileCta);
+      }
+
+      function openMenu() {
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.classList.add('active');
+        navLinks.classList.add('active');
+        if (backdrop) backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        if (backdrop) backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (toggle) {
         toggle.addEventListener('click', function() {
-          var expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', !expanded);
-          this.classList.toggle('active');
-          var navLinks = this.nextElementSibling;
-          if (navLinks && navLinks.classList.contains('nav-links')) {
-            navLinks.classList.toggle('active');
-          }
+          if (navLinks.classList.contains('active')) closeMenu();
+          else openMenu();
         });
+      }
+
+      // Close on backdrop click
+      if (backdrop) backdrop.addEventListener('click', closeMenu);
+
+      // Close when any nav link is clicked (smooth scroll + close)
+      if (navLinks) {
+        navLinks.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            if (window.innerWidth <= 820) closeMenu();
+          });
+        });
+      }
+
+      // Close on resize to desktop
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 820) closeMenu();
       });
     });
   </script>
