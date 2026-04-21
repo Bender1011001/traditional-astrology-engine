@@ -15,10 +15,10 @@ html {
 :root {
   /* Core backgrounds — rich indigo-black, not flat */
   --bg-deep:    #09090f;
-  --bg-surface: #0f0e1c;
-  --bg-card:    #14122a;
-  --bg-card-hover: #1b1836;
-  --bg-glass:   rgba(255,255,255,0.03);
+  --bg-surface: #131228;
+  --bg-card:    #1a1838;
+  --bg-card-hover: #1f1d42;
+  --bg-glass:   rgba(255,255,255,0.04);
 
   /* Gold — brighter and more accessible than before */
   --gold:         #e8b84b;
@@ -357,9 +357,11 @@ a:hover { color: var(--gold-light); }
   color: var(--gold);
   background: var(--gold-subtle);
   border: 1px solid var(--border-strong);
-  padding: 0.4rem 0.9rem;
+  padding: 0.55rem 1rem;
   border-radius: 8px;
   white-space: nowrap;
+  min-height: 44px;
+  align-items: center;
 }
 
 /* ============================================================
@@ -504,11 +506,13 @@ a:hover { color: var(--gold-light); }
 .time-unknown-label {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.78rem;
+  gap: 0.5rem;
+  font-size: 0.82rem;
   color: var(--text-dim);
   cursor: pointer;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
+  min-height: 44px;
+  padding: 0.25rem 0;
 }
 
 .time-unknown-label input[type="checkbox"] { accent-color: var(--gold); }
@@ -892,16 +896,16 @@ a:hover { color: var(--gold-light); }
 
 .stat-number {
   font-family: var(--font-display);
-  font-size: 1.9rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--gold);
   line-height: 1;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
 .stat-label {
-  font-size: 0.75rem;
-  color: var(--text-dim);
+  font-size: 0.73rem;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -1048,7 +1052,14 @@ a:hover { color: var(--gold-light); }
   border-color: var(--gold);
   box-shadow: var(--shadow-gold);
   position: relative;
-  background: linear-gradient(160deg, rgba(24,22,44,0.95), rgba(18,16,36,0.95));
+  background: linear-gradient(160deg, rgba(30,27,54,0.98), rgba(22,19,44,0.98));
+}
+
+.price-card-featured .price-badge {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #09090f;
+  border-color: transparent;
+  font-weight: 800;
 }
 
 .price-card-featured:hover {

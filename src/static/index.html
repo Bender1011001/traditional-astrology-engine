@@ -220,7 +220,7 @@
     <!-- HERO -->
     <section class="hero" id="get-reading">
       <div class="hero-content">
-        <p class="hero-eyebrow">✦ Free &nbsp;·&nbsp; Instant &nbsp;·&nbsp; No Account Required</p>
+        <p class="hero-eyebrow">✦ Free &nbsp;·&nbsp; No Account</p>
         <h1 class="hero-title">Your Birth Chart,<br><em>Properly Calculated.</em></h1>
         <p class="hero-subtitle">
           Enter your birth details and get a complete natal chart reading in seconds —
@@ -435,7 +435,7 @@
             <li>Sect determination</li>
             <li>Quick dignity overview</li>
           </ul>
-          <a href="#get-reading" class="btn-price">Start Free →</a>
+          <a href="#get-reading" class="btn-price">Get Free Chart →</a>
           <p class="price-note">Instant. No email. No credit card.</p>
         </div>
         <div class="price-card price-card-featured">
@@ -636,9 +636,20 @@
         // Don't show if user dismissed in this session
         if (sessionStorage.getItem('pwa_dismissed')) return;
 
-        // Show the banner
-        banner.style.display = 'block';
-        banner.style.animation = 'slideUp 0.4s ease';
+        // Delay: show only after user scrolls past the form OR after 25s
+        let shown = false;
+        function showBanner() {
+          if (shown) return;
+          shown = true;
+          banner.style.display = 'block';
+          banner.style.animation = 'slideUp 0.4s ease';
+          window.removeEventListener('scroll', onScroll);
+        }
+        function onScroll() {
+          if (window.scrollY > 600) showBanner();
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        setTimeout(showBanner, 25000);
       });
 
       if (installBtn) {
