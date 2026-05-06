@@ -20,8 +20,8 @@
   </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Traditional Birth Chart Calculator — Free Instant Reading ✦</title>
-<meta content="Calculate your traditional birth chart free using pre-1700s classical techniques. Get dignities, sect, profections & timing — real astrology, not AI guesswork." name="description"/>
+<title>Traditional Birth Chart Calculator — Dignities, Sect, Profections & Firdaria</title>
+<meta content="Free traditional birth chart calculator using Swiss Ephemeris. Scores essential dignities, determines sect, calculates your profection year and active firdaria period. Enter birth date, time, and city." name="description"/>
 <meta content="#f6f0e6" name="theme-color"/>
 <link href="https://traditional-astrology.com/traditional-birth-chart-calculator.html" rel="canonical"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -29,36 +29,57 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="style.css?v=mobilenav2" rel="stylesheet"/>
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is a traditional natal chart?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A traditional natal chart (also called a traditional birth chart) is a map of the sky for the exact moment and location of birth. Traditional astrology treats it as a structured record of life circumstances, talents, and challenges using pre-1700s techniques from classical authors like Vettius Valens, Bonatti, and Dorotheus."
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Traditional Birth Chart Calculator",
+        "url": "https://traditional-astrology.com/traditional-birth-chart-calculator.html",
+        "description": "Free traditional birth chart calculator using Swiss Ephemeris. Computes essential dignities, sect, whole sign houses, annual profections, firdaria periods, and the Lot of Fortune.",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need my exact birth time for a traditional birth chart?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The more precise the better. Birth time determines the Ascendant and house positions. An error of 4 minutes can shift the Ascendant degree, and at sign boundaries it may change your rising sign entirely. If you only have an approximate time, use the 'I don't know my birth time' option for a solar chart instead."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the difference between a traditional and modern birth chart?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Modern astrology uses Uranus, Neptune, and Pluto and focuses on psychological interpretation. Traditional astrology uses only the seven classical planets (Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn), emphasizes essential dignity scoring and sect, and focuses on concrete life events using pre-1700s techniques."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does this calculator use whole sign houses?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Whole sign houses are the oldest documented house system in Western astrology, appearing in Hellenistic texts before the medieval systems (Placidus, Regiomontanus). The classical techniques this calculator uses were developed within the whole sign framework — applying them in a different house system creates interpretive inconsistencies."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Lot of Fortune?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Lot of Fortune is a calculated point based on the positions of the Ascendant, Sun, and Moon. In day charts: Ascendant + Moon − Sun. In night charts: Ascendant + Sun − Moon. It marks where material circumstances and physical world events tend to manifest in your life."
+            }
           }
-        },
-        {
-          "@type": "Question",
-          "name": "How does a traditional birth chart differ from a modern chart?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Traditional birth charts use essential dignities, sect (day/night distinction), whole sign houses, and concrete testimony-based judgment. Modern charts tend to focus on psychological interpretation and use outer planets like Uranus, Neptune, and Pluto, which traditional astrology does not emphasize."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What techniques are used in traditional natal chart astrology?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Key techniques include essential dignities (domicile, exaltation, triplicity, term, face), sect analysis, house rulerships, profections, firdaria planetary periods, and the Lot of Fortune. These methods provide structured, repeatable analysis grounded in classical sources."
-          }
-        }
-      ]
-    }
+        ]
+      }
+    ]
+  }
   </script>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://traditional-astrology.com/traditional-birth-chart-calculator.html"/>
@@ -112,78 +133,71 @@
   </nav>
 </div>
 </header>
-<section class="basic-view">
-<div class="basic-card">
-<h2 class="section-title">What Is a Natal Chart?</h2>
-<p class="section-subtitle">A natal chart (also called a birth chart) is a map of the sky for the exact moment
-          and location of birth. Traditional astrology treats it as a structured record of life circumstances, talents,
-          and challenges—not a vague personality test.</p>
-<p>In traditional practice, every planet, sign, and house contributes concrete testimony. The Sun, Moon, and
-          planets describe areas of life and the quality of events, while the Ascendant anchors the chart as the
-          native’s life path. This makes natal chart astrology a foundational technique for anyone seeking a serious
-          traditional reading.</p>
+<section class=”basic-view”>
+<div class=”basic-card”>
+<h2 class=”section-title”>What This Calculator Actually Computes</h2>
+<p class=”section-subtitle”>Most birth chart calculators online give you a list of planet positions and stop there. This one goes further.</p>
+<p>Enter your birth date, time, and city. The calculator resolves your coordinates from a geocoding database, converts to Julian Day, then runs the Swiss Ephemeris — the same precision library used by professional astrology software — to place all seven classical planets plus the Ascendant and Midheaven. From there it scores essential dignities, determines sect, calculates the five Hermetic Lots, identifies the Almuten Figuris, runs your current annual profection, and locates your active firdaria period.</p>
+<p>The output is structured as a traditional reading, not just a table of data. Each placement comes with a dignity score and an interpretation drawn from classical sources.</p>
 </div>
 </section>
-<section class="basic-view">
-<div class="basic-card">
-<h2 class="section-title">Historical Roots</h2>
-<p class="section-subtitle">Birth chart interpretation emerges in the Hellenistic era and continues through the
-          Arabic and Renaissance schools.</p>
-<p>Classical authors such as Dorotheus, Valens, and Ptolemy established a method that balances astronomy with
-          clear rules of judgment. Medieval and Renaissance astrologers like Bonatti and Lilly refined these rules into
-          practical systems that are still used today. This lineage is why traditional natal charts emphasize
-          verifiable techniques like dignities, sect, and house rulerships.</p>
+<section class=”basic-view”>
+<div class=”basic-card”>
+<h2 class=”section-title”>Essential Dignities — The Part Most Apps Skip</h2>
+<p class=”section-subtitle”>A planet’s sign placement determines its strength. This is not optional — it changes everything.</p>
+<p>Traditional astrology uses five levels of essential dignity. A planet in its <strong>domicile</strong> (home sign) operates at full strength. In <strong>exaltation</strong>, it works with extra force but sometimes in a lopsided way — exalted planets can be overconfident. <strong>Triplicity</strong>, <strong>term</strong>, and <strong>face</strong> are weaker dignities that still add some support.</p>
+<p>The flip side: <strong>detriment</strong> and <strong>fall</strong> are the opposite of domicile and exaltation. A planet in detriment is like a guest in an enemy’s house. It can still function, but not easily. Mars in Libra, Venus in Aries, Saturn in Cancer — these are debilitated placements that most modern chart tools mention as curiosities. Traditional astrology treats them as load-bearing facts.</p>
+<p>The calculator scores each planet on a numerical scale and flags which planets are working well and which are struggling. That score directly shapes the reading.</p>
 </div>
 </section>
-<section class="basic-view">
-<div class="basic-card">
-<h2 class="section-title">How Traditional Natal Charts Work</h2>
-<p class="section-subtitle">A traditional astrologer reads the chart in layers, starting with structure and
-          moving toward synthesis.</p>
-<ul class="grid-container">
-<li><strong>Angles and houses:</strong> The Ascendant, Midheaven, and twelve houses show where life topics
-            unfold—identity, resources, relationships, career, and legacy.</li>
-<li><strong>Planets and dignities:</strong> Each planet operates with more or less strength depending on its
-            sign, triplicity, term, and face. This is called essential dignity.</li>
-<li><strong>Sect and condition:</strong> Day and night charts determine which planets are in sect and therefore
-            more constructive.</li>
-<li><strong>Testimony and synthesis:</strong> The astrologer weighs multiple testimonies to reach a coherent
-            judgment rather than relying on a single placement.</li>
+<section class=”basic-view”>
+<div class=”basic-card”>
+<h2 class=”section-title”>Day Chart vs. Night Chart — Why It Matters</h2>
+<p class=”section-subtitle”>Whether you were born while the Sun was above or below the horizon changes which planets are your allies.</p>
+<p>This is the doctrine of sect, and it’s one of the first things a traditional astrologer checks. In a day chart — Sun above the horizon — the Sun, Jupiter, and Saturn are the “sect mates” that tend to work constructively. In a night chart, the Moon, Venus, and Mars form the in-sect group.</p>
+<p>The practical effect: Mars is significantly more manageable in a night chart than a day chart. A day-chart Mars tends toward rashness and conflict. A night-chart Mars can still be difficult, but it has more self-control. Jupiter and Saturn flip in the opposite direction — Jupiter is more helpful in day charts, Saturn in night charts.</p>
+<p>Most apps don’t show you this. Ours identifies your sect, marks which planets are in and out of sect, and factors it into every dignity score.</p>
+</div>
+</section>
+<section class=”basic-view”>
+<div class=”basic-card”>
+<h2 class=”section-title”>Whole Sign Houses — Why We Use Them</h2>
+<p class=”section-subtitle”>The house system question is genuinely contentious. Here’s our position and why.</p>
+<p>Whole sign houses assign one entire zodiac sign to each house, starting with the rising sign as the first house. If your Ascendant is at 14° Scorpio, all of Scorpio is your first house, all of Sagittarius is your second, and so on. The degree of the Ascendant still matters — it remains the most sensitive point in the chart — but house boundaries fall at 0° of each sign.</p>
+<p>The competing systems — Placidus, Regiomontanus, Porphyry — all divide houses based on time arcs or space divisions. They produce “intercepted” signs and wildly unequal house sizes at high latitudes. Someone born near the Arctic Circle in Placidus can have houses that span 90° of the zodiac next to houses that span 10°.</p>
+<p>Whole sign houses are the oldest documented system in Western astrology, appearing in Hellenistic texts before any of the medieval systems existed. They’re also the simplest. We use them by default because the source texts we interpret are written around them — it would be incoherent to use Hellenistic techniques in a Placidus framework.</p>
+<p>That said, the Ascendant and Midheaven remain the two most important points in the chart regardless of house system. We include both.</p>
+</div>
+</section>
+<section class=”basic-view”>
+<div class=”basic-card”>
+<h2 class=”section-title”>Your Profection Year — What’s Active Right Now</h2>
+<p class=”section-subtitle”>Annual profections are one of the most practical timing tools in traditional astrology.</p>
+<p>Each year of life corresponds to a different house, cycling through all twelve. Age 0 = first house. Age 1 = second house. Age 12 brings you back to the first. Age 25 = second house again. The house activated in your current profection year becomes the dominant theme — and the planet that rules that sign becomes the “Lord of the Year.”</p>
+<p>If your 10th house (career) is activated and the Lord of the Year is Jupiter in good condition, expect the year to carry professional momentum. If the Lord of the Year is Saturn combust the Sun and in detriment, that same year is likely to feel like grinding through resistance in career matters.</p>
+<p>This technique takes about 30 seconds to apply once you know the chart. The calculator runs it automatically and shows you which house is active, who the Lord of the Year is, and what condition that planet is in.</p>
+</div>
+</section>
+<section class=”basic-view”>
+<div class=”basic-card”>
+<h2 class=”section-title”>Frequently Asked Questions</h2>
+<ul class=”grid-container” style=”list-style:none; padding:0;”>
+<li style=”margin-bottom:1.2rem;”><strong>Do I need my exact birth time?</strong><br>The more precise the better. Birth time determines the Ascendant and house positions. An error of even 4 minutes shifts the Ascendant degree, and at sign boundaries it can change your rising sign entirely. Hospital birth certificates are usually accurate to the minute. If you only have an approximate time, check the “I don’t know my birth time” box — the calculator will produce a solar chart instead.</li>
+<li style=”margin-bottom:1.2rem;”><strong>What’s the difference between traditional and modern astrology?</strong><br>Modern astrology (post-1900) centers on the outer planets — Uranus, Neptune, Pluto — and psychological interpretation. Traditional astrology uses only the seven classical planets visible to the naked eye, emphasizes essential dignity and sect, and focuses on concrete life events rather than personality archetypes. The two traditions ask different questions and use different tools.</li>
+<li style=”margin-bottom:1.2rem;”><strong>Why doesn’t the calculator show Uranus, Neptune, or Pluto?</strong><br>Traditional technique was developed before their discovery and doesn’t have a role for them. Including them in a traditional reading would be anachronistic — like citing Newton in a pre-Newtonian physics text. If you want them, there are plenty of modern chart calculators that include them.</li>
+<li style=”margin-bottom:1.2rem;”><strong>What is the Lot of Fortune?</strong><br>One of five Hermetic Lots, it’s a calculated point (not a planet) that shifts based on whether you have a day or night chart. In day charts: Ascendant + Moon − Sun. In night charts: Ascendant + Sun − Moon. The Lot of Fortune marks where your material circumstances and physical world tend to manifest. It often falls in a surprising house.</li>
 </ul>
-<p>Traditional natal chart reading is careful, methodical, and grounded in repeatable logic. It explains the
-          “why” behind outcomes and provides a map of opportunities and constraints.</p>
 </div>
 </section>
-<section class="basic-view">
-<div class="basic-card">
-<h2 class="section-title">Example Interpretation</h2>
-<p class="section-subtitle">A brief example shows how the method stays practical and tangible.</p>
-<p>Suppose a chart has the ruler of the Ascendant in the tenth house, dignified and supported by Jupiter. A
-          traditional astrologer would judge this as strong evidence for professional authority and public recognition.
-          If the same ruler is weakened by debility or affliction, the forecast shifts toward delays, unstable career
-          outcomes, or reliance on patrons. This approach gives clear expectations rather than vague “you might feel”
-          language.</p>
-</div>
-</section>
-<section class="basic-view">
-<div class="basic-card">
-<h2 class="section-title">Why Natal Charts Matter Today</h2>
-<p class="section-subtitle">Traditional natal chart astrology is useful for life planning, self-knowledge, and
-          choosing the right timing for major decisions.</p>
-<p>Clients often seek a natal chart reading to understand career direction, relational patterns, family
-          dynamics, and long-term life themes. When combined with timing methods like profections and planetary
-          periods, the natal chart becomes a practical decision tool—not just a spiritual mirror.</p>
-<p>If you want a transparent, source-based natal chart reading, our services emphasize traditional techniques
-          that clients can verify and revisit over time.</p>
-</div>
-</section>
-<div class="basic-card related-guides">
-<h2 class="section-title">Related Traditional Guides</h2>
-<ul class="grid-container">
-<li><a class="link-gold" href="planetary-periods.html">Planetary Periods &amp; Time Lords</a> — Learn how life chapters are divided.</li>
-<li><a class="link-gold" href="daily.html">Daily Navigator</a> — See profections, firdaria, and zodiacal releasing applied to your chart for any date.</li>
-<li><a class="link-gold" href="aspects.html">Astrological Aspects Explained</a> — Understanding the geometry of the sky.</li>
-<li><a class="link-gold" href="houses.html">The Twelve Houses</a> — Where life events unfold.</li>
+<div class=”basic-card related-guides”>
+<h2 class=”section-title”>Related Guides</h2>
+<ul class=”grid-container”>
+<li><a class=”link-gold” href=”natal-charts.html”>Traditional Natal Chart Reading</a> — What your chart reveals about life path, career, and relationships.</li>
+<li><a class=”link-gold” href=”annual-profections.html”>Annual Profections Calculator</a> — Find your Lord of the Year for any age.</li>
+<li><a class=”link-gold” href=”planetary-periods.html”>Planetary Periods &amp; Time Lords</a> — How firdaria divides your life into planetary chapters.</li>
+<li><a class=”link-gold” href=”houses.html”>The Twelve Houses Explained</a> — What each house governs and how they interact.</li>
+<li><a class=”link-gold” href=”aspects.html”>Astrological Aspects</a> — The geometry between planets and what it means.</li>
+<li><a class=”link-gold” href=”traditional-vs-modern-astrology.html”>Traditional vs. Modern Astrology</a> — Where the two traditions agree and where they diverge.</li>
 </ul>
 </div>
 <footer class="site-footer">
