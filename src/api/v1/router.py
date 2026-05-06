@@ -29,3 +29,12 @@ api_router.include_router(daily.router, prefix="/charts", tags=["daily-navigator
 
 from src.api.v1.endpoints import horary
 api_router.include_router(horary.router, tags=["horary"])
+
+from src.api.v1.endpoints import electional
+api_router.include_router(electional.router, prefix="/electional", tags=["electional"])
+
+from src.api.v1.endpoints import medical
+api_router.include_router(medical.router, prefix="/medical", tags=["medical"])
+
+from src.api.v1.endpoints import content
+api_router.include_router(content.router, prefix="/content", tags=["content"])

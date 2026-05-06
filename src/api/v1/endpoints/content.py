@@ -38,7 +38,7 @@ async def email_pdf_report(
         # Immediate cleanup of generator buffer
         generator.buffer.close()
         
-        subject = "Your Traditional Astrology Reading"
+        subject = "Your Astrology Reading — Traditional Astrology"
         attachment_bytes = pdf_bytes
         attachment_name = "calibration_audit.pdf" if tier == "CALIBRATION" else "native_audit.pdf"
         
@@ -68,9 +68,9 @@ async def email_pdf_report(
                 readme = (
                     "Traditional Astrology: DIGITAL READING PACKET\n"
                     "====================================\n\n"
-                    "This packet contains your Human Readable Report (PDF) and Machine Readable Source Code (JSON).\n"
-                    "LICENSED USE: You may upload the JSON file to personal AI agents (ChatGPT, Claude) to query your chart data.\n"
-                    "The JSON includes sect status, planetary dignities, and holistic synchronization data."
+                    "This packet contains your reading report (PDF) and machine-readable chart data (JSON).\n"
+                    "You may upload the JSON file to AI assistants (ChatGPT, Claude) to query your chart data.\n"
+                    "The JSON includes sect status, planetary dignities, and detailed delineation data."
                 )
                 zf.writestr("README.txt", readme)
             
@@ -86,20 +86,11 @@ async def email_pdf_report(
         
         html_content = f"""
         <html>
-        <body style="font-family: 'Courier New', monospace; color: #333;">
-            <h2 style="color: #c07a2b;">Your Codex Audit is Attached.</h2>
-            <p>Greetings,</p>
-            <p>Attached is your secure {'PDF' if tier == 'CALIBRATION' else 'Reading Packet'} for your recent astrological calculation.</p>
-            <p><b>Configuration:</b><br>
-               Tier: {tier}<br>
-               House System: Placidus<br>
-               Zodiac: Tropical<br>
-               Engine: v2.5 (Two-Tier Model)
-            </p>
+        <body style="font-family: system-ui, sans-serif; color: #333;">
+            <h2 style="color: #c07a2b;">Your Reading is Attached</h2>
+            <p>Hi there,</p>
+            <p>Attached is your {'PDF report' if tier == 'CALIBRATION' else 'complete reading packet'} from Traditional Astrology.</p>
             {upgrade_link}
-            <br>
-            <p><i>Veritas Filia Temporis</i><br>
-            (Truth is the Daughter of Time)</p>
             <p>— Traditional Astrology</p>
         </body>
         </html>

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status, Body
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status, Body
 from typing import Dict, Any
 from sqlalchemy.orm import Session
 from src.api.v1.schemas import LoginRequest, RegisterRequest, ForgotPasswordRequest, ResetPasswordRequest
@@ -9,13 +9,28 @@ from src.database.core import get_db
 from src.services.admin_notifier import notify_user_registered
 
 import logging
+import time
+from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
 user_manager = get_user_manager()
 
-@router.post("/register")
+_auth_attempts: dict[str, list[float]] = defaultdict(list)
+_AUTH_WINDOW = 300
+_AUTH_MAX_ATTEMPTS = 10
+
+def _check_auth_rate_limit(request: Request):
+    ip = request.client.host if request.client else "unknown"
+    now = time.time()
+    attempts = _auth_attempts[ip]
+    _auth_attempts[ip] = [t for t in attempts if now - t < _AUTH_WINDOW]
+    if len(_auth_attempts[ip]) >= _AUTH_MAX_ATTEMPTS:
+        raise HTTPException(status_code=429, detail="Too many attempts. Try again later.")
+    _auth_attempts[ip].append(now)
+
+@router.post("/register", dependencies=[Depends(_check_auth_rate_limit)])
 async def register(request: RegisterRequest, background_tasks: BackgroundTasks):
     result = user_manager.create_user(request.email, request.password, request.name, plan_tier=request.plan_tier or "")
     if not result["success"]:
@@ -47,7 +62,7 @@ async def register(request: RegisterRequest, background_tasks: BackgroundTasks):
         "user": user,
     }
 
-@router.post("/login")
+@router.post("/login", dependencies=[Depends(_check_auth_rate_limit)])
 async def login(request: LoginRequest):
     result = user_manager.authenticate(request.email, request.password)
     if not result["success"]:
@@ -114,7 +129,7 @@ async def restore_session(token: str):
 
     return chart_input
 
-@router.post("/forgot-password")
+@router.post("/forgot-password", dependencies=[Depends(_check_auth_rate_limit)])
 async def forgot_password(request: ForgotPasswordRequest):
     from src.engine.email_service import send_email, render_template
     from src.core.config import settings
@@ -139,7 +154,7 @@ async def forgot_password(request: ForgotPasswordRequest):
         
     return {"success": True, "message": "If an account exists with this email, you will receive password reset instructions."}
 
-@router.post("/reset-password")
+@router.post("/reset-password", dependencies=[Depends(_check_auth_rate_limit)])
 async def reset_password(request: ResetPasswordRequest):
     result = user_manager.reset_password_with_token(request.token, request.new_password)
     

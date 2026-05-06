@@ -5,7 +5,7 @@ from typing import Optional
 from fastapi import Header, HTTPException
 from src.core.config import settings
 
-def create_access_token(chart_hash: str, tier: str, expires_days: int = 30, data: dict = None) -> str:
+def create_access_token(chart_hash: str, tier: str, expires_days: int = 7, data: dict = None) -> str:
     payload = {
         'chart_hash': chart_hash,
         'tier': tier,

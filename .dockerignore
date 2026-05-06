@@ -1,0 +1,65 @@
+# Git
+.git
+.gitignore
+
+# IDE / editor
+.vscode/
+.idea/
+.roo/
+.roomodes
+.agent/
+.claude/
+.playwright-mcp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Environment / secrets
+.env
+env.yaml
+
+# Documentation & scratch
+*.md
+docs/
+marketing_assets/
+mkdocs.yml
+
+# Test artifacts
+test_*.txt
+test_*.py
+pytest_*.txt
+pytest.ini
+tests/
+verification_*/
+premium_reports/
+
+# Debug / scratch files
+scratch_*.py
+tmp_*.py
+bump_css.py
+*.log
+*.zip
+*.png
+*.pdf
+
+# Large reference files
+Binder1.txt
+sources_from_binder.txt
+chart_data.json
+natal_output.json
+specific_reading_output.json
+user_reading_output.json
+
+# Misc junk
+*.txt
+!requirements.txt
+scripts/
+mcp_config.json
+astrology.db

@@ -1,27 +1,7 @@
 User-agent: *
 Allow: /
 
-# Block all B2B / auth / tool pages from indexing
 Disallow: /api/
-Disallow: /owner.html
-Disallow: /profile.html
-Disallow: /forgot-password.html
-Disallow: /reset-password.html
-Disallow: /login.html
-Disallow: /register.html
-Disallow: /signup.html
-Disallow: /demo.html
-Disallow: /gig-economy.html
-Disallow: /developer.html
-Disallow: /developers.html
-Disallow: /documentation.html
-Disallow: /api-guide.html
-Disallow: /blog.html
-Disallow: /resources.html
-Disallow: /advanced.html
-Disallow: /preview.html
-Disallow: /success.html
-Disallow: /status.html
-Disallow: /how-we-audit.html
+Disallow: /dashboard.html
 
 Sitemap: https://traditional-astrology.com/sitemap.xml

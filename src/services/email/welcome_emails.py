@@ -1,41 +1,28 @@
-import os
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
+from src.engine.email_service import send_email
 
-def send_b2b_welcome_email(to_email, tier, api_key):
-    """Sends a welcome email to B2B users with their API Key and Quick Start guide."""
+
+def send_b2b_welcome_email(to_email: str, tier: str, api_key: str):
     subject = f"Welcome to Traditional Astrology | {tier.capitalize()} Tier Activated"
-    
+
+    quota = {"practitioner": "100", "studio": "Unlimited"}.get(tier, "N/A")
+
     body = f"""
-    Welcome to the Practice,
-    
-    Your {tier} subscription is now active. You have been granted access to the high-throughput generation engine.
-    
-    YOUR API KEY: {api_key}
-    
-    Quick Start:
-    1. View your dashboard: https://traditional-astrology.com/profile.html
-    2. API Documentation: https://traditional-astrology.com/documentation.html
-    3. Join the Practitioner Community (Discord): [Link TBD]
-    
-    Your tier includes {get_quota(tier)} API calls per day. Usage progress can be tracked in your dashboard.
-    
-    For technical support, simply reply to this email.
-    
-    Traditional Astrology
+    <html><body style="font-family: sans-serif; color: #333;">
+    <h2>Welcome to the Practice</h2>
+    <p>Your <strong>{tier}</strong> subscription is now active.</p>
+
+    <p><strong>Your API Key:</strong><br>
+    <code style="background:#f4f4f4;padding:4px 8px;border-radius:3px;">{api_key}</code></p>
+
+    <p><strong>Quick Start:</strong></p>
+    <ol>
+        <li><a href="https://traditional-astrology.com/dashboard.html">Go to your dashboard</a></li>
+        <li>Your tier includes <strong>{quota}</strong> API calls per day</li>
+        <li>For support, reply to this email</li>
+    </ol>
+
+    <p>— Traditional Astrology</p>
+    </body></html>
     """
-    
-    _send_email(to_email, subject, body)
 
-def get_quota(tier):
-    quotas = {"practitioner": 100, "studio": "Unlimited"}
-    return quotas.get(tier, "N/A")
-
-def _send_email(to_email, subject, body, attachment_path=None):
-    # This is a stub for the actual SMTP logic - User will need to provide creds
-    print(f"DEBUG: Sending email to {to_email}")
-    print(f"Subject: {subject}")
-    # Logic for SMTP would go here
-    pass
+    send_email(to_email=to_email, subject=subject, html_content=body)

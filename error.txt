@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "E:\code.projects\astrology\src\scripts\generate_premium_report.py", line 27, in <module>
-    from src.engine.forensic_engine import Auditor
-  File "E:\code.projects\astrology\src\engine\forensic_engine.py", line 110
-    house_system: str = "W",
-    ^^^^^^^^^^^^^^^^^
-SyntaxError: duplicate argument 'house_system' in function definition

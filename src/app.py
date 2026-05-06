@@ -52,9 +52,9 @@ async def lifespan(app: FastAPI):
     # No specific shutdown logic implemented yet
 
 app = FastAPI(
-    title="Traditional Astrology Engine",
-    description="A high-precision engine for pre-1700s Traditional Astrology.",
-    version="2.0.0",
+    title="Traditional Astrology",
+    description="Professional astrology reading engine — natal charts, PDF reports, and batch tools for practitioners.",
+    version="2.1.0",
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan
@@ -175,11 +175,10 @@ app.add_middleware(CSRFProtectionMiddleware)
 
 # CORS Configuration
 _default_origins = [
-    settings.SITE_BASE_URL, 
-    "http://localhost:8000", 
+    settings.SITE_BASE_URL,
+    "http://localhost:8000",
     "http://127.0.0.1:8000",
     "http://localhost:3000",
-    "null" # For file:// origins
 ]
 _env_origins = settings.CORS_ORIGINS.split(',') if settings.CORS_ORIGINS else []
 _cors_origins = list(set(_default_origins + [o.strip() for o in _env_origins if o.strip()]))

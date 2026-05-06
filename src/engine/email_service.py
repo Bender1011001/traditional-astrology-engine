@@ -17,7 +17,7 @@ def _send_email_blocking(to_email: str, subject: str, html_content: str, attachm
                 <a href="https://traditional-astrology.com/privacy.html" style="color: #666;">Privacy Policy</a> | 
                 <a href="https://traditional-astrology.com/terms.html" style="color: #666;">Terms of Service</a>
             </p>
-            <p>To unsubscribe, please rely to this email with "UNSUBSCRIBE".</p>
+            <p>To unsubscribe, reply to this email with "UNSUBSCRIBE".</p>
         </div>
         """
         if "</body>" in html_content:
@@ -27,7 +27,7 @@ def _send_email_blocking(to_email: str, subject: str, html_content: str, attachm
     
     # 2. Try SendGrid
     sendgrid_key = os.getenv("SENDGRID_API_KEY")
-    sender_email = os.getenv("SENDER_EMAIL", "noreply@codexcaelestis.com")
+    sender_email = os.getenv("SENDER_EMAIL", "noreply@traditional-astrology.com")
     
     if sendgrid_key:
         try:

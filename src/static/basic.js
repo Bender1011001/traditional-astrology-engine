@@ -4,13 +4,7 @@ if (!window.CAEL_API_BASE && window.location.hostname !== "localhost" && window.
 }
 
 const API_BASE = window.CAEL_API_BASE || "";
-const IS_GH_PAGES = false;
-const backendNotice = document.getElementById("backendNotice");
-if (backendNotice && IS_GH_PAGES && !API_BASE) {
-    backendNotice.classList.remove("hidden");
-}
-
-const LOG_ENABLED = !IS_GH_PAGES || API_BASE;
+const LOG_ENABLED = true;
 const LOG_SESSION_KEY = "cael_session_id";
 let _sessionEnded = false;
 const _sessionStart = Date.now();
@@ -207,7 +201,7 @@ window.shareReading = async function () {
 
         // 4. Download / Open
         const link = document.createElement('a');
-        link.download = 'my-codex-audit.png';
+        link.download = 'my-natal-chart.png';
         link.href = canvas.toDataURL("image/png");
         link.click();
 

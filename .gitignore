@@ -16,11 +16,14 @@ logs/
 cloudflared.log
 users.json
 users.db
+astrology.db
 *.sqlite
 
-# Local docs scratchpad (do not commit)
-docs/celestial_curia_complete.md
-# Test & Practitioner Outputs
+# IDE / editor
+.vscode/
+.idea/
+
+# Test & practitioner outputs
 alignment_final_verification/
 chart_outputs/
 client_tests/
@@ -30,8 +33,12 @@ test_practitioner_outputs/
 practitioner_outputs/
 test_backups/
 test_cache/
+verification_*/
+premium_reports/
 test_output.txt
 test_results*.txt
+test_failures.txt
+test_report.md
 sovereign_test_output_snippet.json
 god_mode_test_output.json
 reading_output*.json
@@ -45,13 +52,13 @@ reading_result.txt
 debug_*.py
 reproduce_*.py
 test_*.py
-test_credentials.txt
 !tests/
 
 # Local secret dumps (never commit)
 secret_history.txt
+test_credentials.txt
 
-# Large documentation / reference material
+# Large reference material
 Binder1.txt
 binder_chunks/
 binder_toc.txt
@@ -62,7 +69,12 @@ diag_logs/
 diag_logs_v*/
 webapp_logs*.zip
 
-# Various output files
+# Scratch / debug files
+scratch_*.py
+tmp_*.py
+bump_css.py
+
+# Output / artifact files
 report_*.txt
 output_*.txt
 full_forensic_report.txt
@@ -71,6 +83,36 @@ audit_error.txt
 error_log.txt
 login_code.txt
 models_list.txt
+pytest_*.txt
+test_out*.txt
+test_traditional_out.txt
+temp_output.txt
+user_output.txt
+out.txt
+error.txt
+errtest.txt
+exec_summary.txt
+geolat.txt
+gitdiff.txt
+gitdiffapi.txt
+durations.txt
+horary_*.txt
+horary_*.json
+nav_audit.txt
+
+# Large data / output files
+chart_data.json
+natal_output.json
+specific_reading_output.json
+user_reading_output.json
+specific_reading_report.pdf
+user_reading_report.pdf
+
+# Archives
+*.zip
+
+# Screenshots in root
+pt-page.png
 
 # Markdown - ignore all except project docs
 *.md
@@ -83,6 +125,8 @@ models_list.txt
 !src/**/*.md
 !.agent/**/*.md
 
-
 # Cloud Run env vars (contains secrets)
 env.yaml
+
+# MCP config (local only)
+mcp_config.json

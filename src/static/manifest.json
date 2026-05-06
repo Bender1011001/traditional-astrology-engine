@@ -1,7 +1,7 @@
 {
-  "name": "Traditional Astrology — Birth Chart Readings",
-  "short_name": "Astrology",
-  "description": "The most complete traditional birth chart calculator using over 100 classical rules from Valens, Bonatti, and Dorotheus.",
+  "name": "Traditional Astrology — Professional Birth Chart Readings",
+  "short_name": "Traditional Astrology",
+  "description": "Professional astrology reading engine — natal charts, PDF reports, and batch tools for practitioners.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a1a",

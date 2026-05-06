@@ -95,10 +95,10 @@ class FulfillmentService:
             # Determine email template based on tier
             subject = "Your Astrology Report"
             if pdf_tier == "CALIBRATION":
-                subject = "Your Calibration Report (Traditional Astrology)"
+                subject = "Your Calibration Report — Traditional Astrology"
                 template = "order_calibration.html" 
             else:
-                subject = "Your Traditional Astrology Reading"
+                subject = "Your Astrology Reading — Traditional Astrology"
                 template = "order_full.html"
 
             # Construct simple HTML if template doesn't exist yet (Safety first)
@@ -120,7 +120,7 @@ class FulfillmentService:
                 subject=subject,
                 html_content=html_content,
                 attachment_bytes=pdf_bytes,
-                attachment_name=f"Codex_{pdf_tier}_{datetime.now(timezone.utc).strftime('%Y%m%d')}.pdf"
+                attachment_name=f"Reading_{pdf_tier}_{datetime.now(timezone.utc).strftime('%Y%m%d')}.pdf"
             )
             
             if success:
