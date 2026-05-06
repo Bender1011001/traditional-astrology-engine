@@ -17,3 +17,4 @@ psycopg2-binary>=2.9.9,<3.0
 
 pydantic-settings>=2.2.0,<3.0
 cryptography>=42.0.0,<44.0
+redis>=5.0.0,<6.0
