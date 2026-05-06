@@ -4,7 +4,7 @@
  * Flow:
  * 1. User fills birth form → submit
  * 2. Free: Calls /api/v1/premium/guest/request → polls → shows full reading (up to IP limit)
- * 3. After IP limit hit: Shows teaser + paywall ($7 Full Reading / $29 Premium)
+ * 3. After IP limit hit: Shows teaser + paywall ($59 Forensic Nativity Report)
  * 4. Paid: Redirects to Stripe → returns with session_id → calls /generate-paid → polls → shows full reading
  */
 
@@ -519,22 +519,23 @@ function showPaywall() {
         <div style="text-align: center; padding: 2rem 0;">
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">✦</div>
             <h2 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold); margin-bottom: 0.75rem;">
-                You've Used Your Free Readings
+                Unlock Your Forensic Nativity Report
             </h2>
-            <p style="color: var(--text-muted); max-width: 420px; margin: 0 auto 2rem; line-height: 1.75;">
-                You've reached the free reading limit. Unlock your complete natal chart reading
-                with a one-time payment — no account or subscription needed.
+            <p style="color: var(--text-muted); max-width: 460px; margin: 0 auto 1.5rem; line-height: 1.75;">
+                You've used your free chart previews. The full 50+ page Forensic Nativity Report covers your Almuten Figuris, every planet's dignity and condition, all twelve houses, the Lots, fixed stars, your current profection year, and chart-specific remediation.
             </p>
             <div class="unlock-buttons">
-                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn">
-                    ✦ Get Full Reading — $7
+                <button class="btn-cta" onclick="startCheckout('forensic_nativity')" id="checkoutPremiumBtn">
+                    Get Forensic Nativity Report — $59
                 </button>
-                <span class="btn-or">— or —</span>
-                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn">
-                    Get Premium Deep-Dive — $29
-                </button>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+                    One-time payment. Yours forever. No subscription.
+                </p>
                 <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem;">
                     Secure payment via Stripe. No account required.
+                </p>
+                <p style="font-size: 0.85rem; margin-top: 1.25rem;">
+                    <a href="/sample-reading.html" style="color: var(--gold); text-decoration: underline;">See a real sample report →</a>
                 </p>
             </div>
         </div>
@@ -551,7 +552,7 @@ window.startCheckout = async function (tier) {
         return;
     }
 
-    const btn = document.getElementById(tier === "premium_audit" ? "checkoutPremiumBtn" : "checkoutFullBtn");
+    const btn = document.getElementById("checkoutPremiumBtn") || document.getElementById("checkoutFullBtn");
     if (btn) {
         btn.disabled = true;
         btn.textContent = "Redirecting to payment...";
@@ -585,7 +586,7 @@ window.startCheckout = async function (tier) {
     } catch (err) {
         if (btn) {
             btn.disabled = false;
-            btn.textContent = tier === "premium_audit" ? "Get Premium Deep-Dive — $29" : "✦ Get Full Reading — $7";
+            btn.textContent = "Get Forensic Nativity Report — $59";
         }
         alert("Checkout error: " + err.message);
     }

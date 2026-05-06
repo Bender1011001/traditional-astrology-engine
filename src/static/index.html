@@ -81,24 +81,43 @@
       "offers": [
         {
           "@type": "Offer",
-          "name": "Free Birth Chart Preview",
+          "name": "Free Chart Preview",
           "price": "0",
           "priceCurrency": "USD",
-          "description": "Free natal chart overview with planet positions and key dignity assessment."
+          "description": "Free natal chart overview with planet positions, house placements, sect determination, and basic dignity assessment. No account required."
         },
         {
           "@type": "Offer",
-          "name": "Calibration Reading",
-          "price": "7.00",
+          "name": "Forensic Nativity Report",
+          "price": "59.00",
           "priceCurrency": "USD",
-          "description": "Complete natal chart reading with timing techniques, dignities, and personalized insights."
+          "description": "One-time 50+ page traditional astrology PDF report. Includes Almuten Figuris scoring, full dignity audit of all seven planets, all twelve houses, five Arabic Lots, fixed star analysis, humoral correspondences, firdaria periods, and current annual profection."
         },
         {
           "@type": "Offer",
-          "name": "Full Forensic Nativity",
-          "price": "29.00",
+          "name": "Scholar Plan",
+          "price": "14.00",
           "priceCurrency": "USD",
-          "description": "20+ page in-depth analysis using Zodiacal Releasing, Firdaria, Lots, and Primary Directions."
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "14.00",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "description": "Unlimited natal chart readings with full dignity analysis, annual profections, firdaria, PDF export, and saved charts. 7-day free trial."
+        },
+        {
+          "@type": "Offer",
+          "name": "Practitioner Plan",
+          "price": "79.00",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "79.00",
+            "priceCurrency": "USD",
+            "unitCode": "MON"
+          },
+          "description": "Full toolkit for professional astrologers and Etsy sellers — bulk CSV to PDF generation, API access, client labels, unlimited charts, and white-label PDFs."
         }
       ]
     }
@@ -170,7 +189,7 @@
           "name": "Do I need an account?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Enter your birth details, get your reading. If you want the full PDF, you pay once through Stripe — no account, no password, no email required. We don't store your personal data unnecessarily."
+            "text": "For the free chart preview — no account, no email, nothing required. For Scholar and Practitioner plans you create an account so your charts are saved and accessible from any device. Setup takes about 30 seconds."
           }
         }
       ]
@@ -421,55 +440,105 @@
 
     <!-- PRICING -->
     <section class="section section-dark" id="pricing">
-      <h2 class="section-heading">Simple, One-Time Pricing</h2>
-      <p class="section-sub">No subscriptions. No monthly fees. Pay once, keep your reading forever.</p>
+      <h2 class="section-heading">Three Ways In</h2>
+      <p class="section-sub">Free chart, one-time deep-dive report, or unlimited access. Start free — no card required.</p>
+
       <div class="pricing-grid">
+
         <div class="price-card">
           <div class="price-badge">Always Free</div>
           <h3>Chart Preview</h3>
           <div class="price-amount">$0</div>
-          <div class="price-period">No account required</div>
+          <div class="price-period">3 free · No account</div>
           <ul class="price-features">
             <li>Planet positions &amp; signs</li>
-            <li>House placements</li>
+            <li>House placements (whole sign)</li>
             <li>Sect determination</li>
-            <li>Quick dignity overview</li>
+            <li>Basic dignity overview</li>
+            <li>Almuten Figuris identification</li>
           </ul>
           <a href="#get-reading" class="btn-price">Get Free Chart →</a>
-          <p class="price-note">Instant. No email. No credit card.</p>
+          <p class="price-note">Instant. No email. No card.</p>
         </div>
+
         <div class="price-card price-card-featured">
-          <div class="price-badge">Most Popular</div>
-          <h3>Full Reading</h3>
-          <div class="price-amount">$7</div>
-          <div class="price-period">One-time · No account needed</div>
+          <div class="price-badge">Best Value</div>
+          <h3>Forensic Nativity Report</h3>
+          <div class="price-amount">$59</div>
+          <div class="price-period">One-time · 50+ page PDF</div>
           <ul class="price-features">
-            <li>Complete natal interpretation</li>
-            <li>Essential dignity analysis</li>
-            <li>Annual profections &amp; firdaria</li>
-            <li>Lot of Fortune &amp; key Arabic lots</li>
-            <li>Downloadable PDF report</li>
+            <li><strong>Almuten Figuris</strong> &mdash; Master of Nativity scoring</li>
+            <li><strong>All 7 planets</strong> audited individually with dignity, reception, &amp; capacity</li>
+            <li><strong>All 12 houses</strong> with rulers, occupants &amp; judgments</li>
+            <li><strong>5 Arabic Lots</strong> (Fortune, Spirit, Eros, Necessity, Nemesis)</li>
+            <li><strong>Fixed star analysis</strong> (Algol, Regulus, Spica, etc.)</li>
+            <li><strong>Humoral / medical correspondences</strong></li>
+            <li><strong>Firdaria + Annual Profection</strong> timing, current year</li>
+            <li>Specific remediation protocols &amp; days</li>
           </ul>
-          <a href="#get-reading" class="btn-price btn-price-primary">Get Full Reading — $7</a>
-          <p class="price-note">Secure payment via Stripe.</p>
+          <a href="/sample-reading.html" class="btn-price btn-price-primary">See a Real Sample →</a>
+          <p class="price-note">Pay once. Yours forever. Stripe-secured.</p>
         </div>
+
         <div class="price-card">
-          <div class="price-badge">Deep Dive</div>
-          <h3>Complete Analysis</h3>
-          <div class="price-amount">$29</div>
-          <div class="price-period">One-time · No account needed</div>
+          <div class="price-badge">For Practitioners</div>
+          <h3>Scholar &amp; Practitioner</h3>
+          <div class="price-amount">$14<span style="font-size:1rem;font-weight:400">/mo+</span></div>
+          <div class="price-period">For repeat use</div>
           <ul class="price-features">
-            <li>20+ page in-depth report</li>
-            <li>Primary directions &amp; decennials</li>
-            <li>Zodiacal releasing</li>
-            <li>Medical correspondences</li>
-            <li>Fixed star analysis</li>
-            <li>10-year timing forecast</li>
+            <li><strong>Scholar — $14/mo:</strong> unlimited reports, saved charts, PDF export</li>
+            <li><strong>Practitioner — $79/mo:</strong> bulk CSV → ZIP PDF, API access, white-label</li>
+            <li>7-day free trial on both tiers</li>
+            <li>Cancel anytime</li>
           </ul>
-          <a href="#get-reading" class="btn-price">Get Complete Analysis — $29</a>
-          <p class="price-note">Secure payment via Stripe.</p>
+          <a href="/signup.html?plan=scholar" class="btn-price">Start Free Trial →</a>
+          <p class="price-note">For people running multiple charts.</p>
+        </div>
+
+      </div>
+
+      <!-- Premium report value justification -->
+      <div class="premium-justification" style="max-width: 980px; margin: 4rem auto 0; padding: 2rem; background: rgba(20, 20, 40, 0.4); border: 1px solid rgba(201, 168, 76, 0.25); border-radius: 8px;">
+        <h3 style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #c9a84c; margin-bottom: 1.5rem; letter-spacing: 0.02em;">Why $59 for a Natal Chart Report?</h3>
+        <p style="text-align: center; max-width: 720px; margin: 0 auto 1.5rem; color: rgba(255,255,255,0.85); font-size: 1.03rem; line-height: 1.7;">A live consultation with a working traditional astrologer costs $150&ndash;$400. A typical Etsy reading PDF runs $35&ndash;$95 and skips the heavier techniques. This report sits between them: hand-built astrology pipeline, fully calculated, no template substitution.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+          <div>
+            <h4 style="color: #e8b84b; font-size: 0.95rem; margin-bottom: 0.5rem; letter-spacing: 0.05em;">WHAT MOST APPS GIVE YOU</h4>
+            <ul style="font-size: 0.92rem; color: rgba(255,255,255,0.72); line-height: 1.7; padding-left: 1.1rem;">
+              <li>Sun-sign paragraph</li>
+              <li>Generic "Mercury in Virgo means..." text</li>
+              <li>Modern psychological framing</li>
+              <li>No timing techniques</li>
+              <li>10&ndash;15 pages of templated copy</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color: #e8b84b; font-size: 0.95rem; margin-bottom: 0.5rem; letter-spacing: 0.05em;">WHAT YOU GET HERE</h4>
+            <ul style="font-size: 0.92rem; color: rgba(255,255,255,0.85); line-height: 1.7; padding-left: 1.1rem;">
+              <li>Almuten Figuris scoring (skipped by 95% of apps)</li>
+              <li>Mutual reception &amp; mitigation analysis</li>
+              <li>Sect-aware planetary judgments</li>
+              <li>Firdaria + profection for the current year</li>
+              <li>50+ pages of chart-specific reasoning</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color: #e8b84b; font-size: 0.95rem; margin-bottom: 0.5rem; letter-spacing: 0.05em;">HOW IT'S BUILT</h4>
+            <ul style="font-size: 0.92rem; color: rgba(255,255,255,0.85); line-height: 1.7; padding-left: 1.1rem;">
+              <li>Swiss Ephemeris for positions</li>
+              <li>Rule-based dignity engine (Lilly, Bonatti)</li>
+              <li>Hellenistic + medieval doctrine, not modern</li>
+              <li>Every claim traceable to the calculation</li>
+              <li>Same data &rarr; same chart, every time</li>
+            </ul>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="/sample-reading.html" style="display: inline-block; color: #c9a84c; font-weight: 600; font-size: 1rem; text-decoration: underline; margin-right: 1.5rem;">See a real sample report &rarr;</a>
+          <a href="/methodology.html" style="display: inline-block; color: #c9a84c; font-weight: 600; font-size: 1rem; text-decoration: underline;">Read the methodology &rarr;</a>
         </div>
       </div>
+
     </section>
 
     <!-- FAQ -->
@@ -494,11 +563,19 @@
         </details>
         <details class="faq-item">
           <summary>Do I need an account?</summary>
-          <p>No. Enter your birth details, get your reading. If you want the full PDF, you pay once through Stripe — no account, no password, no email required. We don't store your personal data.</p>
+          <p>For the free chart preview — no account, no email, nothing. For Scholar and Practitioner plans you create an account so your charts are saved and accessible from any device. Setup takes about 30 seconds.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I try it before paying?</summary>
+          <p>Yes. The free tier gives you 3 full chart previews with no card required. Scholar and Practitioner both include a 7-day free trial — you won't be charged until the trial ends, and you can cancel any time before that.</p>
+        </details>
+        <details class="faq-item">
+          <summary>I sell astrology readings on Etsy. Which plan is right for me?</summary>
+          <p>Practitioner. It's built specifically for sellers doing readings at volume — upload a CSV of client birth data, get a ZIP of professionally formatted PDFs back. At $79/month, if you're doing 10+ readings a week, it pays for itself in hours saved. <a href="/etsy-astrology-seller.html">See how it works for Etsy sellers →</a></p>
         </details>
         <details class="faq-item">
           <summary>Can I get a refund?</summary>
-          <p>Digital goods are non-refundable, but if your reading has a genuine technical error (wrong calculations, missing data), contact us and we'll make it right.</p>
+          <p>If you're within your 7-day trial period, cancel before it ends and you won't be charged. After billing starts, if your reading has a genuine technical error (wrong calculations, missing data), contact us and we'll make it right.</p>
         </details>
       </div>
     </section>

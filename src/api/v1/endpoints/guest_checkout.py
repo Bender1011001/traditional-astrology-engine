@@ -23,17 +23,18 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-# Tier configuration — simple, no subscriptions
+# Tier configuration — single one-time premium report at $59.
+#
+# Note: legacy tier keys "premium_audit" ($29) and "full_reading" ($7) have been
+# REMOVED. Stripe Price.search by metadata.tier would otherwise match the OLD
+# Stripe prices on those tags and silently bill the wrong amount. The forensic_nativity
+# key is brand-new, so Stripe will auto-create a fresh $59 Price the first time
+# someone checks out (or use STRIPE_PRICE_FORENSIC_NATIVITY env var if set).
 TIERS = {
-    "full_reading": {
-        "price_cents": 700,
-        "product_name": "Full Natal Chart Reading",
-        "description": "Complete natal chart reading with timing, dignities, and personalized insights.",
-    },
-    "premium_audit": {
-        "price_cents": 2900,
-        "product_name": "Premium Forensic Audit",
-        "description": "20+ page deep-dive analysis with advanced timing, remediation, and 10-year forecast.",
+    "forensic_nativity": {
+        "price_cents": 5900,
+        "product_name": "Forensic Nativity Report",
+        "description": "50+ page traditional astrology PDF: Almuten Figuris, all 7 planets audited individually, all 12 houses, 5 Arabic Lots, fixed star analysis, humoral correspondences, firdaria, and current annual profection.",
     },
 }
 

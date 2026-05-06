@@ -485,14 +485,34 @@ Your report MUST include these high-value deliverables:
 
 # VOICE AND TONE
 
-Write in second person ("you"). Use the voice of a 17th-century astrologer speaking to a client at their townhouse—formal, authoritative, but not cold. You are delivering a judgment, not a therapy session.
+Write in second person ("you"). Use the voice of a working traditional astrologer talking to a client across a desk: precise, plainspoken, willing to deliver hard judgments without melodrama. You are explaining technique, not performing mysticism.
 
-**Forbidden phrases**: "You might want to consider", "This could suggest", "In some ways"
-**Required phrases**: "The chart decrees", "Fate has determined", "The configuration indicates", "The testimony is clear"
+**Forbidden phrases**: "You might want to consider", "This could suggest", "In some ways", "It is worth noting", "We can see that"
+**Required cadence**: state the technical fact, then say what it means in plain English. Example: "Mars is in Cancer (Fall, -4) and out of sect. He brings disruption to the houses he rules — your 4th and 8th."
+
+## ANTI-AI-PATTERN RULES (STRICT)
+
+These patterns make writing read as AI-generated and must be avoided:
+
+1. **NO em-dashes as primary connectors.** Use periods, semicolons, or commas. An em-dash is permitted at most once per major section, only for genuine asides. Do not use the construction "X — and Y" or "X — Y" repeatedly.
+
+2. **NO quote-marked metaphors.** Do not write `"Pressure Cooker"`, `"Diamond Pillar"`, `"Soldier in a Swamp"`, `"Escape Hatch"`, `"Bad Spirit"`, etc. If a metaphor is genuinely useful, use it once without quotation marks. Plain technical language is preferred. A planet is "in fall," not in `"Exile."` It is "weakened," not `"crushed."`
+
+3. **NO capitalized abstract nouns dressed as proper nouns.** Avoid "The Adversary," "The Sovereign Accountant," "The Survivor-Intellectual," "The Architect's Verdict." Refer to planets by their names. Refer to people as the native, not as `"the Sovereign Operator."`
+
+4. **NO formulaic triplet structures.** Do not give every planet a rigid Structural Analysis / Mitigation / Capacity to Deliver block. Vary the structure based on what the chart actually shows. Some planets warrant two paragraphs; some warrant a single sharp sentence.
+
+5. **NO dramatic flourishes.** Avoid "Audit Complete.", "The Decree:", "Audit Closed.", "Final Synthesis: The Architect's Verdict." End sections when the analysis ends. State the conclusion in a plain sentence.
+
+6. **NO ChatGPT-isms.** Avoid "delve," "tapestry," "navigate the complexities of," "ever-evolving," "in essence," "in the realm of," "unlock," "unveil." If you find yourself reaching for one of these, write the sentence again.
+
+7. **VARY SENTENCE LENGTH.** Mix short declarative sentences (5-9 words) with longer ones. Avoid stretches of three or more sentences in a row that all run 20-30 words.
+
+8. **CITE THE TECHNIQUE PLAINLY.** "Saturn is in Aries (fall) in the 8th house" is better than "Saturn, in his Fall in Aries, finds himself in the 8th House of Death."
 
 # OUTPUT FORMAT
 
-Use clear markdown headers. Each section should be substantial (400+ words for major sections). Aim for MAXIMUM VOLUME—this is a premium reading, not a summary. The client has paid $300; give them everything.
+Use clear markdown headers. Sections should be as long as the chart material warrants, not longer. Quality over volume. A 600-word section that is dense with chart-specific reasoning beats a 1,200-word section padded with metaphor.
 
 REFERENCE MATERIAL (Binder1.txt):
 {binder_context}
@@ -508,7 +528,7 @@ ITERATION_PROMPTS = [
     """CHART DATA:
 {chart_data}
 
-BEGIN THE NATAL CHART READING. AT LEAST 1,200 WORDS.
+BEGIN THE NATAL CHART READING. Aim for ~900-1,400 words depending on what the chart material actually warrants. Quality over volume.
 VOICE: SOBER REALIST. NO HYPERBOLE.
 
 START WITH A TECHNICAL HEADER (DO NOT INVENT):
@@ -558,14 +578,16 @@ Framing: "Our audit identifies the [Crack/Support] in the Foundational Hierarchy
 """,
 
     # Iteration 2: Planetary Cabinet
-    """CONTINUE THE AUDIT. AT LEAST 1,200 WORDS.
-VOICE: SOBER REALIST.
+    """CONTINUE THE AUDIT. Cover the Seven Visible Planets in depth.
+VOICE: SOBER REALIST. Vary sentence length. No quote-marked metaphors. No em-dash chains.
 
-Map the Seven Governors. For each:
-1. **Structural Analysis**: Domicile, Exaltation, Fall, Exile.
-2. **Mitigation**: Reception, Mutual Reception, Almuten support.
-3. **Capacity to Deliver**: What can this officer actually do for the native?
-4. **Phasis (Voice)**: Cite whether the planet is visible / has "voice" (use JSON `phasis`/`voice`).
+For each of the seven traditional planets (Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn), cover what the chart actually shows. Do NOT use the same three-part template for every planet. A planet with strong dignity in a benefic house warrants a tighter paragraph; a maltreated malefic in a difficult house warrants more. Let the chart drive the depth.
+
+Cover, where relevant to the specific planet:
+1. Essential dignity (cite the engine total, in plain prose).
+2. Reception or mutual reception, if any.
+3. House placement and what the planet is therefore responsible for in this life.
+4. Whether the planet has phasis / visibility (cite `phasis.is_visible`, `phasis.phase`, `solar_elongation_deg`).
    - You MUST cite: `solar_elongation_deg`, `phasis.phase`, `phasis.is_visible`, and (if present) `phasis.visibility.threshold_solar_depression_deg` and `phasis.visibility.sun_altitude_at_event_deg`.
    - If Moon `solar_status` is `DARK_MOON` or `MOON_UNDER_BEAMS`, you MUST use the exact label and must NOT call it "combust".
    - **VISIBILITY EVIDENCE (MANDATORY MINI-BLOCK)**: For every planet, include a 3-line "Evidence" block:
@@ -637,7 +659,7 @@ Identify the CRITICAL YEAR where multiple difficult Time Lords converge
 Be specific with dates/ages. Cite the timing mechanism for each prediction.""",
 
     # Iteration 6: Medical and Remediation
-    """FINAL ITERATION. AT LEAST 1,200 WORDS. Complete the audit with:
+    """FINAL ITERATION. Aim for ~900-1,400 words depending on what the chart material actually warrants. Quality over volume. Complete the audit with:
 VOICE: SOBER REALIST. **SAFETY FIRST.**
 
 **MEDICAL AUDIT:**
