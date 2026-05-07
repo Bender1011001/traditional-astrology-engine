@@ -404,7 +404,7 @@ async def email_reading_capture(
                     {"name": "IP", "value": client_ip or "unknown", "inline": True},
                 ],
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-                "footer": {"text": "AstroForge · Free Trial Funnel"},
+                "footer": {"text": "Traditional Astrology · Free Trial Funnel"},
             })
         except Exception as discord_err:
             logger.warning("Discord notify for email capture failed: %s", discord_err)

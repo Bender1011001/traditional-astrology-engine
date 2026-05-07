@@ -31,83 +31,83 @@
 
 <style>
 .firdar-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.95rem;
+ width: 100%;
+ border-collapse: collapse;
+ margin: 1.5rem 0;
+ font-size: 0.95rem;
 }
 .firdar-table th {
-  background: rgba(201,168,76,0.15);
-  color: var(--gold);
-  font-family: var(--font-display);
-  font-weight: 600;
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-strong);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+ background: rgba(201,168,76,0.15);
+ color: var(--gold);
+ font-family: var(--font-display);
+ font-weight: 600;
+ padding: 0.75rem 1rem;
+ text-align: left;
+ border-bottom: 1px solid var(--border-strong);
+ font-size: 0.85rem;
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
 }
 .firdar-table td {
-  padding: 0.65rem 1rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-muted);
-  vertical-align: middle;
+ padding: 0.65rem 1rem;
+ border-bottom: 1px solid var(--border);
+ color: var(--text-muted);
+ vertical-align: middle;
 }
 .firdar-table tr:last-child td {
-  border-bottom: none;
+ border-bottom: none;
 }
 .firdar-table tr:hover td {
-  background: rgba(212,175,55,0.04);
+ background: rgba(212,175,55,0.04);
 }
 .firdar-planet {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  color: var(--text);
-  font-weight: 600;
+ font-family: var(--font-display);
+ font-size: 1.05rem;
+ color: var(--text);
+ font-weight: 600;
 }
 .firdar-years {
-  color: var(--gold);
-  font-weight: 600;
+ color: var(--gold);
+ font-weight: 600;
 }
 .firdar-node {
-  color: var(--text-dim);
-  font-style: italic;
+ color: var(--text-dim);
+ font-style: italic;
 }
 @media (max-width: 600px) {
-  .firdar-table th, .firdar-table td { padding: 0.55rem 0.6rem; font-size: 0.85rem; }
+ .firdar-table th, .firdar-table td { padding: 0.55rem 0.6rem; font-size: 0.85rem; }
 }
 .sequence-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1.5rem;
+ margin: 1.5rem 0;
 }
 @media (max-width: 680px) {
-  .sequence-grid { grid-template-columns: 1fr; }
+ .sequence-grid { grid-template-columns: 1fr; }
 }
 .sequence-block {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
+ background: rgba(255,255,255,0.03);
+ border: 1px solid var(--border);
+ border-radius: var(--radius-md);
+ padding: 1.25rem;
 }
 .sequence-block h3 {
-  font-family: var(--font-display);
-  color: var(--gold);
-  font-size: 1.1rem;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
+ font-family: var(--font-display);
+ color: var(--gold);
+ font-size: 1.1rem;
+ margin-bottom: 0.75rem;
+ padding-bottom: 0.5rem;
+ border-bottom: 1px solid var(--border);
 }
 .sequence-block ol {
-  margin: 0;
-  padding-left: 1.25rem;
-  color: var(--text-muted);
-  line-height: 1.9;
+ margin: 0;
+ padding-left: 1.25rem;
+ color: var(--text-muted);
+ line-height: 1.9;
 }
 .sequence-block ol li strong {
-  color: var(--text);
+ color: var(--text);
 }
 </style>
 </head>
@@ -115,10 +115,10 @@
 <body style="padding-top: 36px">
 <div id="seoCTABar">
 <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; text-align: center; padding: 0.5rem 1rem; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.85rem; font-weight: 600;">
-    ✦ See your active firdaria period in your natal chart
-    <a href="/#get-reading" style="color: #0a0a1a; text-decoration: underline; margin-left: 0.4rem;">
-        Get your reading →
-    </a>
+ ✦ See your active firdaria period in your natal chart
+ <a href="/#get-reading" style="color: #0a0a1a; text-decoration: underline; margin-left: 0.4rem;">
+ Get your reading →
+ </a>
 </div>
 </div>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -134,24 +134,24 @@
 <div class="ornament"></div>
 <p class="subtitle">The Arabic timing system that divides life into decade-long planetary chapters, each governed by a specific planet determined by your sect.</p>
 <nav class="site-nav" aria-label="Main navigation">
-    <a href="/" class="nav-brand">
-      <span class="brand-icon">✦</span>
-      <span class="brand-text">Traditional Astrology</span>
-    </a>
-    <a href="/#get-reading" class="nav-mobile-cta" style="display:none;">Try Free ✦</a>
-    <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span class="hamburger-icon"></span>
-    </button>
-    <div class="nav-links">
-      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
-      <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
-      <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
-      <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
-    </div>
-  </nav>
+ <a href="/" class="nav-brand">
+ <span class="brand-icon">✦</span>
+ <span class="brand-text">Traditional Astrology</span>
+ </a>
+ <a href="/#get-reading" class="nav-mobile-cta" style="display:none;">Try Free ✦</a>
+ <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+ <span class="hamburger-icon"></span>
+ </button>
+ <div class="nav-links">
+ <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+ <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+ <a href="/horary.html" class="nav-link">Horary Oracle</a>
+ <a href="/daily.html" class="nav-link">Daily Planets</a>
+ <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+ <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+ <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
+ </div>
+ </nav>
 </div>
 </header>
 
@@ -293,7 +293,7 @@
 
 <section class="basic-view"><div class="basic-card" style="text-align:center;">
 <h2 class="section-title">See Your Active Firdaria in the Daily Navigator</h2>
-<p>AstroForge's Daily Navigator shows your active firdaria period — major lord and sub-lord — for any date past, present, or future, alongside your annual profection and current transits. Free with an account.</p>
+<p>Traditional Astrology's Daily Navigator shows your active firdaria period — major lord and sub-lord — for any date past, present, or future, alongside your annual profection and current transits. Free with an account.</p>
 <a href="/daily.html" class="btn-cta" style="display:inline-block;margin-top:1.5rem;padding:0.75rem 2rem;background:linear-gradient(135deg,#c9a84c,#b8922f);color:#0a0a1a;font-weight:700;border-radius:6px;text-decoration:none;">Open Daily Navigator →</a>
 </div></section>
 
@@ -303,15 +303,15 @@
 <li><a class="link-gold" href="planetary-periods.html">Planetary Periods Overview</a> — All classical timing systems compared.</li>
 <li><a class="link-gold" href="planetary-dignities.html">Planetary Dignities</a> — How to read period lords by essential strength.</li>
 <li><a class="link-gold" href="sect-in-astrology.html">Sect in Astrology</a> — The day/night distinction that determines which firdaria sequence applies.</li>
-<li><a class="link-gold" href="zodiacal-releasing.html">Zodiacal Releasing</a> — The Hellenistic timing technique for peak life periods.</li>
+<li><a class="link-gold" href="daily.html">Daily Navigator</a> — See firdaria, profections, and zodiacal releasing applied to your chart for any date.</li>
 <li><a class="link-gold" href="lot-of-fortune.html">Lot of Fortune</a> — Arabic Part used alongside firdaria in traditional timing work.</li>
 </ul></div>
 
 <footer class="site-footer">
 <div class="footer-columns">
-<div class="footer-col"><h3>Product</h3><ul><li><a href="/#get-reading">Get a Reading</a></li><li><a href="techniques.html">Techniques</a></li><li><a href="index.html#pricing">Pricing</a></li></ul></div>
-<div class="footer-col"><h3>Resources</h3><ul><li><a href="faq.html">FAQ</a></li><li><a href="about.html">About</a></li><li><a href="mailto:support@traditional-astrology.com">Support</a></li></ul></div>
-<div class="footer-col"><h3>Legal</h3><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li></ul></div>
+<div class="footer-col"><h3>Product</h3><ul><li><a href="/#get-reading">Get a Reading</a></li><li><a href="/techniques.html">Techniques</a></li><li><a href="/index.html#pricing">Pricing</a></li></ul></div>
+<div class="footer-col"><h3>Resources</h3><ul><li><a href="/faq.html">FAQ</a></li><li><a href="/about.html">About</a></li><li><a href="mailto:support@traditional-astrology.com">Support</a></li></ul></div>
+<div class="footer-col"><h3>Legal</h3><ul><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/terms.html">Terms of Service</a></li></ul></div>
 <div class="footer-col"><h3>Contact</h3><ul><li><a href="mailto:support@traditional-astrology.com">Support</a></li></ul></div>
 </div>
 <div class="footer-bottom">
@@ -347,6 +347,6 @@
 </div></div>
 <script type="module" src="/js/auth.js?v=astro-v5"></script>
 <script>document.addEventListener('DOMContentLoaded',function(){var toggles=document.querySelectorAll('.mobile-menu-toggle');toggles.forEach(function(toggle){if(toggle.dataset.navAttached)return;toggle.dataset.navAttached='true';toggle.addEventListener('click',function(){var expanded=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!expanded);this.classList.toggle('active');var navLinks=this.nextElementSibling;if(navLinks&&navLinks.classList.contains('nav-links')){navLinks.classList.toggle('active');}});});});</script>
-  <script src="/consent.js"></script>
+ <script src="/consent.js"></script>
 </body>
 </html>

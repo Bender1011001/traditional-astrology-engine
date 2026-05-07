@@ -26,7 +26,7 @@ def _send_discord_embed(embed: dict) -> None:
             DISCORD_WEBHOOK_URL,
             data=json.dumps(payload).encode("utf-8"),
             headers={
-                "User-Agent": "AstroForge/1.0",
+                "User-Agent": "TraditionalAstrology/1.0",
                 "Content-Type": "application/json",
             },
             method="POST",
@@ -91,7 +91,7 @@ def notify_chart_created(chart_request_dump: dict, tier: str = "unknown") -> Non
                 {"name": "Zodiac", "value": zodiac.capitalize(), "inline": True},
             ],
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "footer": {"text": "AstroForge Engine"},
+            "footer": {"text": "Traditional Astrology Engine"},
         }
 
         _send_discord_embed(embed)
@@ -118,7 +118,7 @@ def notify_user_registered(email: str, name: str = "", plan_tier: str = "free") 
                 {"name": "Initial Plan", "value": tier_label, "inline": True},
             ],
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "footer": {"text": "AstroForge Engine"},
+            "footer": {"text": "Traditional Astrology Engine"},
         }
 
         _send_discord_embed(embed)

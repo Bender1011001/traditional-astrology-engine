@@ -1,256 +1,314 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Primary page: the main product / traditional birth chart calculator -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
   <url>
     <loc>https://traditional-astrology.com/</loc>
-    <lastmod>2026-03-23</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Legal pages (keep indexed for trust signals) -->
-  <url>
-    <loc>https://traditional-astrology.com/privacy.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/terms.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/refunds.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-
-  <!--
-    SEO content pages — these bring organic traffic
-    for long-tail traditional astrology queries.
-    They link back to the reading form via inline CTA banners.
-  -->
+  <!-- Core product / calculator pages -->
   <url>
     <loc>https://traditional-astrology.com/natal-charts.html</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://traditional-astrology.com/pt/natal-charts.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://traditional-astrology.com/sr/natal-charts.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://traditional-astrology.com/natal-charts.html"/>
   </url>
   <url>
     <loc>https://traditional-astrology.com/free-natal-chart-pdf.html</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://traditional-astrology.com/astrology-reading-for-clients.html</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://traditional-astrology.com/traditional-natal-chart-calculator.html</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/traditional-birth-chart-calculator.html</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/traditional-vs-modern-astrology.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/traditional-astrology-chart-interpretation.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/traditional-astrology-methodology.html</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/sample-reading.html</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://traditional-astrology.com/houses.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/aspects.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/planetary-periods.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/predictive-techniques.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/lot-of-fortune.html</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/almuten-figuris.html</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/hyleg-calculator.html</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/techniques.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/methodology.html</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/about.html</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://traditional-astrology.com/faq.html</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Daily Navigator / Prediction tool -->
-  <url>
     <loc>https://traditional-astrology.com/daily.html</loc>
-    <lastmod>2026-03-23</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Horary Oracle / Question-answering tool -->
   <url>
     <loc>https://traditional-astrology.com/horary.html</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- Case Studies — E-E-A-T authority content -->
-  <url>
-    <loc>https://traditional-astrology.com/case-studies.html</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Annual Profections Calculator — high-intent tool page -->
   <url>
     <loc>https://traditional-astrology.com/annual-profections.html</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/sect-astrology-calculator.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/astrology-reading-for-clients.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Etsy seller / practitioner content -->
   <url>
     <loc>https://traditional-astrology.com/etsy-astrology-seller.html</loc>
-    <lastmod>2026-04-23</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/sell-astrology-readings-etsy.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/astrology-client-birth-data.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/how-to-price-astrology-readings.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/astroforge-vs-astrolabe.html</loc>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Horary educational content -->
+  <!-- Horary content -->
   <url>
     <loc>https://traditional-astrology.com/how-to-ask-horary-question.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/horary-yes-or-no.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/horary-astrology-accuracy.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Classical technique explainers -->
   <url>
-    <loc>https://traditional-astrology.com/sect-in-astrology.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <loc>https://traditional-astrology.com/traditional-vs-modern-astrology.html</loc>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://traditional-astrology.com/sect-astrology-calculator.html</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://traditional-astrology.com/traditional-astrology-chart-interpretation.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/traditional-astrology-methodology.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/sect-in-astrology.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://traditional-astrology.com/planetary-dignities.html</loc>
-    <lastmod>2026-04-24</lastmod>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/bonification-maltreatment-astrology.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/firdaria-astrology.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/houses.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/aspects.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/planetary-periods.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/predictive-techniques.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/lot-of-fortune.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/almuten-figuris.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/hyleg-calculator.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/case-studies.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reference / info pages -->
+  <url>
+    <loc>https://traditional-astrology.com/techniques.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/methodology.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/about.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/faq.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://traditional-astrology.com/blog.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/blog/what-is-a-profection-year.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/blog/annual-profections-by-age.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/blog/horary-astrology-questions.html</loc>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
+  <!-- International alternate pages -->
+  <url>
+    <loc>https://traditional-astrology.com/pt/natal-charts.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://traditional-astrology.com/natal-charts.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://traditional-astrology.com/pt/natal-charts.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://traditional-astrology.com/sr/natal-charts.html"/>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/sr/natal-charts.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://traditional-astrology.com/natal-charts.html"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://traditional-astrology.com/pt/natal-charts.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://traditional-astrology.com/sr/natal-charts.html"/>
+  </url>
+
+  <!-- Legal pages -->
+  <url>
+    <loc>https://traditional-astrology.com/privacy.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/terms.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://traditional-astrology.com/refunds.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
 </urlset>
-
-
