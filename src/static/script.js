@@ -777,7 +777,7 @@ if (exportPdfBtn) {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "astroforge_report.pdf";
+            a.download = "traditional_astrology_report.pdf";
             document.body.appendChild(a);
             a.click();
             a.remove();

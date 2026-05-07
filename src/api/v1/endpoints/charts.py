@@ -430,7 +430,7 @@ async def download_chart_pdf(
 
         # Create filename from chart name or date
         chart_name = chart_meta.get("name", "chart").replace(" ", "_")
-        filename = f"astroforge_{chart_name}.pdf"
+        filename = f"traditional_astrology_{chart_name}.pdf"
 
         return StreamingResponse(
             pdf_buffer,
@@ -505,7 +505,7 @@ async def update_chart_label(
 
 class BulkPdfRequest(BaseModel):
     items: _List[ChartRequest]
-    filename_prefix: str = "astroforge"
+    filename_prefix: str = "traditional_astrology"
 
 
 def _safe_filename(s: str) -> str:

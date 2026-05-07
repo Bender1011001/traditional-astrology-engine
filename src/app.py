@@ -317,6 +317,11 @@ for _page in _LEGACY_REDIRECTS:
 
 
 # Also catch dashboard paths
+@app.get("/astroforge-vs-astrolabe.html", include_in_schema=False)
+async def astroforge_page_redirect():
+    return RedirectResponse(url="/traditional-astrology-vs-astrolabe.html", status_code=301)
+
+
 @app.get("/dashboard", include_in_schema=False)
 async def dashboard_redirect():
     return RedirectResponse(url="/dashboard.html", status_code=301)
