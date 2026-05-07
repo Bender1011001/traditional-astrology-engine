@@ -284,10 +284,8 @@ _LEGACY_REDIRECTS = [
     "api-guide.html",
     # Auth pages
     "login.html",
-    "dashboard.html",
     "register.html",
     "signup.html",
-    "profile.html",
     "forgot-password.html",
     "reset-password.html",
     # Old misc pages
@@ -320,13 +318,13 @@ for _page in _LEGACY_REDIRECTS:
 
 # Also catch dashboard paths
 @app.get("/dashboard", include_in_schema=False)
-async def legacy_dashboard_redirect():
-    return RedirectResponse(url="/", status_code=301)
+async def dashboard_redirect():
+    return RedirectResponse(url="/dashboard.html", status_code=301)
 
 
 @app.get("/dashboard/", include_in_schema=False)
-async def legacy_dashboard_slash_redirect():
-    return RedirectResponse(url="/", status_code=301)
+async def dashboard_slash_redirect():
+    return RedirectResponse(url="/dashboard.html", status_code=301)
 
 
 # --- STATIC FILES ---
