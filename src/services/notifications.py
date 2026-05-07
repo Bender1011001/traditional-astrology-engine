@@ -1,7 +1,9 @@
-import os
 import logging
-from src.engine.email_service import send_email
+import os
+
 from src.core.config import settings
+from src.engine.email_service import send_email
+
 
 class AdminNotificationService:
     """
@@ -32,7 +34,11 @@ class AdminNotificationService:
                 if email and email not in emails:
                     emails.append(email)
 
-        sender = getattr(settings, "SENDER_EMAIL", "").strip() if getattr(settings, "SENDER_EMAIL", None) else ""
+        sender = (
+            getattr(settings, "SENDER_EMAIL", "").strip()
+            if getattr(settings, "SENDER_EMAIL", None)
+            else ""
+        )
         if sender and sender not in emails:
             emails.append(sender)
 
@@ -43,7 +49,9 @@ class AdminNotificationService:
         """Notifies admin when a new account is created."""
         admin_emails = AdminNotificationService._get_admin_emails()
         if not admin_emails:
-            logging.warning("No OWNER_EMAILS configured for account creation notification.")
+            logging.warning(
+                "No OWNER_EMAILS configured for account creation notification."
+            )
             return
 
         subject = f"New Account Created: {user_email}"
@@ -62,7 +70,9 @@ class AdminNotificationService:
             send_email(to_email=admin_email, subject=subject, html_content=html_content)
 
     @staticmethod
-    def notify_purchase_completed(user_email: str, plan_tier: str, amount: float = 0.0, is_recurring: bool = False):
+    def notify_purchase_completed(
+        user_email: str, plan_tier: str, amount: float = 0.0, is_recurring: bool = False
+    ):
         """Notifies admin when a purchase is completed."""
         admin_emails = AdminNotificationService._get_admin_emails()
         if not admin_emails:
@@ -71,7 +81,7 @@ class AdminNotificationService:
 
         purchase_type = "Subscription" if is_recurring else "One-time Purchase"
         subject = f"New {purchase_type}: {plan_tier.upper()} - {user_email}"
-        
+
         html_content = f"""
         <h2>Payment Received</h2>
         <p>A new {purchase_type.lower()} has been completed on <b>{settings.SITE_BASE_URL}</b>.</p>
@@ -94,7 +104,7 @@ class AdminNotificationService:
             return
 
         subject = f"PAYMENT FAILED: {user_email}"
-        
+
         html_content = f"""
         <h2 style="color: red;">Payment Failure Notification</h2>
         <p>A payment attempt failed for user <b>{user_email}</b>.</p>
@@ -109,7 +119,15 @@ class AdminNotificationService:
             send_email(to_email=admin_email, subject=subject, html_content=html_content)
 
     @staticmethod
-    def notify_lead_captured(email: str, segment: str = "", platform: str = "", volume: str = "", pain: str = "", url: str = "", ua: str = ""):
+    def notify_lead_captured(
+        email: str,
+        segment: str = "",
+        platform: str = "",
+        volume: str = "",
+        pain: str = "",
+        url: str = "",
+        ua: str = "",
+    ):
         """
         Notifies admin when a marketing lead is captured.
 

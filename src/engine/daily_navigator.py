@@ -18,23 +18,17 @@ Historical Use Only — not medical, financial, or legal advice.
 
 import logging
 from datetime import datetime
-from typing import Dict, Any, List
+from typing import Any, Dict, List
 
 import swisseph as swe
 
-from .models import Sign, PlanetName, Sect, Chart, Planet
-from .prediction import (
-    calculate_profection_sign,
-    get_lord_of_year,
-    calculate_monthly_profection,
-    calculate_daily_profection,
-    calculate_firdaria,
-    calculate_zr_periods,
-
-)
 from .forensic_forecast import get_profection_timings
 from .lots import calculate_all_lots
-
+from .models import Chart, PlanetName, Sect, Sign
+from .prediction import (calculate_daily_profection, calculate_firdaria,
+                         calculate_monthly_profection,
+                         calculate_profection_sign, calculate_zr_periods,
+                         get_lord_of_year)
 
 logger = logging.getLogger(__name__)
 
@@ -52,32 +46,61 @@ PLANET_DAYS = {
 }
 
 PLANET_CHARITY = {
-    PlanetName.SUN:     {"color": "Gold / Yellow", "gem": "Topaz or Amber", "act": "Donate to children's charities or act with generosity and visibility."},
-    PlanetName.MOON:    {"color": "White / Silver", "gem": "Moonstone or Pearl", "act": "Care for the vulnerable, visit the sick, tend to domestic matters."},
-    PlanetName.MERCURY: {"color": "Mixed / Iridescent", "gem": "Emerald or Agate", "act": "Write letters, study, learn a new skill, perform acts of cleverness."},
-    PlanetName.VENUS:   {"color": "Green / Rose", "gem": "Turquoise or Lapis Lazuli", "act": "Attend to beauty, art, and social harmony. Give to women's shelters."},
-    PlanetName.MARS:    {"color": "Red / Crimson", "gem": "Carnelian or Garnet", "act": "Channel energy into vigorous exertion or physical discipline. Donate to first responders."},
-    PlanetName.JUPITER: {"color": "Royal Blue / Purple", "gem": "Sapphire or Amethyst", "act": "Be generous with wisdom and resources. Sponsor education or religious works."},
-    PlanetName.SATURN:  {"color": "Black / Dark Brown", "gem": "Onyx or Hematite", "act": "Service to the elderly, patience exercises, donate to long-term cause."},
+    PlanetName.SUN: {
+        "color": "Gold / Yellow",
+        "gem": "Topaz or Amber",
+        "act": "Donate to children's charities or act with generosity and visibility.",
+    },
+    PlanetName.MOON: {
+        "color": "White / Silver",
+        "gem": "Moonstone or Pearl",
+        "act": "Care for the vulnerable, visit the sick, tend to domestic matters.",
+    },
+    PlanetName.MERCURY: {
+        "color": "Mixed / Iridescent",
+        "gem": "Emerald or Agate",
+        "act": "Write letters, study, learn a new skill, perform acts of cleverness.",
+    },
+    PlanetName.VENUS: {
+        "color": "Green / Rose",
+        "gem": "Turquoise or Lapis Lazuli",
+        "act": "Attend to beauty, art, and social harmony. Give to women's shelters.",
+    },
+    PlanetName.MARS: {
+        "color": "Red / Crimson",
+        "gem": "Carnelian or Garnet",
+        "act": "Channel energy into vigorous exertion or physical discipline. Donate to first responders.",
+    },
+    PlanetName.JUPITER: {
+        "color": "Royal Blue / Purple",
+        "gem": "Sapphire or Amethyst",
+        "act": "Be generous with wisdom and resources. Sponsor education or religious works.",
+    },
+    PlanetName.SATURN: {
+        "color": "Black / Dark Brown",
+        "gem": "Onyx or Hematite",
+        "act": "Service to the elderly, patience exercises, donate to long-term cause.",
+    },
 }
 
 SIGN_KEYWORDS = {
-    Sign.ARIES:       "initiative, courage, new action",
-    Sign.TAURUS:      "resources, stability, material security",
-    Sign.GEMINI:      "communication, learning, adaptability",
-    Sign.CANCER:      "home, family, emotional security",
-    Sign.LEO:         "authority, creativity, recognition",
-    Sign.VIRGO:       "service, health routines, analysis",
-    Sign.LIBRA:       "partnerships, contracts, balance",
-    Sign.SCORPIO:     "shared resources, investigation, hidden matters",
+    Sign.ARIES: "initiative, courage, new action",
+    Sign.TAURUS: "resources, stability, material security",
+    Sign.GEMINI: "communication, learning, adaptability",
+    Sign.CANCER: "home, family, emotional security",
+    Sign.LEO: "authority, creativity, recognition",
+    Sign.VIRGO: "service, health routines, analysis",
+    Sign.LIBRA: "partnerships, contracts, balance",
+    Sign.SCORPIO: "shared resources, investigation, hidden matters",
     Sign.SAGITTARIUS: "travel, philosophy, legal affairs",
-    Sign.CAPRICORN:   "career, structure, long-term goals",
-    Sign.AQUARIUS:    "community, innovation, alliances",
-    Sign.PISCES:      "solitude, spirituality, surrender",
+    Sign.CAPRICORN: "career, structure, long-term goals",
+    Sign.AQUARIUS: "community, innovation, alliances",
+    Sign.PISCES: "solitude, spirituality, surrender",
 }
 
 
 # ── Core Navigator ────────────────────────────────────────────────────────────
+
 
 class DailyNavigator:
     """Synthesizes all timing layers for a given natal chart and target date."""
@@ -126,7 +149,9 @@ class DailyNavigator:
 
         # Lord of Year natal condition
         natal_loy = next((p for p in chart.planets if p.name == lord_of_year), None)
-        loy_sign_name = natal_loy.sign.value if (natal_loy and natal_loy.sign) else "Unknown"
+        loy_sign_name = (
+            natal_loy.sign.value if (natal_loy and natal_loy.sign) else "Unknown"
+        )
 
         profections_block = {
             "age": age,
@@ -174,7 +199,7 @@ class DailyNavigator:
             res = swe.calc_ut(target_jd, loy_swe_id, swe.FLG_SWIEPH)
             loy_transit_lon = res[0][0]
         loy_transit_sign = list(Sign)[int(loy_transit_lon / 30) % 12]
-        is_epitasis = (daily_sign == loy_transit_sign)
+        is_epitasis = daily_sign == loy_transit_sign
 
         epitasis_block = {
             "active": is_epitasis,
@@ -281,10 +306,10 @@ class DailyNavigator:
 
         # (swe_id, display_name, nature, orb_limit)
         transit_planets = [
-            (swe.VENUS,   "Venus",   "benefic", 2.0),
-            (swe.MARS,    "Mars",    "malefic", 2.0),
+            (swe.VENUS, "Venus", "benefic", 2.0),
+            (swe.MARS, "Mars", "malefic", 2.0),
             (swe.JUPITER, "Jupiter", "benefic", 3.0),
-            (swe.SATURN,  "Saturn",  "malefic", 3.0),
+            (swe.SATURN, "Saturn", "malefic", 3.0),
         ]
         aspects_checked = [
             ("Conjunction", 0),
@@ -300,8 +325,13 @@ class DailyNavigator:
             t_lon = res[0][0]
 
             for natal_p in chart.planets:
-                if natal_p.name in (PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO,
-                                    PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE):
+                if natal_p.name in (
+                    PlanetName.URANUS,
+                    PlanetName.NEPTUNE,
+                    PlanetName.PLUTO,
+                    PlanetName.NORTH_NODE,
+                    PlanetName.SOUTH_NODE,
+                ):
                     continue
 
                 diff = abs(t_lon - natal_p.longitude) % 360
@@ -315,15 +345,17 @@ class DailyNavigator:
                             quality = "supportive" if soft else "mixed"
                         else:
                             quality = "tempering" if soft else "challenging"
-                        hits.append({
-                            "transiting": p_name,
-                            "natal_planet": natal_p.name.value,
-                            "aspect": asp_name,
-                            "orb": round(actual_orb, 2),
-                            "nature": nature,
-                            "quality": quality,
-                            "brief": f"Transiting {p_name} {asp_name.lower()} natal {natal_p.name.value}",
-                        })
+                        hits.append(
+                            {
+                                "transiting": p_name,
+                                "natal_planet": natal_p.name.value,
+                                "aspect": asp_name,
+                                "orb": round(actual_orb, 2),
+                                "nature": nature,
+                                "quality": quality,
+                                "brief": f"Transiting {p_name} {asp_name.lower()} natal {natal_p.name.value}",
+                            }
+                        )
         return hits
 
     @staticmethod
@@ -389,8 +421,14 @@ class DailyNavigator:
         degrees_left = (sign_end_lon - moon_lon) % 360
 
         # Traditional planet positions at this moment
-        trad_planets = [swe.SUN, swe.MERCURY, swe.VENUS, swe.MARS,
-                        swe.JUPITER, swe.SATURN]
+        trad_planets = [
+            swe.SUN,
+            swe.MERCURY,
+            swe.VENUS,
+            swe.MARS,
+            swe.JUPITER,
+            swe.SATURN,
+        ]
         aspect_angles = [0, 60, 90, 120, 180]
         orb_voc = 8.0  # Liberal orb for VoC
 
@@ -433,9 +471,16 @@ class DailyNavigator:
             "void_of_course": is_voc,
             "note": (
                 f"The Moon is in **{moon_sign.value}** ({phase_emoji} {phase_name}). "
-                + ("**Void of Course** — avoid starting new ventures. " if is_voc else "")
-                + ("Waxing (increasing) — favorable for beginnings and growth." if waxing
-                   else "Waning (decreasing) — favorable for endings and release.")
+                + (
+                    "**Void of Course** — avoid starting new ventures. "
+                    if is_voc
+                    else ""
+                )
+                + (
+                    "Waxing (increasing) — favorable for beginnings and growth."
+                    if waxing
+                    else "Waning (decreasing) — favorable for endings and release."
+                )
             ),
         }
 
@@ -456,7 +501,7 @@ class DailyNavigator:
         propitiation_day = PLANET_DAYS.get(primary_lord, "Any day")
 
         # Determine if the current day IS the propitiation day
-        is_propitiation_day = (day_ruler == primary_lord)
+        is_propitiation_day = day_ruler == primary_lord
 
         # Urgency level
         urgency = "low"
@@ -475,18 +520,30 @@ class DailyNavigator:
             destructive_malefic = PlanetName.SATURN
 
         if daily_lord == destructive_malefic:
-            avoid_list.append(f"Avoid rash decisions — the destructive malefic ({destructive_malefic.value}) is today's daily lord.")
-            do_list.append("Exercise caution and patience. Channel energy into disciplined, focused work.")
+            avoid_list.append(
+                f"Avoid rash decisions — the destructive malefic ({destructive_malefic.value}) is today's daily lord."
+            )
+            do_list.append(
+                "Exercise caution and patience. Channel energy into disciplined, focused work."
+            )
         else:
-            do_list.append(f"The daily lord ({daily_lord.value}) favors: {SIGN_KEYWORDS.get(daily_sign, 'general activity')}.")
+            do_list.append(
+                f"The daily lord ({daily_lord.value}) favors: {SIGN_KEYWORDS.get(daily_sign, 'general activity')}."
+            )
 
         if is_epitasis:
-            do_list.append("High-stakes window: events related to this year's theme are amplified today. Act with intention.")
+            do_list.append(
+                "High-stakes window: events related to this year's theme are amplified today. Act with intention."
+            )
 
         # Moon Void of Course warnings
         if moon_voc:
-            avoid_list.append("Moon is Void of Course — avoid starting new ventures, signing contracts, or making major decisions.")
-            do_list.append("Use this VoC period for routine tasks, rest, and reflection rather than new initiatives.")
+            avoid_list.append(
+                "Moon is Void of Course — avoid starting new ventures, signing contracts, or making major decisions."
+            )
+            do_list.append(
+                "Use this VoC period for routine tasks, rest, and reflection rather than new initiatives."
+            )
 
         do_list.append(charity["act"])
 
@@ -498,7 +555,9 @@ class DailyNavigator:
             "gem": charity["gem"],
             "urgency": urgency,
             "do": do_list,
-            "avoid": avoid_list if avoid_list else ["No specific avoidances for today."],
+            "avoid": (
+                avoid_list if avoid_list else ["No specific avoidances for today."]
+            ),
         }
 
     @staticmethod
@@ -533,9 +592,16 @@ class DailyNavigator:
         parts.append(
             f"{moon.get('phase_emoji', '🌙')} The Moon is in **{moon['sign']}** "
             f"({moon['phase']}, {moon['degree']}°). "
-            + ("**Void of Course** — hold off on new initiatives. " if moon.get('void_of_course') else "")
-            + ("Waxing phase favors growth and new beginnings." if moon.get('waxing')
-               else "Waning phase favors completion and release.")
+            + (
+                "**Void of Course** — hold off on new initiatives. "
+                if moon.get("void_of_course")
+                else ""
+            )
+            + (
+                "Waxing phase favors growth and new beginnings."
+                if moon.get("waxing")
+                else "Waning phase favors completion and release."
+            )
         )
 
         if not firdaria.get("error"):
@@ -561,8 +627,6 @@ class DailyNavigator:
                 "Events related to this year's Lord of the Year are at peak intensity."
             )
 
-        parts.append(
-            f"**Recommendation:** {recommendations['do'][0]}"
-        )
+        parts.append(f"**Recommendation:** {recommendations['do'][0]}")
 
         return "\n\n".join(parts)

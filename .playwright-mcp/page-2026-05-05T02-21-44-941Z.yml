@@ -1,0 +1,110 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - text: ✦ Want to discover YOUR chart?
+    - link "Get your full natal chart reading →" [ref=e3] [cursor=pointer]:
+      - /url: /#get-reading
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=e5]:
+    - generic [ref=e7]:
+      - heading "FREQUENTLY ASKED QUESTIONS" [level=1] [ref=e8]
+      - navigation "Main navigation" [ref=e9]:
+        - link "✦ Traditional Astrology" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e11]: ✦
+          - generic [ref=e12]: Traditional Astrology
+        - generic [ref=e13]:
+          - link "Get Your Reading" [ref=e14] [cursor=pointer]:
+            - /url: /#get-reading
+          - link "Horary Oracle" [ref=e15] [cursor=pointer]:
+            - /url: /horary.html
+          - link "Daily Navigator" [ref=e16] [cursor=pointer]:
+            - /url: /daily.html
+          - link "How It Works" [ref=e17] [cursor=pointer]:
+            - /url: /#how-it-works
+    - generic [ref=e20]:
+      - group [ref=e21]:
+        - generic "What makes this traditional rather than modern? +" [ref=e22] [cursor=pointer]
+      - group [ref=e23]:
+        - generic "What if I do not know my birth time? +" [ref=e24] [cursor=pointer]
+      - group [ref=e25]:
+        - generic "Do you offer counseling or spiritual guidance? +" [ref=e26] [cursor=pointer]
+      - group [ref=e27]:
+        - generic "Why is paid access required? +" [ref=e28] [cursor=pointer]
+      - group [ref=e29]:
+        - generic "How quickly will I receive my report? +" [ref=e30] [cursor=pointer]
+      - group [ref=e31]:
+        - generic "Is my data private? +" [ref=e32] [cursor=pointer]
+      - group [ref=e33]:
+        - generic "What is the refund policy? +" [ref=e34] [cursor=pointer]
+      - group [ref=e35]:
+        - generic "What is the Daily Navigator? +" [ref=e36] [cursor=pointer]
+      - group [ref=e37]:
+        - generic "Can I use AstroForge to create natal chart readings for my Etsy clients? +" [ref=e38] [cursor=pointer]
+      - group [ref=e39]:
+        - generic "Does AstroForge generate PDF reports I can send to clients? +" [ref=e40] [cursor=pointer]
+      - group [ref=e41]:
+        - generic "Can I upload a CSV and generate multiple birth chart PDFs at once? +" [ref=e42] [cursor=pointer]
+      - group [ref=e43]:
+        - generic "Is there an API for astrology calculations? +" [ref=e44] [cursor=pointer]
+      - group [ref=e45]:
+        - generic "What is annual profectionsA timing technique that advances the Ascendant one sign per year to identify the 'Time Lord' for that age. and how does it work? +" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]:
+            - text: What is annual
+            - generic [ref=e48]: profectionsA timing technique that advances the Ascendant one sign per year to identify the 'Time Lord' for that age.
+            - text: and how does it work?
+          - text: +
+      - group [ref=e49]:
+        - generic "What is the difference between whole sign houses and Placidus? +" [ref=e50] [cursor=pointer]
+      - group [ref=e51]:
+        - generic "How many readings can I generate per month? +" [ref=e52] [cursor=pointer]
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - heading "Product" [level=3] [ref=e56]
+          - list [ref=e57]:
+            - listitem [ref=e58]:
+              - link "Get a Reading" [ref=e59] [cursor=pointer]:
+                - /url: /#get-reading
+            - listitem [ref=e60]:
+              - link "Techniques" [ref=e61] [cursor=pointer]:
+                - /url: techniques.html
+            - listitem [ref=e62]:
+              - link "Pricing" [ref=e63] [cursor=pointer]:
+                - /url: index.html#pricing
+        - generic [ref=e64]:
+          - heading "Resources" [level=3] [ref=e65]
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - link "FAQ" [ref=e68] [cursor=pointer]:
+                - /url: faq.html
+            - listitem [ref=e69]:
+              - link "Blog" [ref=e70] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e71]:
+              - link "About" [ref=e72] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e73]:
+              - link "Support" [ref=e74] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+        - generic [ref=e75]:
+          - heading "Legal" [level=3] [ref=e76]
+          - list [ref=e77]:
+            - listitem [ref=e78]:
+              - link "Privacy Policy" [ref=e79] [cursor=pointer]:
+                - /url: privacy.html
+            - listitem [ref=e80]:
+              - link "Terms of Service" [ref=e81] [cursor=pointer]:
+                - /url: terms.html
+        - generic [ref=e82]:
+          - heading "Contact" [level=3] [ref=e83]
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - link "Support" [ref=e86] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+            - listitem [ref=e87]:
+              - link "Report a Bug" [ref=e88] [cursor=pointer]:
+                - /url: mailto:bugs@traditional-astrology.com
+      - generic [ref=e89]:
+        - paragraph [ref=e90]: © 2026 Traditional Astrology. All rights reserved.
+        - paragraph [ref=e91]: For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.

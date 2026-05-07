@@ -1,14 +1,18 @@
 """Tests for aspects.py — AspectEngine."""
-from src.engine.aspects import AspectEngine, AspectType, Aspect
+
+from src.engine.aspects import Aspect, AspectEngine, AspectType
 from src.engine.models import Chart, Planet, PlanetName, Sect
 
 
 def _make_chart(planet_positions, asc=0.0, sun_alt=10.0):
-    planets = [Planet(name=n, longitude=lon, speed=spd) for n, lon, spd in planet_positions]
+    planets = [
+        Planet(name=n, longitude=lon, speed=spd) for n, lon, spd in planet_positions
+    ]
     return Chart(sun_altitude=sun_alt, planets=planets, ascendant=asc, mc=270.0)
 
 
 # ─── _calculate_min_distance ────────────────────────────────────────────────
+
 
 def test_min_distance_same():
     assert AspectEngine._calculate_min_distance(100.0, 100.0) == 0.0
@@ -25,6 +29,7 @@ def test_min_distance_wraparound():
 
 # ─── _get_orb_allowance ─────────────────────────────────────────────────────
 
+
 def test_orb_allowance_sun_moon():
     """Sun orb=15, Moon orb=12, average should be 13.5."""
     orb = AspectEngine._get_orb_allowance(PlanetName.SUN, PlanetName.MOON)
@@ -37,6 +42,7 @@ def test_orb_allowance_mercury_venus():
 
 
 # ─── is_applying ─────────────────────────────────────────────────────────────
+
 
 def test_is_applying_true():
     """Faster planet catching up to slower planet."""
@@ -60,75 +66,98 @@ def test_is_applying_separating():
 
 # ─── calculate_aspects ───────────────────────────────────────────────────────
 
+
 def test_calculate_aspects_conjunction():
     """Two planets at the same degree should form a conjunction."""
-    chart = _make_chart([
-        (PlanetName.SUN, 100.0, 1.0),
-        (PlanetName.MOON, 102.0, 13.0),
-        (PlanetName.MERCURY, 250.0, 1.0),
-        (PlanetName.VENUS, 200.0, 1.0),
-        (PlanetName.MARS, 300.0, 0.5),
-        (PlanetName.JUPITER, 50.0, 0.08),
-        (PlanetName.SATURN, 350.0, 0.03),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 100.0, 1.0),
+            (PlanetName.MOON, 102.0, 13.0),
+            (PlanetName.MERCURY, 250.0, 1.0),
+            (PlanetName.VENUS, 200.0, 1.0),
+            (PlanetName.MARS, 300.0, 0.5),
+            (PlanetName.JUPITER, 50.0, 0.08),
+            (PlanetName.SATURN, 350.0, 0.03),
+        ]
+    )
     aspects = AspectEngine.calculate_aspects(chart)
     # Sun at 100 and Moon at 102 are 2° apart — well within conjunction orb
-    conj = [a for a in aspects if a.type == AspectType.CONJUNCTION
-            and {a.planet_a, a.planet_b} == {PlanetName.SUN, PlanetName.MOON}]
+    conj = [
+        a
+        for a in aspects
+        if a.type == AspectType.CONJUNCTION
+        and {a.planet_a, a.planet_b} == {PlanetName.SUN, PlanetName.MOON}
+    ]
     assert len(conj) == 1
     assert conj[0].orb < 3.0
 
 
 def test_calculate_aspects_opposition():
     """Planets 180° apart should form an opposition."""
-    chart = _make_chart([
-        (PlanetName.SUN, 0.0, 1.0),
-        (PlanetName.MOON, 180.0, 13.0),
-        (PlanetName.MERCURY, 250.0, 1.0),
-        (PlanetName.VENUS, 300.0, 1.0),
-        (PlanetName.MARS, 120.0, 0.5),
-        (PlanetName.JUPITER, 90.0, 0.08),
-        (PlanetName.SATURN, 45.0, 0.03),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 0.0, 1.0),
+            (PlanetName.MOON, 180.0, 13.0),
+            (PlanetName.MERCURY, 250.0, 1.0),
+            (PlanetName.VENUS, 300.0, 1.0),
+            (PlanetName.MARS, 120.0, 0.5),
+            (PlanetName.JUPITER, 90.0, 0.08),
+            (PlanetName.SATURN, 45.0, 0.03),
+        ]
+    )
     aspects = AspectEngine.calculate_aspects(chart)
-    opp = [a for a in aspects if a.type == AspectType.OPPOSITION
-           and {a.planet_a, a.planet_b} == {PlanetName.SUN, PlanetName.MOON}]
+    opp = [
+        a
+        for a in aspects
+        if a.type == AspectType.OPPOSITION
+        and {a.planet_a, a.planet_b} == {PlanetName.SUN, PlanetName.MOON}
+    ]
     assert len(opp) == 1
 
 
 def test_calculate_aspects_trine():
     """Planets 120° apart should form a trine."""
-    chart = _make_chart([
-        (PlanetName.SUN, 0.0, 1.0),
-        (PlanetName.MOON, 120.0, 13.0),
-        (PlanetName.MERCURY, 250.0, 1.0),
-        (PlanetName.VENUS, 300.0, 1.0),
-        (PlanetName.MARS, 200.0, 0.5),
-        (PlanetName.JUPITER, 90.0, 0.08),
-        (PlanetName.SATURN, 45.0, 0.03),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 0.0, 1.0),
+            (PlanetName.MOON, 120.0, 13.0),
+            (PlanetName.MERCURY, 250.0, 1.0),
+            (PlanetName.VENUS, 300.0, 1.0),
+            (PlanetName.MARS, 200.0, 0.5),
+            (PlanetName.JUPITER, 90.0, 0.08),
+            (PlanetName.SATURN, 45.0, 0.03),
+        ]
+    )
     aspects = AspectEngine.calculate_aspects(chart)
-    trines = [a for a in aspects if a.type == AspectType.TRINE
-              and {a.planet_a, a.planet_b} == {PlanetName.SUN, PlanetName.MOON}]
+    trines = [
+        a
+        for a in aspects
+        if a.type == AspectType.TRINE
+        and {a.planet_a, a.planet_b} == {PlanetName.SUN, PlanetName.MOON}
+    ]
     assert len(trines) == 1
 
 
 def test_calculate_aspects_nodes_excluded():
     """Nodes should not produce aspects."""
-    chart = _make_chart([
-        (PlanetName.SUN, 100.0, 1.0),
-        (PlanetName.NORTH_NODE, 100.0, 0.0),
-        (PlanetName.SOUTH_NODE, 280.0, 0.0),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 100.0, 1.0),
+            (PlanetName.NORTH_NODE, 100.0, 0.0),
+            (PlanetName.SOUTH_NODE, 280.0, 0.0),
+        ]
+    )
     aspects = AspectEngine.calculate_aspects(chart)
     assert len(aspects) == 0
 
 
 def test_calculate_aspects_returns_list():
-    chart = _make_chart([
-        (PlanetName.SUN, 0.0, 1.0),
-        (PlanetName.MOON, 45.0, 13.0),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 0.0, 1.0),
+            (PlanetName.MOON, 45.0, 13.0),
+        ]
+    )
     aspects = AspectEngine.calculate_aspects(chart)
     assert isinstance(aspects, list)
 
@@ -140,7 +169,7 @@ def test_aspect_dataclass():
         type=AspectType.CONJUNCTION,
         orb=2.5,
         is_applying=True,
-        text="Test"
+        text="Test",
     )
     assert a.planet_a == PlanetName.SUN
     assert a.orb == 2.5
@@ -148,6 +177,7 @@ def test_aspect_dataclass():
 
 
 # ─── _interpret_aspect ───────────────────────────────────────────────────────
+
 
 def test_interpret_malefic_conjunction_day():
     """Mars conjunction in day chart should be destructive."""

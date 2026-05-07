@@ -1,12 +1,16 @@
+
 import pytest
-from httpx import AsyncClient, ASGITransport
-from src.app import app
+from httpx import ASGITransport, AsyncClient
+
 from src.api.v1.auth import create_access_token
-import json
+from src.app import app
+
 
 @pytest.mark.asyncio
 async def test_health_check():
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
         # Root serves static files — may be 200 or 404 in test env
         response = await ac.get("/")
         assert response.status_code in [200, 404, 307]
@@ -15,7 +19,9 @@ async def test_health_check():
 @pytest.mark.asyncio
 async def test_healthz_endpoint():
     """Verify /api/healthz returns structured health info."""
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
         response = await ac.get("/api/healthz")
         assert response.status_code == 200
         data = response.json()
@@ -26,12 +32,27 @@ async def test_healthz_endpoint():
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize("path", ["/login.html", "/dashboard.html"])
+async def test_legacy_auth_pages_redirect_to_chart_funnel(path):
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
+    ) as ac:
+        response = await ac.get(path)
+
+    assert response.status_code == 301
+    assert response.headers["location"] == "/#get-reading"
+
+
+@pytest.mark.asyncio
 async def test_custom_404_page():
     """Verify non-existent paths return custom 404 page."""
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
         response = await ac.get("/this-page-does-not-exist.html")
         assert response.status_code == 404
         assert "Lost Among the Stars" in response.text
+
 
 @pytest.mark.asyncio
 async def test_calculate_endpoint_free():
@@ -43,9 +64,11 @@ async def test_calculate_endpoint_free():
         "state": "ENG",  # Required field
         "lat": 51.5,
         "lon": -0.12,
-        "tz": "Europe/London"
+        "tz": "Europe/London",
     }
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
         # Charts router is mounted at /api/v1/charts, so /calculate lives there.
         response = await ac.post("/api/v1/charts/calculate", json=payload)
         # Valid responses in test env:
@@ -55,17 +78,24 @@ async def test_calculate_endpoint_free():
         #   402 — free reading limit reached
         #   500 — missing runtime keys (OpenRouter, Stripe, etc.)
         assert response.status_code == 200, f"Expected 200, got {response.status_code}"
-        
+
         data = response.json()
         assert "meta" in data
         assert "astronomy" in data
+
+
 @pytest.mark.asyncio
 async def test_auth_validate_session():
     # exchanging session_id (mock) for token
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
-        response = await ac.get("/api/v1/billing/verify-checkout-session", params={"session_id": "mock_id"})
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
+        response = await ac.get(
+            "/api/v1/billing/verify-checkout-session", params={"session_id": "mock_id"}
+        )
         # Should be 400 since mock_id isn't real, but not 405 or 404
-        assert response.status_code == 400 
+        assert response.status_code == 400
+
 
 def test_token_creation():
     token = create_access_token("test_hash", "free", data={"city": "London"})
@@ -83,7 +113,9 @@ async def test_daily_briefing_endpoint():
         "state": "ENG",
         "target_date": "2026-03-23",
     }
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
         response = await ac.post("/api/v1/charts/daily-briefing", json=payload)
         assert response.status_code == 200, f"Expected 200, got {response.status_code}"
 
@@ -110,7 +142,9 @@ async def test_weekly_briefing_endpoint():
         "start_date": "2026-03-23",
         "days": 3,
     }
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True) as ac:
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
         response = await ac.post("/api/v1/charts/weekly-briefing", json=payload)
         assert response.status_code == 200, f"Expected 200, got {response.status_code}"
 

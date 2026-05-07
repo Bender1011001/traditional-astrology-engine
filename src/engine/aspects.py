@@ -1,8 +1,9 @@
-from typing import List, Dict, Optional
 from dataclasses import dataclass
 from enum import Enum
-import math
-from .models import Planet, Chart, PlanetName, Sect
+from typing import List
+
+from .models import Chart, Planet, PlanetName, Sect
+
 
 class AspectType(Enum):
     CONJUNCTION = "Conjunction"
@@ -10,14 +11,17 @@ class AspectType(Enum):
     SQUARE = "Square"
     TRINE = "Trine"
     OPPOSITION = "Opposition"
+
+
 @dataclass
 class Aspect:
     planet_a: PlanetName
     planet_b: PlanetName
     type: AspectType
-    orb: float # The actual difference from the exact aspect
-    is_applying: bool 
+    orb: float  # The actual difference from the exact aspect
+    is_applying: bool
     text: str = ""
+
 
 class AspectEngine:
     # Standard Medieval/Renaissance Orbs (Lilly/Al-Biruni)
@@ -33,8 +37,8 @@ class AspectEngine:
         PlanetName.URANUS: 5.0,
         PlanetName.NEPTUNE: 5.0,
         PlanetName.PLUTO: 5.0,
-        PlanetName.NORTH_NODE: 0.0, # Not usually aspected by bodies in this way
-        PlanetName.SOUTH_NODE: 0.0
+        PlanetName.NORTH_NODE: 0.0,  # Not usually aspected by bodies in this way
+        PlanetName.SOUTH_NODE: 0.0,
     }
 
     ASPECT_ANGLES = {
@@ -42,7 +46,7 @@ class AspectEngine:
         AspectType.SEXTILE: 60,
         AspectType.SQUARE: 90,
         AspectType.TRINE: 120,
-        AspectType.OPPOSITION: 180
+        AspectType.OPPOSITION: 180,
     }
 
     @staticmethod
@@ -66,58 +70,61 @@ class AspectEngine:
         # 1. Current angular distance to the aspect
         # dist_to_aspect = (lon2 - lon1) - target_angle
         # We need the shortest path.
-        
+
         # Relative longitude
         rel_lon = (p2.longitude - p1.longitude) % 360
-        
+
         # Offset by target_angle
         # Example: p2 at 100, p1 at 0. rel_lon=100. target=90 (square).
         # p1 needs to move 10 degrees more to hit 90 (if p2 fixed).
         # Actually, p1 moves 10 deg -> p1=10, p2=100. diff=90.
         # So we check the 'angle of separation' minus the 'target angle'.
-        
+
         # We calculate the distance p1 must travel relative to p2 to reach the exact angle.
         # This is (rel_lon - target_angle) % 360.
-        # But aspect can be from either side? 
+        # But aspect can be from either side?
         # For a 90 deg square, it's exact if rel_lon is 90 or 270.
-        
+
         d1 = (rel_lon - target_angle) % 360
-        d2 = (rel_lon + target_angle) % 360 # Maybe not right for all
+        d2 = (rel_lon + target_angle) % 360  # Maybe not right for all
         # Simplified: Find the distance to the NEAREST exact aspect angle.
-        
+
         dist = (rel_lon - target_angle) % 360
-        if dist > 180: dist -= 360
-        
+        if dist > 180:
+            dist -= 360
+
         # Now we have 'dist' which is the degrees p1 is 'ahead' of the aspect.
         # If dist is -5, p1 is 5 degrees 'behind' the aspect.
         # If relative speed (p1.speed - p2.speed) is positive, p1 is catching up.
         # So if dist < 0 and rel_speed > 0 => Applying.
         # If dist > 0 and rel_speed < 0 => Applying (p1 slowed down or p2 caught up from behind? No).
-        
+
         rel_speed = p1.speed - p2.speed
-        
+
         # If dist > 0, the gap is wider than the target aspect. To apply, the gap must be shrinking.
         # This means p1 must be faster than p2 (p1 catching up to p2), so rel_speed > 0.
-        if dist > 0 and rel_speed > 0: return True
-        
+        if dist > 0 and rel_speed > 0:
+            return True
+
         # If dist < 0, the gap is narrower than the target aspect. To apply, the gap must be widening.
         # This means p2 must be faster than p1 (p2 pulling away from p1), so rel_speed < 0.
-        if dist < 0 and rel_speed < 0: return True
-        
+        if dist < 0 and rel_speed < 0:
+            return True
+
         return False
 
     @staticmethod
     def calculate_aspects(chart: Chart) -> List[Aspect]:
         aspects = []
         planets = [p for p in chart.planets if p.name in AspectEngine.ORBS]
-        
+
         sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
 
         for i in range(len(planets)):
             for j in range(i + 1, len(planets)):
                 p1 = planets[i]
                 p2 = planets[j]
-                
+
                 if "Node" in p1.name.value or "Node" in p2.name.value:
                     continue
 
@@ -134,30 +141,35 @@ class AspectEngine:
                     # Actually for Conjunction(0), Sextile(60/300), Square(90/270), Trine(120/240), Opp(180)
                     for test_angle in [angle, (360 - angle) % 360]:
                         orb_diff = (rel_lon - test_angle) % 360
-                        if orb_diff > 180: orb_diff -= 360
-                        
+                        if orb_diff > 180:
+                            orb_diff -= 360
+
                         if abs(orb_diff) <= allowance:
                             found_type = aspect_type
-                            exact_angle = test_angle # Store the specific angle for applying check
-                            actual_orb = abs(orb_diff)
+                            exact_angle = test_angle  # Store the specific angle for applying check
+                            actual_orb = abs(orb_diff)  # type: ignore
                             break
-                    if found_type: break
-                
+                    if found_type:
+                        break
+
                 if found_type:
                     applying = AspectEngine.is_applying(p1, p2, exact_angle)
-                    
-                    formatted_text = AspectEngine._interpret_aspect(p1, p2, found_type, sect)
-                    
-                    aspects.append(Aspect(
-                        planet_a=p1.name,
-                        planet_b=p2.name,
-                        type=found_type,
-                        orb=actual_orb,
-                        is_applying=applying,
-                        text=formatted_text
-                    ))
-        return aspects
 
+                    formatted_text = AspectEngine._interpret_aspect(
+                        p1, p2, found_type, sect
+                    )
+
+                    aspects.append(
+                        Aspect(
+                            planet_a=p1.name,
+                            planet_b=p2.name,
+                            type=found_type,
+                            orb=actual_orb,
+                            is_applying=applying,
+                            text=formatted_text,
+                        )
+                    )
+        return aspects
 
     @staticmethod
     def _interpret_aspect(p1: Planet, p2: Planet, type: AspectType, sect: Sect) -> str:
@@ -165,39 +177,54 @@ class AspectEngine:
         # Order: Saturn > Jupiter > Mars > Sun > Venus > Mercury > Moon
         # Using a simplified weight system
         weights = {
-            PlanetName.PLUTO: 10, PlanetName.NEPTUNE: 9, PlanetName.URANUS: 8,
-            PlanetName.SATURN: 7, PlanetName.JUPITER: 6, PlanetName.MARS: 5,
-            PlanetName.SUN: 4, PlanetName.VENUS: 3, PlanetName.MERCURY: 2, PlanetName.MOON: 1
+            PlanetName.PLUTO: 10,
+            PlanetName.NEPTUNE: 9,
+            PlanetName.URANUS: 8,
+            PlanetName.SATURN: 7,
+            PlanetName.JUPITER: 6,
+            PlanetName.MARS: 5,
+            PlanetName.SUN: 4,
+            PlanetName.VENUS: 3,
+            PlanetName.MERCURY: 2,
+            PlanetName.MOON: 1,
         }
-        
+
         w1 = weights.get(p1.name, 0)
         w2 = weights.get(p2.name, 0)
-        
+
         agent = p1 if w1 > w2 else p2
         receiver = p2 if w1 > w2 else p1
-        
+
         # Identify Malefic/Benefic Roles based on Sect
         is_agent_malefic = agent.name in [PlanetName.SATURN, PlanetName.MARS]
-        
+
         status = "Neutral"
         if sect == Sect.DAY:
-            if agent.name == PlanetName.SATURN: status = "Constructive" # Disciplinarian
-            elif agent.name == PlanetName.MARS: status = "Destructive" # Incendiary
-            elif agent.name == PlanetName.JUPITER: status = "Benefic"
-            elif agent.name == PlanetName.VENUS: status = "Benefic"
-        else: # Night
-            if agent.name == PlanetName.SATURN: status = "Destructive" # Malicious
-            elif agent.name == PlanetName.MARS: status = "Constructive" # Soldier
-            elif agent.name == PlanetName.JUPITER: status = "Benefic"
-            elif agent.name == PlanetName.VENUS: status = "Benefic"
+            if agent.name == PlanetName.SATURN:
+                status = "Constructive"  # Disciplinarian
+            elif agent.name == PlanetName.MARS:
+                status = "Destructive"  # Incendiary
+            elif agent.name == PlanetName.JUPITER:
+                status = "Benefic"
+            elif agent.name == PlanetName.VENUS:
+                status = "Benefic"
+        else:  # Night
+            if agent.name == PlanetName.SATURN:
+                status = "Destructive"  # Malicious
+            elif agent.name == PlanetName.MARS:
+                status = "Constructive"  # Soldier
+            elif agent.name == PlanetName.JUPITER:
+                status = "Benefic"
+            elif agent.name == PlanetName.VENUS:
+                status = "Benefic"
 
         # Special casing for Moderns (always disruptive/transformative)
         if agent.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
-            status = "Destructive" # Broadly "Hard" energy in traditional framework
+            status = "Destructive"  # Broadly "Hard" energy in traditional framework
 
         # Interpret based on Geometry + Status
         base_desc = ""
-        
+
         if type == AspectType.CONJUNCTION:
             if status == "Destructive":
                 base_desc = f"Afflicted by conjunction with {agent.name.value}. Energy is oppressed or inflamed."
@@ -205,7 +232,7 @@ class AspectEngine:
                 base_desc = f"Strengthened by {agent.name.value}. Structured discipline or drive is added."
             elif status == "Benefic":
                 base_desc = f"Blessed by conjunction with {agent.name.value}. Expansive or harmonious support."
-                
+
         elif type in [AspectType.SQUARE, AspectType.OPPOSITION]:
             if status == "Destructive":
                 base_desc = f"MALIFIC SIEGE: Hard aspect from {agent.name.value} ({status}). Creates destruction, conflict, or failure."

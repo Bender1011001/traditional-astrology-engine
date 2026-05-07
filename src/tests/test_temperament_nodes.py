@@ -1,12 +1,13 @@
 """Tests for temperament.py — TemperamentEngine and nodes.py — Nodal analysis."""
-from src.engine.temperament import TemperamentEngine
-from src.engine.nodes import analyze_nodes, get_shortest_dist, NodalContact
-from src.engine.models import Chart, Planet, PlanetName, Sign
 
+from src.engine.models import Chart, Planet, PlanetName, Sign
+from src.engine.nodes import NodalContact, analyze_nodes, get_shortest_dist
+from src.engine.temperament import TemperamentEngine
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TEMPERAMENT ENGINE
 # ═══════════════════════════════════════════════════════════════════════════════
+
 
 def _make_chart(sun_lon=120.0, moon_lon=100.0, asc=0.0, sun_alt=10.0, nn=80.0):
     planets = [
@@ -18,10 +19,13 @@ def _make_chart(sun_lon=120.0, moon_lon=100.0, asc=0.0, sun_alt=10.0, nn=80.0):
         Planet(name=PlanetName.JUPITER, longitude=90.0, speed=0.08),
         Planet(name=PlanetName.SATURN, longitude=300.0, speed=0.03),
     ]
-    return Chart(sun_altitude=sun_alt, planets=planets, ascendant=asc, mc=270.0, north_node=nn)
+    return Chart(
+        sun_altitude=sun_alt, planets=planets, ascendant=asc, mc=270.0, north_node=nn
+    )
 
 
 # ─── get_element_qualities ───────────────────────────────────────────────────
+
 
 def test_element_qualities_fire():
     qual = TemperamentEngine.get_element_qualities(Sign.ARIES)
@@ -47,6 +51,7 @@ def test_element_qualities_all_signs():
 
 # ─── calculate_temperament ──────────────────────────────────────────────────
 
+
 def test_temperament_returns_expected_keys():
     chart = _make_chart()
     result = TemperamentEngine.calculate_temperament(chart)
@@ -67,8 +72,11 @@ def test_temperament_valid_type():
     chart = _make_chart()
     result = TemperamentEngine.calculate_temperament(chart)
     valid_types = [
-        "Sanguine (Hot/Moist)", "Choleric (Hot/Dry)",
-        "Melancholic (Cold/Dry)", "Phlegmatic (Cold/Moist)", "Balanced"
+        "Sanguine (Hot/Moist)",
+        "Choleric (Hot/Dry)",
+        "Melancholic (Cold/Dry)",
+        "Phlegmatic (Cold/Moist)",
+        "Balanced",
     ]
     assert result["primary_temperament"] in valid_types
 
@@ -90,6 +98,7 @@ def test_temperament_net_balance():
 
 
 # ─── _get_moon_phase_qualities ───────────────────────────────────────────────
+
 
 def test_moon_phase_new():
     name, qual = TemperamentEngine._get_moon_phase_qualities(30.0)
@@ -114,6 +123,7 @@ def test_moon_phase_all_quadrants():
 
 # ─── _get_season_qualities ──────────────────────────────────────────────────
 
+
 def test_season_spring():
     name, qual = TemperamentEngine._get_season_qualities(Sign.TAURUS)
     assert name == "Spring"
@@ -137,6 +147,7 @@ def test_season_all_signs():
 
 # ─── PLANET_NATURES table ───────────────────────────────────────────────────
 
+
 def test_planet_natures_saturn():
     nature = TemperamentEngine.PLANET_NATURES[PlanetName.SATURN]
     assert nature["Cold"] == 1 and nature["Dry"] == 1
@@ -154,6 +165,7 @@ def test_planet_natures_mercury_variable():
 
 # ─── get_shortest_dist ───────────────────────────────────────────────────────
 
+
 def test_shortest_dist_same():
     assert get_shortest_dist(100.0, 100.0) == 0.0
 
@@ -167,6 +179,7 @@ def test_shortest_dist_wraparound():
 
 
 # ─── analyze_nodes ───────────────────────────────────────────────────────────
+
 
 def test_analyze_nodes_head_contact():
     """Planet conjunct North Node should give Anabolism."""

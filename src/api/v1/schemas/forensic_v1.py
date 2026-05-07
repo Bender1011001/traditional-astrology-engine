@@ -1,6 +1,8 @@
-from pydantic import BaseModel, Field
-from typing import Dict, List, Optional, Any
 from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel
+
 
 class ForensicMeta(BaseModel):
     subject_name: str
@@ -9,6 +11,7 @@ class ForensicMeta(BaseModel):
     city: str
     coords: Dict[str, float]
     age: int
+
 
 class ForensicPlanet(BaseModel):
     name: str
@@ -20,6 +23,7 @@ class ForensicPlanet(BaseModel):
     impacts: List[Dict[str, Any]]
     delineation: Optional[str] = None
 
+
 class ForensicAnalysis(BaseModel):
     dignity: Dict[str, Any]
     fate: Dict[str, Any]
@@ -27,10 +31,12 @@ class ForensicAnalysis(BaseModel):
     temperament: Optional[Dict[str, Any]] = None
     aspects: List[Dict[str, Any]]
 
+
 class AstronomyData(BaseModel):
     planets: Dict[str, Any]
     houses: List[float]
     angles: Dict[str, Optional[float]]
+
 
 class TechnicalDataV1(BaseModel):
     meta: ForensicMeta
@@ -38,9 +44,11 @@ class TechnicalDataV1(BaseModel):
     analysis: ForensicAnalysis
     planets_forensic: List[ForensicPlanet]
 
+
 class HumanTranslationV1(BaseModel):
     report_markdown: str
     executive_summary: str
+
 
 class ForensicResponseV1(BaseModel):
     technical_data: TechnicalDataV1

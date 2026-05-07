@@ -1,0 +1,147 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e8]:
+    - link "✦ Traditional Astrology" [ref=e9] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e10]: ✦
+      - generic [ref=e11]: Traditional Astrology
+    - generic [ref=e12]:
+      - link "Get Your Reading" [ref=e13] [cursor=pointer]:
+        - /url: /#get-reading
+      - link "Horary Oracle" [ref=e14] [cursor=pointer]:
+        - /url: /horary.html
+      - link "Daily Navigator" [ref=e15] [cursor=pointer]:
+        - /url: /daily.html
+      - link "How It Works" [ref=e16] [cursor=pointer]:
+        - /url: /#how-it-works
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - paragraph [ref=e20]: Strict Classical Horary Engine · Pre-1700s Rules · Free
+        - heading "The Horary Oracle" [level=1] [ref=e21]
+        - paragraph [ref=e22]: Ask exactly one focused question. The engine will erect a chart for your location at this exact moment, then judge it using mathematical pre-1700s techniques — translation, collection, prohibition, and mutual reception.
+      - generic [ref=e23]:
+        - strong [ref=e24]: One question, one moment.
+        - text: Planets move slowly. Ask the same type of question twice within 30 minutes and the chart won't change — you'll get the same answer. Ask once, ask sincerely, and trust the first result.
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]: Your Question
+            - textbox "Your Question" [ref=e30]:
+              - /placeholder: e.g. Will I get the job? Will the deal close? Should I move to this city?
+          - generic [ref=e31]:
+            - generic [ref=e32]: Your Current City
+            - paragraph [ref=e33]:
+              - text: For mathematical accuracy, the chart must be erected for where you are
+              - emphasis [ref=e34]: right now
+              - text: .
+            - textbox "Your Current City" [ref=e35]:
+              - /placeholder: e.g. London
+          - generic [ref=e36]:
+            - generic [ref=e37]: State / Country
+            - textbox "State / Country" [ref=e38]:
+              - /placeholder: e.g. UK
+        - button "✦ Consult the Oracle" [ref=e39] [cursor=pointer]:
+          - generic [ref=e40]: ✦ Consult the Oracle
+        - paragraph [ref=e41]: 100% Free. No account required.
+        - generic [ref=e42]:
+          - generic [ref=e43]: 📐 Regiomontanus houses
+          - generic [ref=e44]:
+            - text: 🔒 We
+            - strong [ref=e45]: never
+            - text: sell your data
+          - generic [ref=e46]: 📜 Classical Lilly-method rules
+    - generic [ref=e47]:
+      - heading "What Is Horary Astrology?" [level=2] [ref=e48]
+      - paragraph [ref=e49]: The oldest question-answering technique in Western astrology.
+      - generic [ref=e51]:
+        - paragraph [ref=e52]:
+          - text: Horary astrology is a branch of traditional astrology that answers a specific question by erecting a chart for the exact moment the question is sincerely asked. Unlike natal astrology — which maps your entire life from birth — horary focuses on
+          - strong [ref=e53]: one question, one moment, one answer
+          - text: .
+        - paragraph [ref=e54]:
+          - text: The method was perfected by William Lilly in his 1647 masterwork
+          - emphasis [ref=e55]: Christian Astrology
+          - text: ", though its roots trace back to the Arabic astrologers of the 8th–10th centuries (Masha'allah, Sahl ibn Bishr) and ultimately to the Hellenistic tradition. It remains the most empirically testable branch of astrology — you ask, the chart answers, and life confirms or denies."
+    - generic [ref=e56]:
+      - heading "How the Oracle Works" [level=2] [ref=e57]
+      - paragraph [ref=e58]: Three mathematical steps. No guessing.
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e61]: "1"
+          - heading "Erect the Chart" [level=3] [ref=e62]
+          - paragraph [ref=e63]: A Regiomontanus chart is cast for the exact moment you submit your question and your current geographic coordinates. Real ephemeris data — the same Swiss Ephemeris used by professional astrologers.
+        - generic [ref=e64]:
+          - generic [ref=e65]: "2"
+          - heading "Identify Significators" [level=3] [ref=e66]
+          - paragraph [ref=e67]: The Querent (you) is represented by the 1st house ruler. The Quesited (what you're asking about) is assigned to its natural house — 7th for relationships, 10th for career, 2nd for money, and so on. The Moon always co-signifies the Querent.
+        - generic [ref=e68]:
+          - generic [ref=e69]: "3"
+          - heading "Judge Perfection" [level=3] [ref=e70]
+          - paragraph [ref=e71]: "The engine checks whether the significators are applying to aspect, translating light, collecting light, or being prohibited. It scores each condition mathematically and delivers a weighted verdict: Yes, No, or Uncertain."
+    - generic [ref=e72]:
+      - heading "Key Horary Principles" [level=2] [ref=e73]
+      - paragraph [ref=e74]: The classical rules that govern every judgment.
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - heading "✦ Significators" [level=4] [ref=e77]
+          - paragraph [ref=e78]: The Lord of the Ascendant represents you. The Lord of the relevant house represents what you're asking about. Aspects between them — or not — determine the outcome.
+        - generic [ref=e79]:
+          - heading "✦ Perfection" [level=4] [ref=e80]
+          - paragraph [ref=e81]: If the significators are applying to a major aspect (conjunction, sextile, trine, square, opposition), the matter "perfects" — meaning the answer tends toward Yes. No applying aspect means No.
+        - generic [ref=e82]:
+          - heading "✦ Translation of Light" [level=4] [ref=e83]
+          - paragraph [ref=e84]: A faster planet can carry the light from one significator to the other, acting as a go-between or intermediary. This is a classical mechanism for things coming together through a third party.
+        - generic [ref=e85]:
+          - heading "✦ Prohibition" [level=4] [ref=e86]
+          - paragraph [ref=e87]: When a third planet aspects one of the significators before they can perfect, it "prohibits" — blocks — the outcome. Something or someone interferes.
+        - generic [ref=e88]:
+          - heading "✦ Strictures Against Judgment" [level=4] [ref=e89]
+          - paragraph [ref=e90]: Certain chart conditions — early Ascendant, late Ascendant, Saturn in the 7th, void-of-course Moon — indicate the chart may not be fit for judgment. The engine checks and reports these transparently.
+        - generic [ref=e91]:
+          - heading "✦ Regiomontanus Houses" [level=4] [ref=e92]
+          - paragraph [ref=e93]: Classical horary uses Regiomontanus house division, not whole sign. This was the standard for Lilly and the Renaissance horary tradition. House cusps are calculated from real astronomical data.
+    - generic [ref=e94]:
+      - heading "What Can You Ask?" [level=2] [ref=e95]
+      - paragraph [ref=e96]: Horary works best with clear, focused, yes-or-no questions about concrete situations.
+      - generic [ref=e97]:
+        - generic [ref=e98]: "\"Will I get the job I interviewed for?\""
+        - generic [ref=e99]: "\"Should I move to this new city?\""
+        - generic [ref=e100]: "\"Will the business deal close?\""
+        - generic [ref=e101]: "\"Where are my lost keys?\""
+        - generic [ref=e102]: "\"Will I hear back from them?\""
+        - generic [ref=e103]: "\"Is this the right time to invest?\""
+      - link "✦ Ask Your Question Now" [ref=e105] [cursor=pointer]:
+        - /url: "#get-reading"
+    - generic [ref=e106]:
+      - heading "Frequently Asked Questions" [level=2] [ref=e107]
+      - generic [ref=e108]:
+        - group [ref=e109]:
+          - generic "What is horary astrology? +" [ref=e110] [cursor=pointer]
+        - group [ref=e111]:
+          - generic "Do I need my birth time for horary? +" [ref=e112] [cursor=pointer]
+        - group [ref=e113]:
+          - generic "What are strictures against judgment? +" [ref=e114] [cursor=pointer]
+        - group [ref=e115]:
+          - generic "Is this AI-generated? +" [ref=e116] [cursor=pointer]
+        - group [ref=e117]:
+          - generic "What house system does horary use? +" [ref=e118] [cursor=pointer]
+    - generic [ref=e119]:
+      - heading "Ready to Consult the Oracle?" [level=2] [ref=e120]
+      - paragraph [ref=e121]: Ask your question and let the heavens answer. Classical horary — free, transparent, and mathematical.
+      - link "✦ Ask Your Question Now" [ref=e122] [cursor=pointer]:
+        - /url: "#get-reading"
+      - paragraph [ref=e123]: 100% Free. No account or email required.
+    - generic [ref=e125]:
+      - generic [ref=e126]: ✦ Traditional Astrology
+      - generic [ref=e127]:
+        - link "Privacy" [ref=e128] [cursor=pointer]:
+          - /url: privacy.html
+        - link "Terms" [ref=e129] [cursor=pointer]:
+          - /url: terms.html
+        - link "Refunds" [ref=e130] [cursor=pointer]:
+          - /url: refunds.html
+        - link "Support" [ref=e131] [cursor=pointer]:
+          - /url: mailto:support@traditional-astrology.com
+      - paragraph [ref=e132]:
+        - text: © 2026 Traditional Astrology. All rights reserved.
+        - text: For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.

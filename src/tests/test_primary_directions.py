@@ -1,7 +1,9 @@
 """Tests for primary_directions.py — Placidus and Regiomontanus Primary Directions."""
-from unittest.mock import patch, MagicMock
+
+from unittest.mock import patch
+
+from src.engine.models import Chart, Planet, PlanetName
 from src.engine.primary_directions import PrimaryDirectionsEngine
-from src.engine.models import Planet, PlanetName, Chart
 
 
 def test_normalize_deg():
@@ -23,7 +25,7 @@ def test_ecliptic_to_equatorial():
     ra, dec = PrimaryDirectionsEngine.ecliptic_to_equatorial(0.0, 0.0)
     assert abs(ra) < 0.01
     assert abs(dec) < 0.01
-    
+
     # 90 Cancer -> RA 90, Dec ~23.4
     ra, dec = PrimaryDirectionsEngine.ecliptic_to_equatorial(90.0, 0.0)
     assert abs(ra - 90.0) < 0.01
@@ -34,7 +36,7 @@ def test_calculate_ad_and_arcs():
     # Equator (Dec 0) -> AD = 0. DSA = 90, NSA = 90
     ad = PrimaryDirectionsEngine.calculate_ad(0.0, 45.0)
     assert abs(ad) < 0.01
-    
+
     dsa, nsa = PrimaryDirectionsEngine.calculate_semi_arcs(0.0, 45.0)
     assert dsa == 90.0
     assert nsa == 90.0
@@ -43,7 +45,7 @@ def test_calculate_ad_and_arcs():
 def test_calculate_md():
     md = PrimaryDirectionsEngine.calculate_md(100.0, 90.0)
     assert md == 10.0
-    
+
     md2 = PrimaryDirectionsEngine.calculate_md(80.0, 90.0)
     assert md2 == -10.0
 
@@ -52,7 +54,7 @@ def test_calculate_pole():
     """Pole on the meridian should be 0."""
     pole = PrimaryDirectionsEngine.calculate_pole(0.0, 90.0, 45.0)
     assert pole == 0.0
-    
+
     """Pole on the horizon should match geographical latitude."""
     pole_hz = PrimaryDirectionsEngine.calculate_pole(90.0, 90.0, 45.0)
     assert abs(pole_hz - 45.0) < 0.01
@@ -63,11 +65,11 @@ def test_calculate_mundane_position():
     # On MC (RA = RAMC) -> 10.0
     pos = PrimaryDirectionsEngine.calculate_mundane_position(90.0, 0.0, 90.0, 45.0)
     assert pos == 10.0
-    
+
     # On IC (RA = IC) -> 4.0
     pos2 = PrimaryDirectionsEngine.calculate_mundane_position(270.0, 0.0, 90.0, 45.0)
     assert pos2 == 4.0
-    
+
     # Ascendant (East, on horizon)
     pos3 = PrimaryDirectionsEngine.calculate_mundane_position(180.0, 0.0, 90.0, 45.0)
     assert pos3 == 7.0 or pos3 == 1.0
@@ -88,9 +90,9 @@ def test_get_full_speculum():
 def test_calculate_current_distributor(mock_armc):
     sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
     chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
-    
-    mock_armc.return_value = (None, [10.0, 280.0]) # asc_dir = 10.0
-    
+
+    mock_armc.return_value = (None, [10.0, 280.0])  # asc_dir = 10.0
+
     res = PrimaryDirectionsEngine.calculate_current_distributor(chart, 10.0, 45.0)
     assert res["type"] == "Distributor (Term Ruler)"
     assert res["directed_ascendant_deg"] == 10.0
@@ -100,10 +102,10 @@ def test_calculate_current_distributor(mock_armc):
 def test_calculate_circumambulations(mock_armc):
     sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
     chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
-    
+
     # We always return ascendant at 10.0 (Aries)
     mock_armc.return_value = (None, [10.0, 280.0])
-    
+
     res = PrimaryDirectionsEngine.calculate_circumambulations(chart, 45.0, max_years=5)
     assert len(res) == 6
     assert res[0]["age"] == 0
@@ -115,10 +117,10 @@ def test_calculate_directions_to_angles():
     # Promittor Jupiter at 100 degrees
     jup = Planet(name=PlanetName.JUPITER, longitude=100.0, speed=1.0)
     chart = Chart(sun_altitude=10.0, planets=[jup], ascendant=0.0, mc=270.0)
-    
+
     # Very simplified chart
     res = PrimaryDirectionsEngine.calculate_directions_to_angles(chart, 0.0)
-    
+
     assert len(res) > 0
     assert any(r.promittor == "Jupiter" for r in res)
     assert all(r.method == "Placidus/Zodiacal" for r in res)
@@ -127,9 +129,11 @@ def test_calculate_directions_to_angles():
 def test_calculate_directions_to_point():
     jup = Planet(name=PlanetName.JUPITER, longitude=100.0, speed=1.0)
     chart = Chart(sun_altitude=10.0, planets=[jup], ascendant=0.0, mc=270.0)
-    
-    res = PrimaryDirectionsEngine.calculate_directions_to_point(chart, 0.0, 10.0, target_label="Hyleg")
-    
+
+    res = PrimaryDirectionsEngine.calculate_directions_to_point(
+        chart, 0.0, 10.0, target_label="Hyleg"
+    )
+
     assert len(res) > 0
     assert all(r.significator == "Hyleg" for r in res)
 
@@ -138,7 +142,9 @@ def test_calculate_directions_to_planets():
     jup = Planet(name=PlanetName.JUPITER, longitude=100.0, speed=1.0)
     mars = Planet(name=PlanetName.MARS, longitude=50.0, speed=1.0)
     chart = Chart(sun_altitude=10.0, planets=[jup, mars], ascendant=0.0, mc=270.0)
-    
+
     res = PrimaryDirectionsEngine.calculate_directions_to_planets(chart, 0.0)
     assert len(res) > 0
-    assert sum(1 for r in res if r.significator == "Mars" and r.promittor == "Jupiter") > 0
+    assert (
+        sum(1 for r in res if r.significator == "Mars" and r.promittor == "Jupiter") > 0
+    )

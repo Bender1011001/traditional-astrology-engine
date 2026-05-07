@@ -1,27 +1,23 @@
 """Tests for prediction.py — profections, firdaria, ZR, lunar phase, solar arcs, muntha."""
+
 from datetime import datetime
-from src.engine.prediction import (
-    calculate_profection_sign,
-    get_lord_of_year,
-    calculate_monthly_profection,
-    calculate_daily_profection,
-    calculate_epitasis_days,
-    get_opposite_sign,
-    calculate_zr_lifetime_map,
-    calculate_zr_periods,
-    calculate_firdaria,
-    calculate_lunar_phase_advanced,
-    calculate_solar_arcs,
-    calculate_muntha,
-    ZR_YEARS,
-    FIRDARIA_DAY,
-    FIRDARIA_NIGHT,
-)
-from src.engine.models import Sign, PlanetName, Sect, Chart, Planet
+
 import pytest
 
+from src.engine.models import Chart, Planet, PlanetName, Sect, Sign
+from src.engine.prediction import (FIRDARIA_DAY, FIRDARIA_NIGHT, ZR_YEARS,
+                                   calculate_daily_profection,
+                                   calculate_epitasis_days, calculate_firdaria,
+                                   calculate_lunar_phase_advanced,
+                                   calculate_monthly_profection,
+                                   calculate_muntha, calculate_profection_sign,
+                                   calculate_solar_arcs,
+                                   calculate_zr_lifetime_map,
+                                   calculate_zr_periods, get_lord_of_year,
+                                   get_opposite_sign)
 
 # ─── calculate_profection_sign ───────────────────────────────────────────────
+
 
 def test_profection_age_zero():
     """Age 0 → same sign as Ascendant."""
@@ -44,6 +40,7 @@ def test_profection_arbitrary():
 
 # ─── get_lord_of_year ────────────────────────────────────────────────────────
 
+
 def test_lord_of_year_aries():
     assert get_lord_of_year(Sign.ARIES) == PlanetName.MARS
 
@@ -58,6 +55,7 @@ def test_lord_of_year_pisces():
 
 # ─── calculate_monthly_profection ────────────────────────────────────────────
 
+
 def test_monthly_profection_continuous_month1():
     """Month 1 stays in the annual sign."""
     assert calculate_monthly_profection(Sign.ARIES, 1) == Sign.ARIES
@@ -69,23 +67,23 @@ def test_monthly_profection_continuous_month7():
 
 def test_monthly_profection_saltatory():
     result = calculate_monthly_profection(
-        Sign.ARIES, 3, method='Saltatory',
-        natal_start_sign=Sign.ARIES, age=1
+        Sign.ARIES, 3, method="Saltatory", natal_start_sign=Sign.ARIES, age=1
     )
     assert isinstance(result, Sign)
 
 
 def test_monthly_profection_unknown_method():
     with pytest.raises(ValueError, match="Unknown profection method"):
-        calculate_monthly_profection(Sign.ARIES, 1, method='Invalid')
+        calculate_monthly_profection(Sign.ARIES, 1, method="Invalid")
 
 
 def test_monthly_profection_saltatory_missing_args():
     with pytest.raises(ValueError, match="Natal start sign and age required"):
-        calculate_monthly_profection(Sign.ARIES, 1, method='Saltatory')
+        calculate_monthly_profection(Sign.ARIES, 1, method="Saltatory")
 
 
 # ─── calculate_daily_profection ──────────────────────────────────────────────
+
 
 def test_daily_profection_day1():
     """Day 1 stays in the monthly sign."""
@@ -108,6 +106,7 @@ def test_daily_profection_day4():
 
 # ─── calculate_epitasis_days ─────────────────────────────────────────────────
 
+
 def test_epitasis_days_returns_list():
     result = calculate_epitasis_days(Sign.ARIES, Sign.TAURUS)
     assert isinstance(result, list)
@@ -122,6 +121,7 @@ def test_epitasis_days_same_sign():
 
 # ─── get_opposite_sign ───────────────────────────────────────────────────────
 
+
 def test_opposite_sign():
     assert get_opposite_sign(Sign.ARIES) == Sign.LIBRA
     assert get_opposite_sign(Sign.CANCER) == Sign.CAPRICORN
@@ -129,6 +129,7 @@ def test_opposite_sign():
 
 
 # ─── ZR_YEARS table ─────────────────────────────────────────────────────────
+
 
 def test_zr_years_all_signs():
     """All 12 signs should have ZR years."""
@@ -144,6 +145,7 @@ def test_zr_years_sum():
 
 
 # ─── calculate_zr_lifetime_map ───────────────────────────────────────────────
+
 
 def test_zr_lifetime_map_structure():
     birth = datetime(1990, 1, 1)
@@ -168,6 +170,7 @@ def test_zr_lifetime_map_paragraphs():
 
 # ─── calculate_zr_periods ───────────────────────────────────────────────────
 
+
 def test_zr_periods_basic():
     birth = datetime(1990, 1, 1)
     target = datetime(2020, 6, 15)
@@ -177,6 +180,7 @@ def test_zr_periods_basic():
 
 
 # ─── FIRDARIA tables ─────────────────────────────────────────────────────────
+
 
 def test_firdaria_day_sum():
     """Day firdaria should sum to 75 years."""
@@ -191,6 +195,7 @@ def test_firdaria_night_sum():
 
 
 # ─── calculate_firdaria ─────────────────────────────────────────────────────
+
 
 def test_firdaria_basic():
     birth = datetime(1990, 1, 1)
@@ -229,6 +234,7 @@ def test_firdaria_before_birth():
 
 # ─── calculate_lunar_phase_advanced ──────────────────────────────────────────
 
+
 def test_lunar_phase_new():
     result = calculate_lunar_phase_advanced(100.0, 110.0)
     assert result["name"] == "New Moon"
@@ -252,6 +258,7 @@ def test_lunar_phase_all_eight():
 
 # ─── calculate_solar_arcs ───────────────────────────────────────────────────
 
+
 def test_solar_arcs_age_30():
     chart = Chart(
         sun_altitude=10.0,
@@ -259,7 +266,8 @@ def test_solar_arcs_age_30():
             Planet(name=PlanetName.SUN, longitude=100.0, speed=1.0),
             Planet(name=PlanetName.MOON, longitude=200.0, speed=13.0),
         ],
-        ascendant=0.0, mc=270.0
+        ascendant=0.0,
+        mc=270.0,
     )
     progressed = calculate_solar_arcs(chart, 30.0)
     assert len(progressed) == 2
@@ -273,7 +281,8 @@ def test_solar_arcs_wraparound():
     chart = Chart(
         sun_altitude=10.0,
         planets=[Planet(name=PlanetName.SUN, longitude=350.0, speed=1.0)],
-        ascendant=0.0, mc=270.0
+        ascendant=0.0,
+        mc=270.0,
     )
     progressed = calculate_solar_arcs(chart, 20.0)
     # 350 + 20 = 370 % 360 = 10
@@ -281,6 +290,7 @@ def test_solar_arcs_wraparound():
 
 
 # ─── calculate_muntha ───────────────────────────────────────────────────────
+
 
 def test_muntha_age_zero():
     result = calculate_muntha(Sign.ARIES, 0)

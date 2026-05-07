@@ -1,9 +1,12 @@
-import redis
 import logging
 from datetime import datetime, timezone
+
+import redis
+
 from src.core.config import settings
 
 logger = logging.getLogger(__name__)
+
 
 class RateLimiter:
     def __init__(self):
@@ -14,18 +17,26 @@ class RateLimiter:
         if settings.REDIS_URL:
             try:
                 self.redis = redis.from_url(settings.REDIS_URL, decode_responses=True)
-                self.redis.ping() # Test connection
+                self.redis.ping()  # Test connection
                 self.use_redis = True
             except Exception as e:
-                logger.warning("Redis connection failed: %s. Falling back to in-memory.", repr(e), exc_info=True)
+                logger.warning(
+                    "Redis connection failed: %s. Falling back to in-memory.",
+                    repr(e),
+                    exc_info=True,
+                )
                 self.use_redis = False
                 self._requests = {}
         else:
             self.use_redis = False
             self._requests = {}
 
-        self.DAILY_LIMIT = max(0, int(getattr(settings, "FREE_SINGLE_READINGS_PER_IP", 3)))
-        self.WINDOW_SECONDS = max(60, int(getattr(settings, "FREE_SINGLE_READINGS_WINDOW_SECONDS", 86400)))
+        self.DAILY_LIMIT = max(
+            0, int(getattr(settings, "FREE_SINGLE_READINGS_PER_IP", 3))
+        )
+        self.WINDOW_SECONDS = max(
+            60, int(getattr(settings, "FREE_SINGLE_READINGS_WINDOW_SECONDS", 86400))
+        )
 
     def consume_free_reading(self, ip: str) -> dict:
         """
@@ -50,12 +61,16 @@ class RateLimiter:
                     "limit": self.DAILY_LIMIT,
                 }
             except Exception as e:
-                logger.warning("Redis rate limit check failed, using in-memory fallback: %s", repr(e), exc_info=True)
+                logger.warning(
+                    "Redis rate limit check failed, using in-memory fallback: %s",
+                    repr(e),
+                    exc_info=True,
+                )
 
         now = datetime.now(timezone.utc).timestamp()
-        
+
         # Memory Leak Prevention: Garbage collect stale IPs every 1000 requests
-        self._gc_counter = getattr(self, '_gc_counter', 0) + 1
+        self._gc_counter = getattr(self, "_gc_counter", 0) + 1
         if self._gc_counter > 1000:
             stale_ips = []
             for k, timestamps in self._requests.items():
@@ -71,7 +86,9 @@ class RateLimiter:
         if ip not in self._requests:
             self._requests[ip] = []
 
-        self._requests[ip] = [t for t in self._requests[ip] if now - t < self.WINDOW_SECONDS]
+        self._requests[ip] = [
+            t for t in self._requests[ip] if now - t < self.WINDOW_SECONDS
+        ]
         current_count = len(self._requests[ip])
         if current_count >= self.DAILY_LIMIT:
             return {
@@ -92,5 +109,6 @@ class RateLimiter:
 
     def is_allowed(self, ip: str) -> bool:
         return bool(self.consume_free_reading(ip).get("allowed"))
+
 
 rate_limiter = RateLimiter()

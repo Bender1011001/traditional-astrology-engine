@@ -17,6 +17,7 @@ PROJECT_ID = "astrology-engine-prod"
 REGION = "us-central1"
 SERVICE_NAME = "astrology-engine"
 IMAGE = f"gcr.io/{PROJECT_ID}/{SERVICE_NAME}"
+CLOUD_SQL_INSTANCE = "astrology-487423:us-central1:astrology-db"
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -28,7 +29,11 @@ def run(cmd: str, check: bool = True) -> subprocess.CompletedProcess:
     result = subprocess.run(
         cmd, shell=True, capture_output=False, text=True,
         cwd=ROOT_DIR,
-        env={**os.environ, "CLOUDSDK_CORE_DISABLE_PROMPTS": "1"},
+        env={
+            **os.environ,
+            "CLOUDSDK_CORE_DISABLE_PROMPTS": "1",
+            "CLOUDSDK_CORE_DISABLE_FILE_LOGGING": "1",
+        },
     )
     if check and result.returncode != 0:
         print(f"FAILED with exit code {result.returncode}")
@@ -47,7 +52,7 @@ def ensure_env_yaml():
             env_mtime = os.path.getmtime(env_path)
             yaml_mtime = os.path.getmtime(env_yaml_path)
             if env_mtime > yaml_mtime:
-                print("   ⚠️  .env is newer than env.yaml — regenerating...")
+                print("   .env is newer than env.yaml; regenerating...")
                 run(f'python "{os.path.join(ROOT_DIR, "scripts", "gen_env_yaml.py")}"')
         return
 
@@ -55,7 +60,7 @@ def ensure_env_yaml():
         print("ERROR: Neither env.yaml nor .env found. Cannot deploy.")
         sys.exit(1)
 
-    print("   📝 Generating env.yaml from .env...")
+    print("   Generating env.yaml from .env...")
     run(f'python "{os.path.join(ROOT_DIR, "scripts", "gen_env_yaml.py")}"')
 
 
@@ -65,7 +70,7 @@ def main():
     deploy_only = "--deploy-only" in args
     run_tests = "--run-tests" in args
 
-    print(f"\n🌟 Astrology Engine Deployment")
+    print("\nAstrology Engine Deployment")
     print(f"   Project: {PROJECT_ID}")
     print(f"   Region:  {REGION}")
     print(f"   Service: {SERVICE_NAME}")
@@ -73,24 +78,24 @@ def main():
 
     # Step 0: Run tests (optional)
     if run_tests:
-        print("\n\n🧪 STEP 0: Running tests...")
+        print("\n\nSTEP 0: Running tests...")
         result = run("pytest src/tests/ -q --tb=short", check=False)
         if result.returncode != 0:
-            print("❌ Tests failed! Aborting deployment.")
+            print("Tests failed. Aborting deployment.")
             sys.exit(1)
-        print("✅ All tests passed.")
+        print("All tests passed.")
 
     # Step 1: Build and push image via Cloud Build
     if not deploy_only:
-        print("\n\n🔨 STEP 1: Building Docker image via Cloud Build...")
+        print("\n\nSTEP 1: Building Docker image via Cloud Build...")
         start = time.time()
-        run(f"gcloud builds submit --tag {IMAGE} --timeout=600")
+        run(f"gcloud builds submit --tag {IMAGE} --timeout=600 --project {PROJECT_ID}")
         elapsed = time.time() - start
-        print(f"✅ Image built and pushed in {elapsed:.0f}s.")
+        print(f"Image built and pushed in {elapsed:.0f}s.")
 
     # Step 2: Deploy to Cloud Run
     if not build_only:
-        print("\n\n🚀 STEP 2: Deploying to Cloud Run...")
+        print("\n\nSTEP 2: Deploying to Cloud Run...")
         ensure_env_yaml()
 
         deploy_cmd = (
@@ -105,16 +110,19 @@ def main():
             f"--min-instances 0 "
             f"--max-instances 3 "
             f"--timeout 300 "
-            f"--env-vars-file env.yaml"
+            f"--add-cloudsql-instances {CLOUD_SQL_INSTANCE} "
+            f"--env-vars-file env.yaml "
+            f"--project {PROJECT_ID} "
+            f"--quiet"
         )
         run(deploy_cmd)
-        print("✅ Deployed successfully!")
+        print("Deployed successfully!")
 
         # Get the service URL
-        print("\n\n📡 Service URL:")
-        run(f'gcloud run services describe {SERVICE_NAME} --region {REGION} --format="value(status.url)"', check=False)
+        print("\n\nService URL:")
+        run(f'gcloud run services describe {SERVICE_NAME} --region {REGION} --project {PROJECT_ID} --format="value(status.url)"', check=False)
 
-    print("\n\n✨ Deployment complete!")
+    print("\n\nDeployment complete.")
 
 
 if __name__ == "__main__":

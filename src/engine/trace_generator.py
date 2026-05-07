@@ -9,49 +9,40 @@ Returns a JSON-serializable dict with all computation steps.
 
 import logging
 from datetime import datetime
-from typing import Optional, Dict, Any
+from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 
-from .trace import (
-    ComputationTrace,
-    CAT_ASTRONOMY, CAT_SECT, CAT_DIGNITY, CAT_ACCIDENTAL,
-    CAT_ASPECTS, CAT_LOTS, CAT_RECEPTION, CAT_KAKOSIS,
-    CAT_VITALITY, CAT_ALMUTEN, CAT_TEMPERAMENT, CAT_PROFECTIONS,
-    CAT_ZR, CAT_FIRDARIA, CAT_DECENNIALS, CAT_DIRECTIONS,
-    CAT_STARS, CAT_MANSIONS, CAT_MUNDANE, CAT_MEDICAL,
-)
-from .models import Planet, Chart, Sect, PlanetName, Sign
-from .calculator.main import calculate_chart_data
-from .dignities import DignityCalculator
+
+from .advanced_mechanics import (AlmutenEngine, DodecatemoriaEngine,
+                                 DoryphoryEngine)
 from .aspects import AspectEngine
-from .lots import calculate_all_lots, LotName
-from .reception import ReceptionEngine, ReceptionMode
-from .kakosis import KakosisEngine
-from .hyleg import HylegAlcocodenEngine
-from .temperament import TemperamentEngine
-from .advanced_mechanics import AlmutenEngine, DoryphoryEngine, DodecatemoriaEngine
-from .prediction import (
-    calculate_profection_sign, get_lord_of_year, AdvancedPredictionEngine,
-    calculate_firdaria, FIRDARIA_DAY, FIRDARIA_NIGHT,
-)
+from .calculations import (calculate_prenatal_syzygy_details,
+                           format_longitude)
+from .calculator.main import calculate_chart_data
+from .classical_mechanics import ClassicalMechanicsEngine
 from .decennials import DecennialEngine
-from .phasis import PhasisEngine
-from .primary_directions import PrimaryDirectionsEngine
-from .stars import check_fixed_stars
-from .mansions import LunarMansionEngine
-from .classical_mechanics import ClassicalMechanicsEngine, calculate_antiscia_points
-from .geniture import LordOfGenitureEngine
-from .calculations import (
-    calculate_solar_status, is_besieged, is_in_via_combusta,
-    format_longitude, calculate_prenatal_syzygy_details
-)
-from .reference_data import (
-    DOMICILES, EXALTATIONS, DOROTHEAN_TRIPLICITY, EGYPTIAN_TERMS,
-    FACES_ORDER, SIGN_ELEMENTS, MOIETIES
-)
+from .dignities import DignityCalculator
 from .forensic_engine import Auditor
-import swisseph as swe
+from .geniture import LordOfGenitureEngine
+from .hyleg import HylegAlcocodenEngine
+from .kakosis import KakosisEngine
+from .lots import LotName, calculate_all_lots
+from .mansions import LunarMansionEngine
+from .models import Chart, PlanetName, Sect, Sign
+from .prediction import (FIRDARIA_DAY, FIRDARIA_NIGHT,
+                         calculate_firdaria, get_lord_of_year)
+from .primary_directions import PrimaryDirectionsEngine
+from .reception import ReceptionEngine, ReceptionMode
+from .reference_data import (DOMICILES, DOROTHEAN_TRIPLICITY, EGYPTIAN_TERMS,
+                             EXALTATIONS, FACES_ORDER, MOIETIES, SIGN_ELEMENTS)
+from .stars import check_fixed_stars
+from .temperament import TemperamentEngine
+from .trace import (CAT_ACCIDENTAL, CAT_ALMUTEN, CAT_ASPECTS, CAT_ASTRONOMY,
+                    CAT_DECENNIALS, CAT_DIGNITY, CAT_DIRECTIONS, CAT_FIRDARIA,
+                    CAT_KAKOSIS, CAT_LOTS, CAT_MANSIONS, CAT_PROFECTIONS,
+                    CAT_RECEPTION, CAT_SECT, CAT_STARS, CAT_TEMPERAMENT,
+                    CAT_VITALITY, ComputationTrace)
 
 logger = logging.getLogger(__name__)
 
@@ -80,14 +71,21 @@ def build_trace_object(
     """
     Generate a complete computation trace object for given birth data.
     """
-    birth_label = f"{date_str} {time_str}, {city}, {state}" if state else f"{date_str} {time_str}, {city}"
+    birth_label = (
+        f"{date_str} {time_str}, {city}, {state}"
+        if state
+        else f"{date_str} {time_str}, {city}"
+    )
     trace = ComputationTrace(subject_name=name, birth_data=birth_label)
 
     try:
         # 1. Calculate chart
         raw = calculate_chart_data(
-            date_str=date_str, time_str=time_str,
-            city=city, state=state, house_system="W"
+            date_str=date_str,
+            time_str=time_str,
+            city=city,
+            state=state,
+            house_system="W",
         )
 
         if "error" in raw:
@@ -98,23 +96,27 @@ def build_trace_object(
                 rule="",
                 source="",
                 calculation=raw["error"],
-                result="Failed"
+                result="Failed",
             )
             return trace
 
         chart = Auditor._rebuild_chart_model(raw)
-        
+
         # Determine age
         utc_time = raw["meta"].get("utc_time", date_str)
         try:
             birth_dt = datetime.fromisoformat(utc_time)
         except (ValueError, TypeError):
             birth_dt = datetime.strptime(date_str, "%Y-%m-%d")
-        
+
         if birth_dt.tzinfo:
             birth_dt = birth_dt.replace(tzinfo=None)
         now = datetime.now()
-        age = now.year - birth_dt.year - ((now.month, now.day) < (birth_dt.month, birth_dt.day))
+        age = (
+            now.year
+            - birth_dt.year
+            - ((now.month, now.day) < (birth_dt.month, birth_dt.day))
+        )
 
         # 2. Trace all categories
         _trace_astronomy(trace, raw, chart)
@@ -156,7 +158,7 @@ def generate_trace(
     Generate a complete computation trace for given birth data (Dict format).
     """
     trace = build_trace_object(date_str, time_str, city, state, name)
-    
+
     # If there was an error added as a step, we can check for it
     if trace.steps and trace.steps[0].category == "Error":
         return {
@@ -165,14 +167,15 @@ def generate_trace(
             "total_steps": 0,
             "categories": [],
             "subject_name": name,
-            "birth_data": getattr(trace, 'birth_data', ''),
+            "birth_data": getattr(trace, "birth_data", ""),
         }
-        
+
     return trace.to_dict()
 
 
 # ─── Trace Functions ──────────────────────────────────────────────────────────
 # These are extracted from scripts/generate_trace.py for reuse.
+
 
 def _trace_astronomy(trace: ComputationTrace, raw: dict, chart: Chart):
     """Trace the astronomical foundations."""
@@ -191,7 +194,11 @@ def _trace_astronomy(trace: ComputationTrace, raw: dict, chart: Chart):
     trace.add(
         category=CAT_ASTRONOMY,
         technique="Julian Day Number",
-        inputs={"date": meta.get("date"), "time": meta.get("time"), "tz": meta.get("timezone")},
+        inputs={
+            "date": meta.get("date"),
+            "time": meta.get("time"),
+            "tz": meta.get("timezone"),
+        },
         rule="Convert local date/time to Universal Time, then to Julian Day for ephemeris lookup.",
         source="Swiss Ephemeris (pyswisseph)",
         calculation=f"Local {meta.get('date')} {meta.get('time')} {meta.get('timezone')} → UTC → JD = {meta.get('julian_day')}",
@@ -226,7 +233,11 @@ def _trace_astronomy(trace: ComputationTrace, raw: dict, chart: Chart):
     trace.add(
         category=CAT_ASTRONOMY,
         technique="Ascendant (Rising Degree)",
-        inputs={"JD": meta.get("julian_day"), "lat": meta.get("lat"), "lon": meta.get("lon")},
+        inputs={
+            "JD": meta.get("julian_day"),
+            "lat": meta.get("lat"),
+            "lon": meta.get("lon"),
+        },
         rule="Calculate the ecliptic degree crossing the eastern horizon at the moment of birth for the given geographic coordinates.",
         source="Swiss Ephemeris swe.houses()",
         calculation=f"swe.houses(JD, lat={meta.get('lat')}, lon={meta.get('lon')}) → Ascendant = {asc:.6f}°",
@@ -269,7 +280,9 @@ def _trace_planetary_hours(trace: ComputationTrace, chart: Chart, raw: dict):
     utc_str = meta.get("utc_time", "")
 
     try:
-        birth_dt = datetime.fromisoformat(utc_str.replace("Z", "+00:00")) if utc_str else None
+        birth_dt = (
+            datetime.fromisoformat(utc_str.replace("Z", "+00:00")) if utc_str else None
+        )
         if birth_dt and birth_dt.tzinfo:
             birth_dt = birth_dt.replace(tzinfo=None)
 
@@ -281,14 +294,18 @@ def _trace_planetary_hours(trace: ComputationTrace, chart: Chart, raw: dict):
         asc_lord_str = asc_lord.value if asc_lord else None
 
         hour_info = ClassicalMechanicsEngine.get_planetary_hours(
-            birth_dt, lat, lon, asc_sign, asc_lord_str
+            birth_dt, lat, lon, asc_sign, asc_lord_str  # type: ignore
         )
 
         if hour_info:
             trace.add(
                 category=CAT_ASTRONOMY,
                 technique="Planetary Hour at Birth",
-                inputs={"datetime_utc": str(birth_dt), "latitude": lat, "longitude": lon},
+                inputs={
+                    "datetime_utc": str(birth_dt),
+                    "latitude": lat,
+                    "longitude": lon,
+                },
                 rule="Calculate sunrise/sunset using Swiss Ephemeris. Divide the daytime into 12 unequal 'temporal hours', and similarly the nighttime. Each hour is ruled by a planet in Chaldean descending order starting from the Day Lord.",
                 source="Lilly, Christian Astrology pp.31-32; Abu Ma'shar",
                 calculation=f"Day: {hour_info.day_of_week}, Day Lord: {hour_info.day_lord}. {'Daytime' if hour_info.is_daytime else 'Nighttime'} birth, Hour #{hour_info.hour_number} → Hour Lord: {hour_info.hour_lord}. ASC Lord: {asc_lord_str or '?'}.",
@@ -320,15 +337,22 @@ def _trace_dignities(trace: ComputationTrace, chart: Chart):
     signs = list(Sign)
 
     for planet in chart.planets:
-        if planet.name in (PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO,
-                          PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE):
+        if planet.name in (
+            PlanetName.URANUS,
+            PlanetName.NEPTUNE,
+            PlanetName.PLUTO,
+            PlanetName.NORTH_NODE,
+            PlanetName.SOUTH_NODE,
+        ):
             continue
 
         sign = _sign_of(planet.longitude)
         deg = _deg_in_sign(planet.longitude)
         element = SIGN_ELEMENTS.get(sign, "Unknown")
 
-        dig = DignityCalculator.calculate_planet_dignity(planet.name, planet.longitude, sect)
+        dig = DignityCalculator.calculate_planet_dignity(
+            planet.name, planet.longitude, sect
+        )
         rulers = DignityCalculator.get_essential_rulers(planet.longitude, sect)
         score_bd = dig.get("score_breakdown", {})
 
@@ -339,7 +363,11 @@ def _trace_dignities(trace: ComputationTrace, chart: Chart):
         trace.add(
             category=CAT_DIGNITY,
             technique="Domicile",
-            inputs={"planet": planet.name.value, "sign": sign.value, "degree": f"{deg:.2f}°"},
+            inputs={
+                "planet": planet.name.value,
+                "sign": sign.value,
+                "degree": f"{deg:.2f}°",
+            },
             rule=f"The domicile ruler of {sign.value} is {dom_ruler.value if dom_ruler else 'Unknown'}. If {planet.name.value} IS the domicile ruler of its own sign, it receives +5 dignity. If it is in the OPPOSITE sign of the one it rules, it is in Detriment (-5).",
             source="Ptolemy, Tetrabiblos I.17",
             calculation=f"{planet.name.value} at {_fmt(planet.longitude)} → Sign: {sign.value} → Ruler of {sign.value}: {dom_ruler.value if dom_ruler else '?'}. {'MATCH → +5 (Domicile)' if is_dom else f'No match → {dom_score} points'}",
@@ -370,7 +398,11 @@ def _trace_dignities(trace: ComputationTrace, chart: Chart):
         trace.add(
             category=CAT_DIGNITY,
             technique="Triplicity (Dorothean)",
-            inputs={"planet": planet.name.value, "element": element, "sect": sect_label},
+            inputs={
+                "planet": planet.name.value,
+                "element": element,
+                "sect": sect_label,
+            },
             rule=f"{element} triplicity rulers (Dorothean): Day={trip_rulers_raw[0].value if hasattr(trip_rulers_raw[0], 'value') else trip_rulers_raw[0]}, Night={trip_rulers_raw[1].value if hasattr(trip_rulers_raw[1], 'value') else trip_rulers_raw[1]}, Participant={trip_rulers_raw[2].value if hasattr(trip_rulers_raw[2], 'value') else trip_rulers_raw[2]}. If {planet.name.value} is the active triplicity ruler for this sect, it receives +3.",
             source="Dorotheus, Carmen Astrologicum I.1",
             calculation=f"Element: {element}, Sect: {sect_label} → Active ruler: {trip_ruler.value if trip_ruler else '?'}. {planet.name.value} {'= MATCH → +3' if trip_score > 0 else '≠ ruler → 0'}",
@@ -382,11 +414,20 @@ def _trace_dignities(trace: ComputationTrace, chart: Chart):
         term_ruler = rulers.get("term")
         term_score = score_bd.get("term", 0)
         terms_list = EGYPTIAN_TERMS.get(sign, [])
-        terms_str = ", ".join([f"{t[0].value if hasattr(t[0], 'value') else t[0]}(<{t[1]}°)" for t in terms_list])
+        terms_str = ", ".join(
+            [
+                f"{t[0].value if hasattr(t[0], 'value') else t[0]}(<{t[1]}°)"
+                for t in terms_list
+            ]
+        )
         trace.add(
             category=CAT_DIGNITY,
             technique="Term / Bounds (Egyptian)",
-            inputs={"planet": planet.name.value, "sign": sign.value, "degree": f"{deg:.2f}°"},
+            inputs={
+                "planet": planet.name.value,
+                "sign": sign.value,
+                "degree": f"{deg:.2f}°",
+            },
             rule=f"Egyptian Terms of {sign.value}: [{terms_str}]. The planet ruling the degree-range that contains {deg:.1f}° is the Term ruler. If {planet.name.value} is the Term ruler, +2.",
             source="Valens, Anthology; Egyptian tradition",
             calculation=f"Degree {deg:.2f}° in {sign.value} → Term ruler: {term_ruler.value if term_ruler else '?'}. {planet.name.value} {'= MATCH → +2' if term_score > 0 else '≠ ruler → 0'}",
@@ -403,7 +444,12 @@ def _trace_dignities(trace: ComputationTrace, chart: Chart):
         trace.add(
             category=CAT_DIGNITY,
             technique="Face / Decan (Chaldean)",
-            inputs={"planet": planet.name.value, "sign": sign.value, "degree": f"{deg:.2f}°", "decan": face_idx + 1},
+            inputs={
+                "planet": planet.name.value,
+                "sign": sign.value,
+                "degree": f"{deg:.2f}°",
+                "decan": face_idx + 1,
+            },
             rule=f"Chaldean decan order cycles through Saturn→Jupiter→Mars→Sun→Venus→Mercury→Moon. Decan {face_idx+1} of {sign.value} (degrees {face_idx*10}–{(face_idx+1)*10}°) is ruled by {face_ruler.value if hasattr(face_ruler, 'value') else face_ruler}. If {planet.name.value} is the Face ruler, +1.",
             source="Chaldean order; Firmicus Maternus",
             calculation=f"Sign #{sign_idx+1} × 3 decans + decan {face_idx+1} → global index {global_face_idx} → ruler: {face_ruler.value if hasattr(face_ruler, 'value') else face_ruler}. {face_score} points.",
@@ -429,8 +475,15 @@ def _trace_dignities(trace: ComputationTrace, chart: Chart):
 def _trace_aspects(trace: ComputationTrace, chart: Chart):
     """Trace aspect calculations."""
     aspects = AspectEngine.calculate_aspects(chart)
-    core_planets = {PlanetName.SUN, PlanetName.MOON, PlanetName.MERCURY,
-                   PlanetName.VENUS, PlanetName.MARS, PlanetName.JUPITER, PlanetName.SATURN}
+    core_planets = {
+        PlanetName.SUN,
+        PlanetName.MOON,
+        PlanetName.MERCURY,
+        PlanetName.VENUS,
+        PlanetName.MARS,
+        PlanetName.JUPITER,
+        PlanetName.SATURN,
+    }
 
     for asp in aspects:
         if asp.planet_a not in core_planets or asp.planet_b not in core_planets:
@@ -445,9 +498,17 @@ def _trace_aspects(trace: ComputationTrace, chart: Chart):
         moiety_b = MOIETIES.get(asp.planet_b, 3.0)
         max_orb = moiety_a + moiety_b
 
-        apply_str = "Applying (strengthening)" if asp.is_applying else "Separating (past peak)"
+        apply_str = (
+            "Applying (strengthening)" if asp.is_applying else "Separating (past peak)"
+        )
 
-        exact_angles = {"Conjunction": 0, "Sextile": 60, "Square": 90, "Trine": 120, "Opposition": 180}
+        exact_angles = {
+            "Conjunction": 0,
+            "Sextile": 60,
+            "Square": 90,
+            "Trine": 120,
+            "Opposition": 180,
+        }
         exact_deg = exact_angles.get(asp.type.value, 0)
 
         trace.add(
@@ -523,7 +584,12 @@ def _trace_lots(trace: ComputationTrace, chart: Chart):
     trace.add(
         category=CAT_LOTS,
         technique="Lot of Fortune (Tyche)",
-        inputs={"Asc": _fmt(chart.ascendant), "Sun": _fmt(sun.longitude), "Moon": _fmt(moon.longitude), "sect": "Day" if is_day else "Night"},
+        inputs={
+            "Asc": _fmt(chart.ascendant),
+            "Sun": _fmt(sun.longitude),
+            "Moon": _fmt(moon.longitude),
+            "sect": "Day" if is_day else "Night",
+        },
         rule=f"Day chart: Asc + Moon − Sun. Night chart: Asc + Sun − Moon. The Lot of Fortune represents the body, health, luck, and material circumstances.",
         source="Paulus Alexandrinus, Introduction; Valens, Anthology II",
         calculation=f"{formula} = {calc} (mod 360) = {fort:.2f}°",
@@ -542,7 +608,11 @@ def _trace_lots(trace: ComputationTrace, chart: Chart):
     trace.add(
         category=CAT_LOTS,
         technique="Lot of Spirit (Daimon)",
-        inputs={"Asc": _fmt(chart.ascendant), "Sun": _fmt(sun.longitude), "Moon": _fmt(moon.longitude)},
+        inputs={
+            "Asc": _fmt(chart.ascendant),
+            "Sun": _fmt(sun.longitude),
+            "Moon": _fmt(moon.longitude),
+        },
         rule=f"Day chart: Asc + Sun − Moon. Night chart: Asc + Moon − Sun. The Lot of Spirit represents the mind, intellect, career, and will.",
         source="Paulus Alexandrinus, Introduction; Valens, Anthology IV",
         calculation=f"{formula_s} = {calc_s} (mod 360) = {spir:.2f}°",
@@ -552,10 +622,26 @@ def _trace_lots(trace: ComputationTrace, chart: Chart):
     # Remaining lots
     lot_names_map = {
         LotName.EROS.value: ("Eros (Love)", "Venus/Spirit", "Desire, love, attraction"),
-        LotName.NECESSITY.value: ("Necessity (Ananke)", "Mercury/Fortune", "Constraints, obligations, enemies"),
-        LotName.COURAGE.value: ("Courage (Tolma)", "Mars/Fortune", "Boldness, daring, conflict"),
-        LotName.VICTORY.value: ("Victory (Nike)", "Jupiter/Spirit", "Success, triumph, faith"),
-        LotName.NEMESIS.value: ("Nemesis", "Saturn/Fortune", "Saturn dealings, karmic debts"),
+        LotName.NECESSITY.value: (
+            "Necessity (Ananke)",
+            "Mercury/Fortune",
+            "Constraints, obligations, enemies",
+        ),
+        LotName.COURAGE.value: (
+            "Courage (Tolma)",
+            "Mars/Fortune",
+            "Boldness, daring, conflict",
+        ),
+        LotName.VICTORY.value: (
+            "Victory (Nike)",
+            "Jupiter/Spirit",
+            "Success, triumph, faith",
+        ),
+        LotName.NEMESIS.value: (
+            "Nemesis",
+            "Saturn/Fortune",
+            "Saturn dealings, karmic debts",
+        ),
     }
 
     for lot_key, (lot_label, formula_desc, meaning) in lot_names_map.items():
@@ -573,17 +659,28 @@ def _trace_lots(trace: ComputationTrace, chart: Chart):
 
 def _trace_reception(trace: ComputationTrace, chart: Chart):
     """Trace reception and mutual reception."""
-    mutuals = ReceptionEngine.calculate_mutual_receptions(chart, ReceptionMode.STANDARD_LILLY)
+    mutuals = ReceptionEngine.calculate_mutual_receptions(
+        chart, ReceptionMode.STANDARD_LILLY
+    )
 
     if mutuals:
         for mr in mutuals:
-            pa = mr.planet_a.value if hasattr(mr.planet_a, 'value') else str(mr.planet_a)
-            pb = mr.planet_b.value if hasattr(mr.planet_b, 'value') else str(mr.planet_b)
+            pa = (
+                mr.planet_a.value if hasattr(mr.planet_a, "value") else str(mr.planet_a)
+            )
+            pb = (
+                mr.planet_b.value if hasattr(mr.planet_b, "value") else str(mr.planet_b)
+            )
 
             trace.add(
                 category=CAT_RECEPTION,
                 technique=f"Mutual Reception: {pa} <-> {pb}",
-                inputs={"planet_a": pa, "planet_b": pb, "type": mr.type, "strength": mr.strength_score},
+                inputs={
+                    "planet_a": pa,
+                    "planet_b": pb,
+                    "type": mr.type,
+                    "strength": mr.strength_score,
+                },
                 rule=f"Mutual Reception: {pa} is in {pb}'s dignity AND {pb} is in {pa}'s dignity. Type: {mr.type}.",
                 source="Bonatti, Liber Astronomiae; Lilly, Christian Astrology",
                 calculation=f"{pa} reception of {pb}: {', '.join(mr.reception_a_in_b.dignities)} (score {mr.reception_a_in_b.score}). {pb} reception of {pa}: {', '.join(mr.reception_b_in_a.dignities)} (score {mr.reception_b_in_a.score}). Combined: {mr.strength_score}.",
@@ -603,10 +700,20 @@ def _trace_reception(trace: ComputationTrace, chart: Chart):
 
 def _trace_kakosis(trace: ComputationTrace, chart: Chart):
     """Trace maltreatment conditions."""
-    core_planets = [p for p in chart.planets if p.name in (
-        PlanetName.SUN, PlanetName.MOON, PlanetName.MERCURY,
-        PlanetName.VENUS, PlanetName.MARS, PlanetName.JUPITER, PlanetName.SATURN
-    )]
+    core_planets = [
+        p
+        for p in chart.planets
+        if p.name
+        in (
+            PlanetName.SUN,
+            PlanetName.MOON,
+            PlanetName.MERCURY,
+            PlanetName.VENUS,
+            PlanetName.MARS,
+            PlanetName.JUPITER,
+            PlanetName.SATURN,
+        )
+    ]
 
     for planet in core_planets:
         conditions = KakosisEngine.check_maltreatments(planet, chart)
@@ -659,7 +766,10 @@ def _trace_vitality(trace: ComputationTrace, chart: Chart):
             trace.add(
                 category=CAT_VITALITY,
                 technique="Alcocoden (Giver of Years)",
-                inputs={"hyleg": hyleg.get("name"), "hyleg_longitude": _fmt(hyleg.get("longitude", 0))},
+                inputs={
+                    "hyleg": hyleg.get("name"),
+                    "hyleg_longitude": _fmt(hyleg.get("longitude", 0)),
+                },
                 rule="Find the essential ruler of the Hyleg degree with the highest Bonatti-score that aspects the Hyleg. That planet is the Alcocoden — it grants its Minor, Mean, or Major years as the baseline vitality.",
                 source="Bonatti, Liber Astronomiae VIII",
                 calculation=f"Hyleg at {_fmt(hyleg.get('longitude', 0))} → essential rulers scored → winner: {alco_name} (score: {alcocoden.get('score', 0)}) via {alcocoden.get('aspect', 'Unknown')}",
@@ -715,16 +825,16 @@ def _trace_almuten(trace: ComputationTrace, chart: Chart):
     almuten_result = AlmutenEngine.calculate_almuten(chart)
     gen_result = LordOfGenitureEngine.calculate(chart)
 
-    almuten_winner = getattr(almuten_result, 'winner', None)
+    almuten_winner = getattr(almuten_result, "winner", None)
     if almuten_winner is None and isinstance(almuten_result, dict):
-        almuten_winner = almuten_result.get('winner', 'Unknown')
-    if hasattr(almuten_winner, 'value'):
-        almuten_winner = almuten_winner.value
+        almuten_winner = dict(almuten_result).get("winner", "Unknown")
+    if hasattr(almuten_winner, "value"):
+        almuten_winner = almuten_winner.value  # type: ignore
 
-    gen_winner = getattr(gen_result, 'winner', None)
+    gen_winner = getattr(gen_result, "winner", None)
     if gen_winner is None and isinstance(gen_result, dict):
-        gen_winner = gen_result.get('winner', 'Unknown')
-    if hasattr(gen_winner, 'value'):
+        gen_winner = dict(gen_result).get("winner", "Unknown")
+    if hasattr(gen_winner, "value"):
         gen_winner = gen_winner.value
 
     trace.add(
@@ -856,7 +966,10 @@ def _trace_firdaria(trace: ComputationTrace, chart: Chart, birth_date, target_da
     trace.add(
         category=CAT_FIRDARIA,
         technique="Firdaria Period",
-        inputs={"sect": "Day" if sect == Sect.DAY else "Night", "current_age": fird.get("Current Age", "?")},
+        inputs={
+            "sect": "Day" if sect == Sect.DAY else "Night",
+            "current_age": fird.get("Current Age", "?"),
+        },
         rule=f"{'Day' if sect == Sect.DAY else 'Night'} chart Firdaria sequence: {order_str}. Each major period is subdivided into 7 sub-periods.",
         source="Abu Ma'shar, On the Revolutions of the Years of Nativities",
         calculation=f"Age {fird.get('Current Age', '?')} falls in: Major = {fird.get('Major Period', '?')} ({fird.get('Major Start', '?')} to {fird.get('Major End', '?')}), Sub = {fird.get('Sub Period', '?')} ({fird.get('Sub Start', '?')} to {fird.get('Sub End', '?')}).",
@@ -869,7 +982,9 @@ def _trace_decennials(trace: ComputationTrace, chart: Chart, birth_date, target_
     """Trace Decennials (Valens chronocrator system)."""
     try:
         apheta = DecennialEngine.select_apheta(chart)
-        apheta_name = apheta.name.value if hasattr(apheta.name, 'value') else str(apheta.name)
+        apheta_name = (
+            apheta.name.value if hasattr(apheta.name, "value") else str(apheta.name)
+        )
 
         is_day = chart.sun_altitude > 0
         sect_light = "Sun" if is_day else "Moon"
@@ -898,21 +1013,34 @@ def _trace_decennials(trace: ComputationTrace, chart: Chart, birth_date, target_
         )
 
         try:
-            periods = DecennialEngine.calculate_decennials(chart, birth_date, target_date)
-            if periods and isinstance(periods, list) and len(periods) > 0:
-                current = periods[-1]
-                if isinstance(current, dict):
-                    trace.add(
-                        category=CAT_DECENNIALS,
-                        technique="Current Decennial Period",
-                        inputs={"target_date": str(target_date)},
-                        rule="Each planet's major period lasts its Minor Years. Sub-periods cycle through the remaining planets in zodiacal order.",
-                        source="Valens, Anthology IV.10-11",
-                        calculation=f"Current period: {current}",
-                        result=f"Major: {current.get('major', '?')} / Sub: {current.get('sub', '?')}",
-                    )
+            periods = DecennialEngine.generate_decennials(chart, birth_date)
+            current_major = None
+            current_sub = None
+            target_iso = target_date.isoformat()
+
+            for major in periods:
+                if major["start_date"] <= target_iso <= major["end_date"]:
+                    current_major = major["major_lord"]
+                    for sub in major["sub_periods"]:
+                        if sub["start_date"] <= target_iso <= sub["end_date"]:
+                            current_sub = sub["sub_lord"]
+                            break
+                    break
+
+            if current_major and current_sub:
+                trace.add(
+                    category=CAT_DECENNIALS,
+                    technique="Current Decennial Period",
+                    inputs={"target_date": str(target_date)},
+                    rule="Each planet's major period lasts its Minor Years. Sub-periods cycle through the remaining planets in zodiacal order.",
+                    source="Valens, Anthology IV.10-11",
+                    calculation=f"Evaluated date {target_date.date()} against sequence.",
+                    result=f"Major: {current_major} / Sub: {current_sub}",
+                )
         except Exception as e:
-            logger.warning("Current decennial period trace failed: %s", repr(e), exc_info=True)
+            logger.warning(
+                "Current decennial period trace failed: %s", repr(e), exc_info=True
+            )
 
     except Exception as e:
         logger.warning("Decennial trace failed: %s", repr(e), exc_info=True)
@@ -935,12 +1063,15 @@ def _trace_lunar_mansions(trace: ComputationTrace, chart: Chart):
         trace.add(
             category=CAT_MANSIONS,
             technique="Natal Moon Lunar Mansion",
-            inputs={"moon_longitude": round(moon.longitude, 4), "moon_position": _fmt(moon.longitude)},
+            inputs={
+                "moon_longitude": round(moon.longitude, 4),
+                "moon_position": _fmt(moon.longitude),
+            },
             rule="Divide the ecliptic into 28 equal segments of 12°51'26\". The Moon's position determines the natal mansion and its electional properties.",
             source=sources or "Picatrix Bk I, Ch 4",
             calculation=f"Moon at {_fmt(moon.longitude)} → {moon.longitude:.4f}° ÷ 12.857° = Mansion #{mansion_id} ({mansion_name}).",
             result=f"Mansion #{mansion_id}: {mansion_name}",
-            notes=f"Good for: {good}. Avoid: {bad}." if good or bad else None,
+            notes=f"Good for: {good}. Avoid: {bad}." if good or bad else None,  # type: ignore
         )
     except Exception as e:
         logger.warning("Lunar mansion trace failed: %s", repr(e), exc_info=True)
@@ -953,13 +1084,18 @@ def _trace_primary_directions(trace: ComputationTrace, chart: Chart, raw: dict):
         if geo_lat is None:
             return
 
-        directions = PrimaryDirectionsEngine.calculate_directions_to_angles(chart, geo_lat)
+        directions = PrimaryDirectionsEngine.calculate_directions_to_angles(
+            chart, geo_lat
+        )
 
         # Trace the method
         trace.add(
             category=CAT_DIRECTIONS,
             technique="Primary Directions Engine",
-            inputs={"geographic_latitude": round(geo_lat, 4), "method": "Placidus/Zodiacal"},
+            inputs={
+                "geographic_latitude": round(geo_lat, 4),
+                "method": "Placidus/Zodiacal",
+            },
             rule="Direct each traditional planet's zodiacal aspects to the Ascendant and Midheaven. Arc = OA(promittor aspect point) - OA(significator). 1° arc ≈ 1 year (Ptolemy Key).",
             source="Ptolemy, Tetrabiblos III.10; Placidus de Titis",
             calculation=f"Computed {len(directions)} directions to Asc/MC within 100° arc.",
@@ -972,7 +1108,11 @@ def _trace_primary_directions(trace: ComputationTrace, chart: Chart, raw: dict):
             trace.add(
                 category=CAT_DIRECTIONS,
                 technique=f"Direction: {d.promittor} {d.aspect} → {d.significator}",
-                inputs={"promittor": d.promittor, "significator": d.significator, "aspect": d.aspect},
+                inputs={
+                    "promittor": d.promittor,
+                    "significator": d.significator,
+                    "aspect": d.aspect,
+                },
                 rule=f"Zodiacal direction of {d.promittor}'s {d.aspect} ray to the {d.significator}.",
                 source="Placidus de Titis, Primum Mobile",
                 calculation=f"Arc = {arc_str}, converted via Ptolemy Key: {d.years:.1f} years ({d.date_offset}).",
@@ -994,19 +1134,31 @@ def _trace_doryphory(trace: ComputationTrace, chart: Chart):
         trace.add(
             category=CAT_ACCIDENTAL,
             technique="Doryphory (Spear-Bearers / Bodyguards)",
-            inputs={"total_guards": len(instances), "solar": len(sun_guards), "lunar": len(moon_guards)},
+            inputs={
+                "total_guards": len(instances),
+                "solar": len(sun_guards),
+                "lunar": len(moon_guards),
+            },
             rule="Solar doryphory: planets rising before the Sun (oriental, within 30°, not combust <8°). Lunar doryphory: planets setting after the Moon (occidental, within 30°). Co-presence in the same sign also qualifies.",
             source="Porphyry, Introduction to the Tetrabiblos; Firmicus Maternus, Mathesis",
             calculation=f"Found {len(sun_guards)} solar bodyguard(s), {len(moon_guards)} lunar bodyguard(s).",
             result=f"{len(instances)} total bodyguards",
-            notes="Doryphory dramatically elevates natal eminence. More guards = higher social standing potential." if instances else "No bodyguards found — native lacks doryphory support.",
+            notes=(
+                "Doryphory dramatically elevates natal eminence. More guards = higher social standing potential."
+                if instances
+                else "No bodyguards found — native lacks doryphory support."
+            ),
         )
 
         for inst in instances:
             trace.add(
                 category=CAT_ACCIDENTAL,
                 technique=f"Bodyguard: {inst.planet.value}",
-                inputs={"planet": inst.planet.value, "luminary": inst.related_luminary, "type": inst.type},
+                inputs={
+                    "planet": inst.planet.value,
+                    "luminary": inst.related_luminary,
+                    "type": inst.type,
+                },
                 rule=f"{inst.type} doryphory relative to the {inst.related_luminary}.",
                 source="Porphyry; Firmicus Maternus",
                 calculation=f"{inst.planet.value} acts as {inst.type} bodyguard to the {inst.related_luminary}.",
@@ -1034,7 +1186,15 @@ def _trace_dodecatemoria(trace: ComputationTrace, chart: Chart):
         )
 
         # Individual planet dodecatemoria
-        traditional_names = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]
+        traditional_names = [
+            "Sun",
+            "Moon",
+            "Mercury",
+            "Venus",
+            "Mars",
+            "Jupiter",
+            "Saturn",
+        ]
         for pname in traditional_names:
             if pname not in data:
                 continue
@@ -1044,10 +1204,19 @@ def _trace_dodecatemoria(trace: ComputationTrace, chart: Chart):
             trace.add(
                 category=CAT_DIGNITY,
                 technique=f"Dodecatemorion: {pname}",
-                inputs={"natal_longitude": natal_pos, "degree_in_sign": round(planet_obj.longitude % 30, 2) if planet_obj else "?"},
+                inputs={
+                    "natal_longitude": natal_pos,
+                    "degree_in_sign": (
+                        round(planet_obj.longitude % 30, 2) if planet_obj else "?"
+                    ),
+                },
                 rule="Sign_Start + (Degree-in-Sign × 12) mod 360.",
                 source="Vettius Valens, Anthology",
-                calculation=f"{natal_pos} → degree-in-sign = {planet_obj.longitude % 30:.2f}° × 12 = {(planet_obj.longitude % 30) * 12:.2f}° arc → projected from sign start to {_fmt(d['longitude'])} in {d['sign']}" if planet_obj else "?",
+                calculation=(
+                    f"{natal_pos} → degree-in-sign = {planet_obj.longitude % 30:.2f}° × 12 = {(planet_obj.longitude % 30) * 12:.2f}° arc → projected from sign start to {_fmt(d['longitude'])} in {d['sign']}"
+                    if planet_obj
+                    else "?"
+                ),
                 result=f"{d['sign']} (ruler: {d['ruler']}, term: {d.get('term_ruler', '?')})",
             )
     except Exception as e:

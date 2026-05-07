@@ -1,0 +1,126 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - text: ✦ Want to discover YOUR chart?
+    - link "Get your full natal chart reading →" [ref=e3] [cursor=pointer]:
+      - /url: /#get-reading
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - heading "ABOUT Traditional Astrology" [level=1] [ref=e7]
+      - paragraph [ref=e8]: A disciplined, source-anchored system for traditional astrological judgment.
+      - navigation "Main navigation" [ref=e9]:
+        - link "✦ Traditional Astrology" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e11]: ✦
+          - generic [ref=e12]: Traditional Astrology
+        - button "Toggle menu" [ref=e13] [cursor=pointer]
+    - generic [ref=e15]:
+      - heading "THE OUTSIDER STRATEGY" [level=2] [ref=e16]
+      - generic [ref=e17]:
+        - paragraph [ref=e18]: I am not an astrologer. I am a Systems Architect who reverse-engineered their rules.
+        - paragraph [ref=e19]: People trust "Outsiders" who audit complex systems more than they trust the insiders. The Astrologer's weakness is that they are "too close" to the material. They "feel" the chart.
+        - paragraph [ref=e20]:
+          - text: My strength is that I don't care about the feelings. I care about the
+          - strong [ref=e21]: Rule Validity
+          - text: .
+        - paragraph [ref=e22]: I approached this as a data ingestion problem. I analyzed 2,000 years of texts (Valens, Lilly, Bonatti) that most ignore, and I built this engine to enforce those rules strictly.
+        - paragraph [ref=e23]: The result is this engine. It performs the rigorous "Forensic Audit" calculations—Sect, Almuten, Mutual Receptions—without bias.
+        - paragraph [ref=e24]: I didn't write the astrology; I compiled it.
+      - paragraph [ref=e26]: "\"I used to be a hard materialist. I believed you couldn't predict a damn thing based on a birth chart. Then I ran my own data through this engine. It identified me as a 'Forensic Auditor'—a systems architect building complex logic in the dark. It described my life better than I could. I don't ask you to believe in astrology. I ask you to trust the audit.\""
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - heading "MISSION" [level=2] [ref=e31]
+        - paragraph [ref=e32]: Traditional Astrology exists to restore technical, auditable astrology. Every delineation is grounded in a classical source, calculated through transparent rules, and delivered with explicit limitations. The goal is not to inspire or console, but to judge natal promise with disciplined technique.
+      - generic [ref=e33]:
+        - strong [ref=e34]: "Core commitments:"
+        - text: classical sources, reproducible rules, and zero modern psychological overlay.
+    - generic [ref=e35]:
+      - heading "LINEAGE & AUTHORITY" [level=2] [ref=e36]
+      - paragraph [ref=e37]: We follow the transmission of traditional astrology from the Hellenistic era, through Arabic synthesis, to Renaissance practice. This lineage defines the interpretive rules used in every report.
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - heading "Classical Canon" [level=4] [ref=e40]
+          - paragraph [ref=e41]: "Ptolemy, Dorotheus, Valens, and Firmicus supply foundational doctrine: sect, essential dignity, and topic delineation."
+        - generic [ref=e42]:
+          - heading "Medieval Transmission" [level=4] [ref=e43]
+          - paragraph [ref=e44]: Abu Ma'shar, Al-Biruni, and Bonatti preserve and refine technique, especially in judgment and timing.
+        - generic [ref=e45]:
+          - heading "Renaissance Discipline" [level=4] [ref=e46]
+          - paragraph [ref=e47]: Lilly and his contemporaries formalize rules for planetary strength, practical judgment, and predictive rigor.
+    - generic [ref=e48]:
+      - heading "BOUNDARIES & ETHICS" [level=2] [ref=e49]
+      - paragraph [ref=e50]: We explicitly exclude categories that do not belong to traditional doctrine or professional responsibility.
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - heading "No Therapy Framing" [level=4] [ref=e53]
+          - paragraph [ref=e54]: We do not provide counseling or psychological guidance. Reports are technical judgments, not self-help narratives.
+        - generic [ref=e55]:
+          - heading "No Professional Substitution" [level=4] [ref=e56]
+          - paragraph [ref=e57]: Medical, legal, or financial outcomes are not guaranteed or advised. Any historical medical material is clearly labeled.
+        - generic [ref=e58]:
+          - heading "Transparent Limits" [level=4] [ref=e59]
+          - paragraph [ref=e60]: If data is missing, we document what cannot be judged. We do not invent interpretations.
+    - generic [ref=e61]:
+      - heading "CREDIBILITY SIGNALS" [level=2] [ref=e62]
+      - paragraph [ref=e63]: Clients receive a chain of reasoning with every report. These signals reinforce accountability and method discipline.
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - heading "Rule Ledger" [level=4] [ref=e66]
+          - paragraph [ref=e67]: Each output is paired with the underlying rule set so you can audit the logic.
+        - generic [ref=e68]:
+          - heading "Source Citations" [level=4] [ref=e69]
+          - paragraph [ref=e70]: Key techniques are traceable to named texts in the Methodology library.
+        - generic [ref=e71]:
+          - heading "Explicit Scope" [level=4] [ref=e72]
+          - paragraph [ref=e73]: We state what is within astrological judgment and what is excluded.
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - heading "Product" [level=3] [ref=e77]
+          - list [ref=e78]:
+            - listitem [ref=e79]:
+              - link "Get a Reading" [ref=e80] [cursor=pointer]:
+                - /url: /#get-reading
+            - listitem [ref=e81]:
+              - link "Techniques" [ref=e82] [cursor=pointer]:
+                - /url: techniques.html
+            - listitem [ref=e83]:
+              - link "Pricing" [ref=e84] [cursor=pointer]:
+                - /url: index.html#pricing
+        - generic [ref=e85]:
+          - heading "Resources" [level=3] [ref=e86]
+          - list [ref=e87]:
+            - listitem [ref=e88]:
+              - link "FAQ" [ref=e89] [cursor=pointer]:
+                - /url: faq.html
+            - listitem [ref=e90]:
+              - link "Blog" [ref=e91] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e92]:
+              - link "About" [ref=e93] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e94]:
+              - link "Support" [ref=e95] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+        - generic [ref=e96]:
+          - heading "Legal" [level=3] [ref=e97]
+          - list [ref=e98]:
+            - listitem [ref=e99]:
+              - link "Privacy Policy" [ref=e100] [cursor=pointer]:
+                - /url: privacy.html
+            - listitem [ref=e101]:
+              - link "Terms of Service" [ref=e102] [cursor=pointer]:
+                - /url: terms.html
+        - generic [ref=e103]:
+          - heading "Contact" [level=3] [ref=e104]
+          - list [ref=e105]:
+            - listitem [ref=e106]:
+              - link "Support" [ref=e107] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+            - listitem [ref=e108]:
+              - link "Report a Bug" [ref=e109] [cursor=pointer]:
+                - /url: mailto:bugs@traditional-astrology.com
+      - generic [ref=e110]:
+        - paragraph [ref=e111]: © 2026 Traditional Astrology. All rights reserved.
+        - paragraph [ref=e112]: For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.

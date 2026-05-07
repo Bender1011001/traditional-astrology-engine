@@ -1,5 +1,5 @@
-from typing import Tuple
-from .models import Planet, PlanetName, Sect, Sign, Chart
+
+from .models import Chart, Planet, PlanetName, Sect, Sign
 
 
 def format_longitude(lon: float) -> dict:
@@ -39,6 +39,7 @@ def format_longitude(lon: float) -> dict:
         "string": s,
     }
 
+
 def calculate_sect(sun_altitude: float) -> Sect:
     return Sect.DAY if sun_altitude > 0 else Sect.NIGHT
 
@@ -49,25 +50,62 @@ def calculate_lunar_phase(sun_lon: float, moon_lon: float) -> tuple[str, str]:
     Based on Dane Rudhyar's Cycle of Manifestation.
     """
     diff = (moon_lon - sun_lon) % 360
-    
+
     phases = [
-        (45, "New Moon", "The Primitive/The Initiator. Subjective, impulsive, seeding new impulses."),
-        (90, "Crescent", "The Breakthrough/The Mobilizer. Struggle to manifest new forms against the past."),
-        (135, "First Quarter", "The Builder/The Crisis-Actor. 'Crisis in Action' - building new structures."),
-        (180, "Gibbous", "The Perfector/The Analyst. Refining and evaluating the work; seeking growth."),
-        (225, "Full Moon", "The Realizer/The Objectifier. Objectivity, Relationship, and Revelation."),
-        (270, "Disseminating", "The Teacher/The Demonstrator. Sharing realized vision and values."),
-        (315, "Last Quarter", "The Revisor/The Crisis-Thinker. 'Crisis in Consciousness' - re-evaluating beliefs."),
-        (360, "Balsamic", "The Prophet/The Seed-Man. Introverted, Future-Oriented, Distillation and Release.")
+        (
+            45,
+            "New Moon",
+            "The Primitive/The Initiator. Subjective, impulsive, seeding new impulses.",
+        ),
+        (
+            90,
+            "Crescent",
+            "The Breakthrough/The Mobilizer. Struggle to manifest new forms against the past.",
+        ),
+        (
+            135,
+            "First Quarter",
+            "The Builder/The Crisis-Actor. 'Crisis in Action' - building new structures.",
+        ),
+        (
+            180,
+            "Gibbous",
+            "The Perfector/The Analyst. Refining and evaluating the work; seeking growth.",
+        ),
+        (
+            225,
+            "Full Moon",
+            "The Realizer/The Objectifier. Objectivity, Relationship, and Revelation.",
+        ),
+        (
+            270,
+            "Disseminating",
+            "The Teacher/The Demonstrator. Sharing realized vision and values.",
+        ),
+        (
+            315,
+            "Last Quarter",
+            "The Revisor/The Crisis-Thinker. 'Crisis in Consciousness' - re-evaluating beliefs.",
+        ),
+        (
+            360,
+            "Balsamic",
+            "The Prophet/The Seed-Man. Introverted, Future-Oriented, Distillation and Release.",
+        ),
     ]
-    
+
     for limit, name, profile in phases:
         if diff < limit:
             return name, profile
-            
-    return "New Moon", "The Primitive/The Initiator. Subjective, impulsive, seeding new impulses."
+
+    return (
+        "New Moon",
+        "The Primitive/The Initiator. Subjective, impulsive, seeding new impulses.",
+    )
+
 
 import swisseph as swe
+
 
 def calculate_prenatal_syzygy(jd_utc: float) -> tuple[float, str]:
     """
@@ -112,7 +150,9 @@ def calculate_prenatal_syzygy_details(jd_utc: float) -> dict:
         next_type = "New"
         next_target_angle = 0.0
 
-    def _solve_syzygy(t_guess: float, target_angle: float) -> tuple[float, float, float]:
+    def _solve_syzygy(
+        t_guess: float, target_angle: float
+    ) -> tuple[float, float, float]:
         """
         Newton-Raphson solve for (Moon-Sun) phase == target_angle.
         Returns (jd_ut, sun_lon, moon_lon).
@@ -139,7 +179,7 @@ def calculate_prenatal_syzygy_details(jd_utc: float) -> dict:
             v_rel = moon_spd - sun_spd
             if abs(v_rel) < 1e-6:
                 break
-            t -= (delta / v_rel)
+            t -= delta / v_rel
         return (t, sun_lon, moon_lon)
 
     # 2) Prenatal solve: back up by an approximate amount based on the current phase offset.
@@ -170,13 +210,15 @@ def calculate_prenatal_syzygy_details(jd_utc: float) -> dict:
         "note": "Computed by Newton-Raphson solve for (Moon-Sun) phase == 0°/180° (syzygy) preceding birth; also includes the next syzygy after birth for phase disambiguation.",
     }
 
+
 def calculate_solar_status(planet: Planet, sun: Planet) -> str:
     # The Sun cannot be "cazimi" (it is the reference body).
     if planet.name == PlanetName.SUN:
         return "SUN"
 
     diff = abs(planet.longitude - sun.longitude)
-    if diff > 180: diff = 360 - diff
+    if diff > 180:
+        diff = 360 - diff
 
     # Moon: treat near-Sun condition as lunation/visibility, not generic combustion doctrine.
     if planet.name == PlanetName.MOON:
@@ -186,7 +228,7 @@ def calculate_solar_status(planet: Planet, sun: Planet) -> str:
             return "MOON_UNDER_BEAMS"
         return "FREE"
 
-    if diff < 0.28: # 17 minutes
+    if diff < 0.28:  # 17 minutes
         return "CAZIMI"
     if diff < 8.0:
         return "COMBUST"
@@ -194,32 +236,37 @@ def calculate_solar_status(planet: Planet, sun: Planet) -> str:
         return "UNDER_BEAMS"
     return "FREE"
 
+
 def is_in_via_combusta(longitude: float) -> bool:
     """
     Via Combusta (The Burning Way): 15° Libra to 15° Scorpio (195° to 225°).
     """
     return 195.0 <= longitude <= 225.0
 
+
 def is_besieged(planet: Planet, chart: Chart) -> bool:
     mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
     saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
-    
+
     if not mars or not saturn or planet.name in [PlanetName.MARS, PlanetName.SATURN]:
         return False
-        
+
     def get_shortest_arc(p1_lon, p2_lon):
         diff = p1_lon - p2_lon
-        if diff > 180: diff -= 360
-        if diff < -180: diff += 360
+        if diff > 180:
+            diff -= 360
+        if diff < -180:
+            diff += 360
         return diff
-    
+
     dist_mars = get_shortest_arc(planet.longitude, mars.longitude)
     dist_saturn = get_shortest_arc(planet.longitude, saturn.longitude)
-    
+
     # Check if between
     if (dist_mars * dist_saturn < 0) and (abs(dist_mars) + abs(dist_saturn) < 15):
         return True
     return False
+
 
 def is_void_of_course(moon_lon: float, chart_planets: list[Planet]) -> bool:
     """
@@ -232,7 +279,9 @@ def is_void_of_course(moon_lon: float, chart_planets: list[Planet]) -> bool:
     if not moon:
         return True  # No Moon data — treat as VoC for safety
 
-    moon_speed = moon.speed if moon.speed is not None else 13.0  # avg daily motion fallback
+    moon_speed = (
+        moon.speed if moon.speed is not None else 13.0
+    )  # avg daily motion fallback
     moon_pos_in_sign = moon_lon % 30
     dist_to_end = 30 - moon_pos_in_sign
 
@@ -256,7 +305,7 @@ def is_void_of_course(moon_lon: float, chart_planets: list[Planet]) -> bool:
                     # Calculate true intersection offset based on relative velocities
                     time_to_perfect = dist_to_target / closing_speed
                     moon_travel_dist = time_to_perfect * moon_speed
-                    
+
                     # Aspect must mathematically perfect before the Moon leaves its current sign
                     if moon_travel_dist < dist_to_end:
                         # Moon is applying — NOT void of course

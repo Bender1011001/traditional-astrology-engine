@@ -1,0 +1,52 @@
+{
+  "question": "When is the next best time to submit my patent application?",
+  "querent_sign": "Leo",
+  "querent_ruler": "Sun",
+  "quesited_house": 7,
+  "quesited_label": "Relationships/Other",
+  "quesited_sign": "Aquarius",
+  "quesited_ruler": "Saturn",
+  "conditions": [
+    {
+      "condition": "Reception",
+      "giver": "Saturn",
+      "receiver": "Sun",
+      "by": [
+        "Exaltation",
+        "Triplicity"
+      ],
+      "status": "Active"
+    },
+    {
+      "condition": "Regretful Perfection",
+      "aspect": "Opposition",
+      "details": "Applying by Opposition. The matter perfects, but immediately falls apart or causes bitter regret. [Moon as Co-Significator]",
+      "status": "Active"
+    },
+    {
+      "condition": "Prohibition",
+      "intervener": "Venus",
+      "target": "Moon",
+      "aspect": "Trine",
+      "status": "Active",
+      "details": "Venus completes Trine with Moon before Moon completes Opposition with Saturn [Moon as Co-Significator]"
+    },
+    {
+      "condition": "Reception",
+      "giver": "Moon",
+      "receiver": "Saturn",
+      "by": [
+        "Exaltation",
+        "Triplicity",
+        "Term"
+      ],
+      "status": "Active",
+      "details": " [Moon as Co-Significator]"
+    }
+  ],
+  "strictures": [],
+  "verdict": "Unclear",
+  "verdict_weight": "Mixed",
+  "strength_score": 5,
+  "total_score": 1
+}

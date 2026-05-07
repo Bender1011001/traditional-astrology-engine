@@ -1,0 +1,69 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e8]:
+    - link "✦ Traditional Astrology" [ref=e9] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e10]: ✦
+      - generic [ref=e11]: Traditional Astrology
+    - generic [ref=e12]:
+      - link "Get Your Reading" [ref=e13] [cursor=pointer]:
+        - /url: /#get-reading
+      - link "Horary Oracle" [ref=e14] [cursor=pointer]:
+        - /url: /horary.html
+      - link "Daily Navigator" [ref=e15] [cursor=pointer]:
+        - /url: /daily.html
+      - link "How It Works" [ref=e16] [cursor=pointer]:
+        - /url: /#how-it-works
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - paragraph [ref=e19]: Daily Navigator · Personal Cosmic Briefing
+      - heading "What Do the Stars Say About Your Day?" [level=1] [ref=e20]:
+        - text: What Do the Stars
+        - text: Say About
+        - emphasis [ref=e21]: Your Day?
+      - paragraph [ref=e22]: Enter your birth details and we'll synthesize all classical timing techniques — profections, firdaria, zodiacal releasing, and transits — into one actionable daily briefing.
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e27]: Date of Birth
+          - textbox "Date of Birth" [ref=e28]
+        - generic [ref=e29]:
+          - generic [ref=e30]: Time of Birth
+          - textbox "Time of Birth" [ref=e31]
+        - generic [ref=e32]:
+          - generic [ref=e33]: City
+          - textbox "City" [ref=e34]:
+            - /placeholder: e.g. Los Angeles
+        - generic [ref=e35]:
+          - generic [ref=e36]: State / Country
+          - textbox "State / Country" [ref=e37]:
+            - /placeholder: e.g. CA
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: Briefing Date
+          - textbox "Briefing Date" [ref=e41]: 2026-05-05
+        - button "Today" [ref=e42] [cursor=pointer]
+      - button "✦ Get Briefing" [ref=e43] [cursor=pointer]:
+        - generic [ref=e44]: ✦ Get Briefing
+      - paragraph [ref=e45]: Free — no account required. Historical use only.
+  - contentinfo [ref=e46]:
+    - generic [ref=e47]:
+      - generic [ref=e48]: ✦ Traditional Astrology
+      - generic [ref=e49]:
+        - link "Privacy" [ref=e50] [cursor=pointer]:
+          - /url: privacy.html
+        - link "Terms" [ref=e51] [cursor=pointer]:
+          - /url: terms.html
+        - link "Refunds" [ref=e52] [cursor=pointer]:
+          - /url: refunds.html
+        - link "Support" [ref=e53] [cursor=pointer]:
+          - /url: mailto:support@traditional-astrology.com
+      - paragraph [ref=e54]:
+        - text: © 2026 Traditional Astrology. All rights reserved.
+        - text: For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.
+  - generic [ref=e56]:
+    - generic [ref=e58]:
+      - generic [ref=e59]: Install Traditional Astrology
+      - generic [ref=e60]: Add to home screen for quick access
+    - generic [ref=e61]:
+      - button "Install" [ref=e62] [cursor=pointer]
+      - button "Dismiss" [ref=e63] [cursor=pointer]: ×

@@ -1,18 +1,14 @@
 """Tests for calculations.py — core utility functions."""
-from src.engine.calculations import (
-    format_longitude,
-    calculate_sect,
-    calculate_lunar_phase,
-    calculate_solar_status,
-    is_in_via_combusta,
-    is_besieged,
-    is_void_of_course,
-    calculate_prenatal_syzygy,
-)
-from src.engine.models import Planet, PlanetName, Sect, Chart
 
+from src.engine.calculations import (calculate_lunar_phase,
+                                     calculate_prenatal_syzygy, calculate_sect,
+                                     calculate_solar_status, format_longitude,
+                                     is_besieged, is_in_via_combusta,
+                                     is_void_of_course)
+from src.engine.models import Chart, Planet, PlanetName, Sect
 
 # ─── format_longitude ────────────────────────────────────────────────────────
+
 
 def test_format_longitude_aries_zero():
     result = format_longitude(0.0)
@@ -44,11 +40,25 @@ def test_format_longitude_negative():
 
 def test_format_longitude_each_sign():
     """Each 30° boundary should map to the next sign."""
-    signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+    signs = [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
+    ]
     for i, expected_sign in enumerate(signs):
         result = format_longitude(i * 30.0 + 15.0)
-        assert result["sign"] == expected_sign, f"At {i*30+15}° expected {expected_sign}, got {result['sign']}"
+        assert (
+            result["sign"] == expected_sign
+        ), f"At {i*30+15}° expected {expected_sign}, got {result['sign']}"
 
 
 def test_format_longitude_dms_seconds_rollover():
@@ -60,6 +70,7 @@ def test_format_longitude_dms_seconds_rollover():
 
 
 # ─── calculate_sect ──────────────────────────────────────────────────────────
+
 
 def test_calculate_sect_day():
     assert calculate_sect(10.0) == Sect.DAY
@@ -75,6 +86,7 @@ def test_calculate_sect_horizon():
 
 
 # ─── calculate_lunar_phase ───────────────────────────────────────────────────
+
 
 def test_lunar_phase_new_moon():
     name, profile = calculate_lunar_phase(0.0, 10.0)
@@ -104,10 +116,13 @@ def test_lunar_phase_all_phases():
     for diff in range(0, 360, 5):
         name, _ = calculate_lunar_phase(0.0, float(diff))
         phases_found.add(name)
-    assert len(phases_found) == 8, f"Only found {len(phases_found)} phases: {phases_found}"
+    assert (
+        len(phases_found) == 8
+    ), f"Only found {len(phases_found)} phases: {phases_found}"
 
 
 # ─── calculate_solar_status ──────────────────────────────────────────────────
+
 
 def test_solar_status_sun_is_sun():
     sun = Planet(name=PlanetName.SUN, longitude=100.0, speed=1.0)
@@ -158,6 +173,7 @@ def test_solar_status_moon_free():
 
 # ─── is_in_via_combusta ─────────────────────────────────────────────────────
 
+
 def test_via_combusta_inside():
     assert is_in_via_combusta(210.0) is True
 
@@ -177,55 +193,63 @@ def test_via_combusta_outside():
 
 # ─── is_besieged ─────────────────────────────────────────────────────────────
 
+
 def _make_chart(positions, asc=0.0, sun_alt=10.0):
     planets = [Planet(name=n, longitude=lon, speed=1.0) for n, lon in positions.items()]
     return Chart(sun_altitude=sun_alt, planets=planets, ascendant=asc, mc=270.0)
 
 
 def test_besieged_between_malefics():
-    chart = _make_chart({
-        PlanetName.SUN: 100.0,
-        PlanetName.MOON: 105.0,
-        PlanetName.MARS: 100.0,
-        PlanetName.SATURN: 110.0,
-        PlanetName.MERCURY: 150.0,
-        PlanetName.VENUS: 200.0,
-        PlanetName.JUPITER: 300.0,
-    })
+    chart = _make_chart(
+        {
+            PlanetName.SUN: 100.0,
+            PlanetName.MOON: 105.0,
+            PlanetName.MARS: 100.0,
+            PlanetName.SATURN: 110.0,
+            PlanetName.MERCURY: 150.0,
+            PlanetName.VENUS: 200.0,
+            PlanetName.JUPITER: 300.0,
+        }
+    )
     moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
     assert is_besieged(moon, chart) is True
 
 
 def test_not_besieged_too_far():
-    chart = _make_chart({
-        PlanetName.SUN: 100.0,
-        PlanetName.MOON: 105.0,
-        PlanetName.MARS: 50.0,
-        PlanetName.SATURN: 200.0,
-        PlanetName.MERCURY: 150.0,
-        PlanetName.VENUS: 250.0,
-        PlanetName.JUPITER: 300.0,
-    })
+    chart = _make_chart(
+        {
+            PlanetName.SUN: 100.0,
+            PlanetName.MOON: 105.0,
+            PlanetName.MARS: 50.0,
+            PlanetName.SATURN: 200.0,
+            PlanetName.MERCURY: 150.0,
+            PlanetName.VENUS: 250.0,
+            PlanetName.JUPITER: 300.0,
+        }
+    )
     moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
     assert is_besieged(moon, chart) is False
 
 
 def test_mars_cannot_be_besieged():
     """Mars itself should never be considered besieged."""
-    chart = _make_chart({
-        PlanetName.SUN: 100.0,
-        PlanetName.MOON: 200.0,
-        PlanetName.MARS: 105.0,
-        PlanetName.SATURN: 110.0,
-        PlanetName.MERCURY: 150.0,
-        PlanetName.VENUS: 250.0,
-        PlanetName.JUPITER: 300.0,
-    })
+    chart = _make_chart(
+        {
+            PlanetName.SUN: 100.0,
+            PlanetName.MOON: 200.0,
+            PlanetName.MARS: 105.0,
+            PlanetName.SATURN: 110.0,
+            PlanetName.MERCURY: 150.0,
+            PlanetName.VENUS: 250.0,
+            PlanetName.JUPITER: 300.0,
+        }
+    )
     mars = next(p for p in chart.planets if p.name == PlanetName.MARS)
     assert is_besieged(mars, chart) is False
 
 
 # ─── is_void_of_course ──────────────────────────────────────────────────────
+
 
 def test_voc_with_applying_aspect():
     """Moon with an applying aspect should NOT be void of course."""
@@ -261,9 +285,11 @@ def test_voc_no_moon():
 
 # ─── calculate_prenatal_syzygy ───────────────────────────────────────────────
 
+
 def test_prenatal_syzygy_returns_tuple():
     """Should return (longitude, type) tuple."""
     import swisseph as swe
+
     # Use a known Julian Day (Jan 1, 2000 noon)
     jd = swe.julday(2000, 1, 1, 12.0)
     lon, syz_type = calculate_prenatal_syzygy(jd)

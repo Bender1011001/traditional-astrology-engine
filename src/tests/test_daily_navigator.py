@@ -1,8 +1,10 @@
 """
 Tests for the Daily Navigator engine and API endpoint.
 """
-import pytest
+
 from datetime import datetime
+
+
 from src.engine.daily_navigator import DailyNavigator
 from src.engine.models import Chart, Planet, PlanetName
 
@@ -38,14 +40,26 @@ class TestDailyNavigatorEngine:
         birth_jd = 2424319.895833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
 
         expected_keys = {
-            "date", "display_date", "profections", "firdaria",
-            "zodiacal_releasing", "transits", "moon", "epitasis",
-            "planetary_day", "recommendations", "forecast_summary",
+            "date",
+            "display_date",
+            "profections",
+            "firdaria",
+            "zodiacal_releasing",
+            "transits",
+            "moon",
+            "epitasis",
+            "planetary_day",
+            "recommendations",
+            "forecast_summary",
         }
-        assert expected_keys.issubset(set(briefing.keys())), f"Missing keys: {expected_keys - set(briefing.keys())}"
+        assert expected_keys.issubset(
+            set(briefing.keys())
+        ), f"Missing keys: {expected_keys - set(briefing.keys())}"
 
     def test_profections_block_structure(self):
         chart = _make_test_chart()
@@ -53,7 +67,9 @@ class TestDailyNavigatorEngine:
         birth_jd = 2424319.895833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         prof = briefing["profections"]
 
         assert "age" in prof
@@ -70,7 +86,9 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         fir = briefing["firdaria"]
         assert "Major Period" in fir or "error" in fir
 
@@ -80,7 +98,9 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         epi = briefing["epitasis"]
         assert "active" in epi
         assert isinstance(epi["active"], bool)
@@ -92,7 +112,9 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         rec = briefing["recommendations"]
         assert "primary_time_lord" in rec
         assert "color" in rec
@@ -108,9 +130,13 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         assert isinstance(briefing["forecast_summary"], str)
-        assert len(briefing["forecast_summary"]) > 50  # Should be a meaningful paragraph
+        assert (
+            len(briefing["forecast_summary"]) > 50
+        )  # Should be a meaningful paragraph
 
     def test_transits_are_list(self):
         chart = _make_test_chart()
@@ -118,7 +144,9 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         assert isinstance(briefing["transits"], list)
 
     def test_planetary_day_block(self):
@@ -127,7 +155,9 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         pd = briefing["planetary_day"]
         assert "weekday" in pd
         assert "ruler" in pd
@@ -139,7 +169,9 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         moon = briefing["moon"]
         assert "sign" in moon
         assert "phase" in moon
@@ -168,8 +200,10 @@ class TestDailyNavigatorEngine:
         assert briefing_a["date"] == "2026-03-20"
         assert briefing_b["date"] == "2026-03-25"
         # Moon should differ across 5 days (it moves ~13°/day)
-        assert briefing_a["moon"]["sign"] != briefing_b["moon"]["sign"] or \
-               briefing_a["moon"]["degree"] != briefing_b["moon"]["degree"]
+        assert (
+            briefing_a["moon"]["sign"] != briefing_b["moon"]["sign"]
+            or briefing_a["moon"]["degree"] != briefing_b["moon"]["degree"]
+        )
 
     def test_recommendations_urgency_valid(self):
         """Urgency must be one of the expected severity levels."""
@@ -178,6 +212,8 @@ class TestDailyNavigatorEngine:
         birth_jd = 2448090.0833
         target_date = datetime(2026, 3, 23)
 
-        briefing = DailyNavigator.generate_briefing(chart, birth_dt, birth_jd, target_date)
+        briefing = DailyNavigator.generate_briefing(
+            chart, birth_dt, birth_jd, target_date
+        )
         rec = briefing["recommendations"]
         assert rec["urgency"] in ("low", "moderate", "high", "critical")

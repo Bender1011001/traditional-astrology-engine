@@ -1,13 +1,9 @@
-import os
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
+
 
 def send_b2b_welcome_email(to_email, tier, api_key):
     """Sends a welcome email to B2B users with their API Key and Quick Start guide."""
     subject = f"Welcome to Traditional Astrology | {tier.capitalize()} Tier Activated"
-    
+
     body = f"""
     Welcome to the Practice,
     
@@ -26,16 +22,17 @@ def send_b2b_welcome_email(to_email, tier, api_key):
     
     Traditional Astrology
     """
-    
+
     _send_email(to_email, subject, body)
+
 
 def get_quota(tier):
     quotas = {"practitioner": 100, "studio": "Unlimited"}
     return quotas.get(tier, "N/A")
+
 
 def _send_email(to_email, subject, body, attachment_path=None):
     # This is a stub for the actual SMTP logic - User will need to provide creds
     print(f"DEBUG: Sending email to {to_email}")
     print(f"Subject: {subject}")
     # Logic for SMTP would go here
-    pass

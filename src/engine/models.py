@@ -1,10 +1,12 @@
 from dataclasses import dataclass
-from enum import Enum, auto
+from enum import Enum
 from typing import Dict, List, Optional
+
 
 class Sect(Enum):
     DAY = "Day"
     NIGHT = "Night"
+
 
 class PlanetName(Enum):
     SUN = "Sun"
@@ -20,26 +22,29 @@ class PlanetName(Enum):
     NORTH_NODE = "North_Node"
     SOUTH_NODE = "South_Node"
 
+
 class PlanetaryPhase(Enum):
     UNDER_BEAMS = "Under the Beams"
     COMBUST = "Combust"
     CAZIMI = "Cazimi"
     HELIACAL_RISING = "Heliacal Rising"
     HELIACAL_SETTING = "Heliacal Setting"
-    MORNING_FIRST = "Morning First" # Same as heliacal rising for superiors
+    MORNING_FIRST = "Morning First"  # Same as heliacal rising for superiors
     EVENING_FIRST = "Evening First"
-    EVENING_LAST = "Evening Last" # Same as heliacal setting for superiors
+    EVENING_LAST = "Evening Last"  # Same as heliacal setting for superiors
     MORNING_LAST = "Morning Last"
     STATION_RETROGRADE = "Station Retrograde"
     STATION_DIRECT = "Station Direct"
-    OPPOSITION = "Opposition" # Acronychal Rising
+    OPPOSITION = "Opposition"  # Acronychal Rising
     FREE = "Free"
+
 
 class SolarProximity(Enum):
     CAZIMI = "Cazimi"
     COMBUST = "Combust"
     UNDER_BEAMS = "Under the Beams"
     FREE = "Free"
+
 
 class Sign(Enum):
     ARIES = "Aries"
@@ -55,6 +60,7 @@ class Sign(Enum):
     AQUARIUS = "Aquarius"
     PISCES = "Pisces"
 
+
 @dataclass
 class Planet:
     name: PlanetName
@@ -62,19 +68,19 @@ class Planet:
     latitude: float = 0.0
     speed: float = 0.0
     altitude: float = 0.0
-    
+
     # Phasis Data
     phase: Optional[PlanetaryPhase] = None
     solar_proximity: Optional[SolarProximity] = None
     is_oriental: bool = False
     in_chariot: bool = False
     is_visible: bool = True
-    
+
     @property
     def sign(self) -> Sign:
         index = int(self.longitude / 30) % 12
         return list(Sign)[index]
-    
+
     @property
     def degree_in_sign(self) -> float:
         return self.longitude % 30
@@ -83,19 +89,21 @@ class Planet:
     def is_retrograde(self) -> bool:
         return self.speed < 0
 
+
 @dataclass
 class Chart:
-    sun_altitude: float # Degrees above/below horizon
+    sun_altitude: float  # Degrees above/below horizon
     planets: List[Planet]
-    ascendant: float # 0-360
+    ascendant: float  # 0-360
     mc: float = 0.0
-    north_node: float = 0.0 
+    north_node: float = 0.0
     south_node: float = 0.0
     geo_lat: Optional[float] = None
     geo_lon: Optional[float] = None
     jd: Optional[float] = None
     houses: Optional[Dict[int, float]] = None
     house_system: Optional[str] = None
+
 
 class LotName(Enum):
     FORTUNE = "Fortune"

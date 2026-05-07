@@ -1,6 +1,8 @@
 from fastapi import APIRouter
-from src.api.v1.endpoints import charts, synastry, mundane, telemetry, forensic, billing, developer, owner, meta
+
 import src.api.v1.endpoints.premium as premium_endpoint
+from src.api.v1.endpoints import (billing, charts, developer, forensic, meta,
+                                  mundane, owner, synastry, telemetry)
 
 api_router = APIRouter()
 
@@ -16,16 +18,21 @@ api_router.include_router(meta.router, tags=["meta"])
 api_router.include_router(premium_endpoint.router, prefix="/premium", tags=["premium"])
 
 from src.api.v1.endpoints import guest_checkout
+
 api_router.include_router(guest_checkout.router, prefix="/guest", tags=["guest"])
 
 from src.api.v1.endpoints import auth
+
 api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
 
 from src.api.v1.endpoints import admin
+
 api_router.include_router(admin.router, prefix="/admin", tags=["admin"])
 
 from src.api.v1.endpoints import daily
+
 api_router.include_router(daily.router, prefix="/charts", tags=["daily-navigator"])
 
 from src.api.v1.endpoints import horary
+
 api_router.include_router(horary.router, tags=["horary"])

@@ -1,0 +1,207 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - text: ✦ Etsy seller? Start your free Practitioner trial —
+    - link "Try free for 7 days →" [ref=e3] [cursor=pointer]:
+      - /url: /signup.html?intent=practitioner
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=e5]:
+    - navigation "Main navigation" [ref=e8]:
+      - link "✦ AstroForge" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e10]: ✦
+        - generic [ref=e11]: AstroForge
+      - generic [ref=e12]:
+        - link "Get Your Reading" [ref=e13] [cursor=pointer]:
+          - /url: /#get-reading
+        - link "Horary Oracle" [ref=e14] [cursor=pointer]:
+          - /url: /horary.html
+        - link "Daily Navigator" [ref=e15] [cursor=pointer]:
+          - /url: /daily.html
+        - link "FAQ" [ref=e16] [cursor=pointer]:
+          - /url: /faq.html
+    - generic [ref=e17]:
+      - text: For Etsy Astrology Sellers & Independent Practitioners
+      - heading "The Astrology PDF Generator Built for Sellers Who Scale" [level=1] [ref=e18]:
+        - text: The
+        - emphasis [ref=e19]: Astrology PDF Generator
+        - text: Built for Sellers Who Scale
+      - paragraph [ref=e20]: Stop spending hours building readings by hand. Upload your client birth data as a CSV, download a ZIP of professional natal chart PDFs — one per client, ready to send.
+      - generic [ref=e21]:
+        - link "Start Free 7-Day Trial" [ref=e22] [cursor=pointer]:
+          - /url: /signup.html?intent=practitioner
+        - link "See a Sample PDF" [ref=e23] [cursor=pointer]:
+          - /url: /sample-reading.html
+      - paragraph [ref=e24]: No card required for trial · Practitioner plan $29/mo after
+    - separator [ref=e25]
+    - generic [ref=e26]:
+      - generic [ref=e27]: How It Works
+      - heading "CSV In. ZIP Out. Done." [level=2] [ref=e28]
+      - paragraph [ref=e29]: Three steps from client order to delivered PDF — no astrology software to install, no manual chart building, no copy-pasting.
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]: "01"
+          - heading "Upload Your Client CSV" [level=3] [ref=e33]
+          - paragraph [ref=e34]: Download our template, fill in client name, birth date, birth time, and city. Upload from your dashboard — handles up to 500 rows at once.
+        - generic [ref=e35]:
+          - generic [ref=e36]: "02"
+          - heading "We Calculate & Format" [level=3] [ref=e37]
+          - paragraph [ref=e38]: "AstroForge runs full traditional calculations for every client: planets, dignities, profections, lots, and a 10-year timing forecast."
+        - generic [ref=e39]:
+          - generic [ref=e40]: "03"
+          - heading "Download & Deliver" [level=3] [ref=e41]
+          - paragraph [ref=e42]: A ZIP of named PDFs arrives in seconds. Attach directly to Etsy order messages or email — zero extra formatting needed.
+    - separator [ref=e43]
+    - generic [ref=e44]:
+      - generic [ref=e45]: What's Included
+      - heading "What Each Natal Chart PDF Contains" [level=2] [ref=e46]
+      - paragraph [ref=e47]: Every generated PDF is a complete traditional birth chart reading — the same depth your clients would pay an astrologer hours to produce.
+      - generic [ref=e48]:
+        - generic [ref=e49]: All 7 classical planets — sign, house, degree
+        - generic [ref=e50]: Essential dignity scores (domicile, exaltation, detriment, fall)
+        - generic [ref=e51]: Sect analysis (day/night chart)
+        - generic [ref=e52]: Lot of Fortune & Lot of Spirit
+        - generic [ref=e53]: Almuten Figuris (chart ruler)
+        - generic [ref=e54]: Annual profection year & Lord of the Year
+        - generic [ref=e55]: Current Firdaria planetary period
+        - generic [ref=e56]: 10-year timing forecast
+        - generic [ref=e57]: Aspects & mutual receptions
+        - generic [ref=e58]: Personalized client name on every page
+      - paragraph [ref=e59]: "Average report length: 8–12 pages. Calculated from real astronomical data — not AI-generated text."
+    - separator [ref=e60]
+    - generic [ref=e61]:
+      - generic [ref=e62]: Features
+      - heading "Everything an Etsy Astrology Seller Needs" [level=2] [ref=e63]
+      - paragraph [ref=e64]: Built specifically for practitioners who generate readings at volume — not a generic astrology app with a bulk feature bolted on.
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e67]: 📄
+          - heading "Batch PDF Generator" [level=3] [ref=e68]
+          - paragraph [ref=e69]: Upload a CSV with up to 500 clients. Get a single ZIP of named PDFs within seconds. No per-report charges on the Practitioner plan.
+        - generic [ref=e70]:
+          - generic [ref=e71]: 🏷️
+          - heading "Client Labels & Tags" [level=3] [ref=e72]
+          - paragraph [ref=e73]: Tag saved charts by Etsy order number, client name, or custom label. Filter and find any chart instantly from your dashboard.
+        - generic [ref=e74]:
+          - generic [ref=e75]: 🔌
+          - heading "API Access" [level=3] [ref=e76]
+          - paragraph [ref=e77]: 100 API calls per day on Practitioner. Returns structured JSON for every calculation — integrate directly into your own tools or automations.
+        - generic [ref=e78]:
+          - generic [ref=e79]: ⚖️
+          - heading "Commercial License" [level=3] [ref=e80]
+          - paragraph [ref=e81]: Your Practitioner subscription includes a commercial use license. Sell the generated PDFs as digital products on Etsy, Gumroad, or your own site.
+        - generic [ref=e82]:
+          - generic [ref=e83]: 🔒
+          - heading "Client Data Privacy" [level=3] [ref=e84]
+          - paragraph [ref=e85]: Birth data is used only to generate the reading and stored securely under your account. Never sold or used for profiling.
+        - generic [ref=e86]:
+          - generic [ref=e87]: 📐
+          - heading "Traditional Accuracy" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Calculations use pre-1700s classical techniques — whole sign houses, essential dignities, sect. Not AI paraphrasing. Not modern psychological framing.
+    - separator [ref=e90]
+    - generic [ref=e91]:
+      - generic [ref=e92]: Pricing
+      - heading "Simple Plans for Every Volume" [level=2] [ref=e93]
+      - paragraph [ref=e94]: Start free. Scale when your Etsy orders pick up.
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]: Scholar
+          - generic [ref=e98]: $9.99 /mo
+          - paragraph [ref=e99]: Unlimited individual readings with PDF export. Great for practitioners doing 1-on-1 work.
+          - list [ref=e100]:
+            - listitem [ref=e101]: ✦ Unlimited natal chart readings
+            - listitem [ref=e102]: ✦ PDF download on every reading
+            - listitem [ref=e103]: ✦ Saved charts dashboard
+            - listitem [ref=e104]: ✦ Full traditional technique suite
+          - link "Get Scholar" [ref=e105] [cursor=pointer]:
+            - /url: /signup.html?tier=scholar
+        - generic [ref=e106]:
+          - generic [ref=e107]: Best for Etsy Sellers
+          - generic [ref=e108]: Practitioner
+          - generic [ref=e109]: $29 /mo
+          - paragraph [ref=e110]: Bulk CSV→ZIP PDF generation, API access, and client labels. Built for volume.
+          - list [ref=e111]:
+            - listitem [ref=e112]: ✦ Everything in Scholar
+            - listitem [ref=e113]: ✦ Bulk CSV → ZIP PDF tool (up to 500/batch)
+            - listitem [ref=e114]: ✦ Client label & tag system
+            - listitem [ref=e115]: ✦ API access (100 calls/day)
+            - listitem [ref=e116]: ✦ Commercial use license
+            - listitem [ref=e117]: ✦ 7-day free trial, cancel any time
+          - link "Start Free Trial" [ref=e118] [cursor=pointer]:
+            - /url: /signup.html?intent=practitioner
+    - separator [ref=e119]
+    - generic [ref=e120]:
+      - generic [ref=e121]: FAQ
+      - heading "Questions from Etsy Sellers" [level=2] [ref=e122]
+      - generic [ref=e123]:
+        - group [ref=e124]:
+          - generic "How does the bulk PDF generator work? +" [ref=e125] [cursor=pointer]
+        - group [ref=e126]:
+          - generic "What format does the CSV file need to be in? +" [ref=e127] [cursor=pointer]
+        - group [ref=e128]:
+          - generic "What if a client doesn't know their exact birth time? +" [ref=e129] [cursor=pointer]
+        - group [ref=e130]:
+          - generic "How many PDFs can I generate at once? +" [ref=e131] [cursor=pointer]
+        - group [ref=e132]:
+          - generic "Can I sell these PDFs commercially on Etsy? +" [ref=e133] [cursor=pointer]
+        - group [ref=e134]:
+          - generic "Is there a free trial? +" [ref=e135] [cursor=pointer]
+    - generic [ref=e137]:
+      - heading "Ready to Stop Building PDFs by Hand?" [level=2] [ref=e138]
+      - paragraph [ref=e139]: Join astrology sellers who use AstroForge to fulfill Etsy orders in seconds instead of hours.
+      - link "Start Your Free 7-Day Trial" [ref=e140] [cursor=pointer]:
+        - /url: /signup.html?intent=practitioner
+      - paragraph [ref=e141]: No card required · Practitioner plan $29/mo after trial · Cancel any time
+    - generic [ref=e142]:
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - heading "Product" [level=3] [ref=e145]
+          - list [ref=e146]:
+            - listitem [ref=e147]:
+              - link "Get a Reading" [ref=e148] [cursor=pointer]:
+                - /url: /#get-reading
+            - listitem [ref=e149]:
+              - link "For Etsy Sellers" [ref=e150] [cursor=pointer]:
+                - /url: /etsy-astrology-seller.html
+            - listitem [ref=e151]:
+              - link "Techniques" [ref=e152] [cursor=pointer]:
+                - /url: /techniques.html
+            - listitem [ref=e153]:
+              - link "Pricing" [ref=e154] [cursor=pointer]:
+                - /url: /#pricing
+        - generic [ref=e155]:
+          - heading "Resources" [level=3] [ref=e156]
+          - list [ref=e157]:
+            - listitem [ref=e158]:
+              - link "FAQ" [ref=e159] [cursor=pointer]:
+                - /url: /faq.html
+            - listitem [ref=e160]:
+              - link "Sample Reading" [ref=e161] [cursor=pointer]:
+                - /url: /sample-reading.html
+            - listitem [ref=e162]:
+              - link "About" [ref=e163] [cursor=pointer]:
+                - /url: /about.html
+            - listitem [ref=e164]:
+              - link "Support" [ref=e165] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+        - generic [ref=e166]:
+          - heading "Legal" [level=3] [ref=e167]
+          - list [ref=e168]:
+            - listitem [ref=e169]:
+              - link "Privacy Policy" [ref=e170] [cursor=pointer]:
+                - /url: /privacy.html
+            - listitem [ref=e171]:
+              - link "Terms of Service" [ref=e172] [cursor=pointer]:
+                - /url: /terms.html
+        - generic [ref=e173]:
+          - heading "Contact" [level=3] [ref=e174]
+          - list [ref=e175]:
+            - listitem [ref=e176]:
+              - link "Support" [ref=e177] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+            - listitem [ref=e178]:
+              - link "Report a Bug" [ref=e179] [cursor=pointer]:
+                - /url: mailto:bugs@traditional-astrology.com
+      - generic [ref=e180]:
+        - paragraph [ref=e181]: © 2026 AstroForge / Traditional Astrology. All rights reserved.
+        - paragraph [ref=e182]: For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.

@@ -1,40 +1,45 @@
-from fastapi import APIRouter, HTTPException, Request, Body
-from pydantic import BaseModel
-import sys
-import os
 import logging
+import os
+import sys
 from datetime import datetime, timezone
+
+from fastapi import APIRouter, Body, HTTPException, Request
+from pydantic import BaseModel
 
 # Ensure the src directory is in the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
 
-from src.services.db_patch import patch_database
+from src.api.v1.client_ip import get_client_ip
 from src.core.config import settings
+from src.services.db_patch import patch_database
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
 # In-memory rate limiter for admin endpoint (simple implementation)
-_admin_attempts = {}
+_admin_attempts = {}  # type: ignore
+
 
 class AdminActionRequest(BaseModel):
     key: str
 
+
 def _check_admin_rate_limit(ip: str, max_attempts: int = 5, window: int = 3600) -> bool:
     """Check if admin action is allowed for this IP (5 attempts per hour)"""
     now = datetime.now(timezone.utc).timestamp()
-    
+
     if ip not in _admin_attempts:
         _admin_attempts[ip] = []
-    
+
     # Clean old attempts
     _admin_attempts[ip] = [t for t in _admin_attempts[ip] if now - t < window]
-    
+
     if len(_admin_attempts[ip]) >= max_attempts:
         return False
-    
+
     _admin_attempts[ip].append(now)
     return True
+
 
 @router.post("/patch_db")
 async def trigger_patch_db(request: Request, body: AdminActionRequest = Body(...)):
@@ -42,26 +47,34 @@ async def trigger_patch_db(request: Request, body: AdminActionRequest = Body(...
     Emergency endpoint to trigger database schema patch.
     SECURITY: Requires admin key from environment variable, rate limited, with audit logging.
     """
-    client_ip = request.client.host if request.client else "unknown"
-    
+    client_ip = get_client_ip(request)
+
     # SECURITY: Rate limiting (5 attempts per hour per IP)
     if not _check_admin_rate_limit(client_ip):
         logger.warning("ADMIN SECURITY: Rate limit exceeded for IP %s", client_ip)
-        raise HTTPException(status_code=429, detail="Too many admin requests. Try again later.")
-    
+        raise HTTPException(
+            status_code=429, detail="Too many admin requests. Try again later."
+        )
+
     # SECURITY: Verify admin key from environment
-    admin_key = getattr(settings, 'ADMIN_SECRET_KEY', None)
+    admin_key = getattr(settings, "ADMIN_SECRET_KEY", None)
     if not admin_key:
         logger.error("ADMIN SECURITY: ADMIN_SECRET_KEY not configured in environment")
         raise HTTPException(status_code=500, detail="Admin endpoint not configured")
-    
+
     if body.key != admin_key:
-        logger.warning("ADMIN SECURITY: Invalid admin key attempt from IP %s", client_ip)
+        logger.warning(
+            "ADMIN SECURITY: Invalid admin key attempt from IP %s", client_ip
+        )
         raise HTTPException(status_code=403, detail="Forbidden")
-    
+
     # AUDIT LOG: Log successful admin action
-    logger.info("ADMIN ACTION: Database patch triggered by IP %s at %s", client_ip, datetime.now(timezone.utc))
-    
+    logger.info(
+        "ADMIN ACTION: Database patch triggered by IP %s at %s",
+        client_ip,
+        datetime.now(timezone.utc),
+    )
+
     try:
         patch_database()
         logger.info("ADMIN ACTION: Database patch completed successfully")
@@ -69,4 +82,7 @@ async def trigger_patch_db(request: Request, body: AdminActionRequest = Body(...
     except Exception as e:
         logger.error("ADMIN ACTION: Database patch failed - %s", repr(e), exc_info=True)
         # SECURITY: Don't expose internal error details
-        return {"success": False, "message": "Database patch encountered an error. Check server logs."}
+        return {
+            "success": False,
+            "message": "Database patch encountered an error. Check server logs.",
+        }

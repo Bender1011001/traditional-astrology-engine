@@ -1,0 +1,48 @@
+{
+  "question": "will I find a high or critical bug on immunify that pays me at least 1 million dollars worth of whatever they pay out in?",
+  "querent_sign": "Scorpio",
+  "querent_ruler": "Mars",
+  "quesited_house": 2,
+  "quesited_label": "Money/Resources",
+  "quesited_sign": "Sagittarius",
+  "quesited_ruler": "Jupiter",
+  "conditions": [
+    {
+      "condition": "Minor Mutual Reception",
+      "p1": "Mars",
+      "p2": "Jupiter",
+      "p1_receives_p2_by": [
+        "Triplicity"
+      ],
+      "p2_receives_p1_by": [
+        "Triplicity"
+      ],
+      "status": "Active"
+    },
+    {
+      "condition": "Reception",
+      "giver": "Jupiter",
+      "receiver": "Moon",
+      "by": [
+        "Domicile"
+      ],
+      "status": "Active",
+      "details": " [Moon as Co-Significator]"
+    },
+    {
+      "condition": "Besiegement by Benefics",
+      "target": "Moon",
+      "benefic_1": "Venus",
+      "benefic_2": "Jupiter",
+      "details": "Moon is warmly enclosed between Venus and Jupiter. Supreme protection and aid. [Moon as Co-Significator]",
+      "status": "Active"
+    }
+  ],
+  "strictures": [
+    "Moon is Void of Course (Medieval/Lilly Out-of-Sign Rule): The Moon makes no aspect before leaving its sign. The matter goes hardly on."
+  ],
+  "verdict": "No",
+  "verdict_weight": "No Connection",
+  "strength_score": 12,
+  "total_score": 16
+}

@@ -14,11 +14,11 @@ This system produces $300-tier reports by implementing:
 Reference: docs/research/Traditional Astrology Report Analysis.txt
 """
 
+import argparse
+import json
+import logging
 import os
 import sys
-import json
-import argparse
-import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -28,12 +28,13 @@ logger = logging.getLogger(__name__)
 sys.path.append(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), "src"))
 
-from src.engine.forensic_engine import Auditor
-from src.engine.chat_oracle import _openrouter_request, _load_binder_context
-from src.engine.calculator.config import HOUSE_SYSTEM_LABELS, COMPARE_SYSTEMS
-from src.engine.dignities import DignityCalculator, TermSystem, TriplicityScheme
-from src.engine.models import PlanetName, Sect
 from src.engine.calculations import format_longitude
+from src.engine.calculator.config import COMPARE_SYSTEMS, HOUSE_SYSTEM_LABELS
+from src.engine.chat_oracle import _load_binder_context, _openrouter_request
+from src.engine.dignities import (DignityCalculator, TermSystem,
+                                  TriplicityScheme)
+from src.engine.forensic_engine import Auditor
+from src.engine.models import PlanetName, Sect
 
 BINDER_CONTEXT = _load_binder_context()
 
@@ -556,7 +557,6 @@ Framing: "Our audit identifies the [Crack/Support] in the Foundational Hierarchy
 
 **VISUAL REQUIREMENT**: If Mutual Reception (e.g. Mars/Jupiter) is found, include a Mermaid flowchart showing the resource swap between the signs. Include the sign glyphs and exaltation degrees (e.g. Cancer/15°).
 """,
-
     # Iteration 2: Planetary Cabinet
     """CONTINUE THE AUDIT. AT LEAST 1,200 WORDS.
 VOICE: SOBER REALIST.
@@ -578,7 +578,6 @@ Map the Seven Governors. For each:
 - If a planet is **Cazimi** (e.g., Sun/Mercury), include a Mermaid diagram showing the 'Planetary Heart' (Planet inside the Sun).
 - If there is a **Square** (e.g., Venus/Saturn), include a Mermaid 'Friction' diagram showing the tension between the houses/signs.
 """,
-
     # Iteration 3: Houses and Lots
     """Continue. Now map the TERRESTRIAL ESTATE (The Twelve Houses) and the HERMETIC LOTS.
 
@@ -596,7 +595,6 @@ Focus on CONCRETE life circumstances, not psychological states
 - Use fixed-star conjunctions provided in the JSON (do NOT re-compute star positions). These are FORCE MAJEURE.
 
 Do NOT repeat previous material. Cover only what has not been addressed.""",
-
     # Iteration 4: Timing Analysis
     """Continue. Now analyze the CHRONOCRATORS (Time Lords).
 
@@ -616,7 +614,6 @@ Do NOT repeat previous material. Cover only what has not been addressed.""",
 - Current pressure points and opportunities
 
 Be SPECIFIC with ages and time ranges. Use the calculated data, not speculation.""",
-
     # Iteration 5: Past and Future
     """Continue. Now perform TEMPORAL ANALYSIS.
 
@@ -635,7 +632,6 @@ Project the next 5-10 years:
 Identify the CRITICAL YEAR where multiple difficult Time Lords converge
 
 Be specific with dates/ages. Cite the timing mechanism for each prediction.""",
-
     # Iteration 6: Medical and Remediation
     """FINAL ITERATION. AT LEAST 1,200 WORDS. Complete the audit with:
 VOICE: SOBER REALIST. **SAFETY FIRST.**
@@ -665,6 +661,7 @@ DO NOT SUMMARIZE. DO NOT USE PLACEHOLDERS. COMPLETE LOGIC ONLY.""",
 # MAIN GENERATION LOGIC
 # =============================================================================
 
+
 def _apply_dignity_overrides(
     combined_data: Dict[str, Any],
     triplicity_scheme: Optional[str] = None,
@@ -693,7 +690,13 @@ def _apply_dignity_overrides(
         raw = triplicity_scheme.strip().lower()
         if raw in ("dorothean", "doro", "dor"):
             tr = TriplicityScheme.DOROTHEAN
-        elif raw in ("ptolemaic", "ptol", "pt", "ptolemaic_sect_gated", "ptolemaic-sect-gated"):
+        elif raw in (
+            "ptolemaic",
+            "ptol",
+            "pt",
+            "ptolemaic_sect_gated",
+            "ptolemaic-sect-gated",
+        ):
             tr = TriplicityScheme.PTOLEMAIC_SECT_GATED
 
     # Nothing to do.
@@ -719,7 +722,9 @@ def _apply_dignity_overrides(
             # Preserve the full original object but override what the prompt reads.
             p["dignities"] = variant
         except Exception as e:
-            logger.debug("Dignity variant calc failed for planet: %s", repr(e), exc_info=True)
+            logger.debug(
+                "Dignity variant calc failed for planet: %s", repr(e), exc_info=True
+            )
             continue
 
     # Record doctrine choice for appendix display.
@@ -750,7 +755,7 @@ def generate_chart_data(
     print(f"Subject: {name}")
     print(f"Birth: {date_str} at {time_str} in {city}, {state or ''}")
     print(f"{'='*80}\n")
-    
+
     result = Auditor.generate_full_nativity(
         date_str=date_str,
         time_str=time_str,
@@ -759,32 +764,34 @@ def generate_chart_data(
         name=name,
         latitude=latitude,
         longitude=longitude,
-        house_system="W"  # Whole Sign Houses - STRICT
+        house_system="W",  # Whole Sign Houses - STRICT
     )
-    
+
     if not result or "error" in result:
         print(f"Engine Failure: {result.get('error', 'Unknown')}")
         return None
-    
+
     # Combine all data for comprehensive LLM input
     combined_data: Dict[str, Any] = {
         "meta": result["technical_data"]["meta"],
         "astronomy": result["technical_data"]["astronomy"],
         "analysis": result["technical_data"]["analysis"],
-        "human_translation": result["human_translation"]
+        "human_translation": result["human_translation"],
     }
 
     # Back-compat: if caller's `analysis` is missing `planets_forensic`, inject it so the LLM can
     # cite planetary cabinet details instead of fabricating.
     if "planets_forensic" not in combined_data["analysis"]:
-        combined_data["analysis"]["planets_forensic"] = result["technical_data"].get("planets_forensic", [])
+        combined_data["analysis"]["planets_forensic"] = result["technical_data"].get(
+            "planets_forensic", []
+        )
 
     combined_data = _apply_dignity_overrides(
         combined_data,
         triplicity_scheme=triplicity_scheme,
         term_system=term_system,
     )
-    
+
     chart_json = json.dumps(combined_data, indent=2, default=str)
     return chart_json
 
@@ -825,7 +832,9 @@ def generate_chart_data_object(
         "human_translation": result.get("human_translation"),
     }
     if "planets_forensic" not in combined_data["analysis"]:
-        combined_data["analysis"]["planets_forensic"] = result["technical_data"].get("planets_forensic", [])
+        combined_data["analysis"]["planets_forensic"] = result["technical_data"].get(
+            "planets_forensic", []
+        )
 
     combined_data = _apply_dignity_overrides(
         combined_data,
@@ -920,8 +929,20 @@ def build_method_matrix_report(
         if payload:
             per_system[code] = payload
 
-    planet_rows = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "North_Node", "South_Node"]
-    headers = ["Body"] + [f"{HOUSE_SYSTEM_LABELS.get(c, c)} ({c})" for c in per_system.keys()]
+    planet_rows = [
+        "Sun",
+        "Moon",
+        "Mercury",
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn",
+        "North_Node",
+        "South_Node",
+    ]
+    headers = ["Body"] + [
+        f"{HOUSE_SYSTEM_LABELS.get(c, c)} ({c})" for c in per_system.keys()
+    ]
     md += "| " + " | ".join(headers) + " |\n"
     md += "|" + "---|" * len(headers) + "\n"
     for body in planet_rows:
@@ -934,7 +955,9 @@ def build_method_matrix_report(
                 continue
             house = entry.get("house") or (entry.get("accidental") or {}).get("house")
             lonf = entry.get("longitude_fmt") or {}
-            pos = lonf.get("string") or _fmt_lon_simple(float(entry.get("longitude") or 0.0))
+            pos = lonf.get("string") or _fmt_lon_simple(
+                float(entry.get("longitude") or 0.0)
+            )
             row.append(f"{pos} | H{house}")
         md += "| " + " | ".join(row) + " |\n"
 
@@ -942,8 +965,16 @@ def build_method_matrix_report(
     md += "| System | Ascendant | MC |\n|---|---|---|\n"
     for code, payload in per_system.items():
         ang = (payload.get("astronomy") or {}).get("angles") or {}
-        asc_lon = ang.get("Ascendant", {}).get("longitude") if isinstance(ang.get("Ascendant"), dict) else ang.get("Ascendant")
-        mc_lon = ang.get("MC", {}).get("longitude") if isinstance(ang.get("MC"), dict) else ang.get("MC")
+        asc_lon = (
+            ang.get("Ascendant", {}).get("longitude")
+            if isinstance(ang.get("Ascendant"), dict)
+            else ang.get("Ascendant")
+        )
+        mc_lon = (
+            ang.get("MC", {}).get("longitude")
+            if isinstance(ang.get("MC"), dict)
+            else ang.get("MC")
+        )
         asc_s = _fmt_lon_simple(float(asc_lon)) if asc_lon is not None else "(missing)"
         mc_s = _fmt_lon_simple(float(mc_lon)) if mc_lon is not None else "(missing)"
         md += f"| {HOUSE_SYSTEM_LABELS.get(code, code)} ({code}) | {asc_s} | {mc_s} |\n"
@@ -977,16 +1008,36 @@ def build_method_matrix_report(
         pn = PlanetName(body)
 
         d_e = DignityCalculator.calculate_planet_dignity_variant(
-            pn, lon, sect, term_system=TermSystem.EGYPTIAN, triplicity_scheme=TriplicityScheme.DOROTHEAN, include_monomoiria=False
+            pn,
+            lon,
+            sect,
+            term_system=TermSystem.EGYPTIAN,
+            triplicity_scheme=TriplicityScheme.DOROTHEAN,
+            include_monomoiria=False,
         )["total_score"]
         d_p = DignityCalculator.calculate_planet_dignity_variant(
-            pn, lon, sect, term_system=TermSystem.PTOLEMAIC, triplicity_scheme=TriplicityScheme.DOROTHEAN, include_monomoiria=False
+            pn,
+            lon,
+            sect,
+            term_system=TermSystem.PTOLEMAIC,
+            triplicity_scheme=TriplicityScheme.DOROTHEAN,
+            include_monomoiria=False,
         )["total_score"]
         p_e = DignityCalculator.calculate_planet_dignity_variant(
-            pn, lon, sect, term_system=TermSystem.EGYPTIAN, triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED, include_monomoiria=False
+            pn,
+            lon,
+            sect,
+            term_system=TermSystem.EGYPTIAN,
+            triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED,
+            include_monomoiria=False,
         )["total_score"]
         p_p = DignityCalculator.calculate_planet_dignity_variant(
-            pn, lon, sect, term_system=TermSystem.PTOLEMAIC, triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED, include_monomoiria=False
+            pn,
+            lon,
+            sect,
+            term_system=TermSystem.PTOLEMAIC,
+            triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED,
+            include_monomoiria=False,
         )["total_score"]
 
         md += f"| {body} | {pos} | {d_e} | {d_p} | {p_e} | {p_p} |\n"
@@ -1004,7 +1055,9 @@ def build_method_matrix_report(
     timing_sources: List[Tuple[str, Any]] = []
     timing_sources.extend([(k, fate.get(k)) for k in sorted(fate.keys())])
     if "enhanced_profections" in analysis:
-        timing_sources.append(("enhanced_profections", analysis.get("enhanced_profections")))
+        timing_sources.append(
+            ("enhanced_profections", analysis.get("enhanced_profections"))
+        )
 
     printed = set()
     for key, value in timing_sources:
@@ -1038,12 +1091,13 @@ def apply_safety_filters(text):
         r"(?i)\bguillotine\b": "professional setback",
         r"(?i)\bbeheading\b": "loss of reputation",
     }
-    
+
     import re
+
     filtered_text = text
     for pattern, replacement in replacements.items():
         filtered_text = re.sub(pattern, replacement, filtered_text)
-    
+
     return filtered_text
 
 
@@ -1052,10 +1106,21 @@ PLANETARY_CHARITY_DISCLAIMER = """
 **Legal Disclaimer:** This audit utilizes traditional metaphysical anatomy (Melothesia) and historical astrological protocols for symbolic and energetic remediation. These insights are intended for historical and spiritual research purposes only. They are NOT a substitute for modern medical diagnosis, psychological counseling, or professional financial treatment. Always consult a licensed professional before making significant life decisions.
 """
 
+
 def _sign_to_index(sign: str) -> int:
     order = [
-        "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-        "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces",
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
     ]
     try:
         return order.index(sign)
@@ -1077,7 +1142,11 @@ def build_raw_data_appendix(chart_data: str) -> str:
     Uses only the JSON payload we feed the LLM (no recomputation).
     """
     try:
-        parsed = json.loads(chart_data) if isinstance(chart_data, str) else (chart_data or {})
+        parsed = (
+            json.loads(chart_data)
+            if isinstance(chart_data, str)
+            else (chart_data or {})
+        )
     except Exception as e:
         logger.debug("Chart data JSON parse failed: %s", repr(e), exc_info=True)
         return ""
@@ -1087,7 +1156,9 @@ def build_raw_data_appendix(chart_data: str) -> str:
     analysis = (parsed or {}).get("analysis", {}) or {}
     angles = (analysis or {}).get("angles", {}) or {}
     planets_forensic = (analysis or {}).get("planets_forensic", []) or []
-    mundane_ctx = (analysis or {}).get("advanced_mechanics", {}).get("mundane_context", {}) or {}
+    mundane_ctx = (analysis or {}).get("advanced_mechanics", {}).get(
+        "mundane_context", {}
+    ) or {}
     syzygy = (analysis or {}).get("syzygy", {}) or {}
     sect = (analysis or {}).get("sect", {}) or {}
     supp = (analysis or {}).get("supplemental", {}) or {}
@@ -1115,7 +1186,9 @@ def build_raw_data_appendix(chart_data: str) -> str:
     ang_md += "- Aspects: `analysis.aspects` is septener-only (core). `analysis.aspects_shadow` contains aspects involving outer planets (shadow only). Node aspects are not computed by the aspect engine.\n"
     ang_md += "- Receptions: computed from `analysis.teams.receptions` using `ReceptionMode.STANDARD_LILLY` with sect-gated Ptolemaic triplicity rights.\n"
     # Dignity doctrine (for method comparisons)
-    dv = (((parsed or {}).get("meta") or {}).get("chart") or {}).get("dignity_variant") or {}
+    dv = (((parsed or {}).get("meta") or {}).get("chart") or {}).get(
+        "dignity_variant"
+    ) or {}
     if dv:
         ang_md += (
             f"- Dignities/terms (override): triplicity = {dv.get('triplicity_scheme')}; terms = {dv.get('term_system')}. "
@@ -1146,18 +1219,30 @@ def build_raw_data_appendix(chart_data: str) -> str:
     # Syzygy + phase block
     if syzygy:
         ang_md += "\n**Prenatal Syzygy + Natal Phase (separate layers):**\n\n"
-        pre = (syzygy.get("prenatal_syzygy") or {}) if isinstance(syzygy.get("prenatal_syzygy"), dict) else {}
-        nxt = (pre.get("next_syzygy") or {}) if isinstance(pre.get("next_syzygy"), dict) else {}
-        phase = (syzygy.get("natal_phase") or {}) if isinstance(syzygy.get("natal_phase"), dict) else {}
+        pre = (
+            (syzygy.get("prenatal_syzygy") or {})
+            if isinstance(syzygy.get("prenatal_syzygy"), dict)
+            else {}
+        )
+        nxt = (
+            (pre.get("next_syzygy") or {})
+            if isinstance(pre.get("next_syzygy"), dict)
+            else {}
+        )
+        phase = (
+            (syzygy.get("natal_phase") or {})
+            if isinstance(syzygy.get("natal_phase"), dict)
+            else {}
+        )
         if pre:
             ang_md += f"- SAN (Syzygia Ante Nativitatem): {pre.get('datetime_utc')} | {_fmt_lon(pre.get('longitude_fmt') or {})} | type: {pre.get('type')}\n"
         if nxt:
             ang_md += f"- Next syzygy after birth: {nxt.get('datetime_utc')} | {_fmt_lon(nxt.get('longitude_fmt') or {})} | type: {nxt.get('type')}\n"
         if phase.get("moon_sun_elongation_deg") is not None:
-            ang_md += f"- Natal elongation (min, 0..180): {float(phase.get('moon_sun_elongation_deg')):.4f}°\n"
+            ang_md += f"- Natal elongation (min, 0..180): {float(phase.get('moon_sun_elongation_deg')):.4f}°\n"  # type: ignore
         if phase.get("moon_sun_phase_deg") is not None:
             ang_md += (
-                f"- Natal phase (Sun->Moon, 0..360): {float(phase.get('moon_sun_phase_deg')):.4f}°"
+                f"- Natal phase (Sun->Moon, 0..360): {float(phase.get('moon_sun_phase_deg')):.4f}°"  # type: ignore
                 f" | waxing: {phase.get('is_waxing')} | waning: {phase.get('is_waning')}\n"
             )
 
@@ -1204,13 +1289,19 @@ def build_raw_data_appendix(chart_data: str) -> str:
         eclipses = mundane_ctx.get("eclipses") or []
 
     if eclipses and asc_sign:
-        ang_md += "\n**Eclipses (mundane context; WSH placement shown explicitly):**\n\n"
-        for e in eclipses:
-            lonf = e.get("longitude_fmt") or {}
-            esign = lonf.get("sign") or e.get("sign")
+        ang_md += (
+            "\n**Eclipses (mundane context; WSH placement shown explicitly):**\n\n"
+        )
+        for eclipse_item in eclipses:
+            lonf = eclipse_item.get("longitude_fmt") or {}
+            esign = lonf.get("sign") or eclipse_item.get("sign")
             wsh = _wsh_house_from_asc(asc_sign, esign) if esign else -1
-            ang_md += f"- {e.get('type')}: {e.get('date_utc')} | {_fmt_lon(lonf)} | WSH house from Asc({asc_sign}): {wsh}\n"
-            note = e.get("chorography_note") or e.get("influence_note") or e.get("note")
+            ang_md += f"- {eclipse_item.get('type')}: {eclipse_item.get('date_utc')} | {_fmt_lon(lonf)} | WSH house from Asc({asc_sign}): {wsh}\n"
+            note = (
+                eclipse_item.get("chorography_note")
+                or eclipse_item.get("influence_note")
+                or eclipse_item.get("note")
+            )
             if note:
                 ang_md += f"  - Note: {note}\n"
 
@@ -1221,7 +1312,9 @@ def build_raw_data_appendix(chart_data: str) -> str:
             if not isinstance(s, dict):
                 continue
             star_name = s.get("star_name") or s.get("name") or s.get("star") or "Star"
-            body_name = s.get("planet_name") or s.get("body") or s.get("planet") or "Body"
+            body_name = (
+                s.get("planet_name") or s.get("body") or s.get("planet") or "Body"
+            )
             contact = s.get("contact_type") or s.get("type") or "CONTACT"
             msg = s.get("message")
             line = f"- {star_name} | {contact} | body: {body_name}"
@@ -1236,20 +1329,24 @@ def build_raw_data_appendix(chart_data: str) -> str:
         for a in aspects:
             if not isinstance(a, dict):
                 continue
+            orb_val = float(a.get("orb") if a.get("orb") is not None else 0.0)  # type: ignore
             ang_md += (
                 f"- {a.get('planet_a')} {a.get('type')} {a.get('planet_b')} "
-                f"| orb: {float(a.get('orb')):.4f}° | applying: {a.get('is_applying')}\n"
+                f"| orb: {orb_val:.4f}° | applying: {a.get('is_applying')}\n"
             )
 
     shadow_aspects = (analysis or {}).get("aspects_shadow", []) or []
     if isinstance(shadow_aspects, list) and shadow_aspects:
-        ang_md += "\n**Shadow Aspects (outer planets; do not use for core judgment):**\n\n"
+        ang_md += (
+            "\n**Shadow Aspects (outer planets; do not use for core judgment):**\n\n"
+        )
         for a in shadow_aspects:
             if not isinstance(a, dict):
                 continue
+            orb_val = float(a.get("orb") if a.get("orb") is not None else 0.0)  # type: ignore
             ang_md += (
                 f"- {a.get('planet_a')} {a.get('type')} {a.get('planet_b')} "
-                f"| orb: {float(a.get('orb')):.4f}° | applying: {a.get('is_applying')}\n"
+                f"| orb: {orb_val:.4f}° | applying: {a.get('is_applying')}\n"
             )
 
     # Vitality safety reminder for hostile readers
@@ -1262,43 +1359,44 @@ def build_raw_data_appendix(chart_data: str) -> str:
 
 def run_premium_report(chart_data, output_file, iterations=6):
     """Generate $300-tier premium report using research-backed methodology."""
-    
+
     print(f"\n{'='*80}")
     print(f"PREMIUM REPORT GENERATION - Traditional Astrology")
     print(f"Methodology: Traditional Hellenistic Synthesis ($197 Tier)")
     print(f"Iterations: {iterations}")
-    print(f"{'='*80}\n")    
+    print(f"{'='*80}\n")
     # Construct system prompt with Binder context (truncated to avoid context window overflow)
     truncated_binder = BINDER_CONTEXT[:50000] if BINDER_CONTEXT else ""
     system_prompt = PREMIUM_SYSTEM_PROMPT.format(binder_context=truncated_binder)
-    
+
     messages = [{"role": "system", "content": system_prompt}]
     all_responses = []
-    
+
     for i, prompt_template in enumerate(ITERATION_PROMPTS[:iterations]):
         print(f"\nIteration {i+1}/{iterations}...")
-        
+
         # Format the prompt with chart data
         prompt = prompt_template.format(chart_data=chart_data)
         messages.append({"role": "user", "content": prompt})
-        
+
         response = _openrouter_request(
-            messages=messages,
-            temperature=0.15,
-            max_tokens=16000,
-            top_p=0.9
+            messages=messages, temperature=0.15, max_tokens=16000, top_p=0.9
         )
-        
-        if not response or response.startswith("Error:") or response.startswith("Oracle Communication Error"):
+
+        if (
+            not response
+            or response.startswith("Error:")
+            or response.startswith("Oracle Communication Error")
+        ):
             print(f"  ⚠ Error: {response[:100] if response else 'No response'}")
             break
-        
+
         all_responses.append(response)
         messages.append({"role": "assistant", "content": response})
-        
+
         word_count = len(response.split())
         print(f"  Part {i+1}: {word_count:,} words")
-    
+
     # Assemble final document
     timestamp = datetime.now().strftime("%B %d, %Y at %I:%M %p")
 
@@ -1321,7 +1419,7 @@ def run_premium_report(chart_data, output_file, iterations=6):
     except Exception as e:
         logger.debug("Birth header construction failed: %s", repr(e), exc_info=True)
         birth_header = ""
-    
+
     final_report = f"""# PREMIUM NATAL CHART READING
 ## Inspection of the Nativity
 
@@ -1339,29 +1437,29 @@ def run_premium_report(chart_data, output_file, iterations=6):
 
     for i, resp in enumerate(all_responses):
         final_report += f"# Part {i+1}\n\n{resp}\n\n---\n\n"
-        
+
     # Apply Hard-Coded Safety Filters
     final_report = apply_safety_filters(final_report)
-    
+
     # Add final educational disclaimer and footer
     final_report += "\n\n---\n"
     final_report += "### EDUCATIONAL NOTICE & METHODOLOGICAL LIMITS\n"
     final_report += "This report is rendered by the Traditional Astrology engine using rules from the Hellenistic and Medieval corpora. These results are for historical and spiritual research purposes only. Accuracy depends on precise birth data.\n\n"
     final_report += "© 2026 Traditional Astrology | [traditional-astrology.com](https://traditional-astrology.com)\n"
-    
+
     # Add Disclaimer
     final_report += PLANETARY_CHARITY_DISCLAIMER
-    
+
     # Save to file
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(final_report)
-    
+
     total_words = len(final_report.split())
     print(f"\n✓ PREMIUM REPORT COMPLETE")
     print(f"  Total words: {total_words:,}")
     print(f"  Estimated pages: {total_words/400:.1f}")
     print(f"  Output: {output_file}")
-    
+
     return final_report
 
 
@@ -1374,27 +1472,63 @@ def main():
     parser.add_argument("--time", required=True, help="Birth time (HH:MM)")
     parser.add_argument("--city", required=True, help="Birth city")
     parser.add_argument("--state", default="", help="Birth state/region")
-    parser.add_argument("--lat", type=float, default=None, help="Optional latitude override (bypass geocoding)")
-    parser.add_argument("--lon", type=float, default=None, help="Optional longitude override (bypass geocoding)")
-    parser.add_argument("--iterations", type=int, default=6, help="Number of iteration passes")
-    parser.add_argument("--output-dir", default="premium_reports", help="Output directory")
-    parser.add_argument("--matrix", action="store_true", help="Generate a deterministic multi-method comparison report (no LLM).")
-    parser.add_argument("--house-systems", default="", help="Comma-separated house system codes to compare (default: engine COMPARE_SYSTEMS).")
-    parser.add_argument("--triplicity", default="", help="Doctrine override for report comparison: dorothean or ptolemaic.")
-    parser.add_argument("--terms", default="", help="Doctrine override for report comparison: egyptian or ptolemaic.")
-    
+    parser.add_argument(
+        "--lat",
+        type=float,
+        default=None,
+        help="Optional latitude override (bypass geocoding)",
+    )
+    parser.add_argument(
+        "--lon",
+        type=float,
+        default=None,
+        help="Optional longitude override (bypass geocoding)",
+    )
+    parser.add_argument(
+        "--iterations", type=int, default=6, help="Number of iteration passes"
+    )
+    parser.add_argument(
+        "--output-dir", default="premium_reports", help="Output directory"
+    )
+    parser.add_argument(
+        "--matrix",
+        action="store_true",
+        help="Generate a deterministic multi-method comparison report (no LLM).",
+    )
+    parser.add_argument(
+        "--house-systems",
+        default="",
+        help="Comma-separated house system codes to compare (default: engine COMPARE_SYSTEMS).",
+    )
+    parser.add_argument(
+        "--triplicity",
+        default="",
+        help="Doctrine override for report comparison: dorothean or ptolemaic.",
+    )
+    parser.add_argument(
+        "--terms",
+        default="",
+        help="Doctrine override for report comparison: egyptian or ptolemaic.",
+    )
+
     args = parser.parse_args()
-    
+
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Method-matrix mode: deterministic comparison across doctrine forks.
     if args.matrix:
-        systems = [s.strip().upper() for s in (args.house_systems.split(",") if args.house_systems else []) if s.strip()]
+        systems = [
+            s.strip().upper()
+            for s in (args.house_systems.split(",") if args.house_systems else [])
+            if s.strip()
+        ]
         if not systems:
             systems = list(COMPARE_SYSTEMS)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         safe_name = args.name.replace(" ", "_").lower()
-        output_file = os.path.join(args.output_dir, f"{safe_name}_method_matrix_{timestamp}.md")
+        output_file = os.path.join(
+            args.output_dir, f"{safe_name}_method_matrix_{timestamp}.md"
+        )
         report = build_method_matrix_report(
             name=args.name,
             date_str=args.date,
@@ -1409,7 +1543,7 @@ def main():
             f.write(report)
         print(f"\n✓ METHOD MATRIX COMPLETE\n  Output: {output_file}\n")
         return 0
-    
+
     # Generate chart data
     # Generate chart data
     # If lat/lon are provided, bypass geocoding (useful when providers rate-limit).
@@ -1426,21 +1560,23 @@ def main():
     )
     if not chart_data:
         return 1
-    
-    
+
     # Generate output filename
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     safe_name = args.name.replace(" ", "_").lower()
     output_file = os.path.join(args.output_dir, f"{safe_name}_premium_{timestamp}.md")
-    
+
     # Run generation
     run_premium_report(chart_data, output_file, args.iterations)
-    
+
     return 0
 
 
 if __name__ == "__main__":
     if sys.platform == "win32":
         import io
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', line_buffering=True)
+
+        sys.stdout = io.TextIOWrapper(
+            sys.stdout.buffer, encoding="utf-8", line_buffering=True
+        )
     sys.exit(main())

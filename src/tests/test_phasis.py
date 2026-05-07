@@ -1,9 +1,11 @@
 """Tests for phasis.py — Planetary Phases, Solar Proximity, Arcus Visionis."""
-from src.engine.phasis import PhasisEngine, AV_THRESHOLDS, NAME_TO_SWE
-from src.engine.models import Planet, PlanetName, PlanetaryPhase, SolarProximity
 
+from src.engine.models import (Planet, PlanetaryPhase, PlanetName,
+                               SolarProximity)
+from src.engine.phasis import AV_THRESHOLDS, NAME_TO_SWE, PhasisEngine
 
 # ─── is_oriental ─────────────────────────────────────────────────────────────
+
 
 def test_is_oriental_behind_sun():
     """Planet behind Sun zodiacally (Sun at 100, planet at 80) = Oriental."""
@@ -21,6 +23,7 @@ def test_is_oriental_wraparound():
 
 
 # ─── get_solar_proximity ────────────────────────────────────────────────────
+
 
 def test_solar_proximity_cazimi():
     """Within 17' (0.283°) of Sun = Cazimi."""
@@ -53,6 +56,7 @@ def test_solar_proximity_wraparound():
 
 
 # ─── get_synodic_phase ──────────────────────────────────────────────────────
+
 
 def test_synodic_phase_sun():
     """Sun always returns FREE."""
@@ -97,9 +101,15 @@ def test_synodic_phase_returns_planetary_phase():
 
 # ─── AV_THRESHOLDS ──────────────────────────────────────────────────────────
 
+
 def test_av_thresholds_completeness():
     """All traditional planets should have AV thresholds."""
-    for pn in [PlanetName.SATURN, PlanetName.JUPITER, PlanetName.MARS, PlanetName.MERCURY]:
+    for pn in [
+        PlanetName.SATURN,
+        PlanetName.JUPITER,
+        PlanetName.MARS,
+        PlanetName.MERCURY,
+    ]:
         assert pn in AV_THRESHOLDS
 
 
@@ -112,20 +122,33 @@ def test_av_threshold_venus_asymmetric():
 
 # ─── NAME_TO_SWE ────────────────────────────────────────────────────────────
 
+
 def test_name_to_swe_mapping():
     """All 7 classical bodies should map to swisseph constants."""
-    for pn in [PlanetName.SUN, PlanetName.MOON, PlanetName.MERCURY, PlanetName.VENUS,
-               PlanetName.MARS, PlanetName.JUPITER, PlanetName.SATURN]:
+    for pn in [
+        PlanetName.SUN,
+        PlanetName.MOON,
+        PlanetName.MERCURY,
+        PlanetName.VENUS,
+        PlanetName.MARS,
+        PlanetName.JUPITER,
+        PlanetName.SATURN,
+    ]:
         assert pn in NAME_TO_SWE
 
 
 # ─── calculate_visibility_details ────────────────────────────────────────────
 
+
 def test_visibility_sun_always_visible():
     result = PhasisEngine.calculate_visibility_details(
-        jd=2460000.0, lat=40.0, lon=-74.0,
+        jd=2460000.0,
+        lat=40.0,
+        lon=-74.0,
         planet_name=PlanetName.SUN,
-        planet_lon=100.0, planet_lat=0.0, sun_lon=100.0
+        planet_lon=100.0,
+        planet_lat=0.0,
+        sun_lon=100.0,
     )
     assert result["is_visible"] is True
     assert result["method"] == "sun_default"
@@ -134,9 +157,13 @@ def test_visibility_sun_always_visible():
 def test_visibility_non_traditional():
     """Nodes/non-traditional bodies default to visible."""
     result = PhasisEngine.calculate_visibility_details(
-        jd=2460000.0, lat=40.0, lon=-74.0,
+        jd=2460000.0,
+        lat=40.0,
+        lon=-74.0,
         planet_name=PlanetName.MOON,
-        planet_lon=200.0, planet_lat=5.0, sun_lon=100.0
+        planet_lon=200.0,
+        planet_lat=5.0,
+        sun_lon=100.0,
     )
     assert result["is_visible"] is True
     assert result["method"] == "non_traditional_default"
@@ -145,17 +172,29 @@ def test_visibility_non_traditional():
 def test_visibility_details_keys():
     """Result should have all documented keys."""
     result = PhasisEngine.calculate_visibility_details(
-        jd=2460000.0, lat=40.0, lon=-74.0,
+        jd=2460000.0,
+        lat=40.0,
+        lon=-74.0,
         planet_name=PlanetName.SATURN,
-        planet_lon=200.0, planet_lat=0.0, sun_lon=100.0
+        planet_lon=200.0,
+        planet_lat=0.0,
+        sun_lon=100.0,
     )
-    for key in ["is_visible", "method", "oriental", "event",
-                "threshold_solar_depression_deg", "sun_altitude_at_event_deg",
-                "event_jd_ut", "note"]:
+    for key in [
+        "is_visible",
+        "method",
+        "oriental",
+        "event",
+        "threshold_solar_depression_deg",
+        "sun_altitude_at_event_deg",
+        "event_jd_ut",
+        "note",
+    ]:
         assert key in result, f"Missing key: {key}"
 
 
 # ─── check_chariot ──────────────────────────────────────────────────────────
+
 
 def test_chariot_sun_in_leo():
     """Sun at 120° (Leo, its domicile) should be in its chariot."""

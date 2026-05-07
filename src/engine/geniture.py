@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
-from .models import Chart, Planet, PlanetName, Sect, Sign
 from .dignities import DignityCalculator
-from .reference_data import DOMICILES, EXALTATIONS, PTOLEMAIC_TERMS, PTOLEMAIC_TRIPLICITY, SIGN_ELEMENTS, MOIETIES
-import logging
+from .models import Chart, Planet, PlanetName, Sect, Sign
+from .reference_data import (DOMICILES, EXALTATIONS, MOIETIES, PTOLEMAIC_TERMS,
+                             PTOLEMAIC_TRIPLICITY, SIGN_ELEMENTS)
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ class LordOfGenitureEngine:
     """
 
     CAZIMI_DEG = 17 / 60.0  # 0°17'
-    COMBUST_DEG = 8.5       # 8°30'
+    COMBUST_DEG = 8.5  # 8°30'
     UNDER_BEAMS_DEG = 17.0  # 17°
 
     @staticmethod
@@ -65,7 +66,13 @@ class LordOfGenitureEngine:
         try:
             face_val = DignityCalculator.FACES[sign][face_idx]
         except Exception as e:
-            logger.warning("Face lookup failed for %s at %.1f°: %s", sign, deg, repr(e), exc_info=True)
+            logger.warning(
+                "Face lookup failed for %s at %.1f°: %s",
+                sign,
+                deg,
+                repr(e),
+                exc_info=True,
+            )
             return None
         if isinstance(face_val, str):
             key = face_val.upper()
@@ -73,7 +80,9 @@ class LordOfGenitureEngine:
         return face_val
 
     @classmethod
-    def _ptolemaic_triplicity_ruler(cls, lon: float, sect: Sect) -> Optional[PlanetName]:
+    def _ptolemaic_triplicity_ruler(
+        cls, lon: float, sect: Sect
+    ) -> Optional[PlanetName]:
         sign = cls._in_sign(lon)
         element = SIGN_ELEMENTS.get(sign)
         if not element:
@@ -84,7 +93,9 @@ class LordOfGenitureEngine:
         return rulers[0] if sect == Sect.DAY else rulers[1]
 
     @classmethod
-    def _essential_score_lilly(cls, planet: PlanetName, lon: float, sect: Sect) -> Tuple[int, Dict[str, int], List[str]]:
+    def _essential_score_lilly(
+        cls, planet: PlanetName, lon: float, sect: Sect
+    ) -> Tuple[int, Dict[str, int], List[str]]:
         score = 0
         breakdown: Dict[str, int] = {
             "domicile": 0,
@@ -160,7 +171,10 @@ class LordOfGenitureEngine:
             details.append("Face (+1)")
 
         # Peregrine: no essential dignity at all (and not in detriment/fall scoring above)
-        has_any_pos = any(breakdown[k] > 0 for k in ["domicile", "exaltation", "triplicity", "term", "face"])
+        has_any_pos = any(
+            breakdown[k] > 0
+            for k in ["domicile", "exaltation", "triplicity", "term", "face"]
+        )
         if not has_any_pos and breakdown["detriment"] == 0 and breakdown["fall"] == 0:
             score -= 5
             breakdown["peregrine"] = -5
@@ -188,7 +202,9 @@ class LordOfGenitureEngine:
         return 0, "House (0)"
 
     @classmethod
-    def _motion_score_lilly(cls, planet: Planet) -> Tuple[int, Dict[str, int], List[str]]:
+    def _motion_score_lilly(
+        cls, planet: Planet
+    ) -> Tuple[int, Dict[str, int], List[str]]:
         score = 0
         breakdown = {"direct": 0, "retrograde": 0, "swift": 0, "slow": 0}
         details: List[str] = []
@@ -218,7 +234,9 @@ class LordOfGenitureEngine:
         return score, breakdown, details
 
     @classmethod
-    def _solar_phase_score_lilly(cls, planet: Planet, chart: Chart) -> Tuple[int, Dict[str, int], List[str]]:
+    def _solar_phase_score_lilly(
+        cls, planet: Planet, chart: Chart
+    ) -> Tuple[int, Dict[str, int], List[str]]:
         if planet.name == PlanetName.SUN:
             return 0, {"cazimi": 0, "combust": 0, "under_beams": 0}, []
 
@@ -246,7 +264,9 @@ class LordOfGenitureEngine:
         return 0, breakdown, details
 
     @classmethod
-    def _orientality_score_lilly(cls, planet: Planet, chart: Chart) -> Tuple[int, Dict[str, int], List[str]]:
+    def _orientality_score_lilly(
+        cls, planet: Planet, chart: Chart
+    ) -> Tuple[int, Dict[str, int], List[str]]:
         if planet.name == PlanetName.SUN:
             return 0, {"orientality": 0}, []
 
@@ -293,7 +313,9 @@ class LordOfGenitureEngine:
         return score, breakdown, details
 
     @classmethod
-    def _aspect_score_lilly(cls, planet: Planet, chart: Chart) -> Tuple[int, Dict[str, int], List[str]]:
+    def _aspect_score_lilly(
+        cls, planet: Planet, chart: Chart
+    ) -> Tuple[int, Dict[str, int], List[str]]:
         """
         Score aspects to benefics/malefics using Lilly-style moieties as a practical orb.
         This is a simplified subset of Lilly's table (enough to distinguish dominant actors).
@@ -383,7 +405,9 @@ class LordOfGenitureEngine:
             details.extend(ess_d)
 
             # House
-            house_num = DignityCalculator.get_house_number(p.longitude, chart.ascendant, getattr(chart, "houses", None))
+            house_num = DignityCalculator.get_house_number(
+                p.longitude, chart.ascendant, getattr(chart, "houses", None)
+            )
             hs, hs_detail = cls._house_score_lilly(house_num)
             total += hs
             breakdown["acc_house"] = hs
@@ -435,5 +459,5 @@ class LordOfGenitureEngine:
                 }
                 for k, v in scores.items()
             },
-            "method": "Lilly (net fortitudes/debilities; Ptolemaic terms/triplicity)"
+            "method": "Lilly (net fortitudes/debilities; Ptolemaic terms/triplicity)",
         }

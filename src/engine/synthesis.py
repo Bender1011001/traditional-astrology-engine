@@ -1,6 +1,7 @@
-from typing import Dict, List, Any
-from .models import PlanetName, Sect
+from typing import Any, Dict
+
 from .calculations import format_longitude
+
 
 class ReportSynthesizer:
     """
@@ -11,61 +12,63 @@ class ReportSynthesizer:
     @staticmethod
     def synthesize(raw_report: Dict[str, Any]) -> str:
         sections = []
-        
+
         # 1. Executive Summary
         sections.append(ReportSynthesizer._generate_executive_summary(raw_report))
-        
+
         # 2. The Constitution
         sections.append(ReportSynthesizer._generate_constitution(raw_report))
 
         # 3. Dignity & Almuten Breakdown
         sections.append(ReportSynthesizer._generate_dignity_breakdown(raw_report))
-        
+
         # 4. Planetary Protocols (The Meat)
         sections.append(ReportSynthesizer._generate_planetary_protocols(raw_report))
-        
+
         # 5. House Systems
         sections.append(ReportSynthesizer._generate_house_systems(raw_report))
 
         # 6. Aspect Analysis
         sections.append(ReportSynthesizer._generate_aspect_analysis(raw_report))
-        
+
         # 7. The Fate Timeline
         sections.append(ReportSynthesizer._generate_fate_timeline(raw_report))
-        
+
         # 7b. Fixed Star Contacts
         sections.append(ReportSynthesizer._generate_fixed_stars(raw_report))
-        
+
         # 8. Forensic Audit
         sections.append(ReportSynthesizer._generate_forensic_audit(raw_report))
-        
+
         # 9. Universal Overrides
         sections.append(ReportSynthesizer._generate_universal_overrides(raw_report))
-        
+
         return "\n\n".join(sections)
 
     @staticmethod
     def _generate_executive_summary(report: Dict) -> str:
         soul_guardian = report.get("soul_guardian", {})
         vitality = report.get("vitality", {})
-        
+
         summary = "# EXECUTIVE SUMMARY: COMPREHENSIVE FORENSIC AUDIT\n"
         summary += f"**Soul Guardian (Almuten Figuris):** {soul_guardian.get('almuten', 'Unknown')}\n"
         summary += f"**Core Function:** {soul_guardian.get('job_description', 'N/A')}\n"
-        
+
         # Vitality Section — Hyleg/Alcocoden/Anareta
         hyleg = vitality.get("hyleg", {})
         alco = vitality.get("alcocoden", {})
         years = vitality.get("years_capacity", {})
         anareta = vitality.get("anareta", {})
-        
+
         # Pick the best years estimate (valens_term preferred if valid, else default)
         best_years = years.get("valens_term", years.get("default", {}))
-        rating = best_years.get("vitality_rating", vitality.get("vitality_rating", "Indeterminate"))
-        
+        rating = best_years.get(
+            "vitality_rating", vitality.get("vitality_rating", "Indeterminate")
+        )
+
         summary += f"\n### Vitality Assessment (Historical Longevity Technique)\n"
         summary += f"**Hyleg (Source of Life):** {hyleg.get('name', 'Unknown')} ({hyleg.get('type', '')})\n"
-        
+
         if alco:
             alco_name = alco.get("name")
             if hasattr(alco_name, "value"):
@@ -75,18 +78,20 @@ class ReportSynthesizer:
             if alco_aspect:
                 summary += f" via {alco_aspect}"
             summary += "\n"
-        
+
         if best_years.get("base_years"):
             summary += f"**Years Capacity:** {best_years.get('base_years_type', '')} Years of {best_years.get('alcocoden', '')} = {best_years.get('base_years')}\n"
-        
+
         summary += f"**Vitality Rating:** {rating}\n"
-        
+
         if anareta.get("name"):
             anareta_reason = anareta.get("reason", "")
-            summary += f"**Anareta (Destroyer):** {anareta.get('name')} — {anareta_reason}\n"
-        
+            summary += (
+                f"**Anareta (Destroyer):** {anareta.get('name')} — {anareta_reason}\n"
+            )
+
         summary += "\n_Historical Use Only. This section is not medical advice, diagnosis, or treatment._\n"
-        
+
         return summary
 
     @staticmethod
@@ -107,7 +112,7 @@ class ReportSynthesizer:
         text = "## I. SECT & TEMPERAMENT (HISTORICAL)\n"
         text += f"**Sect:** {summary.get('sect', 'Unknown')}\n"
         text += f"**Temperament:** {primary_temp}\n"
-        
+
         # Show humoral quality scores if available
         if scores:
             hot = scores.get("Hot", 0)
@@ -115,12 +120,20 @@ class ReportSynthesizer:
             moist = scores.get("Moist", 0)
             dry = scores.get("Dry", 0)
             text += f"**Humoral Qualities:** Hot: {hot}, Cold: {cold}, Moist: {moist}, Dry: {dry}\n"
-            
+
             if net:
                 hc = net.get("Hot_vs_Cold", 0)
                 md = net.get("Moist_vs_Dry", 0)
-                hc_str = f"Hot+{hc}" if hc > 0 else (f"Cold+{abs(hc)}" if hc < 0 else "Balanced")
-                md_str = f"Moist+{md}" if md > 0 else (f"Dry+{abs(md)}" if md < 0 else "Balanced")
+                hc_str = (
+                    f"Hot+{hc}"
+                    if hc > 0
+                    else (f"Cold+{abs(hc)}" if hc < 0 else "Balanced")
+                )
+                md_str = (
+                    f"Moist+{md}"
+                    if md > 0
+                    else (f"Dry+{abs(md)}" if md < 0 else "Balanced")
+                )
                 text += f"**Net Balance:** {hc_str}, {md_str}\n"
 
         text += "\n"
@@ -131,16 +144,16 @@ class ReportSynthesizer:
     def _generate_house_systems(report: Dict) -> str:
         text = "## IV. HOUSE CUSPS (WHOLE SIGN / PLACIDUS)\n"
         houses = report.get("houses", {})
-        
+
         # Sort keys to ensure 1-12 order even if Dict is unordered
         sorted_keys = sorted(houses.keys(), key=lambda x: int(x))
-        
+
         cols = []
         for k in sorted_keys:
             val = houses[k]
             fmt = format_longitude(val)
             cols.append(f"| {k} | {fmt['string']} |")
-            
+
         text += "| House | Cusp |\n|---|---|\n" + "\n".join(cols) + "\n"
         return text
 
@@ -149,11 +162,11 @@ class ReportSynthesizer:
         text = "## V. ASPECT ANALYSIS: THE GEOMETRY OF FATE\n"
         text += "---\n"
         aspects = report.get("aspects", [])
-        
+
         if not aspects:
             text += "_No major classical aspects detected within standard orbs._\n"
             return text
-            
+
         # Group aspects by planet to make it more narrative
         for asp in aspects:
             # Handle both object and dict
@@ -176,18 +189,18 @@ class ReportSynthesizer:
             p2 = p2_raw.value if hasattr(p2_raw, "value") else p2_raw
             type_ = type_raw.value if hasattr(type_raw, "value") else type_raw
             apply_str = "Applying" if is_applying else "Separating"
-            
+
             # Classify the dynamic using traditional planet natures
             MALEFICS = {"Mars", "Saturn", "Pluto"}
             BENEFICS = {"Venus", "Jupiter"}
-            
+
             narrative = ""
             if type_ == "Conjunction":
                 # Conjunctions take on the nature of the planets involved
                 planets = {p1, p2}
                 has_malefic = bool(planets & MALEFICS)
                 has_benefic = bool(planets & BENEFICS)
-                
+
                 if has_malefic and not has_benefic:
                     narrative = f"The conjunction of {p1} and {p2} is **Volatile**. The malefic nature dominates, intensifying destructive or challenging energies."
                 elif has_malefic and has_benefic:
@@ -205,38 +218,46 @@ class ReportSynthesizer:
                 narrative += " This dynamic is **increasing in intensity** as the life progresses."
             else:
                 narrative += " This dynamic represents a **resolved pattern** from earlier in life or ancestral inheritance."
-            
+
             text += f"#### {p1} {type_} {p2} ({orb}°, {apply_str})\n"
             text += f"{narrative}\n"
             if interp:
                 text += f"\n> **Dossier Entry:** {interp}\n"
             text += "\n"
-                
+
         return text
 
     @staticmethod
     def _generate_dignity_breakdown(report: Dict) -> str:
         text = "## II. SOVEREIGN POWER STRUCTURE\n"
         teams = report.get("summary", {})
-        
-        text += f"**Constructive Team:** {', '.join(teams.get('constructive_team', []))}\n"
-        text += f"**Destructive Team:** {', '.join(teams.get('destructive_team', []))}\n"
-        
+
+        text += (
+            f"**Constructive Team:** {', '.join(teams.get('constructive_team', []))}\n"
+        )
+        text += (
+            f"**Destructive Team:** {', '.join(teams.get('destructive_team', []))}\n"
+        )
+
         receptions = teams.get("mutual_receptions", [])
         if receptions:
             text += "**Mutual Receptions:**\n"
             for r in receptions:
                 # Handle both dict and object (Aspect-like)
                 if hasattr(r, "planet_a"):
-                    pa = r.planet_a.value if hasattr(r.planet_a, "value") else r.planet_a
-                    pb = r.planet_b.value if hasattr(r.planet_b, "value") else r.planet_b
+                    pa = (
+                        r.planet_a.value if hasattr(r.planet_a, "value") else r.planet_a
+                    )
+                    pb = (
+                        r.planet_b.value if hasattr(r.planet_b, "value") else r.planet_b
+                    )
                     rt = r.type.value if hasattr(r.type, "value") else r.type
                 else:
                     pa = r.get("planet_a")
                     pb = r.get("planet_b")
                     rt = r.get("type")
                 text += f"- {pa} <-> {pb} ({rt})\n"
-                
+
         return text
 
     @staticmethod
@@ -244,7 +265,7 @@ class ReportSynthesizer:
         text = "## III. PLANETARY PROTOCOLS: THE INSTRUMENTS OF FATE\n"
         text += "---\n\n"
         planets = report.get("planets", [])
-        
+
         node_delineations = {
             "North_Node": {
                 "Aries": "AMPLIFICATION of the ego and impulsive drive. The 'Head' ingests identity with aggressive hunger. Danger of self-obsession.",
@@ -258,7 +279,7 @@ class ReportSynthesizer:
                 "Sagittarius": "GREED for meaning and expansion. A hunger for the 'Big Truth' that overlooks the immediate reality. The archer's aim is loud.",
                 "Capricorn": "AMPLIFICATION of ambition and structural legacy. Ingesting status and public power with a head that has no stomach.",
                 "Aquarius": "VORACIOUS innovation and tribal belonging. Hungering for the future while being possessed by the collective vision.",
-                "Pisces": "HYPER-DISSOLUTION. Ingesting the mystical leading to a 'loud' escapism or a voracious spiritual appetite."
+                "Pisces": "HYPER-DISSOLUTION. Ingesting the mystical leading to a 'loud' escapism or a voracious spiritual appetite.",
             },
             "South_Node": {
                 "Aries": "DIMINISHMENT of conflict. The 'Tail' releases the waste of past aggression. Learning to let go of the fight.",
@@ -272,8 +293,8 @@ class ReportSynthesizer:
                 "Sagittarius": "DIMINISHMENT of dogmatism. Letting go of aimless wandering or 'borrowed' truths. Purging the wanderlust.",
                 "Capricorn": "RELEASE of status-obsession. Releasing the cold pursuit of ambition. Detachment from the public mask.",
                 "Aquarius": "PURGING detachment. Releasing the residue of rebellion without a heart. Finding the simple human pulse.",
-                "Pisces": "DIMINISHMENT of escapism. Releasing the 'waste' of boundaryless surrender. Finding the structure within the void."
-            }
+                "Pisces": "DIMINISHMENT of escapism. Releasing the 'waste' of boundaryless surrender. Finding the structure within the void.",
+            },
         }
 
         # Compute Ascendant sign index for Whole Sign house placement
@@ -295,23 +316,28 @@ class ReportSynthesizer:
                 planet_sign_idx = int(lon / 30) % 12
                 house_num = ((planet_sign_idx - asc_sign_idx) % 12) + 1
                 ws_house = f" — House {house_num}"
-            
+
             dignity = p.get("dignities", {})
             total_score = dignity.get("total_score", 0)
-            
+
             solar = p.get("solar_status", "FREE")
             solar_cond = "✅ Clear"
-            if solar == "COMBUST": solar_cond = "🔥 COMBUST"
-            elif solar == "UNDER_BEAMS": solar_cond = "🌥️ Under the Beams"
-            elif solar == "CAZIMI": solar_cond = "👑 CAZIMI (Heart of the Sun)"
-            
+            if solar == "COMBUST":
+                solar_cond = "🔥 COMBUST"
+            elif solar == "UNDER_BEAMS":
+                solar_cond = "🌥️ Under the Beams"
+            elif solar == "CAZIMI":
+                solar_cond = "👑 CAZIMI (Heart of the Sun)"
+
             maltreatments = p.get("maltreatments", [])
             is_retro = p.get("retrograde", False)
             speed = p.get("speed", 0)
             retro_glyph = " ℞" if is_retro else ""
-            
-            text += f"### {name} in {sign} ({round(lon % 30, 2)}°){ws_house}{retro_glyph}\n"
-            
+
+            text += (
+                f"### {name} in {sign} ({round(lon % 30, 2)}°){ws_house}{retro_glyph}\n"
+            )
+
             if name not in ["North_Node", "South_Node"]:
                 # Build human-readable dignity list from score_breakdown
                 breakdown = dignity.get("score_breakdown", {})
@@ -332,50 +358,56 @@ class ReportSynthesizer:
                     dignity_labels.append(f"Detriment {breakdown['detriment']}")
                 if breakdown.get("fall", 0) < 0:
                     dignity_labels.append(f"Fall {breakdown['fall']}")
-                
-                dignity_str = ", ".join(dignity_labels) if dignity_labels else "Peregrine"
+
+                dignity_str = (
+                    ", ".join(dignity_labels) if dignity_labels else "Peregrine"
+                )
                 text += f"- **Essential Dignity:** `{total_score}` ({dignity_str})\n"
-                
+
                 # Peregrine Check
                 essential_sum = (
-                    breakdown.get("domicile", 0) + 
-                    breakdown.get("exaltation", 0) + 
-                    breakdown.get("triplicity", 0) + 
-                    breakdown.get("term", 0) + 
-                    breakdown.get("face", 0)
+                    breakdown.get("domicile", 0)
+                    + breakdown.get("exaltation", 0)
+                    + breakdown.get("triplicity", 0)
+                    + breakdown.get("term", 0)
+                    + breakdown.get("face", 0)
                 )
                 if essential_sum == 0 and name not in ["North_Node", "South_Node"]:
                     text += f"  - 🦅 **Peregrine (Wanderer):** This planet lacks essential dignity, behaving like a stranger in a foreign land without resources.\n"
-                
+
                 # Retrograde Check (Lilly: -5 accidental debility)
                 if is_retro:
                     text += f"  - 🔄 **Retrograde** ({speed:.4f}°/day): Planet moves against the natural order. Accidental debility (-5 per Lilly).\n"
-                
+
                 text += f"- **Solar Condition:** {solar_cond}\n"
-            
+
             if maltreatments:
                 text += f"- **MALTREATMENT (KAKOSIS):**\n"
                 for m in maltreatments:
                     text += f"  - ⚠️ {m.get('description')}\n"
             elif name not in ["North_Node", "South_Node"]:
-                 text += "- **Status:** ✨ No Maltreatment detected.\n"
-                 
+                text += "- **Status:** ✨ No Maltreatment detected.\n"
+
             impacts = p.get("impacts", [])
             for imp in impacts:
                 text += f"- **CONDITION:** {imp.get('cause')} -> {imp.get('effect')}\n"
-                
+
             # Delineation logic
             delin = p.get("delineation", "")
-            if (not delin or "not found" in delin.lower()) and name in node_delineations:
+            if (
+                not delin or "not found" in delin.lower()
+            ) and name in node_delineations:
                 # Normalize sign check to title case
-                sign_key = sign.title() if hasattr(sign, 'title') else str(sign)
-                delin = node_delineations[name].get(sign_key, "Delineation in progress.")
-            
+                sign_key = sign.title() if hasattr(sign, "title") else str(sign)
+                delin = node_delineations[name].get(
+                    sign_key, "Delineation in progress."
+                )
+
             if delin:
                 text += f"\n> {delin}\n"
-                
+
             text += "\n---\n"
-            
+
         return text
 
     @staticmethod
@@ -384,7 +416,7 @@ class ReportSynthesizer:
         stars = report.get("fixed_stars", [])
         if not stars:
             return ""
-        
+
         text = "## VII. FIXED STAR CONTACTS\n"
         for s in stars:
             star = s.get("star_name", "Unknown")
@@ -400,13 +432,13 @@ class ReportSynthesizer:
     @staticmethod
     def _generate_fate_timeline(report: Dict) -> str:
         text = "## VI. THE FATE TIMELINE: CHRONOCRATORS & DIRECTIONS\n"
-        
+
         # Distributor
         dist = report.get("primary_direction_distributor", {})
         if dist:
             text += f"**Current Distributor (Master Time Lord):** {dist.get('planet')} (Partner: {dist.get('partner')})\n"
             text += f"**Status:** {dist.get('description')}\n"
-            
+
         # Profections
         prof = report.get("profections", {})
         if prof:
@@ -426,6 +458,7 @@ class ReportSynthesizer:
         decennials = report.get("decennials", [])
         if decennials:
             from datetime import datetime
+
             now = datetime.now()
             current_major = None
             current_sub = None
@@ -445,7 +478,7 @@ class ReportSynthesizer:
                         break
                 except (ValueError, KeyError):
                     continue
-            
+
             if current_major:
                 dec_str = f"**Decennials (Valens):** {current_major['major_lord']}"
                 if current_sub:
@@ -459,33 +492,37 @@ class ReportSynthesizer:
         sr = report.get("solar_return", {})
         if sr and "return_date" in sr:
             text += f"**Solar Return Date:** {sr.get('return_date')}\n"
-            
+
         return text
 
     @staticmethod
     def _generate_forensic_audit(report: Dict) -> str:
         text = "## VIII. FORENSIC AUDIT: LIFE DOMAINS\n"
-        
+
         lots = report.get("forensic_lots", {})
         for lot_name, data in lots.items():
             status = data.get("status", "Clear")
             sign = data.get("sign", "")
             ruler = data.get("ruler", "")
-            
+
             # Extract position data if available
             lot_data = data.get("data", {})
             lot_lon = lot_data.get("longitude")
             lot_house = lot_data.get("house")
             lot_sign = lot_data.get("sign", sign)
-            
+
             # Format position
             pos_str = ""
             if lot_lon is not None:
                 fmt = format_longitude(lot_lon)
-                pos_str = f" [{fmt['string']}, House {lot_house}]" if lot_house else f" [{fmt['string']}]"
+                pos_str = (
+                    f" [{fmt['string']}, House {lot_house}]"
+                    if lot_house
+                    else f" [{fmt['string']}]"
+                )
             elif lot_sign:
                 pos_str = f" [in {lot_sign}]"
-            
+
             line = f"**{lot_name}:**{pos_str} {status}."
             if "Maltreated" in status or "maltreated" in status.lower():
                 details = data.get("maltreatment_details", [])
@@ -493,28 +530,36 @@ class ReportSynthesizer:
                     line += " " + " ".join(details)
             elif ruler:
                 line += f" Ruled by {ruler}."
-                 
+
             text += line + "\n"
-            
+
         return text
 
     @staticmethod
     def _generate_universal_overrides(report: Dict) -> str:
         text = "## IX. UNIVERSAL OVERRIDES: ACTS OF GOD\n"
-        
+
         events = report.get("summary", {}).get("universal_events", [])
         if not events:
             text += "No major universal overrides active in this period.\n"
         else:
             for ev in events:
-                lon = ev.get('longitude', 0)
-                fmt = format_longitude(lon) if isinstance(lon, (int, float)) else {"string": str(lon)}
-                sign_raw = ev.get('sign', 'N/A')
-                sign_str = sign_raw.value if hasattr(sign_raw, 'value') else str(sign_raw)
-                text += f"- **{ev.get('type')}:** {fmt['string']}. Impacting {sign_str}.\n"
-                
+                lon = ev.get("longitude", 0)
+                fmt = (
+                    format_longitude(lon)
+                    if isinstance(lon, (int, float))
+                    else {"string": str(lon)}
+                )
+                sign_raw = ev.get("sign", "N/A")
+                sign_str = (
+                    sign_raw.value if hasattr(sign_raw, "value") else str(sign_raw)
+                )
+                text += (
+                    f"- **{ev.get('type')}:** {fmt['string']}. Impacting {sign_str}.\n"
+                )
+
         audit = report.get("summary", {}).get("universal_causation_audit", [])
         for a in audit:
             text += f"- **{a.get('cause')}:** {a.get('rule')}\n"
-            
+
         return text

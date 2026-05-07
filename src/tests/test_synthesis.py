@@ -1,21 +1,36 @@
 """Tests for synthesis.py — ReportSynthesizer."""
+
 from src.engine.synthesis import ReportSynthesizer
 
 
 def _build_minimal_report():
     """Build a minimal valid report dict for synthesis."""
     return {
-        "soul_guardian": {"almuten": "Jupiter", "job_description": "Expansion and wisdom"},
+        "soul_guardian": {
+            "almuten": "Jupiter",
+            "job_description": "Expansion and wisdom",
+        },
         "vitality": {
             "hyleg": {"name": "Sun", "type": "Planet"},
             "alcocoden": {"name": "Jupiter", "aspect": "Trine"},
-            "years_capacity": {"default": {"base_years": 79, "base_years_type": "Major", "alcocoden": "Jupiter", "vitality_rating": "Strong"}},
+            "years_capacity": {
+                "default": {
+                    "base_years": 79,
+                    "base_years_type": "Major",
+                    "alcocoden": "Jupiter",
+                    "vitality_rating": "Strong",
+                }
+            },
             "anareta": {"name": "Mars", "reason": "Square to Hyleg"},
             "vitality_rating": "Strong",
         },
         "summary": {
             "sect": "Day",
-            "temperament": {"primary_temperament": "Sanguine", "scores": {"Hot": 4, "Cold": 2, "Moist": 3, "Dry": 1}, "net_balance": {"Hot_vs_Cold": 2, "Moist_vs_Dry": 2}},
+            "temperament": {
+                "primary_temperament": "Sanguine",
+                "scores": {"Hot": 4, "Cold": 2, "Moist": 3, "Dry": 1},
+                "net_balance": {"Hot_vs_Cold": 2, "Moist_vs_Dry": 2},
+            },
             "constructive_team": ["Jupiter", "Sun"],
             "destructive_team": ["Mars"],
             "mutual_receptions": [],
@@ -27,7 +42,19 @@ def _build_minimal_report():
                 "name": "Sun",
                 "sign": "Leo",
                 "longitude": 126.5,
-                "dignities": {"total_score": 9, "score_breakdown": {"domicile": 5, "exaltation": 0, "triplicity": 3, "term": 0, "face": 1, "monomoiria": 0, "detriment": 0, "fall": 0}},
+                "dignities": {
+                    "total_score": 9,
+                    "score_breakdown": {
+                        "domicile": 5,
+                        "exaltation": 0,
+                        "triplicity": 3,
+                        "term": 0,
+                        "face": 1,
+                        "monomoiria": 0,
+                        "detriment": 0,
+                        "fall": 0,
+                    },
+                },
                 "solar_status": "SUN",
                 "maltreatments": [],
                 "retrograde": False,
@@ -39,7 +66,19 @@ def _build_minimal_report():
                 "name": "Moon",
                 "sign": "Cancer",
                 "longitude": 100.0,
-                "dignities": {"total_score": 5, "score_breakdown": {"domicile": 5, "exaltation": 0, "triplicity": 0, "term": 0, "face": 0, "monomoiria": 0, "detriment": 0, "fall": 0}},
+                "dignities": {
+                    "total_score": 5,
+                    "score_breakdown": {
+                        "domicile": 5,
+                        "exaltation": 0,
+                        "triplicity": 0,
+                        "term": 0,
+                        "face": 0,
+                        "monomoiria": 0,
+                        "detriment": 0,
+                        "fall": 0,
+                    },
+                },
                 "solar_status": "FREE",
                 "maltreatments": [],
                 "retrograde": False,
@@ -50,20 +89,43 @@ def _build_minimal_report():
         ],
         "houses": {str(i): (i - 1) * 30.0 for i in range(1, 13)},
         "aspects": [
-            {"planet_a": "Sun", "planet_b": "Moon", "type": "Sextile", "orb": 3.5, "is_applying": True, "text": "Harmonious luminaries."},
+            {
+                "planet_a": "Sun",
+                "planet_b": "Moon",
+                "type": "Sextile",
+                "orb": 3.5,
+                "is_applying": True,
+                "text": "Harmonious luminaries.",
+            },
         ],
         "fixed_stars": [
-            {"star_name": "Regulus", "planet_name": "Sun", "message": "Royal star conjunct Sun.", "mythology": "Heart of the Lion"},
+            {
+                "star_name": "Regulus",
+                "planet_name": "Sun",
+                "message": "Royal star conjunct Sun.",
+                "mythology": "Heart of the Lion",
+            },
         ],
         "forensic_lots": {
-            "Lot of Fortune": {"status": "Clear", "sign": "Virgo", "ruler": "Mercury", "data": {"longitude": 155.0, "house": 6, "sign": "Virgo"}},
+            "Lot of Fortune": {
+                "status": "Clear",
+                "sign": "Virgo",
+                "ruler": "Mercury",
+                "data": {"longitude": 155.0, "house": 6, "sign": "Virgo"},
+            },
         },
         "profections": {"lord_of_year": "Jupiter", "annual_sign": "Sagittarius"},
-        "firdaria": {"Major Period": "Jupiter", "Sub Period": "Venus", "Sub Start": "2024-01-01", "Sub End": "2025-06-01"},
+        "firdaria": {
+            "Major Period": "Jupiter",
+            "Sub Period": "Venus",
+            "Sub Start": "2024-01-01",
+            "Sub End": "2025-06-01",
+        },
     }
 
 
 # ─── synthesize (full pipeline) ─────────────────────────────────────────────
+
 
 def test_synthesize_returns_string():
     report = _build_minimal_report()
@@ -89,6 +151,7 @@ def test_synthesize_contains_all_sections():
 
 # ─── _generate_executive_summary ─────────────────────────────────────────────
 
+
 def test_executive_summary_almuten():
     report = _build_minimal_report()
     result = ReportSynthesizer._generate_executive_summary(report)
@@ -112,6 +175,7 @@ def test_executive_summary_anareta():
 
 
 # ─── _generate_constitution ──────────────────────────────────────────────────
+
 
 def test_constitution_sect_and_temperament():
     report = _build_minimal_report()
@@ -138,6 +202,7 @@ def test_constitution_string_temperament():
 
 # ─── _generate_dignity_breakdown ─────────────────────────────────────────────
 
+
 def test_dignity_breakdown_teams():
     report = _build_minimal_report()
     result = ReportSynthesizer._generate_dignity_breakdown(report)
@@ -146,6 +211,7 @@ def test_dignity_breakdown_teams():
 
 
 # ─── _generate_planetary_protocols ───────────────────────────────────────────
+
 
 def test_planetary_protocols_sun():
     report = _build_minimal_report()
@@ -163,18 +229,20 @@ def test_planetary_protocols_delineation():
 def test_planetary_protocols_node_delineation():
     """Nodes should get fallback delineation from internal dict."""
     report = _build_minimal_report()
-    report["planets"].append({
-        "name": "North_Node",
-        "sign": "Aries",
-        "longitude": 10.0,
-        "dignities": {"total_score": 0, "score_breakdown": {}},
-        "solar_status": "FREE",
-        "maltreatments": [],
-        "retrograde": False,
-        "speed": 0.0,
-        "impacts": [],
-        "delineation": "",
-    })
+    report["planets"].append(
+        {
+            "name": "North_Node",
+            "sign": "Aries",
+            "longitude": 10.0,
+            "dignities": {"total_score": 0, "score_breakdown": {}},
+            "solar_status": "FREE",
+            "maltreatments": [],
+            "retrograde": False,
+            "speed": 0.0,
+            "impacts": [],
+            "delineation": "",
+        }
+    )
     result = ReportSynthesizer._generate_planetary_protocols(report)
     assert "North_Node" in result
     assert "AMPLIFICATION" in result  # From the node_delineations dict for Aries
@@ -197,13 +265,16 @@ def test_planetary_protocols_combust():
 
 def test_planetary_protocols_maltreatment():
     report = _build_minimal_report()
-    report["planets"][1]["maltreatments"] = [{"description": "Besieged by Mars and Saturn"}]
+    report["planets"][1]["maltreatments"] = [
+        {"description": "Besieged by Mars and Saturn"}
+    ]
     result = ReportSynthesizer._generate_planetary_protocols(report)
     assert "MALTREATMENT" in result
     assert "Besieged" in result
 
 
 # ─── _generate_house_systems ────────────────────────────────────────────────
+
 
 def test_house_systems_12_rows():
     report = _build_minimal_report()
@@ -213,6 +284,7 @@ def test_house_systems_12_rows():
 
 
 # ─── _generate_aspect_analysis ──────────────────────────────────────────────
+
 
 def test_aspect_analysis_sextile():
     report = _build_minimal_report()
@@ -237,6 +309,7 @@ def test_aspect_analysis_applying():
 
 # ─── _generate_fixed_stars ──────────────────────────────────────────────────
 
+
 def test_fixed_stars_present():
     report = _build_minimal_report()
     result = ReportSynthesizer._generate_fixed_stars(report)
@@ -252,6 +325,7 @@ def test_fixed_stars_empty():
 
 
 # ─── _generate_fate_timeline ────────────────────────────────────────────────
+
 
 def test_fate_timeline_profections():
     report = _build_minimal_report()
@@ -269,6 +343,7 @@ def test_fate_timeline_firdaria():
 
 # ─── _generate_forensic_audit ───────────────────────────────────────────────
 
+
 def test_forensic_audit_lot():
     report = _build_minimal_report()
     result = ReportSynthesizer._generate_forensic_audit(report)
@@ -278,6 +353,7 @@ def test_forensic_audit_lot():
 
 
 # ─── _generate_universal_overrides ──────────────────────────────────────────
+
 
 def test_universal_overrides_empty():
     report = _build_minimal_report()

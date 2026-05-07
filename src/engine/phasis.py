@@ -1,8 +1,9 @@
-import swisseph as swe
-import math
-from typing import Dict, List, Optional, Tuple
 import logging
-from .models import PlanetName, PlanetaryPhase, SolarProximity, Planet, Sign
+from typing import Dict, List
+
+import swisseph as swe
+
+from .models import Planet, PlanetaryPhase, PlanetName, SolarProximity
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,7 @@ AV_THRESHOLDS = {
     PlanetName.MERCURY: 12.0,
     # Venus is asymmetric
     "VENUS_EVENING": 5.0,
-    "VENUS_MORNING": 7.0
+    "VENUS_MORNING": 7.0,
 }
 
 NAME_TO_SWE = {
@@ -27,6 +28,7 @@ NAME_TO_SWE = {
     PlanetName.JUPITER: swe.JUPITER,
     PlanetName.SATURN: swe.SATURN,
 }
+
 
 class PhasisEngine:
     @staticmethod
@@ -47,8 +49,8 @@ class PhasisEngine:
         diff = abs(planet_lon - sun_lon)
         if diff > 180:
             diff = 360 - diff
-            
-        if diff <= (17.0 / 60.0): # 17 minutes for Cazimi
+
+        if diff <= (17.0 / 60.0):  # 17 minutes for Cazimi
             return SolarProximity.CAZIMI
         elif diff <= 8.0:
             return SolarProximity.COMBUST
@@ -58,13 +60,16 @@ class PhasisEngine:
             return SolarProximity.FREE
 
     @staticmethod
-    def check_chariot(planet_name: PlanetName, planet_lon: float, domiciles: Dict, terms: Dict) -> bool:
+    def check_chariot(
+        planet_name: PlanetName, planet_lon: float, domiciles: Dict, terms: Dict
+    ) -> bool:
         """
         A planet is in its chariot if it is in its own Domicile, Exaltation, or Bounds (Terms).
         Ref: Paulus Alexandrinus, Introduction to Astrology, Ch. 14.
         """
         from .dignities import DignityCalculator
         from .models import Sect
+
         # Use a neutral sect for essential ruler lookup (chariot doesn't depend on sect)
         rulers = DignityCalculator.get_essential_rulers(planet_lon, Sect.DAY)
         if rulers.get("domicile") == planet_name:
@@ -128,7 +133,11 @@ class PhasisEngine:
         oriental = PhasisEngine.is_oriental(planet_lon, sun_lon)
 
         if planet_name == PlanetName.VENUS:
-            threshold = float(AV_THRESHOLDS["VENUS_MORNING"] if oriental else AV_THRESHOLDS["VENUS_EVENING"])
+            threshold = float(
+                AV_THRESHOLDS["VENUS_MORNING"]
+                if oriental
+                else AV_THRESHOLDS["VENUS_EVENING"]
+            )
         else:
             threshold = float(AV_THRESHOLDS.get(planet_name, 12.0))
 
@@ -153,7 +162,9 @@ class PhasisEngine:
             # Find next rise/set near the reference JD.
             # Use jd-0.5 to ensure we catch the relevant event around the date boundary.
             # pyswisseph signature: rise_trans(tjdut, body, rsmi, geopos, atpress=0, attemp=0, flags=FLG_SWIEPH)
-            _res, tret = swe.rise_trans(jd - 0.5, p_id, rsmi, geopos, 0.0, 0.0, swe.FLG_SWIEPH)
+            _res, tret = swe.rise_trans(
+                jd - 0.5, p_id, rsmi, geopos, 0.0, 0.0, swe.FLG_SWIEPH
+            )
             t_event = float(tret[0])
 
             # Sun altitude at the planet's rise/set time.
@@ -210,9 +221,9 @@ class PhasisEngine:
         sun_lon: float,
     ) -> bool:
         return bool(
-            PhasisEngine.calculate_visibility_details(jd, lat, lon, planet_name, planet_lon, planet_lat, sun_lon).get(
-                "is_visible"
-            )
+            PhasisEngine.calculate_visibility_details(
+                jd, lat, lon, planet_name, planet_lon, planet_lat, sun_lon
+            ).get("is_visible")
         )
 
     @staticmethod
@@ -225,49 +236,66 @@ class PhasisEngine:
 
         oriental = PhasisEngine.is_oriental(planet.longitude, sun_lon)
         diff = abs(planet.longitude - sun_lon)
-        if diff > 180: diff = 360 - diff
-        
+        if diff > 180:
+            diff = 360 - diff
+
         # 1. Check Proximity first
         prox = PhasisEngine.get_solar_proximity(planet.longitude, sun_lon)
-        if prox == SolarProximity.CAZIMI: return PlanetaryPhase.CAZIMI
-        
+        if prox == SolarProximity.CAZIMI:
+            return PlanetaryPhase.CAZIMI
+
         # 2. Check Stations
-        if abs(planet.speed) < 0.05: # High threshold for stationarity in phasis
-            return PlanetaryPhase.STATION_RETROGRADE if planet.speed < 0 else PlanetaryPhase.STATION_DIRECT
+        if abs(planet.speed) < 0.05:  # High threshold for stationarity in phasis
+            return (
+                PlanetaryPhase.STATION_RETROGRADE
+                if planet.speed < 0
+                else PlanetaryPhase.STATION_DIRECT
+            )
 
         # 3. Superior vs Inferior
-        is_superior = planet.name in [PlanetName.MARS, PlanetName.JUPITER, PlanetName.SATURN]
-        
+        is_superior = planet.name in [
+            PlanetName.MARS,
+            PlanetName.JUPITER,
+            PlanetName.SATURN,
+        ]
+
         if is_superior:
-            if diff > 165: return PlanetaryPhase.OPPOSITION
+            if diff > 165:
+                return PlanetaryPhase.OPPOSITION
             if oriental:
-                if diff < 20: return PlanetaryPhase.MORNING_FIRST
+                if diff < 20:
+                    return PlanetaryPhase.MORNING_FIRST
                 return PlanetaryPhase.FREE
             else:
-                if diff < 20: return PlanetaryPhase.EVENING_LAST
+                if diff < 20:
+                    return PlanetaryPhase.EVENING_LAST
                 return PlanetaryPhase.FREE
         else:
             # Inferior Cycle
             if oriental:
-                if planet.speed < 0: return PlanetaryPhase.MORNING_FIRST
+                if planet.speed < 0:
+                    return PlanetaryPhase.MORNING_FIRST
                 return PlanetaryPhase.MORNING_LAST
             else:
-                if planet.speed > 0: return PlanetaryPhase.EVENING_FIRST
+                if planet.speed > 0:
+                    return PlanetaryPhase.EVENING_FIRST
                 return PlanetaryPhase.EVENING_LAST
 
         return PlanetaryPhase.FREE
 
     @staticmethod
-    def calculate_heliacal_events(jd: float, geo_lat: float, geo_lon: float) -> List[Dict]:
+    def calculate_heliacal_events(
+        jd: float, geo_lat: float, geo_lon: float
+    ) -> List[Dict]:
         """
         Calculates heliacal rising and setting dates for all traditional planets.
-        
+
         Uses Swiss Ephemeris swe.heliacal_ut() which implements Schoch/Reingold
         visibility algorithms based on arcus visionis.
-        
+
         Heliacal Rising = first morning visibility after being hidden in Sun's rays.
         Heliacal Setting = last evening visibility before disappearing into Sun's rays.
-        
+
         These were crucial in Mesopotamian & Ptolemaic astrology for determining
         planetary strength cycles (a planet near its heliacal rising is 'newly born'
         and gaining power).
@@ -290,32 +318,50 @@ class PhasisEngine:
         ]
 
         for pname in HELIACAL_PLANETS:
-            entry = {"planet": pname.value, "heliacal_rising": None, "heliacal_setting": None}
+            entry = {
+                "planet": pname.value,
+                "heliacal_rising": None,
+                "heliacal_setting": None,
+            }
             obj_name = pname.value
 
             try:
-                res_rise = swe.heliacal_ut(jd, geopos, atmo, observer, obj_name, swe.HELIACAL_RISING, 0)
+                res_rise = swe.heliacal_ut(
+                    jd, geopos, atmo, observer, obj_name, swe.HELIACAL_RISING, 0
+                )
                 if res_rise and len(res_rise) > 0:
                     rise_jd = res_rise[0]
                     y, m, d, h = swe.revjul(rise_jd)
-                    entry["heliacal_rising"] = {
+                    entry["heliacal_rising"] = {  # type: ignore
                         "jd": round(rise_jd, 4),
                         "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
                     }
             except Exception as e:
-                logger.warning("Heliacal rising calc failed for %s: %s", pname.value, repr(e), exc_info=True)
+                logger.warning(
+                    "Heliacal rising calc failed for %s: %s",
+                    pname.value,
+                    repr(e),
+                    exc_info=True,
+                )
 
             try:
-                res_set = swe.heliacal_ut(jd, geopos, atmo, observer, obj_name, swe.HELIACAL_SETTING, 0)
+                res_set = swe.heliacal_ut(
+                    jd, geopos, atmo, observer, obj_name, swe.HELIACAL_SETTING, 0
+                )
                 if res_set and len(res_set) > 0:
                     set_jd = res_set[0]
                     y, m, d, h = swe.revjul(set_jd)
-                    entry["heliacal_setting"] = {
+                    entry["heliacal_setting"] = {  # type: ignore
                         "jd": round(set_jd, 4),
                         "date": f"{int(y):04d}-{int(m):02d}-{int(d):02d}",
                     }
             except Exception as e:
-                logger.warning("Heliacal setting calc failed for %s: %s", pname.value, repr(e), exc_info=True)
+                logger.warning(
+                    "Heliacal setting calc failed for %s: %s",
+                    pname.value,
+                    repr(e),
+                    exc_info=True,
+                )
 
             results.append(entry)
 

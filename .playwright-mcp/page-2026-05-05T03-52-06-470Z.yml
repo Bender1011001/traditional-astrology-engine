@@ -1,0 +1,243 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e8]:
+    - link "✦ Traditional Astrology" [ref=e9] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e10]: ✦
+      - generic [ref=e11]: Traditional Astrology
+    - generic [ref=e12]:
+      - link "Get Your Reading" [ref=e13] [cursor=pointer]:
+        - /url: /#get-reading
+      - link "Sample Reading" [ref=e14] [cursor=pointer]:
+        - /url: /sample-reading.html
+      - link "Ask a Question" [ref=e15] [cursor=pointer]:
+        - /url: /horary.html
+      - link "Daily Planets" [ref=e16] [cursor=pointer]:
+        - /url: /daily.html
+      - link "Get Free Chart ✦" [ref=e17] [cursor=pointer]:
+        - /url: "#get-reading"
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - paragraph [ref=e21]: ✦ Free · No Account
+        - heading "Your Birth Chart, Properly Calculated." [level=1] [ref=e22]:
+          - text: Your Birth Chart,
+          - emphasis [ref=e23]: Properly Calculated.
+        - paragraph [ref=e24]: Enter your birth details and get a complete natal chart reading in seconds — planetary dignities, timing forecast, and classical interpretation. The same methods used for 2,000 years. Not generic sun-sign horoscopes.
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]: Date of Birth
+            - textbox "Date of Birth" [ref=e30]: 1990-06-15
+          - generic [ref=e31]:
+            - generic [ref=e32]: Time of Birth
+            - textbox "Time of Birth" [ref=e33]: 14:30
+            - generic [ref=e34] [cursor=pointer]:
+              - checkbox "I don't know my birth time" [ref=e35]
+              - generic [ref=e36]: I don't know my birth time
+          - generic [ref=e37]:
+            - generic [ref=e38]: City of Birth
+            - textbox "City of Birth" [ref=e39]:
+              - /placeholder: e.g. Los Angeles
+              - text: Los Angeles
+          - generic [ref=e40]:
+            - generic [ref=e41]: State / Country
+            - textbox "State / Country" [ref=e42]:
+              - /placeholder: e.g. CA or United Kingdom
+              - text: CA
+        - button "✦ Reveal My Chart — It's Free" [ref=e43] [cursor=pointer]:
+          - generic [ref=e44]: ✦ Reveal My Chart — It's Free
+        - paragraph [ref=e45]: No account · No email · Results in seconds
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e48]: 🔒
+            - text: We never sell your data
+          - generic [ref=e49]:
+            - generic [ref=e50]: 🪐
+            - text: Swiss Ephemeris accuracy
+          - generic [ref=e51]:
+            - generic [ref=e52]: ✓
+            - text: Whole Sign Houses
+    - generic [ref=e54]:
+      - generic [ref=e55]:
+        - generic [ref=e56]: 2,000+
+        - generic [ref=e57]: Years of Technique
+      - generic [ref=e58]:
+        - generic [ref=e59]: "7"
+        - generic [ref=e60]: Classical Planets
+      - generic [ref=e61]:
+        - generic [ref=e62]: 100%
+        - generic [ref=e63]: Deterministic Calculations
+      - generic [ref=e64]:
+        - generic [ref=e65]: $0
+        - generic [ref=e66]: To Get Your Chart
+    - generic [ref=e67]:
+      - heading "Popular Free Calculators" [level=2] [ref=e68]
+      - paragraph [ref=e69]: Start with the exact question you came here to answer, then generate the chart.
+      - generic [ref=e70]:
+        - link "Free Natal Chart PDF Generate a traditional chart preview and save it as a browser PDF." [ref=e71] [cursor=pointer]:
+          - /url: /free-natal-chart-pdf.html
+          - heading "Free Natal Chart PDF" [level=3] [ref=e72]
+          - paragraph [ref=e73]: Generate a traditional chart preview and save it as a browser PDF.
+        - link "Sect Astrology Calculator Find whether your chart is diurnal or nocturnal and why that matters." [ref=e74] [cursor=pointer]:
+          - /url: /sect-astrology-calculator.html
+          - heading "Sect Astrology Calculator" [level=3] [ref=e75]
+          - paragraph [ref=e76]: Find whether your chart is diurnal or nocturnal and why that matters.
+        - link "Annual Profections Find the activated house and timing themes for your current year." [ref=e77] [cursor=pointer]:
+          - /url: /annual-profections.html
+          - heading "Annual Profections" [level=3] [ref=e78]
+          - paragraph [ref=e79]: Find the activated house and timing themes for your current year.
+    - generic [ref=e80]:
+      - heading "How It Works" [level=2] [ref=e81]
+      - paragraph [ref=e82]: Three steps to discover your chart. No tricks, no gimmicks.
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]: "1"
+          - heading "Enter Your Birth Details" [level=3] [ref=e86]
+          - paragraph [ref=e87]: Date, time, and place of birth. That's all we need. The more precise your birth time, the more accurate the reading.
+        - generic [ref=e88]:
+          - generic [ref=e89]: "2"
+          - heading "We Calculate Your Chart" [level=3] [ref=e90]
+          - paragraph [ref=e91]: Our engine uses real astronomical data — the same Swiss Ephemeris used by professional astrologers — to compute your exact planetary positions.
+        - generic [ref=e92]:
+          - generic [ref=e93]: "3"
+          - heading "Read Your Personal Insights" [level=3] [ref=e94]
+          - paragraph [ref=e95]: Get a detailed interpretation based on classical techniques from Vettius Valens, Bonatti, and Dorotheus. Not generic sun-sign horoscopes — a real chart reading.
+    - generic [ref=e96]:
+      - heading "This Is Real Astrology" [level=2] [ref=e97]
+      - paragraph [ref=e98]: We don't guess. We calculate.
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - generic [ref=e101]: 🪐
+          - heading "Classical Technique" [level=3] [ref=e102]
+          - paragraph [ref=e103]: We use traditional methods — essential dignities, sect, whole sign houses, profections, firdaria — the way astrology was practiced for millennia.
+        - generic [ref=e104]:
+          - generic [ref=e105]: 📐
+          - heading "Precision Calculations" [level=3] [ref=e106]
+          - paragraph [ref=e107]: Every planet position calculated from real ephemeris data. Every dignity scored. Every aspect computed with exact orbs. Nothing made up.
+        - generic [ref=e108]:
+          - generic [ref=e109]: 🕰️
+          - heading "Timing Techniques" [level=3] [ref=e110]
+          - paragraph [ref=e111]: Know what phase of life you're in right now. Annual profections, firdaria periods, and zodiacal releasing tell you what this year means for you.
+        - generic [ref=e112]:
+          - generic [ref=e113]: 📜
+          - heading "Not AI Guesswork" [level=3] [ref=e114]
+          - paragraph [ref=e115]: Every interpretation is rooted in named classical sources. When we cite Valens or Bonatti, we mean it. You can check our work.
+    - generic [ref=e117]:
+      - 'heading "New: The Horary Oracle" [level=2] [ref=e118]'
+      - paragraph [ref=e119]: Have a specific, burning question? Will I get the job? Where are my lost keys? Ask the Oracle for a direct mathematical judgment using classical pre-1700s rules.
+      - link "✦ Ask a Specific Question" [ref=e120] [cursor=pointer]:
+        - /url: /horary.html
+    - generic [ref=e121]:
+      - heading "What You'll Discover" [level=2] [ref=e122]
+      - paragraph [ref=e123]: Here's a glimpse of what your reading includes.
+      - generic [ref=e124]:
+        - generic [ref=e125]:
+          - heading "✦ Your Planetary Positions" [level=4] [ref=e126]
+          - paragraph [ref=e127]: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn — each placed in their exact sign, degree, and house. No outer planets dominating the reading.
+        - generic [ref=e128]:
+          - heading "✦ Sect & Temperament" [level=4] [ref=e129]
+          - paragraph [ref=e130]: Were you born during the day or night? This changes everything. Your benefics, malefics, and overall constitution are different depending on sect.
+        - generic [ref=e131]:
+          - heading "✦ Essential Dignities" [level=4] [ref=e132]
+          - paragraph [ref=e133]: Which planets are strong in your chart? Which are struggling? The dignity scores reveal who has power in your life and who doesn't.
+        - generic [ref=e134]:
+          - heading "✦ Your Current Life Period" [level=4] [ref=e135]
+          - paragraph [ref=e136]: Annual profections and firdaria show exactly what themes dominate your life right now — and when they'll shift.
+        - generic [ref=e137]:
+          - heading "✦ The Lot of Fortune" [level=4] [ref=e138]
+          - paragraph [ref=e139]: This ancient calculation reveals where your physical circumstances and "luck" manifest. It's often the most surprising part of the reading.
+        - generic [ref=e140]:
+          - heading "✦ Fixed Stars" [level=4] [ref=e141]
+          - paragraph [ref=e142]: The brightest fixed stars near your key points can override planetary influence. This is the "force majeure" layer of your chart.
+      - link "✦ Get Your Reading Now" [ref=e144] [cursor=pointer]:
+        - /url: "#get-reading"
+    - generic [ref=e145]:
+      - heading "Simple, One-Time Pricing" [level=2] [ref=e146]
+      - paragraph [ref=e147]: No subscriptions. No monthly fees. Pay once, keep your reading forever.
+      - paragraph [ref=e148]:
+        - link "See a real example reading before you pay →" [ref=e149] [cursor=pointer]:
+          - /url: /sample-reading.html
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - generic [ref=e152]: Always Free
+          - heading "Chart Preview" [level=3] [ref=e153]
+          - generic [ref=e154]: $0
+          - generic [ref=e155]: No account required
+          - list [ref=e156]:
+            - listitem [ref=e157]: ✓ Planet positions & signs
+            - listitem [ref=e158]: ✓ House placements
+            - listitem [ref=e159]: ✓ Sect determination
+            - listitem [ref=e160]: ✓ Quick dignity overview
+          - link "Get Free Chart →" [ref=e161] [cursor=pointer]:
+            - /url: "#get-reading"
+          - paragraph [ref=e162]: Instant. No email. No credit card.
+        - generic [ref=e163]:
+          - generic [ref=e164]: Most Popular
+          - heading "Full Reading" [level=3] [ref=e165]
+          - generic [ref=e166]: $25
+          - generic [ref=e167]: One-time · No account needed
+          - list [ref=e168]:
+            - listitem [ref=e169]: ✓ Complete natal interpretation
+            - listitem [ref=e170]: ✓ Essential dignity analysis
+            - listitem [ref=e171]: ✓ Annual profections & firdaria
+            - listitem [ref=e172]: ✓ Lot of Fortune & key Arabic lots
+            - listitem [ref=e173]: ✓ Downloadable PDF report
+          - link "Get Full Reading — $25" [ref=e174] [cursor=pointer]:
+            - /url: "#get-reading"
+          - paragraph [ref=e175]: Secure payment via Stripe.
+        - generic [ref=e176]:
+          - generic [ref=e177]: Deep Dive
+          - heading "Complete Analysis" [level=3] [ref=e178]
+          - generic [ref=e179]: $69
+          - generic [ref=e180]: One-time · No account needed
+          - list [ref=e181]:
+            - listitem [ref=e182]: ✓ 20+ page in-depth report
+            - listitem [ref=e183]: ✓ Primary directions & decennials
+            - listitem [ref=e184]: ✓ Zodiacal releasing
+            - listitem [ref=e185]: ✓ Historical health correspondences
+            - listitem [ref=e186]: ✓ Fixed star analysis
+            - listitem [ref=e187]: ✓ 10-year timing forecast
+          - link "Get Complete Analysis — $69" [ref=e188] [cursor=pointer]:
+            - /url: "#get-reading"
+          - paragraph [ref=e189]: Secure payment via Stripe.
+    - generic [ref=e190]:
+      - heading "Frequently Asked Questions" [level=2] [ref=e191]
+      - generic [ref=e192]:
+        - group [ref=e193]:
+          - generic "What is traditional astrology? +" [ref=e194] [cursor=pointer]
+        - group [ref=e195]:
+          - generic "Do I need to know my birth time? +" [ref=e196] [cursor=pointer]
+        - group [ref=e197]:
+          - generic "How is this different from free astrology sites? +" [ref=e198] [cursor=pointer]
+        - group [ref=e199]:
+          - generic "Is this AI-generated? +" [ref=e200] [cursor=pointer]
+        - group [ref=e201]:
+          - generic "Do I need an account? +" [ref=e202] [cursor=pointer]
+        - group [ref=e203]:
+          - generic "Can I get a refund? +" [ref=e204] [cursor=pointer]
+    - generic [ref=e205]:
+      - heading "Ready to Discover Your Chart?" [level=2] [ref=e206]
+      - paragraph [ref=e207]: Enter your birth details and see what the classical tradition reveals about your life.
+      - link "✦ Get Your Reading Now" [ref=e208] [cursor=pointer]:
+        - /url: "#get-reading"
+      - paragraph [ref=e209]: Free preview — no account or email required.
+    - generic [ref=e211]:
+      - generic [ref=e212]: ✦ Traditional Astrology
+      - generic [ref=e213]:
+        - link "Free PDF Preview" [ref=e214] [cursor=pointer]:
+          - /url: /free-natal-chart-pdf.html
+        - link "Sect Calculator" [ref=e215] [cursor=pointer]:
+          - /url: /sect-astrology-calculator.html
+        - link "Profections" [ref=e216] [cursor=pointer]:
+          - /url: /annual-profections.html
+        - link "Privacy" [ref=e217] [cursor=pointer]:
+          - /url: privacy.html
+        - link "Terms" [ref=e218] [cursor=pointer]:
+          - /url: terms.html
+        - link "Refunds" [ref=e219] [cursor=pointer]:
+          - /url: refunds.html
+        - link "Support" [ref=e220] [cursor=pointer]:
+          - /url: mailto:support@traditional-astrology.com
+      - paragraph [ref=e221]:
+        - text: © 2026 Traditional Astrology. All rights reserved.
+        - text: For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.

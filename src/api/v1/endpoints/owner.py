@@ -1,35 +1,56 @@
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session
 
 from src.api.v1.auth import get_current_user
-from src.api.v1.schemas import OwnerSubscriptionUpdateRequest
+from src.api.v1.schemas import OwnerSubscriptionUpdateRequest  # type: ignore
 from src.core.config import settings
 from src.database.core import get_db
-from src.database.models import Invoice, Lead, OutreachTarget, SubscriptionPlan, User, UserSubscription
+from src.database.models import (
+    ChartEvent,
+    Invoice,
+    Lead,
+    OutreachTarget,
+    ReadingFeedbackEvent,
+    SubscriptionPlan,
+    User,
+    UserSubscription,
+)
 
 router = APIRouter()
 
 
 def _owner_emails() -> List[str]:
-    return [email.strip().lower() for email in settings.OWNER_EMAILS.split(",") if email.strip()]
+    return [
+        email.strip().lower()
+        for email in settings.OWNER_EMAILS.split(",")
+        if email.strip()
+    ]
 
 
 def require_owner(
     current_user: Optional[User] = Depends(get_current_user),
     owner_key: Optional[str] = Header(None, alias="X-Owner-Key"),
 ) -> Optional[User]:
-    if owner_key and settings.OWNER_BOOTSTRAP_KEY and owner_key == settings.OWNER_BOOTSTRAP_KEY:
+    if (
+        owner_key
+        and settings.OWNER_BOOTSTRAP_KEY
+        and owner_key == settings.OWNER_BOOTSTRAP_KEY
+    ):
         return current_user
 
     if not current_user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated."
+        )
 
     owner_emails = _owner_emails()
     if current_user.email.lower() not in owner_emails:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Owner access required.")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Owner access required."
+        )
 
     return current_user
 
@@ -53,7 +74,9 @@ def list_plans(
                 "id": plan.id,
                 "tier": plan.tier,
                 "price_monthly": float(plan.price_monthly),
-                "price_annual": float(plan.price_annual) if plan.price_annual is not None else None,
+                "price_annual": (
+                    float(plan.price_annual) if plan.price_annual is not None else None
+                ),
                 "chart_quota": plan.chart_quota,
                 "api_quota": plan.api_quota,
                 # For verification/debug (not shown publicly; owner-only).
@@ -89,8 +112,13 @@ def list_users(
 
     users = query.order_by(User.created_at.desc()).limit(limit).all()
     user_ids = [u.id for u in users]
-    all_invoices = db.query(Invoice).filter(Invoice.user_id.in_(user_ids)).order_by(Invoice.created_at.desc()).all()
-    
+    all_invoices = (
+        db.query(Invoice)
+        .filter(Invoice.user_id.in_(user_ids))
+        .order_by(Invoice.created_at.desc())
+        .all()
+    )
+
     latest_invoices = {}
     for inv in all_invoices:
         if inv.user_id not in latest_invoices:
@@ -119,19 +147,100 @@ def list_users(
                 "subscription": {
                     "status": sub.status if sub else "none",
                     "plan_tier": plan_name,
-                    "current_period_end": sub.current_period_end.isoformat() if sub and sub.current_period_end else None,
+                    "current_period_end": (
+                        sub.current_period_end.isoformat()
+                        if sub and sub.current_period_end
+                        else None
+                    ),
                     "cancel_at_period_end": sub.cancel_at_period_end if sub else False,
                 },
                 "payment": {
                     "status": payment_status,
-                    "amount_paid": float(last_invoice.amount_paid) if last_invoice and last_invoice.amount_paid else None,
-                    "amount_due": float(last_invoice.amount_due) if last_invoice and last_invoice.amount_due else None,
-                    "invoice_date": last_invoice.created_at.isoformat() if last_invoice else None,
+                    "amount_paid": (
+                        float(last_invoice.amount_paid)
+                        if last_invoice and last_invoice.amount_paid
+                        else None
+                    ),
+                    "amount_due": (
+                        float(last_invoice.amount_due)
+                        if last_invoice and last_invoice.amount_due
+                        else None
+                    ),
+                    "invoice_date": (
+                        last_invoice.created_at.isoformat() if last_invoice else None
+                    ),
                 },
             }
         )
 
     return {"users": results}
+
+
+@router.get("/chart-events")
+def list_chart_events(
+    owner: Optional[User] = Depends(require_owner),
+    db: Session = Depends(get_db),
+    limit: int = 50,
+    include_reading_html: bool = False,
+):
+    limit = max(1, min(int(limit or 50), 500))
+    events = (
+        db.query(ChartEvent).order_by(ChartEvent.created_at.desc()).limit(limit).all()
+    )
+    event_ids = [event.id for event in events]
+    feedback_rows = (
+        db.query(ReadingFeedbackEvent)
+        .filter(ReadingFeedbackEvent.chart_event_id.in_(event_ids))
+        .order_by(ReadingFeedbackEvent.created_at.asc())
+        .all()
+        if event_ids
+        else []
+    )
+
+    feedback_by_chart = {}
+    for feedback in feedback_rows:
+        feedback_by_chart.setdefault(feedback.chart_event_id, []).append(feedback)
+
+    return {
+        "chart_events": [
+            {
+                "id": event.id,
+                "event_type": event.event_type,
+                "status": event.status,
+                "created_at": (
+                    event.created_at.isoformat() if event.created_at else None
+                ),
+                "client_ip": event.client_ip,
+                "user_agent": event.user_agent,
+                "referer": event.referer,
+                "path": event.path,
+                "request_payload": event.request_payload,
+                "chart_summary": event.chart_summary,
+                "reading_hash": event.reading_hash,
+                "reading_html": event.reading_html if include_reading_html else None,
+                "reading_html_chars": len(event.reading_html or ""),
+                "error_message": event.error_message,
+                "free_readings_remaining": event.free_readings_remaining,
+                "generation_ms": event.generation_ms,
+                "feedback": [
+                    {
+                        "id": feedback.id,
+                        "vote": feedback.vote,
+                        "source": feedback.source,
+                        "created_at": (
+                            feedback.created_at.isoformat()
+                            if feedback.created_at
+                            else None
+                        ),
+                        "client_ip": feedback.client_ip,
+                        "comment": feedback.comment,
+                    }
+                    for feedback in feedback_by_chart.get(event.id, [])
+                ],
+            }
+            for event in events
+        ]
+    }
 
 
 @router.post("/subscription/update")
@@ -142,11 +251,19 @@ def update_subscription(
 ):
     user = db.query(User).filter(User.id == payload.user_id).first()
     if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found."
+        )
 
-    plan = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier == payload.plan_tier).first()
+    plan = (
+        db.query(SubscriptionPlan)
+        .filter(SubscriptionPlan.tier == payload.plan_tier)
+        .first()
+    )
     if not plan:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Plan not found.")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Plan not found."
+        )
 
     sub = user.subscription
     if not sub:
@@ -154,8 +271,14 @@ def update_subscription(
         db.add(sub)
 
     current_plan_tier = sub.plan.tier if sub and sub.plan else "free"
-    current_paid = current_plan_tier != "free" and sub.status in {"active", "trial", "past_due"}
-    requested_status = payload.status or ("active" if payload.plan_tier != "free" else "active")
+    current_paid = current_plan_tier != "free" and sub.status in {
+        "active",
+        "trial",
+        "past_due",
+    }
+    requested_status = payload.status or (
+        "active" if payload.plan_tier != "free" else "active"
+    )
     downgrading = payload.plan_tier == "free" or requested_status == "canceled"
 
     if current_paid and downgrading and not payload.confirm_downgrade:
@@ -177,7 +300,9 @@ def update_subscription(
 
     if payload.current_period_end:
         try:
-            parsed = datetime.fromisoformat(payload.current_period_end.replace("Z", "+00:00"))
+            parsed = datetime.fromisoformat(
+                payload.current_period_end.replace("Z", "+00:00")
+            )
         except ValueError as exc:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -194,7 +319,9 @@ def update_subscription(
         "subscription": {
             "status": sub.status,
             "plan_tier": plan.tier,
-            "current_period_end": sub.current_period_end.isoformat() if sub.current_period_end else None,
+            "current_period_end": (
+                sub.current_period_end.isoformat() if sub.current_period_end else None
+            ),
             "cancel_at_period_end": sub.cancel_at_period_end,
         },
     }

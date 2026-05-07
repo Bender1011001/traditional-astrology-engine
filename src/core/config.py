@@ -1,5 +1,7 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class Settings(BaseSettings):
     STRIPE_SECRET_KEY: str
@@ -38,12 +40,16 @@ class Settings(BaseSettings):
     STRIPE_PRICE_FULL_ONETIME: str = ""
     STRIPE_PRICE_SINGLE_READING_ONETIME: str = ""
 
+    # Guest checkout (no-account flow) — $25 and $69 tiers
+    STRIPE_PRICE_FULL_READING: str = ""
+    STRIPE_PRICE_PREMIUM_AUDIT: str = ""
+
     # Public reading monetization:
-    # - First N free readings per IP per rolling window.
+    # - First N free readings per visitor per rolling window.
     # - Additional readings require one-time purchase.
     FREE_SINGLE_READINGS_PER_IP: int = 3
     FREE_SINGLE_READINGS_WINDOW_SECONDS: int = 86400
-    SINGLE_READING_PRICE_USD: int = 20
+    SINGLE_READING_PRICE_USD: int = 25
 
     TRIAL_DAYS_DEFAULT: int = 14
     # Revenue control:
@@ -70,4 +76,5 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-settings = Settings()
+
+settings = Settings()  # type: ignore

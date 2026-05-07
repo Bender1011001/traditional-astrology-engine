@@ -1,10 +1,13 @@
 from datetime import datetime, timezone
+
 import swisseph as swe
 from fastapi import APIRouter, HTTPException
-from src.api.v1.schemas import WorldRequest
+
+from src.api.v1.schemas import WorldRequest  # type: ignore
 from src.engine.mundane import build_world_dashboard
 
 router = APIRouter()
+
 
 @router.post("/world")
 async def world_dashboard(request: WorldRequest):
@@ -22,7 +25,9 @@ async def world_dashboard(request: WorldRequest):
     else:
         dt = datetime.now(timezone.utc)
 
-    jd = swe.julday(dt.year, dt.month, dt.day, dt.hour + dt.minute/60.0 + dt.second/3600.0)
+    jd = swe.julday(
+        dt.year, dt.month, dt.day, dt.hour + dt.minute / 60.0 + dt.second / 3600.0
+    )
     dashboard = build_world_dashboard(jd)
     dashboard["timestamp"] = dt.isoformat() + "Z"
     return dashboard

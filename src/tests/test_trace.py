@@ -1,11 +1,15 @@
-from src.engine.trace import ComputationTrace, TraceStep, CAT_ASTRONOMY
+from src.engine.trace import CAT_ASTRONOMY, ComputationTrace
+
 
 def test_computation_trace_initialization():
-    trace = ComputationTrace(subject_name="John Doe", birth_data="2000-01-01 12:00, New York")
+    trace = ComputationTrace(
+        subject_name="John Doe", birth_data="2000-01-01 12:00, New York"
+    )
     assert trace.subject_name == "John Doe"
     assert trace.birth_data == "2000-01-01 12:00, New York"
     assert len(trace.steps) == 0
     assert trace.elapsed_ms >= 0
+
 
 def test_computation_trace_add():
     trace = ComputationTrace()
@@ -18,9 +22,9 @@ def test_computation_trace_add():
         calculation="1+1=2",
         result=2,
         notes="note",
-        subsection="sub"
+        subsection="sub",
     )
-    
+
     assert len(trace.steps) == 1
     assert step == trace.steps[0]
     assert step.step_number == 1
@@ -34,22 +38,57 @@ def test_computation_trace_add():
     assert step.notes == "note"
     assert step.subsection == "sub"
 
+
 def test_computation_trace_categories_and_selection():
     trace = ComputationTrace()
-    trace.add(category="Cat A", technique="T1", inputs={}, rule="-", source="-", calculation="-", result="R")
-    trace.add(category="Cat A", technique="T2", inputs={}, rule="-", source="-", calculation="-", result="R")
-    trace.add(category="Cat B", technique="T3", inputs={}, rule="-", source="-", calculation="-", result="R")
-    
+    trace.add(
+        category="Cat A",
+        technique="T1",
+        inputs={},
+        rule="-",
+        source="-",
+        calculation="-",
+        result="R",
+    )
+    trace.add(
+        category="Cat A",
+        technique="T2",
+        inputs={},
+        rule="-",
+        source="-",
+        calculation="-",
+        result="R",
+    )
+    trace.add(
+        category="Cat B",
+        technique="T3",
+        inputs={},
+        rule="-",
+        source="-",
+        calculation="-",
+        result="R",
+    )
+
     assert trace.categories == ["Cat A", "Cat B"]
-    
+
     cat_a_steps = trace.steps_by_category("Cat A")
     assert len(cat_a_steps) == 2
     assert cat_a_steps[0].technique == "T1"
-    
+
+
 def test_computation_trace_to_dict():
     trace = ComputationTrace(subject_name="Alice", birth_data="TestData")
-    trace.add(category="Cat A", technique="T1", inputs={"a": "b"}, rule="Rule", source="Src", calculation="Calc", result="Result", notes="Note")
-    
+    trace.add(
+        category="Cat A",
+        technique="T1",
+        inputs={"a": "b"},
+        rule="Rule",
+        source="Src",
+        calculation="Calc",
+        result="Result",
+        notes="Note",
+    )
+
     d = trace.to_dict()
     assert d["subject_name"] == "Alice"
     assert d["birth_data"] == "TestData"
@@ -57,7 +96,7 @@ def test_computation_trace_to_dict():
     assert d["total_steps"] == 1
     assert "elapsed_ms" in d
     assert d["categories"] == ["Cat A"]
-    
+
     step_dict = d["steps"][0]
     assert step_dict["step"] == 1
     assert step_dict["category"] == "Cat A"

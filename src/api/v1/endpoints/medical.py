@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-from src.engine.models import Chart
+
 from src.engine.medical import MedicalAstrology
+from src.engine.models import Chart
 
 router = APIRouter()
 
@@ -8,6 +9,7 @@ MEDICAL_DISCLAIMER = (
     "FOR HISTORICAL AND EDUCATIONAL RESEARCH PURPOSES ONLY. NOT MEDICAL ADVICE. "
     "DO NOT USE FOR HEALTH DECISIONS OR SURGERY SCHEDULING."
 )
+
 
 @router.get("/surgery_check")
 async def surgery_check(body_part: str, jd: float):

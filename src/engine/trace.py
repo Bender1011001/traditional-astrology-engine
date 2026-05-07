@@ -10,25 +10,27 @@ The trace is rendered as a beautiful standalone HTML document.
 """
 
 from __future__ import annotations
+
 import time
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
 from datetime import datetime
+from typing import Any, Dict, List
 
 
 @dataclass
 class TraceStep:
     """A single auditable computation step."""
+
     step_number: int
-    category: str           # e.g. "Essential Dignities", "Lots", "Aspects"
-    technique: str          # e.g. "Domicile Lookup", "Lot of Fortune"
+    category: str  # e.g. "Essential Dignities", "Lots", "Aspects"
+    technique: str  # e.g. "Domicile Lookup", "Lot of Fortune"
     inputs: Dict[str, Any]  # Human-readable inputs
-    rule: str               # The rule or formula in plain language
-    source: str             # Historical source (e.g. "Ptolemy, Tetrabiblos I.17")
-    calculation: str        # Step-by-step arithmetic or logic
-    result: Any             # The final result of this step
-    notes: str = ""         # Optional practitioner notes
-    subsection: str = ""    # Optional grouping within category
+    rule: str  # The rule or formula in plain language
+    source: str  # Historical source (e.g. "Ptolemy, Tetrabiblos I.17")
+    calculation: str  # Step-by-step arithmetic or logic
+    result: Any  # The final result of this step
+    notes: str = ""  # Optional practitioner notes
+    subsection: str = ""  # Optional grouping within category
 
 
 class ComputationTrace:
@@ -105,7 +107,11 @@ class ComputationTrace:
                     "rule": s.rule,
                     "source": s.source,
                     "calculation": s.calculation,
-                    "result": str(s.result) if not isinstance(s.result, (str, int, float, bool, type(None))) else s.result,
+                    "result": (
+                        str(s.result)
+                        if not isinstance(s.result, (str, int, float, bool, type(None)))
+                        else s.result
+                    ),
                     "notes": s.notes,
                 }
                 for s in self.steps
@@ -114,23 +120,23 @@ class ComputationTrace:
 
 
 # ─── Category constants for consistency ───────────────────────────────────────
-CAT_ASTRONOMY    = "① Astronomical Foundations"
-CAT_SECT         = "② Sect Determination"
-CAT_DIGNITY      = "③ Essential Dignities"
-CAT_ACCIDENTAL   = "④ Accidental Dignities"
-CAT_ASPECTS      = "⑤ Aspects & Geometry"
-CAT_LOTS         = "⑥ Arabic Parts / Lots"
-CAT_RECEPTION    = "⑦ Reception & Mutual Reception"
-CAT_KAKOSIS      = "⑧ Conditions of Maltreatment (Kakosis)"
-CAT_VITALITY     = "⑨ Vitality & Longevity"
-CAT_ALMUTEN      = "⑩ Almuten Figuris & Lord of Geniture"
-CAT_TEMPERAMENT  = "⑪ Temperament (Humoral)"
-CAT_PROFECTIONS  = "⑫ Annual Profections"
-CAT_ZR           = "⑬ Zodiacal Releasing"
-CAT_FIRDARIA     = "⑭ Firdaria"
-CAT_DECENNIALS   = "⑮ Decennials"
-CAT_DIRECTIONS   = "⑯ Primary Directions"
-CAT_STARS        = "⑰ Fixed Stars & Parans"
-CAT_MANSIONS     = "⑱ Lunar Mansions"
-CAT_MUNDANE      = "⑲ Mundane Context"
-CAT_MEDICAL      = "⑳ Medical / Decumbiture"
+CAT_ASTRONOMY = "① Astronomical Foundations"
+CAT_SECT = "② Sect Determination"
+CAT_DIGNITY = "③ Essential Dignities"
+CAT_ACCIDENTAL = "④ Accidental Dignities"
+CAT_ASPECTS = "⑤ Aspects & Geometry"
+CAT_LOTS = "⑥ Arabic Parts / Lots"
+CAT_RECEPTION = "⑦ Reception & Mutual Reception"
+CAT_KAKOSIS = "⑧ Conditions of Maltreatment (Kakosis)"
+CAT_VITALITY = "⑨ Vitality & Longevity"
+CAT_ALMUTEN = "⑩ Almuten Figuris & Lord of Geniture"
+CAT_TEMPERAMENT = "⑪ Temperament (Humoral)"
+CAT_PROFECTIONS = "⑫ Annual Profections"
+CAT_ZR = "⑬ Zodiacal Releasing"
+CAT_FIRDARIA = "⑭ Firdaria"
+CAT_DECENNIALS = "⑮ Decennials"
+CAT_DIRECTIONS = "⑯ Primary Directions"
+CAT_STARS = "⑰ Fixed Stars & Parans"
+CAT_MANSIONS = "⑱ Lunar Mansions"
+CAT_MUNDANE = "⑲ Mundane Context"
+CAT_MEDICAL = "⑳ Medical / Decumbiture"

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone, date
+from datetime import date, datetime, timezone
 
 from src.core.config import settings
 
@@ -16,7 +16,9 @@ def free_individual_readings_promo_active(now: datetime | None = None) -> bool:
     if not bool(getattr(settings, "PROMO_FREE_INDIVIDUAL_READINGS", False)):
         return False
 
-    until = (getattr(settings, "PROMO_FREE_INDIVIDUAL_READINGS_UNTIL", "") or "").strip()
+    until = (
+        getattr(settings, "PROMO_FREE_INDIVIDUAL_READINGS_UNTIL", "") or ""
+    ).strip()
     if not until:
         return True
 
@@ -28,4 +30,3 @@ def free_individual_readings_promo_active(now: datetime | None = None) -> bool:
 
     now_d = (now or datetime.now(timezone.utc)).date()
     return now_d <= until_d
-

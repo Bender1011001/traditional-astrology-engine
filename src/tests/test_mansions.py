@@ -1,8 +1,9 @@
 """Tests for mansions.py — 28 Lunar Mansions (Picatrix)."""
+
 from src.engine.mansions import LunarMansionEngine
 
-
 # ─── Catalog completeness ────────────────────────────────────────────────────
+
 
 def test_mansions_count():
     assert len(LunarMansionEngine.MANSIONS) == 28
@@ -21,7 +22,9 @@ def test_mansions_have_required_keys():
 
 def test_mansions_ids_sequential():
     for i, m in enumerate(LunarMansionEngine.MANSIONS):
-        assert m["mansion_id"] == i + 1, f"Mansion {i}: expected id={i+1}, got {m['mansion_id']}"
+        assert (
+            m["mansion_id"] == i + 1
+        ), f"Mansion {i}: expected id={i+1}, got {m['mansion_id']}"
 
 
 def test_mansions_cover_360():
@@ -35,14 +38,18 @@ def test_mansion_boundaries_contiguous():
     for i in range(27):
         end = LunarMansionEngine.MANSIONS[i]["end_lon_deg"]
         start_next = LunarMansionEngine.MANSIONS[i + 1]["start_lon_deg"]
-        assert abs(end - start_next) < 0.001, f"Gap between mansion {i+1} and {i+2}: end={end}, start={start_next}"
+        assert (
+            abs(end - start_next) < 0.001
+        ), f"Gap between mansion {i+1} and {i+2}: end={end}, start={start_next}"
 
 
 def test_mansion_width():
     """Each mansion should be ~12.857° wide."""
     for m in LunarMansionEngine.MANSIONS:
         width = m["end_lon_deg"] - m["start_lon_deg"]
-        assert abs(width - LunarMansionEngine.MANSION_WIDTH) < 0.01, f"{m['name']} width: {width}"
+        assert (
+            abs(width - LunarMansionEngine.MANSION_WIDTH) < 0.01
+        ), f"{m['name']} width: {width}"
 
 
 def test_all_mansions_have_sources():
@@ -52,6 +59,7 @@ def test_all_mansions_have_sources():
 
 
 # ─── get_lunar_mansion ───────────────────────────────────────────────────────
+
 
 def test_mansion_first():
     """0° should be Al-Sharatain (mansion 1)."""

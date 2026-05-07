@@ -15,7 +15,9 @@ def get_public_meta():
     return {
         "promo": {
             "free_individual_readings": bool(free_individual_readings_promo_active()),
-            "free_individual_readings_until": (settings.PROMO_FREE_INDIVIDUAL_READINGS_UNTIL or "").strip() or None,
+            "free_individual_readings_until": (
+                settings.PROMO_FREE_INDIVIDUAL_READINGS_UNTIL or ""
+            ).strip()
+            or None,
         }
     }
-

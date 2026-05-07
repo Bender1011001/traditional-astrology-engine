@@ -9,15 +9,15 @@ transits, epitasis, moon condition, and recommendations.
 """
 
 import logging
-from datetime import datetime, timezone, timedelta
-from typing import Optional, List, Dict, Any
+from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from src.services.engine_bridge import calculate_chart_async
 from src.engine.daily_navigator import DailyNavigator
-from src.engine.models import Chart, Planet, PlanetName, Sign
+from src.engine.models import Chart, Planet, PlanetName
+from src.services.engine_bridge import calculate_chart_async
 
 logger = logging.getLogger(__name__)
 
@@ -25,8 +25,8 @@ router = APIRouter()
 
 
 class DailyBriefingRequest(BaseModel):
-    date: str          # Birth date YYYY-MM-DD
-    time: str          # Birth time HH:MM
+    date: str  # Birth date YYYY-MM-DD
+    time: str  # Birth time HH:MM
     city: str
     state: Optional[str] = ""
     name: Optional[str] = "Native"
@@ -48,9 +48,13 @@ def _rebuild_chart_model(raw: dict) -> Chart:
 
     # Normalize to list of (name_str, data_dict) tuples
     if isinstance(raw_planets, dict):
-        planet_items = [(name, data) for name, data in raw_planets.items() if isinstance(data, dict)]
+        planet_items = [
+            (name, data) for name, data in raw_planets.items() if isinstance(data, dict)
+        ]
     elif isinstance(raw_planets, list):
-        planet_items = [(p.get("name", ""), p) for p in raw_planets if isinstance(p, dict)]
+        planet_items = [
+            (p.get("name", ""), p) for p in raw_planets if isinstance(p, dict)
+        ]
     else:
         planet_items = []
 
@@ -60,12 +64,14 @@ def _rebuild_chart_model(raw: dict) -> Chart:
         except (ValueError, KeyError):
             continue
         # Note: Planet.sign is a computed @property from longitude, not a constructor arg
-        planets.append(Planet(
-            name=name,
-            longitude=pdata.get("longitude", 0.0),
-            latitude=pdata.get("latitude", 0.0),
-            speed=pdata.get("speed", 0.0),
-        ))
+        planets.append(
+            Planet(
+                name=name,
+                longitude=pdata.get("longitude", 0.0),
+                latitude=pdata.get("latitude", 0.0),
+                speed=pdata.get("speed", 0.0),
+            )
+        )
 
     asc = raw.get("angles", {}).get("Ascendant", 0.0)
     mc = raw.get("angles", {}).get("MC", 0.0)
@@ -81,7 +87,11 @@ def _rebuild_chart_model(raw: dict) -> Chart:
     raw_houses = raw.get("houses", {})
     houses_dict: Optional[Dict[int, float]] = None
     if isinstance(raw_houses, dict):
-        houses_dict = {int(k): float(v) for k, v in raw_houses.items() if isinstance(v, (int, float))}
+        houses_dict = {
+            int(k): float(v)
+            for k, v in raw_houses.items()
+            if isinstance(v, (int, float))
+        }
     elif isinstance(raw_houses, list):
         houses_dict = {}
         for idx, h in enumerate(raw_houses, start=1):
@@ -134,8 +144,12 @@ async def daily_briefing(data: DailyBriefingRequest):
             node_type=data.node_type,
         )
     except Exception as e:
-        logger.error("Chart calculation failed for daily briefing: %s", repr(e), exc_info=True)
-        raise HTTPException(status_code=500, detail="Chart calculation error. Please verify your input.")
+        logger.error(
+            "Chart calculation failed for daily briefing: %s", repr(e), exc_info=True
+        )
+        raise HTTPException(
+            status_code=500, detail="Chart calculation error. Please verify your input."
+        )
 
     if "error" in raw_chart:
         raise HTTPException(status_code=400, detail=raw_chart["error"])
@@ -164,7 +178,9 @@ async def daily_briefing(data: DailyBriefingRequest):
         try:
             target_dt = datetime.strptime(data.target_date, "%Y-%m-%d")
         except ValueError:
-            raise HTTPException(status_code=400, detail="target_date must be YYYY-MM-DD format.")
+            raise HTTPException(
+                status_code=400, detail="target_date must be YYYY-MM-DD format."
+            )
     else:
         target_dt = datetime.now(timezone.utc).replace(tzinfo=None)
 
@@ -178,7 +194,9 @@ async def daily_briefing(data: DailyBriefingRequest):
         )
     except Exception as e:
         logger.exception("DailyNavigator failed: %s", e)
-        raise HTTPException(status_code=500, detail="Prediction engine error. Please try again.")
+        raise HTTPException(
+            status_code=500, detail="Prediction engine error. Please try again."
+        )
 
     return {
         "status": "success",
@@ -192,14 +210,15 @@ async def daily_briefing(data: DailyBriefingRequest):
 # WEEKLY BRIEFING — 7-day look-ahead
 # ─────────────────────────────────────────────────────────────────────────────
 
+
 class WeeklyBriefingRequest(BaseModel):
-    date: str          # Birth date YYYY-MM-DD
-    time: str          # Birth time HH:MM
+    date: str  # Birth date YYYY-MM-DD
+    time: str  # Birth time HH:MM
     city: str
     state: Optional[str] = ""
     name: Optional[str] = "Native"
     start_date: Optional[str] = None  # First day of the week (default: today)
-    days: int = 7                     # Number of days (1-14, default 7)
+    days: int = 7  # Number of days (1-14, default 7)
     house_system: Optional[str] = "W"
     zodiac_system: Optional[str] = "tropical"
     node_type: str = "mean"
@@ -243,13 +262,15 @@ def _synthesize_week_overview(days_data: List[Dict[str, Any]]) -> Dict[str, Any]
         transits = briefing.get("transits", [])
         n_challenging = sum(1 for t in transits if t.get("quality") == "challenging")
         n_supportive = sum(1 for t in transits if t.get("quality") == "supportive")
-        transit_counts.append({
-            "date": date_str,
-            "display": display,
-            "total": len(transits),
-            "supportive": n_supportive,
-            "challenging": n_challenging,
-        })
+        transit_counts.append(
+            {
+                "date": date_str,
+                "display": display,
+                "total": len(transits),
+                "supportive": n_supportive,
+                "challenging": n_challenging,
+            }
+        )
         if n_challenging >= 2:
             challenging_transit_days.append(display)
 
@@ -286,9 +307,13 @@ def _synthesize_week_overview(days_data: List[Dict[str, Any]]) -> Dict[str, Any]
             "multiple challenging aspects active. Proceed with patience."
         )
     if best_day:
-        parts.append(f"✅ **Best day this week**: {best_day} (most supportive transits).")
+        parts.append(
+            f"✅ **Best day this week**: {best_day} (most supportive transits)."
+        )
     if worst_day and worst_day != best_day:
-        parts.append(f"🛑 **Most cautious day**: {worst_day} (most challenging aspects).")
+        parts.append(
+            f"🛑 **Most cautious day**: {worst_day} (most challenging aspects)."
+        )
 
     if not parts:
         parts.append("A relatively steady week with no major peaks or caution windows.")
@@ -331,8 +356,12 @@ async def weekly_briefing(data: WeeklyBriefingRequest):
             node_type=data.node_type,
         )
     except Exception as e:
-        logger.error("Chart calculation failed for weekly briefing: %s", repr(e), exc_info=True)
-        raise HTTPException(status_code=500, detail="Chart calculation error. Please verify your input.")
+        logger.error(
+            "Chart calculation failed for weekly briefing: %s", repr(e), exc_info=True
+        )
+        raise HTTPException(
+            status_code=500, detail="Chart calculation error. Please verify your input."
+        )
 
     if "error" in raw_chart:
         raise HTTPException(status_code=400, detail=raw_chart["error"])
@@ -361,9 +390,13 @@ async def weekly_briefing(data: WeeklyBriefingRequest):
         try:
             start_dt = datetime.strptime(data.start_date, "%Y-%m-%d")
         except ValueError:
-            raise HTTPException(status_code=400, detail="start_date must be YYYY-MM-DD format.")
+            raise HTTPException(
+                status_code=400, detail="start_date must be YYYY-MM-DD format."
+            )
     else:
-        start_dt = datetime.now(timezone.utc).replace(tzinfo=None, hour=0, minute=0, second=0, microsecond=0)
+        start_dt = datetime.now(timezone.utc).replace(
+            tzinfo=None, hour=0, minute=0, second=0, microsecond=0
+        )
 
     # 5. Generate briefings for each day
     days_output: List[Dict[str, Any]] = []
@@ -376,16 +409,25 @@ async def weekly_briefing(data: WeeklyBriefingRequest):
                 birth_jd=birth_jd,
                 target_date=target_dt,
             )
-            days_output.append({
-                "day_index": offset,
-                "briefing": briefing,
-            })
+            days_output.append(
+                {
+                    "day_index": offset,
+                    "briefing": briefing,
+                }
+            )
         except Exception as e:
-            logger.warning("DailyNavigator failed for day %d (%s): %s", offset, target_dt, e)
-            days_output.append({
-                "day_index": offset,
-                "briefing": {"date": target_dt.strftime("%Y-%m-%d"), "error": str(e)},
-            })
+            logger.warning(
+                "DailyNavigator failed for day %d (%s): %s", offset, target_dt, e
+            )
+            days_output.append(
+                {
+                    "day_index": offset,
+                    "briefing": {
+                        "date": target_dt.strftime("%Y-%m-%d"),
+                        "error": str(e),
+                    },
+                }
+            )
 
     # 6. Synthesize week overview
     week_overview = _synthesize_week_overview(days_output)

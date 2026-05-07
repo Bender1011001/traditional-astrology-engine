@@ -1,0 +1,267 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e8]:
+    - link "✦ Traditional Astrology" [ref=e9] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e10]: ✦
+      - generic [ref=e11]: Traditional Astrology
+    - generic [ref=e12]:
+      - link "Get Your Reading" [ref=e13] [cursor=pointer]:
+        - /url: /#get-reading
+      - link "Horary Oracle" [ref=e14] [cursor=pointer]:
+        - /url: /horary.html
+      - link "Daily Navigator" [ref=e15] [cursor=pointer]:
+        - /url: /daily.html
+      - link "Sample Reading" [ref=e16] [cursor=pointer]:
+        - /url: /sample-reading.html
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - paragraph [ref=e20]: Real Output · Not a Template
+      - heading "What Your Reading Looks Like" [level=1] [ref=e21]
+      - paragraph [ref=e22]: Every line below is computed from real astronomical data using Swiss Ephemeris and pre-1700s classical rules. This is a condensed excerpt — the full reading continues across six parts.
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - strong [ref=e25]: PREMIUM NATAL CHART READING — EXAMPLE CHART
+        - text: "Birth: August 13, 1996 · 07:18 AM PDT · Fairfield, CA (38.2°N, 122.0°W)"
+        - text: "Method: Whole Sign Houses · Tropical Zodiac · Septener Only (Sun–Saturn)"
+        - text: "Engine: Swiss Ephemeris · Hellenistic / Medieval Classical Corpus"
+      - generic [ref=e26]:
+        - heading "Part I — Inspection of the Nativity" [level=2] [ref=e27]
+        - heading "I. Sect & The Prenatal Syzygy" [level=3] [ref=e28]
+        - paragraph [ref=e29]:
+          - text: This is a
+          - strong [ref=e30]: Day Chart
+          - text: — the Sun was 9.87° above the horizon at birth. In a day chart,
+          - strong [ref=e31]: Jupiter
+          - text: is the Benefic of Sect and
+          - strong [ref=e32]: Saturn
+          - text: acts as the Constructive Malefic (tempered by solar heat).
+          - strong [ref=e33]: Mars
+          - text: becomes the Adversary — his heat is over-inflamed by the day and operates destructively.
+        - paragraph [ref=e34]:
+          - text: The prenatal syzygy (root of the life) was a
+          - strong [ref=e35]: Full Moon on July 30, 1996
+          - text: at
+          - strong [ref=e36]: Aquarius 07°32'
+          - text: — falling in the
+          - strong [ref=e37]: 6th House of Labor and Sickness
+          - text: . At birth, the Moon had traveled to within 7.85° of the Sun, placing it in the
+          - strong [ref=e38]: Dark Moon phase
+          - text: — invisible, obscured, muted.
+        - heading "II. The Master of the Nativity (Almuten Figuris)" [level=3] [ref=e39]
+        - paragraph [ref=e40]:
+          - strong [ref=e41]: Mercury
+          - text: is the undisputed Almuten with a cumulative dignity score of
+          - strong [ref=e42]: "27"
+          - text: — the highest in the chart by a wide margin. Mercury is the "Captain of the Soul," governing the native's capacity for commerce, precision, and analytical discernment.
+        - paragraph [ref=e43]:
+          - text: The
+          - strong [ref=e44]: Temperament
+          - text: is
+          - strong [ref=e45]: Melancholic (Cold/Dry)
+          - text: ": Cold score 8, Dry score 7. Net balance: Cold +4, Dry +2. This constitution tends toward deep analysis, introspection, and systematic thinking — with a need for warming, moistening activity to maintain equilibrium."
+        - heading "III. The Planetary Positions" [level=3] [ref=e46]
+        - table [ref=e47]:
+          - rowgroup [ref=e48]:
+            - row "Body Position House Condition Visible" [ref=e49]:
+              - columnheader "Body" [ref=e50]
+              - columnheader "Position" [ref=e51]
+              - columnheader "House" [ref=e52]
+              - columnheader "Condition" [ref=e53]
+              - columnheader "Visible" [ref=e54]
+          - rowgroup [ref=e55]:
+            - row "Sun Leo 21°05' 12th Domicile · Cadent Yes" [ref=e56]:
+              - cell "Sun" [ref=e57]:
+                - strong [ref=e58]: Sun
+              - cell "Leo 21°05'" [ref=e59]
+              - cell "12th" [ref=e60]
+              - cell "Domicile · Cadent" [ref=e61]:
+                - generic [ref=e62]: Domicile · Cadent
+              - cell "Yes" [ref=e63]
+            - row "Moon Leo 13°14' 12th Peregrine · Dark Moon No" [ref=e64]:
+              - cell "Moon" [ref=e65]:
+                - strong [ref=e66]: Moon
+              - cell "Leo 13°14'" [ref=e67]
+              - cell "12th" [ref=e68]
+              - cell "Peregrine · Dark Moon" [ref=e69]:
+                - generic [ref=e70]: Peregrine · Dark Moon
+              - cell "No" [ref=e71]
+            - row "Mercury ★ Virgo 17°10' 1st Domicile + Exaltation Yes" [ref=e72]:
+              - cell "Mercury ★" [ref=e73]:
+                - strong [ref=e74]: Mercury ★
+              - cell "Virgo 17°10'" [ref=e75]
+              - cell "1st" [ref=e76]
+              - cell "Domicile + Exaltation" [ref=e77]:
+                - generic [ref=e78]: Domicile + Exaltation
+              - cell "Yes" [ref=e79]
+            - row "Venus Cancer 05°32' 11th Triplicity · Maltreated Yes" [ref=e80]:
+              - cell "Venus" [ref=e81]:
+                - strong [ref=e82]: Venus
+              - cell "Cancer 05°32'" [ref=e83]
+              - cell "11th" [ref=e84]
+              - cell "Triplicity · Maltreated" [ref=e85]:
+                - generic [ref=e86]: Triplicity · Maltreated
+              - cell "Yes" [ref=e87]
+            - row "Mars Cancer 12°31' 11th Fall + Peregrine Yes" [ref=e88]:
+              - cell "Mars" [ref=e89]:
+                - strong [ref=e90]: Mars
+              - cell "Cancer 12°31'" [ref=e91]
+              - cell "11th" [ref=e92]
+              - cell "Fall + Peregrine" [ref=e93]:
+                - generic [ref=e94]: Fall + Peregrine
+              - cell "Yes" [ref=e95]
+            - row "Jupiter Capricorn 08°30' Rx 5th Fall · Retrograde Yes" [ref=e96]:
+              - cell "Jupiter" [ref=e97]:
+                - strong [ref=e98]: Jupiter
+              - cell "Capricorn 08°30' Rx" [ref=e99]
+              - cell "5th" [ref=e100]
+              - cell "Fall · Retrograde" [ref=e101]:
+                - generic [ref=e102]: Fall · Retrograde
+              - cell "Yes" [ref=e103]
+            - row "Saturn Aries 06°51' Rx 8th Fall · Retrograde Yes" [ref=e104]:
+              - cell "Saturn" [ref=e105]:
+                - strong [ref=e106]: Saturn
+              - cell "Aries 06°51' Rx" [ref=e107]
+              - cell "8th" [ref=e108]
+              - cell "Fall · Retrograde" [ref=e109]:
+                - generic [ref=e110]: Fall · Retrograde
+              - cell "Yes" [ref=e111]
+        - paragraph [ref=e112]: "★ Almuten Figuris (score: 27). All positions computed via Swiss Ephemeris at JD 2450308.805556."
+      - generic [ref=e113]:
+        - heading "Part II — The Planetary Cabinet" [level=2] [ref=e114]
+        - 'heading "1. Mercury: The Sovereign Almuten (House 1)" [level=3] [ref=e115]'
+        - paragraph [ref=e116]:
+          - text: Mercury sits in
+          - strong [ref=e117]: Virgo 17°10'
+          - text: in its own Domicile (+5) and Exaltation (+4) — essential dignity score of
+          - strong [ref=e118]: "9"
+          - text: . Accidentally, it is angular in the 1st House, swift in motion, and has full Voice. This is the "King in his own Castle" — the only governor in this nativity with total autonomy.
+        - generic [ref=e119]:
+          - strong [ref=e120]: Phasis (Visibility Evidence — Mandatory)
+          - text: "Solar Status: FREE · Elongation: 26.09° · Phase: Evening First · Visible: True"
+          - text: "Method: Arcus Visionis · Threshold: 12.0° · Sun Alt at set: −12.15°"
+        - paragraph [ref=e121]:
+          - text: As ruler of the Ascendant and the 10th House (Gemini), Mercury is simultaneously the body of the native and the career. The native
+          - emphasis [ref=e122]: is
+          - text: his work. Reputation is built on Virgoan precision — forensic, auditable, documented. The
+          - strong [ref=e123]: Monomoiria
+          - text: (degree ruler) is Jupiter, adding a layer of judicial wisdom to cold analytical nature. The
+          - strong [ref=e124]: Dodecatemoria
+          - text: falls in Pisces (House 7) — a hidden shadow in contracts and partnerships.
+        - 'heading "2. The Escape Hatch: Mars–Jupiter Mutual Reception" [level=3] [ref=e125]'
+        - paragraph [ref=e126]:
+          - text: Both Mars and Jupiter are in their Fall — yet both are saved by a
+          - strong [ref=e127]: pure exaltation swap
+          - text: . Mars is in Cancer (Jupiter's exaltation). Jupiter is in Capricorn (Mars' exaltation). Each receives the other by exaltation, creating an "Active Assistance" protocol that prevents total ruin in the 5th and 11th houses.
+        - generic [ref=e128]:
+          - generic [ref=e129]: Mutual Reception — The Escape Hatch
+          - generic [ref=e130]:
+            - generic [ref=e131]: Mars in Cancer
+            - generic [ref=e132]: ⇄
+            - generic [ref=e133]: Jupiter in Capricorn
+          - generic [ref=e134]:
+            - text: Cancer = Jupiter's Exaltation (15°) · Capricorn = Mars' Exaltation (28°)
+            - text: Both in Fall — yet each receives the other. Crisis becomes navigable.
+        - 'heading "3. Fixed Star: Caput Algol on the Midheaven" [level=3] [ref=e135]'
+        - paragraph [ref=e136]:
+          - text: The Midheaven (MC) at
+          - strong [ref=e137]: Taurus 27°02'
+          - text: is conjunct
+          - strong [ref=e138]: Caput Algol
+          - text: — the Head of Medusa, the most violent star in the classical canon. This is a high-voltage career placement.
+        - paragraph [ref=e139]:
+          - strong [ref=e140]: "The Glory:"
+          - text: If the native maintains total composure and integrity, he achieves a rank that borders on legendary — the career of someone who slays the monster others refuse to face.
+          - strong [ref=e141]: "The Nemesis:"
+          - text: Any lapse — public anger, rashness, dishonesty — triggers irreversible reputational collapse. Algol does not forgive. The head is always on the block.
+      - generic [ref=e142]:
+        - heading "Part III — The Master Clock (Chronocrators)" [level=2] [ref=e143]
+        - heading "Current Time Lords" [level=3] [ref=e144]
+        - paragraph [ref=e145]:
+          - text: The native is currently in the
+          - strong [ref=e146]: Mercury Major Firdaria (2014–2027)
+          - text: — the strongest possible era for someone whose Almuten is Mercury in Domicile. The sub-period is
+          - strong [ref=e147]: Mercury / Venus (Oct 2025 – Aug 2027)
+          - text: ", activating both the chart ruler and the 11th-house alliances."
+        - paragraph [ref=e148]:
+          - text: The
+          - strong [ref=e149]: Annual Profection
+          - text: at Age 29 reaches the
+          - strong [ref=e150]: 6th House (Aquarius)
+          - text: ". Lord of the Year:"
+          - strong [ref=e151]: Saturn
+          - text: "(natal: Fall/Retrograde in the 8th). This is a year of heavy labor, debt resolution, and structural austerity — with the Mercury sub-period providing the forensic tools to navigate it."
+        - heading "10-Year Timing Forecast" [level=3] [ref=e152]
+        - table [ref=e153]:
+          - rowgroup [ref=e154]:
+            - row "Age Year Lord House Forecast" [ref=e155]:
+              - columnheader "Age" [ref=e156]
+              - columnheader "Year" [ref=e157]
+              - columnheader "Lord" [ref=e158]
+              - columnheader "House" [ref=e159]
+              - columnheader "Forecast" [ref=e160]
+          - rowgroup [ref=e161]:
+            - row "29 2025–26 Saturn (Fall) 6th · Labor Grueling work; debt resolution. Mercury sub-period provides tools." [ref=e162]:
+              - cell "29" [ref=e163]:
+                - strong [ref=e164]: "29"
+              - cell "2025–26" [ref=e165]
+              - cell "Saturn (Fall)" [ref=e166]
+              - cell "6th · Labor" [ref=e167]
+              - cell "Grueling work; debt resolution. Mercury sub-period provides tools." [ref=e168]
+            - row "30 2026–27 Jupiter (Fall) 7th · Contracts Contractual friction; partnerships tested. Use the exaltation swap." [ref=e169]:
+              - cell "30" [ref=e170]
+              - cell "2026–27" [ref=e171]
+              - cell "Jupiter (Fall)" [ref=e172]
+              - cell "7th · Contracts" [ref=e173]
+              - cell "Contractual friction; partnerships tested. Use the exaltation swap." [ref=e174]
+            - row "32 2028 Venus (Maltreated) 9th · MC/Algol High-Stakes Eminence. Algol risk. Integrity is the only shield." [ref=e175]:
+              - cell "32" [ref=e176]
+              - cell "2028" [ref=e177]
+              - cell "Venus (Maltreated)" [ref=e178]
+              - cell "9th · MC/Algol" [ref=e179]
+              - cell "High-Stakes Eminence. Algol risk. Integrity is the only shield." [ref=e180]:
+                - strong [ref=e181]: High-Stakes Eminence.
+                - text: Algol risk. Integrity is the only shield.
+            - row "33 2029 Moon (12th/Dark) 10th · Rank Critical year. Reputation under pressure. Build fortifications now." [ref=e182]:
+              - cell "33" [ref=e183]
+              - cell "2029" [ref=e184]
+              - cell "Moon (12th/Dark)" [ref=e185]
+              - cell "10th · Rank" [ref=e186]
+              - cell "Critical year. Reputation under pressure. Build fortifications now." [ref=e187]:
+                - strong [ref=e188]: Critical year.
+                - text: Reputation under pressure. Build fortifications now.
+            - row "36 2032 Mercury (Strong) 1st · Will Recovery and restoration. The Almuten returns to the helm." [ref=e189]:
+              - cell "36" [ref=e190]
+              - cell "2032" [ref=e191]
+              - cell "Mercury (Strong)" [ref=e192]
+              - cell "1st · Will" [ref=e193]
+              - cell "Recovery and restoration. The Almuten returns to the helm." [ref=e194]
+        - paragraph [ref=e195]: Current period highlighted. Forecast integrates Primary Directions (Placidus), Decennials (Valens), Annual Profections, and Firdaria.
+      - generic [ref=e196]:
+        - paragraph [ref=e197]: This reading continues
+        - paragraph [ref=e198]: Three More Parts in Your Full Reading
+        - paragraph [ref=e199]: The complete analysis includes the Hermetic Lots (Fortune, Spirit, Eros, Courage, Victory), the full Twelve Topoi house audit, the Medical Correspondences, the Remediation Protocol, and the complete Primary Directions calendar — all computed from your specific birth data.
+        - generic [ref=e200]:
+          - generic [ref=e201]: ✦ 7 Hermetic Lots & Arabic Parts
+          - generic [ref=e202]: ✦ Twelve House Audit (Topoi)
+          - generic [ref=e203]: ✦ Medical Correspondences
+          - generic [ref=e204]: ✦ Primary Directions Calendar
+          - generic [ref=e205]: ✦ Remediation Protocol
+          - generic [ref=e206]: ✦ Computation Trace (Show Your Work)
+        - generic [ref=e207]:
+          - link "✦ Get Your Reading — from $25" [ref=e208] [cursor=pointer]:
+            - /url: /#get-reading
+          - link "See Pricing" [ref=e209] [cursor=pointer]:
+            - /url: /
+        - paragraph [ref=e210]: One-time payment. No account. No subscription. Instant delivery.
+  - contentinfo [ref=e211]:
+    - paragraph [ref=e212]:
+      - text: © 2026 Traditional Astrology ·
+      - link "Privacy" [ref=e213] [cursor=pointer]:
+        - /url: privacy.html
+      - text: ·
+      - link "Terms" [ref=e214] [cursor=pointer]:
+        - /url: terms.html
+      - text: ·
+      - link "Refunds" [ref=e215] [cursor=pointer]:
+        - /url: refunds.html
+    - paragraph [ref=e216]: For entertainment and historical study purposes only. Not medical, legal, or financial advice.

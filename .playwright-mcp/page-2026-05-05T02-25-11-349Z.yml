@@ -1,0 +1,136 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - text: ✦ Want to discover YOUR chart?
+    - link "Get your full natal chart reading →" [ref=e3] [cursor=pointer]:
+      - /url: /#get-reading
+  - link "Skip to content" [ref=e4] [cursor=pointer]:
+    - /url: "#main"
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - navigation "Main navigation" [ref=e7]:
+        - link "✦ Traditional Astrology" [ref=e8] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e9]: ✦
+          - generic [ref=e10]: Traditional Astrology
+        - generic [ref=e11]:
+          - link "Get Your Reading" [ref=e12] [cursor=pointer]:
+            - /url: /#get-reading
+          - link "Horary Oracle" [ref=e13] [cursor=pointer]:
+            - /url: /horary.html
+          - link "Daily Navigator" [ref=e14] [cursor=pointer]:
+            - /url: /daily.html
+          - link "How It Works" [ref=e15] [cursor=pointer]:
+            - /url: /#how-it-works
+      - heading "TECHNIQUE CATALOG" [level=1] [ref=e16]
+      - paragraph [ref=e17]: Every traditional calculation we implement, organized by category.
+    - generic [ref=e18]:
+      - heading "SIGNATURE CAPABILITIES" [level=2] [ref=e19]
+      - paragraph [ref=e20]: These are the techniques practitioners usually cannot get from mainstream tools, or cannot get with full traceability.
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - heading "Parans (Paranatellonta)" [level=4] [ref=e23]
+          - paragraph [ref=e24]: Spherical astronomy relationships between fixed stars and planets (rising/culminating/setting).
+        - generic [ref=e25]:
+          - heading "Zodiacal Releasing (L1/L2) + Loosing of the Bond" [level=4] [ref=e26]
+          - paragraph [ref=e27]: Timing periods with Loosing of the Bond and foreshadowing logic.
+        - generic [ref=e28]:
+          - heading "Primary Directions (Placidus Semi-Arc)" [level=4] [ref=e29]
+          - paragraph [ref=e30]: Direction arcs to angles and distributor logic for current periods.
+        - generic [ref=e31]:
+          - heading "Daily and Monthly Profections" [level=4] [ref=e32]
+          - paragraph [ref=e33]: Continuous and saltatory monthly profections; daily profection stepping.
+        - generic [ref=e34]:
+          - heading "Monomoiria and Dodecatemoria" [level=4] [ref=e35]
+          - paragraph [ref=e36]: Degree-ruler and micro-zodiac computations for classical technique work.
+        - generic [ref=e37]:
+          - heading "Complete Lots (Hermetic + Classical)" [level=4] [ref=e38]
+          - paragraph [ref=e39]: Lots beyond Fortune/Spirit, including specialized lots, with sect-sensitive reversals.
+      - generic [ref=e40]:
+        - link "Try a Free Calculation" [ref=e41] [cursor=pointer]:
+          - /url: /#get-reading
+        - link "Read Technical Docs" [ref=e42] [cursor=pointer]:
+          - /url: /
+    - generic [ref=e43]:
+      - heading "CATEGORIES" [level=2] [ref=e44]
+      - paragraph [ref=e45]: A practical map of what the engine calculates and exports.
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - heading "Essential Dignities and Condition" [level=4] [ref=e48]
+          - paragraph [ref=e49]: Domicile, exaltation, triplicity (sect-sensitive), term, face; plus visibility, combustion, maltreatment.
+        - generic [ref=e50]:
+          - heading "Aspects and Geometries" [level=4] [ref=e51]
+          - paragraph [ref=e52]: Traditional aspects with orbs and applying/separating logic.
+          - paragraph [ref=e53]:
+            - text: "See:"
+            - link "aspects" [ref=e54] [cursor=pointer]:
+              - /url: aspects.html
+        - generic [ref=e55]:
+          - heading "Houses and Topography" [level=4] [ref=e56]
+          - paragraph [ref=e57]: Whole sign by default; additional house systems supported for practitioners.
+          - paragraph [ref=e58]:
+            - text: "See:"
+            - link "houses" [ref=e59] [cursor=pointer]:
+              - /url: houses.html
+        - generic [ref=e60]:
+          - heading "Timing Techniques" [level=4] [ref=e61]
+          - paragraph [ref=e62]: Profections, releasing, firdaria, and direction-based timing layers.
+          - paragraph [ref=e63]:
+            - text: "See:"
+            - link "predictive techniques" [ref=e64] [cursor=pointer]:
+              - /url: predictive-techniques.html
+        - generic [ref=e65]:
+          - heading "Fixed Stars" [level=4] [ref=e66]
+          - paragraph [ref=e67]: Fixed star checks and star/planet interaction reporting (including paran support).
+        - generic [ref=e68]:
+          - heading "Rule Ledger Export" [level=4] [ref=e69]
+          - paragraph [ref=e70]: Machine-readable ledger of conditions and judgments with sources and trace.
+    - generic [ref=e71]:
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - heading "Product" [level=3] [ref=e74]
+          - list [ref=e75]:
+            - listitem [ref=e76]:
+              - link "Get a Reading" [ref=e77] [cursor=pointer]:
+                - /url: /#get-reading
+            - listitem [ref=e78]:
+              - link "Techniques" [ref=e79] [cursor=pointer]:
+                - /url: techniques.html
+            - listitem [ref=e80]:
+              - link "Pricing" [ref=e81] [cursor=pointer]:
+                - /url: index.html#pricing
+        - generic [ref=e82]:
+          - heading "Resources" [level=3] [ref=e83]
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - link "FAQ" [ref=e86] [cursor=pointer]:
+                - /url: faq.html
+            - listitem [ref=e87]:
+              - link "Blog" [ref=e88] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e89]:
+              - link "About" [ref=e90] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e91]:
+              - link "Support" [ref=e92] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+        - generic [ref=e93]:
+          - heading "Legal" [level=3] [ref=e94]
+          - list [ref=e95]:
+            - listitem [ref=e96]:
+              - link "Privacy Policy" [ref=e97] [cursor=pointer]:
+                - /url: privacy.html
+            - listitem [ref=e98]:
+              - link "Terms of Service" [ref=e99] [cursor=pointer]:
+                - /url: terms.html
+        - generic [ref=e100]:
+          - heading "Contact" [level=3] [ref=e101]
+          - list [ref=e102]:
+            - listitem [ref=e103]:
+              - link "Support" [ref=e104] [cursor=pointer]:
+                - /url: mailto:support@traditional-astrology.com
+            - listitem [ref=e105]:
+              - link "Report a Bug" [ref=e106] [cursor=pointer]:
+                - /url: mailto:bugs@traditional-astrology.com
+      - generic [ref=e107]:
+        - paragraph [ref=e108]: © 2026 Traditional Astrology. All rights reserved.
+        - paragraph [ref=e109]: For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.

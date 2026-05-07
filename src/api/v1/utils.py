@@ -1,9 +1,12 @@
 import hashlib
-from datetime import datetime
+
 from fastapi import Request
-from src.engine.logger import ActivityLogger
+
 from src.api.v1.auth import validate_token
+from src.api.v1.client_ip import get_client_ip
+from src.engine.logger import ActivityLogger
 from src.engine.models import Chart, Planet, PlanetName
+
 
 def generate_chart_hash(req) -> str:
     # Normalize inputs for hashing
@@ -14,12 +17,19 @@ def generate_chart_hash(req) -> str:
     raw = f"{date}_{time}_{city}_{state}"
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
-def log_event(event_type: str, payload: dict, request: Request, session_id: str = None, ts: str = None):
+
+def log_event(
+    event_type: str,
+    payload: dict,
+    request: Request,
+    session_id: str = None,  # type: ignore
+    ts: str = None,  # type: ignore
+):
     """
     Helper to log business events via ActivityLogger.
     """
-    client_ip = request.client.host if request.client else "unknown"
-    
+    client_ip = get_client_ip(request)
+
     # Try to extract user ID from token if present
     user_id = "guest"
     auth_header = request.headers.get("Authorization")
@@ -27,23 +37,25 @@ def log_event(event_type: str, payload: dict, request: Request, session_id: str 
         try:
             token = auth_header.split(" ")[1]
             token_payload = validate_token(token)
-            if token_payload and "d" in token_payload and "user_id" in token_payload["d"]:
+            if (
+                token_payload
+                and "d" in token_payload
+                and "user_id" in token_payload["d"]
+            ):
                 user_id = token_payload["d"]["user_id"]
         except Exception:
             pass
-            
+
     details = payload.copy()
     if session_id:
         details["session_id"] = session_id
     if ts:
         details["client_ts"] = ts
-        
+
     ActivityLogger.log_activity(
-        event_type,
-        user_id=user_id,
-        ip=client_ip,
-        details=details
+        event_type, user_id=user_id, ip=client_ip, details=details
     )
+
 
 def result_to_model(res):
     model_planets = []
@@ -59,7 +71,7 @@ def result_to_model(res):
                 longitude=data["longitude"],
                 latitude=data.get("latitude", 0.0),
                 speed=data.get("speed", 0.0),
-                altitude=data.get("altitude", 0.0)
+                altitude=data.get("altitude", 0.0),
             )
         )
         if name == "Sun":
@@ -77,5 +89,5 @@ def result_to_model(res):
         geo_lon=res.get("meta", {}).get("lon"),
         jd=res.get("meta", {}).get("julian_day"),
         houses=res.get("houses"),
-        house_system=(res.get("meta", {}).get("house_system") or {}).get("code")
+        house_system=(res.get("meta", {}).get("house_system") or {}).get("code"),
     )

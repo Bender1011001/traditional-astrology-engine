@@ -1,17 +1,19 @@
 from __future__ import annotations
 
-from geopy.geocoders import Nominatim
-from geopy.exc import GeocoderServiceError, GeocoderTimedOut, GeocoderUnavailable
-from timezonefinder import TimezoneFinder
+import hashlib
+import json
+import logging
 import os
 import time
-import json
-import hashlib
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
-import pytz
-import logging
+
+import pytz  # type: ignore
+from geopy.exc import (GeocoderServiceError, GeocoderTimedOut,
+                       GeocoderUnavailable)
+from geopy.geocoders import Nominatim
+from timezonefinder import TimezoneFinder
 
 logger = logging.getLogger(__name__)
 
@@ -43,14 +45,15 @@ def _normalize_query(city: str, state: str = "") -> str:
 
 _MEM_GEO_CACHE = None
 
+
 def _load_geocode_cache() -> dict:
     global _MEM_GEO_CACHE
     if _MEM_GEO_CACHE is not None:
         return _MEM_GEO_CACHE
-        
+
     try:
         if not os.path.exists(_GEOCODE_CACHE_FILE):
-            _MEM_GEO_CACHE = {}
+            _MEM_GEO_CACHE = {}  # type: ignore
             return _MEM_GEO_CACHE
         with open(_GEOCODE_CACHE_FILE, "r", encoding="utf-8") as f:
             data = json.load(f) or {}
@@ -92,7 +95,9 @@ def _cache_get(query_norm: str) -> tuple[float, float] | None:
     if created:
         try:
             created_dt = datetime.fromisoformat(created)
-            if created_dt < (datetime.now(timezone.utc) - timedelta(days=_GEOCODE_CACHE_TTL_DAYS)):
+            if created_dt < (
+                datetime.now(timezone.utc) - timedelta(days=_GEOCODE_CACHE_TTL_DAYS)
+            ):
                 return None
         except Exception as e:
             logger.warning("Cache TTL parse failed: %s", repr(e), exc_info=True)
@@ -108,7 +113,11 @@ def _cache_get(query_norm: str) -> tuple[float, float] | None:
 def _cache_set(query_norm: str, lat: float, lon: float) -> None:
     cache = _load_geocode_cache()
     k = _cache_key(query_norm)
-    cache[k] = {"created": datetime.now(timezone.utc).replace(microsecond=0).isoformat(), "lat": float(lat), "lon": float(lon)}
+    cache[k] = {
+        "created": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "lat": float(lat),
+        "lon": float(lon),
+    }
     _save_geocode_cache(cache)
 
 
@@ -143,14 +152,15 @@ def _geocode_us_census(city: str, state: str) -> tuple[float, float] | None:
     url = base + "?" + urllib.parse.urlencode(params)
     try:
         payload = _http_json(url)
-        matches = (
-            payload.get("result", {})
-            .get("addressMatches", [])
-        )
+        matches = payload.get("result", {}).get("addressMatches", [])
         if not matches:
             # Try the more forgiving one-line endpoint
             base2 = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress"
-            params2 = {"address": f"{city}, {state}", "benchmark": "2020", "format": "json"}
+            params2 = {
+                "address": f"{city}, {state}",
+                "benchmark": "2020",
+                "format": "json",
+            }
             url2 = base2 + "?" + urllib.parse.urlencode(params2)
             payload2 = _http_json(url2)
             matches = payload2.get("result", {}).get("addressMatches", [])
@@ -196,15 +206,20 @@ def _geocode_open_meteo(city: str, state: str = "") -> tuple[float, float] | Non
                 admin1 = (r.get("admin1") or "").strip().lower()
                 cc = (r.get("country_code") or "").strip().upper()
                 # US only filter if state provided (avoid Fairfield UK, etc).
-                if cc == "US" and (state_norm in admin1 or admin1.startswith(state_norm)):
+                if cc == "US" and (
+                    state_norm in admin1 or admin1.startswith(state_norm)
+                ):
                     best = r
                     break
         if best is None:
             # Otherwise prefer US result if any, else first result.
-            best = next((r for r in results if (r.get("country_code") or "").upper() == "US"), results[0])
+            best = next(
+                (r for r in results if (r.get("country_code") or "").upper() == "US"),
+                results[0],
+            )
 
-        lat = best.get("latitude")
-        lon = best.get("longitude")
+        lat = best.get("latitude")  # type: ignore
+        lon = best.get("longitude")  # type: ignore
         if isinstance(lat, (int, float)) and isinstance(lon, (int, float)):
             return float(lat), float(lon)
     except Exception as e:
@@ -213,14 +228,15 @@ def _geocode_open_meteo(city: str, state: str = "") -> tuple[float, float] | Non
     return None
 
 
-_IN_MEMORY_GEO_CACHE = {}
+_IN_MEMORY_GEO_CACHE = {}  # type: ignore
+
 
 def get_coordinates(city: str, state: str = "") -> tuple[float, float]:
     """
     Get latitude and longitude for a given city and state.
     """
     query_norm = _normalize_query(city, state)
-    
+
     # 1. In-Memory Cache (Blazing fast for test suites and batched queries)
     if query_norm in _IN_MEMORY_GEO_CACHE:
         return _IN_MEMORY_GEO_CACHE[query_norm]
@@ -294,7 +310,11 @@ def get_coordinates_with_meta(city: str, state: str = "") -> tuple[float, float,
             if location:
                 lat, lon = float(location.latitude), float(location.longitude)
                 _cache_set(query_norm, lat, lon)
-                return lat, lon, {"source": "nominatim", "query": query, "query_norm": query_norm}
+                return (
+                    lat,
+                    lon,
+                    {"source": "nominatim", "query": query, "query_norm": query_norm},
+                )
             raise ValueError(f"Could not find location: {query}")
         except (GeocoderTimedOut, GeocoderUnavailable, GeocoderServiceError) as e:
             last_error = e
@@ -308,17 +328,34 @@ def get_coordinates_with_meta(city: str, state: str = "") -> tuple[float, float,
     us_census = _geocode_us_census((city or "").strip(), state_str)
     if us_census:
         _cache_set(query_norm, us_census[0], us_census[1])
-        return us_census[0], us_census[1], {"source": "us_census", "query": f"{city}, {state_str}", "query_norm": query_norm}
+        return (
+            us_census[0],
+            us_census[1],
+            {
+                "source": "us_census",
+                "query": f"{city}, {state_str}",
+                "query_norm": query_norm,
+            },
+        )
 
     open_meteo = _geocode_open_meteo((city or "").strip(), state_str)
     if open_meteo:
         _cache_set(query_norm, open_meteo[0], open_meteo[1])
-        return open_meteo[0], open_meteo[1], {"source": "open_meteo", "query": f"{city}, {state_str}", "query_norm": query_norm}
+        return (
+            open_meteo[0],
+            open_meteo[1],
+            {
+                "source": "open_meteo",
+                "query": f"{city}, {state_str}",
+                "query_norm": query_norm,
+            },
+        )
 
     raise ValueError(
         f"Geocoding failed after {_timeout}s and {_max_attempts} attempts. "
         f"Last error: {last_error}"
     )
+
 
 def get_timezone(lat: float, lon: float) -> str:
     """
@@ -328,6 +365,7 @@ def get_timezone(lat: float, lon: float) -> str:
     if not tz_str:
         raise ValueError("Could not determine timezone")
     return tz_str
+
 
 def get_local_datetime_now(city: str, state: str) -> datetime:
     """

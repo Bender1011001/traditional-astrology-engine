@@ -9,7 +9,24 @@
       "Bash(sqlite3 users.db \"SELECT COUNT\\(*\\) FROM guest_requests;\")",
       "Bash(sqlite3 users.db \"SELECT COUNT\\(*\\) FROM usage_records;\")",
       "Bash(sqlite3 users.db \"SELECT COUNT\\(*\\) FROM async_report_tasks;\")",
-      "Bash(sqlite3 users.db \"SELECT created_at FROM users ORDER BY created_at DESC LIMIT 3;\")"
+      "Bash(sqlite3 users.db \"SELECT created_at FROM users ORDER BY created_at DESC LIMIT 3;\")",
+      "Bash(gcloud config *)",
+      "Bash(gcloud run *)",
+      "Bash(python scripts/deploy_cloudrun.py)",
+      "Bash(PYTHONIOENCODING=utf-8 python scripts/deploy_cloudrun.py)",
+      "Bash(gcloud projects *)",
+      "Bash(curl -s \"https://astrology-engine-jknswoor2a-uc.a.run.app/api/v1/meta/health\")",
+      "Bash(curl -s \"https://astrology-engine-jknswoor2a-uc.a.run.app/docs\")",
+      "Bash(curl -s \"https://astrology-engine-jknswoor2a-uc.a.run.app/openapi.json\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(k\\) for k in d['paths'].keys\\(\\)]\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -X POST https://astrology-engine-jknswoor2a-uc.a.run.app/api/v1/charts/daily-briefing -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s -X POST http://localhost:8000/api/v1/charts/calculate -H 'Content-Type: application/json' -d '{\"date\":\"1996-08-13\",\"time\":\"07:18\",\"lat\":38.2494,\"lon\":-122.0400,\"timezone\":\"America/Los_Angeles\",\"house_system\":\"whole_sign\"}')",
+      "Bash(curl -s \"http://localhost:8000/health\")",
+      "Bash(python -c \"import uvicorn\")",
+      "Bash(curl -s https://astrology-engine-jknswoor2a-uc.a.run.app/api/v1/demo/chart -X POST -H 'Content-Type: application/json' -d '{\"date\": \"1996-08-13\", \"time\": \"07:18\", \"latitude\": 38.2493, \"longitude\": -122.0400, \"timezone\": \"America/Los_Angeles\", \"location\": \"Fairfield, CA\", \"house_system\": \"whole_sign\"}')",
+      "Bash(curl -s https://astrology-engine-jknswoor2a-uc.a.run.app/api/v1/charts/calculate -X POST -H 'Content-Type: application/json' -d '{\"date\": \"1996-08-13\", \"time\": \"07:18\", \"latitude\": 38.2493, \"longitude\": -122.0400, \"timezone\": \"America/Los_Angeles\", \"location\": \"Fairfield, CA\", \"house_system\": \"whole_sign\"}')",
+      "Bash(curl -s https://astrology-engine-jknswoor2a-uc.a.run.app/api/v1/charts/daily-briefing -X POST -H 'Content-Type: application/json' -d '{ *)"
     ]
   }
 }

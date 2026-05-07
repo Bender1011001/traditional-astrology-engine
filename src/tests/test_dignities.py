@@ -1,9 +1,11 @@
 """Tests for dignities.py — DignityCalculator."""
-from src.engine.dignities import DignityCalculator, TermSystem, TriplicityScheme
-from src.engine.models import PlanetName, Sign, Sect, Chart, Planet
 
+from src.engine.dignities import (DignityCalculator, TermSystem,
+                                  TriplicityScheme)
+from src.engine.models import Chart, Planet, PlanetName, Sect, Sign
 
 # ─── calculate_planet_dignity ────────────────────────────────────────────────
+
 
 def test_sun_in_leo_domicile():
     """Sun in Leo should have Domicile (+5)."""
@@ -32,7 +34,9 @@ def test_sun_in_libra_fall():
 
 
 def test_dignity_returns_all_keys():
-    result = DignityCalculator.calculate_planet_dignity(PlanetName.MARS, 100.0, Sect.NIGHT)
+    result = DignityCalculator.calculate_planet_dignity(
+        PlanetName.MARS, 100.0, Sect.NIGHT
+    )
     assert "total_score" in result
     assert "score_breakdown" in result
     assert "details" in result
@@ -51,14 +55,23 @@ def test_triplicity_day_fire():
 def test_triplicity_night_fire():
     """Jupiter should have Triplicity in a Fire sign at night."""
     # Jupiter at 5° Aries, Night — Jupiter is night triplicity ruler of Fire
-    result = DignityCalculator.calculate_planet_dignity(PlanetName.JUPITER, 5.0, Sect.NIGHT)
+    result = DignityCalculator.calculate_planet_dignity(
+        PlanetName.JUPITER, 5.0, Sect.NIGHT
+    )
     assert result["score_breakdown"]["triplicity"] == 3
 
 
 def test_all_planets_dignity_computable():
     """Every traditional planet should compute without errors."""
-    planets = [PlanetName.SUN, PlanetName.MOON, PlanetName.MERCURY,
-               PlanetName.VENUS, PlanetName.MARS, PlanetName.JUPITER, PlanetName.SATURN]
+    planets = [
+        PlanetName.SUN,
+        PlanetName.MOON,
+        PlanetName.MERCURY,
+        PlanetName.VENUS,
+        PlanetName.MARS,
+        PlanetName.JUPITER,
+        PlanetName.SATURN,
+    ]
     for p in planets:
         for lon in [0.0, 90.0, 180.0, 270.0]:
             result = DignityCalculator.calculate_planet_dignity(p, lon, Sect.DAY)
@@ -66,6 +79,7 @@ def test_all_planets_dignity_computable():
 
 
 # ─── calculate_planet_dignity_variant ────────────────────────────────────────
+
 
 def test_variant_ptolemaic_terms():
     result = DignityCalculator.calculate_planet_dignity_variant(
@@ -77,8 +91,10 @@ def test_variant_ptolemaic_terms():
 
 def test_variant_ptolemaic_triplicity():
     result = DignityCalculator.calculate_planet_dignity_variant(
-        PlanetName.MARS, 5.0, Sect.NIGHT,
-        triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED
+        PlanetName.MARS,
+        5.0,
+        Sect.NIGHT,
+        triplicity_scheme=TriplicityScheme.PTOLEMAIC_SECT_GATED,
     )
     assert result["variants"]["triplicity_scheme"] == "Ptolemaic (sect-gated)"
 
@@ -90,17 +106,20 @@ def test_variant_peregrine():
         PlanetName.MOON, 60.0, Sect.DAY, include_monomoiria=False
     )
     # Note: Moon may still have term or face in Gemini, so check conditionally
-    if (result["score_breakdown"]["domicile"] == 0 and
-        result["score_breakdown"]["exaltation"] == 0 and
-        result["score_breakdown"]["triplicity"] == 0 and
-        result["score_breakdown"]["term"] == 0 and
-        result["score_breakdown"]["face"] == 0 and
-        result["score_breakdown"]["detriment"] == 0 and
-        result["score_breakdown"]["fall"] == 0):
+    if (
+        result["score_breakdown"]["domicile"] == 0
+        and result["score_breakdown"]["exaltation"] == 0
+        and result["score_breakdown"]["triplicity"] == 0
+        and result["score_breakdown"]["term"] == 0
+        and result["score_breakdown"]["face"] == 0
+        and result["score_breakdown"]["detriment"] == 0
+        and result["score_breakdown"]["fall"] == 0
+    ):
         assert "Peregrine" in " ".join(result["details"])
 
 
 # ─── get_house_number ────────────────────────────────────────────────────────
+
 
 def test_house_number_whole_sign():
     """Whole Sign: planet in same sign as Asc = House 1."""
@@ -123,6 +142,7 @@ def test_house_number_with_cusps():
 
 # ─── get_monomoiria_ruler ────────────────────────────────────────────────────
 
+
 def test_monomoiria_ruler_returns_planet():
     ruler = DignityCalculator.get_monomoiria_ruler(Sign.ARIES, 0.0)
     assert isinstance(ruler, PlanetName)
@@ -140,13 +160,14 @@ def test_monomoiria_ruler_chaldean_rotation():
 
 # ─── check_hayz_halb ─────────────────────────────────────────────────────────
 
+
 def test_hayz_diurnal_planet_day():
     """Sun in a Fire sign, day chart, above horizon → Hayz."""
     chart = Chart(
         sun_altitude=10.0,
         planets=[Planet(name=PlanetName.SUN, longitude=5.0, speed=1.0)],
         ascendant=180.0,  # Libra Asc → Aries is House 7 (above horizon)
-        mc=270.0
+        mc=270.0,
     )
     result = DignityCalculator.check_hayz_halb(PlanetName.SUN, 5.0, chart)
     # Aries (Fire/Masculine), Day chart, House 7 (above horizon) → Hayz
@@ -157,7 +178,8 @@ def test_hayz_returns_dict():
     chart = Chart(
         sun_altitude=10.0,
         planets=[Planet(name=PlanetName.MOON, longitude=100.0, speed=13.0)],
-        ascendant=0.0, mc=270.0
+        ascendant=0.0,
+        mc=270.0,
     )
     result = DignityCalculator.check_hayz_halb(PlanetName.MOON, 100.0, chart)
     assert "status" in result
@@ -165,6 +187,7 @@ def test_hayz_returns_dict():
 
 
 # ─── calculate_accidental_dignity ────────────────────────────────────────────
+
 
 def test_accidental_dignity_angular():
     """Planet in angular house should get +5."""
@@ -174,7 +197,8 @@ def test_accidental_dignity_angular():
             Planet(name=PlanetName.SUN, longitude=5.0, speed=1.0),
             Planet(name=PlanetName.JUPITER, longitude=5.0, speed=0.08),
         ],
-        ascendant=0.0, mc=270.0
+        ascendant=0.0,
+        mc=270.0,
     )
     jupiter = chart.planets[1]
     result = DignityCalculator.calculate_accidental_dignity(jupiter, chart)
@@ -190,7 +214,8 @@ def test_accidental_dignity_retrograde():
             Planet(name=PlanetName.SUN, longitude=100.0, speed=1.0),
             Planet(name=PlanetName.SATURN, longitude=300.0, speed=-0.03),
         ],
-        ascendant=0.0, mc=270.0
+        ascendant=0.0,
+        mc=270.0,
     )
     saturn = chart.planets[1]
     result = DignityCalculator.calculate_accidental_dignity(saturn, chart)
@@ -198,6 +223,7 @@ def test_accidental_dignity_retrograde():
 
 
 # ─── get_essential_rulers ────────────────────────────────────────────────────
+
 
 def test_get_essential_rulers():
     rulers = DignityCalculator.get_essential_rulers(5.0, Sect.DAY)
@@ -212,6 +238,7 @@ def test_get_essential_rulers():
 
 # ─── calculate_planetary_joy ─────────────────────────────────────────────────
 
+
 def test_planetary_joy_mercury_h1():
     p = Planet(name=PlanetName.MERCURY, longitude=0.0, speed=1.0)
     assert DignityCalculator.calculate_planetary_joy(p, 1) == 2
@@ -225,10 +252,16 @@ def test_planetary_joy_wrong_house():
 def test_planetary_joy_all():
     """Each joy planet should score 2 in its joy house."""
     joys = {
-        PlanetName.MERCURY: 1, PlanetName.MOON: 3, PlanetName.VENUS: 5,
-        PlanetName.MARS: 6, PlanetName.SUN: 9, PlanetName.JUPITER: 11,
-        PlanetName.SATURN: 12
+        PlanetName.MERCURY: 1,
+        PlanetName.MOON: 3,
+        PlanetName.VENUS: 5,
+        PlanetName.MARS: 6,
+        PlanetName.SUN: 9,
+        PlanetName.JUPITER: 11,
+        PlanetName.SATURN: 12,
     }
     for name, house in joys.items():
         p = Planet(name=name, longitude=0.0, speed=1.0)
-        assert DignityCalculator.calculate_planetary_joy(p, house) == 2, f"{name.value} joy in house {house} failed"
+        assert (
+            DignityCalculator.calculate_planetary_joy(p, house) == 2
+        ), f"{name.value} joy in house {house} failed"

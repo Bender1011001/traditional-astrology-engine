@@ -1,16 +1,15 @@
 """Tests for stars.py — Fixed Stars catalog, conjunctions, and utility functions."""
-from src.engine.stars import (
-    STARS, FixedStar, StarContact,
-    get_shortest_dist, get_fixed_star_meta,
-    _normalize_deg, _precess_longitude,
-    _equatorial_to_ecliptic, _ecliptic_to_equatorial,
-    check_fixed_stars,
-)
-from src.engine.models import Chart, Planet, PlanetName
-import math
 
+
+from src.engine.models import Chart, Planet, PlanetName
+from src.engine.stars import (STARS, FixedStar, StarContact,
+                              _ecliptic_to_equatorial, _equatorial_to_ecliptic,
+                              _normalize_deg, _precess_longitude,
+                              check_fixed_stars, get_fixed_star_meta,
+                              get_shortest_dist)
 
 # ─── STARS catalog ───────────────────────────────────────────────────────────
+
 
 def test_stars_catalog_count():
     """Should have at least 20 fixed stars in the catalog."""
@@ -20,7 +19,9 @@ def test_stars_catalog_count():
 def test_stars_have_required_fields():
     for star in STARS:
         assert star.name, f"Star missing name"
-        assert 0.0 <= star.longitude < 360.0, f"{star.name} longitude out of range: {star.longitude}"
+        assert (
+            0.0 <= star.longitude < 360.0
+        ), f"{star.name} longitude out of range: {star.longitude}"
         assert star.nature, f"{star.name} missing nature"
         assert star.magnitude >= 1, f"{star.name} invalid magnitude: {star.magnitude}"
         assert star.orb > 0, f"{star.name} invalid orb: {star.orb}"
@@ -60,6 +61,7 @@ def test_all_stars_have_swe_name():
 
 # ─── get_fixed_star_meta ────────────────────────────────────────────────────
 
+
 def test_fixed_star_meta():
     meta = get_fixed_star_meta()
     assert "catalog" in meta
@@ -69,6 +71,7 @@ def test_fixed_star_meta():
 
 
 # ─── get_shortest_dist ───────────────────────────────────────────────────────
+
 
 def test_shortest_dist_same():
     assert get_shortest_dist(100.0, 100.0) == 0.0
@@ -84,6 +87,7 @@ def test_shortest_dist_wraparound():
 
 # ─── _normalize_deg ──────────────────────────────────────────────────────────
 
+
 def test_normalize_deg_positive():
     assert _normalize_deg(370.0) == 10.0
 
@@ -98,6 +102,7 @@ def test_normalize_deg_zero():
 
 # ─── _precess_longitude ─────────────────────────────────────────────────────
 
+
 def test_precess_longitude_no_jd():
     """Without JD, should return original 2025 longitude."""
     result = _precess_longitude(100.0, None)
@@ -105,6 +110,7 @@ def test_precess_longitude_no_jd():
 
 
 # ─── coordinate transforms ──────────────────────────────────────────────────
+
 
 def test_equatorial_to_ecliptic_roundtrip():
     """Converting equatorial → ecliptic → equatorial should return original."""
@@ -125,13 +131,14 @@ def test_ecliptic_to_equatorial_equinox():
 
 # ─── StarContact dataclass ──────────────────────────────────────────────────
 
+
 def test_star_contact_dataclass():
     contact = StarContact(
         star_name="Sirius",
         planet_name="Sun",
         contact_type="CONJUNCTION",
         message="test",
-        mythology="The Dog Star"
+        mythology="The Dog Star",
     )
     assert contact.star_name == "Sirius"
     assert contact.contact_type == "CONJUNCTION"
@@ -140,16 +147,21 @@ def test_star_contact_dataclass():
 
 # ─── check_fixed_stars (conjunction detection) ───────────────────────────────
 
+
 def _make_chart(planet_positions, asc=0.0, mc=270.0, sun_alt=10.0):
-    planets = [Planet(name=n, longitude=lon, speed=spd) for n, lon, spd in planet_positions]
+    planets = [
+        Planet(name=n, longitude=lon, speed=spd) for n, lon, spd in planet_positions
+    ]
     return Chart(sun_altitude=sun_alt, planets=planets, ascendant=asc, mc=mc)
 
 
 def test_check_fixed_stars_returns_list():
-    chart = _make_chart([
-        (PlanetName.SUN, 100.0, 1.0),
-        (PlanetName.MOON, 200.0, 13.0),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 100.0, 1.0),
+            (PlanetName.MOON, 200.0, 13.0),
+        ]
+    )
     result = check_fixed_stars(chart)
     assert isinstance(result, list)
 
@@ -157,12 +169,16 @@ def test_check_fixed_stars_returns_list():
 def test_conjunction_with_regulus():
     """Planet conjunct Regulus (0°10' Virgo ≈ 150.167) should be detected."""
     regulus = next(s for s in STARS if s.name == "Regulus")
-    chart = _make_chart([
-        (PlanetName.SUN, regulus.longitude, 1.0),  # Exact conjunction
-        (PlanetName.MOON, 200.0, 13.0),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, regulus.longitude, 1.0),  # Exact conjunction
+            (PlanetName.MOON, 200.0, 13.0),
+        ]
+    )
     result = check_fixed_stars(chart)
-    regulus_contacts = [c for c in result if c.star_name == "Regulus" and c.planet_name == "Sun"]
+    regulus_contacts = [
+        c for c in result if c.star_name == "Regulus" and c.planet_name == "Sun"
+    ]
     assert len(regulus_contacts) >= 1
     assert regulus_contacts[0].contact_type == "CONJUNCTION"
 
@@ -170,21 +186,27 @@ def test_conjunction_with_regulus():
 def test_conjunction_with_sirius():
     """Planet conjunct Sirius should be detected."""
     sirius = next(s for s in STARS if s.name == "Sirius")
-    chart = _make_chart([
-        (PlanetName.JUPITER, sirius.longitude + 0.5, 0.08),  # 0.5° orb
-        (PlanetName.SUN, 100.0, 1.0),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.JUPITER, sirius.longitude + 0.5, 0.08),  # 0.5° orb
+            (PlanetName.SUN, 100.0, 1.0),
+        ]
+    )
     result = check_fixed_stars(chart)
-    sirius_contacts = [c for c in result if c.star_name == "Sirius" and c.planet_name == "Jupiter"]
+    sirius_contacts = [
+        c for c in result if c.star_name == "Sirius" and c.planet_name == "Jupiter"
+    ]
     assert len(sirius_contacts) >= 1
 
 
 def test_no_conjunction_outside_orb():
     """Planet outside star's orb should not detect a conjunction."""
-    chart = _make_chart([
-        (PlanetName.SUN, 0.0, 1.0),  # 0° Aries — not near any star closely
-        (PlanetName.MOON, 30.0, 13.0),  # 0° Taurus — also not near any
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 0.0, 1.0),  # 0° Aries — not near any star closely
+            (PlanetName.MOON, 30.0, 13.0),  # 0° Taurus — also not near any
+        ]
+    )
     result = check_fixed_stars(chart)
     # May or may not have contacts depending on star positions
     for c in result:
@@ -196,10 +218,14 @@ def test_angular_star_presence():
     spica = next(s for s in STARS if s.name == "Spica")
     chart = _make_chart(
         [(PlanetName.SUN, 100.0, 1.0), (PlanetName.MOON, 200.0, 13.0)],
-        asc=spica.longitude  # Put Ascendant exactly on Spica
+        asc=spica.longitude,  # Put Ascendant exactly on Spica
     )
     result = check_fixed_stars(chart)
-    angular = [c for c in result if c.star_name == "Spica" and c.contact_type == "ANGULAR_PRESENCE"]
+    angular = [
+        c
+        for c in result
+        if c.star_name == "Spica" and c.contact_type == "ANGULAR_PRESENCE"
+    ]
     assert len(angular) >= 1
     assert "STAR ON ASCENDANT" in angular[0].message
 
@@ -207,11 +233,13 @@ def test_angular_star_presence():
 def test_antares_aldebaran_axis_alert():
     """Moon or Mars on Aldebaran should trigger AXIS_ALERT."""
     aldebaran = next(s for s in STARS if s.name == "Aldebaran")
-    chart = _make_chart([
-        (PlanetName.SUN, 100.0, 1.0),
-        (PlanetName.MOON, aldebaran.longitude, 13.0),  # Moon right on Aldebaran
-        (PlanetName.MARS, 200.0, 0.5),
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 100.0, 1.0),
+            (PlanetName.MOON, aldebaran.longitude, 13.0),  # Moon right on Aldebaran
+            (PlanetName.MARS, 200.0, 0.5),
+        ]
+    )
     result = check_fixed_stars(chart)
     axis_alerts = [c for c in result if c.contact_type == "AXIS_ALERT"]
     assert len(axis_alerts) >= 1
@@ -219,6 +247,7 @@ def test_antares_aldebaran_axis_alert():
 
 
 # ─── FixedStar dataclass ────────────────────────────────────────────────────
+
 
 def test_fixed_star_defaults():
     star = FixedStar(name="Test", longitude=100.0, nature="Jupiter", magnitude=1)

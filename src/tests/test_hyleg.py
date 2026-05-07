@@ -1,9 +1,12 @@
 """Tests for hyleg.py — HylegAlcocodenEngine."""
+
 from src.engine.hyleg import HylegAlcocodenEngine
 from src.engine.models import Chart, Planet, PlanetName
 
 
-def _build_chart(sun_lon=30.0, moon_lon=120.0, asc=0.0, sun_alt=10.0, extra_planets=None):
+def _build_chart(
+    sun_lon=30.0, moon_lon=120.0, asc=0.0, sun_alt=10.0, extra_planets=None
+):
     """Build a Chart with Sun, Moon and optionally other planets."""
     planets = [
         Planet(name=PlanetName.SUN, longitude=sun_lon, speed=1.0, altitude=sun_alt),
@@ -20,6 +23,7 @@ def _build_chart(sun_lon=30.0, moon_lon=120.0, asc=0.0, sun_alt=10.0, extra_plan
 
 
 # ─── determine_hyleg ─────────────────────────────────────────────────────────
+
 
 def test_determine_hyleg_returns_dict():
     chart = _build_chart()
@@ -48,10 +52,13 @@ def test_determine_hyleg_night_chart():
 
 # ─── determine_alcocoden ─────────────────────────────────────────────────────
 
+
 def test_determine_alcocoden_bonatti_method():
     chart = _build_chart()
     hyleg = HylegAlcocodenEngine.determine_hyleg(chart)
-    alco = HylegAlcocodenEngine.determine_alcocoden(hyleg, chart, method="bonatti_points")
+    alco = HylegAlcocodenEngine.determine_alcocoden(
+        hyleg, chart, method="bonatti_points"
+    )
     # Can be None if no candidate qualifies
     if alco is not None:
         assert "name" in alco
@@ -69,6 +76,7 @@ def test_determine_alcocoden_valens_term():
 
 
 # ─── calculate_lifespan ──────────────────────────────────────────────────────
+
 
 def test_calculate_lifespan_with_alcocoden():
     chart = _build_chart()
@@ -93,6 +101,7 @@ def test_calculate_lifespan_no_alcocoden():
 
 # ─── determine_anareta ───────────────────────────────────────────────────────
 
+
 def test_determine_anareta_basic():
     chart = _build_chart()
     hyleg = HylegAlcocodenEngine.determine_hyleg(chart)
@@ -116,7 +125,12 @@ def test_determine_anareta_with_tight_malefic():
     for p in chart.planets:
         if p.name == PlanetName.MARS:
             p.longitude = 90.0
-    hyleg = {"type": "Planet", "name": "Sun", "longitude": 0.0, "candidate": PlanetName.SUN}
+    hyleg = {
+        "type": "Planet",
+        "name": "Sun",
+        "longitude": 0.0,
+        "candidate": PlanetName.SUN,
+    }
     anareta = HylegAlcocodenEngine.determine_anareta(hyleg, chart)
     if anareta["name"]:
         assert anareta["name"] in ["Mars", "Saturn", "Descendant (7th cusp)"]
@@ -125,10 +139,18 @@ def test_determine_anareta_with_tight_malefic():
 
 # ─── planetary_years ──────────────────────────────────────────────────────────
 
+
 def test_planetary_years_table():
     """Ensure all 7 planets have minor, mean, major years."""
-    required = [PlanetName.SATURN, PlanetName.JUPITER, PlanetName.MARS,
-                PlanetName.SUN, PlanetName.VENUS, PlanetName.MERCURY, PlanetName.MOON]
+    required = [
+        PlanetName.SATURN,
+        PlanetName.JUPITER,
+        PlanetName.MARS,
+        PlanetName.SUN,
+        PlanetName.VENUS,
+        PlanetName.MERCURY,
+        PlanetName.MOON,
+    ]
     for p in required:
         years = HylegAlcocodenEngine.PLANETARY_YEARS[p]
         assert "minor" in years

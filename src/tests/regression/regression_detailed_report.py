@@ -1,8 +1,8 @@
-import sys
-import os
 import json
+import os
+import sys
 from datetime import datetime
-from typing import Dict, Any
+
 import swisseph as swe
 
 # Ensure project root is in path
@@ -18,6 +18,7 @@ except ImportError as e:
     print(f"Traceback details: {e}")
     sys.exit(1)
 
+
 def run_regression_test():
     """
     Detailed Report Regression Test Suite.
@@ -25,7 +26,7 @@ def run_regression_test():
     """
     script_dir = os.path.dirname(os.path.abspath(__file__))
     ref_path = os.path.join(script_dir, "golden_references.json")
-    
+
     if not os.path.exists(ref_path):
         print(f"❌ Error: Reference file not found at {ref_path}")
         sys.exit(1)
@@ -39,13 +40,13 @@ def run_regression_test():
 
     for key, data in golden_data.items():
         print(f"Checking: {data['name']}...")
-        bd = data['birth_data']
-        expected = data['expected_results']
-        
+        bd = data["birth_data"]
+        expected = data["expected_results"]
+
         # 1. Calculate Natal Chart (Directly with coordinates)
         # Using accurate historical JD
-        jd = swe.julday(bd['year'], bd['month'], bd['day'], bd['hour'])
-        
+        jd = swe.julday(bd["year"], bd["month"], bd["day"], bd["hour"])
+
         planets_to_calc = {
             "Sun": swe.SUN,
             "Moon": swe.MOON,
@@ -57,65 +58,72 @@ def run_regression_test():
             "Uranus": swe.URANUS,
             "Neptune": swe.NEPTUNE,
             "Pluto": swe.PLUTO,
-            "North_Node": swe.MEAN_NODE
+            "North_Node": swe.MEAN_NODE,
         }
-        
+
         flags = swe.FLG_SWIEPH | swe.FLG_SPEED
         topo_flags = flags | swe.FLG_TOPOCTR
-        swe.set_topo(bd['lon'], bd['lat'], 0)
-        
+        swe.set_topo(bd["lon"], bd["lat"], 0)
+
         calculated_planets = []
         sun_alt = 0.0
-        
+
         for pname, pid in planets_to_calc.items():
             res = swe.calc_ut(jd, pid, flags)
             coords = res[0]
-            
+
             # Altitude for Sun / Topocentric
             topo_res = swe.calc_ut(jd, pid, topo_flags)
             topo_coords = topo_res[0]
             xin = (topo_coords[0], topo_coords[1], topo_coords[2])
-            azresult = swe.azalt(jd, swe.ECL2HOR, (bd['lon'], bd['lat'], 0), 0, 0, xin)
+            azresult = swe.azalt(jd, swe.ECL2HOR, (bd["lon"], bd["lat"], 0), 0, 0, xin)
             altitude = azresult[1]
-            
-            p_enum = PlanetName.NORTH_NODE if pname == "North_Node" else PlanetName[pname.upper()]
-            calculated_planets.append(Planet(
-                name=p_enum,
-                longitude=coords[0],
-                latitude=coords[1],
-                speed=coords[3],
-                altitude=altitude
-            ))
-            
+
+            p_enum = (
+                PlanetName.NORTH_NODE
+                if pname == "North_Node"
+                else PlanetName[pname.upper()]
+            )
+            calculated_planets.append(
+                Planet(
+                    name=p_enum,
+                    longitude=coords[0],
+                    latitude=coords[1],
+                    speed=coords[3],
+                    altitude=altitude,
+                )
+            )
+
             if pname == "Sun":
                 sun_alt = altitude
 
         # Angles and Houses (Placidus)
-        cusps, ascmc = swe.houses(jd, bd['lat'], bd['lon'], b'P')
-        
+        cusps, ascmc = swe.houses(jd, bd["lat"], bd["lon"], b"P")
+
         chart_obj = Chart(
             sun_altitude=sun_alt,
             planets=calculated_planets,
             ascendant=ascmc[0],
             mc=ascmc[1],
-            geo_lat=bd['lat'],
-            geo_lon=bd['lon'],
+            geo_lat=bd["lat"],
+            geo_lon=bd["lon"],
             jd=jd,
-            houses={i+1: c for i, c in enumerate(cusps)}
+            houses={i + 1: c for i, c in enumerate(cusps)},
         )
-        
+
         # 2. Run Forensic Audit
         age_key = [k for k in expected.keys() if k.startswith("lord_of_year_age_")]
         test_age = 0
         if age_key:
             test_age = int(age_key[0].split("_")[-1])
-            
+
         from src.engine.forensic_engine import Auditor
+
         audit_data = Auditor.perform_audit(
-            chart_obj, 
-            jd=chart_obj.jd, 
-            age=test_age, 
-            birth_dt=datetime(bd['year'], bd['month'], bd['day'])
+            chart_obj,
+            jd=chart_obj.jd,
+            age=test_age,
+            birth_dt=datetime(bd["year"], bd["month"], bd["day"]),
         )
         audit = audit_data["analysis"]
         print(f"DEBUG: VITALITY: {audit.get('vitality')}")
@@ -135,36 +143,49 @@ def run_regression_test():
 
         # Use Almuten Engine to get Almuten Figuris
         from src.engine.advanced_mechanics import AlmutenEngine
-        almuten_data = AlmutenEngine.calculate_almuten(chart_obj)
-        almuten_winner = almuten_data.winner.value if almuten_data and almuten_data.winner else None
 
-        actuals_hyleg = get_nested_val(audit, "vitality", "hyleg", "candidate") or get_nested_val(audit, "vitality", "hyleg")
-        
+        almuten_data = AlmutenEngine.calculate_almuten(chart_obj)
+        almuten_winner = (
+            almuten_data.winner.value if almuten_data and almuten_data.winner else None
+        )
+
+        actuals_hyleg = get_nested_val(
+            audit, "vitality", "hyleg", "candidate"
+        ) or get_nested_val(audit, "vitality", "hyleg")
+
         actuals = {
             "ascendant_sign": get_sign_str(chart_obj.ascendant),
             "mc_sign": get_sign_str(chart_obj.mc),
             "almuten_figuris": almuten_winner,
-            "hyleg": getattr(actuals_hyleg, "value", actuals_hyleg) if actuals_hyleg else None
+            "hyleg": (
+                getattr(actuals_hyleg, "value", actuals_hyleg)
+                if actuals_hyleg
+                else None
+            ),
         }
-        
+
         # fallback if hyleg is just a string or enum
         if isinstance(actuals["hyleg"], dict):
             hyleg_val = actuals["hyleg"].get("candidate")
             actuals["hyleg"] = getattr(hyleg_val, "value", hyleg_val)
         elif hasattr(actuals["hyleg"], "value"):
             actuals["hyleg"] = actuals["hyleg"].value
-        
+
         if age_key:
-            actuals[age_key[0]] = audit.get("enhanced_profections", {}).get("lord_of_year")
+            actuals[age_key[0]] = audit.get("enhanced_profections", {}).get(
+                "lord_of_year"
+            )
 
         for metric, exp_val in expected.items():
             act_val = actuals.get(metric)
             if str(act_val) != str(exp_val):
-                failures.append(f"FAILED: {data['name']} | {metric} | Expected: {exp_val}, Actual: {act_val}")
+                failures.append(
+                    f"FAILED: {data['name']} | {metric} | Expected: {exp_val}, Actual: {act_val}"
+                )
                 print(f"  ❌ {metric}: {act_val} (Expected: {exp_val})")
             else:
                 print(f"  ✅ {metric}: {act_val}")
-        
+
     print("\n--- Summary ---")
     if not failures:
         print("✅ ALL TESTS PASSED. Forensic accuracy maintained.")
@@ -174,6 +195,7 @@ def run_regression_test():
         for f in failures:
             print(f"  {f}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     run_regression_test()

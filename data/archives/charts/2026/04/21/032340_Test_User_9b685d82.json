@@ -1,0 +1,3902 @@
+{
+  "timestamp": "2026-04-21T03:23:40.079976+00:00",
+  "request": {
+    "date": "1990-01-01",
+    "time": "12:00",
+    "city": "London",
+    "state": "ENG",
+    "name": "Test User",
+    "age": null,
+    "analysis_date": null,
+    "house_system": null,
+    "compare_house_systems": false,
+    "zodiac_system": null,
+    "ayanamsa": null,
+    "node_type": "mean",
+    "rectification_methods": null,
+    "time_range_start": null,
+    "time_range_end": null,
+    "time_range_samples": null,
+    "access_token": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "result": {
+    "meta": {
+      "subject_name": "Test User",
+      "generated_at": "2026-04-20T20:23:40.003798",
+      "analysis_date": "2026-04-20T20:23:38",
+      "julian_day": 2447893.0,
+      "age": 36,
+      "chart": {
+        "date": "1990-01-01",
+        "time": "12:00",
+        "city": "London",
+        "state": "ENG",
+        "lat": 51.5074456,
+        "lon": -0.1277653,
+        "geocode": {
+          "source": "nominatim",
+          "query": "London, ENG",
+          "query_norm": "london, eng"
+        },
+        "timezone": "Europe/London",
+        "tz_abbrev": "GMT",
+        "utc_offset_hours": 0.0,
+        "dst_offset_hours": 0.0,
+        "utc_time": "1990-01-01T12:00:00+00:00",
+        "julian_day": 2447893.0,
+        "house_system": {
+          "code": "W",
+          "label": "Whole Sign",
+          "requested": "W"
+        },
+        "zodiac_system": {
+          "code": "tropical",
+          "label": "Tropical"
+        },
+        "node_type": "mean"
+      },
+      "birth_date": "1990-01-01",
+      "birth_time": "12:00",
+      "city": "London",
+      "state": "ENG",
+      "lat": 51.5074456,
+      "lon": -0.1277653,
+      "timezone": "Europe/London",
+      "utc_time": "1990-01-01T12:00:00+00:00",
+      "tier": "free",
+      "chart_hash": "dfe841b9c93848b3985da8e6e6ba38c710e26fdab49187ed869361ee6eefd2ec",
+      "promo_unlocked": false
+    },
+    "astronomy": {
+      "planets": {
+        "Sun": {
+          "longitude": 280.8142554457551,
+          "latitude": 1.198568251736384e-05,
+          "speed": 1.0194731047713608,
+          "altitude": 15.48301880122887,
+          "is_retrograde": false,
+          "classical": {
+            "antiscia": {
+              "longitude": 259.1857445542449,
+              "sign": "Sagittarius"
+            },
+            "contra_antiscia": {
+              "longitude": 79.18574455424488,
+              "sign": "Gemini"
+            },
+            "dodecatemorion": {
+              "longitude": 39.77106534906147,
+              "sign": "Taurus",
+              "term_ruler": "Mercury"
+            },
+            "phasis": {
+              "phase": null,
+              "solar_proximity": null,
+              "is_oriental": false,
+              "is_visible": true
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Sun",
+              "trigonal_ruler": "Saturn"
+            }
+          }
+        },
+        "Moon": {
+          "longitude": 333.2676876709447,
+          "latitude": 1.470689509033714,
+          "speed": 13.470100876603471,
+          "altitude": 12.985158961755095,
+          "is_retrograde": false,
+          "classical": {
+            "antiscia": {
+              "longitude": 206.73231232905528,
+              "sign": "Libra"
+            },
+            "contra_antiscia": {
+              "longitude": 26.732312329055276,
+              "sign": "Aries"
+            },
+            "dodecatemorion": {
+              "longitude": 9.21225205133669,
+              "sign": "Aries",
+              "term_ruler": "Venus"
+            },
+            "phasis": {
+              "phase": null,
+              "solar_proximity": null,
+              "is_oriental": false,
+              "is_visible": true
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Venus",
+              "trigonal_ruler": "Saturn"
+            },
+            "kakosis": [
+              {
+                "condition": "Overcoming",
+                "malefic": "Mars",
+                "details": "Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -2 severity)"
+              }
+            ]
+          }
+        },
+        "Mercury": {
+          "longitude": 295.6728045365951,
+          "latitude": 0.6303053479296999,
+          "speed": -0.29457231086390206,
+          "altitude": 16.60718767342786,
+          "is_retrograde": true,
+          "classical": {
+            "antiscia": {
+              "longitude": 244.3271954634049,
+              "sign": "Sagittarius"
+            },
+            "contra_antiscia": {
+              "longitude": 64.3271954634049,
+              "sign": "Gemini"
+            },
+            "dodecatemorion": {
+              "longitude": 218.07365443914114,
+              "sign": "Scorpio",
+              "term_ruler": "Venus"
+            },
+            "phasis": {
+              "phase": "Evening Last",
+              "solar_proximity": "Under the Beams",
+              "is_oriental": false,
+              "is_visible": false
+            },
+            "doryphory": [
+              {
+                "type": "Bodily/Co-Present (Same Sign)",
+                "luminary": "Sun",
+                "score": 9
+              }
+            ],
+            "monomoiria": {
+              "zoidion_ruler": "Venus",
+              "trigonal_ruler": "Jupiter"
+            }
+          }
+        },
+        "Venus": {
+          "longitude": 306.22183347340115,
+          "latitude": 1.90119182603386,
+          "speed": -0.13028679463746695,
+          "altitude": 17.55522957013896,
+          "is_retrograde": true,
+          "classical": {
+            "antiscia": {
+              "longitude": 233.77816652659885,
+              "sign": "Scorpio"
+            },
+            "contra_antiscia": {
+              "longitude": 53.77816652659885,
+              "sign": "Taurus"
+            },
+            "dodecatemorion": {
+              "longitude": 14.662001680813773,
+              "sign": "Aries",
+              "term_ruler": "Mercury"
+            },
+            "phasis": {
+              "phase": "Evening Last",
+              "solar_proximity": "Free",
+              "is_oriental": false,
+              "is_visible": true
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Moon",
+              "trigonal_ruler": "Sun"
+            }
+          }
+        },
+        "Mars": {
+          "longitude": 250.00008659831522,
+          "latitude": -0.03293101657334668,
+          "speed": 0.7037567092002174,
+          "altitude": 11.203966419708623,
+          "is_retrograde": false,
+          "classical": {
+            "antiscia": {
+              "longitude": 289.9999134016848,
+              "sign": "Capricorn"
+            },
+            "contra_antiscia": {
+              "longitude": 109.99991340168481,
+              "sign": "Cancer"
+            },
+            "dodecatemorion": {
+              "longitude": 0.0010391797826514448,
+              "sign": "Aries",
+              "term_ruler": "Jupiter"
+            },
+            "phasis": {
+              "phase": "Free",
+              "solar_proximity": "Free",
+              "is_oriental": true,
+              "is_visible": true
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Venus",
+              "trigonal_ruler": "Saturn"
+            }
+          }
+        },
+        "Jupiter": {
+          "longitude": 95.14872561928787,
+          "latitude": -0.11696028211234831,
+          "speed": -0.1344807787059025,
+          "altitude": -15.13086853855369,
+          "is_retrograde": true,
+          "classical": {
+            "antiscia": {
+              "longitude": 84.85127438071213,
+              "sign": "Gemini"
+            },
+            "contra_antiscia": {
+              "longitude": 264.85127438071214,
+              "sign": "Sagittarius"
+            },
+            "dodecatemorion": {
+              "longitude": 151.78470743145448,
+              "sign": "Virgo",
+              "term_ruler": "Mercury"
+            },
+            "phasis": {
+              "phase": "Opposition",
+              "solar_proximity": "Free",
+              "is_oriental": false,
+              "is_visible": false
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Venus",
+              "trigonal_ruler": "Mars"
+            },
+            "kakosis": [
+              {
+                "condition": "Opposition",
+                "malefic": "Saturn",
+                "details": "Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+              }
+            ]
+          }
+        },
+        "Saturn": {
+          "longitude": 285.65752209545855,
+          "latitude": 0.2933007711611973,
+          "speed": 0.11827134300635227,
+          "altitude": 16.059066308840706,
+          "is_retrograde": false,
+          "classical": {
+            "antiscia": {
+              "longitude": 254.34247790454145,
+              "sign": "Sagittarius"
+            },
+            "contra_antiscia": {
+              "longitude": 74.34247790454145,
+              "sign": "Gemini"
+            },
+            "dodecatemorion": {
+              "longitude": 97.89026514550255,
+              "sign": "Cancer",
+              "term_ruler": "Venus"
+            },
+            "phasis": {
+              "phase": "Evening Last",
+              "solar_proximity": "Combust",
+              "is_oriental": false,
+              "is_visible": false
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Jupiter",
+              "trigonal_ruler": "Mercury"
+            }
+          }
+        },
+        "Uranus": {
+          "longitude": 275.7854752499868,
+          "latitude": -0.2701075849178518,
+          "speed": 0.060008221689690854,
+          "altitude": 14.805382259757938,
+          "is_retrograde": false,
+          "classical": {
+            "antiscia": {
+              "longitude": 264.2145247500132,
+              "sign": "Sagittarius"
+            },
+            "contra_antiscia": {
+              "longitude": 84.2145247500132,
+              "sign": "Gemini"
+            },
+            "dodecatemorion": {
+              "longitude": 339.42570299984163,
+              "sign": "Pisces",
+              "term_ruler": "Venus"
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Mercury",
+              "trigonal_ruler": "Mars"
+            }
+          }
+        },
+        "Neptune": {
+          "longitude": 282.0381195937742,
+          "latitude": 0.8473535347486423,
+          "speed": 0.03791101668797783,
+          "altitude": 16.41268215946898,
+          "is_retrograde": false,
+          "classical": {
+            "antiscia": {
+              "longitude": 257.9618804062258,
+              "sign": "Sagittarius"
+            },
+            "contra_antiscia": {
+              "longitude": 77.96188040622582,
+              "sign": "Gemini"
+            },
+            "dodecatemorion": {
+              "longitude": 54.4574351252902,
+              "sign": "Taurus",
+              "term_ruler": "Saturn"
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Mercury",
+              "trigonal_ruler": "Mars"
+            }
+          }
+        },
+        "Pluto": {
+          "longitude": 227.0931665507912,
+          "latitude": 15.284420926542278,
+          "speed": 0.02732341526818635,
+          "altitude": 20.70469091099123,
+          "is_retrograde": false,
+          "classical": {
+            "antiscia": {
+              "longitude": 312.90683344920876,
+              "sign": "Aquarius"
+            },
+            "contra_antiscia": {
+              "longitude": 132.90683344920876,
+              "sign": "Leo"
+            },
+            "dodecatemorion": {
+              "longitude": 55.11799860949452,
+              "sign": "Taurus",
+              "term_ruler": "Saturn"
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Mercury",
+              "trigonal_ruler": "Saturn"
+            }
+          }
+        },
+        "North_Node": {
+          "longitude": 318.43498371138435,
+          "latitude": 0.0,
+          "speed": -0.052959410457089705,
+          "altitude": 14.625795747210585,
+          "is_retrograde": true,
+          "classical": {
+            "antiscia": {
+              "longitude": 221.56501628861565,
+              "sign": "Scorpio"
+            },
+            "contra_antiscia": {
+              "longitude": 41.56501628861565,
+              "sign": "Taurus"
+            },
+            "dodecatemorion": {
+              "longitude": 161.21980453661217,
+              "sign": "Virgo",
+              "term_ruler": "Venus"
+            },
+            "monomoiria": {
+              "zoidion_ruler": "Venus",
+              "trigonal_ruler": "Jupiter"
+            }
+          }
+        },
+        "South_Node": {
+          "longitude": 138.43498371138435,
+          "latitude": -0.0,
+          "speed": -0.052959410457089705,
+          "altitude": 0,
+          "is_retrograde": true,
+          "classical": {
+            "antiscia": {
+              "longitude": 41.56501628861565,
+              "sign": "Taurus"
+            },
+            "contra_antiscia": {
+              "longitude": 221.56501628861565,
+              "sign": "Scorpio"
+            },
+            "dodecatemorion": {
+              "longitude": 341.2198045366122,
+              "sign": "Pisces",
+              "term_ruler": "Venus"
+            }
+          }
+        }
+      },
+      "houses": {
+        "1": 0.0,
+        "2": 30.0,
+        "3": 60.0,
+        "4": 90.0,
+        "5": 120.0,
+        "6": 150.0,
+        "7": 180.0,
+        "8": 210.0,
+        "9": 240.0,
+        "10": 270.0,
+        "11": 300.0,
+        "12": 330.0
+      },
+      "angles": {
+        "Ascendant": 24.944159966389954,
+        "MC": 279.8825219800085
+      }
+    },
+    "analysis": {
+      "sect": {
+        "type": "DAY",
+        "sun_altitude_deg": 15.48301880122887,
+        "note": "Sect is determined by Sun altitude (above/below horizon), not by house labels."
+      },
+      "dignity": {
+        "almuten": {
+          "winner": "Mars",
+          "score": 26,
+          "breakdown": {
+            "Sun": 18,
+            "Moon": 2,
+            "Mercury": 18,
+            "Venus": 24,
+            "Mars": 26,
+            "Jupiter": 18,
+            "Saturn": 26
+          }
+        },
+        "lord_of_geniture": {
+          "winner": "Venus",
+          "scores": {
+            "Sun": {
+              "total": 1,
+              "breakdown": {
+                "essential_peregrine": -5,
+                "acc_house": 5,
+                "acc_direct": 4,
+                "acc_swift": 2,
+                "acc_malefic_aspects": -5
+              },
+              "details": [
+                "Peregrine (-5)",
+                "House (1/10) (+5)",
+                "Direct (+4)",
+                "Swift (+2)",
+                "Conjunct Saturn (-5)"
+              ]
+            },
+            "Moon": {
+              "total": -1,
+              "breakdown": {
+                "essential_peregrine": -5,
+                "acc_house": -5,
+                "acc_direct": 4,
+                "acc_swift": 2,
+                "acc_orientality": 2,
+                "acc_benefic_aspects": 4,
+                "acc_malefic_aspects": -3
+              },
+              "details": [
+                "Peregrine (-5)",
+                "House (12) (-5)",
+                "Direct (+4)",
+                "Swift (+2)",
+                "Increasing in Light (+2)",
+                "Trine Jupiter (+4)",
+                "Square Mars (-3)"
+              ]
+            },
+            "Mercury": {
+              "total": -7,
+              "breakdown": {
+                "essential_peregrine": -5,
+                "acc_house": 5,
+                "acc_retrograde": -5,
+                "acc_under_beams": -4,
+                "acc_orientality": 2
+              },
+              "details": [
+                "Peregrine (-5)",
+                "House (1/10) (+5)",
+                "Retrograde (-5)",
+                "Under Beams (-4)",
+                "Occidental (+2)"
+              ]
+            },
+            "Venus": {
+              "total": 7,
+              "breakdown": {
+                "essential_face": 1,
+                "acc_house": 4,
+                "acc_retrograde": -5,
+                "acc_orientality": 2,
+                "acc_benefic_aspects": 5
+              },
+              "details": [
+                "Face (+1)",
+                "House (7/4/11) (+4)",
+                "Retrograde (-5)",
+                "Occidental (+2)",
+                "Conjunct Venus (+5)"
+              ]
+            },
+            "Mars": {
+              "total": 3,
+              "breakdown": {
+                "essential_peregrine": -5,
+                "acc_house": 2,
+                "acc_direct": 4,
+                "acc_swift": 2,
+                "acc_orientality": 2,
+                "acc_benefic_aspects": 3,
+                "acc_malefic_aspects": -5
+              },
+              "details": [
+                "Peregrine (-5)",
+                "House (9) (+2)",
+                "Direct (+4)",
+                "Swift (+2)",
+                "Oriental (+2)",
+                "Sextile Venus (+3)",
+                "Conjunct Mars (-5)"
+              ]
+            },
+            "Jupiter": {
+              "total": 6,
+              "breakdown": {
+                "essential_exaltation": 4,
+                "acc_house": 4,
+                "acc_retrograde": -5,
+                "acc_orientality": -2,
+                "acc_benefic_aspects": 5
+              },
+              "details": [
+                "Exaltation (+4)",
+                "House (7/4/11) (+4)",
+                "Retrograde (-5)",
+                "Occidental (-2)",
+                "Conjunct Jupiter (+5)"
+              ]
+            },
+            "Saturn": {
+              "total": 4,
+              "breakdown": {
+                "essential_domicile": 5,
+                "acc_house": 5,
+                "acc_direct": 4,
+                "acc_swift": 2,
+                "acc_combust": -5,
+                "acc_orientality": -2,
+                "acc_malefic_aspects": -5
+              },
+              "details": [
+                "Domicile (+5)",
+                "House (1/10) (+5)",
+                "Direct (+4)",
+                "Swift (+2)",
+                "Combust (-5)",
+                "Occidental (-2)",
+                "Conjunct Saturn (-5)"
+              ]
+            }
+          },
+          "method": "Lilly (net fortitudes/debilities; Ptolemaic terms/triplicity)"
+        },
+        "doryphory": [
+          "Mercury"
+        ]
+      },
+      "fate": {
+        "hermetic_lots": {
+          "Fortune": {
+            "longitude": 77.39759219157958,
+            "sign": "Gemini",
+            "degree": 17.3976,
+            "longitude_fmt": {
+              "lon_abs": 77.39759219157958,
+              "sign": "Gemini",
+              "deg_in_sign": 17.397592,
+              "dms": {
+                "deg": 17,
+                "min": 23,
+                "sec": 51
+              },
+              "string": "Gemini 17°23'51\""
+            },
+            "house": 3,
+            "ruler": "Mercury",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Opposed by Mars. (Within 7° orb)"
+            ],
+            "formula": "Day: Asc + Moon - Sun | Night: Asc + Sun - Moon",
+            "inputs": {
+              "sect": "DAY",
+              "asc": 24.944159966389954,
+              "sun": 280.8142554457551,
+              "moon": 333.2676876709447,
+              "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py."
+            }
+          },
+          "Spirit": {
+            "longitude": 332.4907277412004,
+            "sign": "Pisces",
+            "degree": 2.4907,
+            "longitude_fmt": {
+              "lon_abs": 332.4907277412004,
+              "sign": "Pisces",
+              "deg_in_sign": 2.490728,
+              "dms": {
+                "deg": 2,
+                "min": 29,
+                "sec": 27
+              },
+              "string": "Pisces 02°29'27\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -2 severity)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": "Day: Asc + Sun - Moon | Night: Asc + Moon - Sun",
+            "inputs": {
+              "sect": "DAY",
+              "asc": 24.944159966389954,
+              "sun": 280.8142554457551,
+              "moon": 333.2676876709447,
+              "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py."
+            }
+          },
+          "Eros": {
+            "longitude": 358.67526569859075,
+            "sign": "Pisces",
+            "degree": 28.6753,
+            "longitude_fmt": {
+              "lon_abs": 358.67526569859075,
+              "sign": "Pisces",
+              "deg_in_sign": 28.675266,
+              "dms": {
+                "deg": 28,
+                "min": 40,
+                "sec": 31
+              },
+              "string": "Pisces 28°40'31\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": "Day: Asc + Venus - Spirit | Night: Asc + Spirit - Venus",
+            "inputs": {
+              "sect": "DAY",
+              "asc": 24.944159966389954,
+              "sun": 280.8142554457551,
+              "moon": 333.2676876709447,
+              "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py."
+            }
+          },
+          "Necessity": {
+            "longitude": 166.66894762137443,
+            "sign": "Virgo",
+            "degree": 16.6689,
+            "longitude_fmt": {
+              "lon_abs": 166.66894762137443,
+              "sign": "Virgo",
+              "deg_in_sign": 16.668948,
+              "dms": {
+                "deg": 16,
+                "min": 40,
+                "sec": 8
+              },
+              "string": "Virgo 16°40'08\""
+            },
+            "house": 6,
+            "ruler": "Mercury",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": "Day: Asc + Mercury - Fortune | Night: Asc + Fortune - Mercury",
+            "inputs": {
+              "sect": "DAY",
+              "asc": 24.944159966389954,
+              "sun": 280.8142554457551,
+              "moon": 333.2676876709447,
+              "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py."
+            }
+          },
+          "Courage": {
+            "longitude": 212.3416655596543,
+            "sign": "Scorpio",
+            "degree": 2.3417,
+            "longitude_fmt": {
+              "lon_abs": 212.3416655596543,
+              "sign": "Scorpio",
+              "deg_in_sign": 2.341666,
+              "dms": {
+                "deg": 2,
+                "min": 20,
+                "sec": 30
+              },
+              "string": "Scorpio 02°20'30\""
+            },
+            "house": 8,
+            "ruler": "Mars",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": "Day: Asc + Mars - Fortune | Night: Asc + Fortune - Mars",
+            "inputs": {
+              "sect": "DAY",
+              "asc": 24.944159966389954,
+              "sun": 280.8142554457551,
+              "moon": 333.2676876709447,
+              "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py."
+            }
+          },
+          "Victory": {
+            "longitude": 147.60215784447746,
+            "sign": "Leo",
+            "degree": 27.6022,
+            "longitude_fmt": {
+              "lon_abs": 147.60215784447746,
+              "sign": "Leo",
+              "deg_in_sign": 27.602158,
+              "dms": {
+                "deg": 27,
+                "min": 36,
+                "sec": 8
+              },
+              "string": "Leo 27°36'08\""
+            },
+            "house": 5,
+            "ruler": "Sun",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": "Day: Asc + Jupiter - Spirit | Night: Asc + Spirit - Jupiter",
+            "inputs": {
+              "sect": "DAY",
+              "asc": 24.944159966389954,
+              "sun": 280.8142554457551,
+              "moon": 333.2676876709447,
+              "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py."
+            }
+          },
+          "Nemesis": {
+            "longitude": 176.68423006251098,
+            "sign": "Virgo",
+            "degree": 26.6842,
+            "longitude_fmt": {
+              "lon_abs": 176.68423006251098,
+              "sign": "Virgo",
+              "deg_in_sign": 26.68423,
+              "dms": {
+                "deg": 26,
+                "min": 41,
+                "sec": 3
+              },
+              "string": "Virgo 26°41'03\""
+            },
+            "house": 6,
+            "ruler": "Mercury",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": "Day: Asc + Saturn - Fortune | Night: Asc + Fortune - Saturn",
+            "inputs": {
+              "sect": "DAY",
+              "asc": 24.944159966389954,
+              "sun": 280.8142554457551,
+              "moon": 333.2676876709447,
+              "note": "Lots use Ascendant + (B - A); some reverse A/B by sect as encoded in lots.py."
+            }
+          },
+          "Debt": {
+            "longitude": 14.928877525253426,
+            "sign": "Aries",
+            "degree": 14.9289,
+            "longitude_fmt": {
+              "lon_abs": 14.928877525253426,
+              "sign": "Aries",
+              "deg_in_sign": 14.928878,
+              "dms": {
+                "deg": 14,
+                "min": 55,
+                "sec": 44
+              },
+              "string": "Aries 14°55'44\""
+            },
+            "house": 1,
+            "ruler": "Mars",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Lot] Enclosed by rays of Mars and Saturn (Span: 5.7°).",
+              "[Lot] Struck by Saturn via tight square (0.7° orb)."
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Theft": {
+            "longitude": 339.2714420281101,
+            "sign": "Pisces",
+            "degree": 9.2714,
+            "longitude_fmt": {
+              "lon_abs": 339.2714420281101,
+              "sign": "Pisces",
+              "deg_in_sign": 9.271442,
+              "dms": {
+                "deg": 9,
+                "min": 16,
+                "sec": 17
+              },
+              "string": "Pisces 09°16'17\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect) (Mitigated by Benefic Intervention: -2 severity)",
+              "[Lot] Struck by Mars via tight square (0.7° orb). (Mitigated by Benefic Intervention: -2 severity)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Accusation": {
+            "longitude": 349.2867244692466,
+            "sign": "Pisces",
+            "degree": 19.2867,
+            "longitude_fmt": {
+              "lon_abs": 349.2867244692466,
+              "sign": "Pisces",
+              "deg_in_sign": 19.286724,
+              "dms": {
+                "deg": 19,
+                "min": 17,
+                "sec": 12
+              },
+              "string": "Pisces 19°17'12\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Father": {
+            "longitude": 29.7874266160934,
+            "sign": "Aries",
+            "degree": 29.7874,
+            "longitude_fmt": {
+              "lon_abs": 29.7874266160934,
+              "sign": "Aries",
+              "deg_in_sign": 29.787427,
+              "dms": {
+                "deg": 29,
+                "min": 47,
+                "sec": 15
+              },
+              "string": "Aries 29°47'15\""
+            },
+            "house": 1,
+            "ruler": "Mars",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Mother": {
+            "longitude": 51.99001416393355,
+            "sign": "Taurus",
+            "degree": 21.99,
+            "longitude_fmt": {
+              "lon_abs": 51.99001416393355,
+              "sign": "Taurus",
+              "deg_in_sign": 21.990014,
+              "dms": {
+                "deg": 21,
+                "min": 59,
+                "sec": 24
+              },
+              "string": "Taurus 21°59'24\""
+            },
+            "house": 2,
+            "ruler": "Venus",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Marriage_Men": {
+            "longitude": 45.50847134433258,
+            "sign": "Taurus",
+            "degree": 15.5085,
+            "longitude_fmt": {
+              "lon_abs": 45.50847134433258,
+              "sign": "Taurus",
+              "deg_in_sign": 15.508471,
+              "dms": {
+                "deg": 15,
+                "min": 30,
+                "sec": 30
+              },
+              "string": "Taurus 15°30'30\""
+            },
+            "house": 2,
+            "ruler": "Venus",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Marriage_Women": {
+            "longitude": 357.8983057688464,
+            "sign": "Pisces",
+            "degree": 27.8983,
+            "longitude_fmt": {
+              "lon_abs": 357.8983057688464,
+              "sign": "Pisces",
+              "deg_in_sign": 27.898306,
+              "dms": {
+                "deg": 27,
+                "min": 53,
+                "sec": 54
+              },
+              "string": "Pisces 27°53'54\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Children": {
+            "longitude": 199.2786301399227,
+            "sign": "Libra",
+            "degree": 19.2786,
+            "longitude_fmt": {
+              "lon_abs": 199.2786301399227,
+              "sign": "Libra",
+              "deg_in_sign": 19.27863,
+              "dms": {
+                "deg": 19,
+                "min": 16,
+                "sec": 43
+              },
+              "string": "Libra 19°16'43\""
+            },
+            "house": 7,
+            "ruler": "Venus",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Siblings": {
+            "longitude": 194.4353634902193,
+            "sign": "Libra",
+            "degree": 14.4354,
+            "longitude_fmt": {
+              "lon_abs": 194.4353634902193,
+              "sign": "Libra",
+              "deg_in_sign": 14.435363,
+              "dms": {
+                "deg": 14,
+                "min": 26,
+                "sec": 7
+              },
+              "string": "Libra 14°26'07\""
+            },
+            "house": 7,
+            "ruler": "Venus",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Enclosed by rays of Mars and Saturn (Span: 5.7°).",
+              "[Lot] Struck by Saturn via tight square (1.2° orb)."
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Friends": {
+            "longitude": 62.539043100739605,
+            "sign": "Gemini",
+            "degree": 2.539,
+            "longitude_fmt": {
+              "lon_abs": 62.539043100739605,
+              "sign": "Gemini",
+              "deg_in_sign": 2.539043,
+              "dms": {
+                "deg": 2,
+                "min": 32,
+                "sec": 21
+              },
+              "string": "Gemini 02°32'21\""
+            },
+            "house": 3,
+            "ruler": "Mercury",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Opposed by Mars. (Within 7° orb) (Mitigated by Benefic Intervention: -2 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Enemies": {
+            "longitude": 349.2867244692466,
+            "sign": "Pisces",
+            "degree": 19.2867,
+            "longitude_fmt": {
+              "lon_abs": 349.2867244692466,
+              "sign": "Pisces",
+              "deg_in_sign": 19.286724,
+              "dms": {
+                "deg": 19,
+                "min": 17,
+                "sec": 12
+              },
+              "string": "Pisces 19°17'12\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Sickness": {
+            "longitude": 14.928877525253426,
+            "sign": "Aries",
+            "degree": 14.9289,
+            "longitude_fmt": {
+              "lon_abs": 14.928877525253426,
+              "sign": "Aries",
+              "deg_in_sign": 14.928878,
+              "dms": {
+                "deg": 14,
+                "min": 55,
+                "sec": 44
+              },
+              "string": "Aries 14°55'44\""
+            },
+            "house": 1,
+            "ruler": "Mars",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Lot] Enclosed by rays of Mars and Saturn (Span: 5.7°).",
+              "[Lot] Struck by Saturn via tight square (0.7° orb)."
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Assets": {
+            "longitude": 134.12990452063482,
+            "sign": "Leo",
+            "degree": 14.1299,
+            "longitude_fmt": {
+              "lon_abs": 134.12990452063482,
+              "sign": "Leo",
+              "deg_in_sign": 14.129905,
+              "dms": {
+                "deg": 14,
+                "min": 7,
+                "sec": 48
+              },
+              "string": "Leo 14°07'48\""
+            },
+            "house": 5,
+            "ruler": "Sun",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Death": {
+            "longitude": 261.67647229544525,
+            "sign": "Sagittarius",
+            "degree": 21.6765,
+            "longitude_fmt": {
+              "lon_abs": 261.67647229544525,
+              "sign": "Sagittarius",
+              "deg_in_sign": 21.676472,
+              "dms": {
+                "deg": 21,
+                "min": 40,
+                "sec": 35
+              },
+              "string": "Sagittarius 21°40'35\""
+            },
+            "house": 9,
+            "ruler": "Jupiter",
+            "status": "Ruler Maltreated",
+            "maltreatment_details": [
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Journeys": {
+            "longitude": 344.12990452063485,
+            "sign": "Pisces",
+            "degree": 14.1299,
+            "longitude_fmt": {
+              "lon_abs": 344.12990452063485,
+              "sign": "Pisces",
+              "deg_in_sign": 14.129905,
+              "dms": {
+                "deg": 14,
+                "min": 7,
+                "sec": 48
+              },
+              "string": "Pisces 14°07'48\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Lot] Enclosed by rays of Mars and Saturn (Span: 5.7°).",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Commerce": {
+            "longitude": 39.80270905722995,
+            "sign": "Taurus",
+            "degree": 9.8027,
+            "longitude_fmt": {
+              "lon_abs": 39.80270905722995,
+              "sign": "Taurus",
+              "deg_in_sign": 9.802709,
+              "dms": {
+                "deg": 9,
+                "min": 48,
+                "sec": 10
+              },
+              "string": "Taurus 09°48'10\""
+            },
+            "house": 2,
+            "ruler": "Venus",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Boldness": {
+            "longitude": 301.67655889376044,
+            "sign": "Aquarius",
+            "degree": 1.6766,
+            "longitude_fmt": {
+              "lon_abs": 301.67655889376044,
+              "sign": "Aquarius",
+              "deg_in_sign": 1.676559,
+              "dms": {
+                "deg": 1,
+                "min": 40,
+                "sec": 36
+              },
+              "string": "Aquarius 01°40'36\""
+            },
+            "house": 11,
+            "ruler": "Saturn",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Success": {
+            "longitude": 199.2786301399227,
+            "sign": "Libra",
+            "degree": 19.2786,
+            "longitude_fmt": {
+              "lon_abs": 199.2786301399227,
+              "sign": "Libra",
+              "deg_in_sign": 19.27863,
+              "dms": {
+                "deg": 19,
+                "min": 16,
+                "sec": 43
+              },
+              "string": "Libra 19°16'43\""
+            },
+            "house": 7,
+            "ruler": "Venus",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Misfortune": {
+            "longitude": 29.7874266160934,
+            "sign": "Aries",
+            "degree": 29.7874,
+            "longitude_fmt": {
+              "lon_abs": 29.7874266160934,
+              "sign": "Aries",
+              "deg_in_sign": 29.787427,
+              "dms": {
+                "deg": 29,
+                "min": 47,
+                "sec": 15
+              },
+              "string": "Aries 29°47'15\""
+            },
+            "house": 1,
+            "ruler": "Mars",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Life": {
+            "longitude": 194.4353634902193,
+            "sign": "Libra",
+            "degree": 14.4354,
+            "longitude_fmt": {
+              "lon_abs": 194.4353634902193,
+              "sign": "Libra",
+              "deg_in_sign": 14.435363,
+              "dms": {
+                "deg": 14,
+                "min": 26,
+                "sec": 7
+              },
+              "string": "Libra 14°26'07\""
+            },
+            "house": 7,
+            "ruler": "Venus",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Enclosed by rays of Mars and Saturn (Span: 5.7°).",
+              "[Lot] Struck by Saturn via tight square (1.2° orb)."
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Wisdom": {
+            "longitude": 20.10089331668655,
+            "sign": "Aries",
+            "degree": 20.1009,
+            "longitude_fmt": {
+              "lon_abs": 20.10089331668655,
+              "sign": "Aries",
+              "deg_in_sign": 20.100893,
+              "dms": {
+                "deg": 20,
+                "min": 6,
+                "sec": 3
+              },
+              "string": "Aries 20°06'03\""
+            },
+            "house": 1,
+            "ruler": "Mars",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Saturn in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Art": {
+            "longitude": 50.351737994036,
+            "sign": "Taurus",
+            "degree": 20.3517,
+            "longitude_fmt": {
+              "lon_abs": 50.351737994036,
+              "sign": "Taurus",
+              "deg_in_sign": 20.351738,
+              "dms": {
+                "deg": 20,
+                "min": 21,
+                "sec": 6
+              },
+              "string": "Taurus 20°21'06\""
+            },
+            "house": 2,
+            "ruler": "Venus",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Battles": {
+            "longitude": 349.2867244692466,
+            "sign": "Pisces",
+            "degree": 19.2867,
+            "longitude_fmt": {
+              "lon_abs": 349.2867244692466,
+              "sign": "Pisces",
+              "deg_in_sign": 19.286724,
+              "dms": {
+                "deg": 19,
+                "min": 17,
+                "sec": 12
+              },
+              "string": "Pisces 19°17'12\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Foundation": {
+            "longitude": 280.0372955160108,
+            "sign": "Capricorn",
+            "degree": 10.0373,
+            "longitude_fmt": {
+              "lon_abs": 280.0372955160108,
+              "sign": "Capricorn",
+              "deg_in_sign": 10.037296,
+              "dms": {
+                "deg": 10,
+                "min": 2,
+                "sec": 14
+              },
+              "string": "Capricorn 10°02'14\""
+            },
+            "house": 10,
+            "ruler": "Saturn",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Basis": {
+            "longitude": 280.0372955160108,
+            "sign": "Capricorn",
+            "degree": 10.0373,
+            "longitude_fmt": {
+              "lon_abs": 280.0372955160108,
+              "sign": "Capricorn",
+              "deg_in_sign": 10.037296,
+              "dms": {
+                "deg": 10,
+                "min": 2,
+                "sec": 14
+              },
+              "string": "Capricorn 10°02'14\""
+            },
+            "house": 10,
+            "ruler": "Saturn",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Exaltation": {
+            "longitude": 123.12990452063482,
+            "sign": "Leo",
+            "degree": 3.1299,
+            "longitude_fmt": {
+              "lon_abs": 123.12990452063482,
+              "sign": "Leo",
+              "deg_in_sign": 3.129905,
+              "dms": {
+                "deg": 3,
+                "min": 7,
+                "sec": 48
+              },
+              "string": "Leo 03°07'48\""
+            },
+            "house": 5,
+            "ruler": "Sun",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Wheat": {
+            "longitude": 199.2786301399227,
+            "sign": "Libra",
+            "degree": 19.2786,
+            "longitude_fmt": {
+              "lon_abs": 199.2786301399227,
+              "sign": "Libra",
+              "deg_in_sign": 19.27863,
+              "dms": {
+                "deg": 19,
+                "min": 16,
+                "sec": 43
+              },
+              "string": "Libra 19°16'43\""
+            },
+            "house": 7,
+            "ruler": "Venus",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Barley": {
+            "longitude": 72.55432554187615,
+            "sign": "Gemini",
+            "degree": 12.5543,
+            "longitude_fmt": {
+              "lon_abs": 72.55432554187615,
+              "sign": "Gemini",
+              "deg_in_sign": 12.554326,
+              "dms": {
+                "deg": 12,
+                "min": 33,
+                "sec": 16
+              },
+              "string": "Gemini 12°33'16\""
+            },
+            "house": 3,
+            "ruler": "Mercury",
+            "status": "Lot Maltreated",
+            "maltreatment_details": [
+              "[Lot] Opposed by Mars. (Within 2° orb)",
+              "[Lot] Struck by Mars via tight opposition (2.6° orb)."
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Rice": {
+            "longitude": 215.45295644256066,
+            "sign": "Scorpio",
+            "degree": 5.453,
+            "longitude_fmt": {
+              "lon_abs": 215.45295644256066,
+              "sign": "Scorpio",
+              "deg_in_sign": 5.452956,
+              "dms": {
+                "deg": 5,
+                "min": 27,
+                "sec": 11
+              },
+              "string": "Scorpio 05°27'11\""
+            },
+            "house": 8,
+            "ruler": "Mars",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          },
+          "Lentils": {
+            "longitude": 349.2867244692466,
+            "sign": "Pisces",
+            "degree": 19.2867,
+            "longitude_fmt": {
+              "lon_abs": 349.2867244692466,
+              "sign": "Pisces",
+              "deg_in_sign": 19.286724,
+              "dms": {
+                "deg": 19,
+                "min": 17,
+                "sec": 12
+              },
+              "string": "Pisces 19°17'12\""
+            },
+            "house": 12,
+            "ruler": "Jupiter",
+            "status": "Lot Maltreated / Ruler Maltreated",
+            "maltreatment_details": [
+              "[Lot] Overcome by Mars in the 10th sign (Superior/Dexter Square). (Aggravated by Sect)",
+              "[Ruler Jupiter] Opposed by Saturn. (Within 10° orb) (Mitigated by Benefic Intervention: -3 severity)"
+            ],
+            "formula": null,
+            "inputs": null
+          },
+          "Poverty": {
+            "longitude": 166.66894762137443,
+            "sign": "Virgo",
+            "degree": 16.6689,
+            "longitude_fmt": {
+              "lon_abs": 166.66894762137443,
+              "sign": "Virgo",
+              "deg_in_sign": 16.668948,
+              "dms": {
+                "deg": 16,
+                "min": 40,
+                "sec": 8
+              },
+              "string": "Virgo 16°40'08\""
+            },
+            "house": 6,
+            "ruler": "Mercury",
+            "status": "Clear",
+            "maltreatment_details": [],
+            "formula": null,
+            "inputs": null
+          }
+        },
+        "primary_directions": [
+          {
+            "significator": "Ascendant",
+            "promittor": "Mercury",
+            "aspect": "Square (Dexter)",
+            "arc": 0.33564506635270064,
+            "years": 0.33564506635270064,
+            "date_offset": "0y 4m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Sun",
+            "aspect": "Conjunction",
+            "arc": 1.0094286280939286,
+            "years": 1.0094286280939286,
+            "date_offset": "1y 0m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Moon",
+            "aspect": "Sextile (Dexter)",
+            "arc": 3.96090513212571,
+            "years": 3.96090513212571,
+            "date_offset": "3y 11m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Jupiter",
+            "aspect": "Sextile (Sinister)",
+            "arc": 4.899767128924108,
+            "years": 4.899767128924108,
+            "date_offset": "4y 10m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Venus",
+            "aspect": "Square (Dexter)",
+            "arc": 5.4436750438131725,
+            "years": 5.4436750438131725,
+            "date_offset": "5y 5m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Saturn",
+            "aspect": "Conjunction",
+            "arc": 6.236396461922823,
+            "years": 6.236396461922823,
+            "date_offset": "6y 2m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Sun",
+            "aspect": "Trine (Dexter)",
+            "arc": 7.845759030742897,
+            "years": 7.845759030742897,
+            "date_offset": "7y 10m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Saturn",
+            "aspect": "Trine (Dexter)",
+            "arc": 10.525823431886455,
+            "years": 10.525823431886455,
+            "date_offset": "10y 6m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Mercury",
+            "aspect": "Trine (Dexter)",
+            "arc": 16.649343869755768,
+            "years": 16.649343869755768,
+            "date_offset": "16y 7m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Mercury",
+            "aspect": "Conjunction",
+            "arc": 16.899583297329627,
+            "years": 16.899583297329627,
+            "date_offset": "16y 10m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Moon",
+            "aspect": "Square (Dexter)",
+            "arc": 21.928909880595867,
+            "years": 21.928909880595867,
+            "date_offset": "21y 11m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Venus",
+            "aspect": "Trine (Dexter)",
+            "arc": 24.154849954655248,
+            "years": 24.154849954655248,
+            "date_offset": "24y 1m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Mars",
+            "aspect": "Opposition",
+            "arc": 27.155261345530405,
+            "years": 27.155261345530405,
+            "date_offset": "27y 1m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Venus",
+            "aspect": "Conjunction",
+            "arc": 27.85117452521183,
+            "years": 27.85117452521183,
+            "date_offset": "27y 10m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Mars",
+            "aspect": "Sextile (Dexter)",
+            "arc": 31.694083040985788,
+            "years": 31.694083040985788,
+            "date_offset": "31y 8m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Moon",
+            "aspect": "Trine (Dexter)",
+            "arc": 49.837605205596,
+            "years": 49.837605205596,
+            "date_offset": "49y 10m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Jupiter",
+            "aspect": "Conjunction",
+            "arc": 51.99210849110489,
+            "years": 51.99210849110489,
+            "date_offset": "51y 11m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Moon",
+            "aspect": "Conjunction",
+            "arc": 54.44743417001524,
+            "years": 54.44743417001524,
+            "date_offset": "54y 5m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Jupiter",
+            "aspect": "Trine (Sinister)",
+            "arc": 56.226536142854115,
+            "years": 56.226536142854115,
+            "date_offset": "56y 2m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Sun",
+            "aspect": "Opposition",
+            "arc": 58.74490438458356,
+            "years": 58.74490438458356,
+            "date_offset": "58y 8m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Mars",
+            "aspect": "Square (Dexter)",
+            "arc": 60.782749566802636,
+            "years": 60.782749566802636,
+            "date_offset": "60y 9m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Sun",
+            "aspect": "Sextile (Dexter)",
+            "arc": 61.54325372498846,
+            "years": 61.54325372498846,
+            "date_offset": "61y 6m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Saturn",
+            "aspect": "Opposition",
+            "arc": 64.80457568032142,
+            "years": 64.80457568032142,
+            "date_offset": "64y 9m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Saturn",
+            "aspect": "Sextile (Dexter)",
+            "arc": 66.04642657872353,
+            "years": 66.04642657872353,
+            "date_offset": "66y 0m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Mercury",
+            "aspect": "Sextile (Dexter)",
+            "arc": 75.2770710698336,
+            "years": 75.2770710698336,
+            "date_offset": "75y 3m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Mercury",
+            "aspect": "Opposition",
+            "arc": 78.01808558496134,
+            "years": 78.01808558496134,
+            "date_offset": "78y 0m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Jupiter",
+            "aspect": "Square (Sinister)",
+            "arc": 83.97406093762345,
+            "years": 83.97406093762345,
+            "date_offset": "83y 11m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Venus",
+            "aspect": "Sextile (Dexter)",
+            "arc": 84.96013127241065,
+            "years": 84.96013127241065,
+            "date_offset": "84y 11m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Mars",
+            "aspect": "Trine (Dexter)",
+            "arc": 88.43768013181881,
+            "years": 88.43768013181881,
+            "date_offset": "88y 5m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Sun",
+            "aspect": "Square (Dexter)",
+            "arc": 89.18852770260486,
+            "years": 89.18852770260486,
+            "date_offset": "89y 2m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Venus",
+            "aspect": "Opposition",
+            "arc": 92.62911381930871,
+            "years": 92.62911381930871,
+            "date_offset": "92y 7m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Midheaven",
+            "promittor": "Saturn",
+            "aspect": "Square (Dexter)",
+            "arc": 93.66960431335644,
+            "years": 93.66960431335644,
+            "date_offset": "93y 8m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          },
+          {
+            "significator": "Ascendant",
+            "promittor": "Mars",
+            "aspect": "Trine (Sinister)",
+            "arc": 97.96776194736725,
+            "years": 97.96776194736725,
+            "date_offset": "97y 11m",
+            "method": "Placidus/Zodiacal",
+            "key": "Ptolemy (1 degree = 1 year)",
+            "notes": "Zodiacal primary direction using oblique ascension (OA) of zodiacal aspect points (lat=0 for aspect point)."
+          }
+        ],
+        "planet_to_planet_directions": [
+          {
+            "significator": "Moon",
+            "promittor": "Mars",
+            "aspect": "Square (Dexter)",
+            "arc": 4.035680720677874,
+            "years": 4.035680720677874,
+            "date_offset": "4y 0m"
+          },
+          {
+            "significator": "Sun",
+            "promittor": "Saturn",
+            "aspect": "Conjunction",
+            "arc": 5.214600519906753,
+            "years": 5.214600519906753,
+            "date_offset": "5y 2m"
+          },
+          {
+            "significator": "Jupiter",
+            "promittor": "Sun",
+            "aspect": "Opposition",
+            "arc": 6.1520345734986535,
+            "years": 6.1520345734986535,
+            "date_offset": "6y 1m"
+          },
+          {
+            "significator": "Mercury",
+            "promittor": "Venus",
+            "aspect": "Conjunction",
+            "arc": 10.043379666345515,
+            "years": 10.043379666345515,
+            "date_offset": "10y 0m"
+          },
+          {
+            "significator": "Saturn",
+            "promittor": "Mercury",
+            "aspect": "Conjunction",
+            "arc": 10.42806310164633,
+            "years": 10.42806310164633,
+            "date_offset": "10y 5m"
+          },
+          {
+            "significator": "Jupiter",
+            "promittor": "Saturn",
+            "aspect": "Opposition",
+            "arc": 11.37900240732759,
+            "years": 11.37900240732759,
+            "date_offset": "11y 4m"
+          },
+          {
+            "significator": "Jupiter",
+            "promittor": "Moon",
+            "aspect": "Opposition",
+            "arc": 15.163143048521064,
+            "years": 15.163143048521064,
+            "date_offset": "15y 1m"
+          },
+          {
+            "significator": "Sun",
+            "promittor": "Mercury",
+            "aspect": "Conjunction",
+            "arc": 15.839234916741475,
+            "years": 15.839234916741475,
+            "date_offset": "15y 10m"
+          },
+          {
+            "significator": "Moon",
+            "promittor": "Jupiter",
+            "aspect": "Square (Sinister)",
+            "arc": 18.36632434933813,
+            "years": 18.36632434933813,
+            "date_offset": "18y 4m"
+          },
+          {
+            "significator": "Saturn",
+            "promittor": "Venus",
+            "aspect": "Conjunction",
+            "arc": 21.0322756746084,
+            "years": 21.0322756746084,
+            "date_offset": "21y 0m"
+          },
+          {
+            "significator": "Moon",
+            "promittor": "Sun",
+            "aspect": "Square (Dexter)",
+            "arc": 21.57907938285763,
+            "years": 21.57907938285763,
+            "date_offset": "21y 6m"
+          },
+          {
+            "significator": "Venus",
+            "promittor": "Moon",
+            "aspect": "Conjunction",
+            "arc": 21.682881239619974,
+            "years": 21.682881239619974,
+            "date_offset": "21y 8m"
+          },
+          {
+            "significator": "Jupiter",
+            "promittor": "Mercury",
+            "aspect": "Opposition",
+            "arc": 22.042189242734352,
+            "years": 22.042189242734352,
+            "date_offset": "22y 0m"
+          },
+          {
+            "significator": "Moon",
+            "promittor": "Saturn",
+            "aspect": "Square (Dexter)",
+            "arc": 24.36111308614113,
+            "years": 24.36111308614113,
+            "date_offset": "24y 4m"
+          },
+          {
+            "significator": "Mars",
+            "promittor": "Jupiter",
+            "aspect": "Opposition",
+            "arc": 26.0831944003873,
+            "years": 26.0831944003873,
+            "date_offset": "26y 0m"
+          },
+          {
+            "significator": "Venus",
+            "promittor": "Mars",
+            "aspect": "Square (Dexter)",
+            "arc": 26.633058845632092,
+            "years": 26.633058845632092,
+            "date_offset": "26y 7m"
+          },
+          {
+            "significator": "Sun",
+            "promittor": "Venus",
+            "aspect": "Conjunction",
+            "arc": 26.733853321430388,
+            "years": 26.733853321430388,
+            "date_offset": "26y 8m"
+          },
+          {
+            "significator": "Moon",
+            "promittor": "Mercury",
+            "aspect": "Square (Dexter)",
+            "arc": 30.287397976594093,
+            "years": 30.287397976594093,
+            "date_offset": "30y 3m"
+          },
+          {
+            "significator": "Mars",
+            "promittor": "Sun",
+            "aspect": "Conjunction",
+            "arc": 32.52326334125695,
+            "years": 32.52326334125695,
+            "date_offset": "32y 6m"
+          },
+          {
+            "significator": "Jupiter",
+            "promittor": "Venus",
+            "aspect": "Opposition",
+            "arc": 32.99378047061654,
+            "years": 32.99378047061654,
+            "date_offset": "32y 11m"
+          },
+          {
+            "significator": "Mercury",
+            "promittor": "Moon",
+            "aspect": "Conjunction",
+            "arc": 33.49896976246259,
+            "years": 33.49896976246259,
+            "date_offset": "33y 5m"
+          },
+          {
+            "significator": "Jupiter",
+            "promittor": "Mars",
+            "aspect": "Square (Sinister)",
+            "arc": 34.01701345494274,
+            "years": 34.01701345494274,
+            "date_offset": "34y 0m"
+          },
+          {
+            "significator": "Moon",
+            "promittor": "Venus",
+            "aspect": "Square (Dexter)",
+            "arc": 36.91242514949653,
+            "years": 36.91242514949653,
+            "date_offset": "36y 10m"
+          },
+          {
+            "significator": "Mars",
+            "promittor": "Saturn",
+            "aspect": "Conjunction",
+            "arc": 38.151893987336166,
+            "years": 38.151893987336166,
+            "date_offset": "38y 1m"
+          },
+          {
+            "significator": "Mercury",
+            "promittor": "Mars",
+            "aspect": "Square (Dexter)",
+            "arc": 38.945452232661864,
+            "years": 38.945452232661864,
+            "date_offset": "38y 11m"
+          },
+          {
+            "significator": "Venus",
+            "promittor": "Jupiter",
+            "aspect": "Square (Sinister)",
+            "arc": 44.45920192707297,
+            "years": 44.45920192707297,
+            "date_offset": "44y 5m"
+          },
+          {
+            "significator": "Saturn",
+            "promittor": "Moon",
+            "aspect": "Conjunction",
+            "arc": 46.42344341952776,
+            "years": 46.42344341952776,
+            "date_offset": "46y 5m"
+          },
+          {
+            "significator": "Venus",
+            "promittor": "Sun",
+            "aspect": "Square (Dexter)",
+            "arc": 48.46103745420697,
+            "years": 48.46103745420697,
+            "date_offset": "48y 5m"
+          },
+          {
+            "significator": "Mars",
+            "promittor": "Mercury",
+            "aspect": "Conjunction",
+            "arc": 50.06195971358875,
+            "years": 50.06195971358875,
+            "date_offset": "50y 0m"
+          },
+          {
+            "significator": "Venus",
+            "promittor": "Saturn",
+            "aspect": "Square (Dexter)",
+            "arc": 51.914209578467364,
+            "years": 51.914209578467364,
+            "date_offset": "51y 10m"
+          },
+          {
+            "significator": "Saturn",
+            "promittor": "Mars",
+            "aspect": "Square (Dexter)",
+            "arc": 52.416925476163215,
+            "years": 52.416925476163215,
+            "date_offset": "52y 5m"
+          },
+          {
+            "significator": "Sun",
+            "promittor": "Moon",
+            "aspect": "Conjunction",
+            "arc": 53.13236308698316,
+            "years": 53.13236308698316,
+            "date_offset": "53y 1m"
+          },
+          {
+            "significator": "Mercury",
+            "promittor": "Jupiter",
+            "aspect": "Square (Sinister)",
+            "arc": 58.687862803734845,
+            "years": 58.687862803734845,
+            "date_offset": "58y 8m"
+          },
+          {
+            "significator": "Venus",
+            "promittor": "Mercury",
+            "aspect": "Square (Dexter)",
+            "arc": 59.209751030207656,
+            "years": 59.209751030207656,
+            "date_offset": "59y 2m"
+          },
+          {
+            "significator": "Sun",
+            "promittor": "Mars",
+            "aspect": "Square (Dexter)",
+            "arc": 59.41156359215904,
+            "years": 59.41156359215904,
+            "date_offset": "59y 4m"
+          },
+          {
+            "significator": "Moon",
+            "promittor": "Mars",
+            "aspect": "Opposition",
+            "arc": 62.76186903119691,
+            "years": 62.76186903119691,
+            "date_offset": "62y 9m"
+          },
+          {
+            "significator": "Mars",
+            "promittor": "Venus",
+            "aspect": "Conjunction",
+            "arc": 62.84295632827224,
+            "years": 62.84295632827224,
+            "date_offset": "62y 10m"
+          },
+          {
+            "significator": "Mercury",
+            "promittor": "Sun",
+            "aspect": "Square (Dexter)",
+            "arc": 63.12268432610023,
+            "years": 63.12268432610023,
+            "date_offset": "63y 1m"
+          },
+          {
+            "significator": "Mercury",
+            "promittor": "Saturn",
+            "aspect": "Square (Dexter)",
+            "arc": 66.94318222964063,
+            "years": 66.94318222964063,
+            "date_offset": "66y 11m"
+          },
+          {
+            "significator": "Saturn",
+            "promittor": "Jupiter",
+            "aspect": "Square (Sinister)",
+            "arc": 74.28042738173161,
+            "years": 74.28042738173161,
+            "date_offset": "74y 3m"
+          },
+          {
+            "significator": "Saturn",
+            "promittor": "Sun",
+            "aspect": "Square (Dexter)",
+            "arc": 79.19470532663138,
+            "years": 79.19470532663138,
+            "date_offset": "79y 2m"
+          }
+        ],
+        "primary_direction_distributor": {
+          "type": "Distributor (Term Ruler)",
+          "planet": "Mars",
+          "partner": "North_Node",
+          "partner_reason": "Aspecting Planet (North_Node)",
+          "directed_ascendant_deg": 80.32014613887767,
+          "arc": 36.2984257357974,
+          "description": "The Directed Ascendant is at 80.32°, in the Terms of Mars. Partner: North_Node (Aspecting Planet (North_Node))."
+        },
+        "circumambulations": [
+          {
+            "age": 0,
+            "directed_asc_lon": 24.9442,
+            "directed_asc_fmt": "Aries 24°56'39\"",
+            "sign": "Aries",
+            "bound_ruler": "Mars",
+            "bound_range": "20°–25°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 1,
+            "directed_asc_lon": 27.1028,
+            "directed_asc_fmt": "Aries 27°06'10\"",
+            "sign": "Aries",
+            "bound_ruler": "Saturn",
+            "bound_range": "25°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": true
+          },
+          {
+            "age": 2,
+            "directed_asc_lon": 29.2236,
+            "directed_asc_fmt": "Aries 29°13'25\"",
+            "sign": "Aries",
+            "bound_ruler": "Saturn",
+            "bound_range": "25°–30°",
+            "partner": "Mars",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 3,
+            "directed_asc_lon": 31.3052,
+            "directed_asc_fmt": "Taurus 01°18'19\"",
+            "sign": "Taurus",
+            "bound_ruler": "Venus",
+            "bound_range": "0°–8°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": true
+          },
+          {
+            "age": 4,
+            "directed_asc_lon": 33.3467,
+            "directed_asc_fmt": "Taurus 03°20'48\"",
+            "sign": "Taurus",
+            "bound_ruler": "Venus",
+            "bound_range": "0°–8°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": false
+          },
+          {
+            "age": 5,
+            "directed_asc_lon": 35.3474,
+            "directed_asc_fmt": "Taurus 05°20'51\"",
+            "sign": "Taurus",
+            "bound_ruler": "Venus",
+            "bound_range": "0°–8°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": false
+          },
+          {
+            "age": 6,
+            "directed_asc_lon": 37.3068,
+            "directed_asc_fmt": "Taurus 07°18'24\"",
+            "sign": "Taurus",
+            "bound_ruler": "Venus",
+            "bound_range": "0°–8°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": false
+          },
+          {
+            "age": 7,
+            "directed_asc_lon": 39.2246,
+            "directed_asc_fmt": "Taurus 09°13'29\"",
+            "sign": "Taurus",
+            "bound_ruler": "Mercury",
+            "bound_range": "8°–14°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": true
+          },
+          {
+            "age": 8,
+            "directed_asc_lon": 41.101,
+            "directed_asc_fmt": "Taurus 11°06'03\"",
+            "sign": "Taurus",
+            "bound_ruler": "Mercury",
+            "bound_range": "8°–14°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 9,
+            "directed_asc_lon": 42.9361,
+            "directed_asc_fmt": "Taurus 12°56'10\"",
+            "sign": "Taurus",
+            "bound_ruler": "Mercury",
+            "bound_range": "8°–14°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 10,
+            "directed_asc_lon": 44.7303,
+            "directed_asc_fmt": "Taurus 14°43'49\"",
+            "sign": "Taurus",
+            "bound_ruler": "Jupiter",
+            "bound_range": "14°–22°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": true
+          },
+          {
+            "age": 11,
+            "directed_asc_lon": 46.4842,
+            "directed_asc_fmt": "Taurus 16°29'03\"",
+            "sign": "Taurus",
+            "bound_ruler": "Jupiter",
+            "bound_range": "14°–22°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 12,
+            "directed_asc_lon": 48.1984,
+            "directed_asc_fmt": "Taurus 18°11'54\"",
+            "sign": "Taurus",
+            "bound_ruler": "Jupiter",
+            "bound_range": "14°–22°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 13,
+            "directed_asc_lon": 49.8738,
+            "directed_asc_fmt": "Taurus 19°52'26\"",
+            "sign": "Taurus",
+            "bound_ruler": "Jupiter",
+            "bound_range": "14°–22°",
+            "partner": "Venus",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 14,
+            "directed_asc_lon": 51.5112,
+            "directed_asc_fmt": "Taurus 21°30'40\"",
+            "sign": "Taurus",
+            "bound_ruler": "Jupiter",
+            "bound_range": "14°–22°",
+            "partner": "Venus",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 15,
+            "directed_asc_lon": 53.1116,
+            "directed_asc_fmt": "Taurus 23°06'42\"",
+            "sign": "Taurus",
+            "bound_ruler": "Saturn",
+            "bound_range": "22°–27°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": true
+          },
+          {
+            "age": 16,
+            "directed_asc_lon": 54.6759,
+            "directed_asc_fmt": "Taurus 24°40'33\"",
+            "sign": "Taurus",
+            "bound_ruler": "Saturn",
+            "bound_range": "22°–27°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 17,
+            "directed_asc_lon": 56.2051,
+            "directed_asc_fmt": "Taurus 26°12'18\"",
+            "sign": "Taurus",
+            "bound_ruler": "Saturn",
+            "bound_range": "22°–27°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 18,
+            "directed_asc_lon": 57.7005,
+            "directed_asc_fmt": "Taurus 27°42'02\"",
+            "sign": "Taurus",
+            "bound_ruler": "Mars",
+            "bound_range": "27°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": true
+          },
+          {
+            "age": 19,
+            "directed_asc_lon": 59.1629,
+            "directed_asc_fmt": "Taurus 29°09'47\"",
+            "sign": "Taurus",
+            "bound_ruler": "Mars",
+            "bound_range": "27°–30°",
+            "partner": "Venus",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 20,
+            "directed_asc_lon": 60.5936,
+            "directed_asc_fmt": "Gemini 00°35'37\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mercury",
+            "bound_range": "0°–6°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": true
+          },
+          {
+            "age": 21,
+            "directed_asc_lon": 61.9937,
+            "directed_asc_fmt": "Gemini 01°59'37\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mercury",
+            "bound_range": "0°–6°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": false
+          },
+          {
+            "age": 22,
+            "directed_asc_lon": 63.3642,
+            "directed_asc_fmt": "Gemini 03°21'51\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mercury",
+            "bound_range": "0°–6°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": false
+          },
+          {
+            "age": 23,
+            "directed_asc_lon": 64.7061,
+            "directed_asc_fmt": "Gemini 04°42'22\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mercury",
+            "bound_range": "0°–6°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": false
+          },
+          {
+            "age": 24,
+            "directed_asc_lon": 66.0207,
+            "directed_asc_fmt": "Gemini 06°01'14\"",
+            "sign": "Gemini",
+            "bound_ruler": "Jupiter",
+            "bound_range": "6°–12°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": true
+          },
+          {
+            "age": 25,
+            "directed_asc_lon": 67.3088,
+            "directed_asc_fmt": "Gemini 07°18'32\"",
+            "sign": "Gemini",
+            "bound_ruler": "Jupiter",
+            "bound_range": "6°–12°",
+            "partner": "Venus",
+            "partner_reason": "Aspecting (Venus)",
+            "is_transition": false
+          },
+          {
+            "age": 26,
+            "directed_asc_lon": 68.5716,
+            "directed_asc_fmt": "Gemini 08°34'18\"",
+            "sign": "Gemini",
+            "bound_ruler": "Jupiter",
+            "bound_range": "6°–12°",
+            "partner": "Venus",
+            "partner_reason": "Aspecting (Venus)",
+            "is_transition": false
+          },
+          {
+            "age": 27,
+            "directed_asc_lon": 69.8099,
+            "directed_asc_fmt": "Gemini 09°48'36\"",
+            "sign": "Gemini",
+            "bound_ruler": "Jupiter",
+            "bound_range": "6°–12°",
+            "partner": "Mars",
+            "partner_reason": "Aspecting (Mars)",
+            "is_transition": false
+          },
+          {
+            "age": 28,
+            "directed_asc_lon": 71.0249,
+            "directed_asc_fmt": "Gemini 11°01'30\"",
+            "sign": "Gemini",
+            "bound_ruler": "Jupiter",
+            "bound_range": "6°–12°",
+            "partner": "Mars",
+            "partner_reason": "Aspecting (Mars)",
+            "is_transition": false
+          },
+          {
+            "age": 29,
+            "directed_asc_lon": 72.2174,
+            "directed_asc_fmt": "Gemini 12°13'03\"",
+            "sign": "Gemini",
+            "bound_ruler": "Venus",
+            "bound_range": "12°–17°",
+            "partner": "Mars",
+            "partner_reason": "Aspecting (Mars)",
+            "is_transition": true
+          },
+          {
+            "age": 30,
+            "directed_asc_lon": 73.3883,
+            "directed_asc_fmt": "Gemini 13°23'18\"",
+            "sign": "Gemini",
+            "bound_ruler": "Venus",
+            "bound_range": "12°–17°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 31,
+            "directed_asc_lon": 74.5384,
+            "directed_asc_fmt": "Gemini 14°32'18\"",
+            "sign": "Gemini",
+            "bound_ruler": "Venus",
+            "bound_range": "12°–17°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 32,
+            "directed_asc_lon": 75.6688,
+            "directed_asc_fmt": "Gemini 15°40'08\"",
+            "sign": "Gemini",
+            "bound_ruler": "Venus",
+            "bound_range": "12°–17°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 33,
+            "directed_asc_lon": 76.7801,
+            "directed_asc_fmt": "Gemini 16°46'48\"",
+            "sign": "Gemini",
+            "bound_ruler": "Venus",
+            "bound_range": "12°–17°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 34,
+            "directed_asc_lon": 77.8731,
+            "directed_asc_fmt": "Gemini 17°52'23\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mars",
+            "bound_range": "17°–24°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": true
+          },
+          {
+            "age": 35,
+            "directed_asc_lon": 78.9486,
+            "directed_asc_fmt": "Gemini 18°56'55\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mars",
+            "bound_range": "17°–24°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 36,
+            "directed_asc_lon": 80.0073,
+            "directed_asc_fmt": "Gemini 20°00'26\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mars",
+            "bound_range": "17°–24°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 37,
+            "directed_asc_lon": 81.05,
+            "directed_asc_fmt": "Gemini 21°03'00\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mars",
+            "bound_range": "17°–24°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 38,
+            "directed_asc_lon": 82.0772,
+            "directed_asc_fmt": "Gemini 22°04'38\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mars",
+            "bound_range": "17°–24°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 39,
+            "directed_asc_lon": 83.0897,
+            "directed_asc_fmt": "Gemini 23°05'23\"",
+            "sign": "Gemini",
+            "bound_ruler": "Mars",
+            "bound_range": "17°–24°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 40,
+            "directed_asc_lon": 84.088,
+            "directed_asc_fmt": "Gemini 24°05'17\"",
+            "sign": "Gemini",
+            "bound_ruler": "Saturn",
+            "bound_range": "24°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": true
+          },
+          {
+            "age": 41,
+            "directed_asc_lon": 85.0728,
+            "directed_asc_fmt": "Gemini 25°04'22\"",
+            "sign": "Gemini",
+            "bound_ruler": "Saturn",
+            "bound_range": "24°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 42,
+            "directed_asc_lon": 86.0445,
+            "directed_asc_fmt": "Gemini 26°02'40\"",
+            "sign": "Gemini",
+            "bound_ruler": "Saturn",
+            "bound_range": "24°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 43,
+            "directed_asc_lon": 87.0038,
+            "directed_asc_fmt": "Gemini 27°00'14\"",
+            "sign": "Gemini",
+            "bound_ruler": "Saturn",
+            "bound_range": "24°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 44,
+            "directed_asc_lon": 87.9511,
+            "directed_asc_fmt": "Gemini 27°57'04\"",
+            "sign": "Gemini",
+            "bound_ruler": "Saturn",
+            "bound_range": "24°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 45,
+            "directed_asc_lon": 88.887,
+            "directed_asc_fmt": "Gemini 28°53'13\"",
+            "sign": "Gemini",
+            "bound_ruler": "Saturn",
+            "bound_range": "24°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 46,
+            "directed_asc_lon": 89.8119,
+            "directed_asc_fmt": "Gemini 29°48'43\"",
+            "sign": "Gemini",
+            "bound_ruler": "Saturn",
+            "bound_range": "24°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 47,
+            "directed_asc_lon": 90.7264,
+            "directed_asc_fmt": "Cancer 00°43'35\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": true
+          },
+          {
+            "age": 48,
+            "directed_asc_lon": 91.6307,
+            "directed_asc_fmt": "Cancer 01°37'51\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Moon",
+            "partner_reason": "Aspecting (Moon)",
+            "is_transition": false
+          },
+          {
+            "age": 49,
+            "directed_asc_lon": 92.5254,
+            "directed_asc_fmt": "Cancer 02°31'32\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": false
+          },
+          {
+            "age": 50,
+            "directed_asc_lon": 93.4109,
+            "directed_asc_fmt": "Cancer 03°24'39\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": false
+          },
+          {
+            "age": 51,
+            "directed_asc_lon": 94.2875,
+            "directed_asc_fmt": "Cancer 04°17'15\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": false
+          },
+          {
+            "age": 52,
+            "directed_asc_lon": 95.1555,
+            "directed_asc_fmt": "Cancer 05°09'20\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": false
+          },
+          {
+            "age": 53,
+            "directed_asc_lon": 96.0155,
+            "directed_asc_fmt": "Cancer 06°00'56\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": false
+          },
+          {
+            "age": 54,
+            "directed_asc_lon": 96.8676,
+            "directed_asc_fmt": "Cancer 06°52'04\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mars",
+            "bound_range": "0°–7°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": false
+          },
+          {
+            "age": 55,
+            "directed_asc_lon": 97.7123,
+            "directed_asc_fmt": "Cancer 07°42'44\"",
+            "sign": "Cancer",
+            "bound_ruler": "Venus",
+            "bound_range": "7°–13°",
+            "partner": "Jupiter",
+            "partner_reason": "Aspecting (Jupiter)",
+            "is_transition": true
+          },
+          {
+            "age": 56,
+            "directed_asc_lon": 98.5498,
+            "directed_asc_fmt": "Cancer 08°32'59\"",
+            "sign": "Cancer",
+            "bound_ruler": "Venus",
+            "bound_range": "7°–13°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 57,
+            "directed_asc_lon": 99.3805,
+            "directed_asc_fmt": "Cancer 09°22'50\"",
+            "sign": "Cancer",
+            "bound_ruler": "Venus",
+            "bound_range": "7°–13°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 58,
+            "directed_asc_lon": 100.2045,
+            "directed_asc_fmt": "Cancer 10°12'16\"",
+            "sign": "Cancer",
+            "bound_ruler": "Venus",
+            "bound_range": "7°–13°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 59,
+            "directed_asc_lon": 101.0223,
+            "directed_asc_fmt": "Cancer 11°01'20\"",
+            "sign": "Cancer",
+            "bound_ruler": "Venus",
+            "bound_range": "7°–13°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 60,
+            "directed_asc_lon": 101.834,
+            "directed_asc_fmt": "Cancer 11°50'02\"",
+            "sign": "Cancer",
+            "bound_ruler": "Venus",
+            "bound_range": "7°–13°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 61,
+            "directed_asc_lon": 102.6399,
+            "directed_asc_fmt": "Cancer 12°38'24\"",
+            "sign": "Cancer",
+            "bound_ruler": "Venus",
+            "bound_range": "7°–13°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": false
+          },
+          {
+            "age": 62,
+            "directed_asc_lon": 103.4403,
+            "directed_asc_fmt": "Cancer 13°26'25\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Sun",
+            "partner_reason": "Aspecting (Sun)",
+            "is_transition": true
+          },
+          {
+            "age": 63,
+            "directed_asc_lon": 104.2354,
+            "directed_asc_fmt": "Cancer 14°14'08\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 64,
+            "directed_asc_lon": 105.0254,
+            "directed_asc_fmt": "Cancer 15°01'32\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 65,
+            "directed_asc_lon": 105.8106,
+            "directed_asc_fmt": "Cancer 15°48'38\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 66,
+            "directed_asc_lon": 106.5911,
+            "directed_asc_fmt": "Cancer 16°35'28\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 67,
+            "directed_asc_lon": 107.3671,
+            "directed_asc_fmt": "Cancer 17°22'02\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 68,
+            "directed_asc_lon": 108.1389,
+            "directed_asc_fmt": "Cancer 18°08'20\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Saturn",
+            "partner_reason": "Aspecting (Saturn)",
+            "is_transition": false
+          },
+          {
+            "age": 69,
+            "directed_asc_lon": 108.9066,
+            "directed_asc_fmt": "Cancer 18°54'24\"",
+            "sign": "Cancer",
+            "bound_ruler": "Mercury",
+            "bound_range": "13°–19°",
+            "partner": "Moon",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 70,
+            "directed_asc_lon": 109.6704,
+            "directed_asc_fmt": "Cancer 19°40'13\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Moon",
+            "partner_reason": "Domicile ruler",
+            "is_transition": true
+          },
+          {
+            "age": 71,
+            "directed_asc_lon": 110.4304,
+            "directed_asc_fmt": "Cancer 20°25'50\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Moon",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 72,
+            "directed_asc_lon": 111.1869,
+            "directed_asc_fmt": "Cancer 21°11'13\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Moon",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 73,
+            "directed_asc_lon": 111.94,
+            "directed_asc_fmt": "Cancer 21°56'24\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Moon",
+            "partner_reason": "Domicile ruler",
+            "is_transition": false
+          },
+          {
+            "age": 74,
+            "directed_asc_lon": 112.6898,
+            "directed_asc_fmt": "Cancer 22°41'23\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 75,
+            "directed_asc_lon": 113.4366,
+            "directed_asc_fmt": "Cancer 23°26'12\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 76,
+            "directed_asc_lon": 114.1803,
+            "directed_asc_fmt": "Cancer 24°10'49\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 77,
+            "directed_asc_lon": 114.9212,
+            "directed_asc_fmt": "Cancer 24°55'16\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 78,
+            "directed_asc_lon": 115.6595,
+            "directed_asc_fmt": "Cancer 25°39'34\"",
+            "sign": "Cancer",
+            "bound_ruler": "Jupiter",
+            "bound_range": "19°–26°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          },
+          {
+            "age": 79,
+            "directed_asc_lon": 116.3951,
+            "directed_asc_fmt": "Cancer 26°23'42\"",
+            "sign": "Cancer",
+            "bound_ruler": "Saturn",
+            "bound_range": "26°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": true
+          },
+          {
+            "age": 80,
+            "directed_asc_lon": 117.1283,
+            "directed_asc_fmt": "Cancer 27°07'42\"",
+            "sign": "Cancer",
+            "bound_ruler": "Saturn",
+            "bound_range": "26°–30°",
+            "partner": "Mercury",
+            "partner_reason": "Aspecting (Mercury)",
+            "is_transition": false
+          }
+        ],
+        "active_directions": [],
+        "profections": {},
+        "firdaria": {
+          "Major Period": "Moon",
+          "Sub Period": "Sun",
+          "Major Start": "2021-01-01",
+          "Major End": "2030-01-01",
+          "Sub Start": "2026-02-22",
+          "Sub End": "2027-06-07",
+          "Current Age": 36.3
+        },
+        "solar_return": {
+          "return_jd": 2461041.741119563,
+          "return_date": "2026-01-01T05:47:12.730253",
+          "natal_sun_longitude": 280.8142554457551
+        },
+        "muntha": {
+          "sign": "Aries",
+          "age": 36
+        },
+        "transits": [
+          {
+            "transit": "Jupiter",
+            "natal_planet": "Saturn",
+            "aspect": "Opposition",
+            "orb": 1.91
+          },
+          {
+            "transit": "Saturn",
+            "natal_planet": "Sun",
+            "aspect": "Square",
+            "orb": 2.88
+          },
+          {
+            "transit": "Saturn",
+            "natal_planet": "Jupiter",
+            "aspect": "Square",
+            "orb": 2.78
+          },
+          {
+            "transit": "Saturn",
+            "natal_planet": "Uranus",
+            "aspect": "Square",
+            "orb": 2.14
+          },
+          {
+            "transit": "Neptune",
+            "natal_planet": "Jupiter",
+            "aspect": "Square",
+            "orb": 2.24
+          },
+          {
+            "transit": "Neptune",
+            "natal_planet": "Uranus",
+            "aspect": "Square",
+            "orb": 2.87
+          },
+          {
+            "transit": "Pluto",
+            "natal_planet": "Venus",
+            "aspect": "Conjunct",
+            "orb": 0.77
+          }
+        ],
+        "decennials": [
+          {
+            "major_lord": "Sun",
+            "start_date": "1990-01-01T12:00:00",
+            "end_date": "2000-08-06T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Sun",
+                "start_date": "1990-01-01T12:00:00",
+                "end_date": "1991-07-25T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "1991-07-25T12:00:00",
+                "end_date": "1994-01-10T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "1994-01-10T12:00:00",
+                "end_date": "1995-09-02T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "1995-09-02T12:00:00",
+                "end_date": "1996-04-29T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "1996-04-29T12:00:00",
+                "end_date": "1998-05-19T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "1998-05-19T12:00:00",
+                "end_date": "1999-05-14T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "1999-05-14T12:00:00",
+                "end_date": "2000-08-06T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Saturn",
+            "start_date": "2000-08-06T12:00:00",
+            "end_date": "2011-03-12T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2000-08-06T12:00:00",
+                "end_date": "2003-01-23T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2003-01-23T12:00:00",
+                "end_date": "2004-09-14T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "2004-09-14T12:00:00",
+                "end_date": "2005-05-12T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "2005-05-12T12:00:00",
+                "end_date": "2007-06-01T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2007-06-01T12:00:00",
+                "end_date": "2008-05-26T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2008-05-26T12:00:00",
+                "end_date": "2009-08-19T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2009-08-19T12:00:00",
+                "end_date": "2011-03-12T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Mercury",
+            "start_date": "2011-03-12T12:00:00",
+            "end_date": "2021-10-15T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2011-03-12T12:00:00",
+                "end_date": "2012-11-01T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "2012-11-01T12:00:00",
+                "end_date": "2013-06-29T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "2013-06-29T12:00:00",
+                "end_date": "2015-07-19T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2015-07-19T12:00:00",
+                "end_date": "2016-07-13T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2016-07-13T12:00:00",
+                "end_date": "2017-10-06T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2017-10-06T12:00:00",
+                "end_date": "2019-04-29T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2019-04-29T12:00:00",
+                "end_date": "2021-10-15T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Venus",
+            "start_date": "2021-10-15T12:00:00",
+            "end_date": "2032-05-20T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Venus",
+                "start_date": "2021-10-15T12:00:00",
+                "end_date": "2022-06-12T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "2022-06-12T12:00:00",
+                "end_date": "2024-07-01T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2024-07-01T12:00:00",
+                "end_date": "2025-06-26T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2025-06-26T12:00:00",
+                "end_date": "2026-09-19T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2026-09-19T12:00:00",
+                "end_date": "2028-04-11T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2028-04-11T12:00:00",
+                "end_date": "2030-09-28T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2030-09-28T12:00:00",
+                "end_date": "2032-05-20T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Moon",
+            "start_date": "2032-05-20T12:00:00",
+            "end_date": "2042-12-24T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Moon",
+                "start_date": "2032-05-20T12:00:00",
+                "end_date": "2034-06-09T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2034-06-09T12:00:00",
+                "end_date": "2035-06-04T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2035-06-04T12:00:00",
+                "end_date": "2036-08-27T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2036-08-27T12:00:00",
+                "end_date": "2038-03-20T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2038-03-20T12:00:00",
+                "end_date": "2040-09-05T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2040-09-05T12:00:00",
+                "end_date": "2042-04-28T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "2042-04-28T12:00:00",
+                "end_date": "2042-12-24T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Jupiter",
+            "start_date": "2042-12-24T12:00:00",
+            "end_date": "2053-07-29T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2042-12-24T12:00:00",
+                "end_date": "2043-12-19T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2043-12-19T12:00:00",
+                "end_date": "2045-03-13T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2045-03-13T12:00:00",
+                "end_date": "2046-10-04T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2046-10-04T12:00:00",
+                "end_date": "2049-03-22T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2049-03-22T12:00:00",
+                "end_date": "2050-11-12T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "2050-11-12T12:00:00",
+                "end_date": "2051-07-10T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "2051-07-10T12:00:00",
+                "end_date": "2053-07-29T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Mars",
+            "start_date": "2053-07-29T12:00:00",
+            "end_date": "2064-03-03T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Mars",
+                "start_date": "2053-07-29T12:00:00",
+                "end_date": "2054-10-22T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2054-10-22T12:00:00",
+                "end_date": "2056-05-14T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2056-05-14T12:00:00",
+                "end_date": "2058-10-31T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2058-10-31T12:00:00",
+                "end_date": "2060-06-22T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "2060-06-22T12:00:00",
+                "end_date": "2061-02-17T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "2061-02-17T12:00:00",
+                "end_date": "2063-03-09T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2063-03-09T12:00:00",
+                "end_date": "2064-03-03T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Venus",
+            "start_date": "2064-03-03T12:00:00",
+            "end_date": "2074-10-07T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Venus",
+                "start_date": "2064-03-03T12:00:00",
+                "end_date": "2064-10-29T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "2064-10-29T12:00:00",
+                "end_date": "2066-11-18T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2066-11-18T12:00:00",
+                "end_date": "2067-11-13T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2067-11-13T12:00:00",
+                "end_date": "2069-02-05T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2069-02-05T12:00:00",
+                "end_date": "2070-08-29T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2070-08-29T12:00:00",
+                "end_date": "2073-02-14T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2073-02-14T12:00:00",
+                "end_date": "2074-10-07T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Moon",
+            "start_date": "2074-10-07T12:00:00",
+            "end_date": "2085-05-12T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Moon",
+                "start_date": "2074-10-07T12:00:00",
+                "end_date": "2076-10-26T12:00:00"
+              },
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2076-10-26T12:00:00",
+                "end_date": "2077-10-21T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2077-10-21T12:00:00",
+                "end_date": "2079-01-14T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2079-01-14T12:00:00",
+                "end_date": "2080-08-06T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2080-08-06T12:00:00",
+                "end_date": "2083-01-23T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2083-01-23T12:00:00",
+                "end_date": "2084-09-14T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "2084-09-14T12:00:00",
+                "end_date": "2085-05-12T12:00:00"
+              }
+            ]
+          },
+          {
+            "major_lord": "Jupiter",
+            "start_date": "2085-05-12T12:00:00",
+            "end_date": "2095-12-16T12:00:00",
+            "sub_periods": [
+              {
+                "sub_lord": "Jupiter",
+                "start_date": "2085-05-12T12:00:00",
+                "end_date": "2086-05-07T12:00:00"
+              },
+              {
+                "sub_lord": "Mars",
+                "start_date": "2086-05-07T12:00:00",
+                "end_date": "2087-07-31T12:00:00"
+              },
+              {
+                "sub_lord": "Sun",
+                "start_date": "2087-07-31T12:00:00",
+                "end_date": "2089-02-20T12:00:00"
+              },
+              {
+                "sub_lord": "Saturn",
+                "start_date": "2089-02-20T12:00:00",
+                "end_date": "2091-08-09T12:00:00"
+              },
+              {
+                "sub_lord": "Mercury",
+                "start_date": "2091-08-09T12:00:00",
+                "end_date": "2093-03-31T12:00:00"
+              },
+              {
+                "sub_lord": "Venus",
+                "start_date": "2093-03-31T12:00:00",
+                "end_date": "2093-11-26T12:00:00"
+              },
+              {
+                "sub_lord": "Moon",
+                "start_date": "2093-11-26T12:00:00",
+                "end_date": "2095-12-16T12:00:00"
+              }
+            ]
+          }
+        ]
+      },
+      "teams": {
+        "constructive_team": [
+          "Sun",
+          "Jupiter",
+          "Saturn"
+        ],
+        "destructive_team": [
+          "Mars"
+        ],
+        "receptions": [
+          {
+            "planet_a": "Venus",
+            "planet_b": "Saturn",
+            "type": "Mixed",
+            "score": 11,
+            "a_in_b": {
+              "guest": "Venus",
+              "host": "Saturn",
+              "dignities": [
+                "Domicile",
+                "Triplicity"
+              ],
+              "score": 8,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "b_in_a": {
+              "guest": "Saturn",
+              "host": "Venus",
+              "dignities": [
+                "Triplicity"
+              ],
+              "score": 3,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "planet_a_sign": "Aquarius",
+            "planet_b_sign": "Capricorn"
+          },
+          {
+            "planet_a": "Moon",
+            "planet_b": "Jupiter",
+            "type": "Pure Domicile",
+            "score": 10,
+            "a_in_b": {
+              "guest": "Moon",
+              "host": "Jupiter",
+              "dignities": [
+                "Domicile"
+              ],
+              "score": 5,
+              "is_valid": true,
+              "is_operative": true,
+              "mode": "Standard (Lilly)",
+              "mitigation": "Active Assistance"
+            },
+            "b_in_a": {
+              "guest": "Jupiter",
+              "host": "Moon",
+              "dignities": [
+                "Domicile"
+              ],
+              "score": 5,
+              "is_valid": true,
+              "is_operative": true,
+              "mode": "Standard (Lilly)",
+              "mitigation": "Active Assistance"
+            },
+            "planet_a_sign": "Pisces",
+            "planet_b_sign": "Cancer"
+          },
+          {
+            "planet_a": "Mars",
+            "planet_b": "Jupiter",
+            "type": "Mixed",
+            "score": 10,
+            "a_in_b": {
+              "guest": "Mars",
+              "host": "Jupiter",
+              "dignities": [
+                "Domicile"
+              ],
+              "score": 5,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "b_in_a": {
+              "guest": "Jupiter",
+              "host": "Mars",
+              "dignities": [
+                "Triplicity",
+                "Term"
+              ],
+              "score": 5,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "planet_a_sign": "Sagittarius",
+            "planet_b_sign": "Cancer"
+          },
+          {
+            "planet_a": "Sun",
+            "planet_b": "Mars",
+            "type": "Mixed",
+            "score": 8,
+            "a_in_b": {
+              "guest": "Sun",
+              "host": "Mars",
+              "dignities": [
+                "Exaltation",
+                "Face"
+              ],
+              "score": 5,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "b_in_a": {
+              "guest": "Mars",
+              "host": "Sun",
+              "dignities": [
+                "Triplicity"
+              ],
+              "score": 3,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "planet_a_sign": "Capricorn",
+            "planet_b_sign": "Sagittarius"
+          },
+          {
+            "planet_a": "Mercury",
+            "planet_b": "Venus",
+            "type": "Mixed",
+            "score": 5,
+            "a_in_b": {
+              "guest": "Mercury",
+              "host": "Venus",
+              "dignities": [
+                "Triplicity"
+              ],
+              "score": 3,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "b_in_a": {
+              "guest": "Venus",
+              "host": "Mercury",
+              "dignities": [
+                "Term"
+              ],
+              "score": 2,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "planet_a_sign": "Capricorn",
+            "planet_b_sign": "Aquarius"
+          },
+          {
+            "planet_a": "Moon",
+            "planet_b": "Mars",
+            "type": "Mixed",
+            "score": 4,
+            "a_in_b": {
+              "guest": "Moon",
+              "host": "Mars",
+              "dignities": [
+                "Triplicity"
+              ],
+              "score": 3,
+              "is_valid": true,
+              "is_operative": true,
+              "mode": "Standard (Lilly)",
+              "mitigation": "Maleficence Neutralized (Host receives Guest)"
+            },
+            "b_in_a": {
+              "guest": "Mars",
+              "host": "Moon",
+              "dignities": [
+                "Face"
+              ],
+              "score": 1,
+              "is_valid": true,
+              "is_operative": true,
+              "mode": "Standard (Lilly)",
+              "mitigation": "Active Assistance"
+            },
+            "planet_a_sign": "Pisces",
+            "planet_b_sign": "Sagittarius"
+          },
+          {
+            "planet_a": "Sun",
+            "planet_b": "Mercury",
+            "type": "Mixed",
+            "score": 3,
+            "a_in_b": {
+              "guest": "Sun",
+              "host": "Mercury",
+              "dignities": [
+                "Term"
+              ],
+              "score": 2,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "b_in_a": {
+              "guest": "Mercury",
+              "host": "Sun",
+              "dignities": [
+                "Face"
+              ],
+              "score": 1,
+              "is_valid": true,
+              "is_operative": false,
+              "mode": "Standard (Lilly)",
+              "mitigation": "None"
+            },
+            "planet_a_sign": "Capricorn",
+            "planet_b_sign": "Capricorn"
+          }
+        ]
+      },
+      "vitality": {
+        "hyleg": {
+          "type": "Angle",
+          "name": "Ascendant",
+          "longitude": 24.944159966389954,
+          "candidate": "Ascendant"
+        },
+        "alcocoden": {
+          "name": "Venus"
+        },
+        "alcocoden_methods": {
+          "valens_term": {
+            "name": "Mars",
+            "details": {
+              "name": 

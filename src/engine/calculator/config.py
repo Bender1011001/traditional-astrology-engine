@@ -1,9 +1,6 @@
 import swisseph as swe
 
-ZODIAC_SYSTEM_LABELS = {
-    "tropical": "Tropical",
-    "sidereal": "Sidereal"
-}
+ZODIAC_SYSTEM_LABELS = {"tropical": "Tropical", "sidereal": "Sidereal"}
 
 AYANAMSA_OPTIONS = {
     "fagan_bradley": (swe.SIDM_FAGAN_BRADLEY, "Fagan-Bradley"),
@@ -13,7 +10,7 @@ AYANAMSA_OPTIONS = {
     "hipparchos": (swe.SIDM_HIPPARCHOS, "Hipparchos"),
     "true_citra": (swe.SIDM_TRUE_CITRA, "True Citra"),
     "true_revati": (swe.SIDM_TRUE_REVATI, "True Revati"),
-    "suryasiddhanta": (swe.SIDM_SURYASIDDHANTA, "Surya Siddhanta")
+    "suryasiddhanta": (swe.SIDM_SURYASIDDHANTA, "Surya Siddhanta"),
 }
 
 AYANAMSA_ALIASES = {
@@ -27,7 +24,7 @@ AYANAMSA_ALIASES = {
     "hipparchus": "hipparchos",
     "truecitra": "true_citra",
     "truerevati": "true_revati",
-    "suryasiddhanta": "suryasiddhanta"
+    "suryasiddhanta": "suryasiddhanta",
 }
 
 HOUSE_SYSTEM_LABELS = {
@@ -39,7 +36,7 @@ HOUSE_SYSTEM_LABELS = {
     "O": "Porphyry",
     "E": "Equal",
     "K": "Koch",
-    "T": "Topocentric"
+    "T": "Topocentric",
 }
 
 HOUSE_SYSTEM_ALIASES = {
@@ -56,10 +53,11 @@ HOUSE_SYSTEM_ALIASES = {
     "equal": "E",
     "koch": "K",
     "topocentric": "T",
-    "topo": "T"
+    "topo": "T",
 }
 
 COMPARE_SYSTEMS = ["W", "P", "R", "B", "O", "C"]
+
 
 def normalize_zodiac_system(value: str | None) -> tuple[str, str]:
     if not value:
@@ -69,6 +67,7 @@ def normalize_zodiac_system(value: str | None) -> tuple[str, str]:
         return "sidereal", ZODIAC_SYSTEM_LABELS["sidereal"]
     return "tropical", ZODIAC_SYSTEM_LABELS["tropical"]
 
+
 def normalize_ayanamsa(value: str | None) -> tuple[int, str, str]:
     if not value:
         mode, label = AYANAMSA_OPTIONS["lahiri"]
@@ -77,6 +76,7 @@ def normalize_ayanamsa(value: str | None) -> tuple[int, str, str]:
     norm = AYANAMSA_ALIASES.get(key, "lahiri")
     mode, label = AYANAMSA_OPTIONS.get(norm, AYANAMSA_OPTIONS["lahiri"])
     return mode, label, norm
+
 
 def normalize_house_system(value: str | None) -> tuple[str, str]:
     if not value:

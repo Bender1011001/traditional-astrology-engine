@@ -1,10 +1,10 @@
-import os
+import hashlib
 import json
 import logging
-import urllib.request
+import os
 import urllib.error
+import urllib.request
 from datetime import datetime, timezone
-import hashlib
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,9 @@ def _send_discord_embed(embed: dict) -> None:
         )
         with urllib.request.urlopen(req, timeout=5.0) as resp:
             if resp.status not in (200, 204):
-                logger.warning("Discord webhook returned unexpected status: %s", resp.status)
+                logger.warning(
+                    "Discord webhook returned unexpected status: %s", resp.status
+                )
     except urllib.error.HTTPError as e:
         logger.error("Discord webhook HTTP error %s: %s", e.code, e.reason)
     except urllib.error.URLError as e:
@@ -45,6 +47,7 @@ def _send_discord_embed(embed: dict) -> None:
 # ---------------------------------------------------------------------------
 # Public notification functions
 # ---------------------------------------------------------------------------
+
 
 def notify_chart_created(chart_request_dump: dict, tier: str = "unknown") -> None:
     """
@@ -62,8 +65,8 @@ def notify_chart_created(chart_request_dump: dict, tier: str = "unknown") -> Non
         tob = chart_request_dump.get("time") or "N/A"
 
         tier_colors = {
-            "paid": 0x6B46C1,      # purple — paying customer
-            "free": 0x4A5568,      # grey   — free tier
+            "paid": 0x6B46C1,  # purple — paying customer
+            "free": 0x4A5568,  # grey   — free tier
             "full_nativity": 0x2B6CB0,  # blue — B2B / full endpoint
         }
         color = tier_colors.get(tier, 0x718096)
@@ -108,7 +111,7 @@ def notify_user_registered(email: str, name: str = "", plan_tier: str = "free") 
 
         embed = {
             "title": "👤 New Account Registered",
-            "color": 0x38A169,   # green — growth event
+            "color": 0x38A169,  # green — growth event
             "fields": [
                 {"name": "Email", "value": email, "inline": True},
                 {"name": "Name", "value": display_name, "inline": True},
@@ -133,7 +136,9 @@ def archive_chart_output(chart_request_dump: dict, result: dict) -> None:
     try:
         now = datetime.now(timezone.utc)
         folder_path = os.path.join(
-            "data", "archives", "charts",
+            "data",
+            "archives",
+            "charts",
             str(now.year),
             f"{now.month:02d}",
             f"{now.day:02d}",
@@ -142,7 +147,9 @@ def archive_chart_output(chart_request_dump: dict, result: dict) -> None:
 
         name = chart_request_dump.get("name") or "Guest"
         req_date = chart_request_dump.get("date") or "0000-00-00"
-        hash_str = hashlib.md5(f"{name}{req_date}{now.timestamp()}".encode()).hexdigest()[:8]
+        hash_str = hashlib.md5(
+            f"{name}{req_date}{now.timestamp()}".encode()
+        ).hexdigest()[:8]
 
         filename = f"{now.strftime('%H%M%S')}_{name.replace(' ', '_')}_{hash_str}.json"
         file_path = os.path.join(folder_path, filename)

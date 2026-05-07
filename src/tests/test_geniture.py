@@ -1,27 +1,35 @@
 """Tests for geniture.py — Lord of Geniture (Lilly net fortitudes/debilities)."""
-from src.engine.geniture import LordOfGenitureEngine, GeniturePlanetScore
+
+from src.engine.geniture import GeniturePlanetScore, LordOfGenitureEngine
 from src.engine.models import Chart, Planet, PlanetName, Sect, Sign
 
 
 def _make_chart(planet_positions, asc=0.0, sun_alt=10.0):
-    planets = [Planet(name=n, longitude=lon, speed=spd) for n, lon, spd in planet_positions]
+    planets = [
+        Planet(name=n, longitude=lon, speed=spd) for n, lon, spd in planet_positions
+    ]
     return Chart(sun_altitude=sun_alt, planets=planets, ascendant=asc, mc=270.0)
 
 
 def _full_chart(asc=0.0, sun_alt=10.0):
     """A standard chart with all 7 traditional planets."""
-    return _make_chart([
-        (PlanetName.SUN, 120.0, 1.0),      # Leo
-        (PlanetName.MOON, 100.0, 13.0),     # Cancer
-        (PlanetName.MERCURY, 130.0, 1.5),   # Leo
-        (PlanetName.VENUS, 60.0, 1.0),      # Gemini
-        (PlanetName.MARS, 200.0, 0.5),      # Libra
-        (PlanetName.JUPITER, 270.0, 0.08),  # Capricorn
-        (PlanetName.SATURN, 300.0, 0.03),   # Aquarius
-    ], asc=asc, sun_alt=sun_alt)
+    return _make_chart(
+        [
+            (PlanetName.SUN, 120.0, 1.0),  # Leo
+            (PlanetName.MOON, 100.0, 13.0),  # Cancer
+            (PlanetName.MERCURY, 130.0, 1.5),  # Leo
+            (PlanetName.VENUS, 60.0, 1.0),  # Gemini
+            (PlanetName.MARS, 200.0, 0.5),  # Libra
+            (PlanetName.JUPITER, 270.0, 0.08),  # Capricorn
+            (PlanetName.SATURN, 300.0, 0.03),  # Aquarius
+        ],
+        asc=asc,
+        sun_alt=sun_alt,
+    )
 
 
 # ─── Helper methods ──────────────────────────────────────────────────────────
+
 
 def test_norm_diff_same():
     assert LordOfGenitureEngine._norm_diff(100.0, 100.0) == 0.0
@@ -40,6 +48,7 @@ def test_deg_in_sign():
 
 
 # ─── _essential_score_lilly ──────────────────────────────────────────────────
+
 
 def test_essential_domicile():
     """Sun in Leo should get domicile (+5)."""
@@ -72,6 +81,7 @@ def test_essential_peregrine():
 
 # ─── _house_score_lilly ─────────────────────────────────────────────────────
 
+
 def test_house_score_angular():
     score, detail = LordOfGenitureEngine._house_score_lilly(1)
     assert score == 5
@@ -94,6 +104,7 @@ def test_house_score_8th():
 
 
 # ─── _motion_score_lilly ────────────────────────────────────────────────────
+
 
 def test_motion_direct():
     p = Planet(name=PlanetName.JUPITER, longitude=270.0, speed=0.08)
@@ -118,6 +129,7 @@ def test_motion_swift():
 
 # ─── _solar_phase_score_lilly ────────────────────────────────────────────────
 
+
 def test_solar_phase_sun_exempt():
     """Sun itself should return 0 for solar phase."""
     chart = _full_chart()
@@ -128,10 +140,12 @@ def test_solar_phase_sun_exempt():
 
 def test_solar_phase_cazimi():
     """Planet within 0°17' of Sun = Cazimi (+5)."""
-    chart = _make_chart([
-        (PlanetName.SUN, 120.0, 1.0),
-        (PlanetName.MERCURY, 120.1, 1.2),  # 0.1° from Sun (within 0.28° cazimi)
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 120.0, 1.0),
+            (PlanetName.MERCURY, 120.1, 1.2),  # 0.1° from Sun (within 0.28° cazimi)
+        ]
+    )
     merc = chart.planets[1]
     score, breakdown, _ = LordOfGenitureEngine._solar_phase_score_lilly(merc, chart)
     assert breakdown["cazimi"] == 5
@@ -139,10 +153,12 @@ def test_solar_phase_cazimi():
 
 def test_solar_phase_combust():
     """Planet within 8.5° of Sun = Combust (-5)."""
-    chart = _make_chart([
-        (PlanetName.SUN, 120.0, 1.0),
-        (PlanetName.MERCURY, 125.0, 1.2),  # 5° from Sun
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 120.0, 1.0),
+            (PlanetName.MERCURY, 125.0, 1.2),  # 5° from Sun
+        ]
+    )
     merc = chart.planets[1]
     score, breakdown, _ = LordOfGenitureEngine._solar_phase_score_lilly(merc, chart)
     assert breakdown["combust"] == -5
@@ -150,10 +166,12 @@ def test_solar_phase_combust():
 
 def test_solar_phase_under_beams():
     """Planet within 17° but outside 8.5° = Under Beams (-4)."""
-    chart = _make_chart([
-        (PlanetName.SUN, 120.0, 1.0),
-        (PlanetName.VENUS, 132.0, 1.0),  # 12° from Sun
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 120.0, 1.0),
+            (PlanetName.VENUS, 132.0, 1.0),  # 12° from Sun
+        ]
+    )
     venus = chart.planets[1]
     score, breakdown, _ = LordOfGenitureEngine._solar_phase_score_lilly(venus, chart)
     assert breakdown["under_beams"] == -4
@@ -161,18 +179,22 @@ def test_solar_phase_under_beams():
 
 # ─── _orientality_score_lilly ────────────────────────────────────────────────
 
+
 def test_orientality_moon_increasing():
     """Moon ahead of Sun (increasing light) should get +2."""
-    chart = _make_chart([
-        (PlanetName.SUN, 120.0, 1.0),
-        (PlanetName.MOON, 200.0, 13.0),  # 80° ahead
-    ])
+    chart = _make_chart(
+        [
+            (PlanetName.SUN, 120.0, 1.0),
+            (PlanetName.MOON, 200.0, 13.0),  # 80° ahead
+        ]
+    )
     moon = chart.planets[1]
     score, _, details = LordOfGenitureEngine._orientality_score_lilly(moon, chart)
     assert score == 2
 
 
 # ─── calculate (full pipeline) ──────────────────────────────────────────────
+
 
 def test_calculate_returns_expected_keys():
     chart = _full_chart()
@@ -211,12 +233,13 @@ def test_calculate_score_has_breakdown():
 
 # ─── GeniturePlanetScore dataclass ──────────────────────────────────────────
 
+
 def test_geniture_planet_score_dataclass():
     gps = GeniturePlanetScore(
         planet=PlanetName.SUN,
         total=15,
         breakdown={"domicile": 5, "direct": 4},
-        details=["Domicile (+5)", "Direct (+4)"]
+        details=["Domicile (+5)", "Direct (+4)"],
     )
     assert gps.total == 15
     assert gps.planet == PlanetName.SUN

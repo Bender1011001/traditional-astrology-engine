@@ -47,6 +47,7 @@ reproduce_*.py
 test_*.py
 test_credentials.txt
 !tests/
+!src/tests/test_*.py
 
 # Local secret dumps (never commit)
 secret_history.txt

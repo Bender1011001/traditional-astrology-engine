@@ -9,16 +9,14 @@ Architecture:
   Auditor.generate_full_nativity() → chart_data dict → this module → HTML string
 
 This module is the "hook" that converts a visitor into a paying customer.
-The free reading shows enough to be valuable, then CTAs toward $7/$29 tiers.
+The free reading shows enough to be valuable, then CTAs toward $25/$69 tiers.
 """
 
 import json
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
+
 from src.engine.forensic_engine import Auditor
-from src.engine.models import PlanetName, Sign, Sect
-from src.engine.dignities import DignityCalculator
-from src.engine.calculations import format_longitude
 
 logger = logging.getLogger(__name__)
 
@@ -80,33 +78,105 @@ SUN_IN_SIGN = {
 }
 
 MOON_IN_SIGN = {
-    "Aries": {"title": "Instinct of Action", "text": "Your Moon in Aries gives you fast emotional reflexes. You process feelings through action — when upset, you move; when inspired, you charge forward. The traditional view: the Moon in Mars's sign produces bold instincts but restless moods."},
-    "Taurus": {"title": "Instinct of Comfort", "text": "Your Moon in Taurus is Exalted — one of the strongest lunar placements. Your emotional nature is steady, reliable, and deeply connected to physical comfort and beauty. The ancients said this Moon gives contentment and a natural talent for attracting material security."},
-    "Gemini": {"title": "Instinct of Curiosity", "text": "Your Moon in Gemini processes emotions through conversation and mental stimulation. You need variety, social engagement, and intellectual sparring to feel alive. The traditional view: Mercury's sign gives the Moon quick wit but sometimes scattered focus."},
-    "Cancer": {"title": "Instinct of Protection", "text": "Your Moon in Cancer is in its own Domicile — the most powerful lunar placement of all. Your emotional life is rich, deep, and closely tied to family and memory. The ancients said this Moon gives powerful intuition and an almost psychic sensitivity to the moods of others."},
-    "Leo": {"title": "Instinct of Expression", "text": "Your Moon in Leo processes emotions through creativity and dramatic expression. You need recognition, warmth, and a stage — even if that stage is your living room. The traditional view: the Sun's domicile gives the Moon warmth and generosity but also a need for admiration."},
-    "Virgo": {"title": "Instinct of Service", "text": "Your Moon in Virgo finds emotional security through order, routine, and being useful. You process feelings practically — by fixing, organizing, or analyzing. The traditional view: Mercury's earth sign gives the Moon precision but can produce anxiety when things feel chaotic."},
-    "Libra": {"title": "Instinct of Harmony", "text": "Your Moon in Libra processes emotions through relationships and aesthetic environments. You need peace, beauty, and balanced partnerships to feel centered. The traditional view: Venus's air sign gives the Moon social grace and a talent for negotiation."},
-    "Scorpio": {"title": "Instinct of Depth", "text": "Your Moon in Scorpio is in its Fall — but this produces intensity, not weakness. Your emotional nature runs deep and you feel things with extraordinary power. The traditional view: Mars's water sign gives the Moon resilience and determination, but emotions can become consuming."},
-    "Sagittarius": {"title": "Instinct of Freedom", "text": "Your Moon in Sagittarius processes emotions through adventure, philosophy, and humor. You need space, freedom, and the sense that life has meaning. The traditional view: Jupiter's fire sign gives the Moon optimism and restlessness in equal measure."},
-    "Capricorn": {"title": "Instinct of Control", "text": "Your Moon in Capricorn is in its Detriment — the sign opposite Cancer. Your emotional nature is controlled, strategic, and goal-oriented. The ancients said this Moon produces self-discipline and endurance, but the price is a tendency to suppress vulnerability."},
-    "Aquarius": {"title": "Instinct of Independence", "text": "Your Moon in Aquarius processes emotions through ideas, communities, and causes. You need mental stimulation and social engagement but also significant personal space. The traditional view: Saturn's air sign gives the Moon a cool, objective quality."},
-    "Pisces": {"title": "Instinct of Compassion", "text": "Your Moon in Pisces processes emotions through empathy, imagination, and creativity. Your boundaries are naturally permeable — you absorb the emotional atmosphere of any room you enter. The traditional view: Jupiter's water sign gives the Moon exceptional sensitivity and artistic talent."},
+    "Aries": {
+        "title": "Instinct of Action",
+        "text": "Your Moon in Aries gives you fast emotional reflexes. You process feelings through action — when upset, you move; when inspired, you charge forward. The traditional view: the Moon in Mars's sign produces bold instincts but restless moods.",
+    },
+    "Taurus": {
+        "title": "Instinct of Comfort",
+        "text": "Your Moon in Taurus is Exalted — one of the strongest lunar placements. Your emotional nature is steady, reliable, and deeply connected to physical comfort and beauty. The ancients said this Moon gives contentment and a natural talent for attracting material security.",
+    },
+    "Gemini": {
+        "title": "Instinct of Curiosity",
+        "text": "Your Moon in Gemini processes emotions through conversation and mental stimulation. You need variety, social engagement, and intellectual sparring to feel alive. The traditional view: Mercury's sign gives the Moon quick wit but sometimes scattered focus.",
+    },
+    "Cancer": {
+        "title": "Instinct of Protection",
+        "text": "Your Moon in Cancer is in its own Domicile — the most powerful lunar placement of all. Your emotional life is rich, deep, and closely tied to family and memory. The ancients said this Moon gives powerful intuition and an almost psychic sensitivity to the moods of others.",
+    },
+    "Leo": {
+        "title": "Instinct of Expression",
+        "text": "Your Moon in Leo processes emotions through creativity and dramatic expression. You need recognition, warmth, and a stage — even if that stage is your living room. The traditional view: the Sun's domicile gives the Moon warmth and generosity but also a need for admiration.",
+    },
+    "Virgo": {
+        "title": "Instinct of Service",
+        "text": "Your Moon in Virgo finds emotional security through order, routine, and being useful. You process feelings practically — by fixing, organizing, or analyzing. The traditional view: Mercury's earth sign gives the Moon precision but can produce anxiety when things feel chaotic.",
+    },
+    "Libra": {
+        "title": "Instinct of Harmony",
+        "text": "Your Moon in Libra processes emotions through relationships and aesthetic environments. You need peace, beauty, and balanced partnerships to feel centered. The traditional view: Venus's air sign gives the Moon social grace and a talent for negotiation.",
+    },
+    "Scorpio": {
+        "title": "Instinct of Depth",
+        "text": "Your Moon in Scorpio is in its Fall — but this produces intensity, not weakness. Your emotional nature runs deep and you feel things with extraordinary power. The traditional view: Mars's water sign gives the Moon resilience and determination, but emotions can become consuming.",
+    },
+    "Sagittarius": {
+        "title": "Instinct of Freedom",
+        "text": "Your Moon in Sagittarius processes emotions through adventure, philosophy, and humor. You need space, freedom, and the sense that life has meaning. The traditional view: Jupiter's fire sign gives the Moon optimism and restlessness in equal measure.",
+    },
+    "Capricorn": {
+        "title": "Instinct of Control",
+        "text": "Your Moon in Capricorn is in its Detriment — the sign opposite Cancer. Your emotional nature is controlled, strategic, and goal-oriented. The ancients said this Moon produces self-discipline and endurance, but the price is a tendency to suppress vulnerability.",
+    },
+    "Aquarius": {
+        "title": "Instinct of Independence",
+        "text": "Your Moon in Aquarius processes emotions through ideas, communities, and causes. You need mental stimulation and social engagement but also significant personal space. The traditional view: Saturn's air sign gives the Moon a cool, objective quality.",
+    },
+    "Pisces": {
+        "title": "Instinct of Compassion",
+        "text": "Your Moon in Pisces processes emotions through empathy, imagination, and creativity. Your boundaries are naturally permeable — you absorb the emotional atmosphere of any room you enter. The traditional view: Jupiter's water sign gives the Moon exceptional sensitivity and artistic talent.",
+    },
 }
 
 RISING_SIGN = {
-    "Aries": {"title": "The Warrior's Gate", "text": "With Aries rising, Mars is the lord of your chart. Your first impression is one of directness, energy, and confidence. The body tends toward an athletic build with a distinctive forehead or facial features. Traditionally, Aries rising marks a life defined by initiative and physical courage."},
-    "Taurus": {"title": "The Earth Gate", "text": "With Taurus rising, Venus governs your chart. Your first impression is one of calm stability, with an appreciation for beauty and comfort. The body tends toward a solid build with a strong neck and pleasant face. Traditionally, Taurus rising marks a life oriented toward material accomplishment."},
-    "Gemini": {"title": "The Messenger's Gate", "text": "With Gemini rising, Mercury rules your chart. Your first impression is one of curiosity, wit, and adaptable energy. The body tends toward a slender, youthful appearance. Traditionally, Gemini rising marks a life of intellectual versatility and social connectivity."},
-    "Cancer": {"title": "The Moon's Gate", "text": "With Cancer rising, the Moon governs your chart. Your first impression is one of warmth and emotional receptivity. The body tends toward a round face and soft features. Traditionally, Cancer rising marks a life deeply shaped by family, heritage, and domestic life."},
-    "Leo": {"title": "The Sun's Gate", "text": "With Leo rising, the Sun is lord of your chart. Your first impression is one of warmth, authority, and natural magnetism. The body tends toward a proud bearing with notable hair. Traditionally, Leo rising marks a life drawn toward leadership and creative expression."},
-    "Virgo": {"title": "The Scholar's Gate", "text": "With Virgo rising, Mercury (in earth) governs your chart. Your first impression is one of intelligence, precision, and quiet competence. The body tends toward a slender, well-groomed appearance. Traditionally, Virgo rising marks a life oriented toward mastery of craft and intellectual service."},
-    "Libra": {"title": "The Diplomat's Gate", "text": "With Libra rising, Venus (in air) governs your chart. Your first impression is one of grace, charm, and aesthetic sensibility. The body tends toward balanced, symmetrical features. Traditionally, Libra rising marks a life shaped by partnerships, negotiations, and the pursuit of justice."},
-    "Scorpio": {"title": "The Sentinel's Gate", "text": "With Scorpio rising, Mars (by night) governs your chart. Your first impression is intense, penetrating, and quietly powerful. The body tends toward a compact, magnetic build with striking eyes. Traditionally, Scorpio rising marks a life of deep transformation and strategic mastery."},
-    "Sagittarius": {"title": "The Pilgrim's Gate", "text": "With Sagittarius rising, Jupiter governs your chart. Your first impression is one of enthusiasm, optimism, and expansive warmth. The body tends toward height with an open, expressive face. Traditionally, Sagittarius rising marks a life of adventure, learning, and philosophical seeking."},
-    "Capricorn": {"title": "The Chancellor's Gate", "text": "With Capricorn rising, Saturn governs your chart. Your first impression is one of seriousness, competence, and quiet authority. The body tends toward a lean build that ages well. Traditionally, Capricorn rising marks a life of ambitious long-range planning and increasing power over time."},
-    "Aquarius": {"title": "The Innovator's Gate", "text": "With Aquarius rising, Saturn (in air) governs your chart. Your first impression is one of originality, intellectual independence, and cool detachment. The body tends toward a distinctive, unconventional appearance. Traditionally, Aquarius rising marks a life oriented toward systemic thinking and community reform."},
-    "Pisces": {"title": "The Dreamer's Gate", "text": "With Pisces rising, Jupiter (by water) governs your chart. Your first impression is one of gentleness, imaginative depth, and spiritual sensitivity. The body tends toward soft features and an ethereal quality. Traditionally, Pisces rising marks a life guided by intuition, compassion, and creative vision."},
+    "Aries": {
+        "title": "The Warrior's Gate",
+        "text": "With Aries rising, Mars is the lord of your chart. Your first impression is one of directness, energy, and confidence. The body tends toward an athletic build with a distinctive forehead or facial features. Traditionally, Aries rising marks a life defined by initiative and physical courage.",
+    },
+    "Taurus": {
+        "title": "The Earth Gate",
+        "text": "With Taurus rising, Venus governs your chart. Your first impression is one of calm stability, with an appreciation for beauty and comfort. The body tends toward a solid build with a strong neck and pleasant face. Traditionally, Taurus rising marks a life oriented toward material accomplishment.",
+    },
+    "Gemini": {
+        "title": "The Messenger's Gate",
+        "text": "With Gemini rising, Mercury rules your chart. Your first impression is one of curiosity, wit, and adaptable energy. The body tends toward a slender, youthful appearance. Traditionally, Gemini rising marks a life of intellectual versatility and social connectivity.",
+    },
+    "Cancer": {
+        "title": "The Moon's Gate",
+        "text": "With Cancer rising, the Moon governs your chart. Your first impression is one of warmth and emotional receptivity. The body tends toward a round face and soft features. Traditionally, Cancer rising marks a life deeply shaped by family, heritage, and domestic life.",
+    },
+    "Leo": {
+        "title": "The Sun's Gate",
+        "text": "With Leo rising, the Sun is lord of your chart. Your first impression is one of warmth, authority, and natural magnetism. The body tends toward a proud bearing with notable hair. Traditionally, Leo rising marks a life drawn toward leadership and creative expression.",
+    },
+    "Virgo": {
+        "title": "The Scholar's Gate",
+        "text": "With Virgo rising, Mercury (in earth) governs your chart. Your first impression is one of intelligence, precision, and quiet competence. The body tends toward a slender, well-groomed appearance. Traditionally, Virgo rising marks a life oriented toward mastery of craft and intellectual service.",
+    },
+    "Libra": {
+        "title": "The Diplomat's Gate",
+        "text": "With Libra rising, Venus (in air) governs your chart. Your first impression is one of grace, charm, and aesthetic sensibility. The body tends toward balanced, symmetrical features. Traditionally, Libra rising marks a life shaped by partnerships, negotiations, and the pursuit of justice.",
+    },
+    "Scorpio": {
+        "title": "The Sentinel's Gate",
+        "text": "With Scorpio rising, Mars (by night) governs your chart. Your first impression is intense, penetrating, and quietly powerful. The body tends toward a compact, magnetic build with striking eyes. Traditionally, Scorpio rising marks a life of deep transformation and strategic mastery.",
+    },
+    "Sagittarius": {
+        "title": "The Pilgrim's Gate",
+        "text": "With Sagittarius rising, Jupiter governs your chart. Your first impression is one of enthusiasm, optimism, and expansive warmth. The body tends toward height with an open, expressive face. Traditionally, Sagittarius rising marks a life of adventure, learning, and philosophical seeking.",
+    },
+    "Capricorn": {
+        "title": "The Chancellor's Gate",
+        "text": "With Capricorn rising, Saturn governs your chart. Your first impression is one of seriousness, competence, and quiet authority. The body tends toward a lean build that ages well. Traditionally, Capricorn rising marks a life of ambitious long-range planning and increasing power over time.",
+    },
+    "Aquarius": {
+        "title": "The Innovator's Gate",
+        "text": "With Aquarius rising, Saturn (in air) governs your chart. Your first impression is one of originality, intellectual independence, and cool detachment. The body tends toward a distinctive, unconventional appearance. Traditionally, Aquarius rising marks a life oriented toward systemic thinking and community reform.",
+    },
+    "Pisces": {
+        "title": "The Dreamer's Gate",
+        "text": "With Pisces rising, Jupiter (by water) governs your chart. Your first impression is one of gentleness, imaginative depth, and spiritual sensitivity. The body tends toward soft features and an ethereal quality. Traditionally, Pisces rising marks a life guided by intuition, compassion, and creative vision.",
+    },
 }
 
 SECT_DESCRIPTIONS = {
@@ -125,10 +195,23 @@ SECT_DESCRIPTIONS = {
 # HELPER FUNCTIONS
 # =============================================================================
 
+
 def _get_sign_from_longitude(lon: float) -> str:
     """Convert ecliptic longitude to sign name."""
-    signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]
+    signs = [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
+    ]
     return signs[int(lon / 30.0) % 12]
 
 
@@ -185,20 +268,35 @@ def _planet_display_name(name: str) -> str:
 
 
 PLANET_GLYPHS = {
-    "Sun": "☉", "Moon": "☽", "Mercury": "☿", "Venus": "♀",
-    "Mars": "♂", "Jupiter": "♃", "Saturn": "♄",
+    "Sun": "☉",
+    "Moon": "☽",
+    "Mercury": "☿",
+    "Venus": "♀",
+    "Mars": "♂",
+    "Jupiter": "♃",
+    "Saturn": "♄",
 }
 
 SIGN_GLYPHS = {
-    "Aries": "♈", "Taurus": "♉", "Gemini": "♊", "Cancer": "♋",
-    "Leo": "♌", "Virgo": "♍", "Libra": "♎", "Scorpio": "♏",
-    "Sagittarius": "♐", "Capricorn": "♑", "Aquarius": "♒", "Pisces": "♓",
+    "Aries": "♈",
+    "Taurus": "♉",
+    "Gemini": "♊",
+    "Cancer": "♋",
+    "Leo": "♌",
+    "Virgo": "♍",
+    "Libra": "♎",
+    "Scorpio": "♏",
+    "Sagittarius": "♐",
+    "Capricorn": "♑",
+    "Aquarius": "♒",
+    "Pisces": "♓",
 }
 
 
 # =============================================================================
 # MAIN GENERATOR
 # =============================================================================
+
 
 def generate_free_reading(
     name: str,
@@ -234,7 +332,11 @@ def generate_free_reading(
         )
 
         if not result or "error" in result:
-            error_msg = result.get("error", "Unknown calculation error") if result else "Engine returned no data"
+            error_msg = (
+                result.get("error", "Unknown calculation error")
+                if result
+                else "Engine returned no data"
+            )
             logger.error("Free reading chart generation failed: %s", error_msg)
             return {
                 "status": "failed",
@@ -255,8 +357,16 @@ def generate_free_reading(
         moon_data = _find_planet(planets_forensic, "Moon")
         asc_lon = float(astronomy.get("angles", {}).get("Ascendant", 0))
 
-        sun_sign = _get_sign_from_longitude(float(sun_data.get("longitude", 0))) if sun_data else "Unknown"
-        moon_sign = _get_sign_from_longitude(float(moon_data.get("longitude", 0))) if moon_data else "Unknown"
+        sun_sign = (
+            _get_sign_from_longitude(float(sun_data.get("longitude", 0)))
+            if sun_data
+            else "Unknown"
+        )
+        moon_sign = (
+            _get_sign_from_longitude(float(moon_data.get("longitude", 0)))
+            if moon_data
+            else "Unknown"
+        )
         rising_sign = _get_sign_from_longitude(asc_lon)
 
         sect_data = analysis.get("sect", {})
@@ -271,12 +381,17 @@ def generate_free_reading(
         # Build chart wheel data for SVG rendering in the browser
         try:
             planets_for_wheel = {
-                p["name"]: {"longitude": float(p["longitude"]), "retrograde": p.get("retrograde", False)}
+                p["name"]: {
+                    "longitude": float(p["longitude"]),
+                    "retrograde": p.get("retrograde", False),
+                }
                 for p in planets_forensic
                 if p.get("name") and p.get("longitude") is not None
             }
             raw_houses = astronomy.get("houses", {})
-            houses_for_wheel = {str(k): float(v) for k, v in raw_houses.items() if v is not None}
+            houses_for_wheel = {
+                str(k): float(v) for k, v in raw_houses.items() if v is not None
+            }
             chart_wheel_data = {
                 "planets": planets_for_wheel,
                 "houses": houses_for_wheel,
@@ -366,28 +481,34 @@ def _build_dignity_scorecard(planets_forensic: list, sect_type: str) -> list:
         elif pname == "Venus":
             sect_role = "Greater Benefic" if sect_type == "NIGHT" else "Lesser Benefic"
         elif pname == "Saturn":
-            sect_role = "Ally / Constructive" if sect_type == "DAY" else "Adversary / Blocking"
+            sect_role = (
+                "Ally / Constructive" if sect_type == "DAY" else "Adversary / Blocking"
+            )
         elif pname == "Mars":
-            sect_role = "Adversary / Volatile" if sect_type == "DAY" else "Ally / Driven"
+            sect_role = (
+                "Adversary / Volatile" if sect_type == "DAY" else "Ally / Driven"
+            )
         elif pname == "Mercury":
             sect_role = "Neutral / Adaptable"
 
         house = pdata.get("house")
         retrograde = pdata.get("retrograde", False)
 
-        rows.append({
-            "name": pname,
-            "glyph": PLANET_GLYPHS.get(pname, ""),
-            "sign": sign,
-            "sign_glyph": SIGN_GLYPHS.get(sign, ""),
-            "position": _format_planet_position(lon),
-            "dignity_score": total_score,
-            "dignity_label": _get_dignity_label(total_score),
-            "dignity_class": _get_dignity_color_class(total_score),
-            "sect_role": sect_role,
-            "house": house,
-            "retrograde": retrograde,
-        })
+        rows.append(
+            {
+                "name": pname,
+                "glyph": PLANET_GLYPHS.get(pname, ""),
+                "sign": sign,
+                "sign_glyph": SIGN_GLYPHS.get(sign, ""),
+                "position": _format_planet_position(lon),
+                "dignity_score": total_score,
+                "dignity_label": _get_dignity_label(total_score),
+                "dignity_class": _get_dignity_color_class(total_score),
+                "sect_role": sect_role,
+                "house": house,
+                "retrograde": retrograde,
+            }
+        )
 
     return rows
 
@@ -395,6 +516,7 @@ def _build_dignity_scorecard(planets_forensic: list, sect_type: str) -> list:
 # =============================================================================
 # HTML RENDERER
 # =============================================================================
+
 
 def _render_free_reading_html(
     name: str,
@@ -577,12 +699,12 @@ def _render_free_reading_html(
                 <span>🔒 No account needed</span>
             </div>
             <div class="cta-buttons">
-                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn">
-                    ✦ Get Full Reading — $7
+                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn" data-default-label="✦ Get Full Reading — $25">
+                    ✦ Get Full Reading — $25
                 </button>
                 <span class="btn-or">— or —</span>
-                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn">
-                    Complete Analysis — $29
+                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn" data-default-label="Complete Analysis — $69">
+                    Complete Analysis — $69
                 </button>
             </div>
             <p class="cta-fine-print">Secure payment via Stripe · No account needed · Instant PDF delivery</p>
