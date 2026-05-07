@@ -7,9 +7,9 @@ the runtime app can import seeding without relying on a "scripts" folder.
 
 from __future__ import annotations
 
-from src.database.core import engine, Base, SessionLocal
-from src.database.models import SubscriptionPlan
 from src.core.config import settings
+from src.database.core import Base, SessionLocal, engine
+from src.database.models import SubscriptionPlan
 
 
 def seed_plans() -> None:
@@ -18,8 +18,12 @@ def seed_plans() -> None:
         print("Ensuring Subscription Plans exist (upsert)...")
 
         # Legacy env var fallback (older single-tier config).
-        legacy_pract_monthly = (getattr(settings, "STRIPE_SUBSCRIPTION_PRICE_ID", "") or "").strip() or None
-        legacy_pract_annual = (getattr(settings, "STRIPE_ANNUAL_PRICE_ID", "") or "").strip() or None
+        legacy_pract_monthly = (
+            getattr(settings, "STRIPE_SUBSCRIPTION_PRICE_ID", "") or ""
+        ).strip() or None
+        legacy_pract_annual = (
+            getattr(settings, "STRIPE_ANNUAL_PRICE_ID", "") or ""
+        ).strip() or None
 
         desired = [
             {
@@ -36,21 +40,38 @@ def seed_plans() -> None:
                 "tier": "scholar",
                 "chart_quota": None,
                 "api_quota": 0,
-                "price_monthly": 9.99,
-                "price_annual": 99.00,
-                "stripe_price_id_monthly": (getattr(settings, "STRIPE_PRICE_SCHOLAR_MONTHLY", "") or "").strip() or None,
-                "stripe_price_id_annual": (getattr(settings, "STRIPE_PRICE_SCHOLAR_ANNUAL", "") or "").strip() or None,
-                "features": {"api_access": False, "pdf_export": True, "saved_charts": True},
+                "price_monthly": 14.00,
+                "price_annual": 140.00,
+                "stripe_price_id_monthly": (
+                    getattr(settings, "STRIPE_PRICE_SCHOLAR_MONTHLY", "") or ""
+                ).strip()
+                or None,
+                "stripe_price_id_annual": (
+                    getattr(settings, "STRIPE_PRICE_SCHOLAR_ANNUAL", "") or ""
+                ).strip()
+                or None,
+                "features": {
+                    "api_access": False,
+                    "pdf_export": True,
+                    "saved_charts": True,
+                },
             },
             {
                 "tier": "practitioner",
                 "chart_quota": None,
-                "api_quota": 100,
-                "price_monthly": 29.00,
-                "price_annual": 290.00,
-                "stripe_price_id_monthly": settings.STRIPE_PRICE_PRACTITIONER_MONTHLY or legacy_pract_monthly,
-                "stripe_price_id_annual": settings.STRIPE_PRICE_PRACTITIONER_ANNUAL or legacy_pract_annual,
-                "features": {"api_access": True, "pdf_export": True, "saved_charts": True, "white_label_pdf": True},
+                "api_quota": 500,
+                "price_monthly": 79.00,
+                "price_annual": 790.00,
+                "stripe_price_id_monthly": settings.STRIPE_PRICE_PRACTITIONER_MONTHLY
+                or legacy_pract_monthly,
+                "stripe_price_id_annual": settings.STRIPE_PRICE_PRACTITIONER_ANNUAL
+                or legacy_pract_annual,
+                "features": {
+                    "api_access": True,
+                    "pdf_export": True,
+                    "saved_charts": True,
+                    "white_label_pdf": True,
+                },
             },
             {
                 "tier": "studio",
@@ -60,23 +81,33 @@ def seed_plans() -> None:
                 "price_annual": 990.00,
                 "stripe_price_id_monthly": settings.STRIPE_PRICE_STUDIO_MONTHLY or None,
                 "stripe_price_id_annual": settings.STRIPE_PRICE_STUDIO_ANNUAL or None,
-                "features": {"api_access": True, "pdf_export": True, "saved_charts": True, "white_label_pdf": True, "seats": 5},
+                "features": {
+                    "api_access": True,
+                    "pdf_export": True,
+                    "saved_charts": True,
+                    "white_label_pdf": True,
+                    "seats": 5,
+                },
             },
         ]
 
         for d in desired:
-            plan = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier == d["tier"]).first()
+            plan = (
+                db.query(SubscriptionPlan)
+                .filter(SubscriptionPlan.tier == d["tier"])  # type: ignore
+                .first()
+            )
             if not plan:
-                plan = SubscriptionPlan(tier=d["tier"])
+                plan = SubscriptionPlan(tier=d["tier"])  # type: ignore
                 db.add(plan)
 
-            plan.chart_quota = d["chart_quota"]
-            plan.api_quota = d["api_quota"]
-            plan.price_monthly = d["price_monthly"]
-            plan.price_annual = d["price_annual"]
-            plan.stripe_price_id_monthly = d["stripe_price_id_monthly"]
-            plan.stripe_price_id_annual = d["stripe_price_id_annual"]
-            plan.features = d["features"]
+            plan.chart_quota = d["chart_quota"]  # type: ignore
+            plan.api_quota = d["api_quota"]  # type: ignore
+            plan.price_monthly = d["price_monthly"]  # type: ignore
+            plan.price_annual = d["price_annual"]  # type: ignore
+            plan.stripe_price_id_monthly = d["stripe_price_id_monthly"]  # type: ignore
+            plan.stripe_price_id_annual = d["stripe_price_id_annual"]  # type: ignore
+            plan.features = d["features"]  # type: ignore
 
         db.commit()
         print("Plans ensured successfully.")
@@ -92,4 +123,3 @@ def reset_db() -> None:
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     print("Database tables recreated.")
-

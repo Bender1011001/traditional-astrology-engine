@@ -1,17 +1,19 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, BackgroundTasks
-from sqlalchemy.orm import Session
-from src.database.core import get_db
-from src.api.v1.auth import get_current_user, create_access_token
-from src.database.models import SubscriptionPlan, User
-from src.api.v1.schemas import CheckoutRequest
-from src.services.subscription import SubscriptionService
-from src.services.fulfillment import FulfillmentService
-from src.core.config import settings
-import stripe
+import hashlib
 import json
 import logging
-import hashlib
 
+import stripe
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
+from sqlalchemy.orm import Session
+
+from src.api.v1.auth import create_access_token, get_current_user
+from src.api.v1.schemas import CheckoutRequest  # type: ignore
+from src.core.config import settings
+from src.database.core import get_db
+from src.database.models import AsyncReportTask, GuestRequest, SubscriptionPlan, User
+from src.services.fulfillment import FulfillmentService
+from src.services.premium_generator import generate_premium_report_task
+from src.services.subscription import SubscriptionService
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +27,9 @@ def _checkout_globally_enabled() -> bool:
 _REPORT_PRICE_CACHE: dict[str, str | None] = {}
 
 
-def _lookup_onetime_price_id(*, product_name: str, unit_amount: int, currency: str = "usd") -> str | None:
+def _lookup_onetime_price_id(
+    *, product_name: str, unit_amount: int, currency: str = "usd"
+) -> str | None:
     """
     Best-effort Stripe lookup for one-time report prices by Product name + amount.
 
@@ -37,7 +41,7 @@ def _lookup_onetime_price_id(*, product_name: str, unit_amount: int, currency: s
 
     try:
         prices = stripe.Price.list(active=True, limit=100, expand=["data.product"])
-        for p in (prices.get("data") or []):
+        for p in prices.get("data") or []:
             try:
                 if (p.get("type") or "").lower() != "one_time":
                     continue
@@ -57,7 +61,9 @@ def _lookup_onetime_price_id(*, product_name: str, unit_amount: int, currency: s
                     _REPORT_PRICE_CACHE[cache_key] = p.get("id")
                     return p.get("id")
             except Exception as e:
-                logger.warning("Skipping price entry during lookup: %s", repr(e), exc_info=True)
+                logger.warning(
+                    "Skipping price entry during lookup: %s", repr(e), exc_info=True
+                )
                 continue
     except Exception as e:
         logging.getLogger(__name__).error("Stripe price lookup failed: %s", e)
@@ -96,7 +102,7 @@ async def list_public_plans(db: Session = Depends(get_db)):
     out = []
     checkout_global = _checkout_globally_enabled()
     for tier in tiers:
-        p = by_tier.get(tier)
+        p = by_tier.get(tier)  # type: ignore
         if not p:
             out.append(
                 {
@@ -112,10 +118,16 @@ async def list_public_plans(db: Session = Depends(get_db)):
         out.append(
             {
                 "tier": p.tier,
-                "price_monthly": float(p.price_monthly) if p.price_monthly is not None else None,
-                "price_annual": float(p.price_annual) if p.price_annual is not None else None,
-                "checkout_enabled_monthly": bool(p.stripe_price_id_monthly) and checkout_global,
-                "checkout_enabled_annual": bool(p.stripe_price_id_annual) and checkout_global,
+                "price_monthly": (  # type: ignore
+                    float(p.price_monthly) if p.price_monthly is not None else None
+                ),
+                "price_annual": (  # type: ignore
+                    float(p.price_annual) if p.price_annual is not None else None
+                ),
+                "checkout_enabled_monthly": bool(p.stripe_price_id_monthly)
+                and checkout_global,
+                "checkout_enabled_annual": bool(p.stripe_price_id_annual)
+                and checkout_global,
             }
         )
 
@@ -125,14 +137,19 @@ async def list_public_plans(db: Session = Depends(get_db)):
         "checkout_globally_enabled": checkout_global,
     }
 
+
 @router.post("/create-checkout-session")
-async def create_checkout_session(request: CheckoutRequest, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+async def create_checkout_session(
+    request: CheckoutRequest,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     """
     Create a Stripe Checkout Session.
 
     Supported Tiers:
     - One-time purchases:
-      - 'single_reading': $20 (single chart unlock)
+      - 'single_reading': $25 (single chart unlock)
       - 'calibration': $27 (PDF)
       - 'full': $197 (Forensic Packet)
 
@@ -155,36 +172,54 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
     # ----------------------------
     if tier in {"single_reading", "calibration", "full"}:
         if not request.chart_request:
-            raise HTTPException(status_code=400, detail="chart_request is required for one-time purchases")
+            raise HTTPException(
+                status_code=400,
+                detail="chart_request is required for one-time purchases",
+            )
 
         # Map tier -> Stripe Price ID (prefer env; fallback to product lookup).
         if tier == "single_reading":
-            price_id = (getattr(settings, "STRIPE_PRICE_SINGLE_READING_ONETIME", "") or "").strip()
+            price_id = (
+                getattr(settings, "STRIPE_PRICE_SINGLE_READING_ONETIME", "") or ""
+            ).strip()
             if not price_id:
                 price_id = _lookup_onetime_price_id(
                     product_name="Single Reading",
-                    unit_amount=int(getattr(settings, "SINGLE_READING_PRICE_USD", 20)) * 100,
+                    unit_amount=int(getattr(settings, "SINGLE_READING_PRICE_USD", 25))
+                    * 100,
                 )
             plan_tier = "SINGLE_READING"
         elif tier == "calibration":
-            price_id = (getattr(settings, "STRIPE_PRICE_CALIBRATION_ONETIME", "") or "").strip()
+            price_id = (
+                getattr(settings, "STRIPE_PRICE_CALIBRATION_ONETIME", "") or ""
+            ).strip()
             if not price_id:
-                price_id = _lookup_onetime_price_id(product_name="Calibration Audit", unit_amount=2700)
+                price_id = _lookup_onetime_price_id(
+                    product_name="Calibration Audit", unit_amount=2700
+                )
             plan_tier = "CALIBRATION"
         else:
-            price_id = (getattr(settings, "STRIPE_PRICE_FULL_ONETIME", "") or "").strip()
+            price_id = (
+                getattr(settings, "STRIPE_PRICE_FULL_ONETIME", "") or ""
+            ).strip()
             if not price_id:
-                price_id = _lookup_onetime_price_id(product_name="Full Forensic Audit + Agent Data", unit_amount=19700)
+                price_id = _lookup_onetime_price_id(
+                    product_name="Full Forensic Audit + Agent Data", unit_amount=19700
+                )
             plan_tier = "FULL"
 
         if not price_id:
-            raise HTTPException(status_code=500, detail="Stripe one-time price is not configured")
+            raise HTTPException(
+                status_code=500, detail="Stripe one-time price is not configured"
+            )
 
         # Stripe expects a literal "{CHECKOUT_SESSION_ID}" placeholder in the final URL.
         final_success_url = request.success_url or ""
         if "{CHECKOUT_SESSION_ID}" not in final_success_url:
             sep = "&" if "?" in final_success_url else "?"
-            final_success_url = f"{final_success_url}{sep}session_id={{CHECKOUT_SESSION_ID}}"
+            final_success_url = (
+                f"{final_success_url}{sep}session_id={{CHECKOUT_SESSION_ID}}"
+            )
 
         # Minimal chart payload stored in metadata (keep Stripe metadata small).
         cr = request.chart_request.model_dump() if request.chart_request else {}
@@ -204,29 +239,35 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
                 allow_promotion_codes=True,
                 success_url=final_success_url,
                 cancel_url=request.cancel_url,
-                customer_email=user.email,
-                client_reference_id=user.id,
+                customer_email=user.email,  # type: ignore
+                client_reference_id=user.id,  # type: ignore
                 metadata={
-                    "user_id": user.id,
+                    "user_id": user.id,  # type: ignore
                     "plan_tier": plan_tier,
                     "chart_data": json.dumps(chart_min),
                 },
                 invoice_creation={
                     "enabled": True,
-                    "invoice_data": {"metadata": {"user_id": user.id, "plan_tier": plan_tier}},
+                    "invoice_data": {
+                        "metadata": {"user_id": user.id, "plan_tier": plan_tier}  # type: ignore
+                    },
                 },
             )
             return {"sessionId": session.id, "url": session.url}
         except Exception as e:
-            logger.error("Stripe one-time checkout creation failed: %s", repr(e), exc_info=True)
-            raise HTTPException(status_code=500, detail="Failed to create checkout session")
+            logger.error(
+                "Stripe one-time checkout creation failed: %s", repr(e), exc_info=True
+            )
+            raise HTTPException(
+                status_code=500, detail="Failed to create checkout session"
+            )
 
     # ----------------------------
     # Subscription tiers
     # ----------------------------
     if tier not in {"scholar", "practitioner", "studio"}:
         raise HTTPException(status_code=400, detail="Invalid tier")
-        
+
     try:
         service = SubscriptionService(db)
         session = service.create_checkout_session(
@@ -235,35 +276,50 @@ async def create_checkout_session(request: CheckoutRequest, user: User = Depends
             annual=request.annual,
             success_url=request.success_url,
             cancel_url=request.cancel_url,
-            chart_data=request.chart_request.model_dump() if request.chart_request else None
+            chart_data=(
+                request.chart_request.model_dump() if request.chart_request else None  # type: ignore
+            ),
         )
         return {"sessionId": session.id, "url": session.url}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        logger.error("Stripe subscription checkout creation failed: %s", repr(e), exc_info=True)
+        logger.error(
+            "Stripe subscription checkout creation failed: %s", repr(e), exc_info=True
+        )
         raise HTTPException(status_code=500, detail="Failed to create checkout session")
 
+
 @router.get("/verify-checkout-session")
-async def verify_checkout_session(session_id: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+async def verify_checkout_session(
+    session_id: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)
+):
     try:
         session = stripe.checkout.Session.retrieve(session_id)
     except Exception as e:
-        logger.warning("Invalid Stripe session retrieval for session_id=%s: %s", session_id, repr(e), exc_info=True)
+        logger.warning(
+            "Invalid Stripe session retrieval for session_id=%s: %s",
+            session_id,
+            repr(e),
+            exc_info=True,
+        )
         raise HTTPException(status_code=400, detail="Invalid Session ID")
 
     # Subscription checkouts with trials can complete without an immediate payment.
     if session.payment_status not in {"paid", "no_payment_required"}:
         raise HTTPException(status_code=400, detail="Payment not completed")
 
-    user_id = session.metadata.get("user_id")
-    plan_tier = session.metadata.get("plan_tier")
-    
+    metadata = session.metadata or {}
+    user_id = metadata.get("user_id")
+    plan_tier = metadata.get("plan_tier")
+
     if not user_id:
-         raise HTTPException(status_code=400, detail="Invalid session metadata")
+        raise HTTPException(status_code=400, detail="Invalid session metadata")
 
     # Sync DB status immediately (subscriptions only).
-    is_subscription = bool(session.get("subscription")) or (str(session.get("mode") or "").lower() == "subscription")
+    is_subscription = bool(session.get("subscription")) or (
+        str(session.get("mode") or "").lower() == "subscription"
+    )
     if is_subscription:
         service = SubscriptionService(db)
         service._process_subscription_success(session)  # Reuse webhook logic to be safe
@@ -271,11 +327,17 @@ async def verify_checkout_session(session_id: str, background_tasks: BackgroundT
     # Recover Chart Data
     chart_data = None
     chart_hash = f"user_{user_id}"
-    if session.metadata.get("chart_data"):
+    if metadata.get("chart_data"):
         try:
-            chart_data = json.loads(session.metadata.get("chart_data"))
+            chart_data_raw = metadata.get("chart_data")
+            if chart_data_raw is not None:
+                chart_data = json.loads(str(chart_data_raw))
         except (TypeError, ValueError) as e:
-            logger.warning("Failed to parse chart_data from session metadata: %s", repr(e), exc_info=True)
+            logger.warning(
+                "Failed to parse chart_data from session metadata: %s",
+                repr(e),
+                exc_info=True,
+            )
     chart_hash = _chart_hash_from_chart_data(chart_data) or chart_hash
 
     # TRIGGER FULFILLMENT (Background Task) for report products only.
@@ -284,49 +346,62 @@ async def verify_checkout_session(session_id: str, background_tasks: BackgroundT
         if user and user.email:
             background_tasks.add_task(
                 FulfillmentService.fulfill_order,
-                user_email=user.email,
-                user_name=user.name or "User",
+                user_email=str(user.email),
+                user_name=str(user.name) if user.name else "User",
                 chart_request=chart_data,
-                tier=plan_tier or "practitioner"
+                tier=str(plan_tier) if plan_tier else "practitioner",
             )
-            
+
     # Create Token
     # We include user_id in data so get_current_user works
     access_token = create_access_token(
         chart_hash=chart_hash,
-        tier=plan_tier,
+        tier=str(plan_tier) if plan_tier else "",
         expires_days=30,
-        data={"user_id": user_id, "chart_input": chart_data}
+        data={"user_id": user_id, "chart_input": chart_data},
     )
 
     return {
         "verified": True,
         "access_token": access_token,
         "chart_hash": chart_hash,
-        "chart_data": chart_data, # Return so frontend can repopulate if needed
-        "tier": plan_tier
+        "chart_data": chart_data,  # Return so frontend can repopulate if needed
+        "tier": plan_tier,
     }
 
+
 @router.post("/cancel-subscription")
-async def cancel_subscription(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+async def cancel_subscription(
+    user: User = Depends(get_current_user), db: Session = Depends(get_db)
+):
     """
     Cancel the user's active subscription (auto-renew off).
     """
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
-    
+
     try:
         service = SubscriptionService(db)
         sub = service.cancel_subscription(user, immediate=False)
-        period_end_str = sub.current_period_end.strftime("%Y-%m-%d") if sub.current_period_end else "end of billing period"
+        period_end_str = (
+            sub.current_period_end.strftime("%Y-%m-%d")
+            if sub.current_period_end
+            else "end of billing period"
+        )
         return {
-            "success": True, 
-            "message": "Auto-renewal turned off. Access continues until " + period_end_str
+            "success": True,
+            "message": "Auto-renewal turned off. Access continues until "
+            + period_end_str,
         }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        logger.error("Subscription cancellation failed for user %s: %s", user.id if user else 'unknown', repr(e), exc_info=True)
+        logger.error(
+            "Subscription cancellation failed for user %s: %s",
+            user.id if user else "unknown",
+            repr(e),
+            exc_info=True,
+        )
         raise HTTPException(status_code=500, detail="Failed to cancel subscription")
 
 
@@ -351,7 +426,10 @@ async def start_trial(
     # Don't allow overwriting a Stripe-managed subscription.
     sub = user.subscription
     if sub and sub.stripe_subscription_id and sub.status in {"active", "trial"}:
-        raise HTTPException(status_code=400, detail="Subscription already managed by Stripe. Use checkout instead.")
+        raise HTTPException(
+            status_code=400,
+            detail="Subscription already managed by Stripe. Use checkout instead.",
+        )
 
     service = SubscriptionService(db)
     try:
@@ -363,25 +441,109 @@ async def start_trial(
         "success": True,
         "status": updated.status,
         "plan_tier": updated.plan.tier if updated.plan else tier_norm,
-        "trial_end_date": updated.trial_end_date.isoformat() if updated.trial_end_date else None,
+        "trial_end_date": (
+            updated.trial_end_date.isoformat() if updated.trial_end_date else None
+        ),
     }
 
 
 @router.post("/webhook")
-async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
+async def stripe_webhook(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
     payload = await request.body()
     sig_header = request.headers.get("stripe-signature")
-    
+
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
         )
-    except ValueError as e:
+    except ValueError:
         raise HTTPException(status_code=400, detail="Invalid payload")
-    except stripe.error.SignatureVerificationError as e:
+    except stripe.error.SignatureVerificationError:
         raise HTTPException(status_code=400, detail="Invalid signature")
-        
+
+    event_type = event["type"]
+
+    # --- Guest one-time purchase fulfillment ---
+    # Guest checkout sessions have no user_id/client_reference_id; instead they carry
+    # metadata.tier == "forensic_nativity". Handle them here before passing to
+    # SubscriptionService which would silently drop them.
+    if event_type == "checkout.session.completed":
+        session_obj = event["data"]["object"]
+        metadata = session_obj.get("metadata") or {}
+        tier = metadata.get("tier", "")
+        user_id = metadata.get("user_id") or session_obj.get("client_reference_id")
+
+        if tier == "forensic_nativity" and not user_id:
+            session_id = session_obj.get("id", "")
+            payment_status = session_obj.get("payment_status", "")
+
+            if payment_status == "paid" and session_id:
+                # Idempotency — skip if task already exists
+                existing = (
+                    db.query(AsyncReportTask)
+                    .filter(AsyncReportTask.id == session_id)
+                    .first()
+                )
+                if not existing:
+                    import json as _json
+
+                    chart_data_str = metadata.get("chart_data", "{}")
+                    try:
+                        chart_data = _json.loads(chart_data_str)
+                    except Exception:
+                        chart_data = {}
+
+                    # Capture customer email
+                    customer_email = None
+                    try:
+                        cd = session_obj.get("customer_details") or {}
+                        customer_email = cd.get("email") or session_obj.get(
+                            "customer_email"
+                        )
+                    except Exception:
+                        pass
+
+                    request_meta = {
+                        "date": chart_data.get("date", ""),
+                        "time": chart_data.get("time", "12:00"),
+                        "city": chart_data.get("city", ""),
+                        "state": chart_data.get("state", ""),
+                        "name": chart_data.get("name", "Guest"),
+                    }
+                    if customer_email:
+                        request_meta["customer_email"] = customer_email
+
+                    task = AsyncReportTask(
+                        id=session_id,
+                        status="pending",
+                        request_meta=request_meta,
+                    )
+                    db.add(task)
+
+                    # Record guest usage
+                    usage = GuestRequest(
+                        ip_address="webhook",
+                        request_type=f"paid_{tier}",
+                    )
+                    db.add(usage)
+                    db.commit()
+                    db.refresh(task)
+
+                    background_tasks.add_task(
+                        generate_premium_report_task, task.id, request_meta
+                    )
+                    logger.info(
+                        "Webhook: started guest fulfillment for session %s", session_id
+                    )
+
+            return {"status": "success"}
+
+    # --- Subscription / authenticated-user events ---
     service = SubscriptionService(db)
     service.handle_webhook(event)
-    
+
     return {"status": "success"}
