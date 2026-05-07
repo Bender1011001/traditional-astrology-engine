@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RCNDWN4XVN');
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>What Birth Data You Need from Astrology Clients (and Why It Matters) | AstroForge</title>
+<meta name="description" content="A practical guide for astrology practitioners on collecting accurate birth data — date, time, and location — and what to do when clients don't have their exact birth time."/>
+<meta name="keywords" content="what birth data do I need for astrology reading, astrology client intake, birth time astrology, astrology client information, natal chart data collection, birth certificate astrology, unknown birth time astrology, astrology intake form, astrology seller client data, birth data collection Etsy astrology, astrology reading requirements, astrology client form"/>
+<meta name="robots" content="index,follow"/>
+<meta name="theme-color" content="#0a0a1a"/>
+<link rel="canonical" href="https://traditional-astrology.com/astrology-client-birth-data.html"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://traditional-astrology.com/astrology-client-birth-data.html"/>
+<meta property="og:title" content="What Birth Data You Need from Astrology Clients (and Why It Matters)"/>
+<meta property="og:description" content="Date, exact time, and location — why all three matter, where clients can find their birth time, and what to do when they can't."/>
+<meta property="og:image" content="https://traditional-astrology.com/og-card.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="What Birth Data You Need from Astrology Clients (and Why It Matters)"/>
+<meta name="twitter:description" content="Practical guide for practitioners: what data to collect, why birth time is non-negotiable, and how to build it cleanly into your order process."/>
+<meta name="twitter:image" content="https://traditional-astrology.com/og-card.png"/>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What information do I need from a client for an astrology reading?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You need three things: the exact birth date (day, month, year), the exact birth time (to the minute if possible), and the birth location (city and country). All three are required for a complete traditional natal chart reading. Without the birth time, you cannot calculate the Ascendant, house positions, or any timing techniques that depend on them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does birth time matter so much in astrology?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Ascendant — the rising sign — changes sign roughly every two hours. The entire house system is derived from it. Houses determine where life topics like career, relationships, health, and finances fall in the chart. Miss the birth time by two hours and you may be looking at a completely different rising sign, different house rulerships, and different Lord of the Year in the annual profection. For traditional astrology specifically, the Ascendant is foundational to almost every interpretive technique."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do I do if a client doesn't know their birth time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "First, encourage them to check their birth certificate, hospital records, or family records — many have the time. If it's truly unavailable, you have two honest options: produce a partial reading using planetary positions and dignities only (noting clearly that house-based analysis is omitted), or use a solar chart with the Sun on the Ascendant as a useful approximation. Rectification — working backwards from life events to estimate the birth time — is a valid but advanced service that can be offered separately."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What format should I ask clients to provide their birth data in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Specify the format explicitly to avoid ambiguity. For date: DD/MM/YYYY (e.g., 15/03/1990) — this removes the month/day confusion common with US vs. European conventions. For time: HH:MM with AM/PM specified, or 24-hour format (e.g., 14:30). For location: city name and country. If you use AstroForge's bulk CSV tool, the expected format is date as YYYY-MM-DD and time as HH:MM in 24-hour format."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  .guide-hero {
+    text-align: center;
+    padding: 4rem 1.5rem 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .guide-hero .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .guide-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-weight: 600;
+    color: #f5f0e8;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .guide-hero .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: rgba(245,240,232,0.68);
+    line-height: 1.75;
+    max-width: 620px;
+    margin: 0 auto 2rem;
+  }
+  .guide-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 0.06em;
+  }
+
+  .content-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .content-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.55rem, 4vw, 2.1rem);
+    color: #f5f0e8;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+  .content-section p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.72);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .content-section p:last-child { margin-bottom: 0; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    margin: 0 1.5rem;
+  }
+
+  .callout-box {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px;
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+  .callout-box p {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.8);
+    line-height: 1.7;
+  }
+  .callout-box strong { color: #c9a84c; }
+
+  .callout-warning {
+    background: rgba(180,60,40,0.08);
+    border: 1px solid rgba(200,80,60,0.3);
+    border-radius: 8px;
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+  .callout-warning p {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.8);
+    line-height: 1.7;
+  }
+  .callout-warning strong { color: #e87c6a; }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0;
+  }
+  .checklist li {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: rgba(245,240,232,0.75);
+    padding: 0.45rem 0 0.45rem 1.6rem;
+    position: relative;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '✦';
+    color: #c9a84c;
+    font-size: 0.6rem;
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+  }
+
+  .three-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin: 1.75rem 0;
+  }
+  .point-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+  }
+  .point-card .point-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    color: #c9a84c;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+  .point-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: #f5f0e8;
+    margin-bottom: 0.4rem;
+  }
+  .point-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.58);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+    margin: 1.75rem 0;
+  }
+  .option-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 8px;
+    padding: 1.4rem 1.25rem;
+  }
+  .option-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #f5f0e8;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+  .option-card .option-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+  }
+  .tag-recommended { background: rgba(201,168,76,0.15); color: #c9a84c; }
+  .tag-partial { background: rgba(255,255,255,0.06); color: rgba(245,240,232,0.5); }
+  .tag-advanced { background: rgba(100,80,180,0.15); color: #a89ad4; }
+  .option-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .form-example {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.83rem;
+  }
+  .form-example .form-label {
+    color: rgba(245,240,232,0.4);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .form-example .form-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.65rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .form-example .field-name {
+    color: #c9a84c;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+  .form-example .field-desc {
+    color: rgba(245,240,232,0.65);
+    font-size: 0.8rem;
+  }
+  .form-example .field-hint {
+    color: rgba(245,240,232,0.35);
+    font-size: 0.75rem;
+    font-style: italic;
+    margin-left: 0.25rem;
+  }
+
+  .csv-example {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  .csv-example pre {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.75);
+    margin: 0;
+    line-height: 1.8;
+    white-space: pre;
+  }
+  .csv-example .csv-header {
+    color: #c9a84c;
+  }
+  .csv-example .csv-comment {
+    color: rgba(245,240,232,0.3);
+    font-size: 0.73rem;
+  }
+
+  .cta-block {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    margin: 2.5rem 0;
+  }
+  .cta-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    color: #f5f0e8;
+    margin-bottom: 0.75rem;
+  }
+  .cta-block p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.65);
+    margin-bottom: 1.75rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-primary-gold {
+    background: linear-gradient(135deg, #c9a84c, #b8922f);
+    color: #0a0a1a;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.85rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+  }
+  .btn-primary-gold:hover { opacity: 0.88; }
+  .btn-ghost {
+    background: transparent;
+    color: #c9a84c;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.8rem 1.75rem;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s;
+    margin-left: 0.75rem;
+  }
+  .btn-ghost:hover { border-color: #c9a84c; }
+
+  .related-guides {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 8px;
+    padding: 2rem 1.75rem;
+    max-width: 860px;
+    margin: 0 auto 3rem;
+  }
+  .related-guides h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: #f5f0e8;
+    margin-bottom: 1rem;
+  }
+  .related-guides ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.65rem;
+  }
+  .related-guides li {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.5;
+  }
+  .link-gold {
+    color: #c9a84c;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .link-gold:hover { text-decoration: underline; }
+</style>
+</head>
+<body style="padding-top: 36px">
+<div id="seoCTABar">
+<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; text-align: center; padding: 0.5rem 1rem; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.85rem; font-weight: 600;">
+  ✦ Generate readings from client data automatically —
+  <a href="/signup.html?intent=practitioner" style="color: #0a0a1a; text-decoration: underline; margin-left: 0.4rem;">
+    Try AstroForge Practitioner free for 7 days →
+  </a>
+</div>
+</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="background-globes">
+  <div class="globe globe-1"></div>
+  <div class="globe globe-2"></div>
+  <div class="stars-overlay"></div>
+</div>
+<main class="container" id="main">
+  <header>
+    <div class="header-content">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/" class="nav-brand">
+          <span class="brand-icon">✦</span>
+          <span class="brand-text">AstroForge</span>
+        </a>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span class="hamburger-icon"></span>
+        </button>
+        <div class="nav-links">
+          <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+          <a href="/horary.html" class="nav-link">Horary Oracle</a>
+          <a href="/daily.html" class="nav-link">Daily Navigator</a>
+          <a href="/faq.html" class="nav-link">FAQ</a>
+          <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+          <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="guide-hero">
+    <span class="eyebrow">Practitioner Guide — Client Intake</span>
+    <h1>What Birth Data You Need from Astrology Clients (and Why It Matters)</h1>
+    <p class="hero-sub">
+      Date, exact time, and location — why all three are non-negotiable for a complete reading,
+      where clients can find their birth time, and what to do when they can't.
+    </p>
+    <p class="guide-meta">Updated April 2026 &nbsp;·&nbsp; 6 min read</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SECTION 1: The three data points -->
+  <div class="content-section">
+    <span class="section-label">Section 1</span>
+    <h2>The Three Data Points Every Reading Requires</h2>
+    <p>
+      A complete traditional natal chart requires exactly three things from the client.
+      Miss any one of them and significant parts of the chart become either unavailable
+      or unreliable.
+    </p>
+    <div class="three-points">
+      <div class="point-card">
+        <span class="point-icon">01</span>
+        <h3>Birth Date</h3>
+        <p>Day, month, and year. Determines all planetary positions. Ask for DD/MM/YYYY format to avoid month/day ambiguity — the 3rd of October and the 10th of March are easy to confuse.</p>
+      </div>
+      <div class="point-card">
+        <span class="point-icon">02</span>
+        <h3>Exact Birth Time</h3>
+        <p>To the minute if possible. Determines the Ascendant, house system, Lots, and all timing techniques that depend on them. This is the most commonly missing piece and the most consequential.</p>
+      </div>
+      <div class="point-card">
+        <span class="point-icon">03</span>
+        <h3>Birth Location</h3>
+        <p>City and country. Used to calculate local sidereal time, which determines the Ascendant and house cusps. A city name is enough — AstroForge resolves coordinates automatically.</p>
+      </div>
+    </div>
+    <p>
+      All three interact. The Ascendant is calculated from birth time and birth location combined.
+      Get either wrong and the entire house system shifts. For traditional astrology specifically,
+      this matters more than it does in modern sun-sign approaches — classical technique is built
+      on houses, dignity, and the Ascendant in a way that modern psychological astrology is not.
+    </p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SECTION 2: Why birth time is critical -->
+  <div class="content-section">
+    <span class="section-label">Section 2</span>
+    <h2>Why Birth Time Is the Most Critical Data Point</h2>
+    <p>
+      The Ascendant — the rising sign — changes sign roughly every two hours. The entire
+      house system is derived from it: all twelve houses, their cusps, and which planet
+      rules each house. Because traditional astrology assigns every life topic to a house
+      (career to the 10th, relationships to the 7th, finances to the 2nd and 8th, health
+      to the 1st and 6th), an incorrect birth time produces fundamentally wrong
+      house-based conclusions.
+    </p>
+    <p>
+      Consider a client born on a day when Mercury is in the 10th house at 9:00 AM, but
+      in the 11th house at 11:00 AM. Two hours separates "Mercury shapes your career" from
+      "Mercury shapes your social networks and friendships." Different sections, different
+      reading, different advice — same birth date.
+    </p>
+    <div class="callout-warning">
+      <p>
+        <strong>Specific techniques that fail without an accurate birth time:</strong> The Ascendant
+        and all house positions. The Lot of Fortune and Lot of Spirit (calculated from the
+        Ascendant). Annual profections and the Lord of the Year. Firdaria — which requires
+        knowing sect, which requires knowing whether the Sun is above or below the horizon
+        at birth. Essentially all of the timing and predictive layer of a traditional reading.
+      </p>
+    </div>
+    <p>
+      The planetary positions themselves — Sun, Moon, Mercury, and so on through Saturn —
+      are unaffected by birth time unless the Moon is changing sign within hours of the
+      birth (the Moon moves about 12–13 degrees per day, roughly half a sign). Even without
+      a birth time, you can produce a meaningful partial reading using planetary positions,
+      essential dignities, and aspect patterns. But you should be transparent with clients
+      about what is and is not included.
+    </p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SECTION 3: Where clients can find their birth time -->
+  <div class="content-section">
+    <span class="section-label">Section 3</span>
+    <h2>Where Clients Can Find Their Birth Time</h2>
+    <p>
+      Many clients assume they cannot find their birth time, but most have not looked
+      in the right places. Include these suggestions in your listing description or in a
+      post-purchase message template so clients know where to check before contacting you.
+    </p>
+    <ul class="checklist">
+      <li>
+        <strong>Birth certificate</strong> — The most reliable source. In the United States,
+        most states include the exact birth time on the long-form birth certificate. Short-form
+        "abstract" certificates often omit the time — clients should request the long form from
+        their state's vital records office if they only have a short form.
+      </li>
+      <li>
+        <strong>Hospital birth records</strong> — Every birth is logged by the hospital at
+        the time of delivery. Clients can request these records from the hospital where they
+        were born, usually through the medical records department. Response time varies but
+        these records are almost always available.
+      </li>
+      <li>
+        <strong>Baby book</strong> — Many parents recorded birth time in a baby book or
+        similar keepsake, especially for first children. Worth checking before going through
+        official channels.
+      </li>
+      <li>
+        <strong>Family records</strong> — Parents, grandparents, or older siblings who were
+        present at the birth often remember the time or wrote it down. A phone call is often
+        faster than requesting official documents.
+      </li>
+      <li>
+        <strong>Ancestry records and vital records databases</strong> — For clients born before
+        digital records, some countries digitized birth records that include time. Worth
+        checking ancestry.com or the equivalent national archive for older clients.
+      </li>
+    </ul>
+    <div class="callout-box">
+      <p>
+        <strong>A note on international clients:</strong> Birth time recording varies by
+        country. In the UK, birth time is not routinely included on the standard birth
+        certificate but may be in hospital records. In France, Germany, and many other
+        European countries, exact birth time is recorded on official civil registration
+        documents. In some countries — particularly in parts of Asia and Africa — birth
+        time recording was inconsistent in earlier decades. Set realistic expectations
+        for clients from regions where records may be incomplete.
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SECTION 4: When birth time is unknown -->
+  <div class="content-section">
+    <span class="section-label">Section 4</span>
+    <h2>When the Birth Time Is Unknown: Your Options</h2>
+    <p>
+      When a client genuinely cannot find their birth time, be honest about what that
+      means for the reading rather than filling in the gaps silently. Clients appreciate
+      transparency, and it protects your reputation against reviews that say "the reading
+      was wrong."
+    </p>
+    <p>
+      You have three legitimate options:
+    </p>
+    <div class="options-grid">
+      <div class="option-card">
+        <span class="option-tag tag-partial">Partial Reading</span>
+        <h3>Planets and Dignities Only</h3>
+        <p>Deliver a reading based on planetary positions, essential dignities, sign placements, and aspects — with a clear note that house-based analysis, Lots, profections, and timing are omitted due to unknown birth time. This is the most honest approach. Price it lower than a full reading.</p>
+      </div>
+      <div class="option-card">
+        <span class="option-tag tag-recommended">Approximation</span>
+        <h3>Solar Chart</h3>
+        <p>Place the Sun on the Ascendant and calculate houses from there. This gives a usable house structure and is a recognized technique in traditional practice. Be explicit with the client: "This uses a solar chart with the Sun as the Ascendant, as your birth time is unknown." Results are approximate, not exact.</p>
+      </div>
+      <div class="option-card">
+        <span class="option-tag tag-advanced">Advanced Service</span>
+        <h3>Rectification</h3>
+        <p>Using key life events (marriage, career changes, moves, accidents), an experienced astrologer works backwards to estimate the birth time. This is a separate, skilled service — charge accordingly. It takes hours and requires real astrological judgment. Offer it only if you are qualified to do it.</p>
+      </div>
+    </div>
+    <p>
+      If you use AstroForge for bulk generation and a client's birth time is missing, entering
+      12:00 (noon) as a placeholder produces a chart with a noon Ascendant. The generated PDF
+      will note that the birth time was not provided and indicate which sections are time-dependent.
+      This is a clean, transparent way to handle missing data at volume.
+    </p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SECTION 5: Collecting data cleanly -->
+  <div class="content-section">
+    <span class="section-label">Section 5</span>
+    <h2>How to Collect Birth Data Cleanly</h2>
+    <p>
+      The single most important rule: collect data at the point of order, not after.
+      Every message exchange after purchase adds delay to your turnaround, increases
+      the chance of a miscommunication, and risks a missed format (3/10 vs 10/3,
+      AM vs 24-hour time). Build data collection into the order process itself.
+    </p>
+    <p>
+      <strong>On Etsy:</strong> Use the "personalisation" or "buyer note" field in your listing.
+      In your listing settings, enable the buyer note and write specific instructions in the
+      prompt field. Something like: "Please enter: Full name, Date of birth (DD/MM/YYYY),
+      Exact birth time (HH:MM, state AM/PM or use 24-hour), Birth city and country."
+      Etsy displays this prompt on the checkout page — most buyers will fill it in correctly.
+    </p>
+    <p>
+      <strong>For direct clients (website, Instagram, word-of-mouth):</strong> Use a short
+      intake form. Google Forms or Typeform work fine. Keep it to five fields — more than
+      that and clients start abandoning the form.
+    </p>
+
+    <div class="form-example">
+      <span class="form-label">Sample Client Intake Form Fields</span>
+      <div class="form-row">
+        <span class="field-name">Full Name</span>
+        <span class="field-desc">As you'd like it to appear on the reading</span>
+      </div>
+      <div class="form-row">
+        <span class="field-name">Date of Birth</span>
+        <span class="field-desc">DD/MM/YYYY</span>
+        <span class="field-hint">e.g. 15/03/1990</span>
+      </div>
+      <div class="form-row">
+        <span class="field-name">Exact Birth Time</span>
+        <span class="field-desc">HH:MM — include AM/PM or use 24-hour format</span>
+        <span class="field-hint">e.g. 07:45 AM or 19:30</span>
+      </div>
+      <div class="form-row">
+        <span class="field-name">Birth City</span>
+        <span class="field-desc">City name only</span>
+        <span class="field-hint">e.g. Toronto</span>
+      </div>
+      <div class="form-row">
+        <span class="field-name">Birth Country</span>
+        <span class="field-desc">Country name or two-letter code</span>
+        <span class="field-hint">e.g. Canada or CA</span>
+      </div>
+    </div>
+
+    <p>
+      Specify format explicitly and always give an example. "DD/MM/YYYY — e.g. 15/03/1990"
+      eliminates the month/day confusion that causes the most common re-work. "HH:MM AM/PM
+      — e.g. 07:45 AM" is unambiguous. These small formatting choices save real time across
+      dozens of orders.
+    </p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SECTION 6: Format for bulk generation -->
+  <div class="content-section">
+    <span class="section-label">Section 6</span>
+    <h2>Formatting Data for Bulk PDF Generation</h2>
+    <p>
+      If you use AstroForge's Practitioner plan to generate readings in batch, your client
+      data goes into a CSV file. The format is strict — the system validates each row before
+      processing and rejects rows with malformed dates or missing fields, so it pays to
+      get the format right before uploading.
+    </p>
+    <p>
+      The CSV expects five columns:
+    </p>
+
+    <div class="csv-example">
+      <pre><span class="csv-header">name,date,time,city,country</span>
+<span class="csv-comment"># name: client's full name (used to label the PDF file)</span>
+<span class="csv-comment"># date: YYYY-MM-DD (ISO 8601 format)</span>
+<span class="csv-comment"># time: HH:MM in 24-hour format</span>
+<span class="csv-comment"># city: city name as a string</span>
+<span class="csv-comment"># country: country name or ISO 3166-1 alpha-2 code</span>
+Sarah Chen,1990-03-15,07:45,Toronto,CA
+James Okafor,1985-11-02,14:20,Lagos,NG
+Priya Sharma,1994-07-28,00:10,Mumbai,IN</pre>
+    </div>
+
+    <p>
+      The date format here (YYYY-MM-DD) differs from the intake form suggestion (DD/MM/YYYY)
+      deliberately — your intake form is designed to be unambiguous for clients, while the
+      CSV uses ISO 8601 for unambiguous machine parsing. You will need to reformat dates
+      when transferring from your intake form to the CSV. A simple spreadsheet formula
+      handles this: if the intake date is in A1 as DD/MM/YYYY, the formula
+      <code style="font-family:'Space Mono',monospace;font-size:0.82em;color:#c9a84c;">=TEXT(DATEVALUE(A1),"YYYY-MM-DD")</code> outputs the correct format.
+    </p>
+    <p>
+      Download the CSV template directly from your AstroForge dashboard — it includes
+      example rows and column validation hints. You can also share the template link
+      with clients who submit data in bulk (e.g., if you are generating readings for
+      a practitioner network or workshop group).
+    </p>
+    <div class="callout-box">
+      <p>
+        <strong>Handling unknown birth times in the CSV:</strong> Enter <code style="font-family:'Space Mono',monospace;font-size:0.85em;">12:00</code> as
+        the time placeholder. The generated PDF will note that the birth time was not
+        provided and flag which sections are time-dependent. Do not leave the time
+        field blank — it will cause the row to fail validation.
+      </p>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="/signup.html?intent=practitioner" class="btn-primary-gold">Download CSV Template</a>
+      <a href="/etsy-astrology-seller.html" class="btn-ghost">How Bulk PDF Works</a>
+    </div>
+    <p style="text-align:center;font-family:'Inter',sans-serif;font-size:0.78rem;color:rgba(245,240,232,0.35);margin-top:0.75rem;">
+      Template available after free sign-up &nbsp;·&nbsp; No card required for 7-day trial
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div class="content-section">
+    <div class="cta-block">
+      <h2>Ready to Turn Client Data Into PDFs Automatically?</h2>
+      <p>Upload your client CSV. AstroForge generates a complete traditional natal chart reading for each row and packages them as a labeled ZIP. Practitioner plan — $29/mo, 7-day free trial.</p>
+      <a href="/signup.html?intent=practitioner" class="btn-primary-gold">Start Your Free Trial</a>
+      <p style="font-size:0.78rem;color:rgba(245,240,232,0.35);margin-top:1rem;margin-bottom:0;">
+        No card required &nbsp;·&nbsp; Practitioner $29/mo after trial &nbsp;·&nbsp; Cancel any time
+      </p>
+    </div>
+  </div>
+
+  <!-- RELATED GUIDES -->
+  <div class="related-guides">
+    <h2>Related Guides</h2>
+    <ul>
+      <li><a class="link-gold" href="etsy-astrology-seller.html">AstroForge for Etsy Sellers</a> — Full feature overview for practitioners.</li>
+      <li><a class="link-gold" href="sell-astrology-readings-etsy.html">How to Sell Astrology Readings on Etsy</a> — What to include, listing tips, and scaling your production.</li>
+      <li><a class="link-gold" href="faq.html">FAQ</a> — Common questions about AstroForge answered.</li>
+      <li><a class="link-gold" href="traditional-vs-modern-astrology.html">Traditional vs. Modern Astrology</a> — Why classical techniques produce more specific readings.</li>
+    </ul>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="/#get-reading">Get a Reading</a></li>
+          <li><a href="/etsy-astrology-seller.html">For Etsy Sellers</a></li>
+          <li><a href="/techniques.html">Techniques</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="/faq.html">FAQ</a></li>
+          <li><a href="/sample-reading.html">Sample Reading</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+          <li><a href="mailto:bugs@traditional-astrology.com">Report a Bug</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AstroForge / Traditional Astrology. All rights reserved.</p>
+      <p class="footer-disclaimer">For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.</p>
+    </div>
+  </footer>
+</main>
+
+<script src="basic.js?v=20260319brand"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('[PWA] SW registered, scope:', reg.scope))
+        .catch(err => console.warn('[PWA] SW registration failed:', err));
+    });
+  }
+</script>
+
+<!-- AUTH MODALS -->
+<div id="authModalOverlay" class="modal-overlay hidden">
+  <div class="modal-card">
+    <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+    <div id="loginView" class="auth-view">
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+      <form id="loginForm" class="auth-form">
+        <div class="form-field"><label for="loginEmail">Email Address</label><input type="email" id="loginEmail" required autocomplete="username"/></div>
+        <div class="form-field"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required autocomplete="current-password"/></div>
+        <button type="submit" class="btn-cta auth-submit"><span class="btn-text">Sign In</span><span class="btn-loading hidden">Signing In...</span></button>
+        <div id="loginError" class="auth-error-msg hidden"></div>
+      </form>
+      <div class="auth-footer"><p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p></div>
+    </div>
+    <div id="registerView" class="auth-view hidden">
+      <h2 class="auth-title">Create Account</h2>
+      <p class="auth-sub">Save your natal chart securely and access it anywhere.</p>
+      <form id="registerForm" class="auth-form">
+        <div class="form-field"><label for="regEmail">Email Address</label><input type="email" id="regEmail" required autocomplete="email"/></div>
+        <div class="form-field"><label for="regPassword">Password</label><input type="password" id="regPassword" required autocomplete="new-password" minlength="8"/></div>
+        <button type="submit" class="btn-cta auth-submit"><span class="btn-text">Create Account</span><span class="btn-loading hidden">Creating...</span></button>
+        <div id="registerError" class="auth-error-msg hidden"></div>
+      </form>
+      <div class="auth-footer"><p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p></div>
+    </div>
+  </div>
+</div>
+<script type="module" src="/js/auth.js?v=astro-v5"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggles = document.querySelectorAll('.mobile-menu-toggle');
+    toggles.forEach(function(toggle) {
+      if (toggle.dataset.navAttached) return;
+      toggle.dataset.navAttached = 'true';
+      toggle.addEventListener('click', function() {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+        this.classList.toggle('active');
+        var navLinks = this.nextElementSibling;
+        if (navLinks && navLinks.classList.contains('nav-links')) {
+          navLinks.classList.toggle('active');
+        }
+      });
+    });
+  });
+</script>
+  <script src="/consent.js"></script>
+</body>
+</html>

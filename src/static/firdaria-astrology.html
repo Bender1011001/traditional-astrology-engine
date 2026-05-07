@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RCNDWN4XVN');</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Firdaria — The Medieval Planetary Period System Explained</title>
+<meta name="description" content="Firdaria divides life into planetary sub-periods lasting years. Learn the sequence, day/night chart differences, and how to read the active period lord in your natal chart."/>
+<meta name="keywords" content="firdaria astrology, firdaria planetary periods, firdar medieval astrology, day chart firdaria sequence, night chart firdaria, planetary period lord, firdaria sub-periods, Chaldean order periods, traditional astrology timing, firdaria vs profections, life chapter astrology, nodal periods firdaria"/>
+<meta content="#0a0a1a" name="theme-color"/>
+<link href="https://traditional-astrology.com/firdaria-astrology.html" rel="canonical"/>
+<meta property="og:title" content="Firdaria — The Medieval Planetary Period System Explained"/>
+<meta property="og:description" content="Firdaria divides life into decade-long planetary periods with nested sub-periods. Learn the day and night chart sequences and how to read the active period lord."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://traditional-astrology.com/firdaria-astrology.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:image" content="https://traditional-astrology.com/og-card.png"/>
+<meta name="twitter:image" content="https://traditional-astrology.com/og-card.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What are firdaria in astrology?","acceptedAnswer":{"@type":"Answer","text":"Firdaria (singular: firdar) is a medieval Arabic timing system that divides life into a sequence of planetary periods, each governed by a specific planet. Major periods last 7–12 years, with seven nested sub-periods within each. The word derives from the Persian 'fardar.' Unlike annual profections, firdaria operate on a decade-long timescale and reveal the overarching planetary 'chapter' a person is living through."}},
+{"@type":"Question","name":"What is the firdaria sequence for a day chart?","acceptedAnswer":{"@type":"Answer","text":"For day charts (Sun above the horizon at birth), the firdaria sequence begins with the Sun and proceeds: Sun (10 years), Venus (8 years), Mercury (13 years), Moon (9 years), Saturn (11 years), Jupiter (12 years), Mars (7 years), North Node (3 years), South Node (2 years). The total cycle is 75 years, after which it repeats from the Sun."}},
+{"@type":"Question","name":"How do firdaria sub-periods work?","acceptedAnswer":{"@type":"Answer","text":"Each major firdar period is subdivided into seven sub-periods, one for each classical planet, proceeding in Chaldean order starting from the major period lord. For example, in a Sun firdar the sub-periods cycle: Sun/Sun, Sun/Venus, Sun/Mercury, Sun/Moon, Sun/Saturn, Sun/Jupiter, Sun/Mars. Each sub-period blends the themes of both the major lord and the sub-lord."}},
+{"@type":"Question","name":"How do firdaria differ from annual profections?","acceptedAnswer":{"@type":"Answer","text":"Firdaria and annual profections operate at different time scales and should be used together. Firdaria give the decade-level planetary theme — the overarching chapter. Profections give the year-level focus — which house domain is activated annually. Transits and solar returns then trigger specific events within those layered periods. Major life events tend to occur when all three layers align simultaneously."}}
+]}</script>
+
+<style>
+.firdar-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+.firdar-table th {
+  background: rgba(201,168,76,0.15);
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-strong);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.firdar-table td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+.firdar-table tr:last-child td {
+  border-bottom: none;
+}
+.firdar-table tr:hover td {
+  background: rgba(212,175,55,0.04);
+}
+.firdar-planet {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--text);
+  font-weight: 600;
+}
+.firdar-years {
+  color: var(--gold);
+  font-weight: 600;
+}
+.firdar-node {
+  color: var(--text-dim);
+  font-style: italic;
+}
+@media (max-width: 600px) {
+  .firdar-table th, .firdar-table td { padding: 0.55rem 0.6rem; font-size: 0.85rem; }
+}
+.sequence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+@media (max-width: 680px) {
+  .sequence-grid { grid-template-columns: 1fr; }
+}
+.sequence-block {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+.sequence-block h3 {
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.sequence-block ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.sequence-block ol li strong {
+  color: var(--text);
+}
+</style>
+</head>
+
+<body style="padding-top: 36px">
+<div id="seoCTABar">
+<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; text-align: center; padding: 0.5rem 1rem; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.85rem; font-weight: 600;">
+    ✦ See your active firdaria period in your natal chart
+    <a href="/#get-reading" style="color: #0a0a1a; text-decoration: underline; margin-left: 0.4rem;">
+        Get your reading →
+    </a>
+</div>
+</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="background-globes">
+<div class="globe globe-1"></div>
+<div class="globe globe-2"></div>
+<div class="stars-overlay"></div>
+</div>
+<main class="container" id="main">
+<header>
+<div class="header-content">
+<h1>FIRDARIA — MEDIEVAL PLANETARY PERIODS</h1>
+<div class="ornament"></div>
+<p class="subtitle">The Arabic timing system that divides life into decade-long planetary chapters, each governed by a specific planet determined by your sect.</p>
+<nav class="site-nav" aria-label="Main navigation" style="margin-top:2rem;">
+<a href="/" class="nav-brand"><span class="brand-icon">✦</span><span class="brand-text">Traditional Astrology</span></a>
+<button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false"><span class="hamburger-icon"></span></button>
+<div class="nav-links">
+<a href="/#get-reading" class="nav-link">Get Your Reading</a>
+<a href="/horary.html" class="nav-link">Horary Oracle</a>
+<a href="/daily.html" class="nav-link">Daily Navigator</a>
+<a href="/#how-it-works" class="nav-link">How It Works</a>
+<a id="navLoginBtn" href="#" class="nav-link">Sign In</a>
+<a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden">My Account</a>
+</div>
+</nav>
+</div>
+</header>
+
+<section class="basic-view"><div class="basic-card">
+<h2 class="section-title">What Firdaria Are</h2>
+<p class="section-subtitle">A medieval Arabic timing system that reveals the overarching planetary chapter of a life.</p>
+<p>Firdaria (singular: <em>firdar</em>) is a timing system of medieval Arabic astrology that divides a human life into a sequence of planetary periods, each governed by a single ruling planet. The word derives from the Persian <em>fardar</em>, and the technique appears in the works of Abu Ma'shar (9th century CE) and was transmitted through medieval Latin astrology into the Renaissance tradition.</p>
+<p>Unlike annual profections, which cycle a house forward every year, firdaria operate on a much longer timescale. Major periods last between 7 and 13 years, with seven nested sub-periods within each — creating a double layer of planetary governance that spans an entire lifetime. The firdaria reveal the decade-level <em>theme</em> of a life: what planetary energy is running as the background frequency, shaping what opportunities arise, what challenges recur, and which natal promises are most likely to ripen during that span.</p>
+<p>The system's most important feature is its dependence on <strong>sect</strong>. Whether the Sun was above or below the horizon at birth determines which sequence applies and which planet begins the chain. Applying the wrong sequence — day chart rules to a night birth — produces a fundamentally incorrect map. This is not an aesthetic choice; it is a structural distinction built into the technique's design.</p>
+</div></section>
+
+<section class="basic-view"><div class="basic-card">
+<h2 class="section-title">The Day Chart Sequence</h2>
+<p class="section-subtitle">For nativities where the Sun was above the horizon at birth (a diurnal or day chart).</p>
+<p>A day chart is one where the Sun is in houses 7 through 12 — above the Ascendant-Descendant axis, meaning the birth occurred between sunrise and sunset. For day charts, the firdaria sequence begins with the <strong>Sun</strong> and proceeds in the following fixed order:</p>
+
+<div class="sequence-grid">
+<div class="sequence-block">
+<h3>Day Chart Sequence</h3>
+<ol>
+<li><strong>Sun</strong> — 10 years</li>
+<li><strong>Venus</strong> — 8 years</li>
+<li><strong>Mercury</strong> — 13 years</li>
+<li><strong>Moon</strong> — 9 years</li>
+<li><strong>Saturn</strong> — 11 years</li>
+<li><strong>Jupiter</strong> — 12 years</li>
+<li><strong>Mars</strong> — 7 years</li>
+<li><strong>North Node</strong> — 3 years</li>
+<li><strong>South Node</strong> — 2 years</li>
+</ol>
+</div>
+<div class="sequence-block">
+<h3>Period Lengths</h3>
+<table class="firdar-table">
+<thead><tr><th>Planet</th><th>Duration</th></tr></thead>
+<tbody>
+<tr><td class="firdar-planet">Sun</td><td class="firdar-years">10 years</td></tr>
+<tr><td class="firdar-planet">Venus</td><td class="firdar-years">8 years</td></tr>
+<tr><td class="firdar-planet">Mercury</td><td class="firdar-years">13 years</td></tr>
+<tr><td class="firdar-planet">Moon</td><td class="firdar-years">9 years</td></tr>
+<tr><td class="firdar-planet">Saturn</td><td class="firdar-years">11 years</td></tr>
+<tr><td class="firdar-planet">Jupiter</td><td class="firdar-years">12 years</td></tr>
+<tr><td class="firdar-planet">Mars</td><td class="firdar-years">7 years</td></tr>
+<tr><td class="firdar-node">North Node</td><td class="firdar-years">3 years</td></tr>
+<tr><td class="firdar-node">South Node</td><td class="firdar-years">2 years</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<p>The total cycle spans <strong>75 years</strong>, after which it repeats beginning again with the Sun. The sequence is fixed and does not vary based on natal chart placements — what varies is the planet's condition in the natal chart, which determines how it performs as period lord. A person born in a day chart who is currently in their 40s will likely be in their Saturn or Jupiter firdar, depending on exact birth year.</p>
+</div></section>
+
+<section class="basic-view"><div class="basic-card">
+<h2 class="section-title">The Night Chart Sequence</h2>
+<p class="section-subtitle">For nativities where the Sun was below the horizon at birth (a nocturnal or night chart).</p>
+<p>A night chart is one where the Sun occupies houses 1 through 6 — below the Ascendant-Descendant axis, meaning the birth occurred between sunset and sunrise. For night charts, the firdaria sequence begins with the <strong>Moon</strong> rather than the Sun. This is not a minor adjustment; it shifts every period's starting age by a full decade and changes which planet governs the first years of life.</p>
+
+<div class="sequence-grid">
+<div class="sequence-block">
+<h3>Night Chart Sequence</h3>
+<ol>
+<li><strong>Moon</strong> — 9 years</li>
+<li><strong>Saturn</strong> — 11 years</li>
+<li><strong>Jupiter</strong> — 12 years</li>
+<li><strong>Mars</strong> — 7 years</li>
+<li><strong>Sun</strong> — 10 years</li>
+<li><strong>Venus</strong> — 8 years</li>
+<li><strong>Mercury</strong> — 13 years</li>
+<li><strong>North Node</strong> — 3 years</li>
+<li><strong>South Node</strong> — 2 years</li>
+</ol>
+</div>
+<div class="sequence-block">
+<h3>Key Difference from Day Chart</h3>
+<p style="color:var(--text-muted);line-height:1.8;font-size:0.95rem;">The night chart sequence preserves the same seven planets and the same individual period lengths — the total remains 75 years. What changes is the <em>starting planet</em> (Moon instead of Sun) and thus the order in which periods arrive throughout life.</p>
+<p style="color:var(--text-muted);line-height:1.8;font-size:0.95rem;margin-top:0.75rem;">A night-born child's first decade is governed by the Moon, emphasizing instinct, family, and the maternal lineage. A day-born child's first decade is governed by the Sun, emphasizing vitality, identity, and the father's lineage. This is a meaningful structural difference, not an arbitrary one.</p>
+</div>
+</div>
+
+<p>Applying the day chart sequence to a night birth — a common error — produces a systematically incorrect map of life periods. Before calculating firdaria for any chart, confirm sect by checking whether the natal Sun is above or below the horizon.</p>
+</div></section>
+
+<section class="basic-view"><div class="basic-card">
+<h2 class="section-title">Sub-Periods Within Each Firdar</h2>
+<p class="section-subtitle">Each major period contains seven nested sub-periods, each co-governed by a second planet in Chaldean order.</p>
+<p>Every major firdar period is subdivided into <strong>seven sub-periods</strong>, one for each classical planet. The sub-periods cycle through the Chaldean order — Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon — but they begin from the major period lord rather than Saturn. The major period lord always takes the first sub-period, then the sequence continues from there.</p>
+
+<p>For example, in a <strong>Sun firdar</strong> (10-year major period), the sub-periods proceed:</p>
+<ul class="grid-container" style="margin-top:1rem;">
+<li><strong>Sun / Sun</strong> — Opens the Sun firdar. The themes of Sun are doubly emphasized: identity, vitality, authority figures, the father, public recognition.</li>
+<li><strong>Sun / Venus</strong> — Brings Venusian themes under the Sun's aegis: relationships, beauty, pleasure, financial matters surface within the decade's broader Sun narrative.</li>
+<li><strong>Sun / Mercury</strong> — Communication, travel, trade, and intellectual pursuits become prominent sub-themes within the Sun chapter.</li>
+<li><strong>Sun / Moon</strong> — The public, the home, women, and emotional matters enter the period's focus.</li>
+<li><strong>Sun / Saturn</strong> — A more demanding and restrictive sub-period; structure, discipline, and tests arrive within the Sun's decade.</li>
+<li><strong>Sun / Jupiter</strong> — Growth, abundance, and opportunity expand within the Sun period, often a rewarding sub-period.</li>
+<li><strong>Sun / Mars</strong> — Drive, conflict, physical energy, and competitive matters characterize the closing sub-period of the Sun firdar.</li>
+</ul>
+<p style="margin-top:1.25rem;">The proportional length of each sub-period is calculated by dividing the major period's years into seven equal parts. In a 10-year Sun firdar, each sub-period is approximately 17 months. In a 12-year Jupiter firdar, each sub-period is approximately 20–21 months. The sub-period lord acts as a modifier and co-governor — it does not override the major lord but adds a secondary layer of signification that colors events.</p>
+</div></section>
+
+<section class="basic-view"><div class="basic-card">
+<h2 class="section-title">How to Read the Active Period Lord</h2>
+<p class="section-subtitle">The natal condition of the period lord determines the quality, not the identity, of what the decade delivers.</p>
+<p>Identifying the active firdar is only half the work. The more important step is reading the <strong>natal condition of the period lord</strong> — because that condition determines whether the planet performs at its best, worst, or somewhere in the middle across the decade it governs.</p>
+<ul class="grid-container">
+<li><strong>House placement:</strong> The natal house the period lord occupies reveals which area of life becomes most activated during the firdar. A period lord in the 7th house will tend to bring relationship events, legal matters, or partnerships to the foreground.</li>
+<li><strong>Essential dignity:</strong> A planet in domicile or exaltation performs with strength and coherence during its period. A planet in detriment or fall, or entirely lacking dignity (peregrine), may deliver the period's themes in a diminished, distorted, or inconsistent way.</li>
+<li><strong>Accidental dignity:</strong> Angular planets (1st, 4th, 7th, 10th houses) are strengthened in their periods. Cadent planets (3rd, 6th, 9th, 12th houses) are weakened. A period lord in the 12th house, even if essentially dignified, may deliver themes in hidden, blocked, or self-undermining ways.</li>
+<li><strong>Aspects received:</strong> Benefic planets applying to the period lord, or the period lord applying to its own domicile, improve the period. Malefic planets afflicting the period lord — especially by square or opposition without reception — introduce difficulty, conflict, or reversal during that decade.</li>
+</ul>
+<p style="margin-top:1.25rem;"><strong>Practical example:</strong> A Jupiter firdar for a native with Jupiter dignified in Sagittarius in the 10th house is typically a decade of significant professional expansion, recognition, and increase. The same Jupiter firdar for a native with Jupiter in Gemini (detriment) in the 6th house may bring growth through service, health challenges, or a career domain involving illness, routines, or subordinate roles — not the triumphant expansion, but still Jupiter's themes operating through a less favorable filter.</p>
+</div></section>
+
+<section class="basic-view"><div class="basic-card">
+<h2 class="section-title">Firdaria vs. Annual Profections — Using Both Together</h2>
+<p class="section-subtitle">Two timing layers at different scales; major events occur when both align.</p>
+<p>Firdaria and annual profections answer different questions at different scales. They are not alternatives — they are layers of the same timing architecture. Using them in isolation produces incomplete analysis; using them together produces a precision that neither achieves alone.</p>
+<ul class="grid-container">
+<li><strong>Firdaria:</strong> The decade-level layer. Which planet is the governing "landlord" of this chapter of life? What natal promise is most ripe for activation during this 7–13 year span?</li>
+<li><strong>Annual profections:</strong> The year-level layer. Which house domain — and which Lord of the Year — is the annual focus? Does the Lord of the Year happen to be the same planet as the active firdar lord? If so, that year is doubly emphasized.</li>
+<li><strong>Solar returns:</strong> The month-level confirmation. How does the Lord of the Year appear in the Solar Return chart? What houses are activated? What transits hit the relevant planets?</li>
+<li><strong>Transits:</strong> The event-level trigger. Transits to the firdar lord, the profection lord, or the natal significator of an expected event precipitate specific happenings within the broader period.</li>
+</ul>
+<p style="margin-top:1.25rem;">A reliable traditional rule: major life events tend to occur when the firdar lord, the profection lord, and a transit all activate the same natal promise simultaneously. One layer alone rarely produces an event of lasting significance. The convergence of layers is what makes a year pivotal — and understanding firdaria gives you the foundational decade-level framework within which all other layers operate.</p>
+</div></section>
+
+<section class="basic-view"><div class="basic-card">
+<h2 class="section-title">The Nodal Periods at the End of the Cycle</h2>
+<p class="section-subtitle">The final five years of the firdaria cycle — governed by the North and South Nodes — are distinct in character from the planetary periods.</p>
+<p>Both the day and night sequences end with a <strong>North Node period (3 years)</strong> followed by a <strong>South Node period (2 years)</strong>, totaling 5 years before the sequence repeats. These nodal periods are frequently overlooked in firdaria work, in part because the nodes are not planets and do not have the same range of natal configurations as the seven classical bodies. But their effects are real and distinct.</p>
+<ul class="grid-container">
+<li><strong>North Node firdar (3 years):</strong> Tends to bring increase, new connections, social expansion, and a widening of circumstances. Events often feel somewhat uncontrolled or scattered — there is growth, but it may arrive in unfamiliar forms or through networks and alliances rather than personal effort. The North Node's house placement in the natal chart governs where this expansion manifests.</li>
+<li><strong>South Node firdar (2 years):</strong> Tends to bring release, conclusions, separations, and the shedding of what has been accumulated. This is not necessarily tragic — it can be deliberate simplification, completion of long-running matters, or departure from situations that have run their course. The South Node's house placement shows the domain where release occurs.</li>
+<li><strong>Planets conjunct the nodes:</strong> If a classical planet conjuncts either node natally, its significations are blended into the nodal period and substantially modify the period's character. A natal Venus conjunct the North Node, for instance, enriches the North Node firdar with Venusian themes — relationships, beauty, finance, pleasure.</li>
+<li><strong>Timing note:</strong> For a day-born native, the nodal periods arrive in the early 70s (ages 70–75), if the person reaches them. For a night-born native, they arrive in the mid-60s (ages 65–70). This demographic reality means many practitioners encounter them in the charts of older clients or retrospectively in historical figures.</li>
+</ul>
+</div></section>
+
+<section class="basic-view"><div class="basic-card" style="text-align:center;">
+<h2 class="section-title">See Your Active Firdaria in the Daily Navigator</h2>
+<p>AstroForge's Daily Navigator shows your active firdaria period — major lord and sub-lord — for any date past, present, or future, alongside your annual profection and current transits. Free with an account.</p>
+<a href="/daily.html" class="btn-cta" style="display:inline-block;margin-top:1.5rem;padding:0.75rem 2rem;background:linear-gradient(135deg,#c9a84c,#b8922f);color:#0a0a1a;font-weight:700;border-radius:6px;text-decoration:none;">Open Daily Navigator →</a>
+</div></section>
+
+<div class="basic-card related-guides"><h2 class="section-title">Related Guides</h2>
+<ul class="grid-container">
+<li><a class="link-gold" href="annual-profections.html">Annual Profections</a> — The annual timing layer above firdaria.</li>
+<li><a class="link-gold" href="planetary-periods.html">Planetary Periods Overview</a> — All classical timing systems compared.</li>
+<li><a class="link-gold" href="planetary-dignities.html">Planetary Dignities</a> — How to read period lords by essential strength.</li>
+<li><a class="link-gold" href="sect-in-astrology.html">Sect in Astrology</a> — The day/night distinction that determines which firdaria sequence applies.</li>
+<li><a class="link-gold" href="zodiacal-releasing.html">Zodiacal Releasing</a> — The Hellenistic timing technique for peak life periods.</li>
+<li><a class="link-gold" href="lot-of-fortune.html">Lot of Fortune</a> — Arabic Part used alongside firdaria in traditional timing work.</li>
+</ul></div>
+
+<footer class="site-footer">
+<div class="footer-columns">
+<div class="footer-col"><h3>Product</h3><ul><li><a href="/#get-reading">Get a Reading</a></li><li><a href="techniques.html">Techniques</a></li><li><a href="index.html#pricing">Pricing</a></li></ul></div>
+<div class="footer-col"><h3>Resources</h3><ul><li><a href="faq.html">FAQ</a></li><li><a href="about.html">About</a></li><li><a href="mailto:support@traditional-astrology.com">Support</a></li></ul></div>
+<div class="footer-col"><h3>Legal</h3><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li></ul></div>
+<div class="footer-col"><h3>Contact</h3><ul><li><a href="mailto:support@traditional-astrology.com">Support</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 Traditional Astrology. All rights reserved.</p>
+<p class="footer-disclaimer">For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.</p>
+</div>
+</footer>
+</main>
+<script src="basic.js"></script>
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js');});}</script>
+<div id="authModalOverlay" class="modal-overlay hidden"><div class="modal-card">
+<button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+<div id="loginView" class="auth-view">
+<h2 class="auth-title">Welcome Back</h2><p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+<form id="loginForm" class="auth-form">
+<div class="form-field"><label for="loginEmail">Email Address</label><input type="email" id="loginEmail" required autocomplete="username"/></div>
+<div class="form-field"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required autocomplete="current-password"/></div>
+<button type="submit" class="btn-cta auth-submit"><span class="btn-text">Sign In</span><span class="btn-loading hidden">Signing In...</span></button>
+<div id="loginError" class="auth-error-msg hidden"></div>
+</form>
+<div class="auth-footer"><p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p></div>
+</div>
+<div id="registerView" class="auth-view hidden">
+<h2 class="auth-title">Create Account</h2><p class="auth-sub">Save your natal chart securely and access it anywhere.</p>
+<form id="registerForm" class="auth-form">
+<div class="form-field"><label for="regEmail">Email Address</label><input type="email" id="regEmail" required autocomplete="email"/></div>
+<div class="form-field"><label for="regPassword">Password</label><input type="password" id="regPassword" required autocomplete="new-password" minlength="8"/></div>
+<button type="submit" class="btn-cta auth-submit"><span class="btn-text">Create Account</span><span class="btn-loading hidden">Creating...</span></button>
+<div id="registerError" class="auth-error-msg hidden"></div>
+</form>
+<div class="auth-footer"><p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p></div>
+</div>
+</div></div>
+<script type="module" src="/js/auth.js?v=astro-v5"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){var toggles=document.querySelectorAll('.mobile-menu-toggle');toggles.forEach(function(toggle){if(toggle.dataset.navAttached)return;toggle.dataset.navAttached='true';toggle.addEventListener('click',function(){var expanded=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!expanded);this.classList.toggle('active');var navLinks=this.nextElementSibling;if(navLinks&&navLinks.classList.contains('nav-links')){navLinks.classList.toggle('active');}});});});</script>
+  <script src="/consent.js"></script>
+</body>
+</html>

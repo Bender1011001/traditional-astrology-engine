@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TJNM5XVD');</script>
-  <!-- End Google Tag Manager -->
-
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Forensic Case Studies | Traditional Astrology Proofs</title>
   <meta name="description" content="Read forensic case studies demonstrating the accuracy of classical astrological techniques on famous figures and historical events." />
@@ -25,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=mobilenav3" />
+  <link rel="stylesheet" href="style.css?v=rev20260504premtrial1" />
   
   <style>
     .case-grid {
@@ -140,7 +136,8 @@
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
       <a href="/daily.html" class="nav-link">Daily Navigator</a>
       <a href="/case-studies.html" class="nav-link" style="color: var(--gold);">Case Studies</a>
-      <a href="/dashboard.html" class="nav-link hidden" id="navAccountBtn" aria-label="My Account">My Account</a>
+      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
     </div>
   </nav>
 
@@ -271,5 +268,36 @@
       });
     });
   </script>
+
+  <!-- AUTH MODALS -->
+  <div id="authModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+      <div id="loginView" class="auth-view">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-field"><label for="loginEmail">Email Address</label><input type="email" id="loginEmail" required autocomplete="username" /></div>
+          <div class="form-field"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required autocomplete="current-password" /></div>
+          <button type="submit" class="btn-cta auth-submit"><span class="btn-text">Sign In</span><span class="btn-loading hidden">Signing In...</span></button>
+          <div id="loginError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer"><p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p></div>
+      </div>
+      <div id="registerView" class="auth-view hidden">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-sub">Save your charts securely and access them anywhere.</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-field"><label for="regEmail">Email Address</label><input type="email" id="regEmail" required autocomplete="email" /></div>
+          <div class="form-field"><label for="regPassword">Password</label><input type="password" id="regPassword" required autocomplete="new-password" minlength="8" /></div>
+          <button type="submit" class="btn-cta auth-submit"><span class="btn-text">Create Account</span><span class="btn-loading hidden">Creating...</span></button>
+          <div id="registerError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer"><p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p></div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script src="/consent.js"></script>
 </body>
 </html>

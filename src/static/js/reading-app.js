@@ -4,7 +4,7 @@
  * Flow:
  * 1. User fills birth form → submit
  * 2. Free: Calls /api/v1/premium/guest/request → polls → shows full reading (up to IP limit)
- * 3. After IP limit hit: Shows teaser + paywall ($7 Full Reading / $29 Premium)
+ * 3. After visitor limit hit: Shows teaser + paywall ($25 Full Reading / $69 Premium)
  * 4. Paid: Redirects to Stripe → returns with session_id → calls /generate-paid → polls → shows full reading
  */
 
@@ -13,8 +13,27 @@ import { renderChartWheel } from './chart-graphics.js';
 
 // ─── State ───
 let chartPayload = null;
+let currentReadingContext = null;
 let loadingStartTime = null;
 let elapsedTimerInterval = null;
+
+function trackConversionEvent(eventName, params = {}) {
+    try {
+        if (typeof window.gtag === "function") {
+            window.gtag("event", eventName, {
+                event_category: "reading_funnel",
+                ...params,
+            });
+        }
+    } catch (_) {
+        // Analytics must never interrupt chart generation or checkout.
+    }
+}
+
+window.printReading = function () {
+    trackConversionEvent("print_save_pdf");
+    window.print();
+};
 
 // ─── Loading Messages ───
 const LOADING_MSGS = [
@@ -40,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (exportPdfBtn) {
         exportPdfBtn.addEventListener('click', () => {
-            window.print();
+            printReading();
         });
     }
 
@@ -85,6 +104,7 @@ function setupForm() {
             city: document.getElementById("birthCity").value,
             state: document.getElementById("birthState")?.value || "",
             name: "Guest",
+            time_unknown: Boolean(timeUnknown),
         };
 
         if (!chartPayload.date || !chartPayload.city) {
@@ -95,6 +115,7 @@ function setupForm() {
         // Save for after payment redirect
         localStorage.setItem("ta_chart_payload", JSON.stringify(chartPayload));
 
+        trackConversionEvent("free_chart_submit");
         showLoading();
         await requestFreeReading(chartPayload);
     });
@@ -135,6 +156,7 @@ async function requestFreeReading(payload) {
             if (resp.status === 402) {
                 // Free limit reached — show paywall
                 hideLoading();
+                trackConversionEvent("free_chart_paywall", { reason: "visitor_limit" });
                 showPaywall();
                 return;
             }
@@ -155,7 +177,17 @@ async function requestFreeReading(payload) {
         // Instant free reading (new flow) — no polling needed
         if (data.instant && data.reading_html) {
             hideLoading();
-            showFreeReading(data.reading_html, data.free_readings_remaining);
+            trackConversionEvent("free_chart_success", {
+                free_readings_remaining: data.free_readings_remaining,
+                chart_event_id: data.chart_event_id,
+            });
+            showFreeReading(
+                data.reading_html,
+                data.free_readings_remaining,
+                data.chart_event_id,
+                data.reading_hash,
+                data.chart_summary
+            );
             return;
         }
 
@@ -168,6 +200,7 @@ async function requestFreeReading(payload) {
         throw new Error("Unexpected response format.");
     } catch (err) {
         hideLoading();
+        trackConversionEvent("free_chart_error", { error: String(err.message || err) });
         showError(err.message);
     }
 }
@@ -224,6 +257,7 @@ function checkForPaidReturn() {
 
     // Clean URL
     window.history.replaceState({}, document.title, "/");
+    trackConversionEvent("paid_return");
 
     // Restore chart data
     try {
@@ -242,6 +276,8 @@ async function generatePaidReading(sessionId) {
     try {
         const resp = await apiFetch(`/api/v1/guest/generate-paid?session_id=${encodeURIComponent(sessionId)}`, {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: "{}",
         });
 
         if (!resp.ok) {
@@ -250,22 +286,37 @@ async function generatePaidReading(sessionId) {
         }
 
         const data = await resp.json();
+        trackConversionEvent("paid_generation_started", { tier: data.tier || "unknown" });
         pollForCompletion(data.task_id, -1); // -1 = paid, no limit
     } catch (err) {
         hideLoading();
+        trackConversionEvent("paid_generation_error", { error: String(err.message || err) });
         showError(err.message);
     }
 }
 
 // ─── UI: Show Free Reading (HTML, instant) ───
-function showFreeReading(readingHtml, freeRemaining) {
+function showFreeReading(readingHtml, freeRemaining, chartEventId, readingHash, chartSummary) {
     const section = document.getElementById("readingSection");
     const content = document.getElementById("readingContent");
     if (!section || !content) return;
 
+    currentReadingContext = {
+        chart_event_id: chartEventId || null,
+        reading_hash: readingHash || hashStr(JSON.stringify({ chartPayload, readingHtml })),
+        source: "b2c_free_chart",
+        birth: chartPayload,
+        meta: {
+            chart_summary: chartSummary || {},
+            free_readings_remaining: freeRemaining,
+        },
+        time_unknown: Boolean(chartPayload?.time_unknown),
+    };
+
     content.innerHTML = `
+        ${buildInstantConversionBar(freeRemaining)}
         ${readingHtml}
-        ${buildFeedbackWidget()}
+        ${buildFeedbackWidget("free")}
     `;
 
     // Render the natal chart wheel if data is embedded in the reading HTML
@@ -283,9 +334,207 @@ function showFreeReading(readingHtml, freeRemaining) {
     section.scrollIntoView({ behavior: "smooth", block: "start" });
 
     // Attach feedback & action handlers
-    attachFeedbackHandlers(content);
+    attachFeedbackHandlers(content, "free");
     const chartActions = document.getElementById("chartActions");
     if (chartActions) chartActions.classList.remove("hidden");
+
+    // Kick off the free LLM premium trial simultaneously in the background
+    kickOffFreePremiumTrial(chartPayload, chartEventId);
+}
+
+// ─── Free Premium Trial — Background LLM Kickoff ───────────────────────────
+async function kickOffFreePremiumTrial(payload, chartEventId) {
+    const content = document.getElementById("readingContent");
+    if (!content) return;
+
+    // Insert the top announcement banner at the very top of reading content
+    const topBannerEl = document.createElement("div");
+    topBannerEl.id = "premiumTrialTopBanner";
+    topBannerEl.innerHTML = buildPremiumTrialTopBanner();
+    content.insertAdjacentElement("afterbegin", topBannerEl);
+
+    // Append the loading section below all existing content
+    const loadingEl = document.createElement("div");
+    loadingEl.id = "premiumTrialSection";
+    loadingEl.innerHTML = buildPremiumLoadingSection();
+    content.appendChild(loadingEl);
+
+    try {
+        const resp = await apiFetch("/api/v1/premium/free-trial/request", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+
+        if (!resp.ok) {
+            _hidePremiumTrialSection();
+            return;
+        }
+
+        const data = await resp.json();
+
+        if (data.status === "limit_reached") {
+            _hidePremiumTrialSection();
+            _hidePremiumTopBanner();
+            trackConversionEvent("premium_trial_limit_reached");
+            return;
+        }
+
+        if (data.status === "started" && data.task_id) {
+            trackConversionEvent("premium_trial_started");
+            pollForFreePremium(data.task_id, chartEventId);
+            return;
+        }
+
+        _hidePremiumTrialSection();
+    } catch (err) {
+        _hidePremiumTrialSection();
+        console.warn("Free premium trial kickoff failed (non-critical):", err);
+    }
+}
+
+function _hidePremiumTrialSection() {
+    const el = document.getElementById("premiumTrialSection");
+    if (el) el.remove();
+}
+
+function _hidePremiumTopBanner() {
+    const el = document.getElementById("premiumTrialTopBanner");
+    if (el) el.remove();
+}
+
+// ─── Free Premium Trial — Polling ───────────────────────────────────────────
+const PREMIUM_LOADING_MSGS = [
+    "Calculating your full planetary picture...",
+    "Analyzing sect, dignities, and mutual receptions...",
+    "Mapping the annual profection year...",
+    "Interpreting your Lot of Fortune...",
+    "Synthesizing the firdaria time-lord sequence...",
+    "Correlating fixed star influences...",
+    "Drafting your forecast narrative...",
+    "Finalizing your 10-year timeline...",
+    "Running final editorial pass...",
+    "Almost there — polishing the last sections...",
+];
+
+function pollForFreePremium(taskId, chartEventId) {
+    let msgIdx = 0;
+    let attempts = 0;
+    const maxAttempts = 70; // ~5.8 min at 5s intervals
+
+    const interval = setInterval(async () => {
+        attempts++;
+        _updatePremiumLoadingMessage(
+            PREMIUM_LOADING_MSGS[msgIdx % PREMIUM_LOADING_MSGS.length],
+            attempts,
+            maxAttempts
+        );
+        msgIdx++;
+
+        if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            _hidePremiumTrialSection();
+            _hidePremiumTopBanner();
+            trackConversionEvent("premium_trial_timeout");
+            return;
+        }
+
+        try {
+            const resp = await apiFetch(`/api/v1/premium/guest/status/${taskId}`);
+            if (!resp.ok) return;
+
+            const data = await resp.json();
+
+            if (data.status === "completed" && data.result) {
+                clearInterval(interval);
+                _renderFreePremiumResult(data.result, chartEventId);
+                trackConversionEvent("premium_trial_completed");
+            } else if (data.status === "failed") {
+                clearInterval(interval);
+                _hidePremiumTrialSection();
+                _hidePremiumTopBanner();
+                trackConversionEvent("premium_trial_failed");
+            }
+        } catch (_) {
+            // Suppress poll errors; retry next interval
+        }
+    }, 5000);
+}
+
+function _updatePremiumLoadingMessage(msg, attempts, maxAttempts) {
+    const msgEl = document.getElementById("premiumLoadingMsg");
+    if (msgEl) {
+        msgEl.style.opacity = "0";
+        setTimeout(() => {
+            msgEl.textContent = msg;
+            msgEl.style.opacity = "1";
+        }, 200);
+    }
+    const bar = document.getElementById("premiumLoadingBar");
+    if (bar) {
+        const pct = Math.min((attempts / maxAttempts) * 90, 90);
+        bar.style.width = pct + "%";
+    }
+    const elapsed = document.getElementById("premiumLoadingElapsed");
+    if (elapsed) {
+        const secs = attempts * 5;
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        elapsed.textContent = mins > 0 ? `${mins}m ${s}s` : `${s}s`;
+    }
+}
+
+function _renderFreePremiumResult(result, chartEventId) {
+    const section = document.getElementById("premiumTrialSection");
+    if (!section) return;
+
+    const md = result?.report_markdown || "";
+    const html = renderMarkdown(md);
+
+    section.innerHTML = buildRenderedPremiumSection(html, chartEventId);
+
+    // Update the top banner to reflect completion
+    const topBanner = document.getElementById("premiumTrialTopBanner");
+    if (topBanner) {
+        topBanner.innerHTML = buildPremiumTrialTopBannerComplete();
+    }
+
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    attachFeedbackHandlers(section, "premium_trial");
+    attachEmailCaptureHandler(section, chartEventId);
+}
+
+function buildInstantConversionBar(freeRemaining) {
+    const remainingText = Number.isFinite(Number(freeRemaining)) && Number(freeRemaining) >= 0
+        ? `<span>${Number(freeRemaining)} free chart${Number(freeRemaining) === 1 ? "" : "s"} left today</span>`
+        : "";
+
+    return `
+        <div class="result-conversion-bar" aria-label="Full reading purchase options">
+            <div class="result-conversion-copy">
+                <div class="result-conversion-kicker">Chart generated</div>
+                <h2>Unlock the complete reading while this chart is loaded.</h2>
+                <p>Save the free preview as a PDF, or unlock houses, lots, fixed stars, time-lord periods, and the full forecast.</p>
+                <div class="result-conversion-meta">
+                    <span>No account</span>
+                    <span>Stripe checkout</span>
+                    ${remainingText}
+                </div>
+            </div>
+            <div class="result-conversion-actions">
+                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullTopBtn" data-default-label="Full Reading — $25">
+                    Full Reading — $25
+                </button>
+                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumTopBtn" data-default-label="Complete Analysis — $69">
+                    Complete Analysis — $69
+                </button>
+                <button class="btn-cta btn-cta-secondary" onclick="printReading()" data-default-label="Print / Save Preview PDF">
+                    Print / Save Preview PDF
+                </button>
+            </div>
+        </div>
+    `;
 }
 
 // ─── UI: Show Paid Reading (Markdown, polled) ───
@@ -297,18 +546,26 @@ function showReading(result, freeRemaining) {
     const md = result?.report_markdown || "";
     const html = renderMarkdown(md);
     const traceData = result?.computation_trace || null;
+    currentReadingContext = {
+        chart_event_id: result?.chart_event_id || null,
+        reading_hash: result?.reading_hash || result?.meta?.chart_hash || hashStr(JSON.stringify({ chartPayload, md })),
+        source: freeRemaining < 0 ? "b2c_paid_reading" : "b2c_reading",
+        birth: chartPayload,
+        meta: result?.meta || {},
+        time_unknown: Boolean(chartPayload?.time_unknown),
+    };
 
     content.innerHTML = `
         <div class="reading-body">${html}</div>
         ${traceData ? buildTraceSection(traceData) : ''}
         ${buildPostReadingCTA(freeRemaining)}
-        ${buildFeedbackWidget()}
+        ${buildFeedbackWidget("free")}
     `;
 
     section.classList.remove("hidden");
     section.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    attachFeedbackHandlers(content);
+    attachFeedbackHandlers(content, "free");
     const chartActions = document.getElementById("chartActions");
     if (chartActions) chartActions.classList.remove("hidden");
 
@@ -488,8 +745,8 @@ function buildPostReadingCTA(freeRemaining) {
             <div class="unlock-cta" style="border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2rem;">
                 <h3>Your Premium Reading is Complete</h3>
                 <p>You can print this page or use your browser's "Save as PDF" to keep a copy.</p>
-                <button class="btn-cta btn-cta-secondary" onclick="window.print()" style="width: auto; margin-top: 1rem;">
-                    🖨️ Print / Save as PDF
+                <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: auto; margin-top: 1rem;">
+                    Print / Save as PDF
                 </button>
             </div>
         `;
@@ -501,8 +758,8 @@ function buildPostReadingCTA(freeRemaining) {
 
     return `
         <div class="unlock-cta">
-            <button class="btn-cta btn-cta-secondary" onclick="window.print()" style="width: auto; margin-top: 0; margin-bottom: 1.5rem;">
-                🖨️ Print / Save as PDF
+            <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: auto; margin-top: 0; margin-bottom: 1.5rem;">
+                Print / Save as PDF
             </button>
             ${freeText}
         </div>
@@ -526,12 +783,12 @@ function showPaywall() {
                 with a one-time payment — no account or subscription needed.
             </p>
             <div class="unlock-buttons">
-                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn">
-                    ✦ Get Full Reading — $7
+                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn" data-default-label="✦ Get Full Reading — $25">
+                    ✦ Get Full Reading — $25
                 </button>
                 <span class="btn-or">— or —</span>
-                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn">
-                    Get Premium Deep-Dive — $29
+                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn" data-default-label="Get Premium Deep-Dive — $69">
+                    Get Premium Deep-Dive — $69
                 </button>
                 <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem;">
                     Secure payment via Stripe. No account required.
@@ -551,11 +808,12 @@ window.startCheckout = async function (tier) {
         return;
     }
 
-    const btn = document.getElementById(tier === "premium_audit" ? "checkoutPremiumBtn" : "checkoutFullBtn");
-    if (btn) {
+    const buttons = getCheckoutButtons(tier);
+    buttons.forEach((btn) => {
         btn.disabled = true;
         btn.textContent = "Redirecting to payment...";
-    }
+    });
+    trackConversionEvent("checkout_click", { tier });
 
     try {
         const params = new URLSearchParams({
@@ -569,6 +827,8 @@ window.startCheckout = async function (tier) {
 
         const resp = await apiFetch(`/api/v1/guest/checkout?${params.toString()}`, {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: "{}",
         });
 
         if (!resp.ok) {
@@ -578,65 +838,273 @@ window.startCheckout = async function (tier) {
 
         const data = await resp.json();
         if (data.url) {
+            trackConversionEvent("checkout_redirect", { tier });
             window.location.href = data.url;
         } else {
             throw new Error("No checkout URL returned.");
         }
     } catch (err) {
-        if (btn) {
+        buttons.forEach((btn) => {
             btn.disabled = false;
-            btn.textContent = tier === "premium_audit" ? "Get Premium Deep-Dive — $29" : "✦ Get Full Reading — $7";
-        }
+            btn.textContent = btn.dataset.defaultLabel || (tier === "premium_audit" ? "Get Premium Deep-Dive — $69" : "✦ Get Full Reading — $25");
+        });
+        trackConversionEvent("checkout_error", { tier, error: String(err.message || err) });
         alert("Checkout error: " + err.message);
     }
 };
 
+function getCheckoutButtons(tier) {
+    const selectors = tier === "premium_audit"
+        ? ["#checkoutPremiumBtn", "#checkoutPremiumTopBtn"]
+        : ["#checkoutFullBtn", "#checkoutFullTopBtn"];
+    return selectors
+        .map((selector) => document.querySelector(selector))
+        .filter(Boolean);
+}
+
 // ─── UI: Feedback Widget ───
-function buildFeedbackWidget() {
+function buildFeedbackWidget(source) {
+    const widgetId = source === "premium_trial" ? "premiumFeedbackWidget" : "freeFeedbackWidget";
+
+    const label = source === "premium_trial"
+        ? "Was the premium reading helpful?"
+        : "Was this chart reading good or bad?";
     return `
-        <div class="feedback-widget">
-            <h4>Was this reading accurate?</h4>
+        <div class="feedback-widget" id="${widgetId}">
+            <h4>${label}</h4>
             <div class="feedback-buttons">
-                <button class="feedback-btn" data-vote="up">👍 Yes, accurate</button>
-                <button class="feedback-btn" data-vote="down">👎 Not accurate</button>
+                <button class="feedback-btn" data-vote="good" aria-label="Thumbs up - good reading">👍 Good</button>
+                <button class="feedback-btn" data-vote="bad" aria-label="Thumbs down - bad reading">👎 Bad</button>
+            </div>
+            <div class="feedback-comment-wrap" style="display:none; margin-top: 1rem;">
+                <textarea
+                    class="feedback-comment-textarea"
+                    placeholder="Any feedback is appreciated (optional)..."
+                    rows="3"
+                    maxlength="1000"
+                    aria-label="Optional feedback comment"
+                ></textarea>
+                <button class="feedback-submit-btn" type="button">Send Feedback</button>
             </div>
             <p class="feedback-status"></p>
         </div>
     `;
 }
 
-function attachFeedbackHandlers(container) {
-    const btns = container.querySelectorAll(".feedback-btn");
-    const statusEl = container.querySelector(".feedback-status");
+function attachFeedbackHandlers(container, source) {
+    const widget = container.querySelector(".feedback-widget");
+    if (!widget) return;
+
+    const btns = widget.querySelectorAll(".feedback-btn");
+    const statusEl = widget.querySelector(".feedback-status");
+    const commentWrap = widget.querySelector(".feedback-comment-wrap");
+    const commentTextarea = widget.querySelector(".feedback-comment-textarea");
+    const submitBtn = widget.querySelector(".feedback-submit-btn");
+    let chosenVote = null;
     let submitted = false;
 
     btns.forEach((btn) => {
-        btn.addEventListener("click", async () => {
+        btn.addEventListener("click", () => {
             if (submitted) return;
+            btns.forEach((b) => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            chosenVote = btn.dataset.vote;
+            // Show comment box after a vote
+            if (commentWrap) commentWrap.style.display = "block";
+            trackConversionEvent("reading_feedback_vote", { vote: chosenVote, source: source || "b2c_reading" });
+        });
+    });
+
+    if (submitBtn) {
+        submitBtn.addEventListener("click", async () => {
+            if (submitted || !chosenVote) return;
             submitted = true;
             btns.forEach((b) => (b.disabled = true));
-            const vote = btn.dataset.vote;
+            if (submitBtn) submitBtn.disabled = true;
+
+            const comment = (commentTextarea?.value || "").trim();
+            const context = currentReadingContext || {};
+            const readingHash = context.reading_hash || hashStr(JSON.stringify(chartPayload || {}));
 
             if (statusEl) statusEl.textContent = "Saving...";
 
             try {
-                await apiFetch("/api/v1/reading_feedback", {
+                const resp = await apiFetch("/api/v1/reading_feedback", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        reading_hash: hashStr(JSON.stringify(chartPayload || {})),
-                        vote: vote,
-                        source: "b2c_reading",
-                        birth: chartPayload,
+                        reading_hash: readingHash,
+                        vote: chosenVote,
+                        source: source || "b2c_reading",
+                        chart_event_id: context.chart_event_id || null,
+                        birth: context.birth || chartPayload,
+                        meta: context.meta || {},
+                        time_unknown: Boolean(context.time_unknown),
+                        comment: comment || null,
                         ts: new Date().toISOString(),
                     }),
                 });
-                if (statusEl) statusEl.textContent = "Thank you for your feedback!";
+                if (!resp.ok) throw new Error("Feedback save failed.");
+                if (statusEl) statusEl.textContent = "✓ Thank you for your feedback!";
+                if (commentWrap) commentWrap.style.display = "none";
             } catch (e) {
-                if (statusEl) statusEl.textContent = "Could not save feedback.";
+                submitted = false;
+                if (submitBtn) submitBtn.disabled = false;
+                if (statusEl) statusEl.textContent = "Could not save feedback — please try again.";
             }
         });
+    }
+}
+
+// ─── Email Capture Handler ───
+function attachEmailCaptureHandler(container, chartEventId) {
+    const form = container.querySelector(".email-capture-form");
+    const input = container.querySelector(".email-capture-input");
+    const btn = container.querySelector(".email-capture-btn");
+    const status = container.querySelector(".email-capture-status");
+    if (!form || !input || !btn) return;
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = (input.value || "").trim();
+        if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+            if (status) { status.textContent = "Please enter a valid email address."; status.style.color = "var(--danger)"; }
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = "Sending...";
+        trackConversionEvent("email_capture_submit");
+
+        try {
+            const resp = await apiFetch("/api/v1/premium/email-reading", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email,
+                    chart_event_id: chartEventId || null,
+                    name: chartPayload?.name || "Guest",
+                }),
+            });
+            if (!resp.ok) throw new Error("Submission failed.");
+            if (status) { status.textContent = "✓ Got it! We'll be in touch."; status.style.color = "var(--gold)"; }
+            btn.textContent = "Sent ✓";
+            input.disabled = true;
+        } catch (err) {
+            btn.disabled = false;
+            btn.textContent = "Send Me a Copy";
+            if (status) { status.textContent = "Error — please try again."; status.style.color = "var(--danger)"; }
+        }
     });
+}
+
+// ─── Premium Trial UI Builders ───
+function buildPremiumTrialTopBanner() {
+    return `
+        <div class="premium-trial-top-banner" role="status" aria-live="polite">
+            <div class="premium-trial-banner-inner">
+                <span class="premium-trial-badge">✦ LIMITED TIME</span>
+                <p class="premium-trial-headline">
+                    Your <strong>full premium reading</strong> is generating in the background &mdash; completely free.
+                </p>
+                <p class="premium-trial-sub">
+                    This is the <strong>$25 report</strong>. It takes up to 5 minutes. Read your chart below while you wait — we'll load it right here when it's ready.
+                </p>
+            </div>
+        </div>
+    `;
+}
+
+function buildPremiumTrialTopBannerComplete() {
+    return `
+        <div class="premium-trial-top-banner premium-trial-top-banner--complete" role="status">
+            <div class="premium-trial-banner-inner">
+                <span class="premium-trial-badge">✦ READY</span>
+                <p class="premium-trial-headline">
+                    Your <strong>premium reading</strong> is complete. Scroll down to read it.
+                </p>
+            </div>
+        </div>
+    `;
+}
+
+function buildPremiumLoadingSection() {
+    return `
+        <div class="premium-loading-section">
+            <div class="premium-loading-header">
+                <div class="premium-loading-orb"></div>
+                <div>
+                    <h3 class="premium-loading-title">Premium Reading Generating</h3>
+                    <p class="premium-loading-subtitle">Multi-stage LLM analysis in progress &mdash; this takes up to 5 minutes</p>
+                </div>
+            </div>
+            <div class="premium-loading-progress-track">
+                <div class="premium-loading-progress-fill" id="premiumLoadingBar"></div>
+            </div>
+            <p class="premium-loading-msg" id="premiumLoadingMsg">Calculating your full planetary picture...</p>
+            <p class="premium-loading-elapsed">Elapsed: <span id="premiumLoadingElapsed">0s</span></p>
+        </div>
+    `;
+}
+
+function buildRenderedPremiumSection(html, chartEventId) {
+    return `
+        <div class="premium-reading-section">
+            <div class="premium-reading-header">
+                <span class="premium-reading-badge">✦ PREMIUM READING</span>
+                <h2 class="premium-reading-title">Your Full Traditional Astrology Report</h2>
+                <p class="premium-reading-subtitle">LLM-generated multi-stage analysis &mdash; normally $25</p>
+                <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width:auto; margin-top:0.75rem;">
+                    Print / Save as PDF
+                </button>
+            </div>
+            <div class="premium-reading-body reading-body">${html}</div>
+            ${buildPremiumBottomBanner()}
+            ${buildEmailCapture()}
+            ${buildFeedbackWidget("premium_trial")}
+        </div>
+    `;
+}
+
+function buildPremiumBottomBanner() {
+    return `
+        <div class="premium-bottom-banner">
+            <div class="premium-bottom-banner-inner">
+                <span class="premium-trial-badge">✦ LIMITED TIME OFFER</span>
+                <h3 class="premium-bottom-title">This report is normally $25.</h3>
+                <p class="premium-bottom-sub">
+                    We're sharing the full reading free while we gather feedback from real users.
+                    If it resonated with you, share it with someone who might benefit.
+                </p>
+                <button class="btn-cta" onclick="printReading()" style="width:auto;">
+                    Print / Save PDF
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function buildEmailCapture() {
+    return `
+        <div class="email-capture-block">
+            <h4 class="email-capture-title">Want a copy sent to your inbox?</h4>
+            <p class="email-capture-sub">We'll email you a copy of this reading &mdash; no spam, no account required.</p>
+            <form class="email-capture-form" novalidate>
+                <div class="email-capture-row">
+                    <input
+                        type="email"
+                        class="email-capture-input"
+                        placeholder="your@email.com"
+                        autocomplete="email"
+                        aria-label="Your email address"
+                        required
+                    />
+                    <button type="submit" class="email-capture-btn">Send Me a Copy</button>
+                </div>
+                <p class="email-capture-status"></p>
+            </form>
+        </div>
+    `;
 }
 
 // ─── UI: Loading State ───

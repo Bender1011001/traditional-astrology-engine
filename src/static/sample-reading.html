@@ -2,16 +2,8 @@
 <html lang="en">
 
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJNM5XVD');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCNDWN4XVN"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -21,41 +13,296 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0a0a1a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Astrology" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <title>Sample Traditional Astrology Reading — See the Proof</title>
-    <meta name="description"
-        content="View a complete sample of a traditional astrology reading. See the exact planetary calculations, essential dignities, and timing techniques used in your personal natal chart.">
+    <meta name="theme-color" content="#0a0a1a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translacent" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <title>Sample Traditional Astrology Reading — See the Full Depth</title>
+    <meta name="description" content="See a real traditional astrology natal chart reading — planetary dignities, essential sect analysis, Firdaria timing, mutual receptions, and Primary Directions. Every number is computed from real astronomical data.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://traditional-astrology.com/sample-reading.html">
 
-    <meta property="og:title" content="Sample Traditional Astrology Reading — See What You'll Get">
-    <meta property="og:description" content="Preview a full natal chart reading using classical astrological techniques from Valens, Bonatti, and Dorotheus.">
+    <meta property="og:title" content="Sample Traditional Astrology Reading — See the Full Depth">
+    <meta property="og:description" content="A real natal chart reading using Hellenistic and Medieval techniques — Almuten Figuris, Firdaria periods, mutual receptions, and 10-year timing forecast.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://traditional-astrology.com/sample-reading.html">
+    <meta property="og:image" content="https://traditional-astrology.com/og-card.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=mobilenav3">
-  <meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
-  <meta content="https://traditional-astrology.com/og-card.png" name="twitter:image"/>
-  <meta name="description" content="View a complete sample traditional astrology reading. See the 30+ page deep dive into essential dignities, life topics, and predictive timing techniques.">
+    <link rel="stylesheet" href="style.css?v=rev20260504premtrial1">
+
+    <style>
+        .sample-report {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+        .report-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-muted, rgba(255,255,255,0.45));
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(212,175,55,0.15);
+            line-height: 1.9;
+        }
+        .report-part {
+            margin-bottom: 3rem;
+        }
+        .report-part h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(212,175,55,0.9);
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+        .report-part h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.92);
+            margin: 2rem 0 0.75rem;
+        }
+        .report-part p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.93rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 1rem;
+        }
+        .visibility-block {
+            background: rgba(212,175,55,0.06);
+            border: 1px solid rgba(212,175,55,0.18);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+        .visibility-block strong {
+            color: rgba(212,175,55,0.85);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .reception-diagram {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.65);
+        }
+        .reception-diagram .diagram-title {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(212,175,55,0.7);
+            margin-bottom: 1rem;
+        }
+        .reception-flow {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 0.75rem 0;
+        }
+        .planet-node {
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.83rem;
+        }
+        .planet-node.malefic { border-color: rgba(220,80,80,0.4); background: rgba(220,80,80,0.08); }
+        .planet-node.benefic { border-color: rgba(80,180,120,0.4); background: rgba(80,180,120,0.06); }
+        .flow-arrow {
+            color: rgba(212,175,55,0.5);
+            font-size: 1.1rem;
+        }
+        .flow-label {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.45);
+            font-style: italic;
+        }
+        .timing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+        }
+        .timing-table th {
+            text-align: left;
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            color: rgba(212,175,55,0.8);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .timing-table td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.72);
+            vertical-align: top;
+        }
+        .timing-table tr.active td {
+            background: rgba(212,175,55,0.07);
+            color: rgba(255,255,255,0.9);
+        }
+        .timing-table tr.active td:first-child {
+            border-left: 2px solid rgba(212,175,55,0.6);
+        }
+        .paywall {
+            margin: 3rem 0 0;
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, rgba(10,10,26,0) 0%, rgba(10,10,26,0.98) 30%);
+            text-align: center;
+            position: relative;
+        }
+        .paywall::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(180deg, transparent, rgba(10,10,26,0.9));
+            pointer-events: none;
+        }
+        .paywall-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.92);
+            margin-bottom: 0.75rem;
+        }
+        .paywall-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .paywall-continues {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .continues-item {
+            background: rgba(212,175,55,0.07);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 6px;
+            padding: 0.4rem 0.85rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.65);
+        }
+        .paywall-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-paywall-primary {
+            background: linear-gradient(135deg, rgba(212,175,55,0.9), rgba(180,140,30,0.9));
+            color: #0a0a1a;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-paywall-primary:hover { opacity: 0.88; }
+        .btn-paywall-secondary {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-decoration: none;
+            display: inline-block;
+            transition: border-color 0.2s;
+        }
+        .btn-paywall-secondary:hover { border-color: rgba(212,175,55,0.4); }
+        .planet-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.77rem;
+            overflow-x: auto;
+            display: block;
+        }
+        .planet-table th {
+            text-align: left;
+            padding: 0.5rem 0.6rem;
+            border-bottom: 1px solid rgba(212,175,55,0.25);
+            color: rgba(212,175,55,0.75);
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .planet-table td {
+            padding: 0.45rem 0.6rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.7);
+            white-space: nowrap;
+        }
+        .label-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.04em;
+        }
+        .badge-strong { background: rgba(80,180,120,0.15); color: rgba(100,220,150,0.9); border: 1px solid rgba(80,180,120,0.3); }
+        .badge-weak { background: rgba(220,80,80,0.1); color: rgba(240,100,100,0.85); border: 1px solid rgba(220,80,80,0.25); }
+        .badge-neutral { background: rgba(180,180,180,0.08); color: rgba(200,200,200,0.7); border: 1px solid rgba(180,180,180,0.2); }
+        .hero-eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(212,175,55,0.7);
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <!-- Stars background -->
     <div class="cosmos-bg">
         <div class="stars-layer stars-sm"></div>
         <div class="stars-layer stars-md"></div>
@@ -64,195 +311,310 @@
         <div class="nebula nebula-2"></div>
     </div>
 
-    <!-- Navbar matching index.html -->
     <nav class="site-nav" aria-label="Main navigation">
         <a href="/" class="nav-brand">
             <span class="brand-icon">✦</span>
             <span class="brand-text">Traditional Astrology</span>
         </a>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span class="hamburger-icon"></span>
-    </button>
-    <div class="nav-links">
-      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
-      <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Navigator</a>
-      <a href="/#how-it-works" class="nav-link">How It Works</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
-    </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger-icon"></span>
+        </button>
+        <div class="nav-links">
+            <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+            <a href="/horary.html" class="nav-link">Horary Oracle</a>
+            <a href="/daily.html" class="nav-link">Daily Navigator</a>
+            <a href="/sample-reading.html" class="nav-link" aria-current="page">Sample Reading</a>
+            <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
+            <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+        </div>
     </nav>
 
     <main id="main" class="container">
-        <section class="hero" style="padding: 6rem 0 3rem;">
-            <div class="hero-content" style="text-align: center;">
-                <p class="hero-eyebrow">Preview · What Your Reading Looks Like</p>
-                <h1 class="hero-title">Sample Reading</h1>
-                <p class="hero-subtitle" style="max-width: 640px; margin: 0 auto;">
-                    Here's a preview of what your personalized traditional astrology reading includes.
-                    Every number is computed from real astronomical data — not generic sun-sign horoscopes.
+        <section class="hero" style="padding: 5rem 0 2rem;">
+            <div class="hero-content" style="text-align: center; max-width: 680px; margin: 0 auto;">
+                <p class="hero-eyebrow">Real Output · Not a Template</p>
+                <h1 class="hero-title" style="font-size: clamp(1.8rem,5vw,2.8rem);">What Your Reading Looks Like</h1>
+                <p class="hero-subtitle" style="font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.6);">
+                    Every line below is computed from real astronomical data using Swiss Ephemeris and pre-1700s classical rules. This is a condensed excerpt — the full reading continues across six parts.
                 </p>
             </div>
         </section>
 
-        <section class="basic-view">
-            <div class="basic-card">
-                <div class="basic-reading-body sample-content">
-                    <p
-                        style="font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem; letter-spacing: 0.05em;">
-                        <strong>SUBJECT:</strong> John Doe<br>
-                        <strong>DATA:</strong> Jan 1, 1990, 12:00 PM, New York, NY<br>
-                        <strong>METHOD:</strong> Traditional / Pre-1700s Classical Techniques
-                    </p>
+        <div class="sample-report">
 
-                    <h3 class="basic-reading-title">I. NATURAL TEMPERAMENT</h3>
-                    <p>
-                        Your chart indicates a <strong>Choleric-Sanguine</strong> temperament. This is derived from the
-                        dominance of hot and dry qualities in your Ascendant (Aries) and the Moon's phase (Waxing).
-                    </p>
-                    <p>
-                        This suggests a personality that is action-oriented, quick to respond, and generally optimistic.
-                        You possess a high baseline of energy but may struggle with sustained patience.
-                    </p>
+            <!-- Report Header -->
+            <div class="report-meta">
+                <strong>PREMIUM NATAL CHART READING — EXAMPLE CHART</strong><br>
+                Birth: August 13, 1996 · 07:18 AM PDT · Fairfield, CA (38.2°N, 122.0°W)<br>
+                Method: Whole Sign Houses · Tropical Zodiac · Septener Only (Sun–Saturn)<br>
+                Engine: Swiss Ephemeris · Hellenistic / Medieval Classical Corpus
+            </div>
 
-                    <h3 class="basic-reading-title">II. THE RULER OF THE CHART</h3>
-                    <p>
-                        <strong>Mars</strong> is the Lord of the Geniture (Chart Ruler). It is located in Scorpio in the
-                        8th House.
-                    </p>
-                    <p>
-                        <strong>Condition:</strong> Mars is in its own Domicile (Scorpio), giving it +5 points of
-                        essential dignity. It is highly effective and powerful here.
-                    </p>
-                    <p>
-                        <strong>Implication:</strong> You navigate life extensively through crisis management,
-                        intensity, and deep investigation. You have a natural ability to handle resources of others and
-                        confront difficult truths.
-                    </p>
+            <!-- PART 1 -->
+            <div class="report-part">
+                <h2>Part I — Inspection of the Nativity</h2>
 
-                    <h3 class="basic-reading-title">III. CURRENT LIFE CHAPTER (ANNUAL PROFECTION)</h3>
-                    <p>
-                        <strong>Age 34: 11th House Profection</strong>
-                    </p>
-                    <p>
-                        This year, the focus is on social networks, friends, and hopes/wishes. The Time Lord for the
-                        year is <strong>Saturn</strong> (ruler of Aquarius, your 11th house).
-                    </p>
-                    <p>
-                        Saturn will demand structure and maturity regarding your peer groups. Expect a pruning of
-                        friendships that no longer serve your long-term goals.
-                    </p>
+                <h3>I. Sect &amp; The Prenatal Syzygy</h3>
+                <p>
+                    This is a <strong>Day Chart</strong> — the Sun was 9.87° above the horizon at birth. In a day chart, <strong>Jupiter</strong> is the Benefic of Sect and <strong>Saturn</strong> acts as the Constructive Malefic (tempered by solar heat). <strong>Mars</strong> becomes the Adversary — his heat is over-inflamed by the day and operates destructively.
+                </p>
+                <p>
+                    The prenatal syzygy (root of the life) was a <strong>Full Moon on July 30, 1996</strong> at <strong>Aquarius 07°32'</strong> — falling in the <strong>6th House of Labor and Sickness</strong>. At birth, the Moon had traveled to within 7.85° of the Sun, placing it in the <strong>Dark Moon phase</strong> — invisible, obscured, muted.
+                </p>
 
-                    <hr class="ornament" style="margin: 3rem auto; width: 60px;">
+                <h3>II. The Master of the Nativity (Almuten Figuris)</h3>
+                <p>
+                    <strong>Mercury</strong> is the undisputed Almuten with a cumulative dignity score of <strong>27</strong> — the highest in the chart by a wide margin. Mercury is the "Captain of the Soul," governing the native's capacity for commerce, precision, and analytical discernment.
+                </p>
+                <p>
+                    The <strong>Temperament</strong> is <strong>Melancholic (Cold/Dry)</strong>: Cold score 8, Dry score 7. Net balance: Cold +4, Dry +2. This constitution tends toward deep analysis, introspection, and systematic thinking — with a need for warming, moistening activity to maintain equilibrium.
+                </p>
 
-                    <div style="text-align: center;">
-                        <p style="font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem;">
-                            This is a truncated preview. Full readings include 5–7 detailed sections covering
-                            Essential Dignities, Arabic Lots, Firdaria Periods, Primary Directions, and more —
-                            plus a complete Computation Trace showing every calculation.
-                        </p>
-                        <a href="/#get-reading" class="cta-button"
-                            style="display: inline-block; padding: 1rem 2.5rem; font-size: 1.1rem;">
-                            Generate Your Free Chart
-                        </a>
+                <h3>III. The Planetary Positions</h3>
+                <table class="planet-table">
+                    <thead>
+                        <tr>
+                            <th>Body</th>
+                            <th>Position</th>
+                            <th>House</th>
+                            <th>Condition</th>
+                            <th>Visible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sun</strong></td>
+                            <td>Leo 21°05'</td>
+                            <td>12th</td>
+                            <td><span class="label-badge badge-neutral">Domicile · Cadent</span></td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Moon</strong></td>
+                            <td>Leo 13°14'</td>
+                            <td>12th</td>
+                            <td><span class="label-badge badge-weak">Peregrine · Dark Moon</span></td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mercury ★</strong></td>
+                            <td>Virgo 17°10'</td>
+                            <td>1st</td>
+                            <td><span class="label-badge badge-strong">Domicile + Exaltation</span></td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Venus</strong></td>
+                            <td>Cancer 05°32'</td>
+                            <td>11th</td>
+                            <td><span class="label-badge badge-neutral">Triplicity · Maltreated</span></td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mars</strong></td>
+                            <td>Cancer 12°31'</td>
+                            <td>11th</td>
+                            <td><span class="label-badge badge-weak">Fall + Peregrine</span></td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jupiter</strong></td>
+                            <td>Capricorn 08°30' Rx</td>
+                            <td>5th</td>
+                            <td><span class="label-badge badge-weak">Fall · Retrograde</span></td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Saturn</strong></td>
+                            <td>Aries 06°51' Rx</td>
+                            <td>8th</td>
+                            <td><span class="label-badge badge-weak">Fall · Retrograde</span></td>
+                            <td>Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.78rem; color: rgba(255,255,255,0.4); margin-top: -0.5rem;">★ Almuten Figuris (score: 27). All positions computed via Swiss Ephemeris at JD 2450308.805556.</p>
+            </div>
+
+            <!-- PART 2 -->
+            <div class="report-part">
+                <h2>Part II — The Planetary Cabinet</h2>
+
+                <h3>1. Mercury: The Sovereign Almuten (House 1)</h3>
+                <p>
+                    Mercury sits in <strong>Virgo 17°10'</strong> in its own Domicile (+5) and Exaltation (+4) — essential dignity score of <strong>9</strong>. Accidentally, it is angular in the 1st House, swift in motion, and has full Voice. This is the "King in his own Castle" — the only governor in this nativity with total autonomy.
+                </p>
+                <div class="visibility-block">
+                    <strong>Phasis (Visibility Evidence — Mandatory)</strong><br>
+                    Solar Status: FREE · Elongation: 26.09° · Phase: Evening First · Visible: True<br>
+                    Method: Arcus Visionis · Threshold: 12.0° · Sun Alt at set: −12.15°
+                </div>
+                <p>
+                    As ruler of the Ascendant and the 10th House (Gemini), Mercury is simultaneously the body of the native and the career. The native <em>is</em> his work. Reputation is built on Virgoan precision — forensic, auditable, documented. The <strong>Monomoiria</strong> (degree ruler) is Jupiter, adding a layer of judicial wisdom to cold analytical nature. The <strong>Dodecatemoria</strong> falls in Pisces (House 7) — a hidden shadow in contracts and partnerships.
+                </p>
+
+                <h3>2. The Escape Hatch: Mars–Jupiter Mutual Reception</h3>
+                <p>
+                    Both Mars and Jupiter are in their Fall — yet both are saved by a <strong>pure exaltation swap</strong>. Mars is in Cancer (Jupiter's exaltation). Jupiter is in Capricorn (Mars' exaltation). Each receives the other by exaltation, creating an "Active Assistance" protocol that prevents total ruin in the 5th and 11th houses.
+                </p>
+
+                <div class="reception-diagram">
+                    <div class="diagram-title">Mutual Reception — The Escape Hatch</div>
+                    <div class="reception-flow">
+                        <div class="planet-node malefic">Mars in Cancer</div>
+                        <span class="flow-arrow">⇄</span>
+                        <div class="planet-node benefic">Jupiter in Capricorn</div>
+                    </div>
+                    <div style="margin-top: 0.75rem; font-size: 0.75rem; color: rgba(255,255,255,0.4);">
+                        Cancer = Jupiter's Exaltation (15°) · Capricorn = Mars' Exaltation (28°)<br>
+                        Both in Fall — yet each receives the other. Crisis becomes navigable.
                     </div>
                 </div>
+
+                <h3>3. Fixed Star: Caput Algol on the Midheaven</h3>
+                <p>
+                    The Midheaven (MC) at <strong>Taurus 27°02'</strong> is conjunct <strong>Caput Algol</strong> — the Head of Medusa, the most violent star in the classical canon. This is a high-voltage career placement.
+                </p>
+                <p>
+                    <strong>The Glory:</strong> If the native maintains total composure and integrity, he achieves a rank that borders on legendary — the career of someone who slays the monster others refuse to face.<br>
+                    <strong>The Nemesis:</strong> Any lapse — public anger, rashness, dishonesty — triggers irreversible reputational collapse. Algol does not forgive. The head is always on the block.
+                </p>
             </div>
-        </section>
+
+            <!-- PART 3: TIMING (partial) -->
+            <div class="report-part">
+                <h2>Part III — The Master Clock (Chronocrators)</h2>
+
+                <h3>Current Time Lords</h3>
+                <p>
+                    The native is currently in the <strong>Mercury Major Firdaria (2014–2027)</strong> — the strongest possible era for someone whose Almuten is Mercury in Domicile. The sub-period is <strong>Mercury / Venus (Oct 2025 – Aug 2027)</strong>, activating both the chart ruler and the 11th-house alliances.
+                </p>
+                <p>
+                    The <strong>Annual Profection</strong> at Age 29 reaches the <strong>6th House (Aquarius)</strong>. Lord of the Year: <strong>Saturn</strong> (natal: Fall/Retrograde in the 8th). This is a year of heavy labor, debt resolution, and structural austerity — with the Mercury sub-period providing the forensic tools to navigate it.
+                </p>
+
+                <h3>10-Year Timing Forecast</h3>
+                <table class="timing-table">
+                    <thead>
+                        <tr>
+                            <th>Age</th>
+                            <th>Year</th>
+                            <th>Lord</th>
+                            <th>House</th>
+                            <th>Forecast</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="active">
+                            <td><strong>29</strong></td>
+                            <td>2025–26</td>
+                            <td>Saturn (Fall)</td>
+                            <td>6th · Labor</td>
+                            <td>Grueling work; debt resolution. Mercury sub-period provides tools.</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>2026–27</td>
+                            <td>Jupiter (Fall)</td>
+                            <td>7th · Contracts</td>
+                            <td>Contractual friction; partnerships tested. Use the exaltation swap.</td>
+                        </tr>
+                        <tr>
+                            <td>32</td>
+                            <td>2028</td>
+                            <td>Venus (Maltreated)</td>
+                            <td>9th · MC/Algol</td>
+                            <td><strong>High-Stakes Eminence.</strong> Algol risk. Integrity is the only shield.</td>
+                        </tr>
+                        <tr>
+                            <td>33</td>
+                            <td>2029</td>
+                            <td>Moon (12th/Dark)</td>
+                            <td>10th · Rank</td>
+                            <td><strong>Critical year.</strong> Reputation under pressure. Build fortifications now.</td>
+                        </tr>
+                        <tr>
+                            <td>36</td>
+                            <td>2032</td>
+                            <td>Mercury (Strong)</td>
+                            <td>1st · Will</td>
+                            <td>Recovery and restoration. The Almuten returns to the helm.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.78rem; color: rgba(255,255,255,0.38);">Current period highlighted. Forecast integrates Primary Directions (Placidus), Decennials (Valens), Annual Profections, and Firdaria.</p>
+            </div>
+
+            <!-- PAYWALL -->
+            <div class="paywall">
+                <p class="hero-eyebrow" style="margin-bottom: 1rem;">This reading continues</p>
+                <p class="paywall-title">Three More Parts in Your Full Reading</p>
+                <p class="paywall-sub">
+                    The complete analysis includes the Hermetic Lots (Fortune, Spirit, Eros, Courage, Victory), the full Twelve Topoi house audit, the Medical Correspondences, the Remediation Protocol, and the complete Primary Directions calendar — all computed from your specific birth data.
+                </p>
+                <div class="paywall-continues">
+                    <span class="continues-item">✦ 7 Hermetic Lots &amp; Arabic Parts</span>
+                    <span class="continues-item">✦ Twelve House Audit (Topoi)</span>
+                    <span class="continues-item">✦ Medical Correspondences</span>
+                    <span class="continues-item">✦ Primary Directions Calendar</span>
+                    <span class="continues-item">✦ Remediation Protocol</span>
+                    <span class="continues-item">✦ Computation Trace (Show Your Work)</span>
+                </div>
+                <div class="paywall-buttons">
+                    <a href="/#get-reading" class="btn-paywall-primary">✦ Get Your Reading — from $25</a>
+                    <a href="/" class="btn-paywall-secondary">See Pricing</a>
+                </div>
+                <p style="margin-top: 1.25rem; font-size: 0.75rem; color: rgba(255,255,255,0.3);">One-time payment. No account. No subscription. Instant delivery.</p>
+            </div>
+
+        </div>
     </main>
 
-    <!-- Footer matching index.html -->
     <footer style="text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.8rem;">
         <p>© 2026 Traditional Astrology · <a href="privacy.html" style="color: var(--text-muted);">Privacy</a> · <a href="terms.html" style="color: var(--text-muted);">Terms</a> · <a href="refunds.html" style="color: var(--text-muted);">Refunds</a></p>
         <p style="margin-top: 0.5rem; font-size: 0.7rem;">For entertainment and historical study purposes only. Not medical, legal, or financial advice.</p>
     </footer>
 
-    <script src="basic.js?v=20260319brand"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('[PWA] SW registered, scope:', reg.scope))
-          .catch(err => console.warn('[PWA] SW registration failed:', err));
-      });
-    }
-  </script>
-  <!-- AUTH MODALS -->
-  <div id="authModalOverlay" class="modal-overlay hidden">
-    <div class="modal-card">
-      <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
-      
-      <!-- Login View -->
-      <div id="loginView" class="auth-view">
-        <h2 class="auth-title">Welcome Back</h2>
-        <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
-        <form id="loginForm" class="auth-form">
-          <div class="form-field">
-            <label for="loginEmail">Email Address</label>
-            <input type="email" id="loginEmail" required autocomplete="username" />
-          </div>
-          <div class="form-field">
-            <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" required autocomplete="current-password" />
-          </div>
-          <button type="submit" class="btn-cta auth-submit">
-            <span class="btn-text">Sign In</span>
-            <span class="btn-loading hidden">Signing In...</span>
-          </button>
-          <div id="loginError" class="auth-error-msg hidden"></div>
-        </form>
-        <div class="auth-footer">
-          <p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p>
+    <!-- AUTH MODALS -->
+    <div id="authModalOverlay" class="modal-overlay hidden">
+      <div class="modal-card">
+        <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+        <div id="loginView" class="auth-view">
+          <h2 class="auth-title">Welcome Back</h2>
+          <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+          <form id="loginForm" class="auth-form">
+            <div class="form-field"><label for="loginEmail">Email Address</label><input type="email" id="loginEmail" required autocomplete="username" /></div>
+            <div class="form-field"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required autocomplete="current-password" /></div>
+            <button type="submit" class="btn-cta auth-submit"><span class="btn-text">Sign In</span><span class="btn-loading hidden">Signing In...</span></button>
+            <div id="loginError" class="auth-error-msg hidden"></div>
+          </form>
+          <div class="auth-footer"><p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p></div>
         </div>
-      </div>
-
-      <!-- Register View -->
-      <div id="registerView" class="auth-view hidden">
-        <h2 class="auth-title">Create Account</h2>
-        <p class="auth-sub">Save your natal chart securely and access it anywhere.</p>
-        <form id="registerForm" class="auth-form">
-          <div class="form-field">
-            <label for="regEmail">Email Address</label>
-            <input type="email" id="regEmail" required autocomplete="email" />
-          </div>
-          <div class="form-field">
-            <label for="regPassword">Password</label>
-            <input type="password" id="regPassword" required autocomplete="new-password" minlength="8" />
-          </div>
-          <button type="submit" class="btn-cta auth-submit">
-            <span class="btn-text">Create Account</span>
-            <span class="btn-loading hidden">Creating...</span>
-          </button>
-          <div id="registerError" class="auth-error-msg hidden"></div>
-        </form>
-        <div class="auth-footer">
-          <p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p>
+        <div id="registerView" class="auth-view hidden">
+          <h2 class="auth-title">Create Account</h2>
+          <p class="auth-sub">Save your charts securely and access them anywhere.</p>
+          <form id="registerForm" class="auth-form">
+            <div class="form-field"><label for="regEmail">Email Address</label><input type="email" id="regEmail" required autocomplete="email" /></div>
+            <div class="form-field"><label for="regPassword">Password</label><input type="password" id="regPassword" required autocomplete="new-password" minlength="8" /></div>
+            <button type="submit" class="btn-cta auth-submit"><span class="btn-text">Create Account</span><span class="btn-loading hidden">Creating...</span></button>
+            <div id="registerError" class="auth-error-msg hidden"></div>
+          </form>
+          <div class="auth-footer"><p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p></div>
         </div>
       </div>
     </div>
-  </div>
+    <script type="module" src="/js/auth.js?v=astro-v5"></script>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var toggles = document.querySelectorAll('.mobile-menu-toggle');
-      toggles.forEach(function(toggle) {
-        // Only attach if not already attached to prevent duplicates if script runs twice
-        if (toggle.dataset.navAttached) return;
-        toggle.dataset.navAttached = 'true';
-        toggle.addEventListener('click', function() {
-          var expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', !expanded);
-          this.classList.toggle('active');
-          var navLinks = this.nextElementSibling;
-          if (navLinks && navLinks.classList.contains('nav-links')) {
-            navLinks.classList.toggle('active');
-          }
-        });
-      });
-    });
-  </script>
+    <script src="basic.js?v=20260319brand"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('[PWA] SW registered'))
+                    .catch(err => console.warn('[PWA] SW failed:', err));
+            });
+        }
+    </script>
+  <script src="/consent.js"></script>
 </body>
-
 </html>

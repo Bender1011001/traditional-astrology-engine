@@ -124,4 +124,15 @@ const closeBtn = document.getElementById('closeAuthModal');
     });
   }
 
+  export function updateAuthUI() {
+    updateNavState();
+  }
+
+  export function logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_info');
+    updateNavState();
+    window.location.href = '/';
+  }
+
 

@@ -601,7 +601,7 @@ function buildUpgradeCTA(hasToken) {
                 <button type="button" class="btn-secondary"
                         onclick="startCheckout('single_reading')"
                         style="width:100%; font-size:0.85rem;">
-                    Buy This Reading ($20)
+                    Buy This Reading ($25)
                 </button>
                 <a href="login.html" style="font-size:0.78rem; color:var(--text-muted,#aaa); margin-top:0.1rem;">
                     Already have an account? Log in →
