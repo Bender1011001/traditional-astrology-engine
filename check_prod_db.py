@@ -1,9 +1,15 @@
 import psycopg2
 import psycopg2.extras
+import os
+import sys
+from dotenv import load_dotenv
 
-# Connect via public IP (need to allow this IP in Cloud SQL authorized networks, or use proxy)
-# Using the prod credentials from Cloud Run
-conn_str = "postgresql://postgres:AstrF0rg3_Pr0d_2026!@34.57.76.114/astrology"
+load_dotenv()
+
+conn_str = os.environ.get("DATABASE_URL_DIRECT") or os.environ.get("DATABASE_URL")
+if not conn_str:
+    print("DATABASE_URL_DIRECT or DATABASE_URL must be set; refusing to use hardcoded credentials.")
+    sys.exit(1)
 
 try:
     conn = psycopg2.connect(conn_str, connect_timeout=10)

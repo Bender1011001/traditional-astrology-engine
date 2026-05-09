@@ -61,7 +61,7 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
     if not _oracle_breaker.allow_request():
         return "Error: Circuit Breaker Open (Too many failures). info: The Oracle is currently meditating (service unavailable)."
 
-    api_key = os.environ.get("OPENROUTER_API_KEY")
+    api_key = (os.environ.get("OPENROUTER_API_KEY") or "").strip()
     if not api_key:
         return "Error: OPENROUTER_API_KEY environment variable not found. Please set it in your environment."
 
@@ -69,8 +69,9 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
         base_url = os.getenv(
             "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1/chat/completions"
         )
-        # Default to Gemini 3 Pro for best reasoning with large context
-        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3-flash-preview")
+        # Default to the production cost/performance model; deployments can
+        # override this through OPENROUTER_MODEL.
+        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3.1-flash-lite")
         timeout = float(
             os.getenv("OPENROUTER_TIMEOUT", "120")
         )  # Increased timeout for large context

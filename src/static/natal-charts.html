@@ -14,8 +14,8 @@
   </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Traditional Birth Chart Calculator — Free Classical Natal Chart Reading</title>
-<meta content="Free traditional birth chart calculator. Get your classical natal chart reading — planetary dignities, sect, profections, and timing forecast — in seconds. No account needed." name="description"/>
+<title>Natal Charts Explained — Traditional Astrology Guide & Free Preview</title>
+<meta content="Learn what natal charts are in traditional astrology, then start a free chart preview with sect, planetary dignities, houses, and timing context. Calculator-intent users can use the Traditional Birth Chart Calculator." name="description"/>
 <meta content="#f6f0e6" name="theme-color"/>
 <link href="https://traditional-astrology.com/natal-charts.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://traditional-astrology.com/natal-charts.html"/>
@@ -25,8 +25,40 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
-<script type="application/ld+json">
+<link href="style.css?v=rev20260509print1" rel="stylesheet"/>
+  <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -78,9 +110,9 @@
 <main class="container" id="main">
 <header>
 <div class="header-content">
-<h1>Traditional Birth Chart Calculator</h1>
+<h1>Natal Charts in Traditional Astrology</h1>
 <div class="ornament"></div>
-<p class="subtitle">Enter your birth details below for a free classical natal chart reading — planetary positions, dignities, sect, and this year's timing forecast. No account required.</p>
+<p class="subtitle">Learn how a natal chart works in traditional astrology, then try a free classical chart preview. For the focused calculator landing page, use the <a class="link-gold" href="traditional-birth-chart-calculator.html">Traditional Birth Chart Calculator</a>.</p>
 <nav class="site-nav" aria-label="Main navigation">
     <a href="/" class="nav-brand">
       <span class="brand-icon">✦</span>
@@ -93,10 +125,11 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
@@ -133,7 +166,7 @@
         <span class="btn-text">✦ Reveal My Chart</span>
         <span class="btn-loading hidden">Calculating your stars...</span>
       </button>
-      <p class="form-note">Free · No account · No email · Results in seconds</p>
+      <p class="form-note">Free · No account · No email · Results in seconds. Calculator-intent users can also start from the <a class="link-gold" href="/traditional-birth-chart-calculator.html">traditional astrology calculator</a>.</p>
       <div class="trust-signals" style="display:flex; justify-content:center; gap:1.5rem; margin-top:1rem; font-size:0.8rem; color:rgba(255,255,255,0.6); align-items:center;">
         <span>🔒 We never sell your data.</span>
         <span>🪐 Swiss Ephemeris · Whole Sign Houses</span>
@@ -221,6 +254,7 @@
 <div class="basic-card related-guides">
 <h2 class="section-title">Related Traditional Guides</h2>
 <ul class="grid-container">
+<li><a class="link-gold" href="traditional-birth-chart-calculator.html">Traditional astrology calculator</a> — Calculate the classical birth chart first.</li>
 <li><a class="link-gold" href="planetary-periods.html">Planetary Periods &amp; Time Lords</a> — Learn how life chapters are divided.</li>
 <li><a class="link-gold" href="annual-profections.html">Annual Profections Calculator</a> — Find your Lord of the Year for any age.</li>
 <li><a class="link-gold" href="daily.html">Daily Navigator</a> — See profections, firdaria, and zodiacal releasing applied to your chart for any date.</li>
@@ -270,7 +304,7 @@
 </footer>
 </main>
 <script src="basic.js"></script>
-<script type="module" src="/js/reading-app.js?v=rev20260504premtrial1"></script>
+<script type="module" src="/js/reading-app.js?v=rev20260509print1"></script>
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -336,7 +370,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

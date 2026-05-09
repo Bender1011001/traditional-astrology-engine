@@ -7,6 +7,10 @@ from fastapi import Header
 from src.core.config import settings
 
 
+def _jwt_secret() -> str:
+    return settings.JWT_SECRET.strip()
+
+
 def create_access_token(
     chart_hash: str, tier: str, expires_days: int = 30, data: dict = None  # type: ignore
 ) -> str:
@@ -18,12 +22,12 @@ def create_access_token(
     if data:
         payload["d"] = data
 
-    return jwt.encode(payload, settings.JWT_SECRET, algorithm="HS256")
+    return jwt.encode(payload, _jwt_secret(), algorithm="HS256")
 
 
 def validate_token(token: str) -> Optional[dict]:
     try:
-        payload = jwt.decode(token, settings.JWT_SECRET, algorithms=["HS256"])
+        payload = jwt.decode(token, _jwt_secret(), algorithms=["HS256"])
         return payload
     except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
         return None

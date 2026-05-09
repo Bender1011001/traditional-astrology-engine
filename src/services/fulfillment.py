@@ -6,7 +6,7 @@ from starlette.concurrency import run_in_threadpool
 from src.engine.email_service import send_email
 from src.engine.pdf_generator import PDFReportGenerator
 from src.services.engine_bridge import generate_full_nativity_async
-from src.services.premium_generator import PremiumGenerator
+from src.services.premium_generator import PremiumGenerator, llm_iterations_for_tier
 
 logger = logging.getLogger(__name__)
 
@@ -78,8 +78,12 @@ class FulfillmentService:
                 logger.info("Generating Premium AI Dossier (This may take time)...")
                 try:
                     # Run LLM generation in threadpool to avoid blocking
+                    iteration_count = llm_iterations_for_tier(tier)
                     custom_markdown = await run_in_threadpool(
-                        PremiumGenerator.generate_premium_report_markdown, chart_data
+                        PremiumGenerator.generate_premium_report_markdown,
+                        chart_data,
+                        tier,
+                        iteration_count,
                     )
                 except Exception as ai_error:
                     logger.error(

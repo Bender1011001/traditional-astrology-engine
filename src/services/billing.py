@@ -6,8 +6,9 @@ from sqlalchemy.orm import Session
 from src.core.config import settings
 from src.database.models import SubscriptionPlan, User, UserSubscription
 
-if settings.STRIPE_SECRET_KEY:
-    stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe_secret_key = (settings.STRIPE_SECRET_KEY or "").strip()
+if stripe_secret_key:
+    stripe.api_key = stripe_secret_key
 
 
 class BillingService:

@@ -10,11 +10,12 @@ from typing import Any
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
+from src.api.v1.auth import get_current_user
 from src.api.v1.client_ip import get_client_ip, is_rate_limitable_client_ip
 from src.api.v1.schemas import ChartRequest  # type: ignore
 from src.core.config import settings
 from src.database.core import get_db
-from src.database.models import AsyncReportTask, ChartEvent, GuestRequest, Lead
+from src.database.models import AsyncReportTask, ChartEvent, GuestRequest, Lead, User
 from src.services.admin_notifier import notify_chart_created
 from src.services.free_reading_generator import generate_free_reading
 from src.services.premium_generator import generate_premium_report_task
@@ -245,11 +246,11 @@ async def check_premium_guest_status(task_id: str, db: Session = Depends(get_db)
     }
 
 
-# ─── Free Premium Trial Constants ─────────────────────────────────────────────
+# ─── Free Premium Add-On Constants ────────────────────────────────────────────
 # Strictly per-IP using real visitor IPs (X-Forwarded-For via get_client_ip).
 # Separate request_type key so this never touches the free-instant quota counter.
-MAX_FREE_PREMIUM_TRIAL_PER_IP = 2
-FREE_PREMIUM_TRIAL_WINDOW_SECONDS = 86400  # 24 hours
+MAX_FREE_PREMIUM_REPORTS_PER_IP = 1
+FREE_PREMIUM_REQUEST_TYPE = "free_premium_trial"
 
 
 @router.post("/free-trial/request")
@@ -257,12 +258,13 @@ async def request_free_premium_trial(
     chart_request: ChartRequest,
     request: Request,
     background_tasks: BackgroundTasks,
+    current_user: User | None = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
     Kick off a free LLM-generated premium report in the background.
 
-    - Limit: 2 per real IP per 24-hour window.
+    - Limit: 1 lifetime report per real IP.
     - Uses get_client_ip() which reads X-Forwarded-For correctly on Cloud Run,
       so every visitor gets their own independent quota — not a shared proxy IP.
     - When the limit is hit we return status="limit_reached" (200) rather than
@@ -272,72 +274,85 @@ async def request_free_premium_trial(
     """
     client_ip = get_client_ip(request)
     enforce_limit = is_rate_limitable_client_ip(client_ip)
+    if not enforce_limit:
+        logger.warning(
+            "Free premium report denied because client IP is not rate-limitable: %s",
+            client_ip,
+        )
+        return {
+            "status": "limit_reached",
+            "message": "Free premium report requires a real visitor IP.",
+        }
 
-    if enforce_limit:
-        window_start = datetime.now(timezone.utc) - timedelta(
-            seconds=FREE_PREMIUM_TRIAL_WINDOW_SECONDS
+    trial_count = (
+        db.query(GuestRequest)
+        .filter(
+            GuestRequest.ip_address == client_ip,
+            GuestRequest.request_type == FREE_PREMIUM_REQUEST_TYPE,
         )
-        trial_count = (
-            db.query(GuestRequest)
-            .filter(
-                GuestRequest.ip_address == client_ip,
-                GuestRequest.request_type == "free_premium_trial",
-                GuestRequest.created_at >= window_start,
-            )
-            .count()
+        .count()
+    )
+    if trial_count >= MAX_FREE_PREMIUM_REPORTS_PER_IP:
+        logger.info(
+            "Free premium report limit reached for IP %s (%d existing)",
+            client_ip,
+            trial_count,
         )
-        if trial_count >= MAX_FREE_PREMIUM_TRIAL_PER_IP:
-            logger.info(
-                "Free premium trial limit reached for IP %s (%d today)",
-                client_ip,
-                trial_count,
-            )
-            return {"status": "limit_reached"}
+        return {
+            "status": "limit_reached",
+            "message": "The free premium report for this visitor has already been used.",
+        }
 
     # Create the async task record
     task_id = str(uuid.uuid4())
-    task = AsyncReportTask(
-        id=task_id,
-        status="pending",
-        request_meta={
-            "name": chart_request.name or "Guest",
-            "date": chart_request.date,
-            "time": chart_request.time,
-            "city": chart_request.city,
-            "state": chart_request.state or "",
-        },
-    )
-    db.add(task)
-
-    # Record this usage against the visitor's IP so the counter is accurate.
-    # Only written after task creation so partial failures don't waste quota.
-    if enforce_limit:
-        usage = GuestRequest(
-            ip_address=client_ip,
-            request_type="free_premium_trial",
-        )
-        db.add(usage)
-
-    db.commit()
-    db.refresh(task)
-
-    # Fire the LLM generation as a background task — caller polls for status.
-    request_data = {
+    request_meta = {
         "name": chart_request.name or "Guest",
         "date": chart_request.date,
         "time": chart_request.time,
         "city": chart_request.city,
         "state": chart_request.state or "",
+        "tier": "free_premium",
+        "report_iterations": 1,
     }
+    if current_user:
+        request_meta["user_id"] = current_user.id
+        request_meta["account_email"] = current_user.email
+        request_meta["customer_email"] = current_user.email
+
+    task = AsyncReportTask(
+        id=task_id,
+        status="pending",
+        request_meta=request_meta,
+    )
+    db.add(task)
+
+    # Record this usage against the visitor's IP so the counter is accurate.
+    # Only written after task creation so partial failures don't waste quota.
+    usage = GuestRequest(
+        ip_address=client_ip,
+        request_type=FREE_PREMIUM_REQUEST_TYPE,
+    )
+    db.add(usage)
+
+    db.commit()
+    db.refresh(task)
+
+    # Fire the LLM generation as a background task — caller polls for status.
+    request_data = dict(request_meta)
     background_tasks.add_task(generate_premium_report_task, task.id, request_data)
-    background_tasks.add_task(notify_chart_created, request_data, "Free Trial")
+    background_tasks.add_task(notify_chart_created, request_data, "Free Premium")
 
     logger.info(
-        "Free premium trial started: task=%s ip=%s",
+        "Free premium report started: task=%s ip=%s",
         task.id,
         client_ip,
     )
-    return {"status": "started", "task_id": task.id}
+    return {
+        "status": "started",
+        "task_id": task.id,
+        "tier": "free_premium",
+        "free_premium_remaining": 0,
+    }
 
 
 @router.post("/email-reading")
@@ -395,17 +410,19 @@ async def email_reading_capture(
         from datetime import datetime, timezone
 
         try:
-            _send_discord_embed({
-                "title": "📧 Email Captured — Free Premium Trial",
-                "color": 0xF6AD55,
-                "fields": [
-                    {"name": "Email", "value": email, "inline": True},
-                    {"name": "Name", "value": name, "inline": True},
-                    {"name": "IP", "value": client_ip or "unknown", "inline": True},
-                ],
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-                "footer": {"text": "Traditional Astrology · Free Trial Funnel"},
-            })
+            _send_discord_embed(
+                {
+                    "title": "📧 Email Captured — Free Premium Report",
+                    "color": 0xF6AD55,
+                    "fields": [
+                        {"name": "Email", "value": email, "inline": True},
+                        {"name": "Name", "value": name, "inline": True},
+                        {"name": "IP", "value": client_ip or "unknown", "inline": True},
+                    ],
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "footer": {"text": "Traditional Astrology · Free Premium Funnel"},
+                }
+            )
         except Exception as discord_err:
             logger.warning("Discord notify for email capture failed: %s", discord_err)
 

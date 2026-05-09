@@ -8,12 +8,13 @@ if ROOT_DIR not in sys.path:
 
 import logging
 import time
+from urllib.parse import quote
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import JSONResponse, RedirectResponse
+from starlette.responses import FileResponse, JSONResponse, RedirectResponse
 
 from src.api.v1.client_ip import get_client_ip
 from src.api.v1.router import api_router as v1_router
@@ -156,6 +157,9 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         )
         response.headers["Content-Security-Policy"] = csp
         noindex_paths = {
+            "/account",
+            "/account/",
+            "/account.html",
             "/dashboard",
             "/dashboard/",
             "/dashboard.html",
@@ -177,8 +181,12 @@ class CacheControlMiddleware(BaseHTTPMiddleware):
         response = await call_next(request)
         if request.method == "GET" and response.status_code == 200:
             path = request.url.path
-            if path == "/dashboard.html":
-                response.headers["Cache-Control"] = "no-store"
+            if path in {"/account.html", "/dashboard.html"}:
+                response.headers["Cache-Control"] = (
+                    "no-store, no-cache, must-revalidate, max-age=0"
+                )
+                response.headers["Pragma"] = "no-cache"
+                response.headers["Expires"] = "0"
             # Static assets cache aggressively
             elif any(
                 path.endswith(ext)
@@ -283,12 +291,11 @@ _LEGACY_REDIRECTS = [
     "developers.html",
     "documentation.html",
     "api-guide.html",
-    # Auth pages
-    "login.html",
-    "register.html",
-    "signup.html",
-    "forgot-password.html",
-    "reset-password.html",
+    "etsy-astrology-seller.html",
+    "sell-astrology-readings-etsy.html",
+    "astrology-client-birth-data.html",
+    "traditional-astrology-vs-astrolabe.html",
+    "how-to-price-astrology-readings.html",
     # Old misc pages
     "demo.html",
     "booking.html",
@@ -299,7 +306,6 @@ _LEGACY_REDIRECTS = [
     "advanced.html",
     "preview.html",
     "how-we-audit.html",
-    "owner.html",
     "status.html",
     "success.html",
 ]
@@ -317,20 +323,102 @@ for _page in _LEGACY_REDIRECTS:
     app.get(_route_path, include_in_schema=False)(_make_redirect())
 
 
-# Also catch dashboard paths
+_AUTH_MODAL_REDIRECTS = {
+    "login.html": "/account.html?auth=login",
+    "register.html": "/account.html?auth=register",
+    "signup.html": "/account.html?auth=register",
+    "forgot-password.html": "/account.html?auth=forgot",
+}
+
+for _page, _target in _AUTH_MODAL_REDIRECTS.items():
+    _route_path = f"/{_page}"
+
+    def _make_auth_redirect(target=_target, page=_page):
+        async def _redirect():
+            return RedirectResponse(url=target, status_code=302)
+
+        _redirect.__name__ = f"redirect_{page.replace('.', '_').replace('-', '_')}"
+        return _redirect
+
+    app.get(_route_path, include_in_schema=False)(_make_auth_redirect())
+
+
+@app.get("/reset-password.html", include_in_schema=False)
+async def reset_password_page_redirect(request: Request):
+    token = request.query_params.get("token", "")
+    target = "/account.html?auth=reset"
+    if token:
+        target = f"{target}&token={quote(token, safe='')}"
+    return RedirectResponse(url=target, status_code=302)
+
+
+@app.get("/owner.html", include_in_schema=False)
+async def retired_owner_page():
+    return JSONResponse(
+        {"detail": "Gone"},
+        status_code=410,
+        headers={
+            "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+            "Pragma": "no-cache",
+            "Expires": "0",
+            "X-Robots-Tag": "noindex, nofollow",
+        },
+    )
+
+
 @app.get("/astroforge-vs-astrolabe.html", include_in_schema=False)
 async def astroforge_page_redirect():
-    return RedirectResponse(url="/traditional-astrology-vs-astrolabe.html", status_code=301)
+    return RedirectResponse(url="/#get-reading", status_code=301)
+
+
+@app.get("/account.html", include_in_schema=False)
+async def account_page():
+    account_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "static", "account.html"
+    )
+    response = FileResponse(account_file, media_type="text/html")
+    response.headers["Cache-Control"] = (
+        "no-store, no-cache, must-revalidate, max-age=0"
+    )
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return response
+
+
+@app.get("/account", include_in_schema=False)
+async def account_redirect():
+    return RedirectResponse(url="/account.html", status_code=302)
+
+
+@app.get("/account/", include_in_schema=False)
+async def account_slash_redirect():
+    return RedirectResponse(url="/account.html", status_code=302)
+
+
+@app.get("/dashboard.html", include_in_schema=False)
+async def dashboard_page():
+    dashboard_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "static", "dashboard.html"
+    )
+    response = FileResponse(dashboard_file, media_type="text/html")
+    response.headers["Cache-Control"] = (
+        "no-store, no-cache, must-revalidate, max-age=0"
+    )
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return response
 
 
 @app.get("/dashboard", include_in_schema=False)
 async def dashboard_redirect():
-    return RedirectResponse(url="/dashboard.html", status_code=301)
+    return RedirectResponse(url="/dashboard.html", status_code=302)
 
 
 @app.get("/dashboard/", include_in_schema=False)
 async def dashboard_slash_redirect():
-    return RedirectResponse(url="/dashboard.html", status_code=301)
+    return RedirectResponse(url="/dashboard.html", status_code=302)
 
 
 # --- STATIC FILES ---

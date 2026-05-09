@@ -14,8 +14,40 @@
     </script>
     <meta charset="UTF-8">
     <title>Privacy Policy | Traditional Astrology</title>
-    <link rel="stylesheet" href="style.css">
-  <meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
+    <link rel="stylesheet" href="style.css?v=rev20260508mobile1">
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
   <meta content="https://traditional-astrology.com/og-card.png" name="twitter:image"/>
   <meta name="description" content="Privacy policy for Traditional Astrology. We do not sell your birth data. All classical astrological calculations are performed securely.">
   <link rel="canonical" href="https://traditional-astrology.com/privacy.html"/>
@@ -34,16 +66,17 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
     <div class="container policy-container" style="margin-top: 6rem; min-height: 60vh; max-width: 760px; line-height: 1.8; color: rgba(255,255,255,0.85);">
         <h1>Privacy Policy</h1>
-        <p style="color: rgba(255,255,255,0.55); font-size: 0.9rem;">Last Updated: May 6, 2026</p>
+        <p style="color: rgba(255,255,255,0.55); font-size: 0.9rem;">Last Updated: May 8, 2026</p>
 
         <h2>1. Data We Collect</h2>
         <p>We collect birth date, time, and location to generate astrological calculations. We do not require or store your real name or personal identity unless you provide it during account registration or when requesting a report.</p>
@@ -54,9 +87,10 @@
 
         <h2>3. Analytics and Cookies</h2>
         <p>We use Google Analytics (GA4) to understand how visitors find the site — which pages are visited, how long sessions last, and what search queries lead here. This data is aggregated and does not identify you personally.</p>
-        <p><strong>Consent:</strong> When you first visit this site, a banner at the bottom of the page asks whether you accept or decline analytics. If you decline, Google Analytics does not set cookies and no usage data is collected from your session. Your choice is stored in your browser's localStorage under the key <code>ta_consent</code> and lasts until you clear your browser storage. You can change your preference at any time by clearing that key.</p>
-        <p>We implement <strong>Google Consent Mode v2</strong>. This means analytics tags do not run until after you have accepted — not before. If you decline, the tags are still loaded (for technical reasons related to how GA4 initialises) but operate in a cookieless mode that does not track your session.</p>
-        <p>We do not use advertising cookies, retargeting pixels, or third-party tracking scripts beyond Google Analytics and Google Tag Manager.</p>
+        <p><strong>Consent:</strong> When you first visit this site, a banner at the bottom of the page asks whether you accept or decline analytics. Your choice is stored in your browser's localStorage under the key <code>ta_consent</code> and lasts until you clear your browser storage.</p>
+        <p>We implement <strong>Google Consent Mode v2</strong> with analytics and advertising storage defaulted to <strong>denied</strong> before you make a choice. The Google tag may load immediately so Consent Mode can enforce that default, but analytics cookies are not enabled unless you accept. If you decline, analytics remains denied and GA4 operates without analytics cookies; Google may receive limited consent-mode technical pings rather than ordinary analytics cookie data.</p>
+        <p>You can change your preference at any time using the visible <strong>Cookie preferences</strong> control shown on site pages after you make a choice.</p>
+        <p>We do not use advertising cookies, retargeting pixels, or third-party tracking scripts beyond Google Analytics.</p>
 
         <h2>4. Email</h2>
         <p>If you purchase a report, we email your PDF to the address Stripe collected at checkout. We do not add you to a marketing list on the basis of that purchase. If you create an account, we may send transactional emails (password reset, subscription notifications). You can unsubscribe from non-transactional email by replying with "UNSUBSCRIBE".</p>
@@ -70,7 +104,7 @@
         <h2>7. Third-Party Services</h2>
         <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
           <li><strong>Stripe</strong> — payment processing. <a href="https://stripe.com/privacy" style="color: #c9a84c;">Stripe Privacy Policy</a></li>
-          <li><strong>Google Analytics / Tag Manager</strong> — site analytics (consent-gated). <a href="https://policies.google.com/privacy" style="color: #c9a84c;">Google Privacy Policy</a></li>
+          <li><strong>Google Analytics</strong> — site analytics (consent-gated). <a href="https://policies.google.com/privacy" style="color: #c9a84c;">Google Privacy Policy</a></li>
           <li><strong>Google Cloud Run</strong> — application hosting (US-based)</li>
         </ul>
 
@@ -82,8 +116,8 @@
 
     <!-- Footer matching index.html -->
     <footer style="text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.8rem;">
-        <p>© 2026 Traditional Astrology · <a href="/privacy.html" style="color: var(--text-muted);">Privacy</a> · <a href="/terms.html" style="color: var(--text-muted);">Terms</a> · <a href="/refunds.html" style="color: var(--text-muted);">Refunds</a></p>
-        <p style="margin-top: 0.5rem; font-size: 0.7rem;">For entertainment and historical study purposes only. Not medical, legal, or financial advice.</p>
+        <p>© 2026 Traditional Astrology · <a href="/about.html" style="color: var(--text-muted);">About</a> · <a href="/methodology.html" style="color: var(--text-muted);">Methodology</a> · <a href="/privacy.html" style="color: var(--text-muted);">Privacy</a> · <a href="/terms.html" style="color: var(--text-muted);">Terms</a> · <a href="/refunds.html" style="color: var(--text-muted);">Refunds</a> · <a href="/contact.html" style="color: var(--text-muted);">Contact/Support</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.7rem;">Historical Use Only. For entertainment, historical, and spiritual research only. Not medical, financial, legal, psychological, emergency, or safety advice. Do not use for urgent decisions.</p>
     </footer>
   <script>
     if ('serviceWorker' in navigator) {
@@ -149,7 +183,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -14,8 +14,40 @@
     </script>
     <meta charset="UTF-8">
     <title>Refund Policy | Traditional Astrology</title>
-    <link rel="stylesheet" href="style.css">
-  <meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
+    <link rel="stylesheet" href="style.css?v=rev20260508mobile1">
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
   <meta content="https://traditional-astrology.com/og-card.png" name="twitter:image"/>
   <meta name="description" content="Review our clear, no-nonsense refund policy for premium traditional astrology reports and predictive forecasting services.">
   <link rel="canonical" href="https://traditional-astrology.com/refunds.html"/>
@@ -34,44 +66,38 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
     <div class="container policy-container" style="margin-top: 6rem; min-height: 60vh;">
         <h1>Refund Policy</h1>
-        <p>Last Updated: May 6, 2026</p>
+        <p>Last Updated: May 8, 2026</p>
 
         <h2>1. One-Time Reading Purchases</h2>
-        <p>Individual readings (Full Reading at $49 and Complete Analysis at $69) are digital products delivered immediately upon payment. Because the reading is generated and delivered instantly, we generally do not offer refunds for completed purchases.</p>
-        <p><strong>Exception — technical errors:</strong> If your reading contains a genuine technical error (e.g., incorrect planetary positions, wrong chart data despite correct input, or a corrupted PDF), contact us within 14 days of purchase at <code>support@traditional-astrology.com</code> with your order details. We will either regenerate your reading or issue a full refund — your choice.</p>
+        <p>Individual readings (Full Reading at $25 and Complete Analysis at $69) and $5 Horary Oracle questions are digital products generated after payment and delivered in the browser return flow, with email recommended for receipts and support. Because the output is generated for the chart or question data you entered, completed purchases are generally final.</p>
+        <p><strong>14-day technical remedy window:</strong> If your reading has a genuine technical or delivery/access problem (for example, incorrect planetary positions despite correct input, wrong chart data, missing paid sections, a corrupted PDF/browser export, or a failed return page after Stripe checkout), contact us within 14 days of purchase at <code>support@traditional-astrology.com</code> with your order details. We will regenerate the report, restore access, or issue a full refund for eligible technical failures.</p>
 
-        <h2>2. Subscription Plans (Scholar &amp; Practitioner)</h2>
-        <p>Monthly subscriptions may be canceled at any time from your dashboard. Cancellation stops future billing, and your access continues until the end of the current billing period. No pro-rated refunds are issued for partial months.</p>
-        <p><strong>First-month guarantee:</strong> If you subscribe and are unsatisfied within the first 7 days of your first paid month, contact <code>support@traditional-astrology.com</code> for a full refund of that month's charge.</p>
-
-        <h2>3. Free Trials</h2>
-        <p>Free trials do not require a credit card and incur no charge. If you choose to subscribe after a trial, billing begins according to the plan terms displayed at checkout. You will not be charged automatically when a trial ends.</p>
-
-        <h2>4. Free Chart Previews</h2>
+        <h2>2. Free Chart Previews</h2>
         <p>The free chart preview (available to all visitors, no account required) has no associated charge and therefore no refund applies.</p>
 
-        <h2>5. How to Request a Refund</h2>
-        <p>Email <code>support@traditional-astrology.com</code> with your account email and a brief description of the issue. We aim to respond within 1 business day. Approved refunds are processed back to the original payment method via Stripe and typically appear within 5–10 business days.</p>
+        <h2>3. How to Request a Refund</h2>
+        <p>Email <code>support@traditional-astrology.com</code> with your checkout email, order ID if available, birth data used for the report, and a brief description of the issue. We aim to respond within 1 business day. Approved refunds are processed back to the original payment method via Stripe and typically appear within 5–10 business days.</p>
 
-        <h2>6. Chargebacks</h2>
-        <p>If you believe a charge is unauthorized, please contact us first. We resolve most disputes faster than the chargeback process and can issue refunds directly. Filing a chargeback without contacting us first may result in account suspension while the dispute is investigated.</p>
+        <h2>4. Chargebacks</h2>
+        <p>If you believe a charge is unauthorized, please contact us first. We resolve most disputes faster than the chargeback process and can issue refunds directly.</p>
 
         <a href="/index.html" class="help-btn" style="background: linear-gradient(135deg, #c9a84c, #b8922f); color: #0a0a1a; font-weight: 700; margin-top: 2rem;">Back to Home</a>
     </div>
 
     <!-- Footer matching index.html -->
     <footer style="text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.8rem;">
-        <p>© 2026 Traditional Astrology · <a href="/privacy.html" style="color: var(--text-muted);">Privacy</a> · <a href="/terms.html" style="color: var(--text-muted);">Terms</a> · <a href="/refunds.html" style="color: var(--text-muted);">Refunds</a></p>
-        <p style="margin-top: 0.5rem; font-size: 0.7rem;">For entertainment and historical study purposes only. Not medical, legal, or financial advice.</p>
+        <p>© 2026 Traditional Astrology · <a href="/about.html" style="color: var(--text-muted);">About</a> · <a href="/methodology.html" style="color: var(--text-muted);">Methodology</a> · <a href="/privacy.html" style="color: var(--text-muted);">Privacy</a> · <a href="/terms.html" style="color: var(--text-muted);">Terms</a> · <a href="/refunds.html" style="color: var(--text-muted);">Refunds</a> · <a href="/contact.html" style="color: var(--text-muted);">Contact/Support</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.7rem;">Historical Use Only. For entertainment, historical, and spiritual research only. Not medical, financial, legal, psychological, emergency, or safety advice. Do not use for urgent decisions.</p>
     </footer>
   <script>
     if ('serviceWorker' in navigator) {
@@ -137,7 +163,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

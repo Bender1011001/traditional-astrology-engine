@@ -10,8 +10,8 @@
  * on subsequent visits, even offline.
  */
 
-const CACHE_NAME = "astro-v8";
-const RUNTIME_CACHE = "astro-runtime-v8";
+const CACHE_NAME = "astro-v18-print-pdf";
+const RUNTIME_CACHE = "astro-runtime-v18-print-pdf";
 
 // Core app shell — cached on install.
 // IMPORTANT: Do NOT include query-string cache busters here.
@@ -19,12 +19,14 @@ const RUNTIME_CACHE = "astro-runtime-v8";
 const APP_SHELL = [
   "/",
   "/index.html",
+  "/account.html",
   "/daily.html",
   "/about.html",
   "/faq.html",
   "/horary.html",
   "/style.css",
   "/config.js",
+  "/consent.js",
   "/js/horary-app.js",
   "/js/auth.js",
   "/js/api.js",
@@ -84,7 +86,13 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Everything else (HTML, CSS, JS, images) → Cache-First
+  // HTML documents → Network-First so returning visitors receive launch fixes.
+  if (event.request.mode === "navigate" || event.request.destination === "document") {
+    event.respondWith(networkFirst(event.request));
+    return;
+  }
+
+  // Everything else (CSS, JS, images) → Cache-First
   event.respondWith(cacheFirst(event.request));
 });
 
@@ -94,9 +102,15 @@ async function cacheFirst(request) {
   let cached = await caches.match(request);
   if (cached) return cached;
 
-  // Try without query string (handles ?v=cachebust mismatches)
+  // Try without query string for non-code assets only.
+  // JavaScript and CSS query strings are deployment version contracts;
+  // stripping them can resurrect stale navigation/auth code from old caches.
   const url = new URL(request.url);
-  if (url.search) {
+  const isVersionedCodeAsset =
+    request.destination === "script" ||
+    request.destination === "style" ||
+    /\.(?:js|css)$/i.test(url.pathname);
+  if (url.search && !isVersionedCodeAsset) {
     const strippedUrl = url.origin + url.pathname;
     cached = await caches.match(strippedUrl);
     if (cached) return cached;

@@ -20,8 +20,40 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
-<script type="application/ld+json">
+<link href="style.css?v=rev20260508mobile1" rel="stylesheet"/>
+  <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What are firdaria in astrology?","acceptedAnswer":{"@type":"Answer","text":"Firdaria (singular: firdar) is a medieval Arabic timing system that divides life into a sequence of planetary periods, each governed by a specific planet. Major periods last 7–12 years, with seven nested sub-periods within each. The word derives from the Persian 'fardar.' Unlike annual profections, firdaria operate on a decade-long timescale and reveal the overarching planetary 'chapter' a person is living through."}},
 {"@type":"Question","name":"What is the firdaria sequence for a day chart?","acceptedAnswer":{"@type":"Answer","text":"For day charts (Sun above the horizon at birth), the firdaria sequence begins with the Sun and proceeds: Sun (10 years), Venus (8 years), Mercury (13 years), Moon (9 years), Saturn (11 years), Jupiter (12 years), Mars (7 years), North Node (3 years), South Node (2 years). The total cycle is 75 years, after which it repeats from the Sun."}},
@@ -145,10 +177,11 @@
  <div class="nav-links">
  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
  <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
  <a href="/horary.html" class="nav-link">Horary Oracle</a>
- <a href="/daily.html" class="nav-link">Daily Planets</a>
- <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
- <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+ <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+ <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+ <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
  <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
  </div>
  </nav>
@@ -258,12 +291,12 @@
 <p class="section-subtitle">The natal condition of the period lord determines the quality, not the identity, of what the decade delivers.</p>
 <p>Identifying the active firdar is only half the work. The more important step is reading the <strong>natal condition of the period lord</strong> — because that condition determines whether the planet performs at its best, worst, or somewhere in the middle across the decade it governs.</p>
 <ul class="grid-container">
-<li><strong>House placement:</strong> The natal house the period lord occupies reveals which area of life becomes most activated during the firdar. A period lord in the 7th house will tend to bring relationship events, legal matters, or partnerships to the foreground.</li>
+<li><strong>House placement:</strong> The natal house the period lord occupies reveals which area of life becomes symbolically activated during the firdar. A period lord in the 7th house highlights relationship, dispute, and partnership symbolism; this is not legal, business, safety, or relationship advice.</li>
 <li><strong>Essential dignity:</strong> A planet in domicile or exaltation performs with strength and coherence during its period. A planet in detriment or fall, or entirely lacking dignity (peregrine), may deliver the period's themes in a diminished, distorted, or inconsistent way.</li>
 <li><strong>Accidental dignity:</strong> Angular planets (1st, 4th, 7th, 10th houses) are strengthened in their periods. Cadent planets (3rd, 6th, 9th, 12th houses) are weakened. A period lord in the 12th house, even if essentially dignified, may deliver themes in hidden, blocked, or self-undermining ways.</li>
 <li><strong>Aspects received:</strong> Benefic planets applying to the period lord, or the period lord applying to its own domicile, improve the period. Malefic planets afflicting the period lord — especially by square or opposition without reception — introduce difficulty, conflict, or reversal during that decade.</li>
 </ul>
-<p style="margin-top:1.25rem;"><strong>Practical example:</strong> A Jupiter firdar for a native with Jupiter dignified in Sagittarius in the 10th house is typically a decade of significant professional expansion, recognition, and increase. The same Jupiter firdar for a native with Jupiter in Gemini (detriment) in the 6th house may bring growth through service, health challenges, or a career domain involving illness, routines, or subordinate roles — not the triumphant expansion, but still Jupiter's themes operating through a less favorable filter.</p>
+<p style="margin-top:1.25rem;"><strong>Practical example:</strong> A Jupiter firdar for a native with Jupiter dignified in Sagittarius in the 10th house is traditionally read as professional expansion, recognition, and increase symbolism. The same Jupiter firdar for a native with Jupiter in Gemini (detriment) in the 6th house may symbolize growth through service, routines, or subordinate roles — still Jupiter's themes operating through a less favorable filter. This is historical timing symbolism only, not career, health, legal, business, or financial advice.</p>
 </div></section>
 
 <section class="basic-view"><div class="basic-card">
@@ -345,7 +378,7 @@
 <div class="auth-footer"><p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p></div>
 </div>
 </div></div>
-<script type="module" src="/js/auth.js?v=astro-v5"></script>
+<script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 <script>document.addEventListener('DOMContentLoaded',function(){var toggles=document.querySelectorAll('.mobile-menu-toggle');toggles.forEach(function(toggle){if(toggle.dataset.navAttached)return;toggle.dataset.navAttached='true';toggle.addEventListener('click',function(){var expanded=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',!expanded);this.classList.toggle('active');var navLinks=this.nextElementSibling;if(navLinks&&navLinks.classList.contains('nav-links')){navLinks.classList.toggle('active');}});});});</script>
  <script src="/consent.js"></script>
 </body>

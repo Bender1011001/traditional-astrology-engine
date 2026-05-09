@@ -20,8 +20,40 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
-<script type="application/ld+json">
+<link href="style.css?v=rev20260508mobile1" rel="stylesheet"/>
+  <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -95,10 +127,11 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
@@ -108,7 +141,7 @@
 <div class="basic-card">
 <h2 class="section-title">What Is a Natal Chart?</h2>
 <p class="section-subtitle">A snapshot of the sky at the moment you were born. Traditional astrology reads it as a map of your life — not a personality quiz.</p>
-<p>Every planet, sign, and house in the chart carries specific meaning. The Sun and Moon describe core drives, the other planets govern particular areas of life, and the Ascendant sets the whole chart in motion. In the traditional approach, these aren’t metaphors for your inner world — they’re concrete indicators of circumstances, talents, and challenges that tend to show up in predictable ways.</p>
+<p>Every planet, sign, and house in the chart carries specific meaning. The Sun and Moon describe core drives, the other planets govern particular areas of life, and the Ascendant sets the whole chart in motion. To see the traditional method in practice, start with the <a class="link-gold" href="traditional-birth-chart-calculator.html">traditional birth chart calculator</a>.</p>
 </div>
 </section>
 <section class="basic-view">
@@ -149,6 +182,7 @@
 <div class="basic-card related-guides">
 <h2 class="section-title">Related Traditional Guides</h2>
 <ul class="grid-container">
+<li><a class="link-gold" href="traditional-birth-chart-calculator.html">Traditional astrology calculator</a> — Calculate a classical chart with sect and dignities.</li>
 <li><a class="link-gold" href="planetary-periods.html">Planetary Periods &amp; Time Lords</a> — Learn how life chapters are divided.</li>
 <li><a class="link-gold" href="daily.html">Daily Navigator</a> — See profections, firdaria, and zodiacal releasing applied to your chart for any date.</li>
 <li><a class="link-gold" href="aspects.html">Astrological Aspects Explained</a> — Understanding the geometry of the sky.</li>
@@ -261,7 +295,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -9,16 +9,18 @@ to get the full reading.
 import json
 import logging
 import uuid
+from typing import Optional
 
 import stripe
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
+from src.api.v1.auth import get_current_user
 from src.api.v1.client_ip import get_client_ip
 from src.api.v1.schemas import ChartRequest  # type: ignore
 from src.core.config import settings
 from src.database.core import get_db
-from src.database.models import AsyncReportTask, GuestRequest
+from src.database.models import AsyncReportTask, GuestRequest, User
 from src.services.admin_notifier import notify_chart_created
 from src.services.premium_generator import generate_premium_report_task
 
@@ -34,17 +36,67 @@ TIERS = {
         "product_name": "Full Natal Chart Reading",
         "description": "Complete natal chart reading with timing, dignities, and personalized insights.",
         "config_key": "STRIPE_PRICE_FULL_READING",
+        "report_iterations": 1,
     },
     "premium_audit": {
         "price_cents": 6900,
         "product_name": "Complete Astrological Analysis",
         "description": "20+ page deep-dive analysis with advanced timing, remediation, and 10-year forecast.",
         "config_key": "STRIPE_PRICE_PREMIUM_AUDIT",
+        "report_iterations": 3,
     },
 }
 
-# Free teaser: no limit — always allow the quick preview
-MAX_FREE_PREMIUM_PER_IP = 3
+
+def _stripe_field(obj, key: str, default=None):
+    if hasattr(obj, "get"):
+        return obj.get(key, default)
+    return getattr(obj, key, default)
+
+
+def _is_checkout_ready_price(price_id: str, tier_key: str) -> bool:
+    tier = TIERS[tier_key]
+    expected_amount = int(tier["price_cents"])  # type: ignore
+
+    try:
+        price = stripe.Price.retrieve(price_id, expand=["product"])
+        product = _stripe_field(price, "product")
+        if isinstance(product, str):
+            product = stripe.Product.retrieve(product)
+
+        price_active = bool(_stripe_field(price, "active", False))
+        product_active = bool(_stripe_field(product, "active", False))
+        unit_amount = int(_stripe_field(price, "unit_amount", 0) or 0)
+        currency = str(_stripe_field(price, "currency", "") or "").lower()
+
+        if (
+            price_active
+            and product_active
+            and unit_amount == expected_amount
+            and currency == "usd"
+        ):
+            return True
+
+        logger.warning(
+            "Ignoring non-checkout-ready Stripe price %s for %s: "
+            "price_active=%s product_active=%s unit_amount=%s currency=%s",
+            price_id,
+            tier_key,
+            price_active,
+            product_active,
+            unit_amount,
+            currency,
+        )
+        return False
+    except Exception as e:
+        logger.warning(
+            "Stripe price validation failed for %s/%s: %s",
+            tier_key,
+            price_id,
+            repr(e),
+            exc_info=True,
+        )
+        return False
 
 
 def _get_or_create_stripe_price(tier_key: str) -> str:
@@ -54,33 +106,37 @@ def _get_or_create_stripe_price(tier_key: str) -> str:
 
     # Check settings cache
     cached = getattr(settings, cache_attr, None)
-    if cached:
+    if cached and _is_checkout_ready_price(cached, tier_key):
         return cached
+    if cached:
+        setattr(settings, cache_attr, None)
 
     # Check pre-configured price IDs (config_key → existing settings attribute)
     config_key = tier.get("config_key", "")
     if config_key:
         env_val = (getattr(settings, config_key, "") or "").strip()
-        if env_val:
+        if env_val and _is_checkout_ready_price(env_val, tier_key):
             setattr(settings, cache_attr, env_val)
             return env_val
 
     # Fallback: check generic env var STRIPE_PRICE_{TIER_KEY}
     generic_key = f"STRIPE_PRICE_{tier_key.upper()}"
     generic_val = (getattr(settings, generic_key, "") or "").strip()
-    if generic_val:
+    if generic_val and _is_checkout_ready_price(generic_val, tier_key):
         setattr(settings, cache_attr, generic_val)
         return generic_val
 
     # Search Stripe for existing price
     try:
         prices = stripe.Price.search(
-            query=f'active:"true" metadata["tier"]:"{tier_key}"', limit=1
+            query=f'active:"true" metadata["tier"]:"{tier_key}"', limit=5
         )
         if prices and prices.data:
-            price_id = prices.data[0].id
-            setattr(settings, cache_attr, price_id)
-            return price_id
+            for candidate in prices.data:
+                price_id = _stripe_field(candidate, "id")
+                if price_id and _is_checkout_ready_price(price_id, tier_key):
+                    setattr(settings, cache_attr, price_id)
+                    return price_id
     except Exception as e:
         logger.warning(
             "Stripe price search failed for %s: %s", tier_key, repr(e), exc_info=True
@@ -121,6 +177,7 @@ async def guest_checkout(
     city: str,
     state: str = "",
     name: str = "Guest",
+    current_user: Optional[User] = Depends(get_current_user),
 ):
     """
     Create a Stripe Checkout Session for a guest (no account required).
@@ -136,7 +193,7 @@ async def guest_checkout(
     if not date or not city:
         raise HTTPException(status_code=400, detail="Date and city are required.")
 
-    stripe.api_key = getattr(settings, "STRIPE_SECRET_KEY", "") or ""
+    stripe.api_key = (getattr(settings, "STRIPE_SECRET_KEY", "") or "").strip()
     if not stripe.api_key:
         raise HTTPException(status_code=500, detail="Payment system not configured.")
 
@@ -157,19 +214,25 @@ async def guest_checkout(
     origin = str(request.base_url).rstrip("/")
 
     try:
-        session = stripe.checkout.Session.create(
-            payment_method_types=["card"],
-            line_items=[{"price": price_id, "quantity": 1}],
-            mode="payment",
-            allow_promotion_codes=True,
-            success_url=f"{origin}/?paid=true&session_id={{CHECKOUT_SESSION_ID}}&order={order_id}",
-            cancel_url=f"{origin}/#get-reading",
-            metadata={
+        checkout_kwargs = {
+            "payment_method_types": ["card"],
+            "line_items": [{"price": price_id, "quantity": 1}],
+            "mode": "payment",
+            "allow_promotion_codes": True,
+            "success_url": f"{origin}/?paid=true&session_id={{CHECKOUT_SESSION_ID}}&order={order_id}",
+            "cancel_url": f"{origin}/#get-reading",
+            "metadata": {
                 "order_id": order_id,
                 "tier": tier_key,
                 "chart_data": json.dumps(chart_data),
             },
-        )
+        }
+        if current_user:
+            checkout_kwargs["customer_email"] = current_user.email
+            checkout_kwargs["metadata"]["user_id"] = current_user.id
+            checkout_kwargs["metadata"]["account_email"] = current_user.email
+
+        session = stripe.checkout.Session.create(**checkout_kwargs)
         return {"url": session.url, "session_id": session.id, "order_id": order_id}
     except Exception as e:
         logger.error("Stripe checkout creation failed: %s", repr(e), exc_info=True)
@@ -183,13 +246,14 @@ async def generate_paid_reading(
     request: Request,
     background_tasks: BackgroundTasks,
     session_id: str,
+    current_user: Optional[User] = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
     After successful payment, verify the Stripe session and start premium generation.
     Returns a task_id to poll for status.
     """
-    stripe.api_key = getattr(settings, "STRIPE_SECRET_KEY", "") or ""
+    stripe.api_key = (getattr(settings, "STRIPE_SECRET_KEY", "") or "").strip()
     if not stripe.api_key:
         raise HTTPException(status_code=500, detail="Payment system not configured.")
 
@@ -249,9 +313,26 @@ async def generate_paid_reading(
     except Exception:
         pass
 
+    tier_key = str(session.metadata.get("tier", "full_reading") or "full_reading").strip().lower()  # type: ignore
+    tier_cfg = TIERS.get(tier_key, TIERS["full_reading"])
+
     request_meta = chart_request.model_dump()
+    request_meta["tier"] = tier_key
+    request_meta["report_iterations"] = int(tier_cfg["report_iterations"])  # type: ignore[arg-type]
     if customer_email:
         request_meta["customer_email"] = customer_email
+    metadata_user_id = session.metadata.get("user_id") if session.metadata else None  # type: ignore
+    metadata_account_email = (
+        session.metadata.get("account_email") if session.metadata else None  # type: ignore
+    )
+    if current_user:
+        request_meta["user_id"] = current_user.id
+        request_meta["account_email"] = current_user.email
+        request_meta.setdefault("customer_email", current_user.email)
+    elif metadata_user_id:
+        request_meta["user_id"] = metadata_user_id
+    if metadata_account_email:
+        request_meta["account_email"] = metadata_account_email
 
     task = AsyncReportTask(
         id=session_id,  # Use Stripe session_id as the primary key for guaranteed 1:1 idempotency

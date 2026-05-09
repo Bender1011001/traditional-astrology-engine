@@ -33,8 +33,8 @@ def _send_email_blocking(
             html_content += footer
 
     # 2. Try SendGrid
-    sendgrid_key = os.getenv("SENDGRID_API_KEY")
-    sender_email = os.getenv("SENDER_EMAIL", "noreply@traditional-astrology.com")
+    sendgrid_key = (os.getenv("SENDGRID_API_KEY") or "").strip()
+    sender_email = os.getenv("SENDER_EMAIL", "noreply@traditional-astrology.com").strip()
 
     if sendgrid_key:
         try:
@@ -84,7 +84,8 @@ def _send_email_blocking(
     smtp_host = os.getenv("SMTP_HOST")
     smtp_port = int(os.getenv("SMTP_PORT", "587"))
     smtp_user = os.getenv("SMTP_USER")
-    smtp_pass = os.getenv("SMTP_PASS")
+    smtp_pass_raw = os.getenv("SMTP_PASS")
+    smtp_pass = smtp_pass_raw.strip() if smtp_pass_raw else smtp_pass_raw
 
     if smtp_host and smtp_user:
         try:

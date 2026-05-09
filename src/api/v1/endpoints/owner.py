@@ -36,8 +36,8 @@ def require_owner(
 ) -> Optional[User]:
     if (
         owner_key
-        and settings.OWNER_BOOTSTRAP_KEY
-        and owner_key == settings.OWNER_BOOTSTRAP_KEY
+        and settings.OWNER_BOOTSTRAP_KEY.strip()
+        and owner_key.strip() == settings.OWNER_BOOTSTRAP_KEY.strip()
     ):
         return current_user
 

@@ -1,6 +1,8 @@
 import logging
 import math
+import os
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import swisseph as swe
@@ -12,6 +14,33 @@ logger = logging.getLogger(__name__)
 FIXED_STAR_EPOCH = 2025
 FIXED_STAR_CATALOG = "Swiss Ephemeris fixed star catalog (swe.fixstar) when available; fallback to traditional longitudes."
 FIXED_STAR_PRECESSION = "Swiss Ephemeris JD positions when available; fallback linear precession of 1° per 72 years from 2025 epoch."
+LOCAL_EPHE_DIR = Path(__file__).resolve().parents[1] / "ephe"
+DEFAULT_EPHE_DIRS = (
+    LOCAL_EPHE_DIR,
+    Path("/usr/share/swisseph"),
+    Path("/usr/local/share/swisseph"),
+)
+_FIXSTAR_CATALOG_AVAILABLE: Optional[bool] = None
+_FIXSTAR_MISSING_LOGGED = False
+_FIXSTAR_WARNED_STARS: set[str] = set()
+
+
+def _configure_swisseph_ephe_path() -> str:
+    existing = os.environ.get("SE_EPHE_PATH", "")
+    path_parts: List[str] = [str(path) for path in DEFAULT_EPHE_DIRS]
+    path_parts.extend(part for part in existing.split(os.pathsep) if part)
+
+    deduped = list(dict.fromkeys(path_parts))
+    ephe_path = os.pathsep.join(deduped)
+
+    # Swiss Ephemeris ignores swe.set_ephe_path() if SE_EPHE_PATH is already
+    # non-empty, so set both to the same explicit application path.
+    os.environ["SE_EPHE_PATH"] = ephe_path
+    swe.set_ephe_path(ephe_path)
+    return ephe_path
+
+
+SWISSEPH_EPHE_PATH = _configure_swisseph_ephe_path()
 
 
 @dataclass
@@ -325,21 +354,41 @@ def _precess_longitude(lon_2025: float, jd: Optional[float]) -> float:
 def _get_star_equatorial(
     star: FixedStar, jd: Optional[float]
 ) -> Optional[Tuple[float, float]]:
+    global _FIXSTAR_CATALOG_AVAILABLE, _FIXSTAR_MISSING_LOGGED
+
     if jd is None or not star.swe_name:
         return None
+    if _FIXSTAR_CATALOG_AVAILABLE is False:
+        return None
+
     try:
-        res = swe.fixstar(star.swe_name, jd)
-        coords = res[1] if isinstance(res[1], (list, tuple)) else res[0]
+        flags = swe.FLG_SWIEPH | swe.FLG_EQUATORIAL
+        res = swe.fixstar2_ut(star.swe_name, jd, flags)
+        coords = res[0]
         ra = coords[0]
         dec = coords[1]
+        _FIXSTAR_CATALOG_AVAILABLE = True
         return (ra, dec)
     except Exception as e:
-        logger.warning(
-            "Star equatorial lookup failed for %s: %s",
-            star.swe_name,
-            repr(e),
-            exc_info=True,
-        )
+        if "sefstars.txt" in str(e):
+            _FIXSTAR_CATALOG_AVAILABLE = False
+            if not _FIXSTAR_MISSING_LOGGED:
+                logger.warning(
+                    "Swiss Ephemeris fixed star catalog sefstars.txt is unavailable "
+                    "on path %s; falling back to bundled traditional longitudes.",
+                    SWISSEPH_EPHE_PATH,
+                )
+                _FIXSTAR_MISSING_LOGGED = True
+            return None
+
+        if star.swe_name not in _FIXSTAR_WARNED_STARS:
+            logger.warning(
+                "Star equatorial lookup failed for %s: %s",
+                star.swe_name,
+                repr(e),
+                exc_info=True,
+            )
+            _FIXSTAR_WARNED_STARS.add(star.swe_name)
         return None
 
 

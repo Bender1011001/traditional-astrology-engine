@@ -1,9 +1,15 @@
 """Tests for stars.py — Fixed Stars catalog, conjunctions, and utility functions."""
 
 
+import logging
+
+import pytest
+
+import src.engine.stars as stars_module
 from src.engine.models import Chart, Planet, PlanetName
 from src.engine.stars import (STARS, FixedStar, StarContact,
                               _ecliptic_to_equatorial, _equatorial_to_ecliptic,
+                              _get_star_equatorial,
                               _normalize_deg, _precess_longitude,
                               check_fixed_stars, get_fixed_star_meta,
                               get_shortest_dist)
@@ -57,6 +63,46 @@ def test_all_stars_have_swe_name():
     """Every star should have a Swiss Ephemeris lookup name."""
     for star in STARS:
         assert star.swe_name, f"{star.name} missing swe_name"
+
+
+def test_sefstars_catalog_is_packaged():
+    catalog = stars_module.LOCAL_EPHE_DIR / "sefstars.txt"
+    assert catalog.exists()
+    assert catalog.stat().st_size > 100_000
+
+
+def test_swiss_ephemeris_fixed_star_lookup_works_with_bundled_catalog():
+    jd = stars_module.swe.julday(2025, 1, 1, 0)
+    sirius = next(s for s in STARS if s.name == "Sirius")
+
+    ra_dec = _get_star_equatorial(sirius, jd)
+
+    assert ra_dec is not None
+    ra, dec = ra_dec
+    assert 0.0 <= ra < 360.0
+    assert -90.0 <= dec <= 90.0
+
+
+def test_missing_sefstars_falls_back_without_log_spam(monkeypatch, caplog):
+    calls = {"count": 0}
+
+    def missing_catalog(*_args, **_kwargs):
+        calls["count"] += 1
+        raise stars_module.swe.Error("SwissEph file 'sefstars.txt' not found")
+
+    monkeypatch.setattr(stars_module.swe, "fixstar2_ut", missing_catalog)
+    monkeypatch.setattr(stars_module, "_FIXSTAR_CATALOG_AVAILABLE", None)
+    monkeypatch.setattr(stars_module, "_FIXSTAR_MISSING_LOGGED", False)
+
+    jd = stars_module.swe.julday(2025, 1, 1, 0)
+    sirius = next(s for s in STARS if s.name == "Sirius")
+
+    with caplog.at_level(logging.WARNING):
+        assert _get_star_equatorial(sirius, jd) is None
+        assert _get_star_equatorial(sirius, jd) is None
+
+    assert calls["count"] == 1
+    assert caplog.text.count("sefstars.txt is unavailable") == 1
 
 
 # ─── get_fixed_star_meta ────────────────────────────────────────────────────

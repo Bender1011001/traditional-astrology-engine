@@ -4,7 +4,7 @@
   <!-- Analytics intentionally omitted from this private account surface. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Astrological Dashboard | Traditional Astrology</title>
+  <title>Your Account | Traditional Astrology</title>
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#0a0a1a" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -12,125 +12,451 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=rev20260504premtrial1">
+  <link rel="stylesheet" href="style.css?v=rev20260508mobile1">
   
-  <style>
-    .dashboard-container {
-      max-width: 1000px;
-      margin: 8rem auto 4rem auto;
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><style>
+    .account-container {
+      max-width: 1120px;
+      margin: 7.5rem auto 4rem auto;
       padding: 0 1.5rem;
       min-height: 60vh;
     }
-    
-    .dashboard-header {
-      margin-bottom: 3rem;
+
+    .account-hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
-    .dashboard-header h1 {
-      font-size: 2.5rem;
+
+    .account-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1;
       color: var(--gold);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
-    .dashboard-header p {
+
+    .account-hero p {
       color: var(--text-muted);
       font-family: 'Inter', sans-serif;
+      max-width: 620px;
+      line-height: 1.65;
+      margin: 0;
     }
-    
-    .dashboard-grid {
+
+    .account-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .account-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 1rem;
+      border-radius: 6px;
+      border: 1px solid rgba(212,175,55,0.28);
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      background: rgba(212,175,55,0.08);
+    }
+
+    .account-action.primary {
+      color: #0a0a1a;
+      background: linear-gradient(135deg, #d7b85a, #b8922f);
+      border-color: transparent;
+    }
+
+    .account-stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .account-stat,
+    .account-card {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(212,175,55,0.14);
+      border-radius: 8px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+      backdrop-filter: blur(12px);
+    }
+
+    .account-stat {
+      padding: 1rem;
+    }
+
+    .account-stat span {
+      display: block;
+      color: rgba(255,255,255,0.52);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .account-stat strong {
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+    }
+
+    .account-grid {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 2rem;
+      gap: 1.25rem;
     }
 
     @media (max-width: 768px) {
-      .dashboard-grid {
+      .account-container { margin-top: 6rem; }
+      .account-hero { align-items: flex-start; flex-direction: column; }
+      .account-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .account-grid {
         grid-template-columns: 1fr;
       }
     }
-    
-    .profile-card, .saved-charts-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+    @media (max-width: 520px) {
+      .account-stats { grid-template-columns: 1fr; }
+      .account-actions { width: 100%; }
+      .account-action { width: 100%; }
+    }
+
+    .account-card {
+      padding: 1.5rem;
       position: relative;
       overflow: hidden;
     }
 
-    .profile-card::before, .saved-charts-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    .account-card.wide {
+      grid-column: 1 / -1;
     }
-    
-    .card-title {
+
+    .account-card h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
+      font-size: 1.55rem;
       color: var(--gold);
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.8rem;
+      margin: 0 0 1rem;
     }
-    
-    .profile-info {
+
+    .account-copy {
+      color: rgba(255,255,255,0.62);
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: var(--text-main);
+      line-height: 1.6;
+      margin: 0 0 1rem;
     }
-    .profile-info p {
-      margin-bottom: 1rem;
+
+    .account-definition {
+      display: grid;
+      gap: 0.85rem;
+      margin: 0;
+    }
+
+    .account-definition div {
       display: flex;
+      align-items: baseline;
       justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding-bottom: 0.75rem;
     }
-    .profile-info strong {
-      color: var(--text-muted);
-      font-weight: 500;
+
+    .account-definition dt {
+      color: rgba(255,255,255,0.5);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
-    
-    .logout-btn {
-      display: inline-block;
+
+    .account-definition dd {
+      color: #fff;
+      margin: 0;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .account-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .account-field label {
+      display: block;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+
+    .account-field input {
       width: 100%;
-      text-align: center;
-      padding: 0.8rem;
-      margin-top: 2rem;
+      box-sizing: border-box;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      border-radius: 6px;
+      min-height: 42px;
+      padding: 0 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .account-field select {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      border-radius: 6px;
+      min-height: 42px;
+      padding: 0 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .account-field input:focus {
+      outline: none;
+      border-color: rgba(212,175,55,0.55);
+    }
+
+    .account-form-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .account-secondary-btn,
+    .logout-btn {
+      min-height: 40px;
+      border-radius: 6px;
+      padding: 0 1rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .account-secondary-btn {
+      border: 1px solid rgba(212,175,55,0.28);
+      color: var(--gold);
+      background: rgba(212,175,55,0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logout-btn {
+      width: 100%;
+      margin-top: 1.25rem;
       background: rgba(200, 50, 50, 0.1);
       border: 1px solid rgba(200, 50, 50, 0.3);
-      color: #ff8888;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
+      color: #ff9a9a;
     }
-    .logout-btn:hover {
-      background: rgba(200, 50, 50, 0.2);
-    }
-    
+
     .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
+      padding: 1.25rem;
+      border: 1px dashed rgba(212,175,55,0.18);
+      border-radius: 8px;
       color: var(--text-muted);
       font-family: 'Inter', sans-serif;
     }
-    
-    .new-chart-btn {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.8rem 2rem;
-      background: linear-gradient(135deg, #c9a84c, #b8922f);
-      color: #0a0a1a;
-      font-weight: 700;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+
+    .chart-list {
+      display: grid;
+      gap: 0.75rem;
     }
-    .new-chart-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(0,0,0,0.18);
+    }
+
+    .chart-row strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .chart-row span {
+      color: rgba(255,255,255,0.58);
+      font-size: 0.86rem;
+    }
+
+    .chart-row-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .account-danger-btn {
+      min-height: 40px;
+      border-radius: 6px;
+      padding: 0 0.8rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      border: 1px solid rgba(200,50,50,0.3);
+      color: #ffb4b4;
+      background: rgba(200,50,50,0.09);
+    }
+
+    .account-mini-form {
+      padding: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 1rem;
+    }
+
+    .reports-list,
+    .transit-list {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .report-row,
+    .transit-day {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.035);
+      padding: 1rem;
+    }
+
+    .report-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .report-row strong,
+    .transit-day strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .report-row span,
+    .transit-day span {
+      color: rgba(255,255,255,0.58);
+      font-size: 0.84rem;
+    }
+
+    .report-status {
+      display: inline-block;
+      border: 1px solid rgba(212,175,55,0.24);
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      color: rgba(212,175,55,0.9);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-left: 0.5rem;
+    }
+
+    .report-viewer {
+      margin-top: 1rem;
+      padding: 1.25rem;
+      border: 1px solid rgba(212,175,55,0.14);
+      border-radius: 8px;
+      background: rgba(10,10,26,0.58);
+      color: rgba(255,255,255,0.78);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      max-height: 520px;
+      overflow: auto;
+    }
+
+    .report-viewer h1,
+    .report-viewer h2,
+    .report-viewer h3 {
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .transit-controls {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+    }
+
+    .transit-controls .account-field {
+      min-width: 190px;
+    }
+
+    .transit-overview {
+      border: 1px solid rgba(212,175,55,0.12);
+      border-radius: 8px;
+      background: rgba(212,175,55,0.05);
+      padding: 1rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .account-status {
+      min-height: 1.25rem;
+      color: rgba(212,175,55,0.82);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
     }
   </style>
   <meta name="description" content="Access your saved traditional birth charts, predictive readings, and daily astrological timing techniques all in one secure place.">
@@ -158,38 +484,153 @@
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
 
-  <main class="dashboard-container">
-    <div class="dashboard-header">
-      <h1 id="welcomeText">Welcome</h1>
-      <p>Manage your account and view your saved natal charts safely synced across your devices.</p>
-    </div>
-    
-    <div class="dashboard-grid">
-      <!-- Profile Column -->
-      <section class="profile-card">
-        <h2 class="card-title">Profile Data</h2>
-        <div class="profile-info">
-          <p><strong>Email</strong> <span id="userEmail">Loading...</span></p>
-          <p><strong>Status</strong> <span id="userPlan">Free tier</span></p>
-          <p><strong>Member since</strong> <span id="userJoined">--</span></p>
-        </div>
+  <main class="account-container">
+    <section class="account-hero">
+      <div>
+        <h1 id="welcomeText">Your Account</h1>
+        <p>Keep your chart work, daily horoscope preferences, and reading access in one private account area. This page is not indexed and requires a valid sign-in session.</p>
+      </div>
+      <div class="account-actions" aria-label="Account actions">
+        <a href="/#get-reading" class="account-action primary">Generate New Chart</a>
+        <a href="/daily.html" class="account-action">Daily Horoscopes</a>
+        <a href="/compatibility.html" class="account-action">Compatibility</a>
+      </div>
+    </section>
+
+    <section class="account-stats" aria-label="Account summary">
+      <div class="account-stat"><span>Plan</span><strong id="accountPlan">Loading</strong></div>
+      <div class="account-stat"><span>Saved Charts</span><strong id="savedChartCount">0</strong></div>
+      <div class="account-stat"><span>Reports</span><strong id="reportCount">0</strong></div>
+      <div class="account-stat"><span>Member Since</span><strong id="memberSinceShort">--</strong></div>
+      <div class="account-stat"><span>Daily Profile</span><strong id="dailyProfileStatus">Not saved</strong></div>
+    </section>
+
+    <div class="account-grid">
+      <section class="account-card">
+        <h2>Profile</h2>
+        <dl class="account-definition">
+          <div><dt>Email</dt><dd id="userEmail">Loading...</dd></div>
+          <div><dt>Name</dt><dd id="userName">--</dd></div>
+          <div><dt>Status</dt><dd id="userPlan">Free</dd></div>
+          <div><dt>Joined</dt><dd id="userJoined">--</dd></div>
+        </dl>
+        <a class="account-secondary-btn" href="/?auth=forgot" style="margin-top:1rem;width:100%;box-sizing:border-box;">Reset Password</a>
         <button id="logoutBtn" class="logout-btn">Log Out</button>
       </section>
-      
-      <!-- Charts Column -->
-      <section class="saved-charts-card">
-        <h2 class="card-title">Saved Charts</h2>
-        
-        <div class="empty-state">
-          <p>You haven't saved any natal charts yet to your account.</p>
-          <a href="/#get-reading" class="new-chart-btn">Generate Free Chart</a>
+
+      <section class="account-card">
+        <h2>Daily Horoscope Profile</h2>
+        <p class="account-copy">Save your birth details in this browser so the Daily Horoscopes page can open directly into your personal timing briefing.</p>
+        <form id="dailyProfileForm">
+          <div class="account-form-grid">
+            <div class="account-field">
+              <label for="accountBirthDate">Birth Date</label>
+              <input type="date" id="accountBirthDate" required>
+            </div>
+            <div class="account-field">
+              <label for="accountBirthTime">Birth Time</label>
+              <input type="time" id="accountBirthTime" required>
+            </div>
+            <div class="account-field">
+              <label for="accountCity">City</label>
+              <input type="text" id="accountCity" placeholder="Fairfield" required>
+            </div>
+            <div class="account-field">
+              <label for="accountState">State / Country</label>
+              <input type="text" id="accountState" placeholder="CA">
+            </div>
+          </div>
+          <div class="account-form-actions">
+            <button type="submit" class="account-secondary-btn">Save Daily Profile</button>
+            <a href="/daily.html#personal-briefing" class="account-secondary-btn">Open Personal Briefing</a>
+          </div>
+          <div id="dailyProfileMessage" class="account-status" role="status"></div>
+        </form>
+      </section>
+
+      <section class="account-card wide">
+        <h2>Saved Charts</h2>
+        <p class="account-copy">Save the charts you will use again for daily transits, compatibility checks, and future reports.</p>
+        <form id="saveChartForm" class="account-mini-form">
+          <div class="account-form-grid">
+            <div class="account-field">
+              <label for="saveChartName">Chart Name</label>
+              <input type="text" id="saveChartName" placeholder="Andrew" required>
+            </div>
+            <div class="account-field">
+              <label for="saveChartDate">Birth Date</label>
+              <input type="date" id="saveChartDate" required>
+            </div>
+            <div class="account-field">
+              <label for="saveChartTime">Birth Time</label>
+              <input type="time" id="saveChartTime" required>
+            </div>
+            <div class="account-field">
+              <label for="saveChartCity">City</label>
+              <input type="text" id="saveChartCity" placeholder="Fairfield" required>
+            </div>
+            <div class="account-field">
+              <label for="saveChartState">State / Country</label>
+              <input type="text" id="saveChartState" placeholder="CA">
+            </div>
+            <div class="account-field">
+              <label for="saveChartLabel">Label</label>
+              <input type="text" id="saveChartLabel" placeholder="Self, partner, client">
+            </div>
+          </div>
+          <div class="account-form-actions">
+            <button type="submit" class="account-secondary-btn">Save Chart</button>
+            <button type="button" id="copyDailyProfileToChart" class="account-secondary-btn">Use Daily Profile</button>
+          </div>
+          <div id="saveChartMessage" class="account-status" role="status"></div>
+        </form>
+        <div id="savedChartsList" class="chart-list">
+          <div class="empty-state">Loading saved charts...</div>
+        </div>
+      </section>
+
+      <section class="account-card wide">
+        <h2>Personal Transit Calendar</h2>
+        <p class="account-copy">Choose a saved chart and generate a seven-day traditional timing forecast from the same Daily Navigator engine.</p>
+        <div class="transit-controls">
+          <div class="account-field">
+            <label for="transitChartSelect">Saved Chart</label>
+            <select id="transitChartSelect"></select>
+          </div>
+          <div class="account-field">
+            <label for="transitStartDate">Start Date</label>
+            <input type="date" id="transitStartDate">
+          </div>
+          <button type="button" id="loadTransitsBtn" class="account-secondary-btn">Load Transits</button>
+        </div>
+        <div id="transitCalendar">
+          <div class="empty-state">Save a chart, then load personal transits for the week ahead.</div>
+        </div>
+      </section>
+
+      <section class="account-card wide">
+        <h2>Report Archive</h2>
+        <p class="account-copy">Completed free premium reports and paid reports are listed here when they are tied to this account or the same email address.</p>
+        <div id="reportsList" class="reports-list">
+          <div class="empty-state">Loading report archive...</div>
+        </div>
+        <div id="reportViewer" class="report-viewer hidden"></div>
+      </section>
+
+      <section class="account-card wide">
+        <h2>How This Account Works</h2>
+        <p class="account-copy">Your account stores authentication, profile status, saved chart metadata, and report access linked to your account or checkout email. The free chart and premium report flow still works without an account, but signing in gives returning customers a stable place to continue chart work.</p>
+        <div class="account-actions">
+          <a href="/terms.html" class="account-action">Terms</a>
+          <a href="/privacy.html" class="account-action">Privacy</a>
+          <a href="mailto:support@traditional-astrology.com" class="account-action">Support</a>
         </div>
       </section>
     </div>
@@ -204,6 +645,268 @@
   <script type="module" src="js/api.js"></script>
   <script type="module">
     import { apiFetch } from './js/api.js';
+
+    const DAILY_STORAGE_KEY = 'daily_navigator_birth';
+    let accountCharts = [];
+    let accountReports = [];
+
+    function text(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function authHeaders(extra = {}) {
+      const token = localStorage.getItem('access_token');
+      return token ? { ...extra, 'Authorization': `Bearer ${token}` } : extra;
+    }
+
+    async function apiJson(path, options = {}) {
+      const response = await apiFetch(path, {
+        ...options,
+        headers: authHeaders({ 'Content-Type': 'application/json', ...(options.headers || {}) }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem('access_token');
+          window.location.href = '/?auth=expired';
+        }
+        throw new Error(payload.detail || payload.message || `HTTP ${response.status}`);
+      }
+      return payload;
+    }
+
+    function formatDate(value, compact = false) {
+      if (!value) return '--';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '--';
+      return date.toLocaleDateString(undefined, compact ? { month: 'short', year: 'numeric' } : {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function todayIsoDate() {
+      const date = new Date();
+      date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+      return date.toISOString().slice(0, 10);
+    }
+
+    function markdownToHtml(markdown) {
+      const lines = String(markdown || '').split(/\r?\n/);
+      const out = [];
+      for (const line of lines) {
+        const clean = escapeHtml(line).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        if (!clean.trim()) {
+          out.push('<br>');
+        } else if (clean.startsWith('### ')) {
+          out.push(`<h3>${clean.slice(4)}</h3>`);
+        } else if (clean.startsWith('## ')) {
+          out.push(`<h2>${clean.slice(3)}</h2>`);
+        } else if (clean.startsWith('# ')) {
+          out.push(`<h1>${clean.slice(2)}</h1>`);
+        } else if (clean.startsWith('- ')) {
+          out.push(`<p>${clean}</p>`);
+        } else {
+          out.push(`<p>${clean}</p>`);
+        }
+      }
+      return out.join('');
+    }
+
+    function loadDailyProfile() {
+      let saved = null;
+      try {
+        saved = JSON.parse(localStorage.getItem(DAILY_STORAGE_KEY) || 'null');
+      } catch (e) {
+        saved = null;
+      }
+      if (!saved) return;
+      document.getElementById('accountBirthDate').value = saved.birthDate || '';
+      document.getElementById('accountBirthTime').value = saved.birthTime || '';
+      document.getElementById('accountCity').value = saved.city || '';
+      document.getElementById('accountState').value = saved.state || '';
+      text('dailyProfileStatus', saved.birthDate && saved.city ? 'Saved' : 'Partial');
+    }
+
+    function saveDailyProfile() {
+      const profile = {
+        birthDate: document.getElementById('accountBirthDate').value,
+        birthTime: document.getElementById('accountBirthTime').value,
+        city: document.getElementById('accountCity').value,
+        state: document.getElementById('accountState').value,
+      };
+      localStorage.setItem(DAILY_STORAGE_KEY, JSON.stringify(profile));
+      text('dailyProfileStatus', 'Saved');
+      text('dailyProfileMessage', 'Daily horoscope profile saved in this browser.');
+    }
+
+    function copyDailyProfileToSaveForm() {
+      let saved = null;
+      try {
+        saved = JSON.parse(localStorage.getItem(DAILY_STORAGE_KEY) || 'null');
+      } catch (e) {
+        saved = null;
+      }
+      if (!saved) {
+        text('saveChartMessage', 'No daily profile is saved in this browser yet.');
+        return;
+      }
+      document.getElementById('saveChartDate').value = saved.birthDate || '';
+      document.getElementById('saveChartTime').value = saved.birthTime || '';
+      document.getElementById('saveChartCity').value = saved.city || '';
+      document.getElementById('saveChartState').value = saved.state || '';
+      text('saveChartMessage', 'Daily profile copied into the saved chart form.');
+    }
+
+    function renderSavedCharts(charts) {
+      const container = document.getElementById('savedChartsList');
+      if (!container) return;
+
+      if (!Array.isArray(charts) || charts.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <p>No saved chart metadata is attached to this account yet.</p>
+            <a href="/#get-reading" class="account-secondary-btn" style="margin-top:0.85rem;">Generate Free Chart</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = charts
+        .slice()
+        .sort((a, b) => Number(b.index ?? 0) - Number(a.index ?? 0))
+        .map((chart) => {
+          const index = Number(chart.index ?? 0);
+          const name = chart.name || chart.subject || 'Saved chart';
+          const when = [chart.date, chart.time].filter(Boolean).join(' ');
+          const place = [chart.city, chart.state].filter(Boolean).join(', ');
+          const savedAt = chart.saved_at ? `Saved ${formatDate(chart.saved_at)}` : 'Saved chart';
+          const label = chart.label ? ` | ${chart.label}` : '';
+          return `
+            <div class="chart-row">
+              <div>
+                <strong>${escapeHtml(name)}</strong>
+                <span>${escapeHtml([when, place, savedAt].filter(Boolean).join(' | ') + label)}</span>
+              </div>
+              <div class="chart-row-actions">
+                <button class="account-secondary-btn" data-chart-action="transits" data-index="${index}">Transits</button>
+                <button class="account-danger-btn" data-chart-action="delete" data-index="${index}">Delete</button>
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+    }
+
+    function renderTransitSelect(charts) {
+      const select = document.getElementById('transitChartSelect');
+      if (!select) return;
+      if (!Array.isArray(charts) || charts.length === 0) {
+        select.innerHTML = '<option value="">No saved charts</option>';
+        return;
+      }
+      select.innerHTML = charts
+        .map((chart) => `<option value="${Number(chart.index ?? 0)}">${escapeHtml(chart.name || 'Saved chart')} - ${escapeHtml(chart.date || '')}</option>`)
+        .join('');
+    }
+
+    function renderReports(reports) {
+      const container = document.getElementById('reportsList');
+      if (!container) return;
+      if (!Array.isArray(reports) || reports.length === 0) {
+        container.innerHTML = '<div class="empty-state">No reports are linked to this account yet. Generate a free premium report or complete checkout while signed in to archive future reports here.</div>';
+        return;
+      }
+      container.innerHTML = reports.map((report) => {
+        const title = report.name || 'Astrology report';
+        const place = [report.city, report.state].filter(Boolean).join(', ');
+        const meta = [report.date, place, report.tier, `${report.generated_words || 0} words`].filter(Boolean).join(' | ');
+        const canView = report.status === 'completed' && report.has_report;
+        return `
+          <div class="report-row">
+            <div>
+              <strong>${escapeHtml(title)} <span class="report-status">${escapeHtml(report.status || 'unknown')}</span></strong>
+              <span>${escapeHtml(meta)}</span>
+            </div>
+            <button class="account-secondary-btn" data-report-id="${escapeHtml(report.task_id)}" ${canView ? '' : 'disabled'}>View Report</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderTransitCalendar(data) {
+      const container = document.getElementById('transitCalendar');
+      if (!container) return;
+      const days = Array.isArray(data.days) ? data.days : [];
+      const overview = data.week_overview || {};
+      const overviewHtml = overview.summary
+        ? `<div class="transit-overview">${markdownToHtml(overview.summary)}</div>`
+        : '';
+      const dayHtml = days.map((day) => {
+        const briefing = day.briefing || {};
+        if (briefing.error) {
+          return `<div class="transit-day"><strong>${escapeHtml(briefing.date || 'Day')}</strong><span>${escapeHtml(briefing.error)}</span></div>`;
+        }
+        const rec = briefing.recommendations || {};
+        const moon = briefing.moon || {};
+        const transitCount = Array.isArray(briefing.transits) ? briefing.transits.length : 0;
+        return `
+          <div class="transit-day">
+            <strong>${escapeHtml(briefing.display_date || briefing.date || 'Day')}</strong>
+            <span>${escapeHtml(briefing.forecast_summary || 'Daily forecast unavailable.')}</span>
+            <span>Moon: ${escapeHtml(moon.sign || 'unknown')} | Urgency: ${escapeHtml(rec.urgency || 'low')} | Active transits: ${transitCount}</span>
+          </div>
+        `;
+      }).join('');
+      container.innerHTML = `${overviewHtml}<div class="transit-list">${dayHtml}</div>`;
+    }
+
+    async function loadOverview() {
+      const overview = await apiJson('/api/v1/account/overview');
+      accountCharts = Array.isArray(overview.charts) ? overview.charts : [];
+      accountReports = Array.isArray(overview.reports) ? overview.reports : [];
+      text('savedChartCount', String(accountCharts.length));
+      text('reportCount', String(accountReports.length));
+      renderSavedCharts(accountCharts);
+      renderTransitSelect(accountCharts);
+      renderReports(accountReports);
+    }
+
+    async function loadChartTransits(index) {
+      const startDate = document.getElementById('transitStartDate').value || todayIsoDate();
+      const calendar = document.getElementById('transitCalendar');
+      if (calendar) calendar.innerHTML = '<div class="empty-state">Calculating personal transits...</div>';
+      const data = await apiJson(`/api/v1/account/charts/${encodeURIComponent(index)}/transits?days=7&start_date=${encodeURIComponent(startDate)}`, {
+        method: 'GET',
+      });
+      renderTransitCalendar(data);
+    }
+
+    async function viewReport(taskId) {
+      const viewer = document.getElementById('reportViewer');
+      if (!viewer) return;
+      viewer.classList.remove('hidden');
+      viewer.innerHTML = 'Loading report...';
+      const data = await apiJson(`/api/v1/account/reports/${encodeURIComponent(taskId)}`, { method: 'GET' });
+      const report = data.report || {};
+      if (report.report_markdown) {
+        viewer.innerHTML = markdownToHtml(report.report_markdown);
+      } else {
+        viewer.innerHTML = `<p>${escapeHtml(report.error || 'This report is not ready yet.')}</p>`;
+      }
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     document.addEventListener('DOMContentLoaded', async () => {
       const token = localStorage.getItem('access_token');
@@ -221,39 +924,122 @@
         });
       }
 
-      // Fetch user data
-      try {
-        const response = await apiFetch('/api/v1/auth/me', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`
+      const dailyForm = document.getElementById('dailyProfileForm');
+      if (dailyForm) {
+        dailyForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          saveDailyProfile();
+        });
+      }
+      loadDailyProfile();
+      document.getElementById('transitStartDate').value = todayIsoDate();
+
+      const copyDailyBtn = document.getElementById('copyDailyProfileToChart');
+      if (copyDailyBtn) copyDailyBtn.addEventListener('click', copyDailyProfileToSaveForm);
+
+      const saveChartForm = document.getElementById('saveChartForm');
+      if (saveChartForm) {
+        saveChartForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          text('saveChartMessage', 'Saving chart...');
+          try {
+            await apiJson('/api/v1/account/charts', {
+              method: 'POST',
+              body: JSON.stringify({
+                name: document.getElementById('saveChartName').value,
+                date: document.getElementById('saveChartDate').value,
+                time: document.getElementById('saveChartTime').value,
+                city: document.getElementById('saveChartCity').value,
+                state: document.getElementById('saveChartState').value,
+                label: document.getElementById('saveChartLabel').value,
+              }),
+            });
+            text('saveChartMessage', 'Chart saved.');
+            await loadOverview();
+          } catch (err) {
+            text('saveChartMessage', err.message || 'Could not save chart.');
           }
         });
+      }
 
-        if (!response.ok) {
-          if (response.status === 401) {
-            localStorage.removeItem('access_token');
-            window.location.href = '/?auth=expired';
+      const savedChartsList = document.getElementById('savedChartsList');
+      if (savedChartsList) {
+        savedChartsList.addEventListener('click', async (event) => {
+          const button = event.target.closest('[data-chart-action]');
+          if (!button) return;
+          const index = button.dataset.index;
+          if (button.dataset.chartAction === 'transits') {
+            document.getElementById('transitChartSelect').value = index;
+            await loadChartTransits(index);
           }
-          throw new Error('Failed to load profile');
-        }
+          if (button.dataset.chartAction === 'delete') {
+            button.disabled = true;
+            try {
+              await apiJson(`/api/v1/account/charts/${encodeURIComponent(index)}`, { method: 'DELETE' });
+              await loadOverview();
+            } catch (err) {
+              text('saveChartMessage', err.message || 'Could not delete chart.');
+              button.disabled = false;
+            }
+          }
+        });
+      }
 
-        const data = await response.json();
-        
-        // Populate profile
+      const loadTransitsBtn = document.getElementById('loadTransitsBtn');
+      if (loadTransitsBtn) {
+        loadTransitsBtn.addEventListener('click', async () => {
+          const index = document.getElementById('transitChartSelect').value;
+          if (index === '') return;
+          try {
+            await loadChartTransits(index);
+          } catch (err) {
+            const calendar = document.getElementById('transitCalendar');
+            if (calendar) calendar.innerHTML = `<div class="empty-state">${escapeHtml(err.message || 'Could not load transits.')}</div>`;
+          }
+        });
+      }
+
+      const reportsList = document.getElementById('reportsList');
+      if (reportsList) {
+        reportsList.addEventListener('click', async (event) => {
+          const button = event.target.closest('[data-report-id]');
+          if (!button) return;
+          button.disabled = true;
+          try {
+            await viewReport(button.dataset.reportId);
+          } catch (err) {
+            const viewer = document.getElementById('reportViewer');
+            if (viewer) {
+              viewer.classList.remove('hidden');
+              viewer.innerHTML = `<p>${escapeHtml(err.message || 'Could not load report.')}</p>`;
+            }
+          } finally {
+            button.disabled = false;
+          }
+        });
+      }
+
+      try {
+        const data = await apiJson('/api/v1/auth/me', { method: 'GET' });
+
         if (data.user) {
           const user = data.user;
-          document.getElementById('userEmail').textContent = user.email || 'Unknown';
-          document.getElementById('welcomeText').textContent = user.name ? `Welcome back, ${user.name}` : 'Welcome back';
-          if (user.subscription_tier) {
-             document.getElementById('userPlan').textContent = user.subscription_tier === 'free' ? 'Free tier' : user.subscription_tier.toUpperCase();
-          }
-          if (user.created_at) {
-             document.getElementById('userJoined').textContent = new Date(user.created_at).toLocaleDateString();
-          }
+          const sub = user.subscription_details || {};
+          const plan = sub.plan_name || user.subscription_tier || 'Free';
+
+          text('userEmail', user.email || 'Unknown');
+          text('userName', user.name || 'Not set');
+          text('welcomeText', user.name ? `Welcome back, ${user.name}` : 'Your Account');
+          text('userPlan', plan === 'free' ? 'Free' : String(plan));
+          text('accountPlan', plan === 'free' ? 'Free' : String(plan));
+          text('userJoined', formatDate(user.created_at));
+          text('memberSinceShort', formatDate(user.created_at, true));
+          await loadOverview();
         }
       } catch (err) {
-        console.error('Error fetching dashboard data:', err);
+        text('welcomeText', 'Account unavailable');
+        text('savedChartsList', '');
+        text('reportsList', '');
       }
     });
   </script>
@@ -313,7 +1099,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

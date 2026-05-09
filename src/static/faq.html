@@ -14,9 +14,9 @@
 </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Astrology FAQ — Birth Chart PDF Generator, Etsy Sellers & Traditional Methods</title>
-<meta content="Answers to common questions about Traditional Astrology — our astrology PDF generator, bulk chart tools for Etsy sellers, traditional methodology, and pricing tiers." name="description"/>
-<meta name="keywords" content="astrology FAQ, astrology PDF generator questions, how to create astrology PDFs for Etsy, bulk natal chart generator FAQ, traditional astrology questions, what is annual profections, whole sign houses explained, how to sell astrology readings on Etsy, astrology reading PDF for clients"/>
+<title>Astrology FAQ — Free Birth Chart Preview, Paid Readings & Traditional Methods</title>
+<meta content="Answers to common questions about Traditional Astrology — free chart previews, paid traditional readings, privacy, methodology, and historical-use boundaries." name="description"/>
+<meta name="keywords" content="astrology FAQ, traditional astrology questions, free birth chart preview, paid astrology reading, what is annual profections, whole sign houses explained, sect astrology, traditional natal chart calculator"/>
 <meta content="index,follow" name="robots"/>
 <meta content="#f6f0e6" name="theme-color"/>
 <link href="https://traditional-astrology.com/faq.html" rel="canonical"/>
@@ -50,35 +50,35 @@
  "name": "What is the Daily Navigator?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "The Daily Navigator is a free tool that generates a personalized daily briefing based on your birth chart. It synthesizes profections, firdaria, zodiacal releasing, transits, and Moon condition into one actionable forecast for any date."
+ "text": "The Daily Navigator is a free tool that generates a personalized daily briefing based on your birth chart. It synthesizes profections, firdaria, zodiacal releasing, transits, and Moon condition into symbolic non-advice timing notes for any date."
  }
  }, {
  "@type": "Question",
  "name": "Can I use Traditional Astrology to create natal chart readings for my Etsy clients?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Yes. Traditional Astrology is designed for Etsy sellers and independent practitioners who deliver astrology readings at volume. Upload a CSV of client birth data and download a ZIP of ready-to-send PDF reports — each one branded and ready to deliver."
+ "text": "You can use individual paid readings as source material for client work if you add your own professional judgment and do not present generated text as a human-written reading. Bulk CSV and API plans are not currently part of the live customer offer."
  }
  }, {
  "@type": "Question",
  "name": "Does Traditional Astrology generate PDF reports I can send to clients?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Yes. Every paid reading generates a professionally formatted PDF covering planetary positions, essential dignities, sect, Lot of Fortune, annual profections, and a 10-year timing forecast. PDFs are downloadable immediately after generation."
+ "text": "Yes. Every paid reading generates a browser-delivered report that you can print or save as a PDF. It covers planetary positions, essential dignities, sect, Lot of Fortune, annual profections, and a timing overview."
  }
  }, {
  "@type": "Question",
  "name": "Can I upload a CSV file and generate multiple birth chart PDFs at once?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Yes — this is the Batch PDF Tool available on the Practitioner plan ($29/mo). Upload a CSV with client name, birth date, time, and city. Traditional Astrology generates one PDF per client and packages them into a single ZIP download."
+ "text": "No. Bulk CSV generation is not currently part of the live public product. The live site is focused on instant free chart previews and one-time paid readings."
  }
  }, {
  "@type": "Question",
  "name": "Is there an API for astrology calculations?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Yes. The Practitioner plan includes API access with 100 calls per day. The API returns the same traditional calculations used in our PDFs — planetary positions, dignities, sect, lots, profections, and timing data."
+ "text": "No public paid API is currently offered. The production customer product is the free chart preview and one-time paid readings."
  }
  }, {
  "@type": "Question",
@@ -99,7 +99,7 @@
  "name": "How many readings can I generate per month?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Free accounts get 3 readings with no sign-up required. Scholar ($9.99/mo) includes unlimited individual readings with PDF export. Practitioner ($29/mo) adds the bulk CSV-to-PDF tool, API access, and client labels — ideal for Etsy sellers generating readings at volume."
+ "text": "The free chart preview has a rolling no-sign-up usage limit. Paid readings are one-time purchases: the Full Reading is $25 and the Deep Dive is $69."
  }
  }]
  ,"speakable":{"@type":"SpeakableSpecification","cssSelector":[".faq-item summary","h1","h2"]}}
@@ -107,8 +107,40 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
-<script type="application/ld+json">
+<link href="style.css?v=rev20260508mobile1" rel="stylesheet"/>
+  <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script type="application/ld+json">
  {
  "@context": "https://schema.org",
  "@type": "BreadcrumbList",
@@ -125,8 +157,8 @@
  }]
  }
  </script>
- <meta property="og:title" content="Astrology FAQ — PDF Generator, Etsy Sellers & Traditional Methods"/>
- <meta property="og:description" content="Answers about our astrology PDF generator, bulk chart tools for Etsy sellers, traditional methodology, and pricing."/>
+ <meta property="og:title" content="Astrology FAQ — Free Preview, Paid Readings & Traditional Methods"/>
+ <meta property="og:description" content="Answers about free chart previews, paid traditional readings, privacy, methodology, and pricing."/>
  <meta property="og:type" content="website"/>
  <meta property="og:url" content="https://traditional-astrology.com/faq.html"/>
  <meta property="og:image" content="https://traditional-astrology.com/og-card.png"/>
@@ -164,10 +196,11 @@
  <div class="nav-links">
  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
  <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
  <a href="/horary.html" class="nav-link">Horary Oracle</a>
- <a href="/daily.html" class="nav-link">Daily Planets</a>
- <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
- <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+ <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+ <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+ <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
  <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
  </div>
  </nav>
@@ -194,7 +227,7 @@
 </details>
 <details class="faq-item">
 <summary>How quickly will I get my report?</summary>
-<p>Instantly. You pay, it generates, you download. There's no queue and no waiting period.</p>
+<p>After successful Stripe checkout, the site returns you to the report page and starts generating the paid report in your browser. Most reports are available shortly after payment. If the return page fails or you lose access, email <a href="/contact.html" style="color: #c9a84c;">support</a> with your Stripe receipt email so we can restore access or apply the refund remedy policy.</p>
 </details>
 <details class="faq-item">
 <summary>Is my data private?</summary>
@@ -202,27 +235,27 @@
 </details>
 <details class="faq-item">
 <summary>What's the refund policy?</summary>
-<p>If your report has a genuine technical problem — wrong calculations, missing sections, something clearly broken — email us within 30 days and we'll make it right or refund you. Full policy on the <a href="/refunds.html" style="color: #c9a84c;">refunds page</a>.</p>
+<p>Generated digital reports are generally final, but technical or delivery/access problems are covered for 14 days. Email support with your order details and we will regenerate, restore access, or issue a full refund for eligible technical failures. Full policy on the <a href="/refunds.html" style="color: #c9a84c;">refunds page</a>.</p>
 </details>
 <details class="faq-item">
 <summary>What is the Daily Navigator?</summary>
-<p>The <a href="daily.html" style="color: #c9a84c;">Daily Navigator</a> is a free tool that generates a personalized daily briefing based on your birth chart. It synthesizes profections, firdaria, zodiacal releasing, transits, and Moon condition (including Void of Course detection) into one actionable forecast. You can explore any date — past, present, or future.</p>
+<p>The <a href="daily.html" style="color: #c9a84c;">Daily Navigator</a> is a free tool that generates a personalized daily briefing based on your birth chart. It synthesizes profections, firdaria, zodiacal releasing, transits, and Moon condition (including Void of Course detection) into symbolic non-advice timing notes. You can explore any date — past, present, or future.</p>
 </details>
 <details class="faq-item">
 <summary>Can I use this for my Etsy astrology shop?</summary>
-<p>That's exactly what it's built for. Upload a CSV with your clients' birth data, download a ZIP of finished PDF reports. Attach them to your Etsy orders and you're done. The <a href="/etsy-astrology-seller.html" style="color: #c9a84c;">Etsy seller page</a> walks through the whole workflow.</p>
+<p>You can use individual paid readings as source material for client work, provided you add your own professional judgment and do not present the generated text as a human-written reading. Bulk CSV and API plans are not currently part of the live customer offer.</p>
 </details>
 <details class="faq-item">
 <summary>Do I get actual PDFs I can send to clients?</summary>
-<p>Yes. Every paid reading produces a formatted PDF — planet positions, dignities, sect analysis, Lot of Fortune, profections, and a 10-year timing forecast. Download it immediately and send it however you want.</p>
+<p>Every paid reading produces a formatted browser report you can print or save as a PDF — planet positions, dignities, sect analysis, Lot of Fortune, profections, and a timing overview. Paid checkout is processed by Stripe; we never see or store your full card number.</p>
 </details>
 <details class="faq-item">
 <summary>Can I generate a batch of charts from a spreadsheet?</summary>
-<p>Yes, on the Practitioner plan ($29/mo). Upload a CSV — client name, birth date, time, city — and get back a ZIP of individually labeled PDFs. One upload, one download, no copy-pasting birth data one at a time.</p>
+<p>Not in the live public product right now. The customer-ready flow is one chart at a time: free preview first, then a one-time Stripe checkout for a Full Reading or Complete Analysis.</p>
 </details>
 <details class="faq-item">
 <summary>Is there an API?</summary>
-<p>Practitioner plan includes API access — 100 calls/day. Returns the same data as the PDFs (positions, dignities, sect, lots, profections, timing) in structured JSON. Good for building your own tools or integrating with existing workflows.</p>
+<p>Not as a public paid product right now. The public site is focused on instant chart previews and one-time reading purchases.</p>
 </details>
 <details class="faq-item">
 <summary>What is annual profections?</summary>
@@ -234,7 +267,7 @@
 </details>
 <details class="faq-item">
 <summary>How many readings can I run per month?</summary>
-<p>Free: 3 readings, no account needed. Scholar ($9.99/mo): unlimited individual readings with PDF export. Practitioner ($29/mo): everything in Scholar plus the batch CSV tool, API access, and client labels.</p>
+<p>The free preview allows a small number of readings per visitor in a rolling window. Paid readings are one-time purchases: $25 for a Full Reading and $69 for the Complete Analysis.</p>
 </details>
 </div>
 </div>
@@ -255,7 +288,8 @@
 <li><a href="/faq.html">FAQ</a></li>
 <li><a href="/">Blog</a></li>
 <li><a href="/about.html">About</a></li>
-<li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+<li><a href="/methodology.html">Methodology</a></li>
+<li><a href="/contact.html">Contact/Support</a></li>
 </ul>
 </div>
 <div class="footer-col">
@@ -263,19 +297,20 @@
 <ul>
 <li><a href="/privacy.html">Privacy Policy</a></li>
 <li><a href="/terms.html">Terms of Service</a></li>
+<li><a href="/refunds.html">Refund Policy</a></li>
 </ul>
 </div>
 <div class="footer-col">
 <h3>Contact</h3>
 <ul>
- <li><a href="mailto:support@traditional-astrology.com">Support</a></li>
+ <li><a href="/contact.html">Contact/Support</a></li>
  <li><a href="mailto:bugs@traditional-astrology.com">Report a Bug</a></li>
  </ul>
 </div>
 </div>
 <div class="footer-bottom">
  <p>© 2026 Traditional Astrology. All rights reserved.</p>
- <p class="footer-disclaimer">For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.</p>
+ <p class="footer-disclaimer">Historical Use Only. For entertainment, historical, and spiritual research only. Not medical, financial, legal, psychological, emergency, or safety advice. Do not use for urgent decisions.</p>
 </div>
 </footer>
 </main>
@@ -345,7 +380,7 @@
  </div>
  </div>
 
- <script type="module" src="/js/auth.js?v=astro-v5"></script>
+ <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
  <script>
  document.addEventListener('DOMContentLoaded', function() {

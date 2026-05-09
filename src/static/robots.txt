@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Block all B2B / auth / tool pages from indexing
+# Block all API, auth, and deprecated business pages from indexing
 Disallow: /api/
 Disallow: /owner.html
 Disallow: /profile.html
@@ -16,7 +16,12 @@ Disallow: /developer.html
 Disallow: /developers.html
 Disallow: /documentation.html
 Disallow: /api-guide.html
-Disallow: /blog.html
+Disallow: /etsy-astrology-seller.html
+Disallow: /sell-astrology-readings-etsy.html
+Disallow: /astrology-client-birth-data.html
+Disallow: /traditional-astrology-vs-astrolabe.html
+Disallow: /astroforge-vs-astrolabe.html
+Disallow: /how-to-price-astrology-readings.html
 Disallow: /resources.html
 Disallow: /advanced.html
 Disallow: /preview.html

@@ -1,8 +1,18 @@
 from fastapi import APIRouter
 
 import src.api.v1.endpoints.premium as premium_endpoint
-from src.api.v1.endpoints import (billing, charts, developer, forensic, meta,
-                                  mundane, owner, synastry, telemetry)
+from src.api.v1.endpoints import (
+    account,
+    billing,
+    charts,
+    developer,
+    forensic,
+    meta,
+    mundane,
+    owner,
+    synastry,
+    telemetry,
+)
 
 api_router = APIRouter()
 
@@ -14,6 +24,7 @@ api_router.include_router(billing.router, prefix="/billing", tags=["billing"])
 api_router.include_router(telemetry.router, tags=["telemetry"])
 api_router.include_router(developer.router, prefix="/developer", tags=["developer"])
 api_router.include_router(owner.router, prefix="/owner", tags=["owner"])
+api_router.include_router(account.router, prefix="/account", tags=["account"])
 api_router.include_router(meta.router, tags=["meta"])
 api_router.include_router(premium_endpoint.router, prefix="/premium", tags=["premium"])
 

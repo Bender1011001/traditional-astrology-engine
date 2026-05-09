@@ -30,8 +30,41 @@ function trackConversionEvent(eventName, params = {}) {
     }
 }
 
+function authHeaders(extra = {}) {
+    const headers = { ...extra };
+    try {
+        const token = localStorage.getItem("access_token");
+        if (token) headers.Authorization = `Bearer ${token}`;
+    } catch (_) {
+        // Private browsing/storage issues should not block the reading flow.
+    }
+    return headers;
+}
+
+function hasPrintableReading() {
+    const section = document.getElementById("readingSection");
+    const content = document.getElementById("readingContent");
+    return Boolean(
+        section &&
+        content &&
+        !section.classList.contains("hidden") &&
+        content.textContent.trim().length > 0
+    );
+}
+
+function setReadingPrintMode(active) {
+    document.body.classList.toggle(
+        "printing-reading",
+        Boolean(active && hasPrintableReading())
+    );
+}
+
+window.addEventListener("beforeprint", () => setReadingPrintMode(true));
+window.addEventListener("afterprint", () => setReadingPrintMode(false));
+
 window.printReading = function () {
     trackConversionEvent("print_save_pdf");
+    setReadingPrintMode(true);
     window.print();
 };
 
@@ -148,7 +181,7 @@ async function requestFreeReading(payload) {
     try {
         const resp = await apiFetch("/api/v1/premium/guest/request", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: authHeaders({ "Content-Type": "application/json" }),
             body: JSON.stringify(payload),
         });
 
@@ -276,7 +309,7 @@ async function generatePaidReading(sessionId) {
     try {
         const resp = await apiFetch(`/api/v1/guest/generate-paid?session_id=${encodeURIComponent(sessionId)}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: authHeaders({ "Content-Type": "application/json" }),
             body: "{}",
         });
 
@@ -338,11 +371,12 @@ function showFreeReading(readingHtml, freeRemaining, chartEventId, readingHash, 
     const chartActions = document.getElementById("chartActions");
     if (chartActions) chartActions.classList.remove("hidden");
 
-    // Kick off the free LLM premium trial simultaneously in the background
+    // Every real visitor IP gets one free LLM report after the instant chart.
+    // Further premium reports go through the paid Stripe checkout path.
     kickOffFreePremiumTrial(chartPayload, chartEventId);
 }
 
-// ─── Free Premium Trial — Background LLM Kickoff ───────────────────────────
+// ─── Free Premium Report — Background LLM Kickoff ──────────────────────────
 async function kickOffFreePremiumTrial(payload, chartEventId) {
     const content = document.getElementById("readingContent");
     if (!content) return;
@@ -362,7 +396,7 @@ async function kickOffFreePremiumTrial(payload, chartEventId) {
     try {
         const resp = await apiFetch("/api/v1/premium/free-trial/request", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: authHeaders({ "Content-Type": "application/json" }),
             body: JSON.stringify(payload),
         });
 
@@ -389,7 +423,7 @@ async function kickOffFreePremiumTrial(payload, chartEventId) {
         _hidePremiumTrialSection();
     } catch (err) {
         _hidePremiumTrialSection();
-        console.warn("Free premium trial kickoff failed (non-critical):", err);
+        console.warn("Free premium report kickoff failed (non-critical):", err);
     }
 }
 
@@ -403,7 +437,7 @@ function _hidePremiumTopBanner() {
     if (el) el.remove();
 }
 
-// ─── Free Premium Trial — Polling ───────────────────────────────────────────
+// ─── Free Premium Report — Polling ──────────────────────────────────────────
 const PREMIUM_LOADING_MSGS = [
     "Calculating your full planetary picture...",
     "Analyzing sect, dignities, and mutual receptions...",
@@ -517,10 +551,11 @@ function buildInstantConversionBar(freeRemaining) {
                 <h2>Unlock the complete reading while this chart is loaded.</h2>
                 <p>Save the free preview as a PDF, or unlock houses, lots, fixed stars, time-lord periods, and the full forecast.</p>
                 <div class="result-conversion-meta">
-                    <span>No account</span>
-                    <span>Stripe checkout</span>
+                    <span>Free preview: no account/email</span>
+                    <span>Paid reports: secure Stripe checkout</span>
                     ${remainingText}
                 </div>
+                <p class="checkout-reassurance" style="margin:0.85rem 0 0; max-width:none; text-align:left;"><strong>Checkout reassurance:</strong> Stripe processes payment and this site never sees your full card number. Paid reports generate after checkout returns you here; email is optional but recommended for receipts and delivery support.</p>
             </div>
             <div class="result-conversion-actions">
                 <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullTopBtn" data-default-label="Full Reading — $25">
@@ -780,7 +815,7 @@ function showPaywall() {
             </h2>
             <p style="color: var(--text-muted); max-width: 420px; margin: 0 auto 2rem; line-height: 1.75;">
                 You've reached the free reading limit. Unlock your complete natal chart reading
-                with a one-time payment — no account or subscription needed.
+                with a one-time Stripe payment — no subscription. Email is recommended for receipts and support.
             </p>
             <div class="unlock-buttons">
                 <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn" data-default-label="✦ Get Full Reading — $25">
@@ -791,7 +826,7 @@ function showPaywall() {
                     Get Premium Deep-Dive — $69
                 </button>
                 <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem;">
-                    Secure payment via Stripe. No account required.
+                    Secure payment via Stripe. We never see your full card number. If the return page fails, contact support with your Stripe receipt email.
                 </p>
             </div>
         </div>
@@ -827,7 +862,7 @@ window.startCheckout = async function (tier) {
 
         const resp = await apiFetch(`/api/v1/guest/checkout?${params.toString()}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: authHeaders({ "Content-Type": "application/json" }),
             body: "{}",
         });
 
@@ -855,8 +890,8 @@ window.startCheckout = async function (tier) {
 
 function getCheckoutButtons(tier) {
     const selectors = tier === "premium_audit"
-        ? ["#checkoutPremiumBtn", "#checkoutPremiumTopBtn"]
-        : ["#checkoutFullBtn", "#checkoutFullTopBtn"];
+        ? ["#checkoutPremiumBtn", "#checkoutPremiumTopBtn", "#checkoutPremiumPremiumBottomBtn"]
+        : ["#checkoutFullBtn", "#checkoutFullTopBtn", "#checkoutFullPremiumBottomBtn"];
     return selectors
         .map((selector) => document.querySelector(selector))
         .filter(Boolean);
@@ -998,17 +1033,17 @@ function attachEmailCaptureHandler(container, chartEventId) {
     });
 }
 
-// ─── Premium Trial UI Builders ───
+// ─── Free Premium Report UI Builders ───
 function buildPremiumTrialTopBanner() {
     return `
         <div class="premium-trial-top-banner" role="status" aria-live="polite">
             <div class="premium-trial-banner-inner">
                 <span class="premium-trial-badge">✦ LIMITED TIME</span>
                 <p class="premium-trial-headline">
-                    Your <strong>full premium reading</strong> is generating in the background &mdash; completely free.
+                    Your <strong>free premium reading</strong> is generating in the background.
                 </p>
                 <p class="premium-trial-sub">
-                    This is the <strong>$25 report</strong>. It takes up to 5 minutes. Read your chart below while you wait — we'll load it right here when it's ready.
+                    Each visitor gets one free LLM-generated report. Read your instant chart below while it finishes; after this, additional premium reports are paid.
                 </p>
             </div>
         </div>
@@ -1021,7 +1056,7 @@ function buildPremiumTrialTopBannerComplete() {
             <div class="premium-trial-banner-inner">
                 <span class="premium-trial-badge">✦ READY</span>
                 <p class="premium-trial-headline">
-                    Your <strong>premium reading</strong> is complete. Scroll down to read it.
+                    Your <strong>free premium reading</strong> is complete. Scroll down to read it.
                 </p>
             </div>
         </div>
@@ -1035,7 +1070,7 @@ function buildPremiumLoadingSection() {
                 <div class="premium-loading-orb"></div>
                 <div>
                     <h3 class="premium-loading-title">Premium Reading Generating</h3>
-                    <p class="premium-loading-subtitle">Multi-stage LLM analysis in progress &mdash; this takes up to 5 minutes</p>
+                    <p class="premium-loading-subtitle">LLM analysis in progress &mdash; usually under a minute</p>
                 </div>
             </div>
             <div class="premium-loading-progress-track">
@@ -1051,9 +1086,9 @@ function buildRenderedPremiumSection(html, chartEventId) {
     return `
         <div class="premium-reading-section">
             <div class="premium-reading-header">
-                <span class="premium-reading-badge">✦ PREMIUM READING</span>
+                <span class="premium-reading-badge">✦ FREE PREMIUM READING</span>
                 <h2 class="premium-reading-title">Your Full Traditional Astrology Report</h2>
-                <p class="premium-reading-subtitle">LLM-generated multi-stage analysis &mdash; normally $25</p>
+                <p class="premium-reading-subtitle">Your one free LLM-generated report for this visitor connection</p>
                 <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width:auto; margin-top:0.75rem;">
                     Print / Save as PDF
                 </button>
@@ -1070,13 +1105,21 @@ function buildPremiumBottomBanner() {
     return `
         <div class="premium-bottom-banner">
             <div class="premium-bottom-banner-inner">
-                <span class="premium-trial-badge">✦ LIMITED TIME OFFER</span>
-                <h3 class="premium-bottom-title">This report is normally $25.</h3>
+                <span class="premium-trial-badge">✦ ONE FREE PREMIUM REPORT</span>
+                <h3 class="premium-bottom-title">Want another report?</h3>
                 <p class="premium-bottom-sub">
-                    We're sharing the full reading free while we gather feedback from real users.
-                    If it resonated with you, share it with someone who might benefit.
+                    This visitor connection has used its free premium generation.
+                    Additional reports are available through secure Stripe checkout; email is recommended for receipts and delivery support.
                 </p>
-                <button class="btn-cta" onclick="printReading()" style="width:auto;">
+                <div class="result-conversion-actions" style="justify-content:center; margin-top:1rem;">
+                    <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullPremiumBottomBtn" data-default-label="Another Full Reading — $25">
+                        Another Full Reading — $25
+                    </button>
+                    <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumPremiumBottomBtn" data-default-label="Complete Analysis — $69">
+                        Complete Analysis — $69
+                    </button>
+                </div>
+                <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width:auto; margin-top:1rem;">
                     Print / Save PDF
                 </button>
             </div>
@@ -1088,7 +1131,7 @@ function buildEmailCapture() {
     return `
         <div class="email-capture-block">
             <h4 class="email-capture-title">Want a copy sent to your inbox?</h4>
-            <p class="email-capture-sub">We'll email you a copy of this reading &mdash; no spam, no account required.</p>
+            <p class="email-capture-sub">We'll email you a copy of this reading &mdash; no spam. Free preview does not require email; email is recommended for delivery and support.</p>
             <form class="email-capture-form" novalidate>
                 <div class="email-capture-row">
                     <input

@@ -5,7 +5,7 @@ Supports persistence via SQLite (default) or PostgreSQL.
 
 import logging
 import secrets
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 logger = logging.getLogger(__name__)
 from typing import Any, Dict, List, Optional
@@ -19,6 +19,13 @@ from src.services.notifications import AdminNotificationService
 
 # Initialize tables - MOVED TO APP STARTUP to prevent hang
 # Base.metadata.create_all(bind=engine)
+
+
+def _as_utc(value: datetime) -> datetime:
+    """Treat database-naive timestamps as UTC and normalize aware values to UTC."""
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
 
 
 class UserManager:
@@ -386,13 +393,12 @@ class UserManager:
 
             token = secrets.token_urlsafe(32)
             # Expires in 1 hour
-            expires = (
-                datetime.now(timezone.utc).replace(second=0, microsecond=0).timestamp()
-                + 3600
-            )
+            expires_at = datetime.now(timezone.utc).replace(
+                second=0, microsecond=0
+            ) + timedelta(hours=1)
 
             user.reset_token = token  # type: ignore
-            user.reset_token_expires = datetime.fromtimestamp(expires, tz=timezone.utc)  # type: ignore
+            user.reset_token_expires = expires_at  # type: ignore
             db.commit()
 
             return {"success": True, "token": token}
@@ -414,7 +420,10 @@ class UserManager:
                 return {"success": False, "message": "Invalid or expired reset token."}
 
             # Check expiration
-            if user.reset_token_expires < datetime.now(timezone.utc):
+            if not user.reset_token_expires:
+                return {"success": False, "message": "Invalid or expired reset token."}
+
+            if _as_utc(user.reset_token_expires) < datetime.now(timezone.utc):
                 return {"success": False, "message": "Reset token has expired."}
 
             if len(new_password) < 8:

@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     OWNER_EMAILS: str = ""
     OWNER_BOOTSTRAP_KEY: str = ""
     PUBLIC_API_DOCS_ENABLED: bool = False
+
     # Pricing (B2B SaaS). Leave blank to disable checkout for that tier until configured.
     STRIPE_PRICE_SCHOLAR_MONTHLY: str = ""
     STRIPE_PRICE_SCHOLAR_ANNUAL: str = ""
@@ -43,6 +44,9 @@ class Settings(BaseSettings):
     # Guest checkout (no-account flow) — $25 and $69 tiers
     STRIPE_PRICE_FULL_READING: str = ""
     STRIPE_PRICE_PREMIUM_AUDIT: str = ""
+
+    # Cheap one-time Stripe test product: one paid horary question for $5.
+    STRIPE_PRICE_HORARY_QUESTION: str = ""
 
     # Public reading monetization:
     # - First N free readings per visitor per rolling window.

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});</script>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TJNM5XVD');</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5T7HPNKL7V"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5T7HPNKL7V');</script>
 
@@ -23,9 +22,41 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css?v=mobilenav2" />
+  <link rel="stylesheet" href="/style.css?v=rev20260508mobile1" />
 
-  <script type="application/ld+json">
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -45,15 +76,13 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type": "Question", "name": "What is a profection year by age?", "acceptedAnswer": {"@type": "Answer", "text": "Each year of life activates one house of the natal chart, advancing one house per birthday and cycling back to the 1st house every twelve years. So age 0, 12, 24, 36, 48, 60, 72, and 84 are all 1st-house profection years."}},
-      {"@type": "Question", "name": "Why are the ages 12, 24, 36 important?", "acceptedAnswer": {"@type": "Answer", "text": "These are profection returns to the 1st house. The 1st house governs body and self, and its ruler in your birth chart becomes Lord of the Year again. These years often coincide with major life resets: identity, health changes, new chapters."}},
-      {"@type": "Question", "name": "What does an 8th house profection year mean?", "acceptedAnswer": {"@type": "Answer", "text": "8th-house profection years activate topics of debt, inheritance, other people's money, and fear. They occur at ages 7, 19, 31, 43, 55, 67, and 79. The condition of the planet that rules your 8th house determines whether the year leans toward windfall (inheritance, settled debts) or strain (loss, financial obligations)."}}
+      {"@type": "Question", "name": "Why are the ages 12, 24, 36 important?", "acceptedAnswer": {"@type": "Answer", "text": "These are profection returns to the 1st house. The 1st house governs body and self in traditional symbolism, and its ruler in your birth chart becomes Lord of the Year again. These years are read as symbolic personal reset years, not health predictions."}},
+      {"@type": "Question", "name": "What does an 8th house profection year mean?", "acceptedAnswer": {"@type": "Answer", "text": "8th-house profection years activate traditional topics of debt, inheritance, shared resources, mortality symbolism, and fear. They occur at ages 7, 19, 31, 43, 55, 67, and 79. This is historical symbolism only, not financial, estate, legal, or death-timing advice."}}
     ]
   }
   </script>
 </head>
 <body>
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJNM5XVD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
   <div class="cosmos-bg">
     <div class="stars-layer stars-sm"></div>
     <div class="stars-layer stars-md"></div>
@@ -72,10 +101,11 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
@@ -114,33 +144,33 @@
       11, 23, 35, 47, 59, 71, 83 → <strong>12th house</strong></p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">1st house years (ages 0, 12, 24, 36, 48, 60, 72, 84)</h2>
-      <p>The 1st house governs the body, vitality, and the self. A 1st-house profection year often coincides with identity reset: changes in appearance, health concerns, new chapters of personal direction. The Lord of the Year is your Ascendant ruler — the planet that rules your rising sign — and its natal condition tells you most of what to expect. A strong, well-placed Ascendant ruler in a 1st-house year tends to be a productive personal year. A weak or maltreated one points to friction with the body or sense of self.</p>
+      <p>The 1st house governs the body, vitality, and the self in traditional symbolism. A 1st-house profection year is read as an identity-reset frame: appearance, embodied self-image, and new chapters of personal direction may become symbolic topics. This is not health advice, diagnosis, or prognosis.</p>
       <p>These returns line up with culturally recognized turning points: 12 (start of adolescence in classical sources), 24 (early adulthood consolidating), 36 (often described as a midpoint), 48, 60, and so on.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">2nd house years (1, 13, 25, 37, 49, 61, 73)</h2>
-      <p>The 2nd house governs movable property, money, and allies. A 2nd-house profection year is a money year — for better or worse. Look at the ruler of your 2nd house in the birth chart. If it sits in a benefic house and is dignified, the year tends toward financial gain or stable income. If it is in fall or in a difficult house (8th, 12th), the year tends toward expenses, slow income, or financial dependency on others.</p>
+      <p>The 2nd house governs movable property, resources, and allies. A 2nd-house profection year highlights resource symbolism. Look at the ruler of your 2nd house in the birth chart to understand the traditional symbolic tone. This is not financial advice, income prediction, investment guidance, or budgeting advice.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">3rd house years (2, 14, 26, 38, 50, 62, 74)</h2>
-      <p>Siblings, neighbors, short journeys, letters and communications, learning. A 3rd-house year is rarely dramatic but often productive in a domestic and intellectual sense. Many people start writing, studying a new subject, or shifting their immediate environment in these years. Watch the ruler of the 3rd: if it is Mercury and Mercury is well-placed, the year favors writing and contracts. If it is Mars in fall, expect arguments with siblings or trouble with short trips.</p>
+      <p>Siblings, neighbors, short journeys, letters and communications, learning. A 3rd-house year is rarely dramatic but often productive in a domestic and intellectual sense. Many people start writing, studying a new subject, or shifting their immediate environment in these years. The ruler of the 3rd describes the symbolic tone around communication and agreements; use ordinary judgment and qualified advice for contracts or travel safety.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">4th house years (3, 15, 27, 39, 51, 63, 75)</h2>
-      <p>Father, family of origin, land, and the end of things. A 4th-house year often surfaces unfinished business with the home or with one's father. Real estate moves, inheritances, family conflicts, or returns to ancestral places are common. The 4th is also the house of the grave in some classical sources — for older natives the 4th-house year sometimes correlates with bereavement.</p>
+      <p>Father, family of origin, land, and endings. A 4th-house year symbolically surfaces home, ancestry, and foundations. Classical texts also connect the 4th with endings and burial symbolism; this site treats that as historical context only, not death timing or estate advice.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">5th house years (4, 16, 28, 40, 52, 64, 76)</h2>
-      <p>Children, pleasure, creativity, romance, gambling. A 5th-house year is generally a "lighter" year if the ruler is well placed. Pregnancies, courtships, and creative projects belong here. The Lord of the Year matters: a benefic ruler of the 5th in a good house can deliver one of the most enjoyable years of a chart. A debilitated ruler turns the same year into restlessness, problematic romances, or losses through speculation.</p>
+      <p>Children, pleasure, creativity, romance, and games of chance. A 5th-house year is generally a "lighter" symbolic year if the ruler is well placed. Creative projects and pleasure topics belong here. This is not pregnancy, relationship, gambling, or financial advice.</p>
       <p>The 28th year (the late Saturn return for some, plus a 5th-house profection) is a famous example of how layers stack. Many people make significant life shifts at 28 — partly the Saturn return, partly the 5th-house pleasure year asking what they actually love.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">6th house years (5, 17, 29, 41, 53, 65, 77)</h2>
-      <p>Sickness, labor, hard work. The 6th is one of the difficult houses — classical sources called it the house of "bad fortune." A 6th-house profection year asks for grinding work and tends to surface health issues, especially if the ruler of the 6th is afflicted in the natal chart. The reward is what builds: skills, stamina, professional capacity. Many career foundations get laid in 6th-house years even though they don't feel like it at the time.</p>
-      <p>Age 29 is notable — it is a 6th-house year that overlaps with the first Saturn return for many. Hard work, health rearrangement, and accumulated debt often surface together.</p>
+      <p>Sickness, labor, and hard work are the traditional 6th-house topics. Classical sources called it the house of "bad fortune." On this site, 6th-house profections are framed as historical symbolism around work, service, and bodily themes only, not diagnosis, treatment, prognosis, or health advice.</p>
+      <p>Age 29 is notable — it is a 6th-house year that overlaps with the first Saturn return for many. The symbolic stack emphasizes responsibility, workload, and routine; use qualified professionals for health, debt, legal, or financial issues.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">7th house years (6, 18, 30, 42, 54, 66, 78)</h2>
-      <p>Marriage, partners, open enemies, lawsuits. A 7th-house year almost always brings partnership questions to the front. People marry, divorce, take on co-founders, or end long alliances in these years. The condition of the 7th-house ruler tells you whether partnerships built (or broken) in the year will last: a dignified ruler points to enduring partnership, an afflicted one points to instability or conflict.</p>
-      <p>Note that the 7th also rules open enemies and lawsuits. If you are heading into a 7th-house year and the ruler is being squared by Mars or Saturn natally, expect contractual or legal tension.</p>
+      <p>Marriage, partners, open enemies, and lawsuits are the traditional 7th-house topics. A 7th-house year brings relationship and counterpart symbolism to the front. This is not relationship, business, legal, psychological, emergency, or safety advice.</p>
+      <p>Because the 7th also rules open enemies and lawsuits in classical texts, difficult rulers may symbolize counterpart friction. Handle contracts, disputes, and legal matters through appropriate professional channels.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">8th house years (7, 19, 31, 43, 55, 67, 79)</h2>
-      <p>Death, debt, inheritance, other people's money, fear. The 8th is a heavy house. Profections through the 8th tend to surface the topics that have been ignored: financial obligations, estate matters, intimacy issues, anxiety. They are not automatically bad years — sometimes inheritances arrive — but they are years of structural confrontation.</p>
-      <p>Age 31 is a frequent inflection point: 8th-house profection plus the lingering effects of the first Saturn return. Many people restructure their relationship to debt, family money, or legacy obligations around this age.</p>
+      <p>Mortality symbolism, debt, inheritance, other people's resources, and fear are the traditional 8th-house topics. The 8th is a heavy symbolic house, often used for obligations, shared resources, estate themes, and anxiety in classical delineation. This is historical symbolism only, not death timing, financial advice, estate advice, or psychological guidance.</p>
+      <p>Age 31 is a frequent inflection point in traditional timing discussion: 8th-house profection plus the lingering effects of the first Saturn return. Treat any debt, family-money, legal, or estate questions through qualified professional advice.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">9th house years (8, 20, 32, 44, 56, 68, 80)</h2>
       <p>Long journeys, religion, philosophy, divination, higher learning. The 9th is a benefic place by tradition. A 9th-house profection year favors travel (especially long-distance), study, publishing, religious or philosophical commitment, and any work involving foreign places or higher institutions. People often go to grad school, move countries, or start writing books in 9th-house years. The Lord of the Year sets the tone: Jupiter as ruler of the 9th in a strong placement makes for one of the more expansive years of life.</p>
@@ -154,7 +184,7 @@
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">12th house years (11, 23, 35, 47, 59, 71, 83)</h2>
       <p>Hidden enemies, sorrow, retreat, large institutions, things that happen out of sight. The 12th is the most difficult house in the traditional system. A 12th-house profection year tends toward isolation, hidden work, hospitalization or institutional involvement, and processes that move slowly without visible result. The reward is depth: real reflection, long projects that mature in private, spiritual development.</p>
-      <p>The right strategy for a 12th-house year is usually withdrawal rather than push. Public moves attempted here often fail or run into invisible obstacles. Work that is meant to mature out of sight does well.</p>
+      <p>In traditional symbolism, 12th-house years are often described as better suited to private work than public pressure. This is not a directive for career, legal, business, safety, or psychological decisions.</p>
 
       <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #c9a84c; margin-top: 3rem; margin-bottom: 1rem;">Why people the same age have different years</h2>
 
@@ -180,11 +210,11 @@
       </details>
       <details class="faq-item" style="margin-bottom: 1rem;">
         <summary>Should I plan major life decisions around my profection year?</summary>
-        <p>Profections give a useful frame for what topic is active. They are less precise about exact dates within the year. For decision timing, traditional astrologers usually combine profections with firdaria periods and primary directions. Profections alone tell you what the year is about, not when within it the events occur.</p>
+        <p>No. Profections give a symbolic frame for what topic is active in traditional astrology. They should not be used to make legal, business, financial, medical, psychological, emergency, safety, or urgent decisions.</p>
       </details>
       <details class="faq-item" style="margin-bottom: 1rem;">
         <summary>What does an 8th house profection year mean?</summary>
-        <p>The 8th house governs debt, inheritance, others' money, and fear. 8th-house years occur at ages 7, 19, 31, 43, 55, 67, and 79. They tend to surface financial entanglements with others — settling estates, managing debts, dealing with insurance or shared resources. Whether the year leans toward windfall or strain depends on the natal condition of your 8th-house ruler.</p>
+        <p>The 8th house governs debt, inheritance, others' resources, mortality symbolism, and fear in classical texts. 8th-house years occur at ages 7, 19, 31, 43, 55, 67, and 79. Treat this as historical symbolism only, not financial, legal, estate, insurance, psychological, or death-timing advice.</p>
       </details>
 
     </article>

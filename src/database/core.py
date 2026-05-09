@@ -1,4 +1,5 @@
 import logging
+import os
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -7,8 +8,24 @@ logger = logging.getLogger(__name__)
 
 from src.core.config import settings
 
-# Priority: DATABASE_URL env var (Production), else local SQLite
-DATABASE_URL = settings.DATABASE_URL or "sqlite:///./users.db"
+DEFAULT_DATABASE_URL = "sqlite:///./users.db"
+
+
+def _resolve_database_url(configured_url: str, is_cloud_run: bool) -> str:
+    if configured_url and configured_url != DEFAULT_DATABASE_URL:
+        return configured_url
+    if is_cloud_run:
+        raise RuntimeError(
+            "DATABASE_URL must be set for Cloud Run. Refusing to fall back to SQLite."
+        )
+    return DEFAULT_DATABASE_URL
+
+
+# Priority: DATABASE_URL env var (Production), else local SQLite only outside Cloud Run.
+DATABASE_URL = _resolve_database_url(
+    settings.DATABASE_URL,
+    bool(os.getenv("K_SERVICE")),
+)
 
 # Normalize legacy 'postgres://' URLs to SQLAlchemy-compatible 'postgresql://'
 if DATABASE_URL.startswith("postgres://"):

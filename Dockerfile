@@ -14,6 +14,7 @@ FROM python:3.10-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV SE_EPHE_PATH=/app/src/ephe:/usr/share/swisseph:/usr/local/share/swisseph
 
 # Copy installed packages from builder
 COPY --from=builder /install /usr/local

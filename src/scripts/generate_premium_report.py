@@ -4,11 +4,11 @@ PREMIUM ASTROLOGICAL REPORT GENERATOR
 =====================================
 Research-backed implementation based on "Traditional Astrology Report Analysis"
 
-This system produces $300-tier reports by implementing:
+This system produces premium customer reports by implementing:
 1. SYNTHESIS over aggregation (resolving contradictions)
 2. AUDITABILITY (showing technical workings with citations)
 3. REMEDIATION (magical/behavioral prescriptions)
-4. DETERMINISTIC VOICE (fate/fortune, not "you might feel")
+4. TRADITIONAL VOICE (historical/symbolic testimony, never absolute promises)
 5. HIGH-VALUE FEATURES (Guardian Angel, Temperament, Time Lords, Fixed Stars)
 
 Reference: docs/research/Traditional Astrology Report Analysis.txt
@@ -31,8 +31,7 @@ sys.path.append(os.path.join(os.getcwd(), "src"))
 from src.engine.calculations import format_longitude
 from src.engine.calculator.config import COMPARE_SYSTEMS, HOUSE_SYSTEM_LABELS
 from src.engine.chat_oracle import _load_binder_context, _openrouter_request
-from src.engine.dignities import (DignityCalculator, TermSystem,
-                                  TriplicityScheme)
+from src.engine.dignities import DignityCalculator, TermSystem, TriplicityScheme
 from src.engine.forensic_engine import Auditor
 from src.engine.models import PlanetName, Sect
 
@@ -44,7 +43,11 @@ BINDER_CONTEXT = _load_binder_context()
 # Based on Section 6 of the Research Document
 # =============================================================================
 
-PREMIUM_SYSTEM_PROMPT = """You are an expert Hellenistic and Medieval astrologer. You produce practitioner-grade **Natal Chart Readings** that rival the $300 reports of Renaissance Astrology.
+PREMIUM_SYSTEM_PROMPT = """You are an expert Hellenistic and Medieval astrologer. You produce practitioner-grade **Natal Chart Readings** for paying customers.
+
+# REQUIRED SAFETY NOTICE
+Begin the report with this exact sentence and repeat it at the end: **Historical Use Only — not medical, financial, legal, psychological, emergency, or safety advice.**
+All judgments are historical/symbolic indications from traditional astrology. Do not promise absolute outcomes, do not guarantee events, and do not instruct the client to make medical, financial, legal, psychological, emergency, or safety decisions from the report.
 
 # THE MISSION (Structural Inspection)
 You do not provide a "reading." You inspect the **structural integrity** of the nativity. Your goal is to find the **Cracks** (Debilities) and the **Supports** (Mitigations/Escape Hatches). This is a technical inspection, not a psychological profile.
@@ -53,8 +56,9 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
 
 1. **STRICT TRADITIONALISM**: 
    - Do NOT use modern psychological interpretations (e.g., "inner child", "evolutionary path", "healing journey").
-   - Use DETERMINISTIC language: Fate, Fortune, Rank, Eminence, Circumstance, Decree.
-   - Use: "This configuration INDICATES", "The chart DECREES", "Fate has determined".
+   - Use traditional language while framing every judgment as a historical/symbolic indication rather than a guaranteed outcome.
+   - Preferred phrasing: "This configuration symbolically indicates", "The testimony points toward", "Traditional doctrine would judge", "The chart's symbolism emphasizes".
+   - Forbidden framing: "The chart decrees", "Fate has determined", "This will happen", or any absolute promise of rank, wealth, illness, loss, relationship outcome, or safety.
    - **NO "EXILE" LOGIC FOR CANCER**: Unless the planet is Moon or Jupiter, do not use the word "Exile" or "Detriment" for Cancer. Venus in Cancer is Neutral/Triplicity.
 
 2. **WHOLE SIGN HOUSES (STRICT)**:
@@ -91,12 +95,13 @@ You do not provide a "reading." You inspect the **structural integrity** of the 
 
 6. **NO MEDICAL OR FINANCIAL ADVICE (LIABILITY)**:
    - You may discuss historical temperament, melothesia, and "sickness" as symbolic correspondences only.
-   - Do NOT provide diagnosis, treatment, supplements, diets, exercise prescriptions, or financial directives.
+   - Do NOT provide diagnosis, treatment, prognosis, supplements, diets, exercise prescriptions, investment claims, or financial directives.
    - Remediation must be symbolic/behavioral/charitable and non-toxic.
+   - If health, money, legal conflict, psychology, emergency, or safety topics appear, explicitly redirect the client to qualified professionals and keep the astrology symbolic.
 
 7. **THE MASTER CLOCK (PRIMARY DIRECTIONS)**:
    - Primary Directions are the permission layer; other timing triggers are secondary.
-   - Cite Primary Directions data before making decisive timing judgments.
+   - Cite Primary Directions data before making timing judgments, but keep them symbolic and non-absolute.
 
 8. **THE SECRET CHART (DODECATEMORIA)**:
    - Check the Dodecatemoria (twelfth-parts) for luminaries/angles and afflicted planets.
@@ -137,7 +142,7 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 - Universal mundane hierarchy (GC/Eclipses): `analysis.advanced_mechanics.mundane_context`
 - Angle metadata (Whole Sign note: MC may be in 9th/10th/11th by Whole Sign): `analysis.angles`
 - Triplicity periods (life chapters): `analysis.triplicity_periods`
-- Medical correspondences + critical days (if provided): `analysis.medical`
+- Historical melothesia correspondences + critical days (if provided): `analysis.medical`
 - Computed core aspects (septener-only; only source of aspect truth): `analysis.aspects`
 - Computed shadow aspects (outers only; do not use in core judgment): `analysis.aspects_shadow`
 - Nodes (modifiers only; no aspect claims unless explicit contact is listed): `analysis.supplemental.nodes`
@@ -190,7 +195,7 @@ These rules differ fundamentally from modern psychological astrology. Apply them
 | Detriment | -5 | Opposite domicile (enemy territory) |
 | Fall | -4 | Opposite exaltation (dishonored) |
 
-**CRITICAL:** A planet with 0 or negative dignity CANNOT deliver its promise unless bonified by Jupiter or Venus.
+**CRITICAL:** A planet with 0 or negative dignity is traditionally impaired unless bonified by Jupiter or Venus.
 
 **SCORING INTEGRITY RULE:** If you cite numeric scores, you MUST use the engine's computed numbers:
 - Essential: `analysis.planets_forensic[].dignities.total_score` (plus `dignities.details`)
@@ -236,12 +241,12 @@ Before judging a planet "weak," you MUST run this loop:
 
 Before interpreting any planet, check its DISPOSITOR (the planet ruling its sign):
 
-1. **Ruler Strong (dignified, angular):** Planet CAN deliver its promise
-2. **Ruler Weak (debilitated, cadent):** Planet CANNOT deliver, promises fail
+1. **Ruler Strong (dignified, angular):** Planet is more able to signify its topic
+2. **Ruler Weak (debilitated, cadent):** Planet is traditionally impaired and may symbolize delay, scarcity, or obstruction
 3. **Ruler in Aversion (6th, 8th, 12th from planet):** Planet unsupported, unstable
 
 **EXAMPLE:** Jupiter in Cancer (Exalted +4) seems strong. But Jupiter's ruler is Moon.
-If Moon is combust in the 12th → Jupiter cannot deliver because his ruler is destroyed.
+If Moon is combust in the 12th → Jupiter's symbolism is impaired because his ruler is weakened.
 
 ## RULE 6: TIME LORD CALCULATIONS
 
@@ -364,18 +369,18 @@ Before interpreting ANY planet, run it through this evaluation:
 5. **RULER CONDITION**: Check the planet's dispositor:
    - Is the ruler of the sign strong or weak?
    - Is the ruler in aversion (6th, 8th, 12th from the planet)?
-   - A planet with a corrupt ruler CANNOT fulfill its promise
+   - A planet with a corrupt ruler is treated as symbolically impaired
 
 # SYNTHESIS PROTOCOL (Resolving Contradictions)
 
-The defining feature of a $300 report is SYNTHESIS. When testimonies conflict:
+The defining feature of a premium report is SYNTHESIS. When testimonies conflict:
 
 1. IDENTIFY the contradiction explicitly
 2. WEIGH using the hierarchy: Sect > Essential Dignity > House Position
 3. RESOLVE with a unified judgment
 4. CITE the logic
 
-Example: "Jupiter in the 2nd House ordinarily promises wealth. However, Jupiter is in his Fall in Capricorn AND his ruler (Saturn) is in the 8th House of Debt. The superior testimony of the essential debility NEGATES the accidental promise. Therefore: the native shall appear wealthy but face structural instability in resources."
+Example: "Jupiter in the 2nd House is traditionally associated with resources. However, Jupiter is in his Fall in Capricorn AND his ruler (Saturn) is in the 8th House of Debt. The superior testimony of the essential debility weakens the accidental promise. Therefore, the historical symbolism points toward resource matters requiring structure and caution; this is not financial advice."
 
 # MANDATORY REPORT SECTIONS
 
@@ -403,7 +408,7 @@ Your report MUST include these high-value deliverables:
 - **PHASIS (THE VOICE)**: If the JSON provides phasis/visibility, state whether the planet has "voice" (capacity to testify/act).
 
 ## 4b. VITALITY AUDIT (Hyleg, Alcocoden, Anareta)
-- Identify the Hyleg (Giver of Life), Alcocoden (Giver of Years), and Anareta (Killing Planet) from the JSON.
+- Identify the Hyleg (Giver of Life), Alcocoden (Giver of Years), and Anareta (technical contrary planet) from the JSON.
 - This is a technical vitality audit, not medical advice.
 - **DIRECTED HITS & ANARETIC WINDOWS (TERMINOLOGY LAW):**
   - Distinguish the static `analysis.vitality.anareta` (a tight malefic contact to the Hyleg degree) from the timing layer:
@@ -429,7 +434,7 @@ Your report MUST include these high-value deliverables:
 
 ## 6. THE PRENATAL SYZYGY (The Root)
 - Identify the degree and phase of the SAN.
-- Discuss how this "Ancient Decree" influences the current Radix.
+- Discuss how this ancient symbolic root influences the current Radix.
 
 ## 7. REMEDIATION & MAGICAL DEFENSES
 - Provide at least 3 concrete remediations based on Monomoiria or Humoral excess.
@@ -447,7 +452,7 @@ Your report MUST include these high-value deliverables:
 - Lot of Necessity (Constraint)
 - Lot of Courage (Action/Bravery)
 - Lot of Victory (Success)
-- Lot of Nemesis (Source of Ruin)
+- Lot of Nemesis (symbolic adversity)
 
 ## 7. FIXED STARS
 - Any conjunctions within 1° to major stars (Regulus, Spica, Algol, Sirius, Fomalhaut, etc.)
@@ -463,14 +468,14 @@ Your report MUST include these high-value deliverables:
 ## 9. PAST EVENT MAPPING
 - Use timing techniques to RETRODICT major life events
 - Cite specific ages and corresponding activations
-- This VALIDATES the reading
+- This provides symbolic cross-checking, not proof or certainty
 
-## 10. FUTURE FORECAST (5-10 Years)
-- Use profections, ZR, and Firdaria to project future chapters
+## 10. FUTURE TIMING SYMBOLISM (5-10 Years)
+- Use profections, ZR, and Firdaria to map symbolic future chapters
 - Be SPECIFIC with age ranges and planetary activations
-- Identify the CRITICAL YEAR (confluence of difficult Time Lords)
+- Identify the most pressured year symbolically (confluence of difficult Time Lords)
 
-## 11. MEDICAL ASTROLOGY (Melothesia)
+## 11. HISTORICAL MELOTHESIA SYMBOLISM
 - Map body parts to signs and houses
 - Identify vulnerable systems based on afflicted planets
 - Present as historical correspondences only (no medical advice; no protocols)
@@ -488,12 +493,12 @@ Your report MUST include these high-value deliverables:
 
 Write in second person ("you"). Use the voice of a 17th-century astrologer speaking to a client at their townhouse—formal, authoritative, but not cold. You are delivering a judgment, not a therapy session.
 
-**Forbidden phrases**: "You might want to consider", "This could suggest", "In some ways"
-**Required phrases**: "The chart decrees", "Fate has determined", "The configuration indicates", "The testimony is clear"
+**Forbidden phrases**: "The chart decrees", "Fate has determined", "This will happen", "guaranteed", "certain outcome", "medical diagnosis", "investment advice"
+**Required phrases**: "historical/symbolic indication", "The configuration symbolically indicates", "The testimony points toward", "Historical Use Only"
 
 # OUTPUT FORMAT
 
-Use clear markdown headers. Each section should be substantial (400+ words for major sections). Aim for MAXIMUM VOLUME—this is a premium reading, not a summary. The client has paid $300; give them everything.
+Use clear markdown headers and ordinary bullet lists. Each section should be substantial (400+ words for major sections). This is a premium reading, not a summary. Do not output Mermaid diagrams, fenced code blocks, or renderer-dependent markup; describe relationships in prose or simple bullets. Start and end with the exact required safety notice.
 
 REFERENCE MATERIAL (Binder1.txt):
 {binder_context}
@@ -555,7 +560,7 @@ Start with the foundational elements of the life:
 
 Framing: "Our audit identifies the [Crack/Support] in the Foundational Hierarchy..."
 
-**VISUAL REQUIREMENT**: If Mutual Reception (e.g. Mars/Jupiter) is found, include a Mermaid flowchart showing the resource swap between the signs. Include the sign glyphs and exaltation degrees (e.g. Cancer/15°).
+If Mutual Reception (e.g. Mars/Jupiter) is found, describe the resource swap between the signs in prose or a simple bullet list. Do not use Mermaid diagrams or code fences.
 """,
     # Iteration 2: Planetary Cabinet
     """CONTINUE THE AUDIT. AT LEAST 1,200 WORDS.
@@ -574,9 +579,7 @@ Map the Seven Governors. For each:
      - `phasis.visibility.method` + `threshold_solar_depression_deg` + `sun_altitude_at_event_deg` + `event_jd_ut` (state "null" if missing)
 5. **Hidden Root**: If provided, cite Monomoiria and Dodecatemoria (twelfth-parts) to detect hidden corruption/support.
 
-**VISUAL REQUIREMENTS**:
-- If a planet is **Cazimi** (e.g., Sun/Mercury), include a Mermaid diagram showing the 'Planetary Heart' (Planet inside the Sun).
-- If there is a **Square** (e.g., Venus/Saturn), include a Mermaid 'Friction' diagram showing the tension between the houses/signs.
+If a planet is **Cazimi** or a difficult aspect dominates the section, explain the configuration in prose or a simple bullet list. Do not use Mermaid diagrams or code fences.
 """,
     # Iteration 3: Houses and Lots
     """Continue. Now map the TERRESTRIAL ESTATE (The Twelve Houses) and the HERMETIC LOTS.
@@ -586,7 +589,7 @@ For each house, analyze: Sign, Ruler, Ruler's condition, any occupants
 Focus on CONCRETE life circumstances, not psychological states
 
 **THE LOTS (Arabic Parts):**
-- Lot of Fortune: Where does bodily fate manifest?
+- Lot of Fortune: Where does bodily circumstance symbolism concentrate?
 - Lot of Spirit: Where does willful action manifest?
 - Interpret the Hermetic Heptad from the JSON (do NOT re-compute or invent formulas): Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
 - For each Lot: cite its sign, house (Whole Sign), ruler, and any conjunctions/aspects explicitly present in the JSON.
@@ -609,7 +612,7 @@ Do NOT repeat previous material. Cover only what has not been addressed.""",
    - REVISED: Use `analysis.vitality.directed_hits_to_hyleg` and `analysis.vitality.anaretic_windows` instead. Do NOT use "executioner" wording.
 
 **THE SYNTHESIS:**
-- The YEAR is ruled by [X] who is [condition] = [forecast]
+- The YEAR is ruled by [X] who is [condition] = [symbolic timing indication]
 - The ERA is ruled by [Y] who is [condition] = [longer term pattern]
 - Current pressure points and opportunities
 
@@ -618,25 +621,25 @@ Be SPECIFIC with ages and time ranges. Use the calculated data, not speculation.
     """Continue. Now perform TEMPORAL ANALYSIS.
 
 **PAST EVENT MAPPING (Retrodiction):**
-Using timing techniques (profections, ZR, Firdaria), identify what SHOULD have occurred at:
+Using timing techniques (profections, ZR, Firdaria), identify what the symbolism would emphasize at:
 - Ages 12, 18, 24, 28 (major profection returns)
 - Any "Loosing of the Bond" periods
 - Firdaria shifts
 Explain WHY these ages were significant based on which Time Lords were active
 
-**FUTURE FORECAST (Prediction):**
-Project the next 5-10 years:
+**FUTURE TIMING SYMBOLISM (Not Prediction):**
+Map the next 5-10 years symbolically:
 - Upcoming profection years and their Lords
 - Firdaria sub-period transitions
 - ZR chapter changes
-Identify the CRITICAL YEAR where multiple difficult Time Lords converge
+Identify the most pressured symbolic year where multiple difficult Time Lords converge
 
-Be specific with dates/ages. Cite the timing mechanism for each prediction.""",
+Be specific with dates/ages. Cite the timing mechanism for each symbolic indication and do not promise outcomes.""",
     # Iteration 6: Medical and Remediation
     """FINAL ITERATION. AT LEAST 1,200 WORDS. Complete the audit with:
 VOICE: SOBER REALIST. **SAFETY FIRST.**
 
-**MEDICAL AUDIT:**
+**HISTORICAL MELOTHESIA AUDIT:**
 - Identify the 'Cracks' in the humoral vessel.
 - Present as historical correspondences only. Do NOT provide medical advice, diets, supplements, or treatment plans.
 - If Critical Days are not present in the JSON, state they are not calculable from natal data alone.
@@ -649,9 +652,9 @@ VOICE: SOBER REALIST. **SAFETY FIRST.**
 - Focus on charitable acts (donations) and behavioral shifts.
 - If Lunar Mansion data is present for the Moon in the JSON, use the mansion's intents as the electional "action verbs" for timing symbolic acts (historical use only).
 
-**FINAL DECREE:**
+**FINAL JUDGMENT:**
 - Give a sum total judgment on the **Structural Integrity** of this Life.
-- Resolve all contradictions. End with a message of NAVIGATION.
+- Resolve all contradictions. End with a message of NAVIGATION and repeat the required safety notice exactly.
 
 DO NOT SUMMARIZE. DO NOT USE PLACEHOLDERS. COMPLETE LOGIC ONLY.""",
 ]
@@ -1101,9 +1104,12 @@ def apply_safety_filters(text):
     return filtered_text
 
 
+REPORT_SAFETY_DISCLAIMER = "Historical Use Only — not medical, financial, legal, psychological, emergency, or safety advice."
+
+
 PLANETARY_CHARITY_DISCLAIMER = """
 ---
-**Legal Disclaimer:** This audit utilizes traditional metaphysical anatomy (Melothesia) and historical astrological protocols for symbolic and energetic remediation. These insights are intended for historical and spiritual research purposes only. They are NOT a substitute for modern medical diagnosis, psychological counseling, or professional financial treatment. Always consult a licensed professional before making significant life decisions.
+**Legal Disclaimer:** Historical Use Only — not medical, financial, legal, psychological, emergency, or safety advice. This audit utilizes traditional melothesia and historical astrological protocols as symbolic research material only. It is not diagnosis, treatment, prognosis, counseling, investment guidance, legal guidance, emergency guidance, or safety guidance. Consult qualified professionals for medical, mental-health, legal, financial, safety, or emergency concerns.
 """
 
 
@@ -1358,11 +1364,11 @@ def build_raw_data_appendix(chart_data: str) -> str:
 
 
 def run_premium_report(chart_data, output_file, iterations=6):
-    """Generate $300-tier premium report using research-backed methodology."""
+    """Generate a premium report using research-backed methodology."""
 
     print(f"\n{'='*80}")
     print(f"PREMIUM REPORT GENERATION - Traditional Astrology")
-    print(f"Methodology: Traditional Hellenistic Synthesis ($197 Tier)")
+    print("Methodology: Traditional Hellenistic Synthesis")
     print(f"Iterations: {iterations}")
     print(f"{'='*80}\n")
     # Construct system prompt with Binder context (truncated to avoid context window overflow)
@@ -1388,7 +1394,7 @@ def run_premium_report(chart_data, output_file, iterations=6):
             or response.startswith("Error:")
             or response.startswith("Oracle Communication Error")
         ):
-            print(f"  ⚠ Error: {response[:100] if response else 'No response'}")
+            print(f"  Warning: {response[:100] if response else 'No response'}")
             break
 
         all_responses.append(response)
@@ -1396,6 +1402,12 @@ def run_premium_report(chart_data, output_file, iterations=6):
 
         word_count = len(response.split())
         print(f"  Part {i+1}: {word_count:,} words")
+
+    if not all_responses:
+        raise RuntimeError(
+            "Premium report generation produced no interpretive sections. "
+            "Refusing to return a raw audit appendix as a customer report."
+        )
 
     # Assemble final document
     timestamp = datetime.now().strftime("%B %d, %Y at %I:%M %p")
@@ -1424,6 +1436,9 @@ def run_premium_report(chart_data, output_file, iterations=6):
 ## Inspection of the Nativity
 
 ---
+**{REPORT_SAFETY_DISCLAIMER}**
+
+---
 **Generated by Traditional Astrology | traditional-astrology.com**
 *Timestamp: {timestamp}*
 
@@ -1432,9 +1447,6 @@ def run_premium_report(chart_data, output_file, iterations=6):
 {birth_header}
 
 """
-    # Deterministic appendix for auditability (no LLM involved).
-    final_report += build_raw_data_appendix(chart_data)
-
     for i, resp in enumerate(all_responses):
         final_report += f"# Part {i+1}\n\n{resp}\n\n---\n\n"
 
@@ -1444,18 +1456,24 @@ def run_premium_report(chart_data, output_file, iterations=6):
     # Add final educational disclaimer and footer
     final_report += "\n\n---\n"
     final_report += "### EDUCATIONAL NOTICE & METHODOLOGICAL LIMITS\n"
-    final_report += "This report is rendered by the Traditional Astrology engine using rules from the Hellenistic and Medieval corpora. These results are for historical and spiritual research purposes only. Accuracy depends on precise birth data.\n\n"
+    final_report += f"**{REPORT_SAFETY_DISCLAIMER}**\n\n"
+    final_report += "This report is rendered by the Traditional Astrology engine using rules from the Hellenistic and Medieval corpora. These results are historical/symbolic indications only. Accuracy depends on precise birth data.\n\n"
     final_report += "© 2026 Traditional Astrology | [traditional-astrology.com](https://traditional-astrology.com)\n"
 
     # Add Disclaimer
     final_report += PLANETARY_CHARITY_DISCLAIMER
+
+    # Deterministic appendix for auditability (no LLM involved). This belongs
+    # after the interpretation, never before it.
+    final_report += "\n\n---\n\n## Technical Appendix\n\n"
+    final_report += build_raw_data_appendix(chart_data)
 
     # Save to file
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(final_report)
 
     total_words = len(final_report.split())
-    print(f"\n✓ PREMIUM REPORT COMPLETE")
+    print("\nPREMIUM REPORT COMPLETE")
     print(f"  Total words: {total_words:,}")
     print(f"  Estimated pages: {total_words/400:.1f}")
     print(f"  Output: {output_file}")
@@ -1465,7 +1483,7 @@ def run_premium_report(chart_data, output_file, iterations=6):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate $300-tier Premium Astrological Report"
+        description="Generate a premium astrological report"
     )
     parser.add_argument("--name", required=True, help="Subject name")
     parser.add_argument("--date", required=True, help="Birth date (YYYY-MM-DD)")
@@ -1541,7 +1559,7 @@ def main():
         )
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(report)
-        print(f"\n✓ METHOD MATRIX COMPLETE\n  Output: {output_file}\n")
+        print(f"\nMETHOD MATRIX COMPLETE\n  Output: {output_file}\n")
         return 0
 
     # Generate chart data

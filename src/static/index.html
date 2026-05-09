@@ -47,8 +47,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=rev20260504fix1" />
-  <script src="config.js?v=20260310b2c"></script>
+  <link rel="stylesheet" href="style.css?v=rev20260509print1" />
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script src="config.js?v=20260310b2c"></script>
 
   <script type="application/ld+json">
     {
@@ -86,7 +118,7 @@
         {
           "@type": "Offer",
           "name": "Full Reading",
-          "price": "49.00",
+          "price": "25.00",
           "priceCurrency": "USD",
           "description": "Complete natal chart reading with timing techniques, dignities, and personalized insights."
         },
@@ -171,7 +203,7 @@
           "name": "Do I need an account?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Enter your birth details, get your reading. If you want the full PDF, you pay once through Stripe — no account, no password, no email required. We don't store your personal data unnecessarily."
+            "text": "The free chart preview does not require an account or email. Paid readings use one-time Stripe checkout; email is optional in the site flow but recommended for receipts, delivery support, and re-access help."
           }
         }
       ]
@@ -202,21 +234,61 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
   <!-- Mobile menu backdrop -->
   <div class="nav-backdrop" id="navBackdrop"></div>
 
+  <script>
+    (function hardenAccountNavigation() {
+      var ACCOUNT_PATH = '/account.html';
+      function isAccountLink(link) {
+        if (!link) return false;
+        var label = (link.getAttribute('aria-label') || '').trim().toLowerCase();
+        var text = (link.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        return link.id === 'navAccountBtn' || label === 'my account' || text === 'my account';
+      }
+      function normalizeAccountLinks() {
+        document.querySelectorAll('#navAccountBtn, a[aria-label="My Account"]').forEach(function(link) {
+          if (!isAccountLink(link)) return;
+          link.classList.remove('hidden');
+          if (link.getAttribute('href') !== ACCOUNT_PATH) link.setAttribute('href', ACCOUNT_PATH);
+          if (link.id === 'navAccountBtn' && link.textContent !== 'My Account') link.textContent = 'My Account';
+        });
+      }
+
+      normalizeAccountLinks();
+      document.addEventListener('DOMContentLoaded', normalizeAccountLinks);
+      window.addEventListener('load', normalizeAccountLinks);
+      setTimeout(normalizeAccountLinks, 0);
+      setTimeout(normalizeAccountLinks, 500);
+      setTimeout(normalizeAccountLinks, 1500);
+      setTimeout(normalizeAccountLinks, 3000);
+
+      document.addEventListener('click', function(event) {
+        var link = event.target && event.target.closest ? event.target.closest('a') : null;
+        if (!isAccountLink(link)) return;
+        if (link.getAttribute('href') !== ACCOUNT_PATH) link.setAttribute('href', ACCOUNT_PATH);
+        setTimeout(function() {
+          if (window.location.pathname !== ACCOUNT_PATH) {
+            window.location.assign(ACCOUNT_PATH);
+          }
+        }, 0);
+      }, true);
+    })();
+  </script>
+
   <main>
     <!-- HERO -->
     <section class="hero" id="get-reading">
       <div class="hero-content">
-        <p class="hero-eyebrow">✦ Free &nbsp;·&nbsp; No Account</p>
+        <p class="hero-eyebrow">✦ Free Chart &nbsp;·&nbsp; One Free Premium Report</p>
         <h1 class="hero-title">Your Birth Chart,<br><em>Properly Calculated.</em></h1>
         <p class="hero-subtitle">
           Enter your birth details and get a complete natal chart reading in seconds —
@@ -253,7 +325,8 @@
             <span class="btn-text">✦ Reveal My Chart — It's Free</span>
             <span class="btn-loading hidden">Calculating your stars...</span>
           </button>
-          <p class="form-note">No account · No email · Results in seconds</p>
+          <p class="form-note">Free preview: no account or email required. Email is optional and recommended for paid delivery/support.</p>
+          <p class="safety-disclaimer"><strong>Historical Use Only.</strong> Not medical, financial, legal, psychological, emergency, or safety advice. Do not use this chart or report for urgent decisions.</p>
 
           <div class="trust-bar">
             <span class="trust-item"><span>🔒</span> We never sell your data</span>
@@ -280,8 +353,8 @@
           <div class="stat-label">Deterministic Calculations</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">$0</div>
-          <div class="stat-label">To Get Your Chart</div>
+          <div class="stat-number">1</div>
+          <div class="stat-label">Free Premium Report</div>
         </div>
       </div>
     </section>
@@ -290,6 +363,10 @@
       <h2 class="section-heading">Popular Free Calculators</h2>
       <p class="section-sub">Start with the exact question you came here to answer, then generate the chart.</p>
       <div class="seo-grid">
+        <a class="seo-card" href="/traditional-birth-chart-calculator.html">
+          <h3>Traditional Birth Chart Calculator</h3>
+          <p>Primary free traditional astrology calculator with sect, dignities, houses, lots, and optional premium report.</p>
+        </a>
         <a class="seo-card" href="/free-natal-chart-pdf.html">
           <h3>Free Natal Chart PDF</h3>
           <p>Generate a traditional chart preview and save it as a browser PDF.</p>
@@ -399,6 +476,15 @@
       </div>
     </section>
 
+    <!-- COMPATIBILITY TEASER -->
+    <section class="section" style="padding-top: 0;">
+      <div style="background: rgba(255,255,255,0.035); border: 1px solid rgba(212, 175, 55, 0.16); border-radius: 12px; padding: 2rem; text-align: center; max-width: 800px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+        <h2 style="font-family: 'Cormorant Garamond', serif; color: #c9a84c; font-size: 2rem; margin-top: 0; margin-bottom: 0.5rem;">Compatibility Calculator</h2>
+        <p style="color: rgba(255, 255, 255, 0.78); margin-bottom: 1.5rem; line-height: 1.6;">Compare two charts through traditional synastry: Lots of Fortune and Spirit, sect, and structural contacts instead of generic Sun-sign matching.</p>
+        <a href="/compatibility.html" class="btn-cta btn-cta-secondary" style="margin: 0; display: inline-block;">✦ Compare Two Charts</a>
+      </div>
+    </section>
+
     <!-- SAMPLE READING TEASER -->
     <section class="section" id="sample">
       <h2 class="section-heading">What's In a Reading</h2>
@@ -444,48 +530,51 @@
           <div class="price-badge">Always Free</div>
           <h3>Chart Preview</h3>
           <div class="price-amount">$0</div>
-          <div class="price-period">No account required</div>
+          <div class="price-period">Free preview · No account or email required</div>
           <ul class="price-features">
             <li>Planet positions &amp; signs</li>
             <li>House placements</li>
             <li>Sect determination</li>
             <li>Quick dignity overview</li>
+            <li>One free LLM premium report per visitor IP</li>
           </ul>
           <a href="#get-reading" class="btn-price">Get Free Chart →</a>
-          <p class="price-note">Instant. No email. No credit card.</p>
+          <p class="price-note">Instant preview. Premium add-on generates after the chart.</p>
         </div>
         <div class="price-card price-card-featured">
           <div class="price-badge">Most Popular</div>
           <h3>Full Reading</h3>
-          <div class="price-amount">$49</div>
-          <div class="price-period">One-time · No account needed</div>
+          <div class="price-amount">$25</div>
+          <div class="price-period">One-time · Core natal report</div>
           <ul class="price-features">
             <li>Complete natal interpretation</li>
             <li>Essential dignity analysis</li>
             <li>Annual profections &amp; firdaria</li>
             <li>Lot of Fortune &amp; key Arabic lots</li>
-            <li>Downloadable PDF report</li>
+            <li>Browser-delivered report you can print or save as PDF</li>
           </ul>
-          <a href="#get-reading" class="btn-price btn-price-primary">Get Full Reading — $49</a>
-          <p class="price-note">Secure payment via Stripe.</p>
+          <a href="#get-reading" class="btn-price btn-price-primary">Get Full Reading — $25</a>
+          <p class="price-note">Best for a concise complete reading after the free preview.</p>
         </div>
         <div class="price-card">
           <div class="price-badge">Deep Dive</div>
           <h3>Complete Analysis</h3>
           <div class="price-amount">$69</div>
-          <div class="price-period">One-time · No account needed</div>
+          <div class="price-period">One-time · Expanded technical audit</div>
           <ul class="price-features">
+            <li>Everything in the Full Reading</li>
             <li>20+ page in-depth report</li>
             <li>Primary directions &amp; decennials</li>
             <li>Zodiacal releasing</li>
-            <li>Historical health correspondences</li>
+            <li>Historical melothesia symbolism (not medical advice)</li>
             <li>Fixed star analysis</li>
-            <li>10-year timing forecast</li>
+            <li>10-year timing overview</li>
           </ul>
           <a href="#get-reading" class="btn-price">Get Complete Analysis — $69</a>
-          <p class="price-note">Secure payment via Stripe.</p>
+          <p class="price-note">Best for source-heavy timing and audit detail.</p>
         </div>
       </div>
+      <p class="checkout-reassurance"><strong>Checkout &amp; delivery:</strong> paid reports use secure Stripe checkout; this site never sees your full card number. Reports usually generate on the return page after payment. If the return page fails or delivery/access is interrupted, email <a href="/contact.html" style="color:#c9a84c;">support</a> with your Stripe receipt email and we will regenerate, restore access, or refund eligible technical failures under the 14-day policy.</p>
     </section>
 
     <!-- FAQ -->
@@ -510,11 +599,11 @@
         </details>
         <details class="faq-item">
           <summary>Do I need an account?</summary>
-          <p>No. Type in your birth details, hit the button, see your chart. If you want the full PDF, you pay once through Stripe — no account, no password, no email list. Done.</p>
+          <p>The free preview requires no account and no email. Paid reports are one-time Stripe checkouts; email is optional in the site flow but recommended for receipt, delivery, and support if you need re-access.</p>
         </details>
         <details class="faq-item">
           <summary>Can I get a refund?</summary>
-          <p>Digital products are generally non-refundable, but if something is genuinely wrong with your reading — wrong calculations, missing sections, a bug — email us and we'll fix it or refund it.</p>
+          <p>Generated digital reports are generally final, but technical or delivery/access problems are covered for 14 days. Email support with your order details and we will regenerate, restore access, or issue a full refund for eligible technical failures.</p>
         </details>
       </div>
     </section>
@@ -522,7 +611,7 @@
     <!-- FINAL CTA -->
     <section class="section section-dark final-cta">
       <h2 class="section-heading">See What's in Your Chart</h2>
-      <p class="section-sub">Takes 15 seconds. No account, no email, no catch.</p>
+      <p class="section-sub">Takes 15 seconds. Free preview — no account, no email, no catch.</p>
       <a href="#get-reading" class="btn-cta">✦ Get Your Reading Now</a>
       <p class="form-note" style="margin-top: 1rem;">Free preview — no account or email required.</p>
     </section>
@@ -534,23 +623,26 @@
           <span class="brand-icon">✦</span> Traditional Astrology
         </div>
         <div class="footer-links">
+          <a href="/traditional-birth-chart-calculator.html">Traditional Birth Chart Calculator</a>
           <a href="/free-natal-chart-pdf.html">Free PDF Preview</a>
           <a href="/sect-astrology-calculator.html">Sect Calculator</a>
           <a href="/annual-profections.html">Profections</a>
+          <a href="/about.html">About</a>
+          <a href="/methodology.html">Methodology</a>
           <a href="/privacy.html">Privacy</a>
           <a href="/terms.html">Terms</a>
           <a href="/refunds.html">Refunds</a>
-          <a href="mailto:support@traditional-astrology.com">Support</a>
+          <a href="/contact.html">Contact/Support</a>
         </div>
         <p class="footer-legal">
           © 2026 Traditional Astrology. All rights reserved.<br>
-          For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.
+          Historical Use Only. For entertainment, historical, and spiritual research only. Not medical, financial, legal, psychological, emergency, or safety advice. Do not use for urgent decisions.
         </p>
       </div>
     </footer>
   </main>
 
-  <script type="module" src="js/reading-app.js?v=rev20260504premtrial1"></script>
+  <script type="module" src="js/reading-app.js?v=rev20260509print1"></script>
   <!-- PWA Install Banner -->
   <div id="pwaInstallBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
     background:linear-gradient(135deg,rgba(10,10,26,0.97),rgba(20,18,40,0.97));
@@ -629,7 +721,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     // PWA Service Worker Registration + Install Prompt

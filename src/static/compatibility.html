@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5T7HPNKL7V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5T7HPNKL7V');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Compatibility Astrology Calculator | Traditional Astrology</title>
+  <meta name="description" content="Compare two birth charts with a traditional astrology compatibility calculator using Lots, sect, and structural synastry indicators." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://traditional-astrology.com/compatibility.html" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=rev20260508mobile1" />
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script src="config.js?v=20260310b2c"></script>
+  <style>
+    .compat-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 7.5rem 1.5rem 4rem;
+    }
+    .compat-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+    .compat-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      color: #fff;
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 0.98;
+      margin: 0 0 1rem;
+    }
+    .compat-hero p,
+    .method-panel p,
+    .compat-form-card p {
+      color: rgba(255,255,255,0.66);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+    }
+    .method-panel {
+      border: 1px solid rgba(212,175,55,0.16);
+      border-radius: 8px;
+      padding: 1.25rem;
+      background: rgba(255,255,255,0.045);
+      box-shadow: 0 16px 42px rgba(0,0,0,0.26);
+    }
+    .method-panel h2,
+    .compat-form-card h2,
+    .result-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold);
+      margin: 0 0 0.75rem;
+      font-size: 1.55rem;
+    }
+    .compat-form-card,
+    .result-card {
+      border: 1px solid rgba(212,175,55,0.14);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.045);
+      padding: 1.5rem;
+      box-shadow: 0 16px 42px rgba(0,0,0,0.26);
+      backdrop-filter: blur(12px);
+    }
+    .compat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    .person-panel {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 1rem;
+      background: rgba(0,0,0,0.16);
+    }
+    .person-panel h3 {
+      font-family: 'Cormorant Garamond', serif;
+      color: #fff;
+      font-size: 1.35rem;
+      margin: 0 0 1rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+    .form-field label {
+      display: block;
+      color: rgba(255,255,255,0.55);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+    .form-field input {
+      width: 100%;
+      min-height: 42px;
+      box-sizing: border-box;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      padding: 0 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .compat-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .result-card {
+      margin-top: 1.5rem;
+    }
+    .result-list {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .result-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(10,10,26,0.45);
+      padding: 1rem;
+    }
+    .result-item strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 0.35rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .result-item p,
+    .result-card p {
+      color: rgba(255,255,255,0.72);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .account-status {
+      min-height: 1.25rem;
+      color: rgba(212,175,55,0.82);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+    .hidden { display: none !important; }
+    @media (max-width: 860px) {
+      .compat-hero,
+      .compat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 560px) {
+      .compat-container {
+        padding-top: 6rem;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .compat-actions .btn-cta,
+      .compat-actions .btn-secondary {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cosmos-bg">
+    <div class="stars-layer stars-sm"></div>
+    <div class="stars-layer stars-md"></div>
+    <div class="stars-layer stars-lg"></div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+  </div>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <a href="/#get-reading" class="nav-mobile-cta" style="display:none;">Try Free ✦</a>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger-icon"></span>
+    </button>
+    <div class="nav-links">
+      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+      <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
+      <a href="/horary.html" class="nav-link">Horary Oracle</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
+      <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
+    </div>
+  </nav>
+
+  <main class="compat-container">
+    <section class="compat-hero">
+      <div>
+        <h1>Compatibility Through Traditional Synastry</h1>
+        <p>Compare two birth charts through structural fit: Lots, sect, and the classical points where one person's planets directly activate another person's Fortune and Spirit.</p>
+      </div>
+      <aside class="method-panel">
+        <h2>What This Checks</h2>
+        <p>This first version focuses on traditional structural indicators instead of vague Sun-sign matching. It calculates both charts, rebuilds them as engine models, and audits chart-to-chart contact around the Lots of Fortune and Spirit.</p>
+      </aside>
+    </section>
+
+    <section class="compat-form-card">
+      <h2>Compare Two Charts</h2>
+      <form id="compatibilityForm">
+        <div class="compat-grid">
+          <div class="person-panel">
+            <h3>Person A</h3>
+            <div class="form-grid">
+              <div class="form-field"><label for="aName">Name</label><input id="aName" type="text" value="Person A" required></div>
+              <div class="form-field"><label for="aDate">Birth Date</label><input id="aDate" type="date" required></div>
+              <div class="form-field"><label for="aTime">Birth Time</label><input id="aTime" type="time" required></div>
+              <div class="form-field"><label for="aCity">City</label><input id="aCity" type="text" placeholder="Fairfield" required></div>
+              <div class="form-field"><label for="aState">State / Country</label><input id="aState" type="text" placeholder="CA"></div>
+            </div>
+          </div>
+          <div class="person-panel">
+            <h3>Person B</h3>
+            <div class="form-grid">
+              <div class="form-field"><label for="bName">Name</label><input id="bName" type="text" value="Person B" required></div>
+              <div class="form-field"><label for="bDate">Birth Date</label><input id="bDate" type="date" required></div>
+              <div class="form-field"><label for="bTime">Birth Time</label><input id="bTime" type="time" required></div>
+              <div class="form-field"><label for="bCity">City</label><input id="bCity" type="text" placeholder="Los Angeles" required></div>
+              <div class="form-field"><label for="bState">State / Country</label><input id="bState" type="text" placeholder="CA"></div>
+            </div>
+          </div>
+        </div>
+        <div class="compat-actions">
+          <button type="submit" class="btn-cta" id="compatSubmit">Compare Charts</button>
+          <a href="/#get-reading" class="btn-secondary">Get a Natal Reading First</a>
+        </div>
+        <p class="safety-disclaimer"><strong>Historical Use Only.</strong> Compatibility analysis is symbolic traditional synastry, not relationship, legal, psychological, emergency, or safety advice. Not medical or financial advice. Do not use it for urgent decisions.</p>
+        <p id="compatStatus" class="account-status" role="status"></p>
+      </form>
+    </section>
+
+    <section id="compatResults" class="result-card hidden" aria-live="polite"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><span class="brand-icon">✦</span> Traditional Astrology</div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/refunds.html">Refunds</a>
+        <a href="/about.html">About</a>
+        <a href="/methodology.html">Methodology</a>
+        <a href="/contact.html">Contact/Support</a>
+      </div>
+      <p class="footer-legal">Historical Use Only. For entertainment, historical, and spiritual research only. Not medical, financial, legal, psychological, emergency, or safety advice. Do not use for urgent decisions.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { apiFetch } from './js/api.js';
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function person(prefix) {
+      return {
+        name: document.getElementById(`${prefix}Name`).value || `${prefix.toUpperCase()} Chart`,
+        date: document.getElementById(`${prefix}Date`).value,
+        time: document.getElementById(`${prefix}Time`).value,
+        city: document.getElementById(`${prefix}City`).value,
+        state: document.getElementById(`${prefix}State`).value || '',
+        house_system: 'W',
+        zodiac_system: 'tropical'
+      };
+    }
+
+    function itemList(items, emptyText) {
+      if (!items || !items.length) {
+        return `<div class="result-item"><p>${escapeHtml(emptyText)}</p></div>`;
+      }
+      return items.map((item) => `
+        <div class="result-item">
+          <strong>${escapeHtml(item.type || item.planet || 'Indicator')}</strong>
+          <p>${escapeHtml(item.delineation || item.description || 'Indicator found.')}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderResults(data) {
+      const results = document.getElementById('compatResults');
+      const syn = data.synastry || {};
+      results.classList.remove('hidden');
+      results.innerHTML = `
+        <h2>${escapeHtml(syn.overall_assessment || 'Compatibility Analysis')}</h2>
+        <p>This is a structural synastry read, not a deterministic judgment about the relationship. Use it as historical and symbolic analysis only.</p>
+        <h2>Dependency Audits</h2>
+        <div class="result-list">${itemList(syn.dependency_audits, 'No tight planet-to-Fortune dependency indicators were found within the configured orb.')}</div>
+        <h2>Shared Fate Indicators</h2>
+        <div class="result-list">${itemList(syn.shared_fate, 'No tight Spirit/Fortune shared-fate indicators were found within the configured orb.')}</div>
+      `;
+      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('compatibilityForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = document.getElementById('compatStatus');
+      const button = document.getElementById('compatSubmit');
+      status.textContent = 'Calculating both charts...';
+      button.disabled = true;
+      try {
+        const response = await apiFetch('/api/v1/synastry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ person_a: person('a'), person_b: person('b') })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.detail || `HTTP ${response.status}`);
+        status.textContent = 'Compatibility analysis complete.';
+        renderResults(data);
+        if (typeof gtag === 'function') {
+          gtag('event', 'compatibility_complete', { event_category: 'compatibility' });
+        }
+      } catch (err) {
+        status.textContent = err.message || 'Compatibility calculation failed.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.mobile-menu-toggle').forEach(function(toggle) {
+        if (toggle.dataset.navAttached) return;
+        toggle.dataset.navAttached = 'true';
+        toggle.addEventListener('click', function() {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', String(!expanded));
+          this.classList.toggle('active');
+          document.body.classList.toggle('nav-open', !expanded);
+          var nav = this.closest ? this.closest('.site-nav') : null;
+          var navLinks = nav ? nav.querySelector('.nav-links') : this.nextElementSibling;
+          if (navLinks && navLinks.classList.contains('nav-links')) {
+            navLinks.classList.toggle('active', !expanded);
+          }
+        });
+      });
+    });
+  </script>
+  <script src="/consent.js"></script>
+</body>
+</html>

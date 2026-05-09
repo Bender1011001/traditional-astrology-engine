@@ -7,6 +7,7 @@ from datetime import datetime
 
 from src.engine.daily_navigator import DailyNavigator
 from src.engine.models import Chart, Planet, PlanetName
+from src.services.daily_horoscope import generate_daily_horoscopes
 
 
 def _make_test_chart():
@@ -217,3 +218,21 @@ class TestDailyNavigatorEngine:
         )
         rec = briefing["recommendations"]
         assert rec["urgency"] in ("low", "moderate", "high", "critical")
+
+
+class TestDailyHoroscopes:
+    def test_public_daily_horoscopes_are_computed_for_all_signs(self):
+        payload = generate_daily_horoscopes(datetime(2026, 5, 8).date())
+
+        assert payload["date"] == "2026-05-08"
+        assert payload["method"].startswith("Tropical zodiac")
+        assert payload["disclaimer"].startswith("Historical Use Only")
+        assert payload["sky"]["moon"]["sign"]
+        assert len(payload["horoscopes"]) == 12
+
+        aries = next(item for item in payload["horoscopes"] if item["sign"] == "Aries")
+        assert aries["ruler"] == "Mars"
+        assert aries["tone"] in {"supportive", "mixed", "cautious"}
+        assert 1 <= aries["moon_house"] <= 12
+        assert "Moon in" in aries["summary"]
+        assert aries["action"]

@@ -12,7 +12,10 @@ from src.core.config import settings
 from src.database.core import get_db
 from src.database.models import AsyncReportTask, GuestRequest, SubscriptionPlan, User
 from src.services.fulfillment import FulfillmentService
-from src.services.premium_generator import generate_premium_report_task
+from src.services.premium_generator import (
+    generate_premium_report_task,
+    llm_iterations_for_tier,
+)
 from src.services.subscription import SubscriptionService
 
 logger = logging.getLogger(__name__)
@@ -25,6 +28,7 @@ def _checkout_globally_enabled() -> bool:
 
 
 _REPORT_PRICE_CACHE: dict[str, str | None] = {}
+_GUEST_ONE_TIME_TIERS = {"full_reading", "premium_audit", "forensic_nativity"}
 
 
 def _lookup_onetime_price_id(
@@ -458,7 +462,7 @@ async def stripe_webhook(
 
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET.strip()
         )
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid payload")
@@ -468,16 +472,17 @@ async def stripe_webhook(
     event_type = event["type"]
 
     # --- Guest one-time purchase fulfillment ---
-    # Guest checkout sessions have no user_id/client_reference_id; instead they carry
-    # metadata.tier == "forensic_nativity". Handle them here before passing to
-    # SubscriptionService which would silently drop them.
+    # Guest checkout sessions have no user_id/client_reference_id; they carry
+    # metadata.tier from the no-account checkout flow. Handle them here before
+    # SubscriptionService, which would otherwise silently drop them.
     if event_type == "checkout.session.completed":
         session_obj = event["data"]["object"]
         metadata = session_obj.get("metadata") or {}
-        tier = metadata.get("tier", "")
+
+        tier = str(metadata.get("tier", "") or "").strip().lower()
         user_id = metadata.get("user_id") or session_obj.get("client_reference_id")
 
-        if tier == "forensic_nativity" and not user_id:
+        if tier in _GUEST_ONE_TIME_TIERS and not user_id:
             session_id = session_obj.get("id", "")
             payment_status = session_obj.get("payment_status", "")
 
@@ -494,7 +499,13 @@ async def stripe_webhook(
                     chart_data_str = metadata.get("chart_data", "{}")
                     try:
                         chart_data = _json.loads(chart_data_str)
-                    except Exception:
+                    except (TypeError, ValueError) as e:
+                        logger.warning(
+                            "Webhook: failed to parse guest chart data for session %s: %s",
+                            session_id,
+                            repr(e),
+                            exc_info=True,
+                        )
                         chart_data = {}
 
                     # Capture customer email
@@ -504,8 +515,13 @@ async def stripe_webhook(
                         customer_email = cd.get("email") or session_obj.get(
                             "customer_email"
                         )
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logger.warning(
+                            "Webhook: failed to read customer email for session %s: %s",
+                            session_id,
+                            repr(e),
+                            exc_info=True,
+                        )
 
                     request_meta = {
                         "date": chart_data.get("date", ""),
@@ -513,6 +529,8 @@ async def stripe_webhook(
                         "city": chart_data.get("city", ""),
                         "state": chart_data.get("state", ""),
                         "name": chart_data.get("name", "Guest"),
+                        "tier": tier,
+                        "report_iterations": llm_iterations_for_tier(tier),
                     }
                     if customer_email:
                         request_meta["customer_email"] = customer_email

@@ -2,6 +2,16 @@
 import os
 import yaml
 
+SECRET_ENV_VARS = {
+    "JWT_SECRET",
+    "OPENROUTER_API_KEY",
+    "OWNER_BOOTSTRAP_KEY",
+    "SMTP_PASS",
+    "STRIPE_SECRET_KEY",
+    "STRIPE_WEBHOOK_SECRET",
+}
+
+
 def main():
     env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
     out_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "env.yaml")
@@ -17,7 +27,7 @@ def main():
             value = value.strip()
             if len(value) >= 2 and value[0] == value[-1] and value[0] in ('"', "'"):
                 value = value[1:-1]
-            if key:
+            if key and key not in SECRET_ENV_VARS:
                 env_vars[key] = value
 
     with open(out_path, "w", encoding="utf-8") as f:

@@ -27,8 +27,40 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
-<script type="application/ld+json">
+<link href="style.css?v=rev20260508mobile1" rel="stylesheet"/>
+  <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "FAQPage",
@@ -99,10 +131,11 @@
  <div class="nav-links">
  <a href="/#get-reading" class="nav-link">Get Your Reading</a>
  <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
  <a href="/horary.html" class="nav-link">Horary Oracle</a>
- <a href="/daily.html" class="nav-link">Daily Planets</a>
- <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
- <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+ <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+ <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+ <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
  <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
  </div>
  </nav>
@@ -154,9 +187,9 @@
 <p>Question categories where practitioners consistently report high reliability:</p>
 <ul class="grid-container">
  <li><strong>Lost or missing items:</strong> "Where is my passport? Will I recover it?" The 2nd house (movables) and Moon as co-significator of lost objects give a clear framework. Many practitioners consider this horary's most impressive domain.</li>
- <li><strong>Business negotiations:</strong> "Will this deal close?" "Will the buyer accept our counter-offer?" The 7th house (the other party) and whether its lord applies to the querent's significator produces yes/no testimony that can be checked within days or weeks.</li>
+ <li><strong>Non-urgent negotiations:</strong> "Will this arrangement come together?" "Will the buyer respond to the counter-offer?" The 7th house (the other party) and whether its lord applies to the querent's significator produces symbolic yes/no testimony that can be checked within days or weeks. This is not business, legal, financial, or contract advice.</li>
  <li><strong>Truth and deception questions:</strong> "Is this person being honest with me?" The condition of the 7th house lord, whether Mercury (planet of communication) is afflicted, and the Moon's aspects provide structured testimony.</li>
- <li><strong>Medical outcome questions:</strong> "Will I recover from this illness?" The 6th house (illness), 8th house (death), and Ascendant lord's condition are a well-developed traditional framework with substantial historical precedent.</li>
+ <li><strong>Historical illness symbolism:</strong> Classical texts discuss the 6th and 8th houses in illness cases, but this site does not provide diagnosis, treatment, prognosis, recovery timing, or medical recommendations. Use qualified medical care for health questions.</li>
 </ul>
 <p style="margin-top:1rem;">These question types share a common feature: they have concrete, verifiable outcomes within a short time frame. This is exactly what makes them testable — and what gives horary practitioners their accumulated experience with which chart patterns match which outcomes.</p>
 </div>
@@ -182,7 +215,7 @@
 <h2 class="section-title">The Honest Bottom Line</h2>
 <p class="section-subtitle">Experienced practitioners report 70–80% accuracy on well-formed questions with radical charts — significantly above chance for binary outcomes.</p>
 <p>To put that number in context: a coin flip on a binary outcome is 50%. A 70-80% accuracy rate on yes/no questions — consistently reported by practitioners who document their cases — is a meaningful departure from chance, even accounting for the selection effect of practitioners emphasizing their successful cases over unsuccessful ones.</p>
-<p>That said, 70-80% is not 100%, and honest horary practitioners do not claim 100%. Every predictive system has failure rates. Weather forecasting, medical prognosis, and financial modeling all produce probabilistic estimates — and all are useful precisely because they outperform random guessing, not because they are infallible.</p>
+<p>That said, 70-80% is not 100%, and honest horary practitioners do not claim 100%. Every predictive system has failure rates. Horary content on this site is historical and symbolic; it is not a substitute for qualified medical, financial, legal, psychological, emergency, or safety guidance.</p>
 <p>What distinguishes horary from less structured systems is that its failure modes are defined in advance. The tradition tells you when a chart is unreadable, what conditions make a judgment unreliable, and what question types the technique handles poorly. This makes the system falsifiable and improvable in a way that vague intuition-based methods are not. That structure is why horary has maintained a serious practitioner base for nearly two millennia — not because it is infallible, but because it is consistent and verifiable in a way that makes it worth taking seriously.</p>
 </div>
 </section>
@@ -257,7 +290,7 @@
  </div>
  </div>
 </div>
-<script type="module" src="/js/auth.js?v=astro-v5"></script>
+<script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 <script>
  document.addEventListener('DOMContentLoaded', function() {
  var toggles = document.querySelectorAll('.mobile-menu-toggle');

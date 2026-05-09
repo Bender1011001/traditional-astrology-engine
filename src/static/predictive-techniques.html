@@ -26,8 +26,40 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="style.css?v=rev20260504premtrial1" rel="stylesheet"/>
-  <meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
+<link href="style.css?v=rev20260508mobile1" rel="stylesheet"/>
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
   <meta content="https://traditional-astrology.com/og-card.png" name="twitter:image"/>
   <meta name="description" content="Master classical predictive astrology techniques: annual profections, primary directions, and firdaria. Learn real-world forecasting from historical sources.">
 <script type="application/ld+json">
@@ -66,10 +98,11 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
@@ -105,14 +138,14 @@
 <div class="basic-card">
 <h2 class="section-title">Example Forecast</h2>
 <p class="section-subtitle">What it actually looks like when you combine the methods.</p>
-<p>Say you're 30 — that's a 7th-house profection year, so partnerships and contracts are the theme. Your 7th-house ruler is Venus, and natally Venus sits in Taurus (her own sign) in the 2nd house with a trine from Jupiter. That's a good Venus. So your 30th year should favor new partnerships, especially ones involving money or resources. Now check: is there a transit of Jupiter crossing your 7th house this year too? If so, three techniques are pointing the same direction. That's when traditional astrologers get confident about a forecast.</p>
+<p>Say you're 30 — that's a 7th-house profection year, so partnerships and counterpart agreements are the symbolic theme. Your 7th-house ruler is Venus, and natally Venus sits in Taurus (her own sign) in the 2nd house with a trine from Jupiter. Traditional astrology would read that as supportive testimony around relationship and resource symbolism. If a transit of Jupiter also crosses your 7th house, three techniques point to the same symbolic topic. This is historical timing analysis only, not contract, business, legal, or financial advice.</p>
 </div>
 </section>
 <section class="basic-view">
 <div class="basic-card">
 <h2 class="section-title">What's the Point?</h2>
-<p class="section-subtitle">Knowing the theme of the year helps you make better decisions about when to act.</p>
-<p>If your profection year activates the 10th house and your Lord of the Year is well-placed, that's a good year to push for a promotion or launch something public. If next year activates the 12th house with a debilitated ruler, that's a year to finish things quietly, not start new ventures. It's not fortune-telling — it's pattern recognition with a 2,000-year track record. You still make the decisions. The chart just tells you what the weather is likely to be.</p>
+<p class="section-subtitle">Knowing the symbolic theme of the year gives historical context for study and reflection.</p>
+<p>If your profection year activates the 10th house and your Lord of the Year is well-placed, traditional astrologers read public and career symbolism as emphasized. If next year activates the 12th house with a debilitated ruler, private work and hidden obstacles are the symbolic frame. This is not fortune-telling or advice for career, business, legal, financial, medical, psychological, emergency, safety, or urgent decisions.</p>
 </div>
 </section>
 <section class="basic-view">
@@ -237,7 +270,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

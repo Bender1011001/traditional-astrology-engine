@@ -472,7 +472,7 @@ class DailyNavigator:
             "note": (
                 f"The Moon is in **{moon_sign.value}** ({phase_emoji} {phase_name}). "
                 + (
-                    "**Void of Course** — avoid starting new ventures. "
+                    "**Void of Course** — traditional texts frame initiation symbolism as weaker; this is not decision advice. "
                     if is_voc
                     else ""
                 )
@@ -521,10 +521,10 @@ class DailyNavigator:
 
         if daily_lord == destructive_malefic:
             avoid_list.append(
-                f"Avoid rash decisions — the destructive malefic ({destructive_malefic.value}) is today's daily lord."
+                f"Symbolic caution: the out-of-sect malefic ({destructive_malefic.value}) is today's daily lord."
             )
             do_list.append(
-                "Exercise caution and patience. Channel energy into disciplined, focused work."
+                "Traditional emphasis: patience, discipline, and focused work themes are highlighted."
             )
         else:
             do_list.append(
@@ -533,16 +533,16 @@ class DailyNavigator:
 
         if is_epitasis:
             do_list.append(
-                "High-stakes window: events related to this year's theme are amplified today. Act with intention."
+                "Symbolically amplified window: themes related to this year's Lord of the Year are emphasized today."
             )
 
         # Moon Void of Course warnings
         if moon_voc:
             avoid_list.append(
-                "Moon is Void of Course — avoid starting new ventures, signing contracts, or making major decisions."
+                "Void-of-Course Moon: historical timing texts describe weaker initiation symbolism; this is not advice about contracts, finances, health, safety, emergencies, or urgent choices."
             )
             do_list.append(
-                "Use this VoC period for routine tasks, rest, and reflection rather than new initiatives."
+                "Symbolic framing: routine, review, rest, and reflection themes are emphasized more than initiation themes."
             )
 
         do_list.append(charity["act"])
@@ -556,7 +556,7 @@ class DailyNavigator:
             "urgency": urgency,
             "do": do_list,
             "avoid": (
-                avoid_list if avoid_list else ["No specific avoidances for today."]
+                avoid_list if avoid_list else ["No specific symbolic cautions for today."]
             ),
         }
 
@@ -593,7 +593,7 @@ class DailyNavigator:
             f"{moon.get('phase_emoji', '🌙')} The Moon is in **{moon['sign']}** "
             f"({moon['phase']}, {moon['degree']}°). "
             + (
-                "**Void of Course** — hold off on new initiatives. "
+                "**Void of Course** — historical texts describe weaker initiation symbolism; not decision advice. "
                 if moon.get("void_of_course")
                 else ""
             )

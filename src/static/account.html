@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>My Account | Traditional Astrology</title>
+  <meta name="description" content="Sign in to your Traditional Astrology account to view saved charts, premium reports, and daily horoscope preferences." />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="canonical" href="https://traditional-astrology.com/account.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css?v=rev20260508mobile1" />
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script src="/config.js?v=20260310b2c"></script>
+  <style>
+    .account-entry {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 56px) 0 72px;
+    }
+
+    .account-entry-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 32px;
+      align-items: center;
+      min-height: calc(100vh - var(--nav-height) - 112px);
+    }
+
+    .account-kicker {
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .account-entry h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.7rem, 7vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .account-entry h1 em {
+      color: var(--gold);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .account-lede {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .account-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .account-panel {
+      border: 1px solid var(--border-strong);
+      background: rgba(15, 14, 32, 0.82);
+      box-shadow: var(--shadow-card);
+      border-radius: 8px;
+      padding: 28px;
+    }
+
+    .account-panel h2,
+    .account-feature h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 0;
+    }
+
+    .account-panel p,
+    .account-feature p,
+    .account-note {
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .account-status {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .account-status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .account-status-row strong {
+      color: var(--text);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .account-secondary-link {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .account-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .account-feature {
+      min-height: 210px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .account-feature span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      color: var(--gold);
+      margin-bottom: 18px;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 880px) {
+      .account-entry {
+        width: min(100% - 24px, 720px);
+        padding-top: calc(var(--nav-height) + 32px);
+      }
+
+      .account-entry-hero,
+      .account-feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .account-entry-hero {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cosmos-bg">
+    <div class="stars-layer stars-sm"></div>
+    <div class="stars-layer stars-md"></div>
+    <div class="stars-layer stars-lg"></div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+  </div>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" class="nav-brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <a href="/#get-reading" class="nav-mobile-cta" style="display:none;">Try Free ✦</a>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger-icon"></span>
+    </button>
+    <div class="nav-links">
+      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+      <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
+      <a href="/horary.html" class="nav-link">Horary Oracle</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
+      <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
+    </div>
+  </nav>
+
+  <main class="account-entry">
+    <section class="account-entry-hero">
+      <div>
+        <p class="account-kicker">Private account area</p>
+        <h1>My Account<br><em>and readings.</em></h1>
+        <p class="account-lede">
+          Sign in to view saved charts, premium reports, and personal daily horoscope settings.
+          New customers can create an account before or after generating a chart.
+        </p>
+        <div class="account-action-row" id="accountLoggedOutActions">
+          <a id="accountLoginAction" class="btn-cta" href="/account.html?auth=login">
+            <span class="btn-text">Sign In</span>
+          </a>
+          <a id="accountRegisterAction" class="btn-cta btn-cta-secondary" href="/account.html?auth=register">
+            <span class="btn-text">Create Account</span>
+          </a>
+        </div>
+        <div class="account-action-row hidden" id="accountLoggedInActions">
+          <a class="btn-cta" href="/dashboard.html">
+            <span class="btn-text">Open Dashboard</span>
+          </a>
+          <a class="btn-cta btn-cta-secondary" href="/#get-reading">
+            <span class="btn-text">Generate New Chart</span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="account-panel" aria-label="Account status">
+        <h2>Account Status</h2>
+        <p id="accountStatusMessage">Sign in or create an account to access your private workspace.</p>
+        <div class="account-status">
+          <div class="account-status-row">
+            <span>Session</span>
+            <strong id="accountSessionStatus">Not signed in</strong>
+          </div>
+          <div class="account-status-row">
+            <span>Saved reports</span>
+            <strong>Available after sign-in</strong>
+          </div>
+          <div class="account-status-row">
+            <span>Daily profile</span>
+            <strong>Dashboard</strong>
+          </div>
+        </div>
+        <p class="account-note">
+          Forgot your password? Choose <a id="accountForgotAction" class="account-secondary-link" href="/account.html?auth=forgot">reset password</a>.
+        </p>
+      </aside>
+    </section>
+
+    <section class="account-feature-grid" aria-label="Account features">
+      <article class="account-feature">
+        <span>1</span>
+        <h2>Saved Charts</h2>
+        <p>Keep birth data and calculated charts in one place so returning customers do not have to re-enter details.</p>
+      </article>
+      <article class="account-feature">
+        <span>2</span>
+        <h2>Report Archive</h2>
+        <p>Open completed readings again from the dashboard, including free premium reports and paid report history.</p>
+      </article>
+      <article class="account-feature">
+        <span>3</span>
+        <h2>Daily Horoscope Profile</h2>
+        <p>Use your saved birth chart to generate personal daily transits and traditional timing notes.</p>
+      </article>
+    </section>
+  </main>
+
+  <div id="authModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuthModal" aria-label="Close modal">&times;</button>
+
+      <div id="loginView" class="auth-view">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-sub">Sign in to access your saved charts and premium reports.</p>
+        <form id="loginForm" class="auth-form">
+          <div class="form-field">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" required autocomplete="username" />
+          </div>
+          <div class="form-field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-loading hidden">Signing In...</span>
+          </button>
+          <div id="loginError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="#" id="showRegisterView">Create one</a></p>
+        </div>
+      </div>
+
+      <div id="registerView" class="auth-view hidden">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-sub">Save your charts securely and access them anywhere.</p>
+        <form id="registerForm" class="auth-form">
+          <div class="form-field">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" required autocomplete="new-password" minlength="8" />
+          </div>
+          <button type="submit" class="btn-cta auth-submit">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-loading hidden">Creating...</span>
+          </button>
+          <div id="registerError" class="auth-error-msg hidden"></div>
+        </form>
+        <div class="auth-footer">
+          <p>Already have an account? <a href="#" id="showLoginView">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.CAEL_AUTH_SUCCESS_CALLBACK = function () {
+      window.location.href = '/dashboard.html';
+    };
+  </script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
+  <script>
+    (function () {
+      function markSignedInState() {
+        var token = localStorage.getItem('access_token');
+        var loggedOut = document.getElementById('accountLoggedOutActions');
+        var loggedIn = document.getElementById('accountLoggedInActions');
+        var session = document.getElementById('accountSessionStatus');
+        var message = document.getElementById('accountStatusMessage');
+
+        if (token) {
+          if (loggedOut) loggedOut.classList.add('hidden');
+          if (loggedIn) loggedIn.classList.remove('hidden');
+          if (session) session.textContent = 'Signed in';
+          if (message) message.textContent = 'Your session is active. Open the dashboard to view saved charts and reports.';
+        }
+      }
+
+      function wireMobileNav() {
+        var toggle = document.querySelector('.mobile-menu-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', function () {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', String(!expanded));
+          this.classList.toggle('active');
+          var navLinks = this.nextElementSibling;
+          if (navLinks && navLinks.classList.contains('nav-links')) {
+            navLinks.classList.toggle('active');
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        markSignedInState();
+        wireMobileNav();
+      });
+    })();
+  </script>
+</body>
+</html>

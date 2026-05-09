@@ -17,8 +17,19 @@ PROJECT_ID = "astrology-engine-prod"
 REGION = "us-central1"
 SERVICE_NAME = "astrology-engine"
 IMAGE = f"gcr.io/{PROJECT_ID}/{SERVICE_NAME}"
-CLOUD_SQL_INSTANCE = "astrology-487423:us-central1:astrology-db"
+CLOUD_SQL_INSTANCE = "astrology-engine-prod:us-central1:astrology-db"
+DATABASE_URL_SECRET = "astrology-database-url"
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+SECRET_ENV_VARS = {
+    "DATABASE_URL": DATABASE_URL_SECRET,
+    "JWT_SECRET": "astrology-jwt-secret",
+    "OPENROUTER_API_KEY": "astrology-openrouter-api-key",
+    "OWNER_BOOTSTRAP_KEY": "astrology-owner-bootstrap-key",
+    "SMTP_PASS": "astrology-smtp-pass",
+    "STRIPE_SECRET_KEY": "astrology-stripe-secret-key",
+    "STRIPE_WEBHOOK_SECRET": "astrology-stripe-webhook-secret",
+}
 
 
 def run(cmd: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -110,8 +121,9 @@ def main():
             f"--min-instances 0 "
             f"--max-instances 3 "
             f"--timeout 300 "
-            f"--add-cloudsql-instances {CLOUD_SQL_INSTANCE} "
+            f"--set-cloudsql-instances {CLOUD_SQL_INSTANCE} "
             f"--env-vars-file env.yaml "
+            f"--set-secrets {','.join(f'{env}={secret}:latest' for env, secret in SECRET_ENV_VARS.items())} "
             f"--project {PROJECT_ID} "
             f"--quiet"
         )

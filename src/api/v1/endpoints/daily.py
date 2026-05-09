@@ -12,16 +12,49 @@ import logging
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
 from src.engine.daily_navigator import DailyNavigator
 from src.engine.models import Chart, Planet, PlanetName
+from src.services.daily_horoscope import generate_daily_horoscopes
 from src.services.engine_bridge import calculate_chart_async
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+
+@router.get("/daily-horoscopes")
+async def daily_horoscopes(
+    target_date: Optional[str] = Query(
+        None,
+        description="Date to calculate for, in YYYY-MM-DD format. Defaults to today UTC.",
+    )
+):
+    """Generate public daily horoscopes for all twelve signs.
+
+    This is a lighter public forecast than the natal Daily Navigator. It uses
+    real Swiss Ephemeris transit positions for the requested date and interprets
+    them through traditional sign rulers and whole-sign topics.
+    """
+    if target_date:
+        try:
+            resolved_date = datetime.strptime(target_date, "%Y-%m-%d").date()
+        except ValueError:
+            raise HTTPException(
+                status_code=400, detail="target_date must be YYYY-MM-DD format."
+            )
+    else:
+        resolved_date = datetime.now(timezone.utc).date()
+
+    try:
+        return {"status": "success", **generate_daily_horoscopes(resolved_date)}
+    except Exception as e:
+        logger.error("Daily horoscope generation failed: %s", repr(e), exc_info=True)
+        raise HTTPException(
+            status_code=500, detail="Daily horoscope engine error. Please try again."
+        )
 
 
 class DailyBriefingRequest(BaseModel):
@@ -299,7 +332,7 @@ def _synthesize_week_overview(days_data: List[Dict[str, Any]]) -> Dict[str, Any]
     if voc_days:
         parts.append(
             f"🌙 **Moon Void of Course** on {', '.join(voc_days)} — "
-            "avoid starting new ventures on these days."
+            "historical timing symbolism is noted; do not use this as advice for contracts, finances, health, safety, emergencies, or urgent choices."
         )
     if challenging_transit_days:
         parts.append(

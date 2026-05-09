@@ -113,8 +113,40 @@
       color: #c9a84c;
     }
   </style>
-  <link rel="stylesheet" href="style.css?v=rev20260504premtrial1">
-  <meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
+  <link rel="stylesheet" href="style.css?v=rev20260508mobile1">
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><meta content="https://traditional-astrology.com/og-card.png" property="og:image"/>
   <meta content="https://traditional-astrology.com/og-card.png" name="twitter:image"/>
   <meta name="description" content="The page you are looking for has been lost to the stars. Return to our free traditional astrology calculator to cast your birth chart instantly.">
 </head>
@@ -136,8 +168,8 @@
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
       <a href="/daily.html" class="nav-link">Daily Navigator</a>
       <a href="/#how-it-works" class="nav-link">How It Works</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
     </div>
   </div>
 
@@ -196,7 +228,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

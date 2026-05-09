@@ -1,20 +1,21 @@
 ---
 project: static
 status: complete
-updated: 2026-03-14
+updated: 2026-05-08
 ---
 
 # Static Assets (B2C Readings Site)
 
 ## Resume
-- **Pick up at**: [Review and update]
-- **Last session**: [Auto-migrated to CONTEXT v2]
-- **Blocked on**: Nothing
+- **Paid horary Stripe test flow (2026-05-09 UTC)**: The Horary Oracle page is now the cheap Stripe test surface. `horary.html` changed from a free-form answer flow to a `$5` one-time Stripe checkout CTA; `js/horary-app.js` posts the question/city/state to `POST /api/v1/horary/checkout`, redirects to Stripe, then on return from `?horary_paid=success&session_id=...` calls `POST /api/v1/horary/paid-answer` and renders the verified paid answer. `sw.js` is now `astro-v17-paid-horary` so cached `/js/horary-app.js` is refreshed. Terms/refunds mention the `$5` Horary Oracle question as a one-time digital purchase. Local browser smoke on `http://127.0.0.1:8765/horary.html` showed the `$5` CTA and no console warnings; production deploy/live Stripe smoke remain if needed.
+- **Mobile optimization pass (2026-05-08 UTC)**: Fixed the current mobile website surface around the public conversion path. `style.css` now improves the sticky mobile header, hamburger menu sizing, tiny-screen brand/CTA fit, form/input/button touch targets, hero text wrapping, trust-item stacking, Daily Navigator target-date controls, compatibility secondary CTAs, and compact disclaimer copy. `consent.js` now owns a real capture-phase mobile nav controller for pages with inconsistent inline handlers; verified bug before the patch: `/compatibility.html` set the hamburger `aria-expanded` state but did not reveal `.nav-links`. Static CSS references were bumped to `rev20260508mobile1`; `sw.js` is now `astro-v15` / `astro-runtime-v15` and caches `consent.js`. Static HTML pages now also include an inline `mobile-nav-fallback` style, because the in-app browser reproduced a stale service-worker cache where fresh HTML loaded but old external CSS still kept `.nav-links` hidden.
+- **Pick up at**: Production deploy and live mobile smoke if these local static changes should go public.
+- **Blocked on**: Nothing known locally; live deployment still needs a normal Cloud Run deploy if these static changes should go public.
 
 ## Status
 - **Working**: Main landing/readings page (index.html), guest checkout flow, premium reading generation, Stripe one-time payments.
 - **Legacy/Deprecated**: Most old B2B pages (gig-economy, developer, documentation, etc) are still present but no longer linked from the main page.
-- **In-Progress**: Polishing reading output rendering, mobile optimizations.
+- **In-Progress**: Mobile polish is implemented and locally verified; production deployment and live smoke remain if requested.
 
 ## Tech Stack
 - HTML5, CSS3 (Vanilla — dark mystical theme)

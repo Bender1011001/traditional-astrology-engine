@@ -21,14 +21,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://traditional-astrology.com/daily.html" />
   <meta property="og:title" content="Daily Navigator — Your Personal Cosmic Briefing | Traditional Astrology" />
-  <meta property="og:description" content="Get your personal daily astrological briefing based on classical timing techniques: profections, firdaria, zodiacal releasing, transits, and actionable recommendations." />
+  <meta property="og:description" content="Get a personal daily astrological briefing based on classical timing techniques: profections, firdaria, zodiacal releasing, transits, and symbolic non-advice timing notes." />
   <meta property="og:image" content="https://traditional-astrology.com/og-card.png" />
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://traditional-astrology.com/daily.html" />
   <meta name="twitter:title" content="Daily Navigator — Your Personal Cosmic Briefing | Traditional Astrology" />
-  <meta name="twitter:description" content="Get your personal daily astrological briefing based on classical timing techniques: profections, firdaria, zodiacal releasing, transits, and actionable recommendations." />
+  <meta name="twitter:description" content="Get a personal daily astrological briefing based on classical timing techniques: profections, firdaria, zodiacal releasing, transits, and symbolic non-advice timing notes." />
   <meta name="twitter:image" content="https://traditional-astrology.com/og-card.png" />
 
   <meta name="robots" content="index,follow" />
@@ -48,7 +48,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Daily Navigator — Personal Cosmic Briefing",
-    "description": "Free interactive tool that synthesizes classical astrological timing techniques (profections, firdaria, zodiacal releasing, transits, Moon condition) into one actionable daily briefing based on your birth chart.",
+    "description": "Free interactive tool that synthesizes classical astrological timing techniques (profections, firdaria, zodiacal releasing, transits, Moon condition) into one symbolic non-advice daily briefing based on your birth chart.",
     "url": "https://traditional-astrology.com/daily.html",
     "applicationCategory": "LifestyleApplication",
     "operatingSystem": "Any",
@@ -68,8 +68,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=rev20260504premtrial1" />
-  <script src="config.js?v=20260310b2c"></script>
+  <link rel="stylesheet" href="style.css?v=rev20260508mobile1" />
+    <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style><script src="config.js?v=20260310b2c"></script>
 
   <style>
     /* ── Daily Navigator Specific Styles ─────────────────────────── */
@@ -649,6 +681,235 @@
       font-size: 0.85rem;
       color: rgba(255,255,255,0.5);
     }
+
+    /* -- Public Daily Horoscopes ------------------------------------- */
+    .daily-horoscope-section {
+      max-width: 1120px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+    .daily-horoscope-panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,175,55,0.16);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.28);
+      backdrop-filter: blur(12px);
+    }
+    .daily-horoscope-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.5rem;
+      align-items: end;
+      margin-bottom: 1.25rem;
+    }
+    .daily-horoscope-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: #fff;
+      margin: 0 0 0.35rem;
+    }
+    .daily-horoscope-header p {
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.55;
+      margin: 0;
+      max-width: 720px;
+    }
+    .daily-date-control {
+      display: flex;
+      align-items: end;
+      gap: 0.6rem;
+    }
+    .daily-date-control label {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+    .daily-date-control input {
+      min-height: 40px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      padding: 0 0.7rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .daily-date-control button {
+      min-height: 40px;
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 8px;
+      background: rgba(212,175,55,0.1);
+      color: rgba(212,175,55,0.9);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0 0.9rem;
+      cursor: pointer;
+    }
+    .daily-sky-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .sky-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 0.85rem;
+    }
+    .sky-item span {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      margin-bottom: 0.25rem;
+    }
+    .sky-item strong {
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .sign-tabs {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .sign-tab {
+      min-height: 42px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.72);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.83rem;
+      cursor: pointer;
+    }
+    .sign-tab.active,
+    .sign-tab:hover {
+      border-color: rgba(212,175,55,0.45);
+      color: #d4af37;
+      background: rgba(212,175,55,0.1);
+    }
+    .daily-sign-card {
+      border: 1px solid rgba(212,175,55,0.14);
+      border-radius: 10px;
+      background: rgba(10,10,26,0.58);
+      padding: 1.35rem;
+      min-height: 220px;
+    }
+    .daily-sign-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
+    }
+    .daily-sign-topline h3 {
+      font-family: 'Cormorant Garamond', serif;
+      color: #fff;
+      font-size: 1.75rem;
+      margin: 0;
+    }
+    .tone-pill {
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tone-supportive { background: rgba(74,222,128,0.12); color: #86efac; border: 1px solid rgba(74,222,128,0.3); }
+    .tone-mixed { background: rgba(251,191,36,0.12); color: #facc15; border: 1px solid rgba(251,191,36,0.3); }
+    .tone-cautious { background: rgba(248,113,113,0.12); color: #fca5a5; border: 1px solid rgba(248,113,113,0.3); }
+    .daily-sign-card h4 {
+      color: rgba(212,175,55,0.95);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin: 0 0 0.6rem;
+    }
+    .daily-sign-card p {
+      color: rgba(255,255,255,0.72);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      margin: 0 0 0.85rem;
+    }
+    .daily-sign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .daily-sign-grid div {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 0.75rem;
+      color: rgba(255,255,255,0.62);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.84rem;
+    }
+    .daily-sign-grid strong {
+      display: block;
+      color: #fff;
+      margin-top: 0.25rem;
+    }
+    .public-error {
+      color: #fca5a5;
+      font-family: 'Inter', sans-serif;
+      padding: 1rem;
+      border: 1px solid rgba(248,113,113,0.25);
+      border-radius: 8px;
+      background: rgba(248,113,113,0.08);
+    }
+    .personal-briefing-anchor {
+      display: block;
+      position: relative;
+      top: -6rem;
+      height: 0;
+      overflow: hidden;
+    }
+    @media (max-width: 820px) {
+      .daily-horoscope-header {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+      .daily-sky-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .sign-tabs {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .daily-sign-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 520px) {
+      .daily-horoscope-panel {
+        padding: 1rem;
+      }
+      .daily-date-control {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .daily-sky-strip,
+      .sign-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .daily-sign-topline {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 
@@ -674,24 +935,52 @@
     <div class="nav-links">
       <a href="/#get-reading" class="nav-link">Get Your Reading</a>
       <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
       <a href="/horary.html" class="nav-link">Horary Oracle</a>
-      <a href="/daily.html" class="nav-link">Daily Planets</a>
-      <a id="navLoginBtn" href="#" class="nav-link" aria-label="Log In">Sign In</a>
-      <a id="navAccountBtn" href="/dashboard.html" class="nav-link hidden" aria-label="My Account">My Account</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
       <a href="/#get-reading" class="nav-cta">Get Free Chart ✦</a>
     </div>
   </nav>
 
   <main>
-    <!-- HERO + FORM -->
+    <!-- HERO + DAILY HOROSCOPES + FORM -->
     <section class="nav-hero" id="navigator-top">
-      <p class="hero-eyebrow">Daily Navigator · Personal Cosmic Briefing</p>
-      <h1 class="hero-title">What Do the Stars<br>Say About <em>Your Day?</em></h1>
+      <p class="hero-eyebrow">Daily Horoscopes + Personal Cosmic Briefing</p>
+      <h1 class="hero-title">Read Today's Sky<br>Through <em>Traditional Astrology</em></h1>
       <p class="hero-subtitle">
-        Enter your birth details and we'll synthesize all classical timing techniques —
-        profections, firdaria, zodiacal releasing, and transits — into one actionable daily briefing.
+        Start with the public horoscope for your rising sign or Sun sign, then enter
+        birth details for a personal timing briefing using profections, firdaria,
+        zodiacal releasing, and transits.
       </p>
     </section>
+
+    <section class="daily-horoscope-section" id="daily-horoscopes">
+      <div class="daily-horoscope-panel">
+        <div class="daily-horoscope-header">
+          <div>
+            <h2>Daily Horoscopes</h2>
+            <p>Read for your rising sign if you know it; otherwise use your Sun sign. These forecasts are calculated from today's real planetary positions and interpreted through traditional sign rulers and whole-sign topics.</p>
+          </div>
+          <div class="daily-date-control">
+            <div>
+              <label for="publicHoroscopeDate">Date</label>
+              <input type="date" id="publicHoroscopeDate" />
+            </div>
+            <button type="button" id="loadPublicHoroscopesBtn">Update</button>
+          </div>
+        </div>
+        <div id="publicHoroscopeSky" class="daily-sky-strip" aria-live="polite"></div>
+        <div id="publicHoroscopeTabs" class="sign-tabs" role="tablist" aria-label="Choose zodiac sign"></div>
+        <div id="publicHoroscopeCard" class="daily-sign-card" aria-live="polite">
+          <p>Loading today's horoscopes...</p>
+        </div>
+        <p class="safety-disclaimer"><strong>Historical Use Only.</strong> Daily horoscopes are symbolic timing notes, not medical, financial, legal, psychological, emergency, or safety advice. Do not use them for urgent decisions.</p>
+      </div>
+    </section>
+
+    <span class="personal-briefing-anchor" id="personal-briefing" aria-hidden="true"></span>
 
     <div class="nav-form-card" id="navFormCard">
       <form id="navForm" autocomplete="on">
@@ -724,7 +1013,8 @@
           <span class="btn-text">✦ Get Briefing</span>
           <span class="btn-loading hidden">Calculating your cosmic weather...</span>
         </button>
-        <p class="form-note">Free — no account required. Historical use only.</p>
+        <p class="form-note">Free personal timing briefing - no account required. Historical use only.</p>
+        <p class="safety-disclaimer"><strong>Historical Use Only.</strong> The personal briefing is not medical, financial, legal, psychological, emergency, or safety advice. Do not use it for urgent decisions.</p>
       </form>
     </div>
 
@@ -750,11 +1040,13 @@
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
         <a href="/refunds.html">Refunds</a>
-        <a href="mailto:support@traditional-astrology.com">Support</a>
+        <a href="/about.html">About</a>
+        <a href="/methodology.html">Methodology</a>
+        <a href="/contact.html">Contact/Support</a>
       </div>
       <p class="footer-legal">
         © 2026 Traditional Astrology. All rights reserved.<br>
-        For entertainment, historical, and spiritual research purposes only. Not medical, legal, or financial advice.
+        Historical Use Only. For entertainment, historical, and spiritual research only. Not medical, financial, legal, psychological, emergency, or safety advice. Do not use for urgent decisions.
       </p>
     </div>
   </footer>
@@ -772,6 +1064,14 @@
       const loadingSection = document.getElementById('navLoading');
       const resultsSection = document.getElementById('briefingResults');
       const submitBtn = document.getElementById('navSubmitBtn');
+      const publicDateInput = document.getElementById('publicHoroscopeDate');
+      const publicLoadBtn = document.getElementById('loadPublicHoroscopesBtn');
+      const publicSky = document.getElementById('publicHoroscopeSky');
+      const publicTabs = document.getElementById('publicHoroscopeTabs');
+      const publicCard = document.getElementById('publicHoroscopeCard');
+      const signOrder = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
+      let publicHoroscopeData = null;
+      let selectedPublicSign = localStorage.getItem('daily_horoscope_sign') || 'Aries';
 
       // Session cache for instant prev/next day revisits
       const briefingCache = new Map();
@@ -780,6 +1080,106 @@
 
       // Track week view state
       let weekViewOpen = false;
+
+      function todayIsoDate() {
+        const d = new Date();
+        d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+        return d.toISOString().slice(0, 10);
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      async function loadPublicHoroscopes() {
+        const dateValue = publicDateInput.value || todayIsoDate();
+        publicDateInput.value = dateValue;
+        publicCard.innerHTML = '<p>Loading daily horoscopes...</p>';
+        publicSky.innerHTML = '';
+        publicTabs.innerHTML = '';
+        publicLoadBtn.disabled = true;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/v1/charts/daily-horoscopes?target_date=${encodeURIComponent(dateValue)}`);
+          const payload = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            throw new Error(payload.detail || `HTTP ${res.status}`);
+          }
+          publicHoroscopeData = payload;
+          if (!payload.horoscopes || !payload.horoscopes.some(h => h.sign === selectedPublicSign)) {
+            selectedPublicSign = 'Aries';
+          }
+          renderPublicHoroscopes();
+        } catch (err) {
+          publicCard.innerHTML = `<div class="public-error">Could not load daily horoscopes: ${escapeHtml(err.message)}</div>`;
+        } finally {
+          publicLoadBtn.disabled = false;
+        }
+      }
+
+      function renderPublicHoroscopes() {
+        if (!publicHoroscopeData) return;
+        const sky = publicHoroscopeData.sky || {};
+        const phase = sky.lunar_phase || {};
+        const day = sky.planetary_day || {};
+        publicSky.innerHTML = `
+          <div class="sky-item"><span>Date</span><strong>${escapeHtml(publicHoroscopeData.date)}</strong></div>
+          <div class="sky-item"><span>Sun</span><strong>${escapeHtml(sky.sun?.sign || 'Unknown')}</strong></div>
+          <div class="sky-item"><span>Moon</span><strong>${escapeHtml(sky.moon?.sign || 'Unknown')}</strong></div>
+          <div class="sky-item"><span>Day Ruler</span><strong>${escapeHtml(day.ruler || 'Unknown')}</strong></div>
+        `;
+        if (phase.phase) {
+          publicSky.innerHTML += `<div class="sky-item"><span>Lunar Phase</span><strong>${escapeHtml(phase.phase)}</strong></div>`;
+        }
+
+        publicTabs.innerHTML = signOrder.map(sign => `
+          <button type="button" class="sign-tab ${sign === selectedPublicSign ? 'active' : ''}" data-sign="${sign}" role="tab" aria-selected="${sign === selectedPublicSign ? 'true' : 'false'}">
+            ${sign}
+          </button>
+        `).join('');
+
+        publicTabs.querySelectorAll('.sign-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            selectedPublicSign = tab.dataset.sign;
+            localStorage.setItem('daily_horoscope_sign', selectedPublicSign);
+            renderPublicHoroscopes();
+          });
+        });
+
+        const reading = publicHoroscopeData.horoscopes.find(h => h.sign === selectedPublicSign) || publicHoroscopeData.horoscopes[0];
+        const toneClass = `tone-${reading.tone || 'mixed'}`;
+        publicCard.innerHTML = `
+          <div class="daily-sign-topline">
+            <h3>${escapeHtml(reading.sign)}</h3>
+            <span class="tone-pill ${toneClass}">${escapeHtml(reading.tone || 'mixed')}</span>
+          </div>
+          <h4>${escapeHtml(reading.headline)}</h4>
+          <p>${escapeHtml(reading.summary)}</p>
+          <p><strong>Today:</strong> ${escapeHtml(reading.action)}</p>
+          <div class="daily-sign-grid">
+            <div>Traditional ruler<strong>${escapeHtml(reading.ruler)}</strong></div>
+            <div>Moon house<strong>House ${escapeHtml(reading.moon_house)}</strong></div>
+            <div>Ruler house<strong>House ${escapeHtml(reading.ruler_house)}</strong></div>
+          </div>
+        `;
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'daily_horoscope_view', {
+            event_category: 'daily_horoscopes',
+            sign: selectedPublicSign,
+            target_date: publicHoroscopeData.date,
+          });
+        }
+      }
+
+      publicLoadBtn.addEventListener('click', loadPublicHoroscopes);
+      publicDateInput.value = todayIsoDate();
+      loadPublicHoroscopes();
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -936,7 +1336,7 @@
             <div class="stat-row"><span class="stat-label">Speed</span><span class="stat-value">${m.speed}°/day${m.fast ? ' (fast)' : ' (slow)'}</span></div>
           `;
           if (m.void_of_course) {
-            moonHtml += '<p style="margin-top:0.75rem;font-size:0.85rem;color:rgba(255,165,0,0.75);">⚠ The Moon is Void of Course — avoid starting new ventures, signing contracts, or making major decisions.</p>';
+            moonHtml += '<p style="margin-top:0.75rem;font-size:0.85rem;color:rgba(255,165,0,0.75);">⚠ The Moon is Void of Course — in traditional timing symbolism, initiation themes are treated as less supported. This is not advice for contracts, business, financial, legal, medical, safety, emergency, or urgent decisions.</p>';
           }
           html += renderPanel('🌙', 'Moon Condition', moonHtml);
         }
@@ -987,7 +1387,7 @@
           <div class="stat-row"><span class="stat-label">Propitiation Day</span><span class="stat-value">${rec.propitiation_day}${rec.is_propitiation_day ? ' ← Today!' : ''}</span></div>
           <h4 style="font-family:'Cormorant Garamond',serif;color:#fff;margin:1rem 0 0.5rem;font-size:1.05rem;">Do</h4>
           <ul class="rec-list do-list">${rec.do.map(d => `<li>${d}</li>`).join('')}</ul>
-          <h4 style="font-family:'Cormorant Garamond',serif;color:#fff;margin:1rem 0 0.5rem;font-size:1.05rem;">Avoid</h4>
+          <h4 style="font-family:'Cormorant Garamond',serif;color:#fff;margin:1rem 0 0.5rem;font-size:1.05rem;">Symbolic Cautions</h4>
           <ul class="rec-list avoid-list">${rec.avoid.map(a => `<li>${a}</li>`).join('')}</ul>
         `;
         html += renderPanel('🎯', 'Recommendations', recHtml);
@@ -997,7 +1397,7 @@
           <div class="upsell-card">
             <h3>✦ Want the Full Picture?</h3>
             <p>Your daily briefing shows today's timing. A full natal chart reading reveals your lifelong patterns — dignities, house lords, sect analysis, primary directions, and more.</p>
-            <a href="/#get-reading" class="upsell-btn" onclick="if(typeof gtag==='function')gtag('event','upsell_click',{event_category:'daily_navigator',event_label:'full_reading_49'})">✦ Get Your Full Reading — $49</a>
+            <a href="/#get-reading" class="upsell-btn" onclick="if(typeof gtag==='function')gtag('event','upsell_click',{event_category:'daily_navigator',event_label:'full_reading_25'})">✦ Get Your Full Reading — $25</a>
           </div>
         `;
 
@@ -1005,7 +1405,7 @@
         html += `<div class="share-row"><button class="share-btn" id="shareBriefing">📋 Share This Briefing</button></div>`;
 
         // Disclaimer
-        html += `<div class="disclaimer-bar">Historical Use Only — Not medical, financial, or legal advice. For entertainment and spiritual research purposes.</div>`;
+        html += `<div class="disclaimer-bar">Historical Use Only — not medical, financial, legal, psychological, emergency, or safety advice. Do not use for urgent decisions.</div>`;
 
         resultsSection.innerHTML = html;
 
@@ -1054,7 +1454,7 @@
             moon ? `🌙 Moon in ${moon.sign} (${moon.phase})${moon.void_of_course ? ' — Void of Course ⚠️' : ''}` : '',
             `🎯 Primary Time Lord: ${rec.primary_time_lord}`,
             `✅ Do: ${rec.do[0]}`,
-            `❌ Avoid: ${rec.avoid[0]}`,
+            `⚠ Symbolic caution: ${rec.avoid[0]}`,
             ``,
             `Get your free daily briefing → https://traditional-astrology.com/daily.html`,
           ].filter(Boolean).join('\n');
@@ -1409,7 +1809,7 @@
     </div>
   </div>
 
-  <script type="module" src="/js/auth.js?v=astro-v5"></script>
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
