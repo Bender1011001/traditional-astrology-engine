@@ -1,4 +1,6 @@
 
+from pathlib import Path
+
 import pytest
 from httpx import ASGITransport, AsyncClient
 
@@ -30,6 +32,24 @@ async def test_healthz_endpoint():
         assert "uptime_seconds" in data
         assert isinstance(data["uptime_seconds"], (int, float))
 
+
+def test_owner_bootstrap_key_is_not_committed():
+    script = Path(__file__).resolve().parents[2] / "check_via_api.py"
+    text = script.read_text(encoding="utf-8")
+
+    assert 'OWNER_KEY = "' not in text
+    assert "OWNER_BOOTSTRAP_KEY" in text
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("path", ["/docs", "/redoc", "/openapi.json"])
+async def test_api_docs_are_not_public_by_default(path):
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
+    ) as ac:
+        response = await ac.get(path)
+
+    assert response.status_code == 404
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("path", ["/login.html", "/dashboard.html"])

@@ -61,8 +61,9 @@ app = FastAPI(
     title="Traditional Astrology Engine",
     description="A high-precision engine for pre-1700s Traditional Astrology.",
     version="2.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc",
+    docs_url="/docs" if settings.PUBLIC_API_DOCS_ENABLED else None,
+    redoc_url="/redoc" if settings.PUBLIC_API_DOCS_ENABLED else None,
+    openapi_url="/openapi.json" if settings.PUBLIC_API_DOCS_ENABLED else None,
     lifespan=lifespan,
 )
 
