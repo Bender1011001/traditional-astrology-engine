@@ -54,6 +54,7 @@ jobs:
           gcloud builds submit gcloud-error-to-codex \
             --tag gcr.io/astrology-engine-prod/gcloud-error-to-codex \
             --project astrology-engine-prod \
+            --suppress-logs \
             --timeout=600
 
           gcloud run deploy gcloud-error-to-codex \

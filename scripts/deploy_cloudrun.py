@@ -101,7 +101,7 @@ def main():
     if not deploy_only:
         print("\n\nSTEP 1: Building Docker image via Cloud Build...")
         start = time.time()
-        run(f"gcloud builds submit --tag {IMAGE} --timeout=600 --project {PROJECT_ID}")
+        run(f"gcloud builds submit --tag {IMAGE} --timeout=600 --suppress-logs --project {PROJECT_ID}")
         elapsed = time.time() - start
         print(f"Image built and pushed in {elapsed:.0f}s.")
 
