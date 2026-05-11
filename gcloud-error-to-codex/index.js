@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import express from "express";
+import { Logging } from "@google-cloud/logging";
 import { Octokit } from "@octokit/rest";
 import { pathToFileURL } from "url";
 
@@ -30,8 +31,15 @@ export function loadConfig(env = process.env) {
     githubRepo: String(env.GITHUB_REPO).trim(),
     webhookToken: String(env.WEBHOOK_TOKEN).trim(),
     siteName: String(env.SITE_NAME || "traditional-astrology.com").trim(),
-    codexMention: String(env.CODEX_MENTION || "@codex").trim()
+    codexMention: String(env.CODEX_MENTION || "@codex").trim(),
+    logLookupDisabled: /^(1|true|yes)$/i.test(String(env.LOG_LOOKUP_DISABLED || "").trim()),
+    logLookupWindowSeconds: parsePositiveInteger(env.LOG_LOOKUP_WINDOW_SECONDS, 900)
   };
+}
+
+function parsePositiveInteger(value, fallback) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : fallback;
 }
 
 export function sha1(value) {
@@ -83,6 +91,152 @@ function deepString(...values) {
   return "";
 }
 
+function escapeLoggingString(value) {
+  return String(value).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+export function parseAlertTimestamp(value, fallback = new Date()) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return new Date(value > 1_000_000_000_000 ? value : value * 1000);
+  }
+
+  if (typeof value === "string" && value.trim()) {
+    const trimmed = value.trim();
+    if (/^\d+(\.\d+)?$/.test(trimmed)) {
+      const numeric = Number(trimmed);
+      return new Date(numeric > 1_000_000_000_000 ? numeric : numeric * 1000);
+    }
+
+    const parsed = new Date(trimmed);
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed;
+    }
+  }
+
+  return fallback;
+}
+
+export function buildMatchedLogFilter(payload, windowSeconds = 900, now = new Date()) {
+  const source = payload && typeof payload === "object" ? payload : {};
+  const incident = source.incident || {};
+  const resource = incident.resource || source.resource || {};
+  const labels = resource.labels || {};
+  const projectId = labels.project_id || incident.scoping_project_id || source.project_id || "";
+  const anchor = parseAlertTimestamp(
+    incident.started_at || incident.start_time || source.timestamp || source.receiveTimestamp,
+    now
+  );
+  const start = new Date(anchor.getTime() - windowSeconds * 1000);
+  const end = new Date(anchor.getTime() + windowSeconds * 1000);
+  const terms = [];
+
+  if (resource.type) {
+    terms.push(`resource.type="${escapeLoggingString(resource.type)}"`);
+  }
+
+  for (const [key, value] of Object.entries(labels)) {
+    if (value !== undefined && value !== null && value !== "") {
+      terms.push(`resource.labels.${key}="${escapeLoggingString(value)}"`);
+    }
+  }
+
+  terms.push("severity>=ERROR");
+  terms.push(`timestamp>="${start.toISOString()}"`);
+  terms.push(`timestamp<="${end.toISOString()}"`);
+
+  return {
+    projectId: String(projectId || "").trim(),
+    filter: terms.join(" AND ")
+  };
+}
+
+export function normalizeLogEntry(entry) {
+  const metadata = entry?.metadata || {};
+  const payload = entry?.data ?? entry?.jsonPayload ?? entry?.textPayload ?? "";
+  const jsonPayload =
+    payload && typeof payload === "object" && !Array.isArray(payload) ? payload : undefined;
+  const textPayload = typeof payload === "string" ? payload : undefined;
+
+  return {
+    timestamp: cleanLogScalar(metadata.timestamp || entry?.timestamp),
+    severity: cleanLogScalar(metadata.severity || entry?.severity),
+    logName: cleanLogScalar(metadata.logName || entry?.logName),
+    insertId: cleanLogScalar(metadata.insertId || entry?.insertId),
+    resource: metadata.resource || entry?.resource || {},
+    jsonPayload,
+    textPayload,
+    raw: {
+      metadata,
+      payload
+    }
+  };
+}
+
+function cleanLogScalar(value) {
+  if (value === undefined || value === null || value === "") {
+    return "";
+  }
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+  if (typeof value === "object") {
+    if (typeof value.toISOString === "function") {
+      return String(value.toISOString());
+    }
+    if (typeof value.toJSON === "function") {
+      const json = value.toJSON();
+      return typeof json === "string" ? json : clean(json, "");
+    }
+  }
+  return clean(value, "");
+}
+
+export async function lookupMatchedLogEntry(payload, config, loggingClient, now = new Date()) {
+  if (config.logLookupDisabled) {
+    return null;
+  }
+
+  const { projectId, filter } = buildMatchedLogFilter(
+    payload,
+    config.logLookupWindowSeconds,
+    now
+  );
+  if (!projectId || !filter) {
+    return null;
+  }
+
+  const client = loggingClient || new Logging({ projectId });
+  const [entries] = await client.getEntries({
+    filter,
+    orderBy: "timestamp desc",
+    pageSize: 1
+  });
+
+  if (!entries || entries.length === 0) {
+    return null;
+  }
+
+  return normalizeLogEntry(entries[0]);
+}
+
+export async function enrichAlertPayload(payload, config, loggingClient) {
+  try {
+    const matchedLogEntry = await lookupMatchedLogEntry(payload, config, loggingClient);
+    if (!matchedLogEntry) {
+      return payload;
+    }
+    return {
+      ...payload,
+      matchedLogEntry
+    };
+  } catch (err) {
+    console.warn("Cloud Logging lookup failed; creating issue from alert payload only", {
+      message: err.message
+    });
+    return payload;
+  }
+}
+
 function topStackLine(value) {
   return String(value || "")
     .split(/\r?\n/)
@@ -93,20 +247,25 @@ function topStackLine(value) {
 export function extractAlert(payload, siteName = "traditional-astrology.com") {
   const source = payload && typeof payload === "object" ? payload : {};
   const incident = source.incident || {};
-  const resource = incident.resource || source.resource || {};
+  const matchedLog = source.matchedLogEntry || {};
+  const resource = incident.resource || source.resource || matchedLog.resource || {};
   const labels = resource.labels || {};
   const metadata = incident.metadata || source.metadata || {};
   const systemLabels = metadata.system_labels || source.system_labels || {};
-  const jsonPayload = source.jsonPayload || source.json_payload || {};
+  const matchedJsonPayload = matchedLog.jsonPayload || {};
+  const jsonPayload = source.jsonPayload || source.json_payload || matchedJsonPayload || {};
   const errorPayload = source.error || source.exception || {};
 
   const summary = deepString(
-    incident.summary,
-    incident.documentation?.content,
+    jsonPayload.message,
+    jsonPayload.error?.message,
+    matchedLog.textPayload,
+    source.message,
+    source.textPayload,
     source.summary,
     source.subject,
-    source.message,
-    jsonPayload.message,
+    incident.summary,
+    incident.documentation?.content,
     source.textPayload,
     "Google Cloud production error"
   );
@@ -139,18 +298,20 @@ export function extractAlert(payload, siteName = "traditional-astrology.com") {
   );
 
   const severity = deepString(
-    incident.severity,
+    matchedLog.severity,
     source.severity,
     jsonPayload.severity,
+    incident.severity,
     systemLabels.severity,
     "ERROR"
   );
 
   const startedAt = deepString(
-    incident.started_at,
-    incident.start_time,
+    matchedLog.timestamp,
     source.timestamp,
     source.receiveTimestamp,
+    incident.started_at,
+    incident.start_time,
     new Date().toISOString()
   );
 
@@ -164,15 +325,17 @@ export function extractAlert(payload, siteName = "traditional-astrology.com") {
   );
 
   const possibleStack = deepString(
+    jsonPayload.stack_trace,
+    jsonPayload.stackTrace,
+    jsonPayload.stack,
+    jsonPayload.exception,
+    jsonPayload.error,
+    matchedLog.textPayload,
     source.stack,
     source.stack_trace,
     source.stackTrace,
     errorPayload.stack,
     errorPayload.stack_trace,
-    jsonPayload.stack,
-    jsonPayload.stack_trace,
-    jsonPayload.exception,
-    jsonPayload.error,
     source.textPayload,
     incident.documentation?.content,
     summary
@@ -198,6 +361,8 @@ export function extractAlert(payload, siteName = "traditional-astrology.com") {
     startedAt: clean(startedAt),
     url: clean(url, "no-link-provided"),
     possibleStack: clean(possibleStack, "No stack trace supplied"),
+    matchedLogFound: Boolean(source.matchedLogEntry),
+    matchedLogEntry: source.matchedLogEntry || null,
     rawText
   };
 }
@@ -269,11 +434,18 @@ Production error report:
 | Condition | ${alert.conditionName} |
 | Started at | ${alert.startedAt} |
 | Google Cloud link | ${alert.url} |
+| Matched log entry | ${alert.matchedLogFound ? "yes" : "no"} |
 
 Likely error / stack / alert text:
 
 \`\`\`
 ${truncate(alert.possibleStack, 6000)}
+\`\`\`
+
+Matched Cloud Logging entry:
+
+\`\`\`json
+${truncate(alert.matchedLogEntry || { status: "not_found" }, 8000)}
 \`\`\`
 
 Raw Google Cloud alert payload:
@@ -302,7 +474,7 @@ ${truncate(alert.possibleStack, 4000)}
 \`\`\``;
 }
 
-export function createApp({ config, octokit }) {
+export function createApp({ config, octokit, logging }) {
   const app = express();
   app.disable("x-powered-by");
   app.use(express.json({ limit: "3mb" }));
@@ -325,7 +497,8 @@ export function createApp({ config, octokit }) {
 
       await ensureLabels(octokit, config);
 
-      const alert = extractAlert(req.body, config.siteName);
+      const alertPayload = await enrichAlertPayload(req.body, config, logging);
+      const alert = extractAlert(alertPayload, config.siteName);
       const existing = await findExistingIssue(octokit, config, alert.fingerprint);
 
       if (existing) {

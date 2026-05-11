@@ -9,11 +9,12 @@ Google Cloud Logging / Error Reporting
 -> Cloud Monitoring alert webhook
 -> this Cloud Run service
 -> GitHub issue in Bender1011001/astrology
--> @codex production repair task
+-> codex_prod_error GitHub Actions workflow
 -> PR guarded by CI, risk_gate, and automerge_safe
 ```
 
 The bridge does not repair code directly and does not need repository contents access. It only creates or updates GitHub issues with the `production-error` and `codex` labels.
+When Cloud Monitoring sends only incident metadata, the bridge queries Cloud Logging for the newest matching error entry in the incident time window and includes that payload in the GitHub issue.
 
 ## Environment
 
@@ -31,6 +32,8 @@ Optional:
 ```text
 SITE_NAME          traditional-astrology.com
 CODEX_MENTION      @codex
+LOG_LOOKUP_DISABLED false
+LOG_LOOKUP_WINDOW_SECONDS 900
 PORT               8080
 ```
 
@@ -89,6 +92,9 @@ Use the production Google Cloud project and region already used by the site:
 gcloud config set project astrology-engine-prod
 gcloud config set run/region us-central1
 gcloud services enable run.googleapis.com secretmanager.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
+gcloud projects add-iam-policy-binding astrology-engine-prod \
+  --member serviceAccount:820685644947-compute@developer.gserviceaccount.com \
+  --role roles/logging.viewer
 ```
 
 Store the GitHub token:

@@ -1,12 +1,15 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  buildMatchedLogFilter,
   buildIssueBody,
   buildIssueTitle,
   clean,
   extractAlert,
   isAuthorizedToken,
+  lookupMatchedLogEntry,
   loadConfig,
+  normalizeLogEntry,
   truncate
 } from "../index.js";
 
@@ -25,9 +28,20 @@ test("loadConfig requires the deployment secrets", () => {
       GITHUB_TOKEN: "unit-github-token",
       GITHUB_OWNER: "owner",
       GITHUB_REPO: "repo",
-      WEBHOOK_TOKEN: "token"
+      WEBHOOK_TOKEN: "token",
+      LOG_LOOKUP_WINDOW_SECONDS: "120"
     }).siteName,
     "traditional-astrology.com"
+  );
+  assert.equal(
+    loadConfig({
+      GITHUB_TOKEN: "unit-github-token",
+      GITHUB_OWNER: "owner",
+      GITHUB_REPO: "repo",
+      WEBHOOK_TOKEN: "token",
+      LOG_LOOKUP_DISABLED: "true"
+    }).logLookupDisabled,
+    true
   );
 });
 
@@ -81,6 +95,147 @@ test("extractAlert can use structured log payload fields", () => {
 
   assert.equal(alert.summary, "stripe_webhook failed");
   assert.match(alert.possibleStack, /AttributeError/);
+});
+
+test("extractAlert prefers an enriched matched Cloud Logging entry", () => {
+  const alert = extractAlert(
+    {
+      incident: {
+        summary: "Log match condition fired for Cloud Run Revision",
+        documentation: {
+          content: "Generic alert documentation"
+        },
+        resource: {
+          labels: {
+            service_name: "astrology-engine",
+            project_id: "astrology-engine-prod"
+          }
+        },
+        severity: "No severity",
+        started_at: 1778515562
+      },
+      matchedLogEntry: {
+        timestamp: "2026-05-11T16:05:48.496Z",
+        severity: "ERROR",
+        resource: {
+          labels: {
+            service_name: "astrology-engine"
+          }
+        },
+        jsonPayload: {
+          message: "Codex drill synthetic production error",
+          stack_trace: "CodexDrillError: synthetic monitored error\n    at drill"
+        }
+      }
+    },
+    config.siteName
+  );
+
+  assert.equal(alert.summary, "Codex drill synthetic production error");
+  assert.equal(alert.severity, "ERROR");
+  assert.equal(alert.startedAt, "2026-05-11T16:05:48.496Z");
+  assert.equal(alert.matchedLogFound, true);
+  assert.match(alert.possibleStack, /CodexDrillError/);
+  assert.match(buildIssueBody(alert, config), /Matched log entry \| yes/);
+});
+
+test("buildMatchedLogFilter targets the incident resource and time window", () => {
+  const { projectId, filter } = buildMatchedLogFilter(
+    {
+      incident: {
+        started_at: 1778515562,
+        resource: {
+          type: "cloud_run_revision",
+          labels: {
+            project_id: "astrology-engine-prod",
+            service_name: "astrology-engine",
+            revision_name: "astrology-engine-00099-hvs"
+          }
+        }
+      }
+    },
+    60,
+    new Date("2026-05-11T16:07:00Z")
+  );
+
+  assert.equal(projectId, "astrology-engine-prod");
+  assert.match(filter, /resource\.type="cloud_run_revision"/);
+  assert.match(filter, /resource\.labels\.service_name="astrology-engine"/);
+  assert.match(filter, /resource\.labels\.revision_name="astrology-engine-00099-hvs"/);
+  assert.match(filter, /severity>=ERROR/);
+  assert.match(filter, /timestamp>="2026-05-11T16:05:02\.000Z"/);
+  assert.match(filter, /timestamp<="2026-05-11T16:07:02\.000Z"/);
+});
+
+test("lookupMatchedLogEntry returns the newest entry from Cloud Logging", async () => {
+  const fakeClient = {
+    lastRequest: null,
+    async getEntries(request) {
+      this.lastRequest = request;
+      return [
+        [
+          {
+            metadata: {
+              timestamp: "2026-05-11T16:05:48.496Z",
+              severity: "ERROR",
+              logName: "projects/astrology-engine-prod/logs/codex-prod-error-drill",
+              resource: {
+                type: "cloud_run_revision",
+                labels: {
+                  service_name: "astrology-engine"
+                }
+              }
+            },
+            data: {
+              message: "drill failure",
+              stack_trace: "CodexDrillError"
+            }
+          }
+        ]
+      ];
+    }
+  };
+
+  const entry = await lookupMatchedLogEntry(
+    {
+      incident: {
+        started_at: 1778515562,
+        resource: {
+          type: "cloud_run_revision",
+          labels: {
+            project_id: "astrology-engine-prod",
+            service_name: "astrology-engine"
+          }
+        }
+      }
+    },
+    { logLookupDisabled: false, logLookupWindowSeconds: 900 },
+    fakeClient,
+    new Date("2026-05-11T16:07:00Z")
+  );
+
+  assert.equal(fakeClient.lastRequest.orderBy, "timestamp desc");
+  assert.equal(fakeClient.lastRequest.pageSize, 1);
+  assert.equal(entry.severity, "ERROR");
+  assert.equal(entry.jsonPayload.message, "drill failure");
+});
+
+test("normalizeLogEntry handles text payloads", () => {
+  const entry = normalizeLogEntry({
+    metadata: {
+      timestamp: {
+        toJSON() {
+          return "2026-05-11T16:05:48Z";
+        }
+      },
+      severity: "ERROR"
+    },
+    data: "RuntimeError: plain text log"
+  });
+
+  assert.equal(entry.timestamp, "2026-05-11T16:05:48Z");
+  assert.equal(entry.textPayload, "RuntimeError: plain text log");
+  assert.equal(entry.jsonPayload, undefined);
 });
 
 test("issue title and body include Codex task and review policy", () => {
