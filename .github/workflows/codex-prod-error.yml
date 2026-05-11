@@ -15,10 +15,6 @@ permissions:
   issues: write
   pull-requests: write
 
-concurrency:
-  group: codex-prod-error-${{ github.event.issue.number || inputs.issue_number }}
-  cancel-in-progress: true
-
 jobs:
   investigate:
     if: >-

@@ -33,7 +33,7 @@ export function loadConfig(env = process.env) {
     siteName: String(env.SITE_NAME || "traditional-astrology.com").trim(),
     codexMention: String(env.CODEX_MENTION || "@codex").trim(),
     logLookupDisabled: /^(1|true|yes)$/i.test(String(env.LOG_LOOKUP_DISABLED || "").trim()),
-    logLookupWindowSeconds: parsePositiveInteger(env.LOG_LOOKUP_WINDOW_SECONDS, 900),
+    logLookupWindowSeconds: parsePositiveInteger(env.LOG_LOOKUP_WINDOW_SECONDS, 300),
     logLookupAttempts: parsePositiveInteger(env.LOG_LOOKUP_ATTEMPTS, 4),
     logLookupDelayMillis: parsePositiveInteger(env.LOG_LOOKUP_DELAY_MILLIS, 2000)
   };
