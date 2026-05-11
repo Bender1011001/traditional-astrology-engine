@@ -11,6 +11,11 @@ permissions:
 jobs:
   app:
     runs-on: ubuntu-latest
+    env:
+      STRIPE_SECRET_KEY: unit-stripe-secret
+      STRIPE_WEBHOOK_SECRET: unit-webhook-secret
+      JWT_SECRET: unit-jwt-secret
+      SENDER_EMAIL: tests@example.test
     steps:
       - uses: actions/checkout@v4
 

@@ -34,7 +34,7 @@ jobs:
             echo "deploy=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if git diff --quiet HEAD^ HEAD -- gcloud-error-to-codex .github/workflows/deploy-error-bridge.yml; then
+          if git diff --quiet HEAD^ HEAD -- gcloud-error-to-codex .github/workflows/ci.yml .github/workflows/deploy-error-bridge.yml; then
             echo "deploy=false" >> "$GITHUB_OUTPUT"
           else
             echo "deploy=true" >> "$GITHUB_OUTPUT"
