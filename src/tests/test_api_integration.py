@@ -398,8 +398,16 @@ async def test_calculate_endpoint_free():
 
 
 @pytest.mark.asyncio
-async def test_auth_validate_session():
+async def test_auth_validate_session(monkeypatch):
     # exchanging session_id (mock) for token
+    def fake_retrieve(_session_id):
+        raise ValueError("mock Stripe session does not exist")
+
+    monkeypatch.setattr(
+        "src.api.v1.endpoints.billing.stripe.checkout.Session.retrieve",
+        fake_retrieve,
+    )
+
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
     ) as ac:

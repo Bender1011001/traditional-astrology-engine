@@ -366,19 +366,20 @@ async def verify_checkout_session(
         raise HTTPException(status_code=400, detail="Invalid Session ID")
 
     # Subscription checkouts with trials can complete without an immediate payment.
-    if session.payment_status not in {"paid", "no_payment_required"}:
+    payment_status = _stripe_field(session, "payment_status")
+    if payment_status not in {"paid", "no_payment_required"}:
         raise HTTPException(status_code=400, detail="Payment not completed")
 
-    metadata = session.metadata or {}
-    user_id = metadata.get("user_id")
-    plan_tier = metadata.get("plan_tier")
+    metadata = _stripe_mapping(_stripe_field(session, "metadata", {}))
+    user_id = _stripe_field(metadata, "user_id")
+    plan_tier = _stripe_field(metadata, "plan_tier")
 
     if not user_id:
         raise HTTPException(status_code=400, detail="Invalid session metadata")
 
     # Sync DB status immediately (subscriptions only).
-    is_subscription = bool(session.get("subscription")) or (
-        str(session.get("mode") or "").lower() == "subscription"
+    is_subscription = bool(_stripe_field(session, "subscription")) or (
+        str(_stripe_field(session, "mode") or "").lower() == "subscription"
     )
     if is_subscription:
         service = SubscriptionService(db)
@@ -387,9 +388,9 @@ async def verify_checkout_session(
     # Recover Chart Data
     chart_data = None
     chart_hash = f"user_{user_id}"
-    if metadata.get("chart_data"):
+    if _stripe_field(metadata, "chart_data"):
         try:
-            chart_data_raw = metadata.get("chart_data")
+            chart_data_raw = _stripe_field(metadata, "chart_data")
             if chart_data_raw is not None:
                 chart_data = json.loads(str(chart_data_raw))
         except (TypeError, ValueError) as e:

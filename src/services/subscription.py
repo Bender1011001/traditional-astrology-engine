@@ -16,6 +16,34 @@ if stripe_secret_key:
     stripe.api_key = stripe_secret_key
 
 
+def _stripe_field(obj, key, default=None):
+    if obj is None:
+        return default
+    if isinstance(obj, dict):
+        return obj.get(key, default)
+    try:
+        return obj[key]
+    except (KeyError, TypeError, AttributeError):
+        return getattr(obj, key, default)
+
+
+def _stripe_mapping(obj) -> dict:
+    if obj is None:
+        return {}
+    if isinstance(obj, dict):
+        return obj
+
+    to_dict_recursive = getattr(obj, "to_dict_recursive", None)
+    if callable(to_dict_recursive):
+        return to_dict_recursive()
+
+    to_dict = getattr(obj, "to_dict", None)
+    if callable(to_dict):
+        return to_dict()
+
+    return {}
+
+
 class SubscriptionService:
     def __init__(self, db: Session):
         self.db = db
@@ -218,27 +246,29 @@ class SubscriptionService:
         return sub
 
     def handle_webhook(self, event: dict):
-        event_type = event["type"]
+        event_type = _stripe_field(event, "type")
+        event_data = _stripe_field(event, "data", {})
 
         if event_type == "checkout.session.completed":
-            session = event["data"]["object"]
+            session = _stripe_field(event_data, "object")
             self._process_subscription_success(session)
         elif event_type == "invoice.payment_succeeded":
-            invoice = event["data"]["object"]
+            invoice = _stripe_field(event_data, "object")
             self._process_payment_succeeded(invoice)
         elif event_type == "invoice.payment_failed":
-            invoice = event["data"]["object"]
+            invoice = _stripe_field(event_data, "object")
             self._process_payment_failed(invoice)
         elif event_type == "customer.subscription.deleted":
-            sub_data = event["data"]["object"]
+            sub_data = _stripe_field(event_data, "object")
             self._process_subscription_deleted(sub_data)
         elif event_type == "customer.subscription.updated":
-            sub_data = event["data"]["object"]
+            sub_data = _stripe_field(event_data, "object")
             self._process_subscription_updated(sub_data)
 
     def _process_subscription_success(self, session: dict):
-        user_id = session.get("client_reference_id") or session.get("metadata", {}).get(
-            "user_id"
+        metadata = _stripe_mapping(_stripe_field(session, "metadata", {}))
+        user_id = _stripe_field(session, "client_reference_id") or _stripe_field(
+            metadata, "user_id"
         )
         if not user_id:
             return
@@ -247,13 +277,13 @@ class SubscriptionService:
         if not user:
             return
 
-        plan_tier = session.get("metadata", {}).get("plan_tier")
+        plan_tier = _stripe_field(metadata, "plan_tier")
         plan = self.get_plan_by_tier(plan_tier)
         if not plan:
             return
 
-        stripe_sub_id = session.get("subscription")
-        stripe_cust_id = session.get("customer")
+        stripe_sub_id = _stripe_field(session, "subscription")
+        stripe_cust_id = _stripe_field(session, "customer")
 
         sub = user.subscription
         if not sub:
@@ -267,19 +297,21 @@ class SubscriptionService:
         # Stripe sub details
         if stripe_sub_id:
             stripe_sub = stripe.Subscription.retrieve(stripe_sub_id)
+            current_period_start = _stripe_field(stripe_sub, "current_period_start")
+            current_period_end = _stripe_field(stripe_sub, "current_period_end")
             sub.current_period_start = datetime.fromtimestamp(
-                stripe_sub.current_period_start, tz=timezone.utc  # type: ignore
+                current_period_start, tz=timezone.utc  # type: ignore
             )
             sub.current_period_end = datetime.fromtimestamp(
-                stripe_sub.current_period_end, tz=timezone.utc  # type: ignore
+                current_period_end, tz=timezone.utc  # type: ignore
             )
 
             # Preserve trial state if Stripe says we're trialing.
-            stripe_status = stripe_sub.get("status")
+            stripe_status = _stripe_field(stripe_sub, "status")
             if stripe_status == "trialing":
                 sub.status = "trial"
-                trial_start = stripe_sub.get("trial_start")
-                trial_end = stripe_sub.get("trial_end")
+                trial_start = _stripe_field(stripe_sub, "trial_start")
+                trial_end = _stripe_field(stripe_sub, "trial_end")
                 sub.trial_start_date = (
                     datetime.fromtimestamp(trial_start, tz=timezone.utc)
                     if trial_start
@@ -304,8 +336,8 @@ class SubscriptionService:
 
         # Notify Admin
         try:
-            amount = session.get("amount_total", 0) / 100.0
-            is_recurring = session.get("mode") == "subscription"
+            amount = (_stripe_field(session, "amount_total", 0) or 0) / 100.0
+            is_recurring = _stripe_field(session, "mode") == "subscription"
             AdminNotificationService.notify_purchase_completed(
                 user_email=user.email,  # type: ignore
                 plan_tier=plan_tier,
@@ -323,7 +355,7 @@ class SubscriptionService:
         # Log invoice
         user_id = None
         # Try to find sub by stripe customer
-        customer_id = invoice.get("customer")
+        customer_id = _stripe_field(invoice, "customer")
         sub = (
             self.db.query(UserSubscription)
             .filter(UserSubscription.stripe_customer_id == customer_id)
@@ -332,9 +364,10 @@ class SubscriptionService:
 
         if sub:
             sub.status = "active"  # type: ignore
-            if invoice.get("period_end"):
+            period_end = _stripe_field(invoice, "period_end")
+            if period_end:
                 sub.current_period_end = datetime.fromtimestamp(  # type: ignore
-                    invoice.get("period_end"), tz=timezone.utc  # type: ignore
+                    period_end, tz=timezone.utc  # type: ignore
                 )
             self.db.commit()
 
@@ -342,7 +375,7 @@ class SubscriptionService:
             try:
                 user = sub.user
                 plan_tier = sub.plan.tier if sub.plan else "unknown"
-                amount = invoice.get("amount_paid", 0) / 100.0
+                amount = (_stripe_field(invoice, "amount_paid", 0) or 0) / 100.0
                 AdminNotificationService.notify_purchase_completed(
                     user_email=user.email,
                     plan_tier=plan_tier,
@@ -360,18 +393,18 @@ class SubscriptionService:
             new_inv = Invoice(
                 user_id=sub.user_id,
                 subscription_id=sub.id,
-                stripe_invoice_id=invoice.get("id"),
-                amount_due=(invoice.get("amount_due") or 0) / 100.0,
-                amount_paid=(invoice.get("amount_paid") or 0) / 100.0,
-                status=invoice.get("status"),
-                pdf_url=invoice.get("invoice_pdf"),
+                stripe_invoice_id=_stripe_field(invoice, "id"),
+                amount_due=(_stripe_field(invoice, "amount_due") or 0) / 100.0,
+                amount_paid=(_stripe_field(invoice, "amount_paid") or 0) / 100.0,
+                status=_stripe_field(invoice, "status"),
+                pdf_url=_stripe_field(invoice, "invoice_pdf"),
                 created_at=datetime.now(timezone.utc),
             )
             self.db.add(new_inv)
             self.db.commit()
 
     def _process_payment_failed(self, invoice: dict):
-        customer_id = invoice.get("customer")
+        customer_id = _stripe_field(invoice, "customer")
         sub = (
             self.db.query(UserSubscription)
             .filter(UserSubscription.stripe_customer_id == customer_id)
@@ -385,8 +418,8 @@ class SubscriptionService:
             try:
                 user = sub.user
                 plan_tier = sub.plan.tier if sub.plan else "unknown"
-                error_obj = invoice.get("last_payment_error") or {}
-                error_msg = error_obj.get("message", "Payment failed")
+                error_obj = _stripe_field(invoice, "last_payment_error") or {}
+                error_msg = _stripe_field(error_obj, "message", "Payment failed")
                 AdminNotificationService.notify_payment_failed(
                     user_email=user.email, plan_tier=plan_tier, error_message=error_msg
                 )
@@ -398,7 +431,7 @@ class SubscriptionService:
                 )
 
     def _process_subscription_deleted(self, sub_data: dict):
-        stripe_id = sub_data.get("id")
+        stripe_id = _stripe_field(sub_data, "id")
         sub = (
             self.db.query(UserSubscription)
             .filter(UserSubscription.stripe_subscription_id == stripe_id)
@@ -409,26 +442,28 @@ class SubscriptionService:
             self.db.commit()
 
     def _process_subscription_updated(self, sub_data: dict):
-        stripe_id = sub_data.get("id")
+        stripe_id = _stripe_field(sub_data, "id")
         sub = (
             self.db.query(UserSubscription)
             .filter(UserSubscription.stripe_subscription_id == stripe_id)
             .first()
         )
         if sub:
-            period_end_ts = sub_data.get("current_period_end")
+            period_end_ts = _stripe_field(sub_data, "current_period_end")
             if period_end_ts is not None:
                 sub.current_period_end = datetime.fromtimestamp(  # type: ignore
                     period_end_ts, tz=timezone.utc
                 )
-            sub.cancel_at_period_end = sub_data.get("cancel_at_period_end")  # type: ignore
-            status = sub_data.get("status")
+            sub.cancel_at_period_end = _stripe_field(
+                sub_data, "cancel_at_period_end"
+            )  # type: ignore
+            status = _stripe_field(sub_data, "status")
             if status == "active":
                 sub.status = "active"  # type: ignore
             elif status == "trialing":
                 sub.status = "trial"  # type: ignore
-                trial_start = sub_data.get("trial_start")
-                trial_end = sub_data.get("trial_end")
+                trial_start = _stripe_field(sub_data, "trial_start")
+                trial_end = _stripe_field(sub_data, "trial_end")
                 if trial_start:
                     sub.trial_start_date = datetime.fromtimestamp(  # type: ignore
                         trial_start, tz=timezone.utc

@@ -9,6 +9,25 @@ from src.database.models import (SubscriptionPlan, User, UserSubscription)
 from src.services.subscription import SubscriptionService
 
 
+class StripeLikeObject:
+    """Minimal StripeObject facsimile: item/attribute access, no .get()."""
+
+    def __init__(self, **values):
+        self._values = values
+
+    def __getitem__(self, key):
+        return self._values[key]
+
+    def __getattr__(self, key):
+        try:
+            return self._values[key]
+        except KeyError as exc:
+            raise AttributeError(key) from exc
+
+    def to_dict_recursive(self):
+        return dict(self._values)
+
+
 @pytest.fixture
 def mock_db_session():
     return MagicMock()
@@ -169,6 +188,59 @@ def test_process_subscription_success_new_sub(service, mock_db_session, pro_plan
             # Sub should be created and activated
             assert hasattr(user, "subscription") or mock_db_session.add.called
             mock_notify.assert_called_once()
+
+
+def test_process_subscription_success_accepts_stripe_object(service, mock_db_session, pro_plan):
+    """Stripe SDK webhook objects do not expose dict.get()."""
+    user = User(id=1, email="webhook@example.com")
+    mock_db_session.query().filter().first.return_value = user
+    service.get_plan_by_tier = MagicMock(return_value=pro_plan)
+
+    session_data = StripeLikeObject(
+        client_reference_id=1,
+        metadata=StripeLikeObject(plan_tier="scholar"),
+        subscription="sub_123",
+        customer="cus_123",
+        mode="subscription",
+        amount_total=500,
+    )
+
+    stripe_sub = StripeLikeObject(
+        current_period_start=1600000000,
+        current_period_end=1602592000,
+        status="active",
+    )
+
+    with patch("stripe.Subscription.retrieve", return_value=stripe_sub):
+        with patch(
+            "src.services.notifications.AdminNotificationService.notify_purchase_completed"
+        ) as mock_notify:
+            service._process_subscription_success(session_data)
+
+    created_sub = mock_db_session.add.call_args.args[0]
+    assert created_sub.plan_id == 2
+    assert created_sub.stripe_customer_id == "cus_123"
+    assert created_sub.stripe_subscription_id == "sub_123"
+    assert created_sub.status == "active"
+    mock_notify.assert_called_once()
+
+
+def test_process_subscription_success_ignores_unowned_stripe_object(
+    service, mock_db_session
+):
+    """Retired one-time checkout retries should return cleanly when no user is present."""
+    session_data = StripeLikeObject(
+        client_reference_id=None,
+        metadata=StripeLikeObject(tier="horary_question"),
+        subscription=None,
+        customer=None,
+        mode="payment",
+        amount_total=500,
+    )
+
+    service._process_subscription_success(session_data)
+
+    mock_db_session.query.assert_not_called()
 
 
 def test_get_usage_stats(service, mock_db_session, pro_plan, test_user):
