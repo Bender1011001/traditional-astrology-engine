@@ -33,7 +33,9 @@ export function loadConfig(env = process.env) {
     siteName: String(env.SITE_NAME || "traditional-astrology.com").trim(),
     codexMention: String(env.CODEX_MENTION || "@codex").trim(),
     logLookupDisabled: /^(1|true|yes)$/i.test(String(env.LOG_LOOKUP_DISABLED || "").trim()),
-    logLookupWindowSeconds: parsePositiveInteger(env.LOG_LOOKUP_WINDOW_SECONDS, 900)
+    logLookupWindowSeconds: parsePositiveInteger(env.LOG_LOOKUP_WINDOW_SECONDS, 900),
+    logLookupAttempts: parsePositiveInteger(env.LOG_LOOKUP_ATTEMPTS, 4),
+    logLookupDelayMillis: parsePositiveInteger(env.LOG_LOOKUP_DELAY_MILLIS, 2000)
   };
 }
 
@@ -122,12 +124,8 @@ export function buildMatchedLogFilter(payload, windowSeconds = 900, now = new Da
   const resource = incident.resource || source.resource || {};
   const labels = resource.labels || {};
   const projectId = labels.project_id || incident.scoping_project_id || source.project_id || "";
-  const anchor = parseAlertTimestamp(
-    incident.started_at || incident.start_time || source.timestamp || source.receiveTimestamp,
-    now
-  );
-  const start = new Date(anchor.getTime() - windowSeconds * 1000);
-  const end = new Date(anchor.getTime() + windowSeconds * 1000);
+  const end = new Date(now.getTime() + 60 * 1000);
+  const start = new Date(now.getTime() - windowSeconds * 1000);
   const terms = [];
 
   if (resource.type) {
@@ -206,17 +204,26 @@ export async function lookupMatchedLogEntry(payload, config, loggingClient, now 
   }
 
   const client = loggingClient || new Logging({ projectId });
-  const [entries] = await client.getEntries({
-    filter,
-    orderBy: "timestamp desc",
-    pageSize: 1
-  });
+  const attempts = parsePositiveInteger(config.logLookupAttempts, 1);
+  const delayMillis = parsePositiveInteger(config.logLookupDelayMillis, 0);
 
-  if (!entries || entries.length === 0) {
-    return null;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const [entries] = await client.getEntries({
+      filter,
+      orderBy: "timestamp desc",
+      pageSize: 1
+    });
+
+    if (entries && entries.length > 0) {
+      return normalizeLogEntry(entries[0]);
+    }
+
+    if (attempt < attempts && delayMillis > 0) {
+      await new Promise((resolve) => setTimeout(resolve, delayMillis));
+    }
   }
 
-  return normalizeLogEntry(entries[0]);
+  return null;
 }
 
 export async function enrichAlertPayload(payload, config, loggingClient) {

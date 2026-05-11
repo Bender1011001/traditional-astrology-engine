@@ -163,8 +163,8 @@ test("buildMatchedLogFilter targets the incident resource and time window", () =
   assert.match(filter, /resource\.labels\.service_name="astrology-engine"/);
   assert.match(filter, /resource\.labels\.revision_name="astrology-engine-00099-hvs"/);
   assert.match(filter, /severity>=ERROR/);
-  assert.match(filter, /timestamp>="2026-05-11T16:05:02\.000Z"/);
-  assert.match(filter, /timestamp<="2026-05-11T16:07:02\.000Z"/);
+  assert.match(filter, /timestamp>="2026-05-11T16:06:00\.000Z"/);
+  assert.match(filter, /timestamp<="2026-05-11T16:08:00\.000Z"/);
 });
 
 test("lookupMatchedLogEntry returns the newest entry from Cloud Logging", async () => {
@@ -209,7 +209,12 @@ test("lookupMatchedLogEntry returns the newest entry from Cloud Logging", async 
         }
       }
     },
-    { logLookupDisabled: false, logLookupWindowSeconds: 900 },
+    {
+      logLookupDisabled: false,
+      logLookupWindowSeconds: 900,
+      logLookupAttempts: 1,
+      logLookupDelayMillis: 0
+    },
     fakeClient,
     new Date("2026-05-11T16:07:00Z")
   );
@@ -218,6 +223,56 @@ test("lookupMatchedLogEntry returns the newest entry from Cloud Logging", async 
   assert.equal(fakeClient.lastRequest.pageSize, 1);
   assert.equal(entry.severity, "ERROR");
   assert.equal(entry.jsonPayload.message, "drill failure");
+});
+
+test("lookupMatchedLogEntry retries while Cloud Logging indexes a fresh entry", async () => {
+  let calls = 0;
+  const fakeClient = {
+    async getEntries() {
+      calls += 1;
+      if (calls === 1) {
+        return [[]];
+      }
+      return [
+        [
+          {
+            metadata: {
+              timestamp: "2026-05-11T16:05:50Z",
+              severity: "ERROR"
+            },
+            data: {
+              message: "event appeared after retry"
+            }
+          }
+        ]
+      ];
+    }
+  };
+
+  const entry = await lookupMatchedLogEntry(
+    {
+      incident: {
+        resource: {
+          type: "cloud_run_revision",
+          labels: {
+            project_id: "astrology-engine-prod",
+            service_name: "astrology-engine"
+          }
+        }
+      }
+    },
+    {
+      logLookupDisabled: false,
+      logLookupWindowSeconds: 900,
+      logLookupAttempts: 2,
+      logLookupDelayMillis: 0
+    },
+    fakeClient,
+    new Date("2026-05-11T16:07:00Z")
+  );
+
+  assert.equal(calls, 2);
+  assert.equal(entry.jsonPayload.message, "event appeared after retry");
 });
 
 test("normalizeLogEntry handles text payloads", () => {
