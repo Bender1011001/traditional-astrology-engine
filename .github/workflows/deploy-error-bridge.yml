@@ -51,8 +51,13 @@ jobs:
       - name: Deploy gcloud-error-to-codex
         if: steps.changes.outputs.deploy == 'true'
         run: |
+          gcloud builds submit gcloud-error-to-codex \
+            --tag gcr.io/astrology-engine-prod/gcloud-error-to-codex \
+            --project astrology-engine-prod \
+            --timeout=600
+
           gcloud run deploy gcloud-error-to-codex \
-            --source gcloud-error-to-codex \
+            --image gcr.io/astrology-engine-prod/gcloud-error-to-codex \
             --project astrology-engine-prod \
             --region us-central1 \
             --allow-unauthenticated \
