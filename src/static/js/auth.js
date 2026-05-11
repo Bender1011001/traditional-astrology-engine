@@ -303,6 +303,8 @@ async function handleResetPassword(form) {
 
 createAuxiliaryViews();
 updateNavState();
+window.CAEL_OPEN_AUTH_MODAL = openAuthModal;
+window.CAEL_REFRESH_AUTH_NAV = updateNavState;
 
 const initialIntent = authIntent();
 if (initialIntent === 'required' || initialIntent === 'expired' || initialIntent === 'login') {

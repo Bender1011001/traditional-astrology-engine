@@ -1,0 +1,47 @@
+name: deploy_cloud_run
+
+on:
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-cloud-run
+  cancel-in-progress: false
+
+jobs:
+  deploy_site:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Select production project
+        run: |
+          gcloud config set project astrology-engine-prod
+          gcloud config set run/region us-central1
+
+      - name: Build and deploy astrology-engine
+        run: python scripts/deploy_cloudrun.py --skip-env-yaml
+
+      - name: Smoke check production health
+        run: |
+          curl -fsS --retry 5 --retry-delay 5 https://traditional-astrology.com/api/healthz

@@ -251,6 +251,8 @@ async def check_premium_guest_status(task_id: str, db: Session = Depends(get_db)
 # Separate request_type key so this never touches the free-instant quota counter.
 MAX_FREE_PREMIUM_REPORTS_PER_IP = 1
 FREE_PREMIUM_REQUEST_TYPE = "free_premium_trial"
+FREE_BEST_READING_TIER = "premium_audit"
+FREE_BEST_READING_ITERATIONS = 3
 
 
 @router.post("/free-trial/request")
@@ -262,9 +264,9 @@ async def request_free_premium_trial(
     db: Session = Depends(get_db),
 ):
     """
-    Kick off a free LLM-generated premium report in the background.
+    Kick off the best customer-facing LLM report in the background.
 
-    - Limit: 1 lifetime report per real IP.
+    - Limit: 1 lifetime complete-analysis report per real IP.
     - Uses get_client_ip() which reads X-Forwarded-For correctly on Cloud Run,
       so every visitor gets their own independent quota — not a shared proxy IP.
     - When the limit is hit we return status="limit_reached" (200) rather than
@@ -311,8 +313,9 @@ async def request_free_premium_trial(
         "time": chart_request.time,
         "city": chart_request.city,
         "state": chart_request.state or "",
-        "tier": "free_premium",
-        "report_iterations": 1,
+        "tier": FREE_BEST_READING_TIER,
+        "free_entitlement": "one_free_best_reading_per_ip",
+        "report_iterations": FREE_BEST_READING_ITERATIONS,
     }
     if current_user:
         request_meta["user_id"] = current_user.id
@@ -340,7 +343,9 @@ async def request_free_premium_trial(
     # Fire the LLM generation as a background task — caller polls for status.
     request_data = dict(request_meta)
     background_tasks.add_task(generate_premium_report_task, task.id, request_data)
-    background_tasks.add_task(notify_chart_created, request_data, "Free Premium")
+    background_tasks.add_task(
+        notify_chart_created, request_data, "Free Complete Analysis"
+    )
 
     logger.info(
         "Free premium report started: task=%s ip=%s",
@@ -350,7 +355,9 @@ async def request_free_premium_trial(
     return {
         "status": "started",
         "task_id": task.id,
-        "tier": "free_premium",
+        "tier": FREE_BEST_READING_TIER,
+        "free_entitlement": "one_free_best_reading_per_ip",
+        "report_iterations": FREE_BEST_READING_ITERATIONS,
         "free_premium_remaining": 0,
     }
 

@@ -1,0 +1,59 @@
+name: risk_gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  risk_gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check PR risk level
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+
+          echo "Base: $BASE_SHA"
+          echo "Head: $HEAD_SHA"
+
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > changed_files.txt
+          cat changed_files.txt
+
+          FILE_COUNT=$(wc -l < changed_files.txt | tr -d ' ')
+          echo "Changed file count: $FILE_COUNT"
+
+          if [ "$FILE_COUNT" -gt 8 ]; then
+            echo "Too many files changed for unattended autofix."
+            exit 1
+          fi
+
+          FORBIDDEN_REGEX='(^|/)(auth|login|account|session|sessions|oauth|jwt|stripe|billing|payment|payments|checkout|purchase|purchases|invoice|invoices|subscription|subscriptions|migration|migrations|schema|schemas|database|db|terraform|infra|infrastructure)(/|$)|(^|/)(Dockerfile|cloudbuild\.ya?ml|requirements.*\.txt|package(-lock)?\.json)$|(^|/)\.github/workflows/|(^|/)\.env|secret|secrets|iam|service-account|service_account|dns|domain|deploy_cloudrun'
+
+          if grep -Eiq "$FORBIDDEN_REGEX" changed_files.txt; then
+            echo "Forbidden high-risk file path changed. Owner review required."
+            exit 1
+          fi
+
+          ADDED=$(git diff --numstat "$BASE_SHA" "$HEAD_SHA" | awk '{s+=$1} END {print s+0}')
+          DELETED=$(git diff --numstat "$BASE_SHA" "$HEAD_SHA" | awk '{s+=$2} END {print s+0}')
+
+          echo "Added lines: $ADDED"
+          echo "Deleted lines: $DELETED"
+
+          if [ "$ADDED" -gt 250 ] || [ "$DELETED" -gt 250 ]; then
+            echo "Diff too large for unattended autofix."
+            exit 1
+          fi
+
+          echo "Risk gate passed."

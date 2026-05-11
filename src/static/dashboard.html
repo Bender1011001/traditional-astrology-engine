@@ -522,6 +522,8 @@
           <div><dt>Joined</dt><dd id="userJoined">--</dd></div>
         </dl>
         <a class="account-secondary-btn" href="/?auth=forgot" style="margin-top:1rem;width:100%;box-sizing:border-box;">Reset Password</a>
+        <p id="subscriptionDetail" class="account-copy" style="margin-top:0.9rem;"></p>
+        <button id="cancelSubscriptionBtn" class="account-secondary-btn hidden" style="width:100%;box-sizing:border-box;">Cancel Subscription Renewal</button>
         <button id="logoutBtn" class="logout-btn">Log Out</button>
       </section>
 
@@ -924,6 +926,25 @@
         });
       }
 
+      const cancelSubscriptionBtn = document.getElementById('cancelSubscriptionBtn');
+      if (cancelSubscriptionBtn) {
+        cancelSubscriptionBtn.addEventListener('click', async () => {
+          if (!window.confirm('Turn off subscription auto-renewal? Access continues until the end of the paid billing period.')) {
+            return;
+          }
+          cancelSubscriptionBtn.disabled = true;
+          try {
+            const data = await apiJson('/api/v1/billing/cancel-subscription', { method: 'POST' });
+            text('subscriptionDetail', data.message || 'Auto-renewal is turned off.');
+            cancelSubscriptionBtn.classList.add('hidden');
+          } catch (err) {
+            text('subscriptionDetail', err.message || 'Could not cancel subscription renewal.');
+          } finally {
+            cancelSubscriptionBtn.disabled = false;
+          }
+        });
+      }
+
       const dailyForm = document.getElementById('dailyProfileForm');
       if (dailyForm) {
         dailyForm.addEventListener('submit', (event) => {
@@ -1032,6 +1053,16 @@
           text('welcomeText', user.name ? `Welcome back, ${user.name}` : 'Your Account');
           text('userPlan', plan === 'free' ? 'Free' : String(plan));
           text('accountPlan', plan === 'free' ? 'Free' : String(plan));
+          if (sub.current_period_end) {
+            const renewal = sub.cancel_at_period_end ? 'Access until' : 'Renews through';
+            text('subscriptionDetail', `${renewal} ${formatDate(sub.current_period_end)}.`);
+          } else {
+            text('subscriptionDetail', plan === 'free' ? 'No active paid subscription.' : 'Active subscription.');
+          }
+          const cancelBtn = document.getElementById('cancelSubscriptionBtn');
+          if (cancelBtn && sub.has_stripe_subscription && !sub.cancel_at_period_end && ['active', 'trial'].includes(String(sub.status || '').toLowerCase())) {
+            cancelBtn.classList.remove('hidden');
+          }
           text('userJoined', formatDate(user.created_at));
           text('memberSinceShort', formatDate(user.created_at, true));
           await loadOverview();

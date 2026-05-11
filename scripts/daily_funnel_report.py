@@ -28,7 +28,7 @@ DEFAULT_SERVICE = "astrology-engine"
 DEFAULT_TIMEZONE = "America/Los_Angeles"
 DEFAULT_LIMIT = 5000
 
-GA4_MEASUREMENT_ID = "G-RCNDWN4XVN"
+GA4_MEASUREMENT_ID = "G-5T7HPNKL7V"
 
 BOT_OR_TEST_RE = re.compile(
     r"bot|crawler|spider|headless|chatgpt|claude|googleother|"

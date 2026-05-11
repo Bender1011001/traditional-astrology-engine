@@ -1,28 +1,35 @@
 import logging
 import uuid
+from datetime import datetime, timezone
 from typing import Any
 
 import stripe
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
+from src.api.v1.auth import get_current_user
 from src.api.v1.client_ip import get_client_ip
-from src.api.v1.middleware.horary_rate_limiter import enforce_horary_rate_limit
 from src.api.v1.schemas import HoraryRequest  # type: ignore
 from src.api.v1.utils import result_to_model
 from src.core.config import settings
 from src.database.core import get_db
-from src.database.models import AsyncReportTask, GuestRequest
+from src.database.models import (
+    AsyncReportTask,
+    GuestRequest,
+    SubscriptionPlan,
+    UsageRecord,
+    User,
+)
 from src.engine.calculator.main import calculate_chart_data
 from src.engine.horary import build_horary_oracle
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-HORARY_QUESTION_TIER = "horary_question"
-HORARY_QUESTION_PRICE_CENTS = 500
-HORARY_QUESTION_PRODUCT_NAME = "Horary Oracle Question"
-_HORARY_PRICE_CACHE: str | None = None
+HORARY_SUBSCRIPTION_TIER = "horary"
+HORARY_SUBSCRIPTION_PRICE_CENTS = 500
+HORARY_SUBSCRIPTION_PRODUCT_NAME = "Horary Oracle Unlimited"
+_HORARY_SUBSCRIPTION_PRICE_CACHE: str | None = None
 
 
 def _stripe_field(obj: Any, key: str, default: Any = None) -> Any:
@@ -38,7 +45,7 @@ def _metadata(obj: Any) -> dict[str, Any]:
     return dict(metadata)
 
 
-def _is_ready_horary_price(price_id: str) -> bool:
+def _is_ready_horary_subscription_price(price_id: str) -> bool:
     try:
         price = stripe.Price.retrieve(price_id, expand=["product"])
         product = _stripe_field(price, "product")
@@ -46,17 +53,19 @@ def _is_ready_horary_price(price_id: str) -> bool:
             product = stripe.Product.retrieve(product)
 
         metadata = _metadata(price)
+        recurring = _stripe_field(price, "recurring", {}) or {}
         return (
             bool(_stripe_field(price, "active", False))
             and bool(_stripe_field(product, "active", False))
             and int(_stripe_field(price, "unit_amount", 0) or 0)
-            == HORARY_QUESTION_PRICE_CENTS
+            == HORARY_SUBSCRIPTION_PRICE_CENTS
             and str(_stripe_field(price, "currency", "") or "").lower() == "usd"
-            and metadata.get("tier") == HORARY_QUESTION_TIER
+            and str(_stripe_field(recurring, "interval", "") or "") == "month"
+            and metadata.get("tier") == HORARY_SUBSCRIPTION_TIER
         )
     except Exception as e:
         logger.warning(
-            "Stripe horary price validation failed for %s: %s",
+            "Stripe horary subscription price validation failed for %s: %s",
             price_id,
             repr(e),
             exc_info=True,
@@ -64,52 +73,136 @@ def _is_ready_horary_price(price_id: str) -> bool:
         return False
 
 
-def _get_or_create_horary_price() -> str:
-    global _HORARY_PRICE_CACHE
+def _get_or_create_horary_subscription_price() -> str:
+    global _HORARY_SUBSCRIPTION_PRICE_CACHE
 
-    if _HORARY_PRICE_CACHE and _is_ready_horary_price(_HORARY_PRICE_CACHE):
-        return _HORARY_PRICE_CACHE
-    _HORARY_PRICE_CACHE = None
+    if _HORARY_SUBSCRIPTION_PRICE_CACHE and _is_ready_horary_subscription_price(
+        _HORARY_SUBSCRIPTION_PRICE_CACHE
+    ):
+        return _HORARY_SUBSCRIPTION_PRICE_CACHE
+    _HORARY_SUBSCRIPTION_PRICE_CACHE = None
 
-    configured = (getattr(settings, "STRIPE_PRICE_HORARY_QUESTION", "") or "").strip()
-    if configured and _is_ready_horary_price(configured):
-        _HORARY_PRICE_CACHE = configured
+    configured = (getattr(settings, "STRIPE_PRICE_HORARY_MONTHLY", "") or "").strip()
+    if configured and _is_ready_horary_subscription_price(configured):
+        _HORARY_SUBSCRIPTION_PRICE_CACHE = configured
         return configured
 
     try:
         prices = stripe.Price.search(
-            query=f'active:"true" metadata["tier"]:"{HORARY_QUESTION_TIER}"',
+            query=f'active:"true" metadata["tier"]:"{HORARY_SUBSCRIPTION_TIER}"',
             limit=10,
         )
         for candidate in prices.data or []:
             price_id = _stripe_field(candidate, "id")
-            if price_id and _is_ready_horary_price(str(price_id)):
-                _HORARY_PRICE_CACHE = str(price_id)
+            if price_id and _is_ready_horary_subscription_price(str(price_id)):
+                _HORARY_SUBSCRIPTION_PRICE_CACHE = str(price_id)
                 return str(price_id)
     except Exception as e:
-        logger.warning("Stripe horary price search failed: %s", repr(e), exc_info=True)
+        logger.warning(
+            "Stripe horary subscription price search failed: %s",
+            repr(e),
+            exc_info=True,
+        )
 
     try:
         product = stripe.Product.create(
-            name=HORARY_QUESTION_PRODUCT_NAME,
+            name=HORARY_SUBSCRIPTION_PRODUCT_NAME,
             description=(
-                "One focused traditional horary astrology question, judged by "
-                "classical Regiomontanus rules."
+                "Unlimited focused traditional horary astrology questions for "
+                "$5/month, judged by deterministic Regiomontanus rules."
             ),
-            metadata={"tier": HORARY_QUESTION_TIER},
+            metadata={"tier": HORARY_SUBSCRIPTION_TIER},
         )
         price = stripe.Price.create(
             product=product.id,
-            unit_amount=HORARY_QUESTION_PRICE_CENTS,
+            unit_amount=HORARY_SUBSCRIPTION_PRICE_CENTS,
             currency="usd",
-            metadata={"tier": HORARY_QUESTION_TIER},
+            recurring={"interval": "month"},
+            metadata={"tier": HORARY_SUBSCRIPTION_TIER},
         )
-        _HORARY_PRICE_CACHE = price.id
-        logger.info("Created Stripe horary price %s", price.id)
+        _HORARY_SUBSCRIPTION_PRICE_CACHE = price.id
+        logger.info("Created Stripe horary subscription price %s", price.id)
         return str(price.id)
     except Exception as e:
-        logger.error("Failed to create Stripe horary price: %s", repr(e), exc_info=True)
+        logger.error(
+            "Failed to create Stripe horary subscription price: %s",
+            repr(e),
+            exc_info=True,
+        )
         raise
+
+
+def _upsert_horary_subscription_plan(db: Session, price_id: str) -> SubscriptionPlan:
+    plan = (
+        db.query(SubscriptionPlan)
+        .filter(SubscriptionPlan.tier == HORARY_SUBSCRIPTION_TIER)
+        .first()
+    )
+    if not plan:
+        plan = SubscriptionPlan(tier=HORARY_SUBSCRIPTION_TIER)
+        db.add(plan)
+
+    plan.chart_quota = None
+    plan.api_quota = 0
+    plan.price_monthly = 5.00
+    plan.price_annual = 0.00
+    plan.stripe_price_id_monthly = price_id
+    plan.stripe_price_id_annual = None
+    plan.features = {
+        "api_access": False,
+        "horary_unlimited": True,
+        "deterministic_engine": True,
+    }
+    db.commit()
+    db.refresh(plan)
+    return plan
+
+
+def _as_utc(value: datetime) -> datetime:
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
+
+
+def _has_active_horary_access(user: User | None) -> bool:
+    if not user or not user.subscription:
+        return False
+
+    sub = user.subscription
+    plan_tier = ""
+    if sub.plan and sub.plan.tier:
+        plan_tier = str(sub.plan.tier).strip().lower()
+
+    if plan_tier not in {"horary", "scholar", "practitioner", "studio"}:
+        return False
+    if str(sub.status or "").strip().lower() not in {"active", "trial"}:
+        return False
+    if sub.current_period_end and _as_utc(sub.current_period_end) < datetime.now(
+        timezone.utc
+    ):
+        return False
+    return True
+
+
+def _horary_access_payload(user: User | None) -> dict[str, Any]:
+    active = _has_active_horary_access(user)
+    sub = user.subscription if user and user.subscription else None
+    plan = sub.plan if sub and sub.plan else None
+    return {
+        "authenticated": bool(user),
+        "active": active,
+        "tier": str(plan.tier) if plan and plan.tier else "guest",
+        "status": str(sub.status) if sub and sub.status else "none",
+        "current_period_end": (
+            sub.current_period_end.isoformat()
+            if sub and sub.current_period_end
+            else None
+        ),
+        "price_monthly": 5,
+        "currency": "USD",
+        "engine": "deterministic_horary_engine",
+        "uses_llm": False,
+    }
 
 
 def _validated_question_payload(payload: HoraryRequest) -> HoraryRequest:
@@ -120,29 +213,6 @@ def _validated_question_payload(payload: HoraryRequest) -> HoraryRequest:
     if not city:
         raise HTTPException(status_code=400, detail="City is required for horary.")
     return payload.model_copy(update={"question": question, "city": city})
-
-
-def _payload_from_session_metadata(metadata: dict[str, Any]) -> HoraryRequest:
-    if str(metadata.get("purchase_type") or "") != HORARY_QUESTION_TIER:
-        raise HTTPException(status_code=400, detail="Not a paid horary checkout.")
-
-    def optional_float(value: Any) -> float | None:
-        if value in {None, ""}:
-            return None
-        try:
-            return float(value)
-        except (TypeError, ValueError):
-            return None
-
-    return HoraryRequest(
-        question=str(metadata.get("question") or ""),
-        city=str(metadata.get("city") or ""),
-        state=str(metadata.get("state") or ""),
-        date=str(metadata.get("date") or "") or None,
-        time=str(metadata.get("time") or "") or None,
-        latitude=optional_float(metadata.get("latitude")),
-        longitude=optional_float(metadata.get("longitude")),
-    )
 
 
 def _build_horary_answer(payload: HoraryRequest) -> dict[str, Any]:
@@ -188,12 +258,28 @@ def _build_horary_answer(payload: HoraryRequest) -> dict[str, Any]:
     return {"meta": res.get("meta", {}), "oracle": oracle}
 
 
-@router.post("/horary/checkout")
-async def create_paid_horary_checkout(payload: HoraryRequest, request: Request):
+@router.get("/horary/access")
+async def horary_subscription_access(user: User | None = Depends(get_current_user)):
     """
-    Create a cheap one-time Stripe Checkout Session for a single horary question.
+    Report whether the current account has unlimited horary access.
     """
-    payload = _validated_question_payload(payload)
+    return _horary_access_payload(user)
+
+
+@router.post("/horary/subscription/checkout")
+async def create_horary_subscription_checkout(
+    request: Request,
+    user: User | None = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Create a Stripe Checkout Session for the $5/month unlimited horary pass.
+    """
+    if not user:
+        raise HTTPException(status_code=401, detail="Account sign-in is required.")
+
+    if _has_active_horary_access(user):
+        return {"already_active": True, "access": _horary_access_payload(user)}
 
     if str(getattr(settings, "SALES_MODE", "live")).strip().lower() != "live":
         raise HTTPException(status_code=409, detail="Checkout is currently paused.")
@@ -203,132 +289,113 @@ async def create_paid_horary_checkout(payload: HoraryRequest, request: Request):
         raise HTTPException(status_code=500, detail="Payment system not configured.")
 
     try:
-        price_id = _get_or_create_horary_price()
-        order_id = uuid.uuid4().hex[:12]
+        price_id = _get_or_create_horary_subscription_price()
+        _upsert_horary_subscription_plan(db, price_id)
         origin = str(request.base_url).rstrip("/")
         metadata = {
-            "purchase_type": HORARY_QUESTION_TIER,
-            "tier": HORARY_QUESTION_TIER,
-            "order_id": order_id,
-            "question": payload.question[:500],
-            "city": payload.city[:150],
-            "state": (payload.state or "")[:100],
-            "date": payload.date or "",
-            "time": payload.time or "",
-            "latitude": "" if payload.latitude is None else str(payload.latitude),
-            "longitude": "" if payload.longitude is None else str(payload.longitude),
+            "purchase_type": "horary_subscription",
+            "tier": HORARY_SUBSCRIPTION_TIER,
+            "plan_tier": HORARY_SUBSCRIPTION_TIER,
+            "user_id": str(user.id),
         }
         session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             line_items=[{"price": price_id, "quantity": 1}],
-            mode="payment",
+            mode="subscription",
             allow_promotion_codes=True,
             success_url=(
-                f"{origin}/horary.html?horary_paid=success"
-                f"&session_id={{CHECKOUT_SESSION_ID}}&order={order_id}"
+                f"{origin}/horary.html?horary_subscribed=success"
+                "&session_id={CHECKOUT_SESSION_ID}"
             ),
-            cancel_url=f"{origin}/horary.html?horary_paid=cancelled",
+            cancel_url=f"{origin}/horary.html?horary_subscribed=cancelled",
+            customer_email=str(user.email),
+            client_reference_id=str(user.id),
             metadata=metadata,
+            subscription_data={"metadata": metadata},
         )
-        return {"url": session.url, "session_id": session.id, "order_id": order_id}
+        return {"url": session.url, "session_id": session.id}
     except HTTPException:
         raise
     except Exception as e:
         logger.error(
-            "Stripe paid horary checkout creation failed: %s", repr(e), exc_info=True
-        )
-        raise HTTPException(
-            status_code=500, detail="Could not create checkout session."
-        )
-
-
-@router.post("/horary/paid-answer")
-async def paid_horary_answer(
-    request: Request,
-    session_id: str,
-    db: Session = Depends(get_db),
-):
-    """
-    Verify a paid Stripe session and return the purchased horary answer.
-    Idempotent: the same Checkout Session returns the same stored answer.
-    """
-    stripe.api_key = (getattr(settings, "STRIPE_SECRET_KEY", "") or "").strip()
-    if not stripe.api_key:
-        raise HTTPException(status_code=500, detail="Payment system not configured.")
-
-    existing_task = (
-        db.query(AsyncReportTask).filter(AsyncReportTask.id == session_id).first()
-    )
-    if (
-        existing_task
-        and existing_task.status == "completed"
-        and existing_task.result_json
-    ):
-        result = dict(existing_task.result_json)
-        result["paid"] = True
-        result["session_id"] = session_id
-        return result
-
-    try:
-        session = stripe.checkout.Session.retrieve(session_id)
-    except Exception as e:
-        logger.warning(
-            "Stripe paid horary session retrieval failed for %s: %s",
-            session_id,
+            "Stripe horary subscription checkout creation failed: %s",
             repr(e),
             exc_info=True,
         )
-        raise HTTPException(status_code=400, detail="Invalid checkout session.")
+        raise HTTPException(
+            status_code=500, detail="Could not create subscription checkout session."
+        )
 
-    payment_status = str(_stripe_field(session, "payment_status", "") or "")
-    if payment_status not in {"paid", "no_payment_required"}:
-        raise HTTPException(status_code=402, detail="Payment not completed.")
 
-    metadata = _metadata(session)
-    payload = _payload_from_session_metadata(metadata)
+@router.post("/horary/subscriber-answer")
+async def subscriber_horary_answer(
+    payload: HoraryRequest,
+    request: Request,
+    user: User | None = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Cast a horary answer for an active unlimited horary subscriber.
+    """
+    if not user:
+        raise HTTPException(status_code=401, detail="Account sign-in is required.")
+    if not _has_active_horary_access(user):
+        raise HTTPException(
+            status_code=402,
+            detail="An active $5/month Horary Oracle subscription is required.",
+        )
+
     result = _build_horary_answer(payload)
-    result["question"] = payload.question
-    result["paid"] = True
-    result["session_id"] = session_id
-    result["order_id"] = metadata.get("order_id")
-
+    task_id = f"horary_sub_{uuid.uuid4().hex}"
     request_meta = payload.model_dump()
     request_meta.update(
         {
-            "tier": HORARY_QUESTION_TIER,
-            "stripe_session_id": session_id,
-            "order_id": metadata.get("order_id"),
+            "tier": "horary_subscription",
+            "user_id": str(user.id),
+            "account_email": str(user.email),
         }
     )
+    result["question"] = payload.question
+    result["paid"] = True
+    result["subscription_active"] = True
+    result["task_id"] = task_id
+    result["access"] = _horary_access_payload(user)
 
     try:
-        if existing_task:
-            existing_task.status = "completed"
-            existing_task.request_meta = request_meta
-            existing_task.result_json = result
-            task = existing_task
-        else:
-            task = AsyncReportTask(
-                id=session_id,
-                status="completed",
-                request_meta=request_meta,
-                result_json=result,
-            )
-            db.add(task)
-
+        task = AsyncReportTask(
+            id=task_id,
+            status="completed",
+            request_meta=request_meta,
+            result_json=result,
+        )
+        db.add(task)
         db.add(
             GuestRequest(
                 ip_address=get_client_ip(request),
-                request_type="paid_horary_question",
+                request_type="subscription_horary_question",
             )
         )
+        if user.subscription:
+            db.add(
+                UsageRecord(
+                    subscription_id=user.subscription.id,
+                    user_id=str(user.id),
+                    resource_type="horary_question",
+                    resource_id=task_id,
+                    cost_credits=1,
+                    metadata_json={
+                        "city": payload.city,
+                        "state": payload.state or "",
+                        "tier": "horary_subscription",
+                    },
+                )
+            )
         db.commit()
-        db.refresh(task)
     except Exception as e:
         db.rollback()
         logger.error(
-            "Failed to persist paid horary answer for %s: %s",
-            session_id,
+            "Failed to persist subscriber horary answer for user %s: %s",
+            user.id,
             repr(e),
             exc_info=True,
         )
@@ -337,14 +404,15 @@ async def paid_horary_answer(
     return result
 
 
-@router.post("/horary", dependencies=[Depends(enforce_horary_rate_limit)])
-async def horary_oracle(payload: HoraryRequest, request: Request):
+@router.post("/horary")
+async def horary_oracle(
+    payload: HoraryRequest,
+    request: Request,
+    user: User | None = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     """
-    Legacy free horary API with IP rate limiting. The public page now uses the
-    paid checkout flow, but this route remains for compatibility.
+    Subscription-gated horary API. Kept at the original path so older static
+    callers do not expose a free bypass around Horary Oracle Unlimited.
     """
-    result = _build_horary_answer(payload)
-    result["question"] = payload.question
-    result["paid"] = False
-    result["checkout_available"] = True
-    return result
+    return await subscriber_horary_answer(payload, request, user, db)

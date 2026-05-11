@@ -54,6 +54,53 @@ def _stripe_field(obj, key: str, default=None):
     return getattr(obj, key, default)
 
 
+def _metadata(obj) -> dict:
+    metadata = _stripe_field(obj, "metadata", {}) or {}
+    if hasattr(metadata, "to_dict"):
+        return dict(metadata.to_dict())
+    return dict(metadata)
+
+
+def _purchase_metadata_for_session(
+    session, fallback_tier: str = "full_reading"
+) -> dict:
+    metadata = _metadata(session)
+    tier_key = (
+        str(metadata.get("tier") or fallback_tier or "full_reading").strip().lower()
+    )
+    tier_cfg = TIERS.get(tier_key)
+    fallback_amount_cents = int(
+        (tier_cfg or TIERS["full_reading"])["price_cents"]  # type: ignore[index]
+    )
+    amount_cents = int(
+        _stripe_field(session, "amount_total", fallback_amount_cents)
+        or fallback_amount_cents
+    )
+    currency = str(_stripe_field(session, "currency", "usd") or "usd").upper()
+    value = round(amount_cents / 100.0, 2)
+    product_name = str(
+        (tier_cfg or {}).get("product_name") or "Traditional Astrology Reading"
+    )
+
+    return {
+        "transaction_id": str(_stripe_field(session, "id", "") or ""),
+        "order_id": str(metadata.get("order_id") or _stripe_field(session, "id", "")),
+        "currency": currency,
+        "value": value,
+        "amount_cents": amount_cents,
+        "tier": tier_key,
+        "items": [
+            {
+                "item_id": tier_key,
+                "item_name": product_name,
+                "item_category": "paid_reading",
+                "price": value,
+                "quantity": 1,
+            }
+        ],
+    }
+
+
 def _is_checkout_ready_price(price_id: str, tier_key: str) -> bool:
     tier = TIERS[tier_key]
     expected_amount = int(tier["price_cents"])  # type: ignore
@@ -280,14 +327,17 @@ async def generate_paid_reading(
     )
     if existing_task:
         # If it already exists, someone double-clicked or reloaded the page. We silently accept it.
+        tier_key = str(_metadata(session).get("tier", "unknown") or "unknown")
         return {
             "task_id": existing_task.id,
-            "tier": session.metadata.get("tier", "unknown"),  # type: ignore
+            "tier": tier_key,
+            "purchase": _purchase_metadata_for_session(session, tier_key),
             "message": "Report generation already in progress.",
         }
 
     # Extract chart data from metadata
-    chart_data_str = session.metadata.get("chart_data", "{}")  # type: ignore
+    session_metadata = _metadata(session)
+    chart_data_str = session_metadata.get("chart_data", "{}")
     chart_data = json.loads(chart_data_str)
 
     if not chart_data.get("date") or not chart_data.get("city"):
@@ -313,7 +363,11 @@ async def generate_paid_reading(
     except Exception:
         pass
 
-    tier_key = str(session.metadata.get("tier", "full_reading") or "full_reading").strip().lower()  # type: ignore
+    tier_key = (
+        str(session_metadata.get("tier", "full_reading") or "full_reading")
+        .strip()
+        .lower()
+    )
     tier_cfg = TIERS.get(tier_key, TIERS["full_reading"])
 
     request_meta = chart_request.model_dump()
@@ -321,10 +375,8 @@ async def generate_paid_reading(
     request_meta["report_iterations"] = int(tier_cfg["report_iterations"])  # type: ignore[arg-type]
     if customer_email:
         request_meta["customer_email"] = customer_email
-    metadata_user_id = session.metadata.get("user_id") if session.metadata else None  # type: ignore
-    metadata_account_email = (
-        session.metadata.get("account_email") if session.metadata else None  # type: ignore
-    )
+    metadata_user_id = session_metadata.get("user_id")
+    metadata_account_email = session_metadata.get("account_email")
     if current_user:
         request_meta["user_id"] = current_user.id
         request_meta["account_email"] = current_user.email
@@ -345,7 +397,7 @@ async def generate_paid_reading(
     client_ip = get_client_ip(request)
     usage = GuestRequest(
         ip_address=client_ip,
-        request_type=f"paid_{session.metadata.get('tier', 'unknown')}",  # type: ignore
+        request_type=f"paid_{session_metadata.get('tier', 'unknown')}",
     )
     db.add(usage)
     db.commit()
@@ -358,12 +410,13 @@ async def generate_paid_reading(
     background_tasks.add_task(
         notify_chart_created,
         chart_request.model_dump(),
-        f"Paid: {session.metadata.get('tier', 'unknown')}",  # type: ignore
+        f"Paid: {session_metadata.get('tier', 'unknown')}",
     )
 
     return {
         "task_id": task.id,
-        "tier": session.metadata.get("tier", "unknown"),  # type: ignore
+        "tier": session_metadata.get("tier", "unknown"),
+        "purchase": _purchase_metadata_for_session(session, tier_key),
         "message": "Report generation started.",
     }
 

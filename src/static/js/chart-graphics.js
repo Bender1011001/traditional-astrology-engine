@@ -1,127 +1,319 @@
 import { SIGNS } from './config.js';
 
-export function renderChartWheel(data) {
-    const container = document.getElementById('chartWheelContainer');
-    const size = 600;
-    const center = size / 2;
-    const radius = 250;
-    const innerRadius = 160;
-    const houseRadius = 120;
+const SIGN_GLYPHS = {
+    Aries: "♈",
+    Taurus: "♉",
+    Gemini: "♊",
+    Cancer: "♋",
+    Leo: "♌",
+    Virgo: "♍",
+    Libra: "♎",
+    Scorpio: "♏",
+    Sagittarius: "♐",
+    Capricorn: "♑",
+    Aquarius: "♒",
+    Pisces: "♓",
+};
 
-    let svg = `<svg viewBox="0 0 ${size} ${size}" class="chart-wheel-svg">
-        <defs>
-            <radialGradient id="ringGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="60%" stop-color="transparent" />
-                <stop offset="100%" stop-color="rgba(192, 112, 47, 0.15)" />
-            </radialGradient>
-            <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge>
-                    <feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/>
-                </feMerge>
-            </filter>
-        </defs>
-        
-        <!-- Background Rings -->
-        <circle cx="${center}" cy="${center}" r="${radius + 30}" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.2" />
-        <circle cx="${center}" cy="${center}" r="${radius}" fill="url(#ringGrad)" stroke="var(--gold)" stroke-width="2" />
-        <circle cx="${center}" cy="${center}" r="${innerRadius}" fill="none" stroke="var(--gold)" stroke-width="1" />
-        <circle cx="${center}" cy="${center}" r="${houseRadius}" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.5" />
-    `;
+const PLANET_GLYPHS = {
+    Sun: "☉",
+    Moon: "☽",
+    Mercury: "☿",
+    Venus: "♀",
+    Mars: "♂",
+    Jupiter: "♃",
+    Saturn: "♄",
+    Uranus: "♅",
+    Neptune: "♆",
+    Pluto: "♇",
+    North_Node: "☊",
+    South_Node: "☋",
+};
 
-    const offset = data.angles.Ascendant;
+const ROMAN_HOUSES = {
+    1: "I",
+    2: "II",
+    3: "III",
+    4: "IV",
+    5: "V",
+    6: "VI",
+    7: "VII",
+    8: "VIII",
+    9: "IX",
+    10: "X",
+    11: "XI",
+    12: "XII",
+};
 
-    // Draw Signs (Counter-Clockwise)
-    for (let i = 0; i < 12; i++) {
-        const startEcl = i * 30;
-        // Wheel Angle = 180 - (Ecliptic - Ascendant)
-        const wheelStart = (180 - (startEcl - offset)) % 360;
+const ASPECTS = [
+    { angle: 0, orb: 6, className: "conjunction" },
+    { angle: 60, orb: 4, className: "sextile" },
+    { angle: 90, orb: 5, className: "square" },
+    { angle: 120, orb: 5, className: "trine" },
+    { angle: 180, orb: 6, className: "opposition" },
+];
 
-        // Division line
-        const rad = (wheelStart * Math.PI) / 180;
-        const x1 = center + innerRadius * Math.cos(rad);
-        const y1 = center + innerRadius * Math.sin(rad);
-        const x2 = center + radius * Math.cos(rad);
-        const y2 = center + radius * Math.sin(rad);
-        svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--gold)" stroke-width="1" opacity="0.4" />`;
+function escapeSvg(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+}
 
-        // Sign Label
-        const labelAngle = ((wheelStart - 15) * Math.PI) / 180;
-        const lx = center + (radius - 20) * Math.cos(labelAngle);
-        const ly = center + (radius - 20) * Math.sin(labelAngle);
-        svg += `<text x="${lx}" y="${ly}" fill="var(--gold)" font-size="12" font-weight="bold" text-anchor="middle" alignment-baseline="middle" transform="rotate(${wheelStart - 105}, ${lx}, ${ly})" opacity="0.8">${SIGNS[i].substring(0, 3).toUpperCase()}</text>`;
-    }
+function normalizeDeg(value) {
+    const n = Number(value) || 0;
+    return ((n % 360) + 360) % 360;
+}
 
-    // Draw Houses
-    for (const [num, lon] of Object.entries(data.houses)) {
-        const wheelLon = (180 - (lon - offset)) % 360;
-        const rad = (wheelLon * Math.PI) / 180;
-        const x1 = center + houseRadius * Math.cos(rad);
-        const y1 = center + houseRadius * Math.sin(rad);
-        const x2 = center + innerRadius * Math.cos(rad);
-        const y2 = center + innerRadius * Math.sin(rad);
+function wheelAngle(longitude, ascendant) {
+    return normalizeDeg(180 - (normalizeDeg(longitude) - normalizeDeg(ascendant)));
+}
 
-        svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--purple)" stroke-width="1" opacity="0.5" />`;
+function polarPoint(center, radius, angleDeg) {
+    const rad = (angleDeg * Math.PI) / 180;
+    return {
+        x: center + radius * Math.cos(rad),
+        y: center + radius * Math.sin(rad),
+    };
+}
 
-        // House Number
-        const hLabelAngle = ((wheelLon - 15) * Math.PI) / 180;
-        const hx = center + (houseRadius + 15) * Math.cos(hLabelAngle);
-        const hy = center + (houseRadius + 15) * Math.sin(hLabelAngle);
-        svg += `<text x="${hx}" y="${hy}" fill="var(--purple-light)" font-size="9" text-anchor="middle" opacity="0.6">${num}</text>`;
-    }
+function describeArc(center, innerRadius, outerRadius, startAngle, endAngle) {
+    const startOuter = polarPoint(center, outerRadius, startAngle);
+    const endOuter = polarPoint(center, outerRadius, endAngle);
+    const startInner = polarPoint(center, innerRadius, endAngle);
+    const endInner = polarPoint(center, innerRadius, startAngle);
+    const largeArc = Math.abs(endAngle - startAngle) > 180 ? 1 : 0;
 
-    // Draw Aspects (Connecting Planets)
-    const planetEntries = Object.entries(data.planets);
-    for (let i = 0; i < planetEntries.length; i++) {
-        for (let j = i + 1; j < planetEntries.length; j++) {
-            const [p1, info1] = planetEntries[i];
-            const [p2, info2] = planetEntries[j];
-            const diff = Math.abs(info1.longitude - info2.longitude) % 360;
-            const dist = diff > 180 ? 360 - diff : diff;
+    return [
+        `M ${startOuter.x.toFixed(2)} ${startOuter.y.toFixed(2)}`,
+        `A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${endOuter.x.toFixed(2)} ${endOuter.y.toFixed(2)}`,
+        `L ${startInner.x.toFixed(2)} ${startInner.y.toFixed(2)}`,
+        `A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${endInner.x.toFixed(2)} ${endInner.y.toFixed(2)}`,
+        "Z",
+    ].join(" ");
+}
 
-            let color = "";
-            let orb = 5;
-            if (dist < orb) color = "var(--gold)"; // Conjunction
-            else if (Math.abs(dist - 180) < orb) color = "var(--danger)"; // Opposition
-            else if (Math.abs(dist - 90) < orb) color = "var(--danger)"; // Square
-            else if (Math.abs(dist - 120) < orb) color = "var(--success)"; // Trine
-            else if (Math.abs(dist - 60) < orb) color = "var(--success)"; // Sextile
+function zodiacPosition(longitude) {
+    const lon = normalizeDeg(longitude);
+    const signIndex = Math.floor(lon / 30);
+    const signName = SIGNS[signIndex] || "";
+    const signLon = lon % 30;
+    const degree = Math.floor(signLon);
+    const minute = Math.round((signLon - degree) * 60);
+    const normalizedDegree = minute === 60 ? degree + 1 : degree;
+    const normalizedMinute = minute === 60 ? 0 : minute;
+    return `${normalizedDegree}°${String(normalizedMinute).padStart(2, "0")}′ ${SIGN_GLYPHS[signName] || signName}`;
+}
 
-            if (color) {
-                const a1 = ((180 - (info1.longitude - offset)) * Math.PI) / 180;
-                const a2 = ((180 - (info2.longitude - offset)) * Math.PI) / 180;
-                const r = houseRadius - 10;
-                svg += `<line x1="${center + r * Math.cos(a1)}" y1="${center + r * Math.sin(a1)}" x2="${center + r * Math.cos(a2)}" y2="${center + r * Math.sin(a2)}" stroke="${color}" stroke-width="0.5" opacity="0.2" />`;
-            }
+function midpointLongitude(start, end) {
+    const distance = normalizeDeg(end - start);
+    return normalizeDeg(start + distance / 2);
+}
+
+function matchingAspect(distance) {
+    return ASPECTS.find((aspect) => Math.abs(distance - aspect.angle) <= aspect.orb);
+}
+
+function distributedPlanetAngles(planetEntries, ascendant) {
+    const minSpacing = 13;
+    const positioned = planetEntries
+        .map(([name, info]) => ({
+            name,
+            angle: wheelAngle(info.longitude, ascendant),
+        }))
+        .sort((a, b) => a.angle - b.angle);
+
+    for (let i = 1; i < positioned.length; i++) {
+        if (positioned[i].angle - positioned[i - 1].angle < minSpacing) {
+            positioned[i].angle = positioned[i - 1].angle + minSpacing;
         }
     }
 
-    // Draw Planets
-    const PLANET_GLYPHS = {
-        "Sun": "☉", "Moon": "☾", "Mercury": "☿", "Venus": "♀", "Mars": "♂",
-        "Jupiter": "♃", "Saturn": "♄", "Uranus": "♅", "Neptune": "♆", "Pluto": "♇",
-        "North_Node": "☊", "South_Node": "☋"
-    };
+    if (positioned.length > 1 && positioned[positioned.length - 1].angle >= 360) {
+        const overflow = positioned[positioned.length - 1].angle - 359;
+        for (const item of positioned) item.angle -= overflow;
+    }
 
-    planetEntries.forEach(([name, info]) => {
-        const wheelDeg = (180 - (info.longitude - offset)) % 360;
-        const rad = (wheelDeg * Math.PI) / 180;
-        const r = innerRadius - 25;
-        const px = center + r * Math.cos(rad);
-        const py = center + r * Math.sin(rad);
+    return new Map(positioned.map((item) => [item.name, normalizeDeg(item.angle)]));
+}
 
-        svg += `
-            <g class="planet-glyph-group" style="cursor: pointer" onclick='window.showDetailsByPlanet("${name}", ${JSON.stringify(data).replace(/'/g, "&apos;")})'>
-                <circle cx="${px}" cy="${py}" r="14" fill="var(--bg-card)" stroke="var(--gold)" stroke-width="1.5" filter="url(#glow)" />
-                <text x="${px}" y="${py}" fill="var(--gold)" font-size="16" text-anchor="middle" alignment-baseline="middle">${PLANET_GLYPHS[name] || name.charAt(0)}</text>
-            </g>
-        `;
-    });
+function renderRingLabel(svg, label, x, y, className, extra = "") {
+    svg.push(
+        `<text class="${className}" x="${x.toFixed(2)}" y="${y.toFixed(2)}" text-anchor="middle" dominant-baseline="middle" ${extra}>${escapeSvg(label)}</text>`
+    );
+}
 
-    // Center Earth
-    svg += `<circle cx="${center}" cy="${center}" r="15" fill="var(--bg-card)" stroke="var(--gold)" stroke-width="1" />`;
-    svg += `<text x="${center}" y="${center}" fill="var(--gold)" font-size="8" text-anchor="middle" alignment-baseline="middle">TERRA</text>`;
+export function renderChartWheel(data) {
+    const container = document.getElementById('chartWheelContainer');
+    if (!container || !data?.planets || !data?.houses || !data?.angles) return;
 
-    svg += `</svg>`;
-    container.innerHTML = svg;
+    const size = 720;
+    const center = size / 2;
+    const outerRadius = 330;
+    const zodiacOuter = 308;
+    const zodiacInner = 248;
+    const houseOuter = 240;
+    const houseInner = 126;
+    const aspectRadius = 104;
+    const planetPointRadius = 232;
+    const planetLabelRadius = 198;
+    const ascendant = normalizeDeg(data.angles.Ascendant);
+    const houses = data.houses || {};
+    const planetEntries = Object.entries(data.planets)
+        .filter(([, info]) => info && info.longitude !== undefined && info.longitude !== null)
+        .sort((a, b) => normalizeDeg(a[1].longitude) - normalizeDeg(b[1].longitude));
+    const labelAngles = distributedPlanetAngles(planetEntries, ascendant);
+
+    const svg = [
+        `<svg viewBox="0 0 ${size} ${size}" class="chart-wheel-svg" role="img" aria-label="Traditional astrology natal chart wheel">`,
+        `<defs>
+            <radialGradient id="chartPaperGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(252,244,218,0.08)" />
+                <stop offset="64%" stop-color="rgba(252,244,218,0.025)" />
+                <stop offset="100%" stop-color="rgba(201,168,76,0.16)" />
+            </radialGradient>
+            <filter id="wheelTextShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="1" stdDeviation="1.4" flood-color="#05050b" flood-opacity="0.75" />
+            </filter>
+        </defs>`,
+        `<rect x="18" y="18" width="${size - 36}" height="${size - 36}" rx="18" class="chart-wheel-plate" />`,
+        `<circle cx="${center}" cy="${center}" r="${outerRadius}" class="chart-wheel-outer-halo" />`,
+        `<circle cx="${center}" cy="${center}" r="${zodiacOuter}" class="chart-wheel-zodiac-backdrop" />`,
+    ];
+
+    // Zodiac ring.
+    for (let i = 0; i < 12; i++) {
+        const startLon = i * 30;
+        const endLon = startLon + 30;
+        const startAngle = wheelAngle(startLon, ascendant);
+        const endAngle = wheelAngle(endLon, ascendant);
+        const signName = SIGNS[i];
+        const labelPoint = polarPoint(center, 278, wheelAngle(startLon + 15, ascendant));
+        svg.push(
+            `<path d="${describeArc(center, zodiacInner, zodiacOuter, endAngle, startAngle)}" class="zodiac-slice zodiac-slice-${i % 2}" />`
+        );
+        renderRingLabel(
+            svg,
+            SIGN_GLYPHS[signName] || signName.slice(0, 3),
+            labelPoint.x,
+            labelPoint.y,
+            "zodiac-glyph",
+            `transform="rotate(${wheelAngle(startLon + 15, ascendant) + 90}, ${labelPoint.x.toFixed(2)}, ${labelPoint.y.toFixed(2)})"`
+        );
+    }
+
+    // Degree ticks and sign boundaries.
+    for (let degree = 0; degree < 360; degree += 5) {
+        const angle = wheelAngle(degree, ascendant);
+        const isSignBoundary = degree % 30 === 0;
+        const isDecan = degree % 10 === 0;
+        const tickStart = isSignBoundary ? zodiacInner - 2 : isDecan ? zodiacOuter - 18 : zodiacOuter - 11;
+        const tickEnd = zodiacOuter;
+        const p1 = polarPoint(center, tickStart, angle);
+        const p2 = polarPoint(center, tickEnd, angle);
+        svg.push(
+            `<line x1="${p1.x.toFixed(2)}" y1="${p1.y.toFixed(2)}" x2="${p2.x.toFixed(2)}" y2="${p2.y.toFixed(2)}" class="${isSignBoundary ? "zodiac-boundary" : "degree-tick"}" />`
+        );
+    }
+
+    svg.push(
+        `<circle cx="${center}" cy="${center}" r="${zodiacInner}" class="chart-ring chart-ring-strong" />`,
+        `<circle cx="${center}" cy="${center}" r="${houseOuter}" class="chart-ring chart-ring-soft" />`,
+        `<circle cx="${center}" cy="${center}" r="${houseInner}" class="chart-ring chart-ring-soft" />`,
+        `<circle cx="${center}" cy="${center}" r="${aspectRadius}" class="aspect-field" />`
+    );
+
+    // Houses.
+    for (let house = 1; house <= 12; house++) {
+        const lon = houses[String(house)] ?? houses[house];
+        if (lon === undefined || lon === null) continue;
+
+        const angle = wheelAngle(lon, ascendant);
+        const p1 = polarPoint(center, houseInner, angle);
+        const p2 = polarPoint(center, houseOuter, angle);
+        const isAngular = [1, 4, 7, 10].includes(house);
+        svg.push(
+            `<line x1="${p1.x.toFixed(2)}" y1="${p1.y.toFixed(2)}" x2="${p2.x.toFixed(2)}" y2="${p2.y.toFixed(2)}" class="${isAngular ? "house-cusp house-cusp-angular" : "house-cusp"}" />`
+        );
+
+        const nextLon = houses[String(house === 12 ? 1 : house + 1)] ?? houses[house === 12 ? 1 : house + 1];
+        const labelLon = nextLon === undefined || nextLon === null
+            ? normalizeDeg(Number(lon) + 15)
+            : midpointLongitude(Number(lon), Number(nextLon));
+        const labelPoint = polarPoint(center, 174, wheelAngle(labelLon, ascendant));
+        renderRingLabel(svg, ROMAN_HOUSES[house] || house, labelPoint.x, labelPoint.y, "house-number");
+    }
+
+    // Angles.
+    const axisLabels = [
+        ["ASC", ascendant],
+        ["DSC", ascendant + 180],
+    ];
+    const mc = houses["10"] ?? houses[10];
+    if (mc !== undefined && mc !== null) {
+        axisLabels.push(["MC", Number(mc)], ["IC", Number(mc) + 180]);
+    }
+    for (const [label, lon] of axisLabels) {
+        const angle = wheelAngle(lon, ascendant);
+        const lineStart = polarPoint(center, 44, angle);
+        const lineEnd = polarPoint(center, zodiacInner, angle);
+        const labelPoint = polarPoint(center, 326, angle);
+        svg.push(
+            `<line x1="${lineStart.x.toFixed(2)}" y1="${lineStart.y.toFixed(2)}" x2="${lineEnd.x.toFixed(2)}" y2="${lineEnd.y.toFixed(2)}" class="angle-axis" />`
+        );
+        renderRingLabel(svg, label, labelPoint.x, labelPoint.y, "angle-label");
+    }
+
+    // Aspects.
+    for (let i = 0; i < planetEntries.length; i++) {
+        for (let j = i + 1; j < planetEntries.length; j++) {
+            const [, info1] = planetEntries[i];
+            const [, info2] = planetEntries[j];
+            const diff = Math.abs(normalizeDeg(info1.longitude) - normalizeDeg(info2.longitude));
+            const distance = diff > 180 ? 360 - diff : diff;
+            const aspect = matchingAspect(distance);
+            if (!aspect) continue;
+
+            const a1 = wheelAngle(info1.longitude, ascendant);
+            const a2 = wheelAngle(info2.longitude, ascendant);
+            const p1 = polarPoint(center, aspectRadius, a1);
+            const p2 = polarPoint(center, aspectRadius, a2);
+            svg.push(
+                `<line x1="${p1.x.toFixed(2)}" y1="${p1.y.toFixed(2)}" x2="${p2.x.toFixed(2)}" y2="${p2.y.toFixed(2)}" class="aspect-line aspect-${aspect.className}" />`
+            );
+        }
+    }
+
+    // Planet markers and labels.
+    for (const [name, info] of planetEntries) {
+        const trueAngle = wheelAngle(info.longitude, ascendant);
+        const labelAngle = labelAngles.get(name) ?? trueAngle;
+        const point = polarPoint(center, planetPointRadius, trueAngle);
+        const labelPoint = polarPoint(center, planetLabelRadius, labelAngle);
+        const glyph = PLANET_GLYPHS[name] || name.charAt(0);
+        const label = `${glyph} ${zodiacPosition(info.longitude)}${info.retrograde ? " R" : ""}`;
+        const safeName = escapeSvg(name.replace(/_/g, " "));
+
+        svg.push(
+            `<g class="planet-marker" data-planet="${escapeSvg(name)}">
+                <title>${safeName}: ${escapeSvg(zodiacPosition(info.longitude))}${info.retrograde ? " retrograde" : ""}</title>
+                <line x1="${point.x.toFixed(2)}" y1="${point.y.toFixed(2)}" x2="${labelPoint.x.toFixed(2)}" y2="${labelPoint.y.toFixed(2)}" class="planet-leader" />
+                <circle cx="${point.x.toFixed(2)}" cy="${point.y.toFixed(2)}" r="4.6" class="planet-dot" />
+                <g transform="translate(${labelPoint.x.toFixed(2)} ${labelPoint.y.toFixed(2)})">
+                    <rect x="-35" y="-12" width="70" height="24" rx="12" class="planet-label-backdrop" />
+                    <text class="planet-label" x="0" y="0" text-anchor="middle" dominant-baseline="middle">${escapeSvg(label)}</text>
+                </g>
+            </g>`
+        );
+    }
+
+    svg.push(
+        `<circle cx="${center}" cy="${center}" r="40" class="chart-wheel-center" />`,
+        `<text x="${center}" y="${center - 4}" text-anchor="middle" dominant-baseline="middle" class="chart-center-title">NATAL</text>`,
+        `<text x="${center}" y="${center + 13}" text-anchor="middle" dominant-baseline="middle" class="chart-center-subtitle">CHART</text>`,
+        "</svg>"
+    );
+
+    container.innerHTML = svg.join("");
 }

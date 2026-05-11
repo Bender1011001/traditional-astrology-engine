@@ -76,6 +76,7 @@ models_list.txt
 # Markdown - ignore all except project docs
 *.md
 !README.md
+!AGENTS.md
 !ASTROLOGY.md
 !CHANGELOG.md
 !CONTEXT.md

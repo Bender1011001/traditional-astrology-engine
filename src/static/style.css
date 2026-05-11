@@ -1043,6 +1043,181 @@ body.nav-open .nav-backdrop { display: block; }
   line-height: 1.85;
 }
 
+.chart-wheel-section {
+  padding-top: 1.75rem;
+}
+
+.chart-wheel-container {
+  width: min(100%, 720px);
+  margin: 1rem auto 0;
+  padding: clamp(0.25rem, 2vw, 0.85rem);
+  border: 1px solid rgba(232, 184, 75, 0.22);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(244, 218, 151, 0.08), transparent 58%),
+    linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.035), 0 18px 48px rgba(0,0,0,0.28);
+  overflow: hidden;
+}
+
+.chart-wheel-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+}
+
+.chart-wheel-plate {
+  fill: rgba(10, 10, 26, 0.62);
+  stroke: rgba(232, 184, 75, 0.12);
+}
+
+.chart-wheel-outer-halo {
+  fill: none;
+  stroke: rgba(232, 184, 75, 0.2);
+  stroke-width: 1.25;
+}
+
+.chart-wheel-zodiac-backdrop {
+  fill: url(#chartPaperGlow);
+  stroke: rgba(232, 184, 75, 0.55);
+  stroke-width: 1.4;
+}
+
+.zodiac-slice-0 {
+  fill: rgba(232, 184, 75, 0.06);
+}
+
+.zodiac-slice-1 {
+  fill: rgba(132, 160, 190, 0.045);
+}
+
+.zodiac-glyph {
+  fill: #f0d486;
+  filter: url(#wheelTextShadow);
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 27px;
+  font-weight: 500;
+}
+
+.zodiac-boundary {
+  stroke: rgba(232, 184, 75, 0.72);
+  stroke-width: 1.15;
+}
+
+.degree-tick {
+  stroke: rgba(224, 221, 213, 0.3);
+  stroke-width: 0.75;
+}
+
+.chart-ring {
+  fill: none;
+}
+
+.chart-ring-strong {
+  stroke: rgba(232, 184, 75, 0.52);
+  stroke-width: 1.2;
+}
+
+.chart-ring-soft {
+  stroke: rgba(224, 221, 213, 0.24);
+  stroke-width: 0.9;
+}
+
+.house-cusp {
+  stroke: rgba(224, 221, 213, 0.34);
+  stroke-width: 0.9;
+}
+
+.house-cusp-angular,
+.angle-axis {
+  stroke: rgba(232, 184, 75, 0.82);
+  stroke-width: 1.65;
+}
+
+.house-number {
+  fill: rgba(224, 221, 213, 0.62);
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.angle-label {
+  fill: #0a0a1a;
+  stroke: rgba(232, 184, 75, 0.95);
+  stroke-width: 4;
+  paint-order: stroke;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.aspect-field {
+  fill: rgba(255,255,255,0.018);
+  stroke: rgba(224, 221, 213, 0.12);
+  stroke-width: 0.8;
+}
+
+.aspect-line {
+  fill: none;
+  stroke-width: 1.1;
+  opacity: 0.46;
+}
+
+.aspect-conjunction { stroke: rgba(240, 212, 134, 0.7); }
+.aspect-sextile { stroke: rgba(115, 176, 223, 0.62); }
+.aspect-square,
+.aspect-opposition { stroke: rgba(218, 103, 103, 0.62); }
+.aspect-trine { stroke: rgba(126, 188, 143, 0.62); }
+
+.planet-leader {
+  stroke: rgba(232, 184, 75, 0.48);
+  stroke-width: 0.8;
+}
+
+.planet-dot {
+  fill: #f0d486;
+  stroke: #0a0a1a;
+  stroke-width: 1.4;
+}
+
+.planet-label-backdrop {
+  fill: rgba(9, 9, 15, 0.84);
+  stroke: rgba(232, 184, 75, 0.38);
+  stroke-width: 0.8;
+}
+
+.planet-label {
+  fill: #efe6c7;
+  filter: url(#wheelTextShadow);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.chart-wheel-center {
+  fill: rgba(9, 9, 15, 0.86);
+  stroke: rgba(232, 184, 75, 0.55);
+  stroke-width: 1;
+}
+
+.chart-center-title,
+.chart-center-subtitle {
+  fill: rgba(240, 212, 134, 0.9);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.chart-center-title {
+  font-size: 11px;
+}
+
+.chart-center-subtitle {
+  font-size: 8px;
+}
+
 .free-reading-cta {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -1088,10 +1263,340 @@ body.nav-open .nav-backdrop { display: block; }
   font-size: 0.75rem;
 }
 
+.geomancy-tool-shell {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.geomancy-option-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  color: rgba(255,255,255,0.75);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+}
+
+.geomancy-option-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: #c9a84c;
+}
+
+.chart-form-card textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.035);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.chart-form-card textarea:focus {
+  outline: none;
+  border-color: rgba(201,168,76,0.55);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+}
+
+.geomancy-manual-panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.035);
+}
+
+.geomancy-manual-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
+  gap: 0.75rem;
+}
+
+.geomancy-count-field {
+  display: grid;
+  gap: 0.3rem;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+}
+
+.geomancy-count-field input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.22);
+  color: #efe6c7;
+  text-align: center;
+  font: 600 0.98rem var(--font-body);
+}
+
+.geomancy-result-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.geomancy-kicker {
+  margin: 0 0 0.35rem;
+  color: rgba(201,168,76,0.78);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.geomancy-result-header h2 {
+  margin: 0 0 0.5rem;
+  color: #f0d486;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+}
+
+.geomancy-result-header p {
+  margin: 0;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+}
+
+.geomancy-score {
+  min-width: 116px;
+  padding: 1rem;
+  border: 1px solid rgba(201,168,76,0.24);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.24);
+  text-align: center;
+}
+
+.geomancy-score span,
+.geomancy-score small {
+  display: block;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.geomancy-score strong {
+  display: block;
+  color: #f0d486;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.geomancy-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.geomancy-summary-card,
+.geomancy-figure-card {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.035);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+.geomancy-summary-card {
+  padding: 1rem;
+}
+
+.geomancy-summary-card > span {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: rgba(201,168,76,0.78);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.geomancy-summary-card h3,
+.geomancy-figure-card h3 {
+  margin: 0.7rem 0 0.35rem;
+  color: #efe6c7;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.geomancy-summary-card p,
+.geomancy-figure-card p {
+  margin: 0;
+  color: rgba(255,255,255,0.66);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.geomancy-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.geomancy-meta-strip span {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(201,168,76,0.16);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.72);
+  font-size: 0.82rem;
+}
+
+.geomancy-shield {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.geomancy-figure-card {
+  min-height: 172px;
+  padding: 0.9rem;
+}
+
+.geomancy-role {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.76rem;
+}
+
+.geomancy-role strong {
+  color: #c9a84c;
+}
+
+.geomancy-dots {
+  display: grid;
+  gap: 0.3rem;
+  width: 54px;
+  margin: 0 auto;
+}
+
+.geomancy-dot-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 12px;
+}
+
+.geomancy-dot-row i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #f0d486;
+  box-shadow: 0 0 12px rgba(240,212,134,0.32);
+}
+
+.geomancy-notes,
+.geomancy-source-note {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.18);
+}
+
+.geomancy-notes h3 {
+  margin: 0 0 0.75rem;
+  color: #c9a84c;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+
+.geomancy-notes ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+}
+
+.geomancy-source-note p {
+  margin: 0 0 0.65rem;
+  color: rgba(255,255,255,0.66);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.geomancy-source-note p:last-child {
+  margin-bottom: 0;
+}
+
+.geomancy-explainer {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.geomancy-explainer-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+}
+
+.geomancy-explainer-card p {
+  color: rgba(255,255,255,0.74);
+  line-height: 1.75;
+}
+
+.geomancy-explainer-card p:last-child {
+  margin-bottom: 0;
+}
+
+.geomancy-principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.geomancy-principle-card {
+  min-height: 150px;
+  padding: 1.15rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+}
+
+.geomancy-principle-card h4 {
+  margin: 0 0 0.45rem;
+  color: #c9a84c;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.geomancy-principle-card p {
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.subscription-active {
+  border-color: rgba(84, 214, 155, 0.45) !important;
+  background: rgba(84, 214, 155, 0.08) !important;
+}
+
 @media (max-width: 600px) {
   .reading-card { padding: 1.5rem 1.25rem; }
   .result-conversion-bar { grid-template-columns: 1fr; }
   .big-three-grid { grid-template-columns: 1fr; }
+  .chart-wheel-container {
+    padding: 0.2rem;
+    border-radius: 8px;
+  }
+  .zodiac-glyph { font-size: 25px; }
+  .planet-label { font-size: 11px; }
   .cta-buttons { flex-direction: column; }
   .cta-buttons .btn-cta { width: 100%; min-width: 0; }
   .target-date-row {
@@ -1102,6 +1607,17 @@ body.nav-open .nav-backdrop { display: block; }
     width: 100%;
     min-height: 44px;
     justify-content: center;
+  }
+  .geomancy-result-header,
+  .geomancy-summary-grid,
+  .geomancy-shield {
+    grid-template-columns: 1fr;
+  }
+  .geomancy-score {
+    width: 100%;
+  }
+  .geomancy-manual-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

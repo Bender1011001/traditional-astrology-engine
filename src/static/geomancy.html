@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5T7HPNKL7V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-5T7HPNKL7V');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>What Is Geomancy? Rule-Based Shield Chart Calculator</title>
+  <meta name="description" content="Learn the strict rules of classical geomancy, then cast a free shield chart with mothers, daughters, nieces, witnesses, judge, and outcome." />
+  <meta name="keywords" content="what is geomancy, geomancy rules, geomantic shield chart, ilm al raml, classical geomancy, traditional divination, geomantic figures" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://traditional-astrology.com/geomancy.html" />
+  <meta property="og:title" content="What Is Geomancy? Rule-Based Shield Chart Calculator" />
+  <meta property="og:description" content="Learn why geomancy belongs beside traditional astrology: strict odd/even rules, derived figures, witnesses, judge, and outcome." />
+  <meta property="og:image" content="https://traditional-astrology.com/og-card.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://traditional-astrology.com/geomancy.html" />
+  <meta name="twitter:title" content="What Is Geomancy? Rule-Based Shield Chart Calculator" />
+  <meta name="twitter:description" content="Learn the strict rules of classical geomancy, then cast a free shield chart." />
+  <meta name="twitter:image" content="https://traditional-astrology.com/og-card.png" />
+
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="canonical" href="https://traditional-astrology.com/geomancy.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=rev20260511horarygeomancy1" />
+  <style id="mobile-nav-fallback">
+    @media (max-width: 820px) {
+      body { padding-top: var(--nav-height, 64px); }
+      .site-nav {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu-toggle { display: flex !important; }
+      .nav-links {
+        display: none !important;
+        position: fixed;
+        top: var(--nav-height, 64px);
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - var(--nav-height, 64px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        flex-direction: column;
+      }
+      .nav-links.active,
+      body.nav-open .nav-links {
+        display: flex !important;
+      }
+      .nav-backdrop.active,
+      body.nav-open .nav-backdrop {
+        display: block !important;
+      }
+    }
+  </style>
+  <script src="config.js?v=20260510geomancy1"></script>
+</head>
+
+<body>
+  <div class="cosmos-bg">
+    <div class="stars-layer stars-sm"></div>
+    <div class="stars-layer stars-md"></div>
+    <div class="stars-layer stars-lg"></div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+  </div>
+
+  <div id="navBackdrop" class="nav-backdrop"></div>
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <span class="brand-mark">☿</span>
+      <span class="brand-text">Traditional Astrology</span>
+    </a>
+    <button class="mobile-menu-toggle" aria-label="Open navigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links">
+      <a href="/#get-reading" class="nav-link">Get Your Reading</a>
+      <a href="/sample-reading.html" class="nav-link">Sample Reading</a>
+      <a href="/compatibility.html" class="nav-link">Compatibility</a>
+      <a href="/horary.html" class="nav-link">Horary Oracle</a>
+      <a href="/geomancy.html" class="nav-link">Geomancy</a>
+      <a href="/daily.html" class="nav-link">Daily Horoscopes</a>
+      <a id="navLoginBtn" href="#" class="nav-link hidden" aria-label="Log In">Sign In</a>
+      <a id="navAccountBtn" href="/account.html" class="nav-link" aria-label="My Account">My Account</a>
+      <a href="#geomancy-tool" class="nav-cta">Cast Shield</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="geomancy-tool">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Classical Geomancy · Shield Chart · Ilm al-Raml</p>
+        <h1 class="hero-title">What Is Geomancy?</h1>
+        <p class="hero-subtitle">
+          A strict question method built from odd and even marks. Cast four mothers, derive the daughters, nieces, witnesses, judge, and outcome, then inspect every rule that produced the shield.
+        </p>
+      </div>
+
+      <div class="geomancy-tool-shell">
+        <div class="chart-form-card">
+          <form id="geomancyForm" autocomplete="off">
+            <div class="form-field">
+              <label for="geomancyQuestion">Your Question</label>
+              <textarea id="geomancyQuestion" name="question" placeholder="e.g. Will the message arrive? Will this matter resolve?" required></textarea>
+            </div>
+
+            <label class="geomancy-option-row" for="manualCountsToggle">
+              <input type="checkbox" id="manualCountsToggle" />
+              <span>Enter my own sixteen line counts instead of using secure random counts.</span>
+            </label>
+
+            <div id="manualCountsPanel" class="geomancy-manual-panel hidden">
+              <p class="form-note" style="margin-top:0;">Enter four counts for each mother, top row to bottom row. Odd counts become one dot; even counts become two dots.</p>
+              <div id="manualCountsGrid" class="geomancy-manual-grid"></div>
+            </div>
+
+            <button type="submit" id="geomancySubmitBtn" class="btn-cta" style="width:100%;margin-top:1.25rem;">
+              <span class="btn-text">Cast Geomantic Shield</span>
+              <span class="btn-loading hidden">Casting...</span>
+            </button>
+            <p class="form-note">Historical Use Only. Not medical, financial, legal, emergency, psychological, or safety advice.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="error-section hidden" id="errorSection">
+      <div class="error-card">
+        <h3>Could not cast the shield</h3>
+        <p id="errorMessage"></p>
+      </div>
+    </section>
+
+    <section class="reading-section hidden" id="geomancyResultSection">
+      <div class="reading-card" id="geomancyResultContent"></div>
+      <div class="chart-actions" style="display:flex;justify-content:center;margin-top:2rem;">
+        <button id="castAgainBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">Cast Again</button>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <h2 class="section-heading">How This Cast Is Built</h2>
+      <p class="section-sub">A machine-usable implementation of the procedural spine from the dossier.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Four Mothers</h3>
+          <p>The first sixteen marks are reduced to odd or even rows, producing four mother figures.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Parity Combination</h3>
+          <p>Daughters are read from the mothers; nieces, witnesses, and judge are made by row-wise odd/even combination.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Judge and Outcome</h3>
+          <p>The fifteenth figure is checked for evenness, then the outcome is formed from the first mother and the judge.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="why-geomancy">
+      <h2 class="section-heading">Why Geomancy Belongs Here</h2>
+      <p class="section-sub">It is not modern personality content. It is a rule-governed classical question system.</p>
+      <div class="geomancy-explainer">
+        <div class="geomancy-explainer-card">
+          <p>Geomancy is an older divinatory art known in the Arabic tradition as <em>ilm al-raml</em>, the science of sand. A question is reduced to a set of odd and even rows, and those rows generate a full shield chart by fixed procedure.</p>
+          <p>That is why it fits this site. Traditional Astrology already favors techniques where the calculation can be audited: sect, dignities, house rulership, planetary motion, and horary perfection. Geomancy has the same appeal. The first figures determine the rest; the witnesses determine the judge; the judge must pass a validity rule.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="geomancy-rules">
+      <h2 class="section-heading">The Strict Rules</h2>
+      <p class="section-sub">The result is derived, not improvised.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Odd or Even Lines</h3>
+          <p>Each line count is reduced to one dot if odd, two dots if even. Four rows make one figure, and the first sixteen rows make the four mothers.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Daughters From Rows</h3>
+          <p>The daughters are not separately chosen. They are extracted across the mothers: top rows form the first daughter, second rows form the second, and so on.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Combination by Parity</h3>
+          <p>Later figures come from combining rows. Matching rows produce two dots; different rows produce one dot. This creates the nieces, witnesses, judge, and final outcome.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Judge Validity</h3>
+          <p>The judge, the fifteenth figure, must have an even total. If the judge has an odd total, the cast is invalid and should be rejected rather than interpreted.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="shield-positions">
+      <h2 class="section-heading">The Shield Positions</h2>
+      <p class="section-sub">Sixteen places, each generated from the figures before it.</p>
+      <div class="geomancy-principles-grid">
+        <div class="geomancy-principle-card">
+          <h4>Mothers</h4>
+          <p>Positions 1-4 are the only figures directly cast from line counts. They are the seed of the whole chart.</p>
+        </div>
+        <div class="geomancy-principle-card">
+          <h4>Daughters</h4>
+          <p>Positions 5-8 are drawn from the rows of the mothers. They reveal what was already contained in the original cast.</p>
+        </div>
+        <div class="geomancy-principle-card">
+          <h4>Nieces</h4>
+          <p>Positions 9-12 are generated by combining mothers and daughters, narrowing the chart toward judgement.</p>
+        </div>
+        <div class="geomancy-principle-card">
+          <h4>Witnesses</h4>
+          <p>Positions 13 and 14 are the questioner and asked-about witnesses, representing the two sides brought before the judge.</p>
+        </div>
+        <div class="geomancy-principle-card">
+          <h4>Judge</h4>
+          <p>Position 15 is the balancing figure. It must be even, and it carries the strongest summary of the cast.</p>
+        </div>
+        <div class="geomancy-principle-card">
+          <h4>Outcome</h4>
+          <p>Position 16 reconciles the first mother with the judge, giving a final derived outcome rather than a new random sign.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="geomancy-vs-horary">
+      <h2 class="section-heading">Geomancy and Horary</h2>
+      <p class="section-sub">Two question systems, two rule sets.</p>
+      <div class="geomancy-explainer">
+        <div class="geomancy-explainer-card">
+          <p>Geomancy answers through a shield chart derived from parity. Horary answers through an astrological chart for the moment and place of the question. Both are useful here because both are structured systems with strict internal rules.</p>
+          <p>The free geomancy tool is best for seeing the shield logic directly. The Horary Oracle is the paid planetary version: $5/month for unlimited focused questions, calculated from Swiss Ephemeris positions, Regiomontanus houses, significators, applying aspects, reception, and strictures against judgement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark final-cta">
+      <h2 class="section-heading">Ask a Planetary Question Instead</h2>
+      <p class="section-sub">Horary is the astrological companion to geomancy: a deterministic rules engine for focused questions, unlocked for $5/month.</p>
+      <a href="/horary.html" class="btn-cta">Open the Horary Oracle</a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-mark">☿</span>
+          <span>Traditional Astrology</span>
+        </div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/horary.html">Horary</a>
+          <a href="/geomancy.html">Geomancy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/privacy.html">Privacy</a>
+        </div>
+        <p class="footer-legal">
+          © 2026 Traditional Astrology. All rights reserved.<br>
+          Historical Use Only. For entertainment, historical, and spiritual research only. Not medical, financial, legal, psychological, emergency, or safety advice.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="/js/auth.js?v=astro-v16-account-nav"></script>
+  <script type="module" src="/js/geomancy-app.js?v=20260510geomancy1"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+
+</html>

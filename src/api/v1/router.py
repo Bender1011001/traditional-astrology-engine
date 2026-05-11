@@ -7,6 +7,7 @@ from src.api.v1.endpoints import (
     charts,
     developer,
     forensic,
+    geomancy,
     meta,
     mundane,
     owner,
@@ -26,6 +27,7 @@ api_router.include_router(developer.router, prefix="/developer", tags=["develope
 api_router.include_router(owner.router, prefix="/owner", tags=["owner"])
 api_router.include_router(account.router, prefix="/account", tags=["account"])
 api_router.include_router(meta.router, tags=["meta"])
+api_router.include_router(geomancy.router, tags=["geomancy"])
 api_router.include_router(premium_endpoint.router, prefix="/premium", tags=["premium"])
 
 from src.api.v1.endpoints import guest_checkout

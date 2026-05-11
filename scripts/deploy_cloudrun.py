@@ -1,12 +1,12 @@
 """Build and deploy the astrology engine to Google Cloud Run.
 
 Usage:
-    python scripts/deploy_cloudrun.py [--build-only] [--deploy-only] [--run-tests]
+    python scripts/deploy_cloudrun.py [--build-only] [--deploy-only] [--run-tests] [--skip-env-yaml]
 
 Requires:
     - gcloud CLI authenticated
     - Project set to astrology-engine-prod
-    - env.yaml with environment variables (generate via scripts/gen_env_yaml.py)
+    - env.yaml with environment variables for local deploys (generate via scripts/gen_env_yaml.py)
 """
 import subprocess
 import sys
@@ -80,6 +80,7 @@ def main():
     build_only = "--build-only" in args
     deploy_only = "--deploy-only" in args
     run_tests = "--run-tests" in args
+    skip_env_yaml = "--skip-env-yaml" in args
 
     print("\nAstrology Engine Deployment")
     print(f"   Project: {PROJECT_ID}")
@@ -107,7 +108,12 @@ def main():
     # Step 2: Deploy to Cloud Run
     if not build_only:
         print("\n\nSTEP 2: Deploying to Cloud Run...")
-        ensure_env_yaml()
+        env_vars_flag = ""
+        if skip_env_yaml:
+            print("   Skipping env.yaml; preserving existing Cloud Run non-secret environment variables.")
+        else:
+            ensure_env_yaml()
+            env_vars_flag = "--env-vars-file env.yaml "
 
         deploy_cmd = (
             f"gcloud run deploy {SERVICE_NAME} "
@@ -122,7 +128,7 @@ def main():
             f"--max-instances 3 "
             f"--timeout 300 "
             f"--set-cloudsql-instances {CLOUD_SQL_INSTANCE} "
-            f"--env-vars-file env.yaml "
+            f"{env_vars_flag}"
             f"--set-secrets {','.join(f'{env}={secret}:latest' for env, secret in SECRET_ENV_VARS.items())} "
             f"--project {PROJECT_ID} "
             f"--quiet"

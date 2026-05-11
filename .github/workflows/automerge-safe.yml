@@ -1,0 +1,21 @@
+name: automerge_safe
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge_safe:
+    if: contains(github.event.pull_request.labels.*.name, 'autofix-safe')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable auto-merge for safe autofix PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr merge "$PR_URL" --squash --auto --delete-branch

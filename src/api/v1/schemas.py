@@ -59,6 +59,12 @@ class HoraryRequest(BaseModel):
     longitude: Optional[float] = Field(None, ge=-180.0, le=180.0)
 
 
+class GeomancyRequest(BaseModel):
+    question: str = Field(..., max_length=500)
+    mother_counts: Optional[List[int]] = Field(None, min_items=16, max_items=16)
+    mothers: Optional[List[List[int]]] = Field(None, min_items=4, max_items=4)
+
+
 class WorldRequest(BaseModel):
     date: Optional[str] = Field(None, max_length=20)
     time: Optional[str] = Field(None, max_length=20)

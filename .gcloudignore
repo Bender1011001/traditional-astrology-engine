@@ -4,3 +4,8 @@
 !LICENSE
 !src/
 !src/**
+src/.env
+src/.env.*
+src/.pytest_cache/
+src/**/__pycache__/
+src/**/*.pyc

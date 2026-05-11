@@ -9,6 +9,7 @@
  */
 
 import { apiFetch } from './api.js';
+import { trackPurchase } from './config.js';
 import { renderChartWheel } from './chart-graphics.js';
 
 // ─── State ───
@@ -319,6 +320,10 @@ async function generatePaidReading(sessionId) {
         }
 
         const data = await resp.json();
+        trackPurchase(data.purchase || {
+            transaction_id: sessionId,
+            tier: data.tier || "unknown",
+        });
         trackConversionEvent("paid_generation_started", { tier: data.tier || "unknown" });
         pollForCompletion(data.task_id, -1); // -1 = paid, no limit
     } catch (err) {
@@ -1040,10 +1045,10 @@ function buildPremiumTrialTopBanner() {
             <div class="premium-trial-banner-inner">
                 <span class="premium-trial-badge">✦ LIMITED TIME</span>
                 <p class="premium-trial-headline">
-                    Your <strong>free premium reading</strong> is generating in the background.
+                    Your <strong>free Complete Analysis</strong> is generating in the background.
                 </p>
                 <p class="premium-trial-sub">
-                    Each visitor gets one free LLM-generated report. Read your instant chart below while it finishes; after this, additional premium reports are paid.
+                    Each visitor connection gets one free best-tier LLM report. Read your instant chart below while it finishes; after this, additional premium reports are paid.
                 </p>
             </div>
         </div>
@@ -1056,7 +1061,7 @@ function buildPremiumTrialTopBannerComplete() {
             <div class="premium-trial-banner-inner">
                 <span class="premium-trial-badge">✦ READY</span>
                 <p class="premium-trial-headline">
-                    Your <strong>free premium reading</strong> is complete. Scroll down to read it.
+                    Your <strong>free Complete Analysis</strong> is complete. Scroll down to read it.
                 </p>
             </div>
         </div>
@@ -1069,8 +1074,8 @@ function buildPremiumLoadingSection() {
             <div class="premium-loading-header">
                 <div class="premium-loading-orb"></div>
                 <div>
-                    <h3 class="premium-loading-title">Premium Reading Generating</h3>
-                    <p class="premium-loading-subtitle">LLM analysis in progress &mdash; usually under a minute</p>
+                    <h3 class="premium-loading-title">Complete Analysis Generating</h3>
+                    <p class="premium-loading-subtitle">Best-tier LLM analysis in progress &mdash; usually a few minutes</p>
                 </div>
             </div>
             <div class="premium-loading-progress-track">
@@ -1086,9 +1091,9 @@ function buildRenderedPremiumSection(html, chartEventId) {
     return `
         <div class="premium-reading-section">
             <div class="premium-reading-header">
-                <span class="premium-reading-badge">✦ FREE PREMIUM READING</span>
-                <h2 class="premium-reading-title">Your Full Traditional Astrology Report</h2>
-                <p class="premium-reading-subtitle">Your one free LLM-generated report for this visitor connection</p>
+                <span class="premium-reading-badge">✦ FREE COMPLETE ANALYSIS</span>
+                <h2 class="premium-reading-title">Your Complete Traditional Astrology Analysis</h2>
+                <p class="premium-reading-subtitle">Your one free best-tier LLM report for this visitor connection</p>
                 <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width:auto; margin-top:0.75rem;">
                     Print / Save as PDF
                 </button>
@@ -1105,10 +1110,10 @@ function buildPremiumBottomBanner() {
     return `
         <div class="premium-bottom-banner">
             <div class="premium-bottom-banner-inner">
-                <span class="premium-trial-badge">✦ ONE FREE PREMIUM REPORT</span>
+                <span class="premium-trial-badge">✦ ONE FREE COMPLETE ANALYSIS</span>
                 <h3 class="premium-bottom-title">Want another report?</h3>
                 <p class="premium-bottom-sub">
-                    This visitor connection has used its free premium generation.
+                    This visitor connection has used its free best-tier generation.
                     Additional reports are available through secure Stripe checkout; email is recommended for receipts and delivery support.
                 </p>
                 <div class="result-conversion-actions" style="justify-content:center; margin-top:1rem;">

@@ -31,6 +31,61 @@ _REPORT_PRICE_CACHE: dict[str, str | None] = {}
 _GUEST_ONE_TIME_TIERS = {"full_reading", "premium_audit", "forensic_nativity"}
 
 
+def _stripe_field(obj, key, default=None):
+    if obj is None:
+        return default
+    if isinstance(obj, dict):
+        return obj.get(key, default)
+    try:
+        return obj[key]
+    except (KeyError, TypeError, AttributeError):
+        return getattr(obj, key, default)
+
+
+def _stripe_mapping(obj) -> dict:
+    if obj is None:
+        return {}
+    if isinstance(obj, dict):
+        return obj
+
+    to_dict_recursive = getattr(obj, "to_dict_recursive", None)
+    if callable(to_dict_recursive):
+        return to_dict_recursive()
+
+    to_dict = getattr(obj, "to_dict", None)
+    if callable(to_dict):
+        return to_dict()
+
+    return {}
+
+
+def _checkout_purchase_metadata(session, plan_tier: str | None) -> dict:
+    session_id = str(_stripe_field(session, "id", "") or "")
+    amount_cents = int(_stripe_field(session, "amount_total", 0) or 0)
+    currency = str(_stripe_field(session, "currency", "usd") or "usd").upper()
+    tier = str(plan_tier or "unknown")
+    value = round(amount_cents / 100.0, 2)
+    item_name = "Horary Oracle Unlimited" if tier == "horary" else tier
+    item_category = "subscription" if _stripe_field(session, "subscription") else "checkout"
+    return {
+        "transaction_id": session_id,
+        "order_id": session_id,
+        "currency": currency,
+        "value": value,
+        "amount_cents": amount_cents,
+        "tier": tier,
+        "items": [
+            {
+                "item_id": tier,
+                "item_name": item_name,
+                "item_category": item_category,
+                "price": value,
+                "quantity": 1,
+            }
+        ],
+    }
+
+
 def _lookup_onetime_price_id(
     *, product_name: str, unit_amount: int, currency: str = "usd"
 ) -> str | None:
@@ -99,7 +154,7 @@ async def list_public_plans(db: Session = Depends(get_db)):
     Purpose:
     - Frontend can hide/disable tiers whose Stripe Price IDs are not configured.
     """
-    tiers = ["scholar", "practitioner", "studio"]
+    tiers = ["horary", "scholar", "practitioner", "studio"]
     plans = db.query(SubscriptionPlan).filter(SubscriptionPlan.tier.in_(tiers)).all()
     by_tier = {p.tier: p for p in plans}
 
@@ -158,6 +213,7 @@ async def create_checkout_session(
       - 'full': $197 (Forensic Packet)
 
     - Subscriptions (B2B):
+    - 'horary': $5/mo (unlimited deterministic horary questions)
     - 'practitioner': $147/mo (unlimited calculations, 100 API calls/day, 100 saved charts)
     - 'studio': $497/mo (unlimited calculations, unlimited API, unlimited saved charts)
     """
@@ -269,7 +325,7 @@ async def create_checkout_session(
     # ----------------------------
     # Subscription tiers
     # ----------------------------
-    if tier not in {"scholar", "practitioner", "studio"}:
+    if tier not in {"horary", "scholar", "practitioner", "studio"}:
         raise HTTPException(status_code=400, detail="Invalid tier")
 
     try:
@@ -371,6 +427,7 @@ async def verify_checkout_session(
         "chart_hash": chart_hash,
         "chart_data": chart_data,  # Return so frontend can repopulate if needed
         "tier": plan_tier,
+        "purchase": _checkout_purchase_metadata(session, plan_tier),
     }
 
 
@@ -418,13 +475,13 @@ async def start_trial(
     """
     Start a no-card trial for an existing account.
 
-    Allowed tiers: practitioner, studio.
+    Allowed tiers: horary, scholar, practitioner, studio.
     """
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
 
     tier_norm = (tier or "").strip().lower()
-    if tier_norm not in {"scholar", "practitioner", "studio"}:
+    if tier_norm not in {"horary", "scholar", "practitioner", "studio"}:
         raise HTTPException(status_code=400, detail="Invalid tier")
 
     # Don't allow overwriting a Stripe-managed subscription.
@@ -477,14 +534,18 @@ async def stripe_webhook(
     # SubscriptionService, which would otherwise silently drop them.
     if event_type == "checkout.session.completed":
         session_obj = event["data"]["object"]
-        metadata = session_obj.get("metadata") or {}
+        metadata = _stripe_mapping(_stripe_field(session_obj, "metadata", {}))
 
-        tier = str(metadata.get("tier", "") or "").strip().lower()
-        user_id = metadata.get("user_id") or session_obj.get("client_reference_id")
+        tier = str(_stripe_field(metadata, "tier", "") or "").strip().lower()
+        user_id = _stripe_field(metadata, "user_id") or _stripe_field(
+            session_obj, "client_reference_id"
+        )
 
         if tier in _GUEST_ONE_TIME_TIERS and not user_id:
-            session_id = session_obj.get("id", "")
-            payment_status = session_obj.get("payment_status", "")
+            session_id = str(_stripe_field(session_obj, "id", "") or "")
+            payment_status = str(
+                _stripe_field(session_obj, "payment_status", "") or ""
+            )
 
             if payment_status == "paid" and session_id:
                 # Idempotency — skip if task already exists
@@ -496,7 +557,7 @@ async def stripe_webhook(
                 if not existing:
                     import json as _json
 
-                    chart_data_str = metadata.get("chart_data", "{}")
+                    chart_data_str = _stripe_field(metadata, "chart_data", "{}")
                     try:
                         chart_data = _json.loads(chart_data_str)
                     except (TypeError, ValueError) as e:
@@ -511,8 +572,11 @@ async def stripe_webhook(
                     # Capture customer email
                     customer_email = None
                     try:
-                        cd = session_obj.get("customer_details") or {}
-                        customer_email = cd.get("email") or session_obj.get(
+                        cd = _stripe_field(session_obj, "customer_details", {}) or {}
+                        customer_email = _stripe_field(
+                            cd, "email"
+                        ) or _stripe_field(
+                            session_obj,
                             "customer_email"
                         )
                     except Exception as e:

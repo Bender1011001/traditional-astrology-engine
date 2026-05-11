@@ -45,8 +45,8 @@ class Settings(BaseSettings):
     STRIPE_PRICE_FULL_READING: str = ""
     STRIPE_PRICE_PREMIUM_AUDIT: str = ""
 
-    # Cheap one-time Stripe test product: one paid horary question for $5.
-    STRIPE_PRICE_HORARY_QUESTION: str = ""
+    # Horary Oracle subscription: $5/month unlimited deterministic horary questions.
+    STRIPE_PRICE_HORARY_MONTHLY: str = ""
 
     # Public reading monetization:
     # - First N free readings per visitor per rolling window.

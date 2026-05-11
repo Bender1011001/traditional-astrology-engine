@@ -10,8 +10,8 @@
  * on subsequent visits, even offline.
  */
 
-const CACHE_NAME = "astro-v18-print-pdf";
-const RUNTIME_CACHE = "astro-runtime-v18-print-pdf";
+const CACHE_NAME = "astro-v22-geomancy-horary-subscription";
+const RUNTIME_CACHE = "astro-runtime-v22-geomancy-horary-subscription";
 
 // Core app shell — cached on install.
 // IMPORTANT: Do NOT include query-string cache busters here.
@@ -24,10 +24,15 @@ const APP_SHELL = [
   "/about.html",
   "/faq.html",
   "/horary.html",
+  "/geomancy.html",
   "/style.css",
   "/config.js",
   "/consent.js",
+  "/js/config.js",
+  "/js/reading-app.js",
+  "/js/chart-graphics.js",
   "/js/horary-app.js",
+  "/js/geomancy-app.js",
   "/js/auth.js",
   "/js/api.js",
   "/manifest.json",

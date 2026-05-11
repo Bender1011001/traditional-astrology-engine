@@ -57,6 +57,23 @@ def seed_plans() -> None:
                 },
             },
             {
+                "tier": "horary",
+                "chart_quota": None,
+                "api_quota": 0,
+                "price_monthly": 5.00,
+                "price_annual": 0.00,
+                "stripe_price_id_monthly": (
+                    getattr(settings, "STRIPE_PRICE_HORARY_MONTHLY", "") or ""
+                ).strip()
+                or None,
+                "stripe_price_id_annual": None,
+                "features": {
+                    "api_access": False,
+                    "horary_unlimited": True,
+                    "deterministic_engine": True,
+                },
+            },
+            {
                 "tier": "practitioner",
                 "chart_quota": None,
                 "api_quota": 500,

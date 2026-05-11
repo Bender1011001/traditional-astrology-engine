@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 
 import pytest
@@ -8,9 +9,17 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from src.api.v1.endpoints import billing, guest_checkout, horary
+from src.api.v1.auth import create_access_token
 from src.app import app
 from src.database.core import Base, get_db
-from src.database.models import AsyncReportTask, GuestRequest
+from src.database.models import (
+    AsyncReportTask,
+    GuestRequest,
+    SubscriptionPlan,
+    UsageRecord,
+    User,
+    UserSubscription,
+)
 
 
 @pytest.fixture()
@@ -131,17 +140,129 @@ async def test_guest_checkout_rejects_unknown_tier_without_stripe(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_paid_horary_checkout_creates_five_dollar_session(monkeypatch):
+async def test_generate_paid_reading_returns_ga4_purchase_metadata(
+    db_session, monkeypatch
+):
+    background_calls = []
+    chart_data = {
+        "date": "1990-01-01",
+        "time": "12:00",
+        "city": "London",
+        "state": "United Kingdom",
+        "name": "Paid Guest",
+    }
+    paid_session = SimpleNamespace(
+        id="cs_test_paid_full",
+        payment_status="paid",
+        amount_total=2500,
+        currency="usd",
+        metadata={
+            "order_id": "ord_full",
+            "tier": "full_reading",
+            "chart_data": json.dumps(chart_data),
+        },
+        customer_details=SimpleNamespace(email="paid@example.com"),
+        customer_email=None,
+    )
+
+    monkeypatch.setattr(guest_checkout.settings, "STRIPE_SECRET_KEY", " sk_test_unit ")
+    monkeypatch.setattr(
+        guest_checkout.stripe.checkout.Session,
+        "retrieve",
+        lambda session_id: paid_session,
+    )
+
+    async def fake_generate_premium_report_task(task_id, request_meta):
+        background_calls.append((task_id, request_meta))
+
+    monkeypatch.setattr(
+        guest_checkout,
+        "generate_premium_report_task",
+        fake_generate_premium_report_task,
+    )
+    monkeypatch.setattr(guest_checkout, "notify_chart_created", lambda *_args: None)
+
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="https://traditional-astrology.test"
+    ) as ac:
+        response = await ac.post(
+            "/api/v1/guest/generate-paid",
+            params={"session_id": "cs_test_paid_full"},
+            headers={"X-Forwarded-For": "203.0.113.55"},
+        )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["task_id"] == "cs_test_paid_full"
+    assert data["tier"] == "full_reading"
+    assert data["purchase"] == {
+        "transaction_id": "cs_test_paid_full",
+        "order_id": "ord_full",
+        "currency": "USD",
+        "value": 25.0,
+        "amount_cents": 2500,
+        "tier": "full_reading",
+        "items": [
+            {
+                "item_id": "full_reading",
+                "item_name": "Full Natal Chart Reading",
+                "item_category": "paid_reading",
+                "price": 25.0,
+                "quantity": 1,
+            }
+        ],
+    }
+
+    task = (
+        db_session.query(AsyncReportTask)
+        .filter(AsyncReportTask.id == "cs_test_paid_full")
+        .one()
+    )
+    assert task.request_meta["tier"] == "full_reading"
+    assert task.request_meta["customer_email"] == "paid@example.com"
+
+    usage = (
+        db_session.query(GuestRequest).filter_by(request_type="paid_full_reading").one()
+    )
+    assert usage.ip_address == "203.0.113.55"
+    assert background_calls[0][0] == "cs_test_paid_full"
+
+
+def _create_user(db_session, user_id="user_horary", email="horary@example.com"):
+    user = User(
+        id=user_id,
+        email=email,
+        name="Horary User",
+        password_hash="not-used",
+        salt="",
+    )
+    db_session.add(user)
+    db_session.commit()
+    return user
+
+
+def _auth_header(user_id="user_horary"):
+    token = create_access_token("", "free", data={"user_id": user_id})
+    return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.mark.asyncio
+async def test_horary_subscription_checkout_creates_monthly_session(
+    db_session, monkeypatch
+):
     created_kwargs = {}
+    _create_user(db_session)
 
     monkeypatch.setattr(horary.settings, "STRIPE_SECRET_KEY", " sk_test_unit\r\n")
-    monkeypatch.setattr(horary, "_get_or_create_horary_price", lambda: "price_horary")
+    monkeypatch.setattr(
+        horary, "_get_or_create_horary_subscription_price", lambda: "price_horary_monthly"
+    )
 
     def fake_session_create(**kwargs):
         created_kwargs.update(kwargs)
         return SimpleNamespace(
-            id="cs_test_horary",
-            url="https://checkout.stripe.test/cs_test_horary",
+            id="cs_test_horary_sub",
+            url="https://checkout.stripe.test/cs_test_horary_sub",
         )
 
     monkeypatch.setattr(horary.stripe.checkout.Session, "create", fake_session_create)
@@ -150,57 +271,62 @@ async def test_paid_horary_checkout_creates_five_dollar_session(monkeypatch):
         transport=ASGITransport(app=app), base_url="https://traditional-astrology.test"
     ) as ac:
         response = await ac.post(
-            "/api/v1/horary/checkout",
-            json={
-                "question": "Will I receive a reply?",
-                "city": "London",
-                "state": "UK",
-            },
+            "/api/v1/horary/subscription/checkout",
+            headers=_auth_header(),
         )
 
     assert response.status_code == 200
     assert horary.stripe.api_key == "sk_test_unit"
-    assert response.json()["url"] == "https://checkout.stripe.test/cs_test_horary"
-    assert created_kwargs["mode"] == "payment"
-    assert created_kwargs["line_items"] == [{"price": "price_horary", "quantity": 1}]
+    assert response.json()["url"] == "https://checkout.stripe.test/cs_test_horary_sub"
+    assert created_kwargs["mode"] == "subscription"
+    assert created_kwargs["line_items"] == [
+        {"price": "price_horary_monthly", "quantity": 1}
+    ]
     assert created_kwargs["success_url"].startswith(
-        "https://traditional-astrology.test/horary.html?horary_paid=success"
+        "https://traditional-astrology.test/horary.html?horary_subscribed=success"
     )
     assert created_kwargs["cancel_url"] == (
-        "https://traditional-astrology.test/horary.html?horary_paid=cancelled"
+        "https://traditional-astrology.test/horary.html?horary_subscribed=cancelled"
     )
-    assert created_kwargs["metadata"]["purchase_type"] == "horary_question"
-    assert created_kwargs["metadata"]["tier"] == "horary_question"
-    assert created_kwargs["metadata"]["question"] == "Will I receive a reply?"
-    assert created_kwargs["metadata"]["city"] == "London"
+    assert created_kwargs["customer_email"] == "horary@example.com"
+    assert created_kwargs["client_reference_id"] == "user_horary"
+    assert created_kwargs["metadata"]["purchase_type"] == "horary_subscription"
+    assert created_kwargs["metadata"]["tier"] == "horary"
+    assert created_kwargs["metadata"]["plan_tier"] == "horary"
+
+    plan = db_session.query(SubscriptionPlan).filter_by(tier="horary").one()
+    assert float(plan.price_monthly) == 5.0
+    assert plan.stripe_price_id_monthly == "price_horary_monthly"
 
 
 @pytest.mark.asyncio
-async def test_paid_horary_answer_verifies_payment_and_persists(
+async def test_subscriber_horary_answer_requires_active_subscription_and_persists(
     db_session, monkeypatch
 ):
-    monkeypatch.setattr(horary.settings, "STRIPE_SECRET_KEY", " sk_test_unit\r\n")
-
-    paid_session = SimpleNamespace(
-        id="cs_test_paid_horary",
-        payment_status="paid",
-        metadata={
-            "purchase_type": "horary_question",
-            "tier": "horary_question",
-            "order_id": "ord_horary",
-            "question": "Will the package arrive?",
-            "city": "London",
-            "state": "UK",
-            "date": "",
-            "time": "",
-            "latitude": "",
-            "longitude": "",
-        },
+    user = _create_user(db_session)
+    plan = SubscriptionPlan(
+        id="plan_horary",
+        tier="horary",
+        chart_quota=None,
+        api_quota=0,
+        price_monthly=5.00,
+        price_annual=0.00,
+        stripe_price_id_monthly="price_horary_monthly",
+        features={"horary_unlimited": True},
     )
-
-    def fake_retrieve(session_id):
-        assert session_id == "cs_test_paid_horary"
-        return paid_session
+    db_session.add(plan)
+    db_session.add(
+        UserSubscription(
+            user_id=user.id,
+            plan_id=plan.id,
+            status="active",
+            stripe_customer_id="cus_horary",
+            stripe_subscription_id="sub_horary",
+            current_period_start=datetime.now(timezone.utc),
+            current_period_end=datetime.now(timezone.utc) + timedelta(days=30),
+        )
+    )
+    db_session.commit()
 
     def fake_build_answer(payload):
         return {
@@ -221,41 +347,51 @@ async def test_paid_horary_answer_verifies_payment_and_persists(
             },
         }
 
-    monkeypatch.setattr(horary.stripe.checkout.Session, "retrieve", fake_retrieve)
     monkeypatch.setattr(horary, "_build_horary_answer", fake_build_answer)
 
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="https://traditional-astrology.test"
     ) as ac:
         response = await ac.post(
-            "/api/v1/horary/paid-answer",
-            params={"session_id": "cs_test_paid_horary"},
-            headers={"X-Forwarded-For": "203.0.113.42"},
+            "/api/v1/horary/subscriber-answer",
+            json={
+                "question": "Will the package arrive?",
+                "city": "London",
+                "state": "UK",
+            },
+            headers={**_auth_header(), "X-Forwarded-For": "203.0.113.42"},
         )
 
     assert response.status_code == 200
     data = response.json()
     assert data["paid"] is True
+    assert data["subscription_active"] is True
     assert data["question"] == "Will the package arrive?"
-    assert data["session_id"] == "cs_test_paid_horary"
     assert data["oracle"]["verdict"] == "YES"
+    assert data["access"]["active"] is True
+    assert data["access"]["uses_llm"] is False
 
     task = (
         db_session.query(AsyncReportTask)
-        .filter(AsyncReportTask.id == "cs_test_paid_horary")
+        .filter(AsyncReportTask.id == data["task_id"])
         .one()
     )
     assert task.status == "completed"
-    assert task.request_meta["tier"] == "horary_question"
-    assert task.request_meta["order_id"] == "ord_horary"
+    assert task.request_meta["tier"] == "horary_subscription"
+    assert task.request_meta["user_id"] == "user_horary"
     assert task.result_json["oracle"]["verdict"] == "YES"
 
     usage = (
         db_session.query(GuestRequest)
-        .filter_by(request_type="paid_horary_question")
+        .filter_by(request_type="subscription_horary_question")
         .one()
     )
     assert usage.ip_address == "203.0.113.42"
+    usage_record = db_session.query(UsageRecord).filter_by(
+        resource_type="horary_question"
+    ).one()
+    assert usage_record.user_id == "user_horary"
+    assert usage_record.cost_credits == 1
 
 
 def test_get_or_create_price_skips_inactive_configured_product(monkeypatch):
@@ -332,12 +468,12 @@ async def test_guest_checkout_webhook_fulfills_current_guest_tier(
         },
     }
 
-    monkeypatch.setattr(billing.settings, "STRIPE_WEBHOOK_SECRET", " whsec_unit\r\n")
+    monkeypatch.setattr(billing.settings, "STRIPE_WEBHOOK_SECRET", " unit_webhook_secret\r\n")
 
     def fake_construct_event(payload, sig_header, secret):
         assert payload == b"{}"
         assert sig_header == "sig_unit"
-        assert secret == "whsec_unit"
+        assert secret == "unit_webhook_secret"
         return event
 
     async def fake_generate_premium_report_task(task_id, request_meta):
@@ -384,6 +520,107 @@ async def test_guest_checkout_webhook_fulfills_current_guest_tier(
                 "tier": "full_reading",
                 "report_iterations": 1,
                 "customer_email": "paid@example.com",
+            },
+        )
+    ]
+
+
+@pytest.mark.asyncio
+async def test_guest_checkout_webhook_accepts_stripe_object_without_get(
+    db_session, monkeypatch
+):
+    class StripeLike:
+        def __init__(self, **fields):
+            self._fields = fields
+
+        def __getitem__(self, key):
+            if key in self._fields:
+                return self._fields[key]
+            raise KeyError(key)
+
+        def __getattr__(self, key):
+            try:
+                return self[key]
+            except KeyError as exc:
+                raise AttributeError(key) from exc
+
+        def to_dict_recursive(self):
+            converted = {}
+            for key, value in self._fields.items():
+                if hasattr(value, "to_dict_recursive"):
+                    converted[key] = value.to_dict_recursive()
+                else:
+                    converted[key] = value
+            return converted
+
+    background_calls = []
+    chart_data = {
+        "date": "1982-03-09",
+        "time": "19:00",
+        "city": "Tecpan",
+        "state": "Mexico",
+        "name": "Paid Guest",
+    }
+    session_obj = StripeLike(
+        id="cs_test_guest_webhook_stripe_object",
+        payment_status="paid",
+        metadata=StripeLike(
+            tier="premium_audit",
+            chart_data=json.dumps(chart_data),
+        ),
+        customer_details=StripeLike(email="object-paid@example.com"),
+    )
+    event = {
+        "type": "checkout.session.completed",
+        "data": {"object": session_obj},
+    }
+
+    monkeypatch.setattr(billing.settings, "STRIPE_WEBHOOK_SECRET", "unit_webhook_secret")
+    monkeypatch.setattr(
+        billing.stripe.Webhook,
+        "construct_event",
+        lambda _payload, _sig_header, _secret: event,
+    )
+
+    async def fake_generate_premium_report_task(task_id, request_meta):
+        background_calls.append((task_id, request_meta))
+
+    monkeypatch.setattr(
+        billing, "generate_premium_report_task", fake_generate_premium_report_task
+    )
+
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="https://traditional-astrology.test"
+    ) as ac:
+        response = await ac.post(
+            "/api/v1/billing/webhook",
+            content=b"{}",
+            headers={"stripe-signature": "sig_unit"},
+        )
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "success"}
+
+    task = (
+        db_session.query(AsyncReportTask)
+        .filter(AsyncReportTask.id == "cs_test_guest_webhook_stripe_object")
+        .one()
+    )
+    assert task.status == "pending"
+    assert task.request_meta == {
+        **chart_data,
+        "tier": "premium_audit",
+        "report_iterations": 3,
+        "customer_email": "object-paid@example.com",
+    }
+    assert background_calls == [
+        (
+            "cs_test_guest_webhook_stripe_object",
+            {
+                **chart_data,
+                "tier": "premium_audit",
+                "report_iterations": 3,
+                "customer_email": "object-paid@example.com",
             },
         )
     ]

@@ -153,13 +153,16 @@ async def test_free_premium_trial_allows_one_report_per_ip(db_session, monkeypat
 
     assert response.status_code == 200
     assert response.json()["status"] == "started"
-    assert response.json()["tier"] == "free_premium"
+    assert response.json()["tier"] == "premium_audit"
+    assert response.json()["free_entitlement"] == "one_free_best_reading_per_ip"
+    assert response.json()["report_iterations"] == 3
     assert response.json()["free_premium_remaining"] == 0
 
     task = db_session.query(AsyncReportTask).one()
     assert task.status == "pending"
-    assert task.request_meta["tier"] == "free_premium"
-    assert task.request_meta["report_iterations"] == 1
+    assert task.request_meta["tier"] == "premium_audit"
+    assert task.request_meta["free_entitlement"] == "one_free_best_reading_per_ip"
+    assert task.request_meta["report_iterations"] == 3
 
     usage = db_session.query(GuestRequest).one()
     assert usage.ip_address == "203.0.113.10"

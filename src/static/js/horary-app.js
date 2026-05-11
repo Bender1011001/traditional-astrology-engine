@@ -1,4 +1,19 @@
-import { API_BASE, trackEvent } from './config.js';
+import { trackEvent, trackPurchase } from './config.js';
+import { apiFetch } from './api.js';
+
+const HORARY_SUBSCRIPTION_PURCHASE = {
+    tier: "horary",
+    value: 5,
+    currency: "USD",
+    amount_cents: 500,
+    items: [{
+        item_id: "horary",
+        item_name: "Horary Oracle Unlimited",
+        item_category: "subscription",
+        price: 5,
+        quantity: 1,
+    }],
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("horaryForm");
@@ -12,76 +27,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const readingSection = document.getElementById("readingSection");
     const readingContent = document.getElementById("readingContent");
     const askAnotherBtn = document.getElementById("askAnotherBtn");
+    const subscriptionStatus = document.getElementById("subscriptionStatus");
+    const subscriptionFinePrint = document.getElementById("subscriptionFinePrint");
     const urlParams = new URLSearchParams(window.location.search);
+    let accessState = {
+        authenticated: Boolean(currentToken()),
+        active: false,
+        uses_llm: false,
+        price_monthly: 5,
+    };
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        // UI Reset
-        errorMessage.innerText = "";
-        errorSection.classList.add("hidden");
+        clearError();
         readingSection.classList.add("hidden");
 
-        const payload = {
-            question: document.getElementById("question").value.trim(),
-            city: document.getElementById("horaryCity").value.trim(),
-            state: document.getElementById("horaryState").value.trim()
-        };
-
+        const payload = readPayload();
         if (!payload.question || !payload.city) {
             showError("Question and City are required.");
             return;
         }
 
-        // Loading state
-        submitBtn.disabled = true;
-        btnText.classList.add("hidden");
-        btnLoading.classList.remove("hidden");
-        chartFormCard.style.opacity = "0.5";
-        chartFormCard.style.pointerEvents = "none";
+        sessionStorage.setItem("pending_horary_question", JSON.stringify(payload));
 
-        try {
-            const response = await fetch(`${API_BASE}/api/v1/horary/checkout`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest"
-                },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await response.json().catch(() => ({}));
-
-            if (!response.ok) {
-                throw new Error(data.detail || "Failed to start Stripe checkout.");
-            }
-
-            if (!data.url) {
-                throw new Error("No Stripe checkout URL returned.");
-            }
-
-            sessionStorage.setItem("pending_horary_question", JSON.stringify(payload));
-            trackEvent("horary_checkout_start", { city: payload.city });
-            window.location.href = data.url;
-        } catch (err) {
-            console.error("Horary API error:", err);
-            showError(err.message);
-            trackEvent("horary_checkout_error", { error: err.message });
-        } finally {
-            // Revert Loading State
-            submitBtn.disabled = false;
-            btnText.classList.remove("hidden");
-            btnLoading.classList.add("hidden");
-            chartFormCard.style.opacity = "1";
-            chartFormCard.style.pointerEvents = "auto";
+        if (accessState.active) {
+            await castSubscriberHorary(payload);
+            return;
         }
+
+        startSubscriptionCheckout(payload);
     });
 
-    if (urlParams.get("horary_paid") === "success" && urlParams.get("session_id")) {
-        loadPaidHoraryAnswer(urlParams.get("session_id"));
-    } else if (urlParams.get("horary_paid") === "cancelled") {
+    if (urlParams.get("horary_subscribed") === "success" && urlParams.get("session_id")) {
+        verifySubscriptionReturn(urlParams.get("session_id"));
+    } else if (urlParams.get("horary_subscribed") === "cancelled") {
         showError("Checkout was cancelled. Your card was not charged.");
         window.history.replaceState({}, document.title, "/horary.html");
+        refreshAccessState();
+    } else {
+        refreshAccessState();
     }
 
     askAnotherBtn.addEventListener("click", () => {
@@ -91,44 +75,256 @@ document.addEventListener("DOMContentLoaded", () => {
         chartFormCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
+    function currentToken() {
+        try {
+            return localStorage.getItem("access_token") || "";
+        } catch (_) {
+            return "";
+        }
+    }
+
+    function authHeaders(extra = {}) {
+        const token = currentToken();
+        if (!token) return { ...extra };
+        return { ...extra, "Authorization": `Bearer ${token}` };
+    }
+
+    function readPayload() {
+        return {
+            question: document.getElementById("question").value.trim(),
+            city: document.getElementById("horaryCity").value.trim(),
+            state: document.getElementById("horaryState").value.trim(),
+        };
+    }
+
+    function setLoading(active, label = "Working...") {
+        submitBtn.disabled = active;
+        btnText.classList.toggle("hidden", active);
+        btnLoading.classList.toggle("hidden", !active);
+        btnLoading.textContent = label;
+        chartFormCard.style.opacity = active ? "0.55" : "1";
+        chartFormCard.style.pointerEvents = active ? "none" : "auto";
+    }
+
+    function clearError() {
+        errorMessage.innerText = "";
+        errorSection.classList.add("hidden");
+        chartFormCard.classList.remove("hidden");
+    }
+
     function showError(msg) {
         errorMessage.innerText = msg;
         errorSection.classList.remove("hidden");
         chartFormCard.classList.add("hidden");
     }
 
-    async function loadPaidHoraryAnswer(sessionId) {
+    function setAccessState(nextState) {
+        accessState = {
+            ...accessState,
+            ...(nextState || {}),
+            authenticated: Boolean((nextState && nextState.authenticated) || currentToken()),
+        };
+
+        if (!subscriptionStatus) return;
+
+        if (accessState.active) {
+            subscriptionStatus.innerHTML = `
+                <strong>Horary Oracle Unlimited is active.</strong>
+                Ask as many focused questions as you need on this account. The verdict is calculated by code, not generated by an LLM.
+            `;
+            subscriptionStatus.classList.add("subscription-active");
+            btnText.textContent = "Cast Horary Question";
+            if (subscriptionFinePrint) {
+                subscriptionFinePrint.textContent = "Your active subscription covers this question. Fair-use technical protections still apply.";
+            }
+            return;
+        }
+
+        subscriptionStatus.innerHTML = `
+            <strong>$5/month unlimited horary.</strong>
+            Create or sign into an account, subscribe through Stripe, then ask unlimited deterministic horary questions.
+        `;
+        subscriptionStatus.classList.remove("subscription-active");
+        btnText.textContent = "Start $5/month Unlimited Access";
+        if (subscriptionFinePrint) {
+            subscriptionFinePrint.textContent = "$5/month recurring subscription. Manage or cancel from your account. No LLM is used for horary verdicts.";
+        }
+    }
+
+    async function refreshAccessState() {
+        try {
+            const response = await apiFetch("/api/v1/horary/access", {
+                headers: authHeaders({ "X-Requested-With": "XMLHttpRequest" }),
+            });
+            const data = await response.json().catch(() => ({}));
+            if (response.ok) setAccessState(data);
+        } catch (err) {
+            console.warn("Horary access check failed:", err);
+        }
+    }
+
+    function requireAuthThen(callback) {
+        if (currentToken()) {
+            callback();
+            return;
+        }
+
+        window.CAEL_AUTH_SUCCESS_CALLBACK = () => {
+            window.CAEL_AUTH_SUCCESS_CALLBACK = null;
+            refreshAccessState().finally(callback);
+        };
+
+        if (typeof window.CAEL_OPEN_AUTH_MODAL === "function") {
+            window.CAEL_OPEN_AUTH_MODAL("register");
+            trackEvent("horary_auth_required", { source: "subscription_checkout" });
+            return;
+        }
+
+        window.location.href = "/account.html?auth=register";
+    }
+
+    function startSubscriptionCheckout(payload) {
+        requireAuthThen(async () => {
+            setLoading(true, "Opening Stripe checkout...");
+            try {
+                sessionStorage.setItem("pending_horary_question", JSON.stringify(payload));
+                const response = await apiFetch("/api/v1/horary/subscription/checkout", {
+                    method: "POST",
+                    headers: authHeaders({ "X-Requested-With": "XMLHttpRequest" }),
+                });
+                const data = await response.json().catch(() => ({}));
+
+                if (response.status === 401) {
+                    setLoading(false);
+                    requireAuthThen(() => startSubscriptionCheckout(payload));
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error(data.detail || "Failed to start Stripe subscription checkout.");
+                }
+                if (data.already_active) {
+                    setAccessState(data.access || { active: true });
+                    await castSubscriberHorary(payload);
+                    return;
+                }
+                if (!data.url) {
+                    throw new Error("No Stripe checkout URL returned.");
+                }
+
+                trackEvent("horary_subscription_checkout_start", { city: payload.city });
+                window.location.href = data.url;
+            } catch (err) {
+                console.error("Horary subscription checkout error:", err);
+                showError(err.message || "Could not start subscription checkout.");
+                trackEvent("horary_subscription_checkout_error", { error: err.message });
+            } finally {
+                setLoading(false);
+            }
+        });
+    }
+
+    async function verifySubscriptionReturn(sessionId) {
         errorMessage.innerText = "";
         errorSection.classList.add("hidden");
         chartFormCard.classList.add("hidden");
         readingContent.innerHTML = `
             <div class="verdict-box" style="margin-top:0;text-align:center;">
-                <div class="verdict-title" style="font-size:1.55rem;">Verifying Stripe payment</div>
-                <p style="color:rgba(255,255,255,0.72);margin:0;">Casting your paid horary chart now...</p>
+                <div class="verdict-title" style="font-size:1.55rem;">Activating subscription</div>
+                <p style="color:rgba(255,255,255,0.72);margin:0;">Verifying Stripe and unlocking unlimited horary...</p>
             </div>
         `;
         readingSection.classList.remove("hidden");
         readingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         try {
-            const response = await fetch(`${API_BASE}/api/v1/horary/paid-answer?session_id=${encodeURIComponent(sessionId)}`, {
-                method: "POST",
-                headers: { "X-Requested-With": "XMLHttpRequest" }
+            const response = await apiFetch(`/api/v1/billing/verify-checkout-session?session_id=${encodeURIComponent(sessionId)}`, {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
             });
             const data = await response.json().catch(() => ({}));
             if (!response.ok) {
-                throw new Error(data.detail || "Could not verify your paid horary session.");
+                throw new Error(data.detail || "Could not verify the subscription checkout.");
             }
 
-            renderHoraryResponse(data.question || "Your paid horary question", data.oracle);
-            trackEvent("horary_paid_answer", { paid: true });
-            sessionStorage.removeItem("pending_horary_question");
+            if (data.access_token) {
+                localStorage.setItem("access_token", data.access_token);
+            }
+
+            trackPurchase(data.purchase || {
+                ...HORARY_SUBSCRIPTION_PURCHASE,
+                transaction_id: sessionId,
+                order_id: sessionId,
+            });
+            trackEvent("horary_subscription_started", { tier: data.tier || "horary" });
+            setAccessState({ active: true, authenticated: true, tier: data.tier || "horary" });
             window.history.replaceState({}, document.title, "/horary.html");
+
+            const pending = readPendingPayload();
+            if (pending && pending.question && pending.city) {
+                await castSubscriberHorary(pending);
+            } else {
+                readingSection.classList.add("hidden");
+                chartFormCard.classList.remove("hidden");
+            }
         } catch (err) {
-            console.error("Paid horary return error:", err);
+            console.error("Horary subscription return error:", err);
             readingSection.classList.add("hidden");
-            showError(err.message || "Could not load your paid horary answer.");
-            trackEvent("horary_paid_answer_error", { error: err.message });
+            showError(err.message || "Could not activate your subscription.");
+            trackEvent("horary_subscription_verify_error", { error: err.message });
+        }
+    }
+
+    function readPendingPayload() {
+        try {
+            return JSON.parse(sessionStorage.getItem("pending_horary_question") || "null");
+        } catch (_) {
+            return null;
+        }
+    }
+
+    async function castSubscriberHorary(payload) {
+        setLoading(true, "Casting horary chart...");
+        chartFormCard.classList.add("hidden");
+        readingContent.innerHTML = `
+            <div class="verdict-box" style="margin-top:0;text-align:center;">
+                <div class="verdict-title" style="font-size:1.55rem;">Casting horary chart</div>
+                <p style="color:rgba(255,255,255,0.72);margin:0;">Calculating significators, strictures, and perfection rules...</p>
+            </div>
+        `;
+        readingSection.classList.remove("hidden");
+        readingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        try {
+            const response = await apiFetch("/api/v1/horary/subscriber-answer", {
+                method: "POST",
+                headers: authHeaders({
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                }),
+                body: JSON.stringify(payload),
+            });
+            const data = await response.json().catch(() => ({}));
+            if (response.status === 401) {
+                throw new Error("Sign in again to use your Horary Oracle subscription.");
+            }
+            if (response.status === 402) {
+                setAccessState({ active: false });
+                chartFormCard.classList.remove("hidden");
+                throw new Error(data.detail || "Subscription is required for horary questions.");
+            }
+            if (!response.ok) {
+                throw new Error(data.detail || "Could not cast your horary chart.");
+            }
+
+            renderHoraryResponse(data.question || payload.question, data.oracle);
+            sessionStorage.removeItem("pending_horary_question");
+            trackEvent("horary_subscriber_answer", { paid: true, subscription: true });
+        } catch (err) {
+            console.error("Subscriber horary error:", err);
+            readingSection.classList.add("hidden");
+            showError(err.message || "Could not cast your horary chart.");
+            trackEvent("horary_subscriber_answer_error", { error: err.message });
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -148,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <h4 style="color:#c9a84c; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; margin-bottom: 1rem;">Mathematical Conditions Found</h4>
                 ${oracle.conditions.map(c => `
                     <div class="trace-item">
-                        <span class="trace-label">[${c.status}] ${c.condition}</span> 
+                        <span class="trace-label">[${c.status}] ${c.condition}</span>
                         <span style="color:rgba(255,255,255,0.8);">${c.details || ""}</span>
                     </div>
                 `).join("")}
@@ -166,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="verdict-text" style="font-size:1.1rem; color:rgba(255,255,255,0.7); font-style:italic;">
                 " ${question} "
             </div>
-            
+
             ${stricturesHtml}
 
             <div class="verdict-box" style="margin-top: 0">

@@ -28,8 +28,14 @@ window.CAEL_CONFIG = {
         host.endsWith(".run.app");
 
     if (isLocal || host === "") {
-        // Local dev: point to local API server explicitly
-        window.CAEL_API_BASE = "http://127.0.0.1:8000";
+        // Local dev: FastAPI-served pages should call same origin; separate
+        // static dev servers still point to the default local API port.
+        const port = String(window.location.port || "");
+        if (isLocal && port && port !== "3000" && port !== "5173") {
+            window.CAEL_API_BASE = window.location.origin;
+        } else {
+            window.CAEL_API_BASE = "http://127.0.0.1:8000";
+        }
         return;
     }
 

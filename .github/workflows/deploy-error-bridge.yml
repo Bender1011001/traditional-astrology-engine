@@ -1,0 +1,71 @@
+name: deploy_error_bridge
+
+on:
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-error-bridge
+  cancel-in-progress: false
+
+jobs:
+  deploy_bridge:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 2
+
+      - name: Check whether bridge changed
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if git diff --quiet HEAD^ HEAD -- gcloud-error-to-codex .github/workflows/deploy-error-bridge.yml; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: google-github-actions/auth@v2
+        if: steps.changes.outputs.deploy == 'true'
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+        if: steps.changes.outputs.deploy == 'true'
+
+      - name: Deploy gcloud-error-to-codex
+        if: steps.changes.outputs.deploy == 'true'
+        run: |
+          gcloud run deploy gcloud-error-to-codex \
+            --source gcloud-error-to-codex \
+            --project astrology-engine-prod \
+            --region us-central1 \
+            --allow-unauthenticated \
+            --min-instances 0 \
+            --max-instances 2 \
+            --set-env-vars GITHUB_OWNER="Bender1011001" \
+            --set-env-vars GITHUB_REPO="astrology" \
+            --set-env-vars SITE_NAME="traditional-astrology.com" \
+            --set-secrets GITHUB_TOKEN=github-token:latest,WEBHOOK_TOKEN=gcloud-error-webhook-token:latest \
+            --quiet
+
+      - name: Smoke check bridge health
+        if: steps.changes.outputs.deploy == 'true'
+        run: |
+          SERVICE_URL="$(gcloud run services describe gcloud-error-to-codex --project astrology-engine-prod --region us-central1 --format='value(status.url)')"
+          curl -fsS --retry 5 --retry-delay 5 "$SERVICE_URL/healthz"
