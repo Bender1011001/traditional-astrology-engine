@@ -58,28 +58,37 @@ if "@" in safe_url:
 else:
     logger.info("Connecting to Local/Sqlite DB")
 
-# Engine configuration optimized for Serverless/Cloud Run dynamic scaling
-# Hardcapping connection footprints so horizontal container scaling doesn't exhaust DB slots.
-engine_kwargs = {
-    "pool_size": 2,
-    "max_overflow": 4,
-    "pool_timeout": 30,
-    "pool_recycle": 1800,
-}
+def _database_engine_kwargs(database_url: str) -> dict:
+    if "sqlite" in database_url:
+        return {"connect_args": {"check_same_thread": False}}
 
-if "sqlite" in DATABASE_URL:
-    engine_kwargs = {"connect_args": {"check_same_thread": False}}  # type: ignore
-elif _is_cloudsql_proxy:
-    # Cloud SQL Auth Proxy handles encryption — no SSL flags needed on the connection.
-    engine_kwargs["connect_args"] = {  # type: ignore
-        "connect_timeout": 5,
+    # Engine configuration optimized for Serverless/Cloud Run dynamic scaling.
+    # Keep connection footprints small, and validate pooled connections before
+    # reuse because Cloud SQL can close them while a Cloud Run container is idle.
+    kwargs = {
+        "pool_size": 2,
+        "max_overflow": 4,
+        "pool_timeout": 30,
+        "pool_recycle": 1800,
+        "pool_pre_ping": True,
     }
-else:
-    # Direct remote Postgres — require SSL at the driver level.
-    engine_kwargs["connect_args"] = {  # type: ignore
-        "sslmode": "require",
-        "connect_timeout": 5,
-    }
+
+    if "/cloudsql/" in database_url:
+        # Cloud SQL Auth Proxy handles encryption — no SSL flags needed on the connection.
+        kwargs["connect_args"] = {
+            "connect_timeout": 5,
+        }
+    else:
+        # Direct remote Postgres — require SSL at the driver level.
+        kwargs["connect_args"] = {
+            "sslmode": "require",
+            "connect_timeout": 5,
+        }
+
+    return kwargs
+
+
+engine_kwargs = _database_engine_kwargs(DATABASE_URL)
 
 engine = create_engine(DATABASE_URL, **engine_kwargs)
 

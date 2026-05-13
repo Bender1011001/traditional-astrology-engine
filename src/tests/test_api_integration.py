@@ -7,7 +7,12 @@ from httpx import ASGITransport, AsyncClient
 
 from src.api.v1.auth import create_access_token
 from src.app import app
-from src.database.core import DEFAULT_DATABASE_URL, SessionLocal, _resolve_database_url
+from src.database.core import (
+    DEFAULT_DATABASE_URL,
+    SessionLocal,
+    _database_engine_kwargs,
+    _resolve_database_url,
+)
 from src.database.models import AsyncReportTask, User
 from src.engine.user_auth import _as_utc
 
@@ -15,6 +20,15 @@ from src.engine.user_auth import _as_utc
 def test_cloud_run_database_url_is_required():
     with pytest.raises(RuntimeError, match="DATABASE_URL must be set"):
         _resolve_database_url(DEFAULT_DATABASE_URL, is_cloud_run=True)
+
+
+def test_postgres_engine_pre_pings_pooled_connections():
+    kwargs = _database_engine_kwargs("postgresql://user:pass@example.com/app")
+
+    assert kwargs["pool_pre_ping"] is True
+    assert kwargs["pool_recycle"] == 1800
+    assert kwargs["connect_args"]["connect_timeout"] == 5
+    assert kwargs["connect_args"]["sslmode"] == "require"
 
 
 def test_naive_reset_token_expiry_is_treated_as_utc():
