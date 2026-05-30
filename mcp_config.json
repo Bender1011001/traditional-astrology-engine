@@ -6,6 +6,10 @@
       "env": {
         "PYTHONPATH": "e:/code.projects/astrology"
       }
+    },
+    "etsy": {
+      "type": "http",
+      "url": "https://mcp.api.etsycloud.com/mcp"
     }
   }
 }

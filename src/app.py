@@ -296,6 +296,10 @@ _LEGACY_REDIRECTS = [
     "astrology-client-birth-data.html",
     "traditional-astrology-vs-astrolabe.html",
     "how-to-price-astrology-readings.html",
+    "compatibility.html",
+    "daily.html",
+    "horary.html",
+    "refunds.html",
     # Old misc pages
     "demo.html",
     "booking.html",
@@ -352,8 +356,7 @@ async def reset_password_page_redirect(request: Request):
     return RedirectResponse(url=target, status_code=302)
 
 
-@app.get("/owner.html", include_in_schema=False)
-async def retired_owner_page():
+def _retired_private_page_response():
     return JSONResponse(
         {"detail": "Gone"},
         status_code=410,
@@ -364,6 +367,19 @@ async def retired_owner_page():
             "X-Robots-Tag": "noindex, nofollow",
         },
     )
+
+
+@app.get("/owner", include_in_schema=False)
+@app.get("/owner/", include_in_schema=False)
+@app.get("/owner.html", include_in_schema=False)
+@app.get("/profile", include_in_schema=False)
+@app.get("/profile/", include_in_schema=False)
+@app.get("/profile.html", include_in_schema=False)
+@app.get("/src/static/login.html", include_in_schema=False)
+@app.get("/src/static/owner.html", include_in_schema=False)
+@app.get("/src/static/profile.html", include_in_schema=False)
+async def retired_private_page():
+    return _retired_private_page_response()
 
 
 @app.get("/astroforge-vs-astrolabe.html", include_in_schema=False)

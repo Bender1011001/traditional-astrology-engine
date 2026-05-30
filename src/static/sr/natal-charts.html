@@ -24,7 +24,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<link href="/style.css?v=rev20260509bestwheel1" rel="stylesheet"/>
+<link href="/style.css?v=rev20260526support1" rel="stylesheet"/>
   <style id="mobile-nav-fallback">
     @media (max-width: 820px) {
       body { padding-top: var(--nav-height, 64px); }
@@ -211,7 +211,9 @@
   </div>
   <div class="chart-actions hidden" id="chartActions" style="display:flex; justify-content:center; gap:1rem; margin-top:2rem;">
     <button id="exportPdfBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">&#10022; Izvezi PDF</button>
-    <button id="shareChartBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;">&#10022; Podeli Kartu</button>
+    <button id="shareChartBtn" class="btn-cta btn-cta-secondary" style="margin-top:0;" data-reading-share-action="share">Podeli Citanje</button>
+    <button class="btn-cta btn-cta-secondary" style="margin-top:0;" data-reading-share-action="copy">Kopiraj Link</button>
+    <p class="reading-share-status" data-share-status aria-live="polite"></p>
   </div>
 </section>
 
@@ -323,7 +325,7 @@
 </main>
 
 <script src="/basic.js"></script>
-<script type="module" src="/js/reading-app.js?v=rev20260509bestwheel1"></script>
+<script type="module" src="/js/reading-app.js?v=rev20260526support1"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {

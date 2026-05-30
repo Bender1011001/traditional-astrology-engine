@@ -12,7 +12,7 @@ import uuid
 from typing import Optional
 
 import stripe
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request
 from sqlalchemy.orm import Session
 
 from src.api.v1.auth import get_current_user
@@ -43,7 +43,7 @@ TIERS = {
         "product_name": "Complete Astrological Analysis",
         "description": "20+ page deep-dive analysis with advanced timing, remediation, and 10-year forecast.",
         "config_key": "STRIPE_PRICE_PREMIUM_AUDIT",
-        "report_iterations": 3,
+        "report_iterations": 6,
     },
 }
 
@@ -285,6 +285,126 @@ async def guest_checkout(
         logger.error("Stripe checkout creation failed: %s", repr(e), exc_info=True)
         raise HTTPException(
             status_code=500, detail="Could not create checkout session."
+        )
+
+
+@router.post("/tip")
+async def guest_tip(
+    request: Request,
+    amount_cents: int = Query(..., ge=100, le=50000),
+):
+    """
+    Create a Stripe Checkout Session for an optional visitor tip/donation.
+
+    This does not unlock content. The public report remains free; this endpoint
+    exists only for visitors who want to support the project after receiving value.
+    """
+    stripe.api_key = (getattr(settings, "STRIPE_SECRET_KEY", "") or "").strip()
+    if not stripe.api_key:
+        raise HTTPException(status_code=500, detail="Tip system not configured.")
+
+    origin = str(request.base_url).rstrip("/")
+    dollars = amount_cents / 100.0
+
+    try:
+        session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "usd",
+                        "unit_amount": amount_cents,
+                        "product_data": {
+                            "name": "Support Traditional Astrology",
+                            "description": (
+                                "Optional tip for the free traditional astrology "
+                                "reading project. This does not unlock extra content."
+                            ),
+                        },
+                    },
+                    "quantity": 1,
+                }
+            ],
+            mode="payment",
+            success_url=(
+                f"{origin}/?tip=thanks&session_id={{CHECKOUT_SESSION_ID}}"
+            ),
+            cancel_url=f"{origin}/#support-the-work",
+            metadata={
+                "purchase_type": "tip",
+                "tier": "tip",
+                "amount_cents": str(amount_cents),
+            },
+        )
+        logger.info("Created optional tip checkout for $%.2f", dollars)
+        return {"url": session.url, "session_id": session.id}
+    except Exception as e:
+        logger.error("Stripe tip checkout creation failed: %s", repr(e), exc_info=True)
+        raise HTTPException(
+            status_code=500, detail="Could not create tip checkout session."
+        )
+
+
+@router.post("/monthly-support")
+async def guest_monthly_support(
+    request: Request,
+    amount_cents: int = Query(500, ge=100, le=50000),
+):
+    """
+    Create a Stripe Checkout Session for optional monthly supporter billing.
+
+    This does not unlock content or create an app subscription entitlement.
+    It is a reader-support path for keeping the public report free.
+    """
+    stripe.api_key = (getattr(settings, "STRIPE_SECRET_KEY", "") or "").strip()
+    if not stripe.api_key:
+        raise HTTPException(status_code=500, detail="Support system not configured.")
+
+    origin = str(request.base_url).rstrip("/")
+    dollars = amount_cents / 100.0
+    metadata = {
+        "purchase_type": "monthly_support",
+        "tier": "monthly_support",
+        "amount_cents": str(amount_cents),
+    }
+
+    try:
+        session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "usd",
+                        "unit_amount": amount_cents,
+                        "recurring": {"interval": "month"},
+                        "product_data": {
+                            "name": "Traditional Astrology Monthly Supporter",
+                            "description": (
+                                "Monthly support for keeping the complete "
+                                "traditional astrology report free. This does "
+                                "not unlock extra content."
+                            ),
+                        },
+                    },
+                    "quantity": 1,
+                }
+            ],
+            mode="subscription",
+            success_url=(
+                f"{origin}/?supporter=monthly&session_id={{CHECKOUT_SESSION_ID}}"
+            ),
+            cancel_url=f"{origin}/#support-the-work",
+            metadata=metadata,
+            subscription_data={"metadata": metadata},
+        )
+        logger.info("Created monthly supporter checkout for $%.2f/month", dollars)
+        return {"url": session.url, "session_id": session.id}
+    except Exception as e:
+        logger.error(
+            "Stripe monthly support checkout creation failed: %s",
+            repr(e),
+            exc_info=True,
+        )
+        raise HTTPException(
+            status_code=500, detail="Could not create monthly support checkout."
         )
 
 

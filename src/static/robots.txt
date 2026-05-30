@@ -1,10 +1,10 @@
 User-agent: *
 Allow: /
 
-# Block all API, auth, and deprecated business pages from indexing
+# Block API and deprecated business pages from indexing.
+# Retired private pages such as owner.html/profile.html are not disallowed here
+# so crawlers can see their 410 Gone responses and remove stale URLs.
 Disallow: /api/
-Disallow: /owner.html
-Disallow: /profile.html
 Disallow: /forgot-password.html
 Disallow: /reset-password.html
 Disallow: /login.html
@@ -22,6 +22,10 @@ Disallow: /astrology-client-birth-data.html
 Disallow: /traditional-astrology-vs-astrolabe.html
 Disallow: /astroforge-vs-astrolabe.html
 Disallow: /how-to-price-astrology-readings.html
+Disallow: /compatibility.html
+Disallow: /daily.html
+Disallow: /horary.html
+Disallow: /refunds.html
 Disallow: /resources.html
 Disallow: /advanced.html
 Disallow: /preview.html

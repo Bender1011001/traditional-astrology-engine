@@ -1,21 +1,24 @@
 """
 FREE READING GENERATOR
 ======================
-Template-based, instant, zero-LLM reading for the B2C funnel.
-Extracts key consumer-friendly data from Auditor chart output and renders
-a clean HTML reading in < 3 seconds. No API credits consumed.
+Legacy template-based, instant, zero-LLM reading helper.
+
+The public B2C free chart now uses the premium LLM pipeline's first response.
+Keep this module available for internal comparisons and emergency fallback only.
+When called directly, it extracts key consumer-friendly data from Auditor chart
+output and renders a clean HTML reading without API credits.
 
 Architecture:
   Auditor.generate_full_nativity() → chart_data dict → this module → HTML string
 
-This module is the "hook" that converts a visitor into a paying customer.
-The free reading shows enough to be valuable, then CTAs toward $25/$69 tiers.
+This module is no longer the default public free-chart hook.
 """
 
 import json
 import logging
 from typing import Any, Dict, Optional
 
+from src.engine.astrocartography import build_astrocartography_map_from_chart_data
 from src.engine.forensic_engine import Auditor
 
 logger = logging.getLogger(__name__)
@@ -277,6 +280,8 @@ PLANET_GLYPHS = {
     "Saturn": "♄",
 }
 
+TRADITIONAL_PLANETS = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]
+
 SIGN_GLYPHS = {
     "Aries": "♈",
     "Taurus": "♉",
@@ -306,9 +311,10 @@ def generate_free_reading(
     state: str = "",
     latitude: Optional[float] = None,
     longitude: Optional[float] = None,
+    time_unknown: bool = False,
 ) -> Dict[str, Any]:
     """
-    Generates an instant, template-based free reading.
+    Generates the legacy instant, template-based free reading.
 
     Returns:
         {
@@ -387,6 +393,7 @@ def generate_free_reading(
                 }
                 for p in planets_forensic
                 if p.get("name") and p.get("longitude") is not None
+                and p.get("name") in TRADITIONAL_PLANETS
             }
             raw_houses = astronomy.get("houses", {})
             houses_for_wheel = {
@@ -400,6 +407,16 @@ def generate_free_reading(
         except Exception as exc:
             logger.warning("Chart wheel data build failed: %s", repr(exc))
             chart_wheel_data = None
+
+        try:
+            astrocartography_data = build_astrocartography_map_from_chart_data(
+                technical_data,
+                intent="overview",
+                time_unknown=bool(time_unknown),
+            )
+        except Exception as exc:
+            logger.warning("Astrocartography data build failed: %s", repr(exc), exc_info=True)
+            astrocartography_data = None
 
         # 3. Render HTML
         reading_html = _render_free_reading_html(
@@ -420,6 +437,7 @@ def generate_free_reading(
             temperament=temperament,
             age=meta.get("age", 0),
             chart_wheel_data=chart_wheel_data,
+            astrocartography_data=astrocartography_data,
         )
 
         chart_summary = {
@@ -457,10 +475,9 @@ def _find_planet(planets_forensic: list, name: str) -> Optional[dict]:
 
 def _build_dignity_scorecard(planets_forensic: list, sect_type: str) -> list:
     """Build a consumer-friendly dignity scorecard for the septener."""
-    septener = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]
     rows = []
 
-    for pname in septener:
+    for pname in TRADITIONAL_PLANETS:
         pdata = _find_planet(planets_forensic, pname)
         if not pdata:
             continue
@@ -536,6 +553,7 @@ def _render_free_reading_html(
     temperament: dict,
     age: int,
     chart_wheel_data: Optional[dict] = None,
+    astrocartography_data: Optional[dict] = None,
 ) -> str:
     """Renders the complete free reading as an HTML fragment."""
 
@@ -548,14 +566,38 @@ def _render_free_reading_html(
     if chart_wheel_data:
         wheel_json = json.dumps(chart_wheel_data, ensure_ascii=False)
         chart_wheel_html = f"""
-        <div class="reading-section chart-wheel-section">
-            <h2 class="section-title">✦ Your Natal Chart</h2>
+        <div class="reading-section chart-wheel-section forensic-readout-section">
+            <h2 class="section-title">✦ Traditional Technical Chart</h2>
+            <p class="section-note">This is a Whole Sign, seven-visible-planet calculation grid. Non-septener bodies are excluded from the chart display because this reading follows the traditional/Hellenistic framework.</p>
+            <div class="forensic-method-grid" aria-label="Traditional chart technical readout">
+                <div><span>Planet Set</span><strong>7 visible planets</strong><p>Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn.</p></div>
+                <div><span>House System</span><strong>Whole Sign</strong><p>House topics are read by sign; angles remain visible as calculated points.</p></div>
+                <div><span>Sect</span><strong>{sect_type.title()}</strong><p>Day/night status changes benefic and malefic weighting before synthesis.</p></div>
+                <div><span>Dignity</span><strong>Essential + accidental</strong><p>Rulership, exaltation, triplicity, term, face, house, speed, and solar condition.</p></div>
+            </div>
             <div id="chartWheelContainer" class="chart-wheel-container"></div>
             <script type="application/json" id="chartWheelData">{wheel_json}</script>
         </div>
         """
     else:
         chart_wheel_html = ""
+
+    if astrocartography_data:
+        astro_json = json.dumps(astrocartography_data, ensure_ascii=False)
+        confidence_note = ""
+        if astrocartography_data.get("chart", {}).get("time_confidence") == "low_noon_placeholder":
+            confidence_note = "<p class='section-warning'>Birth time was unknown, so this map uses the noon placeholder and should be treated as low-confidence.</p>"
+        astrocartography_html = f"""
+        <div class="reading-section astrocartography-section">
+            <h2 class="section-title">✦ Your Astrocartography Map</h2>
+            <p class="section-note">Planetary angular lines are calculated from this exact chart. Historical Use Only; not relocation, immigration, financial, legal, medical, or safety advice.</p>
+            {confidence_note}
+            <div id="astrocartographyMapContainer" class="astro-map-container"></div>
+            <script type="application/json" id="astrocartographyData">{astro_json}</script>
+        </div>
+        """
+    else:
+        astrocartography_html = ""
 
     # Big Three header
     sun_glyph = SIGN_GLYPHS.get(sun_sign, "")
@@ -628,6 +670,9 @@ def _render_free_reading_html(
 
         <!-- CHART WHEEL -->
         {chart_wheel_html}
+
+        <!-- ASTROCARTOGRAPHY -->
+        {astrocartography_html}
 
         <!-- THE BIG THREE -->
         <div class="big-three-grid">

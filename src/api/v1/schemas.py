@@ -26,6 +26,26 @@ class ChartRequest(BaseModel):
     time_unknown: Optional[bool] = False
 
 
+class TargetLocation(BaseModel):
+    name: str = Field(..., max_length=150)
+    latitude: float = Field(..., ge=-90.0, le=90.0)
+    longitude: float = Field(..., ge=-180.0, le=180.0)
+
+
+class AstrocartographyRequest(ChartRequest):
+    intent: Literal[
+        "overview",
+        "career",
+        "business",
+        "relationship",
+        "home",
+        "creative",
+        "study",
+    ] = "overview"
+    planets: Optional[List[str]] = Field(None, max_items=10)
+    target_locations: Optional[List[TargetLocation]] = Field(None, max_items=25)
+
+
 class CheckoutRequest(BaseModel):
     tier: str = Field(..., max_length=50)
     chart_request: Optional[ChartRequest] = None

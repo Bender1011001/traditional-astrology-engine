@@ -9,6 +9,7 @@ geopy
 timezonefinder
 pytz
 bcrypt
+jinja2
 
 python-multipart
 email-validator

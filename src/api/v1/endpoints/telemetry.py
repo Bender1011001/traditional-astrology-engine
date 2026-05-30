@@ -135,6 +135,20 @@ async def log_reading_feedback(
     db.commit()
     db.refresh(event)
 
+    try:
+        AdminNotificationService.notify_reading_feedback(
+            vote=vote,
+            source=feedback.source or "",
+            comment=feedback.comment or "",
+            chart_event_id=chart_event_id or "",
+            reading_hash=feedback.reading_hash,
+            birth=feedback.birth or {},
+            url=request.headers.get("referer", ""),
+            ua=request.headers.get("user-agent", ""),
+        )
+    except Exception as e:
+        logging.error("Reading feedback notification failed: %s", repr(e), exc_info=True)
+
     return {
         "status": "feedback_saved",
         "feedback_id": event.id,

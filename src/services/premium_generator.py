@@ -1,14 +1,17 @@
 import asyncio
+import hashlib
 import json
 import logging
 import os
 import re
 import tempfile
+import time
+from typing import Any
 
 from sqlalchemy.orm import Session
 
 from src.database.core import SessionLocal
-from src.database.models import AsyncReportTask
+from src.database.models import AsyncReportTask, ChartEvent
 from src.engine.email_service import send_email
 from src.scripts.generate_premium_report import generate_chart_data, run_premium_report
 
@@ -22,14 +25,16 @@ TECHNICAL_APPENDIX_HEADING_RE = re.compile(r"(?mi)^\s*##\s+Technical Appendix\s*
 TIER_REPORT_ITERATIONS = {
     "free": 0,
     "free_instant": 0,
+    "free_chart": 1,
+    "free_llm_chart": 1,
     "free_premium": 1,
     "free_premium_trial": 1,
     "full_reading": 1,
     "single_reading": 1,
     "full": 1,
     "onetime": 1,
-    "premium_audit": 3,
-    "complete_analysis": 3,
+    "premium_audit": 6,
+    "complete_analysis": 6,
     "middle": 3,
     "forensic_nativity": 6,
     "top": 6,
@@ -105,12 +110,125 @@ def llm_iterations_for_tier(tier: str | None) -> int:
     )
 
 
+def _sign_from_longitude(longitude: Any) -> str | None:
+    try:
+        lon = float(longitude) % 360.0
+    except (TypeError, ValueError):
+        return None
+    signs = [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
+    ]
+    return signs[int(lon // 30)]
+
+
+def _planet_sign(planets_forensic: list[dict[str, Any]], planet_name: str) -> str | None:
+    entry = next(
+        (p for p in planets_forensic if str(p.get("name") or "") == planet_name),
+        None,
+    )
+    if not entry:
+        return None
+    lon_fmt = entry.get("longitude_fmt") or {}
+    if isinstance(lon_fmt, dict) and lon_fmt.get("sign"):
+        return str(lon_fmt["sign"])
+    return _sign_from_longitude(entry.get("longitude"))
+
+
+def _angle_longitude(chart_data: dict[str, Any], angle_name: str) -> Any:
+    astronomy_angles = ((chart_data.get("astronomy") or {}).get("angles") or {})
+    angle = astronomy_angles.get(angle_name)
+    if isinstance(angle, dict):
+        return angle.get("longitude")
+    if angle is not None:
+        return angle
+
+    analysis_angles = ((chart_data.get("analysis") or {}).get("angles") or {})
+    angle = analysis_angles.get(angle_name)
+    if isinstance(angle, dict):
+        return angle.get("longitude")
+    return angle
+
+
+def summarize_chart_data(chart_data: dict[str, Any]) -> dict[str, Any]:
+    """Small durable summary for funnel analytics and owner chart-event readback."""
+    meta = chart_data.get("meta") or {}
+    chart_meta = meta.get("chart") or {}
+    analysis = chart_data.get("analysis") or {}
+    planets_forensic = analysis.get("planets_forensic") or []
+    if not isinstance(planets_forensic, list):
+        planets_forensic = []
+
+    asc_lon = _angle_longitude(chart_data, "Ascendant")
+    house_system = chart_meta.get("house_system")
+    if isinstance(house_system, dict):
+        house_system = house_system.get("label") or house_system.get("code")
+
+    return {
+        "sun_sign": _planet_sign(planets_forensic, "Sun"),
+        "moon_sign": _planet_sign(planets_forensic, "Moon"),
+        "rising_sign": _sign_from_longitude(asc_lon),
+        "sect": (analysis.get("sect") or {}).get("type"),
+        "age": meta.get("age"),
+        "city": chart_meta.get("city"),
+        "state": chart_meta.get("state"),
+        "house_system": house_system,
+    }
+
+
+def report_reading_hash(
+    request_data: dict[str, Any], chart_summary: dict[str, Any], report_markdown: str
+) -> str:
+    hash_payload = {
+        "request": request_data,
+        "summary": chart_summary,
+        "report_markdown": report_markdown,
+    }
+    encoded = json.dumps(hash_payload, sort_keys=True, default=str).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+TIER_EMAIL_CONFIG = {
+    "forensic_nativity": {
+        "report_name": "Forensic Nativity Report",
+        "page_estimate": "50+",
+        "description": "every classical technique: Almuten Figuris, sect, essential dignities at all five levels, Arabic Lots, fixed star contacts, firdaria, humoral temperament, and your current annual profection",
+    },
+    "premium_audit": {
+        "report_name": "Complete Astrological Analysis",
+        "page_estimate": "20+",
+        "description": "advanced timing techniques, essential dignities, Arabic Lots, firdaria, temperament analysis, and a personalized 10-year forecast",
+    },
+    "full_reading": {
+        "report_name": "Full Natal Chart Reading",
+        "page_estimate": "10+",
+        "description": "natal chart timing, essential dignities, sect analysis, and personalized insights",
+    },
+}
+TIER_EMAIL_DEFAULT = TIER_EMAIL_CONFIG["forensic_nativity"]
+
+
 def _send_report_email(
-    customer_email: str, customer_name: str, pdf_bytes: bytes, chart_data: dict
+    customer_email: str, customer_name: str, pdf_bytes: bytes, chart_data: dict,
+    tier: str = "forensic_nativity",
 ) -> None:
     """Send the completed PDF report to the customer."""
     birth_date = chart_data.get("birth_date_utc", "") or chart_data.get("date", "")
     city = chart_data.get("city", "")
+    email_cfg = TIER_EMAIL_CONFIG.get(tier, TIER_EMAIL_DEFAULT)
+    report_name = email_cfg["report_name"]
+    page_estimate = email_cfg["page_estimate"]
+    description = email_cfg["description"]
 
     html = f"""
     <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #222;">
@@ -118,15 +236,13 @@ def _send_report_email(
         <p style="color: #c9a84c; font-size: 1.1rem; margin: 0;">✦ Traditional Astrology</p>
       </div>
       <div style="padding: 2rem;">
-        <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Your Forensic Nativity Report is ready.</h1>
+        <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Your {report_name} is ready.</h1>
         <p style="color: #555; margin-bottom: 1.5rem;">
           Born: {birth_date} &nbsp;·&nbsp; {city}
         </p>
         <p>The PDF is attached to this email. Save it to your device — this is your permanent copy.</p>
         <p style="margin-top: 1.5rem; color: #555; font-size: 0.9rem;">
-          The report runs to 50+ pages and covers every classical technique: Almuten Figuris,
-          sect, essential dignities at all five levels, Arabic Lots, fixed star contacts,
-          firdaria, humoral temperament, and your current annual profection.
+          The report runs to {page_estimate} pages and covers {description}.
         </p>
         <p style="margin-top: 1.5rem; color: #555; font-size: 0.9rem;">
           Questions or calculation corrections:
@@ -138,11 +254,11 @@ def _send_report_email(
 
     from datetime import datetime, timezone
 
-    filename = f"Traditional_Astrology_Forensic_Nativity_{datetime.now(timezone.utc).strftime('%Y%m%d')}.pdf"
+    filename = f"Traditional_Astrology_{report_name.replace(' ', '_')}_{datetime.now(timezone.utc).strftime('%Y%m%d')}.pdf"
 
     success = send_email(
         to_email=customer_email,
-        subject="Your Forensic Nativity Report — Traditional Astrology",
+        subject=f"Your {report_name} — Traditional Astrology",
         html_content=html,
         attachment_bytes=pdf_bytes,
         attachment_name=filename,
@@ -196,6 +312,7 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
     Background task to generate a premium report.
     """
     logger.info("Starting premium report generation for task %s", task_id)
+    started = time.perf_counter()
 
     db: Session = SessionLocal()
     task = db.query(AsyncReportTask).filter(AsyncReportTask.id == task_id).first()
@@ -214,13 +331,15 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
 
         chart_data_json = await loop.run_in_executor(
             None,
-            lambda: generate_chart_data(
-                name=request_data.get("name"),
-                date_str=request_data.get("date"),
-                time_str=request_data.get("time"),
-                city=request_data.get("city"),
-                state=request_data.get("state"),
-            ),
+                lambda: generate_chart_data(
+                    name=request_data.get("name"),
+                    date_str=request_data.get("date"),
+                    time_str=request_data.get("time"),
+                    city=request_data.get("city"),
+                    state=request_data.get("state"),
+                    latitude=request_data.get("latitude"),
+                    longitude=request_data.get("longitude"),
+                ),
         )
 
         if not chart_data_json:
@@ -228,6 +347,11 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
 
         # 2. Run Premium Report Logic via Class
         chart_data = json.loads(chart_data_json)
+        if request_data.get("time_unknown"):
+            chart_data.setdefault("meta", {}).setdefault("chart", {})[
+                "time_unknown"
+            ] = True
+        chart_summary = summarize_chart_data(chart_data)
         tier = str(request_data.get("tier") or "").strip().lower()
         requested_iterations = request_data.get("report_iterations")
         iteration_count = (
@@ -263,16 +387,46 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
             computation_trace = None
 
         # 4. Store Result
+        chart_event_id = request_data.get("chart_event_id")
+        reading_hash = report_reading_hash(request_data, chart_summary, report_markdown)
         result_payload = {
             "report_markdown": report_markdown,
             "chart_data": chart_data,
             "computation_trace": computation_trace,
             "tier": tier,
             "report_iterations": iteration_count,
+            "chart_event_id": chart_event_id,
+            "reading_hash": reading_hash,
+            "chart_summary": chart_summary,
+            "meta": {
+                "chart_summary": chart_summary,
+                "chart_event_id": chart_event_id,
+                "reading_hash": reading_hash,
+                "free_readings_remaining": request_data.get(
+                    "free_readings_remaining"
+                ),
+            },
         }
 
         task.result_json = result_payload  # type: ignore
         task.status = "completed"  # type: ignore
+        if chart_event_id:
+            chart_event = (
+                db.query(ChartEvent).filter(ChartEvent.id == chart_event_id).first()
+            )
+            if chart_event:
+                chart_event.status = "completed"  # type: ignore
+                chart_event.chart_summary = chart_summary  # type: ignore
+                chart_event.reading_hash = reading_hash  # type: ignore
+                chart_event.reading_html = report_markdown  # type: ignore
+                chart_event.error_message = None  # type: ignore
+                chart_event.generation_ms = int((time.perf_counter() - started) * 1000)  # type: ignore
+            else:
+                logger.warning(
+                    "Task %s completed but chart_event_id %s was not found",
+                    task_id,
+                    chart_event_id,
+                )
         db.commit()
         logger.info("Task %s completed successfully", task_id)
 
@@ -291,7 +445,8 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
                 await loop.run_in_executor(
                     None,
                     lambda: _send_report_email(
-                        customer_email, customer_name, pdf_bytes, chart_data
+                        customer_email, customer_name, pdf_bytes, chart_data,
+                        tier=tier,
                     ),
                 )
             except Exception as email_err:
@@ -306,6 +461,15 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         logger.error("Task %s failed: %s", task_id, repr(e), exc_info=True)
         task.status = "failed"  # type: ignore
         task.result_json = {"error": str(e)}  # type: ignore
+        chart_event_id = request_data.get("chart_event_id")
+        if chart_event_id:
+            chart_event = (
+                db.query(ChartEvent).filter(ChartEvent.id == chart_event_id).first()
+            )
+            if chart_event:
+                chart_event.status = "failed"  # type: ignore
+                chart_event.error_message = str(e)  # type: ignore
+                chart_event.generation_ms = int((time.perf_counter() - started) * 1000)  # type: ignore
         db.commit()
     finally:
         db.close()

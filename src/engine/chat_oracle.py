@@ -71,7 +71,7 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
         )
         # Default to the production cost/performance model; deployments can
         # override this through OPENROUTER_MODEL.
-        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3.1-flash-lite")
+        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3.5-flash")
         timeout = float(
             os.getenv("OPENROUTER_TIMEOUT", "120")
         )  # Increased timeout for large context

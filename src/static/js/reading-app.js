@@ -3,13 +3,13 @@
  * 
  * Flow:
  * 1. User fills birth form → submit
- * 2. Free: Calls /api/v1/premium/guest/request → polls → shows full reading (up to IP limit)
- * 3. After visitor limit hit: Shows teaser + paywall ($25 Full Reading / $69 Premium)
- * 4. Paid: Redirects to Stripe → returns with session_id → calls /generate-paid → polls → shows full reading
+ * 2. Free: Calls /api/v1/premium/guest/request → polls → shows complete reading
+ * 3. Visitors can generate as many reports as they want
+ * 4. Feedback: visitor can rate the reading, send a comment, and optionally tip at the end
  */
 
 import { apiFetch } from './api.js';
-import { trackPurchase } from './config.js';
+import { renderAstrocartographyMap } from './astrocartography-map.js';
 import { renderChartWheel } from './chart-graphics.js';
 
 // ─── State ───
@@ -27,7 +27,7 @@ function trackConversionEvent(eventName, params = {}) {
             });
         }
     } catch (_) {
-        // Analytics must never interrupt chart generation or checkout.
+        // Analytics must never interrupt chart generation.
     }
 }
 
@@ -69,54 +69,282 @@ window.printReading = function () {
     window.print();
 };
 
+const SHARE_READING_TITLE = "My Traditional Astrology Reading";
+const SHARE_READING_TEXT = "I just generated a free complete traditional astrology reading with sect, houses, lots, fixed stars, and timing. You can make yours here:";
+const SHARE_READING_FALLBACK_URL = "https://traditional-astrology.com/#get-reading";
+const SUPPORT_TIP_AMOUNTS = [
+    { amountCents: 500, label: "$5" },
+    { amountCents: 1100, label: "$11" },
+    { amountCents: 2500, label: "$25" },
+    { amountCents: 6900, label: "$69" },
+];
+const MONTHLY_SUPPORT_AMOUNT_CENTS = 500;
+
+function getReadingShareUrl(medium) {
+    try {
+        const origin = window.location.origin && window.location.origin !== "null"
+            ? window.location.origin
+            : "https://traditional-astrology.com";
+        if (!medium) return `${origin}/#get-reading`;
+        return `${origin}/?utm_source=share&utm_medium=${encodeURIComponent(medium)}&utm_campaign=reading_share#get-reading`;
+    } catch (_) {
+        return SHARE_READING_FALLBACK_URL;
+    }
+}
+
+function getPersonalizedShareText() {
+    const summary = currentReadingContext?.meta?.chart_summary || {};
+    const sun = summary.sun_sign;
+    const moon = summary.moon_sign;
+    const rising = summary.rising_sign;
+    if (sun && moon && rising) {
+        return `${sun} Sun, ${moon} Moon, ${rising} Rising — I just got a free 20-page traditional astrology reading and it's surprisingly detailed. Get yours:`;
+    }
+    if (sun) {
+        return `${sun} Sun — I just got a free 20-page traditional astrology reading and it's surprisingly detailed. Get yours:`;
+    }
+    return SHARE_READING_TEXT;
+}
+
+function getReadingSharePayload(medium) {
+    return {
+        title: SHARE_READING_TITLE,
+        text: getPersonalizedShareText(),
+        url: getReadingShareUrl(medium),
+    };
+}
+
+function setShareStatus(button, message) {
+    const host = button?.closest(".reading-share-actions, .chart-actions, .share-nudge");
+    const status = host?.querySelector("[data-share-status]");
+    if (!status) {
+        temporarilyLabelButton(button, "Copied");
+        return;
+    }
+
+    status.textContent = message;
+    clearTimeout(status.dataset.clearTimer);
+    const timer = window.setTimeout(() => {
+        status.textContent = "";
+    }, 3200);
+    status.dataset.clearTimer = String(timer);
+}
+
+function temporarilyLabelButton(button, label) {
+    if (!button) return;
+    const original = button.textContent;
+    button.textContent = label;
+    window.setTimeout(() => {
+        button.textContent = original;
+    }, 1800);
+}
+
+async function writeClipboardText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        const copied = document.execCommand("copy");
+        if (!copied) throw new Error("Copy command failed.");
+    } finally {
+        textarea.remove();
+    }
+}
+
+async function copyReadingShareText(button) {
+    const payload = getReadingSharePayload("copy");
+    await writeClipboardText(`${payload.text}\n${payload.url}`);
+    setShareStatus(button, "Share text copied.");
+    temporarilyLabelButton(button, "Copied");
+    trackConversionEvent("reading_share_copy");
+}
+
+async function shareReading(button) {
+    const payload = getReadingSharePayload("native");
+    if (navigator.share) {
+        try {
+            await navigator.share(payload);
+            setShareStatus(button, "Share sheet opened.");
+            trackConversionEvent("reading_share_native");
+            return;
+        } catch (err) {
+            if (err?.name === "AbortError") return;
+        }
+    }
+
+    await copyReadingShareText(button);
+}
+
+function openPlatformShare(platform) {
+    const text = getPersonalizedShareText();
+    const url = getReadingShareUrl(platform);
+    const encoded = encodeURIComponent(text + "\n" + url);
+    const encodedUrl = encodeURIComponent(url);
+    const encodedText = encodeURIComponent(text);
+    let shareUrl = "";
+
+    switch (platform) {
+        case "twitter":
+            shareUrl = `https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+            break;
+        case "facebook":
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+            break;
+        case "whatsapp":
+            shareUrl = `https://wa.me/?text=${encoded}`;
+            break;
+        case "reddit":
+            shareUrl = `https://reddit.com/submit?url=${encodedUrl}&title=${encodeURIComponent(SHARE_READING_TITLE)}`;
+            break;
+        default:
+            return;
+    }
+
+    trackConversionEvent("reading_share_platform", { platform });
+    window.open(shareUrl, "_blank", "noopener,noreferrer,width=600,height=500");
+}
+
+function buildShareNudge() {
+    const summary = currentReadingContext?.meta?.chart_summary || {};
+    const sun = summary.sun_sign;
+    const personalNote = sun
+        ? `Your ${escapeHtml(sun)} Sun reading is ready to share.`
+        : "Your reading is ready to share.";
+
+    return `
+        <div class="share-nudge" id="shareNudge">
+            <div class="share-nudge-inner">
+                <h3 class="share-nudge-title">Know someone who'd find this interesting?</h3>
+                <p class="share-nudge-sub">${personalNote} The site is 100% free — no catch.</p>
+                <div class="share-platform-buttons">
+                    <button type="button" class="share-platform-btn share-twitter" onclick="openPlatformShare('twitter')" aria-label="Share on Twitter/X">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>Twitter / X</span>
+                    </button>
+                    <button type="button" class="share-platform-btn share-facebook" onclick="openPlatformShare('facebook')" aria-label="Share on Facebook">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        <span>Facebook</span>
+                    </button>
+                    <button type="button" class="share-platform-btn share-whatsapp" onclick="openPlatformShare('whatsapp')" aria-label="Share on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <span>WhatsApp</span>
+                    </button>
+                    <button type="button" class="share-platform-btn share-reddit" onclick="openPlatformShare('reddit')" aria-label="Share on Reddit">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+                        <span>Reddit</span>
+                    </button>
+                </div>
+                <div class="share-nudge-alt">
+                    <button type="button" class="btn-cta btn-cta-secondary share-nudge-copy" data-reading-share-action="copy">
+                        Copy Share Link
+                    </button>
+                    <p class="reading-share-status" data-share-status aria-live="polite"></p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+window.openPlatformShare = openPlatformShare;
+
+function setupReadingShareHandlers() {
+    document.addEventListener("click", async (event) => {
+        const target = event.target instanceof Element ? event.target : null;
+        const button = target?.closest("[data-reading-share-action]");
+        if (!button) return;
+
+        event.preventDefault();
+        const action = button.dataset.readingShareAction || "share";
+        button.disabled = true;
+        try {
+            if (action === "copy") {
+                await copyReadingShareText(button);
+            } else {
+                await shareReading(button);
+            }
+        } catch (err) {
+            setShareStatus(button, "Could not copy. Use your browser address bar.");
+            trackConversionEvent("reading_share_error", { error: String(err.message || err) });
+        } finally {
+            button.disabled = false;
+        }
+    });
+}
+
+function showSupportReturnNotice() {
+    let params;
+    try {
+        params = new URLSearchParams(window.location.search || "");
+    } catch (_) {
+        return;
+    }
+
+    const isTipThanks = params.get("tip") === "thanks";
+    const isMonthlyThanks = params.get("supporter") === "monthly";
+    if (!isTipThanks && !isMonthlyThanks) return;
+
+    const formCard = document.getElementById("chartFormCard");
+    const host = formCard?.parentElement || document.getElementById("get-reading");
+    if (!host || document.getElementById("supportReturnNotice")) return;
+
+    const notice = document.createElement("div");
+    notice.id = "supportReturnNotice";
+    notice.className = "support-return-notice";
+    notice.innerHTML = `
+        <strong>Thank you for supporting the free report.</strong>
+        <span>${isMonthlyThanks ? "Your monthly support helps keep this full traditional reading available to everyone." : "Your tip helps pay for chart calculation, report generation, and source research."}</span>
+    `;
+    host.insertBefore(notice, formCard || host.firstChild);
+    trackConversionEvent(isMonthlyThanks ? "monthly_support_success" : "tip_success");
+}
+
 // ─── Loading Messages ───
 const LOADING_MSGS = [
-    "Locating your birth coordinates...",
+    "Validating your birth data...",
     "Calculating planetary positions from the Swiss Ephemeris...",
-    "Determining sect — day chart or night chart...",
-    "Scoring essential dignities...",
-    "Computing the Lot of Fortune...",
-    "Analyzing mutual receptions...",
-    "Running annual profections...",
-    "Synthesizing your personal reading...",
+    "Building the forensic audit payload...",
+    "Writing the complete LLM report...",
+    "Synthesizing sect, dignities, lots, and timing...",
+    "Checking safety language and report quality...",
+    "Saving your chart record...",
+    "Rendering your free reading...",
+];
+
+const LOADING_DETAILS = [
+    "Checking date, time, and location before the engine starts.",
+    "The chart math is deterministic: same birth data, same chart.",
+    "The LLM receives the full structured chart payload used for the complete report.",
+    "This can take a few minutes. The moving bars mean the browser is still polling.",
+    "The report is being written from the calculated chart data, not a generic template.",
+    "The customer-facing body is checked before it is shown.",
+    "Persisting the result so feedback and owner readback still work.",
+    "Finalizing the browser view.",
 ];
 
 // ─── DOM Ready ───
 document.addEventListener("DOMContentLoaded", () => {
     setupForm();
     setupTimeUnknownToggle();
-    checkForPaidReturn();
+    setupReadingShareHandlers();
+    setupSupportCheckoutHandlers();
+    showSupportReturnNotice();
 
     // Export & Share Handlers
     const exportPdfBtn = document.getElementById('exportPdfBtn');
-    const shareChartBtn = document.getElementById('shareChartBtn');
 
     if (exportPdfBtn) {
         exportPdfBtn.addEventListener('click', () => {
             printReading();
-        });
-    }
-
-    if (shareChartBtn) {
-        shareChartBtn.addEventListener('click', async () => {
-            const chartUrl = window.location.href;
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'My Traditional Astrology Chart',
-                        text: 'Check out my classical astrology reading!',
-                        url: chartUrl
-                    });
-                } catch (err) {
-                    console.log('Share error:', err);
-                }
-            } else {
-                navigator.clipboard.writeText(chartUrl).then(() => {
-                    const originalText = shareChartBtn.textContent;
-                    shareChartBtn.textContent = '✦ Copied to Clipboard!';
-                    setTimeout(() => { shareChartBtn.textContent = originalText; }, 2000);
-                });
-            }
         });
     }
 });
@@ -146,7 +374,7 @@ function setupForm() {
             return;
         }
 
-        // Save for after payment redirect
+        // Save so report feedback and browser refreshes can preserve context.
         localStorage.setItem("ta_chart_payload", JSON.stringify(chartPayload));
 
         trackConversionEvent("free_chart_submit");
@@ -187,13 +415,6 @@ async function requestFreeReading(payload) {
         });
 
         if (!resp.ok) {
-            if (resp.status === 402) {
-                // Free limit reached — show paywall
-                hideLoading();
-                trackConversionEvent("free_chart_paywall", { reason: "visitor_limit" });
-                showPaywall();
-                return;
-            }
             const err = await resp.json().catch(() => ({}));
             let msg = "Request failed.";
             if (Array.isArray(err?.detail)) {
@@ -225,9 +446,20 @@ async function requestFreeReading(payload) {
             return;
         }
 
-        // Legacy/paid flow — poll for completion
+        // LLM-backed complete free flow — poll for completion
         if (data.task_id) {
-            pollForCompletion(data.task_id, data.free_readings_remaining);
+            trackConversionEvent("free_chart_generation_started", {
+                chart_event_id: data.chart_event_id,
+                tier: data.tier || "free_chart",
+            });
+            updateLoadingMessage("Writing the complete LLM report...", LOADING_DETAILS[3]);
+            updateLoadingProgress(3, 18);
+            pollForCompletion(
+                data.task_id,
+                data.free_readings_remaining,
+                data.chart_event_id,
+                data.tier || "free_chart"
+            );
             return;
         }
 
@@ -240,15 +472,23 @@ async function requestFreeReading(payload) {
 }
 
 // ─── Polling ───
-function pollForCompletion(taskId, freeRemaining) {
+function pollForCompletion(taskId, freeRemaining, chartEventId = null, tier = "free_chart") {
     let msgIdx = 0;
     let attempts = 0;
-    const maxAttempts = 120; // 10 minutes at 5s intervals
+    const maxAttempts = 144; // 12 minutes at 5s intervals
 
     const interval = setInterval(async () => {
         attempts++;
-        updateLoadingMessage(LOADING_MSGS[msgIdx % LOADING_MSGS.length]);
-        updateLoadingProgress(msgIdx % LOADING_MSGS.length);
+        const stageIndex = Math.min(
+            LOADING_MSGS.length - 2,
+            Math.floor((attempts / maxAttempts) * (LOADING_MSGS.length + 2))
+        );
+        const pct = Math.min(92, 18 + Math.floor((attempts / maxAttempts) * 74));
+        updateLoadingMessage(
+            LOADING_MSGS[stageIndex],
+            LOADING_DETAILS[stageIndex]
+        );
+        updateLoadingProgress(stageIndex, pct);
         msgIdx++;
 
         if (attempts >= maxAttempts) {
@@ -265,10 +505,22 @@ function pollForCompletion(taskId, freeRemaining) {
             const data = await resp.json();
 
             if (data.status === "processing") {
-                updateLoadingMessage("Synthesizing your personal reading...");
+                const processingStage = Math.max(stageIndex, 4);
+                updateLoadingMessage(
+                    LOADING_MSGS[processingStage],
+                    LOADING_DETAILS[processingStage]
+                );
+                updateLoadingProgress(processingStage, Math.max(pct, 35));
             } else if (data.status === "completed") {
                 clearInterval(interval);
+                updateLoadingMessage("Rendering your free reading...", LOADING_DETAILS[7]);
+                updateLoadingProgress(7, 100);
                 hideLoading();
+                trackConversionEvent("free_chart_success", {
+                    free_readings_remaining: freeRemaining,
+                    chart_event_id: data.result?.chart_event_id || chartEventId,
+                    tier: data.result?.tier || tier,
+                });
                 showReading(data.result, freeRemaining);
             } else if (data.status === "failed") {
                 clearInterval(interval);
@@ -279,58 +531,6 @@ function pollForCompletion(taskId, freeRemaining) {
             // Suppressed: non-critical poll error; retry will occur next interval
         }
     }, 5000);
-}
-
-// ─── Post-Payment Return ───
-function checkForPaidReturn() {
-    const params = new URLSearchParams(window.location.search);
-    const isPaid = params.get("paid") === "true";
-    const sessionId = params.get("session_id");
-
-    if (!isPaid || !sessionId) return;
-
-    // Clean URL
-    window.history.replaceState({}, document.title, "/");
-    trackConversionEvent("paid_return");
-
-    // Restore chart data
-    try {
-        chartPayload = JSON.parse(localStorage.getItem("ta_chart_payload"));
-    } catch (e) {
-        chartPayload = null;
-    }
-
-    // Trigger paid generation
-    showLoading();
-    updateLoadingMessage("Payment confirmed! Generating your premium reading...");
-    generatePaidReading(sessionId);
-}
-
-async function generatePaidReading(sessionId) {
-    try {
-        const resp = await apiFetch(`/api/v1/guest/generate-paid?session_id=${encodeURIComponent(sessionId)}`, {
-            method: "POST",
-            headers: authHeaders({ "Content-Type": "application/json" }),
-            body: "{}",
-        });
-
-        if (!resp.ok) {
-            const err = await resp.json().catch(() => ({}));
-            throw new Error(err?.detail || "Could not start generation.");
-        }
-
-        const data = await resp.json();
-        trackPurchase(data.purchase || {
-            transaction_id: sessionId,
-            tier: data.tier || "unknown",
-        });
-        trackConversionEvent("paid_generation_started", { tier: data.tier || "unknown" });
-        pollForCompletion(data.task_id, -1); // -1 = paid, no limit
-    } catch (err) {
-        hideLoading();
-        trackConversionEvent("paid_generation_error", { error: String(err.message || err) });
-        showError(err.message);
-    }
 }
 
 // ─── UI: Show Free Reading (HTML, instant) ───
@@ -355,6 +555,7 @@ function showFreeReading(readingHtml, freeRemaining, chartEventId, readingHash, 
         ${buildInstantConversionBar(freeRemaining)}
         ${readingHtml}
         ${buildFeedbackWidget("free")}
+        ${buildShareNudge()}
     `;
 
     // Render the natal chart wheel if data is embedded in the reading HTML
@@ -368,6 +569,16 @@ function showFreeReading(readingHtml, freeRemaining, chartEventId, readingHash, 
         }
     }
 
+    const astroDataEl = content.querySelector('#astrocartographyData');
+    if (astroDataEl) {
+        try {
+            const astroData = JSON.parse(astroDataEl.textContent);
+            renderAstrocartographyMap(astroData);
+        } catch (e) {
+            console.warn('Astrocartography map render failed:', e);
+        }
+    }
+
     section.classList.remove("hidden");
     section.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -376,12 +587,11 @@ function showFreeReading(readingHtml, freeRemaining, chartEventId, readingHash, 
     const chartActions = document.getElementById("chartActions");
     if (chartActions) chartActions.classList.remove("hidden");
 
-    // Every real visitor IP gets one free LLM report after the instant chart.
-    // Further premium reports go through the paid Stripe checkout path.
-    kickOffFreePremiumTrial(chartPayload, chartEventId);
+    // The current free chart flow uses complete report generation directly, so
+    // there is no second background add-on job to start here.
 }
 
-// ─── Free Premium Report — Background LLM Kickoff ──────────────────────────
+// ─── Retired Free Complete Add-On Bridge ────────────────────────────────────
 async function kickOffFreePremiumTrial(payload, chartEventId) {
     const content = document.getElementById("readingContent");
     if (!content) return;
@@ -428,7 +638,7 @@ async function kickOffFreePremiumTrial(payload, chartEventId) {
         _hidePremiumTrialSection();
     } catch (err) {
         _hidePremiumTrialSection();
-        console.warn("Free premium report kickoff failed (non-critical):", err);
+        console.warn("Retired free report add-on kickoff failed (non-critical):", err);
     }
 }
 
@@ -442,7 +652,7 @@ function _hidePremiumTopBanner() {
     if (el) el.remove();
 }
 
-// ─── Free Premium Report — Polling ──────────────────────────────────────────
+// ─── Retired Free Premium Add-On Polling ────────────────────────────────────
 const PREMIUM_LOADING_MSGS = [
     "Calculating your full planetary picture...",
     "Analyzing sect, dignities, and mutual receptions...",
@@ -544,40 +754,64 @@ function _renderFreePremiumResult(result, chartEventId) {
     attachEmailCaptureHandler(section, chartEventId);
 }
 
-function buildInstantConversionBar(freeRemaining) {
-    const remainingText = Number.isFinite(Number(freeRemaining)) && Number(freeRemaining) >= 0
-        ? `<span>${Number(freeRemaining)} free chart${Number(freeRemaining) === 1 ? "" : "s"} left today</span>`
-        : "";
-
+function buildReadingShareActions() {
     return `
-        <div class="result-conversion-bar" aria-label="Full reading purchase options">
+        <div class="reading-share-actions" aria-label="Share this reading">
+            <button type="button" class="btn-cta btn-cta-secondary" data-reading-share-action="share">
+                Share Reading
+            </button>
+            <button type="button" class="btn-cta btn-cta-secondary reading-copy-btn" data-reading-share-action="copy">
+                Copy Link
+            </button>
+            <div class="share-inline-platforms">
+                <button type="button" class="share-icon-btn" onclick="openPlatformShare('twitter')" aria-label="Share on X" title="Share on X">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </button>
+                <button type="button" class="share-icon-btn" onclick="openPlatformShare('facebook')" aria-label="Share on Facebook" title="Share on Facebook">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </button>
+                <button type="button" class="share-icon-btn" onclick="openPlatformShare('whatsapp')" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </button>
+            </div>
+            <p class="reading-share-status" data-share-status aria-live="polite"></p>
+        </div>
+    `;
+}
+
+function buildInstantConversionBar(freeRemaining) {
+    return `
+        <div class="result-conversion-bar" aria-label="Free reading actions">
             <div class="result-conversion-copy">
-                <div class="result-conversion-kicker">Chart generated</div>
-                <h2>Unlock the complete reading while this chart is loaded.</h2>
-                <p>Save the free preview as a PDF, or unlock houses, lots, fixed stars, time-lord periods, and the full forecast.</p>
+                <div class="result-conversion-kicker">100% free complete reading</div>
+                <h2>Your full traditional astrology report is ready.</h2>
+                <p>This is the complete report flow: sect, dignities, houses, lots, fixed stars, time-lord periods, and forecast synthesis.</p>
                 <div class="result-conversion-meta">
-                    <span>Free preview: no account/email</span>
-                    <span>Paid reports: secure Stripe checkout</span>
-                    ${remainingText}
+                    <span>No account or email required</span>
+                    <span>20+ page depth when saved as PDF</span>
+                    <span>Generate another chart whenever you want</span>
                 </div>
-                <p class="checkout-reassurance" style="margin:0.85rem 0 0; max-width:none; text-align:left;"><strong>Checkout reassurance:</strong> Stripe processes payment and this site never sees your full card number. Paid reports generate after checkout returns you here; email is optional but recommended for receipts and delivery support.</p>
+                <p class="feedback-reassurance" style="margin:0.85rem 0 0; max-width:none; text-align:left;"><strong>Feedback matters:</strong> use the Good/Bad buttons and comment box at the bottom to tell us how accurate the reading felt.</p>
+                <div class="result-conversion-support" id="support-the-work">
+                    <p><strong>Reader supported:</strong> the report is free. Tips pay for chart calculation, LLM report generation, and source research.</p>
+                    <div class="result-support-actions">
+                        <button class="support-action-btn" type="button" data-tip-amount="500" data-default-label="$5 tip">$5 tip</button>
+                        <button class="support-action-btn support-action-primary" type="button" data-monthly-support="500" data-default-label="$5/month supporter">$5/month supporter</button>
+                    </div>
+                    <p class="reading-support-status" data-support-status aria-live="polite"></p>
+                </div>
             </div>
             <div class="result-conversion-actions">
-                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullTopBtn" data-default-label="Full Reading — $25">
-                    Full Reading — $25
-                </button>
-                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumTopBtn" data-default-label="Complete Analysis — $69">
-                    Complete Analysis — $69
-                </button>
-                <button class="btn-cta btn-cta-secondary" onclick="printReading()" data-default-label="Print / Save Preview PDF">
-                    Print / Save Preview PDF
+                ${buildReadingShareActions()}
+                <button class="btn-cta btn-cta-secondary" onclick="printReading()" data-default-label="Print / Save PDF">
+                    Print / Save PDF
                 </button>
             </div>
         </div>
     `;
 }
 
-// ─── UI: Show Paid Reading (Markdown, polled) ───
+// ─── UI: Show Reading (Markdown, polled) ───
 function showReading(result, freeRemaining) {
     const section = document.getElementById("readingSection");
     const content = document.getElementById("readingContent");
@@ -589,13 +823,14 @@ function showReading(result, freeRemaining) {
     currentReadingContext = {
         chart_event_id: result?.chart_event_id || null,
         reading_hash: result?.reading_hash || result?.meta?.chart_hash || hashStr(JSON.stringify({ chartPayload, md })),
-        source: freeRemaining < 0 ? "b2c_paid_reading" : "b2c_reading",
+        source: "b2c_free_chart",
         birth: chartPayload,
         meta: result?.meta || {},
         time_unknown: Boolean(chartPayload?.time_unknown),
     };
 
     content.innerHTML = `
+        ${buildInstantConversionBar(freeRemaining)}
         <div class="reading-body">${html}</div>
         ${traceData ? buildTraceSection(traceData) : ''}
         ${buildPostReadingCTA(freeRemaining)}
@@ -779,127 +1014,18 @@ window.collapseAllTrace = function() {
 };
 
 function buildPostReadingCTA(freeRemaining) {
-    // If paid or free remaining is negative (paid), don't show paywall
-    if (freeRemaining < 0) {
-        return `
-            <div class="unlock-cta" style="border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2rem;">
-                <h3>Your Premium Reading is Complete</h3>
-                <p>You can print this page or use your browser's "Save as PDF" to keep a copy.</p>
-                <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: auto; margin-top: 1rem;">
-                    Print / Save as PDF
-                </button>
-            </div>
-        `;
-    }
-
-    const freeText = (freeRemaining !== undefined && freeRemaining !== null && freeRemaining >= 0)
-        ? `<p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">Free readings remaining: ${freeRemaining}</p>`
-        : "";
-
     return `
         <div class="unlock-cta">
-            <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: auto; margin-top: 0; margin-bottom: 1.5rem;">
-                Print / Save as PDF
-            </button>
-            ${freeText}
-        </div>
-    `;
-}
-
-// ─── UI: Show Paywall ───
-function showPaywall() {
-    const section = document.getElementById("readingSection");
-    const content = document.getElementById("readingContent");
-    if (!section || !content) return;
-
-    content.innerHTML = `
-        <div style="text-align: center; padding: 2rem 0;">
-            <div style="font-size: 2.5rem; margin-bottom: 1rem;">✦</div>
-            <h2 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold); margin-bottom: 0.75rem;">
-                You've Used Your Free Readings
-            </h2>
-            <p style="color: var(--text-muted); max-width: 420px; margin: 0 auto 2rem; line-height: 1.75;">
-                You've reached the free reading limit. Unlock your complete natal chart reading
-                with a one-time Stripe payment — no subscription. Email is recommended for receipts and support.
-            </p>
             <div class="unlock-buttons">
-                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn" data-default-label="✦ Get Full Reading — $25">
-                    ✦ Get Full Reading — $25
+                <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: 100%; margin-top: 0;">
+                    Print / Save as PDF
                 </button>
-                <span class="btn-or">— or —</span>
-                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn" data-default-label="Get Premium Deep-Dive — $69">
-                    Get Premium Deep-Dive — $69
-                </button>
-                <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem;">
-                    Secure payment via Stripe. We never see your full card number. If the return page fails, contact support with your Stripe receipt email.
-                </p>
+                ${buildReadingShareActions()}
             </div>
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">You can generate another full report whenever you want.</p>
         </div>
+        ${buildShareNudge()}
     `;
-
-    section.classList.remove("hidden");
-    section.scrollIntoView({ behavior: "smooth" });
-}
-
-// ─── Stripe Checkout ───
-window.startCheckout = async function (tier) {
-    if (!chartPayload) {
-        alert("Please enter your birth details first.");
-        return;
-    }
-
-    const buttons = getCheckoutButtons(tier);
-    buttons.forEach((btn) => {
-        btn.disabled = true;
-        btn.textContent = "Redirecting to payment...";
-    });
-    trackConversionEvent("checkout_click", { tier });
-
-    try {
-        const params = new URLSearchParams({
-            tier: tier,
-            date: chartPayload.date,
-            time: chartPayload.time,
-            city: chartPayload.city,
-            state: chartPayload.state || "",
-            name: chartPayload.name || "Guest",
-        });
-
-        const resp = await apiFetch(`/api/v1/guest/checkout?${params.toString()}`, {
-            method: "POST",
-            headers: authHeaders({ "Content-Type": "application/json" }),
-            body: "{}",
-        });
-
-        if (!resp.ok) {
-            const err = await resp.json().catch(() => ({}));
-            throw new Error(err?.detail || "Checkout failed.");
-        }
-
-        const data = await resp.json();
-        if (data.url) {
-            trackConversionEvent("checkout_redirect", { tier });
-            window.location.href = data.url;
-        } else {
-            throw new Error("No checkout URL returned.");
-        }
-    } catch (err) {
-        buttons.forEach((btn) => {
-            btn.disabled = false;
-            btn.textContent = btn.dataset.defaultLabel || (tier === "premium_audit" ? "Get Premium Deep-Dive — $69" : "✦ Get Full Reading — $25");
-        });
-        trackConversionEvent("checkout_error", { tier, error: String(err.message || err) });
-        alert("Checkout error: " + err.message);
-    }
-};
-
-function getCheckoutButtons(tier) {
-    const selectors = tier === "premium_audit"
-        ? ["#checkoutPremiumBtn", "#checkoutPremiumTopBtn", "#checkoutPremiumPremiumBottomBtn"]
-        : ["#checkoutFullBtn", "#checkoutFullTopBtn", "#checkoutFullPremiumBottomBtn"];
-    return selectors
-        .map((selector) => document.querySelector(selector))
-        .filter(Boolean);
 }
 
 // ─── UI: Feedback Widget ───
@@ -907,8 +1033,8 @@ function buildFeedbackWidget(source) {
     const widgetId = source === "premium_trial" ? "premiumFeedbackWidget" : "freeFeedbackWidget";
 
     const label = source === "premium_trial"
-        ? "Was the premium reading helpful?"
-        : "Was this chart reading good or bad?";
+        ? "How accurate did the reading feel?"
+        : "How accurate did this chart reading feel?";
     return `
         <div class="feedback-widget" id="${widgetId}">
             <h4>${label}</h4>
@@ -916,10 +1042,10 @@ function buildFeedbackWidget(source) {
                 <button class="feedback-btn" data-vote="good" aria-label="Thumbs up - good reading">👍 Good</button>
                 <button class="feedback-btn" data-vote="bad" aria-label="Thumbs down - bad reading">👎 Bad</button>
             </div>
-            <div class="feedback-comment-wrap" style="display:none; margin-top: 1rem;">
+            <div class="feedback-comment-wrap" style="display:block; margin-top: 1rem;">
                 <textarea
                     class="feedback-comment-textarea"
-                    placeholder="Any feedback is appreciated (optional)..."
+                    placeholder="What felt accurate or off? Your note emails us and helps improve the rules."
                     rows="3"
                     maxlength="1000"
                     aria-label="Optional feedback comment"
@@ -927,6 +1053,7 @@ function buildFeedbackWidget(source) {
                 <button class="feedback-submit-btn" type="button">Send Feedback</button>
             </div>
             <p class="feedback-status"></p>
+            ${buildInlineTipBox()}
         </div>
     `;
 }
@@ -943,6 +1070,8 @@ function attachFeedbackHandlers(container, source) {
     let chosenVote = null;
     let submitted = false;
 
+    attachTipHandlers(widget);
+
     btns.forEach((btn) => {
         btn.addEventListener("click", () => {
             if (submitted) return;
@@ -957,7 +1086,11 @@ function attachFeedbackHandlers(container, source) {
 
     if (submitBtn) {
         submitBtn.addEventListener("click", async () => {
-            if (submitted || !chosenVote) return;
+            if (submitted) return;
+            if (!chosenVote) {
+                if (statusEl) statusEl.textContent = "Choose Good or Bad first, then send the comment.";
+                return;
+            }
             submitted = true;
             btns.forEach((b) => (b.disabled = true));
             if (submitBtn) submitBtn.disabled = true;
@@ -987,6 +1120,11 @@ function attachFeedbackHandlers(container, source) {
                 if (!resp.ok) throw new Error("Feedback save failed.");
                 if (statusEl) statusEl.textContent = "✓ Thank you for your feedback!";
                 if (commentWrap) commentWrap.style.display = "none";
+                const supportBox = widget.querySelector(".inline-tip-box");
+                if (supportBox) {
+                    supportBox.classList.add("inline-tip-box-highlight");
+                    trackConversionEvent("tip_prompt_after_feedback", { source: source || "b2c_reading" });
+                }
             } catch (e) {
                 submitted = false;
                 if (submitBtn) submitBtn.disabled = false;
@@ -1038,17 +1176,17 @@ function attachEmailCaptureHandler(container, chartEventId) {
     });
 }
 
-// ─── Free Premium Report UI Builders ───
+// ─── Retired Free Premium Add-On UI Builders ───
 function buildPremiumTrialTopBanner() {
     return `
         <div class="premium-trial-top-banner" role="status" aria-live="polite">
             <div class="premium-trial-banner-inner">
-                <span class="premium-trial-badge">✦ LIMITED TIME</span>
+                <span class="premium-trial-badge">✦ GENERATING</span>
                 <p class="premium-trial-headline">
-                    Your <strong>free Complete Analysis</strong> is generating in the background.
+                    Your <strong>free LLM chart</strong> is generating.
                 </p>
                 <p class="premium-trial-sub">
-                    Each visitor connection gets one free best-tier LLM report. Read your instant chart below while it finishes; after this, additional premium reports are paid.
+                    The free chart now uses complete report generation directly.
                 </p>
             </div>
         </div>
@@ -1061,7 +1199,7 @@ function buildPremiumTrialTopBannerComplete() {
             <div class="premium-trial-banner-inner">
                 <span class="premium-trial-badge">✦ READY</span>
                 <p class="premium-trial-headline">
-                    Your <strong>free Complete Analysis</strong> is complete. Scroll down to read it.
+                    Your <strong>free LLM chart</strong> is complete. Scroll down to read it.
                 </p>
             </div>
         </div>
@@ -1091,9 +1229,9 @@ function buildRenderedPremiumSection(html, chartEventId) {
     return `
         <div class="premium-reading-section">
             <div class="premium-reading-header">
-                <span class="premium-reading-badge">✦ FREE COMPLETE ANALYSIS</span>
+                <span class="premium-reading-badge">✦ COMPLETE REPORT</span>
                 <h2 class="premium-reading-title">Your Complete Traditional Astrology Analysis</h2>
-                <p class="premium-reading-subtitle">Your one free best-tier LLM report for this visitor connection</p>
+                <p class="premium-reading-subtitle">Complete traditional report generation for this chart</p>
                 <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width:auto; margin-top:0.75rem;">
                     Print / Save as PDF
                 </button>
@@ -1110,20 +1248,12 @@ function buildPremiumBottomBanner() {
     return `
         <div class="premium-bottom-banner">
             <div class="premium-bottom-banner-inner">
-                <span class="premium-trial-badge">✦ ONE FREE COMPLETE ANALYSIS</span>
-                <h3 class="premium-bottom-title">Want another report?</h3>
+                <span class="premium-trial-badge">✦ FULL REPORT INCLUDED</span>
+                <h3 class="premium-bottom-title">Keep a copy of the full report</h3>
                 <p class="premium-bottom-sub">
-                    This visitor connection has used its free best-tier generation.
-                    Additional reports are available through secure Stripe checkout; email is recommended for receipts and delivery support.
+                    This is the complete traditional astrology reading for this chart.
+                    Use your browser print dialog to save it for later.
                 </p>
-                <div class="result-conversion-actions" style="justify-content:center; margin-top:1rem;">
-                    <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullPremiumBottomBtn" data-default-label="Another Full Reading — $25">
-                        Another Full Reading — $25
-                    </button>
-                    <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumPremiumBottomBtn" data-default-label="Complete Analysis — $69">
-                        Complete Analysis — $69
-                    </button>
-                </div>
                 <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width:auto; margin-top:1rem;">
                     Print / Save PDF
                 </button>
@@ -1136,7 +1266,7 @@ function buildEmailCapture() {
     return `
         <div class="email-capture-block">
             <h4 class="email-capture-title">Want a copy sent to your inbox?</h4>
-            <p class="email-capture-sub">We'll email you a copy of this reading &mdash; no spam. Free preview does not require email; email is recommended for delivery and support.</p>
+            <p class="email-capture-sub">We'll email you a copy of this reading &mdash; no spam. The free report does not require email; email is useful for delivery and support.</p>
             <form class="email-capture-form" novalidate>
                 <div class="email-capture-row">
                     <input
@@ -1168,13 +1298,14 @@ function showLoading() {
 
     const loadingSection = document.getElementById("loadingSection");
     if (loadingSection) loadingSection.classList.remove("hidden");
+    updateLoadingMessage(LOADING_MSGS[0], LOADING_DETAILS[0]);
 
     const readingSection = document.getElementById("readingSection");
     if (readingSection) readingSection.classList.add("hidden");
 
     // Reset progress bar
     const fill = document.getElementById("loadingProgressFill");
-    if (fill) fill.style.width = "0%";
+    if (fill) fill.style.width = "4%";
 
     // Reset step indicators
     document.querySelectorAll(".loading-step").forEach((el, i) => {
@@ -1188,7 +1319,10 @@ function showLoading() {
     if (elapsedTimerInterval) clearInterval(elapsedTimerInterval);
     elapsedTimerInterval = setInterval(() => {
         const secs = Math.floor((Date.now() - loadingStartTime) / 1000);
-        if (elapsedEl) elapsedEl.textContent = `Calculating your chart... ${secs}s`;
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        const elapsed = mins > 0 ? `${mins}m ${String(s).padStart(2, "0")}s` : `${s}s`;
+        if (elapsedEl) elapsedEl.textContent = `Elapsed: ${elapsed} · still working`;
     }, 1000);
 
     // Scroll to loading
@@ -1215,7 +1349,7 @@ function hideLoading() {
     }
 }
 
-function updateLoadingMessage(msg) {
+function updateLoadingMessage(msg, detail = null) {
     const el = document.getElementById("loadingMessage");
     if (el) {
         el.style.opacity = "0";
@@ -1224,11 +1358,186 @@ function updateLoadingMessage(msg) {
             el.style.opacity = "1";
         }, 200);
     }
+    if (detail) {
+        const detailEl = document.getElementById("loadingDetail");
+        if (detailEl) detailEl.textContent = detail;
+    }
 }
 
-function updateLoadingProgress(stepIndex) {
+function buildInlineTipBox() {
+    const presetButtons = SUPPORT_TIP_AMOUNTS.map((tip) => (
+        `<button class="tip-preset-btn" type="button" data-tip-amount="${tip.amountCents}" data-default-label="${tip.label} tip">${tip.label}</button>`
+    )).join("");
+
+    return `
+        <div class="inline-tip-box">
+            <h4>Keep the full report free</h4>
+            <p>If the reading helped, pay what it was worth. The full report is already yours either way.</p>
+            <p class="inline-tip-impact">Tips pay for chart calculation, LLM report generation, source research, and keeping the complete report free for the next visitor.</p>
+            <div class="inline-tip-actions" aria-label="Suggested tip amounts">
+                ${presetButtons}
+            </div>
+            <div class="monthly-support-row">
+                <button class="monthly-support-btn" type="button" data-monthly-support="${MONTHLY_SUPPORT_AMOUNT_CENTS}" data-default-label="$5/month supporter">$5/month supporter</button>
+            </div>
+            <form class="custom-tip-form" novalidate>
+                <label class="custom-tip-label" for="customTipAmount">Tip amount</label>
+                <div class="custom-tip-row">
+                    <span class="custom-tip-prefix">$</span>
+                    <input
+                        id="customTipAmount"
+                        class="custom-tip-input"
+                        type="number"
+                        min="1"
+                        max="500"
+                        step="0.01"
+                        value="5"
+                        inputmode="decimal"
+                        aria-label="Tip amount in dollars"
+                    />
+                    <button class="feedback-submit-btn tip-submit-btn" type="submit" data-default-label="Tip">Tip</button>
+                </div>
+                <p class="tip-status" aria-live="polite"></p>
+            </form>
+        </div>
+    `;
+}
+
+function attachTipHandlers(container) {
+    const form = container.querySelector(".custom-tip-form");
+    const tipBox = container.querySelector(".inline-tip-box");
+    if (tipBox && !tipBox.dataset.impressionTracked) {
+        tipBox.dataset.impressionTracked = "1";
+        trackConversionEvent("tip_impression");
+    }
+    if (!form) return;
+
+    const input = form.querySelector(".custom-tip-input");
+    const button = form.querySelector(".tip-submit-btn");
+    const status = form.querySelector(".tip-status");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const dollars = Number(input?.value);
+        if (!Number.isFinite(dollars) || dollars < 1) {
+            if (status) status.textContent = "Enter an amount of at least $1.";
+            return;
+        }
+        if (dollars > 500) {
+            if (status) status.textContent = "Please keep the tip at $500 or less.";
+            return;
+        }
+
+        const amountCents = Math.round(dollars * 100);
+        await startTip(amountCents, button ? [button] : [], status);
+    });
+}
+
+function setupSupportCheckoutHandlers() {
+    document.addEventListener("click", async (event) => {
+        const target = event.target instanceof Element ? event.target : null;
+        const tipButton = target?.closest("[data-tip-amount]");
+        const monthlyButton = target?.closest("[data-monthly-support]");
+        const button = tipButton || monthlyButton;
+        if (!button) return;
+
+        event.preventDefault();
+        const host = button.closest(".inline-tip-box, .result-conversion-support");
+        const status = host?.querySelector(".tip-status, [data-support-status]") || null;
+
+        if (tipButton) {
+            const amountCents = Number(tipButton.dataset.tipAmount);
+            await startTip(amountCents, [tipButton], status);
+            return;
+        }
+
+        const amountCents = Number(monthlyButton.dataset.monthlySupport || MONTHLY_SUPPORT_AMOUNT_CENTS);
+        await startMonthlySupport(amountCents, [monthlyButton], status);
+    });
+}
+
+async function startTip(amountCents, buttons = [], statusEl = null) {
+    const amount = Number(amountCents);
+    if (!Number.isFinite(amount) || amount < 100 || amount > 50000) {
+        if (statusEl) statusEl.textContent = "Choose a valid tip amount.";
+        return;
+    }
+
+    buttons.forEach((btn) => {
+        btn.disabled = true;
+        btn.textContent = "Opening...";
+    });
+    if (statusEl) statusEl.textContent = "Opening secure tip page...";
+    trackConversionEvent("tip_click", { amount_cents: amount });
+
+    try {
+        const resp = await apiFetch(`/api/v1/guest/tip?amount_cents=${encodeURIComponent(String(amount))}`, {
+            method: "POST",
+            headers: authHeaders({ "Content-Type": "application/json" }),
+            body: "{}",
+        });
+        if (!resp.ok) {
+            const err = await resp.json().catch(() => ({}));
+            throw new Error(err?.detail || "Could not start tip page.");
+        }
+        const data = await resp.json();
+        if (!data.url) throw new Error("No tip URL returned.");
+        trackConversionEvent("tip_redirect", { amount_cents: amount });
+        window.location.href = data.url;
+    } catch (err) {
+        buttons.forEach((btn) => {
+            btn.disabled = false;
+            btn.textContent = btn.dataset.defaultLabel || "Tip";
+        });
+        trackConversionEvent("tip_error", { amount_cents: amount, error: String(err.message || err) });
+        if (statusEl) statusEl.textContent = "Could not open tip page. Please try again.";
+    }
+}
+
+async function startMonthlySupport(amountCents = MONTHLY_SUPPORT_AMOUNT_CENTS, buttons = [], statusEl = null) {
+    const amount = Number(amountCents);
+    if (!Number.isFinite(amount) || amount < 100 || amount > 50000) {
+        if (statusEl) statusEl.textContent = "Choose a valid monthly support amount.";
+        return;
+    }
+
+    buttons.forEach((btn) => {
+        btn.disabled = true;
+        btn.textContent = "Opening...";
+    });
+    if (statusEl) statusEl.textContent = "Opening secure monthly support page...";
+    trackConversionEvent("monthly_support_click", { amount_cents: amount });
+
+    try {
+        const resp = await apiFetch(`/api/v1/guest/monthly-support?amount_cents=${encodeURIComponent(String(amount))}`, {
+            method: "POST",
+            headers: authHeaders({ "Content-Type": "application/json" }),
+            body: "{}",
+        });
+        if (!resp.ok) {
+            const err = await resp.json().catch(() => ({}));
+            throw new Error(err?.detail || "Could not start monthly support page.");
+        }
+        const data = await resp.json();
+        if (!data.url) throw new Error("No monthly support URL returned.");
+        trackConversionEvent("monthly_support_redirect", { amount_cents: amount });
+        window.location.href = data.url;
+    } catch (err) {
+        buttons.forEach((btn) => {
+            btn.disabled = false;
+            btn.textContent = btn.dataset.defaultLabel || "$5/month supporter";
+        });
+        trackConversionEvent("monthly_support_error", { amount_cents: amount, error: String(err.message || err) });
+        if (statusEl) statusEl.textContent = "Could not open monthly support page. Please try again.";
+    }
+}
+
+function updateLoadingProgress(stepIndex, percent = null) {
     const totalSteps = LOADING_MSGS.length;
-    const pct = Math.min(((stepIndex + 1) / totalSteps) * 100, 95); // Cap at 95% until complete
+    const pct = percent === null
+        ? Math.min(((stepIndex + 1) / totalSteps) * 100, 95)
+        : Math.max(0, Math.min(Number(percent), 100));
     const fill = document.getElementById("loadingProgressFill");
     if (fill) fill.style.width = pct + "%";
 

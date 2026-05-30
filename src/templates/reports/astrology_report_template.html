@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{{ report.title | default('Traditional Astrology Report') }}</title>
+  <link rel="stylesheet" href="./astrology_report_template.css">
+</head>
+<body>
+  <main class="report-document" aria-label="Traditional Astrology Report">
+    <section class="report-section cover-page" data-section-index="1" data-section="cover">
+      <div class="folio" aria-hidden="true"></div>
+      <div class="cover-mark" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="cover-content">
+        <p class="kicker">Traditional Astrology</p>
+        <h1 class="foil-text">{{ report.client.display_name }}</h1>
+        <p class="cover-subtitle">{{ report.title | default('Modular Nativity Report') }}</p>
+        <div class="cover-meta">
+          <span>{{ report.birth.date }}</span>
+          <span>{{ report.birth.time }}</span>
+          <span>{{ report.birth.location }}</span>
+        </div>
+      </div>
+      <footer class="page-footer">
+        <span>{{ report.brand.name | default('traditional-astrology.com') }}</span>
+        <span>Historical Use Only</span>
+      </footer>
+    </section>
+
+    <section class="report-section letter-page" data-section-index="2" data-section="opening-letter">
+      <header class="page-header">
+        <span>Opening Note</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="narrow-copy">
+        <p class="eyebrow">A clear reading before deeper technique</p>
+        <h2>Your chart is being read as a classical nativity, not as a generic sun-sign profile.</h2>
+        <p>{{ report.opening_letter }}</p>
+        <div class="promise-strip">
+          <div><strong>{{ report.summary.sect }}</strong><span>Sect</span></div>
+          <div><strong>{{ report.summary.ascendant }}</strong><span>Ascendant</span></div>
+          <div><strong>{{ report.summary.almuten }}</strong><span>Almuten</span></div>
+        </div>
+        <p class="legal-note">Historical Use Only: this report is for traditional astrological study and reflection. It is not medical, legal, psychological, emergency, investment, or financial advice.</p>
+      </div>
+      <footer class="page-footer">
+        <span>{{ report.brand.name | default('traditional-astrology.com') }}</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="3" data-section="at-a-glance">
+      <header class="page-header">
+        <span>At A Glance</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Executive summary</p>
+        <h2>The chart in one page</h2>
+      </div>
+      <div class="summary-grid">
+        {% for item in report.at_a_glance %}
+        <article class="summary-card">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+          <p>{{ item.interpretation }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <aside class="conversion-note">
+        <h3>Most useful next read</h3>
+        <p>{{ report.conversion.primary_recommendation }}</p>
+      </aside>
+      <footer class="page-footer">
+        <span>Summary</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section chart-page forensic-chart-page" data-section-index="4" data-section="chart-wheel">
+      <header class="page-header">
+        <span>Traditional Technical Grid</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="technical-readout-copy">
+        <p>Traditional/Hellenistic framework</p>
+        <h2>Dense calculation grid, not modern pop astrology</h2>
+        <p>{{ report.technical_readout.summary }}</p>
+      </div>
+      <div class="method-badge-row" aria-label="Traditional method safeguards">
+        {% for badge in report.technical_readout.badges %}
+        <span>{{ badge }}</span>
+        {% endfor %}
+      </div>
+      <div class="chart-layout">
+        <div class="chart-frame">
+          {% if report.chart.wheel_svg %}
+          {{ report.chart.wheel_svg | safe }}
+          {% else %}
+          <svg class="chart-wheel" viewBox="0 0 640 640" role="img" aria-label="Traditional chart wheel">
+            <circle cx="320" cy="320" r="300"></circle>
+            <circle cx="320" cy="320" r="246"></circle>
+            <circle cx="320" cy="320" r="180"></circle>
+            <circle cx="320" cy="320" r="74"></circle>
+            {% for cusp in report.chart.house_cusps %}
+            <line x1="320" y1="320" x2="320" y2="20" style="transform: rotate({{ cusp.degree }}deg);"></line>
+            {% endfor %}
+            {% for body in report.chart.planets %}
+            <text x="{{ body.x }}" y="{{ body.y }}">{{ body.glyph }}</text>
+            {% endfor %}
+          </svg>
+          {% endif %}
+        </div>
+        <div class="angle-panel technical-readout-panel">
+          <h3>Technical Readout</h3>
+          <dl>
+            <dt>Ascendant</dt><dd>{{ report.angles.ascendant }}</dd>
+            <dt>Midheaven</dt><dd>{{ report.angles.midheaven }}</dd>
+            <dt>Descendant</dt><dd>{{ report.angles.descendant }}</dd>
+            <dt>Imum Coeli</dt><dd>{{ report.angles.imum_coeli }}</dd>
+          </dl>
+          <div class="readout-table">
+            {% for row in report.technical_readout.rows %}
+            <div>
+              <span>{{ row.label }}</span>
+              <strong>{{ row.value }}</strong>
+              <p>{{ row.detail }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <footer class="page-footer">
+        <span>Forensic Chart Grid</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="5" data-section="birth-data-audit">
+      <header class="page-header">
+        <span>Calculation Record</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Inputs and audit trail</p>
+        <h2>Birth data used for this calculation</h2>
+      </div>
+      <table class="report-table">
+        <tbody>
+          {% for row in report.birth.audit_rows %}
+          <tr><th>{{ row.label }}</th><td>{{ row.value }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="method-note">
+        <h3>Method guardrail</h3>
+        <p>{{ report.method.calculation_note }}</p>
+      </div>
+      <footer class="page-footer">
+        <span>Audit</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="6" data-section="planetary-positions">
+      <header class="page-header">
+        <span>Planetary Positions</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Seven visible planets plus nodes and lots where available</p>
+        <h2>Celestial positions</h2>
+      </div>
+      <table class="report-table dense-table">
+        <thead>
+          <tr><th>Body</th><th>Sign</th><th>Degree</th><th>House</th><th>Motion</th><th>Condition</th></tr>
+        </thead>
+        <tbody>
+          {% for planet in report.planets %}
+          <tr>
+            <td>{{ planet.name }}</td>
+            <td>{{ planet.sign }}</td>
+            <td>{{ planet.degree }}</td>
+            <td>{{ planet.house }}</td>
+            <td>{{ planet.motion }}</td>
+            <td>{{ planet.condition }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <footer class="page-footer">
+        <span>Positions</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="7" data-section="houses">
+      <header class="page-header">
+        <span>House Framework</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Topics and angular emphasis</p>
+        <h2>The twelve houses</h2>
+      </div>
+      <div class="two-column-list">
+        {% for house in report.houses %}
+        <article>
+          <span>{{ house.number }}</span>
+          <h3>{{ house.name }}</h3>
+          <p>{{ house.summary }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Houses</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="8" data-section="sect">
+      <header class="page-header">
+        <span>Sect</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="hero-statement">
+        <p>Day and night change the dignity of testimony.</p>
+        <h2>{{ report.sect.heading }}</h2>
+      </div>
+      <div class="split-analysis">
+        <article>
+          <h3>Sect light</h3>
+          <p>{{ report.sect.light_analysis }}</p>
+        </article>
+        <article>
+          <h3>Benefic and malefic emphasis</h3>
+          <p>{{ report.sect.benefic_malefic_analysis }}</p>
+        </article>
+      </div>
+      <div class="quote-panel">
+        <p>{{ report.sect.customer_translation }}</p>
+      </div>
+      <footer class="page-footer">
+        <span>Sect Always Matters</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="9" data-section="essential-dignity">
+      <header class="page-header">
+        <span>Essential Dignity</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Rulership, exaltation, triplicity, term, face</p>
+        <h2>Planetary dignity scorecard</h2>
+      </div>
+      <div class="scorecard">
+        {% for score in report.dignities %}
+        <article class="score-row">
+          <div><strong>{{ score.planet }}</strong><span>{{ score.condition }}</span></div>
+          <div class="meter" style="--score: {{ score.percent }}%;"><span></span></div>
+          <b>{{ score.total }}</b>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Dignities</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="10" data-section="accidental-condition">
+      <header class="page-header">
+        <span>Accidental Condition</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Visibility, speed, angle, combustion, retrogradation</p>
+        <h2>How strongly each planet can act</h2>
+      </div>
+      <div class="condition-columns">
+        {% for condition in report.accidental_conditions %}
+        <article>
+          <h3>{{ condition.planet }}</h3>
+          <ul>
+            {% for note in condition.notes %}
+            <li>{{ note }}</li>
+            {% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Condition</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="11" data-section="temperament">
+      <header class="page-header">
+        <span>Temperament</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Element and quality balance</p>
+        <h2>Temperamental signature</h2>
+      </div>
+      <div class="bar-chart">
+        {% for item in report.temperament.bars %}
+        <div class="bar-row" style="--value: {{ item.percent }}%;">
+          <span>{{ item.label }}</span>
+          <div><i></i></div>
+          <b>{{ item.value }}</b>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="long-copy">{{ report.temperament.interpretation }}</p>
+      <footer class="page-footer">
+        <span>Temperament</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="12" data-section="ascendant-ruler">
+      <header class="page-header">
+        <span>Ascendant Ruler</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="hero-statement">
+        <p>The ruler of the Ascendant shows the chart's operating style.</p>
+        <h2>{{ report.ascendant_ruler.title }}</h2>
+      </div>
+      <div class="analysis-block">
+        <p>{{ report.ascendant_ruler.analysis }}</p>
+      </div>
+      <div class="method-note">
+        <h3>Reader's shortcut</h3>
+        <p>{{ report.ascendant_ruler.customer_takeaway }}</p>
+      </div>
+      <footer class="page-footer">
+        <span>Chart Pilot</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="13" data-section="sun">
+      <header class="page-header">
+        <span>Luminary Chapter</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="planet-chapter">
+        <span class="planet-label">Sun</span>
+        <h2>{{ report.luminaries.sun.title }}</h2>
+        <p>{{ report.luminaries.sun.analysis }}</p>
+      </div>
+      <div class="evidence-list">
+        {% for item in report.luminaries.sun.evidence %}
+        <div><strong>{{ item.label }}</strong><span>{{ item.value }}</span></div>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Sun</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="14" data-section="moon">
+      <header class="page-header">
+        <span>Luminary Chapter</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="planet-chapter">
+        <span class="planet-label">Moon</span>
+        <h2>{{ report.luminaries.moon.title }}</h2>
+        <p>{{ report.luminaries.moon.analysis }}</p>
+      </div>
+      <div class="evidence-list">
+        {% for item in report.luminaries.moon.evidence %}
+        <div><strong>{{ item.label }}</strong><span>{{ item.value }}</span></div>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Moon</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="15" data-section="personal-planets">
+      <header class="page-header">
+        <span>Personal Planets</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Mercury, Venus, and Mars</p>
+        <h2>The active faculties</h2>
+      </div>
+      <div class="chapter-stack">
+        {% for chapter in report.personal_planets %}
+        <article>
+          <h3>{{ chapter.planet }}: {{ chapter.title }}</h3>
+          <p>{{ chapter.analysis }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Faculties</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="16" data-section="social-planets">
+      <header class="page-header">
+        <span>Jupiter And Saturn</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="split-analysis large">
+        {% for chapter in report.social_planets %}
+        <article>
+          <span class="planet-label">{{ chapter.planet }}</span>
+          <h2>{{ chapter.title }}</h2>
+          <p>{{ chapter.analysis }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Benefic And Malefic</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="17" data-section="aspects">
+      <header class="page-header">
+        <span>Aspects</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Configured testimony</p>
+        <h2>The major aspect map</h2>
+      </div>
+      <table class="report-table dense-table">
+        <thead>
+          <tr><th>Aspect</th><th>Orb</th><th>Condition</th><th>Meaning</th></tr>
+        </thead>
+        <tbody>
+          {% for aspect in report.aspects %}
+          <tr>
+            <td>{{ aspect.bodies }}</td>
+            <td>{{ aspect.orb }}</td>
+            <td>{{ aspect.condition }}</td>
+            <td>{{ aspect.interpretation }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <footer class="page-footer">
+        <span>Aspects</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="18" data-section="receptions">
+      <header class="page-header">
+        <span>Receptions</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Who can help whom</p>
+        <h2>Reception, bonification, and maltreatment</h2>
+      </div>
+      <div class="reception-flow">
+        {% for reception in report.receptions %}
+        <article>
+          <strong>{{ reception.from }}</strong>
+          <span>{{ reception.type }}</span>
+          <strong>{{ reception.to }}</strong>
+          <p>{{ reception.interpretation }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Receptions</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="19" data-section="lots">
+      <header class="page-header">
+        <span>Lots</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Fortune, Spirit, Eros, Necessity, and related parts</p>
+        <h2>Arabic Parts and calculated lots</h2>
+      </div>
+      <div class="lot-grid">
+        {% for lot in report.lots %}
+        <article>
+          <span>{{ lot.name }}</span>
+          <strong>{{ lot.position }}</strong>
+          <p>{{ lot.interpretation }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Lots</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="20" data-section="almuten">
+      <header class="page-header">
+        <span>Almuten Figuris</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="hero-statement">
+        <p>The planet with the strongest total claim over the chart.</p>
+        <h2>{{ report.almuten.title }}</h2>
+      </div>
+      <div class="split-analysis">
+        <article>
+          <h3>Score basis</h3>
+          <p>{{ report.almuten.score_basis }}</p>
+        </article>
+        <article>
+          <h3>Customer meaning</h3>
+          <p>{{ report.almuten.interpretation }}</p>
+        </article>
+      </div>
+      <footer class="page-footer">
+        <span>Almuten</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="21" data-section="stars-mansions">
+      <header class="page-header">
+        <span>Stars And Mansions</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Fixed stars, lunar mansions, and visibility conditions</p>
+        <h2>Additional celestial testimony</h2>
+      </div>
+      <div class="chapter-stack compact">
+        {% for item in report.stars_and_mansions %}
+        <article>
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.interpretation }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Stars</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="22" data-section="profection">
+      <header class="page-header">
+        <span>Annual Profection</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="hero-statement">
+        <p>The year is read through a house, sign, and lord.</p>
+        <h2>{{ report.timing.profection.title }}</h2>
+      </div>
+      <div class="timing-band">
+        <div><span>Age</span><strong>{{ report.timing.profection.age }}</strong></div>
+        <div><span>House</span><strong>{{ report.timing.profection.house }}</strong></div>
+        <div><span>Lord</span><strong>{{ report.timing.profection.lord }}</strong></div>
+      </div>
+      <p class="long-copy">{{ report.timing.profection.interpretation }}</p>
+      <footer class="page-footer">
+        <span>Profection</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="23" data-section="firdaria">
+      <header class="page-header">
+        <span>Firdaria</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Planetary period sequence</p>
+        <h2>Current period and subperiod</h2>
+      </div>
+      <div class="timeline">
+        {% for period in report.timing.firdaria.periods %}
+        <article class="{{ period.state }}">
+          <span>{{ period.dates }}</span>
+          <strong>{{ period.ruler }}</strong>
+          <p>{{ period.interpretation }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <div class="timelord-readout">
+        <article>
+          <span>Lot of Spirit</span>
+          <strong>{{ report.timing.spirit_peak.position }}</strong>
+          <p>Spirit sign: {{ report.timing.spirit_peak.spirit_sign }}</p>
+        </article>
+        <article>
+          <span>Peak Period</span>
+          <strong>{{ report.timing.spirit_peak.peak_sign }}</strong>
+          <p>{{ report.timing.spirit_peak.status }}</p>
+        </article>
+        <article>
+          <span>Active Releasing Stack</span>
+          <strong>{{ report.timing.spirit_peak.active_stack }}</strong>
+          <p>Calculated from the Lot of Spirit when the source chart includes the lot and birth timing data.</p>
+        </article>
+      </div>
+      <footer class="page-footer">
+        <span>Firdaria</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="24" data-section="solar-return">
+      <header class="page-header">
+        <span>Solar Return</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Annual return snapshot</p>
+        <h2>{{ report.timing.solar_return.title }}</h2>
+      </div>
+      <div class="split-analysis">
+        <article>
+          <h3>Return emphasis</h3>
+          <p>{{ report.timing.solar_return.emphasis }}</p>
+        </article>
+        <article>
+          <h3>How to use this page</h3>
+          <p>{{ report.timing.solar_return.customer_use }}</p>
+        </article>
+      </div>
+      <footer class="page-footer">
+        <span>Solar Return</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="25" data-section="primary-directions">
+      <header class="page-header">
+        <span>Primary Directions</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Long-arc timing</p>
+        <h2>Directional contacts</h2>
+      </div>
+      <table class="report-table dense-table">
+        <thead>
+          <tr><th>Date</th><th>Promissor</th><th>Significator</th><th>Reading</th></tr>
+        </thead>
+        <tbody>
+          {% for direction in report.timing.primary_directions %}
+          <tr>
+            <td>{{ direction.date }}</td>
+            <td>{{ direction.promissor }}</td>
+            <td>{{ direction.significator }}</td>
+            <td>{{ direction.interpretation }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <footer class="page-footer">
+        <span>Directions</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="26" data-section="next-year">
+      <header class="page-header">
+        <span>Next Twelve Months</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Customer-facing timing synthesis</p>
+        <h2>{{ report.timing.next_year.title }}</h2>
+      </div>
+      <div class="month-grid">
+        {% for month in report.timing.next_year.months %}
+        <article>
+          <span>{{ month.label }}</span>
+          <p>{{ month.focus }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Year Ahead</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="27" data-section="synthesis">
+      <header class="page-header">
+        <span>Synthesis</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Where the testimony converges</p>
+        <h2>{{ report.synthesis.title }}</h2>
+      </div>
+      <div class="chapter-stack">
+        {% for theme in report.synthesis.themes %}
+        <article>
+          <h3>{{ theme.title }}</h3>
+          <p>{{ theme.analysis }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Synthesis</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section worksheet-page" data-section-index="28" data-section="reflection">
+      <header class="page-header">
+        <span>Reflection Page</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Notes after reading</p>
+        <h2>Keep the useful parts close</h2>
+      </div>
+      <div class="worksheet">
+        {% for prompt in report.reflection_prompts %}
+        <article>
+          <h3>{{ prompt }}</h3>
+          <div class="write-lines" aria-hidden="true"></div>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Reflection</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section" data-section-index="29" data-section="method-appendix">
+      <header class="page-header">
+        <span>Method Appendix</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="section-title">
+        <p>Transparent calculations</p>
+        <h2>How this report was assembled</h2>
+      </div>
+      <div class="method-grid">
+        {% for method in report.method.steps %}
+        <article>
+          <span>{{ method.number }}</span>
+          <h3>{{ method.title }}</h3>
+          <p>{{ method.description }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <footer class="page-footer">
+        <span>Method</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+
+    <section class="report-section final-page" data-section-index="30" data-section="next-steps">
+      <header class="page-header">
+        <span>Next Steps</span>
+        <span class="section-number"></span>
+      </header>
+      <div class="final-content">
+        <p class="eyebrow">Continue only where the question is live</p>
+        <h2 class="foil-text">{{ report.next_steps.heading }}</h2>
+        <p>{{ report.next_steps.body }}</p>
+        <div class="cta-grid">
+          {% for action in report.next_steps.actions %}
+          <a class="cta-card" href="{{ action.url }}">
+            <span>{{ action.label }}</span>
+            <strong>{{ action.title }}</strong>
+            <p>{{ action.description }}</p>
+          </a>
+          {% endfor %}
+        </div>
+        <div class="qr-frame">
+          {{ report.next_steps.qr_svg | safe }}
+        </div>
+        <p class="legal-note">Historical Use Only. This material is not medical, legal, psychological, emergency, investment, or financial advice. Any paid follow-up should be used as interpretive study, not as a substitute for licensed professional judgment.</p>
+      </div>
+      <footer class="page-footer">
+        <span>{{ report.brand.name | default('traditional-astrology.com') }}</span>
+        <span class="section-number"></span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

@@ -114,6 +114,114 @@ async def test_guest_checkout_creates_full_reading_session(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_guest_tip_creates_optional_checkout_without_unlocking_content(
+    monkeypatch,
+):
+    created_kwargs = {}
+
+    monkeypatch.setattr(
+        guest_checkout.settings, "STRIPE_SECRET_KEY", " sk_test_tip\r\n"
+    )
+
+    def fake_session_create(**kwargs):
+        created_kwargs.update(kwargs)
+        return SimpleNamespace(
+            id="cs_test_tip",
+            url="https://checkout.stripe.test/cs_test_tip",
+        )
+
+    monkeypatch.setattr(
+        guest_checkout.stripe.checkout.Session, "create", fake_session_create
+    )
+
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="https://traditional-astrology.test"
+    ) as ac:
+        response = await ac.post("/api/v1/guest/tip", params={"amount_cents": 1500})
+
+    assert response.status_code == 200
+    assert guest_checkout.stripe.api_key == "sk_test_tip"
+    assert response.json() == {
+        "url": "https://checkout.stripe.test/cs_test_tip",
+        "session_id": "cs_test_tip",
+    }
+    assert created_kwargs["mode"] == "payment"
+    assert created_kwargs["line_items"][0]["price_data"]["unit_amount"] == 1500
+    assert created_kwargs["line_items"][0]["price_data"]["currency"] == "usd"
+    assert (
+        created_kwargs["line_items"][0]["price_data"]["product_data"]["name"]
+        == "Support Traditional Astrology"
+    )
+    assert created_kwargs["success_url"].startswith(
+        "https://traditional-astrology.test/?tip=thanks&session_id="
+    )
+    assert created_kwargs["cancel_url"] == (
+        "https://traditional-astrology.test/#support-the-work"
+    )
+    assert created_kwargs["metadata"] == {
+        "purchase_type": "tip",
+        "tier": "tip",
+        "amount_cents": "1500",
+    }
+
+
+@pytest.mark.asyncio
+async def test_guest_monthly_support_creates_subscription_without_unlocking_content(
+    monkeypatch,
+):
+    created_kwargs = {}
+
+    monkeypatch.setattr(
+        guest_checkout.settings, "STRIPE_SECRET_KEY", " sk_test_support\r\n"
+    )
+
+    def fake_session_create(**kwargs):
+        created_kwargs.update(kwargs)
+        return SimpleNamespace(
+            id="cs_test_support",
+            url="https://checkout.stripe.test/cs_test_support",
+        )
+
+    monkeypatch.setattr(
+        guest_checkout.stripe.checkout.Session, "create", fake_session_create
+    )
+
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="https://traditional-astrology.test"
+    ) as ac:
+        response = await ac.post("/api/v1/guest/monthly-support")
+
+    assert response.status_code == 200
+    assert guest_checkout.stripe.api_key == "sk_test_support"
+    assert response.json() == {
+        "url": "https://checkout.stripe.test/cs_test_support",
+        "session_id": "cs_test_support",
+    }
+    assert created_kwargs["mode"] == "subscription"
+    assert created_kwargs["line_items"][0]["price_data"]["unit_amount"] == 500
+    assert created_kwargs["line_items"][0]["price_data"]["currency"] == "usd"
+    assert created_kwargs["line_items"][0]["price_data"]["recurring"] == {
+        "interval": "month"
+    }
+    assert (
+        created_kwargs["line_items"][0]["price_data"]["product_data"]["name"]
+        == "Traditional Astrology Monthly Supporter"
+    )
+    assert created_kwargs["success_url"].startswith(
+        "https://traditional-astrology.test/?supporter=monthly&session_id="
+    )
+    assert created_kwargs["cancel_url"] == (
+        "https://traditional-astrology.test/#support-the-work"
+    )
+    assert created_kwargs["metadata"] == {
+        "purchase_type": "monthly_support",
+        "tier": "monthly_support",
+        "amount_cents": "500",
+    }
+    assert created_kwargs["subscription_data"]["metadata"] == created_kwargs["metadata"]
+
+
+@pytest.mark.asyncio
 async def test_guest_checkout_rejects_unknown_tier_without_stripe(monkeypatch):
     monkeypatch.setattr(guest_checkout.settings, "STRIPE_SECRET_KEY", "sk_test_unit")
 
@@ -610,7 +718,7 @@ async def test_guest_checkout_webhook_accepts_stripe_object_without_get(
     assert task.request_meta == {
         **chart_data,
         "tier": "premium_audit",
-        "report_iterations": 3,
+        "report_iterations": 6,
         "customer_email": "object-paid@example.com",
     }
     assert background_calls == [
@@ -619,7 +727,7 @@ async def test_guest_checkout_webhook_accepts_stripe_object_without_get(
             {
                 **chart_data,
                 "tier": "premium_audit",
-                "report_iterations": 3,
+                "report_iterations": 6,
                 "customer_email": "object-paid@example.com",
             },
         )

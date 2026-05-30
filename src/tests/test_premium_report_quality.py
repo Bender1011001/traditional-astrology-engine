@@ -111,8 +111,8 @@ Internal calculation table.
         ("single_reading", 1),
         ("free_premium", 1),
         ("free_premium_trial", 1),
-        ("premium_audit", 3),
-        ("complete_analysis", 3),
+        ("premium_audit", 6),
+        ("complete_analysis", 6),
         ("forensic_nativity", 6),
         ("top", 6),
     ],
@@ -122,7 +122,7 @@ def test_llm_iterations_are_tiered(tier, expected_iterations):
 
 
 @pytest.mark.asyncio
-async def test_free_premium_trial_allows_one_report_per_ip(db_session, monkeypatch):
+async def test_free_premium_trial_endpoint_is_retired(db_session, monkeypatch):
     payload = {
         "name": "Test User",
         "date": "1996-08-13",
@@ -131,10 +131,10 @@ async def test_free_premium_trial_allows_one_report_per_ip(db_session, monkeypat
         "state": "CA",
     }
 
-    async def fake_generate_task(task_id, request_meta):
-        return None
+    async def fail_if_called(task_id, request_meta):
+        raise AssertionError("retired free premium trial must not start a task")
 
-    monkeypatch.setattr(premium, "generate_premium_report_task", fake_generate_task)
+    monkeypatch.setattr(premium, "generate_premium_report_task", fail_if_called)
     monkeypatch.setattr(premium, "notify_chart_created", lambda *_args, **_kwargs: None)
 
     async with AsyncClient(
@@ -145,29 +145,9 @@ async def test_free_premium_trial_allows_one_report_per_ip(db_session, monkeypat
             json=payload,
             headers={"x-forwarded-for": "203.0.113.10"},
         )
-        second_response = await ac.post(
-            "/api/v1/premium/free-trial/request",
-            json=payload,
-            headers={"x-forwarded-for": "203.0.113.10"},
-        )
 
     assert response.status_code == 200
-    assert response.json()["status"] == "started"
-    assert response.json()["tier"] == "premium_audit"
-    assert response.json()["free_entitlement"] == "one_free_best_reading_per_ip"
-    assert response.json()["report_iterations"] == 3
-    assert response.json()["free_premium_remaining"] == 0
-
-    task = db_session.query(AsyncReportTask).one()
-    assert task.status == "pending"
-    assert task.request_meta["tier"] == "premium_audit"
-    assert task.request_meta["free_entitlement"] == "one_free_best_reading_per_ip"
-    assert task.request_meta["report_iterations"] == 3
-
-    usage = db_session.query(GuestRequest).one()
-    assert usage.ip_address == "203.0.113.10"
-    assert usage.request_type == premium.FREE_PREMIUM_REQUEST_TYPE
-
-    assert second_response.status_code == 200
-    assert second_response.json()["status"] == "limit_reached"
-    assert db_session.query(GuestRequest).count() == 1
+    assert response.json()["status"] == "limit_reached"
+    assert "first premium LLM response" in response.json()["message"]
+    assert db_session.query(AsyncReportTask).count() == 0
+    assert db_session.query(GuestRequest).count() == 0

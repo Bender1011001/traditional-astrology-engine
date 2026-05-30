@@ -88,3 +88,10 @@ models_list.txt
 
 # Cloud Run env vars (contains secrets)
 env.yaml
+
+# Local scratch / probe output (do not commit)
+artifacts/
+browser_smoke.db
+ERROR
+horoscope-chart5-700__radix_traditional_astroseek-13-8-1996_07-18.png
+Finding Etsy Astrology PDF Sellers.txt

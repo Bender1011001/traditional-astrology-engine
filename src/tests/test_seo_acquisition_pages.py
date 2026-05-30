@@ -22,6 +22,10 @@ DEPRECATED_BUSINESS_PAGES = [
     "traditional-astrology-vs-astrolabe.html",
     "astroforge-vs-astrolabe.html",
     "how-to-price-astrology-readings.html",
+    "compatibility.html",
+    "daily.html",
+    "horary.html",
+    "refunds.html",
 ]
 
 
@@ -45,34 +49,37 @@ def test_site_uses_one_google_analytics_tag_path():
             assert "googletagmanager.com/gtag/js?id=G-5T7HPNKL7V" in html, str(path)
 
 
-def test_paid_flows_emit_single_deduped_ga4_purchase_event():
+def test_public_report_shell_is_single_free_report_with_feedback_tip():
     config_js = (STATIC / "js" / "config.js").read_text(encoding="utf-8")
     reading_js = (STATIC / "js" / "reading-app.js").read_text(encoding="utf-8")
     horary_js = (STATIC / "js" / "horary-app.js").read_text(encoding="utf-8")
     sw_js = (STATIC / "sw.js").read_text(encoding="utf-8")
     homepage = (STATIC / "index.html").read_text(encoding="utf-8")
     natal = (STATIC / "natal-charts.html").read_text(encoding="utf-8")
-    horary = (STATIC / "horary.html").read_text(encoding="utf-8")
     report_py = (ROOT / "scripts" / "daily_funnel_report.py").read_text(
         encoding="utf-8"
     )
 
     assert 'window.gtag("event", "purchase", payload)' in config_js
     assert "ta_purchase_tracked_${transactionId}" in config_js
-    assert "trackPurchase(data.purchase" in reading_js
+    assert "trackPurchase(data.purchase" not in reading_js
     assert "trackPurchase(data.purchase" in horary_js
     assert "/api/v1/horary/subscription/checkout" in horary_js
     assert "/api/v1/horary/subscriber-answer" in horary_js
     assert "/api/v1/horary/checkout" not in horary_js
     assert "/api/v1/horary/paid-answer" not in horary_js
-    assert "astro-v22-geomancy-horary-subscription" in sw_js
+    assert "astro-v27-support-tips" in sw_js
     assert "/js/chart-graphics.js" in sw_js
     assert "/js/geomancy-app.js" in sw_js
-    assert "js/reading-app.js?v=rev20260509bestwheel1" in homepage
-    assert "/js/reading-app.js?v=rev20260509bestwheel1" in natal
-    assert "js/horary-app.js?v=20260511horarysub1" in horary
-    assert "$5/month" in horary
-    assert "$1" not in horary
+    assert "/horary.html" not in sw_js
+    assert "/js/horary-app.js" not in sw_js
+    assert "js/reading-app.js?v=rev20260526support1" in homepage
+    assert "/js/reading-app.js?v=rev20260526support1" in natal
+    assert "Generate another chart whenever you want" in reading_js
+    assert "Share Reading" in reading_js
+    assert "I just generated a free complete traditional astrology reading" in reading_js
+    assert 'data-reading-share-action="share"' in homepage
+    assert "Free Report Limit Reached" not in reading_js
     assert 'GA4_MEASUREMENT_ID = "G-5T7HPNKL7V"' in report_py
     assert 'GA4_MEASUREMENT_ID = "G-RCNDWN4XVN"' not in report_py
 
@@ -92,7 +99,7 @@ def test_geomancy_page_is_indexable_and_uses_real_api():
     assert "What Is Geomancy?" in html
     assert "The Strict Rules" in html
     assert "Judge Validity" in html
-    assert "$5/month" in html
+    assert "$5/month" not in html
     assert "https://traditional-astrology.com/geomancy.html" in sitemap
 
 
@@ -131,6 +138,44 @@ def test_acquisition_pages_are_in_sitemap():
 
     for page in ACQUISITION_PAGES:
         assert f"https://traditional-astrology.com/{page}" in sitemap
+
+
+def test_calculator_search_snippets_match_search_console_terms():
+    homepage = (STATIC / "index.html").read_text(encoding="utf-8")
+    birth = (STATIC / "traditional-birth-chart-calculator.html").read_text(
+        encoding="utf-8"
+    )
+    natal = (STATIC / "natal-charts.html").read_text(encoding="utf-8")
+
+    assert "100% Free Traditional Astrology Reading" in homepage
+    assert "The Full 20+ Page Report" in homepage
+    assert "free traditional astrology calculator" in homepage.lower()
+    assert "Free Traditional Birth Chart Calculator" in birth
+    assert "free traditional birth chart calculator" in birth.lower()
+    assert "Stripe-paid" not in birth
+    assert "optional paid premium report" not in birth
+    assert "single free full-report flow" in birth.lower()
+    assert "Traditional Natal Chart Guide | Free Birth Chart Calculator" in natal
+    assert "Results in seconds" not in natal
+    assert "class=\u201d" not in natal
+
+
+def test_homepage_promotes_single_free_report_and_end_of_reading_tip():
+    homepage = (STATIC / "index.html").read_text(encoding="utf-8")
+    reading_js = (STATIC / "js" / "reading-app.js").read_text(encoding="utf-8")
+
+    assert "one complete traditional astrology report" in homepage
+    assert "No visitor cap on the public natal report" in homepage
+    assert "Tip $" not in homepage
+    assert "onclick=\"startTip" not in homepage
+    assert "Feedback box at the bottom" in homepage
+    assert "How accurate did this chart reading feel?" in reading_js
+    assert "Your note emails us and helps improve the rules." in reading_js
+    assert "Tip amount" in reading_js
+    assert "pay what it was worth" in reading_js
+    assert "$5/month supporter" in reading_js
+    assert "/api/v1/guest/tip?amount_cents=" in reading_js
+    assert "/api/v1/guest/monthly-support?amount_cents=" in reading_js
 
 
 def test_sitemap_keeps_live_pages_and_excludes_retired_business_pages():

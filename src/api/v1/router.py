@@ -3,6 +3,7 @@ from fastapi import APIRouter
 import src.api.v1.endpoints.premium as premium_endpoint
 from src.api.v1.endpoints import (
     account,
+    astrocartography,
     billing,
     charts,
     developer,
@@ -19,6 +20,7 @@ api_router = APIRouter()
 
 api_router.include_router(charts.router, prefix="/charts", tags=["charts"])
 api_router.include_router(synastry.router, tags=["synastry"])
+api_router.include_router(astrocartography.router, tags=["astrocartography"])
 api_router.include_router(mundane.router, tags=["mundane"])
 api_router.include_router(forensic.router, prefix="/forensic", tags=["forensic"])
 api_router.include_router(billing.router, prefix="/billing", tags=["billing"])

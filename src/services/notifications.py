@@ -1,5 +1,6 @@
 import logging
 import os
+from html import escape
 
 from src.core.config import settings
 from src.engine.email_service import send_email
@@ -64,6 +65,68 @@ class AdminNotificationService:
             <li><b>Name:</b> {user_name or 'N/A'}</li>
             <li><b>Time:</b> {logging.Formatter().formatTime(logging.LogRecord('', 0, '', 0, '', None, None), '%Y-%m-%d %H:%M:%S')}</li>
         </ul>
+        """
+
+        for admin_email in admin_emails:
+            send_email(to_email=admin_email, subject=subject, html_content=html_content)
+
+    @staticmethod
+    def notify_reading_feedback(
+        *,
+        vote: str,
+        source: str = "",
+        comment: str = "",
+        chart_event_id: str = "",
+        reading_hash: str = "",
+        birth: dict | None = None,
+        url: str = "",
+        ua: str = "",
+    ):
+        """
+        Notifies admins when a visitor rates a reading.
+
+        The email intentionally includes only operational context and the user's
+        explicit comment, not the full generated reading body.
+        """
+        admin_emails = AdminNotificationService._get_admin_emails()
+        if not admin_emails:
+            logging.warning("No OWNER_EMAILS configured for feedback notification.")
+            return
+
+        birth = birth or {}
+        vote_label = "Good" if vote == "good" else "Bad"
+        subject = f"Reading feedback: {vote_label}"
+        safe_comment = escape(comment or "No comment provided.")
+        safe_source = escape(source or "N/A")
+        safe_chart_event_id = escape(chart_event_id or "N/A")
+        safe_reading_hash = escape((reading_hash or "N/A")[:18])
+        safe_url = escape(url or "N/A")
+        safe_ua = escape((ua or "N/A")[:500])
+
+        birth_rows = ""
+        for label, key in (
+            ("Date", "date"),
+            ("Time", "time"),
+            ("City", "city"),
+            ("State", "state"),
+        ):
+            value = birth.get(key)
+            if value:
+                birth_rows += f"<li><b>{label}:</b> {escape(str(value))}</li>"
+
+        html_content = f"""
+        <h2>Reading Feedback</h2>
+        <ul>
+            <li><b>Vote:</b> {vote_label}</li>
+            <li><b>Source:</b> {safe_source}</li>
+            <li><b>Chart Event:</b> {safe_chart_event_id}</li>
+            <li><b>Reading Hash:</b> {safe_reading_hash}</li>
+            <li><b>URL:</b> {safe_url}</li>
+            <li><b>User-Agent:</b> {safe_ua}</li>
+            {birth_rows}
+        </ul>
+        <h3>Visitor Comment</h3>
+        <p style="white-space: pre-wrap;">{safe_comment}</p>
         """
 
         for admin_email in admin_emails:

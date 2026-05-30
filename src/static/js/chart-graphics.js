@@ -23,12 +23,9 @@ const PLANET_GLYPHS = {
     Mars: "♂",
     Jupiter: "♃",
     Saturn: "♄",
-    Uranus: "♅",
-    Neptune: "♆",
-    Pluto: "♇",
-    North_Node: "☊",
-    South_Node: "☋",
 };
+
+const TRADITIONAL_PLANETS = new Set(["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]);
 
 const ROMAN_HOUSES = {
     1: "I",
@@ -161,7 +158,7 @@ export function renderChartWheel(data) {
     const ascendant = normalizeDeg(data.angles.Ascendant);
     const houses = data.houses || {};
     const planetEntries = Object.entries(data.planets)
-        .filter(([, info]) => info && info.longitude !== undefined && info.longitude !== null)
+        .filter(([name, info]) => TRADITIONAL_PLANETS.has(name) && info && info.longitude !== undefined && info.longitude !== null)
         .sort((a, b) => normalizeDeg(a[1].longitude) - normalizeDeg(b[1].longitude));
     const labelAngles = distributedPlanetAngles(planetEntries, ascendant);
 
@@ -310,8 +307,8 @@ export function renderChartWheel(data) {
 
     svg.push(
         `<circle cx="${center}" cy="${center}" r="40" class="chart-wheel-center" />`,
-        `<text x="${center}" y="${center - 4}" text-anchor="middle" dominant-baseline="middle" class="chart-center-title">NATAL</text>`,
-        `<text x="${center}" y="${center + 13}" text-anchor="middle" dominant-baseline="middle" class="chart-center-subtitle">CHART</text>`,
+        `<text x="${center}" y="${center - 4}" text-anchor="middle" dominant-baseline="middle" class="chart-center-title">WHOLE</text>`,
+        `<text x="${center}" y="${center + 13}" text-anchor="middle" dominant-baseline="middle" class="chart-center-subtitle">SIGN</text>`,
         "</svg>"
     );
 

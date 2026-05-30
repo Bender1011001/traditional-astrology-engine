@@ -245,6 +245,8 @@ async def calculate_chart(
         house_system=chart_request.house_system or "W",
         zodiac_system=chart_request.zodiac_system or "tropical",
         ayanamsa=chart_request.ayanamsa,
+        latitude=getattr(chart_request, "latitude", None),
+        longitude=getattr(chart_request, "longitude", None),
     )
 
     if "error" in engine_result:

@@ -6,6 +6,7 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from src.api.v1.auth import create_access_token
+from src.api.v1.endpoints import charts
 from src.app import app
 from src.database.core import DEFAULT_DATABASE_URL, SessionLocal, _resolve_database_url
 from src.database.models import AsyncReportTask, User
@@ -70,11 +71,25 @@ async def test_auth_pages_redirect_to_auth_modal(path, expected_location):
 
 
 @pytest.mark.asyncio
-async def test_owner_page_is_retired_without_analytics_redirect():
+@pytest.mark.parametrize(
+    "path",
+    [
+        "/owner",
+        "/owner/",
+        "/owner.html",
+        "/profile",
+        "/profile/",
+        "/profile.html",
+        "/src/static/login.html",
+        "/src/static/owner.html",
+        "/src/static/profile.html",
+    ],
+)
+async def test_retired_private_pages_are_gone_without_analytics_redirect(path):
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
     ) as ac:
-        response = await ac.get("/owner.html")
+        response = await ac.get(path)
 
     assert response.status_code == 410
     assert "location" not in response.headers
@@ -162,30 +177,25 @@ async def test_dashboard_html_serves_account_surface():
 
 
 @pytest.mark.asyncio
-async def test_daily_html_serves_public_horoscope_surface():
+async def test_daily_html_redirects_to_single_free_report_funnel():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
     ) as ac:
         response = await ac.get("/daily.html")
 
-    assert response.status_code == 200
-    assert "Daily Horoscopes" in response.text
-    assert "publicHoroscopeCard" in response.text
-    assert "/api/v1/charts/daily-horoscopes" in response.text
-    assert "personal-briefing" in response.text
+    assert response.status_code == 301
+    assert response.headers["location"] == "/#get-reading"
 
 
 @pytest.mark.asyncio
-async def test_compatibility_html_serves_synastry_surface():
+async def test_compatibility_html_redirects_to_single_free_report_funnel():
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
     ) as ac:
         response = await ac.get("/compatibility.html")
 
-    assert response.status_code == 200
-    assert "Compatibility Through Traditional Synastry" in response.text
-    assert "/api/v1/synastry" in response.text
-    assert "Compare Two Charts" in response.text
+    assert response.status_code == 301
+    assert response.headers["location"] == "/#get-reading"
 
 
 @pytest.mark.asyncio
@@ -395,6 +405,52 @@ async def test_calculate_endpoint_free():
         data = response.json()
         assert "meta" in data
         assert "astronomy" in data
+
+
+@pytest.mark.asyncio
+async def test_calculate_endpoint_forwards_explicit_coordinates(monkeypatch):
+    captured_kwargs = {}
+
+    async def fake_generate_full_nativity_async(**kwargs):
+        captured_kwargs.update(kwargs)
+        return {
+            "technical_data": {
+                "analysis": {},
+                "astronomy": {},
+                "meta": {},
+            },
+            "human_translation": {
+                "report_markdown": "Coordinate pass-through smoke.",
+                "executive_summary": "Coordinate pass-through smoke.",
+            },
+        }
+
+    monkeypatch.setattr(
+        charts, "generate_full_nativity_async", fake_generate_full_nativity_async
+    )
+    monkeypatch.setattr(charts, "get_from_cache", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(charts, "set_to_cache", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(charts, "archive_chart_output", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(charts, "notify_chart_created", lambda *_args, **_kwargs: None)
+
+    payload = {
+        "name": "Coordinate Test",
+        "date": "1990-01-01",
+        "time": "12:00",
+        "city": "London",
+        "state": "ENG",
+        "latitude": 51.5072,
+        "longitude": -0.1276,
+    }
+
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test", follow_redirects=True
+    ) as ac:
+        response = await ac.post("/api/v1/charts/calculate", json=payload)
+
+    assert response.status_code == 200
+    assert captured_kwargs["latitude"] == 51.5072
+    assert captured_kwargs["longitude"] == -0.1276
 
 
 @pytest.mark.asyncio
