@@ -1,0 +1,118 @@
+{
+  "date": "2026-06-01",
+  "user_goal": "Wide-net astrology-event correlation study: test all data domains (finance, natural, macro, human behavior, space weather) against 910 astrological features with mandatory placebo gate and falsification battery. Document every result. Find any real connection or definitively show none exists.",
+  "task_tier": "large",
+  "current_phase": "implementation",
+  "repo": {
+    "shape": "monorepo",
+    "relevant_subproject": "astrology_mapping_v5 (new) — uses v4 engine at financial_astrology_analysis_v4/generate_features.py",
+    "stack": "Python, swisseph, pandas, sklearn, yfinance, requests",
+    "package_manager": "conda/pip",
+    "run_commands_from": "E:\\code.projects\\astrology",
+    "test_command": "python -m pytest src/tests/ -x -q",
+    "build_command": "n/a",
+    "lint_command": "n/a",
+    "typecheck_command": "n/a"
+  },
+  "assumptions": [
+    {
+      "assumption": "v4 generate_features.py is importable from astrology_mapping_v5 via sys.path",
+      "confidence": "high",
+      "risk_if_wrong": "Need to copy or package the engine"
+    },
+    {
+      "assumption": "yfinance, FRED direct CSV, USGS API, GFZ Potsdam, SIDC, HURDAT2 are all accessible without auth",
+      "confidence": "high",
+      "risk_if_wrong": "Some domains may be skipped; target >=12 of 20"
+    },
+    {
+      "assumption": "Calendar placebo will match or beat astro on S&P 500 (confirmed by v4 placebo test)",
+      "confidence": "certain",
+      "risk_if_wrong": "n/a — already proven"
+    },
+    {
+      "assumption": "Git branch astro-mapping-v5 isolates all new work from main",
+      "confidence": "high",
+      "risk_if_wrong": "Low — branch is live and confirmed"
+    }
+  ],
+  "work_items": [
+    {
+      "id": "W1",
+      "class": "REQUIRED",
+      "description": "Build shared infrastructure: data fetcher, domain runner, master runner",
+      "why": "Reusable pipeline prevents duplication across 20 domains",
+      "ruled_out": "One-off scripts per domain — too slow and unmaintainable",
+      "status": "active",
+      "verification": "run_domain.py <domain> executes end-to-end without error"
+    },
+    {
+      "id": "W2",
+      "class": "REQUIRED",
+      "description": "Test all 20 data domains with placebo gate + falsification battery",
+      "why": "Core research goal — cast the widest possible net",
+      "ruled_out": "Finance-only — prior study showed that approach produces era-confounded results",
+      "status": "active",
+      "verification": "synthesis_report.md has results table with >= 12 domains"
+    },
+    {
+      "id": "W3",
+      "class": "REQUIRED",
+      "description": "Deep-dive on any candidate signal that passes all gates",
+      "why": "Must try to disprove before accepting any connection",
+      "ruled_out": "n/a — only triggered if something actually passes",
+      "status": "pending",
+      "verification": "deepdive.md exists for each passing domain"
+    },
+    {
+      "id": "W4",
+      "class": "REQUIRED",
+      "description": "synthesis_report.md with cross-domain comparison and final conclusion",
+      "why": "User needs the big picture, not just per-domain files",
+      "ruled_out": "n/a",
+      "status": "pending",
+      "verification": "synthesis_report.md exists with summary table and conclusion"
+    }
+  ],
+  "changed_files": [
+    {"path": "astrology_mapping_v5/ (new directory)", "what_and_why": "All v5 code lives here on astro-mapping-v5 branch"}
+  ],
+  "commands_run": [
+    {"cmd": "git checkout -b astro-mapping-v5", "cwd": "E:\\code.projects\\astrology", "result": "Branch created successfully"},
+    {"cmd": "invoke_subagent teamwork_preview", "cwd": "n/a", "result": "Launched: dbaf6b62-0809-4226-80e1-3a18f116ffc5"}
+  ],
+  "bugs_found": [
+    {
+      "bug": "v4 pipeline epoch confound — slow outer-planet features proxy target autocorrelation",
+      "location": "financial_astrology_analysis_v4/model.py walk_forward_auc",
+      "status": "fixed in v5 via detrended targets + placebo gate + fast-feature split",
+      "evidence": "calendar AUC 0.6745 beat astro AUC 0.6626 on high_vol_day"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Even with methodology fixes, 20 domains with 910 features each may produce no genuine signal — the result 'astrology correlates with nothing' is valid science but may take days of compute",
+      "why_it_matters": "User wants a real answer, not a premature null result",
+      "evidence": "v4 placebo confirmed null result for S&P 500",
+      "next_step": "If all 20 domains null, this is the definitive answer and should be reported clearly"
+    },
+    {
+      "risk": "Some natural/human data sources (NHTSA, CDC FluView) may have API changes or broken endpoints",
+      "why_it_matters": "Could drop below 12-domain coverage threshold",
+      "evidence": "Known API instability for NHTSA FARS",
+      "next_step": "Teamwork agent will skip and document; fallback to local CSV if available"
+    }
+  ],
+  "resume": {
+    "status": "Teamwork subagent dbaf6b62 launched and building infrastructure",
+    "next_action": "Monitor subagent progress; review synthesis_report.md when complete; deep-dive any passing domains; update research log",
+    "files_to_inspect_next": [
+      "E:\\code.projects\\astrology\\astrology_mapping_v5\\synthesis_report.md",
+      "E:\\code.projects\\astrology\\astrology_mapping_v5\\results\\"
+    ],
+    "commands_to_run_next": [
+      "python astrology_mapping_v5/run_all.py (after subagent builds it)",
+      "python financial_astrology_analysis_v4/summarize_results.py (already done)"
+    ]
+  }
+}
