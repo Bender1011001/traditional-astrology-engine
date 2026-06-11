@@ -146,6 +146,11 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 - Computed core aspects (septener-only; only source of aspect truth): `analysis.aspects`
 - Computed shadow aspects (outers only; do not use in core judgment): `analysis.aspects_shadow`
 - Nodes (modifiers only; no aspect claims unless explicit contact is listed): `analysis.supplemental.nodes`
+- **Twelve Topoi (deterministic ruler-condition chains), natural significators per topic, derived/turned houses, places-from-Fortune**: `analysis.topical` (`twelve_topoi`, `natural_significators`, `derived_houses`, `places_from_fortune`)
+- **Zodiacal Releasing (Valens; from BOTH Lot of Spirit and Lot of Fortune)**: `analysis.fate.zodiacal_releasing` (per lot: `start_sign`, `current` = active L1/L2/L3, `l1_chapters` with `peak_from_fortune` and Loosing-of-the-Bond status)
+
+# DETERMINISTIC TOPICAL & RELEASING LAYERS (DO NOT RE-DERIVE)
+The ruler-condition chain for every house, the natural significators of each topic, the derived (turned) houses, the places-from-Fortune, and the full Zodiacal Releasing periods are PROVIDED in `analysis.topical` and `analysis.fate.zodiacal_releasing`. You MUST cite these structures and MUST NOT compute, re-derive, or invent them. When judging a topic, cite: (a) the topical house + its ruler's `condition_band` and the listed `reasons`; (b) the natural significator(s) and their condition; (c) any relevant Lot / place-from-Fortune. When `ruler_in_aversion_to_its_house` is true, you MUST note that the lord cannot regard its own place. If a field is absent, say so plainly — do not fabricate.
 
 # TRADITIONAL DIGNITY LEDGER (HARD-CODED TRUTH)
 
@@ -585,8 +590,9 @@ If a planet is **Cazimi** or a difficult aspect dominates the section, explain t
     """Continue. Now map the TERRESTRIAL ESTATE (The Twelve Houses) and the HERMETIC LOTS.
 
 **THE TWELVE TOPOI:**
-For each house, analyze: Sign, Ruler, Ruler's condition, any occupants
-Focus on CONCRETE life circumstances, not psychological states
+Use `analysis.topical.twelve_topoi` as the source of truth — do NOT re-derive the ruler chain. For each house cite: Sign, Ruler, the ruler's `condition_band` + its `reasons`, any `occupants`, and (when true) `ruler_in_aversion_to_its_house` (the lord cannot regard its own place).
+Then, for each major life topic (parents, marriage, children, wealth, career, enemies/illness, death), judge it by the FULL stack from `analysis.topical.natural_significators`: the topical house + its ruler AND the natural significator(s) + their condition, cross-confirmed with the relevant Lot and `analysis.topical.places_from_fortune` / `analysis.topical.derived_houses`. A topic is only well-promised when house, lord, and significator agree.
+Focus on CONCRETE life circumstances, not psychological states.
 
 **THE LOTS (Arabic Parts):**
 - Lot of Fortune: Where does bodily circumstance symbolism concentrate?
@@ -607,7 +613,7 @@ Do NOT repeat previous material. Cover only what has not been addressed.""",
 2. DECENNIALS (VALENS): What General Period? What Sub-Period? How does it activate natal configurations?
 3. ANNUAL PROFECTION: What house? What Lord of the Year? That Lord's natal condition?
 4. FIRDARIA: What Major Period? What Sub-Period? How do these Lords interact?
-5. ZODIACAL RELEASING: What Level 1 chapter (from Lot of Spirit)? What Level 2?
+5. ZODIACAL RELEASING (from `analysis.fate.zodiacal_releasing`; do NOT compute it yourself): Cite the CURRENT L1/L2/L3 released from the Lot of **Spirit** (`zodiacal_releasing.Spirit.current`) AND from the Lot of **Fortune** (`zodiacal_releasing.Fortune.current`). Flag whether the current/upcoming chapters are `peak_from_fortune` (peak periods of activity and eminence) and call out any "Loosing of the Bond" status. Use the `l1_chapters` list for the lifetime arc.
 6. VITALITY TIMING NUANCE: If the JSON flags directed hits/anaretic windows to the Hyleg degree, cite them as technical risk windows only (no "executioner" framing).
    - REVISED: Use `analysis.vitality.directed_hits_to_hyleg` and `analysis.vitality.anaretic_windows` instead. Do NOT use "executioner" wording.
 

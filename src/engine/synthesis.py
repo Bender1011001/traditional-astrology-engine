@@ -190,8 +190,10 @@ class ReportSynthesizer:
             type_ = type_raw.value if hasattr(type_raw, "value") else type_raw
             apply_str = "Applying" if is_applying else "Separating"
 
-            # Classify the dynamic using traditional planet natures
-            MALEFICS = {"Mars", "Saturn", "Pluto"}
+            # Classify the dynamic using traditional planet natures.
+            # Septener only: the outer planets are non-traditional and are NOT
+            # treated as malefics/benefics in classical doctrine.
+            MALEFICS = {"Mars", "Saturn"}
             BENEFICS = {"Venus", "Jupiter"}
 
             narrative = ""

@@ -393,6 +393,7 @@ class DignityCalculator:
             "monomoiria": 0,
             "detriment": 0,
             "fall": 0,
+            "peregrine": 0,
         }
 
         # 1. Domicile (+5)
@@ -491,15 +492,21 @@ class DignityCalculator:
         else:
             details.append(f"Monomoiria Ruler: {mono_ruler.value}")
 
-        # 7. Peregrine (-5): No essential dignity of any kind
-        if (
-            score_breakdown["domicile"] == 0
-            and score_breakdown["exaltation"] == 0
-            and score_breakdown["triplicity"] == 0
-            and score_breakdown["term"] == 0
-            and score_breakdown["face"] == 0
-        ):
+        # 7. Peregrine (-5): a planet bearing NONE of the five essential
+        #    dignities AND not in detriment or fall. Peregrine is mutually
+        #    exclusive with detriment/fall (Lilly, Christian Astrology p.115):
+        #    a fallen planet is debilitated by its fall, NOT additionally as a
+        #    wanderer. Recorded in the breakdown so the ledger sums to total.
+        _has_positive_dignity = any(
+            score_breakdown[_k] > 0
+            for _k in ("domicile", "exaltation", "triplicity", "term", "face")
+        )
+        _in_detriment_or_fall = (
+            score_breakdown["detriment"] < 0 or score_breakdown["fall"] < 0
+        )
+        if not _has_positive_dignity and not _in_detriment_or_fall:
             score += cls.PEREGRINE
+            score_breakdown["peregrine"] = cls.PEREGRINE
             details.append("Peregrine (-5)")
 
         # 8. Collect variant information for report
@@ -616,6 +623,7 @@ class DignityCalculator:
             "monomoiria": 0,
             "detriment": 0,
             "fall": 0,
+            "peregrine": 0,
         }
 
         # 1. Domicile (+5) / Detriment (-5)
@@ -730,15 +738,21 @@ class DignityCalculator:
             else:
                 details.append(f"Monomoiria Ruler: {mono_ruler.value}")
 
-        # 7. Peregrine (-5): No essential dignity of any kind
-        if (
-            score_breakdown["domicile"] == 0
-            and score_breakdown["exaltation"] == 0
-            and score_breakdown["triplicity"] == 0
-            and score_breakdown["term"] == 0
-            and score_breakdown["face"] == 0
-        ):
+        # 7. Peregrine (-5): a planet bearing NONE of the five essential
+        #    dignities AND not in detriment or fall. Peregrine is mutually
+        #    exclusive with detriment/fall (Lilly, Christian Astrology p.115):
+        #    a fallen planet is debilitated by its fall, NOT additionally as a
+        #    wanderer. Recorded in the breakdown so the ledger sums to total.
+        _has_positive_dignity = any(
+            score_breakdown[_k] > 0
+            for _k in ("domicile", "exaltation", "triplicity", "term", "face")
+        )
+        _in_detriment_or_fall = (
+            score_breakdown["detriment"] < 0 or score_breakdown["fall"] < 0
+        )
+        if not _has_positive_dignity and not _in_detriment_or_fall:
             score += cls.PEREGRINE
+            score_breakdown["peregrine"] = cls.PEREGRINE
             details.append("Peregrine (-5)")
 
         return {

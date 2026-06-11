@@ -33,12 +33,14 @@ from .mundane import MundaneEngine, check_eclipse_impact, get_recent_eclipses
 from .phasis import PhasisEngine
 from .prediction import (AdvancedPredictionEngine, calculate_epitasis_days,
                          calculate_profection_sign, calculate_solar_return_jd,
+                         calculate_zr_lifetime_map, calculate_zr_periods,
                          get_lord_of_year)
 from .primary_directions import PrimaryDirectionsEngine
 from .reception import ReceptionEngine, ReceptionMode
 from .solar_return import SolarReturnEngine
 from .synthesis import ReportSynthesizer
 from .temperament import TemperamentEngine
+from .topical import TopicalEngine
 
 RULE_SOURCE_MAP_EXT = {
     "Bonatti Consideration 5": [
@@ -552,6 +554,21 @@ class Auditor:
 
         horary_phys = Auditor._calculate_horary_physics(chart, age)  # type: ignore
         analysis["horary_physics"] = horary_phys
+
+        # 7b. Topical layer (deterministic): the Twelve Topoi with ruler-condition
+        #     chains, natural significators per topic, derived (turned) houses, and
+        #     places-from-Fortune. Sourced here so the narrative layer must CITE the
+        #     ruler-condition chain instead of improvising it.
+        try:
+            analysis["topical"] = TopicalEngine.build(
+                ascendant_lon=float(chart.ascendant),
+                sect=sect,
+                planets_forensic=planets_forensic,
+                hermetic_lots=analysis["fate"].get("hermetic_lots", {}),  # type: ignore
+            )
+        except Exception as e:
+            logger.warning("Topical layer failed: %s", repr(e), exc_info=True)
+            analysis["topical"] = {"error": "topical layer unavailable"}
 
         # 8. Universal Ledger (Source of Truth)
         rule_ledger = Auditor._generate_rule_ledger(
@@ -1251,8 +1268,60 @@ class Auditor:
         )
         prediction_report = predictor.get_prediction_report(ans_date)
 
+        # 3. Zodiacal Releasing (Valens) from Spirit and Fortune.
+        #    Computed here (not by the narrative layer) so the report can no
+        #    longer omit or fabricate the most important Hellenistic time-lord
+        #    technique. Reference: Valens, Anthology IV; Brennan, Hellenistic
+        #    Astrology ch. 19 (peak periods are angular from the Lot of Fortune).
+        zodiacal_releasing: Dict[str, Any] = {
+            "_doc": "Valens zodiacal releasing. L1 chapters released from the Lot of Spirit (action, career, eminence) and the Lot of Fortune (body, circumstance). 'current' gives the active L1>L2>L3. 'peak_from_fortune' marks chapters whose sign is angular (1/4/7/10) from the Lot of Fortune (peak periods of activity). Loosing of the Bond is flagged in each period's status.",
+        }
+        try:
+            lot_lons = predictor.get_lots()  # name -> absolute longitude (sect-aware)
+            fortune_lon = lot_lons.get("Fortune")
+            fortune_sidx = (
+                int(fortune_lon / 30) % 12 if fortune_lon is not None else None
+            )
+            for lot_name in ("Spirit", "Fortune"):
+                lon = lot_lons.get(lot_name)
+                if lon is None:
+                    continue
+                start_sign = list(Sign)[int(lon / 30) % 12]
+                current = calculate_zr_periods(start_sign, bdt, ans_date, level=4)
+                lifetime = calculate_zr_lifetime_map(
+                    start_sign, bdt, years=100, max_level=1
+                )
+                l1 = []
+                for ch in lifetime:
+                    sidx = list(Sign).index(Sign(ch["sign"]))
+                    peak = (
+                        ((sidx - fortune_sidx) % 12) in (0, 3, 6, 9)
+                        if fortune_sidx is not None
+                        else None
+                    )
+                    l1.append(
+                        {
+                            "sign": ch["sign"],
+                            "start_date": ch["start_date"],
+                            "end_date": ch["end_date"],
+                            "duration_years": ch["duration_years"],
+                            "peak_from_fortune": peak,
+                        }
+                    )
+                zodiacal_releasing[lot_name] = {
+                    "start_sign": start_sign.value,
+                    "current": current,
+                    "l1_chapters": l1,
+                }
+        except Exception as e:
+            logger.warning(
+                "Zodiacal Releasing computation failed: %s", repr(e), exc_info=True
+            )
+            zodiacal_releasing["error"] = "zodiacal releasing unavailable"
+
         return {
             "hermetic_lots": lots,
+            "zodiacal_releasing": zodiacal_releasing,
             "primary_directions": p_dirs_json,
             "planet_to_planet_directions": [
                 {
