@@ -62,22 +62,30 @@ def test_public_report_shell_is_single_free_report_with_feedback_tip():
 
     assert 'window.gtag("event", "purchase", payload)' in config_js
     assert "ta_purchase_tracked_${transactionId}" in config_js
-    assert "trackPurchase(data.purchase" not in reading_js
+    # Paid funnel: the $69 Complete Analysis purchase flow lives in reading-app.js.
+    assert "trackPurchase(data.purchase" in reading_js
+    assert "/api/v1/guest/checkout?" in reading_js
+    assert "/api/v1/guest/generate-paid?session_id=" in reading_js
+    assert "/api/v1/guest/task-status/" in reading_js
+    assert "data-premium-checkout" in reading_js
+    # One-off purchases only — no subscription surfaces in the natal funnel.
+    assert "/api/v1/guest/monthly-support" not in reading_js
+    assert "$5/month supporter" not in reading_js
     assert "trackPurchase(data.purchase" in horary_js
     assert "/api/v1/horary/subscription/checkout" in horary_js
     assert "/api/v1/horary/subscriber-answer" in horary_js
     assert "/api/v1/horary/checkout" not in horary_js
     assert "/api/v1/horary/paid-answer" not in horary_js
-    assert "astro-v27-support-tips" in sw_js
+    assert "astro-v28-premium-checkout" in sw_js
     assert "/js/chart-graphics.js" in sw_js
     assert "/js/geomancy-app.js" in sw_js
     assert "/horary.html" not in sw_js
     assert "/js/horary-app.js" not in sw_js
-    assert "js/reading-app.js?v=rev20260526support1" in homepage
-    assert "/js/reading-app.js?v=rev20260526support1" in natal
+    assert "js/reading-app.js?v=rev20260612premium1" in homepage
+    assert "/js/reading-app.js?v=rev20260612premium1" in natal
     assert "Generate another chart whenever you want" in reading_js
     assert "Share Reading" in reading_js
-    assert "I just generated a free complete traditional astrology reading" in reading_js
+    assert "I just generated a free traditional astrology reading" in reading_js
     assert 'data-reading-share-action="share"' in homepage
     assert "Free Report Limit Reached" not in reading_js
     assert 'GA4_MEASUREMENT_ID = "G-5T7HPNKL7V"' in report_py
@@ -147,8 +155,8 @@ def test_calculator_search_snippets_match_search_console_terms():
     )
     natal = (STATIC / "natal-charts.html").read_text(encoding="utf-8")
 
-    assert "100% Free Traditional Astrology Reading" in homepage
-    assert "The Full 20+ Page Report" in homepage
+    assert "Free Traditional Astrology Reading" in homepage
+    assert "Real Calculations. No Sign-Up." in homepage
     assert "free traditional astrology calculator" in homepage.lower()
     assert "Free Traditional Birth Chart Calculator" in birth
     assert "free traditional birth chart calculator" in birth.lower()
@@ -160,7 +168,7 @@ def test_calculator_search_snippets_match_search_console_terms():
     assert "class=\u201d" not in natal
 
 
-def test_homepage_promotes_single_free_report_and_end_of_reading_tip():
+def test_homepage_promotes_free_reading_with_paid_upgrade():
     homepage = (STATIC / "index.html").read_text(encoding="utf-8")
     reading_js = (STATIC / "js" / "reading-app.js").read_text(encoding="utf-8")
 
@@ -169,13 +177,15 @@ def test_homepage_promotes_single_free_report_and_end_of_reading_tip():
     assert "Tip $" not in homepage
     assert "onclick=\"startTip" not in homepage
     assert "Feedback box at the bottom" in homepage
+    # The $69 one-time upgrade is promoted; subscriptions are not.
+    assert "one-time $69 upgrade" in homepage
+    assert "No subscription" in homepage
     assert "How accurate did this chart reading feel?" in reading_js
     assert "Your note emails us and helps improve the rules." in reading_js
     assert "Tip amount" in reading_js
-    assert "pay what it was worth" in reading_js
-    assert "$5/month supporter" in reading_js
+    assert "Complete Astrological Analysis" in reading_js
+    assert "keep the reading and get your money back" in reading_js
     assert "/api/v1/guest/tip?amount_cents=" in reading_js
-    assert "/api/v1/guest/monthly-support?amount_cents=" in reading_js
 
 
 def test_sitemap_keeps_live_pages_and_excludes_retired_business_pages():
