@@ -267,6 +267,7 @@ def _send_report_email(
         logger.info("Report email sent to %s", customer_email)
     else:
         logger.error("Failed to send report email to %s", customer_email)
+        raise RuntimeError(f"send_email returned False for {customer_email}")
 
 
 class PremiumGenerator:
@@ -359,6 +360,10 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
             if requested_iterations is not None
             else llm_iterations_for_tier(tier)
         )
+        # A paid order must never run with fewer passes than its tier promises
+        # (the original $69 incident shipped a paid customer the free reading).
+        if request_data.get("paid"):
+            iteration_count = max(iteration_count, llm_iterations_for_tier(tier))
 
         report_markdown = await loop.run_in_executor(
             None,
@@ -432,6 +437,15 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
 
         # Generate PDF and email it to the customer if we have their email
         customer_email = request_data.get("customer_email")
+        if request_data.get("paid") and not customer_email:
+            from src.services.admin_notifier import notify_paid_order_issue
+
+            notify_paid_order_issue(
+                kind="No customer email on paid order",
+                task_id=task_id,
+                tier=tier,
+                error="Report generated but there is no email to deliver the PDF to.",
+            )
         if customer_email:
             try:
                 from src.engine.pdf_generator import PDFReportGenerator
@@ -456,9 +470,29 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
                     repr(email_err),
                     exc_info=True,
                 )
+                if request_data.get("paid"):
+                    from src.services.admin_notifier import notify_paid_order_issue
+
+                    notify_paid_order_issue(
+                        kind="PDF/email delivery failed",
+                        task_id=task_id,
+                        tier=tier,
+                        customer_email=str(customer_email or ""),
+                        error=repr(email_err),
+                    )
 
     except Exception as e:
         logger.error("Task %s failed: %s", task_id, repr(e), exc_info=True)
+        if request_data.get("paid"):
+            from src.services.admin_notifier import notify_paid_order_issue
+
+            notify_paid_order_issue(
+                kind="Report generation FAILED",
+                task_id=task_id,
+                tier=str(request_data.get("tier") or "unknown"),
+                customer_email=str(request_data.get("customer_email") or ""),
+                error=repr(e),
+            )
         task.status = "failed"  # type: ignore
         task.result_json = {"error": str(e)}  # type: ignore
         chart_event_id = request_data.get("chart_event_id")

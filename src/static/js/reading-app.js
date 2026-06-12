@@ -1,14 +1,17 @@
 /**
  * reading-app.js — B2C Reading Flow
- * 
+ *
  * Flow:
  * 1. User fills birth form → submit
- * 2. Free: Calls /api/v1/premium/guest/request → polls → shows complete reading
- * 3. Visitors can generate as many reports as they want
- * 4. Feedback: visitor can rate the reading, send a comment, and optionally tip at the end
+ * 2. Free: Calls /api/v1/premium/guest/request → polls → shows free reading
+ * 3. Upsell: $69 Complete Analysis via guest Stripe checkout (no account).
+ *    Return URL /?paid=true&session_id=... → POST /api/v1/guest/generate-paid
+ *    → poll /api/v1/guest/task-status/{id} → render + PDF emailed.
+ * 4. Feedback: visitor can rate the reading, send a comment, and optionally tip
  */
 
 import { apiFetch } from './api.js';
+import { trackPurchase } from './config.js';
 import { renderAstrocartographyMap } from './astrocartography-map.js';
 import { renderChartWheel } from './chart-graphics.js';
 
@@ -70,15 +73,14 @@ window.printReading = function () {
 };
 
 const SHARE_READING_TITLE = "My Traditional Astrology Reading";
-const SHARE_READING_TEXT = "I just generated a free complete traditional astrology reading with sect, houses, lots, fixed stars, and timing. You can make yours here:";
+const SHARE_READING_TEXT = "I just generated a free traditional astrology reading with sect, houses, lots, fixed stars, and timing. You can make yours here:";
 const SHARE_READING_FALLBACK_URL = "https://traditional-astrology.com/#get-reading";
 const SUPPORT_TIP_AMOUNTS = [
     { amountCents: 500, label: "$5" },
     { amountCents: 1100, label: "$11" },
     { amountCents: 2500, label: "$25" },
-    { amountCents: 6900, label: "$69" },
 ];
-const MONTHLY_SUPPORT_AMOUNT_CENTS = 500;
+const PREMIUM_PRICE_LABEL = "$69";
 
 function getReadingShareUrl(medium) {
     try {
@@ -98,10 +100,10 @@ function getPersonalizedShareText() {
     const moon = summary.moon_sign;
     const rising = summary.rising_sign;
     if (sun && moon && rising) {
-        return `${sun} Sun, ${moon} Moon, ${rising} Rising — I just got a free 20-page traditional astrology reading and it's surprisingly detailed. Get yours:`;
+        return `${sun} Sun, ${moon} Moon, ${rising} Rising — I just got a free traditional astrology reading and it's surprisingly detailed. Get yours:`;
     }
     if (sun) {
-        return `${sun} Sun — I just got a free 20-page traditional astrology reading and it's surprisingly detailed. Get yours:`;
+        return `${sun} Sun — I just got a free traditional astrology reading and it's surprisingly detailed. Get yours:`;
     }
     return SHARE_READING_TEXT;
 }
@@ -225,7 +227,7 @@ function buildShareNudge() {
         <div class="share-nudge" id="shareNudge">
             <div class="share-nudge-inner">
                 <h3 class="share-nudge-title">Know someone who'd find this interesting?</h3>
-                <p class="share-nudge-sub">${personalNote} The site is 100% free — no catch.</p>
+                <p class="share-nudge-sub">${personalNote} The free reading takes a minute — no account needed.</p>
                 <div class="share-platform-buttons">
                     <button type="button" class="share-platform-btn share-twitter" onclick="openPlatformShare('twitter')" aria-label="Share on Twitter/X">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -338,6 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupReadingShareHandlers();
     setupSupportCheckoutHandlers();
     showSupportReturnNotice();
+    handlePaidReturn();
 
     // Export & Share Handlers
     const exportPdfBtn = document.getElementById('exportPdfBtn');
@@ -403,6 +406,258 @@ function shakeForm() {
     requestAnimationFrame(() => {
         card.style.animation = "shake 0.4s ease-out";
     });
+}
+
+// ─── Premium ($69 Complete Analysis) Checkout ───────────────────────────────
+
+function getStoredChartPayload() {
+    if (chartPayload?.date && chartPayload?.city) return chartPayload;
+    try {
+        const stored = JSON.parse(localStorage.getItem("ta_chart_payload") || "null");
+        if (stored?.date && stored?.city) {
+            chartPayload = stored;
+            return stored;
+        }
+    } catch (_) {
+        // Ignore storage parse issues; the form is still available.
+    }
+    return null;
+}
+
+function buildPremiumUpsell() {
+    return `
+        <div class="premium-bottom-banner" id="premiumUpsell">
+            <div class="premium-bottom-banner-inner">
+                <span class="premium-trial-badge">✦ GO DEEPER</span>
+                <h3 class="premium-bottom-title">The Complete Astrological Analysis — ${PREMIUM_PRICE_LABEL}</h3>
+                <p class="premium-bottom-sub">
+                    Your free reading is a single pass over the chart. The Complete Analysis runs six
+                    deep synthesis passes: 20+ pages covering advanced timing (annual profections,
+                    firdaria, Zodiacal Releasing), all five dignity levels, Arabic lots, fixed star
+                    contacts, humoral temperament, and a personalized 10-year forecast.
+                </p>
+                <p class="premium-bottom-sub" style="margin-top:0.5rem;">
+                    No account needed. The PDF is emailed to you after checkout, and the full reading
+                    also renders right here in your browser.
+                </p>
+                <button class="btn-cta" type="button" data-premium-checkout data-default-label="Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}" style="width:auto; margin-top:1rem;">
+                    ✦ Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}
+                </button>
+                <p class="premium-bottom-sub" style="margin-top:0.75rem; font-size:0.8rem;">
+                    One-time payment. No subscription. If anything goes wrong with delivery,
+                    you keep the reading and get your money back.
+                </p>
+                <p class="reading-support-status" data-premium-status aria-live="polite"></p>
+            </div>
+        </div>
+    `;
+}
+
+async function startPremiumCheckout(button, statusEl = null) {
+    const payload = getStoredChartPayload();
+    if (!payload) {
+        if (statusEl) statusEl.textContent = "Generate your free reading first so we have your birth details.";
+        return;
+    }
+
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Opening secure checkout...";
+    }
+    if (statusEl) statusEl.textContent = "Opening Stripe checkout...";
+    trackConversionEvent("premium_checkout_click", { tier: "premium_audit" });
+
+    try {
+        const qs = new URLSearchParams({
+            tier: "premium_audit",
+            date: payload.date,
+            time: payload.time || "12:00",
+            city: payload.city,
+            state: payload.state || "",
+            name: payload.name || "Guest",
+        });
+        const resp = await apiFetch(`/api/v1/guest/checkout?${qs.toString()}`, {
+            method: "POST",
+            headers: authHeaders({ "Content-Type": "application/json" }),
+            body: "{}",
+        });
+        if (!resp.ok) {
+            const err = await resp.json().catch(() => ({}));
+            throw new Error(err?.detail || "Could not open checkout.");
+        }
+        const data = await resp.json();
+        if (!data.url) throw new Error("No checkout URL returned.");
+        trackConversionEvent("premium_checkout_redirect", { tier: "premium_audit" });
+        window.location.href = data.url;
+    } catch (err) {
+        if (button) {
+            button.disabled = false;
+            button.textContent = button.dataset.defaultLabel || `Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}`;
+        }
+        trackConversionEvent("premium_checkout_error", { error: String(err.message || err) });
+        if (statusEl) statusEl.textContent = "Could not open checkout. Please try again.";
+    }
+}
+
+// ─── Paid Return: /?paid=true&session_id=... ────────────────────────────────
+
+function handlePaidReturn() {
+    let params;
+    try {
+        params = new URLSearchParams(window.location.search || "");
+    } catch (_) {
+        return;
+    }
+    if (params.get("paid") !== "true") return;
+    const sessionId = params.get("session_id");
+    if (!sessionId) return;
+
+    getStoredChartPayload();
+    showLoading();
+    updateLoadingMessage("Confirming your payment...", "Verifying the Stripe checkout session.");
+    updateLoadingProgress(0, 6);
+
+    startPaidGeneration(sessionId);
+}
+
+async function startPaidGeneration(sessionId) {
+    try {
+        const resp = await apiFetch(
+            `/api/v1/guest/generate-paid?session_id=${encodeURIComponent(sessionId)}`,
+            {
+                method: "POST",
+                headers: authHeaders({ "Content-Type": "application/json" }),
+                body: "{}",
+            }
+        );
+        if (!resp.ok) {
+            const err = await resp.json().catch(() => ({}));
+            throw new Error(err?.detail || "Could not start your paid reading.");
+        }
+        const data = await resp.json();
+        if (data.purchase) trackPurchase(data.purchase);
+        trackConversionEvent("paid_generation_started", { tier: data.tier || "premium_audit" });
+        updateLoadingMessage(
+            "Writing your Complete Analysis...",
+            "Six deep synthesis passes — this usually takes several minutes. Your PDF will also be emailed."
+        );
+        updateLoadingProgress(3, 15);
+        pollForPaidCompletion(data.task_id);
+    } catch (err) {
+        hideLoading();
+        trackConversionEvent("paid_generation_start_error", { error: String(err.message || err) });
+        showError(
+            "Your payment went through, but we could not start the report automatically. " +
+            "Refresh this page to retry — your order is safe and this step can be repeated. " +
+            "If it keeps failing, email support@traditional-astrology.com with your checkout email: " +
+            "you will get your reading, and a refund if we can't deliver it promptly."
+        );
+    }
+}
+
+function pollForPaidCompletion(taskId) {
+    let attempts = 0;
+    const maxAttempts = 360; // 30 minutes at 5s intervals — 6 LLM passes take a while
+
+    const interval = setInterval(async () => {
+        attempts++;
+        const pct = Math.min(92, 15 + Math.floor((attempts / maxAttempts) * 77));
+        const stageIndex = Math.min(LOADING_MSGS.length - 2, 3 + Math.floor((attempts / 60) * 3));
+        updateLoadingMessage(
+            PREMIUM_LOADING_MSGS[attempts % PREMIUM_LOADING_MSGS.length],
+            "Your PDF will be emailed to your checkout address even if you close this page."
+        );
+        updateLoadingProgress(stageIndex, pct);
+
+        if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            hideLoading();
+            showError(
+                "The report is taking longer than expected. Don't worry — generation continues in the " +
+                "background and the PDF will be emailed to your checkout address. If nothing arrives " +
+                "within an hour, email support@traditional-astrology.com."
+            );
+            return;
+        }
+
+        try {
+            const resp = await apiFetch(`/api/v1/guest/task-status/${taskId}`);
+            if (!resp.ok) return;
+            const data = await resp.json();
+
+            if (data.status === "completed") {
+                clearInterval(interval);
+                updateLoadingProgress(7, 100);
+                hideLoading();
+                trackConversionEvent("paid_generation_completed", { tier: data.result?.tier || "premium_audit" });
+                showPaidReading(data.result);
+            } else if (data.status === "failed") {
+                clearInterval(interval);
+                hideLoading();
+                trackConversionEvent("paid_generation_failed");
+                showError(
+                    "Report generation hit an error. We have been alerted automatically and will " +
+                    "regenerate and email your reading. If you don't hear from us within a few hours, " +
+                    "email support@traditional-astrology.com — you keep the reading and get a refund " +
+                    "if we can't make it right."
+                );
+            }
+        } catch (_) {
+            // Suppressed: non-critical poll error; retry next interval
+        }
+    }, 5000);
+}
+
+function showPaidReading(result) {
+    const section = document.getElementById("readingSection");
+    const content = document.getElementById("readingContent");
+    if (!section || !content) return;
+
+    const md = result?.report_markdown || "";
+    const html = renderMarkdown(md);
+    const traceData = result?.computation_trace || null;
+    currentReadingContext = {
+        chart_event_id: result?.chart_event_id || null,
+        reading_hash: result?.reading_hash || hashStr(JSON.stringify({ chartPayload, md })),
+        source: "b2c_paid_reading",
+        birth: chartPayload,
+        meta: result?.meta || {},
+        time_unknown: Boolean(chartPayload?.time_unknown),
+    };
+
+    content.innerHTML = `
+        <div class="premium-trial-top-banner premium-trial-top-banner--complete" role="status">
+            <div class="premium-trial-banner-inner">
+                <span class="premium-trial-badge">✦ COMPLETE ANALYSIS</span>
+                <p class="premium-trial-headline">
+                    Thank you for your purchase. Your <strong>Complete Astrological Analysis</strong> is ready below.
+                </p>
+                <p class="premium-trial-sub">
+                    A PDF copy is on its way to the email you used at checkout. Anything wrong?
+                    Email support@traditional-astrology.com — you keep the reading and get your money back.
+                </p>
+            </div>
+        </div>
+        <div class="reading-body">${html}</div>
+        ${traceData ? buildTraceSection(traceData) : ''}
+        <div class="unlock-cta">
+            <div class="unlock-buttons">
+                <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: 100%; margin-top: 0;">
+                    Print / Save as PDF
+                </button>
+                ${buildReadingShareActions()}
+            </div>
+        </div>
+        ${buildFeedbackWidget("paid")}
+    `;
+
+    section.classList.remove("hidden");
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    attachFeedbackHandlers(content, "paid");
+    const chartActions = document.getElementById("chartActions");
+    if (chartActions) chartActions.classList.remove("hidden");
+    if (traceData) attachTraceHandlers(content);
 }
 
 // ─── Free Reading (Instant) ───
@@ -783,22 +1038,21 @@ function buildInstantConversionBar(freeRemaining) {
     return `
         <div class="result-conversion-bar" aria-label="Free reading actions">
             <div class="result-conversion-copy">
-                <div class="result-conversion-kicker">100% free complete reading</div>
-                <h2>Your full traditional astrology report is ready.</h2>
-                <p>This is the complete report flow: sect, dignities, houses, lots, fixed stars, time-lord periods, and forecast synthesis.</p>
+                <div class="result-conversion-kicker">Your free reading</div>
+                <h2>Your traditional astrology reading is ready.</h2>
+                <p>Calculated from your real chart: sect, dignities, houses, lots, fixed stars, and classical interpretation.</p>
                 <div class="result-conversion-meta">
                     <span>No account or email required</span>
-                    <span>20+ page depth when saved as PDF</span>
                     <span>Generate another chart whenever you want</span>
+                    <span>Free reading stays free</span>
                 </div>
                 <p class="feedback-reassurance" style="margin:0.85rem 0 0; max-width:none; text-align:left;"><strong>Feedback matters:</strong> use the Good/Bad buttons and comment box at the bottom to tell us how accurate the reading felt.</p>
                 <div class="result-conversion-support" id="support-the-work">
-                    <p><strong>Reader supported:</strong> the report is free. Tips pay for chart calculation, LLM report generation, and source research.</p>
+                    <p><strong>Want the full depth?</strong> The Complete Astrological Analysis (${PREMIUM_PRICE_LABEL}, one-time) runs six synthesis passes: 20+ pages with advanced timing, all dignity levels, and a 10-year forecast. PDF emailed, no account needed.</p>
                     <div class="result-support-actions">
-                        <button class="support-action-btn" type="button" data-tip-amount="500" data-default-label="$5 tip">$5 tip</button>
-                        <button class="support-action-btn support-action-primary" type="button" data-monthly-support="500" data-default-label="$5/month supporter">$5/month supporter</button>
+                        <button class="support-action-btn support-action-primary" type="button" data-premium-checkout data-default-label="Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}">Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}</button>
                     </div>
-                    <p class="reading-support-status" data-support-status aria-live="polite"></p>
+                    <p class="reading-support-status" data-premium-status aria-live="polite"></p>
                 </div>
             </div>
             <div class="result-conversion-actions">
@@ -1015,6 +1269,7 @@ window.collapseAllTrace = function() {
 
 function buildPostReadingCTA(freeRemaining) {
     return `
+        ${buildPremiumUpsell()}
         <div class="unlock-cta">
             <div class="unlock-buttons">
                 <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: 100%; margin-top: 0;">
@@ -1022,7 +1277,7 @@ function buildPostReadingCTA(freeRemaining) {
                 </button>
                 ${buildReadingShareActions()}
             </div>
-            <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">You can generate another full report whenever you want.</p>
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">You can generate another free reading whenever you want.</p>
         </div>
         ${buildShareNudge()}
     `;
@@ -1053,7 +1308,7 @@ function buildFeedbackWidget(source) {
                 <button class="feedback-submit-btn" type="button">Send Feedback</button>
             </div>
             <p class="feedback-status"></p>
-            ${buildInlineTipBox()}
+            ${source === "paid" ? "" : buildInlineTipBox()}
         </div>
     `;
 }
@@ -1371,14 +1626,11 @@ function buildInlineTipBox() {
 
     return `
         <div class="inline-tip-box">
-            <h4>Keep the full report free</h4>
-            <p>If the reading helped, pay what it was worth. The full report is already yours either way.</p>
-            <p class="inline-tip-impact">Tips pay for chart calculation, LLM report generation, source research, and keeping the complete report free for the next visitor.</p>
+            <h4>Keep the free reading free</h4>
+            <p>If the reading helped, you can leave a one-time tip. The free reading is already yours either way.</p>
+            <p class="inline-tip-impact">Tips pay for chart calculation, report generation, and source research.</p>
             <div class="inline-tip-actions" aria-label="Suggested tip amounts">
                 ${presetButtons}
-            </div>
-            <div class="monthly-support-row">
-                <button class="monthly-support-btn" type="button" data-monthly-support="${MONTHLY_SUPPORT_AMOUNT_CENTS}" data-default-label="$5/month supporter">$5/month supporter</button>
             </div>
             <form class="custom-tip-form" novalidate>
                 <label class="custom-tip-label" for="customTipAmount">Tip amount</label>
@@ -1438,13 +1690,13 @@ function setupSupportCheckoutHandlers() {
     document.addEventListener("click", async (event) => {
         const target = event.target instanceof Element ? event.target : null;
         const tipButton = target?.closest("[data-tip-amount]");
-        const monthlyButton = target?.closest("[data-monthly-support]");
-        const button = tipButton || monthlyButton;
+        const premiumButton = target?.closest("[data-premium-checkout]");
+        const button = tipButton || premiumButton;
         if (!button) return;
 
         event.preventDefault();
-        const host = button.closest(".inline-tip-box, .result-conversion-support");
-        const status = host?.querySelector(".tip-status, [data-support-status]") || null;
+        const host = button.closest(".inline-tip-box, .result-conversion-support, .premium-bottom-banner");
+        const status = host?.querySelector(".tip-status, [data-support-status], [data-premium-status]") || null;
 
         if (tipButton) {
             const amountCents = Number(tipButton.dataset.tipAmount);
@@ -1452,8 +1704,7 @@ function setupSupportCheckoutHandlers() {
             return;
         }
 
-        const amountCents = Number(monthlyButton.dataset.monthlySupport || MONTHLY_SUPPORT_AMOUNT_CENTS);
-        await startMonthlySupport(amountCents, [monthlyButton], status);
+        await startPremiumCheckout(premiumButton, status);
     });
 }
 
@@ -1492,44 +1743,6 @@ async function startTip(amountCents, buttons = [], statusEl = null) {
         });
         trackConversionEvent("tip_error", { amount_cents: amount, error: String(err.message || err) });
         if (statusEl) statusEl.textContent = "Could not open tip page. Please try again.";
-    }
-}
-
-async function startMonthlySupport(amountCents = MONTHLY_SUPPORT_AMOUNT_CENTS, buttons = [], statusEl = null) {
-    const amount = Number(amountCents);
-    if (!Number.isFinite(amount) || amount < 100 || amount > 50000) {
-        if (statusEl) statusEl.textContent = "Choose a valid monthly support amount.";
-        return;
-    }
-
-    buttons.forEach((btn) => {
-        btn.disabled = true;
-        btn.textContent = "Opening...";
-    });
-    if (statusEl) statusEl.textContent = "Opening secure monthly support page...";
-    trackConversionEvent("monthly_support_click", { amount_cents: amount });
-
-    try {
-        const resp = await apiFetch(`/api/v1/guest/monthly-support?amount_cents=${encodeURIComponent(String(amount))}`, {
-            method: "POST",
-            headers: authHeaders({ "Content-Type": "application/json" }),
-            body: "{}",
-        });
-        if (!resp.ok) {
-            const err = await resp.json().catch(() => ({}));
-            throw new Error(err?.detail || "Could not start monthly support page.");
-        }
-        const data = await resp.json();
-        if (!data.url) throw new Error("No monthly support URL returned.");
-        trackConversionEvent("monthly_support_redirect", { amount_cents: amount });
-        window.location.href = data.url;
-    } catch (err) {
-        buttons.forEach((btn) => {
-            btn.disabled = false;
-            btn.textContent = btn.dataset.defaultLabel || "$5/month supporter";
-        });
-        trackConversionEvent("monthly_support_error", { amount_cents: amount, error: String(err.message || err) });
-        if (statusEl) statusEl.textContent = "Could not open monthly support page. Please try again.";
     }
 }
 

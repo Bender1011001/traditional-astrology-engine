@@ -492,6 +492,7 @@ async def generate_paid_reading(
 
     request_meta = chart_request.model_dump()
     request_meta["tier"] = tier_key
+    request_meta["paid"] = True
     request_meta["report_iterations"] = int(tier_cfg["report_iterations"])  # type: ignore[arg-type]
     if customer_email:
         request_meta["customer_email"] = customer_email

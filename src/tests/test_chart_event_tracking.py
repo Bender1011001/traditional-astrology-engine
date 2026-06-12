@@ -88,8 +88,8 @@ async def test_free_chart_request_starts_complete_llm_task_and_persists_chart_ev
         assert data["status"] == "started"
         assert data["task_id"]
         assert data["chart_event_id"]
-        assert data["tier"] == "premium_audit"
-        assert data["report_iterations"] == 6
+        assert data["tier"] == "free_llm_chart"
+        assert data["report_iterations"] == 1
         assert data["instant"] is False
         assert data["free_readings_remaining"] is None
 
@@ -116,9 +116,9 @@ async def test_free_chart_request_starts_complete_llm_task_and_persists_chart_ev
             .one()
         )
         assert task.status == "pending"
-        assert task.request_meta["tier"] == "premium_audit"
-        assert task.request_meta["free_entitlement"] == "complete_analysis_free_for_launch"
-        assert task.request_meta["report_iterations"] == 6
+        assert task.request_meta["tier"] == "free_llm_chart"
+        assert task.request_meta["free_entitlement"] == "free_single_pass_reading"
+        assert task.request_meta["report_iterations"] == 1
         assert task.request_meta["chart_event_id"] == data["chart_event_id"]
         assert task.request_meta["time_unknown"] is True
         assert task.request_meta["free_readings_remaining"] is None
