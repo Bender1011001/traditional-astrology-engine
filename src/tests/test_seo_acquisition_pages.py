@@ -155,15 +155,19 @@ def test_calculator_search_snippets_match_search_console_terms():
     )
     natal = (STATIC / "natal-charts.html").read_text(encoding="utf-8")
 
-    assert "Free Traditional Astrology Reading" in homepage
+    assert "Free Traditional Astrology Reading" in homepage  # H1 hook
     assert "Real Calculations. No Sign-Up." in homepage
     assert "free traditional astrology calculator" in homepage.lower()
-    assert "Free Traditional Birth Chart Calculator" in birth
-    assert "free traditional birth chart calculator" in birth.lower()
+    # Calculator page targets its head query and no longer carries the stale,
+    # now-inaccurate "100% Free" framing from the all-free era.
+    assert "Traditional Birth Chart Calculator | Free Classical Reading" in birth
+    assert "traditional birth chart calculator" in birth.lower()
+    assert "Best 100% Free Traditional Birth Chart Calculator" not in birth
     assert "Stripe-paid" not in birth
     assert "optional paid premium report" not in birth
     assert "single free full-report flow" in birth.lower()
-    assert "Traditional Natal Chart Guide | Free Birth Chart Calculator" in natal
+    assert "Traditional Natal Chart &amp; Birth Chart Calculator | Free Reading" in natal
+    assert "best 100% free" not in natal.lower()
     assert "Results in seconds" not in natal
     assert "class=\u201d" not in natal
 
