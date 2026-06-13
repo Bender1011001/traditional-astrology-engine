@@ -165,9 +165,13 @@ def test_calculator_search_snippets_match_search_console_terms():
     assert "Best 100% Free Traditional Birth Chart Calculator" not in birth
     assert "Stripe-paid" not in birth
     assert "optional paid premium report" not in birth
-    assert "single free full-report flow" in birth.lower()
+    # Free reading is free; the full/complete report is the paid Complete Analysis.
+    assert "optional one-time purchase" in birth.lower()
+    assert "the full reading is free and there is no shorter public tier" not in birth
+    assert "free complete report" not in birth.lower()
     assert "Traditional Natal Chart &amp; Birth Chart Calculator | Free Reading" in natal
     assert "best 100% free" not in natal.lower()
+    assert "free complete chart reading" not in natal.lower()
     assert "Results in seconds" not in natal
     assert "class=\u201d" not in natal
 
@@ -176,11 +180,15 @@ def test_homepage_promotes_free_reading_with_paid_upgrade():
     homepage = (STATIC / "index.html").read_text(encoding="utf-8")
     reading_js = (STATIC / "js" / "reading-app.js").read_text(encoding="utf-8")
 
-    assert "one complete traditional astrology report" in homepage
-    assert "No visitor cap on the public natal report" in homepage
+    # Free reading + paid Complete Analysis are both presented honestly.
+    assert "Start Free, Go Deeper If You Want" in homepage
+    assert "Complete Astrological Analysis" in homepage
+    assert "Run as many charts as you want" in homepage
     assert "Tip $" not in homepage
     assert "onclick=\"startTip" not in homepage
-    assert "Feedback box at the bottom" in homepage
+    # No leftover all-free-era claims that the full/complete report is free.
+    assert "The Full Report Is Free" not in homepage
+    assert "Get the Free Complete Reading" not in homepage
     # The $69 one-time upgrade is promoted; subscriptions are not.
     assert "one-time $69 upgrade" in homepage
     assert "No subscription" in homepage

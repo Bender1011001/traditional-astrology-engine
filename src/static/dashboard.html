@@ -619,7 +619,7 @@
 
       <section class="account-card wide">
         <h2>Report Archive</h2>
-        <p class="account-copy">Completed free premium reports and paid reports are listed here when they are tied to this account or the same email address.</p>
+        <p class="account-copy">Completed free readings and paid analyses are listed here when they are tied to this account or the same email address.</p>
         <div id="reportsList" class="reports-list">
           <div class="empty-state">Loading report archive...</div>
         </div>
@@ -827,7 +827,7 @@
       const container = document.getElementById('reportsList');
       if (!container) return;
       if (!Array.isArray(reports) || reports.length === 0) {
-        container.innerHTML = '<div class="empty-state">No reports are linked to this account yet. Generate a free premium report or complete checkout while signed in to archive future reports here.</div>';
+        container.innerHTML = '<div class="empty-state">No reports are linked to this account yet. Generate a free reading or complete a purchase while signed in to archive future reports here.</div>';
         return;
       }
       container.innerHTML = reports.map((report) => {
