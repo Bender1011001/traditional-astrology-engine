@@ -49,6 +49,38 @@ def _send_discord_embed(embed: dict) -> None:
 # ---------------------------------------------------------------------------
 
 
+def notify_paid_order_issue(
+    kind: str,
+    task_id: str,
+    tier: str = "unknown",
+    customer_email: str = "",
+    error: str = "",
+) -> None:
+    """
+    Loud alert for any problem on a PAID order: generation failure, missing
+    customer email, or PDF/email delivery failure. A paying customer is
+    waiting, so this must reach the owner immediately.
+    Called from background tasks — must never raise.
+    """
+    try:
+        _send_discord_embed(
+            {
+                "title": f"🚨 PAID ORDER ISSUE — {kind}",
+                "color": 0xE53E3E,
+                "fields": [
+                    {"name": "Task / Session", "value": task_id or "unknown", "inline": False},
+                    {"name": "Tier", "value": tier or "unknown", "inline": True},
+                    {"name": "Customer Email", "value": customer_email or "MISSING", "inline": True},
+                    {"name": "Error", "value": (error or "n/a")[:1000], "inline": False},
+                ],
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "footer": {"text": "Act now: a paying customer is affected."},
+            }
+        )
+    except Exception as e:
+        logger.error("notify_paid_order_issue failed: %s", repr(e))
+
+
 def notify_chart_created(chart_request_dump: dict, tier: str = "unknown") -> None:
     """
     Sends a Discord notification when a new astrological chart is generated.

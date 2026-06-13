@@ -24,7 +24,10 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-FREE_CHART_TIER = "premium_audit"
+# Free tier is a single-pass LLM reading. The 6-pass Complete Analysis
+# (premium_audit, $69) is sold via guest checkout and must never be given
+# away here — see src/api/v1/endpoints/guest_checkout.py.
+FREE_CHART_TIER = "free_llm_chart"
 FREE_CHART_ITERATIONS = llm_iterations_for_tier(FREE_CHART_TIER)
 FREE_CHART_EVENT_TYPE = "free_complete_analysis"
 
@@ -92,10 +95,9 @@ async def request_premium_guest_reading(
     """
     Request a free natal chart reading as a guest.
 
-    The free chart now uses the same forensic chart-data and LLM report pipeline
-    as the former paid Complete Analysis tier. The caller polls
-    /guest/status/{task_id} for completion.
-    The public natal report is intentionally uncapped.
+    The free chart uses the forensic chart-data pipeline with a single LLM
+    pass. The caller polls /guest/status/{task_id} for completion.
+    The free natal report is intentionally uncapped.
     """
     chart_payload = _safe_chart_payload(chart_request)
 
@@ -115,7 +117,7 @@ async def request_premium_guest_reading(
         "city": chart_request.city,
         "state": chart_request.state or "",
         "tier": FREE_CHART_TIER,
-        "free_entitlement": "complete_analysis_free_for_launch",
+        "free_entitlement": "free_single_pass_reading",
         "report_iterations": FREE_CHART_ITERATIONS,
         "chart_event_id": event.id,
         "free_readings_remaining": None,
