@@ -148,9 +148,17 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 - Nodes (modifiers only; no aspect claims unless explicit contact is listed): `analysis.supplemental.nodes`
 - **Twelve Topoi (deterministic ruler-condition chains), natural significators per topic, derived/turned houses, places-from-Fortune**: `analysis.topical` (`twelve_topoi`, `natural_significators`, `derived_houses`, `places_from_fortune`)
 - **Zodiacal Releasing (Valens; from BOTH Lot of Spirit and Lot of Fortune)**: `analysis.fate.zodiacal_releasing` (per lot: `start_sign`, `current` = active L1/L2/L3, `l1_chapters` with `peak_from_fortune` and Loosing-of-the-Bond status)
+- **Degree qualities (Lilly, Christian Astrology p.116) for each planet + angles**: `analysis.degree_qualities` (per body: `masculine_feminine`, `light_dark_smoky_void`, `pitted`, `azimene`, `increasing_fortune`, `interpretations`)
+- **Remediation (Renaissance planetary correspondences + electional timing)**: `analysis.remediation` (`primary_target` = malefic contrary to sect; per-planet `prescriptions` with `election` (day, planetary_hour, lunar_mansion), `safe_remedies` (stones, colors, incense, metal, charitable_acts), and `historical_only` provenance)
+- **Doctrinal disagreements (where the authorities differ)**: `analysis.doctrinal_disagreements` (`known_forks` = curated registry with competing authorities + positions; `chart_specific` = computed triplicity/bound disagreements for THIS chart's planets)
+
+# DOCTRINAL HONESTY (STATE DISAGREEMENTS — DO NOT SILENTLY CHOOSE)
+Traditional astrology's authorities genuinely disagree on real points. Where a judgment you are making touches a fork listed in `analysis.doctrinal_disagreements` (e.g. a planet appears in `chart_specific`, or you rely on triplicity rulers, bounds, the mother's house, the degree tables, length-of-life, or a fixed-star's nature), you MUST: (1) state plainly that the sources disagree, (2) name the disagreeing authorities, and (3) give BOTH positions. Then you may note which the engine adopts as default — but never present a contested choice as if it were settled. This auditable honesty is the product's core value.
 
 # DETERMINISTIC TOPICAL & RELEASING LAYERS (DO NOT RE-DERIVE)
 The ruler-condition chain for every house, the natural significators of each topic, the derived (turned) houses, the places-from-Fortune, and the full Zodiacal Releasing periods are PROVIDED in `analysis.topical` and `analysis.fate.zodiacal_releasing`. You MUST cite these structures and MUST NOT compute, re-derive, or invent them. When judging a topic, cite: (a) the topical house + its ruler's `condition_band` and the listed `reasons`; (b) the natural significator(s) and their condition; (c) any relevant Lot / place-from-Fortune. When `ruler_in_aversion_to_its_house` is true, you MUST note that the lord cannot regard its own place. If a field is absent, say so plainly — do not fabricate.
+
+**Degree qualities** (`analysis.degree_qualities`, Lilly CA p.116) are likewise PROVIDED — do not compute them. Apply them as Lilly does, citing the source: the masculine/feminine degree of the Ascendant/Moon helps sex an unknown person; light/dark/smoky/void degrees on the Ascendant or Moon describe complexion and clarity of understanding; a **pitted** degree on the Ascendant, its lord, or the Moon shows the matter "at a stand"; an **azimene** degree there indicates bodily defect or chronic infirmity (historical/symbolic only — not medical advice); an **increasing-fortune** degree on the 2nd cusp/its lord, Jupiter, or the Lot of Fortune argues for wealth. Mention a degree quality only when the JSON flags it for that body.
 
 # TRADITIONAL DIGNITY LEDGER (HARD-CODED TRUTH)
 
@@ -651,12 +659,10 @@ VOICE: SOBER REALIST. **SAFETY FIRST.**
 - If Critical Days are not present in the JSON, state they are not calculable from natal data alone.
 
 **REMEDIAL CODEX (Planetary Charity):**
-- **SAFETY BLACKLIST ENFORCED**: NEVER suggest lead, mercury, or toxic metals.
-- **REPLACEMENTS**: 
-  - IF Saturn mitigation: Use **Onyx or Hematite**, or service to the elderly.
-  - IF Mars/Blood imagery appears in the tradition: replace it with non-medical symbolic actions and charitable service.
-- Focus on charitable acts (donations) and behavioral shifts.
-- If Lunar Mansion data is present for the Moon in the JSON, use the mansion's intents as the electional "action verbs" for timing symbolic acts (historical use only).
+- **USE `analysis.remediation` AS THE SOURCE — do not improvise remedies.** Cite the `primary_target` (the malefic contrary to sect) and each prescription's `safe_remedies` (stones, colors, incense, metal, charitable_acts) and its `election` (day, planetary hour, and lunar-mansion timing).
+- **SAFETY: only ever recommend items from `safe_remedies`.** The `historical_only` field (e.g. lead for Saturn, quicksilver for Mercury) is provenance ONLY and MUST NOT be recommended. NEVER suggest lead, mercury, or toxic metals.
+- Frame the timing concretely: "To propitiate [planet], perform [charitable act] on [day] in the planetary hour of [planet]" — and, when `election.lunar_mansion` is present, tie the act to the Moon's transit through its natal mansion.
+- Keep everything historical/symbolic and non-medical.
 
 **FINAL JUDGMENT:**
 - Give a sum total judgment on the **Structural Integrity** of this Life.
@@ -664,6 +670,31 @@ VOICE: SOBER REALIST. **SAFETY FIRST.**
 
 DO NOT SUMMARIZE. DO NOT USE PLACEHOLDERS. COMPLETE LOGIC ONLY.""",
 ]
+
+
+# Plain-language translation pass. Runs after the technical iterations, reusing
+# the full conversation so the model already has every judgment in context. The
+# goal is a warm, jargon-free version a complete beginner can read. It conveys
+# what the chart MEANS for the person — it does NOT restate placements,
+# positions, or which technique produced each judgment (the full report below
+# already holds all of that).
+PLAIN_ENGLISH_PROMPT = """Now write a PLAIN-ENGLISH version of the reading above, for someone who knows nothing about astrology. Write the way you would explain it to a friend over coffee.
+
+WHAT THIS SECTION IS:
+- A warm, readable summary of what this chart MEANS for them as a person — their nature, strengths, challenges, and how things tend to play out in life.
+
+WHAT TO LEAVE OUT (it is already in the full report below):
+- Do NOT restate placements or positions ("Sun in the 10th", "Mars in Cancer", "ruler of the 7th"). The reader does not need to know what is where.
+- Do NOT name the technique behind a judgment (sect, dignity, profection, firdaria, lots, almuten, etc.) or cite authors. Just tell them what it means in everyday words.
+- Do NOT introduce anything new. Only translate conclusions already established above. If it is not above, do not say it.
+
+HOW TO WRITE IT:
+- No jargon at all. If a technical idea matters, express it in plain feeling/behavior terms instead of the term.
+- Warm and honest, not flattering. Be straight about challenges, but kind. Never absolute — keep it as a leaning, not a guarantee ("the chart leans toward...", "you tend to...", "this can show up as...").
+- Suggested flow with short, friendly headers: "The Big Picture" (2-3 sentences on the whole person), "Where You're Strong", "Where Life Pushes Back", "How It Tends to Show Up" (relationships, work, temperament), "Timing, In Plain Terms" (ONLY if timing was covered above — translate the ages/years into plain language without naming the method), and "The Takeaway" (one grounded, encouraging paragraph).
+- Roughly 600-900 words. The depth lives in the full report; this is the friendly front door.
+- Begin with this exact line and nothing before it: **Historical Use Only — not medical, financial, legal, psychological, emergency, or safety advice.**
+- Do not mention "the data", "the report", "iterations", or that another version exists. Just speak to the reader."""
 
 
 # =============================================================================
@@ -1391,15 +1422,35 @@ def run_premium_report(chart_data, output_file, iterations=6):
         prompt = prompt_template.format(chart_data=chart_data)
         messages.append({"role": "user", "content": prompt})
 
-        response = _openrouter_request(
-            messages=messages, temperature=0.15, max_tokens=16000, top_p=0.9
-        )
+        # Resilient call: transient OpenRouter errors (IncompleteRead, timeouts,
+        # 5xx) on a single iteration would otherwise truncate the whole report.
+        # Retry the iteration a few times before giving up.
+        def _is_transient(resp: Optional[str]) -> bool:
+            return (
+                not resp
+                or resp.startswith("Error:")
+                or resp.startswith("Oracle Communication Error")
+            )
 
-        if (
-            not response
-            or response.startswith("Error:")
-            or response.startswith("Oracle Communication Error")
-        ):
+        response = None
+        max_attempts = 4
+        for attempt in range(1, max_attempts + 1):
+            response = _openrouter_request(
+                messages=messages, temperature=0.15, max_tokens=16000, top_p=0.9
+            )
+            if not _is_transient(response):
+                break
+            if attempt < max_attempts:
+                wait = 10 * attempt
+                print(
+                    f"  Transient error (attempt {attempt}/{max_attempts}), "
+                    f"retrying in {wait}s: {str(response)[:90]}"
+                )
+                import time as _t
+
+                _t.sleep(wait)
+
+        if _is_transient(response):
             print(f"  Warning: {response[:100] if response else 'No response'}")
             break
 
@@ -1413,6 +1464,32 @@ def run_premium_report(chart_data, output_file, iterations=6):
         raise RuntimeError(
             "Premium report generation produced no interpretive sections. "
             "Refusing to return a raw audit appendix as a customer report."
+        )
+
+    # Plain-English translation pass (best-effort). The messages thread already
+    # holds every technical judgment as assistant turns, so one more turn yields
+    # a jargon-free summary for the same cost as a single short call. A failure
+    # here must NEVER lose the technical report we already produced, so any
+    # transient error simply skips the plain section.
+    plain_english = None
+    try:
+        plain_messages = messages + [
+            {"role": "user", "content": PLAIN_ENGLISH_PROMPT}
+        ]
+        plain_resp = _openrouter_request(
+            messages=plain_messages, temperature=0.3, max_tokens=6000, top_p=0.9
+        )
+        if plain_resp and not (
+            plain_resp.startswith("Error:")
+            or plain_resp.startswith("Oracle Communication Error")
+        ):
+            plain_english = apply_safety_filters(plain_resp.strip())
+            print(f"\nPlain-English pass: {len(plain_english.split()):,} words")
+        else:
+            print(f"\nPlain-English pass skipped: {str(plain_resp)[:90]}")
+    except Exception as plain_err:
+        logger.warning(
+            "Plain-English pass failed (non-fatal): %s", repr(plain_err)
         )
 
     # Assemble final document
@@ -1453,6 +1530,19 @@ def run_premium_report(chart_data, output_file, iterations=6):
 {birth_header}
 
 """
+
+    # Lead with the plain-English version so a non-astrologer gets something
+    # readable immediately; the full technical inspection follows below.
+    if plain_english:
+        final_report += (
+            "# Your Reading in Plain English\n\n"
+            "*A jargon-free summary of what your chart means. "
+            "The complete technical reading — every placement, dignity, and "
+            "timing technique — follows below.*\n\n"
+            f"{plain_english}\n\n---\n\n"
+            "# The Complete Technical Reading\n\n"
+        )
+
     for i, resp in enumerate(all_responses):
         final_report += f"# Part {i+1}\n\n{resp}\n\n---\n\n"
 
