@@ -329,8 +329,10 @@ for _page in _LEGACY_REDIRECTS:
 
 _AUTH_MODAL_REDIRECTS = {
     "login.html": "/account.html?auth=login",
-    "register.html": "/account.html?auth=register",
-    "signup.html": "/account.html?auth=register",
+    # Account creation is retired — the product is guest-first (no signup to get
+    # a reading or to buy). Send signup/register straight to the free reading.
+    "register.html": "/#get-reading",
+    "signup.html": "/#get-reading",
     "forgot-password.html": "/account.html?auth=forgot",
 }
 

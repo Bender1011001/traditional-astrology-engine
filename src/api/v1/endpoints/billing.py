@@ -596,6 +596,11 @@ async def stripe_webhook(
                         "name": chart_data.get("name", "Guest"),
                         "tier": tier,
                         "report_iterations": llm_iterations_for_tier(tier),
+                        # Mark as a paid order so the generator's safety net
+                        # (failure alerts, missing-email alert, iteration floor)
+                        # covers webhook-fulfilled purchases too — not just the
+                        # browser-triggered generate-paid path.
+                        "paid": True,
                     }
                     if customer_email:
                         request_meta["customer_email"] = customer_email

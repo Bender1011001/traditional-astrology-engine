@@ -764,17 +764,19 @@ if (basicForm) {
             return;
         }
 
-        // Account required for readings.
-        const authToken = localStorage.getItem("cael_auth_token");
-        if (!authToken) {
-            try {
-                localStorage.setItem("cael_pending_reading", JSON.stringify(payload));
-                localStorage.setItem("cael_last_request", JSON.stringify(payload));
-                localStorage.setItem("cael_post_auth_redirect", window.location.href);
-            } catch (e) { }
-            window.location.href = "signup.html?reason=reading";
-            return;
-        }
+        // No account required. Route to the free guest reading flow on the
+        // home page, carrying the birth data so the visitor never hits a wall.
+        try {
+            localStorage.setItem("ta_chart_payload", JSON.stringify({
+                date: payload.date,
+                time: payload.time || "12:00",
+                city: payload.city,
+                state: payload.state || "",
+                name: "Guest",
+            }));
+        } catch (e) { }
+        window.location.href = "/#get-reading";
+        return;
 
         setBasicLoading(true);
         if (basicReading) basicReading.classList.add("hidden");
