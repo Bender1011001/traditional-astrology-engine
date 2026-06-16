@@ -614,6 +614,7 @@ async def test_guest_checkout_webhook_fulfills_current_guest_tier(
         **chart_data,
         "tier": "full_reading",
         "report_iterations": 1,
+        "paid": True,
         "customer_email": "paid@example.com",
     }
 
@@ -627,6 +628,7 @@ async def test_guest_checkout_webhook_fulfills_current_guest_tier(
                 **chart_data,
                 "tier": "full_reading",
                 "report_iterations": 1,
+                "paid": True,
                 "customer_email": "paid@example.com",
             },
         )
@@ -719,6 +721,7 @@ async def test_guest_checkout_webhook_accepts_stripe_object_without_get(
         **chart_data,
         "tier": "premium_audit",
         "report_iterations": 6,
+        "paid": True,
         "customer_email": "object-paid@example.com",
     }
     assert background_calls == [
@@ -728,6 +731,7 @@ async def test_guest_checkout_webhook_accepts_stripe_object_without_get(
                 **chart_data,
                 "tier": "premium_audit",
                 "report_iterations": 6,
+                "paid": True,
                 "customer_email": "object-paid@example.com",
             },
         )

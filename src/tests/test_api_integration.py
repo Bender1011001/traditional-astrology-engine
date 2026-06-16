@@ -69,8 +69,9 @@ async def test_healthz_endpoint():
     ("path", "expected_location"),
     [
         ("/login.html", "/account.html?auth=login"),
-        ("/register.html", "/account.html?auth=register"),
-        ("/signup.html", "/account.html?auth=register"),
+        # Account creation retired — signup/register go to the free reading.
+        ("/register.html", "/#get-reading"),
+        ("/signup.html", "/#get-reading"),
         ("/forgot-password.html", "/account.html?auth=forgot"),
     ],
 )
@@ -166,7 +167,8 @@ async def test_account_html_serves_public_account_entry():
     assert response.headers["x-robots-tag"] == "noindex, nofollow"
     assert "My Account" in response.text
     assert "accountLoginAction" in response.text
-    assert "accountRegisterAction" in response.text
+    # Account creation retired — no registration entry point on the page.
+    assert "accountRegisterAction" not in response.text
     assert "/dashboard.html" in response.text
     assert "/js/auth.js?v=astro-v" in response.text
 
