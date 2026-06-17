@@ -389,54 +389,21 @@ async def astroforge_page_redirect():
     return RedirectResponse(url="/#get-reading", status_code=301)
 
 
+# Accounts are retired — the product is guest-only (no signup, no login needed
+# to get a reading or to buy). Send the account/dashboard surfaces to the
+# free reading instead of serving an account page.
 @app.get("/account.html", include_in_schema=False)
-async def account_page():
-    account_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "static", "account.html"
-    )
-    response = FileResponse(account_file, media_type="text/html")
-    response.headers["Cache-Control"] = (
-        "no-store, no-cache, must-revalidate, max-age=0"
-    )
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0"
-    response.headers["X-Robots-Tag"] = "noindex, nofollow"
-    return response
-
-
 @app.get("/account", include_in_schema=False)
-async def account_redirect():
-    return RedirectResponse(url="/account.html", status_code=302)
-
-
 @app.get("/account/", include_in_schema=False)
-async def account_slash_redirect():
-    return RedirectResponse(url="/account.html", status_code=302)
+async def account_page():
+    return RedirectResponse(url="/#get-reading", status_code=302)
 
 
 @app.get("/dashboard.html", include_in_schema=False)
-async def dashboard_page():
-    dashboard_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "static", "dashboard.html"
-    )
-    response = FileResponse(dashboard_file, media_type="text/html")
-    response.headers["Cache-Control"] = (
-        "no-store, no-cache, must-revalidate, max-age=0"
-    )
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0"
-    response.headers["X-Robots-Tag"] = "noindex, nofollow"
-    return response
-
-
 @app.get("/dashboard", include_in_schema=False)
-async def dashboard_redirect():
-    return RedirectResponse(url="/dashboard.html", status_code=302)
-
-
 @app.get("/dashboard/", include_in_schema=False)
-async def dashboard_slash_redirect():
-    return RedirectResponse(url="/dashboard.html", status_code=302)
+async def dashboard_page():
+    return RedirectResponse(url="/#get-reading", status_code=302)
 
 
 # --- STATIC FILES ---

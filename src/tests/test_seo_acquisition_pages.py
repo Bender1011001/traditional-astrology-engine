@@ -104,7 +104,7 @@ def test_geomancy_page_is_indexable_and_uses_real_api():
     assert "/api/v1/geomancy/cast" in js
     assert "mother_counts" in js
     assert "Historical Use Only" in html
-    assert "What Is Geomancy?" in html
+    assert "Free Geomancy Calculator" in html
     assert "The Strict Rules" in html
     assert "Judge Validity" in html
     assert "$5/month" not in html
