@@ -123,13 +123,16 @@ async def test_reset_password_redirect_preserves_token():
     assert response.headers["location"] == "/account.html?auth=reset&token=abc%20123"
 
 
-def test_public_nav_exposes_account_entry_link():
+def test_public_nav_is_account_free_and_exposes_geomancy():
     index_html = Path(__file__).resolve().parents[1] / "static" / "index.html"
     text = index_html.read_text(encoding="utf-8")
 
-    assert '<a id="navLoginBtn" href="#" class="nav-link hidden"' in text
-    assert '<a id="navAccountBtn" href="/account.html" class="nav-link"' in text
-    assert "/js/auth.js?v=astro-v" in text
+    # Accounts retired: no My Account / Sign In links in the public nav.
+    assert "navLoginBtn" not in text
+    assert "navAccountBtn" not in text
+    assert "My Account" not in text
+    # Geomancy is discoverable from the main nav.
+    assert '<a href="/geomancy.html" class="nav-link">Geomancy</a>' in text
 
 
 def test_owner_bootstrap_key_is_not_committed():
@@ -152,44 +155,28 @@ async def test_api_docs_are_not_public_by_default(path):
 
 
 @pytest.mark.asyncio
-async def test_account_html_serves_public_account_entry():
+async def test_account_and_dashboard_pages_redirect_to_reading():
+    # Accounts are retired: the account and dashboard pages now redirect to
+    # the free reading instead of serving an account UI.
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
     ) as ac:
-        response = await ac.get("/account.html")
-
-    assert response.status_code == 200
-    assert "location" not in response.headers
-    assert "no-store" in response.headers["cache-control"]
-    assert "no-cache" in response.headers["cache-control"]
-    assert response.headers["pragma"] == "no-cache"
-    assert response.headers["expires"] == "0"
-    assert response.headers["x-robots-tag"] == "noindex, nofollow"
-    assert "My Account" in response.text
-    assert "accountLoginAction" in response.text
-    # Account creation retired — no registration entry point on the page.
-    assert "accountRegisterAction" not in response.text
-    assert "/dashboard.html" in response.text
-    assert "/js/auth.js?v=astro-v" in response.text
+        for path in ("/account.html", "/account", "/dashboard.html", "/dashboard"):
+            response = await ac.get(path)
+            assert response.status_code == 302, path
+            assert response.headers["location"] == "/#get-reading", path
 
 
 @pytest.mark.asyncio
-async def test_dashboard_html_serves_account_surface():
+async def test_dashboard_html_redirects_to_reading():
+    # Accounts retired — the dashboard page redirects to the free reading.
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
     ) as ac:
         response = await ac.get("/dashboard.html")
 
-    assert response.status_code == 200
-    assert "location" not in response.headers
-    assert "no-store" in response.headers["cache-control"]
-    assert "no-cache" in response.headers["cache-control"]
-    assert response.headers["pragma"] == "no-cache"
-    assert response.headers["expires"] == "0"
-    assert response.headers["x-robots-tag"] == "noindex, nofollow"
-    assert "Your Account" in response.text
-    assert "Saved Charts" in response.text
-    assert "Daily Horoscope Profile" in response.text
+    assert response.status_code == 302
+    assert response.headers["location"] == "/#get-reading"
 
 
 @pytest.mark.asyncio
@@ -257,26 +244,26 @@ async def test_synastry_endpoint_uses_chart_options_as_keywords():
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("path", ["/dashboard", "/dashboard/"])
-async def test_dashboard_short_paths_redirect_temporarily(path):
+async def test_dashboard_short_paths_redirect_to_reading(path):
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
     ) as ac:
         response = await ac.get(path)
 
     assert response.status_code == 302
-    assert response.headers["location"] == "/dashboard.html"
+    assert response.headers["location"] == "/#get-reading"
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("path", ["/account", "/account/"])
-async def test_account_short_paths_redirect_temporarily(path):
+async def test_account_short_paths_redirect_to_reading(path):
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test", follow_redirects=False
     ) as ac:
         response = await ac.get(path)
 
     assert response.status_code == 302
-    assert response.headers["location"] == "/account.html"
+    assert response.headers["location"] == "/#get-reading"
 
 
 @pytest.mark.asyncio
