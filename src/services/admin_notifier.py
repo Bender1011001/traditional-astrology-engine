@@ -2,6 +2,7 @@ import hashlib
 import json
 import logging
 import os
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -9,6 +10,12 @@ from datetime import datetime, timezone
 logger = logging.getLogger(__name__)
 
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "")
+
+# Low-credit watchdog state (per process). Cloud Run may run several instances,
+# so this throttles each instance independently — at worst a few duplicate
+# alerts, never a missed drawdown.
+_CREDIT_CHECK_MIN_INTERVAL_S = 1800  # don't hit the OpenRouter API more than this
+_credit_check_state = {"ts": 0.0, "alerted_low": False}
 
 
 def _send_discord_embed(embed: dict) -> None:
@@ -42,6 +49,80 @@ def _send_discord_embed(embed: dict) -> None:
         logger.error("Discord webhook connection error: %s", e.reason)
     except Exception as e:
         logger.error("Unexpected error sending Discord notification: %s", repr(e))
+
+
+# ---------------------------------------------------------------------------
+# OpenRouter low-credit watchdog
+# ---------------------------------------------------------------------------
+
+
+def check_openrouter_credits(threshold_usd: float | None = None) -> None:
+    """
+    Best-effort: warn via Discord when the OpenRouter balance is low, so the
+    LLM never silently runs dry mid-reading (which strands paying customers).
+
+    Called opportunistically from the report task — i.e. exactly when credits
+    are being spent. Throttled so it queries OpenRouter at most every
+    ~30 minutes per instance. Never raises.
+    """
+    try:
+        now = time.time()
+        if now - _credit_check_state["ts"] < _CREDIT_CHECK_MIN_INTERVAL_S:
+            return
+        _credit_check_state["ts"] = now
+
+        api_key = (os.getenv("OPENROUTER_API_KEY") or "").strip()
+        if not api_key or api_key.lower() == "dummy":
+            return
+
+        if threshold_usd is None:
+            try:
+                threshold_usd = float(os.getenv("OPENROUTER_LOW_CREDIT_USD", "3"))
+            except ValueError:
+                threshold_usd = 3.0
+
+        req = urllib.request.Request(
+            "https://openrouter.ai/api/v1/credits",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "User-Agent": "TraditionalAstrology/1.0",
+            },
+            method="GET",
+        )
+        with urllib.request.urlopen(req, timeout=8.0) as resp:
+            data = json.loads(resp.read().decode("utf-8")).get("data", {}) or {}
+
+        total = float(data.get("total_credits", 0) or 0)
+        used = float(data.get("total_usage", 0) or 0)
+        remaining = round(total - used, 2)
+
+        if remaining <= threshold_usd:
+            # Only alert on the transition into "low" so we don't spam every
+            # reading once the balance is below the line.
+            if not _credit_check_state["alerted_low"]:
+                _credit_check_state["alerted_low"] = True
+                _send_discord_embed(
+                    {
+                        "title": "⚠️ OpenRouter credits low",
+                        "color": 0xF6AD55,
+                        "fields": [
+                            {"name": "Remaining", "value": f"${remaining:.2f}", "inline": True},
+                            {"name": "Threshold", "value": f"${threshold_usd:.2f}", "inline": True},
+                        ],
+                        "description": (
+                            "Readings will start failing when this hits $0. "
+                            "Top up OpenRouter to keep free and paid readings working."
+                        ),
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "footer": {"text": "Traditional Astrology — credit watchdog"},
+                    }
+                )
+                logger.warning("OpenRouter credits low: $%.2f remaining", remaining)
+        else:
+            # Reset once topped back up so the next drawdown alerts again.
+            _credit_check_state["alerted_low"] = False
+    except Exception as e:
+        logger.debug("OpenRouter credit check failed (non-fatal): %s", repr(e))
 
 
 # ---------------------------------------------------------------------------
