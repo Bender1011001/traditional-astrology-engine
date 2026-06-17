@@ -507,3 +507,12 @@ async def generate_premium_report_task(task_id: str, request_data: dict):
         db.commit()
     finally:
         db.close()
+        # Watchdog: warn before OpenRouter runs dry. Best-effort, throttled,
+        # and runs on every reading (free + paid) so the balance is monitored
+        # exactly while it's being spent. Never affects the report result.
+        try:
+            from src.services.admin_notifier import check_openrouter_credits
+
+            check_openrouter_credits()
+        except Exception as credit_err:
+            logger.debug("Credit watchdog skipped: %s", repr(credit_err))
