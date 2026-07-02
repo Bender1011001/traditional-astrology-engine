@@ -52,33 +52,22 @@ class DecumbitureEngine:
 
             t = decumbiture_jd + approx_days
 
-            # Simple Newton-like refinement (3 iterations)
-            for _ in range(3):
-                m_curr = swe.calc_ut(t, swe.MOON, swe.FLG_SWIEPH)[0][0]
+            # High-Precision Variable Velocity Sweeping (Newton's Method with True Speed)
+            for _ in range(5):
+                pos = swe.calc_ut(t, swe.MOON, swe.FLG_SWIEPH | swe.FLG_SPEED)[0]
+                m_curr = pos[0]
+                m_speed = pos[3]  # True speed in longitude (deg/day)
+                
                 diff = (m_curr - start_lon) % 360
-                # Handle wrapping
-                # This diff is "how far traveled forward".
-                # If start=350, current=10, diff should be 20.
 
-                # Check actual travel distance including orbits?
-                # The moon doesn't loop 360 in these short ranges usually,
-                # but if we go > 27 days it does.
-
-                # We know the target is like 45, 90 etc.
-                # Just minimize (diff - target)
-                # But diff via modulo might be tricky if it wrapped.
-
-                # Calculate total movement
-                # But simpler: calculate error in degrees, adjust t
                 err = target_dist - diff
                 if err > 180:
                     err -= 360
                 elif err < -180:
                     err += 360
 
-                # If error is large due to wrap mismatch, careful.
-                # Assuming approximate calculation put us close.
-                t += err / avg_motion
+                # Exact refinement using the Moon's variable true speed at time `t`
+                t += err / m_speed
 
             y, m, d, h = swe.revjul(t)
             # Rounding to nearest hour

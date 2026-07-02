@@ -675,7 +675,12 @@ class DignityCalculator:
                             f"Triplicity (Participant, {TriplicityScheme.DOROTHEAN.value}) (+1)"
                         )
             else:
-                pt = PTOLEMAIC_TRIPLICITY.get(element)
+                # cls.ZODIAC_ELEMENTS yields UPPERCASE keys ("FIRE"); the imported
+                # PTOLEMAIC_TRIPLICITY is title-case ("Fire"). Normalize so the
+                # Ptolemaic triplicity is actually awarded (previously always 0).
+                pt = PTOLEMAIC_TRIPLICITY.get(element) or PTOLEMAIC_TRIPLICITY.get(
+                    str(element).title()
+                )
                 if pt and len(pt) >= 2:
                     day_ruler, night_ruler = pt[0], pt[1]
                     if sect == Sect.DAY and planet_name == day_ruler:
@@ -870,11 +875,35 @@ class DignityCalculator:
                 score += 5
                 details.append("Cazimi (+5)")
             elif dist <= 8:
-                score -= 5
                 if planet.name == PlanetName.MOON:
+                    score -= 5
                     # Lunar near-Sun condition should be labeled as phase/visibility, not planetary combustion.
                     details.append("Dark Moon (<=8° from Sun) (-5)")
+                elif planet.name == PlanetName.MERCURY:
+                    # The Mercury Exception Loop (Bonatti)
+                    # If Mercury is combust but in Domicile (Gemini/Virgo) or Egyptian Bounds, it bypasses penalty
+                    sign_idx = int(planet.longitude / 30) % 12
+                    sign = list(Sign)[sign_idx]
+                    is_mercury_exception = False
+                    
+                    if sign in [Sign.GEMINI, Sign.VIRGO]:
+                        is_mercury_exception = True
+                    else:
+                        degree = planet.longitude % 30
+                        for r_p, limit in EGYPTIAN_TERMS.get(sign, []):
+                            if degree < limit:
+                                r_name = PlanetName[r_p.upper()] if isinstance(r_p, str) else r_p
+                                if r_name == PlanetName.MERCURY:
+                                    is_mercury_exception = True
+                                break
+                    
+                    if is_mercury_exception:
+                        details.append("Combust but in Domicile/Bounds (Mercury Exception) (0)")
+                    else:
+                        score -= 5
+                        details.append("Combust (-5)")
                 else:
+                    score -= 5
                     details.append("Combust (-5)")
             elif dist <= 15:
                 score -= 4

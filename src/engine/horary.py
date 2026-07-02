@@ -592,6 +592,39 @@ def check_strictures(chart: Chart) -> List[str]:
             "Ascendant in late degrees (> 27°): The matter is already settled and too late to change."
         )
 
+    # 1.5 Radicality Check
+    if chart.jd and chart.geo_lat is not None and chart.geo_lon is not None:
+        try:
+            import swisseph as swe
+            from datetime import datetime, timezone
+            y, m, d, h = swe.revjul(chart.jd)
+            hour_int = int(h)
+            min_int = int((h - hour_int) * 60)
+            sec_int = int((((h - hour_int) * 60) - min_int) * 60)
+            dt = datetime(y, m, d, hour_int, min_int, sec_int, tzinfo=timezone.utc)
+            
+            from .planetary_hours import PlanetaryHourEngine
+            hr_data = PlanetaryHourEngine.calculate_hours(dt, chart.geo_lat, chart.geo_lon)
+            hour_ruler_val = hr_data.get("hour_ruler")
+            
+            if hour_ruler_val:
+                asc_sign_idx = int(chart.ascendant / 30) % 12
+                asc_sign = list(Sign)[asc_sign_idx]
+                from .reference_data import TRIPLICITY_RULERS, SIGN_ELEMENTS
+                import src.engine.reference_data as ref_data
+                asc_ruler = ref_data.DOMICILES[asc_sign]
+                
+                if hour_ruler_val != asc_ruler.value:
+                    element = SIGN_ELEMENTS.get(asc_sign, "Fire")
+                    trip_rulers = TRIPLICITY_RULERS.get(element, [])
+                    hour_ruler_enum = PlanetName(hour_ruler_val)
+                    if hour_ruler_enum not in trip_rulers:
+                        strictures.append(
+                            f"Chart is Non-Radical: Planetary Hour Ruler ({hour_ruler_val}) does not match or support the Ascendant Ruler ({asc_ruler.value})."
+                        )
+        except Exception:
+            pass
+
     # 2. Saturn/Mars in the 1st or 7th house sign
     saturn = next((p for p in chart.planets if p.name == PlanetName.SATURN), None)
     mars = next((p for p in chart.planets if p.name == PlanetName.MARS), None)
@@ -791,14 +824,44 @@ def check_besiegement(p: Planet, chart: Chart) -> Optional[Dict]:
             and p.name not in malefics
         ):
             if next_planet.name != prev_planet.name:
-                return {
-                    "condition": "Besiegement by Malefics",
-                    "target": p.name.value,
-                    "malefic_1": prev_planet.name.value,
-                    "malefic_2": next_planet.name.value,
-                    "details": f"{p.name.value} is bodily besieged between {prev_planet.name.value} and {next_planet.name.value}. Severe constraint and harm.",
-                    "status": "Active",
-                }
+                # Check Reception Veto
+                from .reference_data import DOMICILES, EXALTATIONS, TRIPLICITY_RULERS, SIGN_ELEMENTS
+                has_reception = False
+                for malefic in (next_planet, prev_planet):
+                    m_sign_idx = int(malefic.longitude / 30) % 12
+                    m_sign = list(Sign)[m_sign_idx]
+                    
+                    if DOMICILES.get(m_sign) == p.name:
+                        has_reception = True
+                    if EXALTATIONS.get(m_sign) == p.name:
+                        has_reception = True
+                        
+                    element = SIGN_ELEMENTS.get(m_sign, "Fire")
+                    trip = TRIPLICITY_RULERS.get(element, tuple())
+                    if p.name in trip:
+                        has_reception = True
+                        
+                    if has_reception:
+                        break
+                        
+                if not has_reception:
+                    return {
+                        "condition": "Besiegement by Malefics Without Reception",
+                        "target": p.name.value,
+                        "malefic_1": prev_planet.name.value,
+                        "malefic_2": next_planet.name.value,
+                        "details": f"{p.name.value} is bodily besieged between {prev_planet.name.value} and {next_planet.name.value} WITHOUT reception. Fatal constraint and harm.",
+                        "status": "VETO",
+                    }
+                else:
+                    return {
+                        "condition": "Besiegement by Malefics (Mitigated)",
+                        "target": p.name.value,
+                        "malefic_1": prev_planet.name.value,
+                        "malefic_2": next_planet.name.value,
+                        "details": f"{p.name.value} is besieged between {prev_planet.name.value} and {next_planet.name.value}, mitigated by Reception.",
+                        "status": "Active",
+                    }
 
         if (
             next_planet.name in benefics

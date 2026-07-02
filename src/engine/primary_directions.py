@@ -218,17 +218,17 @@ class PrimaryDirectionsEngine:
 
     @classmethod
     def calculate_current_distributor(
-        cls, chart: Chart, age_years: float, geo_lat: float
+        cls, chart: Chart, age_years: float, geo_lat: float, key: str = "Ptolemy"
     ) -> Dict:
         """
         Calculates the current 'Distributor' (Term Ruler of Directed Ascendant).
         Algorithm:
-        1. Calculate Arc = Age (Ptolemy Key).
+        1. Calculate Arc = Age (Ptolemy/Naibod Key).
         2. Direct the Ascendant by this Arc (OA_Dir = OA_Radical + Arc).
         3. Convert OA_Dir back to Zodiacal Longitude.
         4. Find the Term Ruler of that Longitude.
         """
-        arc = cls.ptolemy_key(age_years)
+        arc = cls.get_arc_from_years(age_years, key)
 
         # 1. Get Natal OA of Ascendant
         # We can simulate this by calculating the RAMC that would put the Ascendant at the horizon + Arc?
@@ -306,13 +306,13 @@ class PrimaryDirectionsEngine:
 
     @classmethod
     def calculate_circumambulations(
-        cls, chart: Chart, geo_lat: float, max_years: int = 80
+        cls, chart: Chart, geo_lat: float, max_years: int = 80, key: str = "Ptolemy"
     ) -> List[Dict]:
         """
         Circumambulations through the Bounds (Ptolemy Tetrabiblos III.10).
 
         The master predictive technique of Ptolemaic astrology:
-        - Directs the Ascendant forward 1° per year (Ptolemy Key).
+        - Directs the Ascendant forward (Ptolemy/Naibod Key).
         - At each year, records which Egyptian Term/Bound the directed Ascendant falls in.
         - The term ruler is the 'Distributor' — the planet governing that period of life.
         - When the Asc crosses from one bound to the next, there is a life transition.
@@ -334,7 +334,7 @@ class PrimaryDirectionsEngine:
         prev_ruler = None
 
         for year in range(max_years + 1):
-            arc = cls.ptolemy_key(float(year))
+            arc = cls.get_arc_from_years(float(year), key)
             ramc_dir = (mc_ra + arc) % 360.0
 
             try:
@@ -420,7 +420,7 @@ class PrimaryDirectionsEngine:
 
     @classmethod
     def calculate_directions_to_angles(
-        cls, chart: Chart, geo_lat: float
+        cls, chart: Chart, geo_lat: float, key: str = "Ptolemy"
     ) -> List[DirectionResult]:
         """
         Calculates directions of all planets to Conjunction/Opposition/Square/Trine/Sextile of Asc/MC.
@@ -507,8 +507,8 @@ class PrimaryDirectionsEngine:
                                 promittor=p.name.value,
                                 aspect=name_pt,
                                 arc=arc,
-                                years=cls.ptolemy_key(arc),
-                                date_offset=cls.format_years(arc),
+                                years=cls.get_years_from_arc(arc, key),
+                                date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
                                 method="Placidus/Zodiacal",
                             )
                         )
@@ -538,8 +538,8 @@ class PrimaryDirectionsEngine:
                                 promittor=p.name.value,
                                 aspect=name_pt,
                                 arc=arc,
-                                years=cls.ptolemy_key(arc),
-                                date_offset=cls.format_years(arc),
+                                years=cls.get_years_from_arc(arc, key),
+                                date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
                                 method="Placidus/Zodiacal",
                             )
                         )
@@ -553,6 +553,7 @@ class PrimaryDirectionsEngine:
         geo_lat: float,
         target_lon: float,
         target_label: str = "Point",
+        key: str = "Ptolemy",
     ) -> List[DirectionResult]:
         """
         Calculate zodiacal primary directions of promittors to a generic ecliptic point.
@@ -627,8 +628,8 @@ class PrimaryDirectionsEngine:
                                 promittor=p.name.value,
                                 aspect=name_pt,
                                 arc=arc,
-                                years=cls.ptolemy_key(arc),
-                                date_offset=cls.format_years(arc),
+                                years=cls.get_years_from_arc(arc, key),
+                                date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
                                 method="Placidus/Zodiacal",
                             )
                         )
@@ -637,7 +638,7 @@ class PrimaryDirectionsEngine:
 
     @classmethod
     def calculate_directions_to_planets(
-        cls, chart: Chart, geo_lat: float
+        cls, chart: Chart, geo_lat: float, key: str = "Ptolemy"
     ) -> List[DirectionResult]:
         """
         Directs each traditional planet to every other planet's natal position.
@@ -726,8 +727,8 @@ class PrimaryDirectionsEngine:
                                     promittor=prom.name.value,
                                     aspect=name_pt,
                                     arc=arc,
-                                    years=cls.ptolemy_key(arc),
-                                    date_offset=cls.format_years(arc),
+                                    years=cls.get_years_from_arc(arc, key),
+                                    date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
                                     method="Placidus/Zodiacal",
                                 )
                             )
@@ -738,6 +739,23 @@ class PrimaryDirectionsEngine:
     def ptolemy_key(arc: float) -> float:
         """1 degree = 1 year"""
         return arc
+
+    @staticmethod
+    def naibod_key(arc: float) -> float:
+        """0.9856 degrees = 1 year"""
+        return arc / 0.9856
+
+    @classmethod
+    def get_years_from_arc(cls, arc: float, key: str = "Ptolemy") -> float:
+        if key == "Naibod":
+            return cls.naibod_key(arc)
+        return cls.ptolemy_key(arc)
+
+    @classmethod
+    def get_arc_from_years(cls, years: float, key: str = "Ptolemy") -> float:
+        if key == "Naibod":
+            return years * 0.9856
+        return years
 
     @staticmethod
     def format_years(years: float) -> str:

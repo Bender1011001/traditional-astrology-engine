@@ -35,7 +35,8 @@ def test_besiegement():
     result = check_besiegement(p, chart)
 
     assert result is not None
-    assert result["condition"] == "Besiegement by Malefics"
+    # Venus between Mars and Saturn with no reception -> unmitigated besiegement.
+    assert result["condition"] == "Besiegement by Malefics Without Reception"
 
 
 def test_besiegement_benefics():

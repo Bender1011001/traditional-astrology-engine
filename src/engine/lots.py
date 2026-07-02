@@ -11,15 +11,19 @@ def calculate_lot(asc: float, a_lon: float, b_lon: float) -> float:
     return (asc + b_lon - a_lon) % 360.0
 
 
-def calculate_lot_position(chart: Chart, lot_name: LotName, sect: Sect) -> float:
+def calculate_lot_position(
+    chart: Chart, lot_name: LotName, sect: Sect, use_valens_hermetic: bool = False
+) -> float:
     """
     Calculates the position of a specific lot.
     """
-    all_lots = calculate_all_lots(chart, sect)
+    all_lots = calculate_all_lots(chart, sect, use_valens_hermetic)
     return all_lots.get(lot_name.value, 0.0)
 
 
-def calculate_all_lots(chart: Chart, sect: Sect) -> Dict[str, float]:
+def calculate_all_lots(
+    chart: Chart, sect: Sect, use_valens_hermetic: bool = False
+) -> Dict[str, float]:
     """
     Calculates standard Arabic Parts and Forensic Lots.
     Returns a dictionary mapping LotName values (strings) to longitudes.
@@ -60,21 +64,43 @@ def calculate_all_lots(chart: Chart, sect: Sect) -> Dict[str, float]:
     fort_lon = lots[LotName.FORTUNE.value]
     spir_lon = lots[LotName.SPIRIT.value]
 
-    # Necessity (Ananke): Mercury vs Fortune
-    # Historical logic: Day: Asc + Fortune - Mercury (From Mercury to Fortune)
-    lots[LotName.NECESSITY.value] = (
-        calculate_lot(asc, mercury.longitude, fort_lon)
-        if is_day
-        else calculate_lot(asc, fort_lon, mercury.longitude)
-    )
+    # Necessity (Ananke)
+    if use_valens_hermetic:
+        # Valens/Egyptian:
+        # Day: Asc + Spirit - Fortune (From Fortune to Spirit)
+        # Night: Asc + Fortune - Spirit (From Spirit to Fortune)
+        lots[LotName.NECESSITY.value] = (
+            calculate_lot(asc, fort_lon, spir_lon)
+            if is_day
+            else calculate_lot(asc, spir_lon, fort_lon)
+        )
+    else:
+        # Paulus Alexandrinus: Mercury vs Fortune
+        # Day: Asc + Fortune - Mercury (From Mercury to Fortune)
+        lots[LotName.NECESSITY.value] = (
+            calculate_lot(asc, mercury.longitude, fort_lon)
+            if is_day
+            else calculate_lot(asc, fort_lon, mercury.longitude)
+        )
 
-    # Eros: Venus vs Spirit
-    # Day: Asc + Venus - Spirit (From Spirit to Venus)
-    lots[LotName.EROS.value] = (
-        calculate_lot(asc, spir_lon, venus.longitude)
-        if is_day
-        else calculate_lot(asc, venus.longitude, spir_lon)
-    )
+    # Eros
+    if use_valens_hermetic:
+        # Valens/Egyptian:
+        # Day: Asc + Fortune - Spirit (From Spirit to Fortune)
+        # Night: Asc + Spirit - Fortune (From Fortune to Spirit)
+        lots[LotName.EROS.value] = (
+            calculate_lot(asc, spir_lon, fort_lon)
+            if is_day
+            else calculate_lot(asc, fort_lon, spir_lon)
+        )
+    else:
+        # Paulus Alexandrinus: Venus vs Spirit
+        # Day: Asc + Venus - Spirit (From Spirit to Venus)
+        lots[LotName.EROS.value] = (
+            calculate_lot(asc, spir_lon, venus.longitude)
+            if is_day
+            else calculate_lot(asc, venus.longitude, spir_lon)
+        )
 
     # Courage (Tolma): Mars vs Fortune
     # Day: Asc + Fortune - Mars (From Mars to Fortune)
@@ -279,11 +305,13 @@ def calculate_all_lots(chart: Chart, sect: Sect) -> Dict[str, float]:
         else calculate_lot(asc, moon.longitude, venus.longitude)
     )
 
-    # Poverty (Al-Biruni: Reverse of Necessity)
+    # Poverty: Fortune vs Spirit (al-Biruni, Book of Instruction).
+    # Day: Asc + Fortune - Spirit (from Spirit to Fortune); night reversed.
+    # Distinct from Necessity, which is built from Mercury and Fortune.
     lots[LotName.POVERTY.value] = (
-        calculate_lot(asc, mercury.longitude, fort_lon)
+        calculate_lot(asc, spir_lon, fort_lon)
         if is_day
-        else calculate_lot(asc, fort_lon, mercury.longitude)
+        else calculate_lot(asc, fort_lon, spir_lon)
     )
 
     return lots

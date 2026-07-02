@@ -362,19 +362,43 @@ function setupForm() {
 
         const timeUnknown = document.getElementById("timeUnknown")?.checked;
         const timeInput = document.getElementById("birthTime");
+        const dateInput = document.getElementById("birthDate");
+        const cityInput = document.getElementById("birthCity");
+
+        // ── Validation: block submit until required fields are complete ──
+        const missing = [];
+        if (!dateInput?.value) missing.push([dateInput, "your date of birth"]);
+        if (!timeUnknown && !timeInput?.value) missing.push([timeInput, "your time of birth (or check “I don’t know my birth time”)"]);
+        if (!cityInput?.value.trim()) missing.push([cityInput, "your city of birth"]);
+
+        // clear any prior invalid marks
+        [dateInput, timeInput, cityInput].forEach(el => el && el.setAttribute("aria-invalid", "false"));
+
+        if (missing.length) {
+            missing.forEach(([el]) => el && el.setAttribute("aria-invalid", "true"));
+            showFormError("Please enter " + missing.map(m => m[1]).join(", ") + ".");
+            (missing[0][0])?.focus();
+            shakeForm();
+            return;
+        }
+        clearFormError();
+
+        const latVal = document.getElementById("birthLat")?.value;
+        const lonVal = document.getElementById("birthLon")?.value;
 
         chartPayload = {
-            date: document.getElementById("birthDate").value,
+            date: dateInput.value,
             time: timeUnknown && !timeInput?.value ? "12:00" : (timeInput?.value || "12:00"),
-            city: document.getElementById("birthCity").value,
+            city: cityInput.value.trim(),
             state: document.getElementById("birthState")?.value || "",
             name: "Guest",
             time_unknown: Boolean(timeUnknown),
         };
-
-        if (!chartPayload.date || !chartPayload.city) {
-            shakeForm();
-            return;
+        // If a city was picked from suggestions, pass exact coordinates so the
+        // server skips geocoding (faster, and never fails on an ambiguous name).
+        if (latVal && lonVal) {
+            chartPayload.latitude = parseFloat(latVal);
+            chartPayload.longitude = parseFloat(lonVal);
         }
 
         // Save so report feedback and browser refreshes can preserve context.
@@ -383,6 +407,130 @@ function setupForm() {
         trackConversionEvent("free_chart_submit");
         showLoading();
         await requestFreeReading(chartPayload);
+    });
+
+    setupCityAutocomplete();
+}
+
+// ─── Inline form-error helpers ───
+function showFormError(msg) {
+    const el = document.getElementById("formError");
+    if (!el) return;
+    el.textContent = msg;
+    el.hidden = false;
+}
+function clearFormError() {
+    const el = document.getElementById("formError");
+    if (!el) return;
+    el.textContent = "";
+    el.hidden = true;
+}
+
+// ─── City Autocomplete (Open-Meteo geocoding, free, no key) ───
+function setupCityAutocomplete() {
+    const input = document.getElementById("birthCity");
+    const list = document.getElementById("citySuggestions");
+    const stateInput = document.getElementById("birthState");
+    const latInput = document.getElementById("birthLat");
+    const lonInput = document.getElementById("birthLon");
+    if (!input || !list) return;
+
+    let debounceTimer = null;
+    let activeIdx = -1;
+    let items = [];
+
+    const closeList = () => {
+        list.hidden = true;
+        list.innerHTML = "";
+        input.setAttribute("aria-expanded", "false");
+        activeIdx = -1;
+        items = [];
+    };
+
+    const fmtSub = (r) => [r.admin1, r.country].filter(Boolean).join(", ");
+
+    const choose = (r) => {
+        input.value = r.name;
+        if (stateInput) stateInput.value = r.admin1 || r.country || "";
+        if (latInput) latInput.value = r.latitude;
+        if (lonInput) lonInput.value = r.longitude;
+        input.setAttribute("aria-invalid", "false");
+        clearFormError();
+        closeList();
+    };
+
+    const render = () => {
+        if (!items.length) { closeList(); return; }
+        list.innerHTML = items.map((r, i) =>
+            `<li role="option" data-i="${i}" class="${i === activeIdx ? "active" : ""}">${escapeHtml(r.name)}<span class="city-sub">${escapeHtml(fmtSub(r))}</span></li>`
+        ).join("");
+        list.hidden = false;
+        input.setAttribute("aria-expanded", "true");
+    };
+
+    // Photon (komoot) geocoder — free, no key, and already allow-listed in our CSP.
+    const search = async (q) => {
+        try {
+            const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=8&lang=en`;
+            const resp = await fetch(url);
+            if (!resp.ok) return;
+            const data = await resp.json();
+            const feats = Array.isArray(data.features) ? data.features : [];
+            const seen = new Set();
+            items = [];
+            for (const f of feats) {
+                const p = f.properties || {};
+                const coords = (f.geometry || {}).coordinates || [];
+                // Only settlements make sense as a birthplace.
+                const isPlace = p.osm_key === "place" ||
+                    ["city", "town", "village", "hamlet", "municipality"].includes(p.type);
+                const name = p.name || p.city;
+                if (!isPlace || !name || coords.length < 2) continue;
+                const admin1 = p.state || p.county || "";
+                const key = `${name}|${admin1}|${p.country || ""}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                items.push({
+                    name,
+                    admin1,
+                    country: p.country || "",
+                    latitude: coords[1],
+                    longitude: coords[0],
+                });
+                if (items.length >= 6) break;
+            }
+            activeIdx = -1;
+            render();
+        } catch (_) { /* network hiccup — silently skip suggestions */ }
+    };
+
+    input.addEventListener("input", () => {
+        // Typing invalidates any previously selected coordinates.
+        if (latInput) latInput.value = "";
+        if (lonInput) lonInput.value = "";
+        const q = input.value.trim();
+        clearTimeout(debounceTimer);
+        if (q.length < 2) { closeList(); return; }
+        debounceTimer = setTimeout(() => search(q), 250);
+    });
+
+    input.addEventListener("keydown", (e) => {
+        if (list.hidden || !items.length) return;
+        if (e.key === "ArrowDown") { e.preventDefault(); activeIdx = (activeIdx + 1) % items.length; render(); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); activeIdx = (activeIdx - 1 + items.length) % items.length; render(); }
+        else if (e.key === "Enter" && activeIdx >= 0) { e.preventDefault(); choose(items[activeIdx]); }
+        else if (e.key === "Escape") { closeList(); }
+    });
+
+    list.addEventListener("mousedown", (e) => {
+        const li = e.target.closest("li[data-i]");
+        if (!li) return;
+        e.preventDefault();
+        choose(items[parseInt(li.dataset.i, 10)]);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!list.hidden && !e.target.closest(".city-autocomplete")) closeList();
     });
 }
 
