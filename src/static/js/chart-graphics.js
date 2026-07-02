@@ -113,26 +113,49 @@ function matchingAspect(distance) {
 }
 
 function distributedPlanetAngles(planetEntries, ascendant) {
-    const minSpacing = 13;
+    // Spread label angles so planet glyphs never overlap. Works on the wheel's
+    // angular axis (0-360, screen space). Clusters are pushed apart symmetrically
+    // around their centre, then relaxed over several passes — so a tight stack of
+    // planets (e.g. three in one sign) fans out evenly instead of piling to one side.
+    const minSpacing = 15; // degrees of arc between adjacent labels
     const positioned = planetEntries
         .map(([name, info]) => ({
             name,
+            ideal: wheelAngle(info.longitude, ascendant),
             angle: wheelAngle(info.longitude, ascendant),
         }))
         .sort((a, b) => a.angle - b.angle);
 
-    for (let i = 1; i < positioned.length; i++) {
-        if (positioned[i].angle - positioned[i - 1].angle < minSpacing) {
-            positioned[i].angle = positioned[i - 1].angle + minSpacing;
+    const n = positioned.length;
+    if (n <= 1) {
+        return new Map(positioned.map((p) => [p.name, normalizeDeg(p.angle)]));
+    }
+
+    // Relaxation passes: push overlapping neighbours apart in both directions,
+    // gently pull each label back toward its true (ideal) position each pass.
+    for (let pass = 0; pass < 60; pass++) {
+        let moved = false;
+        for (let i = 0; i < n; i++) {
+            const a = positioned[i];
+            const b = positioned[(i + 1) % n];
+            let gap = b.angle - a.angle;
+            if (i === n - 1) gap += 360; // wrap-around pair
+            if (gap < minSpacing) {
+                const push = (minSpacing - gap) / 2;
+                a.angle -= push;
+                b.angle += push;
+                moved = true;
+            }
         }
+        // Light spring back toward ideal so labels stay near their real degree.
+        for (const p of positioned) {
+            const diff = ((p.ideal - p.angle + 540) % 360) - 180;
+            p.angle += diff * 0.05;
+        }
+        if (!moved) break;
     }
 
-    if (positioned.length > 1 && positioned[positioned.length - 1].angle >= 360) {
-        const overflow = positioned[positioned.length - 1].angle - 359;
-        for (const item of positioned) item.angle -= overflow;
-    }
-
-    return new Map(positioned.map((item) => [item.name, normalizeDeg(item.angle)]));
+    return new Map(positioned.map((p) => [p.name, normalizeDeg(p.angle)]));
 }
 
 function renderRingLabel(svg, label, x, y, className, extra = "") {

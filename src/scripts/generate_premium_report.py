@@ -1400,8 +1400,14 @@ def build_raw_data_appendix(chart_data: str) -> str:
     return ang_md + "\n---\n\n"
 
 
-def run_premium_report(chart_data, output_file, iterations=6):
-    """Generate a premium report using research-backed methodology."""
+def run_premium_report(chart_data, output_file, iterations=6, model=None):
+    """Generate a premium report using research-backed methodology.
+
+    `model` optionally overrides the OpenRouter model for this run (used for
+    per-tier model selection: a stronger model for paid reports, a cheaper one
+    for free readings). When None, `_openrouter_request` falls back to the
+    OPENROUTER_MODEL environment variable.
+    """
 
     print(f"\n{'='*80}")
     print(f"PREMIUM REPORT GENERATION - Traditional Astrology")
@@ -1436,7 +1442,7 @@ def run_premium_report(chart_data, output_file, iterations=6):
         max_attempts = 4
         for attempt in range(1, max_attempts + 1):
             response = _openrouter_request(
-                messages=messages, temperature=0.15, max_tokens=16000, top_p=0.9
+                messages=messages, temperature=0.15, max_tokens=16000, top_p=0.9, model=model
             )
             if not _is_transient(response):
                 break

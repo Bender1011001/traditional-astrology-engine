@@ -67,17 +67,22 @@ def calculate_monthly_profection(
         raise ValueError(f"Unknown profection method: {method}")
 
 
-def calculate_daily_profection(monthly_sign: Sign, day: float) -> Sign:
+def calculate_daily_profection(monthly_sign: Sign, day: float, method: str = "Standard") -> Sign:
     """
     Implements Daily Profection.
-    2 days and 8 hours (2.333 days) per sign from the monthly profection sign.
+    Standard: 2 days and 8 hours (2.333 days) per sign from the monthly profection sign.
+    Valens: Exactly 1 sign per day rate.
 
     day: 1-indexed (1 to 30)
     """
     signs = list(Sign)
-    # 2 days and 8 hours = 2 + 8/24 = 2.3333... days
-    # which is exactly 7/3 days.
-    rate = 7 / 3
+    
+    if method == "Valens":
+        rate = 1.0
+    else:
+        # 2 days and 8 hours = 2 + 8/24 = 2.3333... days
+        # which is exactly 7/3 days.
+        rate = 7 / 3
 
     start_index = signs.index(monthly_sign)
     # We subtract 1 from day to make it 0-indexed for calculation
@@ -86,7 +91,7 @@ def calculate_daily_profection(monthly_sign: Sign, day: float) -> Sign:
     return signs[target_index]
 
 
-def calculate_epitasis_days(monthly_sign: Sign, transiting_loy_sign: Sign) -> list[int]:
+def calculate_epitasis_days(monthly_sign: Sign, transiting_loy_sign: Sign, method: str = "Standard") -> list[int]:
     """
     Identify specific days within a month where the Daily Profection matches
     the zodiacal sign of the transiting Lord of the Year.
@@ -97,7 +102,7 @@ def calculate_epitasis_days(monthly_sign: Sign, transiting_loy_sign: Sign) -> li
     epitasis_days = []
     # Check for a standard 30-day month
     for day in range(1, 31):
-        daily_sign = calculate_daily_profection(monthly_sign, float(day))
+        daily_sign = calculate_daily_profection(monthly_sign, float(day), method=method)
         if daily_sign == transiting_loy_sign:
             epitasis_days.append(day)
     return epitasis_days

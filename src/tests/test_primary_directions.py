@@ -148,3 +148,9 @@ def test_calculate_directions_to_planets():
     assert (
         sum(1 for r in res if r.significator == "Mars" and r.promittor == "Jupiter") > 0
     )
+
+
+def test_naibod_key():
+    assert abs(PrimaryDirectionsEngine.naibod_key(0.9856) - 1.0) < 0.001
+    assert abs(PrimaryDirectionsEngine.get_arc_from_years(1.0, key="Naibod") - 0.9856) < 0.001
+    assert abs(PrimaryDirectionsEngine.get_years_from_arc(0.9856, key="Naibod") - 1.0) < 0.001

@@ -89,10 +89,38 @@ class PDFReportGenerator:
             )
         )
 
+    @staticmethod
+    def _fmt_inline(content: str) -> str:
+        """XML-escape raw content, THEN apply markdown bold/italic. Escaping first
+        means stray & < > in the (LLM-authored) text can never break the parser."""
+        from xml.sax.saxutils import escape
+
+        s = escape(content)
+        s = re.sub(r"\*\*(.*?)\*\*", r"<b>\1</b>", s)
+        s = re.sub(r"\*(.*?)\*", r"<i>\1</i>", s)
+        return s
+
+    def _safe_para(self, formatted_text: str, style):
+        """Build a Paragraph; if ReportLab rejects the inline XML (e.g. the model
+        emitted overlapping/mismatched <b>/<i> tags), fall back to a plain,
+        tag-stripped, fully-escaped version so a single bad line never aborts the
+        whole PDF."""
+        from xml.sax.saxutils import escape
+
+        try:
+            return Paragraph(formatted_text, style)
+        except Exception:
+            stripped = re.sub(r"</?[a-zA-Z][^>]*>", "", formatted_text)
+            try:
+                return Paragraph(stripped, style)
+            except Exception:
+                return Paragraph(escape(stripped), style)
+
     def _parse_markdown(self, text):
         """
-        Simple Markdown parser for ReportLab.
-        Converts # Headers, **bold**, *italics*, and lists.
+        Simple, robust Markdown parser for ReportLab.
+        Converts # Headers, **bold**, *italics*, and lists; tolerates malformed
+        inline markup without failing the document.
         """
         flowables = []
         lines = text.split("\n")
@@ -101,48 +129,35 @@ class PDFReportGenerator:
         for line in lines:
             line = line.strip()
 
-            # Handle Code Blocks (Skip them for now, or render differently)
             if line.startswith("```"):
                 in_code_block = not in_code_block
                 continue
-
             if in_code_block:
                 continue
-
             if not line:
                 flowables.append(Spacer(1, 6))
                 continue
 
-            # Formatting (Bold/Italic) - using reportlab's XML syntax
-            # Replace **text** with <b>text</b>
-            line = re.sub(r"\*\*(.*?)\*\*", r"<b>\1</b>", line)
-            # Replace *text* with <i>text</i>
-            line = re.sub(r"\*(.*?)\*", r"<i>\1</i>", line)
-
-            # Headers
+            # Headers (detect on the raw line; format only the content)
             if line.startswith("# "):
-                # Special handling for "Part X" to force page break
                 if line.startswith("# Part"):
                     flowables.append(PageBreak())
-
-                flowables.append(Paragraph(line[2:], self.styles["Header1"]))
+                flowables.append(self._safe_para(self._fmt_inline(line[2:]), self.styles["Header1"]))
                 flowables.append(Spacer(1, 6))
             elif line.startswith("## "):
-                flowables.append(Paragraph(line[3:], self.styles["Header2"]))
+                flowables.append(self._safe_para(self._fmt_inline(line[3:]), self.styles["Header2"]))
             elif line.startswith("### "):
-                flowables.append(Paragraph(line[4:], self.styles["Header3"]))
+                flowables.append(self._safe_para(self._fmt_inline(line[4:]), self.styles["Header3"]))
             elif line.startswith("---"):
-                # Changed from PageBreak to HorizontalLine
                 flowables.append(Spacer(1, 6))
                 flowables.append(HorizontalLine())
                 flowables.append(Spacer(1, 6))
             elif line.startswith("- ") or line.startswith("* "):
-                # Bullet point
-                flowables.append(Paragraph(f"• {line[2:]}", self.styles["Normal"]))
+                flowables.append(self._safe_para("• " + self._fmt_inline(line[2:]), self.styles["Normal"]))
             elif line.startswith("> "):
-                flowables.append(Paragraph(line[2:], self.styles["Quote"]))
+                flowables.append(self._safe_para(self._fmt_inline(line[2:]), self.styles["Quote"]))
             else:
-                flowables.append(Paragraph(line, self.styles["Normal"]))
+                flowables.append(self._safe_para(self._fmt_inline(line), self.styles["Normal"]))
 
         return flowables
 

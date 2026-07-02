@@ -306,3 +306,10 @@ def test_muntha_age_5():
 def test_muntha_full_cycle():
     result = calculate_muntha(Sign.LEO, 12)
     assert result["sign"] == "Leo"
+
+
+def test_daily_profection_valens():
+    """Valens method: exactly 1 sign per day."""
+    assert calculate_daily_profection(Sign.ARIES, 1.0, method="Valens") == Sign.ARIES
+    assert calculate_daily_profection(Sign.ARIES, 2.0, method="Valens") == Sign.TAURUS
+    assert calculate_daily_profection(Sign.ARIES, 3.0, method="Valens") == Sign.GEMINI

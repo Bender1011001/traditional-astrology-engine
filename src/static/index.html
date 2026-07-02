@@ -252,13 +252,19 @@
             </div>
             <div class="form-field">
               <label for="birthCity">City of Birth</label>
-              <input type="text" id="birthCity" name="birthCity" placeholder="e.g. Los Angeles" required autocomplete="address-level2" />
+              <div class="city-autocomplete" style="position:relative;">
+                <input type="text" id="birthCity" name="birthCity" placeholder="Start typing, e.g. Fairfield" required autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="citySuggestions" />
+                <ul id="citySuggestions" class="city-suggestions" role="listbox" hidden></ul>
+              </div>
+              <input type="hidden" id="birthLat" />
+              <input type="hidden" id="birthLon" />
             </div>
             <div class="form-field">
               <label for="birthState">State / Country</label>
               <input type="text" id="birthState" name="birthState" placeholder="e.g. CA or United Kingdom" autocomplete="address-level1" />
             </div>
           </div>
+          <p id="formError" class="form-error" role="alert" aria-live="assertive" hidden style="color:#ff8a8a;font-size:0.9rem;margin:0.25rem 0 0.75rem;"></p>
           <button type="submit" class="btn-cta" id="submitBtn">
             <span class="btn-text">✦ Calculate My Free Reading</span>
             <span class="btn-loading hidden">Starting LLM chart...</span>
@@ -694,7 +700,7 @@
     </footer>
   </main>
 
-  <script type="module" src="js/reading-app.js?v=rev20260612premium1"></script>
+  <script type="module" src="js/reading-app.js?v=rev20260702autocomplete1"></script>
   <script>
     (function setupHomepageProfectionTool() {
       var form = document.getElementById('quickProfectionForm');
@@ -974,6 +980,45 @@
     @keyframes slideUp {
       from { transform: translateY(100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
+    }
+    .city-suggestions {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      z-index: 50;
+      margin: 0;
+      padding: 0.25rem;
+      list-style: none;
+      background: #14142a;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 8px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .city-suggestions[hidden] { display: none; }
+    .city-suggestions li {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+    .city-suggestions li .city-sub {
+      display: block;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 0.1rem;
+    }
+    .city-suggestions li:hover,
+    .city-suggestions li.active {
+      background: rgba(201, 168, 76, 0.18);
+    }
+    .form-field input[aria-invalid="true"] {
+      border-color: #ff8a8a !important;
+      box-shadow: 0 0 0 2px rgba(255, 138, 138, 0.25);
     }
   </style>
 

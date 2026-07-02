@@ -39,6 +39,9 @@ from .primary_directions import PrimaryDirectionsEngine
 from .reception import ReceptionEngine, ReceptionMode
 from .solar_return import SolarReturnEngine
 from .synthesis import ReportSynthesizer
+from .degrees import DegreeQualityEngine
+from .doctrine import DoctrineEngine
+from .remediation import RemediationEngine
 from .temperament import TemperamentEngine
 from .topical import TopicalEngine
 
@@ -569,6 +572,50 @@ class Auditor:
         except Exception as e:
             logger.warning("Topical layer failed: %s", repr(e), exc_info=True)
             analysis["topical"] = {"error": "topical layer unavailable"}
+
+        # 7c. Degree qualities (Lilly, Christian Astrology p.116): masculine/
+        #     feminine, light/dark/smoky/void, pitted, azimene (lame), and
+        #     increasing-fortune degrees for each planet and the angles.
+        try:
+            deg_q: Dict[str, Any] = {}
+            for p in chart.planets:
+                if p.name in (PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE):
+                    continue
+                deg_q[p.name.value] = DegreeQualityEngine.lookup(p.longitude)
+            deg_q["Ascendant"] = DegreeQualityEngine.lookup(chart.ascendant)
+            deg_q["Midheaven"] = DegreeQualityEngine.lookup(chart.mc)
+            analysis["degree_qualities"] = deg_q
+        except Exception as e:
+            logger.warning("Degree-quality layer failed: %s", repr(e), exc_info=True)
+            analysis["degree_qualities"] = {"error": "degree qualities unavailable"}
+
+        # 7d. Remediation (Renaissance planetary correspondences + electional
+        #     timing). Sourced/structured so the narrative cites safe, two-layer
+        #     remedies (historical vs safe) instead of improvising them.
+        try:
+            afflicted = [
+                p.get("name")
+                for p in planets_forensic
+                if p.get("maltreatments")
+                and p.get("name") not in ("North_Node", "South_Node")
+            ]
+            moon_mansion = (analysis.get("supplemental") or {}).get("lunar_mansion")
+            analysis["remediation"] = RemediationEngine.prescribe_for_chart(
+                sect=sect, afflicted_planets=afflicted, moon_mansion=moon_mansion
+            )
+        except Exception as e:
+            logger.warning("Remediation layer failed: %s", repr(e), exc_info=True)
+            analysis["remediation"] = {"error": "remediation unavailable"}
+
+        # 7e. Doctrinal disagreements: where the authorities differ (triplicity
+        #     rulers, bounds, the mother's house, degree tables, length-of-life,
+        #     fixed-star natures...), surface BOTH positions with attribution so
+        #     the reading never silently picks one.
+        try:
+            analysis["doctrinal_disagreements"] = DoctrineEngine.build(chart, sect)
+        except Exception as e:
+            logger.warning("Doctrine layer failed: %s", repr(e), exc_info=True)
+            analysis["doctrinal_disagreements"] = {"error": "doctrine layer unavailable"}
 
         # 8. Universal Ledger (Source of Truth)
         rule_ledger = Auditor._generate_rule_ledger(
@@ -1501,12 +1548,32 @@ class Auditor:
         }
         try:
             if hyleg and "longitude" in hyleg:
-                dirs = PrimaryDirectionsEngine.calculate_directions_to_point(
-                    chart=chart,
-                    geo_lat=chart.geo_lat,  # type: ignore
-                    target_lon=hyleg["longitude"],
-                    target_label=f"Hyleg ({hyleg.get('name')})",
-                )
+                hyleg_name = hyleg.get("name")
+                if hyleg_name in ("Ascendant", "Midheaven", "MC"):
+                    # The Ascendant and MC are mundane ANGLES, not generic ecliptic
+                    # points. Directing to them must use the angle method (oblique
+                    # ascension for the Ascendant, RAMC for the MC) — the same method
+                    # the main `primary_directions` table uses. Using the generic
+                    # ecliptic-point/semi-arc method here made the vitality section
+                    # disagree with the primary-directions table for the identical
+                    # aspect (e.g. Saturn opp Asc: 46.06° here vs 43.68° there).
+                    angle_sig = (
+                        "Midheaven" if hyleg_name in ("Midheaven", "MC") else "Ascendant"
+                    )
+                    dirs = [
+                        d
+                        for d in PrimaryDirectionsEngine.calculate_directions_to_angles(
+                            chart=chart, geo_lat=chart.geo_lat  # type: ignore
+                        )
+                        if d.significator == angle_sig
+                    ]
+                else:
+                    dirs = PrimaryDirectionsEngine.calculate_directions_to_point(
+                        chart=chart,
+                        geo_lat=chart.geo_lat,  # type: ignore
+                        target_lon=hyleg["longitude"],
+                        target_label=f"Hyleg ({hyleg.get('name')})",
+                    )
                 dirs_json = [
                     {
                         "significator": d.significator,

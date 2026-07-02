@@ -57,7 +57,7 @@ def _load_binder_context():
 BINDER_CONTEXT = _load_binder_context()
 
 
-def _openrouter_request(messages, temperature, max_tokens, top_p=None):
+def _openrouter_request(messages, temperature, max_tokens, top_p=None, model=None):
     if not _oracle_breaker.allow_request():
         return "Error: Circuit Breaker Open (Too many failures). info: The Oracle is currently meditating (service unavailable)."
 
@@ -70,8 +70,9 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
             "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1/chat/completions"
         )
         # Default to the production cost/performance model; deployments can
-        # override this through OPENROUTER_MODEL.
-        model = os.getenv("OPENROUTER_MODEL", "google/gemini-3.5-flash")
+        # override this through OPENROUTER_MODEL. Callers may also pass an
+        # explicit `model` (e.g. per-tier selection) which takes precedence.
+        model = model or os.getenv("OPENROUTER_MODEL", "google/gemini-3.5-flash")
         timeout = float(
             os.getenv("OPENROUTER_TIMEOUT", "120")
         )  # Increased timeout for large context
@@ -96,6 +97,19 @@ def _openrouter_request(messages, temperature, max_tokens, top_p=None):
         }
         if top_p is not None:
             payload["top_p"] = top_p
+
+        # Reasoning / "thinking" budget for capable models (e.g. Gemini 3 Flash).
+        # Defaults to "high"; override via OPENROUTER_REASONING_EFFORT (low|medium|
+        # high) or set it to "off" to disable. Gated to reasoning-capable models so
+        # it can never break a model that lacks a thinking mode.
+        reasoning_effort = os.getenv("OPENROUTER_REASONING_EFFORT", "high").strip().lower()
+        model_l = model.lower()
+        supports_reasoning = any(
+            k in model_l
+            for k in ("gemini-3", "gemini-2", "flash", "thinking", "opus", "sonnet", "o1", "o3", "grok")
+        )
+        if reasoning_effort in ("low", "medium", "high") and supports_reasoning:
+            payload["reasoning"] = {"effort": reasoning_effort}
 
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(

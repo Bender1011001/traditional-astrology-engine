@@ -110,6 +110,25 @@ def llm_iterations_for_tier(tier: str | None) -> int:
     )
 
 
+def model_for_iterations(iteration_count: int) -> str | None:
+    """Select the OpenRouter model by report depth.
+
+    Deep, multi-pass paid reports (>=2 iterations) get the premium model, which
+    produces the richer narrative depth (triplicity chapters, full ZR timelines,
+    isolated forensic domains). Free / single-pass readings return None so that
+    `_openrouter_request` falls back to the cheaper OPENROUTER_MODEL default.
+
+    Override via env: OPENROUTER_MODEL_PAID (premium tier), OPENROUTER_MODEL (free tier).
+    """
+    if iteration_count >= 2:
+        return (
+            os.getenv("OPENROUTER_MODEL_PAID")
+            or os.getenv("OPENROUTER_MODEL_PREMIUM")
+            or "google/gemini-3.5-flash"
+        )
+    return None
+
+
 def _sign_from_longitude(longitude: Any) -> str | None:
     try:
         lon = float(longitude) % 360.0
@@ -297,7 +316,14 @@ class PremiumGenerator:
             # We call the script logic.
             # Note: run_premium_report is sync, so this blocks.
             # Callers should run this in threadpool/executor.
-            run_premium_report(chart_data_json, output_path, iterations=iteration_count)
+            # Paid multi-pass reports use the premium model; free readings use the
+            # cheaper default (model=None -> OPENROUTER_MODEL env).
+            run_premium_report(
+                chart_data_json,
+                output_path,
+                iterations=iteration_count,
+                model=model_for_iterations(iteration_count),
+            )
 
             with open(output_path, "r", encoding="utf-8") as f:
                 report_markdown = f.read()
