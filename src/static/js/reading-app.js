@@ -4,7 +4,7 @@
  * Flow:
  * 1. User fills birth form → submit
  * 2. Free: Calls /api/v1/premium/guest/request → polls → shows free reading
- * 3. Upsell: $69 Complete Analysis via guest Stripe checkout (no account).
+ * 3. Upsell: $20 Complete Analysis via guest Stripe checkout (no account).
  *    Return URL /?paid=true&session_id=... → POST /api/v1/guest/generate-paid
  *    → poll /api/v1/guest/task-status/{id} → render + PDF emailed.
  * 4. Feedback: visitor can rate the reading, send a comment, and optionally tip
@@ -80,7 +80,7 @@ const SUPPORT_TIP_AMOUNTS = [
     { amountCents: 1100, label: "$11" },
     { amountCents: 2500, label: "$25" },
 ];
-const PREMIUM_PRICE_LABEL = "$69";
+const PREMIUM_PRICE_LABEL = "$20";
 
 function getReadingShareUrl(medium) {
     try {
@@ -556,7 +556,7 @@ function shakeForm() {
     });
 }
 
-// ─── Premium ($69 Complete Analysis) Checkout ───────────────────────────────
+// ─── Premium ($20 Complete Analysis) Checkout ───────────────────────────────
 
 function getStoredChartPayload() {
     if (chartPayload?.date && chartPayload?.city) return chartPayload;

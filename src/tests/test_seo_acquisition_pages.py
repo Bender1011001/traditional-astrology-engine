@@ -62,7 +62,7 @@ def test_public_report_shell_is_single_free_report_with_feedback_tip():
 
     assert 'window.gtag("event", "purchase", payload)' in config_js
     assert "ta_purchase_tracked_${transactionId}" in config_js
-    # Paid funnel: the $69 Complete Analysis purchase flow lives in reading-app.js.
+    # Paid funnel: the $20 Complete Analysis purchase flow lives in reading-app.js.
     assert "trackPurchase(data.purchase" in reading_js
     assert "/api/v1/guest/checkout?" in reading_js
     assert "/api/v1/guest/generate-paid?session_id=" in reading_js
@@ -189,8 +189,8 @@ def test_homepage_promotes_free_reading_with_paid_upgrade():
     # No leftover all-free-era claims that the full/complete report is free.
     assert "The Full Report Is Free" not in homepage
     assert "Get the Free Complete Reading" not in homepage
-    # The $69 one-time upgrade is promoted; subscriptions are not.
-    assert "one-time $69 upgrade" in homepage
+    # The $20 one-time upgrade is promoted; subscriptions are not.
+    assert "one-time $20 upgrade" in homepage
     assert "No subscription" in homepage
     assert "How accurate did this chart reading feel?" in reading_js
     assert "Your note emails us and helps improve the rules." in reading_js

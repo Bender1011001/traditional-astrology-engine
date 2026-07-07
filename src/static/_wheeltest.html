@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>wheel test</title>
+<link rel="stylesheet" href="/style.css" />
+<style>body{background:#0a0a14;margin:0;padding:20px;} #chartWheelContainer{max-width:720px;margin:0 auto;}</style>
+</head><body>
+<div id="chartWheelContainer"></div>
+<script type="module">
+import { renderChartWheel } from '/js/chart-graphics.js';
+const r = await fetch('/api/v1/charts/wheel',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:'1990-06-15',time:'14:30',city:'London'})}).then(x=>x.json());
+const planets={}; for(const[n,i] of Object.entries(r.planets)) planets[n]={longitude:i.longitude,retrograde:!!i.is_retrograde};
+renderChartWheel({planets,houses:r.houses,angles:r.angles});
+window.__rendered=true;
+</script>
+</body></html>

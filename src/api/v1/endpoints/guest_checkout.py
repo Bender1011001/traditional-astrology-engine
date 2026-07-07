@@ -39,7 +39,7 @@ TIERS = {
         "report_iterations": 1,
     },
     "premium_audit": {
-        "price_cents": 6900,
+        "price_cents": 2000,
         "product_name": "Complete Astrological Analysis",
         "description": "20+ page deep-dive analysis with advanced timing, remediation, and 10-year forecast.",
         "config_key": "STRIPE_PRICE_PREMIUM_AUDIT",
