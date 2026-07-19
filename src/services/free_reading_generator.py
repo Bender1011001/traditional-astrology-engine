@@ -736,23 +736,19 @@ def _render_free_reading_html(
         <!-- UPSELL CTA -->
         <div class="free-reading-cta">
             <div class="cta-divider"></div>
-            <h2 class="cta-title">Want to go deeper?</h2>
-            <p class="cta-subtitle">Your full reading adds the 12-house analysis, all eight Hermetic Lots, Fixed Star conjunctions, Firdaria time-lord periods, and a year-by-year forecast — everything computed from the same chart data above, in a downloadable PDF.</p>
+            <h2 class="cta-title">Want the complete analysis?</h2>
+            <p class="cta-subtitle">The Complete Astrological Analysis covers the full 12-house judgment, the Hermetic Lots, fixed-star testimony, length-of-life doctrine, and your current profection, Firdaria, and Zodiacal Releasing chapters — every judgment cited to its classical source, delivered as a typeset PDF you keep forever.</p>
             <div class="cta-value-points" style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin:1.25rem 0; font-size:0.85rem; color:rgba(255,255,255,0.7);">
-                <span>📄 PDF you keep forever</span>
-                <span>⏱️ Ready in under a minute</span>
+                <span>📄 Typeset PDF you keep forever</span>
+                <span>⏱️ Generated instantly</span>
                 <span>🔒 No account needed</span>
             </div>
             <div class="cta-buttons">
-                <button class="btn-cta" onclick="startCheckout('full_reading')" id="checkoutFullBtn" data-default-label="✦ Get Full Reading — $25">
-                    ✦ Get Full Reading — $25
-                </button>
-                <span class="btn-or">— or —</span>
-                <button class="btn-cta btn-cta-secondary" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn" data-default-label="Complete Analysis — $69">
-                    Complete Analysis — $69
+                <button class="btn-cta" onclick="startCheckout('premium_audit')" id="checkoutPremiumBtn" data-default-label="✦ Complete Analysis — $20">
+                    ✦ Complete Analysis — $20
                 </button>
             </div>
-            <p class="cta-fine-print">Secure payment via Stripe · No account needed · Instant PDF delivery</p>
+            <p class="cta-fine-print">Secure payment via Stripe · No account needed · This site is built and paid for by one person — every purchase keeps it online</p>
         </div>
 
         <!-- DISCLAIMER -->

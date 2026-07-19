@@ -720,7 +720,7 @@ async def test_guest_checkout_webhook_accepts_stripe_object_without_get(
     assert task.request_meta == {
         **chart_data,
         "tier": "premium_audit",
-        "report_iterations": 6,
+        "report_iterations": 1,
         "paid": True,
         "customer_email": "object-paid@example.com",
     }
@@ -730,9 +730,85 @@ async def test_guest_checkout_webhook_accepts_stripe_object_without_get(
             {
                 **chart_data,
                 "tier": "premium_audit",
-                "report_iterations": 6,
+                "report_iterations": 1,
                 "paid": True,
                 "customer_email": "object-paid@example.com",
             },
         )
     ]
+
+
+@pytest.mark.asyncio
+async def test_report_pdf_download_for_paid_completed_task(db_session, monkeypatch):
+    task = AsyncReportTask(
+        id="cs_test_pdf_paid",
+        status="completed",
+        request_meta={"paid": True, "tier": "premium_audit", "name": "Test Native"},
+        result_json={
+            "report_markdown": "# Reading\n\nA judgment paragraph.",
+            "chart_data": {"meta": {"chart": {}}, "analysis": {}},
+        },
+    )
+    db_session.add(task)
+    db_session.commit()
+
+    class FakePdfGenerator:
+        def __init__(self, chart_data, tier=None):
+            pass
+
+        def generate(self, custom_content=None):
+            import io
+
+            return io.BytesIO(b"%PDF-1.4 fake")
+
+    monkeypatch.setattr(
+        "src.engine.pdf_generator.PDFReportGenerator", FakePdfGenerator
+    )
+
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        response = await client.get("/api/v1/guest/report-pdf/cs_test_pdf_paid")
+
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "application/pdf"
+    assert "attachment" in response.headers["content-disposition"]
+    assert response.content.startswith(b"%PDF")
+
+
+@pytest.mark.asyncio
+async def test_report_pdf_download_rejected_for_free_task(db_session):
+    task = AsyncReportTask(
+        id="free-task-uuid",
+        status="completed",
+        request_meta={"tier": "free_llm_chart", "name": "Test Native"},
+        result_json={
+            "report_markdown": "# Reading",
+            "chart_data": {"meta": {}, "analysis": {}},
+        },
+    )
+    db_session.add(task)
+    db_session.commit()
+
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        response = await client.get("/api/v1/guest/report-pdf/free-task-uuid")
+
+    assert response.status_code == 402
+
+
+@pytest.mark.asyncio
+async def test_report_pdf_download_rejected_while_pending(db_session):
+    task = AsyncReportTask(
+        id="cs_test_pdf_pending",
+        status="processing",
+        request_meta={"paid": True, "tier": "premium_audit"},
+        result_json=None,
+    )
+    db_session.add(task)
+    db_session.commit()
+
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        response = await client.get("/api/v1/guest/report-pdf/cs_test_pdf_pending")
+
+    assert response.status_code == 409

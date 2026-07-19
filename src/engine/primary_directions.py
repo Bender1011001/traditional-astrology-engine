@@ -37,8 +37,12 @@ class MundaneSpeculum:
 
 class PrimaryDirectionsEngine:
     """
-    Implements Primary Directions using Placidus (Semi-Arc) and Regiomontanus methods.
-    Focuses on Placidus as the 'gold standard' for intermediate points.
+    Implements a mixed primary-direction toolkit.
+
+    The angle and point routines below are a configured zodiacal
+    oblique-ascension method with latitude-free aspect points.  They are not a
+    complete Placidus semi-arc implementation and must not be labeled as one.
+    The speculum helpers support separate mundane work.
     """
 
     # Obliquity of Ecliptic (J2000 fallback; prefer _get_obliquity(jd) for accuracy)
@@ -264,29 +268,27 @@ class PrimaryDirectionsEngine:
             dignities = DignityCalculator.get_essential_rulers(asc_directed_lon, sect)
             term_ruler = dignities["term"]
 
-            # Find the "Partner" (Participating Planet)
-            # The partner is the planet that aspects the directed degree,
-            # or the ruler of the sign if no aspect.
-            partner = dignities["domicile"]
-            partner_reason = "Domicile Ruler"
-
-            for p in chart.planets:
-                if p.name in [PlanetName.URANUS, PlanetName.NEPTUNE, PlanetName.PLUTO]:
-                    continue
-                diff = abs(p.longitude - asc_directed_lon)
-                if diff > 180:
-                    diff = 360 - diff
-                # Check major aspects (Conjunction, Sextile, Square, Trine, Opposition)
-                if (
-                    diff < 3
-                    or abs(diff - 60) < 3
-                    or abs(diff - 90) < 3
-                    or abs(diff - 120) < 3
-                    or abs(diff - 180) < 3
-                ):
-                    partner = p.name
-                    partner_reason = f"Aspecting Planet ({p.name.value})"
-                    break
+            # Ptolemy IV.10: a ray reaching the prorogator governs until the
+            # next ray arrives.  Select the most recent directed ray, not an
+            # arbitrary planet found within a present-time three-degree orb.
+            asc_rays = [
+                direction
+                for direction in cls.calculate_directions_to_angles(
+                    chart, geo_lat, key
+                )
+                if direction.significator == "Ascendant"
+                and direction.years <= age_years
+            ]
+            if asc_rays:
+                last_ray = max(asc_rays, key=lambda direction: direction.years)
+                partner = last_ray.promittor
+                partner_reason = (
+                    f"Last directed ray: {last_ray.promittor} {last_ray.aspect} "
+                    f"at age {last_ray.years:.2f}"
+                )
+            else:
+                partner = dignities["domicile"]
+                partner_reason = "Configured natal fallback before first directed ray"
 
             return {
                 "type": "Distributor (Term Ruler)",
@@ -309,7 +311,7 @@ class PrimaryDirectionsEngine:
         cls, chart: Chart, geo_lat: float, max_years: int = 80, key: str = "Ptolemy"
     ) -> List[Dict]:
         """
-        Circumambulations through the Bounds (Ptolemy Tetrabiblos III.10).
+        Circumambulations through the Bounds (Ptolemy Tetrabiblos IV.10).
 
         The master predictive technique of Ptolemaic astrology:
         - Directs the Ascendant forward (Ptolemy/Naibod Key).
@@ -332,6 +334,33 @@ class PrimaryDirectionsEngine:
 
         table = []
         prev_ruler = None
+        asc_rays = sorted(
+            (
+                direction
+                for direction in cls.calculate_directions_to_angles(
+                    chart, geo_lat, key
+                )
+                if direction.significator == "Ascendant"
+            ),
+            key=lambda direction: direction.years,
+        )
+
+        def _directed_asc_at_age(age_years: float) -> float:
+            arc_at_age = cls.get_arc_from_years(age_years, key)
+            ramc_at_age = (mc_ra + arc_at_age) % 360.0
+            _cusps_at_age, ascmc_at_age = swe.houses_armc(
+                ramc_at_age, geo_lat, epsilon, b"P"
+            )
+            return float(ascmc_at_age[0])
+
+        def _bound_ruler_at_age(age_years: float) -> PlanetName:
+            longitude = _directed_asc_at_age(age_years)
+            sign_at_age = list(Sign)[int(longitude / 30.0) % 12]
+            degree_at_age = longitude % 30.0
+            for ruler_at_age, end_degree in EGYPTIAN_TERMS[sign_at_age]:
+                if degree_at_age < end_degree:
+                    return ruler_at_age
+            return EGYPTIAN_TERMS[sign_at_age][-1][0]
 
         for year in range(max_years + 1):
             arc = cls.get_arc_from_years(float(year), key)
@@ -371,32 +400,37 @@ class PrimaryDirectionsEngine:
                 bound_end = 30
 
             # Detect bound transitions
-            is_transition = prev_ruler is not None and bound_ruler != prev_ruler
+            prior_ruler = prev_ruler
+            is_transition = prior_ruler is not None and bound_ruler != prior_ruler
+            exact_transition_age = None
+            if is_transition and year > 0:
+                low = float(year - 1)
+                high = float(year)
+                # The directed Ascendant moves smoothly in this configured
+                # model. Bisect the first instant at which the new bound ruler
+                # replaces the prior ruler instead of reporting only the next
+                # whole-year sample.
+                for _ in range(48):
+                    middle = (low + high) / 2.0
+                    if _bound_ruler_at_age(middle) == prior_ruler:
+                        low = middle
+                    else:
+                        high = middle
+                exact_transition_age = high
             prev_ruler = bound_ruler
 
-            # Partner: planet aspecting the directed degree or domicile ruler
+            # Partner: the most recent ray to reach the Ascendant prorogation.
             dignities = DignityCalculator.get_essential_rulers(asc_dir_lon, sect)
             partner = dignities.get("domicile")
-            partner_reason = "Domicile ruler"
-            for p in chart.planets:
-                if p.name in [
-                    PlanetName.URANUS,
-                    PlanetName.NEPTUNE,
-                    PlanetName.PLUTO,
-                    PlanetName.NORTH_NODE,
-                    PlanetName.SOUTH_NODE,
-                ]:
-                    continue
-                diff = abs(p.longitude - asc_dir_lon) % 360
-                if diff > 180:
-                    diff = 360 - diff
-                for asp_angle in [0, 60, 90, 120, 180]:
-                    if abs(diff - asp_angle) < 3.0:
-                        partner = p.name
-                        partner_reason = f"Aspecting ({p.name.value})"
-                        break
-                if partner != dignities.get("domicile"):
-                    break
+            partner_reason = "Configured natal fallback before first directed ray"
+            prior_rays = [ray for ray in asc_rays if ray.years <= year]
+            if prior_rays:
+                last_ray = prior_rays[-1]
+                partner = last_ray.promittor
+                partner_reason = (
+                    f"Last directed ray: {last_ray.promittor} {last_ray.aspect} "
+                    f"at age {last_ray.years:.2f}"
+                )
 
             fmt = format_longitude(asc_dir_lon)
             entry = {
@@ -413,6 +447,11 @@ class PrimaryDirectionsEngine:
                 "partner": partner.value if hasattr(partner, "value") else str(partner),  # type: ignore
                 "partner_reason": partner_reason,
                 "is_transition": is_transition,
+                "exact_transition_age": (
+                    round(exact_transition_age, 6)
+                    if exact_transition_age is not None
+                    else None
+                ),
             }
             table.append(entry)
 
@@ -509,7 +548,7 @@ class PrimaryDirectionsEngine:
                                 arc=arc,
                                 years=cls.get_years_from_arc(arc, key),
                                 date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
-                                method="Placidus/Zodiacal",
+                                method="Configured zodiacal OA",
                             )
                         )
 
@@ -540,7 +579,7 @@ class PrimaryDirectionsEngine:
                                 arc=arc,
                                 years=cls.get_years_from_arc(arc, key),
                                 date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
-                                method="Placidus/Zodiacal",
+                                method="Configured zodiacal OA",
                             )
                         )
 
@@ -563,7 +602,8 @@ class PrimaryDirectionsEngine:
 
         Implementation note:
         - Treats the significator as an ecliptic point (lat=0) for auditability and stability.
-        - This is a simplified "Placidus/Zodiacal" style direction: arc measured via OA.
+        - This is a configured zodiacal direction: arc measured via OA with
+          latitude-free ecliptic aspect points.
         """
         results: List[DirectionResult] = []
 
@@ -630,7 +670,7 @@ class PrimaryDirectionsEngine:
                                 arc=arc,
                                 years=cls.get_years_from_arc(arc, key),
                                 date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
-                                method="Placidus/Zodiacal",
+                                method="Configured zodiacal OA",
                             )
                         )
 
@@ -729,7 +769,7 @@ class PrimaryDirectionsEngine:
                                     arc=arc,
                                     years=cls.get_years_from_arc(arc, key),
                                     date_offset=cls.format_years(cls.get_years_from_arc(arc, key)),
-                                    method="Placidus/Zodiacal",
+                                    method="Configured zodiacal OA",
                                 )
                             )
 

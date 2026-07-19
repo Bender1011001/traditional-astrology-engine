@@ -56,7 +56,9 @@ class FixedStar:
     mythology: Optional[str] = None
 
 
-# 2025 Coordinates and forensic meanings derived from Binder1_part_030.txt and traditional sources
+# Coordinates are resolved at the chart epoch through Swiss Ephemeris when
+# available.  Interpretive catalog entries remain source-specific; do not blend
+# a later star manual into Ptolemy without an explicit authority label.
 STARS = [
     FixedStar(
         name="Alpheratz",
@@ -70,12 +72,11 @@ STARS = [
     FixedStar(
         name="Caput Algol",
         longitude=56.500,  # 26°30' Taurus
-        nature="Saturn/Mars",
+        nature="Jupiter/Saturn (Ptolemy: Perseus generally)",
         magnitude=2,
-        orb=2.5,
-        glory="High-intensity eminence when handled with integrity",
-        # Avoid doom-porn / literal violence language in outputs (see Algol reframing rule).
-        nemesis="Loss of face; reputational collapse through rashness or loss of composure",
+        orb=1.0,
+        glory="Public prominence under the Jupiter-Saturn nature Ptolemy assigns to Perseus",
+        nemesis="Ptolemy's violent Gorgon judgment requires Mars and anaretic conditions; angular contact alone does not establish it",
         swe_name="Algol",
         mythology="Medusa's Head",
     ),
@@ -273,6 +274,8 @@ class StarContact:
     angle: Optional[str] = None
     message: str = ""
     mythology: Optional[str] = None
+    orb_deg: Optional[float] = None
+    nature: Optional[str] = None
 
 
 def get_shortest_dist(a: float, b: float) -> float:
@@ -521,6 +524,8 @@ def check_fixed_stars(chart: Chart) -> List[StarContact]:
                         contact_type=contact_type,
                         message=msg,
                         mythology=star.mythology,
+                        orb_deg=dist,
+                        nature=star.nature,
                     )
                 )
 
@@ -538,40 +543,15 @@ def check_fixed_stars(chart: Chart) -> List[StarContact]:
                         contact_type="ANGULAR_PRESENCE",
                         message=f"STAR ON {angle_name.upper()}: {star.name}. Glory: {star.glory}. Nemesis: {star.nemesis}.",
                         mythology=star.mythology,
+                        orb_deg=dist,
+                        nature=star.nature,
                     )
                 )
 
-    # 4. Antares-Aldebaran Axis Alert (Violent Potential)
-    # As per Binder1_part_028.txt:
-    # Moon/Mars on this axis (opposite stars) signifies violent death potential.
-    aldebaran = next((s for s in STARS if s.name == "Aldebaran"), None)
-    antares = next((s for s in STARS if s.name == "Antares"), None)
-
-    if aldebaran and antares:
-        for p_name_target in [PlanetName.MOON, PlanetName.MARS]:
-            planet = next((p for p in chart.planets if p.name == p_name_target), None)  # type: ignore
-            if planet:
-                # Check conjunction with either star
-                al_lon = _get_star_longitude(aldebaran, chart.jd)
-                an_lon = _get_star_longitude(antares, chart.jd)
-                on_aldebaran = (
-                    get_shortest_dist(planet.longitude, al_lon) <= aldebaran.orb
-                )
-                on_antares = get_shortest_dist(planet.longitude, an_lon) <= antares.orb
-
-                if on_aldebaran or on_antares:
-                    msg = (
-                        f"CRITICAL AXIS ALERT: {p_name_target.value} is on the Antares-Aldebaran axis. "
-                        "Signifies violent potential / cosmic tension between integrity and obsession. "
-                        "Traditionally associated with violent death by the sword or hanging."
-                    )
-                    all_contacts.append(
-                        StarContact(
-                            star_name="Antares-Aldebaran Axis",
-                            planet_name=p_name_target.value,
-                            contact_type="AXIS_ALERT",
-                            message=msg,
-                        )
-                    )
+    # Do not manufacture a compound Aldebaran-Antares "axis alert."  The
+    # ordinary conjunction records above preserve an actual Moon or Mars
+    # contact with either star.  A violent-death judgment additionally requires
+    # the complete anaretic configuration of the cited authority; a star
+    # conjunction alone cannot supply it.
 
     return all_contacts

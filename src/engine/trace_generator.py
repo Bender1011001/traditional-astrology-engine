@@ -1094,7 +1094,7 @@ def _trace_primary_directions(trace: ComputationTrace, chart: Chart, raw: dict):
             technique="Primary Directions Engine",
             inputs={
                 "geographic_latitude": round(geo_lat, 4),
-                "method": "Placidus/Zodiacal",
+                "method": "Configured zodiacal OA",
             },
             rule="Direct each traditional planet's zodiacal aspects to the Ascendant and Midheaven. Arc = OA(promittor aspect point) - OA(significator). 1° arc ≈ 1 year (Ptolemy Key).",
             source="Ptolemy, Tetrabiblos III.10; Placidus de Titis",

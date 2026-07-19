@@ -89,8 +89,9 @@ class FulfillmentService:
                     logger.error(
                         "AI Generation Failed: %s", repr(ai_error), exc_info=True
                     )
-                    # Fallback to Algorithmic Full Report if AI fails
-                    custom_markdown = f"# Report Generation Issue\n\nWe encountered a disruption in the etheric link. The standardized algorithmic report follows below.\n\n---\n"
+                    raise RuntimeError(
+                        "Premium reading generation failed; no customer PDF was sent."
+                    ) from ai_error
 
             # 3. Generate PDF
             logger.info("Rendering PDF...")

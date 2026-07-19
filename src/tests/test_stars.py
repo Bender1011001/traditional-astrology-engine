@@ -47,10 +47,11 @@ def test_sirius_present():
     assert "Sirius" in names
 
 
-def test_algol_has_special_orb():
-    """Algol traditionally gets a wider orb."""
+def test_algol_uses_conservative_angular_orb_and_ptolemaic_nature():
+    """The product does not silently import a later wide-orb convention."""
     algol = next(s for s in STARS if s.name == "Caput Algol")
-    assert algol.orb == 2.5
+    assert algol.orb == 1.0
+    assert "Jupiter/Saturn" in algol.nature
 
 
 def test_spica_pure_benefic():
@@ -189,6 +190,7 @@ def test_star_contact_dataclass():
     assert contact.star_name == "Sirius"
     assert contact.contact_type == "CONJUNCTION"
     assert contact.mythology == "The Dog Star"
+    assert contact.orb_deg is None
 
 
 # ─── check_fixed_stars (conjunction detection) ───────────────────────────────
@@ -276,8 +278,8 @@ def test_angular_star_presence():
     assert "STAR ON ASCENDANT" in angular[0].message
 
 
-def test_antares_aldebaran_axis_alert():
-    """Moon or Mars on Aldebaran should trigger AXIS_ALERT."""
+def test_antares_aldebaran_contact_does_not_invent_violent_death_axis():
+    """Preserve the conjunction without manufacturing a death judgment."""
     aldebaran = next(s for s in STARS if s.name == "Aldebaran")
     chart = _make_chart(
         [
@@ -287,9 +289,16 @@ def test_antares_aldebaran_axis_alert():
         ]
     )
     result = check_fixed_stars(chart)
-    axis_alerts = [c for c in result if c.contact_type == "AXIS_ALERT"]
-    assert len(axis_alerts) >= 1
-    assert "Moon" in axis_alerts[0].planet_name
+    conjunctions = [
+        c
+        for c in result
+        if c.contact_type == "CONJUNCTION"
+        and c.star_name == "Aldebaran"
+        and c.planet_name == "Moon"
+    ]
+    assert conjunctions
+    assert not [c for c in result if c.contact_type == "AXIS_ALERT"]
+    assert "violent death" not in " ".join(c.message.lower() for c in result)
 
 
 # ─── FixedStar dataclass ────────────────────────────────────────────────────

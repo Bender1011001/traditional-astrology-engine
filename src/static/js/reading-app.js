@@ -6,7 +6,7 @@
  * 2. Free: Calls /api/v1/premium/guest/request → polls → shows free reading
  * 3. Upsell: $20 Complete Analysis via guest Stripe checkout (no account).
  *    Return URL /?paid=true&session_id=... → POST /api/v1/guest/generate-paid
- *    → poll /api/v1/guest/task-status/{id} → render + PDF emailed.
+ *    → poll /api/v1/guest/task-status/{id} → render + instant PDF download.
  * 4. Feedback: visitor can rate the reading, send a comment, and optionally tip
  */
 
@@ -579,21 +579,21 @@ function buildPremiumUpsell() {
                 <span class="premium-trial-badge">✦ GO DEEPER</span>
                 <h3 class="premium-bottom-title">The Complete Astrological Analysis — ${PREMIUM_PRICE_LABEL}</h3>
                 <p class="premium-bottom-sub">
-                    Your free reading is a single pass over the chart. The Complete Analysis runs six
-                    deep synthesis passes: 20+ pages covering advanced timing (annual profections,
-                    firdaria, Zodiacal Releasing), all five dignity levels, Arabic lots, fixed star
-                    contacts, humoral temperament, and a personalized 10-year forecast.
+                    The Complete Analysis is a source-cited, sect-first reading that integrates
+                    planetary condition, shared-ruler life topics, annual profections, Firdaria,
+                    Zodiacal Releasing, and the places where traditional authorities disagree.
                 </p>
                 <p class="premium-bottom-sub" style="margin-top:0.5rem;">
-                    No account needed. The PDF is emailed to you after checkout, and the full reading
-                    also renders right here in your browser.
+                    No account needed. Your analysis is generated instantly after checkout — read it
+                    right here and download the typeset PDF on the spot.
                 </p>
                 <button class="btn-cta" type="button" data-premium-checkout data-default-label="Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}" style="width:auto; margin-top:1rem;">
                     ✦ Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}
                 </button>
                 <p class="premium-bottom-sub" style="margin-top:0.75rem; font-size:0.8rem;">
-                    One-time payment. No subscription. If anything goes wrong with delivery,
-                    you keep the reading and get your money back.
+                    One-time payment. No subscription. Every purchase directly keeps this site
+                    online — it is built and paid for by one person. If anything goes wrong with
+                    delivery, you keep the reading and get your money back.
                 </p>
                 <p class="reading-support-status" data-premium-status aria-live="polite"></p>
             </div>
@@ -687,7 +687,7 @@ async function startPaidGeneration(sessionId) {
         trackConversionEvent("paid_generation_started", { tier: data.tier || "premium_audit" });
         updateLoadingMessage(
             "Writing your Complete Analysis...",
-            "Six deep synthesis passes — this usually takes several minutes. Your PDF will also be emailed."
+            "Building the source-cited analysis — this usually takes under a minute."
         );
         updateLoadingProgress(3, 15);
         pollForPaidCompletion(data.task_id);
@@ -713,7 +713,7 @@ function pollForPaidCompletion(taskId) {
         const stageIndex = Math.min(LOADING_MSGS.length - 2, 3 + Math.floor((attempts / 60) * 3));
         updateLoadingMessage(
             PREMIUM_LOADING_MSGS[attempts % PREMIUM_LOADING_MSGS.length],
-            "Your PDF will be emailed to your checkout address even if you close this page."
+            "Almost there — your reading and PDF download will appear right here."
         );
         updateLoadingProgress(stageIndex, pct);
 
@@ -721,9 +721,9 @@ function pollForPaidCompletion(taskId) {
             clearInterval(interval);
             hideLoading();
             showError(
-                "The report is taking longer than expected. Don't worry — generation continues in the " +
-                "background and the PDF will be emailed to your checkout address. If nothing arrives " +
-                "within an hour, email support@traditional-astrology.com."
+                "The report is taking longer than expected. Refresh this page to retry — your order " +
+                "is safe and this step can be repeated free. If it keeps failing, email " +
+                "support@traditional-astrology.com: you get your reading, or your money back."
             );
             return;
         }
@@ -738,16 +738,15 @@ function pollForPaidCompletion(taskId) {
                 updateLoadingProgress(7, 100);
                 hideLoading();
                 trackConversionEvent("paid_generation_completed", { tier: data.result?.tier || "premium_audit" });
-                showPaidReading(data.result);
+                showPaidReading(data.result, taskId);
             } else if (data.status === "failed") {
                 clearInterval(interval);
                 hideLoading();
                 trackConversionEvent("paid_generation_failed");
                 showError(
-                    "Report generation hit an error. We have been alerted automatically and will " +
-                    "regenerate and email your reading. If you don't hear from us within a few hours, " +
-                    "email support@traditional-astrology.com — you keep the reading and get a refund " +
-                    "if we can't make it right."
+                    "Report generation hit an error. Refresh this page to retry free — your order is " +
+                    "safe. If it keeps failing, email support@traditional-astrology.com — you keep " +
+                    "the reading and get a refund if we can't make it right."
                 );
             }
         } catch (_) {
@@ -756,10 +755,11 @@ function pollForPaidCompletion(taskId) {
     }, 5000);
 }
 
-function showPaidReading(result) {
+function showPaidReading(result, taskId) {
     const section = document.getElementById("readingSection");
     const content = document.getElementById("readingContent");
     if (!section || !content) return;
+    const pdfUrl = taskId ? `/api/v1/guest/report-pdf/${encodeURIComponent(taskId)}` : null;
 
     const md = result?.report_markdown || "";
     const html = renderMarkdown(md);
@@ -781,15 +781,25 @@ function showPaidReading(result) {
                     Thank you for your purchase. Your <strong>Complete Astrological Analysis</strong> is ready below.
                 </p>
                 <p class="premium-trial-sub">
-                    A PDF copy is on its way to the email you used at checkout. Anything wrong?
+                    Download your typeset PDF below — it's yours to keep forever. Anything wrong?
                     Email support@traditional-astrology.com — you keep the reading and get your money back.
                 </p>
+                ${pdfUrl ? `
+                <a class="btn-cta" href="${pdfUrl}" download style="display:inline-block; width:auto; margin-top:0.75rem;"
+                   onclick="trackConversionEvent('paid_pdf_download', {})">
+                    ⬇ Download Your PDF
+                </a>` : ""}
             </div>
         </div>
         <div class="reading-body">${html}</div>
         ${traceData ? buildTraceSection(traceData) : ''}
         <div class="unlock-cta">
             <div class="unlock-buttons">
+                ${pdfUrl ? `
+                <a class="btn-cta" href="${pdfUrl}" download style="width: 100%; margin-top: 0; display:block; text-align:center;"
+                   onclick="trackConversionEvent('paid_pdf_download', {})">
+                    ⬇ Download Your PDF
+                </a>` : ""}
                 <button class="btn-cta btn-cta-secondary" onclick="printReading()" style="width: 100%; margin-top: 0;">
                     Print / Save as PDF
                 </button>
@@ -1196,7 +1206,8 @@ function buildInstantConversionBar(freeRemaining) {
                 </div>
                 <p class="feedback-reassurance" style="margin:0.85rem 0 0; max-width:none; text-align:left;"><strong>Feedback matters:</strong> use the Good/Bad buttons and comment box at the bottom to tell us how accurate the reading felt.</p>
                 <div class="result-conversion-support" id="support-the-work">
-                    <p><strong>Want the full depth?</strong> The Complete Astrological Analysis (${PREMIUM_PRICE_LABEL}, one-time) runs six synthesis passes: 20+ pages with advanced timing, all dignity levels, and a 10-year forecast. PDF emailed, no account needed.</p>
+                    <p><strong>A note from the person who built this:</strong> this site isn't free for me — server time, source texts, and a lot of nights went into it. If the reading was worth something to you, the ${PREMIUM_PRICE_LABEL} Complete Analysis PDF (or any tip below) is what keeps it online.</p>
+                    <p style="margin-top:0.5rem;">The Complete Astrological Analysis (${PREMIUM_PRICE_LABEL}, one-time) is a source-cited sect-first nativity with integrated life topics, current time lords, and explicit doctrinal disagreements — generated instantly, downloadable as a typeset PDF, no account needed.</p>
                     <div class="result-support-actions">
                         <button class="support-action-btn support-action-primary" type="button" data-premium-checkout data-default-label="Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}">Get the Complete Analysis — ${PREMIUM_PRICE_LABEL}</button>
                     </div>

@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "customer_claim_threshold": "A doctrine may be described as text-verified only when its edition is text_inspected and the rule has a precise location.",
+    "unverified_handling": "Keep the calculation or rule internal, label it as a configured project method, and do not attribute it to an original authority as settled fact."
+  },
+  "editions": {
+    "lilly_christian_astrology_1647_wellcome": {
+      "author": "William Lilly",
+      "title": "Christian Astrology",
+      "edition": "London, 1647; Wellcome Library copy",
+      "archive_identifier": "b30338724",
+      "archive_url": "https://archive.org/details/b30338724",
+      "text_file": "b30338724_djvu.txt",
+      "text_sha256": "7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa",
+      "verification": "facsimile_and_ocr_inspected",
+      "rights": "Public Domain Mark 1.0",
+      "ocr_note": "Long-s OCR is noisy; the printed page images control the reading."
+    },
+    "lilly_christian_astrology_1647": {
+      "author": "William Lilly",
+      "title": "Christian Astrology",
+      "edition": "London, 1647",
+      "archive_identifier": "bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647",
+      "archive_url": "https://archive.org/details/bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647",
+      "text_file": "bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647_djvu.txt",
+      "text_sha256": "f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d",
+      "verification": "text_inspected",
+      "ocr_note": "Long-s OCR is noisy; page images remain controlling when wording matters."
+    },
+    "ptolemy_tetrabiblos_ashmand_1822": {
+      "author": "Claudius Ptolemy",
+      "translator": "J. M. Ashmand, from the Greek paraphrase of Proclus",
+      "title": "Ptolemy's Tetrabiblos, or Quadripartite",
+      "edition": "London, 1822",
+      "archive_identifier": "ptolemystetrabi01procgoog",
+      "archive_url": "https://archive.org/details/ptolemystetrabi01procgoog",
+      "text_file": "ptolemystetrabi01procgoog_djvu.txt",
+      "text_sha256": "152221d620bf34a3c942eaf62818bfb4e995fbd0ba48aab837d2c8a84d7382c6",
+      "verification": "text_inspected",
+      "edition_limit": "This is an English translation through Proclus' paraphrase, not a critical Greek edition."
+    },
+    "dorotheus_carmen_book_i_pingree_1976": {
+      "author": "Dorotheus of Sidon",
+      "translator": "David Pingree",
+      "compiler": "Deborah Houlding",
+      "title": "Carmen Astrologicum, Book I",
+      "edition": "English translation from the BSB B.G. Teubner 1976 edition; searchable reproduction published online 2013",
+      "source_url": "https://www.skyscript.co.uk/dorotheus1.pdf",
+      "source_file": "dorotheus_carmen_book1_pingree.pdf",
+      "source_sha256": "33bf2b057257de999142861ad222056b1f092397760662b611132c2e5e284c82",
+      "verification": "translation_inspected",
+      "rights": "Modern copyrighted English translation made available for personal study. Internal verification only; do not redistribute.",
+      "edition_limit": "The reproduction carries Pingree's English translation and Teubner page references but not the parallel Arabic, Greek, and Latin text of the complete 1976 edition. This pass verifies the translated Book I rule, not the underlying languages or textual variants."
+    },
+    "paulus_introductory_matters_schmidt_1995": {
+      "author": "Paulus Alexandrinus",
+      "translator": "Robert Schmidt",
+      "editor": "Robert Hand",
+      "title": "Introductory Matters",
+      "edition": "Project Hindsight, third revised edition, February 1995",
+      "archive_identifier": "livingsignsii",
+      "archive_url": "https://archive.org/details/livingsignsii",
+      "text_file": "Paulus Alexandrinus - Introductory Matters_djvu.txt",
+      "text_sha256": "e5fe6a770c9e09bdfe0db8ed86b870d754be9c58c37261a5000bd822ce5c7601",
+      "verification": "translation_inspected",
+      "rights": "Copyright 1993 Robert Schmidt; third revised edition 1995. Internal verification only; do not redistribute.",
+      "edition_limit": "Modern copyrighted English translation. It verifies the translated chapter structure, not a critical Greek text."
+    },
+    "valens_anthology_book_iv_schmidt_1996": {
+      "author": "Vettius Valens",
+      "translator": "Robert Schmidt",
+      "editor": "Robert Hand",
+      "title": "The Anthology, Book IV",
+      "edition": "Project Hindsight Greek Track Volume XI, 1996",
+      "archive_identifier": "livingsignsii",
+      "archive_url": "https://archive.org/details/livingsignsii",
+      "text_file": "Vettius Valens Book IV_djvu.txt",
+      "text_sha256": "35676841dd550b9e81bef33cec98bf9402d5b76064999d83a0fabfcb19941c85",
+      "verification": "translation_inspected",
+      "rights": "Copyright 1996 Robert Schmidt. Internal verification only; do not redistribute.",
+      "edition_limit": "Modern copyrighted English translation. Exact Greek terminology and textual variants require a critical Greek edition."
+    },
+    "valens_anthologies_riley_2010": {
+      "author": "Vettius Valens",
+      "translator": "Mark T. Riley",
+      "title": "Anthologies",
+      "edition": "Preliminary English translation completed in the 1990s and released online in 2010; based on Kroll 1908 and Pingree 1986",
+      "source_url": "https://www.csus.edu/indiv/r/rileymt/vettius%20valens%20entire.pdf",
+      "source_file": "valens_anthologies_riley_entire.pdf",
+      "source_sha256": "0581d4cd17ff899becf1915aef3c01a9c2c35a0b2abb1bbcade9e3f310e40b9c",
+      "text_file": "valens_entire_djvu.txt",
+      "text_sha256": "10925034d2edc7ecb71e3987d52bc4d36a96366972ed28dcc061a492f4334852",
+      "verification": "translation_inspected",
+      "rights": "Freely released preliminary translation. Preserve attribution and do not represent it as a perfected critical translation.",
+      "edition_limit": "Riley explicitly calls the translation preliminary and unperfected. The detailed decennial computation inspected here appears in material labeled A Fifth-Century Addition, although that addition says the method is also found in Valens."
+    },
+    "ibn_ezra_nativities_revolution_sela_2014": {
+      "author": "Abraham Ibn Ezra",
+      "editor_translator": "Shlomo Sela",
+      "title": "Abraham Ibn Ezra on Nativities and Continuous Horoscopy: A Parallel Hebrew-English Critical Edition of the Book of Nativities and the Book of Revolution",
+      "edition": "Brill, Etudes sur le Judaisme Medieval 59, 2014",
+      "source_url": "https://www.betemunah.org/Book%20of%20Nativities%20and%20the%20Book%20of%20Revolution.pdf",
+      "source_file": "ibn_ezra_nativities_revolutions_sela.pdf",
+      "source_sha256": "58152334a828879e52a02e195589ee03189d681ea637572e08548dfd05403738",
+      "text_file": "ibn_ezra_nativities_revolutions_sela.txt",
+      "text_sha256": "036939ee2d52387035fa091142a499f3e70efaa890be2d44576ab24281bcf2b3",
+      "verification": "parallel_text_and_translation_inspected",
+      "rights": "Copyright 2014 Koninklijke Brill NV. Internal verification only; do not redistribute.",
+      "edition_limit": "This pass verifies Sela's critical Hebrew-English edition and translated rules. It does not independently retranslate the Hebrew or resolve every manuscript variant."
+    },
+    "al_biruni_instruction_wright_1934": {
+      "author": "Abu'l-Rayhan Muhammad ibn Ahmad al-Biruni",
+      "translator": "R. Ramsay Wright",
+      "title": "The Book of Instruction in the Elements of the Art of Astrology",
+      "edition": "London: Luzac & Co., 1934; translation facing Arabic and Persian manuscript text",
+      "source_url": "https://www.skyscript.co.uk/pdf/pubs/texts/albiruni/docs/albiruni.pdf",
+      "source_file": "albiruni.pdf",
+      "source_sha256": "b5b15d3a25842072d680dd6e6d341c992bff0c2a43141d36b47e6a7e2cc761d2",
+      "verification": "translation_and_facing_text_inspected",
+      "edition_limit": "Wright's English translation faces the reproduced manuscript text, but this pass verifies the translated rule and page image rather than independently retranslating the Arabic or Persian."
+    },
+    "firmicus_mathesis_bram_1975": {
+      "author": "Julius Firmicus Maternus",
+      "translator": "Jean Rhys Bram",
+      "title": "Ancient Astrology: Theory and Practice (Matheseos Libri VIII)",
+      "edition": "Park Ridge, New Jersey: Noyes Press, 1975",
+      "source_url": "https://krasiancientastrology.com/wp-content/uploads/2016/11/firmicusmaternustheoryandpractice-1.pdf",
+      "source_file": "firmicus_mathesis_bram.pdf",
+      "source_sha256": "254d5aa703eac2df913a760938f234f55587232bbdc5296673f645f7eba3eb21",
+      "verification": "translation_inspected",
+      "rights": "Modern copyrighted English translation. Internal verification only; do not redistribute.",
+      "edition_limit": "This verifies Bram's English translation and its printed table. Exact Latin terminology and textual variants require comparison with a critical Latin edition."
+    },
+    "picatrix_book_i_4_thomas_selected": {
+      "author": "Pseudo-Maslama al-Majriti (traditional attribution)",
+      "translator": "Robert Thomas",
+      "title": "On the Creation, Proportion and Composition of the Heavens for the Fashioning of Images",
+      "edition": "Selected translation of Picatrix Book I, Chapter 4",
+      "source_url": "https://www.lightforcenetwork.com/wp-content/uploads/2015/06/On-the-Creation.pdf",
+      "source_file": "picatrix_selected_warnock.pdf",
+      "source_sha256": "622a08f3760065cf6b8b884bc05793faee72170ab42b4f8603c50f81be66db94",
+      "verification": "translation_inspected",
+      "rights": "Modern English translation. Internal verification only; do not redistribute.",
+      "edition_limit": "The selected translation contains transcription or textual inconsistencies in some intermediate degree boundaries. It securely verifies the electional and image-making scope and the Moon's eleventh-mansion assignment in this chart, but not every printed second as a critical boundary table."
+    }
+  },
+  "verified_rules": {
+    "lilly_hyleg_alcocoden_and_years": {
+      "edition_id": "lilly_christian_astrology_1647_wellcome",
+      "location": "Book III, Chapter CIV, printed pp. 527-531; Mercury's planetary years, printed p. 80",
+      "verification": "facsimile_and_ocr_inspected",
+      "verified_summary": "Lilly selects the sect light when it occupies an eligible hylegical place, rejects the eighth and twelfth for the luminaries, and otherwise proceeds through the alternate light, prenatal lunation rulers, and Ascendant. The Arabic Alcocoden is the planet with essential dignity at the Hyleg that beholds it; Lilly also records a preference for superior essential dignity when no contender aspects. An angular, strong, fortunate Alcocoden may give its greater years. Lilly's table assigns Mercury 76 greater years, 48 mean years, and 20 least years.",
+      "publication_limit": "Lilly says the native might live the selected years only if no obstructive directions, sudden casualties, or general calamity intervene. In the same chapter he explicitly says he is not satisfied that the Hyleg, Anareta, or Alcocoden can yet be selected with certainty and calls for verification from completed lives. Publish the exact branch result and competing branch, never a single guaranteed death age."
+    },
+    "dorotheus_sect_light_triplicity_fortune": {
+      "edition_id": "dorotheus_carmen_book_i_pingree_1976",
+      "location": "Chapters 1, 5, and 22-24; Teubner pp. 161-162 and 183-189; reproduction pp. 2-3 and 13-17",
+      "verification": "translation_inspected",
+      "verified_summary": "For fortune, property, and elevation, Dorotheus takes the triplicity rulers of the Sun by day or Moon by night. The first and second rulers are compared for the beginning and later outcome of the native's condition. The third or participating ruler contributes to the overall testimony, but the inspected passage does not assign it a fixed final third of life.",
+      "publication_limit": "Do not publish equal early, middle, and late age thirds or call the participating ruler the late-life ruler. Judge the first, second, and participating rulers by Dorotheus's place hierarchy, dignity, visibility, motion, configurations, and contrary testimony. This is a broad condition judgment, not an event-dating technique."
+    },
+    "valens_decennials_129_months": {
+      "edition_id": "valens_anthologies_riley_2010",
+      "location": "Book VI material and the Fifth-Century Addition, Riley pp. 168-172 (Kroll 367-372; Pingree 359-366); compare Schmidt Book IV chapter 26",
+      "verification": "translation_inspected_with_transmission_caveat",
+      "verified_summary": "The major decennial period is 129 months, or 10 years 9 months. The seven sub-period shares are Saturn 30 months, Jupiter 12, Mars 15, Sun 19, Venus 8, Mercury 20, and Moon 25, assigned in the chart's zodiacal planetary order from an eligible aphetic light or the planet following the Ascendant. The shares sum exactly to 129 months.",
+      "publication_limit": "Riley labels the detailed computational exposition a fifth-century addition, even though the addition says the method is also found in Valens. Publish this as a Valens-tradition transmission, not uncontested authorial wording. Customer dates use modern civil calendar months to preserve 10 years 9 months; do not replace the months with uninterrupted 30-day blocks or import the fourth-ruler reset from the separate lunar-quarter method."
+    },
+    "ibn_ezra_triplicity_life_thirds": {
+      "edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+      "location": "Book of Revolution section 4, English p. 375 with facing Hebrew p. 374; referencing the Book of Nativities",
+      "verification": "parallel_text_and_translation_inspected",
+      "verified_summary": "Ibn Ezra explicitly says the triplicity rulers of the Sun's sign by day or the Moon's sign by night rule the native's years, divided into three parts, and that the active ruler's condition must be compared between nativity and annual revolution.",
+      "publication_limit": "This is a later medieval life-phase doctrine, not the wording of Dorotheus I.22. It supports first, middle, and last relative phases but does not itself supply numerical age boundaries. Keep it separate from the Lilly-scoped Hyleg and Alcocoden branches published elsewhere in the report."
+    },
+    "ibn_ezra_annual_revolution_core": {
+      "edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+      "location": "Book of Revolution sections 1, 4, 15, and 21, English pp. 373, 375, 385, and 389 with facing Hebrew",
+      "verification": "parallel_text_and_translation_inspected",
+      "verified_summary": "Ibn Ezra defines the annual revolution as the moment the Sun returns to its natal degree and minute, instructs the reader to cast the return Ascendant and planets, compare the sect-light triplicity ruler between nativity and return, inspect the ruler of the return Ascendant, and subordinate the shorter-lived annual indications to stronger natal and directional testimony.",
+      "publication_limit": "Do not mix Tajika Muntha, arbitrary point weights, or a modern Morin handover into this source-scoped method. Return houses are location-dependent; if the native's location at the return is unknown, disclose the use of natal coordinates as a proxy. The return modifies and times natal testimony rather than replacing it."
+    },
+    "firmicus_antiscia_major_configurations": {
+      "edition_id": "firmicus_mathesis_bram_1975",
+      "location": "Book II, Chapter XXIX, The Antiscia, especially sections 3-9, printed pp. 59-63",
+      "verification": "translation_and_table_inspected",
+      "verified_summary": "Firmicus pairs Gemini-Cancer, Taurus-Leo, Aries-Virgo, Pisces-Libra, Scorpio-Aquarius, and Sagittarius-Capricorn, maps degree 1 to degree 29 through degree 29 to degree 1, and explicitly says planets connected through antiscion by trine, square, sextile, or opposition portend as if normally configured.",
+      "publication_limit": "Firmicus verifies the reflected degree scheme and all major configurations through it. The source passage supplies no numerical orb; the customer layer therefore uses a disclosed conservative one-degree configured limit. Do not reduce the technique to conjunctions alone or import unsupported modern labels such as secret ally and secret enemy as Firmicus's words."
+    },
+    "picatrix_lunar_mansions_electional_scope": {
+      "edition_id": "picatrix_book_i_4_thomas_selected",
+      "location": "Book I, Chapter IV, Talismans of the Mansions of the Moon, especially the opening and eleventh mansion (Azobra)",
+      "verification": "translation_inspected_partial_boundaries",
+      "verified_summary": "The chapter announces the works of the Moon through 28 mansions and repeatedly instructs the practitioner to fashion images or choose operations while the Moon occupies a mansion. The eleventh mansion, called Azobra in this translation, contains the Fairfield Moon under both the configured equal division and the inspected printed boundary variants.",
+      "publication_limit": "This is electional and talismanic doctrine, not a natal personality or destiny delineation. Publish the calculated mansion only with that scope limit. Do not give magical, coercive, medical, martial, or financial instructions, and do not infer a birth-chart trait from the listed image-making operations."
+    },
+    "sect_malefic_moderation": {
+      "edition_id": "ptolemy_tetrabiblos_ashmand_1822",
+      "location": "Book I, Chapter VII, Diurnal and Nocturnal",
+      "verified_summary": "Saturn is assigned to the day and Mars to the night so each contrary quality is moderated by the sect environment.",
+      "publication_limit": "In-sect moderates a malefic. It does not make the malefic a benefic, ally, or universal stabilizer."
+    },
+    "ptolemaic_triplicity_rulers": {
+      "edition_id": "ptolemy_tetrabiblos_ashmand_1822",
+      "location": "Book I, Chapter XXI, The Triplicities",
+      "verified_summary": "Ptolemy assigns sect-dependent principal rulers to the four elemental triangles.",
+      "publication_limit": "Do not merge this table with the Dorothean three-ruler table."
+    },
+    "ptolemaic_terms": {
+      "edition_id": "ptolemy_tetrabiblos_ashmand_1822",
+      "location": "Book I, Chapters XXIII-XXIV, disposition and table of terms",
+      "verified_summary": "Ptolemy distinguishes Egyptian and other term arrangements and supplies his own table.",
+      "publication_limit": "A report must identify the selected bound table when it affects dignity."
+    },
+    "ptolemaic_aspects": {
+      "edition_id": "ptolemy_tetrabiblos_ashmand_1822",
+      "location": "Book I, Chapter XVI, Mutual Configurations of the Signs, printed pp. 37-39",
+      "verification": "translation_inspected_partial",
+      "verified_summary": "Ptolemy defines opposition at 180 degrees, trine at 120 degrees, quartile at 90 degrees, and sextile at 60 degrees, and distinguishes harmonious from discordant configurations.",
+      "publication_limit": "This passage verifies the four configuration geometries. It does not by itself verify the project's numerical orb allowances, applying/separating algorithm, or conjunction handling; those remain configured calculation details."
+    },
+    "ptolemy_doryphory_rank": {
+      "edition_id": "ptolemy_tetrabiblos_ashmand_1822",
+      "location": "Book III, Chapter V, The Parents, printed pp. 120-121; Book IV, Chapter III, The Fortune of Rank, printed pp. 181-184",
+      "verification": "translation_inspected",
+      "verified_summary": "Ptolemy places attendants in the luminary's sign or the sign next following, especially morning or oriental stars with the Sun and evening or occidental stars with the Moon. Rank then depends on the luminaries' gender and angularity, the attendants' angular testimony, and the attendants' nature and condition.",
+      "publication_limit": "Do not replace the sign-based placement with a fixed thirty-degree window. Attendance is not itself a guarantee of kingship: the royal branch requires angular and masculine luminaries plus a complete attendant retinue, while debilitated or adverse attendants give subordinate, dangerous, or unstable dignity. Ashmand's Placidus footnote discusses aspectual attendance separately; the current audited engine publishes the bodily Ptolemaic branch only."
+    },
+    "ptolemy_perseus_algol": {
+      "edition_id": "ptolemy_tetrabiblos_ashmand_1822",
+      "location": "Book I, Chapter X, Constellations North of the Zodiac, printed p. 30; Book III, Chapter IX, printed pp. 209-210",
+      "verification": "translation_inspected",
+      "verified_summary": "Ptolemy assigns Perseus generally the nature of Jupiter and Saturn, while distinguishing the sword-hilt nebula as Mars and Mercury. In the violent-death chapter he associates Mars near the Gorgon with decapitation or mutilation, but only inside a larger anaretic judgment involving malefic control of the death-producing places.",
+      "publication_limit": "Algol is in the Gorgon's head, not the sword hilt. Do not label it Saturn-Mars from this source, and do not infer violent death from an Algol-angle contact without the required Mars and anaretic conditions. The report's one-degree ecliptic conjunction orb is a conservative configured product rule, not a number supplied by this passage."
+    },
+    "ptolemy_prorogation_distributor": {
+      "edition_id": "ptolemy_tetrabiblos_ashmand_1822",
+      "location": "Book IV, Chapter X, Divisions of Times, printed pp. 214-218",
+      "verification": "translation_inspected_partial_implementation",
+      "verified_summary": "Ptolemy assigns different prorogators to different event classes, gives Ascendant distances in ascensional times of the latitude, lets planets bodily or by aspect govern after their rays reach the prorogation, and also gives participation to rulers of the occupied terms.",
+      "publication_limit": "The current engine publishes only the Ascendant bound distributor through a configured one-degree-per-year zodiacal oblique-ascension method using Egyptian bounds. Bound changes are numerically solved within annual brackets, but its latitude-free aspect points, key, bound table, and ray dates remain configured choices, not a complete reproduction of every Ptolemaic prorogation. Do not label it a full Placidus semi-arc direction suite."
+    },
+    "lilly_reception": {
+      "edition_id": "lilly_christian_astrology_1647",
+      "location": "An Introduction to Astrology, p. 112, Reception",
+      "verified_summary": "Lilly defines reception through one planet occupying another's dignity and distinguishes reception by house, triplicity, term, face, or other essential dignity.",
+      "publication_limit": "Reception is assistance or exchange; the text does not justify treating it as cancellation of every debility or an assured favorable outcome."
+    },
+    "lilly_planetary_conditions": {
+      "edition_id": "lilly_christian_astrology_1647",
+      "location": "An Introduction to Astrology, planetary chapters and dignity tables, approximately pp. 57-83 and 104-117",
+      "verified_summary": "Lilly gives planetary natures, houses, exaltations, falls, triplicity rights, terms, and related conditions.",
+      "publication_limit": "The exact page image controls when OCR glyphs obscure signs or planetary symbols."
+    },
+    "lilly_degree_quality_tables": {
+      "edition_id": "lilly_christian_astrology_1647",
+      "location": "An Introduction to Astrology, Two necessary Tables of the Signes and The use of the Table, printed pp. 116-118",
+      "verification": "facsimile_pages_inspected",
+      "verified_summary": "Lilly tabulates masculine and feminine, light, dark, smoky, void, deep or pitted, lame or deficient, and increasing-fortune degrees. He applies light, dark, smoky, and void chiefly to the Ascendant and Moon; pitted degrees to the Ascendant, Moon, or Ascendant ruler; azimene degrees as corroboration through the Ascendant, Moon, Ascendant ruler, or principal lord when an existing bodily defect is already known; and increasing-fortune degrees to the second cusp or ruler, Jupiter, or Fortune.",
+      "publication_limit": "Do not apply a degree flag indiscriminately to every planet. The azimene passage is retrospective corroboration, not authority to predict a diagnosis or bodily defect from the flag alone. Masculine and feminine degrees answer sex questions and are not a general personality classification."
+    },
+    "whole_sign_topical_chain": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 24, On the Tabular Exposition of the Twelve Places, pp. 46-57",
+      "verification": "translation_inspected_partial",
+      "verified_summary": "Paulus explicitly orders the twelve places by whole signs from the Horoskopos and supplies place topics and planet-in-place delineations.",
+      "publication_limit": "The project's consolidated topic labels and ruler-condition heuristic draw on more than Paulus. Paulus verifies the whole-sign place framework only; the complete mapping remains a multi-author configured synthesis."
+    },
+    "paulus_planets_in_places_chart_rules": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 24, On the Tabular Exposition of the Twelve Places, chart-relevant passages on printed pp. 46-57",
+      "verification": "translation_and_facing_pages_inspected",
+      "verified_summary": "For the placements in the Fairfield test nativity, Paulus makes Hermes rejoice in the first; gives benefics in the fifth a child-producing promise; treats the eighth as inheritance and profit-from-death testimony even when occupied by malefics; gives Mars in the eleventh sharply different day and night outcomes; gives Venus in the eleventh favorable marriage and fortune unless afflicted by malefic rays; and supplies severe Sun and Moon delineations in the twelfth, with the Moon's harsher result conditioned on malefic regard or application.",
+      "publication_limit": "Publish the stated conditions and sect branches. Do not transplant the favorable nocturnal Mars rule into a day chart, ignore Venus's malefic-ray exception, or present the severe twelfth-place language without weighing dignity, aspect, sect, and the rest of the nativity. These are historical natal judgments, not medical or financial instructions."
+    },
+    "paulus_planetary_joys": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 24, On the Tabular Exposition of the Twelve Places, pp. 46-57",
+      "verification": "translation_inspected",
+      "verified_summary": "Paulus explicitly assigns Hermes to rejoice in the first place, the Moon in the third, Aphrodite in the fifth, Ares in the sixth, the Sun in the ninth, Zeus in the eleventh, and Kronos in the twelfth.",
+      "publication_limit": "A joy is a place-based affinity and modifier of activity. It does not erase essential debility, sect, maltreatment, or the rest of the natal hierarchy."
+    },
+    "paulus_dodecatemoria_x13": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 22, Concerning the Twelfth Parts, pp. 41-43",
+      "verification": "translation_inspected",
+      "verified_summary": "Paulus instructs the reader to multiply the degrees held within the sign by 13 and count the resulting arc from that sign; his 11 Aries example yields 23 Leo.",
+      "publication_limit": "This verifies the Pauline x13 variant. It does not verify the project's legacy attribution of the x12 variant to Valens; method differences must remain visible."
+    },
+    "paulus_seven_hermetic_lots": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 23, Concerning the Seven Lots in the Panaretus, printed pp. 43-45",
+      "verification": "translation_and_facing_pages_inspected",
+      "verified_summary": "Paulus gives sect-reversing formulas for Fortune, Spirit, Eros, Necessity, Courage, Victory, and Nemesis. He assigns Fortune to body, life-course, possessions, reputation, and privilege; Spirit to soul, temper, mindfulness, power, and deliberate action; Eros to appetite, voluntary desire, friendship, and mutual favor; Necessity to constraint, submission, struggle, war, enmity, hatred, condemnation, and restriction; Courage to boldness, treachery, might, and villainy; Victory to trust, expectation, contest, association, penalties, and rewards; and Nemesis to subterranean and cold fates, impotence, exile, destruction, grief, and the quality of death.",
+      "publication_limit": "The source meanings must be printed without replacing severe terms with generic positivity. Each lot is still judged through place, ruler, ruler condition, and configurations. Nemesis does not by itself calculate a death date, and none of these lots authorizes medical, legal, financial, martial, or coercive advice."
+    },
+    "paulus_zoidion_monomoiria": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 5, Concerning the Zoidion's Monomoiria, pp. 10-11",
+      "verification": "translation_and_table_inspected",
+      "verified_summary": "The first degree is assigned to the domicile ruler of the sign, the second to the next planet in the order of the seven-zoned sphere, and the sequence continues degree by degree.",
+      "publication_limit": "This verifies degree mastership. The project's optional +1 score when a planet occupies its own monomoiria is a disclosed configured weighting, not a numerical value stated by Paulus."
+    },
+    "paulus_trigonal_monomoiria": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 32, Concerning the Monomoiria by Trigon, pp. 66-68",
+      "verification": "translation_and_table_inspected",
+      "verified_summary": "The degree of the sect light is apportioned through a seven-ruler sequence specific to its triplicity and sect. The printed canon gives distinct day and night columns for each of four triplicities.",
+      "publication_limit": "This trigonal form belongs to the degree of the sect light and is not a second degree ruler to attach indiscriminately to every planet. Manuscript tables varied; this implementation follows the inspected Schmidt-Hand canon."
+    },
+    "annual_profection_sign_rotation": {
+      "edition_id": "paulus_introductory_matters_schmidt_1995",
+      "location": "Chapter 31, Concerning Year and Month and Day, pp. 65-66",
+      "verification": "translation_inspected",
+      "verified_summary": "Paulus gives the first year to the Horoskopos, the second to the next sign, and continues through twelve before returning the thirteenth year to the Horoskopos.",
+      "publication_limit": "This verifies annual sign rotation. Monthly, daily, and other elaborations require their own source checks."
+    },
+    "valens_zodiacal_releasing": {
+      "edition_id": "valens_anthology_book_iv_schmidt_1996",
+      "location": "Chapters 4-7, division from Fortune and Spirit, Loosing of the Bond, and sign period years, pp. 3-14",
+      "verification": "translation_inspected",
+      "verified_summary": "Valens releases bodily and circumstantial matters from Fortune, action and reputation from Spirit, describes Loosing of the Bond, and supplies the sign-period years.",
+      "publication_limit": "A released chapter describes the class and timing of activated testimony. It does not independently guarantee eminence, crisis, or a concrete event."
+    },
+    "al_biruni_firdaria_seven_planet_core": {
+      "edition_id": "al_biruni_instruction_wright_1934",
+      "location": "Section 395, Firdaria of Planets, printed p. 32 (PDF p. 33)",
+      "verification": "translation_and_facing_text_inspected",
+      "verified_summary": "For a day nativity the first period begins with the Sun; for a night nativity it begins with the Moon. The remaining planets follow in descending order. Each major period is divided into seven equal parts, beginning with the major chronocrator and continuing with the next planet below.",
+      "publication_limit": "Section 395 verifies the seven-planet sequence and equal subperiods. It does not mention the lunar nodes; any node periods must be labeled as a later configured extension, not attributed to this passage."
+    },
+    "al_biruni_hayz_halb": {
+      "edition_id": "al_biruni_instruction_wright_1934",
+      "location": "Section 496, Hayyiz and Halb, printed p. 101 (PDF p. 102)",
+      "verification": "translation_and_facing_text_inspected",
+      "verified_summary": "Halb matches diurnal planets above ground by day or below at night and nocturnal planets above at night or below by day. Hayyiz adds matching planetary and sign gender; Mars is explicitly male and nocturnal.",
+      "publication_limit": "Mercury is conditional on sign or association and remains indeterminate unless that dependency is explicitly modeled. Hayz and halb modify condition; they do not make a malefic benefic or cancel debility."
+    }
+  },
+  "candidate_editions_from_binder": [
+    {
+      "work": "Vettius Valens, Anthology Book IV",
+      "edition": "Robert Schmidt translation, Robert Hand editor, Project Hindsight Greek Track XI, 1996",
+      "binder_source": "Archive item livingsignsii",
+      "status": "timing_chapters_4_through_7_inspected",
+      "limit": "Copyrighted modern translation; do not redistribute. Greek textual verification remains outstanding."
+    },
+    {
+      "work": "Guido Bonatti, Liber Astronomiae Part I",
+      "edition": "Robert Zoller translation, Robert Hand editor, Project Hindsight Latin Track VII, 1994",
+      "binder_source": "Archive item GuidoBonattiLiberAstronomiaePart4OnHoraryPart1",
+      "status": "metadata_and_title_pages_inspected",
+      "limit": "Copyrighted modern translation; not yet verified against the Ratdolt Latin edition."
+    },
+    {
+      "work": "Guido Bonatti, Liber Astronomiae Part IV and Horary Part I",
+      "edition": "Robert Hand translation, Robert Schmidt editor, Project Hindsight Latin Track XIII, 1996",
+      "binder_source": "Archive item GuidoBonattiLiberAstronomiaePart4OnHoraryPart1",
+      "status": "metadata_and_title_pages_inspected",
+      "limit": "Copyrighted modern translation; useful for internal comparison, not redistribution."
+    }
+  ],
+  "required_before_textual_claim": [
+    "Dorotheus of Sidon outside the inspected Carmen Astrologicum Book I chapters",
+    "Vettius Valens, Anthology outside the inspected Book IV timing chapters",
+    "Guido Bonatti, Liber Astronomiae",
+    "Abu Ma'shar, Firdaria and revolutions material",
+    "Ibn Ezra, Almuten Figuris source",
+    "Paulus Alexandrinus outside the inspected chapters 24 and 31",
+    "al-Biruni, Book of Instruction outside inspected section 395",
+    "Picatrix and Agrippa for magical correspondences"
+  ]
+}

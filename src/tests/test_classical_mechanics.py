@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from unittest.mock import patch
 
 from src.engine.classical_mechanics import (ClassicalMechanicsEngine,
+                                            calculate_antiscia_configurations,
                                             calculate_antiscia_points,
                                             calculate_dodecatemorion,
                                             calculate_planetary_hours,
@@ -97,6 +98,40 @@ def test_engine_get_antiscia():
     """Tests engine wrapper for get_antiscia."""
     pt = ClassicalMechanicsEngine.get_antiscia(10.0)
     assert pt.antiscia_lon == 170.0
+
+
+def test_antiscia_configurations_include_firmicus_major_aspects():
+    planets = [
+        Planet(name=PlanetName.SUN, longitude=141.096609, speed=1.0),
+        Planet(name=PlanetName.MERCURY, longitude=167.182642, speed=1.2),
+        Planet(name=PlanetName.MARS, longitude=102.519722, speed=0.6),
+        Planet(name=PlanetName.JUPITER, longitude=278.508390, speed=-0.1),
+    ]
+
+    results = calculate_antiscia_configurations(planets, orb_limit=1.0)
+
+    assert [
+        (item["planet_1"], item["planet_2"], item["aspect"])
+        for item in results
+    ] == [
+        ("Sun", "Jupiter", "Trine"),
+        ("Mercury", "Mars", "Square"),
+    ]
+    assert all(item["orb"] < 0.4 for item in results)
+    assert all(
+        item["source_rule_id"] == "firmicus_antiscia_major_configurations"
+        for item in results
+    )
+
+
+def test_antiscia_configurations_use_conservative_configured_orb():
+    planets = [
+        Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0),
+        Planet(name=PlanetName.MOON, longitude=172.0, speed=13.0),
+    ]
+
+    assert calculate_antiscia_configurations(planets) == []
+    assert calculate_antiscia_configurations(planets, orb_limit=2.0)[0]["orb"] == 2.0
 
 
 # ─── 2. DODECATEMORIA ───────────────────────────────────────────────────────

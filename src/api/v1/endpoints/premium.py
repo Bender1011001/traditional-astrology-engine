@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 # Free tier is a single-pass LLM reading. The 6-pass Complete Analysis
-# (premium_audit, $69) is sold via guest checkout and must never be given
+# (premium_audit, currently $20) is sold via guest checkout and must never be given
 # away here — see src/api/v1/endpoints/guest_checkout.py.
 FREE_CHART_TIER = "free_llm_chart"
 FREE_CHART_ITERATIONS = llm_iterations_for_tier(FREE_CHART_TIER)

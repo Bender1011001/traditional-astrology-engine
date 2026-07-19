@@ -89,6 +89,70 @@ def check_antiscia_aspect(
     return None
 
 
+def calculate_antiscia_configurations(
+    chart_planets: List[Planet], *, orb_limit: float = 1.0
+) -> List[Dict]:
+    """Return source-auditable major aspects made through the antiscia.
+
+    Firmicus, *Mathesis* II.29.9, does not limit the doctrine to a body
+    conjoining another body's antiscion.  He explicitly names trine, square,
+    sextile, and opposition through the reflected point as operative like the
+    corresponding ordinary configurations.  His passage supplies no numerical
+    orb, so customer publication uses a disclosed conservative one-degree
+    configured limit rather than the legacy planetary-moiety allowance.
+    """
+    if orb_limit < 0:
+        raise ValueError("Antiscia orb_limit must be non-negative")
+    angles = (
+        ("Conjunction", 0.0),
+        ("Sextile", 60.0),
+        ("Square", 90.0),
+        ("Trine", 120.0),
+        ("Opposition", 180.0),
+    )
+    traditional = {
+        PlanetName.SUN,
+        PlanetName.MOON,
+        PlanetName.MERCURY,
+        PlanetName.VENUS,
+        PlanetName.MARS,
+        PlanetName.JUPITER,
+        PlanetName.SATURN,
+    }
+    planets = [planet for planet in chart_planets if planet.name in traditional]
+    results: List[Dict] = []
+    for index, first in enumerate(planets):
+        antiscion = calculate_antiscia_points(first.longitude).antiscia_lon
+        for second in planets[index + 1 :]:
+            separation = abs(((second.longitude - antiscion + 180.0) % 360.0) - 180.0)
+            aspect_name = None
+            aspect_angle = None
+            orb = None
+            for candidate_name, candidate_angle in angles:
+                candidate_orb = abs(separation - candidate_angle)
+                if candidate_orb <= orb_limit:
+                    aspect_name = candidate_name
+                    aspect_angle = candidate_angle
+                    orb = candidate_orb
+                    break
+            if aspect_name is None or aspect_angle is None or orb is None:
+                continue
+            results.append(
+                {
+                    "planet_1": first.name.value,
+                    "planet_2": second.name.value,
+                    "antiscion_of": first.name.value,
+                    "antiscion_longitude": antiscion,
+                    "aspect": aspect_name,
+                    "aspect_angle": aspect_angle,
+                    "orb": round(orb, 6),
+                    "orb_limit": orb_limit,
+                    "source_rule_id": "firmicus_antiscia_major_configurations",
+                }
+            )
+    return results
+
+
 # ==========================================
 # 2. DODECATEMORIA (Twelfth-Parts)
 # ==========================================
@@ -122,6 +186,9 @@ def calculate_dodecatemorion(
     sign_start = sign_idx * 30.0
     deg_in_sign = longitude % 30.0
 
+    # ``Valens`` is a legacy API token for the configured x12 variant. The
+    # historical attribution is unresolved and must not leak into customer
+    # prose as a verified claim.
     multiplier = 12.0 if method == "Valens" else 13.0
 
     projected_arc = deg_in_sign * multiplier
@@ -255,3 +322,11 @@ class ClassicalMechanicsEngine:
                         }
                     )
         return results
+
+    @staticmethod
+    def get_antiscia_configurations(
+        chart_planets: List[Planet], *, orb_limit: float = 1.0
+    ) -> List[Dict]:
+        return calculate_antiscia_configurations(
+            chart_planets, orb_limit=orb_limit
+        )

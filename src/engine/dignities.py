@@ -1,6 +1,8 @@
 from enum import Enum
 from typing import Dict, List, Optional
 
+import swisseph as swe
+
 from .models import Chart, Planet, PlanetName, Sect, Sign
 from .reference_data import CHALDEAN_TERMS
 from .reference_data import DOMICILES as REF_DOMICILES
@@ -315,10 +317,15 @@ class DignityCalculator:
         cls, planet_name: PlanetName, longitude: float, chart: Chart
     ) -> Dict:
         """
-        Hayz:
-            Diurnal Planet (Sun, Jup, Sat): Day chart, Above horizon, Masculine Sign.
-            Nocturnal Planet (Moon, Ven, Mar): Night chart, Below horizon, Feminine Sign.
-        Halb: Lesser condition (satisfies sect and either horizon or sign condition).
+        Al-Biruni section 496:
+        - Halb matches the planet's diurnal/nocturnal family to its actual
+          above/below-ground position at day or night.
+        - Hayz is Halb plus agreement between the planet's gender and the
+          sign's gender. Mars is explicitly male and nocturnal.
+
+        Mercury is left indeterminate because al-Biruni makes its family and
+        gender conditional on sign or planetary association; this function
+        does not yet model that association.
         """
         chart_sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
         is_diurnal = planet_name in [
@@ -338,32 +345,79 @@ class DignityCalculator:
         element = cls.ZODIAC_ELEMENTS[sign]
         is_masculine = element in ["FIRE", "AIR"]
 
-        # Above horizon check (using house number for simplicity/consistency)
-        house_num = cls.get_house_number(
-            longitude, chart.ascendant, getattr(chart, "houses", None)
-        )
-        is_above_horizon = house_num >= 7
+        planet = next((p for p in chart.planets if p.name == planet_name), None)
+        altitude_deg: Optional[float] = None
+        if (
+            planet is not None
+            and chart.jd is not None
+            and chart.geo_lat is not None
+            and chart.geo_lon is not None
+        ):
+            xin = (longitude, planet.latitude, 1.0)
+            azimuth_data = swe.azalt(
+                chart.jd,
+                swe.ECL2HOR,
+                (chart.geo_lon, chart.geo_lat, 0.0),
+                0.0,
+                0.0,
+                xin,
+            )
+            altitude_deg = float(azimuth_data[1])
+            is_above_horizon = altitude_deg > 0.0
+            horizon_method = "swiss_ephemeris_altitude"
+        elif planet is not None and chart.jd is not None:
+            altitude_deg = float(planet.altitude)
+            is_above_horizon = altitude_deg > 0.0
+            horizon_method = "stored_altitude"
+        else:
+            # Compatibility fallback for small synthetic charts that do not
+            # carry a Julian day/altitude. Production charts use altitude.
+            house_num = cls.get_house_number(
+                longitude, chart.ascendant, getattr(chart, "houses", None)
+            )
+            is_above_horizon = house_num >= 7
+            horizon_method = "house_number_fallback"
 
-        status = "None"
-        details = []
+        if not is_diurnal and not is_nocturnal:
+            return {
+                "status": "Indeterminate",
+                "details": ["Mercury requires association-sensitive family and gender."],
+                "is_above_horizon": is_above_horizon,
+                "horizon_method": horizon_method,
+                "altitude_deg": altitude_deg,
+                "halb_match": None,
+                "gender_match": None,
+            }
 
-        sect_match = (chart_sect == Sect.DAY and is_diurnal) or (
-            chart_sect == Sect.NIGHT and is_nocturnal
-        )
-        horizon_match = is_above_horizon if is_diurnal else not is_above_horizon
-        sign_match = is_masculine if is_diurnal else not is_masculine
+        is_day = chart_sect == Sect.DAY
+        if is_diurnal:
+            halb_match = is_above_horizon if is_day else not is_above_horizon
+            planet_is_masculine = True
+        else:
+            halb_match = is_above_horizon if not is_day else not is_above_horizon
+            # Mars is the explicit male/nocturnal exception in al-Biruni 496.
+            planet_is_masculine = planet_name == PlanetName.MARS
+        gender_match = is_masculine == planet_is_masculine
 
-        if sect_match and horizon_match and sign_match:
+        if halb_match and gender_match:
             status = "Hayz"
-            details.append("In Hayz (Sect, Horizon, and Sign match)")
-        elif sect_match and (horizon_match or sign_match):
+            details = ["Halb condition plus matching planetary and sign gender."]
+        elif halb_match:
             status = "Halb"
-            details.append("In Halb (Sect match plus either Horizon or Sign)")
-        elif sect_match:
-            status = "In Sect"
-            details.append("Matches chart sect only")
+            details = ["Diurnal/nocturnal family matches the planet's horizon position."]
+        else:
+            status = "None"
+            details = ["The required diurnal/nocturnal horizon relationship is absent."]
 
-        return {"status": status, "details": details}
+        return {
+            "status": status,
+            "details": details,
+            "is_above_horizon": is_above_horizon,
+            "horizon_method": horizon_method,
+            "altitude_deg": altitude_deg,
+            "halb_match": halb_match,
+            "gender_match": gender_match,
+        }
 
     @classmethod
     def calculate_planet_dignity(

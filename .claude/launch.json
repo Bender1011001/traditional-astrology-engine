@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "astro", "runtimeExecutable": "python", "runtimeArgs": [".claude/_devserver.py"], "port": 8011 }
+  ]
+}

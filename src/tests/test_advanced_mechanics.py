@@ -73,6 +73,28 @@ def test_monomoiria():
         MonomoiriaEngine.get_trigonal_monomoiria(0.5, True, Sign.ARIES, Sign.LEO)
         == PlanetName.SUN
     )
+    # Paulus ch. 32 table is not the ordinary Chaldean sequence: degree 2
+    # in the diurnal fire column is Jupiter, not Venus.
+    assert (
+        MonomoiriaEngine.get_trigonal_monomoiria(1.5, True, Sign.ARIES, Sign.LEO)
+        == PlanetName.JUPITER
+    )
+    assert (
+        MonomoiriaEngine.get_trigonal_monomoiria(1.5, False, Sign.ARIES, Sign.LEO)
+        == PlanetName.SUN
+    )
+    assert (
+        MonomoiriaEngine.get_trigonal_monomoiria(0.5, True, Sign.TAURUS, Sign.VIRGO)
+        == PlanetName.VENUS
+    )
+    assert (
+        MonomoiriaEngine.get_trigonal_monomoiria(3.5, False, Sign.GEMINI, Sign.AQUARIUS)
+        == PlanetName.JUPITER
+    )
+    assert (
+        MonomoiriaEngine.get_trigonal_monomoiria(6.5, False, Sign.CANCER, Sign.PISCES)
+        == PlanetName.SATURN
+    )
 
 
 def test_almuten_scoring():
@@ -100,6 +122,57 @@ def test_doryphory():
         None,
     )
     assert merc_guard is not None
+    assert merc_guard.phase == "oriental"
+    assert merc_guard.placement_relation == "same_sign"
+
+
+def test_doryphory_uses_next_following_sign_not_fixed_thirty_degrees():
+    chart = create_mock_chart(is_day=True)
+    sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
+    moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
+    mercury = next(p for p in chart.planets if p.name == PlanetName.MERCURY)
+    sun.longitude = 141.096609  # Leo 21
+    moon.longitude = 133.246366  # Leo 13
+    mercury.longitude = 167.182642  # Virgo 17; 33.94 degrees after Moon
+
+    guards = DoryphoryEngine.check_doryphory(chart)
+
+    lunar_mercury = next(
+        guard
+        for guard in guards
+        if guard.planet == PlanetName.MERCURY
+        and guard.related_luminary == "Moon"
+    )
+    assert lunar_mercury.phase == "occidental"
+    assert lunar_mercury.placement_relation == "next_following_sign"
+    assert not any(
+        guard.planet == PlanetName.MERCURY
+        and guard.related_luminary == "Sun"
+        for guard in guards
+    )
+
+
+def test_doryphory_excludes_outer_planets_and_wrong_phase():
+    chart = create_mock_chart(is_day=True)
+    chart.planets.append(
+        Planet(name=PlanetName.URANUS, longitude=5.0)
+    )
+    # Venus is in the sign following the Moon but is oriental, so it cannot
+    # serve the Moon under Ptolemy's vespertine/occidental condition.
+    sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
+    moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
+    venus = next(p for p in chart.planets if p.name == PlanetName.VENUS)
+    sun.longitude = 100.0
+    moon.longitude = 50.0
+    venus.longitude = 65.0
+
+    guards = DoryphoryEngine.check_doryphory(chart)
+
+    assert all(guard.planet != PlanetName.URANUS for guard in guards)
+    assert not any(
+        guard.planet == PlanetName.VENUS and guard.related_luminary == "Moon"
+        for guard in guards
+    )
 
 
 def test_dodecatemoria():

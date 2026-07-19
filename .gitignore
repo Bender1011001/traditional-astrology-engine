@@ -95,3 +95,25 @@ browser_smoke.db
 ERROR
 horoscope-chart5-700__radix_traditional_astroseek-13-8-1996_07-18.png
 Finding Etsy Astrology PDF Sellers.txt
+
+# Local research / analysis artifacts (never ship)
+artifacts/
+output/
+tmp/
+premium_reports/
+data/archives/
+data/etsy_shop/
+data/sources/
+astrology_mapping_v5/
+financial_astrology_analysis*/
+talisman-app/
+.playwright-mcp/
+.agents/
+Reading Guide*
+*_ORIGINAL.txt
+debug_*.txt
+chunks_*.txt
+scratch_*
+chart_debug.txt
+live-*.png
+etsy_test_batch.csv

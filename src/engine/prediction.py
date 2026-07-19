@@ -131,6 +131,15 @@ def calculate_zr_lifetime_map(
     """
     signs = list(Sign)
 
+    def _serialize_period(start: datetime, end: datetime) -> dict:
+        """Keep readable dates while preserving sub-day boundaries exactly."""
+        return {
+            "start_date": start.strftime("%Y-%m-%d"),
+            "end_date": end.strftime("%Y-%m-%d"),
+            "start_datetime": start.isoformat(timespec="seconds"),
+            "end_datetime": end.isoformat(timespec="seconds"),
+        }
+
     def _build_level(
         parent_sign_idx: int,
         parent_start_date: datetime,
@@ -155,20 +164,22 @@ def calculate_zr_lifetime_map(
             # Duration at this level: planetary years / scale factor
             raw_duration = ZR_YEARS[current_sign]
             if level == 1:
-                duration_days = int(raw_duration * 360)  # Years → days (360-day year)
+                duration_days = float(raw_duration * 360)  # Years → days
             elif level == 2:
-                duration_days = int(raw_duration * 30)  # Months → days
+                duration_days = float(raw_duration * 30)  # Months → days
             elif level == 3:
-                duration_days = int(raw_duration * 2.5)  # ~2.5 days per unit (30/12)
+                duration_days = raw_duration * 2.5  # Days; retain half-days
             elif level == 4:
-                duration_days = int(raw_duration * (2.5 / 12.0))  # ~5 hours per unit (2.5/12)
+                # Hours: one Level-3 day divided into twelve Level-4 units.
+                # Do not truncate: the smallest periods last hours, not days.
+                duration_days = raw_duration * (2.5 / 12.0)
             else:
                 break
 
             # Don't exceed parent boundaries
             remaining = parent_duration_days - elapsed_days
             if duration_days > remaining:
-                duration_days = float(remaining)  # type: ignore
+                duration_days = float(remaining)
 
             start = parent_start_date + timedelta(days=elapsed_days)
             end = start + timedelta(days=duration_days)
@@ -180,22 +191,19 @@ def calculate_zr_lifetime_map(
             entry = {
                 "level": level,
                 "sign": current_sign.value,
-                "start_date": start.strftime("%Y-%m-%d"),
-                "end_date": end.strftime("%Y-%m-%d"),
                 "status": (
                     "Loosing of the Bond"
                     if is_lb
                     else ("Foreshadowing" if is_foreshadowing else "Normal")
                 ),
                 "is_pivot": is_lb or is_foreshadowing,
+                **_serialize_period(start, end),
             }
 
             # Recursively add sub-periods (only if requested and not at max level)
-            if level < max_level and level <= 2:
-                # Only nest L3 inside L2, and L4 inside L3 (for the current target date queries)
-                # Full L3/L4 for all L2 would be massive — only do for level <= 2
+            if level < max_level and level <= 3:
                 sub = _build_level(current_idx, start, duration_days, level + 1)
-                entry["sub_periods"] = sub  # type: ignore
+                entry["sub_periods"] = sub
 
             entries.append(entry)
 
@@ -224,10 +232,9 @@ def calculate_zr_lifetime_map(
         chapter = {
             "level": 1,
             "sign": l1_sign.value,
-            "start_date": l1_start.strftime("%Y-%m-%d"),
-            "end_date": l1_end.strftime("%Y-%m-%d"),
             "duration_years": ZR_YEARS[l1_sign],
             "paragraphs": _build_level(current_l1_idx, l1_start, l1_duration_days, 2),
+            **_serialize_period(l1_start, l1_end),
         }
 
         chapters.append(chapter)
@@ -246,12 +253,15 @@ def calculate_zr_periods(
     """
     full_map = calculate_zr_lifetime_map(start_sign, start_date, years=120, max_level=4)
 
-    target_date_str = target_date.strftime("%Y-%m-%d")
+    def _contains(period: dict) -> bool:
+        start = datetime.fromisoformat(period["start_datetime"])
+        end = datetime.fromisoformat(period["end_datetime"])
+        return start <= target_date < end
 
     for l1 in full_map:
-        if l1["start_date"] <= target_date_str < l1["end_date"]:
+        if _contains(l1):
             for l2 in l1["paragraphs"]:
-                if l2["start_date"] <= target_date_str < l2["end_date"]:
+                if _contains(l2):
                     result = {
                         "Level 1": l1["sign"],
                         "Level 2": l2["sign"],
@@ -263,11 +273,19 @@ def calculate_zr_periods(
 
                     # Traverse L3 if available
                     for l3 in l2.get("sub_periods", []):
-                        if l3["start_date"] <= target_date_str < l3["end_date"]:
+                        if _contains(l3):
                             result["Level 3"] = l3["sign"]
                             result["L3_Status"] = l3["status"]
                             result["L3_Start"] = l3["start_date"]
                             result["L3_End"] = l3["end_date"]
+
+                            for l4 in l3.get("sub_periods", []):
+                                if _contains(l4):
+                                    result["Level 4"] = l4["sign"]
+                                    result["L4_Status"] = l4["status"]
+                                    result["L4_Start"] = l4["start_datetime"]
+                                    result["L4_End"] = l4["end_datetime"]
+                                    break
                             break
 
                     return result
@@ -309,7 +327,7 @@ def calculate_firdaria(sect: Sect, birth_date: datetime, target_date: datetime) 
     sequence = FIRDARIA_DAY if sect == Sect.DAY else FIRDARIA_NIGHT
 
     # Calculate age in years
-    age_days = (target_date - birth_date).days
+    age_days = (target_date - birth_date).total_seconds() / 86400.0
     age_years = age_days / 365.25
 
     if age_years < 0:
@@ -366,6 +384,11 @@ def calculate_firdaria(sect: Sect, birth_date: datetime, target_date: datetime) 
         "Sub Start": age_to_date(sub_start_age).strftime("%Y-%m-%d"),
         "Sub End": age_to_date(sub_end_age).strftime("%Y-%m-%d"),
         "Current Age": round(age_years, 2),
+        "Source Rule ID": (
+            "configured_firdaria_node_extension"
+            if major_period in (PlanetName.NORTH_NODE, PlanetName.SOUTH_NODE)
+            else "al_biruni_firdaria_seven_planet_core"
+        ),
     }
 
 

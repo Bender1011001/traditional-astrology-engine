@@ -115,5 +115,16 @@ def test_mansion_has_intents():
     assert len(result["intents_good"]) > 0
 
 
+def test_mansion_output_blocks_natal_extrapolation():
+    result = LunarMansionEngine.get_lunar_mansion(133.246366)
+
+    assert result["mansion_id"] == 11
+    assert result["inspected_source_name_variant"] == "Azobra"
+    assert result["source_rule_id"] == "picatrix_lunar_mansions_electional_scope"
+    assert result["usage_scope"] == "electional_talismanic_only"
+    assert result["natal_delineation_supported"] is False
+    assert result["assignment_robust_to_inspected_boundary_variants"] is True
+
+
 def test_mansion_width_constant():
     assert abs(LunarMansionEngine.MANSION_WIDTH - 360.0 / 28) < 0.0001

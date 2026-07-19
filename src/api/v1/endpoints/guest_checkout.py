@@ -41,9 +41,13 @@ TIERS = {
     "premium_audit": {
         "price_cents": 2000,
         "product_name": "Complete Astrological Analysis",
-        "description": "20+ page deep-dive analysis with advanced timing, remediation, and 10-year forecast.",
+        "description": (
+            "Source-cited traditional nativity with sect, planetary condition, "
+            "whole-sign topics, and current time lords. Read instantly in your "
+            "browser and download the typeset PDF."
+        ),
         "config_key": "STRIPE_PRICE_PREMIUM_AUDIT",
-        "report_iterations": 6,
+        "report_iterations": 1,
     },
 }
 
@@ -557,3 +561,67 @@ async def check_task_status(
         "status": task.status,
         "result": task.result_json if task.status in ("completed", "failed") else None,
     }
+
+
+@router.get("/report-pdf/{task_id}")
+async def download_report_pdf(
+    task_id: str,
+    db: Session = Depends(get_db),
+):
+    """Render and download the PDF for a completed reading task.
+
+    The report is deterministic, so the PDF is rendered on demand from the
+    stored result instead of being stored or emailed. Possession of the task id
+    (the Stripe session id for paid orders) is the same trust model as
+    /task-status.
+    """
+    task = db.query(AsyncReportTask).filter(AsyncReportTask.id == task_id).first()
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found.")
+    if task.status != "completed":
+        raise HTTPException(status_code=409, detail="Reading is not ready yet.")
+    if not (task.request_meta or {}).get("paid"):
+        raise HTTPException(
+            status_code=402,
+            detail=(
+                "The complete reading is free to read on the site. The typeset "
+                "PDF download is the one-time purchase that keeps it free."
+            ),
+        )
+
+    result = task.result_json or {}
+    report_markdown = result.get("report_markdown")
+    chart_data = result.get("chart_data")
+    if not report_markdown or not isinstance(chart_data, dict):
+        raise HTTPException(
+            status_code=409, detail="This reading has no downloadable report."
+        )
+
+    import asyncio
+
+    from fastapi.responses import Response
+
+    from src.engine.pdf_generator import PDFReportGenerator
+
+    loop = asyncio.get_event_loop()
+    try:
+        pdf_buffer = await loop.run_in_executor(
+            None,
+            lambda: PDFReportGenerator(chart_data, tier="FULL").generate(
+                custom_content=report_markdown
+            ),
+        )
+    except Exception as pdf_err:
+        logger.error(
+            "PDF render failed for task %s: %s", task_id, repr(pdf_err), exc_info=True
+        )
+        raise HTTPException(status_code=500, detail="PDF rendering failed.")
+
+    name = str((task.request_meta or {}).get("name") or "reading").strip() or "reading"
+    safe_name = "".join(c if c.isalnum() or c in "-_" else "_" for c in name)[:40]
+    filename = f"traditional_astrology_{safe_name}.pdf"
+    return Response(
+        content=pdf_buffer.getvalue(),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )

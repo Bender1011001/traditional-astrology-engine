@@ -18,6 +18,7 @@ from .advanced_mechanics import (AlmutenEngine, DodecatemoriaEngine,
 from .aspects import AspectEngine
 from .calculations import (calculate_solar_status, format_longitude,
                            is_besieged, is_in_via_combusta)
+from .classical_mechanics import calculate_antiscia_configurations
 from .decennials import DecennialEngine
 from .decumbiture import DecumbitureEngine
 from .dignities import DignityCalculator
@@ -379,6 +380,9 @@ class Auditor:
             )
             analysis["aspects"] = []  # type: ignore
             analysis["aspects_shadow"] = []  # type: ignore
+        analysis["antiscia_configurations"] = calculate_antiscia_configurations(
+            chart.planets, orb_limit=1.0
+        )
         analysis["medical"] = Auditor._calculate_medical_suite(
             chart, decumbiture_jd=decumbiture_jd
         )
@@ -584,6 +588,17 @@ class Auditor:
                 deg_q[p.name.value] = DegreeQualityEngine.lookup(p.longitude)
             deg_q["Ascendant"] = DegreeQualityEngine.lookup(chart.ascendant)
             deg_q["Midheaven"] = DegreeQualityEngine.lookup(chart.mc)
+            fortune = (
+                (analysis.get("fate") or {})
+                .get("hermetic_lots", {})
+                .get("Fortune", {})
+            )
+            if isinstance(fortune, dict) and isinstance(
+                fortune.get("longitude"), (int, float)
+            ):
+                deg_q["Lot of Fortune"] = DegreeQualityEngine.lookup(
+                    float(fortune["longitude"])
+                )
             analysis["degree_qualities"] = deg_q
         except Exception as e:
             logger.warning("Degree-quality layer failed: %s", repr(e), exc_info=True)
@@ -652,6 +667,9 @@ class Auditor:
             lum = sun if d.related_luminary == "Sun" else moon
             lum_lon = float(lum.longitude) if lum else None
             p_lon = float(p.longitude)
+            asc_sign = int(float(chart.ascendant) / 30.0) % 12
+            guard_sign = int(p_lon / 30.0) % 12
+            guard_house = ((guard_sign - asc_sign) % 12) + 1
 
             # Basic delta for auditability (not used for house judgment).
             delta = None
@@ -671,6 +689,10 @@ class Auditor:
                     "guard": d.planet.value,
                     "type": d.type,
                     "score": d.score,
+                    "phase": d.phase,
+                    "placement_relation": d.placement_relation,
+                    "guard_house_wsh": guard_house,
+                    "guard_angular_wsh": guard_house in {1, 4, 7, 10},
                     "guard_longitude": p_lon,
                     "guard_longitude_fmt": format_longitude(p_lon),
                     "luminary_longitude": lum_lon,
@@ -681,7 +703,8 @@ class Auditor:
                     "same_sign": (
                         _same_sign(p_lon, lum_lon) if lum_lon is not None else None
                     ),
-                    "note": "Doryphory instances are computed by DoryphoryEngine (Type 3 bodily rules + same-sign nuance).",
+                    "source_rule_id": "ptolemy_doryphory_rank",
+                    "note": "Ptolemaic bodily attendance: same sign or next following sign; oriental guards attend the Sun and occidental guards attend the Moon.",
                 }
             )
 
@@ -1479,29 +1502,12 @@ class Auditor:
                 if total_f + 1e-9 < float(age_years):
                     out = dict(payload)
                     out["invalid_under_sanity"] = True
-                    out["total_years"] = None
+                    out["total_years"] = total_f
                     bd = list(out.get("breakdown") or [])
-                    # Redact numeric detail to prevent downstream consumers from presenting a bogus
-                    # "death age" that is already falsified by current age.
-                    try:
-                        import re
-
-                        bd = [
-                            re.sub(r"[-+]?\\d+(?:\\.\\d+)?", "[REDACTED]", str(x))
-                            for x in bd
-                        ]
-                    except Exception as e:
-                        logger.warning(
-                            "Error redacting breakdown years: %s",
-                            repr(e),
-                            exc_info=True,
-                        )
-                        bd = [str(x) for x in bd]
                     bd.append(
                         "SANITY: this method produced a years figure that is less than the native's current age. "
-                        "The numeric output has been scrubbed; do NOT read as length-of-life. "
-                        "Treat as a failed/misapplied variant or an early-life vulnerability indicator requiring rectification "
-                        "and primary-direction validation."
+                        "The exact arithmetic is preserved, but the branch is empirically falsified as a literal death age. "
+                        "Treat it as a failed or misapplied variant requiring rectification and primary-direction validation."
                     )
                     out["breakdown"] = bd
                     return out
@@ -1662,13 +1668,13 @@ class Auditor:
                     ),
                     "details": alc_bonatti,
                 },
-                "note": "Multiple longevity traditions exist. This engine reports both Valens-term and Bonatti/Lilly-points candidates.",
+                "note": "Multiple longevity branches exist. The legacy valens_term key is a configured strict bound-lord branch and is not text-attributed to Valens; the second branch uses dignity points and degree aspects in a Bonatti/Lilly style.",
             },
             "years_capacity": {
                 "default": lifespan,
                 "valens_term": lifespan_valens,
                 "bonatti_points": lifespan_bonatti,
-                "note": "Traditional years computations; not a literal life expectancy. Cross-validate with Primary Directions and documented accidents.",
+                "note": "Historical planetary-years computations. Publish the exact branch results together with their method limits and competing outcomes.",
             },
             "years_capacity_sanity": {
                 "age_years": age_years,
@@ -1682,9 +1688,12 @@ class Auditor:
                 ),
                 "bonatti_points_lt_age": (
                     (
-                        lifespan_bonatti.get("total_years") is not None
-                        and float(lifespan_bonatti.get("total_years"))  # type: ignore
-                        < float(age_years)
+                        bool(lifespan_bonatti.get("invalid_under_sanity"))
+                        or (
+                            lifespan_bonatti.get("total_years") is not None
+                            and float(lifespan_bonatti.get("total_years"))  # type: ignore
+                            < float(age_years)
+                        )
                     )
                     if age_years is not None
                     else None
@@ -1706,8 +1715,12 @@ class Auditor:
     @staticmethod
     def _calculate_triplicity_periods(chart: Chart) -> Dict[str, Any]:
         """
-        Dorothean Triplicity Periods: life divided into three chapters ruled by the triplicity rulers
-        of the sect light's element (early/middle/late).
+        Dorothean sect-light triplicity judgment.
+
+        Carmen Astrologicum I.22 contrasts the first and second rulers for the
+        beginning and later outcome of fortune/property.  The participating
+        ruler contributes to the total testimony, but Dorotheus does not assign
+        it a fixed final third of life.  No numerical age boundaries are implied.
         """
         sect = Sect.DAY if chart.sun_altitude > 0 else Sect.NIGHT
         sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
@@ -1735,13 +1748,18 @@ class Auditor:
             "sect_light": sect_light.name.value,
             "sect_light_sign": sign.value,
             "element": element,
-            "chapters": {
-                "early_life_ruler": order[0].value,
-                "middle_life_ruler": order[1].value,
-                "late_life_ruler": order[2].value,
+            "rulers": {
+                "first": order[0].value,
+                "second": order[1].value,
+                "participant": order[2].value,
             },
             "all_rulers": [r.value for r in order],
-            "method": "Dorothean Triplicity Periods (3 rulers: day/night/participant; ordered by sect)",
+            "temporal_roles": {
+                "first": "beginning of life/fortune testimony",
+                "second": "later outcome of life/fortune testimony",
+                "participant": "supporting testimony; no fixed final life third",
+            },
+            "method": "Dorothean sect-light triplicity judgment (first, second, and participating rulers; no fixed age thirds)",
         }
 
     @staticmethod
@@ -1836,8 +1854,17 @@ class Auditor:
         is_day = sect == Sect.DAY
 
         zoidion_mono = MonomoiriaEngine.get_zoidion_monomoiria(planet.longitude)
-        trigonal_mono = MonomoiriaEngine.get_trigonal_monomoiria(
-            planet.longitude, is_day, sun_sign, moon_sign
+        is_sect_light = (
+            is_day and planet.name == PlanetName.SUN
+        ) or (
+            not is_day and planet.name == PlanetName.MOON
+        )
+        trigonal_mono = (
+            MonomoiriaEngine.get_trigonal_monomoiria(
+                planet.longitude, is_day, sun_sign, moon_sign
+            )
+            if is_sect_light
+            else None
         )
 
         dodec_val_lon = DodecatemoriaEngine.calculate_dodecatemoria_valens(
@@ -1845,6 +1872,11 @@ class Auditor:
         )
         dodec_paul_lon = DodecatemoriaEngine.calculate_dodecatemoria_paul(
             planet.longitude
+        )
+        hayz_halb = DignityCalculator.check_hayz_halb(
+            planet.name,
+            planet.longitude,
+            chart,
         )
 
         def _dodec_payload(lon: float, method: str) -> Dict[str, object]:
@@ -1889,6 +1921,7 @@ class Auditor:
                 planet.name, planet.longitude, sect
             ),
             "accidental": DignityCalculator.calculate_accidental_dignity(planet, chart),
+            "sect_condition": hayz_halb,
             "solar_status": calculate_solar_status(planet, sun),
             "solar_elongation_deg": round(
                 (((planet.longitude - sun.longitude) + 540.0) % 360.0) - 180.0, 6
@@ -1915,11 +1948,20 @@ class Auditor:
             "classical": {
                 "monomoiria": {
                     "zoidion_ruler": zoidion_mono.value,
-                    "trigonal_ruler": trigonal_mono.value,
+                    "trigonal_ruler": (
+                        trigonal_mono.value if trigonal_mono is not None else None
+                    ),
+                    "trigonal_scope": "sect_light" if is_sect_light else None,
                 },
                 "dodecatemoria": {
-                    "valens": _dodec_payload(dodec_val_lon, "Valens (x12)"),
-                    "paul": _dodec_payload(dodec_paul_lon, "Paul (x13)"),
+                    # Legacy keys remain stable, but the x12 attribution is not
+                    # presented as settled after comparison with Valens' own
+                    # 22 Aquarius -> Scorpio example.
+                    "valens": _dodec_payload(
+                        dodec_val_lon,
+                        "Configured standard (x12; attribution unresolved)",
+                    ),
+                    "paul": _dodec_payload(dodec_paul_lon, "Paulus (x13)"),
                 },
             },
             "impacts": [],

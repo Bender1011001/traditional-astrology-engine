@@ -93,10 +93,12 @@ def test_decennial_sequence(test_case_1996):
     first_period = decennials[0]
     assert first_period["major_lord"] == "Mercury"
 
-    # Duration check (3870 days)
+    # The source states 129 calendar months = 10 years 9 months.
     start = datetime.fromisoformat(first_period["start_date"])
     end = datetime.fromisoformat(first_period["end_date"])
-    assert (end - start).days == 3870
+    assert (end.year, end.month, end.day) == (2007, 5, 13)
+    assert first_period["duration_months"] == 129
+    assert first_period["sub_periods"][-1]["end_date"] == first_period["end_date"]
 
 
 def test_phasis_stationarity():

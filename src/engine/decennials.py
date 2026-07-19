@@ -1,4 +1,6 @@
-from datetime import datetime, timedelta
+import calendar
+import math
+from datetime import datetime
 from typing import Any, Dict, List
 
 from .models import Chart, Planet, PlanetName
@@ -19,6 +21,21 @@ OPERATIVE_HOUSES = [1, 10, 11, 7, 5, 9, 4]
 
 
 class DecennialEngine:
+    @staticmethod
+    def _add_calendar_months(value: datetime, months: int) -> datetime:
+        """Advance by civil calendar months while preserving time and timezone.
+
+        Valens states decennial allocations in months and calls the complete
+        major period 10 years 9 months (129 months).  Treating every month as
+        30 uninterrupted modern days drops the intercalary days and moves
+        customer-facing dates progressively early.
+        """
+        month_index = value.year * 12 + (value.month - 1) + months
+        year, month_zero = divmod(month_index, 12)
+        month = month_zero + 1
+        day = min(value.day, calendar.monthrange(year, month)[1])
+        return value.replace(year=year, month=month, day=day)
+
     @staticmethod
     def get_zodiacal_sequence(chart: Chart) -> List[Planet]:
         """
@@ -56,7 +73,7 @@ class DecennialEngine:
         """
         # Determine Sect
         # Note: chart.sun_altitude is used to determine day/night
-        is_day = chart.sun_altitude > -0.833  # Standard horizon
+        is_day = chart.sun_altitude > 0.0
 
         sun = next((p for p in chart.planets if p.name == PlanetName.SUN), None)
         moon = next((p for p in chart.planets if p.name == PlanetName.MOON), None)
@@ -95,97 +112,71 @@ class DecennialEngine:
         chart: Chart, start_date: datetime, lifespan_years: int = 100
     ) -> List[Dict]:
         """
-        Generates the Decennial tree (General and Sub-periods).
-        Uses a 360-day year (Prophetic Year) logic internally for durations.
+        Generate the 129-month major periods and their planetary month shares.
+
+        Major periods last 10 years 9 months.  Their sub-periods use the
+        planets' minor years as calendar months and therefore sum to the same
+        129 months.  After all seven planets, the zodiacal sequence repeats
+        from the apheta; the separate "jump to the fourth" rule belongs to a
+        different quarter-period method and is not used here.
         """
         apheta = DecennialEngine.select_apheta(chart)
         full_sequence = DecennialEngine.get_zodiacal_sequence(chart)
 
-        # Standard Period = 129 months = 3870 days
-        PERIOD_DAYS = 3870
-
         results = []
-        current_date = start_date
 
         # Align sequence to Apheta
         start_idx = full_sequence.index(apheta)
         current_sequence = full_sequence[start_idx:] + full_sequence[:start_idx]
 
-        # Cycle 1
-        for i in range(7):
-            major_lord = current_sequence[i]
+        period_count = max(1, math.ceil((lifespan_years * 12) / 129))
+        for i in range(period_count):
+            major_lord = current_sequence[i % len(current_sequence)]
+            # Every boundary is computed from the birth anchor with cumulative
+            # months. Chaining from a previously clamped date (e.g. a Feb 29 or
+            # day-31 birth landing in a shorter month) would permanently lose
+            # the anchor day and break the 129-month invariant.
+            major_start = DecennialEngine._add_calendar_months(start_date, i * 129)
+            major_end = DecennialEngine._add_calendar_months(start_date, (i + 1) * 129)
             major_period: Dict[str, Any] = {
                 "major_lord": major_lord.name.value,
-                "start_date": current_date.isoformat(),
-                "end_date": (current_date + timedelta(days=PERIOD_DAYS)).isoformat(),
+                "start_date": major_start.isoformat(),
+                "end_date": major_end.isoformat(),
+                "duration_months": 129,
+                "aphetic_lord": apheta.name.value,
+                "source_rule_id": "valens_decennials_129_months",
                 "sub_periods": [],
             }
 
             # Sub-periods start with Major Lord
-            sub_sequence = current_sequence[i:] + current_sequence[:i]
-            sub_date = current_date
+            offset = i % len(current_sequence)
+            sub_sequence = current_sequence[offset:] + current_sequence[:offset]
+            cumulative_months = i * 129
 
-            for j in range(7):
-                sub_lord = sub_sequence[j]
-                duration_days = (
-                    MINOR_YEARS[sub_lord.name] * 30
-                )  # minor_years × 30-day months = sub-period in days
+            for sub_lord in sub_sequence:
+                duration_months = MINOR_YEARS[sub_lord.name]
+                sub_start = DecennialEngine._add_calendar_months(
+                    start_date, cumulative_months
+                )
+                cumulative_months += duration_months
+                sub_end = DecennialEngine._add_calendar_months(
+                    start_date, cumulative_months
+                )
 
                 major_period["sub_periods"].append(
                     {
                         "sub_lord": sub_lord.name.value,
-                        "start_date": sub_date.isoformat(),
-                        "end_date": (
-                            sub_date + timedelta(days=duration_days)
-                        ).isoformat(),
+                        "start_date": sub_start.isoformat(),
+                        "end_date": sub_end.isoformat(),
+                        "duration_months": duration_months,
                     }
                 )
-                sub_date += timedelta(days=duration_days)
+
+            if cumulative_months != (i + 1) * 129:
+                raise ValueError(
+                    "Decennial sub-periods must total the 129-month major period"
+                )
 
             results.append(major_period)
-            current_date += timedelta(days=PERIOD_DAYS)
-
-            if len(results) * 10.75 >= lifespan_years:
-                break
-
-        # Reset Logic for Old Age (Jump to Fourth)
-        if len(results) < (lifespan_years / 10.75):
-            # Valens Rule: Finish 7 planets, then jump to the 4th from Apheta
-            new_start_idx = (start_idx + 3) % 7
-            new_sequence = full_sequence[new_start_idx:] + full_sequence[:new_start_idx]
-
-            # Repeat Cycle 2
-            for i in range(7):
-                major_lord = new_sequence[i]
-                major_period = {
-                    "major_lord": major_lord.name.value,
-                    "start_date": current_date.isoformat(),
-                    "end_date": (
-                        current_date + timedelta(days=PERIOD_DAYS)
-                    ).isoformat(),
-                    "sub_periods": [],
-                }
-
-                sub_sequence = new_sequence[i:] + new_sequence[:i]
-                sub_date = current_date
-
-                for j in range(7):
-                    sub_lord = sub_sequence[j]
-                    duration_days = MINOR_YEARS[sub_lord.name] * 30
-                    major_period["sub_periods"].append(
-                        {
-                            "sub_lord": sub_lord.name.value,
-                            "start_date": sub_date.isoformat(),
-                            "end_date": (
-                                sub_date + timedelta(days=duration_days)
-                            ).isoformat(),
-                        }
-                    )
-                    sub_date += timedelta(days=duration_days)
-
-                results.append(major_period)
-                current_date += timedelta(days=PERIOD_DAYS)
-                if len(results) * 10.75 >= lifespan_years:
-                    break
 
         return results

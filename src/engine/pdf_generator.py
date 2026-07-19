@@ -1,11 +1,12 @@
 import re
+import math
 from io import BytesIO
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
-from reportlab.platypus import (Flowable, PageBreak, Paragraph,
+from reportlab.platypus import (Flowable, KeepTogether, PageBreak, Paragraph,
                                 SimpleDocTemplate, Spacer, Table, TableStyle)
 
 
@@ -20,6 +21,98 @@ class HorizontalLine(Flowable):
         self.canv.line(0, 0, self.width, 0)
 
 
+class TraditionalChartWheel(Flowable):
+    """Compact seven-planet whole-sign wheel for the report cover."""
+
+    SIGNS = ("Ar", "Ta", "Ge", "Cn", "Le", "Vi", "Li", "Sc", "Sg", "Cp", "Aq", "Pi")
+    PLANET_LABELS = {
+        "Sun": "Su",
+        "Moon": "Mo",
+        "Mercury": "Me",
+        "Venus": "Ve",
+        "Mars": "Ma",
+        "Jupiter": "Ju",
+        "Saturn": "Sa",
+    }
+
+    def __init__(self, chart_data, size=250):
+        super().__init__()
+        self.chart_data = chart_data
+        self.width = size
+        self.height = size
+        self.hAlign = "CENTER"
+
+    @staticmethod
+    def _point(cx, cy, radius, longitude, ascendant):
+        angle = math.radians(180.0 - ((float(longitude) - ascendant) % 360.0))
+        return cx + radius * math.cos(angle), cy + radius * math.sin(angle)
+
+    def draw(self):
+        canvas = self.canv
+        cx = self.width / 2
+        cy = self.height / 2
+        outer = self.width * 0.46
+        inner = self.width * 0.34
+        analysis = self.chart_data.get("analysis", {}) or {}
+        angles = analysis.get("angles", {}) or {}
+        asc = (angles.get("Ascendant", {}) or {}).get("longitude", 0.0)
+        if isinstance(asc, dict):
+            asc = asc.get("lon_abs", 0.0)
+        asc = float(asc or 0.0)
+
+        canvas.saveState()
+        canvas.setStrokeColor(colors.HexColor("#172554"))
+        canvas.setFillColor(colors.HexColor("#172554"))
+        canvas.setLineWidth(1.1)
+        canvas.circle(cx, cy, outer, stroke=1, fill=0)
+        canvas.setLineWidth(0.6)
+        canvas.circle(cx, cy, inner, stroke=1, fill=0)
+
+        asc_sign = int(asc // 30) % 12
+        for offset in range(12):
+            longitude = (asc_sign + offset) * 30.0
+            x1, y1 = self._point(cx, cy, inner, longitude, asc)
+            x2, y2 = self._point(cx, cy, outer, longitude, asc)
+            canvas.line(x1, y1, x2, y2)
+            middle = longitude + 15.0
+            tx, ty = self._point(cx, cy, outer - 13, middle, asc)
+            canvas.setFont("Times-Bold", 7.5)
+            canvas.drawCentredString(tx, ty - 2.5, self.SIGNS[(asc_sign + offset) % 12])
+
+        planets = [
+            item
+            for item in analysis.get("planets_forensic", []) or []
+            if item.get("name") in self.PLANET_LABELS
+        ]
+        planets.sort(key=lambda item: float(item.get("longitude", 0.0)))
+        last_lon = None
+        cluster_level = 0
+        for planet in planets:
+            lon = float(planet.get("longitude", 0.0))
+            if last_lon is not None and min((lon - last_lon) % 360, (last_lon - lon) % 360) < 8:
+                cluster_level = (cluster_level + 1) % 3
+            else:
+                cluster_level = 0
+            radius = inner - 20 - cluster_level * 13
+            px, py = self._point(cx, cy, radius, lon, asc)
+            canvas.setFillColor(colors.HexColor("#8B1E1E"))
+            canvas.circle(px, py, 7.5, stroke=0, fill=1)
+            canvas.setFillColor(colors.white)
+            canvas.setFont("Helvetica-Bold", 5.8)
+            canvas.drawCentredString(px, py - 2, self.PLANET_LABELS[planet["name"]])
+            last_lon = lon
+
+        canvas.setStrokeColor(colors.HexColor("#8B1E1E"))
+        canvas.setLineWidth(1.2)
+        left_x, left_y = self._point(cx, cy, outer + 5, asc, asc)
+        right_x, right_y = self._point(cx, cy, outer + 5, asc + 180, asc)
+        canvas.line(left_x, left_y, right_x, right_y)
+        canvas.setFillColor(colors.HexColor("#8B1E1E"))
+        canvas.setFont("Times-Bold", 7)
+        canvas.drawString(4, cy + 4, "ASC")
+        canvas.restoreState()
+
+
 class PDFReportGenerator:
     def __init__(self, chart_data, tier="FULL"):
         self.data = chart_data
@@ -29,29 +122,44 @@ class PDFReportGenerator:
         self._setup_custom_styles()
 
     def _setup_custom_styles(self):
+        self.styles["Title"].fontName = "Times-Bold"
+        self.styles["Title"].fontSize = 28
+        self.styles["Title"].leading = 32
+        self.styles["Title"].textColor = colors.HexColor("#172554")
+        self.styles["Normal"].fontName = "Times-Roman"
+        self.styles["Normal"].fontSize = 10.5
+        self.styles["Normal"].leading = 15
+        self.styles["Normal"].spaceAfter = 7
         self.styles.add(
             ParagraphStyle(
                 name="Header1",
                 parent=self.styles["Heading1"],
-                fontSize=16,
-                spaceAfter=12,
-                textColor=colors.darkblue,
+                fontName="Times-Bold",
+                fontSize=19,
+                leading=23,
+                spaceAfter=14,
+                keepWithNext=True,
+                textColor=colors.HexColor("#172554"),
             )
         )
         self.styles.add(
             ParagraphStyle(
                 name="Header2",
                 parent=self.styles["Heading2"],
+                fontName="Times-Bold",
                 fontSize=14,
-                spaceBefore=12,
-                spaceAfter=6,
-                textColor=colors.darkred,
+                leading=18,
+                spaceBefore=16,
+                spaceAfter=8,
+                keepWithNext=True,
+                textColor=colors.HexColor("#8B1E1E"),
             )
         )
         self.styles.add(
             ParagraphStyle(
                 name="Header3",
                 parent=self.styles["Heading3"],
+                fontName="Times-Bold",
                 fontSize=12,
                 spaceBefore=10,
                 spaceAfter=4,
@@ -62,7 +170,9 @@ class PDFReportGenerator:
             ParagraphStyle(
                 name="NormalSmall",
                 parent=self.styles["Normal"],
-                fontSize=9,
+                fontName="Times-Roman",
+                fontSize=8.25,
+                leading=10.5,
             )
         )
         self.styles.add(
@@ -125,6 +235,7 @@ class PDFReportGenerator:
         flowables = []
         lines = text.split("\n")
         in_code_block = False
+        in_evidence_notes = False
 
         for line in lines:
             line = line.strip()
@@ -146,6 +257,8 @@ class PDFReportGenerator:
                 flowables.append(Spacer(1, 6))
             elif line.startswith("## "):
                 flowables.append(self._safe_para(self._fmt_inline(line[3:]), self.styles["Header2"]))
+                if line[3:].strip().lower() == "evidence notes":
+                    in_evidence_notes = True
             elif line.startswith("### "):
                 flowables.append(self._safe_para(self._fmt_inline(line[4:]), self.styles["Header3"]))
             elif line.startswith("---"):
@@ -153,11 +266,29 @@ class PDFReportGenerator:
                 flowables.append(HorizontalLine())
                 flowables.append(Spacer(1, 6))
             elif line.startswith("- ") or line.startswith("* "):
-                flowables.append(self._safe_para("• " + self._fmt_inline(line[2:]), self.styles["Normal"]))
+                flowables.append(
+                    KeepTogether(
+                        [
+                            self._safe_para(
+                                "• " + self._fmt_inline(line[2:]),
+                                self.styles["NormalSmall"]
+                                if in_evidence_notes
+                                else self.styles["Normal"],
+                            )
+                        ]
+                    )
+                )
             elif line.startswith("> "):
                 flowables.append(self._safe_para(self._fmt_inline(line[2:]), self.styles["Quote"]))
             else:
-                flowables.append(self._safe_para(self._fmt_inline(line), self.styles["Normal"]))
+                flowables.append(
+                    self._safe_para(
+                        self._fmt_inline(line),
+                        self.styles["NormalSmall"]
+                        if in_evidence_notes
+                        else self.styles["Normal"],
+                    )
+                )
 
         return flowables
 
@@ -169,10 +300,10 @@ class PDFReportGenerator:
         doc = SimpleDocTemplate(
             self.buffer,
             pagesize=LETTER,
-            rightMargin=72,
-            leftMargin=72,
-            topMargin=72,
-            bottomMargin=72,
+            rightMargin=58,
+            leftMargin=58,
+            topMargin=62,
+            bottomMargin=54,
         )
 
         story = []
@@ -187,15 +318,17 @@ class PDFReportGenerator:
         story.append(Spacer(1, 12))
 
         # Metadata
-        meta = self.data.get("meta", {})
+        meta = self.data.get("meta", {}) or {}
+        chart_meta = meta.get("chart", {}) if isinstance(meta.get("chart"), dict) else {}
+        display_meta = {**meta, **chart_meta}
         dt_str = (
-            f"{meta.get('date', 'Unknown Date')} at {meta.get('time', 'Unknown Time')}"
+            f"{display_meta.get('date', 'Unknown Date')} at {display_meta.get('time', 'Unknown Time')}"
         )
-        loc_str = f"{meta.get('city', 'Unknown City')}, {meta.get('state', '')}"
+        loc_str = f"{display_meta.get('city', 'Unknown City')}, {display_meta.get('state', '')}"
 
         story.append(
             Paragraph(
-                f"<b>Native Name:</b> {meta.get('subject_name', 'Native')}",
+                f"<b>Native Name:</b> {display_meta.get('subject_name') or display_meta.get('name') or 'Native'}",
                 self.styles["Normal"],
             )
         )
@@ -211,7 +344,10 @@ class PDFReportGenerator:
 
         summary = forensic.get("summary", {})
 
-        if "sect_status" in summary:
+        direct_sect = (self.data.get("analysis", {}) or {}).get("sect", {})
+        if direct_sect.get("type"):
+            sect_status = str(direct_sect["type"]).title()
+        elif "sect_status" in summary:
             sect_status = summary["sect_status"]
         elif "astronomy" in self.data.get("technical_data", {}):
             sun_alt = (
@@ -224,7 +360,27 @@ class PDFReportGenerator:
         story.append(
             Paragraph(f"<b>Sect Status:</b> {sect_status}", self.styles["Normal"])
         )
-        story.append(Spacer(1, 24))
+        house_system = display_meta.get("house_system") or {}
+        zodiac_system = display_meta.get("zodiac_system") or {}
+        if isinstance(house_system, dict) or isinstance(zodiac_system, dict):
+            house_label = house_system.get("label", "Whole Sign") if isinstance(house_system, dict) else str(house_system)
+            zodiac_label = zodiac_system.get("label", "Tropical") if isinstance(zodiac_system, dict) else str(zodiac_system)
+            story.append(
+                Paragraph(
+                    f"<b>Method:</b> {house_label} houses · {zodiac_label} zodiac · seven visible planets",
+                    self.styles["Normal"],
+                )
+            )
+        story.append(Spacer(1, 36))
+        story.append(
+            Paragraph(
+                "A source-aware historical nativity, with calculated evidence and explicit doctrinal limits.",
+                self.styles["Quote"],
+            )
+        )
+        story.append(Spacer(1, 12))
+        story.append(TraditionalChartWheel(self.data, size=250))
+        story.append(PageBreak())
 
         # --- CONTENT INJECTION ---
         if custom_content:
@@ -239,14 +395,27 @@ class PDFReportGenerator:
             self._generate_algorithmic_report(story, forensic, sect_status)
 
         # Footer / Disclaimer
-        story.append(Spacer(1, 24))
-        disclaimer = (
-            "HISTORICAL USE ONLY: This report provides traditional calculations and technical exports. "
-            "It is not medical, legal, or financial advice. Do not use it to make health, legal, or investment decisions."
-        )
-        story.append(Paragraph(disclaimer, self.styles["NormalSmall"]))
+        if not custom_content:
+            story.append(Spacer(1, 24))
+            disclaimer = (
+                "HISTORICAL USE ONLY: This report provides traditional calculations and technical exports. "
+                "It is not medical, legal, or financial advice. Do not use it to make health, legal, or investment decisions."
+            )
+            story.append(Paragraph(disclaimer, self.styles["NormalSmall"]))
 
-        doc.build(story)
+        def draw_page(canvas, document):
+            canvas.saveState()
+            page = canvas.getPageNumber()
+            canvas.setStrokeColor(colors.HexColor("#D6D3D1"))
+            canvas.setLineWidth(0.5)
+            canvas.line(document.leftMargin, 35, LETTER[0] - document.rightMargin, 35)
+            canvas.setFont("Times-Roman", 8)
+            canvas.setFillColor(colors.HexColor("#57534E"))
+            canvas.drawString(document.leftMargin, 22, "Traditional Astrology · Historical doctrine edition")
+            canvas.drawRightString(LETTER[0] - document.rightMargin, 22, f"Page {page}")
+            canvas.restoreState()
+
+        doc.build(story, onFirstPage=draw_page, onLaterPages=draw_page)
         self.buffer.seek(0)
         return self.buffer
 

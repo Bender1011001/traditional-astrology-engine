@@ -168,7 +168,8 @@ class HylegAlcocodenEngine:
         Determines the Alcocoden (Giver of Years).
 
         Supported methods:
-        - "valens_term": strict bound/term ruler of the Hyleg degree (degree-based), must aspect the Hyleg.
+        - "valens_term": legacy key for the configured strict bound/term-ruler branch. The inspected
+          sources do not justify attributing this implementation to Valens.
         - "bonatti_points": essential rulers scored (dom/exalt/trip/term/face), highest score that aspects the Hyleg.
 
         Notes on aspect requirement:

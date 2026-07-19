@@ -3,7 +3,11 @@ from typing import Dict
 
 class LunarMansionEngine:
     """
-    Implements the 28 Lunar Mansions (Tropical) based on Picatrix Book I, Chapter 4.
+    Implements the configured equal tropical 28-mansion calculation.
+
+    Picatrix Book I, Chapter 4 supplies electional/talismanic operations, not
+    natal delineations.  Callers must not turn ``intents_good`` or
+    ``intents_bad`` into character statements or birth-chart predictions.
     """
 
     MANSION_WIDTH = 12.8571428571  # 360 / 28
@@ -475,4 +479,21 @@ class LunarMansionEngine:
 
         # Adjust for 1-based indexing in MANSIONS list if needed, or just access by index
         # MANSIONS list is 0-indexed but has mansion_id 1..28
-        return LunarMansionEngine.MANSIONS[mansion_index]
+        result = dict(LunarMansionEngine.MANSIONS[mansion_index])
+        result.update(
+            {
+                "calculation_method": "configured_equal_tropical_28_from_aries",
+                "mansion_width_deg": LunarMansionEngine.MANSION_WIDTH,
+                "source_rule_id": "picatrix_lunar_mansions_electional_scope",
+                "usage_scope": "electional_talismanic_only",
+                "natal_delineation_supported": False,
+                "publication_limit": (
+                    "Publish the calculated mansion and the source's electional scope. "
+                    "Do not convert image-making or electional operations into natal character or destiny claims."
+                ),
+            }
+        )
+        if result["mansion_id"] == 11:
+            result["inspected_source_name_variant"] = "Azobra"
+            result["assignment_robust_to_inspected_boundary_variants"] = True
+        return result

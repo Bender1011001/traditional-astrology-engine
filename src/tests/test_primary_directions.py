@@ -3,7 +3,7 @@
 from unittest.mock import patch
 
 from src.engine.models import Chart, Planet, PlanetName
-from src.engine.primary_directions import PrimaryDirectionsEngine
+from src.engine.primary_directions import DirectionResult, PrimaryDirectionsEngine
 
 
 def test_normalize_deg():
@@ -99,6 +99,32 @@ def test_calculate_current_distributor(mock_armc):
 
 
 @patch("swisseph.houses_armc")
+def test_current_distributor_partner_is_last_directed_ray_not_present_orb(
+    mock_armc, monkeypatch
+):
+    sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
+    chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
+    mock_armc.return_value = (None, [25.0, 280.0])
+    rays = [
+        DirectionResult("Ascendant", "Venus", "Sextile", 5.0, 5.0, "5y 0m", "Configured zodiacal OA"),
+        DirectionResult("Ascendant", "Mercury", "Conjunction", 19.4, 19.4, "19y 5m", "Configured zodiacal OA"),
+        DirectionResult("Ascendant", "Mars", "Square", 35.0, 35.0, "35y 0m", "Configured zodiacal OA"),
+    ]
+    monkeypatch.setattr(
+        PrimaryDirectionsEngine,
+        "calculate_directions_to_angles",
+        classmethod(lambda cls, chart, geo_lat, key="Ptolemy": rays),
+    )
+
+    res = PrimaryDirectionsEngine.calculate_current_distributor(
+        chart, 30.0, 45.0
+    )
+
+    assert res["partner"] == "Mercury"
+    assert "age 19.40" in res["partner_reason"]
+
+
+@patch("swisseph.houses_armc")
 def test_calculate_circumambulations(mock_armc):
     sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
     chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
@@ -113,6 +139,28 @@ def test_calculate_circumambulations(mock_armc):
     assert res[0]["sign"] == "Aries"
 
 
+@patch("swisseph.houses_armc")
+def test_circumambulation_transitions_are_solved_between_year_samples(mock_armc):
+    sun = Planet(name=PlanetName.SUN, longitude=10.0, speed=1.0)
+    chart = Chart(sun_altitude=10.0, planets=[sun], ascendant=0.0, mc=270.0)
+
+    # With MC at 270 RA, make the directed Ascendant advance one zodiacal
+    # degree for each degree of RAMC. Aries changes from Jupiter to Venus at 6°.
+    def houses_for_armc(armc, _lat, _epsilon, _system):
+        return None, [((armc - 270.0) % 360.0), 0.0]
+
+    mock_armc.side_effect = houses_for_armc
+
+    result = PrimaryDirectionsEngine.calculate_circumambulations(
+        chart, 45.0, max_years=8
+    )
+    transition = next(item for item in result if item["is_transition"])
+
+    assert transition["age"] == 6
+    assert abs(transition["exact_transition_age"] - 6.0) < 1e-5
+    assert transition["bound_ruler"] == "Venus"
+
+
 def test_calculate_directions_to_angles():
     # Promittor Jupiter at 100 degrees
     jup = Planet(name=PlanetName.JUPITER, longitude=100.0, speed=1.0)
@@ -123,7 +171,7 @@ def test_calculate_directions_to_angles():
 
     assert len(res) > 0
     assert any(r.promittor == "Jupiter" for r in res)
-    assert all(r.method == "Placidus/Zodiacal" for r in res)
+    assert all(r.method == "Configured zodiacal OA" for r in res)
 
 
 def test_calculate_directions_to_point():

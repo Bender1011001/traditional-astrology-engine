@@ -490,14 +490,24 @@ def calculate_chart_data(
                 key_name = "North_Node"
 
             z_ruler = MonomoiriaEngine.get_zoidion_monomoiria(p.longitude)
-            t_ruler = MonomoiriaEngine.get_trigonal_monomoiria(
-                p.longitude, is_day, sun_sign, moon_sign
+            is_sect_light = (
+                is_day and p.name == PlanetName.SUN
+            ) or (
+                not is_day and p.name == PlanetName.MOON
+            )
+            t_ruler = (
+                MonomoiriaEngine.get_trigonal_monomoiria(
+                    p.longitude, is_day, sun_sign, moon_sign
+                )
+                if is_sect_light
+                else None
             )
 
             if key_name in results["planets"]:  # type: ignore
                 results["planets"][key_name]["classical"]["monomoiria"] = {  # type: ignore
                     "zoidion_ruler": z_ruler.value,
-                    "trigonal_ruler": t_ruler.value,
+                    "trigonal_ruler": t_ruler.value if t_ruler is not None else None,
+                    "trigonal_scope": "sect_light" if is_sect_light else None,
                 }
 
     # 6. Dodecatemoria Detailed

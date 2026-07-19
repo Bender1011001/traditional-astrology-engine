@@ -141,7 +141,7 @@ You MUST source all judgments from the provided JSON. Use these canonical paths:
 - Fixed stars: `analysis.supplemental.stars`
 - Universal mundane hierarchy (GC/Eclipses): `analysis.advanced_mechanics.mundane_context`
 - Angle metadata (Whole Sign note: MC may be in 9th/10th/11th by Whole Sign): `analysis.angles`
-- Triplicity periods (life chapters): `analysis.triplicity_periods`
+- Sect-light triplicity fortune judgment (first/second/participant, no fixed thirds): `analysis.triplicity_periods`
 - Historical melothesia correspondences + critical days (if provided): `analysis.medical`
 - Computed core aspects (septener-only; only source of aspect truth): `analysis.aspects`
 - Computed shadow aspects (outers only; do not use in core judgment): `analysis.aspects_shadow`
@@ -268,9 +268,9 @@ If Moon is combust in the 12th → Jupiter's symbolism is impaired because his r
 - The planet ruling the profected sign is LORD OF THE YEAR
 - Judge the year by the Lord's NATAL condition
 
-**Decennials (Valens):**
+**Decennials (Valens-tradition transmission):**
 - Include the current General Period and Sub-Period from the JSON decennial report.
-- Treat Decennials as a major chronocrator alongside Firdaria and Profections.
+- Treat Decennials as a major chronocrator alongside Firdaria and Profections. Preserve the fifth-century-addition caveat and the modern civil-calendar-month rendering; do not call every computational detail Valens's uncontested wording.
 
 **Firdaria (Day Chart sequence):**
 Sun (0-10) → Venus (10-18) → Mercury (18-31) → Moon (31-40) → Saturn (40-51) → Jupiter (51-63) → Mars (63-70)
@@ -431,14 +431,14 @@ Your report MUST include these high-value deliverables:
 - Do NOT present `lifespan_estimate.total_years` as a literal life expectancy or a death prediction. If you mention it at all, call it a **traditional computed capacity figure** that requires cross-validation by Primary Directions.
 - Do NOT use the phrase "lifespan" or "life expectancy". Use: "years-table capacity" / "years-giving capacity" / "traditional years computation".
 - **MULTI-TRADITION REQUIREMENT:** You MUST present both:
-  - Valens strict bound-lord method: `analysis.vitality.alcocoden_methods.valens_term` + `analysis.vitality.years_capacity.valens_term`
+  - Configured strict bound-lord method (legacy `valens_term` payload key; do not attribute this implementation to Valens): `analysis.vitality.alcocoden_methods.valens_term` + `analysis.vitality.years_capacity.valens_term`
   - Bonatti/Lilly points method: `analysis.vitality.alcocoden_methods.bonatti_points` + `analysis.vitality.years_capacity.bonatti_points`
   - If they conflict, you MUST state the conflict and explain that this is a tradition fork, not a chart contradiction.
  - **SANITY CHECK (MANDATORY):** You MUST check `analysis.vitality.years_capacity_sanity`.
    - If any computed years figure is `< age_years`, you MUST explicitly say: "This is NOT a death age; this variant is inconsistent with the lived fact and requires rectification/validation by Primary Directions."
 
 ## 4c. TRIPLICITY NARRATIVE (Three Chapters of Life)
-- Use the Dorothean triplicity rulers of the Sect Light to describe Early/Middle/Late life chapters.
+- Use the Dorothean triplicity rulers of the Sect Light to judge fortune/property: first ruler for the beginning, second for the later outcome, and participant as supporting testimony. Do not attribute equal thirds to Dorotheus. Separately preserve Ibn Ezra's later first/middle/last relative-phase method without numerical ages or longevity claims.
 - Use the JSON triplicity periods if provided; do not invent rulers.
 
 ## 5. DORYPHORY EVALUATION (The Spear-Bearers)
@@ -1400,7 +1400,7 @@ def build_raw_data_appendix(chart_data: str) -> str:
     return ang_md + "\n---\n\n"
 
 
-def run_premium_report(chart_data, output_file, iterations=6, model=None):
+def _run_premium_report_legacy(chart_data, output_file, iterations=6, model=None):
     """Generate a premium report using research-backed methodology.
 
     `model` optionally overrides the OpenRouter model for this run (used for
@@ -1581,6 +1581,37 @@ def run_premium_report(chart_data, output_file, iterations=6, model=None):
     print(f"  Output: {output_file}")
 
     return final_report
+
+
+def run_premium_report(chart_data, output_file, iterations=1, model=None):
+    """Generate the evidence-first customer report.
+
+    ``iterations`` remains in the signature for stored tasks and older callers.
+    The v2 pipeline intentionally uses at most one optional editorial pass;
+    astrological facts and limits come from a deterministic evidence packet,
+    not a multi-turn model conversation.
+    """
+    from src.services.reading_composer import compose_customer_reading
+
+    parsed = json.loads(chart_data) if isinstance(chart_data, str) else chart_data
+    if not isinstance(parsed, dict):
+        raise ValueError("Premium report generation requires a chart-data object")
+
+    editor_mode = os.getenv("PREMIUM_READING_EDITOR", "disabled").strip().lower()
+    llm_request = (
+        None
+        if editor_mode in {"0", "false", "off", "disabled", "none"}
+        else _openrouter_request
+    )
+    report, _packet = compose_customer_reading(
+        parsed,
+        llm_request=llm_request,
+        model=model,
+        require_comprehensive=True,
+    )
+    with open(output_file, "w", encoding="utf-8") as handle:
+        handle.write(report)
+    return report
 
 
 def main():

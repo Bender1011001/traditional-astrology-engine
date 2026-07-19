@@ -86,10 +86,10 @@ DOCTRINAL_FORKS: List[Dict[str, Any]] = [
         "topic": "Length of life — Alcocoden years",
         "summary": "How to compute the years the Giver of Years grants.",
         "positions": [
-            {"authority": "Valens (strict bound-lord method)", "position": "Years derive from the bound-lord configuration."},
+            {"authority": "Configured strict bound-lord branch (legacy valens_term key)", "position": "The inspected sources do not justify attributing this implementation to Valens."},
             {"authority": "Bonatti / Lilly (points method)", "position": "Greater / mean / lesser planetary years selected by the Alcocoden's condition."},
         ],
-        "engine_handling": "analysis.vitality computes BOTH (valens_term and bonatti_points) and flags the conflict when they diverge — this is a tradition fork, not a chart error.",
+        "engine_handling": "analysis.vitality computes both the legacy valens_term key (configured strict bound-lord branch) and bonatti_points, then publishes the conflict rather than falsely harmonizing it.",
     },
     {
         "topic": "Lot of Marriage",

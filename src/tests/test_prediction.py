@@ -1,6 +1,6 @@
 """Tests for prediction.py — profections, firdaria, ZR, lunar phase, solar arcs, muntha."""
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import pytest
 
@@ -168,6 +168,31 @@ def test_zr_lifetime_map_paragraphs():
         assert para["level"] == 2
 
 
+def test_zr_uses_exact_360_day_years():
+    birth = datetime(1990, 1, 1)
+    first = calculate_zr_lifetime_map(Sign.ARIES, birth, years=15, max_level=1)[0]
+    start = datetime.fromisoformat(first["start_datetime"])
+    end = datetime.fromisoformat(first["end_datetime"])
+    assert end - start == timedelta(days=15 * 360)
+
+
+def test_zr_loosing_of_bond_jumps_to_opposite_parent_sign():
+    birth = datetime(1990, 1, 1)
+    first = calculate_zr_lifetime_map(Sign.CANCER, birth, years=25, max_level=2)[0]
+    paragraphs = first["paragraphs"]
+    assert paragraphs[12]["sign"] == Sign.CAPRICORN.value
+    assert paragraphs[12]["status"] == "Loosing of the Bond"
+
+
+def test_zr_level_four_retains_hour_precision():
+    birth = datetime(1990, 1, 1, 6, 0)
+    first = calculate_zr_lifetime_map(Sign.ARIES, birth, years=1, max_level=4)[0]
+    l4 = first["paragraphs"][0]["sub_periods"][0]["sub_periods"][0]
+    start = datetime.fromisoformat(l4["start_datetime"])
+    end = datetime.fromisoformat(l4["end_datetime"])
+    assert end - start == timedelta(hours=75)  # Aries: 15 * 5 hours
+
+
 # ─── calculate_zr_periods ───────────────────────────────────────────────────
 
 
@@ -177,6 +202,16 @@ def test_zr_periods_basic():
     result = calculate_zr_periods(Sign.CANCER, birth, target)
     assert "Level 1" in result
     assert "Level 2" in result
+
+
+def test_zr_periods_returns_all_four_levels():
+    birth = datetime(1990, 1, 1, 6, 0)
+    result = calculate_zr_periods(Sign.ARIES, birth, birth + timedelta(hours=1), level=4)
+    assert result["Level 1"] == Sign.ARIES.value
+    assert result["Level 2"] == Sign.ARIES.value
+    assert result["Level 3"] == Sign.ARIES.value
+    assert result["Level 4"] == Sign.ARIES.value
+    assert "T" in result["L4_Start"]
 
 
 # ─── FIRDARIA tables ─────────────────────────────────────────────────────────
@@ -223,6 +258,22 @@ def test_firdaria_at_birth():
     target = datetime(1990, 1, 2)
     result = calculate_firdaria(Sect.DAY, birth, target)
     assert result["Major Period"] == "Sun"  # Day chart starts with Sun
+    assert result["Source Rule ID"] == "al_biruni_firdaria_seven_planet_core"
+
+
+def test_firdaria_night_core_sequence_reaches_sun_after_mars():
+    birth = datetime(1900, 1, 1)
+    # Night core: Moon 9 + Saturn 11 + Jupiter 12 + Mars 7 = 39 years.
+    result = calculate_firdaria(Sect.NIGHT, birth, birth + timedelta(days=39 * 365.25 + 1))
+    assert result["Major Period"] == "Sun"
+    assert result["Source Rule ID"] == "al_biruni_firdaria_seven_planet_core"
+
+
+def test_firdaria_nodes_are_labeled_as_configured_extension():
+    birth = datetime(1900, 1, 1)
+    result = calculate_firdaria(Sect.DAY, birth, birth + timedelta(days=70 * 365.25 + 1))
+    assert result["Major Period"] == "North_Node"
+    assert result["Source Rule ID"] == "configured_firdaria_node_extension"
 
 
 def test_firdaria_before_birth():

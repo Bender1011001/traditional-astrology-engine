@@ -111,10 +111,10 @@ Internal calculation table.
         ("single_reading", 1),
         ("free_premium", 1),
         ("free_premium_trial", 1),
-        ("premium_audit", 6),
-        ("complete_analysis", 6),
-        ("forensic_nativity", 6),
-        ("top", 6),
+        ("premium_audit", 1),
+        ("complete_analysis", 1),
+        ("forensic_nativity", 1),
+        ("top", 1),
     ],
 )
 def test_llm_iterations_are_tiered(tier, expected_iterations):

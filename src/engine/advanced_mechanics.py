@@ -207,6 +207,84 @@ class MonomoiriaEngine:
         PlanetName.MERCURY,
         PlanetName.MOON,
     ]
+    # Paulus, Introductory Matters ch. 32, Canon of Monomoiria by
+    # Degree [Trigonal Type], pp. 66-68.  These are the first seven rows;
+    # the sequence repeats through degree 30.  This is not the ordinary
+    # Chaldean order used by the zoidion monomoiria in ch. 5.
+    TRIGONAL_SEQUENCES = {
+        ("Fire", True): (
+            PlanetName.SUN,
+            PlanetName.JUPITER,
+            PlanetName.VENUS,
+            PlanetName.MOON,
+            PlanetName.SATURN,
+            PlanetName.MERCURY,
+            PlanetName.MARS,
+        ),
+        ("Fire", False): (
+            PlanetName.JUPITER,
+            PlanetName.SUN,
+            PlanetName.MOON,
+            PlanetName.VENUS,
+            PlanetName.MERCURY,
+            PlanetName.SATURN,
+            PlanetName.MARS,
+        ),
+        ("Earth", True): (
+            PlanetName.VENUS,
+            PlanetName.MOON,
+            PlanetName.SATURN,
+            PlanetName.MERCURY,
+            PlanetName.MARS,
+            PlanetName.SUN,
+            PlanetName.JUPITER,
+        ),
+        ("Earth", False): (
+            PlanetName.MOON,
+            PlanetName.VENUS,
+            PlanetName.MERCURY,
+            PlanetName.SATURN,
+            PlanetName.MARS,
+            PlanetName.JUPITER,
+            PlanetName.SUN,
+        ),
+        ("Air", True): (
+            PlanetName.SATURN,
+            PlanetName.MERCURY,
+            PlanetName.MARS,
+            PlanetName.SUN,
+            PlanetName.JUPITER,
+            PlanetName.VENUS,
+            PlanetName.MOON,
+        ),
+        ("Air", False): (
+            PlanetName.MERCURY,
+            PlanetName.SATURN,
+            PlanetName.MARS,
+            PlanetName.JUPITER,
+            PlanetName.SUN,
+            PlanetName.MOON,
+            PlanetName.VENUS,
+        ),
+        ("Water", True): (
+            PlanetName.MARS,
+            PlanetName.SUN,
+            PlanetName.SATURN,
+            PlanetName.VENUS,
+            PlanetName.MOON,
+            PlanetName.JUPITER,
+            PlanetName.MERCURY,
+        ),
+        ("Water", False): (
+            PlanetName.MARS,
+            PlanetName.JUPITER,
+            PlanetName.SUN,
+            PlanetName.MOON,
+            PlanetName.VENUS,
+            PlanetName.MERCURY,
+            PlanetName.SATURN,
+        ),
+    }
 
     @staticmethod
     def get_zoidion_monomoiria(longitude: float) -> PlanetName:
@@ -238,50 +316,26 @@ class MonomoiriaEngine:
         longitude: float, is_day_chart: bool, sun_sign: Sign, moon_sign: Sign
     ) -> PlanetName:
         """
-        Chapter 32 System: Rectification tool.
-        Seed based on Triplicity of Sect Light.
+        Paulus chapter 32 trigonal monomoiria for the degree of the sect light.
+
+        The caller supplies that degree as ``longitude``.  The method retains
+        the older signature for compatibility, but customer publication must
+        not attach this result indiscriminately to every planet.
         """
-        target_sign = get_sign_from_lon(longitude)
         deg_in_sign = int(longitude % 30)
 
         # 1. Determine Sect Light
         sect_light_sign = sun_sign if is_day_chart else moon_sign
 
-        # 2. Determine Triplicity of Sect Light Sign (Use Dorothean)
-        # Paul's rules are very specific:
-        # Fire: Sun(D) / Jup(N)
-        # Earth: Ven(D) / Moon(N)
-        # Air: Sat(D) / Merc(N)
-        # Water: Ven(D) / Mars(N) - NOTE VENUS FOR DAY WATER
-
         from .reference_data import SIGN_ELEMENTS
 
         element = SIGN_ELEMENTS[sect_light_sign]
-
-        seed = None
-        if element == "Fire":
-            seed = PlanetName.SUN if is_day_chart else PlanetName.JUPITER
-        elif element == "Earth":
-            seed = PlanetName.VENUS if is_day_chart else PlanetName.MOON
-        elif element == "Air":
-            seed = PlanetName.SATURN if is_day_chart else PlanetName.MERCURY
-        elif element == "Water":
-            seed = PlanetName.VENUS if is_day_chart else PlanetName.MARS
-
-        if not seed:
-            seed = PlanetName.SUN  # Fallback
-
-        # 3. Progression
-        # The seed starts the Triplicity. But is it per sign?
-        # The text says: "start from the star that welcomes this light trigonally...
-        # apportioning one degree to each star in the order of zoidia (Chaldean)".
-        # Wait, the table shows the seed rule is consistent for the whole Triplicity, NOT resetting per sign?
-        # "These tables are applicable to any sign falling within the respective Triplicity."
-        # Yes.
-
-        start_idx = MonomoiriaEngine.CHALDEAN_DESC.index(seed)
-        current_idx = (start_idx + deg_in_sign) % 7
-        return MonomoiriaEngine.CHALDEAN_DESC[current_idx]
+        sequence = MonomoiriaEngine.TRIGONAL_SEQUENCES.get((element, is_day_chart))
+        if not sequence:
+            raise ValueError(
+                f"No Paulus trigonal monomoiria sequence for {element=} {is_day_chart=}"
+            )
+        return sequence[deg_in_sign % 7]
 
 
 # ==========================================
@@ -454,102 +508,72 @@ class DoryphoryInstance:
     type: str  # Bodily, Aspectual
     related_luminary: str  # Sun, Moon
     score: int  # Qualitative score
+    phase: str = ""
+    placement_relation: str = ""
 
 
 class DoryphoryEngine:
     @staticmethod
     def check_doryphory(chart: Chart) -> List[DoryphoryInstance]:
+        """Identify Ptolemaic bodily attendants of the luminaries.
+
+        Tetrabiblos III.5 places an attendant in the luminary's own sign or
+        the sign next following, with morning (oriental) stars attending the
+        Sun and evening (occidental) stars attending the Moon.  This is a
+        sign-based rule, not the legacy fixed 30-degree distance window.
+        """
         instances = []
         sun = next(p for p in chart.planets if p.name == PlanetName.SUN)
         moon = next(p for p in chart.planets if p.name == PlanetName.MOON)
 
-        # Helper: sign check
-        def _same_sign(a_lon: float, b_lon: float) -> bool:
-            return int(a_lon / 30) % 12 == int(b_lon / 30) % 12
+        traditional_guards = {
+            PlanetName.MERCURY,
+            PlanetName.VENUS,
+            PlanetName.MARS,
+            PlanetName.JUPITER,
+            PlanetName.SATURN,
+        }
 
-        def _push_unique(inst: DoryphoryInstance):
-            key = (inst.planet, inst.type, inst.related_luminary)
-            if not hasattr(_push_unique, "_seen"):
-                _push_unique._seen = set()  # type: ignore
-            if key in _push_unique._seen:  # type: ignore
-                return
-            _push_unique._seen.add(key)  # type: ignore
-            instances.append(inst)
+        def relation_to(luminary: Planet, planet: Planet) -> Optional[str]:
+            luminary_sign = int(luminary.longitude / 30.0) % 12
+            planet_sign = int(planet.longitude / 30.0) % 12
+            if planet_sign == luminary_sign:
+                return "same_sign"
+            if planet_sign == (luminary_sign + 1) % 12:
+                return "next_following_sign"
+            return None
 
-        # Solar Doryphory (Rise Before Sun)
-        # Check planets in range [SunLon - 30, SunLon]
-        for p in chart.planets:
-            if p.name in [
-                PlanetName.SUN,
-                PlanetName.MOON,
-                PlanetName.NORTH_NODE,
-                PlanetName.SOUTH_NODE,
-            ]:
+        for planet in chart.planets:
+            if planet.name not in traditional_guards:
                 continue
-
-            diff = (sun.longitude - p.longitude) % 360
-            if 0 < diff <= 30.0:  # Strict: within 1 sign (<= 30 degrees) preceding
-                # Check distance from sun (Combustion < 8)
-                if diff < 8:
-                    continue  # Combust guards are useless
-
-                _push_unique(
+            preceding_sun = (sun.longitude - planet.longitude) % 360.0
+            phase = (
+                "oriental"
+                if 0.0 < preceding_sun < 180.0
+                else "occidental"
+            )
+            sun_relation = relation_to(sun, planet)
+            if sun_relation and phase == "oriental":
+                instances.append(
                     DoryphoryInstance(
-                        planet=p.name,
+                        planet=planet.name,
                         type="Bodily/Oriental",
                         related_luminary="Sun",
                         score=10,
+                        phase=phase,
+                        placement_relation=sun_relation,
                     )
                 )
-
-            # Type 3 nuance: bodily co-presence in the same sign can count as doryphory
-            # even if the planet is not strictly preceding by longitude (e.g., Bernie Sanders case study).
-            # We still disqualify exact "blinded" proximity to the Sun (< 8°) as a functional guard.
-            if _same_sign(p.longitude, sun.longitude):
-                dist = abs(p.longitude - sun.longitude)
-                if dist > 180:
-                    dist = 360 - dist
-                if dist < 8:
-                    continue
-                _push_unique(
+            moon_relation = relation_to(moon, planet)
+            if moon_relation and phase == "occidental":
+                instances.append(
                     DoryphoryInstance(
-                        planet=p.name,
-                        type="Bodily/Co-Present (Same Sign)",
-                        related_luminary="Sun",
-                        score=9,
-                    )
-                )
-
-        # Lunar Doryphory (Rise After Moon)
-        # Check planets in range [MoonLon, MoonLon + 30]
-        for p in chart.planets:
-            if p.name in [
-                PlanetName.SUN,
-                PlanetName.MOON,
-                PlanetName.NORTH_NODE,
-                PlanetName.SOUTH_NODE,
-            ]:
-                continue
-
-            diff = (p.longitude - moon.longitude) % 360
-            if 0 < diff <= 30.0:  # Strict: within 1 sign (<= 30 degrees) following
-                _push_unique(
-                    DoryphoryInstance(
-                        planet=p.name,
+                        planet=planet.name,
                         type="Bodily/Occidental",
                         related_luminary="Moon",
                         score=10,
-                    )
-                )
-
-            # Same-sign bodily doryphory for the Moon (common in Hellenistic reconstructions).
-            if _same_sign(p.longitude, moon.longitude):
-                _push_unique(
-                    DoryphoryInstance(
-                        planet=p.name,
-                        type="Bodily/Co-Present (Same Sign)",
-                        related_luminary="Moon",
-                        score=9,
+                        phase=phase,
+                        placement_relation=moon_relation,
                     )
                 )
 
@@ -565,9 +589,14 @@ class DodecatemoriaEngine:
     @staticmethod
     def calculate_dodecatemoria_valens(longitude: float) -> float:
         """
-        Calculates the 12-fold Dodecatemoria (Valens/Standard).
+        Calculates the configured 12-fold dodecatemoria variant.
         Formula: Sign_Start + (DegreeInSign * 12).
         Projects the sign's micro-zodiac onto the full zodiac.
+
+        The legacy method name is retained for API compatibility. Do not label
+        this variant as securely Valens-derived in customer output: the
+        inspected Valens example at 22 Aquarius yields Scorpio, which agrees
+        with the 13-fold projection rather than this 12-fold result.
         """
         deg_in_sign = longitude % 30.0
         sign_start = (longitude // 30) * 30
@@ -599,10 +628,10 @@ class DodecatemoriaEngine:
         for p in chart.planets:
             if is_valens:
                 lon = DodecatemoriaEngine.calculate_dodecatemoria_valens(p.longitude)
-                method = "Valens (x12)"
+                method = "Configured standard (x12; attribution unresolved)"
             else:
                 lon = DodecatemoriaEngine.calculate_dodecatemoria_paul(p.longitude)
-                method = "Paul (x13)"
+                method = "Paulus (x13)"
 
             sign = get_sign_from_lon(lon)
             domicile = DOMICILES[sign]

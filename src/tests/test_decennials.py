@@ -128,14 +128,85 @@ def test_generate_decennials(mock_select_apheta, mock_zodiacal):
     assert res[0]["major_lord"] == "Sun"
     assert res[1]["major_lord"] == "Moon"
 
-    # Sub periods total exactly 3870 days.
+    # Sub-periods total exactly 129 calendar months.
     assert len(res[0]["sub_periods"]) == 7
     assert res[0]["sub_periods"][0]["sub_lord"] == "Sun"
 
-    # Sun minor years is 19. Sub-period should be 19 * 30 = 570 days.
-    # Start date string parser -> check distance
+    # Sun's least years become 19 calendar months.
     start = datetime.fromisoformat(res[0]["sub_periods"][0]["start_date"])
     end = datetime.fromisoformat(res[0]["sub_periods"][0]["end_date"])
+    assert start == datetime(2000, 1, 1, tzinfo=timezone.utc)
+    assert end == datetime(2001, 8, 1, tzinfo=timezone.utc)
+    assert res[0]["end_date"] == datetime(
+        2010, 10, 1, tzinfo=timezone.utc
+    ).isoformat()
+    assert res[0]["sub_periods"][-1]["end_date"] == res[0]["end_date"]
 
-    delta = end - start
-    assert delta.days == 570
+
+def test_decennial_cycle_repeats_from_apheta_after_seven_major_periods():
+    planets = [
+        Planet(name=name, longitude=float(index * 30), speed=1.0)
+        for index, name in enumerate(
+            (
+                PlanetName.SUN,
+                PlanetName.MOON,
+                PlanetName.MARS,
+                PlanetName.JUPITER,
+                PlanetName.VENUS,
+                PlanetName.SATURN,
+                PlanetName.MERCURY,
+            )
+        )
+    ]
+    chart = Chart(sun_altitude=10.0, planets=planets, ascendant=0.0)
+    result = DecennialEngine.generate_decennials(
+        chart, datetime(2000, 1, 1), lifespan_years=90
+    )
+    assert result[0]["major_lord"] == "Sun"
+    assert result[7]["major_lord"] == "Sun"
+
+
+def _regression_chart():
+    planets = [
+        Planet(name=name, longitude=float(index * 30), speed=1.0)
+        for index, name in enumerate(
+            (
+                PlanetName.SUN,
+                PlanetName.MOON,
+                PlanetName.MARS,
+                PlanetName.JUPITER,
+                PlanetName.VENUS,
+                PlanetName.SATURN,
+                PlanetName.MERCURY,
+            )
+        )
+    ]
+    return Chart(sun_altitude=10.0, planets=planets, ascendant=0.0)
+
+
+def test_decennials_leap_day_birth_keeps_129_month_invariant():
+    """Regression: a Feb 29 birth must not break the 129-month invariant.
+
+    Chaining month additions from a clamped Feb 28/30 date used to drift the
+    anchor day and raise ValueError, which aborted the entire nativity.
+    """
+    from datetime import datetime, timezone
+
+    chart = _regression_chart()
+    start = datetime(1988, 2, 29, 23, 45, tzinfo=timezone.utc)
+    periods = DecennialEngine.generate_decennials(chart, start)
+    assert periods, "leap-day birth must produce decennial periods"
+    for major in periods:
+        assert major["duration_months"] == 129
+        assert major["sub_periods"][0]["start_date"] == major["start_date"]
+        assert major["sub_periods"][-1]["end_date"] == major["end_date"]
+
+
+def test_decennials_day31_birth_keeps_129_month_invariant():
+    from datetime import datetime, timezone
+
+    chart = _regression_chart()
+    start = datetime(1990, 1, 31, 12, 0, tzinfo=timezone.utc)
+    periods = DecennialEngine.generate_decennials(chart, start)
+    for major in periods:
+        assert major["sub_periods"][-1]["end_date"] == major["end_date"]

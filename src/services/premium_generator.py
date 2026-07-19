@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 RAW_APPENDIX_MARKER = "### Raw Natal Data (Audit Appendix)"
 MIN_CUSTOMER_REPORT_WORDS = 700
-DEFAULT_PREMIUM_ITERATIONS = 6
+DEFAULT_PREMIUM_ITERATIONS = 1
 TECHNICAL_APPENDIX_HEADING_RE = re.compile(r"(?mi)^\s*##\s+Technical Appendix\s*$")
 
 TIER_REPORT_ITERATIONS = {
@@ -33,12 +33,21 @@ TIER_REPORT_ITERATIONS = {
     "single_reading": 1,
     "full": 1,
     "onetime": 1,
-    "premium_audit": 6,
-    "complete_analysis": 6,
-    "middle": 3,
-    "forensic_nativity": 6,
-    "top": 6,
-    "premium": 6,
+    "premium_audit": 1,
+    "complete_analysis": 1,
+    "middle": 1,
+    "forensic_nativity": 1,
+    "top": 1,
+    "premium": 1,
+}
+
+PAID_READING_TIERS = {
+    "premium_audit",
+    "complete_analysis",
+    "middle",
+    "forensic_nativity",
+    "top",
+    "premium",
 }
 
 
@@ -127,6 +136,18 @@ def model_for_iterations(iteration_count: int) -> str | None:
             or "google/gemini-3.5-flash"
         )
     return None
+
+
+def model_for_tier(tier: str | None) -> str | None:
+    """Use the strongest configured editor for paid readings only."""
+    normalized = str(tier or "").strip().lower()
+    if normalized not in PAID_READING_TIERS:
+        return None
+    return (
+        os.getenv("OPENROUTER_MODEL_PAID")
+        or os.getenv("OPENROUTER_MODEL_PREMIUM")
+        or "openai/gpt-5.6-sol"
+    )
 
 
 def _sign_from_longitude(longitude: Any) -> str | None:
@@ -220,18 +241,15 @@ def report_reading_hash(
 TIER_EMAIL_CONFIG = {
     "forensic_nativity": {
         "report_name": "Forensic Nativity Report",
-        "page_estimate": "50+",
-        "description": "every classical technique: Almuten Figuris, sect, essential dignities at all five levels, Arabic Lots, fixed star contacts, firdaria, humoral temperament, and your current annual profection",
+        "description": "sect, planetary condition, whole-sign topics, sourced timing techniques, and explicit doctrinal limits",
     },
     "premium_audit": {
         "report_name": "Complete Astrological Analysis",
-        "page_estimate": "20+",
-        "description": "advanced timing techniques, essential dignities, Arabic Lots, firdaria, temperament analysis, and a personalized 10-year forecast",
+        "description": "sect, planetary condition, whole-sign topics, sourced timing techniques, and explicit doctrinal limits",
     },
     "full_reading": {
         "report_name": "Full Natal Chart Reading",
-        "page_estimate": "10+",
-        "description": "natal chart timing, essential dignities, sect analysis, and personalized insights",
+        "description": "sect, planetary condition, whole-sign topics, sourced timing techniques, and explicit doctrinal limits",
     },
 }
 TIER_EMAIL_DEFAULT = TIER_EMAIL_CONFIG["forensic_nativity"]
@@ -246,7 +264,6 @@ def _send_report_email(
     city = chart_data.get("city", "")
     email_cfg = TIER_EMAIL_CONFIG.get(tier, TIER_EMAIL_DEFAULT)
     report_name = email_cfg["report_name"]
-    page_estimate = email_cfg["page_estimate"]
     description = email_cfg["description"]
 
     html = f"""
@@ -261,7 +278,7 @@ def _send_report_email(
         </p>
         <p>The PDF is attached to this email. Save it to your device — this is your permanent copy.</p>
         <p style="margin-top: 1.5rem; color: #555; font-size: 0.9rem;">
-          The report runs to {page_estimate} pages and covers {description}.
+          This source-cited edition covers {description}.
         </p>
         <p style="margin-top: 1.5rem; color: #555; font-size: 0.9rem;">
           Questions or calculation corrections:
@@ -322,7 +339,7 @@ class PremiumGenerator:
                 chart_data_json,
                 output_path,
                 iterations=iteration_count,
-                model=model_for_iterations(iteration_count),
+                model=model_for_tier(tier),
             )
 
             with open(output_path, "r", encoding="utf-8") as f:

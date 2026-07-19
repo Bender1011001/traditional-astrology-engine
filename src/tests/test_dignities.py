@@ -171,7 +171,8 @@ def test_hayz_diurnal_planet_day():
     )
     result = DignityCalculator.check_hayz_halb(PlanetName.SUN, 5.0, chart)
     # Aries (Fire/Masculine), Day chart, House 7 (above horizon) → Hayz
-    assert result["status"] in ["Hayz", "Halb", "In Sect"]
+    assert result["status"] == "Hayz"
+    assert result["horizon_method"] == "house_number_fallback"
 
 
 def test_hayz_returns_dict():
@@ -184,6 +185,66 @@ def test_hayz_returns_dict():
     result = DignityCalculator.check_hayz_halb(PlanetName.MOON, 100.0, chart)
     assert "status" in result
     assert "details" in result
+
+
+def test_hayz_uses_calculated_altitude_and_al_biruni_halb_rule():
+    sun = Planet(name=PlanetName.SUN, longitude=5.0, speed=1.0, altitude=12.0)
+    jupiter = Planet(
+        name=PlanetName.JUPITER,
+        longitude=275.0,  # Capricorn, feminine sign
+        speed=0.08,
+        altitude=20.0,
+    )
+    moon = Planet(
+        name=PlanetName.MOON,
+        longitude=95.0,  # Cancer, feminine sign
+        speed=13.0,
+        altitude=-15.0,
+    )
+    chart = Chart(
+        sun_altitude=12.0,
+        planets=[sun, jupiter, moon],
+        ascendant=180.0,
+        mc=270.0,
+        jd=2450000.0,
+    )
+
+    sun_result = DignityCalculator.check_hayz_halb(PlanetName.SUN, 5.0, chart)
+    jupiter_result = DignityCalculator.check_hayz_halb(
+        PlanetName.JUPITER, 275.0, chart
+    )
+    moon_result = DignityCalculator.check_hayz_halb(
+        PlanetName.MOON, 95.0, chart
+    )
+
+    assert sun_result["status"] == "Hayz"
+    assert jupiter_result["status"] == "Halb"
+    assert moon_result["status"] == "Hayz"
+    assert all(
+        result["horizon_method"] == "stored_altitude"
+        for result in (sun_result, jupiter_result, moon_result)
+    )
+
+
+def test_hayz_keeps_mercury_indeterminate_until_association_is_modeled():
+    mercury = Planet(
+        name=PlanetName.MERCURY,
+        longitude=165.0,
+        speed=1.2,
+        altitude=-10.0,
+    )
+    chart = Chart(
+        sun_altitude=10.0,
+        planets=[mercury],
+        ascendant=150.0,
+        mc=60.0,
+        jd=2450000.0,
+    )
+    result = DignityCalculator.check_hayz_halb(
+        PlanetName.MERCURY, 165.0, chart
+    )
+    assert result["status"] == "Indeterminate"
+    assert result["halb_match"] is None
 
 
 # ─── calculate_accidental_dignity ────────────────────────────────────────────
