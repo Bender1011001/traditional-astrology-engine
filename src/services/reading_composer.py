@@ -1595,8 +1595,9 @@ def _lot_paragraphs(
         ruler_citation = ""
         if ruler_item:
             pd = ruler_item["details"]
+            ruler_place = HOUSE_CONTEXT.get(pd.get("house"), f"house {pd.get('house')}")
             ruler_context = (
-                f"{ruler} rules from {HOUSE_CONTEXT.get(pd.get('house'), f'house {pd.get("house")}')} in a {_condition_class(pd)} condition. "
+                f"{ruler} rules from {ruler_place} in a {_condition_class(pd)} condition. "
                 "That condition decides whether the lot's field can be directed, must negotiate a price, or repeatedly suffers obstruction."
             )
             ruler_citation = f" [{ruler_item.get('id')}]"
