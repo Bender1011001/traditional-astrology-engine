@@ -2288,11 +2288,13 @@ def _life_chapter_paragraphs(
     second_place = "one of Dorotheus's worst places" if second_house in worst_places else (
         "a good place" if second_good else "a place not counted among his good places"
     )
+    first_house_context = HOUSE_CONTEXT.get(first_house, "the first ruler's place")
+    second_house_context = HOUSE_CONTEXT.get(second_house, "the second ruler's place")
     paragraphs.append(
         f"The first ruler is {first_name} in house {first_house}, {first_place}; the second is {second_name} in house "
         f"{second_house}, {second_place}. {verdict} For you, this ties the beginning to "
-        f"{HOUSE_CONTEXT.get(first_house, 'the first ruler\'s place')} and the later outcome to "
-        f"{HOUSE_CONTEXT.get(second_house, 'the second ruler\'s place')}. "
+        f"{first_house_context} and the later outcome to "
+        f"{second_house_context}. "
         f"[{item.get('id')}] [{first.get('id')}] [{second.get('id')}]"
     )
     if participant:
@@ -2697,7 +2699,8 @@ def _timing_paragraphs(
             sub = rulers[1] if len(rulers) > 1 else None
             event_text = PLANET_PERIOD_EVENTS.get(major, "the major lord's affairs")
             if sub:
-                event_text += f", filtered through {PLANET_PERIOD_EVENTS.get(sub, 'the sub-lord\'s affairs')}"
+                sub_events = PLANET_PERIOD_EVENTS.get(sub, "the sub-lord's affairs")
+                event_text += f", filtered through {sub_events}"
             paragraphs.append(
                 f"This period makes {event_text} recurrent rather than incidental. The major lord supplies the long chapter; "
                 "the sub-lord describes the people, circumstances, and immediate occasions through which it becomes concrete. "
