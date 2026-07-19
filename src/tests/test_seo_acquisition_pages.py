@@ -76,13 +76,13 @@ def test_public_report_shell_is_single_free_report_with_feedback_tip():
     assert "/api/v1/horary/subscriber-answer" in horary_js
     assert "/api/v1/horary/checkout" not in horary_js
     assert "/api/v1/horary/paid-answer" not in horary_js
-    assert "astro-v29-instant-pdf" in sw_js
+    assert "astro-v30-landing-form" in sw_js
     assert "/js/chart-graphics.js" in sw_js
     assert "/js/geomancy-app.js" in sw_js
     assert "/horary.html" not in sw_js
     assert "/js/horary-app.js" not in sw_js
-    assert "js/reading-app.js?v=rev20260715instantpdf1" in homepage
-    assert "/js/reading-app.js?v=rev20260715instantpdf1" in natal
+    assert "js/reading-app.js?v=rev20260719landing1" in homepage
+    assert "/js/reading-app.js?v=rev20260719landing1" in natal
     assert "Generate another chart whenever you want" in reading_js
     assert "Share Reading" in reading_js
     assert "I just generated a free traditional astrology reading" in reading_js

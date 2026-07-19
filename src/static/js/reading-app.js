@@ -341,6 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupSupportCheckoutHandlers();
     showSupportReturnNotice();
     handlePaidReturn();
+    handleLandingStart();
 
     // Export & Share Handlers
     const exportPdfBtn = document.getElementById('exportPdfBtn');
@@ -351,6 +352,50 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// ─── Landing-page handoff: /?start=1&date=...&city=... auto-starts a reading ───
+// SEO landing pages (calculator, firdaria, hyleg) host a small birth-data form
+// that navigates here; this prefills the main form and submits it so visitors
+// get their reading in one step instead of re-entering everything.
+function handleLandingStart() {
+    let params;
+    try {
+        params = new URLSearchParams(window.location.search || "");
+    } catch (_) {
+        return;
+    }
+    if (params.get("start") !== "1") return;
+    const date = params.get("date") || "";
+    const city = (params.get("city") || "").trim();
+    if (!date || !city) return;
+
+    const form = document.getElementById("chartForm");
+    const dateInput = document.getElementById("birthDate");
+    const cityInput = document.getElementById("birthCity");
+    if (!form || !dateInput || !cityInput) return;
+
+    dateInput.value = date;
+    cityInput.value = city;
+    const stateInput = document.getElementById("birthState");
+    if (stateInput) stateInput.value = (params.get("state") || "").trim();
+    const time = (params.get("time") || "").trim();
+    const timeInput = document.getElementById("birthTime");
+    const unknownBox = document.getElementById("timeUnknown");
+    if (time && timeInput) {
+        timeInput.value = time;
+    } else if (unknownBox) {
+        unknownBox.checked = true;
+        unknownBox.dispatchEvent(new Event("change"));
+    }
+
+    trackConversionEvent("landing_form_handoff", { from: params.get("from") || "unknown" });
+    document.getElementById("get-reading")?.scrollIntoView({ block: "start" });
+    if (typeof form.requestSubmit === "function") {
+        form.requestSubmit();
+    } else {
+        form.dispatchEvent(new Event("submit", { cancelable: true }));
+    }
+}
 
 // ─── Form Setup ───
 function setupForm() {

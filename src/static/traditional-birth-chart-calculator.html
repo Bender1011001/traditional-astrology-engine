@@ -159,9 +159,28 @@
 <h2 class="section-title">Free Traditional Birth Chart Calculator</h2>
 <p class="section-subtitle">Calculate a traditional astrology birth chart reading: sect, dignities, houses, lots, and timing context — free, no account required.</p>
 <p>Enter your birth date, time, and place to generate a free classical chart reading. The calculator prioritizes traditional techniques: sect-aware day/night logic, essential dignities and debilities, classical houses, and lots where the birth data supports them. The free reading is genuine; the optional Complete Analysis adds a source-cited evidence trail, integrated topics, and current time lords.</p>
-<p style="text-align:center;margin:1.5rem 0;">
-<a class="btn-cta" href="/#get-reading" style="display:inline-block;">Use the Traditional Birth Chart Calculator</a>
-</p>
+<form action="/" method="get" style="max-width:540px;margin:1.5rem auto;text-align:left;" aria-label="Free birth chart reading form">
+<input type="hidden" name="start" value="1" />
+<input type="hidden" name="from" value="calculator" />
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+<label style="display:block;font-size:0.85rem;color:rgba(255,255,255,0.78);">Date of birth
+<input type="date" name="date" required style="width:100%;padding:0.6rem;margin-top:0.3rem;background:rgba(255,255,255,0.07);border:1px solid rgba(212,175,55,0.4);border-radius:6px;color:#fff;color-scheme:dark;" />
+</label>
+<label style="display:block;font-size:0.85rem;color:rgba(255,255,255,0.78);">Time of birth <span style="opacity:0.7;">(blank = unknown)</span>
+<input type="time" name="time" style="width:100%;padding:0.6rem;margin-top:0.3rem;background:rgba(255,255,255,0.07);border:1px solid rgba(212,175,55,0.4);border-radius:6px;color:#fff;color-scheme:dark;" />
+</label>
+</div>
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:0.75rem;margin-top:0.75rem;">
+<label style="display:block;font-size:0.85rem;color:rgba(255,255,255,0.78);">City of birth
+<input type="text" name="city" required placeholder="e.g. Fairfield" style="width:100%;padding:0.6rem;margin-top:0.3rem;background:rgba(255,255,255,0.07);border:1px solid rgba(212,175,55,0.4);border-radius:6px;color:#fff;" />
+</label>
+<label style="display:block;font-size:0.85rem;color:rgba(255,255,255,0.78);">State / Country
+<input type="text" name="state" placeholder="e.g. CA" style="width:100%;padding:0.6rem;margin-top:0.3rem;background:rgba(255,255,255,0.07);border:1px solid rgba(212,175,55,0.4);border-radius:6px;color:#fff;" />
+</label>
+</div>
+<button type="submit" class="btn-cta" style="display:block;width:100%;margin-top:1rem;">✦ Calculate My Free Reading</button>
+<p style="font-size:0.78rem;color:rgba(255,255,255,0.6);text-align:center;margin-top:0.6rem;">Free full traditional reading — no account or email required. Historical Use Only; not advice.</p>
+</form>
 <ul class="grid-container">
 <li><strong>Sect-aware day/night logic:</strong> diurnal and nocturnal charts are handled differently because sect changes how planetary testimony is weighed.</li>
 <li><strong>Essential dignities and debilities:</strong> domicile, exaltation, triplicity, term, face, detriment, and fall are surfaced as part of the classical chart structure.</li>

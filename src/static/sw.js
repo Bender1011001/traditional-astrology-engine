@@ -10,7 +10,7 @@
  * on subsequent visits, even offline.
  */
 
-const CACHE_NAME = "astro-v29-instant-pdf";
+const CACHE_NAME = "astro-v30-landing-form";
 const RUNTIME_CACHE = "astro-runtime-v27-support-tips";
 
 // Core app shell — cached on install.
