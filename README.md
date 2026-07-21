@@ -1,16 +1,17 @@
-# Judicial Astrology Engine: The Sovereign Release
+# Judicial Astrology Engine
 
-Judicial Astrology Engine is a high-precision, practitioner-grade astrological engine built for the reconstruction and analysis of traditional nativity and mundane data. It implements 135 core rules derived from Hellenistic and Medieval sources (Valens, Ptolemy, Dorotheus, Bonatti, and Ibn Ezra).
+A traditional (Hellenistic and Medieval) astrology engine. It computes natal and mundane charts with the Swiss Ephemeris and applies classical interpretation techniques drawn from sources including Valens, Ptolemy, Dorotheus, Bonatti, and Ibn Ezra.
 
-Live site: [traditional-astrology.com](https://traditional-astrology.com)
+Live demo: [traditional-astrology.com](https://traditional-astrology.com)
 
-## What's New: The Sovereign Release (v1.0)
-The Sovereign Release marks the graduation of the engine from a research project to a production tool for practitioners.
+> Historical and symbolic use only. This software does not provide medical, financial, legal, or safety advice. See the disclaimer at the end.
 
-- **Hardened Synthesis**: Fully aligned with traditional binder specifications, featuring the **Amplification/Greed Node Model** and narrative-driven geometric aspect interpretation.
-- **Advanced Mechanics**: Integrated **Almuten Figuris** (Ibn Ezra 12-point house scoring) and the **Panaretos Lot Protocol** (full Forensic Audits for the 7 Hermetic Lots).
-- **Premium CLI**: A single entry point for generating the premium forensic report (`src/scripts/generate_premium_report.py`).
-- **Audit-Grade Logic**: Every calculation now includes a **Kakosis (Maltreatment)** audit, checking for besiegement, combustion, and malefic intervention.
+## Highlights
+
+- **Traditional synthesis**: dignity/debility, sect, aspect geometry, and narrative chart synthesis.
+- **Almuten Figuris**: Ibn Ezra 12-point house scoring, plus the seven Hermetic Lots with sect-based reversal.
+- **Report CLI**: a single entry point for generating a full chart report (`src/scripts/generate_premium_report.py`).
+- **Condition audits**: besiegement, combustion/cazimi, and maltreatment (Kakosis) checks applied to each placement.
 
 ## Core Features
 
