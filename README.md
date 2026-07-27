@@ -1,4 +1,4 @@
-# Judicial Astrology Engine
+# Judicial Astrology Engine — Traditional Hellenistic & Medieval Astrology in Python
 
 A traditional (Hellenistic and Medieval) astrology engine. It computes natal and mundane charts with the Swiss Ephemeris and applies classical interpretation techniques drawn from sources including Valens, Ptolemy, Dorotheus, Bonatti, and Ibn Ezra.
 
