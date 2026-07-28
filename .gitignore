@@ -117,3 +117,7 @@ scratch_*
 chart_debug.txt
 live-*.png
 etsy_test_batch.csv
+
+# local agent/editor scaffold (leaks internal deploy URLs + local perms)
+.claude/
+.roomodes
