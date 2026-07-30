@@ -702,7 +702,8 @@ def build_reading_evidence(chart_data: Mapping[str, Any]) -> list[ReadingEvidenc
             continue
         add(
             "aspect",
-            f"{a} forms a {aspect.get('type')} with {b}, orb {float(aspect.get('orb', 0.0)):.2f} degrees; applying: {bool(aspect.get('is_applying'))}.",
+            f"{a} forms a {aspect.get('type')} with {b} at an orb of {float(aspect.get('orb', 0.0)):.2f} degrees, "
+            f"{'applying' if aspect.get('is_applying') else 'separating'}.",
             "Ptolemy, Tetrabiblos, aspect doctrine",
             "ptolemaic_aspects",
             f"analysis.aspects[{len([e for e in evidence if e.category == 'aspect'])}]",

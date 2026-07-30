@@ -246,6 +246,23 @@ def _readable_reasons(reasons: list[str]) -> str:
     return ", ".join(cleaned[:-1]) + f", and {cleaned[-1]}"
 
 
+def _join_names(names: list[str]) -> str:
+    """Join names as natural English: 'A', 'A and B', 'A, B, and C'."""
+    names = [str(n) for n in names]
+    if len(names) <= 1:
+        return names[0] if names else ""
+    if len(names) == 2:
+        return f"{names[0]} and {names[1]}"
+    return ", ".join(names[:-1]) + f", and {names[-1]}"
+
+
+def _condition_phrase(details: Mapping[str, Any]) -> str:
+    """Condition class with its correct English article, e.g. 'an unsupported'."""
+    cls = _condition_class(details)
+    article = "an" if cls[0] in "aeiou" else "a"
+    return f"{article} {cls}"
+
+
 def _condition_class(details: Mapping[str, Any]) -> str:
     dignity = str(details.get("dignities") or "").lower()
     if "domicile" in dignity or "exaltation" in dignity:
@@ -838,11 +855,18 @@ def _aspect_synthesis_paragraphs(
         hub_citations = " ".join(
             f"[{planets[name].get('id')}]" for name in hubs if name in planets
         )
-        paragraphs.append(
-            f"The most connected planet or planets in the aspect graph are {', '.join(hubs)}, each carrying {maximum} "
-            "major contacts. These planets are unavoidable distribution hubs in your life: when one is activated, it "
-            f"draws several otherwise separate topics into the same period and makes their condition visible through events. {hub_citations}"
-        )
+        if len(hubs) == 1:
+            paragraphs.append(
+                f"The most connected planet in the aspect graph is {hubs[0]}, carrying {maximum} "
+                "major contacts. It is an unavoidable distribution hub in your life: when it is activated, it "
+                f"draws several otherwise separate topics into the same period and makes their condition visible through events. {hub_citations}"
+            )
+        else:
+            paragraphs.append(
+                f"The most connected planets in the aspect graph are {_join_names(hubs)}, each carrying {maximum} "
+                "major contacts. These planets are unavoidable distribution hubs in your life: when one is activated, it "
+                f"draws several otherwise separate topics into the same period and makes their condition visible through events. {hub_citations}"
+            )
     return paragraphs
 
 
@@ -1597,7 +1621,7 @@ def _lot_paragraphs(
             pd = ruler_item["details"]
             ruler_place = HOUSE_CONTEXT.get(pd.get("house"), f"house {pd.get('house')}")
             ruler_context = (
-                f"{ruler} rules from {ruler_place} in a {_condition_class(pd)} condition. "
+                f"{ruler} rules from {ruler_place} in {_condition_phrase(pd)} condition. "
                 "That condition decides whether the lot's field can be directed, must negotiate a price, or repeatedly suffers obstruction."
             )
             ruler_citation = f" [{ruler_item.get('id')}]"
@@ -1811,7 +1835,7 @@ def _executive_synthesis(
             leader_house = pd.get("house")
             leader_context = HOUSE_CONTEXT.get(leader_house, f"house {leader_house}")
             leader_judgments.append(
-                f"{name} activates {leader_context} from a {_condition_class(pd)} natal condition"
+                f"{name} activates {leader_context} from {_condition_phrase(pd)} natal condition"
             )
         paragraphs.append(
             f"The current clocks concentrate most strongly on {' and '.join(descriptions)}. Their natal houses, rulerships, "
@@ -1929,14 +1953,10 @@ def _direct_judgment(
         house_text = ", ".join(
             HOUSE_CONTEXT.get(house, f"house {house}") for house in pressure.houses
         )
-        hub_text = (
-            pressure.hubs[0]
-            if len(pressure.hubs) == 1
-            else ", ".join(pressure.hubs[:-1]) + f", and {pressure.hubs[-1]}"
-        )
+        hub_text = _join_names(list(pressure.hubs))
         paragraphs.append(
-            f"The principal pressure network joins {', '.join(pressure.planets)} through {pressure.edge_count} hard contacts and distributes its effects through {house_text}. "
-            f"{hub_text} " + ("are" if len(pressure.hubs) > 1 else "is") + " the hub of that network. When one joined topic is activated, trouble does not remain local: "
+            f"The principal pressure network joins {_join_names(list(pressure.planets))} through {pressure.edge_count} hard contacts and distributes its effects through {house_text}. "
+            f"{hub_text} " + ("are the hubs" if len(pressure.hubs) > 1 else "is the hub") + " of that network. When one joined topic is activated, trouble does not remain local: "
             "attachment can become conflict, opportunity can become obligation, and another person's crisis can alter work, resources, or reputation. "
             "This is the chart's chief mechanism of consequential change. Dignity and reception may provide tools inside the configuration, but neither makes the configuration disappear. "
             + " ".join(f"[{value}]" for value in pressure.evidence_ids)
@@ -2045,7 +2065,7 @@ def _governing_promises(
         vd = venus["details"]
         paragraphs.append(
             "4. **Attachment brings opportunity and trouble together.** "
-            f"Venus acts from {HOUSE_CONTEXT.get(vd.get('house'), 'its natal place')} in a {_condition_class(vd)} condition"
+            f"Venus acts from {HOUSE_CONTEXT.get(vd.get('house'), 'its natal place')} in {_condition_phrase(vd)} condition"
             + (f" and is hard-configured with {', '.join(dict.fromkeys(hard_partners))}" if hard_partners else "")
             + ". Love, friendship, patronage, agreement, and creative pleasure are therefore consequential but not innocent: bonds open doors while also carrying rivalry, delay, unequal duty, disappointment, or changed terms. "
             f"[{venus.get('id')}] {' '.join(relationship_ids)}"
@@ -2139,7 +2159,7 @@ def _integrated_life_judgments(
         helm_place = HOUSE_CONTEXT.get(hd.get("house"), f"house {hd.get('house')}")
         paragraphs.extend([
             "### Mind, Character, and Agency",
-            f"The helm is {helm}. It stands in {hd.get('sign')} in {helm_place} with a {_condition_class(hd)} condition. "
+            f"The helm is {helm}. It stands in {hd.get('sign')} in {helm_place} with {_condition_phrase(hd)} condition. "
             f"This describes a person who must {faculty}. The same faculty has a characteristic defect: {defect}. "
             f"Because the helm is {_condition_class(hd)}, its operation is one of the native's "
             + ("most dependable sources of agency." if _condition_class(hd) == "strong" else "recurrent fields of correction rather than an effortless possession.")
@@ -2185,7 +2205,8 @@ def _integrated_life_judgments(
         aspect_clause = ""
         if vm or vs:
             pieces = [f"Venus-{name} {kind}" for name, kind in (("Mars", vm), ("Saturn", vs)) if kind]
-            aspect_clause = " Its " + " and ".join(pieces) + " make attraction inseparable from contest, frustration, distance, duty, or rejection."
+            verb = "makes" if len(pieces) == 1 else "make"
+            aspect_clause = " Its " + " and ".join(pieces) + f" {verb} attraction inseparable from contest, frustration, distance, duty, or rejection."
         seventh_band = str(seventh["details"].get("condition_band") or "mixed")
         partnership_verdict = {
             "well-supported": "Binding partnership has a capable ruler and can produce a concrete, durable result.",
@@ -2198,7 +2219,7 @@ def _integrated_life_judgments(
         paragraphs.extend([
             "### Love, Marriage, Sexuality, and Children",
             f"The seventh ruler is {seventh['details'].get('ruler')} in {HOUSE_CONTEXT.get(seventh['details'].get('ruler_house'), 'its natal place')}. {partnership_verdict} "
-            f"Venus is in {vd.get('sign')} in {venus_route} with a {_condition_class(vd)} condition, so love, agreement, pleasure, and attachment enter through that place.{aspect_clause} "
+            f"Venus is in {vd.get('sign')} in {venus_route} with {_condition_phrase(vd)} condition, so love, agreement, pleasure, and attachment enter through that place.{aspect_clause} "
             f"The ruler's condition describes whether a bond can carry its promise; Venus and its hard contacts describe how desire complicates the result. "
             f"{house_citations(7)} {planet_citations('Venus')} {vm_id} {vs_id}",
             f"The fifth place confirms that love, sex, pleasure, children, and creative work are joined to the same larger question of increase. {_topic_native_prediction(fifth['details'], planet_map, include_route=False)} This does not deny children or creation; it says they arrive with more responsibility, reversal, expense, or fear than the initial desire admits. Durable creation is possible precisely because the chart can continue after the romance of beginning has failed. {house_citations(5)}",
@@ -2321,9 +2342,9 @@ def _life_chapter_paragraphs(
                 continue
             pd = ruler_item["details"]
             house = int(pd.get("house") or 0)
-            condition = _condition_class(pd)
+            condition_phrase = _condition_phrase(pd)
             phase_rows.append(
-                f"The {label} relative phase belongs to {ruler_name} in house {house}, a {condition} ruler, so it is organized through "
+                f"The {label} relative phase belongs to {ruler_name} in house {house}, {condition_phrase} ruler, so it is organized through "
                 f"{HOUSE_CONTEXT.get(house, 'that natal place')} and brings {PLANET_PERIOD_EVENTS.get(ruler_name, ruler_name + ' matters')}. "
                 f"[{phase_item.get('id')}] [{ruler_item.get('id')}]"
             )
@@ -2380,11 +2401,14 @@ def _longevity_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
         f"[{source_item.get('id')}]"
     )
 
+    strict_found = bool(strict_capacity.get("alcocoden"))
     strict_lord = method_name(strict_capacity.get("alcocoden") or strict_method.get("name"))
     strict_total = strict_capacity.get("total_years")
     strict_total_text = format_years(strict_total)
     strict_type = str(strict_capacity.get("base_years_type") or "greater").lower()
-    strict_breakdown = [str(value) for value in strict_capacity.get("breakdown", [])]
+    strict_breakdown = [
+        str(value).rstrip(".") for value in strict_capacity.get("breakdown", [])
+    ]
     strict_invalid = bool(strict_capacity.get("invalid_under_sanity"))
     strict_aspect_details = strict_method.get("details", {})
     strict_aspect = (
@@ -2392,19 +2416,36 @@ def _longevity_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
         if isinstance(strict_aspect_details, Mapping)
         else "configured aspect rule"
     )
-    paragraphs.extend([
-        f"### Branch One — {strict_lord} Gives {strict_total_text} Years",
-        (
-            f"The strict-bound branch makes {strict_lord} Alcocoden. {strict_lord} is the bound lord used at the Hyleg and is admitted "
-            f"through {strict_aspect.lower()}. It assigns the {strict_type} planetary-years value: **{strict_total_text} years**. "
-            + ("Its ledger reads: " + "; ".join(strict_breakdown) + ". " if strict_breakdown else "")
-            + ("The engine marks this result invalid under its attained-age sanity check. " if strict_invalid else f"The computed judgment of this branch is therefore a lifetime of {strict_total_text} years. ")
-            + f"[{source_item.get('id')}] [{branch_item.get('id')}]"
-        ),
-    ])
+    if not strict_found:
+        # The method legitimately produced no giver of years for this chart.
+        # State the absence honestly instead of naming a placeholder planet.
+        paragraphs.extend([
+            "### Branch One — The Strict Bound-Lord Method Finds No Giver of Years",
+            (
+                "The strict-bound branch requires the bound lord of the Hyleg degree to aspect the Hyleg. In this "
+                "nativity no planet satisfies that condition, so the method yields no Alcocoden and therefore no "
+                "years figure. The old authors met this case as well: an inapplicable method is reported as "
+                "inapplicable, not forced to produce a number. "
+                f"[{source_item.get('id')}] [{branch_item.get('id')}]"
+            ),
+        ])
+    else:
+        paragraphs.extend([
+            f"### Branch One — {strict_lord} Gives {strict_total_text} Years",
+            (
+                f"The strict-bound branch makes {strict_lord} Alcocoden. {strict_lord} is the bound lord used at the Hyleg and is admitted "
+                f"through {strict_aspect.lower()}. It assigns the {strict_type} planetary-years value: **{strict_total_text} years**. "
+                + ("Its ledger reads: " + "; ".join(strict_breakdown) + ". " if strict_breakdown else "")
+                + ("The engine marks this result invalid under its attained-age sanity check. " if strict_invalid else f"The computed judgment of this branch is therefore a lifetime of {strict_total_text} years. ")
+                + f"[{source_item.get('id')}] [{branch_item.get('id')}]"
+            ),
+        ])
 
+    points_found = bool(points_capacity.get("alcocoden"))
     points_lord = method_name(points_capacity.get("alcocoden") or points_method.get("name"))
-    point_breakdown = [str(value) for value in points_capacity.get("breakdown", [])]
+    point_breakdown = [
+        str(value).rstrip(".") for value in points_capacity.get("breakdown", [])
+    ]
     arithmetic_rows = [value for value in point_breakdown if value.startswith(("Base:", "Added", "Subtracted"))]
     points_total = points_capacity.get("total_years")
     points_total_text = format_years(points_total)
@@ -2420,46 +2461,70 @@ def _longevity_paragraphs(items: list[Mapping[str, Any]]) -> list[str]:
         if isinstance(points_aspect_details, Mapping)
         else "configured aspect rule"
     )
-    points_heading = (
-        f"### Branch Two — {points_lord} Produces a Failed Result"
-        if points_invalid
-        else f"### Branch Two — {points_lord} Gives {points_total_text} Years"
-    )
-    paragraphs.extend([
-        points_heading,
-        (
-            f"The dignity-points and degree-aspect branch instead selects {points_lord}, which actually casts the recorded "
-            f"{points_aspect.lower()} to the Hyleg. "
-            f"It begins with {points_capacity.get('base_years')} {str(points_capacity.get('base_years_type') or 'mean').lower()} years. "
-            + ("Its ledger reads: " + "; ".join(arithmetic_rows) + ". " if arithmetic_rows else "")
-            + (failed_total_text + "so the engine marks the branch invalid while preserving the result. " if points_invalid else f"The resulting figure is {points_total_text} years and remains a competing numerical judgment. ")
-            + ("The contradiction is not concealed: either this branch is misapplied, the method requires rectification, or the technique fails on this nativity. " if points_invalid else "Both viable branches must remain visible because the method has not supplied a reason to suppress either one. ")
-            + f"[{source_item.get('id')}] [{branch_item.get('id')}]"
-        ),
-    ])
+    if not points_found:
+        paragraphs.extend([
+            "### Branch Two — The Dignity-Points Method Finds No Giver of Years",
+            (
+                "The dignity-points and degree-aspect branch likewise finds no planet that both holds sufficient "
+                "essential dignity at the Hyleg and casts a qualifying aspect to it, so it yields no Alcocoden and "
+                "no years figure. The absence is reported as such. "
+                f"[{source_item.get('id')}] [{branch_item.get('id')}]"
+            ),
+        ])
+    else:
+        points_heading = (
+            f"### Branch Two — {points_lord} Produces a Failed Result"
+            if points_invalid
+            else f"### Branch Two — {points_lord} Gives {points_total_text} Years"
+        )
+        paragraphs.extend([
+            points_heading,
+            (
+                f"The dignity-points and degree-aspect branch instead selects {points_lord}, which actually casts the recorded "
+                f"{points_aspect.lower()} to the Hyleg. "
+                f"It begins with {points_capacity.get('base_years')} {str(points_capacity.get('base_years_type') or 'mean').lower()} years. "
+                + ("Its ledger reads: " + "; ".join(arithmetic_rows) + ". " if arithmetic_rows else "")
+                + (failed_total_text + "so the engine marks the branch invalid while preserving the result. " if points_invalid else f"The resulting figure is {points_total_text} years and remains a competing numerical judgment. ")
+                + ("The contradiction is not concealed: either this branch is misapplied, the method requires rectification, or the technique fails on this nativity. " if points_invalid else "Both viable branches must remain visible because the method has not supplied a reason to suppress either one. ")
+                + f"[{source_item.get('id')}] [{branch_item.get('id')}]"
+            ),
+        ])
 
     paragraphs.append(
         "### The Judgment Between the Branches"
     )
     viable = [
-        (strict_lord, strict_total, strict_aspect, strict_invalid),
-        (points_lord, points_total, points_aspect, points_invalid),
+        (strict_lord, strict_total, strict_aspect, strict_invalid) if strict_found else None,
+        (points_lord, points_total, points_aspect, points_invalid) if points_found else None,
     ]
-    viable = [row for row in viable if not row[3] and row[1] is not None]
+    viable = [row for row in viable if row is not None and not row[3] and row[1] is not None]
     failed = [
-        (strict_lord, strict_total) if strict_invalid else None,
-        (points_lord, points_total) if points_invalid else None,
+        (strict_lord, strict_total) if strict_found and strict_invalid else None,
+        (points_lord, points_total) if points_found and points_invalid else None,
     ]
     failed = [row for row in failed if row is not None]
+    missing_methods = []
+    if not strict_found:
+        missing_methods.append("the strict bound-lord method")
+    if not points_found:
+        missing_methods.append("the dignity-points method")
     viable_text = "; ".join(f"{name} gives {format_years(years)} years" for name, years, _aspect, _invalid in viable)
     failed_text = "; ".join(f"{name}'s {format_years(years)}-year result fails the sanity check" for name, years in failed)
+    missing_text = " and ".join(missing_methods)
     whole_sign_weakness = any(
         "whole sign" in aspect.lower() or "whole_sign" in aspect.lower()
         for _name, _years, aspect, _invalid in viable
     )
+    if viable_text:
+        opening = f"The internally viable result or results are: **{viable_text}.** "
+    elif failed:
+        opening = "Neither numerical branch survives the configured sanity check. "
+    else:
+        opening = "No numerical branch applies to this nativity. "
     paragraphs.append(
-        (f"The internally viable result or results are: **{viable_text}.** " if viable_text else "Neither numerical branch survives the configured sanity check. ")
+        opening
         + (f"The failed result or results remain part of the record: {failed_text}. " if failed_text else "")
+        + (f"In this chart {missing_text} {'finds' if len(missing_methods) == 1 else 'find'} no qualifying Alcocoden at all, and that absence is part of the honest record. " if missing_text else "")
         + ("A surviving branch depends on whole-sign co-presence rather than a close degree aspect, which is a disclosed methodological weakness rather than a detail to conceal. " if whole_sign_weakness else "")
         + "Lilly himself says that the Hyleg, Anareta, and Alcocoden cannot always be selected with certainty. The truthful judgment therefore states the emitted years, the failed rivals, and the aspect mode without turning a branch into a fixed date of death. "
         f"[{source_item.get('id')}] [{branch_item.get('id')}]"
@@ -2629,9 +2694,9 @@ def _timing_paragraphs(
             ruler_item = planet_map.get(ruler)
             ruler_details = ruler_item.get("details", {}) if ruler_item else {}
             topic = str(topic_details.get("topic") or "the activated place")
-            condition = _condition_class(ruler_details) if ruler_details else "mixed"
+            condition = _condition_phrase(ruler_details) if ruler_details else "a mixed"
             paragraphs.append(
-                f"This birthday year activates {topic}, and {ruler} carries the year from a {condition} natal condition. "
+                f"This birthday year activates {topic}, and {ruler} carries the year from {condition} natal condition. "
                 f"The year's most likely manifestations are {PLANET_PERIOD_EVENTS.get(ruler, 'events governed by the Lord of the Year')}. "
                 f"Because the ruler is natally placed in {HOUSE_CONTEXT.get(ruler_details.get('house'), 'its natal house')}, "
                 "events in that field become the route through which the profected topic is delivered. "
@@ -2829,10 +2894,10 @@ def _long_range_timing_paragraphs(
                 ruler_text = ""
                 if planet:
                     pd = planet["details"]
-                    condition = _condition_class(pd)
+                    condition = _condition_phrase(pd)
                     ruler_text = (
                         f" Its ruler, {ruler}, is natally in house {pd.get('house')} with {pd.get('dignities')}, routing "
-                        f"the chapter through {HOUSE_CONTEXT.get(pd.get('house'), 'that place')}. From a {condition} condition, "
+                        f"the chapter through {HOUSE_CONTEXT.get(pd.get('house'), 'that place')}. From {condition} condition, "
                         f"it repeatedly produces {PLANET_PERIOD_EVENTS.get(str(ruler), str(ruler) + ' matters')}. [{planet.get('id')}]"
                     )
                 peak = (

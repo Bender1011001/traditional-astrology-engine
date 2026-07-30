@@ -764,3 +764,51 @@ def test_degree_quality_delineation_preserves_lillys_significator_scope(chart_da
     assert "Sun carries a pitted table flag" in report
     assert "Mars carries an azimene table flag outside Lilly's stated" in report
     assert "applying its bodily language directly to you would exceed the printed rule" in report
+
+
+def test_no_alcocoden_renders_honest_absence_not_unknown_placeholder():
+    """Regression: charts where a longevity method finds no Alcocoden must say so.
+
+    The Jul 28 customer chart rendered '### Branch One — Unknown Gives 0 Years'
+    and 'makes Unknown Alcocoden' — a raw fallback surfaced as customer prose.
+    """
+    from src.services.reading_composer import _longevity_paragraphs
+
+    items = [
+        {
+            "id": "E44",
+            "details": {
+                "hyleg": {"name": "Ascendant", "longitude": 220.59},
+                "strict_method": {"name": None, "details": {}},
+                "points_method": {"name": "points", "details": {"aspect": "Square"}},
+            },
+        },
+        {
+            "id": "E45",
+            "details": {
+                "strict_capacity": {
+                    "alcocoden": None,
+                    "total_years": 0,
+                    "breakdown": ["No Alcocoden found (Valens term method)."],
+                    "invalid_under_sanity": True,
+                },
+                "points_capacity": {
+                    "alcocoden": "Sun",
+                    "base_years": 19,
+                    "base_years_type": "minor",
+                    "total_years": 19.0,
+                    "breakdown": ["Base: Minor Years of Sun (19)"],
+                    "invalid_under_sanity": True,
+                },
+                "anareta": {"reason": "none found"},
+                "anaretic_windows": {"candidates": []},
+            },
+        },
+    ]
+    text = " | ".join(_longevity_paragraphs(items))
+    assert "Unknown" not in text
+    assert "Finds No Giver of Years" in text
+    assert "0 Years" not in text
+    assert "finds no qualifying Alcocoden" in text
+    # The found branch still renders normally
+    assert "Sun" in text and "19" in text
