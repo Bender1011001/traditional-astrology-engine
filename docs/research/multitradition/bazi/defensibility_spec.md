@@ -15,10 +15,10 @@ Ziping` gives a hierarchy of conditional judgments, not a tally.
 |---|---|---|---|
 | 1 | Four pillars under named boundary conventions | HKO tables (validated kernel) + disclosed Li Chun/jie conventions | `implemented` |
 | 2 | Day master identification | `Yuanhai Ziping` 看命入式: the day stem is the subject | `implemented` |
-| 3 | Hidden stems (藏干) in each branch | `Sanming Tonghui` juan 1 | `computable` — **blocking** |
-| 4 | **Month command (月令 / 得令)**: does the day master obtain the season | `Yuanhai Ziping` 看命入式, step 2 | `computable` — **blocking** |
+| 3 | Hidden stems (藏干) in each branch | `Sanming Tonghui` juan 1 | `implemented` (main qi drives judgment; middle/residual reported without weight) |
+| 4 | **Month command (月令 / 得令)**: does the day master obtain the season | `Yuanhai Ziping` 看命入式, step 2 | `implemented` (wang/xiang/xiu/qiu/si + rooting) |
 | 5 | Rootedness (通根) and relative strength class | `Yuanhai Ziping` step 3 | `computable` — depends on 3 |
-| 6 | Ten Gods (十神) from every stem and hidden stem to the day master | `Yuanhai Ziping` relation families | `computable` |
+| 6 | Ten Gods (十神) from every stem and hidden stem to the day master | `Yuanhai Ziping` relation families | `implemented` |
 | 7 | Branch relations: combinations (合), clashes (冲), harms, punishments, frames | `Sanming Tonghui` juan 1 | `computable` |
 | 8 | Pattern (格局) candidacy and completion/defeat tests | `Yuanhai Ziping` 神趣八法 | `source_gated` — school-specific precedence |
 | 9 | Transformation (化) and following (从) structures | `Yuanhai Ziping` 神趣八法 | `source_gated` |
@@ -28,9 +28,9 @@ Ziping` gives a hierarchy of conditional judgments, not a tally.
 | 13 | Na Yin (纳音) | `Sanming Tonghui` juan 1 | `computable` |
 | 14 | Auxiliary stars (神煞) | source/school-specific | `refused` unless enabled per named pack |
 
-**Items 3 and 4 are blocking.** Hidden stems are a fixed lookup table and month
-command is the first substantive judgment the tradition makes. Without them the
-section is a pillar calculator, not a reading.
+**Items 3, 4 and 6 are now implemented** (2026-08-01), in the hierarchy's own
+order. The section is no longer a pillar calculator. Remaining blockers are 5
+(strength class, which is school-dependent) and 7 (branch relations).
 
 ## Judgment hierarchy
 
@@ -89,7 +89,10 @@ why item 8 and 12 stay source-gated.
 
 ## Current implementation gap
 
-The shipped panel covers items 1, 2, 10, and 13's inputs. The next work, in
-order: **hidden stems (3)**, **month command (4)**, strength class (5), then Ten
-Gods (6) and branch relations (7). Items 8, 9, and 12 stay gated until edition
-control resolves the interpolation problem.
+The shipped panel covers items 1, 2, 3, 4, 6, 10 and 13's inputs, and emits a
+reading in the Ziping order. Next: **branch relations (7)** - combinations,
+clashes, harms, punishments - then strength class (5) only if a named school
+pack fixes its criteria. Items 8, 9 and 12 stay gated until edition control
+resolves the interpolation problem. A structural worked-example suite (10/10,
+mutation-tested) now covers the anchor, hidden stems, Ten Gods and seasonal
+command.

@@ -17,7 +17,7 @@ reasons like a Western chart wearing sidereal longitudes.
 | 3 | Rasi (D1) placements with dignity | Brhajjataka II (encoded in `brhajjataka_planetary_rule_manifest.json`) | `implemented` |
 | 4 | Nakshatra and pada for Moon, lagna, and each graha | Brhajjataka I.4-14 passages already passage-aligned | `implemented` |
 | 5 | Whole-sign bhava assignment | classical default; Sripati is the live alternative | `implemented` (disclosed) |
-| 6 | **Navamsha (D9)** | universally treated as mandatory; BPHS varga chapters | `computable` — **blocking** |
+| 6 | **Navamsha (D9)** | universally treated as mandatory; BPHS varga chapters | `implemented` (all grahas, nodes, lagna; vargottama flagged; D9 dignity separate) |
 | 7 | Vimshottari mahadasha from janma nakshatra | BPHS dasha chapters; standard 120-year scheme | `implemented` |
 | 8 | Vimshottari antardasha (bhukti) | same | `computable` |
 | 9 | Graha dignity: exaltation, debilitation, own sign, moolatrikona | Brhajjataka II | `implemented` (moolatrikona pending) |
@@ -29,10 +29,11 @@ reasons like a Western chart wearing sidereal longitudes.
 | 15 | Ashtakavarga | BPHS | `source_gated` |
 | 16 | Other vargas (D10 career, D7 children, etc.) | BPHS varga chapters | `source_gated` — which vargas are mandatory varies by school |
 
-**Item 6 is the single blocking gap.** A Jyotisha reading without navamsha will
-be dismissed on sight. It is arithmetic we can already do — the D9 sign is a
-deterministic function of the D1 longitude — so it is composer work, not a source
-gate.
+**Item 6 is done** (2026-08-01), verified by four structural properties the
+classical rule guarantees and now covered by a runnable worked example. It
+immediately earned its place: in the Fairfield chart Saturn is neutral in D1
+Pisces but **exalted in D9 Libra** — a D1-only verdict on Saturn would have been
+wrong.
 
 ## Judgment hierarchy
 
