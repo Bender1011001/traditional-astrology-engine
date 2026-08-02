@@ -6,9 +6,13 @@ sexagenary cycle the validated BaZi kernel encodes - Tibetan and Chinese share
 that cycle exactly, differing only in naming - which makes it checkable against
 two independent anchors rather than resting on a private constant.
 
-Mewa and parkha are deliberately NOT computed: their anchors and their
-sex-dependence are not fixed by any source in the registry, and a plausible
-looking number would be indistinguishable from a wrong one.
+Mewa and parkha are deliberately NOT computed, and the reason is worth stating
+precisely because an earlier version of this module stated it wrongly. It is not
+that no source fixes them: the White Beryl does, it is public domain, it has been
+retrieved, and its elemental-astrology chapter has been located page-exactly. The
+blocker is that the available witness is a photostat reprint whose script is
+legible but not yet transcribable at the confidence this repo requires, and a
+plausible-looking number would be indistinguishable from a wrong one.
 """
 
 from __future__ import annotations
@@ -74,10 +78,20 @@ def build(birth: BirthInput, bazi_year: int | None = None) -> TraditionSection:
     section.disclose(
         DisclosureKind.REFUSAL,
         "Mewa and parkha",
-        "Not computed. Their cycle anchors are not fixed by any source in the "
-        "registry, and parkha is conventionally sex-dependent while sex is not part "
-        "of the birth input contract. A plausible-looking value here would be "
-        "indistinguishable from a wrong one.",
+        "Not computed - but the reason has changed, and the earlier one was wrong. "
+        "This section used to say their anchors were fixed by no source in the "
+        "registry. That was a false blocker. The controlling primary source is "
+        "identified and retrieved: Sangye Gyatso's White Beryl (bai DUr dkar po, "
+        "1685), whose elemental-astrology chapter has been located page-exactly in "
+        "the 1972 Lhasa-block reprint, hash-pinned, and recorded as Public Domain "
+        "by the holding archive. The real blocker is legibility, not rights and not "
+        "access: OCR of that photostat print is unusable, and direct visual reading "
+        "reached confirmed-legible Tibetan script without reaching sentence-level "
+        "transcription confidence. Parkha is additionally sex-dependent by "
+        "convention, and sex is not part of the birth input contract. Popular "
+        "websites do state mewa and parkha arithmetic; they cite nothing, and "
+        "taking a number from one would be indistinguishable from taking a wrong "
+        "one.",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
