@@ -223,10 +223,46 @@ def _bazi_engine_output(example: dict[str, Any]) -> dict[str, Any] | None:
     return None
 
 
+def _tibetan_engine_output(example: dict[str, Any]) -> dict[str, Any] | None:
+    """Year-character anchors and sexagenary structural consequences."""
+    sys.path.insert(0, str(REPO_ROOT))
+    from src.engine.multitradition.tibetan import (  # noqa: PLC0415
+        ELEMENTS,
+        year_character,
+    )
+
+    eid = example["example_id"]
+    if eid in ("tibetan.year_character.rabjung_anchor",
+               "tibetan.year_character.jiazi_crosscheck"):
+        return {
+            f"year_{year}": year_character(year)
+            for year in (1027, 1984, 1996)
+        }
+
+    if eid == "tibetan.year_character.cycle_closure":
+        span = [year_character(1984 + offset) for offset in range(60)]
+        characters = {
+            (c["element"], c["animal"], c["polarity"]) for c in span
+        }
+        element_counts = {e: 0 for e in ELEMENTS}
+        for c in span:
+            element_counts[c["element"]] += 1
+        polarities = [c["polarity"] for c in span]
+        return {
+            "sixty_unique_characters": len(characters) == 60,
+            "each_element_twelve_years": set(element_counts.values()) == {12},
+            "polarity_strictly_alternates": all(
+                polarities[i] != polarities[i + 1] for i in range(59)
+            ),
+        }
+    return None
+
+
 ENGINE_ADAPTERS = {
     "maya": _maya_engine_output,
     "jyotisha": _jyotisha_engine_output,
     "bazi": _bazi_engine_output,
+    "tibetan": _tibetan_engine_output,
 }
 
 

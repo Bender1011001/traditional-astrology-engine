@@ -69,7 +69,9 @@ def test_every_fixture_builds_every_section(birth: BirthInput) -> None:
     panel = build_panel(birth)
     failures = {s["tradition_id"]: s["error"] for s in panel["sections"] if s.get("error")}
     assert not failures, f"sections failed: {failures}"
-    assert len(panel["sections"]) == 8
+    # Sections are added by separate tradition packs; the count only grows.
+    # Presence of each expected tradition is asserted individually below.
+    assert len(panel["sections"]) >= 8
 
 
 @pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
@@ -302,6 +304,304 @@ def test_islamicate_gates_firdaria_durations(fairfield_panel: dict) -> None:
     assert any("firdaria period" in item for item in gated)
 
 
+# --- Islamicate: al-Biruni reference conditions -----------------------------
+
+CLASSICAL_SEVEN = {"Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"}
+
+
+def _al_biruni_vectors() -> dict:
+    import json
+    from pathlib import Path
+
+    path = Path(
+        "docs/research/multitradition/islamicate/"
+        "al_biruni_reference_condition_validation_vectors.json"
+    )
+    vectors = json.loads(path.read_text(encoding="utf-8"))["vectors"]
+    return {vector["vector_id"]: vector for vector in vectors}
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_islamicate_computes_halb_and_hayyiz_for_seven_planets(
+    birth: BirthInput,
+) -> None:
+    facts = _section(build_panel(birth), "islamicate_persian")["facts"]
+    conditions = facts["planetary_conditions"]
+    assert {c["body"] for c in conditions} == CLASSICAL_SEVEN
+    for condition in conditions:
+        # Every planet carries both flags explicitly. `None` is a computed
+        # refusal (Mercury's unresolved context), not a missing key.
+        assert "halb" in condition and "hayyiz" in condition
+        assert condition["halb"] in (True, False, None)
+        assert condition["hayyiz"] in (True, False, None)
+        assert condition["sign_gender"] in ("male", "female")
+        assert isinstance(condition["above_horizon"], bool)
+        if condition["body"] != "Mercury":
+            assert condition["halb"] is not None, condition["body"]
+            assert condition["hayyiz"] is not None, condition["body"]
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_islamicate_hayyiz_implies_halb_one_way(birth: BirthInput) -> None:
+    """al-Biruni section 496: every hayyiz is a halb; the converse is not."""
+    facts = _section(build_panel(birth), "islamicate_persian")["facts"]
+    for condition in facts["planetary_conditions"]:
+        if condition["hayyiz"] is True:
+            assert condition["halb"] is True, condition["body"]
+    assert facts["condition_summary"]["one_way_implication_holds"] is True
+    summary = facts["condition_summary"]
+    assert set(summary["in_hayyiz"]) <= set(summary["in_halb"])
+
+
+def test_islamicate_halb_hayyiz_reproduce_the_pack_vectors() -> None:
+    """The pack ships truth tables. Reproduce them from the engine helpers."""
+    from src.engine.multitradition.western import (
+        islamicate_halb,
+        islamicate_hayyiz,
+    )
+
+    vectors = _al_biruni_vectors()
+
+    for case in vectors["islamicate.al_biruni.halb_truth_table"]["expected"]["cases"]:
+        assert (
+            islamicate_halb(
+                case["planet_sect"], case["nativity_sect"], case["above_horizon"]
+            )
+            is case["halb"]
+        ), case
+
+    male_signs = {"aries", "gemini", "leo", "libra", "sagittarius", "aquarius"}
+    genders = {"sun": "male", "venus": "female", "mars": "male"}
+    hayyiz_cases = vectors["islamicate.al_biruni.hayyiz_implication_examples"][
+        "expected"
+    ]
+    for case in hayyiz_cases["cases"]:
+        planet_sect = "diurnal" if case["planet"] == "sun" else "nocturnal"
+        halb = islamicate_halb(
+            planet_sect, case["nativity_sect"], case["above_horizon"]
+        )
+        sign_gender = "male" if case["sign"] in male_signs else "female"
+        hayyiz = islamicate_hayyiz(halb, genders[case["planet"]], sign_gender)
+        assert halb is case["halb"], case
+        assert hayyiz is case["hayyiz"], case
+    assert hayyiz_cases["every_hayyiz_is_halb"] is True
+    assert hayyiz_cases["halb_without_hayyiz_exists"] is True
+
+    # Mars: male but nocturnal, so it needs the nocturnal horizon condition
+    # AND a male sign. The general predicate must reproduce the pack's
+    # Mars-specific worked cases without a special case.
+    for case in vectors["islamicate.al_biruni.mars_hayyiz_examples"]["expected"][
+        "cases"
+    ]:
+        halb = islamicate_halb(
+            "nocturnal", case["nativity_sect"], case["above_horizon"]
+        )
+        sign_gender = "male" if case["sign"] in male_signs else "female"
+        assert halb is case["halb"], case
+        assert islamicate_hayyiz(halb, "male", sign_gender) is case["hayyiz"], case
+
+
+def test_islamicate_mercury_is_conditional_not_defaulted() -> None:
+    """al-Qabisi's male/diurnal Mercury must not leak into al-Biruni's."""
+    from src.engine.multitradition.western import islamicate_mercury_resolution
+
+    vectors = _al_biruni_vectors()
+    cases = vectors["islamicate.al_biruni.mercury_resolution_matrix"]["expected"][
+        "cases"
+    ]
+    expected = {case["case"]: case for case in cases}
+
+    alone_in_aries = islamicate_mercury_resolution("male", [])
+    assert alone_in_aries["gender"] == expected["alone_in_aries"]["gender"]
+    assert alone_in_aries["sect"] == expected["alone_in_aries"]["sect"]
+
+    with_venus = islamicate_mercury_resolution(
+        None, [{"body": "Venus", "gender": "female", "sect": "nocturnal"}]
+    )
+    assert with_venus["gender"] == expected["associated_with_venus"]["gender"]
+    assert with_venus["sect"] == expected["associated_with_venus"]["sect"]
+
+    # Sign and association pointing opposite ways: the inspected passage gives
+    # no conflict priority, so the sect must fail closed rather than default.
+    conflicted = islamicate_mercury_resolution(
+        "male", [{"body": "Venus", "gender": "female", "sect": "nocturnal"}]
+    )
+    assert conflicted["sect"] is None
+    assert conflicted["conflict"] is True
+
+
+def test_islamicate_mercury_disagreement_is_surfaced(fairfield_panel: dict) -> None:
+    section = _section(fairfield_panel, "islamicate_persian")
+    resolution = section["facts"]["mercury_resolution"]
+    assert "al-Qabisi" in resolution["al_qabisi_difference"]
+    assert "male and diurnal" in resolution["al_qabisi_difference"]
+    joined = " ".join(section["reading"])
+    assert "al-Qabisi" in joined and "al-Biruni" in joined
+
+
+def test_islamicate_firdaria_order_follows_sect(fairfield_panel: dict) -> None:
+    facts = _section(fairfield_panel, "islamicate_persian")["facts"]
+    vectors = _al_biruni_vectors()
+    assert facts["sect"]["nativity_sect"] == "diurnal"
+    assert (
+        facts["firdaria"]["major_order"]
+        == vectors["islamicate.al_biruni.firdaria.diurnal_order"]["expected"][
+            "major_order"
+        ]
+    )
+    nocturnal = _section(build_panel(SYDNEY), "islamicate_persian")["facts"]
+    assert nocturnal["sect"]["nativity_sect"] == "nocturnal"
+    assert (
+        nocturnal["firdaria"]["major_order"]
+        == vectors["islamicate.al_biruni.firdaria.nocturnal_order"]["expected"][
+            "major_order"
+        ]
+    )
+
+
+def test_islamicate_subperiod_structure_matches_pack_vector() -> None:
+    from src.engine.multitradition.western import islamicate_firdaria_subperiods
+
+    descending = ["saturn", "jupiter", "mars", "sun", "venus", "mercury", "moon"]
+    expected = _al_biruni_vectors()[
+        "islamicate.al_biruni.firdaria.sun_subperiod_structure"
+    ]["expected"]["subperiods"]
+    assert islamicate_firdaria_subperiods("sun", descending) == expected
+    # Structure only: no seventh carries a duration of any kind.
+    for major in descending:
+        parts = islamicate_firdaria_subperiods(major, descending)
+        assert len(parts) == 7
+        assert parts[0]["rulers"] == [major]
+        assert all(set(p) == {"index", "fraction_start", "fraction_end", "rulers"}
+                   for p in parts)
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_islamicate_emits_no_firdaria_durations(birth: BirthInput) -> None:
+    """Section 395 gives no node periods and no duration table. Emit none."""
+    firdaria = _section(build_panel(birth), "islamicate_persian")["facts"]["firdaria"]
+    assert firdaria["durations_emitted"] is False
+    assert firdaria["node_periods_emitted"] is False
+
+    offenders: list[str] = []
+
+    def walk(node, path: str) -> None:
+        if isinstance(node, dict):
+            for key, value in node.items():
+                walk(value, f"{path}.{key}")
+        elif isinstance(node, list):
+            for index, value in enumerate(node):
+                walk(value, f"{path}[{index}]")
+        elif isinstance(node, (int, float)) and not isinstance(node, bool):
+            leaf = path.rsplit(".", 1)[-1].lower()
+            if any(token in leaf for token in ("year", "age", "date", "duration")):
+                offenders.append(f"{path}={node}")
+
+    walk(firdaria, "firdaria")
+    assert not offenders, f"firdaria emitted duration-like values: {offenders}"
+    # The lunar nodes are not chronocrators in this pack.
+    assert "north_node" not in str(firdaria["major_order"])
+    assert len(firdaria["major_order"]) == 7
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_islamicate_refusal_disclosures_survive(birth: BirthInput) -> None:
+    section = _section(build_panel(birth), "islamicate_persian")
+    refusals = [
+        d for d in section["disclosures"] if d["kind"] == DisclosureKind.REFUSAL.value
+    ]
+    subjects = " ".join(d["subject"] for d in refusals)
+    details = " ".join(d["detail"] for d in refusals)
+    assert "Firdaria periods and ages" in subjects
+    assert "section 395" in details
+    assert "major-duration table" in details
+    # The joy boundary and the prediction boundary must both stay refused.
+    assert any("halb or hayyiz" in d["subject"] for d in refusals)
+    assert any("Prediction" == d["subject"] for d in refusals)
+    joined_reading = " ".join(section["reading"])
+    assert "no firdaria ages or dates" in joined_reading.lower()
+
+
+def test_islamicate_variants_are_surfaced_with_lineage(fairfield_panel: dict) -> None:
+    """The 8 preserved variants are the publishable scholarship. Show them."""
+    section = _section(fairfield_panel, "islamicate_persian")
+    concordance = section["facts"]["variant_concordance"]
+    assert concordance["candidate_passages"] == 30
+    assert concordance["preserved_variants"] == 8
+    assert len(concordance["observations"]) == 8
+
+    rows = concordance["firdaria_year_values_by_lineage"]
+    lineages = {row["lineage"] for row in rows}
+    assert "Arabic" in lineages
+    assert "Latin - Hermann of Carinthia" in lineages
+    assert "Latin - John of Seville" in lineages
+    assert "Latin - Adelard of Bath" in lineages
+
+    def row_for(lineage_fragment: str, work_fragment: str) -> dict:
+        return next(
+            r
+            for r in rows
+            if lineage_fragment in r["lineage"] and work_fragment in r["work"]
+        )
+
+    # Mars: Arabic 7 against Hermann's 8.
+    assert row_for("Arabic", "Great Introduction")["mars_years"] == 7
+    assert row_for("Hermann of Carinthia", "Great Introduction")["mars_years"] == 8
+    # John of Seville: listed values total 74 against a stated 75.
+    john = row_for("John of Seville", "Great Introduction")
+    assert john["recomputed_total"] == 74
+    assert john["stated_total"] == 75
+    assert john["totals_agree"] is False
+    # Adelard of Bath: 75 against a stated 77, where the Arabic agrees with itself.
+    adelard = row_for("Adelard of Bath", "Abbreviation")
+    assert adelard["recomputed_total"] == 75
+    assert adelard["stated_total"] == 77
+    assert adelard["totals_agree"] is False
+    assert row_for("Arabic", "Abbreviation")["totals_agree"] is True
+
+    # Terminology variants: collapse and competentia.
+    observation_ids = {o["observation_id"] for o in concordance["observations"]}
+    assert "halb_hayyiz_qabisi_latin_terminology" in observation_ids
+    assert "hayyiz_abbreviation_competentia" in observation_ids
+
+
+def test_islamicate_reading_attributes_every_variant_by_lineage(
+    fairfield_panel: dict,
+) -> None:
+    section = _section(fairfield_panel, "islamicate_persian")
+    reading = section["reading"]
+    assert reading, "Islamicate reading missing"
+    joined = " ".join(reading)
+
+    # Sect is stated first - it conditions everything after it.
+    assert "Sect first" in reading[0]
+    assert "al-Biruni" in reading[0]
+    # Condition before structure, structure before variants.
+    halb_index = next(i for i, line in enumerate(reading) if "halb" in line)
+    firdaria_index = next(i for i, line in enumerate(reading) if "Firdaria" in line)
+    variant_index = next(i for i, line in enumerate(reading) if "Variant," in line)
+    assert halb_index < firdaria_index < variant_index
+
+    # Every lineage is named, and no variant is attributed to "Islamic astrology".
+    for lineage in (
+        "Hermann of Carinthia",
+        "John of Seville",
+        "Adelard of Bath",
+        "Arabic",
+    ):
+        assert lineage in joined, lineage
+    assert "competentia" in joined
+    assert "alhaiz" in joined
+    assert "Islamic astrology" not in joined
+
+    # Named authors, never a generic tradition label.
+    for author in ("al-Biruni", "Abu Ma'shar", "al-Qabisi"):
+        assert author in joined, author
+
+    # The arithmetic disagreements are stated numerically, not hand-waved.
+    assert "74" in joined and "75" in joined and "77" in joined
+
+
 def test_render_produces_markdown_with_labels(fairfield_panel: dict) -> None:
     text = render(fairfield_panel)
     assert text.startswith("# Multi-tradition panel")
@@ -324,3 +624,896 @@ def test_broken_section_does_not_kill_panel(monkeypatch: pytest.MonkeyPatch) -> 
     # Every other section still built.
     others = [s for s in result["sections"] if s["tradition_id"] != "maya"]
     assert all(not s.get("error") for s in others)
+
+
+# --------------------------------------------------------------------------- #
+# Jyotisha reading layer: drishti, antardasha, combustion, naisargika, yogas,
+# and the judgment hierarchy the defensibility spec fixes.
+# --------------------------------------------------------------------------- #
+
+
+@pytest.fixture(scope="module")
+def vedic_sections() -> dict:
+    """Every fixture's Jyotisha section, built once for the whole module."""
+    return {
+        birth.name: _section(build_panel(birth), "indian_jyotisha")
+        for birth in ALL_FIXTURES
+    }
+
+
+def _step_numbers(reading: list[str]) -> list[int]:
+    """Leading step label of every reading line, per the spec's hierarchy."""
+    numbers = []
+    for line in reading:
+        head = line.split(".", 1)[0]
+        assert head.isdigit(), f"reading line carries no step label: {line[:70]}"
+        numbers.append(int(head))
+    return numbers
+
+
+def test_drishti_computed_for_every_graha(fairfield_panel: dict) -> None:
+    """Universal 7th aspect for all; special aspects only for Mars/Jupiter/Saturn."""
+    from src.engine.multitradition.vedic import (
+        GRAHA_ORDER,
+        SPECIAL_DRISHTI,
+        drishti_houses,
+    )
+
+    facts = _section(fairfield_panel, "indian_jyotisha")["facts"]
+    rows = {row["graha"]: row for row in facts["drishti"]}
+    assert set(rows) == set(GRAHA_ORDER), "a graha is missing from the drishti table"
+
+    for graha in facts["grahas"]:
+        name = graha["graha"]
+        row = rows[name]
+        aspects = drishti_houses(name, graha["house"])
+        assert 7 in aspects, f"{name} lacks the universal 7th aspect"
+        assert len(aspects) == 1 + len(SPECIAL_DRISHTI.get(name, ()))
+        assert row["from_house"] == graha["house"]
+        assert row["aspects_houses"] == sorted(set(aspects.values()))
+        assert graha["drishti_houses"] == row["aspects_houses"]
+
+    # The classical rule, checked from the lagna so the arithmetic is legible.
+    assert set(drishti_houses("Sun", 1).values()) == {7}
+    assert set(drishti_houses("Mars", 1).values()) == {4, 7, 8}
+    assert set(drishti_houses("Jupiter", 1).values()) == {5, 7, 9}
+    assert set(drishti_houses("Saturn", 1).values()) == {3, 7, 10}
+    # Wrap-around: Saturn in the 12th aspects the 2nd, 6th and 9th.
+    assert drishti_houses("Saturn", 12) == {3: 2, 7: 6, 10: 9}
+    # Rahu and Ketu take the 7th only under the disclosed scheme.
+    assert set(drishti_houses("Rahu", 5).values()) == {11}
+
+
+def test_antardasha_subdivides_the_running_mahadasha(vedic_sections: dict) -> None:
+    """Nine bhuktis, sequence from the mahadasha lord, summing to its length."""
+    from src.engine.multitradition.vedic import DASHA_SEQUENCE, DASHA_YEARS
+
+    order = [name for name, _ in DASHA_SEQUENCE]
+    for label, section in vedic_sections.items():
+        block = section["facts"]["vimshottari_antardashas"]
+        assert block, f"{label}: no antardasha block"
+        periods = block["periods"]
+        lord = block["mahadasha_lord"]
+        full = block["mahadasha_full_years"]
+
+        assert len(periods) == 9, f"{label}: expected nine bhuktis"
+        # Sub-lords run the standard sequence starting from the mahadasha lord.
+        start = order.index(lord)
+        assert [p["antardasha_lord"] for p in periods] == [
+            order[(start + step) % 9] for step in range(9)
+        ], label
+        assert periods[0]["antardasha_lord"] == lord, label
+
+        # Proportional subdivision, exactly as the spec states it.
+        for period in periods:
+            expected = full * DASHA_YEARS[period["antardasha_lord"]] / 120
+            assert period["years"] == pytest.approx(expected, abs=1e-6), label
+            assert period["mahadasha_lord"] == lord
+
+        # The sub-periods reconstitute the mahadasha, within rounding.
+        assert sum(p["years"] for p in periods) == pytest.approx(full, abs=1e-4)
+        assert block["sum_of_antardasha_years"] == pytest.approx(full, abs=1e-4)
+        assert "/ 120" in block["subdivision_rule"]
+
+        # The running mahadasha is the one being subdivided, and the running
+        # bhukti sits inside it.
+        current = section["facts"]["vimshottari_current"]
+        assert current["status"] == "running", label
+        assert current["mahadasha"]["lord"] == lord, label
+        running = current["antardasha"]
+        assert running is not None, label
+        assert running["mahadasha_lord"] == lord, label
+        stamp = current["as_of"]
+        assert running["start"] <= stamp < running["end"], label
+        assert current["mahadasha"]["start"] <= stamp < current["mahadasha"]["end"]
+
+
+def test_antardasha_of_a_birth_partial_mahadasha_still_sums_to_full(
+    fairfield_panel: dict,
+) -> None:
+    """A mahadasha already running at birth is subdivided from its notional start."""
+    from src.engine.multitradition.vedic import (
+        DASHA_YEARS,
+        _antardashas,
+        _mahadasha_spans,
+    )
+
+    facts = _section(fairfield_panel, "indian_jyotisha")["facts"]
+    lord = facts["janma_nakshatra"]["lord"]
+    spans = _mahadasha_spans(FAIRFIELD, lord, 0.6)
+    first = spans[0]
+    assert first["partial_at_birth"] is True
+    assert first["notional_start"] < first["start"], "balance must predate birth"
+
+    block = _antardashas(first)
+    assert block["mahadasha_full_years"] == DASHA_YEARS[lord]
+    assert sum(p["years"] for p in block["periods"]) == pytest.approx(
+        DASHA_YEARS[lord], abs=1e-4
+    )
+    # Bhuktis that closed before the birth moment are flagged, not hidden.
+    assert any(p["before_birth"] for p in block["periods"])
+
+
+def test_combustion_flags_are_booleans(vedic_sections: dict) -> None:
+    from src.engine.multitradition.vedic import (
+        COMBUSTION_ORBS,
+        COMBUSTION_ORBS_RETROGRADE,
+    )
+
+    for label, section in vedic_sections.items():
+        for graha in section["facts"]["grahas"]:
+            assert isinstance(graha["combust"], bool), f"{label}/{graha['graha']}"
+            assert isinstance(graha["solar_separation_degrees"], float)
+            orb = graha["combustion_orb_degrees"]
+            assert orb is None or isinstance(orb, float)
+            if orb is None:
+                # No orb, no claim: the Sun itself and the nodes.
+                assert graha["combust"] is False
+                assert graha["graha"] in {"Sun", "Rahu", "Ketu"}
+            else:
+                expected = (
+                    COMBUSTION_ORBS_RETROGRADE.get(graha["graha"], orb)
+                    if graha["retrograde"]
+                    else COMBUSTION_ORBS[graha["graha"]]
+                )
+                assert orb == expected
+                assert graha["combust"] is (
+                    graha["solar_separation_degrees"] <= orb
+                )
+
+
+def test_fairfield_moon_is_combust_under_the_configured_orb(
+    fairfield_panel: dict,
+) -> None:
+    facts = _section(fairfield_panel, "indian_jyotisha")["facts"]
+    by_name = {g["graha"]: g for g in facts["grahas"]}
+    moon = by_name["Moon"]
+    assert moon["combust"] is True
+    assert moon["combustion_orb_degrees"] == 12.0
+    assert moon["solar_separation_degrees"] == pytest.approx(7.85, abs=0.05)
+    # Own sign and combust at once - the condition the reading must not smooth over.
+    assert moon["dignity"] == "own sign"
+    assert by_name["Sun"]["combust"] is False
+    assert by_name["Mercury"]["combust"] is False
+
+
+def test_combustion_orbs_disclosed_as_configured(fairfield_panel: dict) -> None:
+    section = _section(fairfield_panel, "indian_jyotisha")
+    configured = [
+        d
+        for d in section["disclosures"]
+        if d["kind"] == DisclosureKind.CONFIGURED_METHOD.value
+        and "ombustion" in d["subject"]
+    ]
+    assert configured, "combustion orbs are a product choice and must be disclosed"
+    detail = configured[0]["detail"]
+    for expected in (
+        "Moon 12", "Mars 17", "Mercury 14", "Jupiter 11", "Venus 10", "Saturn 15",
+    ):
+        assert expected in detail, expected
+    assert "retrograde" in detail
+    assert configured[0]["alternatives"]
+    # And the table itself is emitted as a fact, not only as prose.
+    orbs = section["facts"]["combustion_orbs_configured"]
+    assert orbs["direct"]["Mars"] == 17.0
+    assert orbs["retrograde_overrides"] == {"Mercury": 12.0, "Venus": 8.0}
+
+
+def test_naisargika_table_is_complete_and_asymmetric() -> None:
+    from src.engine.multitradition.vedic import (
+        GRAHAS,
+        NAISARGIKA,
+        naisargika_relation,
+    )
+
+    for graha in GRAHAS:
+        row = NAISARGIKA[graha]
+        listed = [*row["friends"], *row["neutral"], *row["enemies"]]
+        assert sorted(listed) == sorted(set(GRAHAS) - {graha}), graha
+        assert len(listed) == len(set(listed)), f"{graha} listed twice"
+
+    # The classical table is deliberately not symmetric.
+    assert naisargika_relation("Mars", "Moon") == "friend"
+    assert naisargika_relation("Moon", "Mars") == "neutral"
+    assert naisargika_relation("Saturn", "Sun") == "enemy"
+    assert naisargika_relation("Moon", "Moon") == "own sign lord"
+    # The nodes carry no agreed naisargika row.
+    assert naisargika_relation("Rahu", "Sun") == "not assessed for nodes"
+
+
+def test_naisargika_dispositor_relation_on_every_graha(
+    vedic_sections: dict,
+) -> None:
+    from src.engine.multitradition.vedic import (
+        SIGN_LORD,
+        naisargika_relation,
+    )
+
+    for label, section in vedic_sections.items():
+        for graha in section["facts"]["grahas"]:
+            assert graha["dispositor"] == SIGN_LORD[graha["rasi"]], label
+            assert graha["dispositor_relation"] == naisargika_relation(
+                graha["graha"], graha["dispositor"]
+            ), f"{label}/{graha['graha']}"
+
+
+def test_yogas_report_constituent_facts(fairfield_panel: dict) -> None:
+    """A yoga is only defendable if the facts that made it true are shown."""
+    from src.engine.multitradition.vedic import drishti_houses
+
+    facts = _section(fairfield_panel, "indian_jyotisha")["facts"]
+    yogas = facts["yogas"]
+    assert yogas, "Leo lagna with Mars owning 4 and 9 must yield at least one yoga"
+
+    houses = {g["graha"]: g["house"] for g in facts["grahas"]}
+    for yoga in yogas:
+        assert yoga["rule"], yoga
+        assert len(yoga["constituent_facts"]) >= 2, yoga["yoga"]
+        joined = " ".join(yoga["constituent_facts"])
+        for graha in yoga["grahas"]:
+            assert graha in joined, f"{yoga['yoga']} never names {graha}"
+        # Every record cites at least one house number - the structural claim.
+        assert any(char.isdigit() for char in joined)
+        # Any claimed relation must actually hold in the chart.
+        if len(yoga["grahas"]) == 2:
+            first, second = yoga["grahas"]
+            if yoga["relation"] == "conjunct":
+                assert houses[first] == houses[second], yoga["summary"]
+            else:
+                assert houses[second] in drishti_houses(
+                    first, houses[first]
+                ).values()
+                assert houses[first] in drishti_houses(
+                    second, houses[second]
+                ).values()
+
+    # Leo lagna: Mars owns the 4th (Scorpio, a kendra) and the 9th (Aries,
+    # a trikona), which is the textbook yogakaraka identification.
+    yogakaraka = [y for y in yogas if y["yoga"] == "Yogakaraka"]
+    assert [y["grahas"] for y in yogakaraka] == [["Mars"]]
+    constituents = " ".join(yogakaraka[0]["constituent_facts"])
+    assert "kendra" in constituents and "trikona" in constituents
+    assert "house 4" in constituents and "house 9" in constituents
+
+    # The lagna lord is a kendra AND trikona lord trivially; it must not be
+    # promoted to yogakaraka on that basis alone.
+    assert facts["lagna"]["lord"] == "Sun"
+    assert all("Sun" not in y["grahas"] for y in yogakaraka)
+
+    assert any(y["yoga"] == "Raja Yoga" for y in yogas)
+    assert any(y["yoga"] == "Dhana Yoga" for y in yogas)
+    # Mercury owns the 2nd and the 11th - two dhana houses in one hand.
+    single_lord_dhana = [
+        y for y in yogas if y["yoga"] == "Dhana Yoga" and len(y["grahas"]) == 1
+    ]
+    assert [y["grahas"] for y in single_lord_dhana] == [["Mercury"]]
+
+
+def test_yoga_records_are_well_formed_for_every_fixture(
+    vedic_sections: dict,
+) -> None:
+    for label, section in vedic_sections.items():
+        for yoga in section["facts"]["yogas"]:
+            assert yoga["yoga"] in {"Yogakaraka", "Raja Yoga", "Dhana Yoga"}, label
+            assert yoga["grahas"] and yoga["summary"] and yoga["rule"]
+            assert yoga["constituent_facts"], f"{label}: {yoga['yoga']} bare name"
+
+
+def test_navamsha_cross_check_surfaces_d1_d9_divergence(
+    fairfield_panel: dict,
+) -> None:
+    """Saturn is neutral in D1 Pisces but exalted in D9 Libra - that must show."""
+    section = _section(fairfield_panel, "indian_jyotisha")
+    rows = {r["graha"]: r for r in section["facts"]["navamsha_cross_check"]}
+    saturn = rows["Saturn"]
+    assert saturn["rasi_d1"] == "Pisces"
+    assert saturn["dignity_d1"] == "neutral placement"
+    assert saturn["rasi_d9"] == "Libra"
+    assert saturn["dignity_d9"] == "exalted"
+    assert saturn["diverges"] is True
+    assert "raises" in saturn["verdict"]
+
+    # Jupiter runs the other way: own sign in D1, plain in D9.
+    jupiter = rows["Jupiter"]
+    assert jupiter["dignity_d1"] == "own sign"
+    assert jupiter["diverges"] is True
+    assert "undercuts" in jupiter["verdict"]
+
+    # And the divergence must reach the prose, not just the fact block.
+    step_six = " ".join(
+        line for line in section["reading"] if line.startswith("6.")
+    )
+    assert "Saturn" in step_six and "Libra" in step_six and "exalted" in step_six
+
+
+def test_reading_follows_the_judgment_hierarchy(vedic_sections: dict) -> None:
+    """Lagna first, yogas seventh, dasha last - the spec's order, enforced."""
+    for label, section in vedic_sections.items():
+        reading = section.get("reading")
+        assert reading, f"{label}: Jyotisha reading missing"
+        numbers = _step_numbers(reading)
+        assert numbers == sorted(numbers), f"{label}: steps run out of order"
+        assert set(numbers) == set(range(1, 9)), f"{label}: missing a step"
+        assert numbers[0] == 1 and numbers[-1] == 8, label
+
+        # 1. lagna, 2. Moon before any solar claim, 7. yogas only after.
+        assert numbers.index(1) < numbers.index(7), label
+        assert "Lagna" in reading[0], label
+        moon_line = reading[numbers.index(2)]
+        assert "janma" in moon_line.lower(), label
+        assert "outranks the Sun" in moon_line, label
+
+        # Nothing may name a yoga before step 7.
+        first_yoga = next(
+            (i for i, line in enumerate(reading) if "oga" in line), None
+        )
+        assert first_yoga is not None, label
+        assert numbers[first_yoga] == 7, f"{label}: a yoga was named too early"
+
+        # 8. dasha is read against the natal structure, not free-floating.
+        dasha = " ".join(line for line in reading if line.startswith("8."))
+        assert "mahadasha" in dasha.lower() and "antardasha" in dasha.lower()
+        assert "natal structure" in dasha, label
+
+
+def test_vedic_refusals_cover_the_spec_list(vedic_sections: dict) -> None:
+    """Ayurdaya, muhurta/remedies, varna, compatibility, Shadbala/Ashtakavarga."""
+    required = ("ayurdaya", "muhurta", "varna", "marriage", "shadbala")
+    for label, section in vedic_sections.items():
+        refusals = [
+            d
+            for d in section["disclosures"]
+            if d["kind"] == DisclosureKind.REFUSAL.value
+        ]
+        assert refusals, label
+        blob = " ".join(f"{d['subject']} {d['detail']}" for d in refusals).lower()
+        for token in required:
+            assert token in blob, f"{label}: no refusal covers {token}"
+        assert "ashtakavarga" in blob, label
+        # The refusals must be actual refusals, not hedged claims.
+        assert "no lifespan" in blob or "no longevity" in blob, label
+
+
+def test_vedic_reading_never_asserts_a_refused_claim(vedic_sections: dict) -> None:
+    """The prose must not smuggle back what the refusals removed."""
+    banned = ("shadbala", "ashtakavarga", "varna", "guna milan", "gemstone")
+    for label, section in vedic_sections.items():
+        prose = " ".join(section["reading"]).lower()
+        for token in banned:
+            if token in ("shadbala", "ashtakavarga"):
+                # Named only to say they are not used.
+                for line in section["reading"]:
+                    if token in line.lower():
+                        assert "not evaluated" in line.lower(), f"{label}: {token}"
+                continue
+            assert token not in prose, f"{label}: reading asserts {token}"
+
+
+# --------------------------------------------------------------------------
+# Egyptian civil calendar, Zi Wei Dou Shu, Vietnamese lunisolar calendar
+# --------------------------------------------------------------------------
+
+NEW_TRADITION_IDS = ("pharaonic_egyptian", "ziwei_doushu", "vietnamese")
+
+
+@pytest.fixture(scope="module")
+def quito_panel() -> dict:
+    return build_panel(QUITO_LATE_ZI)
+
+
+def _disclosure_blob(section: dict, kind: DisclosureKind | None = None) -> str:
+    return " ".join(
+        f"{d['subject']} {d['detail']}"
+        for d in section["disclosures"]
+        if kind is None or d["kind"] == kind.value
+    ).lower()
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_new_sections_build_for_every_fixture(birth: BirthInput) -> None:
+    """All three new packs must render for every fixture, with disclosures."""
+    panel = build_panel(birth)
+    present = {s["tradition_id"] for s in panel["sections"]}
+    for tradition_id in NEW_TRADITION_IDS:
+        assert tradition_id in present, f"{tradition_id} missing from panel"
+        section = _section(panel, tradition_id)
+        assert not section.get("error"), f"{tradition_id}: {section.get('error')}"
+        assert section["disclosures"], f"{tradition_id} discloses nothing"
+        assert section["facts"], f"{tradition_id} emitted no facts"
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_new_sections_each_carry_a_refusal(birth: BirthInput) -> None:
+    """Each of these packs has something it cannot say; it must say so."""
+    panel = build_panel(birth)
+    for tradition_id in NEW_TRADITION_IDS:
+        section = _section(panel, tradition_id)
+        refusals = [
+            d
+            for d in section["disclosures"]
+            if d["kind"] == DisclosureKind.REFUSAL.value
+        ]
+        assert refusals, f"{tradition_id} refuses nothing"
+
+
+# --- Egyptian -------------------------------------------------------------
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_egyptian_refuses_to_place_the_birth(birth: BirthInput) -> None:
+    """default_profile is null in the pack, so the birth is never converted."""
+    section = _section(build_panel(birth), "pharaonic_egyptian")
+    placement = section["facts"]["birth_placement"]
+    assert placement["placed"] is False
+    assert placement["chronology_profile_used"] is None
+    assert placement["reason"] == "no_approved_chronology_profile"
+    # The withheld input is reported, never a converted date.
+    assert "season_id" not in placement
+    assert "year_position" not in placement
+    assert section["facts"]["chronology_contract"]["default_profile"] is None
+    refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
+    assert "chronology" in refusals
+    assert "default_profile" in refusals or "null" in refusals
+
+
+def test_egyptian_structure_matches_the_validated_pack(fairfield_panel: dict) -> None:
+    facts = _section(fairfield_panel, "pharaonic_egyptian")["facts"]
+    model = facts["calendar_model"]
+    assert model["year_length_days"] == 365
+    assert model["ordinary_months"] == 12
+    assert model["ordinary_month_length_days"] == 30
+    assert model["ordinary_days"] == 360
+    assert model["additional_days"] == 5
+    assert model["intercalation"] is False
+    assert model["seasons"] == [
+        "Akhet (4 months)",
+        "Peret (4 months)",
+        "Shemu (4 months)",
+    ]
+    structure = facts["cycle_internal_structure"]
+    assert structure["position_date_round_trip_over_365_positions"] is True
+    # Landmarks from the pack's own vectors.
+    assert structure["landmark_positions"]["I Akhet 1"] == 0
+    assert structure["landmark_positions"]["II Akhet 1"] == 30
+    assert structure["landmark_positions"]["I Peret 1"] == 120
+    assert structure["landmark_positions"]["I Shemu 1"] == 240
+    assert structure["landmark_positions"]["heriu-renpet day 5"] == 364
+
+
+def test_egyptian_conversion_fails_closed() -> None:
+    """The pack's negative chronology vectors must be reproduced exactly."""
+    from src.engine.multitradition.egyptian import date_to_position, place_civil_date
+
+    assert place_civil_date(0, None)["error"] == "missing_profile"
+    complete = {
+        "profile_id": "x",
+        "tradition_id": "pharaonic_egyptian",
+        "model_id": "alexandrian_coptic_leap",
+        "anchor_civil_date": "2000-01-01",
+        "calendar_policy": "test",
+        "anchor_egyptian_date": {"season_id": "akhet", "month_in_season": 1, "day": 1},
+        "historical_regime": "test",
+        "authority": "test",
+        "uncertainty_days": 0,
+        "locality": "test",
+        "day_start": "test",
+    }
+    assert place_civil_date(0, complete)["error"] == "wrong_calendar_model"
+    # An incomplete profile is not silently completed.
+    partial = dict(complete, model_id="pharaonic_civil_365")
+    del partial["uncertainty_days"]
+    assert place_civil_date(0, partial)["error"] == "missing_profile"
+    # Ordinary months have exactly thirty days; the year has exactly five extras.
+    assert date_to_position("akhet", 1, 31)["error"] == "invalid_ordinary_day"
+    assert (
+        date_to_position("heriu_renpet", None, 6)["error"] == "invalid_additional_day"
+    )
+
+
+def test_egyptian_emits_no_forbidden_output_fields(fairfield_panel: dict) -> None:
+    """The pack names the fields a calendar position may never turn into."""
+    import json
+
+    section = _section(fairfield_panel, "pharaonic_egyptian")
+    blob = json.dumps(section["facts"]).lower()
+    for forbidden in ("prognosis", "personality", "good_bad", "compatibility"):
+        assert f'"{forbidden}"' not in blob, f"forbidden field {forbidden} emitted"
+
+
+def test_egyptian_surfaces_the_sallier_iv_access_refusal(
+    fairfield_panel: dict,
+) -> None:
+    """Source-access-only, and the epagomenal section is lost, not proven absent."""
+    section = _section(fairfield_panel, "pharaonic_egyptian")
+    witness = section["facts"]["sallier_iv_witness"]
+    assert witness["rule_extraction_ready"] is False
+    assert witness["complete_translation_present"] is False
+    assert witness["historical_absence_proven"] is False
+    assert any("Epagomenal" in item for item in witness["lost_ranges"])
+    refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
+    assert "sallier" in refusals
+    assert "lost" in refusals
+    assert (
+        section["facts"]["hemerology_boundary"][
+            "missing_witness_text_creates_negative_rule"
+        ]
+        is False
+    )
+
+
+# --- Zi Wei Dou Shu -------------------------------------------------------
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_ziwei_refuses_the_chart_without_a_lunar_month(birth: BirthInput) -> None:
+    section = _section(build_panel(birth), "ziwei_doushu")
+    construction = section["facts"]["chart_construction"]
+    assert construction["status"] == "blocked_no_lunisolar_profile"
+    blocked = " ".join(construction["blocked_operations"]).lower()
+    for operation in ("life palace", "body palace", "topic palace", "four transf"):
+        assert operation in blocked
+    # No palace may be placed for this birth anywhere in the facts.
+    assert "life_palace" not in section["facts"]
+    assert "body_palace" not in section["facts"]
+    refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
+    assert "lunar" in refusals and "five tigers" in refusals
+
+
+def test_ziwei_reproduces_its_pack_vectors(fairfield_panel: dict) -> None:
+    check = _section(fairfield_panel, "ziwei_doushu")["facts"]["vector_selfcheck"]
+    assert check["ziwei.quanshu.wenchang_wenqu.zi"]["wenchang"] == "xu"
+    assert check["ziwei.quanshu.wenchang_wenqu.zi"]["wenqu"] == "chen"
+    assert check["ziwei.quanshu.wenchang_wenqu.chou"]["wenchang"] == "you"
+    assert check["ziwei.quanshu.wenchang_wenqu.chou"]["wenqu"] == "si"
+    for key, value in check.items():
+        if isinstance(value, dict) and "matches_source_example" in value:
+            assert value["matches_source_example"] is True, key
+    assert check["five_tigers_table"] == "not_implemented_by_pack_instruction"
+
+
+def test_ziwei_emits_every_double_hour_basis_and_no_meaning(
+    fairfield_panel: dict,
+) -> None:
+    section = _section(fairfield_panel, "ziwei_doushu")
+    placements = section["facts"]["hour_keyed_placements"]
+    assert set(placements) == {"true_solar_time", "clock_time", "local_mean_time"}
+    for row in placements.values():
+        assert row["wenchang_branch"] and row["wenqu_branch"]
+    # Grade D construction candidates may not become prose.
+    assert not section.get("reading")
+    assert section["evidence_grade"] == "transcription_grade"
+
+
+def test_ziwei_wenchang_wenqu_are_bijective_over_the_twelve_hours() -> None:
+    """Each anchor sweeps all twelve branches exactly once - one per double-hour."""
+    from src.engine.multitradition.ziwei import (
+        BRANCHES,
+        wenchang_branch,
+        wenqu_branch,
+    )
+
+    assert {wenchang_branch(b) for b in BRANCHES} == set(BRANCHES)
+    assert {wenqu_branch(b) for b in BRANCHES} == set(BRANCHES)
+    # The two stars coincide only where the counts meet: Mao and You.
+    coincide = {b for b in BRANCHES if wenchang_branch(b) == wenqu_branch(b)}
+    assert coincide == {"mao", "you"}
+
+
+# --- Vietnamese lunisolar calendar ----------------------------------------
+
+
+def test_vietnamese_reproduces_every_published_vector(fairfield_panel: dict) -> None:
+    """The 1984-85 worked tables are the pack's only proof; reproduce them all."""
+    check = _section(fairfield_panel, "vietnamese")["facts"][
+        "worked_example_selfcheck"
+    ]
+    assert check["all_published_vectors_reproduced"] is True
+    assert check["month11_1984"]["computed"]["start_civil_date"] == "1984-11-23"
+    assert check["month11_1984"]["computed"]["end_civil_date"] == "1984-12-21"
+    divergence = check["new_year_divergence_1985"]["computed"]
+    assert divergence["vietnamese_new_year"] == "1985-01-21"
+    assert divergence["chinese_new_year"] == "1985-02-20"
+    leap = check["intercalary_month_1985"]["computed"]
+    assert leap["is_leap_year"] is True
+    assert leap["intercalary_month_start"] == "1985-03-21"
+    assert leap["intercalary_month_end"] == "1985-04-19"
+    for key, value in check.items():
+        if isinstance(value, dict) and "matches" in value:
+            assert value["matches"] is True, key
+
+
+def test_vietnamese_uses_vietnams_civil_day_not_the_birth_places(
+    quito_panel: dict,
+) -> None:
+    """A 23:20 Quito birth is already the next day in Vietnam - and must say so."""
+    facts = _section(quito_panel, "vietnamese")["facts"]
+    dates = facts["civil_dates"]
+    assert dates["birth_place_civil_date"] == "2004-06-21"
+    assert dates["vietnamese_civil_date"] == "2004-06-22"
+    assert dates["differs_from_birth_place_day"] is True
+    assert facts["calendar_profile"]["civil_offset_hours"] == 7.0
+    assert facts["calendar_profile"]["reference_longitude"] == "105E"
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_vietnamese_lunar_date_is_well_formed(birth: BirthInput) -> None:
+    facts = _section(build_panel(birth), "vietnamese")["facts"]
+    lunar = facts["lunar_date"]
+    assert 1 <= lunar["month_number"] <= 12
+    assert 1 <= lunar["day"] <= 30
+    assert lunar["month_length_days"] in (29, 30)
+    assert isinstance(lunar["is_intercalary"], bool)
+    structure = facts["lunar_year_structure"]
+    assert structure["month_count"] in (12, 13)
+    assert structure["is_leap_year"] is (structure["month_count"] == 13)
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_vietnamese_refuses_natal_claims_and_historical_regimes(
+    birth: BirthInput,
+) -> None:
+    section = _section(build_panel(birth), "vietnamese")
+    refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
+    assert "royal" in refusals or "historical" in refusals
+    assert "tu vi" in refusals or "natal" in refusals
+    # A calendar date, never a chart: no pillars, stars or sexagenary year name.
+    for banned in ("pillars", "stars", "sexagenary_year", "day_master", "palaces"):
+        assert banned not in section["facts"]
+
+
+def test_vietnamese_ephemeris_and_civil_day_are_disclosed_as_configured(
+    fairfield_panel: dict,
+) -> None:
+    """The pack names no ephemeris and no statutory zone history; we must."""
+    section = _section(fairfield_panel, "vietnamese")
+    configured = _disclosure_blob(section, DisclosureKind.CONFIGURED_METHOD)
+    assert "ephemeris" in configured
+    assert "105" in configured
+    alternatives = [
+        alternative
+        for d in section["disclosures"]
+        for alternative in d.get("alternatives", [])
+    ]
+    assert alternatives, "configured choices must name their alternatives"
+    assert section["evidence_grade"] == "configured_method"
+
+
+# --------------------------------------------------------------------------
+# M5: Mesopotamian (Babylonian) omen-mode section
+#
+# The corpus contains no personality genre, so the section's defining property
+# is a refusal. These tests lock that refusal, the conservatism of the omen
+# matcher, and the disclosure of the matching orb.
+# --------------------------------------------------------------------------
+
+BABYLONIAN_ID = "mesopotamian_babylonian"
+EDITION_ORDER = ["Moon", "Sun", "Jupiter", "Venus", "Mercury", "Saturn", "Mars"]
+
+
+def _babylonian(panel: dict) -> dict:
+    return _section(panel, BABYLONIAN_ID)
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_babylonian_section_builds_for_every_fixture(birth: BirthInput) -> None:
+    panel = build_panel(birth)
+    assert BABYLONIAN_ID in {s["tradition_id"] for s in panel["sections"]}
+    section = _babylonian(panel)
+    assert not section.get("error"), section.get("error")
+    assert section["facts"], "no calculation emitted"
+    assert section["disclosures"], "a section hiding its conventions"
+    assert section.get("reading"), "no reading emitted"
+    # The calendar projection and the matching orb are product choices.
+    assert section["evidence_grade"] == "configured_method"
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_babylonian_refuses_the_personality_genre(birth: BirthInput) -> None:
+    """The defining refusal: the surviving corpus has no personality genre."""
+    section = _babylonian(build_panel(birth))
+    refusals = [
+        d for d in section["disclosures"] if d["kind"] == DisclosureKind.REFUSAL.value
+    ]
+    genre = [d for d in refusals if "genre" in d["subject"].lower()]
+    assert genre, "no refusal names the genre boundary"
+    detail = genre[0]["detail"].lower()
+    assert "no personality genre" in detail
+    assert "cannot be turned into one" in detail
+    # The other refusals the spec's refusal list requires.
+    subjects = " ".join(d["subject"].lower() for d in refusals)
+    for required in ("prediction", "natal synthesis", "witness blending",
+                     "commentary layer"):
+        assert required in subjects, f"missing refusal: {required}"
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_babylonian_reading_makes_no_personality_claim(birth: BirthInput) -> None:
+    """No character claim, and no second-person address to a native at all."""
+    import re
+
+    section = _babylonian(build_panel(birth))
+    reading = section["reading"]
+    blob = " ".join(reading)
+
+    # Second-person address is the tell of a personality reading.
+    assert not re.search(r"\b(you|your|yours|yourself)\b", blob, re.IGNORECASE), (
+        "the Babylonian section must never address a native"
+    )
+    assert not re.search(
+        r"\b(your|the native's|his|her|their)\s+"
+        r"(character|personality|temperament|disposition|traits?)\b",
+        blob,
+        re.IGNORECASE,
+    ), "a personality claim leaked into the Babylonian reading"
+    # The genre boundary is stated in the reading itself, not only in metadata.
+    lowered = blob.lower()
+    assert "kings" in lowered and "lands" in lowered
+    assert "no protasis that takes a birth as input" in lowered
+    assert "personality reading" in lowered
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_babylonian_never_asserts_a_customer_prediction(birth: BirthInput) -> None:
+    """Every surfaced clause stays a historical artifact, for every fixture."""
+    facts = _babylonian(build_panel(birth))["facts"]
+    matching = facts["omen_matching"]
+    surfaced = matching["matched"] + matching["calendar_selector_overlap"]
+    for record in surfaced:
+        assert record["customer_prediction"] is False, record["rule_id"]
+        assert record["birth_input_eligible"] is False, record["rule_id"]
+        assert record["attribution"], record["rule_id"]
+        assert "not about a person" in record["genre_label"]
+    judgments = facts["horoscope_judgment_clauses"]
+    assert judgments["encoded_clause_count"] == 21
+    assert judgments["executable_from_birth_input"] == 0
+    assert judgments["with_resolved_trigger"] == 0
+    for clause in judgments["clauses"]:
+        assert clause["customer_prediction"] is False, clause["rule_id"]
+        assert clause["attribution"], clause["rule_id"]
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_babylonian_matching_orb_is_disclosed_and_accounted(
+    birth: BirthInput,
+) -> None:
+    """No silent default: the orb is stated and every rule lands in a bucket."""
+    section = _babylonian(build_panel(birth))
+    configured = [
+        d
+        for d in section["disclosures"]
+        if d["kind"] == DisclosureKind.CONFIGURED_METHOD.value
+    ]
+    orb = [d for d in configured if "orb" in d["subject"].lower()]
+    assert orb, "the matching orb must be disclosed"
+    assert orb[0]["alternatives"], "the orb must name the widenings it refused"
+    # The calendar projection and the tropical/sidereal gap are disclosed too.
+    blob = _disclosure_blob(section, DisclosureKind.CONFIGURED_METHOD)
+    assert "calendar" in blob and "projection" in blob
+    assert "sidereal" in blob and "tropical" in blob
+
+    matching = section["facts"]["omen_matching"]
+    assert matching["configured_orb"]
+    assert matching["rules_evaluated"] == 72
+    accounted = (
+        matching["matched_count"]
+        + matching["non_executable_by_pack"]
+        + matching["unevaluable_count"]
+        + matching["not_matched_count"]
+    )
+    assert accounted == matching["rules_evaluated"], "a rule vanished silently"
+    # Calendar overlap is reported, and reported as *not* a match.
+    assert "Not matches" in matching["calendar_selector_overlap_note"]
+
+
+def test_babylonian_fairfield_matches_no_omen(fairfield_panel: dict) -> None:
+    """1996-08-13 carries no eclipse, so the corpus has nothing to say."""
+    facts = _babylonian(fairfield_panel)["facts"]
+    projection = facts["babylonian_date_projection"]
+    assert projection["status"] == "modern_projection_not_a_historical_date"
+    assert projection["month"] == "abu" and projection["day"] == 27
+    assert facts["eclipse_condition"]["lunar_eclipse_in_progress"] is False
+    matching = facts["omen_matching"]
+    assert matching["matched_count"] == 0
+    assert matching["calendar_selector_overlap"] == []
+    assert "no umbral lunar eclipse" in matching["no_match_reason"]
+
+
+def test_babylonian_paris_projects_a_day_fourteen_full_moon() -> None:
+    """The projection must land the full moon on the middle of the month."""
+    facts = _babylonian(build_panel(PARIS_1931))["facts"]
+    projection = facts["babylonian_date_projection"]
+    assert projection["month"] == "shabatu"
+    assert projection["day"] == 14
+    assert facts["lunar_condition"]["phase"] == "opposition, full moon"
+    # Day 14 with no eclipse: the protases naming it are surfaced, not matched.
+    matching = facts["omen_matching"]
+    assert matching["matched_count"] == 0
+    assert matching["calendar_selector_overlap"], "day-14 protases not surfaced"
+
+
+def test_babylonian_matcher_quotes_and_attributes_every_match() -> None:
+    """Drive the matcher with a sky that does satisfy encoded protases."""
+    from src.engine.multitradition.babylonian import evaluate_rules
+
+    eclipse_sky = {
+        "phenomenon": "lunar_eclipse",
+        "babylonian_month": "simanu",  # SAA 8 writes this month `sivan`
+        "babylonian_day": 15,
+        "watch": "evening",
+        "sets_while_eclipsed": False,
+    }
+    result = evaluate_rules(eclipse_sky)
+    assert result["matched_count"] >= 5, "the matching path never fires"
+    for record in result["matched"]:
+        assert record["apodosis_clauses"], record["rule_id"]
+        assert "[" in record["attribution"], "no edition id in the citation"
+        assert record["concerns"], record["rule_id"]
+        assert "kings, lands" in record["genre_label"]
+        assert record["customer_prediction"] is False
+        assert record["birth_input_eligible"] is False
+    # Rules the packs mark non-executable are never matched.
+    matched_ids = {record["rule_id"] for record in result["matched"]}
+    assert "babylonian.eae20.im.xiii.schematic_days_destruction" not in matched_ids
+    assert "babylonian.saa8.535.rev12.evening_watch_term" not in matched_ids
+    # A recensional variant is carried beside its primary, never merged into it.
+    revolt = next(
+        record for record in result["matched"]
+        if record["rule_id"].endswith("sivan15_revolt_variant")
+    )
+    assert revolt["recensional_variant"]
+    assert revolt["recensional_variant"] not in revolt["apodosis_clauses"]
+
+
+def test_babylonian_reports_positions_in_the_editions_own_order(
+    fairfield_panel: dict,
+) -> None:
+    """Rochberg's table order, sign and degree only - the corpus has no more."""
+    facts = _babylonian(fairfield_panel)["facts"]
+    positions = facts["positions_in_edition_order"]
+    assert [item["body"] for item in positions] == EDITION_ORDER
+    for item in positions:
+        assert item["zodiac"] == "tropical"
+        assert 0.0 <= item["degree_in_sign"] < 30.0
+        assert set(item) == {"body", "sign", "degree_in_sign", "zodiac"}
+    for absent in ("houses", "aspects", "rulerships", "sect"):
+        assert absent in facts["not_recorded_by_this_corpus"]
+        assert absent not in facts
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_panel_still_builds_every_section_with_babylonian_wired(
+    birth: BirthInput,
+) -> None:
+    panel = build_panel(birth)
+    failures = {
+        s["tradition_id"]: s["error"] for s in panel["sections"] if s.get("error")
+    }
+    assert not failures, f"sections failed: {failures}"
+    ids = [s["tradition_id"] for s in panel["sections"]]
+    assert len(ids) == len(set(ids)), "a tradition id is wired twice"
+    assert BABYLONIAN_ID in ids
+    for previously_shipped in (
+        "western_traditional", "indian_jyotisha", "chinese_bazi", "tibetan",
+        "maya", "nahua_central_mexican",
+    ):
+        assert previously_shipped in ids

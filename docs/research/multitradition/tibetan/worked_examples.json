@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "tibetan",
+  "source_registry_ids": [
+    "tibetan_janson_calendar_mathematics_2014",
+    "tibetan_calendrical_calculations_phugpa",
+    "tibetan_mentseekhang_calendar_almanac"
+  ],
+  "status": "encoded_runnable",
+  "notes": "The year-character series is verifiable today against two independent published anchors that no source disputes. The Phugpa month/day calculation has a validated exact-rational implementation but its own publication contract requires almanac conformance before dates are presented, so those examples stay inventory_only and name the specific gate.",
+  "examples": [
+    {
+      "example_id": "tibetan.year_character.rabjung_anchor",
+      "work": "Rabjung era, first year",
+      "location": "1027 CE, the year the first rabjung begins",
+      "description": "The canonical anchor of the Tibetan sexagenary era. Every published rabjung table starts here, so an implementation that misses it is wrong at the origin.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "tibetan.rabjung.1027_element",
+            "kind": "calculation_value",
+            "author_states": "1027 CE is a Fire year.",
+            "engine_field": "year_1027.element",
+            "expected_value": "Fire",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "tibetan.rabjung.1027_animal",
+            "kind": "calculation_value",
+            "author_states": "1027 CE is a Rabbit year.",
+            "engine_field": "year_1027.animal",
+            "expected_value": "Rabbit",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "tibetan.rabjung.1027_polarity",
+            "kind": "calculation_value",
+            "author_states": "1027 CE is a female (yin) year.",
+            "engine_field": "year_1027.polarity",
+            "expected_value": "female",
+            "comparison": "exact"
+          }
+        ],
+        "quotation": "The first rabjung begins in the female Fire-Rabbit year, 1027 CE."
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "tibetan.year_character.jiazi_crosscheck",
+      "work": "Sexagenary cycle, independent Chinese anchor",
+      "location": "1984 CE, a Jia-Zi year",
+      "description": "Tibetan and Chinese share one sexagenary cycle, differing only in naming. Checking the Tibetan series against a Chinese anchor 957 years from the rabjung origin proves the series is not merely fitted to its own starting point. This example exists because an earlier implementation used a private element anchor and returned Wood Mouse for 1996 instead of Fire Mouse - it passed a 1027 check and failed here.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "tibetan.crosscheck.1984_element",
+            "kind": "calculation_value",
+            "author_states": "1984 CE is Jia-Zi: a Wood year.",
+            "engine_field": "year_1984.element",
+            "expected_value": "Wood",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "tibetan.crosscheck.1984_animal",
+            "kind": "calculation_value",
+            "author_states": "1984 CE is Jia-Zi: a Mouse (Rat) year.",
+            "engine_field": "year_1984.animal",
+            "expected_value": "Mouse",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "tibetan.crosscheck.1996_element",
+            "kind": "calculation_value",
+            "author_states": "1996 CE is Bing-Zi: a Fire Mouse year, not Wood.",
+            "engine_field": "year_1996.element",
+            "expected_value": "Fire",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "tibetan.crosscheck.1996_animal",
+            "kind": "calculation_value",
+            "author_states": "1996 CE is a Mouse year.",
+            "engine_field": "year_1996.animal",
+            "expected_value": "Mouse",
+            "comparison": "exact"
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "tibetan.year_character.cycle_closure",
+      "work": "Sexagenary structure, consequences",
+      "location": "Structural properties of a 60-year cycle over 5 elements and 12 animals",
+      "description": "Each element must govern exactly two consecutive years, and each element/animal pair must recur exactly once per sixty years. An off-by-one in the element pairing satisfies neither.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "tibetan.structure.sixty_unique_pairs",
+            "kind": "calculation_value",
+            "author_states": "Sixty consecutive years yield sixty distinct element/animal/polarity characters.",
+            "engine_field": "sixty_unique_characters",
+            "expected_value": true,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "tibetan.structure.element_pairs",
+            "kind": "calculation_value",
+            "author_states": "Each element governs exactly twelve years per sixty-year cycle, in consecutive male/female pairs.",
+            "engine_field": "each_element_twelve_years",
+            "expected_value": true,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "tibetan.structure.polarity_alternates",
+            "kind": "calculation_value",
+            "author_states": "Polarity alternates strictly year by year.",
+            "engine_field": "polarity_strictly_alternates",
+            "expected_value": true,
+            "comparison": "exact"
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "tibetan.phugpa.almanac_conformance",
+      "work": "Phugpa calendar, month and lunar day",
+      "location": "Janson 2014 (hash-pinned); Men-Tsee-Khang almanacs",
+      "description": "The Phugpa pack computes months and lunar days with exact rational arithmetic across three epoch profiles. Its own publication contract requires comparison against purchased consecutive Men-Tsee-Khang almanacs before dates are shown, and sets institutional_conformance false until then.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "tibetan.phugpa.pending_almanac",
+            "kind": "calculation_value",
+            "author_states": "Pending: compare computed dates against at least three, then ten, consecutive Men-Tsee-Khang almanacs, with qualified Tibetan-language review.",
+            "note": "Placeholder recording the pack's own stated gate. Not runnable."
+          }
+        ]
+      },
+      "encoding_status": "inventory_only",
+      "blockers": [
+        "Men-Tsee-Khang almanacs are purchased physical publications; none is in the repository.",
+        "The pack's publication_contract sets institutional_conformance false and requires this comparison before dates are presented.",
+        "Qualified Tibetan-language review not obtained."
+      ]
+    }
+  ]
+}

@@ -9,7 +9,18 @@ from __future__ import annotations
 
 from typing import Any
 
-from . import bazi, mesoamerican, tibetan, timebase, vedic, western
+from . import (
+    babylonian,
+    bazi,
+    egyptian,
+    mesoamerican,
+    tibetan,
+    timebase,
+    vedic,
+    vietnamese,
+    western,
+    ziwei,
+)
 from .types import BirthInput, TraditionSection
 
 PANEL_VERSION = "0.1.0"
@@ -93,6 +104,26 @@ def build_panel(birth: BirthInput) -> dict[str, Any]:
             lambda: mesoamerican.build_nahua(birth, bases),
             "nahua_central_mexican",
             "Nahua tonalpohualli",
+        ),
+        _guard(
+            lambda: babylonian.build(birth, bases, tropical_chart),
+            "mesopotamian_babylonian",
+            "Mesopotamian (Babylonian omen corpus)",
+        ),
+        _guard(
+            lambda: egyptian.build(birth, bases),
+            "pharaonic_egyptian",
+            "Pharaonic Egyptian civil calendar",
+        ),
+        _guard(
+            lambda: ziwei.build(birth, bases),
+            "ziwei_doushu",
+            "Zi Wei Dou Shu (Purple Star)",
+        ),
+        _guard(
+            lambda: vietnamese.build(birth, bases),
+            "vietnamese",
+            "Vietnamese lunisolar calendar",
         ),
     ]
 
