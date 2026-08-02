@@ -139,7 +139,95 @@ def _jyotisha_engine_output(example: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
-ENGINE_ADAPTERS = {"maya": _maya_engine_output, "jyotisha": _jyotisha_engine_output}
+def _bazi_engine_output(example: dict[str, Any]) -> dict[str, Any] | None:
+    """Structural consequences of the BaZi tables, plus the day anchor."""
+    sys.path.insert(0, str(REPO_ROOT))
+    from src.engine.multitradition.bazi import (  # noqa: PLC0415
+        BRANCH_ELEMENT,
+        COMMAND_STATES,
+        DAY_ANCHOR_INDEX,
+        DAY_ANCHOR_JDN,
+        HIDDEN_STEMS,
+        STEM_ELEMENT,
+        _pair,
+        _stems,
+        seasonal_state,
+        ten_god,
+    )
+
+    eid = example["example_id"]
+
+    if eid == "bazi.anchor.independent_crosscheck":
+        idx_2000 = (DAY_ANCHOR_INDEX + (2451545 - DAY_ANCHOR_JDN)) % 60
+        idx_1949 = (DAY_ANCHOR_INDEX + (2433191 - DAY_ANCHOR_JDN)) % 60
+        stem, branch = _pair(idx_2000)
+        return {
+            "anchor_1949_index": idx_1949,
+            "anchor_2000_index": idx_2000,
+            "anchor_2000_pair": f"{stem}/{branch}",
+        }
+
+    if eid == "bazi.hidden_stems.main_qi_identity":
+        return {
+            "main_qi_matches_branch_element_all_12": all(
+                STEM_ELEMENT[stems[0]][0] == BRANCH_ELEMENT[branch]
+                for branch, stems in HIDDEN_STEMS.items()
+            ),
+            "pure_branch_count": sum(
+                1 for stems in HIDDEN_STEMS.values() if len(stems) == 1
+            ),
+        }
+
+    if eid == "bazi.ten_gods.relation_closure":
+        stems = _stems()
+        return {
+            "ten_distinct_relations_all_day_masters": all(
+                len({ten_god(dm, other)[0] for other in stems}) == 10
+                for dm in stems
+            ),
+            "self_relation_all_stems": (
+                "bi_jian"
+                if all(ten_god(s, s)[0] == "bi_jian" for s in stems)
+                else "MISMATCH"
+            ),
+            "same_element_opposite_polarity_all_stems": (
+                "jie_cai"
+                if all(
+                    ten_god(a, b)[0] == "jie_cai"
+                    for a in stems
+                    for b in stems
+                    if STEM_ELEMENT[a][0] == STEM_ELEMENT[b][0]
+                    and STEM_ELEMENT[a][1] != STEM_ELEMENT[b][1]
+                )
+                else "MISMATCH"
+            ),
+        }
+
+    if eid == "bazi.seasonal.command_closure":
+        elements = ["Wood", "Fire", "Earth", "Metal", "Water"]
+        branches = list(HIDDEN_STEMS)
+        bijective = all(
+            sorted(seasonal_state(e, b) for e in elements) == sorted(COMMAND_STATES)
+            for b in branches
+        )
+        from src.engine.multitradition.bazi import SEASON_ELEMENT  # noqa: PLC0415
+
+        season_wang = all(
+            seasonal_state(SEASON_ELEMENT[b], b).startswith("wang") for b in branches
+        )
+        return {
+            "seasonal_state_bijection_all_12_months": bijective,
+            "season_element_always_wang": season_wang,
+        }
+
+    return None
+
+
+ENGINE_ADAPTERS = {
+    "maya": _maya_engine_output,
+    "jyotisha": _jyotisha_engine_output,
+    "bazi": _bazi_engine_output,
+}
 
 
 def run(tradition_filter: str | None = None) -> dict[str, Any]:

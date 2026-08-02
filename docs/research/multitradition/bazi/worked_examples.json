@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "chinese_bazi",
+  "source_registry_ids": [
+    "chinese_hko_stems_branches",
+    "chinese_hko_24_solar_terms_2027",
+    "bazi_sanming_tonghui_wikisource",
+    "bazi_yuanhai_ziping_wikisource"
+  ],
+  "status": "encoded_runnable",
+  "notes": "BaZi's classical case charts cannot yet serve as golden examples: the Sanming Tonghui work page warns that later commercial printings INSERTED late-Ming official charts, so any case chart is untrustworthy until edition control resolves the interpolation problem. That is a documented finding, not an assumption. What CAN be verified now are the structural consequences of the doctrine itself - relations that must hold for every chart if the tables are correct - plus the sexagenary day anchor against an independent published date.",
+  "examples": [
+    {
+      "example_id": "bazi.anchor.independent_crosscheck",
+      "work": "Sexagenary day count, independent anchor verification",
+      "location": "Two published day-pillar identities separated by 18354 days",
+      "description": "The day anchor is a product choice (no concordance source is registered), so it must reproduce a SECOND independently published day identity. 1949-10-01 is a Jia-Zi day; 2000-01-01 is a Wu-Wu day. An anchor fitted to one and wrong on the other would be caught here.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "bazi.anchor.jiazi_1949",
+            "kind": "calculation_value",
+            "author_states": "JDN 2433191 (1949-10-01) is a Jia-Zi day, sexagenary index 0.",
+            "engine_field": "anchor_1949_index",
+            "expected_value": 0,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "bazi.anchor.wuwu_2000",
+            "kind": "calculation_value",
+            "author_states": "JDN 2451545 (2000-01-01) is a Wu-Wu day, sexagenary index 54.",
+            "engine_field": "anchor_2000_index",
+            "expected_value": 54,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "bazi.anchor.wuwu_2000_pair",
+            "kind": "calculation_value",
+            "author_states": "Index 54 is the pair Wu-Wu.",
+            "engine_field": "anchor_2000_pair",
+            "expected_value": "wu_stem/wu_branch",
+            "comparison": "exact"
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "bazi.hidden_stems.main_qi_identity",
+      "work": "Hidden-stem doctrine, structural consequence",
+      "location": "Sanming Tonghui juan 1, stem-branch and Na Yin material",
+      "description": "Schools differ on middle and residual qi, but no school disputes that a branch's MAIN hidden stem carries the branch's own element. If that identity fails for any of the twelve branches, the hidden-stem table is corrupt - and every month-command and rooting judgment built on it is void.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "bazi.hidden.main_qi_matches_branch_element",
+            "kind": "calculation_value",
+            "author_states": "For all twelve branches, the element of the main hidden stem equals the element of the branch itself.",
+            "engine_field": "main_qi_matches_branch_element_all_12",
+            "expected_value": true,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "bazi.hidden.pure_branches",
+            "kind": "calculation_value",
+            "author_states": "The four cardinal branches Zi, Mao, You each carry exactly one hidden stem (pure qi).",
+            "engine_field": "pure_branch_count",
+            "expected_value": 3,
+            "comparison": "exact"
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "bazi.ten_gods.relation_closure",
+      "work": "Ten-God doctrine, structural consequence",
+      "location": "Yuanhai Ziping, Ten-God relation families",
+      "description": "The Ten Gods are defined by five element relations crossed with polarity agreement. Structural consequences: every day master must generate exactly ten distinct relations across the ten stems; a stem must relate to itself as Friend (bi jian); and the same-element opposite-polarity stem must be Rob Wealth (jie cai).",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "bazi.tengod.ten_distinct_per_day_master",
+            "kind": "calculation_value",
+            "author_states": "Each of the ten possible day masters yields ten distinct Ten-God relations across the ten stems.",
+            "engine_field": "ten_distinct_relations_all_day_masters",
+            "expected_value": true,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "bazi.tengod.self_is_friend",
+            "kind": "calculation_value",
+            "author_states": "A stem relates to itself as Friend (bi jian).",
+            "engine_field": "self_relation_all_stems",
+            "expected_value": "bi_jian",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "bazi.tengod.same_element_opposite_polarity",
+            "kind": "calculation_value",
+            "author_states": "The same-element, opposite-polarity stem is Rob Wealth (jie cai).",
+            "engine_field": "same_element_opposite_polarity_all_stems",
+            "expected_value": "jie_cai",
+            "comparison": "exact"
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "bazi.seasonal.command_closure",
+      "work": "Seasonal command doctrine, structural consequence",
+      "location": "Yuanhai Ziping, month-command and seasonal-depth material",
+      "description": "In any month, the five elements must occupy the five command states exactly once each - one prosperous, one assisting, one resting, one imprisoned, one dead. A table that assigns two elements the same state, or leaves a state empty, is wrong.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "bazi.seasonal.bijection_all_months",
+            "kind": "calculation_value",
+            "author_states": "For each of the twelve month branches, the five elements map onto the five command states bijectively.",
+            "engine_field": "seasonal_state_bijection_all_12_months",
+            "expected_value": true,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "bazi.seasonal.season_element_is_prosperous",
+            "kind": "calculation_value",
+            "author_states": "In every month the season's own element stands prosperous (wang).",
+            "engine_field": "season_element_always_wang",
+            "expected_value": true,
+            "comparison": "exact"
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "bazi.sanming.case_charts_inventory",
+      "work": "Sanming Tonghui case charts",
+      "location": "Wikisource juan 1-9; juan 10-12 absent",
+      "description": "Classical case charts exist in the later juan, but the work page's own bibliographic note warns that later commercial printings inserted charts of late-Ming officials. Until a dated scan establishes which charts belong to the received text, these cannot serve as golden examples.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "bazi.sanming.pending_edition_control",
+            "kind": "topical_verdict",
+            "author_states": "Pending edition control: identify which case charts are original to the received text and which are later insertions.",
+            "note": "Placeholder recording the blocked task. Not runnable."
+          }
+        ]
+      },
+      "encoding_status": "inventory_only",
+      "blockers": [
+        "Volumes 10-12 are absent from the Wikisource transcription.",
+        "The work page documents inserted late-Ming official charts in later commercial printings.",
+        "No dated page-image scan has been aligned to the transcription."
+      ]
+    }
+  ]
+}
