@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "japanese_sukuyodo",
+  "pack_id": "sukuyodo_xiuyao_jing_t1299_v1",
+  "purpose": "Hash-pinned access record for the Taisho witnesses that this pack's rules cite. Every rule citation resolves to a line key in one of the *_lines.txt renderings recorded here.",
+  "not_onmyodo": "Sukuyodo is the Buddhist astral tradition transmitted through Chinese Buddhist translation from Indian and Iranian material. It is not Onmyodo. The repository's separate `onmyodo/` track covers the yin-yang and five-phase court tradition of the Onmyoryo. No source, rule, or vector may cross between the two tracks.",
+  "retrieval": {
+    "date": "2026-08-02",
+    "method": "HTTPS GET of CBETA's TEI P5 corpus as published on GitHub",
+    "base_url": "https://raw.githubusercontent.com/cbeta-org/xml-p5/master/T/T21",
+    "reproduce": "python docs/research/multitradition/sukuyodo/fetch_sukuyo_sources.py --verify"
+  },
+  "rights_note": {
+    "cbeta_header_statement": "Available for non-commercial use when distributed with this header intact.",
+    "observed_where": "TEI header, fileDesc/publicationStmt/availability, present verbatim in each stored XML file",
+    "distributor": "CBETA (Chinese Buddhist Electronic Text Association)",
+    "underlying_edition": "Taisho shinshu daizokyo (Taisho Tripitaka), volume 21",
+    "assessment": "NOT assumed public domain. The transcription carries CBETA's stated non-commercial condition, and the Taisho edition itself carries its own publisher terms. The stored XML retains the CBETA header unmodified so the condition travels with the file. Research use inside this repository is within the stated condition; any customer-facing reproduction of these transcriptions requires a separate rights review.",
+    "consequence": "Quotation in research documents is permitted and is done with full passage addresses. Redistribution of the transcription as product content is not authorized by this manifest."
+  },
+  "artifacts": [
+    {
+      "file": "T21n1299.xml",
+      "work": "文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經",
+      "short_title": "Xiuyao jing / Sukuyokyo",
+      "taisho": "T21 no. 1299",
+      "attributed_translator": "不空 Amoghavajra (Bukong), rendered 759 CE (乾元二年)",
+      "attributed_annotator": "楊景風 Yang Jingfeng, revised annotation 764 CE (廣德二年)",
+      "extent": "2 fascicles (卷上 T21.0387a02-0393c10; 卷下 T21.0393c11-0399c19)",
+      "format": "TEI P5 XML",
+      "bytes": 386505,
+      "sha256": "259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b",
+      "role": "controlling text for this pack"
+    },
+    {
+      "file": "T21n1299_lines.txt",
+      "derived_from": "T21n1299.xml",
+      "description": "Line-addressed plain text. Key format T21n1299_p0391b06 = Taisho vol. 21, text 1299, page 391, column b, line 06. Apparatus variants are dropped in favour of the lemma reading; notes, mulu and anchors are dropped.",
+      "lines": 1052,
+      "bytes": 73231,
+      "sha256": "efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb",
+      "role": "citation surface for every rule in sukuyo_rule_manifest.json"
+    },
+    {
+      "file": "T21n1308.xml",
+      "work": "七曜攘災決",
+      "short_title": "Qiyao rangzai jue",
+      "taisho": "T21 no. 1308",
+      "attributed_compiler": "西天竺國婆羅門僧金俱吒 (a brahmin monk of West India, name transcribed 金俱吒)",
+      "extent": "3 fascicles (上/中/下), T21.0426b17-0459a",
+      "format": "TEI P5 XML",
+      "bytes": 280824,
+      "sha256": "464d38d06fb926a7060866d275058802244bef5f4602bfd0b58dc97f59594df8",
+      "role": "contrast witness: planetary apotropaic procedure, mansion-degree apportionment, planetary ephemeris tables, and a twelve-place scheme"
+    },
+    {
+      "file": "T21n1308_lines.txt",
+      "derived_from": "T21n1308.xml",
+      "lines": 975,
+      "bytes": 64059,
+      "sha256": "50b9c1481eb25c8eefc97962602cb45f142039fcbe71a2a9df6983e627937a7d",
+      "role": "citation surface"
+    },
+    {
+      "file": "T21n1311.xml",
+      "work": "梵天火羅九曜",
+      "short_title": "Bontenkara kuyo",
+      "taisho": "T21 no. 1311",
+      "attributed_author": "唐 一行述 (attributed to Yixing; attribution is a transmission claim, not established authorship)",
+      "extent": "1 fascicle, T21.0459b01-0462",
+      "format": "TEI P5 XML",
+      "bytes": 91994,
+      "sha256": "15cca1e14d418ee607ce4ef2b446950783ce5ce33636b2027eb95cc35cc45fc2",
+      "role": "second contrast witness: opens with 二十八宿 and runs a nine-luminary (九曜) age cycle, i.e. a different scheme from T1299's 27-mansion cycle. Acquired to prove the schemes are separable, not to be merged into them."
+    },
+    {
+      "file": "T21n1311_lines.txt",
+      "derived_from": "T21n1311.xml",
+      "lines": 309,
+      "bytes": 17246,
+      "sha256": "e4f2e978c63ded912f163b6a06388ac7a6a6987b1bb124dd9fa4cd09e6e6ae47",
+      "role": "citation surface"
+    }
+  ],
+  "attempted_and_failed": [
+    {
+      "target": "SAT Daizokyo Text Database (University of Tokyo)",
+      "url": "https://21dzk.l.u-tokyo.ac.jp/SAT/ddb-sat2.php?mode=detail&nonum=1299&vol=21",
+      "date": "2026-08-02",
+      "result": "HTTP 200 with a 57-byte body containing an unsubstituted SQL fragment (`select minn,maxn from minmax where num =  and num2 = ''`). The parameter names guessed for this endpoint are wrong and the service leaked its query template instead of erroring.",
+      "consequence": "No SAT text was retrieved and none is cited. SAT is not required: CBETA serves the same Taisho text with the same page/column/line addresses, and both were retrieved successfully.",
+      "would_unblock": "The current SAT API parameter documentation, or the SAT2018 permalink form (satdb2018pre.php with a `useid` of the form 1299_,21,0387a01), which would allow an independent second transcription for collation against CBETA."
+    },
+    {
+      "target": "Japanese Sukuyodo practitioner manuals (e.g. 宿曜占文抄, 宿曜運命勘録)",
+      "date": "2026-08-02",
+      "result": "Not retrievable as full text. NDL Search returns catalogue and article records only.",
+      "consequence": "This pack contains NO Japanese-side Sukuyodo rule. Everything encoded is from the Chinese Taisho text that the Japanese tradition read. The Japanese reception layer is declared source_gated, not silently assumed identical.",
+      "would_unblock": "A digitized or edited text of 『宿曜占文抄』 (Kozan-ji holding, discussed in Udai Takafumi, 'Enkeishiki Hokuto mandara ko', NDL record R000000004-I023457152) or of a dated Sukuyodo divination record (kanmon) from the Insei/Kamakura period corpus surveyed in Akazawa Haruhiko, 『院政期・鎌倉期の宿曜道と宿曜師』 (2021, NDL record R100000136-I1010009142284836736)."
+    }
+  ],
+  "search_leads_recorded_not_used": {
+    "query": "https://ndlsearch.ndl.go.jp/api/opensearch?title=%E5%AE%BF%E6%9B%9C&cnt=20",
+    "date": "2026-08-02",
+    "status": "search_metadata_only",
+    "note": "Catalogue metadata only. None of these was opened, and none is cited by any rule. They are recorded because they name the specific documents and specialists that would lift this pack's review gate.",
+    "items": [
+      {"title": "院政期・鎌倉期の宿曜道と宿曜師", "author": "赤澤春彦", "year": 2021, "why": "the standard modern study of the Japanese Sukuyodo institution and its practitioners"},
+      {"title": "陰陽道・宿曜道別立隆盛の淵源―〈術数文化〉の視点から", "author": "水口幹記", "year": 2021, "why": "directly argues the separate establishment of Onmyodo and Sukuyodo; the citation that would let this repository state the disambiguation on external authority rather than on its own reading"},
+      {"title": "陰陽師VS宿曜師 暦の利権をめぐる争い", "author": "繁田信一", "why": "on the institutional rivalry between onmyoji and sukuyoshi over calendar authority"},
+      {"title": "円形式北斗曼荼羅考 : 高山寺蔵『宿曜占文抄』をめぐって", "author": "宇代貴文", "why": "names the Kozan-ji Sukuyo senmonsho manuscript, the highest-value Japanese-side target"},
+      {"title": "漢訳アビダルマにおける宇宙論と『宿曜経』", "author": "Jeffrey Kotyk", "year": 2021, "why": "Kotyk is the working specialist on the Xiuyao jing's transmission; the natural independent reviewer for this pack"}
+    ]
+  },
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "interpretation_eligible": false,
+    "birth_reading_enabled": false,
+    "specialist_review_complete": false,
+    "second_independent_encoder": false
+  }
+}

@@ -16,6 +16,8 @@ SCHEMA_PATH = ROOT / "engine_coverage_manifest.schema.json"
 REGISTRY_PATH = ROOT / "source_registry.json"
 
 EXPECTED_TRACK_IDS = {
+    "jaimini",
+    "japanese_sukuyodo",
     "indian_jyotisha",
     "chinese_bazi",
     "ziwei_doushu",
@@ -39,6 +41,8 @@ EXPECTED_TRACK_IDS = {
 }
 
 EXPECTED_AUDIT_DIRECTORIES = {
+    "jaimini",
+    "sukuyodo",
     "babylonian",
     "bazi",
     "burmese",
@@ -62,8 +66,8 @@ EXPECTED_AUDIT_DIRECTORIES = {
 }
 
 EXPECTED_STATUS_COUNTS = {
-    "research_verified": 18,
-    "source_limited": 53,
+    "research_verified": 20,
+    "source_limited": 54,
     "not_implemented": 3,
 }
 

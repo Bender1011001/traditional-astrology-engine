@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-08-01",
+  "updated": "2026-08-02",
   "purpose": "Fail-closed inventory for every tradition and engine branch named in the original culture map.",
   "status_vocabulary": {
     "production_verified": "Calculation, interpretation, provenance, validation, rights, cultural review, and publication gates all pass.",
@@ -1527,6 +1527,85 @@
             "inscription corpus",
             "language and archaeological review",
             "proof against later lunar-mansion back-projection"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "jaimini",
+      "display_name": "Jaimini (sign-aspect Jyotisha)",
+      "registry_tradition_ids": [
+        "indian_jaimini"
+      ],
+      "source_audit": "jaimini/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "jaimini_chara_karaka",
+          "name": "Chara karaka assignment and the seven-or-eight candidate fork",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "jaimini/source_audit.md",
+            "jaimini/jaimini_rule_manifest.json",
+            "jaimini/jaimini_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "resolve the seven-vs-eight karaka candidate set (both encoded, neither picked)",
+            "Devanagari transcription of the Jammu Nilakantha folios",
+            "independent Sanskrit review of restorations carrying doctrinal weight"
+          ]
+        },
+        {
+          "module_id": "jaimini_arudha_and_sign_dasha",
+          "name": "Arudha padas, special lagnas, and sign-based dashas",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "jaimini/source_audit.md"
+          ],
+          "remaining_gates": [
+            "page images for the Abhyankar critical edition",
+            "commentator precedence where twelve disagreements are recorded",
+            "fourteen worked karaka charts as a validation suite"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "japanese_sukuyodo",
+      "display_name": "Japanese Sukuyodo (Buddhist mansion astrology)",
+      "registry_tradition_ids": [
+        "japanese_sukuyodo"
+      ],
+      "source_audit": "sukuyodo/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "sukuyo_mansion_system",
+          "name": "Birth mansion and mansion-relationship categories",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "sukuyodo/source_audit.md",
+            "sukuyodo/sukuyo_rule_manifest.json",
+            "sukuyodo/sukuyo_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "named lunisolar calendar regime (birth mansion is uncomputable for a civil date without it; fails closed)",
+            "independent Classical Chinese and Buddhist-astral-science review plus blind second encoder",
+            "Taisho facsimile for corrupt Rakshasa-day graphs and T1308 grid tables",
+            "Japanese layer (Kozan-ji Sukuyo senmonsho or a dated kanmon) - this track is currently the Chinese text Sukuyodo read, not Sukuyodo practice"
           ]
         }
       ]

@@ -1,0 +1,1126 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "japanese_sukuyodo",
+  "source_pack_id": "sukuyodo_xiuyao_jing_t1299_v1",
+  "status": "research_only; every expectation below was evaluated against the hash-pinned Taisho text or computed from the canonical order the text states. Nothing here is implemented in the live engine.",
+  "source_ids": [
+    "sukuyodo_xiuyao_jing_t1299_cbeta",
+    "sukuyodo_qiyao_rangzai_jue_t1308_cbeta",
+    "sukuyodo_bontenkara_kuyo_t1311_cbeta"
+  ],
+  "vectors": [
+    {
+      "vector_id": "sukuyo.v.operative_cycle_is_27",
+      "rule_ids": [
+        "sukuyo.mansion.operative_cycle_is_27",
+        "sukuyo.mansion.canonical_order"
+      ],
+      "inputs": {
+        "question": "how many mansions does T1299's operative cycle contain"
+      },
+      "expected": {
+        "cycle_length": 27,
+        "first_mansion": "昴",
+        "last_mansion": "胃",
+        "contains_niu": false,
+        "independent_statements_in_text": 4
+      },
+      "provenance": "T1299 T21.0387b12, T21.0388b24, T21.0391b10-b11, T21.0397c19 all state 二十七宿; the fascicle-2 almanac is titled 二十七宿所為吉凶曆. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.niu_catalogued_not_operative",
+      "rule_ids": [
+        "sukuyo.mansion.niu_is_catalogued_not_operative"
+      ],
+      "inputs": {
+        "asterism": "牛"
+      },
+      "expected": {
+        "present_in_chapter2_figure_catalogue": true,
+        "catalogue_position": "between 斗 and 女",
+        "has_natal_clause": true,
+        "has_day_election_clause": false,
+        "pada_allotted": 0,
+        "present_in_election_almanac": false,
+        "reachable_by_any_birth_mansion_computation": false,
+        "unresolved_conflict_recorded": "T21.0387a20 lists 牛 in a thirteen-mansion solar enumeration"
+      },
+      "provenance": "T1299 T21.0390a14-a16 gives 牛 a deity, gotra, offering and a natal clause but no 此宿直日 clause; every other entry has one. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.pada_allotment_closes",
+      "rule_ids": [
+        "sukuyo.rasi.pada_allotment",
+        "sukuyo.mansion.operative_cycle_is_27"
+      ],
+      "inputs": {
+        "allotment_source": "T1299 chapter 1, 序分定宿直品第一"
+      },
+      "expected": {
+        "pada_per_sign": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "every_sign_totals_9": true,
+        "grand_total_pada": 108,
+        "distinct_mansions_allotted": 27,
+        "every_mansion_totals_4": true,
+        "pada_allotted_to_niu": 0,
+        "arithmetic": "12 x 9 = 108 = 27 x 4"
+      },
+      "provenance": "Computed from the twelve 宮 paragraphs at T1299 T21.0387b14-0388a04. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.resident_luminary_domiciles",
+      "rule_ids": [
+        "sukuyo.rasi.resident_luminary"
+      ],
+      "inputs": {
+        "question": "which luminary is resident in each of the twelve 宮"
+      },
+      "expected": {
+        "assignments": {
+          "師子宮": "大陽",
+          "女宮": "辰星",
+          "秤宮": "太白",
+          "蝎宮": "熒惑",
+          "弓宮": "歲星",
+          "磨竭宮": "鎮星",
+          "瓶宮": "鎮星",
+          "魚宮": "歲星",
+          "羊宮": "熒惑",
+          "牛宮": "太白",
+          "婬宮": "辰星",
+          "蟹宮": "太陰"
+        },
+        "sun_signs": 1,
+        "moon_signs": 1,
+        "each_planet_signs": 2,
+        "matches_classical_domicile_arrangement": true,
+        "text_supplies_other_dignities": false,
+        "orthographic_note": "the text writes the luminaries inconsistently: 大陽 at T21.0387b14 but 太陽 at T21.0387c08, and 大陰 and 太陰 likewise alternate. Names are recorded as printed at each location and are not normalized."
+      },
+      "provenance": "The 位焉 clause of each of the twelve sign paragraphs, T1299 T21.0387b14-0388a04. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sign_natal_clause_is_office_shaped",
+      "rule_ids": [
+        "sukuyo.rasi.birth_sign_delineation"
+      ],
+      "inputs": {
+        "signs": [
+          "師子宮",
+          "秤宮"
+        ]
+      },
+      "expected": {
+        "clause_trigger": "若人生屬此宮者",
+        "leo_verbatim": "法合足精神、富貴孝順，合掌握軍旅之任也",
+        "libra_verbatim": "法合心直平政、信敬多財，合掌庫藏之任",
+        "form": "法合 X，合掌 Y 之任",
+        "is_psychological_trait_list": false
+      },
+      "provenance": "T1299 T21.0387b14-b17 (師子宮) and T21.0387b22-b24 (秤宮). T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sign_natal_clause_suppressed_content",
+      "rule_ids": [
+        "sukuyo.rasi.birth_sign_delineation"
+      ],
+      "inputs": {
+        "sign": "蟹宮"
+      },
+      "expected": {
+        "cancer_verbatim": "法合惡性欺誑、聰明而短命，合掌刑獄訟之任",
+        "contains_lifespan_claim": true,
+        "customer_output_permitted": false,
+        "reason": "lifespan and character-defect claims are on the pack's refusal list"
+      },
+      "provenance": "T1299 T21.0388a01-a04 (蟹宮). T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.month_full_moon_table_closes",
+      "rule_ids": [
+        "sukuyo.calendar.month_full_moon_mansion",
+        "sukuyo.mansion.canonical_order"
+      ],
+      "inputs": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "expected": {
+        "table": {
+          "1": "翼",
+          "2": "角",
+          "3": "氐",
+          "4": "心",
+          "5": "箕",
+          "6": "女",
+          "7": "室",
+          "8": "婁",
+          "9": "昴",
+          "10": "觜",
+          "11": "鬼",
+          "12": "星"
+        },
+        "steps_between_successive_months": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          2,
+          2,
+          3,
+          2,
+          2
+        ],
+        "steps_sum": 27,
+        "closes_on_27": true
+      },
+      "provenance": "T1299 T21.0394c20-c28 names months 正月 through 十二月 by their fifteenth-day mansion; the steps are computed against the canonical order. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.birth_mansion_m09d15",
+      "rule_ids": [
+        "sukuyo.natal.birth_mansion_primary_method",
+        "sukuyo.calendar.month_full_moon_mansion"
+      ],
+      "inputs": {
+        "lunar_month": 9,
+        "lunar_day": 15,
+        "calendar": "the source's own lunar scheme, not a civil date"
+      },
+      "expected": {
+        "full_moon_mansion": "昴",
+        "birth_mansion": "昴",
+        "offset_from_full_moon": 0
+      },
+      "provenance": "Applying T1299 T21.0394c28-0395a03 and T21.0395b01-b03: count back from the month's full-moon mansion before the fifteenth, forward after it. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.birth_mansion_m09d01",
+      "rule_ids": [
+        "sukuyo.natal.birth_mansion_primary_method",
+        "sukuyo.calendar.month_full_moon_mansion"
+      ],
+      "inputs": {
+        "lunar_month": 9,
+        "lunar_day": 1,
+        "calendar": "the source's own lunar scheme, not a civil date"
+      },
+      "expected": {
+        "full_moon_mansion": "昴",
+        "birth_mansion": "氐",
+        "offset_from_full_moon": 13
+      },
+      "provenance": "Applying T1299 T21.0394c28-0395a03 and T21.0395b01-b03: count back from the month's full-moon mansion before the fifteenth, forward after it. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.birth_mansion_m02d30",
+      "rule_ids": [
+        "sukuyo.natal.birth_mansion_primary_method",
+        "sukuyo.calendar.month_full_moon_mansion"
+      ],
+      "inputs": {
+        "lunar_month": 2,
+        "lunar_day": 30,
+        "calendar": "the source's own lunar scheme, not a civil date"
+      },
+      "expected": {
+        "full_moon_mansion": "角",
+        "birth_mansion": "胃",
+        "offset_from_full_moon": 15
+      },
+      "provenance": "Applying T1299 T21.0394c28-0395a03 and T21.0395b01-b03: count back from the month's full-moon mansion before the fifteenth, forward after it. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.birth_mansion_m12d16",
+      "rule_ids": [
+        "sukuyo.natal.birth_mansion_primary_method",
+        "sukuyo.calendar.month_full_moon_mansion"
+      ],
+      "inputs": {
+        "lunar_month": 12,
+        "lunar_day": 16,
+        "calendar": "the source's own lunar scheme, not a civil date"
+      },
+      "expected": {
+        "full_moon_mansion": "星",
+        "birth_mansion": "張",
+        "offset_from_full_moon": 1
+      },
+      "provenance": "Applying T1299 T21.0394c28-0395a03 and T21.0395b01-b03: count back from the month's full-moon mansion before the fifteenth, forward after it. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.abbreviated_equals_primary_exhaustive",
+      "rule_ids": [
+        "sukuyo.natal.birth_mansion_abbreviated_method",
+        "sukuyo.natal.birth_mansion_primary_method"
+      ],
+      "inputs": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ]
+      },
+      "expected": {
+        "cases_tested": 360,
+        "mismatches": 0,
+        "identity": "(day + 13 - 1) == (day - 15) + 27",
+        "conclusion": "the text's abbreviated reckoning is algebraically the primary reckoning"
+      },
+      "provenance": "T1299 T21.0395b04-b06 (又法略算) against T21.0394c28-0395a03; exhaustively evaluated over all twelve months and all thirty lunar days. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.civil_date_fails_closed",
+      "rule_ids": [
+        "sukuyo.natal.birth_mansion_requires_lunar_calendar"
+      ],
+      "inputs": {
+        "civil_date": "1970-01-01",
+        "calendar_regime_named": false
+      },
+      "expected": {
+        "birth_mansion_emitted": false,
+        "status": "fail_closed",
+        "reason": "T1299 supplies no conversion from a civil date into its lunar month and day",
+        "required_before_emission": [
+          "named lunisolar regime",
+          "leap-month policy",
+          "day boundary",
+          "locality",
+          "fortnight convention"
+        ],
+        "forbidden_fallbacks": [
+          "Gregorian day-of-year modulo 27",
+          "a modern Chinese, Japanese or Indian almanac",
+          "a Jyotisha nakshatra computed from a modern ephemeris"
+        ]
+      },
+      "provenance": "T1299's procedure presupposes 生月 and 生日 already in the source's lunar scheme (T21.0395b01-b06); the 黑白月分 chapter at T21.0392c29-0393a22 is a further unresolved convention. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.conjunction_classes_partition",
+      "rule_ids": [
+        "sukuyo.calendar.mansion_on_duty_conjunction_classes",
+        "sukuyo.mansion.operative_cycle_is_27"
+      ],
+      "inputs": {
+        "classes": [
+          "前合",
+          "並合",
+          "隨合"
+        ]
+      },
+      "expected": {
+        "前合": 6,
+        "並合": 12,
+        "隨合": 9,
+        "total": 27,
+        "disjoint": true,
+        "exhausts_operative_cycle": true,
+        "niu_in_any_class": false
+      },
+      "provenance": "T1299 T21.0388b26-c03 enumerates the three classes; the 6/12/9 counts are the text's own and are checked against the canonical order. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.conjunction_class_lookup",
+      "rule_ids": [
+        "sukuyo.calendar.mansion_on_duty_conjunction_classes"
+      ],
+      "inputs": {
+        "mansions": [
+          "奎",
+          "參",
+          "心"
+        ]
+      },
+      "expected": {
+        "奎": "前合",
+        "參": "並合",
+        "心": "隨合",
+        "rule_for_前合": "the Moon has not yet reached the mansion but the day is reckoned to it",
+        "rule_for_隨合": "the mansion follows behind the Moon as a calf follows its mother",
+        "source_instruction": "當以此頌復驗之於天"
+      },
+      "provenance": "T1299 T21.0388b28-c03 and the verse restatement at T21.0395b09-b21. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sanku_triad_heads",
+      "rule_ids": [
+        "sukuyo.sanku.triad_heads"
+      ],
+      "inputs": {
+        "offsets": [
+          0,
+          9,
+          18
+        ]
+      },
+      "expected": {
+        "offset_0": "命",
+        "offset_9": "業",
+        "offset_18": "胎",
+        "nine_per_group": 9,
+        "groups": 3,
+        "product": 27,
+        "closes_the_cycle": true
+      },
+      "provenance": "T1299 T21.0391a29-b11 and the ordinal restatement at T21.0397c07-c19 (第一命宿 … 次第十宿，為二九行頭為業宿 … 次第十九宿，即為三九行頭為胎宿 … 第二十七親宿). T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sanku_worked_example_from_bi",
+      "rule_ids": [
+        "sukuyo.sanku.category_by_offset",
+        "sukuyo.sanku.triad_heads",
+        "sukuyo.mansion.canonical_order"
+      ],
+      "inputs": {
+        "birth_mansion": "畢"
+      },
+      "expected": {
+        "subject_birth_mansion": "畢",
+        "初九_computed": "畢觜參井鬼柳星張翼",
+        "初九_as_printed": "畢觜參井鬼柳星張翼",
+        "二九_computed": "軫角亢氐房心尾箕斗",
+        "二九_as_printed": "軫角亢氐房心尾箕斗",
+        "三九_computed": "女虛危室壁奎婁胃昴",
+        "三九_as_printed": "女虛危室壁奎婁胃昴",
+        "all_three_match": true,
+        "categories_in_order": "命榮衰安危成壞友親業榮衰安危成壞友親胎榮衰安危成壞友親",
+        "status": "this is the tradition's own worked example and the engine reproduces it exactly"
+      },
+      "provenance": "T1299 T21.0397c02-c06 prints the three nines for a subject whose birth mansion is 畢. Rotating the canonical order by index(畢) reproduces all twenty-seven entries in the printed sequence. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sanku_category_lookup",
+      "rule_ids": [
+        "sukuyo.sanku.category_by_offset"
+      ],
+      "inputs": {
+        "subject_mansions": [
+          "昴",
+          "心"
+        ]
+      },
+      "expected": {
+        "pairs": [
+          {
+            "subject": "昴",
+            "target": "井",
+            "offset": 4,
+            "category": "危"
+          },
+          {
+            "subject": "昴",
+            "target": "翼",
+            "offset": 9,
+            "category": "業"
+          },
+          {
+            "subject": "昴",
+            "target": "壁",
+            "offset": 23,
+            "category": "成"
+          },
+          {
+            "subject": "心",
+            "target": "心",
+            "offset": 0,
+            "category": "命"
+          }
+        ]
+      },
+      "provenance": "Direct application of the table at T1299 T21.0391a29-b11 / T21.0397c07-c17. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sanku_relation_is_asymmetric",
+      "rule_ids": [
+        "sukuyo.sanku.relationship_is_bidirectional",
+        "sukuyo.sanku.category_by_offset"
+      ],
+      "inputs": {
+        "person_a_birth_mansion": "昴",
+        "person_b_birth_mansion": "井"
+      },
+      "expected": {
+        "a": "昴",
+        "b": "井",
+        "b_seen_from_a": {
+          "offset": 4,
+          "category": "危"
+        },
+        "a_seen_from_b": {
+          "offset": 23,
+          "category": "成"
+        },
+        "categories_differ": true,
+        "offsets_sum_to_27": true,
+        "one_direction_favourable_other_not": true,
+        "single_category_output_permitted": false
+      },
+      "provenance": "T1299 T21.0391b14-b16 requires both 彼人命宿押我何宿 and 我命宿押彼人何宿. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.association_favourable_set",
+      "rule_ids": [
+        "sukuyo.sanku.favourable_set_for_association"
+      ],
+      "inputs": {
+        "question": "結交"
+      },
+      "expected": {
+        "favourable": [
+          "榮",
+          "安",
+          "成",
+          "友",
+          "親"
+        ],
+        "favourable_count": 5,
+        "unfavourable": [
+          "命",
+          "業",
+          "胎",
+          "衰",
+          "危",
+          "壞"
+        ],
+        "hedge_preserved": "大抵",
+        "verbatim": "大抵以榮、安、成、友、親為善，堪結交；自餘並惡，不可與相知",
+        "question_scope": "結交 only, not a general goodness ranking"
+      },
+      "provenance": "T1299 T21.0391b14-b17, attributed by the annotator to the master (和上云). T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.ki_category_conflict_preserved",
+      "rule_ids": [
+        "sukuyo.sanku.favourable_set_for_association",
+        "sukuyo.election.ki_day"
+      ],
+      "inputs": {
+        "category": "危"
+      },
+      "expected": {
+        "危_in_association_favourable_set": false,
+        "危日_recommended_for_結交": true,
+        "危日_recommended_for_婚姻": true,
+        "危日_also_listed_凶_for_婚姻": true,
+        "resolution_offered": false,
+        "engine_must_emit_both": true
+      },
+      "provenance": "T1299 T21.0391b14-b17 excludes 危 from the association set; T21.0391b23-b24 and T21.0398a02 recommend 危日 for 結交 and 婚姻; T21.0398a09-a10 lists 危 with 壞 as 凶 for 婚姻. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sanku_overrides_almanac",
+      "rule_ids": [
+        "sukuyo.election.sanku_overrides_general_almanac"
+      ],
+      "inputs": {
+        "almanac": "長行曆 unfavourable",
+        "sanku_category": "榮"
+      },
+      "expected": {
+        "general_almanac_verdict": "unfavourable",
+        "personal_sanku_verdict": "favourable",
+        "resulting_judgment": "proceed",
+        "verbatim": "此所用三九法，於長行曆縱不是吉相，己身三九若吉，但用無妨",
+        "hierarchy": "personal three-nine layer outranks the impersonal almanac layer"
+      },
+      "provenance": "T1299 T21.0398a14-a15. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.mei_and_tai_day",
+      "rule_ids": [
+        "sukuyo.election.mei_and_tai_days"
+      ],
+      "inputs": {
+        "day_categories": [
+          "命",
+          "胎"
+        ]
+      },
+      "expected": {
+        "命": "不宜舉動百事",
+        "胎": "不宜舉動百事",
+        "witnesses_agree": true,
+        "witness_count": 2
+      },
+      "provenance": "T1299 T21.0391b19 and T21.0398a07. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.gou_day_fork_unresolved",
+      "rule_ids": [
+        "sukuyo.election.gou_day_contradiction"
+      ],
+      "inputs": {
+        "day_category": "業"
+      },
+      "expected": {
+        "chapter3": {
+          "verbatim": "業宿直日，所作皆吉祥",
+          "polarity": "favourable"
+        },
+        "sanbi": {
+          "verbatim": "值業宿日，所作善惡亦不成就，甚衰",
+          "polarity": "unfavourable"
+        },
+        "polarities_agree": false,
+        "single_polarity_output_permitted": false,
+        "both_must_be_emitted_with_locations": true
+      },
+      "provenance": "T1299 T21.0391b19-b20 against T21.0398a07-a08. Two passages of the same text directly contradict each other about a triad head. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sui_ki_e_day_fork",
+      "rule_ids": [
+        "sukuyo.election.sui_ki_e_days"
+      ],
+      "inputs": {
+        "day_categories": [
+          "衰",
+          "危",
+          "壞"
+        ]
+      },
+      "expected": {
+        "chapter3_blocked_group": [
+          "衰",
+          "危",
+          "壞"
+        ],
+        "sanbi_blocked_group": [
+          "危",
+          "壞"
+        ],
+        "sanbi_sui_permitted": [
+          "解除諸惡",
+          "療病"
+        ],
+        "groups_agree": false,
+        "disagreement_is_about": "衰"
+      },
+      "provenance": "T1299 T21.0391b20-b22 against T21.0398a09-a11. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.e_day_directional_exception",
+      "rule_ids": [
+        "sukuyo.election.sui_ki_e_days"
+      ],
+      "inputs": {
+        "day_category": "壞"
+      },
+      "expected": {
+        "day_category": "壞",
+        "generally": "unfavourable for travel, trade, tailoring and grooming",
+        "exception_permitted": [
+          "壓鎮 suppression",
+          "降伏怨讎 subduing enemies",
+          "討伐暴惡 punishing the violent"
+        ],
+        "carried_by_both_witnesses": true,
+        "conclusion": "壞 is directional, not simply negative"
+      },
+      "provenance": "T1299 T21.0391b21-b22 and T21.0398a12-a13. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.ei_day",
+      "rule_ids": [
+        "sukuyo.election.ei_day"
+      ],
+      "inputs": {
+        "day_category": "榮"
+      },
+      "expected": {
+        "day_category": "榮",
+        "lay_uses": [
+          "入官拜職",
+          "對見大人",
+          "上書表進獻君王",
+          "興營買賣",
+          "裁著新衣",
+          "沐浴"
+        ],
+        "monastic_uses": [
+          "剃髮",
+          "割爪甲",
+          "沐浴",
+          "承事師主",
+          "啟請法要"
+        ],
+        "grade": "並大吉"
+      },
+      "provenance": "T1299 T21.0397c25-c28. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.an_day",
+      "rule_ids": [
+        "sukuyo.election.an_day"
+      ],
+      "inputs": {
+        "day_category": "安"
+      },
+      "expected": {
+        "day_category": "安",
+        "uses": [
+          "移徙",
+          "遠行",
+          "入宅",
+          "造作園宅",
+          "安坐臥床帳",
+          "作壇場"
+        ],
+        "witnesses_agree": true
+      },
+      "provenance": "T1299 T21.0391b22-b23 and T21.0397c29-0398a01. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.ki_day_internal_contradiction",
+      "rule_ids": [
+        "sukuyo.election.ki_day"
+      ],
+      "inputs": {
+        "day_category": "危",
+        "act": "婚姻"
+      },
+      "expected": {
+        "day_category": "危",
+        "favourable_statement": "宜結交、定婚姻，歡宴聚會並吉",
+        "unfavourable_statement": "若危壞日，並不宜遠行出、入移徙、買賣、婚姻、裁衣、剃頭、沐浴並凶",
+        "lines_apart_in_same_section": 7,
+        "both_concern_婚姻": true,
+        "resolution_offered": false
+      },
+      "provenance": "T1299 T21.0398a02 against T21.0398a09-a10, both inside 三必祕要法. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.sei_day",
+      "rule_ids": [
+        "sukuyo.election.sei_day"
+      ],
+      "inputs": {
+        "day_category": "成"
+      },
+      "expected": {
+        "day_category": "成",
+        "chapter3_uses": [
+          "修學問道",
+          "合藥",
+          "求仙"
+        ],
+        "sanbi_uses": [
+          "修道學問",
+          "合和長年藥法",
+          "作諸成就法"
+        ],
+        "register_shift": "求仙 (transcendence-seeking) in one witness, 成就法 (siddhi rite) in the other",
+        "normalized": false
+      },
+      "provenance": "T1299 T21.0391b24-b25 and T21.0398a03-a04. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.yu_and_shin_days",
+      "rule_ids": [
+        "sukuyo.election.yu_and_shin_days"
+      ],
+      "inputs": {
+        "day_categories": [
+          "友",
+          "親"
+        ]
+      },
+      "expected": {
+        "day_categories": [
+          "友",
+          "親"
+        ],
+        "chapter3_use": "結交朋友",
+        "chapter3_grade": "大吉",
+        "sanbi_uses": [
+          "結交",
+          "定婚姻",
+          "歡宴聚會"
+        ],
+        "sanbi_merges_with_危日_list": true
+      },
+      "provenance": "T1299 T21.0391b25 and T21.0398a05-a06. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.variant_opinion_kept_labelled",
+      "rule_ids": [
+        "sukuyo.election.variant_four_mansion_travel_prohibition"
+      ],
+      "inputs": {
+        "day_categories": [
+          "命",
+          "胎",
+          "危",
+          "壞"
+        ]
+      },
+      "expected": {
+        "marker_in_source": "又一說云",
+        "categories": [
+          "命",
+          "胎",
+          "危",
+          "壞"
+        ],
+        "prohibits": [
+          "進路",
+          "剃髮",
+          "裁衣",
+          "除爪甲"
+        ],
+        "merged_into_main_list": false,
+        "marker_must_survive_rendering": true
+      },
+      "provenance": "T1299 T21.0398a16-a17. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.affliction_of_mei_or_tai",
+      "rule_ids": [
+        "sukuyo.transit.affliction_of_mei_and_tai"
+      ],
+      "event": {
+        "agent": "五星及日月",
+        "verb": "陵犯守逼",
+        "target_category": "命"
+      },
+      "expected": {
+        "afflicted_category": "命",
+        "judgment": "厄會之時 / 於身大凶",
+        "prescribed": [
+          "修功德",
+          "持真言念誦",
+          "立道場",
+          "入灌頂及護摩"
+        ],
+        "prescriptions_are_liturgical_not_advice": true,
+        "obscure_clause_recorded_unused": "凡日月直，星沒。"
+      },
+      "provenance": "T1299 T21.0391b26-b28 and T21.0398a18-a19. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.affliction_inverts_by_category",
+      "rule_ids": [
+        "sukuyo.transit.affliction_inverts_by_category"
+      ],
+      "event": {
+        "agent": "五星及日月",
+        "verb": "陵犯守逼",
+        "target_categories": [
+          "榮",
+          "壞"
+        ]
+      },
+      "expected": {
+        "afflicting_favourable_category": {
+          "categories": [
+            "業",
+            "榮",
+            "安",
+            "成",
+            "友",
+            "親"
+          ],
+          "result": "所求不遂、百事迍邅"
+        },
+        "afflicting_unfavourable_category": {
+          "categories": [
+            "衰",
+            "危",
+            "壞"
+          ],
+          "result": "所求稱意、百事通達"
+        },
+        "sign_of_affliction_depends_on_category": true,
+        "uniform_negative_transit_scoring_contradicts_source": true,
+        "ephemeris_is_external": "當須問知司天者"
+      },
+      "provenance": "T1299 T21.0391c01-c03 and T21.0398a19-a25. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.seven_day_cycle",
+      "rule_ids": [
+        "sukuyo.weekday.seven_day_cycle"
+      ],
+      "inputs": {
+        "question": "what is the period of the 七曜直日 cycle"
+      },
+      "expected": {
+        "members": [
+          "太陽",
+          "太陰",
+          "熒惑",
+          "辰星",
+          "歲星",
+          "太白",
+          "鎮星"
+        ],
+        "count": 7,
+        "period_days": 7,
+        "verbatim": "一日一易，七日一周，周而復始",
+        "epoch_supplied_by_text": false
+      },
+      "provenance": "T1299 T21.0391c07-c10 and T21.0398a28-a29. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.weekday_transmission_names",
+      "rule_ids": [
+        "sukuyo.weekday.seven_day_cycle",
+        "sukuyo.boundary.sukuyodo_is_not_onmyodo"
+      ],
+      "inputs": {
+        "question": "what does T1299 say about where the weekday system came from"
+      },
+      "expected": {
+        "languages_named": [
+          "胡 (Sogdian)",
+          "波斯 (Persian)",
+          "天竺 (Sanskrit)"
+        ],
+        "sunday_sogdian": "蜜",
+        "sunday_sanskrit": "阿儞底耶",
+        "instruction": "忽不記得，但當問胡及波斯并五天竺人總知",
+        "religious_observance_noted": "尼乾子末摩尼，常以密日持齋",
+        "any_yin_yang_or_five_phase_unit_used": false,
+        "conclusion": "the text documents its own Iranian and Indian transmission"
+      },
+      "provenance": "T1299 T21.0398b01-b18. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.weekday_natal_mercury_gap",
+      "rule_ids": [
+        "sukuyo.weekday.natal_delineation"
+      ],
+      "inputs": {
+        "planets": [
+          "太陽",
+          "太陰",
+          "熒惑",
+          "辰星",
+          "歲星",
+          "太白",
+          "鎮星"
+        ]
+      },
+      "expected": {
+        "planets_with_natal_clause": 6,
+        "planet_without_natal_clause": "辰星 (Mercury)",
+        "gap_filled_by_inference": false,
+        "jupiter_verbatim": "法合貴重榮祿"
+      },
+      "provenance": "T1299 T21.0391c11-0392a27; the 辰星 paragraph at T21.0392a04-a09 carries election, imprisonment, annual and eclipse clauses but no 若人此日生者 clause. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.weekday_natal_suppressed_content",
+      "rule_ids": [
+        "sukuyo.weekday.natal_delineation"
+      ],
+      "inputs": {
+        "planets": [
+          "太陽",
+          "太白",
+          "熒惑"
+        ]
+      },
+      "expected": {
+        "sun_clause_contains_lifespan_claim": true,
+        "venus_clause_contains_lifespan_claim": true,
+        "mars_clause_contains_appearance_and_kin_harm_claims": true,
+        "customer_output_permitted": false,
+        "mundane_omens_must_not_be_folded_into_natal": [
+          "若五月五日得此曜者",
+          "若有虧蝕地動者"
+        ]
+      },
+      "provenance": "T1299 T21.0391c14-c15 (Sun, 孝順短命), T21.0392a18-a19 (Venus, 短命好善), T21.0392a01 (Mars, 醜陋惡性、妨親害族). T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.weekday_mansion_classes",
+      "rule_ids": [
+        "sukuyo.weekday.mansion_combination_classes"
+      ],
+      "inputs": {
+        "question": "the three weekday-mansion combination tables"
+      },
+      "expected": {
+        "classes": [
+          "甘露日",
+          "金剛峯日",
+          "羅剎日"
+        ],
+        "rows_per_class": 7,
+        "total_pairs": 21,
+        "kanro_sun_mansion": "軫",
+        "kongobu_sun_mansion": "尾",
+        "kanro_polarity": "大吉祥",
+        "rasetsu_polarity": "不宜舉百事，必有殃禍"
+      },
+      "provenance": "T1299 T21.0398b21-c07. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.weekday_mansion_corrupt_rows",
+      "rule_ids": [
+        "sukuyo.weekday.mansion_combination_classes"
+      ],
+      "inputs": {
+        "class": "羅剎日"
+      },
+      "expected": {
+        "corrupt_rows": [
+          {
+            "class": "羅剎日",
+            "weekday": "大陽",
+            "printed": "冒",
+            "is_a_mansion_name": false,
+            "candidate": "昴",
+            "emended": false,
+            "obstacle": "昴 already fills the 金剛峯日 水曜 row"
+          },
+          {
+            "class": "羅剎日",
+            "weekday": "木曜",
+            "printed": "底",
+            "is_a_mansion_name": false,
+            "candidate": "氐",
+            "emended": false
+          }
+        ],
+        "usable_pairs": 19,
+        "unusable_pairs": 2
+      },
+      "provenance": "T1299 T21.0398c03 and T21.0398c05. T1299 = T21n1299 in sources/T21n1299_lines.txt (sha256 efc2b8de7e...); line keys are Taisho page/column/line."
+    },
+    {
+      "vector_id": "sukuyo.v.t1308_is_a_separate_system",
+      "rule_ids": [
+        "sukuyo.boundary.t1308_is_a_28_mansion_system"
+      ],
+      "inputs": {
+        "works": [
+          "T1299",
+          "T1308"
+        ]
+      },
+      "expected": {
+        "t1299_cycle": 27,
+        "t1308_mansion_deities": 28,
+        "t1308_includes_niu_in_degree_table": true,
+        "t1299_mei_shuku_definition": "the mansion of the lunar birth day, from the month's full-moon mansion",
+        "t1308_mei_shuku_definition": "the mansion where the Sun and Moon stand at the time of birth",
+        "definitions_agree": false,
+        "merge_permitted": false,
+        "t1308_quadrant_degrees": [
+          75,
+          98,
+          80,
+          113
+        ],
+        "t1308_quadrant_sum": 366,
+        "expected_chinese_zhoutian": 365.25,
+        "discrepancy_corrected": false,
+        "t1308_tables_encoded": false
+      },
+      "provenance": "T1308 T21.0426b23-c05 and the 宿度法 at T21.0427b18-c06, read in sources/T21n1308_lines.txt (sha256 50b9c1481e...). T1299's own deferral to an external ephemeris is at T21.0398a23-a25."
+    },
+    {
+      "vector_id": "sukuyo.v.sukuyodo_separate_from_onmyodo",
+      "rule_ids": [
+        "sukuyo.boundary.sukuyodo_is_not_onmyodo"
+      ],
+      "inputs": {
+        "tracks": [
+          "sukuyodo",
+          "onmyodo"
+        ]
+      },
+      "expected": {
+        "shared_sources_with_onmyodo_track": 0,
+        "shared_rules": 0,
+        "shared_vectors": 0,
+        "sexagenary_stem_branch_used": false,
+        "five_phase_generation_or_conquest_used": false,
+        "shikiban_board_used": false,
+        "directional_deity_taboo_used": false,
+        "operative_units": [
+          "27 mansions",
+          "12 signs",
+          "7 planetary weekdays"
+        ],
+        "remedies_are": "Buddhist tantric (灌頂, 護摩, 真言, 道場)",
+        "contrast_witness": "T1311 opens with 二十八宿 and a nine-luminary age cycle, so even within the Buddhist astral corpus the schemes differ and cannot be pooled"
+      },
+      "provenance": "T1299 T21.0398b01-b18 and T21.0391b27-b28; T1311 T21.0459b05-b10 read in sources/T21n1311_lines.txt (sha256 e4f2e978c6...)."
+    }
+  ]
+}

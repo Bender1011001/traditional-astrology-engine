@@ -1,0 +1,894 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "jaimini",
+  "source_pack_id": "jaimini_upadesa_sutra_v1",
+  "status": "research_only; no engine implements these; vectors are targets, not passing results",
+  "source_ids": [
+    "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+    "jaimini_sutrarthaprakasika_dli_2015_242319"
+  ],
+  "vectors": [
+    {
+      "vector_id": "jaimini.v.drsti.aries",
+      "rule_ids": [
+        "jaimini.rasi-drsti.movable"
+      ],
+      "inputs": {
+        "sign": "Aries",
+        "modality": "movable"
+      },
+      "expected": {
+        "aspected_signs": [
+          "Leo",
+          "Scorpio",
+          "Aquarius"
+        ],
+        "not_aspected": [
+          "Taurus"
+        ],
+        "reason": "Taurus is the 2nd from Aries and is excluded"
+      },
+      "provenance": "Derived from sutra 1.1.2 plus the vrddha karika 'caram dhanam vina sthanuh'; cross-checked against the Sutrarthaprakasika's own enumeration 5/8/11 for movable signs."
+    },
+    {
+      "vector_id": "jaimini.v.drsti.cancer",
+      "rule_ids": [
+        "jaimini.rasi-drsti.movable"
+      ],
+      "inputs": {
+        "sign": "Cancer",
+        "modality": "movable"
+      },
+      "expected": {
+        "aspected_signs": [
+          "Scorpio",
+          "Aquarius",
+          "Taurus"
+        ],
+        "not_aspected": [
+          "Leo"
+        ]
+      },
+      "provenance": "Same rule applied to a second movable sign as a structural control."
+    },
+    {
+      "vector_id": "jaimini.v.drsti.taurus",
+      "rule_ids": [
+        "jaimini.rasi-drsti.fixed"
+      ],
+      "inputs": {
+        "sign": "Taurus",
+        "modality": "fixed"
+      },
+      "expected": {
+        "aspected_signs": [
+          "Cancer",
+          "Libra",
+          "Capricorn"
+        ],
+        "not_aspected": [
+          "Aries"
+        ],
+        "reason": "Aries is the 12th from Taurus and is excluded"
+      },
+      "provenance": "Derived from sutra 1.1.2 and the karika's second quarter 'sthiram antyam vina caram'."
+    },
+    {
+      "vector_id": "jaimini.v.drsti.leo",
+      "rule_ids": [
+        "jaimini.rasi-drsti.fixed"
+      ],
+      "inputs": {
+        "sign": "Leo",
+        "modality": "fixed"
+      },
+      "expected": {
+        "aspected_signs": [
+          "Libra",
+          "Capricorn",
+          "Aries"
+        ],
+        "not_aspected": [
+          "Cancer"
+        ]
+      },
+      "provenance": "Structural control on a second fixed sign."
+    },
+    {
+      "vector_id": "jaimini.v.drsti.gemini",
+      "rule_ids": [
+        "jaimini.rasi-drsti.dual"
+      ],
+      "inputs": {
+        "sign": "Gemini",
+        "modality": "dual"
+      },
+      "expected": {
+        "aspected_signs": [
+          "Virgo",
+          "Sagittarius",
+          "Pisces"
+        ],
+        "not_aspected": [
+          "Gemini"
+        ],
+        "reason": "a dual sign does not aspect itself"
+      },
+      "provenance": "Derived from the karika's third quarter 'yugmam svena vina yugmam'."
+    },
+    {
+      "vector_id": "jaimini.v.drsti.symmetry",
+      "rule_ids": [
+        "jaimini.rasi-drsti.movable",
+        "jaimini.rasi-drsti.fixed",
+        "jaimini.rasi-drsti.dual"
+      ],
+      "inputs": {
+        "check": "every sign aspects exactly three signs, and the relation is symmetric between movable and fixed"
+      },
+      "expected": {
+        "aspects_per_sign": 3,
+        "total_directed_aspect_pairs": 36,
+        "movable_fixed_symmetry": "Aries aspects Scorpio and Scorpio aspects Aries",
+        "dual_symmetry": "full - dual signs aspect each other mutually"
+      },
+      "provenance": "Structural property that any correct implementation must satisfy; derived, not quoted."
+    },
+    {
+      "vector_id": "jaimini.v.graha-drsti.basic",
+      "rule_ids": [
+        "jaimini.graha-drsti.inherits-rasi-drsti"
+      ],
+      "inputs": {
+        "graha": "Jupiter",
+        "occupied_sign": "Aries"
+      },
+      "expected": {
+        "aspects_signs": [
+          "Leo",
+          "Scorpio",
+          "Aquarius"
+        ],
+        "aspects_grahas_in": [
+          "Leo",
+          "Scorpio",
+          "Aquarius"
+        ],
+        "contrast_parasari": "Parasari would give Jupiter aspects on the 5th, 7th and 9th from Aries = Leo, Libra, Sagittarius"
+      },
+      "provenance": "Sutra 1.1.3 applied to the movable-sign aspect set. The Parasari contrast line is a deliberate divergence check, not a Jaimini claim."
+    },
+    {
+      "vector_id": "jaimini.v.drsti.sammukha.abstain",
+      "rule_ids": [
+        "jaimini.rasi-drsti.sammukha-vs-parsva.disputed"
+      ],
+      "inputs": {
+        "sign": "Aries",
+        "question": "which of Leo, Scorpio, Aquarius is sammukha"
+      },
+      "expected": {
+        "engine_must": "abstain",
+        "candidate_answer": "Scorpio (8th) per the Sutrarthaprakasika",
+        "reason_for_abstention": "the commentator rejects a karika on this point and the OCR does not settle the referent"
+      },
+      "provenance": "Negative control: the pack must not emit a sammukha weighting."
+    },
+    {
+      "vector_id": "jaimini.v.argala.primary",
+      "rule_ids": [
+        "jaimini.argala.primary"
+      ],
+      "inputs": {
+        "reference_sign_index": 1,
+        "grahas": {
+          "Venus": 4,
+          "Moon": 2,
+          "Saturn": 11,
+          "Mars": 6
+        }
+      },
+      "expected": {
+        "argala_makers": [
+          "Venus",
+          "Moon",
+          "Saturn"
+        ],
+        "not_argala": [
+          "Mars"
+        ],
+        "offsets_used": [
+          4,
+          2,
+          11
+        ]
+      },
+      "provenance": "Sutra 1.1.4 with the commentary's katapayadi decoding of dara/bhagya/sula to 4/2/11."
+    },
+    {
+      "vector_id": "jaimini.v.argala.katapayadi-dara",
+      "rule_ids": [
+        "jaimini.argala.primary",
+        "jaimini.katapayadi.bhava-and-rasi"
+      ],
+      "inputs": {
+        "sutra_word": "dara",
+        "consonants": [
+          "d",
+          "r"
+        ]
+      },
+      "expected": {
+        "digit_values": [
+          8,
+          2
+        ],
+        "read_right_to_left": 28,
+        "modulo_12": 4,
+        "house": 4
+      },
+      "provenance": "The commentary works this exact example: 'dakarasyastasamkhya rekarasya dvisamkhya astavimsatimite dvadasatasthe sesam caturmitam'."
+    },
+    {
+      "vector_id": "jaimini.v.argala.third-house.fork",
+      "rule_ids": [
+        "jaimini.argala.third-house-malefic"
+      ],
+      "inputs": {
+        "reference_sign_index": 1,
+        "third_house_contents": {
+          "malefics": 2,
+          "benefics": 0
+        }
+      },
+      "expected": {
+        "sutrarthaprakasika_verdict": "no argala - fewer than three malefics",
+        "abhyankar_verdict": "argala - malefics outnumber benefics",
+        "engine_must": "fan_out_or_abstain"
+      },
+      "provenance": "Deliberate disagreement case constructed to separate the two readings of bhuyasa. Two malefics and no benefics is exactly the configuration where they differ."
+    },
+    {
+      "vector_id": "jaimini.v.argala.virodhi",
+      "rule_ids": [
+        "jaimini.argala.virodhi"
+      ],
+      "inputs": {
+        "reference_sign_index": 1,
+        "grahas": {
+          "Venus": 4,
+          "Sun": 10
+        }
+      },
+      "expected": {
+        "argala_maker": "Venus",
+        "obstructor_present": "Sun",
+        "obstructor_offsets": [
+          12,
+          10,
+          3
+        ],
+        "pairing_confidence": "low - which obstructor cancels which argala is not settled by the retrieved text"
+      },
+      "provenance": "Sutra 1.1.6. The vector asserts membership of the obstructor set, which is certain, and explicitly refuses to assert the pairing, which is not."
+    },
+    {
+      "vector_id": "jaimini.v.argala.virodhi-cancelled",
+      "rule_ids": [
+        "jaimini.argala.virodhi-cancelled"
+      ],
+      "inputs": {
+        "argala_makers": 3,
+        "obstructors": 1
+      },
+      "expected": {
+        "obstruction_effective": false,
+        "reason": "na nyuna - fewer in number",
+        "residual": "argala stands with strength 3 - 1 = 2 per the commentary's subtraction procedure"
+      },
+      "provenance": "Sutra 1.1.7 plus the commentary's explicit subtraction instruction."
+    },
+    {
+      "vector_id": "jaimini.v.argala.trikona",
+      "rule_ids": [
+        "jaimini.argala.trikona"
+      ],
+      "inputs": {
+        "reference_sign_index": 1,
+        "grahas": {
+          "Mercury": 5,
+          "Jupiter": 9
+        }
+      },
+      "expected": {
+        "argala_maker": "Mercury",
+        "obstructor": "Jupiter",
+        "basis": "5th gives argala, 9th obstructs it"
+      },
+      "provenance": "Sutra 1.1.8 with the commentary's explicit 5th/9th pairing."
+    },
+    {
+      "vector_id": "jaimini.v.argala.ketu-reverse",
+      "rule_ids": [
+        "jaimini.argala.ketu-reversed"
+      ],
+      "inputs": {
+        "reference_point": "Ketu",
+        "graha_offset_forward": 4
+      },
+      "expected": {
+        "counts_as": "the 10th in reverse reckoning, not the 4th",
+        "argala_by_forward_count": false,
+        "scope_caveat": "whether viparita reaches back to sutras 1.1.4-1.1.7 or only to 1.1.8 is disputed"
+      },
+      "provenance": "Sutra 1.1.9. The scope caveat records the Sutrarthaprakasika's rejection of the sarvatrika reading."
+    },
+    {
+      "vector_id": "jaimini.v.argala.target.abstain",
+      "rule_ids": [
+        "jaimini.argala.target.disputed"
+      ],
+      "inputs": {
+        "argala_formed": true,
+        "question": "what does it act upon"
+      },
+      "expected": {
+        "engine_must": "fan_out_or_abstain",
+        "candidates": [
+          "the bhava under consideration (Sutrarthaprakasika)",
+          "the aspecting graha (Subodhini)"
+        ]
+      },
+      "provenance": "Negative control preserving the named disagreement."
+    },
+    {
+      "vector_id": "jaimini.v.karaka.rank.seven",
+      "rule_ids": [
+        "jaimini.chara-karaka.atmakaraka.by-degree",
+        "jaimini.chara-karaka.descending-order",
+        "jaimini.chara-karaka.scheme.seven"
+      ],
+      "inputs": {
+        "scheme": "seven",
+        "longitudes_within_sign_deg": {
+          "Sun": 28.4,
+          "Moon": 3.1,
+          "Mars": 17.9,
+          "Mercury": 25.2,
+          "Jupiter": 11.6,
+          "Venus": 22.0,
+          "Saturn": 8.3
+        }
+      },
+      "expected": {
+        "atmakaraka": "Sun",
+        "amatyakaraka": "Mercury",
+        "bhratrkaraka": "Venus",
+        "matrkaraka": "Mars",
+        "putrakaraka": "Mars",
+        "jnatikaraka": "Jupiter",
+        "darakaraka": "Moon",
+        "note": "under the seven-karaka scheme Matrkaraka doubles as Putrakaraka, so Jupiter takes Jnati and the Moon, lowest of the seven, takes Dara; Saturn at 8.3 is the sixth-ranked graha and carries no separate karaka title in this scheme",
+        "ranking_used": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Moon"
+        ]
+      },
+      "provenance": "Constructed vector, not a classical worked chart. Degrees chosen with no ties so that the arithmetic of sutra 1.1.10 and the chain 1.1.12-1.1.17 is fully determined. Flagged: the mapping of the seven-karaka chain onto seven ranked grahas needs specialist confirmation, since collapsing Matr and Putra leaves six titles for seven bodies."
+    },
+    {
+      "vector_id": "jaimini.v.karaka.rank.eight-with-rahu-reversed",
+      "rule_ids": [
+        "jaimini.chara-karaka.atmakaraka.by-degree",
+        "jaimini.chara-karaka.scheme.eight",
+        "jaimini.chara-karaka.rahu.reverse-counted"
+      ],
+      "inputs": {
+        "scheme": "eight",
+        "longitudes_within_sign_deg": {
+          "Sun": 28.4,
+          "Moon": 3.1,
+          "Mars": 17.9,
+          "Mercury": 25.2,
+          "Jupiter": 11.6,
+          "Venus": 22.0,
+          "Saturn": 8.3,
+          "Rahu": 1.2
+        }
+      },
+      "expected": {
+        "rahu_effective_degree": 28.8,
+        "arithmetic": "30 - 1.2 = 28.8",
+        "atmakaraka": "Rahu",
+        "amatyakaraka": "Sun",
+        "bhratrkaraka": "Mercury",
+        "matrkaraka": "Venus",
+        "pitrkaraka": "Mars",
+        "putrakaraka": "Jupiter",
+        "jnatikaraka": "Saturn",
+        "darakaraka": "Moon",
+        "significance": "the SAME chart yields a different Atmakaraka under the two conventions - Sun under seven, Rahu under eight-with-reversal. This is the sharpest reason the convention must be disclosed."
+      },
+      "provenance": "Constructed vector. Rahu at 1.2 degrees was chosen specifically to exercise the commentary's own remark that Rahu becomes Atmakaraka 'nyunamsatvena' - by having few forward degrees."
+    },
+    {
+      "vector_id": "jaimini.v.karaka.rahu-excluded-control",
+      "rule_ids": [
+        "jaimini.chara-karaka.rahu.excluded"
+      ],
+      "inputs": {
+        "scheme": "seven",
+        "longitudes_within_sign_deg": {
+          "Sun": 28.4,
+          "Rahu": 1.2,
+          "Moon": 3.1
+        }
+      },
+      "expected": {
+        "rahu_considered": false,
+        "atmakaraka_candidate_set_excludes": [
+          "Rahu",
+          "Ketu"
+        ],
+        "atmakaraka": "Sun"
+      },
+      "provenance": "Negative control pairing with the reverse-count vector: the same Rahu position must produce no karaka at all under the seven-karaka reading."
+    },
+    {
+      "vector_id": "jaimini.v.karaka.tie.abstain",
+      "rule_ids": [
+        "jaimini.chara-karaka.tie-break.disputed"
+      ],
+      "inputs": {
+        "longitudes_within_sign": {
+          "Venus": "12deg 30min 00sec",
+          "Mars": "12deg 30min 00sec"
+        }
+      },
+      "expected": {
+        "engine_must": "abstain",
+        "candidate_resolutions": [
+          "compare finer units (sutra's kaladibhih) - undetermined here",
+          "the stronger graha becomes Atmakaraka (kecit and the Sutrarthaprakasika's own view)",
+          "decide by sthira-karaka (Subodhini, rejected by the Sutrarthaprakasika)"
+        ],
+        "must_not": "silently pick one"
+      },
+      "provenance": "Exact-tie negative control. Constructed; exact ties are vanishingly rare in real charts but the pack must state its behaviour."
+    },
+    {
+      "vector_id": "jaimini.v.karaka.atmakaraka.significance",
+      "rule_ids": [
+        "jaimini.chara-karaka.atmakaraka.significance"
+      ],
+      "inputs": {
+        "atmakaraka": "Saturn",
+        "condition": "debilitated"
+      },
+      "expected": {
+        "topic": "bandha and moksa",
+        "historical_testimony": "the commentary says such an Atmakaraka gives bondage-type suffering in its own dasa",
+        "publication": "suppressed - must not be rendered as a prediction of imprisonment"
+      },
+      "provenance": "Sutra 1.1.11 with the publication limit exercised as a test."
+    },
+    {
+      "vector_id": "jaimini.v.karaka.divergence-from-parasari",
+      "rule_ids": [
+        "jaimini.chara-karaka.atmakaraka.by-degree",
+        "jaimini.sthira-karaka.mars"
+      ],
+      "inputs": {
+        "chart_has": "Mars at 17.9 degrees within its sign, ranked fourth"
+      },
+      "expected": {
+        "jaimini_chara_role": "Matrkaraka by degree rank",
+        "jaimini_sthira_role": "sister, brother-in-law, younger brother, mother",
+        "parasari_role": "Mars is the fixed karaka for siblings and courage",
+        "conclusion": "Jaimini runs BOTH a variable and a fixed significator layer; Parasari runs only the fixed layer. The chara layer is what makes the reading diverge."
+      },
+      "provenance": "Divergence documentation vector. Asserts the coexistence of the two layers, which both witnesses state, and nothing further."
+    },
+    {
+      "vector_id": "jaimini.v.sthira-karaka.mars",
+      "rule_ids": [
+        "jaimini.sthira-karaka.mars"
+      ],
+      "inputs": {
+        "graha": "Mars",
+        "karaka_type": "sthira"
+      },
+      "expected": {
+        "signifies": [
+          "sister",
+          "brother-in-law",
+          "younger brother",
+          "mother"
+        ]
+      },
+      "provenance": "Sutra 1.1.19 (Sutrarthaprakasika) / 1.1.20 (Abhyankar), two witnesses agreeing."
+    },
+    {
+      "vector_id": "jaimini.v.sthira-karaka.mercury",
+      "rule_ids": [
+        "jaimini.sthira-karaka.mercury"
+      ],
+      "inputs": {
+        "graha": "Mercury",
+        "karaka_type": "sthira"
+      },
+      "expected": {
+        "signifies": [
+          "maternal uncle",
+          "maternal relatives"
+        ],
+        "derivation": "uttaratah - 'from the next' after Mars"
+      },
+      "provenance": "Sutra 1.1.20 / 1.1.21, two witnesses agreeing."
+    },
+    {
+      "vector_id": "jaimini.v.sthira-karaka.jupiter.fork",
+      "rule_ids": [
+        "jaimini.sthira-karaka.jupiter-venus-saturn.disputed"
+      ],
+      "inputs": {
+        "topics": [
+          "grandfather",
+          "husband",
+          "son"
+        ]
+      },
+      "expected": {
+        "abhyankar_assignment": {
+          "grandfather": "Jupiter",
+          "husband": "Jupiter",
+          "son": "Jupiter"
+        },
+        "sutrarthaprakasika_assignment": {
+          "grandfather": "Jupiter",
+          "husband": "Venus",
+          "son": "Saturn"
+        },
+        "engine_must": "fan_out_or_abstain"
+      },
+      "provenance": "Direct witness disagreement on the same sutra; both readings recorded verbatim in extraction_notes.md."
+    },
+    {
+      "vector_id": "jaimini.v.katapayadi.viveka",
+      "rule_ids": [
+        "jaimini.katapayadi.bhava-and-rasi",
+        "jaimini.dasa.cycle.144-year-maximum"
+      ],
+      "inputs": {
+        "sutra_word": "viveka",
+        "consonants": [
+          "v",
+          "v",
+          "k"
+        ]
+      },
+      "expected": {
+        "digit_values": [
+          4,
+          4,
+          1
+        ],
+        "read_right_to_left": 144,
+        "meaning": "the maximum total of the twelve sign dasas in years"
+      },
+      "provenance": "The commentary decodes viveka to 144 and Abhyankar's translation independently renders the sutra with the number 144 - a two-witness check on the decoding method itself."
+    },
+    {
+      "vector_id": "jaimini.v.katapayadi.not-grahas",
+      "rule_ids": [
+        "jaimini.katapayadi.not-grahas"
+      ],
+      "inputs": {
+        "sutra_word": "mandah",
+        "context": "mando 'jyayan grahesu"
+      },
+      "expected": {
+        "decode_as_number": false,
+        "read_as": "Saturn",
+        "reason": "na grahah - planet names are exempt from the encoding"
+      },
+      "provenance": "Negative control on the decoding rule; without it 'manda' would decode to a house number and the strength sutra would be unreadable."
+    },
+    {
+      "vector_id": "jaimini.v.arudha.general",
+      "rule_ids": [
+        "jaimini.arudha.general"
+      ],
+      "inputs": {
+        "bhava_sign": "Aries",
+        "lord": "Mars",
+        "lord_sign": "Gemini",
+        "offset_bhava_to_lord": 3
+      },
+      "expected": {
+        "count_onward_from_lord": 3,
+        "pada_sign": "Leo",
+        "arithmetic": "Gemini + 3 signs counted inclusively = Leo"
+      },
+      "provenance": "Sutra 1.1.29 (Abhyankar). Constructed example; the inclusive-counting convention is the standard Sanskrit one but is NOT stated in the sutra and is flagged in extraction_notes.md as an assumed convention."
+    },
+    {
+      "vector_id": "jaimini.v.arudha.exception-4th",
+      "rule_ids": [
+        "jaimini.arudha.exception.lord-in-4th"
+      ],
+      "inputs": {
+        "bhava_sign": "Aries",
+        "lord_sign": "Cancer",
+        "offset": 4
+      },
+      "expected": {
+        "general_rule_would_give": "Cancer + 4 = Libra (the 7th)",
+        "sutra_gives": "Cancer (the 4th)",
+        "pada_sign": "Cancer"
+      },
+      "provenance": "Sutra 1.1.30, stated as an explicit exception in Abhyankar's translation."
+    },
+    {
+      "vector_id": "jaimini.v.arudha.exception-7th",
+      "rule_ids": [
+        "jaimini.arudha.exception.lord-in-7th"
+      ],
+      "inputs": {
+        "bhava_sign": "Aries",
+        "lord_sign": "Libra",
+        "offset": 7
+      },
+      "expected": {
+        "general_rule_would_give": "Libra + 7 = Aries (the bhava itself)",
+        "sutra_gives": "Capricorn (the 10th)",
+        "arithmetic": "Libra + 3 signs, per the commentary's 'rasitrayam yuktam'",
+        "pada_sign": "Capricorn"
+      },
+      "provenance": "Sutra 1.1.31 in Abhyankar plus the Sutrarthaprakasika's arithmetic; two witnesses agreeing on the result."
+    },
+    {
+      "vector_id": "jaimini.v.dasa.direction.odd",
+      "rule_ids": [
+        "jaimini.dasa.direction.odd-forward"
+      ],
+      "inputs": {
+        "sign": "Aries",
+        "parity": "odd"
+      },
+      "expected": {
+        "direction": "forward",
+        "next_sign_in_sequence": "Taurus"
+      },
+      "provenance": "Sutra 1.1.24 / 1.1.25."
+    },
+    {
+      "vector_id": "jaimini.v.dasa.direction.even",
+      "rule_ids": [
+        "jaimini.dasa.direction.even-reverse"
+      ],
+      "inputs": {
+        "sign": "Cancer",
+        "parity": "even"
+      },
+      "expected": {
+        "direction": "reverse",
+        "next_sign_in_sequence": "Gemini"
+      },
+      "provenance": "Sutra 1.1.25 / 1.1.26."
+    },
+    {
+      "vector_id": "jaimini.v.dasa.direction.exception",
+      "rule_ids": [
+        "jaimini.dasa.direction.fixed-sign-exception"
+      ],
+      "inputs": {
+        "signs": [
+          "Taurus",
+          "Leo",
+          "Scorpio",
+          "Aquarius"
+        ]
+      },
+      "expected": {
+        "Taurus": "forward (despite being even)",
+        "Scorpio": "forward (despite being even)",
+        "Leo": "reverse (despite being odd)",
+        "Aquarius": "reverse (despite being odd)",
+        "witness_agreement": "Abhyankar's '2, 5, 8 and 11' names the same four signs as the Sutrarthaprakasika's ojakuta and matr/dharma decoding"
+      },
+      "provenance": "Sutra 1.1.26 / 1.1.27 with the old karika 'kramad vrse vrscike ca vyutkramat kumbhasimhayoh' and Nilakantha's summary verse."
+    },
+    {
+      "vector_id": "jaimini.v.dasa.length.open",
+      "rule_ids": [
+        "jaimini.dasa.length.sign-to-its-lord"
+      ],
+      "inputs": {
+        "sign": "Aries",
+        "lord": "Mars",
+        "lord_sign": "Leo"
+      },
+      "expected": {
+        "count": 5,
+        "years_candidate": [
+          4,
+          5
+        ],
+        "engine_must": "abstain",
+        "unresolved": [
+          "subtract-one convention",
+          "lord in its own sign",
+          "dual lordship of Scorpio and Aquarius"
+        ]
+      },
+      "provenance": "Deliberately incomplete: the sutra fixes the counting but not the conventions, so the vector asserts the count and refuses the year figure."
+    },
+    {
+      "vector_id": "jaimini.v.dasa.cycle-total",
+      "rule_ids": [
+        "jaimini.dasa.cycle.144-year-maximum"
+      ],
+      "inputs": {
+        "signs": 12,
+        "max_years_per_sign": 12
+      },
+      "expected": {
+        "maximum_total_years": 144,
+        "sutra_word": "viveka"
+      },
+      "provenance": "Sutra 1.1.33 / 1.1.34, confirmed by two witnesses and by the katapayadi decoding."
+    },
+    {
+      "vector_id": "jaimini.v.hora-lagna.rate",
+      "rule_ids": [
+        "jaimini.special-lagna.hora-lagna.rate"
+      ],
+      "inputs": {
+        "elapsed_ghatikas_since_reference": 10.0
+      },
+      "expected": {
+        "signs_advanced": 4.0,
+        "arithmetic": "10 / 2.5 = 4",
+        "clock_equivalent": "10 ghatikas = 4 hours; Hora Lagna advances one sign per hour"
+      },
+      "provenance": "Vrddha verse 'sardhadvighatikamitat kalad'; the commentary states the anupata explicitly."
+    },
+    {
+      "vector_id": "jaimini.v.bhava-lagna.rate",
+      "rule_ids": [
+        "jaimini.special-lagna.bhava-lagna.rate"
+      ],
+      "inputs": {
+        "elapsed_ghatikas_since_reference": 10.0
+      },
+      "expected": {
+        "signs_advanced": 2.0,
+        "arithmetic": "10 / 5 = 2",
+        "clock_equivalent": "one sign per 2 hours"
+      },
+      "provenance": "Vrddha verse 'ghatikanam tu pancakam'."
+    },
+    {
+      "vector_id": "jaimini.v.ghatika-lagna.rate",
+      "rule_ids": [
+        "jaimini.special-lagna.ghatika-lagna.rate"
+      ],
+      "inputs": {
+        "elapsed_ghatikas_since_reference": 10.0
+      },
+      "expected": {
+        "signs_advanced": 10.0,
+        "arithmetic": "10 / 1 = 10",
+        "clock_equivalent": "one sign per 24 minutes"
+      },
+      "provenance": "Commentary statement only; no separate vrddha verse was retrieved, so this rests on a single witness."
+    },
+    {
+      "vector_id": "jaimini.v.special-lagna.origin.fork",
+      "rule_ids": [
+        "jaimini.special-lagna.origin.disputed"
+      ],
+      "inputs": {
+        "janma_lagna_sign": "Aries",
+        "janma_lagna_parity": "odd",
+        "sun_sign": "Sagittarius"
+      },
+      "expected": {
+        "pracinah_and_vrddha": "count from Sagittarius (the Sun's sign), because the lagna is odd",
+        "sutrarthaprakasika": "count from Sagittarius in every case",
+        "nilakantha": "rejects the karika underlying the pracina rule; the retrieved witnesses do not preserve his positive alternative",
+        "engine_must": "treat as configured_method and disclose"
+      },
+      "provenance": "Three attributed positions from a single continuous passage in the Sutrarthaprakasika. Nilakantha's own text could not be read directly - see the access manifest."
+    },
+    {
+      "vector_id": "jaimini.v.varnada.computation",
+      "rule_ids": [
+        "jaimini.special-lagna.varnada.computation"
+      ],
+      "inputs": {
+        "janma_lagna_sign_index_from_aries": 3,
+        "janma_lagna_parity": "odd",
+        "hora_lagna_count": 5,
+        "both_counts_same_parity": true
+      },
+      "expected": {
+        "operation": "add",
+        "total": 8,
+        "varnada_sign": "the 8th from Aries = Scorpio",
+        "caveat": "the worked examples in the commentary operate on full sign-degree-minute-second longitudes, not on whole-sign counts; this vector tests only the parity-and-add branch"
+      },
+      "provenance": "Vrddha verse quoted in full in the commentary. The caveat records that the commentary's own two examples use finer arithmetic than the verse as stated."
+    },
+    {
+      "vector_id": "jaimini.v.varnada.uncertainty",
+      "rule_ids": [
+        "jaimini.special-lagna.varnada.commentator-uncertainty"
+      ],
+      "inputs": {
+        "question": "why does the rule reverse for even lagnas"
+      },
+      "expected": {
+        "answer_available": false,
+        "commentator_says": "na vidmah - 'we do not know'",
+        "engine_must": "compute and display, never delineate as settled"
+      },
+      "provenance": "Negative control preserving the commentator's own admission."
+    },
+    {
+      "vector_id": "jaimini.v.bala.saturn",
+      "rule_ids": [
+        "jaimini.graha-bala.saturn-weakest"
+      ],
+      "inputs": {
+        "grahas": [
+          "Sun",
+          "Moon",
+          "Mars",
+          "Mercury",
+          "Jupiter",
+          "Venus",
+          "Saturn"
+        ]
+      },
+      "expected": {
+        "weakest": "Saturn",
+        "strongest": "Sun",
+        "ascending_order": [
+          "Saturn",
+          "Mars",
+          "Mercury",
+          "Jupiter",
+          "Venus",
+          "Moon",
+          "Sun"
+        ],
+        "cross_branch_agreement": "matches the Brhajjataka natural-strength order already encoded on the Parasari side"
+      },
+      "provenance": "Sutra 1.1.23 / 1.1.24; the full order comes from the commentary's Brhajjataka citation, not from the Jaimini sutra itself."
+    },
+    {
+      "vector_id": "jaimini.v.varga.delegation",
+      "rule_ids": [
+        "jaimini.varga.hora-dreskana.as-current"
+      ],
+      "inputs": {
+        "varga": "navamsa",
+        "asked": "what does Jaimini define it as"
+      },
+      "expected": {
+        "defined_by_jaimini": false,
+        "sutra_says": "horadayah siddhah - take them as current",
+        "engine_must": "import the definition from a named external text and disclose which one"
+      },
+      "provenance": "Sutra 1.1.35. This is a refusal-shaped rule: the text delegates, so the engine must not attribute a varga definition to Jaimini."
+    }
+  ]
+}

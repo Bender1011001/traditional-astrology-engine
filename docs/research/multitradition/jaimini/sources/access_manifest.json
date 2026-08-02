@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "jaimini",
+  "source_pack_id": "jaimini_upadesa_sutra_v1",
+  "purpose": "Records exactly what was retrieved for the Jaimini Upadesa Sutra pack, with SHA-256 hashes of the retrieved bytes, and exactly what was tried and failed. Files here are the archive.org OCR text layers (djvu.txt). The controlling page images are NOT stored in the repo; their identifiers are recorded so they can be re-fetched.",
+  "retrieved": [
+    {
+      "registry_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+      "file": "abhyankar_1951_jaimini_upadesa_sutras_nilakantha_djvu.txt",
+      "sha256": "a9a29136ac6d5ca4882846686a5c6048f2b447d1a358ea8e1647f5d63e5526bc",
+      "bytes": 450612,
+      "retrieved_utc": "2026-08-02",
+      "archive_identifier": "jaimini-kva-a-4-size",
+      "download_url": "https://archive.org/download/jaimini-kva-a-4-size/Jaimini%20KVA%20A4%20size_djvu.txt",
+      "companion_page_images": {
+        "file": "Jaimini KVA A4 size.pdf",
+        "format": "Image Container PDF",
+        "bytes": 238612935,
+        "stored_in_repo": false
+      },
+      "ocr_character_profile": {"devanagari": 0, "latin": 327137},
+      "usable_for": "English introduction and the complete English translation of the sutras",
+      "not_usable_for": "the Sanskrit text, which the OCR did not recover at all"
+    },
+    {
+      "registry_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+      "file": "dli_2015_242319_jaimini_sutram_djvu.txt",
+      "sha256": "54bc593b6e131a20a7ed2394d163b0f37a318dfc8e9b1d83e60cefe274181bb0",
+      "bytes": 341845,
+      "retrieved_utc": "2026-08-02",
+      "archive_identifier": "in.ernet.dli.2015.242319",
+      "download_url": "https://archive.org/download/in.ernet.dli.2015.242319/2015.242319.Jaimini-Sutram_djvu.txt",
+      "companion_page_images": {
+        "file": "2015.242319.Jaimini-Sutram.pdf",
+        "format": "Image Container PDF",
+        "bytes": 389073857,
+        "stored_in_repo": false
+      },
+      "ocr_character_profile": {"devanagari": 104988, "latin": 0},
+      "usable_for": "Sanskrit sutra text and commentary for Adhyaya 1 Pada 1, sutras 1-33",
+      "not_usable_for": "exact orthography; every quoted sutra in extraction_notes.md carries its raw OCR alongside the restored reading"
+    },
+    {
+      "registry_id": "jaimini_sitaram_jha_tattvadarsa_benares",
+      "file": "sitaram_jha_tattvadarsha_jaimini_sutram_djvu.txt",
+      "sha256": "f37f48443940680567c91b3decc1a7b1b048d77284e8fdb4b9d5872d09c2966d",
+      "bytes": 431537,
+      "retrieved_utc": "2026-08-02",
+      "archive_identifier": "xyly-jaimini-sutram-sanskrit-hindi-tika-sahitam-tattvad",
+      "download_url": "https://archive.org/download/xyly-jaimini-sutram-sanskrit-hindi-tika-sahitam-tattvad/Jaimini%20Sutram%20Sanskrit%20Hindi%20Tika%20Sahitam%20Tattvadarsha%20Sitaram%20Jha%20Jaimini%20Sanskrit%20and%20Hindi%20Astrology%20Illustrated%20Benares%20-%20Master%20Khelari%20Lal%20and%20Sons_djvu.txt",
+      "ocr_character_profile": {"devanagari": 126548, "latin": 5044},
+      "usable_for": "corroboration of the technique inventory and of the Nilakantha and Kesava commentarial attributions, via the editor's Hindi preface",
+      "not_usable_for": "rule extraction; no rule in this pack is drawn from it"
+    },
+    {
+      "registry_id": "jaimini_nilakantha_vyakhya_ms_jammu_882gha",
+      "file": "nilakantha_vyakhya_ms_jammu_882gha_djvu.txt",
+      "sha256": "2d9510d2284583cb6f34da8ce48297cafe96c6774df500f52087f55b9292fa0f",
+      "bytes": 107043,
+      "retrieved_utc": "2026-08-02",
+      "archive_identifier": "JaiminiSutraWithVyakhyaNeelkanth882GhaAlm5Shlf1DevanagariJyotisha",
+      "download_url": "https://archive.org/download/JaiminiSutraWithVyakhyaNeelkanth882GhaAlm5Shlf1DevanagariJyotisha/Jaimini%20Sutra%20with%20Vyakhya%20-%20Neelkanth%20_882_Gha_Alm_5_Shlf_1_Devanagari%20-%20Jyotisha_djvu.txt",
+      "ocr_character_profile": {"devanagari": 28648, "latin": 0},
+      "usable_for": "confirming that a Nilakantha vyakhya manuscript exists, is accessible, and treats the ayurdaya material",
+      "not_usable_for": "any rule extraction. Manuscript OCR is too degraded. Every Nilakantha position in this pack is quoted at second hand from the Sutrarthaprakasika and is labelled as such."
+    },
+    {
+      "registry_id": "jaimini_suryanarain_rao_1949_translation",
+      "file": "suryanarain_rao_1949_jaimini_sutras_djvu.txt",
+      "sha256": "5b60ad9f90414dbe6aa2520deef1259e999441d54918e1eaaffc813504a209e2",
+      "bytes": 419835,
+      "retrieved_utc": "2026-08-02",
+      "archive_identifier": "in.ernet.dli.2015.486584",
+      "download_url": "https://archive.org/download/in.ernet.dli.2015.486584/2015.486584.Jaimini-Sutras_djvu.txt",
+      "ocr_character_profile": {"devanagari": 76936, "latin": 0},
+      "ocr_failure": "A Devanagari OCR profile was applied to an English-language book. Every page came out as Devanagari mojibake. No sentence is recoverable.",
+      "usable_for": "the table-of-contents structure only, which confirms the special-lagna inventory (Arudha/Pada, Varnada, Ghatika, Hora, Bhava)",
+      "not_usable_for": "anything else. No rule in this pack is drawn from it."
+    }
+  ],
+  "attempted_and_rejected": [
+    {
+      "route": "GRETIL (https://gretil.sub.uni-goettingen.de/)",
+      "what_was_done": "Downloaded the full index (1,033,721 bytes) and searched it for every Jaimini string.",
+      "result": "GRETIL holds Jaimini-Grhyasutra, Jaimini Mimamsasutra (plain and with commentary 1-7), Jaiminiya-Brahmana, Jaiminiya-Upanisad-Brahmana and Jaiminiyanyayamalavistara. It does NOT hold the astrological Upadesa Sutra.",
+      "conclusion": "Negative. Route closed unless GRETIL announces a jyotisa accession."
+    },
+    {
+      "route": "sanskritdocuments.org",
+      "what_was_done": "Fetched the major-works index and looked for a jyotisa/Jaimini astrological text.",
+      "result": "No Jaimini Upadesa Sutra found. The site's jyotisha section was not shown to carry it.",
+      "conclusion": "Negative for this text."
+    },
+    {
+      "route": "archive.org title search for 'Jaimini Sutra'",
+      "what_was_done": "Advanced-search query across titles, then per-item metadata inspection.",
+      "result": "The majority of hits are the PURVA MIMAMSA SUTRA of Jaimini, a work of Vedic ritual hermeneutics with no astrological content. Specifically excluded: the Allahabad 1911 Sacred Books of the Hindus volume (Ganganatha Jha), the Sastradipika of Parthasarathi Misra, the Mimamsakaustubha series, Mohan Lal Sandal's translation, and the Jaimini Grhyasutra (Caland 1922).",
+      "conclusion": "A real and easy trap. Recorded so that a later pass does not ingest the wrong Jaimini."
+    },
+    {
+      "route": "wisdomlib",
+      "what_was_done": "Not pursued as a primary route.",
+      "result": "Two public-domain-era Sanskrit witnesses and one critical edition were already in hand, which is a stronger evidentiary base than a secondary web encyclopaedia.",
+      "conclusion": "Deferred, not failed."
+    },
+    {
+      "route": "Modern copyrighted translations and commentaries",
+      "what_was_done": "Identified but deliberately not used: Sanjay Rath's course on the Upadesa Sutra, B. V. Raman's Studies in Jaimini Astrology, Iranganti Rangacharya, and the Suresh Chandra Mishra Hindi edition.",
+      "result": "Not required. The Sanskrit was read directly, which is the more defensible route under this corpus's translation policy.",
+      "conclusion": "Excluded by policy, not by failure."
+    }
+  ],
+  "outstanding_acquisitions": [
+    "Page images for jaimini-kva-a-4-size, to recover the Devanagari that its OCR lost and to read Abhyankar's critical apparatus and his 14 worked Karaka-kundalis.",
+    "Devanagari transcription of the Jammu Nilakantha manuscript folios covering Adhyaya 1 Pada 1, so Nilakantha can be read directly rather than through the Sutrarthaprakasika's hostile quotation.",
+    "A clean copy of B. Suryanarain Rao's translation as an independent third check on the 1.1.15 numbering discrepancy.",
+    "Abhyankar's Appendix 1, the Jaimini-Sutra-Karika, which is the source of several vrddha verses this pack currently receives only through the Sutrarthaprakasika's quotations.",
+    "Abhyankar's Appendix 4, the comparative contents table against Brhad-Yavana-Jataka, Brhajjataka, Saravali and Brhat Parasari - the single best available basis for a rigorous Jaimini-versus-Parasari divergence statement."
+  ]
+}

@@ -1,0 +1,1937 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "jaimini",
+  "school_id": "jaimini_upadesa_sutra",
+  "source_pack_id": "jaimini_upadesa_sutra_v1",
+  "source_edition_id": "abhyankar_1951_critical_edition_aligned_to_sutrarthaprakasika_dli_2015_242319",
+  "source_registry_ids": [
+    "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+    "jaimini_sutrarthaprakasika_dli_2015_242319",
+    "jaimini_sitaram_jha_tattvadarsa_benares",
+    "jaimini_nilakantha_vyakhya_ms_jammu_882gha",
+    "jaimini_suryanarain_rao_1949_translation"
+  ],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Adhyaya 1, Pada 1 of the Jaimini Upadesa Sutra, encoded from two independent witnesses read in the original: K. V. Abhyankar's 1951 critical edition (15 manuscripts, with his English translation) and the Jaiminiyasutram with the Sutrarthaprakasika Sanskrit commentary (DLI 2015.242319). The two agree on the substance of every rule encoded here and disagree on sutra NUMBERING by exactly one from 1.1.15 onward, because Abhyankar's text carries a Pitrkaraka sutra the Sutrarthaprakasika's does not. Both numberings are recorded on every affected rule. Sanskrit was read directly; no modern copyrighted translation was relied on. Grade for the engine's own renderings is engine_translation_unreviewed. Nothing here is customer-eligible: there is no Jaimini engine, no independent Sanskrit review, and no reproduced worked example yet.",
+  "rules": [
+    {
+      "rule_id": "jaimini.rasi-drsti.movable",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "rasi",
+        "modality": "cara",
+        "applies_to": "sign_to_sign_aspect"
+      },
+      "conditions": {
+        "aspecting_sign_modality": "movable"
+      },
+      "conclusion": {
+        "aspects_signs_at_offsets": [
+          5,
+          8,
+          11
+        ],
+        "stated_as": "a movable sign aspects every fixed sign except the second from it",
+        "excluded_offset": 2,
+        "note": "This is a SIGN aspect, not a planetary aspect. It has no counterpart in the Parasari drsti scheme.",
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.2",
+          "verification": "Abhyankar: 'The (twelve) Divisions aspect the Divisions in their front; so also they aspect the Divisions at the two sides.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.2 (abhipasyanty rksani parsve ca)",
+          "verification": "Devanagari OCR reads 'abhipadayantyaksani parcvaseca'; restored as abhipasyanty rksani parsve ca. The commentary's own enumeration (movable: 5th/8th/11th; fixed: 3rd/6th/9th; dual: 4th/7th/10th) fixes the sense."
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.2 commentary, vrddha karika",
+          "verification": "Quoted verse: 'caram dhanam vina sthanuh sthiram antyam vina caram | yugmam svena vina yugmam pasyaty ity ayam agamah ||'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.rasi-drsti.fixed",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "rasi",
+        "modality": "sthira",
+        "applies_to": "sign_to_sign_aspect"
+      },
+      "conditions": {
+        "aspecting_sign_modality": "fixed"
+      },
+      "conclusion": {
+        "aspects_signs_at_offsets": [
+          3,
+          6,
+          9
+        ],
+        "stated_as": "a fixed sign aspects every movable sign except the twelfth from it",
+        "excluded_offset": 12,
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.2",
+          "verification": "Abhyankar: 'The (twelve) Divisions aspect the Divisions in their front; so also they aspect the Divisions at the two sides.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.2 (abhipasyanty rksani parsve ca)",
+          "verification": "Devanagari OCR reads 'abhipadayantyaksani parcvaseca'; restored as abhipasyanty rksani parsve ca. The commentary's own enumeration (movable: 5th/8th/11th; fixed: 3rd/6th/9th; dual: 4th/7th/10th) fixes the sense."
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.2 commentary, vrddha karika",
+          "verification": "Quoted verse: 'caram dhanam vina sthanuh sthiram antyam vina caram | yugmam svena vina yugmam pasyaty ity ayam agamah ||'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.rasi-drsti.dual",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "rasi",
+        "modality": "dvisvabhava",
+        "applies_to": "sign_to_sign_aspect"
+      },
+      "conditions": {
+        "aspecting_sign_modality": "dual"
+      },
+      "conclusion": {
+        "aspects_signs_at_offsets": [
+          4,
+          7,
+          10
+        ],
+        "stated_as": "a dual sign aspects every dual sign except itself",
+        "excluded_offset": 1,
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.2",
+          "verification": "Abhyankar: 'The (twelve) Divisions aspect the Divisions in their front; so also they aspect the Divisions at the two sides.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.2 (abhipasyanty rksani parsve ca)",
+          "verification": "Devanagari OCR reads 'abhipadayantyaksani parcvaseca'; restored as abhipasyanty rksani parsve ca. The commentary's own enumeration (movable: 5th/8th/11th; fixed: 3rd/6th/9th; dual: 4th/7th/10th) fixes the sense."
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.2 commentary, vrddha karika",
+          "verification": "Quoted verse: 'caram dhanam vina sthanuh sthiram antyam vina caram | yugmam svena vina yugmam pasyaty ity ayam agamah ||'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.graha-drsti.inherits-rasi-drsti",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "planetary_aspect"
+      },
+      "conditions": {
+        "graha_occupies_sign": "any"
+      },
+      "conclusion": {
+        "aspects": "the same signs its occupied sign aspects, and the grahas standing in them",
+        "stated_as": "tannisthas ca tadvat - 'and those established in them, likewise'",
+        "divergence_from_parasari": "Jaimini derives planetary aspect from sign modality. Parasari gives each graha a 7th-house aspect plus special aspects for Mars, Jupiter and Saturn. The two schemes disagree for almost every chart.",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.3",
+          "verification": "Abhyankar: 'The planets occupying the Divisions aspect similarly.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.3 (tannisthas ca tadvat)",
+          "verification": "Commentary: grahas in movable signs aspect all fixed signs and the grahas in them, leaving out the 2nd sign and its graha."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.rasi-drsti.sammukha-vs-parsva.disputed",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "rasi",
+        "applies_to": "aspect_quality_subdivision"
+      },
+      "conditions": {
+        "aspect_exists": true,
+        "question": "which aspected sign is 'facing' (sammukha) and which are 'at the side' (parsva)"
+      },
+      "conclusion": {
+        "reading_sutrarthaprakasika": {
+          "movable": {
+            "sammukha": 8,
+            "parsva": [
+              5,
+              11
+            ]
+          },
+          "fixed": {
+            "sammukha": 6,
+            "parsva": [
+              3,
+              9
+            ]
+          },
+          "dual": {
+            "sammukha": 7,
+            "parsva": [
+              4,
+              10
+            ]
+          }
+        },
+        "reading_karika_rejected_by_commentator": "the Sutrarthaprakasika quotes a karika giving the same assignment and then calls it svakalpita ('its own invention'); the OCR does not let us tell whether the quoted karika differs from the commentator's own derivation or whether the rejection targets the Subodhini's 'vicitra riti' mentioned immediately before",
+        "chart_form_dependency": "the commentary notes the answer changes between a square chart (caturasra-cakra) and a circular chart (vartula-cakra)",
+        "engine_action": "do not use sammukha/parsva weighting; the aspect set itself is not in doubt, only its subdivision",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [
+        "jaimini.rasi-drsti.movable",
+        "jaimini.rasi-drsti.fixed",
+        "jaimini.rasi-drsti.dual"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.2 commentary",
+          "verification": "'parantu subodhinikarena vicitra ritih svikrta' followed by a quoted karika and 'tad api svakalpitam eva iti'. OCR legible but the referent of the rejection is ambiguous."
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.argala.primary",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha_or_bhava",
+        "applies_to": "argala_intervention"
+      },
+      "conditions": {
+        "grahas_in_offsets_from_reference": [
+          4,
+          2,
+          11
+        ]
+      },
+      "conclusion": {
+        "forms": "argala (a 'bolt' or intervention) on the reference point",
+        "sutra_words": "dara / bhagya / sula",
+        "decoded_via": "katapayadi consonant numerals reduced modulo 12: dara = d(8) r(2) read right-to-left = 28, 28 mod 12 = 4",
+        "commentary_decoding": "turya (4th), dvitiya (2nd), ekadasa (11th)",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.4",
+          "verification": "'The planets occupying the fourth, second and eleventh houses from the aspecting planet form a combination with the aspecting planet.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.4 (darabhagyasulastha argala nidhyatuh)",
+          "verification": "Commentary decodes to 4th/2nd/11th and works the katapayadi arithmetic for 'dara' explicitly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.argala.third-house-malefic",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "argala_intervention"
+      },
+      "conditions": {
+        "grahas_in_offset_from_reference": 3,
+        "graha_nature": "malefic"
+      },
+      "conclusion": {
+        "forms": "argala, but only bhuyasa ('by the many')",
+        "reading_sutrarthaprakasika": "three or more malefics are needed; one or two do not form it",
+        "reading_abhyankar": "the malefics must outnumber the benefics in that house",
+        "reading_premanidhi_rejected": "Premanidhi Pandita is quoted as holding that bhuyasa selects the single malefic occupying the greatest arc; the Sutrarthaprakasika calls this asangata ('incoherent'), arguing bhuyasa counts bodies, not degrees",
+        "alternative_sense": "the commentary also allows bhuyasa = 'strongly, without obstruction'",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.5",
+          "verification": "'The planets in the third house ... provided they are malefic planets and are in a greater number than the benefic planets in that house.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.5 (kamastha tu bhuyasa papanam)",
+          "verification": "kama = k(1) m(5) = 51, 51 mod 12 = 3. Commentary names and rejects Premanidhi Pandita's reading."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.argala.virodhi",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "argala_obstruction"
+      },
+      "conditions": {
+        "grahas_in_offsets_from_reference": [
+          12,
+          10,
+          3
+        ]
+      },
+      "conclusion": {
+        "obstructs": "the argala formed from the 4th, 2nd and 11th respectively",
+        "sutra_words": "rispha / nica / kama",
+        "pairing": {
+          "4": 10,
+          "2": 12,
+          "11": 3
+        },
+        "pairing_confidence": "the sutra lists rispha(12) nica(10) kama(3); the commentary says the obstruction operates 'kramena' (respectively) on the argala-makers, but the OCR does not settle which obstructor is paired with which argala",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.6",
+          "verification": "'The planets, occupying the tenth twelfth and third houses from the aspecting planet, present an opposition (to the formation of the combination of planets occupying respectively the fourth, second and eleventh houses).'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.6 (risphanicakamastha virodhinah)",
+          "verification": "Commentary: dasama-dvadasa-trtiya-sthana-stha grahah virodhinah, 'kramena' with respect to the argala-makers."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.argala.virodhi-cancelled",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "argala_obstruction_cancellation"
+      },
+      "conditions": {
+        "obstructors_fewer_than_argala_makers": true,
+        "or_obstructors_weak": true
+      },
+      "conclusion": {
+        "obstruction": "does not take effect",
+        "residual_arithmetic": "where obstructors outnumber argala-makers the commentary directs subtracting the weaker count from the stronger and judging the remainder",
+        "strength_caveat": "the commentary notes a graha exalted or in its own sign can be balin even when outnumbered, so 'na nyuna' and 'vibala' are not redundant",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.7",
+          "verification": "'Planets lesser in number, or weakened, do not present an opposition.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.7 (na nyuna vibalas ca)",
+          "verification": "Commentary supplies the subtraction procedure and the exaltation caveat."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.argala.trikona",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "argala_intervention"
+      },
+      "conditions": {
+        "grahas_in_offsets_from_reference": [
+          5,
+          9
+        ]
+      },
+      "conclusion": {
+        "forms": "argala as before (pragvat)",
+        "obstruction": "the 9th obstructs the 5th, per the commentary ('pancame grahasattve argala; navame nyuna-samkhyatva-nirbalatva-rahita-graha-sattve tat-pratibandhakah')",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.8",
+          "verification": "'Similar combination takes place in the case of houses in trine (viz. the fifth and ninth from the house concerned).'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.8 (pragvat trikone)",
+          "verification": "Commentary pairs 5th as argala and 9th as its obstructor."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.argala.ketu-reversed",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "graha": [
+          "ketu",
+          "rahu"
+        ],
+        "applies_to": "argala_counting_direction"
+      },
+      "conditions": {
+        "reference_point_is_node": true
+      },
+      "conclusion": {
+        "counting": "reversed - offsets are counted backwards through the zodiac",
+        "rahu_included": "the commentary states 'ketu-padam rahor api bodhakam' - the word Ketu carries Rahu too",
+        "scope_dispute": "some hold viparita applies universally to every preceding argala sutra ('viparitam iti sutram kaiscit sarvatrikam uktam'); the Sutrarthaprakasika rejects that, confining it to the trikona sutra it immediately follows, on the ground that the sutra order would otherwise have been different",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.9",
+          "verification": "'Reverse is the case with Ketu (regarding the counting of houses which is done backwards).'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.9 (viparitam ketoh)",
+          "verification": "Commentary states and rejects the sarvatrika (universal-scope) reading."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.argala.target.disputed",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "argala",
+        "applies_to": "what_the_argala_acts_upon"
+      },
+      "conditions": {
+        "argala_formed": true
+      },
+      "conclusion": {
+        "reading_sutrarthaprakasika": "the argala falls on the BHAVA under consideration, not on the aspecting graha; nidhyatuh is a reference point ('from the seer'), not a patient",
+        "reading_subodhini": "the argala falls on the aspecting GRAHA itself",
+        "commentator_argument": "the Sutrarthaprakasika argues that if the Subodhini were right the sutra would have read 'darabhagyasulastha argala grahat'",
+        "engine_action": "fan out both targets or abstain",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [
+        "jaimini.argala.primary"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.4 commentary",
+          "verification": "'yat tu subodhinikarena ... drstr-graha-upari argala bhavati iti yad uktam tad asangatam'"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.atmakaraka.by-degree",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "variable_significator_assignment"
+      },
+      "conditions": {
+        "candidate_set": "the seven grahas Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn (Rahu optionally, see the scheme rules)",
+        "measure": "longitude within the occupied sign, i.e. sidereal longitude modulo 30 degrees"
+      },
+      "conclusion": {
+        "atmakaraka": "the graha with the greatest degrees-within-sign",
+        "arithmetic": "rank descending on (degree, minute, second) of longitude mod 30",
+        "tie_break_primary": "kaladibhih - if degrees are equal, compare minutes, then finer units",
+        "fully_deterministic": true,
+        "note": "This is pure arithmetic and is directly implementable and testable. It is the single most implementable rule in the text.",
+        "divergence_from_parasari": "Parasari karakas are FIXED by nature (Sun = father, Moon = mother, ...). Jaimini's chara karakas are assigned per chart by degree, so the same graha signifies different topics in different nativities.",
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.10",
+          "verification": "'That planet (out of the seven or eight planets) who is more ahead than others (in degrees and minutes in the several divisions ...) is called the Chief Significator.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 (atmadhikah kaladibhir nabhogah saptanam astanam va)",
+          "verification": "Commentary: 'saptanam karakanam va astanam karakanam vicare yo nabhogah kaladibhih ... yo 'dhikah sa atma'; and 'yatra grahanam amsatulyata cet tada kaladi-sthanena yo 'dhikah sa atmakarako bhavati'."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.descending-order",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "variable_significator_assignment"
+      },
+      "conditions": {
+        "atmakaraka_already_assigned": true
+      },
+      "conclusion": {
+        "order_after_atmakaraka": [
+          "amatyakaraka",
+          "bhratrkaraka",
+          "matrkaraka",
+          "putrakaraka",
+          "jnatikaraka",
+          "darakaraka"
+        ],
+        "assignment": "each successive karaka is the graha with the next lower degrees-within-sign",
+        "sutra_chain": "tasyanusaranad amatyah / tasya bhrata / tasya mata / tasya putrah / tasya jnatih / tasya darah ca",
+        "vrddha_verse": "bhagadhikah karakah syad alpabhago 'ntyakarakah | madhyamso madhyakhetah syad upakhetah sa eva hi ||",
+        "note": "This ordering is the SEVEN-karaka chain of the Sutrarthaprakasika. See the scheme rules for the eight-karaka variant, which inserts Pitrkaraka after Matrkaraka.",
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.12 - 1.1.17",
+          "verification": "Six consecutive sutras; the commentary spells out 'atmakarakan nyunamso ... karakah' for each."
+        },
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.12 - 1.1.18",
+          "verification": "Abhyankar's translation gives the same chain but with Pitrkaraka at 1.1.15, shifting all later numbers by one."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.scheme.seven",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "karaka_scheme",
+        "applies_to": "how_many_karakas"
+      },
+      "conditions": {
+        "scheme_selected": "seven"
+      },
+      "conclusion": {
+        "candidate_grahas": [
+          "sun",
+          "moon",
+          "mars",
+          "mercury",
+          "jupiter",
+          "venus",
+          "saturn"
+        ],
+        "rahu_included": false,
+        "karaka_count": 7,
+        "matr_putra_identity": "Matrkaraka doubles as Putrakaraka; there is no separate Pitrkaraka",
+        "sutra_authority": "matra saha putram eke samamananti - 'some hold the son together with the mother'",
+        "cross_reference_parasari": "the Sutrarthaprakasika quotes a Brhat-Parasara-Hora verse: 'ravyadi-sani-paryanta bhaveyuh sapta karakah' - seven karakas, Sun through Saturn",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [
+        "jaimini.chara-karaka.scheme.eight"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.18 (matra saha putram eke samamananti)",
+          "verification": "The Sutrarthaprakasika's own running text has SEVEN karakas: its sutras 12-17 are amatya, bhratr, matr, putra, jnati, dara."
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 commentary",
+          "verification": "'asmin granthe saptanam karakanam darsanad ravyadi-sany-antanam saptanam grahanam madhye yo graho 'msadibhir adhikah sa atma'"
+        },
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.19",
+          "verification": "'Some scholars maintain the tradition of taking the Significator of the mother as the Significator of the son also, (taking the number of significatory planets as seven and not eight, of course omitting Rahu).'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.scheme.eight",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "karaka_scheme",
+        "applies_to": "how_many_karakas"
+      },
+      "conditions": {
+        "scheme_selected": "eight"
+      },
+      "conclusion": {
+        "candidate_grahas": [
+          "sun",
+          "moon",
+          "mars",
+          "mercury",
+          "jupiter",
+          "venus",
+          "saturn",
+          "rahu"
+        ],
+        "rahu_included": true,
+        "karaka_count": 8,
+        "extra_karaka": "pitrkaraka, inserted between matrkaraka and putrakaraka",
+        "order": [
+          "atmakaraka",
+          "amatyakaraka",
+          "bhratrkaraka",
+          "matrkaraka",
+          "pitrkaraka",
+          "putrakaraka",
+          "jnatikaraka",
+          "darakaraka"
+        ],
+        "sutra_authority": "the sutra itself offers both: saptanam astanam va - 'of seven or of eight'",
+        "node_handling_abhyankar": "Abhyankar's introduction states Rahu and Ketu hold the same degrees within a sign and are therefore counted together as ONE karaka graha, giving eight not nine",
+        "cross_reference_parasari": "the quoted Brhat-Parasara verse adds 'amsah samye grahau dvau ced rahum tan ganayed dvija'",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [
+        "jaimini.chara-karaka.scheme.seven"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.15",
+          "verification": "'The planet next to the Significator of the Mother is called the Significator of the Father (Pitrkaraka).' Abhyankar's critical text, edited from 15 MSS, carries this sutra; the Sutrarthaprakasika's text does not."
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 (saptanam astanam va)",
+          "verification": "'astanam va iti tu matantarena astama-karaka-bodhako vikalpena rahor bodhakas ca ... tesam mate pitrkarako ...'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.18 commentary",
+          "verification": "'kvacit pustakesu matrkarakan nyunamsah pitrkarako bhavati iti srutam tad asangatam' - the commentator KNOWS the Pitrkaraka manuscripts and rejects them."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.rahu.reverse-counted",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "graha": "rahu",
+        "applies_to": "degree_measure_for_karaka_ranking"
+      },
+      "conditions": {
+        "scheme_selected": "eight",
+        "convention": "reverse"
+      },
+      "conclusion": {
+        "measure_for_rahu": "30 degrees minus its longitude within the sign",
+        "rationale": "Rahu moves retrograde, so its progress through a sign is measured backwards",
+        "vrddha_verse": "mesady-asavya-margena rahuketu na karakau - 'by the non-leftward (forward, Aries-order) path Rahu and Ketu are not karakas'",
+        "commentary_gloss": "savyam vamam asavyam daksinam, tena mesadi-krama-margena rahuketu karakau na bhavatah; viparita-margena tu bhavata eva - 'by the reverse path they certainly are'",
+        "corollary": "the commentary adds 'rahor nyunamsatvenatmakarakatvam syad iti vrddhenapi pratipaditam' - Rahu at LOW forward degrees becomes Atmakaraka precisely because it is reverse-counted",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [
+        "jaimini.chara-karaka.rahu.excluded"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.10",
+          "verification": "'That planet (out of the seven or eight planets) who is more ahead than others (in degrees and minutes in the several divisions ...) is called the Chief Significator.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 (atmadhikah kaladibhir nabhogah saptanam astanam va)",
+          "verification": "Commentary: 'saptanam karakanam va astanam karakanam vicare yo nabhogah kaladibhih ... yo 'dhikah sa atma'; and 'yatra grahanam amsatulyata cet tada kaladi-sthanena yo 'dhikah sa atmakarako bhavati'."
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 commentary, vrddha verse",
+          "verification": "The verse and its gloss are the only explicit statement of the reverse-count convention found in the retrieved witnesses."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.rahu.excluded",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "graha": [
+          "rahu",
+          "ketu"
+        ],
+        "applies_to": "candidate_set_membership"
+      },
+      "conditions": {
+        "scheme_selected": "seven"
+      },
+      "conclusion": {
+        "rahu_is_karaka": false,
+        "ketu_is_karaka": false,
+        "basis": "the same vrddha verse, read as a flat denial in the normal (forward) reckoning that the rest of the text uses",
+        "engine_action": "this is the DEFAULT under the seven-karaka scheme; selecting it changes every karaka assignment in charts where Rahu would have ranked high",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [
+        "jaimini.chara-karaka.rahu.reverse-counted"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 commentary, vrddha verse",
+          "verification": "'mesady-asavya-margena rahuketu na karakau'"
+        },
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.19",
+          "verification": "Abhyankar glosses the seven-karaka option as 'of course omitting Rahu'."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.tie-break.disputed",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "karaka_ranking_tie_resolution"
+      },
+      "conditions": {
+        "two_or_more_grahas_equal_in_degrees": true
+      },
+      "conclusion": {
+        "reading_sutra_literal": "compare kalas (minutes), then finer units - the word kaladibhih in sutra 1.1.10 is taken to license this",
+        "reading_kecit": "'some say' the STRONGER graha becomes Atmakaraka and the other becomes upakheta",
+        "reading_sutrarthaprakasika_own": "'asman-mate tu amsa-samye yo bali sa atma yas tu nirbalah sa tad-anya-karakah' - the commentator adopts the strength rule for equality at the degree level",
+        "reading_subodhini": "the Subodhini is quoted as first using minutes and then, on equality of minutes, deciding by sthira-karaka; the Sutrarthaprakasika calls that asangata",
+        "commentator_admission": "'tatra mulam anvesyam' - 'the source for that should be sought' - said of the kecit reading",
+        "engine_action": "exact ties are measure-zero in practice but MUST not be resolved silently; abstain and report",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.10",
+          "verification": "'That planet (out of the seven or eight planets) who is more ahead than others (in degrees and minutes in the several divisions ...) is called the Chief Significator.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 (atmadhikah kaladibhir nabhogah saptanam astanam va)",
+          "verification": "Commentary: 'saptanam karakanam va astanam karakanam vicare yo nabhogah kaladibhih ... yo 'dhikah sa atma'; and 'yatra grahanam amsatulyata cet tada kaladi-sthanena yo 'dhikah sa atmakarako bhavati'."
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.10 commentary",
+          "verification": "Three positions are stated and attributed in a single passage."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.chara-karaka.atmakaraka.significance",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "atmakaraka",
+        "applies_to": "delineation"
+      },
+      "conditions": {
+        "atmakaraka_assigned": true
+      },
+      "conclusion": {
+        "signifies": "bandha and moksa - bondage and liberation",
+        "sutra": "sa iste bandhamoksayoh",
+        "commentary": "an Atmakaraka debilitated or joined to malefics gives bondage-type suffering in its own dasa/antardasa; exalted or joined to benefics it releases even one already bound",
+        "publication_note": "'bondage' in the commentary includes literal imprisonment. Not to be rendered as a prediction.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.11",
+          "verification": "'He rules over the bondage and liberation (misery and happiness) of man.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.11 (sa iste bandhamoksayoh)",
+          "verification": "Commentary as summarised."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Must never be rendered as a prediction of imprisonment, confinement, or spiritual attainment.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.sthira-karaka.mars",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "graha": "mars",
+        "applies_to": "fixed_significator"
+      },
+      "conditions": {
+        "karaka_type": "sthira"
+      },
+      "conclusion": {
+        "signifies": [
+          "sister",
+          "brother-in-law",
+          "younger brother",
+          "mother"
+        ],
+        "sutra": "bhaginy artah syalah kaniyan janani ca",
+        "note": "arta is a name for Bhauma/Mars. These FIXED significators coexist with the variable chara karakas; Jaimini uses both.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.20",
+          "verification": "'The consideration of the sister, brother-in-law, younger brother and mother can be made from the planet Mars.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.19",
+          "verification": "'artad bhaumat bhagini syalo laghubhrata mata ca tesam vicarah karyah'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.sthira-karaka.mercury",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "graha": "mercury",
+        "applies_to": "fixed_significator"
+      },
+      "conditions": {
+        "karaka_type": "sthira"
+      },
+      "conclusion": {
+        "signifies": [
+          "maternal uncle",
+          "maternal relatives",
+          "kin of the mother's line"
+        ],
+        "sutra": "matuladyo bandhavo matrsajatiya ity uttaratah",
+        "uttaratah": "'from the next', i.e. the graha after Mars in the standard order = Mercury",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.21",
+          "verification": "'Other relatives such as maternal uncle, or mother's relatives, in short, are to be considered from the next i.e. Mercury.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.20",
+          "verification": "'uttarato bhaumad uddhrto budhat'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.sthira-karaka.jupiter-venus-saturn.disputed",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "fixed_significator"
+      },
+      "conditions": {
+        "karaka_type": "sthira",
+        "topics": [
+          "grandfather",
+          "husband",
+          "son"
+        ]
+      },
+      "conclusion": {
+        "sutra": "pitamahah patiputrav iti gurumukhad eva janiyat",
+        "reading_abhyankar": "ALL THREE - grandfather, husband and son - are read from Jupiter",
+        "reading_sutrarthaprakasika": "distributed across three grahas: 'guroh pitamahah sukrat patih saneh putra iti janiyat' - grandfather from Jupiter, husband from Venus, son from Saturn",
+        "textual_basis_of_the_split": "the commentary reads gurumukhat as 'from Jupiter onward', i.e. Jupiter, Venus, Saturn in sequence, and defends it by noting that the next sutra would otherwise have to be restructured",
+        "engine_action": "fan out; the two readings assign the same three topics to different grahas",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.22",
+          "verification": "'Grandfather, husband and son should be considered from Jupiter.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.21",
+          "verification": "'guroh pitamahah sukrat patih saneh putra iti janiyat'"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.katapayadi.bhava-and-rasi",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "text_decoding",
+        "applies_to": "how_to_read_the_sutras"
+      },
+      "conditions": {
+        "sutra_word_denotes": [
+          "bhava",
+          "rasi"
+        ]
+      },
+      "conclusion": {
+        "decoding": "consonants carry katapayadi numerals; digits are read right-to-left ('ankanam vamato gatih'); the value is reduced modulo 12 to give the house or sign",
+        "sutra": "sarvatra savarna bhava rasayas ca",
+        "worked_example_in_commentary": "dara: d = 8, r = 2 -> 28; 28 mod 12 = 4 -> the fourth house",
+        "second_example": "viveka -> 144 (the maximum dasa total)",
+        "why_this_matters": "Jaimini's sutras are written in numeric code. Almost every substantive disagreement between commentators begins as a disagreement about how to decode a word.",
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.32",
+          "verification": "'The Bhavas (houses) and the Divisions are to be understood everywhere in this system of Jaimini from letters of the alphabet of the words used for them.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.31 (sarvatra savarna bhava rasayas ca)",
+          "verification": "Commentary supplies the katapayadi karika 'katapayavarnabhavair iha pindantyair aksarair ankah ...' and the dara worked example."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.katapayadi.not-grahas",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "text_decoding",
+        "applies_to": "how_to_read_the_sutras"
+      },
+      "conditions": {
+        "sutra_word_denotes": "graha"
+      },
+      "conclusion": {
+        "decoding": "planet names are NOT katapayadi-encoded; they are read as ordinary words",
+        "sutra": "na grahah",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.33",
+          "verification": "'The planets are not to be understood in the way given above.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.32 (na grahah)",
+          "verification": "'grahah savarna na bhavanti'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.arudha.general",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "bhava",
+        "applies_to": "arudha_pada_computation"
+      },
+      "conditions": {
+        "bhava": "any",
+        "lord_placement": "not_1st_4th_or_7th_from_the_bhava"
+      },
+      "conclusion": {
+        "computation": "count from the bhava to its lord's sign; then count the same number of signs onward from the lord's sign; the sign arrived at is the pada (arudha)",
+        "applied_to_lagna": "gives the Pada Lagna / Arudha Lagna",
+        "divergence_from_parasari": "arudha padas have no counterpart in the core Parasari natal method encoded elsewhere in this repo; they produce an entirely separate twelve-house frame (the pada-kundali) that Jaimini reads alongside the rasi chart",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.29",
+          "verification": "'The Pada Lagna or Arudha Lagna is the division which is obtained by calculating as many divisions ahead of the division occupied by the lord of the Ascendant, as there are divisions from the Ascendant to the lord.'"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.arudha.exception.lord-in-4th",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "bhava",
+        "applies_to": "arudha_pada_computation"
+      },
+      "conditions": {
+        "lord_offset_from_bhava": 4
+      },
+      "conclusion": {
+        "pada": "the 4th sign itself, not the 7th that the general rule would give",
+        "reason_stated": "not given in the sutra; the general rule would put the pada in the 7th, which the text forbids",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.30",
+          "verification": "'If the lord of the Ascendant be in the fourth from the Ascendant, then the fourth house (and not the seventh house) is the Pada Lagna or Arudha Lagna.'"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.arudha.exception.lord-in-7th",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "bhava",
+        "applies_to": "arudha_pada_computation"
+      },
+      "conditions": {
+        "lord_offset_from_bhava": 7
+      },
+      "conclusion": {
+        "pada": "the 10th sign, not the bhava itself",
+        "commentary_arithmetic": "'tasmin svamini rasitrayam yuktam kartavyam tada padam bhavati' - add three signs to the lord's sign",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.31",
+          "verification": "'Similarly, if the lord of the Ascendant be in the seventh house from the Ascendant, then the tenth is the Pada Lagna or Arudha Lagna (and not the Ascendant itself).'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.29 - 1.1.30 commentary",
+          "verification": "Supplies the 'add three signs' arithmetic for the lord-in-7th case."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.dasa.direction.odd-forward",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "timing",
+      "scope": {
+        "object": "rasi_dasa",
+        "applies_to": "counting_direction"
+      },
+      "conditions": {
+        "sign_is_odd": true
+      },
+      "conclusion": {
+        "direction": "forward (praci / zodiacal order)",
+        "sutra": "pracivrttir visamabhesu",
+        "odd_signs": [
+          "Aries",
+          "Gemini",
+          "Leo",
+          "Libra",
+          "Sagittarius",
+          "Aquarius"
+        ],
+        "divergence_from_parasari": "Jaimini's dasas run on SIGNS, not on grahas. Vimsottari is a nakshatra-seeded planetary dasa; chara dasa is a sign sequence whose lengths are computed per sign.",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.25",
+          "verification": "'Counting ahead should be followed in the case of odd divisions.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.24 (pracivrttir visamabhesu)",
+          "verification": "Commentary lists Mesa, Mithuna, Simha, Tula, Dhanus, Kumbha."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.dasa.direction.even-reverse",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "timing",
+      "scope": {
+        "object": "rasi_dasa",
+        "applies_to": "counting_direction"
+      },
+      "conditions": {
+        "sign_is_even": true
+      },
+      "conclusion": {
+        "direction": "reverse (paraci / against zodiacal order)",
+        "sutra": "paracy uttaresu",
+        "even_signs": [
+          "Taurus",
+          "Cancer",
+          "Virgo",
+          "Scorpio",
+          "Capricorn",
+          "Pisces"
+        ],
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.26",
+          "verification": "'Counting backwards should be followed in the case of even divisions.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.25 (paracy uttaresu)",
+          "verification": "Commentary lists Vrsa, Karkata, Kanya, Vrscika, Makara, Mina."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.dasa.direction.fixed-sign-exception",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "timing",
+      "scope": {
+        "object": "rasi_dasa",
+        "applies_to": "counting_direction"
+      },
+      "conditions": {
+        "sign_in": [
+          "Taurus",
+          "Leo",
+          "Scorpio",
+          "Aquarius"
+        ]
+      },
+      "conclusion": {
+        "direction": "inverted relative to the odd/even rule",
+        "resulting_direction": {
+          "Taurus": "forward",
+          "Scorpio": "forward",
+          "Leo": "reverse",
+          "Aquarius": "reverse"
+        },
+        "sutra": "na kvacit - 'not in some cases'",
+        "sages_own_gloss": "matrdharmayoh samanyam viparitam ojakutayoh",
+        "commentary_decoding": "matr/dharma = 4th and 9th words decoding to the 5th and 11th signs (Simha, Kumbha); ojakuta = Vrsa and Vrscika",
+        "old_karika": "kramad vrse vrscike ca vyutkramat kumbhasimhayoh",
+        "nilakantha_summary_verse": "mesadibhir vimeka-geyam padam ojapade kramat | dasabdanayane karya ganana vyutkramat same ||",
+        "witness_agreement": "Abhyankar's translation gives the exception as 'divisions 2, 5, 8 and 11', which are Taurus, Leo, Scorpio and Aquarius - the same four signs. The witnesses AGREE here.",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.27",
+          "verification": "'Not so, however, in some cases (i.e. in the case of divisions 2, 5, 8 and 11).'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.26 (na kvacit)",
+          "verification": "Commentary quotes the sage's own gloss, the old karika, and Nilakantha's summary verse."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.dasa.length.sign-to-its-lord",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "timing",
+      "scope": {
+        "object": "rasi_dasa",
+        "applies_to": "dasa_length"
+      },
+      "conditions": {
+        "sign": "any"
+      },
+      "conclusion": {
+        "length_years": "the number of signs counted from the sign to the sign occupied by that sign's lord, counted forward or backward per the direction rules",
+        "sutra": "generally, for each division the years are counted from the division to the division occupied by its lord",
+        "unresolved": "the sutra as translated does not settle the subtract-one convention, the treatment of a lord in its own sign, or the dual lordship of Scorpio and Aquarius. Those are supplied by later practice, not by this sutra.",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.28",
+          "verification": "'Generally, for each division, the number of years for the life-period of the division or Dasa is calculated from the particular division to the division occupied by the lord of that division (in the right or reverse order according as the division falls in odd or even Rasipadas).'"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Partially stated. The arithmetic is not closed by the sutra; do not implement a dasa length without resolving the open conventions listed in conclusion.unresolved."
+    },
+    {
+      "rule_id": "jaimini.dasa.cycle.144-year-maximum",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "timing",
+      "scope": {
+        "object": "rasi_dasa",
+        "applies_to": "cycle_total"
+      },
+      "conditions": {
+        "full_cycle": true
+      },
+      "conclusion": {
+        "twelve_signs_taken_in_order": true,
+        "maximum_total_years": 144,
+        "sutra": "yavad vivekam avrttir bhanam",
+        "katapayadi": "viveka = v(4) v(4) k(1), read right-to-left = 144",
+        "check": "12 signs x a maximum of 12 years each = 144",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.34",
+          "verification": "'The twelve divisions are to be taken one after another for considering the periods (Dasas) so that the maximum number of years for the divisions reaches the number 144.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.33 (yavad vivekam avrttir bhanam)",
+          "verification": "Commentary decodes viveka via katapayadi to 144."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.special-lagna.hora-lagna.rate",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "special_lagna",
+        "lagna": "hora",
+        "applies_to": "computation"
+      },
+      "conditions": {
+        "time_since_reference": "elapsed ghatikas"
+      },
+      "conclusion": {
+        "rate": "one sign per 2.5 ghatikas (one ghatika = 24 minutes, so one sign per 60 minutes of clock time)",
+        "vrddha_verse": "tatha sardhadvighatikamitat kalad vilagnabhat | prayati lagnam tannama horalagnam pracaksate ||",
+        "note": "Hora Lagna advances at a uniform rate, unlike the rising sign, which depends on oblique ascension at the birthplace.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.31 commentary, vrddha verse",
+          "verification": "Quoted with the anupata (rule of three) worked out: if 30 degrees are obtained in 2.5 ghatikas, how much in the elapsed ghatikas."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.special-lagna.bhava-lagna.rate",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "special_lagna",
+        "lagna": "bhava",
+        "applies_to": "computation"
+      },
+      "conditions": {
+        "time_since_reference": "elapsed ghatikas"
+      },
+      "conclusion": {
+        "rate": "one sign per 5 ghatikas (one sign per 2 hours of clock time)",
+        "vrddha_verse": "suryodayam samarabhya ghatikanam tu pancakam | prayati janmaparyantam bhavalagnam tathaiva ca ||",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.31 commentary, vrddha verse",
+          "verification": "As quoted."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.special-lagna.ghatika-lagna.rate",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "special_lagna",
+        "lagna": "ghatika",
+        "applies_to": "computation"
+      },
+      "conditions": {
+        "time_since_reference": "elapsed ghatikas"
+      },
+      "conclusion": {
+        "rate": "one sign per ghatika (one sign per 24 minutes of clock time)",
+        "commentary": "ghatikalagnam ghatikamitodayapramananusarena",
+        "note": "The commentary states the rate but the retrieved witnesses do not give a separate vrddha verse for it.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.31 commentary",
+          "verification": "'bhavalagnam pancaghatikamitodayamana-nusarena horalagnam sardhadvighatikamitamananusarena ghatikalagnam ghatikamitodayapramananusarena'"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.special-lagna.origin.disputed",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "special_lagna",
+        "applies_to": "where_the_count_starts"
+      },
+      "conditions": {
+        "computing": [
+          "hora_lagna",
+          "bhava_lagna",
+          "ghatika_lagna"
+        ]
+      },
+      "conclusion": {
+        "reading_pracinah_and_vrddha": "if the janma lagna is in an ODD sign, count from the Sun's sign; if EVEN, count from the janma lagna",
+        "reading_nilakantha": "Nilakantha rejects the karika that yields the above, saying 'karikato 'yam artho nayati' - 'this sense does not follow from the karika'. The Sutrarthaprakasika replies that this is 'samyag viruddham' (entirely wrong) and that Nilakantha simply discarded the earlier karika.",
+        "reading_sutrarthaprakasika": "always count from the SUN. 'sarvesam eva lagnanam suryad eva pravrttih' - at sunrise the janma, bhava, hora and ghatika lagnas all coincide, and diverge thereafter only by their own rates.",
+        "commentator_humility": "'atra manmatam eva mukhyam iti nasmakam agrahah; kevalam sadyuktir eva maya pradarsita' - 'I do not insist my view is primary; I have only shown a good argument.'",
+        "engine_action": "this fork changes the Hora Lagna by whole signs. It must be a disclosed configured_method, never a silent default.",
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.31 commentary",
+          "verification": "The three positions appear in a single continuous passage and are individually attributed."
+        },
+        {
+          "edition_id": "jaimini_nilakantha_vyakhya_ms_jammu_882gha",
+          "work": "Nilakantha, Jaimini Sutra Vyakhya (Jammu MS 882 Gha)",
+          "section": "unpaginated manuscript",
+          "location": "not located in this MS",
+          "verification": "The Jammu manuscript of Nilakantha's vyakhya was retrieved but its OCR is too degraded to locate or confirm this passage independently. The attribution rests on the Sutrarthaprakasika's quotation alone."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.special-lagna.varnada.computation",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "special_lagna",
+        "lagna": "varnada",
+        "applies_to": "computation"
+      },
+      "conditions": {
+        "inputs": [
+          "janma_lagna",
+          "hora_lagna"
+        ]
+      },
+      "conclusion": {
+        "step_1": "if the janma lagna is in an odd sign, count forward from Aries; if even, count backward from Pisces",
+        "step_2": "count likewise from Aries/Pisces to the Hora Lagna",
+        "step_3": "if the two counts are of the SAME kind (both odd or both even), ADD them; if of different kinds, SUBTRACT the smaller from the larger",
+        "step_4": "the sign reached by that total, counted from Aries or Pisces, is the Varnada",
+        "vrddha_verse": "ojalagnaprasutanam mesader ganayet kramat | yugmalagnaprasutanam minader apasavyatah || mesaminadito janmalagnantam ganayet sudhih | tathaiva horalagnantam ganayitva tatah param || pumstvena stritaya vai te sajatiye ubhe yadi | tarhi samsthe yojayet vai jatyantare tu visodhayet || mesaminaditah pascad yo rasih sa tu varnadah ||",
+        "extension": "the same procedure applied from each bhava's Bhava Lagna and Gulika Lagna gives a Varnada for every house",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.31 commentary, vrddha verse",
+          "verification": "Verse quoted in full, followed by two numeric worked examples in the commentary."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.special-lagna.varnada.commentator-uncertainty",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "special_lagna",
+        "lagna": "varnada",
+        "applies_to": "rule_justification"
+      },
+      "conditions": {
+        "varnada_rule_applied": true
+      },
+      "conclusion": {
+        "commentator_admission": "'parantu acaryena katham ojalagnetyadi krtam tan na vidmah' - 'but why the teacher said \"odd lagna\" and so on, we do not know'",
+        "second_admission": "'parantu acaryena katham evam tam iti na vidmah'",
+        "alternative_the_commentator_notes": "in his worked examples he observes that simply ADDING the two lagna longitudes as they stand reaches the same Varnada, and remarks that he cannot explain why the odd/even reversal was prescribed",
+        "engine_action": "Varnada may be COMPUTED and shown as a figure. It must not be delineated as though its derivation were settled.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.31 commentary",
+          "verification": "Two explicit admissions of non-understanding in the same passage."
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Genuinely disputed in the commentarial tradition. Both readings encoded; the engine must fan out or abstain, never silently pick one."
+    },
+    {
+      "rule_id": "jaimini.graha-bala.saturn-weakest",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "graha",
+        "applies_to": "natural_strength_order"
+      },
+      "conditions": {
+        "comparison": "among the seven grahas"
+      },
+      "conclusion": {
+        "saturn": "weakest (ajyayan - 'least senior/strongest')",
+        "sutra": "mando 'jyayan grahesu",
+        "full_order_from_commentary": "ascending strength: Saturn, Mars, Mercury, Jupiter, Venus, Moon, Sun - i.e. the Sun is strongest",
+        "commentary_cross_reference": "the Sutrarthaprakasika grounds the order in Varahamihira's Brhajjataka and cites Laghujataka for its use: 'balasamye 'smad adhikacinta'",
+        "repo_cross_reference": "the same ordinal series is already encoded on the Parasari side in jyotisha/brhajjataka_planetary_rule_manifest.json; this is a genuine point of AGREEMENT between the two branches",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.24",
+          "verification": "'Saturn is the most feeble among planets.'"
+        },
+        {
+          "edition_id": "jaimini_sutrarthaprakasika_dli_2015_242319",
+          "work": "Jaiminiyasutram with Sutrarthaprakasika commentary",
+          "section": "Adhyaya 1, Pada 1",
+          "location": "1.1.23 (mando 'jyayan grahesu)",
+          "verification": "'grahesu ravyadisaptasu grahesu mandah sanir ajyayan ati-durbalah'"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    },
+    {
+      "rule_id": "jaimini.varga.hora-dreskana.as-current",
+      "tradition_id": "jaimini",
+      "school_id": "jaimini_upadesa_sutra",
+      "period": "classical Sanskrit sutra text of uncertain date; Abhyankar argues a pre-Varahamihira stratum, surviving witnesses are early-modern to modern",
+      "domain": "natal",
+      "scope": {
+        "object": "varga",
+        "applies_to": "subdivision_definitions"
+      },
+      "conditions": {
+        "varga_in": [
+          "hora",
+          "dreskana",
+          "other_subdivisions"
+        ]
+      },
+      "conclusion": {
+        "definition_source": "NOT defined by Jaimini; to be taken as current among practitioners",
+        "sutra": "horadayah siddhah",
+        "abhyankar_inference": "Abhyankar argues this shows the subdivisions were known to Jaimini even though he does not use them, and that navamsa is the earliest subdivision because it matches the nakshatra carana",
+        "engine_consequence": "a Jaimini engine MUST import varga definitions from outside the Upadesa Sutra and disclose which text it took them from. The sutra explicitly delegates.",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "1.1.35",
+          "verification": "'Hora, Dreskana and other kinds of subdivisions are to be taken as they are current among the people.'"
+        },
+        {
+          "edition_id": "jaimini_abhyankar_1951_upadesa_sutra_critical_edition",
+          "work": "Jaimini, Upadesa Sutra (Abhyankar critical edition, 15 MSS)",
+          "section": "Adhyaya 1, Pada 1; English Translation section",
+          "location": "Introduction para 50",
+          "verification": "Abhyankar cites the sutra as 'horadayah siddhah' (1.1.35) and draws the navamsa/carana inference."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Research only. Not eligible for customer output: no Jaimini engine exists and no independent Sanskrit review has been obtained.",
+      "review_status": "Encoded from two aligned witnesses by engine reading of the Sanskrit and of Abhyankar's English; awaiting independent Sanskrit specialist review."
+    }
+  ]
+}
