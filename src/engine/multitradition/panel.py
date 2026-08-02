@@ -13,6 +13,7 @@ from . import (
     babylonian,
     bazi,
     egyptian,
+    hellenistic,
     mesoamerican,
     tibetan,
     timebase,
@@ -64,10 +65,23 @@ def build_panel(birth: BirthInput) -> dict[str, Any]:
     tropical_chart = _chart(birth, sidereal=False)
     sidereal_chart = _chart(birth, sidereal=True)
 
+    # Hellenistic and Latin-European read the same sky by different procedure.
+    # `western_section` remains the shared calculation basis that the Islamicate
+    # and Jewish profiles hang off, since all four share the tropical core.
     western_section = _guard(
         lambda: western.build_western(birth, tropical_chart),
         "western_traditional",
-        "Western traditional (Hellenistic/medieval)",
+        "Western traditional (shared core)",
+    )
+    hellenistic_section = _guard(
+        lambda: hellenistic.build_hellenistic(birth, tropical_chart),
+        "hellenistic",
+        "Hellenistic (Greco-Roman)",
+    )
+    latin_section = _guard(
+        lambda: hellenistic.build_latin_european(birth, tropical_chart),
+        "latin_european",
+        "Latin-European (medieval / Renaissance)",
     )
     bazi_section = _guard(
         lambda: bazi.build(birth, bases), "chinese_bazi", "Chinese BaZi (Four Pillars)"
@@ -78,6 +92,8 @@ def build_panel(birth: BirthInput) -> dict[str, Any]:
 
     sections = [
         western_section,
+        hellenistic_section,
+        latin_section,
         _guard(
             lambda: western.build_islamicate(birth, western_section),
             "islamicate_persian",

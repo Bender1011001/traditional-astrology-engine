@@ -1594,3 +1594,88 @@ def test_branch_relations_are_reported_not_ranked(fairfield_panel: dict) -> None
 def test_branch_relations_appear_in_the_reading(fairfield_panel: dict) -> None:
     reading = " ".join(_section(fairfield_panel, "chinese_bazi")["reading"])
     assert "Branch relations present" in reading
+
+
+# --------------------------------------------------------------------------- #
+# Hellenistic / Latin-European split
+# --------------------------------------------------------------------------- #
+
+
+def test_chaldean_faces_follow_the_canonical_series() -> None:
+    """The face series starts at Mars for Aries 0-10, not at Saturn."""
+    from src.engine.multitradition.hellenistic import _face_ruler
+
+    expected = [
+        (0, "Mars"), (10, "Sun"), (20, "Venus"),
+        (30, "Mercury"), (40, "Moon"), (50, "Saturn"), (60, "Jupiter"),
+    ]
+    for longitude, ruler in expected:
+        assert _face_ruler(longitude) == ruler
+    # Full circuit: 36 decans, each of the seven appearing in Chaldean order.
+    series = [_face_ruler(d * 10) for d in range(36)]
+    assert series[0] == "Mars"
+    assert len(set(series)) == 7
+
+
+def test_egyptian_bounds_partition_each_sign() -> None:
+    from src.engine.multitradition.hellenistic import SIGNS, _bounds_for
+
+    for sign in SIGNS:
+        bounds = _bounds_for(sign)
+        assert bounds, f"no bounds for {sign}"
+        assert bounds[0][1] == 0.0
+        assert bounds[-1][2] == 30.0
+        for earlier, later in zip(bounds, bounds[1:]):
+            assert earlier[2] == later[1], f"gap or overlap in {sign}"
+
+
+def test_hellenistic_and_latin_are_separate_sections(fairfield_panel: dict) -> None:
+    hellenistic = _section(fairfield_panel, "hellenistic")
+    latin = _section(fairfield_panel, "latin_european")
+    assert not hellenistic.get("error")
+    assert not latin.get("error")
+    # The Hellenistic section must NOT carry a numerical dignity score.
+    assert "lilly_essential_dignity" not in hellenistic["facts"]
+    # The Latin section must carry it.
+    assert latin["facts"]["lilly_essential_dignity"]
+
+
+def test_hellenistic_refuses_the_latin_scoring_table(fairfield_panel: dict) -> None:
+    refusals = [
+        d
+        for d in _section(fairfield_panel, "hellenistic")["disclosures"]
+        if d["kind"] == DisclosureKind.REFUSAL.value
+    ]
+    assert any("numerical dignity score" in d["subject"].lower() for d in refusals)
+
+
+def test_hermetic_lots_reverse_by_sect(fairfield_panel: dict) -> None:
+    """Fortune and Spirit must be reflections of each other about the ascendant."""
+    facts = _section(fairfield_panel, "hellenistic")["facts"]
+    lots = facts["hermetic_lots"]
+    assert lots["sect_reversal_applied"] is True
+    assert lots["fortune"]["sign"] == "Leo"
+    assert lots["spirit"]["sign"] == "Virgo"
+
+
+def test_latin_dignity_matches_third_party_where_method_agrees(
+    fairfield_panel: dict,
+) -> None:
+    """Four of seven reproduce GERMES 2.39 exactly; divergence is documented."""
+    facts = _section(fairfield_panel, "latin_european")["facts"]
+    scores = {p["body"]: p["essential_score"] for p in facts["lilly_essential_dignity"]}
+    assert scores["Sun"] == 8
+    assert scores["Moon"] == -5
+    assert scores["Mercury"] == 9
+    assert scores["Venus"] == 4
+    assert "third_party_comparison" in facts
+
+
+def test_peregrine_fork_emits_both_readings(fairfield_panel: dict) -> None:
+    facts = _section(fairfield_panel, "latin_european")["facts"]
+    saturn = next(
+        p for p in facts["lilly_essential_dignity"] if p["body"] == "Saturn"
+    )
+    assert saturn["essential_score"] == -4
+    # The stacking reading reproduces the third-party value.
+    assert saturn["essential_score_peregrine_stacking"] == -9
