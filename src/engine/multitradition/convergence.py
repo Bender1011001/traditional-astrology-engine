@@ -21,7 +21,11 @@ from dataclasses import dataclass, field
 from typing import Any
 
 # Sections sharing a calculation basis count as one independent voice.
-# Western/Islamicate/Jewish: literally the same tropical chart object.
+# Western/Islamicate/Jewish: literally the same tropical chart object. Both
+# Islamicate sections belong here - al-Biruni's and al-Qabisi's procedures
+# differ from each other and are kept as separate schools in the research pack,
+# but they read the SAME sky, so counting them as two agreeing voices would
+# manufacture corroboration out of one chart.
 # Western/Vedic: whole-sign house NUMBERS coincide because the ascendant shifts
 # back one sign in lockstep with every planet - so house-placement agreement
 # between them is an identity, not evidence.
@@ -29,6 +33,7 @@ SHARED_BASIS_GROUPS: dict[str, tuple[str, ...]] = {
     "hellenistic_core": (
         "western_traditional",
         "islamicate_persian",
+        "islamicate_al_qabisi",
         "medieval_jewish",
     ),
     "sexagenary_core": ("chinese_bazi", "tibetan", "vietnamese", "ziwei_doushu"),
