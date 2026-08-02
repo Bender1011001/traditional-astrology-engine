@@ -1,7 +1,7 @@
 # Nahua reading pack — status and blockers
 
-Status: **blocked on retrieval only**
-Updated: 2026-08-01 (revised — see correction below)
+Status: **UNBLOCKED — text retrieved and hash-pinned**
+Updated: 2026-08-01 (second revision; retrieval solved)
 Spec: [defensibility_spec.md](defensibility_spec.md)
 
 ## Correction to the previous version of this document
@@ -22,7 +22,30 @@ See the "Translation is not a gate for quotation" section added to
 [../DEFENSIBILITY.md](../DEFENSIBILITY.md), which now governs this class of
 decision corpus-wide.
 
-## The actual blocker, correctly scoped
+## Retrieval: solved
+
+The frontend is client-rendered, but its backend serves complete folio records
+as plain JSON, reachable with an ordinary HTTP GET:
+
+    https://dfc-be.ch.digtest.co.uk/codex/codex_folio/book/4/folio/{folio}/
+
+Discovered by loading the folio page in a browser and reading the application's
+`__NEXT_DATA__` payload, which names its backend URLs directly. Each record
+carries the stable folio UUID, IIIF URLs, and four text records (Nahuatl
+transcription, Nahuatl-to-English, Spanish transcription, Spanish-to-English),
+each with its own UUID, full markdown, and citation block.
+
+`fetch_florentine_book4.py` now fetches and hash-pins folios into
+`florentine_book4/` with an access manifest. The ten-folio pilot set (1r-5v,
+covering the Ce Cipactli chapter and the opening of chapter 2) is committed:
+40 text records, every one hash-pinned.
+
+**Provenance verification:** folio 1r's UUID
+(`afbf3a94-1f97-4bb5-bb75-d15fdb97ef40`) and all four of its text-record UUIDs
+are exactly the identifiers the validated tonalpohualli pack cited from visual
+inspection. The chain from validated pack to retrievable text is closed.
+
+## The previous blocker, for the record
 
 **Retrieval.** No route tried from this environment returns the source text:
 

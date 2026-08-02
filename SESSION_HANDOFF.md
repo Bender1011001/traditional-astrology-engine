@@ -141,7 +141,13 @@ pending page inspection, honestly labeled with blockers.
 
 ## Blockers
 
-**1. M4 / Nahua — RETRIEVAL ONLY.** Corrected after review: the rights blocker
+**1. M4 / Nahua — RESOLVED.** The backend API serves folio JSON to plain HTTP
+(`dfc-be.ch.digtest.co.uk/codex/codex_folio/book/4/folio/{f}/`); found by
+loading the page in the in-app browser and reading `__NEXT_DATA__`. Ten folios
+(1r-5v) fetched and hash-pinned, all four pack-cited text-record UUIDs verified
+present. M4 encoding can proceed. Original note kept below for the record:
+
+**(historical) M4 / Nahua — RETRIEVAL ONLY.** Corrected after review: the rights blocker
 I originally recorded was wrong and is withdrawn. The 16th-century Nahuatl and
 Sahagun's Spanish are public domain and can be rendered directly, so the modern
 copyrighted English translation was never needed. The real and only blocker is

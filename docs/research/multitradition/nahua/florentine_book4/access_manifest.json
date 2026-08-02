@@ -1,0 +1,429 @@
+{
+  "source": "Digital Florentine Codex backend API",
+  "backend_url_pattern": "https://dfc-be.ch.digtest.co.uk/codex/codex_folio/book/4/folio/{folio}/",
+  "frontend": "https://florentinecodex.getty.edu/book/4/folio/{folio}",
+  "rights_basis": "16th-century Nahuatl and Spanish are public domain. The Getty digital edition's modern apparatus and translations carry their own citations, preserved verbatim inside each witness record. Downstream encoding quotes the public-domain transcription columns and renders translations independently; the stored witnesses serve as provenance, not as republication.",
+  "witnesses": {
+    "1r": {
+      "file": "folio_1r.json",
+      "sha256": "ec8bd8918e40147b784061303bc7d5b5d9c81bb6a3c7fb320e113e8d777e323b",
+      "bytes": 20486,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "afbf3a94-1f97-4bb5-bb75-d15fdb97ef40",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/d1b1deca-1a34-4947-a20a-8b9a8cb6810c/",
+        "book_number": "4",
+        "folio": "1r",
+        "text_records": [
+          {
+            "text_record_id": "31115076-d898-4f81-a89d-a1c9cbeac8ab",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 693
+          },
+          {
+            "text_record_id": "e91d245b-8896-4fdc-a769-c8ed3be94360",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 2238
+          },
+          {
+            "text_record_id": "ecfe83af-d58b-412c-ab44-7ea2100b803d",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 648
+          },
+          {
+            "text_record_id": "3401d7c1-e648-4a7e-9305-257084caae3f",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 1409
+          }
+        ]
+      }
+    },
+    "1v": {
+      "file": "folio_1v.json",
+      "sha256": "a2e2af0bad422f2108a0c94bc5e9e9a9a650bd70a3d8f73baa47c3d94242afda",
+      "bytes": 19328,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "4b5d50ba-2a3a-45dd-a3c9-1be15712adcb",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/fea3d8d9-7212-4752-add3-f8ea3c837f80/",
+        "book_number": "4",
+        "folio": "1v",
+        "text_records": [
+          {
+            "text_record_id": "7475a66e-aba7-447e-b21b-9fe9fc90c69b",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 851
+          },
+          {
+            "text_record_id": "1f4adf09-9f94-4473-885b-49d58004fd53",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1346
+          },
+          {
+            "text_record_id": "ea727d00-41a1-4367-9491-d28d4217ace7",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 1060
+          },
+          {
+            "text_record_id": "5766625e-5997-44a9-935e-c4fa6d4162bb",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 883
+          }
+        ]
+      }
+    },
+    "2r": {
+      "file": "folio_2r.json",
+      "sha256": "bea9cc19df4c9f097d4881f02abd1b27f1c14b86e21cf6cfc75d7796af2542e8",
+      "bytes": 19362,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "565bf8f1-32a0-482b-be8a-c150fac2fd37",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/46895986-56e3-4643-b1f2-8b17aabecc93/",
+        "book_number": "4",
+        "folio": "2r",
+        "text_records": [
+          {
+            "text_record_id": "da4c88b1-573b-4c18-b4a9-f11243662279",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 893
+          },
+          {
+            "text_record_id": "1fe2daa1-3b79-4bb4-aacd-f945236829fe",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1234
+          },
+          {
+            "text_record_id": "896235f6-c894-4f37-8ff5-2d49f81f28f6",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 1048
+          },
+          {
+            "text_record_id": "792e63fb-e172-4cba-8d96-bd9833fd17a9",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 1399
+          }
+        ]
+      }
+    },
+    "2v": {
+      "file": "folio_2v.json",
+      "sha256": "c1d493f77d339cba3fc29dd6e2adbfb2eaeae6f5ef3c262b21c2d32cd5de647b",
+      "bytes": 19207,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "741ef1b4-d9f0-4489-934d-b5e31a93173e",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/8adb6edc-bdad-40a7-9a92-ba36505c7626/",
+        "book_number": "4",
+        "folio": "2v",
+        "text_records": [
+          {
+            "text_record_id": "efe22486-4fd0-434d-81f2-1436d8f951a1",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 865
+          },
+          {
+            "text_record_id": "20704cbd-a754-4ac9-8c9d-6be2782af19c",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1360
+          },
+          {
+            "text_record_id": "bbcfcb52-02d8-4d45-9315-0e1e13ef690a",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 1080
+          },
+          {
+            "text_record_id": "26209f28-26dd-404a-b3e2-c1f4e9f1bb9b",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 1285
+          }
+        ]
+      }
+    },
+    "3r": {
+      "file": "folio_3r.json",
+      "sha256": "66eaadd99b8c5cfb872b0445cee6e27fcd3a3cf598f24640bbc2c95930a947aa",
+      "bytes": 19875,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "45c082dc-46c6-44aa-b476-f6c85d1c8b5a",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/b876abcc-71cc-4cf7-a55a-c645bed10e58/",
+        "book_number": "4",
+        "folio": "3r",
+        "text_records": [
+          {
+            "text_record_id": "e7c9dacc-f850-4524-9e9e-6b9eb0f335f3",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 879
+          },
+          {
+            "text_record_id": "9157960b-76b6-4378-966d-d04c6db47559",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1452
+          },
+          {
+            "text_record_id": "783a3926-9087-47c9-84e1-f8f0b900f718",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 1067
+          },
+          {
+            "text_record_id": "6da89a90-4d20-434b-9036-a5117fb15d6d",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 1295
+          }
+        ]
+      }
+    },
+    "3v": {
+      "file": "folio_3v.json",
+      "sha256": "d8eb1fc9aa22dd9cd0d6acd143c037ed880d519d15840057ef7c2a3dcebab31b",
+      "bytes": 16355,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "dc5b289f-ace6-43be-9563-370be6af74a9",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/53f3735f-25a5-41fc-ac19-8d21270b2a63/",
+        "book_number": "4",
+        "folio": "3v",
+        "text_records": [
+          {
+            "text_record_id": "31584c06-9e2e-44a7-a3a8-a613f17e91b2",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 794
+          },
+          {
+            "text_record_id": "744dc924-613f-456a-becb-6c1fabcf706a",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1013
+          },
+          {
+            "text_record_id": "c2db23bf-9627-4ca6-b63a-1c0fb039d91a",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 597
+          },
+          {
+            "text_record_id": "db15dbd6-3dcf-411a-b10b-0b8b0fc9aa4c",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 739
+          }
+        ]
+      }
+    },
+    "4r": {
+      "file": "folio_4r.json",
+      "sha256": "528605937560753cddd51da3d89a1ec0148c179bb7db9230dff17a5704a84691",
+      "bytes": 17741,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "66cd6658-2daf-42dc-88a1-dc8c2d112f63",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/faae3e40-4414-453d-9f80-18fec088744e/",
+        "book_number": "4",
+        "folio": "4r",
+        "text_records": [
+          {
+            "text_record_id": "4b6c8ebb-77ae-435d-bd67-857724d02f3f",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 801
+          },
+          {
+            "text_record_id": "e17f04f1-9dbd-45f1-af87-8e2c8c495a8b",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1130
+          },
+          {
+            "text_record_id": "d2c1b6d2-675f-49ad-8cf5-c557cdc5eadc",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 818
+          },
+          {
+            "text_record_id": "1309097f-463d-4a92-bfee-1158c6222016",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 883
+          }
+        ]
+      }
+    },
+    "4v": {
+      "file": "folio_4v.json",
+      "sha256": "1c7e239316fb87b19452615d24cab17522d3bd45d3918bf6cb9962dec1b9201f",
+      "bytes": 17431,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "a942c2d6-712b-49d9-aa96-45f7ab6e576e",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/c235c6dc-330a-4861-a2ad-1e36cb7cb057/",
+        "book_number": "4",
+        "folio": "4v",
+        "text_records": [
+          {
+            "text_record_id": "f4da4dd8-49fd-4e78-9a38-89d3c34ac074",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 857
+          },
+          {
+            "text_record_id": "4cd886e7-1d18-4a19-8fb9-95acc8a093b7",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1037
+          },
+          {
+            "text_record_id": "f472bbbe-9a09-4c96-afbd-6f50f28d3dda",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 888
+          },
+          {
+            "text_record_id": "6759b7df-5ded-4c37-9139-e10a7e40fe08",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 936
+          }
+        ]
+      }
+    },
+    "5r": {
+      "file": "folio_5r.json",
+      "sha256": "665b197f786ab9774c3070081e1858877b2e399b19b4019ccd01e72e83ad3420",
+      "bytes": 18025,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "f85be4d4-85c1-4600-a084-b693edc69eb3",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/99973f4c-d875-4eb8-9be0-45f4c14da0a4/",
+        "book_number": "4",
+        "folio": "5r",
+        "text_records": [
+          {
+            "text_record_id": "f090d1b9-16b6-490a-9820-49cad3a91ae6",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 913
+          },
+          {
+            "text_record_id": "22852a19-941a-449e-8ed9-b42177ed4177",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1119
+          },
+          {
+            "text_record_id": "fa6f82f7-715f-4df9-937f-e4641c6f6166",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 866
+          },
+          {
+            "text_record_id": "969d0079-4649-4c15-939e-f93a69789861",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 1169
+          }
+        ]
+      }
+    },
+    "5v": {
+      "file": "folio_5v.json",
+      "sha256": "45f28bdbea619cf9518ff69c57002172b168726107f39965e0edd5ac449783ed",
+      "bytes": 18997,
+      "retrieved": "2026-08-02",
+      "summary": {
+        "folio_id": "a7e93a5e-b0dd-4682-8a3b-f7bcc549969f",
+        "canvas_id": "https://dfc-be.ch.digtest.co.uk/iiif/iiif/canvas/b323870a-e47a-47ad-adb7-fa71321a067b/",
+        "book_number": "4",
+        "folio": "5v",
+        "text_records": [
+          {
+            "text_record_id": "534f1abd-ea31-44dc-9b34-47e596ab2641",
+            "column": "nahuatl",
+            "type": "transcription",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 937
+          },
+          {
+            "text_record_id": "c709eb2e-ac15-4ae1-b7da-4112dbab3982",
+            "column": "nahuatl",
+            "type": "translation",
+            "subtitle": "(Anderson & Dibble 1953–1982)",
+            "markdown_chars": 1283
+          },
+          {
+            "text_record_id": "1ceb7f9d-a754-4f7a-a07a-7d040db3a749",
+            "column": "spanish",
+            "type": "transcription",
+            "subtitle": "(López Austin & García Quintana 2000)",
+            "markdown_chars": 943
+          },
+          {
+            "text_record_id": "11ba201e-339b-45df-b1d4-b7f1317baa87",
+            "column": "spanish",
+            "type": "translation",
+            "subtitle": "(García Garagarza 2023)",
+            "markdown_chars": 1277
+          }
+        ]
+      }
+    }
+  },
+  "updated": "2026-08-02"
+}
