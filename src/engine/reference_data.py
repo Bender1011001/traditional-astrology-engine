@@ -74,13 +74,35 @@ DOROTHEAN_TRIPLICITY = {
     "Water": (PlanetName.VENUS, PlanetName.MARS, PlanetName.MOON),
 }
 
-# Ptolemaic Triplicity (Lilly Mode)
-# Format: {Element: (Day, Night)} - No participant usually used in this mode
+# Ptolemaic Triplicity - Tetrabiblos I.21, Ptolemy's own text.
+# Format: {Element: (Day, Night)}
+#
+# The water row used to read (MARS, MOON), which matched NEITHER authority: not
+# Ptolemy, who gives Venus by day, and not Lilly, who gives Mars by both. It was
+# a blend of two traditions inside one table, and a blend is the one thing a
+# table like this must never be - if two rules conflict, they belong to
+# different traditions and get different tables. So they now do.
+#
+# Ptolemy on the watery triangle: Mars has familiarity with it through Scorpio,
+# "but, as the signs which compose this triplicity are feminine, the Moon by
+# night and Venus by day ... govern it, together with Mars." Mars stays a
+# co-ruler of the triangle; the SECT-DEPENDENT principals are Venus and Moon.
 PTOLEMAIC_TRIPLICITY = {
     "Fire": (PlanetName.SUN, PlanetName.JUPITER),
     "Earth": (PlanetName.VENUS, PlanetName.MOON),
     "Air": (PlanetName.SATURN, PlanetName.MERCURY),
-    "Water": (PlanetName.MARS, PlanetName.MOON),
+    "Water": (PlanetName.VENUS, PlanetName.MOON),
+}
+
+# Lilly's printed triplicity table (Christian Astrology I) - a LATIN-EUROPEAN
+# tradition, not Ptolemy's, and kept separate from him for that reason. Its
+# water row gives Mars by day and by night, which is where the old hybrid's
+# Mars-by-day came from.
+LILLY_TRIPLICITY = {
+    "Fire": (PlanetName.SUN, PlanetName.JUPITER),
+    "Earth": (PlanetName.VENUS, PlanetName.MOON),
+    "Air": (PlanetName.SATURN, PlanetName.MERCURY),
+    "Water": (PlanetName.MARS, PlanetName.MARS),
 }
 
 # Legacy Export for backward compatibility (defaults to Dorothean in original code? No, original had dict with Sect keys)

@@ -37,10 +37,12 @@ DOCTRINAL_FORKS: List[Dict[str, Any]] = [
         "positions": [
             {"authority": "Dorothean (Dorotheus, Carmen Astrologicum; Bonatti; Māshāʾallāh; most Persian/medieval)",
              "position": "Three rulers per triplicity — a day lord, a night lord, and a participating lord (+3 / +3 / +1)."},
-            {"authority": "Ptolemaic (Ptolemy, Tetrabiblos I.18; William Lilly)",
-             "position": "Two rulers per triplicity — day and night only, no participating lord. The Water day-ruler is Mars (vs Venus in the Dorothean scheme)."},
+            {"authority": "Ptolemaic (Ptolemy, Tetrabiblos, the trigons chapter — I.21 in Ashmand's numbering)",
+             "position": "Two rulers per triplicity — day and night only, no participating lord. For the watery trigon Ptolemy gives Venus by day and the Moon by night, with Mars a co-ruler of the triangle through Scorpio: 'as the signs which compose this triplicity are feminine, the Moon by night and Venus by day … govern it, together with Mars.'"},
+            {"authority": "Lilly (Christian Astrology I) — a Latin-European table, NOT Ptolemy's",
+             "position": "Two rulers per triplicity, but the watery trigon is Mars by day AND by night. This is where the commonly-quoted 'Mars is the water day-ruler' comes from; it is Lilly's, not Ptolemy's, and the two are kept as separate authorities here rather than merged under one 'Ptolemaic' label."},
         ],
-        "engine_handling": "Default = Dorothean; Ptolemaic (sect-gated) is computable. See chart_specific for where they actually differ in this chart.",
+        "engine_handling": "Default = Dorothean; Ptolemaic (sect-gated) is computable. Ptolemy and Lilly were previously blended into one table whose water row (Mars by day, Moon by night) matched neither of them; they are now separate. See chart_specific for where they actually differ in this chart.",
     },
     {
         "topic": "Terms / bounds",

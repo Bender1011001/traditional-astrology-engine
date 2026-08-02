@@ -24,17 +24,38 @@ def test_registry_well_formed():
         assert fork["engine_handling"]
 
 
-def test_water_triplicity_fork_for_venus_by_day():
-    # Venus at 10° Cancer (water). Dorothean: Venus is the water day-ruler (+3).
-    # Ptolemaic: the water day-ruler is Mars, so Venus gets none -> the schemes disagree.
+def test_water_triplicity_ptolemy_and_dorotheus_agree_venus_by_day():
+    """Venus at 10 Cancer by day: Dorotheus and Ptolemy BOTH give her the trigon.
+
+    This test previously asserted the opposite - that the two schemes disagree,
+    because the engine's "Ptolemaic" water row read Mars by day. That row was a
+    blend of two traditions: Ptolemy gives Venus by day (Tetrabiblos, trigons
+    chapter), Lilly gives Mars by day and night, and the table held Mars-by-day
+    with Moon-by-night, which is neither. With the traditions separated, the
+    genuine disagreement here is Ptolemy vs Lilly, not Dorotheus vs Ptolemy.
+    """
     chart = _C([_P(PlanetName.VENUS, 100.0)])
     forks = DoctrineEngine.chart_dignity_forks(chart, Sect.DAY)
     trip = [f for f in forks if f["planet"] == "Venus" and f["factor"] == "triplicity dignity"]
-    assert trip, "expected a triplicity disagreement for Venus in Cancer by day"
-    auths = " ".join(p["authority"] for p in trip[0]["positions"])
-    assert "Dorothean" in auths and "Ptolemaic" in auths
-    vals = [p["value"] for p in trip[0]["positions"]]
-    assert "+3" in vals and "none" in vals
+    assert not trip, (
+        "Dorotheus and Ptolemy both make Venus the watery day-ruler, so there is "
+        "no triplicity fork for her here"
+    )
+
+
+def test_ptolemaic_and_lilly_triplicity_tables_are_separate_traditions():
+    """The two must not be blended, and their water rows must differ."""
+    from src.engine.reference_data import LILLY_TRIPLICITY, PTOLEMAIC_TRIPLICITY
+
+    # Ptolemy: Venus by day, Moon by night. Lilly: Mars by day and night.
+    assert PTOLEMAIC_TRIPLICITY["Water"] == (PlanetName.VENUS, PlanetName.MOON)
+    assert LILLY_TRIPLICITY["Water"] == (PlanetName.MARS, PlanetName.MARS)
+    assert PTOLEMAIC_TRIPLICITY["Water"] != LILLY_TRIPLICITY["Water"]
+    # They agree everywhere else; water is the whole of the disagreement.
+    for element in ("Fire", "Earth", "Air"):
+        assert PTOLEMAIC_TRIPLICITY[element] == LILLY_TRIPLICITY[element]
+    # And the old hybrid must never come back.
+    assert PTOLEMAIC_TRIPLICITY["Water"] != (PlanetName.MARS, PlanetName.MOON)
 
 
 def test_build_shape():
