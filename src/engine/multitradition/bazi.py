@@ -52,6 +52,92 @@ BRANCH_ELEMENT = {
     "chen": "Earth", "si": "Fire", "wu_branch": "Fire", "wei": "Earth",
     "shen": "Metal", "you": "Metal", "xu": "Earth", "hai": "Water",
 }
+# Hidden stems (藏干) per branch, main qi first. Transcription-grade: the
+# standard table as carried by the inspected Yuanhai Ziping / Sanming Tonghui
+# transcriptions. School tables differ occasionally on middle/residual qi;
+# that variance is disclosed, and the MAIN qi (which no school disputes and
+# which always matches the branch's own element) is the only one used for
+# month-command and rooting judgments.
+HIDDEN_STEMS: dict[str, list[str]] = {
+    "zi": ["gui"],
+    "chou": ["ji", "gui", "xin"],
+    "yin_branch": ["jia", "bing", "wu_stem"],
+    "mao": ["yi"],
+    "chen": ["wu_stem", "yi", "gui"],
+    "si": ["bing", "wu_stem", "geng"],
+    "wu_branch": ["ding", "ji"],
+    "wei": ["ji", "ding", "yi"],
+    "shen": ["geng", "ren", "wu_stem"],
+    "you": ["xin"],
+    "xu": ["wu_stem", "xin", "ding"],
+    "hai": ["ren", "jia"],
+}
+
+# Five-phase generation order for Ten-God and seasonal-state derivation.
+ELEMENT_CYCLE = ["Wood", "Fire", "Earth", "Metal", "Water"]
+
+# Ten Gods (十神): relation of another stem to the day master, by element
+# relation and polarity agreement. Names follow the inspected Ziping usage.
+TEN_GOD_NAMES = {
+    (0, True): ("bi_jian", "比肩 Friend"),
+    (0, False): ("jie_cai", "劫財 Rob Wealth"),
+    (1, True): ("shi_shen", "食神 Eating God"),
+    (1, False): ("shang_guan", "傷官 Hurting Officer"),
+    (2, True): ("pian_cai", "偏財 Indirect Wealth"),
+    (2, False): ("zheng_cai", "正財 Direct Wealth"),
+    (3, True): ("qi_sha", "七殺 Seven Killings"),
+    (3, False): ("zheng_guan", "正官 Direct Officer"),
+    (4, True): ("pian_yin", "偏印 Indirect Resource"),
+    (4, False): ("zheng_yin", "正印 Direct Resource"),
+}
+
+# Seasonal command states (旺相休囚死) of an element in a month branch's season.
+# The season's own element is prosperous (wang); the element it generates is
+# assisting (xiang); the element that generates it rests (xiu); the element
+# that controls it is imprisoned (qiu); the element it controls is dead (si).
+# Earth commands the four seasonal-transition months (chen, xu, chou, wei).
+SEASON_ELEMENT = {
+    "yin_branch": "Wood", "mao": "Wood",
+    "si": "Fire", "wu_branch": "Fire",
+    "shen": "Metal", "you": "Metal",
+    "hai": "Water", "zi": "Water",
+    "chen": "Earth", "xu": "Earth", "chou": "Earth", "wei": "Earth",
+}
+COMMAND_STATES = ["wang 旺 (prosperous)", "xiang 相 (assisting)",
+                  "xiu 休 (resting)", "qiu 囚 (imprisoned)", "si 死 (dead)"]
+
+
+def ten_god(day_stem: str, other_stem: str) -> tuple[str, str]:
+    """Ten-God relation of other_stem to the day master."""
+    day_element, day_yang = STEM_ELEMENT[day_stem]
+    other_element, other_yang = STEM_ELEMENT[other_stem]
+    relation = (
+        ELEMENT_CYCLE.index(other_element) - ELEMENT_CYCLE.index(day_element)
+    ) % 5
+    return TEN_GOD_NAMES[(relation, day_yang == other_yang)]
+
+
+def seasonal_state(element: str, month_branch: str) -> str:
+    """Command state of an element in the month branch's season."""
+    season = SEASON_ELEMENT[month_branch]
+    season_index = ELEMENT_CYCLE.index(season)
+    element_index = ELEMENT_CYCLE.index(element)
+    offset = (element_index - season_index) % 5
+    # offset 0: element IS the season -> wang; 1: season generates it -> xiang;
+    # 4: it generates the season -> xiu; 3: it controls the season... careful:
+    # states are defined FROM the season: generated-by-season = xiang,
+    # generator-of-season = xiu, controller-of-season = qiu, controlled = si.
+    if offset == 0:
+        return COMMAND_STATES[0]
+    if offset == 1:
+        return COMMAND_STATES[1]
+    if offset == 4:
+        return COMMAND_STATES[2]
+    if offset == 3:
+        return COMMAND_STATES[3]
+    return COMMAND_STATES[4]
+
+
 # Solar longitude of each JIE (month-establishing term) -> month branch.
 JIE_TO_BRANCH: list[tuple[int, str]] = [
     (315, "yin_branch"), (345, "mao"), (15, "chen"), (45, "si"),
@@ -159,11 +245,31 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         ("Late-Zi rollover at 23:00",),
     )
     section.disclose(
+        DisclosureKind.SOURCE,
+        "Hidden stems and Ten Gods",
+        "The hidden-stem table and Ten-God relations follow the inspected "
+        "Yuanhai Ziping / Sanming Tonghui transcriptions (transcription grade: "
+        "the Wikisource witnesses cannot control wording). Only the undisputed "
+        "MAIN qi of each branch - which always matches the branch's own element "
+        "- is used for month-command and rooting judgments; middle and residual "
+        "qi are reported but carry no judgment weight here.",
+    )
+    section.disclose(
+        DisclosureKind.CONFIGURED_METHOD,
+        "Month command",
+        "Seasonal command states (wang/xiang/xiu/qiu/si) computed from the month "
+        "branch's season under the standard five-phase cycle, with Earth "
+        "commanding the four transition months. The Ziping hierarchy makes this "
+        "the first substantive judgment, before any strength or pattern claim.",
+    )
+    section.disclose(
         DisclosureKind.REFUSAL,
-        "Strength and pattern",
-        "Day-master strength class, pattern eligibility, and useful-element "
-        "selection are school-specific and are not asserted here. The Ziping "
-        "hierarchy requires month command before any such judgment.",
+        "Pattern and useful god",
+        "Pattern (geju) eligibility and useful-element (yongshen) selection are "
+        "school-specific and stay refused pending edition control. The support "
+        "assessment below states seasonal state and roots - the facts every "
+        "school agrees precede those judgments - and draws a summary conclusion "
+        "only where the testimony is unanimous.",
     )
 
     stems, branches = _stems(), _branches()
@@ -229,6 +335,51 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
     }
     day_master_element, day_master_yang = STEM_ELEMENT[day_stem]
 
+    hidden = {
+        name: [
+            {
+                "stem": s,
+                "label": STEM_LABELS[s],
+                "element": STEM_ELEMENT[s][0],
+                "qi": ("main", "middle", "residual")[i],
+                "ten_god": ten_god(day_stem, s)[1],
+            }
+            for i, s in enumerate(HIDDEN_STEMS[p["branch"]])
+        ]
+        for name, p in pillars.items()
+    }
+    visible_gods = {
+        name: ten_god(day_stem, p["stem"])[1]
+        for name, p in pillars.items()
+        if name != "day"
+    }
+
+    command = seasonal_state(day_master_element, month_branch)
+    root_branches = [
+        name
+        for name, p in pillars.items()
+        if any(
+            STEM_ELEMENT[s][0] == day_master_element
+            for s in HIDDEN_STEMS[p["branch"]]
+        )
+    ]
+    month_root = "month" in root_branches
+    timely = command.startswith(("wang", "xiang"))
+    if timely and month_root:
+        support = (
+            "supported: the day master is in seasonal command "
+            "and rooted in the month branch itself"
+        )
+    elif not timely and not root_branches:
+        support = (
+            "unsupported: out of season with no root in any branch"
+        )
+    else:
+        support = (
+            "mixed: seasonal state and rooting point different ways; "
+            "the final strength class is school-dependent and not asserted"
+        )
+
     section.facts = {
         "pillar_year_used": pillar_year,
         "li_chun_boundary_utc": _jd_to_iso(li_chun_this_year),
@@ -241,12 +392,73 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
             "element": day_master_element,
             "polarity": "yang" if day_master_yang else "yin",
         },
+        "month_command": {
+            "season_of_month_branch": SEASON_ELEMENT[month_branch],
+            "day_master_state": command,
+            "root_in_month_branch": month_root,
+            "root_branches": root_branches,
+            "support_assessment": support,
+        },
+        "hidden_stems": hidden,
+        "visible_stem_ten_gods": visible_gods,
         "element_tally": _element_tally(pillars),
         "luck_pillars": _luck_pillars(
             birth, jd, year_stem, month_stem, month_branch
         ),
     }
+
+    section.reading = _bazi_reading(
+        day_stem, day_master_element, day_master_yang, command, month_root,
+        root_branches, support, visible_gods, hidden,
+        _element_tally(pillars),
+    )
     return section
+
+
+def _bazi_reading(
+    day_stem: str,
+    element: str,
+    yang: bool,
+    command: str,
+    month_root: bool,
+    root_branches: list[str],
+    support: str,
+    visible_gods: dict[str, str],
+    hidden: dict[str, list[dict[str, Any]]],
+    tally: dict[str, int],
+) -> list[str]:
+    """Structural reading in the Ziping order: subject, command, roots, relations.
+
+    Describes what the chart IS in the tradition's own categories. No pattern
+    verdict, no fortune - those stay behind the edition-control gate.
+    """
+    polarity = "yang" if yang else "yin"
+    reading = [
+        f"Day master (the subject of the chart): {STEM_LABELS[day_stem]}, "
+        f"{polarity} {element}. The Ziping hierarchy judges everything else "
+        "relative to this stem.",
+        f"Month command, the first judgment: the day master stands in state "
+        f"{command} for this month's season, "
+        f"{'with' if month_root else 'without'} a root in the month branch"
+        + (
+            f"; rooted also in {', '.join(b for b in root_branches if b != 'month')}"
+            if [b for b in root_branches if b != "month"]
+            else ""
+        )
+        + f". Assessment: {support}.",
+    ]
+    god_list = ", ".join(f"{pillar}: {god}" for pillar, god in visible_gods.items())
+    reading.append(f"Visible stems relative to the day master - {god_list}.")
+
+    missing = [element_name for element_name, count in tally.items() if count == 0]
+    if missing:
+        reading.append(
+            f"Absent element(s) among visible stems and branch main qi: "
+            f"{', '.join(missing)}. In Ziping terms the related Ten-God "
+            "relations lack visible carriers; hidden-stem presence, if any, is "
+            "listed in the calculation block and carries less force."
+        )
+    return reading
 
 
 def _pillar_dict(stem: str, branch: str) -> dict[str, Any]:
