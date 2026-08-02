@@ -1,0 +1,502 @@
+"""A full Parāśari Jyotiṣa report.
+
+Not a Hellenistic report with Sanskrit vocabulary. The judgment order is the
+tradition's own, and it is the order Phaladīpikā and the commentaries actually
+use:
+
+  1. the lagna, its lord, and the janma nakṣatra - who the chart belongs to
+  2. the nine grahas, each in its rāśi, bhāva, dignity and D9
+  3. the twelve bhāvas, each by its lord's condition and its occupants
+  4. the yogas that are actually present, with their sourced results
+  5. the daśā that is running now, and the ones on either side of it
+
+Every delineation is quoted from the research corpus with its rule id. Where
+Phaladīpikā's text was not recovered - Sun in bhāvas 1-5, 7 and 8 sit in an OCR
+gap - the report says so in the place the delineation would have gone, instead
+of substituting a different author or writing something plausible.
+"""
+
+from __future__ import annotations
+
+import json
+from functools import lru_cache
+from pathlib import Path
+from typing import Any
+
+from ..multitradition import build_panel
+from ..multitradition.types import BirthInput
+from .report import Delineation, ReportSection, TraditionReport
+
+RESEARCH_ROOT = (
+    Path(__file__).resolve().parents[3] / "docs" / "research" / "multitradition"
+)
+DELINEATION_MANIFEST = RESEARCH_ROOT / "jyotisha" / "delineation_rule_manifest.json"
+
+ORDINAL = {
+    1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th", 6: "6th",
+    7: "7th", 8: "8th", 9: "9th", 10: "10th", 11: "11th", 12: "12th",
+}
+BHAVA_NAMES = {
+    1: "Tanu — body, self, and the whole life's measure",
+    2: "Dhana — wealth, speech, family, sustenance",
+    3: "Sahaja — siblings, courage, effort, short journeys",
+    4: "Bandhu — mother, home, land, vehicles, inner contentment",
+    5: "Putra — children, intellect, pūrva puṇya, counsel",
+    6: "Ari — enemies, disease, debt, service, obstacles",
+    7: "Yuvati — marriage, partnership, open dealings",
+    8: "Randhra — longevity, hidden things, upheaval, inheritance",
+    9: "Dharma — fortune, father, teacher, righteousness, pilgrimage",
+    10: "Karma — action, profession, status, public standing",
+    11: "Lābha — gains, elder siblings, desires fulfilled",
+    12: "Vyaya — loss, expenditure, seclusion, liberation, foreign lands",
+}
+KENDRAS = (1, 4, 7, 10)
+TRIKONAS = (1, 5, 9)
+DUSTHANAS = (6, 8, 12)
+
+
+@lru_cache(maxsize=1)
+def _manifest() -> dict[str, Any]:
+    return json.loads(DELINEATION_MANIFEST.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=1)
+def _rules_by_id() -> dict[str, dict[str, Any]]:
+    return {r["rule_id"]: r for r in _manifest()["rules"]}
+
+
+def _source_label(rule: dict[str, Any]) -> str:
+    passages = rule.get("source_passages") or []
+    if not passages:
+        return rule.get("rule_id", "unknown source")
+    p = passages[0]
+    work = p.get("work") or "Phaladīpikā"
+    loc = p.get("location") or p.get("section") or ""
+    return f"{work}, {loc}".strip().rstrip(",")
+
+
+def _delineate(
+    rule_id: str, text: str, trigger: str, caveat: str | None = None
+) -> Delineation | None:
+    rule = _rules_by_id().get(rule_id)
+    if rule is None or not text:
+        return None
+    return Delineation(
+        text=text.strip(),
+        rule_id=rule_id,
+        source=_source_label(rule),
+        evidence_grade=rule.get("evidence_grade", "?"),
+        trigger=trigger,
+        caveat=caveat,
+    )
+
+
+def _planet_in_bhava(graha: str, house: int) -> tuple[str | None, str | None]:
+    """Phaladīpikā's result for a graha in a bhāva, or the reason there is none."""
+    rule_id = f"jyotisha.phaladeepika.08.planet_in_bhava.{graha.lower()}"
+    rule = _rules_by_id().get(rule_id)
+    if rule is None:
+        return None, f"no Phaladīpikā bhāva-results rule is encoded for {graha}"
+    conclusion = rule.get("conclusion", {}) or {}
+    results = conclusion.get("results_by_house") or {}
+    text = results.get(str(house)) or results.get(house)
+    if text:
+        return str(text), None
+    missing = conclusion.get("houses_not_recovered")
+    if missing:
+        return None, (
+            f"Phaladīpikā's text for {graha} in the {ORDINAL[house]} bhāva was not "
+            f"recovered from the available scan (the pack records houses "
+            f"{missing} as an OCR gap). No substitute author is used."
+        )
+    return None, (
+        f"the encoded Phaladīpikā rule for {graha} carries no result for the "
+        f"{ORDINAL[house]} bhāva"
+    )
+
+
+def _facts(birth: BirthInput) -> dict[str, Any]:
+    panel = build_panel(birth)
+    section = next(
+        s for s in panel["sections"] if s["tradition_id"] == "indian_jyotisha"
+    )
+    if section.get("error"):
+        raise RuntimeError(f"Jyotisha calculation failed: {section['error']}")
+    return section["facts"]
+
+
+def _house_of(facts: dict[str, Any], graha: str) -> int | None:
+    for row in facts["grahas"]:
+        if row["graha"] == graha:
+            return row["house"]
+    return None
+
+
+def _graha_row(facts: dict[str, Any], graha: str) -> dict[str, Any] | None:
+    return next((r for r in facts["grahas"] if r["graha"] == graha), None)
+
+
+def build_report(birth: BirthInput) -> TraditionReport:
+    facts = _facts(birth)
+    report = TraditionReport(
+        tradition_id="indian_jyotisha",
+        display_name="Parāśari Jyotiṣa — Full Reading",
+        birth=birth.to_dict(),
+    )
+    lagna = facts["lagna"]
+    grahas = facts["grahas"]
+    houses = {h["house"]: h for h in facts["houses"]}
+    lordships = facts["house_lordships"]
+
+    _opening(report, facts, lagna)
+    _grahas_section(report, facts, grahas)
+    _bhavas_section(report, facts, houses, lordships, grahas)
+    _yogas_section(report, facts)
+    _dasha_section(report, facts)
+    _navamsha_section(report, facts, grahas)
+    _drishti_section(report, facts)
+    _limits(report, facts)
+    return report
+
+
+def _opening(report: TraditionReport, facts: dict, lagna: dict) -> None:
+    s = report.add(ReportSection("The Lagna and Its Lord", level=2))
+    lord = lagna["lord"]
+    lord_row = _graha_row(facts, lord)
+    s.notes.append(
+        f"The lagna rises in **{lagna['rasi']}** at {lagna['degree_in_sign']:.2f}°, "
+        f"in the nakṣatra **{lagna['nakshatra']} pāda {lagna['pada']}** "
+        f"(lord {lagna['nakshatra_lord']}). Its navāṃśa is {lagna['navamsha']}"
+        + (", vargottama." if lagna.get("vargottama") else ".")
+    )
+    s.notes.append(
+        f"The lagneśa — lord of the lagna — is **{lord}**"
+        + (
+            f", standing in {lord_row['rasi']} in the {ORDINAL[lord_row['house']]} "
+            f"bhāva, {lord_row['dignity']}."
+            if lord_row else "."
+        )
+    )
+    s.notes.append(
+        f"The janma rāśi (Moon sign) is **{facts['janma_rasi']}** and the janma "
+        f"nakṣatra is **{facts['janma_nakshatra']['name']} pāda "
+        f"{facts['janma_nakshatra']['pada']}**, lord "
+        f"{facts['janma_nakshatra']['lord']} — which is what sets the "
+        f"Viṃśottarī daśā sequence below."
+    )
+    if lord_row:
+        text, why = _planet_in_bhava(lord, lord_row["house"])
+        if text:
+            d = _delineate(
+                f"jyotisha.phaladeepika.08.planet_in_bhava.{lord.lower()}",
+                text,
+                f"lagneśa {lord} in the {ORDINAL[lord_row['house']]} bhāva",
+            )
+            if d:
+                s.delineations.append(d)
+        elif why:
+            s.refusals.append(why)
+
+
+def _grahas_section(report: TraditionReport, facts: dict, grahas: list) -> None:
+    s = report.add(ReportSection("The Nine Grahas", level=2))
+    s.table = [
+        {
+            "Graha": g["graha"],
+            "Rāśi": f"{g['rasi']} {g['degree_in_sign']:.1f}°",
+            "Bhāva": g["house"],
+            "Nakṣatra": f"{g['nakshatra']} p{g['pada']}",
+            "Dignity": g["dignity"],
+            "D9": g["navamsha"],
+            "Vargottama": "yes" if g.get("vargottama") else "",
+            "Combust": "yes" if g.get("combust") else "",
+        }
+        for g in grahas
+    ]
+    for g in grahas:
+        sub = report.add(
+            ReportSection(
+                f"{g['graha']} in {g['rasi']}, {ORDINAL[g['house']]} bhāva",
+                level=3,
+            )
+        )
+        bits = [
+            f"{g['graha']} stands in **{g['rasi']}** at "
+            f"{g['degree_in_sign']:.2f}°, in the {ORDINAL[g['house']]} bhāva "
+            f"({g['dignity']}).",
+            f"Nakṣatra {g['nakshatra']} pāda {g['pada']}, lord "
+            f"{g['nakshatra_lord']}. In the navāṃśa it falls in "
+            f"{g['navamsha']} ({g['navamsha_dignity']})"
+            + (", vargottama — the same sign in D1 and D9, which strengthens it."
+               if g.get("vargottama") else "."),
+        ]
+        if g.get("dispositor"):
+            bits.append(
+                f"Its dispositor is {g['dispositor']}, a {g['dispositor_relation']} "
+                f"by naisargika relation."
+            )
+        if g.get("combust"):
+            bits.append(
+                f"It is combust — within {g.get('combustion_orb_degrees')}° of the "
+                f"Sun ({g.get('solar_separation_degrees')}° actual separation)."
+            )
+        if g.get("retrograde"):
+            bits.append("It is retrograde (vakrī).")
+        if g.get("drishti_houses"):
+            bits.append(
+                "It casts drishti on "
+                + ", ".join(ORDINAL[h] for h in g["drishti_houses"])
+                + " bhāva."
+            )
+        sub.notes.append(" ".join(bits))
+        text, why = _planet_in_bhava(g["graha"], g["house"])
+        if text:
+            d = _delineate(
+                f"jyotisha.phaladeepika.08.planet_in_bhava.{g['graha'].lower()}",
+                text,
+                f"{g['graha']} in the {ORDINAL[g['house']]} bhāva",
+            )
+            if d:
+                sub.delineations.append(d)
+        elif why:
+            sub.refusals.append(why)
+
+
+def _bhavas_section(
+    report: TraditionReport, facts: dict, houses: dict, lordships: dict, grahas: list
+) -> None:
+    report.add(ReportSection("The Twelve Bhāvas", level=2)).notes.append(
+        "Each bhāva is judged by three things in this tradition: the sign on it, "
+        "the condition of its lord, and whatever occupies it. All three are given "
+        "below; the sourced delineation follows each occupant."
+    )
+    occupants: dict[int, list[dict]] = {}
+    for g in grahas:
+        occupants.setdefault(g["house"], []).append(g)
+    for house in range(1, 13):
+        info = houses[house]
+        sub = report.add(
+            ReportSection(f"Bhāva {house}: {BHAVA_NAMES[house]}", level=3)
+        )
+        lord = info["lord"]
+        lord_row = _graha_row(facts, lord)
+        kind = []
+        if house in KENDRAS:
+            kind.append("kendra")
+        if house in TRIKONAS:
+            kind.append("trikoṇa")
+        if house in DUSTHANAS:
+            kind.append("duḥsthāna")
+        note = (
+            f"**{info['rasi']}** occupies the {ORDINAL[house]} bhāva"
+            + (f" ({', '.join(kind)})" if kind else "")
+            + f". Its lord is **{lord}**"
+        )
+        if lord_row:
+            note += (
+                f", placed in {lord_row['rasi']} in the "
+                f"{ORDINAL[lord_row['house']]} bhāva, {lord_row['dignity']}"
+            )
+        other = [h for h in lordships.get(lord, []) if h != house]
+        if other:
+            note += (
+                f". {lord} also rules the "
+                + ", ".join(ORDINAL[h] for h in other)
+                + " bhāva, so those topics are tied to this one"
+            )
+        note += "."
+        sub.notes.append(note)
+        here = occupants.get(house, [])
+        if here:
+            sub.notes.append(
+                "Occupied by " + ", ".join(g["graha"] for g in here) + "."
+            )
+            for g in here:
+                text, why = _planet_in_bhava(g["graha"], house)
+                if text:
+                    d = _delineate(
+                        f"jyotisha.phaladeepika.08.planet_in_bhava.{g['graha'].lower()}",
+                        text,
+                        f"{g['graha']} occupying the {ORDINAL[house]} bhāva",
+                    )
+                    if d:
+                        sub.delineations.append(d)
+                elif why:
+                    sub.refusals.append(why)
+        else:
+            sub.notes.append(
+                "No graha occupies it; it is judged from its lord's condition alone."
+            )
+
+
+def _yogas_section(report: TraditionReport, facts: dict) -> None:
+    s = report.add(ReportSection("Yogas Present in This Chart", level=2))
+    yogas = facts.get("yogas") or []
+    if not yogas:
+        s.notes.append("No yoga in the engine's encoded set is formed here.")
+        return
+    s.notes.append(
+        f"{len(yogas)} yoga(s) are formed. Each is listed with the placements "
+        "that constitute it, so the claim can be checked rather than taken."
+    )
+    yoga_rule_map = {
+        "Pancha Mahapurusha": "jyotisha.phaladeepika.06.pancha_mahapurusha_yoga",
+        "Kesari": "jyotisha.phaladeepika.06.kesari_and_sakata_yoga",
+        "Gajakesari": "jyotisha.phaladeepika.06.kesari_and_sakata_yoga",
+        "Sakata": "jyotisha.phaladeepika.06.kesari_and_sakata_yoga",
+        "Sunapha": "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma",
+        "Anapha": "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma",
+        "Durudhara": "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma",
+        "Kemadruma": "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma",
+        "Neechabhanga": "jyotisha.phaladeepika.neechabhanga_rajayoga",
+        "Raja Yoga": "jyotisha.phaladeepika.four_rajayogas",
+    }
+    for y in yogas:
+        sub = report.add(ReportSection(y["yoga"], level=3))
+        sub.notes.append(f"**{y.get('summary', '')}** Rule: {y.get('rule', '')}")
+        for fact in y.get("constituent_facts", []):
+            sub.notes.append(f"- {fact}")
+        rule_id = next(
+            (rid for key, rid in yoga_rule_map.items() if key.lower() in y["yoga"].lower()),
+            None,
+        )
+        if rule_id and rule_id in _rules_by_id():
+            rule = _rules_by_id()[rule_id]
+            c = rule.get("conclusion", {}) or {}
+            text = None
+            for key in ("judgment", "kesari_result", "graded_result",
+                        "one_directional_result", "sunapha_result"):
+                if isinstance(c.get(key), str):
+                    text = c[key]
+                    break
+            if text:
+                d = _delineate(rule_id, text, f"{y['yoga']} formed in this chart")
+                if d:
+                    sub.delineations.append(d)
+        else:
+            sub.refusals.append(
+                f"The engine detects {y['yoga']} structurally, but no Phaladīpikā "
+                "result for it is encoded in the corpus yet, so no classical "
+                "verdict is quoted."
+            )
+
+
+def _dasha_section(report: TraditionReport, facts: dict) -> None:
+    s = report.add(ReportSection("Viṃśottarī Daśā", level=2))
+    current = facts.get("vimshottari_current") or {}
+    maha = current.get("mahadasha") or {}
+    antar = current.get("antardasha") or {}
+    s.notes.append(
+        "Viṃśottarī runs from the janma nakṣatra, so the whole timing layer is "
+        "downstream of the Moon's longitude — a few minutes of birth-time error "
+        "moves every date below."
+    )
+    if maha:
+        s.notes.append(
+            f"As of {current.get('as_of')}, the running mahādaśā is "
+            f"**{maha['lord']}** ({maha['start']} → {maha['end']}), with "
+            f"**{antar.get('antardasha_lord')}** antardaśā "
+            f"({antar.get('start')} → {antar.get('end')})."
+        )
+    s.table = [
+        {
+            "Mahādaśā": m["lord"],
+            "From": m["start"],
+            "To": m["end"],
+            "Years": m["years"],
+            "At birth": "partial" if m.get("partial_at_birth") else "",
+        }
+        for m in facts.get("vimshottari_mahadashas", [])
+    ]
+    rule_id = "jyotisha.phaladeepika.19.vimshottari_mahadasha_significations"
+    rule = _rules_by_id().get(rule_id)
+    if rule and maha:
+        results = (rule.get("conclusion", {}) or {}).get("results_by_graha") or {}
+        text = results.get(maha["lord"]) or results.get(maha["lord"].lower())
+        if text:
+            d = _delineate(
+                rule_id, str(text),
+                f"{maha['lord']} mahādaśā running as of {current.get('as_of')}",
+                caveat=(
+                    "Phaladīpikā states the daśā's general significations. It does "
+                    "not, in the encoded chapter, condition them on the daśā "
+                    "lord's placement in this particular chart — that refinement "
+                    "belongs to the commentaries and is not sourced here."
+                ),
+            )
+            if d:
+                s.delineations.append(d)
+    if not s.delineations:
+        s.refusals.append(
+            "No sourced signification for the running mahādaśā lord is encoded."
+        )
+
+
+def _navamsha_section(report: TraditionReport, facts: dict, grahas: list) -> None:
+    s = report.add(ReportSection("Navāṃśa (D9)", level=2))
+    s.notes.append(
+        "The D9 is the tradition's own check on the D1: a graha strong in the rāśi "
+        "chart but weak in navāṃśa is held to promise more than it delivers. "
+        "Vargottama grahas — same sign in both — are the exception."
+    )
+    varg = [g["graha"] for g in grahas if g.get("vargottama")]
+    s.notes.append(
+        ("Vargottama here: " + ", ".join(varg) + ".") if varg
+        else "No graha is vargottama in this chart."
+    )
+    s.table = [
+        {
+            "Graha": g["graha"],
+            "D1 rāśi": g["rasi"],
+            "D1 dignity": g["dignity"],
+            "D9 rāśi": g["navamsha"],
+            "D9 dignity": g["navamsha_dignity"],
+        }
+        for g in grahas
+    ]
+    s.refusals.append(
+        "Only D1 and D9 are computed. The wider ṣoḍaśavarga — D10 for career, D7 "
+        "for children, D12 for parents — is not, so no varga-specific judgment is "
+        "made on those topics."
+    )
+
+
+def _drishti_section(report: TraditionReport, facts: dict) -> None:
+    s = report.add(ReportSection("Drishti (Aspects)", level=2))
+    s.notes.append(
+        "Jyotiṣa drishti is whole-sign and mostly forward-looking: every graha "
+        "aspects the 7th from itself, with Mars adding the 4th and 8th, Jupiter "
+        "the 5th and 9th, and Saturn the 3rd and 10th."
+    )
+    s.table = [
+        {
+            "Graha": d["graha"],
+            "From bhāva": d["from_house"],
+            "Aspects": "; ".join(d.get("aspects", [])) or "—",
+            "Special": d.get("special_drishti", "none"),
+        }
+        for d in facts.get("drishti", [])
+    ]
+
+
+def _limits(report: TraditionReport, facts: dict) -> None:
+    report.method_notes.extend([
+        f"Sidereal, Lahiri ayanāṃśa {facts['ayanamsa_degrees']:.4f}° at birth. "
+        "Other ayanāṃśas (Raman, Krishnamurti) shift every position and are not "
+        "computed here.",
+        "Whole-sign bhāvas, which is the Parāśari norm. Śrīpati and other cusp "
+        "systems would move grahas near a sign boundary into adjacent bhāvas.",
+        "Every delineation above is quoted from Phaladīpikā via the research "
+        "corpus, at evidence grade B: the translation mediates, and the scan's "
+        "own Devanāgarī is OCR-corrupted so it cannot independently control "
+        "wording. Independent Sanskrit review is outstanding.",
+        "Bṛhat Parāśara Horā Śāstra — the root text this system is named for — is "
+        "NOT the source of any delineation here. Its available scan is unusable. "
+        "Every judgment above comes from Mantreśvara's later Phaladīpikā, and a "
+        "practitioner asking 'what does BPHS say' is owed the answer that this "
+        "report cannot tell them.",
+        "Ṣaḍbala, Aṣṭakavarga and the wider vargas are not computed, so no "
+        "strength-number or transit-scoring claim is made.",
+        "No remedial measures (upāya), no gemstone, mantra or ritual prescription "
+        "is issued. Those are religious instruction, not chart judgment.",
+    ])
