@@ -939,6 +939,48 @@ def validate(root: Path) -> dict[str, Any]:
     if len(islamicate_variant_observations) != 8:
         raise ValueError("Islamicate variant-observation inventory changed")
 
+    # Defensibility specs: every tradition with a reading section must publish
+    # the six-part spec that governs what its reading may and may not claim.
+    defensibility_standard = root / "DEFENSIBILITY.md"
+    if not defensibility_standard.is_file():
+        raise ValueError("DEFENSIBILITY.md standard is missing")
+    required_spec_sections = (
+        "## Core-technique checklist",
+        "## Judgment hierarchy",
+        "## Worked-example inventory",
+        "## Refusal list",
+        "## Conventions requiring disclosure",
+        "## Current implementation gap",
+    )
+    defensibility_tracks = (
+        "jyotisha",
+        "bazi",
+        "islamicate",
+        "medieval_jewish",
+        "maya",
+        "nahua",
+        "babylonian",
+    )
+    defensibility_specs: dict[str, int] = {}
+    for track in defensibility_tracks:
+        spec_path = root / track / "defensibility_spec.md"
+        if not spec_path.is_file():
+            raise ValueError(f"Missing defensibility spec: {track}")
+        text = spec_path.read_text(encoding="utf-8")
+        missing_sections = [s for s in required_spec_sections if s not in text]
+        if missing_sections:
+            raise ValueError(
+                f"Defensibility spec {track} missing sections: {missing_sections}"
+            )
+        if "## Refusal list" in text:
+            refusal_block = text.split("## Refusal list", 1)[1]
+            refusal_block = refusal_block.split("\n## ", 1)[0]
+            if refusal_block.count("- ") < 3:
+                raise ValueError(
+                    f"Defensibility spec {track} lists fewer than three refusals"
+                )
+        defensibility_specs[track] = len(text.splitlines())
+
     coverage_manifest_path = root / "engine_coverage_manifest.json"
     coverage_manifest = all_json[coverage_manifest_path]
     coverage_schema = all_json[root / "engine_coverage_manifest.schema.json"]
@@ -1059,6 +1101,8 @@ def validate(root: Path) -> dict[str, Any]:
         "nahua_tonalpohualli_customer_eligible": nahua_boundary[
             "customer_eligible"
         ],
+        "defensibility_specs": len(defensibility_specs),
+        "defensibility_spec_tracks": sorted(defensibility_specs),
         "bazi_sexagenary_rules": len(bazi_rules),
         "bazi_sexagenary_vectors": len(bazi_vectors),
         "bazi_sexagenary_joint_period": bazi_cycle["joint_period"],
