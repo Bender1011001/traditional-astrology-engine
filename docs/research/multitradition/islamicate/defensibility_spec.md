@@ -52,6 +52,30 @@ against a stated 75, and Adelard's 75 against a stated 77. Publishing those
 disagreements is itself a defendable contribution: it is exactly what a
 specialist would want to see and what no astrology product shows.
 
+## Correction: the modern translations were never the gate
+
+This spec originally listed the Brill (2019), Aragno (2004), and 1994 modern
+translations as gates on Abu Ma'shar and al-Qabisi. That was a conflation and is
+withdrawn — see "Translation is not a gate for quotation" in
+[../DEFENSIBILITY.md](../DEFENSIBILITY.md).
+
+The Arabic originals are 9th-10th century and public domain. **Seven TEI
+witnesses are already downloaded and hash-verified in this repository**, covering
+separate Arabic, Hermann, John, and Adelard lineages, with 30 candidate passages
+already catalogued across five concepts. That text can be read and rendered now.
+
+What the modern critical editions genuinely supply is the **apparatus** —
+manuscript stemma, variant collation, and editorial argument — which is real
+scholarly value that a bare TEI transcription does not carry and that a reader
+cannot reconstruct. The gates have been rewritten to ask for the apparatus rather
+than the translation.
+
+Practical consequence: the 8 preserved variants (including the Mars firdaria
+disagreement, Arabic 7 years against Hermann's 8, and the John/Adelard arithmetic
+that does not sum to its own stated total) can be **presented now**, with the
+Arabic and Latin quoted, rendered, and attributed by lineage. That is publishable
+content today, and it is exactly the material a specialist would want to see.
+
 ## Refusal list
 
 - **No firdaria dates or durations** sourced to al-Biruni section 395.

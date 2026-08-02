@@ -72,6 +72,46 @@ without its branch and its doubts.
 The honest ceiling, stated plainly, is part of "best possible." Sometimes it is
 most of it.
 
+## Translation is not a gate for quotation
+
+A correction to an error this standard originally encouraged.
+
+Requiring "an independent specialist translation" before a tradition can say
+anything conflates two different activities:
+
+**Rule promotion into a validated pack** — where a rule will drive automated
+judgment — legitimately wants independent review. Not because reading the
+language is hard, but because technical terms (`yongshen`, `hayyiz`,
+`moolatrikona`, `de ling`) carry doctrinal weight that a single unreviewed
+reading can silently distort, and because the pack is a single point of failure
+for every reading built on it.
+
+**Quotation and reading** does not. Where the source is public domain, rendering
+it directly is *more* defensible than depending on a modern copyrighted
+translation, because the reader can be given all three of: the original text, the
+rendering, and the passage citation. A specialist can then check the rendering
+against the original — which is impossible when the product paraphrases someone
+else's copyrighted English to avoid quoting it.
+
+The practical consequences:
+
+| Situation | Correct action |
+|---|---|
+| Public-domain original, no modern translation rights | **Translate directly.** Show original + rendering + citation. Grade as `engine_translation_unreviewed`. |
+| Public-domain original, modern translation exists but is copyrighted | Same. The modern translation is a convenience, not a prerequisite. |
+| Original not retrievable | **This is the real blocker** — an access problem, not a language or rights problem. Name it as such. |
+| Rule promotion into a validated pack | Independent specialist review still required. |
+
+Applies across the corpus: Classical Nahuatl and 16th-century Spanish
+(Florentine Codex), Classical Chinese (`Yuanhai Ziping`, `Sanming Tonghui`),
+Sanskrit (Brhajjataka, BPHS), Arabic (al-Biruni, Abu Ma'shar), Hebrew (Ibn Ezra),
+Greek (Valens, Ptolemy), Latin (Lilly's sources, the Hermann/John/Adelard
+lineages), and Akkadian.
+
+Where a blocker is recorded, it must state which of the four rows above applies.
+A blocker that says "awaiting translation" when the original is public domain and
+retrievable is not a blocker — it is unfinished work.
+
 ## The defense brief
 
 Each tradition additionally publishes a defense brief covering: sources and

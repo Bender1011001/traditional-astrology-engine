@@ -141,12 +141,29 @@ pending page inspection, honestly labeled with blockers.
 
 ## Blockers
 
-**1. M4 / Nahua — text access + rights.** `florentinecodex.getty.edu` is
-client-rendered; fetching folio 1r returns metadata and availability flags, not
-the text. And the standard English translation (Anderson & Dibble, 1950–1982) is
-a 20th-century scholarly work, not public domain — the 16th-century Nahuatl and
-Spanish are old, the modern English rendering is not. Full detail in
-`docs/research/multitradition/nahua/reading_pack_status.md`.
+**1. M4 / Nahua — RETRIEVAL ONLY.** Corrected after review: the rights blocker
+I originally recorded was wrong and is withdrawn. The 16th-century Nahuatl and
+Sahagun's Spanish are public domain and can be rendered directly, so the modern
+copyrighted English translation was never needed. The real and only blocker is
+that no route tried returns the text: Getty is client-rendered, and LoC/WDL
+returns 403 to the fetch tool.
+
+**Trivially unblockable by you:** download the Book 4 folios covering the twenty
+day signs and commit them under
+`docs/research/multitradition/nahua/folios/`. Images can be read directly.
+Full detail in `docs/research/multitradition/nahua/reading_pack_status.md`.
+
+**1b. The same error was found propagating into the Islamicate gates**, where it
+was blocking real work. Three modules listed obtaining a modern English
+translation (Brill 2019, Aragno 2004, 1994) as a gate — while seven Arabic and
+Latin TEI witnesses sit hash-verified in the repo with 30 catalogued passages.
+Gates rewritten to ask for the critical *apparatus* (stemma, variant collation),
+which is genuine scholarly value, rather than the translation. Consequence: the
+8 preserved variants are publishable content **now**.
+
+A new standard section, "Translation is not a gate for quotation", now governs
+this decision corpus-wide and separates rule promotion (independent review still
+required) from quotation (render the public-domain original directly).
 
 **2. Sex is not in the birth input contract.** Affects BaZi luck-pillar direction
 (currently both emitted) and Tibetan parkha (currently refused). Needs a product

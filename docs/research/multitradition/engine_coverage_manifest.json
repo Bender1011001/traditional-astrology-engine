@@ -84,7 +84,7 @@
             "jyotisha/source_audit.md"
           ],
           "remaining_gates": [
-            "controlling edition and translation",
+            "controlling edition collation (Sanskrit original is public domain; a modern translation is a convenience, not a gate)",
             "Sanskrit review",
             "rule and precedence extraction"
           ]
@@ -100,7 +100,7 @@
             "jyotisha/source_audit.md"
           ],
           "remaining_gates": [
-            "controlling edition and translation",
+            "controlling edition collation (Sanskrit original is public domain; a modern translation is a convenience, not a gate)",
             "Sanskrit review",
             "rule and precedence extraction"
           ]
@@ -369,7 +369,7 @@
             "islamicate/al_biruni_abu_mashar_al_qabisi_candidate_concordance.json"
           ],
           "remaining_gates": [
-            "2019 English translation and apparatus",
+            "Brill critical apparatus for variant resolution (Arabic is public domain and already hash-pinned as TEI; the modern translation is a convenience, not a gate)",
             "Arabic review",
             "Latin-lineage variant resolution"
           ]
@@ -386,7 +386,7 @@
             "islamicate/al_biruni_abu_mashar_al_qabisi_candidate_concordance.json"
           ],
           "remaining_gates": [
-            "1994 translation and apparatus",
+            "critical apparatus for variant resolution (Arabic/Latin already hash-pinned as TEI; the modern translation is a convenience, not a gate)",
             "Arabic review",
             "prohibition against Great Introduction inheritance"
           ]
@@ -403,7 +403,7 @@
             "islamicate/al_biruni_abu_mashar_al_qabisi_candidate_concordance.json"
           ],
           "remaining_gates": [
-            "2004 English translation and apparatus",
+            "Aragno critical apparatus for variant resolution (Arabic already hash-pinned as TEI; the modern translation is a convenience, not a gate)",
             "Arabic review",
             "Mercury and halb/hayyiz variant adjudication"
           ]
