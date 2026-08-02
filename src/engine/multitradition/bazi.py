@@ -138,6 +138,142 @@ def seasonal_state(element: str, month_branch: str) -> str:
     return COMMAND_STATES[4]
 
 
+# --- Branch relations (Sanming Tonghui juan 1) -------------------------------
+# Six harmonies. Each branch appears exactly once.
+LIU_HE: list[tuple[str, str]] = [
+    ("zi", "chou"), ("yin_branch", "hai"), ("mao", "xu"),
+    ("chen", "you"), ("si", "shen"), ("wu_branch", "wei"),
+]
+# Six clashes: each branch against the branch six positions away.
+LIU_CHONG: list[tuple[str, str]] = [
+    ("zi", "wu_branch"), ("chou", "wei"), ("yin_branch", "shen"),
+    ("mao", "you"), ("chen", "xu"), ("si", "hai"),
+]
+# Six harms.
+LIU_HAI: list[tuple[str, str]] = [
+    ("zi", "wei"), ("chou", "wu_branch"), ("yin_branch", "si"),
+    ("mao", "chen"), ("shen", "hai"), ("you", "xu"),
+]
+# Six destructions.
+LIU_PO: list[tuple[str, str]] = [
+    ("zi", "you"), ("wu_branch", "mao"), ("shen", "si"),
+    ("yin_branch", "hai"), ("chen", "chou"), ("xu", "wei"),
+]
+# Three-harmony frames (san he): each yields a transformed element.
+SAN_HE: list[tuple[tuple[str, str, str], str]] = [
+    (("shen", "zi", "chen"), "Water"),
+    (("hai", "mao", "wei"), "Wood"),
+    (("yin_branch", "wu_branch", "xu"), "Fire"),
+    (("si", "you", "chou"), "Metal"),
+]
+# Directional/seasonal frames (san hui).
+SAN_HUI: list[tuple[tuple[str, str, str], str]] = [
+    (("yin_branch", "mao", "chen"), "Wood"),
+    (("si", "wu_branch", "wei"), "Fire"),
+    (("shen", "you", "xu"), "Metal"),
+    (("hai", "zi", "chou"), "Water"),
+]
+# Punishments, by named type.
+XING_GROUPS: list[tuple[tuple[str, ...], str]] = [
+    (("yin_branch", "si", "shen"), "wu en zhi xing (ungrateful)"),
+    (("chou", "xu", "wei"), "shi shi zhi xing (bullying)"),
+    (("zi", "mao"), "wu li zhi xing (discourteous)"),
+]
+ZI_XING = ("chen", "wu_branch", "you", "hai")  # self-punishment when doubled
+
+
+def _pairs_present(
+    table: list[tuple[str, str]], present: dict[str, list[str]]
+) -> list[dict[str, Any]]:
+    found = []
+    for first, second in table:
+        if first in present and second in present:
+            found.append({
+                "branches": [BRANCH_LABELS[first], BRANCH_LABELS[second]],
+                # present[branch] is a list of pillar names (a branch can occur
+                # in more than one pillar), so flatten rather than nest.
+                "pillars": sorted(present[first] + present[second]),
+            })
+    return found
+
+
+def branch_relations(pillars: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """All classical branch relations among the four pillars.
+
+    Reports what is present; it does not adjudicate which relation dominates
+    when several apply to one branch, because precedence is school-specific and
+    the spec keeps that gated.
+    """
+    present: dict[str, list[str]] = {}
+    for pillar_name, pillar in pillars.items():
+        present.setdefault(pillar["branch"], []).append(pillar_name)
+
+    counts = {branch: len(names) for branch, names in present.items()}
+
+    san_he_found = []
+    for frame, element in SAN_HE:
+        members = [b for b in frame if b in present]
+        if len(members) == 3:
+            san_he_found.append({
+                "type": "complete",
+                "frame": [BRANCH_LABELS[b] for b in frame],
+                "transforms_to": element,
+            })
+        elif len(members) == 2:
+            san_he_found.append({
+                "type": "half",
+                "present": [BRANCH_LABELS[b] for b in members],
+                "missing": [BRANCH_LABELS[b] for b in frame if b not in present],
+                "reinforces": element,
+            })
+
+    san_hui_found = []
+    for frame, element in SAN_HUI:
+        members = [b for b in frame if b in present]
+        if len(members) == 3:
+            san_hui_found.append({
+                "frame": [BRANCH_LABELS[b] for b in frame],
+                "seasonal_element": element,
+            })
+
+    xing_found = []
+    for group, label in XING_GROUPS:
+        members = [b for b in group if b in present]
+        if len(members) == len(group):
+            xing_found.append({
+                "type": label,
+                "complete": True,
+                "branches": [BRANCH_LABELS[b] for b in group],
+            })
+        elif len(group) == 3 and len(members) == 2:
+            xing_found.append({
+                "type": label,
+                "complete": False,
+                "present": [BRANCH_LABELS[b] for b in members],
+            })
+    for branch in ZI_XING:
+        if counts.get(branch, 0) >= 2:
+            xing_found.append({
+                "type": "zi xing (self-punishment)",
+                "complete": True,
+                "branches": [BRANCH_LABELS[branch]] * counts[branch],
+            })
+
+    return {
+        "six_harmonies": _pairs_present(LIU_HE, present),
+        "six_clashes": _pairs_present(LIU_CHONG, present),
+        "six_harms": _pairs_present(LIU_HAI, present),
+        "six_destructions": _pairs_present(LIU_PO, present),
+        "three_harmony_frames": san_he_found,
+        "directional_frames": san_hui_found,
+        "punishments": xing_found,
+        "precedence_note": (
+            "Relations are reported, not ranked. When several apply to one "
+            "branch, which prevails is school-specific and stays gated."
+        ),
+    }
+
+
 # Solar longitude of each JIE (month-establishing term) -> month branch.
 JIE_TO_BRANCH: list[tuple[int, str]] = [
     (315, "yin_branch"), (345, "mao"), (15, "chen"), (45, "si"),
@@ -401,6 +537,7 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         },
         "hidden_stems": hidden,
         "visible_stem_ten_gods": visible_gods,
+        "branch_relations": branch_relations(pillars),
         "element_tally": _element_tally(pillars),
         "luck_pillars": _luck_pillars(
             birth, jd, year_stem, month_stem, month_branch
@@ -410,7 +547,7 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
     section.reading = _bazi_reading(
         day_stem, day_master_element, day_master_yang, command, month_root,
         root_branches, support, visible_gods, hidden,
-        _element_tally(pillars),
+        _element_tally(pillars), section.facts["branch_relations"],
     )
     return section
 
@@ -426,6 +563,7 @@ def _bazi_reading(
     visible_gods: dict[str, str],
     hidden: dict[str, list[dict[str, Any]]],
     tally: dict[str, int],
+    relations: dict[str, Any],
 ) -> list[str]:
     """Structural reading in the Ziping order: subject, command, roots, relations.
 
@@ -449,6 +587,55 @@ def _bazi_reading(
     ]
     god_list = ", ".join(f"{pillar}: {god}" for pillar, god in visible_gods.items())
     reading.append(f"Visible stems relative to the day master - {god_list}.")
+
+    # Branch relations, stated before any absence claim because a clash or frame
+    # changes what the branches are doing in the first place.
+    relation_lines: list[str] = []
+    for frame in relations["three_harmony_frames"]:
+        if frame["type"] == "complete":
+            relation_lines.append(
+                f"complete three-harmony frame {'-'.join(frame['frame'])} "
+                f"transforming toward {frame['transforms_to']}"
+            )
+        else:
+            relation_lines.append(
+                f"half three-harmony frame {'-'.join(frame['present'])} "
+                f"(missing {'-'.join(frame['missing'])}) reinforcing "
+                f"{frame['reinforces']}"
+            )
+    for frame in relations["directional_frames"]:
+        relation_lines.append(
+            f"directional frame {'-'.join(frame['frame'])} "
+            f"({frame['seasonal_element']})"
+        )
+    for label, key in (
+        ("clash", "six_clashes"),
+        ("harmony", "six_harmonies"),
+        ("harm", "six_harms"),
+        ("destruction", "six_destructions"),
+    ):
+        for item in relations[key]:
+            relation_lines.append(
+                f"{label} between {' and '.join(item['branches'])} "
+                f"({'/'.join(item['pillars'])} pillars)"
+            )
+    for punishment in relations["punishments"]:
+        branches = punishment.get("branches") or punishment.get("present") or []
+        relation_lines.append(
+            f"{'complete' if punishment['complete'] else 'partial'} punishment, "
+            f"{punishment['type']}: {'-'.join(branches)}"
+        )
+
+    if relation_lines:
+        reading.append(
+            "Branch relations present: " + "; ".join(relation_lines) + ". "
+            + relations["precedence_note"]
+        )
+    else:
+        reading.append(
+            "No classical branch relations (harmony, clash, harm, destruction, "
+            "frame, or punishment) are present among these four branches."
+        )
 
     missing = [element_name for element_name, count in tally.items() if count == 0]
     if missing:

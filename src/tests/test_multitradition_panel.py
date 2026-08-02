@@ -1517,3 +1517,80 @@ def test_panel_still_builds_every_section_with_babylonian_wired(
         "maya", "nahua_central_mexican",
     ):
         assert previously_shipped in ids
+
+
+# --------------------------------------------------------------------------- #
+# BaZi branch relations (spec item 7)
+# --------------------------------------------------------------------------- #
+
+
+def test_branch_relation_tables_are_structurally_complete() -> None:
+    """Each of the four pair tables must cover all twelve branches exactly once."""
+    from collections import Counter
+
+    from src.engine.multitradition.bazi import (
+        LIU_CHONG,
+        LIU_HAI,
+        LIU_HE,
+        LIU_PO,
+        _branches,
+    )
+
+    branches = set(_branches())
+    for table in (LIU_HE, LIU_CHONG, LIU_HAI, LIU_PO):
+        assert len(table) == 6
+        flat = [b for pair in table for b in pair]
+        assert set(flat) == branches
+        assert max(Counter(flat).values()) == 1
+
+
+def test_clashes_are_exactly_six_positions_apart() -> None:
+    from src.engine.multitradition.bazi import LIU_CHONG, _branches
+
+    index = {b: i for i, b in enumerate(_branches())}
+    for first, second in LIU_CHONG:
+        assert abs(index[first] - index[second]) == 6
+
+
+def test_frames_partition_the_twelve_branches() -> None:
+    from collections import Counter
+
+    from src.engine.multitradition.bazi import SAN_HE, SAN_HUI, _branches
+
+    branches = set(_branches())
+    for frames in (SAN_HE, SAN_HUI):
+        assert len(frames) == 4
+        flat = [b for frame, _ in frames for b in frame]
+        assert set(flat) == branches
+        assert max(Counter(flat).values()) == 1
+
+
+def test_fairfield_branch_relations(fairfield_panel: dict) -> None:
+    """Reproduces the relations verified by hand, plus two it found."""
+    relations = _section(fairfield_panel, "chinese_bazi")["facts"][
+        "branch_relations"
+    ]
+    clashes = relations["six_clashes"]
+    assert len(clashes) == 1
+    assert set(clashes[0]["pillars"]) == {"year", "day"}
+
+    frames = relations["three_harmony_frames"]
+    assert any(
+        f["type"] == "half" and f["reinforces"] == "Water" for f in frames
+    )
+
+    assert len(relations["six_destructions"]) == 1
+    punishments = relations["punishments"]
+    assert any("discourteous" in p["type"] and p["complete"] for p in punishments)
+
+
+def test_branch_relations_are_reported_not_ranked(fairfield_panel: dict) -> None:
+    relations = _section(fairfield_panel, "chinese_bazi")["facts"][
+        "branch_relations"
+    ]
+    assert "school-specific" in relations["precedence_note"]
+
+
+def test_branch_relations_appear_in_the_reading(fairfield_panel: dict) -> None:
+    reading = " ".join(_section(fairfield_panel, "chinese_bazi")["reading"])
+    assert "Branch relations present" in reading
