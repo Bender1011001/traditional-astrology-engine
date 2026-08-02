@@ -17,7 +17,7 @@ Rules are loaded from the hash-pinned research manifests on disk, the same way
 from __future__ import annotations
 
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -220,7 +220,8 @@ def _project_calendar(jd: float, geo: tuple[float, float, float]) -> dict[str, A
         if following > jd:
             break
         equinox = following
-    start = _refine_conjunction(_previous_conjunction(equinox + 5.0) - 2 * SYNODIC_MONTH_DAYS)
+    first = _previous_conjunction(equinox + 5.0) - 2 * SYNODIC_MONTH_DAYS
+    start = _refine_conjunction(first)
 
     day_ones: list[float] = []
     found_nisannu = False
@@ -272,11 +273,8 @@ def _project_calendar(jd: float, geo: tuple[float, float, float]) -> dict[str, A
 
 def _iso(jd: float) -> str:
     year, month, day, hour = swe.revjul(jd)
-    from datetime import datetime
-
-    return (
-        datetime(year, month, day) + timedelta(hours=hour)
-    ).strftime("%Y-%m-%dT%H:%M UT")
+    moment = datetime(year, month, day) + timedelta(hours=hour)
+    return moment.strftime("%Y-%m-%dT%H:%M UT")
 
 
 def _night_watch(jd: float, geo: tuple[float, float, float]) -> dict[str, Any]:
@@ -295,7 +293,12 @@ def _night_watch(jd: float, geo: tuple[float, float, float]) -> dict[str, Any]:
     if next_sunrise is None or not (last_sunset <= jd <= next_sunrise):
         return {"is_night": False, "watch": None, "status": "daylight_birth"}
     fraction = (jd - last_sunset) / (next_sunrise - last_sunset)
-    watch = "evening" if fraction < 1 / 3 else ("middle" if fraction < 2 / 3 else "dawn")
+    if fraction < 1 / 3:
+        watch = "evening"
+    elif fraction < 2 / 3:
+        watch = "middle"
+    else:
+        watch = "dawn"
     return {
         "is_night": True,
         "watch": watch,
@@ -955,10 +958,12 @@ def _matching_paragraph(matching: dict[str, Any]) -> str:
         text += f" For the remainder, {matching['no_match_reason']}."
     overlap = matching.get("calendar_selector_overlap") or []
     if overlap:
+        count = len(overlap)
+        noun = "protasis names" if count == 1 else "protases name"
         text += (
-            f" {len(overlap)} protases name the projected month or day - "
+            f" {count} {noun} the projected month or day - "
             + ", ".join(item["rule_id"] for item in overlap)
-            + " - but they are not matches: the eclipse each of them "
+            + " - but that is not a match: the eclipse each of them "
             "presupposes did not occur."
         )
     return text
