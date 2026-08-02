@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "school_id": "neo_assyrian_celestial_report_saa8_535",
+  "source_pack_id": "saao_saa8_lunar_eclipse_reports_316_535_v1",
+  "source_edition_id": "saao_saa8_hunger1992_oracc_p236933",
+  "source_registry_ids": ["babylonian_saao_saa8_reports"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "The current ORACC TEI for P236933 / SAA 8 535 was hash-locked and inspected in Akkadian transliteration, English translation, damage markup, metadata, and line alignment. This is an applied Neo-Assyrian royal/state omen dossier, not a natal source. Rules are grade B pending independent Assyriological collation and broader Enuma Anu Enlil witness comparison; all consumer predictions and historical interventions are disabled.",
+  "rules": [
+    {
+      "rule_id":"babylonian.saa8.535.obv1-3.sivan15_revolt_variant",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","report":"SAA 08 535","target_context":"royal_state","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"babylonian_month","operator":"equals","value":"sivan"},{"fact":"babylonian_day","operator":"equals","value":15}]},
+      "conclusion":{"type":"historical_apodosis_with_variant","primary":"servants_kill_unnamed_male_in_revolt","variant":"elders_die_context_broken","customer_prediction":false},
+      "priority":null,"exceptions":["The antecedent and variant context are damaged; do not silently identify a modern target."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 1-3; TEI translation unit n=1","verification":"ORACC_TEI_transliteration_translation_and_damage_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical clause display only; suppress violence and death as present-day prediction.","review_status":"Assyriological_variant_and_antecedent_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.obv4.sivan_evening_fish_locust_variant",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"state_ecological_portent","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"babylonian_month","operator":"equals","value":"sivan"},{"fact":"watch","operator":"equals","value":"evening"}]},
+      "conclusion":{"type":"historical_apodosis_with_variant","primary":"attack_of_fish","variant":"attack_of_locusts_restored","customer_prediction":false},
+      "priority":null,"exceptions":["The locust alternative is restored and must remain a variant, not a second simultaneous outcome."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 4; TEI translation unit n=4","verification":"ORACC_TEI_transliteration_translation_variant_and_restoration_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; no ecological forecast.","review_status":"Assyriological_variant_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.obv5.sivan_flood",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"land","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"babylonian_month","operator":"equals","value":"sivan"}]},
+      "conclusion":{"type":"historical_apodosis","themes":["flood_arrives","floodwater_devastates_land"],"customer_prediction":false},
+      "priority":null,"exceptions":["Floodwater and devastation wording is partly broken or restored."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 5; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_translation_and_damage_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; no disaster forecast.","review_status":"Assyriological_restoration_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.obv6-7.evening_completion_south_wind_fall",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"foreign_kings_and_lands","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"watch","operator":"equals","value":"evening"},{"fact":"eclipse_finishes_watch","operator":"equals","value":true},{"fact":"wind","operator":"equals","value":"south"}]},
+      "conclusion":{"type":"historical_apodosis","targets":["king_of_elam","king_of_guti","their_land"],"theme":"fall","customer_prediction":false},
+      "priority":null,"exceptions":["All four predicates are required; Elam is partly broken."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 6-7; TEI translation unit n=6","verification":"ORACC_TEI_transliteration_translation_and_damage_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; no political forecast.","review_status":"Assyriological_and_compound_predicate_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.obv8-r2.sivan_eclipse_harvest_failure",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"land_harvest","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"eclipse"},{"fact":"babylonian_month","operator":"equals","value":"sivan"},{"fact":"babylonian_day","operator":"between_inclusive","value":[1,30]}]},
+      "conclusion":{"type":"historical_apodosis","theme":"harvest_does_not_prosper","customer_prediction":false},
+      "priority":null,"exceptions":["The clause crosses the tablet break and its conclusion is partly broken."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 8-r. 2; TEI translation unit n=8","verification":"ORACC_TEI_transliteration_translation_and_break_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; no agricultural forecast.","review_status":"Assyriological_break_and_scope_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.obv10.dark_moon_emergence_flood",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"land","birth_input_eligible":false,"eclipse_required_by_clause":false},
+      "conditions":{"all":[{"fact":"moon_emergence","operator":"equals","value":"dark"}]},
+      "conclusion":{"type":"historical_apodosis","theme":"devastating_flood","customer_prediction":false},
+      "priority":null,"exceptions":["Although copied inside an eclipse dossier, the translated protasis itself says only that the moon comes out darkly; an eclipse predicate may not be inserted."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 10; TEI translation unit n=10","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; no disaster forecast.","review_status":"Assyriological_and_dossier_scope_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.obv11-12.cloud_enters_cloud_ruin_fragment",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"land","birth_input_eligible":false,"executable":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse_restored"},{"fact":"cloud_configuration","operator":"equals","value":"cloud_enters_cloud_variant_into_cloud"}]},
+      "conclusion":{"type":"damaged_historical_apodosis","themes":["gods_remove_land_reason","land_changes","land_quickly_ruined"],"customer_prediction":false},
+      "priority":null,"exceptions":["Protasis and conclusion contain breaks or restorations; exact astronomical semantics are unresolved."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 11-12; TEI translation unit n=11","verification":"ORACC_TEI_transliteration_translation_damage_and_variant_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Research trace only; never execute or forecast.","review_status":"Assyriological_reconstruction_required"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.obv13-15.cloud_exit_clearing_trouble_fragment",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"land_and_king","birth_input_eligible":false,"executable":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse_restored"},{"fact":"moon_exits_cloud","operator":"equals","value":true},{"fact":"sky_clears","operator":"equals","value":true}]},
+      "conclusion":{"type":"damaged_historical_apodosis","themes":["great_land_made_small","king_continual_troubles"],"customer_prediction":false},
+      "priority":null,"exceptions":["Core subjects are partly restored; no current target may be inferred."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"obv. 13-15; TEI translation unit n=13","verification":"ORACC_TEI_transliteration_translation_and_restoration_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Research trace only; never execute or predict royal trouble.","review_status":"Assyriological_reconstruction_required"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev1-2.lightning_no_water_flood_fragment",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"land","birth_input_eligible":false,"executable":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse_restored"},{"fact":"lightning","operator":"equals","value":true}]},
+      "conclusion":{"type":"damaged_historical_apodosis","theme":"flood_of_no_water_carries_away_land","customer_prediction":false},
+      "priority":null,"exceptions":["Both protasis and conclusion are substantially restored or broken; the unusual flood expression requires specialist review."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 1-2; TEI translation unit n=r 1","verification":"ORACC_TEI_transliteration_translation_and_restoration_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Research trace only; never execute or forecast.","review_status":"Assyriological_reconstruction_required"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev3-4.south_wind_famine_fragment",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"king_and_land","birth_input_eligible":false,"executable":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse_restored"},{"fact":"wind","operator":"equals","value":"south_continuous"}]},
+      "conclusion":{"type":"damaged_historical_apodosis","themes":["king_predicate_missing","famine_context_broken"],"customer_prediction":false},
+      "priority":null,"exceptions":["The royal predicate and famine context are broken; the rule cannot produce an outcome."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 3-4; TEI translation unit n=r 3","verification":"ORACC_TEI_transliteration_translation_and_break_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Research trace only; fail closed.","review_status":"Assyriological_reconstruction_required"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev5-6.jupiter_present_substitution_omen",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"king_and_substitute_noble","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"this_lunar_eclipse"},{"fact":"jupiter_present_in_eclipse","operator":"equals","value":true}]},
+      "conclusion":{"type":"historical_substitution_apodosis","themes":["well_being_for_king","famous_noble_dies_in_kings_stead"],"customer_prediction":false},
+      "priority":null,"exceptions":["The eclipse phrase and noble title are partly restored; this is a royal substitution omen, not a personal Jupiter meaning."],"conflicts_with":["generic_jupiter_benefic_meaning","natal_jupiter_rule"],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 5-6; TEI translation unit n=r 5","verification":"ORACC_TEI_transliteration_translation_and_restoration_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; suppress death and substitution as prediction or advice.","review_status":"Assyriological_and_ritual_context_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev7-8.dark_sagittarius_geographic_decision",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"mutabal_and_babylon","birth_input_eligible":false,"executable":false},
+      "conditions":{"all":[{"fact":"moon_dark_region","operator":"equals","value":"sagittarius"}]},
+      "conclusion":{"type":"damaged_geographic_decision","targets":["mutabal","babylon"],"customer_prediction":false},
+      "priority":null,"exceptions":["Moon, Sagittarius, Mutabal, and Babylon are partly restored; 'decision' does not itself specify the outcome."],"conflicts_with":["natal_moon_in_sagittarius_meaning"],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 7-8; TEI translation unit n=r 7","verification":"ORACC_TEI_transliteration_translation_and_restoration_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Research trace only; no outcome and no natal sign meaning.","review_status":"Assyriological_geographic_and_semantic_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev9.sivan_routes_westland",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","technique":"eclipse_geographic_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"babylonian_month","operator":"equals","value":"sivan"}]},
+      "conclusion":{"type":"geographic_routing","recipient":"westland","customer_prediction":false},
+      "priority":null,"exceptions":["Westland is partly broken in the translation."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 9; TEI translation unit n=r 9","verification":"ORACC_TEI_transliteration_translation_and_damage_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_geographic_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev9.day15_routes_westland",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","technique":"eclipse_geographic_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"babylonian_day","operator":"equals","value":15}]},
+      "conclusion":{"type":"geographic_routing","recipient":"westland","customer_prediction":false},
+      "priority":null,"exceptions":["Westland is partly broken in the translation."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 9; TEI translation unit n=r 9","verification":"ORACC_TEI_transliteration_translation_and_damage_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_geographic_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev9-10.evening_watch_routes_akkad",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","technique":"eclipse_geographic_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"watch","operator":"equals","value":"evening"}]},
+      "conclusion":{"type":"geographic_routing","recipient":"akkad","customer_prediction":false},
+      "priority":null,"exceptions":[],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 9-10; TEI translation unit n=r 9","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_geographic_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev11.evening_watch_deaths",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","target_context":"unspecified_historical_group","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"watch","operator":"equals","value":"evening"}]},
+      "conclusion":{"type":"historical_apodosis","theme":"deaths","customer_prediction":false},
+      "priority":null,"exceptions":["The target is not specified by this clause alone; routing rules may supply institutional geography but not a modern person."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 11; TEI translation unit n=r 11","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; suppress death prediction.","review_status":"Assyriological_target_and_context_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev12.evening_watch_term",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"timing",
+      "scope":{"artifact":"P236933","technique":"omen_term","birth_input_eligible":false,"executable":false},
+      "conditions":{"all":[{"fact":"watch","operator":"equals","value":"evening"}]},
+      "conclusion":{"type":"historical_omen_term","duration":{"months":3,"days":10,"restored":true},"customer_prediction":false},
+      "priority":null,"exceptions":["The duration is restored and its exact calendrical arithmetic is not established by this passage."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 12; TEI translation unit n=r 12","verification":"ORACC_TEI_transliteration_translation_and_restoration_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Research display only; do not calculate a forecast date.","review_status":"Assyriological_and_calendar_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.535.rev13.sivan_routes_ur",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_535","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P236933","technique":"eclipse_geographic_decision","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"babylonian_month","operator":"equals","value":"sivan"}]},
+      "conclusion":{"type":"geographic_decision","recipient":"ur","outcome":null,"customer_prediction":false},
+      "priority":null,"exceptions":["The verb 'gives' is restored; a decision recipient is not an outcome and coexists with the Westland routing."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p236933","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 535","location":"rev. 13; TEI translation unit n=r 13","verification":"ORACC_TEI_transliteration_translation_and_restoration_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only; do not invent an outcome.","review_status":"Assyriological_and_geographic_review_pending"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "nahua_central_mexican",
+  "source_pack_id": "nahua_tonalpohualli_cycle_v1",
+  "status": "research_only_fail_closed",
+  "source_ids": [
+    "nahua_getty_florentine_codex_book4",
+    "nahua_inah_anales_tonalamatl_table"
+  ],
+  "vectors": [
+    {
+      "vector_id": "nahua.cycle.origin",
+      "rule_ids": ["nahua.tonalpohualli.coefficient_cycle_13", "nahua.tonalpohualli.day_sign_cycle_20", "nahua.tonalpohualli.trecena_boundary"],
+      "inputs": {"operation": "offset", "day_offset": 0},
+      "expected": {"coefficient": 1, "day_sign_id": "cipactli", "canonical_cycle_index": 0, "trecena_position": 1, "trecena_start_sign_id": "cipactli", "day_offset": 0},
+      "provenance": "Florentine Codex Book 4 folio 1r begins with Ce Cipactli; INAH table row/order fixture."
+    },
+    {
+      "vector_id": "nahua.cycle.second_day",
+      "rule_ids": ["nahua.tonalpohualli.coefficient_cycle_13", "nahua.tonalpohualli.day_sign_cycle_20"],
+      "inputs": {"operation": "offset", "day_offset": 1},
+      "expected": {"coefficient": 2, "day_sign_id": "ehecatl", "canonical_cycle_index": 1, "trecena_position": 2, "trecena_start_sign_id": "cipactli", "day_offset": 1},
+      "provenance": "Second row/position of the INAH twenty-trecena table."
+    },
+    {
+      "vector_id": "nahua.cycle.first_trecena_end",
+      "rule_ids": ["nahua.tonalpohualli.coefficient_cycle_13", "nahua.tonalpohualli.day_sign_cycle_20", "nahua.tonalpohualli.trecena_boundary"],
+      "inputs": {"operation": "offset", "day_offset": 12},
+      "expected": {"coefficient": 13, "day_sign_id": "acatl", "canonical_cycle_index": 12, "trecena_position": 13, "trecena_start_sign_id": "cipactli", "day_offset": 12},
+      "provenance": "First thirteen positions derived from the complete INAH coefficient/sign table."
+    },
+    {
+      "vector_id": "nahua.cycle.second_trecena_start",
+      "rule_ids": ["nahua.tonalpohualli.trecena_boundary", "nahua.tonalpohualli.day_sign_cycle_20"],
+      "inputs": {"operation": "offset", "day_offset": 13},
+      "expected": {"coefficient": 1, "day_sign_id": "ocelotl", "canonical_cycle_index": 13, "trecena_position": 1, "trecena_start_sign_id": "ocelotl", "day_offset": 13},
+      "provenance": "INAH table identifies the second trecena as 1 Ocelotl; Florentine Codex Book 4 chapter 2 heading was inspected on folios 3v-4r."
+    },
+    {
+      "vector_id": "nahua.cycle.sign_wrap",
+      "rule_ids": ["nahua.tonalpohualli.coefficient_cycle_13", "nahua.tonalpohualli.day_sign_cycle_20"],
+      "inputs": {"operation": "offset", "day_offset": 20},
+      "expected": {"coefficient": 8, "day_sign_id": "cipactli", "canonical_cycle_index": 20, "trecena_position": 8, "trecena_start_sign_id": "ocelotl", "day_offset": 20},
+      "provenance": "Twenty-sign wrap under the independently advancing 13 and 20 series."
+    },
+    {
+      "vector_id": "nahua.cycle.last_day",
+      "rule_ids": ["nahua.tonalpohualli.joint_recurrence_260"],
+      "inputs": {"operation": "offset", "day_offset": 259},
+      "expected": {"coefficient": 13, "day_sign_id": "xochitl", "canonical_cycle_index": 259, "trecena_position": 13, "trecena_start_sign_id": "tochtli", "day_offset": 259},
+      "provenance": "Last unique coefficient/sign pair before the source-stated return at 260 days."
+    },
+    {
+      "vector_id": "nahua.cycle.full_round_trip",
+      "rule_ids": ["nahua.tonalpohualli.joint_recurrence_260"],
+      "inputs": {"operation": "offset", "day_offset": 260},
+      "expected": {"coefficient": 1, "day_sign_id": "cipactli", "canonical_cycle_index": 0, "trecena_position": 1, "trecena_start_sign_id": "cipactli", "day_offset": 260},
+      "provenance": "Florentine Codex Book 4 folio 1r explicitly says the 260-day cycle returns to the beginning."
+    },
+    {
+      "vector_id": "nahua.cycle.negative_round_trip",
+      "rule_ids": ["nahua.tonalpohualli.joint_recurrence_260"],
+      "inputs": {"operation": "offset", "day_offset": -1},
+      "expected": {"coefficient": 13, "day_sign_id": "xochitl", "canonical_cycle_index": 259, "trecena_position": 13, "trecena_start_sign_id": "tochtli", "day_offset": -1},
+      "provenance": "Modular inverse boundary fixture; no historical epoch is implied."
+    },
+    {
+      "vector_id": "nahua.epoch.named_fixture_forward",
+      "rule_ids": ["nahua.tonalpohualli.explicit_epoch_required", "nahua.tonalpohualli.named_epoch_date_offset"],
+      "inputs": {
+        "operation": "civil_date",
+        "civil_date": "2000-01-14",
+        "epoch": {"epoch_id": "test_fixture_not_historical", "tradition_id": "nahua_central_mexican", "epoch_civil_date": "2000-01-01", "calendar_policy": "proleptic_gregorian_test_fixture", "epoch_tonalpohualli": {"coefficient": 1, "day_sign_id": "cipactli"}, "region": "test_fixture", "authority": "arithmetic_validation_only", "uncertainty": "not_a_historical_correlation", "day_start": "civil_midnight_test_fixture"}
+      },
+      "expected": {"coefficient": 1, "day_sign_id": "ocelotl", "canonical_cycle_index": 13, "trecena_position": 1, "trecena_start_sign_id": "ocelotl", "day_offset": 13},
+      "provenance": "Synthetic epoch explicitly labeled as a test fixture; validates date subtraction without claiming a historical correlation."
+    },
+    {
+      "vector_id": "nahua.epoch.missing_rejected",
+      "rule_ids": ["nahua.tonalpohualli.explicit_epoch_required"],
+      "inputs": {"operation": "civil_date", "civil_date": "2000-01-01"},
+      "expected": {"error": "missing_epoch"},
+      "provenance": "Fail-closed epoch contract."
+    },
+    {
+      "vector_id": "nahua.epoch.maya_reuse_rejected",
+      "rule_ids": ["nahua.tonalpohualli.no_cross_tradition_epoch"],
+      "inputs": {
+        "operation": "civil_date",
+        "civil_date": "2000-01-01",
+        "epoch": {"epoch_id": "forbidden_maya_fixture", "tradition_id": "maya", "epoch_civil_date": "2000-01-01", "calendar_policy": "proleptic_gregorian_test_fixture", "epoch_tonalpohualli": {"coefficient": 1, "day_sign_id": "cipactli"}, "region": "test_fixture", "authority": "forbidden_cross_tradition_fixture", "uncertainty": "not_applicable", "day_start": "civil_midnight_test_fixture"}
+      },
+      "expected": {"error": "wrong_epoch_tradition"},
+      "provenance": "Explicit regression against Maya/Nahua correlation conflation."
+    },
+    {
+      "vector_id": "nahua.output.no_interpretation",
+      "rule_ids": ["nahua.tonalpohualli.arithmetic_has_no_divinatory_output"],
+      "inputs": {"operation": "output_contract", "day_offset": 0},
+      "expected": {"forbidden_fields_present": [], "birth_reading_enabled": false, "customer_eligible": false},
+      "provenance": "Separation of arithmetic from unimplemented source-scoped interpretation."
+    }
+  ]
+}

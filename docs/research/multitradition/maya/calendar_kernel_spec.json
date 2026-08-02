@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "maya",
+  "source_pack_id": "maya_calendar_kernel_gmt_v1",
+  "status": "research_verified_calendar_arithmetic_only_no_live_engine_or_interpretation",
+  "source_registry_ids": [
+    "maya_nmai_calendar_system_living_kiche",
+    "maya_nmai_calendar_system_pdf",
+    "maya_famsi_date_converter",
+    "maya_cambridge_calendar_correlation_review",
+    "maya_pnas_correlation_radiocarbon_2013"
+  ],
+  "acquired_source": {
+    "source_id": "maya_nmai_calendar_system_pdf",
+    "title": "The Maya Calendar System",
+    "sha256": "a12c9e4d8716abdb1e06c05f93778b5ae7e6658614f94a47a157179a76f6e5fa",
+    "bytes": 6851033,
+    "pages": 10,
+    "inspection": "All text extracted; rendered pages 1, 2, 4, 6, 8, 9, and 10 visually inspected and legible."
+  },
+  "long_count": {
+    "component_order": ["baktun", "katun", "tun", "uinal", "kin"],
+    "weights_days": {
+      "baktun": 144000,
+      "katun": 7200,
+      "tun": 360,
+      "uinal": 20,
+      "kin": 1
+    },
+    "radices": {
+      "katun_per_baktun": 20,
+      "tun_per_katun": 20,
+      "uinal_per_tun": 18,
+      "kin_per_uinal": 20
+    },
+    "canonical_input_constraints": {
+      "baktun": {"minimum": 0},
+      "katun": {"minimum": 0, "maximum": 19},
+      "tun": {"minimum": 0, "maximum": 19},
+      "uinal": {"minimum": 0, "maximum": 17},
+      "kin": {"minimum": 0, "maximum": 19}
+    },
+    "era_cycle_days": 1872000,
+    "notation_policy": {
+      "linear_computation": "The arithmetic origin is total_day 0 and decomposes as 0.0.0.0.0.",
+      "mythic_creation_display": "Smithsonian expresses the creation-cycle boundary as 13.0.0.0.0; retain that source notation as an annotation and do not replace the linear value.",
+      "negative_days": "Reject in this five-place profile; an Extended Long Count profile must be separately sourced and enabled."
+    }
+  },
+  "tzolkin": {
+    "length_days": 260,
+    "number_cycle": 13,
+    "name_cycle": 20,
+    "number_formula": "euclidean_mod(total_day + 3, 13) + 1",
+    "name_index_formula": "euclidean_mod(total_day + 19, 20)",
+    "name_profiles": {
+      "yucatec_smithsonian_2012": [
+        "Imix'", "Ik'", "Ak'b'al", "K'an", "Chikchan", "Kimi", "Manik'", "Lamat", "Muluk", "Ok", "Chuwen", "Eb'", "B'en", "Ix", "Men", "K'ib'", "Kab'an", "Etz'nab'", "Kawak", "Ajaw"
+      ],
+      "kiche_smithsonian_2012": [
+        "Imox", "Iq'", "Aq'ab'al", "K'at", "Kan", "Kame", "Kej", "Q'anil", "Toj", "Tz'i'", "B'atz'", "E", "Aj", "I'x", "Tz'ikin", "Ajmaq", "No'j", "Tijax", "Kawoq", "Ajpu'"
+      ]
+    },
+    "profile_policy": "A language/community profile changes labels, not the underlying index. Meanings, ceremonies, and readings are excluded."
+  },
+  "haab": {
+    "length_days": 365,
+    "month_names_profile": "yucatec_smithsonian_2012",
+    "month_names": [
+      "Pop", "Wo'", "Sip", "Sotz'", "Sek", "Xul", "Yaxk'in", "Mol", "Ch'en", "Yax", "Sak'", "Keh", "Mak", "K'ank'in", "Muwan", "Pax", "K'ayab", "Kumk'u", "Wayeb"
+    ],
+    "position_formula": "euclidean_mod(total_day + 348, 365)",
+    "ordinary_months": 18,
+    "ordinary_month_length_days": 20,
+    "wayeb_length_days": 5
+  },
+  "calendar_round": {
+    "length_days": 18980,
+    "equivalent_cycles": {"haab": 52, "tzolkin": 73},
+    "formula": "least_common_multiple(260, 365)"
+  },
+  "correlations": {
+    "gmt_584283": {
+      "constant": 584283,
+      "status": "bounded_research_default",
+      "formula": "integer_jdn = total_day + 584283",
+      "evidence": ["maya_cambridge_calendar_correlation_review", "maya_pnas_correlation_radiocarbon_2013"]
+    },
+    "gmt_584285": {
+      "constant": 584285,
+      "status": "alternate_sensitivity_profile_not_default",
+      "formula": "integer_jdn = total_day + 584285",
+      "evidence": ["maya_cambridge_calendar_correlation_review"]
+    }
+  },
+  "civil_date_contract": {
+    "calendar": "proleptic_gregorian",
+    "year_numbering": "astronomical_year_numbering_with_year_0",
+    "jdn_semantics": "Integer JDN identifies the civil date containing the conventional noon boundary; this research kernel compares integer date identities and does not infer a birth-time instant.",
+    "required_output_fields": ["correlation_id", "correlation_constant", "integer_jdn", "civil_calendar", "year_numbering"],
+    "prohibited_defaults": ["silent_correlation_selection", "silent_historical_timezone", "silent_calendar_reform"]
+  },
+  "publication_contract": {
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "customer_prediction": false,
+    "historical_use_only": true,
+    "live_engine": false,
+    "allowed_output": "Calendar expressions and correlation-specific civil-date concordances with sources and limitations.",
+    "prohibited_output": "Personality, destiny, omen, ritual, medical, financial, fatalistic, or anonymous living-practice meaning."
+  }
+}

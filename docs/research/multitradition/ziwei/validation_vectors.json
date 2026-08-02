@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "ziwei_doushu",
+  "source_pack_id": "ziwei_quanshu_juan2_wikisource_candidate_v1",
+  "status": "transcription_candidate_not_independently_verified",
+  "source_id": "ziwei_doushu_quanshu_juan2_wikisource",
+  "vectors": [
+    {
+      "vector_id": "ziwei.quanshu.life_body.month1_zi",
+      "rule_ids": ["ziwei.quanshu.j2.place_life_and_body_palaces"],
+      "inputs": {"chart_lunar_month": 1, "double_hour_branch": "zi"},
+      "expected": {"life_palace_branch": "yin", "body_palace_branch": "yin"},
+      "provenance": "Explicit example in An shen ming li"
+    },
+    {
+      "vector_id": "ziwei.quanshu.life_body.month1_chou",
+      "rule_ids": ["ziwei.quanshu.j2.place_life_and_body_palaces"],
+      "inputs": {"chart_lunar_month": 1, "double_hour_branch": "chou"},
+      "expected": {"life_palace_branch": "chou", "body_palace_branch": "mao"},
+      "provenance": "Explicit example in An shen ming li"
+    },
+    {
+      "vector_id": "ziwei.quanshu.life_body.month1_yin",
+      "rule_ids": ["ziwei.quanshu.j2.place_life_and_body_palaces"],
+      "inputs": {"chart_lunar_month": 1, "double_hour_branch": "yin"},
+      "expected": {"life_palace_branch": "zi", "body_palace_branch": "chen"},
+      "provenance": "Explicit example in An shen ming li"
+    },
+    {
+      "vector_id": "ziwei.quanshu.leap_month1_normalization",
+      "rule_ids": ["ziwei.quanshu.j2.adjust_leap_birth_month"],
+      "inputs": {"recorded_lunar_month": 1, "is_intercalary": true},
+      "expected": {"chart_lunar_month_for_life_body": 2},
+      "provenance": "Explicit intercalary-first-month example in An shen ming li"
+    },
+    {
+      "vector_id": "ziwei.quanshu.wenchang_wenqu.zi",
+      "rule_ids": ["ziwei.quanshu.j2.place_wenchang_wenqu_by_hour"],
+      "inputs": {"double_hour_branch": "zi"},
+      "expected": {"wenchang_branch": "xu", "wenqu_branch": "chen"},
+      "provenance": "Explicit anchors in An Wenchang Wenqu xing jue"
+    },
+    {
+      "vector_id": "ziwei.quanshu.wenchang_wenqu.chou",
+      "rule_ids": ["ziwei.quanshu.j2.place_wenchang_wenqu_by_hour"],
+      "inputs": {"double_hour_branch": "chou"},
+      "expected": {"wenchang_branch": "you", "wenqu_branch": "si"},
+      "provenance": "Explicit Chou-hour examples in An Wenchang Wenqu xing jue"
+    },
+    {
+      "vector_id": "ziwei.quanshu.zuofu_youbi.month1",
+      "rule_ids": ["ziwei.quanshu.j2.place_zuofu_youbi_by_month"],
+      "inputs": {"source_scoped_lunar_month": 1},
+      "expected": {"zuofu_branch": "chen", "youbi_branch": "xu"},
+      "provenance": "Explicit month-one anchors in An Zuofu Youbi xing jue"
+    },
+    {
+      "vector_id": "ziwei.quanshu.zuofu_youbi.month2",
+      "rule_ids": ["ziwei.quanshu.j2.place_zuofu_youbi_by_month"],
+      "inputs": {"source_scoped_lunar_month": 2},
+      "expected": {"zuofu_branch": "si", "youbi_branch": "you"},
+      "provenance": "Explicit month-two examples in An Zuofu Youbi xing jue"
+    },
+    {
+      "vector_id": "ziwei.quanshu.four_transformations.jia",
+      "rule_ids": ["ziwei.quanshu.j2.four_transformations_by_year_stem"],
+      "inputs": {"birth_year_stem": "jia"},
+      "expected": {"lu": "lianzhen", "quan": "pojun", "ke": "wuqu", "ji": "taiyang"},
+      "provenance": "Explicit Jia explanation following the ten-stem verse"
+    },
+    {
+      "vector_id": "ziwei.quanshu.topic_palaces.reverse_from_zi",
+      "rule_ids": ["ziwei.quanshu.j2.place_twelve_topic_palaces"],
+      "inputs": {"life_palace_branch": "zi"},
+      "expected": {"direction": "reverse", "assignments": {"life": "zi", "siblings": "hai", "wife_and_concubines_historical_label": "xu", "children": "you", "wealth": "shen", "illness": "wei", "travel": "wu", "servants_historical_label": "si", "office_and_career": "chen", "property": "mao", "fortune_and_virtue": "yin", "parents": "chou"}},
+      "provenance": "Full reverse-branch expansion of the twelve-topic order in An shi'er gong li; historical labels remain visible for later inclusive rendering"
+    },
+    {
+      "vector_id": "ziwei.quanshu.five_tigers.all_year_stems",
+      "rule_ids": ["ziwei.quanshu.j2.five_tigers_starting_stem"],
+      "inputs": {"birth_year_stems": ["jia", "yi", "bing", "ding", "wu", "ji", "geng", "xin", "ren", "gui"]},
+      "expected": {"stem_branch_at_yin": {"jia": "bing-yin", "yi": "wu-yin", "bing": "geng-yin", "ding": "ren-yin", "wu": "jia-yin", "ji": "bing-yin", "geng": "wu-yin", "xin": "geng-yin", "ren": "ren-yin", "gui": "jia-yin"}, "implementation_allowed_before_facsimile_collation": false},
+      "provenance": "Complete transcription-table expansion of the five paired year-stem groups; still grade D until Chinese-character facsimile collation"
+    }
+  ],
+  "required_boundary_expansion": [
+    "all twelve regular lunar months",
+    "every supported intercalary-month policy after facsimile review",
+    "all twelve double-hours",
+    "one instant before, at and after every double-hour boundary",
+    "uncertain birth intervals spanning a double-hour boundary",
+    "all ten year stems for Five Tigers and Four Transformations"
+  ]
+}

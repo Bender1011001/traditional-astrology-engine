@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "islamicate_persian",
+  "author_id": "al_biruni",
+  "work_id": "kitab_al_tafhim",
+  "source_pack_id": "islamicate_al_biruni_tafhim_reference_conditions_v1",
+  "edition_id": "wright_1934_halle_facing_scan",
+  "title": "The Book of Instruction in the Elements of the Art of Astrology",
+  "scope": "Author- and work-specific reference rules for firdaria structure, planet/sign classifications, halb, and hayyiz.",
+  "sources": {
+    "institutional_full_edition": {
+      "registry_id": "islamicate_al_biruni_halle_full_facing_1934",
+      "repository": "Universitaets- und Landesbibliothek Sachsen-Anhalt",
+      "record_url": "https://opendata.uni-halle.de/handle/1981185920/101870",
+      "doi": "https://doi.org/10.25673/99914",
+      "mets_url": "https://opendata.uni-halle.de/retrieve/76ecdd4c-57ee-4827-af61-893873842795/mets.xml",
+      "iiif_manifest_url": "https://opendata.uni-halle.de/json/iiif/1981185920/101870/3d85daea-887c-4aa5-abf1-562d6add6731/manifest",
+      "extent": "XVIII + 530 cataloged pages; 718 IIIF canvases",
+      "languages": ["Arabic", "English"],
+      "license": "Public Domain Mark 1.0",
+      "mets_sha256": "9f6202f26f7f342d02f2374152f9f31c4e2dac435e28656fb8da176c8c4c0f1d",
+      "mets_bytes": 1034446,
+      "iiif_manifest_sha256": "c28e88e610bf9fb788c3239aa649ff18862b7241df8a76c8fdfa4cd79960a408",
+      "iiif_manifest_bytes": 1992840,
+      "inspection": "Metadata and structure inspected. Six relevant English/Arabic facing-page pairs were rendered and visually checked. Arabic was not independently translated."
+    },
+    "english_astrology_extract": {
+      "registry_id": "islamicate_al_biruni_wright_1934_local",
+      "url": "https://www.skyscript.co.uk/pdf/pubs/texts/albiruni/docs/albiruni.pdf",
+      "scope": "English astrological extract, sections 347-530",
+      "pdf_pages": 128,
+      "pdf_bytes": 34377417,
+      "pdf_sha256": "b5b15d3a25842072d680dd6e6d341c992bff0c2a43141d36b47e6a7e2cc761d2",
+      "extracted_text_bytes": 307013,
+      "extracted_text_sha256": "11d1c3f37303ff0c52967c1beb952e490e869fe2ae18f75b657694279bdf247c",
+      "inspection": "Complete extract text inspected; title, first and last pages, rule pages, cross-references, and surrounding pages rendered and checked. This file does not contain the facing Arabic pages."
+    }
+  },
+  "facing_page_evidence": [
+    {"sections":"347-349","english_canvas_order":458,"english_printed_page":211,"english_sha256":"bbdcf80f232009449e5c68416ae414b2878d4aae26add914f87235ad4fa4840a","arabic_canvas_order":459,"arabic_sha256":"fe869e88cba3522dedd25604d9d76a34ad3d2dac544cf9add08e1901da396c5e"},
+    {"sections":"383-386","english_canvas_order":504,"english_printed_page":234,"english_sha256":"77543e1bae10876d856d1a0be7d02683c72f471044dfcd3f262c4a3107d7354c","arabic_canvas_order":505,"arabic_sha256":"86177a978a7880943ffc3be86d7b24b34f7065961ca4ef866fedea7c3ff0dde9"},
+    {"sections":"393-395","english_canvas_order":514,"english_printed_page":239,"english_sha256":"6f62f3820b2f189d4a9e8ebea7c95b05f30d7a765adfcf52dc2a20b08e3cf382","arabic_canvas_order":515,"arabic_sha256":"48a0f6623a200e680ae06fab61ff216c9f49aa222ecc292c6f92dffa92f985a2"},
+    {"sections":"396-401","english_canvas_order":516,"english_printed_page":240,"english_sha256":"f00f016a9f25a3db501c0b5f4316e97c52a79c290be48428b60997cd02cbc86a","arabic_canvas_order":517,"arabic_sha256":"636c8ea3d7cd7fb5985ad3bb5df9801dd1c2e14d310d603315868c3999fed986"},
+    {"sections":"495-497","english_canvas_order":654,"english_printed_page":308,"english_sha256":"36357c879304e3cc7b44f60eec3324eb091f52474112f203052c82887a537554","arabic_canvas_order":655,"arabic_sha256":"f773ad91ad63efb9dcf18e219fbea7e186383d533e570fcf7ea855aeeef923ff"},
+    {"sections":"498-500","english_canvas_order":656,"english_printed_page":309,"english_sha256":"203bc69b2203c7f52467bf50fb73f284cadb94d2eb81e6381ef556e4de3cc0f0","arabic_canvas_order":657,"arabic_sha256":"9e0ebd7c1e4190e107f248f90cf6b30448d5939b3da46d316a1bbc4dc4c5cee3"}
+  ],
+  "lineage_contract": {
+    "author_work_edition_identity_required": true,
+    "generic_islamicate_identity_allowed": false,
+    "later_firdaria_node_periods_allowed": false,
+    "abu_mashar_degree_extension_imported": false,
+    "source_language_translation_verified": false,
+    "note": "Section 395 labels firdaria a Persian idea. Section 496 separately attributes an expanded degree treatment to Abu Ma'shar. Neither statement authorizes silent merging with later authors or schools."
+  },
+  "firdaria": {
+    "descending_cycle": ["saturn", "jupiter", "mars", "sun", "venus", "mercury", "moon"],
+    "diurnal_major_order": ["sun", "venus", "mercury", "moon", "saturn", "jupiter", "mars"],
+    "nocturnal_major_order": ["moon", "saturn", "jupiter", "mars", "sun", "venus", "mercury"],
+    "subperiods_per_major_period": 7,
+    "subperiod_rule": "The first seventh belongs to the major chronocrator alone; each later seventh joins it with the next planet below in the descending cycle.",
+    "node_periods_stated": false,
+    "major_period_durations_stated_in_inspected_passage": false,
+    "elapsed_age_boundary_calculation_authorized": false
+  },
+  "classifications": {
+    "male_signs": ["aries", "gemini", "leo", "libra", "sagittarius", "aquarius"],
+    "female_signs": ["taurus", "cancer", "virgo", "scorpio", "capricorn", "pisces"],
+    "male_planets": ["saturn", "jupiter", "mars", "sun"],
+    "female_planets": ["venus", "moon"],
+    "diurnal_planets": ["saturn", "jupiter", "sun"],
+    "nocturnal_planets": ["mars", "venus", "moon"],
+    "mercury_gender": "conditional_on_association; male when alone",
+    "mercury_sect": "conditional_on_sign_or_associated_planet; the inspected passage gives no conflict priority"
+  },
+  "condition_logic": {
+    "halb": "true when a diurnal planet is above the horizon by day or below it by night, or a nocturnal planet is above by night or below by day",
+    "hayyiz": "halb plus agreement between planet gender and sign gender",
+    "implication": "every hayyiz is halb; not every halb is hayyiz",
+    "mars_note": "Mars is male and nocturnal, so it requires the nocturnal horizon condition and a male sign",
+    "joy_boundary": "Section 498 lists halb or hayyiz among several joy conditions. This pack does not infer a complete judgment, cancel debility, or change benefic/malefic nature."
+  },
+  "publication_contract": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "interpretation_eligible": false,
+    "full_reading_eligible": false,
+    "arabic_specialist_review_complete": false,
+    "independent_reader_agreement_complete": false,
+    "historical_use_only": true
+  }
+}

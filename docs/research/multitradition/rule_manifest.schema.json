@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traditional-astrology.local/schemas/rule-manifest-v1.json",
+  "title": "Multi-Tradition Atomic Rule Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "updated",
+    "tradition_id",
+    "school_id",
+    "source_pack_id",
+    "source_edition_id",
+    "source_registry_ids",
+    "implementation_status",
+    "publication_status",
+    "evidence_note",
+    "rules"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "updated": {"type": "string", "format": "date"},
+    "tradition_id": {"$ref": "#/$defs/nonEmptyString"},
+    "school_id": {"$ref": "#/$defs/nonEmptyString"},
+    "source_pack_id": {"$ref": "#/$defs/nonEmptyString"},
+    "source_edition_id": {"$ref": "#/$defs/nonEmptyString"},
+    "source_registry_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonEmptyString"}
+    },
+    "implementation_status": {
+      "enum": ["not_implemented", "experimental", "research_verified", "production_verified"]
+    },
+    "publication_status": {
+      "enum": ["research_only", "historical_use_only", "customer_eligible"]
+    },
+    "evidence_note": {"$ref": "#/$defs/nonEmptyString"},
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/rule"}
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "nullableNonEmptyString": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/nonEmptyString"}
+      ]
+    },
+    "sourcePassage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edition_id", "work", "section", "location", "verification"],
+      "properties": {
+        "edition_id": {"$ref": "#/$defs/nonEmptyString"},
+        "work": {"$ref": "#/$defs/nonEmptyString"},
+        "section": {"$ref": "#/$defs/nonEmptyString"},
+        "location": {"$ref": "#/$defs/nonEmptyString"},
+        "verification": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_id",
+        "tradition_id",
+        "school_id",
+        "period",
+        "domain",
+        "scope",
+        "conditions",
+        "conclusion",
+        "priority",
+        "exceptions",
+        "conflicts_with",
+        "source_passages",
+        "evidence_grade",
+        "publication_limit",
+        "review_status"
+      ],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]+$"
+        },
+        "tradition_id": {"$ref": "#/$defs/nonEmptyString"},
+        "school_id": {"$ref": "#/$defs/nullableNonEmptyString"},
+        "period": {"$ref": "#/$defs/nonEmptyString"},
+        "domain": {
+          "enum": ["natal", "timing", "omen", "calendar", "compatibility", "other"]
+        },
+        "scope": {"type": "object", "minProperties": 1},
+        "conditions": {"type": "object", "minProperties": 1},
+        "conclusion": {"type": "object", "minProperties": 1},
+        "priority": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "integer"}
+          ]
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/nonEmptyString"},
+          "uniqueItems": true
+        },
+        "conflicts_with": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/nonEmptyString"},
+          "uniqueItems": true
+        },
+        "source_passages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/sourcePassage"}
+        },
+        "evidence_grade": {"enum": ["A", "B", "C", "D", "E"]},
+        "publication_limit": {"$ref": "#/$defs/nonEmptyString"},
+        "review_status": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    }
+  }
+}

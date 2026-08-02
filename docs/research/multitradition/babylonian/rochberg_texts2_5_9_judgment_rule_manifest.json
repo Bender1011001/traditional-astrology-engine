@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "mesopotamian_babylonian",
+  "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+  "source_pack_id": "rochberg_1998_texts2_5_9_judgment_clauses_v1",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_texts2_5_9",
+  "source_registry_ids": ["babylonian_rochberg_horoscopes_1998_awdl"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Rochberg's critical edition, Texts 2, 5, and 9, book pages 56-57, 65-67, and 79-81, was re-inspected in transcription, translation, critical apparatus, commentary, astronomical tables, and rendered page images from the 184-page AWDL scan with SHA-256 dd233eb1593135dacf280224288fb16cf3697df48fc9ec0347cc522959dff285. The twelve explicit judgment clauses are preserved here at their actual confidence levels. Text 2's subject is uncertain and its reverse chronology is obscure; Text 5's possible house material is damaged and is not linked securely to its judgments; Text 9 has one line-linked lunar clause plus restored or damaged planetary premises. No complete reusable trigger is established, so every rule is non-executable from a modern birth input and research-only.",
+  "rules": [
+    {
+      "rule_id": "babylonian.rochberg1998.text2.rev1.propitious_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "darius_ii_year_14_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 2 (AB 251)",
+        "technique": "unresolved_short_horoscope_judgment",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text2"},
+          {"fact": "text.contains_reverse_line_1_clause", "operator": "equals", "value": true},
+          {"fact": "astronomical_or_chronological_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["propitious_outcome"],
+        "translated_subject": "things_question_mark",
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The translated subject is explicitly uncertain.",
+        "Rochberg says the reverse month/year material and its relation to the birth are completely obscure.",
+        "The clause cannot be generalized into a whole-chart auspiciousness score."
+      ],
+      "conflicts_with": ["generic_babylonian_chart_fortune_score", "planetary_sign_propitiousness_inference"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 2 (AB 251)",
+          "location": "pp. 56-57, rev. 1 and reverse commentary",
+          "verification": "transcription_translation_commentary_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Corpus-example display only with the uncertain subject and unresolved trigger shown. Do not produce a present-day auspiciousness prediction.",
+      "review_status": "akkadian_syntax_reverse_chronology_and_parallel_horoscope_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev2.initial_property_lack_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_personal_judgment_sequence",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_line_2_clause", "operator": "equals", "value": true},
+          {"fact": "judgment_sequence_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["initial_property_lack"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The line is incomplete after the property statement.",
+        "The damaged possible house scheme is not established as this clause's trigger.",
+        "No isolated placement or conjunction in Text 5 may trigger the outcome."
+      ],
+      "conflicts_with": ["generic_wealth_prediction", "text5_planet_in_sign_wealth_rule"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 2; damaged possible house material pp. 66-67",
+          "verification": "transcription_translation_critical_apparatus_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Historical clause display only. Do not infer poverty, property loss, or financial advice from a modern chart.",
+      "review_status": "akkadian_trigger_house_scheme_and_parallel_text_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev4.food_insufficiency_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_personal_judgment_sequence",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_line_4_clause", "operator": "equals", "value": true},
+          {"fact": "judgment_sequence_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["food_insufficiency_or_hunger"],
+        "translation_uncertainty": ["food", "suffice", "hunger"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Each central noun or verb in the translation carries uncertainty.",
+        "The damaged possible house scheme is not established as this clause's trigger.",
+        "The line is safety-sensitive and cannot become a health, deprivation, or food-security prediction."
+      ],
+      "conflicts_with": ["generic_hunger_prediction", "medical_or_nutritional_forecast"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 4; damaged possible house material pp. 66-67",
+          "verification": "transcription_translation_critical_apparatus_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Internal historical corpus display only with every uncertain word marked. Suppress from personal readings and all health or deprivation advice.",
+      "review_status": "akkadian_reading_trigger_and_safety_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev5.youth_property_does_not_last_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_personal_judgment_sequence",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_line_5_clause", "operator": "equals", "value": true},
+          {"fact": "judgment_sequence_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["property_acquired_in_youth_does_not_last"],
+        "translation_uncertainty": ["youth", "last"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The age phase and durability verb are uncertain in translation.",
+        "The clause's computational trigger and relation to the damaged house material are unknown.",
+        "This cannot support financial forecasting."
+      ],
+      "conflicts_with": ["generic_early_life_property_loss_prediction", "financial_forecast"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 5; damaged possible house material pp. 66-67",
+          "verification": "transcription_translation_critical_apparatus_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Historical clause display only with translation uncertainty. Do not predict property loss or give financial advice.",
+      "review_status": "akkadian_age_term_trigger_and_parallel_text_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev6.year36_property_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "timing",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_age_or_year_property_judgment",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_line_6_clause", "operator": "equals", "value": true},
+          {"fact": "age_or_calendar_year_meaning", "operator": "unresolved"},
+          {"fact": "timing_technique", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["property_in_year_or_age_36"],
+        "number": 36,
+        "number_semantics": "36th_year_or_36_years",
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The translation explicitly leaves open whether the phrase means the 36th year or 36 years.",
+        "No annual technique, starting epoch, or activation rule is supplied by this passage.",
+        "The number must not be imported into profections, zodiacal releasing, dashas, or any foreign timing system."
+      ],
+      "conflicts_with": ["generic_age_36_wealth_prediction", "foreign_timing_technique_import"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 6",
+          "verification": "transcription_translation_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical numeric clause display only. Never promise property at age 36 or connect the number to an unattested timing method.",
+      "review_status": "akkadian_number_semantics_timing_lineage_and_parallel_text_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev7.long_life_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_longevity_judgment",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_line_7_clause", "operator": "equals", "value": true},
+          {"fact": "longevity_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["long_life"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The apodosis is preserved, but its trigger is not established.",
+        "The clause cannot be used to estimate or promise lifespan.",
+        "No isolated Text 5 placement or the adjacent age-36 statement supplies a verified trigger."
+      ],
+      "conflicts_with": ["modern_longevity_prediction", "text5_placement_lifespan_rule"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 7",
+          "verification": "transcription_translation_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Internal historical-source display only. Suppress all personal lifespan inferences and promises.",
+      "review_status": "akkadian_trigger_longevity_corpus_and_safety_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev8-9.wife_social_conflict_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_personal_judgment_sequence",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_lines_8_9_clause", "operator": "equals", "value": true},
+          {"fact": "judgment_sequence_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["wife_and_social_conflict_or_coercion"],
+        "translation_alternatives": [
+          "his_wife_whom_people_will_seduce_in_his_presence_incomplete",
+          "his_wife_in_whose_presence_people_will_overpower_him_will_bring_it_about_incomplete"
+        ],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Rochberg prints two substantially different translation alternatives and both are incomplete.",
+        "The clause cannot be simplified into a marriage, infidelity, or abuse prediction.",
+        "No astronomical trigger is established."
+      ],
+      "conflicts_with": ["relationship_betrayal_prediction", "abuse_prediction", "generic_marriage_rule"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 8-9",
+          "verification": "transcription_translation_alternatives_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Internal historical-source display only with both incomplete alternatives. Suppress from relationship and safety predictions.",
+      "review_status": "akkadian_reading_translation_trigger_and_safety_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev10.profit_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_personal_judgment_sequence",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_line_10_clause", "operator": "equals", "value": true},
+          {"fact": "judgment_sequence_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["profit"],
+        "translation_uncertainty": ["see_profit"],
+        "preceding_subject": "broken",
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The beginning of the line is broken and the profit verb is uncertain.",
+        "The clause's trigger is unknown.",
+        "This cannot support investment, income, or business advice."
+      ],
+      "conflicts_with": ["generic_profit_prediction", "financial_advice"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 10",
+          "verification": "transcription_translation_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Historical clause display only with the break and uncertain verb shown. Do not make financial predictions or recommendations.",
+      "review_status": "akkadian_reading_trigger_and_safety_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text5.rev11-12.property_travel_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_48_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 5 (MLC 1870)",
+        "technique": "unresolved_personal_judgment_sequence",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text5"},
+          {"fact": "text.contains_reverse_lines_11_12_fragment", "operator": "equals", "value": true},
+          {"fact": "judgment_sequence_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_fragment",
+        "themes": ["travel_concerning_property"],
+        "complete_predication": false,
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The surviving phrase has no complete verbal prediction.",
+        "The following line is broken.",
+        "The fragment cannot be completed from modern expectations about travel or property."
+      ],
+      "conflicts_with": ["generic_property_travel_prediction", "reconstructed_missing_apodosis"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 5 (MLC 1870)",
+          "location": "p. 67, rev. 11-12",
+          "verification": "transcription_translation_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Philological fragment display only. It is not a prediction and must not be completed or rendered as one.",
+      "review_status": "akkadian_fragment_join_and_parallel_text_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text9.obv4.moon_aquarius_long_life_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_63_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 9 (NCBT 1231)",
+        "technique": "line_linked_lunar_judgment_candidate",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text9"},
+          {"fact": "text.moon_longitude", "operator": "equals", "value": "aquarius_12_degrees"},
+          {"fact": "line_link_establishes_complete_reusable_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["long_life"],
+        "candidate_premise": "moon_at_12_degrees_aquarius_on_same_line",
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The lunar position and apodosis are preserved on the same line, but one record does not prove that Moon in Aquarius is the complete reusable protasis.",
+        "Corpus comparison and Akkadian syntax review are required before any placement rule can be proposed.",
+        "The clause may never become a lifespan estimate or guarantee."
+      ],
+      "conflicts_with": ["moon_in_aquarius_generic_babylonian_longevity_rule", "modern_longevity_prediction"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 9 (NCBT 1231)",
+          "location": "pp. 79-80, obv. 4; astronomical table p. 81",
+          "verification": "transcription_translation_commentary_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical record display only. Do not fire on Moon in Aquarius and suppress all personal lifespan inference.",
+      "review_status": "akkadian_syntax_nativity_omen_parallel_corpus_and_safety_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text9.obv5.jupiter_prince_help_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_63_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 9 (NCBT 1231)",
+        "technique": "line_linked_planetary_judgment_candidate",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text9"},
+          {"fact": "text.restored_planet", "operator": "equals", "value": "jupiter"},
+          {"fact": "text.planet_position", "operator": "equals", "value": "beginning_of_scorpius"},
+          {"fact": "line_link_establishes_complete_reusable_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["someone_will_help_the_prince"],
+        "target": "prince_not_identified_as_native",
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Jupiter is restored from traces and expected horoscope ordering, not fully preserved.",
+        "The apodosis concerns a prince and is not automatically a prediction about the native's social status.",
+        "The same-line placement is not yet a verified reusable trigger."
+      ],
+      "conflicts_with": ["jupiter_in_scorpio_patronage_rule", "modern_royal_or_status_promise"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 9 (NCBT 1231)",
+          "location": "pp. 79-80, obv. 5 and critical apparatus; astronomical table p. 81",
+          "verification": "transcription_restoration_translation_commentary_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "Corpus-example display only with the restored planet and royal target marked. Do not infer patronage, rank, or help from a modern Jupiter placement.",
+      "review_status": "tablet_collation_restoration_akkadian_syntax_and_royal_context_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text9.obv6.venus_sons_clause",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_judgment_clauses_rochberg_1998",
+      "period": "seleucid_era_year_63_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 9 (NCBT 1231)",
+        "technique": "damaged_line_linked_venus_judgment_candidate",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg1998.text9"},
+          {"fact": "text.damaged_birth_or_aquarius_venus_clause", "operator": "equals", "value": true},
+          {"fact": "venus_relation_syntax", "operator": "unresolved"},
+          {"fact": "line_link_establishes_complete_reusable_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["male_offspring"],
+        "premise_alternatives": ["born_in_aquarius_with_venus", "born_in_region_of_venus", "damaged_other"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The subject, preposition, and Venus relation are damaged or uncertain.",
+        "No sign, conjunction, region, or KI interpretation may be selected silently.",
+        "The offspring apodosis is not a fertility assessment or guarantee."
+      ],
+      "conflicts_with": ["venus_in_aquarius_sons_rule", "venus_conjunction_sons_rule", "fertility_or_child_guarantee"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 9 (NCBT 1231)",
+          "location": "pp. 79-80, obv. 6 and critical apparatus; astronomical table p. 81",
+          "verification": "transcription_damaged_reading_translation_astronomical_table_and_page_images_reinspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Internal corpus display only with all premise alternatives exposed. Suppress all fertility, pregnancy, and family-composition predictions.",
+      "review_status": "tablet_collation_akkadian_syntax_trigger_parallel_text_and_safety_review_pending"
+    }
+  ]
+}

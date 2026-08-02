@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+  "source_file_sha256": "dd233eb1593135dacf280224288fb16cf3697df48fc9ec0347cc522959dff285",
+  "status": "edition_pages_inspected_astronomy_independently_recomputed_object_concordance_and_calendar_review_incomplete",
+  "tablet_count": 10,
+  "record_count": 11,
+  "records": [
+    {
+      "record_id": "rochberg1998.text1",
+      "rochberg_text_number": 1,
+      "artifact_ids": ["AO 17649"],
+      "cdli_id": null,
+      "edition_pages": {"book": "51-55", "pdf": "67-71"},
+      "date": {
+        "babylonian": "Darius II year 13, Tebetu 24, last part of night of the 25th",
+        "editor_proposed_julian": "-409-01-12/13",
+        "confidence": "preserved"
+      },
+      "record_profile": ["birth_notice", "synodic_phenomena_around_birth", "solstice", "intercalation"],
+      "preservation": "good",
+      "birth_time_status": "last part of night is preserved; no numerical clock time is preserved",
+      "recorded_data": [
+        {"kind": "mercury_first_visibility", "value": "Kislimu 15, east; the zodiac sign is damaged, with an orthographic Gemini reading and computation-led alternatives discussed by Rochberg", "textual_status": "damaged"},
+        {"kind": "winter_solstice", "value": "Tebetu 9", "textual_status": "preserved"},
+        {"kind": "last_lunar_visibility", "value": "Tebetu 26; the phenomenon is supplied in angle brackets", "textual_status": "restored_by_editor"},
+        {"kind": "mercury_last_visibility_morning", "value": "Sabatu 2, Capricorn, with dense-clouds notice", "textual_status": "preserved"},
+        {"kind": "venus_last_visibility_morning", "value": "Sabatu 14, Aquarius", "textual_status": "preserved"},
+        {"kind": "jupiter_second_station", "value": "Tasritu 22, Aquarius", "textual_status": "preserved"},
+        {"kind": "jupiter_last_visibility", "value": "Addaru 2, Pisces", "textual_status": "preserved"},
+        {"kind": "saturn_first_visibility", "value": "Du'uzu 30, Cancer, high and faint; Du'uzu 26 is separately given as an ideal alternate because Saturn was already high", "textual_status": "preserved"},
+        {"kind": "saturn_first_station", "value": "Kislimu 7; independent astronomy conflicts with strict same-month arithmetic from the edition's Kislimu 15 mapping", "textual_status": "preserved"},
+        {"kind": "saturn_acronychal_rising", "value": "Tebetu 17; Babylonian opposition means rising at sunset rather than exact 180-degree longitude", "textual_status": "preserved"},
+        {"kind": "intercalation", "value": "intercalary Addaru", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [],
+      "editorial_computation_status": "Independent DE431 reconstruction reproduces 15 published modern-longitude values within 0.568 degrees, 12 published rise/set times within 0.058 hour, the Jupiter station interval, and the Saturn acronychal elongation within 0.372 degrees. It also exposes a 24.484-day Saturn-station conflict under strict same-month arithmetic. Visibility verdicts and uncertain calendar mappings remain intentionally unresolved.",
+      "engine_limits": [
+        "None of the astronomical data refers directly to the birth date according to Rochberg's commentary.",
+        "Do not convert synodic events into birth-time planet placements.",
+        "The doubtful Mercury zodiacal reading needs collation.",
+        "Do not silently reconcile the Kislimu day-7 Saturn station with the Kislimu day-15 Mercury Julian mapping.",
+        "The Tebetu day-26 lunar phenomenon is editorially restored and has no selected Julian date or visibility verdict."
+      ],
+      "pilot_eligibility": "include"
+    },
+    {
+      "record_id": "rochberg1998.text2",
+      "rochberg_text_number": 2,
+      "artifact_ids": ["AB 251"],
+      "cdli_id": null,
+      "edition_pages": {"book": "56-57", "pdf": "72-73"},
+      "date": {
+        "babylonian": "Darius II year 14, Nisannu night of the 14th",
+        "editor_proposed_julian": "-409-04-29",
+        "confidence": "partly_preserved"
+      },
+      "record_profile": ["birth_notice", "normal_star_lunar_position", "planetary_signs", "lunar_visibility", "short_judgment"],
+      "preservation": "mixed",
+      "birth_time_status": "night of the 14th; exact time is not preserved",
+      "recorded_data": [
+        {"kind": "moon_normal_star_position", "value": "below the lower part of the Pincer of the Scorpion, interpreted near alpha and beta Librae", "textual_status": "preserved"},
+        {"kind": "jupiter_sign", "value": "Pisces", "textual_status": "preserved"},
+        {"kind": "venus_sign", "value": "Taurus", "textual_status": "preserved"},
+        {"kind": "saturn_sign", "value": "Cancer", "textual_status": "preserved"},
+        {"kind": "mars_sign", "value": "Gemini", "textual_status": "preserved"},
+        {"kind": "mercury_visibility", "value": "had set and was not visible", "textual_status": "preserved"},
+        {"kind": "lunar_visibility", "value": "new crescent duration and last visibility dates", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [
+        {
+          "themes": ["propitious_outcome"],
+          "location": "reverse line 1",
+          "textual_status": "partly_preserved",
+          "executable_trigger": null,
+          "customer_prediction": false,
+          "note": "The subject is translated with a question mark and the relation to the preceding astronomical data is not established."
+        }
+      ],
+      "editorial_computation_status": "Rochberg tabulates computed longitudes for -409 April 29; independent reproduction is pending",
+      "engine_limits": [
+        "The damaged auspicious statement is not a generic whole-chart rule.",
+        "The obscure reverse date/year material is not part of an executable trigger."
+      ],
+      "pilot_eligibility": "include_with_restoration_tests"
+    },
+    {
+      "record_id": "rochberg1998.text3",
+      "rochberg_text_number": 3,
+      "artifact_ids": ["BM 32376", "76-11-17,2108"],
+      "cdli_id": null,
+      "edition_pages": {"book": "58-60", "pdf": "74-76"},
+      "date": {
+        "babylonian": "Seleucid Era 13, Tebetu 24-27",
+        "editor_proposed_julian": "-297-02-02/07",
+        "confidence": "editorially_reconstructed"
+      },
+      "record_profile": ["fragmentary_birth_notice", "planetary_signs", "mercury_synodic_event", "possible_eclipse_reference"],
+      "preservation": "fragmentary",
+      "birth_time_status": "birth date, time, and lunar longitude are lost; the editor dates a several-day interval astronomically",
+      "recorded_data": [
+        {"kind": "sun_sign", "value": "Aquarius", "textual_status": "restored_by_editor"},
+        {"kind": "jupiter_sign", "value": "Leo", "textual_status": "preserved"},
+        {"kind": "venus_sign", "value": "Aquarius", "textual_status": "restored_by_editor"},
+        {"kind": "mercury_first_visibility_evening", "value": "29th, Aquarius", "textual_status": "restored_by_editor"},
+        {"kind": "saturn_sign", "value": "Aries", "textual_status": "partly_preserved"},
+        {"kind": "mars_sign", "value": "Capricorn", "textual_status": "preserved"},
+        {"kind": "eclipse_reference", "value": "possibly lunar or solar", "textual_status": "damaged"},
+        {"kind": "bit_nisirti_reference", "value": "body or scheme lost in break", "textual_status": "damaged"}
+      ],
+      "explicit_judgments": [],
+      "editorial_computation_status": "Two comparison dates are tabulated and several readings are restored from modern computation; independent reproduction is pending",
+      "engine_limits": [
+        "Editorially restored positions must disappear when restoration-sensitive mode is enabled.",
+        "The possible eclipse and bit nisirti references are too damaged for a rule.",
+        "Do not treat the editorial date interval as a preserved birth time."
+      ],
+      "pilot_eligibility": "exclude_from_primary_golden_set"
+    },
+    {
+      "record_id": "rochberg1998.text4",
+      "rochberg_text_number": 4,
+      "artifact_ids": ["BM 33382", "Rm III 59", "LBAT 1459"],
+      "cdli_id": "P364217",
+      "edition_pages": {"book": "61-64", "pdf": "77-80"},
+      "date": {
+        "babylonian": "Seleucid Era 24, Abu 19",
+        "editor_proposed_julian": "-287-09-01",
+        "confidence": "partly_preserved"
+      },
+      "record_profile": ["birth_notice", "normal_star_lunar_position", "planetary_signs", "synodic_events", "equinox", "eclipse"],
+      "preservation": "good",
+      "birth_time_status": "no birth time is preserved; the editor computes at Babylonian midnight to accommodate the normal-star lunar position",
+      "recorded_data": [
+        {"kind": "moon_normal_star_position", "value": "2 cubits west of zeta Tauri", "textual_status": "preserved"},
+        {"kind": "jupiter_sign", "value": "Cancer", "textual_status": "preserved"},
+        {"kind": "venus_sign", "value": "Cancer", "textual_status": "preserved"},
+        {"kind": "saturn_last_visibility", "value": "Abu 10, Virgo", "textual_status": "preserved"},
+        {"kind": "mercury_last_visibility_evening", "value": "Abu 14, Virgo", "textual_status": "preserved"},
+        {"kind": "mars_sign", "value": "Leo", "textual_status": "preserved"},
+        {"kind": "sun_sign", "value": "Virgo", "textual_status": "preserved"},
+        {"kind": "autumn_equinox", "value": "Ululu 16", "textual_status": "preserved"},
+        {"kind": "lunar_eclipse", "value": "Arahsamna night 13; totality in Taurus", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [],
+      "editorial_computation_status": "Rochberg tabulates birth-date longitudes and separately checks Saturn and Mercury visibility dates; independent reproduction is pending",
+      "engine_limits": [
+        "Mercury and Saturn sign entries belong to their synodic-event dates, not necessarily the birth time.",
+        "The editor's assumed computation time must remain separate from the preserved text.",
+        "CDLI metadata confirms the object and genre but supplies no text or image on the inspected record."
+      ],
+      "pilot_eligibility": "include"
+    },
+    {
+      "record_id": "rochberg1998.text5",
+      "rochberg_text_number": 5,
+      "artifact_ids": ["MLC 1870"],
+      "cdli_id": null,
+      "edition_pages": {"book": "65-67", "pdf": "81-83"},
+      "date": {
+        "babylonian": "Seleucid Era 48, Addaru night of the 23rd, day restored",
+        "editor_proposed_julian": "-262-04-04",
+        "confidence": "partly_preserved"
+      },
+      "record_profile": ["birth_notice", "degree_positions", "planetary_signs", "possible_house_scheme", "extended_personal_judgments"],
+      "preservation": "mixed",
+      "birth_time_status": "night date is partly preserved; editor computes approximately 4:00 AM Babylonian local time",
+      "recorded_data": [
+        {"kind": "sun_longitude", "value": "Aries 13;30 degrees", "textual_status": "preserved"},
+        {"kind": "moon_longitude", "value": "Aquarius 10 degrees", "textual_status": "preserved"},
+        {"kind": "jupiter_position", "value": "beginning of Leo", "textual_status": "preserved"},
+        {"kind": "venus_relation", "value": "with the sun", "textual_status": "preserved"},
+        {"kind": "mercury_relation", "value": "with the sun", "textual_status": "preserved"},
+        {"kind": "saturn_sign", "value": "Cancer", "textual_status": "preserved"},
+        {"kind": "mars_position", "value": "end of Cancer", "textual_status": "preserved"},
+        {"kind": "possible_house_scheme", "value": "sign and month lists associated with house terminology", "textual_status": "damaged"}
+      ],
+      "explicit_judgments": [
+        {"themes": ["initial_property_lack"], "location": "reverse line 2", "textual_status": "partly_preserved", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["food_insufficiency_or_hunger"], "location": "reverse line 4", "textual_status": "damaged", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["youth_property_does_not_last"], "location": "reverse line 5", "textual_status": "partly_preserved", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["property_in_year_or_age_36"], "location": "reverse line 6", "textual_status": "preserved", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["long_life"], "location": "reverse line 7", "textual_status": "preserved", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["wife_or_social_conflict"], "location": "reverse lines 8-9", "textual_status": "damaged", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["profit"], "location": "reverse line 10", "textual_status": "partly_preserved", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["travel_concerning_property"], "location": "reverse lines 11-12", "textual_status": "damaged", "executable_trigger": null, "customer_prediction": false}
+      ],
+      "editorial_computation_status": "Rochberg tabulates seven longitudes for -262 April 4; independent reproduction is pending",
+      "engine_limits": [
+        "The relation between the damaged house material and each judgment is not established.",
+        "No judgment may fire from an isolated sign, degree, or conjunction.",
+        "Longevity, hunger, relationship, and wealth language is historical-source material only."
+      ],
+      "pilot_eligibility": "include_with_restoration_tests"
+    },
+    {
+      "record_id": "rochberg1998.text6a",
+      "rochberg_text_number": 6,
+      "artifact_ids": ["BM 47721", "81-11-3,426"],
+      "cdli_id": null,
+      "edition_pages": {"book": "69-71", "pdf": "85-87"},
+      "date": {
+        "babylonian": "proposed Seleucid Era 53, Arahsamna 24",
+        "editor_proposed_julian": "-258-11-14/15",
+        "confidence": "editorially_reconstructed"
+      },
+      "record_profile": ["first_record_on_shared_tablet", "fragmentary_birth_notice", "planetary_signs", "mercury_synodic_state", "bit_nisirti"],
+      "preservation": "fragmentary",
+      "birth_time_status": "date is reconstructed from sparse planetary data; editor states it cannot be improved from the horoscope alone",
+      "recorded_data": [
+        {"kind": "saturn_sign", "value": "Virgo", "textual_status": "preserved"},
+        {"kind": "mars_sign", "value": "Capricorn", "textual_status": "preserved"},
+        {"kind": "mercury_visibility", "value": "had set, not visible, followed by first visibility in the east", "textual_status": "partly_preserved"},
+        {"kind": "lunar_visibility", "value": "moonset after sunrise on the 15th and last lunar visibility on the 27th", "textual_status": "partly_preserved"},
+        {"kind": "bit_nisirti_reference", "value": "of Mercury", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [],
+      "editorial_computation_status": "Rochberg gives one workable date and tabulates longitudes; the date is explicitly non-unique and independent reproduction is pending",
+      "engine_limits": [
+        "Do not promote the proposed date to a preserved fact.",
+        "Do not infer missing Moon, Sun, Jupiter, or Venus positions from expected sequence.",
+        "The bit nisirti scheme is unresolved."
+      ],
+      "pilot_eligibility": "exclude_from_primary_golden_set"
+    },
+    {
+      "record_id": "rochberg1998.text6b",
+      "rochberg_text_number": 6,
+      "artifact_ids": ["BM 47721", "81-11-3,426"],
+      "cdli_id": null,
+      "edition_pages": {"book": "69-71", "pdf": "85-87"},
+      "date": {
+        "babylonian": "Seleucid Era 61, Ajaru 8",
+        "editor_proposed_julian": "-250-05-05/06",
+        "confidence": "preserved"
+      },
+      "record_profile": ["second_record_on_shared_tablet", "birth_time_before_sunset", "normal_star_lunar_position_at_different_time"],
+      "preservation": "mixed",
+      "birth_time_status": "birth one-half beru before sunset; lunar position is explicitly for beginning of night on the preceding civil-date segment",
+      "recorded_data": [
+        {"kind": "moon_normal_star_position", "value": "east of gamma Virginis by a lost number of cubits", "textual_status": "partly_preserved"},
+        {"kind": "birth_time", "value": "one-half beru before sunset", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [],
+      "editorial_computation_status": "Only the lunar longitude is computed because no other comparable data survive; independent reproduction is pending",
+      "engine_limits": [
+        "The lunar observation time and birth time must remain distinct.",
+        "The missing cubit distance prevents a directional residual from being accepted.",
+        "No planetary reading can be reconstructed from the broken remainder."
+      ],
+      "pilot_eligibility": "include_with_restoration_tests"
+    },
+    {
+      "record_id": "rochberg1998.text7",
+      "rochberg_text_number": 7,
+      "artifact_ids": ["BM 33667"],
+      "cdli_id": null,
+      "edition_pages": {"book": "73-75", "pdf": "89-91"},
+      "date": {
+        "babylonian": "Seleucid Era 54, Kislimu 8",
+        "editor_proposed_julian": "-257-12-15",
+        "confidence": "preserved"
+      },
+      "record_profile": ["conception_record", "birth_record", "normal_star_lunar_positions", "planetary_signs", "solstice_and_equinox", "mercury_synodic_event"],
+      "preservation": "good",
+      "birth_time_status": "beginning of night is preserved for the lunar observation associated with the birth date",
+      "recorded_data": [
+        {"kind": "conception_date", "value": "Seleucid Era 53, intercalary Addaru night 1", "textual_status": "partly_preserved"},
+        {"kind": "conception_moon_normal_star_position", "value": "2.5 cubits below beta Arietis", "textual_status": "preserved"},
+        {"kind": "vernal_equinox", "value": "12th day", "textual_status": "preserved"},
+        {"kind": "birth_moon_normal_star_position", "value": "1.5 cubits below eta Piscium and 0.5 cubit east", "textual_status": "partly_preserved"},
+        {"kind": "winter_solstice", "value": "20th day", "textual_status": "preserved"},
+        {"kind": "jupiter_sign", "value": "Capricorn", "textual_status": "preserved"},
+        {"kind": "venus_sign", "value": "Scorpius", "textual_status": "preserved"},
+        {"kind": "saturn_sign", "value": "Libra", "textual_status": "preserved"},
+        {"kind": "mars_sign", "value": "Libra", "textual_status": "preserved"},
+        {"kind": "mercury_last_visibility_morning", "value": "Kislimu 9, Sagittarius", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [],
+      "editorial_computation_status": "Rochberg checks conception and birth lunar data and the next-day Mercury phenomenon; independent reproduction is pending",
+      "engine_limits": [
+        "The 273-day conception-to-birth interval is a feature of this record, not a universal gestation rule.",
+        "The editor's comparison with Greek astrological literature is commentary, not Babylonian executable doctrine.",
+        "Mercury's sign belongs to the next-day synodic event, not a preserved birth placement."
+      ],
+      "pilot_eligibility": "include"
+    },
+    {
+      "record_id": "rochberg1998.text8",
+      "rochberg_text_number": 8,
+      "artifact_ids": ["BM 36943", "80-6-17,644"],
+      "cdli_id": null,
+      "edition_pages": {"book": "77-78", "pdf": "93-94"},
+      "date": {
+        "babylonian": "Seleucid Era 61, Kislimu 8",
+        "editor_proposed_julian": "-250-11-28/29",
+        "confidence": "preserved"
+      },
+      "record_profile": ["birth_notice", "normal_star_lunar_position", "planetary_signs", "invisibility_with_sun", "bit_nisirti"],
+      "preservation": "mixed",
+      "birth_time_status": "the date is preserved but an exact birth time is not; the editor computes at 16 UT",
+      "recorded_data": [
+        {"kind": "moon_normal_star_position", "value": "below eta Piscium", "textual_status": "restored_by_editor"},
+        {"kind": "moon_sign", "value": "Aries", "textual_status": "partly_preserved"},
+        {"kind": "sun_sign", "value": "Sagittarius", "textual_status": "preserved"},
+        {"kind": "jupiter_sign", "value": "Virgo", "textual_status": "partly_preserved"},
+        {"kind": "venus_sign", "value": "Scorpius", "textual_status": "preserved"},
+        {"kind": "mars_sign", "value": "Libra", "textual_status": "preserved", "note": "Rochberg says this is the only position not supported by computation and suggests a possible alternative reading."},
+        {"kind": "mercury_and_saturn_visibility", "value": "had set, not visible, with the sun", "textual_status": "preserved"},
+        {"kind": "bit_nisirti_reference", "value": "of Venus", "textual_status": "preserved"},
+        {"kind": "winter_solstice", "value": "Tebetu 8", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [],
+      "editorial_computation_status": "Rochberg tabulates positions and flags Mars as unsupported; independent reproduction is pending",
+      "engine_limits": [
+        "Mars in Libra must remain a text/computation discrepancy and cannot be silently corrected.",
+        "Restored normal-star and damaged lunar-sign data require restoration-sensitive tests.",
+        "The bit nisirti scheme is unresolved."
+      ],
+      "pilot_eligibility": "include_with_restoration_tests"
+    },
+    {
+      "record_id": "rochberg1998.text9",
+      "rochberg_text_number": 9,
+      "artifact_ids": ["NCBT 1231"],
+      "cdli_id": null,
+      "edition_pages": {"book": "79-81", "pdf": "95-97"},
+      "date": {
+        "babylonian": "Seleucid Era 63, Tebetu day 2 with ambiguous night/day wording",
+        "editor_proposed_julian": "-248-12-29",
+        "confidence": "partly_preserved"
+      },
+      "record_profile": ["named_native", "degree_positions", "planetary_signs", "line-linked_judgments"],
+      "preservation": "good",
+      "birth_time_status": "night/day wording is not entirely clear; the lunar longitude constrains the date but not a modern clock time",
+      "recorded_data": [
+        {"kind": "native_name", "value": "Anu-belsunu", "textual_status": "preserved"},
+        {"kind": "sun_longitude", "value": "Capricorn 9;30 degrees", "textual_status": "preserved"},
+        {"kind": "moon_longitude", "value": "Aquarius 12 degrees", "textual_status": "preserved"},
+        {"kind": "jupiter_position", "value": "beginning of Scorpius", "textual_status": "restored_by_editor"},
+        {"kind": "venus_relation", "value": "Aquarius with or in the region of Venus", "textual_status": "damaged"},
+        {"kind": "mercury_sign", "value": "Capricorn", "textual_status": "restored_by_editor"},
+        {"kind": "saturn_sign", "value": "Capricorn", "textual_status": "preserved"},
+        {"kind": "mars_sign", "value": "Cancer", "textual_status": "restored_by_editor"}
+      ],
+      "explicit_judgments": [
+        {"themes": ["long_life"], "location": "obverse line 4 after Moon in Aquarius", "textual_status": "preserved", "executable_trigger": null, "customer_prediction": false, "note": "Line adjacency is preserved, but corpus comparison and syntax review are required before treating Moon in Aquarius as the complete trigger."},
+        {"themes": ["someone_helps_the_prince"], "location": "obverse line 5 after restored Jupiter at beginning of Scorpius", "textual_status": "partly_preserved", "executable_trigger": null, "customer_prediction": false, "note": "The planet name is restored and the target is a prince; this is not a modern personal-status promise."},
+        {"themes": ["sons"], "location": "obverse line 6 after damaged Aquarius and Venus clause", "textual_status": "damaged", "executable_trigger": null, "customer_prediction": false, "note": "The astronomical syntax is uncertain and the statement is ineligible for fertility prediction."}
+      ],
+      "editorial_computation_status": "Rochberg tabulates seven longitudes for -248 December 29; independent reproduction is pending",
+      "engine_limits": [
+        "Line adjacency is not yet proof that a single placement is the full rule trigger.",
+        "Restored planet names must be mutation-tested away.",
+        "Longevity, fertility, and royal-status outcomes are historical-source material only."
+      ],
+      "pilot_eligibility": "include_with_restoration_tests"
+    },
+    {
+      "record_id": "rochberg1998.text10",
+      "rochberg_text_number": 10,
+      "artifact_ids": ["MLC 2190", "YPM BC 002136", "W 20030/143 duplicate"],
+      "cdli_id": "P507395",
+      "edition_pages": {"book": "83-87", "pdf": "99-103"},
+      "date": {
+        "babylonian": "Seleucid Era 77, Simanu 4, in the morning of the 5th with uncertain reading",
+        "editor_proposed_julian": "-234-06-02/03",
+        "confidence": "partly_preserved"
+      },
+      "record_profile": ["named_native", "degree_positions", "lunar_latitude_omen", "planetary_KI_judgments", "duplicate_witness"],
+      "preservation": "good",
+      "birth_time_status": "date/time expression is difficult and lunar longitude does not resolve it; editor computes at approximately 4:00 AM Babylonian local time",
+      "recorded_data": [
+        {"kind": "native_name", "value": "Aristocrates", "textual_status": "preserved"},
+        {"kind": "moon_sign", "value": "Leo", "textual_status": "preserved"},
+        {"kind": "sun_longitude", "value": "Gemini 12;30 degrees", "textual_status": "preserved"},
+        {"kind": "jupiter_longitude", "value": "Sagittarius 18 degrees", "textual_status": "preserved"},
+        {"kind": "venus_longitude", "value": "Taurus 4 degrees", "textual_status": "preserved"},
+        {"kind": "mercury_relation", "value": "Gemini with the sun", "textual_status": "preserved"},
+        {"kind": "saturn_longitude", "value": "Cancer 6 degrees", "textual_status": "preserved"},
+        {"kind": "mars_longitude", "value": "Cancer 24 degrees", "textual_status": "preserved"},
+        {"kind": "moon_latitude_motion", "value": "from the middle or nodal zone toward positive latitude", "textual_status": "preserved"}
+      ],
+      "explicit_judgments": [
+        {"themes": ["prosperity", "greatness"], "location": "obverse lines 4-6", "textual_status": "preserved", "executable_trigger": "moon_motion_from_nodal_zone_toward_positive_latitude_pending_definition", "customer_prediction": false},
+        {"themes": ["prosperity", "peace_or_reconciliation", "durable_wealth", "long_life"], "location": "obverse lines 7-8", "textual_status": "partly_preserved", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["favor", "sons_and_daughters"], "location": "obverse lines 8-10", "textual_status": "preserved", "executable_trigger": null, "customer_prediction": false},
+        {"themes": ["bravery", "rank", "importance_among_brothers", "fathers_house"], "location": "reverse lines 1-3", "textual_status": "partly_preserved", "executable_trigger": null, "customer_prediction": false}
+      ],
+      "editorial_computation_status": "Rochberg tabulates seven longitudes; the record and published targets are separately encoded, independent reproduction pending",
+      "engine_limits": [
+        "Planetary KI judgments are not planet-in-sign or conjunction rules.",
+        "The KI scheme requires source-critical reconstruction under named hypothesis packs.",
+        "The duplicate helps establish text but does not resolve every verb or the birth time."
+      ],
+      "pilot_eligibility": "include"
+    }
+  ]
+}

@@ -1,10 +1,405 @@
 ---
 project: astrology
 status: in_progress
-updated: 2026-07-13
+updated: 2026-08-01
 ---
 
 # Astrology Project
+
+## Active Multi-Tradition Engine Research (2026-07-31)
+
+- **Objective**: research everything required for one birth-data intake to
+  produce independently calculated, rules-first, source-attributed readings for
+  Western, Indian Jyotisha, Chinese systems, Mesopotamian/Babylonian,
+  Islamicate/Persian, Tibetan, Maya, Nahua/Central Mexican, pharaonic Egyptian,
+  Japanese Onmyodo, Southeast Asian, and related regional traditions. Only the
+  Western system is currently implemented/live; Vedic and Chinese mentions in
+  the checkout are research/methodology references, not engines.
+- **Research foundation added**:
+  `docs/research/multitradition/README.md` defines scope, evidence grades,
+  cultural separation, and production gates;
+  `docs/research/multitradition/engine_research_spec.md` defines canonical birth
+  inputs, tradition configuration, fact/rule/judgment traces, per-tradition
+  technique inventories, validation requirements, and deliverables;
+  `docs/research/multitradition/historical_time_contract.md` defines immutable
+  reported input, place resolution, time-candidate intervals, civil/solar/
+  UT1/TT layers, calendar adoption policy, uncertainty fan-out, cache identity,
+  and cross-tradition boundary tests;
+  `docs/research/multitradition/source_registry.json` is the machine-readable
+  discovery/verification ledger (153 current entries after Jyotisha, BaZi,
+  Babylonian, Islamicate/Persian, Tibetan, Maya, Nahua, Egyptian, Onmyodo,
+  Thai/Lanna/Lue, Burmese/Arakanese, Khmer, Sinhalese/Sri Lankan, Mon, and
+  Korean, Mongolian, Vietnamese, Zi Wei Dou Shu, medieval Jewish, and
+  pre-Islamic Arabian witness expansion, valid JSON);
+  detailed audits now exist under `jyotisha/`, `bazi/`, `babylonian/`,
+  `islamicate/`, `tibetan/`, `maya/`, `nahua/`, `egyptian/`, `onmyodo/`,
+  `thai/`, `burmese/`, `khmer/`, `sinhalese/`, `mon/`, `korean/`,
+  `mongolian/`, `vietnamese/`, `ziwei/`, `medieval_jewish/`, and
+  `pre_islamic_arabian/`.
+- **Method**: extend the existing `doctrine_sources.json` standard—edition and
+  rights identity, hashes when files are acquired, precise passage locations,
+  inspected-text status, source limitations, and publication limits. Do not use
+  a prose model to decide placements or judgments. Do not create a generic
+  ancient, Vedic, Chinese, or Southeast Asian rule blend.
+- **Initial verified leads**: GRETIL machine-readable Sanskrit `Brhajjataka`;
+  Hong Kong Observatory stem-branch and solar-term references; ORACC discovery
+  for Babylonian omen corpora; the repo's already inspected al-Biruni and Ibn
+  Ezra editions; Tibetan calendar algorithm literature documenting version
+  differences; INAH/SLUB/FAMSI/Smithsonian Maya resources; British Museum
+  Papyrus Sallier IV; McMaster Ancient Egyptian Astronomy Database; Thai
+  National Library and Suriyayatra academic leads.
+- **Archive source progress and failure retained**: the bundled Archive.org
+  helper's search command returned the same query-rewrite API error for both
+  multiword and single-term searches; no results from those failed calls were
+  promoted. Direct use of Archive.org's official advanced-search JSON endpoint
+  then succeeded, and the helper's `details`/`text` paths verified metadata and
+  OCR for a 1905 English *Brihat Jataka*, 1914 Sanskrit *Saravali*, 1950 English
+  *Phaladeepika*, and 1899 Sanskrit-Hindi BPHS witness. Rights and OCR quality
+  differ sharply and are recorded in the registry. Some ORACC, NYPL, Indian
+  parliamentary, Thai-library, and university pages still require retry or
+  alternate access.
+- **Jyotisha atomic-rule progress**: the first source-scoped Chapters I-II
+  pilots are now encoded in
+  `docs/research/multitradition/jyotisha/brhajjataka_calculation_rule_manifest.json`.
+  Together with `brhajjataka_planetary_rule_manifest.json`, twenty-two grade-B
+  research rules align GRETIL verse IDs with Aiyar's 1905 translation while
+  keeping Aiyar's NOTES separate. The packs preserve
+  the competing stanza-11 and stanza-12 Hora/Drekkana constructions as
+  mutually exclusive variants, refuse to infer an ayanamsha or moolatrikona
+  degree ranges, distinguish qualifiers from numerical shadbala, and have 75
+  direct/derived targets across two vector files. The added negative controls
+  reject an invented ayanamsha, moolatrikona degree spans and numeric shadbala
+  weights. Facsimile,
+  Sanskrit-specialist, boundary, astronomy-profile, and rights review remain
+  mandatory; no Jyotisha code or live product behavior was changed.
+- **BaZi source progress**: HKO independently anchors stems/branches, shichen,
+  month/hour stem tables, and solar-term longitude events. Chinese Wikisource
+  `Yuanhai Ziping` and `Sanming Tonghui` were inspected as discovery witnesses,
+  not controlling editions. The former exposes day-master/month-command,
+  strength, pattern, following, transformation, and defeat logic; the latter's
+  work page warns of later interpolations and lacks volumes 10-12. A 98-page
+  `Mingli Jicheng` volume-one scan opens but still needs title/colophon and
+  contents verification. `docs/research/multitradition/bazi/source_audit.md`
+  records the rule graph, unresolved boundary conventions, translation method,
+  safety suppressions, and production gates. Generic element-percentage
+  scoring is explicitly rejected unless a controlling source supplies it.
+- **Babylonian source progress**: the research now separates `Enuma Anu Enlil`
+  omen-series material, Neo-Assyrian SAA 8 royal reports, late Babylonian natal
+  horoscopes, and astronomical compendia such as `MUL.APIN`. The 1998 Rochberg
+  corpus is identified through its publisher and NYU AWDL scan; CDLI object
+  records, SAA 8 translated/transliterated reports, the British Museum
+  `MUL.APIN` witness, and a 2024 technical reinterpretation were inspected.
+  `docs/research/multitradition/babylonian/source_audit.md` defines separate
+  product modes, forbids importing later Western houses/aspects/dignities,
+  specifies a tablet-to-edition-to-computation data model, and makes a ten-
+  horoscope corpus validator the first bounded pilot.
+- **Babylonian atomic-rule progress**: Rochberg Texts 2, 5, 9, and 10 and the
+  Text 11 duplicate were re-inspected in transcription, translation, apparatus,
+  commentary, astronomical tables, and rendered page images. All sixteen
+  explicit judgment clauses in Texts 1-10 are now represented by research-only
+  rules with thirteen vectors. Text 2's subject is uncertain; Text 5's eight
+  outcomes have no recoverable link to its damaged possible house scheme; Text
+  9's same-line Moon, restored Jupiter and damaged Venus premises do not prove
+  reusable protases; and Text 10's planetary judgments depend on unresolved
+  `KI` (`qaqqaru`, “place”). Mutation vectors remove restorations, reject
+  isolated sign/conjunction triggers and suppress lifespan, fertility,
+  deprivation, relationship, status and financial predictions. Assyriological
+  review, full-corpus parallels, technical-scheme reconstruction, safety and
+  commercial rights remain gates; no Babylonian engine or live behavior was
+  added.
+- **Babylonian corpus-fixture progress**: Texts 1-10 were inspected across book
+  pp. 51-85 and rendered PDF pp. 67-101. They contain eleven births because
+  Text 6 has two records. `babylonian/rochberg_texts1_10_corpus_manifest.json`
+  now preserves record format, dates, time limits, astronomical statements,
+  sixteen explicit judgment clauses, restoration status, computation status,
+  engine limits and pilot eligibility under a dedicated JSON Schema. The pass
+  proves that synodic-event dates, normal-star observations, conception data,
+  birth-time positions, `bit nisirti`, `KI`, and personal judgments cannot be
+  flattened into one chart template. CDLI P364217 is now concorded to Text 4;
+  remaining object links and separately implemented full-corpus recomputation
+  remain open.
+- **Babylonian astronomy progress**: a reproducible pyswisseph 20230604 / Swiss
+  Ephemeris 2.10.03 validator now checks 67 Rochberg Texts 2-10 table positions
+  using hashed official DE431 files plus a Moshier cross-model comparison,
+  proleptic Julian dates, astronomical year numbering, explicit correction
+  values, locked `TIDAL_DE431`, and fail-closed return-flag checks. All 58
+  non-lunar positions fall within 0.2151 degrees. Three Moon rows exceed the
+  exploratory threshold: Text 5 and Text 9 are reconcilable only by post-hoc
+  shifts near +1.09 and -1.53 hours, while Text 6(b)'s printed May 4 label is a
+  day away from its adjoining May 5 prose and drops from a 12.1770-degree to a
+  0.2695-degree residual under the prose date. No time was silently rectified;
+  an uncertainty interval, calendar review and prospective tolerances remain
+  gates. A separately written NASA/JPL Horizons API path now cross-checks all
+  192 published positions. For the original 67, identical-TT results agree
+  within 0.0008223 degrees, while same-UT comparisons expose Horizons Delta-T
+  values 95.059-224.735 seconds larger and a maximum lunar difference of
+  0.0306521 degrees. For the 125-position Texts 11-27 extension, identical-TT
+  results agree within 0.0008398 degrees; same-UT differences peak at 0.0148495
+  degrees for the Moon while Horizons-minus-Swiss Delta-T ranges from -41.945
+  to +90.342 seconds across eighteen dates.
+  Mars/Jupiter/Saturn use ancient-coverage barycenters, and the live API result
+  is not an immutable golden oracle; an offline versioned second ephemeris,
+  independent calendar reconstruction and prospective tolerances remain open.
+  The extension's first run used broad prospective discovery bounds; its tighter
+  stored thresholds are explicitly post-hoc drift alarms, not acceptance rules.
+- **Babylonian object-concordance progress**: exact searches of the current CDLI
+  catalog now match 30 of Rochberg's 32 numbered tablets. Every accepted CDLI
+  artifact page preserves the edition designation and explicitly cites the same
+  Rochberg number. `babylonian/rochberg_cdli_concordance.json` locks these joins,
+  the Text 25 two-piece join, and multi-birth tablets without collapsing records.
+  W 20030/143 (Text 11) and W 20030/10 (Text 16) returned no exact CDLI match and
+  remain null; no sequential identifier was guessed. Image availability, rights,
+  checksums, repository text, and sign-level collation remain separate gates.
+  Twenty-nine matched pages currently show no image and none supplies in-page
+  text. P364229 / Text 27 alone exposes a photo thumbnail; it was hash-verified,
+  visually inspected, and removed without asserting any new sign reading.
+- **Babylonian Text 1 event progress**: AO 17649 is now represented by a
+  dedicated twelve-record event specification rather than a natal chart,
+  following Rochberg's explicit statement that none of its astronomy refers to
+  the birth date. A locked DE431 validator reproduces 15 published longitude
+  comparisons within 0.5673 degrees, 12 rise/set comparisons within 0.0574
+  hour, Jupiter's station interval and Saturn's acronychal elongation. It also
+  preserves a 24.484-day Saturn-station conflict under strict same-month
+  arithmetic, keeps the Tebetu day-26 lunar event marked as editorially
+  restored, separates schematic Tebetu day-9 solstice from the calculated
+  tropical crossing, and emits zero visibility or natal-position verdicts.
+  Assyriological collation, calendar reconstruction, atmospheric visibility
+  criteria, independent software and prospective tolerances remain gates; no
+  Babylonian engine or live behavior was added.
+- **Shared time/calendar contract**: IANA's own documented pre-1970 limits,
+  NASA historical Delta-T uncertainty, Swiss Ephemeris time/calendar APIs, and
+  USNO calendar-reform examples now anchor a fail-closed contract. Historical
+  input can yield multiple time candidates or an interval; any uncertainty
+  crossing a tradition boundary must fan out into alternate fact sets rather
+  than being silently normalized.
+- **Islamicate/Persian source progress**: inspected critical-edition records
+  for Abu Ma'shar's *Great Introduction* and historical astrology, al-Qabisi's
+  trilingual *Introduction*, Masha'allah's historical/natal corpus, Sahl
+  manuscript leads, and al-Kindi's lost-Arabic weather transmission. The new
+  `islamicate/source_audit.md` requires author + work + textual lineage + branch
+  packs and begins with the repo's already passage-verified al-Biruni firdaria
+  and hayyiz/halb rules. Natal, questions, elections, mundane history, and
+  weather may not be blended.
+- **Al-Biruni bounded-validator progress**: visual inspection corrected the
+  local source record: the hashed 128-page file is an English astrology extract,
+  not the complete facing-text edition. The complete public-domain Wright 1934
+  Arabic/English edition was located at the Universitaets- und Landesbibliothek
+  Sachsen-Anhalt; its METS, 718-canvas IIIF manifest, and six relevant facing-
+  page pairs were inspected and hash-locked. A separate author/work/edition-
+  scoped specification, 15 rules, 13 compound vectors, and validator now cover
+  structural diurnal/nocturnal firdaria order, equal-seventh subperiods, sign
+  and planet classifications, Mercury's unresolved context, `halb`, `hayyiz`,
+  the Mars case, and the limited joy statement. All vectors and 288 exhaustive
+  fixed-planet condition combinations pass. The pack refuses node periods and
+  age/date boundaries because section 395 supplies neither node periods nor a
+  major-duration table. Arabic linguistic verification, complete interpretation,
+  customer eligibility, and `live_engine` all remain false.
+- **Tibetan source progress**: Men-Tsee-Khang's institutional taxonomy,
+  Phugpa lineage statement, official first-professional curriculum, calendar/
+  almanac description, and Janson calendar mathematics were inspected. The new
+  `tibetan/source_audit.md` separates Kalacakra astronomy, elemental natal,
+  compatibility, obstacle-year, and sensitive medical/deceased/ritual modules;
+  makes institutional partnership and Tibetan-language review mandatory; and
+  selects a Phugpa calendar concordance as the first pilot.
+- **Tibetan Phugpa arithmetic progress**: the complete Janson 2014 PDF and TeX
+  source were acquired, hash-locked, fully text-inspected, and visually checked
+  on representative formula/table pages. A separate exact-rational research
+  specification, ten calendar-only rules, ten compound vectors, and standalone
+  validator reproduce 31 published Losar dates (2000-2030), all Table 7 Phugpa
+  leap months (2000-2020), the complete Table 8 skipped/repeated-day inventory
+  for 2012, E806/E1927/E1987 epoch equivalence, the 2025 Phugpa/Tsurphu Losar
+  divergence, and three named standard-versus-Lochen formula divergences.
+  Janson's explicit secondary-source/Tibetan-language limitation is preserved.
+  Institutional almanac concordance, Tibetan review, and permission remain
+  open; `institutional_conformance`, interpretation eligibility, and
+  `live_engine` are false.
+- **Maya source progress**: INAH/SLUB Dresden page maps, INAH's Maya Codex of
+  Mexico portal, Smithsonian living K'iche' daykeeping/calendar material, and
+  academic correlation scholarship were inspected. The new
+  `maya/source_audit.md` separates calendar conversion, ancient codex almanac
+  exploration, and community-specific living practice; makes the GMT constant
+  versioned/configurable; and rejects a generic “Mayan zodiac.”
+- **Maya calendar-kernel progress**: a separate research-only specification,
+  eight atomic calendar rules, twelve validation vectors, and deterministic
+  validator now reproduce the Smithsonian `4 Ajaw 8 Kumk'u` creation anchor,
+  the `4 Ajaw 3 K'ank'in` 2012 anchor, and FAMSI's July 24, 2026 result under
+  `gmt_584283`. Long Count and Wayeb boundaries, the 18,980-day Calendar Round,
+  Yucatec/K'iche' label alignment, and `gmt_584283`/`gmt_584285` sensitivity
+  pass. The acquired ten-page Smithsonian PDF is hash-locked; all text and
+  representative rendered pages were inspected. The pack explicitly sets
+  `live_engine`, interpretation eligibility, and customer prediction false.
+  The Dresden almanac pilot, specialist/rights review, and any consented living
+  practice remain open; no live code or customer behavior was changed.
+- **Nahua source progress**: Getty's bilingual/pictorial Florentine Codex Book
+  4, INAH's Tonalamatl de Aubin and research program, and the holding-
+  institution Codex Borbonicus facsimile were inspected. The new
+  `nahua/source_audit.md` models coefficient, day sign, trecena, patrons,
+  day/night lords, birds, conditional passages, and colonial mediation rather
+  than a single “Aztec sign.” A One Cipactli trecena concordance is the first
+  bounded pilot.
+- **Pharaonic Egyptian source progress**: British Museum Sallier IV and
+  EA10474 records, Bakir's Cairo Calendar edition record, Leitz's controlling
+  comparative corpus, the full Porceddu periodicity paper, and McMaster's
+  decan/diagonal-star-table database were inspected. The new
+  `egyptian/source_audit.md` defines a witness-specific 365-day hemerology with
+  normally three prognosis units per ordinary day, keeps modern periodicity
+  hypotheses out of ancient rules, separates astronomical/funerary decan
+  evidence, and rejects a fabricated pharaonic natal zodiac. The first pilot is
+  a one-month, three-witness concordance, not a modern personality reading.
+- **Onmyodo source progress**: NDL calendar history, the National Museum of
+  Japanese History's research exhibition and digitized `Hoki` variant, Koike's
+  dated-manuscript study, Kosaka's `Senjiryakketsu` critical-study record,
+  Hayashi/Hayek's full historiographic review, and Baba's calendar-divination
+  study were inspected. The new `onmyodo/source_audit.md` separates Heian court
+  calendar/astronomy/shikiban work, variable medieval `Hoki` lineages,
+  early-modern `Ozassho` and military calendar divination, and later practice.
+  Birth time cannot substitute for a question/event time; the birth interface
+  remains `source_limited` until a birth-specific procedure is verified.
+- **Thai/Lanna/Lue source progress**: Naksuk's 344-page comparative
+  `Suriyayatra` thesis identifies 97 formulas across Central Thai, Lanna, and
+  Lue witnesses; its acquired image PDF is hashed but its text layer is not
+  usable as rule evidence. Gislén's intercalation study, Phongsawad's full
+  `Chakratipani` study, Pengkaew's `Tamradao` thesis record, Thai Ministry of
+  Culture inscription leads, and the Thai Astrologers Foundation curriculum
+  were inspected. The new `thai/source_audit.md` separates calendar/planetary
+  calculation, birth-chart interpretation, stellar mundane material, and
+  modern professional synthesis. Its first pilots are a three-witness
+  `Suriyayatra` concordance and an edition-scoped `Chakratipani` worked chart;
+  severe medical, disability, fertility, and death language is historical-only
+  and cannot become advice.
+- **Burmese source progress**: Irwin's full 1909 Burmese/Arakanese calendar
+  text and OCR, the multilingual 1925 MAP 19777 astrology parabaik, and Moore's
+  SOAS manuscript-study record were inspected. The new
+  `burmese/source_audit.md` keeps original Makaranta, later Thandeikta,
+  Arakanese variants, manuscript divination, and alleged Mahabote procedures
+  separate. Irwin's official tables and descriptions may seed calendar
+  fixtures, but his corrigenda, colonial assumptions, and reform proposals are
+  not silently treated as traditional rules. Mahabote remains `source_limited`
+  until an authoritative Burmese witness and worked examples are verified.
+- **Khmer source progress**: Vernotte and Kichenassamy's full integer-recipe
+  reconstruction, Faraut's 1910 Gallica holding record, EFEO's 120-folio
+  astrology archive, the Khmer Manuscript Heritage portal, and
+  Jiaviriyaboonya's study of modern Thai influence were inspected. The new
+  `khmer/source_audit.md` defines a 638-era, source-versioned ephemeris pilot
+  while preserving the documented midnight-versus-sunrise conflict and known
+  data errors. Historical Cambodian calculation, manuscript divination, and
+  modern hybrid practice remain distinct. No comprehensive Khmer natal reading
+  is yet justified.
+- **Sinhalese/Sri Lankan source progress**: the full 1905 Benares Sanskrit
+  Series edition and romanized OCR of `Daivajnakamadhenu` were inspected and
+  hashed. Its thirty chapters map astronomy/calendrics, natal, longevity,
+  dasha, ashtakavarga, yoga, prashna, muhurta, compatibility, omens and applied
+  branches, but noisy OCR and its nature as a compilation forbid direct rule
+  extraction. Gornall's historical study, Kemper's ethnography, Peradeniya and
+  Colombo curricula, Sri Jayewardenepura manuscripts, official New Year
+  practice, and Sri Lankan Tamil EAP records were also mapped. The new
+  `sinhalese/source_audit.md` separates the medieval Sanskrit layer, later
+  Sinhala practice, and Sri Lankan Tamil track, and authorizes only a bounded
+  concordance/calculation pilot pending Sanskrit and community review.
+- **Mon source progress**: EAP1432 establishes a large Mon-associated Thailand
+  corpus containing astrology/divination, and the U Po Thi catalog exposes
+  several astral titles in Lower Myanmar. Neither establishes a verified Mon-
+  language birth-reading procedure. The new `mon/source_audit.md` requires
+  language, script, provenance and genre to be classified independently and
+  leaves the product status `source_limited`. The ThaiScience Haripunjaya
+  article endpoint returned HTML rather than its indexed PDF, so no snippet
+  claim was promoted; the EAP1432 methodology report also awaits full access.
+- **Korean source progress**: KCI historical studies, Academy of Korean Studies
+  technical overviews, Digital Jangseogak calendar, Myeonggwahak, Tojeong
+  Bigyeol and marriage-document witnesses, and a 2026 algorithm-formalization
+  abstract were inspected. The new `korean/source_audit.md` separates Korean
+  Saju-Myeongri, Joseon court calendrics/electional work, Tojeong Bigyeol, Dang
+  Saju, compatibility and modern schools. A Korean Saju calculation profile is
+  feasible, but cannot be a translated Chinese result; school choices and
+  historical Korean offset/DST transitions need explicit fixtures. Direct
+  access to the KASI historical-time PDF timed out, so hour-pillar transition
+  tests remain gated on institutional and legal sources.
+- **Mongolian source progress**: Mostaert and Cleaves' 1969 scholarly manual,
+  the open 2025 Ernst Collection catalog entry for a Mongolian-language
+  seasonal electional manuscript, NLM's Tibetan-language manuscript from
+  Mongolia, a University of Cambridge Kalmyk oral-history record, an academic
+  eighteenth-century calendar survey, and Inner Mongolia University's catalog
+  were mapped. The new `mongolian/source_audit.md` prevents Mongolian
+  provenance from being confused with Mongolian language and separates
+  Mongolian, Kalmyk, Buryat, Inner Mongolian and Tibetan-source lineages. It
+  authorizes manuscript concordance pilots but keeps natal output
+  `source_limited`; direct access to the NLM article returned HTTP 429.
+- **Vietnamese source progress**: Pham and Le's full 2021 history establishes
+  locally produced royal calendars, changing dynastic/regional regimes, and
+  manuscript almanac runs; the inspected modern calculation page supplies
+  explicit New-Moon, month-11, principal-term and leap-month rules with a
+  worked Vietnam/China divergence. The new `vietnamese/source_audit.md` keeps
+  historical and modern calendars, Vietnamese Tu Vi, Four Pillars, date
+  selection, Muong and Cham materials separate. A modern calendar boundary
+  pilot is feasible; comprehensive Vietnamese natal output remains
+  `source_limited` pending named editions, worked charts and language review.
+- **Zi Wei Dou Shu source progress**: the three-juan Chinese Wikisource
+  transcription of `Ziwei Doushu Quanshu` and its detailed juan-two chart-
+  construction section were inspected. The new `ziwei/source_audit.md`
+  identifies life/body palaces, five-phase bureau, star placement, Four
+  Transformations and timing as versioned calculation families, but requires
+  facsimile collation before encoding. It also quarantines the different
+  Daoist-canon work with the same title; shared naming may never merge their
+  stars or construction rules.
+- **Medieval Jewish source progress**: Sela's critical-edition program now
+  maps Ibn Ezra's introductions, two `Book of Reasons` versions, two `Book of
+  the World` versions, three elections versions, three interrogations versions,
+  the luminaries/critical-days work, nativities and continuous horoscopy. NLI
+  Ms. Heb. 3906=8 supplies a detailed public-domain 1749 composite witness with
+  several horoscopes. The new `medieval_jewish/source_audit.md` selects a
+  bounded Ibn Ezra natal/revolution pilot while keeping Arabic source ancestry,
+  Hebrew recension, later translation, other Jewish authors, world astrology,
+  questions, elections, medicine and astral magic separate.
+- **Pre-Islamic Arabian source progress**: ISMI maps Ibn Qutayba's ninth-
+  century `Kitab al-Anwa`, four manuscripts and the 1956 Hyderabad edition;
+  OCIANA supplies direct Ancient North Arabian inscription evidence; Varisco,
+  Adams and Al-Jallad provide the source-critical framework. The new
+  `pre_islamic_arabian/source_audit.md` rejects both a fabricated natal reading
+  and the unqualified retrojection of a later uniform 28-station grid onto
+  older rain-star complexes. The valid pilots are philological, observational
+  and epigraphic concordances, not birthday personality output.
+- **Atomic rule extraction started**: `rule_manifest.schema.json` now enforces
+  the shared rule contract, and `medieval_jewish/rule_manifest.json` contains
+  five passage-located Ibn Ezra rules from the inspected Sela edition: solar-
+  return construction, sect-light triplicity comparison, relative life phases,
+  return-Ascendant witnesses, and annual-versus-natal precedence. All remain
+  research-only, grade B, and Hebrew-review pending; no exact phase ages,
+  return-location convention, modern tolerances or foreign annual techniques
+  were invented. Eight dependency, boundary and precedence vectors cover every
+  rule, including return-location uncertainty, rejected equal numeric thirds,
+  no Tajika Muntha substitution and natal-over-annual precedence.
+- **Zi Wei calculation extraction started**:
+  `ziwei/calculation_rule_manifest.json` records seven research-only candidate
+  rules for leap-month normalization, life/body palaces, twelve topic palaces,
+  Five Tigers, Wenchang/Wenqu, Zuofu/Youbi and Four Transformations. They are
+  deliberately grade D until facsimile collation. Eleven explicit and derived
+  transcription examples are preserved in `ziwei/validation_vectors.json`,
+  including complete Five Tigers and reverse topic-palace expansions; unresolved
+  leap-month dependencies and all time boundaries fail closed.
+- **Vietnamese calendar fixtures started**:
+  `vietnamese/calendar_rule_manifest.json` formalizes five research-only rules
+  for local New-Moon day, the month-11 solstice anchor, normal numbering,
+  intercalation and Vietnamese rather than Beijing civil-day identity.
+  `vietnamese/calendar_validation_vectors.json` ties five published 1984-1985
+  calculations to those rules, including Hanoi/Beijing local-day divergence,
+  month 11, New Year divergence and the Vietnamese intercalary month. All are
+  marked pending independent ephemeris and almanac recomputation.
+- **Research corpus integrity gate**: `validation_vectors.schema.json` and
+  `validate_research_corpus.py` now validate the complete source-rule-vector
+  graph. The current pass proves 154 unique sources, 16 schema-valid rule
+  manifests, 165 globally unique rules, 15 vector files, 195 globally unique
+  vectors, and vector coverage for all 165 rules, including the bounded SAA 8,
+  EAE Tablet 20, ancient EAE commentary, Maya and Tibetan Phugpa calendar-only
+  invariants, and the al-Biruni author/translation/publication boundaries.
+- **Working-tree safety**: pre-existing changes in auth, database, email/DNS,
+  static config, scripts, tests, templates, and other untracked files are user
+  work and were not modified by this research pass.
+- **Next research work**: obtain independent Arabic review of the six encoded
+  al-Biruni passage pairs, then extract the same concepts separately from Abu
+  Ma'shar and al-Qabisi to test cross-author disagreement without inheritance.
+  Continue passage-level extraction, calculation specifications, and bounded
+  validation corpora across the registry. No new tradition may be called
+  production-ready until every documented gate passes.
 
 ## Resume
 - **Instant-fulfillment ship (2026-07-15 PDT)**: Deployed the v7 deterministic pipeline to production with a new delivery model that removes every component that killed the two real sales. The $20 Complete Analysis is now generated in ~6 seconds end-to-end (chart → composer → stored task) and delivered instantly: rendered in the browser plus a new `GET /api/v1/guest/report-pdf/{task_id}` route that renders the 33-36 page typeset PDF on demand from the stored deterministic result (no storage, no email dependency; paid tasks only, 402 for free tasks, 409 while pending). All "PDF emailed" promises removed from copy (SMTP creds remain dead — email is now a bonus, not the delivery path). Free reading remains free and now also runs the deterministic composer (zero marginal cost, no OpenRouter spend on the free funnel). Removed the $25 `full_reading` dual CTA (single $20 product); honest owner support note added after the free reading. Pre-ship stress across 7 diverse charts (leap-day Sydney 1988, London 1942 age-84, Tokyo newborn 2024, Reykjavik 64°N, Quito equator, Fairfield reference, and the July 9 customer's Sugar Land chart) surfaced and fixed three fail-closed defects: (1) decennials broke the 129-month invariant for leap-day/day-31 births because month additions chained from clamped dates — boundaries now computed from the birth anchor with cumulative months; (2) natives past the 75-year Firdaria span produced no firdaria evidence item and failed coverage — the layer now emits an explicit doctrinal-limit statement and the composer renders it honestly; (3) two contract regex over-matches (bare "treat" as medical, directive window crossing clause boundaries) narrowed with regression tests. 7/7 charts now pass. The July 9 customer's v7 make-good report is regenerated and verified at `artifacts/customer-makegood-20260715/` (33 pages, passed publication contract) — send still gated on mail auth + owner decision; owner is refunding the $20. Cache busts: `rev20260715instantpdf1`, sw `astro-v29-instant-pdf`.
@@ -353,3 +748,115 @@ python scripts/extract_all_traditional_data.py  # Regenerate data to JSON
 python scripts/migrate_json_to_db.py           # Sync JSON data to Database
 python scripts/enhance_delineations.py         # Refresh delineation quality
 ```
+
+## Multi-tradition research update (2026-08-01)
+
+- Only the Western system is live. Mesopotamian/Babylonian work under
+  `docs/research/multitradition/` is research-only and has no engine, API,
+  deployment, billing, or customer-output integration.
+- Rochberg's complete edition catalogue is encoded as 31 horoscope entries
+  across 28 numbered horoscope texts plus four birth-note tablets preserving
+  six births. Text 11 is the sole explicit duplicate, yielding 30 catalogued
+  horoscope entries after collapse; Text 28 may originally have contained more
+  than one horoscope, so this is not a proven unique-nativity count.
+- Texts 11-20 were inspected across book pp. 86-115 / PDF pp. 102-131. Their
+  eleven records contain three candidate favorable/good-fortune clauses, all in
+  Text 16 and all fail-closed because their predicates are damaged, uncertain,
+  or incomplete.
+- Texts 21-28 and Birth Notes 29-32 are now fully passage-inspected. Text 27
+  adds two record-specific fortune fragments with no recoverable trigger; Text
+  32 preserves three separate births. Current validated graph after the
+  separate Maya, Nahua cycle-only, Egyptian civil-calendar-only, Tibetan Phugpa,
+  and al-Biruni research packs: 160 sources, 18 rule manifests, 184 rules, 17
+  vector files, 224 vectors, and complete
+  coverage.
+- Published longitude tables for Texts 11-27 are now independently recomputed:
+  125 positions across 18 tables, with 112 inside exploratory tolerances and 13
+  preserved failures. Text 18 Saturn has the largest planetary residual (2.1036
+  degrees); Text 23 has a strong one-day table-label conflict.
+- All 192 published Rochberg positions now have a separate JPL Horizons
+  cross-check. Thirty of 32 tablet records have exact CDLI matches; Texts 11
+  and 16 remain unresolved, and the matched CDLI pages do not supply an
+  independent in-page transliteration or translation.
+- A separate, bounded Neo-Assyrian state-omen pilot now encodes official ORACC
+  TEI for SAA 8 reports 316 and 535 as 24 passage units, 33 rules, and 12
+  vectors. Every rule rejects birth input and customer prediction; damaged and
+  restored predicates fail closed, and harmful political or ritual clauses are
+  historical evidence only.
+- A bounded `Enuma Anu Enlil` Tablet 20 witness pilot now compares Late
+  Babylonian IM 124485 with Neo-Assyrian VAT 9419 + VAT 11310: 13 passage
+  units, 17 witness-scoped rules, and 11 vectors. The critical editions show
+  substantive recensional differences, so witness blending fails closed; all
+  rules reject birth input and customer prediction.
+- The complete Tablets 15-22 edition landscape is now explicit: the controlling
+  Rochberg-Halton 1988 volume and Fincke's 2016/2017/2019 update articles are
+  verified but not falsely marked as full-text inspected. Two open ancient
+  commentaries, BM 47447 and Sm.683, add 21 passage units, 22 commentary-scoped
+  rules, and 14 vectors. Commentary never overwrites base text, and an ancient
+  rationalization of a manuscript error remains witness-specific.
+- The next Islamicate comparison gate now has seven exact, remotely reverified
+  TEI witnesses from the University of Wurzburg: Arabic plus two separate Latin
+  lineages for Abu Ma'shar's *Great Introduction*, Arabic plus Latin for
+  al-Qabisi's *Introduction*, and Arabic plus Latin for Abu Ma'shar's distinct
+  *Abbreviation*. The access matrix pins raw-byte hashes and prohibits
+  cross-work, cross-author, and cross-translation inheritance. No doctrinal
+  rules were encoded because the modern English translations and full critical
+  apparatus still require lawful access and Arabic review.
+- A structural Islamicate concordance now identifies 30 candidate passages for
+  five shared concepts and preserves eight explicit variants. Important flags
+  include conflicting Great Introduction firdaria values, an Adelard total of
+  77 whose listed values sum to 75, Latin terminology that collapses or
+  semantically renders Arabic technical terms, and an apparent al-Qabisi versus
+  al-Biruni Mercury-classification difference. These remain passage candidates,
+  not rules; the main validator enforces false rule-readiness, live status, and
+  customer eligibility.
+- The multitradition workspace now has a schema-validated global engine coverage
+  manifest covering all 20 tracks in the original culture inventory. It names
+  74 modules, including 54 that can legitimately consume birth data. Current
+  truth is 18 `research_verified`, 53 `source_limited`, three
+  `not_implemented`, and zero non-Western `production_verified` or live
+  modules. Only 13 modules have validated machine-readable research artifacts.
+  The validator requires all rule manifests and all 20 source-audit directories
+  to appear in the coverage graph, so successful narrow pilots cannot be
+  mistaken for complete engines. (14 modules now carry validated
+  machine-readable research artifacts after the BaZi kernel pass.)
+- The Chinese BaZi track now has a fail-closed sexagenary kernel artifact:
+  ten stems, twelve branches, the sixty-pair Jia-Zi cycle with the
+  same-parity invariant enumerated over all 120 combinations, the twelve
+  two-hour shichen (all 1,440 minutes partition-checked, Zi straddling
+  23:00-01:00), and the HKO year-to-month and day-to-hour stem lookup
+  tables verified row-by-row. Ten rules and twenty vectors enforce
+  fail-closed boundaries: no default day-count anchor (no concordance
+  source is registered yet; fixtures are labeled non-historical), no
+  year/month/day/hour boundary convention (the school convention matrix
+  stays unresolved), and no five-element, Ten-God, luck-pillar, or
+  interpretation output. Solar terms are encoded only as 24
+  ecliptic-longitude moments (12 major, 12 minor) with per-term
+  longitudes deliberately deferred. Named-concordance, school-convention,
+  solar-time-lineage, and almanac-conformance gates remain open; nothing
+  is live or customer-eligible.
+- The Nahua track now has a fail-closed 13-by-20 arithmetic artifact: 20 day
+  signs, 20 trecena heads, all 260 unique pairs, eight rules, and twelve
+  vectors. It has no default civil-date correlation, rejects Maya epoch reuse,
+  emits no interpretation, and remains non-live/non-customer. The first
+  One-Cipactli concordance still requires a justified correlation, complete
+  codex plates, all thirteen aligned Book 4 passages, and specialist review.
+- The pharaonic Egyptian track now has a fail-closed 365-position civil-calendar
+  artifact: three four-month seasons, twelve 30-day ordinary months, and five
+  `heriu-renpet` days. Eleven rules and seventeen vectors enforce the full
+  bijection, no sixth leap day, no default chronology, rejection of later
+  Alexandrian/Coptic profiles, and no prognosis or birth-reading output. The
+  Porceddu source PDF is hash-pinned and relevant pages were visually checked.
+  A complete 317-page Cleveland Public Library scan of Budge's 1923 second
+  series is also acquired and hash-pinned; its 41 Sallier IV plates span
+  LXXXVIII-CXXVIII. Description pages, the first two calendar plates, and the
+  last reverse plate were visually checked. Budge says the likely epagomenal
+  portion is lost, correcting the earlier boundary from historical absence to
+  non-preservation/abstention. The facsimile is not a complete critical
+  translation, so rule extraction remains false and nothing is live or
+  customer-eligible. Historical chronology, Bakir/Leitz collation, and the
+  one-month three-papyrus hemerology concordance remain incomplete gates.
+- Next: expand through Tablets 15-22 and more applied reports, with
+  Assyriological collation, rights review, and separate astronomy/calendar
+  facts. Do not implement or publish a Babylonian reading engine until those
+  gates are resolved.

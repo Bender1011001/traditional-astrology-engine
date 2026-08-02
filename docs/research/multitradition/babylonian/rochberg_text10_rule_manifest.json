@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "mesopotamian_babylonian",
+  "school_id": "late_babylonian_horoscope_text10_rochberg_1998",
+  "source_pack_id": "rochberg_1998_text10_mlc2190_v1",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_text10",
+  "source_registry_ids": ["babylonian_rochberg_horoscopes_1998_awdl", "babylonian_cdli_aristocrates_p507395"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Rochberg's critical edition, Text 10 (MLC 2190), pages 83-85, was inspected in transcription, translation, commentary, and published astronomical-data table; the relevant PDF pages were also visually checked. The table's seven tropical longitudes were reproduced through a locked Swiss Ephemeris profile and independently cross-checked against NASA/JPL Horizons. The lunar-latitude motion trigger, ancient zodiac correction, tablet reading, and Akkadian have not been independently resolved, so the rules remain grade B. Three predictions are explicitly attached to planetary KI (qaqqaru), 'place,' whose executable scheme is not established by the passage. They must never be reduced to planet-in-sign meanings.",
+  "rules": [
+    {
+      "rule_id": "babylonian.rochberg1998.text10.obv4-6.moon_positive_latitude_omen",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_text10_rochberg_1998",
+      "period": "seleucid_era_year_77_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 10 (MLC 2190)",
+        "technique": "lunar_latitude_omen_in_horoscope",
+        "generalizability": "requires_nativity_omen_parallel_review"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "moon.motion_relative_to_nodal_zone", "operator": "equals", "value": "from_middle_toward_positive_latitude"},
+          {"fact": "source_profile", "operator": "equals", "value": "rochberg_1998_text10"}
+        ]
+      },
+      "conclusion": {
+        "type": "historical_omen_apodosis",
+        "themes": ["prosperity", "greatness"],
+        "target": "apparently_individual_but_editor_notes_not_explicitly_royal",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Rochberg says this may reflect an otherwise unknown nativity omen; broader applicability beyond Text 10 is not established.",
+        "A calculation of increasing positive lunar latitude requires a versioned ancient/modern astronomical definition and independent recomputation."
+      ],
+      "conflicts_with": ["generic_moon_north_node_personality_meaning"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 10 (MLC 2190)",
+          "location": "pp. 83-84, obv. 4-6; commentary p. 84",
+          "verification": "transcription_translation_commentary_and_page_images_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical-source display only until the lunar-latitude computation and nativity-omen lineage are reviewed. Do not turn it into a general present-day promise of prosperity or status.",
+      "review_status": "akkadian_assyriological_astronomical_and_parallel_text_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text10.obv7-8.jupiter_ki_place_judgment",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_text10_rochberg_1998",
+      "period": "seleucid_era_year_77_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 10 (MLC 2190)",
+        "technique": "planetary_KI_qaqqaru_place_judgment",
+        "planet": "jupiter",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg_1998_text10_mlc2190"},
+          {"fact": "text.contains_jupiter_KI_clause", "operator": "equals", "value": true},
+          {"fact": "KI_scheme_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["prosperity", "peace_or_reconciliation_translation_uncertain", "durable_wealth", "long_life"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The translated subject for life is restored or uncertain, and Rochberg discusses uncertainty in the readings behind prosperity/peace.",
+        "The KI place is not demonstrated to mean Jupiter at 18 degrees Sagittarius; no planet-in-sign rule may be inferred.",
+        "The longevity clause is safety-restricted and may not become a personal lifespan prediction."
+      ],
+      "conflicts_with": ["jupiter_in_sagittarius_generic_babylonian_delineation", "modern_longevity_prediction"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 10 (MLC 2190)",
+          "location": "p. 84, obv. 7-8; KI and reading commentary p. 85",
+          "verification": "transcription_translation_commentary_and_page_images_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Corpus-example display only. Suppress the lifespan prediction in consumer output, retain it internally with a safety reason, and do not generalize the clause until the KI scheme and parallels are source-verified.",
+      "review_status": "akkadian_reading_KI_scheme_assyriological_and_safety_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text10.obv8-10.venus_ki_place_judgment",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_text10_rochberg_1998",
+      "period": "seleucid_era_year_77_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 10 (MLC 2190)",
+        "technique": "planetary_KI_qaqqaru_place_judgment",
+        "planet": "venus",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg_1998_text10_mlc2190"},
+          {"fact": "text.contains_venus_KI_clause", "operator": "equals", "value": true},
+          {"fact": "KI_scheme_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["favor_wherever_the_native_goes", "male_and_female_offspring"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The KI place is not demonstrated to mean Venus at 4 degrees Taurus; no planet-in-sign rule may be inferred.",
+        "The offspring statement is a historical apodosis, not a valid fertility assessment or guarantee."
+      ],
+      "conflicts_with": ["venus_in_taurus_generic_babylonian_delineation", "fertility_or_child_guarantee"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 10 (MLC 2190)",
+          "location": "p. 84, obv. 8-10; KI commentary p. 85",
+          "verification": "transcription_translation_commentary_and_page_images_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Corpus-example display only. Do not predict fertility, children, or family composition, and do not generalize until the KI scheme and nativity-omen parallels are verified.",
+      "review_status": "KI_scheme_assyriological_parallel_text_and_safety_review_pending"
+    },
+    {
+      "rule_id": "babylonian.rochberg1998.text10.rev1-3.mercury_ki_place_judgment",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "late_babylonian_horoscope_text10_rochberg_1998",
+      "period": "seleucid_era_year_77_horoscope_in_1998_critical_edition",
+      "domain": "natal",
+      "scope": {
+        "work": "Babylonian Horoscopes",
+        "text": "Text 10 (MLC 2190)",
+        "technique": "planetary_KI_qaqqaru_place_judgment",
+        "planet": "mercury",
+        "executable_from_birth_input": false
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_record", "operator": "equals", "value": "rochberg_1998_text10_mlc2190"},
+          {"fact": "text.contains_mercury_KI_clause", "operator": "equals", "value": true},
+          {"fact": "KI_scheme_trigger", "operator": "unresolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "record_specific_historical_judgment",
+        "themes": ["bravery", "first_in_rank", "greater_importance_than_brothers", "succession_to_fathers_house"],
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The duplicate Text 11 supports the passage, but Rochberg says the verb in the father's-house clause needs collation.",
+        "The KI place is not demonstrated to mean Mercury in Gemini or Mercury with the Sun; no planet-in-sign or conjunction rule may be inferred.",
+        "Ancient household rank and succession language must be historically contextualized rather than converted into a modern status guarantee."
+      ],
+      "conflicts_with": ["mercury_in_gemini_generic_babylonian_delineation", "mercury_conjunct_sun_generic_babylonian_delineation"],
+      "source_passages": [
+        {
+          "edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+          "work": "Babylonian Horoscopes",
+          "section": "Text 10 (MLC 2190), with duplicate Text 11 (W 20030/143)",
+          "location": "p. 84, rev. 1-3; critical apparatus p. 83 and duplicate pp. 86-87",
+          "verification": "transcription_translation_critical_apparatus_duplicate_and_page_images_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Corpus-example display only. Preserve the collation uncertainty and do not promise rank, inheritance, or superiority over siblings from a modern chart.",
+      "review_status": "tablet_collation_KI_scheme_assyriological_and_context_review_pending"
+    }
+  ]
+}

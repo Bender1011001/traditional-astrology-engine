@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "islamicate_persian",
+  "source_pack_id": "islamicate_al_biruni_tafhim_reference_conditions_v1",
+  "status": "research_only_facing_pages_inspected_arabic_review_pending",
+  "source_ids": ["islamicate_al_biruni_halle_full_facing_1934", "islamicate_al_biruni_wright_1934_local"],
+  "vectors": [
+    {
+      "vector_id": "islamicate.al_biruni.source_and_publication_contract",
+      "rule_ids": ["islamicate.al_biruni.tafhim.identity", "islamicate.al_biruni.publication.boundary"],
+      "inputs": {"operation": "source_contract"},
+      "expected": {"author_id":"al_biruni","work_id":"kitab_al_tafhim","edition_id":"wright_1934_halle_facing_scan","generic_islamicate_merge":false,"source_language_translation_verified":false,"live_engine":false,"customer_eligible":false,"interpretation_eligible":false,"full_reading_eligible":false,"historical_use_only":true},
+      "provenance": "Halle institutional record, METS/IIIF structure, Wright title page, and the bounded publication contract."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.firdaria.diurnal_order",
+      "rule_ids": ["islamicate.al_biruni.firdaria.major_order.diurnal"],
+      "inputs": {"operation":"firdaria_major_order","nativity_sect":"diurnal"},
+      "expected": {"major_order":["sun","venus","mercury","moon","saturn","jupiter","mars"]},
+      "provenance": "Section 395, printed p. 239, IIIF canvases 514-515."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.firdaria.nocturnal_order",
+      "rule_ids": ["islamicate.al_biruni.firdaria.major_order.nocturnal"],
+      "inputs": {"operation":"firdaria_major_order","nativity_sect":"nocturnal"},
+      "expected": {"major_order":["moon","saturn","jupiter","mars","sun","venus","mercury"]},
+      "provenance": "Section 395, printed p. 239, IIIF canvases 514-515."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.firdaria.sun_subperiod_structure",
+      "rule_ids": ["islamicate.al_biruni.firdaria.subperiod_structure"],
+      "inputs": {"operation":"firdaria_subperiods","major_ruler":"sun"},
+      "expected": {"subperiods":[
+        {"index":1,"fraction_start":"0/7","fraction_end":"1/7","rulers":["sun"]},
+        {"index":2,"fraction_start":"1/7","fraction_end":"2/7","rulers":["sun","venus"]},
+        {"index":3,"fraction_start":"2/7","fraction_end":"3/7","rulers":["sun","mercury"]},
+        {"index":4,"fraction_start":"3/7","fraction_end":"4/7","rulers":["sun","moon"]},
+        {"index":5,"fraction_start":"4/7","fraction_end":"5/7","rulers":["sun","saturn"]},
+        {"index":6,"fraction_start":"5/7","fraction_end":"6/7","rulers":["sun","jupiter"]},
+        {"index":7,"fraction_start":"6/7","fraction_end":"7/7","rulers":["sun","mars"]}
+      ]},
+      "provenance": "Section 395 states equal sevenths, the first ruled alone by the chronocrator, then partnerships with planets next below."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.firdaria_fail_closed_boundaries",
+      "rule_ids": ["islamicate.al_biruni.firdaria.nodes.excluded", "islamicate.al_biruni.firdaria.duration.unresolved"],
+      "inputs": {"operation":"firdaria_boundaries"},
+      "expected": {"planetary_rulers_only":true,"node_periods_authorized":false,"major_period_durations_available":false,"elapsed_age_boundaries_authorized":false},
+      "provenance": "Negative boundary from section 395: the passage cycles seven planets but supplies no node periods or major-duration table."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.sign_gender_table",
+      "rule_ids": ["islamicate.al_biruni.condition.sign_gender"],
+      "inputs": {"operation":"sign_gender_table"},
+      "expected": {"aries":"male","taurus":"female","gemini":"male","cancer":"female","leo":"male","virgo":"female","libra":"male","scorpio":"female","sagittarius":"male","capricorn":"female","aquarius":"male","pisces":"female"},
+      "provenance": "Sections 347-348, printed p. 211, IIIF canvases 458-459."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.planet_gender_table",
+      "rule_ids": ["islamicate.al_biruni.condition.planet_gender"],
+      "inputs": {"operation":"planet_gender_table"},
+      "expected": {"saturn":"male","jupiter":"male","mars":"male","sun":"male","venus":"female","moon":"female","mercury":"conditional_male_when_alone"},
+      "provenance": "Sections 385 and 396-401, printed pp. 234 and 240, with facing Arabic pages."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.planet_sect_table",
+      "rule_ids": ["islamicate.al_biruni.condition.planet_sect"],
+      "inputs": {"operation":"planet_sect_table"},
+      "expected": {"saturn":"diurnal","jupiter":"diurnal","mars":"nocturnal","sun":"diurnal","venus":"nocturnal","moon":"nocturnal","mercury":"conditional_on_sign_or_association"},
+      "provenance": "Sections 386 and 396-401, printed pp. 234 and 240, with facing Arabic pages."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.mercury_resolution_matrix",
+      "rule_ids": ["islamicate.al_biruni.condition.mercury.explicit_resolution"],
+      "inputs": {"operation":"mercury_resolution_matrix"},
+      "expected": {"cases":[
+        {"case":"undeclared","status":"rejected","reason":"Mercury gender and sect bases are required"},
+        {"case":"alone_in_aries","status":"resolved","gender":"male","sect":"diurnal"},
+        {"case":"associated_with_venus","status":"resolved","gender":"female","sect":"nocturnal"}
+      ]},
+      "provenance": "Sections 385-386 condition Mercury by association/sign and section 396-401 calls it male and diurnal by nature. The bounded passages provide no conflict priority."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.halb_truth_table",
+      "rule_ids": ["islamicate.al_biruni.condition.halb"],
+      "inputs": {"operation":"halb_truth_table"},
+      "expected": {"cases":[
+        {"nativity_sect":"diurnal","planet_sect":"diurnal","above_horizon":true,"halb":true},
+        {"nativity_sect":"diurnal","planet_sect":"diurnal","above_horizon":false,"halb":false},
+        {"nativity_sect":"diurnal","planet_sect":"nocturnal","above_horizon":true,"halb":false},
+        {"nativity_sect":"diurnal","planet_sect":"nocturnal","above_horizon":false,"halb":true},
+        {"nativity_sect":"nocturnal","planet_sect":"diurnal","above_horizon":true,"halb":false},
+        {"nativity_sect":"nocturnal","planet_sect":"diurnal","above_horizon":false,"halb":true},
+        {"nativity_sect":"nocturnal","planet_sect":"nocturnal","above_horizon":true,"halb":true},
+        {"nativity_sect":"nocturnal","planet_sect":"nocturnal","above_horizon":false,"halb":false}
+      ]},
+      "provenance": "Section 496, printed p. 308, IIIF canvases 654-655."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.hayyiz_implication_examples",
+      "rule_ids": ["islamicate.al_biruni.condition.hayyiz"],
+      "inputs": {"operation":"hayyiz_examples"},
+      "expected": {"cases":[
+        {"planet":"sun","nativity_sect":"diurnal","above_horizon":true,"sign":"aries","halb":true,"hayyiz":true},
+        {"planet":"sun","nativity_sect":"diurnal","above_horizon":true,"sign":"taurus","halb":true,"hayyiz":false},
+        {"planet":"sun","nativity_sect":"nocturnal","above_horizon":false,"sign":"aries","halb":true,"hayyiz":true},
+        {"planet":"sun","nativity_sect":"nocturnal","above_horizon":true,"sign":"aries","halb":false,"hayyiz":false},
+        {"planet":"venus","nativity_sect":"nocturnal","above_horizon":true,"sign":"taurus","halb":true,"hayyiz":true}
+      ],"every_hayyiz_is_halb":true,"halb_without_hayyiz_exists":true},
+      "provenance": "Section 496 defines hayyiz as halb plus gender agreement and explicitly gives the one-way implication."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.mars_hayyiz_examples",
+      "rule_ids": ["islamicate.al_biruni.condition.mars_hayyiz"],
+      "inputs": {"operation":"mars_examples"},
+      "expected": {"cases":[
+        {"nativity_sect":"nocturnal","above_horizon":true,"sign":"aries","halb":true,"hayyiz":true},
+        {"nativity_sect":"nocturnal","above_horizon":true,"sign":"taurus","halb":true,"hayyiz":false},
+        {"nativity_sect":"diurnal","above_horizon":false,"sign":"aries","halb":true,"hayyiz":true},
+        {"nativity_sect":"diurnal","above_horizon":true,"sign":"aries","halb":false,"hayyiz":false}
+      ]},
+      "provenance": "Mars-specific qualification in section 496, printed p. 308, IIIF canvases 654-655."
+    },
+    {
+      "vector_id": "islamicate.al_biruni.joy_nonexclusive_boundary",
+      "rule_ids": ["islamicate.al_biruni.condition.joy_nonexclusive"],
+      "inputs": {"operation":"joy_boundary"},
+      "expected": {"halb_or_hayyiz_is_a_joy_condition":true,"complete_judgment_authorized":false,"debility_cancelled":false,"malefic_nature_changed":false,"score_authorized":false,"customer_prediction":false},
+      "provenance": "Sections 396-401 and 498, printed pp. 240 and 309, IIIF canvases 516-517 and 656-657."
+    }
+  ]
+}

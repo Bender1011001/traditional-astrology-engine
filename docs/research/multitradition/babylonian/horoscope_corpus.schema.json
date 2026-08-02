@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astrology.local/schemas/babylonian-horoscope-corpus-v1.json",
+  "title": "Late Babylonian horoscope corpus research manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "updated",
+    "tradition_id",
+    "source_edition_id",
+    "source_file_sha256",
+    "status",
+    "tablet_count",
+    "record_count",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "updated": {"type": "string", "format": "date"},
+    "tradition_id": {"const": "mesopotamian_babylonian"},
+    "source_edition_id": {"type": "string", "minLength": 1},
+    "source_file_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"type": "string", "minLength": 1},
+    "tablet_count": {"type": "integer", "minimum": 1},
+    "record_count": {"type": "integer", "minimum": 1},
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "datum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value", "textual_status"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "value": {},
+        "textual_status": {
+          "enum": [
+            "preserved",
+            "partly_preserved",
+            "damaged",
+            "restored_by_editor",
+            "editorial_inference"
+          ]
+        },
+        "note": {"type": "string"}
+      }
+    },
+    "judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["themes", "location", "textual_status", "executable_trigger", "customer_prediction"],
+      "properties": {
+        "themes": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "location": {"type": "string", "minLength": 1},
+        "textual_status": {"enum": ["preserved", "partly_preserved", "damaged", "restored_by_editor"]},
+        "executable_trigger": {"type": ["string", "null"]},
+        "customer_prediction": {"const": false},
+        "note": {"type": "string"}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_id",
+        "rochberg_text_number",
+        "artifact_ids",
+        "edition_pages",
+        "date",
+        "record_profile",
+        "preservation",
+        "birth_time_status",
+        "recorded_data",
+        "explicit_judgments",
+        "editorial_computation_status",
+        "engine_limits",
+        "pilot_eligibility"
+      ],
+      "properties": {
+        "record_id": {"type": "string", "pattern": "^rochberg1998\\.text[0-9]+[ab]?$"},
+        "rochberg_text_number": {"type": "integer", "minimum": 1},
+        "artifact_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "cdli_id": {"type": ["string", "null"], "pattern": "^P[0-9]+$"},
+        "edition_pages": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["book", "pdf"],
+          "properties": {
+            "book": {"type": "string", "minLength": 1},
+            "pdf": {"type": "string", "minLength": 1}
+          }
+        },
+        "date": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["babylonian", "editor_proposed_julian", "confidence"],
+          "properties": {
+            "babylonian": {"type": "string", "minLength": 1},
+            "editor_proposed_julian": {"type": "string", "minLength": 1},
+            "confidence": {"enum": ["preserved", "partly_preserved", "editorially_reconstructed", "uncertain"]}
+          }
+        },
+        "record_profile": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "preservation": {"enum": ["good", "mixed", "fragmentary"]},
+        "birth_time_status": {"type": "string", "minLength": 1},
+        "recorded_data": {"type": "array", "items": {"$ref": "#/$defs/datum"}},
+        "explicit_judgments": {"type": "array", "items": {"$ref": "#/$defs/judgment"}},
+        "editorial_computation_status": {"type": "string", "minLength": 1},
+        "engine_limits": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "pilot_eligibility": {"enum": ["include", "include_with_restoration_tests", "exclude_from_primary_golden_set"]}
+      }
+    }
+  }
+}

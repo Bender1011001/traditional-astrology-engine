@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+  "source_file_sha256": "dd233eb1593135dacf280224288fb16cf3697df48fc9ec0347cc522959dff285",
+  "source_location": {"book_pages": "25-27", "pdf_pages": "41-43"},
+  "status": "complete_edition_catalog_passage_inspection_and_thirty_of_thirty_two_cdli_object_matches",
+  "summary": {
+    "numbered_texts": 32,
+    "horoscope_text_numbers": 28,
+    "birth_note_text_numbers": 4,
+    "birth_note_birth_records": 6,
+    "horoscope_record_entries": 31,
+    "explicit_duplicate_links": 1,
+    "catalogued_horoscope_entries_after_explicit_duplicate_collapse": 30
+  },
+  "date_layer_policy": "Catalog year-dates identify proposed Julian event years. Index labels can identify a Seleucid regnal year spanning two Julian years. Both printed layers are evidence and must be preserved; neither may be silently normalized into the other. Counts describe edition catalogue entries, not necessarily every nativity originally written on a damaged tablet.",
+  "date_layer_notes": [
+    {"text": 15, "catalog_year_date": -201, "index_label": "S.E. 109 / -202", "event_heading": "-201 February 4", "policy": "preserve_all_printed_layers"},
+    {"text": 23, "catalog_year_date": -87, "index_label": "S.E. 223 / -88", "policy": "preserve_all_printed_layers_until_passage_inspection"}
+  ],
+  "horoscope_records": [
+    {"record_id":"rochberg1998.text1","text_number":1,"museum_number":"AO 17649","catalog_year_date":-409,"duplicate_of":null},
+    {"record_id":"rochberg1998.text2","text_number":2,"museum_number":"AB 251","catalog_year_date":-409,"duplicate_of":null},
+    {"record_id":"rochberg1998.text3","text_number":3,"museum_number":"BM 32376","catalog_year_date":-297,"duplicate_of":null},
+    {"record_id":"rochberg1998.text4","text_number":4,"museum_number":"BM 33382","catalog_year_date":-287,"duplicate_of":null},
+    {"record_id":"rochberg1998.text5","text_number":5,"museum_number":"MLC 1870","catalog_year_date":-262,"duplicate_of":null},
+    {"record_id":"rochberg1998.text6a","text_number":6,"museum_number":"BM 47721","catalog_year_date":-258,"duplicate_of":null},
+    {"record_id":"rochberg1998.text6b","text_number":6,"museum_number":"BM 47721","catalog_year_date":-250,"duplicate_of":null},
+    {"record_id":"rochberg1998.text7","text_number":7,"museum_number":"BM 33667","catalog_year_date":-257,"duplicate_of":null},
+    {"record_id":"rochberg1998.text8","text_number":8,"museum_number":"BM 36943","catalog_year_date":-250,"duplicate_of":null},
+    {"record_id":"rochberg1998.text9","text_number":9,"museum_number":"NCBT 1231","catalog_year_date":-248,"duplicate_of":null},
+    {"record_id":"rochberg1998.text10","text_number":10,"museum_number":"MLC 2190","catalog_year_date":-234,"duplicate_of":null},
+    {"record_id":"rochberg1998.text11","text_number":11,"museum_number":"W 20030/143","catalog_year_date":-234,"duplicate_of":"rochberg1998.text10"},
+    {"record_id":"rochberg1998.text12","text_number":12,"museum_number":"BM 33741","catalog_year_date":-229,"duplicate_of":null},
+    {"record_id":"rochberg1998.text13","text_number":13,"museum_number":"BM 47642","catalog_year_date":-223,"duplicate_of":null},
+    {"record_id":"rochberg1998.text14","text_number":14,"museum_number":"BM 36620","catalog_year_date":-219,"duplicate_of":null},
+    {"record_id":"rochberg1998.text15","text_number":15,"museum_number":"BM 36796","catalog_year_date":-201,"duplicate_of":null},
+    {"record_id":"rochberg1998.text16a","text_number":16,"museum_number":"W 20030/10","catalog_year_date":-199,"duplicate_of":null},
+    {"record_id":"rochberg1998.text16b","text_number":16,"museum_number":"W 20030/10","catalog_year_date":-198,"duplicate_of":null},
+    {"record_id":"rochberg1998.text17","text_number":17,"museum_number":"BM 41054","catalog_year_date":-175,"duplicate_of":null},
+    {"record_id":"rochberg1998.text18","text_number":18,"museum_number":"BM 35516","catalog_year_date":-141,"duplicate_of":null},
+    {"record_id":"rochberg1998.text19","text_number":19,"museum_number":"BM 81561","catalog_year_date":-139,"duplicate_of":null},
+    {"record_id":"rochberg1998.text20","text_number":20,"museum_number":"BM 78089","catalog_year_date":-125,"duplicate_of":null},
+    {"record_id":"rochberg1998.text21","text_number":21,"museum_number":"BM 33018","catalog_year_date":-124,"duplicate_of":null},
+    {"record_id":"rochberg1998.text22a","text_number":22,"museum_number":"BM 41301","catalog_year_date":-116,"duplicate_of":null},
+    {"record_id":"rochberg1998.text22b","text_number":22,"museum_number":"BM 41301","catalog_year_date":-114,"duplicate_of":null},
+    {"record_id":"rochberg1998.text23","text_number":23,"museum_number":"BM 34003","catalog_year_date":-87,"duplicate_of":null},
+    {"record_id":"rochberg1998.text24","text_number":24,"museum_number":"BM 77265","catalog_year_date":-82,"duplicate_of":null},
+    {"record_id":"rochberg1998.text25","text_number":25,"museum_number":"BM 42025 + BM 42164","catalog_year_date":-80,"duplicate_of":null},
+    {"record_id":"rochberg1998.text26","text_number":26,"museum_number":"BM 35515","catalog_year_date":-75,"duplicate_of":null},
+    {"record_id":"rochberg1998.text27","text_number":27,"museum_number":"BM 38104","catalog_year_date":-68,"duplicate_of":null},
+    {"record_id":"rochberg1998.text28","text_number":28,"museum_number":"BM 37374","catalog_year_date":null,"duplicate_of":null,"note":"The passage is undated and too fragmentary; Rochberg says the tablet ought to have contained more than one horoscope. One catalogue entry must not be presented as a proven one-nativity count."}
+  ],
+  "birth_note_records": [
+    {"record_id":"rochberg1998.text29","text_number":29,"museum_number":"BM 64148","catalog_year_dates":[-368]},
+    {"record_id":"rochberg1998.text30","text_number":30,"museum_number":"BM 33563","catalog_year_dates":[-292]},
+    {"record_id":"rochberg1998.text31","text_number":31,"museum_number":"BM 34693","catalog_year_dates":[-213]},
+    {"record_id":"rochberg1998.text32","text_number":32,"museum_number":"BM 34567","catalog_year_dates":[-114,-116,-153],"birth_record_count":3,"note":"The passage preserves three distinct birth notices."}
+  ],
+  "required_remaining_inspection": ["resolve CDLI or other institutional object records for W 20030/143 and W 20030/10", "image-level collation and rights review", "Babylonian calendar and visibility uncertainty", "Assyriological review of damaged and restored readings"]
+}

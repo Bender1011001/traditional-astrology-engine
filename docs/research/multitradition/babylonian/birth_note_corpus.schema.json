@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astrology.local/schemas/babylonian-birth-note-corpus-v1.json",
+  "title": "Late Babylonian birth-note corpus research manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "updated", "tradition_id", "source_edition_id", "source_file_sha256", "status", "tablet_count", "birth_record_count", "tablets"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "updated": {"type": "string", "format": "date"},
+    "tradition_id": {"const": "mesopotamian_babylonian"},
+    "source_edition_id": {"type": "string", "minLength": 1},
+    "source_file_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"type": "string", "minLength": 1},
+    "tablet_count": {"type": "integer", "minimum": 1},
+    "birth_record_count": {"type": "integer", "minimum": 1},
+    "tablets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text_number", "artifact_ids", "edition_pages", "birth_records", "non_birth_annotations", "engine_limits"],
+        "properties": {
+          "text_number": {"type": "integer", "minimum": 29, "maximum": 32},
+          "artifact_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "edition_pages": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["book", "pdf"],
+            "properties": {"book": {"type": "string"}, "pdf": {"type": "string"}}
+          },
+          "birth_records": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["record_id", "babylonian_date", "editor_julian_date", "birth_time", "textual_status"],
+              "properties": {
+                "record_id": {"type": "string", "pattern": "^rochberg1998\\.text(29|30|31|32)[a-c]?$"},
+                "babylonian_date": {"type": "string"},
+                "editor_julian_date": {"type": "string"},
+                "birth_time": {"type": "string"},
+                "native": {"type": ["string", "null"]},
+                "textual_status": {"enum": ["preserved", "partly_preserved", "damaged"]}
+              }
+            }
+          },
+          "non_birth_annotations": {"type": "array", "items": {"type": "string"}},
+          "engine_limits": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

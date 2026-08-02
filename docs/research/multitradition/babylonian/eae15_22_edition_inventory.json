@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "scope": "Edition, update, and ancient-commentary inventory for Enuma Anu Enlil lunar-eclipse Tablets 15-22; bibliographic access is not treated as passage inspection.",
+  "controlling_edition": {
+    "source_registry_id": "babylonian_rochberg_halton_eae15_22_1988",
+    "citation": "Francesca Rochberg-Halton, Aspects of Babylonian Celestial Divination: The Lunar Eclipse Tablets of Enuma Anu Enlil, AfO Beiheft 22 (1988), 296 pp.",
+    "coverage": "Tablets 15-22, transliteration, translation, and detailed commentary",
+    "access_status": "bibliographic_records_verified_full_volume_not_acquired",
+    "implementation_gate": "No claim of complete Tablets 15-22 rule coverage until the full edition is legally acquired, hash-locked, and passage-inspected."
+  },
+  "later_updates": [
+    {
+      "source_registry_id": "babylonian_fincke_eae15_19_additions_2016",
+      "coverage": "Tablets 15-19",
+      "citation": "Jeanette C. Fincke, KASKAL 13 (2016), pp. 89-119, DOI 10.1400/251413",
+      "access_status": "metadata_and_author_bibliography_verified_paywalled_full_text_not_inspected"
+    },
+    {
+      "source_registry_id": "babylonian_fincke_eae20_additions_2017",
+      "coverage": "Tablet 20",
+      "citation": "Jeanette C. Fincke, KASKAL 14 (2017), pp. 55-74, DOI 10.1400/257666",
+      "access_status": "metadata_and_author_bibliography_verified_paywalled_full_text_not_inspected"
+    },
+    {
+      "source_registry_id": "babylonian_fincke_eae21_22_additions_2019",
+      "coverage": "Tablets 21-22",
+      "citation": "Jeanette C. Fincke, KASKAL 16 (2019), pp. 95-132, DOI 10.1400/278198",
+      "access_status": "metadata_and_author_bibliography_verified_paywalled_full_text_not_inspected"
+    }
+  ],
+  "open_ancient_commentaries": [
+    {
+      "source_registry_id": "babylonian_ccp_p461229_eae16_19_commentary",
+      "artifact_id": "BM 47447 / P461229",
+      "base_text_scope": "Primarily EAE 16 with final entries from EAE 19",
+      "period": "Achaemenid, year 19 of an Artaxerxes (445, 385, or 339 BCE)",
+      "status": "full_open_transliteration_translation_introduction_notes_and_collation_inspected",
+      "oracc_html_sha256": "a9330a5d48830886a3d5475476937818ceff52c8a576ca8cf2bc2da6e1f50ffc",
+      "oracc_html_bytes": 317570
+    },
+    {
+      "source_registry_id": "babylonian_ccp_p425538_eae21_commentary",
+      "artifact_id": "Sm.683 / P425538",
+      "base_text_scope": "EAE 21 sections II, IV, and VI",
+      "period": "Neo-Assyrian, seventh century BCE",
+      "status": "full_open_transliteration_translation_introduction_notes_and_images_metadata_inspected",
+      "oracc_html_sha256": "d2f0c77ec23f793725f7ca71d6f1c4e3571bfb3fde7615d9b087662152765fbe",
+      "oracc_html_bytes": 53940
+    }
+  ],
+  "method_constraints": [
+    "Ancient commentary is a distinct evidence layer and may redefine, restrict, or rationalize a base omen; it is never silently substituted for the base text.",
+    "A quoted base omen inside a commentary is scoped to that commentary witness unless independently collated against the controlling edition.",
+    "Alternative explanations remain alternatives, not cumulative conditions.",
+    "Broken predicates, uncertain tablet assignments, restored dates, and damaged geographical equations fail closed.",
+    "All state-omen and commentary outputs are historical-use-only, birth-input-ineligible, and customer-prediction-ineligible."
+  ],
+  "negative_search_result": "The Internet Archive helper returned no exact Rochberg-Halton volume for focused title/author searches. CDLI, Google Books, Open Library, WorldCat, and NYPL verified the bibliography but did not supply an openly inspectable full edition."
+}

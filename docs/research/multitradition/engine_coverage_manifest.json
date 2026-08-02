@@ -1,0 +1,1535 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "purpose": "Fail-closed inventory for every tradition and engine branch named in the original culture map.",
+  "status_vocabulary": {
+    "production_verified": "Calculation, interpretation, provenance, validation, rights, cultural review, and publication gates all pass.",
+    "research_verified": "Authoritative or scholarly sources have been inspected and the stated research artifact or design boundary is reproducible, but production gates remain open.",
+    "experimental": "A bounded implementation exists but validation or source authority is insufficient for research_verified status.",
+    "source_limited": "The surviving or currently accessible corpus cannot yet justify the complete proposed module.",
+    "not_implemented": "The module is enumerated but no implementation is claimed or simulated."
+  },
+  "implementation_states": [
+    "validated_research_artifact",
+    "source_design_only",
+    "source_discovery_only",
+    "none"
+  ],
+  "global_product_boundary": {
+    "western_engine_live": true,
+    "nonwestern_live_engines": [],
+    "nonwestern_customer_eligible_modules": [],
+    "historical_use_only_required": true,
+    "prose_may_invent_missing_rules": false,
+    "missing_modules_must_be_reported": true
+  },
+  "coverage_counts_are_not_completion": "A module is complete only at production_verified. A research_verified calendar kernel does not imply an interpretation engine, and a source audit does not imply executable rules.",
+  "tracks": [
+    {
+      "track_id": "indian_jyotisha",
+      "display_name": "Indian Jyotisha",
+      "registry_tradition_ids": [
+        "indian_jyotisha"
+      ],
+      "source_audit": "jyotisha/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "brhajjataka_classical_jataka",
+          "name": "Varahamihira Brhajjataka calculation and planetary-condition pilot",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "jyotisha/brhajjataka_calculation_rule_manifest.json",
+            "jyotisha/brhajjataka_validation_vectors.json",
+            "jyotisha/brhajjataka_planetary_rule_manifest.json",
+            "jyotisha/brhajjataka_planetary_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "controlling Sanskrit edition collation",
+            "independent Sanskrit review",
+            "complete natal procedure",
+            "astronomical convention freeze"
+          ]
+        },
+        {
+          "module_id": "parashari_natal",
+          "name": "Parashari natal framework including houses, yogas, vargas, and dashas",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "jyotisha/source_audit.md"
+          ],
+          "remaining_gates": [
+            "BPHS recension selection",
+            "passage-complete rule extraction",
+            "ayanamsha and node convention",
+            "worked-chart validation"
+          ]
+        },
+        {
+          "module_id": "saravali_natal",
+          "name": "Kalyanavarma Saravali natal pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "jyotisha/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling edition and translation",
+            "Sanskrit review",
+            "rule and precedence extraction"
+          ]
+        },
+        {
+          "module_id": "phaladeepika_natal",
+          "name": "Mantreswara Phaladeepika natal pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "jyotisha/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling edition and translation",
+            "Sanskrit review",
+            "rule and precedence extraction"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "chinese_bazi",
+      "display_name": "Chinese BaZi / Four Pillars",
+      "registry_tradition_ids": [
+        "chinese",
+        "chinese_bazi"
+      ],
+      "source_audit": "bazi/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "bazi_calendar_kernel",
+          "name": "Four Pillars calendar and solar-term calculation profile",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "bazi/source_audit.md",
+            "bazi/sexagenary_kernel_spec.json",
+            "bazi/sexagenary_rule_manifest.json",
+            "bazi/sexagenary_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "named day-count concordance source with two-sided boundary vectors",
+            "named school convention profile for year, month, day, and hour boundaries",
+            "true-solar-time and historical-time lineage attribution",
+            "independent almanac conformance"
+          ]
+        },
+        {
+          "module_id": "yuanhai_ziping_interpretation",
+          "name": "Yuanhai Ziping interpretation pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "bazi/source_audit.md"
+          ],
+          "remaining_gates": [
+            "dated scan alignment",
+            "Chinese textual review",
+            "school-specific precedence rules"
+          ]
+        },
+        {
+          "module_id": "sanming_tonghui_interpretation",
+          "name": "Sanming Tonghui interpretation pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "bazi/source_audit.md"
+          ],
+          "remaining_gates": [
+            "edition and interpolation control",
+            "Chinese review",
+            "complete combination and exception hierarchy"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "ziwei_doushu",
+      "display_name": "Zi Wei Dou Shu",
+      "registry_tradition_ids": [
+        "ziwei_doushu",
+        "ziwei_doushu_source_criticism",
+        "daoist_star_astrology"
+      ],
+      "source_audit": "ziwei/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "ziwei_named_edition_chart",
+          "name": "Named-edition palace and star-placement calculator",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "ziwei/calculation_rule_manifest.json",
+            "ziwei/validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "complete table transcription",
+            "calendar convention freeze",
+            "independent chart comparison"
+          ]
+        },
+        {
+          "module_id": "ziwei_interpretation",
+          "name": "Palace, star, transformation, and timing interpretation",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "ziwei/source_audit.md"
+          ],
+          "remaining_gates": [
+            "named school and edition",
+            "complete primary text",
+            "Chinese review",
+            "combination precedence"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "mesopotamian_babylonian",
+      "display_name": "Mesopotamian and Babylonian Astrology",
+      "registry_tradition_ids": [
+        "mesopotamian_babylonian"
+      ],
+      "source_audit": "babylonian/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "late_babylonian_horoscope_reconstruction",
+          "name": "Late Babylonian horoscope record and astronomy reconstruction",
+          "input_kind": "historical_birth_record",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "babylonian/rochberg_full_corpus_catalog.json",
+            "babylonian/rochberg_texts1_10_astronomy_spec.json",
+            "babylonian/rochberg_texts11_27_astronomy_spec.json",
+            "babylonian/jpl_horizons_crosscheck_spec.json",
+            "babylonian/jpl_horizons_texts11_27_crosscheck_spec.json"
+          ],
+          "remaining_gates": [
+            "Assyriological collation",
+            "visibility and atmospheric criteria",
+            "source-era astronomical convention profiles"
+          ]
+        },
+        {
+          "module_id": "late_babylonian_natal_judgment",
+          "name": "Tablet-specific late Babylonian natal judgments",
+          "input_kind": "historical_birth_record",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "babylonian/rochberg_text10_rule_manifest.json",
+            "babylonian/rochberg_text16_judgment_rule_manifest.json",
+            "babylonian/rochberg_text27_judgment_rule_manifest.json",
+            "babylonian/rochberg_texts2_5_9_judgment_rule_manifest.json"
+          ],
+          "remaining_gates": [
+            "recoverable predicate mapping",
+            "complete judgment corpus",
+            "proof against importing Hellenistic meanings"
+          ]
+        },
+        {
+          "module_id": "enuma_anu_enlil_omen_reader",
+          "name": "Enuma Anu Enlil witness-scoped omen reader",
+          "input_kind": "observed_celestial_omen",
+          "birth_input_eligible": false,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "babylonian/eae20_witness_rule_manifest.json",
+            "babylonian/eae20_witness_validation_vectors.json",
+            "babylonian/eae16_21_commentary_rule_manifest.json",
+            "babylonian/eae16_21_commentary_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "full tablet-family coverage",
+            "recension-specific collation",
+            "Assyriological review"
+          ]
+        },
+        {
+          "module_id": "neo_assyrian_royal_reports",
+          "name": "Neo-Assyrian scholarly-report explorer",
+          "input_kind": "observed_celestial_omen",
+          "birth_input_eligible": false,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "babylonian/saa8_lunar_eclipse_pilot_corpus.json",
+            "babylonian/saa8_316_applied_eclipse_rule_manifest.json",
+            "babylonian/saa8_535_lunar_eclipse_rule_manifest.json",
+            "babylonian/saa8_lunar_eclipse_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "broader report corpus",
+            "selector reconstruction",
+            "historical and political safety review"
+          ]
+        },
+        {
+          "module_id": "mul_apin_calendar",
+          "name": "MUL.APIN star-calendar and observational reconstruction",
+          "input_kind": "historical_date_location",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "babylonian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling edition",
+            "visibility model",
+            "location and epoch fixtures"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "islamicate_persian",
+      "display_name": "Persian, Arabic, and Islamicate Astrology",
+      "registry_tradition_ids": [
+        "islamicate_persian"
+      ],
+      "source_audit": "islamicate/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "al_biruni_reference_conditions",
+          "name": "Al-Biruni reference, firdaria structure, halb, and hayyiz pilot",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "islamicate/al_biruni_reference_condition_spec.json",
+            "islamicate/al_biruni_reference_condition_rule_manifest.json",
+            "islamicate/al_biruni_reference_condition_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "Arabic specialist review",
+            "complete author/work natal procedure",
+            "independent passage-to-predicate reader"
+          ]
+        },
+        {
+          "module_id": "abu_mashar_great_introduction",
+          "name": "Abu Ma'shar Great Introduction doctrine pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "islamicate/abu_mashar_al_qabisi_access_matrix.json",
+            "islamicate/al_biruni_abu_mashar_al_qabisi_candidate_concordance.json"
+          ],
+          "remaining_gates": [
+            "2019 English translation and apparatus",
+            "Arabic review",
+            "Latin-lineage variant resolution"
+          ]
+        },
+        {
+          "module_id": "abu_mashar_abbreviation",
+          "name": "Abu Ma'shar Abbreviation independent work pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "islamicate/abu_mashar_al_qabisi_access_matrix.json",
+            "islamicate/al_biruni_abu_mashar_al_qabisi_candidate_concordance.json"
+          ],
+          "remaining_gates": [
+            "1994 translation and apparatus",
+            "Arabic review",
+            "prohibition against Great Introduction inheritance"
+          ]
+        },
+        {
+          "module_id": "al_qabisi_introduction",
+          "name": "Al-Qabisi Introduction independent doctrine pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "islamicate/abu_mashar_al_qabisi_access_matrix.json",
+            "islamicate/al_biruni_abu_mashar_al_qabisi_candidate_concordance.json"
+          ],
+          "remaining_gates": [
+            "2004 English translation and apparatus",
+            "Arabic review",
+            "Mercury and halb/hayyiz variant adjudication"
+          ]
+        },
+        {
+          "module_id": "islamicate_interrogations",
+          "name": "Author-scoped interrogations and horary",
+          "input_kind": "question_datetime_location",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "islamicate/source_audit.md"
+          ],
+          "remaining_gates": [
+            "Sahl and Mashallah controlling editions",
+            "Arabic/Latin lineage separation",
+            "complete procedural extraction"
+          ]
+        },
+        {
+          "module_id": "islamicate_elections",
+          "name": "Author-scoped electional astrology",
+          "input_kind": "election_request",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "islamicate/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling author/work editions",
+            "procedural and exception extraction",
+            "worked election validation"
+          ]
+        },
+        {
+          "module_id": "islamicate_mundane_conjunctional",
+          "name": "Mundane, dynastic, and great-conjunction astrology",
+          "input_kind": "historical_event_context",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "islamicate/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete critical editions",
+            "attribution control",
+            "political and catastrophe safety restrictions"
+          ]
+        },
+        {
+          "module_id": "islamicate_talismanic_ritual",
+          "name": "Talismanic, magical, and ritual astrology",
+          "input_kind": "ritual_context",
+          "birth_input_eligible": false,
+          "coverage_status": "not_implemented",
+          "implementation_state": "none",
+          "artifacts": [
+            "islamicate/source_audit.md"
+          ],
+          "remaining_gates": [
+            "separate authorization and cultural review",
+            "source and lineage selection",
+            "safety policy"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "tibetan",
+      "display_name": "Tibetan Astrology",
+      "registry_tradition_ids": [
+        "tibetan"
+      ],
+      "source_audit": "tibetan/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "phugpa_calendar",
+          "name": "Phugpa calendar arithmetic profile",
+          "input_kind": "calendar_date_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "tibetan/phugpa_calendar_spec.json",
+            "tibetan/phugpa_calendar_rule_manifest.json",
+            "tibetan/phugpa_calendar_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "institutional concordance",
+            "issued-calendar boundary fixtures",
+            "lineage-qualified review"
+          ]
+        },
+        {
+          "module_id": "tsurphu_calendar",
+          "name": "Tsurphu calendar profile",
+          "input_kind": "calendar_date_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "tibetan/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling lineage sources",
+            "calendar constants",
+            "independent almanac vectors"
+          ]
+        },
+        {
+          "module_id": "kar_tsi_natal",
+          "name": "Kar-tsi Indian-derived natal and astronomical layer",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "tibetan/source_audit.md"
+          ],
+          "remaining_gates": [
+            "teaching texts",
+            "lineage configuration",
+            "worked calculations and interpretations"
+          ]
+        },
+        {
+          "module_id": "nak_tsi_elemental",
+          "name": "Nak-tsi elemental natal layer",
+          "input_kind": "birth_date_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "tibetan/source_audit.md"
+          ],
+          "remaining_gates": [
+            "lineage-qualified source acquisition",
+            "elemental table extraction",
+            "practitioner reproduction"
+          ]
+        },
+        {
+          "module_id": "tibetan_compatibility_obstacle_years",
+          "name": "Compatibility, obstacle-year, and yearly calculation profiles",
+          "input_kind": "birth_date_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "tibetan/source_audit.md"
+          ],
+          "remaining_gates": [
+            "official curriculum source texts",
+            "lineage-qualified interpretation review",
+            "boundary vectors"
+          ]
+        },
+        {
+          "module_id": "tibetan_medical_ritual_divination",
+          "name": "Medical, deceased, geomancy, ritual, and arising-vowel profiles",
+          "input_kind": "specialist_context",
+          "birth_input_eligible": false,
+          "coverage_status": "not_implemented",
+          "implementation_state": "none",
+          "artifacts": [
+            "tibetan/source_audit.md"
+          ],
+          "remaining_gates": [
+            "separate medical and ritual authorization",
+            "qualified lineage collaboration",
+            "safety and dignity review"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "maya",
+      "display_name": "Maya Calendrical Divination",
+      "registry_tradition_ids": [
+        "maya"
+      ],
+      "source_audit": "maya/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "maya_calendar_kernel",
+          "name": "Long Count, Calendar Round, Tzolk'in, and Haab conversion",
+          "input_kind": "calendar_date",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "maya/calendar_kernel_spec.json",
+            "maya/calendar_rule_manifest.json",
+            "maya/calendar_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "correlation profile selection",
+            "independent institutional conformance",
+            "historical timezone boundary policy"
+          ]
+        },
+        {
+          "module_id": "maya_codical_almanacs",
+          "name": "Ancient codical almanac explorer",
+          "input_kind": "codex_calendar_position",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "maya/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete almanac passage extraction",
+            "epigraphic review",
+            "codex-specific variant control"
+          ]
+        },
+        {
+          "module_id": "maya_birth_date_reconstruction",
+          "name": "Historical birth-date calendar reconstruction",
+          "input_kind": "birth_date",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "maya/source_audit.md"
+          ],
+          "remaining_gates": [
+            "correlation disclosure",
+            "historically warranted interpretation corpus",
+            "separation from living practice"
+          ]
+        },
+        {
+          "module_id": "living_maya_daykeeping",
+          "name": "Living Maya daykeeping reading",
+          "input_kind": "birth_date_and_community_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "maya/source_audit.md"
+          ],
+          "remaining_gates": [
+            "community partnership and consent",
+            "language and regional lineage selection",
+            "living-practice validation"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "nahua_central_mexican",
+      "display_name": "Nahua and Central Mexican Tonalpohualli",
+      "registry_tradition_ids": [
+        "nahua_central_mexican"
+      ],
+      "source_audit": "nahua/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "tonalpohualli_calendar",
+          "name": "Tonalpohualli, trecena, and Calendar Round reconstruction",
+          "input_kind": "calendar_date",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "nahua/source_audit.md",
+            "nahua/tonalpohualli_cycle_spec.json",
+            "nahua/calendar_rule_manifest.json",
+            "nahua/calendar_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "authoritative correlation and day-boundary profile",
+            "primary-codex and colonial fixture suite",
+            "Nahuatl and codicological review"
+          ]
+        },
+        {
+          "module_id": "tonalamatl_divination",
+          "name": "Codex-scoped tonalamatl divination",
+          "input_kind": "calendar_position_and_codex",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "nahua/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete pictorial passage corpus",
+            "Nahuatl and iconographic review",
+            "regional variant control"
+          ]
+        },
+        {
+          "module_id": "living_nahua_practice",
+          "name": "Living Nahua calendrical practice",
+          "input_kind": "birth_date_and_community_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "nahua/source_audit.md"
+          ],
+          "remaining_gates": [
+            "community partnership",
+            "regional and language identity",
+            "consent and cultural review"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "pharaonic_egyptian",
+      "display_name": "Pharaonic Egyptian Astral and Hemerological Traditions",
+      "registry_tradition_ids": [
+        "pharaonic_egyptian"
+      ],
+      "source_audit": "egyptian/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "egyptian_calendar_reconstruction",
+          "name": "Civil-calendar historical date reconstruction",
+          "input_kind": "historical_date",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "egyptian/source_audit.md",
+            "egyptian/civil_calendar_spec.json",
+            "egyptian/civil_calendar_rule_manifest.json",
+            "egyptian/civil_calendar_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "reign and chronology profiles",
+            "historical anchor fixtures",
+            "Egyptological and calendrical review"
+          ]
+        },
+        {
+          "module_id": "egyptian_hemerology",
+          "name": "Papyrus-scoped lucky and unlucky day explorer",
+          "input_kind": "egyptian_calendar_date",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "egyptian/source_audit.md",
+            "egyptian/budge_sallier_iv_access_manifest.json"
+          ],
+          "remaining_gates": [
+            "complete transcription and critical translation for the acquired Sallier IV facsimile",
+            "Bakir 1966 and Leitz 1994 collation",
+            "witness-specific rule corpus",
+            "Egyptological review"
+          ]
+        },
+        {
+          "module_id": "egyptian_decan_explorer",
+          "name": "Decan and diagonal-star-table explorer",
+          "input_kind": "historical_time_and_object",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "egyptian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "object-specific tables",
+            "chronology and orientation model",
+            "Egyptological and astronomical review"
+          ]
+        },
+        {
+          "module_id": "native_egyptian_birth_reading",
+          "name": "Native pharaonic birth reading",
+          "input_kind": "birth_date",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "none",
+          "artifacts": [
+            "egyptian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "surviving natal authority",
+            "proof against importing Hellenistic houses and zodiac meanings"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "japanese_onmyodo",
+      "display_name": "Japanese Onmyodo",
+      "registry_tradition_ids": [
+        "japanese_onmyodo"
+      ],
+      "source_audit": "onmyodo/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "onmyodo_calendar_direction",
+          "name": "Period-specific calendar and directional selection",
+          "input_kind": "date_location_direction",
+          "birth_input_eligible": false,
+          "coverage_status": "research_verified",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "onmyodo/source_audit.md"
+          ],
+          "remaining_gates": [
+            "period and text freeze",
+            "Japanese text review",
+            "historical calendar reconstruction"
+          ]
+        },
+        {
+          "module_id": "onmyodo_shikiban",
+          "name": "Shikiban divination",
+          "input_kind": "question_or_event_datetime_location",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "onmyodo/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete technical corpus",
+            "diagram and procedure extraction",
+            "specialist reproduction"
+          ]
+        },
+        {
+          "module_id": "onmyodo_birth_reading",
+          "name": "Birth-input reading",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "not_implemented",
+          "implementation_state": "none",
+          "artifacts": [
+            "onmyodo/source_audit.md"
+          ],
+          "remaining_gates": [
+            "proof of period-specific birth-input procedure",
+            "separation from modern Nine Star Ki"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "burmese",
+      "display_name": "Burmese and Myanmar Regional Astrology",
+      "registry_tradition_ids": [
+        "burmese",
+        "burmese_arakanese",
+        "burmese_pao"
+      ],
+      "source_audit": "burmese/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "burmese_calendar",
+          "name": "Burmese lunisolar calendar and era reconstruction",
+          "input_kind": "calendar_date",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "burmese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "formula and era-version manifest",
+            "official almanac vectors",
+            "historical reform boundaries"
+          ]
+        },
+        {
+          "module_id": "burmese_eight_day_planetary",
+          "name": "Eight-day planetary and directional astrology",
+          "input_kind": "birth_weekday_and_time",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "burmese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling Burmese sources",
+            "Wednesday split boundary",
+            "regional review"
+          ]
+        },
+        {
+          "module_id": "mahabote",
+          "name": "Mahabote birth reading",
+          "input_kind": "birth_date",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "burmese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "pre-modern or authoritative Burmese rule text",
+            "Burmese review",
+            "worked reading validation"
+          ]
+        },
+        {
+          "module_id": "burmese_manuscript_astrology",
+          "name": "Manuscript-scoped regional astrological reading",
+          "input_kind": "manuscript_and_birth_context",
+          "birth_input_eligible": "conditional",
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "burmese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete digitization",
+            "Burmese/Pali transcription and translation",
+            "provenance-specific rule extraction"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "thai",
+      "display_name": "Thai, Lanna, and Lue Astrology",
+      "registry_tradition_ids": [
+        "thai",
+        "thai_lanna",
+        "thai_lanna_lue",
+        "mainland_southeast_asian_calendars"
+      ],
+      "source_audit": "thai/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "thai_suriyayatra",
+          "name": "Thai Suriyayatra calculation profile",
+          "input_kind": "date_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "thai/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling historical formulas",
+            "issued-calendar fixtures",
+            "machine-readable calculation manifest"
+          ]
+        },
+        {
+          "module_id": "thai_judgment_corpora",
+          "name": "Named Thai judgment-text packs",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "thai/source_audit.md"
+          ],
+          "remaining_gates": [
+            "Chakratipani and Tamradao editions",
+            "Thai review",
+            "rule hierarchy extraction"
+          ]
+        },
+        {
+          "module_id": "lanna_lue_regional",
+          "name": "Lanna and Lue regional astrology",
+          "input_kind": "birth_or_election_context",
+          "birth_input_eligible": "conditional",
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "thai/source_audit.md"
+          ],
+          "remaining_gates": [
+            "regional manuscripts",
+            "language and provenance review",
+            "calendar lineage separation"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "khmer",
+      "display_name": "Khmer Astrology",
+      "registry_tradition_ids": [
+        "khmer",
+        "khmer_living_practice",
+        "mainland_southeast_asian_calendars"
+      ],
+      "source_audit": "khmer/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "khmer_ephemeris",
+          "name": "Khmer ephemeris and calendar reconstruction",
+          "input_kind": "date_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "khmer/source_audit.md"
+          ],
+          "remaining_gates": [
+            "formula-version manifest",
+            "inscription and almanac fixtures",
+            "machine-readable implementation"
+          ]
+        },
+        {
+          "module_id": "khmer_archival_rules",
+          "name": "Archival manuscript judgment pack",
+          "input_kind": "birth_or_election_context",
+          "birth_input_eligible": "conditional",
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "khmer/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete manuscript access",
+            "Khmer transcription and translation",
+            "rule extraction"
+          ]
+        },
+        {
+          "module_id": "khmer_living_practice",
+          "name": "Living Khmer astrological practice",
+          "input_kind": "birth_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "khmer/source_audit.md"
+          ],
+          "remaining_gates": [
+            "practitioner collaboration",
+            "consent and cultural review",
+            "blind reproduction"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "sinhalese",
+      "display_name": "Sri Lankan Sinhalese Astrology",
+      "registry_tradition_ids": [
+        "sri_lankan_sinhalese",
+        "sri_lankan_tamil_jyotisha",
+        "transregional_pali_astral_sciences"
+      ],
+      "source_audit": "sinhalese/source_audit.md",
+      "overall_status": "source_limited",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "daivajnakamadhenu",
+          "name": "Daivajnakamadhenu historical text pack",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "sinhalese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete witness acquisition",
+            "Sanskrit/Sinhala review",
+            "Sri Lankan adaptation boundaries"
+          ]
+        },
+        {
+          "module_id": "sinhalese_living_natal",
+          "name": "Living Sinhalese natal and electional practice",
+          "input_kind": "birth_or_election_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "sinhalese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "named practitioner lineage",
+            "technical manuals",
+            "blind reproduction and cultural review"
+          ]
+        },
+        {
+          "module_id": "sri_lankan_tamil_jyotisha",
+          "name": "Sri Lankan Tamil Jyotisha regional track",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "sinhalese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "Tamil sources",
+            "regional convention map",
+            "separation from Sinhalese and Indian packs"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "mon",
+      "display_name": "Mon Astral Practices",
+      "registry_tradition_ids": [
+        "mon_astral_practices",
+        "transregional_pali_astral_sciences"
+      ],
+      "source_audit": "mon/source_audit.md",
+      "overall_status": "source_limited",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "mon_manuscript_astrology",
+          "name": "Mon manuscript-scoped astrology",
+          "input_kind": "manuscript_and_context",
+          "birth_input_eligible": "conditional",
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "mon/source_audit.md"
+          ],
+          "remaining_gates": [
+            "EAP1432 full corpus access",
+            "Mon transcription and translation",
+            "provenance-specific technique map"
+          ]
+        },
+        {
+          "module_id": "mon_calendar",
+          "name": "Mon calendar profile",
+          "input_kind": "calendar_date",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "mon/source_audit.md"
+          ],
+          "remaining_gates": [
+            "Mon-specific evidence",
+            "proof against substituting Burmese calendar rules",
+            "boundary fixtures"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "mongolian",
+      "display_name": "Mongolian Zurkhai and Astral Traditions",
+      "registry_tradition_ids": [
+        "mongolian_zurkhai",
+        "kalmyk_mongolian_zurkhai",
+        "mongolian_astral_manuscripts",
+        "mongolian_buddhist_astral_practice"
+      ],
+      "source_audit": "mongolian/source_audit.md",
+      "overall_status": "source_limited",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "mongolian_zurkhai_calendar",
+          "name": "Mongolian Zurkhai calendar profile",
+          "input_kind": "calendar_date_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "mongolian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "calendar-school selection",
+            "Mongolian almanac fixtures",
+            "proof against substituting Tibetan profiles"
+          ]
+        },
+        {
+          "module_id": "mongolian_seasonal_elections",
+          "name": "Mongolian-language seasonal electional manual",
+          "input_kind": "seasonal_election_context",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "mongolian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete text and translation",
+            "Mongolian specialist review",
+            "procedural vectors"
+          ]
+        },
+        {
+          "module_id": "mongolian_natal",
+          "name": "Mongolian natal reading",
+          "input_kind": "birth_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "mongolian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "technical natal sources",
+            "lineage-qualified review",
+            "regional and language boundaries"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "korean",
+      "display_name": "Korean Saju, Myeongri, and Related Traditions",
+      "registry_tradition_ids": [
+        "korean_calendar_science",
+        "korean_saju_myeongri",
+        "korean_myeonggwa_and_electional",
+        "korean_tojeong_bigyeol"
+      ],
+      "source_audit": "korean/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "korean_calendar_profile",
+          "name": "Period-specific Korean calendar and Four-Pillars calculation profile",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "korean/source_audit.md"
+          ],
+          "remaining_gates": [
+            "Joseon/modern period selection",
+            "issued calendar fixtures",
+            "machine-readable boundary suite"
+          ]
+        },
+        {
+          "module_id": "korean_saju_interpretation",
+          "name": "Korean Saju and Myeongri interpretation",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "korean/source_audit.md"
+          ],
+          "remaining_gates": [
+            "named Korean school and texts",
+            "Korean review",
+            "separation from generic Chinese BaZi"
+          ]
+        },
+        {
+          "module_id": "tojeong_bigyeol",
+          "name": "Tojeong Bigyeol annual-divination engine",
+          "input_kind": "birth_and_year_context",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "korean/source_audit.md"
+          ],
+          "remaining_gates": [
+            "edition concordance",
+            "calculation procedure",
+            "Korean interpretation review"
+          ]
+        },
+        {
+          "module_id": "korean_electional",
+          "name": "Korean Myeonggwahak and electional practice",
+          "input_kind": "election_request",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "korean/source_audit.md"
+          ],
+          "remaining_gates": [
+            "technical historical corpus",
+            "procedure extraction",
+            "period-specific calendar integration"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "vietnamese",
+      "display_name": "Vietnamese Calendar Science and Tu Vi",
+      "registry_tradition_ids": [
+        "vietnamese_calendar_science",
+        "vietnamese_tu_vi"
+      ],
+      "source_audit": "vietnamese/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "vietnamese_modern_lunisolar_calendar",
+          "name": "Modern Vietnamese lunisolar boundary profile",
+          "input_kind": "calendar_date_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "vietnamese/calendar_rule_manifest.json",
+            "vietnamese/calendar_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "legal/official independent fixtures",
+            "historical applicability boundary",
+            "institutional conformance"
+          ]
+        },
+        {
+          "module_id": "vietnamese_historical_calendars",
+          "name": "Dynasty-specific historical Vietnamese calendars",
+          "input_kind": "historical_date_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "vietnamese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "dynasty-specific issued calendar corpus",
+            "reform and meridian history",
+            "dated boundary vectors"
+          ]
+        },
+        {
+          "module_id": "vietnamese_tu_vi",
+          "name": "Named-school Vietnamese Tu Vi reading",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "vietnamese/source_audit.md"
+          ],
+          "remaining_gates": [
+            "named Vietnamese school and texts",
+            "Vietnamese review",
+            "proof against substituting Chinese Zi Wei tables"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "medieval_jewish",
+      "display_name": "Medieval Jewish Astrology",
+      "registry_tradition_ids": [
+        "medieval_jewish"
+      ],
+      "source_audit": "medieval_jewish/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "ibn_ezra_revolutions",
+          "name": "Ibn Ezra nativity-revolution timing pilot",
+          "input_kind": "birth_datetime_location_and_year",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "medieval_jewish/rule_manifest.json",
+            "medieval_jewish/validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "complete work procedure",
+            "Hebrew review",
+            "continuous-horoscopy integration"
+          ]
+        },
+        {
+          "module_id": "ibn_ezra_nativities",
+          "name": "Ibn Ezra nativities and continuous horoscopy",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "medieval_jewish/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete critical editions",
+            "Hebrew/Latin lineage separation",
+            "full procedural rule extraction"
+          ]
+        },
+        {
+          "module_id": "jewish_world_astrology",
+          "name": "World astrology and reasons literature",
+          "input_kind": "historical_event_context",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "medieval_jewish/source_audit.md"
+          ],
+          "remaining_gates": [
+            "work-specific editions",
+            "Hebrew review",
+            "political prediction safety"
+          ]
+        },
+        {
+          "module_id": "jewish_elections_interrogations",
+          "name": "Elections and interrogations",
+          "input_kind": "question_or_election_context",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "medieval_jewish/source_audit.md"
+          ],
+          "remaining_gates": [
+            "controlling editions",
+            "procedural extraction",
+            "Arabic/Latin dependency mapping"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "pre_islamic_arabian",
+      "display_name": "Pre-Islamic and Early Arabian Star Calendars",
+      "registry_tradition_ids": [
+        "pre_islamic_arabian",
+        "ancient_north_arabian"
+      ],
+      "source_audit": "pre_islamic_arabian/source_audit.md",
+      "overall_status": "source_limited",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "anwa_concordance",
+          "name": "Ibn Qutayba anwa source concordance",
+          "input_kind": "seasonal_observation",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "pre_islamic_arabian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "complete Arabic edition and translation",
+            "Arabic philological review",
+            "pre-Islamic versus later compilation boundary"
+          ]
+        },
+        {
+          "module_id": "arabian_lunar_mansion_calendar",
+          "name": "Observational lunar-mansion and seasonal calendar",
+          "input_kind": "observation_date_location",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "pre_islamic_arabian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "heliacal visibility profile",
+            "regional star identifications",
+            "historical observation fixtures"
+          ]
+        },
+        {
+          "module_id": "ancient_north_arabian_inscriptions",
+          "name": "Ancient North Arabian inscription/source concordance",
+          "input_kind": "inscription_context",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_discovery_only",
+          "artifacts": [
+            "pre_islamic_arabian/source_audit.md"
+          ],
+          "remaining_gates": [
+            "inscription corpus",
+            "language and archaeological review",
+            "proof against later lunar-mansion back-projection"
+          ]
+        }
+      ]
+    }
+  ]
+}

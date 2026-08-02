@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "indian_jyotisha",
+  "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+  "source_pack_id": "varahamihira_brhajjataka_gretil_aiyar_1905_v1",
+  "source_edition_id": "brhajjataka_gretil_1979_aiyar_1905_alignment",
+  "source_registry_ids": ["jyotisha_varahamihira_brhajjataka_gretil", "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Selected Chapter 2 rules were aligned between GRETIL's Sanskrit input based on the 1979 reprint and Aiyar's 1905 English translation. Only structural classifications and strength qualifiers with clear alignment are encoded. No numerical shadbala score, continuous aspect orb, brilliance threshold, planetary-war algorithm, or mixed-Mercury resolution has been invented. Independent Sanskrit and facsimile review remain pending.",
+  "rules": [
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.05.benefic_malefic_classification",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "planetary_benefic_malefic_classification"},
+      "conditions": {
+        "all": [
+          {"fact": "classical_planet", "operator": "in", "value": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]},
+          {"fact": "moon_phase_half", "operator": "known"},
+          {"fact": "mercury_conjunction_context", "operator": "known_when_planet_is_mercury"}
+        ]
+      },
+      "conclusion": {
+        "type": "conditional_classification",
+        "malefic": ["sun", "mars", "saturn", "waning_moon", "mercury_joined_to_any_malefic_in_this_list"],
+        "benefic": ["jupiter", "venus", "waxing_moon", "mercury_joined_to_any_benefic_in_this_list"],
+        "unresolved": ["mercury_unjoined", "mercury_joined_to_both_categories", "exact_phase_boundary"]
+      },
+      "priority": null,
+      "exceptions": [
+        "The waxing-Moon benefic classification follows the contrast implied by the verse and Aiyar's note; a Sanskrit reviewer must confirm the syntax.",
+        "The passage does not resolve Mercury joined simultaneously to benefic and malefic planets or Mercury with no relevant conjunction.",
+        "Rahu and Ketu are not added to this seven-planet classification from a different source."
+      ],
+      "conflicts_with": ["generic_fixed_mercury_benefic_classification", "generic_nodes_added_to_brhajjataka_02.05"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.05a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 5 and NOTES", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "translation_and_commentary_inspected_with_ambiguity_retained"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Expose the phase and conjunction evidence. If Mercury's classification is unresolved, downstream rules requiring a benefic/malefic label must fan out or abstain.",
+      "review_status": "verse_aligned_syntax_phase_boundary_and_facsimile_review_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.13.aspect_strengths",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "graha_drishti_strength_by_relative_house"},
+      "conditions": {
+        "all": [
+          {"fact": "aspecting_classical_planet", "operator": "known"},
+          {"fact": "target_relative_house_inclusive", "operator": "in", "value": [3, 4, 5, 7, 8, 9, 10]}
+        ]
+      },
+      "conclusion": {
+        "type": "fractional_aspect_lookup",
+        "baseline_fraction_by_relative_house": {"3": "1/4", "10": "1/4", "5": "1/2", "9": "1/2", "4": "3/4", "8": "3/4", "7": "1"},
+        "full_aspect_overrides": {
+          "saturn": [3, 10],
+          "jupiter": [5, 9],
+          "mars": [4, 8]
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "Aiyar's NOTES add middle-point geometry and an extension of fifteen degrees on either side. That continuous-orb construction is commentary and is not encoded as verse text here.",
+        "The rule does not import Western applying/separating aspects, aspect orbs, or sign-based whole-sign doctrine."
+      ],
+      "conflicts_with": ["western_aspect_orbs", "generic_all_jyotisha_aspects_full_strength"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.13a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 13 and NOTES", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "translation_and_commentary_distinguished"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Show the relative house, baseline fraction, and any planet-specific override. Do not use Aiyar's continuous orb until it is encoded as a separately attributed commentary rule.",
+      "review_status": "verse_aligned_aspect_semantics_and_facsimile_review_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.16-17.natural_relationships",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "brhajjataka_satyacharya_natural_relationship_table",
+      "period": "satyacharya_view_restated_by_varahamihira_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "natural_planetary_relationship"},
+      "conditions": {"all": [{"fact": "subject_planet", "operator": "in", "value": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]}]},
+      "conclusion": {
+        "type": "directed_relationship_lookup",
+        "relations": {
+          "sun": {"friends": ["moon", "mars", "jupiter"], "neutral": ["mercury"], "enemies": ["venus", "saturn"]},
+          "moon": {"friends": ["sun", "mercury"], "neutral": ["mars", "jupiter", "venus", "saturn"], "enemies": []},
+          "mars": {"friends": ["sun", "moon", "jupiter"], "neutral": ["venus", "saturn"], "enemies": ["mercury"]},
+          "mercury": {"friends": ["sun", "venus"], "neutral": ["mars", "jupiter", "saturn"], "enemies": ["moon"]},
+          "jupiter": {"friends": ["sun", "moon", "mars"], "neutral": ["saturn"], "enemies": ["mercury", "venus"]},
+          "venus": {"friends": ["mercury", "saturn"], "neutral": ["mars", "jupiter"], "enemies": ["sun", "moon"]},
+          "saturn": {"friends": ["mercury", "venus"], "neutral": ["jupiter"], "enemies": ["sun", "moon", "mars"]}
+        }
+      },
+      "priority": null,
+      "exceptions": ["Relationships are directed and must be evaluated from each subject planet; do not assume symmetry."],
+      "conflicts_with": ["jyotisha.varahamihira.brhajjataka.02.15.reported_some_friend_table"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.16a-b and BJ_02.17a-b", "verification": "sanskrit_verses_and_stable_ids_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanzas 16-17", "location": "OCR aligned to printed chapter and stanzas; page image review pending", "verification": "english_translation_table_inspected"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Name this as the Satyacharya relationship table restated in Brhajjataka. Do not merge it with the different friend list introduced as the view of some in stanza 15.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.18.temporary_relationships",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "temporary_planetary_relationship"},
+      "conditions": {"all": [{"fact": "other_planet_relative_house_from_subject_planet", "operator": "range", "minimum_inclusive": 1, "maximum_inclusive": 12}]},
+      "conclusion": {
+        "type": "relative_house_classification",
+        "temporary_friend_houses_inclusive": [2, 12, 11, 3, 10, 4],
+        "temporary_enemy_houses_inclusive": [1, 5, 6, 7, 8, 9]
+      },
+      "priority": null,
+      "exceptions": ["The relationship is calculated from the subject planet to the other planet and may differ in the reverse direction if exact house/sign conventions differ."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.18a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 18", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "english_translation_ocr_inspected"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Show the subject, other planet, and inclusive relative house. Do not substitute angular separation or Western aspect type.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.18.temporary_exaltation_friend_variant",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "brhajjataka_reported_kecit_temporary_friend_augmentation",
+      "period": "variant_reported_in_varahamihira_text_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "temporary_planetary_relationship", "variant": "reported_some_exaltation_augmentation"},
+      "conditions": {
+        "all": [
+          {"fact": "other_planet.sign", "operator": "equals", "value_from": "subject_planet.exaltation_sign"},
+          {"fact": "jyotisha.varahamihira.brhajjataka.01.13.exaltation_depression", "operator": "available"}
+        ]
+      },
+      "conclusion": {"type": "temporary_relationship_override", "relationship": "friend"},
+      "priority": null,
+      "exceptions": ["The translation explicitly marks this augmentation as the view of some; it is not enabled by the base stanza-18 profile."],
+      "conflicts_with": ["base_temporary_relationship_without_exaltation_augmentation"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.18a-b", "verification": "sanskrit_variant_marker_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 18", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "reported_variant_wording_inspected"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Enable only in a named variant profile and show that it overrides the base relative-house classification for this pair.",
+      "review_status": "verse_aligned_variant_scope_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.19.positional_strength_qualifiers",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "sthanabala_qualifier_membership"},
+      "conditions": {"any": [
+        {"fact": "planet.in_exaltation_sign", "operator": "equals", "value": true},
+        {"fact": "planet.in_natural_friend_sign", "operator": "equals", "value": true},
+        {"fact": "planet.in_moolatrikona_sign", "operator": "equals", "value": true},
+        {"fact": "planet.in_own_navamsa", "operator": "equals", "value": true},
+        {"fact": "planet.in_own_sign", "operator": "equals", "value": true}
+      ]},
+      "conclusion": {"type": "strength_qualifier", "qualifier": "sthanabala_present", "numeric_weight": null},
+      "priority": null,
+      "exceptions": ["This verse names qualifying placements but does not assign the numerical weights used by later shadbala software or tables."],
+      "conflicts_with": ["unsourced_numeric_shadbala_weights"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.19a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 19", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "english_translation_ocr_inspected"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Report each qualifying placement separately. Do not output a strength total or rank from this rule alone.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.19.directional_strength",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "dikbala_by_angular_house"},
+      "conditions": {"all": [{"fact": "planet.house_from_ascendant", "operator": "in", "value": [1, 4, 7, 10]}]},
+      "conclusion": {
+        "type": "planet_house_lookup",
+        "directional_strength_houses": {
+          "mercury": 1,
+          "jupiter": 1,
+          "sun": 10,
+          "mars": 10,
+          "saturn": 7,
+          "moon": 4,
+          "venus": 4
+        }
+      },
+      "priority": null,
+      "exceptions": ["Aiyar's NOTES report another commentator reading that uses directional triplicity signs. That alternative is not silently substituted for the angular-house rule."],
+      "conflicts_with": ["aiyar_reported_directional_triplicity_commentator_variant"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.19a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 19 and NOTES", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "translation_and_commentarial_variant_distinguished"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Show the planet and actual angular house. Do not substitute a directional-sign rule unless its separate variant is selected and encoded.",
+      "review_status": "verse_aligned_direction_semantics_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.20.motional_strength",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "cheshtabala_qualifier_membership"},
+      "conditions": {"any": [
+        {"all": [{"fact": "planet", "operator": "in", "value": ["sun", "moon"]}, {"fact": "planet.sign", "operator": "in", "value": ["capricorn", "aquarius", "pisces", "aries", "taurus", "gemini"]}]},
+        {"all": [{"fact": "planet", "operator": "in", "value": ["mars", "mercury", "jupiter", "venus", "saturn"]}, {"fact": "planet.motion", "operator": "equals", "value": "retrograde"}]},
+        {"all": [{"fact": "planet", "operator": "in", "value": ["mars", "mercury", "jupiter", "venus", "saturn"]}, {"fact": "planet.samagama_status", "operator": "equals", "value": true}]},
+        {"all": [{"fact": "planet", "operator": "in", "value": ["mars", "mercury", "jupiter", "venus", "saturn"]}, {"fact": "planet.greatest_brilliancy_status", "operator": "equals", "value": true}]},
+        {"all": [{"fact": "planet", "operator": "in", "value": ["mars", "mercury", "jupiter", "venus", "saturn"]}, {"fact": "planet.is_northern_in_planetary_war", "operator": "equals", "value": true}]}
+      ]},
+      "conclusion": {"type": "strength_qualifier", "qualifier": "cheshtabala_present", "numeric_weight": null},
+      "priority": null,
+      "exceptions": [
+        "Aiyar renders samagama as conjunction with the Moon, while the inspected Sanskrit line requires specialist review before that narrowing is accepted; the engine fact remains source-labeled samagama_status.",
+        "Aiyar's NOTES provide approximate elongations for greatest brilliancy. They are commentary and are not encoded here.",
+        "Planetary-war eligibility and northern-planet determination require a separate source-scoped calculation specification."
+      ],
+      "conflicts_with": ["modern_numeric_cheshtabala_silently_attributed_to_bj_02.20"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.20a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 20 and NOTES", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "translation_and_commentary_distinguished_with_samagama_ambiguity_retained"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Report only the source-scoped qualifying condition. Do not compute modern cheshtabala points, approximate brilliance thresholds, or planetary-war results from this rule alone.",
+      "review_status": "verse_aligned_samagama_war_brilliancy_and_facsimile_review_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.21.temporal_strength_day_night",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "kalabala_day_night_qualifier"},
+      "conditions": {"all": [{"fact": "source_scoped_day_night_status", "operator": "in", "value": ["day", "night"]}]},
+      "conclusion": {
+        "type": "planet_time_lookup",
+        "night_strength": ["moon", "mars", "saturn", "mercury"],
+        "day_strength": ["sun", "jupiter", "venus", "mercury"],
+        "both_day_and_night": ["mercury"]
+      },
+      "priority": null,
+      "exceptions": ["This passage does not define the astronomical horizon/refraction convention used to determine day versus night; that belongs in the selected Jyotisha astronomy profile."],
+      "conflicts_with": ["western_sect_substituted_for_brhajjataka_kalabala"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.21a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 21", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "english_translation_ocr_inspected"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Call this the source's day/night temporal-strength qualifier, not Western sect. Show the day/night fact and its astronomical profile.",
+      "review_status": "verse_aligned_day_night_boundary_and_facsimile_review_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.21.temporal_strength_lunar_phase",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "kalabala_lunar_phase_qualifier"},
+      "conditions": {
+        "all": [
+          {"fact": "moon_phase_half", "operator": "in", "value": ["waxing", "waning"]},
+          {"fact": "jyotisha.varahamihira.brhajjataka.02.05.benefic_malefic_classification", "operator": "resolved"}
+        ]
+      },
+      "conclusion": {
+        "type": "category_time_lookup",
+        "waning_moon_half_strength_category": "malefic",
+        "waxing_moon_half_strength_category": "benefic"
+      },
+      "priority": null,
+      "exceptions": ["If Mercury's benefic/malefic category is unresolved, this rule must not force a single Mercury result.", "Exact waxing/waning boundary treatment remains part of the calendar/astronomy profile."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.21a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 21", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "english_translation_ocr_inspected"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Show the resolved planet category and lunar half. Abstain at unresolved phase boundaries or mixed Mercury classifications.",
+      "review_status": "verse_aligned_phase_boundary_and_facsimile_review_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.02.21.natural_strength_order",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter2_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {"work": "Brhajjataka", "technique": "naisargikabala_relative_order"},
+      "conditions": {"all": [{"fact": "classical_planet", "operator": "in", "value": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]}]},
+      "conclusion": {
+        "type": "strict_relative_order",
+        "weakest_to_strongest": ["saturn", "mars", "mercury", "jupiter", "venus", "moon", "sun"],
+        "numeric_weights": null
+      },
+      "priority": null,
+      "exceptions": ["The verse supplies an ordinal order, not numerical shadbala values or ratios."],
+      "conflicts_with": ["modern_numeric_naisargikabala_values_silently_attributed_to_bj_02.21"],
+      "source_passages": [
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_gretil", "work": "Brhajjataka", "section": "Grahabheda", "location": "BJ_02.21a-b", "verification": "sanskrit_verse_and_stable_id_inspected"},
+        {"edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive", "work": "The Brihat Jataka", "section": "Chapter II, stanza 21", "location": "OCR aligned to printed chapter and stanza; page image review pending", "verification": "english_translation_ocr_inspected"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Use only as an ordinal source fact. Do not convert the order into arbitrary points or let it override other strength types without a source-defined precedence rule.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    }
+  ]
+}

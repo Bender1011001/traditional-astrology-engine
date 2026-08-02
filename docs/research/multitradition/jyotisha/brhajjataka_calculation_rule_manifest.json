@@ -1,0 +1,603 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "indian_jyotisha",
+  "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+  "source_pack_id": "varahamihira_brhajjataka_gretil_aiyar_1905_v1",
+  "source_edition_id": "brhajjataka_gretil_1979_aiyar_1905_alignment",
+  "source_registry_ids": ["jyotisha_varahamihira_brhajjataka_gretil", "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Chapter 1 rules were aligned between the GRETIL machine-readable Sanskrit input based on the 1979 Oriental Books Reprint Corporation edition and N. Chidambaram Aiyar's 1905 second-edition English translation. The Sanskrit has not yet been independently retranslated or collated to the controlling page images. Aiyar's NOTES are treated as commentary, not silently attributed to Varahamihira. The scan title page says Registered Copyright although Internet Archive metadata has no populated rights field; this pack is internal research only.",
+  "rules": [
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.04.sign_nakshatra_quarter_partition",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "zodiac_and_nakshatra_quarter_partition"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "ecliptic_circle", "operator": "declared"},
+          {"fact": "zodiac_reference_zero", "operator": "declared"}
+        ]
+      },
+      "conclusion": {
+        "type": "partition_definition",
+        "zodiac_sign_count": 12,
+        "nakshatra_quarters_per_sign": 9,
+        "nakshatra_quarters_total": 108,
+        "first_sign": "aries",
+        "first_named_nakshatra": "asvini"
+      },
+      "priority": null,
+      "exceptions": [
+        "The passage does not define a modern ayanamsha value, epoch, precession model or ephemeris.",
+        "Aiyar's note connecting the starting point to a particular Revati position is commentator material and is not encoded as Varahamihira's universal zodiac zero."
+      ],
+      "conflicts_with": [
+        "generic_modern_ayanamsha_silently_attributed_to_varahamihira"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.04a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 4",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "english_translation_ocr_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Do not calculate or publish sidereal positions until a named astronomical profile supplies the zodiac zero independently. Never present Aiyar's explanatory note as the text's ayanamsha rule.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "sign_rulership"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "zodiac_sign", "operator": "in", "value": ["aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"]}
+        ]
+      },
+      "conclusion": {
+        "type": "lookup_table",
+        "rulers": {
+          "aries": "mars",
+          "taurus": "venus",
+          "gemini": "mercury",
+          "cancer": "moon",
+          "leo": "sun",
+          "virgo": "mercury",
+          "libra": "venus",
+          "scorpio": "mars",
+          "sagittarius": "jupiter",
+          "capricorn": "saturn",
+          "aquarius": "saturn",
+          "pisces": "jupiter"
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "This seven-planet table does not add modern outer planets as sign rulers."
+      ],
+      "conflicts_with": [
+        "modern_outer_planet_sign_rulers"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.06a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 6",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "english_translation_ocr_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Attribute this table to the selected Brhajjataka pack and do not silently extend it with modern rulerships.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "navamsa_assignment"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_scoped_zodiac_sign", "operator": "known"},
+          {"fact": "longitude_within_sign", "operator": "range", "minimum_inclusive": 0, "maximum_exclusive": 30}
+        ]
+      },
+      "conclusion": {
+        "type": "equal_division_assignment",
+        "parts_per_sign": 9,
+        "part_size_degrees": "3+1/3",
+        "advance": "one zodiac sign per successive navamsa",
+        "starting_sign_by_natal_sign_group": {
+          "aries_leo_sagittarius": "aries",
+          "taurus_virgo_capricorn": "capricorn",
+          "gemini_libra_aquarius": "libra",
+          "cancer_scorpio_pisces": "cancer"
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "Exact floating-point and boundary representation is an engine convention, not wording supplied by the verse; use exact rational arithmetic and expose boundary uncertainty.",
+        "The rule operates only after a source-scoped zodiac longitude has been established."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.06a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 6 and translator NOTES",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "translation_and_commentary_distinguished"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Show the input longitude, exact navamsa index and starting-sign rule. If birth-time or zodiac-zero uncertainty crosses a navamsa boundary, report all possible results rather than choosing one.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "trimsamsa_assignment"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "sign_parity", "operator": "in", "value": ["odd", "even"]},
+          {"fact": "longitude_within_sign", "operator": "range", "minimum_inclusive": 0, "maximum_exclusive": 30}
+        ]
+      },
+      "conclusion": {
+        "type": "unequal_segment_assignment",
+        "odd_sign_segments": [
+          {"start_inclusive": 0, "end_exclusive": 5, "ruler": "mars"},
+          {"start_inclusive": 5, "end_exclusive": 10, "ruler": "saturn"},
+          {"start_inclusive": 10, "end_exclusive": 18, "ruler": "jupiter"},
+          {"start_inclusive": 18, "end_exclusive": 25, "ruler": "mercury"},
+          {"start_inclusive": 25, "end_exclusive": 30, "ruler": "venus"}
+        ],
+        "even_sign_segments": [
+          {"start_inclusive": 0, "end_exclusive": 5, "ruler": "venus"},
+          {"start_inclusive": 5, "end_exclusive": 12, "ruler": "mercury"},
+          {"start_inclusive": 12, "end_exclusive": 20, "ruler": "jupiter"},
+          {"start_inclusive": 20, "end_exclusive": 25, "ruler": "saturn"},
+          {"start_inclusive": 25, "end_exclusive": 30, "ruler": "mars"}
+        ]
+      },
+      "priority": null,
+      "exceptions": [
+        "Half-open interval notation is the deterministic implementation convention adopted for testing; a philological review must confirm treatment of an object exactly on a textual degree boundary."
+      ],
+      "conflicts_with": [
+        "generic_equal_one_degree_trimsamsa_ownership"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.07a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 7 and translator NOTES",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "translation_and_commentary_distinguished"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Publish the segment and ruler actually selected. Treat an uncertainty interval crossing a segment boundary as multiple possible placements.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.11.hora_primary",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_presented_rule",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "hora_assignment",
+        "variant": "stanza_11_presented_rule"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "sign_parity", "operator": "in", "value": ["odd", "even"]},
+          {"fact": "longitude_within_sign", "operator": "range", "minimum_inclusive": 0, "maximum_exclusive": 30}
+        ]
+      },
+      "conclusion": {
+        "type": "two_equal_part_assignment",
+        "part_size_degrees": 15,
+        "odd_sign_rulers_in_order": ["sun", "moon"],
+        "even_sign_rulers_in_order": ["moon", "sun"]
+      },
+      "priority": null,
+      "exceptions": [
+        "The equal halves are supported by the Chapter I stanza 9 definition as rendered and explained by Aiyar; facsimile and Sanskrit review remain pending."
+      ],
+      "conflicts_with": [
+        "jyotisha.varahamihira.brhajjataka.01.12.hora_reported_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.09a-b and BJ_01.11a-b",
+          "verification": "sanskrit_verses_and_stable_ids_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanzas 9 and 11",
+          "location": "OCR aligned to printed chapter and stanzas; page image review pending",
+          "verification": "english_translation_ocr_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "The trace must name the stanza-11 variant. Do not combine it with the alternative reported in stanza 12.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.11.drekkana_primary",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_presented_rule",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "drekkana_assignment",
+        "variant": "stanza_11_presented_rule"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_scoped_zodiac_sign", "operator": "known"},
+          {"fact": "longitude_within_sign", "operator": "range", "minimum_inclusive": 0, "maximum_exclusive": 30},
+          {"fact": "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers", "operator": "available"}
+        ]
+      },
+      "conclusion": {
+        "type": "three_equal_part_assignment",
+        "part_size_degrees": 10,
+        "ruling_sign_offsets_in_order_inclusive": [1, 5, 9],
+        "ruler_lookup": "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers"
+      },
+      "priority": null,
+      "exceptions": [
+        "Offsets are counted inclusively from the occupied sign: the occupied sign itself, then its fifth and ninth signs."
+      ],
+      "conflicts_with": [
+        "jyotisha.varahamihira.brhajjataka.01.12.drekkana_reported_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.11a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 11 and Leo example in NOTES",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "translation_and_explicit_commentary_example_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "The trace must name the stanza-11 variant and show the ruling sign and its ruler. Do not combine it with stanza 12.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.12.hora_reported_variant",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "brhajjataka_reported_kecit_aiyar_garga_attribution",
+      "period": "variant_reported_in_varahamihira_text_with_1905_commentarial_attribution",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "hora_assignment",
+        "variant": "stanza_12_reported_some"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_scoped_zodiac_sign", "operator": "known"},
+          {"fact": "longitude_within_sign", "operator": "range", "minimum_inclusive": 0, "maximum_exclusive": 30},
+          {"fact": "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers", "operator": "available"}
+        ]
+      },
+      "conclusion": {
+        "type": "two_equal_part_assignment",
+        "part_size_degrees": 15,
+        "ruling_sign_offsets_in_order_inclusive": [1, 11],
+        "ruler_lookup": "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers"
+      },
+      "priority": null,
+      "exceptions": [
+        "The Sanskrit marks this as the view of some. Aiyar's note identifies it with Garga and his school, but that attribution is commentarial and must remain tagged as such."
+      ],
+      "conflicts_with": [
+        "jyotisha.varahamihira.brhajjataka.01.11.hora_primary"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.12a-b",
+          "verification": "sanskrit_variant_marker_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 12 and NOTES",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "translation_and_commentarial_attribution_distinguished"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "This rule is selectable only as the reported stanza-12 variant. Label the Garga association as Aiyar's commentarial attribution, not a verified authorial attribution.",
+      "review_status": "verse_aligned_attribution_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.12.drekkana_reported_variant",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "brhajjataka_reported_kecit_aiyar_garga_attribution",
+      "period": "variant_reported_in_varahamihira_text_with_1905_commentarial_attribution",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "drekkana_assignment",
+        "variant": "stanza_12_reported_some"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "source_scoped_zodiac_sign", "operator": "known"},
+          {"fact": "longitude_within_sign", "operator": "range", "minimum_inclusive": 0, "maximum_exclusive": 30},
+          {"fact": "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers", "operator": "available"}
+        ]
+      },
+      "conclusion": {
+        "type": "three_equal_part_assignment",
+        "part_size_degrees": 10,
+        "ruling_sign_offsets_in_order_inclusive": [1, 12, 11],
+        "ruler_lookup": "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers"
+      },
+      "priority": null,
+      "exceptions": [
+        "The Sanskrit marks this as the view of some. Aiyar's note identifies it with Garga and his school, but that attribution is commentarial and must remain tagged as such."
+      ],
+      "conflicts_with": [
+        "jyotisha.varahamihira.brhajjataka.01.11.drekkana_primary"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.12a-b",
+          "verification": "sanskrit_variant_marker_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 12 and Sagittarius example in NOTES",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "translation_and_explicit_commentary_example_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "This rule is selectable only as the reported stanza-12 variant. Show its ruling-sign path and do not merge it with the stanza-11 rule.",
+      "review_status": "verse_aligned_attribution_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.13.exaltation_depression",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "exaltation_and_depression"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "classical_planet", "operator": "in", "value": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]}
+        ]
+      },
+      "conclusion": {
+        "type": "lookup_table",
+        "exaltations": {
+          "sun": {"sign": "aries", "nominal_degree": 10},
+          "moon": {"sign": "taurus", "nominal_degree": 3},
+          "mars": {"sign": "capricorn", "nominal_degree": 28},
+          "mercury": {"sign": "virgo", "nominal_degree": 15},
+          "jupiter": {"sign": "cancer", "nominal_degree": 5},
+          "venus": {"sign": "pisces", "nominal_degree": 27},
+          "saturn": {"sign": "libra", "nominal_degree": 20}
+        },
+        "depressions": "opposite sign at the same nominal degree"
+      },
+      "priority": null,
+      "exceptions": [
+        "The manifest records the translated nominal degree numbers but does not yet decide whether a source's ordinal degree expression should be represented as a zero-based point, a one-based degree interval, or another numerical convention.",
+        "No interpolation of exaltation strength is supplied by this verse."
+      ],
+      "conflicts_with": [
+        "generic_linear_exaltation_strength_curve"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.13a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 13",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "english_translation_ocr_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "The signs may be reported historically. Do not compute a percentage strength or exact-distance score until a source passage defining that operation is separately encoded and the degree convention is reviewed.",
+      "review_status": "verse_aligned_number_terms_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.14.vargottama_navamsas",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "vargottama_classification"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "sign_modality", "operator": "in", "value": ["movable", "fixed", "dual"]},
+          {"fact": "navamsa_ordinal", "operator": "range", "minimum_inclusive": 1, "maximum_inclusive": 9}
+        ]
+      },
+      "conclusion": {
+        "type": "classification_rule",
+        "vargottama_navamsa_by_modality": {
+          "movable": 1,
+          "fixed": 5,
+          "dual": 9
+        },
+        "semantic_check": "the navamsa sign equals the natal sign"
+      },
+      "priority": null,
+      "exceptions": [
+        "Aiyar's OCR note describes dual signs with a garbled parenthetical; the source rule is encoded as first, middle and last navamsa and cross-checked against the navamsa sequence."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.14a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 14 and NOTES",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "translation_checked_against_derived_navamsa_identity"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Report only whether the source-scoped placement is vargottama. Do not attach an invented point value or universal prediction.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    },
+    {
+      "rule_id": "jyotisha.varahamihira.brhajjataka.01.14.moolatrikona_signs",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "varahamihira_brhajjataka_chapter1_alignment",
+      "period": "varahamihira_text_in_1979_sanskrit_input_aligned_to_1905_translation",
+      "domain": "natal",
+      "scope": {
+        "work": "Brhajjataka",
+        "technique": "moolatrikona_sign_lookup"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "classical_planet", "operator": "in", "value": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]}
+        ]
+      },
+      "conclusion": {
+        "type": "lookup_table",
+        "moolatrikona_signs": {
+          "sun": "leo",
+          "moon": "taurus",
+          "mars": "aries",
+          "mercury": "virgo",
+          "jupiter": "sagittarius",
+          "venus": "libra",
+          "saturn": "aquarius"
+        },
+        "degree_ranges": null
+      },
+      "priority": null,
+      "exceptions": [
+        "This passage supplies signs, not the degree spans commonly found in later tables; no degree range may be inferred into this source pack."
+      ],
+      "conflicts_with": [
+        "later_moolatrikona_degree_ranges_silently_attributed_to_brhajjataka_01.14"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_gretil",
+          "work": "Brhajjataka",
+          "section": "Rasiprabheda",
+          "location": "BJ_01.14a-b",
+          "verification": "sanskrit_verse_and_stable_id_inspected"
+        },
+        {
+          "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+          "work": "The Brihat Jataka",
+          "section": "Chapter I, stanza 14 and planet/sign list in NOTES",
+          "location": "OCR aligned to printed chapter and stanza; page image review pending",
+          "verification": "translation_and_commentary_distinguished"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Report the sign attribution only. Do not claim that this passage supplies a particular moolatrikona degree interval.",
+      "review_status": "verse_aligned_sanskrit_review_and_facsimile_check_pending"
+    }
+  ]
+}

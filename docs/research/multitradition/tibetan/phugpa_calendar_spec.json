@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "tibetan",
+  "source_pack_id": "tibetan_phugpa_calendar_janson2014_v1",
+  "status": "research_verified_against_published_secondary_tables_not_institutional_almanacs_no_live_engine",
+  "lineage": "phugpa",
+  "source_registry_ids": [
+    "tibetan_janson_calendar_mathematics_2014",
+    "tibetan_mentseekhang_introduction_astroscience",
+    "tibetan_mentseekhang_calendar_almanac"
+  ],
+  "acquired_source": {
+    "source_id": "tibetan_janson_calendar_mathematics_2014",
+    "pdf_sha256": "7cafc7df563a3020849c86f4e397daa18b7f7f5ff46244403180aca90b9d0f77",
+    "pdf_bytes": 536535,
+    "pdf_pages": 86,
+    "source_archive_sha256": "bdd1c58722cca7dbf76da55d6a39bd047ad9d43147be0b92e985952de4fd3f18",
+    "tex_sha256": "edf45d3a0978a92cd3eff2482bfd258a4168424f4cfd24f9ead5a24c733a4a4b",
+    "tex_bytes": 258615,
+    "inspection": "Complete TeX source and extracted PDF text inspected; rendered PDF pages 1, 2, 14-16, 19-20, 25-26, and 28 visually inspected and legible."
+  },
+  "evidence_limit": "Janson explicitly relies on secondary sources and does not read Tibetan. This pack is a faithful implementation of his stated Phugpa reconstruction, not proof of Men-Tsee-Khang institutional conformance.",
+  "epoch_profiles": {
+    "e806": {"year":806,"month":3,"beta_star":61,"m0":{"integer":2015501,"fraction":[4783,5656]},"s0":[743,804],"a0":[475,3528]},
+    "e1927": {"year":1927,"month":3,"beta_star":55,"m0":{"integer":2424972,"fraction":[5457,5656]},"s0":[749,804],"a0":[1741,3528]},
+    "e1987": {"year":1987,"month":3,"beta_star":0,"m0":{"integer":2446914,"fraction":[135,707]},"s0":[0,1],"a0":[38,49]}
+  },
+  "default_epoch_profile": "e806",
+  "month_calculation": {
+    "solar_month_count": "M_star = 12*(Y-Y0) + M-M0",
+    "intercalation_index": "ix = euclidean_mod(67*M_star + beta_star, 65)",
+    "leap_month_when": [48,49],
+    "true_month_count": "floor((67*M_star + beta_star + 17)/65) - leap_indicator",
+    "phugpa_leap_year": "euclidean_mod(24*Y + 33, 65) >= 41",
+    "phugpa_leap_month": "floor(33 - euclidean_mod(24*Y + 33, 65)/2)",
+    "leap_month_order": "The leap month precedes the regular month with the same number."
+  },
+  "exact_rational_constants": {
+    "mean_month_m1":[167025,5656],
+    "mean_lunar_day_m2":[11135,11312],
+    "mean_sun_month_s1":[65,804],
+    "mean_sun_day_s2":[13,4824],
+    "moon_anomaly_month_a1":[253,3528],
+    "moon_anomaly_day_profiles":{"standard_almanac":[1,28],"lochen_correction":[3781,105840]},
+    "moon_table":[0,5,10,15,19,22,24,25],
+    "sun_table":[0,6,10,11],
+    "table_policy":"Extend by the source's stated symmetries and use exact linear interpolation between integer arguments."
+  },
+  "day_calculation": {
+    "mean_date":"n*m1 + d*m2 + m0",
+    "mean_sun":"euclidean_fraction(n*s1 + d*s2 + s0)",
+    "moon_anomaly":"euclidean_fraction(n*a1 + d*a2 + a0)",
+    "moon_equation":"interpolate_moon_table(28*moon_anomaly)",
+    "sun_equation":"interpolate_sun_table(12*euclidean_fraction(mean_sun - 1/4))",
+    "true_date":"mean_date + moon_equation/60 - sun_equation/60",
+    "integer_jdn":"floor(true_date)",
+    "skipped":"integer_jdn(d) equals integer_jdn(d-1)",
+    "repeated":"integer_jdn(d) minus integer_jdn(d-1) equals 2; first occurrence is integer_jdn(d)-1",
+    "weekday":"euclidean_mod(integer_jdn + 2, 7) with 0=Saturday through 6=Friday",
+    "day_boundary":"The source models a dawn-to-dawn calendar day through its local true-date convention; do not add a modern sunrise calculation."
+  },
+  "losar": "1 + integer_jdn(day 30 of regular month 12 in the preceding Tibetan year)",
+  "version_contract": {
+    "cache_identity_fields":["lineage","source_pack_id","epoch_profile","moon_anomaly_day_profile"],
+    "forbidden_merges":["phugpa_with_tsurphu","phugpa_with_bhutan","phugpa_with_mongolia","standard_a2_with_lochen_a2"],
+    "alternate_results_must_be_exposed":true
+  },
+  "publication_contract": {
+    "birth_input_eligible":true,
+    "calendar_fact_eligible":true,
+    "interpretation_eligible":false,
+    "customer_prediction":false,
+    "historical_use_only":true,
+    "live_engine":false,
+    "institutional_conformance":false,
+    "required_next_gate":"Compare every date against at least three purchased consecutive Men-Tsee-Khang almanacs, then expand to ten and obtain qualified Tibetan-language review."
+  }
+}

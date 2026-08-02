@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "maya",
+  "school_id": "maya_calendar_kernel_gmt_v1",
+  "source_pack_id": "maya_calendar_kernel_gmt_v1",
+  "source_edition_id": "nmai_calendar_system_2012_with_independent_correlation_checks",
+  "source_registry_ids": [
+    "maya_nmai_calendar_system_pdf",
+    "maya_famsi_date_converter",
+    "maya_cambridge_calendar_correlation_review",
+    "maya_pnas_correlation_radiocarbon_2013"
+  ],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "These rules encode calendar arithmetic and declared correlation transforms only. They contain no divinatory meaning and do not authorize a live Maya reading engine.",
+  "rules": [
+    {
+      "rule_id": "maya.calendar.long_count.compose_decompose",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_scholarly_reconstruction_of_maya_calendar", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"canonical_five_place_long_count": true},
+      "conclusion": {"weights_days": [144000, 7200, 360, 20, 1], "customer_prediction": false},
+      "priority": 100, "exceptions": ["Reject negative totals and out-of-radix components in this profile."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"nmai_calendar_system_2012","work":"The Maya Calendar System","section":"The Long Count","location":"PDF pp. 8-9, Table 3","verification":"Text and rendered pages inspected; units and values transcribed."}],
+      "evidence_grade":"B", "publication_limit":"Calendar facts only; Historical Use Only.", "review_status":"Arithmetic independently validated; Maya specialist review remains required."
+    },
+    {
+      "rule_id": "maya.calendar.tzolkin.number_cycle",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_scholarly_reconstruction_of_maya_calendar", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"total_day_is_nonnegative_integer": true},
+      "conclusion": {"formula":"euclidean_mod(total_day + 3, 13) + 1", "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id":"nmai_calendar_system_2012","work":"The Maya Calendar System","section":"The 260-day Tzolk'in Calendar","location":"PDF pp. 2-4, Table 1","verification":"The 13-number cycle, 20-name cycle, and 260 combinations were inspected."}],
+      "evidence_grade":"B", "publication_limit":"Calendar facts only.", "review_status":"Arithmetic independently validated."
+    },
+    {
+      "rule_id": "maya.calendar.tzolkin.name_cycle",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_scholarly_reconstruction_of_maya_calendar", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"total_day_is_nonnegative_integer": true, "declared_name_profile": true},
+      "conclusion": {"formula":"euclidean_mod(total_day + 19, 20)", "customer_prediction": false},
+      "priority": 100, "exceptions": ["Labels require an explicit language/community profile."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"nmai_calendar_system_2012","work":"The Maya Calendar System","section":"The 260-day Tzolk'in Calendar","location":"PDF pp. 3-4, Tables 1-2","verification":"Yucatec and K'iche' sequences were inspected and aligned by index."}],
+      "evidence_grade":"B", "publication_limit":"Names only; living meanings and ceremonies excluded.", "review_status":"Orthographic/community review remains required."
+    },
+    {
+      "rule_id": "maya.calendar.haab.position",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_scholarly_reconstruction_of_maya_calendar", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"total_day_is_nonnegative_integer": true},
+      "conclusion": {"formula":"euclidean_mod(total_day + 348, 365)", "structure":"18_months_of_20_days_plus_5_day_wayeb", "customer_prediction": false},
+      "priority": 100, "exceptions": ["Wayeb accepts day numbers 0 through 4 only."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"nmai_calendar_system_2012","work":"The Maya Calendar System","section":"The 365-day Haab Calendar","location":"PDF pp. 5-6, Figure 2","verification":"Month order, day numbering, and five-day Wayeb were inspected."}],
+      "evidence_grade":"B", "publication_limit":"Calendar facts only.", "review_status":"Arithmetic independently validated."
+    },
+    {
+      "rule_id": "maya.calendar.round.recurrence",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_scholarly_reconstruction_of_maya_calendar", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"tzolkin_length": 260, "haab_length": 365},
+      "conclusion": {"recurrence_days":18980, "haab_cycles":52, "tzolkin_cycles":73, "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id":"nmai_calendar_system_2012","work":"The Maya Calendar System","section":"The Calendar Round","location":"PDF p. 7","verification":"52-Haab/73-Tzolk'in recurrence statement inspected."}],
+      "evidence_grade":"B", "publication_limit":"Calendar facts only.", "review_status":"LCM independently validated."
+    },
+    {
+      "rule_id": "maya.calendar.correlation.jdn",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_correlation_scholarship", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"declared_correlation_id": true, "total_day_is_nonnegative_integer": true},
+      "conclusion": {"formula":"integer_jdn = total_day + correlation_constant", "customer_prediction": false},
+      "priority": 110, "exceptions": ["Never select or conceal a correlation implicitly."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"kennett_et_al_2013","work":"Correlating the ancient Maya and modern European calendars with high-precision AMS 14C dating","section":"GMT correlation","location":"PNAS 110(17), discussion of coefficient 584,283","verification":"Open full text inspected; coefficient and additive mapping statement verified."}],
+      "evidence_grade":"B", "publication_limit":"Always show correlation ID and constant.", "review_status":"Independent published correlation check present; dispute disclosure remains mandatory."
+    },
+    {
+      "rule_id": "maya.calendar.correlation.cycle_independence",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_scholarly_reconstruction_of_maya_calendar", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"same_total_day": true, "different_correlation_profiles": true},
+      "conclusion": {"internal_calendar_cycles_unchanged":true, "civil_date_changes_by_constant_difference":true, "customer_prediction": false},
+      "priority": 110, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id":"reingold_dershowitz_2018","work":"Calendrical Calculations: Mayan Calendars","section":"Correlation problem","location":"chapter 14, pp. 169-184","verification":"Publisher chapter abstract/metadata and described GMT mapping inspected; arithmetic independently derived."}],
+      "evidence_grade":"C", "publication_limit":"Sensitivity display only; not a claim that variants are interchangeable.", "review_status":"Acquire full chapter before production use."
+    },
+    {
+      "rule_id": "maya.calendar.names.profile_mapping",
+      "tradition_id": "maya", "school_id": "maya_calendar_kernel_gmt_v1", "period": "modern_museum_community_educational_resource", "domain": "calendar",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"same_tzolkin_index": true, "declared_language_profile": true},
+      "conclusion": {"labels_may_differ":true, "index_must_not_change":true, "meaning_inference":false, "customer_prediction": false},
+      "priority": 120, "exceptions": ["Do not blend or anonymize K'iche' and Yucatec terminology."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"nmai_calendar_system_2012","work":"The Maya Calendar System","section":"The 260-day Tzolk'in Calendar","location":"PDF p. 4, Table 2","verification":"Paired K'iche' and Yucatec day names inspected."}],
+      "evidence_grade":"B", "publication_limit":"Label concordance only; no community-authored meanings or ceremonies.", "review_status":"Community and orthographic review required before public labels."
+    }
+  ]
+}

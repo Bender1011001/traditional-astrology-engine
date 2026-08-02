@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "school_id": "late_babylonian_horoscope_text16_rochberg_1998",
+  "source_pack_id": "rochberg_1998_text16_w20030_10_v1",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_text16",
+  "source_registry_ids": ["babylonian_rochberg_horoscopes_1998_awdl"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Text 16 (W 20030/10), book pages 100-104 / PDF pages 116-120, was inspected in transcription, translation, apparatus, commentary, astronomical tables, and rendered page images. It contains two horoscopes and three favorable or good-fortune expressions, but none supplies a secure general birth-input predicate: one has a damaged beginning, one is an uncertain event qualifier, and one has an incomplete conditional premise. Tablet-side sequence, copied readings, lunar motion, and astronomical discrepancies require review.",
+  "rules": [
+    {
+      "rule_id":"babylonian.rochberg1998.text16b.obv10.good_fortune_clause","tradition_id":"mesopotamian_babylonian","school_id":"late_babylonian_horoscope_text16_rochberg_1998","period":"seleucid_era_year_113_horoscope_in_1998_critical_edition","domain":"natal",
+      "scope":{"work":"Babylonian Horoscopes","text":"Text 16b (W 20030/10 obverse)","technique":"damaged_record_specific_clause","executable_from_birth_input":false},
+      "conditions":{"all":[{"fact":"source_record","operator":"equals","value":"rochberg1998.text16b"},{"fact":"clause.beginning","operator":"unresolved"}]},
+      "conclusion":{"type":"damaged_historical_apodosis","themes":["good_fortune_or_propitious_days"],"algorithmic_trigger":null,"customer_prediction":false},"priority":null,
+      "exceptions":["The beginning of the clause is damaged, so its trigger is unknown.","The phrase cannot characterize Text 16b as a whole and cannot be transferred to a modern chart."],
+      "conflicts_with":["generic_text16b_good_fortune_reading"],
+      "source_passages":[{"edition_id":"babylonian_rochberg_horoscopes_1998_awdl","work":"Babylonian Horoscopes","section":"Text 16b (W 20030/10 obverse)","location":"p. 101, obv. 10; commentary pp. 101-104","verification":"transcription_translation_apparatus_commentary_and_page_images_inspected"}],
+      "evidence_grade":"C","publication_limit":"Corpus-fragment display only. Do not generate a favorable personal reading.","review_status":"damage_trigger_assyriological_and_tablet_collation_review_pending"
+    },
+    {
+      "rule_id":"babylonian.rochberg1998.text16a.rev5.venus_first_visibility_favorable_qualifier","tradition_id":"mesopotamian_babylonian","school_id":"late_babylonian_horoscope_text16_rochberg_1998","period":"seleucid_era_year_112_horoscope_in_1998_critical_edition","domain":"natal",
+      "scope":{"work":"Babylonian Horoscopes","text":"Text 16a (W 20030/10 reverse)","technique":"venus_first_visibility_event_qualifier","executable_from_birth_input":false},
+      "conditions":{"all":[{"fact":"source_record","operator":"equals","value":"rochberg1998.text16a"},{"fact":"venus.event","operator":"equals","value":"first_visibility_in_east"},{"fact":"qualifier.reading","operator":"unresolved"}]},
+      "conclusion":{"type":"uncertain_historical_event_qualifier","themes":["favorable_question_mark"],"algorithmic_trigger":null,"customer_prediction":false},"priority":null,
+      "exceptions":["The translation marks favorable with a question mark.","The qualifier belongs to a first-visibility event and is not a Venus-in-Gemini delineation.","The copied Venus numeral/sign reading requires collation."],
+      "conflicts_with":["venus_in_gemini_is_favorable_babylonian_rule"],
+      "source_passages":[{"edition_id":"babylonian_rochberg_horoscopes_1998_awdl","work":"Babylonian Horoscopes","section":"Text 16a (W 20030/10 reverse)","location":"p. 101, rev. 5; apparatus and commentary pp. 101-104","verification":"transcription_translation_apparatus_commentary_and_page_images_inspected"}],
+      "evidence_grade":"D","publication_limit":"Uncertain event-label display only. Do not produce a personal outcome or a sign meaning.","review_status":"akkadian_reading_visibility_definition_astronomical_and_collation_review_pending"
+    },
+    {
+      "rule_id":"babylonian.rochberg1998.text16a.rev9.moon_progress_favorable_fragment","tradition_id":"mesopotamian_babylonian","school_id":"late_babylonian_horoscope_text16_rochberg_1998","period":"seleucid_era_year_112_horoscope_in_1998_critical_edition","domain":"natal",
+      "scope":{"work":"Babylonian Horoscopes","text":"Text 16a (W 20030/10 reverse)","technique":"damaged_lunar_progress_conditional","executable_from_birth_input":false},
+      "conditions":{"all":[{"fact":"source_record","operator":"equals","value":"rochberg1998.text16a"},{"fact":"moon.progress_condition","operator":"unresolved"}]},
+      "conclusion":{"type":"incomplete_historical_conditional","themes":["favorable"],"algorithmic_trigger":null,"customer_prediction":false},"priority":null,
+      "exceptions":["The conditional premise after the Moon's progress is incomplete.","No latitude, phase, direction, degree, or timing predicate may be supplied from modern assumptions."],
+      "conflicts_with":["generic_moon_progress_favorable_rule"],
+      "source_passages":[{"edition_id":"babylonian_rochberg_horoscopes_1998_awdl","work":"Babylonian Horoscopes","section":"Text 16a (W 20030/10 reverse)","location":"p. 101, rev. 9; commentary pp. 103-104","verification":"transcription_translation_commentary_and_page_images_inspected"}],
+      "evidence_grade":"D","publication_limit":"Corpus-fragment display only. Fail closed until the premise is textually established.","review_status":"damage_lunar_terminology_astronomical_and_parallel_text_review_pending"
+    }
+  ]
+}

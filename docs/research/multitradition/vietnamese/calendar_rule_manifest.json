@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "vietnamese_calendar_science",
+  "school_id": "modern_vietnamese_lunisolar_uhm_candidate",
+  "source_pack_id": "vietnam_modern_lunisolar_rules_uhm_candidate_v1",
+  "source_edition_id": "vietnam_modern_lunisolar_rules_uhm",
+  "source_registry_ids": ["vietnam_modern_lunisolar_rules_uhm"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "The calculation rules and worked tables are explicit on the inspected technical page, but its authorship, statutory authority and exact astronomical implementation are not established. Rules remain grade D until independently recomputed and checked against Vietnamese almanacs.",
+  "rules": [
+    {
+      "rule_id": "vietnam.modern_calendar.month_starts_on_local_new_moon_day",
+      "tradition_id": "vietnamese_calendar_science",
+      "school_id": "modern_vietnamese_lunisolar_uhm_candidate",
+      "period": "modern_calculation_profile",
+      "domain": "calendar",
+      "scope": {
+        "operation": "lunar_month_start",
+        "calendar_profile": "modern_vietnamese_candidate"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "astronomical.new_moon.utc_instant", "operator": "known"},
+          {"fact": "calendar_profile.civil_time_rule", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "civil_date_assignment",
+        "lunar_month_day_1": "the Vietnamese local civil date containing the astronomical New Moon instant"
+      },
+      "priority": null,
+      "exceptions": [
+        "The source page does not define the ephemeris, timescale, numerical tolerance or historical civil-time law for all supported years.",
+        "This rule cannot be applied proleptically to a historical royal calendar without a regime-specific source."
+      ],
+      "conflicts_with": ["chinese_calendar.local_civil_day_assignment"],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_modern_lunisolar_rules_uhm",
+          "work": "How to compute the Vietnamese lunar calendar",
+          "section": "General rules and local-time example",
+          "location": "Paragraphs preceding the 1984 event table",
+          "verification": "technical_page_and_worked_table_inspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Always show the calendar profile and civil-time basis. If uncertainty crosses local midnight, return alternate lunar dates instead of choosing one.",
+      "review_status": "independent_ephemeris_almanac_and_vietnamese_review_pending"
+    },
+    {
+      "rule_id": "vietnam.modern_calendar.winter_solstice_in_month11",
+      "tradition_id": "vietnamese_calendar_science",
+      "school_id": "modern_vietnamese_lunisolar_uhm_candidate",
+      "period": "modern_calculation_profile",
+      "domain": "calendar",
+      "scope": {
+        "operation": "lunar_month_number_anchor",
+        "calendar_profile": "modern_vietnamese_candidate"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "winter_solstice.local_civil_date", "operator": "known"},
+          {"fact": "lunar_month_intervals_around_solstice", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "month_number_assignment",
+        "month_number": 11,
+        "target_interval": "the lunar month containing the winter solstice on the configured Vietnamese local civil-day basis"
+      },
+      "priority": null,
+      "exceptions": [
+        "A solstice and New Moon near local midnight can assign a different month-11 interval in Vietnam and China.",
+        "Historical regimes require separate evidence."
+      ],
+      "conflicts_with": ["chinese_calendar.month11_for_same_utc_events"],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_modern_lunisolar_rules_uhm",
+          "work": "How to compute the Vietnamese lunar calendar",
+          "section": "Month numbering",
+          "location": "Rule immediately before the 1984 worked example",
+          "verification": "technical_page_and_worked_table_inspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Do not import Beijing's month-11 interval. Emit all candidates when event-time or civil-time uncertainty changes containment.",
+      "review_status": "independent_ephemeris_almanac_and_vietnamese_review_pending"
+    },
+    {
+      "rule_id": "vietnam.modern_calendar.normal_year_month_numbering",
+      "tradition_id": "vietnamese_calendar_science",
+      "school_id": "modern_vietnamese_lunisolar_uhm_candidate",
+      "period": "modern_calculation_profile",
+      "domain": "calendar",
+      "scope": {
+        "operation": "normal_lunar_year_numbering",
+        "calendar_profile": "modern_vietnamese_candidate"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "lunar_month_count_between_relevant_month11_anchors", "operator": "equals", "value": 12}
+        ]
+      },
+      "conclusion": {
+        "type": "sequential_month_numbering",
+        "sequence": [11,12,1,2,3,4,5,6,7,8,9,10],
+        "intercalary_month": null
+      },
+      "priority": null,
+      "exceptions": [
+        "The relevant anchors must first be selected on the Vietnamese local-day basis."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_modern_lunisolar_rules_uhm",
+          "work": "How to compute the Vietnamese lunar calendar",
+          "section": "Example: lunar calendar for 1984",
+          "location": "Month-count conclusion following the 1984 event table",
+          "verification": "technical_page_and_worked_table_inspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Do not label a year normal until every New Moon interval and both month-11 anchors are independently recomputed.",
+      "review_status": "independent_ephemeris_almanac_and_vietnamese_review_pending"
+    },
+    {
+      "rule_id": "vietnam.modern_calendar.first_no_principal_term_month_is_intercalary",
+      "tradition_id": "vietnamese_calendar_science",
+      "school_id": "modern_vietnamese_lunisolar_uhm_candidate",
+      "period": "modern_calculation_profile",
+      "domain": "calendar",
+      "scope": {
+        "operation": "intercalary_month_selection",
+        "calendar_profile": "modern_vietnamese_candidate"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "lunar_month_count_between_relevant_month11_anchors", "operator": "equals", "value": 13},
+          {"fact": "post_solstice_lunar_months.principal_term_containment", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "intercalary_month_assignment",
+        "selected_interval": "the first lunar month after the first winter-solstice anchor that contains no principal term",
+        "numbering": "repeat the preceding lunar month number and mark the selected interval intercalary"
+      },
+      "priority": null,
+      "exceptions": [
+        "Principal-term containment must use the same local civil-day and boundary convention as month starts.",
+        "The exact astronomical longitude and apparent/mean convention for principal terms must be declared."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_modern_lunisolar_rules_uhm",
+          "work": "How to compute the Vietnamese lunar calendar",
+          "section": "Leap-year rule and 1985 worked example",
+          "location": "Leap-month rule and event table for 1985",
+          "verification": "technical_page_and_worked_table_inspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Show the absent principal term and surrounding event instants in the calculation trace. Never select a leap month from a memorized year table alone.",
+      "review_status": "independent_ephemeris_almanac_and_vietnamese_review_pending"
+    },
+    {
+      "rule_id": "vietnam.modern_calendar.vietnamese_local_day_not_beijing_day",
+      "tradition_id": "vietnamese_calendar_science",
+      "school_id": "modern_vietnamese_lunisolar_uhm_candidate",
+      "period": "modern_calculation_profile",
+      "domain": "calendar",
+      "scope": {
+        "operation": "regional_calendar_identity",
+        "calendar_profile": "modern_vietnamese_candidate"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "astronomical_event.utc_instant", "operator": "known"},
+          {"fact": "vietnamese_calendar_reference.civil_time", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "calculation_identity_requirement",
+        "rule": "assign event civil dates using the Vietnamese calendar reference, not Beijing civil time",
+        "documented_reference_longitude": "105 degrees east on the inspected page"
+      },
+      "priority": 100,
+      "exceptions": [
+        "Reference longitude is not a substitute for statutory timezone history; the valid period and precise role of 105 degrees east require Vietnamese authority.",
+        "Historical dynastic and regional calendars are different profiles."
+      ],
+      "conflicts_with": ["generic_east_asian_lunisolar_calendar_single_timezone"],
+      "source_passages": [
+        {
+          "edition_id": "vietnam_modern_lunisolar_rules_uhm",
+          "work": "How to compute the Vietnamese lunar calendar",
+          "section": "Local-time explanation and comparison with Chinese calendar",
+          "location": "New-Moon example before the 1984 table and 1985 comparison section",
+          "verification": "technical_page_and_worked_table_inspected"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Do not reuse a Chinese calendar API result under a Vietnamese label. Expose reference longitude, civil-time rule, ephemeris and supported date range.",
+      "review_status": "independent_ephemeris_almanac_and_vietnamese_review_pending"
+    }
+  ]
+}

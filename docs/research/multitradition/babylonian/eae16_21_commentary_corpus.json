@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "branch": "ancient_commentary_on_lunar_eclipse_omens",
+  "source_pack_id": "eae16_21_ancient_commentary_witnesses_v1",
+  "status": "open_ancient_commentary_editions_inspected_research_only",
+  "structured_sources": [
+    {
+      "source_registry_id": "babylonian_ccp_p461229_eae16_19_commentary",
+      "artifact_id": "BM 47447 / P461229",
+      "url": "https://ccp.yale.edu/P461229",
+      "structured_edition_url": "https://oracc.museum.upenn.edu/ccpo/P461229/html",
+      "structured_edition_sha256": "a9330a5d48830886a3d5475476937818ceff52c8a576ca8cf2bc2da6e1f50ffc",
+      "structured_edition_bytes": 317570,
+      "coverage": "71-line commentary, mainly EAE 16 with EAE 19 entries at the end",
+      "inspection": "Catalogue, introduction, complete transliteration and translation, notes, colophon, collations, and quoted-base-text markup inspected."
+    },
+    {
+      "source_registry_id": "babylonian_ccp_p425538_eae21_commentary",
+      "artifact_id": "Sm.683 / P425538",
+      "url": "https://ccp.yale.edu/P425538",
+      "structured_edition_url": "https://oracc.museum.upenn.edu/ccpo/P425538/html",
+      "structured_edition_sha256": "d2f0c77ec23f793725f7ca71d6f1c4e3571bfb3fde7615d9b087662152765fbe",
+      "structured_edition_bytes": 53940,
+      "coverage": "Fragmentary commentary on EAE 21 sections II, IV, and VI",
+      "inspection": "Catalogue, introduction, complete transliteration and translation, notes, manuscript-error discussion, and image metadata inspected."
+    }
+  ],
+  "passage_units": [
+    {"passage_id":"eae16.commentary.lightning_summer","artifact_id":"BM 47447","location":"obv. 1-2","kind":"scope_restriction","normalized_interpretation":{"base_protasis":"eclipse_and_lightning","applies_on_account_of":"summer"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae16.commentary.waterless_flood","artifact_id":"BM 47447","location":"obv. 3-5","kind":"lexical_equation","normalized_interpretation":{"waterless_flood":"plague","take_away":"carry_away_or_deprive"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae16.commentary.cloud_enters_cloud","artifact_id":"BM 47447","location":"obv. 5-8","kind":"phenomenon_reinterpretation","normalized_interpretation":{"cloud_enters_cloud":"star_enters_star","land_intelligence_taken":"deprived"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae16.commentary.colors","artifact_id":"BM 47447","location":"obv. 9-14, 22-23; rev. 39-40","kind":"alternative_scope","normalized_interpretation":{"colored_cloud_or_eclipse":["planetary_reference","cloud","eclipse_shape"]},"eligibility":"ambiguous_fail_closed"},
+    {"passage_id":"eae16.commentary.long_lived_king","artifact_id":"BM 47447","location":"obv. 14-15","kind":"scope_restriction","normalized_interpretation":{"base_apodosis":"gods_make_king_live_long","applies_to":"abandoned_land"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae16.commentary.halo_clear_sky","artifact_id":"BM 47447","location":"obv. 15-17","kind":"phenomenon_reinterpretation","normalized_interpretation":{"moves_in_halo_and_clears":"clears_in_winter_under_clear_sky","halo":"clear_sky"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae16.commentary.obscurity","artifact_id":"BM 47447","location":"obv. 24-29","kind":"alternative_phenomenon_reading","normalized_interpretation":{"rises_obscure_until_clearing":["dark_cloud_then_bright_sky","clears_at_start_of_winter"],"sets_in_obscurity":["enters_and_sets_in_cloud","literal_setting"]},"eligibility":"alternative_readings_not_merged"},
+    {"passage_id":"eae16.commentary.dark_middle","artifact_id":"BM 47447","location":"obv. 33-36","kind":"astronomical_interpretation","normalized_interpretation":{"dark_in_middle_and_sprinkled":"small_eclipse_clearing_quickly_left_and_right","middle_of_month_day":14},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae16.commentary.fully_covered","artifact_id":"BM 47447","location":"rev. 40-45","kind":"phenomenon_and_wordplay","normalized_interpretation":{"dark_and_fully_covered":"eclipse_in_dark_thin_cloud","glow":"star","save_equation":"commentarial_wordplay_not_observation"},"eligibility":"semantic_only_no_apodosis_inference"},
+    {"passage_id":"eae16.commentary.scalp_enemy","artifact_id":"BM 47447","location":"rev. 46-48","kind":"phenomenon_and_apodosis_clarification","normalized_interpretation":{"scalp_darkens_sky":"disturbance_on_sky_surface","evil_one":"enemies"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae16.commentary.fixed_interval","artifact_id":"BM 47447","location":"rev. 48-49","kind":"timing_scope","normalized_interpretation":{"moon_to_its_month":"eclipse_from_one_fixed_time_to_another"},"eligibility":"damaged_base_predicate_fail_closed"},
+    {"passage_id":"eae19.commentary.simanu","artifact_id":"BM 47447","location":"rev. 52-54","kind":"base_omen_reinterpretation","normalized_interpretation":{"base_date":{"month":"simanu","day":21},"commentary_region":"scorpius","commentary_days":[22,23]},"eligibility":"date_conflict_fail_closed"},
+    {"passage_id":"eae19.commentary.tashritu","artifact_id":"BM 47447","location":"rev. 55-58","kind":"regional_equation","normalized_interpretation":{"base_date":{"month":"tashritu","day":14},"eclipse_region":"gula","gula_equations":["rain_region","elam_region","palace_iskaru_fields"]},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae19.commentary.arahsamna","artifact_id":"BM 47447","location":"rev. 59-61","kind":"regional_equation","normalized_interpretation":{"base_date":{"month":"arahsamna","day":14},"alternate_celestial_scope":"halo_in_pleiades_and_taurus","commentary_outcome":"plague"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae19.commentary.kislimu","artifact_id":"BM 47447","location":"rev. 62-63","kind":"alternative_regional_equation","normalized_interpretation":{"base_date":{"month":"kislimu","day":14},"alternatives":["orion_region","facing_sagittarius"],"commentary_outcome":"plague"},"eligibility":"alternatives_not_merged"},
+    {"passage_id":"eae19.commentary.shabatu","artifact_id":"BM 47447","location":"rev. 64-65","kind":"regional_equation","normalized_interpretation":{"base_date":{"month":"shabatu","day":14},"eclipse_region":"gemini","commentary_outcome":"plague"},"eligibility":"historical_semantic_constraint_only"},
+    {"passage_id":"eae19.commentary.addaru","artifact_id":"BM 47447","location":"rev. 65-67","kind":"regional_dependency","normalized_interpretation":{"base_date":{"month":"addaru","day":14},"eclipse_region":["virgo","saturn"],"good_or_evil_dependency":"month_region_compared_with_region_destined_for_land","dependency_text_status":"broken"},"eligibility":"dependency_broken_fail_closed"},
+    {"passage_id":"eae21.commentary.source_error","artifact_id":"Sm.683","location":"obv. 2-6 and introduction","kind":"scribal_variant_rationalization","normalized_interpretation":{"base_manuscript_a":"GIŠ.GAN","other_manuscript":"PA.GAN_or_imaḫḫaṣ","commentary_equation":"GIŠ.GAN_as_PA.GAN_mahasu","editorial_assessment":"base_manuscript_error_rationalized_by_commentator"},"eligibility":"witness_specific_no_normalization"},
+    {"passage_id":"eae21.commentary.day21_sea","artifact_id":"Sm.683","location":"obv. 7-10","kind":"base_omen_and_gloss","normalized_interpretation":{"day":21,"base_outcomes":["sea_produce_disappears","sea_becomes_marsh","bird_nests"],"gloss":"become_and_nest_equations"},"eligibility":"quoted_base_omen_historical_only"},
+    {"passage_id":"eae21.commentary.month_v_day21","artifact_id":"Sm.683","location":"rev. 11-14","kind":"base_omen_and_month_gloss","normalized_interpretation":{"month":5,"day":21,"base_outcomes":["adad_thunders","god_devastates","after_year_adad_smites_herds"],"month_gloss":"that_month"},"eligibility":"quoted_base_omen_historical_only"},
+    {"passage_id":"eae21.commentary.day20","artifact_id":"Sm.683","location":"rev. 15-17","kind":"base_omen_and_verb_gloss","normalized_interpretation":{"day":20,"base_outcomes":["rain_and_source_floods_cease","land_goes_against_land","peace_occurs"],"haqu_gloss":"to_go"},"eligibility":"quoted_base_omen_historical_only"}
+  ],
+  "global_constraints": {
+    "commentary_is_not_base_text": true,
+    "alternatives_are_not_cumulative": true,
+    "damaged_or_restored_predicates_fail_closed": true,
+    "birth_input_eligible": false,
+    "customer_prediction": false
+  }
+}

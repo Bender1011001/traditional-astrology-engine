@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_pack_id": "eae16_21_ancient_commentary_witnesses_v1",
+  "status": "research_vectors_complete_for_bounded_commentary_witnesses_no_runtime_or_customer_output",
+  "source_ids": [
+    "babylonian_ccp_p461229_eae16_19_commentary",
+    "babylonian_ccp_p425538_eae21_commentary"
+  ],
+  "vectors": [
+    {
+      "vector_id": "babylonian.eae16.commentary.lightning_season_boundary",
+      "rule_ids": ["babylonian.eae16.commentary.lightning_summer_scope"],
+      "inputs": {"summer_case":{"lunar_eclipse":true,"lightning":true,"season":"summer"},"winter_case":{"lunar_eclipse":true,"lightning":true,"season":"winter"}},
+      "expected": {"summer_commentary_scope_matches":true,"winter_commentary_scope_matches":false,"base_apodosis_inferred":false,"customer_output":false},
+      "provenance": "BM 47447 obv. 1-2; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae16.commentary.lexical_not_free_standing",
+      "rule_ids": ["babylonian.eae16.commentary.waterless_flood_plague","babylonian.eae16.commentary.cloud_enters_cloud_as_stars"],
+      "event": {"commentary_witness":"BM 47447","lemmas":["waterless_flood","cloud_enters_cloud"]},
+      "expected": {"waterless_flood_gloss":"plague","cloud_event_gloss":"star_enters_star","global_cloud_replacement":false,"free_standing_omen_execution":false},
+      "provenance": "BM 47447 obv. 3-8; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae16.commentary.color_abstention",
+      "rule_ids": ["babylonian.eae16.commentary.color_reference_ambiguous"],
+      "event": {"color":"red","commentary_witness":"BM 47447","context_unspecified":true},
+      "expected": {"candidate_readings":["planetary_reference","cloud_reference","eclipse_shape"],"combine_candidates":false,"choose_without_context":false},
+      "provenance": "BM 47447 obv. 9-14, 22-23 and rev. 39-40; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae16.commentary.target_and_halo_scope",
+      "rule_ids": ["babylonian.eae16.commentary.long_lived_king_abandoned_land","babylonian.eae16.commentary.halo_clear_winter"],
+      "event": {"quoted_apodosis":"gods_make_king_live_long","base_phenomenon":"eclipse_moves_in_halo_and_clears"},
+      "expected": {"longevity_target":"abandoned_land","personal_longevity_prediction":false,"halo_commentary":"clear_winter_sky","modern_visibility_algorithm":false},
+      "provenance": "BM 47447 obv. 14-17 and note 8; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae16.commentary.obscurity_alternatives",
+      "rule_ids": ["babylonian.eae16.commentary.obscure_rising_alternatives","babylonian.eae16.commentary.obscure_setting_alternatives"],
+      "event": {"rises_in_obscurity":true,"stands_until_clearing":true,"sets_in_obscurity":true},
+      "expected": {"rising_alternatives":2,"setting_alternatives":2,"alternatives_cumulative":false,"automatic_cloud_choice":false},
+      "provenance": "BM 47447 obv. 24-30; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae16.commentary.extent_interpretations",
+      "rule_ids": ["babylonian.eae16.commentary.dark_middle_small_eclipse","babylonian.eae16.commentary.fully_covered_thin_cloud"],
+      "inputs": {"case_small":{"dark_in_middle":true,"sprinkled":true},"case_covered":{"dark":true,"fully_covered":true}},
+      "expected": {"case_small_commentary":{"day":14,"extent":"small","clearing":"quick_left_and_right"},"case_covered_commentary":"dark_thin_cloud","modern_magnitude_computed":false,"wordplay_as_observation":false},
+      "provenance": "BM 47447 obv. 33-36 and rev. 40-45; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae16.commentary.clarification_and_damage",
+      "rule_ids": ["babylonian.eae16.commentary.scalp_disturbance_enemies","babylonian.eae16.commentary.fixed_interval_damaged"],
+      "event": {"scalp_darkens_sky":true,"moon_to_its_month_text":"damaged"},
+      "expected": {"phenomenon_gloss":"sky_surface_disturbance","apodosis_gloss":"people_see_enemies","fixed_interval_note_preserved":true,"damaged_rule_executes":false},
+      "provenance": "BM 47447 rev. 46-49; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae19.commentary.simanu_date_conflict",
+      "rule_ids": ["babylonian.eae19.commentary.simanu_date_conflict"],
+      "event": {"month":"simanu","base_day":21,"commentary_days":[22,23],"region":"Scorpius"},
+      "expected": {"date_harmonized":false,"execution":false,"required_resolution":"controlling_edition_and_philological_collation"},
+      "provenance": "BM 47447 rev. 52-54; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae19.commentary.regional_equations_vii_viii",
+      "rule_ids": ["babylonian.eae19.commentary.tashritu_gula_elam","babylonian.eae19.commentary.arahsamna_pleiades_taurus"],
+      "inputs": {"tashritu_case":{"month":"tashritu","day":14},"arahsamna_case":{"month":"arahsamna","day":14}},
+      "expected": {"tashritu_region":"Gula","gula_equations":["rain","Elam","palace_iskaru_fields"],"arahsamna_alternative":"halo_inner_part_in_Pleiades_and_Taurus","cross_month_match":false,"customer_output":false},
+      "provenance": "BM 47447 rev. 55-61; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae19.commentary.regional_equations_ix_xi",
+      "rule_ids": ["babylonian.eae19.commentary.kislimu_orion_sagittarius","babylonian.eae19.commentary.shabatu_gemini"],
+      "inputs": {"kislimu_case":{"month":"kislimu","day":14},"shabatu_case":{"month":"shabatu","day":14}},
+      "expected": {"kislimu_alternatives":["Orion","facing_Sagittarius"],"kislimu_merge":false,"shabatu_region":"Gemini","shared_historical_outcome":"plague","personal_prediction":false},
+      "provenance": "BM 47447 rev. 62-65; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae19.commentary.addaru_broken_dependency",
+      "rule_ids": ["babylonian.eae19.commentary.addaru_broken_region_dependency"],
+      "event": {"month":"addaru","day":14,"regions":["Virgo","Saturn"],"land_destiny_region":"unknown_due_to_break"},
+      "expected": {"good_or_evil_selected":false,"execution":false,"reason":"decisive_region_comparison_is_broken"},
+      "provenance": "BM 47447 rev. 65-67; CCP P461229"
+    },
+    {
+      "vector_id": "babylonian.eae21.commentary.scribal_error_preservation",
+      "rule_ids": ["babylonian.eae21.commentary.gishgan_manuscript_error"],
+      "inputs": {"manuscript_a":"GIŠ.GAN","parallel_manuscript":"PA.GAN_or_imaḫḫaṣ","commentary":"GIŠ.GAN_rationalized_as_PA.GAN"},
+      "expected": {"overwrite_manuscript_a":false,"apply_rationalization_to_parallel":false,"record_editorial_error_assessment":true},
+      "provenance": "Sm.683 introduction, obv. 2-6, notes 2-4; CCP P425538"
+    },
+    {
+      "vector_id": "babylonian.eae21.commentary.quoted_base_omens",
+      "rule_ids": ["babylonian.eae21.commentary.day21_sea_marsh","babylonian.eae21.commentary.month5_day21_thunder","babylonian.eae21.commentary.day20_rain_war_peace"],
+      "inputs": {"day21_general":{"day":21},"month5_day21":{"month":5,"day":21},"day20":{"day":20}},
+      "expected": {"day21_general_outcomes":3,"month5_day21_outcomes":3,"day20_outcomes":3,"cross_day_match":false,"base_text_status":"quoted_in_commentary_pending_controlling_edition_collation","customer_output":false},
+      "provenance": "Sm.683 obv. 7-10 and rev. 11-17; CCP P425538"
+    },
+    {
+      "vector_id": "babylonian.eae.commentary.birth_input_rejection",
+      "rule_ids": [
+        "babylonian.eae16.commentary.lightning_summer_scope",
+        "babylonian.eae16.commentary.color_reference_ambiguous",
+        "babylonian.eae19.commentary.tashritu_gula_elam",
+        "babylonian.eae21.commentary.day20_rain_war_peace"
+      ],
+      "inputs": {"birth_date":"1990-01-01","birth_time":"12:00","birth_place":"London"},
+      "expected": {"matched_rules":[],"historical_context_may_be_shown":true,"personalized_portent":false,"customer_prediction":false},
+      "provenance": "Corpus-wide safety invariant: both ancient commentary witnesses concern institutional or natural omens, not modern natal readings."
+    }
+  ]
+}

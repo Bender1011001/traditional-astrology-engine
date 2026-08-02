@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "pharaonic_egyptian",
+  "school_id": "bounded_pharaonic_civil_calendar_arithmetic",
+  "source_pack_id": "egyptian_civil_calendar_365_v1",
+  "source_edition_id": "porceddu2008_ucl_and_budge1923_visual_check_2026_08_01",
+  "source_registry_ids": ["egyptian_porceddu_periodicity_2008", "egyptian_ucl_civil_calendar", "egyptian_cpl_budge_1923_hieratic_papyri_second_series"],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "This pack encodes only positions in the 365-day civil year and fail-closed chronology boundaries. It does not encode a historical epoch, papyrus prognosis, modern periodicity hypothesis or birth reading.",
+  "rules": [
+    {
+      "rule_id": "egyptian.civil.seasons_three_by_four_months",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "pharaonic_civil_calendar", "domain": "calendar",
+      "scope": {"component": "ordinary_year", "birth_input_eligible": false},
+      "conditions": {"ordinary_month_number": "1..12"},
+      "conclusion": {"season_order": ["akhet", "peret", "shemu"], "months_per_season": 4, "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "2. The Egyptian civil calendar", "location": "PDF p.3 / journal p.329", "verification": "Rendered page visually inspected; text states four months per Akhet, Peret and Shemu."}],
+      "evidence_grade": "B", "publication_limit": "Research calendar arithmetic only.", "review_status": "Egyptological terminology review required."
+    },
+    {
+      "rule_id": "egyptian.civil.ordinary_month_thirty_days",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "pharaonic_civil_calendar", "domain": "calendar",
+      "scope": {"component": "ordinary_month", "birth_input_eligible": false},
+      "conditions": {"season": ["akhet", "peret", "shemu"], "month_in_season": "1..4"},
+      "conclusion": {"valid_day_range": [1, 30], "day_31_valid": false, "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "2. The Egyptian civil calendar", "location": "PDF p.3 / journal p.329", "verification": "Rendered page visually inspected; text states twelve months of thirty days."}],
+      "evidence_grade": "B", "publication_limit": "Research calendar arithmetic only.", "review_status": "Calendar structure verified; chronology not supplied."
+    },
+    {
+      "rule_id": "egyptian.civil.heriu_renpet_five_days",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "pharaonic_civil_calendar", "domain": "calendar",
+      "scope": {"component": "additional_period", "birth_input_eligible": false},
+      "conditions": {"ordinary_days_elapsed": 360},
+      "conclusion": {"period_id": "heriu_renpet", "valid_day_range": [1, 5], "month_in_season": null, "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "2. The Egyptian civil calendar", "location": "PDF p.3 / journal p.329", "verification": "Rendered page visually inspected; five days upon the year are named heriu-renpet."}],
+      "evidence_grade": "B", "publication_limit": "Research calendar arithmetic only.", "review_status": "Names and period terminology require Egyptological review."
+    },
+    {
+      "rule_id": "egyptian.civil.year_length_365",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "pharaonic_civil_calendar", "domain": "calendar",
+      "scope": {"component": "year", "birth_input_eligible": false},
+      "conditions": {"ordinary_days": 360, "additional_days": 5},
+      "conclusion": {"year_length_days": 365, "next_position_after_364": 0, "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "Introduction and section 2", "location": "PDF pp.1,3 / journal pp.327,329", "verification": "Text and rendered pages inspected; both state a 365-day civil year."}],
+      "evidence_grade": "B", "publication_limit": "Research calendar arithmetic only.", "review_status": "Historical anchoring remains separate."
+    },
+    {
+      "rule_id": "egyptian.civil.pharaonic_model_no_intercalation",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "pharaonic_civil_calendar", "domain": "calendar",
+      "scope": {"model_id": "pharaonic_civil_365", "birth_input_eligible": false},
+      "conditions": {"year_boundary_reached": true},
+      "conclusion": {"insert_leap_day": false, "alexandrian_coptic_rule_inherited": false, "customer_prediction": false},
+      "priority": 120, "exceptions": ["Later Alexandrian/Coptic calendars require their own model and effective interval."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "ucl_digital_egypt_calendar", "work": "The Egyptian - Coptic calendar", "section": "calendar table and introduction", "location": "institutional web page", "verification": "Page distinguishes the later Alexandrian leap reform from the ancient 365-day structure."}],
+      "evidence_grade": "B", "publication_limit": "Model separation only.", "review_status": "Chronological authority required for regime transitions."
+    },
+    {
+      "rule_id": "egyptian.civil.position_date_bijection",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "pharaonic_civil_calendar", "domain": "calendar",
+      "scope": {"operation": "cycle_internal_conversion", "birth_input_eligible": false},
+      "conditions": {"valid_calendar_position_or_date": true},
+      "conclusion": {"unique_positions": 365, "round_trip_required": true, "customer_prediction": false},
+      "priority": 110, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "sections 2-3", "location": "PDF pp.3-4 / journal pp.329-330", "verification": "The paper numbers civil dates from the beginning of the year, with I Akhet 1 as 1 and II Akhet 1 as 31."}],
+      "evidence_grade": "B", "publication_limit": "Research calendar arithmetic only.", "review_status": "Independent exhaustive validation required."
+    },
+    {
+      "rule_id": "egyptian.civil.explicit_chronology_profile_required",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "civil_date_conversion", "birth_input_eligible": "conditional"},
+      "conditions": {"civil_date_requested": true},
+      "conclusion": {"default_profile": null, "require_named_regime_anchor_and_uncertainty": true, "customer_prediction": false},
+      "priority": 200, "exceptions": ["Cycle-internal position conversion needs no civil chronology."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "2. The Egyptian civil calendar", "location": "PDF p.3 / journal p.329", "verification": "Rendered page states that the 365-day year fell out of step with the solar year."}],
+      "evidence_grade": "B", "publication_limit": "No customer-facing civil-date conversion.", "review_status": "Blocked pending named historical chronology profiles."
+    },
+    {
+      "rule_id": "egyptian.civil.named_profile_date_offset",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "civil_date_conversion", "birth_input_eligible": "conditional"},
+      "conditions": {"complete_named_profile": true, "resolved_civil_date": true},
+      "conclusion": {"operation": "civil_day_difference_then_euclidean_365_advance", "preserve_year_delta": true, "customer_prediction": false},
+      "priority": 190, "exceptions": ["Unresolved calendar policy, locality or day boundary fails closed."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "research_boundary_2026_08_01", "work": "Pharaonic Egyptian source audit", "section": "Calendar kernel", "location": "chronology profile contract", "verification": "Audit requires regime, anchor, civil calendar policy and uncertainty for conversion."}],
+      "evidence_grade": "B", "publication_limit": "Synthetic research fixtures only until a historical profile is approved.", "review_status": "No production chronology profile exists."
+    },
+    {
+      "rule_id": "egyptian.civil.reject_cross_regime_profile",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "civil_date_conversion", "birth_input_eligible": "conditional"},
+      "conditions": {"profile_model_id_is_not": "pharaonic_civil_365"},
+      "conclusion": {"reject": true, "coptic_or_alexandrian_back_projection": false, "customer_prediction": false},
+      "priority": 210, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "ucl_digital_egypt_calendar", "work": "The Egyptian - Coptic calendar", "section": "introduction", "location": "institutional web page", "verification": "The page dates the Alexandrian/Coptic intercalating form to 30-26 BCE, requiring a separate regime."}],
+      "evidence_grade": "B", "publication_limit": "Fail-closed regime control.", "review_status": "Required invariant."
+    },
+    {
+      "rule_id": "egyptian.civil.no_automatic_hemerology_or_birth_reading",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "calendar_position", "birth_input_eligible": false},
+      "conditions": {"egyptian_calendar_date_computed": true},
+      "conclusion": {"emit_prognosis": false, "emit_birth_reading": false, "requires_separate_witness_lookup": true, "customer_prediction": false},
+      "priority": 220, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "sections 1-3", "location": "PDF pp.2-4 / journal pp.328-330", "verification": "The paper distinguishes manuscripts, records disagreements, and describes modern statistical analysis; calendar position alone is not a witness-specific judgment."}],
+      "evidence_grade": "B", "publication_limit": "Calendar fields only; no reading.", "review_status": "Hemerology corpus not implemented."
+    },
+    {
+      "rule_id": "egyptian.civil.heriu_renpet_no_preserved_main_calendar_prognosis",
+      "tradition_id": "pharaonic_egyptian", "school_id": "bounded_pharaonic_civil_calendar_arithmetic", "period": "new_kingdom_hemerology_comparison", "domain": "calendar",
+      "scope": {"component": "heriu_renpet", "birth_input_eligible": false},
+      "conditions": {"additional_day": "1..5"},
+      "conclusion": {"preserved_main_calendar_prognosis_available": false, "historical_absence_proven": false, "invent_missing_value": false, "requires_witness_lookup": true, "customer_prediction": false},
+      "priority": 230, "exceptions": ["References elsewhere in a papyrus do not become entries in the main calendar without a source locator.", "A lost source portion is unknown evidence, not a negative prognosis rule."], "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "porceddu2008", "work": "Evidence of Periodicity in Ancient Egyptian Calendars", "section": "2-3", "location": "PDF pp.3-4 / journal pp.329-330", "verification": "Rendered pages report no prognosis data for the final five days in the compared corpus and distinguish extra-calendar references from Cairo's main calendar."},
+        {"edition_id": "budge1923_second_series", "work": "Facsimiles of Egyptian Hieratic Papyri in the British Museum", "section": "Papyrus No. 10184, Sallier IV", "location": "PDF p.39 / printed p.35", "verification": "Rendered page visually inspected; Budge says the Sallier IV portion probably containing the Five Epagomenal Days is lost."}
+      ],
+      "evidence_grade": "B", "publication_limit": "Preservation/abstention gate only; no historical negative rule and no reading.", "review_status": "Direct loss is verified for Sallier IV; other witnesses and the original tradition remain unresolved pending Leitz/Bakir and papyrus collation."
+    }
+  ]
+}

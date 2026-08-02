@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "nahua_central_mexican",
+  "school_id": "bounded_tonalpohualli_cycle_arithmetic",
+  "source_pack_id": "nahua_tonalpohualli_cycle_v1",
+  "source_edition_id": "getty_dfc_book4_folio1r_and_inah_anales_table_2026_08_01",
+  "source_registry_ids": [
+    "nahua_getty_florentine_codex_book4",
+    "nahua_inah_anales_tonalamatl_table"
+  ],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "This pack encodes only cycle arithmetic and fail-closed conversion boundaries. It supplies no default epoch, civil-date correlation, personality taxonomy or divinatory judgment.",
+  "rules": [
+    {
+      "rule_id": "nahua.tonalpohualli.coefficient_cycle_13",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "central_mexican_calendar_witnesses", "domain": "calendar",
+      "scope": {"series": "coefficient", "birth_input_eligible": false},
+      "conditions": {"integer_day_offset_from_valid_anchor": true},
+      "conclusion": {"operation": "advance_modulo", "modulus": 13, "range": [1, 13], "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "getty_dfc_book4_folio1r_2026_08_01", "work": "Florentine Codex Book 4", "section": "Chapter 1", "location": "folio 1r", "verification": "Stable Spanish and English text records inspected; the passage states thirteen days per period."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Classical Nahuatl and calendrical review still required."
+    },
+    {
+      "rule_id": "nahua.tonalpohualli.day_sign_cycle_20",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "central_mexican_calendar_witnesses", "domain": "calendar",
+      "scope": {"series": "day_sign", "birth_input_eligible": false},
+      "conditions": {"integer_day_offset_from_valid_anchor": true},
+      "conclusion": {"operation": "advance_in_source_order", "sign_count": 20, "customer_prediction": false},
+      "priority": 100, "exceptions": ["Source spellings are not silently regularized into interpretation keys."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "inah_anales_tonalamatl_scan", "work": "El Tonalamatl", "section": "Tabla de las veinte trecenas", "location": "table headed by Cipactli through Xochitl", "verification": "Complete twenty-row order and coefficient table inspected in the INAH-hosted scan/indexed text."}],
+      "evidence_grade": "B", "publication_limit": "Research arithmetic only.", "review_status": "Primary-witness and orthographic collation required."
+    },
+    {
+      "rule_id": "nahua.tonalpohualli.joint_recurrence_260",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "central_mexican_calendar_witnesses", "domain": "calendar",
+      "scope": {"series": ["coefficient", "day_sign"], "birth_input_eligible": false},
+      "conditions": {"coefficient_period": 13, "day_sign_period": 20},
+      "conclusion": {"joint_period_days": 260, "same_pair_before_260": false, "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "getty_dfc_book4_folio1r_2026_08_01", "work": "Florentine Codex Book 4", "section": "Chapter 1", "location": "folio 1r", "verification": "The inspected text explicitly states a 260-day cycle returning to the beginning."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Independent full-cycle reproduction required before any converter release."
+    },
+    {
+      "rule_id": "nahua.tonalpohualli.trecena_boundary",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "central_mexican_calendar_witnesses", "domain": "calendar",
+      "scope": {"series": "trecena", "birth_input_eligible": false},
+      "conditions": {"coefficient": 1},
+      "conclusion": {"begins_new_trecena": true, "trecena_length_days": 13, "customer_prediction": false},
+      "priority": 100, "exceptions": ["This does not attach a patron, augury or ritual unless a selected witness supplies it."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "getty_dfc_book4_folio1r_2026_08_01", "work": "Florentine Codex Book 4", "section": "Chapter 1", "location": "folio 1r heading and opening paragraph", "verification": "Ce Cipactli is the opening sign and the text describes counting by thirteen-day periods."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Patron and pictorial layers remain out of scope."
+    },
+    {
+      "rule_id": "nahua.tonalpohualli.explicit_epoch_required",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "civil_date_conversion", "birth_input_eligible": "conditional"},
+      "conditions": {"civil_date_requested": true},
+      "conclusion": {"require_named_epoch_profile": true, "default_epoch": null, "customer_prediction": false},
+      "priority": 200, "exceptions": ["Cycle-internal offsets may be calculated without a civil-date epoch."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "research_boundary_2026_08_01", "work": "Nahua source audit", "section": "Calendar kernel", "location": "epoch contract", "verification": "Source comparison established that inspected witnesses support the cycle but do not yet establish a selected civil-date correlation and day boundary."}],
+      "evidence_grade": "B", "publication_limit": "No customer-facing civil-date conversion.", "review_status": "Blocked pending an authoritative named correlation and day-boundary profile."
+    },
+    {
+      "rule_id": "nahua.tonalpohualli.named_epoch_date_offset",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "civil_date_conversion", "birth_input_eligible": "conditional"},
+      "conditions": {"complete_named_epoch_profile": true, "input_is_resolved_civil_date": true},
+      "conclusion": {"day_offset": "input_civil_date_minus_epoch_civil_date", "then_apply_cycle_arithmetic": true, "customer_prediction": false},
+      "priority": 190, "exceptions": ["Clock instants, unresolved timezones and unresolved day boundaries fail closed."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "research_boundary_2026_08_01", "work": "Nahua source audit", "section": "Calendar kernel", "location": "epoch contract", "verification": "The audit requires the civil date, calendar policy, locality, authority, uncertainty and day boundary to travel with any correlation."}],
+      "evidence_grade": "B", "publication_limit": "Research fixture conversion only.", "review_status": "No historical epoch has yet been approved."
+    },
+    {
+      "rule_id": "nahua.tonalpohualli.no_cross_tradition_epoch",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "civil_date_conversion", "birth_input_eligible": "conditional"},
+      "conditions": {"epoch_tradition_id_is_not": "nahua_central_mexican"},
+      "conclusion": {"reject": true, "maya_correlation_reuse": false, "customer_prediction": false},
+      "priority": 210, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "research_boundary_2026_08_01", "work": "Nahua source audit", "section": "Calendar kernel", "location": "cross-tradition boundary", "verification": "The audit explicitly prohibits reusing a Maya correlation merely because both traditions employ 260-day cycles."}],
+      "evidence_grade": "B", "publication_limit": "Fail-closed research control.", "review_status": "Required invariant."
+    },
+    {
+      "rule_id": "nahua.tonalpohualli.arithmetic_has_no_divinatory_output",
+      "tradition_id": "nahua_central_mexican", "school_id": "bounded_tonalpohualli_cycle_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "cycle_arithmetic", "birth_input_eligible": false},
+      "conditions": {"calendar_position_computed": true},
+      "conclusion": {"emit_interpretation": false, "personality_lookup": false, "customer_prediction": false},
+      "priority": 220, "exceptions": ["A future source-scoped interpretation pack must remain separate and independently validated."], "conflicts_with": [],
+      "source_passages": [{"edition_id": "getty_dfc_book4_folio1r_2026_08_01", "work": "Florentine Codex Book 4", "section": "Chapter 1", "location": "folio 1r", "verification": "The source preserves conditional conduct language, demonstrating that a bare day-sign lookup would erase material conditions."}],
+      "evidence_grade": "A", "publication_limit": "Arithmetic fields only; no reading.", "review_status": "Interpretation corpus not implemented."
+    }
+  ]
+}

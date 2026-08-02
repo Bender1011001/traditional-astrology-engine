@@ -1,0 +1,1395 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+  "source_pack_id": "eae20_im124485_vat9419_witness_comparison_v1",
+  "source_edition_id": "al_rawi_george2006_im124485_with_heessel2021_vat9419_comparison",
+  "source_registry_ids": [
+    "babylonian_al_rawi_george_eae20_im124485_2006",
+    "babylonian_heessel_kal13_eae20_vat9419_11310_2021"
+  ],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "The 2006 critical edition of IM 124485 was inspected across its full article, transliteration, English translation, notes, manuscript comparisons, cuneiform copy, photographs, and conclusions. KAL 13 text 21 (2021) was independently inspected in German transliteration, translation, notes, duplicate concordance, OCR, and rendered pages. Rules are explicitly witness- and recension-scoped because the editions demonstrate multiple contemporaneous recensions, transposed directions, changed dates, unstable clause boundaries, and conflicting peace/plunder or destruction/prosperity outcomes. No rule is natal or customer-executable.",
+  "rules": [
+    {
+      "rule_id": "babylonian.eae20.im.vii.tashritu14_mutabal",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "IM 124485",
+        "section": "VII",
+        "target_context": "Mutabal_Borsippa",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "tashritu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "west_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "south_below"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "north"
+          },
+          {
+            "fact": "middle_watch_progress",
+            "operator": "equals",
+            "value": "reaches_half"
+          },
+          {
+            "fact": "eclipse_progress",
+            "operator": "equals",
+            "value": "beyond_half_until_light"
+          },
+          {
+            "fact": "star_cusp_motion",
+            "operator": "equals",
+            "value": "right_then_left"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "witness_scoped_historical_apodosis",
+        "themes": [
+          "mutabal_resettled",
+          "mutabal_crown_prince_rules",
+          "borsippa_crown_prince_afflicted"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "All nine predicates belong to the compound protasis; the article notes that its duration is physically impossible but textually valid.",
+        "The final political clause contains a scribal correction."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.msd.vii.king_war_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "VII",
+          "location": "IM 124485 lines 1-8; article pp. 26-32",
+          "verification": "critical_transliteration_translation_notes_and_tablet_images_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Assyriological_recollation_and_full_recension_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.msd.vii.king_war_variant",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "neo_assyrian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "MS D",
+        "section": "VII",
+        "target_context": "kings",
+        "executable": false,
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "tashritu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "recensional_variant_apodosis",
+        "theme": "king_declares_war_on_king",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Only the short surviving apodosis is secure; do not import all IM predicates into damaged MS D."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.im.vii.tashritu14_mutabal"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "VII recensional commentary",
+          "location": "article p. 36, MS D rev. 8",
+          "verification": "critical_commentary_and_variant_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "MS_D_protasis_reconstruction_and_image_collation_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im.vii.numusda_supplement",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "IM 124485",
+        "section": "VII supplementary omen",
+        "target_context": "Mutabal_Babylon_Borsippa_Dilbat",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "nisannu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "numusda_relation",
+            "operator": "equals",
+            "value": "below_yoke_above_marduk"
+          },
+          {
+            "fact": "additional_star_state",
+            "operator": "equals",
+            "value": "present_and_bright"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "supplementary_fixed_star_apodosis",
+        "themes": [
+          "mutabal_resettled",
+          "babylon_deserted",
+          "mutabal_and_dilbat_abandoned",
+          "borsippa_relieved"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The damaged relation at IM line 10 is not reconstructed.",
+        "MS S gives a different month/day and additional outcomes; this rule is IM-only."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "VII supplementary omen",
+          "location": "IM 124485 lines 8-16; article p. 32 and pp. 37-38",
+          "verification": "critical_translation_and_recensional_commentary_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Damaged_star_relation_and_recensional_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im.viii.arahsamna14_eridu",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "IM 124485",
+        "section": "VIII",
+        "target_context": "Eridu_royalty",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "arahsamna"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "east_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "west_below"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "north"
+          },
+          {
+            "fact": "middle_watch_progress",
+            "operator": "equals",
+            "value": "sets_out"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "reaches_half"
+          },
+          {
+            "fact": "cusp_state",
+            "operator": "equals",
+            "value": "jabbing_sky"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "witness_scoped_historical_apodosis",
+        "themes": [
+          "eridu_men_slaughtered",
+          "royal_reign_ends",
+          "city_abandoned",
+          "king_and_family_killed",
+          "crown_prince_escapes"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Eridu may signify Babylon in the first-millennium interpretation described by the editors; retain the written target and the scholarly gloss separately."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.mss.viii.transposed_directions"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "VIII",
+          "location": "IM 124485 lines 17-23; article p. 32 and pp. 38-39",
+          "verification": "critical_translation_and_recensional_commentary_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Target_semantics_and_recensional_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.mss.viii.transposed_directions",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "early_neo_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "MS S",
+        "section": "VIII",
+        "target_context": "Eridu_royalty",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "arahsamna"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "east_below"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "west_above"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "north"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "reaches_half"
+          },
+          {
+            "fact": "cusp_state",
+            "operator": "equals",
+            "value": "jabbing_sky"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "recensional_variant_apodosis",
+        "themes": [
+          "rich_man_dies_household_prospers",
+          "brawls",
+          "eridu_men_slaughtered",
+          "royal_reign_changes",
+          "city_taken",
+          "king_and_family_killed",
+          "crown_prince_escapes"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Above and below are deliberately transposed relative to IM; do not normalize them away."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.im.viii.arahsamna14_eridu"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "VIII recensional commentary",
+          "location": "MS S rev. 12-17; article pp. 38-39",
+          "verification": "collated_variant_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "MS_S_image_collation_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im.viii.venus_enters_moon",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "IM 124485",
+        "section": "VIII supplementary omen",
+        "target_context": "land_and_people",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "nisannu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "venus_moon_event",
+            "operator": "equals",
+            "value": "venus_enters_moon_exits_right"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "supplementary_planetary_apodosis",
+        "themes": [
+          "land_and_people_destroyed",
+          "enemy_excluded_from_land"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "This is a separate Venus-Moon omen embedded after the eclipse omen, not an extra condition on the Arahsamna eclipse.",
+        "MS Z gives day 15; MS S gives Arahsamna and enemy incursion."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "VIII supplementary omen",
+          "location": "IM 124485 lines 23-24; article p. 32 and p. 39",
+          "verification": "critical_translation_and_variant_commentary_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Date_and_recensional_variant_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im.ix.kislimu14_der",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "IM 124485",
+        "section": "IX",
+        "target_context": "Der_royalty",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "kislimu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "north_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "south_below"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "west"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "reaches_half"
+          },
+          {
+            "fact": "right_cusp_state",
+            "operator": "equals",
+            "value": "curled"
+          },
+          {
+            "fact": "eclipse_progress",
+            "operator": "equals",
+            "value": "beyond_half"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "witness_scoped_historical_apodosis",
+        "themes": [
+          "der_resettled",
+          "king_of_der_dies",
+          "der_lacks_good_fortune",
+          "king_short_lived",
+          "venus_bright_by_yoke_of_enlil"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The Venus movement is part of the apodosis/predicted outcome, not an observed trigger."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.mss.ix.transposed_prosperity_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "IX",
+          "location": "IM 124485 lines 25-32; article p. 32 and pp. 39-41",
+          "verification": "critical_translation_and_recensional_commentary_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Recensional_and_planetary_clause_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.mss.ix.transposed_prosperity_variant",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "early_neo_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "MS S",
+        "section": "IX",
+        "target_context": "Der_royalty",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "kislimu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "north_below"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "south_above"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "west"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "reaches_half"
+          },
+          {
+            "fact": "right_cusp_state",
+            "operator": "equals",
+            "value": "curled"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "recensional_variant_apodosis",
+        "themes": [
+          "inundation_and_famine_preface",
+          "king_of_der_dies",
+          "der_prospers",
+          "kingship_endures"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The manuscript is damaged and its apodosis is restored partly from an excerpt; the positive land outcome conflicts with IM."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.im.ix.kislimu14_der"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "IX recensional commentary",
+          "location": "MS S rev. 19-23; article pp. 39-40",
+          "verification": "collated_variant_translation_and_restoration_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "MS_S_image_and_restoration_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im_vat.x.tebetu14_plunder",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian_and_neo_assyrian",
+      "domain": "omen",
+      "scope": {
+        "artifacts": [
+          "IM 124485",
+          "VAT 9419 + VAT 11310"
+        ],
+        "section": "X",
+        "target_context": "Subartu_Gutium",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "tebetu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "east_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "west_below"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "west"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "eclipse_ends"
+          },
+          {
+            "fact": "cusp_state",
+            "operator": "equals",
+            "value": "equal_neither_fat_nor_thin"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "multi_witness_historical_apodosis",
+        "themes": [
+          "subartu_and_gutium_captured",
+          "people_perish",
+          "widows_increase",
+          "king_of_subartu_conquers_and_plunders"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The independent Assur witness is fragmentary in the protasis but supports the plunder outcome."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.msm.x.peace_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "X",
+          "location": "IM 124485 lines 33-41; article pp. 32-33 and pp. 41-42",
+          "verification": "critical_translation_and_commentary_inspected"
+        },
+        {
+          "edition_id": "heessel2021_kal13_text21",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "KAL 13 text 21 / EAE 20 X",
+          "location": "VAT 9419 + VAT 11310 rev. IV? 1-5; KAL 13 pp. 57-58",
+          "verification": "German_transliteration_translation_notes_and_rendered_pages_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Full_witness_stemma_and_sign_collation_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.msm.x.peace_variant",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "neo_assyrian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "MS M",
+        "section": "X",
+        "target_context": "Subartu",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "tebetu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "eclipse_progress",
+            "operator": "equals",
+            "value": "beyond_half"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "recensional_variant_apodosis",
+        "themes": [
+          "subartu_and_gutium_captured",
+          "people_perish",
+          "widows_increase",
+          "king_of_subartu_makes_peace_with_lands"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The shorter preserved protasis is insufficient to assert every IM selector.",
+        "The peace/plunder divergence can arise from a small logographic difference but must remain a substantive conflict."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.im_vat.x.tebetu14_plunder"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "X recensional commentary",
+          "location": "MS M iv 17-21; article p. 41",
+          "verification": "collated_transliteration_translation_and_variant_analysis_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "MS_M_image_and_full_protasis_collation_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im_vat.xi.shabatu14_babylon",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian_and_neo_assyrian",
+      "domain": "omen",
+      "scope": {
+        "artifacts": [
+          "IM 124485",
+          "VAT 9419 + VAT 11310"
+        ],
+        "section": "XI",
+        "target_context": "Babylon_Ur",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "shabatu"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "south_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "east_below"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "north"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "begins"
+          },
+          {
+            "fact": "sun_company",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "cusp_state",
+            "operator": "equals",
+            "value": "jabbing_sky"
+          },
+          {
+            "fact": "whole_disk_covered",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "fact": "moon_disappears",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "day28_followup",
+            "operator": "equals",
+            "value": "red_rising_moon_shows_eclipse"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "multi_witness_historical_apodosis",
+        "themes": [
+          "babylon_destroyed",
+          "people_scattered",
+          "royal_reign_ends",
+          "ur_takes_babylonian_hegemony"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The editors warn that the pseudo-historical claim of Ur taking Babylonian hegemony describes history that never occurred.",
+        "Day-28 observation is a short-term eclipse-prediction technique, not birth input."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.mss.xi.night_elapsed_positive_appendix"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "XI",
+          "location": "IM 124485 lines 42-53; article pp. 31-33 and pp. 42-44",
+          "verification": "critical_translation_and_recensional_commentary_inspected"
+        },
+        {
+          "edition_id": "heessel2021_kal13_text21",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "KAL 13 text 21 / EAE 20 XI",
+          "location": "VAT 9419 + VAT 11310 rev. IV? 6-17; KAL 13 pp. 57-58",
+          "verification": "German_transliteration_translation_and_rendered_pages_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Historical_claim_and_full_witness_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.mss.xi.night_elapsed_positive_appendix",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "early_neo_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "MS S",
+        "section": "XI appended omen",
+        "target_context": "land",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "night_elapsed_while_eclipsed",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "recensional_appended_apodosis",
+        "themes": [
+          "river_floods",
+          "rain",
+          "successful_harvest",
+          "good_fortune"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "This favorable clause is a separate appended non-calendrical omen, not a reversal of the main Shabatu omen."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.im_vat.xi.shabatu14_babylon"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "XI recensional commentary",
+          "location": "MS S rev. 34-37; article pp. 43-44",
+          "verification": "collated_variant_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "MS_S_image_and_clause_boundary_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im.xii.addaru14_amurru",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "IM 124485",
+        "section": "XII",
+        "target_context": "Amurru",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "addaru"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "north_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "east_below"
+          },
+          {
+            "fact": "winds",
+            "operator": "contains_all",
+            "value": [
+              "west",
+              "east"
+            ]
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "eclipse_ends"
+          },
+          {
+            "fact": "cusps_at_rise",
+            "operator": "equals",
+            "value": "not_visible"
+          },
+          {
+            "fact": "cusps_at_set",
+            "operator": "equals",
+            "value": "visible"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "witness_scoped_historical_apodosis",
+        "themes": [
+          "amurru_chaos",
+          "gods_of_land_accursed",
+          "cities_deserted",
+          "nation_devours_nation",
+          "cities_sacked"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "IM line 60 is corrupt; the correct wherever-cities-destruction clause belongs to other witnesses and is not silently substituted."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.vat.xii.east_wind_city_variant",
+        "babylonian.eae20.mss_y.xii.south_east_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "XII",
+          "location": "IM 124485 lines 54-60; article p. 33 and pp. 44-46",
+          "verification": "critical_translation_textual_notes_and_recensional_commentary_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Corrupt_line_and_wind_variant_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.vat.xii.east_wind_city_variant",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "neo_assyrian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "VAT 9419 + VAT 11310",
+        "section": "XII",
+        "target_context": "Amurru",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "addaru"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "north_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "east_below"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "east"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "eclipse_ends"
+          },
+          {
+            "fact": "cusps_at_rise",
+            "operator": "equals",
+            "value": "not_visible"
+          },
+          {
+            "fact": "cusps_at_set",
+            "operator": "equals",
+            "value": "visible"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "witness_scoped_historical_apodosis",
+        "themes": [
+          "amurru_chaos",
+          "gods_of_land_accursed",
+          "city_brightening_or_extinction_near",
+          "nation_devours_nation",
+          "cities_sacked",
+          "wherever_city_exists_destruction"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The city term is philologically uncertain between brightening and extinction; retain both possibilities.",
+        "Lines 21-26 are partly reconstructed using IM and other duplicates."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.im.xii.addaru14_amurru",
+        "babylonian.eae20.mss_y.xii.south_east_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "heessel2021_kal13_text21",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "KAL 13 text 21 / EAE 20 XII",
+          "location": "VAT 9419 + VAT 11310 rev. IV? 18-27; KAL 13 pp. 57-59",
+          "verification": "German_transliteration_translation_notes_duplicate_table_and_rendered_pages_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "German_philological_and_reconstruction_review_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.mss_y.xii.south_east_variant",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "middle_assyrian_and_early_neo_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifacts": [
+          "MS Y",
+          "MS S",
+          "MS b"
+        ],
+        "section": "XII",
+        "target_context": "Amurru",
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_month",
+            "operator": "equals",
+            "value": "addaru"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "equals",
+            "value": 14
+          },
+          {
+            "fact": "darkening_quadrant",
+            "operator": "equals",
+            "value": "south_above"
+          },
+          {
+            "fact": "clearing_quadrant",
+            "operator": "equals",
+            "value": "east_below"
+          },
+          {
+            "fact": "wind",
+            "operator": "equals",
+            "value": "east"
+          },
+          {
+            "fact": "dawn_watch_progress",
+            "operator": "equals",
+            "value": "eclipse_ends"
+          },
+          {
+            "fact": "moon_at_rise",
+            "operator": "equals",
+            "value": "not_observable"
+          },
+          {
+            "fact": "moon_at_set",
+            "operator": "equals",
+            "value": "observable"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "recensional_variant_apodosis",
+        "themes": [
+          "amurru_destroyed_or_chaotic",
+          "gods_of_land_accursed",
+          "city_close_to_city",
+          "nation_devours_nation",
+          "cities_sacked",
+          "wherever_city_exists_destruction"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "These witnesses omit the lunar-cusp predicate and change the darkening direction.",
+        "MS S and MS b add famine and economic-collapse material not present in MS Y."
+      ],
+      "conflicts_with": [
+        "babylonian.eae20.im.xii.addaru14_amurru",
+        "babylonian.eae20.vat.xii.east_wind_city_variant"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "XII recensional commentary",
+          "location": "MS S rev. 38-44, MS b rev. 6-11, MS Y rev. 1-13; article pp. 44-46",
+          "verification": "collated_variant_translations_and_stemma_analysis_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Three_witness_image_collation_pending"
+    },
+    {
+      "rule_id": "babylonian.eae20.im_vat.xii.papsukkal_daylight",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian_and_neo_assyrian",
+      "domain": "omen",
+      "scope": {
+        "artifacts": [
+          "IM 124485",
+          "VAT 9419 + VAT 11310"
+        ],
+        "section": "XII supplementary omen",
+        "target_context": "humans_animals_land",
+        "executable": false,
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "papsukkal_state",
+            "operator": "equals",
+            "value": "rises_and_stands_with_sun"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "unstable_clause_boundary_apodosis",
+        "themes": [
+          "human_and_animal_downfall",
+          "land_panics",
+          "posterity_dies"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "The boundary between protasis and apodosis changes radically among MS Y, MS S, MS b, IM, and duplicates.",
+        "Papsukkal varies with Sipazianna/Orion and a commentary reinterprets the observation as a lunar-Saturn configuration."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "XII supplementary omen",
+          "location": "IM 124485 lines 60-63 and comparative witnesses; article pp. 33 and 46-47",
+          "verification": "critical_translation_and_clause_boundary_analysis_inspected"
+        },
+        {
+          "edition_id": "heessel2021_kal13_text21",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "KAL 13 text 21 / EAE 20 XII supplement",
+          "location": "VAT 9419 + VAT 11310 rev. IV? 24-26; KAL 13 pp. 57-59",
+          "verification": "fragmentary_German_edition_and_reconstruction_notes_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Protasis_apodosis_boundary_and_object_identification_unresolved"
+    },
+    {
+      "rule_id": "babylonian.eae20.im.xiii.schematic_days_destruction",
+      "tradition_id": "mesopotamian_babylonian",
+      "school_id": "eae20_witness_scoped_lunar_eclipse_omens",
+      "period": "late_babylonian",
+      "domain": "omen",
+      "scope": {
+        "artifact": "IM 124485",
+        "section": "XIII",
+        "target_context": "unspecified",
+        "executable": false,
+        "birth_input_eligible": false
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "phenomenon",
+            "operator": "equals",
+            "value": "lunar_eclipse"
+          },
+          {
+            "fact": "babylonian_day",
+            "operator": "in",
+            "value": [
+              7,
+              14,
+              21
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "schematic_summary_apodosis",
+        "theme": "destruction",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [
+        "Days 7 and 21 cannot host a lunar eclipse; they are schematic textual dates and must never be generated as astronomical events.",
+        "The month is broken and line 65 is not understood."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "al_rawi_george2006_eae20_im124485",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "XIII",
+          "location": "IM 124485 lines 64-67; article p. 33 and pp. 48-49",
+          "verification": "critical_translation_commentary_and_impossibility_analysis_inspected"
+        },
+        {
+          "edition_id": "heessel2021_kal13_text21",
+          "work": "Enuma Anu Enlil Tablet 20 witness edition",
+          "section": "KAL 13 text 21 / EAE 20 XIII fragment",
+          "location": "VAT 9419 + VAT 11310 rev. IV? 27; KAL 13 pp. 57-59",
+          "verification": "fragmentary_parallel_and_reconstruction_note_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Historical research display only; no present-day political, disaster, death, ritual, or personal prediction.",
+      "review_status": "Schematic_summary_only_never_execute"
+    }
+  ]
+}

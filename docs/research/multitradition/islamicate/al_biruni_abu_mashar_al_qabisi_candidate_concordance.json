@@ -1,0 +1,592 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "purpose": "Passage-discovery concordance for comparing al-Biruni, Abu Ma'shar, and al-Qabisi without merging authors, works, or translation lineages.",
+  "research_only": true,
+  "rule_manifest": false,
+  "rule_extraction_ready": false,
+  "live_engine": false,
+  "customer_output_eligible": false,
+  "source_registry_ids": [
+    "islamicate_al_biruni_halle_full_facing_1934",
+    "islamicate_al_biruni_wright_1934_local",
+    "islamicate_wurzburg_abu_mashar_great_introduction_tei",
+    "islamicate_wurzburg_al_qabisi_introduction_tei",
+    "islamicate_wurzburg_abu_mashar_abbreviation_tei"
+  ],
+  "discovery_method": {
+    "corpus": "University of Wurzburg Arabic and Latin Corpus 0.4.0",
+    "retrieved": "2026-08-01",
+    "method": "Search TEI headings and text nodes, resolve each hit to the nearest preceding primary-edition page break without an edRef attribute, then inspect the bounded page text and parallel lineages.",
+    "primary_page_rule": "A pb carrying edRef identifies a secondary manuscript or print witness and is not used as the controlling edition-page address.",
+    "promotion_rule": "A candidate passage is not a rule. Promotion requires the controlling English translation and apparatus, Arabic specialist review, a second independent reader, and validation vectors.",
+    "quoted_text_stored": false
+  },
+  "comparison_concepts": [
+    {
+      "concept_id": "planet_and_sign_gender_sect",
+      "description": "Sign gender, sign day/night classification, planet gender, and planet sect or day/night classification.",
+      "al_biruni_baseline": [
+        {
+          "work_id": "kitab_al_tafhim",
+          "sections": "347-349, 385-386, 396-401",
+          "printed_pages": "211, 234, 240",
+          "status": "existing_translation_dependent_research_rules; Arabic review pending"
+        }
+      ],
+      "candidates": [
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_arabic_tei",
+          "language": "Arabic",
+          "passages": [
+            "II.8 pp. 220-220 sign gender",
+            "II.9 pp. 222-222 sign day/night",
+            "IV.8 pp. 426-428 planet gender",
+            "IV.9 pp. 430-432 planet day/night"
+          ],
+          "status": "candidate_only"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_hermann_latin_tei",
+          "language": "Latin",
+          "translator": "Hermann of Carinthia",
+          "passages": [
+            "pp. 35-35 sign gender and day/night",
+            "p. 71 planet gender and day/night"
+          ],
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passages": [
+            "p. 84 sign gender and day/night",
+            "p. 172 planet gender",
+            "p. 173 planet day/night"
+          ],
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_arabic_tei",
+          "language": "Arabic",
+          "passages": [
+            "chapter I p. 24 sign gender and day/night",
+            "chapter II pp. 62-82 planet gender and day/night"
+          ],
+          "status": "candidate_only"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passages": [
+            "chapter 1 pp. 231-233 sign gender and day/night",
+            "chapter 2 pp. 267-287 planet gender and day/night"
+          ],
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "mukhtasar_al_mudkhal",
+          "artifact_id": "abu_mashar_abbreviation_arabic_tei",
+          "language": "Arabic",
+          "passages": [
+            "chapter 1 pp. 14-24 sign classifications",
+            "chapter 2 pp. 30-38 planet classifications"
+          ],
+          "status": "candidate_only_separate_work"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "mukhtasar_al_mudkhal",
+          "artifact_id": "abu_mashar_abbreviation_adelard_latin_tei",
+          "language": "Latin",
+          "translator": "Adelard of Bath",
+          "passages": [
+            "chapter 1 pp. 94-104 sign classifications",
+            "chapter 2 pp. 106-108 planet classifications"
+          ],
+          "status": "candidate_translation_lineage_separate_work"
+        }
+      ]
+    },
+    {
+      "concept_id": "halb_and_hayyiz",
+      "description": "Horizon/sect and gender/sign conditions whose terminology and grouping vary by witness.",
+      "al_biruni_baseline": [
+        {
+          "work_id": "kitab_al_tafhim",
+          "sections": "495-497, especially 496",
+          "printed_page": 308,
+          "status": "existing_translation_dependent_research_rules; Arabic review pending"
+        }
+      ],
+      "candidates": [
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_arabic_tei",
+          "language": "Arabic",
+          "passages": [
+            "VII.1 p. 722 hayyiz definition candidate",
+            "VII.6 p. 786 lexical halb/hayyiz candidate"
+          ],
+          "observed_tokens": [
+            "الحيّز",
+            "حلبها",
+            "حيّزها"
+          ],
+          "status": "candidate_only_apparatus_required"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_hermann_latin_tei",
+          "language": "Latin",
+          "translator": "Hermann of Carinthia",
+          "passages": [
+            "p. 128 haiz definition candidate",
+            "p. 140 condition-list candidate"
+          ],
+          "observed_tokens": [
+            "Haiz",
+            "haizehe"
+          ],
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passages": [
+            "p. 276 alhaiz definition candidate",
+            "p. 304 condition-list candidate"
+          ],
+          "observed_tokens": [
+            "alhaiz",
+            "haiz"
+          ],
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_arabic_tei",
+          "language": "Arabic",
+          "passages": [
+            "chapter I p. 60 halb/hayyiz definition candidate",
+            "chapter III p. 100 condition-list candidate"
+          ],
+          "observed_tokens": [
+            "الحلب",
+            "حيّزه",
+            "حلبها"
+          ],
+          "status": "candidate_only_apparatus_required"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passages": [
+            "chapter 1 p. 266 alhaiz/aiz definition candidate",
+            "chapter 3 p. 309 condition-list candidate"
+          ],
+          "observed_tokens": [
+            "alhaiz",
+            "aiz",
+            "haiz"
+          ],
+          "status": "candidate_translation_terminology_collapse_review"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "mukhtasar_al_mudkhal",
+          "artifact_id": "abu_mashar_abbreviation_arabic_tei",
+          "language": "Arabic",
+          "passages": [
+            "chapter 3 p. 40 hayyiz definition candidate",
+            "chapter 4 p. 52 lexical halb/hayyiz candidate"
+          ],
+          "observed_tokens": [
+            "الحيّز",
+            "حلبها",
+            "حيّزها"
+          ],
+          "status": "candidate_only_separate_work_apparatus_required"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "mukhtasar_al_mudkhal",
+          "artifact_id": "abu_mashar_abbreviation_adelard_latin_tei",
+          "language": "Latin",
+          "translator": "Adelard of Bath",
+          "passages": [
+            "chapter 3 p. 110 competentia definition candidate",
+            "chapter 4 p. 120 condition-list candidate"
+          ],
+          "observed_tokens": [
+            "competentia",
+            "locis sexui aptis"
+          ],
+          "status": "candidate_translation_semantic_rendering_review"
+        }
+      ]
+    },
+    {
+      "concept_id": "planetary_house_joys",
+      "description": "Planetary houses of joy, kept distinct from ordinary emotional joy vocabulary.",
+      "al_biruni_baseline": [
+        {
+          "work_id": "kitab_al_tafhim",
+          "sections": "396-401 and 498",
+          "printed_pages": "240 and 309",
+          "status": "existing_nonexclusive_condition_rule; broader hierarchy unresolved"
+        }
+      ],
+      "candidates": [
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_arabic_tei",
+          "language": "Arabic",
+          "passage": "VI.26 pp. 680-694; planetary joy list occurs near the end of the division",
+          "status": "candidate_only"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_hermann_latin_tei",
+          "language": "Latin",
+          "translator": "Hermann of Carinthia",
+          "passage": "chapter 26 pp. 121-123",
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passage": "differentia XXVI pp. 258-264; explicit list on p. 264",
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_arabic_tei",
+          "language": "Arabic",
+          "passage": "chapter I p. 54",
+          "status": "candidate_only"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passage": "chapter 1 p. 261",
+          "status": "candidate_translation_lineage"
+        }
+      ]
+    },
+    {
+      "concept_id": "firdaria_year_values",
+      "description": "Named firdaria-year values and node values, separated from sequencing and subperiod procedure.",
+      "al_biruni_baseline": [
+        {
+          "work_id": "kitab_al_tafhim",
+          "section": "395",
+          "printed_page": 239,
+          "status": "inspected passage does not state period durations or node periods"
+        }
+      ],
+      "candidates": [
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_arabic_tei",
+          "language": "Arabic",
+          "passage": "VII.8 p. 800",
+          "listed_values": {
+            "sun": 10,
+            "venus": 8,
+            "mercury": 13,
+            "moon": 9,
+            "saturn": 11,
+            "jupiter": 12,
+            "mars": 7,
+            "north_node": 3,
+            "south_node": 2
+          },
+          "stated_total": 75,
+          "status": "candidate_only"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_hermann_latin_tei",
+          "language": "Latin",
+          "translator": "Hermann of Carinthia",
+          "passage": "chapter 8 p. 143",
+          "listed_values": {
+            "sun": 10,
+            "venus": 8,
+            "mercury": 13,
+            "moon": 9,
+            "saturn": 11,
+            "jupiter": 12,
+            "mars": 8,
+            "north_node": 3,
+            "south_node": 2
+          },
+          "stated_total": null,
+          "status": "candidate_numeric_variant_apparatus_required"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passage": "differentia VIII p. 310",
+          "listed_values": {
+            "sun": 10,
+            "venus": 8,
+            "mercury": 13,
+            "jupiter": 12,
+            "mars": 7,
+            "moon": 8,
+            "saturn": 11,
+            "north_node": 3,
+            "south_node": 2
+          },
+          "stated_total": 75,
+          "status": "candidate_order_and_numeric_variant_apparatus_required"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_arabic_tei",
+          "language": "Arabic",
+          "passage": "chapter II pp. 64-88",
+          "listed_values": {
+            "sun": 10,
+            "venus": 8,
+            "mercury": 13,
+            "moon": 9,
+            "saturn": 11,
+            "jupiter": 12,
+            "mars": 7,
+            "north_node": 3,
+            "south_node": 2
+          },
+          "stated_total": null,
+          "status": "candidate_only"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passage": "chapter 2 pp. 270-293",
+          "listed_values": {
+            "sun": 10,
+            "venus": 8,
+            "mercury": 13,
+            "moon": 9,
+            "saturn": 11,
+            "jupiter": 12,
+            "mars": 7,
+            "north_node": 3,
+            "south_node": 2
+          },
+          "stated_total": null,
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "mukhtasar_al_mudkhal",
+          "artifact_id": "abu_mashar_abbreviation_arabic_tei",
+          "language": "Arabic",
+          "passage": "chapter 7 p. 80",
+          "listed_values": {
+            "sun": 10,
+            "venus": 8,
+            "mercury": 13,
+            "moon": 9,
+            "saturn": 11,
+            "jupiter": 12,
+            "mars": 7,
+            "north_node": 3,
+            "south_node": 2
+          },
+          "stated_total": 75,
+          "status": "candidate_only_separate_work"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "mukhtasar_al_mudkhal",
+          "artifact_id": "abu_mashar_abbreviation_adelard_latin_tei",
+          "language": "Latin",
+          "translator": "Adelard of Bath",
+          "passage": "chapter 7 p. 136",
+          "listed_values": {
+            "sun": 10,
+            "venus": 8,
+            "mercury": 13,
+            "moon": 9,
+            "saturn": 11,
+            "jupiter": 12,
+            "mars": 7,
+            "north_node": 3,
+            "south_node": 2
+          },
+          "stated_total": 77,
+          "status": "candidate_total_variant_apparatus_required"
+        }
+      ]
+    },
+    {
+      "concept_id": "firdaria_sequence_and_subperiods",
+      "description": "Diurnal/nocturnal starting order and subdivision of each major period, kept separate from year-value tables.",
+      "al_biruni_baseline": [
+        {
+          "work_id": "kitab_al_tafhim",
+          "section": "395",
+          "printed_page": 239,
+          "status": "seven-planet diurnal/nocturnal order and sevenfold subperiod structure encoded; nodes and durations excluded"
+        }
+      ],
+      "candidates": [
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_arabic_tei",
+          "language": "Arabic",
+          "passage": "chapter IV pp. 132-134",
+          "observed_scope": "diurnal start, nocturnal start, node periods, and sevenfold subdivision all occur in the bounded passage",
+          "status": "candidate_only"
+        },
+        {
+          "author_id": "al_qabisi",
+          "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+          "artifact_id": "al_qabisi_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "passage": "chapter 4 pp. 343-344",
+          "observed_scope": "diurnal start, nocturnal start, node periods, stated total, and sevenfold subdivision occur in the bounded passage",
+          "status": "candidate_translation_lineage"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "kitab_al_mudkhal_al_kabir",
+          "artifact_id": "abu_mashar_great_introduction_arabic_tei",
+          "language": "Arabic",
+          "passage": "VII.8 p. 800",
+          "observed_scope": "year-value inventory only in the inspected division",
+          "status": "negative_scope_finding"
+        },
+        {
+          "author_id": "abu_mashar_al_balkhi",
+          "work_id": "mukhtasar_al_mudkhal",
+          "artifact_id": "abu_mashar_abbreviation_arabic_tei",
+          "language": "Arabic",
+          "passage": "chapter 7 pp. 80-82",
+          "observed_scope": "year-value and related degree-table inventory; no complete sequencing procedure located in the inspected chapter",
+          "status": "negative_scope_finding_separate_work"
+        }
+      ]
+    }
+  ],
+  "variant_observations": [
+    {
+      "observation_id": "firdaria_great_introduction_mars_variant",
+      "type": "numeric_translation_lineage_variant",
+      "evidence": "The Arabic p. 800 and John p. 310 list Mars as 7; Hermann p. 143 lists Mars as 8.",
+      "resolution": "unresolved_pending_2019_apparatus",
+      "engine_action": "refuse_cross_lineage_value_selection"
+    },
+    {
+      "observation_id": "firdaria_great_introduction_john_internal_total",
+      "type": "internal_arithmetic_and_order_conflict",
+      "evidence": "John p. 310 lists values summing to 74, including a bracketed Moon value of 8, but states a total of 75 and orders Jupiter and Mars before Moon and Saturn.",
+      "resolution": "unresolved_pending_2019_apparatus",
+      "engine_action": "refuse_unreviewed_rule_promotion"
+    },
+    {
+      "observation_id": "firdaria_abbreviation_latin_total",
+      "type": "internal_arithmetic_conflict",
+      "evidence": "The Adelard Latin p. 136 values sum to 75 but the text states 77; the Arabic p. 80 values and stated total are both 75.",
+      "resolution": "unresolved_pending_1994_apparatus",
+      "engine_action": "preserve_both_recorded_and_recomputed_totals"
+    },
+    {
+      "observation_id": "halb_hayyiz_qabisi_latin_terminology",
+      "type": "translation_terminology_boundary",
+      "evidence": "The Qabisi Arabic p. 60 uses separate halb and hayyiz tokens within the definition; Latin p. 266 uses alhaiz and aiz for the two stages.",
+      "resolution": "unresolved_pending_arabic_and_apparatus_review",
+      "engine_action": "do_not_normalize_terms_automatically"
+    },
+    {
+      "observation_id": "halb_lexeme_semantic_anomaly",
+      "type": "cross_passage_lexical_anomaly",
+      "evidence": "Great Introduction Arabic p. 786 and Abbreviation Arabic p. 52 contain a halb-form token immediately glossed through dignities and joys, unlike the horizon use in Qabisi p. 60 and the al-Biruni baseline.",
+      "resolution": "unresolved_pending_arabic_collation_and_apparatus",
+      "engine_action": "do_not_equate_surface_forms_across_passages"
+    },
+    {
+      "observation_id": "hayyiz_abbreviation_competentia",
+      "type": "translation_semantic_rendering",
+      "evidence": "The Abbreviation Arabic p. 40 names hayyiz; Adelard p. 110 renders the corresponding first planetary condition as competentia rather than a transliteration.",
+      "resolution": "candidate_alignment_pending_apparatus",
+      "engine_action": "retain_translation_specific_term"
+    },
+    {
+      "observation_id": "mercury_author_scope_difference",
+      "type": "author_scoped_classification_difference",
+      "evidence": "The inspected Qabisi chapter II Arabic and Latin describe Mercury as male and diurnal, while the existing al-Biruni pack keeps Mercury conditional on context.",
+      "resolution": "candidate_difference_pending_controlling_translation_review",
+      "engine_action": "prohibit_cross_author_mercury_default"
+    },
+    {
+      "observation_id": "firdaria_scope_not_contradiction",
+      "type": "passage_scope_difference",
+      "evidence": "Al-Biruni section 395 omits duration and node tables in the inspected passage; Qabisi chapters II and IV and Abu Ma'shar's year-value passages include them.",
+      "resolution": "preserve_as_scope_difference",
+      "engine_action": "do_not_backfill_al_biruni_from_other_authors"
+    }
+  ],
+  "hard_invariants": [
+    "No candidate passage is a doctrinal rule.",
+    "No Arabic token is translated by this concordance.",
+    "No Latin translation lineage overrides the Arabic witness or another Latin lineage.",
+    "The Great Introduction and the Abbreviation remain different works.",
+    "Arithmetic disagreement is preserved as evidence and is never silently corrected.",
+    "Absence from one inspected passage is not absence from an author's complete corpus.",
+    "Only the Western engine is live; every item here remains research-only and customer-ineligible."
+  ],
+  "next_gate": [
+    "Acquire lawful access to the 2019, 2004, and 1994 translations and critical apparatus.",
+    "Collate each flagged numeric and terminological variant against the apparatus.",
+    "Obtain Arabic history-of-astrology review for the halb/hayyiz passages and Mercury classifications.",
+    "Have a second reader independently reproduce every passage address and candidate alignment.",
+    "Only then create separate rule manifests and mutation vectors for each author/work/lineage."
+  ]
+}

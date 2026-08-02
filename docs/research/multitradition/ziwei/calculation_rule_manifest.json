@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "ziwei_doushu",
+  "school_id": "quanshu_wikisource_transcription_candidate",
+  "source_pack_id": "ziwei_quanshu_juan2_wikisource_candidate_v1",
+  "source_edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+  "source_registry_ids": ["ziwei_doushu_quanshu_juan2_wikisource"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "These deterministic candidates are transcribed from Chinese Wikisource juan 2. The source page does not identify a base facsimile or collation, so all rules are evidence grade D until checked character by character against a dated edition and reviewed in Chinese.",
+  "rules": [
+    {
+      "rule_id": "ziwei.quanshu.j2.adjust_leap_birth_month",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_wikisource_transcription_candidate",
+      "period": "qing_transmitted_text_unidentified_printing",
+      "domain": "calendar",
+      "scope": {
+        "work": "Ziwei Doushu Quanshu",
+        "juan": 2,
+        "operation": "life_and_body_palace_birth_month_input"
+      },
+      "conditions": {
+        "any": [
+          {"fact": "birth.lunar_month.is_intercalary", "operator": "equals", "value": false},
+          {"fact": "birth.lunar_month.is_intercalary", "operator": "equals", "value": true}
+        ]
+      },
+      "conclusion": {
+        "type": "normalized_chart_month",
+        "if_regular": "use recorded lunar month number",
+        "if_intercalary": "use the following lunar month number for life/body palace placement",
+        "example": {"recorded": "intercalary month 1", "chart_month": 2}
+      },
+      "priority": null,
+      "exceptions": [
+        "The transcription does not establish whether month 12 wraps to month 1 or whether later schools subdivide an intercalary month; both require facsimile and school evidence.",
+        "This normalization is limited to the stated life/body palace operation and must not silently alter every month-dependent star rule."
+      ],
+      "conflicts_with": ["ziwei.other_school.leap_month_split_or_previous_month"],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+          "work": "Ziwei Doushu Quanshu, juan 2",
+          "section": "An shen ming li",
+          "location": "Wikisource juan 2, opening construction paragraph",
+          "verification": "primary_transcription_inspected_base_edition_unknown"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Do not call this the universal Zi Wei leap-month rule. Display the Quanshu source profile and suppress the chart if an unresolved month-12 or school variant changes placement.",
+      "review_status": "facsimile_collation_and_chinese_review_pending"
+    },
+    {
+      "rule_id": "ziwei.quanshu.j2.place_life_and_body_palaces",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_wikisource_transcription_candidate",
+      "period": "qing_transmitted_text_unidentified_printing",
+      "domain": "natal",
+      "scope": {
+        "work": "Ziwei Doushu Quanshu",
+        "juan": 2,
+        "operation": "life_and_body_palaces"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "birth.chart_lunar_month", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]},
+          {"fact": "birth.double_hour_branch", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "palace_placement_algorithm",
+        "month_anchor": "place lunar month 1 at Yin and count branches forward to chart lunar month",
+        "hour_anchor": "treat the resulting month palace as Zi hour",
+        "life_palace": "count branches backward from the month palace to the birth double-hour",
+        "body_palace": "count branches forward from the month palace to the birth double-hour"
+      },
+      "priority": null,
+      "exceptions": [
+        "Branch indexing, inclusivity and the Zi-hour civil-time boundary require explicit golden examples and cannot be inferred from a modern calculator.",
+        "The adjusted month must come from the source-scoped leap-month rule rather than a generic Chinese calendar library default."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+          "work": "Ziwei Doushu Quanshu, juan 2",
+          "section": "An shen ming li",
+          "location": "Wikisource juan 2, opening construction paragraph and examples",
+          "verification": "primary_transcription_inspected_base_edition_unknown"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "No customer chart until all twelve months, twelve double-hours, leap cases and boundary instants reproduce a facsimile-backed worked source.",
+      "review_status": "facsimile_collation_and_chinese_review_pending"
+    },
+    {
+      "rule_id": "ziwei.quanshu.j2.place_twelve_topic_palaces",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_wikisource_transcription_candidate",
+      "period": "qing_transmitted_text_unidentified_printing",
+      "domain": "natal",
+      "scope": {
+        "work": "Ziwei Doushu Quanshu",
+        "juan": 2,
+        "operation": "twelve_topic_palaces"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "chart.life_palace.branch", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "ordered_reverse_branch_assignment",
+        "start_at": "chart.life_palace.branch",
+        "direction": "reverse",
+        "topics": [
+          "life",
+          "siblings",
+          "wife_and_concubines_historical_label",
+          "children",
+          "wealth",
+          "illness",
+          "travel",
+          "servants_historical_label",
+          "office_and_career",
+          "property",
+          "fortune_and_virtue",
+          "parents"
+        ]
+      },
+      "priority": null,
+      "exceptions": [
+        "Historical topic labels must be preserved in the source trace but mapped to inclusive customer labels without changing palace order.",
+        "The transcription emphatically rejects forward placement for this operation."
+      ],
+      "conflicts_with": ["ziwei.forward_topic_palace_order"],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+          "work": "Ziwei Doushu Quanshu, juan 2",
+          "section": "An shi'er gong li",
+          "location": "Wikisource juan 2, immediately after the life/body construction paragraph",
+          "verification": "primary_transcription_inspected_base_edition_unknown"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Use inclusive modern headings while retaining the literal historical label in evidence. Do not introduce a different topic order from a later school.",
+      "review_status": "facsimile_collation_and_chinese_review_pending"
+    },
+    {
+      "rule_id": "ziwei.quanshu.j2.five_tigers_starting_stem",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_wikisource_transcription_candidate",
+      "period": "qing_transmitted_text_unidentified_printing",
+      "domain": "natal",
+      "scope": {
+        "work": "Ziwei Doushu Quanshu",
+        "juan": 2,
+        "operation": "stem_at_yin_for_palace_stem_sequence"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "birth.year_stem", "operator": "in", "value": ["jia","yi","bing","ding","wu","ji","geng","xin","ren","gui"]}
+        ]
+      },
+      "conclusion": {
+        "type": "lookup_table",
+        "result": "stem_branch_at_yin",
+        "table": {
+          "jia": "bing-yin",
+          "ji": "bing-yin",
+          "yi": "wu-yin",
+          "geng": "wu-yin",
+          "bing": "geng-yin",
+          "xin": "geng-yin",
+          "ding": "ren-yin",
+          "ren": "ren-yin",
+          "wu": "jia-yin",
+          "gui": "jia-yin"
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "Romanization is an engine normalization; the facsimile-backed rule must retain the Chinese characters for every stem and branch."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+          "work": "Ziwei Doushu Quanshu, juan 2",
+          "section": "Qi wuxing yin li",
+          "location": "Wikisource juan 2, five year-stem pairings at Yin",
+          "verification": "primary_transcription_inspected_base_edition_unknown"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Do not use this table until Chinese characters and pairings are collated against the selected facsimile and a complete palace-stem sequence is independently reproduced.",
+      "review_status": "facsimile_collation_and_chinese_review_pending"
+    },
+    {
+      "rule_id": "ziwei.quanshu.j2.place_wenchang_wenqu_by_hour",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_wikisource_transcription_candidate",
+      "period": "qing_transmitted_text_unidentified_printing",
+      "domain": "natal",
+      "scope": {
+        "work": "Ziwei Doushu Quanshu",
+        "juan": 2,
+        "operation": "auxiliary_star_placement"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "birth.double_hour_branch", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "paired_star_placement",
+        "wenchang": "place Zi hour at Xu and count branches backward to the birth double-hour",
+        "wenqu": "place Zi hour at Chen and count branches forward to the birth double-hour"
+      },
+      "priority": null,
+      "exceptions": [
+        "The birth-hour boundary and inclusive counting convention must be tested at all twelve values."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+          "work": "Ziwei Doushu Quanshu, juan 2",
+          "section": "An Wenchang Wenqu xing jue",
+          "location": "Wikisource juan 2, hour-based Wenchang and Wenqu verse plus examples",
+          "verification": "primary_transcription_inspected_base_edition_unknown"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "No prose meaning may be generated from these stars until their placements pass boundary vectors and an interpretation rule separately matches.",
+      "review_status": "facsimile_collation_and_chinese_review_pending"
+    },
+    {
+      "rule_id": "ziwei.quanshu.j2.place_zuofu_youbi_by_month",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_wikisource_transcription_candidate",
+      "period": "qing_transmitted_text_unidentified_printing",
+      "domain": "natal",
+      "scope": {
+        "work": "Ziwei Doushu Quanshu",
+        "juan": 2,
+        "operation": "auxiliary_star_placement"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "birth.source_scoped_lunar_month_for_star_placement", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}
+        ]
+      },
+      "conclusion": {
+        "type": "paired_star_placement",
+        "zuofu": "place lunar month 1 at Chen and count branches forward to the birth month",
+        "youbi": "place lunar month 1 at Xu and count branches backward to the birth month"
+      },
+      "priority": null,
+      "exceptions": [
+        "The inspected passage does not explicitly restate whether its month input uses the earlier intercalary-month adjustment; that dependency remains unresolved rather than assumed."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+          "work": "Ziwei Doushu Quanshu, juan 2",
+          "section": "An Zuofu Youbi xing jue",
+          "location": "Wikisource juan 2, month-based Zuofu and Youbi verse plus examples",
+          "verification": "primary_transcription_inspected_base_edition_unknown"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Do not choose a leap-month dependency by convention. If the selected facsimile or school does not resolve it, emit an alternate chart or omit these stars.",
+      "review_status": "facsimile_collation_and_chinese_review_pending"
+    },
+    {
+      "rule_id": "ziwei.quanshu.j2.four_transformations_by_year_stem",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_wikisource_transcription_candidate",
+      "period": "qing_transmitted_text_unidentified_printing",
+      "domain": "natal",
+      "scope": {
+        "work": "Ziwei Doushu Quanshu",
+        "juan": 2,
+        "operation": "birth_year_four_transformations"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "birth.year_stem", "operator": "in", "value": ["jia","yi","bing","ding","wu","ji","geng","xin","ren","gui"]}
+        ]
+      },
+      "conclusion": {
+        "type": "ordered_lookup_table",
+        "ordered_transformation_keys": ["lu","quan","ke","ji"],
+        "table": {
+          "jia": ["lianzhen","pojun","wuqu","taiyang"],
+          "yi": ["tianji","tianliang","ziwei","taiyin"],
+          "bing": ["tiantong","tianji","wenchang","lianzhen"],
+          "ding": ["taiyin","tiantong","tianji","jumen"],
+          "wu": ["tanlang","taiyin","youbi","tianji"],
+          "ji": ["wuqu","tanlang","tianliang","wenqu"],
+          "geng": ["taiyang","wuqu","taiyin","tiantong"],
+          "xin": ["jumen","taiyang","wenqu","wenchang"],
+          "ren": ["tianliang","ziwei","tianfu","wuqu"],
+          "gui": ["pojun","jumen","taiyin","tanlang"]
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "Later schools use variant Four Transformation tables; this table is valid only for the selected Quanshu lineage after facsimile collation.",
+        "Romanized star IDs must be linked to an immutable Chinese-character vocabulary to prevent homonym and spelling errors."
+      ],
+      "conflicts_with": ["ziwei.other_school.four_transformations_table"],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_doushu_quanshu_juan2_wikisource",
+          "work": "Ziwei Doushu Quanshu, juan 2",
+          "section": "An Lu Quan Ke Ji si xing bianhua jue",
+          "location": "Wikisource juan 2, ten-stem Four Transformations verse and Jia example",
+          "verification": "primary_transcription_inspected_base_edition_unknown"
+        }
+      ],
+      "evidence_grade": "D",
+      "publication_limit": "Always display the table lineage. Do not merge a later school table or interpret a transformation without a separately sourced relational judgment rule.",
+      "review_status": "facsimile_collation_and_chinese_review_pending"
+    }
+  ]
+}

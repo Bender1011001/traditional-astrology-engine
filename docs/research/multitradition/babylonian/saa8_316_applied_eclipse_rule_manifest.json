@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "school_id": "neo_assyrian_celestial_report_saa8_316_munnabitu",
+  "source_pack_id": "saao_saa8_lunar_eclipse_reports_316_535_v1",
+  "source_edition_id": "saao_saa8_hunger1992_oracc_p238143",
+  "source_registry_ids": ["babylonian_saao_saa8_reports"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "The current ORACC TEI for P238143 / SAA 8 316 was hash-locked and inspected in Akkadian transliteration, English translation, damage markup, metadata, and line alignment. The report is especially valuable because Munnabitu explicitly explains how month, day, watch, eclipse direction, lunar region, totality, and Jupiter were combined in a royal-state interpretation. It also documents uncertainty, favorable advocacy, and historical substitution practice. None of this accepts birth data or authorizes present-day prediction, ritual, political action, or harm.",
+  "rules": [
+    {
+      "rule_id":"babylonian.saa8.316.obv3-5.multi_selector_routing_framework",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"lunar_eclipse_recipient_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"available_selectors","operator":"contains_all_available","value":["month","day","watch","beginning_region","clearing_or_end_region"]}]},
+      "conclusion":{"type":"interpretive_framework","operation":"route_eclipse_evil_to_each_recipient_identified_by_each_available_selector","customer_prediction":false},
+      "priority":null,"exceptions":["A missing selector stays unknown; it may not be imputed from another selector.","The framework routes institutional recipients, not modern individuals."],"conflicts_with":["single_factor_eclipse_interpretation","birth_chart_eclipse_interpretation"],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 3-5; TEI translation unit n=3","verification":"ORACC_TEI_transliteration_translation_and_line_alignment_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical framework display only.","review_status":"Assyriological_and_parallel_report_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv5-8.unknown_beginning_abstention",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"observation_uncertainty","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"eclipse_beginning_region_observed","operator":"equals","value":false}]},
+      "conclusion":{"type":"abstention","unknown_fact":"beginning_region","forbidden":"infer_beginning_recipient","customer_prediction":false},
+      "priority":null,"exceptions":["Other independently observed selectors can still be interpreted; only the missing beginning route abstains."],"conflicts_with":["impute_unobserved_eclipse_beginning"],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 5-8 within TEI translation unit n=5","verification":"ORACC_TEI_translation_explicit_unknown_and_transliteration_inspected"}],
+      "evidence_grade":"B","publication_limit":"Research process rule; no prediction.","review_status":"Assyriological_and_observation_model_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv5.sivan_routes_westland",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"eclipse_geographic_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"babylonian_month","operator":"equals","value":"sivan"}]},
+      "conclusion":{"type":"geographic_routing","recipient":"westland","customer_prediction":false},
+      "priority":null,"exceptions":[],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 5; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_geographic_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv5.sivan_decision_ur",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"eclipse_geographic_decision","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"babylonian_month","operator":"equals","value":"sivan"}]},
+      "conclusion":{"type":"geographic_decision","recipient":"ur","outcome":null,"customer_prediction":false},
+      "priority":null,"exceptions":["A decision recipient is not itself a positive or negative result and coexists with Westland routing."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 5-6; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only; do not invent an outcome.","review_status":"Assyriological_and_geographic_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv6.day14_routes_elam",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"eclipse_geographic_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"babylonian_day","operator":"equals","value":14}]},
+      "conclusion":{"type":"geographic_routing","recipient":"elam","polarity":"evil","customer_prediction":false},
+      "priority":null,"exceptions":["The report explicitly phrases this as the evil of day 14."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 6; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_geographic_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv7-8.south_west_motion_evil",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"eclipse_directional_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"eclipse_darkening_motion_regions","operator":"contains_all","value":["south","west"]}]},
+      "conclusion":{"type":"directional_geographic_omen","polarity":"evil","recipients":["elam","westland"],"customer_prediction":false},
+      "priority":null,"exceptions":["The report applies a two-direction observation; do not reduce it to an unqualified west-only or south-only rule."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 7-8; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical applied example only; no geopolitical forecast.","review_status":"Assyriological_direction_semantics_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv8-9.east_north_clearing_good",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"eclipse_directional_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"eclipse_clearing_regions","operator":"contains_all","value":["east","north"]}]},
+      "conclusion":{"type":"directional_geographic_omen","polarity":"good","recipients":["subartu","akkad"],"customer_prediction":false},
+      "priority":null,"exceptions":["The report applies a two-direction observation; do not reduce it to an unqualified east-only or north-only rule."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 8-9; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical applied example only; no geopolitical forecast.","review_status":"Assyriological_direction_semantics_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv9.total_coverage_all_lands",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"eclipse_coverage_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"eclipse_coverage","operator":"equals","value":"total"}]},
+      "conclusion":{"type":"coverage_scope","recipients":"all_lands","polarity":null,"customer_prediction":false},
+      "priority":null,"exceptions":["The clause expands recipient scope but does not by itself specify one common outcome or polarity."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 9; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical scope display only; do not invent an outcome.","review_status":"Assyriological_scope_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv10.right_lunar_region_akkad",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"lunar_disk_region_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"lunar_disk_region","operator":"equals","value":"right"}]},
+      "conclusion":{"type":"geographic_routing","recipient":"akkad","customer_prediction":false},
+      "priority":null,"exceptions":["Right/left orientation must follow the source's observational convention, not an unstated viewer convention."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 10; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_orientation_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv10.left_lunar_region_elam",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"lunar_disk_region_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"lunar_disk_region","operator":"equals","value":"left"}]},
+      "conclusion":{"type":"geographic_routing","recipient":"elam","customer_prediction":false},
+      "priority":null,"exceptions":["Right/left orientation must follow the source's observational convention, not an unstated viewer convention."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 10; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_orientation_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv10-11.upper_lunar_region_westland",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"lunar_disk_region_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"lunar_disk_region","operator":"equals","value":"upper"}]},
+      "conclusion":{"type":"geographic_routing","recipient":"westland","customer_prediction":false},
+      "priority":null,"exceptions":["Moon and Westland are partly broken in this mapping."],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 10-11; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_translation_and_damage_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_restoration_and_orientation_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv11-12.lower_lunar_region_subartu",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","technique":"lunar_disk_region_routing","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"lunar_disk_region","operator":"equals","value":"lower"}]},
+      "conclusion":{"type":"geographic_routing","recipient":"subartu","customer_prediction":false},
+      "priority":null,"exceptions":[],"conflicts_with":[],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 11-12; TEI translation unit n=5","verification":"ORACC_TEI_transliteration_and_translation_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical routing display only.","review_status":"Assyriological_and_orientation_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.rev3-6.jupiter_applied_substitution_omen",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"omen",
+      "scope":{"artifact":"P238143","target_context":"king_and_substitute_person","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"phenomenon","operator":"equals","value":"lunar_eclipse"},{"fact":"jupiter_present_in_eclipse","operator":"equals","value":true}]},
+      "conclusion":{"type":"applied_historical_substitution_omen","themes":["well_being_for_king","important_person_dies_in_kings_stead"],"customer_prediction":false},
+      "priority":null,"exceptions":["The report applies the clause within a royal substitution framework; it is not a generic benefic Jupiter rule."],"conflicts_with":["generic_jupiter_benefic_meaning","natal_jupiter_rule"],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"rev. 3-6; TEI translation unit n=r 3","verification":"ORACC_TEI_transliteration_translation_and_applied_argument_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical display only; suppress death and substitution as prediction or advice.","review_status":"Assyriological_ritual_and_political_context_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.obv18-21.substitution_response_never_automate",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"other",
+      "scope":{"artifact":"P238143","technique":"historical_response","birth_input_eligible":false,"automation_forbidden":true},
+      "conditions":{"all":[{"fact":"historical_report_passage","operator":"equals","value":"saa8_316_obv18_21"}]},
+      "conclusion":{"type":"documented_historical_response","content":["chief_exorcist_action","remove_prince_from_office_as_consequence_bearer","protect_king"],"recommendation":false,"customer_prediction":false},
+      "priority":null,"exceptions":["The opening and target details are damaged.","Office removal, exorcistic action, and substitution are never automated or recommended."],"conflicts_with":["modern_ritual_instruction","political_action_recommendation"],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"obv. 18-21; TEI translation unit n=18","verification":"ORACC_TEI_transliteration_translation_and_damage_markup_inspected"}],
+      "evidence_grade":"B","publication_limit":"Historical context note only; never execute, recommend, personalize, or operationalize.","review_status":"Assyriological_ritual_ethics_and_safety_review_pending"
+    },
+    {
+      "rule_id":"babylonian.saa8.316.rev12-16.propitious_report_selection_context",
+      "tradition_id":"mesopotamian_babylonian","school_id":"neo_assyrian_celestial_report_saa8_316_munnabitu","period":"neo_assyrian","domain":"other",
+      "scope":{"artifact":"P238143","technique":"historical_epistemic_practice","birth_input_eligible":false},
+      "conditions":{"all":[{"fact":"historical_report_passage","operator":"equals","value":"saa8_316_rev12_16"}]},
+      "conclusion":{"type":"source_criticism_context","observations":["scholar_reports_what_seems_correct_propitious_and_good_for_king","requests_repeated_reading","asserts_truthfulness"],"inference":"royal_advocacy_may_shape_selection_and_presentation","customer_prediction":false},
+      "priority":null,"exceptions":["This is evidence about report practice, not permission to suppress negative source clauses or manufacture positive readings."],"conflicts_with":["treat_report_as_neutral_exhaustive_rule_dump","rewrite_omen_for_customer_optimism"],
+      "source_passages":[{"edition_id":"saao_saa8_hunger1992_oracc_p238143","work":"Astrological Reports to Assyrian Kings","section":"SAA 08 316","location":"rev. 12-16; TEI translation unit n=r 12","verification":"ORACC_TEI_transliteration_translation_and_rhetorical_context_inspected"}],
+      "evidence_grade":"B","publication_limit":"Source-critical context only; no prediction or editorial license.","review_status":"Assyriological_and_historiographic_review_pending"
+    }
+  ]
+}

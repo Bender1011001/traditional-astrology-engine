@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "islamicate_persian",
+  "school_id": "al_biruni_tafhim_wright1934",
+  "source_pack_id": "islamicate_al_biruni_tafhim_reference_conditions_v1",
+  "source_edition_id": "wright_1934_halle_facing_scan",
+  "source_registry_ids": ["islamicate_al_biruni_halle_full_facing_1934", "islamicate_al_biruni_wright_1934_local"],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "The relevant English passages and their facing Arabic pages were visually inspected in the Halle institutional scan. Rules remain translation-dependent because no Arabic specialist has independently checked the encoding.",
+  "rules": [
+    {
+      "rule_id": "islamicate.al_biruni.tafhim.identity",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_work_via_1934_edition", "domain": "other",
+      "scope": {"reference_fact_eligible": true, "interpretation_eligible": false},
+      "conditions": {"author_work_edition_declared": true},
+      "conclusion": {"generic_islamicate_merge": false, "later_author_accretions_imported": false, "customer_prediction": false},
+      "priority": 1000, "exceptions": ["A rule from Abu Ma'shar, al-Qabisi, Masha'allah, Sahl, or a later tradition requires its own source pack."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"Title page and sections 347-530","location":"Halle record and IIIF canvases; English/Arabic facing edition","verification":"Institutional metadata, edition structure, and bounded passage pairs inspected."}],
+      "evidence_grade": "B", "publication_limit": "Author/work/edition identity only; Historical Use Only.", "review_status": "Arabic specialist review remains required."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.firdaria.major_order.diurnal",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "timing",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"nativity_sect": "diurnal"},
+      "conclusion": {"major_order": ["sun", "venus", "mercury", "moon", "saturn", "jupiter", "mars"], "customer_prediction": false},
+      "priority": 200, "exceptions": ["Major-period durations are not supplied by the inspected passage."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"395, Firdaria of planets","location":"printed p. 239; IIIF canvases 514-515","verification":"English rule page and facing Arabic page visually inspected."}],
+      "evidence_grade": "C", "publication_limit": "Structural sequence only; no age/date prediction.", "review_status": "Translation-dependent; Arabic review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.firdaria.major_order.nocturnal",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "timing",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"nativity_sect": "nocturnal"},
+      "conclusion": {"major_order": ["moon", "saturn", "jupiter", "mars", "sun", "venus", "mercury"], "customer_prediction": false},
+      "priority": 200, "exceptions": ["Major-period durations are not supplied by the inspected passage."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"395, Firdaria of planets","location":"printed p. 239; IIIF canvases 514-515","verification":"English rule page and facing Arabic page visually inspected."}],
+      "evidence_grade": "C", "publication_limit": "Structural sequence only; no age/date prediction.", "review_status": "Translation-dependent; Arabic review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.firdaria.subperiod_structure",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "timing",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"major_chronocrator_known": true},
+      "conclusion": {"equal_sevenths": true, "first_seventh_major_ruler_alone": true, "later_sevenths_partner_next_below": true, "customer_prediction": false},
+      "priority": 210, "exceptions": ["The duration of the containing major period is unresolved in this pack."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"395, Firdaria of planets","location":"printed p. 239; IIIF canvases 514-515","verification":"Subperiod sentence inspected on the English page with its facing Arabic witness."}],
+      "evidence_grade": "C", "publication_limit": "Relative sevenths and ruler pairing only.", "review_status": "Translation-dependent; Arabic review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.firdaria.nodes.excluded",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "timing",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"source_pack_invoked": true},
+      "conclusion": {"planetary_rulers_only": true, "node_periods_authorized": false, "customer_prediction": false},
+      "priority": 900, "exceptions": ["A later node-period scheme requires a separately attributed source pack."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"395, Firdaria of planets","location":"printed p. 239; IIIF canvases 514-515","verification":"The passage names and cycles only the seven planets; no node periods are stated."}],
+      "evidence_grade": "C", "publication_limit": "Negative source boundary, not a universal historical claim.", "review_status": "Later transmission comparison pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.firdaria.duration.unresolved",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "timing",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"only_section_395_pack_available": true},
+      "conclusion": {"major_duration_table_available": false, "elapsed_age_boundaries_authorized": false, "customer_prediction": false},
+      "priority": 950, "exceptions": ["Do not import familiar later duration tables without passage-level attribution."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"394-395","location":"printed p. 239; IIIF canvases 514-515","verification":"The inspected passage gives order and subdivision but no major-period duration table."}],
+      "evidence_grade": "C", "publication_limit": "Fail closed before calendar-age calculations.", "review_status": "Locate and verify a controlling duration source before implementation."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.sign_gender",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"zodiac_sign_known": true},
+      "conclusion": {"male_signs": ["aries", "gemini", "leo", "libra", "sagittarius", "aquarius"], "female_signs": ["taurus", "cancer", "virgo", "scorpio", "capricorn", "pisces"], "customer_prediction": false},
+      "priority": 120, "exceptions": ["Abu Ma'shar's degree-level extension mentioned in section 496 is not imported."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"347-349, especially 348","location":"printed p. 211; IIIF canvases 458-459","verification":"Hot/cold sign table, gender statement, and facing Arabic page inspected."}],
+      "evidence_grade": "C", "publication_limit": "Classification fact only.", "review_status": "Arabic terminology review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.planet_gender",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"planet_known": true},
+      "conclusion": {"male": ["saturn", "jupiter", "mars", "sun"], "female": ["venus", "moon"], "mercury": "conditional; male when alone", "customer_prediction": false},
+      "priority": 120, "exceptions": ["The rejected report that Mars is female is not used."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"385 and 396-401","location":"printed pp. 234 and 240; IIIF canvases 504-505 and 516-517","verification":"Planet gender prose/table and facing Arabic pages inspected."}],
+      "evidence_grade": "C", "publication_limit": "Classification fact only.", "review_status": "Mercury conflict priority remains unresolved."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.planet_sect",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"planet_known": true},
+      "conclusion": {"diurnal": ["saturn", "jupiter", "sun"], "nocturnal": ["mars", "venus", "moon"], "mercury": "conditional on sign or associated planet", "customer_prediction": false},
+      "priority": 120, "exceptions": ["The rejected report assigning sect to the lunar nodes is not used."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"386 and 396-401","location":"printed pp. 234 and 240; IIIF canvases 504-505 and 516-517","verification":"Planet sect prose/table and facing Arabic pages inspected."}],
+      "evidence_grade": "C", "publication_limit": "Classification fact only.", "review_status": "Mercury conflict priority remains unresolved."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.mercury.explicit_resolution",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"planet": "mercury"},
+      "conclusion": {"gender_basis_required": true, "sect_basis_required": true, "silent_default_for_conflicting_contexts": false, "customer_prediction": false},
+      "priority": 300, "exceptions": ["Mercury is male and diurnal by nature in section 396-401, but sections 385-386 condition both classifications; this pack fails closed when context is undeclared."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"385-386 and 396-401","location":"printed pp. 234 and 240; IIIF canvases 504-505 and 516-517","verification":"Conditional Mercury statements and facing pages inspected; no conflict priority found in the bounded passages."}],
+      "evidence_grade": "C", "publication_limit": "Research classifier only; ambiguity must be surfaced.", "review_status": "Broader passage and Arabic review required."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.halb",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"planet_sect_resolved": true, "nativity_sect_known": true, "horizon_position_known": true},
+      "conclusion": {"predicate": "(planet_sect == nativity_sect) == above_horizon", "customer_prediction": false},
+      "priority": 220, "exceptions": ["Mercury requires explicit contextual resolution."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"496, Hayyiz and halb","location":"printed p. 308; IIIF canvases 654-655","verification":"Horizon/sect predicate and facing Arabic page inspected."}],
+      "evidence_grade": "C", "publication_limit": "Condition flag only; no standalone life judgment.", "review_status": "Arabic specialist review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.hayyiz",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"halb_true": true, "planet_gender_resolved": true, "sign_gender_known": true},
+      "conclusion": {"predicate": "halb and planet_gender == sign_gender", "every_hayyiz_is_halb": true, "converse_required": false, "customer_prediction": false},
+      "priority": 230, "exceptions": ["Degree-specific gender extensions are excluded."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"496, Hayyiz and halb","location":"printed p. 308; IIIF canvases 654-655","verification":"Gender/sign addition and one-way implication inspected on the facing pair."}],
+      "evidence_grade": "C", "publication_limit": "Condition flag only; no standalone life judgment.", "review_status": "Arabic specialist review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.mars_hayyiz",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"planet": "mars"},
+      "conclusion": {"planet_gender": "male", "planet_sect": "nocturnal", "requires_male_sign": true, "requires_above_at_night_or_below_by_day": true, "customer_prediction": false},
+      "priority": 240, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"496, Mars qualification","location":"printed p. 308; IIIF canvases 654-655","verification":"Mars-specific sentence and facing Arabic page inspected."}],
+      "evidence_grade": "C", "publication_limit": "Condition flag only.", "review_status": "Arabic specialist review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.condition.joy_nonexclusive",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "eleventh_century_reference_report", "domain": "natal",
+      "scope": {"birth_input_eligible": true, "interpretation_eligible": false},
+      "conditions": {"halb_or_hayyiz_true": true},
+      "conclusion": {"joy_condition_present": true, "complete_judgment_authorized": false, "debility_cancelled": false, "malefic_nature_changed": false, "customer_prediction": false},
+      "priority": 250, "exceptions": ["Section 498 lists multiple other joy conditions; this pack does not score or prioritize them."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"396-401 and 498","location":"printed pp. 240 and 309; IIIF canvases 516-517 and 656-657","verification":"Planet nature table and joy list inspected with facing Arabic pages."}],
+      "evidence_grade": "C", "publication_limit": "One condition fact, never a complete reading.", "review_status": "Broader condition hierarchy and Arabic review pending."
+    },
+    {
+      "rule_id": "islamicate.al_biruni.publication.boundary",
+      "tradition_id": "islamicate_persian", "school_id": "al_biruni_tafhim_wright1934", "period": "research_governance", "domain": "other",
+      "scope": {"research_use": true, "interpretation_eligible": false},
+      "conditions": {"source_pack_invoked": true},
+      "conclusion": {"live_engine": false, "customer_eligible": false, "full_reading_eligible": false, "historical_use_only": true, "customer_prediction": false},
+      "priority": 2000, "exceptions": ["Arabic specialist review, independent predicate agreement, branch-level conflict rules, and broader source coverage are mandatory before publication."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"wright_1934_halle_facing_scan","work":"Kitab al-Tafhim / The Book of Instruction","section":"Bounded pilot evidence contract","location":"sections 348, 385-386, 395, 396-401, 496, 498","verification":"All rule-bearing English pages and facing Arabic witnesses visually inspected; linguistic verification remains open."}],
+      "evidence_grade": "C", "publication_limit": "Research only; Historical Use Only.", "review_status": "Not eligible for live or customer use."
+    }
+  ]
+}

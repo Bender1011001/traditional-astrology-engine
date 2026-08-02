@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "pharaonic_egyptian",
+  "artifact_type": "source_access_manifest",
+  "witness_id": "papyrus_sallier_iv_ea10184",
+  "source_registry_id": "egyptian_cpl_budge_1923_hieratic_papyri_second_series",
+  "publication": {
+    "title": "Facsimiles of Egyptian Hieratic Papyri in the British Museum, with Descriptions, Summaries of Contents, etc.",
+    "series": "Second Series",
+    "author": "E. A. Wallis Budge",
+    "publisher": "British Museum",
+    "place": "London",
+    "year": 1923,
+    "repository": "Cleveland Public Library, John Griswold White Collection",
+    "item_url": "https://cplorg.contentdm.oclc.org/digital/collection/p4014coll9/id/5301/",
+    "metadata_url": "https://cplorg.contentdm.oclc.org/digital/api/singleitem/collection/p4014coll9/id/5301",
+    "download_url": "https://cplorg.contentdm.oclc.org/digital/api/collection/p4014coll9/id/5301/download",
+    "rights_statement": "Public Domain Mark 1.0 in repository metadata; repository requests attribution and disclaims representations about other rights.",
+    "sha256": "084058ed3a69936bcc56e1d96e1be0541a1f18f4d645e16dd1b9fec1a980f419",
+    "bytes": 152147349,
+    "pdf_pages": 317
+  },
+  "witness_description": {
+    "british_museum_number": "10184",
+    "traditional_name": "Sallier IV",
+    "budge_section": "Papyrus No. 10184, Sallier IV (Plates LXXXVIII-CXXVIII)",
+    "description_pages": [
+      {
+        "pdf_page": 38,
+        "printed_page": 34,
+        "inspection": "rendered_and_visually_checked",
+        "verified_facts": [
+          "Budge labels the work a Calendar of Lucky and Unlucky Days.",
+          "The portion containing days 1-17 of Thoth is lost.",
+          "The portions containing Pachons, Payni, Epiphi and Mesore are lost.",
+          "The two surviving portions contain twenty-three columns.",
+          "Budge dates the manuscript to the reign of Ramesses II or an immediate successor.",
+          "The day-level signs include good, unlucky and a third category Budge interprets only tentatively."
+        ]
+      },
+      {
+        "pdf_page": 39,
+        "printed_page": 35,
+        "inspection": "rendered_and_visually_checked",
+        "verified_facts": [
+          "Budge says the day is apparently divided into three parts but does not resolve whether the scheme represents twelve or twenty-four hours.",
+          "Budge says the portion probably containing the Five Epagomenal Days is lost.",
+          "Budge's discussion of epagomenal birthdays comes from a separate Leiden papyrus and must not be imported into Sallier IV.",
+          "The page includes selected English summaries, not a complete critical translation of the witness."
+        ]
+      },
+      {
+        "pdf_page": 42,
+        "printed_page": 38,
+        "inspection": "rendered_and_visually_checked",
+        "verified_facts": [
+          "Budge prints selected entries for Pachons days 5 and 6.",
+          "Budge says the opening lines of column XXIV mention two lucky days and one unlucky day but the remaining fragments yield no connected sense.",
+          "Budge says all days from Pachons 11 through Mesore 30 are wanting."
+        ]
+      }
+    ],
+    "preservation": {
+      "surviving_range_from_porceddu_2008": "I Akhet 18 through I Shemu 12",
+      "lost_ranges_from_budge_1923": [
+        "I Akhet 1-17 (Thoth 1-17)",
+        "I Shemu 11 through IV Shemu 30 (Pachons 11 through Mesore 30)",
+        "the portion probably containing the Five Epagomenal Days"
+      ],
+      "epagomenal_absence_interpretation": "not_preserved_in_this_witness",
+      "historical_absence_proven": false
+    }
+  },
+  "facsimile": {
+    "plate_first": {"roman": "LXXXVIII", "number": 88, "pdf_page": 231},
+    "plate_last": {"roman": "CXXVIII", "number": 128, "pdf_page": 311},
+    "plate_count": 41,
+    "pdf_page_stride": 2,
+    "mapping_formula": "pdf_page = 231 + 2 * (plate_number - 88)",
+    "inspected_plates": [
+      {
+        "plate": "LXXXVIII",
+        "pdf_page": 231,
+        "side": "obverse",
+        "column": "I",
+        "date_caption": "days 18-23 of Thoth",
+        "inspection": "rendered_and_visually_checked"
+      },
+      {
+        "plate": "LXXXIX",
+        "pdf_page": 233,
+        "side": "obverse",
+        "column": "II",
+        "date_caption": "days 23-26 of Thoth",
+        "inspection": "rendered_and_visually_checked"
+      },
+      {
+        "plate": "CXXVIII",
+        "pdf_page": 311,
+        "side": "reverse",
+        "column": "XXIII",
+        "date_caption": null,
+        "inspection": "rendered_and_visually_checked"
+      }
+    ]
+  },
+  "interpretive_boundaries": {
+    "complete_file_acquired": true,
+    "complete_file_read": false,
+    "complete_translation_present": false,
+    "rule_extraction_ready": false,
+    "modern_critical_edition_collated": false,
+    "hieratic_transcription_collated": false,
+    "birth_statements_customer_eligible": false,
+    "dangerous_or_deterministic_clauses": "historical_source_data_only",
+    "separate_witness_material_may_be_imported": false,
+    "missing_text_may_be_filled_from_another_witness": false
+  },
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "reading_output": false,
+    "historical_use_only": true
+  },
+  "remaining_gates": [
+    "Acquire and collate a complete transcription and translation.",
+    "Collate Budge against Bakir 1966 and both volumes of Leitz 1994.",
+    "Encode every surviving date, prognosis unit, lacuna, restoration and translation variant with source locators.",
+    "Obtain independent Hieratic and Egyptological review.",
+    "Resolve image and modern-edition rights before public display."
+  ]
+}

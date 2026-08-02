@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "status": "independently_recomputed_against_two_ephemeris_algorithms_interpretive_and_calendar_review_pending",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+  "corpus_manifest": "rochberg_texts1_10_corpus_manifest.json",
+  "calculation_profile": {
+    "calendar": "proleptic_julian_as_explicitly_used_in_rochberg_date_labels",
+    "year_numbering": "astronomical_with_year_zero",
+    "input_time_scale": "UT_input_to_swe_calc_ut_not_modern_civil_UTC",
+    "coordinates": "geocentric_apparent_ecliptic_longitude_of_date",
+    "primary_backend": "Swiss Ephemeris compressed DE431 files through pyswisseph",
+    "secondary_backend": "Swiss Ephemeris built-in Moshier semi-analytical model",
+    "pyswisseph_package_version": "20230604",
+    "swisseph_library_version": "2.10.03",
+    "primary_flags": ["FLG_SWIEPH", "FLG_SPEED"],
+    "secondary_flags": ["FLG_MOSEPH", "FLG_SPEED"],
+    "delta_t_policy": "Swiss Ephemeris version 2.10.03 model with tidal acceleration explicitly locked before mixed-backend calls; runtime value is emitted for every case",
+    "tidal_acceleration_arcsec_per_century_squared": -25.8,
+    "tidal_acceleration_constant": "TIDAL_DE431",
+    "longitude_policy": "Add Rochberg's stated date-specific ancient-minus-modern longitude correction only to reproduce the edition table; this does not independently establish a Babylonian zodiac theory",
+    "planet_tolerance_degrees": 0.25,
+    "moon_tolerance_degrees": 0.35,
+    "tolerance_status": "exploratory_post_hoc_reproduction_thresholds_not_final_golden_acceptance_limits"
+  },
+  "ephemeris_files": [
+    {
+      "name": "seplm06.se1",
+      "official_url": "https://raw.githubusercontent.com/aloistr/swisseph/master/ephe/seplm06.se1",
+      "sha256": "5a8719a75e48b223c0d7c8ba0191d698b808b4fb7265f2cddaa975edd8ac7aec",
+      "bytes": 484263,
+      "coverage": "601 BCE through 2 BCE, planets"
+    },
+    {
+      "name": "semom06.se1",
+      "official_url": "https://raw.githubusercontent.com/aloistr/swisseph/master/ephe/semom06.se1",
+      "sha256": "d21bb9968c97c0647088aaa4af402dee22706f327b2bedd67685623738ebd54b",
+      "bytes": 1332989,
+      "coverage": "601 BCE through 2 BCE, Moon"
+    }
+  ],
+  "body_ids": {
+    "sun": 0,
+    "moon": 1,
+    "mercury": 2,
+    "venus": 3,
+    "mars": 4,
+    "jupiter": 5,
+    "saturn": 6
+  },
+  "cases": [
+    {
+      "case_id": "rochberg1998.text2.table",
+      "record_id": "rochberg1998.text2",
+      "edition_location": "book p. 57 / PDF p. 73",
+      "julian_datetime": {"year": -409, "month": 4, "day": 29, "ut_hour": 0.0},
+      "rochberg_longitude_correction_degrees": 8.73,
+      "published_adjusted_longitudes": {"moon": 205.38, "sun": 40.9, "jupiter": 357.89, "venus": 53.85, "mercury": 19.06, "saturn": 109.74, "mars": 85.73}
+    },
+    {
+      "case_id": "rochberg1998.text3.feb2_table",
+      "record_id": "rochberg1998.text3",
+      "edition_location": "book p. 60 / PDF p. 76, first comparison column",
+      "julian_datetime": {"year": -297, "month": 2, "day": 2, "ut_hour": 16.0},
+      "rochberg_longitude_correction_degrees": 7.18,
+      "published_adjusted_longitudes": {"sun": 316.92, "jupiter": 145.04, "venus": 316.36, "mercury": 318.82, "saturn": 25.85, "mars": 279.67}
+    },
+    {
+      "case_id": "rochberg1998.text3.feb7_table",
+      "record_id": "rochberg1998.text3",
+      "edition_location": "book p. 60 / PDF p. 76, second comparison column",
+      "julian_datetime": {"year": -297, "month": 2, "day": 7, "ut_hour": 16.0},
+      "rochberg_longitude_correction_degrees": 7.18,
+      "published_adjusted_longitudes": {"sun": 321.92, "jupiter": 144.39, "venus": 322.59, "mercury": 328.55, "saturn": 26.22, "mars": 283.51}
+    },
+    {
+      "case_id": "rochberg1998.text4.table",
+      "record_id": "rochberg1998.text4",
+      "edition_location": "book p. 64 / PDF p. 80",
+      "julian_datetime": {"year": -287, "month": 9, "day": 1, "ut_hour": 21.0},
+      "rochberg_longitude_correction_degrees": 7.04,
+      "published_adjusted_longitudes": {"moon": 64.34, "sun": 161.67, "jupiter": 115.02, "venus": 115.44, "mercury": 182.93, "saturn": 169.88, "mars": 139.23}
+    },
+    {
+      "case_id": "rochberg1998.text5.table",
+      "record_id": "rochberg1998.text5",
+      "edition_location": "book p. 67 / PDF p. 83",
+      "julian_datetime": {"year": -262, "month": 4, "day": 4, "ut_hour": 1.0},
+      "rochberg_longitude_correction_degrees": 6.7,
+      "published_adjusted_longitudes": {"moon": 311.38, "sun": 16.28, "jupiter": 121.47, "venus": 15.15, "mercury": 4.19, "saturn": 103.79, "mars": 110.04}
+    },
+    {
+      "case_id": "rochberg1998.text6a.table",
+      "record_id": "rochberg1998.text6a",
+      "edition_location": "book p. 71 / PDF p. 87, horoscope a",
+      "julian_datetime": {"year": -258, "month": 11, "day": 15, "ut_hour": 16.0},
+      "rochberg_longitude_correction_degrees": 6.64,
+      "published_adjusted_longitudes": {"moon": 209.31, "sun": 236.48, "jupiter": 259.72, "venus": 220.13, "mercury": 237.48, "saturn": 173.01, "mars": 286.79}
+    },
+    {
+      "case_id": "rochberg1998.text6b.printed_table_label",
+      "record_id": "rochberg1998.text6b",
+      "edition_location": "book p. 71 / PDF p. 87, horoscope b table label",
+      "julian_datetime": {"year": -250, "month": 5, "day": 4, "ut_hour": 16.0},
+      "rochberg_longitude_correction_degrees": 6.53,
+      "published_adjusted_longitudes": {"moon": 154.84}
+    },
+    {
+      "case_id": "rochberg1998.text7.birth_table",
+      "record_id": "rochberg1998.text7",
+      "edition_location": "book p. 75 / PDF p. 91",
+      "julian_datetime": {"year": -257, "month": 12, "day": 15, "ut_hour": 14.0},
+      "rochberg_longitude_correction_degrees": 6.63,
+      "published_adjusted_longitudes": {"moon": 3.49, "jupiter": 293.25, "venus": 226.14, "saturn": 186.03, "mars": 192.59}
+    },
+    {
+      "case_id": "rochberg1998.text8.table",
+      "record_id": "rochberg1998.text8",
+      "edition_location": "book p. 78 / PDF p. 94",
+      "julian_datetime": {"year": -250, "month": 11, "day": 28, "ut_hour": 16.0},
+      "rochberg_longitude_correction_degrees": 6.53,
+      "published_adjusted_longitudes": {"moon": 357.37, "sun": 249.7, "jupiter": 164.48, "venus": 237.04, "mercury": 234.01, "saturn": 255.88, "mars": 54.47}
+    },
+    {
+      "case_id": "rochberg1998.text9.table",
+      "record_id": "rochberg1998.text9",
+      "edition_location": "book p. 81 / PDF p. 97",
+      "julian_datetime": {"year": -248, "month": 12, "day": 29, "ut_hour": 16.0},
+      "rochberg_longitude_correction_degrees": 6.5,
+      "published_adjusted_longitudes": {"sun": 281.8, "moon": 315.39, "jupiter": 221.65, "venus": 313.4, "mercury": 294.95, "saturn": 279.58, "mars": 93.25}
+    },
+    {
+      "case_id": "rochberg1998.text10.table",
+      "record_id": "rochberg1998.text10",
+      "edition_location": "book p. 85 / PDF p. 101",
+      "julian_datetime": {"year": -234, "month": 6, "day": 3, "ut_hour": 1.0},
+      "rochberg_longitude_correction_degrees": 6.31,
+      "published_adjusted_longitudes": {"moon": 126.09, "sun": 73.49, "jupiter": 260.05, "venus": 27.85, "mercury": 52.15, "saturn": 90.48, "mars": 115.6}
+    }
+  ],
+  "diagnostic_variants": [
+    {
+      "case_id": "rochberg1998.text6b.prose_date_diagnostic",
+      "based_on_case_id": "rochberg1998.text6b.printed_table_label",
+      "body": "moon",
+      "summary_key": "text6b_prose_date_moon_residual_degrees",
+      "julian_datetime": {"year": -250, "month": 5, "day": 5, "ut_hour": 16.0},
+      "basis": "The prose immediately above the table says the beginning-of-night lunar position corresponds to May 5 in the Julian calendar, while the printed table heading says May 4.",
+      "expected_result": "Moon residual falls from approximately 12.17 degrees to approximately 0.26 degrees; preserve this as an edition date-label discrepancy pending specialist review."
+    }
+  ],
+  "expected_summary": {
+    "position_checks": 67,
+    "planet_checks": 58,
+    "moon_checks": 9,
+    "within_body_tolerance": 64,
+    "planet_checks_within_tolerance": 58,
+    "moon_checks_within_tolerance": 6,
+    "out_of_tolerance_keys": [
+      "rochberg1998.text5.table:moon",
+      "rochberg1998.text6b.printed_table_label:moon",
+      "rochberg1998.text9.table:moon"
+    ],
+    "maximum_planet_residual_degrees": 0.2151,
+    "maximum_primary_secondary_difference_degrees": 0.0242,
+    "text6b_prose_date_moon_residual_degrees": -0.2695,
+    "moon_nearest_time_shift_hours": {
+      "rochberg1998.text2.table": -0.6934,
+      "rochberg1998.text4.table": 0.1231,
+      "rochberg1998.text5.table": 1.0908,
+      "rochberg1998.text6a.table": -0.6205,
+      "rochberg1998.text6b.printed_table_label": 24.5446,
+      "rochberg1998.text7.birth_table": 0.2716,
+      "rochberg1998.text8.table": -0.1585,
+      "rochberg1998.text9.table": -1.5298,
+      "rochberg1998.text10.table": 0.6132
+    }
+  },
+  "interpretation_limits": [
+    "This validation reproduces Rochberg's modern astronomical comparison tables; it does not prove the ancient recorded values or any astrological judgment.",
+    "The applied ancient-minus-modern offsets come from Rochberg and are not an independently derived Babylonian zodiac model.",
+    "The residual tolerances were selected during this exploratory reproduction pass and are not preregistered acceptance thresholds for the final golden corpus.",
+    "The Swiss and Moshier calculations are algorithmically distinct cross-model checks exposed through the same Swiss Ephemeris library, not a fully independent software implementation.",
+    "Text 1 has no birth-date position table and requires an event-level visibility, station, solstice, and intercalation validator instead of this longitude-table test.",
+    "Text 3 and Text 6a remain excluded from the primary golden set despite numerical table reproduction because their dates and text are reconstructed or fragmentary.",
+    "Lunar residuals must be tested across plausible UT1 and Delta-T intervals; a favorable single time must not be selected post hoc.",
+    "Swiss Ephemeris tidal acceleration must be set explicitly because automatic mode can become call-order dependent when SWIEPH and MOSEPH calculations are interleaved.",
+    "The Text 6b printed-label/prose-date conflict must remain visible until the edition, calendar conversion, and astronomical reasoning receive specialist review."
+  ]
+}

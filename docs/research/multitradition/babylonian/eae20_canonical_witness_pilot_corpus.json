@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "branch": "enuma_anu_enlil_lunar_eclipse_tablet_20_witness_comparison",
+  "source_pack_id": "eae20_im124485_vat9419_witness_comparison_v1",
+  "status": "critical_editions_transliterations_translations_commentary_and_images_inspected_research_only",
+  "scope": "A bounded witness and recension pilot for the latter half of Enuma Anu Enlil Tablet 20, not a complete edition of Tablets 15-22 and not a natal system.",
+  "structured_sources": [
+    {
+      "source_registry_id": "babylonian_al_rawi_george_eae20_im124485_2006",
+      "artifact_id": "IM 124485",
+      "title": "Tablets from the Sippar Library XIII: Enuma Anu Ellil XX",
+      "authors": ["F. N. H. Al-Rawi", "A. R. George"],
+      "publication": "Iraq 68 (2006), pp. 23-57",
+      "url": "https://www.cambridge.org/core/journals/iraq/article/tablets-from-the-sippar-library-xiii-enuma-anu-ellil-xx/280BDD368D6222B88EAFDC70CFC49E15",
+      "repository_copy": "https://eprints.soas.ac.uk/3315/2/tablets_from_the_sippar_library_xiii_enuma_anu_ellil_xx.pdf",
+      "retrieved_pdf_sha256": "5bab54e46996419fc98c3423d3c2b69f1c4e7e4a15f598948ccc06ed79c7d72e",
+      "retrieved_pdf_bytes": 8891721,
+      "retrieved_pdf_pages": 35,
+      "witness_period": "Late Babylonian, copied after the mid-sixth century and before the Sippar library was abandoned in the early fifth century BCE",
+      "witness_provenience": "Sippar Library",
+      "coverage": "EAE 20 sections VII-XIII, manuscript lines 1-68",
+      "inspection": "Complete article text extracted; introduction, edition, translation, notes, manuscript comparison, conclusions, cuneiform copy, and tablet photographs inspected."
+    },
+    {
+      "source_registry_id": "babylonian_heessel_kal13_eae20_vat9419_11310_2021",
+      "artifact_id": "VAT 9419 + VAT 11310, probably belonging with VAT 9740+",
+      "title": "Keilschrifttexte aus Assur literarischen Inhalts 13: Divinatorische Texte III: Astrologische Omina, text 21",
+      "author": "Nils P. Heessel",
+      "publication": "KAL 13 (2021), pp. 57-59",
+      "url": "https://doi.org/10.11588/diglit.69509#0070",
+      "download_url": "https://digi.hadw-bw.de/view/kal13/download.pdf",
+      "retrieved_pdf_sha256": "d15921dc93a848cd4f26adda674fd412e404850d638cc8496fd7af766971589e",
+      "retrieved_pdf_bytes": 53165893,
+      "retrieved_pdf_pages": 279,
+      "witness_period": "Neo-Assyrian",
+      "coverage": "Fragmentary EAE 20 sections X-XIII, reverse IV? lines 1-27",
+      "inspection": "German edition metadata, transliteration, translation, notes, duplicate table, and rendered pages 56-59 inspected; text 21 explicitly parallels IM 124485 lines 35-64."
+    }
+  ],
+  "passage_units": [
+    {"passage_id":"eae20.im.vii.main","artifact_id":"IM 124485","location":"section VII, lines 1-8; article pp. 26-32","kind":"calendrical_lunar_eclipse_omen","normalized_protasis":{"month":"tashritu","day":14,"darkening":"west_above","clearing":"south_below","wind":"north","middle_watch":"reaches_half","beyond_half":true,"continues_until_light":true,"cusp_star_motion":"right_to_left"},"normalized_apodosis":["mutabal_resettled","mutabal_crown_prince_rules","borsippa_crown_prince_afflicted"],"variant_note":"Neo-Assyrian MS D instead gives king_declares_war_on_king; MS S and MS a preserve shorter Mutabal-resettlement recensions.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.vii.supplement","artifact_id":"IM 124485","location":"section VII, lines 8-16; article p. 32","kind":"supplementary_fixed_star_omen","normalized_protasis":{"month":"nisannu","day":14,"numusda_position":"below_yoke_above_marduk","additional_star":"present_and_bright"},"normalized_apodosis":["mutabal_resettled","babylon_deserted","mutabal_and_dilbat_abandoned","borsippa_relieved"],"variant_note":"MS S dates the configuration to 28th Shabatu or Tashritu and differs in several outcomes; the damaged relation at IM line 10 remains unresolved.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.viii.main","artifact_id":"IM 124485","location":"section VIII, lines 17-23; article p. 32","kind":"calendrical_lunar_eclipse_omen","normalized_protasis":{"month":"arahsamna","day":14,"darkening":"east_above","clearing":"west_below","wind":"north","middle_watch":"sets_out","dawn_watch":"reaches_half","cusps":"jab_sky"},"normalized_apodosis":["eridu_men_slaughtered","royal_reign_ends","city_abandoned","king_and_family_killed","crown_prince_escapes"],"variant_note":"Early Neo-Babylonian MS S transposes above and below and adds a rich-man-death and brawls clause.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.viii.supplement","artifact_id":"IM 124485","location":"section VIII, lines 23-24; article p. 32","kind":"supplementary_venus_moon_omen","normalized_protasis":{"month":"nisannu","day":14,"venus":"enters_moon_then_exits_right"},"normalized_apodosis":["land_and_people_destroyed","enemy_excluded_from_land"],"variant_note":"MS Z gives day 15; MS S gives 14th Arahsamna and predicts an enemy incursion rather than exclusion.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.ix.main","artifact_id":"IM 124485","location":"section IX, lines 25-32; article p. 32","kind":"calendrical_lunar_eclipse_omen","normalized_protasis":{"month":"kislimu","day":14,"darkening":"north_above","clearing":"south_below","wind":"west","dawn_watch":"reaches_half","right_cusp":"curled","beyond_half":true},"normalized_apodosis":["der_resettled","king_of_der_dies","der_lacks_good_fortune","king_short_lived","venus_bright_by_yoke_of_enlil"],"variant_note":"MS S transposes above and below and gives a partly different apodosis in which Der prospers and its kingship endures.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.x.main","artifact_id":"IM 124485","location":"section X, lines 33-41; article pp. 32-33","kind":"calendrical_lunar_eclipse_omen","normalized_protasis":{"month":"tebetu","day":14,"darkening":"east_above","clearing":"west_below","wind":"west","dawn_watch":"eclipse_ends","cusps":"equal_neither_fat_nor_thin"},"normalized_apodosis":["subartu_and_gutium_captured","people_perish","widows_increase","king_of_subartu_conquers_and_plunders"],"variant_note":"MS M changes the final royal outcome to king_of_subartu_makes_peace_with_lands; MS S also changes eclipse duration.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.xi.main","artifact_id":"IM 124485","location":"section XI, lines 42-53; article pp. 31-33","kind":"calendrical_lunar_eclipse_omen_with_day28_observation","normalized_protasis":{"month":"shabatu","day":14,"darkening":"south_above","clearing":"east_below","wind":"north","dawn_watch":"begins","sun_company":true,"cusps":"jab_sky","whole_disk_covered":false,"moon_disappears":true,"day28_followup":"red_rising_moon_shows_eclipse"},"normalized_apodosis":["babylon_destroyed","people_scattered","royal_reign_ends","ur_takes_babylonian_hegemony"],"variant_note":"MS S appends a separate non-calendrical favorable omen for a night that elapses during eclipse: river flood, rain, successful harvest, and good fortune.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.xii.main","artifact_id":"IM 124485","location":"section XII, lines 54-60; article p. 33","kind":"calendrical_lunar_eclipse_omen","normalized_protasis":{"month":"addaru","day":14,"darkening":"north_above","clearing":"east_below","winds":["west","east"],"dawn_watch":"eclipse_ends","cusps_at_rise":"not_visible","cusps_at_set":"visible"},"normalized_apodosis":["amurru_chaos","gods_of_land_accursed","cities_deserted","nation_devours_nation","cities_sacked"],"variant_note":"VAT 9419+VAT 11310 preserves east wind only and a city-brightening/extinction reading; IM line 60 is corrupt where other witnesses preserve wherever cities exist devastation occurs.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.im.xii.supplement","artifact_id":"IM 124485","location":"section XII, lines 60-63; article p. 33","kind":"supplementary_papsukkal_daylight_omen","normalized_protasis":{"papsukkal":"rises_and_stands_with_sun"},"normalized_apodosis":["human_and_animal_downfall","land_panics","posterity_dies"],"variant_note":"Across MS Y, MS S, MS b, IM, and duplicates the boundary between protasis and apodosis changes radically; Papsukkal also varies with Sipazianna/Orion.","eligibility":"research_only_non_executable"},
+    {"passage_id":"eae20.im.xiii.summary","artifact_id":"IM 124485","location":"section XIII, lines 64-67; article p. 33","kind":"schematic_summary","normalized_protasis":{"eclipse_days":[7,14,21],"darkening":"above","clearing":"below"},"normalized_apodosis":["destruction"],"variant_note":"The edition explicitly identifies days 7 and 21 as astronomically impossible schematic dates; line 65 is not understood.","eligibility":"research_only_non_executable"},
+    {"passage_id":"eae20.vat.x","artifact_id":"VAT 9419 + VAT 11310","location":"KAL 13 text 21, reverse IV? lines 1-5; pp. 57-58","kind":"duplicate_and_recensional_control","normalized_protasis":{"section":"EAE20_X","wind":"west","beyond_half":true},"normalized_apodosis":["subartu_and_gutium_captured","people_perish","widows_increase","king_of_subartu_plunders_lands"],"variant_note":"Supports the IM plunder reading against MS M's peace reading.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.vat.xi","artifact_id":"VAT 9419 + VAT 11310","location":"KAL 13 text 21, reverse IV? lines 6-17; pp. 57-58","kind":"duplicate_and_recensional_control","normalized_protasis":{"section":"EAE20_XI","month":"shabatu","day":14,"darkening":"south_above","clearing":"east_below","wind":"north"},"normalized_apodosis":["babylon_destroyed","people_scattered","ur_takes_babylonian_hegemony"],"variant_note":"Independently supports the principal IM negative Babylon outcome.","eligibility":"historical_display_only"},
+    {"passage_id":"eae20.vat.xii","artifact_id":"VAT 9419 + VAT 11310","location":"KAL 13 text 21, reverse IV? lines 18-27; pp. 57-59","kind":"duplicate_with_substantive_variants","normalized_protasis":{"month":"addaru","day":14,"darkening":"north_above","clearing":"east_below","wind":"east","dawn_watch":"eclipse_ends","cusps_at_rise":"not_visible","cusps_at_set":"visible"},"normalized_apodosis":["amurru_chaos","gods_of_land_accursed","city_brightening_or_extinction_near","nation_devours_nation","cities_sacked","wherever_city_exists_destruction"],"variant_note":"Differs from IM's two-wind selector and city-desertion reading; its Papsukkal continuation is reconstructed partly from IM and other duplicates.","eligibility":"historical_display_only"}
+  ],
+  "global_constraints": [
+    "Rules are witness- and recension-scoped; no single harmonized canonical outcome may replace documented variants.",
+    "Month, day, darkening quadrant, clearing quadrant, watch, duration, wind, cusp state, accompanying body, and follow-up observation remain distinct predicates.",
+    "Impossible schematic eclipse dates are preserved as textual facts and never treated as computable astronomical events.",
+    "Supplementary fixed-star and planetary omens remain separate from the calendrical eclipse protasis they accompany.",
+    "All political, military, death, famine, flood, destruction, and ritual implications are historical evidence only.",
+    "No rule accepts birth data, creates a natal delineation, or produces customer predictions."
+  ]
+}

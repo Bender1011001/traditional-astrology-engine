@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "chinese_bazi",
+  "school_id": "bounded_sexagenary_cycle_arithmetic",
+  "source_pack_id": "bazi_sexagenary_kernel_v1",
+  "source_edition_id": "hko_reference_pages_and_sanming_juan1_2026_07_31",
+  "source_registry_ids": [
+    "chinese_hko_stems_branches",
+    "chinese_hko_24_solar_terms_2027",
+    "bazi_sanming_tonghui_wikisource"
+  ],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "This pack encodes only observatory-attested cycle arithmetic, the shichen partition, the two stem lookup tables, and fail-closed boundaries. It supplies no day-count anchor, no school boundary convention, no five-element tally, no Ten-God relation, no luck pillar, and no interpretation.",
+  "rules": [
+    {
+      "rule_id": "bazi.sexagenary.stem_cycle_10",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "shared_chinese_calendar_kernel", "domain": "calendar",
+      "scope": {"series": "heavenly_stem", "birth_input_eligible": false},
+      "conditions": {"integer_offset_from_valid_position": true},
+      "conclusion": {"operation": "advance_modulo", "modulus": 10, "order_origin": "jia", "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "hko_stems_branches_web_2026_07_31", "work": "Heavenly Stems and Earthly Branches", "section": "Stems table", "location": "HKO public reference page", "verification": "The inspected page lists the ten stems in fixed order beginning with Jia."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Independent almanac conformance still required."
+    },
+    {
+      "rule_id": "bazi.sexagenary.branch_cycle_12",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "shared_chinese_calendar_kernel", "domain": "calendar",
+      "scope": {"series": "earthly_branch", "birth_input_eligible": false},
+      "conditions": {"integer_offset_from_valid_position": true},
+      "conclusion": {"operation": "advance_modulo", "modulus": 12, "order_origin": "zi", "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [{"edition_id": "hko_stems_branches_web_2026_07_31", "work": "Heavenly Stems and Earthly Branches", "section": "Branches table", "location": "HKO public reference page", "verification": "The inspected page lists the twelve branches in fixed order beginning with Zi."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Independent almanac conformance still required."
+    },
+    {
+      "rule_id": "bazi.sexagenary.joint_cycle_60_parity",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "shared_chinese_calendar_kernel", "domain": "calendar",
+      "scope": {"series": ["heavenly_stem", "earthly_branch"], "birth_input_eligible": false},
+      "conditions": {"stem_period": 10, "branch_period": 12, "joint_advance": true},
+      "conclusion": {"joint_period": 60, "origin_pair": ["jia", "zi"], "same_parity_only": true, "cross_parity_pairs_rejected": true, "customer_prediction": false},
+      "priority": 100, "exceptions": [], "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "hko_stems_branches_web_2026_07_31", "work": "Heavenly Stems and Earthly Branches", "section": "Sexagenary cycle table", "location": "HKO public reference page", "verification": "The inspected page gives the complete sixty-pair cycle beginning with Jia-Zi."},
+        {"edition_id": "wikisource_sanming_tonghui_juan1_2026_07_31", "work": "Sanming Tonghui", "section": "Juan 1", "location": "sixty-Jiazi enumeration in the volume-one transcription", "verification": "The classical enumeration corroborates the sixty-pair structure; the transcription controls no wording."}
+      ],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Structural corroboration only from the Wikisource witness."
+    },
+    {
+      "rule_id": "bazi.sexagenary.shichen_partition",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "shared_chinese_calendar_kernel", "domain": "calendar",
+      "scope": {"series": "shichen", "birth_input_eligible": false},
+      "conditions": {"time_of_day_in_named_clock_basis": true},
+      "conclusion": {"two_hour_periods": 12, "zi_spans": ["23:00", "01:00"], "assigns_branch_only": true, "customer_prediction": false},
+      "priority": 100,
+      "exceptions": ["This partition attests branch spans only; the day-rollover convention at the Zi boundary is not decided here and fails closed without a named convention profile."],
+      "conflicts_with": [],
+      "source_passages": [{"edition_id": "hko_stems_branches_web_2026_07_31", "work": "Heavenly Stems and Earthly Branches", "section": "Shichen table", "location": "HKO public reference page", "verification": "The inspected page assigns the twelve two-hour shichen with Zi from 23:00 through 01:00."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Clock-basis and day-rollover conventions remain unresolved by design."
+    },
+    {
+      "rule_id": "bazi.sexagenary.month_stem_from_year_stem",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "shared_chinese_calendar_kernel", "domain": "calendar",
+      "scope": {"series": "month_stem", "birth_input_eligible": "conditional"},
+      "conditions": {"year_stem_known": true},
+      "conclusion": {"first_month_stem_lookup": {"jia": "bing", "ji": "bing", "yi": "wu_stem", "geng": "wu_stem", "bing": "geng", "xin": "geng", "ding": "ren", "ren": "ren", "wu_stem": "jia", "gui": "jia"}, "subsequent_months_advance_by_one": true, "customer_prediction": false},
+      "priority": 110,
+      "exceptions": ["Applying this table to a birth requires a named month-boundary convention; the lookup itself decides no boundary."],
+      "conflicts_with": [],
+      "source_passages": [{"edition_id": "hko_stems_branches_web_2026_07_31", "work": "Heavenly Stems and Earthly Branches", "section": "Year-stem to month-stem table", "location": "HKO public reference page", "verification": "The inspected page supplies the complete ten-row lookup from year stem to first-month stem."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Month-boundary convention remains gated."
+    },
+    {
+      "rule_id": "bazi.sexagenary.hour_stem_from_day_stem",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "shared_chinese_calendar_kernel", "domain": "calendar",
+      "scope": {"series": "hour_stem", "birth_input_eligible": "conditional"},
+      "conditions": {"day_stem_known": true},
+      "conclusion": {"zi_hour_stem_lookup": {"jia": "jia", "ji": "jia", "yi": "bing", "geng": "bing", "bing": "wu_stem", "xin": "wu_stem", "ding": "geng", "ren": "geng", "wu_stem": "ren", "gui": "ren"}, "subsequent_hours_advance_by_one": true, "customer_prediction": false},
+      "priority": 110,
+      "exceptions": ["Applying this table to a birth requires a named clock-basis and day-rollover convention; the lookup itself decides neither."],
+      "conflicts_with": [],
+      "source_passages": [{"edition_id": "hko_stems_branches_web_2026_07_31", "work": "Heavenly Stems and Earthly Branches", "section": "Day-stem to hour-stem table", "location": "HKO public reference page", "verification": "The inspected page supplies the complete ten-row lookup from day stem to Zi-hour stem."}],
+      "evidence_grade": "A", "publication_limit": "Research arithmetic only.", "review_status": "Clock-basis convention remains gated."
+    },
+    {
+      "rule_id": "bazi.solar_terms.24_longitude_moments",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "shared_chinese_calendar_kernel", "domain": "calendar",
+      "scope": {"series": "solar_terms", "birth_input_eligible": false},
+      "conditions": {"solar_term_definition_requested": true},
+      "conclusion": {"term_count": 24, "major_terms": 12, "minor_terms": 12, "defined_as_ecliptic_longitude_moments": true, "per_term_longitudes_encoded": false, "customer_prediction": false},
+      "priority": 100,
+      "exceptions": ["Per-term longitude and name assignments are not encoded pending capture of multi-year observatory tables.", "No mapping from terms to pillar months is made here."],
+      "conflicts_with": [],
+      "source_passages": [{"edition_id": "hko_solar_terms_2027_pdf_2026_07_31", "work": "24 Solar Terms in 2027", "section": "Term table", "location": "HKO published table", "verification": "The inspected table defines solar terms as moments at 24 predefined ecliptic-longitude positions and distinguishes twelve major and twelve minor terms."}],
+      "evidence_grade": "A", "publication_limit": "Definition only; no month mapping.", "review_status": "Multi-year table capture pending."
+    },
+    {
+      "rule_id": "bazi.sexagenary.named_anchor_required",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "civil_date_conversion", "birth_input_eligible": "conditional"},
+      "conditions": {"civil_date_requested": true},
+      "conclusion": {"require_named_anchor_profile": true, "default_anchor": null, "customer_prediction": false},
+      "priority": 200,
+      "exceptions": ["Cycle-internal offsets may be calculated without a civil-date anchor."],
+      "conflicts_with": [],
+      "source_passages": [{"edition_id": "research_boundary_2026_08_01", "work": "BaZi source audit", "section": "Unresolved convention matrix", "location": "day-count and historical-time rows", "verification": "The inspected observatory pages attest cycle structure but supply no day-count concordance; the audit therefore requires a named anchor with authority and uncertainty."}],
+      "evidence_grade": "B", "publication_limit": "No customer-facing civil-date conversion.", "review_status": "Blocked pending a registered day-count concordance source."
+    },
+    {
+      "rule_id": "bazi.sexagenary.named_convention_profile_required",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "pillar_boundary_assignment", "birth_input_eligible": "conditional"},
+      "conditions": {"boundary_dependent_pillar_requested": true},
+      "conclusion": {"require_named_convention_profile": true, "default_profile": null, "boundaries": ["year", "month", "day", "hour_clock"], "customer_prediction": false},
+      "priority": 210,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [{"edition_id": "research_boundary_2026_08_01", "work": "BaZi source audit", "section": "Unresolved convention matrix", "location": "year, month, day, and hour-clock rows", "verification": "The audit records that these boundaries vary by school and forbids hidden defaults; every chart-changing choice must be named."}],
+      "evidence_grade": "B", "publication_limit": "Fail-closed research control.", "review_status": "Blocked pending named school convention packs."
+    },
+    {
+      "rule_id": "bazi.sexagenary.arithmetic_has_no_interpretation",
+      "tradition_id": "chinese_bazi", "school_id": "bounded_sexagenary_cycle_arithmetic", "period": "modern_reconstruction_boundary", "domain": "calendar",
+      "scope": {"operation": "cycle_arithmetic", "birth_input_eligible": false},
+      "conditions": {"pillar_or_cycle_position_computed": true},
+      "conclusion": {"emit_interpretation": false, "five_element_tally": false, "ten_god_output": false, "luck_pillar_output": false, "customer_prediction": false},
+      "priority": 220,
+      "exceptions": ["Future interpretation packs must be separate, source-controlled, and independently validated."],
+      "conflicts_with": [],
+      "source_passages": [{"edition_id": "research_boundary_2026_08_01", "work": "BaZi source audit", "section": "Result of this pass", "location": "conditional-hierarchy finding", "verification": "The inspected Yuanhai Ziping structure shows conditional judgments that a bare tally would erase; the audit forbids substituting undocumented weighted totals for source logic."}],
+      "evidence_grade": "B", "publication_limit": "Arithmetic fields only; no reading.", "review_status": "Interpretation corpus not implemented."
+    }
+  ]
+}

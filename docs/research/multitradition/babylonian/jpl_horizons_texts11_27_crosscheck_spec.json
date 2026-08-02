@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "status": "live_jpl_horizons_crosscheck_passed_snapshot_and_specialist_review_pending",
+  "rochberg_astronomy_spec": "rochberg_texts11_27_astronomy_spec.json",
+  "api": {
+    "endpoint": "https://ssd.jpl.nasa.gov/api/horizons.api",
+    "documentation": "https://ssd-api.jpl.nasa.gov/doc/horizons.html",
+    "manual": "https://ssd.jpl.nasa.gov/horizons/manual.html",
+    "expected_signature_source": "NASA/JPL Horizons API",
+    "observed_signature_version": "1.2",
+    "observed_date": "2026-08-01"
+  },
+  "query_profile": {
+    "ephemeris_type": "OBSERVER",
+    "center": "500@399",
+    "center_meaning": "Earth geocenter",
+    "quantity": 31,
+    "quantity_meaning": "observer-centered apparent IAU76/80 Earth ecliptic-of-date longitude and latitude with light-time, gravitational deflection, and stellar aberration",
+    "delta_t_quantity": 30,
+    "delta_t_quantity_meaning": "TDB minus UT seconds",
+    "reference_system": "ICRF",
+    "calendar_format": "JD",
+    "calendar_type": "MIXED",
+    "angle_format": "DEG",
+    "apparent_mode": "AIRLESS",
+    "extra_precision": true,
+    "time_list_type": "JD",
+    "ut_comparison": "same source-table UT labels, allowing each implementation to use its own TDB/TT-minus-UT model",
+    "tt_comparison": "same TT Julian instants derived from the locked Swiss profile, isolating ephemeris and reference-frame differences from Delta-T"
+  },
+  "target_ids": {
+    "sun": {"command": "10", "object": "Sun"},
+    "moon": {"command": "301", "object": "Moon"},
+    "mercury": {"command": "199", "object": "Mercury center"},
+    "venus": {"command": "299", "object": "Venus center"},
+    "mars": {"command": "4", "object": "Mars system barycenter"},
+    "jupiter": {"command": "5", "object": "Jupiter system barycenter"},
+    "saturn": {"command": "6", "object": "Saturn system barycenter"}
+  },
+  "why_barycenters_are_used": "Horizons documents objects 0-10, 199, 299, 301, and 399 as available over the required ancient interval. Planet-center targets 499, 599, and 699 do not cover these BCE dates, so outer-planet comparisons use system barycenters and retain that limitation explicitly.",
+  "observed_summary": {
+    "position_comparisons": 125,
+    "ut_same_label": {
+      "maximum_absolute_difference_degrees": 0.0148495,
+      "maximum_planet_difference_degrees": 0.001646,
+      "maximum_moon_difference_degrees": 0.0148495,
+      "mean_absolute_difference_degrees": 0.0014886
+    },
+    "tt_same_instant": {
+      "maximum_absolute_difference_degrees": 0.0008398,
+      "maximum_planet_difference_degrees": 0.000839,
+      "maximum_moon_difference_degrees": 0.0008398,
+      "mean_absolute_difference_degrees": 0.000829
+    },
+    "delta_t": {
+      "unique_instants": 18,
+      "minimum_horizons_minus_swiss_seconds": -41.945,
+      "maximum_horizons_minus_swiss_seconds": 90.342,
+      "mean_horizons_minus_swiss_seconds": 16.798
+    }
+  },
+  "live_drift_gates": {
+    "position_comparisons": 125,
+    "ut_maximum_absolute_difference_degrees": 0.016,
+    "ut_maximum_planet_difference_degrees": 0.002,
+    "tt_maximum_absolute_difference_degrees": 0.001,
+    "delta_t_difference_seconds_minimum": -45.0,
+    "delta_t_difference_seconds_maximum": 95.0
+  },
+  "gate_status": "exploratory_post_hoc_snapshot_drift_gates_not_final_golden_tolerances",
+  "findings": [
+    "At identical ancient UT labels, the largest longitude difference is lunar and is consistent with the different Delta-T models.",
+    "Horizons TDB-UT minus the locked Swiss value ranges from -41.945 to 90.342 seconds across the eighteen instants.",
+    "At identical TT instants, all 125 longitudes agree within 0.000840 degrees; the nearly common longitude offset is consistent with differing ecliptic-of-date/reference-frame realizations and is not silently subtracted.",
+    "Together with the earlier 67-row run, 192 modern tropical longitude calculations used for the Rochberg table reproductions now have an independent Horizons comparison.",
+    "This comparison supports the modern tropical longitudes used in the Rochberg reproduction but does not validate Rochberg's ancient-zodiac correction values, tablet readings, calendar conversions, eclipse identifications, visibility claims, or judgments."
+  ],
+  "limits": [
+    "Horizons is a live service whose models and API version can change; any later drift-gate failure requires review rather than automatic fixture replacement.",
+    "The TT list uses the locked Swiss Delta-T model only to define common dynamical instants; the Horizons UT comparison separately exposes model disagreement.",
+    "IAU76/80 Horizons ecliptic-of-date and Swiss Ephemeris ecliptic-of-date are not assumed identical.",
+    "Outer-planet barycenter-versus-center differences remain part of the error budget.",
+    "The first run used broad prospective discovery bounds; the tighter stored gates were selected after observing that run and are only drift alarms, not preregistered production acceptance criteria.",
+    "Final golden vectors require an immutable Horizons response snapshot or offline JPL SPK pipeline, source review, and prospective tolerances."
+  ]
+}

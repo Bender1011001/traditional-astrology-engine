@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "vietnamese_calendar_science",
+  "source_pack_id": "vietnam_modern_lunisolar_rules_uhm_candidate_v1",
+  "status": "published_worked_examples_pending_independent_recomputation",
+  "source_id": "vietnam_modern_lunisolar_rules_uhm",
+  "vectors": [
+    {
+      "vector_id": "vietnam.calendar.new_moon_local_day_divergence.1984_05_30",
+      "rule_ids": [
+        "vietnam.modern_calendar.month_starts_on_local_new_moon_day",
+        "vietnam.modern_calendar.vietnamese_local_day_not_beijing_day"
+      ],
+      "event": {"kind": "new_moon", "utc": "1984-05-30T16:47:52Z"},
+      "expected": {
+        "hanoi_civil_date": "1984-05-30",
+        "beijing_civil_date": "1984-05-31"
+      },
+      "provenance": "Worked 1984 event table"
+    },
+    {
+      "vector_id": "vietnam.calendar.solstice_local_day_divergence.1984_12_21",
+      "rule_ids": [
+        "vietnam.modern_calendar.winter_solstice_in_month11",
+        "vietnam.modern_calendar.vietnamese_local_day_not_beijing_day"
+      ],
+      "event": {"kind": "winter_solstice_principal_term", "utc": "1984-12-21T16:22:42Z"},
+      "expected": {
+        "hanoi_civil_date": "1984-12-21",
+        "beijing_civil_date": "1984-12-22"
+      },
+      "provenance": "Worked 1984 event table"
+    },
+    {
+      "vector_id": "vietnam.calendar.month11_1984",
+      "rule_ids": [
+        "vietnam.modern_calendar.month_starts_on_local_new_moon_day",
+        "vietnam.modern_calendar.winter_solstice_in_month11",
+        "vietnam.modern_calendar.normal_year_month_numbering"
+      ],
+      "inputs": {"calendar_profile": "modern_vietnamese_candidate"},
+      "expected": {
+        "month_number": 11,
+        "start_civil_date": "1984-11-23",
+        "end_civil_date": "1984-12-21"
+      },
+      "provenance": "Worked month-11 derivation"
+    },
+    {
+      "vector_id": "vietnam.calendar.new_year_divergence.1985",
+      "rule_ids": [
+        "vietnam.modern_calendar.winter_solstice_in_month11",
+        "vietnam.modern_calendar.first_no_principal_term_month_is_intercalary",
+        "vietnam.modern_calendar.vietnamese_local_day_not_beijing_day"
+      ],
+      "inputs": {"gregorian_year": 1985},
+      "expected": {
+        "vietnamese_new_year": "1985-01-21",
+        "chinese_new_year": "1985-02-20"
+      },
+      "provenance": "Published Vietnam-China comparison"
+    },
+    {
+      "vector_id": "vietnam.calendar.intercalary_month.1985",
+      "rule_ids": [
+        "vietnam.modern_calendar.month_starts_on_local_new_moon_day",
+        "vietnam.modern_calendar.winter_solstice_in_month11",
+        "vietnam.modern_calendar.first_no_principal_term_month_is_intercalary"
+      ],
+      "inputs": {"calendar_profile": "modern_vietnamese_candidate", "gregorian_year": 1985},
+      "expected": {
+        "is_leap_year": true,
+        "intercalary_month_start": "1985-03-21",
+        "intercalary_month_end": "1985-04-19",
+        "reason": "first post-solstice lunar month in the thirteen-month span without a principal term"
+      },
+      "provenance": "Worked 1985 leap-month derivation"
+    }
+  ],
+  "required_independent_checks": [
+    "recompute New Moon instants with a named ephemeris and timescale",
+    "recompute principal-term instants from apparent solar longitude",
+    "verify civil-time offsets for Hanoi and Beijing at every event",
+    "compare every month label with two independent Vietnamese almanac series",
+    "test one second before, at and after every New Moon and principal-term boundary",
+    "separate modern calculation from every historical royal-calendar regime"
+  ]
+}

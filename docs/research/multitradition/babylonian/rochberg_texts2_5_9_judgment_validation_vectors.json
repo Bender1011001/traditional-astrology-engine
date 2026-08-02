@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_pack_id": "rochberg_1998_texts2_5_9_judgment_clauses_v1",
+  "status": "research_vectors_for_record_display_abstention_mutation_and_safety_not_engine_execution",
+  "source_ids": [
+    "babylonian_rochberg_horoscopes_1998_awdl"
+  ],
+  "vectors": [
+    {
+      "vector_id": "babylonian.rochberg1998.text2.record_clause_preserves_uncertainty",
+      "rule_ids": [
+        "babylonian.rochberg1998.text2.rev1.propitious_clause"
+      ],
+      "inputs": {
+        "source_record": "rochberg1998.text2",
+        "text_contains_reverse_line_1_clause": true,
+        "translated_subject": "things_question_mark",
+        "astronomical_or_chronological_trigger": "unresolved"
+      },
+      "expected": {
+        "historical_clause_display": "propitious_outcome",
+        "subject_uncertainty_visible": true,
+        "algorithmic_trigger": null,
+        "customer_prediction": false
+      },
+      "provenance": "Rochberg 1998 Text 2, p. 56 rev. 1 and reverse commentary p. 57"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text2.generic_chart_must_abstain",
+      "rule_ids": [
+        "babylonian.rochberg1998.text2.rev1.propitious_clause"
+      ],
+      "inputs": {
+        "source_record": null,
+        "modern_birth_chart": {
+          "jupiter_sign": "pisces",
+          "venus_sign": "taurus",
+          "saturn_sign": "cancer",
+          "mars_sign": "gemini"
+        }
+      },
+      "expected": {
+        "matched_rule_ids": [],
+        "abstention_reason": "text2_does_not_establish_the_clause_trigger_or_a_generic_chart_score"
+      },
+      "provenance": "Negative control derived from Rochberg's statement that the reverse chronology and relation to the birth are obscure"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text5.record_clause_inventory",
+      "rule_ids": [
+        "babylonian.rochberg1998.text5.rev2.initial_property_lack_clause",
+        "babylonian.rochberg1998.text5.rev4.food_insufficiency_clause",
+        "babylonian.rochberg1998.text5.rev5.youth_property_does_not_last_clause",
+        "babylonian.rochberg1998.text5.rev6.year36_property_clause",
+        "babylonian.rochberg1998.text5.rev7.long_life_clause",
+        "babylonian.rochberg1998.text5.rev8-9.wife_social_conflict_clause",
+        "babylonian.rochberg1998.text5.rev10.profit_clause",
+        "babylonian.rochberg1998.text5.rev11-12.property_travel_clause"
+      ],
+      "inputs": {
+        "source_record": "rochberg1998.text5",
+        "inspected_lines": ["rev2", "rev4", "rev5", "rev6", "rev7", "rev8-9", "rev10", "rev11-12"],
+        "judgment_sequence_trigger": "unresolved"
+      },
+      "expected": {
+        "historical_clause_count": 8,
+        "executable_rule_count": 0,
+        "customer_prediction_count": 0,
+        "complete_predication_count": 7,
+        "fragment_count": 1
+      },
+      "provenance": "Rochberg 1998 Text 5, p. 67 rev. 2-12"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text5.placements_are_not_triggers",
+      "rule_ids": [
+        "babylonian.rochberg1998.text5.rev2.initial_property_lack_clause",
+        "babylonian.rochberg1998.text5.rev4.food_insufficiency_clause",
+        "babylonian.rochberg1998.text5.rev5.youth_property_does_not_last_clause",
+        "babylonian.rochberg1998.text5.rev6.year36_property_clause",
+        "babylonian.rochberg1998.text5.rev7.long_life_clause",
+        "babylonian.rochberg1998.text5.rev8-9.wife_social_conflict_clause",
+        "babylonian.rochberg1998.text5.rev10.profit_clause",
+        "babylonian.rochberg1998.text5.rev11-12.property_travel_clause"
+      ],
+      "inputs": {
+        "source_record": null,
+        "modern_birth_chart": {
+          "sun": "aries_13_degrees_30_minutes",
+          "moon": "aquarius_10_degrees",
+          "jupiter": "beginning_of_leo",
+          "venus": "with_sun",
+          "mercury": "with_sun",
+          "saturn": "cancer",
+          "mars": "end_of_cancer"
+        }
+      },
+      "expected": {
+        "matched_rule_ids": [],
+        "abstention_reason": "text5_does_not_link_any_isolated_placement_or_conjunction_to_the_reverse_judgment_sequence"
+      },
+      "provenance": "Negative control preserving the gap between Text 5's astronomical record and damaged technical/judgment material"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text5.house_material_removed_mutation",
+      "rule_ids": [
+        "babylonian.rochberg1998.text5.rev2.initial_property_lack_clause",
+        "babylonian.rochberg1998.text5.rev4.food_insufficiency_clause",
+        "babylonian.rochberg1998.text5.rev5.youth_property_does_not_last_clause",
+        "babylonian.rochberg1998.text5.rev6.year36_property_clause",
+        "babylonian.rochberg1998.text5.rev7.long_life_clause",
+        "babylonian.rochberg1998.text5.rev8-9.wife_social_conflict_clause",
+        "babylonian.rochberg1998.text5.rev10.profit_clause",
+        "babylonian.rochberg1998.text5.rev11-12.property_travel_clause"
+      ],
+      "inputs": {
+        "source_record": "rochberg1998.text5",
+        "possible_house_scheme": "removed_as_damaged",
+        "reverse_judgment_lines_preserved": true
+      },
+      "expected": {
+        "historical_clauses_remain_visible": true,
+        "technical_trigger_status": "unresolved",
+        "executable_rule_count": 0,
+        "inferred_house_meanings": []
+      },
+      "provenance": "Required restoration mutation: damaged obverse house terminology cannot be silently supplied to explain the reverse"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text5.year36_semantics_fail_closed",
+      "rule_ids": [
+        "babylonian.rochberg1998.text5.rev6.year36_property_clause"
+      ],
+      "inputs": {
+        "source_record": "rochberg1998.text5",
+        "number": 36,
+        "number_semantics": "unresolved_between_36th_year_and_36_years",
+        "timing_technique": null
+      },
+      "expected": {
+        "historical_number_display": 36,
+        "timed_prediction": null,
+        "borrowed_timing_system": null,
+        "abstention_reason": "passage_does_not_supply_number_semantics_or_an_activation_method"
+      },
+      "provenance": "Rochberg 1998 Text 5, p. 67 rev. 6 prints '36th year (or: 36 years)'"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text5.consumer_safety_suppression",
+      "rule_ids": [
+        "babylonian.rochberg1998.text5.rev2.initial_property_lack_clause",
+        "babylonian.rochberg1998.text5.rev4.food_insufficiency_clause",
+        "babylonian.rochberg1998.text5.rev5.youth_property_does_not_last_clause",
+        "babylonian.rochberg1998.text5.rev6.year36_property_clause",
+        "babylonian.rochberg1998.text5.rev7.long_life_clause",
+        "babylonian.rochberg1998.text5.rev8-9.wife_social_conflict_clause",
+        "babylonian.rochberg1998.text5.rev10.profit_clause",
+        "babylonian.rochberg1998.text5.rev11-12.property_travel_clause"
+      ],
+      "inputs": {
+        "output_mode": "customer_birth_reading",
+        "source_record": "rochberg1998.text5"
+      },
+      "expected": {
+        "published_personal_predictions": [],
+        "suppressed_domains": ["wealth", "food_or_health", "lifespan", "relationship_harm", "profit", "property_travel"],
+        "historical_use_only_notice_required": true
+      },
+      "provenance": "Safety boundary for unresolved and severe historical apodoses"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text9.record_clause_inventory",
+      "rule_ids": [
+        "babylonian.rochberg1998.text9.obv4.moon_aquarius_long_life_clause",
+        "babylonian.rochberg1998.text9.obv5.jupiter_prince_help_clause",
+        "babylonian.rochberg1998.text9.obv6.venus_sons_clause"
+      ],
+      "inputs": {
+        "source_record": "rochberg1998.text9",
+        "moon_longitude": "aquarius_12_degrees",
+        "restored_jupiter_position": "beginning_of_scorpius",
+        "damaged_venus_clause": true
+      },
+      "expected": {
+        "historical_clause_count": 3,
+        "candidate_line_link_count": 3,
+        "verified_reusable_trigger_count": 0,
+        "customer_prediction_count": 0
+      },
+      "provenance": "Rochberg 1998 Text 9, pp. 79-80 obv. 4-6"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text9.moon_aquarius_generic_abstention",
+      "rule_ids": [
+        "babylonian.rochberg1998.text9.obv4.moon_aquarius_long_life_clause"
+      ],
+      "inputs": {
+        "source_record": null,
+        "modern_birth_chart": {
+          "moon_sign": "aquarius",
+          "moon_degree": 12
+        }
+      },
+      "expected": {
+        "matched_rule_ids": [],
+        "lifespan_output": null,
+        "abstention_reason": "same_line_adjacency_in_one_horoscope_does_not_prove_a_complete_reusable_protasis"
+      },
+      "provenance": "Negative control required by the Text 9 corpus note and longevity safety boundary"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text9.jupiter_restoration_removed_mutation",
+      "rule_ids": [
+        "babylonian.rochberg1998.text9.obv5.jupiter_prince_help_clause"
+      ],
+      "inputs": {
+        "source_record": "rochberg1998.text9",
+        "restored_planet_name": null,
+        "preserved_traces_only": true,
+        "apodosis": "someone_will_help_the_prince"
+      },
+      "expected": {
+        "planet_identification": "unknown",
+        "placement_trigger": null,
+        "historical_apodosis_may_display_with_downgrade": true,
+        "customer_prediction": false
+      },
+      "provenance": "Mutation of Rochberg's restored BA[BBAR] in Text 9 obv. 5"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text9.venus_syntax_alternatives_fail_closed",
+      "rule_ids": [
+        "babylonian.rochberg1998.text9.obv6.venus_sons_clause"
+      ],
+      "inputs": {
+        "source_record": "rochberg1998.text9",
+        "premise_readings": ["born_in_aquarius_with_venus", "born_in_region_of_venus", "damaged_other"],
+        "selected_reading": null
+      },
+      "expected": {
+        "premise_alternatives_visible": true,
+        "algorithmic_trigger": null,
+        "fertility_or_offspring_prediction": null
+      },
+      "provenance": "Rochberg 1998 Text 9, pp. 79-80 obv. 6, where subject and relation are uncertain"
+    },
+    {
+      "vector_id": "babylonian.rochberg1998.text9.consumer_safety_suppression",
+      "rule_ids": [
+        "babylonian.rochberg1998.text9.obv4.moon_aquarius_long_life_clause",
+        "babylonian.rochberg1998.text9.obv5.jupiter_prince_help_clause",
+        "babylonian.rochberg1998.text9.obv6.venus_sons_clause"
+      ],
+      "inputs": {
+        "output_mode": "customer_birth_reading",
+        "source_record": "rochberg1998.text9"
+      },
+      "expected": {
+        "published_personal_predictions": [],
+        "suppressed_domains": ["lifespan", "royal_or_social_status", "fertility_and_offspring"],
+        "historical_use_only_notice_required": true
+      },
+      "provenance": "Safety boundary for Text 9's longevity, royal-target, and offspring clauses"
+    }
+  ],
+  "required_expansion_before_implementation": [
+    "independent Akkadian review of every line and uncertainty marker",
+    "tablet-image collation for restored and damaged signs",
+    "full-corpus search for repeated protasis-apodosis pairs and nativity-omen parallels",
+    "named hypothesis packs for any proposed house, bit nisirti, KI, or sign relation",
+    "mutation tests proving restored planet names and damaged technical material cannot create a trigger",
+    "consumer safety review preserving historical clauses while suppressing lifespan, fertility, deprivation, relationship-harm, status, and financial predictions"
+  ]
+}

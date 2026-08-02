@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "chinese_bazi",
+  "artifact_status": "validated_research_artifact",
+  "publication_status": "research_only",
+  "purpose": "A fail-closed arithmetic kernel for the ten-stem/twelve-branch sexagenary cycle, the two-hour shichen partition, and the observatory-attested stem lookup tables. It supplies no day-count anchor, no year/month/day/hour boundary convention, no five-element tally, no Ten-God relation, and no interpretation.",
+  "source_registry_ids": [
+    "chinese_hko_stems_branches",
+    "chinese_hko_24_solar_terms_2027",
+    "bazi_sanming_tonghui_wikisource"
+  ],
+  "source_anchors": [
+    {
+      "source_id": "chinese_hko_stems_branches",
+      "work": "Heavenly Stems and Earthly Branches",
+      "location": "Hong Kong Observatory public reference page, inspected 2026-07-31",
+      "verified_claim": "Lists the ten stems and twelve branches in order, the complete sexagenary pairing beginning with Jia-Zi, the twelve two-hour shichen including Zi from 23:00 through 01:00, and year-stem-to-month-stem and day-stem-to-hour-stem lookup tables."
+    },
+    {
+      "source_id": "chinese_hko_24_solar_terms_2027",
+      "work": "24 Solar Terms in 2027",
+      "location": "Hong Kong Observatory table, inspected 2026-07-31",
+      "verified_claim": "Defines solar terms as moments when the Sun reaches 24 predefined ecliptic-longitude positions and distinguishes twelve major and twelve minor terms."
+    },
+    {
+      "source_id": "bazi_sanming_tonghui_wikisource",
+      "work": "Sanming Tonghui, volume one",
+      "location": "Chinese Wikisource transcription of juan 1, inspected 2026-07-31",
+      "verified_claim": "Volume one exposes stem-branch origins and the sixty-Jiazi enumeration as classical structural material. Transcription-grade witness only; it controls no wording."
+    }
+  ],
+  "cycle": {
+    "stem_count": 10,
+    "branch_count": 12,
+    "joint_period": 60,
+    "canonical_cycle_origin": {"stem_id": "jia", "branch_id": "zi"},
+    "parity_rule": "Stems and branches advance together by one position per unit; only same-parity stem/branch pairs occur, giving 60 of the 120 combinatorial pairs.",
+    "stems": [
+      {"index": 0, "id": "jia", "source_label": "甲"},
+      {"index": 1, "id": "yi", "source_label": "乙"},
+      {"index": 2, "id": "bing", "source_label": "丙"},
+      {"index": 3, "id": "ding", "source_label": "丁"},
+      {"index": 4, "id": "wu_stem", "source_label": "戊"},
+      {"index": 5, "id": "ji", "source_label": "己"},
+      {"index": 6, "id": "geng", "source_label": "庚"},
+      {"index": 7, "id": "xin", "source_label": "辛"},
+      {"index": 8, "id": "ren", "source_label": "壬"},
+      {"index": 9, "id": "gui", "source_label": "癸"}
+    ],
+    "branches": [
+      {"index": 0, "id": "zi", "source_label": "子", "shichen_start": "23:00", "shichen_end": "01:00"},
+      {"index": 1, "id": "chou", "source_label": "丑", "shichen_start": "01:00", "shichen_end": "03:00"},
+      {"index": 2, "id": "yin_branch", "source_label": "寅", "shichen_start": "03:00", "shichen_end": "05:00"},
+      {"index": 3, "id": "mao", "source_label": "卯", "shichen_start": "05:00", "shichen_end": "07:00"},
+      {"index": 4, "id": "chen", "source_label": "辰", "shichen_start": "07:00", "shichen_end": "09:00"},
+      {"index": 5, "id": "si", "source_label": "巳", "shichen_start": "09:00", "shichen_end": "11:00"},
+      {"index": 6, "id": "wu_branch", "source_label": "午", "shichen_start": "11:00", "shichen_end": "13:00"},
+      {"index": 7, "id": "wei", "source_label": "未", "shichen_start": "13:00", "shichen_end": "15:00"},
+      {"index": 8, "id": "shen", "source_label": "申", "shichen_start": "15:00", "shichen_end": "17:00"},
+      {"index": 9, "id": "you", "source_label": "酉", "shichen_start": "17:00", "shichen_end": "19:00"},
+      {"index": 10, "id": "xu", "source_label": "戌", "shichen_start": "19:00", "shichen_end": "21:00"},
+      {"index": 11, "id": "hai", "source_label": "亥", "shichen_start": "21:00", "shichen_end": "23:00"}
+    ],
+    "month_stem_from_year_stem": {
+      "description": "HKO year-stem-to-month-stem lookup: the stem of the first (Yin) month determined by the year stem; subsequent month stems advance by one per month branch.",
+      "table": {
+        "jia": "bing", "ji": "bing",
+        "yi": "wu_stem", "geng": "wu_stem",
+        "bing": "geng", "xin": "geng",
+        "ding": "ren", "ren": "ren",
+        "wu_stem": "jia", "gui": "jia"
+      }
+    },
+    "hour_stem_from_day_stem": {
+      "description": "HKO day-stem-to-hour-stem lookup: the stem of the Zi hour determined by the day stem; subsequent hour stems advance by one per branch.",
+      "table": {
+        "jia": "jia", "ji": "jia",
+        "yi": "bing", "geng": "bing",
+        "bing": "wu_stem", "xin": "wu_stem",
+        "ding": "geng", "ren": "geng",
+        "wu_stem": "ren", "gui": "ren"
+      }
+    }
+  },
+  "solar_terms": {
+    "term_count": 24,
+    "major_terms": 12,
+    "minor_terms": 12,
+    "definition": "Moments when the Sun reaches 24 predefined ecliptic-longitude positions, as stated by the inspected Hong Kong Observatory table.",
+    "not_encoded": [
+      "Per-term longitude assignments and names, pending capture of multi-year observatory tables.",
+      "Any mapping from terms to pillar-month boundaries, which is a school convention."
+    ]
+  },
+  "anchor_contract": {
+    "default_anchor": null,
+    "required_fields": [
+      "anchor_id",
+      "tradition_id",
+      "anchor_civil_date",
+      "calendar_policy",
+      "anchor_sexagenary_index",
+      "authority",
+      "uncertainty",
+      "day_start"
+    ],
+    "required_tradition_id": "chinese_bazi",
+    "supported_date_input": "An ISO civil date already resolved under the named calendar policy and day-boundary profile of the anchor.",
+    "unsupported_inputs": [
+      "A clock instant requiring unresolved timezone, solar-time, or day-boundary conversion",
+      "An unnamed or default day-count anchor",
+      "A day concordance asserted without a registered source"
+    ],
+    "cache_key_fields": [
+      "anchor_id",
+      "tradition_id",
+      "calendar_policy",
+      "day_start",
+      "anchor_civil_date",
+      "anchor_sexagenary_index"
+    ]
+  },
+  "convention_contract": {
+    "default_profile": null,
+    "unresolved_boundaries": [
+      "year boundary: beginning-of-spring term versus lunar/civil new year",
+      "month boundary: minor-term mapping and time standard",
+      "day boundary: civil midnight versus early/late Zi-hour rollover",
+      "hour clock: standard civil time, local mean solar time, or apparent solar time"
+    ],
+    "policy": "Any pillar assignment that depends on one of these boundaries fails closed unless a named convention profile resolves every boundary it touches. No default may be hidden from a report or cache key."
+  },
+  "output_contract": {
+    "allowed_fields": [
+      "stem_id",
+      "branch_id",
+      "sexagenary_index",
+      "shichen_branch_id",
+      "first_month_stem_id",
+      "zi_hour_stem_id",
+      "day_offset"
+    ],
+    "forbidden_fields": [
+      "five_element_tally",
+      "ten_god",
+      "hidden_stems",
+      "luck_pillar",
+      "strength",
+      "pattern",
+      "personality",
+      "fate",
+      "fortune",
+      "health",
+      "compatibility",
+      "recommendation"
+    ]
+  },
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "birth_reading_enabled": false,
+    "historical_use_only": true,
+    "anchor_ready": false,
+    "convention_ready": false,
+    "interpretation_ready": false
+  },
+  "remaining_gates": [
+    "Register a named day-count concordance source and encode two-sided boundary vectors against it.",
+    "Name a school convention profile resolving year, month, day, and hour boundaries with source authority.",
+    "Attribute a true-solar-time and historical-time policy with lineage and uncertainty.",
+    "Cross-check pillar output against independent observatory/almanac tables for multiple years.",
+    "Keep Ten-God, hidden-stem, and interpretation layers in separate, source-controlled packs."
+  ]
+}

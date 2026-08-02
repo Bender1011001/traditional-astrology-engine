@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "purpose": "Passage-access and textual-lineage gate for independent Abu Ma'shar and al-Qabisi rule packs.",
+  "research_only": true,
+  "live_engine": false,
+  "customer_output_eligible": false,
+  "retrieval": {
+    "retrieved_at": "2026-08-01",
+    "repository": "Arabic and Latin Corpus, Institute of Philosophy, University of Wurzburg",
+    "repository_url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/",
+    "corpus_version": "0.4.0",
+    "data_compiled": "2026-06-30 12:21 GMT+02:00",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "hash_method": "SHA-256 over the exact response bytes returned by each TEI XML URL"
+  },
+  "controlling_editions": [
+    {
+      "source_id": "islamicate_abu_mashar_great_introduction_2019",
+      "author_id": "abu_mashar_al_balkhi",
+      "work_id": "kitab_al_mudkhal_al_kabir",
+      "title": "The Great Introduction to Astrology",
+      "edition": "Keiji Yamamoto and Charles Burnett, 2019, two volumes",
+      "available_here": "Arabic TEI transcription derived from volume 1; English translation and critical apparatus are not exposed in the Wurzburg TEI files inspected",
+      "rule_extraction_ready": false,
+      "blocking_gate": "Acquire lawful access to the facing English translation and apparatus, then align every proposed rule to the Arabic and obtain independent Arabic review."
+    },
+    {
+      "source_id": "islamicate_al_qabisi_introduction_2004",
+      "author_id": "al_qabisi",
+      "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+      "title": "The Introduction to Astrology",
+      "edition": "Charles Burnett, Keiji Yamamoto, and Michio Yano, 2004",
+      "available_here": "Arabic and John of Seville Latin TEI transcriptions; the English translation and critical apparatus are not exposed in the Wurzburg TEI files inspected",
+      "rule_extraction_ready": false,
+      "blocking_gate": "Acquire the complete edition, align English-Arabic-Latin passages, and obtain independent Arabic review before encoding doctrine."
+    },
+    {
+      "source_id": "islamicate_wurzburg_abu_mashar_abbreviation_tei",
+      "author_id": "abu_mashar_al_balkhi",
+      "work_id": "mukhtasar_al_mudkhal",
+      "title": "The Abbreviation of the Introduction to Astrology",
+      "edition": "Charles Burnett, Keiji Yamamoto, and Michio Yano, 1994",
+      "available_here": "Arabic and Adelard of Bath Latin TEI transcriptions",
+      "rule_extraction_ready": false,
+      "blocking_gate": "Treat as a separate work; acquire translation and apparatus, align passages, and obtain independent Arabic review."
+    }
+  ],
+  "witness_sets": [
+    {
+      "witness_set_id": "abu_mashar_great_introduction_wurzburg_tei",
+      "source_registry_id": "islamicate_wurzburg_abu_mashar_great_introduction_tei",
+      "author_id": "abu_mashar_al_balkhi",
+      "work_id": "kitab_al_mudkhal_al_kabir",
+      "do_not_merge_with_work_ids": [
+        "mukhtasar_al_mudkhal",
+        "kitab_al_milal_wa_al_duwal",
+        "kitab_tahawil_sini_al_alam"
+      ],
+      "artifacts": [
+        {
+          "artifact_id": "abu_mashar_great_introduction_arabic_tei",
+          "language": "Arabic",
+          "textual_lineage": "2019 critical Arabic edition",
+          "url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/text/Albu_Intro_ar.xml",
+          "bytes": 1124397,
+          "sha256": "816c724496c75b5a42e87bf1f765808f8616c20b96e47e90c00d631b24ee2208",
+          "division_profile": {
+            "book": 1,
+            "part": 113
+          },
+          "page_break_count": 454,
+          "primary_edition_page_break_count": 454,
+          "secondary_witness_page_breaks": {},
+          "edition_page_range": "41-946",
+          "passage_addressable": true
+        },
+        {
+          "artifact_id": "abu_mashar_great_introduction_hermann_latin_tei",
+          "language": "Latin",
+          "translator": "Hermann of Carinthia",
+          "textual_lineage": "Richard Lemay edition, volume 8, with named manuscript and 1489-print witnesses",
+          "url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/text/Albu_Intro_Her_la.xml",
+          "bytes": 516742,
+          "sha256": "5a4898588e4caf2af4d32671950a99d664d7a362102ec4afc291c65145231cbe",
+          "division_profile": {
+            "liber": 8,
+            "capitulum": 104
+          },
+          "page_break_count": 413,
+          "primary_edition_page_break_count": 168,
+          "secondary_witness_page_breaks": {
+            "#MsN": 108,
+            "#Ratdolt": 137
+          },
+          "edition_page_range": "2-169",
+          "passage_addressable": true
+        },
+        {
+          "artifact_id": "abu_mashar_great_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "textual_lineage": "Richard Lemay edition, volume 5, with Cambridge Trinity College O.8.34 named as a source witness",
+          "url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/text/Albu_Intro_JS_la.xml",
+          "bytes": 1064537,
+          "sha256": "d1bf58221d60c39405e05da3d1cb3eb66d3569445941ecfe6f7a55f10d73564d",
+          "division_profile": {
+            "tractatus": 8,
+            "differentia": 106,
+            "capitulum": 5
+          },
+          "page_break_count": 577,
+          "primary_edition_page_break_count": 386,
+          "secondary_witness_page_breaks": {
+            "#ms": 191
+          },
+          "edition_page_range": "1-386",
+          "passage_addressable": true
+        }
+      ],
+      "usable_now_for": [
+        "source discovery",
+        "passage inventory",
+        "Arabic-Latin alignment planning",
+        "translation-variant detection after qualified language review"
+      ],
+      "not_usable_now_for": [
+        "automatic English interpretation",
+        "unreviewed doctrinal rule extraction",
+        "customer readings"
+      ]
+    },
+    {
+      "witness_set_id": "al_qabisi_introduction_wurzburg_tei",
+      "source_registry_id": "islamicate_wurzburg_al_qabisi_introduction_tei",
+      "author_id": "al_qabisi",
+      "work_id": "kitab_al_mudkhal_ila_sinaat_ahkam_al_nujum",
+      "do_not_merge_with_work_ids": [
+        "kitab_al_mudkhal_al_kabir",
+        "mukhtasar_al_mudkhal"
+      ],
+      "artifacts": [
+        {
+          "artifact_id": "al_qabisi_introduction_arabic_tei",
+          "language": "Arabic",
+          "textual_lineage": "2004 critical Arabic edition",
+          "url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/text/Alcab_Intro_ar.xml",
+          "bytes": 189353,
+          "sha256": "3267ff80d6b10dbecf3a2eed7a51495db0842dd20d711a5952cbcbfa05657add",
+          "division_profile": {
+            "book": 1,
+            "chapter": 5
+          },
+          "page_break_count": 69,
+          "primary_edition_page_break_count": 69,
+          "secondary_witness_page_breaks": {},
+          "edition_page_range": "18-154",
+          "passage_addressable": true
+        },
+        {
+          "artifact_id": "al_qabisi_introduction_john_latin_tei",
+          "language": "Latin",
+          "translator": "John of Seville",
+          "textual_lineage": "Latin text in the 2004 critical edition",
+          "url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/text/Alcab_Intro_la.xml",
+          "bytes": 186070,
+          "sha256": "0766e56b232809e763e8ae1f1cbcbd131ce3649df811ef319e2c1d6803de74b8",
+          "division_profile": {
+            "prologue": 1,
+            "chapter": 5
+          },
+          "page_break_count": 140,
+          "primary_edition_page_break_count": 140,
+          "secondary_witness_page_breaks": {},
+          "edition_page_range": "225-364",
+          "passage_addressable": true
+        }
+      ],
+      "usable_now_for": [
+        "source discovery",
+        "passage inventory",
+        "Arabic-Latin alignment planning",
+        "translation-variant detection after qualified language review"
+      ],
+      "not_usable_now_for": [
+        "automatic English interpretation",
+        "unreviewed doctrinal rule extraction",
+        "customer readings"
+      ]
+    },
+    {
+      "witness_set_id": "abu_mashar_abbreviation_wurzburg_tei",
+      "source_registry_id": "islamicate_wurzburg_abu_mashar_abbreviation_tei",
+      "author_id": "abu_mashar_al_balkhi",
+      "work_id": "mukhtasar_al_mudkhal",
+      "do_not_merge_with_work_ids": [
+        "kitab_al_mudkhal_al_kabir"
+      ],
+      "artifacts": [
+        {
+          "artifact_id": "abu_mashar_abbreviation_arabic_tei",
+          "language": "Arabic",
+          "textual_lineage": "1994 critical Arabic edition with London BL Add. 7490 named as a source witness",
+          "url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/text/Albu_Abbr_ar.xml",
+          "bytes": 88880,
+          "sha256": "fcd2bbc3df7d19ce5bf10f9abbf2cd5cfba8bcbbb8635a4ab58dda779bda488a",
+          "division_profile": {
+            "chapter": 7
+          },
+          "page_break_count": 58,
+          "primary_edition_page_break_count": 36,
+          "secondary_witness_page_breaks": {
+            "#B": 22
+          },
+          "edition_page_range": "12-82",
+          "passage_addressable": true
+        },
+        {
+          "artifact_id": "abu_mashar_abbreviation_adelard_latin_tei",
+          "language": "Latin",
+          "translator": "Adelard of Bath",
+          "textual_lineage": "1994 critical Latin edition with London BL Sloane 2030 named as a source witness",
+          "url": "https://www.arabic-latin-corpus.philosophie.uni-wuerzburg.de/text/Albu_Abbr_la.xml",
+          "bytes": 77464,
+          "sha256": "420283ecbe1d320d1a4cd0f048ee39bf37e0be5dbbdecc905ec1b0d8b55cf777",
+          "division_profile": {
+            "preface": 1,
+            "chapter": 7
+          },
+          "page_break_count": 35,
+          "primary_edition_page_break_count": 26,
+          "secondary_witness_page_breaks": {
+            "#S": 9
+          },
+          "edition_page_range": "92-142",
+          "passage_addressable": true
+        }
+      ],
+      "usable_now_for": [
+        "separate-work inventory",
+        "passage alignment planning"
+      ],
+      "not_usable_now_for": [
+        "substitution for the Great Introduction",
+        "unreviewed doctrinal rule extraction",
+        "customer readings"
+      ]
+    }
+  ],
+  "hard_invariants": [
+    "Every rule must name one author_id, one work_id, one language, one textual_lineage, and one passage address.",
+    "The Great Introduction and its Abbreviation are different works and may not inherit rules from one another.",
+    "Hermann of Carinthia and John of Seville are separate Latin translation lineages; agreement may be recorded but never presumed.",
+    "A Latin witness cannot establish Abu Ma'shar's or al-Qabisi's Arabic wording without alignment to the Arabic witness.",
+    "The Wurzburg TEI files inspected do not include the modern English translations or full critical apparatus.",
+    "Cross-author comparison is an explicitly labeled research view, never a generic Islamicate doctrine pack.",
+    "No artifact in this matrix is eligible for the live Western engine or for customer-facing output."
+  ],
+  "next_actions": [
+    "Acquire lawful access to the 2019 Great Introduction and 2004 al-Qabisi editions, including English translations and apparatus.",
+    "Maintain and extend the validated structural passage concordance without translating or interpreting doctrine.",
+    "Select the same narrowly defined concepts already tested in the al-Biruni pilot and locate candidate passages independently in each work.",
+    "Require Arabic specialist review and a second independent passage-to-predicate reader before any rule manifest is created.",
+    "Add mutation vectors proving that disabling cross-work and cross-author inheritance changes results."
+  ]
+}

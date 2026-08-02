@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_pack_id": "saao_saa8_lunar_eclipse_reports_316_535_v1",
+  "status": "research_vectors_complete_for_bounded_pilot_no_runtime_or_customer_output",
+  "source_id": "babylonian_saao_saa8_reports",
+  "vectors": [
+    {
+      "vector_id":"babylonian.saa8.535.sivan15_evening_compound_direct",
+      "rule_ids":[
+        "babylonian.saa8.535.obv1-3.sivan15_revolt_variant",
+        "babylonian.saa8.535.obv4.sivan_evening_fish_locust_variant",
+        "babylonian.saa8.535.obv5.sivan_flood",
+        "babylonian.saa8.535.obv6-7.evening_completion_south_wind_fall",
+        "babylonian.saa8.535.obv8-r2.sivan_eclipse_harvest_failure",
+        "babylonian.saa8.535.rev9.sivan_routes_westland",
+        "babylonian.saa8.535.rev9.day15_routes_westland",
+        "babylonian.saa8.535.rev9-10.evening_watch_routes_akkad",
+        "babylonian.saa8.535.rev11.evening_watch_deaths",
+        "babylonian.saa8.535.rev12.evening_watch_term",
+        "babylonian.saa8.535.rev13.sivan_routes_ur"
+      ],
+      "event":{"phenomenon":"lunar_eclipse","babylonian_month":"sivan","babylonian_day":15,"watch":"evening","eclipse_finishes_watch":true,"wind":"south"},
+      "expected":{"historical_clause_matches":11,"routing_recipients":["westland_from_month","westland_from_day","akkad_from_watch","ur_decision_without_outcome"],"variant_policy":"fish_primary_locusts_restored_variant_not_simultaneous","term":{"months":3,"days":10,"restored":true,"forecast_date_generated":false},"customer_output":false},
+      "provenance":"SAA 08 535 obv. 1-8 and rev. 9-13; ORACC P236933 TEI"
+    },
+    {
+      "vector_id":"babylonian.saa8.535.dark_moon_not_silently_eclipse",
+      "rule_ids":["babylonian.saa8.535.obv10.dark_moon_emergence_flood"],
+      "event":{"moon_emergence":"dark","eclipse_status":"not_stated_in_clause"},
+      "expected":{"historical_clause_match":true,"inserted_eclipse_predicate":false,"disaster_forecast":false,"customer_output":false},
+      "provenance":"SAA 08 535 obv. 10; ORACC translation unit n=10"
+    },
+    {
+      "vector_id":"babylonian.saa8.535.damaged_fragments_fail_closed",
+      "rule_ids":[
+        "babylonian.saa8.535.obv11-12.cloud_enters_cloud_ruin_fragment",
+        "babylonian.saa8.535.obv13-15.cloud_exit_clearing_trouble_fragment",
+        "babylonian.saa8.535.rev1-2.lightning_no_water_flood_fragment",
+        "babylonian.saa8.535.rev3-4.south_wind_famine_fragment"
+      ],
+      "event":{"phenomenon":"lunar_eclipse","cloud_configuration":"ambiguous","lightning":true,"wind":"south_continuous"},
+      "expected":{"research_clause_candidates":4,"executable_rules":0,"reason":"broken_or_restored_protases_and_apodoses","customer_output":false},
+      "provenance":"SAA 08 535 obv. 11-15 and rev. 1-4; ORACC TEI damage and restoration markup"
+    },
+    {
+      "vector_id":"babylonian.saa8.535.jupiter_substitution_not_generic_benefic",
+      "rule_ids":["babylonian.saa8.535.rev5-6.jupiter_present_substitution_omen"],
+      "event":{"phenomenon":"this_lunar_eclipse","jupiter_present_in_eclipse":true,"context":"neo_assyrian_royal_report"},
+      "expected":{"historical_themes":["well_being_for_king","substitute_noble_death"],"generic_jupiter_meaning":false,"natal_rule":false,"death_prediction":false,"customer_output":false},
+      "provenance":"SAA 08 535 rev. 5-6; ORACC P236933"
+    },
+    {
+      "vector_id":"babylonian.saa8.535.dark_sagittarius_has_recipient_no_outcome",
+      "rule_ids":["babylonian.saa8.535.rev7-8.dark_sagittarius_geographic_decision"],
+      "event":{"moon_dark_region":"sagittarius","context":"damaged_report_clause"},
+      "expected":{"recipients":["mutabal","babylon"],"outcome":null,"natal_moon_sign_meaning":false,"executable":false},
+      "provenance":"SAA 08 535 rev. 7-8; ORACC TEI restored words retained"
+    },
+    {
+      "vector_id":"babylonian.saa8.316.applied_multi_selector_direct",
+      "rule_ids":[
+        "babylonian.saa8.316.obv3-5.multi_selector_routing_framework",
+        "babylonian.saa8.316.obv5.sivan_routes_westland",
+        "babylonian.saa8.316.obv5.sivan_decision_ur",
+        "babylonian.saa8.316.obv6.day14_routes_elam",
+        "babylonian.saa8.316.obv7-8.south_west_motion_evil",
+        "babylonian.saa8.316.obv8-9.east_north_clearing_good",
+        "babylonian.saa8.316.obv9.total_coverage_all_lands",
+        "babylonian.saa8.316.obv10.right_lunar_region_akkad",
+        "babylonian.saa8.316.obv10.left_lunar_region_elam",
+        "babylonian.saa8.316.obv10-11.upper_lunar_region_westland",
+        "babylonian.saa8.316.obv11-12.lower_lunar_region_subartu"
+      ],
+      "event":{"phenomenon":"lunar_eclipse","babylonian_month":"sivan","babylonian_day":14,"watch":"evening","eclipse_beginning_region_observed":false,"eclipse_darkening_motion_regions":["south","west"],"eclipse_clearing_regions":["east","north"],"eclipse_coverage":"total"},
+      "expected":{"month_routes":["westland","ur_decision_without_outcome"],"day_routes":["elam_evil"],"motion_routes":{"evil":["elam","westland"],"good":["subartu","akkad"]},"coverage_scope":"all_lands_without_standalone_polarity","lunar_region_table":{"right":"akkad","left":"elam","upper":"westland_partly_broken","lower":"subartu"},"beginning_route":"unknown","customer_output":false},
+      "provenance":"SAA 08 316 obv. 3-12; ORACC P238143 applied interpretation"
+    },
+    {
+      "vector_id":"babylonian.saa8.316.unknown_beginning_abstains_only_that_selector",
+      "rule_ids":["babylonian.saa8.316.obv5-8.unknown_beginning_abstention"],
+      "event":{"phenomenon":"lunar_eclipse","eclipse_beginning_region_observed":false,"other_selectors_available":true},
+      "expected":{"beginning_recipient":null,"imputation":false,"other_selector_processing":"allowed_in_historical_reconstruction","customer_output":false},
+      "provenance":"SAA 08 316 obv. 5-8 explicitly says the beginning was not known"
+    },
+    {
+      "vector_id":"babylonian.saa8.316.direction_pair_mutation",
+      "rule_ids":[
+        "babylonian.saa8.316.obv7-8.south_west_motion_evil",
+        "babylonian.saa8.316.obv8-9.east_north_clearing_good"
+      ],
+      "event":{"eclipse_darkening_motion_regions":["west"],"eclipse_clearing_regions":["north"]},
+      "expected":{"compound_south_west_rule_matches":false,"compound_east_north_rule_matches":false,"reason":"one_required_direction_missing_from_each_pair"},
+      "provenance":"Mutation of the paired directional observations in SAA 08 316 obv. 7-9"
+    },
+    {
+      "vector_id":"babylonian.saa8.316.jupiter_applied_not_natal",
+      "rule_ids":["babylonian.saa8.316.rev3-6.jupiter_applied_substitution_omen"],
+      "event":{"phenomenon":"lunar_eclipse","jupiter_present_in_eclipse":true,"context":"Munnabitu_report_to_king"},
+      "expected":{"historical_clause_applied":true,"natal_jupiter_rule":false,"generic_benefic_rule":false,"harm_prediction":false,"customer_output":false},
+      "provenance":"SAA 08 316 rev. 3-6 applies the Jupiter eclipse clause in royal substitution context"
+    },
+    {
+      "vector_id":"babylonian.saa8.316.response_instruction_safety",
+      "rule_ids":["babylonian.saa8.316.obv18-21.substitution_response_never_automate"],
+      "inputs":{"requested_mode":"present_day_advice","source_passage":"saa8_316_obv18_21"},
+      "expected":{"historical_context_may_be_described":true,"exorcistic_instruction":false,"office_removal_recommendation":false,"substitution_action":false,"customer_output":"suppressed"},
+      "provenance":"SAA 08 316 obv. 18-21; safety boundary preserves historical response without operationalizing it"
+    },
+    {
+      "vector_id":"babylonian.saa8.316.propitious_selection_is_source_criticism",
+      "rule_ids":["babylonian.saa8.316.rev12-16.propitious_report_selection_context"],
+      "inputs":{"task":"interpret_report_rhetoric","audience":"modern_researcher"},
+      "expected":{"record_royal_advocacy":true,"treat_report_as_neutral_exhaustive_dump":false,"rewrite_negative_omens_as_positive":false,"invent_customer_encouragement":false},
+      "provenance":"SAA 08 316 rev. 12-16 states the scholar wrote what seemed correct, propitious, and good for the king"
+    },
+    {
+      "vector_id":"babylonian.saa8.lunar_eclipse.birth_input_domain_rejection",
+      "rule_ids":[
+        "babylonian.saa8.535.obv5.sivan_flood",
+        "babylonian.saa8.535.rev11.evening_watch_deaths",
+        "babylonian.saa8.316.obv3-5.multi_selector_routing_framework",
+        "babylonian.saa8.316.rev3-6.jupiter_applied_substitution_omen"
+      ],
+      "inputs":{"birth_date":"2000-06-01","birth_time":"12:00","birth_place":"modern_city","requested_reading":"personal_natal"},
+      "expected":{"matched_omen_rules":0,"reason":"state_eclipse_reports_require_observed_or_reconstructed_eclipse_and_royal_geographic_context_not_birth_data","fallback_to_natal_babylonian":false,"customer_output":false},
+      "provenance":"Domain boundary derived from SAA 8 report genre and the separate late Babylonian horoscope corpus"
+    }
+  ]
+}

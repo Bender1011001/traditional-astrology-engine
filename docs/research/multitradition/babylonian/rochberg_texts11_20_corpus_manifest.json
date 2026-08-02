@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+  "source_file_sha256": "dd233eb1593135dacf280224288fb16cf3697df48fc9ec0347cc522959dff285",
+  "status": "edition_pages_inspected_published_longitude_tables_independently_recomputed_eclipse_visibility_calendar_and_object_concordance_pending",
+  "tablet_count": 10,
+  "record_count": 11,
+  "records": [
+    {
+      "record_id":"rochberg1998.text11","rochberg_text_number":11,"artifact_ids":["W 20030/143"],"cdli_id":null,"edition_pages":{"book":"86","pdf":"102"},
+      "date":{"babylonian":"Seleucid Era 77, Simanu 4","editor_proposed_julian":"-234-06-02/03","confidence":"preserved"},
+      "record_profile":["duplicate_witness_of_text10"],"preservation":"fragmentary","birth_time_status":"Refer to Text 10; this witness does not independently resolve the difficult time expression.",
+      "recorded_data":[{"kind":"duplicate_witness","value":"Duplicate of Text 10 / MLC 2190; reverse line 4 remains unclear in both witnesses","textual_status":"preserved"}],
+      "explicit_judgments":[],"editorial_computation_status":"Edition directs the reader to Text 10; no independent table is supplied.",
+      "engine_limits":["Do not count repeated clauses as independent rules.","The apparatus says a reverse-line reading needs collation."],"pilot_eligibility":"exclude_from_primary_golden_set"
+    },
+    {
+      "record_id":"rochberg1998.text12","rochberg_text_number":12,"artifact_ids":["BM 33741"],"cdli_id":null,"edition_pages":{"book":"87-88","pdf":"103-104"},
+      "date":{"babylonian":"Seleucid Era 82, Simanu 28","editor_proposed_julian":"-229-07-02","confidence":"preserved"},
+      "record_profile":["birth_notice","planetary_signs","fragmentary_record"],"preservation":"fragmentary","birth_time_status":"Birth time is not preserved; the editor uses the Moon as a time indication and computes near noon.",
+      "recorded_data":[{"kind":"moon_sign","value":"beginning of Cancer","textual_status":"preserved"},{"kind":"sun_sign","value":"Cancer","textual_status":"preserved"},{"kind":"jupiter_sign","value":"Gemini","textual_status":"preserved"},{"kind":"venus_clause","value":"bracketed and fragmentary","textual_status":"damaged"}],
+      "explicit_judgments":[],"editorial_computation_status":"Published position table inspected; independent reproduction pending.",
+      "engine_limits":["Nearly half the tablet is broken.","Do not promote the editor's computation time to a preserved birth time."],"pilot_eligibility":"include_with_restoration_tests"
+    },
+    {
+      "record_id":"rochberg1998.text13","rochberg_text_number":13,"artifact_ids":["BM 47642"],"cdli_id":null,"edition_pages":{"book":"89-91","pdf":"105-107"},
+      "date":{"babylonian":"Seleucid Era 88, Abu 4","editor_proposed_julian":"-223-07-29","confidence":"preserved"},
+      "record_profile":["birth_notice","normal_star_lunar_position","planetary_signs","visibility","solstice","eclipse_context"],"preservation":"mixed","birth_time_status":"Beginning of night is preserved.",
+      "recorded_data":[{"kind":"moon_normal_star_position","value":"near alpha Virginis","textual_status":"preserved"},{"kind":"moon_sign","value":"Libra","textual_status":"preserved"},{"kind":"sun_sign","value":"Leo","textual_status":"preserved"},{"kind":"jupiter_and_saturn_sign","value":"Scorpius","textual_status":"preserved"},{"kind":"venus_sign","value":"Gemini","textual_status":"preserved"},{"kind":"mercury_and_mars_visibility","value":"set and not visible with the Sun","textual_status":"preserved"},{"kind":"bit_nisirti_reference","value":"of Jupiter; child born","textual_status":"preserved"}],
+      "explicit_judgments":[],"editorial_computation_status":"Published adjusted-longitude table inspected; independent reproduction pending.",
+      "engine_limits":["The bit nisirti phrase has no apodosis and is not an executable prediction.","Broken eclipse context cannot be supplied from a modern chart."],"pilot_eligibility":"include"
+    },
+    {
+      "record_id":"rochberg1998.text14","rochberg_text_number":14,"artifact_ids":["BM 36620"],"cdli_id":null,"edition_pages":{"book":"92-95","pdf":"108-111"},
+      "date":{"babylonian":"Seleucid Era 92, Tasritu 12(?)","editor_proposed_julian":"-219-10-21","confidence":"editorially_reconstructed"},
+      "record_profile":["birth_notice","planetary_signs","solstice","eclipse_context","extensive_restoration"],"preservation":"fragmentary","birth_time_status":"No reliable numerical birth time is preserved.",
+      "recorded_data":[{"kind":"opening_blessing","value":"may it go well","textual_status":"preserved"},{"kind":"moon_sign","value":"Aries","textual_status":"restored_by_editor"},{"kind":"sun_sign","value":"Scorpius","textual_status":"preserved"},{"kind":"jupiter_sign","value":"Aries","textual_status":"restored_by_editor"},{"kind":"venus_and_saturn_sign","value":"Sagittarius","textual_status":"restored_by_editor"},{"kind":"mercury_and_mars_visibility","value":"set and not visible","textual_status":"preserved"}],
+      "explicit_judgments":[],"editorial_computation_status":"Date and multiple signs are restored with modern computation or almanac comparison; the printed half-month eclipse sequence does not match an actual solar eclipse.",
+      "engine_limits":["The opening blessing is not a natal prediction.","Restored fields must be removable in restoration-sensitive mode.","Preserve the eclipse mismatch."],"pilot_eligibility":"include_with_restoration_tests"
+    },
+    {
+      "record_id":"rochberg1998.text15","rochberg_text_number":15,"artifact_ids":["BM 36796"],"cdli_id":null,"edition_pages":{"book":"96-99","pdf":"112-115"},
+      "date":{"babylonian":"Seleucid Era 109, Sabatu 9","editor_proposed_julian":"-201-02-04","confidence":"preserved"},
+      "record_profile":["birth_notice","evening_watch","planetary_signs","lunar_visibility","solstice","edition_layer_conflicts"],"preservation":"mixed","birth_time_status":"Evening watch is preserved.",
+      "recorded_data":[{"kind":"moon_sign","value":"end of Taurus","textual_status":"preserved"},{"kind":"sun_sign","value":"Aquarius","textual_status":"preserved"},{"kind":"jupiter_sign","value":"Libra in translation; the printed comparison table labels the text as end of Leo while its computed value is Libra 2","textual_status":"preserved"},{"kind":"venus_relation","value":"with the Sun","textual_status":"preserved"},{"kind":"mercury_sign","value":"Aquarius in text; printed computation is Capricorn 21","textual_status":"preserved"},{"kind":"saturn_sign","value":"Leo","textual_status":"preserved"},{"kind":"mars_sign","value":"Capricorn","textual_status":"preserved"},{"kind":"bit_nisirti_reference","value":"of Jupiter; the daughter ...","textual_status":"damaged"}],
+      "explicit_judgments":[],"editorial_computation_status":"Published translation/table and their Jupiter and Mercury discrepancies were preserved as separate evidence layers; independent reproduction pending.",
+      "engine_limits":["Do not silently choose between the Jupiter translation and table label.","Do not silently correct Mercury.","The broken daughter phrase is not a judgment."],"pilot_eligibility":"include_with_restoration_tests"
+    },
+    {
+      "record_id":"rochberg1998.text16a","rochberg_text_number":16,"artifact_ids":["W 20030/10 reverse"],"cdli_id":null,"edition_pages":{"book":"100-104","pdf":"116-120"},
+      "date":{"babylonian":"Seleucid Era 112, Simanu 3","editor_proposed_julian":"-199-06-05","confidence":"preserved"},
+      "record_profile":["second_record_on_shared_tablet","degree_positions","planetary_presence","lunar_motion","judgment_fragments"],"preservation":"mixed","birth_time_status":"No modern numerical birth time is preserved; edition computes 1.75 UT.",
+      "recorded_data":[{"kind":"moon_longitude","value":"Cancer 15; published computation Cancer 29","textual_status":"preserved"},{"kind":"sun_sign","value":"Gemini","textual_status":"preserved"},{"kind":"jupiter_longitude","value":"Scorpius 26","textual_status":"preserved"},{"kind":"venus_first_visibility","value":"5 Gemini, favorable(?)","textual_status":"partly_preserved"},{"kind":"mercury_longitude","value":"reached(?) Gemini 27","textual_status":"partly_preserved"},{"kind":"saturn_presence","value":"Virgo 10, not present","textual_status":"preserved"},{"kind":"mars_presence","value":"Taurus 10, present","textual_status":"preserved"},{"kind":"moon_progress","value":"conditional statement damaged before favorable apodosis","textual_status":"damaged"}],
+      "explicit_judgments":[{"themes":["favorable_visibility_qualifier"],"location":"reverse line 5","textual_status":"partly_preserved","executable_trigger":null,"customer_prediction":false},{"themes":["favorable_moon_progress"],"location":"reverse line 9","textual_status":"damaged","executable_trigger":null,"customer_prediction":false}],
+      "editorial_computation_status":"Published table inspected; Moon differs materially from text and independent reproduction is pending.",
+      "engine_limits":["Do not generalize favorable(?) to Venus in Gemini.","The lunar-progress premise is incomplete.","Tablet-side order and copy require collation."],"pilot_eligibility":"include_with_restoration_tests"
+    },
+    {
+      "record_id":"rochberg1998.text16b","rochberg_text_number":16,"artifact_ids":["W 20030/10 obverse"],"cdli_id":null,"edition_pages":{"book":"100-104","pdf":"116-120"},
+      "date":{"babylonian":"Seleucid Era 113, Tasritu 14","editor_proposed_julian":"-198-10-31","confidence":"preserved"},
+      "record_profile":["first_record_on_shared_tablet","degree_positions","planetary_presence","lunar_latitude","judgment_fragment"],"preservation":"mixed","birth_time_status":"No modern numerical birth time is preserved; edition computes 3 UT.",
+      "recorded_data":[{"kind":"moon_sign","value":"Taurus","textual_status":"preserved"},{"kind":"sun_sign","value":"Scorpius","textual_status":"preserved"},{"kind":"jupiter_longitude","value":"Capricorn 10","textual_status":"preserved"},{"kind":"venus_longitude","value":"Capricorn 4; published computation Sagittarius 27","textual_status":"preserved"},{"kind":"mercury_relation","value":"Scorpius 8 with the Sun","textual_status":"preserved"},{"kind":"saturn_presence","value":"Libra 3, present","textual_status":"preserved"},{"kind":"mars_longitude","value":"Sagittarius 10","textual_status":"preserved"},{"kind":"moon_latitude","value":"textual direction conflicts with computed direction for selected date","textual_status":"preserved"}],
+      "explicit_judgments":[{"themes":["good_fortune_or_propitious_days"],"location":"obverse line 10","textual_status":"damaged","executable_trigger":null,"customer_prediction":false}],
+      "editorial_computation_status":"Published table inspected; Venus and lunar-latitude conflicts remain explicit; independent reproduction pending.",
+      "engine_limits":["The beginning of the good-fortune clause and its trigger are damaged.","Do not silently reconcile Venus or lunar-latitude conflicts.","Tablet-side order and copy require collation."],"pilot_eligibility":"include_with_restoration_tests"
+    },
+    {
+      "record_id":"rochberg1998.text17","rochberg_text_number":17,"artifact_ids":["BM 41054"],"cdli_id":"P565177","edition_pages":{"book":"105-107","pdf":"121-123"},
+      "date":{"babylonian":"proposed Seleucid Era 136, Tasritu 19(?)","editor_proposed_julian":"-175-10-20","confidence":"editorially_reconstructed"},
+      "record_profile":["fragmentary_birth_notice","planetary_signs","solstice"],"preservation":"fragmentary","birth_time_status":"Not preserved; date is explicitly provisional and selected by elimination.",
+      "recorded_data":[{"kind":"moon_sign","value":"Gemini","textual_status":"partly_preserved"},{"kind":"jupiter_sign","value":"Scorpius","textual_status":"preserved"},{"kind":"venus_and_mercury_sign","value":"apparently intended same sign, not confirmed by computation","textual_status":"damaged"},{"kind":"solstice_date","value":"Kislimu 21, conflicting with expected Uruk Scheme date 27","textual_status":"preserved"},{"kind":"daughter_fragment","value":"incomplete reverse fragment","textual_status":"damaged"}],
+      "explicit_judgments":[],"editorial_computation_status":"Provisional date and unresolved planetary fit; independent reproduction pending.",
+      "engine_limits":["Exclude from primary golden tests.","Do not infer a judgment from the daughter fragment.","Preserve the solstice conflict.","The printed table's Jupiter value 253.5 is labeled Scorpius 13.5 even though the longitude corresponds to Sagittarius 13.5; do not silently reconcile it."],"pilot_eligibility":"exclude_from_primary_golden_set"
+    },
+    {
+      "record_id":"rochberg1998.text18","rochberg_text_number":18,"artifact_ids":["BM 35516"],"cdli_id":null,"edition_pages":{"book":"108-110","pdf":"124-126"},
+      "date":{"babylonian":"Seleucid Era 169, Addaru 6","editor_proposed_julian":"-141-03-01","confidence":"preserved"},
+      "record_profile":["birth_notice","normal_star_observation","planetary_signs","lunar_visibility","equinox"],"preservation":"good","birth_time_status":"Last part of night is preserved; the normal-star Moon is explicitly at the start of the Babylonian day, not the birth time.",
+      "recorded_data":[{"kind":"moon_sign","value":"beginning of Gemini","textual_status":"preserved"},{"kind":"sun_sign","value":"Pisces","textual_status":"preserved"},{"kind":"jupiter_sign","value":"Libra","textual_status":"preserved"},{"kind":"venus_and_mars_sign","value":"Capricorn","textual_status":"preserved"},{"kind":"mercury","value":"omitted from record","textual_status":"preserved"},{"kind":"saturn_sign","value":"Leo","textual_status":"preserved"},{"kind":"bit_nisirti_reference","value":"of Jupiter; child born","textual_status":"preserved"}],
+      "explicit_judgments":[],"editorial_computation_status":"Published table inspected; independent reproduction pending.",
+      "engine_limits":["Keep observation time separate from birth time.","The bit nisirti phrase has no apodosis."],"pilot_eligibility":"include"
+    },
+    {
+      "record_id":"rochberg1998.text19","rochberg_text_number":19,"artifact_ids":["BM 81561"],"cdli_id":null,"edition_pages":{"book":"111-112","pdf":"127-128"},
+      "date":{"babylonian":"Seleucid Era 172, Ululu 13 with month restored","editor_proposed_julian":"-139-09-07","confidence":"editorially_reconstructed"},
+      "record_profile":["birth_notice","evening_watch","planetary_signs","equinox","restored_date"],"preservation":"fragmentary","birth_time_status":"Evening watch is preserved; month and date are reconstructed from almanac, zodiacal, and watch evidence.",
+      "recorded_data":[{"kind":"moon_sign","value":"Pisces(?) expected by computation but trace does not permit a secure reading","textual_status":"damaged"},{"kind":"sun_sign","value":"Virgo","textual_status":"preserved"},{"kind":"jupiter_sign","value":"Sagittarius","textual_status":"preserved"},{"kind":"venus_sign","value":"Libra","textual_status":"preserved"},{"kind":"mars_sign","value":"Gemini","textual_status":"preserved"},{"kind":"mercury_and_saturn_visibility","value":"with the Sun and not visible","textual_status":"preserved"}],
+      "explicit_judgments":[],"editorial_computation_status":"Date and Moon reading are restoration-sensitive; published table inspected and independent reproduction pending.",
+      "engine_limits":["Do not overwrite the incompatible Moon trace with the computed expectation.","Restored month/date must remain editorial."],"pilot_eligibility":"include_with_restoration_tests"
+    },
+    {
+      "record_id":"rochberg1998.text20","rochberg_text_number":20,"artifact_ids":["BM 78089"],"cdli_id":null,"edition_pages":{"book":"113-115","pdf":"129-131"},
+      "date":{"babylonian":"Seleucid Era 186, Abu 24","editor_proposed_julian":"-125-08-16","confidence":"preserved"},
+      "record_profile":["birth_notice","planetary_signs","lunar_eclipse_mismatch","solar_eclipse"],"preservation":"good","birth_time_status":"Last part of night toward morning is preserved.",
+      "recorded_data":[{"kind":"moon_sign","value":"Gemini","textual_status":"preserved"},{"kind":"sun_sign","value":"Leo","textual_status":"preserved"},{"kind":"jupiter_and_saturn_sign","value":"Pisces","textual_status":"preserved"},{"kind":"venus_sign","value":"Leo","textual_status":"preserved"},{"kind":"mercury_and_mars_visibility","value":"set and not visible","textual_status":"preserved"},{"kind":"lunar_eclipse_reference","value":"text date has no actual eclipse; likely diary reflection according to editor","textual_status":"preserved"},{"kind":"solar_eclipse_reference","value":"partial eclipse dated one day differently by computation; Sun at end of Virgo confirmed","textual_status":"preserved"}],
+      "explicit_judgments":[],"editorial_computation_status":"Published table and eclipse commentary inspected; independent reproduction pending.",
+      "engine_limits":["Preserve the lunar-eclipse mismatch and one-day solar-eclipse discrepancy.","Do not convert eclipse notices into personal predictions."],"pilot_eligibility":"include_with_restoration_tests"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "maya",
+  "source_pack_id": "maya_calendar_kernel_gmt_v1",
+  "status": "research_vectors_complete_for_bounded_calendar_kernel_no_live_engine_or_interpretation",
+  "source_ids": [
+    "maya_nmai_calendar_system_pdf",
+    "maya_famsi_date_converter",
+    "maya_cambridge_calendar_correlation_review",
+    "maya_pnas_correlation_radiocarbon_2013"
+  ],
+  "vectors": [
+    {
+      "vector_id":"maya.calendar.creation_anchor",
+      "rule_ids":["maya.calendar.long_count.compose_decompose","maya.calendar.tzolkin.number_cycle","maya.calendar.tzolkin.name_cycle","maya.calendar.haab.position","maya.calendar.correlation.jdn"],
+      "inputs":{"operation":"calendar_from_total","total_day":0,"correlation_id":"gmt_584283","name_profile":"yucatec_smithsonian_2012"},
+      "expected":{"long_count":[0,0,0,0,0],"source_creation_notation":"13.0.0.0.0","tzolkin":{"number":4,"name":"Ajaw"},"haab":{"day":8,"month":"Kumk'u"},"integer_jdn":584283,"gregorian":{"year":-3113,"month":8,"day":11},"customer_prediction":false},
+      "provenance":"Smithsonian The Maya Calendar System pp. 8-10; creation date shown as 13.0.0.0.0 4 Ajaw 8 Kumk'u, August 11, 3114 BCE."
+    },
+    {
+      "vector_id":"maya.calendar.2012_cycle_anchor",
+      "rule_ids":["maya.calendar.long_count.compose_decompose","maya.calendar.tzolkin.number_cycle","maya.calendar.tzolkin.name_cycle","maya.calendar.haab.position","maya.calendar.correlation.jdn"],
+      "inputs":{"operation":"calendar_from_total","total_day":1872000,"correlation_id":"gmt_584283","name_profile":"yucatec_smithsonian_2012"},
+      "expected":{"long_count":[13,0,0,0,0],"tzolkin":{"number":4,"name":"Ajaw"},"haab":{"day":3,"month":"K'ank'in"},"integer_jdn":2456283,"gregorian":{"year":2012,"month":12,"day":21},"customer_prediction":false},
+      "provenance":"Smithsonian The Maya Calendar System pp. 9-10."
+    },
+    {
+      "vector_id":"maya.calendar.famsi_2026_reference",
+      "rule_ids":["maya.calendar.long_count.compose_decompose","maya.calendar.tzolkin.number_cycle","maya.calendar.tzolkin.name_cycle","maya.calendar.haab.position","maya.calendar.correlation.jdn"],
+      "inputs":{"operation":"calendar_from_gregorian","gregorian":{"year":2026,"month":7,"day":24},"correlation_id":"gmt_584283","name_profile":"yucatec_smithsonian_2012"},
+      "expected":{"total_day":1876963,"long_count":[13,0,13,14,3],"tzolkin":{"number":1,"name":"Ak'b'al"},"haab":{"day":16,"month":"Xul"},"integer_jdn":2461246,"customer_prediction":false},
+      "provenance":"FAMSI Date Conversion search interface, GMT 584283, Friday July 24 2026 CE: 13.0.13.14.3, 1 Ak'bal 16 Xul; apostrophe normalized to selected display profile."
+    },
+    {
+      "vector_id":"maya.calendar.long_count_rollovers",
+      "rule_ids":["maya.calendar.long_count.compose_decompose"],
+      "inputs":{"operation":"rollover_cases","totals":[19,20,359,360,7199,7200]},
+      "expected":{"long_counts":[[0,0,0,0,19],[0,0,0,1,0],[0,0,0,17,19],[0,0,1,0,0],[0,0,19,17,19],[0,1,0,0,0]]},
+      "provenance":"Derived boundary vectors from Smithsonian Table 3 unit weights."
+    },
+    {
+      "vector_id":"maya.calendar.haab_wayeb_boundaries",
+      "rule_ids":["maya.calendar.haab.position"],
+      "inputs":{"operation":"haab_cases","totals":[11,12,16,17]},
+      "expected":{"haab":[{"day":19,"month":"Kumk'u"},{"day":0,"month":"Wayeb"},{"day":4,"month":"Wayeb"},{"day":0,"month":"Pop"}]},
+      "provenance":"Derived boundary vectors from Smithsonian Haab structure and the 8 Kumk'u origin."
+    },
+    {
+      "vector_id":"maya.calendar.tzolkin_wrap",
+      "rule_ids":["maya.calendar.tzolkin.number_cycle","maya.calendar.tzolkin.name_cycle"],
+      "inputs":{"operation":"tzolkin_cases","totals":[0,1,259,260],"name_profile":"yucatec_smithsonian_2012"},
+      "expected":{"tzolkin":[{"number":4,"name":"Ajaw"},{"number":5,"name":"Imix'"},{"number":3,"name":"Kawak"},{"number":4,"name":"Ajaw"}]},
+      "provenance":"Derived full-cycle boundary vector from Smithsonian 13-number and 20-name cycles."
+    },
+    {
+      "vector_id":"maya.calendar.round_repeat",
+      "rule_ids":["maya.calendar.round.recurrence","maya.calendar.tzolkin.number_cycle","maya.calendar.tzolkin.name_cycle","maya.calendar.haab.position"],
+      "inputs":{"operation":"calendar_round_compare","totals":[0,18980],"name_profile":"yucatec_smithsonian_2012"},
+      "expected":{"same_calendar_round":true,"long_counts_differ":true,"period_days":18980},
+      "provenance":"Smithsonian The Maya Calendar System p. 7; 52 Haab equals 73 Tzolk'in."
+    },
+    {
+      "vector_id":"maya.calendar.correlation_sensitivity",
+      "rule_ids":["maya.calendar.correlation.jdn","maya.calendar.correlation.cycle_independence"],
+      "inputs":{"operation":"compare_correlations","total_day":1872000,"correlation_ids":["gmt_584283","gmt_584285"]},
+      "expected":{"integer_jdns":[2456283,2456285],"jdn_difference":2,"internal_cycles_equal":true,"correlation_ids_visible":true},
+      "provenance":"GMT variants are explicit configuration; arithmetic sensitivity vector."
+    },
+    {
+      "vector_id":"maya.calendar.kiche_label_mapping",
+      "rule_ids":["maya.calendar.tzolkin.name_cycle","maya.calendar.names.profile_mapping"],
+      "inputs":{"operation":"compare_name_profiles","totals":[0,1],"name_profiles":["yucatec_smithsonian_2012","kiche_smithsonian_2012"]},
+      "expected":{"pairs":[{"index":19,"yucatec":"Ajaw","kiche":"Ajpu'"},{"index":0,"yucatec":"Imix'","kiche":"Imox"}],"indices_equal":true,"meanings_emitted":false},
+      "provenance":"Smithsonian The Maya Calendar System p. 4, Table 2."
+    },
+    {
+      "vector_id":"maya.calendar.invalid_components_rejected",
+      "rule_ids":["maya.calendar.long_count.compose_decompose"],
+      "inputs":{"operation":"invalid_long_counts","cases":[[0,0,0,18,0],[0,0,0,0,20],[-1,0,0,0,0]]},
+      "expected":{"all_rejected":true,"silent_normalization":false},
+      "provenance":"Fail-closed canonical five-place Long Count constraints."
+    },
+    {
+      "vector_id":"maya.calendar.negative_total_rejected",
+      "rule_ids":["maya.calendar.long_count.compose_decompose","maya.calendar.correlation.jdn"],
+      "inputs":{"operation":"invalid_totals","totals":[-1]},
+      "expected":{"all_rejected":true,"extended_count_inferred":false},
+      "provenance":"This bounded profile excludes Extended Long Count inference."
+    },
+    {
+      "vector_id":"maya.calendar.birth_output_boundary",
+      "rule_ids":["maya.calendar.long_count.compose_decompose","maya.calendar.tzolkin.number_cycle","maya.calendar.tzolkin.name_cycle","maya.calendar.haab.position","maya.calendar.correlation.jdn","maya.calendar.names.profile_mapping"],
+      "inputs":{"operation":"publication_contract","birth_date":"1990-01-01","birth_time":"12:00","birth_place":"London"},
+      "expected":{"calendar_facts_allowed":true,"interpretation_allowed":false,"personality_output":false,"living_meaning_output":false,"customer_prediction":false,"historical_use_only":true,"live_engine":false},
+      "provenance":"Research-pack safety boundary: birth input may select a calendar date, but the sources do not authorize a generic personal reading."
+    }
+  ]
+}

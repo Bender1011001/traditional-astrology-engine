@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "medieval_jewish",
+  "school_id": "ibn_ezra_sela_nativities_revolution",
+  "source_pack_id": "ibn_ezra_nativities_revolution_sela_2014_v1",
+  "source_edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+  "source_registry_ids": ["jewish_ibn_ezra_nativities_revolution_local"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Rules are extracted from the inspected Sela parallel Hebrew-English critical edition. The English and facing Hebrew pages were inspected, but the Hebrew has not yet been independently retranslated; evidence is therefore grade B.",
+  "rules": [
+    {
+      "rule_id": "medieval_jewish.ibn_ezra.revolution.s1.solar_return_instant",
+      "tradition_id": "medieval_jewish",
+      "school_id": "ibn_ezra_sela_nativities_revolution",
+      "period": "twelfth_century_ibn_ezra_text_in_modern_critical_edition",
+      "domain": "timing",
+      "scope": {
+        "work": "Book of Revolution",
+        "technique": "annual_revolution",
+        "requires_natal_chart": true,
+        "requires_target_year": true
+      },
+      "conditions": {
+        "all": [
+          {"fact": "natal.sun.tropical_longitude", "operator": "known"},
+          {"fact": "target_year", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "calculation_requirement",
+        "return_instant": "the instant in the target year when the Sun returns to its natal degree and minute",
+        "required_return_facts": ["ascendant", "seven_planets"]
+      },
+      "priority": null,
+      "exceptions": [
+        "The inspected section does not settle the modern numerical root-finding tolerance, ephemeris, timescale, aberration model or return-location convention; all must be explicit engine configuration."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+          "work": "Book of Revolution",
+          "section": "1",
+          "location": "English p. 373 with facing Hebrew p. 372",
+          "verification": "parallel_text_and_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Do not claim a source-specified arc-second tolerance or return location. If residence at return is unknown, disclose the configured location policy and omit location-dependent claims when uncertainty changes the result.",
+      "review_status": "translation_inspected_hebrew_review_pending"
+    },
+    {
+      "rule_id": "medieval_jewish.ibn_ezra.revolution.s4.sect_light_triplicity_ruler",
+      "tradition_id": "medieval_jewish",
+      "school_id": "ibn_ezra_sela_nativities_revolution",
+      "period": "twelfth_century_ibn_ezra_text_in_modern_critical_edition",
+      "domain": "timing",
+      "scope": {
+        "work": "Book of Revolution",
+        "technique": "natal_return_triplicity_comparison"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "natal.sect", "operator": "in", "value": ["day", "night"]},
+          {"fact": "natal.sect_light.sign", "operator": "known"},
+          {"fact": "natal.triplicity_rulers_for_sect_light", "operator": "known"},
+          {"fact": "annual_revolution.chart", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "required_comparison",
+        "subject": "the triplicity ruler active for the native's relative life phase",
+        "compare": ["condition_in_nativity", "condition_in_annual_revolution"]
+      },
+      "priority": null,
+      "exceptions": [
+        "This rule does not by itself define a numerical age boundary for the three relative life phases.",
+        "Triplicity ruler tables and condition predicates must come from the same declared Ibn Ezra source pack or a documented source dependency."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+          "work": "Book of Revolution",
+          "section": "4",
+          "location": "English p. 375 with facing Hebrew p. 374",
+          "verification": "parallel_text_and_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Publish the actual natal and return conditions and the unresolved phase boundary. Do not turn the comparison into arbitrary points or claim that one annual chart overrides the nativity.",
+      "review_status": "translation_inspected_hebrew_review_pending"
+    },
+    {
+      "rule_id": "medieval_jewish.ibn_ezra.revolution.s4.relative_life_thirds",
+      "tradition_id": "medieval_jewish",
+      "school_id": "ibn_ezra_sela_nativities_revolution",
+      "period": "twelfth_century_ibn_ezra_text_in_modern_critical_edition",
+      "domain": "timing",
+      "scope": {
+        "work": "Book of Revolution",
+        "technique": "triplicity_life_phases"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "natal.sect", "operator": "in", "value": ["day", "night"]},
+          {"fact": "natal.sect_light.triplicity_rulers", "operator": "count_equals", "value": 3}
+        ]
+      },
+      "conclusion": {
+        "type": "relative_phase_assignment",
+        "phases": [
+          {"ordinal": 1, "ruler_index": 1},
+          {"ordinal": 2, "ruler_index": 2},
+          {"ordinal": 3, "ruler_index": 3}
+        ],
+        "numeric_age_boundaries": null
+      },
+      "priority": null,
+      "exceptions": [
+        "The inspected passage says the native's years are divided into three parts but does not supply exact ages or require three equal civil-duration intervals."
+      ],
+      "conflicts_with": [
+        "western_hellenistic.dorotheus.carmen.i22.first_second_participating_rulers"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+          "work": "Book of Revolution",
+          "section": "4",
+          "location": "English p. 375 with facing Hebrew p. 374",
+          "verification": "parallel_text_and_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Describe first, middle and last relative phases only. Do not invent ages, assume equal thirds, or attribute this later doctrine to Dorotheus.",
+      "review_status": "translation_inspected_hebrew_review_pending"
+    },
+    {
+      "rule_id": "medieval_jewish.ibn_ezra.revolution.s15.return_ascendant_witness",
+      "tradition_id": "medieval_jewish",
+      "school_id": "ibn_ezra_sela_nativities_revolution",
+      "period": "twelfth_century_ibn_ezra_text_in_modern_critical_edition",
+      "domain": "timing",
+      "scope": {
+        "work": "Book of Revolution",
+        "technique": "annual_ascendant_judgment"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "annual_revolution.ascendant", "operator": "known"},
+          {"fact": "annual_revolution.ascendant_ruler", "operator": "known"},
+          {"fact": "natal.ascendant", "operator": "known"},
+          {"fact": "annual_terminal_or_profected_sign", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "required_annual_witnesses",
+        "inspect": [
+          "annual_revolution.ascendant_ruler.condition",
+          "annual_revolution.ascendant.relationship_to_natal_ascendant",
+          "annual_revolution.ascendant.relationship_to_annual_terminal_or_profected_sign"
+        ]
+      },
+      "priority": null,
+      "exceptions": [
+        "The rule requires the source-defined annual terminal or profected sign; a Tajika Muntha or another system's annual point is not an equivalent substitute."
+      ],
+      "conflicts_with": [
+        "western_tajika.muntha_imported_as_ibn_ezra"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+          "work": "Book of Revolution",
+          "section": "15",
+          "location": "English p. 385 with facing Hebrew p. 384",
+          "verification": "parallel_text_and_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Show each admitted witness and its actual condition. Do not use arbitrary point weights, Tajika Muntha, or an unsupported modern handover rule.",
+      "review_status": "translation_inspected_hebrew_review_pending"
+    },
+    {
+      "rule_id": "medieval_jewish.ibn_ezra.revolution.s21.annual_subordinate_to_natal",
+      "tradition_id": "medieval_jewish",
+      "school_id": "ibn_ezra_sela_nativities_revolution",
+      "period": "twelfth_century_ibn_ezra_text_in_modern_critical_edition",
+      "domain": "timing",
+      "scope": {
+        "work": "Book of Revolution",
+        "technique": "evidence_precedence"
+      },
+      "conditions": {
+        "all": [
+          {"fact": "natal_testimony", "operator": "known"},
+          {"fact": "annual_revolution_testimony", "operator": "known"}
+        ]
+      },
+      "conclusion": {
+        "type": "precedence_rule",
+        "higher_order": ["natal_promise", "longer_term_directional_testimony"],
+        "lower_order": ["annual_revolution_testimony"],
+        "effect": "shorter annual testimony times or modifies compatible higher-order testimony and does not independently replace it"
+      },
+      "priority": 100,
+      "exceptions": [
+        "The exact directional technique and all compatibility conditions must be identified from their own source passages before implementation."
+      ],
+      "conflicts_with": [
+        "generic_annual_chart_overrides_nativity"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "ibn_ezra_nativities_revolution_sela_2014",
+          "work": "Book of Revolution",
+          "section": "21",
+          "location": "English p. 389 with facing Hebrew p. 388",
+          "verification": "parallel_text_and_translation_inspected"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Never announce an annual event from the return alone when the required natal or longer-term testimony is absent or contradictory. Report rejected annual testimony explicitly.",
+      "review_status": "translation_inspected_hebrew_review_pending"
+    }
+  ]
+}

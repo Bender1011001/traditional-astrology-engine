@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_pack_id": "eae20_im124485_vat9419_witness_comparison_v1",
+  "status": "research_vectors_complete_for_bounded_eae20_witness_pilot_no_runtime_or_customer_output",
+  "source_ids": [
+    "babylonian_al_rawi_george_eae20_im124485_2006",
+    "babylonian_heessel_kal13_eae20_vat9419_11310_2021"
+  ],
+  "vectors": [
+    {
+      "vector_id": "babylonian.eae20.vii.im_compound_direct",
+      "rule_ids": [
+        "babylonian.eae20.im.vii.tashritu14_mutabal",
+        "babylonian.eae20.im.vii.numusda_supplement"
+      ],
+      "event": {
+        "phenomenon": "lunar_eclipse",
+        "babylonian_month": "tashritu",
+        "babylonian_day": 14,
+        "darkening_quadrant": "west_above",
+        "clearing_quadrant": "south_below",
+        "wind": "north",
+        "middle_watch_progress": "reaches_half",
+        "eclipse_progress": "beyond_half_until_light",
+        "star_cusp_motion": "right_then_left",
+        "separate_nisannu_star_configuration": true
+      },
+      "expected": {
+        "im_main_match": true,
+        "supplement_processed_as_separate_omen": true,
+        "customer_output": false
+      },
+      "provenance": "IM 124485 section VII, lines 1-16; Al-Rawi and George 2006 pp. 26-32"
+    },
+    {
+      "vector_id": "babylonian.eae20.vii.recensional_conflict",
+      "rule_ids": [
+        "babylonian.eae20.im.vii.tashritu14_mutabal",
+        "babylonian.eae20.msd.vii.king_war_variant"
+      ],
+      "event": {
+        "phenomenon": "lunar_eclipse",
+        "babylonian_month": "tashritu",
+        "babylonian_day": 14,
+        "witness_unspecified": true
+      },
+      "expected": {
+        "single_harmonized_outcome": false,
+        "available_witness_outcomes": [
+          "IM_Mutabal_resettlement",
+          "MS_D_king_war"
+        ],
+        "required_resolution": "select_named_witness_or_return_conflict",
+        "customer_output": false
+      },
+      "provenance": "Al-Rawi and George 2006 p. 36 compares IM with MS D"
+    },
+    {
+      "vector_id": "babylonian.eae20.viii.direction_mutation",
+      "rule_ids": [
+        "babylonian.eae20.im.viii.arahsamna14_eridu",
+        "babylonian.eae20.mss.viii.transposed_directions",
+        "babylonian.eae20.im.viii.venus_enters_moon"
+      ],
+      "event": {
+        "phenomenon": "lunar_eclipse",
+        "babylonian_month": "arahsamna",
+        "babylonian_day": 14,
+        "darkening_quadrant": "east_below",
+        "clearing_quadrant": "west_above",
+        "wind": "north",
+        "dawn_watch_progress": "reaches_half",
+        "cusp_state": "jabbing_sky"
+      },
+      "expected": {
+        "im_direction_rule_matches": false,
+        "ms_s_transposed_rule_matches": true,
+        "venus_supplement_matches": false,
+        "reason": "directions_and_supplementary_date_are_not_interchangeable"
+      },
+      "provenance": "EAE 20 VIII IM and MS S comparison, article pp. 38-39"
+    },
+    {
+      "vector_id": "babylonian.eae20.viii.venus_separate_direct",
+      "rule_ids": [
+        "babylonian.eae20.im.viii.venus_enters_moon"
+      ],
+      "event": {
+        "babylonian_month": "nisannu",
+        "babylonian_day": 14,
+        "venus_moon_event": "venus_enters_moon_exits_right"
+      },
+      "expected": {
+        "supplementary_planetary_rule_match": true,
+        "arahsamna_eclipse_required": false,
+        "natal_venus_rule": false,
+        "customer_output": false
+      },
+      "provenance": "IM 124485 VIII lines 23-24; article p. 32"
+    },
+    {
+      "vector_id": "babylonian.eae20.ix.recension_direction_outcome_conflict",
+      "rule_ids": [
+        "babylonian.eae20.im.ix.kislimu14_der",
+        "babylonian.eae20.mss.ix.transposed_prosperity_variant"
+      ],
+      "inputs": {
+        "case_im": {
+          "darkening_quadrant": "north_above",
+          "clearing_quadrant": "south_below"
+        },
+        "case_ms_s": {
+          "darkening_quadrant": "north_below",
+          "clearing_quadrant": "south_above"
+        }
+      },
+      "expected": {
+        "case_im_outcome": "Der_lacks_good_fortune_and_king_short_lived",
+        "case_ms_s_outcome": "Der_prospers_and_kingship_endures",
+        "cross_match": false,
+        "harmonization": false
+      },
+      "provenance": "Al-Rawi and George 2006 pp. 39-41"
+    },
+    {
+      "vector_id": "babylonian.eae20.x.peace_plunder_abstention",
+      "rule_ids": [
+        "babylonian.eae20.im_vat.x.tebetu14_plunder",
+        "babylonian.eae20.msm.x.peace_variant"
+      ],
+      "event": {
+        "phenomenon": "lunar_eclipse",
+        "babylonian_month": "tebetu",
+        "babylonian_day": 14,
+        "eclipse_progress": "beyond_half",
+        "witness_unspecified": true
+      },
+      "expected": {
+        "conflict_set": [
+          "IM_and_VAT_plunder",
+          "MS_M_peace"
+        ],
+        "choose_one_without_witness": false,
+        "customer_prediction": false
+      },
+      "provenance": "IM 124485 X, MS M iv 17-21, and KAL 13 text 21 rev. IV? 1-5"
+    },
+    {
+      "vector_id": "babylonian.eae20.xi.main_vs_appended",
+      "rule_ids": [
+        "babylonian.eae20.im_vat.xi.shabatu14_babylon",
+        "babylonian.eae20.mss.xi.night_elapsed_positive_appendix"
+      ],
+      "event": {
+        "phenomenon": "lunar_eclipse",
+        "babylonian_month": "shabatu",
+        "babylonian_day": 14,
+        "darkening_quadrant": "south_above",
+        "clearing_quadrant": "east_below",
+        "wind": "north",
+        "dawn_watch_progress": "begins",
+        "sun_company": true,
+        "cusp_state": "jabbing_sky",
+        "whole_disk_covered": false,
+        "moon_disappears": true,
+        "day28_followup": "red_rising_moon_shows_eclipse",
+        "night_elapsed_while_eclipsed": true
+      },
+      "expected": {
+        "main_negative_clause_match": true,
+        "ms_s_appended_favorable_clause_match": true,
+        "one_cancels_other": false,
+        "pseudo_history_warning": true,
+        "customer_output": false
+      },
+      "provenance": "IM 124485 XI and MS S appended omen; article pp. 42-44; KAL 13 pp. 57-58"
+    },
+    {
+      "vector_id": "babylonian.eae20.xii.witness_selector_conflict",
+      "rule_ids": [
+        "babylonian.eae20.im.xii.addaru14_amurru",
+        "babylonian.eae20.vat.xii.east_wind_city_variant",
+        "babylonian.eae20.mss_y.xii.south_east_variant"
+      ],
+      "inputs": {
+        "im": {
+          "darkening": "north_above",
+          "winds": [
+            "west",
+            "east"
+          ],
+          "cusp_predicate": true
+        },
+        "vat": {
+          "darkening": "north_above",
+          "winds": [
+            "east"
+          ],
+          "cusp_predicate": true
+        },
+        "ms_s_y": {
+          "darkening": "south_above",
+          "winds": [
+            "east"
+          ],
+          "cusp_predicate": false
+        }
+      },
+      "expected": {
+        "three_distinct_witness_profiles": true,
+        "drop_wind_or_direction": false,
+        "city_term_uncertainty_preserved": true,
+        "single_merged_rule": false
+      },
+      "provenance": "Al-Rawi and George 2006 pp. 44-46; KAL 13 text 21 pp. 57-59"
+    },
+    {
+      "vector_id": "babylonian.eae20.xii.papsukkal_boundary_abstention",
+      "rule_ids": [
+        "babylonian.eae20.im_vat.xii.papsukkal_daylight"
+      ],
+      "event": {
+        "papsukkal_state": "rises_and_stands_with_sun"
+      },
+      "expected": {
+        "historical_candidate_match": true,
+        "executable": false,
+        "reason": "protasis_apodosis_boundary_and_celestial_identity_change_across_witnesses",
+        "natal_orion_or_saturn_meaning": false
+      },
+      "provenance": "EAE 20 XII supplementary omen and scholia, article pp. 46-48"
+    },
+    {
+      "vector_id": "babylonian.eae20.xiii.impossible_date_fail_closed",
+      "rule_ids": [
+        "babylonian.eae20.im.xiii.schematic_days_destruction"
+      ],
+      "event": {
+        "phenomenon": "lunar_eclipse",
+        "babylonian_day": 7,
+        "astronomical_event_possible": false
+      },
+      "expected": {
+        "textual_rule_recorded": true,
+        "astronomical_event_generated": false,
+        "prediction": false,
+        "reason": "schematic_impossible_date"
+      },
+      "provenance": "IM 124485 XIII lines 64-67 and article pp. 48-49"
+    },
+    {
+      "vector_id": "babylonian.eae20.birth_input_domain_rejection",
+      "rule_ids": [
+        "babylonian.eae20.im.vii.tashritu14_mutabal",
+        "babylonian.eae20.msd.vii.king_war_variant",
+        "babylonian.eae20.im.vii.numusda_supplement",
+        "babylonian.eae20.im.viii.arahsamna14_eridu",
+        "babylonian.eae20.mss.viii.transposed_directions",
+        "babylonian.eae20.im.viii.venus_enters_moon",
+        "babylonian.eae20.im.ix.kislimu14_der",
+        "babylonian.eae20.mss.ix.transposed_prosperity_variant",
+        "babylonian.eae20.im_vat.x.tebetu14_plunder",
+        "babylonian.eae20.msm.x.peace_variant",
+        "babylonian.eae20.im_vat.xi.shabatu14_babylon",
+        "babylonian.eae20.mss.xi.night_elapsed_positive_appendix",
+        "babylonian.eae20.im.xii.addaru14_amurru",
+        "babylonian.eae20.vat.xii.east_wind_city_variant",
+        "babylonian.eae20.mss_y.xii.south_east_variant",
+        "babylonian.eae20.im_vat.xii.papsukkal_daylight",
+        "babylonian.eae20.im.xiii.schematic_days_destruction"
+      ],
+      "inputs": {
+        "birth_date": "2000-01-01",
+        "birth_time": "12:00",
+        "birth_place": "modern_city",
+        "requested_reading": "personal_natal"
+      },
+      "expected": {
+        "matched_rules": 0,
+        "reason": "EAE20_rules_require_witness_scoped_eclipse_or_supplementary_celestial_observations_and_institutional_targets",
+        "fallback_to_babylonian_natal": false,
+        "customer_output": false
+      },
+      "provenance": "Genre and domain boundary in both critical editions; EAE 20 is celestial state omen material, not a birth horoscope"
+    }
+  ]
+}

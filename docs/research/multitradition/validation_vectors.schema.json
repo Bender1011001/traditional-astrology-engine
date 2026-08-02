@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traditional-astrology.local/schemas/validation-vectors-v1.json",
+  "title": "Multi-Tradition Rule Validation Vectors",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "updated",
+    "tradition_id",
+    "source_pack_id",
+    "status",
+    "vectors"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "updated": {"type": "string", "format": "date"},
+    "tradition_id": {"$ref": "#/$defs/nonEmptyString"},
+    "source_pack_id": {"$ref": "#/$defs/nonEmptyString"},
+    "status": {"$ref": "#/$defs/nonEmptyString"},
+    "source_id": {"$ref": "#/$defs/nonEmptyString"},
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonEmptyString"}
+    },
+    "vectors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/vector"}
+    }
+  },
+  "oneOf": [
+    {"required": ["source_id"], "not": {"required": ["source_ids"]}},
+    {"required": ["source_ids"], "not": {"required": ["source_id"]}}
+  ],
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "vector": {
+      "type": "object",
+      "required": ["vector_id", "rule_ids", "expected", "provenance"],
+      "properties": {
+        "vector_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]+$"
+        },
+        "rule_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9._-]+$"
+          }
+        },
+        "inputs": {"type": "object"},
+        "event": {"type": "object", "minProperties": 1},
+        "expected": {"type": "object", "minProperties": 1},
+        "provenance": {"$ref": "#/$defs/nonEmptyString"}
+      },
+      "oneOf": [
+        {"required": ["inputs"], "not": {"required": ["event"]}},
+        {"required": ["event"], "not": {"required": ["inputs"]}}
+      ]
+    }
+  }
+}

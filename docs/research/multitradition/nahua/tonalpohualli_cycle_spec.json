@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "nahua_central_mexican",
+  "artifact_status": "validated_research_artifact",
+  "publication_status": "research_only",
+  "purpose": "A fail-closed arithmetic kernel for the 13-by-20 tonalpohualli cycle. It does not supply a default civil-date correlation or any divinatory meaning.",
+  "source_registry_ids": [
+    "nahua_getty_florentine_codex_book4",
+    "nahua_inah_anales_tonalamatl_table"
+  ],
+  "source_anchors": [
+    {
+      "source_id": "nahua_getty_florentine_codex_book4",
+      "work": "Florentine Codex, Book 4",
+      "location": "folio 1r, stable folio id afbf3a94-1f97-4bb5-bb75-d15fdb97ef40; canvas d1b1deca-1a34-4947-a20a-8b9a8cb6810c",
+      "verified_claim": "The Spanish-to-English text states that thirteen-day periods make a 260-day cycle and return to the beginning; the Nahuatl and Spanish headings begin with Ce Cipactli.",
+      "text_record_ids": [
+        "ecfe83af-d58b-412c-ab44-7ea2100b803d",
+        "3401d7c1-e648-4a7e-9305-257084caae3f",
+        "31115076-d898-4f81-a89d-a1c9cbeac8ab",
+        "e91d245b-8896-4fdc-a769-c8ed3be94360"
+      ]
+    },
+    {
+      "source_id": "nahua_inah_anales_tonalamatl_table",
+      "work": "El Tonalamatl",
+      "location": "Anales del Museo Nacional, table of the twenty trecenas, scan pages numbered 89 and 521 in indexed witnesses",
+      "verified_claim": "The table supplies the complete twenty-sign order, the coefficient permutation across trecenas, and the 260-position recurrence. Historical spellings are retained as source labels."
+    }
+  ],
+  "cycle": {
+    "coefficient_min": 1,
+    "coefficient_max": 13,
+    "day_signs": [
+      {"index": 0, "id": "cipactli", "source_label": "Cipactli"},
+      {"index": 1, "id": "ehecatl", "source_label": "Ehecatl"},
+      {"index": 2, "id": "calli", "source_label": "Calli"},
+      {"index": 3, "id": "cuetzpalin", "source_label": "Cuetzpalin"},
+      {"index": 4, "id": "coatl", "source_label": "Coatl"},
+      {"index": 5, "id": "miquiztli", "source_label": "Miquiztli"},
+      {"index": 6, "id": "mazatl", "source_label": "Mazatl"},
+      {"index": 7, "id": "tochtli", "source_label": "Tochtli"},
+      {"index": 8, "id": "atl", "source_label": "Atl"},
+      {"index": 9, "id": "itzcuintli", "source_label": "Itzcuintli"},
+      {"index": 10, "id": "ozomatli", "source_label": "Ozomatli"},
+      {"index": 11, "id": "malinalli", "source_label": "Malinalli"},
+      {"index": 12, "id": "acatl", "source_label": "Acatl"},
+      {"index": 13, "id": "ocelotl", "source_label": "Ocelotl"},
+      {"index": 14, "id": "cuauhtli", "source_label": "Cuautli"},
+      {"index": 15, "id": "cozcacuauhtli", "source_label": "Cozcacuautli"},
+      {"index": 16, "id": "ollin", "source_label": "Olin"},
+      {"index": 17, "id": "tecpatl", "source_label": "Tecpatl"},
+      {"index": 18, "id": "quiahuitl", "source_label": "Quiahuitl"},
+      {"index": 19, "id": "xochitl", "source_label": "Xochitl"}
+    ],
+    "joint_period_days": 260,
+    "trecena_length_days": 13,
+    "trecenas_per_cycle": 20,
+    "canonical_cycle_origin": {"coefficient": 1, "day_sign_id": "cipactli"},
+    "advance_rule": "For integer day offset d from a valid anchor, advance the coefficient and day-sign indices independently modulo 13 and 20.",
+    "trecena_rule": "Coefficient 1 begins a trecena; the coefficient is also the one-based position within that trecena."
+  },
+  "epoch_contract": {
+    "default_epoch": null,
+    "required_fields": [
+      "epoch_id",
+      "tradition_id",
+      "epoch_civil_date",
+      "calendar_policy",
+      "epoch_tonalpohualli",
+      "region",
+      "authority",
+      "uncertainty",
+      "day_start"
+    ],
+    "required_tradition_id": "nahua_central_mexican",
+    "epoch_tonalpohualli_fields": ["coefficient", "day_sign_id"],
+    "supported_date_input": "An ISO civil date already resolved under the named calendar, locality and day-boundary profile.",
+    "unsupported_inputs": [
+      "A clock instant requiring unresolved timezone or day-boundary conversion",
+      "An unnamed or default correlation",
+      "A Maya correlation reused because both systems have 260-day cycles"
+    ],
+    "cache_key_fields": [
+      "epoch_id",
+      "tradition_id",
+      "calendar_policy",
+      "region",
+      "day_start",
+      "epoch_civil_date",
+      "epoch_tonalpohualli"
+    ]
+  },
+  "output_contract": {
+    "allowed_fields": [
+      "coefficient",
+      "day_sign_id",
+      "canonical_cycle_index",
+      "trecena_position",
+      "trecena_start_sign_id",
+      "day_offset"
+    ],
+    "forbidden_fields": [
+      "personality",
+      "fate",
+      "fortune",
+      "health",
+      "death",
+      "morality",
+      "compatibility",
+      "recommendation"
+    ]
+  },
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "birth_reading_enabled": false,
+    "historical_use_only": true,
+    "correlation_ready": false,
+    "interpretation_ready": false
+  },
+  "remaining_gates": [
+    "Name and justify at least one civil-date correlation from a controlling historical/critical source.",
+    "Specify locality, historical calendar policy, timezone treatment and day boundary.",
+    "Collate orthography and the complete cycle against primary pictorial witnesses.",
+    "Obtain Classical Nahuatl, codicological and contemporary Nahua review.",
+    "Build source-scoped trecena and day interpretation packs separately from arithmetic."
+  ]
+}

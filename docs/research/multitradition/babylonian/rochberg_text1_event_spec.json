@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "status": "exploratory_event_reconstruction_not_a_natal_chart_and_not_a_visibility_oracle",
+  "source_edition_id": "babylonian_rochberg_horoscopes_1998_awdl",
+  "source_file_sha256": "dd233eb1593135dacf280224288fb16cf3697df48fc9ec0347cc522959dff285",
+  "source_location": "Text 1 (AO 17649), book pp. 51-55 / PDF pp. 67-71",
+  "source_finding": "Rochberg explicitly states that none of Text 1's astronomical data refer to the date of birth. The record is a sequence of synodic phenomena, a schematic solstice date, a restored lunar-visibility datum, and an intercalation notice around the birth.",
+  "astronomy_dependency": "rochberg_texts1_10_astronomy_spec.json",
+  "calculation_profile": {
+    "calendar": "proleptic_julian_as_printed_by_rochberg",
+    "year_numbering": "astronomical_with_year_zero_consistent_with_existing_research_profile",
+    "time_scale": "UT_input_to_swe_calc_ut_not_modern_civil_UTC",
+    "location": {
+      "label": "Babylon calculation assumption",
+      "longitude_east_degrees": 44.42,
+      "latitude_north_degrees": 32.54,
+      "altitude_meters": 20.0,
+      "status": "explicit_approximate_reconstruction_coordinate_not_a_preserved_text_fact"
+    },
+    "rise_set_model": {
+      "disc": "center",
+      "refraction": "disabled",
+      "atmospheric_pressure_hpa": 0.0,
+      "temperature_celsius": 15.0,
+      "reason": "This setting reproduces Rochberg's printed Sun and planet rise/set times more closely than the default apparent-limb/refraction profile. It is a reconstruction profile, not an ancient visibility criterion."
+    },
+    "ephemeris": "Swiss Ephemeris compressed DE431 files and locked TIDAL_DE431 profile inherited from the astronomy dependency",
+    "rochberg_ancient_minus_modern_longitude_correction_degrees": 8.73,
+    "correction_status": "edition_value_used_only_to_reproduce_reported_Babylonian_zodiac_signs_not_independently_derived",
+    "visibility_policy": "Rise/set gaps, elongation, and altitude are geometric diagnostics only. No first/last visibility verdict is generated without a source-specific atmospheric, extinction, magnitude, horizon, weather, and observational criterion."
+  },
+  "exploratory_gates": {
+    "maximum_published_modern_longitude_residual_degrees": 0.8,
+    "maximum_rise_or_set_time_residual_hours": 0.1,
+    "maximum_published_elongation_residual_degrees": 0.5,
+    "maximum_station_interval_boundary_error_days": 1.0,
+    "saturn_station_same_month_conflict_minimum_days": 20.0,
+    "status": "post_hoc_reproduction_and_conflict_detection_gates_not_prospective_golden_tolerances"
+  },
+  "events": [
+    {
+      "event_id": "text1.mercury_first_visibility_morning",
+      "source_line": "obv. 3",
+      "babylonian_date": "Kislimu (IX), around day 15",
+      "editor_julian_date": {"year": -410, "month": 12, "day": 5},
+      "textual_status": "date_and_phenomenon_preserved_zodiac_sign_damaged",
+      "reported_phenomenon": "Mercury first visibility in the east as a morning star",
+      "reported_zodiac_reading": "orthographically Gemini; damaged; computation-led alternatives discussed by Rochberg",
+      "published_computation": {
+        "sunrise_ut_hour": 3.92,
+        "mercury_rise_ut_hour": 2.62,
+        "mercury_altitude_at_sunrise_degrees": 14.28,
+        "printed_summary_sun_longitude_degrees": 256.9,
+        "printed_summary_mercury_longitude_degrees": 241.84,
+        "later_stated_uncorrected_mercury_longitude_degrees": 233.11,
+        "internal_note": "The printed summary longitudes are approximately the modern tropical values plus the stated 8.73-degree correction, despite their nearby modern-tropical label. The later 233.11-degree Mercury value exposes the distinction."
+      }
+    },
+    {
+      "event_id": "text1.winter_solstice_scheme_date",
+      "source_line": "obv. 4",
+      "babylonian_date": "Tebetu (X) day 9",
+      "editor_julian_date": null,
+      "textual_status": "preserved",
+      "reported_phenomenon": "winter solstice date",
+      "published_interpretation": "Rochberg identifies this as consistent with the fixed-calendar Uruk Scheme, not as a demonstrated observation of the instantaneous tropical solar crossing."
+    },
+    {
+      "event_id": "text1.last_lunar_visibility_restored",
+      "source_line": "obv. 4",
+      "babylonian_date": "Tebetu (X) day 26",
+      "editor_julian_date": null,
+      "textual_status": "phenomenon_editorially_restored_in_angle_brackets",
+      "reported_phenomenon": "last lunar visibility of the month",
+      "validation_policy": "Retain nearby lunar elongation and Moon-rise-before-sunrise diagnostics without selecting a Julian date or asserting visibility."
+    },
+    {
+      "event_id": "text1.mercury_last_visibility_morning",
+      "source_line": "obv. 5",
+      "babylonian_date": "Sabatu (XI), around day 2",
+      "editor_julian_date": {"year": -409, "month": 1, "day": 20},
+      "textual_status": "preserved_with_dense_clouds_notice",
+      "reported_phenomenon": "Mercury last visibility in the east in Capricorn",
+      "published_computation": {
+        "sun_longitude_modern_degrees": 295.38,
+        "mercury_longitude_modern_degrees": 283.83,
+        "sunrise_ut_hour": 4.24,
+        "mercury_rise_ut_hour": 3.59
+      }
+    },
+    {
+      "event_id": "text1.venus_last_visibility_morning",
+      "source_line": "obv. 6",
+      "babylonian_date": "Sabatu (XI) day 14",
+      "editor_julian_date": {"year": -409, "month": 2, "day": 1},
+      "textual_status": "preserved",
+      "reported_phenomenon": "Venus last visibility in the east, west of Aquarius",
+      "published_computation": {
+        "sun_longitude_modern_degrees": 307.42,
+        "venus_longitude_modern_degrees": 297.89,
+        "sunrise_ut_hour": 4.15,
+        "venus_rise_ut_hour": 3.67
+      }
+    },
+    {
+      "event_id": "text1.jupiter_second_station",
+      "source_line": "rev. 1",
+      "babylonian_date": "Tasritu (VII) day 22",
+      "editor_julian_date_interval": {
+        "start": {"year": -410, "month": 10, "day": 12},
+        "end": {"year": -410, "month": 10, "day": 16}
+      },
+      "textual_status": "preserved",
+      "reported_phenomenon": "Jupiter second stationary point in Aquarius",
+      "published_computation": {
+        "jupiter_longitude_modern_degrees": 313.16,
+        "jupiter_longitude_babylonian_degrees": 321.89,
+        "returned_to_direct_motion_by_julian_day": {"year": -410, "month": 10, "day": 17}
+      }
+    },
+    {
+      "event_id": "text1.jupiter_last_visibility_evening",
+      "source_line": "rev. 2",
+      "babylonian_date": "Addaru (XII), around day 2",
+      "editor_julian_date": {"year": -409, "month": 2, "day": 17},
+      "textual_status": "preserved",
+      "reported_phenomenon": "Jupiter last visibility in Pisces",
+      "published_computation": {
+        "calculation_ut_hour": 16.0,
+        "sun_longitude_modern_degrees": 323.87,
+        "jupiter_longitude_modern_degrees": 332.98,
+        "sunset_ut_hour": 14.73,
+        "jupiter_set_ut_hour": 15.43
+      }
+    },
+    {
+      "event_id": "text1.saturn_first_visibility_observed",
+      "source_line": "rev. 3",
+      "babylonian_date": "Du'uzu (IV) day 30",
+      "editor_julian_date": {"year": -410, "month": 7, "day": 23},
+      "textual_status": "preserved_with_high_and_faint_observational_remark",
+      "reported_phenomenon": "Saturn first visibility in Cancer, high and faint",
+      "published_computation": {
+        "calculation_ut_hour": 2.0,
+        "sun_longitude_modern_degrees": 114.21,
+        "saturn_longitude_modern_degrees": 98.55,
+        "sunrise_ut_hour": 2.08,
+        "saturn_rise_ut_hour": 0.85,
+        "sun_altitude_degrees": -0.89,
+        "saturn_altitude_degrees": 12.87
+      }
+    },
+    {
+      "event_id": "text1.saturn_first_visibility_ideal_alternate",
+      "source_line": "rev. 4",
+      "babylonian_date": "Du'uzu (IV), around day 26",
+      "editor_julian_date": {"year": -410, "month": 7, "day": 19},
+      "textual_status": "preserved_as_ideal_alternate_not_observation",
+      "reported_phenomenon": "ideal first visibility date inferred because Saturn was already high on day 30",
+      "published_computation": {
+        "sun_longitude_modern_degrees": 109.79,
+        "saturn_longitude_modern_degrees": 97.97,
+        "sunrise_ut_hour": 2.04,
+        "saturn_rise_ut_hour": 1.11
+      }
+    },
+    {
+      "event_id": "text1.saturn_first_station_calendar_conflict",
+      "source_line": "rev. 4-5",
+      "babylonian_date": "Kislimu (IX) day 7",
+      "editor_julian_date": null,
+      "textual_status": "preserved_but_no_published_computation_supplied",
+      "reported_phenomenon": "Saturn first stationary point",
+      "validation_policy": "Compute the station independently and compare it both with the text and with strict same-month arithmetic from the edition's IX.15 = -410 December 5 Mercury mapping. Preserve any conflict rather than moving either event."
+    },
+    {
+      "event_id": "text1.saturn_acronychal_rising",
+      "source_line": "rev. 4-6",
+      "babylonian_date": "Tebetu (X) day 17",
+      "editor_julian_date": {"year": -409, "month": 1, "day": 4},
+      "textual_status": "preserved",
+      "reported_phenomenon": "opposition in the Babylonian sense of acronychal rising, not exact 180-degree opposition",
+      "published_computation": {
+        "sun_longitude_modern_degrees": 279.73,
+        "saturn_longitude_modern_degrees": 103.2,
+        "elongation_degrees": 176.53
+      }
+    },
+    {
+      "event_id": "text1.intercalary_addaru_notice",
+      "source_line": "obv. 6 and rev. 5",
+      "babylonian_date": "year-level notice",
+      "editor_julian_date": null,
+      "textual_status": "preserved_twice",
+      "reported_phenomenon": "the year had an intercalary Addaru",
+      "validation_policy": "Calendar fact only; astronomy does not independently prove the scribal intercalation notice."
+    }
+  ],
+  "required_before_golden_promotion": [
+    "Assyriological review of the tablet, copy, damaged Mercury sign, restorations, and event terminology",
+    "source-critical Babylonian calendar reconstruction rather than arithmetic from one editor date",
+    "independent ephemeris and horizon implementation",
+    "source-specific visibility criteria with extinction, magnitude, weather, horizon, and observational uncertainty",
+    "prospectively declared tolerances",
+    "resolution or explicit versioning of the Kislimu day-7 Saturn station versus Kislimu day-15 Mercury date conflict",
+    "commercial rights review before publishing edition-derived translation or page images"
+  ]
+}

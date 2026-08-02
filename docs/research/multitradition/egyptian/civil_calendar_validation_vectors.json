@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "pharaonic_egyptian",
+  "source_pack_id": "egyptian_civil_calendar_365_v1",
+  "status": "research_only_fail_closed",
+  "source_ids": ["egyptian_porceddu_periodicity_2008", "egyptian_ucl_civil_calendar", "egyptian_cpl_budge_1923_hieratic_papyri_second_series"],
+  "vectors": [
+    {
+      "vector_id": "egyptian.civil.akhet_1_1",
+      "rule_ids": ["egyptian.civil.seasons_three_by_four_months", "egyptian.civil.ordinary_month_thirty_days", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "date_to_position", "date": {"season_id": "akhet", "month_in_season": 1, "day": 1}},
+      "expected": {"season_id": "akhet", "month_in_season": 1, "day": 1, "year_position": 0, "year_delta": 0, "is_additional_day": false, "additional_day": null},
+      "provenance": "Porceddu et al. number I Akhet 1 as the first civil day."
+    },
+    {
+      "vector_id": "egyptian.civil.akhet_1_30",
+      "rule_ids": ["egyptian.civil.ordinary_month_thirty_days", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "date_to_position", "date": {"season_id": "akhet", "month_in_season": 1, "day": 30}},
+      "expected": {"season_id": "akhet", "month_in_season": 1, "day": 30, "year_position": 29, "year_delta": 0, "is_additional_day": false, "additional_day": null},
+      "provenance": "Thirty-day ordinary-month upper boundary."
+    },
+    {
+      "vector_id": "egyptian.civil.akhet_2_1",
+      "rule_ids": ["egyptian.civil.ordinary_month_thirty_days", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "position_to_date", "year_position": 30},
+      "expected": {"season_id": "akhet", "month_in_season": 2, "day": 1, "year_position": 30, "year_delta": 0, "is_additional_day": false, "additional_day": null},
+      "provenance": "Porceddu et al. identify II Akhet 1 as day number 31, equivalent to zero-based position 30."
+    },
+    {
+      "vector_id": "egyptian.civil.peret_1_1",
+      "rule_ids": ["egyptian.civil.seasons_three_by_four_months", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "position_to_date", "year_position": 120},
+      "expected": {"season_id": "peret", "month_in_season": 1, "day": 1, "year_position": 120, "year_delta": 0, "is_additional_day": false, "additional_day": null},
+      "provenance": "Four 30-day Akhet months precede Peret."
+    },
+    {
+      "vector_id": "egyptian.civil.shemu_1_1",
+      "rule_ids": ["egyptian.civil.seasons_three_by_four_months", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "position_to_date", "year_position": 240},
+      "expected": {"season_id": "shemu", "month_in_season": 1, "day": 1, "year_position": 240, "year_delta": 0, "is_additional_day": false, "additional_day": null},
+      "provenance": "Eight 30-day months precede Shemu."
+    },
+    {
+      "vector_id": "egyptian.civil.last_ordinary_day",
+      "rule_ids": ["egyptian.civil.ordinary_month_thirty_days", "egyptian.civil.heriu_renpet_five_days"],
+      "inputs": {"operation": "position_to_date", "year_position": 359},
+      "expected": {"season_id": "shemu", "month_in_season": 4, "day": 30, "year_position": 359, "year_delta": 0, "is_additional_day": false, "additional_day": null},
+      "provenance": "Last of twelve 30-day ordinary months."
+    },
+    {
+      "vector_id": "egyptian.civil.heriu_renpet_1",
+      "rule_ids": ["egyptian.civil.heriu_renpet_five_days", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "position_to_date", "year_position": 360},
+      "expected": {"season_id": "heriu_renpet", "month_in_season": null, "day": 1, "year_position": 360, "year_delta": 0, "is_additional_day": true, "additional_day": 1},
+      "provenance": "First day upon the year after 360 ordinary days."
+    },
+    {
+      "vector_id": "egyptian.civil.heriu_renpet_5",
+      "rule_ids": ["egyptian.civil.heriu_renpet_five_days", "egyptian.civil.year_length_365"],
+      "inputs": {"operation": "date_to_position", "date": {"season_id": "heriu_renpet", "month_in_season": null, "day": 5}},
+      "expected": {"season_id": "heriu_renpet", "month_in_season": null, "day": 5, "year_position": 364, "year_delta": 0, "is_additional_day": true, "additional_day": 5},
+      "provenance": "Fifth and final additional day."
+    },
+    {
+      "vector_id": "egyptian.civil.full_year_wrap",
+      "rule_ids": ["egyptian.civil.year_length_365", "egyptian.civil.pharaonic_model_no_intercalation", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "position_to_date", "year_position": 365},
+      "expected": {"season_id": "akhet", "month_in_season": 1, "day": 1, "year_position": 0, "year_delta": 1, "is_additional_day": false, "additional_day": null},
+      "provenance": "A 365-day non-intercalating research-model round trip."
+    },
+    {
+      "vector_id": "egyptian.civil.negative_wrap",
+      "rule_ids": ["egyptian.civil.year_length_365", "egyptian.civil.position_date_bijection"],
+      "inputs": {"operation": "position_to_date", "year_position": -1},
+      "expected": {"season_id": "heriu_renpet", "month_in_season": null, "day": 5, "year_position": 364, "year_delta": -1, "is_additional_day": true, "additional_day": 5},
+      "provenance": "Euclidean negative-boundary fixture."
+    },
+    {
+      "vector_id": "egyptian.civil.day_31_rejected",
+      "rule_ids": ["egyptian.civil.ordinary_month_thirty_days"],
+      "inputs": {"operation": "date_to_position", "date": {"season_id": "akhet", "month_in_season": 1, "day": 31}},
+      "expected": {"error": "invalid_ordinary_day"},
+      "provenance": "Ordinary months have exactly thirty days."
+    },
+    {
+      "vector_id": "egyptian.civil.additional_day_6_rejected",
+      "rule_ids": ["egyptian.civil.heriu_renpet_five_days", "egyptian.civil.pharaonic_model_no_intercalation"],
+      "inputs": {"operation": "date_to_position", "date": {"season_id": "heriu_renpet", "month_in_season": null, "day": 6}},
+      "expected": {"error": "invalid_additional_day"},
+      "provenance": "The pharaonic 365-day model has five additional days, not the later intercalary sixth day."
+    },
+    {
+      "vector_id": "egyptian.chronology.synthetic_forward",
+      "rule_ids": ["egyptian.civil.explicit_chronology_profile_required", "egyptian.civil.named_profile_date_offset"],
+      "inputs": {
+        "operation": "civil_date",
+        "civil_date": "2000-12-30",
+        "profile": {"profile_id": "test_fixture_not_historical", "tradition_id": "pharaonic_egyptian", "model_id": "pharaonic_civil_365", "anchor_civil_date": "2000-01-01", "calendar_policy": "proleptic_gregorian_test_fixture", "anchor_egyptian_date": {"season_id": "akhet", "month_in_season": 1, "day": 1}, "historical_regime": "synthetic_test_only", "authority": "arithmetic_validation_only", "uncertainty_days": 0, "locality": "test_fixture", "day_start": "civil_midnight_test_fixture"}
+      },
+      "expected": {"season_id": "heriu_renpet", "month_in_season": null, "day": 5, "year_position": 364, "year_delta": 0, "is_additional_day": true, "additional_day": 5},
+      "provenance": "Explicitly synthetic fixture validates civil-day subtraction without claiming a historical epoch."
+    },
+    {
+      "vector_id": "egyptian.chronology.missing_rejected",
+      "rule_ids": ["egyptian.civil.explicit_chronology_profile_required"],
+      "inputs": {"operation": "civil_date", "civil_date": "2000-01-01"},
+      "expected": {"error": "missing_profile"},
+      "provenance": "Fail-closed chronology contract."
+    },
+    {
+      "vector_id": "egyptian.chronology.coptic_model_rejected",
+      "rule_ids": ["egyptian.civil.reject_cross_regime_profile", "egyptian.civil.pharaonic_model_no_intercalation"],
+      "inputs": {
+        "operation": "civil_date",
+        "civil_date": "2000-01-01",
+        "profile": {"profile_id": "forbidden_coptic_fixture", "tradition_id": "pharaonic_egyptian", "model_id": "alexandrian_coptic_leap", "anchor_civil_date": "2000-01-01", "calendar_policy": "proleptic_gregorian_test_fixture", "anchor_egyptian_date": {"season_id": "akhet", "month_in_season": 1, "day": 1}, "historical_regime": "forbidden_cross_regime_fixture", "authority": "negative_control", "uncertainty_days": 0, "locality": "test_fixture", "day_start": "civil_midnight_test_fixture"}
+      },
+      "expected": {"error": "wrong_calendar_model"},
+      "provenance": "Regression against projecting the later Alexandrian/Coptic leap rule backward."
+    },
+    {
+      "vector_id": "egyptian.hemerology.additional_days_abstain",
+      "rule_ids": ["egyptian.civil.heriu_renpet_no_preserved_main_calendar_prognosis", "egyptian.civil.no_automatic_hemerology_or_birth_reading"],
+      "inputs": {"operation": "prognosis_eligibility", "date": {"season_id": "heriu_renpet", "month_in_season": null, "day": 1}},
+      "expected": {"preserved_main_calendar_prognosis_available": false, "historical_absence_proven": false, "requires_witness_lookup": true, "emit_birth_reading": false},
+      "provenance": "Porceddu et al. report no final-five-day prognosis data in the compared corpus; Budge states Sallier IV's likely epagomenal portion is lost. The validator abstains rather than converting loss into historical absence."
+    },
+    {
+      "vector_id": "egyptian.output.no_reading",
+      "rule_ids": ["egyptian.civil.no_automatic_hemerology_or_birth_reading"],
+      "inputs": {"operation": "output_contract", "year_position": 0},
+      "expected": {"forbidden_fields_present": [], "birth_reading_enabled": false, "customer_eligible": false, "hemerology_ready": false},
+      "provenance": "Calendar arithmetic remains isolated from source-limited hemerology and natal claims."
+    }
+  ]
+}

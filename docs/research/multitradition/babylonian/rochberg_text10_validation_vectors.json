@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "mesopotamian_babylonian",
+  "source_pack_id": "rochberg_1998_text10_mlc2190_v1",
+  "status": "published_record_and_longitudes_recomputed_lunar_latitude_trigger_and_source_review_pending",
+  "source_ids": [
+    "babylonian_rochberg_horoscopes_1998_awdl",
+    "babylonian_cdli_aristocrates_p507395"
+  ],
+  "vectors": [
+    {
+      "vector_id": "babylonian.rochberg1998.text10.recorded_and_published_computed_facts",
+      "rule_ids": [
+        "babylonian.rochberg1998.text10.obv4-6.moon_positive_latitude_omen",
+        "babylonian.rochberg1998.text10.obv7-8.jupiter_ki_place_judgment",
+        "babylonian.rochberg1998.text10.obv8-10.venus_ki_place_judgment",
+        "babylonian.rochberg1998.text10.rev1-3.mercury_ki_place_judgment"
+      ],
+      "inputs": {
+        "artifact": "MLC 2190 / YPM BC 002136 / CDLI P507395",
+        "duplicate": "W 20030/143",
+        "seleucid_era_year": 77,
+        "babylonian_month": "Simanu",
+        "babylonian_day_text": "4, in the morning(?) of the 5th(?)",
+        "proposed_julian_date": "-234-06-02/03",
+        "proposed_computation_time": "-234-06-03 01:00 UT",
+        "time_uncertainty": "Rochberg says the date/time expression is difficult and lunar longitude cannot resolve the birth time"
+      },
+      "expected": {
+        "recorded_positions": {
+          "moon": {"sign": "leo", "degree": null},
+          "sun": {"sign": "gemini", "sexagesimal_degree": "12;30"},
+          "jupiter": {"sign": "sagittarius", "degree": 18},
+          "venus": {"sign": "taurus", "degree": 4},
+          "mercury": {"sign": "gemini", "with": "sun"},
+          "saturn": {"sign": "cancer", "degree": 6},
+          "mars": {"sign": "cancer", "degree": 24}
+        },
+        "rochberg_published_computation": {
+          "moon": {"absolute_longitude_degrees": "126.09", "formatted": "leo 6"},
+          "sun": {"absolute_longitude_degrees": "73.49", "formatted": "gemini 13"},
+          "jupiter": {"absolute_longitude_degrees": "260.05", "formatted": "sagittarius 20"},
+          "venus": {"absolute_longitude_degrees": "27.85", "formatted": "aries 28"},
+          "mercury": {"absolute_longitude_degrees": "52.15", "formatted": "taurus 22"},
+          "saturn": {"absolute_longitude_degrees": "90.48", "formatted": "cancer 0"},
+          "mars": {"absolute_longitude_degrees": "115.60", "formatted": "cancer 26"}
+        },
+        "published_computation_note": "Computed for 1:00 UT, about 4:00 AM Babylonian local time with a midnight epoch, and adjusted by +6;31 degrees for -234",
+        "explicit_judgment_families": ["lunar_positive_latitude_omen", "jupiter_KI", "venus_KI", "mercury_KI"],
+        "forbidden_generalizations": ["planet_in_sign_rule", "modern_house_rule", "modern_aspect_rule", "ascendant_rule", "fertility_guarantee", "lifespan_prediction"]
+      },
+      "provenance": "Rochberg 1998 Text 10, pp. 83-85, with Text 11 duplicate pp. 86-87; CDLI P507395 institutional object summary"
+    }
+  ],
+  "required_expansion_before_implementation": [
+    "source-specific Babylonian calendar and chronology review beyond the current explicit proleptic-Julian year-zero policy",
+    "independent lunar-latitude motion and nodal-zone reconstruction for the obverse 4-6 candidate trigger",
+    "recorded-versus-computed residuals without silently correcting the tablet",
+    "Assyriological review of transcription translation restorations and duplicate readings",
+    "source-critical reconstruction of KI qaqqaru under separately named Rochberg 1998 and later hypothesis packs",
+    "at least nine additional well-preserved horoscope records from the controlling corpus",
+    "mutation tests proving that zodiac sign alone cannot trigger any KI judgment"
+  ]
+}

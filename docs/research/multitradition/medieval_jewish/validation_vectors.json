@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "medieval_jewish",
+  "source_pack_id": "ibn_ezra_nativities_revolution_sela_2014_v1",
+  "status": "research_vectors_pending_hebrew_review_ephemeris_profile_and_complete_dependency_extraction",
+  "source_id": "jewish_ibn_ezra_nativities_revolution_local",
+  "vectors": [
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.return_definition_without_invented_tolerance",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s1.solar_return_instant"
+      ],
+      "inputs": {
+        "natal_sun_tropical_longitude": "known_to_degree_and_minute",
+        "target_year": 2030,
+        "ephemeris_profile": "declared_external_dependency",
+        "root_finding_tolerance": null,
+        "return_location_policy": null
+      },
+      "expected": {
+        "calculation_requirement": "find_instant_when_sun_returns_to_natal_degree_and_minute",
+        "required_return_facts": ["ascendant", "seven_planets"],
+        "computed_instant": null,
+        "source_specified_arcsecond_tolerance": null,
+        "source_specified_location_policy": null
+      },
+      "provenance": "Ibn Ezra, Book of Revolution section 1, Sela English p. 373 with facing Hebrew p. 372"
+    },
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.location_uncertainty_suppresses_ascendant_claims",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s1.solar_return_instant",
+        "medieval_jewish.ibn_ezra.revolution.s15.return_ascendant_witness"
+      ],
+      "inputs": {
+        "solar_return_instant": "known",
+        "return_location": "unknown",
+        "candidate_locations_change_ascendant": true
+      },
+      "expected": {
+        "planetary_return_facts_may_compute": true,
+        "return_ascendant": null,
+        "ascendant_dependent_judgments": [],
+        "disclosure": "return_location_policy_unresolved"
+      },
+      "provenance": "Boundary implied by section 1's required return ascendant and the source pack's explicit unresolved location convention"
+    },
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.relative_life_phases_without_ages",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s4.relative_life_thirds"
+      ],
+      "inputs": {
+        "natal_sect": "day",
+        "sect_light": "sun",
+        "triplicity_rulers_for_sect_light": ["ruler_1", "ruler_2", "ruler_3"],
+        "native_age": 36
+      },
+      "expected": {
+        "relative_phases": [
+          {"ordinal": 1, "ruler": "ruler_1"},
+          {"ordinal": 2, "ruler": "ruler_2"},
+          {"ordinal": 3, "ruler": "ruler_3"}
+        ],
+        "active_phase_from_numeric_age": null,
+        "numeric_age_boundaries": null
+      },
+      "provenance": "Ibn Ezra, Book of Revolution section 4, Sela English p. 375 with facing Hebrew p. 374"
+    },
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.equal_thirds_mutation_rejected",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s4.relative_life_thirds"
+      ],
+      "inputs": {
+        "proposed_numeric_age_boundaries": [30, 60],
+        "proposal_basis": "assumed_equal_thirds_of_ninety_years"
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inspected_passage_supplies_relative_first_middle_last_phases_but_no_equal_duration_or_exact_ages"
+      },
+      "provenance": "Negative control preventing a modern equal-third schedule from being attributed to section 4"
+    },
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.triplicity_comparison_requires_resolved_phase",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s4.sect_light_triplicity_ruler",
+        "medieval_jewish.ibn_ezra.revolution.s4.relative_life_thirds"
+      ],
+      "inputs": {
+        "natal_sect": "night",
+        "sect_light": "moon",
+        "triplicity_rulers": ["ruler_1", "ruler_2", "ruler_3"],
+        "relative_life_phase": "unresolved",
+        "annual_revolution_chart": "known"
+      },
+      "expected": {
+        "active_triplicity_ruler": null,
+        "natal_return_condition_comparison": null,
+        "abstention_reason": "active_relative_life_phase_not_resolved_by_the_inspected_passage"
+      },
+      "provenance": "Sections 4's dependency boundary: the comparison needs the active ruler but the extracted passage supplies no numeric phase ages"
+    },
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.return_ascendant_three_witnesses_no_muntha",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s15.return_ascendant_witness"
+      ],
+      "inputs": {
+        "annual_revolution_ascendant": "known",
+        "annual_revolution_ascendant_ruler": "known",
+        "natal_ascendant": "known",
+        "annual_terminal_or_profected_sign": "known_from_ibn_ezra_dependency",
+        "tajika_muntha": "available_but_foreign"
+      },
+      "expected": {
+        "inspect": [
+          "annual_revolution.ascendant_ruler.condition",
+          "annual_revolution.ascendant.relationship_to_natal_ascendant",
+          "annual_revolution.ascendant.relationship_to_annual_terminal_or_profected_sign"
+        ],
+        "tajika_muntha_used": false,
+        "arbitrary_point_weights": null
+      },
+      "provenance": "Ibn Ezra, Book of Revolution section 15, Sela English p. 385 with facing Hebrew p. 384"
+    },
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.compatible_annual_testimony_is_subordinate",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s21.annual_subordinate_to_natal"
+      ],
+      "inputs": {
+        "natal_testimony": "supports_topic",
+        "longer_term_directional_testimony": "supports_topic",
+        "annual_revolution_testimony": "supports_topic_and_supplies_shorter_timing"
+      },
+      "expected": {
+        "higher_order": ["natal_promise", "longer_term_directional_testimony"],
+        "annual_role": "time_or_modify_compatible_higher_order_testimony",
+        "annual_overrides_nativity": false
+      },
+      "provenance": "Ibn Ezra, Book of Revolution section 21, Sela English p. 389 with facing Hebrew p. 388"
+    },
+    {
+      "vector_id": "medieval_jewish.ibn_ezra.revolution.annual_only_event_claim_rejected",
+      "rule_ids": [
+        "medieval_jewish.ibn_ezra.revolution.s21.annual_subordinate_to_natal"
+      ],
+      "inputs": {
+        "natal_testimony": "absent_or_contradictory",
+        "longer_term_directional_testimony": "absent",
+        "annual_revolution_testimony": "apparently_supports_event"
+      },
+      "expected": {
+        "event_announcement": null,
+        "rejected_annual_testimony_reported": true,
+        "rejection_reason": "annual_revolution_does_not_independently_replace_required_higher_order_testimony"
+      },
+      "provenance": "Negative precedence control derived from Book of Revolution section 21"
+    }
+  ],
+  "required_expansion_before_implementation": [
+    "independent Hebrew review of every extracted passage",
+    "versioned ephemeris timescale root-finding and return-location profiles",
+    "source extraction for triplicity tables condition predicates and the annual terminal or profected sign",
+    "worked historical charts from the same Ibn Ezra textual lineage",
+    "boundary tests for return-location uncertainty and solar-longitude root finding",
+    "precedence tests retaining every annual testimony rejected by natal or longer-term evidence"
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-31",
+  "tradition_id": "indian_jyotisha",
+  "source_pack_id": "varahamihira_brhajjataka_gretil_aiyar_1905_v1",
+  "status": "research_vectors_half_open_boundary_convention_pending_specialist_review",
+  "source_ids": [
+    "jyotisha_varahamihira_brhajjataka_gretil",
+    "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive"
+  ],
+  "numeric_convention": {
+    "longitude_within_sign": "exact degrees in the half-open interval [0,30)",
+    "segment_intervals": "start inclusive and end exclusive",
+    "boundary_note": "This is the deterministic test convention. It must not be represented as explicit textual wording until specialist review confirms the source's boundary treatment."
+  },
+  "vectors": [
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.aries_first",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment"],
+      "inputs": {"sign": "aries", "longitude_within_sign": "0"},
+      "expected": {"navamsa_ordinal": 1, "navamsa_sign": "aries"},
+      "provenance": "Derived from BJ_01.06 and Aiyar's explicit first-navamsa explanation"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.aries_before_second",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment"],
+      "inputs": {"sign": "aries", "longitude_within_sign": "3°19'59.999999\""},
+      "expected": {"navamsa_ordinal": 1, "navamsa_sign": "aries"},
+      "provenance": "Boundary vector derived from nine equal divisions"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.aries_at_second",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment"],
+      "inputs": {"sign": "aries", "longitude_within_sign": "3°20'00\""},
+      "expected": {"navamsa_ordinal": 2, "navamsa_sign": "taurus"},
+      "provenance": "Boundary vector derived from nine equal divisions under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.taurus_middle_vargottama",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment",
+        "jyotisha.varahamihira.brhajjataka.01.14.vargottama_navamsas"
+      ],
+      "inputs": {"sign": "taurus", "longitude_within_sign": "13°20'00\"", "sign_modality": "fixed"},
+      "expected": {"navamsa_ordinal": 5, "navamsa_sign": "taurus", "is_vargottama": true},
+      "provenance": "Aiyar's explicit fifth-navamsa explanation aligned to BJ_01.14"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.gemini_last_vargottama",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment",
+        "jyotisha.varahamihira.brhajjataka.01.14.vargottama_navamsas"
+      ],
+      "inputs": {"sign": "gemini", "longitude_within_sign": "26°40'00\"", "sign_modality": "dual"},
+      "expected": {"navamsa_ordinal": 9, "navamsa_sign": "gemini", "is_vargottama": true},
+      "provenance": "Aiyar's explicit ninth-navamsa explanation aligned to BJ_01.14"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.cancer_first",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment"],
+      "inputs": {"sign": "cancer", "longitude_within_sign": "0"},
+      "expected": {"navamsa_ordinal": 1, "navamsa_sign": "cancer"},
+      "provenance": "Explicit starting-sign group in BJ_01.06"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.leo_first",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment"],
+      "inputs": {"sign": "leo", "longitude_within_sign": "0"},
+      "expected": {"navamsa_ordinal": 1, "navamsa_sign": "aries"},
+      "provenance": "Explicit triangular-sign grouping in Aiyar's explanation of BJ_01.06"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.virgo_first",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment"],
+      "inputs": {"sign": "virgo", "longitude_within_sign": "0"},
+      "expected": {"navamsa_ordinal": 1, "navamsa_sign": "capricorn"},
+      "provenance": "Explicit triangular-sign grouping in Aiyar's explanation of BJ_01.06"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.navamsa.libra_first",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.06.navamsa_assignment"],
+      "inputs": {"sign": "libra", "longitude_within_sign": "0"},
+      "expected": {"navamsa_ordinal": 1, "navamsa_sign": "libra"},
+      "provenance": "Explicit triangular-sign grouping in Aiyar's explanation of BJ_01.06"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.hora_primary.aries_before_boundary",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.11.hora_primary"],
+      "inputs": {"sign": "aries", "sign_parity": "odd", "longitude_within_sign": "14°59'59.999999\""},
+      "expected": {"hora_ordinal": 1, "hora_ruler": "sun"},
+      "provenance": "BJ_01.11 with the Chapter I equal-half definition"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.hora_primary.aries_at_boundary",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.11.hora_primary"],
+      "inputs": {"sign": "aries", "sign_parity": "odd", "longitude_within_sign": "15°00'00\""},
+      "expected": {"hora_ordinal": 2, "hora_ruler": "moon"},
+      "provenance": "Boundary vector under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.hora_primary.taurus_first",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.11.hora_primary"],
+      "inputs": {"sign": "taurus", "sign_parity": "even", "longitude_within_sign": "0"},
+      "expected": {"hora_ordinal": 1, "hora_ruler": "moon"},
+      "provenance": "BJ_01.11 even-sign order"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.hora_primary.taurus_second",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.11.hora_primary"],
+      "inputs": {"sign": "taurus", "sign_parity": "even", "longitude_within_sign": "15°00'00\""},
+      "expected": {"hora_ordinal": 2, "hora_ruler": "sun"},
+      "provenance": "BJ_01.11 even-sign order"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.drekkana_primary.leo_first",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.11.drekkana_primary"
+      ],
+      "inputs": {"sign": "leo", "longitude_within_sign": "0"},
+      "expected": {"drekkana_ordinal": 1, "ruling_sign": "leo", "drekkana_ruler": "sun"},
+      "provenance": "Aiyar's explicit Leo example for BJ_01.11"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.drekkana_primary.leo_second",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.11.drekkana_primary"
+      ],
+      "inputs": {"sign": "leo", "longitude_within_sign": "10°00'00\""},
+      "expected": {"drekkana_ordinal": 2, "ruling_sign": "sagittarius", "drekkana_ruler": "jupiter"},
+      "provenance": "Aiyar's explicit Leo example for BJ_01.11"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.drekkana_primary.leo_third",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.11.drekkana_primary"
+      ],
+      "inputs": {"sign": "leo", "longitude_within_sign": "20°00'00\""},
+      "expected": {"drekkana_ordinal": 3, "ruling_sign": "aries", "drekkana_ruler": "mars"},
+      "provenance": "Aiyar's explicit Leo example for BJ_01.11"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.hora_variant.sagittarius_first",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.12.hora_reported_variant"
+      ],
+      "inputs": {"sign": "sagittarius", "longitude_within_sign": "0"},
+      "expected": {"hora_ordinal": 1, "ruling_sign": "sagittarius", "hora_ruler": "jupiter"},
+      "provenance": "Aiyar's explicit Sagittarius example for BJ_01.12"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.hora_variant.sagittarius_second",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.12.hora_reported_variant"
+      ],
+      "inputs": {"sign": "sagittarius", "longitude_within_sign": "15°00'00\""},
+      "expected": {"hora_ordinal": 2, "ruling_sign": "libra", "hora_ruler": "venus"},
+      "provenance": "Aiyar's explicit Sagittarius example for BJ_01.12"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.drekkana_variant.sagittarius_first",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.12.drekkana_reported_variant"
+      ],
+      "inputs": {"sign": "sagittarius", "longitude_within_sign": "0"},
+      "expected": {"drekkana_ordinal": 1, "ruling_sign": "sagittarius", "drekkana_ruler": "jupiter"},
+      "provenance": "Aiyar's explicit Sagittarius example for BJ_01.12"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.drekkana_variant.sagittarius_second",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.12.drekkana_reported_variant"
+      ],
+      "inputs": {"sign": "sagittarius", "longitude_within_sign": "10°00'00\""},
+      "expected": {"drekkana_ordinal": 2, "ruling_sign": "scorpio", "drekkana_ruler": "mars"},
+      "provenance": "Aiyar's explicit Sagittarius example for BJ_01.12"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.drekkana_variant.sagittarius_third",
+      "rule_ids": [
+        "jyotisha.varahamihira.brhajjataka.01.06.sign_rulers",
+        "jyotisha.varahamihira.brhajjataka.01.12.drekkana_reported_variant"
+      ],
+      "inputs": {"sign": "sagittarius", "longitude_within_sign": "20°00'00\""},
+      "expected": {"drekkana_ordinal": 3, "ruling_sign": "libra", "drekkana_ruler": "venus"},
+      "provenance": "Aiyar's explicit Sagittarius example for BJ_01.12"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.odd_start",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "aries", "sign_parity": "odd", "longitude_within_sign": "0"},
+      "expected": {"segment_ordinal": 1, "trimsamsa_ruler": "mars"},
+      "provenance": "BJ_01.07 odd-sign sequence"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.odd_at_5",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "aries", "sign_parity": "odd", "longitude_within_sign": "5°00'00\""},
+      "expected": {"segment_ordinal": 2, "trimsamsa_ruler": "saturn"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.odd_at_10",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "aries", "sign_parity": "odd", "longitude_within_sign": "10°00'00\""},
+      "expected": {"segment_ordinal": 3, "trimsamsa_ruler": "jupiter"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.odd_at_18",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "aries", "sign_parity": "odd", "longitude_within_sign": "18°00'00\""},
+      "expected": {"segment_ordinal": 4, "trimsamsa_ruler": "mercury"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.odd_at_25",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "aries", "sign_parity": "odd", "longitude_within_sign": "25°00'00\""},
+      "expected": {"segment_ordinal": 5, "trimsamsa_ruler": "venus"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.even_start",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "taurus", "sign_parity": "even", "longitude_within_sign": "0"},
+      "expected": {"segment_ordinal": 1, "trimsamsa_ruler": "venus"},
+      "provenance": "BJ_01.07 even-sign reversed sequence"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.even_at_5",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "taurus", "sign_parity": "even", "longitude_within_sign": "5°00'00\""},
+      "expected": {"segment_ordinal": 2, "trimsamsa_ruler": "mercury"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.even_at_12",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "taurus", "sign_parity": "even", "longitude_within_sign": "12°00'00\""},
+      "expected": {"segment_ordinal": 3, "trimsamsa_ruler": "jupiter"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.even_at_20",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "taurus", "sign_parity": "even", "longitude_within_sign": "20°00'00\""},
+      "expected": {"segment_ordinal": 4, "trimsamsa_ruler": "saturn"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.trimsamsa.even_at_25",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.07.trimsamsa_assignment"],
+      "inputs": {"sign": "taurus", "sign_parity": "even", "longitude_within_sign": "25°00'00\""},
+      "expected": {"segment_ordinal": 5, "trimsamsa_ruler": "mars"},
+      "provenance": "Boundary vector from BJ_01.07 under the declared half-open convention"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.exaltation.sun",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.13.exaltation_depression"],
+      "inputs": {"planet": "sun"},
+      "expected": {"exaltation_sign": "aries", "nominal_degree": 10, "depression_sign": "libra"},
+      "provenance": "Direct table alignment from BJ_01.13"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.exaltation.moon",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.13.exaltation_depression"],
+      "inputs": {"planet": "moon"},
+      "expected": {"exaltation_sign": "taurus", "nominal_degree": 3, "depression_sign": "scorpio"},
+      "provenance": "Direct table alignment from BJ_01.13; degree convention remains review-pending"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.exaltation.saturn",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.13.exaltation_depression"],
+      "inputs": {"planet": "saturn"},
+      "expected": {"exaltation_sign": "libra", "nominal_degree": 20, "depression_sign": "aries"},
+      "provenance": "Direct table alignment from BJ_01.13"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.partition.structure_without_ayanamsha",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.04.sign_nakshatra_quarter_partition"],
+      "inputs": {"ecliptic_circle": "declared", "zodiac_reference_zero": "not_supplied_by_source_pack"},
+      "expected": {"zodiac_sign_count": 12, "nakshatra_quarters_per_sign": 9, "nakshatra_quarters_total": 108, "first_sign": "aries", "first_named_nakshatra": "asvini", "computed_sidereal_longitude": null, "ayanamsha": null},
+      "provenance": "Structural content of BJ_01.04 with an explicit negative control against importing Aiyar's Revati note or a modern ayanamsha"
+    },
+    {
+      "vector_id": "jyotisha.brhajjataka.moolatrikona.all_signs_no_degree_ranges",
+      "rule_ids": ["jyotisha.varahamihira.brhajjataka.01.14.moolatrikona_signs"],
+      "inputs": {"classical_planets": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]},
+      "expected": {"moolatrikona_signs": {"sun": "leo", "moon": "taurus", "mars": "aries", "mercury": "virgo", "jupiter": "sagittarius", "venus": "libra", "saturn": "aquarius"}, "degree_ranges": null},
+      "provenance": "BJ_01.14 sign list while affirmatively rejecting later degree-span imports"
+    }
+  ],
+  "required_expansion_before_implementation": [
+    "all twelve signs at every navamsa boundary, one exact unit before and at the boundary",
+    "all twelve signs at the 15-degree hora boundary for each selected variant",
+    "all twelve signs at the 10-degree and 20-degree drekkana boundaries for each selected variant",
+    "every trimsamsa segment boundary in odd and even signs, one exact unit before and at the boundary",
+    "uncertainty intervals crossing each varga boundary",
+    "all seven exaltation and depression pairs after Sanskrit number-term and facsimile review",
+    "all seven moolatrikona sign lookups while affirmatively rejecting unsourced degree ranges"
+  ]
+}

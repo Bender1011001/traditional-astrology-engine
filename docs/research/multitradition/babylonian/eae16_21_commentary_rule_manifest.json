@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "mesopotamian_babylonian",
+  "school_id": "eae_ancient_commentary_witnesses",
+  "source_pack_id": "eae16_21_ancient_commentary_witnesses_v1",
+  "source_edition_id": "ccp_oracc_p461229_p425538_2026_08_01",
+  "source_registry_ids": [
+    "babylonian_ccp_p461229_eae16_19_commentary",
+    "babylonian_ccp_p425538_eae21_commentary"
+  ],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "Ancient commentaries are encoded as a distinct interpretive layer. They can restrict scope, equate words, identify celestial regions, preserve alternatives, or rationalize a manuscript error. Quoted base omens remain scoped to the commentary witness until collated against the controlling edition. No rule is natal or customer-executable.",
+  "rules": [
+    {
+      "rule_id": "babylonian.eae16.commentary.lightning_summer_scope",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"all":[{"phenomenon":"lunar_eclipse"},{"coincident":"lightning"}]},
+      "conclusion": {"commentary_scope":"summer","base_apodosis_not_supplied":true,"customer_prediction":false},
+      "priority": 100, "exceptions": ["Do not apply outside the commentary's summer restriction."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 1-2","verification":"Full Yale/ORACC transliteration, translation, introduction, and notes inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical commentary display only; no personal prediction.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.waterless_flood_plague",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"commentary_lemma":"waterless_flood"},
+      "conclusion": {"commentary_equivalent":"plague","semantic_layer":"ancient_lexical_explanation","customer_prediction":false},
+      "priority": 100, "exceptions": ["Do not infer the missing base protasis or apply this as a free-standing omen."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 3-5","verification":"Full Yale/ORACC edition inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical lexical explanation only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.cloud_enters_cloud_as_stars",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"cloud_enters_another_cloud_during_eclipse"},
+      "conclusion": {"commentary_phenomenon":"star_enters_another_star","cloud_equated_with":"star","customer_prediction":false},
+      "priority": 100, "exceptions": ["Use only in this commentary witness; do not globally replace cloud with star."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 5-8","verification":"Full Yale/ORACC edition inspected; quoted base-text parallels recorded."}],
+      "evidence_grade":"A", "publication_limit":"Historical commentary display only.", "review_status":"Assyriologist and astronomy-history review required."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.color_reference_ambiguous",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_selector":"white_black_red_yellow_multicolored_or_very_dark"},
+      "conclusion": {"commentary_alternatives":["planetary_reference","cloud_reference","eclipse_shape"],"deterministic_resolution":false,"customer_prediction":false},
+      "priority": 110, "exceptions": ["Never add the three alternatives together or choose one without witness context."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse and reverse","location":"obv. 9-14, 22-23; rev. 39-40","verification":"All repeated color explanations inspected in the full edition."}],
+      "evidence_grade":"A", "publication_limit":"Return ambiguity in historical research output; no prediction.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.long_lived_king_abandoned_land",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_apodosis":"gods_make_king_live_long"},
+      "conclusion": {"commentary_target":"abandoned_land","original_king_target_redefined":true,"customer_prediction":false},
+      "priority": 110, "exceptions": ["Do not retain a personal or royal longevity reading after applying the commentary restriction."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 14-15 and note 8","verification":"Translation and note explicitly state that the scope clause redefines the target."}],
+      "evidence_grade":"A", "publication_limit":"Historical scope explanation only; no longevity prediction.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.halo_clear_winter",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"eclipse_moves_within_halo_and_clears"},
+      "conclusion": {"commentary_reading":"clears_during_winter_in_clear_sky","halo_equated_with":"clear_sky","customer_prediction":false},
+      "priority": 100, "exceptions": ["Do not use as a modern atmospheric visibility rule."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 15-17","verification":"Full transliteration and translation inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical semantic display only.", "review_status":"Assyriologist and history-of-astronomy review required."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.obscure_rising_alternatives",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"moon_rises_in_obscurity_until_clearing"},
+      "conclusion": {"commentary_alternatives":["rises_in_dark_cloud_then_brightens_sky","clears_at_beginning_of_winter"],"merge_alternatives":false,"customer_prediction":false},
+      "priority": 110, "exceptions": ["Named alternatives must be preserved separately."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 24-27","verification":"Full transliteration and translation inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical alternatives only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.obscure_setting_alternatives",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"moon_sets_in_obscurity"},
+      "conclusion": {"commentary_alternatives":["enters_and_sets_while_in_cloud","literal_setting_in_obscurity"],"merge_alternatives":false,"customer_prediction":false},
+      "priority": 110, "exceptions": ["Do not select the cloud interpretation automatically."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 26-30","verification":"Full transliteration and translation inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical alternatives only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.dark_middle_small_eclipse",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"moon_dark_in_middle_and_sprinkled"},
+      "conclusion": {"commentary_day":14,"commentary_eclipse_extent":"small","commentary_clearing":"quickly_to_right_and_left","customer_prediction":false},
+      "priority": 100, "exceptions": ["This is an ancient interpretation, not a validated modern eclipse-size algorithm."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"obverse","location":"lines 33-36","verification":"Full translation and collated readings inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical astronomical interpretation only.", "review_status":"Assyriologist and astronomy-history review required."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.fully_covered_thin_cloud",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"moon_dark_and_completely_covered"},
+      "conclusion": {"commentary_phenomenon":"eclipse_in_dark_thin_cloud","wordplay_not_observation":true,"customer_prediction":false},
+      "priority": 100, "exceptions": ["The glow/save explanation is commentarial wordplay and cannot generate an observation predicate."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 40-45","verification":"Full translation and explanatory notes inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical commentary display only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.scalp_disturbance_enemies",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"moon_obscure_and_scalp_darkens_sky"},
+      "conclusion": {"commentary_phenomenon":"disturbance_on_surface_of_sky","clarified_apodosis":"people_of_land_see_their_enemies","customer_prediction":false},
+      "priority": 100, "exceptions": ["Do not modernize 'enemies' into an individual relationship claim."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 46-48","verification":"Full translation and unambiguous commentarial rendering inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical state-omen explanation only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae16.commentary.fixed_interval_damaged",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 16","birth_input_eligible":false},
+      "conditions": {"base_expression":"moon_to_its_month_damaged"},
+      "conclusion": {"commentary_reading":"eclipse_from_one_fixed_time_to_another","executable":false,"customer_prediction":false},
+      "priority": 120, "exceptions": ["The base predicate is damaged; fail closed."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 48-49","verification":"Damage and translation inspected in full edition."}],
+      "evidence_grade":"A", "publication_limit":"Historical damaged-text display only.", "review_status":"Blocked from implementation pending base-text collation."
+    },
+    {
+      "rule_id": "babylonian.eae19.commentary.simanu_date_conflict",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 19 III 6","birth_input_eligible":false},
+      "conditions": {"base_date":{"month":"simanu","day":21},"sets_while_eclipsed":true},
+      "conclusion": {"commentary_region":"scorpius","commentary_days":[22,23],"date_conflict":true,"executable":false,"customer_prediction":false},
+      "priority": 120, "exceptions": ["Do not reconcile day 21 with commentary days 22-23 without philological review."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 52-54","verification":"Quoted base omen and commentary date/region interpretation inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical conflict display only.", "review_status":"Blocked from implementation pending controlling-edition and Assyriological collation."
+    },
+    {
+      "rule_id": "babylonian.eae19.commentary.tashritu_gula_elam",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 19","birth_input_eligible":false},
+      "conditions": {"month":"tashritu","day":14,"sets_while_eclipsed":true},
+      "conclusion": {"commentary_region":"Gula","region_equations":["rain","Elam","palace_iskaru_fields"],"customer_prediction":false},
+      "priority": 100, "exceptions": ["The damaged sky term and state apodosis remain historical only."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 55-58","verification":"Full quoted omen, commentary, and collated readings inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical geographic-equation display only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae19.commentary.arahsamna_pleiades_taurus",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 19 III 14","birth_input_eligible":false},
+      "conditions": {"month":"arahsamna","day":14,"sets_while_eclipsed":true},
+      "conclusion": {"commentary_alternative_scope":"halo_inner_part_in_pleiades_and_taurus","commentary_outcome":"plague","customer_prediction":false},
+      "priority": 100, "exceptions": ["The halo reading is an ancient alternative, not an additional eclipse selector."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 59-61","verification":"Full translation and uncertain section numbering inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical state-omen display only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae19.commentary.kislimu_orion_sagittarius",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 19 III 16","birth_input_eligible":false},
+      "conditions": {"month":"kislimu","day":14,"sets_while_eclipsed":true},
+      "conclusion": {"commentary_region_alternatives":["Orion","facing_Sagittarius"],"commentary_outcome":"plague","merge_alternatives":false,"customer_prediction":false},
+      "priority": 110, "exceptions": ["Do not merge Orion and Sagittarius or select one without witness context."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 62-63","verification":"Full translation inspected; alternative marker retained."}],
+      "evidence_grade":"A", "publication_limit":"Historical alternatives only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae19.commentary.shabatu_gemini",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 19 III 18","birth_input_eligible":false},
+      "conditions": {"month":"shabatu","day":14,"sets_while_eclipsed":true},
+      "conclusion": {"commentary_region":"Gemini","commentary_outcome":"plague","customer_prediction":false},
+      "priority": 100, "exceptions": ["State-omen apodosis is historical evidence only."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 64-65","verification":"Full translation and uncertain base-text citation inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical state-omen display only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae19.commentary.addaru_broken_region_dependency",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "achaemenid_commentary_on_earlier_omen", "domain": "omen",
+      "scope": {"artifact":"BM 47447","base_text":"EAE 19","birth_input_eligible":false},
+      "conditions": {"month":"addaru","day":14,"sets_while_eclipsed":true},
+      "conclusion": {"commentary_regions":["Virgo","Saturn"],"good_or_evil_requires":"comparison_of_month_region_with_land_destiny_region","dependency_broken":true,"executable":false,"customer_prediction":false},
+      "priority": 120, "exceptions": ["The decisive dependency is broken; never guess good or evil."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p461229","work":"Commentary on EAE 16-19","section":"reverse","location":"lines 65-67","verification":"Full translation inspected; break marker and unresolved comparison retained."}],
+      "evidence_grade":"A", "publication_limit":"Historical damaged-text display only.", "review_status":"Blocked from implementation pending additional witnesses."
+    },
+    {
+      "rule_id": "babylonian.eae21.commentary.gishgan_manuscript_error",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "neo_assyrian_commentary_on_eae21", "domain": "omen",
+      "scope": {"artifact":"Sm.683","base_text":"EAE 21 II 3","birth_input_eligible":false},
+      "conditions": {"manuscript_reading":"GIŠ.GAN"},
+      "conclusion": {"commentary_rationalization":"GIŠ.GAN_as_PA.GAN_mahasu_to_smite","editorial_assessment":"base_manuscript_error","normalize_other_witnesses":false,"customer_prediction":false},
+      "priority": 120, "exceptions": ["Preserve the erroneous reading and its ancient rationalization as witness-specific data."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p425538","work":"Commentary on EAE 21","section":"introduction and obverse","location":"introduction; lines 2-6; notes 2-4","verification":"Full Yale/ORACC edition and manuscript-error analysis inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical textual-criticism display only.", "review_status":"Assyriologist review required before implementation."
+    },
+    {
+      "rule_id": "babylonian.eae21.commentary.day21_sea_marsh",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "neo_assyrian_commentary_on_eae21", "domain": "omen",
+      "scope": {"artifact":"Sm.683","base_text":"EAE 21 II 5","birth_input_eligible":false},
+      "conditions": {"lunar_eclipse_day":21},
+      "conclusion": {"quoted_base_outcomes":["sea_produce_disappears","sea_becomes_marsh","bird_nests_there"],"commentary_gloss":"become_and_nest_equations","customer_prediction":false},
+      "priority": 100, "exceptions": ["Quoted base text is commentary-witness evidence until collated against the controlling edition."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p425538","work":"Commentary on EAE 21","section":"obverse","location":"lines 7-10 and notes 6-8","verification":"Full transliteration, translation, and notes inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical state/nature omen only; no personal prediction.", "review_status":"Controlling-edition collation required before base-rule implementation."
+    },
+    {
+      "rule_id": "babylonian.eae21.commentary.month5_day21_thunder",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "neo_assyrian_commentary_on_eae21", "domain": "omen",
+      "scope": {"artifact":"Sm.683","base_text":"EAE 21 IV 4","birth_input_eligible":false},
+      "conditions": {"babylonian_month":5,"lunar_eclipse_day":21},
+      "conclusion": {"quoted_base_outcomes":["Adad_thunders","god_devastates","after_year_Adad_smites_herds"],"month_gloss":"that_month","customer_prediction":false},
+      "priority": 100, "exceptions": ["Quoted base text is commentary-witness evidence until collated against the controlling edition."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p425538","work":"Commentary on EAE 21","section":"reverse","location":"lines 11-14 and note 9","verification":"Full transliteration, translation, and notes inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical state/nature omen only.", "review_status":"Controlling-edition collation required before base-rule implementation."
+    },
+    {
+      "rule_id": "babylonian.eae21.commentary.day20_rain_war_peace",
+      "tradition_id": "mesopotamian_babylonian", "school_id": "eae_ancient_commentary_witnesses", "period": "neo_assyrian_commentary_on_eae21", "domain": "omen",
+      "scope": {"artifact":"Sm.683","base_text":"EAE 21 VI 4","birth_input_eligible":false},
+      "conditions": {"lunar_eclipse_day":20},
+      "conclusion": {"quoted_base_outcomes":["rain_from_sky_and_source_floods_cease","land_goes_against_land","peace_occurs"],"commentary_gloss":"haqu_means_to_go","customer_prediction":false},
+      "priority": 100, "exceptions": ["Quoted base text is commentary-witness evidence until collated against the controlling edition."], "conflicts_with": [],
+      "source_passages": [{"edition_id":"ccp_p425538","work":"Commentary on EAE 21","section":"reverse","location":"lines 15-17 and note 10","verification":"Full transliteration, translation, and notes inspected."}],
+      "evidence_grade":"A", "publication_limit":"Historical state/nature omen only.", "review_status":"Controlling-edition collation required before base-rule implementation."
+    }
+  ]
+}

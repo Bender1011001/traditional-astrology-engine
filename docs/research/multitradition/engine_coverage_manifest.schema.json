@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traditional-astrology.com/schemas/engine-coverage-manifest-v1.json",
+  "title": "Multi-Tradition Engine Coverage Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "updated",
+    "purpose",
+    "status_vocabulary",
+    "implementation_states",
+    "global_product_boundary",
+    "coverage_counts_are_not_completion",
+    "tracks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 20
+    },
+    "status_vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "production_verified",
+        "research_verified",
+        "experimental",
+        "source_limited",
+        "not_implemented"
+      ],
+      "properties": {
+        "production_verified": {
+          "type": "string",
+          "minLength": 20
+        },
+        "research_verified": {
+          "type": "string",
+          "minLength": 20
+        },
+        "experimental": {
+          "type": "string",
+          "minLength": 20
+        },
+        "source_limited": {
+          "type": "string",
+          "minLength": 20
+        },
+        "not_implemented": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "implementation_states": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "validated_research_artifact",
+          "source_design_only",
+          "source_discovery_only",
+          "none"
+        ]
+      }
+    },
+    "global_product_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "western_engine_live",
+        "nonwestern_live_engines",
+        "nonwestern_customer_eligible_modules",
+        "historical_use_only_required",
+        "prose_may_invent_missing_rules",
+        "missing_modules_must_be_reported"
+      ],
+      "properties": {
+        "western_engine_live": {
+          "const": true
+        },
+        "nonwestern_live_engines": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "nonwestern_customer_eligible_modules": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "historical_use_only_required": {
+          "const": true
+        },
+        "prose_may_invent_missing_rules": {
+          "const": false
+        },
+        "missing_modules_must_be_reported": {
+          "const": true
+        }
+      }
+    },
+    "coverage_counts_are_not_completion": {
+      "type": "string",
+      "minLength": 40
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    }
+  },
+  "$defs": {
+    "relativeFile": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_./-]+\\.(json|md)$"
+    },
+    "coverageStatus": {
+      "enum": [
+        "production_verified",
+        "research_verified",
+        "experimental",
+        "source_limited",
+        "not_implemented"
+      ]
+    },
+    "implementationState": {
+      "enum": [
+        "validated_research_artifact",
+        "source_design_only",
+        "source_discovery_only",
+        "none"
+      ]
+    },
+    "birthEligibility": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "const": "conditional"
+        }
+      ]
+    },
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "module_id",
+        "name",
+        "input_kind",
+        "birth_input_eligible",
+        "coverage_status",
+        "implementation_state",
+        "artifacts",
+        "remaining_gates"
+      ],
+      "properties": {
+        "module_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 8
+        },
+        "input_kind": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "birth_input_eligible": {
+          "$ref": "#/$defs/birthEligibility"
+        },
+        "coverage_status": {
+          "$ref": "#/$defs/coverageStatus"
+        },
+        "implementation_state": {
+          "$ref": "#/$defs/implementationState"
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/relativeFile"
+          }
+        },
+        "remaining_gates": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 5
+          }
+        },
+        "live_engine": {
+          "const": false
+        },
+        "customer_eligible": {
+          "const": false
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "track_id",
+        "display_name",
+        "registry_tradition_ids",
+        "source_audit",
+        "overall_status",
+        "live_engine",
+        "customer_eligible",
+        "modules"
+      ],
+      "properties": {
+        "track_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 4
+        },
+        "registry_tradition_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          }
+        },
+        "source_audit": {
+          "$ref": "#/$defs/relativeFile"
+        },
+        "overall_status": {
+          "$ref": "#/$defs/coverageStatus"
+        },
+        "live_engine": {
+          "const": false
+        },
+        "customer_eligible": {
+          "const": false
+        },
+        "modules": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/module"
+          }
+        }
+      }
+    }
+  }
+}

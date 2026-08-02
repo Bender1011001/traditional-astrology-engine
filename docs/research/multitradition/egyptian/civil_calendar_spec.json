@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "pharaonic_egyptian",
+  "source_pack_id": "egyptian_civil_calendar_365_v1",
+  "artifact_status": "validated_research_artifact",
+  "publication_status": "research_only",
+  "purpose": "A fail-closed bijection for positions within the 365-day pharaonic Egyptian civil year. It supplies neither a default historical chronology nor hemerological judgments.",
+  "source_registry_ids": [
+    "egyptian_porceddu_periodicity_2008",
+    "egyptian_ucl_civil_calendar",
+    "egyptian_cpl_budge_1923_hieratic_papyri_second_series"
+  ],
+  "source_anchors": [
+    {
+      "source_id": "egyptian_porceddu_periodicity_2008",
+      "location": "PDF pages 1, 3-5; journal pages 327, 329-331",
+      "verified_claims": [
+        "The civil year contains twelve 30-day months plus five days upon the year.",
+        "Four months form each of Akhet, Peret and Shemu.",
+        "The compared hemerology data contain no preserved prognoses for the five heriu-renpet days; this is not proof that every original witness omitted them.",
+        "The 365-day year drifts against the natural seasons.",
+        "The three prognosis units and their time mapping are a separate interpretive problem."
+      ],
+      "sha256": "b6c15ade0035169fbfb697645bd3cac902aad47bbb123e05013207a3d68c3f52",
+      "bytes": 397561,
+      "pages": 13
+    },
+    {
+      "source_id": "egyptian_ucl_civil_calendar",
+      "location": "institutional calendar table",
+      "verified_claims": [
+        "The table lists four months in each of Akhet, Peret and Shemu followed by five epagomenal days.",
+        "The later Alexandrian/Coptic leap-day reform must not be back-projected into the pharaonic 365-day model."
+      ]
+    },
+    {
+      "source_id": "egyptian_cpl_budge_1923_hieratic_papyri_second_series",
+      "location": "PDF pp.38-39 / printed pp.34-35; Plates LXXXVIII-CXXVIII on PDF pp.231-311",
+      "verified_claims": [
+        "Sallier IV is a Calendar of Lucky and Unlucky Days preserved in twenty-three columns across two surviving portions.",
+        "The portion probably containing the Five Epagomenal Days is lost.",
+        "The loss of a source portion cannot be encoded as proof that the original calendar assigned no prognosis.",
+        "Selected English summaries and a facsimile do not supply a complete critical rule corpus."
+      ],
+      "sha256": "084058ed3a69936bcc56e1d96e1be0541a1f18f4d645e16dd1b9fec1a980f419",
+      "bytes": 152147349,
+      "pages": 317
+    }
+  ],
+  "calendar_model": {
+    "model_id": "pharaonic_civil_365",
+    "year_length_days": 365,
+    "ordinary_months": 12,
+    "ordinary_month_length_days": 30,
+    "ordinary_days": 360,
+    "additional_days": 5,
+    "intercalation": false,
+    "seasons": [
+      {"index": 0, "id": "akhet", "source_label": "Akhet", "months": 4},
+      {"index": 1, "id": "peret", "source_label": "Peret", "months": 4},
+      {"index": 2, "id": "shemu", "source_label": "Shemu", "months": 4}
+    ],
+    "additional_period": {"id": "heriu_renpet", "source_label": "heriu-renpet", "days": 5},
+    "position_contract": "Zero-based year positions 0-359 map to three seasons, four months per season and thirty days per month; positions 360-364 map to heriu-renpet days 1-5.",
+    "year_advance_contract": "Integer offsets use Euclidean division by 365 and return a signed year_delta plus the normalized position."
+  },
+  "chronology_contract": {
+    "default_profile": null,
+    "required_fields": [
+      "profile_id",
+      "tradition_id",
+      "model_id",
+      "anchor_civil_date",
+      "calendar_policy",
+      "anchor_egyptian_date",
+      "historical_regime",
+      "authority",
+      "uncertainty_days",
+      "locality",
+      "day_start"
+    ],
+    "required_tradition_id": "pharaonic_egyptian",
+    "required_model_id": "pharaonic_civil_365",
+    "supported_date_input": "An ISO civil date already resolved under the named calendar policy and day boundary.",
+    "unsupported_profiles": [
+      "Alexandrian or Coptic leap-year rules projected backward",
+      "A modern fixed month/day table treated as universal pharaonic chronology",
+      "An unnamed reign, epoch, locality, calendar policy or day boundary"
+    ],
+    "cache_key_fields": [
+      "profile_id",
+      "tradition_id",
+      "model_id",
+      "anchor_civil_date",
+      "anchor_egyptian_date",
+      "calendar_policy",
+      "historical_regime",
+      "locality",
+      "day_start",
+      "uncertainty_days"
+    ]
+  },
+  "hemerology_boundary": {
+    "ordinary_date_prognosis": "requires a separately selected and collated witness entry",
+    "heriu_renpet_prognosis": "no prognosis survives in the currently inspected main-calendar data; Sallier IV's likely epagomenal portion is lost, so historical absence is not proven",
+    "missing_witness_text_creates_negative_rule": false,
+    "three_part_time_mapping": "not implemented; source-specific and scholarly interpretation must remain explicit",
+    "modern_periodicity_creates_ancient_rule": false,
+    "calendar_position_creates_birth_reading": false
+  },
+  "output_contract": {
+    "allowed_fields": ["season_id", "month_in_season", "day", "year_position", "year_delta", "is_additional_day", "additional_day"],
+    "forbidden_fields": ["good_bad", "prognosis", "personality", "fate", "health", "death", "morality", "compatibility", "recommendation"]
+  },
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "birth_reading_enabled": false,
+    "historical_use_only": true,
+    "chronology_ready": false,
+    "hemerology_ready": false
+  },
+  "remaining_gates": [
+    "Acquire a controlling chronology for each historical regime and anchor.",
+    "Acquire and collate Bakir 1966 and Leitz 1994 against the papyri.",
+    "Encode witness-specific prognosis units, damage and restorations separately.",
+    "Obtain Egyptological, Hieratic and calendrical review.",
+    "Resolve museum-image and modern-edition rights before public display."
+  ]
+}

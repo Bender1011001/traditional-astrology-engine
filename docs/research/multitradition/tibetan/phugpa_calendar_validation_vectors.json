@@ -1,0 +1,80 @@
+{
+  "schema_version":1,
+  "updated":"2026-08-01",
+  "tradition_id":"tibetan",
+  "source_pack_id":"tibetan_phugpa_calendar_janson2014_v1",
+  "status":"research_vectors_complete_against_janson_secondary_reconstruction_no_institutional_conformance_or_live_engine",
+  "source_ids":["tibetan_janson_calendar_mathematics_2014","tibetan_mentseekhang_introduction_astroscience","tibetan_mentseekhang_calendar_almanac"],
+  "vectors":[
+    {
+      "vector_id":"tibetan.phugpa.losar.table1_2000_2030",
+      "rule_ids":["tibetan.phugpa.losar","tibetan.phugpa.day.true_date","tibetan.phugpa.month.true_count"],
+      "inputs":{"operation":"losar_table","years":[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]},
+      "expected":{"gregorian_dates":[[2000,2,6],[2001,2,24],[2002,2,13],[2003,3,3],[2004,2,21],[2005,2,9],[2006,2,28],[2007,2,18],[2008,2,7],[2009,2,25],[2010,2,14],[2011,3,5],[2012,2,22],[2013,2,11],[2014,3,2],[2015,2,19],[2016,2,9],[2017,2,27],[2018,2,16],[2019,2,5],[2020,2,24],[2021,2,12],[2022,3,3],[2023,2,21],[2024,2,10],[2025,2,28],[2026,2,18],[2027,2,7],[2028,2,26],[2029,2,14],[2030,3,5]]},
+      "provenance":"Janson 2014 Table 1 (PDF p. 2) and Table 9 Phugpa column (PDF p. 54)."
+    },
+    {
+      "vector_id":"tibetan.phugpa.leap_months.table7_2000_2020",
+      "rule_ids":["tibetan.phugpa.month.intercalation","tibetan.phugpa.month.true_count"],
+      "inputs":{"operation":"leap_month_table","year_start":2000,"year_end":2020},
+      "expected":{"leap_months":{"2000":1,"2002":10,"2005":6,"2008":3,"2010":11,"2013":8,"2016":4,"2019":1}},
+      "provenance":"Janson 2014 Table 7, Phugpa column (PDF p. 52)."
+    },
+    {
+      "vector_id":"tibetan.phugpa.skipped_repeated.table8_2012",
+      "rule_ids":["tibetan.phugpa.day.skipped_repeated","tibetan.phugpa.day.true_date","tibetan.phugpa.day.weekday"],
+      "inputs":{"operation":"year_day_anomalies","year":2012},
+      "expected":{"months":{"1":{"repeated":[5],"skipped":[19]},"2":{"repeated":[9,27],"skipped":[12,25]},"3":{"repeated":[],"skipped":[17]},"4":{"repeated":[3],"skipped":[10]},"5":{"repeated":[29],"skipped":[13]},"6":{"repeated":[],"skipped":[6]},"7":{"repeated":[25],"skipped":[9]},"8":{"repeated":[],"skipped":[1]},"9":{"repeated":[20],"skipped":[5,29]},"10":{"repeated":[],"skipped":[]},"11":{"repeated":[13],"skipped":[3,27]},"12":{"repeated":[17],"skipped":[21]}}},
+      "provenance":"Janson 2014 Table 8, Phugpa column (PDF pp. 53-54); minus signs denote skipped dates."
+    },
+    {
+      "vector_id":"tibetan.phugpa.repeated_day_two_jdns",
+      "rule_ids":["tibetan.phugpa.day.skipped_repeated","tibetan.phugpa.day.weekday"],
+      "inputs":{"operation":"lunar_date","year":2024,"month":2,"day":14,"leap":false},
+      "expected":{"status":"repeated","integer_jdns":[2460393,2460394],"gregorian_dates":[[2024,3,23],[2024,3,24]],"weekdays":[0,1]},
+      "provenance":"Derived boundary fixture from the exact Janson Phugpa equations; repeated dates occupy consecutive JDNs with distinct weekdays."
+    },
+    {
+      "vector_id":"tibetan.phugpa.skipped_day_no_jdn",
+      "rule_ids":["tibetan.phugpa.day.skipped_repeated"],
+      "inputs":{"operation":"lunar_date","year":2024,"month":2,"day":4,"leap":false},
+      "expected":{"status":"skipped","integer_jdns":[],"gregorian_dates":[]},
+      "provenance":"Derived boundary fixture from the exact Janson Phugpa equations."
+    },
+    {
+      "vector_id":"tibetan.phugpa.leap_month_order_2024",
+      "rule_ids":["tibetan.phugpa.month.intercalation","tibetan.phugpa.month.true_count"],
+      "inputs":{"operation":"leap_month_order","year":2024,"month":6},
+      "expected":{"is_leap_month":true,"leap_true_month_count":15069,"regular_true_month_count":15070,"consecutive":true,"leap_precedes_regular":true},
+      "provenance":"Derived from equations 5.10 and 5.42; order follows Janson section 5."
+    },
+    {
+      "vector_id":"tibetan.phugpa.epoch_equivalence",
+      "rule_ids":["tibetan.phugpa.epoch.equivalence","tibetan.phugpa.day.true_date","tibetan.phugpa.losar"],
+      "inputs":{"operation":"epoch_compare","epoch_profiles":["e806","e1927","e1987"],"dates":[{"year":2012,"month":1,"day":1,"leap":false},{"year":2024,"month":6,"day":4,"leap":true},{"year":2025,"month":9,"day":30,"leap":false}]},
+      "expected":{"all_integer_jdns_equal":true,"losar_2024_equal":true},
+      "provenance":"Janson explains that complete epoch constant sets yield the same calendar; equations and constants on PDF pp. 14, 22-24."
+    },
+    {
+      "vector_id":"tibetan.phugpa.a2_stated_divergences",
+      "rule_ids":["tibetan.phugpa.a2.profile_versioning","tibetan.phugpa.day.true_date"],
+      "inputs":{"operation":"a2_divergences","cases":[{"year":2000,"month":12,"day":17,"leap":false},{"year":2006,"month":3,"day":12,"leap":false},{"year":2025,"month":9,"day":29,"leap":false}]},
+      "expected":{"standard_jdns":[2451951,2453865,2460998],"lochen_jdns":[2451950,2453866,2460999],"civil_dates_named_by_source":[[2001,2,10],[2006,5,10],[2025,11,19]]},
+      "provenance":"Janson Remark 14 (PDF pp. 25-26) names JDN 2451951, 2453866, and 2460999 as modern dates where the two a2 choices differ."
+    },
+    {
+      "vector_id":"tibetan.phugpa.cross_lineage_nonidentity",
+      "rule_ids":["tibetan.phugpa.lineage.identity","tibetan.phugpa.losar"],
+      "inputs":{"operation":"lineage_boundary_fixture","year":2025},
+      "expected":{"phugpa_losar":[2025,2,28],"tsurphu_reference_losar":[2025,3,1],"merge_allowed":false,"cache_identity_equal":false},
+      "provenance":"Janson Table 9 gives Phugpa 28 February and Tsurphu 1 March for 2025. Tsurphu is reference data only, not implemented by this pack."
+    },
+    {
+      "vector_id":"tibetan.phugpa.publication_boundary",
+      "rule_ids":["tibetan.phugpa.publication.boundary","tibetan.phugpa.lineage.identity"],
+      "inputs":{"operation":"publication_contract","birth_date":"1990-01-01","birth_time":"12:00","birth_place":"London"},
+      "expected":{"calendar_facts_allowed":true,"interpretation_allowed":false,"institutional_conformance":false,"live_engine":false,"customer_prediction":false,"historical_use_only":true},
+      "provenance":"Research safety boundary: the secondary mathematical reconstruction does not authorize a living-tradition natal or predictive engine."
+    }
+  ]
+}
