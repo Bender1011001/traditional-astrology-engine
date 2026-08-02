@@ -1,23 +1,16 @@
 # Session handoff — multi-tradition reading platform
 
 Branch: `feat/multitradition-panel` (never touched `main`)
-Date: 2026-08-01
+Updated: 2026-08-02
 Mission: *one birth input → the best defendable reading each tradition supports*
 
 ## Bottom line
 
-M1–M4 shipped and committed, plus navamsha. M4's story matters: I recorded it
-as blocked (Getty client-rendered; "translation rights"), and both halves of
-that blocker fell to direct challenges from you — the rights concern was a
-reasoning error (the 16th-century originals are public domain and I read the
-languages), and the retrieval blocker fell in minutes once I used the in-app
-browser instead of raw fetches, exposing the backend JSON API. Ten folios are
-now hash-pinned, provenance-verified against the validated pack's own citation
-UUIDs, and the first Ce Cipactli auguries are encoded and rendering in the
-panel. M5–M6 not started.
-
-The panel renders one birth into **8 tradition sections**, and there is now an
-operational definition of "defendable" plus a test suite that can go red.
+**12 tradition sections render from one birth input**, each with an evidence
+grade, explicit disclosures, and refusals where the sources cannot speak. A
+cross-tradition convergence layer collapses those 12 into **6 independent
+voices** by calculation basis, so agreement is never manufactured from sections
+that share a chart.
 
 Run it:
 
@@ -25,9 +18,85 @@ Run it:
 python scripts/multitradition_panel.py --fixture fairfield --format markdown
 ```
 
-Demo artifact: **`docs/research/multitradition/demo_fairfield_panel.md`**
-(359 lines, your birth across all 8 traditions), committed and tracked.
-(`artifacts/` is gitignored, so the demo lives under `docs/`.)
+Demo: `docs/research/multitradition/demo_fairfield_panel.md` (1223 lines).
+
+| | Check | Result |
+|---|---|---|
+| Tests | `test_multitradition_panel.py` + `test_multitradition_convergence.py` | **137 passing** |
+| Worked examples | 4 suites (Maya, Jyotisha, BaZi, Tibetan) | **33/33 claims**, mutation-tested |
+| Research corpus | `validate_research_corpus.py` | pass — 194 rules, 244 vectors, 0 non-Western live |
+| Coverage | `validate_engine_coverage.py` | pass — 20 tracks, 74 modules |
+| Lint | session-owned files | clean |
+| Live engine | premium pipeline, checkout | untouched |
+
+## The 12 sections
+
+| Tradition | Grade | What it does |
+|---|---|---|
+| Western | live engine | tropical positions, sect, whole-sign |
+| Islamicate | validated pack | **computed** halb/hayyiz, firdaria ordering, 8 lineage variants |
+| Medieval Jewish | validated pack | Ibn Ezra revolutions profile |
+| Vedic | configured | navamsha, drishti, antardasha, combustion, **yogas with constituent facts** |
+| BaZi | configured | pillars, hidden stems, **month command**, Ten Gods, luck pillars |
+| Tibetan | configured | year character, rabjung |
+| Maya | validated pack | Long Count/Tzolk'in/Haab/Lord of Night, both correlations |
+| Nahua | validated pack | **quotes Book 4 auguries** from hash-pinned witnesses |
+| Babylonian | configured | omen mode — state omens, genre boundary refused |
+| Egyptian | validated pack | 365-day model; refuses to place the birth |
+| Ziwei | transcription | Wenchang/Wenqu only; refuses the chart itself |
+| Vietnamese | configured | full lunisolar date; all 5 pack vectors reproduce |
+
+## Findings worth reading
+
+- **Vedic**: independently reproduced the yoga analysis computed by hand earlier
+  in the session (Mars yogakaraka, Jupiter–Venus Raja Yoga, Mercury Dhana Yoga),
+  and yogakaraka detection reproduces the classical list with no lookup table.
+  Saturn is neutral in D1 Pisces but **exalted in D9 Libra** — a D1-only verdict
+  would have been wrong, which is exactly why navamsha is mandatory.
+- **Islamicate**: Mercury holds **halb without hayyiz**, so the pack's one-way
+  implication shows up in the chart itself. Mercury's classification **fails
+  closed** in 3 of 4 fixtures because al-Biruni 385–386 states no conflict
+  priority.
+- **Babylonian**: **0 omens matched** for Fairfield out of 72 protases — every
+  encoded protasis presupposes a lunar eclipse. Orb is zero on every axis and
+  three widenings are named and refused. A synthetic eclipse sky yields 11
+  matches, proving the zero is evidence, not a broken matcher.
+- **Egyptian**: refuses to place the birth at all. `default_profile` is null and
+  the year drifts a day per 4 years, so an unanchored conversion is wrong by an
+  unbounded amount.
+- **Ziwei**: refuses its own chart — life/body palaces need the lunar month and
+  the pack registers no conversion, *including* an explicit refusal to borrow the
+  Vietnamese kernel sitting in the same panel.
+- **Convergence**: the refusal agreement lists 5 traditions but counts 4 voices,
+  because Vietnamese and Ziwei share the sexagenary basis.
+
+## Corrections made this session
+
+1. **"Translation is a gate" was wrong** and is withdrawn corpus-wide. The
+   originals are public domain and readable directly; only *rule promotion* into
+   a validated pack still wants specialist review. This was blocking three
+   Islamicate modules whose Arabic TEI was already hash-pinned in the repo.
+2. **Getty "client-rendered" was not a real blocker** — the app's `__NEXT_DATA__`
+   names a backend serving folio JSON to plain HTTP. 150 folios now pinned.
+3. **Tibetan element anchor bug**: returned Wood Mouse for 1996 instead of Fire
+   Mouse. Fixed by deriving from the sexagenary cycle; now a worked example.
+
+## In flight
+
+A subagent is reading Classical Nahuatl across the 150 pinned folios to encode
+the remaining 19 trecena chapters. 4 statements encoded so far (Ce Cipactli).
+
+## Next
+
+1. Finish the Nahua 20-trecena encoding.
+2. BaZi branch relations (combinations, clashes, harms, punishments) — the last
+   `computable` item on that spec.
+3. Jyotisha worked examples from the four archive translations (page inspection).
+4. Korean/Mongolian/Burmese/Thai/Khmer profiles over the shared cores.
+
+---
+
+## Earlier milestone detail (M1–M4)
 
 ## Status by milestone
 
