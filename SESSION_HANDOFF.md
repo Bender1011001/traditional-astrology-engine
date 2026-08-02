@@ -6,10 +6,15 @@ Mission: *one birth input → the best defendable reading each tradition support
 
 ## Bottom line
 
-M1–M3 shipped and committed, plus navamsha — the one gap M2 identified as blocking a defendable Vedic reading. **M4 is blocked on source access and rights, not
-on effort** — recorded rather than worked around, because faking it would have
-produced exactly the unsourced content the whole standard exists to prevent.
-M5–M6 not started.
+M1–M4 shipped and committed, plus navamsha. M4's story matters: I recorded it
+as blocked (Getty client-rendered; "translation rights"), and both halves of
+that blocker fell to direct challenges from you — the rights concern was a
+reasoning error (the 16th-century originals are public domain and I read the
+languages), and the retrieval blocker fell in minutes once I used the in-app
+browser instead of raw fetches, exposing the backend JSON API. Ten folios are
+now hash-pinned, provenance-verified against the validated pack's own citation
+UUIDs, and the first Ce Cipactli auguries are encoded and rendering in the
+panel. M5–M6 not started.
 
 The panel renders one birth into **8 tradition sections**, and there is now an
 operational definition of "defendable" plus a test suite that can go red.
@@ -31,7 +36,7 @@ Demo artifact: **`docs/research/multitradition/demo_fairfield_panel.md`**
 | M1 | Calculation panel, 8 traditions | **shipped** | `ecbde9c` |
 | M2 | Defensibility standard + 7 specs | **shipped** | `7b06327` |
 | M3 | Worked-example suite + runner | **shipped** | `b5de1ed` |
-| M4 | Nahua reading pack | **blocked** | `c78e47c` (blocker recorded) |
+| M4 | Nahua reading pack | **shipped** (was blocked; user challenge broke it open) | see final commits |
 | M5 | Babylonian omen mode | not started | — |
 | M6 | BaZi Ten Gods, Tibetan obstacle years | not started | — |
 | — | BaZi research kernel (carried over) | shipped | `2fbd991` |
@@ -44,7 +49,7 @@ Demo artifact: **`docs/research/multitradition/demo_fairfield_panel.md`**
 | `validate_research_corpus.py` | **pass** — 160 sources, 19 manifests, 194/194 rules vector-covered, 244 vectors, 7 defensibility specs, 2 worked-example suites, **0 non-Western live engines** |
 | `validate_engine_coverage.py` | **pass** — 20 tracks, 74 modules |
 | `validate_worked_examples.py` | **pass** — 13/13 claims across 4 comparable examples |
-| `pytest src/tests/test_multitradition_panel.py` | **27 passed** |
+| `pytest src/tests/test_multitradition_panel.py` | **29 passed** |
 | `ruff` | clean across all new code |
 | Live engine / premium / checkout | **untouched** (the two modified `auth.py` files predate this session) |
 

@@ -333,6 +333,7 @@ Long Count, Tzolk'in, and Haab arithmetic from the validated Maya calendar kerne
 
 - **Refused — Civil-date correlation.** The validated pack registers NO approved correlation between the tonalpohualli and the civil calendar, and explicitly forbids reusing a Maya correlation merely because both traditions run 260-day counts. The cycle position below is therefore computed under a labeled non-historical fixture and must not be read as this person's day sign.
 - **Source — Kernel provenance.** Day-sign order and the 260-position recurrence come from the validated nahua_tonalpohualli_cycle_v1 pack, anchored to Florentine Codex Book 4 folio 1r and the INAH-hosted trecena table.
+- **Source — Reading corpus.** Quotations below come from Florentine Codex Book 4 via hash-pinned witness files fetched from the Getty backend, quoted in the public-domain Nahuatl with an independent English rendering graded engine_translation_unreviewed. Folio and text-record identifiers accompany every quotation.
 
 **Calculation**
 
@@ -348,6 +349,20 @@ Long Count, Tzolk'in, and Haab arithmetic from the validated Maya calendar kerne
   - **coefficients**: 13
   - **day signs**: 20
   - **joint period days**: 260
+- **augury pack**:
+  - **pack id**: nahua_book4_augury_v1
+  - **statements**: 4
+  - **scope**: Pilot: Chapter 1 (Ce Cipactli) only, from pinned folios 1r-2r. The pack quotes the corpus; it never assigns a day sign to a birth, because no civil-date correlation is approved.
+
+**Reading**
+
+What the corpus itself teaches (Ce Cipactli chapter, quoted as demonstration - not assigned to your birth):
+
+Folio 1r, chapter heading: “First chapter, which tells of the first sign, named One Cipactli, and of the good day-fortune that those born then merited, men and women alike: yet these same people could destroy it, could forfeit it by their own act, because of their laziness.” [Nahuatl: Injc ce capitulo, itechpa tlatoa, injc centetl machiotl: in jtoca ce cipactli, i…]
+
+Folio 2r, the forfeiture clause: “And they also said: even though he was born on a good day sign, if he does not do penance well, if he does not take counsel with himself, if he does not accept and apply to himself the cold water and the nettle - the admonitions, the instruction, the words of the old men and the old women - if he merely turns corrupt, becomes wicked, follows no road at all: nothing comes of it; he destroys it entirely by his own doing.”
+
+The doctrine: a day sign grants a potential that conduct completes or destroys. It is the structural opposite of a personality trait - which is why this section quotes the corpus and refuses the trait table.
 
 ---
 

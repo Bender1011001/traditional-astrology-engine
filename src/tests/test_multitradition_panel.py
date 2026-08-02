@@ -222,6 +222,57 @@ def test_nahua_refuses_a_correlation(fairfield_panel: dict) -> None:
     assert "fixture" in section["facts"]["fixture_anchor_note"].lower()
 
 
+def test_nahua_reading_quotes_corpus_without_personalizing(
+    fairfield_panel: dict,
+) -> None:
+    """The reading must quote the corpus AND keep the day-sign refusal."""
+    section = _section(fairfield_panel, "nahua_central_mexican")
+    assert section.get("reading"), "Nahua reading section missing"
+    joined = " ".join(section["reading"])
+    # Quotes the corpus...
+    assert "Cipactli" in joined
+    assert "forfeiture" in joined.lower() or "destroy" in joined.lower()
+    # ...without assigning it to the reader.
+    assert "not assigned to your birth" in joined
+    # The correlation refusal must survive alongside the reading.
+    assert section["facts"]["correlation_status"] == "unresolved_no_approved_epoch"
+
+
+def test_nahua_augury_pack_witnesses_resolve() -> None:
+    """Every statement's witness file and text-record UUID must exist."""
+    import json
+    from pathlib import Path
+
+    root = Path("docs/research/multitradition/nahua")
+    pack = json.loads((root / "book4_augury_pack.json").read_text(encoding="utf-8"))
+    assert pack["statements"], "augury pack is empty"
+    for statement in pack["statements"]:
+        witness_path = root / statement["witness"]["file"]
+        assert witness_path.is_file(), f"missing witness {witness_path}"
+        record = json.loads(witness_path.read_text(encoding="utf-8"))
+        ids = {
+            item["id"]
+            for column in ("nahuatl_col", "spanish_col")
+            for item in record["texts"][column]
+        }
+        assert statement["witness"]["text_record_id"] in ids, statement["statement_id"]
+        # The quoted Nahuatl must actually appear in the witness markdown
+        # (normalized for the diacritic stripping used in the pack).
+        source_text = " ".join(
+            item.get("markdown") or ""
+            for column in ("nahuatl_col", "spanish_col")
+            for item in record["texts"][column]
+        )
+        probe = statement["nahuatl"][:40]
+        normalized_source = (
+            source_text.replace("ç", "c").replace("â", "a").replace("ã", "a")
+            .replace("õ", "o").replace("ô", "o")
+        )
+        assert probe[:25] in normalized_source or probe[:25] in source_text, (
+            f"quotation not found in witness for {statement['statement_id']}"
+        )
+
+
 def test_tibetan_year_character_anchors() -> None:
     assert year_character(1027) == {
         "element": "Fire",

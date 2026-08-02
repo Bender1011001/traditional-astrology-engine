@@ -93,6 +93,13 @@ def _render_section(section: dict[str, Any]) -> list[str]:
         lines.extend(_render_facts(facts))
         lines.append("")
 
+    if section.get("reading"):
+        lines.append("**Reading**")
+        lines.append("")
+        for paragraph in section["reading"]:
+            lines.append(paragraph)
+            lines.append("")
+
     lines.extend(["---", ""])
     return lines
 

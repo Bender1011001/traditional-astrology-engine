@@ -22,6 +22,7 @@ RESEARCH_ROOT = (
 )
 MAYA_SPEC = RESEARCH_ROOT / "maya" / "calendar_kernel_spec.json"
 NAHUA_SPEC = RESEARCH_ROOT / "nahua" / "tonalpohualli_cycle_spec.json"
+NAHUA_AUGURY_PACK = RESEARCH_ROOT / "nahua" / "book4_augury_pack.json"
 
 # Lords of the Night are not encoded in the validated Maya pack; the nine-fold
 # series is computed here under a disclosed configured formula.
@@ -185,4 +186,60 @@ def build_nahua(birth: BirthInput, bases: TimeBases) -> TraditionSection:
             "joint_period_days": spec["cycle"]["joint_period_days"],
         },
     }
+
+    _attach_nahua_reading(section)
     return section
+
+
+def _attach_nahua_reading(section: TraditionSection) -> None:
+    """Quote the Book 4 corpus from hash-pinned witnesses.
+
+    This is corpus demonstration, not personalization: because no correlation is
+    approved, the reading presents what the source says about its own count -
+    the conditional-fortune doctrine - and explicitly does not connect any of it
+    to the reader's birth date.
+    """
+    if not NAHUA_AUGURY_PACK.is_file():
+        return
+    pack = json.loads(NAHUA_AUGURY_PACK.read_text(encoding="utf-8"))
+    statements = {s["statement_id"]: s for s in pack["statements"]}
+
+    section.disclose(
+        DisclosureKind.SOURCE,
+        "Reading corpus",
+        "Quotations below come from Florentine Codex Book 4 via hash-pinned "
+        "witness files fetched from the Getty backend, quoted in the "
+        "public-domain Nahuatl with an independent English rendering graded "
+        f"{pack['translation_grade']}. Folio and text-record identifiers "
+        "accompany every quotation.",
+    )
+
+    heading = statements.get("nahua.book4.ch1.heading_conditional_fortune")
+    forfeiture = statements.get("nahua.book4.trecena1.forfeiture")
+    reading: list[str] = [
+        "What the corpus itself teaches (Ce Cipactli chapter, quoted as "
+        "demonstration - not assigned to your birth):",
+    ]
+    if heading:
+        reading.append(
+            f"Folio {heading['witness']['folio']}, chapter heading: "
+            f"“{heading['engine_rendering']}” "
+            f"[Nahuatl: {heading['nahuatl'][:80]}…]"
+        )
+    if forfeiture:
+        reading.append(
+            f"Folio {forfeiture['witness']['folio']}, the forfeiture clause: "
+            f"“{forfeiture['engine_rendering']}”"
+        )
+        reading.append(
+            "The doctrine: a day sign grants a potential that conduct completes "
+            "or destroys. It is the structural opposite of a personality trait - "
+            "which is why this section quotes the corpus and refuses the trait "
+            "table."
+        )
+    section.reading = reading
+    section.facts["augury_pack"] = {
+        "pack_id": pack["pack_id"],
+        "statements": len(pack["statements"]),
+        "scope": pack["scope_note"],
+    }

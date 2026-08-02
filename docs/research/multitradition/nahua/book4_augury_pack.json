@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "nahua_central_mexican",
+  "pack_id": "nahua_book4_augury_v1",
+  "kind": "passage_quotation_pack",
+  "publication_status": "research_only",
+  "translation_grade": "engine_translation_unreviewed",
+  "witness_manifest": "florentine_book4/access_manifest.json",
+  "rights_basis": "Statements quote the 16th-century Nahuatl and Spanish transcription columns (public domain) from hash-pinned witnesses, with an independent English rendering. The modern Anderson & Dibble and Garcia Garagarza translations were consulted for verification only and are not reproduced beyond bracketed-emendation facts.",
+  "scope_note": "Pilot: Chapter 1 (Ce Cipactli) only, from pinned folios 1r-2r. The pack quotes the corpus; it never assigns a day sign to a birth, because no civil-date correlation is approved.",
+  "statements": [
+    {
+      "statement_id": "nahua.book4.ch1.heading_conditional_fortune",
+      "topic": "chapter_heading",
+      "day_sign_id": "cipactli",
+      "trecena": 1,
+      "witness": {
+        "file": "florentine_book4/folio_1r.json",
+        "folio": "1r",
+        "text_record_id": "31115076-d898-4f81-a89d-a1c9cbeac8ab",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc ce capitulo, itechpa tlatoa, injc centetl machiotl: in jtoca ce cipactli, ioan in qualli tonalli in qujmaceoaia, in vncan tlacatia, in toqujchti, in cioa: can iehoantin qujpoloaia, qujmotlacalhujaia, yn jpampa in jntlatziviliz.",
+      "spanish_parallel": {
+        "text_record_id": "ecfe83af-d58b-412c-ab44-7ea2100b803d",
+        "excerpt": "Capitulo I del primero signo, llamado Ce Cipactli, y de la buena fortuna que tenian los que en el nacian, ansi hombres como mujeres, si no la perdian por su negligencia o floxura"
+      },
+      "engine_rendering": "First chapter, which tells of the first sign, named One Cipactli, and of the good day-fortune that those born then merited, men and women alike: yet these same people could destroy it, could forfeit it by their own act, because of their laziness.",
+      "doctrinal_note": "The conditionality is in the chapter heading itself, in both languages: the fortune is merited (qujmaceoaia) and can be lost through one's own negligence (tlatziviliz / floxura). Any rendering of this corpus as an unconditional trait table misstates the source from its first sentence."
+    },
+    {
+      "statement_id": "nahua.book4.trecena1.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "cipactli",
+      "trecena": 1,
+      "witness": {
+        "file": "florentine_book4/folio_1v.json",
+        "folio": "1v",
+        "text_record_id": "7475a66e-aba7-447e-b21b-9fe9fc90c69b",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injn matlactetl vmei in tonalli, in iuhquj itlavilanoan muchioa, yn jtech povi: iehoatl in vme acatl, ey calli, navi cuetzpali, macujlli coatl, chiquacen mjqujztli, chicome macatl, chicuei tochtli, chicunavi atl, matlactli itzcujntli, matlactli oce ocomatli, matlactli vmome malinalli, matlactli omej acatl.",
+      "engine_rendering": "These thirteen days become as its dependents, belonging to it: Two [Wind], Three House, Four Lizard, Five Serpent, Six Death, Seven Deer, Eight Rabbit, Nine Water, Ten Dog, Eleven Monkey, Twelve Grass, Thirteen Reed.",
+      "witness_variant": {
+        "reading": "The witness writes 'vme acatl' (Two Reed) as the second member, where the cycle requires Two Wind (ecatl); the list closes correctly with 'matlactli omej acatl' (Thirteen Reed).",
+        "assessment": "Near-certain scribal variant for 'vme ecatl'. The standard scholarly translation emends to 'Two [Wind]' in brackets with a note, which independently confirms this reading. Preserved here rather than silently corrected.",
+        "kernel_crosscheck": "The validated tonalpohualli kernel gives trecena 1 as coefficients 1-13 over signs cipactli, ehecatl, calli, cuetzpalin, coatl, miquiztli, mazatl, tochtli, atl, itzcuintli, ozomatli, malinalli, acatl - agreeing with the witness list at every position except the attested variant."
+      }
+    },
+    {
+      "statement_id": "nahua.book4.trecena1.augury",
+      "topic": "augury",
+      "day_sign_id": "cipactli",
+      "trecena": 1,
+      "witness": {
+        "file": "florentine_book4/folio_1v.json",
+        "folio": "1v",
+        "text_record_id": "7475a66e-aba7-447e-b21b-9fe9fc90c69b",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "In jzqujtetl in tonalli: iuh mjtoaia, muchi qualli: in aqujn ipan tlacatia pilli; mjtoaia tecutiz, tlatocatiz, motlacamatiz, mocujltonoz, motlamachtiz: Auh intla maceoalli ipan tlacatia, oqujchtiz, tiacauhtiz, maviztiz, panvetziz, motleiotiz, onca qujquanj iez: auh intla cioatl ipan tlacati, no motlacamatiz,",
+      "engine_rendering": "All of these days, it was said, were entirely good. He who was born then a noble, it was said, would become a lord, would rule, would be obeyed, would be rich, would prosper. And if a commoner were born then, he would become a man, a brave warrior, honored, risen high, renowned; he would have food to eat. And if a woman were born then, she too would be obeyed,",
+      "doctrinal_note": "The augury is stratified by social station and sex - noble, commoner, woman each receive a distinct formulation of the good fortune. Flattening these into one trait erases the source's own structure. The woman's augury continues onto folio 2r: she prospers, feeds people, hosts, is obeyed; through her the suffering are refreshed; her marketplace dealings succeed."
+    },
+    {
+      "statement_id": "nahua.book4.trecena1.forfeiture",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "cipactli",
+      "trecena": 1,
+      "witness": {
+        "file": "florentine_book4/folio_2r.json",
+        "folio": "2r",
+        "text_record_id": "da4c88b1-573b-4c18-b4a9-f11243662279",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh no yoa quitoaia: ma nel ivi in qualli itonal ipan otlacat, intlacamo vellamaceoa, intlacamo vel monotza, intlacamo qujcuj, intlacamo itech qujpachoa, in atl cecec, in tzitzicaztli, yn inonotzaloca, in izcaliloca, in veuetlatolli, yn jlamatlatolli, in can tlaueliloti, tlavelilocati, in can aie vtli qujtoca, atle onqujca, can ynevian mopopoloa,",
+      "engine_rendering": "And they also said: even though he was born on a good day sign, if he does not do penance well, if he does not take counsel with himself, if he does not accept and apply to himself the cold water and the nettle - the admonitions, the instruction, the words of the old men and the old women - if he merely turns corrupt, becomes wicked, follows no road at all: nothing comes of it; he destroys it entirely by his own doing.",
+      "doctrinal_note": "The forfeiture clause. 'The cold water, the nettle' (in atl cecec, in tzitzicaztli) is the standard Nahuatl difrasismo for corrective discipline. This paragraph is the doctrine the defensibility spec ordered preserved: the day sign grants a potential that conduct completes or destroys. It is the structural opposite of a personality trait."
+    }
+  ]
+}
