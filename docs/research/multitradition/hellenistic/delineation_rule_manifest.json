@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "hellenistic",
+  "school_id": "firmicus_and_ptolemy_2nd_4th_century",
+  "source_pack_id": "hellenistic_firmicus_ptolemy_delineation_v1",
+  "source_edition_id": "firmicus_kroll_skutsch_ziegler_1897_1913_and_ptolemy_boll_boer_teubner_stereotype_reprint",
+  "source_registry_ids": [
+    "hellenistic_firmicus_mathesis_kroll_skutsch_1897_vol1",
+    "hellenistic_firmicus_mathesis_kroll_skutsch_ziegler_1913_vol2",
+    "hellenistic_ptolemy_tetrabiblos_boll_boer_teubner",
+    "hellenistic_valens_anthologiae_kroll_1908",
+    "hellenistic_valens_riley_translation_reading_aid"
+  ],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "Every rule below was extracted directly from the fetched OCR text of a public-domain critical edition: Firmicus Maternus, Mathesis (Kroll/Skutsch 1897 vol.1 = books I-IV+, Kroll/Skutsch/Ziegler 1913 vol.2 = books V-VIII), which is clean, well-behaved Latin OCR, and Claudius Ptolemy, Apotelesmatika (Boll/Boer Teubner edition, a later 'editio stereotypa correctior' of the 1940 first edition), whose Greek OCR is genuine polytonic Unicode with ordinary noise. NEITHER of these page ranges was collated against a page image; both are graded accordingly (evidence_grade B, not A) per this corpus's own convention (see the Byzantine Rhetorius pack for the same page-image-vs-OCR distinction). Renderings are the engine's own from the Latin/Greek and are graded engine_translation_unreviewed; no modern copyrighted translation is cited as source authority anywhere in this file. Vettius Valens' Anthologiae (Kroll 1908 Greek critical edition) was ALSO fetched and hashed but its OCR text layer is a total, whole-document failure: a full-file scan found zero genuine Greek Unicode characters in 1,100,625 characters of text (see source_audit.md) - the same failure class documented for the Lydus De ostentis text in the Byzantine pack (Latin-glyph misidentification of a polytonic Greek font). No rule below rests on Valens; his sect chapter (Anthologiae I.1) and his own nativity (traditionally located in the later books) are named in the worked-example inventory as known-but-blocked leads, using Mark Riley's modern English translation ONLY to confirm their existence and approximate location, never as quoted source authority, per DEFENSIBILITY.md's 'translation is not a gate for quotation' section - the blocker here is genuinely access/OCR quality, not language or rights.",
+  "rules": [
+    {
+      "rule_id": "hel.firmicus.sect_diurnal_trio_and_lacuna",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE, Roman North Africa/Sicily",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "sect (hairesis) of the diurnal trio", "book_chapter": "Mathesis II.7 'De stellarum conditione'", "engine_fields": ["facts.sect", "placements[].sect_status for Sun, Jupiter, Saturn"]},
+      "conditions": {
+        "trigger": "a diurna genitura (the Sun above the horizon; engine facts.sect == 'day')",
+        "subjects": ["Sol", "Iuppiter", "Saturnus"]
+      },
+      "conclusion": {
+        "judgment": "The Sun, Jupiter and Saturn rejoice by day; Jupiter and Saturn therefore follow the Sun's condition.",
+        "latin": "Expositis finibus atque monstratis explicare debemus, quae stellae per diem gaudeant et cuius conditionem sequantur... Per diem gaudent Sol Iuppiter <Saturnus>; conditionem itaque Solis secuntur Iuppiter et Saturnus; [non] ideo in diurnis genituris in oportunis locis positi ****************",
+        "engine_rendering": "Having set out the bounds, we must now explain which stars rejoice by day and whose condition they follow... By day the Sun, Jupiter and Saturn rejoice; Jupiter and Saturn therefore follow the Sun's condition; and so, placed in favourable places in day nativities, [they bring about good things] ...",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "matches the diurnal sect set {Sun, Jupiter, Saturn} that the engine's _sect_status() treats as 'of the sect in favour' when facts.sect == 'day'",
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [
+        "Kroll/Skutsch print '<Saturnus>' as their own editorial supplement; the manuscripts read only 'Sol Iuppiter' at that point, so Saturn's inclusion in the diurnal trio here rests on the editors' judgment, not a manuscript reading - though it is confirmed independently by Ptolemy (hel.ptolemy.sect_diurnal_nocturnal_assignment) and by Firmicus's own later statement that Jupiter does not rejoice at night (hel.firmicus.jupiter_no_joy_at_night, which presupposes the day/night contrast).",
+        "The chapter breaks off in a marked lacuna (printed as a row of asterisks by Kroll/Skutsch) immediately after this sentence, before the parallel nocturnal-trio statement could follow; the editors' index of chapters lost from the old manuscript branch (Kroll/Skutsch p.50 apparatus) lists 'De stellis quando sint matutinae', 'De scematibus stellarum' and 'De moribus stellarum' among the material missing here in the oldest witnesses.",
+        "The complementary night list (Moon, Venus, Mars) is not recovered as a single explicit sentence anywhere in the two fetched volumes; it is triangulated from Firmicus's own cross-references ('stellae... quas diximus gaudere per noctem', II.20) and from Ptolemy's explicit, undamaged statement of the same doctrine."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.7.1-2 (Kroll/Skutsch p. 49)", "location": "fetched OCR text, firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt lines 2691-2703", "verification": "read directly from the fetched OCR text; the printed page number '49' and the chapter heading 'VII. DE STELLARUM CONDITIONE.' at line 2691 were both visually confirmed in the surrounding OCR"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.sect_first_judgment_hierarchy",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "judgment order: sect must be established before angularity is read", "book_chapter": "Mathesis II.20 (de nominibus duodecim locorum, continued)"},
+      "conditions": {
+        "instruction": "for every planet under judgment, first determine whether the nativity is diurna or nocturna, then identify which stars rejoice (gaudent) in that sect, and only then examine their house placement"
+      },
+      "conclusion": {
+        "judgment": "Sect must be checked first, and the same angular test is applied with its outcome reversed between a day chart and a night chart.",
+        "latin": "Quaere etiam, si diurna genitura est, quatenus stellae, quae diurnis genituris gaudent, positae sint et quatenus quae nocturnis... Hoc et in nocturnis genituris observare debemus, sed inmutato ordine potestatis.",
+        "engine_rendering": "Also inquire, if it is a day nativity, where the stars that rejoice in day nativities are placed, and where those that rejoice in night ones are placed... We must observe this in night nativities too, but with the order of power reversed.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "function": "this is the tradition's own instruction that sect is checked before any other placement-based judgment, matching the engine's own disclosed reading order ('Sect is the first judgment')",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.20.11-12 (Kroll/Skutsch p. 66)", "location": "fetched OCR text lines 3608-3621", "verification": "read directly from the fetched OCR text; running page header 'II 20,3-13. 67' visible at line 3592 confirms Book II chapter 20"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.sect_angular_felicity_or_calamity",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "consequence of sect status when angular", "book_chapter": "Mathesis II.20", "engine_fields": ["placements[].sect_status", "placements[].whole_sign_house (1,4,7,10)"]},
+      "conditions": {
+        "case_favor": "a planet of the sect in favour ('quae per diem/noctem gaudent' matching the nativity's own sect) occupies a principal place or first angle",
+        "case_contrary": "a planet contrary to the sect occupies a principal place or first angle of that same (day or night) nativity"
+      },
+      "conclusion": {
+        "if_favor": "it decrees the greatest increases of felicity",
+        "if_contrary": "it brings in endless misfortunes with continued calamities",
+        "latin": "si enim stellae, quae per diem gaudent, in diurna genitura principales locos possederint et in primis cardinibus fuerint inventae, maxima felicitatis incrementa decernunt. Si vero stellae, quas per noctem gaudere diximus, in diurna genitura principalia loca vel primos geniturae possederint cardines, infinita infortunia continuatis calamitatibus indicunt.",
+        "engine_rendering": "For if the stars that rejoice by day hold the principal places in a day nativity and are found in the first angles, they decree the greatest increases of felicity. But if the stars we have said rejoice by night hold the principal places or the first angles of a day nativity, they bring in endless misfortunes through continued calamities.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "keys directly to sect_status ('of the sect in favour' vs 'contrary to the sect') combined with whole_sign_house in {1,4,7,10}",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": ["The night-chart mirror of this same rule (same clause, order of power reversed) is stated in the immediately following sentence, II.20.12."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.20.11-13 (Kroll/Skutsch p. 66)", "location": "fetched OCR text lines 3608-3625", "verification": "read directly from the fetched OCR text; continuous with hel.firmicus.sect_first_judgment_hierarchy"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.jupiter_no_joy_at_night",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "Jupiter excluded from the nocturnal sect", "book_chapter": "Mathesis III (chapter on Jupiter, 'De Iove')", "engine_fields": ["placements[].sect_status for Jupiter"]},
+      "conditions": {
+        "trigger": "Jupiter is positioned contrary to the giver of life (datorem vitae) in a nocturna genitura"
+      },
+      "conclusion": {
+        "judgment": "Jupiter does not rejoice in night nativities, and this failure of joy costs twelve years of the allotted lifespan when Jupiter stands against the giver of life at night.",
+        "latin": "Quodsi in nocturna genitura contra datorem vitae fuerit collocatus (non enim gaudet luppiter in nocturnis genituris), eius aetatis, quaecumque decreta fuerit, duodecim annos aufert.",
+        "engine_rendering": "But if [Jupiter] is placed against the giver of life in a night nativity (for Jupiter does not rejoice in night nativities), it takes away twelve years from whatever span of life has been decreed.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "confirms Jupiter is diurnal-only; matches the engine's sect_status for Jupiter returning 'contrary to the sect' whenever facts.sect == 'night'",
+        "customer_prediction": false,
+        "output_policy": "the twelve-year longevity arithmetic is refused as output per this corpus's standing refusal on Hellenistic length-of-life claims (see hellenistic.py's own disclosure); only the sect classification is used"
+      },
+      "priority": 4,
+      "exceptions": ["Precise chapter numeral not independently re-verified from a clean heading in this OCR pass; identified as Firmicus's chapter on Jupiter by its position between the (headed) chapters on Saturn and the Sun ('V. DE SOLE') in Book III's planet-by-planet sequence, and by content (only Jupiter's placements are discussed on the surrounding pages)."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "III, chapter on Jupiter (Kroll/Skutsch p. 108-109)", "location": "fetched OCR text lines 5636-5639", "verification": "read directly from the fetched OCR text; printed page numbers 108 and running header 'p.109' visible in the surrounding lines"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; longevity arithmetic refused, sect classification only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.exaltation_degrees_table",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "exaltation (altitudo) degrees for all seven classical planets", "book_chapter": "Mathesis II.3 'De altitudinibus et deiectionibus stellarum'", "engine_fields": ["placements[].in_exaltation", "hellenistic.py EXALTATION table"]},
+      "conditions": {
+        "trigger": "identifying the exact degree of each planet's exaltation (altitudo) and fall (deiectio)"
+      },
+      "conclusion": {
+        "judgment": "Sol 19 Ariete, Luna 3 Tauro, Saturnus 21 Libra, Iuppiter 15 Cancro, Mars 28 Capricorno, Venus 27 Piscibus, Mercurius 15 Virgine - each exalted at the stated degree and falling at the same degree of the opposite sign.",
+        "latin": "Sol in Arietis parte XIX. exaltatur, in Librae vero parte XIX. deicitur; Luna exaltatur in Tauri parte tertia, Scorpii tertia deicitur; Saturnus exaltatur in Librae parte XXI., in Arietis rursus <parte> XXI. deicitur; luppiter exaltatur in parte Cancri XV., deicitur vero in Capricorni parte XV.; Mars exaltatur in Capricorni parte XXVIII., deicitur vero in Cancri parte XXVIII.; Venus exaltatur in Piscium parte XXVII., deicitur vero in Virginis parte XXVII.; Mercurius exaltatur in Virginis parte XV., deicitur vero in Piscium parte XV.",
+        "engine_rendering": "The Sun is exalted at Aries 19 and falls at Libra 19; the Moon is exalted at Taurus 3 and falls at Scorpio 3; Saturn is exalted at Libra 21 and falls at Aries 21; Jupiter is exalted at Cancer 15 and falls at Capricorn 15; Mars is exalted at Capricorn 28 and falls at Cancer 28; Venus is exalted at Pisces 27 and falls at Virgo 27; Mercury is exalted at Virgo 15 and falls at Pisces 15.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "exact match, all seven planets, against hellenistic.py's EXALTATION dict: Sun (Aries,19), Moon (Taurus,3), Saturn (Libra,21), Jupiter (Cancer,15), Mars (Capricorn,28), Venus (Pisces,27), Mercury (Virgo,15)",
+        "customer_prediction": false
+      },
+      "priority": 5,
+      "exceptions": ["The Hellenistic engine section tracks only in_exaltation (a boolean); it does not separately track fall/deiectio, which Firmicus states in the same sentence and which the Latin-European section tracks instead as a Lilly-style debility. No engine field is claimed for the fall half of this passage."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.3.5-6 (Kroll/Skutsch p. 43-44)", "location": "fetched OCR text lines 2451-2467", "verification": "read directly from the fetched OCR text; chapter heading 'III. DE ALTITUDINIBUS ET DEIECTIONIBUS STELLARUM.' at line 2410 and printed page numbers 43-44 both visually confirmed; cross-checked field-by-field against hellenistic.py's EXALTATION constant with an exact 7/7 match"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.dignity_hierarchy_and_babylonian_fork_disclosed",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "exaltation ranked above domicile; a reported (not adopted) Babylonian counter-doctrine", "book_chapter": "Mathesis II.3"},
+      "conditions": {
+        "context": "immediately after giving the exaltation degrees, Firmicus reports why 'the Babylonians' held the exaltation sign itself to BE the domicile, then states his own competing ranking"
+      },
+      "conclusion": {
+        "judgment": "The Babylonians wanted the signs of exaltation to BE the domiciles themselves; Firmicus reports this but does not adopt it, and instead asserts as his own doctrine that every planet acts better in its exaltation than in its own domicile.",
+        "latin": "Hac ex causa Babylonii ea signa, in quibus stellae exaltantur, domicilia earum esse voluerunt; nos autem scire debemus hac institutione formati, omnes stellas melius in altitudinibus suis quam in domiciliis suis ....",
+        "engine_rendering": "For this reason the Babylonians wanted the signs in which the planets are exalted to be their domiciles; we, however, formed by this teaching, must know that all the planets [act/fare] better in their exaltations than in their own domiciles ...",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 6,
+      "exceptions": ["Kroll/Skutsch print the sentence ending in an editorial ellipsis (a marked lacuna); the verb governing 'melius... quam' is lost, so the exact scope of the claim ('act better', 'signify better', 'are stronger') cannot be quoted past this point. This is reported as a genuine ranking claim (exaltation > domicile) but not extended beyond what survives."],
+      "conflicts_with": ["This Babylonian domicile-from-exaltation scheme is a reported alternative doctrine, not the one the engine implements; the engine (like Firmicus's own adopted position) keeps domicile and exaltation as two separate dignities."],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.3.6 (Kroll/Skutsch p. 44)", "location": "fetched OCR text lines 2446-2449 and 2462-2467", "verification": "read directly from the fetched OCR text"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.domicile_table_and_gender_pairing",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "domicile (domicilium) assignment for all seven planets, with the masculine/feminine sign-planet gender rationale", "book_chapter": "Mathesis II.2 'De domibus stellarum'", "engine_fields": ["placements[].in_own_domicile", "hellenistic.py DOMICILE table"]},
+      "conditions": {
+        "trigger": "identifying each planet's domicile sign(s)"
+      },
+      "conclusion": {
+        "judgment": "Sun's domicile is Leo, Moon's is Cancer (matched deliberately as masculine ruler/masculine sign, feminine ruler/feminine sign); Saturn holds Aquarius and Capricorn, Jupiter Sagittarius and Pisces, Mars Aries and Scorpio, Venus Taurus and Libra, Mercury Gemini and Virgo, each planet's two signs split one masculine and one feminine.",
+        "latin": "Est itaque Sol [in] Leo et in hoc signo habet domicilium et potestatem, Lunae Cancer. Vide, quam apte quam secundum, ut masculini quidem signi dominus Sol esset, feminini vero Luna, ut pro qualitate generis sui similia sibi sexus sui domicilia vendicarent. Saturnus habet domicilium in Aquario et Capricorno... Iuppiter in Sagittario et Piscibus... Mars in Ariete et in Scorpione... Veneris domus sunt Taurus et Libra... Mercurius domicilium habet in Geminis et Virgine...",
+        "engine_rendering": "The Sun's domicile and power is in Leo, the Moon's in Cancer. See how fittingly, how consistently: the Sun, lord of the masculine sign, and the Moon, of the feminine - each thereby claiming for itself, by the quality of its own gender, the domiciles proper to its own sex. Saturn has his domicile in Aquarius and Capricorn... Jupiter in Sagittarius and Pisces... Mars in Aries and Scorpio... Venus's houses are Taurus and Libra... Mercury has his domicile in Gemini and Virgo...",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "exact match against hellenistic.py's DOMICILE dict for all 12 signs",
+        "customer_prediction": false
+      },
+      "priority": 7,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.2.1-4 (Kroll/Skutsch p. 42-43)", "location": "fetched OCR text lines 2347-2408", "verification": "read directly from the fetched OCR text; chapter heading 'II. DE DOMIBUS STELLARUM.' at line 2345 confirmed"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.decan_face_table_and_own_decan_doctrine",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "the 36 decans (faces) and what it means for a planet to occupy its own decan", "book_chapter": "Mathesis II.4 'De decanis'", "engine_fields": ["placements[].face_lord", "hellenistic.py CHALDEAN/_face_ruler()"]},
+      "conditions": {
+        "trigger": "a planet is found in the decan (10-degree face) it itself rules, even while standing in a sign ruled by a different domicile lord"
+      },
+      "conclusion": {
+        "judgment": "A planet in its own decan is to be treated exactly as if it were in its own domicile, even though the sign belongs to another. Full table: Aries - Mars, Sun, Venus; Taurus - Mercury, Moon, Saturn; Gemini - Jupiter, Mars, Sun; Cancer - Venus, Mercury, Moon; Leo - Saturn, Jupiter, Mars; Virgo - Sun, Venus, Mercury; Libra - Moon, Saturn, Jupiter; Scorpio - Mars, Sun, Venus; Sagittarius - Mercury, Moon, Saturn; Capricorn - Jupiter, Mars, Sun; Aquarius - Venus, Mercury, Moon; Pisces - Saturn, Jupiter, Mars.",
+        "latin": "Sed et ipsi decani singulis stellis deputantur, et si in ipso decano stella fuerit, licet sit in alieno domicilio, sic est habenda, quasi in suo sit domicilio constituta; <in> suo enim decano constituta haec eadem perficit, quae in signo suo constituta decernit. In Ariete primus decanus Martis et secundus Solis, tertius Veneris; Tauri primus decanus Mercurii et secundus Lunae, tertius Saturni; Geminorum primus decanus Iovis et secundus Martis, tertius Solis est; Cancri primus decanus Veneris est, secundus Mercurii, tertius Lunae; Leonis primus decanus Saturni et secundus Iovis, tertius Martis; in Virgine primus decanus Solis est, secundus Veneris, tertius Mercurii; Librae primus decanus Lunae est, secundus Saturni, tertius Iovis; Scorpii primus decanus Martis est, secundus Solis, tertius Veneris; Sagittarii primus decanus Mercurii est, secundus Lunae, tertius Saturni; Capricorni primus decanus Iovis et secundus Martis, tertius Solis; Aquarii primus decanus Veneris est, secundus Mercurii, tertius Lunae; in Piscibus primus decanus Saturni, secundus Iovis, tertius Martis.",
+        "engine_rendering": "But the decans themselves are also assigned to individual planets, and if a planet is found in its own decan, even though it is in another's domicile, it must be regarded exactly as if it stood in its own domicile - for standing in its own decan it accomplishes the same things it decrees when standing in its own sign. [table as above]",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "verified against hellenistic.py's _face_ruler() (Chaldean-order, offset +2, decan = floor(longitude/10)) for Aries, Taurus, Cancer and Leo by direct hand computation: all four signs' three decans match exactly; the remaining eight signs follow the same Chaldean descent and were not hand-checked individually in this pass",
+        "customer_prediction": false
+      },
+      "priority": 8,
+      "exceptions": ["\"Quidam hunc locum volentes suptilius explicare\" (some, wishing to explain this passage more precisely) follow with an alternative doctrine assigning a named deity/'munifex' (liturgos) to each decan; that alternative system is not transcribed here since it is presented by Firmicus as a variant gloss, not his own primary teaching."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.4.1-4 (Kroll/Skutsch p. 44-45)", "location": "fetched OCR text lines 2469-2521", "verification": "read directly from the fetched OCR text; chapter heading 'IV. DE DECANIS.' at line 2469 confirmed; table cross-checked sign-by-sign against the engine's own _face_ruler() output for 4 of 12 signs"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.bounds_capricorn_verified_match",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "Egyptian bounds (fines) of Capricorn", "book_chapter": "Mathesis II.6 'De finibus'", "engine_fields": ["placements[].bound_lord_egyptian", "reference_data.EGYPTIAN_TERMS[Capricorn]"]},
+      "conditions": {"trigger": "dividing Capricorn's 30 degrees among its five bound (term) lords"},
+      "conclusion": {
+        "judgment": "Capricorn 0-7 Mercury, 7-14 Jupiter, 14-22 Venus, 22-26 Saturn, 26-30 Mars.",
+        "latin": "Capricorni dominus est Saturnus; sed fines eius signi hactenus dividuntur: A prima parte usque ad VII. Mercurius possidet fines, ab VIII. usque ad XIV. luppiter, a XV. usque ad XXII. Venus, a XXIII. usque ad XXVI. Saturnus, a XXVII. usque ad XXX. Mars.",
+        "engine_rendering": "Capricorn's domicile lord is Saturn; but the bounds of this sign are divided thus: from the first degree up to the 7th Mercury holds the bounds, from the 8th up to the 14th Jupiter, from the 15th up to the 22nd Venus, from the 23rd up to the 26th Saturn, from the 27th up to the 30th Mars.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "exact match against reference_data.py's EGYPTIAN_TERMS[Sign.CAPRICORN] = [(Mercury,7),(Jupiter,14),(Venus,22),(Saturn,26),(Mars,30)]",
+        "customer_prediction": false
+      },
+      "priority": 9,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.6.11 (Kroll/Skutsch p. 48)", "location": "fetched OCR text lines 2661-2665", "verification": "read directly from the fetched OCR text; chapter heading 'VI. DE FINIBUS.' at line 2566 confirmed; degree-by-degree cross-check against reference_data.py is an exact match"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.bounds_sagittarius_manuscript_fork_disclosed",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE, with a divergence in the transmitted manuscripts",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "Egyptian bounds of Sagittarius: a transmission fork between Firmicus's manuscripts and the Ptolemy/Dorotheus/Paulus/Alexander consensus", "book_chapter": "Mathesis II.6", "engine_fields": ["reference_data.EGYPTIAN_TERMS[Sagittarius]"]},
+      "conditions": {"trigger": "dividing Sagittarius's 30 degrees among its five bound lords"},
+      "conclusion": {
+        "judgment": "Firmicus's own printed manuscript text gives Jupiter 0-12, Venus 12-17, Mercury 17-23, Saturn 23-27, Mars 27-30 (a 12/5/6/4/3 split). Kroll/Skutsch's apparatus notes that Ptolemy, Dorotheus, Paulus and 'Alexander' instead give Mercury 4 degrees, Saturn 5, Mars 4 at this point - i.e. the wider, cross-author consensus (Jupiter 12, Venus 17, Mercury 21, Saturn 26, Mars 30) that the engine's EGYPTIAN_TERMS table actually follows. Firmicus's own transmitted text is therefore the outlier here, not the engine.",
+        "latin": "Sagittarii dominus est luppiter; eius signi fines hactenus dividuntur: A prima parte usque ad XII. fines possidet luppiter, a XIII. usque ad XVII. Venus, ab XVIII. usque ad XXIII. Mercurius, a XXIV. usque ad XXVII. Saturnus, a XXVIII. usque ad XXX. Mars. [apparatus:] Ptol. Doroth. Paul. Al. Merc. IV Sat. V Marti IV partes dant.",
+        "engine_rendering": "Sagittarius's domicile lord is Jupiter; but the bounds of this sign are divided thus: from the first degree to the 12th Jupiter holds the bounds, from the 13th to the 17th Venus, from the 18th to the 23rd Mercury, from the 24th to the 27th Saturn, from the 28th to the 30th Mars. [Kroll/Skutsch's note:] Ptolemy, Dorotheus, Paulus and Alexander give Mercury 4, Saturn 5 and Mars 4 degrees [at this point, instead].",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "the engine's EGYPTIAN_TERMS[Sign.SAGITTARIUS] = [(Jupiter,12),(Venus,17),(Mercury,21),(Saturn,26),(Mars,30)] matches the APPARATUS's comparanda (the Ptolemy/Dorotheus/Paulus/Alexander consensus), not Firmicus's own printed manuscript numbers",
+        "customer_prediction": false
+      },
+      "priority": 10,
+      "exceptions": ["Roman numerals in a noisy OCR pass are a known transcription risk; this rule's own numbers were read twice independently from the fetched text and are internally consistent (they sum to 30 both ways), but were not checked against a page image. If a future page-image pass finds Kroll/Skutsch's main text already emended to the apparatus's figures, this rule should be corrected accordingly."],
+      "conflicts_with": ["hel.firmicus.bounds_capricorn_verified_match is a clean, unforked match at the same chapter; this rule documents that the bound system is not uniformly clean across every sign of Firmicus's own manuscript tradition."],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.6.10, with apparatus (Kroll/Skutsch p. 48-49)", "location": "fetched OCR text lines 2655-2660 (main text) and 2676-2679 (apparatus)", "verification": "read directly from the fetched OCR text; both the main text and the apparatus note were independently located and cross-read"}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only; disclosed as a manuscript-transmission fork, not resolved",
+      "review_status": "ocr_read_roman_numeral_risk_flagged_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.domicile_lord_host_guest_doctrine",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "written 334-337 CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "what it means for a planet to stand in a sign ruled by another planet: the condition of the domicile lord is shared by its guest", "book_chapter": "Mathesis II.20", "engine_fields": ["placements[].domicile_lord", "placements[].in_own_domicile"]},
+      "conditions": {
+        "trigger": "a planet ('the guest') stands in a sign whose domicile lord ('the host') is itself well or badly placed elsewhere in the chart"
+      },
+      "conclusion": {
+        "judgment": "If the lord of the sign is well placed, the planet standing in that sign borrows a share of its host's felicity; if the lord of the sign is cast down (deiectus), the planet standing in that sign is likewise hindered, sharing in its host's downfall - exactly as a guest shares in the fortune or misfortune of the household whose hospitality he has entered.",
+        "latin": "Si enim dominus signi bene fuerit collocatus, felicitatis ipsius partem etiam illa stella, de qua quaerimus, ex hospitis gaudio mutuatur; si vero dominus ipsius signi aliqua sit ratione deiectus... ex deiectione illius stellae, quae signi domina est, participatis deiectionibus impeditur. Et hoc ex nostris actibus facili potes ratione colligere: si cuius domum hospitii gratia fueris ingressus et dominus domus felicibus sublevatur augmentis, et tu particeps felicitatis existis... si vero hospes tuus misero sit squalore deformis et deiectis infortuniorum casibus implicatus, etiam et te participata doloris atque infortunii tormenta conficiunt.",
+        "engine_rendering": "For if the lord of the sign is well placed, that star too, the one we are asking about, borrows a share of its felicity from the joy of its host; but if the lord of that sign is in some way cast down... [our star], sharing in the downfall of the star that is lady of the sign, is likewise hindered by it. And you can gather this easily from your own everyday experience: if you have entered someone's house as a guest and the master of that house is raised up by fortunate increases, you too become a partaker in that felicity... but if your host is disfigured by wretched squalor and caught up in the downfalls of misfortune, the torments of grief and misfortune afflict you too, having had a share in them.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "a direct interpretive gloss on the meaning of the engine's domicile_lord field for every placement not in_own_domicile: the condition of that named lord elsewhere in the chart is asserted to condition the guest planet",
+        "customer_prediction": false
+      },
+      "priority": 11,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "II.20.6-9 (Kroll/Skutsch p. 66-67)", "location": "fetched OCR text lines 3562-3607", "verification": "read directly from the fetched OCR text; running page header 'II 20,3-13. 67' at line 3592 confirms location"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_latin_review_pending"
+    },
+    {
+      "rule_id": "hel.firmicus.book2_lost_chapters_disclosed",
+      "tradition_id": "hellenistic",
+      "school_id": "firmicus_mathesis_latin",
+      "period": "editorial fact about the manuscript transmission, noted by Kroll/Skutsch (1897)",
+      "domain": "other",
+      "scope": {"branch": "provenance", "topic": "Book II's own chapter index names material lost from the oldest manuscript branch"},
+      "conditions": {
+        "trigger": "comparing Book II's surviving chapter sequence (I,II,III,IV,V,VI,VII, then a jump to XV) against its own internal index"
+      },
+      "conclusion": {
+        "judgment": "The old manuscript branch (M, P, R, V, e in Kroll/Skutsch's sigla) loses chapters VIII-XIV entire: 'De formis stellarum. De ortu stellarum. De Luna quid cui astro se iungens significet. De stellis quando sint matutinae. De scematibus stellarum. De moribus stellarum et quo tempore quas vires habeant. De stellis quando sint matutinae quando vespertinae.' Some of this material survives, out of place, in the later manuscripts (A,B,C,D,F) and was relocated by the editors into its indicated position; the rest is simply gone.",
+        "latin": "secundum indicem exciderunt in libris vetustis haec capita: De formis stellarum. De ortu stellarum. De Luna quid cui astro se iungens significet. De stellis quando sint matutinae. De scematibus stellarum. De moribus stellarum et quo tempore quas vires habeant. De stellis quando sint matutinae quando vespertinae. Pars eorum, quae in vetustis libris exciderunt, servata est in recentioribus; edidimus ex A B C D F, ubi falso extant loco.",
+        "engine_rendering": "According to [Book II's own] index, the following chapters have fallen out of the old manuscripts entirely: On the forms of the stars. On the rising of the stars. On what the Moon signifies by joining each star. On when the stars are morning stars. On the configurations of the stars. On the characters of the stars and at what time they have which powers. On when the stars are morning stars, when evening stars. Some of what fell out of the old manuscripts is preserved in the more recent ones; we have printed it from A B C D F, where it stands in the wrong place [in those manuscripts].",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 90,
+      "exceptions": ["This governs how this pack cites Book II: any passage located between chapters VII and XV that is NOT accompanied by a clean chapter-heading match in this OCR pass may be one of these relocated fragments rather than sitting in its original chapter; hel.firmicus.sect_first_judgment_hierarchy, hel.firmicus.sect_angular_felicity_or_calamity and hel.firmicus.domicile_lord_host_guest_doctrine are all cited to chapter XX specifically because a clean 'XX. DE NOMINIBUS DUODECIM LOCORUM' heading and a running 'II 20' page header were both independently visible around them, which places them safely outside this lacuna zone."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "firmicus_kroll_skutsch_1897_vol1", "work": "Firmicus Maternus, Mathesis", "section": "apparatus to II.7 (Kroll/Skutsch p. 49-50)", "location": "fetched OCR text lines 2714-2724", "verification": "read directly from the fetched OCR text's critical apparatus"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; provenance/governance fact, not a delineation",
+      "review_status": "editorial_apparatus_read_directly_no_independent_review_required"
+    },
+    {
+      "rule_id": "hel.ptolemy.sect_diurnal_nocturnal_assignment",
+      "tradition_id": "hellenistic",
+      "school_id": "ptolemy_tetrabiblos_greek",
+      "period": "written mid-2nd century CE, Alexandria",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "the diurnal and nocturnal sect (hairesis) of the five planets plus the two lights", "book_chapter": "Apotelesmatika I, chapter 'Peri hemerinon kai nykterinon' ('On the diurnal and the nocturnal')", "engine_fields": ["facts.sect", "placements[].sect_status"]},
+      "conditions": {
+        "trigger": "assigning each of the five non-luminary planets and the two lights to the diurnal or nocturnal sect"
+      },
+      "conclusion": {
+        "judgment": "The Moon and Venus are handed down as nocturnal, the Sun and Jupiter as diurnal; Mercury is common to both, diurnal in its morning configuration and nocturnal in its evening configuration.",
+        "greek": "νυκτερινοὺς μὲν ἀκολούθως παραδεδώκασι τήν τε σελήνην καὶ τὸν τῆς Ἀφροδίτης, ἡμερινοὺς δὲ τόν τε ἥλιον καὶ τὸν τοῦ Διός, ἐπίκοινον δὲ κατὰ ταῦτα τὸν τοῦ Ἑρμοῦ καὶ ἐν μὲν τῷ ἑῴῳ σχήματι ἡμερινόν, ἐν δὲ τῷ ἑσπερίῳ νυκτερινόν.",
+        "engine_rendering": "Accordingly they have handed down as nocturnal the Moon and the star of Aphrodite, and as diurnal the Sun and the star of Zeus; and common with respect to these is the star of Hermes - diurnal in its morning configuration, nocturnal in its evening configuration.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "matches the engine's own facts.sect / sect_status logic exactly, including the special Mercury case explicitly labelled 'common (takes the sect of its solar phase)' in hellenistic.py's _sect_status()",
+        "customer_prediction": false
+      },
+      "priority": 12,
+      "exceptions": ["Saturn and Mars are not named in this particular sentence; their assignment to the day and night sects respectively is given immediately afterward with an explicit physical rationale, encoded separately as hel.ptolemy.sect_malefics_temperament_rationale."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ptolemy_boll_boer_teubner_stereotype_reprint", "work": "Ptolemy, Apotelesmatika", "section": "I, chapter heading ξ' 'Περὶ ἡμερινῶν καὶ νυκτερινῶν' (Boll/Boer p. 21, 'ΤΩΝ ΠΡΟΣ ΣΥΡΟΝ ΑΠΟΤΕΛΕΣΜΑΤΙΚΩΝ Α΄')", "location": "fetched OCR text, ptolemy_apotelesmatika_boll_boer_teubner_djvu.txt lines 2498-2509", "verification": "read directly from the fetched Greek OCR text, which carries genuine polytonic Unicode throughout (unlike the Valens file); printed page number 21 and the running Greek header for Book A' (I) both visually confirmed"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_greek_review_pending"
+    },
+    {
+      "rule_id": "hel.ptolemy.sect_malefics_temperament_rationale",
+      "tradition_id": "hellenistic",
+      "school_id": "ptolemy_tetrabiblos_greek",
+      "period": "written mid-2nd century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "why Saturn is assigned to the day sect and Mars to the night sect: a physical-quality rationale, not an arbitrary handed-down list", "book_chapter": "Apotelesmatika I, same chapter as hel.ptolemy.sect_diurnal_nocturnal_assignment", "engine_fields": ["placements[].sect_status for Saturn, Mars"]},
+      "conditions": {
+        "trigger": "assigning the two malefics (Saturn, Mars) to a sect by the OPPOSITE of the reasoning used for the benefics"
+      },
+      "conclusion": {
+        "judgment": "They assigned to each sect one of the two destructive planets too, but by the opposite reasoning: Saturn, being cooling, was assigned to the heat of the day; Mars, being dry, to the moisture of the night - so that each, gaining a balance of temperament, becomes proper to the sect that supplies the tempering it lacks.",
+        "greek": "τὸ προσένειμαν δὲ ἑκατέρᾳ τῶν αἱρέσεων καὶ τοὺς δύο τοὺς τῆς φθαρτικῆς οὐσίας, οὐκ ἔτι μέντοι κατὰ τὰς αὐτὰς τῆς φύσεως αἰτίας, ἀλλὰ κατὰ τὰς ἐναντίας... ἔνθεν τὸν μὲν τοῦ Κρόνου ψυκτικὸν ὄντα τῷ θερμῷ τῷ τῆς ἡμέρας ἀπένειμαν, τὸν δὲ τοῦ Ἄρεως ξηρὸν ὄντα τῷ ὑγρῷ τῷ τῆς νυκτός· οὕτως γὰρ ἑκάτερος ὑπὸ τῆς κράσεως συμμετρίας τυχὼν οἰκεῖος γίνεται τῆς τὸ εὔκρατον παρεχούσης αἱρέσεως.",
+        "engine_rendering": "They assigned to each of the sects, too, one of the two planets of destructive substance - no longer, however, by the same causes of nature, but by the opposite ones... hence they assigned Saturn, being cooling, to the heat of the day, and Mars, being dry, to the moisture of the night; for so each, obtaining a balance from the tempering, becomes proper to the sect that supplies the good tempering.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "matches the engine's diurnal set {Sun,Jupiter,Saturn} and nocturnal set {Moon,Venus,Mars} exactly, and supplies the doctrinal REASON (a distinctively Ptolemaic physical rationale not found stated this way in Firmicus) for why the two malefics cross-pair with the opposite sect's qualities rather than following the benefics' same-quality logic",
+        "customer_prediction": false
+      },
+      "priority": 13,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ptolemy_boll_boer_teubner_stereotype_reprint", "work": "Ptolemy, Apotelesmatika", "section": "I, chapter ξ' (Boll/Boer p. 21)", "location": "fetched OCR text lines 2510-2520", "verification": "read directly from the fetched Greek OCR text, continuous with hel.ptolemy.sect_diurnal_nocturnal_assignment"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_greek_review_pending"
+    },
+    {
+      "rule_id": "hel.ptolemy.triplicity_fire_sun_jupiter_mars_participant",
+      "tradition_id": "hellenistic",
+      "school_id": "ptolemy_tetrabiblos_greek",
+      "period": "written mid-2nd century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "the fire triplicity's day and night rulers, with Mars as participating co-lord by sect", "book_chapter": "Apotelesmatika I, chapter on the triplicities (following the sect chapter)", "engine_fields": ["placements[].triplicity_lord_ptolemaic", "reference_data.PTOLEMAIC_TRIPLICITY['Fire']"]},
+      "conditions": {
+        "trigger": "assigning rulership of the fire triangle (Aries, Leo, Sagittarius)"
+      },
+      "conclusion": {
+        "judgment": "The fire triangle (Aries-Leo-Sagittarius), composed of three masculine signs and containing the domiciles of the Sun, Jupiter and Mars, was given to Jupiter and the Sun on account of the Sun's sect, Mars belonging to it too; Mars takes the first co-lordship of it, the Sun by day and Jupiter by night.",
+        "greek": "τὸ μὲν ἀπὸ τὸν Κριὸν καὶ τὸν Λέοντα καὶ τὸν Τοξότην ἐκ τριῶν ἀρρενικῶν ζῳδίων συγκείμενον καὶ οἴκους ἔχον ἡλίου τε καὶ Διὸς καὶ Ἄρεως, ἐδόθη τῷ Διὶ καὶ ἡλίῳ παρὰ τὴν αἵρεσιν τὴν ἡλιακὴν ὄντος τοῦ Ἄρεως. λαμβάνει δὲ αὐτοῦ τὴν πρώτην συνοικοδεσποτείαν ἡμέρας μὲν ὁ ἥλιος, νυκτὸς δὲ ὁ τοῦ Διός.",
+        "engine_rendering": "The triangle running through Aries, Leo and Sagittarius, composed of three masculine signs and holding the domiciles of the Sun, Jupiter and Mars, was given to Jupiter and the Sun, in accordance with the solar sect, Mars belonging to it as well. It takes its first co-lordship: by day the Sun, by night that of Jupiter.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "matches reference_data.py's PTOLEMAIC_TRIPLICITY['Fire'] = (Sun, Jupiter) as (Day, Night); Mars's stated co-lordship (by domicile-holding, not by the day/night table) is additional context the engine's 2-tuple Ptolemaic table does not itself carry",
+        "customer_prediction": false
+      },
+      "priority": 14,
+      "exceptions": ["The engine's own hellenistic.py explicitly discloses Ptolemaic triplicities as the FORK against the Dorothean triplicities it actually uses for its Hellenistic reading; this rule supports that disclosed fork rather than the engine's primary Dorothean table, which rests on Dorotheus (a text not fetched in this pass; see source_audit.md)."],
+      "conflicts_with": ["The engine's primary DOROTHEAN_TRIPLICITY table for Fire is (Sun, Jupiter, Saturn) as (Day, Night, Participating) - a three-way scheme naming Saturn, not Mars, as participant. Ptolemy's own two-tuple table plus Mars-by-domicile is a genuinely different, independently attested scheme, not an error in either source."],
+      "source_passages": [
+        {"edition_id": "ptolemy_boll_boer_teubner_stereotype_reprint", "work": "Ptolemy, Apotelesmatika", "section": "I, triplicity chapter (Boll/Boer p. 41)", "location": "fetched OCR text lines 3782-3796", "verification": "read directly from the fetched Greek OCR text; printed page number 41 and running header 'ΤΩΝ ΠΡΟΣ ΣΥΡΟΝ ΑΠΟΤΕΛΕΣΜΑΤΙΚΩΝ Α΄' both visually confirmed"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_greek_review_pending"
+    },
+    {
+      "rule_id": "hel.ptolemy.parents_sun_saturn_moon_venus_significators",
+      "tradition_id": "hellenistic",
+      "school_id": "ptolemy_tetrabiblos_greek",
+      "period": "written mid-2nd century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "parental significators paired by sect-adjacent gender: Sun+Saturn for the father, Moon+Venus for the mother", "book_chapter": "Apotelesmatika III, chapter ε' 'Peri goneon' ('On parents')", "engine_fields": ["facts.placements (Sun, Saturn, Moon, Venus)", "whole_sign_house 4 (parents)"]},
+      "conditions": {"trigger": "identifying which bodies naturally represent the father and which the mother"},
+      "conclusion": {
+        "judgment": "The Sun and the star of Saturn are naturally associated with the paternal role; the Moon and the star of Venus with the maternal.",
+        "greek": "ὁ μὲν τοίνυν ἥλιος καὶ ὁ τοῦ Κρόνου ἀστὴρ τῷ πατρικῷ προσώπῳ συνοικειοῦνται κατὰ φύσιν, ἡ δὲ σελήνη καὶ ὁ τῆς Ἀφροδίτης τῷ μητρικῷ.",
+        "engine_rendering": "The Sun, then, and the star of Saturn are by nature associated with the paternal role; the Moon and the star of Venus with the maternal.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 15,
+      "exceptions": ["This pairing (Sun+Saturn / Moon+Venus) is not identical to the sect pairing (Sun+Jupiter+Saturn diurnal / Moon+Venus+Mars nocturnal): Jupiter and Mars are absent from the parental significator doctrine even though they belong to the same two sects respectively. The two schemes should not be conflated."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ptolemy_boll_boer_teubner_stereotype_reprint", "work": "Ptolemy, Apotelesmatika", "section": "III.5 'Περὶ γονέων' (Boll/Boer p. 109-110)", "location": "fetched OCR text lines 8581-8590", "verification": "read directly from the fetched Greek OCR text; chapter heading 'ε΄. Περὶ γονέων.' at line 8581 confirmed"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_greek_review_pending"
+    },
+    {
+      "rule_id": "hel.ptolemy.parents_same_sect_doryphoria_brilliance",
+      "tradition_id": "hellenistic",
+      "school_id": "ptolemy_tetrabiblos_greek",
+      "period": "written mid-2nd century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "same-sect bodyguarding (doryphoria) of the parental significators produces eminence", "book_chapter": "Apotelesmatika III.5", "engine_fields": ["placements[].sect_status"]},
+      "conditions": {
+        "trigger": "the parental significator (Sun/Saturn by day, Moon/Venus by night) is flanked by benefic planets OF THE SAME SECT, either in the same sign or the adjoining ones"
+      },
+      "conclusion": {
+        "judgment": "This signifies things concerning the parents as conspicuous and brilliant, especially when planets rising just before the Sun and just before the Moon (in the evening) flank them favourably.",
+        "greek": "ἐπειδήπερ περιεχόμενα μὲν ὑπὸ τῶν ἀγαθοποιεῖν δυναμένων καὶ τῶν τῆς αὐτῆς αἱρέσεως ἤτοι ἐν τοῖς αὐτοῖς ζωδίοις ἢ καὶ ἐν τοῖς ἐφεξῆς ἐπιφανῆ καὶ λαμπρὰ τὰ περὶ τοὺς γονέας διασημαίνει, καὶ μάλιστα ὅταν τὸν μὲν ἥλιον ἑῷοι δορυφορῶσιν ἄστερες, τὴν δὲ σελήνην ἑσπέριοι, καλῶς καὶ αὐτοὶ διακείμενοι.",
+        "engine_rendering": "since [the parental significators], being surrounded by planets capable of doing good and OF THE SAME SECT, either in the same signs or the adjoining ones, signify matters concerning the parents as conspicuous and brilliant - especially whenever morning-rising stars bodyguard the Sun and evening-rising stars bodyguard the Moon, they themselves also being well disposed.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "a direct delineation of what it means for a benefic to be 'of the sect in favour' (engine's sect_status) while also configured (bodyguarding) to a luminary - the topical outcome (parental eminence) is stated explicitly, not invented",
+        "customer_prediction": false
+      },
+      "priority": 16,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ptolemy_boll_boer_teubner_stereotype_reprint", "work": "Ptolemy, Apotelesmatika", "section": "III.5 (Boll/Boer p. 109)", "location": "fetched OCR text lines 8593-8598 and 8632", "verification": "read directly from the fetched Greek OCR text"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_greek_review_pending"
+    },
+    {
+      "rule_id": "hel.ptolemy.parents_opposite_sect_doryphoria_instability",
+      "tradition_id": "hellenistic",
+      "school_id": "ptolemy_tetrabiblos_greek",
+      "period": "written mid-2nd century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "bodyguarding by planets NOT of the same sect diminishes the outcome to moderate/irregular rather than reversing it to bad", "book_chapter": "Apotelesmatika III.5", "engine_fields": ["placements[].sect_status"]},
+      "conditions": {
+        "trigger": "the parental significator IS bodyguarded (doryphoria present) but NOT by planets of the same sect - Ptolemy's example: Mars rising before the Sun, Saturn before the Moon - and the benefics are not well placed with respect to that same sect either"
+      },
+      "conclusion": {
+        "judgment": "One must suppose moderateness and irregularity concerning the parents' life - not outright misfortune, but an unevenness distinct from both the brilliant same-sect case and a fully adverse configuration.",
+        "greek": "ἐὰν δὲ δορυφορῆται μέν, μὴ μέντοι ὑπὸ τῶν τῆς αὐτῆς αἱρέσεως, ὡς ὅταν Ἄρης μὲν ἐπαναφέρηται τῷ ἡλίῳ, Κρόνος δὲ τῇ σελήνῃ, μήπως καλῶς κειμένων τῶν ἀγαθοποιῶν καὶ κατὰ τὴν αὐτὴν αἵρεσιν, μετριότητα καὶ ἀνωμαλίαν περὶ τὸν βίον αὐτῶν ὑπονοητέον.",
+        "engine_rendering": "But if it is bodyguarded, yet not by planets of the same sect - as when Mars rises before the Sun, or Saturn before the Moon - and the benefics are not, in addition, favourably placed with respect to that same sect, one must infer moderateness and unevenness concerning their [the parents'] life.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "the direct converse case to hel.ptolemy.parents_same_sect_doryphoria_brilliance, keyed to the same sect_status field: 'contrary to the sect' bodyguarding a significator produces a qualitatively different (moderate/uneven), not simply inverted, outcome",
+        "customer_prediction": false
+      },
+      "priority": 17,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ptolemy_boll_boer_teubner_stereotype_reprint", "work": "Ptolemy, Apotelesmatika", "section": "III.5 (Boll/Boer p. 110)", "location": "fetched OCR text lines 8640-8645", "verification": "read directly from the fetched Greek OCR text, continuous with the same-sect case above"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_greek_review_pending"
+    },
+    {
+      "rule_id": "hel.ptolemy.children_alien_sect_places_humble",
+      "tradition_id": "hellenistic",
+      "school_id": "ptolemy_tetrabiblos_greek",
+      "period": "written mid-2nd century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "rulers of the children-signifying places, when setting (occidental) and standing in the places of the alien/opposite sect, produce a humble and inconspicuous outcome for offspring", "book_chapter": "Apotelesmatika III (chapter on children), continuing from the parents chapter", "engine_fields": ["placements[].sect_status"]},
+      "conditions": {
+        "trigger": "the rulers of the child-producing signs are occidental (setting, δυτικοί) and stand in the places of the sect opposite to their own"
+      },
+      "conclusion": {
+        "judgment": "[Contrasted with rising rulers in their own places, who make the children distinguished and eminent,] setting rulers found in the places of the alien sect make the offspring humble and unmanifest.",
+        "greek": "ἐὰν δὲ δυτικοὶ καὶ ἐν τοῖς τῆς ἀλλοτρίας αἱρέσεως τόποις, ταπεινὰ καὶ ἀνεπίφαντα.",
+        "engine_rendering": "But if [the rulers] are occidental and in the places of the ALIEN sect, [the outcome for the children is] humble and unmanifest.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "engine_correspondence": "an explicit, topic-specific instance of what 'contrary to the sect' (the engine's sect_status label for a planet of the opposite diurnal/nocturnal group) is stated to mean for a specific house-topic (children) when combined with occidental phase",
+        "customer_prediction": false
+      },
+      "priority": 18,
+      "exceptions": ["This clause belongs to Ptolemy's chapter on children (τεκνοποιία), a topic the engine does not itself compute a dedicated field for; it is included because it is the cleanest surviving Ptolemaic use of the exact phrase 'places of the alien sect' (allotrias haireseos topois) as a general diminishing condition, and because 'contrary to the sect' is a field the engine does compute for every placement."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ptolemy_boll_boer_teubner_stereotype_reprint", "work": "Ptolemy, Apotelesmatika", "section": "III, chapter on children (Boll/Boer p. 176-177)", "location": "fetched OCR text lines 13459-13463", "verification": "read directly from the fetched Greek OCR text"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_read_not_page_image_collated_independent_greek_review_pending"
+    }
+  ]
+}

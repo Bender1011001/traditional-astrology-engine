@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "hellenistic",
+  "source_pack_id": "hellenistic_firmicus_ptolemy_delineation_v1",
+  "status": "no_worked_example_charts_found_in_this_pass_vectors_check_rule_content_against_engine_facts_and_source_text",
+  "source_ids": [
+    "hellenistic_firmicus_mathesis_kroll_skutsch_1897_vol1",
+    "hellenistic_firmicus_mathesis_kroll_skutsch_ziegler_1913_vol2",
+    "hellenistic_ptolemy_tetrabiblos_boll_boer_teubner"
+  ],
+  "vectors": [
+    {
+      "vector_id": "hellenistic.exaltation.full_table_cross_check",
+      "rule_ids": ["hel.firmicus.exaltation_degrees_table"],
+      "inputs": {
+        "engine_exaltation_table": {
+          "Sun": ["Aries", 19], "Moon": ["Taurus", 3], "Mercury": ["Virgo", 15],
+          "Venus": ["Pisces", 27], "Mars": ["Capricorn", 28], "Jupiter": ["Cancer", 15], "Saturn": ["Libra", 21]
+        }
+      },
+      "expected": {
+        "firmicus_ii_3_table": {
+          "Sun": ["Aries", 19], "Moon": ["Taurus", 3], "Saturn": ["Libra", 21],
+          "Jupiter": ["Cancer", 15], "Mars": ["Capricorn", 28], "Venus": ["Pisces", 27], "Mercury": ["Virgo", 15]
+        },
+        "match": "exact, all 7 planets, sign and degree"
+      },
+      "provenance": "src/engine/multitradition/hellenistic.py EXALTATION constant, compared field-by-field against Firmicus, Mathesis II.3.5-6 (Kroll/Skutsch 1897, p.43-44), fetched OCR lines 2451-2467."
+    },
+    {
+      "vector_id": "hellenistic.decan.chaldean_face_spot_check",
+      "rule_ids": ["hel.firmicus.decan_face_table_and_own_decan_doctrine"],
+      "inputs": {
+        "sample_longitudes_degrees": [5, 15, 25, 35, 45, 55, 95, 105, 115, 125, 135, 145],
+        "engine_function": "hellenistic.py _face_ruler(longitude) = CHALDEAN[(floor(longitude/10)+2) % 7], CHALDEAN=[Saturn,Jupiter,Mars,Sun,Venus,Mercury,Moon]"
+      },
+      "expected": {
+        "computed_face_lords": [
+          "Mars", "Sun", "Venus",
+          "Mercury", "Moon", "Saturn",
+          "Venus", "Mercury", "Moon",
+          "Saturn", "Jupiter", "Mars"
+        ],
+        "firmicus_ii_4_table_for_same_signs": {
+          "Aries": ["Mars", "Sun", "Venus"],
+          "Taurus": ["Mercury", "Moon", "Saturn"],
+          "Cancer": ["Venus", "Mercury", "Moon"],
+          "Leo": ["Saturn", "Jupiter", "Mars"]
+        },
+        "match": "exact for all 12 sampled decans across Aries, Taurus, Cancer and Leo (hand-computed against the engine's own algorithm); the remaining 8 signs were not individually hand-checked in this pass but follow the identical Chaldean-descent formula"
+      },
+      "provenance": "src/engine/multitradition/hellenistic.py _face_ruler(), compared against Firmicus, Mathesis II.4.3 (Kroll/Skutsch 1897, p.44-45), fetched OCR lines 2502-2520."
+    },
+    {
+      "vector_id": "hellenistic.domicile.full_table_cross_check",
+      "rule_ids": ["hel.firmicus.domicile_table_and_gender_pairing"],
+      "inputs": {
+        "engine_domicile_table": {
+          "Aries": "Mars", "Taurus": "Venus", "Gemini": "Mercury", "Cancer": "Moon",
+          "Leo": "Sun", "Virgo": "Mercury", "Libra": "Venus", "Scorpio": "Mars",
+          "Sagittarius": "Jupiter", "Capricorn": "Saturn", "Aquarius": "Saturn", "Pisces": "Jupiter"
+        }
+      },
+      "expected": {
+        "firmicus_ii_2_table": {
+          "Leo": "Sun", "Cancer": "Moon", "Aquarius": "Saturn", "Capricorn": "Saturn",
+          "Sagittarius": "Jupiter", "Pisces": "Jupiter", "Aries": "Mars", "Scorpio": "Mars",
+          "Taurus": "Venus", "Libra": "Venus", "Gemini": "Mercury", "Virgo": "Mercury"
+        },
+        "match": "exact, all 12 signs"
+      },
+      "provenance": "src/engine/multitradition/hellenistic.py DOMICILE constant, compared against Firmicus, Mathesis II.2.1-4 (Kroll/Skutsch 1897, p.42-43), fetched OCR lines 2347-2408."
+    },
+    {
+      "vector_id": "hellenistic.bounds.capricorn_cross_check",
+      "rule_ids": ["hel.firmicus.bounds_capricorn_verified_match"],
+      "inputs": {
+        "engine_egyptian_terms_capricorn": [["Mercury", 7], ["Jupiter", 14], ["Venus", 22], ["Saturn", 26], ["Mars", 30]]
+      },
+      "expected": {
+        "firmicus_ii_6_capricorn": [["Mercury", 7], ["Jupiter", 14], ["Venus", 22], ["Saturn", 26], ["Mars", 30]],
+        "match": "exact, all five bound lords and cutoffs"
+      },
+      "provenance": "src/engine/reference_data.py EGYPTIAN_TERMS[Sign.CAPRICORN], compared against Firmicus, Mathesis II.6.11 (Kroll/Skutsch 1897, p.48), fetched OCR lines 2661-2665."
+    },
+    {
+      "vector_id": "hellenistic.bounds.sagittarius_fork_check",
+      "rule_ids": ["hel.firmicus.bounds_sagittarius_manuscript_fork_disclosed"],
+      "inputs": {
+        "engine_egyptian_terms_sagittarius": [["Jupiter", 12], ["Venus", 17], ["Mercury", 21], ["Saturn", 26], ["Mars", 30]],
+        "firmicus_own_manuscript_text_cumulative_ends": [["Jupiter", 12], ["Venus", 17], ["Mercury", 23], ["Saturn", 27], ["Mars", 30]],
+        "kroll_skutsch_apparatus_comparanda_degree_spans": {"Mercury": 4, "Saturn": 5, "Mars": 4}
+      },
+      "expected": {
+        "engine_matches_apparatus_comparanda": true,
+        "engine_matches_firmicus_own_printed_manuscript_numbers": false,
+        "note": "the apparatus comparanda, read as cumulative bound-ends from Jupiter=12 and Venus=17 (both unforked), gives Mercury=21, Saturn=26, Mars=30 - identical to the engine's table. Firmicus's own printed text instead gives Mercury=23, Saturn=27, Mars=30 (a 6/4/3 degree split instead of 4/5/4). The engine follows the wider Ptolemy/Dorotheus/Paulus/Alexander consensus, not Firmicus's specific transmitted manuscript reading, at this one sign."
+      },
+      "provenance": "src/engine/reference_data.py EGYPTIAN_TERMS[Sign.SAGITTARIUS], compared against Firmicus, Mathesis II.6.10 main text and apparatus (Kroll/Skutsch 1897, p.48-49), fetched OCR lines 2655-2660 and 2676-2679."
+    },
+    {
+      "vector_id": "hellenistic.sect.day_chart_status_assignment",
+      "rule_ids": ["hel.ptolemy.sect_diurnal_nocturnal_assignment", "hel.firmicus.sect_diurnal_trio_and_lacuna"],
+      "inputs": {"facts.sect": "day", "sun_altitude_degrees": 32.5},
+      "expected": {
+        "Sun_sect_status": "of the sect in favour",
+        "Jupiter_sect_status": "of the sect in favour",
+        "Saturn_sect_status": "of the sect in favour",
+        "Moon_sect_status": "contrary to the sect",
+        "Venus_sect_status": "contrary to the sect",
+        "Mars_sect_status": "contrary to the sect",
+        "Mercury_sect_status": "common (takes the sect of its solar phase)"
+      },
+      "provenance": "src/engine/multitradition/hellenistic.py _sect_status(), cross-checked against Ptolemy Apotelesmatika I ξ' (Boll/Boer p.21, OCR lines 2498-2509) and Firmicus Mathesis II.7 (Kroll/Skutsch p.49, OCR lines 2691-2703)."
+    },
+    {
+      "vector_id": "hellenistic.sect.night_chart_status_assignment",
+      "rule_ids": ["hel.firmicus.jupiter_no_joy_at_night", "hel.ptolemy.sect_diurnal_nocturnal_assignment"],
+      "inputs": {"facts.sect": "night", "sun_altitude_degrees": -12.0},
+      "expected": {
+        "Moon_sect_status": "of the sect in favour",
+        "Venus_sect_status": "of the sect in favour",
+        "Mars_sect_status": "of the sect in favour",
+        "Sun_sect_status": "contrary to the sect",
+        "Jupiter_sect_status": "contrary to the sect",
+        "Saturn_sect_status": "contrary to the sect",
+        "note": "Firmicus states this negatively and specifically for Jupiter alone ('non enim gaudet Iuppiter in nocturnis genituris'); Ptolemy's chapter states the full reversal for all seven bodies."
+      },
+      "provenance": "src/engine/multitradition/hellenistic.py _sect_status(), cross-checked against Firmicus Mathesis III (De Iove), Kroll/Skutsch p.108-109, OCR lines 5636-5639."
+    },
+    {
+      "vector_id": "hellenistic.sect.malefic_temperament_rationale_check",
+      "rule_ids": ["hel.ptolemy.sect_malefics_temperament_rationale"],
+      "inputs": {"planet": "Saturn", "ptolemaic_quality": "cold", "assigned_sect": "day (hot)", "planet_pair": ["Saturn/day", "Mars/night"]},
+      "expected": {
+        "doctrine": "each malefic is paired with the sect whose quality is the OPPOSITE of its own, so that the pairing supplies a tempering balance rather than reinforcing an existing excess - the inverse logic of the benefic/luminary sect pairing",
+        "source_quotation_present": true
+      },
+      "provenance": "Ptolemy, Apotelesmatika I ξ' (Boll/Boer p.21), OCR lines 2510-2520; qualitative doctrinal check, not a numeric engine field."
+    },
+    {
+      "vector_id": "hellenistic.sect.judgment_hierarchy_order",
+      "rule_ids": ["hel.firmicus.sect_first_judgment_hierarchy"],
+      "event": {"composer_reading_order_step": 1, "step_name": "determine sect (day/night), then read placements"},
+      "expected": {
+        "matches_engine_disclosure": "hellenistic.py's own section.reading[0] begins 'Sect is the first judgment' - Firmicus II.20 supplies the tradition's own instruction for exactly this ordering, checked before angularity or any other placement fact"
+      },
+      "provenance": "Firmicus, Mathesis II.20.11-12 (Kroll/Skutsch p.66), OCR lines 3608-3621, compared against src/engine/multitradition/hellenistic.py build_hellenistic() section.reading list."
+    },
+    {
+      "vector_id": "hellenistic.sect.angular_outcome_consequence",
+      "rule_ids": ["hel.firmicus.sect_angular_felicity_or_calamity"],
+      "inputs": {"whole_sign_house_candidates": [1, 4, 7, 10]},
+      "expected": {
+        "sect_status_of_the_sect_in_favour_AND_angular": "maxima felicitatis incrementa (greatest increases of felicity)",
+        "sect_status_contrary_to_the_sect_AND_angular": "infinita infortunia continuatis calamitatibus (endless misfortunes with continued calamities)",
+        "note": "the rule reverses which trio is 'of the sect' between a day chart and a night chart, but the angular consequence structure itself (best-case vs worst-case) does not change"
+      },
+      "provenance": "Firmicus, Mathesis II.20.11-13 (Kroll/Skutsch p.66), OCR lines 3608-3625, keyed to engine fields placements[].sect_status and placements[].whole_sign_house."
+    },
+    {
+      "vector_id": "hellenistic.dignity.exaltation_over_domicile_claim",
+      "rule_ids": ["hel.firmicus.dignity_hierarchy_and_babylonian_fork_disclosed"],
+      "event": {"doctrine_check": "exaltation ranked above domicile"},
+      "expected": {
+        "firmicus_position": "every planet acts better in its exaltation than in its own domicile (sentence truncated by a manuscript lacuna after 'domiciliis suis')",
+        "babylonian_alternative_reported_not_adopted": "the sign of exaltation IS the domicile - a different scheme Firmicus reports but does not use",
+        "engine_position": "the Hellenistic engine section keeps domicile and exaltation as two separate, independently tracked booleans (in_own_domicile, in_exaltation) and does not rank one above the other numerically, consistent with its own disclosed refusal of a Lilly-style dignity score"
+      },
+      "provenance": "Firmicus, Mathesis II.3.6 (Kroll/Skutsch p.44), OCR lines 2446-2449 and 2462-2467."
+    },
+    {
+      "vector_id": "hellenistic.dignity.domicile_lord_condition_doctrine",
+      "rule_ids": ["hel.firmicus.domicile_lord_host_guest_doctrine"],
+      "inputs": {"example_placement": {"body": "Moon", "sign": "Aries", "domicile_lord": "Mars", "in_own_domicile": false}},
+      "expected": {
+        "judgment": "the Moon's felicity or affliction in this placement is asserted to be shared with, and dependent on, the condition of Mars (its domicile lord) elsewhere in the same chart - a well-placed Mars lends the Moon a share of its own felicity; a cast-down Mars likewise burdens the Moon",
+        "engine_field_interpreted": "placements[].domicile_lord names exactly the 'host' this rule requires be separately assessed"
+      },
+      "provenance": "Firmicus, Mathesis II.20.6-9 (Kroll/Skutsch p.66-67), OCR lines 3562-3607."
+    },
+    {
+      "vector_id": "hellenistic.triplicity.fire_ptolemaic_cross_check",
+      "rule_ids": ["hel.ptolemy.triplicity_fire_sun_jupiter_mars_participant"],
+      "inputs": {"engine_ptolemaic_triplicity_fire": ["Sun", "Jupiter"]},
+      "expected": {
+        "ptolemy_i_18_fire_triangle": {"day_ruler": "Sun", "night_ruler": "Jupiter", "participating_ruler_by_domicile": "Mars"},
+        "match_on_day_night_pair": "exact (Sun, Jupiter)",
+        "note": "the engine's PTOLEMAIC_TRIPLICITY table is a 2-tuple (day, night) and does not itself carry a participating third ruler; Ptolemy's text supplies Mars as co-lord by virtue of holding a domicile (Aries) in the same triangle, additional context beyond the 2-tuple"
+      },
+      "provenance": "src/engine/reference_data.py PTOLEMAIC_TRIPLICITY['Fire'], compared against Ptolemy, Apotelesmatika I (triplicity chapter, Boll/Boer p.41), OCR lines 3782-3796."
+    },
+    {
+      "vector_id": "hellenistic.parents.significators_and_doryphoria",
+      "rule_ids": [
+        "hel.ptolemy.parents_sun_saturn_moon_venus_significators",
+        "hel.ptolemy.parents_same_sect_doryphoria_brilliance",
+        "hel.ptolemy.parents_opposite_sect_doryphoria_instability"
+      ],
+      "event": {"topic": "parents (traditionally the 4th/10th whole-sign places)"},
+      "expected": {
+        "significators": {"father": ["Sun", "Saturn"], "mother": ["Moon", "Venus"]},
+        "same_sect_benefic_doryphoria": "conspicuous and brilliant matters concerning the parents",
+        "opposite_sect_doryphoria_example": "Mars rising before the Sun, or Saturn before the Moon, without same-sect benefic support -> moderateness and irregularity concerning the parents' life",
+        "note": "these three rules must be read together and in this order (significator identity, then same-sect case, then opposite-sect case) since Ptolemy's own chapter presents them as one continuous argument, III.5"
+      },
+      "provenance": "Ptolemy, Apotelesmatika III.5 (Boll/Boer p.109-110), OCR lines 8581-8649."
+    },
+    {
+      "vector_id": "hellenistic.children.alien_sect_diminishment",
+      "rule_ids": ["hel.ptolemy.children_alien_sect_places_humble"],
+      "event": {"topic": "children (a house-topic the engine computes a whole-sign place for but does not delineate)"},
+      "expected": {
+        "judgment": "rulers of the child-producing signs, when occidental and standing in the places of the sect opposite their own, produce a humble and inconspicuous outcome for the children",
+        "engine_field_interpreted": "placements[].sect_status == 'contrary to the sect', for this specific topic"
+      },
+      "provenance": "Ptolemy, Apotelesmatika III, children chapter (Boll/Boer p.176-177), OCR lines 13459-13463."
+    },
+    {
+      "vector_id": "hellenistic.provenance.book2_lost_chapters",
+      "rule_ids": ["hel.firmicus.book2_lost_chapters_disclosed"],
+      "event": {"provenance_check": "Firmicus Mathesis Book II chapters VIII-XIV"},
+      "expected": {
+        "status": "lost entire in the old manuscript branch (M P R V e), per Book II's own surviving index",
+        "partial_recovery": "some material survives, misplaced, in the later manuscripts A B C D F and was relocated by Kroll/Skutsch into its indicated position",
+        "citation_discipline": "any Firmicus Book II citation in this pack falling between chapters VII and XV is anchored to an independently visible chapter heading or running page header, never silently assumed to sit in a numbered gap"
+      },
+      "provenance": "Firmicus, Mathesis, apparatus to II.7 (Kroll/Skutsch p.49-50), OCR lines 2714-2724."
+    }
+  ]
+}

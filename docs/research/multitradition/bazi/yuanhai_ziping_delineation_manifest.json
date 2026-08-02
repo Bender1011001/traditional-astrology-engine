@@ -1,0 +1,656 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "chinese_bazi",
+  "school_id": "yuanhai_ziping_ctext_verse_layer",
+  "source_pack_id": "bazi_yuanhai_ziping_delineation_v1",
+  "source_edition_id": "ctext_yuanhai_ziping_2026_08_02",
+  "source_registry_ids": [
+    "bazi_yuanhai_ziping_wikisource",
+    "bazi_yuanhai_ziping_ctext",
+    "bazi_sanming_tonghui_wikisource",
+    "bazi_sanming_tonghui_ctext_juan10_12"
+  ],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "This pack is the DELINEATION layer, not the calculation kernel: given the pillars, hidden stems, Ten Gods, seasonal command, and branch relations the live engine (src/engine/multitradition/bazi.py) already computes, these rules state what a classical named configuration MEANS, quoted directly from the inspected Chinese and rendered by the engine's own unreviewed translation (rendering_grade: engine_translation_unreviewed throughout, per DEFENSIBILITY.md's 'translation is not a gate for quotation'). All 22 rules are drawn from the ctext.org transcription of Yuanhai Ziping (chapter=901791) - specifically its Wanjin Fu (萬金賦), Four-Character Verses (四言獨步), Five-Character Verses (五言獨步), Five-Phase Generation-Control Rhapsody (五行生克賦), and Luozi's Tidings Rhapsody (珞琭子消息賦) sections - none of which were catalogued in the prior Wikisource-only inspection recorded in bazi/source_audit.md. ctext's own edition record for this title states its version as 暫缺 (no controlling print source identified), so evidence_grade stays C, matching the existing engine disclosure's grade for this same underlying work; this pack does not claim an edition-control upgrade for Yuanhai Ziping itself (see bazi_yuanhai_ziping_gugong_zhenben_facsimile_lead in the registry for that unresolved lead). Every rule carries customer_prediction: false. Rules whose classical text states a lifespan, death, violent-punishment, or gendered/moralizing claim are marked output_policy: refused and are retained ONLY as historical quotation, per the tradition's own refusal list in bazi/defensibility_spec.md; the structural (non-refused) remainder of each such rule is what a future composer may use. No rule here selects a named pattern (格局), a useful/avoidant element (用神), or a strength-class verdict as settled - those axes remain source_gated exactly as recorded in bazi/defensibility_spec.md, and nothing in this pack narrows that gate.",
+  "rules": [
+    {
+      "rule_id": "bazi.delin.tengod.qisha_hour_unrooted_takes_nobility",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_position", "ten_god": "qi_sha (七殺 Seven Killings)", "position": "hour_pillar", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "hour_stem_ten_god_relative_to_day_master": "qi_sha",
+        "hour_branch_hidden_stems_include_day_master_element": false,
+        "qi_sha_seasonally_strong": true
+      },
+      "conclusion": {
+        "judgment": "the native attains nobility / high rank",
+        "chinese": "時殺無根，殺旺取貴。",
+        "engine_rendering": "If the Seven Killings at the Hour pillar has no root, and the Killings itself stands strong in season, it takes nobility.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 10,
+      "exceptions": ["Paired in the source with the immediately following verse (item 221), whose root count reverses the verdict - see bazi.delin.tengod.qisha_hour_multirooted_unfavorable."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 220", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 220", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only; a future composer may use this only alongside the engine's own root/seasonal-state computation for the hour pillar, never as a freestanding claim.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.tengod.qisha_hour_multirooted_unfavorable",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_position", "ten_god": "qi_sha (七殺 Seven Killings)", "position": "hour_pillar", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "hour_stem_ten_god_relative_to_day_master": "qi_sha",
+        "hour_branch_hidden_stems_include_day_master_element_count": ">1",
+        "qi_sha_seasonally_strong": true
+      },
+      "conclusion": {
+        "judgment": "the configuration is unfavorable",
+        "chinese": "時殺多根，殺旺不利。",
+        "engine_rendering": "If the Seven Killings at the Hour pillar has many roots, and the Killings is [also] strong, it is unfavorable.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 11,
+      "exceptions": ["The verse does not state the root-count threshold that separates 'no root' (favorable, previous rule) from 'many roots' (unfavorable, this rule); a single root's classification is left unaddressed by these two lines alone."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 221", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 221", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.tengod.sha_yin_mutual_generation_fame",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_relation", "ten_gods": ["qi_sha (七殺 Seven Killings)", "zheng_yin/pian_yin (印 Seal-Resource)"], "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "qi_sha_present": true,
+        "yin_seal_resource_present": true,
+        "relation": "qi_sha_generates_or_is_supported_by_yin_via_five_phase_production"
+      },
+      "conclusion": {
+        "judgment": "fame and rank are illustrious and successful",
+        "chinese": "殺不離印，印不離殺；殺印相生，功名顯達。",
+        "engine_rendering": "Seven Killings never departs from the Seal; the Seal never departs from Seven Killings. When Killings and Seal generate each other, fame and rank are illustrious and successful.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "note": "This is a general Ten-God relation doctrine, not a completed named pattern (格局) verdict; it does not name or test a geju and stays outside the pattern-candidacy gate.",
+        "customer_prediction": false
+      },
+      "priority": 12,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 218", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 218", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only; must not be rendered as a completed 殺印相生 pattern verdict, only as the cited doctrine.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.tengod.guansha_mixed_controlled_achievement",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_relation", "ten_gods": ["zheng_guan (正官 Direct Officer)", "qi_sha (七殺 Seven Killings)"], "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "zheng_guan_present": true,
+        "qi_sha_present": true,
+        "officer_and_killings_together_are_subdued_or_controlled": true
+      },
+      "conclusion": {
+        "judgment": "there is merit / achievement in subduing the mixed Officer and Killings",
+        "chinese": "官殺重逢，制伏有功；如行帝旺（陽刃），遇之不凶。",
+        "engine_rendering": "When Officer and Killings meet repeatedly, there is merit in subduing them; should the luck period proceed to Imperial Prosperity (the Yang Blade position), meeting it is not inauspicious.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 13,
+      "exceptions": ["The Yang-Blade (陽刃) clause is a luck-period (大運) condition layered onto the natal doctrine; it is retained as an integral part of the quoted couplet rather than split out, since the source does not separate them."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 219", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 219", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.tengod.zhengguan_month_damaged_jia_you_worked_example",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_position_worked_example", "ten_god": "zheng_guan (正官 Direct Officer)", "position": "month_branch_hidden_stem", "day_stem": "jia", "month_branch": "you", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "day_stem": "jia",
+        "month_branch": "you",
+        "officer_star": "xin (辛), the hidden stem of you, is zheng_guan for a Jia day master",
+        "damaging_agents": ["mao (卯) branch - the six-clash partner of you", "ding (丁) stem - Yin Fire, which the source treats as overcoming/breaking the Xin Metal officer star"]
+      },
+      "conclusion": {
+        "judgment": "Mao and Ding overcome and break the Officer star; whether the outcome shows affection or not must be judged further",
+        "chinese": "八月官星（甲木見酉為官），大忌卯丁；卯丁克破，有情無情。",
+        "engine_rendering": "In the eighth month [You/Rooster], the Officer star - for Jia Wood, seeing You is the Officer - greatly taboos Mao and Ding; Mao and Ding overcome and break it, whether with or without redeeming affection.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "mechanical_note": "Directly testable against the live engine's own fields: day_stem=jia, month_branch=you (whose hidden main qi is xin, computed by the engine as zheng_guan for a jia day master), and the engine's branch_relations().six_clashes already carries the you/mao pair structurally; this rule supplies what that structural fact classically MEANS for the Officer star."
+      },
+      "priority": 14,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 222", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 222", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.timing.guanxing_qisha_luck_mutual_dread",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "timing",
+      "scope": {"branch": "natal_timing", "topic": "luck_pillar_ten_god_interaction", "ten_gods": ["zheng_guan (正官 Direct Officer)", "qi_sha (七殺 Seven Killings)"], "chapter": "萬金賦 (Wanjin Fu)"},
+      "conditions": {
+        "natal_officer_star_present": true,
+        "luck_pillar_ten_god": "qi_sha"
+      },
+      "conclusion": {
+        "judgment": "mutual dread between the natal Officer star and a Seven-Killings luck period (and the reverse)",
+        "chinese": "官星怕行七殺運，七殺猶畏官星臨。",
+        "engine_rendering": "The Officer star fears walking into a Seven-Killings luck period; Seven Killings likewise dreads the Officer star's arrival.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 20,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 萬金賦", "section": "item 50", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 50", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only; luck-pillar output stays behind the existing luck-pillar disclosure in src/engine/multitradition/bazi.py, which already emits both directions without a sex input.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.tengod.guansha_mixed_resolution_keep_one",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_relation", "ten_gods": ["zheng_guan (正官)", "qi_sha (七殺)"], "chapter": "萬金賦 (Wanjin Fu)"},
+      "conditions": {
+        "zheng_guan_present": true,
+        "qi_sha_present": true,
+        "both_visible_or_rooted_simultaneously": true
+      },
+      "conclusion": {
+        "judgment": "the mixture bears on the native's longevity; the resolution is to remove one and keep the other, and never let the removed one recur",
+        "chinese": "官殺混雜當壽夭，去官留殺仔細尋。留官去殺莫逢殺，留殺去官官莫逢。",
+        "engine_rendering": "When Officer and Killings are mixed together, it bears on longevity versus early death; removing the Officer and retaining the Killings must be sought out with care. If Officer is kept and Killings removed, do not meet Killings again; if Killings is kept and Officer removed, do not meet the Officer again.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "The 'longevity versus early death' (壽夭) clause is a lifespan claim and is refused for any living customer, per the tradition's refusal list; retained here as historical quotation only. The resolution-method clause (which Ten God to functionally favor once both are present) is not itself a lifespan claim and may be retained structurally."
+      },
+      "priority": 21,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 萬金賦", "section": "items 51-52", "location": "ctext.org wiki.pl?if=gb&chapter=901791, items 51-52", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only; the lifespan clause is refused as customer output per bazi/defensibility_spec.md's refusal list.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.tengod.guansha_damaged_refused",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_damage", "ten_gods": ["zheng_guan (正官)", "qi_sha (七殺)"], "chapter": "萬金賦 (Wanjin Fu)"},
+      "conditions": {
+        "zheng_guan_or_qi_sha_present": true,
+        "damaged_or_clashed": true
+      },
+      "conclusion": {
+        "judgment": "the native will surely die young; the remedy is to fix the future path through a Wealth configuration",
+        "chinese": "官殺受傷人必夭，更宜財格定前程。",
+        "engine_rendering": "If Officer or Killings suffers damage, the person will surely die young; it is better to fix the future path via the Wealth configuration.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused in full for any living customer - this is an explicit early-death claim, exactly the category the refusal list forbids. Retained only as a historical quotation with its suppression reason logged."
+      },
+      "priority": 22,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 萬金賦", "section": "item 53", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 53", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "never rendered as a claim about a living person; historical quotation only, per the refusal list.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.tengod.shishen_outranks_wealth_officer_fears_shangguan_damage",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "ten_god_comparative_value", "ten_gods": ["shi_shen (食神 Eating God)", "zheng_cai/pian_cai (財 Wealth)", "zheng_guan/qi_sha (官殺 Officer/Killings)"], "chapter": "萬金賦 (Wanjin Fu)"},
+      "conditions": {
+        "wealth_officer_seal_present": "must each be distinguished individually before judging",
+        "shi_shen_has_qi": "supported / not weak",
+        "shi_shen_undamaged_by_shang_guan": true
+      },
+      "conclusion": {
+        "judgment": "a supported Eating God surpasses Wealth and Officer in value, but only so long as it is not damaged from without; Wealth or Officer falling into a dead/cutoff seasonal state is a great taboo",
+        "chinese": "財官印綬分明說，莫道食神非易訣；食神有氣勝財官，只怕傷殘前外截，卻分輕重細推詳，大忌財官為死絕。",
+        "engine_rendering": "Wealth, Officer, and Seal-Resource must each be clearly distinguished in the reading; do not say the Eating God lacks a ready formula. When the Eating God has qi, it surpasses Wealth and Officer - one need only fear it being damaged or cut off from without. The relative weight of these must be distinguished in fine detail; it is a great taboo for Wealth or Officer to fall into a dead or cut-off state.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 23,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 萬金賦", "section": "item 64", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 64", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.timing.shangguan_meets_guan_luck_severe_refused",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "timing",
+      "scope": {"branch": "natal_timing", "topic": "luck_pillar_ten_god_interaction", "ten_god": "shang_guan (傷官 Hurting Officer)", "chapter": "萬金賦 (Wanjin Fu)"},
+      "conditions": {
+        "natal_shang_guan_present_and_governing": true,
+        "luck_pillar_ten_god": "zheng_guan"
+      },
+      "conclusion": {
+        "judgment": "severe misfortune, stated in the classical rhetoric as legal execution or exile; danger is visible at once when auspicious stars meet clash",
+        "chinese": "傷官命運莫逢官，斬絞徒流禍百端。月德日貴逢克戰，此命危亡立馬看。",
+        "engine_rendering": "A Hurting-Officer chart or luck period should not meet the Officer; beheading, strangulation, and exile - boundless calamities - follow. When Monthly Virtue or Day Nobility meet clash and combat, this life's danger and ruin can be seen at once.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused in full for any living customer - explicit violent-punishment and death-danger claims. Retained only as historical quotation with its suppression reason logged; the structural doctrine that a Hurting-Officer configuration is averse to an Officer luck period may be retained without the punishment/death imagery."
+      },
+      "priority": 24,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 萬金賦", "section": "items 65-66", "location": "ctext.org wiki.pl?if=gb&chapter=901791, items 65-66", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "never rendered with its punishment/death imagery; historical quotation only, per the refusal list.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.daypillar.shiedabai_reversed_by_wealth_officer",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "day_pillar_category_exception", "category": "十惡大敗 (Ten Evils, Great Defeat)", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "day_pillar_is_member_of_shi_e_da_bai_category": true,
+        "wealth_and_officer_present_and_favorable": true
+      },
+      "conclusion": {
+        "judgment": "the ordinarily inauspicious category reverses into wealth and nobility",
+        "chinese": "十惡大敗，格中大忌；若遇財官，反成富貴。",
+        "engine_rendering": "The 'Ten Evils, Great Defeat' [inauspicious day-pillars] are a great taboo within the configuration; but if the chart meets Wealth and Officer, it reverses instead into wealth and nobility.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 25,
+      "exceptions": ["The inspected passage names the category but does not enumerate its ten specific sexagenary day-pillars; a separate source is required before this rule is operationalizable, and it is retained here as a citation only, not an implementable predicate."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 216", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 216", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only; not operationalizable until the ten member day-pillars are sourced.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.strength.daymaster_strong_month_command_use_wealth",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "month_command_strength_delineation", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "day_master_seasonal_state": "wang or xiang (timely per the engine's existing month_command computation)",
+        "day_master_class": "high/strong"
+      },
+      "conclusion": {
+        "judgment": "use Wealth as the operative Ten God; this reading is outwardly substantial and correct",
+        "chinese": "日主高強，月提得令；用財為物，表實為正。",
+        "engine_rendering": "When the day master is lofty and strong, and the month's seasonal banner has been duly obtained, use Wealth as the operative matter - outwardly substantial, and this is the proper reading.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "note": "Extends, but does not alter, the engine's already-implemented month-command computation (defensibility_spec.md checklist item 4); this states what a 'timely and strong' day master classically implies about which Ten God to foreground, without asserting a full strength-class or useful-element (用神) verdict."
+      },
+      "priority": 30,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 200", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 200", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only; must not be presented as a settled useful-element (用神) verdict, which stays source-gated.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.strength.generation_prosperity_unafraid_of_rest_imprisonment",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "seasonal_state_general_doctrine", "chapter": "五行生克賦 / 四言獨步 (Five-Phase Generation-Control Rhapsody / Four-Character Verses)"},
+      "conditions": {
+        "phase_in_own_generation_or_prosperity_state": true
+      },
+      "conclusion": {
+        "judgment": "a phase in its own generation/prosperity state does not fear a later resting or imprisoned state; only full exhaustion through all four directions ends its run",
+        "chinese": "五行生旺，不怕休囚；東南西北，數盡方休。",
+        "engine_rendering": "When a phase is in its own generation or prosperity, it does not fear resting or imprisonment; only when its course through east, south, west, and north is fully exhausted does it stop.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 31,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 206", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 206", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.strength.advancing_retreating_qi_not_dead_not_born",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "seasonal_transition_nuance", "chapter": "四言獨步 / 珞琭子消息賦 (Four-Character Verses / Luozi's Tidings Rhapsody)"},
+      "conditions": {
+        "phase_qi_direction": "advancing (coming into season) or retreating (departing season)"
+      },
+      "conclusion": {
+        "judgment": "advancing qi is not yet dead; retreating qi is not yet reborn - dormant is not the same as extinct",
+        "chinese": "進氣退氣，命物相爭；進氣不死，退氣不生。 [supporting: 其為氣也，將來者進，成功者退；如蛇在灰，如鱔在塵。]",
+        "engine_rendering": "Advancing qi and retreating qi contend with the chart's substance; advancing qi does not yet die, retreating qi does not yet regenerate. As for this qi: what is coming is advancing, what has finished its work is retreating - like a snake in ash, like an eel in dust.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "note": "A direct qualitative nuance on the engine's already-implemented wang/xiang/xiu/qiu/si seasonal-state computation: a phase transitioning out of season ('退氣') is dormant, not equivalent in force to a phase in the fully opposed ('死') state."
+      },
+      "priority": 32,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 210", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 210", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."},
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 珞琭子消息賦", "section": "item 401", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 401", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.timing.first_luck_seal_township_prosperity_or_calamity",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "timing",
+      "scope": {"branch": "natal_timing", "topic": "first_luck_pillar_ten_god_interaction", "ten_god": "yin (印 Seal-Resource)", "chapter": "萬金賦 (Wanjin Fu)"},
+      "conditions": {
+        "first_luck_pillar_ten_god": "yin (印綬 Seal-Resource)",
+        "luck_pillar_seasonal_state": "generation or prosperity (wang/xiang) versus death/cutoff (si/jue)",
+        "wealth_arrives_to_damage_the_seal": "conditional branch"
+      },
+      "conclusion": {
+        "judgment": "generation/prosperity in the Seal luck period brings glory and flourishing, and meeting an Officer township there brings promotion; a death/cutoff state there is calamity; Wealth arriving to damage the Seal is unfavorable, but the Seal undamaged by Wealth is not fatal",
+        "chinese": "第一限逢印綬鄉，運生生旺必榮昌。官鄉會合遷官職，死絕當頭是禍殃。若是逢財來害印，墮崖落水惡中亡；為官在任他鄉死，作客逢之死路傍。印不逢財人不死，如前逐一細推詳。",
+        "engine_rendering": "If the first luck period enters the Seal-Resource township, and its state is generation or prosperity, the native is surely glorious and flourishing. If the Officer township is met and combines, office and rank are promoted; if death/cutoff confronts it directly, calamity follows. If Wealth instead arrives to harm the Seal [the classical rhetoric names cliff-falls, drowning, dying away from home in office, or death by the roadside as a traveler]. If the Seal is not met by Wealth, the person does not die - each case must be reasoned through individually as above.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "The specific death-mode imagery (falling from a cliff, drowning, dying away from home, roadside death) is refused as customer output per the refusal list; the structural doctrine - first Seal-luck period favorable in generation/prosperity, unfavorable if Wealth damages the Seal - may be retained without that imagery."
+      },
+      "priority": 33,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 萬金賦", "section": "items 60-63", "location": "ctext.org wiki.pl?if=gb&chapter=901791, items 60-63", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "never rendered with its death-mode imagery; historical quotation only for that portion, per the refusal list.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.strength.month_command_useful_branch_fears_clash_most",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "month_command_clash_severity", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "month_branch_or_its_useful_element_present": true,
+        "clash_type": "on the luck period versus on the useful element itself"
+      },
+      "conclusion": {
+        "judgment": "a clash landing on the luck period is mild; a clash landing on the month's useful element itself is inauspicious",
+        "chinese": "提綱有用，最怕刑衝；衝運則緩，衝用則凶。",
+        "engine_rendering": "When the month banner has a useful element, it fears punishment and clash most of all; a clash in the luck period is mild, but a clash on the useful element itself is inauspicious.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "note": "Directly deepens the engine's already-implemented month-command computation (checklist item 4) and its already-computed six_clashes field (checklist item 7): it states the classical stakes of a clash falling specifically on the month branch versus elsewhere."
+      },
+      "priority": 34,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 213", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 213", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.branch.sisheng_stations_strong_subject_prosperity",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "branch_station_group_delineation", "group": "四生 (Four Life-Stations)", "branches": ["yin_branch", "shen", "si", "hai"], "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "chart_contains_two_or_more_of": ["yin_branch", "shen", "si", "hai"],
+        "day_master_and_useful_matter_strong": true
+      },
+      "conclusion": {
+        "judgment": "encountering this configuration while strong brings prosperity",
+        "chinese": "寅申巳亥，四生之局；用物身強，遇之發福。",
+        "engine_rendering": "Yin, Shen, Si, and Hai form the Four Life-Stations configuration; when the useful matter and the self are strong, encountering them brings prosperity.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 40,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 207", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 207", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.branch.siku_stations_hidden_qi_must_be_revealed",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "branch_station_group_delineation", "group": "四墓 (Four Tomb-Stations)", "branches": ["chen", "xu", "chou", "wei"], "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "chart_contains_two_or_more_of": ["chen", "xu", "chou", "wei"],
+        "one_of_the_three_hidden_stems_revealed_and_prosperous_at_stem_level": true
+      },
+      "conclusion": {
+        "judgment": "only a hidden stem that is revealed (appears at the stem level) and prosperous counts as a genuine usable qi from a Tomb-Station branch",
+        "chinese": "辰戌丑未，四墓之局；人元三用，透旺為真。",
+        "engine_rendering": "Chen, Xu, Chou, and Wei form the Four Tomb-Stations configuration; of the three human-element hidden stems usable in each, only one revealed and prosperous at the stem level counts as genuine.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "note": "Bears directly on the engine's already-computed hidden_stems field for chen/xu/chou/wei, each of which the engine already reports with three hidden stems (main/middle/residual, per HIDDEN_STEMS); this rule states the classical criterion for when a middle or residual qi actually carries force."
+      },
+      "priority": 41,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 208", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 208", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.branch.sibai_stations_gendered_claim_refused",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "branch_station_group_delineation", "group": "四敗 (Four Defeat-Stations)", "branches": ["zi", "wu_branch", "mao", "you"], "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "chart_contains_two_or_more_of": ["zi", "wu_branch", "mao", "you"]
+      },
+      "conclusion": {
+        "judgment": "a gendered fate claim: rise-and-decline for a man, solitude for a woman",
+        "chinese": "子午卯酉，四敗之局；男犯興衰，女犯孤獨。",
+        "engine_rendering": "Zi, Wu, Mao, and You form the Four Defeat-Stations configuration; a man who incurs this suffers rise and decline, a woman who incurs this suffers solitude.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused in full as customer output - an explicit gendered/moralizing claim, exactly the category the refusal list forbids. Retained only as historical quotation with its suppression reason logged."
+      },
+      "priority": 42,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 209", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 209", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "never rendered to a customer; historical quotation only, per the refusal list.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.branch.wealth_officer_at_storage_needs_clash_to_open",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "branch_relation_delineation", "ten_gods": ["財 Wealth", "官 Officer"], "relation": "storage/tomb branch containment", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "wealth_or_officer_hidden_in_a_storage_branch": true,
+        "storage_branch_clashed_open": "conditional"
+      },
+      "conclusion": {
+        "judgment": "Wealth or Officer confined in a Storage branch does not prosper unless that storage is clashed open",
+        "chinese": "財官臨庫，不衝不發。",
+        "engine_rendering": "When Wealth or Officer arrives at a Storage branch, it does not prosper unless that storage is clashed open.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "note": "Uses the engine's already-computed six_clashes field together with the hidden-stem Ten-God computation; states what a clash on a chen/xu/chou/wei (storage/tomb) branch means for a Wealth or Officer hidden there."
+      },
+      "priority": 43,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 211", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 211", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.branch.harmony_preferred_general",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "timing",
+      "scope": {"branch": "natal_timing", "topic": "general_orientation", "chapter": "四言獨步 (Four-Character Verses)"},
+      "conditions": {
+        "luck_pillar_or_annual_pillar_forms_a_liu_he_with_a_natal_stem_or_branch": true
+      },
+      "conclusion": {
+        "judgment": "a luck or annual period proceeding into mutual combination (合) with the natal pillars is welcomed",
+        "chinese": "四柱干支，喜行相合。",
+        "engine_rendering": "Among the stems and branches of the four pillars, a period's arrival that forms a mutual combination is welcomed.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "note": "A general orientation statement, not a rule about a specific pillar position; complements the engine's already-computed six_harmonies field with a stated valence (welcomed) rather than a bare structural fact."
+      },
+      "priority": 44,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 四言獨步", "section": "item 212", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 212", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "research_only.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.delin.branch.clash_requires_proportional_count",
+      "tradition_id": "chinese_bazi",
+      "school_id": "yuanhai_ziping_ctext_verse_layer",
+      "period": "Song Ziping compilation lineage (Xu Ziping/Xu Dasheng), transmitted through Ming-Qing print recensions",
+      "domain": "natal",
+      "scope": {"branch": "natal", "topic": "branch_relation_delineation", "relation": "six_clash_multiplicity_exception", "chapter": "五言獨步 (Five-Character Verses)"},
+      "conditions": {
+        "one_branch_of_a_clash_pair_appears_twice_or_more": true,
+        "the_opposite_branch_appears_only_once": true
+      },
+      "conclusion": {
+        "judgment": "two occurrences of one branch do not clash a single occurrence of its clash partner - the same proportional-count principle applies to Wealth, Officer, and Seal-Resource groupings; a luck period that overcomes/breaks this balance is severe",
+        "chinese": "二子不衝午；二寅不衝申；得一分三格，財官印綬同；運中逢克破，一命喪黃泉。",
+        "engine_rendering": "Two Zi do not clash a single Wu; two Yin do not clash a single Shen. Obtaining one part in three, Wealth, Officer, and Seal-Resource are alike; when the luck period meets an overcoming and breaking of this, life is lost.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "The closing death clause ('一命喪黃泉') is refused as customer output per the refusal list; the structural clash-multiplicity doctrine is retained.",
+        "note": "This directly QUALIFIES the engine's already-implemented branch_relations().six_clashes field (checklist item 7), which currently reports a clash purely by presence of both members without weighing relative branch counts. This rule does not change engine output; it is a delineation nuance for a future composer to apply on top of the existing structural fact."
+      },
+      "priority": 45,
+      "exceptions": ["The verse does not state what threshold of imbalance is needed beyond the 2-versus-1 example given for Zi/Wu and Yin/Shen; whether the same ratio generalizes to all six clash pairs is not addressed by this passage alone."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ctext_yuanhai_ziping_901791_2026_08_02", "work": "淵海子平, 五言獨步", "section": "item 341", "location": "ctext.org wiki.pl?if=gb&chapter=901791, item 341", "verification": "Read verbatim via direct page fetch of the numbered passage list; not cross-checked against a page image."}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "never rendered with its death clause; historical quotation only for that portion, per the refusal list.",
+      "review_status": "ctext_ocr_transcription_no_controlling_print_edition_identified_independent_classical_chinese_review_pending"
+    }
+  ]
+}

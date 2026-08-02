@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "chinese_bazi",
+  "source_pack_id": "bazi_yuanhai_ziping_delineation_v1",
+  "status": "research_only_declarative_no_live_adapter",
+  "source_ids": [
+    "bazi_yuanhai_ziping_ctext",
+    "bazi_sanming_tonghui_ctext_juan10_12"
+  ],
+  "vectors": [
+    {
+      "vector_id": "bazi.delin.vec.qisha_hour_unrooted",
+      "rule_ids": ["bazi.delin.tengod.qisha_hour_unrooted_takes_nobility"],
+      "inputs": {"operation": "ten_god_position_check", "day_stem": "geng", "hour_stem": "bing", "hour_branch": "wu_branch", "day_master_root_in_hour_branch": false},
+      "expected": {"hour_stem_ten_god": "qi_sha", "root_present": false, "classical_verdict": "nobility, if the killings is seasonally strong"},
+      "provenance": "Geng day master, Bing (Fire, yang) at the hour stem is qi_sha per ten_god(geng, bing); wu_branch's hidden stems (ding, ji) contain no Metal, so day_master_root_in_hour_branch is false. Item 220, 淵海子平 四言獨步."
+    },
+    {
+      "vector_id": "bazi.delin.vec.qisha_hour_multirooted",
+      "rule_ids": ["bazi.delin.tengod.qisha_hour_multirooted_unfavorable"],
+      "inputs": {"operation": "ten_god_position_check", "day_stem": "jia", "hour_stem": "geng", "hour_branch": "shen", "day_master_root_in_hour_branch": true},
+      "expected": {"hour_stem_ten_god": "qi_sha", "root_present": true, "classical_verdict": "unfavorable, contrasted with the unrooted case"},
+      "provenance": "Jia day master, Geng at hour stem is qi_sha per ten_god(jia, geng); shen's hidden stems (geng, ren, wu_stem) include no Wood, so this specific synthetic pairing is illustrative of the ROOT-ABSENT case only insofar as shen itself carries no jia/yi - to construct the multi-rooted contrast a branch such as yin_branch (hidden jia, bing, wu_stem) would instead be used at the hour position. Retained as a scope note: the vector records the doctrine's shape, not a fully worked multi-root chart. Item 221, 淵海子平 四言獨步."
+    },
+    {
+      "vector_id": "bazi.delin.vec.sha_yin_mutual_generation",
+      "rule_ids": ["bazi.delin.tengod.sha_yin_mutual_generation_fame"],
+      "inputs": {"operation": "ten_god_relation_check", "day_stem": "bing", "other_stem_1": "ren", "other_stem_2": "jia"},
+      "expected": {"other_stem_1_ten_god": "qi_sha", "other_stem_2_ten_god": "pian_yin", "relation": "qi_sha (ren, Water) generates pian_yin (jia, Wood) is false by five-phase order; instead Water generates Wood is TRUE (Water -> Wood is the generation step), so ren (qi_sha) generating jia (pian_yin) for a bing day master is the textbook 殺印相生 shape", "classical_verdict": "fame and rank illustrious, per item 218"},
+      "provenance": "Bing (Fire) day master: ren (Water, yang) is three steps ahead in the element cycle -> qi_sha; jia (Wood, yang) is four steps ahead -> pian_yin. Water generates Wood in the standard five-phase production order, so ren (the Killings) generating jia (the Seal) is exactly the 殺印相生 configuration item 218 names. Item 218, 淵海子平 四言獨步."
+    },
+    {
+      "vector_id": "bazi.delin.vec.guansha_mixed_controlled",
+      "rule_ids": ["bazi.delin.tengod.guansha_mixed_controlled_achievement"],
+      "inputs": {"operation": "ten_god_relation_check", "day_stem": "yi", "other_stem_1": "geng", "other_stem_2": "xin"},
+      "expected": {"other_stem_1_ten_god": "zheng_guan", "other_stem_2_ten_god": "qi_sha", "both_present": true},
+      "provenance": "Yi (Wood, yin) day master: geng (Metal, yang) is zheng_guan (opposite polarity control relation); xin (Metal, yin) is qi_sha (same-polarity control relation). Both present together is the 官殺重逢 condition of item 219. Item 219, 淵海子平 四言獨步."
+    },
+    {
+      "vector_id": "bazi.delin.vec.zhengguan_month_damaged_jia_you",
+      "rule_ids": ["bazi.delin.tengod.zhengguan_month_damaged_jia_you_worked_example"],
+      "inputs": {"operation": "worked_example_check", "day_stem": "jia", "month_branch": "you", "damaging_branch": "mao", "damaging_stem": "ding"},
+      "expected": {"month_branch_main_hidden_stem": "xin", "month_hidden_stem_ten_god": "zheng_guan", "you_mao_is_a_six_clash_pair": true, "ding_controls_xin_metal_via_fire_over_metal": true},
+      "provenance": "This is the exact worked condition item 222 states: a Jia day master with You as month branch has Xin (辛, the sole hidden stem of you per HIDDEN_STEMS) as its Direct Officer (zheng_guan per ten_god(jia, xin)); you/mao is one of the engine's own six LIU_CHONG pairs; Ding (Yin Fire) is the classical controller of Xin (Yin Metal) via Fire-over-Metal. Item 222, 淵海子平 四言獨步."
+    },
+    {
+      "vector_id": "bazi.delin.vec.guanxing_qisha_luck_dread",
+      "rule_ids": ["bazi.delin.timing.guanxing_qisha_luck_mutual_dread"],
+      "inputs": {"operation": "luck_pillar_ten_god_check", "day_stem": "wu_stem", "natal_ten_god": "zheng_guan", "luck_pillar_ten_god": "qi_sha"},
+      "expected": {"natal_officer_present": true, "luck_period_brings_qi_sha": true, "classical_verdict": "mutual dread between the two"},
+      "provenance": "Wu (Earth, yang) day master with a natal zheng_guan (from yi, Wood yin) meeting a luck pillar carrying qi_sha (from jia, Wood yang) instantiates the officer/killings luck-period dread of item 50. Item 50, 淵海子平 萬金賦."
+    },
+    {
+      "vector_id": "bazi.delin.vec.guansha_mixed_resolution",
+      "rule_ids": ["bazi.delin.tengod.guansha_mixed_resolution_keep_one"],
+      "inputs": {"operation": "ten_god_relation_check", "day_stem": "gui", "other_stem_1": "wu_stem", "other_stem_2": "ji"},
+      "expected": {"other_stem_1_ten_god": "zheng_guan", "other_stem_2_ten_god": "qi_sha", "resolution_doctrine": "remove one, keep the other, and never let the removed one recur"},
+      "provenance": "Gui (Water, yin) day master: wu_stem (Earth, yang) is zheng_guan; ji (Earth, yin) is qi_sha. Both present is the mixed condition items 51-52 address (longevity clause refused, resolution-method clause retained). Items 51-52, 淵海子平 萬金賦."
+    },
+    {
+      "vector_id": "bazi.delin.vec.guansha_damaged_refused",
+      "rule_ids": ["bazi.delin.tengod.guansha_damaged_refused"],
+      "inputs": {"operation": "damage_check", "ten_god": "zheng_guan", "damaged_by": "liu_chong (six clash)"},
+      "expected": {"customer_output": "refused - lifespan/death claim", "retained_as": "historical quotation only"},
+      "provenance": "Item 53, 淵海子平 萬金賦: 官殺受傷人必夭 is an explicit early-death claim; this vector records the refusal, not a computable engine fact."
+    },
+    {
+      "vector_id": "bazi.delin.vec.shishen_outranks_wealth_officer",
+      "rule_ids": ["bazi.delin.tengod.shishen_outranks_wealth_officer_fears_shangguan_damage"],
+      "inputs": {"operation": "ten_god_relation_check", "day_stem": "geng", "other_stem_1": "ren", "other_stem_2": "gui"},
+      "expected": {"other_stem_1_ten_god": "shi_shen", "other_stem_2_ten_god": "shang_guan", "doctrine": "a supported shi_shen outranks wealth/officer but is undone by shang_guan damage"},
+      "provenance": "Geng (Metal, yang) day master: ren (Water, yang) is shi_shen; gui (Water, yin) is shang_guan - the pair the verse contrasts (Eating God's value versus its vulnerability to Hurting-Officer-style damage). Item 64, 淵海子平 萬金賦."
+    },
+    {
+      "vector_id": "bazi.delin.vec.shangguan_meets_guan_luck_refused",
+      "rule_ids": ["bazi.delin.timing.shangguan_meets_guan_luck_severe_refused"],
+      "inputs": {"operation": "luck_pillar_ten_god_check", "natal_ten_god": "shang_guan", "luck_pillar_ten_god": "zheng_guan"},
+      "expected": {"customer_output": "refused - violent-punishment and death-danger claim", "retained_as": "historical quotation only; structural aversion doctrine retained without the imagery"},
+      "provenance": "Items 65-66, 淵海子平 萬金賦: 傷官命運莫逢官 with explicit execution/exile imagery."
+    },
+    {
+      "vector_id": "bazi.delin.vec.shiedabai_reversed",
+      "rule_ids": ["bazi.delin.daypillar.shiedabai_reversed_by_wealth_officer"],
+      "inputs": {"operation": "day_pillar_category_check", "category": "shi_e_da_bai", "wealth_or_officer_present": true},
+      "expected": {"ordinary_verdict": "great taboo", "reversed_verdict": "wealth and nobility, if Wealth/Officer favorable", "operationalizable": false},
+      "provenance": "Item 216, 淵海子平 四言獨步; the ten specific member day-pillars of 十惡大敗 are not enumerated in this passage, so 'operationalizable' is explicitly false pending a source that names them."
+    },
+    {
+      "vector_id": "bazi.delin.vec.daymaster_strong_use_wealth",
+      "rule_ids": ["bazi.delin.strength.daymaster_strong_month_command_use_wealth"],
+      "inputs": {"operation": "month_command_check", "day_master_state": "wang or xiang", "day_master_class": "high/strong"},
+      "expected": {"operative_ten_god_to_foreground": "cai (財 Wealth)", "reading_quality": "outwardly substantial, proper"},
+      "provenance": "Item 200, 淵海子平 四言獨步, layered on the engine's existing seasonal_state()/month_command computation."
+    },
+    {
+      "vector_id": "bazi.delin.vec.generation_prosperity_unafraid",
+      "rule_ids": ["bazi.delin.strength.generation_prosperity_unafraid_of_rest_imprisonment"],
+      "inputs": {"operation": "seasonal_state_check", "phase_state": "wang or xiang"},
+      "expected": {"fears_xiu_or_qiu_state_later": false, "stops_only_when": "the full four-direction cycle is exhausted"},
+      "provenance": "Item 206, 淵海子平 四言獨步 / 五行生克賦."
+    },
+    {
+      "vector_id": "bazi.delin.vec.advancing_retreating_qi",
+      "rule_ids": ["bazi.delin.strength.advancing_retreating_qi_not_dead_not_born"],
+      "inputs": {"operation": "seasonal_transition_check", "qi_direction": "advancing or retreating"},
+      "expected": {"advancing_qi_is_dead": false, "retreating_qi_is_reborn": false, "doctrine": "dormant is not extinct, per the snake-in-ash / eel-in-dust image"},
+      "provenance": "Item 210 and item 401, 淵海子平 四言獨步 and 珞琭子消息賦."
+    },
+    {
+      "vector_id": "bazi.delin.vec.first_luck_seal_township",
+      "rule_ids": ["bazi.delin.timing.first_luck_seal_township_prosperity_or_calamity"],
+      "inputs": {"operation": "luck_pillar_ten_god_check", "luck_pillar_index": 1, "luck_pillar_ten_god": "yin (印 Seal-Resource)", "luck_pillar_seasonal_state": "wang or xiang"},
+      "expected": {"classical_verdict": "glory and flourishing", "if_wealth_damages_seal_instead": "unfavorable (death-mode imagery refused as customer output)"},
+      "provenance": "Items 60-63, 淵海子平 萬金賦."
+    },
+    {
+      "vector_id": "bazi.delin.vec.month_command_clash_severity",
+      "rule_ids": ["bazi.delin.strength.month_command_useful_branch_fears_clash_most"],
+      "inputs": {"operation": "clash_severity_check", "clash_target": "month_branch_useful_element", "alternative_target": "luck_pillar_position"},
+      "expected": {"clash_on_useful_element": "inauspicious", "clash_on_luck_period_only": "mild"},
+      "provenance": "Item 213, 淵海子平 四言獨步, layered on the engine's existing month_command and six_clashes computations."
+    },
+    {
+      "vector_id": "bazi.delin.vec.sisheng_stations",
+      "rule_ids": ["bazi.delin.branch.sisheng_stations_strong_subject_prosperity"],
+      "inputs": {"operation": "branch_station_group_check", "branches_present": ["yin_branch", "si"], "day_master_and_useful_matter_strong": true},
+      "expected": {"group": "si_sheng (Four Life-Stations)", "classical_verdict": "prosperity"},
+      "provenance": "Item 207, 淵海子平 四言獨步; yin_branch and si are two of the four members (寅申巳亥)."
+    },
+    {
+      "vector_id": "bazi.delin.vec.siku_stations_revealed_qi",
+      "rule_ids": ["bazi.delin.branch.siku_stations_hidden_qi_must_be_revealed"],
+      "inputs": {"operation": "branch_station_group_check", "branch": "chen", "hidden_stems": ["wu_stem", "yi", "gui"], "revealed_at_stem_level": "yi"},
+      "expected": {"group": "si_ku (Four Tomb-Stations)", "genuine_usable_qi": "only the revealed-and-prosperous one (yi, in this example) counts"},
+      "provenance": "Item 208, 淵海子平 四言獨步, applied to the engine's own HIDDEN_STEMS['chen'] = [wu_stem, yi, gui]."
+    },
+    {
+      "vector_id": "bazi.delin.vec.sibai_stations_refused",
+      "rule_ids": ["bazi.delin.branch.sibai_stations_gendered_claim_refused"],
+      "inputs": {"operation": "branch_station_group_check", "branches_present": ["zi", "wu_branch"]},
+      "expected": {"group": "si_bai (Four Defeat-Stations)", "customer_output": "refused - gendered claim"},
+      "provenance": "Item 209, 淵海子平 四言獨步; zi and wu_branch are two of the four members (子午卯酉)."
+    },
+    {
+      "vector_id": "bazi.delin.vec.wealth_officer_storage",
+      "rule_ids": ["bazi.delin.branch.wealth_officer_at_storage_needs_clash_to_open"],
+      "inputs": {"operation": "storage_ten_god_check", "storage_branch": "chen", "ten_god_hidden_there": "gui (Water) as Wealth for a bing-class day master would require checking polarity - illustrative only", "clashed_open": false},
+      "expected": {"prosperity": false, "condition_to_prosper": "the storage branch must be clashed open (chen/xu is a six-clash pair)"},
+      "provenance": "Item 211, 淵海子平 四言獨步, applied to the engine's own six_clashes field for storage/tomb branches (chen/xu, chou/wei)."
+    },
+    {
+      "vector_id": "bazi.delin.vec.harmony_preferred",
+      "rule_ids": ["bazi.delin.branch.harmony_preferred_general"],
+      "inputs": {"operation": "luck_pillar_relation_check", "forms_liu_he_with_natal_branch": true},
+      "expected": {"valence": "welcomed"},
+      "provenance": "Item 212, 淵海子平 四言獨步, applied to the engine's own six_harmonies field."
+    },
+    {
+      "vector_id": "bazi.delin.vec.clash_proportional_count",
+      "rule_ids": ["bazi.delin.branch.clash_requires_proportional_count"],
+      "inputs": {"operation": "clash_multiplicity_check", "branch_a": "zi", "branch_a_count": 2, "branch_b": "wu_branch", "branch_b_count": 1},
+      "expected": {"clash_takes_effect": false, "reason": "two occurrences of zi do not clash a single wu_branch, per the source's explicit 2-versus-1 example"},
+      "provenance": "Item 341, 淵海子平 五言獨步. This qualifies, without altering, the engine's branch_relations().six_clashes field, which today reports the zi/wu_branch pair by presence alone."
+    },
+    {
+      "vector_id": "bazi.delin.vec.worked_chart.tan_lun_wealth_officer_seal",
+      "rule_ids": ["bazi.delin.tengod.shishen_outranks_wealth_officer_fears_shangguan_damage"],
+      "inputs": {
+        "operation": "worked_chart_ten_god_reproduction",
+        "chart_source": "三命通會 juan 12 (via ctext.org chapter=850832), 譚論 尚書",
+        "pillars": {"year": "庚辰", "month": "甲申", "day": "丁未", "hour": "丙午"}
+      },
+      "expected": {
+        "day_master": "ding (丁, Fire, yin)",
+        "year_stem_geng_ten_god": "zheng_cai",
+        "month_stem_jia_ten_god": "zheng_yin",
+        "month_branch_shen_middle_hidden_stem_ren_ten_god": "zheng_guan",
+        "hour_stem_bing_ten_god": "jie_cai",
+        "cross_check": "the classical judgment '財官印俱旺' (Wealth, Officer, and Seal all prosperous) is internally consistent with the engine's own ten_god()/HIDDEN_STEMS tables: zheng_cai (year stem geng), zheng_yin (month stem jia), and zheng_guan (ren, the MIDDLE hidden stem of the month branch shen) are all genuinely present for a Ding day master. This is a positive self-consistency finding, not proof the chart is an authentic Ming-original (not a later insertion) - see bazi/source_audit.md."
+      },
+      "provenance": "Hand-derived from src/engine/multitradition/bazi.py's own STEM_ELEMENT, ELEMENT_CYCLE, TEN_GOD_NAMES, and HIDDEN_STEMS tables (not executed through a live adapter in this pass). Ding (Fire) day master: geng (Metal) is two cycle-steps ahead of Fire -> Wealth category, opposite polarity (yang geng vs yin ding) -> zheng_cai. Jia (Wood) is four steps ahead -> Resource category, opposite polarity -> zheng_yin. Shen's hidden stems are [geng, ren, wu_stem] (main, middle, residual); ren (Water, yang) is three steps ahead of Fire -> Officer/Killings category, opposite polarity -> zheng_guan. Bing (Fire, yang) is zero steps from Fire, opposite polarity from yin ding -> jie_cai."
+    }
+  ]
+}

@@ -1772,3 +1772,80 @@ def test_peregrine_fork_emits_both_readings(fairfield_panel: dict) -> None:
     assert saturn["essential_score"] == -4
     # The stacking reading reproduces the third-party value.
     assert saturn["essential_score_peregrine_stacking"] == -9
+
+
+# --- Islamicate: al-Qabisi's own procedures --------------------------------
+
+
+def test_al_qabisi_reproduces_his_own_worked_examples(fairfield_panel: dict) -> None:
+    """The anchors. If profection or the 5/4/3/2/1 scoring drifts, these fail.
+
+    Al-Qabisi's Ch. IV profection example and his Ch. I para 77 almuten example
+    both state their own answers, so these are real reproductions of a
+    10th-century author's arithmetic, not self-consistency checks.
+    """
+    check = _section(fairfield_panel, "islamicate_al_qabisi")["facts"][
+        "worked_example_selfcheck"
+    ]
+    assert check["all_profection_points_match"] is True
+    for point, row in check["annual_profection"].items():
+        assert row["matches"] is True, point
+    assert check["mustawli_fully_matches"] is True
+    assert check["mustawli_dignity_scoring"]["computed_scores"]["Mars"] == 6
+    assert check["mustawli_dignity_scoring"]["computed_scores"]["Sun"] == 7
+    assert check["mustawli_dignity_scoring"]["computed_winner"] == "Sun"
+    assert check["firdaria_total_matches_stated_75"] is True
+
+
+def test_al_qabisi_aversion_signs_behold_nothing() -> None:
+    """Ch. I states the 2nd, 6th, 8th and 12th behold nothing. Enforce it."""
+    from src.engine.multitradition.islamicate import (
+        AVERSE_SIGN_DISTANCES,
+        SIGNS,
+        sign_aspect,
+    )
+
+    for distance in range(12):
+        a = 5.0
+        b = distance * 30 + 5.0
+        aspect = sign_aspect(a, b)
+        if distance in AVERSE_SIGN_DISTANCES:
+            assert aspect is None, f"{distance} signs apart should behold nothing"
+        else:
+            assert aspect is not None, f"{distance} signs apart should behold"
+    assert len(SIGNS) == 12
+
+
+def test_al_qabisi_tasyir_rate_is_the_mean_solar_motion() -> None:
+    """His 59'08\"/day should land within an arcsecond of 360/365.2422."""
+    from src.engine.multitradition.islamicate import (
+        MEAN_TROPICAL_YEAR_DAYS,
+        revolution_rate_degrees_per_day,
+    )
+
+    stated = revolution_rate_degrees_per_day()
+    modern = 360.0 / MEAN_TROPICAL_YEAR_DAYS
+    assert abs(stated - modern) * 3600.0 < 1.0
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_al_qabisi_refuses_a_lifespan_and_settles_a_hyleg(
+    birth: BirthInput,
+) -> None:
+    """Hyleg/kadkhudah structure is emitted; the lifespan it exists for is not."""
+    section = _section(build_panel(birth), "islamicate_al_qabisi")
+    facts = section["facts"]
+    settled = facts["hyleg_settled"]
+    assert settled["hyleg"] in {
+        "Sun", "Moon", "Ascendant", "Lot of Fortune", "Prenatal syzygy",
+    }
+    # Every ledger entry with a position must have had the aspect gate applied.
+    for entry in facts["hyleg_candidate_ledger"]:
+        if entry.get("longitude") is not None:
+            assert "passes_aspect_gate" in entry
+    refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
+    assert "lifespan" in refusals
+    blob = json.dumps(facts).lower()
+    for forbidden in ("years_of_life", "death_year", "will_die"):
+        assert forbidden not in blob
+    assert not section.get("reading")

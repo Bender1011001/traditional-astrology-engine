@@ -14,6 +14,7 @@ from . import (
     bazi,
     egyptian,
     hellenistic,
+    islamicate,
     mesoamerican,
     tibetan,
     timebase,
@@ -98,6 +99,11 @@ def build_panel(birth: BirthInput) -> dict[str, Any]:
             lambda: western.build_islamicate(birth, western_section),
             "islamicate_persian",
             "Islamicate / Persian",
+        ),
+        _guard(
+            lambda: islamicate.build(birth, tropical_chart),
+            "islamicate_al_qabisi",
+            "Islamicate (al-Qabisi's own procedures)",
         ),
         _guard(
             lambda: western.build_medieval_jewish(birth, western_section),

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "manifest_id": "tibetan_whitebeyl_access_manifest_2026_08_02",
+  "tradition_id": "tibetan",
+  "retrieved": "2026-08-02",
+  "retrieval_method": "Direct HTTPS download from Internet Archive / BDRC item file endpoints (archive.org/download/{item}/{file}). PDFs were downloaded, rendered to page images with PyMuPDF for direct visual reading, and are recorded here by hash but not stored in the repository (aggregate approximately 143 MB across both works). Selected page-image crops actually inspected are stored under page_images/.",
+  "rights_summary": "Both works are physical reproductions (1972 and 1976 photostat reprints) of Tibetan xylograph prints of a 17th-18th century Tibetan text. Internet Archive / BDRC record the item-level rights statement as 'Public Domain' for both. bdrc-W30116 additionally carries an access_restriction of 'restrictedInChina' (a distribution-policy geoblock applied to Tibet-related BDRC material inside the PRC, not a copyright restriction) but is otherwise unrestricted; bdrc-W1KG12689 carries no restriction at all ('openAccess'). This directly contradicts the blanket 'no sourced anchor' / licensing-style framing previously recorded in this track's source_audit.md and tibetan.py for sMewa and sPar-kha: the controlling primary source is real, identified, retrievable in full, and public domain. See source_audit.md 2026-08-02 addendum for the full finding.",
+  "artifacts": [
+    {
+      "artifact_id": "tibetan_whitebeyl_bdrc_w30116_vol1",
+      "bdrc_item": "bdrc-W30116",
+      "file": "bdrc-W30116-1.pdf",
+      "title": "bai DUr dkar po (Vaidurya dkar po) of sde srid Sangs rgyas rgya mtsho, vol. 1 — 'The fundamental treatise on Tibetan astrology and calendrical calculations'",
+      "author": "sde srid Sangs rgyas rgya mtsho (Desi Sangye Gyatso), 1653-1705",
+      "edition": "New Delhi: T. Tsepal Taikhang, 1972. Reproduced from a print from the Lhasa blocks of Burmiok Athing.",
+      "pages": 650,
+      "bytes": 65394411,
+      "sha256": "b71bfcc07bfd1cac554f602e7d3bc1d87635edcb51bce5bbb825e3fbcd2207ca",
+      "url": "https://archive.org/download/bdrc-W30116/bdrc-W30116-1.pdf",
+      "rights_statement": "Public Domain",
+      "access_restriction": "restrictedInChina",
+      "content_scope": "Predominantly the skar-rtsis (astronomical/calendrical) chapters; only 7 pages in the whole volume matched a scan for the strings \"sme\" / \"spar kha\" in the (unreliable) OCR layer, consistent with the elemental/divinatory chapters sitting mainly in vol. 2.",
+      "ocr_quality": "The IA-generated djvu.txt OCR is unusable for rule extraction: verified by direct inspection to be heavily corrupted (English/decorative front matter is transliterated into pseudo-Tibetan Unicode noise; body-text lines interleave legible runs with garbled strings). No rule in this pack rests on the OCR text.",
+      "used_this_pass": false
+    },
+    {
+      "artifact_id": "tibetan_whitebeyl_bdrc_w30116_vol2",
+      "bdrc_item": "bdrc-W30116",
+      "file": "bdrc-W30116.pdf",
+      "title": "bai DUr dkar po (Vaidurya dkar po) of sde srid Sangs rgyas rgya mtsho, vol. 2",
+      "author": "sde srid Sangs rgyas rgya mtsho (Desi Sangye Gyatso), 1653-1705",
+      "edition": "New Delhi: T. Tsepal Taikhang, 1972. Reproduced from a print from the Lhasa blocks of Burmiok Athing.",
+      "pages": 646,
+      "bytes": 65141693,
+      "sha256": "7b821781c508f903e724db69559052c4d91c4cc624e69ca0538ae171d158fcac",
+      "url": "https://archive.org/download/bdrc-W30116/bdrc-W30116.pdf",
+      "rights_statement": "Public Domain",
+      "access_restriction": "restrictedInChina",
+      "content_scope": "Contains a substantial run of pages (embedded-text-layer keyword hits at file-pages 142, 218, 250, 278, 308, 318, 319, 324, 334, 348, 443, 446, 464, 470, 500, 501, 516, 555, 579, 611 — 20 of 646) matching \"sme\" / \"spar kha\" strings, consistent with a dedicated byung-rtsis/nag-rtsis (elemental astrology) chapter block. File-page 318 was rendered at 6x and 14x zoom and read directly: it is genuine continuous Tibetan dbu-can prose printed with the running folio number 308 in the margin (confirmed by direct visual inspection, not OCR). The prose could not be transcribed to sentence-level confidence at this pass; see source_audit.md for what was and was not verifiable.",
+      "ocr_quality": "Same corruption pattern as vol. 1; unusable for rule extraction.",
+      "used_this_pass": true,
+      "inspected_page_images": [
+        "page_images/w30116_v2_p318_folio308_full.png",
+        "page_images/w30116_v2_p318_folio308_detail.png"
+      ]
+    },
+    {
+      "artifact_id": "tibetan_vaidurya_gyasel_bdrc_w1kg12689_vol1",
+      "bdrc_item": "bdrc-W1KG12689",
+      "file": "bdrc-W1KG12689-1.pdf",
+      "title": "bai DUr g.ya' sel (Vaidurya g.ya' sel, \"Removing the Tarnish of the Beryl\") with the sngon 'gron nyis brgya brgyad pa — Sangye Gyatso's own two companion treatises clarifying controversial points in the White Beryl",
+      "author": "sde srid Sangs rgyas rgya mtsho (Desi Sangye Gyatso), 1653-1705",
+      "edition": "18th-century sde-dge (Derge) redaction, 1976 BDRC/TBRC facsimile reproduction",
+      "pages": 628,
+      "bytes": 6261687,
+      "sha256": "c78d3389f4a34ffdb383f20c9fddf876012b034f3c2f1fe547245eea43bebfd5",
+      "url": "https://archive.org/download/bdrc-W1KG12689/bdrc-W1KG12689-1.pdf",
+      "rights_statement": "Public Domain",
+      "access_restriction": "openAccess",
+      "content_scope": "3 file-page keyword hits (174, 549, 571); not rendered this pass.",
+      "used_this_pass": false
+    },
+    {
+      "artifact_id": "tibetan_vaidurya_gyasel_bdrc_w1kg12689_vol2",
+      "bdrc_item": "bdrc-W1KG12689",
+      "file": "bdrc-W1KG12689.pdf",
+      "title": "bai DUr g.ya' sel (Vaidurya g.ya' sel), vol. 2",
+      "author": "sde srid Sangs rgyas rgya mtsho (Desi Sangye Gyatso), 1653-1705",
+      "edition": "18th-century sde-dge (Derge) redaction, 1976 BDRC/TBRC facsimile reproduction",
+      "pages": 634,
+      "bytes": 6299867,
+      "sha256": "69478ba8b84860a5cbf6d7def0476aa719729777066be8fe017ebfbc50dbcdc0",
+      "url": "https://archive.org/download/bdrc-W1KG12689/bdrc-W1KG12689.pdf",
+      "rights_statement": "Public Domain",
+      "access_restriction": "openAccess",
+      "content_scope": "3 file-page keyword hits (430, 510, 515). File-page 430 rendered at 14x zoom and inspected directly.",
+      "ocr_quality": "Same corruption pattern; unusable for rule extraction.",
+      "used_this_pass": true,
+      "inspected_page_images": [
+        "page_images/w1kg12689_v2_p430_detail.png"
+      ],
+      "legibility_note": "This redaction is printed in a more cursive, lower-contrast style than bdrc-W30116. Direct inspection at 14x zoom was markedly LESS legible than the White Beryl print at the same zoom; this text is not a shortcut around the White Beryl's own legibility gate."
+    }
+  ],
+  "not_retrieved_or_not_used": [
+    {
+      "item": "Gyurme Dorje, 'Tibetan Elemental Divination Paintings: Illuminated Manuscripts from the White Beryl of Sangs-rgyas rGya-mtsho with the Moonbeams Treatise of Lo-chen Dharmasri' (London: John Eskenazi in association with Sam Fogg, 2001)",
+      "status": "in copyright (2001 English translation/commentary by a living scholar); BDRC's scan (archive.org/details/bdrc-W1KG6061) is itself access-restricted under fairUse, not publicly viewable",
+      "why_not_used": "Not needed and not usable for rule promotion: the underlying 18th-century illuminated manuscripts it reproduces are a different, separately-titled artifact from the two works above, and the 2001 English apparatus around them is copyrighted. Named here only as a signpost to the strongest illustrated (thangka-form) witness of the same subject matter, for a future pass with proper access."
+    },
+    {
+      "item": "Unsourced popular websites on Tibetan mewa/parkha arithmetic (tibastro.be/Parkha, kunjung.org/general-4, and similar)",
+      "status": "freely readable, but cite no primary or scholarly source for their stated formulas",
+      "why_not_used": "Explicitly rejected as a source for rule content. This is precisely the 'generic Tibetan astrology engine assembled from English popular books' the existing source_audit.md already warns is unacceptable. Recorded here so a future pass does not rediscover and mistakenly promote them."
+    }
+  ]
+}

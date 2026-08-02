@@ -278,3 +278,107 @@ The comparison produced eight explicit variant observations:
 These are not editorial corrections. The validator recomputes the listed
 firdaria totals, proves that the disagreements remain present, and fails if any
 candidate is promoted to rule-ready, live, or customer-eligible status.
+
+## al-Qabisi direct extraction result (2026-08-02)
+
+The blocking gate recorded above ("no doctrine was encoded from them in this
+pass", "remains gated on lawful access to the English translations") was a
+conflation this corpus has since corrected. Per
+[../DEFENSIBILITY.md](../DEFENSIBILITY.md), "Translation is not a gate for
+quotation": al-Qabisi's *Introduction* is a 9th-10th-century (composed
+mid-10th century, dedicated to Sayf al-Dawla of Aleppo) public-domain Arabic
+text. Independent specialist review is required before any rule is *promoted
+into a validated, live pack* - it was never required before the engine could
+*read the public-domain original and quote it directly*. That distinction had
+not yet been acted on for al-Qabisi specifically; it now has.
+
+**Provenance, precisely.** The Arabic text used is
+`wurzburg_tei/al_qabisi_introduction_arabic_tei.xml`, fetched via
+`fetch_wurzburg_tei.py` and verified against the hash already recorded in
+`abu_mashar_al_qabisi_access_matrix.json`
+(`sha256 3267ff80d6b10dbecf3a2eed7a51495db0842dd20d711a5952cbcbfa05657add`).
+Per its own TEI header: transcribed by Kaddour Alkassem and Azzam Hasan;
+series "Arabic and Latin Corpus", edited by Dag Nikolaus Hasse together with
+Jon Bornholdt, Andreas Büttner, and Irina Galynina; published by the
+Institute of Philosophy, University of Würzburg (Residenz, Südflügel, 97070
+Würzburg, Germany); corpus version 0.4.0, compiled 2026-06-30; licence
+**Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**;
+source edition cited in the TEI `sourceDesc`: al-Qabīṣī (Alcabitius), *The
+Introduction to Astrology*, ed. and transl. Charles Burnett, Keiji Yamamoto
+and Michio Yano (London/Turin, 2004). The companion John of Seville Latin TEI
+witness for the same work (`al_qabisi_introduction_john_latin_tei.xml`,
+`sha256 0766e56b232809e763e8ae1f1cbcbd131ce3649df811ef319e2c1d6803de74b8`) was
+also fetched and hash-verified in this pass via the same script, for future
+Arabic/Latin variant-concordance work; it was not used as a source for any
+rule in this pass.
+
+**What survives and in what shape.** The TEI is a flat, page-addressable
+transcription: one `<div type="book">` containing five `<div type="chapter"
+n="I".."V">` elements (matching al-Qabisi's own stated five-differentia
+structure, given in his own preface: I - the essential and accidental states
+of the zodiacal sphere; II - the natures of the seven planets; III - what
+happens to the seven planets in themselves and to each other; IV -
+interpretation of the astrologers' technical terms; V - the compendium of the
+lots), 206 paragraphs total, with `<pb n=/>` markers reproducing the 2004
+edition's own pagination (18-154) and four `<table>` elements (the Egyptian
+bounds table, the face/decan table, a masculine/feminine-degree table, and a
+"wells"-degree table) using Arabic abjad numerals. No lacunae or editorial
+brackets were encountered in the transcription; the text reads as continuous.
+
+**What was done.** All five chapters were parsed and read directly in Arabic.
+54 rules and 14 validation vectors were extracted into
+`al_qabisi_rule_manifest.json` and `al_qabisi_validation_vectors.json`, each
+citing chapter, paragraph, and edition page, quoting the Arabic, and grading
+every rendering `engine_translation_unreviewed` with `customer_prediction:
+false` throughout - the same discipline already used for the Rhetorius
+(Byzantine) pack in this corpus. Five of al-Qabisi's own dignity tables
+(domicile, exaltation-degree, Dorothean-style triplicity, Egyptian bounds, and
+Chaldean face order) were additionally cross-checked programmatically against
+this repository's existing `src/engine/reference_data.py` and
+`src/engine/multitradition/hellenistic.py` during this pass; all five matched
+exactly, with zero mismatches, across every sign. A sixth finding - al-Qabisi's
+own explicit numerical essential-dignity scoring table (domicile +5,
+exaltation +4, triplicity +3, bound +2, face +1) - is textually identical to
+the scoring table `hellenistic.py` currently documents as "a later Latin
+development" attributed to William Lilly (1647); al-Qabisi states it in
+10th-century Arabic roughly seven centuries earlier. This is reported as a
+research finding for the pack owner's attention; no engine code was changed as
+part of this pass.
+
+Chapter IV turned out to be the single most load-bearing chapter for a natal
+reading: it carries the full hyleg (prorogator) candidate-place algorithm, the
+kadkhudah (alcocoden) selection algorithm (with an explicit, named
+disagreement from Dorotheus on priority order), al-wali (a third,
+less-discussed significator), a fully-worked numeric example of whole-sign
+annual profection (independently reproduced and confirmed correct during this
+pass), a second worked example for world-year profection citing al-Kindi's
+chronology, primary/ascensional directions with a mean-solar-motion rate
+(59'8"/day, correct to about a third of an arcsecond against the modern
+value), a bound-based direction system (al-jarbakhtar) with an internally
+self-consistent rate conversion, and several minor named techniques
+(duodecatemoria, the ninth-parts/nawbahr - structurally the same construction
+as Jyotisha's navamsha, noted as an observation only - the Ascendant-specific
+darijan, and an hour-lord annual rotation, sahib al-dawr). Chapter II
+independently supplied the full nine-body firdaria major-period duration
+table, including both nodes, summing to 75 years - the exact gap flagged as
+absent from the existing al-Biruni pilot (checklist item 7). Chapter V's lot
+compendium (jumal al-sihaam) lists on the order of 50 individually-formulated
+lots across all 12 houses plus mundane/commodity-price lots, several
+explicitly attributed by name (Hermes, Valens, al-Andarzaghar, Dorotheus), and
+closes with al-Qabisi's own admission that the final, weakest tier (commodity
+price divination) is included "even though the doctrine concerning it is
+weak" - a source-internal caveat, not one invented for this pass.
+
+**Rights status, confirmed.** CC BY-SA 4.0 for the TEI transcription itself,
+exactly as already recorded in `abu_mashar_al_qabisi_access_matrix.json`; the
+2004 critical edition's translation and apparatus remain separately
+copyrighted and were neither consulted nor reproduced. Every Arabic quotation
+in the new rule manifest is of the medieval public-domain text.
+
+**What remains gated.** Rule *promotion* into a validated/live pack still
+requires independent Arabic specialist review and a second independent
+passage-to-predicate reader (per the corpus-wide validation gates above); none
+of the 54 rules is `live_engine`, customer-eligible, or interpretation-eligible
+today. The same direct-extraction method should next be applied to the Abu
+Ma'shar Great Introduction and Abbreviation Arabic TEI (already downloaded and
+hash-verified) without merging their doctrine into al-Qabisi's or vice versa.

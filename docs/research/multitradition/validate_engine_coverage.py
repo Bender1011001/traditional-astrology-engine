@@ -19,6 +19,9 @@ EXPECTED_TRACK_IDS = {
     "jaimini",
     "japanese_sukuyodo",
     "byzantine_greek",
+    "hellenistic_delineation",
+    "chinese_qizheng_siyu",
+    "tibetan_white_beryl",
     "indian_jyotisha",
     "chinese_bazi",
     "ziwei_doushu",
@@ -45,6 +48,8 @@ EXPECTED_AUDIT_DIRECTORIES = {
     "jaimini",
     "sukuyodo",
     "byzantine",
+    "hellenistic",
+    "qizheng",
     "babylonian",
     "bazi",
     "burmese",
@@ -68,7 +73,7 @@ EXPECTED_AUDIT_DIRECTORIES = {
 }
 
 EXPECTED_STATUS_COUNTS = {
-    "research_verified": 21,
+    "research_verified": 25,
     "source_limited": 55,
     "not_implemented": 3,
 }

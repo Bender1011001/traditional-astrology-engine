@@ -1,15 +1,17 @@
 {
   "schema_version": 1,
-  "updated": "2026-08-01",
+  "updated": "2026-08-02",
   "tradition_id": "indian_jyotisha",
   "source_registry_ids": [
     "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
     "jyotisha_kalyanavarma_saravali_subrahmanya_1914_archive",
+    "jyotisha_kalyanavarma_saravali_nirnayasagar_1907_archive",
+    "jyotisha_kalyanavarma_saravali_nirnayasagar_1928_dli_archive",
     "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
     "jyotisha_bphs_subodhini_1899_archive"
   ],
-  "status": "inventory_only",
-  "notes": "Honest state: four controlling translations are in the source registry with archive access, but none has yet been page-inspected for worked charts specifically. Nothing below is encoded as a runnable comparison, because doing so from memory rather than from the page would defeat the entire purpose of a worked-example suite. Each entry records what must be inspected and what blocks it.",
+  "status": "partially_encoded",
+  "notes": "2026-08-02 pass: Phaladeepika (Adhyayas V-VIII, XIX) and Aiyar's Brhajjataka translation were both searched broadly for worked-example markers (explicit birth data plus a stated verdict). Neither turned one up; both are rule catalogs, not worked-example collections, in the chapters inspected. That is itself a finding, not a gap glossed over - see the two updated inventory entries below. The BPHS 1899 witness was fetched to a local mirror and its OCR is confirmed (not merely suspected) unusable: of the full text, effectively none of the Devanagari/Hindi survived OCR as anything but literal '?' characters. A THIRD Saravali witness (Nirnaya Sagar Press, 1907, CC0) was located and is, for the first time in this corpus, legible Devanagari rather than corrupted OCR - it has not yet been read for content and is recorded as the next task, not as a worked-example find. No customer-facing chart is encoded anywhere in this file; extracted delineation RULES (as opposed to worked EXAMPLES) from Phaladeepika now live in delineation_rule_manifest.json, which is a separate document from this worked-example suite.",
   "examples": [
     {
       "example_id": "jyotisha.brhajjataka.inventory",
@@ -21,36 +23,77 @@
           {
             "claim_id": "jyotisha.brhajjataka.pending",
             "kind": "calculation_value",
-            "author_states": "Pending page inspection: locate any chart Varahamihira or his commentator works through with stated positions and a stated verdict.",
-            "note": "Placeholder claim recording the inspection task. Not runnable."
+            "author_states": "2026-08-02: searched the full translation for 'for example', 'for instance', 'illustration', 'suppose', 'nativity of' and similar markers. Every hit found is an abstract calculation walkthrough (e.g. 'suppose the longitude of the Sun to be 115 degrees...' for hora/navamsa/Ashtakavarga arithmetic, already reflected in the existing calculation manifests), not a natal chart with real birth data and a stated interpretive verdict. No worked natal chart was located in the portions searched.",
+            "note": "Negative finding, not a placeholder: the search was performed, not merely planned. A page-image pass (rather than keyword search of the OCR) has still not been done and could recover an illustration the OCR garbled past keyword-searchability."
           }
         ]
       },
       "encoding_status": "inventory_only",
       "blockers": [
-        "Page-level inspection of the Aiyar translation for worked illustrations has not been performed.",
-        "Where a commentator supplies the example rather than Varahamihira, attribution must separate the two."
+        "Keyword search of the OCR text found no worked chart; a page-image-level inspection (not keyword search) has not been performed and could still recover one.",
+        "Where a commentator supplies an example rather than Varahamihira, attribution must separate the two."
       ]
     },
     {
       "example_id": "jyotisha.bphs.dasha_inventory",
       "work": "Brihat Parashara Hora Shastra, Subodhini 1899",
-      "location": "Archive copy in registry",
+      "location": "Local mirror: jyotisha/sources/bphs_subodhini_1899_djvu.txt (sha256 edf836323aed641925dea689e0248a582b66238835ac55d8381c372b98ef1684, matching the registry entry)",
       "description": "BPHS dasha and varga chapters are the natural source for a Vimshottari worked example, which would test the engine's dasha start balance directly.",
       "author_judgment": {
         "claims": [
           {
             "claim_id": "jyotisha.bphs.pending",
             "kind": "timing_period",
-            "author_states": "Pending page inspection: locate a worked Vimshottari computation with a stated nakshatra, stated balance, and stated period boundaries.",
-            "note": "Placeholder claim recording the inspection task. Not runnable."
+            "author_states": "2026-08-02: the archive text file was fetched to a local mirror and inspected directly (not merely by metadata). The OCR is confirmed severely corrupted: a spot sample of roughly 2,000 characters contained essentially zero recoverable Devanagari or Hindi words, rendering almost entirely as literal '?' replacement characters. This is worse than the 1914 Saravali witness's 'mixed scripts, many misrecognitions' - it is closer to total OCR failure. No worked Vimshottari computation, or any other content, could be read from this OCR pass.",
+            "note": "This is a genuine access/digitization-quality blocker, not a rights blocker (the digitized pages carry a CC0/public-domain notice) and not a translation-gate question - per DEFENSIBILITY.md's four-row table this is squarely row 3, 'original not retrievable as usable text', even though the underlying page IMAGES are technically downloadable."
           }
         ]
       },
       "encoding_status": "inventory_only",
       "blockers": [
         "The BPHS recension audit already flags variance between recensions; a worked example must name which recension supplies it.",
-        "Page-level inspection not performed."
+        "OCR-text-level inspection is now complete and confirms the text is unusable; only page-IMAGE-level inspection (reading scanned pages directly, not their OCR) could still recover content, and that has not been attempted."
+      ]
+    },
+    {
+      "example_id": "jyotisha.phaladeepika.chapter_inventory",
+      "work": "Phaladeepika (Mantreswara), Subrahmanya Sastri 1950 translation",
+      "location": "Archive item in.gov.ignca.6945; Adhyayas V-VIII (yogas, planet-in-bhava) and XIX (Vimshottari mahadasha results) inspected directly against the OCR text",
+      "description": "The chapters most likely to carry a worked chart in a classical delineation manual - the yoga catalog (V-VII), the planet-in-bhava chapter (VIII), and the dasha-results chapter (XIX) - were read directly, not sampled by keyword search alone, since a worked chart's numbers would not keyword-match. Adhyayas XI-XII (women's horoscope, children) were located but deliberately not mined for rules, since their subject matter (progeny counts, fertility) falls under this tradition's own safety limits on fertility/health claims.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "jyotisha.phaladeepika.no_worked_chart_found",
+            "kind": "topical_verdict",
+            "author_states": "Adhyayas V-VIII and XIX are entirely rule catalogs: named-yoga definitions and results (Pancha Mahapurusha, Kesari/Sakata, Mahabhagya, Adhama/Sama/Varishtha, Sunapha/Anapha/Durudhara/Kemadruma, Vesi/Vaasi/Kartari, the '4 Rajayogas', Neechabhanga Rajayoga), planet-in-bhava results for 12 houses across 8 of 9 grahas (Sun recovered for 5 of 12 houses only), and Vimshottari mahadasha significations for all 9 grahas - all now extracted into jyotisha/delineation_rule_manifest.json. None of these chapters presents a nativity with real or stated birth data, computed positions, and an author-given overall verdict of the kind Sloka-by-sloka rule catalogs do not provide. This is a negative finding about these specific chapters, not a claim that Phaladeepika as a whole contains no worked chart anywhere (Adhyayas IX-XVIII, XX-XXVIII were not inspected in this pass)."
+          }
+        ]
+      },
+      "encoding_status": "inventory_only",
+      "blockers": [
+        "Adhyayas IX-XVIII (rasi-as-lagna effects, kalatra bhava, women's horoscope, issue, longevity, death, rasi general effects, exit-from-the-world, planetary conjunctions) and XX-XXVIII (dasha subdivisions, Kalachakra dasha, Ashtakavarga, upagrahas, transits, miscellanea) were not inspected in this pass and could still contain a worked chart.",
+          "Delineation rules extracted from the chapters that WERE inspected are in jyotisha/delineation_rule_manifest.json, not in this file - this entry records only the worked-example search, which came back negative."
+      ]
+    },
+    {
+      "example_id": "jyotisha.saravali.legible_witness_discovered",
+      "work": "Saravali (Kalyanavarma), Nirnaya Sagar Press 1907 edition (ed. V. Subrahmanya Sastri)",
+      "location": "Archive item saravalisubrahmanyasastryv.nirnayasagarpress1907_202003_345_b; local mirror jyotisha/sources/delineation_saravali_nirnayasagara_1907_djvu.txt",
+      "description": "Both Saravali witnesses previously in this corpus (the 1914 Digital Library of India scan, and a 1928 'third edition' scan) have OCR too corrupted to read as running Devanagari text. This pass located and downloaded a third witness whose OCR is, for the first time, measurably legible: 291,940 of 366,411 characters are proper Devanagari code points and essentially none render as OCR-failure '?' marks. This is a discovery, not a completed extraction - the text proper (past the front-matter book-list pages) has not yet been read for chapters, slokas, or a worked example.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "jyotisha.saravali.witness_legible_not_yet_read",
+            "kind": "calculation_value",
+            "author_states": "Pending: read the Saravali text proper in this witness for chapter structure and any worked horoscope. Not yet performed.",
+            "note": "Placeholder claim recording the next inspection task, distinct from the negative Phaladeepika/Brhajjataka findings above; here the blocker that used to exist (illegible OCR) has been resolved by finding a better witness, and what remains is simply that nobody has read it yet."
+          }
+        ]
+      },
+      "encoding_status": "inventory_only",
+      "blockers": [
+        "Verse-level Sanskrit reading of this witness has not been performed in this pass.",
+        "Per DEFENSIBILITY.md's 'translation is not a gate for quotation' guidance, since the original is public domain and now legibly retrievable, direct rendering (graded engine_translation_unreviewed) is the correct next step rather than waiting for a modern translation - but it was not attempted here for lack of a confident independent Sanskrit reading in the time available this session."
       ]
     },
     {

@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "tibetan",
+  "school_id": "nag_rtsis_whitebeyl_1972_delhi_reprint",
+  "source_pack_id": "tibetan_whitebeyl_gyasel_access_v1",
+  "source_edition_id": "bdrc_w30116_1972_delhi_and_w1kg12689_1976_sdedge",
+  "source_registry_ids": [
+    "tibetan_whitebeyl_bdrc_w30116_1972",
+    "tibetan_vaidurya_gyasel_bdrc_w1kg12689_1976"
+  ],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "This pack does NOT contain sMewa or sPar-kha construction rules. It documents what this pass actually established by direct retrieval and direct visual inspection of the primary source: (1) the White Beryl (bai DUr dkar po) and its companion clarificatory treatise (bai DUr g.ya' sel) are both public-domain, fully retrievable, and their elemental-astrology (byung-rtsis/nag-rtsis) chapter block is real and locatable, which makes the previously-recorded 'no sourced anchor' / licensing framing for sMewa and sPar-kha FALSE as a rights/access claim, in the same pattern as false blockers already dissolved elsewhere in this repository (Nahuatl Florentine Codex, CC-BY-SA Arabic/Latin texts). (2) A genuine, different blocker remains: this specific print could not be read to sentence-level transcription confidence in this pass, which is an evidentiary-quality/paleography gate, not a rights gate. No rule here should be read as asserting any numeric mewa/parkha value, cycle direction, or delineation - none was verified. STATUS NUANCE (this field is a closed enum and cannot carry it): the rules in this manifest are provenance and boundary findings - source identity, rights determination, chapter location, the legibility reclassification, and the cross-tradition separation discipline - and those are verified. NO sMewa or sPar-kha CONSTRUCTION rule is present, because none could be extracted at defensibility grade from the available photostat witness. Do not read 'research_verified' as meaning the elemental layer is encoded; it is not. The prior value of this field was 'access_established_extraction_not_yet_reliable', which said so plainly but was not schema-legal.",
+  "rules": [
+    {
+      "rule_id": "tibetan.whitebeyl.boundary.rights_access_established",
+      "tradition_id": "tibetan",
+      "school_id": "nag_rtsis_whitebeyl_1972_delhi_reprint",
+      "period": "1972_1976_facsimile_of_17th_18th_c_text",
+      "domain": "other",
+      "scope": {
+        "branch": "nag_rtsis",
+        "topic": "access and rights status of the controlling primary source"
+      },
+      "conditions": {
+        "claim_under_test": "sMewa and sPar-kha are blocked on licensing / no sourced anchor, per tibetan.py and the pre-2026-08-02 source_audit.md"
+      },
+      "conclusion": {
+        "finding": "FALSE as a rights/access claim",
+        "evidence": [
+          "bdrc-W30116 (bai DUr dkar po, both vols, 1972 Delhi reprint from Lhasa blocks) carries Internet Archive rights_statement 'Public Domain'; its only restriction is 'restrictedInChina', a PRC distribution geoblock, not a copyright bar",
+          "bdrc-W1KG12689 (bai DUr g.ya' sel, both vols, 1976 facsimile of an 18th-c sde-dge redaction) carries rights_statement 'Public Domain' and access_restriction 'openAccess' - no restriction at all",
+          "both works were retrieved in full as PDFs outside China with no login, paywall, or takedown encountered"
+        ],
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [
+        "Access from inside the PRC is blocked for bdrc-W30116 by BDRC's own stated policy; this was not tested from within China and is recorded as stated, not independently reproduced.",
+        "Engine normalization: this rule's domain was authored as 'provenance', which the shared rule-manifest schema does not admit; it is recorded as 'other'. The substantive scope is unchanged and is stated in this rule's own scope block."
+      ],
+      "conflicts_with": [
+        "tibetan.py's inline comment 'their anchors ... are not fixed by any source in the registry' insofar as it is read as an access/rights claim - it is not; the primary source is registered, hashed and retrievable as of this pass"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "bdrc_w30116_1972",
+          "work": "archive.org item metadata for bdrc-W30116",
+          "section": "rights and access_restriction fields",
+          "location": "https://archive.org/details/bdrc-W30116 and https://archive.org/metadata/bdrc-W30116",
+          "verification": "fetched directly 2026-08-02; rights_statement and access_restriction fields read verbatim"
+        },
+        {
+          "edition_id": "bdrc_w1kg12689_1976",
+          "work": "archive.org item metadata for bdrc-W1KG12689",
+          "section": "rights and access_restriction fields",
+          "location": "https://archive.org/details/bdrc-W1KG12689 and https://archive.org/metadata/bdrc-W1KG12689",
+          "verification": "fetched directly 2026-08-02; rights_statement and access_restriction fields read verbatim"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "This is a provenance finding, not a construction rule; it authorizes further extraction work, not any output.",
+      "review_status": "directly verified against live archive.org metadata; no interpretation involved"
+    },
+    {
+      "rule_id": "tibetan.whitebeyl.boundary.chapter_presence_confirmed",
+      "tradition_id": "tibetan",
+      "school_id": "nag_rtsis_whitebeyl_1972_delhi_reprint",
+      "period": "1972_delhi_reprint",
+      "domain": "other",
+      "scope": {
+        "branch": "nag_rtsis",
+        "topic": "location of elemental-astrology content within the White Beryl"
+      },
+      "conditions": {
+        "method": "embedded PDF text-layer search for the Tibetan strings sme ba (སྨེ་བ) and spar kha (སྤར་ཁ) across both volumes, followed by direct high-resolution visual inspection of one hit page"
+      },
+      "conclusion": {
+        "finding": "volume 2 of bdrc-W30116 carries a substantial, plausibly dedicated run of elemental-astrology material: 20 distinct file-pages out of 646 matched, clustering at file-pages 308-348 and recurring at 443-611; volume 1 carries only 7 scattered matches out of 650, consistent with volume 1 being predominantly skar-rtsis (astronomical/calendrical)",
+        "direct_visual_confirmation": "file-page 318 of bdrc-W30116 vol. 2, rendered at 6x and 14x zoom and read directly (not via OCR), shows genuine continuous Tibetan dbu-can prose with the printed running folio number 308 visible in the margin - this is real primary-source text, not a missing, blank, or corrupted page",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": [
+        "Keyword-hit clustering is a locator heuristic built on an OCR text layer already shown elsewhere in this pack to be unreliable; it is treated as evidence of WHERE to look, not as evidence of WHAT the passages say.",
+        "Only one of the 20 candidate pages (file-page 318 / folio 308) was actually rendered and visually inspected this pass; the other 19 are unverified beyond the keyword-hit locator.",
+        "Engine normalization: this rule's domain was authored as 'provenance', which the shared rule-manifest schema does not admit; it is recorded as 'other'. The substantive scope is unchanged and is stated in this rule's own scope block."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "bdrc_w30116_1972_vol2",
+          "work": "bai DUr dkar po, vol. 2",
+          "section": "folio 308 (file-page 318 of bdrc-W30116.pdf)",
+          "location": "docs/research/multitradition/tibetan/sources/page_images/w30116_v2_p318_folio308_full.png sha256 7ab62866d6909f65bad9c64da29827f3ef2ce678e9d40e02b61caabc5fd11362; detail crop w30116_v2_p318_folio308_detail.png sha256 6db3ffa0c4a543c7928b0c7637c45edac53abdee8ce5432aede0069354c6374d",
+          "verification": "rendered directly from the retrieved PDF at 6x and 14x zoom (PyMuPDF) and read visually; folio number 308 confirmed legible in the printed margin"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Confirms location and genuineness of content only; asserts no specific rule, number, or delineation from the folio.",
+      "review_status": "single-page spot check; full-chapter collation not attempted this pass"
+    },
+    {
+      "rule_id": "tibetan.whitebeyl.boundary.legibility_gate_not_rights_gate",
+      "tradition_id": "tibetan",
+      "school_id": "nag_rtsis_whitebeyl_1972_delhi_reprint",
+      "period": "1972_1976_facsimile",
+      "domain": "other",
+      "scope": {
+        "branch": "nag_rtsis",
+        "topic": "the true nature of the remaining blocker on sMewa/sPar-kha extraction"
+      },
+      "conditions": {
+        "attempted": "sentence-level transcription of file-page 318 (bdrc-W30116 vol.2, folio 308) at 6x and 14x zoom, and of file-page 430 (bdrc-W1KG12689 vol.2) at 14x zoom",
+        "ocr_attempted": "IA-generated djvu.txt/hOCR for both works inspected directly"
+      },
+      "conclusion": {
+        "finding": "the automated OCR layer is confirmed unusable (English/decorative front matter transliterates into pseudo-Tibetan Unicode noise; body text mixes legible runs with garbled strings), and direct visual reading of this specific 1972 photostat-of-woodblock print, while it clearly shows genuine legible Tibetan dbu-can script and readable individual syllables and folio numbers, could not be carried to confident full-sentence transcription of technical procedural content in this pass; the companion sde-dge redaction (bdrc-W1KG12689) is printed in a MORE cursive, LOWER-contrast style and was markedly less legible at the same zoom, so it is not a shortcut around this gate",
+        "classification": "an evidentiary-quality / paleography blocker, requiring either expert manual folio-by-folio reading or a cleaner (ideally modern typeset) edition - NOT an access or rights blocker, and NOT resolvable by substituting unsourced popular-website arithmetic",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [
+        "A different reader, more image processing (e.g. targeted binarization/upscaling of specific lines), or a modern computer-typeset edition of the same text could plausibly clear this gate without any new rights work; this is recorded as the concrete next step, not as a permanent ceiling.",
+        "Engine normalization: this rule's domain was authored as 'provenance', which the shared rule-manifest schema does not admit; it is recorded as 'other'. The substantive scope is unchanged and is stated in this rule's own scope block."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "bdrc_w30116_1972_vol2",
+          "work": "bai DUr dkar po, vol. 2",
+          "section": "folio 308 detail crop",
+          "location": "docs/research/multitradition/tibetan/sources/page_images/w30116_v2_p318_folio308_detail.png sha256 6db3ffa0c4a543c7928b0c7637c45edac53abdee8ce5432aede0069354c6374d",
+          "verification": "directly inspected at maximum practical zoom this pass"
+        },
+        {
+          "edition_id": "bdrc_w1kg12689_1976_vol2",
+          "work": "bai DUr g.ya' sel, vol. 2",
+          "section": "file-page 430 detail crop",
+          "location": "docs/research/multitradition/tibetan/sources/page_images/w1kg12689_v2_p430_detail.png sha256 d82904d2b8f1833a509a7385886c6cb78c518d8fd12bf7f7f21b47d7084e32e5",
+          "verification": "directly inspected at maximum practical zoom this pass; confirmed less legible than the White Beryl print"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "This rule asserts a blocker classification, not any astrological content.",
+      "review_status": "first-pass direct inspection; a second, independently-run inspection would strengthen this finding"
+    },
+    {
+      "rule_id": "tibetan.whitebeyl.boundary.rejects_unsourced_popular_construction",
+      "tradition_id": "tibetan",
+      "school_id": "nag_rtsis_whitebeyl_1972_delhi_reprint",
+      "period": "contemporary",
+      "domain": "other",
+      "scope": {
+        "branch": "nag_rtsis",
+        "topic": "what may NOT be used to fill the legibility gap"
+      },
+      "conditions": {
+        "candidates_checked": [
+          "tibastro.be/Parkha/ParkhaGeneral",
+          "kunjung.org/general-4"
+        ]
+      },
+      "conclusion": {
+        "finding": "both pages state specific numeric mewa/parkha procedures (e.g. a mother's-age-based parkha formula with three variant counting methods; a stated 9,8,7...2 mewa descent sequence) but cite NO primary or scholarly source for any of it",
+        "ruling": "neither is used as a source for any rule in this or any future pass of this track without independent scholarly corroboration; doing so would reproduce exactly the 'generic Tibetan astrology engine assembled from English popular books' failure mode this track's own source_audit.md already names as unacceptable",
+        "customer_prediction": false
+      },
+      "priority": 4,
+      "exceptions": [
+        "Engine normalization: this rule's domain was authored as 'provenance', which the shared rule-manifest schema does not admit; it is recorded as 'other'. The substantive scope is unchanged and is stated in this rule's own scope block."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "web_secondary_unsourced",
+          "work": "tibastro.be and kunjung.org",
+          "section": "Parkha/Mewa calculation pages",
+          "location": "https://www.tibastro.be/Parkha/ParkhaGeneral ; https://www.kunjung.org/general-4",
+          "verification": "fetched directly 2026-08-02; confirmed absence of any cited primary or scholarly source on both pages"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "Negative/boundary finding only.",
+      "review_status": "directly verified"
+    },
+    {
+      "rule_id": "tibetan.whitebeyl.boundary.not_merged_with_sukuyodo_onmyodo_or_bazi",
+      "tradition_id": "tibetan",
+      "school_id": "nag_rtsis_whitebeyl_1972_delhi_reprint",
+      "period": "cross_tradition_governance",
+      "domain": "other",
+      "scope": {
+        "branch": "nag_rtsis",
+        "topic": "transmission-lineage separation discipline"
+      },
+      "conditions": {
+        "observation": "Tibetan byung-rtsis/nag-rtsis (sMewa, sPar-kha) ultimately draws its numerological apparatus - a nine-number magic square and eight trigrams - from the same Chinese five-phase/Yijing-derived cosmological substrate that also underlies the Japanese Onmyodo shikiban tradition and (via a wholly separate Indian/Buddhist transmission for its own core units) is explicitly NOT shared with Sukuyodo's 27-mansion system"
+      },
+      "conclusion": {
+        "ruling": "this track shares no source, no rule, and no vector with docs/research/multitradition/onmyodo/, docs/research/multitradition/sukuyodo/, or docs/research/multitradition/bazi/, despite the distant common Chinese numerological root with Onmyodo/BaZi. The Tibetan corpus, transmission history, technical vocabulary (Wylie Tibetan, not Chinese or Japanese), and institutional context (Men-Tsee-Khang/Phugpa lineage) are distinct and no value may be inherited across tracks",
+        "customer_prediction": false
+      },
+      "priority": 5,
+      "exceptions": [
+        "A rgya-rtsis rnying-ma (old-Chinese-derived) versus rgya-rtsis gsar-ma (new-Chinese-derived) distinction is itself internal to the Tibetan taxonomy per Men-Tsee-Khang and is preserved, not flattened, by this rule.",
+        "Engine normalization: this rule's domain was authored as 'provenance', which the shared rule-manifest schema does not admit; it is recorded as 'other'. The substantive scope is unchanged and is stated in this rule's own scope block."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "mentseekhang_institutional_pages",
+          "work": "Men-Tsee-Khang introduction to Tibetan astrology",
+          "section": "institutional taxonomy",
+          "location": "https://mentseekhang.org/introduction-to-tibetan-astrology/ (already cited in source_audit.md)",
+          "verification": "re-inspected this pass for the rgya-rtsis rnying-ma / gsar-ma distinction"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "Governance rule; no astrological content.",
+      "review_status": "directly verified against existing institutional source already in the registry"
+    }
+  ]
+}

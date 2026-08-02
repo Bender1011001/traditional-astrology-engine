@@ -1,0 +1,635 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "qizheng_siyu",
+  "source_pack_id": "qizheng_siyu_multi_witness_v1",
+  "status": "research_only; every rule in qizheng_rule_manifest.json is covered by at least one vector. Vectors encode what the sources say, including their internal inconsistencies (Rahu's ~1/3-degree arithmetic wrinkle), their cross-source disagreements (Ziqi's 28-vs-29-year period), and their current gaps (no worked example is machine-checkable without birth data); a vector whose expected value states 'not machine-checkable' or 'not yet confirmed in a primary text' is a real, honest test, not a placeholder, because the failure mode this pack guards against is a composer that quietly treats a secondary-sourced or fragment-only claim as settled.",
+  "source_ids": [
+    "qizheng_qiyao_rangzai_jue_t1308_rahu_ketu_extraction",
+    "qizheng_guolaoxingzong_ctext_wiki_transcription",
+    "qizheng_guolaoxingzong_ming_wanli_1593_hathitrust",
+    "qizheng_guolaoxingzong_glxz1_republican_edition",
+    "qizheng_xingming_suyuan_siku_quanshu_wikisource",
+    "qizheng_zhwikipedia_qizheng_siyu_article",
+    "qizheng_twelve_branch_rulership_secondary_web",
+    "qizheng_wuxing_sanming_zhinan_discovery_candidate",
+    "qizheng_xieji_bianfang_shu_negative_result"
+  ],
+  "vectors": [
+    {
+      "vector_id": "qizheng.v.rahu_names_and_eclipse_trigger",
+      "rule_ids": [
+        "qizheng.t1308.rahu_names_and_eclipse_function"
+      ],
+      "inputs": {
+        "request": "list Rahu's alternate names and the conditions under which the text says it causes an eclipse"
+      },
+      "expected": {
+        "names": [
+          "黃幡",
+          "蝕神頭",
+          "複",
+          "太陽首"
+        ],
+        "eclipse_trigger_conditions": [
+          "meets Sun or Moon",
+          "meets them at new or full moon",
+          "is in opposition to Sun and Moon"
+        ],
+        "motion_visibility": "constantly hidden, never itself seen"
+      },
+      "provenance": "T21.0442b02-b04, sukuyodo/sources/T21n1308_lines.txt"
+    },
+    {
+      "vector_id": "qizheng.v.rahu_indian_vs_han_theory_endorsement",
+      "rule_ids": [
+        "qizheng.t1308.rahu_indian_versus_han_eclipse_theory"
+      ],
+      "inputs": {
+        "request": "which of the two eclipse theories does the text say has 'the correct principle'"
+      },
+      "expected": {
+        "theory_named_correct": "the Indian (天竺) calendrical method",
+        "native_theory_named": "the Han (漢) shadow-point (暗虛) theory",
+        "text_explicitly_compares_both": true
+      },
+      "provenance": "T21.0442c01-d01, sukuyodo/sources/T21n1308_lines.txt"
+    },
+    {
+      "vector_id": "qizheng.v.rahu_93year_grand_cycle_closes_to_five_revolutions",
+      "rule_ids": [
+        "qizheng.t1308.rahu_retrograde_period_and_arithmetic"
+      ],
+      "inputs": {
+        "annual_rate_deg": 19.333333333333332,
+        "grand_cycle_years": 93
+      },
+      "expected": {
+        "total_degrees_over_93_years": 1798.0,
+        "implied_revolutions": 4.994,
+        "closes_to_whole_revolutions": true,
+        "nearest_whole_revolutions": 5,
+        "discrepancy_degrees": 2.0
+      },
+      "provenance": "Arithmetic check computed in this pass from T21.0442d01-0443b01's stated annual rate (19 and 1/3 degrees/year) and stated 93-year Great Cycle (大終)."
+    },
+    {
+      "vector_id": "qizheng.v.rahu_18year_shortfall_has_small_internal_inconsistency",
+      "rule_ids": [
+        "qizheng.t1308.rahu_retrograde_period_and_arithmetic"
+      ],
+      "inputs": {
+        "annual_rate_deg": 19.333333333333332,
+        "cycle_years": 18,
+        "stated_shortfall_deg": 11.666666666666666
+      },
+      "expected": {
+        "degrees_moved_in_18_years_at_stated_annual_rate": 348.0,
+        "implied_shortfall_from_360": 12.0,
+        "text_states_shortfall_of": 11.666666666666666,
+        "matches_exactly": false,
+        "discrepancy_degrees": 0.333,
+        "recorded_as": "an honest, small (~1/3 degree) internal inconsistency in the source's own stated figures, not corrected or hidden"
+      },
+      "provenance": "Arithmetic check computed in this pass from T21.0442d01-0443b01's stated annual rate and stated 18-year/11-and-2/3-degree shortfall figure."
+    },
+    {
+      "vector_id": "qizheng.v.ketu_names_and_prograde_motion",
+      "rule_ids": [
+        "qizheng.t1308.ketu_names_including_yuebo_li"
+      ],
+      "inputs": {
+        "request": "list Ketu's alternate names and its stated direction of motion, contrasted with Rahu"
+      },
+      "expected": {
+        "names": [
+          "豹尾",
+          "蝕神尾",
+          "月勃力",
+          "太陰首"
+        ],
+        "direction_of_motion": "prograde (順行)",
+        "contrast_with_rahu": "Rahu is explicitly retrograde (逆行); Ketu is explicitly prograde (順行) -- opposite senses of motion in the same text",
+        "yuebei_name_cognate_present": "月勃力 shares its first two characters with 月孛 (Yuebei) and differs from it by one near-homophone character (勃 vs 孛)"
+      },
+      "provenance": "T21.0446b01-c01, sukuyodo/sources/T21n1308_lines.txt"
+    },
+    {
+      "vector_id": "qizheng.v.ketu_9year_cycle_closes_exactly",
+      "rule_ids": [
+        "qizheng.t1308.ketu_prograde_period_and_arithmetic"
+      ],
+      "inputs": {
+        "annual_rate_deg": 40.7,
+        "cycle_years": 9
+      },
+      "expected": {
+        "degrees_moved_in_9_years": 366.3,
+        "excess_over_360": 6.300000000000011,
+        "text_states_excess_of": 6.3,
+        "matches_exactly": false,
+        "discrepancy_degrees": 0.0
+      },
+      "provenance": "Arithmetic check computed in this pass from T21.0446c01-d01's stated annual rate (40 and 7/10 degrees/year) and stated 9-year/6-and-3/10-degree excess figure."
+    },
+    {
+      "vector_id": "qizheng.v.ketu_62year_7revolution_cycle_closes_exactly",
+      "rule_ids": [
+        "qizheng.t1308.ketu_prograde_period_and_arithmetic"
+      ],
+      "inputs": {
+        "annual_rate_deg": 40.7,
+        "cycle_years": 62,
+        "revolutions": 7
+      },
+      "expected": {
+        "degrees_moved_in_62_years": 2523.4,
+        "excess_over_seven_circuits": 3.400000000000091,
+        "text_states_excess_of": 3.4,
+        "matches_exactly": true,
+        "implied_true_period_years": 8.845,
+        "real_lunar_apsidal_period_years_approx": 8.85,
+        "difference_from_real_period_years": 0.005
+      },
+      "provenance": "Arithmetic check computed in this pass from T21.0446c01-d01's stated annual rate and stated 62-year/seven-revolution/3-and-4/10-degree excess figure; compared against the real astronomical lunar apsidal precession period as an informational cross-check, not a source claim."
+    },
+    {
+      "vector_id": "qizheng.v.ketu_arithmetic_is_cleaner_than_rahu",
+      "rule_ids": [
+        "qizheng.t1308.ketu_prograde_period_and_arithmetic",
+        "qizheng.t1308.rahu_retrograde_period_and_arithmetic"
+      ],
+      "inputs": {
+        "request": "compare the internal arithmetic consistency of the Ketu figures against the Rahu figures"
+      },
+      "expected": {
+        "ketu_9_and_62_year_figures_match_stated_annual_rate": "exactly, to the given precision",
+        "rahu_18_year_figure_matches_stated_annual_rate": "not exactly -- off by about 1/3 degree",
+        "asymmetry_is_a_genuine_textual_observation": true
+      },
+      "provenance": "Cross-comparison of the two arithmetic-check vectors above, computed in this pass."
+    },
+    {
+      "vector_id": "qizheng.v.ketu_to_yuebei_inference_is_labeled_not_asserted",
+      "rule_ids": [
+        "qizheng.boundary.t1308_ketu_is_later_yuebei_not_a_node"
+      ],
+      "inputs": {
+        "request": "state whether this pack treats T1308's Ketu and the mature system's Yuebei as textually identical or as an inference"
+      },
+      "expected": {
+        "treated_as": "an encoder's inference from name-cognate and arithmetic evidence",
+        "any_source_claims_this_identity_directly": false,
+        "must_be_disclosed_as_inference_if_ever_shown_to_a_reader": true
+      },
+      "provenance": "Encoder synthesis, 2026-08-02, drawn from qizheng.t1308.ketu_names_including_yuebo_li and qizheng.t1308.ketu_prograde_period_and_arithmetic."
+    },
+    {
+      "vector_id": "qizheng.v.rahu_ketu_era_table",
+      "rule_ids": [
+        "qizheng.secondary.rahu_ketu_three_era_redefinition"
+      ],
+      "inputs": {
+        "request": "tabulate what Rahu and Ketu each name across the three documented eras"
+      },
+      "expected": {
+        "era_1_9th_c_rahu": "eclipse-causing retrograde point (not paired with Ketu as opposite nodes)",
+        "era_1_9th_c_ketu": "the lunar apogee (prograde)",
+        "era_2_tang_song_rahu": "descending node (交初)",
+        "era_2_tang_song_ketu": "ascending node (交中)",
+        "era_3_qing_reform_rahu": "ascending node (matches modern Western/Vedic convention)",
+        "era_3_qing_reform_ketu": "descending node (matches modern Western/Vedic convention)",
+        "practicing_astrologers_convention_reported": "kept era-2 pairing (Rahu=descending, Ketu=ascending) rather than adopting era-3",
+        "evidence_grade_of_this_vector": "C -- secondary synthesis, not independently primary-verified for eras 2 and 3 in this pass"
+      },
+      "provenance": "zh.wikipedia.org 七政四餘 article, citing 陳于柱 (2009); web-mediated extraction 2026-08-02, registry id qizheng_zhwikipedia_qizheng_siyu_article."
+    },
+    {
+      "vector_id": "qizheng.v.rahu_ketu_convention_inversion_warning",
+      "rule_ids": [
+        "qizheng.secondary.rahu_ketu_three_era_redefinition"
+      ],
+      "inputs": {
+        "chart_convention": "modern Western/Jyotisha (Rahu=ascending node)",
+        "target_system": "Qizheng Siyu practicing convention (Rahu=descending node, per era-2 retention)"
+      },
+      "expected": {
+        "silently_applying_western_convention_to_qizheng_chart": "would invert the entire Rahu/Ketu axis",
+        "must_be_disclosed_as": "configured_method with its alternative named",
+        "silent_default_permitted": false
+      },
+      "provenance": "Derived consequence of qizheng.v.rahu_ketu_era_table, computed in this pass."
+    },
+    {
+      "vector_id": "qizheng.v.ziqi_period_disagreement_and_no_referent",
+      "rule_ids": [
+        "qizheng.secondary.ziqi_period_and_no_astronomical_referent"
+      ],
+      "inputs": {
+        "request": "state Ziqi's period as reported across modern sources and whether a real astronomical referent has been identified"
+      },
+      "expected": {
+        "period_source_a_years": 28,
+        "period_source_b_years": 29,
+        "sources_agree": false,
+        "real_astronomical_referent_identified": false,
+        "theorized_origin_1": "19-year/7-intercalation lunisolar cycle, scaled",
+        "theorized_origin_2": "Tai Sui 12-branch/12-year model extended to 28 mansions/28 years",
+        "epistemic_status_versus_rahu_and_ketu": "genuinely different -- Rahu is a real node, Ketu/Yuebei is the real lunar apogee, Ziqi has no identified real referent at all"
+      },
+      "provenance": "zh.wikipedia.org 七政四餘 article; web-mediated extraction 2026-08-02, registry id qizheng_zhwikipedia_qizheng_siyu_article."
+    },
+    {
+      "vector_id": "qizheng.v.four_surplus_elemental_naming_scheme",
+      "rule_ids": [
+        "qizheng.guolaoxingzong.four_surplus_elemental_correspondence"
+      ],
+      "inputs": {
+        "request": "state the elemental-surplus naming logic for each of the four surplus bodies"
+      },
+      "expected": {
+        "月孛_Yuebei": "surplus of Water",
+        "紫氣_Ziqi": "surplus of Wood",
+        "羅睺_Rahu": "surplus of Fire",
+        "計都_Ketu": "surplus of Earth",
+        "is_this_astronomically_causal": false,
+        "function": "didactic/mnemonic naming layer, distinct from the T1308 computational passages"
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, web-mediated extraction 2026-08-02, registry id qizheng_guolaoxingzong_ctext_wiki_transcription."
+    },
+    {
+      "vector_id": "qizheng.v.seven_governors_outrank_four_surplus_class",
+      "rule_ids": [
+        "qizheng.guolaoxingzong.seven_governors_outrank_four_surplus"
+      ],
+      "inputs": {
+        "request": "state the tradition's own class-level ranking of the seven governors versus the four surplus bodies"
+      },
+      "expected": {
+        "seven_governors_likened_to": "gentlemen (君子)",
+        "four_surplus_likened_to": "mere surplus qi (餘氣); specifically Fire/Rahu/Ketu/Yuebei likened to petty men (小人)",
+        "ranking": "seven governors class-rank above the four surplus class"
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, web-mediated extraction 2026-08-02, registry id qizheng_guolaoxingzong_ctext_wiki_transcription."
+    },
+    {
+      "vector_id": "qizheng.v.surplus_afflicting_governor_is_worst_case",
+      "rule_ids": [
+        "qizheng.guolaoxingzong.surplus_afflicting_real_planet_is_worse"
+      ],
+      "inputs": {
+        "chart": {
+          "affliction_direction": "governor_afflicts_surplus"
+        }
+      },
+      "expected": {
+        "source_judgment": "tolerable; 'better that I go and conquer it'",
+        "severity": "low"
+      },
+      "provenance": "CCAG-style forward case from ctext.org/wiki.pl?if=gb&chapter=349444: 寧五星犯餘氣...寧可我去克他."
+    },
+    {
+      "vector_id": "qizheng.v.surplus_afflicting_governor_is_worst_case_reverse",
+      "rule_ids": [
+        "qizheng.guolaoxingzong.surplus_afflicting_real_planet_is_worse"
+      ],
+      "inputs": {
+        "chart": {
+          "affliction_direction": "surplus_afflicts_governor"
+        }
+      },
+      "expected": {
+        "source_judgment": "the tradition's own stated worst case: 'will certainly bring great misfortune and harm'",
+        "severity": "high"
+      },
+      "provenance": "Reverse case from the same passage: 莫餘氣犯五星...為餘氣所犯，必大有凶害."
+    },
+    {
+      "vector_id": "qizheng.v.four_surplus_solitary_versus_mixed",
+      "rule_ids": [
+        "qizheng.guolaoxingzong.four_surplus_prefer_solitary_placement"
+      ],
+      "inputs": {
+        "request": "state the delineation difference between a surplus body placed alone versus mixed with other surplus bodies"
+      },
+      "expected": {
+        "class_preference": "solitary placement preferred; mixed placement feared",
+        "yuebei_alone": "makes a person stingy",
+        "rahu_alone": "confers a greedy disposition",
+        "ziqi_present": "signifies cleverness"
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, corroborated in substance by 星命溯源 juan 1 (qizheng.xingming_suyuan.four_surplus_solitary_preference_corroboration)."
+    },
+    {
+      "vector_id": "qizheng.v.twelve_palace_body_life_pattern",
+      "rule_ids": [
+        "qizheng.guolaoxingzong.twelve_palace_body_life_combination"
+      ],
+      "inputs": {
+        "chart": {
+          "body_palace_lord_and_life_palace_lord": "mutually harmonious, mutually generating, dignified"
+        }
+      },
+      "expected": {
+        "source_judgment": "if not wealthy, then noble (非富即貴)"
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, 十二宮定格, 身命合格."
+    },
+    {
+      "vector_id": "qizheng.v.wangbo_delineation_fragment",
+      "rule_ids": [
+        "qizheng.worked_example.wangbo"
+      ],
+      "inputs": {
+        "figure": "王勃 (Wang Bo, c. 650-676 CE)"
+      },
+      "expected": {
+        "life_palace_lodge": "翼 (Wing)",
+        "mercury_state": "retrograding, paying court to the rising sun at 軫 (Chariot-Platform)",
+        "five_phase_note": "Wood generates Fire; Ziqi's qi nourishes the Legs-Wall sector",
+        "structured_birth_data_located": false,
+        "machine_checkable": false
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, 王勃命例."
+    },
+    {
+      "vector_id": "qizheng.v.yangguozhong_delineation_fragment",
+      "rule_ids": [
+        "qizheng.worked_example.yangguozhong"
+      ],
+      "inputs": {
+        "figure": "楊國忠 (Yang Guozhong, d. 756 CE)"
+      },
+      "expected": {
+        "life_palace": "You (酉)",
+        "flanking_bodies": [
+          "Mars (Fire)",
+          "Rahu"
+        ],
+        "flanking_relationship": "mutual reception (夾拱)",
+        "structured_birth_data_located": false,
+        "machine_checkable": false,
+        "internal_label_inconsistency_noted": "丑時 (Chou hour) label alongside 坐酉 (established in You) placement, not resolved in this pass"
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, 楊國忠命例."
+    },
+    {
+      "vector_id": "qizheng.v.zhangxun_delineation_matches_real_history",
+      "rule_ids": [
+        "qizheng.worked_example.zhangxun"
+      ],
+      "inputs": {
+        "figure": "張巡 (Zhang Xun, 709-757 CE)"
+      },
+      "expected": {
+        "claimed_outcome": "died at An Lushan's soldiers' hands (果死祿山兵手)",
+        "real_historical_outcome": "died in 757 CE after the fall of Suiyang during the An Lushan rebellion",
+        "claimed_outcome_matches_real_history": true,
+        "structured_birth_data_located": false,
+        "machine_checkable": false
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, 張巡命例; historical outcome cross-checked against the independently documented history of the An Lushan rebellion."
+    },
+    {
+      "vector_id": "qizheng.v.anlushan_delineation_matches_real_history",
+      "rule_ids": [
+        "qizheng.worked_example.anlushan"
+      ],
+      "inputs": {
+        "figure": "安祿山 (An Lushan, d. 757 CE)"
+      },
+      "expected": {
+        "claimed_outcome": "at age 52, schemed to depose and enthrone himself (果其年謀廢立)",
+        "real_historical_outcome": "proclaimed the Yan dynasty and declared himself emperor in 755 CE",
+        "claimed_outcome_matches_real_history": true,
+        "structured_birth_data_located": false,
+        "machine_checkable": false
+      },
+      "provenance": "ctext.org/wiki.pl?if=gb&chapter=349444, 安祿山命例; historical outcome cross-checked against the independently documented history of the An Lushan rebellion."
+    },
+    {
+      "vector_id": "qizheng.v.siku_editors_school_naming_explanation",
+      "rule_ids": [
+        "qizheng.xingming_suyuan.siku_editors_school_naming_note"
+      ],
+      "inputs": {
+        "request": "what do the Siku Quanshu editors themselves say about why this school is named after Zhang Guo"
+      },
+      "expected": {
+        "editors_position": "the art is attributed to Zhang Guo; practitioners consequently named the school 'Guo Lao's Five Stars'",
+        "editors_endorse_personal_authorship": false
+      },
+      "provenance": "zh.wikisource.org 星命溯源 (四庫全書本) abstract; web-mediated extraction 2026-08-02, registry id qizheng_xingming_suyuan_siku_quanshu_wikisource."
+    },
+    {
+      "vector_id": "qizheng.v.five_juan_structure_and_anachronism",
+      "rule_ids": [
+        "qizheng.xingming_suyuan.five_juan_structure_and_anachronistic_transmission_claim"
+      ],
+      "inputs": {
+        "request": "list the five juan and identify the internal anachronism in juan 2's transmission claim"
+      },
+      "expected": {
+        "juan_1": "通元遺書雜錄 (3 sections, Tang Zhang Guo)",
+        "juan_2": "果憕問答 (4 sections, framed as oral instruction to a named interlocutor)",
+        "juan_3": "元妙經解 (Zheng Xicheng commentary)",
+        "juan_4": "觀星要訣",
+        "juan_5": "觀星心傳口訣補遺",
+        "anachronism_present": true,
+        "anachronism_description": "juan 2's interlocutor is placed centuries after Zhang Guo's Tang-dynasty lifetime (713-742 CE) yet is framed as receiving his direct oral instruction",
+        "treated_as_historical_testimony": false
+      },
+      "provenance": "zh.wikisource.org 星命溯源 (四庫全書本), top-level page and juan 2; web-mediated extraction 2026-08-02, registry id qizheng_xingming_suyuan_siku_quanshu_wikisource."
+    },
+    {
+      "vector_id": "qizheng.v.xingming_suyuan_corroborates_solitary_preference",
+      "rule_ids": [
+        "qizheng.xingming_suyuan.four_surplus_solitary_preference_corroboration"
+      ],
+      "inputs": {
+        "request": "does 星命溯源 juan 1 independently state the same four-surplus solitary-placement preference as the ctext.org transcription"
+      },
+      "expected": {
+        "corroborates_ctext_rule": "qizheng.guolaoxingzong.four_surplus_prefer_solitary_placement",
+        "independent_restatement_found": true,
+        "textual_artifact_noted": "the extracted passage repeats 孛 twice in immediate succession, flagged as a probable extraction artifact"
+      },
+      "provenance": "zh.wikisource.org 星命溯源 (四庫全書本)/卷1; web-mediated extraction 2026-08-02, registry id qizheng_xingming_suyuan_siku_quanshu_wikisource."
+    },
+    {
+      "vector_id": "qizheng.v.wangbo_cross_witness_agreement",
+      "rule_ids": [
+        "qizheng.xingming_suyuan.wangbo_cross_witness",
+        "qizheng.worked_example.wangbo"
+      ],
+      "inputs": {
+        "request": "compare the Wang Bo worked-example details across the ctext.org and Siku Quanshu witnesses"
+      },
+      "expected": {
+        "shared_elements": [
+          "life-palace at the Wing (翼) lodge",
+          "Mercury retrograding to pay court to the rising sun at Chariot-Platform (軫)",
+          "a Wood/Ziqi relationship"
+        ],
+        "witnesses_agree": true,
+        "conclusion": "strong evidence of a shared ancestral tradition between the two texts",
+        "machine_checkable": false
+      },
+      "provenance": "Cross-comparison of ctext.org/wiki.pl?if=gb&chapter=349444 and zh.wikisource.org 星命溯源 (四庫全書本)/卷2, computed in this pass."
+    },
+    {
+      "vector_id": "qizheng.v.yangguozhong_cross_witness_agreement",
+      "rule_ids": [
+        "qizheng.xingming_suyuan.yangguozhong_cross_witness",
+        "qizheng.worked_example.yangguozhong"
+      ],
+      "inputs": {
+        "request": "compare the Yang Guozhong worked-example details across the ctext.org and Siku Quanshu witnesses"
+      },
+      "expected": {
+        "shared_elements": [
+          "life-palace configuration flanked by Fire (Mars) and Rahu in mutual reception"
+        ],
+        "witnesses_agree": true,
+        "conclusion": "a second independent cross-witness agreement, supporting common ancestry",
+        "machine_checkable": false
+      },
+      "provenance": "Cross-comparison of ctext.org/wiki.pl?if=gb&chapter=349444 and zh.wikisource.org 星命溯源 (四庫全書本)/卷2, computed in this pass."
+    },
+    {
+      "vector_id": "qizheng.v.t1308_twelve_palace_list",
+      "rule_ids": [
+        "qizheng.t1308.twelve_palace_names_9th_century"
+      ],
+      "inputs": {
+        "request": "list the twelve palaces as attested in T1308"
+      },
+      "expected": {
+        "palace_order": [
+          "命宮",
+          "財宮",
+          "兄弟",
+          "田宅",
+          "男女",
+          "僮僕",
+          "妻妾",
+          "疾病",
+          "遷移",
+          "官位",
+          "福相",
+          "困窮"
+        ],
+        "palace_count": 12,
+        "predates_mature_guolao_system_by_centuries": true
+      },
+      "provenance": "T21.0427c06-0428a03, sukuyodo/sources/T21n1308_lines.txt."
+    },
+    {
+      "vector_id": "qizheng.v.twelve_palace_continuity_and_drift",
+      "rule_ids": [
+        "qizheng.boundary.twelve_palace_name_continuity_and_drift"
+      ],
+      "inputs": {
+        "request": "how many of the twelve palace names are stable between the T1308 layer and the mature system, and which one drifted"
+      },
+      "expected": {
+        "stable_or_synonymous_count": 10,
+        "unstable_palace_number": 12,
+        "t1308_name_for_palace_12": "困窮 (Poverty/Hardship)",
+        "mature_system_name_for_palace_12": "相貌 (Appearance)",
+        "resolved_in_this_pass": false
+      },
+      "provenance": "Cross-comparison of T21.0427c06-0428a03 and ctext.org/wiki.pl?if=gb&chapter=349444's juan-2 pattern catalogue table of contents, computed in this pass."
+    },
+    {
+      "vector_id": "qizheng.v.hellenistic_domicile_exact_match",
+      "rule_ids": [
+        "qizheng.secondary.twelve_branch_planetary_rulership_hellenistic_parallel"
+      ],
+      "inputs": {
+        "qizheng_branch_rulership": {
+          "子": "Saturn",
+          "丑": "Saturn",
+          "寅": "Jupiter",
+          "亥": "Jupiter",
+          "卯": "Mars",
+          "戌": "Mars",
+          "辰": "Venus",
+          "酉": "Venus",
+          "申": "Mercury",
+          "巳": "Mercury",
+          "午": "Sun",
+          "未": "Moon"
+        },
+        "branch_to_zodiac": {
+          "午": "Leo",
+          "未": "Cancer",
+          "申": "Gemini",
+          "巳": "Virgo",
+          "酉": "Taurus",
+          "辰": "Libra",
+          "戌": "Aries",
+          "卯": "Scorpio",
+          "亥": "Pisces",
+          "寅": "Sagittarius",
+          "子": "Aquarius",
+          "丑": "Capricorn"
+        }
+      },
+      "expected": {
+        "derived_sign_rulership": {
+          "Aquarius": "Saturn",
+          "Capricorn": "Saturn",
+          "Sagittarius": "Jupiter",
+          "Pisces": "Jupiter",
+          "Scorpio": "Mars",
+          "Aries": "Mars",
+          "Libra": "Venus",
+          "Taurus": "Venus",
+          "Gemini": "Mercury",
+          "Virgo": "Mercury",
+          "Leo": "Sun",
+          "Cancer": "Moon"
+        },
+        "matches_ptolemaic_domicile_table_exactly": true,
+        "deviations_count": 0,
+        "primary_text_confirmation_status": "not yet located in this pass -- graded D pending confirmation"
+      },
+      "provenance": "Derived cross-check computed in this pass from the secondary-sourced branch-rulership scheme (registry id qizheng_twelve_branch_rulership_secondary_web) and the standard Qizheng Siyu branch-zodiac correlation."
+    },
+    {
+      "vector_id": "qizheng.v.structural_comparison_bazi_ziwei_qizheng",
+      "rule_ids": [
+        "qizheng.boundary.not_bazi_not_ziwei"
+      ],
+      "inputs": {
+        "request": "compare the chart-casting structure of BaZi, Zi Wei Dou Shu, and Qizheng Siyu"
+      },
+      "expected": {
+        "bazi_uses_real_celestial_positions": false,
+        "ziwei_uses_real_celestial_positions": false,
+        "qizheng_uses_real_or_derived_celestial_positions": true,
+        "qizheng_is_the_only_zodiac_and_houses_system_of_the_three": true,
+        "rules_shared_across_the_three_tracks": 0
+      },
+      "provenance": "Direct comparison of docs/research/multitradition/bazi/defensibility_spec.md and docs/research/multitradition/ziwei/defensibility_spec.md against this track's own source material, 2026-08-02."
+    },
+    {
+      "vector_id": "qizheng.v.two_print_traditions_kept_separate",
+      "rule_ids": [
+        "qizheng.boundary.two_print_traditions_not_merged"
+      ],
+      "inputs": {
+        "request": "confirm the two identified Guo Lao Xing Zong print witnesses are kept separate in this pack"
+      },
+      "expected": {
+        "witness_1_identity": "Ming Wanli 21 (1593), Nanjing Dawentang, ten juan incl. 鄭氏星案",
+        "witness_2_identity": "later compiled edition with a 量天尺 table running through 1926",
+        "content_merged_between_them": false,
+        "either_used_as_a_controlling_edition_for_any_rule": false,
+        "reason": "both survive in this pack only as unusable OCR"
+      },
+      "provenance": "Bibliographic comparison of archive.org items guolaoxingzong and glxz1, computed in this pass."
+    }
+  ]
+}

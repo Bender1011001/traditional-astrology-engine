@@ -10,10 +10,13 @@ specialist in either would check first:
   and time-lord procedures (zodiacal releasing, decennials, profections). No
   numerical dignity score - Valens and Dorotheus judge by condition, not points.
 
-  Latin-European (13th - 17th c.): quadrant houses, Lilly's NUMERICAL essential
-  and accidental dignity tables, almuten figuris, developed reception doctrine,
-  primary directions, and horary as a mature branch. The scoring table is a
-  Latin development and applying it to a Hellenistic reading is an anachronism.
+  Latin-European (13th - 17th c.): quadrant houses, the NUMERICAL essential and
+  accidental dignity tables Lilly printed, almuten figuris, developed reception
+  doctrine, primary directions, and horary as a mature branch. Applying the
+  scoring table to a Hellenistic reading is still an anachronism - but it is an
+  Arabic one, not a Latin one. The 5/4/3/2/1 table is al-Qabisi's, stated in the
+  Arabic of the mid-10th century and worked through an example there; the Latin
+  West received it in translation. See the islamicate track.
 
 Both read the same sky. The split is about which authorities and which
 procedures govern the judgment.
@@ -164,9 +167,15 @@ def build_hellenistic(birth: BirthInput, chart: Any) -> TraditionSection:
         DisclosureKind.REFUSAL,
         "No numerical dignity score",
         "Valens and Dorotheus judge planetary condition qualitatively - by sect, "
-        "phase, place, and reception. Lilly's +5/+4/+3/+2/+1 scoring table is a "
-        "later Latin development; applying it here would be an anachronism. It "
-        "appears in the Latin-European section instead, where it belongs.",
+        "phase, place, and reception. The +5/+4/+3/+2/+1 scoring table postdates "
+        "them and applying it here would be an anachronism. It appears in the "
+        "Latin-European section instead. One correction to how this section used "
+        "to describe it: the table is NOT a Latin invention. Al-Qabisi states it "
+        "outright in Arabic in the mid-10th century - domicile five powers, "
+        "exaltation four, triplicity three, bound two, face one - and works an "
+        "almuten example with it, six centuries before Lilly printed it. Lilly "
+        "transmitted it; he did not originate it. The anachronism against Valens "
+        "is real either way, which is why the refusal stands.",
     )
     section.disclose(
         DisclosureKind.REFUSAL,

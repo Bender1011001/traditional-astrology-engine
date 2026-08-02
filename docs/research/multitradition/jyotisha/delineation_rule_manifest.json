@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "indian_jyotisha",
+  "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+  "source_pack_id": "mantreswara_phaladeepika_subrahmanya_1950_v1",
+  "source_edition_id": "phaladeepika_ignca_scan_subrahmanya_sastri_1950_second_edition",
+  "source_registry_ids": ["jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive"],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "This is the Parasari (BPHS-descended) delineation layer, distinct from and not merged with the Jaimini sign-based track at docs/research/multitradition/jaimini/. Every rule below is paraphrased (not quoted at length) from V. Subrahmanya Sastri's 1950 second-edition English translation of Mantreswara's Phaladeepika (archive item in.gov.ignca.6945, registry jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive). That scan's title page states 'copyright registered' and the item's Archive metadata leaves the rights field empty, so this pack is treated exactly as the existing brhajjataka_planetary_rule_manifest.json treats Aiyar's 1905 Brhajjataka translation: internal alignment and paraphrase research, not a customer-facing quotation, pending a jurisdictional rights decision. The same scan carries Devanagari sloka text before each translated passage, but djvu OCR of that Devanagari is corrupted in this copy (mixed Latin/Devanagari misreads) and could not be used to control wording independently; no direct Sanskrit rendering is offered here, and none is claimed. Sloka numbers are read directly off the OCR's own 'Sloka N' labels adjacent to each passage and are corroborated against the printed table of contents and descriptive contents (both inspected), not invented. Chapter (Adhyaya) attributions for the yoga passages are read from the nearest running-header page marker ('Adh. V/VI/VII') in the same scan; where two chapters' headers appear within a few pages of a passage, both are named and the uncertainty is disclosed rather than silently resolved. Every planet-in-bhava and dasha-result table below is a paraphrase lookup, matching the compact 'directed_relationship_lookup' / lookup-table convention already used in brhajjataka_planetary_rule_manifest.json, rather than one rule object per clause. No numeric strength (Shadbala/Ashtakavarga), muhurta timing, remedial prescription, marriage-compatibility, or lifespan claim is encoded anywhere in this file, consistent with the tradition's refusal list. Progeny/children counts stated by the source for some houses and yogas are retained here as historical testimony (kind: topical_verdict) but are flagged output_policy: suppress-as-fertility-adjacent, matching the corpus's existing treatment of varna/caste material - retain in the research trace, never render as a claim about a living person's fertility. Nothing in this file is customer-eligible; customer_prediction is false throughout and no composer or engine code was written to consume it.",
+  "rules": [
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.sun",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Sun", "chapter": "Adhyaya VIII"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Sun"}, {"fact": "house_from_lagna", "operator": "in", "value": [6, 9, 10, 11, 12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_the_sun_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "6": "loses wealth and friends; not long-lived; defective eyesight, or blind",
+          "9": "loses his father; has children and relations; reveres gods and brahmins",
+          "10": "sons, vehicles, praise, intelligence, wealth, strength and fame; becomes a king",
+          "11": "very wealthy and long-lived; a king; without sorrow",
+          "12": "hates his father; defective eyesight; without wealth and children"
+        },
+        "houses_not_recovered": [1, 2, 3, 4, 5, 7, 8]
+      },
+      "priority": null,
+      "exceptions": [
+        "Slokas 1-4 of Adhyaya VIII cover the Sun across all 12 houses per the descriptive contents (1-4: 'the effect of the Sun being posited in the several bhavas from the Lagna onwards'), but this OCR's English recovers only houses 6 and 9-12 cleanly; houses 1-5, 7 and 8 fall in a stretch of the scan where only garbled Devanagari survives between the end of the preceding Neechabhanga passage and the legible resumption at house 6/7's tail. A second pass against the page images (not the OCR) is needed to recover them; they are not invented here.",
+        "Sun's own dignity/retrograde/combustion condition (already computed by the engine) is not folded into this table; the source states these as unconditioned bhava results, one line per house."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII (effects of the Sun and other planets in the several bhavas from the Lagna)", "location": "Slokas 3(tail)-4; descriptive-contents entry '1-4' confirms full 12-house scope", "verification": "translation_inspected_ocr; embedded Devanagari present but OCR-corrupted and not independently checked"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; houses 1-5, 7 and 8 must not be filled in from any other tradition's convention or from memory - report them as not-yet-recovered, not as absent from the source",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review and page-image recovery of houses 1-5,7-8 pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.moon",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Moon", "chapter": "Adhyaya VIII", "sloka_range": "5-7"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Moon"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_the_moon_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "1": "waxing Moon: strong constitution, long life, fearless, powerful, wealthy; waning Moon: the reverse of these",
+          "2": "rich, very learned or eloquent, a sensualist, but defective in some limb",
+          "3": "has brothers; lascivious; strong and powerful; but very miserly",
+          "4": "happy, indulges in sensual pleasure, liberal in gifts, has friends and vehicles, becomes renowned",
+          "5": "good sons; very intelligent; gentle bearing; becomes a minister",
+          "6": "short-lived; ignorant; suffers from stomach ailment; suffers humiliation",
+          "7": "agreeable to look at; loved by a beautiful woman; exceedingly lovely",
+          "8": "suffers from diseases; short-lived",
+          "9": "prosperous and virtuous; blessed with children; victorious; undertakings succeed from the outset",
+          "10": "does good acts; helpful to the virtuous",
+          "11": "high-minded, long-lived, endowed with riches, children and servants",
+          "12": "odious to others; suffers misery; insulted; most indolent"
+        }
+      },
+      "priority": null,
+      "exceptions": ["House-1 result is explicitly conditioned on waxing versus waning Moon; houses 2-12 are not conditioned on phase in this passage."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 5-7", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.mars",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Mars", "chapter": "Adhyaya VIII", "sloka_range": "8-10"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Mars"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_mars_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "1": "an injured limb; short-lived; very cruel and adventurous",
+          "2": "adverse or ugly-faced; devoid of learning and wealth; dependent on bad people",
+          "3": "good qualities; possesses wealth; brave; unassailable; happy; no brothers",
+          "4": "without friends, mother, lands, happiness, house and vehicles",
+          "5": "unhappy; full of avarice; back-biting; weak-minded",
+          "6": "exceedingly smitten with love; wealthy and famous; a king; victorious in battle",
+          "7": "does improper acts; suffers affliction through disease; wanders the roads; loses his wife",
+          "8": "deformed body; poor; short-lived; cursed by the people",
+          "9": "friend of the sovereign yet hated by others; fatherless; commits homicide",
+          "10": "a king, cruel, liberal, praised by important people",
+          "11": "endowed with riches and happiness; brave; no sorrow; good character",
+          "12": "deformed eyes; cruel; without a wife; a slanderer; a mean wretch"
+        }
+      },
+      "priority": null,
+      "exceptions": ["House 5's fuller clause ('unhappy, without children...') is retained with the children/progeny clause suppressed per this file's global fertility-adjacent output_policy."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 8-10", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; house-5 progeny clause suppressed as fertility-adjacent, retained only as historical testimony",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.mercury",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Mercury", "chapter": "Adhyaya VIII", "sloka_range": "11-13"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Mercury"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_mercury_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "1": "long-lived; speaks sweetly and clearly; sharp-witted; learned in all shastras",
+          "2": "acquires wealth by his own talents; a poet; sincere and attractive in speech; eats sumptuous food",
+          "3": "brave; of medium life; has good brothers; suffers fatigue and is dejected",
+          "4": "learned; witty in speech; happy; possessed of friends, lands, corn, wealth and enjoyment",
+          "5": "learned; happy; courageous; a good number of children; conversant with charms or spells",
+          "6": "angry through disputes; harsh in speech; idle; destroys the power of his enemies",
+          "7": "learned; dresses beautifully; has all the greatness; a rich lady as his wife",
+          "8": "widely renowned; long-lived; supporter of his family; a lord and a commander of the army",
+          "9": "learning and wealth; good conduct; religious-minded; conversant with everything; very eloquent in speech",
+          "10": "successful in whatever he undertakes; good learning, strength, intelligence and happiness; does good acts; truthful",
+          "11": "long-lived; truthful; very rich; happy; possessed of servants",
+          "12": "miserable; devoid of learning; suffers humiliation; inactive"
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 11-13", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.jupiter",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Jupiter", "chapter": "Adhyaya VIII", "sloka_range": "14-16"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Jupiter"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_jupiter_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "1": "handsome; fortunate; long-lived; fearless; blessed with children",
+          "2": "eloquent; a good connoisseur of food; a lovely face; wealthy and learned",
+          "3": "treated with disrespect; miserly; a renowned brother; commits sins; wickedly disposed",
+          "4": "lives with mother, friends, attendants, sons, wife, corn and so on; happy",
+          "5": "suffers distress (source names loss connected with progeny, suppressed here); intelligent; becomes a king's adviser",
+          "6": "very tactful; suffers disrespect; destroys his enemies; clever in charms and exorcising",
+          "7": "possesses a good wife and sons; very amiable; more munificent than his father",
+          "8": "poor; earns his livelihood as a menial; sinful but long-lived",
+          "9": "becomes a famous minister; endowed with wealth and children; anxious to do virtuous acts",
+          "10": "follows the right course of conduct; renowned for his virtues; very rich; a friend of the king",
+          "11": "wealthy; fearless; few children; long-lived; travels in vehicles",
+          "12": "hated by others; foul-mouthed; no children; sinful, idle and a menial"
+        }
+      },
+      "priority": null,
+      "exceptions": ["Houses 1, 4, 5, 9, 11 and 12 all carry a progeny/children clause in the source; those clauses are retained only as historical testimony and are suppressed as fertility-adjacent for any customer-facing use, matching this file's global policy."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 14-16(-17)", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; progeny clauses suppressed as fertility-adjacent",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.venus",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Venus", "chapter": "Adhyaya VIII", "sloka_range": "17-19"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Venus"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_venus_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "1": "a healthy and beautiful body; happy; endowed with long life",
+          "2": "becomes a poet; endowed with wealth of various kinds",
+          "3": "wifeless; unhappy; poor; miserly; unpopular",
+          "4": "good vehicles, good house, jewels, clothes and scents",
+          "5": "owner of immense wealth; protects others; very wise; blessed with children",
+          "6": "no enemies; no riches; corrupted by young women; affected by grief",
+          "7": "a good wife but has intrigues with bad women; loses a wife; wealthy",
+          "8": "long-lived, rich, a ruler of the earth",
+          "9": "blessed with wife, friends and children; prosperous through royal favor",
+          "10": "widely renowned; has friends; a lord happily employed",
+          "11": "rich; fond of the company of other women; endowed with many comforts",
+          "12": "sexual enjoyment, wealth and splendour"
+        }
+      },
+      "priority": null,
+      "exceptions": ["House 5's children clause suppressed as fertility-adjacent per this file's global policy."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 17-19", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; house-5 progeny clause suppressed as fertility-adjacent",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.saturn",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Saturn", "chapter": "Adhyaya VIII", "sloka_range": "20-24"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Saturn"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_saturn_by_whole_sign_house_from_the_lagna",
+        "house_1_is_dignity_conditioned": true,
+        "results_by_house": {
+          "1_exalted_or_own_sign": "on a par with the king; a chief or mayor of a city",
+          "1_other_sign": "afflicted with sorrow and misery from childhood; suffers indigence; slovenly and indolent",
+          "2": "an ugly face; without wealth; follows evil courses; later in life lives in a foreign country with vehicles, wealth and other enjoyments",
+          "3": "very intelligent; liberal in gifts; happy with his wife; never inactive, yet overcome with sorrow",
+          "4": "unhappy; houseless; without vehicles; deprived of his mother; sickly in his early years",
+          "5": "roaming about; loses his reason; bereft of children (suppressed), wealth and happiness; perfidious and evil-minded",
+          "6": "a voracious eater; wealthy; subdued by his enemies; stubborn; possessed of self-respect",
+          "7": "wedded to a bad wife; poor; distressed",
+          "8": "unclean and without wealth; suffers from piles; cruel-minded; pinched with hunger; despised by his friends",
+          "9": "bereft of fortune, wealth, children (suppressed), father and religious merit; wicked",
+          "10": "a king or his minister; devotes himself to agriculture; brave, rich and renowned",
+          "11": "a long span of life; lasting wealth and good income; brave; free from disease; moneyed",
+          "12": "impudent; indigent; without children (suppressed); defective of some limb; stupid; driven out by his enemies"
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "House 1 is explicitly dignity-conditioned in the source (exaltation/own sign versus any other sign); houses 2-12 are not conditioned on Saturn's dignity in this passage - this asymmetry is the source's own and is not smoothed over.",
+        "Houses 5, 9 and 12 carry progeny/children clauses, suppressed here as fertility-adjacent per this file's global policy."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 20-24", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; house-5/9/12 progeny clauses suppressed as fertility-adjacent",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.rahu",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Rahu", "chapter": "Adhyaya VIII", "sloka_range": "25-27(33-35 OCR-mislabelled)"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Rahu"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_rahu_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "1": "short life; possesses wealth and strength; suffers diseases in the upper limbs (head, face)",
+          "2": "dubious or insincere in speech; disease in the mouth or face; tender-hearted; wealth through the sovereign; wrathful yet happy",
+          "3": "proud; hostile to his brothers; strong-willed; long-lived; wealthy",
+          "4": "a fool; causes sorrow; has friends; short-lived; happy at some time or other",
+          "5": "talks through the nose; childless (suppressed); hard-hearted; suffers from belly-ache",
+          "6": "troubled by enemies or malefic influence; disease in the arms; wealthy; long-lived",
+          "7": "loses wealth through intrigues with women; suffers separation from his beloved; loses his manhood; self-willed and silly",
+          "8": "short-lived tendencies noted; does impure acts; defective of a limb; suffers wind-disease; has limited issue (suppressed)",
+          "9": "speaks opposingly; becomes head of his clan, headman of a village or mayor of a city; commits unrighteous deeds",
+          "10": "becomes famous; has a limited number of issue (suppressed); engages in others' business; does no good act; fearless",
+          "11": "prosperous; does not have many children (suppressed); long-lived; suffers from ear disease",
+          "12": "intent on secretly committing sinful acts; spends much; suffers from a water-disease"
+        },
+        "exception_clause": "if Rahu is associated with a benefic and occupies a good house (other than the 6th, 8th or 12th), the mahadasha (and, by the source's own extension, the placement) is read as favourable and prosperous rather than by the plain house-result above; the source also names Rahu in Kanya, Meena or Vrischika as conferring honour, happiness, lordship of lands and servants during Rahu's own dasha, though liable to be lost at its close"
+      },
+      "priority": null,
+      "exceptions": ["Houses 5, 8, 10 and 11 carry progeny/issue clauses, suppressed here as fertility-adjacent per this file's global policy."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 25-27 (printed sloka numerals show OCR noise, e.g. '33', '35')", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; progeny clauses suppressed as fertility-adjacent",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending; sloka numbering has visible OCR noise and should be re-verified against a page image"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.08.planet_in_bhava.ketu",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Ketu", "chapter": "Adhyaya VIII", "sloka_range": "28-33"},
+      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Ketu"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "conclusion": {
+        "type": "house_result_lookup",
+        "unit": "results_of_ketu_by_whole_sign_house_from_the_lagna",
+        "results_by_house": {
+          "1": "ungrateful; unhappy; bears tales against others; an outcast, fallen from his position; deformed body; associates with the wicked",
+          "2": "devoid of learning and riches; speech of very vile quality; a sinister look; ever eating at others' tables",
+          "3": "confers long life, strength, wealth and fame; lives happily with his wife and eats good food; loses a brother",
+          "4": "loses his lands, vehicles, mother and happiness; leaves his native country and dwells in a foreign place at another's bounty",
+          "5": "causes loss of children (suppressed), stomach disease and trouble from goblins; becomes evil-minded and wicked",
+          "6": "very magnanimous; possesses the best qualities; attains everlasting fame, firmness and high authority; destroys his enemies",
+          "7": "suffers disrespect; seeks the company of bad women; afflicted by a bowel-related disease; suffers loss of wife and vital power",
+          "8": "short-lived; suffers separation from dear friends and engages in quarrels; meets injury from a weapon; disappointment in all undertakings",
+          "9": "follows a sinful course; does unrighteous things; deprived of his father; unlucky and indigent; slanders the good",
+          "10": "experiences obstacles to good acts; impure; engaged in vile acts, yet energetic, bold and widely renowned",
+          "11": "hoards money; has many good qualities; enjoys himself well; obtains all his requirements",
+          "12": "secretly commits sinful acts; spends money on vile things; destroys wealth; of forbidden conduct; suffers eye-disease"
+        }
+      },
+      "priority": null,
+      "exceptions": ["House 5's children clause suppressed as fertility-adjacent per this file's global policy."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 28-33", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; house-5 progeny clause suppressed as fertility-adjacent",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.06.pancha_mahapurusha_yoga",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "named_yoga_pancha_mahapurusha", "chapter": "Adhyaya VI"},
+      "conditions": {
+        "definition": "one of Mars, Mercury, Jupiter, Venus or Saturn occupies a kendra house (1st, 4th, 7th or 10th from the Lagna) identical with its own sign (swakshetra) or its exaltation sign (swoccha)",
+        "engine_facts_needed": ["graha dignity in {'own sign','exalted'}", "graha house_from_lagna in {1,4,7,10}"]
+      },
+      "conclusion": {
+        "type": "named_yoga_lookup",
+        "unit": "the_five_mahapurusha_yogas",
+        "yogas_by_graha": {
+          "Mars": {"name": "Ruchaka", "result": "a long face; acquires wealth by many daring deeds; brave; overcomes his enemies; powerful and arrogant; renowned for his merits; leader of an army; victorious in all his attempts"},
+          "Mercury": {"name": "Bhadra", "result": "gifted with long life and keen intellect; clean; praised by the learned; leads men; very rich; clever in addressing an assembly"},
+          "Jupiter": {"name": "Hamsa", "result": "a king extolled by the good; auspicious marks (Sankha, Padma, Matsya, Ankusa) on the hands and feet; a beautiful body; eats sumptuous food; of righteous disposition"},
+          "Venus": {"name": "Malavya", "result": "strong limbs; resolute; wealthy; endowed with wife, children (suppressed) and good fortune; prosperous, eats well, enjoys pleasures, commands good vehicles; famous and learned; unperturbed senses"},
+          "Saturn": {"name": "Sasa", "result": "extolled by all; good servants; strong; headman of a village or a king; wicked in disposition; has intrigues with women not his own; usurps others' wealth; happy"}
+        }
+      },
+      "priority": 5,
+      "exceptions": [
+        "Definition verse is printed as 'Sloka 1' of Adhyaya VI; the Ruchaka/Bhadra results are printed under 'Sloka 3' and the Hamsa/Malavya/Sasa results run from the tail of 'Sloka 3' into 'Sloka 4'; an intervening verse 2 was not needed for this rule and was not transcribed.",
+        "The engine already computes both dignity (own sign/exalted/debilitated/neutral) and whole-sign house from the Lagna, and already defines KENDRAS = (1,4,7,10) in src/engine/multitradition/vedic.py, so this rule's condition is directly checkable against existing computed facts - no new calculation is required, only composer wiring, which is out of scope for this research pass."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 1 (definition), Sloka 3-4 (per-graha results)", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; Venus/Malavya children clause suppressed as fertility-adjacent",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.06.kesari_and_sakata_yoga",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "named_yoga_moon_jupiter_relative_house", "chapter": "Adhyaya VI"},
+      "conditions": {
+        "kesari": "the Moon stands in a kendra house (1st, 4th, 7th or 10th) counted from Jupiter's own house",
+        "sakata": "the Moon stands in the 12th, 8th or 6th house counted from Jupiter's own house",
+        "sakata_cancellation": "Sakata does not arise if the Moon itself also occupies a kendra house (1st, 4th, 7th or 10th) from the Lagna"
+      },
+      "conclusion": {
+        "type": "named_yoga_lookup",
+        "kesari_result": "destroys all his enemies like a lion; speaks loftily and nobly in an assembly; passionate and emotional in behaviour; long-lived; highly renowned; exceedingly intelligent; conquers everything by his own valour",
+        "sakata_result": "often becomes unfortunate and may regain what he once lost; a very ordinary and insignificant man; attains much inevitable mental grief; exceedingly unhappy"
+      },
+      "priority": 6,
+      "exceptions": [
+        "'Kendra counted from Jupiter' (or from the Moon) is a relative-house count between two grahas, distinct from the engine's current house-from-Lagna computation; the underlying fact (each graha's whole-sign house) is already computed, so the relative count itself is arithmetic on existing facts (a kendra from graha X is houses whose whole-sign distance from X's house is 0, 3, 6 or 9), but no composer logic currently evaluates it. This is the most commonly cited yoga in popular Parasari practice (usually called Gajakesari Yoga) and is flagged as the highest-value near-term addition."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 14 (definitions), Slokas 16-17 (results)", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.06.mahabhagya_yoga",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "named_yoga_mahabhagya", "chapter": "Adhyaya VI"},
+      "conditions": {
+        "male_variant": "birth by day; Sun, Moon and Lagna all in odd signs (Aries, Gemini, Leo, Libra, Sagittarius, Aquarius)",
+        "female_variant": "birth by night; Sun, Moon and Lagna all in even signs (Taurus, Cancer, Virgo, Scorpio, Capricorn, Pisces)"
+      },
+      "conclusion": {
+        "type": "named_yoga_lookup",
+        "male_result": "causes immense pleasure to all people by his mere appearance; very liberal in his gifts; famous; a ruler of men; living for eighty years; of a spotless character",
+        "female_result": "endowed with wealth, a long-lived husband, sons and grandsons; exceedingly lucky and well-behaved"
+      },
+      "priority": 7,
+      "exceptions": ["The source's own sex/day-night pairing is preserved as printed and is not generalised or reversed; the classical statement is retained even though the corpus does not otherwise use natal-chart sex as an interpretive variable elsewhere."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 13 ('X' in OCR) and Sloka 15", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.06.adhama_sama_varishtha_yoga",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "named_yoga_moon_relative_to_sun", "chapter": "Adhyaya VI"},
+      "conditions": {
+        "adhama": "the Moon occupies a kendra house (1st, 4th, 7th or 10th) counted from the Sun's own house",
+        "sama": "the Moon occupies a panaphara house (2nd, 5th, 8th or 11th) counted from the Sun's own house",
+        "varishtha": "the Moon occupies an apoklima house (3rd, 6th, 9th or 12th) counted from the Sun's own house"
+      },
+      "conclusion": {
+        "type": "named_yoga_lookup",
+        "graded_result": "wealth, vehicles, fame, happiness, knowledge, intellectual precision, modesty, ability, learning, liberality and enjoyment are at their lowest under Adhama, middling under Sama, and highest under Varishtha"
+      },
+      "priority": 8,
+      "exceptions": ["This is a notable inversion of the usual convention that a kendra is the strongest relative position: here a kendra relation to the Sun (the tightest angular relation, closest to conjunction/combustion risk for the Moon) is graded WORST, and the loosest relation (apoklima) is graded BEST. This is the source's own stated ranking, not a transcription error, and must not be silently 'corrected' toward the usual kendra-is-strongest convention."],
+      "conflicts_with": ["a generic assumption that kendra placement is always the strongest classification in every Jyotisha context"],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 14 (definitions), Sloka 18 (graded result)", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.05.sunapha_anapha_durudhara_kemadruma_yoga",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "named_yoga_planets_relative_to_moon", "chapter": "Adhyaya V"},
+      "conditions": {
+        "sunapha": "one or more grahas other than the Sun occupy the 2nd house counted from the Moon's own house",
+        "anapha": "one or more grahas other than the Sun occupy the 12th house counted from the Moon's own house",
+        "durudhara": "grahas other than the Sun occupy both the 2nd and the 12th house counted from the Moon",
+        "kemadruma": "none of the above three configurations is present",
+        "kemadruma_dissenting_view": "some authorities named in the source hold that Kemadruma does not arise if the Moon is associated with any graha, or if a kendra house counted from the Moon is occupied by any graha - the source explicitly preserves this as a named minority position rather than resolving it"
+      },
+      "conclusion": {
+        "type": "named_yoga_lookup",
+        "sunapha_result": "becomes a king or his equal, with self-acquired property, renowned for wisdom and wealth",
+        "anapha_result": "powerful, healthy, of amiable manners, known to fame, blessed with material comforts, well-dressed, contented and happy",
+        "durudhara_result": "freely takes to the joys of life as they arise; blessed with abundance of wealth and vehicles; bountiful; waited upon by faithful attendants",
+        "kemadruma_result": "even one of a princely race becomes obscure, miserable, given to base ways, penurious, drudging as a menial, and wickedly disposed"
+      },
+      "priority": 9,
+      "exceptions": [
+        "This is a relative-house-from-the-Moon computation, not from the Lagna; src/engine/multitradition/vedic.py currently computes whole-sign house only from the Lagna (see `_graha_row`'s `house` field), so no composer logic can evaluate Sunapha/Anapha/Durudhara/Kemadruma against the live engine's current facts without first adding a house-from-the-Moon (chandra lagna) reckoning. This is flagged as a concrete, scoped engine extension, not merely a sourcing gap.",
+        "The dissenting Kemadruma-cancellation view is preserved as a named alternative and must not be silently adopted or silently discarded."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya V", "location": "Sloka 5 (definitions), Slokas 6-7 (results)", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; not evaluable against the live engine until house-from-Moon is computed",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.06.vesi_vaasi_kartari_yoga",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "named_yoga_benefic_malefic_flanking", "chapter": "Adhyaya VI"},
+      "conditions": {
+        "subhavesi_papavesi": "benefic(s) [Subhavesi] or malefic(s) [Papavesi] other than the Moon occupy the 2nd house counted from the Sun",
+        "subhavaasi_paapavaasi": "benefic(s) or malefic(s) other than the Moon occupy the 12th house counted from the Sun",
+        "subhobhayachari_paapobhayachari": "benefics or malefics occupy both the 2nd and 12th houses counted from the Sun",
+        "subhakartari_papakartari": "benefics [Subhakartari] or malefics [Papakartari] occupy both the 2nd and 12th houses counted from the Lagna",
+        "susubha": "benefics unaspected by any malefic occupy the 2nd house counted from the Lagna"
+      },
+      "conclusion": {
+        "type": "named_yoga_lookup",
+        "subhavesi_result": "very handsome, happy, a store of merit, brave, a king, virtuous",
+        "asubhavesi_result": "unjustly vilifies others; loses his splendour; associates with the low; wicked",
+        "subhavaasi_result": "famous, liked by all, exceedingly prosperous, liberal, favourite of the sovereign",
+        "asubhavaasi_result": "deceitful; abuses others; befriends the wicked; of unrighteous conduct though he quotes scripture",
+        "subhobhayachari_result": "has beautiful limbs; affable in address; delights the world; eloquent in speech; renowned and wealthy",
+        "paapobhayachari_result": "mentally afflicted owing to public dishonour; bereft of learning, wealth and luck",
+        "subhakartari_result": "long-lived; fearless; free from disease; without enemies; happy and rich",
+        "papakartari_result": "poor; impure; unhappy; bereft of wife and children (suppressed); deprived of some limb; short-lived"
+      },
+      "priority": 10,
+      "exceptions": [
+        "The Lagna-relative sub-cases (Subhakartari/Papakartari, Susubha) use house-from-Lagna, which the engine already computes; the Sun-relative sub-cases (Subhavesi/Papavesi/Subhavaasi/Paapavaasi/-obhayachari) require house-from-the-Sun, which the engine does not currently compute (a narrower cousin of the Sunapha-family gap above).",
+        "The exact Sanskrit names for the benefic/malefic Vaasi and Obhayachari pairs are uncertain in this OCR (the Devanagari is corrupted); the English descriptive labels used here follow the translator's own English gloss where the transliterated name could not be confirmed."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Slokas 9-11", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; papakartari children clause suppressed as fertility-adjacent; Sun-relative sub-cases not evaluable against the live engine until house-from-Sun is computed",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending; Devanagari name confirmation pending"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.four_rajayogas",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "named_rajayoga_catalog", "chapter": "Adhyaya VI/VII boundary (running header 'Adh. VII' at the adjacent page)"},
+      "conditions": {
+        "rajayoga_1": "malefics are posited in the 3rd, 6th and 11th houses counted from the house occupied by the lord of the Lagna, or from the house occupied by the lord of the Janma Rasi (the Moon's sign)",
+        "rajayoga_2": "Mars and Mercury are conjoined in the 2nd house from the Lagna",
+        "rajayoga_3": "the Sun and Venus are conjoined in the 4th house from the Lagna",
+        "rajayoga_4": "Mars, Saturn and Jupiter together occupy the 10th house, the 11th house and the Lagna (one graha per house, across those three houses)"
+      },
+      "conclusion": {
+        "type": "named_yoga_lookup",
+        "judgment": "each of these four configurations is declared a Raja Yoga by 'those versed in the science'; the source does not further differentiate their relative strength against one another",
+        "customer_prediction": false
+      },
+      "priority": 11,
+      "exceptions": ["Rajayoga 4's phrasing ('quartered in the 10th, 11th and the Lagna') is read as one graha occupying each of the three named houses, not all three grahas occupying one house together; a facsimile check should confirm this reading."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI/VII boundary", "location": "Sloka 24", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending; exact chapter boundary (VI vs VII) not confirmed beyond the nearest running header"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.neechabhanga_rajayoga",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "neechabhanga_debilitation_cancellation", "chapter": "Adhyaya VI/VII boundary (running header 'Adh. VII')"},
+      "conditions": {
+        "trigger": "a graha occupies its own sign of debilitation (dignity = debilitated, per the engine's existing dignity computation)",
+        "cancellation_test_any_of": [
+          "the lord of that debilitation sign occupies a kendra (1st, 4th, 7th or 10th) counted from the Lagna",
+          "the lord of that debilitation sign occupies a kendra counted from the Moon",
+          "the lord of the debilitated graha's own exaltation sign occupies a kendra counted from the Lagna",
+          "the lord of the debilitated graha's own exaltation sign occupies a kendra counted from the Moon"
+        ],
+        "reciprocal_intensifier": "if the kendra relation between the two relevant lords is mutual (each stands in a kendra from the other), the resulting rank is higher than a one-directional case",
+        "weaker_intensifier": "if the debilitation-sign lord merely aspects (rather than co-occupies a kendra with) the debilitated graha, a weaker grade of the same cancellation is produced; if the debilitated graha additionally sits in a house other than the 6th, 8th or 12th, that weaker grade is itself upgraded"
+      },
+      "conclusion": {
+        "type": "graded_result_lookup",
+        "one_directional_result": "the person born will become a king and a just ruler",
+        "mutual_result": "the person becomes an emperor respected by all other kings",
+        "merely_aspected_result": "the person becomes a ruler of the earth and famous; if the debilitated graha also stands in a house other than the 6th, 8th or 12th, this is upgraded to a foremost king",
+        "full_form_result": "the person becomes an emperor endowed with full riches, virtuously disposed, respected by other kings, mighty, famous and affluent",
+        "adjacent_related_rule": "if exactly one of the lords of the 11th, 9th and 2nd houses occupies a kendra with respect to the Moon, and Jupiter happens to be the lord of the 2nd, 5th or 11th house, the person becomes the ruler of a full-blown empire (Sloka 25, printed immediately before the Neechabhanga passage and grouped with it in the source)"
+      },
+      "priority": 3,
+      "exceptions": [
+        "The kendra-from-Lagna branch of this rule is directly checkable against facts src/engine/multitradition/vedic.py already computes today: graha dignity (including 'debilitated'), house_lordships, and KENDRAS = (1,4,7,10). No new calculation is required for that branch.",
+        "The kendra-from-Moon branch requires the same house-from-the-Moon reckoning flagged as missing under the Sunapha/Anapha rule above; it is not yet checkable against the live engine.",
+        "This is the single most commonly cited 'exception' in popular Parasari practice (a planet in its fall is not automatically weak) and is flagged as the highest-value dignity-related composer addition in this pack."
+      ],
+      "conflicts_with": ["a flat rule that a debilitated graha is always weak with no cancellation test applied"],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI/VII boundary", "location": "Slokas 25-29", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending; exact chapter boundary (VI vs VII) not confirmed beyond the nearest running header"
+    },
+    {
+      "rule_id": "jyotisha.phaladeepika.19.vimshottari_mahadasha_significations",
+      "tradition_id": "indian_jyotisha",
+      "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
+      "period": "mantreswara_text_translated_1950_second_edition",
+      "domain": "natal",
+      "scope": {"work": "Phaladeepika", "technique": "vimshottari_mahadasha_general_signification", "chapter": "Adhyaya XIX"},
+      "conditions": {"all": [{"fact": "vimshottari_current.mahadasha.lord", "operator": "known"}]},
+      "conclusion": {
+        "type": "graha_result_lookup",
+        "unit": "general_results_during_each_graha_mahadasha_unconditioned_by_natal_placement_except_the_sun",
+        "results_by_graha": {
+          "Sun_badly_placed_at_birth": "promotes quarrel; sudden displeasure of the sovereign; sickness among relatives; wandering with others; intolerable mental anguish; danger from fire to concealed wealth, grain, sons and wife",
+          "Sun_well_placed_at_birth": "fame, success in undertakings, gravity, devotion to one's duty, and happiness",
+          "Moon": "acquisition of wealth through cruel deeds, kings and fighting; gain through medicines, falsehood, cheating and cruel actions (this graha's own signification, distinct from the Moon's own dasha below); tranquility of mind, success in business, good food, acquisition of wife, children, ornaments, clothes, gems, cows and lands; honours brahmins",
+          "Mars": "wealth through fire, the king, fighting and the like; money through administering medicines, falsehood, cheating and cruel actions; afflicted by bilious complaints and impurity of blood and fever; intrigues with low women; quarrels with wife, children, relations and elders; takes delight in others' misfortune",
+          "Mercury": "meeting of friends; personal comforts; fame through the applause of the learned; favour from elders; cleverness in speech; does good to others; happiness to one's wife and children and friends; an exalted position",
+          "Jupiter": "performs some virtuous deed; acquires children (suppressed); honoured by the sovereign; receives praise from great men; acquisition of elephants, horses and vehicles; meeting of wife, children and friends; fulfilment of one's desires",
+          "Venus": "obtains materials and facilities for sport and happiness; good vehicles, cows, gems, ornaments, treasure; enjoyment in the company of young women; intellectual pursuits; voyage; auspicious deeds; acceptance of presents from the sovereign",
+          "Saturn": "wife and children (suppressed) troubled by gout, rheumatism or similar windy diseases; loss in agriculture; evil talk; intercourse with wicked women; desertion by servants; absence from his own residence; sudden destruction or loss of relations, lands, happiness and wealth",
+          "Rahu_general": "trouble from the sovereign, thieves, poison, fire and weapons; sickness to children (suppressed); a ruffled mind; loss of relations; insult from base people; scandal from a breach of decorum; ejection or dismissal from office; injury to the leg; failure of the business undertaken",
+          "Rahu_if_well_associated": "if Rahu is associated with a benefic and occupies a good house (other than the 6th, 8th or 12th), the dasha is fully auspicious and lifts the native to affluence on a par with a king, with desires fulfilled and steady accumulation of wealth and wide renown",
+          "Rahu_if_in_kanya_meena_vrischika": "confers honour and happiness, lordship of lands, carriages and servants during Rahu's own dasha, though these gains are liable to be lost at the dasha's close",
+          "Ketu": "troubles from enemies, thieves, the sovereign; wounds from weapons; disease from excessive heat; false calumny; a stigma to his family; danger from fire; absence from his own country"
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "Only the Sun's result is explicitly conditioned on the natal placement's quality ('badly placed' vs 'well placed at birth') in this passage; the other eight grahas' results are stated unconditionally in Adhyaya XIX, distinct from (and not to be confused with) the placement-conditioned bhava results of Adhyaya VIII.",
+        "These are MAHADASHA-level (not antardasha/bhukti-level) significations; the source's antardasha subdivision material (Adhyaya XX-XXI) was not inspected in this pass.",
+        "Progeny/children clauses for Jupiter, Saturn and Rahu are suppressed as fertility-adjacent per this file's global policy.",
+        "The engine already computes the running mahadasha lord (`vimshottari_current.mahadasha.lord` in src/engine/multitradition/vedic.py's `build()` output) so this table is directly attachable to that field; no new calculation is required, only composer wiring."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya XIX", "location": "Slokas 5-6 (Sun), 7 (Moon), 9 (Mars), 10 (Mercury), 11 (Jupiter), 12 (Venus), 13 (Saturn), 14-16 (Rahu), 17 (Ketu)", "verification": "translation_inspected_ocr"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; progeny clauses suppressed as fertility-adjacent",
+      "review_status": "translation_paraphrase_read; independent Sanskrit review pending"
+    }
+  ]
+}

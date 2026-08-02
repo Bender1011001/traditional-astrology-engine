@@ -94,15 +94,19 @@
           "name": "Mantreswara Phaladeepika natal pack",
           "input_kind": "birth_datetime_location",
           "birth_input_eligible": true,
-          "coverage_status": "source_limited",
-          "implementation_state": "source_discovery_only",
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
           "artifacts": [
-            "jyotisha/source_audit.md"
+            "jyotisha/source_audit.md",
+            "jyotisha/delineation_rule_manifest.json"
           ],
           "remaining_gates": [
-            "controlling edition collation (Sanskrit original is public domain; a modern translation is a convenience, not a gate)",
-            "Sanskrit review",
-            "rule and precedence extraction"
+            "Phaladeepika 1950 translation rights unresolved; treated as internal paraphrase research only, matching the existing Brhajjataka translation posture",
+            "independent Sanskrit review of every extracted rule (the scan's own embedded Devanagari is OCR-corrupted and could not independently control wording)",
+            "Sun's Adhyaya VIII houses 1-5, 7 and 8 not recovered from this OCR pass; needs a page-image check",
+            "house-from-the-Moon and house-from-the-Sun relative reckoning not yet computed by the engine, so Sunapha/Anapha/Durudhara/Kemadruma, Kesari/Sakata, Adhama/Sama/Varishtha, and the Sun-relative Vesi/Vaasi yogas are sourced but not yet checkable against live chart facts",
+            "no worked natal chart with the author's own stated verdict was found in the inspected chapters (VI-VIII, XIX); the pack is a rule catalog, not a worked-example reproduction",
+            "composer/engine wiring of the sourced rules onto computed facts (no engine or composer code was written in this research pass)"
           ]
         }
       ]
@@ -470,6 +474,26 @@
             "separate authorization and cultural review",
             "source and lineage selection",
             "safety policy"
+          ]
+        },
+        {
+          "module_id": "al_qabisi_introduction_engine",
+          "name": "Al-Qabisi's own procedures: dignity scoring, profection, firdaria",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "islamicate/source_audit.md",
+            "islamicate/al_qabisi_rule_manifest.json",
+            "islamicate/al_qabisi_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "independent Arabic specialist review and a second passage-to-predicate encoder before any rule leaves research status",
+            "hyleg/kadkhudah aspect gate unimplemented: al-Qabisi requires a dignity lord to behold the place, so no hyleg is settled",
+            "the ~50 individually named lots of Ch. V are sourced but not enumerated in the engine",
+            "tasyir arcs need oblique ascension for the locality; only the 59'08\"/day rate is verified",
+            "planetary condition doctrine (reception, translation/collection of light, refranation) sourced but not implemented"
           ]
         }
       ]
@@ -1656,6 +1680,104 @@
             "the poleuon/diepon technique (ch. 56) cannot be computed at all: the surviving chapter never defines what its ordinal sets enumerate, and the fuller text (Venetus 7 f. 393) was inaccessible to Cumont 'because of the war'",
             "Vaticanus 1056's collation of chapter 55 (CCAG V.3 pp. 79-80) is retrievable but not yet fetched",
             "the 2009 Pingree/Heilen edition would give a modern chapter numbering, but its rights are not cleared"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "hellenistic_delineation",
+      "display_name": "Hellenistic delineation (Firmicus, Ptolemy)",
+      "registry_tradition_ids": [
+        "hellenistic"
+      ],
+      "source_audit": "hellenistic/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "hellenistic_firmicus_ptolemy_delineations",
+          "name": "Sect and dignity delineations from the Latin and Greek critical editions",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "hellenistic/source_audit.md",
+            "hellenistic/delineation_rule_manifest.json",
+            "hellenistic/delineation_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "Valens contributes ZERO rules: the Kroll 1908 OCR is 1,100,625 characters containing exactly 0 Greek codepoints - an access-quality blocker, not a rights one; page images are the only route",
+            "no worked-example chart found in either Firmicus volume (~2.3M chars searched); the tradition's own worked nativities live in Valens, behind that same OCR wall",
+            "Ptolemy's Boll/Boer text is a reprint of the 1940 first edition, so its US copyright status is genuinely unverified rather than assumed clear",
+            "Firmicus's own Sagittarius bounds diverge from his manuscript tradition's consensus; the engine follows the consensus and the fork is disclosed, not resolved"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "chinese_qizheng_siyu",
+      "display_name": "Qizheng Siyu (Seven Governors and Four Surplus)",
+      "registry_tradition_ids": [
+        "qizheng_siyu"
+      ],
+      "source_audit": "qizheng/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "qizheng_four_surplus_and_chart_frame",
+          "name": "The Four Surplus bodies, sign/house frame, and Tang worked nativities",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "qizheng/source_audit.md",
+            "qizheng/qizheng_rule_manifest.json",
+            "qizheng/qizheng_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "Ziqi has no identified astronomical referent at all, and its stated period disagrees (28 vs 29 years) across witnesses",
+            "Ketu's identity migrated: T1308 (9th c.) defines it as the lunar apogee, the mature system as a node - recorded as a labelled inference, not an assertion",
+            "Rahu's own arithmetic carries a ~1/3 degree internal inconsistency between its annual rate and 18-year cycle, while Ketu's closes exactly",
+            "the twelve-branch rulership scheme is an exact unmodified transplant of the Ptolemaic domicile table, but is currently sourced only from secondary web material (grade D)",
+            "no structured birth data (year/month/day/hour) located for any of the four Tang worked nativities, so none is machine-checkable yet",
+            "the 1593 Ming Wanli print's OCR is unusable; page-image reading is the route past it"
+          ]
+        }
+      ]
+    },
+    {
+      "track_id": "tibetan_white_beryl",
+      "display_name": "Tibetan elemental astrology (White Beryl)",
+      "registry_tradition_ids": [
+        "tibetan"
+      ],
+      "source_audit": "tibetan/source_audit.md",
+      "overall_status": "source_limited",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "tibetan_whitebeyl_access_and_boundaries",
+          "name": "White Beryl access, rights determination, and cross-tradition boundaries",
+          "input_kind": "reference_only",
+          "birth_input_eligible": false,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "tibetan/source_audit.md",
+            "tibetan/whitebeyl_rule_manifest.json",
+            "tibetan/whitebeyl_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "NO sMewa or sPar-kha construction rule is encoded; this pack holds provenance and boundary findings only",
+            "the prior 'no sourced anchor' blocker was FALSE - the White Beryl is public domain, downloadable, and its elemental chapter located page-exactly; the real blocker is legibility of the 1972 photostat",
+            "OCR of both works is confirmed unusable; direct visual reading reached legible script but not sentence-level transcription confidence",
+            "popular websites publishing mewa/parkha arithmetic cite nothing and are explicitly rejected as sources"
           ]
         }
       ]

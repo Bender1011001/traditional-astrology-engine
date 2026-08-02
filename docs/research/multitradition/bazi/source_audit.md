@@ -1,9 +1,125 @@
 # BaZi / Four Pillars source and convention audit
 
 Status: research foundation, not production approval  
-Updated: 2026-08-01
+Updated: 2026-08-02
 
-## Sexagenary kernel pack (added 2026-08-01)
+## Delineation pack and edition re-check (added 2026-08-02)
+
+This pass had two goals: (1) check whether a better edition than plain Wikisource
+exists for `Yuanhai Ziping` / `Sanming Tonghui`, per the DEFENSIBILITY.md lesson
+that an access problem should never be assumed without actually checking for a
+facsimile; and (2) extract sourced DELINEATION rules - what a Ten God in a given
+pillar, a branch relation, or a month-command state classically MEANS - since the
+calculation layer (pillars, hidden stems, Ten Gods, relations, luck pillars) was
+already strong. Both produced real findings, recorded in full in
+`source_registry.json` and summarized here.
+
+### Edition re-check: a second Yuanhai Ziping transcription, and a resolved Sanming Tonghui gap
+
+**ctext.org (Chinese Text Project) hosts its own transcription of `Yuanhai Ziping`**
+(`ctext.org/wiki.pl?if=gb&chapter=901791`), independent of the Wikisource page
+already in this registry. It supplies sections the earlier Wikisource-only pass
+never catalogued: 萬金賦 (Wanjin Fu), 四言獨步 (Four-Character Verses), 五言獨步
+(Five-Character Verses), 五行生克賦 (Five-Phase Generation-Control Rhapsody), and
+珞琭子消息賦 (Luozi's Tidings Rhapsody). These are the source of the 22 new rules
+in `yuanhai_ziping_delineation_manifest.json`. ctext's OWN edition record for this
+title (`res=727782`) states its version as 暫缺 ("temporarily lacking") - ctext
+itself has not identified a controlling print source for `Yuanhai Ziping`, so this
+remains transcription-grade (evidence_grade C), the same tier as the existing
+engine disclosure. **This is not the edition-control upgrade for Yuanhai Ziping
+itself** - see the next paragraph for what actually is.
+
+**A named, dated historical print edition of `Yuanhai Ziping` was identified**:
+新刊合併官板音義評注淵海子平 ("Newly Printed, Combined Official Edition, with
+Phonetic Glosses and Annotations"), compiled by Yang Cong (楊淙) in the Ming
+Jiajing era (attributed 1548), supplemented by Li Qin (李欽), arranged by Tang
+Jinchi (唐錦池) in Wanli 28 (1600 CE), held by the Palace Museum (故宮博物院) and
+reproduced in facsimile in the 故宮珍本叢刊 (Palace Museum Rare Books Facsimile
+Series), Hainan Publishing House. A second secondary source traces an alternate
+Qing Guangxu 9 (1883) Beijing Dacheng Tang woodblock lineage into the same
+facsimile series (vol. 422, 2000; paperback 2002 collated by Li Feng; ISBN
+9787544302326), plus a 2018 Jiuzhou Publishing House thread-bound reprint. This is
+a genuine, citable edition lineage - far better than "a work without a cited
+source" - but the shuge.org page sharing a scan of it returned HTTP 403 to
+automated fetch, so **no page image was opened in this pass**. See
+`bazi_yuanhai_ziping_gugong_zhenben_facsimile_lead` in the registry. This is
+recorded as a real facsimile LEAD, not yet as a controlling edition: quotation
+from ctext/Wikisource continues to carry the C grade until this lead is actually
+opened and collated.
+
+**The `Sanming Tonghui` "juan 10-12 missing" gap is now resolved for LOCATION.**
+ctext.org hosts juan 10 (`chapter=927175`), juan 11 (`chapter=388738`), and juan 12
+(`chapter=850832`) - all absent from the Wikisource transcription. Critically,
+ctext's own edition page for this title (`res=758991`) identifies its base text as
+the 欽定四庫全書 (Qing-court Siku Quanshu) recension, and its cited page images
+(`06056477.cn_NNNN.png` and siblings) are the SAME Zhejiang University Library
+digitization independently found mirrored at archive.org
+(`bazi_sanming_tonghui_siku_quanshu_zhejiang_scan`) - 600 DPI scans of a named,
+dateable, institutionally-held print, not an anonymous transcription. A second,
+independent, COMPLETE 12-juan facsimile was also found: the Australian National
+University's Xu Dishan collection holding (catalog b22343921, digitized 2020,
+CC BY 4.0 + institutional terms; `bazi_sanming_tonghui_anu_xu_dishan_facsimile`).
+Neither facsimile's page images were personally opened in this pass (the ANU
+item's volume-10/11/12 file links sit behind a client-side "show more" control the
+fetch tool could not expand; the Zhejiang scan's per-juan OCR text files were
+located but not read for juan 10-12 specifically). **The evidence grade for
+Sanming-Tonghui-sourced material used going forward should therefore read B
+("OCR transcription of an identified, page-image-backed print edition"), not the
+prior C ("anonymous community transcription") - but A-grade "page image
+personally collated" status is not yet earned.** This mirrors the Byzantine
+Rhetorius pack's own A/B distinction (page-image-collated versus OCR-only).
+
+**Juan 12 was read and found to contain five worked-example charts (命例)** naming
+Ming officials - 吳嶽, 譚論, 胡宗憲, 李邦珍, 姚淶 - each given as four stem-branch
+pillars with a stated judgment (see `bazi/worked_examples.json`). Juan 11 was also
+read and contains no comparable named-chart examples. These five charts are
+exactly the kind of late-Ming-official material the Wikisource work-page's
+interpolation warning describes. Their presence in the Qing-court Siku Quanshu
+recension is a relevant data point (that recension predates the "later commercial
+printings" the warning most plausibly targets, and Hu Zongxian and Yao Lai were
+near-contemporaries of the compiler Wan Minying) but does **not** resolve the
+authenticity question - it is narrowed, not closed. One of the five (李邦珍) has an
+internal transcription anomaly (a pillar with two branch characters and no stem)
+that is left uncorrected and flagged, precisely because it is itself the clearest
+in-house demonstration of why an OCR pass - even of an identified edition - cannot
+control wording without page-image collation. A second likely anomaly was noted in
+the Yao Lai chart's hour pillar.
+
+One chart (譚論, Tan Lun) yielded a genuine positive finding: its stated judgment
+"財官印俱旺" (Wealth, Officer, and Seal all prosperous) was hand-checked against
+the live engine's own `ten_god()` / `HIDDEN_STEMS` tables in
+`src/engine/multitradition/bazi.py` and found to be internally consistent - Wealth
+at the year stem, Seal at the month stem, and Officer hidden as the MIDDLE qi of
+the month branch are all genuinely present for that Ding day master. This is a
+structural self-consistency check, not proof of the chart's historical
+authenticity, but it is exactly the kind of "would the engine reproduce the
+classical author's own judgment" evidence DEFENSIBILITY.md's requirement 4 asks
+for, and it is the strongest single finding of this pass.
+
+### Delineation rule pack
+
+`yuanhai_ziping_delineation_manifest.json` (22 rules) and
+`yuanhai_ziping_delineation_validation_vectors.json` (23 vectors) now exist,
+covering: Ten-God-in-position delineations (Seven Killings at the Hour pillar
+rooted/unrooted; Seven-Killings/Seal mutual generation; Officer/Killings mixing
+and its resolution; a fully worked Jia-day-master/You-month Officer-damage
+example), luck-pillar-transition delineations (Officer-star versus Seven-Killings
+luck periods; the first luck period entering the Seal township; Hurting Officer
+meeting an Officer luck period), month-command/strength delineations (a strong,
+timely day master's operative Ten God; generation/prosperity's indifference to
+later rest/imprisonment; advancing/retreating qi as dormant rather than dead), and
+branch-relation delineations (the Four Life/Tomb/Defeat-Station groups; Wealth or
+Officer confined in a Storage branch; harmony as a welcomed valence; and a clash
+requiring proportional branch count - the last of which qualifies, without
+altering, the engine's existing presence-only `six_clashes` field). Every rule
+carries `customer_prediction: false`; rules whose classical text states a
+lifespan, death, violent-punishment, or gendered claim are marked
+`output_policy: refused` and kept as historical quotation only, per the refusal
+list below. None of the 22 rules selects a named pattern (格局), a useful/avoidant
+element (用神), or a strength-class verdict as settled - the schools-diverge gate
+on those techniques is untouched.
+
+
 
 The first machine-readable BaZi artifact now exists:
 `sexagenary_kernel_spec.json`, `sexagenary_rule_manifest.json` (10 rules),
@@ -77,6 +193,11 @@ Sources:
 
 ### `Yuanhai Ziping` on Chinese Wikisource
 
+See "Delineation pack and edition re-check (added 2026-08-02)" above for a second,
+independent ctext.org transcription and a named facsimile lead found in the
+2026-08-02 pass. The assessment below is the original 2026-07-31 finding and is
+left as originally written.
+
 The transcription is rich enough for technique discovery. Its table of contents includes the day as subject, month command, annual influence, major luck periods, hidden stems, strength, and the Ten-God relation families. Inspected passages include:
 
 - `看命入式`: the day stem is the subject; year, month, day, and hour have distinct roles; month-season depth and obtaining the command matter; wealth/officer indications require the subject's strength; the reader is warned against rigid application.
@@ -89,6 +210,12 @@ Provenance limitations are serious. The page is categorized as a work without a 
 Source: [Yuanhai Ziping transcription](https://zh.wikisource.org/wiki/%E6%B7%B5%E6%B5%B7%E5%AD%90%E5%B9%B3)
 
 ### `Sanming Tonghui` on Chinese Wikisource
+
+See "Delineation pack and edition re-check (added 2026-08-02)" above: the
+juan 10-12 gap this section flags is now resolved for LOCATION via ctext.org,
+which also identifies a named Siku Quanshu / Zhejiang University Library source
+scan. The assessment below is the original 2026-07-31 finding and is left as
+originally written.
 
 The work page attributes the text to Wan Minying and links volumes one through nine; volumes ten through twelve are explicitly absent. Its bibliographic note is unusually valuable because it warns that later commercial printings inserted charts of late-Ming officials and describes doctrinal preferences and weaknesses in the received text. Volume one exposes foundational Five-Phase, stem-branch, Na Yin, and sixty-Jiazi material.
 

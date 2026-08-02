@@ -1,0 +1,2664 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 http://arabic-latin-corpus.philosophie.uni-wuerzburg.de/schema/alc-tei.xsd">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title type="short">Introduction to Astrology</title>
+            <title xml:lang="la">Introductorius ad magisterium iudiciorum astrorum</title>
+            <title xml:lang="ar-Latn">Kitāb al-Mudḫal ilā ṣināʿat aḥkām al-nuǧūm</title>
+            <title xml:lang="en">Book of the Introduction to the Art of Judicial Astrology</title>
+            <author ref="http://d-nb.info/gnd/100728502">
+               <name xml:lang="ar-Latn">al-Qabīṣī</name>
+               <name xml:lang="la">Alcabitius</name>
+            </author>
+            <respStmt>
+                <resp>translated by</resp>
+                <name xml:lang="en" ref="http://d-nb.info/gnd/102509565">John of Seville</name>
+              </respStmt>
+            <respStmt><resp>transcribed by</resp><name>Carolin Helmer</name></respStmt>
+            <respStmt>
+               <resp>and</resp>
+               <name>Anna Plate</name>
+             </respStmt>
+         </titleStmt><editionStmt><edition>0.4.0</edition></editionStmt>
+         <publicationStmt>
+            <publisher>Institute of Philosophy, University of Würzburg</publisher>
+            <address>
+               <addrLine>Residenz, Südflügel</addrLine>
+               <addrLine>97070 Würzburg</addrLine>
+               <addrLine>Germany</addrLine>
+            </address>
+            <availability status="free">
+               <licence target="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+                  Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</licence>
+            </availability>
+         </publicationStmt>
+         <seriesStmt>
+            <title ref="http://arabic-latin-corpus.philosophie.uni-wuerzburg.de">
+               Arabic and Latin Corpus
+            </title>
+            <respStmt>
+               <resp>edited by</resp>
+               <name ref="https://d-nb.info/gnd/11800638X">Dag Nikolaus Hasse</name>
+            </respStmt>
+            <respStmt>
+               <resp>together with</resp>
+               <name ref="http://d-nb.info/gnd/112492051X">Jon Bornholdt</name>
+               <name ref="http://d-nb.info/gnd/1139662686">Andreas Büttner</name>
+               <name ref="http://d-nb.info/gnd/1162927666">Irina Galynina</name>
+            </respStmt>
+         </seriesStmt>
+         <sourceDesc>
+                  <bibl>al-Qabīṣī (Alcabitius), <hi rend="italic">The Introduction to Astrology</hi>, ed. and transl. Charles Burnett, Keiji Yamamoto and Michio Yano (London/Turin, 2004).</bibl>
+         </sourceDesc>
+            </fileDesc>
+      <profileDesc>
+         <langUsage><language ident="la">Latin</language></langUsage>
+      </profileDesc>
+   </teiHeader>
+   <text>
+<body>
+<div>
+<div type="prologue" n="1">
+<pb n="225"/>
+<p n="2">
+<lb n="1"/> Incipit introductorius Alcabici ad iudicia astrorum, interpretatus a Io-
+<lb n="2"/>hanne yspalensi.
+<lb n="3"/>Incipit prologus Alcabici.</p>
+<p n="3">
+<lb n="4"/> Postulata a domino prolixitate vite Ceyfhaddaula, id est gladii reg-
+<lb n="5"/>ni, et durabilitate sui honoris, custodia quoque eius opum sive bonorum
+<lb n="6"/>atque extensione sui imperii, exordiamur id quod volumus narrare. Cum
+<lb n="7"/>vidissem conventum quorumdam Antiquorum ex auctoribus magisterii iu-
+<lb n="8"/>diciorum <milestone unit="arline" n="5"/> astrorum edidisse libros quos vocaverunt introductorios huius ma-
+<lb n="9"/>gisterii, id est iudiciorum astrorum, set quosdam ex eis non fuisse scru-
+<lb n="10"/>tatos diligenter universa que necessaria sunt in eodem magisterio de his
+<lb n="11"/>que conveniunt introductorio, quosdam vero ea que necessaria sunt pro-
+<lb n="12"/>tulisse prolixe, et quia quod necessarium est in eo periisse cernerem,
+<lb n="13"/>quosdam quoque in ordinatione eorum que protulerunt non incessisse
+<lb n="14"/>itinere discipline conspexissem, cepi edere hunc librum, et posui eum intro-
+<lb n="15"/>ductorium atque collegi in eo ex dictis Antiquorum quicquid necessarium est
+
+<pb n="226"/>
+<lb n="1"/>huic magisterio secundum modum introductorium.</p>
+<p n="4">
+<lb n="2"/><milestone unit="arline" n="10"/> Et non introduxi ratiocinationes disputationi sive defensioni eorum
+<lb n="3"/>que protulimus necessarias, cum sint in libro Ptolomei qui appellatur 'alarbaa
+<lb n="4"/>macalet' id est quatuor tractatuum, et in libro meo quem edidi in
+<lb n="5"/>confirmatione magisterii iudiciorum astrorum et in destructione epistule Aisse
+<lb n="6"/>Benhali in annullatione eius ex ratiocinatione que ad hoc possint
+<lb n="7"/>sufficere. Et divisi eum in quinque differentias.
+<lb n="8"/>Prima differentia, in esse circuli signorum essentiali et accidentali.
+<lb n="9"/>Secunda differentia, in naturis planetarum .vii. et quid sit illis proprium
+<lb n="10"/>et quid significent.
+<lb n="11"/>Tertia differentia, in his que accidunt <milestone unit="arline" n="15"/> planetis .vii. in semetipsis et
+<lb n="12"/>quid accidat eis ab invicem.
+<lb n="13"/>Quarta differentia, in expositione nominum astrologorum.
+<lb n="14"/>Quinta differentia, in universitate partium, et expositione esse eorum
+<lb n="15"/>in gradibus.</p></div>
+
+<div type="chapter" n="1">
+<pb n="227"/>
+<p n="5">
+<lb n="1"/> Prima differentia, in esse circuli signorum essentiali vel acciden-
+<lb n="2"/>tali.</p>
+<p n="6">
+<lb n="3"/> Nithac, id est cingulus, circuli signorum dividitur in .xii. par-
+<lb n="4"/>tes equales secundum divisionem circuli signorum et hee .xii. partes
+<lb n="5"/>vocantur signa et referuntur ad imagines que sunt sub eodem zodiaco cir-
+<lb n="6"/>culo, que sunt Aries, Taurus, <milestone unit="arline" n="20"/> Gemini, Cancer, Leo, Virgo, Libra, Scor-
+<lb n="7"/>pius, Sagittarius, Capricornus, Aquarius, Piscis.</p>
+<p n="7">
+<lb n="8"/> Et unumquodque istorum signorum dividitur in .xxx. partes equales
+<lb n="9"/>que gradus vocantur et gradus dividitur in .lx. minuta, et minutum in
+<lb n="10"/>.lx. secunda, et secundum in .lx. tertia; similiter que sequuntur, quarta
+<lb n="11"/>scilicet et quinta, ascendendo usque ad infinita.</p>
+<p n="8">
+<lb n="12"/> Et sex ex his signis sunt septemtrionalia, id est ab initio Arietis usque
+<lb n="13"/>in finem Virginis, que sunt septemtrionalia a linea equinoctiali, et sex <milestone unit="arline" n="25"/>
+
+<pb n="228"/>
+<lb n="1"/>meridiana, id est ab initio Libre usque in finem Piscis. Et sex ex illis
+<lb n="2"/>dicuntur directe ascendentia, id est ab initio Cancri usque in finem Sagit-
+<lb n="3"/>tarii, et sex tortuose ascendentia dicuntur, id est ab initio Capricorni
+<lb n="4"/>usque in finem Geminorum; et tortuose ascendentia obediunt directe
+<lb n="5"/>ascendentibus, hoc est duo signa que fuerint unius longitudinis a capite
+<lb n="6"/>Cancri obediunt sibi, ut Gemini Cancro, Taurus <milestone unit="arline" n="30"/> Leoni, Aries Virgini,
+<lb n="7"/>et Piscis Libre, Aquarius Scorpioni et Capricornus Sagittario.</p>
+<p n="9">
+<lb n="8"/> Et duo signa que fuerint unius longitudinis a capite Arietis dicuntur
+<lb n="9"/>concordantia in itinere, ut Aries et Piscis, Taurus et Aquarius, Gemini et
+<lb n="10"/>Capricornus, Cancer et Sagittarius, Leo et Scorpio, Virgo et Libra.</p>
+<p n="10">
+<lb n="11"/> Et vocatur medietas circuli que est ab initio Leonis usque in finem
+<lb n="12"/>Capricorni medietas <milestone unit="arline" n="35"/> maxima, et est medietas Solis, quia Sol in omni hac
+<lb n="13"/>medietate habet principatum sicuti habent planete in suis terminis;
+<lb n="14"/>et alia medietas que est ab initio Aquarii usque in finem Cancri vocatur
+
+<pb n="229"/>
+<lb n="1"/>medietas minima, et est medietas Lune, quia Luna similiter habet in omni
+<lb n="2"/>hac medietate principatum sicut Sol in maxima propter efectus suos in
+<lb n="3"/>nobis et quia facit nobis estatem. Et vocatur illa medietas que est ab
+<lb n="4"/>initio Arietis usque in finem Virginis medietas calida, et alia que est ab
+<lb n="5"/>initio Libre usque in finem Piscis vocatur medietas frigida.</p>
+<p n="11">
+<lb n="6"/><milestone unit="arline" n="40"/> Et vocatur illa quarta pars circuli que est ab initio Arietis usque
+<lb n="7"/>in finem Geminorum quarta calida humida, vernalis, puerilis, san-
+<lb n="8"/>guinea; et illa que est ab initio Cancri usque in finem Virginis dicitur
+<lb n="9"/>quarta calida sicca, estivalis, iuvenilis, colerica; et illa que est ab initio
+<lb n="10"/>Libre usque in finem Sagittarii dicitur quarta frigida sicca, autumpnalis,
+<lb n="11"/>melancolica, et significat initium diminutionis mediocris etatis; et illa
+<lb n="12"/>que est ab initio Capricorni usque in finem Piscis dicitur quarta frigida
+<lb n="13"/>humida, defectiva, senilis, hyemalis, flegmatica.</p>
+<p n="12">
+<lb n="14"/><milestone unit="arline" n="45"/> Omnibus autem planetis erraticis qui feruntur in his signis,
+<lb n="15"/>non quod sint in eis, set feruntur sub eis, hoc est in directo eorum,
+<lb n="16"/>altior et propior circulo signorum et cursu tardior est Saturnus, deinde
+
+<pb n="230"/>
+<lb n="1"/>Iupiter, deinde Mars, deinde Sol, deinde Venus, deinde Mercurius, deinde
+<lb n="2"/>Luna, que est terre propior et cursu omnibus velocior. Significantur etiam
+<lb n="3"/>per Caput Draconis et Caudam cum planetis quedam significationes, sicut
+<lb n="4"/>exponemus in sequentibus.</p>
+<p n="13">
+<lb n="5"/> Habent quoque planete in his signis potestates, quasdam per na-
+<lb n="6"/>turam, quasdam per accidentia. Que <milestone unit="arline" n="50"/> sunt per naturam sunt hee: domus,
+<lb n="7"/>exaltatio, terminus, triplicitas et facies. De illis autem que per accidentia
+<lb n="8"/>sunt tractabimus in loco convenienti.</p>
+<p n="14">
+<lb n="9"/> Domus hee sunt: Aries et Scorpio domus Martis, Taurus et Libra
+<lb n="10"/>domus Veneris, Gemini et Virgo domus Mercurii, Cancer domus Lune, Leo
+<lb n="11"/>domus Solis, Sagittarius et Piscis domus Iovis, Capricornus et Aquarius
+<lb n="12"/>domus Saturni. Septimum autem signum a domo uniuscuiusque planete <milestone unit="arline" n="55"/>
+<lb n="13"/>dicitur eiusdem planete fore detrimentum, et si duo signa fuerint domus
+<lb n="14"/>unius planete, dicuntur concordantia in almantica, hoc est in cingulo qui
+<lb n="15"/>latus est in medio et in ligatura strictus, et habet significare zodiacum circu-
+<lb n="16"/>lum. Signa autem in que planete dum intrant dicuntur gratulari in
+
+<pb n="231"/>
+<lb n="1"/>eis, id est domini eorum, secundum Dorothium, sunt hec: Saturnus dum
+<lb n="2"/>intrat Aquarium gaudere dicitur, et Iupiter in Sagittario, Mars in Scorpione,
+<lb n="3"/>Venus in Tauro, et Mercurius in Virgine.</p>
+<p n="15">
+<lb n="4"/> Hee sunt exaltationes planetarum: Sol exaltatur in Ariete, hoc
+<lb n="5"/>est in nono decimo gradu eius, <milestone unit="arline" n="60"/> Luna in tertio gradu Tauri, Saturnus in
+<lb n="6"/>vicesimo primo gradu Libre, Iupiter in quinto decimo gradu Cancri, Mars
+<lb n="7"/>in vicesimo octavo gradu Capricorni, Venus in vicesimo septimo gradu Piscis,
+<lb n="8"/>Mercurius in quinto decimo gradu Virginis, Caput Draconis in tertio gradu
+<lb n="9"/>Geminorum et Cauda in tertio gradu Sagittarii. In septimo autem signo ab
+<lb n="10"/>exaltatione uniuscuiusque planete in <milestone unit="arline" n="65"/> simili gradu erit eius descen-
+<lb n="11"/>sio. Verbi gratia, sicut Sol exaltatur in nono decimo gradu Arietis, ita in nono
+<lb n="12"/>decimo gradu Libre cadit, et sic de ceteris. Ptolomeus autem ponit
+<lb n="13"/>Arietem totum exaltationem Solis et Taurum totum exaltationem Lune
+<lb n="14"/>et cetera similiter.</p>
+<p n="16">
+<lb n="15"/> Triplicitates vero sic distinguimus: omnia enim tria signa
+<lb n="16"/>que in una natura videntur concordare faciunt <milestone unit="arline" n="70"/> triplicitatem et eodem
+<lb n="17"/>nomine vocantur, hoc est triplicitas. Aries ergo, Leo et Sagittarius faci-
+<lb n="18"/>unt triplicitatem primam, quia unumquodque istorum signorum est igneum,
+<lb n="19"/>masculinum, diurnum, calidum scilicet et siccum, colericum, sapore amarum.
+<lb n="20"/>Est quoque et hec triplicitas orientalis, cuius domini sunt in die Sol et in nocte
+
+<pb n="232"/>
+<lb n="1"/>Iupiter, et eorum particeps in die ac nocte est Saturnus.
+<lb n="2"/>Triplicitas secunda est ex Tauro et Virgine et Capricorno, quia
+<lb n="3"/>hec signa sunt feminina, nocturna, terrea, frigida scilicet et sicca,
+<lb n="4"/>melancolica, sapore acria, meridiana. Huius quoque triplicitatis do-
+<lb n="5"/>mini sunt in die Venus et in nocte <milestone unit="arline" n="75"/> Luna, quarum particeps in die ac
+<lb n="6"/>nocte est Mars.
+<lb n="7"/>Tertia triplicitas est es Geminis, Libra et Aquario, quia hec signa
+<lb n="8"/>sunt masculina, diurna, sanguinea scilicet calida humida, aerea, occiden-
+<lb n="9"/>talia, sapore dulcia, cuius triplicitatis domini sunt in die Saturnus et in
+<lb n="10"/>nocte Mercurius, eorum quoque particeps in die ac nocte est Iupiter.
+
+<pb n="233"/>
+<lb n="1"/>Quartam vero triplicitatem faciunt Cancer, Scorpio et Piscis, quia hec
+<lb n="2"/>signa sunt feminina, nocturna, septemtrionalia, aquatica, flegmatica, fri-
+<lb n="3"/>gida humida, sapore salsa, cuius triplicitatis domini sunt in die Venus
+<lb n="4"/>et in nocte Mars, quorum particeps in die ac nocte <milestone unit="arline" n="80"/> est Luna.</p>
+<p n="17">
+<lb n="5"/> Quatuor quoque ex his signis dicuntur esse mobilia, id est
+<lb n="6"/>Aries, Cancer, Libra et Capricornus, et quatuor fixa, id est Taurus, Leo, Scor-
+<lb n="7"/>pio et Aquarius; reliqua vero quatuor, id est Gemini, Virgo, Sagittarius
+<lb n="8"/>et Piscis, sunt communia. Dicuntur autem mobilia quia, quando ingre-
+<lb n="9"/>ditur Sol aliquod istorum, movetur, id est mutatur, tempus; vel figitur, id
+<lb n="10"/>est in eodem statu perseverat; aut fit commune, id est medietas illius erit unius
+
+<pb n="234"/>
+<lb n="1"/>temporis et medietas alterius. Verbi gratia: quando Sol signum Arietis
+<lb n="2"/>ingreditur, mutatur tempus, id est vertitur hyems in ver et quando intrat
+<lb n="3"/>Taurum, figitur idem tempus vernale; quando vero Sol ingreditur Geminos,
+<lb n="4"/>fit tempus commune, id est dimidium erit veris et dimidium estatis, et sic de
+<lb n="5"/>ceteris.</p>
+<p n="18">
+<lb n="6"/> De aspectu. Dicuntur etiam signa se aspicere, hoc est <milestone unit="arline" n="85"/> omne
+<lb n="7"/>signum aspicit tertium ante se et tertium post se, quod est undecimum,
+<lb n="8"/>et hic aspectus dicitur sextilis, et est aspectus dilectionis atque amicitie.
+<lb n="9"/>Dicitur etiam sextilis, eo quod teneat sextam partem circuli, id est .lx.
+<lb n="10"/>gradus. Verbi gratia, planeta qui fuerit in initio Arietis aspicit eum qui fuerit
+<lb n="11"/>in Geminis ante se et eum qui fuerit in Aquario post se. Et aspicit
+<lb n="12"/>quartum ante se et quartum post se, id est decimum, et hic aspectus vo-
+<lb n="13"/>catur tetragona radiatio, eo quod teneat quartam partem celi, id est
+<lb n="14"/>nonaginta gradus, et est aspectus discordie atque medie inimicitatis. As-
+
+<pb n="235"/>
+<lb n="1"/>picit quoque quintum signum ante se et quintum post se, quod est
+<lb n="2"/>nonum, et hic aspectus dicitur trigona radiatio, eo quod teneat tertiam
+<lb n="3"/>partem celi, id est centum .xx. gradus, et est aspectus concordie et dilec-
+<lb n="4"/>tionis perfecte. Aspicit etiam septimum per oppositionem, et est
+<lb n="5"/>aspectus inimicitie integre. Et si in his signis ita se aspicientibus fuerint
+<lb n="6"/>planete, dicuntur <milestone unit="arline" n="90"/> se aspicere; hic est aspectus. Et si duo planete fuerint
+<lb n="7"/>in uno signo, coniuncti dicuntur. Cum vero fuerit planeta in aliquo signo,
+<lb n="8"/>erunt radii eius in signis illis que aspiciunt ipsum signum in simili gradu
+<lb n="9"/>atque minuto. Verbi gratia, si fuerit Mars in primo gradu Arietis et in primo
+<lb n="10"/>minuto eiusdem gradus, erunt radii eius in primo gradu signi Libre et in
+<lb n="11"/>primo minuto eiusdem gradus. Sic intellige de ceteris aspectibus.</p>
+<p n="19">
+<lb n="12"/> De terminis. Sunt quoque planetis in signis termini vel fines,
+ 
+<pb n="236"/>
+<lb n="1"/>quia in unoquoque signo habent quinque planete terminos per diversos
+<lb n="2"/>gradus dispositos. Nam ab initio Arietis usque in sexto gradu eiusdem
+<lb n="3"/>Arietis est terminus Iovis, et a sexto usque in duodecimo <milestone unit="arline" n="95"/> terminus
+<lb n="4"/>Veneris, et a duodecimo usque in viginti terminus Mercurii, et a viginti usque
+<lb n="5"/>in viginti quinque terminus Martis, et a .xxv. usque in .xxx. terminus Sat-
+<lb n="6"/>urni. Et propter diversitatem eorum graduum et gravitatem eorum mem-
+<lb n="7"/>orie descripsimus eos in tabula ut levius esset opus.
+<lb n="8"/>Termini Egyptiorum et dicuntur esse Hermetis.
+ <table>
+  
+    <lb n="9"/><row><cell><milestone unit="arline" n="100"/> Aries </cell><cell> Iupiter vi </cell><cell> Venus vi </cell><cell> Mercurius viii </cell><cell> Mars v </cell><cell> Saturnus v</cell></row>
+       <lb n="10"/><row><cell>Taurus </cell><cell> Venus viii </cell><cell> Mercurius vi </cell><cell> Iupiter viii </cell><cell> Saturnus v </cell><cell> Mars iii</cell></row>
+       <lb n="11"/><row><cell>Gemini </cell><cell>Mercurius vi </cell><cell>Iupiter vi </cell><cell>Venus v</cell><cell>Mars vii</cell><cell>Saturnus vi</cell></row>
+       <lb n="12"/><row><cell>Cancer </cell><cell>Mars vii</cell><cell>Venus vi </cell><cell>Mercurius vi </cell><cell>Iupiter vii</cell><cell>Saturnus iv</cell></row>
+       <lb n="13"/><row><cell>Leo </cell><cell>Iupiter vi </cell><cell>Venus v </cell><cell>Saturnus vii </cell><cell>Mercurius vi </cell><cell>Mars vi</cell></row>
+    <lb n="14"/><row><cell><milestone unit="arline" n="105"/> Virgo </cell><cell>Mercurius vii </cell><cell>Venus x </cell><cell>Iupiter iv </cell><cell>Mars vii </cell><cell>Saturnus ii</cell></row>
+       <lb n="15"/><row><cell>Liba </cell><cell>Saturnus vi </cell><cell>Mercurius viii </cell><cell>Iupiter vii </cell><cell>Venus vii </cell><cell>Mars ii</cell></row>
+       <lb n="16"/><row><cell>Scorpio </cell><cell>Mars vii </cell><cell>Venus iv </cell><cell>Mercurius viii </cell><cell>Iupiter v </cell><cell>Saturnus vi</cell></row>
+       <lb n="17"/><row><cell>Sagitta.</cell><cell> Iupiter xii </cell><cell>Venus v</cell><cell>Mercurius iv </cell><cell>Saturnus v </cell><cell>Mars iv</cell></row>
+       <lb n="18"/><row><cell>Capri. </cell><cell>Mercurius vii </cell><cell>Iupiter vii </cell><cell>Venus viii</cell><cell>Saturnus iv </cell><cell>Mars iv</cell></row>
+    <lb n="19"/><row><cell><milestone unit="arline" n="110"/> Aquari. </cell><cell>Mercurius vii </cell><cell>Venus vi</cell><cell>Iupiter vii </cell><cell> Mars v </cell><cell>Saturnus v</cell></row>
+       <lb n="20"/><row><cell>Piscis </cell><cell>Venus xii </cell><cell>Iupiter iv </cell><cell>Mercurius iii </cell><cell>Mars ix </cell><cell>Saturnus ii</cell></row>
+       
+ </table>
+
+ 
+<pb n="237"/>
+<lb n="1"/>Quidam autem preponunt triplicitates terminis eo quod domini tri-
+<lb n="2"/>plicitatum sint fortiores in nutritione, quia significant nutritionem, et
+<lb n="3"/>quia nulla discordia est in triplicitate sicut est in terminis cum preponuntur.
+<lb n="4"/>Et domini termini sunt in directione fortiores.</p>
+<p n="20">
+<lb n="5"/> De facie. Facies autem signorum sunt hee: unumquodque sig-
+<lb n="6"/>num dividitur in tres partes equales; unaqueque pars ex decem <milestone unit="arline" n="115"/> gradibus
+<lb n="7"/>constat, et vocantur facies, quarum initium est a primo gradu signi Ari-
+<lb n="8"/>etis. Prima ergo facies est a primo gradu signi Arietis usque in
+<lb n="9"/>decimum et datur Marti; secunda usque ad vicesimum gradum
+<lb n="10"/>et datur Soli, qui succedit eum in ordine circulorum; tertia usque in finem
+<lb n="11"/>predicti signi et est Veneris. Similiter, prima facies Tauri est Mercurii, qui
+<lb n="12"/>Venerem succedit, et ita usque in finem signorum.
+
+   <pb n="238"/>
+   <table>
+      <lb n="1"/><row><cell><milestone unit="arline" n="120"/> Aries </cell><cell> Mars x </cell><cell> Sol x </cell><cell> Venus x</cell></row>
+      <lb n="2"/><row><cell>Taurus </cell><cell> Mercurius x </cell><cell> Luna x </cell><cell> Saturnus x</cell></row>
+      <lb n="3"/><row><cell>Gemini </cell><cell> Iupiter x </cell><cell> Mars x </cell><cell> Sol x</cell></row>
+      <lb n="4"/><row><cell>Cancer </cell><cell> Venus x </cell><cell> Mercurius x </cell><cell> Luna x</cell></row>
+      <lb n="5"/><row><cell><milestone unit="arline" n="125"/> Leo </cell><cell> Saturnus x </cell><cell> Iupiter x </cell><cell> Mars x</cell></row>
+      <lb n="6"/><row><cell>Virgo </cell><cell> Sol x </cell><cell> Venus x </cell><cell> Mercurius x</cell></row>
+      <lb n="7"/><row><cell>Libra </cell><cell> Luna x </cell><cell> Saturnus x </cell><cell> Iupiter x</cell></row>
+      <lb n="8"/><row><cell>Scorpio </cell><cell> Mars x </cell><cell> Sol x </cell><cell> Venus x</cell></row>
+      <lb n="9"/><row><cell>Sagittarius </cell><cell> Mercurius x </cell><cell> Luna x </cell><cell> Saturnus x</cell></row>
+      <lb n="10"/><row><cell><milestone unit="arline" n="130"/> Capricornus </cell><cell> Iupiter x </cell><cell> Mars x </cell><cell> Sol x</cell></row>
+      <lb n="11"/><row><cell>Aquarius </cell><cell> Venus x </cell><cell> Mercurius x </cell><cell> Luna x</cell></row>
+      <lb n="12"/><row><cell>Piscis </cell><cell> Saturnus x </cell><cell> Iupiter x </cell><cell> Mars x</cell></row>
+   </table></p>
+  
+<p n="21">
+<lb n="13"/> Cum ergo habueris gradus in aliquo signo et volueris scire ex cuius
+<lb n="14"/>planetarum facie sint, sume ab initio Arietis signa usque in signum in-
+<lb n="15"/>tegrum quod est ante illud signum <milestone unit="arline" n="135"/> de quo faciem volueris scire et
+<lb n="16"/>triplica ea, et quot fuerint adde super hoc quod preterierit ex faciebus
+<lb n="17"/>illius signi cuius faciem volueris scire, cum eadem facie cuius dominum
+<lb n="18"/>volueris scire, et proice a planeta qui est dominus faciei prime signi
+      
+
+      
+<pb n="239"/>
+<lb n="1"/>Arietis, qui est Mars, secundum successionem circulorum .vii. et .vii., et
+<lb n="2"/>quod remanserit infra septem numera a Marte per successionem plane-
+<lb n="3"/>tarum, et quo finitus fuerit numerus, erit prima facies illius signi; unde
+<lb n="4"/>fuerint gradus usque in decimum gradum eiusdem signi illius planete apud
+<lb n="5"/>quem finitus fuerit numerus, et a decem usque in viginti alterius planete qui
+<lb n="6"/>eum succedit, et a viginti usque in finem signi alterius qui eum succedit.
+<lb n="7"/>In cuius ergo decem <milestone unit="arline" n="140"/> fuerit gradus ex signo, erit ex facie ipsius
+<lb n="8"/>planete. Vocantur etiam istarum domini facierum a quibusdam 'deceni'.</p>
+<p n="22">
+<lb n="9"/> Et quia, annuente Deo, iam tractavimus de potestatibus plane-
+<lb n="10"/>tarum in signis, que sunt domus, exaltatio, triplicitas, termini et facies,
+<lb n="11"/>nunc igitur tractemus de virtutibus seu de fortitudinibus eorum in ipsis.
+<lb n="12"/>Nam dominus domus habet quinque fortitudines, et dominus exaltationis
+<lb n="13"/>.iv., et dominus triplicitatis .iii., et dominus termini duas, et dominus
+<lb n="14"/>faciei unam. Intellige ergo ex hoc numero fortitudines planetarum; qui enim
+
+<pb n="240"/>
+<lb n="1"/>magis habundat in numero, magis habundat in fortitudine. Et quidam pre-
+<lb n="2"/>ponunt terminum triplicitati, id est volunt ut dominus termini fortior sit
+<lb n="3"/>domino triplicitatis, set iam superius exposuimus in quo valet unusquisque.</p>
+<p n="23">
+<lb n="4"/> <milestone unit="arline" n="145"/> Quidam etiam de hac re talem dederunt comparationem, dicentes
+<lb n="5"/>quia planeta cum fuerit in domo sua est similis viro in domo atque in
+<lb n="6"/>dominatione sua, et cum fuerit in exaltatione sua est similis viro in regno
+<lb n="7"/>suo atque gloria, et cum fuerit in termino suo est sicut vir inter pa-
+<lb n="8"/>rentes suos et cognatos atque gentes, et dum fuerit in triplicitate sua
+<lb n="9"/>erit sicut vir in honore suo et inter auxiliatores suos atque ministros,
+<lb n="10"/>et cum fuerit in facie sua erit sicut vir in magisterio suo. Hee sunt universe
+<lb n="11"/>potestates planetarum essentiales in signis.</p>
+<p n="24">
+<lb n="12"/> Et sequuntur has figure signorum, quia in signis sunt quedam
+<lb n="13"/>signa que dicuntur rationalia, id est <milestone unit="arline" n="150"/> Virgo, Gemini, Libra, Aquarius
+<lb n="14"/>et medietas prima Sagittarii, quia horum imagines in circulo ad imagines
+
+<pb n="241"/>
+<lb n="1"/>hominum figurantur; hec quoque dicuntur pulcras voces habentia; hec quoque
+<lb n="2"/>vigent cum fuerint in oriente. Et quedam dicuntur alas habentia, id est
+<lb n="3"/>Gemini, Virgo et Piscis; quedam quadrupedia, id est Leo et Sagittarius.
+<lb n="4"/>Et quedam eorum sunt domestica, id est Aries, Taurus et Capricornus;
+<lb n="5"/>et hec vigent cum fuerint in meridie; nam Virgo, Capricornus et Aquarius
+<lb n="6"/>vigent cum fuerint in septemtrione. Et ex signis quedam sunt vitiosa et
+<lb n="7"/>tortuosa, <milestone unit="arline" n="155"/> id est Aries, Taurus, Cancer, Scorpio et Capricornus. Et quedam
+<lb n="8"/>ex eis dicuntur plures proles habentia, id est Cancer, Scorpio et Piscis;
+<lb n="9"/>et hec vigent cum fuerint in occidente. Et quedam sunt sterilia, id est
+<lb n="10"/>Gemini, Leo et Virgo. Et quedam sunt paucos filios habentia, id est Aries,
+<lb n="11"/>Taurus, Libra, Sagittarius, Capricornus et Aquarius. Et quedam dicuntur
+<lb n="12"/>multum luxuriosa, id est Aries, Taurus, Leo et Capricornus. Et ex signis
+<lb n="13"/>quedam dicuntur dimidiam vocem habentia, illa scilicet que formantur ad
+<lb n="14"/>imagines animalium balantium et mugientium et rugientium, <milestone unit="arline" n="160"/> ut Aries,
+<lb n="15"/>Taurus, Leo, Capricornus et ultima pars Sagittarii. Et quedam sunt voce car-
+<lb n="16"/>entia, illa scilicet que formantur ad imagines animalium voce carentium,
+<lb n="17"/>ut Cancer, Scorpio et Piscis.
+
+<pb n="242"/></p>
+<p n="25">
+<lb n="1"/> Et unumquodque signorum habet propriam significationem in his
+<lb n="2"/>que significant ex creatione et moribus hominum, sementum et regionum
+<lb n="3"/>et cetera. Aries habet ex corpore hominis caput et faciem, et ex regioni-
+<lb n="4"/>bus Bebil et Feriz, id est Babyloniam et Persidam, et Adrabigen et
+<lb n="5"/>Falastin.</p>
+<p n="26">
+<lb n="6"/><milestone unit="arline" n="165"/> Taurus habet arbores que plantantur, et ex corpore hominis collum
+<lb n="7"/>et gutturis nodum, et ex regionibus Ezeuuet et Almehin et Handen
+<lb n="8"/>et Alacrad.</p>
+<p n="27">
+<lb n="9"/> Signum Geminorum est largum, boni animi; habet ex corpore
+<lb n="10"/>hominis humeros et brachia et manus, et ex regionibus Iurgen et Arme-
+<lb n="11"/>niam et Adrabigen et Gilen et Egyptum et Barcha.</p>
+
+<pb n="243"/>
+<p n="28">
+<lb n="1"/><milestone unit="arline" n="170"/> Cancer habet ex arboribus eas que fuerint equales longitu-
+<lb n="2"/>dine, et ex corpore hominis pectus, cor, stomacum, costas, splen et
+<lb n="3"/>pulmonem, et ex regionibus Armeniam Minorem et orientalem plagam Hu-
+<lb n="4"/>rachen et Acin, et habet participationem in Balech et Adrabigen.</p>
+<p n="29">
+<lb n="5"/> Leo habet arbores proceras; callidus et versutus, et multe angustie
+<lb n="6"/>atque tristitie, et ex corpore hominis stomacum, cor, latus et dor-
+<lb n="7"/>sum, et ex regionibus <milestone unit="arline" n="175"/> Alturuk usque in finem regionis habitabilis.</p>
+<p n="30">
+<lb n="8"/> Virgo habet quicquid seminatur ex seminibus, et est larga,
+<lb n="9"/>boni animi, et habet ex corpore hominis ventrem, interiora, telam, scil-
+<lb n="10"/>icet diafragma, et intestina, et ex regionibus Algeramica et Assem, id
+<lb n="11"/>est quedam regio circa Ierusalem, et Alforaz, id est Eufraten, et insulam,
+
+<pb n="244"/>
+<lb n="1"/>que est Yspania, et Feriz.</p>
+<p n="31">
+<lb n="2"/> Libra habet arbores proceras, et est larga, boni animi, habens ex
+<lb n="3"/>corpore hominis lumbos, <milestone unit="arline" n="180"/> inferiora ventris, umbelicum, pectinem scilicet,
+<lb n="4"/>et verenda, hancas, ilia et nates, et ex regionibus terram Romanorum vel
+<lb n="5"/>Grecorum et que succedunt eius fines usque ad Affricam; habens Azait
+<lb n="6"/>ad finem Ethiopie, et Barcha; habet etiam Carmen et Segesten et
+<lb n="7"/>Kebul et Tabrasten, Barach et Hau Warah.</p>
+<p n="32">
+<lb n="8"/> Scorpio habet arbores longitudine equales; largus, boni animi, et
+<lb n="9"/>habet ex corpore hominis verenda, testiculos, vesicam, anum et femora,
+<lb n="10"/>et ex regionibus terram Alhigez <milestone unit="arline" n="185"/> et rura Arabum et fines eius usque
+
+<pb n="245"/>
+<lb n="1"/>in Aliemen et Tangeth et Cumus et Elyeth, et habet in Acint participa-
+<lb n="2"/>tionem.</p>
+<p n="33">
+<lb n="3"/> Sagittarius, ingeniosus et callidus; habet ex corpore hominis femo-
+<lb n="4"/>ra, et ex regionibus Ethiopiam et Maharoben et Acint et Halint, que est
+<lb n="5"/>India.</p>
+<p n="34">
+<lb n="6"/> Capricornus, bone vite, iracundus, cautus et callidus, multe tris-
+<lb n="7"/>titie, habens ex corpore hominis genua, et ex regionibus Ethiopiam, et Hanna
+<lb n="8"/>et Harawen et Acint et Umen usque ad Duo Maria et usque ad
+<lb n="9"/>Acint et Halint, que est India.</p>
+<p n="35">
+<lb n="10"/><milestone unit="arline" n="190"/> Aquarius habet ex corpore hominis crura usque ad inferiora
+
+<pb n="246"/>
+<lb n="1"/>cavillarum, et ex regionibus Hazaweth, id est nigredinem, et Alcupha
+<lb n="2"/>et partes eius et terram Helfigez et partem terre Egypti et occiden-
+<lb n="3"/>talem plagam terre Acint.</p>
+<p n="36">
+<lb n="4"/> Piscis, cautus et callidus, comixtus, multi coloris, habens
+<lb n="5"/>ex corpore hominis pedes, et ex regionibus Tabrasten et septemtrionalem
+<lb n="6"/>plagam terre Iurgen et participationem in <milestone unit="arline" n="195"/> Romanis usque ad Essem,
+<lb n="7"/>et habet insulam et Egyptum et Alexandriam et mare Elyemen.</p>
+<p n="37">
+<lb n="8"/> Et si quidam planete significaverint dolorem, et habent in
+<lb n="9"/>unoquoque signo membrum sibi proprium, tractemus ergo de doloribus
+<lb n="10"/>planetarum in signis, et primum incipiamus ab Ariete. In Ariete Sa-
+<lb n="11"/>turnus habet pectus, Iupiter ventrem, Mars caput, Sol femora, Venus pedes,
+<lb n="12"/>Mercurius crura, Luna genua.
+
+<pb n="247"/></p>
+<p n="38">
+<lb n="1"/> In Tauro, Saturnus ventrem, Iupiter dorsum, Mars collum, Sol
+<lb n="2"/>genua, Venus <milestone unit="arline" n="200"/> caput, Mercurius pedes, Luna crura.</p>
+<p n="39">
+<lb n="3"/> In Geminis, Saturnus ventrem, Iupiter verenda et que succedunt,
+<lb n="4"/>Mars pectus, Sol crura et cavillas, Venus collum, Mercurius caput, Luna
+<lb n="5"/>femora.</p>
+<p n="40">
+<lb n="6"/> In Cancro, Saturnus virilia et eius succedentia, Iupiter femora,
+<lb n="7"/>Mars pectus, Sol pedes, Venus brachia et humeros, Mercurius oculos, Luna
+<lb n="8"/>caput.</p>
+<p n="41">
+<lb n="9"/><milestone unit="arline" n="205"/> In Leone, Saturnus verenda et eius succedentia, Iupiter femora
+<lb n="10"/>et genua, Mars ventrem, Sol caput, Venus cor, Mercurius humeros et gut-
+<lb n="11"/>tur, Luna collum.</p>
+<p n="42">
+<lb n="12"/> In Virgine, Saturnus pedes, Iupiter genua et eorum succedentia,
+<lb n="13"/>Mars ventrem, Sol collum, Venus ventrem, Mercurius cor, Luna humeros.</p>
+<p n="43">
+<lb n="14"/> In Libra, Saturnus genua et eorum succedentia, Iupiter oculos
+<lb n="15"/>et eorum succedentia, Mars verenda et eorum succedentia, <milestone unit="arline" n="210"/> Sol humeros,
+<lb n="16"/>Venus caput, Mercurius ventrem, Luna cor.</p>
+<p n="44">
+<lb n="17"/> In Scorpione, Saturnus cavillas, et eorum succedentia, Iupiter
+<lb n="18"/>pedes, Mars caput, brachia et femora, Sol cor, Venus verenda et succedentia
+<lb n="19"/>eorum, Mercurius dorsum, Luna ventrem.</p>
+
+<pb n="248"/>
+<p n="45">
+<lb n="1"/> In Sagittario, Saturnus pedes, Iupiter crura et caput, Mars pedes et
+<lb n="2"/>manus, Sol ventrem, Venus femora et brachia, Mercurius verenda et cor, Luna
+<lb n="3"/>dorsum.</p>
+<p n="46">
+<lb n="4"/><milestone unit="arline" n="215"/> In Capricorno, Saturnus caput et pedes, Iupiter genua et oculos,
+<lb n="5"/>Mars crura et humeros, Sol dorsum, Venus femora et cor, Mercurius verenda
+<lb n="6"/>et eorum succedentia, Luna femora et verendorum succedentia.</p>
+<p n="47">
+<lb n="7"/> In Aquario, Saturnus caput et collum, Iupiter humeros, pectus et
+<lb n="8"/>pedes, Mars cavillas et cor, Sol verenda et eorum succedentia, Venus genua et
+<lb n="9"/>succedentia eorum, Mercurius femora et cor, Luna <milestone unit="arline" n="220"/> verenda.</p>
+<p n="48">
+<lb n="10"/> In Pisce, Saturnus humeros, brachia et collum, Iupiter cor et caput,
+<lb n="11"/>Mars cavillas et ventrem, Sol femora et eorum succedentia, Venus collum et
+<lb n="12"/>dorsum, Mercurius crura et verenda, Luna femora.</p>
+<p n="49">
+<lb n="13"/> Sunt quoque in unoquoque signo gradus qui proprie masculini atque
+<lb n="14"/>feminini dicuntur. Nam ab initio Arietis usque <milestone unit="arline" n="225"/> in .VIII. gradus dicuntur
+<lb n="15"/>esse masculini, et ab octavo in nono feminini, et a nono in .XV. masculini, et a
+<lb n="16"/>quinto decimo usque in .XXII. feminini, et a .XXII. usque in finem Arietis mas-
+<lb n="17"/>culini, quos decrevimus describere sicut descripsimus terminos, et hoc modo
+<lb n="18"/>depinximus in tabula ut levius redderetur opus, Deo auxiliante.
+
+
+<pb n="249"/>
+<table>
+
+ <lb n="1"/><row><cell>Aries </cell><cell> viii m </cell><cell> i f </cell><cell> vi m </cell><cell> vii f </cell><cell> viii m </cell><cell/><cell/></row>
+<lb n="2"/><row><cell>Taurus </cell><cell> v f </cell><cell> vi m </cell><cell> vi f </cell><cell> iv m </cell><cell> iii f </cell><cell> vi m </cell><cell/></row>
+<lb n="3"/><row><cell><milestone unit="arline" n="230"/> Gemini </cell><cell> v f </cell><cell> xi m </cell><cell> vi f </cell><cell> iv m </cell><cell> iv f </cell><cell/><cell/></row>
+<lb n="4"/><row><cell>Cancer </cell><cell> i m </cell><cell> vi f </cell><cell> ii m </cell><cell> ii f </cell><cell> xi m </cell><cell> iv f </cell><cell> iii m </cell></row>
+<lb n="5"/><row><cell>Leo </cell><cell> v m </cell><cell> iii f </cell><cell> vii m </cell><cell> viii f </cell><cell> vii m </cell><cell/><cell/></row>
+<lb n="6"/><row><cell>Virgo </cell><cell> viii f </cell><cell> iv m </cell><cell> viii f </cell><cell> x m </cell><cell/><cell/></row> 
+<lb n="7"/><row><cell>Libra </cell><cell> v m </cell><cell> x f </cell><cell> v m </cell><cell> vii f </cell><cell> iii m </cell><cell/><cell/></row>
+<lb n="8"/><row><cell><milestone unit="arline" n="235"/> Scorpio </cell><cell> iv m </cell><cell> x f</cell><cell> iii m </cell><cell> viii f </cell><cell> v m </cell><cell/><cell/></row>
+<lb n="9"/><row><cell>Sagitta. </cell><cell> ii m </cell><cell> iii f </cell><cell> vii m </cell><cell> xii f </cell><cell> vi m </cell><cell/><cell/></row>
+<lb n="10"/><row><cell>Capri. </cell><cell> xi m </cell><cell> viii f </cell><cell> xi m </cell><cell/><cell/><cell/><cell/></row>
+<lb n="11"/><row><cell>Aquari. </cell><cell> v m </cell><cell> x f </cell><cell> vi m </cell><cell> iv f </cell><cell> ii m </cell><cell> iii f </cell><cell/></row>
+<lb n="12"/><row><cell>Piscis </cell><cell> x m </cell><cell> x f </cell><cell> iii m </cell><cell> v f </cell><cell> ii m </cell><cell/><cell/></row>
+   
+</table>   </p>
+   <p n="50">
+<lb n="13"/><milestone unit="arline" n="240"/> Et in unoquoque istorum signorum sunt gradus qui proprie di-
+      <lb n="14"/>cuntur lucidi et gradus qui dicuntur tenebrosi et gradus qui vocantur
+      <lb n="15"/>fumosi et gradus qui vocantur vacui. Dicunt enim quidam quod ab
+
+ <pb n="250"/>
+      <lb n="1"/>initio Arietis usque in tertium gradum sunt tenebrosi, et a tribus in
+      <lb n="2"/>.VIII. lucidi, et ab .VIII. in .XVI. tenebrosi, et a .XVI. usque in vicesimum
+      <lb n="3"/>lucidi, et a .XX. usque in .XXIIII. vacui, et a .XXIIII. in .XXVIIII. lucidi, et a <milestone unit="arline" n="245"/>
+      <lb n="4"/>.XXVIIII. usque in finem Arietis vacui, ex quibus faciemus tabulam, si
+      <lb n="5"/>Deus volet.
+      
+      <table>
+         <lb n="6"/><row><cell>Aries </cell><cell> iii tene </cell><cell> v luc </cell><cell> viii tene </cell><cell> iv luc </cell><cell> iv vac </cell><cell> v luc </cell><cell> i vac </cell></row>
+         <lb n="7"/><row><cell>Taurus </cell><cell> iii tene </cell><cell> iv luc </cell><cell> v vac </cell><cell> iii luc </cell><cell> v tene </cell><cell> viii luc </cell><cell> ii tene </cell></row>
+         <lb n="8"/><row><cell>Gemini </cell><cell> iv luc </cell><cell> iii tene </cell><cell> v luc </cell><cell> iv vac </cell><cell> vi luc </cell><cell> v tene </cell><cell> iii vac </cell></row>
+         <lb n="9"/><row><cell><milestone unit="arline" n="250"/> Cancer </cell><cell> xii luc </cell><cell> ii tene</cell><cell> iv vac </cell><cell> ii fum </cell><cell> viii luc </cell><cell> ii vac </cell><cell> </cell></row>
+         <lb n="10"/><row><cell>Leo </cell><cell> x tene </cell><cell> x fum </cell><cell> v vac </cell><cell> v luc</cell><cell> </cell><cell> </cell><cell> </cell></row>
+         <lb n="11"/><row><cell>Virgo </cell><cell> v tene</cell><cell> iii luc </cell><cell> ii vac </cell><cell> vi luc </cell><cell> vi fum </cell><cell> v vac </cell><cell> iii tene </cell></row>
+         <lb n="12"/><row><cell>Libra </cell><cell> v luc </cell><cell> v tene</cell><cell>viii luc </cell><cell> iii tene </cell><cell> vi luc </cell><cell> iii vac </cell><cell> </cell></row>
+         <lb n="13"/><row><cell>Scorpio </cell><cell> iii tene </cell><cell> v luc </cell><cell> vi vac </cell><cell> vi luc </cell><cell> ii fum </cell><cell> v vac </cell><cell> iii tene </cell></row>
+         <lb n="14"/><row><cell><milestone unit="arline" n="255"/> Sagitta. </cell><cell> ix luc </cell><cell> iii tene </cell><cell> vii luc </cell><cell> iv fum </cell><cell> vii luc </cell><cell> </cell><cell> </cell></row>
+         <lb n="15"/><row><cell>Capri. </cell><cell> vii tene </cell><cell> iii luc </cell><cell> v fum </cell><cell> iv luc </cell><cell> iii tene </cell><cell> iii vac </cell><cell> v tene </cell></row>
+         <lb n="16"/><row><cell>Aquari. </cell><cell> iv fum </cell><cell> v luc </cell><cell> iv tene </cell><cell> viii luc </cell><cell> iv vac </cell><cell> v luc </cell><cell> </cell></row>
+         <lb n="17"/><row><cell>Piscis </cell><cell> vi tene</cell><cell> vi luc </cell><cell> vi tene </cell><cell> iv luc </cell><cell> iii vac </cell><cell> iii luc </cell><cell> ii tene </cell></row>
+      
+      </table>
+  
+<pb n="251"/></p>
+<p n="51">
+<lb n="1"/> Et in signis sunt gradus qui dicuntur putei; cum fuerit pla-
+<lb n="2"/>neta in aliquo eorum <milestone unit="arline" n="260"/> dicitur esse in puteo, ut sextus gradus signi Arietis
+<lb n="3"/>et .XI., .XVI., .XXIII. et .XXIX.; Tauri, .V., .XII., .XXIV., .XXV.; <milestone unit="arline" n="265"/> Ge-
+<lb n="4"/>mini .II., .XII., .XVII., .XXVI., .XXX.; Cancri .XII., .XVII., .XXIII., .XXVI.
+<lb n="5"/>et .XXX.; Leonis .VI., .XIII., .XV., .XXII., XXIII., .XXVIII.; Virginis .VIII., .XIII.,
+<lb n="6"/>.XVI., .XXI. et .XXV.; Libre .I., .VII., .XX. et .XXX.; <milestone unit="arline" n="270"/> Scorpionis .VIIII., .X., .XXII.,
+<lb n="7"/>.23. et .XXVII.; Sagittarii .VII., .XII., .XV., .XXIV., .XXVII. et .XXX.; Capricorni
+<lb n="8"/>.II., .VII., .XVII., .XXII., .XXIIII., .XXVIII.; Aquarii .I. .XII., .XVII., .XXIV. et
+<lb n="9"/>.XXIX.; Piscis .IIII., .IX., .XXIIII., XXVII. et .XXVIII.</p>
+<p n="52">
+<lb n="10"/><milestone unit="arline" n="275"/> Et sunt in signis quidam gradus qui dicuntur gradus aze-
+<lb n="11"/>mena, id est gradus debilitationis corporis. Est enim azemena quedam
+<lb n="12"/>debilitatio corporis temporalis, ut est cecitas, surditas, amissio membrorum
+<lb n="13"/>et cetera talia, que quamdiu vixerit homo semper habebit secum. Cum
+<lb n="14"/>ergo fuerit Luna cum his gradibus in nativitate alicuius pueri, accidit
+
+<pb n="252"/>
+<lb n="1"/>ei predicta azemena secundum significationem loci et aspectus seu loca pla-
+<lb n="2"/>netarum. Significatur quoque azemena per astra diversis modis, sicut
+<lb n="3"/>in libris nativitatum invenies; gradus autem azemena hii sunt: In
+<lb n="4"/>Tauro .VI. gradus, .VII., .VIII., .IX. atque .X.; in Cancro a .IX. usque ad
+<lb n="5"/>.XV.; in Leone .XVIII., .XXVII., .XXVIII.; in Scorpione .XIX., .XXIX.; in Sagittario
+<lb n="6"/>.I., .VII., .XVIII. et .XIX.; in Capricorno .XXVI. et .XXVII. usque in <milestone unit="arline" n="280"/> .XXIX.; in
+<lb n="7"/>Aquario .XVIII. et .XVIIII.</p>
+<p n="53">
+<lb n="8"/> Et in circulo sunt quidam gradus qui dicuntur augmentantes for-
+<lb n="9"/>tunam, et sunt hii: in Ariete .XVIIII.; in Tauro .III., .XV. et .XXVII.; in
+<lb n="10"/>Geminis .XI.; in Cancro .I., .II., .3., .XIIII. et .XV.; in Leone .II., .V., .VII.,
+<lb n="11"/>et .XVIIII. in Virgine .III., .XIII. <milestone unit="arline" n="285"/> et .XX.; in Libra .III., .V. et .XXI.; in
+<lb n="12"/>Scorpione .VII., .XVIII. et .XX.; in Sagittario .XIII. et .XX.; in Capricorno
+<lb n="13"/>.XII., .XIII., .XIIII. et .XX.; in Aquario .VII., .XVI., .XVII. et .XX.; in Pisce
+<lb n="14"/>.XIII. et .XX.</p>
+<p n="54">
+<lb n="15"/> Et duo gradus qui fuerint unius longitudinis a capite signorum
+<lb n="16"/><milestone unit="arline" n="290"/> mobilium dicuntur compotentes, id est unius fortitudinis, et consortes seu
+
+<pb n="253"/>
+<lb n="1"/>participes in virtute, ut .XX. gradus Capricorni vel Cancri cum .X. gradu
+<lb n="2"/>Sagittarii et Geminorum, et .XX. gradus Arietis et Libre cum .X.
+<lb n="3"/>gradu Piscis atque Virginis et ita in reliquis.</p>
+<p n="55">
+<lb n="4"/> Set quia, auxiliante Deo, iam protulimus esse circuli signo-
+<lb n="5"/>rum essentiale, nunc proferamus etiam accidentale. Nam circulus figu-
+<lb n="6"/>ratur omni hora tali figura que dividitur in quatuor partes, quas dividit <milestone unit="arline" n="295"/> cir-
+<lb n="7"/>culus emisperii et circulus meridiei, id est circulus medii celi, qui facit medium
+<lb n="8"/>diem, et unaqueque pars istarum dividitur in tres partes inequales, se-
+<lb n="9"/>cundum ascensiones signi ascendentis, atque hoc modo dividitur circu-
+<lb n="10"/>lus in .XII. partes, que nominantur domus; nominantur quoque et
+<lb n="11"/>cuspides, cuius opus expositum est in aziz, id est in libro cursus
+<lb n="12"/>siderum. Principium ergo divisionis est ascendens, cuius initium est su-
+<lb n="13"/>per circulum emisperii orientalis; deinde sequitur secunda domus et tertia
+
+<pb n="254"/>
+<lb n="1"/>cetereque domus usque ad duodecimam.</p>
+<p n="56">
+<lb n="2"/> Quarta autem pars que est ab ascendente usque ad medium celi,
+<lb n="3"/>que est domus .XII., <milestone unit="arline" n="300"/> .XI., .X., dicitur quarta pars orientalis, masculina,
+<lb n="4"/>adveniens; significat initium vite, et vocatur puerilis, sanguinea, vernalis.
+<lb n="5"/>Et alia pars que est a medio celi usque ad gradum occidentalis signi,
+<lb n="6"/>id est septimi, que est super circulum emisperii occidentalis, que est
+<lb n="7"/>domus nona, .VIII., .VII., et est meridiana, feminina, recedens; significat
+<lb n="8"/>mediam etatem, et vocatur perfectio iuventutis, estivalis, colerica. Ter-
+<lb n="9"/>tia quoque pars, que est ab occidente usque ad gradum quarte domus,
+<lb n="10"/>que est super circulum medii diei sub terra, que est domus .VI., .V.,
+<lb n="11"/>quarta, est <milestone unit="arline" n="305"/> occidentalis, masculina, adveniens; significat finem vite et
+<lb n="12"/>vocatur autumpnalis, melancolica, et est mediocris etatis. Quarta vero
+<lb n="13"/>pars, que est a quarta domo usque ad ascendens, que est domus .III., .II.
+<lb n="14"/>atque ascendens, est septemtrionalis, feminina, recedens; significat quod ac-
+<lb n="15"/>cidit homini post mortem eius, id est ad quid deveniet corpus eius vel
+<lb n="16"/>eius dispositio de dimissa substantia aut quid dicetur de eo, id est
+<lb n="17"/>utrum laudetur vel vituperetur, et vocatur hec pars senilis, flegma-
+
+<pb n="255"/>
+<lb n="1"/>tica, defectiva, hyemalis. Et ille due partes que sunt a medio celi usque ad
+<lb n="2"/>ascendens et ab ascendente usque ad quartam domum, ista medietas
+<lb n="3"/>vocatur medietas ascendens; <milestone unit="arline" n="310"/> et relique partes que sunt a quarta domo
+<lb n="4"/>usque ad septimam et inde ad medium celi vocantur medietas descendens.
+<lb n="5"/>Et quicquid fuerit super terram ex circulo, id est illa pars circuli superior,
+<lb n="6"/>dicitur dextera, et que sub terra, id est illa pars inferior, dicitur sinistra.
+<lb n="7"/>Et ascendens ac .IIII., .VII. et .X. dicuntur alauted, quas nos angulos
+<lb n="8"/>vocamus ut pulcrius sonet, et secunda domus ac .V., .VIII. et .XI.
+<lb n="9"/>succedentes anguli vocantur; tertia autem et .VI., .VIIII. ac .XII. cadentes
+<lb n="10"/>ab angulis dicuntur. Cum ergo planeta in angulo vel eius succedenti
+<lb n="11"/>fuerit, dicitur proficere; et si fuerit in cadentibus ab angulis, dicitur deficere.</p>
+<p n="57">
+<lb n="12"/><milestone unit="arline" n="315"/> Et unaqueque istarum domorum significat aliquid de esse hominum.
+<lb n="13"/>Nam prima domus, cuius initium oritur in circulo emisperii orientalis, vo-
+<lb n="14"/>catur athalie, id est ascendens; hec significat corpora et vitam et ini-
+<lb n="15"/>tia operum de interrogationibus scilicet et oratione et locutione
+<lb n="16"/>et rumoribus, et quicquid cogitat interrogans in animo suo; et significat ini-
+<lb n="17"/>tium vite. Et dixit Alenzdezgoz in nativitate quia dominus triplici-
+
+<pb n="256"/>
+<lb n="1"/>tatis ascendentis primus significat vitam et naturam nati seu interrogantis,
+<lb n="2"/>et eius delectationes <milestone unit="arline" n="320"/> atque voluptates, et quid diligat vel que odio
+<lb n="3"/>habeat, et quid boni seu mali eum inveniat in initio vite eius. Et dominus
+<lb n="4"/>triplicitatis secundus significat vitam et corpus et virtutem seu fortitudinem et
+<lb n="5"/>medietatem vite. Et dominus triplicitatis tertius significat id quod socii eius
+<lb n="6"/>significaverunt et significat finem vite in morte.</p>
+<p n="58">
+<lb n="7"/> Secunda domus est domus substantie ac victus et ministrorum; et
+<lb n="8"/>significat finem annorum vite, id est finem iuventutis. Et dixit Alenzdezgoz
+<lb n="9"/>de dominis triplicitatis domus substantie, de primo scilicet, .II. .III., <milestone unit="arline" n="325"/>
+<lb n="10"/>vide quis eorum sit fortior esse et loco; hunc facies merito auctorem
+<lb n="11"/>substantie et significatorem acquisitionis eius. Qui si fuerit in medio celi,
+<lb n="12"/>inveniet hanc a rege, et si fuerit in domo fidei, erit melius. Similiter,
+<lb n="13"/>dominus triplicitatis primus dat substantiam in initio vite, et secundus in
+<lb n="14"/>medio, et tertius in fine eius.</p>
+<p n="59">
+<lb n="15"/> Tertia, domus fratrum ac sororum, propinquorum quoque ac dilec-
+<lb n="16"/>torum, fidei ac religionis, <milestone unit="arline" n="330"/> mandatorum ac legatorum, mutationum ac
+
+<pb n="257"/>
+<lb n="1"/>itinerum minorum; et significat esse vite ante mortem. Dixit Alenzdez-
+<lb n="2"/>goz: dominus triplicitatis domus fratrum primus significat fratres maiores et
+<lb n="3"/>secundus medios, tertius autem minores, eritque eorum dignitas et eorum
+<lb n="4"/>esse secundum loca eorum.</p>
+<p n="60">
+<lb n="5"/> Quarta, domus patrum et hereditatum et finis rerum et thesauro-
+<lb n="6"/>rum et omnium absconditorum atque occultorum; et significat de esse vite
+<lb n="7"/>hominum finem. Dixit Alenzdezgoz quia dominus triplicitatis domus
+<lb n="8"/><milestone unit="arline" n="335"/> patrum primus significat patres, secundus civitates et terras, tertius au-
+<lb n="9"/>tem fines rerum et carceres.</p>
+<p n="61">
+<lb n="10"/> Quinta, domus filiorum et delectationum, legatorum atque do-
+<lb n="11"/>nationum; et significat quid futurum sit post mortem, ex laude scilicet
+<lb n="12"/>vel vituperatione. Dixit Alenzdezgoz quia dominus triplicitatis domus filio-
+<lb n="13"/>rum primus significat filios et vitam, secundus delectationem, tertius vero
+<lb n="14"/>significat legatos.</p>
+<p n="62">
+<lb n="15"/><milestone unit="arline" n="340"/> Sexta, domus infirmitatum et servorum; significat finem
+<lb n="16"/>vite et quicquid futurum sit ante senectutem. Dixit Alenzdezgoz: domi-
+<lb n="17"/>nus triplicitatis domus infirmitatum primus significat infirmitates et convali-
+
+<pb n="258"/>
+<lb n="1"/>tudines ab infirmitatibus et a malis, secundus significat vernaculos
+<lb n="2"/>ac servos, tertius significat quid inveniet eum ex eis et eorum utilitatem
+<lb n="3"/>atque opera; et est significator bestiarum et pecorum et omnium quadrupedum,
+<lb n="4"/>et fortitudinis eorum, multitudinis quoque eorum ac paucitatis, more eo-
+<lb n="5"/>rum in manu eius vel egressionis eorum ab ea, carceris quoque ac
+<lb n="6"/>retentionis.</p>
+<p n="63">
+<lb n="7"/><milestone unit="arline" n="345"/> Septima, domus mulierum et nuptiarum, contentionum quo-
+<lb n="8"/>que ac participationum et oppositorum; et significat medietatem finis
+<lb n="9"/>vite erga senectutem. Dixit Alenzdezgoz quia dominus triplicitatis do-
+<lb n="10"/>mus mulierum primus significat mulieres, secundus contentiones, tertius
+<lb n="11"/>commixtiones et participationes.</p>
+<p n="64">
+<lb n="12"/> Octava, domus mortis; significat timorem et mortem atque
+<lb n="13"/>almauerith, id est substantias vel hereditates mortuorum quas debent
+<lb n="14"/>heredes post mortem eorum possidere; et significat finem annorum vite
+<lb n="15"/>post senectutem. Dixit <milestone unit="arline" n="350"/> Alenzdezgoz quia dominus triplicitatis domus mortis
+<lb n="16"/>primus significat mortem, et secundus precepta seu res antiquas, et ter-
+<lb n="17"/>tius almauerith, id est que hereditanda sunt ex mortuis, sicut superius dictum
+<lb n="18"/>est.
+
+<pb n="259"/></p>
+<p n="65">
+<lb n="1"/> Nona, domus peregrinationum atque itinerum, fidei ac religio-
+<lb n="2"/>nis, sapientie, philosophie et librorum, epistolarum quoque ac legatorum,
+<lb n="3"/>narrationum seu rumorum atque somniorum; et significat initium dimidie
+<lb n="4"/>vite. Dixit Alenzdezgoz quia dominus triplicitatis domus peregrinationis
+<lb n="5"/>primus significat peregrinationem et omne quod accidet ei, secundus signi-
+<lb n="6"/>ficat <milestone unit="arline" n="355"/> fidem ac religionem et valitudinem harum atque modum earum,
+<lb n="7"/>et tertius est significator sapientie et somniorum, stellarum quoque et augu-
+<lb n="8"/>riorum et veritatis eorum, scilicet exercentium in eis, atque mendacii.</p>
+<p n="66">
+<lb n="9"/> Decima est domus regia et operum et sublimationis vel exalta-
+<lb n="10"/>tionis, regni quoque et memorie et vocis, scilicet imperii, et magisteri-
+<lb n="11"/>orum atque matrum; et significat dimidium annorum vite. Dixit
+<lb n="12"/>Alenzdezgoz: dominus triplicitatis domus regie primus <milestone unit="arline" n="360"/> significat opus et
+<lb n="13"/>exaltationem, et mansionem altissimam, secundus significat vocem imperii
+<lb n="14"/>et audaciam in eadem, tertius significat stabilitatem eius atque durabili-
+<lb n="15"/>tatem.
+
+<pb n="260"/></p>
+<p n="67">
+<lb n="1"/> Undecima, domus fiducie et fortune atque laudis, amicorum quo-
+<lb n="2"/>que et ministrorum ac auxiliatorum; et significat finem annorum medi-
+<lb n="3"/>etatis vite et post medietatem vite. Dixit Alenzdezgoz quia dominus tri-
+<lb n="4"/>plicitatis domus fiducie primus <milestone unit="arline" n="365"/> significat fiduciam, et secundus amicos,
+<lb n="5"/>tertius significat utilitatem seu profectus eorum.</p>
+<p n="68">
+<lb n="6"/> Duodecima est domus inimicorum et laboris ac tristitie, invidie
+<lb n="7"/>ac susurrationis, calliditatum et ingeniorum atque bestiarum; et significat
+<lb n="8"/>finem vite et quid continget matribus in conceptione sua ex bono
+<lb n="9"/>vel malo. Dixit Alenzdezgoz: dominus triplicitatis domus inimicorum
+<lb n="10"/>primus significat inimicos, secundus labores, tertius vero significat bes-
+<lb n="11"/>tias ac pecora.
+<lb n="12"/>Hoc est quod significant .XII. domus.</p>
+<p n="69">
+<lb n="13"/><milestone unit="arline" n="370"/> Significant etiam .XII. domus colores, et hii sunt. Nam
+<lb n="14"/>domus ascendens et .VII. sunt albe, secunda et duodecima virides, tertia et
+<lb n="15"/>undecima crocee, quarta et decima rubee, quinta et nona mellite, id est habent
+
+<pb n="261"/>
+<lb n="1"/>mellis colorem, sexta vero et octava sunt nigre.</p>
+<p n="70">
+<lb n="2"/> Et unusquisque ex planetis habet in unaquaque harum domo-
+<lb n="3"/>rum quandam potestatem ex potestatibus scilicet accidentalibus que dici-
+<lb n="4"/>tur gaudium; quia Mercurius gaudet in ascendente et Luna in <milestone unit="arline" n="375"/> tertio,
+<lb n="5"/>Venus quoque in quinto et Mars in .VI., Sol in .IX. et Iupiter in .XI., Saturnus
+<lb n="6"/>vero in .XII.</p>
+<p n="71">
+<lb n="7"/> Et dicitur in significatione domorum quia anguli significant forti-
+<lb n="8"/>tudinem et perfectionem, cadentes vero ab angulis debilitatem et detri-
+<lb n="9"/>mentum, nisi quod nona et tertia significant apparitionem et .XII. et .VI.
+<lb n="10"/>significant occultationem et tectionem et vilitatem rerum. Anguli autem et
+<lb n="11"/>domini angulorum significant magnitudinem <milestone unit="arline" n="380"/> honoris et pretii atque for-
+<lb n="12"/>tune et excitationem et elongationem a casu, et presentia casus contrarium
+<lb n="13"/>est fortune, id est dedecus et casus.</p>
+<p n="72">
+<lb n="14"/> De succedentibus vero angulorum, que succedit decimam, id est
+
+<pb n="262"/>
+<lb n="1"/>undecima, significat fortitudinem et fortunam mediam ex amicis ex ea
+<lb n="2"/>parte in qua erat fiducia. Et illa que sequitur quartam, id est quinta,
+<lb n="3"/>significat fortunam mediam per <milestone unit="arline" n="385"/> donationes et venerationes et est causa
+<lb n="4"/>filiorum cum veneratione, letitia et gaudio. Que autem succedit ascen-
+<lb n="5"/>dens, que est secunda, similiter fortunam mediam ex causa substantie
+<lb n="6"/>et ministrorum. Que vero succedit .VII., que est octava, significat for-
+<lb n="7"/>tunam mediam ex almauerith, id est ec substantia que hereditatur a mortuis,
+<lb n="8"/>et a rebus occultis.</p>
+<p n="73">
+<lb n="9"/> Hee sunt quoque significationes dominorum angulorum dum
+<lb n="10"/>fuerint presentes in angulis. Presentia domini ascendentis in ascendente
+<lb n="11"/>significat eius fortunam per semetipsum et per eius familiam et acquisi-
+<lb n="12"/>tionem. Et significat <milestone unit="arline" n="390"/> per presentiam in decimo per regem et per ma-
+<lb n="13"/>gisteria altiora. Et cum fuerit in septimo, per conventiones et satores
+<lb n="14"/>atque uxores. Per presentiam quoque eius in quarto significat fortunam per
+
+<pb n="263"/>
+<lb n="1"/>hereditates et per causas patrum et per productiones aquarum et per
+<lb n="2"/>populationes et ex rebus antiquis et radicalibus.</p>
+<p n="74">
+<lb n="3"/> Significat quoque dominus decime per presentiam suam in eadem de-
+<lb n="4"/>cima fortunam per regnum <milestone unit="arline" n="395"/> magnum vel per regem et magisteria altiora.
+<lb n="5"/>Et significat per presentiam suam in .VII. fortunam per regnum et vic-
+<lb n="6"/>toriam contentionum et ex causis uxorum. Et per presentiam eius in
+<lb n="7"/>quarto, per regnum et causas tributorum et cultus terrarum et edifi-
+<lb n="8"/>cationes civitatum, per divisiones fluminum et custodias civitatum et
+<lb n="9"/>ex rebus antiquis. Et presentia sua in ascendente, per regnum et ingenia
+<lb n="10"/>et per propinquitatem regis ex rebus vulgi.</p>
+<p n="75">
+<lb n="11"/> Presentia autem domini .VII. in .VII. significat fortunam per ne-
+
+<pb n="264"/>
+<lb n="1"/>gotiationes et <milestone unit="arline" n="400"/> conventiones, per nutritiones quoque ac mulieres et per
+<lb n="2"/>satores. Et significat per presentiam suam in quarto per conventiones
+<lb n="3"/>mulierum et negotiationes per causas patrum et hereditatum et cultus terre.
+<lb n="4"/>Et presentia sua in ascendente, per conventiones et negotiationes per
+<lb n="5"/>causas medicine atque astronomie et per opera spiritualia atque ingenia
+<lb n="6"/>et cetera similia. Et significat per presentiam suam in .X. fortunam per
+<lb n="7"/>conventiones et negotiationes et per uxores et per causas regis.</p>
+<p n="76">
+<lb n="8"/><milestone unit="arline" n="405"/> Presentia vero domini quarti in quarto significat fortunam ex
+<lb n="9"/>cultu terre et fructu per causas patrum atque res antiquas. Et per
+<lb n="10"/>presentiam eius in ascendente significat fortunam ex cultu terre et
+<lb n="11"/>fructu per ingenium et consilii profunditatem. Et per presentiam suam in
+<lb n="12"/>.X. significat profectum ex cultu terre et fructu per causas regis et magiste-
+<lb n="13"/>riorum. Et presentia sua in .VII. significat fortunam ex cultu terre et
+<lb n="14"/>fructu et per causas uxorum et satorum et per negotiationes.
+<lb n="15"/>Hec significant domini angulorum per presentiam suam in <milestone unit="arline" n="410"/> angulis.
+
+<pb n="265"/>
+<lb n="1"/>Similiter facies de presentia dominorum ceterarum domorum, set ideo
+<lb n="2"/>introduximus tantum dominos angulorum ut essent exemplar in ceteris.</p>
+<p n="77">
+<lb n="3"/> Et cum volueris scire planetam dominatorem rei, aspicies quis
+<lb n="4"/>planetarum sit plus auctoritatis in domo rei et planetam qui significat natu-
+<lb n="5"/>ram illius rei, sicuti dicemus in naturis planetarum – vide ergo quis planeta
+<lb n="6"/>sit fortior in domo rei – et in parte eius, ex fortitudinibus quas predi-
+<lb n="7"/>ximus, id est ex numero quem predicimus dum de fortitudine potestatum
+<lb n="8"/>planetarum tractaremus, et qui fortior <milestone unit="arline" n="415"/> omnibus fuerit in loco rei, ipse
+<lb n="9"/>erit dominator eius. Verbi gratia, interrogatio si fuerit de substantia et
+<lb n="10"/>volueris scire quis sit dominator eius, et fuerit secunda domus, que sig-
+<lb n="11"/>nificat substantiam, .V. gradus signi Arietis, quia domus est Martis,
+<lb n="12"/>habet in hoc loco Mars quinque fortitudines; exaltatio quoque est Solis, et
+<lb n="13"/>habet in ea .IIII. fortitudines; est etiam et ipsius Solis triplicitas, et habet
+<lb n="14"/>in ea tres fortitudines – habet ergo ibi Sol .VII. fortitudines; et est terminus
+<lb n="15"/>Iovis, et habet ibi duas fortitudines; est etiam facies Martis, et habet ibi
+<lb n="16"/>unam fortitudinem. Igitur Mars habet ibi sex fortitudines, .V. ex domo
+<lb n="17"/>et unam ex facie, et Sol <milestone unit="arline" n="420"/> .VII. et planeta talis vocatur almubtaz. Sol ergo
+
+<pb n="266"/>
+<lb n="1"/>accipit principatum ibi, quia habet .VII. fortitudines et ipse dominatur
+<lb n="2"/>hic in domo substantie. Similiter aspicies in loco partis substantie et Par-
+<lb n="3"/>tis Fortune et participem illorum facies Iovem, qui est significator substantie
+<lb n="4"/>naturaliter, et miscebis significationes partium et planetarum testimo-
+<lb n="5"/>nia; facies hoc de omnibus domibus et scies dominatorem earum.</p>
+<p n="78">
+<lb n="6"/> Ex potestatibus quoque planetarum accidentalibus est al-
+<lb n="7"/>haiz; hoc est cum fuerit planeta diurnus in die super terram et in nocte
+<lb n="8"/>sub terra et planeta nocturnus in nocte super terram <milestone unit="arline" n="425"/> et in die sub terra.
+<lb n="9"/>Et si cum hoc fuerit planeta masculinus in signo masculino et planeta femi-
+<lb n="10"/>ninus in signo feminino, dicitur esse in suo aiz. Et erit fortitudo eius ut
+<lb n="11"/>fortitudo viri in loco eius profectus, acquisitionis atque fortune.</p>
+<p n="79">
+<lb n="12"/> Et quia, auxiliante Deo, iam peregimus quod proposuimus trac-
+<lb n="13"/>tare de circulo signorum et eius accidentibus, prosequamur mentionem
+<lb n="14"/>.VII. planetarum et naturas eorum, esse quoque eorum et quid signifi-
+<lb n="15"/>cent.</p></div>
+
+<div type="chapter" n="2">
+<pb n="267"/>
+<p n="1">
+<lb n="1"/> Differentia secunda in naturis planetarum .VII. et quid sit illis pro-
+<lb n="2"/>prium et quid significent de esse rerum.</p>
+<p n="2">
+<lb n="3"/> Saturnus est masculus, malus, diurnus. Et est significator patrum, si
+<lb n="4"/>fuerit nativitas in nocte. Et significat senectutem ultimam, si fuerit occiden-
+<lb n="5"/>talis; et initium senectutis, si fuerit orientalis. Et significat gravitatem frigoris
+<lb n="6"/>et siccitatis. Et ex complexione corporum, melancoliam, id est augmen-
+<lb n="7"/>tationem eius atque distillationem. Et fortassis erit frigida <milestone unit="arline" n="5"/> humida,
+<lb n="8"/>ponderosa, fetidi odoris, et est multe comestionis et vere dilectionis. Et
+<lb n="9"/>significat profunditatem consilii et multitudinem silentii. Et ex magisteriis,
+<lb n="10"/>res aquaticas, pretiosas, sicut cultus agrorum, populatio terrarum et
+<lb n="11"/>fluminum, si fuerit fortunatus; et res viles et laboriosas, si fuerit malus, ut
+<lb n="12"/>confricationes in balneis et fullones et nautas. Et si fuerit fortunatus,
+<lb n="13"/>erit vere dilectionis, spatiosus et patiens; et si fuerit malus, erit in-
+<lb n="14"/>discretus, instabilis et tristis et merens, male suspicionis, multum sus-
+<lb n="15"/>picans, <milestone unit="arline" n="10"/> commovens homines susurrationibus. Et si fuerit fortunatus,
+
+<pb n="268"/>
+<lb n="1"/>significat de substantia res antiquas et durabiles, sicut hereditates et terre
+<lb n="2"/>cultus; et si fuerit malus, significat aquas sordidas et mali saporis,
+<lb n="3"/>veteres atque convertibiles. Et significat ex infirmitatibus morbos flegmati-
+<lb n="4"/>cos viscosos et melancolicos congelatos, ut lepra et canceres, morphea
+<lb n="5"/>et podagra et cetera huiusmodi. Et significat peregrinationes longinquas,
+<lb n="6"/>carcerem et vincula, laborem quoque et tarditatem atque afflictionem
+<lb n="7"/>et almauerith, id est substantias mortuorum, patres etiam et avos et fratres
+<lb n="8"/>maiores, eunuchos, servos et viles homines. Et significat ex <milestone unit="arline" n="15"/> operibus opera
+<lb n="9"/>coriorum; si solus fuerit significator absque complexione alicuius planetarum,
+<lb n="10"/>significat opus cerdonum.</p>
+<p n="3">
+<lb n="11"/> Quod si complectitur sibi Iupiter, significat opus pergameni in
+<lb n="12"/>quo scribuntur divini libri et iudiciorum. Et si complectitur sibi Mars,
+<lb n="13"/>significat soleas sotularium et preparationes earum. Et si complec-
+<lb n="14"/>titur Sol, significat opus consutorum coriorum. Et si complectitur ei
+<lb n="15"/>Venus, <milestone unit="arline" n="20"/> significat opus coriorum ex quibus fiunt timpana et alia instrumenta
+<lb n="16"/>quibus utimur in ludis. Et si complectitur ei Mercurius, significat opus
+
+<pb n="269"/>
+<lb n="1"/>coriorum in quibus scribuntur testamenta et numeri stipendiorum. Et si com-
+<lb n="2"/>plectitur ei Luna, significat preparationem coriorum ferarum et morticinorum
+<lb n="3"/>animalium et huiusmodi similia. Et significat de sectis eam que unitatem
+<lb n="4"/>confitetur, si fuerit fortunatus; et si fuerit malus, significat credentiam uni-
+<lb n="5"/>tatis, cum multa tamen hesitatione, id est dubitatione.</p>
+<p n="4">
+<lb n="6"/> Et dixit Messehalla, id est quod Deus voluit, qui fuit unus astro-
+<lb n="7"/>logus in scientia perspicuus Indus qui sic dictus est, quod significat fi-
+<lb n="8"/>dem iudaicam – et est ex antiquioribus, et omnes confitentur eam et ipsa
+<lb n="9"/>nullam aliam, sicut Saturnus, cui omnes iunguntur et ipse nulli – et
+<lb n="10"/>indumenta nigra.</p>
+<p n="5">
+<lb n="11"/><milestone unit="arline" n="25"/> Et dixerunt quidam alii quia Saturnus significat interiora auris
+<lb n="12"/>et splen ac stomacum, et habet ex coloribus nigredinem, et de sapor-
+<lb n="13"/>ibus stipticos et acetosos. Et ex diebus, sabbatum, et ex noctibus eam que
+<lb n="14"/>precedit quartam feriam. Et quantitas orbis eius est novem graduum.
+
+<pb n="270"/>
+<lb n="1"/>Et anni firdarie eius sunt .XI., maximi vero .CCCLXV., et maiores
+<lb n="2"/>.LVII., et medii .XLIII. et dimidium, et minores .XXX. Fortitudo eius in plagis
+<lb n="3"/>circuli est in dextera septemtrionis.</p>
+<p n="6">
+<lb n="4"/><milestone unit="arline" n="30"/> Et dixit Messehalla quod significat de figuris hominum hominem
+<lb n="5"/>nigrum et croceum qui, cum ambulaverit, mergit oculos suos in terram,
+<lb n="6"/>ponderosus in incessu, adiungit pedes, et qui fuerit macer, recurvus,
+<lb n="7"/>habens oculos parvos et siccam cutim, venosus, raram habens barbam in
+<lb n="8"/>maxillis, labia spissa, callidus, ingeniosus, seductor et interfector.</p>
+<p n="7">
+<lb n="9"/> Et dixit Dorothius quod significat hominem corpore valde pilosum,
+<lb n="10"/>iunctis superciliis. (</p><p n="6"> Et habet ex regionibus Acint et Indiam et om-
+<lb n="11"/>nem terram nigrorum.) Et ex partibus habens partem <milestone unit="arline" n="35"/> fortitudinis et
+<lb n="12"/>stabilitatis, et significat causas terrarum et hereditatum et eos qui presunt
+<lb n="13"/>operibus, et audaciam et laborem et ingenia et causas mortis.</p>
+<p n="8">
+<lb n="14"/> Iupiter: fortuna, masculus, diurnus. Et est significator substantie
+
+<pb n="271"/>
+<lb n="1"/>et operatur calorem et humiditatem temperatam, aeream, sanguineam. Et de
+<lb n="2"/>etate significat iuventutem usque ad perfectionem etatis. Et ex magis-
+<lb n="3"/>teriis, que pertinent ad legem, ut iusta iudicia iudicare, et pacem in-
+<lb n="4"/>ter homines mittere et in bonis studere. Et significat habundantiam
+<lb n="5"/>substantie. Et ex <milestone unit="arline" n="40"/> negotiis, illa que fiunt absque seductione. Et signifi-
+<lb n="6"/>cat animam et vitam, letitiam et veritatem, religionem et patientiam et
+<lb n="7"/>omne preceptum pulcrum et pretiosum et habundantiam veneris. Et ex in-
+<lb n="8"/>firmitatibus, quicquid fuerit ex sanguine per augmentum quantitatis, que
+<lb n="9"/>non fuerit superflua extra naturam nec ex sanguine usto et convertibili. Et
+<lb n="10"/>est planeta sapientie et intellectus et usus.</p>
+<p n="9">
+<lb n="11"/> Cui si complectitur Saturnus, significat nigromantiam et incanta-
+<lb n="12"/>tiones et exorcismos et cetera. Et si <milestone unit="arline" n="45"/> ei complectitur Mars, significat sci-
+<lb n="13"/>entiam medicine. Et si ei complectitur Sol, significat scientiam sectarum
+<lb n="14"/>et prudentiam in contentionibus et disputationibus. Et si ei complecti-
+<lb n="15"/>tur Venus, significat compositionem sonorum et aliarum scientiarum
+<lb n="16"/>delectabilium. Et si ei complectitur Mercurius, significat scientiam arismetice
+<lb n="17"/>et scribendi, astronomiam quoque, philosophiam atque geometriam. Et si
+<lb n="18"/>complectitur ei Luna, significat scientiam dispositionis aquarum et mensure
+<lb n="19"/>earum necnon et terrarum. Et ex qualitate animi significat largitatem et
+<lb n="20"/>verecundiam atque iustitiam. Et ex sectis, pluralitatem <milestone unit="arline" n="50"/> et simulationem.
+
+<pb n="272"/></p>
+<p n="10">
+<lb n="1"/> Quidam autem dixerunt quia significat epar et stomacum et au-
+<lb n="2"/>rem sinistram et brachia ac ventrem, inferiora quoque umbilici, pectinis,
+<lb n="3"/>et intestina, et ex coloribus, colorem cineritium et viridem et horum si-
+<lb n="4"/>milia, et ex saporibus dulcem. Et quantitas orbis eius est novem graduum.
+<lb n="5"/>Et ex diebus habet Iovis diem, et ex noctibus noctem diei Lune. Et anni
+<lb n="6"/>firdarie eius sunt .XII., et anni eius maximi sunt .CCCXXVIII., et maiores
+<lb n="7"/>.LXXVIIII., <milestone unit="arline" n="55"/> et medii .XLV. et dimidium, minores vero .XII. Et fortitudo eius
+<lb n="8"/>ex plagis circuli est in occidente.</p>
+<p n="11">
+<lb n="9"/> Et dixit Messehalla: significat ex figuris hominum hominem album,
+<lb n="10"/>habentem ruborem in facie, habentem oculos non prorsus nigros, nares
+<lb n="11"/>non equales et breves, calvum, in aliquo dentium habentem nigredinem, pul-
+<lb n="12"/>cre stature, boni animi, moribus bonus, pulcri corporis.</p>
+<p n="12">
+<lb n="13"/><milestone unit="arline" n="62"/></p><p n="12"> Et dixit Dorothius quod significat magnos habentem oculos
+<lb n="14"/>et pupillam, latam barbam, crispum. (</p><p n="11"> Et ex regionibus, Alirac,
+<lb n="15"/>Babiloniam et Azpehem et Persidam <milestone unit="arline" n="60"/> et Almaden et Alahovez et Alcadi-
+
+<pb n="273"/>
+<lb n="1"/>ciam) Et ex partibus, habens partem beatitudinis profectus. Et signifi-
+<lb n="2"/>cat fidem et appetitum in bonis, et operum fundamentum, salubritatem et
+<lb n="3"/>securitatem et participationem.</p>
+<p n="13">
+<lb n="4"/><milestone unit="arline" n="65"/> Mars: masculus, nocturnus, malus; operatur calorem et sicc-
+<lb n="5"/>itatem et est significator fratrum et peregrinationum. Et habet ex etatibus
+<lb n="6"/>iuventutem usque in finem iuventutis; et natura eius colerica, amari saporis.
+<lb n="7"/>Et ex magisteriis, omne magisterium igneum et quod fit per ferrum et
+<lb n="8"/>ignem, sicut est percussio gladiorum cum martellis.</p>
+<p n="14">
+<lb n="9"/> Cui si complectitur Saturnus, significat percussionem ferri. Et si
+<lb n="10"/>complectitur ei Iupiter, significat percussionem eris. Et si complectitur ei
+<lb n="11"/>Sol, significat percussionem aureorum. Et si complectitur ei Venus, signi-
+<lb n="12"/>ficat <milestone unit="arline" n="70"/> magisterium ornamentorum. Et si complectitur ei Mercurius, signi-
+<lb n="13"/>ficat percussionem acuum. Et si complectitur ei Luna, significat percus-
+<lb n="14"/>sionem lancium vel librarum. Et significat etiam, cum solus suscipit
+<lb n="15"/>significationem, opus medicine. Quod si nullus planeta ei complec-
+<lb n="16"/>titur, significat minutionem et vulnerum apertionem et horum simi-
+
+<pb n="274"/>
+<lb n="1"/>lia. Et si complectitur Saturnus ei, significat ex operibus medicine opus
+<lb n="2"/>vulnerum. Et si complectitur ei Iupiter, significat opus naturarum [et
+<lb n="3"/>curam oculorum]. Et si complectitur ei Sol, significat preparationem ocu-
+<lb n="4"/>lorum et alcohol et curam oculorum. Quod si <milestone unit="arline" n="75"/> complectitur ei Venus,
+<lb n="5"/>significat opus ornamenti, ut tonsuram crinium et barbarum et abscisionem
+<lb n="6"/>ungularum. Et si complectitur ei Mercurius, significat abscisionem ve-
+<lb n="7"/>narum. Et si complectitur ei Luna, significat eradicationem dentium et
+<lb n="8"/>purgationem aurium. Et per se significat iniurias miserorum et effusionem
+<lb n="9"/>sanguinum et oppressiones per vim et abscisiones viarum et iracundiam
+<lb n="10"/>et ducatum exercitus et festinationem et levitatem et inverecundiam
+<lb n="11"/>et peregrinationem extra patriam et feditatem coitus et casus puerorum, id
+<lb n="12"/>est abortivorum, et fratres medios atque sorores et scientiam atque discre-
+<lb n="13"/>tionem cure bestiarum. Et ex infirmitatibus, febres calidas <milestone unit="arline" n="80"/> et frenesim
+<lb n="14"/>ex sanguine et pustulas sanguineas et alhabra, que est rubedo corporis
+<lb n="15"/>cum asperitate et feditate, et comestiones carnium cum putredine et
+
+<pb n="275"/>
+<lb n="1"/>dimidii capitis dolorem et ignem sacrum et pavorem et cogitationes hor-
+<lb n="2"/>ribiles que inquietant hominem et commovent et impediunt atque inanes
+<lb n="3"/>reddunt, et quicquid fuerit cum inflammatione caloris. Et ex quali-
+<lb n="4"/>tatibus anime, commotionem scilicet animi et conturbationem. Quod
+<lb n="5"/>si aspexerit eum Saturnus, significat odium et maximam invidiam. Et
+<lb n="6"/>ex sectis, eam in qua fuerit bellum et unitatem et celeritatem mutatio-
+<lb n="7"/>nis a fide et multitudinem hesitationis et mutationem de testamento in
+<lb n="8"/>testamentum; erunt tamen hec omnia sub unitate.</p>
+<p n="15">
+<lb n="9"/><milestone unit="arline" n="85"/> Et dixerunt quidam quia habet ex membris fellis cistim, renes
+<lb n="10"/>et venas et decursum spermatis et dorsum; et habet ex coloribus rube-
+<lb n="11"/>dinem, et ex saporibus amarum. Et quantitas orbis eius, .VIII. graduum.
+<lb n="12"/>Et ex diebus habet diem Martis, et ex noctibus noctem sabbati. Et anni
+<lb n="13"/>firdarie eius sunt .VII., et anni eius maximi sunt .CCLXIIII., et maiores
+<lb n="14"/>.LXVI., medii autem .XL. et dimidium, et minores .XV. Et fortitudo eius in
+<lb n="15"/>plagis circuli, in meridie.</p>
+<p n="16">
+<lb n="16"/><milestone unit="arline" n="90"/> Et dixit Messehalla: significat de imaginibus hominum hominem
+
+<pb n="276"/>
+<lb n="1"/>rubeum facie, habentem capillos rufos et faciem rotundam, leviter homines
+<lb n="2"/>dehonestantem, habentem oculos croceos; horribilis aspectu; audacem,
+<lb n="3"/>habentem in pede signum vel maculam.</p>
+<p n="17">
+<lb n="4"/> Et dixit Dorothius: acutum aspectum habentem. Et habet ex
+<lb n="5"/>regionibus Ierusalem et terram Romanorum usque ad occidentem
+<lb n="6"/>et terram Turcorum. Ex partibus, partem audacie, et significat per-
+<lb n="7"/>severantiam et convenientiam in amore, calliditatem et superbiam et lev-
+<lb n="8"/>itatem et mobilitatem et audaciam et negationem et acuitatem et fes-
+<lb n="9"/>tinationem in omnibus rebus.</p>
+<p n="18">
+<lb n="10"/><milestone unit="arline" n="97"/> Sol: per aspectum fortuna et malus per coniunctionem in uno
+<lb n="11"/>signo, et est masculus, diurnus; operatur calorem et siccitatem; et est sig-
+<lb n="12"/>nificator patrum, si fuerit nativitas in die. Et significat regnum maximum
+<lb n="13"/>et animam vitalem et lumen et splendorem, intellectum et pulcritudinem
+<lb n="14"/>atque fidem. Et ex etate, finem iuventutis, et participatur <milestone unit="arline" n="100"/> universis pla-
+<lb n="15"/>netis in dispositione annorum. Et ex magisteriis, regnum, principatum;
+
+<pb n="277"/>
+<lb n="1"/>et significat iaculationem iaculorum et venationem et purgationem cum
+<lb n="2"/>omni specie purgandi quibus corpora interius et exterius purgantur. Et
+<lb n="3"/>ex infirmitatibus, infirmitates calidas siccas in corporibus apparentes. Et ex
+<lb n="4"/>substantia, aurum plurimum et universas species substantie. Et ex quali-
+<lb n="5"/>tate ipsius animi, animi sublimitatem et subtilitatem et prudentiam
+<lb n="6"/>et que sequuntur, honestatem scilicet et largitatem et gloriam et prolixi-
+<lb n="7"/>tatem mentis. Et ex sectis, culturam bonam et eius similia. Et significat
+<lb n="8"/>imperium vocis et fortitudinem celeritatis.</p>
+<p n="19">
+<lb n="9"/><milestone unit="arline" n="105"/> Cui si complectitur Saturnus, significat villicationem et huiusmo-
+<lb n="10"/>di principatum. Et si complectitur ei Iupiter, significat principatum
+<lb n="11"/>in fide et religione aut esse iudicem inter homines, iudicans opera op-
+<lb n="12"/>pressorum vel iniuriarum et cetera. Et si complectitur ei Mars, significat
+<lb n="13"/>ducatum exercitus et investigationem bellorum. Et si complectitur ei
+<lb n="14"/>Venus, significat regnum per mulieres et per obsequium potentium. Et
+<lb n="15"/>si complectitur ei Mercurius, significat consultores regum et opus librorum et
+<lb n="16"/>hereditatum et maiorum operum. Et si complectitur ei Luna, significat
+
+<pb n="278"/>
+<lb n="1"/>opus legatorum et detectionem consiliorum et cetera <milestone unit="arline" n="110"/> similia.</p>
+<p n="20">
+<lb n="2"/> Et dixerunt quidam quia Sol significat imaginem vultus hominis,
+<lb n="3"/>et proprie ex viris oculum dextrum et ex mulieribus sinistrum.</p>
+<p n="21">
+<lb n="4"/> Et dixerunt quidam quia habet cor et medullam et femora. Et ex
+<lb n="5"/>infirmitatibus, comestionem carnium in ore et detrimentum oris pro-
+<lb n="6"/>prie et descensionem aque in oculum; potestas eius, in capite.</p>
+<p n="22">
+<lb n="7"/><milestone unit="arline" n="115"/> Et dixerunt Indi quia, cum fuerit in ascendente, erit combu-
+<lb n="8"/>rens. Et habebit signum in facie. Et habet ex coloribus quicquid videtur
+<lb n="9"/>peregrino colore, et ex saporibus acutum. Quantitas orbis eius, .XV.
+<lb n="10"/>graduum. Et ex diebus, diem dominicam, et ex noctibus noctem Iovis.
+<lb n="11"/>Anni firdarie eius sunt .X., et anni eius maximi sunt .1461., et maiores
+<lb n="12"/>.120., medii autem .LXVIIII. et dimidium vel secundum quosdam .39. et dimid-
+<lb n="13"/>ium, minores vero .XVIIII. Fortitudo eius ex plagis circuli, in oriente.
+
+<pb n="279"/></p>
+<p n="23">
+<lb n="1"/><milestone unit="arline" n="120"/> Et dixit Messehalla: significat ex figuris hominum eum qui habu-
+<lb n="2"/>erit colorem inter croceum et nigrum, tectum tamen rubore, brevis
+<lb n="3"/>stature; crispus, calvus, pulcri corporis.</p>
+<p n="24">
+<lb n="4"/> Et dixit Dorothius: figura Solis et Lune est figura planetarum qui
+<lb n="5"/>fuerint cum eis et eius qui dignior fuerit loco eorum. Si ergo volueris
+<lb n="6"/>figuram Solis, scito quod sit crocea, habens partem ruboris capillo-
+<lb n="7"/>rum <milestone unit="arline" n="125"/> oculi eius aliquantulum crocei. (</p><p n="23"> Et habet ex regionibus Za-
+<lb n="8"/>markant et Horacen et totam Persidam et terram Romanorum.) Et
+<lb n="9"/>ex partibus partem habens futurorum, vel partem divinationis. Et est signi-
+<lb n="10"/>ficator naturarum et spiritus, sapientie et elationis et perfectionis, fidei
+<lb n="11"/>quoque et scientiarum et laudum.</p>
+<p n="25">
+<lb n="12"/> Venus: fortuna, feminina, nocturna. Et est significatrix mulierum
+<lb n="13"/>et uxorum ac matrum, si fuerit nativitas diurna; et operatur frigus et hu-
+<lb n="14"/>miditatem temperatam. Et ex etate habet iuventutem. Et ex magisteriis, <milestone unit="arline" n="130"/>
+<lb n="15"/>instrumenta ludorum, ornamenta quoque et figuras pulcras et ludos alearum
+
+<pb n="280"/>
+<lb n="1"/>et scacorum, saltationes et otia et fornicationes ac fornicatores et filios
+<lb n="2"/>fornicationis et multitudinem coitus et universa genera luxurie et com-
+<lb n="3"/>positiones coronarum et usus earum et pulcritudinem ac munditiam, ves-
+<lb n="4"/>timenta et ornamenta, aurum et argentum et dilectionem ludi, risus
+<lb n="5"/>et gaudium et unguentis diversisque speciebus uti et potationes ine-
+<lb n="6"/>briantes, seque credit omnibus; largitatem quoque significat et dilec-
+<lb n="7"/>tionem, et amorem, iustitiam et domos orationis; retinet quoque fidem.
+<lb n="8"/>Et significat magisterium omnium sonorum, veluti musicam et cetera.</p>
+<p n="26">
+<lb n="9"/><milestone unit="arline" n="135"/> Quod si complectitur ei Saturnus, significat sonum cantionum
+<lb n="10"/>quibus deflentur mortui vel quas cantant edificatores quando edificant
+<lb n="11"/>edificia. Et si complectitur ei Iupiter, significat sonum lectionum vel can-
+<lb n="12"/>tionum quibus utuntur domini sectarum in altaribus et in locis oratio-
+<lb n="13"/>nis eorum in laude Dei omnipotentis. Et si complectitur ei Mars, sig-
+<lb n="14"/>nificat sonos quibus utuntur seculares et cantus vulgi in quo fit
+
+<pb n="281"/>
+<lb n="1"/>mentio preliorum vel ligationis et laboris et horum similia, ut
+<lb n="2"/>cantus in quo fit mentio <milestone unit="arline" n="140"/> captionis et alligationis et percussionis flag-
+<lb n="3"/>ellorum. Et si ei complectitur Sol, significat sonum ligni quo canitur coram
+<lb n="4"/>regibus et nobilibus. Et si ei complectitur Mercurius, significat sonum qui
+<lb n="5"/>exercetur in compositione versuum. Et si complectitur ei Luna, significat
+<lb n="6"/>cantus nautarum in navibus. Et ex infirmitatibus, morbos frigidos
+<lb n="7"/>humidos qui accidunt proprie et maxime in membris genitalibus. Et ex
+<lb n="8"/>substantia, quod queritur propter pulcritudinem, ut sunt ornamenta
+<lb n="9"/>mulierum et vestimenta earum, margaritas atque picturas. Et ex qual-
+<lb n="10"/>itate animi, <milestone unit="arline" n="145"/> suavitatem et risus et amicitiam et commixtionem et his
+<lb n="11"/>similia, et cupiditates comestionis, potationis ac coitus. Et ex sectis,
+<lb n="12"/>culturam idolorum et eas in quibus maxime exercentur comestiones
+<lb n="13"/>atque potationes.</p>
+<p n="27">
+<lb n="14"/> Et dixerunt quidam quod significet anchas et spinam dorsi et
+<lb n="15"/>sperma.</p>
+<p n="28">
+<lb n="16"/> Et alii dixerunt quia habet significare pinguedines et carnes et
+<lb n="17"/>renes, vulvam et matricem, ventrem, et umbilicum. <milestone unit="arline" n="150"/> Et habet ex coloribus
+
+<pb n="282"/>
+<lb n="1"/>albedines, et ex saporibus unctuosum. Et quantitas orbis eius est .VII.
+<lb n="2"/>graduum. Et habet ex diebus diem Veneris, et ex noctibus noctem Martis.
+<lb n="3"/>Et anni firdarie eius sunt .VIII. Et anni eius maximi .1151., et anni eius
+<lb n="4"/>maiores .82., et medii .45., minores vero .VIII. Fortitudo eius in plagis
+<lb n="5"/>circuli, in dextera orientis.</p>
+<p n="29">
+<lb n="6"/> Et dixit Messehalla: significat de figuris hominum hominem al-
+<lb n="7"/>bum, trahentem ad nigredinem, <milestone unit="arline" n="155"/> pulcri corporis et capillorum, faciem
+<lb n="8"/>habentem rotundam et parvam maxillam; habens oculos pulcros; ni-
+<lb n="9"/>gredo oculorum eius maior albedine.</p>
+<p n="30">
+<lb n="10"/> Et dixit Dorothius: pulcram habens faciem et multos capillos et pul-
+<lb n="11"/>cros oculos; nigredo oculorum eius plus quam oportet; album confectum ru-
+<lb n="12"/>bore, crassum ostendit benivolentiam. (</p><p n="29"> <milestone unit="arline" n="156"/> Et habet ex regionibus
+<lb n="13"/>Alhygez et Aliemen et meridiem et totam terram Arabum).
+<lb n="14"/>habet ex partibus partem desiderii; significat amicitiam et ludum et
+
+<pb n="283"/>
+<lb n="1"/>dilectionem <milestone unit="arline" n="160"/> et patientiam et coniunctiones masculorum.</p>
+<p n="31">
+<lb n="2"/><milestone unit="arline" n="162"/> Mercurius: commixtus, masculus, diurnus; inclinatur per naturam
+<lb n="3"/>suam ad eum cui complectitur ex planetis et signis. Ipse est signifi-
+<lb n="4"/>cator fratrum minorum, et significat servos et dilectionem con-
+<lb n="5"/>cubinarum, et significat deitatem et oracula prophetarum et credulitatem
+<lb n="6"/>et opus et orationem. Quod si fuerit in natura sua <milestone unit="arline" n="165"/> et nullus planeta
+<lb n="7"/>complectitu ei, significat res terreas et augmentationem rerum crescendo.
+<lb n="8"/>Et ex etate, iuventutem et profectum in ea. Et ex operibus, opera que
+<lb n="9"/>generant cognitionem, predicationem et rethoricam et opera que fuerint
+<lb n="10"/>per studia ut negotiationes et estimationem et geometriam et disposi-
+<lb n="11"/>tionem et ordinationem rei et philosophiam et auguria et proverbia et
+<lb n="12"/>scripturam et versificandi scientiam et opus numeri maxime.</p>
+<p n="32">
+<lb n="13"/> Cui si complectitur Saturnus, significat ex opere numeri opus
+<lb n="14"/>mensure terrarum et hereditatum et numerum edificiorum atque telarum.
+<lb n="15"/>Et si complectitur ei Iupiter, significat numerum psallendi et numerum li-
+<lb n="16"/>brorum <milestone unit="arline" n="170"/> divinorum. Et si complectitur ei Mars, significat numerum qui fit in
+<lb n="17"/>donativis exercituum et pugnantium et numerum percussionis flagellorum
+
+<pb n="284"/>
+<lb n="1"/>atque clavarum. Et si complectitur ei Sol, significat preesse numero regum
+<lb n="2"/>et substantie domorum. Et si complectitur ei Venus, significat numerum cor-
+<lb n="3"/>darum lignorum seu cythararum et numerum sonorum atque fistularum. Et
+<lb n="4"/>si complectitur ei Luna, significat ferculorum numerum que fiunt ad comes-
+<lb n="5"/>tiones itinerantium extra domum. Et significat de infirmitatibus infir-
+<lb n="6"/>mitates anime, id est cogitationes horribiles et inquietudinem mentis
+<lb n="7"/>atque dubitationes <milestone unit="arline" n="175"/> et cetera similia. Significat autem animi qualitatem
+<lb n="8"/>secundum complexionem suam atque coniunctionem. Cum fuerit for
+<lb n="9"/>tunatus, erunt bonitates secundum genus fortune que facit eum fortuna-
+<lb n="10"/>tum et secundum locum in quo fuerit fortunatus, et cum fuerit malus, erunt
+<lb n="11"/>iniquitates secundum malum qui eum malum facit et secundum locum
+<lb n="12"/>in quo malus factus est. Et significat ex sectis culturam unitatis et horum
+<lb n="13"/>similia, et hoc de secreto cum ypocrisia et simulatione.</p>
+<p n="33">
+<lb n="14"/> Et dixerunt quidam quod significet femora, umbilicum et crura,
+<lb n="15"/>nervos atque venas. Et ex <milestone unit="arline" n="180"/> coloribus habet omnem colorem commix-
+<lb n="16"/>tum atque variatum et alezmeniuni, qui est color floris lilii agrestis, et
+
+<pb n="285"/>
+<lb n="1"/>ex saporibus acetosum. Et quantitas orbis eius est .VII. graduum. Et ex
+<lb n="2"/>diebus habet diem Mercurii, et ex noctibus noctem diei dominici. Et anni
+<lb n="3"/>firdarie eius sunt .XIII., et anni eius maximi .480., maiores .76., et medii
+<lb n="4"/>.48., minores vero .20. Fortitudo eius in plagis circuli, in septemtrione.</p>
+<p n="34">
+<lb n="5"/> Et dixerunt quidam quod Mercurius a medio retrogradationis eius
+<lb n="6"/>usque ad stationem secundam significat <milestone unit="arline" n="185"/> pueritiam, et a statione secunda
+<lb n="7"/>usque ad coniunctionem Solis, scilicet ad directionem, iuventutem, et a co-
+<lb n="8"/>niunctione Solis usque ad stationem primam, mediam etatem, et a sta-
+<lb n="9"/>tione prima usque ad medium retrogradationis significat senectutem.
+<lb n="10"/>Et ex medio retrogradationis sue significat decrepitam senectutem et
+<lb n="11"/>contrarietatem, et in coniunctione sua per directionem significat dilec-
+<lb n="12"/>tionem et amicitiam. Et ex coniunctione sua per directionem usque ad sta-
+<lb n="13"/>tionem primam significat dilectionem et amoris mutationem. Et ex
+<lb n="14"/>statione sua secunda iens ad coniunctionem, significat inquisitionem dilec-
+<lb n="15"/>tionis et concordiam. Et in statione sua prima iens ad retrogra-
+<lb n="16"/>dationem significat inquisitionem contrarietatis et dissimulationis, et signi-
+
+<pb n="286"/>
+<lb n="1"/>ficat tarditatem et parvam verecundiam <milestone unit="arline" n="190"/> et occupationem in rebus.
+<lb n="2"/>Et in medietate retrogradationis significat celeritatem temperatam
+<lb n="3"/>propter ingenii debilitatem. Et apud stationem secundam significat occupa-
+<lb n="4"/>tionem in ingeniis et tarditatem et egressus ab hoc ad celeritatem et aper-
+<lb n="5"/>tionem ingeniorum. Et in coniunctione sua Soli per directionem signifi-
+<lb n="6"/>cat celeritatem et expansionem ingeniorum et latitudinem eorum. Similiter
+<lb n="7"/>accidit Veneri in his locis et planetis altioribus.</p>
+<p n="35">
+<lb n="8"/> Et dixit Messehalla: significat Mercurius ex figuris hominum
+<lb n="9"/>hominem non multum album nec nigrum habentem colorem, elevatam
+<lb n="10"/>habentem frontem, habentem <milestone unit="arline" n="195"/> in facie longitudinem et nasum lon-
+<lb n="11"/>gum, raram habentem crinem et barbam in maxillis et oculos pulcros
+<lb n="12"/>non ex toto nigros, longos quoque habentem digitos. Et ex regionibus,
+<lb n="13"/>Aldeilen et Magdem et meridiem et omnes regiones Indorum. Et ex
+<lb n="14"/>partibus habet partem negotiationis. Et significat timorem et infestationem
+<lb n="15"/>et bellum, inimicitias, seductiones et contrarietates. Significat quoque pro-
+
+<pb n="287"/>
+<lb n="1"/>fectum et magisterium et subtilitatem in opere et inquisitione et in
+<lb n="2"/>ceteris que fiunt in hominibus ex dictis et contentionibus.</p>
+<p n="36">
+<lb n="3"/><milestone unit="arline" n="201"/> Luna: fortuna, feminina, nocturna; operatur frigus et hu-
+<lb n="4"/>miditatem. Et est significatrix matrum, si fuerit nativitas eius nocturna,
+<lb n="5"/>et est in ea flegma temperatum. Et significat etatem puerilem et ini-
+<lb n="6"/>tium crescendi. Et ex operibus habet legationes et mandata et opera
+<lb n="7"/>aquarum atque terrarum secundum quantitatem fortune vel mali, quia
+<lb n="8"/>si fuerit bona, significat bonum et econverso. Significat etiam principa-
+<lb n="9"/>tum si prefuerit aliquibus rebus ad regem pertinentibus et fuerit fortunata
+<lb n="10"/>et a Sole in bono aspectu. Et de substantia significat <milestone unit="arline" n="205"/> argentum et
+<lb n="11"/>terre cultum, si habuerit auctoritatem in quarto. Et ex fide, religionem.
+<lb n="12"/>Et ex infirmitatibus significat guttam caducam et vultus torsionem et mem-
+<lb n="13"/>brorum commotionem et quicquid fuerit in similitudine frigoris et humidi-
+<lb n="14"/>tatis. Et ex qualitate animi, secundum complexionem suam cum planetis.
+
+<pb n="288"/>
+<lb n="1"/>Quod si complectitur ei fortuna et fuerit ipsa fortuna Venus, sig-
+<lb n="2"/>nificat curialitatem et benignitatem et animi suavitatem et morum hones-
+<lb n="3"/>tatem et motus celeritatem et divinum obsequium. Et si fuerit Iupiter,
+<lb n="4"/>significat honestatem et cautelam et societatum benignitatem et vite
+<lb n="5"/>pulcritudinem. Et si complexa fuerit malis et fuerit Mars, signifi-
+<lb n="6"/>cat studium susurrationis inter homines <milestone unit="arline" n="210"/> et nisum in talibus. Et si
+<lb n="7"/>fuerit Saturnus, odium, simulationem atque invidiam. Et si fuerit Sol ab as-
+<lb n="8"/>pectu laudabili, dispositionem regalem. Et si fuerit Mercurius, significat
+<lb n="9"/>rethoricam, id est facundiam, et bonitatem lingue et scripturam.</p>
+<p n="37">
+<lb n="10"/> Et dixerunt quidam quod significat cogitationem et novitatem animi
+<lb n="11"/>ac debilitatem sensus vel ingenii ac gravitatem lingue et mulieres hones-
+<lb n="12"/>tas et nutritiones parvulorum et matres et materteras et prebentiones
+<lb n="13"/>ciborum.</p>
+<p n="38">
+<lb n="14"/> Et dixerunt alii quia significat cerebrum proprie et pulmones. Et
+<lb n="15"/>ex coloribus habet croceum, et ex saporibus salsum. <milestone unit="arline" n="215"/> Et quantitas orbis eius
+<lb n="16"/>est .XII. graduum. Et significat ex viris oculum sinistrum et ex mulieribus
+<lb n="17"/>dextrum. Et ex diebus habet diem Lune, et ex noctibus noctem Veneris.
+<lb n="18"/>Et anni firdarie eius sunt .IX., maximi .520., maiores autem .108., et medii
+
+<pb n="289"/>
+<lb n="1"/>.LXVI. et dimidium et secundum quosdam .39. et dimidium minores vero
+<lb n="2"/>.XXV. Et fortitudo eius ex plagis circuli, in dextera occidentis.</p>
+<p n="39">
+<lb n="3"/><milestone unit="arline" n="220"/> Et dixit Messehalla: significat de figuris hominum hominem album
+<lb n="4"/>confectum rubore, iunctis superciliis, benivolum, habentem oculos non
+<lb n="5"/>ex toto nigros, faciem rotundam et pulcrum statum. Et ex terris habet
+<lb n="6"/>Atorc et Armeniam et Adailam.</p>
+<p n="40">
+<lb n="7"/> Et dixerunt quidam quia significat pueritiam ab initio mensis usque ad
+<lb n="8"/>.VII. dies, et a .VII. usque ad .XIV. dies iuventutem, et significat
+<lb n="9"/>senectutem perfectionis, id est medie etatis, usque ad vicesimam <milestone unit="arline" n="225"/> primam
+<lb n="10"/>noctem, et senium usque ad coniunctionem, id est usque in finem men-
+<lb n="11"/>sis quando iungitur Soli. Et cum fuerit sub radiis Solis significat secreta
+<lb n="12"/>(et sic omnis planeta) et res occultas. Et ab initio mensis significat
+
+<pb n="290"/>
+<lb n="1"/>omne quod faciendum est, et ab oppositione significat omne quod destru-
+<lb n="2"/>endum est. Et in initio mensis ipsa et Sol significant accusatores, et in
+<lb n="3"/>fine mensis, accusatos. Et significat in initio mensis lucrum et conti-
+<lb n="4"/>nentiam, et in fine mensis stipendia et dispersiones. Et significat in
+<lb n="5"/>oppositione contrarietatem. Et in initio mutationis ad oppositionem, hoc
+<lb n="6"/>est cum fuerint inter eam et oppositionem <milestone unit="arline" n="230"/> .XV. gradus, significat esse ini-
+<lb n="7"/>tii contrarietatis et eius causam. Et cum separata fuerit, significat causas
+<lb n="8"/>ereptionis a contrarietate. Et in exitu suo desub radiis Solis significat
+<lb n="9"/>exitum ab occultatione et his similia. Et in introitu suo sub radios sig-
+<lb n="10"/>nificat aptationem ad occultandum. Et hora divisionis a Sole significat
+<lb n="11"/>aptationem exitus sui ab occultatione. Et hora exitus sui desub radiis
+<lb n="12"/>significat apparitionem et adventum ab absentia. Et dum in quarto aspectu
+<lb n="13"/>Solis fuerit, significat <milestone unit="arline" n="235"/> diminutionem seu descensionem ab alto in infimum.
+<lb n="14"/>Similiter in quarto aspectu secundo, set in quarto aspectu primo signifi-
+<lb n="15"/>cat apparitionem rerum et lucrum et augmentum continentie, et in quarto
+<lb n="16"/>aspectu Solis secundo significat horum opposita.
+
+<pb n="291"/></p>
+<p n="41">
+<lb n="1"/> Et dixerunt quidam quod Luna a coniunctione usque ad dimidi-
+<lb n="2"/>um luminis sui primum erit natura eius humiditas, et a medietate lumi-
+<lb n="3"/>nis sui usque ad impletionem erit natura eius calor, et ab impletione usque
+<lb n="4"/>ad dimidium sui luminis secundum erit <milestone unit="arline" n="240"/> natura eius siccitas, et a dimidio
+<lb n="5"/>luminis sui secundo usque ad coniunctionem erit eius natura frigus.</p>
+<p n="42">
+<lb n="6"/> Reliqui autem planete ab ortu suo usque ad stationem suam pri-
+<lb n="7"/>mam erunt in natura humiditatis et significant pueritiam, et a statione
+<lb n="8"/>sua prima usque ad oppositionem Solis erit natura eorum calor, et significant
+<lb n="9"/>iuventutem, et ab hoc <milestone unit="arline" n="245"/> loco usque ad stationem suam secundam erit natura
+<lb n="10"/>eorum siccitas, et significant perfectam etatem, et a statione sua secunda
+<lb n="11"/>usque ad occultationem suam primam est natura eorum in senio frigida.</p>
+<p n="43">
+<lb n="12"/> Et dixerunt quidam quod Sol significet spiritum, id est animam,
+<lb n="13"/>et Luna cogitationem, et Saturnus merorem et tristitiam et laborem et
+<lb n="14"/>malum, et Iupiter sapientiam et rationem, Mars iram, furtum et celeri-
+<lb n="15"/>tatem, Venus ludum et gaudium, Mercurius rationalitatem seu dialeticam
+
+<pb n="292"/>
+<lb n="1"/><milestone unit="arline" n="250"/> et disciplinam. Et quedam diximus in libro nostro de significatione pla-
+<lb n="2"/>nete, dum complectitur ei alter, similiter etiam considerandum est
+<lb n="3"/>in ceteris rebus quas significant planete.</p>
+<p n="44">
+<lb n="4"/> De ordine vero planetarum seu principatu eorum in conceptione
+<lb n="5"/>puerorum et quamdiu fuerint in ventre matris, sciendum est quia primus
+<lb n="6"/>mensis, ab hora scilicet conceptionis, est Saturni, secundus Iovis, tertius Mar-
+<lb n="7"/>tis, quartus Solis, quintus Veneris, sextus Mercurii, septimus Lune, octavus
+<lb n="8"/>Saturni, et ideo non vivit qui nascitur in octavo mense, eo quod sub potes-
+<lb n="9"/>tate Satuni nascatur, nonus vero Iovis. Principatus quoque seu ordinatio
+<lb n="10"/>planetarum in vita humana, id est qualiter disponatur vita nati, ita di-
+<lb n="11"/>viditur: Luna incipit ab ingressu nati, hoc est a nativitate pueri, et
+<lb n="12"/>disponit secundum quantitatem <milestone unit="arline" n="255"/> annorum nutritionis, qui sunt quatuor
+<lb n="13"/>anni; deinde Mercurius post hanc decem; deinde Venus .VIII.; Sol .XIX.;
+
+<pb n="293"/>
+<lb n="1"/>post hec Mars XV.; post hec Iupiter XII.; post hec Saturnus usque in
+<lb n="2"/>finem vite.</p>
+<p n="45">
+<lb n="3"/> Caput Draconis est masculus; similiter est fortuna et natura
+<lb n="4"/>eius est composita ex natura Iovis et Veneris. Et hoc significat regnum
+<lb n="5"/>et fortunam atque substantiam.</p>
+<p n="46">
+<lb n="6"/><milestone unit="arline" n="260"/> Et dixerunt quidam quod natura eius sit augmentatio, quod
+<lb n="7"/>cum fuerit cum fortunis, auget fortunam eorum, et cum fuerit cum malis,
+<lb n="8"/>auget malitiam eorum. Et anni firdarie eius sunt .III.</p>
+<p n="47">
+<lb n="9"/> Cauda vero eius est mala, naturaque illius est composita ex
+<lb n="10"/>natura Saturni et Martis. Significat deiectionem, casum atque paupertatem.</p>
+<p n="48">
+<lb n="11"/> Et dixerunt quidam quod natura eius sit diminutio, que cum
+<lb n="12"/>fuerit cum fortuniis, minuit fortunam eorum, <milestone unit="arline" n="265"/> et cum fuerit cum malis,
+<lb n="13"/>minuit malitiam eorum. Ideoque dictum est quod Caput esset fortuna
+<lb n="14"/>cum fortunis et malum cum malis, et Cauda mala cum bonis et bona cum
+<lb n="15"/>malis. Et anni firdarie eius sunt duo.</p>
+<p n="49">
+<lb n="16"/> Incipit capitulum quid habeat unusquisque planeta ex diebus.
+<lb n="17"/>Si fuerit aliqua dies vel nox alicui planetarum, erit eius prima hora
+<lb n="18"/>ipsius planete et secunda hora alterius planete qui hunc succedit et
+
+<pb n="294"/>
+<lb n="1"/>cetera. <milestone unit="arline" n="270"/> Verbi gratia, dies Veneris est Veneris, et prima hora eius est
+<lb n="2"/>Veneris, secunda Mercurii, tertia Lune, quarta Saturni, quinta Iovis, sexta Mar-
+<lb n="3"/>tis, septima Solis, octava iterum Veneris, nona Mercurii, decima Lune, un-
+<lb n="4"/>decima Saturni, duodecima Iovis. Ecce habes .XII. horas diei inequales! Item
+<lb n="5"/>de horis noctis. Prima hora sequentis noctis est Martis cuius est et nox tota,
+<lb n="6"/>secunda Solis, tertia Veneris, quarta Mercurii, quinta Lune, sexta Saturni,
+<lb n="7"/>septima Iovis, octava iterum Martis, nona Solis, decima Veneris, undecima
+<lb n="8"/>Mercurii, duodecima Lune. Habes etiam .XII. horas noctis inequales. Et
+<lb n="9"/>incipit dies sabati, cuius prima hora est Saturni, et ipsius est tota dies,
+<lb n="10"/>sic per ordinem numerando invenies horas dierum et noctium et divisiones
+<lb n="11"/>earum super planetis, si Deus voluerit.</p>
+<p n="50">
+<lb n="12"/> Dicuntur etiam hore esse masculine atque feminine, quia hora
+<lb n="13"/>prima uniuscuiusque diei ac noctis est masculina et secunda feminina, ter-
+<lb n="14"/>tia quoque masculina et quarta feminina, sicque succedunt per ordinem,
+<lb n="15"/>una scilicet masculina et alia feminina, usque in finem diei et noctis.
+
+<pb n="295"/></p>
+<p n="51">
+<lb n="1"/><milestone unit="arline" n="275"/> Et quia, Deo annuente, iam peregimus esse planetarum in semetip-
+<lb n="2"/>sis et quid significent, prosequamur narrando quid eis accidit in semetipsis
+<lb n="3"/>et ab invicem, id est a quibusdam erga quosdam.</p></div>
+
+<div type="chapter" n="3">
+<pb n="296"/>
+<p n="1">
+<lb n="1"/> Differentia tertia, in illis que accidunt planetis in semetipsis et ab
+<lb n="2"/>invicem, id est a quibusdam erga quosdam.</p>
+<p n="2">
+<lb n="3"/> Significatio planetarum in semetipsis est ut sit planeta ascendens in
+<lb n="4"/>circulo augis sue, minor lumine et magnitudine atque cursu, id est cum fuerit
+<lb n="5"/>inter ipsum et eius augem minus nonaginta gradibus ante vel retro; est
+<lb n="6"/>fortior. Si autem fuerint inter eum et augem .90. gradus equales, erit
+<lb n="7"/>equalis in lumine et <milestone unit="arline" n="5"/> magnitudine atque cursu. Si vero fuerit extra
+<lb n="8"/>hec loca, erit descendens in circulo augis et apparebit maior lumine
+<lb n="9"/>et magnitudine ac cursu velocior. Et si fuerit portio eius equata mi-
+<lb n="10"/>nus .CLXXX. gradibus, erit augens numerum; et si fuerit plus, erit minuens
+<lb n="11"/>numerum; et si fuerit portio equata eius ex .CLXXX. gradibus vel ex
+<lb n="12"/>.CCLX., erit nec augens nec minuens numerum. Et si additur equatio
+<lb n="13"/>equata super medium cursum, dicitur augens numerum; et si minuitur
+<lb n="14"/>equatio, dicitur minuens numerum. Et quando <milestone unit="arline" n="10"/> aliquis trium plane-
+<lb n="15"/>tarum altiorum vadit plus medio cursu suo, dicitur augere cursum;
+<lb n="16"/>et si minus vadit, dicitur minuere; et si vadit tantum, dicitur esse
+
+<pb n="297"/>
+<lb n="1"/>cursus equalis. Et quando aliquis planetarum inferiorum vadit plus
+<lb n="2"/>cursu Solis, erit augens cursum; et quando vadit minus, erit minuens cur-
+<lb n="3"/>sum; et quando vadit tantum, erit eius cursus equalis. Esse autem
+<lb n="4"/>luminarium in cursu est sicut esse trium altiorum planetarum.</p>
+<p n="3">
+<lb n="5"/><milestone unit="arline" n="15"/> Fit quoque planeta septemtrionalis cum transierit geuzahar suum,
+<lb n="6"/>id est, cum transierit per viam Solis iens a meridie in septemtrionem, ille
+<lb n="7"/>transitus, id est ipsa abscisio circulorum, dicitur geuzahar. Cum igitur
+<lb n="8"/>transierit planeta predictam abscisionem et fuerit inter planetam et ipsam
+<lb n="9"/>abscisionem minus .90. gradibus, erit planeta septemtrionalis, ascendens.
+<lb n="10"/>Et cum fuerit a .90. usque ad .180., erit septemtrionalis, descendens.
+<lb n="11"/>Et cum transierit hunc numerum, id est cum habuerit plus, iens ad .270.,
+<lb n="12"/>erit meridianus, descendens. Et cum transierit hunc numerum, iens ad .CC-
+<lb n="13"/>CLX., erit meridianus, ascendens.
+<lb n="14"/>Hoc est esse planetarum in semetipsis.</p>
+<p n="4">
+<lb n="15"/><milestone unit="arline" n="20"/> De esse autem eorum ab invicem tractemus quid accidat
+<lb n="16"/>quinque planetis erga luminaria.</p>
+<p n="5">
+<lb n="17"/> Et dicamus ex hoc quod dixit Ptolomeus de almuwegeha,
+
+<pb n="298"/>
+<lb n="1"/>hoc est cum fuerit inter planetam et Solem dum fuerit planeta occidentalis,
+<lb n="2"/>id est dum sequitur Solem, tantum quantum est inter domum ipsius plan-
+<lb n="3"/>ete et domum Solis de signis, aut cum fuerit inter ipsum planetam
+<lb n="4"/>et Lunam, cum fuerit orientalis a Luna, <milestone unit="arline" n="25"/> tantum quantum est inter do-
+<lb n="5"/>mum planete et domum Lune de signis, quia planeta, dum successerit
+<lb n="6"/>Solem, et fuerit a Sole Saturnus scilicet in signo sexto et Iupiter in quinto,
+<lb n="7"/>Mars in quarto, Venus in tertio, Mercurius in secundo, tunc dicitur esse in
+<lb n="8"/>almuwegeha Solis. Similiter cum fuerit inter unumquemque planetam et
+<lb n="9"/>Lunam succedentem hic numerus signorum unicuique <milestone unit="arline" n="30"/> planete nu-
+<lb n="10"/>meratus, dicitur esse in almuwegeha Lune.</p>
+<p n="6">
+<lb n="11"/> Et ex hoc duztoria planete, hoc est ut sit planeta in suo haiz
+<lb n="12"/>et in aliquo angulorum ascendentis, et aliquod luminarium in suo haiz
+
+<pb n="299"/>
+<lb n="1"/>similiter in loco sibi consimili, in quadrante eius, videlicet in alio
+<lb n="2"/>angulo, ita quod sit planeta in die orientalis a Sole et occidentalis in nocte
+<lb n="3"/>a Luna.</p>
+<p n="7">
+<lb n="4"/> Et omnis planeta ex quo tegitur a radiis Solis donec appareat
+<lb n="5"/>desub radiis vocatur combustus. Et <milestone unit="arline" n="35"/> dum incipit intrare radios, dicitur
+<lb n="6"/>incepisse comburi vel incedisse in combustionem. Et dum absconditur
+<lb n="7"/>sub radiis et fuerit infra eos, vocatur oppressus. Et cum fuerit cum
+<lb n="8"/>Sole in uno gradu fuerintque inter eos .16. minuta et infra, et latitudo eius
+<lb n="9"/>similiter .16. minutorum, vocatur unitus. Et cum transierit eandem
+<lb n="10"/>unionem, petens exitum, donec videatur, vocatur evasus.</p>
+<p n="8">
+<lb n="11"/> Et ex quo apparent altiores desub radiis et incipiunt oriri, id est
+<lb n="12"/>apparere, mane ante Solem, hoc est <milestone unit="arline" n="40"/> cum fuerint propiores circulo emisperii
+<lb n="13"/>orientalis, donec veniant ad oppositionem, vocantur orientales et dextri.
+<lb n="14"/>Et ex quo transeunt oppositionem donec coniungantur iterum Soli,
+
+<pb n="300"/>
+<lb n="1"/>vocantur occidentales, sinistri. Venus vero et Mercurius ex quo separatur
+<lb n="2"/>aliquis eorum a gradu Solis in medio retrogradationis sue et apparet donec
+<lb n="3"/>comburatur a Sole in sua directione, vocantur orientales. Et ex quo sepa-
+<lb n="4"/>rantur in directione sua a gradu Solis donec iterum comburantur,
+<lb n="5"/>vocantur occidentales. Et cum fuerint in ortu suo, id est cum fuerint ori-
+<lb n="6"/>entales, vocantur dextri et dicuntur esse <milestone unit="arline" n="45"/> masculini; et in occiduo suo,
+<lb n="7"/>id est cum fuerint occidentales, vocantur sinistri et dicuntur esse feminini,
+<lb n="8"/>et tunc sunt fortiores.</p>
+<p n="9">
+<lb n="9"/> Tres vero altiores ex quo exeunt desub radiis Solis vocan-
+<lb n="10"/>tur orientales, et dicuntur augmentari in fortitudine usque ad .30. gradus a
+<lb n="11"/>Sole. Et vocantur post hec usque ad .30. gradus alios orientales, fortes. Et
+<lb n="12"/>cum transierint Solem .LX. gradibus, vocantur planete orientales, euntes
+<lb n="13"/>ad debilitatem, donec veniant ad retrogradationem; tunc nominantur orien-
+<lb n="14"/>tales, retrogradi, donec sint in oppositione. Post hec erunt occidentales,
+<lb n="15"/>retrogradi, <milestone unit="arline" n="50"/> cum transierint scilicet oppositionem donec perveniant ad
+<lb n="16"/>directionem. Deinde a directione usque ad .60. gradus post directionem,
+<lb n="17"/>donec sit eorum longitudo a Sole .30. graduum, dicuntur occidentales,
+
+<pb n="301"/>
+<lb n="1"/>fortes. Deinde a longitudine .LX. graduum post directionem dicun-
+<lb n="2"/>tur occidentales euntes ad debilitatem. Deinde fiunt occidentales, debiles,
+<lb n="3"/>donec intrent sub radiis Solis.</p>
+<p n="10">
+<lb n="4"/> Inferiores quoque ex quo separantur a Sole et ipsi retrogradi,
+<lb n="5"/>vocantur orientales, debiles, sicque esse <milestone unit="arline" n="55"/> non desistunt donec veniant ad di-
+<lb n="6"/>rectionem suam. Tunc fiunt orientales, fortes, donec sit longitudo eorum a
+<lb n="7"/>Sole sicut longitudo Solis ab eis hora retrogradationis. Deinde fiunt orien-
+<lb n="8"/>tales, debiles, donec supponantur radiis, et tunc sunt uniti. Deinde fiunt
+<lb n="9"/>combusti, euntes ad apparitionem quousque videantur. Et ex quo separan-
+<lb n="10"/>tur a Sole in directione usque ad horam retrogradationis sue donec sint
+
+<pb n="302"/>
+<lb n="1"/>retrogradi cum Sole, erunt debiles. Et planeta cum exierit desub radiis
+<lb n="2"/>Solis et nulli planete iunctus fuerit, dicitur quod sit in lumine suo.
+<lb n="3"/><milestone unit="arline" n="60"/> Hoc est esse planetarum cum luminaribus.</p>
+<p n="11">
+<lb n="4"/> Esse autem illorum erga se invicem est hoc: est coniunc-
+<lb n="5"/>tio, id est cum fuerint duo planete in duobus signis aspicientibus se et
+<lb n="6"/>fuerit levior in signo suo minus gradibus quam fuerit ponderosior in signo
+<lb n="7"/>suo, fuerintque inter eos sex gradus vel infra; tunc dicitur quod lev-
+<lb n="8"/>ior eat ad coniunctionem ponderosioris. Et cum eorum gradus fuerint
+<lb n="9"/>equales, perficitur eius coniunctio. Et cum transierit eum, erit separatus
+<lb n="10"/>ab eo. Hec coniunctio dicitur <milestone unit="arline" n="65"/> coniunctio longitudinis.
+<lb n="11"/>Coniunctio vero latitudinis est ut duo planete iungantur per longi-
+<lb n="12"/>tudinem, et, si fuerit eorum applicatio per corpus, erit latitudo eorum
+<lb n="13"/>equalis, id est in una parte; et si fuerit coniunctio ex oppositione,
+<lb n="14"/>erunt eorum latitudines equales, ita ut latitudo unius sit ascendens in
+
+<pb n="303"/>
+<lb n="1"/>septemtrionem et alterius descendens in septemtrionem, vel unius
+<lb n="2"/>ascendens in meridie et alterius descendens in meridie; at si fuerit
+<lb n="3"/>preter hoc de alictisal, erit alictisal longitudinis et non latitudinis, et
+<lb n="4"/>sit unus septemtrionalis, ascendens et alter meridianus, descendens et
+<lb n="5"/>econverso in meridie. Hoc est coniunctio latitudinis.</p>
+<p n="12">
+<lb n="6"/><milestone unit="arline" n="70"/>  Et cum separatur unus planeta ab alio et nulli planetarum iun-
+<lb n="7"/>gitur quamdiu in eodem signo fuerit, dicitur cursus vacuus.</p>
+<p n="13">
+<lb n="8"/> Et si fuerit planeta in aliquo signo et [aliquis planeta] non aspexerit
+<lb n="9"/>hoc signum alter planeta quamdiu in eo fuerit, dicitur quod sit feralis
+<lb n="10"/>vel agrestis.</p>
+<p n="14">
+<lb n="11"/> Et cum separatur planeta levis a planeta ponderosiori et iunctus
+<lb n="12"/>fuerit alii, transfert <milestone unit="arline" n="75"/> naturam primi ad secundum. Transfert etiam
+<lb n="13"/>planeta naturam alio modo, hoc est ut iungatur planeta levis planete
+
+<pb n="304"/>
+<lb n="1"/>ponderosiori se, et ipse ponderosior iterum alteri se ponderosiori; tunc
+<lb n="2"/>medius transfert naturam levis ad ponderosiorem.</p>
+<p n="15">
+<lb n="3"/> Si autem non iungitur unus duorum planetarum alteri, set iun-
+<lb n="4"/>guntur utrique alteri, tunc, si aspexerit ille tertius planeta ad aliquem
+<lb n="5"/>locorum circuli, reddit lumen eorum ad locum ipsum, et hoc vocatur <milestone unit="arline" n="80"/> reddi-
+<lb n="6"/>tus luminis. Iterum, si unus duorum planetarum non iungitur alteri, set
+<lb n="7"/>alter planeta tertius inter utrosque transtulerit lumen, reddet lumen
+<lb n="8"/>unius alteri et hoc similiter dicitur redditus luminis.</p>
+<p n="16">
+<lb n="9"/> Sequitur prohibitio. Et fit duobus modis, uno scilicet ex con-
+<lb n="10"/>iunctione. Hoc est cum fuerint tres planete in uno signo set in diversis
+<lb n="11"/>gradibus, et fuerit ponderosior plus gradibus; tunc ille qui est medius pro-
+<lb n="12"/>hibet priorem, illum scilicet qui est minus gradibus, ne iungatur pondero-
+<lb n="13"/>siori donec transeat eum.
+<lb n="14"/>Secundo modo, ut duo planete sint in <milestone unit="arline" n="85"/> uno signo et levior iungitur
+<lb n="15"/>ponderosiori, alter quoque iungatur eidem ponderosiori per aspectum.
+<lb n="16"/>Ille ergo qui est cum eo in uno signo prohibet aspicientem a coniunctione
+<lb n="17"/>ponderosioris, si fuerint tamen gradus illius qui coniungitur et ipsius
+<lb n="18"/>qui aspicit equales, id est unius numeri. Si vero ille qui aspicit propior fuerit
+
+<pb n="305"/>
+<lb n="1"/>gradui ponderosioris, erit coniunctio aspicientis.</p>
+<p n="17">
+<lb n="2"/> Et si coniungitur planeta domino illius signi in quo fuerit vel
+<lb n="3"/>domino illius exaltationis seu domino ceterarum dignitatum in quibus
+<lb n="4"/>fuerit, dicitur pulsare, id est mittere, naturam illius planete, domini scil-
+<lb n="5"/>icet eiusdem dignitatis, ad eum.</p>
+<p n="18">
+<lb n="6"/><milestone unit="arline" n="90"/> Et quando fuerit in aliqua dignitatum suarum et fuerit coniunctus
+<lb n="7"/>alii planete, dabit fortitudinem suam illi.</p>
+<p n="19">
+<lb n="8"/> Et si fuerit in aliqua dignitatum suarum et fuerit coniunctus plan-
+<lb n="9"/>ete qui habeat etiam partem dignitatis in eodem loco, mittit ei
+<lb n="10"/>etiam utrasque naturas, suam scilicet et illius cui iungitur.
+<lb n="11"/>Et hec missio omnis vocatur alcobol, id est receptio.</p>
+<p n="20">
+<lb n="12"/> Hoc sequitur redditus. Hoc est quando iungitur planeta
+<lb n="13"/>alicui planete qui comburitur, id est qui fuerit sub radiis Solis, vel fuerit
+<lb n="14"/>retrogradus, redditque ei virtutem propter debilitatem suam, quia non
+<lb n="15"/>valet retinere; tunc, si fuerint utrique planete in angulo vel in succeden-
+
+<pb n="306"/>
+<lb n="1"/>tibus angulis, erit redditus cum proficuo. Similiter <milestone unit="arline" n="95"/> si fuerit qui coni-
+<lb n="2"/>ungitur ei tantum in angulo et ille cui iungitur receperit eum.
+<lb n="3"/>Si autem fuerit planeta qui iungitur cadens et ille cui iungitur in an-
+<lb n="4"/>gulo vel in sequenti angulo, [erit redditus cum proficuo], vel si utrique
+<lb n="5"/>fuerint cadentes, erit redditus cum detrimento.</p>
+<p n="21">
+<lb n="6"/> Inde sequitur alintiketh, id est refrenatio, que fit quando pla-
+<lb n="7"/>neta vult coniungi alteri, set, antequam iungatur ei, accidit ei ret-
+<lb n="8"/>rogradatio, et sic destruitur eius coniunctio.</p>
+<p n="22">
+<lb n="9"/> Hanc sequitur alitirad, id est contrarietas accidens. Hec fit
+<lb n="10"/>cum aliquis planeta levis fuerit multorum graduum in signo et alter illo pon-
+<lb n="11"/>derosior <milestone unit="arline" n="100"/> minus gradibus, tertius quoque levior primo volens coniungi
+<lb n="12"/>ponderosiori, set, antequam ei iungatur, fit retrogradus ille levior qui ha-
+<lb n="13"/>bet plures gradus et iungitur eidem ponderoso, et transiens
+
+<pb n="307"/>
+<lb n="1"/>illum iungitur etiam alteri planete leviori, et sic destruitur coniunctio
+<lb n="2"/>illius prioris cum ponderoso.</p>
+<p n="23">
+<lb n="3"/> Sequitur alfaut, id est frustratio. Hec quoque fit cum aliquis
+<lb n="4"/>planeta petit coniunctionem alterius planete, set, antequam perveniat
+<lb n="5"/>ad eum, mutatur in aliud signum, et erit aliquis planeta in paucis gradibus
+<lb n="6"/>aspiciens ipsum signum, et erunt radii eius in initio signi. Cumque ex-
+<lb n="7"/>ierit sequens planeta de primo signo, iungetur <milestone unit="arline" n="105"/> isti aspicienti, et
+<lb n="8"/>annullatur coniunctio quam habebat cum primo.</p>
+<p n="24">
+<lb n="9"/> Hanc quoque sequitur abscisio luminis. Hoc est ut aliquis
+<lb n="10"/>planeta petat coniunctionem alterius, et fuerit in secundo signo a sig-
+<lb n="11"/>no illius cui iungitur alter planeta, set, antequam iungatur ei primus,
+<lb n="12"/>fit ille qui est in secundo signo retrogradus coniungiturque ei et abscidit
+<lb n="13"/>lumen eius a planeta qui volebat ei coniungi. Similiter, si fuerit planeta
+<lb n="14"/>iens ad coniunctionem alterius planete et ipse alter planeta cui vult
+<lb n="15"/>iungi petat coniunctionem <milestone unit="arline" n="110"/> alterius planete se ponderosioris, set,
+<lb n="16"/>antequam perveniat levis ad gradus ponderosioris, iungitur ipse ponderosus
+
+<pb n="308"/>
+<lb n="1"/>alteri se ponderosiori et abscidit lumen illius a planeta primo leviori.</p>
+<p n="25">
+<lb n="2"/> Sunt quoque his planetis loca in quibus confortantur et in quibus
+<lb n="3"/>debilitantur, et loca in quibus fiunt fortune et loca in quibus fiunt
+<lb n="4"/>mali. Set loca in quibus fiunt fortune sunt hec: ut sint scilicet in
+<lb n="5"/>aspectibus bonorum, id est in aliquo aspectuum, in sextili videlicet vel
+<lb n="6"/>in quarto aut in trino qui a quibusdam ita nominantur exagona radiatio,
+<lb n="7"/>tetragona quoque ac trigona, vel sint coniuncti eis aut sint mali cadentes
+<lb n="8"/>ab eis sintque <milestone unit="arline" n="115"/> separati a fortuna et iuncti fortune, aut sint obsessi a
+<lb n="9"/>fortunis vel a radiis earum, id est ut sint inter duas fortunas vel inter
+<lb n="10"/>radios fortunarum.</p>
+<p n="26">
+<lb n="11"/> Hec est enim obsessio, ut habeat planeta fortunam vel radios
+<lb n="12"/>eius ante se et aliam fortunam vel radios eius post se. Et quidam vocant
+<lb n="13"/>hoc alihtifef, id est veneratio. Aut sint uniti cum Sole in uno gradu, aut
+
+<pb n="309"/>
+<lb n="1"/>sint in aspectu eius sextili sive trino, vel in aspectu Lune et Luna tunc
+<lb n="2"/>fortunata, et ut sint cursu velociores, aucti lumine et numero, aut sint in
+<lb n="3"/>dignitatibus suis vel in suo haiz, id est in sua similitudine, ut sit videlicet
+<lb n="4"/>planeta masculus in signo masculo et femininus in signo feminino, et
+<lb n="5"/>diurnus in die super terram et nocte sub terra et nocturnus in nocte super
+<lb n="6"/>terram et reliqua, aut in signis in quibus habuerint dignitates seu
+<lb n="7"/>potestates suas, vel in <milestone unit="arline" n="120"/> gaudiis suis aut in gradibus lucidis vel recepti.</p>
+<p n="27">
+<lb n="8"/> Et ex fortitudine eorum, ut sint ascendentes in septemtrionem
+<lb n="9"/>aut sint septemtrionales, vel sint ascendentes in circulo augis, aut sint
+<lb n="10"/>in statione secunda, hoc est quando fuerint in statione ut dirigantur
+<lb n="11"/>a retrogradatione, aut sint exeuntes desub radiis Solis, aut in angulo
+<lb n="12"/>vel in sequenti eius, aut sint tres altiores orientales a Sole (quod si
+<lb n="13"/>eum aspexerint a sextili aspectu erit illis hoc augmentum fortitudinis)
+<lb n="14"/>aut fuerint in quartis <milestone unit="arline" n="125"/> masculis. Et Sol, cum fuerit in illis quartis
+<lb n="15"/>masculis aut in signis masculis, erit fortis etiam, nisi sit in Libra. Et
+
+<pb n="310"/>
+<lb n="1"/>ex fortitudine trium inferiorum, ut sint occidentales a Sole, aut in quartis
+<lb n="2"/>femininis. Et ex fortitudine Lune, ut sit in nocte super terram et in
+<lb n="3"/>die sub terra in loco feminino vel in signo feminino, et cum fuerit in
+<lb n="4"/>exaltatione Solis.</p>
+<p n="28">
+<lb n="5"/><milestone unit="arline" n="130"/> Ex infortunio vero planetarum et destructione eorum est ut
+<lb n="6"/>sint in coniunctione malorum aut in oppositione eorum, vel in eorum tetrag-
+<lb n="7"/>ona aut trigona seu exagona radiatione, aut si fuerit inter eos et corpus
+<lb n="8"/>mali vel radios eius minus termino planete, aut sint in terminis malo-
+<lb n="9"/>rum aut in domibus eorum, aut sint mali elevati super eos a decimo
+<lb n="10"/>vel ab undecimo a locis eorum; et multo deterius si non receperint eos.
+<lb n="11"/>Aut fuerint in coninctione Solis vel oppositione eius vel in eius
+<lb n="12"/>tetragona radiatione, aut fuerint cum capitibus suorum geuzahar,
+<lb n="13"/><milestone unit="arline" n="135"/> aut cum Capite Draconis vel eius Cauda, sitque inter eos et inter
+
+<pb n="311"/>
+<lb n="1"/>aliquod istorum .XII. gradus vel infra; et maxime si fuerit Luna ab
+<lb n="2"/>aliquo eorum similiter. Et Sol tunc magis impeditur ab eis, id est a Capite
+<lb n="3"/>vel Cauda, cum fuerint inter ipsum et unum eorum etiam quatuor gradus
+<lb n="4"/>ante vel retro. Aut fuerint planete obsessi inter duos malos, hoc est ut
+<lb n="5"/>sit planeta in signo aliquo et cum eo malus vel radii eius ante se et malus
+<lb n="6"/>vel eius radii post se. Aut separetur a malo per coniunctionem vel per
+<lb n="7"/>aspectum et iungatur tali <milestone unit="arline" n="140"/> modo alteri malo. Aut fuerit malus in signo
+<lb n="8"/>vel radii eius quod est ante eum, id est in secundo ab eo, et in signo
+<lb n="9"/>quod est post eum, id est in .XII. ab eo, fuerit alter malus vel radii
+<lb n="10"/>eius. Similiter dicitur de signis quod sint obsessa. Quod si aspexerit for-
+<lb n="11"/>tuna vel Sol eundem planetam vel signum obsessum a trino vel a sextili
+<lb n="12"/>aspectu fueritque inter eum et coniunctionem minus .VII. gradibus, solvetur
+<lb n="13"/>ipsa malitia vel obsessio. Et ex hoc, ut sit planeta retrogradus, vel sub
+<lb n="14"/>radiis Solis combustus, aut cadens ab ascendente.</p>
+<p n="29">
+<lb n="15"/><milestone unit="arline" n="145"/> Et ex debilitate eorum, ut sint tardi cursu aut in statione prima,
+<lb n="16"/>hoc est quando stant ut retrogradi fiant, aut sint retrogradi, aut sint in
+<lb n="17"/>gradibus tenebrosis, aut sint masculini in signis femininis et in gradibus
+
+<pb n="312"/>
+<lb n="1"/>femininis in die sub terra et in nocte super terram, aut sint feminini in
+<lb n="2"/>signis masculinis et in gradibus masculinis in nocte sub terra et in die su-
+<lb n="3"/>per terram, aut sint in oppositione dignitatum suarum seu potestatum, aut
+<lb n="4"/>descendentes in meridie vel meridiani, quia meridies contrarius est septemtri-
+<lb n="5"/>oni et planete cum ascendentes fuerint in septemtrionem fiunt fortiores
+<lb n="6"/>et similiter cum ascenderint in circulum augis efficiuntur quasi spirituales et
+<lb n="7"/>fiunt fortiores, aut cadentes ab angulis vel <milestone unit="arline" n="150"/> a succedentibus angulorum
+<lb n="8"/>aut in domibus cadentibus, aut sint in via combusta, que est medietas ul-
+<lb n="9"/>tima Libre et medietas prima Scorpionis, aut iungatur planete retrogrado
+<lb n="10"/>vel impedito aut cadenti, aut sint non recepti. Aut sint tres altiores
+<lb n="11"/>occidentales a Sole aut in quartis femininis. Et debilitas Solis est ut sit
+<lb n="12"/>in signis femininis aut in quartis femininis, nisi sit in domo nona. Et ex
+<lb n="13"/>debilitate trium inferiorum, ut sint orientales aut in quartis masculinis.</p>
+<p n="30">
+<lb n="14"/><milestone unit="arline" n="155"/> Et dicitur in planetis quod sint quidam eorum se invicem dili-
+<lb n="15"/>gentes vel odientes. Nam de diligentibus quidam Antiquorum dixerunt
+<lb n="16"/>quod Iupiter diligat omnes planetas, et ut sit amicus eorum et ipsi
+
+<pb n="313"/>
+<lb n="1"/>Veneris amici sunt omnes planete, et omnes
+<lb n="2"/>illius preter Martem.
+<lb n="3"/>diligunt eam preter Saturnum. Saturni autem amici sunt Iupiter, Sol et
+<lb n="4"/>Luna, et inimici eius Mars et Venus, et ipsa plus habet eum odio. Et
+<lb n="5"/>Martis amica est Venus, et ceteri planete odio habent eum, et plus odio habent
+<lb n="6"/>eum Iupiter et Sol. Solis vero amici sunt Iupiter <milestone unit="arline" n="160"/> et Venus, et inimici
+<lb n="7"/>Mercurius et Luna. Mercurii amici sunt Iupiter et Venus et Saturnus tan-
+<lb n="8"/>tum, et inimici eius Sol, Luna et Mars. Lune autem amici sunt Iupiter,
+<lb n="9"/>Venus et Saturnus, et inimici eius Mercurius et Mars. Capitis Draconis
+<lb n="10"/>amici sunt Iupiter et Venus, et inimici Saturnus et Mars. Caude vero
+<lb n="11"/>amici Saturnus et Mars, et inimici Sol et Luna, Iupiter et Venus. Et alia
+<lb n="12"/>species inimicitie est cum fuerint duo planete habentes domos suas opposi-
+<lb n="13"/>tas. Tertia quoque species est inimicitie ut sint duorum plane-
+<lb n="14"/>tarum <milestone unit="arline" n="165"/> exaltationes opposite.</p>
+<p n="31">
+<lb n="15"/> Fortior autem planetarum amicitia est ut concordet planeta cum
+<lb n="16"/>planeta in natura et in communi qualitate atque substantia et potestate,
+<lb n="17"/>sicuti concordat Mars cum Sole, quia utrique concordant in calore et sicci-
+
+<pb n="314"/>
+<lb n="1"/>tate et acuitione atque celeritate et est dominus exaltationis eius in qua
+<lb n="2"/>apparet eius fortitudo, et ut concordant Luna et Venus in frigore et hu-
+<lb n="3"/>miditate et est domina exaltationis eius. Cum autem concordaverint duo
+<lb n="4"/>planete in natura et substantia, ut Iupiter et Venus, sunt amici.
+</p></div>
+
+<div type="chapter" n="4">
+<pb n="315"/>
+<p n="1">
+<lb n="1"/> Differentia quarta in expositione nominum astrologorum.</p>
+<p n="2">
+<lb n="2"/> Initium horum est coniunctio et res significantes destructiones seu
+<lb n="3"/>mutationes que fiunt in hoc seculo ex coniunctionibus, quarum numerus
+<lb n="4"/>est .VI. Maior autem omnibus coniunctionibus est coniunctio Saturni et
+<lb n="5"/>Iovis in initio Arietis, et hec it in nongentis.LX. annis. Secunda eo-
+<lb n="6"/>rum coniunctio est in initio uniuscuiusque triplicitatis, et hec fit in
+<lb n="7"/>ducentis .XL. <milestone unit="arline" n="5"/> annis. Iunguntur enim in unaquaque triplicitate duodecies,
+<lb n="8"/>et fortassis facient in ea .XIII. coniunctiones, deinde mutatur eorum coni-
+<lb n="9"/>unctio ad triplicitatem que hanc succedit. Tertia est coniunctio Saturni et
+<lb n="10"/>Martis in initio Cancri, que fit in omnibus .30. annis. Quarta quoque est
+<lb n="11"/>coniunctio Saturni et Iovis in unoquoque signo, que fit in omnibus .20. an-
+
+<pb n="316"/>
+<lb n="1"/>nis. Quinta est descensio luminaris maioris in punctum equinoctialis
+<lb n="2"/>vernalis temporis, id est ingressu Solis in capite Arietis, que fit in omni
+<lb n="3"/>anno. Sexta est coniunctio luminarium et eorum oppositio, que fit
+<lb n="4"/>in dimidio uniuscuiusque mensis lunaris. Et quando dicitur ascendens
+<lb n="5"/>coniunctionis, <milestone unit="arline" n="10"/> nolunt nisi ascendens [dicitur vel significatur ascendens
+<lb n="6"/>mundi id est signum quod ascendit] hora introitus Solis in predictum punc-
+<lb n="7"/>tum equinoctialis vernalis, in initio scilicet illius anni in quo debet fieri
+<lb n="8"/>predicta coniunctio.</p>
+<p n="3">
+<lb n="9"/> Et ex hoc animodar, quod est investigatio gradus ascendentis ali-
+<lb n="10"/>cuius nativitatis. Et putant multi astrologorum quod inveniatur per eum
+<lb n="11"/>idem gradus ascendentis alicuius nati, set hoc falsum est. Et iam
+<lb n="12"/>patefeci hoc in libro meo quem feci de animodar. Set invenitur per
+<lb n="13"/>eum dignior omnibus gradibus circuli post gradum ascendentem in ea-
+<lb n="14"/>dem hora secundum cursum <milestone unit="arline" n="15"/> naturalem. Et concordat multotiens, id est ac-
+<lb n="15"/>cidit aliquando, ut inveniatur per eum idem gradus ascendens. Cuius
+
+<pb n="317"/>
+<lb n="1"/>rei cognitio est ut consideretur gradus coniunctionis vel gradus preventio-
+<lb n="2"/>nis que fuerit ante ipsam nativitatem, quia, si fuerit coniunctio que fuit
+<lb n="3"/>ante nativitatem illi nativitati propior quam preventio preterita, vo-
+<lb n="4"/>catur ipsa nativitas coniunctionalis; et si fuerit preventio illi propior,
+<lb n="5"/>dicitur preventionalis, id est in qualicumque earum fuerit nativitas,
+<lb n="6"/>in coniunctione scilicet vel preventione, eodem modo nativitas predicta
+<lb n="7"/>nuncupatur. Et quia gradus coniunctionis est idem gradus in quo iungun-
+<lb n="8"/>tur luminaria, nulla est inquisitio ibi, nec indiget expositione. <milestone unit="arline" n="20"/> In
+<lb n="9"/>preventione autem, quia unumquodque luminarium est in gradu suo, id est
+<lb n="10"/>diversi sunt in gradibus, necesse est nobis scire quem horum graduum
+<lb n="11"/>velit intelligi gradum preventionis.
+<lb n="12"/>Et iam dixit Ptolomeus quia gradus illius luminaris quod fuerit super
+<lb n="13"/>terram est gradus preventionis. Et quidam sapientium dixerunt: si evenerit in
+<lb n="14"/>preventione ut unum luminarium sit in gradu orientis et alterum in gradu oc-
+<lb n="15"/>cidentis, tunc gradus orientis erit gradus preventionis. Et dixit Welius quia
+<lb n="16"/>gradus preventionis est gradus in quo sit impletio, volens intelligi gradum
+<lb n="17"/>Lune. Set quia hoc opus est <milestone unit="arline" n="25"/> Ptolomei, oportet nos in hoc redire ad eius
+<lb n="18"/>sententiam. Cum ergo gradus coniunctionis vel gradus preventionis cer-
+
+<pb n="318"/>
+<lb n="1"/>tissime patuerit, constitues gradum ascendentem per estimationem in
+<lb n="2"/>hora nativitatis, et quatuor angulos in hora nativitatis. Deinde aspicies
+<lb n="3"/>coniunctionis gradum vel gradum preventionis que fuerit ante nativitatem
+<lb n="4"/>et quis planetarum sit in eo dignior vel fortior eadem hora coniunc-
+<lb n="5"/>tionis vel preventionis per multitudinem dignitatum seu potestatum, id
+<lb n="6"/>est considerabis quis planetarum habeat dominium in eodem loco. Hunc
+<lb n="7"/>ergo planetam equabis ad horam nativitatis. Deinde aspicies utrum sit
+<lb n="8"/>gradus illius planete in signo in quo est propior gradui decime domus
+<lb n="9"/>an gradui ascendentis, et cui horum propior fuerit, facies hunc angu-
+<lb n="10"/>lum ad instar <milestone unit="arline" n="30"/> gradus ipsius planete et eius minuti, et divides .XII.
+<lb n="11"/>domos per eum.
+<lb n="12"/>Dixit Ptolomeus: si plures planete convenerint in dominio eiusdem
+
+<pb n="319"/>
+<lb n="1"/>loci et fuerint equales in fortitudine, constitues dominum loci illum
+<lb n="2"/>qui fuerit dominus haiz. Quod si in hoc etiam convenerint, constitues
+<lb n="3"/>eum qui velocius debet mutari ab esse suo ad illud quod fuerit melius,
+<lb n="4"/>id est eum qui voluerit exire de aliquo signo in quo fuerit et intrare aliud in
+<lb n="5"/>quo habuerit plus dignitatis vel, si fuerint a Sole orientales, eliges eum qui
+<lb n="6"/>Soli fuerit propior et non fuerit sub radiis. Si vero in angulo fuerint,
+<lb n="7"/>ille est eligendus qui gradui eiusdem anguli fuerit propior. Intellige!</p>
+<p n="4">
+<lb n="8"/> Et ex hoc hilesg in nativitatibus, cuius scientia est ut aspi-
+<lb n="9"/>cias horam nativitatis. Que si fuerit in die, incipies a Sole, qui, si fuerit ante
+<lb n="10"/>gradum signi ascendentis per .5. gradus et infra, <milestone unit="arline" n="35"/> aut fuerit in .X. vel
+<lb n="11"/>in .XI., sive masculinum fuerit ipsum signum sive femininum, aptus erit ut
+<lb n="12"/>sit hilesg. Si vero fuerit in .VII. vel in .VIII. vel in nono in signo masculino,
+<lb n="13"/>similiter aptus erit ut sit hilesg. Si autem fuerit in his tribus locis in
+<lb n="14"/>signo feminino, non erit aptus ut sit hilesg.
+
+<pb n="320"/>
+<lb n="1"/>Tunc aspicies Lunam. Que, si fuerit in ascendente vel in secundo aut
+<lb n="2"/>in tertio, in .VII. quoque aut .VIII., erit apta hilesg, masculinum fuerit
+<lb n="3"/><milestone unit="arline" n="40"/> signum sive femininum. Et si fuerit ante gradum signi ascendentis per
+<lb n="4"/>.V. gradus et infra, aut fuerit in .X. aut in .11. aut in quarto vel in .V.
+<lb n="5"/>in signo feminino, aptatur hilesg. Si autem fuerit in aliquo horum locorum
+<lb n="6"/>in signo masculino, non erit apta hilesg, si fuerit nativitas in die.
+<lb n="7"/>Si vero fuerit nativitas nocturna, incipimus a Luna. Que, si fuerit
+<lb n="8"/>in aliquo predictorum locorum secundum quod prediximus, erit apta
+<lb n="9"/>hilesg. Si autem Luna in eis non fuerit, <milestone unit="arline" n="45"/> aspicies post hec ad Solem.
+<lb n="10"/>Qui, si fuerit ante gradum .VII. per .V. gradus et infra, aut fuerit
+<lb n="11"/>in quarto vel in .V., erit in loco hilesg apto, masculinum fuerit signum sive
+<lb n="12"/>femininum. Si vero fuerit in ascendente vel in secundo in signo mas-
+<lb n="13"/>culino, aptabitur etiam hilesg. Si autem fuerit in aliquo istorum locorum
+<lb n="14"/>in signo feminino, non erit aptus hilesg.
+
+<pb n="321"/>
+<lb n="1"/>Quod si luminaria non fuerint apta hilesg aspicies post hec <milestone unit="arline" n="50"/> nativ-
+<lb n="2"/>itatem, utrum sit coniunctionalis an preventionalis, id est utrum sit post
+<lb n="3"/>coniunctionem an post preventionem. Quod si fuerit nativitas coniunction-
+<lb n="4"/>alis et fuerit gradus coniunctionis in aliquo angulorum vel in succedentibus
+<lb n="5"/>angulorum, erit in loco apto hilesg. Si vero predictus gradus fuerit ca-
+<lb n="6"/>dens ab his octo locis, id est ab angulis et succedentibus eorum, non erit
+<lb n="7"/>hilesg. Aspicies tunc gradum Partis Fortune. Qui, si fuerit in aliquo
+<lb n="8"/>angulorum vel in succedentibus eorum, erit in loco apto hilesg. Si vero
+<lb n="9"/>cadens fuerit ab his .VIII. locis, non erit aptus ad hylesg. Aspicies post
+<lb n="10"/>hec gradum ascendentis, et constitues eum hilesg. <milestone unit="arline" n="55"/> Si vero nativitas preven-
+<lb n="11"/>tionalis fuerit, incipies a gradu preventionis aspiciesque in eum sicuti prius
+<lb n="12"/>fecisti in gradu coniunctionis; et post ipsum gradum Partis Fortune, et
+<lb n="13"/>post ipsum gradum ascendentis, eo ordine quo prediximus in gradu coniunc-
+<lb n="14"/>tionis. De sexu autem signorum non curabis, id est non aspicies utrum sint
+<lb n="15"/>signa illa masculina seu feminina, nisi tantummodo in luminaribus. In gradu
+<lb n="16"/>vero coniunctionis et preventionis et Partis Fortune non consid-
+<lb n="17"/>eres utrum sint in masculinis signis vel in femininis tam in angulis quam
+<lb n="18"/>in succedentibus angulorum. Set hec .III. tunc tantum erunt apta hilesg
+
+<pb n="322"/>
+<lb n="1"/>cum fuerint in his <milestone unit="arline" n="60"/> .VIII. locis, id est in angulis vel in succedentibus eorum.
+<lb n="2"/>Si vero fuerint in locis recedentibus, id est cadentibus, ab eis [angulis],
+<lb n="3"/>non erunt apta hilesg.
+<lb n="4"/>Apparet itaque quod Sol sit aptus hilesg in die et nocte super terram
+<lb n="5"/>et sub terra in .XI. locis: super terram scilicet in .VI. locis et sub
+<lb n="6"/>terra in .5. Luna quoque aptatur hilesg in die ac nocte super terram
+<lb n="7"/>et sub terra similiter in .XI. locis: super terram in .V. et sub terra in
+<lb n="8"/>.VI. locis. Et cum hoc, si fuerit Luna in his locis <milestone unit="arline" n="65"/> sub radiis Solis, non
+<lb n="9"/>erit apta hilesg.
+<lb n="10"/>Aspicies autem hilesg in angulis et in sequentibus eorum secundum
+<lb n="11"/>quod equantur .XII. domus circuli per gradus horarum ascendentis, se-
+<lb n="12"/>cundum quod exponitur eius opus in canone planetarum, id est in libro
+<lb n="13"/>cursuum planetarum. Cumque equaveris domos hoc modo, omnis plan-
+<lb n="14"/>eta qui fuerit ante gradum ascendentis vel cuiuslibet domus per .V. gradus
+<lb n="15"/>equales et infra, erit fortitudo illius valida in domo que eum suc-
+<lb n="16"/>cedit. Et omnis locus ex locis que prediximus erit aptus hilesg, si aspexerit
+<lb n="17"/>eum <milestone unit="arline" n="70"/> dominus domus aut exaltationis aut ceterarum dignitatum. Si vero non
+<lb n="18"/>aspexerit eum aliquis dominorum illius, qui sunt dominus domus aut
+
+<pb n="323"/>
+<lb n="1"/>dominus exaltationis aut dominus termini aut
+<lb n="2"/>dominus triplicitatis aut
+<lb n="3"/>dominus faciei, non erit aptus hilesg.</p>
+<p n="5">
+<lb n="4"/> Et ex hoc alquodchodeuh, quod est significator vite. Quod
+<lb n="5"/>cum volueris scire et iam prenosti hilesg eo ordine quem predixi, aspicies
+<lb n="6"/>dominum domus hilesg aut dominum exaltationis eius <milestone unit="arline" n="75"/> aut dominum ter-
+<lb n="7"/>mini eius aut dominum triplicitatis aut dominum faciei. Quis horum
+<lb n="8"/>fuerit fortior et plus <sic>autentior</sic> [sic]  in loco hilesg et aspexerit hilesg,
+<lb n="9"/>erit dignior al[i]quodcodeie. Quod si non aspexerit ille qui fuerit plus
+<lb n="10"/>auctoritatis, aspicias eum qui fuerit minoris auctoritatis, donec inve-
+<lb n="11"/>nias aliquem ex illis qui aspiciat. Quod si non aspexerint hilesg,
+<lb n="12"/>non poterit locus ille esse hilesg et tunc queres hilesg ab alio, et
+<lb n="13"/>iterum queres ab eodem secundo hilesg alquodchodeuh eo ordine quo predi-
+
+<pb n="324"/>
+<lb n="1"/>ximus. Quod si equales fuerint duo planete vel tres in auctoritate gradus
+<lb n="2"/>hilesg <milestone unit="arline" n="80"/> et aspexerint utrique, erit dignior alcodchodoie qui fuerit fortior
+<lb n="3"/>loco. Si vero equales fuerint in fortitudine loci, id est ubi fuerint
+<lb n="4"/>planete, erit ille alquodchodeuh qui propior fuerit gradui hilesg.
+<lb n="5"/>Et quibusdam videbatur melius incipere a domino domus, qui si
+<lb n="6"/>aspexerit hilesg, ponebant quodchodeuh et non considerabant alterum.
+<lb n="7"/>Quod si non invenissent dominum domus aspicientem hilesg, aspicie-
+<lb n="8"/>bant dominum exaltationis, quem si aspicere viderent hiles, pone-
+<lb n="9"/>bant eum quodchodeuh, et non considerabant alium preter eum. Similiter
+<lb n="10"/>faciebant de domino termini et triplicitatis atque faciei per ordinem.
+<lb n="11"/>Et erat Dorothius preponens dominum termini in hoc <milestone unit="arline" n="85"/> domino domus.</p>
+<p n="6">
+<lb n="12"/> Et quidam dixerunt: si equales fuerint duo planete aut tres aut
+<lb n="13"/>plures in dignitate et proximitate aspectus, ille qui fuerit cum Sole in uno
+<lb n="14"/>puncto, et hoc est cum fuerit Soli unitus aut sit iens ad orientalitatem [aut
+
+<pb n="325"/>
+<lb n="1"/>gradu vel propior gradui anguli] aut in initio ortus sui, id est mane
+<lb n="2"/>apparuerit, aut fuerit in statione sua secunda vel in aliquo esse, in
+<lb n="3"/>esse scilicet laudabili a Sole, sicut prediximus, ipse erit alquodchodeuh.
+<lb n="4"/><milestone unit="arline" n="90"/> Si vero gradus Solis fuerit hilesg et fuerit in Ariete vel in Leone, erit Sol
+<lb n="5"/>hilesg et alquodchodeuh simul, et non consideratur alius alquodchodeuh
+<lb n="6"/>preter eum. Similiter, si fuerit gradus Lune hilesg et fuerit in Tauro vel in
+<lb n="7"/>Cancro, habeto eum pro hilesg et quodchodeuh simul, et non considerabis
+<lb n="8"/>pro alquodchodeuh alium preter eum.</p>
+<p n="7">
+<lb n="9"/> Almubtaz vero qui preest nativitati significat esse nati post
+<lb n="10"/><milestone unit="arline" n="95"/> hilesg et quodchodeuh. Et ipse est pluris planetis aliis auctoritatis in
+<lb n="11"/>ascendente et in locis luminarium atque in loco Partis Fortune et in loco
+<lb n="12"/>quoque partis coniunctionis vel preventionis que fit ante nativitatem.
+
+<pb n="326"/>
+<lb n="1"/>Quod si prefuerit aliquis planeta duobus locis aut .III. aut .IIII. aut pluribus,
+<lb n="2"/>pre multitudine potestatis sue in eis erit ipse almubtaz, id est domi-
+<lb n="3"/>nus, auctor et significator vite, post hilesg et quodchodeuh, et per eum
+<lb n="4"/>significatur esse nati. Et quidam habent eum pro quodchodeuh ad
+<lb n="5"/>dandam vitam.</p>
+<p n="8">
+<lb n="6"/><milestone unit="arline" n="100"/> Et ex hoc profectio in annis nativitatum atque mundi.
+<lb n="7"/>Et in annis nativitatum scientia est ut aspicias quot anni transierint nato
+<lb n="8"/>ex annis solaribus perfectis, accipiesque omni anno signum unum, incipiens
+<lb n="9"/>ab ascendente nati per successionem signorum; quo finitus fuerit nu-
+<lb n="10"/>merus, signum quod succedit est signum profectionis ab ascendente, signum
+<lb n="11"/>videlicet anni intrantis quem non misisti in numero. Et hoc erit in tali
+<lb n="12"/>gradu sicut fuit in ascendente nativitatis, et dominus signi eius dici-
+<lb n="13"/>tur alcelquoddeu, cuius interpretatio est dominus anni. Similiter, nu-
+<lb n="14"/>merabis a signo <milestone unit="arline" n="105"/> Solis, unicuique anno unum signum, et exibit per hoc
+
+<pb n="327"/>
+<lb n="1"/>signum profectionis a Sole; similiter a signo Lune et a medio celi et a Parte
+<lb n="2"/>Fortune in similitudine gradus radicis. Cuius rei exemplar est quod natus
+<lb n="3"/>natus est oriente Capricorno sub .XVII. gradu et Sol in Pisce in quin-
+<lb n="4"/>todecimo gradu et Luna in Libra in .XV. gradu et medium celi in .VIII. gradu
+<lb n="5"/>Scorpionis et Pars Fortune in Leone in .XVII. gradu. <milestone unit="arline" n="110"/> Et iam transier-
+<lb n="6"/>ant nato .III. anni perfecti pervenietque quartus annus ab ascendente
+<lb n="7"/>in Arietem, qui est quartus a Capricono, ad .XVII. gradum eiusdem
+<lb n="8"/>Arietis, et erit Mars alcelquoddeu, et perveniet profectio loci Solis
+<lb n="9"/>ad Geminos ad .XV. gradum eiusdem signi; et perveniet profectio
+<lb n="10"/>Lune ad Capricornum ad .XV. gradum eiusdem et profectio a medio
+<lb n="11"/>celi ad .VIII. gradum signi Aquarii; et profectio a Parte Fortune perve-
+<lb n="12"/>niet ad .XVII. gradum Scorpionis. Cumque pervenerit annus ad gradum
+
+<pb n="328"/>
+<lb n="1"/>profectionis, <milestone unit="arline" n="115"/> et fuerit post ipsum gradum in eadem domo planeta vel
+<lb n="2"/>radii eius, et volueris scire quando perveniet profectio ad ipsum planetam
+<lb n="3"/>vel ad eius radios, aspicies quid sit inter gradum ad quem pervenit profec-
+<lb n="4"/>tio anni et planetam vel radios ex gradibus et minutis, et multiplicabis
+<lb n="5"/>eum in .XII. et sextam unius [illius quem multiplicas, vel in .XII. gradus
+<lb n="6"/>et sextam unius gradus], et quod fuerit, erunt dies ex illo anno in
+<lb n="7"/>quo fueris, post quos fiet profectio illius planete.</p>
+<p n="9">
+<lb n="8"/> Profectio autem ex annis mundi. Dixit Alchindi quia fuerunt
+<lb n="9"/>inter annum coniunctionis que significavit <milestone unit="arline" n="120"/> sectam Saracenorum et inter
+
+<pb n="329"/>
+<lb n="1"/>annum Alhegerah, qui fuit primus annus annorum Arabum,
+<lb n="2"/>.LII. anni
+<lb n="3"/>solares, et fuit ascendens anni coniunctionis predicte secte signum
+<lb n="4"/>Geminorum, et pervenit profectio eiusdem anni ad Virginem, et inter
+<lb n="5"/>ipsum annum primum annorum Arabum et primum annorum Iazda-
+<lb n="6"/>gird, regis Persarum, fuerunt tria milia et .DC. et .XXIIII. dies. Cum
+<lb n="7"/>ergo volueris habere notitiam huius rei, accipe annos Iazdagird et verte
+<lb n="8"/>eos in dies sicut expositum est in Azige, id est in libro cursuum plan-
+<lb n="9"/>etarum, et adde desuper dies qui sunt inter primum annorum Arabum
+<lb n="10"/>et Iazdagird, et divide hoc per .CCCLXV. dies et quartam partem diei,
+<lb n="11"/>et quot divisiones <milestone unit="arline" n="125"/> exierint, tot erunt anni solares; et quod remanserit
+<lb n="12"/>ex mensibus et diebus erit ex anno imperfecto, quodque coniunctum
+<lb n="13"/>fuerit ex annis, ipsi sunt anni solares ab initio annorum Arabum. Proice
+<lb n="14"/>ergo omni anno signum unum, et incipe a Virgine, et ad quodcunque signum
+
+<pb n="330"/>
+<lb n="1"/>perduxerit te numerus, ipsum erit signum ad quod pervenit annus mundi
+<lb n="2"/>ab ascensione coniunctionis predicte secte.</p>
+<p n="10">
+<lb n="3"/> Aliis autem extra Alchindi visum est ut adderent super annos
+<lb n="4"/>Iazdagird perfectos .LX. unum <milestone unit="arline" n="130"/> annum et duos menses et .XII. dies ac .XVI.
+<lb n="5"/>horas ex annis Persarum, qui sunt sine fractione, id est sine quarta
+<lb n="6"/>diei, et extenderent hos annos in dies ac verterent dies in an-
+<lb n="7"/>nos solares, sicut prediximus, et inciperent proicere ab initio Libre.
+<lb n="8"/>Quod si volueris profectionem a signo coniunctionis secte, sit proiectio
+<lb n="9"/>a Scorpione. Si vero volueris profectionem ab ascensione regni, minue ex
+<lb n="10"/>annis Iazdagird perfectos .C.XVII. annos Persidos et verte eos in annos
+<lb n="11"/>solares sicut prediximus, et incipe proicere a Virgine. Rursum, si volueris
+<lb n="12"/>profectionem ab ascensione profectionis mutationis coniunctionis a
+<lb n="13"/>triplicitate <milestone unit="arline" n="135"/> aquatica ad triplicitatem igneam, minue ex annis Iazdagird per-
+
+<pb n="331"/>
+<lb n="1"/>fectis .CLXXVI. annos, et verte illos qui remanent in annos solares, et incipe
+<lb n="2"/>proicere a Leone. Et quo pervenerit numerus, in eodem signo erit profectio
+<lb n="3"/>uniuscuiusque initii eorum que prediximus.</p>
+<p n="11">
+<lb n="4"/> Et ex hoc directio. Hoc est ut dirigas significatorem aliquem
+<lb n="5"/>ad aliquem locum signorum et scias quid sit inter eos ex gradibus direc-
+<lb n="6"/>tionis, <milestone unit="arline" n="140"/> accipiasque unicuique gradui annum unum. Cum ergo volueris
+<lb n="7"/>hoc et fuerit ille significator in ascendente quem vis dirigere ad aliquam
+<lb n="8"/>partem circuli, minues ascensiones gradus in quo fuerit significator quem
+<lb n="9"/>volueris dirigere per ascensiones regionis de ascensionibus gradus illius ad
+<lb n="10"/>quem volueris eum dirigere, et quod remanserit, erunt gradus directionis.
+<lb n="11"/>Quod si fuerit significator in gradu .VII., minues ascensiones nadir, id est
+<lb n="12"/>oppositi, gradus in quo est significator de ascensionibus nadir illius gradus
+<lb n="13"/>ad quem volueris eum dirigere in illa regione. Si vero fuerit <milestone unit="arline" n="145"/> significator in
+<lb n="14"/>medio celi vel in angulo terre, minues ascensiones gradus significatoris de
+<lb n="15"/>ascensionibus illius gradus ad quem eum volueris dirigere per ascensiones
+<lb n="16"/>circuli directi, et quod remanserit, erunt gradus directionis.
+<lb n="17"/>Si vero fuerit ille significator quem volueris dirigere in alio loco extra
+
+<pb n="332"/>
+<lb n="1"/>quatuor angulos, aspicies longitudinem eius ab aliquo horum angulorum, qui
+<lb n="2"/>sunt angulus medii celi atque angulus terre. Hoc est: aspicies significa-
+<lb n="3"/>torem. Qui, si fuerit inter ascendens et medium celi, minues ascensiones
+<lb n="4"/>gradus medii celi per circulum directum de ascensionibus gradus significatoris.
+<lb n="5"/><milestone unit="arline" n="150"/> Et si fuerit inter .VII. et medium celi, minues ascensiones gradus significa-
+<lb n="6"/>toris de ascensionibus gradus medii celi per circulum directum, et quod
+<lb n="7"/>remanserit, ex qualicumque horum locorum fuerit, divides per partes
+<lb n="8"/>horarum diei illius gradus in quo fuerit significator, et quod exierit,
+<lb n="9"/>erunt hore longitudinis ab angulo. Et si fuerit inter ascendens et angu-
+<lb n="10"/>lum terre, minues ascensiones gradus significatoris per circulum directum de
+<lb n="11"/>ascensionibus gradus anguli terre. Rursum, si fuerit significator in-
+<lb n="12"/>ter angulum terre et .VII., minues ascensiones gradus anguli terre per cir-
+<lb n="13"/>culum directum de <milestone unit="arline" n="155"/> ascensionibus gradus significatoris, et quod remanserit,
+<lb n="14"/>ex qualicumque horum locorum fuerit, divides eum per tempora horarum
+<lb n="15"/>diei nadir, id est oppositi, gradus significatoris, et quod exierit, ipse
+<lb n="16"/>erunt hore longitudinis ab angulo.</p>
+<p n="12">
+<lb n="17"/> Cumque sciveris horas longitudinis ab angulo, et volueris dirige-
+<lb n="18"/>re significatorem ad aliquem locum circuli signorum, et fuerit significa-
+<lb n="19"/>tor in medio circuli orientali[s], qui est a medio celi usque ad angulum
+<lb n="20"/>terre, de eis qui succedunt ascendens, minue ascensiones gradus
+
+<pb n="333"/>
+<lb n="1"/>in quo fuerit significator <milestone unit="arline" n="160"/> de ascensionibus gradus illius ad quem
+<lb n="2"/>volueris dirigere per circulum directum, et quod remanserit, erit significa-
+<lb n="3"/>tor circuli directi. Serva eum. Post hec minue ascensiones illius gradus in
+<lb n="4"/>quo fuerit significator per ascensiones regionis de ascensionibus illius gradus
+<lb n="5"/>ad quem volueris eum dirigere per ascensiones regionis, et quod fuerit, erit
+<lb n="6"/>significator regionis. Post hec accipies residuum quod fuerit inter significa-
+<lb n="7"/>torem circuli directi et significatorem regionis, accipiesque sextam illius et
+<lb n="8"/>multiplicabis in horis longitudinis ab angulo, et quod fuerit, erit equa-
+<lb n="9"/>tio. Et si fuerit significator circuli directi minus significatore regionis, <milestone unit="arline" n="165"/>
+<lb n="10"/>addes equationem super significatorem circuli directi; et si fuerit significator
+<lb n="11"/>circuli directi plus, minues equationem ex eo; et quod remanserit, erunt
+<lb n="12"/>gradus directionis.
+<lb n="13"/>Item, si fuerit significator quem volueris dirigere in medio occidentali,
+<lb n="14"/>quod est ab angulo terre usque ad medium celi, de eo quod succedit .VII.,
+<lb n="15"/>minues ascensiones nadir gradus significatoris quem volueris dirigere de
+<lb n="16"/>ascensionibus nadir gradus illius ad quem volueris eum dirigere per cir-
+<lb n="17"/>culum directum, et quod remanserit, erit significator circuli directi. Post hec
+<lb n="18"/>minues ascensiones <milestone unit="arline" n="170"/> nadir gradus significatoris etiam per ascensiones re-
+<lb n="19"/>gionis de ascensionibus nadir illius gradus ad quem volueris eum dirigere,
+
+<pb n="334"/>
+<lb n="1"/>et quod remanserit, erit significator regionis. Deinde accipies residuum quod
+<lb n="2"/>fuerit inter significatorem circuli directi et significatorem regionis, accipiesque
+<lb n="3"/>sextam partem eius et multiplicabis in horis longitudinis ab angulo, et
+<lb n="4"/>quod fuerit, erit equatio. Post hec aspicies significatorem circuli directi.
+<lb n="5"/>Si fuerit minus significatore regionis, addes equationem super significatorem
+<lb n="6"/>circuli directi; et si fuerit significator circuli directi plus significatore regionis,
+<lb n="7"/>minues equationem de significatore <milestone unit="arline" n="175"/> circuli directi; et quod ex eo ex-
+<lb n="8"/>ierit, erunt gradus directionis.
+<lb n="9"/>Quod si fuerit significator in aliqua quarta et locus ad quem dirigis eum
+<lb n="10"/>in alia quarta, diriges significatorem ad angulum qui eum succedit; post
+<lb n="11"/>hec diriges ab angulo ad locum, quemadmodum ostendi tibi directionem ab
+<lb n="12"/>angulo, et iunges utrasque directiones.
+<lb n="13"/>Quod cum sciveris significatorem et volueris scire quo perveniet de
+<lb n="14"/>circulo signorum in aliquo annorum, fueritque significator in ascendente,
+<lb n="15"/>addes numerum annorum super ascensiones gradus ascendentis, <milestone unit="arline" n="180"/> et facies
+<lb n="16"/>eum arcum in ascensione regionis, et quo exierit arcus de circulo signo-
+<lb n="17"/>rum, ibi perveniet directio in eodem anno. Si vero fuerit significator in .VII.,
+<lb n="18"/>addes numerum annorum super ascensiones nadir gradus significatoris, et ar-
+
+<pb n="335"/>
+<lb n="1"/>cuabis eum etiam in ascensionibus regionis, et quo exierit de circulo
+<lb n="2"/>signorum, ad eius nadir perveniet directio in eodem anno. Quod si fuerit sig-
+<lb n="3"/>nificator in .X. vel in quarto, addes super ascensiones gradus significatoris
+<lb n="4"/>in circulo directo numerum annorum, et arcuabis eum in ascensionibus circuli
+<lb n="5"/>directi, et quod exierit de <milestone unit="arline" n="185"/> circulo signorum, ibidem perveniet directio
+<lb n="6"/>in eodem anno.
+<lb n="7"/>Si autem fuerit significator extra .IIII. loca, que sunt anguli, scies
+<lb n="8"/>horas longitudinis ab angulo, sicut predixi tibi. Quod si fuerit significator in
+<lb n="9"/>medietate orientali, addes super ascensiones gradus significatoris per circulum
+<lb n="10"/>directum numerum annorum quos volueris, et arcuabis hoc in ascensionibus
+<lb n="11"/>circuli directi, et quod exierit, erit significator circuli directi. Serva eum.
+<lb n="12"/>Post hec addes numerum annorum etiam super ascensiones gradus signifi-
+<lb n="13"/>catoris in regione, et arcuabis hoc in ascensionibus regionis, et quod <milestone unit="arline" n="190"/> fuerit,
+<lb n="14"/>erit significator regionis. Post hec accipies sextam partem residui inter
+<lb n="15"/>significatorem circuli directi et significatorem regionis, et multiplicabis eum
+<lb n="16"/>in horis longitudinis ab angulo, et quod fuerit, erit equatio. Quod si fuerit
+<lb n="17"/>significator circuli directi minus significatore regionis, addes equationem
+<lb n="18"/>super significatorem circuli directi; et si fuerit plus, minues eam de eo; et quod
+<lb n="19"/>remanserit, ibi perveniet directio ex circulo signorum in eodem anno. Quod
+<lb n="20"/>si fuerit significator in medietate occidentali, facies cum nadir gradus signifi-
+<lb n="21"/>catoris sicut fecisti cum gradu significatoris in opere quod est ante eum, et
+<lb n="22"/>quod <milestone unit="arline" n="195"/> fuerit, ibidem perveniet directio ex circulo signorum in eodem anno.
+<lb n="23"/>Et locus ad quem pervenit directio, dicitur locus divisionis, et dominus
+<lb n="24"/>termini illius loci dicitur divisor. Quod si fuerit in gradu divisionis pla-
+
+<pb n="336"/>
+<lb n="1"/>neta aut radii eius aut prope locum ante eum, dicitur hic planeta aut domi-
+<lb n="2"/>nus radiorum particeps divisoris in divisione. Significatores vero qui dirigun-
+<lb n="3"/>tur sunt .V. loca, id est gradus ascendens et gradus Solis et gradus
+<lb n="4"/>Lune, gradus quoque Partis Fortune ac gradus medii celi. Gradus ergo
+<lb n="5"/>ascendentis dirigitur ad accidentia dinoscenda que <milestone unit="arline" n="200"/> accidunt in cor-
+<lb n="6"/>pore; et Sol ad causas dignitatis et exaltationis, honoris quoque ac regni;
+<lb n="7"/>et Luna propter esse anime et corporis atque coniugii; et Pars Fortune
+<lb n="8"/>propter acquisitiones et profectus, exiguitatem quoque et largitatem; et
+<lb n="9"/>medium celi propter magisterium et ceteras dispositiones particulares et esse
+<lb n="10"/>earum.</p>
+<p n="13">
+<lb n="11"/> Si autem fuerit ascendens revolutionis alicuius annorum mundi vel na-
+<lb n="12"/>tivitatum, dirigentur significatores eius secundum hanc directionem,
+<lb n="13"/>unicuique scilicet gradui diem unum. Et quibusdam videtur ut dirigan-
+<lb n="14"/>tur significatores anni hoc modo: omnibus scilicet <milestone unit="arline" n="205"/> .L. et .VIIII. minutis et
+<lb n="15"/>.VIII. secundis unum diem. Nam directio regni et regum sic dirigitur
+<lb n="16"/>eis: a gradu scilicet medii celi per ascensiones circuli directi, omnibus
+<lb n="17"/>.L.VIIII. minutis et .VIII. secundis diem unum, donec perveniat ad bonos
+
+<pb n="337"/>
+<lb n="1"/>vel malos planetas. Et dirigitur esse corporum regum, incolumitate
+<lb n="2"/>scilicet aut infirmitate, ex gradu ascendentis ad bonos vel malos plan-
+<lb n="3"/>etas, omnibus .LVIIII. minutis et .VIII. secundis diem unum per ascensiones
+<lb n="4"/>regionis. Et directio in revolutione annorum mundi ad prenoscendum
+<lb n="5"/>esse <milestone unit="arline" n="210"/> vulgi vel rusticorum, a gradu ascendentis similiter. Et ad prenoscen-
+<lb n="6"/>dum esse regis, a gradu medii celi. Et in revolutione annorum nativitatum
+<lb n="7"/>ad prenoscendum esse nati, a gradu ascendentis revolutionis, omnibus .LVIIII.
+<lb n="8"/>minutis et .VIII. secundis per ascensiones regionis diem unum.</p>
+<p n="14">
+<lb n="9"/> Et ex hoc algerbughtar in nativitatibus, et est directio gradus as-
+<lb n="10"/>cendentis. Hoc est ut aspicias gradum ascendentis in termino cuius plan-
+<lb n="11"/>ete sit, et minuas ascensiones ascendentis in regione de ascensionibus
+<lb n="12"/>que sunt in directo finis <milestone unit="arline" n="215"/> termini illius planete per ascensiones regionis,
+<lb n="13"/>et quod remanserit, accipias unicuique gradui unum annum et omnibus .V.
+<lb n="14"/>minutis mensem et omni minuto .vi. dies, et erit dominus termini dispositor
+<lb n="15"/>annorum qui dicitur divisor. Post hec accipies gradus termini qui
+<lb n="16"/>eum succedit, et vertes eos etiam in gradus ascensionum, et quod
+<lb n="17"/>fuerit, accipies unicuique gradui annum unum et omnibus .V. minutis
+<lb n="18"/>mensem et omni minuto sex dies, eritque dominus termini divisor et dis-
+<lb n="19"/>positor illorum annorum. Similiter intrabis cum omni domino termini
+<lb n="20"/>per successionem usque in finem vite. <milestone unit="arline" n="220"/> Et si fuerit in termino alicuius planete
+
+<pb n="338"/>
+<lb n="1"/>planeta aut radii eius, erit particeps eius in divisione. Et hec divisio
+<lb n="2"/>dicitur divisio algerbughtar.</p>
+<p n="15">
+<lb n="3"/> Et ex hoc duodenarie planetarum et domorum. Hoc est ut
+<lb n="4"/>aspicias quantum ambulaverit planeta in signo suo aut gradus domus
+<lb n="5"/>quam volueris ex gradibus et minutis et multiplicabis hoc in .XII. Post
+<lb n="6"/>hec addes super istum quod exivit ex multiplicatione, gradus atque minuta
+<lb n="7"/>que multiplicasti in .xii., et quod collectum fuerit ex eo, proice eum ab
+<lb n="8"/>initio eiusdem signi, dans unicuique signo .xxx. gradus; quo finitus
+<lb n="9"/>fuerit numerus, <milestone unit="arline" n="225"/> ibi erit duodenaria planetarum ac domorum.</p>
+<p n="16">
+<lb n="10"/> Et ex hoc annaubaharat, que sunt novenarie. Cuius scientia
+<lb n="11"/>est ut scias quantum ambulaverit planeta in signo suo ex gradibus
+
+<pb n="339"/>
+<lb n="1"/>atque minutis aut gradus domus cuius volueris scire novenarium. Post
+<lb n="2"/>hec divides signum in novem divisiones, et unaqueque divisio est ex tribus
+<lb n="3"/>gradibus et tertia. Post hec aspicias in quo novenario ex novenariis ce-
+<lb n="4"/>ciderit gradus planete aut gradus domus. Post hec dabis primum novenar-
+<lb n="5"/>iorum ex signis <milestone unit="arline" n="230"/> domino signi mobilis eiusdem triplicitatis et secun-
+<lb n="6"/>dum novenarium domino signi quod succedit, donec venias ad aliquod
+<lb n="7"/>novenarium ex quo est gradus, eritque planeta dominus eius novenarii.</p>
+<p n="17">
+<lb n="8"/> Verbi gratia, signum ex quo fuerit gradus ille erat ex triplicitate
+<lb n="9"/>Arietis. Erit ergo primum novenarium eiusdem signi Martis domini Ari-
+<lb n="10"/>etis, et secundum novenarium Veneris domine Tauri, et novenarium ter-
+<lb n="11"/>tium <milestone unit="arline" n="235"/> Mercurii domini Geminorum; similiter usque ad novenarium nonum.
+<lb n="12"/>Et si fuerit signum ex triplicitate Cancri, erit novenarium eius primum
+<lb n="13"/>Lune, et secundum novenarium Solis domini Leonis, et tertium Mercurii do-
+<lb n="14"/>mini Virginis. Et si fuerit signum ex triplicitate Libre, erit primum novenar-
+<lb n="15"/>ium eius Veneris domine Libre, et secundum Martis domini Scorpionis, et
+<lb n="16"/>tertium Iovis domini Sagittarii. Similiter, in triplicitate Capricorni, primum
+
+<pb n="340"/>
+<lb n="1"/>novenarium eius est Saturni domini Capricorni, et secundum Saturni
+<lb n="2"/>domini Aquarii, et tertium Iovis domini Piscis; deinde que sequuntur
+<lb n="3"/>secundum ordinem successionum signorum. Verbi gratia, <milestone unit="arline" n="240"/> planeta vel
+<lb n="4"/>aliqua domus domorum erit in nonodecimo gradu Aquarii. Cumque
+<lb n="5"/>dividatur signum per novem divisiones, erit gradus nonusdecimus in divi-
+<lb n="6"/>sione sexta, et quia signum Aquarii est ex triplicitate Libre, ponitur primum
+<lb n="7"/>novenarium eius Veneris domine Libre et secundum Martis domini Scorpi-
+<lb n="8"/>onis et tertium Iovis domini Sagittarii et quartum Saturni domini Capricorni
+<lb n="9"/>et quintum etiam Saturni domini Aquarii et sextum Iovis domini Piscis;
+<lb n="10"/>eritque naubahar, id est novenarium, deciminoni gradus Aquarii  <milestone unit="arline" n="245"/>
+<lb n="11"/>Iovis.</p>
+<p n="18">
+<lb n="12"/> Et ex hoc addorungen. Hoc est ut dividas ascendens per
+<lb n="13"/>tres partes, et sit omnis divisio .X. graduum, dabisque divisionem primam
+<lb n="14"/>domino ascendentis et secundam domino quinti signi et tertiam domi-
+
+<pb n="341"/>
+<lb n="1"/>no noni. Nam ascendens et quintum et nonum semper sunt triplicitas.
+<lb n="2"/>Verbi gratia, Aries erat ascendens; ab initio Arietis usque in decimo
+<lb n="3"/>gradu eius dorungen id est decanus, est Mars. Et si fuerit as-
+<lb n="4"/>cendens a .X. gradibus usque in .XX. gradus, <milestone unit="arline" n="250"/> erit eius dorungen Sol,
+<lb n="5"/>dominus Leonis. Et si fuerit a .XX. usque in finem eius, erit eius
+<lb n="6"/>dorungen Iupiter, dominus Sagittarii.</p>
+<p n="19">
+<lb n="7"/> Et ex hoc dominus orbis in nativitatibus. Hoc est ut aspicias
+<lb n="8"/>dominum hore in qua oritur natus, dabisque ascendens et dominum
+<lb n="9"/>hore anno primo nativitatis eius, et significabitur per esse illius, id est do-
+<lb n="10"/>mini hore, sanitas seu infirmitas corporis nati, sicut significatur per
+<lb n="11"/>dominum ascendentis radicis. Et dabis dominum secunde hore ab eo se-
+<lb n="12"/>cunde domui ab ascendente in secundo anno, et significabitur per esse
+<lb n="13"/>suum in eodem anno esse substantie et cetera, sicut <milestone unit="arline" n="255"/> significatur per esse do-
+<lb n="14"/>mini domus substantie. Et dabis dominum hore tertie domui tertie ab
+
+<pb n="342"/>
+<lb n="1"/>ascendente radicis in tertio anno, et significabitur per esse illius in
+<lb n="2"/>eodem anno esse fratrum et sororum ceterorumque sicut significatur per
+<lb n="3"/>esse domini tertie domus. Et dabis dominum quarte hore quarte domui ab
+<lb n="4"/>ascendente radicis in quarto anno, et significabitur per esse suum in
+<lb n="5"/>eodem anno esse parentum, patrum scilicet, et eorum qui significantur per
+<lb n="6"/>domum quartam. Similiter facies de dominis horarum per successionem. <milestone unit="arline" n="260"/>
+<lb n="7"/>Dabis scilicet dominum uniuscuiusque hore domui ex domibus radicalibus,
+<lb n="8"/>eritque domini hore .XII. ab hora nativitatis domus .XII. ab ascendente radi-
+<lb n="9"/>cis, et dominus .XIII. hore a nativitate erit dominus ascendentis radicis
+<lb n="10"/>et anni .XIII., et dominus quarte .X. hore ab ea erit domus substantie
+<lb n="11"/>et quarti decimi anni. Et nominatur dominus hore prime dominus ascen-
+<lb n="12"/>dentis hore, et dominus secunde hore dominus hore domus substantie,
+<lb n="13"/>et dominus tertie hore dominus hore domus fratrum, et per hoc signifi-
+<lb n="14"/>catur esse pueri et fratrum, et sic de ceteris. Similiter dominus <milestone unit="arline" n="265"/> unius-
+<lb n="15"/>cuiusque harum horarum nominatur nomine domus et nominatur etiam
+<lb n="16"/>orbis dominus, et significatur per eum omni anno sicut significatur per
+
+<pb n="343"/>
+<lb n="1"/>alcelchodeu, hoc est per dominum anni. Et quidam astrologorum po-
+<lb n="2"/>nunt dominum orbis, dominum scilicet ascendentis radicis, anno primo, et
+<lb n="3"/>secundo anno planetam qui hunc succedit, et tertio anno planetam qui
+<lb n="4"/>succedit hunc, sicut predictum est in domino hore.</p>
+<p n="20">
+<lb n="5"/> Et ex hoc dispositio alfirdariet. Hoc est, cum fuerit nativitas diurna,
+<lb n="6"/>preerit in initio vite <milestone unit="arline" n="270"/> dispositioni eius firdarie Sol secundum quantitatem
+<lb n="7"/>annorum firdarie eius, qui sunt decem; post hec, planeta qui succedit Solem,
+<lb n="8"/>qui est Venus, cuius firdarie anni sunt .VIII.; et post Venerem, planeta qui
+<lb n="9"/>eum succedit, qui est Mercurius, et anni eius firdarie sunt .XIII.; deinde
+<lb n="10"/>Luna, et anni eius firdarie sunt .VIIII.; deinde Saturnus, et anni eius fir-
+<lb n="11"/>darie sunt .XI.; deinde Iupiter, et anni eius firdarie sunt .XII.; deinde Mars
+<lb n="12"/>cuius anni firdarie sunt .VII.; deinde Caput, cuius anni firdarie sunt
+<lb n="13"/>.III.; et post hec Cauda, et anni eius firdarie sunt duo. Fiunt anni
+<lb n="14"/>collecti simul .LXXV. anni. Post hec revertitur dispositio ad Solem, et
+<lb n="15"/>similter usque ad ultimum planetarum. Si autem fuerit nativitas nocturna,
+
+<pb n="344"/>
+<lb n="1"/>incipiet dispositio a Luna, disponetque annos firdarie eius,
+<lb n="2"/>qui sunt
+<lb n="3"/>.VIIII., <milestone unit="arline" n="275"/> similiter planeta post planetam, sicut prediximus in Sole. Cumque
+<lb n="4"/>disposuerit planeta annos firdarie sue, disponet proprie primam septimam
+<lb n="5"/>solus, id est septimam partem firdarie sue, deinde participatur ei
+<lb n="6"/>in septima secunda planeta qui eum succedit; post hec participatur ei in
+<lb n="7"/>dispositione in septima tertia tertius planeta, qui succedit secundum;
+<lb n="8"/>et ita donec participetur ei qui est ante eum in ultima septima ex annis
+<lb n="9"/>eius firdarie. Et est unicuique, cum participatur alteri, iudicium super
+<lb n="10"/>nativitatem.</p>
+<p n="21">
+<lb n="11"/><milestone unit="arline" n="280"/> Et ex hoc almamar, id est supereminentia, quia dicitur
+<lb n="12"/>quod planeta vadit super planetam. Hoc est ut aspicias medium cursum plan-
+<lb n="13"/>ete et locum eius equatum, et si fuerit locus eius equatus minus medio
+<lb n="14"/>cursu eius, erit ascendens a medio circuli sui ad summitatem circuli
+<lb n="15"/>sui; et si fuerit locus eius equatus plus medio cursu suo, erit descendens
+<lb n="16"/>a medio circuli sui ad infimum illius; et si equalis fuerit locus eius equa-
+<lb n="17"/>tus medio cursui, erit in medio circuli sui. [Deinde minues], postquam
+
+<pb n="345"/>
+<lb n="1"/>hoc certissime cognoveris, minue minorem eorum de maiori, et
+<lb n="2"/>multiplicabis quod remanserit per .VII., <milestone unit="arline" n="285"/> et divides per .XXII., et quod ex-
+<lb n="3"/>ierit de divisione, erit hoc omni planete pro quantitate ascensionis eius
+<lb n="4"/>vel descensionis. De Venere et Mercurio accipimus quod est inter utraque
+<lb n="5"/>loca, id est quod est inter locum Solis et Veneris et Mercurii, et facimus ut
+<lb n="6"/>supra, quia per hoc scimus quis eorum sit fortior in circulo augis. Set Venus
+<lb n="7"/>et Mercurius, cum fuerit unusquisque eorum orientalis et fuerit locus eius
+<lb n="8"/>equatus minus loco Solis, accipies residuum quod est inter locum eius et
+<lb n="9"/>locum Solis, faciesque cum eo quemadmodum facis in planetis altioribus ex
+<lb n="10"/>multiplicatione et divisione.
+<lb n="11"/>Et proprior ac fortior sit significatio planetarum dum abierint super
+<lb n="12"/>se invicem, id est dum abierit alte super alterum, in coniunctione.
+<lb n="13"/>In oppositione autem <milestone unit="arline" n="290"/> et in quarto aspectu erit significatio eorum mi-
+<lb n="14"/>nus apparens et debilior. Et cum fuerit unus eorum ascendens et alter
+<lb n="15"/>descendens, tunc ascendens eorum vadit super descendentem. Cum vero
+<lb n="16"/>fuerint descendentes, ille qui fuerit minoris descensionis vadit super illum
+
+<pb n="346"/>
+<lb n="1"/>qui fuerit plus descensionis. Et si fuerint ascendentes, ille qui fuerit
+<lb n="2"/>maioris ascensionis vadit super eum qui fuerit minoris ascensionis.
+<lb n="3"/>Dicitur quoque et alio modo, id est ut scias latitudinem utrorumque plan-
+<lb n="4"/>etarum, quia septemtrionalis eorum vadit super meridianum. Et si fuerint
+<lb n="5"/>ambo septemtrionales, ille qui fuerit plus latitudinis vadit super eum qui fuerit
+<lb n="6"/>minoris latitudinis. Si vero fuerint utrique meridiani, ille qui fuerit
+<lb n="7"/>minoris latitudinis vadit super eum qui fuerit maioris latitudinis, ideoque
+<lb n="8"/>dicitur quia Luna vadit super Iovem in his <milestone unit="arline" n="295"/> duobus operibus. Similiter,
+<lb n="9"/>si fuerit aliquis duorum planetarum in medio circuli sui aut nullam
+<lb n="10"/>habens latitudinem, tunc unus eorum ascendens in circulo suo et sep-
+<lb n="11"/>temptrionalis vadit super eum qui caret latitudine et vadit ipse super
+<lb n="12"/>meridianum et super descendentem.</p>
+<p n="22">
+<lb n="13"/> Et ex hoc apertio portarum. Dicitur enim cum iungitur planeta
+
+<pb n="347"/>
+<lb n="1"/>inferior planete superiori et fuerint cum hoc domus eorum opposite.</p>
+<p n="23">
+<lb n="2"/> Et ex hoc albuzt, et est res quam valde observabant Indi. Nam
+<lb n="3"/>ipsi <milestone unit="arline" n="300"/> numerant post coniunctionem, scilicet Solis et Lune, .XII. horas,
+<lb n="4"/>et applicant eas Soli, et dividunt .XII. horas ternas, id est in tres
+<lb n="5"/>partes, in haiz Solis, et iudicant super omnes .IIII. horas ex eis secun-
+<lb n="6"/>dum iudicium dominorum triplicitatis Solis hora coniunctionis. Deinde
+<lb n="7"/>dant Veneri post .XII. horas Solis etiam .XII., et dividunt eas iterum
+<lb n="8"/>ternas, et iudicant super omnem ternam divisionem secundum dominos
+<lb n="9"/>triplicitatis Veneris hora coniunctionis. Post hec faciunt similiter cum
+<lb n="10"/>Mercurio et ceteris planetis per successiones eorum, <milestone unit="arline" n="305"/> donec revertatur
+<lb n="11"/>orbis ad Solem post .LXXX.IIII. horas, et non cessant sic facere frequenter,
+<lb n="12"/>donec veniat coniunctio secunda.</p>
+<p n="24">
+<lb n="13"/> Et quidam dicunt quod albuzt sit hoc: quod post coniunctionem
+
+<pb n="348"/>
+<lb n="1"/>sint .XII. hore inequales que vocantur combuste, et non oportet aliquem
+<lb n="2"/>incipere in eis aliquod opus; et post has .XII. sunt .LXXII. hore in-
+<lb n="3"/>combuste, in quibus est utilis inceptio operum; et post <milestone unit="arline" n="310"/> .LXXII. horas
+<lb n="4"/>incombustas, .XII. combuste; usque ad coniunctionem que succedit.
+<lb n="5"/>Post hec dividunt has .XII. horas in .III. divisiones, dixeruntque quod qui
+<lb n="6"/>inceperit in .IIII. horis primis bellare, timenda erit perditio anime sue,
+<lb n="7"/>et qui inceperit in .4. horis secundis, timendum erit ei detrimentum
+<lb n="8"/>corporis sui sine amissione anime sue, et qui inceperit in .4. horis ul-
+<lb n="9"/>timis, timendum erit ei detrimentum substantie et sociorum [secundis
+<lb n="10"/>arare, timendum erit ei detrimentum magnum in <milestone unit="arline" n="315"/> omnibus que possidet
+<lb n="11"/>et in suo corpore absque amissione anime sue et timetur super eos qui ad
+
+<pb n="349"/>
+<lb n="1"/>eum pertinent perditio].</p>
+<p n="25">
+<lb n="2"/> Et quia explevimus expositionem eorum que sciuntur ex nomini-
+<lb n="3"/>bus astrologorum, sequamur hanc commemorationem universarum par-
+<lb n="4"/>tium.</p></div>
+
+<div type="chapter" n="5">
+<pb n="350"/>
+<p n="1">
+<lb n="1"/> Differentia quinta in commemoratione universarum partium.</p>
+<p n="2">
+<lb n="2"/> Et cum notaverimus in loco partium ‘accipe a loco illo in locum illum
+<lb n="3"/>et proice hoc ab ascendente vel de alio loco’, dicimus ut addas super id
+<lb n="4"/>quod fuerit inter utraque loca gradus ascendentis, et proice ab ascendente
+<lb n="5"/>vel ab initio <milestone unit="arline" n="5"/> signi a quo proicis.</p>
+<p n="3">
+<lb n="6"/> Cuius exemplar est opus Partis Fortune, quia accipis quicquid est
+<lb n="7"/>inter Solem et Lunam ex gradibus, et addis super eos gradus signi
+<lb n="8"/>ascendentis, et quod collectum fuerit proicis eum .XXX. .XXX. gradus.
+<lb n="9"/>Et incipis proicere ab initio signi ascendentis, et quo finitur numerus,
+<lb n="10"/>ibi est Pars Fortune; et in nocte econtra a Luna in Solem, et addes
+
+<pb n="351"/>
+<lb n="1"/>desuper gradus signi ascendentis, et proicis hoc .XXX. .XXX.</p>
+<p n="4">
+<lb n="2"/> Incipiamus itaque post Partem Fortune partes .XII. domorum, et in-
+<lb n="3"/>cipiamus ab ascendente.
+<lb n="4"/>Prima <milestone unit="arline" n="10"/> domus. Pars vite accipitur in die a Iove in Saturnum, et in
+<lb n="5"/>nocte econverso, et proicitur ab ascendente. Pars hilesg accipitur a gradu
+<lb n="6"/>coniunctionis seu preventionis que fuerit ante nativitatem in gradum
+<lb n="7"/>Lune, et proicitur ab ascendente. Pars <sic>futurarum</sic> [sic]  absentium accipitur in die a Luna
+<lb n="8"/>usque in Solem, et in nocte econverso, et proicitur ab ascendente. Pars
+<lb n="9"/>dilectionis et concordie accipitur in die a Parte Fortune in partem futuro-
+<lb n="10"/>rum, et in nocte econverso, et proicis ab ascendente. Pars stabilitatis
+<lb n="11"/>et durationis et fiducie ascendentis et durationis nati <milestone unit="arline" n="15"/> est sicut
+<lb n="12"/>pars dilectionis et concordie. Pars animositatis et audacie accipitur in die
+<lb n="13"/>a Marte in gradum Partis Fortune, et in nocte econverso, et proice ab
+<lb n="14"/>ascendente.</p>
+<p n="5">
+<lb n="15"/> Secunda domus. Pars substantie accipitur in die et nocte a
+<lb n="16"/>domino domus substantie in gradum atque minutum domus substantie, et
+
+<pb n="352"/>
+<lb n="1"/>proicitur ab ascendente. Pars paupertatis et parvitatis ingenii accipitur in
+<lb n="2"/>die a parte futurorum in Partem Fortune, et in nocte econverso, et proicitur
+<lb n="3"/>ab ascendente. Pars beatitudinis et triumphi atque victorie accipitur <milestone unit="arline" n="20"/> in
+<lb n="4"/>die a parte futurorum in Iovem, et in nocte econverso, et proicitur ab
+<lb n="5"/>ascendente.</p>
+<p n="6">
+<lb n="6"/> Tertia domus. Pars fratrum accipitur in die a Saturno in Iovem,
+<lb n="7"/>et in nocte similiter [econverso], et proicitur ab ascendente. Pars mortis
+<lb n="8"/>fratrum accipitur in die a Sole in Saturnum, et in nocte econverso, et proicitur
+<lb n="9"/>ab ascendente; et dum fuerit Saturnus sub radiis, accipitur in die a Sole in
+<lb n="10"/>Iovem, et in nocte econverso, et proicitur ab ascendente.</p>
+<p n="7">
+<lb n="11"/><milestone unit="arline" n="25"/> Quarta domus. Pars patrum accipitur in die a Sole in Saturnum,
+<lb n="12"/>et in nocte econverso, et proicitur ab ascendente. Pars mortis patris accip-
+<lb n="13"/>itur in die a Saturno in Iovem, et in nocte econverso, et proicitur ab ascen-
+<lb n="14"/>dente. Pars avorum accipitur in die a domino domus Solis in Saturnum,
+<lb n="15"/>et in nocte econverso, et proicitur ab ascendente; et si fuerit Sol in domo
+<lb n="16"/>sua vel in aliqua domorum Saturni, accipe in die a Sole in Saturnum,
+<lb n="17"/>et in nocte econverso, et proice ab ascendente; et non consideres utrum <milestone unit="arline" n="30"/>
+<lb n="18"/>sit Saturnus apparens vel sub radiis. Pars hereditatum ac possessionum accip-
+<lb n="19"/>itur in die ac nocte a Saturno in Lunam, et proicitur ab ascendente. Pars nobili-
+
+<pb n="353"/>
+<lb n="1"/>tatis nati et eius de quo fit dubitatio utrum sit filius illius patris cui
+<lb n="2"/>imponitur an alterius, accipitur in die a gradu Solis in gradum exaltationis
+<lb n="3"/>sue, et in nocte a gradu Lune in gradum exaltationis sue, et proicitur ab
+<lb n="4"/>ascendente; quod si fuerit Sol in die in gradu exaltationis sue et Luna
+<lb n="5"/>in nocte in gradu exaltationis sue, erit pars in gradu ascendente et erit
+<lb n="6"/>significatio gradui eius et gradui ascendentis. Pars finis rerum ac-
+<lb n="7"/>cipitur in die <milestone unit="arline" n="35"/> et nocte a Saturno usque in dominum domus coniunctionis
+<lb n="8"/>aut preventionis, et additur desuper gradus ascendentis, et proicitur ab
+<lb n="9"/>ascendente.</p>
+<p n="8">
+<lb n="10"/> Quinta domus. Pars filiorum accipitur in die a Iove in Saturnum,
+<lb n="11"/>et in nocte econverso, et proicitur ab ascendente. Pars que significat tem-
+<lb n="12"/>pus in quo habebit filios et numerum eorum, masculinorum scilicet sive
+<lb n="13"/>femininarum et quid pariet mulier accipitur in die ac nocte a Marte in
+<lb n="14"/>Iovem, et proicitur ab ascendente. Pars scientie filii masculi et femine
+<lb n="15"/>accipitur in die et nocte a Luna in Iovem, et proicitur ab ascendente. <milestone unit="arline" n="40"/> Pars
+
+<pb n="354"/>
+<lb n="1"/>per quam scitur natus de quo fit interrogatio utrum sit masculus an femina
+<lb n="2"/>accipitur in die [ac nocte] a domino domus Lune in Lunam, et in nocte econ-
+<lb n="3"/>verso, et proicitur ab ascendente. Pars significans filium cum pervenerit
+<lb n="4"/>Iupiter ad eum, accipitur in die ac nocte a Marte in Iovem, et proicitur ab
+<lb n="5"/>ascendente. Pars delectationis accipitur in die ac nocte a Venere in Sat-
+<lb n="6"/>urnum, et proicitur ab ascendente. Pars scientie esse filiarum accipitur
+<lb n="7"/>in die ac nocte a Luna in Venerem, et proicitur ab ascendente.</p>
+<p n="9">
+<lb n="8"/> Sexta domus. Pars infirmitatis et azemena, id est debilitatio
+<lb n="9"/>inseparabilis alicuius membri, accipitur in die a Saturno in Martem, et
+<lb n="10"/>in nocte <milestone unit="arline" n="45"/> econverso, et proicitur ab ascendente. Pars servorum accipitur in die
+<lb n="11"/>a Mercurio in Lunam, et in nocte econverso, et proicitur ab ascendente.
+<lb n="12"/>Et dixit Alendezgoz: accipitur in die a Mercurio in Partem Fortune, et in
+<lb n="13"/>nocte econverso, et proicitur ab ascendente. Et dixit: oportet ut utamur
+<lb n="14"/>utrisque partibus insimul.</p>
+<p n="10">
+<lb n="15"/> Septima domus. Pars desponsationis virorum accipitur in die
+<lb n="16"/>et nocte a Sole in Venerem, et proicitur ab ascendente; et hec pars sim-
+<lb n="17"/>ilis est parti mandatorum vel rumorum. Pars desponsationis mulierum vel
+
+<pb n="355"/>
+<lb n="1"/>coniugii ab Hermete <milestone unit="arline" n="50"/> accipitur in die ac nocte a Venere in Saturnum, et
+<lb n="2"/>proicitur ab ascendente; et hec pars congruit parti cultus terre. Item,
+<lb n="3"/>pars desponsationis mulierum secundum Welium accipitur in die ac nocte
+<lb n="4"/>a Sole in Martem, et proicitur ab ascendente. Pars delectationis et
+<lb n="5"/>voluptatis accipitur in die ac nocte a Venere in gradum septimi, et proicitur
+<lb n="6"/>ab ascendente. Pars nuptiarum accipitur in die ac nocte a Saturno in Venerem,
+<lb n="7"/>et proicitur ab ascendente.</p>
+<p n="11">
+<lb n="8"/> Octava domus. Pars mortis accipitur in die ac nocte a Luna in
+<lb n="9"/>gradum <milestone unit="arline" n="55"/> et minutum domus octave, et additur desuper quod ambulaverit
+<lb n="10"/>Saturnus in signo suo, et proicitur ab initio signi Saturni. Pars planete
+<lb n="11"/>qui interficit accipitur in die a domino gradus ascendentis in gradum
+<lb n="12"/>Lune, et in nocte econverso, et proicitur ab ascendente. Pars anni in quo
+<lb n="13"/>timetur nato mors et paupertas et impedimentum ac destructio accipitur
+<lb n="14"/>in die ac nocte a Saturno in gradum domini domus coniunctionis aut
+<lb n="15"/>preventionis que fuerit ante nativitatem, et proicitur ab ascendente. Pars
+<lb n="16"/>vinctionis et carceris et utrum liberetur ab eo an non, accipitur in die a
+<lb n="17"/>Saturno in Partem <milestone unit="arline" n="60"/> Fortune, et in nocte econverso, et proicitur ab ascendente.</p>
+<p n="12">
+<lb n="18"/> Nona domus. Pars peregrinationis accipitur in die ac nocte a
+
+<pb n="356"/>
+<lb n="1"/>domino domus none in gradum et minutum domus none, et proicitur ab
+<lb n="2"/>ascendente. Pars itineris in aqua accipitur in die a Saturno in .XV.
+<lb n="3"/>gradum signi Cancri, et in nocte econverso, et proicitur ab ascendente; quod
+<lb n="4"/>si fuerit Saturnus in .XV. gradu Cancri, erit gradus partis <milestone unit="arline" n="65"/> gradus as-
+<lb n="5"/>cendentis. Pars religionis accipitur in die a Luna in Mercurium, et in nocte
+<lb n="6"/>econverso, et proicitur ab ascendente.</p>
+<p n="13">
+<lb n="7"/> Decima domus. Pars regni et quid operis faciat natus, ac-
+<lb n="8"/>cipitur in die ac nocte a Saturno in Lunam, et proicitur ab ascendente. Pars
+<lb n="9"/>regis atque regni accipitur in die a Marte in Lunam, et in nocte econverso,
+<lb n="10"/>et proicitur ab ascendente; et est ei alia pars similis parti patrum. Pars
+<lb n="11"/>principatuum et operis et regni <milestone unit="arline" n="70"/> secundum Welium accipitur in die ac
+<lb n="12"/>nocte a Sole in gradum medii celi, et proicitur ab ascendente. Pars significans
+<lb n="13"/>utrum sit causa regni an non, accipitur in die ac nocte a Sole in gradum
+<lb n="14"/>medii celi, et proicitur a Iove. Pars matris accipitur in die a Venere in
+<lb n="15"/>Lunam, et in nocte econverso, et proicitur ab ascendente.</p>
+<p n="14">
+<lb n="16"/> Undecima domus. Pars amicorum accipitur in die ac nocte a
+<lb n="17"/>Luna in Mercurium, <milestone unit="arline" n="75"/> et proicitur ab ascendente. Et dixit Alendezgoz: accip-
+<lb n="18"/>itur in nocte econverso. Pars significans effectum amicorum et inimicitie
+
+<pb n="357"/>
+<lb n="1"/>accipitur in die a Parte Fortune in partem futurorum,
+<lb n="2"/>et in nocte econverso, et
+<lb n="3"/>proicitur ab ascendente</p>
+<p n="15">
+<lb n="4"/><milestone unit="arline" n="80"/> Domus duodecima. Pars inimicorum secundum Hermetem accip-
+<lb n="5"/>itur in die ac nocte a domino domus inimicorum usque in gradum et min-
+<lb n="6"/>utum domus inimicorum, et proicitur ab ascendente; et secundum quosdam
+<lb n="7"/>Antiquorum accipitur in die ac nocte <milestone unit="arline" n="85"/> a Saturno in Martem, et proicitur ab
+<lb n="8"/>ascendente.
+<lb n="9"/>Hee sunt partes .XII. domorum.</p>
+<p n="16">
+<lb n="10"/> Et hic sunt alie partes quibus utuntur magistri iudiciorum as-
+<lb n="11"/>trorum multum. Ex quibus est pars que significat mendacium rumorum
+<lb n="12"/>quando ceciderit in signum tortuosum vel mobile, aut fuerit dominus do-
+<lb n="13"/>mus eius retrogradus aut impeditus, vel aspexerint eum mali aut coni-
+<lb n="14"/>uncti fuerint ei. Et significat veritatem eorum, si ceciderit cum fortunis
+<lb n="15"/>aut in domibus seu terminis earum, vel aspexerint eum aut fuerit
+<lb n="16"/>in signo directe ascensionis. Accipitur in die a Mercurio in Venerem,
+<lb n="17"/>et in nocte econverso, et proicitur ab ascendente. Et secundum Abemasar,
+<lb n="18"/>accipitur in die a Mercurio in Lunam, et in nocte econverso, et proicitur ab
+<lb n="19"/>ascendente. Pars rationis et profunditatis sensus accipitur in die a Sat-
+<lb n="20"/>urno in Lunam, et in nocte econverso, et proicitur ab ascendente. Pars
+
+<pb n="358"/>
+<lb n="1"/>sapientie et discipline accipitur in die ac nocte a Saturno in Iovem,
+<lb n="2"/>et proicitur ab ascendente. Pars [sapientie] scientie accipitur in die
+<lb n="3"/>a Luna in Iovem et in nocte econverso, et proicitur ab ascendente.
+<lb n="4"/>Pars guerre et preliorum accipitur in die ac nocte a Saturno in Lunam, et
+<lb n="5"/>proicitur ab ascendente. Pars pacis et concordie exercituum accipitur in
+<lb n="6"/>die ac nocte a Luna in Mercurium, et proicitur ab <milestone unit="arline" n="90"/> ascendente. Pars
+<lb n="7"/>aspiciendi in revolutione anni accipitur in die a Luna in Venerem, et in
+<lb n="8"/>nocte econverso, et proicitur a Sole.</p>
+<p n="17">
+<lb n="9"/> Et quia, auxiliante Deo, introduximus has partes que cadunt in
+<lb n="10"/>rebus particularibus, prosequamur agendo partes que cadunt in revolutione
+<lb n="11"/>annorum mundi et coniunctionum significantium causas regni et stabil-
+<lb n="12"/>itatem seu durationem eius. Ex quibus est pars que dicitur pars
+<lb n="13"/>regni atque imperii, que exercetur in revolutione annorum mundi, accip-
+<lb n="14"/>iturque a <milestone unit="arline" n="95"/> Marte in Lunam, et proicitur ab ascendente coniunctionis que
+<lb n="15"/>significat mutationem regni. Fit quoque alio modo: accipitur scilicet
+<lb n="16"/>a gradu ascendentis coniunctionis in gradum coniunctionis, et proicitur a
+<lb n="17"/>gradu ascendentis revolutionis. Item, fit alio modo: accipitur a gradu So-
+<lb n="18"/>lis usque in gradum medii celi revolutionis [usque ad Solem], et proicitur
+
+<pb n="359"/>
+<lb n="1"/>a gradu Iovis. Pars temporis regni, id est quamdiu debet durare, accipitur
+<lb n="2"/>hora electionis regis a Sole in .XV. gradum signi Leonis, et proicitur a
+<lb n="3"/>Luna; deinde accipitur a Luna in .XV. gradum <milestone unit="arline" n="100"/> signi Cancri, et proici-
+<lb n="4"/>tur a Sole. Alia pars de tempore electionis regis accipitur hora electionis
+<lb n="5"/>regis in die a Iove in Saturnum, et in nocte econverso, et proicitur ab as-
+<lb n="6"/>cendente revolutionis anni in quo surrexit rex. Quod si fuerit Iupiter in signo
+<lb n="7"/>communi et fuerit revolutio diurna, fueritque Iupiter cadens ab angulis, ac-
+<lb n="8"/>cipiatur tunc a Saturno in Iovem, et addantur desuper .XXX. gradus, et
+<lb n="9"/>proiciatur ab ascendente. Si vero Saturnus et Iupiter fuerint sibi oppositi
+<lb n="10"/>et fuerint ambo cadentes ab ascendente, mediatur quod <milestone unit="arline" n="105"/> exierit inter eos,
+<lb n="11"/>id est accipitur medietas graduum qui sunt inter eos, et proicitur ab
+<lb n="12"/>ascendente. Et si fuerit Iupiter in exaltatione sua et fuerit revolutio in nocte,
+<lb n="13"/>numeratur ab eo in Saturnum, et proicitur ab ascendente.</p>
+<p n="18">
+<lb n="14"/> Due partes maxime ex quibus extrahitur tempus electionis
+<lb n="15"/>regis et eius durationis. Pima earum est ut aspicias hora electio-
+<lb n="16"/>nis regis quo pervenit profectus anni a coniunctione triplicitatis que
+<lb n="17"/>significavit sectam ex numero quo datur omnibus .XXX. gradibus annus et
+
+<pb n="360"/>
+<lb n="1"/>omnibus duobus gradibus et dimidio unus mensis. Et cum sciveris in
+<lb n="2"/>quo signo vel <milestone unit="arline" n="110"/> gradu fit hoc, serva eum, quia hic est locus a quo
+<lb n="3"/>equabis primam partem. Et cum volueris aptare eum, aptabis ascendens
+<lb n="4"/>revolutionis anni in quo surrexit ipse electus. Post hec accipe a planeta
+<lb n="5"/>orientali a Sole ex Saturno et Iove in ipso anno usque ad gradum equa-
+<lb n="6"/>tionis partis prime quem servasti, et proice ab ascendente revolutionis; et
+<lb n="7"/>quo pervenerit, ipse est locus partis prime. Pars secunda earum. Aspice a
+<lb n="8"/>coniunctione in qua surrexit rex vel incepit regnum ad quod signum
+<lb n="9"/>seu gradum pervenit profectio anni ex numero quo datur omnibus <milestone unit="arline" n="115"/>
+<lb n="10"/>.XXX. gradibus annus in mense et in die qua surrexit rex, et ipse
+<lb n="11"/>est locus equationis partis secunde. Serva quoque eum. Post hec accipe
+<lb n="12"/>a planeta occidentali a Sole ex Saturno et Iove usque ad locum equationis
+<lb n="13"/>partis secunde quem servasti, et proice eum ab ascendente revolutionis; et
+<lb n="14"/>quo pervenerit, ipse erit locus partis secunde.
+<lb n="15"/>Hee ergo partes sunt que significant fortitudinem regni et eius du-
+<lb n="16"/>rationem.</p>
+
+<pb n="361"/>
+<p n="19">
+<lb n="1"/><milestone unit="arline" n="120"/>  Item, sunt hic alie partes quibus utimur in revolutione an-
+<lb n="2"/>norum mundi, sciturque per eas quid gravetur de rebus in foro vel
+<lb n="3"/>quid erit leve in pretio, quidque pretiosum vel vile, mutum seu parum.
+<lb n="4"/>Hoc est ut aspicias ubi ceciderit pars, id est in cuius planete domum vel
+<lb n="5"/>exaltationem aut terminum seu triplicitatem. Qui planeta si fuerit retro-
+<lb n="6"/>gradus vel combustus aut in loco maligno, vilescet res illa et erit parvi
+<lb n="7"/>pretii. Si vero fuerit in loco fortitudinis aut in angulo, et maxime in medio
+<lb n="8"/>celi, gravabitur res illa et erit maioris pretii. Et si pervenerit dominus illius
+<lb n="9"/>domus ad locum descensionis sue, vilescet res illa et erit levioris pretii.
+<lb n="10"/>Et aspice aspectus <milestone unit="arline" n="125"/> fortunarum et malorum planetarum ad eam, necnon
+<lb n="11"/>et ad Lunam et dominum eius, et vide quis et quomodo aspiciat
+<lb n="12"/>partem ipsam. Si fortune et Luna aspexerint partem, multiplicabitur
+<lb n="13"/>eadem res, et si aspexerint eam mali, detrimentum patietur.
+<lb n="14"/>&lt;I&gt; Pars tritici a Sole in Martem.
+<lb n="15"/>&lt;II&gt; Pars aque a Luna in Venerem.
+<lb n="16"/>&lt;III&gt; Pars ordei a Luna in Iovem.
+
+<pb n="362"/>
+<lb n="1"/>&lt;IV&gt; Pars hymz a Venere in Solem.
+<lb n="2"/>&lt;V&gt; Pars lentis a Marte in Saturnum.
+<lb n="3"/>&lt;VI&gt; Pars fabarum a Saturno in Martem.
+<lb n="4"/>&lt;VII&gt; Pars almesii a Saturno in Martem.
+<lb n="5"/>&lt;VIII&gt; Pars dactilis a Sole in Venerem.
+<lb n="6"/>&lt;IX&gt; Pars mellis <milestone unit="arline" n="130"/> a Luna in Solem.
+<lb n="7"/>&lt;X&gt; Pars aloroz, quod est quoddam genus farris, a Iove in Satur-
+<lb n="8"/>num.
+<lb n="9"/>&lt;XI&gt; Pars olivarum a Mercurio in Lunam.
+<lb n="10"/>&lt;XII&gt; Pars uvarum a Saturno in Venerem.
+<lb n="11"/>&lt;XIII&gt; Pars bambasii a Mercurio in Venerem.
+<lb n="12"/>&lt;XIV&gt; Pars alcicem, quod est quoddam genus seminis albi in simili-
+<lb n="13"/>tudine seminis lini et utuntur eo medici, fitque ec eo unguentum in medici-
+<lb n="14"/>nis utile, a Saturno in Iovem vel in Venerem.
+<lb n="15"/>&lt;XV&gt; Pars abbathigh, qui sunt buteflez magni atque maturi et cro-
+
+<pb n="363"/>
+<lb n="1"/>cei, a Mercurio in Saturnum.
+<lb n="2"/>&lt;XVI&gt; Pars ciborum acrium a Saturno in Martem.
+<lb n="3"/>&lt;XVII&gt; Pars ciborum dulcium a Sole in Venerem.
+<lb n="4"/>&lt;XVIII&gt; Pars ciborum saporis apii vel huiusmodi herbarum saporem
+<lb n="5"/>habentium a Marte in Saturnum.
+<lb n="6"/>&lt;XIX&gt; Pars ciborum amarorum a Mercurio in Saturnum.
+<lb n="7"/>&lt;XX&gt; Pars medicaminum  <milestone unit="arline" n="135"/> purgantium dulcium a Sole in Lunam.
+<lb n="8"/>&lt;XXI&gt; Pars medicaminum acrium a Saturno in Iovem.
+<lb n="9"/>&lt;XXII&gt; Pars medicaminum salsorum a Marte in Lunam.
+<lb n="10"/>&lt;XXIII&gt; Pars venenatorum a geuzahar, id est a Capite Draconis,
+<lb n="11"/>in Saturnum.
+<lb n="12"/>Et proiciuntur universa hec ab ascendente revolutionis.</p>
+<p n="20">
+<lb n="13"/> Hec sunt universa que ceciderunt nobis ex partibus. Introduximus
+<lb n="14"/>quoque has partes novissimas, etsi est in eis narratio debilis, ne dimittere-
+<lb n="15"/>mus aliquid quod possit esse introductorium ad magisterium iudiciorum
+<lb n="16"/>astrorum <milestone unit="arline" n="140"/> quin proferamus illud.
+
+<pb n="364"/>
+<lb n="1"/>Perfectus est introductorius Abdilaziz, id est servi gloriosi, scilicet
+<lb n="2"/>Dei, qui dicitur Alcabic[z]i, ad magisterium iudiciorum astrorum, cum laude
+<lb n="3"/>Dei et eius adiutorio, interpretatus a Iohanne hyspalensi.</p>
+<lb n="4"/><p><add>Additions in αALSa</add>
+<lb n="5"/><add>ASaU:</add>
+<lb n="6"/>Saturnus ex partibus mundi Acint et Alcind et eorum confinia et terras
+<lb n="7"/>nigrorum et montes earum.
+<lb n="8"/>Iupiter Alirac, Bebil et Hispahen et Feriz et ex civitatibus Alawez et Cadi-
+<lb n="9"/>cia.
+<lb n="10"/>Mars Assen et terras Romanorum usque in occidente, et terras Turcorum.
+<lb n="11"/>Sol Zamarcant et Curacen et Feriz et eius terminos et terras Romanorum.
+<lb n="12"/>Venus habet ex partibus Alhigez et Aliemen et terras Arabum.
+<lb n="13"/>Mercurius Addehyle et terras Indorum, Atorc et Armenia.
+<lb n="14"/><add>U, E after [20] hec sunt universa que ceciderunt nobis ex partibus', L before
+<lb n="15"/>'&lt;III&gt; Pars ordei':</add>
+<lb n="16"/>Pars nucum a Mercurio in Martem.
+<lb n="17"/>Pars zuccari a Mercurio in Venerem.
+<lb n="18"/>Pars ventorum a Mercurio in (lacuna)
+<lb n="19"/>Pars ceparum a Saturno in Martem.
+<lb n="20"/>Pars salsatorum a Marte in Lunam.
+<lb n="21"/>Pars terre a Saturno in (lacuna)
+<lb n="22"/>Pars aeris (lacuna)</p></div>
+</div>   
+</body>
+  </text>
+</TEI>

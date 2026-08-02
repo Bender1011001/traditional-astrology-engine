@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "tibetan",
+  "source_pack_id": "tibetan_whitebeyl_gyasel_access_v1",
+  "status": "access_and_boundary_vectors_only_no_astrological_computation_vectors_exist_yet",
+  "source_ids": [
+    "tibetan_whitebeyl_bdrc_w30116_1972",
+    "tibetan_vaidurya_gyasel_bdrc_w1kg12689_1976"
+  ],
+  "vectors": [
+    {
+      "vector_id": "tibetan.whitebeyl.hash.w30116_vol1",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.rights_access_established"
+      ],
+      "inputs": {
+        "operation": "sha256_file",
+        "url": "https://archive.org/download/bdrc-W30116/bdrc-W30116-1.pdf"
+      },
+      "expected": {
+        "sha256": "b71bfcc07bfd1cac554f602e7d3bc1d87635edcb51bce5bbb825e3fbcd2207ca",
+        "bytes": 65394411,
+        "pages": 650
+      },
+      "provenance": "Downloaded and hashed directly 2026-08-02; page count from PyMuPDF doc.page_count."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.hash.w30116_vol2",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.rights_access_established",
+        "tibetan.whitebeyl.boundary.chapter_presence_confirmed"
+      ],
+      "inputs": {
+        "operation": "sha256_file",
+        "url": "https://archive.org/download/bdrc-W30116/bdrc-W30116.pdf"
+      },
+      "expected": {
+        "sha256": "7b821781c508f903e724db69559052c4d91c4cc624e69ca0538ae171d158fcac",
+        "bytes": 65141693,
+        "pages": 646
+      },
+      "provenance": "Downloaded and hashed directly 2026-08-02; page count from PyMuPDF doc.page_count."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.hash.gyasel_vol1",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.rights_access_established"
+      ],
+      "inputs": {
+        "operation": "sha256_file",
+        "url": "https://archive.org/download/bdrc-W1KG12689/bdrc-W1KG12689-1.pdf"
+      },
+      "expected": {
+        "sha256": "c78d3389f4a34ffdb383f20c9fddf876012b034f3c2f1fe547245eea43bebfd5",
+        "bytes": 6261687,
+        "pages": 628
+      },
+      "provenance": "Downloaded and hashed directly 2026-08-02; page count from PyMuPDF doc.page_count."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.hash.gyasel_vol2",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.rights_access_established",
+        "tibetan.whitebeyl.boundary.legibility_gate_not_rights_gate"
+      ],
+      "inputs": {
+        "operation": "sha256_file",
+        "url": "https://archive.org/download/bdrc-W1KG12689/bdrc-W1KG12689.pdf"
+      },
+      "expected": {
+        "sha256": "69478ba8b84860a5cbf6d7def0476aa719729777066be8fe017ebfbc50dbcdc0",
+        "bytes": 6299867,
+        "pages": 634
+      },
+      "provenance": "Downloaded and hashed directly 2026-08-02; page count from PyMuPDF doc.page_count."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.rights.item_level_statements",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.rights_access_established"
+      ],
+      "inputs": {
+        "operation": "archive_org_metadata_fields",
+        "items": [
+          "bdrc-W30116",
+          "bdrc-W1KG12689"
+        ]
+      },
+      "expected": {
+        "bdrc-W30116": {
+          "rights_statement": "Public Domain",
+          "access_restriction": "restrictedInChina"
+        },
+        "bdrc-W1KG12689": {
+          "rights_statement": "Public Domain",
+          "access_restriction": "openAccess"
+        }
+      },
+      "provenance": "https://archive.org/metadata/bdrc-W30116 and https://archive.org/metadata/bdrc-W1KG12689, fetched 2026-08-02. Reproducible by anyone: re-fetch the metadata endpoint and diff the two fields."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.keyword_hit_pages.w30116_vol2",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.chapter_presence_confirmed"
+      ],
+      "inputs": {
+        "operation": "pdf_text_layer_keyword_search",
+        "file": "bdrc-W30116.pdf",
+        "patterns": [
+          "སྨེ",
+          "སྤར་ཁ"
+        ],
+        "note": "patterns are the sme syllable of sme ba (སྨེ) and spar kha (སྤར་ཁ) - stored here as literal Tibetan Unicode, verify by re-running the same PyMuPDF text search"
+      },
+      "expected": {
+        "one_indexed_file_pages": [
+          142,
+          218,
+          250,
+          278,
+          308,
+          318,
+          319,
+          324,
+          334,
+          348,
+          443,
+          446,
+          464,
+          470,
+          500,
+          501,
+          516,
+          555,
+          579,
+          611
+        ],
+        "total_hits": 20,
+        "total_pages": 646
+      },
+      "provenance": "PyMuPDF page.get_text() substring search, run directly against the downloaded PDF 2026-08-02. Reproducible exactly: same file (verify against the hash vector above), same search, same result."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.keyword_hit_pages.w30116_vol1",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.chapter_presence_confirmed"
+      ],
+      "inputs": {
+        "operation": "pdf_text_layer_keyword_search",
+        "file": "bdrc-W30116-1.pdf",
+        "patterns": [
+          "སྨེ",
+          "སྤར་ཁ"
+        ]
+      },
+      "expected": {
+        "one_indexed_file_pages": [
+          26,
+          67,
+          116,
+          249,
+          290,
+          420,
+          502
+        ],
+        "total_hits": 7,
+        "total_pages": 650
+      },
+      "provenance": "Same method as the volume-2 vector above; run against bdrc-W30116-1.pdf."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.folio_number_visual_check",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.chapter_presence_confirmed"
+      ],
+      "inputs": {
+        "operation": "visual_read_of_rendered_page",
+        "file": "bdrc-W30116.pdf",
+        "one_indexed_file_page": 318,
+        "render": "PyMuPDF Matrix(6,6) and Matrix(14,14)"
+      },
+      "expected": {
+        "printed_folio_number_visible_in_margin": 308,
+        "content_type": "continuous Tibetan dbu-can prose, not blank/corrupt/diagram-only"
+      },
+      "provenance": "Direct visual inspection of docs/research/multitradition/tibetan/sources/page_images/w30116_v2_p318_folio308_full.png (sha256 7ab62866d6909f65bad9c64da29827f3ef2ce678e9d40e02b61caabc5fd11362) and the detail crop (sha256 6db3ffa0c4a543c7928b0c7637c45edac53abdee8ce5432aede0069354c6374d). This is a human/model visual-read check, not an automated one; a second independent viewer re-opening the same hash-pinned image should read the same folio number.",
+      "review_status": "single-reader check; independent second reader not yet obtained"
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.unsourced_popular_pages_cite_no_source",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.rejects_unsourced_popular_construction"
+      ],
+      "inputs": {
+        "operation": "page_fetch_and_citation_scan",
+        "urls": [
+          "https://www.tibastro.be/Parkha/ParkhaGeneral",
+          "https://www.kunjung.org/general-4"
+        ]
+      },
+      "expected": {
+        "cites_white_beryl_or_named_scholarly_source": false,
+        "contains_specific_numeric_formula": true
+      },
+      "provenance": "Fetched directly 2026-08-02. Both pages state concrete arithmetic (a mother's-age-based parkha formula and variants; a stated mewa descent sequence 1,9,8,7,6,5,4,3,2) with zero citation to White Beryl, Schuh, Cornu, or any other named source."
+    },
+    {
+      "vector_id": "tibetan.whitebeyl.vector.boundary.not_merged_with_sukuyodo_onmyodo_or_bazi",
+      "rule_ids": [
+        "tibetan.whitebeyl.boundary.not_merged_with_sukuyodo_onmyodo_or_bazi"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "https://mentseekhang.org/introduction-to-tibetan-astrology/ (already cited in source_audit.md)",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "ruling": "this track shares no source, no rule, and no vector with docs/research/multitradition/onmyodo/, docs/research/multitradition/sukuyodo/, or docs/research/multitradition/bazi/, despite the distant common Chinese numerological root with Onmyodo/BaZi. The Tibetan corpus, transmission history, technical vocabulary (Wylie Tibetan, not Chinese or Japanese), and institutional context (Men-Tsee-Khang/Phugpa lineage) are distinct and no value may be inherited across tracks"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "directly verified against existing institutional source already in the registry"
+      },
+      "provenance": "Men-Tsee-Khang introduction to Tibetan astrology - https://mentseekhang.org/introduction-to-tibetan-astrology/ (already cited in source_audit.md). Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    }
+  ]
+}

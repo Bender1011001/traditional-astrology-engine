@@ -138,23 +138,151 @@
     {
       "example_id": "bazi.sanming.case_charts_inventory",
       "work": "Sanming Tonghui case charts",
-      "location": "Wikisource juan 1-9; juan 10-12 absent",
-      "description": "Classical case charts exist in the later juan, but the work page's own bibliographic note warns that later commercial printings inserted charts of late-Ming officials. Until a dated scan establishes which charts belong to the received text, these cannot serve as golden examples.",
+      "location": "Wikisource juan 1-9 (10-12 absent); ctext.org now hosts all of juan 10 (chapter=927175), 11 (chapter=388738), and 12 (chapter=850832)",
+      "description": "UPDATED 2026-08-02: the 'juan 10-12 absent' blocker is resolved for LOCATION - ctext.org hosts all three juan, OCR'd from the identified Qing-court Siku Quanshu recension digitized by Zhejiang University Library (see source_registry.json id bazi_sanming_tonghui_ctext_juan10_12). Juan 12 was read and does contain worked case charts (命例); juan 11 was checked and does not (only hypothetical stem/hour illustrations and bare name citations). The AUTHENTICITY question the Wikisource work-page's interpolation warning raised is NOT resolved by this: the five charts found in juan 12 (see the five entries below) name exactly the kind of late-Ming officials that warning describes. Their presence in the Siku Quanshu court recension is a relevant data point (that recension predates the 'later commercial printings' the warning most plausibly targets) but does not on its own prove they are original to Wan Minying's text rather than a still-earlier insertion layer. They are recorded below at 'judgment_encoded' - chart and stated judgment captured - not 'comparable', pending page-image collation against the ANU and Zhejiang facsimiles (source_registry.json ids bazi_sanming_tonghui_anu_xu_dishan_facsimile, bazi_sanming_tonghui_siku_quanshu_zhejiang_scan).",
       "author_judgment": {
         "claims": [
           {
             "claim_id": "bazi.sanming.pending_edition_control",
             "kind": "topical_verdict",
-            "author_states": "Pending edition control: identify which case charts are original to the received text and which are later insertions.",
-            "note": "Placeholder recording the blocked task. Not runnable."
+            "author_states": "Pending edition control: confirm the five juan-12 charts below against a page-image facsimile before treating any of them as golden.",
+            "note": "Placeholder recording the still-blocked authenticity task. Not runnable."
           }
         ]
       },
       "encoding_status": "inventory_only",
       "blockers": [
-        "Volumes 10-12 are absent from the Wikisource transcription.",
-        "The work page documents inserted late-Ming official charts in later commercial printings.",
-        "No dated page-image scan has been aligned to the transcription."
+        "The five named charts in juan 12 (below) are exactly the late-Ming-official type the Wikisource interpolation warning describes; their presence in the Siku Quanshu recension narrows but does not close that question.",
+        "No page image (ANU or Zhejiang University Library facsimile) has yet been opened and collated against the ctext OCR transcription used here.",
+        "One of the five charts (Li Bangzhen) contains an internal transcription anomaly (see bazi.sanming.libangzhen_transcription_anomaly) that itself demonstrates why OCR-only text cannot control wording."
+      ]
+    },
+    {
+      "example_id": "bazi.sanming.tanlun_wealth_officer_seal",
+      "work": "三命通會, juan 12 (via ctext.org chapter=850832)",
+      "location": "ctext.org wiki.pl?if=gb&chapter=850832, worked-example list in juan 12",
+      "description": "譚論 (Tan Lun), styled 尚書 (Minister), four pillars 庚辰 甲申 丁未 丙午, with the stated judgment 財官印俱旺 (Wealth, Officer, and Seal all prosperous). This is the strongest of the five juan-12 charts for mechanical cross-checking: the claim names three specific Ten-God categories rather than a narrative achievement or a named pattern, so it can be checked against the engine's own Ten-God/hidden-stem tables independent of the authenticity question.",
+      "author_positions": {"year": "庚辰 (geng-chen)", "month": "甲申 (jia-shen)", "day": "丁未 (ding-wei)", "hour": "丙午 (bing-wu)"},
+      "author_judgment": {
+        "quotation": "財官印俱旺",
+        "claims": [
+          {
+            "claim_id": "bazi.sanming.tanlun.wealth_present",
+            "kind": "calculation_value",
+            "author_states": "The year stem Geng is the native's Wealth.",
+            "note": "Hand-verified against the engine's own ten_god()/STEM_ELEMENT tables: geng is zheng_cai (Direct Wealth) for a ding day master. See bazi/yuanhai_ziping_delineation_validation_vectors.json vector bazi.delin.vec.worked_chart.tan_lun_wealth_officer_seal for the full derivation."
+          },
+          {
+            "claim_id": "bazi.sanming.tanlun.seal_present",
+            "kind": "calculation_value",
+            "author_states": "The month stem Jia is the native's Seal-Resource.",
+            "note": "Hand-verified: jia is zheng_yin (Direct Resource) for a ding day master."
+          },
+          {
+            "claim_id": "bazi.sanming.tanlun.officer_present_hidden",
+            "kind": "calculation_value",
+            "author_states": "The Officer is present, hidden as the middle qi of the month branch Shen.",
+            "note": "Hand-verified: shen's hidden stems are [geng, ren, wu_stem]; ren (Water, yang) is zheng_guan for a ding day master. This is not visible at the stem level, which is itself consistent with the classical convention of counting hidden as well as visible Ten Gods."
+          }
+        ]
+      },
+      "encoding_status": "judgment_encoded",
+      "blockers": [
+        "Not yet run through a live engine adapter (hand-derivation only in this pass).",
+        "Authenticity of the chart's attribution to Wan Minying's original text versus a later insertion is unresolved, per bazi.sanming.case_charts_inventory."
+      ]
+    },
+    {
+      "example_id": "bazi.sanming.wuyue_righteous_gentleman",
+      "work": "三命通會, juan 12 (via ctext.org chapter=850832)",
+      "location": "ctext.org wiki.pl?if=gb&chapter=850832, worked-example list in juan 12",
+      "description": "吳嶽 (Wu Yue), styled 尚書 (Minister), four pillars 甲子 癸酉 甲辰 甲子, with the stated judgment 平生正氣君子 (a righteous gentleman throughout life). A character-virtue verdict rather than a specific Ten-God claim, so it is recorded for inventory but not mechanically cross-checked in this pass.",
+      "author_positions": {"year": "甲子 (jia-zi)", "month": "癸酉 (gui-you)", "day": "甲辰 (jia-chen)", "hour": "甲子 (jia-zi)"},
+      "author_judgment": {
+        "quotation": "平生正氣君子",
+        "claims": [
+          {
+            "claim_id": "bazi.sanming.wuyue.character_verdict",
+            "kind": "topical_verdict",
+            "author_states": "The native is a righteous gentleman throughout life.",
+            "note": "Not a Ten-God, position, or branch-relation claim in the narrow sense the engine computes; recorded for completeness, not mechanically comparable."
+          }
+        ]
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "The stated judgment is a character/virtue verdict, not a structural claim the engine's fields can check.",
+        "Authenticity unresolved, per bazi.sanming.case_charts_inventory."
+      ]
+    },
+    {
+      "example_id": "bazi.sanming.huzongxian_high_office",
+      "work": "三命通會, juan 12 (via ctext.org chapter=850832)",
+      "location": "ctext.org wiki.pl?if=gb&chapter=850832, worked-example list in juan 12",
+      "description": "胡宗憲 (Hu Zongxian), styled 尚書 (Minister) - an independently well-documented historical Ming general/official (commanded coastal defense against Wokou piracy). Four pillars 壬申 辛亥 丁酉 壬寅, with the stated judgment 威制四省官居一品 (commanded four provinces with authority, held first-rank office). A narrative career-achievement verdict rather than a specific Ten-God claim.",
+      "author_positions": {"year": "壬申 (ren-shen)", "month": "辛亥 (xin-hai)", "day": "丁酉 (ding-you)", "hour": "壬寅 (ren-yin)"},
+      "author_judgment": {
+        "quotation": "威制四省官居一品",
+        "claims": [
+          {
+            "claim_id": "bazi.sanming.huzongxian.career_verdict",
+            "kind": "topical_verdict",
+            "author_states": "The native commanded four provinces with authority and held first-rank office.",
+            "note": "A career-achievement narrative, not mechanically comparable to the engine's structural fields."
+          }
+        ]
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "The stated judgment is a career-narrative verdict, not a structural claim the engine's fields can check.",
+        "Authenticity unresolved, per bazi.sanming.case_charts_inventory; note that Hu Zongxian (1512-1565) was a near-contemporary of the compiler Wan Minying, which argues against this being a much-LATER commercial insertion, though it does not prove originality either."
+      ]
+    },
+    {
+      "example_id": "bazi.sanming.libangzhen_transcription_anomaly",
+      "work": "三命通會, juan 12 (via ctext.org chapter=850832)",
+      "location": "ctext.org wiki.pl?if=gb&chapter=850832, worked-example list in juan 12",
+      "description": "李邦珍 (Li Bangzhen), styled 都憲 (Censor-in-chief), with the stated judgment 財官雙美透財印而居臺省 (Wealth and Officer both fine, Wealth and Seal transparent, held office in the Censorate). The four-pillar string as fetched reads 癸酉 巳未 壬子 庚子 - but '巳未' is two branch characters with NO stem, which is not a valid pillar. This is recorded deliberately AS the anomaly, rather than silently corrected, because it is itself the clearest demonstration in this pass of why an OCR/web-transcription pass cannot control wording and why page-image collation (not just a second digitization) is required before any juan-12 chart is treated as reliable.",
+      "author_positions": {"year": "癸酉 (gui-you)", "month": "巳未 (INVALID - two branches, no stem; uncorrected)", "day": "壬子 (ren-zi)", "hour": "庚子 (geng-zi)"},
+      "author_judgment": {
+        "quotation": "財官雙美透財印而居臺省",
+        "claims": [
+          {
+            "claim_id": "bazi.sanming.libangzhen.transcription_error_flagged",
+            "kind": "topical_verdict",
+            "author_states": "The month pillar as transcribed is not a well-formed stem-branch pair.",
+            "note": "Deliberately not auto-corrected. Left as evidence for the source-audit finding that ctext's OCR of this juan needs page-image verification before use."
+          }
+        ]
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "The month pillar is malformed in the fetched transcription and cannot be resolved without a page image.",
+        "Authenticity of the chart (independent of the transcription error) is unresolved, per bazi.sanming.case_charts_inventory."
+      ]
+    },
+    {
+      "example_id": "bazi.sanming.yaolai_pattern_verdict_gated",
+      "work": "三命通會, juan 12 (via ctext.org chapter=850832)",
+      "location": "ctext.org wiki.pl?if=gb&chapter=850832, worked-example list in juan 12",
+      "description": "姚淶 (Yao Lai), an independently documented 1526 zhuangyuan (top graduate of the imperial examination). Four pillars 戊申 戊午 丙辰 巳丑, with the stated judgment 合格 (the pattern/configuration qualifies). Deliberately recorded as chart-only: a 合格 verdict is precisely a named-pattern (格局) completion claim, and bazi/defensibility_spec.md's refusal list keeps pattern verdicts source-gated pending edition control. Encoding this chart's judgment as comparable would cross that gate.",
+      "author_positions": {"year": "戊申 (wu_stem-shen)", "month": "戊午 (wu_stem-wu_branch)", "day": "丙辰 (bing-chen)", "hour": "巳丑 (si-chou, AS TRANSCRIBED - si is a branch, not a stem; likely a further OCR anomaly, uncorrected)"},
+      "author_judgment": {
+        "quotation": "合格",
+        "claims": [
+          {
+            "claim_id": "bazi.sanming.yaolai.pattern_verdict_not_extracted",
+            "kind": "topical_verdict",
+            "author_states": "The pattern qualifies (合格).",
+            "note": "Deliberately NOT operationalized as an engine claim - this is exactly the named-pattern verdict category the refusal list keeps gated. The hour pillar as transcribed also appears malformed (si is a branch character, not a stem), a second instance of the same OCR-reliability problem seen in the Li Bangzhen chart."
+          }
+        ]
+      },
+      "encoding_status": "chart_encoded",
+      "blockers": [
+        "The judgment is a named-pattern (格局) completion verdict, which stays source-gated per the refusal list regardless of chart authenticity.",
+        "The hour pillar as transcribed is likely malformed (second OCR anomaly found in this juan).",
+        "Authenticity unresolved, per bazi.sanming.case_charts_inventory."
       ]
     }
   ]

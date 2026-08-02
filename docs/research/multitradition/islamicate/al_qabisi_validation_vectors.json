@@ -1,0 +1,1493 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "islamicate_persian",
+  "source_pack_id": "islamicate_al_qabisi_introduction_wurzburg_tei_v1",
+  "status": "research_verified",
+  "source_ids": [
+    "islamicate_al_qabisi_introduction_2004",
+    "islamicate_wurzburg_al_qabisi_introduction_tei",
+    "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08"
+  ],
+  "vectors": [
+    {
+      "vector_id": "islam.qabisi.vector.domicile_table_matches_reference_data",
+      "rule_ids": [
+        "islam.qabisi.ch1.domicile_table_and_detriment"
+      ],
+      "inputs": {
+        "operation": "compare_table",
+        "table": "domicile",
+        "al_qabisi": {
+          "Aries": "Mars",
+          "Taurus": "Venus",
+          "Gemini": "Mercury",
+          "Cancer": "Moon",
+          "Leo": "Sun",
+          "Virgo": "Mercury",
+          "Libra": "Venus",
+          "Scorpio": "Mars",
+          "Sagittarius": "Jupiter",
+          "Capricorn": "Saturn",
+          "Aquarius": "Saturn",
+          "Pisces": "Jupiter"
+        }
+      },
+      "expected": {
+        "matches_reference_data_DOMICILE": true,
+        "mismatch_count": 0,
+        "note": "identical to src/engine/reference_data.py DOMICILE for all 12 signs"
+      },
+      "provenance": "Chapter I, paragraph 14 (edition p. 22); compared against src/engine/reference_data.py."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.exaltation_table_matches_hellenistic_py",
+      "rule_ids": [
+        "islam.qabisi.ch1.exaltation_fall_table_and_ptolemy_disagreement"
+      ],
+      "inputs": {
+        "operation": "compare_table",
+        "table": "exaltation_degree",
+        "al_qabisi": {
+          "Sun": [
+            "Aries",
+            19
+          ],
+          "Moon": [
+            "Taurus",
+            3
+          ],
+          "Mercury": [
+            "Virgo",
+            15
+          ],
+          "Venus": [
+            "Pisces",
+            27
+          ],
+          "Mars": [
+            "Capricorn",
+            28
+          ],
+          "Jupiter": [
+            "Cancer",
+            15
+          ],
+          "Saturn": [
+            "Libra",
+            21
+          ]
+        }
+      },
+      "expected": {
+        "matches_hellenistic_EXALTATION": true,
+        "mismatch_count": 0,
+        "fall_by_opposite_sign_same_degree": true,
+        "note": "identical to src/engine/multitradition/hellenistic.py EXALTATION for all 7 classical planets, degree for degree. The 'whole-sign exaltation' view al-Qabisi attributes to Ptolemy is NOT what either al-Qabisi's own table or this repo's EXALTATION dict use."
+      },
+      "provenance": "Chapter I, paragraph 15 (edition p. 24); compared against src/engine/multitradition/hellenistic.py."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.triplicity_table_matches_dorothean_not_ptolemaic",
+      "rule_ids": [
+        "islam.qabisi.ch1.triplicity_table"
+      ],
+      "inputs": {
+        "operation": "compare_table",
+        "table": "triplicity_day_night_participating",
+        "al_qabisi": {
+          "Fire": [
+            "Sun",
+            "Jupiter",
+            "Saturn"
+          ],
+          "Earth": [
+            "Venus",
+            "Moon",
+            "Mars"
+          ],
+          "Air": [
+            "Saturn",
+            "Mercury",
+            "Jupiter"
+          ],
+          "Water": [
+            "Venus",
+            "Mars",
+            "Moon"
+          ]
+        }
+      },
+      "expected": {
+        "matches_reference_data_DOROTHEAN_TRIPLICITY": true,
+        "mismatch_count": 0,
+        "matches_reference_data_PTOLEMAIC_TRIPLICITY": false,
+        "note": "al-Qabisi's day/night/participating triplicity table is identical to DOROTHEAN_TRIPLICITY in src/engine/reference_data.py for all 4 elements, and differs from that file's own PTOLEMAIC_TRIPLICITY (2-ruler, no participant)."
+      },
+      "provenance": "Chapter I, paragraph 16 (edition pp. 24-26); compared against src/engine/reference_data.py."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.egyptian_bounds_table_matches_reference_data",
+      "rule_ids": [
+        "islam.qabisi.ch1.egyptian_bounds_table"
+      ],
+      "inputs": {
+        "operation": "decode_abjad_table_and_compare",
+        "source_table_id": "jadwal hudud al-Misriyyin (TEI <table>, lb n=99-111)",
+        "sample_decoded_row_aries": {
+          "Jupiter": 6,
+          "Venus": 6,
+          "Mercury": 8,
+          "Mars": 5,
+          "Saturn": 5,
+          "sum": 30
+        }
+      },
+      "expected": {
+        "all_12_signs_sum_to_30": true,
+        "matches_reference_data_EGYPTIAN_TERMS": true,
+        "mismatch_count": 0,
+        "method": "abjad numerals (ا-ل representing 1-30) decoded programmatically from the TEI <table> cells during this pass and cross-checked planet-width by planet-width against EGYPTIAN_TERMS in src/engine/reference_data.py for all 12 signs"
+      },
+      "provenance": "Chapter I, paragraph 19 + table (edition pp. 26-28); decoded and compared against src/engine/reference_data.py during this research pass."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.face_table_matches_chaldean_face_ruler_function",
+      "rule_ids": [
+        "islam.qabisi.ch1.face_table_chaldean_order"
+      ],
+      "inputs": {
+        "operation": "apply_function_and_compare",
+        "function": "hellenistic._face_ruler(longitude)",
+        "source_table_id": "jadwal al-wujuh (TEI <table>, lb n=120-132)",
+        "sample_points_per_sign": [
+          2,
+          15,
+          25
+        ]
+      },
+      "expected": {
+        "all_12_signs_match": true,
+        "mismatch_count": 0,
+        "note": "applying this repo's own _face_ruler() (Chaldean order with +2 decan offset) at 3 sample degrees per sign reproduces exactly the 3 planets al-Qabisi's own face table lists for that sign, in all 12 signs, verified programmatically during this pass."
+      },
+      "provenance": "Chapter I, paragraphs 20-21 + table (edition pp. 28-30); compared against src/engine/multitradition/hellenistic.py _face_ruler()."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.mustawli_worked_example_arithmetic",
+      "rule_ids": [
+        "islam.qabisi.ch1.dignity_power_scoring",
+        "islam.qabisi.ch1.mustawli_worked_example"
+      ],
+      "inputs": {
+        "operation": "reproduce_worked_example",
+        "house_cusp": [
+          "Aries",
+          5
+        ],
+        "power_table": {
+          "domicile": 5,
+          "exaltation": 4,
+          "triplicity": 3,
+          "bound": 2,
+          "face": 1
+        }
+      },
+      "expected": {
+        "Mars_powers": 6,
+        "Mars_breakdown": "domicile(5)+face(1)",
+        "Sun_powers": 7,
+        "Sun_breakdown": "exaltation(4)+triplicity(3, day ruler of Fire)",
+        "Jupiter_powers": 2,
+        "Jupiter_breakdown": "bound(2)",
+        "winner": "Sun",
+        "winner_matches_source_claim": true
+      },
+      "provenance": "Chapter I, paragraph 77 (edition pp. 58-60); arithmetic independently reproduced and confirmed during this pass to match al-Qabisi's own stated result exactly."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.firdaria_duration_table_sums_to_75",
+      "rule_ids": [
+        "islam.qabisi.ch2.firdaria_full_duration_table"
+      ],
+      "inputs": {
+        "operation": "sum_check",
+        "firdaria_years": {
+          "Sun": 10,
+          "Venus": 8,
+          "Mercury": 13,
+          "Moon": 9,
+          "Saturn": 11,
+          "Jupiter": 12,
+          "Mars": 7,
+          "north_node": 3,
+          "south_node": 2
+        }
+      },
+      "expected": {
+        "sum": 75,
+        "cross_check_note": "matches the total of 75 already recorded in al_biruni_abu_mashar_al_qabisi_candidate_concordance.json for Abu Ma'shar's Abbreviation (Arabic p. 80, 'values summing to and explicitly totaling 75'); the per-planet split is not asserted identical between the two works, only the total."
+      },
+      "provenance": "Chapter II, paragraphs 5/10/15/22/28/33/38/46/48 (edition pp. 64-88); arithmetic verified during this pass."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.annual_profection_worked_example",
+      "rule_ids": [
+        "islam.qabisi.ch4.annual_profection_worked_example"
+      ],
+      "inputs": {
+        "operation": "reproduce_worked_example",
+        "formula": "profected_sign_index = (natal_sign_index + years_elapsed) mod 12, Aries=0..Pisces=11",
+        "natal_points": {
+          "ascendant": [
+            "Capricorn",
+            17
+          ],
+          "mc": [
+            "Scorpio",
+            8
+          ],
+          "sun": [
+            "Pisces",
+            15
+          ],
+          "moon": [
+            "Libra",
+            15
+          ],
+          "fortune": [
+            "Leo",
+            19
+          ]
+        },
+        "years_elapsed": 3
+      },
+      "expected": {
+        "profected_ascendant": [
+          "Aries",
+          17
+        ],
+        "profected_sun": [
+          "Gemini",
+          15
+        ],
+        "profected_moon": [
+          "Capricorn",
+          15
+        ],
+        "profected_mc": [
+          "Aquarius",
+          8
+        ],
+        "profected_fortune": [
+          "Scorpio",
+          19
+        ],
+        "salkhadhay": "Mars",
+        "all_five_match_source_text": true,
+        "salkhadhay_matches_domicile_table": true
+      },
+      "provenance": "Chapter IV, paragraph 8 (edition pp. 116-118); all five profection points and the salkhadhay (domicile lord of the profected Ascendant sign) independently recomputed and confirmed during this pass to match al-Qabisi's own worked example exactly."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.year_revolution_direction_rate_is_mean_solar_motion",
+      "rule_ids": [
+        "islam.qabisi.ch4.primary_directions_tasyir"
+      ],
+      "inputs": {
+        "operation": "compare_rate",
+        "al_qabisi_rate_arcmin_per_day": {
+          "minutes": 59,
+          "seconds": 8
+        },
+        "modern_mean_solar_motion_degrees_per_day": 0.9856473320990837
+      },
+      "expected": {
+        "al_qabisi_rate_decimal_arcmin": 59.1333,
+        "al_qabisi_rate_decimal_degrees": 0.985556,
+        "modern_rate_decimal_degrees": 0.985647,
+        "difference_arcseconds_per_day": 0.33,
+        "conclusion": "al-Qabisi's stated 59'8\"/day rate is the mean solar motion, correct to within about a third of an arcsecond per day"
+      },
+      "provenance": "Chapter IV, paragraph 13 (edition p. 126); computed during this pass. Comparable in later Latin sources to the constant popularly attributed to 'Naibod' (a 16th-century figure), here already stated in 10th-century Arabic."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.jarbakhtar_rate_internal_consistency",
+      "rule_ids": [
+        "islam.qabisi.ch4.jarbakhtar_bound_directions"
+      ],
+      "inputs": {
+        "operation": "consistency_check",
+        "rates": {
+          "degree_to_years": 1,
+          "five_arcmin_to_months": 1,
+          "one_arcmin_to_days": 6
+        }
+      },
+      "expected": {
+        "twelve_months_in_arcmin": 60,
+        "one_degree_in_arcmin": 60,
+        "months_times_5_equals_1_degree": true,
+        "one_month_in_days_via_arcmin_rate": 30,
+        "five_times_6": 30,
+        "conclusion": "all three stated conversion rates are mutually consistent under a schematic 360-day year of twelve 30-day months"
+      },
+      "provenance": "Chapter IV, paragraph 14 (edition p. 128); arithmetic verified during this pass."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.combustion_and_phase_numeric_thresholds",
+      "rule_ids": [
+        "islam.qabisi.ch3.combustion_cascade_thresholds",
+        "islam.qabisi.ch3.oriental_occidental_superior_phase",
+        "islam.qabisi.ch3.application_orb_and_types",
+        "islam.qabisi.ch3.fortune_and_misfortune_conditions"
+      ],
+      "inputs": {
+        "operation": "record_stated_thresholds"
+      },
+      "expected": {
+        "samim_cazimi_like_threshold_arcmin": 16,
+        "superior_planet_phase_thresholds_degrees": [
+          30,
+          60
+        ],
+        "application_orb_degrees": 6,
+        "node_proximity_danger_degrees": 12,
+        "sun_proximity_danger_degrees": 4,
+        "note": "these five numeric thresholds are stated explicitly and independently in the Arabic; recorded here as machine-checkable constants for any future implementation, not cross-checked against another pack in this pass because no equivalent numeric table exists elsewhere in this repo for direct comparison."
+      },
+      "provenance": "Chapter III, paragraphs 7, 9, 11, 28 (edition pp. 92-104); transcribed directly from the Arabic during this pass."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.mamarr_constant_7_over_22",
+      "rule_ids": [
+        "islam.qabisi.ch4.mamarr_planetary_passage"
+      ],
+      "inputs": {
+        "operation": "record_stated_constant",
+        "numerator": 7,
+        "denominator": 22
+      },
+      "expected": {
+        "decimal_value": 0.3182,
+        "note": "recorded as stated; 7/22 is also the reciprocal of the classical school approximation 22/7 for pi. Whether this is intentional in the source is NOT asserted - recorded as an observation only."
+      },
+      "provenance": "Chapter IV, paragraph 21 (edition pp. 134-136); transcribed directly from the Arabic during this pass."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.nawbahr_ninths_worked_example",
+      "rule_ids": [
+        "islam.qabisi.ch4.nawbahr_ninths_worked_example"
+      ],
+      "inputs": {
+        "operation": "reproduce_worked_example",
+        "input_degree": [
+          "Aquarius",
+          18
+        ],
+        "ninth_width_degrees": "3;20 (3 degrees 20 minutes)"
+      },
+      "expected": {
+        "ninth_index_1_based": 6,
+        "ninth_ruler": "Jupiter",
+        "matches_source_text": true,
+        "computation": "18 degrees / 3.3333 degrees-per-ninth = 5.4, i.e. the 6th ninth (16;40-20;00); Aquarius's triplicity cycle (Venus-Mars-Jupiter-Saturn-Saturn-Jupiter for ninths 1-6) lands the 6th ninth on Jupiter"
+      },
+      "provenance": "Chapter IV, paragraphs 16-17 (edition pp. 128-130); arithmetic independently reproduced and confirmed during this pass."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.great_conjunction_cycle_years",
+      "rule_ids": [
+        "islam.qabisi.ch4.great_conjunction_cycles"
+      ],
+      "inputs": {
+        "operation": "record_stated_cycle_years"
+      },
+      "expected": {
+        "saturn_jupiter_aries_point_years": 960,
+        "saturn_jupiter_triplicity_shift_years": 240,
+        "saturn_mars_cancer_point_years": 30,
+        "saturn_jupiter_sign_to_sign_years": 20,
+        "conjunctions_per_triplicity_before_shift": 12,
+        "internal_consistency_check": "240 years per triplicity-shift / 20 years per sign-to-sign conjunction = 12 conjunctions per triplicity, matching al-Qabisi's own explicit statement 'they conjoin twelve times within a triplicity, then their conjunction moves to the next triplicity'"
+      },
+      "provenance": "Chapter IV, paragraph 2 (edition p. 108); arithmetic verified during this pass."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch1.dorothean_rejoicing_domiciles",
+      "rule_ids": [
+        "islam.qabisi.ch1.dorothean_rejoicing_domiciles"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter I, paragraph 14, edition p. 22",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وأمّا البروج التي تسرّ أربابها بنزولها بها على قول دروثيوس فإنّ زحل يسرّ بنزوله الدلو والمشتري بالقوس والمرّيخ بالعقرب والزهرة بالثور وعطارد بالسنبلة",
+          "engine_rendering": "As for the signs whose lords delight in descending into them, according to the saying of Dorotheus: Saturn delights in descending into Aquarius, Jupiter into Sagittarius, Mars into Scorpio, Venus into Taurus, and Mercury into Virgo.",
+          "attributed_to": "Dorotheus (Duruthiyus), by name",
+          "rejoicing_domiciles": {
+            "Saturn": "Aquarius",
+            "Jupiter": "Sagittarius",
+            "Mars": "Scorpio",
+            "Venus": "Taurus",
+            "Mercury": "Virgo"
+          },
+          "note": "of each two-domicile planet's pair, Dorotheus is cited as preferring one specific sign as the planet's delight; Sun and Moon have only one domicile each so do not appear in this list"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter I, paragraph 14, edition p. 22. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch1.dignity_analogy",
+      "rule_ids": [
+        "islam.qabisi.ch1.dignity_analogy"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter I, paragraph 23, edition p. 32",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومثل بعضهم ذلك فقال إنّ كون الكوكب في بيته كالرجل في منزله وضيعته وكونه في شرفه كالرجل في مملكته وسلطانه وشرفه وكونه في حدّه كالرجل في عشيرته وجنسه وكونه في مثلّثته كالرجل في حرسه وأنصاره وأعوانه وكونه في وجهه كالرجل في صناعته",
+          "engine_rendering": "And some of them likened this, saying: a planet's being in its domicile is like a man in his house and his estate; its being in its exaltation is like a man in his kingdom, his sultanate, and his eminence; its being in its bound is like a man among his clan and his kin; its being in its triplicity is like a man among his guard, his supporters, and his helpers; its being in its face is like a man in his craft.",
+          "analogy": {
+            "domicile": "a man in his own house and estate (manzil wa-dai'a)",
+            "exaltation": "a man in his kingdom and sultanate (mamlaka wa-sultan)",
+            "bound": "a man among his clan and kin (ashira wa-jins)",
+            "triplicity": "a man among his guard and supporters (haras wa-ansar)",
+            "face": "a man in his craft (sina'a)"
+          }
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter I, paragraph 23, edition p. 32. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch1.halb_hayyiz_definition",
+      "rule_ids": [
+        "islam.qabisi.ch1.halb_hayyiz_definition"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter I, paragraph 78, edition p. 60",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن حظوظ الكواكب العرضية الحلب وهو أن يكون الكوكب النهاري النهار فوق الأرض وبالليل تحت الأرض والكوكب الليلي بالليل فوق الأرض وبالنهار تحت الأرض فإن كان مع ذلك الكوكب الذكر في برج ذكر والكوكب الأنثى في برج أنثى قيل إنّه في حيّزه وقوّته كقوّة الرجل في موضع فوائده وكسبه وسعادته",
+          "engine_rendering": "Among the planets' accidental fortunes is halb: that the diurnal planet be above the earth by day and below the earth by night, and the nocturnal planet above the earth by night and below the earth by day. If, with that, the masculine planet is in a masculine sign and the feminine planet in a feminine sign, it is said to be in its hayyiz, and its power is like the power of a man in the place of his benefits, his earnings, and his happiness.",
+          "halb": "a diurnal planet above the earth by day (or below the earth by night), and a nocturnal planet above the earth by night (or below the earth by day)",
+          "hayyiz": "halb PLUS gender agreement: a masculine planet additionally in a masculine sign, or a feminine planet in a feminine sign, at which point it is 'in its hayyiz', with power 'like the power of a man in the place of his benefit, his earning, and his happiness'",
+          "cross_check": "matches the one-way implication already validated in this pack's al-Biruni rule set (hayyiz implies halb; halb does not imply hayyiz) and the Mars case discussed there. Al-Qabisi's own formulation independently confirms al-Biruni's section 496 doctrine rather than contradicting it."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter I, paragraph 78, edition p. 60. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch1.house_significations_and_andarzaghar_triplicity",
+      "rule_ids": [
+        "islam.qabisi.ch1.house_significations_and_andarzaghar_triplicity"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter I, paragraph 57, edition p. 48",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وقال الأندرزغر في المواليد إنّ صاحب مثلّثة الطالع الأول يدلّ على الحياة وعلى طبيعة صاحب المولد والمسلة ولذّاته وشهواته وما يهوي ويكره وما يصيبه من الخير والشرّ في أول عمره وصاحب المثلّّثة الثاني يدلّ على الحياة والجسم والقوة وعلى وسط العمر وصاحب المثلّثة الثالث يدلّ على ما دلّ عليه صاحباه وعلى عاقبة الأمر عند الموت",
+          "engine_rendering": "Al-Andarzaghar said, concerning nativities: the lord of the Ascendant's first triplicity signifies life, and the nature of the native, his conduct, his pleasures and desires, what he loves and dislikes, and what befalls him of good and ill in the first part of his life. The lord of the second triplicity signifies life, the body, and strength, and the middle of life. The lord of the third triplicity signifies what the first two signified, and the outcome of the matter at death.",
+          "house_topics_summary": "standard 12 whole-sign topics (1st self/body/life, 2nd wealth, 3rd siblings, 4th fathers/property, 5th children, 6th illness/slaves, 7th women/marriage/opponents, 8th death/inheritance, 9th travel/religion/learning, 10th rulership/career, 11th hope/friends, 12th enemies/misfortune)",
+          "named_technique": "al-Andarzaghar (a named Persian authority, transliterated Pahlavi 'andarz-gar', advice-giver) is cited repeatedly for a refinement: within a topical house, its FIRST triplicity lord signifies the matter's early/major aspect, the SECOND triplicity lord its middle aspect, and the THIRD its outcome or minor aspect (e.g. for the 1st house: 1st triplicity lord = life itself and the native's own nature/pleasures/desires; 2nd = life, body, strength, the middle of life; 3rd = what the first two already showed, and the outcome at death).",
+          "house_colors": {
+            "1st_7th": "white",
+            "2nd_12th": "green",
+            "3rd_11th": "yellow",
+            "4th_10th": "red",
+            "5th_9th": "honey-colored",
+            "6th_8th": "black"
+          }
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter I, paragraph 57, edition p. 48. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch1.joys_and_angularity",
+      "rule_ids": [
+        "islam.qabisi.ch1.joys_and_angularity"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter I, paragraph 70, edition p. 56",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ويقال في دلالة البيوت إنّ الأوتاد تدلّ على القوة والإقبال والسواقط تدلّ على الضعف والإدبار غير أن التاسع والثالث يدلّان على الشهرة والثاني عشر والسادس يدلان على الاكتتام والستر وخمول الأمر",
+          "engine_rendering": "It is said of the houses' signification that the angles signify power and advance, and the cadent places signify weakness and retreat - except that the ninth and third signify fame, and the twelfth and sixth signify concealment, secrecy, and obscurity of the matter.",
+          "joys_table": {
+            "Mercury": 1,
+            "Moon": 3,
+            "Venus": 5,
+            "Mars": 6,
+            "Sun": 9,
+            "Jupiter": 11,
+            "Saturn": 12
+          },
+          "angularity_classes": {
+            "angles_awtad": "1st, 4th, 7th, 10th - signify power and advance (iqbal); a planet there is 'muqbil'",
+            "succeedent_ma_yali_al_awtad": "2nd, 5th, 8th, 11th - lesser strength",
+            "cadent_sawaqit": "3rd, 6th, 9th, 12th - signify weakness and retreat (idbar); a planet there is 'mudbir', EXCEPT the 3rd and 9th which still signify fame/renown despite being cadent, and the 6th/12th which signify concealment rather than open weakness"
+          }
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter I, paragraph 70, edition p. 56. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch1.aspect_definitions_and_ray",
+      "rule_ids": [
+        "islam.qabisi.ch1.aspect_definitions_and_ray"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter I, paragraph 18, edition p. 26",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "المناظرات وقد يقال في هذه البروج إنّ بعضها ينظر إلى بعض ... وإذا كان كوكب في برج كان شعاعه في البرج الذي ينظر إليه في مثل درجته ودقيقته",
+          "engine_rendering": "On aspects: it is said of these signs that some behold others [...]. And when a planet is in a sign, its ray falls in the sign that beholds it, at the same degree and minute.",
+          "aspect_table": {
+            "3rd_sign_each_direction_11th_too": "sextile (tasdis) and friendship (mawadda)",
+            "4th_sign_each_direction_10th_too": "square (tarbi') and opposition-in-kind (mukhalafa), 'half enmity'",
+            "5th_sign_each_direction_9th_too": "trine (tathlith) and agreement (muwafaqa)",
+            "7th_sign": "opposition (muqabala) and enmity ('adawa)"
+          },
+          "ray_shu_a": "when a planet is in a sign, its ray (shu'a) falls in the sign that beholds it, at the same degree and minute",
+          "unaspected_signs": "the 2nd, 6th, 8th, and 12th signs from any given sign behold nothing of it"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter I, paragraph 18, edition p. 26. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch2.four_tier_planetary_years_table",
+      "rule_ids": [
+        "islam.qabisi.ch2.four_tier_planetary_years_table"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter II, paragraph 5, edition p. 64",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وسني فرداريته إحدى عشرة سنة وسنوه العظمى أربع مائة وخمسة وستّون سنة والكبرى سبع وخمسون سنة والوسطى ثلث واربعون سنة ونصف والصغرى ثلثون سنة [Saturn, representative]",
+          "engine_rendering": "[Saturn, representative] ...and his firdaria years are eleven, and his greatest years are four hundred sixty-five, his great years fifty-seven, his middle years forty-three and a half, and his least years thirty.",
+          "planetary_years_table": {
+            "Saturn": {
+              "greatest": 465,
+              "great": 57,
+              "middle": 43.5,
+              "least": 30
+            },
+            "Jupiter": {
+              "greatest": 428,
+              "great": 79,
+              "middle": 45.5,
+              "least": 12
+            },
+            "Mars": {
+              "greatest": 284,
+              "great": 66,
+              "middle": 40.5,
+              "least": 15
+            },
+            "Sun": {
+              "greatest": 1461,
+              "great": 120,
+              "middle": 39.5,
+              "least": 19
+            },
+            "Venus": {
+              "greatest": 1151,
+              "great": 82,
+              "middle": 45,
+              "least": 8
+            },
+            "Mercury": {
+              "greatest": 480,
+              "great": 76,
+              "middle": 48,
+              "least": 20
+            },
+            "Moon": {
+              "greatest": 520,
+              "great": 108,
+              "middle": 66.5,
+              "least": 25
+            }
+          },
+          "note": "recorded here as a distinct, independently-attested classical constant table (a'zam/kubra/wusta/sughra, 'greatest/great/middle/least'), used elsewhere in the tradition for cyclical and longevity computation; not itself asserted as a length-of-life method by this pass."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter II, paragraph 5, edition p. 64. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch2.node_tail_nature_dual_doctrine",
+      "rule_ids": [
+        "islam.qabisi.ch2.node_tail_nature_dual_doctrine"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter II, paragraph 45, edition p. 86",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وأمّا رأس الجوزهر فإنّه سعد وطبيعته مركّبة من طبيعة المشتري والزهرة ... وقال قوم طبيعته الزيادة فإن كان مع السعود زاد في سعادتها وإن كان مع النحوس زاد في نحوستها ... وأمّا الذنب فإنّه نحس وطبيعته مركّبة من طبيعة زحل والمرّيخ ... وقال قوم إن طبيعته النقصان ... فلذلك قيل إنّ الرأس سعد مع السعود ونحس مع النحوس والذنب نحس مع السعود وسعد مع النحوس",
+          "engine_rendering": "As for the head of the Dragon (the Node): it is fortunate, its nature composite of Jupiter's and Venus's nature [...]. And some say its nature is increase: if with fortunate planets it increases their fortune, if with unfortunate ones it increases their misfortune. As for the Tail: it is unfortunate, its nature composite of Saturn's and Mars's nature [...]. And some say its nature is decrease [...]. Hence it is said: the Node is fortunate with the fortunate and unfortunate with the unfortunate, and the Tail is unfortunate with the fortunate and fortunate with the unfortunate.",
+          "primary_doctrine": "the Node (al-Ra's) is benefic, its nature composite of Jupiter and Venus, signifying kingship, happiness, and wealth; the Tail (al-Dhanab) is malefic, its nature composite of Saturn and Mars, signifying lowliness, downfall, and poverty",
+          "alternate_doctrine": "some (qawm) hold instead that the Node's nature is simply 'increase' (amplifying whatever it accompanies, for good or ill) and the Tail's is 'decrease' - summarized as: the Node is fortunate with fortunate planets and unfortunate with unfortunate ones; the Tail is unfortunate with fortunate planets and fortunate with unfortunate ones",
+          "firdaria_confirmed_elsewhere": "both alternate views agree the Node's firdaria is 3 years and the Tail's is 2 years (see islam.qabisi.ch2.firdaria_full_duration_table)"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter II, paragraph 45, edition p. 86. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch2.ages_of_man_table",
+      "rule_ids": [
+        "islam.qabisi.ch2.ages_of_man_table"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter II, paragraph 44, edition p. 86",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وأمّا استيلاؤهنّ على العمر فإنّ القمر يبتدئ بالتدبير مع خروج الجنين فيدبّر مقدار سني الربية وهي أربع سنين ثمّ عطارد بعد ذلك عشر سنين ثمّ الزهرة بعد ذلك ثماني سنين ثمّ الشمس بعد ذلك تسع عشرة سنة ثمّ المرّيخ بعد ذلك خمس عشرة سنة ثمّ المشتري بعد ذلك اثنتا عشرة سنة ثمّ زحل بعد ذلك إلى آخر العمر",
+          "engine_rendering": "As for their rulership over the lifespan: the Moon begins governance from the child's emergence [birth], and governs the years of infancy, which are four years; then Mercury after that, ten years; then Venus after that, eight years; then the Sun after that, nineteen years; then Mars after that, fifteen years; then Jupiter after that, twelve years; then Saturn after that, to the end of life.",
+          "ages_of_man_years": {
+            "Moon": 4,
+            "Mercury": 10,
+            "Venus": 8,
+            "Sun": 19,
+            "Mars": 15,
+            "Jupiter": 12,
+            "Saturn": "rest of life"
+          },
+          "cross_check": "this is, year for year, Ptolemy's 'ages of man' chronocratory from Tetrabiblos IV.10 (Moon 4, Mercury 10, Venus 8, Sun 19, Mars 15, Jupiter 12, Saturn to the end). Al-Qabisi transmits it unchanged and without naming Ptolemy at this specific point (contrast islam.qabisi.ch1.exaltation_fall_table_and_ptolemy_disagreement, where Ptolemy IS named). This is a distinct system from firdaria: it runs once, in a fixed order, over an entire lifetime, rather than a repeating 75-year cycle."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter II, paragraph 44, edition p. 86. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch2.planetary_hour_sequence",
+      "rule_ids": [
+        "islam.qabisi.ch2.planetary_hour_sequence"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter II, paragraph 49, edition p. 88",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وإذا كان يوم أو ليلة لكوكب من الكواكب فإنّ الساعة الأولى منه لذلك الكوكب والساعة الثانية للكوكب الذي يليه والثالثة للكوكب الذي يلي ذلك الكوكب مثاله أنّ يوم الجمعة للزهرة فالساعة الأولى منه للزهرة والساعة الثانية لعطارد والثالثة للقمر والرابعة لزحل",
+          "engine_rendering": "When a day or night belongs to one of the planets, its first hour belongs to that planet, its second hour to the planet following it, its third to the planet following that one. For example, Friday belongs to Venus, so its first hour belongs to Venus, its second to Mercury, its third to the Moon, its fourth to Saturn.",
+          "rule": "the first (unequal, 'zamaniyya') hour of any day or night belongs to that day's own planet; each following hour passes to the next planet in the descending Chaldean order (Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon), cycling continuously",
+          "gender": "the first hour of every day and night is masculine, the second feminine, alternating for the rest of the day-and-night",
+          "worked_example": "Friday belongs to Venus, so its first hour is Venus's, the second Mercury's, the third the Moon's, the fourth Saturn's, and so on"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter II, paragraph 49, edition p. 88. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch2.planetary_core_natures",
+      "rule_ids": [
+        "islam.qabisi.ch2.planetary_core_natures"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter II, paragraph 2, edition p. 62",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "زحل نحس ذكر نهاري ... وقال ما شاء الله يدلّ على اليهودية ولبس السواد ... المشتري سعد ذكر نهاري ... المرّيخ نحس ذكر ليلي ... الشمس سعد بالنظر نحس بالمقارنة وهي ذكر نهارية ... الزهرة سعد أنثى ليلية ... عطارد ممتزج ذكر نهاري يميل طبعه إلى ما مازجه من الكواكب والبروج ... القمر سعد أنثى ليلي",
+          "engine_rendering": "Saturn is malefic, masculine, diurnal [...]. And Masha'allah said: it signifies Judaism and the wearing of black. Jupiter is benefic, masculine, diurnal. Mars is malefic, masculine, nocturnal. The Sun is benefic by aspect, malefic by conjunction, and is masculine, diurnal. Venus is benefic, feminine, nocturnal. Mercury is of mixed nature, masculine, diurnal, its nature inclining to whatever planet or sign it mixes with. The Moon is benefic, feminine, nocturnal.",
+          "core_natures": {
+            "Saturn": "malefic (nahs), masculine, diurnal",
+            "Jupiter": "benefic (sa'd), masculine, diurnal",
+            "Mars": "malefic (nahs), masculine, nocturnal",
+            "Sun": "benefic by aspect but malefic by conjunction (sa'd bi'l-nazar nahs bi'l-muqarana), masculine, diurnal",
+            "Venus": "benefic (sa'd), feminine, nocturnal",
+            "Mercury": "mixed/common (mumtazij), masculine, diurnal, inclines to whatever planet or sign it mixes with",
+            "Moon": "benefic (sa'd), feminine, nocturnal"
+          },
+          "named_citations_in_this_chapter": "each planet's description carries named-authority citations layered onto the base nature: Masha'allah is repeatedly cited for physiognomy and peoples/ethnicities associated with each planet (e.g. 'wa qala Masha'allah ... yadullu 'ala al-yahudiyya wa-lubs al-sawad', 'Masha'allah said [Saturn] signifies Judaism and wearing black'); Dorotheus is repeatedly cited for each planet's own lot and select temperament traits. These attributions are preserved by name rather than merged into a generic 'the tradition holds'."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter II, paragraph 2, edition p. 62. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.apogee_speed_and_latitude_doctrine",
+      "rule_ids": [
+        "islam.qabisi.ch3.apogee_speed_and_latitude_doctrine"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 2, edition p. 90",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فأمّا حالات الكواكب في أنفسها فهو أن يكون الكوكب صاعدا في فلك أوجه ناقصا في النور والعظم والسير ... وإذا كان بينه وبين أوجه تسعون درجة سواء فهو معتدل في النور والعظم والسير ... ومنها أن يكون الكوكب شماليا وهو إذا جاوز جوزهره بأقل من تسعين درجة فهو شمالي صاعد",
+          "engine_rendering": "As for the planets' states in themselves: a planet ascending in the sphere of its apogee is deficient in light, size, and motion [...]. When it is exactly ninety degrees from its apogee it is moderate in light, size, and motion [...]. Among these too: a planet is northern if it has passed its node by less than ninety degrees, and is then northern ascending.",
+          "apogee_rule": "a planet ascending in the sphere of its apogee decreases in light, size, and motion; less than 90 degrees before or after its apogee is still 'ascending'; at exactly 90 degrees it is 'moderate' (mu'tadil); beyond that it is descending in the apogee sphere and increasing in light, size, and motion",
+          "latitude_rule": "measured from the node in 90-degree quadrants: 0-90 degrees past the node is northern ascending; 90-180 is northern descending; 180-270 is southern descending; 270-360 is southern ascending"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 2, edition p. 90. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.muwajaha_and_dusturiyya",
+      "rule_ids": [
+        "islam.qabisi.ch3.muwajaha_and_dusturiyya"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 5, edition p. 92",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فمن ذلك ما ذكره بطلميوس من المواجهة وهو أن يكون بين الكوكب وبين الشمس وهو مغرّب ... ومن ذلك دستورية الكوكب وهو أن يكون الكوكب في حيّزه في وتد من أوتاد الطالع وأحد النيّرين في حيّزه مربّع له في وتد آخر بالنهار من الشمس وبالليل من القمر",
+          "engine_rendering": "Among these is what Ptolemy mentioned of 'facing' (muwajaha): that between the planet, occidental of the Sun, and the Sun [...]. Among these too is a planet's 'dusturiyya' (council/authority): that the planet be in its hayyiz, in one of the Ascendant's angles, and one of the two luminaries also be in its own hayyiz, square to it from another angle - by day from the Sun, by night from the Moon.",
+          "muwajaha": "attributed explicitly to Ptolemy: a planet is 'in the Sun's muwajaha (facing)' when, counting occidental from the Sun, it stands as many signs from the Sun's own domicile as its own domicile is from the Sun's (e.g. Saturn 6 signs, Jupiter 5, Mars 4, Venus 3, Mercury 2); analogously for the Moon, counted oriental of the Moon",
+          "dusturiyya": "a planet is in 'dusturiyya' (council/authority) when it is in its own hayyiz AND angular, while one of the luminaries is also in its own hayyiz and square to it from another angle (by day from the Sun, by night from the Moon) - a stricter, doubly-conditioned configuration beyond plain hayyiz"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 5, edition p. 92. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.oriental_occidental_inferior_phase",
+      "rule_ids": [
+        "islam.qabisi.ch3.oriental_occidental_inferior_phase"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 10, edition p. 94",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فأمّا السفلية فمنذ تفارق الشمس وهي راجعة تسمّى شرقية ضعيفة فلا تزال كذلك حتّى تنتهي إلى استقامتها فهي عند ذلك شرقية قويّة إلى أن يصير بعدها من الشمس كبعد الشمس منها عند الرجعة ثمّ تكون شرقية ضعيفة إلى أن تغمر في الشعاع",
+          "engine_rendering": "As for the inferior planets: from when they separate from the Sun while retrograde, they are called weak oriental, and remain so until they reach their direct station, at which point they are strong oriental, until their distance from the Sun equals what it was at the retrograde station; then they are weak oriental again until submerged in the beams.",
+          "cycle": "from separating from the Sun while retrograde: weak oriental; from stationing direct until as far from the Sun as at retrograde station: strong oriental; then weak oriental again until submerged in the beams, then samim, then combust moving toward emergence; symmetric occidental phases follow after heliacal rising in the west",
+          "note": "unlike the superior planets, the inferior planets' cycle is anchored to their own retrograde/direct stations rather than to fixed 30/60-degree elongation points."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 10, edition p. 94. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.void_of_course_and_feral",
+      "rule_ids": [
+        "islam.qabisi.ch3.void_of_course_and_feral"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 12, edition p. 96",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فإذا انصرف كوكب عن كوكب ولم يتّصل بكوكب ما دام في برجه قيل إنّه خالي السير وإذا كان كوكب في برج لا ينظر إلى برجه كوكب آخر ما دام فيه قيل إنّه وحشي",
+          "engine_rendering": "When a planet has separated from another and applies to no planet for as long as it remains in its sign, it is said to be void of course. When a planet is in a sign that no other planet beholds for as long as it remains there, it is said to be feral.",
+          "khali_al_sayr": "a planet that has separated from one planet and, while still in its own sign, applies to no other, is 'void of course' (khali al-sayr) - the general (any-planet) form of the concept usually reserved for the Moon alone in later Latin practice",
+          "wahshi": "a planet in a sign that no other planet beholds (aspects), for as long as it remains in that sign, is called 'feral' (wahshi)"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 12, edition p. 96. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.translation_and_collection_of_light",
+      "rule_ids": [
+        "islam.qabisi.ch3.translation_and_collection_of_light"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 14, edition p. 96",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فإذا انصرف كوكب خفيف عن كوكب ثقيل واتّصل بكوكب آخر نقل طبيعة الكوكب الأوّل إلى الثاني ... فإذا لم يتّصل أحد الكوكبين بالآخر غير أنّهما يتّصلان جميعا بكوكب آخر فإذا نظر ذلك الكوكب إلى بعض مواضع الفلك ردّ نورهما إلى ذلك الموضع وهذا المعنى يقال له ردّ النور",
+          "engine_rendering": "When a light planet separates from a heavy one and connects with another planet, it carries the first planet's nature to the second [...]. When neither of two planets connects with the other, but both connect with a third planet, and that planet beholds some place in the sphere, it returns their light to that place - this is called the reflection of light.",
+          "naql_al_tabia": "if a light planet separates from a heavy one and connects with another, it carries the first planet's nature to the second; if it separates from a heavy planet and connects with one heavier still, the middle planet carries the lighter one's nature to the heaviest",
+          "radd_al_nur_form_1": "if two planets do not connect with each other but both connect with a third, and that third beholds some place in the sphere, it returns (radd) their light to that place",
+          "radd_al_nur_form_2": "if two planets do not connect with each other, but another planet moves between them (transfers between their degrees), it returns the light of one to the other - this too is called radd al-nur"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 14, edition p. 96. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.prevention_man_two_forms",
+      "rule_ids": [
+        "islam.qabisi.ch3.prevention_man_two_forms"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 16, edition p. 96",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك المنع وهو على وجهين أحدهما من مقارنة وهو أن يكون ثلثة كواكب في برج واحد مختلفة الدرج ويكون الثقيل أكثرها درجا والأوسط قد منع الأقلّ درجا من الاتّصال بالثقيل إلى أن يجوزه",
+          "engine_rendering": "Among these is prevention, which has two forms. One is by conjunction: three planets in one sign at differing degrees, the heaviest holding the greatest degree, and the middle one prevents the planet of least degree from connecting with the heaviest until it passes it.",
+          "by_conjunction": "three planets share one sign at different degrees; the heaviest holds the highest degree, and the middle planet's presence prevents the lightest from completing its application to the heaviest until it passes the middle one",
+          "by_aspect": "two planets share a sign, the lighter applying to the heavier by conjunction, while a third planet beholds the heavier by aspect; whichever of the conjoined and the beholding planet has the closer degree to the heavy planet 'wins' the connection, blocking the other"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 16, edition p. 96. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.reception_and_return",
+      "rule_ids": [
+        "islam.qabisi.ch3.reception_and_return"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 17, edition p. 98",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وإذا اتّصل كوكب بصاحب البرج الذي هو فيه أو صاحب شرفه أو غير ذلك من الحظوظ دفع طبيعة الكوكب إليه ... ومن ذلك الردّ وهو أن يتّصل الكوكب بكوكب محترق أو راجع فيردّ عليه القوّة لضعفه فإذا كان الكوكبان في وتد أو ما يلي وتدا كان ردّا بصلاح ... فأمّا إن كان الكوكب المتّصل ساقطا ... كان ردّه بفساد",
+          "engine_rendering": "When a planet connects with the lord of the sign it is in, or the lord of its exaltation, or another of its dignities, that lord gives its nature to it [...]. Among these is return: a planet connects with a combust or retrograde planet and returns power to it on account of its weakness; if the two planets are angular or succeedent this is a sound return; but if the connecting planet is cadent, the return is a corrupt one.",
+          "qabul": "if a planet connects with the lord of the sign, exaltation, or other dignity it occupies, that lord 'gives' its nature to the connecting planet (qabul, reception); if it holds a dignity itself and connects with a planet that also holds a dignity at that place, both natures are given",
+          "radd": "if a planet connects with a combust or retrograde (i.e. weakened) planet, it 'returns power' to it because of its weakness; if both planets are angular or succeedent this return is a GOOD return; if the connecting planet is cadent (while the other is angular/succeedent, or both are cadent), the return is a CORRUPT return"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 17, edition p. 98. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.frustration_variants",
+      "rule_ids": [
+        "islam.qabisi.ch3.frustration_variants"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 21, edition p. 98",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك الانتكاث وهو أن يكون كوكب يريد الاتّصال بكوكب فقبل أن يتمّ اتّصاله به يرجع فيبطل الاتّصال ... ومن ذلك الاعتراض ... ومنه الفوت ... ومن ذلك قطع النور",
+          "engine_rendering": "Among these is intikath (breaking-off): a planet wishing to connect with another retrogrades before completing the connection, voiding it. Among these is i'tirad (obstruction) [...]. Among these is fawt (missing) [...]. Among these is qat' al-nur (cutting the light) [...].",
+          "intikath": "a planet heading toward connection retrogrades before completing it, voiding the application",
+          "i_tirad": "a lighter, faster planet than the one already applying retrogrades into conjunction with the target first, completing the connection ahead of the original applying planet and voiding its approach",
+          "fawt": "a planet heading toward connection changes sign before arriving, and a different planet already aspecting the new sign connects with the target instead",
+          "qat_al_nur": "a third planet, positioned in the second sign from the target, retrogrades into conjunction with the target and thereby 'cuts the light' before the original applying planet arrives; the same name covers the case where the target itself was about to connect with a heavier planet and that heavier planet's own retrogradation into a third planet cuts the transfer first"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 21, edition p. 98. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch3.planetary_friendship_enmity_table",
+      "rule_ids": [
+        "islam.qabisi.ch3.planetary_friendship_enmity_table"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter III, paragraph 30, edition p. 104",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فأمّا المصادقة فإنّ بعض القدماء قال إنّ المشتري مصادق لجميع الكواكب سوى المرّيخ وهي مصادقة له والزهرة مصادقة لجميع الكواكب وهي مصادقة لها إلّا زحل وزحل أصدقاؤه المشتري والشمس والقمر وأعداؤه المرّيخ والزهرة وهي له أشدّ عداوة",
+          "engine_rendering": "As for friendship: some of the ancients said that Jupiter is friend to all planets except Mars, though Mars is friendly to it; Venus is friend to all planets except Saturn, though Saturn is hostile to her, more fiercely than she to him; Saturn's friends are Jupiter, the Sun, and the Moon, and his enemies are Mars and Venus, she being the more hostile of the two.",
+          "attribution": "attributed to 'some of the ancients' (ba'd al-qudama'), not named individually",
+          "friendship_enmity_table": {
+            "Jupiter": {
+              "friends": "all planets except Mars",
+              "note": "one-directional: Mars IS friendly to Jupiter even though this list does not name Jupiter among Mars's friends elsewhere in the same passage; the source's own list is asymmetric and is preserved as stated"
+            },
+            "Venus": {
+              "friends": "all planets except Saturn",
+              "enemies": [
+                "Saturn (fiercest)"
+              ]
+            },
+            "Saturn": {
+              "friends": [
+                "Jupiter",
+                "Sun",
+                "Moon"
+              ],
+              "enemies": [
+                "Mars",
+                "Venus (fiercer)"
+              ]
+            },
+            "Mars": {
+              "friends": [
+                "Venus"
+              ],
+              "enemies": [
+                "all others, fiercest Jupiter"
+              ]
+            },
+            "Sun": {
+              "friends": [
+                "Jupiter",
+                "Venus",
+                "Saturn"
+              ],
+              "enemies": [
+                "Mercury",
+                "Moon"
+              ]
+            },
+            "Mercury": {
+              "friends": [
+                "Jupiter",
+                "Venus",
+                "Saturn"
+              ],
+              "enemies": [
+                "Sun",
+                "Moon",
+                "Mars"
+              ]
+            },
+            "Moon": {
+              "friends": [
+                "Jupiter",
+                "Venus",
+                "Saturn"
+              ],
+              "enemies": [
+                "Mercury",
+                "Mars"
+              ]
+            },
+            "north_node_al_ras": {
+              "friends": [
+                "Jupiter",
+                "Venus"
+              ],
+              "enemies": [
+                "Mars",
+                "Saturn"
+              ]
+            },
+            "south_node_al_dhanab": {
+              "friends": [
+                "Saturn",
+                "Mars"
+              ],
+              "enemies": [
+                "Sun",
+                "Moon",
+                "Jupiter",
+                "Venus"
+              ]
+            }
+          },
+          "additional_enmity_types": "two further named relations: planets whose domiciles are in opposition, and planets whose exaltations are in opposition, are each called a distinct kind of enmity ('adawa)",
+          "strongest_friendship_rule": "the strongest friendship is a shared nature in quality, temperament, and substance - e.g. Mars and the Sun agree in heat and dryness (and Mars is lord of the Sun's exaltation sign), Moon and Venus agree in cold and moisture (and Venus is lady of the Moon's exaltation sign)",
+          "cross_tradition_note": "a fully asymmetric natural friend/enemy table between planets closely parallels the 'naisargika maitri' (natural friendship) doctrine independently documented in the Jyotisha pack of this same corpus; this is recorded here purely as an observation for future cross-tradition comparison, not as a merge of doctrine, and no Jyotisha values are imported into this rule."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter III, paragraph 30, edition p. 104. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.namudar_prenatal_syzygy",
+      "rule_ids": [
+        "islam.qabisi.ch4.namudar_prenatal_syzygy"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 3, edition p. 108",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك النمودار وقد يظن ّ به كثير من المنجّمين أنّه يخرج به درجة طالع المولود بعينها وذلك خطأ وقد بيّنت ذلك في كتابي في النمودارات ... وقد قال بطلميوس إنّ جزء النيّر الذي فوق الأرض هو جزء الاستقبال وقد قال بعض العلماء إنّ تهيّأ للاستقبال أن يكون أحد النيّرين في جزء المشرق والآخر في جزء المغرب فجزء الاستقبال جزء المشرق وقال واليس إنّ جزء الاستقبال هو الجزء الذي فيه الامتلاء يعني جزء القمر",
+          "engine_rendering": "Among these is the namudar (pre-natal figure). Many astrologers wrongly think it yields the native's own Ascendant degree exactly; that is an error, which I have already shown in my book on namudars [...]. Ptolemy said the degree of prevention is that of whichever luminary is above the earth; some scholars said the degree of prevention is that of whichever luminary is in the eastern part; and Valens said the degree of prevention is the degree of fullness, meaning the Moon's degree.",
+          "correction_of_misconception": "al-Qabisi states explicitly that many astrologers wrongly think the namudar yields the native's own exact Ascendant degree; he says this is an error he has already demonstrated in his own book on namudars, and that it instead yields the first degree of the sphere properly belonging to the native after the Ascendant degree, in the natural direction of motion (though it often coincides with the Ascendant degree)",
+          "classification": "if the syzygy (new or full Moon) preceding birth nearest to birth is a conjunction (ijtima'), the nativity is 'conjunctional' (ijtima'i); if the nearer one is an opposition (istiqbal), the nativity is 'preventional' (istiqbali)",
+          "named_dispute_on_the_prevention_degree": "al-Qabisi records three named views on which of the two luminaries' degrees counts as 'the degree of prevention' at a full Moon: Ptolemy holds it is the luminary above the earth; some scholars hold it is whichever luminary is in the eastern (rising) part; Valens (Walis) holds it is the degree of fullness, i.e. the Moon's own degree",
+          "tie_break": "if more than one planet is equally dominant (most claims of dignity) over the conjunction/prevention degree, Ptolemy's rule makes the swiftest-changing one 'sahib al-hayyiz' (the hayyiz-holder) for this purpose"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 3, edition p. 108. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.hyleg_candidate_places",
+      "rule_ids": [
+        "islam.qabisi.ch4.hyleg_candidate_places"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 4, edition p. 110",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك الهيلاج في المواليد ومعرفته أن تنظر إلى وقت المولد فإن كان نهاريا تبدأ بالشمس فإن كانت قبل درجة الطالع بخمس درج فما دون ذلك أو كانت في العاشر أو في الحادي عشر مذكّرا كان البرج أو مؤنّثا فهي تصلح أن تكون هيلاجا ... وإنّما تصلح هذه الثلثة للهيلاجية إذا كانت في المواضع الثمانية التي هي الأوتاد وما يليها ... وكلّ موضع من المواضع التي ذكرناها إنّها تصلح للهيلاجية إذا ينظر إليها أحد أرباب الحظوظ الخمس",
+          "engine_rendering": "Among these is the hyleg in nativities. To know it: look to the time of birth. If diurnal, begin with the Sun: if it is within five degrees before the Ascendant degree (or less), or in the tenth or eleventh place - masculine or feminine sign alike - it is fit to be hyleg [... full candidate sequence for Moon, syzygy, Lot of Fortune, and Ascendant follows, with gender conditions on the luminaries and pure angularity for the other three ...]. And each of the places we have named is fit for hyleg-status only if one of the five lords of its dignities beholds it.",
+          "day_birth_sequence": "check the Sun first: eligible if within 5 degrees before the Ascendant degree (or less), or in the 10th or 11th place (any gender of sign); also eligible if in the 7th, 8th, or 9th place IF that sign is masculine (not eligible there if feminine); if the Sun is not eligible, check the Moon: eligible in the Ascendant, 2nd, 3rd, 7th, or 8th place (any gender); or within 5 degrees before the Ascendant, or in the 10th, 11th, 4th, or 5th place IF that sign is feminine (not eligible there if masculine)",
+          "night_birth_sequence": "the same candidate places, but beginning with the Moon, then the Sun, with the gender conditions applied symmetrically",
+          "fallback_sequence": "if neither luminary qualifies: check the prenatal syzygy degree (conjunction or prevention, whichever governs the nativity) for angularity; if not angular, check the Lot of Fortune's degree for angularity; if that too fails, the Ascendant degree itself becomes the hyleg by default",
+          "angularity_requirement_detail": "'angular or near it' is defined precisely: a candidate degree counts as angular if it is within 5 whole degrees before the computed house cusp, measured by the equal-hour-based house division set out in the zij",
+          "final_gate": "even a place that reaches one of these eight positions is only hyleg-eligible if it is beheld (aspected) by at least one of the five dignity-lords of that degree (domicile, exaltation, bound, triplicity, or face lord); if none of the five lords aspects it, it fails as hyleg regardless of position"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 4, edition p. 110. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.kadkhudah_alcocoden",
+      "rule_ids": [
+        "islam.qabisi.ch4.kadkhudah_alcocoden"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 5, edition p. 114",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك الكدخذاه وهو دليل كمّية العمر فإذا أردت معرفة ذلك وكنت قد عرفت الهيلاج بالطريق الذي قدّمنا ذكره نظرت إلى صاحب بيت الهيلاج أو شرفه أو حدّه أو مثلّثته أو وجهه فأيّهم كان أكثر مزاعمة في جزء الهيلاج وكان ينظر إلى الهيلاج كان أولى بالكدخذاهية ... وكان دروثيوس يقدّم صاحب الحدّ في ذلك على صاحب البيت",
+          "engine_rendering": "Among these is the kadkhudah, the indicator of the quantity of life. To know it, having already known the hyleg by the method given above, look to the lord of the hyleg's domicile, or its exaltation, its bound, its triplicity, or its face; whichever of these holds the greatest claim over the hyleg's degree and beholds the hyleg is the most entitled to be kadkhudah [...]. And Dorotheus used to place the lord of the bound ahead of the lord of the domicile in this.",
+          "default_priority_order": "domicile lord, then exaltation lord, then bound lord, then triplicity lord, then face lord of the hyleg's own degree - whichever of these, in that order, also aspects the hyleg's degree, becomes kadkhudah; if the domicile lord does not aspect, move to exaltation lord, and so on down the list",
+          "named_disagreement": "Dorotheus is cited by name as reversing this priority: he places the bound lord (sahib al-hadd) AHEAD of the domicile lord (sahib al-bayt) when both aspect the hyleg",
+          "tie_break_rule_1": "if two or three planets tie in dignity-claims over the hyleg's degree and all aspect it, the one with the strongest place (by angularity) wins; if place-strength also ties, the closer in degree to the hyleg's own degree wins",
+          "tie_break_rule_2": "an alternative named procedure ('some say') resolves ties by working strictly down the fixed order domicile-exaltation-bound-triplicity-face without regard to angularity or degree-closeness: whichever of these lords aspects the hyleg first in that fixed order is simply taken as kadkhudah",
+          "tie_break_rule_3_solar_lunar": "if several candidates still tie, the one nearest the Sun in the sense of the Sun's own favorable states (cazimi/samim, or heliacally rising, or in its first station) is preferred as kadkhudah",
+          "collapse_case": "if the hyleg itself is the Sun and the Sun is in Aries or Leo (its own domicile), the Sun is simultaneously hyleg AND kadkhudah, and no further search for a kadkhudah is made; symmetrically for the Moon as hyleg in Taurus or Cancer"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 5, edition p. 114. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.al_wali_governor",
+      "rule_ids": [
+        "islam.qabisi.ch4.al_wali_governor"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 7, edition p. 116",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فأمّا الوالي وهو المبتزّ على المولد ومنه يستدلّ على أحوال المولود بعد الهيلاج والكدخذاه فهو أكثر الكواكب مزاعمة في الطالع وموضع النيّرين وموضع سهم السعادة وموضع جزء الاجتماع أو الاستقبال الذي يكون قبل المولد ... وبعضهم يقيمه مقام الكدخذاه في عطيّة العمر",
+          "engine_rendering": "As for al-wali, the one that prevails over the nativity, from which the native's conditions are inferred after the hyleg and the kadkhudah: it is whichever planet holds the greatest claims over the Ascendant, the place of the two luminaries, the place of the Lot of Fortune, and the place of the conjunction or prevention degree preceding the birth [...]. Some place it in the position of the kadkhudah in the matter of the grant of years.",
+          "definition": "al-wali, also called al-mubtazz (the one that prevails), is whichever planet holds the greatest combined dignity-claims across the Ascendant, both luminaries' places, the Lot of Fortune's place, and the prenatal syzygy degree; if one planet overpowers two, three, or four of these places by weight of its dignity claims, it is al-wali",
+          "function": "al-wali is consulted, after the hyleg and kadkhudah, for the native's general conditions; some authors substitute it for the kadkhudah specifically in the matter of the grant of years"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 7, edition p. 116. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.world_year_profection_al_kindi",
+      "rule_ids": [
+        "islam.qabisi.ch4.world_year_profection_al_kindi"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 9, edition p. 118",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "فأمّا الانتهاء من سني العالم فإنّ الكندي ذكر أنه كان بين سنة القران الدالّ على الملّة وبين الهجرة اثنتان وخمسون سنة شمسية وكان طالع سنة قران الملّة الجوزاء وانتهت السنة التي هاجر فيها رسول الله صلى الله عليه وسلم إلى السنبلة وبين الهجرة وبين يزدجرد ثلثة آلاف وستّمائة وأربعة وعشرون يوما",
+          "engine_rendering": "As for the arrival of the world-years: al-Kindi reported that between the year of the conjunction signifying the religion and the Hijra there were fifty-two solar years; the Ascendant of the year of the conjunction of the religion was Gemini; the year in which the Messenger of God, God bless him and grant him peace, emigrated arrived at Virgo; and between the Hijra and Yazdgird there are three thousand six hundred twenty-four days.",
+          "al_kindi_data": "al-Kindi reported 52 solar years between the year of the 'conjunction of the religion' (qiran al-milla) and the Hijra; the Ascendant of the conjunction-of-religion year was Gemini; the year in which the Prophet emigrated (the Hijra) arrived at Virgo; between the Hijra and the Yazdgird era lie 3624 days",
+          "alternate_method": "a different, unnamed authority ('other than al-Kindi') instead adds 61 years, 2 months, 12 days, and 16 Persian hours to the completed Yazdgird years, and profects from Libra (for the conjunction-of-religion arrival), from Scorpio (for the arrival of the conjunction itself), or from Virgo minus specific year-offsets (117 years for the 'ascendant of the dynasty', 176 years for the watery-to-fiery triplicity transition)"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 9, edition p. 118. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.duodecatemoria_formula",
+      "rule_ids": [
+        "islam.qabisi.ch4.duodecatemoria_formula"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 15, edition p. 128",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك الاثنا عشرية للكواكب والبيوت وهو أن تنظر ما سار الكوكب في برجه أو درج البيت الذي تريد من الدرج والدقائق فتضرب ذلك في اثني عشر ثمّ تعد ّ من أوّل البرج الذي تلك الدرج منه لكلّ برج ثلثين درجة فحيث نفد العدد فثم ّ اثنا عشرية الكوكب أو البيت",
+          "engine_rendering": "Among these is the duodecatemorion for planets and house-cusps: look at how far the planet has traveled in its sign, or the cusp's degree and minutes; multiply that by twelve; then count from the start of the sign that figure belongs to, allotting thirty degrees per sign; wherever the count ends is the duodecatemorion of the planet or the cusp.",
+          "formula": "take the degrees and minutes the planet (or cusp) has traveled within its own sign, multiply by 12, then count that many degrees from the start of the sign the resulting figure falls in, allotting 30 degrees per sign as you count; wherever the count ends is the duodecatemorion"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 15, edition p. 128. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.darijan_ascendant_decans",
+      "rule_ids": [
+        "islam.qabisi.ch4.darijan_ascendant_decans"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 18, edition p. 130",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك الدريجان وهو أن تقسم الطالع بثلثة أقسام كلّ قسم عشر درج فتجعل القسم الأوّل لربّ الطالع والقسم الثاني لربّ الخامس والقسم الثالث لربّ التاسع والطالع والخامس والتاسع أبدا مثلّثة مثاله أن الطالع الحمل ما بين أوّله إلى عشر درج فيكون دريجانه المرّيخ",
+          "engine_rendering": "Among these is al-darijan: you divide the Ascendant into three parts, each ten degrees, and assign the first part to the lord of the Ascendant, the second part to the lord of the fifth, and the third to the lord of the ninth - the Ascendant, fifth, and ninth always being one triplicity. For example: if the Ascendant is Aries, from its start to ten degrees, its darijan is Mars.",
+          "method": "the Ascendant sign's first 10 degrees are ruled by the lord of the Ascendant sign; the second 10 degrees by the lord of the 5th sign from the Ascendant; the third 10 degrees by the lord of the 9th - since the Ascendant, 5th, and 9th are always one triplicity",
+          "worked_example": "for Ascendant Aries: 0-10 degrees ruled by Mars (lord of Aries), 10-20 by the Sun (lord of Leo, the 5th), 20-30 by Jupiter (lord of Sagittarius, the 9th)",
+          "distinctness_note": "this is a DIFFERENT threefold division from the ordinary Chaldean face/decan table (islam.qabisi.ch1.face_table_chaldean_order): darijan applies only to the Ascendant sign and uses the Ascendant-5th-9th triplicity lords, not the continuous Chaldean cycle."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 18, edition p. 130. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.sahib_al_dawr_hour_lord_years",
+      "rule_ids": [
+        "islam.qabisi.ch4.sahib_al_dawr_hour_lord_years"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 19, edition p. 132",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك صاحب الدور في المواليد وهو أن تنظر إلى ربّ الساعة التي ولد فيها المولود فتجعل للطالع وللسنة الأولى من ولادته ... وتجعل ربّ الساعة الثانية منه للبيت الثاني من الطالع وللسنة الثانية ... ومنهم من يجعل صاحب الدور صاحب طالع الأصل لأوّل سنة والسنة الثانية للكوكب الذي يليه",
+          "engine_rendering": "Among these is sahib al-dawr (lord of the rotation) in nativities: look to the lord of the hour in which the native was born, and assign it to the Ascendant and to the first year of life [...]; assign the lord of the second hour after it to the second house from the Ascendant and to the second year [...]. And some of them make sahib al-dawr instead the lord of the radical Ascendant for the first year, and the planet following it for the second year.",
+          "method": "the lord of the hour in which the native was born governs the Ascendant and the first year of life; the lord of the second hour after birth governs the 2nd house and the 2nd year; the lord of the third hour governs the 3rd house and 3rd year; and so on in strict parallel, each successive birth-hour's lord mapped to the correspondingly numbered house AND the correspondingly numbered year (continuing past the 12th house/year by wrapping back to the 1st house with the 13th hour-lord, etc.)",
+          "naming_convention": "each hour-lord in this sequence is named after its assigned house (e.g. 'lord of the Ascendant-hour', 'lord of the wealth-house-hour') and, collectively, the whole sequence is also called 'sahib al-dawr' (lord of the cycle/rotation); it is consulted for that year's affairs the same way the corresponding house's own ordinary lord would be consulted, and cross-referenced the same way as the annual profection's salkhadhay",
+          "named_alternative": "some (minhum) instead assign the natal Ascendant-lord itself to the first year, the next planet in sequence to the second year, and so on - paralleling the hour-lord method but starting from the Ascendant's own domicile lord rather than the birth-hour sequence"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 19, edition p. 132. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.fath_al_abwab",
+      "rule_ids": [
+        "islam.qabisi.ch4.fath_al_abwab"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 22, edition p. 136",
+        "evidence_grade_of_rule": "B"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك فتح الأبواب فإنّه يقال ذلك إذا اتّصل الكوكب السفلي بالكوكب العلوي ويكون بيتاهما متقابلين",
+          "engine_rendering": "Among these is 'the opening of the doors': it is so called when the lower planet connects with the higher planet, and their two domiciles are opposite one another.",
+          "definition": "when the lower planet connects with the higher planet, and their two domiciles are opposite signs to one another (e.g. Mars, lord of Aries, connecting with Venus, lady of Libra), this configuration is called 'the opening of the doors'"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 22, edition p. 136. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch4.al_bust_indian_election_hours",
+      "rule_ids": [
+        "islam.qabisi.ch4.al_bust_indian_election_hours"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter IV, paragraph 23, edition p. 136",
+        "evidence_grade_of_rule": "C"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "ومن ذلك البست وهو شيء كانت تعمل به الهند كثيرا ... وقال قوم البست هو أن تعد ّ بعد الاجتماع اثنتا عشرة ساعة زمانية تسمّى محترقة لا ينبغي لأحد أن يبتدئ فيها بعمل ... فقالوا من ابتدأ في الأربع ساعات الأولى بالحرب خيف على نفسه التلف",
+          "engine_rendering": "Among these is al-bust, a thing the people of India used to practice a great deal [...]. And some said al-bust is that you count, after the conjunction, twelve temporal hours called combust, in which no one should begin any undertaking [...]. They said: whoever begins war in the first four hours risks death to himself.",
+          "attribution": "explicitly attributed to India: 'a thing the people of India used to practice a great deal' (shay' kanat ta'malu bihi al-Hind kathiran)",
+          "method_1": "count 12 hours after the conjunction, assign them to the Sun, subdivided into three 4-hour blocks each ruled by the Sun's own triplicity lords at the conjunction moment; the next 12 hours go to Venus (again split into thirds by Venus's triplicity lords), then Mercury, and so on through the planets in order, the full cycle returning to the Sun after 84 hours (12x7), repeating continuously until the next conjunction",
+          "method_2_alternate": "a different group holds instead that the 12 hours immediately after conjunction are 'combust' (muhtariqa) hours in which no one should begin any undertaking; the following 72 hours are 'not combust' and suitable for beginning actions; then 12 more combust hours, cycling to the next conjunction",
+          "war_omen_subdivision": "the alternate view further subdivides the 12 combust hours into three 4-hour blocks with specific war-timing omens: beginning a war in the first 4 hours risks death to the actor himself; in the second 4 hours, risk of bodily calamity without death; in the last 4 hours, risk of great calamity to one's wealth, property, associates, and dependents"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter IV, paragraph 23, edition p. 136. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch5.lot_of_fortune_general_method",
+      "rule_ids": [
+        "islam.qabisi.ch5.lot_of_fortune_general_method"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter V, paragraph 2, edition p. 140",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وإذا قلنا في بعض السهام خذ من موضع كذا إلى موضع كذا وألقه من الطالع أو من موضع آخر وهو أن تزيد على ما بين الموضعين درج الطالع أو الدرج التي في ذلك البرج الذي تلقي منه ثمّ تلقي ذلك من أوّل برج الطالع أو من أوّل البرج الذي يلقى منه مثال ذلك عمل سهم السعادة فإنّك تأخذ ما بين الشمس والقمر وتلقيه من الطالع",
+          "engine_rendering": "When we say, of some lot, 'take from such a place to such a place, and cast it from the Ascendant,' this means: add to the arc between the two places the Ascendant's own degree, or the degree within the sign you are casting from, then cast that total from the start of the Ascendant's sign, or the start of the sign you are casting from. For example, the working of the Lot of Fortune: you take the arc between the Sun and the Moon and cast it from the Ascendant.",
+          "general_method": "when a lot is described as 'take from place A to place B, and cast it from the Ascendant (or another named place)', this means: add the Ascendant's own degree-distance to the arc from A to B, then count that total forward from the start of the sign you are casting from",
+          "lot_of_fortune_worked": "take the arc from the Sun to the Moon, and cast it from the Ascendant, i.e. add the Ascendant's degree to that arc and count forward from the start of the Ascendant's sign; wherever the count ends is the Lot of Fortune's place",
+          "day_night_reversal": "implicit throughout the chapter via the 'by day ... by night the reverse' formula attached to nearly every individual lot below"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter V, paragraph 2, edition p. 140. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch5.lot_of_hyleg_and_life",
+      "rule_ids": [
+        "islam.qabisi.ch5.lot_of_hyleg_and_life"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter V, paragraph 4, edition p. 140",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "سهم الحياة يؤخذ بالنهار من المشتري إلى زحل وبالليل مخالفا ويلقى من الطالع سهم الهيلاج يؤخذ من جزء الاجتماع أو الاستقبال الذي يكون قبل المولد إلى درجة القمر ويلقى من الطالع",
+          "engine_rendering": "The Lot of Life: taken by day from Jupiter to Saturn, by night the reverse, cast from the Ascendant. The Lot of the Hyleg: taken from the degree of the conjunction or prevention preceding the birth to the Moon's degree, cast from the Ascendant.",
+          "lot_of_life": "by day, from Jupiter to Saturn; by night, the reverse; cast from the Ascendant",
+          "lot_of_hyleg": "from the prenatal conjunction-or-prevention degree (whichever governs the nativity) to the Moon's degree, cast from the Ascendant - notably NOT reversed by sect the way most other lots in this chapter are",
+          "significance": "a Lot explicitly named for and tied to the hyleg concept (islam.qabisi.ch4.hyleg_candidate_places) is unusual in the surviving Arabic lot literature and directly links Chapter IV's hyleg doctrine to Chapter V's lot doctrine."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter V, paragraph 4, edition p. 140. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch5.representative_house_lots_with_attribution",
+      "rule_ids": [
+        "islam.qabisi.ch5.representative_house_lots_with_attribution"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter V, paragraph 5, edition p. 140",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "البيت الثاني سهم المال يؤخذ بالنهار والليل من ربّ بيت المال إلى درجة ودقيقة بيت المال ويلقى من الطالع ... سهم تزويج النساء لهرمس يؤخذ بالنهار والليل من الزهرة إلى زحل ويلقى من الطالع ... سهم تزويج النساء لواليس يؤخذ بالنهار والليل من الشمس إلى القمر ويلقى من الطالع ... سهم الموت يؤخذ بالنهار والليل من القمر إلى درجة ودقيقة بيت الثامن ويلقى من درجة زحل ... سهم العمل والسلطان لواليس يؤخذ بالنهار والليل من الشمس إلى درجة وسط السماء ويلقى من الطالع",
+          "engine_rendering": "Second house, the Lot of Wealth: taken by day and night alike from the lord of the wealth-house to the degree and minute of the wealth-house, cast from the Ascendant [...]. The Lot of Women's Marriage according to Hermes: from Venus to Saturn, cast from the Ascendant. The Lot of Women's Marriage according to Valens: from the Sun to the Moon, cast from the Ascendant. The Lot of Death: from the Moon to the degree and minute of the eighth house, cast from Saturn's degree. The Lot of Work and Sultanate according to Valens: from the Sun to the Midheaven's degree, cast from the Ascendant.",
+          "lot_of_wealth_2nd_house": "by day and night alike, from the lord of the 2nd house's own place to the 2nd-house cusp's degree and minute; cast from the Ascendant",
+          "lot_of_mens_marriage_7th": "by day and night alike, from the Sun to Venus, cast from the Ascendant",
+          "lot_of_womens_marriage_hermes_7th": "attributed to Hermes by name: by day and night alike, from Venus to Saturn, cast from the Ascendant",
+          "lot_of_womens_marriage_valens_7th": "attributed to Valens (Walis) by name, as an alternative to Hermes's formula: by day and night alike, from the Sun to the Moon, cast from the Ascendant",
+          "lot_of_death_8th": "by day and night alike, from the Moon to the 8th house's own degree and minute, cast from Saturn's degree (not from the Ascendant - an explicit exception to the chapter's general casting point)",
+          "lot_of_sultanate_valens_10th": "attributed to Valens (Walis) by name: by day and night alike, from the Sun to the Midheaven's degree, cast from the Ascendant",
+          "lot_of_friends_andarzaghar_variant_11th": "the base formula is from the Moon to Mercury, cast from the Ascendant; al-Andarzaghar is cited by name for a variant night formula (reversed), and al-Qabisi notes 'it is fitting to use both lots together'",
+          "lot_of_enemies_hermes_12th": "attributed to Hermes by name: by day and night alike, from the lord of the 12th house to the 12th house's own degree, cast from the Ascendant; 'some of the ancients' (an unnamed alternative) instead give: from Saturn to Mars, cast from the Ascendant"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter V, paragraph 5, edition p. 140. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch5.additional_named_lots_and_inventory",
+      "rule_ids": [
+        "islam.qabisi.ch5.additional_named_lots_and_inventory"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter V, paragraph 16, edition p. 148",
+        "evidence_grade_of_rule": "A"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "وهاهنا سهام أخر يستعملها أصحاب أحكام النجوم كثيرا ... فهذه جملة ما وقع إلينا من السهام وإنّما أتينا هذه السهام الأخيرة وإن كان القول فيها ضعيفا لئلّا نترك شيئا ممّا يجوز أن يكون مدخلا إلى صناعة أحكام النجوم إلّا أتينا به وبالله التوفيق",
+          "engine_rendering": "And here are other lots frequently used by astrologers [...]. This is the sum of what has come down to us of the lots. We have brought these last lots even though the doctrine concerning them is weak, so as not to leave out anything that might serve as an introduction to the art of astrology - and success is from God.",
+          "additional_lots_named": "the truth or falsehood of a report; intellect and profundity; wisdom; knowledge; war and battle; peace among armies; a lot 'for looking into the revolution of the year'",
+          "chapter_inventory_statement": "al-Qabisi closes the chapter by stating this is 'jumlat ma waqa'a ilayna min al-sihaam' (the sum of what has come down to us of the lots), and that he included even the weakest of them (the mundane commodity-price lots that follow, see islam.qabisi.ch5.commodity_price_lots_self_declared_weak) deliberately, so as not to omit anything that might serve as an introduction to the art"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter V, paragraph 16, edition p. 148. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch5.mundane_kingship_duration_lots",
+      "rule_ids": [
+        "islam.qabisi.ch5.mundane_kingship_duration_lots"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter V, paragraph 17, edition p. 150",
+        "evidence_grade_of_rule": "C"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "عمل السهمين الأعظمين المستخرج بهما مدّة قيام الملك فالأوّل منهما أن تنظر في وقت قيام الملك إلى أين انتهت السنة من قران المثلّثة التي دلّت على الملّة",
+          "engine_rendering": "The working of the two greatest lots, by which the duration of a kingship is derived: the first of them is that you look, at the time the ruler takes power, to where the year has arrived from the triplicity-conjunction that signified the dynasty.",
+          "method_summary": "two lots are cast from two different oriental/occidental planet pairings (Saturn/Jupiter relative to the Sun) at the founding conjunction and at the revolution marking the ruler's accession, then combined; al-Qabisi calls this ''amal al-sahmayn al-a'zamayn' (the working of the two greatest lots)",
+          "commodity_context": "this section is presented alongside a separate lot for the general strength/weakness of a reign, and a note that a planet's rising/falling condition at the relevant revolution shows whether the reign will be prosperous or troubled"
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter V, paragraph 17, edition p. 150. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    },
+    {
+      "vector_id": "islam.qabisi.vector.ch5.commodity_price_lots_self_declared_weak",
+      "rule_ids": [
+        "islam.qabisi.ch5.commodity_price_lots_self_declared_weak"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "what_is_checked": "That the manifest rule reproduces what the cited passage states, at the cited location. This is a fidelity pin, NOT a computation: it fixes the claim in machine-readable form so a page-image pass or a specialist reviewer can diff against it and so silent drift is detectable.",
+        "cited_location": "Arabic TEI chapter V, paragraph 19, edition p. 152",
+        "evidence_grade_of_rule": "C"
+      },
+      "expected": {
+        "asserted_content": {
+          "arabic": "سهم الطعام من الشمس إلى المرّيخ سهم الماء من القمر إلى الزهرة سهم الشعير من القمر إلى المشتري ... سهم السموم من الجوزهر إلى زحل ويلقى جميع ذلك من طالع التحويل",
+          "engine_rendering": "The Lot of Food: from the Sun to Mars. The Lot of Water: from the Moon to Venus. The Lot of Barley: from the Moon to Jupiter [... and so through the remaining named goods] ... The Lot of Poisons: from the node to Saturn. All of these are cast from the revolution's Ascendant.",
+          "method_summary": "for each named good, a lot is cast from the year-revolution's Ascendant; its placement in a domicile/exaltation/bound/triplicity ruled by a planet in good or poor condition (direct/retrograde, combust, angular, aspected by benefics or malefics) signals whether that good will be cheap or dear",
+          "named_goods": "food in general, water, barley, chickpeas, lentils, broad beans, mash-beans, dates, honey, rice, olives, grapes, cotton, sesame, melon, and four taste-categories (sour, sweet, pungent, bitter foods), plus three categories of laxative medicine (sweet, sour, salty) and poisons (cast from the node to Saturn)",
+          "self_declared_caveat": "al-Qabisi explicitly flags this entire set as weak doctrine in his own closing statement (see islam.qabisi.ch5.additional_named_lots_and_inventory): 'we have brought these last lots even though the doctrine concerning them is weak.' This is the source's OWN epistemic caveat, not one invented for this pass."
+        },
+        "customer_prediction": false,
+        "independently_recomputed": false,
+        "review_status": "arabic_read_directly_by_engine_independent_specialist_review_pending"
+      },
+      "provenance": "al-Qabisi, al-Mudkhal ila Sina'at Ahkam al-Nujum (Introduction to Astrology) - Arabic TEI chapter V, paragraph 19, edition p. 152. Auto-derived from the rule's own conclusion block during vector-coverage completion; carries no claim beyond what the rule already states."
+    }
+  ]
+}
