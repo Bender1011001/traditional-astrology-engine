@@ -12,6 +12,21 @@ cross-tradition convergence layer collapses those 12 into **6 independent
 voices** by calculation basis, so agreement is never manufactured from sections
 that share a chart.
 
+**Every tradition is at its source ceiling: 7/7, zero actionable gaps.**
+
+That claim is checkable, not asserted. `ceiling_report.py` scores each tradition
+against its own defensibility spec and classifies every missing technique as
+`computable` (our gap, actionable), `source_gated` (blocked on an edition or
+review), or `refused` (the corpus cannot support it). A tradition is at its
+ceiling when nothing is `computable`. The corpus validator **fails** if any spec
+regresses one in — mutation-tested.
+
+What remains is 22 source-gated items and 4 refusals across all seven traditions.
+Those are facts about surviving corpora, not engine deficiencies: implementing
+past them would mean asserting one school's answer where the tradition itself
+disagrees, which the defensibility standard forbids. **Raising the ceiling now
+requires source work — editions, apparatus, specialist review — not code.**
+
 Run it:
 
 ```bash
@@ -22,9 +37,10 @@ Demo: `docs/research/multitradition/demo_fairfield_panel.md` (1223 lines).
 
 | | Check | Result |
 |---|---|---|
-| Tests | `test_multitradition_panel.py` + `test_multitradition_convergence.py` | **137 passing** |
+| Tests | `test_multitradition_panel.py` + `test_multitradition_convergence.py` | **143 passing** |
 | Worked examples | 4 suites (Maya, Jyotisha, BaZi, Tibetan) | **33/33 claims**, mutation-tested |
-| Research corpus | `validate_research_corpus.py` | pass — 194 rules, 244 vectors, 0 non-Western live |
+| Research corpus | `validate_research_corpus.py` | pass — 194 rules, 244 vectors, 0 non-Western live, **7/7 at ceiling** |
+| Ceiling | `ceiling_report.py` | **0 actionable gaps**, gated against regression |
 | Coverage | `validate_engine_coverage.py` | pass — 20 tracks, 74 modules |
 | Lint | session-owned files | clean |
 | Live engine | premium pipeline, checkout | untouched |
@@ -81,18 +97,25 @@ Demo: `docs/research/multitradition/demo_fairfield_panel.md` (1223 lines).
 3. **Tibetan element anchor bug**: returned Wood Mouse for 1996 instead of Fire
    Mouse. Fixed by deriving from the sexagenary cycle; now a worked example.
 
-## In flight
+## Next — all of it is source work now
 
-A subagent is reading Classical Nahuatl across the 150 pinned folios to encode
-the remaining 19 trecena chapters. 4 statements encoded so far (Ce Cipactli).
+The code-side backlog is empty. Every remaining item needs a document, not a
+commit:
 
-## Next
-
-1. Finish the Nahua 20-trecena encoding.
-2. BaZi branch relations (combinations, clashes, harms, punishments) — the last
-   `computable` item on that spec.
-3. Jyotisha worked examples from the four archive translations (page inspection).
-4. Korean/Mongolian/Burmese/Thai/Khmer profiles over the shared cores.
+1. **Jyotisha worked examples** — four archive translations are registered but
+   none is page-inspected for worked charts. Highest value: it would upgrade the
+   suite from structural self-checks to reproducing Varahamihira's own verdicts.
+2. **BaZi edition control** — a dated `Sanming Tonghui` scan resolving the
+   documented interpolations, which is what currently blocks strength class,
+   pattern, and useful-god (4 source-gated items).
+3. **Islamicate critical apparatus** — Brill/Aragno stemma and variant collation.
+   The Arabic TEI is already pinned; the apparatus is what a bare transcription
+   cannot supply (4 source-gated items).
+4. **Maya correlation partnership** — day meanings are refused on appropriation
+   grounds, not source grounds. That needs a relationship with living K'iche'
+   daykeepers, not a library.
+5. Breadth, if wanted: Korean/Mongolian/Burmese/Thai/Khmer profiles over the
+   shared sexagenary and jyotisha cores.
 
 ---
 
