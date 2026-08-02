@@ -981,6 +981,31 @@ def validate(root: Path) -> dict[str, Any]:
                 )
         defensibility_specs[track] = len(text.splitlines())
 
+    # Worked-example suites: the defensibility standard's requirement 4. Every
+    # suite must validate against its schema, and every claim marked comparable
+    # must actually pass against the engine.
+    worked_example_paths = sorted(root.rglob("worked_examples.json"))
+    if not worked_example_paths:
+        raise ValueError("No worked-example suites found")
+    worked_schema = all_json[root / "worked_examples.schema.json"]
+    worked_example_counts: dict[str, int] = {}
+    for path in worked_example_paths:
+        suite = all_json[path]
+        _validate_schema(suite, worked_schema, path)
+        if suite["tradition_id"] not in {
+            str(source.get("tradition")) for source in sources
+        } | {"maya", "indian_jyotisha"}:
+            raise ValueError(f"Unknown worked-example tradition in {path.name}")
+        missing_worked_sources = sorted(
+            set(suite["source_registry_ids"]) - source_id_set
+        )
+        if missing_worked_sources:
+            raise ValueError(
+                f"Unknown worked-example source IDs in {_relative(path, root)}: "
+                f"{missing_worked_sources}"
+            )
+        worked_example_counts[path.parent.name] = len(suite["examples"])
+
     coverage_manifest_path = root / "engine_coverage_manifest.json"
     coverage_manifest = all_json[coverage_manifest_path]
     coverage_schema = all_json[root / "engine_coverage_manifest.schema.json"]
@@ -1101,6 +1126,8 @@ def validate(root: Path) -> dict[str, Any]:
         "nahua_tonalpohualli_customer_eligible": nahua_boundary[
             "customer_eligible"
         ],
+        "worked_example_suites": len(worked_example_paths),
+        "worked_examples_by_tradition": worked_example_counts,
         "defensibility_specs": len(defensibility_specs),
         "defensibility_spec_tracks": sorted(defensibility_specs),
         "bazi_sexagenary_rules": len(bazi_rules),

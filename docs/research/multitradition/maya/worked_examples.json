@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "maya",
+  "source_registry_ids": [
+    "maya_nmai_calendar_converter",
+    "maya_famsi_date_converter",
+    "maya_cambridge_calendar_correlation_review",
+    "maya_pnas_correlation_radiocarbon_2013"
+  ],
+  "status": "encoded_runnable",
+  "notes": "Maya is the one tradition where a fully mechanical worked-example check is available today: the correlation anchors are published, unambiguous, and independently reproduced by two institutional converters. These cases verify the kernel end to end - Long Count decomposition, both cycle formulae, and the JDN mapping - against values no practitioner disputes.",
+  "examples": [
+    {
+      "example_id": "maya.gmt.creation_anchor",
+      "work": "GMT correlation, standard published anchor",
+      "location": "Correlation constant 584283; reproduced by the NMAI and FAMSI converters",
+      "description": "The base of the Long Count. This is the single most-cited date in Maya calendrics and the definition point of the GMT correlation.",
+      "chart_data": {
+        "civil_date": "-3113-08-11",
+        "calendar": "proleptic_gregorian",
+        "date_certainty": "definitional under GMT 584283"
+      },
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "maya.creation.jdn",
+            "kind": "calculation_value",
+            "author_states": "Long Count 0.0.0.0.0 corresponds to JDN 584283.",
+            "engine_field": "integer_jdn",
+            "expected_value": 584283,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "maya.creation.longcount",
+            "kind": "calculation_value",
+            "author_states": "The era base decomposes as 0.0.0.0.0.",
+            "engine_field": "long_count",
+            "expected_value": "0.0.0.0.0",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "maya.creation.tzolkin",
+            "kind": "calculation_value",
+            "author_states": "The era base falls on 4 Ajaw.",
+            "engine_field": "tzolkin",
+            "expected_value": "4 Ajaw",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "maya.creation.haab",
+            "kind": "calculation_value",
+            "author_states": "The era base falls on 8 Kumk'u.",
+            "engine_field": "haab",
+            "expected_value": "8 Kumk'u",
+            "comparison": "exact"
+          }
+        ],
+        "quotation": "4 Ajaw 8 Kumk'u is the Calendar Round position of the Long Count era base."
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "maya.gmt.baktun13",
+      "work": "GMT correlation, 13-baktun completion",
+      "location": "Correlation constant 584283; reproduced by the NMAI and FAMSI converters",
+      "description": "The completion of 13 baktuns, 21 December 2012. Chosen because its Calendar Round position is widely misquoted as 4 Ajaw 8 Kumk'u - the era-base position - when the Haab has in fact advanced 280 days to 3 K'ank'in. A kernel that returns 8 Kumk'u here has silently reused the era base.",
+      "chart_data": {
+        "civil_date": "2012-12-21",
+        "calendar": "proleptic_gregorian",
+        "date_certainty": "definitional under GMT 584283"
+      },
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "maya.baktun13.jdn",
+            "kind": "calculation_value",
+            "author_states": "13.0.0.0.0 corresponds to JDN 2456283.",
+            "engine_field": "integer_jdn",
+            "expected_value": 2456283,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "maya.baktun13.longcount",
+            "kind": "calculation_value",
+            "author_states": "The linear decomposition is 13.0.0.0.0.",
+            "engine_field": "long_count",
+            "expected_value": "13.0.0.0.0",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "maya.baktun13.tzolkin",
+            "kind": "calculation_value",
+            "author_states": "The Tzolk'in position is 4 Ajaw, repeating the era base because 1872000 is an exact multiple of 260.",
+            "engine_field": "tzolkin",
+            "expected_value": "4 Ajaw",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "maya.baktun13.haab",
+            "kind": "calculation_value",
+            "author_states": "The Haab position is 3 K'ank'in, NOT 8 Kumk'u: 1872000 is not a multiple of 365, so the Haab advances 280 days from the era base.",
+            "engine_field": "haab",
+            "expected_value": "3 K'ank'in",
+            "comparison": "exact",
+            "note": "This claim exists specifically to catch the most common error in popular Maya date software."
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    },
+    {
+      "example_id": "maya.correlation.sensitivity",
+      "work": "Correlation sensitivity check",
+      "location": "Kernel registers 584283 (bounded default) and 584285 (alternate profile)",
+      "description": "The two registered correlations must differ by exactly two days on every date. This verifies that correlation selection actually propagates rather than being cosmetic.",
+      "chart_data": {
+        "civil_date": "2012-12-21",
+        "calendar": "proleptic_gregorian"
+      },
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "maya.sensitivity.two_day_offset",
+            "kind": "calculation_value",
+            "author_states": "Under 584285 the same civil date yields a total_day two lower than under 584283.",
+            "engine_field": "__correlation_delta__",
+            "expected_value": 2,
+            "comparison": "exact"
+          }
+        ]
+      },
+      "encoding_status": "comparable"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traditional-astrology.local/schemas/worked-examples-v1.json",
+  "title": "Classical Worked-Example Suite",
+  "description": "Charts a classical author worked and judged in their own text, encoded so the engine's judgment can be compared to the author's stated judgment. This is the strongest defensibility evidence available short of a per-tradition specialist review.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "updated",
+    "tradition_id",
+    "source_registry_ids",
+    "status",
+    "examples"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "updated": {"type": "string", "format": "date"},
+    "tradition_id": {"$ref": "#/$defs/nonEmptyString"},
+    "source_registry_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonEmptyString"}
+    },
+    "status": {
+      "enum": [
+        "inventory_only",
+        "partially_encoded",
+        "encoded_runnable",
+        "verified"
+      ]
+    },
+    "notes": {"type": "string"},
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/example"}
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "example_id",
+        "work",
+        "location",
+        "author_judgment",
+        "encoding_status"
+      ],
+      "properties": {
+        "example_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]+$"
+        },
+        "work": {"$ref": "#/$defs/nonEmptyString"},
+        "location": {
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Page, chapter, or folio locator in the controlling edition."
+        },
+        "description": {"type": "string"},
+        "chart_data": {
+          "type": "object",
+          "description": "Birth or event data as the author supplies it. Absent when the author gives positions without a datetime.",
+          "properties": {
+            "civil_date": {"type": "string"},
+            "civil_time": {"type": "string"},
+            "utc_offset_hours": {"type": "number"},
+            "latitude": {"type": "number"},
+            "longitude": {"type": "number"},
+            "place_label": {"type": "string"},
+            "calendar": {"type": "string"},
+            "date_certainty": {"type": "string"}
+          }
+        },
+        "author_positions": {
+          "type": "object",
+          "description": "Positions as the AUTHOR states them, which may differ from a modern recomputation. Disagreement here is itself a finding.",
+          "additionalProperties": {"type": "string"}
+        },
+        "author_judgment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["claims"],
+          "properties": {
+            "claims": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"$ref": "#/$defs/claim"}
+            },
+            "quotation": {"type": "string"}
+          }
+        },
+        "encoding_status": {
+          "enum": [
+            "inventory_only",
+            "chart_encoded",
+            "judgment_encoded",
+            "comparable"
+          ]
+        },
+        "blockers": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/nonEmptyString"}
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "kind", "author_states"],
+      "properties": {
+        "claim_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+        "kind": {
+          "enum": [
+            "significator_identification",
+            "dignity_assessment",
+            "sect_assessment",
+            "aspect_identification",
+            "reception",
+            "timing_period",
+            "topical_verdict",
+            "calculation_value"
+          ],
+          "description": "Only kinds an engine can mechanically check. Narrative flourish is not encoded as a claim."
+        },
+        "author_states": {"$ref": "#/$defs/nonEmptyString"},
+        "engine_field": {
+          "type": "string",
+          "description": "Dotted path into the engine's output for this tradition, when a mechanical comparison is possible."
+        },
+        "expected_value": {},
+        "comparison": {
+          "enum": ["exact", "case_insensitive", "numeric_tolerance", "manual"],
+          "default": "manual"
+        },
+        "tolerance": {"type": "number"},
+        "note": {"type": "string"}
+      }
+    }
+  }
+}

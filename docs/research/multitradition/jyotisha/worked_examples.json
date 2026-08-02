@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-01",
+  "tradition_id": "indian_jyotisha",
+  "source_registry_ids": [
+    "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+    "jyotisha_kalyanavarma_saravali_subrahmanya_1914_archive",
+    "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+    "jyotisha_bphs_subodhini_1899_archive"
+  ],
+  "status": "inventory_only",
+  "notes": "Honest state: four controlling translations are in the source registry with archive access, but none has yet been page-inspected for worked charts specifically. Nothing below is encoded as a runnable comparison, because doing so from memory rather than from the page would defeat the entire purpose of a worked-example suite. Each entry records what must be inspected and what blocks it.",
+  "examples": [
+    {
+      "example_id": "jyotisha.brhajjataka.inventory",
+      "work": "Brhajjataka (Varahamihira), Aiyar 1905 translation",
+      "location": "Archive copy in registry; chapters I-II already passage-aligned for the rule packs",
+      "description": "Chapters I and II are already passage-aligned to the encoded calculation and planetary rule manifests, which makes this the most likely place to find illustrations the engine can reproduce. The commentary apparatus is where worked illustrations would appear.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "jyotisha.brhajjataka.pending",
+            "kind": "calculation_value",
+            "author_states": "Pending page inspection: locate any chart Varahamihira or his commentator works through with stated positions and a stated verdict.",
+            "note": "Placeholder claim recording the inspection task. Not runnable."
+          }
+        ]
+      },
+      "encoding_status": "inventory_only",
+      "blockers": [
+        "Page-level inspection of the Aiyar translation for worked illustrations has not been performed.",
+        "Where a commentator supplies the example rather than Varahamihira, attribution must separate the two."
+      ]
+    },
+    {
+      "example_id": "jyotisha.bphs.dasha_inventory",
+      "work": "Brihat Parashara Hora Shastra, Subodhini 1899",
+      "location": "Archive copy in registry",
+      "description": "BPHS dasha and varga chapters are the natural source for a Vimshottari worked example, which would test the engine's dasha start balance directly.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "jyotisha.bphs.pending",
+            "kind": "timing_period",
+            "author_states": "Pending page inspection: locate a worked Vimshottari computation with a stated nakshatra, stated balance, and stated period boundaries.",
+            "note": "Placeholder claim recording the inspection task. Not runnable."
+          }
+        ]
+      },
+      "encoding_status": "inventory_only",
+      "blockers": [
+        "The BPHS recension audit already flags variance between recensions; a worked example must name which recension supplies it.",
+        "Page-level inspection not performed."
+      ]
+    },
+    {
+      "example_id": "jyotisha.navamsha.selfcheck",
+      "work": "Internal consistency check (not a classical worked example)",
+      "location": "N/A",
+      "description": "Once navamsha is implemented, a mechanical self-check is available without any source inspection: the D9 sign of a planet at the exact start of a movable sign must be that same sign, and the 108 navamsha divisions must map onto the 12 signs exactly nine times each. Recorded here so the suite does not have to wait on page access to gain its first Jyotisha coverage.",
+      "author_judgment": {
+        "claims": [
+          {
+            "claim_id": "jyotisha.navamsha.pending_implementation",
+            "kind": "calculation_value",
+            "author_states": "Pending navamsha implementation (blocking gap in the defensibility spec).",
+            "note": "Structural check, not a classical judgment. Runnable as soon as D9 exists."
+          }
+        ]
+      },
+      "encoding_status": "inventory_only",
+      "blockers": [
+        "Navamsha is not yet implemented in the panel."
+      ]
+    }
+  ]
+}
