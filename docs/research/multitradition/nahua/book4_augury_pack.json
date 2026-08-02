@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-08-01",
+  "updated": "2026-08-02",
   "tradition_id": "nahua_central_mexican",
   "pack_id": "nahua_book4_augury_v1",
   "kind": "passage_quotation_pack",
@@ -8,7 +8,7 @@
   "translation_grade": "engine_translation_unreviewed",
   "witness_manifest": "florentine_book4/access_manifest.json",
   "rights_basis": "Statements quote the 16th-century Nahuatl and Spanish transcription columns (public domain) from hash-pinned witnesses, with an independent English rendering. The modern Anderson & Dibble and Garcia Garagarza translations were consulted for verification only and are not reproduced beyond bracketed-emendation facts.",
-  "scope_note": "Pilot: Chapter 1 (Ce Cipactli) only, from pinned folios 1r-2r. The pack quotes the corpus; it never assigns a day sign to a birth, because no civil-date correlation is approved.",
+  "scope_note": "Chapters 1-38 of Florentine Codex Book 4, covering all twenty trecenas (One Cipactli through One Rabbit), from hash-pinned folios 1r-71r. Each statement quotes one witness record and is rendered independently into English. Trecena membership lists are cross-checked against the validated tonalpohualli kernel, and disagreements are recorded as witness variants rather than corrected. The pack quotes the corpus; it never assigns a day sign to a birth, because no civil-date correlation is approved - and, as folios 21r, 35v, 52v and 55v show, the tradition itself assigned the operative sign by ritual choice and household means rather than by date of birth.",
   "statements": [
     {
       "statement_id": "nahua.book4.ch1.heading_conditional_fortune",
@@ -81,6 +81,1253 @@
       "nahuatl": "Auh no yoa quitoaia: ma nel ivi in qualli itonal ipan otlacat, intlacamo vellamaceoa, intlacamo vel monotza, intlacamo qujcuj, intlacamo itech qujpachoa, in atl cecec, in tzitzicaztli, yn inonotzaloca, in izcaliloca, in veuetlatolli, yn jlamatlatolli, in can tlaueliloti, tlavelilocati, in can aie vtli qujtoca, atle onqujca, can ynevian mopopoloa,",
       "engine_rendering": "And they also said: even though he was born on a good day sign, if he does not do penance well, if he does not take counsel with himself, if he does not accept and apply to himself the cold water and the nettle - the admonitions, the instruction, the words of the old men and the old women - if he merely turns corrupt, becomes wicked, follows no road at all: nothing comes of it; he destroys it entirely by his own doing.",
       "doctrinal_note": "The forfeiture clause. 'The cold water, the nettle' (in atl cecec, in tzitzicaztli) is the standard Nahuatl difrasismo for corrective discipline. This paragraph is the doctrine the defensibility spec ordered preserved: the day sign grants a potential that conduct completes or destroys. It is the structural opposite of a personality trait."
+    },
+    {
+      "statement_id": "nahua.book4.ch2.heading_bad_sign_with_remedy",
+      "topic": "chapter_heading",
+      "day_sign_id": "ocelotl",
+      "trecena": 2,
+      "witness": {
+        "file": "florentine_book4/folio_4r.json",
+        "folio": "4r",
+        "text_record_id": "4b6c8ebb-77ae-435d-bd67-857724d02f3f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "in jtoca ce ocelutl: ioan in amo qualli tonalli, in qujmomaceviaia in aqujque ipan tlacatia, in toqujchti, in cioa: auh tel in jca innezcaliliz, in vel nenotzalizpatia: auh in aqujque in jpan tlacatia, y, achi muchintin tlatlacoti muchioaia.",
+      "spanish_parallel": {
+        "text_record_id": "d2c1b6d2-675f-49ad-8cf5-c557cdc5eadc",
+        "excerpt": "Ocelutl, y de la mala fortuna que tenian los que en el nacian, ansi hombres como mujeres, si con su buena diligencia no se remediaban. Los que en este signo nacian por la mayor parte eran esclavos"
+      },
+      "engine_rendering": "...the sign named One Ocelot: and of the bad day-fortune that those born on it merited, men and women alike - and yet it was healed by their rearing, by taking counsel with themselves well; and of those born on it, very nearly all became slaves.",
+      "doctrinal_note": "The second chapter is the mirror image of the first: a bad sign whose heading carries its own remedy clause. 'auh tel in jca innezcaliliz, in vel nenotzalizpatia' - 'and yet, by their upbringing, it was cured by taking good counsel with oneself' - is a conditional, and the Spanish column renders the same clause as 'si con su buena diligencia no se remediaban'. A bad sign is a liability to be worked against, not a verdict. The heading begins on folio 3v ('Injc vme capitulo... injc vntetl ma[chivtl]') and is completed here; the bracketed syllable is the Getty edition's reconstruction of the word broken across the folio turn."
+    },
+    {
+      "statement_id": "nahua.book4.trecena2.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "ocelotl",
+      "trecena": 2,
+      "witness": {
+        "file": "florentine_book4/folio_4r.json",
+        "folio": "4r",
+        "text_record_id": "4b6c8ebb-77ae-435d-bd67-857724d02f3f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "qujcenvica, qujcentlaca, yn itlavilan matlactli vmei, in jtech povi, iehoantin, y, vme quauhtli, ei cozcaquauhtli, navi olin, macujlli tecpatl, chiquacen qujavitl, chicome xochitl, chicuey cipactli, chicunavi hecatl, matlactli calli, matlactli oce, cuetzpali, matlactli vmome coatl, matlactli vmei mjqujztli:",
+      "engine_rendering": "It carries them all with it, it casts them all together, its thirteen dependents that belong to it, these: Two Eagle, Three Vulture, Four Movement, Five Flint, Six Rain, Seven Flower, Eight Cipactli, Nine Wind, Ten House, Eleven Lizard, Twelve Serpent, Thirteen Death.",
+      "doctrinal_note": "Kernel cross-check: the validated tonalpohualli kernel gives trecena 2 as coefficients 1-13 over ocelotl, cuauhtli, cozcacuauhtli, ollin, tecpatl, quiahuitl, xochitl, cipactli, ehecatl, calli, cuetzpalin, coatl, miquiztli. The witness agrees at every one of the twelve listed positions. Note that this list spells the wind sign 'hecatl' (chicunavi hecatl), which is independent support for reading the folio 1v 'vme acatl' as a slip for 'vme ecatl'."
+    },
+    {
+      "statement_id": "nahua.book4.trecena2.fatalist_formula",
+      "topic": "augury",
+      "day_sign_id": "ocelotl",
+      "trecena": 2,
+      "witness": {
+        "file": "florentine_book4/folio_4v.json",
+        "folio": "4v",
+        "text_record_id": "f4da4dd8-49fd-4e78-9a38-89d3c34ac074",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh intlanel aca tiacauh, oquichtli, tlamanj muchioaia, vel monamacaia, motlacocaoaia, tevic, temecapal muchioaia, victli, mecapalli qujmottitiaia, iuh mjtoaia: ca iuhquj itonal, iuhquj iol, iuhquj ipan tlacat, iuhquj itlacatiliz:",
+      "engine_rendering": "And even though someone became a brave warrior, a man, a taker of captives, he would sell himself, would sell himself cheap; he became another's digging stick, another's tumpline; the digging stick and the tumpline showed themselves to him. Thus it was said: such was his day sign, such his life, such the day he was born on, such his birth.",
+      "doctrinal_note": "This is the corpus at its most fatalistic, and it must be quoted rather than softened: the fourfold 'iuhquj' formula asserts that the outcome simply is the day sign. The very next paragraph on the same folio reverses it for the diligent man, and the two stand together in the source. Presenting either one alone misrepresents the chapter."
+    },
+    {
+      "statement_id": "nahua.book4.trecena2.conduct_exception",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "ocelotl",
+      "trecena": 2,
+      "witness": {
+        "file": "florentine_book4/folio_4v.json",
+        "folio": "4v",
+        "text_record_id": "f4da4dd8-49fd-4e78-9a38-89d3c34ac074",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh ca vei qujcaia in aca tiacauh, amo monamacaia, in jvian oalnemja tlalticpac: iehoatl in amo tlatziuhquj, in jeel, in tlamocujtlavianj, in cochicanj, in tlacelianj, in tlamaceoanj, in mocaoanj, in mjconj, in tlachpananj, in tlatzetzeloanj, in tlacujcujnj, in tletlalianj, in ioalli qujtztoc, in popoxiuhteoa, in mocujtivetzi, in amo moteteca, in amo moxiccaoa,",
+      "engine_rendering": "But a brave man could come out well indeed; he did not sell himself, he went on living at his ease upon the earth - that is, the one who was not lazy: the diligent one, the careful one, who woke early, who received instruction, who did penance, who fasted, who drew his own blood, who swept, who shook out the dust, who scoured, who laid the fire, who watched through the night, who rose stirring the embers, who seized his work at once, who did not sprawl idle, who did not neglect himself...",
+      "doctrinal_note": "The escape clause of the worst trecena in the book, and it is not framed as luck: it is a list of practices - rising early, sweeping, fasting, autosacrifice, night vigil, accepting instruction. Book 4 locates the difference between two people born on the same day in what they did, not in what they were."
+    },
+    {
+      "statement_id": "nahua.book4.trecena2.conduct_reversal",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "ocelotl",
+      "trecena": 2,
+      "witness": {
+        "file": "florentine_book4/folio_5r.json",
+        "folio": "5r",
+        "text_record_id": "f090d1b9-16b6-490a-9820-49cad3a91ae6",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Ioan iehoatl qujcaia, panvetzia, in vel monotza, in tlacacquj, in amo qujquammati, qujtemati in onotzaloca, izcaliloca, ican itech qujpachoa, ican qujmacuj, qujmapiquj: auh intla ica necacaiaoalo, amo qujtecuepiliaia, amo qujcuepcaiotia, atle ic qujlochtia.",
+      "engine_rendering": "And this one came out well, rose high: the one who took counsel with himself, who listened, who did not take it as wood, who valued being admonished and instructed, who pressed it to himself, who took it in his hand, who held it closed in his fist. And if he was mocked, he did not turn it back on them, did not repay it, did not retaliate at all.",
+      "doctrinal_note": "'qujquammati' - literally 'takes it as wood', i.e. hears correction as an insult - is the vice named here; its opposite, 'qujmapiquj' (he closes his hand upon it), is the virtue. The augury is therefore about the reception of counsel, which no birth-date lookup can supply."
+    },
+    {
+      "statement_id": "nahua.book4.trecena2.house7_xochitl_conditional",
+      "topic": "house_augury",
+      "day_sign_id": "ocelotl",
+      "trecena": 2,
+      "witness": {
+        "file": "florentine_book4/folio_6v.json",
+        "folio": "6v",
+        "text_record_id": "e7b2ad2f-c0ec-43d5-baa5-1d318f6c8ca3",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "no iuhquj ipan mitoaia in aqujn ipan tlacati, ca moch vel qujchioaz in toltecaiotl, vel totoltecatiz, tlatlanemjliz, ioiolizmatquj iez, intla uel monotzaz: auh intlacamo vel monotza, atle onqujcaia, atle icnopil, can iaujlqujzca, iquequeloloca in qujmomaceviaia.",
+      "day_within_trecena": {
+        "coefficient": 7,
+        "day_sign_id": "xochitl"
+      },
+      "engine_rendering": "The same was said of whoever was born on it: that he would do all the craft-work well, would be a true master craftsman, would be inventive, would be quick-witted - if he took counsel with himself well. And if he did not take counsel with himself well, nothing came of it, there was no deserving; what he merited was only his own dishonour, his own derision.",
+      "doctrinal_note": "A day-level (house-level) augury inside a trecena, showing that the conditional structure is not confined to chapter headings. Seven Flower is the embroiderers' and craftworkers' day; folio 6r sets out the fasts they kept for it and states that a craftswoman who spoiled her fast earned 'avilquizcaiotl' - dissoluteness - on the very same day. Same day, opposite outcomes, decided by observance."
+    },
+    {
+      "statement_id": "nahua.book4.ch3.heading_conditional_fortune",
+      "topic": "chapter_heading",
+      "day_sign_id": "mazatl",
+      "trecena": 3,
+      "witness": {
+        "file": "florentine_book4/folio_7r.json",
+        "folio": "7r",
+        "text_record_id": "6d17b46c-304d-4fcb-b975-4792e177f8d0",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc ei capitulo, itechpa tlatoa: injc etetl machiotl, in jtoca ce macatl: yoan in qualli tonalli, in qujmomaceviaia yn ipan tlacatia, in toqujchti, in cioa: auh intlacamo inpan neltiaia, can iehoantin in tlatziviliztica qujpoloaia.",
+      "spanish_parallel": {
+        "text_record_id": "3564ecbb-85c4-4f3e-aefa-a76b8bd2e5dd",
+        "excerpt": "Capitulo III del tercero signo, llamado Ce Mazatl, y de la buena fortuna que tenian los que en el nacian, ansi hombres como mujeres, si por su negligencia no la perdian"
+      },
+      "engine_rendering": "Third chapter, which tells of the third sign, named One Deer, and of the good day-fortune that those born on it merited, men and women alike; and if it was not fulfilled in them, it was they themselves who destroyed it, by laziness.",
+      "doctrinal_note": "The same conditional shape as chapter 1, in almost the same words: 'intlacamo inpan neltiaia' - if it was not made true in them. The fortune is a claim on conduct, and the Spanish column agrees ('si por su negligencia no la perdian')."
+    },
+    {
+      "statement_id": "nahua.book4.trecena3.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "mazatl",
+      "trecena": 3,
+      "witness": {
+        "file": "florentine_book4/folio_7v.json",
+        "folio": "7v",
+        "text_record_id": "b0da33d2-a20c-40f0-9501-e26957a03357",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "qujvica, iehoatl in vme tochtli, ey atl, navi itzcujntli, macujlli ocomatli, chiquacen malinalli, chicome acatl, chicuei ocelotl, chicunavi quauhtli, matlactli cozcaquauhtli, matlactli oce olin, matlactlomome tecpatl, matlactlomei qujavitl.",
+      "engine_rendering": "...it carries thirteen, these: Two Rabbit, Three Water, Four Dog, Five Monkey, Six Grass, Seven Reed, Eight Ocelot, Nine Eagle, Ten Vulture, Eleven Movement, Twelve Flint, Thirteen Rain.",
+      "doctrinal_note": "Kernel cross-check: trecena 3 runs mazatl, tochtli, atl, itzcuintli, ozomatli, malinalli, acatl, ocelotl, cuauhtli, cozcacuauhtli, ollin, tecpatl, quiahuitl. The witness agrees at all twelve listed positions."
+    },
+    {
+      "statement_id": "nahua.book4.trecena3.qualified_goodness",
+      "topic": "augury",
+      "day_sign_id": "mazatl",
+      "trecena": 3,
+      "witness": {
+        "file": "florentine_book4/folio_7v.json",
+        "folio": "7v",
+        "text_record_id": "b0da33d2-a20c-40f0-9501-e26957a03357",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "In jzqujtetl in tonalli, mjtoaia: qualli, ieccan: auh tel cequj iitla actiuh, itzalan actiuh, injc itlacauhtiuh, in iuh moteneoaz: vncan mjtoa inneneixcaujltoca, injc tecpantivi:",
+      "engine_rendering": "All of these days were said to be good, a favourable place; and yet some go with something inside them, something lodged among them, so that they go spoiled, as will be told: there the particular names of each are given, in the order they are set out.",
+      "doctrinal_note": "The corpus explicitly refuses to treat a 'good' trecena as uniformly good: 'auh tel cequj iitla actiuh, itzalan actiuh, injc itlacauhtiuh'. A rendering that reports a trecena as simply fortunate contradicts the source's own qualification."
+    },
+    {
+      "statement_id": "nahua.book4.trecena3.augury_by_station",
+      "topic": "augury",
+      "day_sign_id": "mazatl",
+      "trecena": 3,
+      "witness": {
+        "file": "florentine_book4/folio_7v.json",
+        "folio": "7v",
+        "text_record_id": "b0da33d2-a20c-40f0-9501-e26957a03357",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "in aqujn ipan tlacati pilli, in tetzon, in teizti, in tetzicueuhca, in tetzicueoallo, in tetlapanca, in tetechpa qujz, iol, in teujtztzo, in teaoaio, in tetentzon, in teixquamol, in teezco, in tetlapallo, tlatocaiotia, oalmoteniotiaia, ipal atlioaia, ipallaqualoia, tetlauhtiaia, qujtemacaia, tetech qujtlaliaia in tilmatli, in maxtlatl, in tlalpilonj, in tecacatl, in nacochtli:",
+      "engine_rendering": "He who was born on it a noble - hair of someone, fingernail of someone, chip and splinter and fragment of someone, sprung and born from someone, thorn of someone, spine of someone, beard of someone, eyebrow of someone, blood and colour of someone - was made a ruler, gained a name, by him men drank and ate; he made gifts, he gave things away, he placed upon people the cape, the loincloth, the head-band, the lip-plug, the ear-plug.",
+      "doctrinal_note": "The heaped metaphors for descent (hair, nail, splinter, thorn, blood of someone) are the standard Nahuatl idiom for legitimate lineage. The augury is addressed to a social station first and a person second: the following paragraphs give separate formulations for the commoner and for the woman."
+    },
+    {
+      "statement_id": "nahua.book4.trecena3.deer_timidity",
+      "topic": "augury",
+      "day_sign_id": "mazatl",
+      "trecena": 3,
+      "witness": {
+        "file": "florentine_book4/folio_8r.json",
+        "folio": "8r",
+        "text_record_id": "eed2bb94-799f-4af0-87f0-87adfd46b45e",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh no ioan mjtoa: in aqujn ipan tlacati ce macatl: qujlmach cēca momauhtiaia, can jmaviz in qujmattinenca, can imauhcac in nemja, can mamauhcanenca, vel iolmjquja, in jquac qujcaquja",
+      "engine_rendering": "And it is also said: whoever was born on One Deer, it is told, was greatly afraid; he went about knowing only dread, he lived only in his fear, he went about only frightened, he quite fainted with terror when he heard...",
+      "doctrinal_note": "An honest counterweight: not every Book 4 augury is conditional. Here the sign's animal supplies a disposition directly, by likeness ('es su natural del ciervo ser temeroso' in the Spanish column), and the chapter goes on to say the parents took no trouble over such a child. Encoding only the conditional passages would flatter the corpus; both patterns are present and both are quoted."
+    },
+    {
+      "statement_id": "nahua.book4.ch4.heading_middling_sign",
+      "topic": "chapter_heading",
+      "day_sign_id": "xochitl",
+      "trecena": 4,
+      "witness": {
+        "file": "florentine_book4/folio_16v.json",
+        "folio": "16v",
+        "text_record_id": "ce45601d-f8ec-4593-833f-3c5a2d4ed9d3",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Inic chicome capitulo, itechpa tlatoa: injc nauhtetl machiotl, yn jtoca ce xuchitl: auh in toqujchti ipan tlacatia, qujtoaia: qujlmach papaqujnj iez, vel mozcalianj: ioan vel qujmocujtlavia in cujcatl, ioan in paqujliztli, ioan cacamanaltinj, cacamanale: auh qujl in cioa, vevey tlamachiuhque: qujlmach can tlanepantla ca injn machiotl, qujtoznequj achi tetolinj, ioan achi qualli.",
+      "spanish_parallel": {
+        "text_record_id": "07664525-f583-4018-8d70-97a5ed5bf991",
+        "excerpt": "Capitulo VII del cuarto signo, llamado ce xuchitl. Los hombres que nacian en el decian que eran alegres, inginiosos y inclinados a la musica y a placeres, decidores, y las mujeres grandes labranderas, y liberales de su cuerpo si se descuidaban. Decian este signo ser indiferente a bien y a mal"
+      },
+      "engine_rendering": "Seventh chapter, which tells of the fourth sign, named One Flower. And of the men born on it they said: it is told he would be joyful, quick-witted, and would take good care of song and of gladness, and would be a joker, a teller of tales; and it is told the women were great embroiderers. It is told this sign stands in the middle, which is to say somewhat afflicting and somewhat good.",
+      "doctrinal_note": "'can tlanepantla ca' - it stands right in the middle. Book 4 has a three-valued vocabulary for signs (qualli / amo qualli / tlanepantla), and this chapter names the middle term explicitly. Any two-valued good/bad presentation loses a category the source itself uses."
+    },
+    {
+      "statement_id": "nahua.book4.trecena4.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "xochitl",
+      "trecena": 4,
+      "witness": {
+        "file": "florentine_book4/folio_16v.json",
+        "folio": "16v",
+        "text_record_id": "ce45601d-f8ec-4593-833f-3c5a2d4ed9d3",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Moquetza ce suchitl, ioan yn jzquitetl ytlavilanoan: injc matlactetl omei tonalli muchiuhtica in yehoatl contoqujlia vme cipactli, yoan ey acatl, navi calli, macujlli cuetzpali, chiquacen coatl, chicome mjqujztli, chicuei macatl, chicunavi tochtli, matlactli atl, matlactli oce ytzcujntli, matlactlomome ocomatli, matlactlomey malinalli:",
+      "engine_rendering": "One Flower rises up, and all its dependents: it is made up of thirteen days, that which follows it being Two Cipactli, and Three [Wind], Four House, Five Lizard, Six Serpent, Seven Death, Eight Deer, Nine Rabbit, Ten Water, Eleven Dog, Twelve Monkey, Thirteen Grass.",
+      "doctrinal_note": "Two independent occurrences of acatl written for ehecatl (folios 1v and 16v) suggest a habit of this Nahuatl scribe rather than a single slip; in both cases the correct sign is recoverable from the cycle and, here, from the facing Spanish column.",
+      "witness_variant": {
+        "reading": "The Nahuatl column writes 'ey acatl' (Three Reed) at the third position, where the cycle requires Three Wind (ehecatl); Reed cannot fall in this trecena at all.",
+        "assessment": "This is the same substitution the pilot found on folio 1v ('vme acatl' for 'vme ecatl'), recurring here in a different chapter. Decisively, the Spanish column of the same folio gives the correct reading - 'la tercera, yei ecatl' - so the two columns of the same page disagree, and the error is confined to the Nahuatl scribe. Preserved rather than silently corrected.",
+        "kernel_crosscheck": "The validated kernel gives trecena 4 as xochitl, cipactli, ehecatl, calli, cuetzpalin, coatl, miquiztli, mazatl, tochtli, atl, itzcuintli, ozomatli, malinalli. The witness agrees at every position except the attested acatl/ehecatl variant."
+      }
+    },
+    {
+      "statement_id": "nahua.book4.trecena4.devotion_conditional",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "xochitl",
+      "trecena": 4,
+      "witness": {
+        "file": "florentine_book4/folio_17r.json",
+        "folio": "17r",
+        "text_record_id": "f541a11c-1ce4-47e9-9e60-a0bf96139fa2",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh qujttaia, qujmaceoaia in jneiollaliliz, in jnetlamachtil, pactinenca, vellamatia: in jquac ipan mjmatia ytonal, qujtoznequj: in jquac vel monotzaia, in vel ontlamaceoa.",
+      "engine_rendering": "And he saw and merited his consolation, his prosperity; he lived contented, he was well pleased - when he was careful of his day sign, which is to say: when he took counsel with himself well, when he did penance well.",
+      "doctrinal_note": "The source glosses its own term. 'ipan mjmatia ytonal' (he was prudent regarding his day sign) is defined on the spot as taking counsel with oneself and doing penance. Devotion to the sign is thus described as conduct, not as belief or luck."
+    },
+    {
+      "statement_id": "nahua.book4.trecena4.forfeiture",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "xochitl",
+      "trecena": 4,
+      "witness": {
+        "file": "florentine_book4/folio_17r.json",
+        "folio": "17r",
+        "text_record_id": "f541a11c-1ce4-47e9-9e60-a0bf96139fa2",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh in aqujn amo ipan mjmatia, in atle ipan qujttaia: can qujtlavelia yn jtonal: ca iuh mjtoa: in jquac aqujn cujcanj, anoco aca toltecatl, tlachichiuhquj: intla ie vnca qujquanj, ye vnca ynecujltonol: auh ie conpopoa, ijxco, ijcpac, ie qujmana, contepopoaltia, yz ic moquetza, iz ic moqujxtia, ic teijxco, teicpac nemj, ic atlamattinemj, ic cuecuenoti,",
+      "engine_rendering": "But as for the one who was not careful of it, who regarded it as nothing: he merely turns his day sign hostile. For thus it is said: when a singer or some craftsman, some maker, already has food to eat, already has his wealth - and then he counts it his own, he sets it before his face and above his head, he makes people count it, and by it he stands up and sets himself apart, and so goes about in people's faces and over their heads, goes about presuming, becomes arrogant...",
+      "doctrinal_note": "'can qujtlavelia yn jtonal' - he simply makes his own day sign hostile. Book 4's failure mode is not that a bad sign strikes; it is that a person spoils a good one. The chapter then follows the arrogant craftsman all the way to disease, abandonment and a pauper's death on folio 17v, and the Spanish column states plainly that this happened to him 'por haber perdido la ventura de su signo'."
+    },
+    {
+      "statement_id": "nahua.book4.ch5.heading_bad_sign_of_quetzalcoatl",
+      "topic": "chapter_heading",
+      "day_sign_id": "acatl",
+      "trecena": 5,
+      "witness": {
+        "file": "florentine_book4/folio_20r.json",
+        "folio": "20r",
+        "text_record_id": "c9f9c3c8-0bc6-45d3-b848-e25e1ee21011",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc chicuei capitulo: itechpa tlatoa, injc macujltetl machiotl, in jtoca ce acatl: auh amo qualli tonalli in jtech ca, qujlmach in aqujque vncan tlacatia, intla vncan tlacatia, injc chicunauhtetl calli, in jtoca chicunavi cipactli: qujtoaia qujlmach cenca techicoitoanj, ioan teteixpanvianj: auh qujlmach injn machiotl, iehoatl itonal in quetzalcoatl: ipampa in tlatoque, in pipilti, vncan muxtlaoaia ioan tlamanaia.",
+      "spanish_parallel": {
+        "text_record_id": "98d95056-7cfe-4d52-8081-762a3e2597d9",
+        "excerpt": "Capitulo VIII del quinto signo, llamado ce acatl, mal afortunado. Decian que los que nacian en el, especial si nacian en la nona casa, que llaman chicunahui cipactli, eran grandes murmuradores, noveleros, malsines, testimuneros"
+      },
+      "engine_rendering": "Eighth chapter, which tells of the fifth sign, named One Reed: and the day-fortune upon it was not good. It is told that those who were born then - if they were born in the ninth house, named Nine Cipactli - they said, it is told, that they were great slanderers and great accusers. And it is told that this sign was the day sign of Quetzalcoatl; for that reason the rulers and the nobles paid their debt there and made offerings.",
+      "doctrinal_note": "Note the doubly narrowed claim: the heading does not say that everyone born in this trecena slandered, but that this was told of those born in one named house of it, the ninth. Book 4 routinely locates an augury at a specific day inside a trecena, which is precisely the resolution a twenty-sign personality table cannot represent."
+    },
+    {
+      "statement_id": "nahua.book4.trecena5.membership_partial",
+      "topic": "trecena_membership",
+      "day_sign_id": "acatl",
+      "trecena": 5,
+      "witness": {
+        "file": "florentine_book4/folio_20v.json",
+        "folio": "20v",
+        "text_record_id": "26a7cddc-7213-40c8-8883-f49010dbbc01",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "qujtoqujlitica yn jpan vme ocelutl, ioan ei quauhtli, navi cozcaquauhtli, macujlli olin, chiquacen tecpatl: in jzqujtetl in tonalli mjtoaia amo qualli, amo ieccan,",
+      "engine_rendering": "There follow upon it Two Ocelot, and Three Eagle, Four Vulture, Five Movement, Six Flint. All of these days were said to be not good, not a favourable place.",
+      "doctrinal_note": "Kernel cross-check: trecena 5 runs acatl, ocelotl, cuauhtli, cozcacuauhtli, ollin, tecpatl, quiahuitl, xochitl, cipactli, ehecatl, calli, cuetzpalin, coatl. The witness lists only the first six positions here and agrees with the kernel on all of them; unlike the chapters with complete lists, this one breaks off, and the pack does not silently complete it."
+    },
+    {
+      "statement_id": "nahua.book4.trecena5.augury_wind_borne",
+      "topic": "augury",
+      "day_sign_id": "acatl",
+      "trecena": 5,
+      "witness": {
+        "file": "florentine_book4/folio_20v.json",
+        "folio": "20v",
+        "text_record_id": "26a7cddc-7213-40c8-8883-f49010dbbc01",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh injc mjtoa: amo ieccan, in aqujn ipan tlacatia pilli, anoco maceoalli, atle cenca imaceoal, ilhujl catca, can iuhqujn ehecatl ipa povia inemiliz, êcatocoia, atle itlaanca, inelhoaio mochioaia: ipampa in jtonalpan quetzalcoatl, êecatl otlacat, ca njman iuhcan oquiz, no iuhquj ipan muchioaia, intla cioatl,",
+      "engine_rendering": "And so it is said that it is not a favourable place: he who was born on it, noble or commoner, had no great deserving, no great portion; his life went as the wind goes, it was carried off by the wind, it had nothing to take hold of, it grew no root - because he was born on the day sign of Quetzalcoatl, of Wind, and so he simply came out that way. The same befell a woman.",
+      "doctrinal_note": "The augury is an argument by likeness to the patron deity, not an assertion about character: the life of one born on Quetzalcoatl's day is wind-borne because Quetzalcoatl is the wind. Stripping the deity out and keeping 'rootless, unstable' as a trait would keep the conclusion while discarding the reason the source gives for it."
+    },
+    {
+      "statement_id": "nahua.book4.trecena5.ritual_mitigation",
+      "topic": "ritual_mitigation",
+      "day_sign_id": "acatl",
+      "trecena": 5,
+      "witness": {
+        "file": "florentine_book4/folio_21r.json",
+        "folio": "21r",
+        "text_record_id": "fc0fbb5a-f2f3-4c88-8954-39d3b25b1f68",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "intla aca ipan otlacat izqujlhujtl oc conchololtiaia, qujchieltiaia in chiconqujavitl qujnjquac caltiaia inic qujtocamacazque, ipampa ic qujpatia in jtonal, vncan qujieccaquixtia, ieccan qujca, chicoqualtia, ic conjttilia, in aco ca itla ilhujl, imaceoal, muchioatiuh intla nemiz, intla uel oapaoaz, intla uel moquetzaz ipampa oc vncan in chicomatl qujtlaliaia, vel qujtemachiaia in chiconqujavitl.",
+      "engine_rendering": "If someone was born on any of these days they would let it pass by, they would make him wait for Seven Rain; only then did they bathe him, in order to give him his name - because by this they cured his day sign. There they brought him out well; he came out in a favourable place, he was made somewhat good, and so they contrived that he might come to have some portion, some deserving, if he lived, if he was well reared, if he stood up well. For that reason they set Seven Water there, and they trusted greatly in Seven Rain.",
+      "doctrinal_note": "Decisive against any 'your day sign is X' product. The tonalpouhque deliberately moved the child's naming off the birth day onto a better one, and the text says outright that this cured the day sign ('qujpatia in jtonal'). The operative sign was chosen, not merely observed - so a birth date alone never determined the reading even inside the tradition."
+    },
+    {
+      "statement_id": "nahua.book4.ch6.heading_good_sign_of_tezcatlipoca",
+      "topic": "chapter_heading",
+      "day_sign_id": "miquiztli",
+      "trecena": 6,
+      "witness": {
+        "file": "florentine_book4/folio_22v.json",
+        "folio": "22v",
+        "text_record_id": "1d8fb809-fe07-4367-8337-529772886c7f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "[chiquacen]tetl machiotl, in jtoca ce mjqujztli: ioan in qualli tonalli itech ca, qujlmach itonal in Tezcatlipuca: auh mjec in ventli, in nextlaoalli injc qujmaviztiliaia, ioan cenca qujnpapaqujltiaia in tlatlacoti.",
+      "spanish_parallel": {
+        "text_record_id": "4bb46efb-3b28-4d99-a3ee-3f01a5a79067",
+        "excerpt": "[mi]quiztli, y de su prospera fortuna. Decian que este signo era de Tezcatlipuca, por cuya reverencia hacian en particular muchas ofrendas y sacrificios. Y hacian fiesta y regalos a los esclavos, cada uno a los suyos, en sus casas"
+      },
+      "engine_rendering": "...the sixth sign, named One Death: and the day-fortune upon it was good. It is told it was the day sign of Tezcatlipoca; and there were many offerings, many debt-payments, by which they honoured him, and they greatly gladdened the slaves.",
+      "doctrinal_note": "The heading runs across the folio turn from 22r; the bracketed syllable is the Getty edition's reconstruction. The chapter title in the Spanish column adds the social fact that on this day masters feasted their slaves - an observance, not a birth trait."
+    },
+    {
+      "statement_id": "nahua.book4.trecena6.mixed_valuation",
+      "topic": "augury",
+      "day_sign_id": "miquiztli",
+      "trecena": 6,
+      "witness": {
+        "file": "florentine_book4/folio_22v.json",
+        "folio": "22v",
+        "text_record_id": "1d8fb809-fe07-4367-8337-529772886c7f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Moquetza ce mjqujztli: ynjn mjtoaia, qualli tonalli: auh ioan achi amo qualli, in iuh neciz nican, ipan itlatollo,",
+      "engine_rendering": "One Death rises up: this was said to be a good day sign - and also somewhat not good, as will appear here in its account.",
+      "doctrinal_note": "The chapter announces its own mixedness in a single sentence before saying anything about people born on it. 'Good sign' in Book 4 is a heading, not a verdict."
+    },
+    {
+      "statement_id": "nahua.book4.trecena6.conditional_prosperity",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "miquiztli",
+      "trecena": 6,
+      "witness": {
+        "file": "florentine_book4/folio_23r.json",
+        "folio": "23r",
+        "text_record_id": "e065e7b0-712d-4274-afbb-038c2b92556a",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh in aqujn ipa tlacatia itonal ce mjqujztli: mjtoaia mocujltonoz, motlamachtiz, intla pilli, anoco can maceoaltzintli, muchi inemactia, itech acia, itech pachivia, in mavicotl: iquac in tlauellamaceoa, mocnomati: auh intlacamo uellamaceoa, ca can yneujian conmocaujlia, qujmjtlacalhuja yn jtonal.",
+      "engine_rendering": "And of the one born on it, whose day sign was One Death, it was said: he will be rich, he will prosper - whether a noble or only a poor commoner, everything was granted him, honour reached him and settled upon him - at the time when he did penance well, when he was humble. And if he did not do penance well, then of his own accord he abandons it; he spoils his own day sign.",
+      "doctrinal_note": "The cleanest statement of the doctrine in the chapters surveyed here. The good outcome is explicitly time-bound to conduct ('iquac in tlauellamaceoa, mocnomati'), and the failure is reflexive: 'yneujian conmocaujlia, qujmjtlacalhuja yn jtonal' - by his own doing he lets it go, he damages his day sign. The person acts on the sign, not only the sign on the person."
+    },
+    {
+      "statement_id": "nahua.book4.ch7.heading_worst_sign",
+      "topic": "chapter_heading",
+      "day_sign_id": "quiahuitl",
+      "trecena": 7,
+      "witness": {
+        "file": "florentine_book4/folio_27r.json",
+        "folio": "27r",
+        "text_record_id": "eab7d22a-2b97-4c1e-8e3e-e393af2d6b59",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc matlactli oce capitulo: itechpa tlatoa, injc chicontetl machiotl, in jtoca ce qujavitl: ioan in amo qualli tonalli, in jtech catca: quilmach in aqujque vncan tlacatia, nanaoalti catca, ioan tetlachivianj, tlatlacatecolo: auh in tlacatecolotl, ca iehoatl qujtoznequj in Diablo, achi muchi in calli itech pouhquj, in amo qualli, in amo iectli: canjio inic matlactetl vmey qualli.",
+      "spanish_parallel": {
+        "text_record_id": "cf219fdb-f9aa-47ce-883c-1c7eabe9e42c",
+        "excerpt": "Capitulo XI del septimo signo, llamado ce quiahuitl, y de su desastrada fortuna. Decian que los que en este signo nacen son nigromanticos, bruxos, hechiceros, enbaidores."
+      },
+      "engine_rendering": "Eleventh chapter, which tells of the seventh sign, named One Rain, and of the bad day-fortune that was upon it. It is told that those born then were sorcerers, and workers of enchantment, and owl-men - and 'tlacatecolotl' means the Devil. Almost all the houses belonging to it were not good, not right; only the thirteenth was good.",
+      "doctrinal_note": "The gloss equating tlacatecolotl with 'el Diablo' is the friar's editorial hand inside the Nahuatl column, and it is quoted here as part of the witness rather than removed: this corpus is a colonial evangelising compilation as well as a Nahua one. The final clause is also a datum against uniform trecena readings - the compiler counts the houses one by one, and one of the thirteen escapes."
+    },
+    {
+      "statement_id": "nahua.book4.trecena7.augury",
+      "topic": "augury",
+      "day_sign_id": "quiahuitl",
+      "trecena": 7,
+      "witness": {
+        "file": "florentine_book4/folio_27v.json",
+        "folio": "27v",
+        "text_record_id": "29375561-6e97-4f90-a8b5-383a4ec7f27c",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Moquetza ce qujaujtl: injn mjtoaia, njman amo qualli tonalli, motqujtica teuhtli, tlacolli, icnoiotl, icnotlacaiotl, tlaciaujliztli, tlacococaviliztli, teopouhcaiotl, atle onqujcaliztli, atle oneoatinemjliztli:",
+      "engine_rendering": "One Rain rises up: this was said to be in no way a good day sign; wholly filled with dust and filth, with misery, with wretchedness, with weariness, with affliction, with anguish, with getting nowhere, with never rising up.",
+      "doctrinal_note": "'teuhtli, tlacolli' - dust and filth - is a fixed difrasismo for vice and degradation, not a description of poverty; rendering it literally as dirt would lose the moral sense, and rendering it as 'bad luck' would lose the image."
+    },
+    {
+      "statement_id": "nahua.book4.trecena7.cihuateteo_precaution",
+      "topic": "observance",
+      "day_sign_id": "quiahuitl",
+      "trecena": 7,
+      "witness": {
+        "file": "florentine_book4/folio_27v.json",
+        "folio": "27v",
+        "text_record_id": "29375561-6e97-4f90-a8b5-383a4ec7f27c",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "ipampa in jpan, y, tonalli, iuh mjtoa: ca vncan temoia, in moteneoa cioateteo, atlacacemelleque, teca mocaiaoanj: ic cenca qujntlaquauhnaoatiaia, in tepilhoan, in aiac qujcaz, aiac vtli qujtocaz: can cali onozque: iuh qujmjlhujaia maca xonqujcaca, anmotenamjctizque, ca temo, ca tlalpan aci in cioapipilti: ic qujntlamauhcaittiliaia in tetaoan: injc amo aca tennecujliviz, ixnecujliujz, tenpatziujz, itech qujneuaz:",
+      "engine_rendering": "...because on this day sign, thus it is said, there descended those called the Cihuateteo, who are ill-omened and who mock people. For that reason they strictly commanded the children that none should go out, that none should take the road, that they should stay indoors. Thus they said to them: do not go out, you will meet them face to face, for they descend, the Cihuapipiltin reach the ground. By this the fathers made them afraid of them, so that no one's mouth should be twisted, no one's eye pulled awry, no one's lips withered, so that it should not fasten on him.",
+      "doctrinal_note": "The practical content of a bad day in Book 4 is a rule about what to do that day - keep the children in - not a claim about people born on it. The palsy symptoms listed (twisted mouth, pulled eye) are what the day is guarded against."
+    },
+    {
+      "statement_id": "nahua.book4.ch8.heading_bad_sign_with_good_houses",
+      "topic": "chapter_heading",
+      "day_sign_id": "malinalli",
+      "trecena": 8,
+      "witness": {
+        "file": "florentine_book4/folio_35r.json",
+        "folio": "35r",
+        "text_record_id": "c210f52c-4d09-43bd-90f8-1c972a7e448f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc caxtolli capitulo: itechpa tlatoa, injc chicuetetl machiotl, in jtoca ce malinalli: ioan in amo qualli tonalli in jtech ca, auh qujl injc ontetl calli qualli: ioan in jxqujch oc cequj chicunauhtetl in jxqujch oc cequj, in jtech vmpeoa injc chicunauhtetl calli, ie injc matlactetl, ioan injc oce, injc omome, inic vmei, qujlmach qualli catca.",
+      "spanish_parallel": {
+        "text_record_id": "37133e89-079a-43ba-b403-bf2868559462",
+        "excerpt": "Capitulo XV del octavo signo, llamado ce malinalli, y de su adversa fortuna. La segunda casa deste signo tenianla por buena, y universalmente todas las casas de nueve arriba, S. 10, 11, 12, 13, las tenian por buenas"
+      },
+      "engine_rendering": "Fifteenth chapter, which tells of the eighth sign, named One Grass, and of the bad day-fortune that was upon it; and it is told the second house was good, and all the rest from the ninth house onward - that is, the tenth, and the eleventh, the twelfth, the thirteenth - it is told these were good.",
+      "doctrinal_note": "A 'bad' trecena in which five of the thirteen houses are counted good. The chapter heading itself enumerates them, which is why the pack encodes trecena membership separately from trecena valuation: the two are not the same claim."
+    },
+    {
+      "statement_id": "nahua.book4.trecena8.augury",
+      "topic": "augury",
+      "day_sign_id": "malinalli",
+      "trecena": 8,
+      "witness": {
+        "file": "florentine_book4/folio_35r.json",
+        "folio": "35r",
+        "text_record_id": "c210f52c-4d09-43bd-90f8-1c972a7e448f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Moquetza ce malinalli, injn mjtoa: njman amo qualli tonalli, tequanj, imacaxonj, in aqujn ipa tlacatia, can motolinjtinenca, tel qujttaia in jneiollaliliz: auh can ompoli, can onqujztiqujca,",
+      "engine_rendering": "One Grass rises up: this is said to be in no way a good day sign - a wild beast, a thing to be feared. Whoever was born on it went about only in want; yet he did find his consolation, and then it perished, it passed straight away.",
+      "doctrinal_note": "'tequanj' - a beast of prey - is Book 4's standard epithet for a dangerous day sign. Even here the source qualifies: 'tel qujttaia in jneiollaliliz', he did see his consolation. The concessive 'tel' recurs throughout the corpus and is the grammatical marker of its refusal to give unmixed verdicts."
+    },
+    {
+      "statement_id": "nahua.book4.trecena8.ritual_mitigation",
+      "topic": "ritual_mitigation",
+      "day_sign_id": "malinalli",
+      "trecena": 8,
+      "witness": {
+        "file": "florentine_book4/folio_35v.json",
+        "folio": "35v",
+        "text_record_id": "22e32874-d1a9-4b09-9086-c884bbb4de04",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh in aqujn ipan tlacatia, aiamo caltiaia, qujn jpan caltiaia, in ey ocelotl, cemilhujtonalli, iuh qujtoaia, in tonalpouhque, ca muchipa qualca in eitioaia, amo netenmachoia, iehoatl injc qujoallatotoqujliaia tonalpouhque, injc achi vncan qujqualtiliaia itonal, in jpan tlacatia ce malinalli.",
+      "engine_rendering": "And whoever was born on it, they did not yet bathe him; they bathed him only on Three Ocelot, a day sign of the day-count. Thus said the day-counters: the third is always a good place; nothing is feared there. For this reason the day-counters put it off to that day, so that they might thereby make somewhat better the day sign of the one born on One Grass.",
+      "doctrinal_note": "The second explicit mitigation in the pack, from a different chapter than the One Reed case on folio 21r: the same technique, deferring the bathing and naming to a better day, applied to a different bad sign. Two independent attestations make it a standing practice, not an isolated remark - and it means the tradition itself did not treat the birth day as the final word."
+    },
+    {
+      "statement_id": "nahua.book4.ch9.heading_conditional_fortune",
+      "topic": "chapter_heading",
+      "day_sign_id": "coatl",
+      "trecena": 9,
+      "witness": {
+        "file": "florentine_book4/folio_37r.json",
+        "folio": "37r",
+        "text_record_id": "0882f7d7-fc92-4f91-bd4b-63f96085d25c",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc caxtolli oce capitulo: itechpa tlatoa, injc chicunauhtetl machiotl, in jtoca ce coatl: qujlmach qualli tonalli: intlacamo can iehoantin qujtlacozque in vncan tlacati: auh in puchteca cenca qujmatatacaia, in jpampa in jnnetlaiecoltiliz.",
+      "spanish_parallel": {
+        "text_record_id": "89aef4b5-d98e-4646-88b2-9ae50a8d843d",
+        "excerpt": "Capitulo XVI del noveno signo, llamado ce coatl, y de su buena fortuna, si los que nacian en el no la perdiesen por su floxura. Los mercaderes tenian a este signo por muy propicio para su oficio"
+      },
+      "engine_rendering": "Sixteenth chapter, which tells of the ninth sign, named One Serpent: it is told a good day sign - if only those born then would not spoil it. And the merchants craved it greatly, because of their trade.",
+      "doctrinal_note": "'intlacamo can iehoantin qujtlacozque in vncan tlacati' - if only those born then would not spoil it. The conditional is built into the title of the chapter, exactly as in chapters 1 and 3, and the Spanish column preserves it ('si los que nacian en el no la perdiesen por su floxura')."
+    },
+    {
+      "statement_id": "nahua.book4.trecena9.augury_by_station",
+      "topic": "augury",
+      "day_sign_id": "coatl",
+      "trecena": 9,
+      "witness": {
+        "file": "florentine_book4/folio_37r.json",
+        "folio": "37r",
+        "text_record_id": "0882f7d7-fc92-4f91-bd4b-63f96085d25c",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Moquetza ce coatl: injn mjtoaia, qualli tonalli: in aqujn ipa tlacatia, qujtoaia: ilhujle, maceoale iez, mocujltonoz, oniez in qujquaz, in qujz, auh in iaoc, in iaopan, oqujchtiz, tiacauhtiz, momavizcotiz panvetziz, mavicoaz, moteniotiz, aco tlatocatiz, tecutiz,",
+      "engine_rendering": "One Serpent rises up: this was said to be a good day sign. Of the one born on it they said: he will have a portion, he will have deserving, he will be rich, he will have what to eat and what to drink; and in war, on the battlefield, he will prove a man, a brave warrior, he will win honour, he will rise high, he will be esteemed, he will gain a name, perhaps he will rule, will be a lord.",
+      "doctrinal_note": "The good-sign formula, stratified by station and by sex as in chapter 1; the clause for the woman follows immediately and runs on to folio 37v, where she is described as a gatherer and keeper who provides for her children."
+    },
+    {
+      "statement_id": "nahua.book4.trecena9.forfeiture",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "coatl",
+      "trecena": 9,
+      "witness": {
+        "file": "florentine_book4/folio_37v.json",
+        "folio": "37v",
+        "text_record_id": "7befbed3-43ec-4807-a0ec-73ab0ad1059f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh ioan mjtoa, macivi in iuhquj in inemac mochioa, in jpan tlacati (ca ie omjto mjieccan) intlacamo iê vellamaceoa, intlacamo vel monotza, catle vnqujca, ca ixcoian conmocaujlia, qujmjxcaoaltia, qujmopolhuja, qujmopopolhuja, in jmaceoal ocatca:",
+      "engine_rendering": "And it is also said: even though such is made the portion of the one born on it - as has already been said in many places - if he does not do penance well, if he does not take counsel with himself well, nothing comes of it; for of his own accord he lets it go, he deprives himself of it, he loses it, he destroys it utterly - what had been his deserving.",
+      "doctrinal_note": "Note the compiler's own aside, 'ca ie omjto mjieccan' (this has already been said in many places): Book 4 is aware that the forfeiture clause is its recurring structure and not an occasional remark. The following lines list the specific vices - taking work lightly, sloth, sleeping late, resenting instruction - by which the loss happens."
+    },
+    {
+      "statement_id": "nahua.book4.trecena9.merchants",
+      "topic": "observance",
+      "day_sign_id": "coatl",
+      "trecena": 9,
+      "witness": {
+        "file": "florentine_book4/folio_37v.json",
+        "folio": "37v",
+        "text_record_id": "7befbed3-43ec-4807-a0ec-73ab0ad1059f",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Ioan mjtoa: in jpan in ce coatl, cenca qujqualittaia in puchteca, in oztomeca, in jaque, in nênemjnj, in vecacalaqujnj, intonalpan catca, intlapoalpan catca, iehoatl qujtztivia, vncan vmpeoaia in veca:",
+      "engine_rendering": "And it is said: on this One Serpent the merchants, the vanguard traders, the travellers, the wayfarers, those who enter far countries, esteemed it greatly; it was their day sign, their day-count; they watched for it, and on it they set out for distant parts.",
+      "doctrinal_note": "A trecena can be read as an occasion rather than a nativity: One Serpent is here an electional day for departure, chosen by a profession. This is the same corpus supplying election, not character."
+    },
+    {
+      "statement_id": "nahua.book4.ch10.heading_good_sign_of_huitzilopochtli",
+      "topic": "chapter_heading",
+      "day_sign_id": "tecpatl",
+      "trecena": 10,
+      "witness": {
+        "file": "florentine_book4/folio_46r.json",
+        "folio": "46r",
+        "text_record_id": "b5860798-8c8e-4fde-9faa-fcc6f0fc7bae",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli oce capitulo: itechpa tlatoa, injc matlactetl machiotl, in jtoca ce tecpatl: ioan qujl qualli in jtonallo, auh qujl in aqujque vncan tlacatia chicaoaque catca, ioan tequjoacatia: auh qujl in cioa vncan tlacatia oqujchiolloque catca, muchi in veli catca, cenca uel qujnextiaia in jntlatquj: auh qujl itonal catca in Vitzilopuchtli, in jtech pouhquj catca, in jtequjuh catca iiaoiotl, qujl no itonal in Camaxtle: auh in jquac vmpeoaia injn machiotl, qujlhujqujxtiliaia, auh qujl muchi qualli catca in jzqujlhujtl, matlaqujlhujtl vmei.",
+      "spanish_parallel": {
+        "text_record_id": "665a10c6-45f7-4fd9-bae5-086fdb704367",
+        "excerpt": "Capitulo XXI del decimo signo, llamado ce tecpatl, y de su felicidad. Decian que los hombres que nacian en este signo eran valientes, esforzados para la guerra y venturosos"
+      },
+      "engine_rendering": "Twenty-first chapter, which tells of the tenth sign, named One Flint, and it is told its day-fortune was good; and it is told that those born then were strong, and became bearers of office; and it is told that the women born then were manly of heart, capable of everything, and made their property greatly increase. And it is told it was the day sign of Huitzilopochtli, that it belonged to him whose office was war; it is told it was also the day sign of Camaxtli. And when this sign began they kept his feast, and it is told all its days were good, all thirteen days.",
+      "doctrinal_note": "One of the very few headings in the surveyed chapters that asserts an unqualified good - 'muchi qualli catca in jzqujlhujtl'. It is quoted precisely so that the conditional headings elsewhere are not mistaken for a house style: where Book 4 means unconditional, it says so."
+    },
+    {
+      "statement_id": "nahua.book4.trecena10.augury",
+      "topic": "augury",
+      "day_sign_id": "tecpatl",
+      "trecena": 10,
+      "witness": {
+        "file": "florentine_book4/folio_47r.json",
+        "folio": "47r",
+        "text_record_id": "6dafc612-76d0-4b37-a9f7-f9eef9d2be37",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh in aqujn ipan tlacatia, y, ce tecpatl qujtoaia, oqujchtiz tiacauhtiz, maujztiz, mocujltonoz:",
+      "engine_rendering": "And of the one born on it, on One Flint, they said: he will prove a man, he will be a brave warrior, he will be honoured, he will be rich.",
+      "doctrinal_note": "Terse and unhedged, in contrast to the long conditional passages of the neighbouring chapters. The same folio shows the pulque-makers watching this day to broach their maguey - the chapter's centre of gravity is the feast, not the nativity."
+    },
+    {
+      "statement_id": "nahua.book4.trecena10.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "tecpatl",
+      "trecena": 10,
+      "witness": {
+        "file": "florentine_book4/folio_47v.json",
+        "folio": "47v",
+        "text_record_id": "cf39aaa6-70e6-4846-9fa8-7c4b7ebf7303",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh in vme qujavitl, ioan ei xochitl, nauj cipactli,  macujlli êcatl, chiquacen calli, chicome cuetzpalin, chicuei coatl, chicunavi mjqujztli, matlactli macatl, matlactloce tochtli, matlactli omome atl, matlactlomej itzcujntli:",
+      "engine_rendering": "And Two Rain, and Three Flower, Four Cipactli, Five Wind, Six House, Seven Lizard, Eight Serpent, Nine Death, Ten Deer, Eleven Rabbit, Twelve Water, Thirteen Dog.",
+      "doctrinal_note": "Kernel cross-check: trecena 10 runs tecpatl, quiahuitl, xochitl, cipactli, ehecatl, calli, cuetzpalin, coatl, miquiztli, mazatl, tochtli, atl, itzcuintli. The witness agrees at all twelve listed positions, and here spells the wind sign correctly as 'ecatl'."
+    },
+    {
+      "statement_id": "nahua.book4.ch11.heading",
+      "topic": "chapter_heading",
+      "day_sign_id": "ozomatli",
+      "trecena": 11,
+      "witness": {
+        "file": "florentine_book4/folio_47v.json",
+        "folio": "47v",
+        "text_record_id": "cf39aaa6-70e6-4846-9fa8-7c4b7ebf7303",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli vmome capitulo, itechpa tlatoa, injc matlactetl oce machiotl, in jtoca ce ocomatli: ioan in jtonallo, qujlmach in aqujque vncan tlacatia",
+      "spanish_parallel": {
+        "text_record_id": "0620911e-7254-4acc-84e7-4aed346e8e58",
+        "excerpt": "Capitulo XXII del onceno signo, llamado ce ozumatli, y de su fortuna. Decian que los que en el nacian eran de buena condicion, ami[gables]"
+      },
+      "engine_rendering": "Twenty-second chapter, which tells of the eleventh sign, named One Monkey, and of its day-fortune. It is told that those who were born then...",
+      "doctrinal_note": "The heading breaks at the foot of 47v and is completed at the head of 48r, where the predicate arrives: they were good-hearted, friendly, loveable, joyful, and took care of song and the other crafts. The break is preserved here rather than spliced, because the pack's rule is one quotation to one witness record."
+    },
+    {
+      "statement_id": "nahua.book4.trecena11.heading_continuation",
+      "topic": "chapter_heading",
+      "day_sign_id": "ozomatli",
+      "trecena": 11,
+      "witness": {
+        "file": "florentine_book4/folio_48r.json",
+        "folio": "48r",
+        "text_record_id": "5c03bc48-2a04-4ad7-bc61-8d39911afbc6",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "qualli iiollo catca, teicnjoan, tlacotlalonj, papaqujnj, qujmocujtlaviaia in cujcatl, ioan in oc cequj toltecaiotl:",
+      "engine_rendering": "...were good-hearted, friends to people, worthy of love, joyful; they took care of song, and of the other crafts.",
+      "doctrinal_note": "The completion of the chapter heading begun on 47v. One Monkey is the artisans' and entertainers' sign, and the augury is a description of sociable competence rather than of fortune."
+    },
+    {
+      "statement_id": "nahua.book4.trecena11.cihuateteo_precaution",
+      "topic": "observance",
+      "day_sign_id": "ozomatli",
+      "trecena": 11,
+      "witness": {
+        "file": "florentine_book4/folio_48r.json",
+        "folio": "48r",
+        "text_record_id": "5c03bc48-2a04-4ad7-bc61-8d39911afbc6",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh ioan qujtoa, no uncan temoaia inchielpan, imacia, in moteneoaia cioapipilti, cioateteu, cenca vnca qujntlamauhcaittiliaia in tepilhoan, ca qujntzatzaquaia calitic, amo qujmonqujxtitlanja, in qujaoac, in vtlica, injc amo motenamjctizque, qujmjtlacozque, aco aca tennecujliviz, tempatziviz, ixnecujliujz, ixvitzaliviz, iten papatlacaz, iten viujiocaz, iollotlauelilotiz, itech qujneoaz, tenqualacqujcaz, matzicoliujz, macopichaujz, icxi qujujlanaz. Et",
+      "engine_rendering": "And they say that there too descended, at their appointed station, those called the Cihuapipiltin, the Cihuateteo. They made the children greatly afraid of them there; they shut them up indoors, they did not let them out into the courtyard or onto the road, so that they should not meet them face to face and be harmed by them - lest someone's mouth be twisted, his lips withered, his eye pulled awry or made thorn-like, his lips flutter and tremble, his heart turn mad, lest it fasten on him, lest he drool, lest his hand be crooked or bent back, lest he drag his foot.",
+      "doctrinal_note": "The same precaution as on One Rain (folio 27v), attached to a different sign. What the corpus supplies for these days is a rule of conduct for everyone alive that day; nothing here is a statement about people born under the sign."
+    },
+    {
+      "statement_id": "nahua.book4.ch12.heading",
+      "topic": "chapter_heading",
+      "day_sign_id": "cuetzpalin",
+      "trecena": 12,
+      "witness": {
+        "file": "florentine_book4/folio_49r.json",
+        "folio": "49r",
+        "text_record_id": "925787b7-53cd-4ee6-86a7-0aa171fd55dd",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli vmei capitulo: itechpa tlatoa, injc matlactetl omvme machiotl, in jtoca ce cuetzpalli: qujl in aqujque vncan tlacatia, iuhqujn tlatlaloapopul catca, cenca chicaoac catca in innacaio in iêel: injc nauhtetl calli, ioa injc macujltetl, ioan injc chiquacentetl, qujl amo qualli catca: auh injc vntetl, ioan inic chicuetetl, qujlmach ca tlanepantla qujca.",
+      "spanish_parallel": {
+        "text_record_id": "60a36d76-1189-41e3-b176-884b0d1dd10d",
+        "excerpt": "Capitulo XXIII del duodecimo signo, llamado ce cuetzpalli, y de su ventura. Decian que los que nacian en este signo eran nervosos, enxutos, sanos de buena carnadura, diligentes, vividores."
+      },
+      "engine_rendering": "Twenty-third chapter, which tells of the twelfth sign, named One Lizard. It is told that those born then were like sturdy little water-creatures; their bodies were very strong, they were diligent. The fourth house, and the fifth, and the sixth, it is told, were not good; but the second and the eighth, it is told, come out only middling.",
+      "doctrinal_note": "House-by-house valuation inside a single trecena, with three grades used in one sentence (good implied, not good, middling). A sign-to-trait table cannot carry this, and the defensibility spec's refusal of a twenty-sign personality lookup is grounded in exactly such passages."
+    },
+    {
+      "statement_id": "nahua.book4.trecena12.augury",
+      "topic": "augury",
+      "day_sign_id": "cuetzpalin",
+      "trecena": 12,
+      "witness": {
+        "file": "florentine_book4/folio_49r.json",
+        "folio": "49r",
+        "text_record_id": "925787b7-53cd-4ee6-86a7-0aa171fd55dd",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Moquetza ce cuetzpalli: inin qujqualittaia, qujtoaia: in aquj̄ ipan tlacatia, cenca chicaoac, chicaoacanacaio aic cenca mococoa: auh intla cana oalhuetzi aquen conmati, meuhtiuetzi, popoxiuhteoa:",
+      "engine_rendering": "One Lizard rises up: this they esteemed. They said: the one born on it was very strong, strong of body, he was never much sick; and if he fell somewhere, he felt nothing of it, he sprang up at once, he rose stirring.",
+      "doctrinal_note": "An augury by likeness to the sign's animal, made explicit in the next clause: they approved it 'because his day sign was Lizard'. The chapter then reports a proverb drawn from the lizard's scuttle, showing the augury feeding ordinary speech rather than a horoscope."
+    },
+    {
+      "statement_id": "nahua.book4.trecena12.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "cuetzpalin",
+      "trecena": 12,
+      "witness": {
+        "file": "florentine_book4/folio_49v.json",
+        "folio": "49v",
+        "text_record_id": "20d72e9c-fd40-4d09-9580-9eb69e30e45e",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh in vme coatl, ioan ei mjqujztli, inic tecpantiuh, navi macatl, macujlli tochtli, chiquacen atl, chicume itzcujntli, chicuei ocomatli, chicunavi malinalli, matlactli acatl, matlactloce ocelutl, matlactli vmome quauhtli, matlactlomei cozcaquauhtli:",
+      "engine_rendering": "And Two Serpent, and Three Death, set in order Four Deer, Five Rabbit, Six Water, Seven Dog, Eight Monkey, Nine Grass, Ten Reed, Eleven Ocelot, Twelve Eagle, Thirteen Vulture.",
+      "doctrinal_note": "Kernel cross-check: trecena 12 runs cuetzpalin, coatl, miquiztli, mazatl, tochtli, atl, itzcuintli, ozomatli, malinalli, acatl, ocelotl, cuauhtli, cozcacuauhtli. The witness agrees at all twelve listed positions."
+    },
+    {
+      "statement_id": "nahua.book4.ch13.heading_fully_conditional",
+      "topic": "chapter_heading",
+      "day_sign_id": "ollin",
+      "trecena": 13,
+      "witness": {
+        "file": "florentine_book4/folio_50r.json",
+        "folio": "50r",
+        "text_record_id": "00c81d78-5d0f-4bee-bf53-0cd884019b90",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "[jto]ca ce olin, auh qujlmach in aqujque vncan tlacatia: intla tlamaceoaia, ioan intla uel izcaltiloia: qujl qualli ipan muchioaia: auh in amo tlamaceoaia, qujl netolinjliztli inpan muchioaia.",
+      "spanish_parallel": {
+        "text_record_id": "9f2b604b-775c-492b-827e-4f2e87240a50",
+        "excerpt": "indiferente a bien y a mal, y que los que en el nacian, si eran penitentes y bien dotrinados, los iba bien, y a los otros, mal"
+      },
+      "engine_rendering": "...named One Movement. And it is told of those who were born then: if they did penance, and if they were well reared, it is told good came upon them; and those who did not do penance, it is told misery came upon them.",
+      "doctrinal_note": "The strongest single piece of evidence in the pack for the defensibility spec's rule. This chapter heading contains no verdict at all - only a pair of conditions and their two outcomes. Rendering One Movement as a personality type would delete the entire content of the heading. The bracketed syllable is the Getty edition's reconstruction of the word broken across the folio turn from 49v."
+    },
+    {
+      "statement_id": "nahua.book4.trecena13.conditional_augury",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "ollin",
+      "trecena": 13,
+      "witness": {
+        "file": "florentine_book4/folio_50r.json",
+        "folio": "50r",
+        "text_record_id": "00c81d78-5d0f-4bee-bf53-0cd884019b90",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Niman oalmoquetza in ce olin: injn qujtoaia, can chico qualli in aqujn vncan tlacati, in oqujchtli, in cioatl in vellamaceoa, in vel monotza, in uel mooapaoa, iehoatl qujcaia, qujttaia in jmaceoal, in jnemac:",
+      "engine_rendering": "Then One Movement rises up: of this they said it is good only by halves. Whoever was born then, man or woman, who did penance well, who took counsel with himself well, who was well brought up - that one came out, that one saw his deserving, his portion.",
+      "doctrinal_note": "'can chico qualli' - good only on one side. The sign is stated to be half-good before any person is described, and the good half is then made to depend on three named practices: penance, self-counsel, upbringing. The other half follows in the next paragraph."
+    },
+    {
+      "statement_id": "nahua.book4.trecena13.forfeiture",
+      "topic": "conditional_forfeiture",
+      "day_sign_id": "ollin",
+      "trecena": 13,
+      "witness": {
+        "file": "florentine_book4/folio_50r.json",
+        "folio": "50r",
+        "text_record_id": "00c81d78-5d0f-4bee-bf53-0cd884019b90",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh intlacamo vel monotza, intlacamo uel mozcalti: can icuepca in qujmonamictiaia icnoiotl, itech eoatinemj, can nentlacatl, acan petzitl, can quauhtlamelaoa, aanemj, can iuh onioa, acan ixtona. Et",
+      "engine_rendering": "But if he did not take counsel with himself well, if he was not well reared, then in exchange what he met with was misery; it went about clinging to him; he was a mere waste of a man, nowhere polished, he blundered straight into the woods, he lived aimlessly, he simply went off, nowhere came into the light.",
+      "doctrinal_note": "The second half of the halved sign, in its own paragraph. Same birth, same sign, opposite life - and the discriminator named is conduct and rearing, neither of which any date conversion can supply."
+    },
+    {
+      "statement_id": "nahua.book4.trecena13.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "ollin",
+      "trecena": 13,
+      "witness": {
+        "file": "florentine_book4/folio_50r.json",
+        "folio": "50r",
+        "text_record_id": "00c81d78-5d0f-4bee-bf53-0cd884019b90",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh in vme tecpatl, ioan ie qujaujtl, navi suchitl, macujlli cipactli, chiquacen hecatl, chicome calli, chicuei cuetzpali, chiconauj coatl, matlactli mjqujztli, matlactloce macatl, matlactlomome tochtli: ioan injc tlatica matlactlomej atl,",
+      "engine_rendering": "And Two Flint, and Three Rain, Four Flower, Five Cipactli, Six Wind, Seven House, Eight Lizard, Nine Serpent, Ten Death, Eleven Deer, Twelve Rabbit, and that with which it ends, Thirteen Water.",
+      "doctrinal_note": "Kernel cross-check: trecena 13 runs ollin, tecpatl, quiahuitl, xochitl, cipactli, ehecatl, calli, cuetzpalin, coatl, miquiztli, mazatl, tochtli, atl. The witness agrees at every position, including the closing thirteenth."
+    },
+    {
+      "statement_id": "nahua.book4.ch14.heading_sign_of_xiuhtecuhtli",
+      "topic": "chapter_heading",
+      "day_sign_id": "itzcuintli",
+      "trecena": 14,
+      "witness": {
+        "file": "florentine_book4/folio_50v.json",
+        "folio": "50v",
+        "text_record_id": "cf10e49d-6736-41d1-9e92-f91068234cea",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli on macujlli capitulo: itechpa tlatoa, injc matlactetl onnavi machiotl, in jtoca ce itzcujntli: inin qujlmach qualli tonalli, ioan qujl itonal catca, in xiuhtecutli: in qujtoaia Tlalxictentica, cenca vei ilhujtl qujchioaia: ioan ypan motlatocaaltiaia in tlatoque.",
+      "spanish_parallel": {
+        "text_record_id": "694b3129-6a71-4595-b615-6f148c9423ae",
+        "excerpt": "Capitulo XXV del catorceno signo, llamado ce itzcuintli, y de su prospera ventura. Este decian ser el signo del dios del fuego, llamado Xiuhtecuhtli o Tlalxictentica. En este signo los senores y principales"
+      },
+      "engine_rendering": "Twenty-fifth chapter, which tells of the fourteenth sign, named One Dog: this, it is told, was a good day sign, and it is told it was the day sign of Xiuhtecuhtli, whom they called Tlalxictentica. They kept a very great feast, and on it the rulers were bathed as rulers.",
+      "doctrinal_note": "The chapter is organised around an event - the installation of rulers, who were washed on this sign - rather than around births. The Spanish column agrees. This is the sign as electional and civic time."
+    },
+    {
+      "statement_id": "nahua.book4.trecena14.augury_and_naming_day",
+      "topic": "augury",
+      "day_sign_id": "itzcuintli",
+      "trecena": 14,
+      "witness": {
+        "file": "florentine_book4/folio_52v.json",
+        "folio": "52v",
+        "text_record_id": "85b08c86-b277-42d4-9a6a-88b8dd020507",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh in aqujn ipan tlacatia, injc qujtonalittaia, qujtoaia: mocujltonoz, ipal iez, qujtlamaujcalhujz in totecujo: aco tecoaz, tealtiz, aco quezqujpa cujcujcaz teitotiz: uh inic qujtocamacaia, qujn no ipan qujmattiuja in naoacatl, iquac qujtlatlaqualiaia, qujxicvenquaqualiaia in pipiltotonti: ipampa in vncan motlatocapaca, in netlatocapacaian tlatoque, altepeme.",
+      "engine_rendering": "And of the one born on it, thus they read his day sign, they said: he will be rich, others will live by him, he will make our lord marvel; perhaps he will host banquets, will bathe slaves, will sing and make people dance a number of times. And so they gave him his name, and they went on watching for Four Reed; then they gave the little children food to eat, they fed them the navel-offering - because it was there that the rulers of the city-states washed themselves as rulers.",
+      "doctrinal_note": "The naming day is again displaced from the birth day, here to Four Reed. Together with the One Reed and One Grass cases this makes three chapters in which the sign that actually attaches to a person is a chosen day, not the day of birth."
+    },
+    {
+      "statement_id": "nahua.book4.trecena14.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "itzcuintli",
+      "trecena": 14,
+      "witness": {
+        "file": "florentine_book4/folio_52v.json",
+        "folio": "52v",
+        "text_record_id": "85b08c86-b277-42d4-9a6a-88b8dd020507",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh in qujtoqujlia vme ocomatli, ioan ey malinalli, navi acatl, macujlli ocelotl, chiquacen quauhtli, chicome cozcaquauhtli, chicuei olin, chicunauj tecpac, matlactli qujaujtl, matlactloce suchitl, matlactlomome cipactli, matlactli vmei hecatl,",
+      "engine_rendering": "And there follow Two Monkey, and Three Grass, Four Reed, Five Ocelot, Six Eagle, Seven Vulture, Eight Movement, Nine Flint, Ten Rain, Eleven Flower, Twelve Cipactli, Thirteen Wind.",
+      "doctrinal_note": "The witness closes this list with a general rule worth recording: 'Estas casas todas siguen la bondad o maldad de sus numeros' in the Spanish column - the houses take their value from their coefficients, which the compiler treats as already explained.",
+      "witness_variant": {
+        "reading": "The Nahuatl column writes 'chicunauj tecpac' at the ninth position, for tecpatl (Flint).",
+        "assessment": "A minor orthographic slip confined to the Nahuatl column: the Spanish column of the same folio has 'la nona, chicunahui tecpatl'. Recorded rather than corrected.",
+        "kernel_crosscheck": "The validated kernel gives trecena 14 as itzcuintli, ozomatli, malinalli, acatl, ocelotl, cuauhtli, cozcacuauhtli, ollin, tecpatl, quiahuitl, xochitl, cipactli, ehecatl. The witness agrees at all twelve listed positions."
+      }
+    },
+    {
+      "statement_id": "nahua.book4.ch15.heading_bad_sign",
+      "topic": "chapter_heading",
+      "day_sign_id": "calli",
+      "trecena": 15,
+      "witness": {
+        "file": "florentine_book4/folio_53r.json",
+        "folio": "53r",
+        "text_record_id": "625ace8f-a7cd-49b9-9b1b-5e84399c705e",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "injc caxtoltetl machiotl, in jtoca ce calli: ioan qujl amo qualli, qujl in vncan tlacatia toqujchti, ichtecque catca, teuhtli tlacolli qujmocujtlaviaia: mochi amo qualli in jnpan mochioaia: auh qujl in cioa cenca tlatziujnj, cenca cochinj, njman atle qualli qujchioa.",
+      "spanish_parallel": {
+        "text_record_id": "a2bf737d-7964-4dc9-b207-b946621876cd",
+        "excerpt": "llamado ce calli, y de su muy adversa fortuna, decian que los hombres que en el nacian eran grandes ladrones, luxuriosos, tahures, desperdiciadores, y que siempre paraban en mal. Y las mujeres que en el nacian eran perezosas, dormilonas, inutiles para todo bien"
+      },
+      "engine_rendering": "...the fifteenth sign, named One House: and it is told it was not good; it is told that the men born then were thieves, that they took care of dust and filth, and that everything that came upon them was not good; and it is told the women were very lazy, very much sleepers, and did nothing at all well.",
+      "doctrinal_note": "The heading runs across the folio turn from 52v. This is a chapter where the corpus reads as a flat trait list, and it is included unedited: the pack's claim is that Book 4 is predominantly conditional, not that it is uniformly so. The immediately following paragraphs qualify it by house and by the descent of the Cihuateteo."
+    },
+    {
+      "statement_id": "nahua.book4.trecena15.augury",
+      "topic": "augury",
+      "day_sign_id": "calli",
+      "trecena": 15,
+      "witness": {
+        "file": "florentine_book4/folio_53r.json",
+        "folio": "53r",
+        "text_record_id": "625ace8f-a7cd-49b9-9b1b-5e84399c705e",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "In ce calli: jnjn ce calli, qujtoaia, njman amo qualli tonalli, tlacolli, teuhtli iiolian, ioan no ipan temoia in omoteneuhque cioateteo, auh in tlein vncan mochioaia, ie mjieccan omjto: in iehoan titici, oc cenca iehoan qujnmaujztiliaia, ceceniaca qujntlamanjliaia in jnchachan,",
+      "engine_rendering": "One House: this One House they said was in no way a good day sign - filth and dust are its heart; and on it too there descended the Cihuateteo already spoken of. And what happened then has been told in many places. The physicians especially honoured it; each one made offerings to them in their own homes.",
+      "doctrinal_note": "Even the flattest bad-sign chapter turns immediately to observance: the physicians' household offerings on this day. Throughout Book 4 the practical unit is what is done on the day, and the pack preserves that emphasis."
+    },
+    {
+      "statement_id": "nahua.book4.trecena15.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "calli",
+      "trecena": 15,
+      "witness": {
+        "file": "florentine_book4/folio_55r.json",
+        "folio": "55r",
+        "text_record_id": "fca024c9-138b-459d-a6c7-2ed15cd7f58d",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "in qujnpeoaltitica ce calli, ioan vme cuetzpalin, ei coatl, nauj mjqujztli, macujlli macatl, chiquacē tochtli, chicome atl, chicuei itzcujntli, chicunauj ocomatli, matlactli malinalli, matlactloce acatl, matlactlomome ocelutl, matlactlomej quauhtli,",
+      "engine_rendering": "...which One House begins, and Two Lizard, Three Serpent, Four Death, Five Deer, Six Rabbit, Seven Water, Eight Dog, Nine Monkey, Ten Grass, Eleven Reed, Twelve Ocelot, Thirteen Eagle.",
+      "doctrinal_note": "Kernel cross-check: trecena 15 runs calli, cuetzpalin, coatl, miquiztli, mazatl, tochtli, atl, itzcuintli, ozomatli, malinalli, acatl, ocelotl, cuauhtli. The witness agrees at every one of the thirteen positions, head included."
+    },
+    {
+      "statement_id": "nahua.book4.ch16.heading_good_sign_qualified",
+      "topic": "chapter_heading",
+      "day_sign_id": "cozcacuauhtli",
+      "trecena": 16,
+      "witness": {
+        "file": "florentine_book4/folio_55r.json",
+        "folio": "55r",
+        "text_record_id": "fca024c9-138b-459d-a6c7-2ed15cd7f58d",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli on chicunavi capitulo: itechpa tlatoa, injc caxtoltetl oce machiotl: qujlmach qualli tonalli: auh qujlmach in aqujque vncan tlaca[tia,]",
+      "spanish_parallel": {
+        "text_record_id": "aafe6dd3-fc36-4318-9f89-f7b745fb0022",
+        "excerpt": "Capitulo XXIX del decimosexto signo, llamado ce cozcacuauhtli, y de su buena fortuna. Decian que los que en este signo nacian vivian mucho, teni[an]"
+      },
+      "engine_rendering": "Twenty-ninth chapter, which tells of the sixteenth sign: it is told a good day sign; and it is told that those who were born then...",
+      "doctrinal_note": "The Nahuatl heading identifies the sign only by its number; the Spanish column names it ce cozcacuauhtli. The sentence completes at the head of 55v with an unusually sharp qualification, encoded as the next statement."
+    },
+    {
+      "statement_id": "nahua.book4.trecena16.self_refutation",
+      "topic": "augury",
+      "day_sign_id": "cozcacuauhtli",
+      "trecena": 16,
+      "witness": {
+        "file": "florentine_book4/folio_55v.json",
+        "folio": "55v",
+        "text_record_id": "0719cfed-95c9-4b6f-a1e2-ac087fe01b5e",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "[tlaca]tia, vecaoaia, iece amo nelli iuh muchioaia, iehica ca mjequjntin iciuhca mjquja, in vncan tlacatia.",
+      "spanish_parallel": {
+        "text_record_id": "874c4b53-5f58-4f40-ac6d-1851c5ec833e",
+        "excerpt": "[teni]an larga vida y eran dichosos, aunque muchos de los que en el nacian murian luego"
+      },
+      "engine_rendering": "...were born then, they lived long - but it did not really happen so, because many who were born then died quickly.",
+      "doctrinal_note": "The compiler contradicts his own heading in the following clause: 'iece amo nelli iuh muchioaia' - but it was not true that it happened so. This is the corpus reporting a prediction and its empirical failure in the same sentence, and it is the single most important line in the pack for any claim that Book 4 is a fortune table."
+    },
+    {
+      "statement_id": "nahua.book4.trecena16.naming_day_by_means",
+      "topic": "ritual_mitigation",
+      "day_sign_id": "cozcacuauhtli",
+      "trecena": 16,
+      "witness": {
+        "file": "florentine_book4/folio_55v.json",
+        "folio": "55v",
+        "text_record_id": "0719cfed-95c9-4b6f-a1e2-ac087fe01b5e",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh intla onca poliujnj, popoliujnj, in qualonj, tenechicolonj, tecentlalilonj, tetemolonj, teiximachonj, tetlacamachonj, tecoanotzalonj, njman iquac caltia in jpan itonal ic qujnotza Cozcaquauh: auh intlaca ie tle popoliujz, oc conchololtia in pilhoaque, oqujc onmotlamachia, oqujc conjhimati, in jxqujch monênênequjz, qujn jpan caltia in chicome hecatl.",
+      "engine_rendering": "And if there was there what could be spent, what could be used up - things to eat, things to gather people with, to assemble them, to seek them out, to make them known, to be obeyed by, to invite them - then at once they bathed him on his own day sign, and so they named him Cozcacuauh. But if there was nothing to spend, the parents let it pass by, so long as they were still contriving, still arranging all that would be needed; and only then did they bathe him, on Seven Wind.",
+      "doctrinal_note": "The plainest statement in the corpus that the sign a person carried was set by household economics. A family that could afford the feast named the child on the birth sign; a family that could not deferred it to another sign entirely. The Spanish column says the same. Any birth-date-to-day-sign product asserts a determinism the source explicitly denies."
+    },
+    {
+      "statement_id": "nahua.book4.trecena16.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "cozcacuauhtli",
+      "trecena": 16,
+      "witness": {
+        "file": "florentine_book4/folio_55v.json",
+        "folio": "55v",
+        "text_record_id": "0719cfed-95c9-4b6f-a1e2-ac087fe01b5e",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Auh in contoqujlia vme calli, ioan ei tecpatl, nauj qujavitl, macujlli suchitl, chiquacen cipactli, chicome hecatl, chicuei calli, chicunauj cuetzpalin, matlactli coatl, matlactloce mjqujztli, matlactlomome macatl, matlactli vmei tochtli.",
+      "engine_rendering": "And there follow Two [Movement], and Three Flint, Four Rain, Five Flower, Six Cipactli, Seven Wind, Eight House, Nine Lizard, Ten Serpent, Eleven Death, Twelve Deer, Thirteen Rabbit.",
+      "doctrinal_note": "This is the strongest argument in the pack for keeping the arithmetic kernel and the quotation corpus as separate artifacts: the corpus is a witness that can be wrong about the cycle, and the kernel is what detects it.",
+      "witness_variant": {
+        "reading": "The witness gives 'vme calli' (Two House) at the second position, where the cycle requires Two Movement (ollin). The same list then correctly gives 'chicuei calli' (Eight House) at the eighth position, so House appears twice and Movement not at all - the list is internally inconsistent.",
+        "assessment": "Unlike the acatl/ehecatl slips, this error is present in BOTH columns: the Spanish column of the same folio reads 'La segunda casa deste signo se llama ume calli'. Since the two columns agree, this is not a copying divergence between scribes but an error already in the shared exemplar or in the compilation itself. Preserved and flagged.",
+        "kernel_crosscheck": "The validated kernel gives trecena 16 as cozcacuauhtli, ollin, tecpatl, quiahuitl, xochitl, cipactli, ehecatl, calli, cuetzpalin, coatl, miquiztli, mazatl, tochtli. The witness agrees at eleven of the twelve listed positions."
+      }
+    },
+    {
+      "statement_id": "nahua.book4.ch17.heading_bad_sign",
+      "topic": "chapter_heading",
+      "day_sign_id": "atl",
+      "trecena": 17,
+      "witness": {
+        "file": "florentine_book4/folio_56r.json",
+        "folio": "56r",
+        "text_record_id": "6d94b11e-9c2e-47a5-9a7f-a5eff078c148",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli on matlactli capitulo: itechpa tlatoa, inic caxtolli omome machiotl, in jtoca ce atl: qujlmach amo qualli tonalli: auh qujl in aqujque vncan tlacatia, can ipeuhian in jnnemjliz achi paquja: auh injc tzonqujcaia amo qualli, auh qujlmach mochipa, amo qualli, injc mjquja: auh qujl itonal catca in chalchiujtl icue, qujlhujqujxtiliaia in atlaca.",
+      "spanish_parallel": {
+        "text_record_id": "f09303c4-98fe-441a-8e37-f2ae693e93ac",
+        "excerpt": "Capitulo XXX del signo decimo [septimo], llamado ce atl, y de su desastrada fortuna. Decian que los que nacian en el, si en la media vida tenian alguna buena dicha, en la otra media habian de ser desdichado"
+      },
+      "engine_rendering": "Thirtieth chapter, which tells of the seventeenth sign, named One Water: it is told a day sign that was not good; and it is told that those who were born then were somewhat happy at the beginning of their life, but they came to a bad end; and it is told that always, badly, so they died. And it is told its day sign belonged to Chalchiuhtli Icue; the water-folk kept her feast.",
+      "doctrinal_note": "A trajectory rather than a trait: good at the start, bad at the end. Book 4 several times divides a life into phases, which no static sign-to-trait mapping can express."
+    },
+    {
+      "statement_id": "nahua.book4.trecena17.parti_coloured",
+      "topic": "augury",
+      "day_sign_id": "atl",
+      "trecena": 17,
+      "witness": {
+        "file": "florentine_book4/folio_56v.json",
+        "folio": "56v",
+        "text_record_id": "e521ce95-c54c-4d89-b6e0-c5a7c1d73d64",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Ce atl: injn ce atl: qujtoa, amono qualli: yoan qujtoa, can chictlapantli, chictlapantica: ixqujch qualli, ixqujch amo qualli:",
+      "engine_rendering": "One Water: this One Water, they say, is likewise not good; and they say it is parti-coloured, it is halved: half good, half not good.",
+      "doctrinal_note": "'chictlapantli' - parti-coloured, of two colours divided down the middle - is the corpus's own image for a sign that cannot be scored. The next paragraph glosses it: 'amo vel macitica motquitica ic qualli', it is not wholly, entirely good."
+    },
+    {
+      "statement_id": "nahua.book4.trecena17.transient_fortune",
+      "topic": "augury",
+      "day_sign_id": "atl",
+      "trecena": 17,
+      "witness": {
+        "file": "florentine_book4/folio_56v.json",
+        "folio": "56v",
+        "text_record_id": "e521ce95-c54c-4d89-b6e0-c5a7c1d73d64",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh intla ca noco itla imaceoaltiz, ca cotocpol, can cuel achic, can cuecuel achic, can achica, can achitonca, ca achitzinca, can ixqujch caujtl in, in jxpan onqujcaz in jnecujltonol, ic ipa mjtoa, in jntlatol tlalticpac tlatlatoanj, can tatacapitz uel in tlalticpac, quēman veli, quenman aveli, intla ipiltian motoliniz, qujn itzonco in achi moiollaliz:",
+      "engine_rendering": "And if he was to have any deserving at all, it was only a scrap, only for a short while, only briefly, only a little, only a moment, only an instant - just that much time would his wealth pass before his face. And so it is said of him in the words of those who speak upon the earth: on earth things are only a thin trickle; sometimes it is possible, sometimes it is not; if he was poor in his youth, only at the very end will he be somewhat consoled.",
+      "doctrinal_note": "The eight near-synonyms for brevity are not padding: Nahuatl augury argues by heaping parallel terms, and a rendering that reduces them to 'brief prosperity' discards the rhetorical form that carries the meaning. The closing proverb ('can tatacapitz uel in tlalticpac') is quoted by the compiler as ordinary earthly speech, not as a divinatory rule."
+    },
+    {
+      "statement_id": "nahua.book4.trecena17.membership_partial",
+      "topic": "trecena_membership",
+      "day_sign_id": "atl",
+      "trecena": 17,
+      "witness": {
+        "file": "florentine_book4/folio_57v.json",
+        "folio": "57v",
+        "text_record_id": "15685fd0-41f5-42be-ba69-4e4f21262c7d",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "nauj malinalli, macujlli acatl, chiquacen ocelotl, chicome quauhtli, chicuey cozcaquauhtli chicunauj olin, matlactli tecpatl, matlactloce qujavitl, matlactlomome suchitl, matlactlomei cipactli:",
+      "engine_rendering": "...Four Grass, Five Reed, Six Ocelot, Seven Eagle, Eight Vulture, Nine Movement, Ten Flint, Eleven Rain, Twelve Flower, Thirteen Cipactli.",
+      "doctrinal_note": "Kernel cross-check: trecena 17 runs atl, itzcuintli, ozomatli, malinalli, acatl, ocelotl, cuauhtli, cozcacuauhtli, ollin, tecpatl, quiahuitl, xochitl, cipactli. The witness agrees at all ten positions visible on this folio; positions two and three fall on 57r and are not quoted here."
+    },
+    {
+      "statement_id": "nahua.book4.ch18.heading_bad_sign",
+      "topic": "chapter_heading",
+      "day_sign_id": "ehecatl",
+      "trecena": 18,
+      "witness": {
+        "file": "florentine_book4/folio_57v.json",
+        "folio": "57v",
+        "text_record_id": "15685fd0-41f5-42be-ba69-4e4f21262c7d",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli on matlactli oce capitulo: itechpa tlatoa injc caxtolli vmei machiotl, in jtoca ce hecatl: ioan in amo qualli, in amo iectli in jtech ca: qujl amo qualli tonalli qujmaceoaia, in vncan tlacatia.",
+      "spanish_parallel": {
+        "text_record_id": "f7eee9eb-75b5-471c-9c60-d6ceb9f537c6",
+        "excerpt": "Capitulo XXXI del signo decimoctavo [ce ecatl] y de sus desgracias y de la mala fortuna de los que en el nacian"
+      },
+      "engine_rendering": "Thirty-first chapter, which tells of the eighteenth sign, named One Wind, and of the bad, the unrighteous, that was upon it: it is told that those born then merited a day-fortune that was not good.",
+      "doctrinal_note": "Note 'qujmaceoaia' again - they merited, they earned by penance - used even of a bad fortune. The verb is the same one the chapter-1 heading uses for good fortune, and it carries the whole conditional theology of the corpus."
+    },
+    {
+      "statement_id": "nahua.book4.trecena18.augury_sorcery",
+      "topic": "augury",
+      "day_sign_id": "ehecatl",
+      "trecena": 18,
+      "witness": {
+        "file": "florentine_book4/folio_57v.json",
+        "folio": "57v",
+        "text_record_id": "15685fd0-41f5-42be-ba69-4e4f21262c7d",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh in aqujn vncan tlacatia, qujtoa intla pilli, naoalli iez, amo tlacatl, tlaciuhquj, nenonotzale, impanj neci ca tlacatl, iecê amo qualli, itlacauhquj, itla qujmati, tlacatecolotlatolli, tlacatecoloiotl,",
+      "engine_rendering": "And of the one born then they say: if a noble, he will be a nahualli, not a man, a soothsayer, a keeper of counsel; on the surface he appears to be a man, but he is not good, he is corrupted, he knows something - the speech of the owl-man, the owl-man's craft...",
+      "doctrinal_note": "The preceding paragraph on the same folio states the reason: on One Wind they read the day sign of Quetzalcoatl, who was the image of the wind and the whirlwind - the same reasoning as in the One Reed chapter on folio 20v, applied to the wind sign itself. The 'tlacatecolotl' vocabulary is the evangelising compiler's frame laid over the Nahua term nahualli, and both are preserved."
+    },
+    {
+      "statement_id": "nahua.book4.trecena18.sorcery_days",
+      "topic": "observance",
+      "day_sign_id": "ehecatl",
+      "trecena": 18,
+      "witness": {
+        "file": "florentine_book4/folio_58r.json",
+        "folio": "58r",
+        "text_record_id": "f4bb5746-b496-449d-b175-b524d39304c0",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "auh in jpan tepoloaia, vncan qujmattiuja in aqualli tonalli, iehoatl contotocaia, contlatotoqujliaia, qujtoa cenca ipan tepoloaia in chicunauj itzcujntli anoco chicunauj mjqujztli, chicunauj malinalli: ioan in ie muchi chichicunanauj, ioan in oc cequj moteneoa aqualli tonalli, in jzqujcan omoteneuh,",
+      "engine_rendering": "And as to when they worked their ruin upon people, they went watching for the bad day signs; they pursued them, they went following after them. They say they especially wrought people's ruin on Nine Dog, or Nine Death, Nine Grass - and on all the nines, and on the other day signs called bad, everywhere mentioned.",
+      "doctrinal_note": "A rule about operative timing, not about nativities: sorcerers elected the ninth-coefficient days. Elsewhere in Book 4 the ninth house is repeatedly the dangerous one, and this passage generalises it explicitly ('in ie muchi chichicunanauj' - all the nines). Coefficient, not sign, is the operator here."
+    },
+    {
+      "statement_id": "nahua.book4.trecena18.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "ehecatl",
+      "trecena": 18,
+      "witness": {
+        "file": "florentine_book4/folio_60v.json",
+        "folio": "60v",
+        "text_record_id": "d30a2a95-ae37-4b7d-a185-4db98a258137",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "in iehoatl vme calli: ey cuetzpalin, navi coatl, macujlli mjqujztli, chiquacen macatl, chicome tochtli, chicuei atl, chicunavi ytzcujntli, matlactli ocomatli, matlactli oce malinalli, matlactli omome acatl, matlactli omey ocelutl.",
+      "engine_rendering": "...these: Two House, Three Lizard, Four Serpent, Five Death, Six Deer, Seven Rabbit, Eight Water, Nine Dog, Ten Monkey, Eleven Grass, Twelve Reed, Thirteen Ocelot.",
+      "doctrinal_note": "Kernel cross-check: trecena 18 runs ehecatl, calli, cuetzpalin, coatl, miquiztli, mazatl, tochtli, atl, itzcuintli, ozomatli, malinalli, acatl, ocelotl. The witness agrees at all twelve listed positions. The list stands at the foot of the One Wind chapter, immediately before the One Eagle chapter heading on the same folio."
+    },
+    {
+      "statement_id": "nahua.book4.ch19.heading_bad_sign",
+      "topic": "chapter_heading",
+      "day_sign_id": "cuauhtli",
+      "trecena": 19,
+      "witness": {
+        "file": "florentine_book4/folio_60v.json",
+        "folio": "60v",
+        "text_record_id": "d30a2a95-ae37-4b7d-a185-4db98a258137",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cēpoalli omatlactli vmey capitulo: vncan moteneoa ynjc caxtolli vnnavi machiotl, yn itoca ce quauhtli: quil amo qualli in tonalli, auh in ipan tlacatia, mochachamaoanj, yoa chicaoque, aiac ixco tlachia, atle ypan tlatta, atle ypa teitta: yoan quil in cihoa, ano tle ypa tlachia, yoan cenca tlavilqujxtianj, tentlaveliloque,",
+      "spanish_parallel": {
+        "text_record_id": "d850769c-ca60-46ae-a302-0a6332107036",
+        "excerpt": "Capitulo XXXIII del signo decimonono, llamado ce cuauhtli, y de su adversa fortuna. Decian que los hombres que nacian en este signo eran valientes o esforzados, atrevidos, desvergonzados, descomedidos"
+      },
+      "engine_rendering": "Thirty-third chapter, in which is told the nineteenth sign, named One Eagle: it is told the day sign was not good, and those born on it were boastful, and strong; they looked no one in the face, they regarded nothing, they regarded no one. And it is told the women too regarded nothing, and were very shameless, foul of mouth...",
+      "doctrinal_note": "One of the chapters that reads as a straight trait list, and the Spanish column matches it. Quoted so the pack's balance is visible: of the eighteen trecena chapters surveyed here, most carry an explicit conditional and several do not."
+    },
+    {
+      "statement_id": "nahua.book4.trecena19.cihuateteo_precaution",
+      "topic": "observance",
+      "day_sign_id": "cuauhtli",
+      "trecena": 19,
+      "witness": {
+        "file": "florentine_book4/folio_61r.json",
+        "folio": "61r",
+        "text_record_id": "20abaf57-af20-42bc-9d37-436512aa1e76",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "In ce quauhtli: ynjn ce quauhtli, mjtoa amo qualli tonalli, no vncan temoia, in qujntocaiotia cihoateteu, quilmach yn juh onmjtoa ca xoxocoio, ca teiccaoan yn vncan temoia, iece cenca vellamauhtiaia, ypampa quil cenca ihjioque, tlaveleque, tetlavelique, amo ellelceuhque, amo icnooaque, njman aixnamjquizti, ynjc teca maviltianj, yn juh omjto quezquican:",
+      "engine_rendering": "One Eagle: this One Eagle they say is a day sign that is not good. On it too there descended those they call the Cihuateteo; it is told, as is said, that only the youngest, only the younger sisters, descended there - yet they frightened people greatly, because it is told they were very fierce, full of anger, wrathful toward people, never appeased, without compassion, in no way to be faced, mocking people as has been said in several places.",
+      "doctrinal_note": "The third Cihuateteo descent in the pack, on a third sign. Across the corpus these days are handled by keeping children indoors and covered; the augury for the day and the augury for people born on it are separate registers, and the chapter keeps them separate."
+    },
+    {
+      "statement_id": "nahua.book4.trecena19.membership",
+      "topic": "trecena_membership",
+      "day_sign_id": "cuauhtli",
+      "trecena": 19,
+      "witness": {
+        "file": "florentine_book4/folio_70v.json",
+        "folio": "70v",
+        "text_record_id": "3be9b3c3-71bc-43fc-ab98-42057b0f1e17",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "in iehoatl Ey olin, 4. tecpatl, 5. qujiavitl, 6. suchitl, 7. cipactli, 8. hecatl, 9. calli, 10. cuetzpalli, 11. coatl, 12. miquiztli, 13. macatl.",
+      "engine_rendering": "...they go following one another, they go replacing one another: Three Movement, 4 Flint, 5 Rain, 6 Flower, 7 Cipactli, 8 Wind, 9 House, 10 Lizard, 11 Serpent, 12 Death, 13 Deer.",
+      "doctrinal_note": "The list stands at the head of 70v, immediately before the twentieth and last chapter heading; positions two and three continue from 70r.",
+      "witness_variant": {
+        "reading": "From the fourth position onward the Nahuatl scribe abandons the spelled-out Nahuatl numerals used everywhere else in Book 4 and writes Arabic digits ('4. tecpatl, 5. qujiavitl'), then repeats a stray '11. 12. 13.' after the list closes.",
+        "assessment": "A compositional shortcut in the manuscript rather than a textual error: the sign names and their order are correct throughout. Recorded because it is a datum about how this part of Book 4 was written, and because a machine reader that expects Nahuatl numerals would silently drop ten of the thirteen days.",
+        "kernel_crosscheck": "The validated kernel gives trecena 19 as cuauhtli, cozcacuauhtli, ollin, tecpatl, quiahuitl, xochitl, cipactli, ehecatl, calli, cuetzpalin, coatl, miquiztli, mazatl. The witness agrees at all eleven positions visible on this folio."
+      }
+    },
+    {
+      "statement_id": "nahua.book4.ch20.heading_last_sign",
+      "topic": "chapter_heading",
+      "day_sign_id": "tochtli",
+      "trecena": 20,
+      "witness": {
+        "file": "florentine_book4/folio_70v.json",
+        "folio": "70v",
+        "text_record_id": "3be9b3c3-71bc-43fc-ab98-42057b0f1e17",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "Injc cempoalli on caxtolli vmey capitulo: ytechpa tlatoa, ynic cempoaltetl: yoan in ca ontlatzacuja machiotl yn itoca ce tochtli: quilmach yn aquique vncan tlacatia cenca motlaecoltianj, tlatequipanoanj mocuiltonoanj.",
+      "spanish_parallel": {
+        "text_record_id": "b906ee6a-0122-4c0d-8d0b-8dd5619b2ee0",
+        "excerpt": "Capitulo XXXVIII del signo vigesimo y ultimo, llamado ce xuchitl [Debe decir tochtli]. Decian que los que nacian en este signo eran granjeros, trabajadores, vividores, ricos, guardosos"
+      },
+      "engine_rendering": "Thirty-eighth chapter, which tells of the twentieth, and of the sign that closes them all, named One Rabbit: it is told that those who were born then were great providers for themselves, great workers, prosperous.",
+      "doctrinal_note": "One Rabbit closes the count. The augury is explicitly causal in the Spanish column - they were rich 'por ser grandes trabajadores y grandes granjeros y grandes aprovechadores del tiempo' - so even in the flattest chapters the prosperity is attributed to labour rather than conferred by the sign.",
+      "witness_variant": {
+        "reading": "The Spanish column of this folio names the twentieth sign 'ce xuchitl', where the Nahuatl column correctly has 'ce tochtli' and the Spanish body text two lines later also has 'El signo vigesimo se llama ce tochtli'.",
+        "assessment": "An error confined to the Spanish chapter title, and the Getty edition carries an editorial footnote on the spot reading 'Debe decir tochtli'. This is the mirror image of the folio 16v case, where the Nahuatl column erred and the Spanish was right - so neither column can be treated as the master copy, and cross-column checking is mandatory."
+      }
+    },
+    {
+      "statement_id": "nahua.book4.trecena20.augury_by_labour",
+      "topic": "augury",
+      "day_sign_id": "tochtli",
+      "trecena": 20,
+      "witness": {
+        "file": "florentine_book4/folio_70v.json",
+        "folio": "70v",
+        "text_record_id": "3be9b3c3-71bc-43fc-ab98-42057b0f1e17",
+        "column": "nahuatl",
+        "record_type": "transcription"
+      },
+      "nahuatl": "mjtoa injn ce tochtli qualli tonalli, yn aqujn vnca tlacatia mocuiltonoanj, oca quiquanj, auh amo can quinencuj, cacuj, amo ca ixpanvetzi yn inecujltonol, vel ixqujch caana, ixquich itlapal quichioa,",
+      "engine_rendering": "It is said this One Rabbit is a good day sign. Whoever was born then was prosperous; he had food to eat - and he did not take it idly, he did not merely snatch at it, his wealth did not simply fall in front of him: he took hold of the whole of it, he did the whole of it with his own strength.",
+      "doctrinal_note": "The corpus itself blocks the fatalistic reading in the very sentence that grants the good fortune: 'amo can quinencuj... amo can ixpanvetzi yn inecujltonol' - he did not get it idly, his wealth did not just fall before him. The following clauses on 71r pile up the same point with a list of work habits."
     }
-  ]
+  ],
+  "orthography_note": "Quoted Nahuatl follows the pilot's convention: c-cedilla is written c, and the vowels a-circumflex, a-tilde, o-tilde and o-circumflex are written a, a, o and o. Every quotation is otherwise a verbatim slice of the pinned witness, taken mechanically rather than retyped. Two of these marks are lossy and must be read with care: the tilde abbreviates a suppressed nasal, so a stripped 'ca' may stand for 'can'/'çan' and 'vnca' for 'vncan', and combining macrons elsewhere in the manuscript do the same job and are left in place. The unmodified reading is always recoverable from the hash-pinned witness named in each statement, which is the authority; the stripped form is a convenience, not the text.",
+  "coverage": {
+    "book": 4,
+    "chapters_encoded": [
+      1,
+      2,
+      3,
+      7,
+      8,
+      9,
+      11,
+      15,
+      16,
+      21,
+      22,
+      23,
+      24,
+      25,
+      27,
+      29,
+      30,
+      31,
+      33,
+      38
+    ],
+    "trecenas_encoded": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "trecenas_total": 20,
+    "folios_pinned_range": "1r-75v",
+    "not_encoded": "Book 4's non-trecena chapters are deliberately left out: the drunkenness chapters (4-6), the merchant orations (17-19), the bathing and naming ceremonies (34-37) and the general chapters (39-41). They are pinned in the witness manifest but are not day-sign augury and do not belong in this pack."
+  }
 }

@@ -216,15 +216,18 @@ def _attach_nahua_reading(section: TraditionSection) -> None:
 
     heading = statements.get("nahua.book4.ch1.heading_conditional_fortune")
     forfeiture = statements.get("nahua.book4.trecena1.forfeiture")
+    mitigations = [
+        s for s in pack["statements"] if s["topic"] == "ritual_mitigation"
+    ]
+
     reading: list[str] = [
-        "What the corpus itself teaches (Ce Cipactli chapter, quoted as "
-        "demonstration - not assigned to your birth):",
+        "What the corpus itself teaches, quoted as demonstration - not assigned "
+        "to your birth:",
     ]
     if heading:
         reading.append(
             f"Folio {heading['witness']['folio']}, chapter heading: "
-            f"“{heading['engine_rendering']}” "
-            f"[Nahuatl: {heading['nahuatl'][:80]}…]"
+            f"“{heading['engine_rendering']}”"
         )
     if forfeiture:
         reading.append(
@@ -233,13 +236,44 @@ def _attach_nahua_reading(section: TraditionSection) -> None:
         )
         reading.append(
             "The doctrine: a day sign grants a potential that conduct completes "
-            "or destroys. It is the structural opposite of a personality trait - "
-            "which is why this section quotes the corpus and refuses the trait "
-            "table."
+            "or destroys. It is the structural opposite of a personality trait."
         )
+
+    if mitigations:
+        reading.append(
+            "**And the corpus undercuts the premise of birth-date day signs "
+            "outright.** In recorded practice the operative sign was chosen, "
+            "not inherited from the date:"
+        )
+        for statement in mitigations:
+            reading.append(
+                f"- Folio {statement['witness']['folio']}: "
+                f"“{statement['engine_rendering'][:260].rstrip()}…”"
+            )
+        reading.append(
+            "The day-counters deliberately deferred the bathing and naming off "
+            "an unfavourable birth day onto a better one - *ic qujpatia in "
+            "jtonal*, \"by this they cured his day sign\" - and on folio 55v "
+            "whether the birth day was used at all depended on whether the "
+            "family could afford the feast. So this section's refusal to hand "
+            "you a day sign is not only a correlation gap: the source itself "
+            "records that the sign a person carried was frequently not the sign "
+            "of their birth."
+        )
+
     section.reading = reading
     section.facts["augury_pack"] = {
         "pack_id": pack["pack_id"],
         "statements": len(pack["statements"]),
+        "trecenas_covered": len(
+            {s.get("trecena") for s in pack["statements"] if s.get("trecena")}
+        ),
+        "day_signs_covered": len(
+            {s.get("day_sign_id") for s in pack["statements"] if s.get("day_sign_id")}
+        ),
+        "witness_variants_preserved": sum(
+            1 for s in pack["statements"] if s.get("witness_variant")
+        ),
+        "ritual_mitigation_passages": len(mitigations),
         "scope": pack["scope_note"],
     }

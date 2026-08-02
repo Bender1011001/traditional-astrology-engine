@@ -748,18 +748,32 @@ Long Count, Tzolk'in, and Haab arithmetic from the validated Maya calendar kerne
   - **joint period days**: 260
 - **augury pack**:
   - **pack id**: nahua_book4_augury_v1
-  - **statements**: 4
-  - **scope**: Pilot: Chapter 1 (Ce Cipactli) only, from pinned folios 1r-2r. The pack quotes the corpus; it never assigns a day sign to a birth, because no civil-date correlation is approved.
+  - **statements**: 72
+  - **trecenas covered**: 20
+  - **day signs covered**: 20
+  - **witness variants preserved**: 6
+  - **ritual mitigation passages**: 3
+  - **scope**: Chapters 1-38 of Florentine Codex Book 4, covering all twenty trecenas (One Cipactli through One Rabbit), from hash-pinned folios 1r-71r. Each statement quotes one witness record and is rendered independently into English. Trecena membership lists are cross-checked against the validated tonalpohualli kernel, and disagreements are recorded as witness variants rather than corrected. The pack quotes the corpus; it never assigns a day sign to a birth, because no civil-date correlation is approved - and, as folios 21r, 35v, 52v and 55v show, the tradition itself assigned the operative sign by ritual choice and household means rather than by date of birth.
 
 **Reading**
 
-What the corpus itself teaches (Ce Cipactli chapter, quoted as demonstration - not assigned to your birth):
+What the corpus itself teaches, quoted as demonstration - not assigned to your birth:
 
-Folio 1r, chapter heading: “First chapter, which tells of the first sign, named One Cipactli, and of the good day-fortune that those born then merited, men and women alike: yet these same people could destroy it, could forfeit it by their own act, because of their laziness.” [Nahuatl: Injc ce capitulo, itechpa tlatoa, injc centetl machiotl: in jtoca ce cipactli, i…]
+Folio 1r, chapter heading: “First chapter, which tells of the first sign, named One Cipactli, and of the good day-fortune that those born then merited, men and women alike: yet these same people could destroy it, could forfeit it by their own act, because of their laziness.”
 
 Folio 2r, the forfeiture clause: “And they also said: even though he was born on a good day sign, if he does not do penance well, if he does not take counsel with himself, if he does not accept and apply to himself the cold water and the nettle - the admonitions, the instruction, the words of the old men and the old women - if he merely turns corrupt, becomes wicked, follows no road at all: nothing comes of it; he destroys it entirely by his own doing.”
 
-The doctrine: a day sign grants a potential that conduct completes or destroys. It is the structural opposite of a personality trait - which is why this section quotes the corpus and refuses the trait table.
+The doctrine: a day sign grants a potential that conduct completes or destroys. It is the structural opposite of a personality trait.
+
+**And the corpus undercuts the premise of birth-date day signs outright.** In recorded practice the operative sign was chosen, not inherited from the date:
+
+- Folio 21r: “If someone was born on any of these days they would let it pass by, they would make him wait for Seven Rain; only then did they bathe him, in order to give him his name - because by this they cured his day sign. There they brought him out well; he came out in…”
+
+- Folio 35v: “And whoever was born on it, they did not yet bathe him; they bathed him only on Three Ocelot, a day sign of the day-count. Thus said the day-counters: the third is always a good place; nothing is feared there. For this reason the day-counters put it off to tha…”
+
+- Folio 55v: “And if there was there what could be spent, what could be used up - things to eat, things to gather people with, to assemble them, to seek them out, to make them known, to be obeyed by, to invite them - then at once they bathed him on his own day sign, and so…”
+
+The day-counters deliberately deferred the bathing and naming off an unfavourable birth day onto a better one - *ic qujpatia in jtonal*, "by this they cured his day sign" - and on folio 55v whether the birth day was used at all depended on whether the family could afford the feast. So this section's refusal to hand you a day sign is not only a correlation gap: the source itself records that the sign a person carried was frequently not the sign of their birth.
 
 ---
 
