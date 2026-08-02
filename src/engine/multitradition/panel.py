@@ -127,7 +127,7 @@ def build_panel(birth: BirthInput) -> dict[str, Any]:
         ),
     ]
 
-    return {
+    panel: dict[str, Any] = {
         "panel_version": PANEL_VERSION,
         "historical_use_only": True,
         "customer_eligible": False,
@@ -142,3 +142,12 @@ def build_panel(birth: BirthInput) -> dict[str, Any]:
         },
         "sections": [section.to_dict() for section in sections],
     }
+    # Convergence reads only what the sections already computed, so it runs last
+    # and is guarded: a failure here must never cost the reader their sections.
+    try:
+        from . import convergence
+
+        panel["convergence"] = convergence.build(panel)
+    except Exception as exc:  # noqa: BLE001
+        panel["convergence_error"] = f"{type(exc).__name__}: {exc}"
+    return panel
