@@ -113,7 +113,33 @@ def _maya_engine_output(example: dict[str, Any]) -> dict[str, Any] | None:
     return primary
 
 
-ENGINE_ADAPTERS = {"maya": _maya_engine_output}
+def _jyotisha_engine_output(example: dict[str, Any]) -> dict[str, Any] | None:
+    """Structural navamsha facts the classical rule constrains."""
+    if example["example_id"] != "jyotisha.navamsha.selfcheck":
+        return None
+
+    sys.path.insert(0, str(REPO_ROOT))
+    from collections import Counter  # noqa: PLC0415
+
+    from src.engine.multitradition.vedic import (  # noqa: PLC0415
+        NAVAMSHA_ARC,
+        SIGNS,
+        navamsha_sign,
+    )
+
+    counts = Counter(navamsha_sign((i + 0.5) * NAVAMSHA_ARC)[0] for i in range(108))
+    return {
+        "navamsha_division_balance": (
+            set(counts) == set(SIGNS) and set(counts.values()) == {9}
+        ),
+        "navamsha_aries_first": navamsha_sign(0.01)[0],
+        "navamsha_taurus_first": navamsha_sign(30.01)[0],
+        "navamsha_gemini_first": navamsha_sign(60.01)[0],
+        "navamsha_pisces_last": navamsha_sign(359.99)[0],
+    }
+
+
+ENGINE_ADAPTERS = {"maya": _maya_engine_output, "jyotisha": _jyotisha_engine_output}
 
 
 def run(tradition_filter: str | None = None) -> dict[str, Any]:

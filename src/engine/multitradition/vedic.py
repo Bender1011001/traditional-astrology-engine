@@ -76,6 +76,28 @@ def _nakshatra_of(longitude: float) -> tuple[str, str, int, float]:
     return NAKSHATRAS[index], lord, pada, into / NAKSHATRA_SPAN
 
 
+NAVAMSHA_ARC = 30.0 / 9.0  # 3 degrees 20 minutes
+
+
+def navamsha_sign(longitude: float) -> tuple[str, int]:
+    """D9 sign and the 1-based navamsha division within the rasi.
+
+    Each 30-degree sign divides into nine 3-20 arcs. The closed form
+    `(sign_index * 9 + part) % 12` reproduces the classical rule without a
+    lookup table: movable signs start their D9 from themselves, fixed signs from
+    the ninth sign, and dual signs from the fifth.
+    """
+    lon = longitude % 360
+    sign_index = int(lon // 30)
+    part = int((lon - sign_index * 30) // NAVAMSHA_ARC)
+    return SIGNS[(sign_index * 9 + part) % 12], part + 1
+
+
+def _vargottama(rasi: str, navamsha: str) -> bool:
+    """A graha occupying the same sign in D1 and D9 is vargottama - strengthened."""
+    return rasi == navamsha
+
+
 def _dignity(graha: str, sign: str) -> str:
     if sign == EXALTATION.get(graha):
         return "exalted"
@@ -121,10 +143,17 @@ def build(birth: BirthInput, chart: Any) -> TraditionSection:
         ("True node",),
     )
     section.disclose(
+        DisclosureKind.SOURCE,
+        "Navamsha",
+        "D9 is computed for every graha and the lagna, with vargottama flagged. "
+        "Jyotisha treats the navamsha as mandatory rather than optional: a D1 "
+        "verdict that D9 contradicts is not a finished judgment.",
+    )
+    section.disclose(
         DisclosureKind.REFUSAL,
         "Interpretation depth",
         "This section reports calculation and structural condition only. "
-        "Divisional charts beyond D1, Shadbala, and Ashtakavarga are not "
+        "Divisional charts beyond D1 and D9, Shadbala, and Ashtakavarga are not "
         "computed, so no strength claim depending on them is made.",
     )
 
@@ -143,6 +172,7 @@ def build(birth: BirthInput, chart: Any) -> TraditionSection:
             continue
         sign, degree = _sign_of(planet.longitude)
         nak, nak_lord, pada, _ = _nakshatra_of(planet.longitude)
+        d9_sign, d9_division = navamsha_sign(planet.longitude)
         grahas.append({
             "graha": name,
             "rasi": sign,
@@ -152,6 +182,10 @@ def build(birth: BirthInput, chart: Any) -> TraditionSection:
             "pada": pada,
             "nakshatra_lord": nak_lord,
             "dignity": _dignity(name, sign),
+            "navamsha": d9_sign,
+            "navamsha_division": d9_division,
+            "navamsha_dignity": _dignity(name, d9_sign),
+            "vargottama": _vargottama(sign, d9_sign),
             "retrograde": getattr(planet, "speed", 0.0) < 0,
         })
 
@@ -162,6 +196,7 @@ def build(birth: BirthInput, chart: Any) -> TraditionSection:
             continue
         sign, degree = _sign_of(node.longitude)
         nak, nak_lord, pada, _ = _nakshatra_of(node.longitude)
+        d9_sign, d9_division = navamsha_sign(node.longitude)
         grahas.append({
             "graha": label,
             "rasi": sign,
@@ -171,6 +206,10 @@ def build(birth: BirthInput, chart: Any) -> TraditionSection:
             "pada": pada,
             "nakshatra_lord": nak_lord,
             "dignity": "not assessed for nodes",
+            "navamsha": d9_sign,
+            "navamsha_division": d9_division,
+            "navamsha_dignity": "not assessed for nodes",
+            "vargottama": _vargottama(sign, d9_sign),
             "retrograde": True,
         })
 
@@ -187,6 +226,9 @@ def build(birth: BirthInput, chart: Any) -> TraditionSection:
             "nakshatra": asc_nak,
             "pada": asc_pada,
             "nakshatra_lord": asc_nak_lord,
+            "navamsha": navamsha_sign(chart.ascendant)[0],
+            "navamsha_lord": SIGN_LORD[navamsha_sign(chart.ascendant)[0]],
+            "vargottama": _vargottama(asc_sign, navamsha_sign(chart.ascendant)[0]),
         },
         "janma_rasi": _sign_of(moon.longitude)[0],
         "janma_nakshatra": {"name": moon_nak, "pada": moon_pada, "lord": moon_lord},

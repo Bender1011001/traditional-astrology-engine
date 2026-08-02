@@ -6,7 +6,7 @@ Mission: *one birth input → the best defendable reading each tradition support
 
 ## Bottom line
 
-M1–M3 shipped and are committed. **M4 is blocked on source access and rights, not
+M1–M3 shipped and committed, plus navamsha — the one gap M2 identified as blocking a defendable Vedic reading. **M4 is blocked on source access and rights, not
 on effort** — recorded rather than worked around, because faking it would have
 produced exactly the unsourced content the whole standard exists to prevent.
 M5–M6 not started.
@@ -20,8 +20,9 @@ Run it:
 python scripts/multitradition_panel.py --fixture fairfield --format markdown
 ```
 
-Demo artifact: **`artifacts/multitradition/fairfield_panel.md`** (355 lines, your
-birth across all 8 traditions) and `.json` alongside it.
+Demo artifact: **`docs/research/multitradition/demo_fairfield_panel.md`**
+(359 lines, your birth across all 8 traditions), committed and tracked.
+(`artifacts/` is gitignored, so the demo lives under `docs/`.)
 
 ## Status by milestone
 
@@ -34,6 +35,7 @@ birth across all 8 traditions) and `.json` alongside it.
 | M5 | Babylonian omen mode | not started | — |
 | M6 | BaZi Ten Gods, Tibetan obstacle years | not started | — |
 | — | BaZi research kernel (carried over) | shipped | `2fbd991` |
+| + | Navamsha (D9), closing M2's Jyotisha blocker | **shipped** | see last commit |
 
 ## Validation — all green
 
@@ -41,8 +43,8 @@ birth across all 8 traditions) and `.json` alongside it.
 |---|---|
 | `validate_research_corpus.py` | **pass** — 160 sources, 19 manifests, 194/194 rules vector-covered, 244 vectors, 7 defensibility specs, 2 worked-example suites, **0 non-Western live engines** |
 | `validate_engine_coverage.py` | **pass** — 20 tracks, 74 modules |
-| `validate_worked_examples.py` | **pass** — 8/8 claims |
-| `pytest src/tests/test_multitradition_panel.py` | **25 passed** |
+| `validate_worked_examples.py` | **pass** — 13/13 claims across 4 comparable examples |
+| `pytest src/tests/test_multitradition_panel.py` | **27 passed** |
 | `ruff` | clean across all new code |
 | Live engine / premium / checkout | **untouched** (the two modified `auth.py` files predate this session) |
 
@@ -116,7 +118,9 @@ exists specifically to catch the most common error in popular Maya software
 280 days to `3 K'ank'in`). **Mutation-tested** — injecting that exact error turns
 the suite red, reverting restores green.
 
-Jyotisha: 3 examples, `inventory_only`, honestly labeled with blockers.
+Jyotisha: 3 examples. The navamsha structural check is now **runnable and
+passing** (5 claims); the two classical-chart examples remain `inventory_only`
+pending page inspection, honestly labeled with blockers.
 
 ## Configured-method choices made (every one disclosed in output)
 
@@ -152,16 +156,14 @@ decision, not research.
 
 ## Next 3 actions
 
-1. **Implement navamsha (D9) in the Vedic section.** Single blocking gap for the
-   first genuinely defendable non-Western reading; pure arithmetic, no source
-   gate. The `jyotisha.navamsha.selfcheck` worked example is already written and
-   becomes runnable the moment D9 exists.
-2. **BaZi hidden stems + month command.** Hidden stems are a fixed lookup table;
+1. **BaZi hidden stems + month command.** Hidden stems are a fixed lookup table;
    month command is the tradition's first substantive judgment. Together they
    move BaZi from pillar calculator to reading.
-3. **M5 Babylonian omen mode** — the design is already written in
+2. **M5 Babylonian omen mode** — the design is already written in
    `babylonian/defensibility_spec.md`, the astronomy is Horizons-verified, and
    ~70 omen rules are encoded. Highest ratio of existing assets to remaining work.
+3. **Jyotisha drishti + antardasha** — the next two items on that spec's
+   checklist now that navamsha is done; both are pure arithmetic.
 
 Deferred deliberately: M4 until source access resolves; Maya two-converter
 cross-check (valuable, needs network); medieval Jewish attribution (needs a
@@ -170,7 +172,7 @@ excluded).
 
 ## Demo — your chart
 
-Full artifact at `artifacts/multitradition/fairfield_panel.md`. Header:
+Full artifact at `docs/research/multitradition/demo_fairfield_panel.md`. Header:
 
 ```
 Birth: 1996-08-13 07:18 (UTC-7) — Fairfield, California, United States

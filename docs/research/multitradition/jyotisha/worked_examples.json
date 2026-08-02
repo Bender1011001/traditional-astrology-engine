@@ -55,23 +55,54 @@
     },
     {
       "example_id": "jyotisha.navamsha.selfcheck",
-      "work": "Internal consistency check (not a classical worked example)",
-      "location": "N/A",
-      "description": "Once navamsha is implemented, a mechanical self-check is available without any source inspection: the D9 sign of a planet at the exact start of a movable sign must be that same sign, and the 108 navamsha divisions must map onto the 12 signs exactly nine times each. Recorded here so the suite does not have to wait on page access to gain its first Jyotisha coverage.",
+      "work": "Classical navamsha rule, structural consequences",
+      "location": "BPHS varga chapters; the rule is stated identically across the standard texts",
+      "description": "The classical navamsha rule states that movable signs begin their D9 from themselves, fixed signs from the ninth sign, and dual signs from the fifth. Those three statements have mechanically checkable consequences, verified here without needing a worked chart: the division counts must balance and the three starting rules must hold exactly.",
       "author_judgment": {
         "claims": [
           {
-            "claim_id": "jyotisha.navamsha.pending_implementation",
+            "claim_id": "jyotisha.navamsha.division_balance",
             "kind": "calculation_value",
-            "author_states": "Pending navamsha implementation (blocking gap in the defensibility spec).",
-            "note": "Structural check, not a classical judgment. Runnable as soon as D9 exists."
+            "author_states": "The 108 navamsha divisions distribute across the twelve signs exactly nine times each.",
+            "engine_field": "navamsha_division_balance",
+            "expected_value": true,
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "jyotisha.navamsha.movable_from_self",
+            "kind": "calculation_value",
+            "author_states": "A movable sign begins its navamsha series from itself: the first navamsha of Aries is Aries.",
+            "engine_field": "navamsha_aries_first",
+            "expected_value": "Aries",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "jyotisha.navamsha.fixed_from_ninth",
+            "kind": "calculation_value",
+            "author_states": "A fixed sign begins from the ninth sign: the first navamsha of Taurus is Capricorn.",
+            "engine_field": "navamsha_taurus_first",
+            "expected_value": "Capricorn",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "jyotisha.navamsha.dual_from_fifth",
+            "kind": "calculation_value",
+            "author_states": "A dual sign begins from the fifth sign: the first navamsha of Gemini is Libra.",
+            "engine_field": "navamsha_gemini_first",
+            "expected_value": "Libra",
+            "comparison": "exact"
+          },
+          {
+            "claim_id": "jyotisha.navamsha.cycle_closes",
+            "kind": "calculation_value",
+            "author_states": "The series closes: the final navamsha of Pisces is Pisces.",
+            "engine_field": "navamsha_pisces_last",
+            "expected_value": "Pisces",
+            "comparison": "exact"
           }
         ]
       },
-      "encoding_status": "inventory_only",
-      "blockers": [
-        "Navamsha is not yet implemented in the panel."
-      ]
+      "encoding_status": "comparable"
     }
   ]
 }

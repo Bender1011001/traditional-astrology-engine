@@ -112,6 +112,50 @@ def test_vedic_matches_known_values(fairfield_panel: dict) -> None:
     assert jupiter["dignity"] == "own sign"
 
 
+def test_navamsha_structural_properties() -> None:
+    """D9 must satisfy four properties the classical rule guarantees."""
+    from collections import Counter
+
+    from src.engine.multitradition.vedic import (
+        NAVAMSHA_ARC,
+        SIGNS,
+        navamsha_sign,
+    )
+
+    # 1. The 108 divisions map onto the 12 signs exactly nine times each.
+    counts = Counter(
+        navamsha_sign((i + 0.5) * NAVAMSHA_ARC)[0] for i in range(108)
+    )
+    assert set(counts) == set(SIGNS)
+    assert set(counts.values()) == {9}
+
+    # 2. Movable signs begin their navamsha from themselves.
+    for sign in ("Aries", "Cancer", "Libra", "Capricorn"):
+        assert navamsha_sign(SIGNS.index(sign) * 30 + 0.01)[0] == sign
+
+    # 3. Fixed signs begin from the ninth sign; dual signs from the fifth.
+    assert navamsha_sign(30.01)[0] == "Capricorn"  # Taurus -> 9th
+    assert navamsha_sign(60.01)[0] == "Libra"  # Gemini -> 5th
+
+    # 4. The cycle closes: the final navamsha of Pisces is Pisces.
+    assert navamsha_sign(359.99)[0] == "Pisces"
+
+
+def test_navamsha_present_for_every_graha(fairfield_panel: dict) -> None:
+    facts = _section(fairfield_panel, "indian_jyotisha")["facts"]
+    assert "navamsha" in facts["lagna"]
+    for graha in facts["grahas"]:
+        assert graha["navamsha"] in _sign_names()
+        assert 1 <= graha["navamsha_division"] <= 9
+        assert isinstance(graha["vargottama"], bool)
+
+
+def _sign_names() -> list[str]:
+    from src.engine.multitradition.vedic import SIGNS
+
+    return SIGNS
+
+
 def test_bazi_matches_known_pillars(fairfield_panel: dict) -> None:
     facts = _section(fairfield_panel, "chinese_bazi")["facts"]
     assert facts["pillar_year_used"] == 1996
