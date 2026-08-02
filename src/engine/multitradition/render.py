@@ -50,6 +50,9 @@ def render(panel: dict[str, Any]) -> str:
     for section in panel["sections"]:
         lines.extend(_render_section(section))
 
+    if panel.get("convergence"):
+        lines.extend(_render_convergence(panel["convergence"]))
+
     lines.extend([
         "## How to read the labels",
         "",
@@ -63,6 +66,52 @@ def render(panel: dict[str, Any]) -> str:
         "",
     ])
     return "\n".join(lines)
+
+
+def _render_convergence(convergence: dict[str, Any]) -> list[str]:
+    """Render cross-tradition comparison, leading with the independence method."""
+    lines = [
+        "## Across traditions",
+        "",
+        f"*{convergence['method_note']}*",
+        "",
+        f"**Independent voices: {convergence['independent_voice_count']}** "
+        f"(from {sum(len(v) for v in convergence['shared_basis_groups'].values()) or 0} "
+        "sections sharing a calculation basis, plus any standing alone).",
+        "",
+    ]
+
+    for basis, members in (convergence.get("shared_basis_groups") or {}).items():
+        if len(members) > 1:
+            lines.append(
+                f"- *{basis.replace('_', ' ')}* — {', '.join(members)} share one "
+                "calculation basis and count as a single voice."
+            )
+    if len(lines) > 6:
+        lines.append("")
+
+    if convergence.get("agreements"):
+        lines.extend(["**Where independent systems agree**", ""])
+        for item in convergence["agreements"]:
+            lines.append(
+                f"- **{item['topic']}** ({item['independent_voices']} independent "
+                f"voice{'s' if item['independent_voices'] != 1 else ''}): "
+                f"{item['statement']}"
+            )
+            if item.get("caveat"):
+                lines.append(f"  - *Caveat: {item['caveat']}*")
+        lines.append("")
+
+    if convergence.get("distinctions"):
+        lines.extend(["**Distinctions that must not be collapsed**", ""])
+        for item in convergence["distinctions"]:
+            lines.append(f"- **{item['topic']}** — {item['statement']}")
+            if item.get("caveat"):
+                lines.append(f"  - *{item['caveat']}*")
+        lines.append("")
+
+    lines.extend(["---", ""])
+    return lines
 
 
 def _render_section(section: dict[str, Any]) -> list[str]:
