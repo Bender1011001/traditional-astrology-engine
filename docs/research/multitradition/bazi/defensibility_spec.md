@@ -17,15 +17,15 @@ Ziping` gives a hierarchy of conditional judgments, not a tally.
 | 2 | Day master identification | `Yuanhai Ziping` 看命入式: the day stem is the subject | `implemented` |
 | 3 | Hidden stems (藏干) in each branch | `Sanming Tonghui` juan 1 | `implemented` (main qi drives judgment; middle/residual reported without weight) |
 | 4 | **Month command (月令 / 得令)**: does the day master obtain the season | `Yuanhai Ziping` 看命入式, step 2 | `implemented` (wang/xiang/xiu/qiu/si + rooting) |
-| 5 | Rootedness (通根) and relative strength class | `Yuanhai Ziping` step 3 | `computable` — depends on 3 |
+| 5 | Rootedness (通根) and relative strength class | `Yuanhai Ziping` step 3 | `source_gated` - schools diverge and the Sanming Tonghui interpolation problem blocks adjudication |
 | 6 | Ten Gods (十神) from every stem and hidden stem to the day master | `Yuanhai Ziping` relation families | `implemented` |
 | 7 | Branch relations: combinations (合), clashes (冲), harms, punishments, frames | `Sanming Tonghui` juan 1 | `implemented` (six harmonies/clashes/harms/destructions, san he + san hui frames, all punishment types incl. self) |
 | 8 | Pattern (格局) candidacy and completion/defeat tests | `Yuanhai Ziping` 神趣八法 | `source_gated` — school-specific precedence |
 | 9 | Transformation (化) and following (从) structures | `Yuanhai Ziping` 神趣八法 | `source_gated` |
 | 10 | Luck pillars: direction, commencement age, sequence | convention matrix; direction is sex-dependent | `implemented` (both directions emitted) |
-| 11 | Annual/monthly period interaction with the qualified natal structure | `Yuanhai Ziping` step 6 | `computable` after 4-5 |
+| 11 | Annual/monthly period interaction with the qualified natal structure | `Yuanhai Ziping` step 6 | `implemented` (luck pillars emitted against the qualified structure) |
 | 12 | Useful/avoidant element (用神) selection | school-specific | `source_gated` — preserve disagreement, never average |
-| 13 | Na Yin (纳音) | `Sanming Tonghui` juan 1 | `computable` |
+| 13 | Na Yin (纳音) | `Sanming Tonghui` juan 1 | `implemented` (30-pair table; each element exactly 6 pairs) |
 | 14 | Auxiliary stars (神煞) | source/school-specific | `refused` unless enabled per named pack |
 
 **Items 3, 4, 6 and 7 are implemented**, in the hierarchy's own order. Every

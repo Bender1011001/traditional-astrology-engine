@@ -918,11 +918,58 @@ def build_medieval_jewish(
         "it is asserted here.",
     )
 
+    # Spec item 7. Ibn Ezra writes in Hebrew and coins Hebrew equivalents for
+    # Arabic technical vocabulary; the parallel critical edition prints both, and
+    # collapsing to English alone hides the layer a historian of medieval Hebrew
+    # science would check first.
+    section.disclose(
+        DisclosureKind.SOURCE,
+        "Hebrew terminology",
+        "Technical terms are given in Hebrew with transliteration alongside the "
+        "English, as the parallel Hebrew-English critical edition prints them. "
+        "Several are Ibn Ezra's own Hebrew calques for Arabic terms.",
+    )
     section.facts = {
         "shared_calculation_core": "western_traditional",
+        "hebrew_terminology": [
+            {
+                "hebrew": "תקופת השנה",
+                "transliteration": "tequfat ha-shanah",
+                "english": "annual revolution (solar return)",
+                "note": "The figure cast for the Sun's return to its natal degree.",
+            },
+            {
+                "hebrew": "מזל צומח",
+                "transliteration": "mazzal tzomeach",
+                "english": "ascendant (literally: rising sign)",
+            },
+            {
+                "hebrew": "בעל הבית",
+                "transliteration": "ba'al ha-bayit",
+                "english": "lord of the house (domicile ruler)",
+                "note": "Hebrew calque for the Arabic rabb al-bayt.",
+            },
+            {
+                "hebrew": "משרת",
+                "transliteration": "mesharet",
+                "english": "planet (literally: servant)",
+            },
+            {
+                "hebrew": "גבול",
+                "transliteration": "gevul",
+                "english": "bound / term",
+            },
+            {
+                "hebrew": "מולד",
+                "transliteration": "molad",
+                "english": "conjunction, birth of the lunation",
+                "note": "Also the technical term of the Hebrew calendar itself.",
+            },
+        ],
         "distinctive_layers_available": [
             "Ibn Ezra annual revolution comparison (validated)",
             "sect-light triplicity ruler phases (validated)",
+            "Hebrew technical vocabulary alongside translation",
         ],
         "distinctive_layers_gated": ["Book of Nativities natal doctrine"],
     }

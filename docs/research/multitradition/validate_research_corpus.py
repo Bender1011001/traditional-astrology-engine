@@ -972,6 +972,31 @@ def validate(root: Path) -> dict[str, Any]:
             raise ValueError(
                 f"Defensibility spec {track} missing sections: {missing_sections}"
             )
+        # Every checklist row must carry a recognised status. An unlabelled row
+        # would silently vanish from the ceiling report.
+        if "## Core-technique checklist" in text:
+            checklist = text.split("## Core-technique checklist", 1)[1]
+            checklist = checklist.split("\n## ", 1)[0]
+            data_rows = [
+                line
+                for line in checklist.splitlines()
+                if line.startswith("|") and not set(line) <= set("|- ")
+            ]
+            # Drop the header row.
+            data_rows = [r for r in data_rows if not r.lstrip("| ").startswith("#")]
+            unlabelled = [
+                row
+                for row in data_rows
+                if not any(
+                    f"`{s}`" in row.lower()
+                    for s in ("implemented", "computable", "source_gated", "refused")
+                )
+            ]
+            if unlabelled:
+                raise ValueError(
+                    f"Defensibility spec {track} has checklist rows with no "
+                    f"status token: {unlabelled[:2]}"
+                )
         if "## Refusal list" in text:
             refusal_block = text.split("## Refusal list", 1)[1]
             refusal_block = refusal_block.split("\n## ", 1)[0]
@@ -980,6 +1005,30 @@ def validate(root: Path) -> dict[str, Any]:
                     f"Defensibility spec {track} lists fewer than three refusals"
                 )
         defensibility_specs[track] = len(text.splitlines())
+
+    # Ceiling gate: no tradition may carry a `computable` checklist item.
+    # `computable` means "our gap, and actionable" - so a spec claiming one is a
+    # spec admitting the reading is below what its own sources permit. Items
+    # that are source_gated or refused are facts about the corpus and are fine.
+    from importlib import util as _import_util
+
+    ceiling_module_path = root / "ceiling_report.py"
+    ceiling_spec = _import_util.spec_from_file_location(
+        "ceiling_report", ceiling_module_path
+    )
+    if ceiling_spec is None or ceiling_spec.loader is None:
+        raise ValueError("Cannot load ceiling_report.py")
+    ceiling_module = _import_util.module_from_spec(ceiling_spec)
+    ceiling_spec.loader.exec_module(ceiling_module)
+    ceiling = ceiling_module.build()
+    below = ceiling["summary"]["below_ceiling"]
+    if below:
+        gaps = {
+            track: ceiling["traditions"][track]["actionable_gaps"] for track in below
+        }
+        raise ValueError(
+            f"Traditions below their source ceiling (actionable gaps remain): {gaps}"
+        )
 
     # Worked-example suites: the defensibility standard's requirement 4. Every
     # suite must validate against its schema, and every claim marked comparable
@@ -1129,6 +1178,10 @@ def validate(root: Path) -> dict[str, Any]:
         "worked_example_suites": len(worked_example_paths),
         "worked_examples_by_tradition": worked_example_counts,
         "defensibility_specs": len(defensibility_specs),
+        "traditions_at_source_ceiling": len(
+            ceiling["summary"]["at_source_ceiling"]
+        ),
+        "actionable_gaps_remaining": ceiling["summary"]["total_actionable_gaps"],
         "defensibility_spec_tracks": sorted(defensibility_specs),
         "bazi_sexagenary_rules": len(bazi_rules),
         "bazi_sexagenary_vectors": len(bazi_vectors),

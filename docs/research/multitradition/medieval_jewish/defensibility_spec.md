@@ -19,7 +19,7 @@ layer.** The doctrine is shipping; it simply is not labeled as Ibn Ezra's.
 | 4 | Sect-light triplicity ruler compared natal vs revolution | Book of Revolution s.4 | `implemented` |
 | 5 | Ibn Ezra's three relative life phases from sect-light triplicity rulers | Book of Nativities, referenced in Revolution s.4 | `implemented` — and correctly kept distinct from Dorotheus's different first/second fortune rule |
 | 6 | Natal doctrine from the Book of Nativities proper | Book of Nativities | `source_gated` — rule and precedence extraction incomplete |
-| 7 | Hebrew terminology preserved alongside translation | parallel Hebrew-English critical edition | `computable` |
+| 7 | Hebrew terminology preserved alongside translation | parallel Hebrew-English critical edition | `implemented` (6 terms, Hebrew + transliteration + English) |
 | 8 | World-astrology / conjunctional doctrine | separate module | `source_gated` |
 | 9 | Elections and interrogations | separate module | `source_gated` |
 

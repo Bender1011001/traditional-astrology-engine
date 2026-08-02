@@ -14,11 +14,11 @@ translation lineage that disagrees with the Arabic.
 | # | Technique | Source basis | Status |
 |---|---|---|---|
 | 1 | Sect and its planetary consequences | al-Biruni pack (validated) | `implemented` |
-| 2 | Halb and hayyiz, with the one-way implication | al-Biruni pack, incl. the Mars case | `computable` — pack validated, composer work only |
-| 3 | Planetary and sign gender/sect classification | al-Biruni pack | `computable` |
-| 4 | Mercury's conditional classification | al-Biruni pack (explicitly conditional) | `computable` — and note al-Qabisi appears to classify Mercury male/diurnal instead |
-| 5 | Firdaria ordering, diurnal and nocturnal | al-Biruni pack (validated) | `computable` |
-| 6 | Equal-seventh subperiod structure | al-Biruni pack (validated) | `computable` |
+| 2 | Halb and hayyiz, with the one-way implication | al-Biruni pack, incl. the Mars case | `implemented` |
+| 3 | Planetary and sign gender/sect classification | al-Biruni pack | `implemented` |
+| 4 | Mercury's conditional classification | al-Biruni pack (explicitly conditional) | `implemented` (fails closed in 3 of 4 fixtures - 385-386 states no conflict priority) |
+| 5 | Firdaria ordering, diurnal and nocturnal | al-Biruni pack (validated) | `implemented` |
+| 6 | Equal-seventh subperiod structure | al-Biruni pack (validated) | `implemented` |
 | 7 | Firdaria **durations and dates** | — | `refused` from this pack: section 395 supplies neither node periods nor a major-duration table |
 | 8 | Lunar mansions (manazil) | pre-Islamic Arabian track, source-limited | `source_gated` |
 | 9 | Lots beyond Fortune/Spirit in the Arabic tradition | al-Biruni's lot chapters | `source_gated` |

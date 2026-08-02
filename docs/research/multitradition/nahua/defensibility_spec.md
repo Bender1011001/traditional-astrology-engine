@@ -19,8 +19,8 @@ That inversion decides the whole design.
 | 1 | 13-by-20 cycle arithmetic | validated tonalpohualli pack | `implemented` |
 | 2 | Trecena identification and heads | validated pack (20 heads verified) | `implemented` |
 | 3 | Civil-date correlation | — | `refused` — no approved epoch exists |
-| 4 | Day-sign auguries | **Florentine Codex Book 4, passage-addressable, public** | `computable` — the strongest interpretive material in any non-Western track |
-| 5 | Trecena-level auguries and patron deities | Florentine Codex Book 4 chapters | `computable` |
+| 4 | Day-sign auguries | **Florentine Codex Book 4, passage-addressable, public** | `implemented` (72 statements, all 20 trecenas, from 150 hash-pinned folios) |
+| 5 | Trecena-level auguries and patron deities | Florentine Codex Book 4 chapters | `implemented` (trecena headings and observances encoded; patron deities remain source_gated) |
 | 6 | Day/night lords, volatiles (birds) | Codex Borbonicus, Tonalamatl Aubin | `source_gated` |
 | 7 | Xiuhpohualli (365-day) position | requires the same missing correlation | `source_gated` |
 | 8 | 52-year Calendar Round position | requires correlation | `source_gated` |

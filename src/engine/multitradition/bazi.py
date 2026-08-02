@@ -274,6 +274,57 @@ def branch_relations(pillars: dict[str, dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+# --- Na Yin (纳音), Sanming Tonghui juan 1 -----------------------------------
+# Thirty melodic-element assignments, one per consecutive PAIR of sexagenary
+# positions. Each of the five elements takes exactly six pairs (twelve pillars).
+NA_YIN: list[tuple[str, str]] = [
+    ("Metal", "海中金 Metal in the Sea"),
+    ("Fire", "爐中火 Fire in the Furnace"),
+    ("Wood", "大林木 Wood of the Great Forest"),
+    ("Earth", "路旁土 Earth by the Roadside"),
+    ("Metal", "劍鋒金 Metal of the Sword Blade"),
+    ("Fire", "山頭火 Fire on the Mountain Top"),
+    ("Water", "澗下水 Water Below the Ravine"),
+    ("Earth", "城頭土 Earth on the City Wall"),
+    ("Metal", "白蠟金 White Wax Metal"),
+    ("Wood", "楊柳木 Willow Wood"),
+    ("Water", "泉中水 Water in the Spring"),
+    ("Earth", "屋上土 Earth on the Roof"),
+    ("Fire", "霹靂火 Thunderbolt Fire"),
+    ("Wood", "松柏木 Pine and Cypress Wood"),
+    ("Water", "長流水 Long Flowing Water"),
+    ("Metal", "沙中金 Metal in the Sand"),
+    ("Fire", "山下火 Fire at the Mountain Foot"),
+    ("Wood", "平地木 Wood of the Plain"),
+    ("Earth", "壁上土 Earth on the Wall"),
+    ("Metal", "金箔金 Gold Foil Metal"),
+    ("Fire", "覆燈火 Lamp Fire"),
+    ("Water", "天河水 Water of the Heavenly River"),
+    ("Earth", "大驛土 Earth of the Great Post Station"),
+    ("Metal", "釵釧金 Hairpin Metal"),
+    ("Wood", "桑柘木 Mulberry Wood"),
+    ("Water", "大溪水 Water of the Great Stream"),
+    ("Earth", "沙中土 Earth in the Sand"),
+    ("Fire", "天上火 Fire in the Heavens"),
+    ("Wood", "石榴木 Pomegranate Wood"),
+    ("Water", "大海水 Water of the Great Sea"),
+]
+
+
+def na_yin(sexagenary_index: int) -> dict[str, str]:
+    """Na Yin element and its image for a 0-based sexagenary index."""
+    element, image = NA_YIN[(sexagenary_index % 60) // 2]
+    return {"element": element, "image": image}
+
+
+def _sexagenary_index(stem: str, branch: str) -> int:
+    stems, branches = _stems(), _branches()
+    target = (stems.index(stem), branches.index(branch))
+    return next(
+        i for i in range(60) if (i % 10, i % 12) == target
+    )
+
+
 # Solar longitude of each JIE (month-establishing term) -> month branch.
 JIE_TO_BRANCH: list[tuple[int, str]] = [
     (315, "yin_branch"), (345, "mao"), (15, "chen"), (45, "si"),
@@ -538,6 +589,10 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "hidden_stems": hidden,
         "visible_stem_ten_gods": visible_gods,
         "branch_relations": branch_relations(pillars),
+        "na_yin": {
+            name: na_yin(_sexagenary_index(p["stem"], p["branch"]))
+            for name, p in pillars.items()
+        },
         "element_tally": _element_tally(pillars),
         "luck_pillars": _luck_pillars(
             birth, jd, year_stem, month_stem, month_branch

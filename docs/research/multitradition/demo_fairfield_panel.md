@@ -225,11 +225,19 @@ Shares the Western calculation core. Distinctive layer: Ibn Ezra's Book of Revol
 
 - **Source — Pack provenance.** Ibn Ezra revolutions rules come from a validated pack built on the parallel Hebrew-English critical edition, and already drive the solar-return layer of the live premium report.
 - **Refused — Nativities treatise.** The Book of Nativities module remains source-limited: its rule and precedence extraction is not complete, so no natal doctrine specific to it is asserted here.
+- **Source — Hebrew terminology.** Technical terms are given in Hebrew with transliteration alongside the English, as the parallel Hebrew-English critical edition prints them. Several are Ibn Ezra's own Hebrew calques for Arabic terms.
 
 **Calculation**
 
 - **shared calculation core**: western_traditional
-- **distinctive layers available**: Ibn Ezra annual revolution comparison (validated), sect-light triplicity ruler phases (validated)
+- **hebrew terminology**:
+  - hebrew תקופת השנה, transliteration tequfat ha-shanah, english annual revolution (solar return), note The figure cast for the Sun's return to its natal degree.
+  - hebrew מזל צומח, transliteration mazzal tzomeach, english ascendant (literally: rising sign)
+  - hebrew בעל הבית, transliteration ba'al ha-bayit, english lord of the house (domicile ruler), note Hebrew calque for the Arabic rabb al-bayt.
+  - hebrew משרת, transliteration mesharet, english planet (literally: servant)
+  - hebrew גבול, transliteration gevul, english bound / term
+  - hebrew מולד, transliteration molad, english conjunction, birth of the lunation, note Also the technical term of the Hebrew calendar itself.
+- **distinctive layers available**: Ibn Ezra annual revolution comparison (validated), sect-light triplicity ruler phases (validated), Hebrew technical vocabulary alongside translation
 - **distinctive layers gated**: Book of Nativities natal doctrine
 
 ---
@@ -609,6 +617,32 @@ Cycle arithmetic, shichen partition, and stem lookup tables from the validated s
   - **year**: 偏財 Indirect Wealth
   - **month**: 偏財 Indirect Wealth
   - **hour**: 劫財 Rob Wealth
+- **branch relations**:
+  - **six harmonies**: 
+  - **six clashes**:
+    - branches ['子 Zi', '午 Wu'], pillars ['day', 'year']
+  - **six harms**: 
+  - **six destructions**:
+    - branches ['午 Wu', '卯 Mao'], pillars ['day', 'hour']
+  - **three harmony frames**:
+    - type half, present ['申 Shen', '子 Zi'], missing ['辰 Chen'], reinforces Water
+  - **directional frames**: 
+  - **punishments**:
+    - type wu li zhi xing (discourteous), complete True, branches ['子 Zi', '卯 Mao']
+  - **precedence note**: Relations are reported, not ranked. When several apply to one branch, which prevails is school-specific and stays gated.
+- **na yin**:
+  - **year**:
+    - **element**: Water
+    - **image**: 澗下水 Water Below the Ravine
+  - **month**:
+    - **element**: Fire
+    - **image**: 山下火 Fire at the Mountain Foot
+  - **day**:
+    - **element**: Wood
+    - **image**: 楊柳木 Willow Wood
+  - **hour**:
+    - **element**: Metal
+    - **image**: 金箔金 Gold Foil Metal
 - **element tally**:
   - **Wood**: 1
   - **Fire**: 3
@@ -646,6 +680,8 @@ Day master (the subject of the chart): 壬 Ren, yang Water. The Ziping hierarchy
 Month command, the first judgment: the day master stands in state xiang 相 (assisting) for this month's season, with a root in the month branch; rooted also in year. Assessment: supported: the day master is in seasonal command and rooted in the month branch itself.
 
 Visible stems relative to the day master - year: 偏財 Indirect Wealth, month: 偏財 Indirect Wealth, hour: 劫財 Rob Wealth.
+
+Branch relations present: half three-harmony frame 申 Shen-子 Zi (missing 辰 Chen) reinforcing Water; clash between 子 Zi and 午 Wu (day/year pillars); destruction between 午 Wu and 卯 Mao (day/hour pillars); complete punishment, wu li zhi xing (discourteous): 子 Zi-卯 Mao. Relations are reported, not ranked. When several apply to one branch, which prevails is school-specific and stays gated.
 
 Absent element(s) among visible stems and branch main qi: Earth. In Ziping terms the related Ten-God relations lack visible carriers; hidden-stem presence, if any, is listed in the calculation block and carries less force.
 

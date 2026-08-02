@@ -29,11 +29,11 @@ laconic — which is itself the most interesting true thing to say about it.
 | # | Technique | Source basis | Status |
 |---|---|---|---|
 | 1 | Positions recomputed for the birth date | 192 positions recomputed and JPL-Horizons cross-checked | `implemented` in corpus |
-| 2 | Babylonian-style position reporting (zodiacal sign + degree) | Rochberg astronomy specs | `computable` |
-| 3 | Lunar phase / eclipse proximity | SAA8 eclipse pilot (33 rules, 12 vectors) | `computable` |
-| 4 | Applicable EAE omen protases for the sky at birth | EAE 20 witness pack (17 rules), EAE 16-21 commentary (22 rules) | `computable` — the section's real content |
-| 5 | Horoscope-format presentation matching Rochberg's text structure | corpus manifests, 31 horoscope records | `computable` |
-| 6 | The 21 explicit judgment clauses, quoted as historical artifacts | Texts 1-28 judgment manifests | `computable`, quotation only |
+| 2 | Babylonian-style position reporting (zodiacal sign + degree) | Rochberg astronomy specs | `implemented` |
+| 3 | Lunar phase / eclipse proximity | SAA8 eclipse pilot (33 rules, 12 vectors) | `implemented` |
+| 4 | Applicable EAE omen protases for the sky at birth | EAE 20 witness pack (17 rules), EAE 16-21 commentary (22 rules) | `implemented` (zero orb; 0/72 matched for Fairfield - all protases presuppose an eclipse) |
+| 5 | Horoscope-format presentation matching Rochberg's text structure | corpus manifests, 31 horoscope records | `implemented` |
+| 6 | The 21 explicit judgment clauses, quoted as historical artifacts | Texts 1-28 judgment manifests | `implemented` |
 | 7 | Natal judgment synthesis | — | `refused`, see below |
 
 ## Judgment hierarchy

@@ -19,12 +19,12 @@ reasons like a Western chart wearing sidereal longitudes.
 | 5 | Whole-sign bhava assignment | classical default; Sripati is the live alternative | `implemented` (disclosed) |
 | 6 | **Navamsha (D9)** | universally treated as mandatory; BPHS varga chapters | `implemented` (all grahas, nodes, lagna; vargottama flagged; D9 dignity separate) |
 | 7 | Vimshottari mahadasha from janma nakshatra | BPHS dasha chapters; standard 120-year scheme | `implemented` |
-| 8 | Vimshottari antardasha (bhukti) | same | `computable` |
+| 8 | Vimshottari antardasha (bhukti) | same | `implemented` |
 | 9 | Graha dignity: exaltation, debilitation, own sign, moolatrikona | Brhajjataka II | `implemented` (moolatrikona pending) |
-| 10 | Friendship/enmity (naisargika and tatkalika) | BPHS relationship chapters | `computable` |
-| 11 | Graha drishti (special aspects for Mars, Jupiter, Saturn) | BPHS aspect chapters | `computable` |
-| 12 | Yogas: Raja, Dhana, and yogakaraka identification | BPHS yoga chapters; Phaladeepika | `computable` |
-| 13 | Combustion (astangata) | BPHS | `computable` |
+| 10 | Friendship/enmity (naisargika and tatkalika) | BPHS relationship chapters | `implemented` (naisargika; tatkalika/panchadha not computed and disclosed) |
+| 11 | Graha drishti (special aspects for Mars, Jupiter, Saturn) | BPHS aspect chapters | `implemented` |
+| 12 | Yogas: Raja, Dhana, and yogakaraka identification | BPHS yoga chapters; Phaladeepika | `implemented` (with constituent facts, evaluated only after items 1-6) |
+| 13 | Combustion (astangata) | BPHS | `implemented` |
 | 14 | Shadbala | BPHS bala chapters | `source_gated` — recension-dependent weights |
 | 15 | Ashtakavarga | BPHS | `source_gated` |
 | 16 | Other vargas (D10 career, D7 children, etc.) | BPHS varga chapters | `source_gated` — which vargas are mandatory varies by school |
