@@ -1,0 +1,1017 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "byzantine_greek",
+  "school_id": "rhetorius_compendium_ccag_recensions",
+  "source_pack_id": "byzantine_rhetorius_ccag_1898_1921_v1",
+  "source_edition_id": "ccag_public_domain_editions_1898_1921",
+  "source_registry_ids": [
+    "byzantine_rhetorius_ccag_08_4_cumont_1921",
+    "byzantine_rhetorius_ccag_01_boll_1898",
+    "byzantine_epitome_ccag_08_3_boudreaux_1912"
+  ],
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "evidence_note": "Extracted directly from the Greek of the public-domain CCAG editions. Every rule below cites a printed page that was rendered from the scan and read as an image, so the encoding does not rest on OCR. Renderings are the engine's own and are graded engine_translation_unreviewed; no modern copyrighted translation was consulted. Three recensions are kept as separate school_ids and no value is inherited across them: recension P is cod. Parisinus gr. 2425 as printed by Cumont in CCAG VIII.4; recension L is cod. Laurentianus XXVIII 34 and its nine collated witnesses as printed by Boll in CCAG I; the epitome school is the Byzantine syntagma of cod. Parisinus gr. 2506 as printed by Boudreaux in CCAG VIII.3. Editorial supplements by Cumont, Boll and Kroll are marked on the rules that depend on them. Nothing here is customer-eligible.",
+  "rules": [
+    {
+      "rule_id": "byz.rhet.p.pinax.seven_inspections_order",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE, Constantinople; transmitted in a 15th-century codex",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "unit": "whole-chart judgment procedure", "chapter": "nd' (54)"},
+      "conditions": {
+        "trigger": "a nativity is to be judged on the pinax",
+        "required_sequence": [
+          "1. prote skepsis: before all else, ease or difficulty of the birth; then the doryphoriai of the lights, whether by sect-mates or by contrary-sect planets; then whether the lights are in masculine signs or in feminine quadrants of the board; then whether the lights are well-bound or unbound to one another and to the Ascendant; then the triplicity lords of the sect light and of the Ascendant, their house rulers, the bound rulers of Sun and Moon, the dodekatemoria, and the Lots of Fortune and Daimon with their lord; then the triplicity lords of the lower midheaven",
+          "2. deutera skepsis: LOST",
+          "3. trite skepsis: on the angles; survives only as the tail of the argument",
+          "4. tetarte skepsis: the conjunctions and full moons, in which places they fell and what they apply to",
+          "5. pempte skepsis: the Lot of Fortune, of Daimon, of Basis, and the exaltation of the nativity, with their phases and positions",
+          "6. hekte skepsis: Anabibazon and Katabibazon, in which places and decans, and by whom beheld",
+          "7. hebdome skepsis: the dodekatemoria of the stars, above all of Sun, Moon and Ascendant"
+        ],
+        "closure_condition": "all seven inspections examined in this manner"
+      },
+      "conclusion": {
+        "judgment": "the practitioner will not err concerning the foundations of the nativity",
+        "greek": "Τούτων γὰρ πασῶν τῶν ἑπτὰ σκέψεων οὕτως ἐξεταζομένων οὐχ ἁμαρτήσῃ περὶ τὰ τῆς γενέσεως θεμέλια.",
+        "engine_rendering": "For when all these seven inspections are examined in this way, you will not go wrong about the foundations of the nativity.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "function": "this is the tradition's own judgment hierarchy and the composer must execute it in this order",
+        "customer_prediction": false
+      },
+      "priority": 1,
+      "exceptions": [
+        "The Second Inspection is entirely lost (Cumont: 'Deutera skepsis tota periit'), and the Third survives only as the end of its argument. The order may be executed only with those two slots explicitly shown as missing.",
+        "The manuscript reads ouk where Cumont prints ouch; the sense is unaffected."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd' Episkepsis pinakike", "section": "closing sentence of the seven inspections", "location": "CCAG VIII.4 p. 124 lines 17-18 (opening of the chapter at p. 118)", "verification": "page image collated: sources/page_images/ccag_08_4_p124.png sha256 8a242949fd66d9b7efcd5cc27d0a5ba461d58d4027eb82769d5c866c449a8041"},
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "editor's note recording the loss of the Second Inspection", "location": "CCAG VIII.4 p. 119 apparatus to line 16", "verification": "page image collated: sources/page_images/ccag_08_4_p119.png sha256 9c8af75fe4af86f599ccc240e84ab9e10b6f9aac38ec2840c6d223ec1d21870d"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; the order may be shown with its gaps, never silently completed",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.pinax.inspection1_opening_sequence",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "unit": "first inspection", "chapter": "nd'"},
+      "conditions": {
+        "step_1": "seek first of all the ease or difficulty of the birth (peri eutokias kai dystokias)",
+        "step_2": "then the doryphoriai of the lights: whether they are attended by planets of their own sect (hairetistai) or by those of the contrary sect (antairetistai)",
+        "step_3": "whether the lights stand in masculine signs or in feminine quadrants of the board",
+        "step_4": "whether the lights are eusyndeta or asyndeta to one another and to the Ascendant, one in a masculine and the other in a feminine sign or the reverse",
+        "step_5": "then seek the triplicity lords of the sect light and of the Ascendant, their house rulers, the bound rulers of Sun and Moon, and where the dodekatemoria of the stars fall",
+        "step_6": "then the Lot of Fortune and the Lot of Daimon and their lord"
+      },
+      "conclusion": {
+        "judgment": "these are the entry points of the whole judgment, in this order",
+        "stated_reason": "polle gar tis estin apo touton energeia - great is the operative power that comes from these",
+        "engine_rendering": "for there is great effect arising from these",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 2,
+      "exceptions": ["'en' before 'arsenikoi' is Cumont's supplement, as is the second 'zetei'."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "first inspection", "location": "CCAG VIII.4 p. 118 last lines through p. 119 line 8", "verification": "page image collated: sources/page_images/ccag_08_4_p119.png sha256 9c8af75fe4af86f599ccc240e84ab9e10b6f9aac38ec2840c6d223ec1d21870d"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.lot_lords_afflicted_atropha",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "viability of the newborn", "chapter": "nd'"},
+      "conditions": {
+        "subject": "the Lots of Fortune and Daimon and their lord",
+        "all_or_any_of": ["under the beams (hypaugoi)", "fallen (peptokotes)", "beheld by malefics", "enclosed by malefics", "opposed to one another and badly fallen"],
+        "intensifier": "especially when the lights too are beheld by malefics"
+      },
+      "conclusion": {
+        "judgment": "atropha poiousi ta tiktomena - they make the offspring not-reared",
+        "engine_rendering": "they make what is born unable to be reared",
+        "rendering_grade": "engine_translation_unreviewed",
+        "secondary_clause": "or else call the mother dishonoured, more so with the Descending Node involved",
+        "customer_prediction": false,
+        "output_policy": "refused for any living customer; retained as a historical statement only"
+      },
+      "priority": 10,
+      "exceptions": ["A lacuna follows in the text; the clause about a planet in the final degrees is incomplete and Cumont thinks Venus was the subject."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "first inspection, on the lots", "location": "CCAG VIII.4 p. 119 lines 8-13", "verification": "page image collated: sources/page_images/ccag_08_4_p119.png sha256 9c8af75fe4af86f599ccc240e84ab9e10b6f9aac38ec2840c6d223ec1d21870d"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "never rendered as a claim about a living person; historical quotation only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.ic_triplicity_lords_death_and_injury",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "quality of death and of bodily injury", "chapter": "nd'"},
+      "conditions": {
+        "subject": "the triplicity lords of the lower midheaven (hypogeion kentron)",
+        "assignment": {"first_triplicity_lord": "signifies the quality of the death", "second_triplicity_lord": "signifies the sinos, the bodily injury"},
+        "aggravating_condition": "if these lie badly, or are beheld by malefics"
+      },
+      "conclusion": {
+        "judgment": "kakopoiousin ton thanaton kai to sinos - they make the death and the injury bad",
+        "engine_rendering": "they worsen the death and the injury",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "structure may be displayed; no death or diagnosis claim may be produced"
+      },
+      "priority": 11,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "first inspection, closing clause", "location": "CCAG VIII.4 p. 119 lines 17-20", "verification": "page image collated: sources/page_images/ccag_08_4_p119.png sha256 9c8af75fe4af86f599ccc240e84ab9e10b6f9aac38ec2840c6d223ec1d21870d"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; death and injury claims are refused in the reading",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.inspection4_syzygy_precedence_parents",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "unit": "fourth inspection", "topic": "fortune and parentage", "chapter": "nd'"},
+      "conditions": {
+        "step": "observe which planets rise before the lights (proanapherontai) and which rise after them (epanapherontai)",
+        "case_benefic": "if they are benefics",
+        "case_malefic": "if they are malefics and parairetai"
+      },
+      "conclusion": {
+        "if_benefic": "matters of fortune and of the parents will be well",
+        "if_malefic": "call the parents foreign, of another race, ignoble or lowly; also that the parental estate is destroyed, or eye pains",
+        "greek_key": "lege tous goneas allophylous e alloethneis e ageneis e tapeinous",
+        "engine_rendering": "say the parents are of another stock or another nation, or base-born, or lowly",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused as output. The claim assigns social and ethnic status and is quoted only as a historical statement."
+      },
+      "priority": 20,
+      "exceptions": ["The parallel clause about lowly parents also attaches to the bound rulers of Sun and Moon when they are bad and fallen under the beams."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fourth inspection", "location": "CCAG VIII.4 p. 120 lines 1-10", "verification": "page image collated: sources/page_images/ccag_08_4_p120.png sha256 551fe6d50d7412be53b58676f0bd912928ccfbf63d1de976698cb85e3eb085b9"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "historical quotation only; never rendered as a claim about a customer's family",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.lights_tropical_signs_foreign_parents",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "parentage", "chapter": "nd'"},
+      "conditions": {"subject": "both lights", "placement": "in a tropical sign"},
+      "conclusion": {
+        "judgment": "say the parents are of another stock or another nation",
+        "greek": "ὁμοίως δὲ καὶ τὰ φῶτα ἐὰν εὕρῃς ἐν τροπικῷ ζῳδίῳ, λέγε τοὺς γονεῖς ἀλλοφύλους ἢ ἀλλοεθνεῖς εἶναι",
+        "rendering_grade": "engine_translation_unreviewed",
+        "cross_reference_in_source": "Rhetorius treats the same subject again in cap. qe' Peri allophylon goneon",
+        "customer_prediction": false,
+        "output_policy": "refused as output"
+      },
+      "priority": 21,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fourth inspection", "location": "CCAG VIII.4 p. 120 lines 10-11", "verification": "page image collated: sources/page_images/ccag_08_4_p120.png sha256 551fe6d50d7412be53b58676f0bd912928ccfbf63d1de976698cb85e3eb085b9"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "historical quotation only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.nonhuman_offspring_figure",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "what kind of creature the figure describes", "chapter": "nd'"},
+      "conditions": {
+        "primary": "the lord of the Moon by pexis is averse (apostrophos) to her AND the lord of the Ascendant is averse to it",
+        "modifier_benefic": "benefics behold the angles",
+        "modifier_malefic": "malefics behold the angles while the benefics are averse"
+      },
+      "conclusion": {
+        "primary": "the one born will not be a human being but a portent or a quadruped",
+        "if_benefic": "the thing born will be one of the tame or deified animals, such as a dog or a cat or a bird",
+        "if_malefic": "the thing born will be some wild animal",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused absolutely. This is retained because it is the clearest demonstration that the surviving protocol judges the figure, not a client, and because it anchors a recension divergence."
+      },
+      "priority": 22,
+      "exceptions": [
+        "Recension divergence: the Munich excerpt reads 'the one born is neither a human being nor a beast but some indistinct portent' where Paris. gr. 2425 reads 'not a human being but a portent or a quadruped'.",
+        "The Munich excerptor moved this passage into a different chapter (on lascivious decans), which Cumont marks as an error.",
+        "'or' before 'bird' and 'some animal' are supplements from the Munich witness; Paris. gr. 2425 omits 'bird'.",
+        "Cumont notes the manuscript's 'ram' is rightly transmitted as 'dog', and compares Ptolemy Tetrabiblos on deified animals."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fourth inspection, closing", "location": "CCAG VIII.4 p. 120 lines 20-26 with apparatus", "verification": "page image collated: sources/page_images/ccag_08_4_p120.png sha256 551fe6d50d7412be53b58676f0bd912928ccfbf63d1de976698cb85e3eb085b9"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "never rendered; refusal-list item",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.daimon_afflicted_nocturnal_downfall",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "unit": "fifth inspection", "topic": "downfall", "chapter": "nd'"},
+      "conditions": {
+        "clause_a": "the Lot of Fortune and its lord are well placed",
+        "clause_b": "the Lot of Daimon and its lord are badly placed and beheld by malefics",
+        "intensifier": "especially in a nocturnal nativity"
+      },
+      "conclusion": {
+        "judgment": "ekptosin telousi te genesei - they bring about downfall for the nativity",
+        "stated_reason_in_source": "dia to kata Ptolemaion kleron tyches hyparchein ton kleron tou daimonos - because according to Ptolemy the Lot of Daimon is the Lot of Fortune",
+        "engine_rendering": "because according to Ptolemy the Lot of Daimon serves as the Lot of Fortune",
+        "rendering_grade": "engine_translation_unreviewed",
+        "attribution_note": "Rhetorius names Ptolemy inside the rule; the sect reversal is therefore inherited doctrine explicitly credited, not Byzantine invention",
+        "customer_prediction": false
+      },
+      "priority": 30,
+      "exceptions": ["A parallel clause makes the lord of the exaltation of the nativity, badly placed or beheld by malefics, produce demotions of rank or of occupation, idleness and sluggishness."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fifth inspection", "location": "CCAG VIII.4 p. 121 lines 7-13", "verification": "page image collated: sources/page_images/ccag_08_4_p121.png sha256 9fea2f4e363140fcde40c0cb371e82dd8be074dc0c002dec5178a60bf9a9941f"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.fortune_lord_placement_source_of_gain",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "unit": "fifth inspection", "topic": "source of livelihood", "chapter": "nd'"},
+      "conditions": {
+        "precondition": "the Lot of Fortune lies well and is beheld by benefics",
+        "case_ninth": "its lord, or the lord of Daimon, is found in the ninth place from the Ascendant",
+        "case_ic": "the lord of the lot is in the lower midheaven",
+        "case_watery": "the lot and its lord are in a watery sign",
+        "case_violence": "Mars or Saturn is in the twelfth from Fortune while the planet of the sect is in its own house, triplicity or exaltation",
+        "general_principle": "otherwise judge the fortunes or downfalls from the nature of the sign and the position in which the lot and its lord fell"
+      },
+      "conclusion": {
+        "if_ninth": "the native will gain from sacred matters or sacred places",
+        "if_ic": "the native will become a treasure-guardian",
+        "if_watery": "the native will gain from wet or nautical matters",
+        "if_violence": "he will make his acquisitions from force and plunder, and from injustices",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 31,
+      "exceptions": ["'in which' is Cumont's supplement in the general-principle clause."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fifth inspection", "location": "CCAG VIII.4 p. 121 lines 14-25", "verification": "page image collated: sources/page_images/ccag_08_4_p121.png sha256 9fea2f4e363140fcde40c0cb371e82dd8be074dc0c002dec5178a60bf9a9941f"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.twelfth_from_fortune_malefic_causes",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "cause of loss", "chapter": "nd'"},
+      "conditions": {
+        "subject": "the twelfth place from the Lot of Fortune",
+        "requirement": "beheld by malefics ONLY, and especially by parairetai",
+        "by_mars": "the beholder is Mars",
+        "by_saturn": "the beholder is Saturn"
+      },
+      "conclusion": {
+        "general": "it signifies the downfalls, and the cause is read off the beholding malefic",
+        "if_mars": "from conflagrations, or rulers, or soldiers, or brigand raids, or the like",
+        "if_saturn": "from shipwrecks, lawsuits, elderly persons, ecclesiastical persons, eunuchs, demolitions on account of old affairs, or persons connected with the dead",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 32,
+      "exceptions": [
+        "Cumont suspects 'ekklesiastikon' should be read 'exousiastikon' (persons in authority) - the manuscript writes the syllable 'ekkle' in the margin, so the Christian reading may be a scribal expansion.",
+        "'hypo men' is Cumont's correction of the manuscript's 'eipomen'."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fifth inspection", "location": "CCAG VIII.4 p. 121 lines 28-33 continuing to p. 122 line 1", "verification": "page images collated: sources/page_images/ccag_08_4_p121.png sha256 9fea2f4e363140fcde40c0cb371e82dd8be074dc0c002dec5178a60bf9a9941f and ccag_08_4_p122.png sha256 103a4189100ba90b78c43129519a7e764ba3453451aba979410b59ea3b0bf3b4"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; the Saturn list names social categories and is not rendered as a claim about persons",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.lots_first_age_lords_last_age",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "division of the life between lots and their lords", "chapter": "nd'"},
+      "conditions": {
+        "subject": "the lots and their lords",
+        "assignment_rule": "the lots signify the first age of life, their lords the last"
+      },
+      "conclusion": {
+        "fortune": "signifies bodily affections and acquisitions, above all through its own eleventh place and that place's lord",
+        "daimon": "signifies matters of the soul, the actions, the reputations and the manner of life",
+        "basis": "the lord of the Basis is the foundation of Fortune",
+        "greek_key": "οἱ μὲν κλῆροι σημαίνουσιν τὴν πρώτην ἡλικίαν, οἱ δὲ κύριοι αὐτῶν τὴν τελευταίαν",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 33,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fifth inspection", "location": "CCAG VIII.4 p. 122 lines 19-23", "verification": "page image collated: sources/page_images/ccag_08_4_p122.png sha256 103a4189100ba90b78c43129519a7e764ba3453451aba979410b59ea3b0bf3b4"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.annual_distribution_multiple_origins",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "timing",
+      "scope": {"branch": "natal timing", "recension": "P", "technique": "annual distribution of the years (profection)", "chapter": "nd'"},
+      "conditions": {
+        "operation": "distributing the years of the birth",
+        "prohibition": "it is NOT sufficient to cast the years from the Ascendant alone",
+        "required_origins": ["the Ascendant", "the Sun", "the Moon", "the Lot of Fortune"],
+        "conditional_origins": "if the native has a father and a mother, also cast the years from the lot of the father and the lot of the mother, and so examine the year of the parents"
+      },
+      "conclusion": {
+        "judgment": "the annual year must be taken from several origins in parallel, not from the Ascendant only",
+        "greek": "μερίζων οὖν τὰ ἔτη τῆς γεννήσεως μὴ μόνον ἀπὸ τοῦ ὡροσκόπου τοὺς ἐνιαυτοὺς δέον ἐκβάλλειν, ἀλλὰ καὶ ἀπὸ Ἡλίου καὶ Σελήνης καὶ κλήρου τῆς τύχης",
+        "engine_rendering": "when distributing the years of the birth one must cast the annual periods not only from the Ascendant but also from the Sun and the Moon and the Lot of Fortune",
+        "rendering_grade": "engine_translation_unreviewed",
+        "distinctiveness": "this multi-origin requirement is one of the clearest points where the Byzantine protocol is stricter than the single-Ascendant profection commonly attributed to the Hellenistic corpus",
+        "customer_prediction": false
+      },
+      "priority": 34,
+      "exceptions": [
+        "The chapter does not state the length of a profected step, so the pack cannot compute a profection from this passage alone.",
+        "The immediately preceding lines add ascensional times 'as the Egyptians do', the greater, mean and least years of each planet, and thirds, halves and two-thirds of those periods, plus the handings-over and receptions of the planets. Cumont marks a lacuna in that list."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fifth inspection, on timing", "location": "CCAG VIII.4 p. 122 lines 23-28 with lines 10-14 for the period apparatus", "verification": "page image collated: sources/page_images/ccag_08_4_p122.png sha256 103a4189100ba90b78c43129519a7e764ba3453451aba979410b59ea3b0bf3b4"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; no year may be computed until a step length is sourced",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.horizon_versus_fortune_life_order_reversal",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "timing",
+      "scope": {"branch": "natal timing", "recension": "P", "topic": "early versus late effectiveness", "chapter": "nd'"},
+      "conditions": {
+        "case_a": "the stars are badly configured to the eastern horizon but well configured to the Lot of Fortune and its lord",
+        "case_b": "the configuration is the other way round, with respect to the Ascendant and to the Lot of Fortune and its lord"
+      },
+      "conclusion": {
+        "if_case_a": "the first things will be ineffective, the later ones effective",
+        "if_case_b": "say the reverse - reverse the effectiveness or the downfall",
+        "greek_key": "τὰ μὲν πρῶτα ἄπρακτα ἔσται, ἐξ ὑστέρου δὲ πρακτικά",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 35,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "fifth inspection", "location": "CCAG VIII.4 p. 122 lines 14-19", "verification": "page image collated: sources/page_images/ccag_08_4_p122.png sha256 103a4189100ba90b78c43129519a7e764ba3453451aba979410b59ea3b0bf3b4"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.sixth_and_twelfth_lords_angular_by_age",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "timing",
+      "scope": {"branch": "natal timing", "recension": "P", "topic": "which part of life is harmed", "chapter": "nd'"},
+      "conditions": {
+        "subject": "the lord of the twelfth place and the lord of the sixth place from the Ascendant",
+        "requirement": "one of them is angular",
+        "case_rising": "it is on the Ascendant (horonomounton)",
+        "case_setting": "it is on the Descendant (dynonton)"
+      },
+      "conclusion": {
+        "if_rising": "they harm the youth",
+        "if_setting": "they harm the old age",
+        "greek": "ὡρονομούντων γὰρ βλάπτουσιν τὴν νεότητα, δύνοντων δὲ τὸ γῆρας",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 36,
+      "exceptions": ["Cumont corrects the manuscript's singular participles to plurals and glosses horonomounton as horoskopounton."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "close of the fifth inspection", "location": "CCAG VIII.4 p. 123 lines 1-3", "verification": "page image collated: sources/page_images/ccag_08_4_p123.png sha256 e3142730987211ded36d65e3e6f107268082a5e3033571d585632f90cd9adbcf"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.lot_of_anairetes_formula_and_moon_aversion",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "technique": "lot construction", "chapter": "nd'"},
+      "conditions": {
+        "formula_day": "measure from the house ruler of the Ascendant to the Moon, and project the same amount from the Ascendant",
+        "formula_night": "reverse the direction",
+        "test": "the Moon does not behold the resulting lot"
+      },
+      "conclusion": {
+        "judgment": "this is a sign of violent death (biothanasia)",
+        "greek": "ζήτει δὲ καὶ τὴν Σελήνην, <εἰ> μὴ ὁρᾷ τὸν κλῆρον τοῦ ἀναιρέτου ἀστέρος· σημεῖόν ἐστιν τοῦτο βιοθανασίας",
+        "rendering_grade": "engine_translation_unreviewed",
+        "computability": "the lot itself is fully computable from the formula given",
+        "customer_prediction": false,
+        "output_policy": "the lot position may be shown; the violent-death reading is refused"
+      },
+      "priority": 37,
+      "exceptions": ["The manuscript reads 'does not see the lord'; Cumont corrects to 'the lot'. 'if' is Cumont's supplement."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "close of the fifth inspection", "location": "CCAG VIII.4 p. 123 lines 3-6", "verification": "page image collated: sources/page_images/ccag_08_4_p123.png sha256 e3142730987211ded36d65e3e6f107268082a5e3033571d585632f90cd9adbcf"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "lot may be computed and displayed; the death judgment is refused",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.aitiatikos_lot_formula",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "technique": "lot construction", "chapter": "nd'"},
+      "conditions": {
+        "formula_day": "measure from Saturn to Mars, and project the same amount from the Ascendant",
+        "formula_night": "reverse the direction",
+        "test": "the lot is beheld by malefics"
+      },
+      "conclusion": {
+        "judgment": "the lot is precarious and dangerous, making the nativities destructive",
+        "greek": "οὗτος γὰρ ὁ κλῆρος ὑπὸ κακοποιῶν θεωρούμενος ἐπισφαλὴς καὶ ἐπικίνδυνος καθαιρετικὰς ποιῶν τὰς γενέσεις",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 38,
+      "exceptions": ["Cumont deletes a 'kai' after Saturn; the manuscript writes 'apo' with 'epi' superscript."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "after the seventh inspection", "location": "CCAG VIII.4 p. 124 lines 8-11", "verification": "page image collated: sources/page_images/ccag_08_4_p124.png sha256 8a242949fd66d9b7efcd5cc27d0a5ba461d58d4027eb82769d5c866c449a8041"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.fixed_stars_on_angular_degrees",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE, transmitting the Anonymous of AD 379",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "fixed stars", "chapter": "nd'"},
+      "conditions": {
+        "case_a": "the planets of the nativity have fallen away from the angles",
+        "case_a_test": "bright fixed stars are found on angular degrees",
+        "case_b": "a planet applies while running the same 'wind' (anemos) as the fixed star",
+        "case_c": "the fixed stars are in the same degree as the planets according to the same wind"
+      },
+      "conclusion": {
+        "if_case_a": "they make the nativities great and surpassing",
+        "if_case_b_or_c": "the fixed stars operate powerfully",
+        "authorial_complaint": "polloi gar agnoousin tas ton aplanon asteron dynameis te kai energeias - for many are ignorant of the powers and operations of the fixed stars",
+        "rendering_grade": "engine_translation_unreviewed",
+        "attribution_note": "Cumont traces this fixed-star clause to the anonymous astrologer of AD 379 (CCAG V.1 pp. 196-197), from whom Rhetorius also repeats it in cap. ne'. It is therefore inherited, not Byzantine.",
+        "customer_prediction": false
+      },
+      "priority": 39,
+      "exceptions": ["The technical term anemos ('wind') is not defined in this chapter; its operational meaning is unresolved here."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nd'", "section": "closing paragraph", "location": "CCAG VIII.4 p. 124 lines 20-28 with Cumont's note 3", "verification": "page image collated: sources/page_images/ccag_08_4_p124.png sha256 8a242949fd66d9b7efcd5cc27d0a5ba461d58d4027eb82769d5c866c449a8041"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; the anemos condition may not be implemented until defined",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.birth_ease_by_sect_and_gender",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE, transmitting Dorotheus",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "ease or difficulty of the birth", "chapter": "ne' (55)"},
+      "conditions": {
+        "case_1": "a male nativity, both lights in masculine signs, and the Ascendant beheld by benefics",
+        "case_2": "the same configuration on a female nativity, especially when the lights are trine to one another and in masculine signs",
+        "case_3": "a male nativity with the lights trine to one another and in feminine signs together with the Ascendant",
+        "case_jupiter": "Jupiter on the Ascendant",
+        "case_saturn": "Saturn on the Ascendant, especially in feminine signs",
+        "case_mars": "Mars on the Ascendant, especially in feminine signs"
+      },
+      "conclusion": {
+        "case_1": "easy birth",
+        "case_2": "difficult birth",
+        "case_3": "difficult birth; this phase of the lights is called amphikyrtos",
+        "case_jupiter": "gives easy birth; and if the rising sign is masculine, the father is better born than the mother, if feminine, the mother than the father",
+        "case_saturn": "difficult birth",
+        "case_mars": "makes the delivery sudden and short, especially on the road or in the bath",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "obstetric outcomes are refused as output"
+      },
+      "priority": 40,
+      "exceptions": [
+        "Recension divergence at the title: Paris. gr. 2425 heads the chapter 'On childbirth'; Vaticanus 1056 heads it 'On easy and difficult birth, according to Dorotheus'. Cumont concludes the genuine title named Dorotheus and that the Paris scribe suppressed him.",
+        "Vaticanus 1056 omits the whole closing clause about the plagia signs and the Moon.",
+        "Vaticanus 1056 reads 'in the bath-house' where Paris. gr. 2425 reads 'in the bath'."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. ne'", "section": "whole chapter with apparatus recording Vaticanus 1056", "location": "CCAG VIII.4 p. 125 lines 1-20", "verification": "page image collated: sources/page_images/ccag_08_4_p125.png sha256 b96aa0e0d4b0cf94403ab9c4d6712deeeff3cd95f3865beb3594f63ae56a70db"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "historical quotation only; no obstetric or pregnancy claim is produced",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.orthos_and_plagios_signs",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "straight and oblique signs", "chapter": "ne'"},
+      "conditions": {
+        "definition_orthos": "the straight signs are from Cancer to Sagittarius",
+        "definition_plagios": "the oblique signs are the rest, from Capricorn to Gemini",
+        "test": "the Moon is in the oblique signs and enclosed by the malefics",
+        "intensifier": "and the malefics themselves in oblique signs, beholding the Moon out of the angles"
+      },
+      "conclusion": {
+        "judgment": "it produces a difficult birth",
+        "greek_key": "ὀρθὰ μὲν ζῴδιά εἰσιν ἀπὸ Καρκίνου ἕως Τοξότου, πλάγια δὲ τὰ λοιπὰ ἀπὸ Αἰγόκερω ἕως Διδύμων",
+        "rendering_grade": "engine_translation_unreviewed",
+        "note": "the sign-set definition itself is computable and non-predictive and may be displayed as a table",
+        "customer_prediction": false
+      },
+      "priority": 41,
+      "exceptions": ["The whole clause from 'the Moon then' to 'beholding' is absent from Vaticanus 1056."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. ne'", "section": "closing clause", "location": "CCAG VIII.4 p. 125 lines 14-20", "verification": "page image collated: sources/page_images/ccag_08_4_p125.png sha256 b96aa0e0d4b0cf94403ab9c4d6712deeeff3cd95f3865beb3594f63ae56a70db"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "definition may be displayed; the birth judgment is refused",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.poleuon_hour_lord_unresolved",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "the poleuon and diepon of the Ascendant", "chapter": "ns' (56)"},
+      "conditions": {
+        "form": "each planet 'poleuon' the Ascendant is given an ordinal set and a delineation",
+        "recorded_sets": {
+          "saturn": "a' g' e' i' (1, 3, 8, 10)",
+          "jupiter": "a' d' i' ia' (1, 4, 10, 11)",
+          "mars": "a' e' st' e' (1, 5, 6, 8)"
+        },
+        "closing_conditional_1": "on the nocturnal hours, if the lord of the hours of the diepon falls into a bad place (kakodaimonise)",
+        "closing_conditional_2": "if with Saturn as diepon the Moon is in opposition",
+        "unresolved": "the chapter never defines what the ordinal sets enumerate; hours and places are both possible and the text does not decide"
+      },
+      "conclusion": {
+        "saturn": "those born are base-born, injured, and violently killed",
+        "jupiter": "those born are rulers, glorious, charming",
+        "mars": "they die by iron or fire, or by the wrath of a magnate, or by a haemorrhage",
+        "closing_1": "it makes them thrown to beasts (the word is corrupt; Cumont queries a new coinage)",
+        "closing_2": "it makes an epileptic and one possessed by a god",
+        "rendering_grade": "engine_translation_unreviewed",
+        "status": "SOURCE-GATED. The delineations are legible but the operative predicate is not defined in the surviving chapter, so this technique cannot be computed.",
+        "customer_prediction": false
+      },
+      "priority": 42,
+      "exceptions": [
+        "Cumont could not inspect the fuller text of this chapter in cod. Venetus 7 f. 393 'because of the war'; that witness is the natural next step.",
+        "The ordinal sets are given as Greek numeral letters and were read from the page image, not from OCR, which corrupted them."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. ns'", "section": "opening entries and closing conditionals", "location": "CCAG VIII.4 p. 125 line 21 to p. 126 line 11", "verification": "page image collated for p. 125: sources/page_images/ccag_08_4_p125.png sha256 b96aa0e0d4b0cf94403ab9c4d6712deeeff3cd95f3865beb3594f63ae56a70db; p. 126 read from OCR only"}
+      ],
+      "evidence_grade": "C",
+      "publication_limit": "never implemented; recorded as a source-gated technique with the missing definition named",
+      "review_status": "predicate_undefined_in_source_venetus_7_collation_required"
+    },
+    {
+      "rule_id": "byz.rhet.p.twelfth_place_names_and_significations",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE, under the name of Hermes Trismegistus",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "the twelve places", "chapter": "nz' (57)"},
+      "conditions": {
+        "chapter_title": "Apotelesmata tou pinakos tes dodekatopou [of Hermes Trismegistus, on the naming and power of the twelve places]",
+        "ordering": "the exposition begins at the TWELFTH place and works backwards, not at the first",
+        "subject": "the twelfth place"
+      },
+      "conclusion": {
+        "names": ["kakodaimonema", "proanaphora of the Ascendant", "metakosmios"],
+        "signifies": ["matters of enemies", "slaves", "quadrupeds", "everything accomplished before the hour of birth"],
+        "engine_rendering": "The twelfth place is called Bad-Daimon, the rising-before of the Ascendant, and beyond-the-world. It signifies matters concerning enemies and slaves and quadrupeds, and everything brought to completion before the hour of delivery.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "distinctiveness": "the reversed enumeration order and the third name metakosmios are the Byzantine presentation; the doctrine is credited in the codices of the second class to Hermes",
+        "customer_prediction": false
+      },
+      "priority": 50,
+      "exceptions": ["The chapter title's second half is supplied by Cumont from Rhetorius' own cap. kb' in Paris. gr. 2506 f. 99v; the words 'tes dodekatopou' are his supplement."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nz'", "section": "chapter opening, twelfth place", "location": "CCAG VIII.4 p. 126 lines 12-18", "verification": "OCR read; page image collation pending for p. 126"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_only_page_image_collation_and_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.p.dodekatopos_names_and_significations",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_p_paris_gr_2425",
+      "period": "early 6th century CE, under the name of Hermes Trismegistus",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "P", "topic": "the complete twelve-place scheme, names and significations only", "chapter": "nz' (57), pp. 126-174"},
+      "conditions": {
+        "exposition_order": [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "order_verified_from": "the volume's own index, which places the twelfth at p. 126, the first at p. 131, then 139, 144, 145, 152, 154, 158, 161, 163, 166, 170",
+        "structural_observation": "all four cadent places (3, 6, 9, 12) carry the epithet metakosmios"
+      },
+      "conclusion": {
+        "place_12": {"names": ["kakodaimonema", "proanaphora of the Ascendant", "metakosmios"], "signifies": ["enemies", "slaves", "quadrupeds", "everything accomplished before the hour of birth"]},
+        "place_1": {"names": ["ho peri zoes", "horoskopos"], "signifies": ["life"], "stated_reason": "so called because this sign rises after the rising of the Bad-Daimon and after the passage of the klimakter; here both the woman giving birth and the infant are examined"},
+        "place_2": {"names": ["bios", "gate of Hades", "idle place"], "signifies": ["livelihood", "hopes from matters of the dead"], "note": "benefics remain more idle here yet still complete the goods hoped for; it is the succedent of the Ascendant"},
+        "place_3": {"names": ["of the goddess Moon", "kataskios", "exousiastikos", "metakosmios"], "signifies": ["travel abroad", "dreams", "religion", "the table", "brothers", "friends", "the queen"]},
+        "place_4": {"names": ["lower midheaven", "the age of old age"], "signifies": ["parents", "landed and hidden matters", "the house in which one was born", "foundations"]},
+        "place_5": {"names": ["Good Fortune", "epiporeusis"], "signifies": ["the place of Venus, for she rejoices there"]},
+        "place_6": {"names": ["bad cadent", "prodysis", "prokataphora", "metakosmios", "Bad Fortune"], "signifies": ["injury", "slaves", "enemies", "quadrupeds", "sometimes action, because it is the right trine of the midheaven"]},
+        "place_7": {"names": ["western angle"], "signifies": ["old age", "marriage", "sometimes inheritance", "injury, especially of the fingers or bladder or feet", "journeys abroad"]},
+        "place_8": {"names": ["idle", "epikataphora of the Ascendant", "epikatadysis", "amaurosis"], "signifies": ["death"], "stated_reason": "the sign is averse to the Ascendant, and so it signifies the account of death, the averse of life"},
+        "place_9": {"names": ["God"], "signifies": ["all divine matters", "kings", "foreigners", "dreams", "religion"], "note": "the place of the Sun; the sign is astronomikon and metakosmion"},
+        "place_10": {"names": ["angle", "midheaven", "quadrant of the Ascendant"], "signifies": ["youth", "action", "marriage", "children", "the standing of the parents"], "note": "the sect leaders rejoice there and give good and profitable actions"},
+        "place_11": {"names": ["Good Daimon", "succedent of the midheaven"], "signifies": ["great wealth and distinguished actions when benefics are there in their own faces, houses, exaltations or bounds", "the third age", "action, patronage and protection at the prime of youth"]},
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 51,
+      "exceptions": [
+        "This rule encodes the NAMES and SIGNIFICATIONS only. The planet-in-place delineation tables that follow each heading are NOT encoded, because Cumont states that Rhetorius misfiled them: material belonging to the ninth place stands in the fourth and is then repeated in the ninth, and material about Mercury and the Moon printed in the fourth belongs properly to the eleventh, where it reads more correctly.",
+        "Cumont identifies two strata in the chapter: a first half agreeing closely with Valens Anthologiae II.5-14 and a second half closely tied to Firmicus Maternus III.2-7 and 13, with the two authors ordering the same material differently.",
+        "The twelfth-place entry duplicates byz.rhet.p.twelfth_place_names_and_significations, which was encoded from the collated chapter opening; the two agree and the earlier rule remains the higher-confidence record for that one place."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_4_cumont_boudreaux_1921", "work": "Rhetorius, Compendium, cap. nz'", "section": "the twelve place headings", "location": "CCAG VIII.4 pp. 126, 131, 139, 144, 145, 152, 154, 158, 161, 163, 166, 170", "verification": "OCR read for all twelve headings; page numbers cross-checked against the volume's own index; page-image collation pending"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; nomenclature and significations only, never the corrupt delineation tables",
+      "review_status": "ocr_only_page_image_collation_pending_delineation_tables_deliberately_excluded"
+    },
+    {
+      "rule_id": "byz.rhet.l.sect_leaders_by_day_and_night",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_l_laur_28_34",
+      "period": "text of the 6th century or earlier, in a stemma of 14th-16th century witnesses",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "L", "topic": "sect", "chapter": "2, Peri haireseos ton asteron"},
+      "conditions": {
+        "case_day": "a diurnal nativity",
+        "case_night": "a nocturnal nativity",
+        "mercury": "Mercury is epikoinos, shared, with respect to the sects"
+      },
+      "conclusion": {
+        "day_sect_leaders": ["Sun", "Saturn", "Jupiter"],
+        "night_sect_leaders": ["Moon", "Venus", "Mars"],
+        "mercury": "belongs to neither sect exclusively",
+        "greek": "Ἐπὶ τῶν ἡμερινῶν γενέσεων αἱρεσιαρχοῦσιν Ἥλιος, Κρόνος, Ζεύς, ἐπὶ δὲ τῶν νυκτερινῶν Σελήνη, Ἀφροδίτη, Ἄρης. ὁ γὰρ Ἑρμῆς ἐπίκοινος πρὸς τὰς αἱρέσεις καθέστηκεν.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 3,
+      "exceptions": [
+        "Attribution divergence: the same chapter stands in cod. Neapolitanus II C 33 f. 521v headed 'On the sects of the stars, by ANTIOCHUS'. The doctrine may not be cited as Rhetorius' own without naming the witness.",
+        "The verb form 'hairesiarchousin' is Kroll's correction; all manuscripts read 'hairesiarchousin' with a different accent pattern that Kroll rejected."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_01_boll_olivieri_1898", "work": "Rhetorius (or Antiochus), Epilysis, cap. 2", "section": "opening", "location": "CCAG I p. 146 lines 1-4 with apparatus note 1", "verification": "page image collated: sources/page_images/ccag_01_p146.png sha256 d1cee490339522ce89398e15c69414f11d78e73c5643c2f3bb72d0f9b96b9910"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; must be cited with the witness family",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.l.benefic_malefic_are_nominal_categories",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_l_laur_28_34",
+      "period": "text of the 6th century or earlier",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "L", "topic": "the status of the benefic/malefic classification", "chapter": "2"},
+      "conditions": {
+        "nominal_benefics": ["Sun", "Jupiter", "Moon", "Venus"],
+        "nominal_malefics": ["Saturn", "Mars"],
+        "mercury_rule": "Mercury, being shared, is good with the good and becomes malefic with the malefics",
+        "override_condition_a": "malefics lying well by phase (phasis), by sect (hairesis) and by place (topos)",
+        "override_condition_b": "benefics lying badly"
+      },
+      "conclusion": {
+        "core_claim": "the terms benefic and malefic are said to be REPUTED (nomizontai), not absolute",
+        "if_override_a": "megalynousi tas tychas - they magnify the fortunes",
+        "if_override_b": "blaptousin autas - they harm them",
+        "quoted_authority": "Dorotheus is quoted in verse: 'the three-sided ones, though evil-working, are blunted; a star is no longer bad when it finds a good place; nor a bad place, when it welcomes a good one'",
+        "engine_rendering": "I said of the benefics and malefics that they are only RECKONED so, since often in some nativities the malefics, lying well by phase and by sect and by place, magnify the fortunes, while the benefics lying badly harm them.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "significance": "this is a first-order qualification: the tradition explicitly denies that planetary benefic status is fixed",
+        "customer_prediction": false
+      },
+      "priority": 4,
+      "exceptions": [
+        "OCR HAZARD RESOLVED: the Archive.org OCR reads 'metalynousi' here. The page image reads 'megalynousi', magnify. The rule depends on the image, not the OCR.",
+        "The participle 'keimenoi' ('lying', i.e. placed) is KROLL'S SUPPLEMENT and stands in no manuscript. The predicate therefore rests partly on an editorial conjecture.",
+        "One witness (r) rewrites the opening of the sentence entirely."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_01_boll_olivieri_1898", "work": "Rhetorius (or Antiochus), Epilysis, cap. 2", "section": "second half", "location": "CCAG I p. 146 lines 4-13 with apparatus to lines 7, 8, 13", "verification": "page image collated: sources/page_images/ccag_01_p146.png sha256 d1cee490339522ce89398e15c69414f11d78e73c5643c2f3bb72d0f9b96b9910"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; Kroll's supplement must be disclosed wherever the rule is shown",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.l.four_angles_elemental_blend",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_l_laur_28_34",
+      "period": "text of the 6th century or earlier",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "L", "topic": "elemental blend of the four angles", "chapter": "3, Peri tes ton ib' zodion kraseos"},
+      "conditions": {
+        "element_map": {"fiery": ["Aries", "Leo", "Sagittarius"], "earthy": ["Taurus", "Virgo", "Capricorn"], "airy": ["Gemini", "Libra", "Aquarius"], "watery": ["Cancer", "Scorpio", "Pisces"]},
+        "worked_case": "Aries rising (fiery) AND Capricorn culminating (earthy) AND Libra setting (airy) AND Cancer at the lower midheaven (watery)",
+        "stated_rationale": "since all material things are composed of the four elements, a human being, sharing the same nature, must partake of them too; therefore the ancients assigned the four angles of the nativity to the four blends"
+      },
+      "conclusion": {
+        "judgment": "estai he krasis ariste - the blend will be best",
+        "engine_rendering": "the temperament will be the best possible",
+        "corollary_in_source": "if you then look for the succedents and the cadents of the angles you will find them lying in accordance with the four elements as well",
+        "rendering_grade": "engine_translation_unreviewed",
+        "computability": "the predicate is fully computable from angle signs alone",
+        "customer_prediction": false
+      },
+      "priority": 5,
+      "exceptions": ["The closing clause 'and the blend will be best' is omitted by cod. L itself; it comes from the other witnesses."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_01_boll_olivieri_1898", "work": "Rhetorius (or Antiochus), Epilysis, cap. 3", "section": "close of chapter", "location": "CCAG I p. 146 line 14 to p. 147 line 3", "verification": "page image collated: sources/page_images/ccag_01_p146.png sha256 d1cee490339522ce89398e15c69414f11d78e73c5643c2f3bb72d0f9b96b9910"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.rhet.l.eye_injuring_signs_by_nebulous_stars",
+      "tradition_id": "byzantine_greek",
+      "school_id": "rhetorius_recension_l_laur_28_34",
+      "period": "text of the 6th century or earlier",
+      "domain": "natal",
+      "scope": {"branch": "natal", "recension": "L", "topic": "signs held to injure the eyes", "chapter": "6, Peri zodion sinopoion eis tous ophthalmous"},
+      "conditions": {
+        "sign_and_stated_cause": {
+          "Taurus": "because of the Pleiad",
+          "Cancer": "because of the little cloud (Praesepe)",
+          "Scorpio": "because of the sting",
+          "Sagittarius": "because of the arrow-point",
+          "Capricorn": "because of the thorn",
+          "Aquarius": "because of the urn",
+          "Leo": "in part"
+        }
+      },
+      "conclusion": {
+        "judgment": "these are the signs held to injure the eyes",
+        "structural_point": "each attribution is justified by a named star-group or a named part of the constellation figure, so the doctrine is astronomical in its stated reasoning rather than arbitrary",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "no ocular or medical claim is produced; the correspondence may be displayed as a historical table"
+      },
+      "priority": 6,
+      "exceptions": ["The chapter's own closing sentence refers the reader elsewhere for accuracy; witness r omits both the heading and the cross-reference."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_01_boll_olivieri_1898", "work": "Rhetorius (or Antiochus), Epilysis, cap. 6", "section": "whole chapter", "location": "CCAG I p. 147 lines 15-20", "verification": "page image collated for the facing column of the same opening: sources/page_images/ccag_01_p146.png sha256 d1cee490339522ce89398e15c69414f11d78e73c5643c2f3bb72d0f9b96b9910; p. 147 read from OCR"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "historical table only; medical claims refused",
+      "review_status": "ocr_read_page_image_collation_pending_for_p147"
+    },
+    {
+      "rule_id": "byz.epit.moon_kenodromia_definition",
+      "tradition_id": "byzantine_greek",
+      "school_id": "byzantine_epitome_paris_gr_2506",
+      "period": "Byzantine epitome, shortly after AD 884, transmitted in an 11th-century syntagma; summarising Antiochus via Rhetorius",
+      "domain": "natal",
+      "scope": {"branch": "definitions", "recension": "epitome", "topic": "void course of the Moon", "chapter": "Antiochus Eisagogika I, ch. pe' (88) as summarised"},
+      "conditions": {
+        "subject": "the Moon",
+        "negative_test": "no planet is about to make an application with her",
+        "excluded_modes": ["by sign (zodiakos)", "by degree (moirikos)", "by adherence (kata kollesin)", "by configuration (kata schema)"],
+        "bound": "nor within thirty degrees"
+      },
+      "conclusion": {
+        "definition": "this state is called kenodromia, the empty course of the Moon",
+        "greek": "Κενοδρομία τῆς Σελήνης λέγεται ὅταν μηδεὶς σὺν αὐτῇ μέλλῃ μήτε ζῳδιακῶς, μήτε μοιρικῶς, μήτε κατὰ κόλλησιν, μήτε κατὰ σχῆμα μηδὲ ἐντὸς τῶν λ' μοιρῶν συναφὴν ποιεῖσθαι.",
+        "engine_rendering": "The empty running of the Moon is said to occur when no planet is about to make an application with her, neither by sign nor by degree nor by adherence nor by configuration, nor within thirty degrees.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "computability": "the thirty-degree bound makes this definition fully computable",
+        "customer_prediction": false
+      },
+      "priority": 7,
+      "exceptions": [
+        "This is the EPITOMATOR'S wording, not Antiochus'. The chapter list summarises; it does not quote.",
+        "Boudreaux deletes a repeated 'mellei' at the end and corrects the opening; the manuscript reads 'medeni syn auto mellei'."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_3_boudreaux_1912", "work": "Byzantine synkephalaiosis of Antiochus, Eisagogika book 1", "section": "chapter pe'", "location": "CCAG VIII.3 p. 110 lines 30-32 with apparatus", "verification": "page image collated: sources/page_images/ccag_08_3_p110.png sha256 f82fb8189ed8ee7ef2611da2be3fa4f6a6354603b39641fe415dbdf9a9ac99b0"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; must be attributed to the epitome, never to Antiochus directly",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.epit.moon_syndesmos_definition",
+      "tradition_id": "byzantine_greek",
+      "school_id": "byzantine_epitome_paris_gr_2506",
+      "period": "Byzantine epitome, shortly after AD 884",
+      "domain": "natal",
+      "scope": {"branch": "definitions", "recension": "epitome", "topic": "bond of the Moon", "chapter": "Antiochus Eisagogika I, ch. pz' (87) as summarised"},
+      "conditions": {
+        "binding": "while the Sun is showing forth the degrees of her day-and-night motion, the Moon is not greatly distant from him",
+        "loosing": "when she has drawn off the same degrees from him"
+      },
+      "conclusion": {
+        "definition_binding": "the Moon is said to be in syndesmos, bond",
+        "definition_loosing": "she is said to loose the bond",
+        "rendering_grade": "engine_translation_unreviewed",
+        "note": "the definition is stated in terms of the Moon's own daily motion, so the threshold is variable rather than a fixed orb",
+        "customer_prediction": false
+      },
+      "priority": 8,
+      "exceptions": ["'tas' is Boll's supplement and the participle was corrected by him; the definition therefore rests on an emended text."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_3_boudreaux_1912", "work": "Byzantine synkephalaiosis of Antiochus, Eisagogika book 1", "section": "chapter pz'", "location": "CCAG VIII.3 p. 110 lines 26-29 with apparatus", "verification": "page image collated: sources/page_images/ccag_08_3_p110.png sha256 f82fb8189ed8ee7ef2611da2be3fa4f6a6354603b39641fe415dbdf9a9ac99b0"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only",
+      "review_status": "greek_read_and_page_image_collated_independent_byzantine_greek_review_pending"
+    },
+    {
+      "rule_id": "byz.epit.antiochus_dating_verdict_is_unreliable",
+      "tradition_id": "byzantine_greek",
+      "school_id": "byzantine_epitome_paris_gr_2506",
+      "period": "Byzantine epitome, shortly after AD 884",
+      "domain": "other",
+      "scope": {"branch": "provenance control", "recension": "epitome", "topic": "how Byzantine attributions must be handled"},
+      "conditions": {
+        "epitomator_claim": "Houtos ho Antiochos metagenesteros estin kai Paulou tou Alexandreos kai Ouálentos - this Antiochus is later than both Paul of Alexandria and Valens",
+        "counter_evidence_1": "Antiochus is cited by Porphyry and therefore lived before the third century",
+        "counter_evidence_2": "the epitomator did not read Antiochus' own Thesauri; he read Rhetorius' sixth-century paraphrase of them",
+        "counter_evidence_3": "in that paraphrase the opinions of Valens and Paul of Alexandria had already been inserted, which is why they surface in chapters 13-19 of the summary"
+      },
+      "conclusion": {
+        "operative_rule": "a Byzantine attribution is evidence about Byzantine reading, not about authorship; every rule taken from the epitome must record the epitome as its source and must not be re-attributed to the named ancient author",
+        "engine_rendering": "This Antiochus is later than both Paul of Alexandria and Valens. [The claim is false; the compiler was reading Rhetorius' paraphrase.]",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": 9,
+      "exceptions": ["Boll's refutation is a modern editorial judgment, dated 1912, and is itself cited as such."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_3_boudreaux_1912", "work": "Byzantine synkephalaiosis of Antiochus", "section": "closing verdict and Boll's note 1", "location": "CCAG VIII.3 p. 111 lines 2-3 with footnote 1", "verification": "page image collated: sources/page_images/ccag_08_3_p111.png sha256 92af2fb1f761990f80c069d3dc2c3b075f2c76e510642f54f6254b28690a0d6e"}
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; this is a governance rule, not a delineation",
+      "review_status": "greek_and_latin_read_and_page_image_collated"
+    },
+    {
+      "rule_id": "byz.epit.ptolemy_canonised_as_law_and_rule",
+      "tradition_id": "byzantine_greek",
+      "school_id": "byzantine_epitome_paris_gr_2506",
+      "period": "Byzantine epitome, shortly after AD 884",
+      "domain": "other",
+      "scope": {"branch": "doctrinal authority", "recension": "epitome", "topic": "the standing of Ptolemy in the Byzantine corpus"},
+      "conditions": {
+        "premise_1": "recapitulations of books are useful as reminders",
+        "premise_2": "the Tetrabiblos needs no recapitulation at all, because a student ought to know its chapters by heart",
+        "premise_3": "Ptolemy handled this laborious subject more accurately than all before him - Nechepso, Petosiris, Hermes and the like",
+        "action": "the epitomator nonetheless sets out its chapter list, so as not to seem to omit the foundation"
+      },
+      "conclusion": {
+        "verdict": "kai tois met' auton tes technes nomos kai kanon pasin nomizetai - and by all who came after him he is reckoned the law and the canon of the art",
+        "engine_rendering": "and to all who came after him he is held to be the law and the standard of the art",
+        "rendering_grade": "engine_translation_unreviewed",
+        "distinctiveness": "explicit canonisation of one authority over the older Egyptian names is a Byzantine editorial act, and it explains why later Byzantine compendia read as Ptolemaic even when their content is Valentine or Hermetic",
+        "customer_prediction": false
+      },
+      "priority": 12,
+      "exceptions": ["Boll notes that the epitomator's chapter division differs from both the printed editions and the known manuscripts, and that Vaticanus gr. 1038 divides the proem into three chapters."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_3_boudreaux_1912", "work": "He tes Tetrabiblou Ptolemaiou synkephalaiosis", "section": "opening paragraph", "location": "CCAG VIII.3 p. 93 lines 1-15", "verification": "OCR read; page image collation pending for p. 93"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_only_page_image_collation_pending"
+    },
+    {
+      "rule_id": "byz.epit.book_evaluation_requires_experience",
+      "tradition_id": "byzantine_greek",
+      "school_id": "byzantine_epitome_paris_gr_2506",
+      "period": "Byzantine epitome, shortly after AD 884",
+      "domain": "other",
+      "scope": {"branch": "source criticism", "recension": "epitome", "topic": "the epitomator's own evidential standard"},
+      "conditions": {
+        "subject": "the astrological booklet ascribed to Hystaspes/Odapsos, which treats Saturn in each of the twelve signs, alone and blended with the other planets, down to the parts and members of each sign, and assigns regions to signs",
+        "test_applied": "whether the compiler has verified it by experience or by calculation"
+      },
+      "conclusion": {
+        "verdict": "homoia men oun epangellomenos estin tois allois, oupo de peira dokimasas echo e kai logismois heuron ei kai homoios tois allois peri tas hyposcheseis diamartanei",
+        "engine_rendering": "He promises much the same things as the others, but I have not yet tested it by experience, nor found by calculation whether he too, like the others, fails in his promises.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "significance": "the Byzantine compiler treats the corpus as a set of claims that may fail, and names experience and calculation as the tests. This is the strongest single piece of evidence that the Byzantine layer is critical rather than merely conservative.",
+        "customer_prediction": false
+      },
+      "priority": 13,
+      "exceptions": ["The name is corrupt in the codex; Boudreaux and Cumont read 'Ho Hystaspou Odapsos'. Two other author entries in the same syntagma break off where the compiler intended to add a date and could not."],
+      "conflicts_with": [],
+      "source_passages": [
+        {"edition_id": "ccag_08_3_boudreaux_1912", "work": "Byzantine syntagma of Paris. gr. 2506, notice on Hystaspes/Odapsos", "section": "closing sentence of the notice", "location": "CCAG VIII.3 p. 92 lines 13-18", "verification": "OCR read; page image collation pending for p. 92"}
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "ocr_only_page_image_collation_pending"
+    }
+  ]
+}

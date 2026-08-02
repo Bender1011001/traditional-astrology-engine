@@ -18,6 +18,7 @@ REGISTRY_PATH = ROOT / "source_registry.json"
 EXPECTED_TRACK_IDS = {
     "jaimini",
     "japanese_sukuyodo",
+    "byzantine_greek",
     "indian_jyotisha",
     "chinese_bazi",
     "ziwei_doushu",
@@ -43,6 +44,7 @@ EXPECTED_TRACK_IDS = {
 EXPECTED_AUDIT_DIRECTORIES = {
     "jaimini",
     "sukuyodo",
+    "byzantine",
     "babylonian",
     "bazi",
     "burmese",
@@ -66,8 +68,8 @@ EXPECTED_AUDIT_DIRECTORIES = {
 }
 
 EXPECTED_STATUS_COUNTS = {
-    "research_verified": 20,
-    "source_limited": 54,
+    "research_verified": 21,
+    "source_limited": 55,
     "not_implemented": 3,
 }
 

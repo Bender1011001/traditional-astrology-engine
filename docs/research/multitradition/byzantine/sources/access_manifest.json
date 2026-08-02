@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "manifest_id": "byzantine_greek_ccag_access_manifest_2026_08_02",
+  "tradition_id": "byzantine_greek",
+  "retrieved": "2026-08-02",
+  "retrieval_method": "Direct HTTPS download from the Internet Archive item file endpoints. OCR text layers (_djvu.txt) were stored in the repository; the scan PDFs were downloaded, used to render page images for visual collation, and are recorded here by hash but not stored (aggregate 70 MB).",
+  "rights_summary": "All editions are Catalogus Codicum Astrologorum Graecorum volumes published 1898-1921 and Wachsmuth's 1897 Teubner Lydus. All are out of copyright in the United States and the EU (authors Boll d. 1924, Cumont d. 1947 - EU life+70 expired 1994 and 2017 respectively; publication before 1929 places them in the US public domain). Two Archive.org items carry an explicit CC Public Domain Mark 1.0. No modern critical edition (Pingree/Heilen 2009) was retrieved or used.",
+  "artifacts": [
+    {
+      "artifact_id": "ccag_08_4_boudreaux_1921_ocr",
+      "path": "ccag_08_4_boudreaux_1921_djvu.txt",
+      "bytes": 1119803,
+      "sha256": "c7b053eb2b78da0051cee92931a8de77791baf2516dd2ced0e9d67b10a536ddb",
+      "url": "https://archive.org/download/ccag-8.4/CCAG8.4_djvu.txt",
+      "archive_item": "ccag-8.4",
+      "edition": "Catalogus Codicum Astrologorum Graecorum VIII.4: Codicum Parisinorum partem quartam descripsit Petrus Boudreaux (Brussels 1921). Appendix pp. 115-174 = 'Rhetorii Aegyptii capitula selecta', edited by Franz Cumont from cod. Parisinus gr. 2425.",
+      "why_it_matters": "The single most complete printed witness to Rhetorius' Compendium available in the public domain. Carries Cumont's Latin praefatio on the recensions and a full critical apparatus.",
+      "ocr_quality": "Polytonic Greek recognised at roughly 45 percent Greek character density; readable but with systematic breathing/accent loss and numeral corruption. Every passage encoded as a rule was collated against a rendered page image (see page_images below).",
+      "public_domain_mark": false
+    },
+    {
+      "artifact_id": "ccag_01_olivieri_1898_ocr",
+      "path": "ccag_01_olivieri_1898_djvu.txt",
+      "bytes": 731961,
+      "sha256": "0093769ab9e32b4ed68f4481eaf60fd8b018a296f330be7b48aca360b55747f8",
+      "url": "https://archive.org/download/ccag-8.4/CCAG1_djvu.txt",
+      "archive_item": "ccag-8.4",
+      "edition": "Catalogus Codicum Astrologorum Graecorum I: Codices Florentinos descripsit Alexander Olivieri, with selected fragments first edited by Boll, Cumont, Kroll and Olivieri (Brussels 1898). Appendix pp. 140-164 = 'Rhetorii quaestiones astrologicae ex Antiochi thesauris excerptae', edited by Franz Boll from cod. Laur. XXVIII 34 and nine collated witnesses.",
+      "why_it_matters": "The second, structurally independent recension. Its title attributes the material to Antiochus, not Rhetorius, and Boll's stemma names the manuscript families explicitly.",
+      "ocr_quality": "Roughly 57 percent Greek character density. Chapter numbers are frequently misread. Both encoded pages were collated against rendered page images.",
+      "public_domain_mark": true,
+      "public_domain_mark_url": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "public_domain_mark_item": "CatalogusCodicumAstrologorumGraec1"
+    },
+    {
+      "artifact_id": "ccag_08_3_boudreaux_1912_ocr",
+      "path": "ccag_08_3_boudreaux_1912_djvu.txt",
+      "bytes": 827952,
+      "sha256": "af7cb0d4544b2bceee5e2c0d1a984c1ad4440bc8822fda9e6669bec19e536609",
+      "url": "https://archive.org/download/ccag-8.4/CCAG8.3_djvu.txt",
+      "archive_item": "ccag-8.4",
+      "edition": "Catalogus Codicum Astrologorum Graecorum VIII.3: Codicum Parisinorum partem tertiam descripsit Petrus Boudreaux (Brussels 1912). Appendix pp. 93-125 prints the Byzantine syntagma of cod. Parisinus gr. 2506, including the synkephalaioseis of Ptolemy's Tetrabiblos, Critodemus, Callicrates, Balbillus, Antiochus, and Rhetorius.",
+      "why_it_matters": "This is the distinctively Byzantine layer: a compiler who summarises, dates, and evaluates each earlier astrological author instead of merely copying him.",
+      "ocr_quality": "Comparable to VIII.4. The two encoded pages were collated against rendered page images from the standalone Michigan scan.",
+      "public_domain_mark": false
+    },
+    {
+      "artifact_id": "ccag_05_1_cumont_boll_1904_ocr",
+      "path": "ccag_05_1_cumont_boll_1904_djvu.txt",
+      "bytes": 984632,
+      "sha256": "a0fbb2e678a0668842bef8d98d25fd383e14aa3a11d931773ef2a7df584ae047",
+      "url": "https://archive.org/download/ccag-8.4/CCAG5.1_djvu.txt",
+      "archive_item": "ccag-8.4",
+      "edition": "Catalogus Codicum Astrologorum Graecorum V.1: Codicum Romanorum partem priorem descripserunt Franciscus Cumont et Franciscus Boll (Brussels 1904).",
+      "why_it_matters": "Describes cod. Angelicus 29, the archetype Cumont and Boll call the only witness preserving the works of Palchus and of 'Apomasar' (Abu Ma'shar in Greek). It also carries the letter of the emperor Manuel I Komnenos, Theophilus of Edessa material, and chapters on annual revolutions and on the waning of Arab dominion. This is the Arabic-absorption layer of Byzantine astrology, and it is demonstrably NOT the Rhetorius layer.",
+      "ocr_quality": "Inspected for catalogue headings only. No rule was extracted from this volume in this pass.",
+      "public_domain_mark": false
+    },
+    {
+      "artifact_id": "ccag_08_1_cumont_1929_ocr",
+      "path": "ccag_08_1_cumont_1929_djvu.txt",
+      "bytes": 1075746,
+      "sha256": "e28ea77e81fdcb7aabb3129e74d84949d8db32ac82df3328791082950ef0e884",
+      "url": "https://archive.org/download/ccag-8.4/CCAG8.1_djvu.txt",
+      "archive_item": "ccag-8.4",
+      "edition": "Catalogus Codicum Astrologorum Graecorum VIII.1: Codicum Parisinorum partem primam descripsit Franciscus Cumont (Brussels 1929).",
+      "why_it_matters": "Retrieved for the Palchus and John Kamateros catalogue entries. No rule extracted in this pass.",
+      "ocr_quality": "Not collated.",
+      "public_domain_mark": false
+    },
+    {
+      "artifact_id": "lydus_de_ostentis_wachsmuth_1897_ocr",
+      "path": "lydus_de_ostentis_wachsmuth_1897_djvu.txt",
+      "bytes": 1308481,
+      "sha256": "7e39bb41f7f40217c919749bc67b7e06f7c75ede021982e72bf1b955aa51888d",
+      "url": "https://archive.org/download/ioannislaurentii00lydu/ioannislaurentii00lydu_djvu.txt",
+      "archive_item": "ioannislaurentii00lydu",
+      "edition": "Ioannis Laurentii Lydi Liber de ostentis et calendaria Graeca omnia, ed. Curtius Wachsmuth, Teubner, Leipzig 1897.",
+      "why_it_matters": "The target text for the sixth-century Constantinopolitan omen/portent branch.",
+      "ocr_quality": "UNUSABLE. The OCR engine mapped the Latin praefatio into Greek glyphs (the title page reads 'ΓΒΕ PE OOTENTIB' for LIBER DE OSTENTIS) and the Greek body text is correspondingly corrupt. The apparent 63 percent Greek character density is an artefact of this misidentification, not evidence of Greek recognition. No rule was extracted. Unblocking requires page-image work on this scan or a different scan.",
+      "public_domain_mark": false,
+      "usable": false
+    }
+  ],
+  "page_images": [
+    {"path": "page_images/ccag_08_4_p119.png", "sha256": "9c8af75fe4af86f599ccc240e84ab9e10b6f9aac38ec2840c6d223ec1d21870d", "bytes": 2146389, "printed_page": "CCAG VIII.4 p. 119", "source_pdf": "CCAG8.4.pdf leaf 124", "renders": "Rhetorius cap. nd', first inspection continued; Cumont's note that the Second Inspection is entirely lost."},
+    {"path": "page_images/ccag_08_4_p120.png", "sha256": "551fe6d50d7412be53b58676f0bd912928ccfbf63d1de976698cb85e3eb085b9", "bytes": 2072337, "printed_page": "CCAG VIII.4 p. 120", "source_pdf": "CCAG8.4.pdf leaf 125", "renders": "Fourth inspection: prenatal syzygy, planets preceding and following the lights, the non-human-offspring configuration, and the Munich witness's divergent reading of it."},
+    {"path": "page_images/ccag_08_4_p121.png", "sha256": "9fea2f4e363140fcde40c0cb371e82dd8be074dc0c002dec5178a60bf9a9941f", "bytes": 2221249, "printed_page": "CCAG VIII.4 p. 121", "source_pdf": "CCAG8.4.pdf leaf 126", "renders": "Fifth inspection: Lot of Daimon afflicted by night with the internal Ptolemy citation; placement of the lord of Fortune as the source of gain; the twelfth from Fortune and its malefic causes."},
+    {"path": "page_images/ccag_08_4_p122.png", "sha256": "103a4189100ba90b78c43129519a7e764ba3453451aba979410b59ea3b0bf3b4", "bytes": 2174747, "printed_page": "CCAG VIII.4 p. 122", "source_pdf": "CCAG8.4.pdf leaf 127", "renders": "Fifth inspection: lots signify the first age and their lords the last; multi-origin distribution of the years."},
+    {"path": "page_images/ccag_08_4_p123.png", "sha256": "e3142730987211ded36d65e3e6f107268082a5e3033571d585632f90cd9adbcf", "bytes": 2264662, "printed_page": "CCAG VIII.4 p. 123", "source_pdf": "CCAG8.4.pdf leaf 128", "renders": "Lot of the anairetic star; sixth inspection (nodes); seventh inspection (dodekatemoria)."},
+    {"path": "page_images/ccag_08_4_p124.png", "sha256": "8a242949fd66d9b7efcd5cc27d0a5ba461d58d4027eb82769d5c866c449a8041", "bytes": 1944108, "printed_page": "CCAG VIII.4 p. 124", "source_pdf": "CCAG8.4.pdf leaf 129", "renders": "The aitiatikos lot; the closing 'seven inspections' sentence; the fixed-star clause Cumont traces to the Anonymous of 379."},
+    {"path": "page_images/ccag_08_4_p125.png", "sha256": "b96aa0e0d4b0cf94403ab9c4d6712deeeff3cd95f3865beb3594f63ae56a70db", "bytes": 2038040, "printed_page": "CCAG VIII.4 p. 125", "source_pdf": "CCAG8.4.pdf leaf 130", "renders": "cap. ne' on birth-ease with the Vaticanus 1056 title variant naming Dorotheus; cap. ns' on the poleuon of the Ascendant."},
+    {"path": "page_images/ccag_01_p141.png", "sha256": "1b6c44114126084782a60df28d2b9c546bbe33bc68ee438bfe4a0f412232a4d5", "bytes": 444841, "printed_page": "CCAG I p. 141", "source_pdf": "Catalogus_codicum_astrologorum_graec_1.pdf leaf 154", "renders": "Boll's stemma of the L recension: L, families a-p-q-f-m, n-o, r-s, with their divergent incipits and chapter inventories."},
+    {"path": "page_images/ccag_01_p146.png", "sha256": "d1cee490339522ce89398e15c69414f11d78e73c5643c2f3bb72d0f9b96b9910", "bytes": 533913, "printed_page": "CCAG I p. 146", "source_pdf": "Catalogus_codicum_astrologorum_graec_1.pdf leaf 159", "renders": "L-recension cap. 2 on sect and cap. 3 on the elemental blend of the signs, with the Naples-codex attribution of cap. 2 to Antiochus."},
+    {"path": "page_images/ccag_08_3_p110.png", "sha256": "f82fb8189ed8ee7ef2611da2be3fa4f6a6354603b39641fe415dbdf9a9ac99b0", "bytes": 1744636, "printed_page": "CCAG VIII.3 p. 110", "source_pdf": "Catalogus_codicum_astrologorum_graec_8p3_text.pdf leaf 126 (adjacent)", "renders": "Epitome of Antiochus Eisagogika I, chapters 74-89, including the definitions of syndesmos and kenodromia."},
+    {"path": "page_images/ccag_08_3_p111.png", "sha256": "92af2fb1f761990f80c069d3dc2c3b075f2c76e510642f54f6254b28690a0d6e", "bytes": 1948545, "printed_page": "CCAG VIII.3 p. 111", "source_pdf": "Catalogus_codicum_astrologorum_graec_8p3_text.pdf leaf 126", "renders": "The epitomator's dating verdict on Antiochus and Boll's footnote showing the epitomator read Rhetorius' paraphrase, not Antiochus."}
+  ],
+  "retrieved_not_stored": [
+    {"name": "CCAG8.4.pdf", "bytes": 57095027, "sha256": "32ce5e1a7902f928a889037311e25a0fe2c8bd7384bfc08940060dd96cdcbd46", "url": "https://archive.org/download/ccag-8.4/CCAG8.4.pdf", "note": "Scan used to render the five CCAG VIII.4 page images above."},
+    {"name": "Catalogus_codicum_astrologorum_graec_1.pdf", "bytes": 6287561, "sha256": "382b38ef47e8d7516eddbe0af2c4655b4bd94f02785065b696d77f836c10f331", "url": "https://archive.org/download/CatalogusCodicumAstrologorumGraec1/Catalogus_codicum_astrologorum_graec_1.pdf", "note": "Scan used to render the two CCAG I page images above."},
+    {"name": "Catalogus_codicum_astrologorum_graec_8p3_text.pdf", "bytes": 7409454, "sha256": "7a42939378f055d3f9748654c6ff298c3d81e25e5a80c18a4c32a13b90532183", "url": "https://archive.org/download/CatalogusCodicumAstrologorumGraec8p3/Catalogus_codicum_astrologorum_graec_8p3_text.pdf", "note": "Scan used to render the two CCAG VIII.3 page images above."}
+  ],
+  "attempted_and_failed": [
+    {
+      "target": "Rhetorius, Compendium astrologicum secundum epitomen in cod. Paris. gr. 2425 servatam, ed. David Pingree, completed by Stephan Heilen (De Gruyter/Teubner, 2009)",
+      "attempt": "Not attempted for download. It is in copyright and no lawful open copy exists.",
+      "failure_class": "rights, not access",
+      "unblocks": "The modern chapter numbering, the full apparatus, and the chapters Cumont did not print."
+    },
+    {
+      "target": "John Lydus, De ostentis, ed. Wachsmuth 1897, usable Greek text",
+      "attempt": "Full OCR text layer downloaded and hashed.",
+      "failure_class": "OCR failure - the scan's text layer transliterates Latin into Greek glyphs and corrupts the Greek",
+      "unblocks": "Rendering page images from the Wachsmuth scan, or locating a scan with a Greek-aware OCR pass, would allow the portent branch to be encoded."
+    },
+    {
+      "target": "Per-leaf page images through the Archive.org /page/nN endpoint on item ccag-8.4",
+      "attempt": "Requested n124_w1800.jpg through n130_w1800.jpg.",
+      "failure_class": "endpoint returned one identical image for every leaf (the item bundles twenty PDFs against a single jp2 zip)",
+      "unblocks": "Resolved by downloading the scan PDF and rendering locally; recorded so the shortcut is not retried."
+    }
+  ]
+}

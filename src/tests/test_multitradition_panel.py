@@ -7,6 +7,7 @@ reproduced, and a broken section cannot take down the panel.
 
 from __future__ import annotations
 
+import json
 from datetime import date
 
 import pytest
@@ -1165,18 +1166,110 @@ def test_egyptian_surfaces_the_sallier_iv_access_refusal(
 
 
 @pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
-def test_ziwei_refuses_the_chart_without_a_lunar_month(birth: BirthInput) -> None:
+def test_ziwei_only_builds_a_chart_when_every_calendar_regime_agrees(
+    birth: BirthInput,
+) -> None:
+    """The regime check is a gate, not decoration: disagreement must refuse."""
+    section = _section(build_panel(birth), "ziwei_doushu")
+    check = section["facts"]["calendar_regime_check"]
+    construction = section["facts"]["chart_construction"]
+
+    months = {regime["chart_month"] for regime in check["regimes"]}
+    assert check["chart_month_invariant"] is (len(months) == 1)
+
+    if check["chart_month_invariant"]:
+        assert construction["status"] == "constructed_palaces_only"
+        assert construction["chart_month"] == check["chart_month"]
+    else:
+        assert construction["status"] == "blocked_calendar_regimes_disagree"
+        assert "life_palace" not in construction
+        assert "four_transformations" not in section["facts"]
+
+    # Whatever the outcome, these stay refused for reasons the regime cannot fix.
+    refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
+    assert "five tigers" in refusals
+    assert "bureau" in refusals
+    assert "decade" in refusals
+
+
+@pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
+def test_ziwei_never_places_a_main_star_or_a_meaning(birth: BirthInput) -> None:
+    """Palaces are a board. The pack has no table that puts a piece on it."""
     section = _section(build_panel(birth), "ziwei_doushu")
     construction = section["facts"]["chart_construction"]
-    assert construction["status"] == "blocked_no_lunisolar_profile"
-    blocked = " ".join(construction["blocked_operations"]).lower()
-    for operation in ("life palace", "body palace", "topic palace", "four transf"):
-        assert operation in blocked
-    # No palace may be placed for this birth anywhere in the facts.
-    assert "life_palace" not in section["facts"]
-    assert "body_palace" not in section["facts"]
-    refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
-    assert "lunar" in refusals and "five tigers" in refusals
+    if construction["status"] != "constructed_palaces_only":
+        return
+    absent = " ".join(construction["still_absent"]).lower()
+    for missing in ("bureau", "main star", "five tigers", "meaning"):
+        assert missing in absent
+    # No main star may be PLACED on any palace - the fourteen main stars must
+    # appear nowhere in the palace/board facts. (Four Transformations is a
+    # separate, explicitly disclosed table lookup keyed on year stem alone,
+    # not a placement, and the pack's own worked-example reproduction in
+    # vector_selfcheck legitimately names stars too - neither is checked here.)
+    board_blob = json.dumps(construction).lower()
+    for star in ("ziwei", "tianfu", "pojun", "tanlang", "qisha"):
+        assert f'"{star}"' not in board_blob
+    assert not section.get("reading")
+
+
+def test_ziwei_life_and_body_palace_structure() -> None:
+    """Life and body are mirror counts from the month palace; check the algebra."""
+    from src.engine.multitradition.ziwei import (
+        BRANCHES,
+        body_palace_branch,
+        life_palace_branch,
+        month_palace_branch,
+    )
+
+    for month in range(1, 13):
+        anchor = BRANCHES.index(month_palace_branch(month))
+        lives = {life_palace_branch(month, hour) for hour in BRANCHES}
+        bodies = {body_palace_branch(month, hour) for hour in BRANCHES}
+        # Each sweeps all twelve branches exactly once across the twelve hours.
+        assert lives == set(BRANCHES)
+        assert bodies == set(BRANCHES)
+        for hour in BRANCHES:
+            life = BRANCHES.index(life_palace_branch(month, hour))
+            body = BRANCHES.index(body_palace_branch(month, hour))
+            # Equidistant from the month palace in opposite directions.
+            assert (anchor - life) % 12 == (body - anchor) % 12
+        # Zi hour puts both on the month palace - the pack's own month-1 example.
+        assert life_palace_branch(month, "zi") == month_palace_branch(month)
+        assert body_palace_branch(month, "zi") == month_palace_branch(month)
+
+
+def test_ziwei_four_transformations_table_is_complete_and_distinct() -> None:
+    """Ten stems, four distinct stars each, no stem missing."""
+    from src.engine.multitradition.ziwei import four_transformations
+
+    stems = ("jia", "yi", "bing", "ding", "wu", "ji", "geng", "xin", "ren", "gui")
+    for stem in stems:
+        row = four_transformations(stem)
+        assert set(row) == {"lu", "quan", "ke", "ji"}
+        assert len(set(row.values())) == 4, f"{stem} repeats a star"
+
+
+def test_ziwei_chart_month_survives_every_meridian_for_the_fairfield_birth(
+    fairfield_panel: dict,
+) -> None:
+    """The claim that makes the configured calendar defendable, asserted directly.
+
+    Three regimes, one chart month - and a lunar DAY that does move, which is
+    the stated reason the bureau stays refused. If that ever stops being true
+    the refusal loses its evidence and this test should fail loudly.
+    """
+    check = _section(fairfield_panel, "ziwei_doushu")["facts"][
+        "calendar_regime_check"
+    ]
+    assert {r["regime_id"] for r in check["regimes"]} == {
+        "purple_mountain_120e",
+        "beijing_local_mean_time",
+        "indochina_105e",
+    }
+    assert {r["chart_month"] for r in check["regimes"]} == {6}
+    assert check["chart_month_invariant"] is True
+    assert check["lunar_day_invariant"] is False
 
 
 def test_ziwei_reproduces_its_pack_vectors(fairfield_panel: dict) -> None:

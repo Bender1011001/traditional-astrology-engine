@@ -1609,6 +1609,56 @@
           ]
         }
       ]
+    },
+    {
+      "track_id": "byzantine_greek",
+      "display_name": "Byzantine Greek astrology (Rhetorius and epitomators)",
+      "registry_tradition_ids": [
+        "byzantine_greek"
+      ],
+      "source_audit": "byzantine/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "byzantine_rhetorius_collated_rules",
+          "name": "Recension P/L and epitome rules with page-image collation",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "byzantine/source_audit.md",
+            "byzantine/rhetorius_rule_manifest.json",
+            "byzantine/rhetorius_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "independent Byzantine-Greek review and a second passage-to-predicate encoder before any rule may leave research status",
+            "recension boundaries (P / L / epitome) must never be merged - a school_id per recension is load-bearing, not cosmetic",
+            "the Second Inspection of the pinax protocol is lost outright in every described witness; nothing will unblock it",
+            "the final chapter on imperial nativities is a scribal refusal in the sole complete codex, not an access gap"
+          ]
+        },
+        {
+          "module_id": "byzantine_ocr_pending_and_source_gated",
+          "name": "OCR-only rules pending page-image collation, and the undefined poleuon predicate",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "source_limited",
+          "implementation_state": "source_design_only",
+          "artifacts": [
+            "byzantine/source_audit.md",
+            "byzantine/rhetorius_rule_manifest.json"
+          ],
+          "remaining_gates": [
+            "page images for CCAG VIII.4 p.126 (dodekatopos), p.93 and p.92 (epitome), and CCAG I p.147 (eye-injuring signs) - all currently OCR-only",
+            "the poleuon/diepon technique (ch. 56) cannot be computed at all: the surviving chapter never defines what its ordinal sets enumerate, and the fuller text (Venetus 7 f. 393) was inaccessible to Cumont 'because of the war'",
+            "Vaticanus 1056's collation of chapter 55 (CCAG V.3 pp. 79-80) is retrievable but not yet fetched",
+            "the 2009 Pingree/Heilen edition would give a modern chapter numbering, but its rights are not cleared"
+          ]
+        }
+      ]
     }
   ]
 }

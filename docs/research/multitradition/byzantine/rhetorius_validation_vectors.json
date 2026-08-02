@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-02",
+  "tradition_id": "byzantine_greek",
+  "source_pack_id": "byzantine_rhetorius_ccag_1898_1921_v1",
+  "status": "research_only; every rule in rhetorius_rule_manifest.json is covered by at least one vector. Vectors encode what the Greek says, including its lacunae and its refusals; a vector whose expected value is a refusal is a real test, because the failure mode this pack guards against is a composer that quietly fills a gap.",
+  "source_ids": [
+    "byzantine_rhetorius_ccag_08_4_cumont_1921",
+    "byzantine_rhetorius_ccag_01_boll_1898",
+    "byzantine_epitome_ccag_08_3_boudreaux_1912"
+  ],
+  "vectors": [
+    {
+      "vector_id": "byz.v.pinax.order_is_seven_with_two_holes",
+      "rule_ids": ["byz.rhet.p.pinax.seven_inspections_order"],
+      "inputs": {"request": "enumerate the inspection order of Rhetorius cap. nd' as the surviving text supports it"},
+      "expected": {
+        "ordered_slots": 7,
+        "slot_1": "present",
+        "slot_2": "lost_entirely",
+        "slot_3": "fragmentary_tail_only",
+        "slot_4": "present",
+        "slot_5": "present",
+        "slot_6": "present_but_breaks_off_mid_sentence",
+        "slot_7": "present",
+        "completeness_claim_may_be_quoted": true,
+        "completeness_claim_may_be_acted_on_as_if_whole": false
+      },
+      "provenance": "CCAG VIII.4 pp. 118-124; Cumont's note to p. 119.16 records that the Second Inspection perished entirely and the Third survives only as the end of its argument."
+    },
+    {
+      "vector_id": "byz.v.pinax.first_item_is_birth_ease",
+      "rule_ids": ["byz.rhet.p.pinax.inspection1_opening_sequence"],
+      "inputs": {"request": "what does the first inspection require before anything else"},
+      "expected": {"first_item": "ease or difficulty of the birth", "second_item": "doryphoriai of the lights by sect-mates or contrary-sect planets", "lots_examined_in_first_inspection": true},
+      "provenance": "CCAG VIII.4 p. 118 final lines: 'pro panton deon zetein peri eutokias kai dystokias kai houtos tas ton photon doryphorias'."
+    },
+    {
+      "vector_id": "byz.v.pinax.first_inspection_ends_at_ic_triplicity",
+      "rule_ids": ["byz.rhet.p.pinax.inspection1_opening_sequence", "byz.rhet.p.ic_triplicity_lords_death_and_injury"],
+      "inputs": {"chart": {"ic_first_triplicity_lord": "well placed", "ic_second_triplicity_lord": "beheld by malefics"}},
+      "expected": {"first_lord_signifies": "quality of the death", "second_lord_signifies": "the bodily injury", "second_lord_worsened": true, "first_lord_worsened": false},
+      "provenance": "CCAG VIII.4 p. 119.17-20."
+    },
+    {
+      "vector_id": "byz.v.lots.afflicted_lot_lords_give_atropha",
+      "rule_ids": ["byz.rhet.p.lot_lords_afflicted_atropha"],
+      "inputs": {"chart": {"lot_of_fortune_lord": "under the beams and fallen", "lot_of_daimon_lord": "beheld by malefics", "lights": "beheld by malefics"}},
+      "expected": {"source_judgment": "atropha - the offspring is not reared", "rendered_to_customer": false, "reason_for_refusal": "a viability claim about a living person"},
+      "provenance": "CCAG VIII.4 p. 119.8-13."
+    },
+    {
+      "vector_id": "byz.v.lots.unafflicted_lot_lords_do_not_trigger",
+      "rule_ids": ["byz.rhet.p.lot_lords_afflicted_atropha"],
+      "inputs": {"chart": {"lot_of_fortune_lord": "angular, not under the beams, unaspected by malefics", "lot_of_daimon_lord": "angular, beheld by Jupiter", "lights": "unafflicted"}},
+      "expected": {"rule_fires": false, "source_judgment": null},
+      "provenance": "Negative case: the rule's predicate is a conjunction of adverse conditions and none obtains."
+    },
+    {
+      "vector_id": "byz.v.syzygy.malefic_precedence_parent_clause_is_refused",
+      "rule_ids": ["byz.rhet.p.inspection4_syzygy_precedence_parents"],
+      "inputs": {"chart": {"planets_rising_before_the_lights": ["Saturn", "Mars"], "parairetai_present": true}},
+      "expected": {"source_judgment": "parents called foreign, of another nation, base-born or lowly", "rendered_to_customer": false, "reason_for_refusal": "assigns ethnic and social status"},
+      "provenance": "CCAG VIII.4 p. 120.4-7."
+    },
+    {
+      "vector_id": "byz.v.syzygy.benefic_precedence_positive_branch",
+      "rule_ids": ["byz.rhet.p.inspection4_syzygy_precedence_parents"],
+      "inputs": {"chart": {"planets_rising_before_the_lights": ["Jupiter", "Venus"], "parairetai_present": false}},
+      "expected": {"source_judgment": "matters of fortune and of the parents will be well", "rendered_to_customer": false, "reason_for_refusal": "research_only pack; no Byzantine reading is published yet"},
+      "provenance": "CCAG VIII.4 p. 120.3-4."
+    },
+    {
+      "vector_id": "byz.v.parents.lights_in_tropical_signs",
+      "rule_ids": ["byz.rhet.p.lights_tropical_signs_foreign_parents"],
+      "inputs": {"chart": {"sun_sign": "Cancer", "moon_sign": "Capricorn", "tropical_signs": ["Aries", "Cancer", "Libra", "Capricorn"]}},
+      "expected": {"predicate_satisfied": true, "source_judgment": "parents of another stock or nation", "rendered_to_customer": false},
+      "provenance": "CCAG VIII.4 p. 120.10-11."
+    },
+    {
+      "vector_id": "byz.v.figure.nonhuman_offspring_and_its_variant",
+      "rule_ids": ["byz.rhet.p.nonhuman_offspring_figure"],
+      "inputs": {"chart": {"lord_of_moon_by_pexis": "averse to the Moon", "lord_of_ascendant": "averse to the Ascendant", "benefics_beholding_angles": true}},
+      "expected": {
+        "paris_2425_reading": "not a human being but a portent or a quadruped; with benefics on the angles, a tame or deified animal such as a dog or a cat or a bird",
+        "monacensis_reading": "neither a human being nor a beast, but some indistinct portent",
+        "readings_merged": false,
+        "rendered_to_customer": false
+      },
+      "provenance": "CCAG VIII.4 p. 120.20-26 and the apparatus recording M's divergent text and its misplacement of the passage into the decan chapter."
+    },
+    {
+      "vector_id": "byz.v.lots.daimon_afflicted_by_night",
+      "rule_ids": ["byz.rhet.p.daimon_afflicted_nocturnal_downfall"],
+      "inputs": {"chart": {"sect": "nocturnal", "lot_of_fortune": "well placed", "lot_of_fortune_lord": "well placed", "lot_of_daimon": "badly placed", "lot_of_daimon_lord": "beheld by malefics"}},
+      "expected": {"source_judgment": "downfall for the nativity", "intensified_by_night": true, "authority_named_in_text": "Ptolemy", "rendered_to_customer": false},
+      "provenance": "CCAG VIII.4 p. 121.7-13, which states the reason as 'because according to Ptolemy the Lot of Daimon is the Lot of Fortune'."
+    },
+    {
+      "vector_id": "byz.v.lots.daimon_rule_does_not_fire_by_day_alone",
+      "rule_ids": ["byz.rhet.p.daimon_afflicted_nocturnal_downfall"],
+      "inputs": {"chart": {"sect": "diurnal", "lot_of_fortune": "well placed", "lot_of_daimon": "well placed", "lot_of_daimon_lord": "unafflicted"}},
+      "expected": {"rule_fires": false, "note": "sect alone is an intensifier in this passage, not the trigger; the trigger is the affliction of Daimon and its lord"},
+      "provenance": "Negative case derived from the same sentence."
+    },
+    {
+      "vector_id": "byz.v.fortune.lord_in_ninth_gives_sacred_gain",
+      "rule_ids": ["byz.rhet.p.fortune_lord_placement_source_of_gain"],
+      "inputs": {"chart": {"lot_of_fortune": "well placed and beheld by benefics", "lord_of_fortune_place_from_ascendant": 9}},
+      "expected": {"source_judgment": "gain from sacred matters or sacred places", "alternative_trigger": "the lord of Daimon in the same place produces the same result"},
+      "provenance": "CCAG VIII.4 p. 121.14-17."
+    },
+    {
+      "vector_id": "byz.v.fortune.lord_at_ic_and_in_water",
+      "rule_ids": ["byz.rhet.p.fortune_lord_placement_source_of_gain"],
+      "inputs": {"chart": {"lord_of_fortune_place": "lower midheaven", "lot_of_fortune_sign": "Pisces", "lord_of_fortune_sign": "Cancer"}},
+      "expected": {"if_ic": "treasure-guardian", "if_watery": "gain from wet or nautical matters", "general_principle_applies": "judge from the nature of the sign and the position"},
+      "provenance": "CCAG VIII.4 p. 121.17-22."
+    },
+    {
+      "vector_id": "byz.v.fortune.twelfth_cause_split_by_malefic",
+      "rule_ids": ["byz.rhet.p.twelfth_from_fortune_malefic_causes"],
+      "inputs": {"chart": {"twelfth_from_fortune_beheld_by": ["Mars"], "benefics_beholding_that_place": false, "parairetai": true}},
+      "expected": {"cause_class": ["conflagrations", "rulers", "soldiers", "brigand raids"], "saturn_branch_applies": false, "requires_malefic_only_testimony": true},
+      "provenance": "CCAG VIII.4 p. 121.28-33."
+    },
+    {
+      "vector_id": "byz.v.fortune.twelfth_cause_saturn_branch",
+      "rule_ids": ["byz.rhet.p.twelfth_from_fortune_malefic_causes"],
+      "inputs": {"chart": {"twelfth_from_fortune_beheld_by": ["Saturn"], "benefics_beholding_that_place": false}},
+      "expected": {"cause_class": ["shipwrecks", "lawsuits", "elderly persons", "ecclesiastical or authoritative persons", "eunuchs", "demolitions over old affairs", "persons connected with the dead"], "editorial_uncertainty_disclosed": "Cumont queries whether 'ecclesiastical' should read 'in authority'"},
+      "provenance": "CCAG VIII.4 p. 121.31-33 with apparatus to line 33."
+    },
+    {
+      "vector_id": "byz.v.fortune.twelfth_rule_blocked_by_benefic_testimony",
+      "rule_ids": ["byz.rhet.p.twelfth_from_fortune_malefic_causes"],
+      "inputs": {"chart": {"twelfth_from_fortune_beheld_by": ["Saturn", "Jupiter"]}},
+      "expected": {"rule_fires": false, "reason": "the text requires the place to be beheld by malefics ONLY"},
+      "provenance": "Negative case: 'hypo kakopoion monon theoroumenos'."
+    },
+    {
+      "vector_id": "byz.v.ages.lots_first_lords_last",
+      "rule_ids": ["byz.rhet.p.lots_first_age_lords_last_age"],
+      "inputs": {"request": "assign the ages and the topical domains of the two principal lots"},
+      "expected": {"lots_signify": "the first age", "lords_of_lots_signify": "the last age", "fortune_domain": ["bodily affections", "acquisitions"], "fortune_key_place": "the eleventh from Fortune and its lord", "daimon_domain": ["soul", "actions", "reputations", "manner"], "basis_lord": "foundation of Fortune"},
+      "provenance": "CCAG VIII.4 p. 122.19-23."
+    },
+    {
+      "vector_id": "byz.v.timing.multi_origin_distribution_required",
+      "rule_ids": ["byz.rhet.p.annual_distribution_multiple_origins"],
+      "inputs": {"request": "from which points are the years of the nativity cast"},
+      "expected": {
+        "required_origins": ["Ascendant", "Sun", "Moon", "Lot of Fortune"],
+        "conditional_origins": ["lot of the father", "lot of the mother"],
+        "ascendant_only_is_sufficient": false,
+        "step_length_supplied_by_this_passage": false
+      },
+      "provenance": "CCAG VIII.4 p. 122.23-28, which explicitly forbids casting from the Ascendant alone."
+    },
+    {
+      "vector_id": "byz.v.timing.no_profection_computed_without_step_length",
+      "rule_ids": ["byz.rhet.p.annual_distribution_multiple_origins"],
+      "inputs": {"chart": {"age_years": 34, "ascendant_sign": "Virgo"}},
+      "expected": {"profected_sign_returned": null, "reason": "the chapter names the origins but never states the length of a step; computing one sign per year here would be an import from another author"},
+      "provenance": "Negative case protecting against silent completion of the passage."
+    },
+    {
+      "vector_id": "byz.v.timing.early_late_reversal",
+      "rule_ids": ["byz.rhet.p.horizon_versus_fortune_life_order_reversal"],
+      "inputs": {"chart": {"stars_to_eastern_horizon": "badly configured", "stars_to_lot_of_fortune_and_its_lord": "well configured"}},
+      "expected": {"early_life": "ineffective", "later_life": "effective", "reversed_case_expected": "if the configuration is inverted, the order of effectiveness inverts"},
+      "provenance": "CCAG VIII.4 p. 122.14-19."
+    },
+    {
+      "vector_id": "byz.v.ages.sixth_and_twelfth_lords_by_angle",
+      "rule_ids": ["byz.rhet.p.sixth_and_twelfth_lords_angular_by_age"],
+      "inputs": {"chart": {"lord_of_twelfth": "on the Ascendant", "lord_of_sixth": "on the Descendant"}},
+      "expected": {"lord_of_twelfth_harms": "youth", "lord_of_sixth_harms": "old age"},
+      "provenance": "CCAG VIII.4 p. 123.1-3."
+    },
+    {
+      "vector_id": "byz.v.lot.anairetes_formula_and_test",
+      "rule_ids": ["byz.rhet.p.lot_of_anairetes_formula_and_moon_aversion"],
+      "inputs": {"chart": {"sect": "diurnal", "lord_of_ascendant_longitude_deg": 100.0, "moon_longitude_deg": 160.0, "ascendant_longitude_deg": 20.0}},
+      "expected": {"lot_longitude_deg": 80.0, "formula": "Ascendant + (Moon - lord of Ascendant), reversed by night", "moon_beholds_lot_test": "if the Moon does not behold it, the text calls it a sign of violent death", "death_judgment_rendered": false},
+      "provenance": "CCAG VIII.4 p. 123.3-6. Arithmetic: 20 + (160 - 100) = 80."
+    },
+    {
+      "vector_id": "byz.v.lot.aitiatikos_formula_day_and_night",
+      "rule_ids": ["byz.rhet.p.aitiatikos_lot_formula"],
+      "inputs": {"chart": {"saturn_longitude_deg": 300.0, "mars_longitude_deg": 45.0, "ascendant_longitude_deg": 10.0}},
+      "expected": {"day_lot_longitude_deg": 115.0, "night_lot_longitude_deg": 265.0, "malefic_testimony_makes_it": "precarious and dangerous, making nativities destructive"},
+      "provenance": "CCAG VIII.4 p. 124.8-11. Day: 10 + (45 - 300 mod 360 = 105) = 115. Night reverses the arc: 10 - 105 = -95 = 265."
+    },
+    {
+      "vector_id": "byz.v.fixedstars.angular_degrees_override_cadent_planets",
+      "rule_ids": ["byz.rhet.p.fixed_stars_on_angular_degrees"],
+      "inputs": {"chart": {"planets": "all cadent", "bright_fixed_stars_on_angular_degrees": true}},
+      "expected": {"source_judgment": "great and surpassing nativities", "upstream_author": "the anonymous astrologer of AD 379", "anemos_condition_implemented": false},
+      "provenance": "CCAG VIII.4 p. 124.20-28 and Cumont's note 3 identifying the source as CCAG V.1 pp. 196-197."
+    },
+    {
+      "vector_id": "byz.v.tokos.sect_and_gender_matrix",
+      "rule_ids": ["byz.rhet.p.birth_ease_by_sect_and_gender"],
+      "inputs": {"chart": {"native_sex": "male", "sun_sign_gender": "masculine", "moon_sign_gender": "masculine", "ascendant_beheld_by": ["Jupiter"]}},
+      "expected": {"source_judgment": "easy birth", "same_configuration_on_female_nativity": "difficult birth", "title_attribution_in_vaticanus_1056": "according to Dorotheus", "title_attribution_in_paris_2425": "On childbirth, with Dorotheus suppressed", "rendered_to_customer": false},
+      "provenance": "CCAG VIII.4 p. 125.3-6 with the apparatus recording the Vaticanus title."
+    },
+    {
+      "vector_id": "byz.v.tokos.jupiter_and_saturn_and_mars_on_ascendant",
+      "rule_ids": ["byz.rhet.p.birth_ease_by_sect_and_gender"],
+      "inputs": {"chart": {"planet_on_ascendant": "Mars", "ascendant_sign_gender": "feminine"}},
+      "expected": {"jupiter_case": "easy birth, and the more nobly born parent follows the gender of the rising sign", "saturn_case": "difficult birth, especially in feminine signs", "mars_case": "sudden and short delivery, especially on the road or in the bath", "rendered_to_customer": false},
+      "provenance": "CCAG VIII.4 p. 125.9-14."
+    },
+    {
+      "vector_id": "byz.v.signs.orthos_plagios_partition",
+      "rule_ids": ["byz.rhet.p.orthos_and_plagios_signs"],
+      "inputs": {"request": "partition the zodiac into straight and oblique signs as cap. ne' defines them"},
+      "expected": {
+        "orthos": ["Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius"],
+        "plagios": ["Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini"],
+        "partition_is_exhaustive": true,
+        "moon_in_plagios_enclosed_by_malefics": "difficult birth",
+        "clause_present_in_vaticanus_1056": false
+      },
+      "provenance": "CCAG VIII.4 p. 125.14-20 with the apparatus recording V's omission."
+    },
+    {
+      "vector_id": "byz.v.poleuon.predicate_is_undefined",
+      "rule_ids": ["byz.rhet.p.poleuon_hour_lord_unresolved"],
+      "inputs": {"chart": {"birth_hour_of_day": 3, "planetary_hour_lord": "Saturn"}},
+      "expected": {
+        "delineation_returned": null,
+        "reason": "cap. ns' gives ordinal sets (Saturn 1 3 8 10; Jupiter 1 4 10 11; Mars 1 5 6 8) without ever saying what they enumerate",
+        "guessing_hours_or_places_permitted": false,
+        "unblocking_witness": "cod. Venetus 7 f. 393, which Cumont could not inspect"
+      },
+      "provenance": "CCAG VIII.4 p. 125.21-27; numerals read from the page image because the OCR corrupted them."
+    },
+    {
+      "vector_id": "byz.v.poleuon.closing_conditionals_are_legible",
+      "rule_ids": ["byz.rhet.p.poleuon_hour_lord_unresolved"],
+      "inputs": {"chart": {"diepon": "Saturn", "moon_aspect_to_diepon": "opposition"}},
+      "expected": {"source_judgment": "makes an epileptic and one possessed by a god", "rendered_to_customer": false, "reason_for_refusal": "medical and religious claim about a person"},
+      "provenance": "CCAG VIII.4 p. 126.9-11."
+    },
+    {
+      "vector_id": "byz.v.places.twelfth_names_and_reverse_order",
+      "rule_ids": ["byz.rhet.p.twelfth_place_names_and_significations"],
+      "inputs": {"request": "state the opening of cap. nz' and its enumeration direction"},
+      "expected": {
+        "first_place_expounded": 12,
+        "direction": "descending from the twelfth",
+        "names": ["kakodaimonema", "proanaphora of the Ascendant", "metakosmios"],
+        "significations": ["enemies", "slaves", "quadrupeds", "everything accomplished before the hour of birth"],
+        "credited_author_in_second_class_codices": "Hermes Trismegistus"
+      },
+      "provenance": "CCAG VIII.4 p. 126.12-18."
+    },
+    {
+      "vector_id": "byz.v.places.twelve_names_and_cadent_epithet",
+      "rule_ids": ["byz.rhet.p.dodekatopos_names_and_significations"],
+      "inputs": {"request": "return the Byzantine name-sets of all twelve places and the exposition order of cap. nz'"},
+      "expected": {
+        "exposition_order": [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "places_covered": 12,
+        "metakosmios_applies_to": [3, 6, 9, 12],
+        "metakosmios_is_the_cadent_set": true,
+        "place_8_reason_given": "the sign is averse to the Ascendant, therefore it signifies death, the averse of life",
+        "place_5_owner": "Venus, who rejoices there",
+        "place_9_owner": "the Sun",
+        "place_10_occupants_that_rejoice": "the sect leaders"
+      },
+      "provenance": "CCAG VIII.4 cap. nz', headings at pp. 126, 131, 139, 144, 145, 152, 154, 158, 161, 163, 166, 170, cross-checked against the volume index."
+    },
+    {
+      "vector_id": "byz.v.places.delineation_tables_are_withheld",
+      "rule_ids": ["byz.rhet.p.dodekatopos_names_and_significations"],
+      "inputs": {"request": "return the delineation of Mercury in the fourth place from cap. nz'"},
+      "expected": {
+        "delineation_returned": null,
+        "reason": "Cumont records that the Mercury and Moon material printed in the fourth place belongs to the eleventh, and that ninth-place material was inserted into the fourth and then repeated in the ninth; the printed place assignments are known to be corrupt",
+        "unblocking_document": "a critical apparatus that resolves the misfiling, i.e. the Pingree/Heilen edition, or a systematic collation against Valens II.5-14 and Firmicus III.2-7"
+      },
+      "provenance": "CCAG VIII.4 p. 117-118, Cumont's analysis of the chapter's two strata and its misplaced sections."
+    },
+    {
+      "vector_id": "byz.v.l.sect_leaders_and_mercury",
+      "rule_ids": ["byz.rhet.l.sect_leaders_by_day_and_night"],
+      "inputs": {"chart": {"sect": "diurnal"}},
+      "expected": {"sect_leaders": ["Sun", "Saturn", "Jupiter"], "nocturnal_leaders": ["Moon", "Venus", "Mars"], "mercury_assigned_to_a_sect": false, "attribution_alternatives": ["Rhetorius (families a p q f m)", "Antiochus (cod. Laur. XXVIII 34 title, cod. Neapolitanus II C 33 heading)"]},
+      "provenance": "CCAG I p. 146.1-4 with apparatus note 1."
+    },
+    {
+      "vector_id": "byz.v.l.malefics_well_placed_magnify_fortunes",
+      "rule_ids": ["byz.rhet.l.benefic_malefic_are_nominal_categories"],
+      "inputs": {"chart": {"saturn": "well placed by phase, by sect and by place", "jupiter": "badly placed"}},
+      "expected": {
+        "saturn_effect": "magnifies the fortunes",
+        "jupiter_effect": "harms them",
+        "benefic_malefic_labels_are_absolute": false,
+        "greek_verb": "megalynousi",
+        "ocr_misreading_rejected": "metalynousi",
+        "editorial_supplement_disclosed": "keimenoi is Kroll's conjecture and stands in no manuscript"
+      },
+      "provenance": "CCAG I p. 146.7-10, read from the page image; the OCR text of the same line is wrong."
+    },
+    {
+      "vector_id": "byz.v.l.mercury_takes_the_colour_of_its_company",
+      "rule_ids": ["byz.rhet.l.benefic_malefic_are_nominal_categories"],
+      "inputs": {"chart": {"mercury_configured_with": ["Mars", "Saturn"]}},
+      "expected": {"mercury_class": "malefic in this chart", "mercury_class_if_with_benefics": "benefic", "mercury_has_fixed_class": false},
+      "provenance": "CCAG I p. 146.5-7."
+    },
+    {
+      "vector_id": "byz.v.l.four_angles_best_blend",
+      "rule_ids": ["byz.rhet.l.four_angles_elemental_blend"],
+      "inputs": {"chart": {"ascendant_sign": "Aries", "midheaven_sign": "Capricorn", "descendant_sign": "Libra", "lower_midheaven_sign": "Cancer"}},
+      "expected": {"elements_at_angles": ["fire", "earth", "air", "water"], "all_four_present": true, "judgment": "the blend is best", "clause_present_in_cod_L": false},
+      "provenance": "CCAG I p. 146.27 - p. 147.1, the worked example given in the chapter itself, with the apparatus noting cod. L omits the closing clause."
+    },
+    {
+      "vector_id": "byz.v.l.four_angles_blend_not_best",
+      "rule_ids": ["byz.rhet.l.four_angles_elemental_blend"],
+      "inputs": {"chart": {"ascendant_sign": "Aries", "midheaven_sign": "Sagittarius", "descendant_sign": "Libra", "lower_midheaven_sign": "Gemini"}},
+      "expected": {"elements_at_angles": ["fire", "fire", "air", "air"], "all_four_present": false, "judgment": "the chapter's best-blend condition is not met"},
+      "provenance": "Negative case constructed from the same rule; the source states the positive condition only."
+    },
+    {
+      "vector_id": "byz.v.l.eye_signs_have_named_causes",
+      "rule_ids": ["byz.rhet.l.eye_injuring_signs_by_nebulous_stars"],
+      "inputs": {"request": "list the signs the chapter calls harmful to the eyes and the reason each is given"},
+      "expected": {
+        "Taurus": "the Pleiad",
+        "Cancer": "the little cloud",
+        "Scorpio": "the sting",
+        "Sagittarius": "the arrow-point",
+        "Capricorn": "the thorn",
+        "Aquarius": "the urn",
+        "Leo": "in part",
+        "medical_claim_rendered": false
+      },
+      "provenance": "CCAG I p. 147.15-20."
+    },
+    {
+      "vector_id": "byz.v.epit.kenodromia_thirty_degree_bound",
+      "rule_ids": ["byz.epit.moon_kenodromia_definition"],
+      "inputs": {"chart": {"moon_longitude_deg": 12.0, "next_applying_planet_longitude_deg": 55.0, "applications_by_sign": false, "applications_by_degree": false, "applications_by_adherence": false, "applications_by_configuration": false}},
+      "expected": {"separation_deg": 43.0, "within_thirty_degrees": false, "kenodromia": true, "attribution": "the Byzantine epitome, not Antiochus directly"},
+      "provenance": "CCAG VIII.3 p. 110.30-32."
+    },
+    {
+      "vector_id": "byz.v.epit.kenodromia_blocked_within_thirty",
+      "rule_ids": ["byz.epit.moon_kenodromia_definition"],
+      "inputs": {"chart": {"moon_longitude_deg": 12.0, "next_applying_planet_longitude_deg": 38.0}},
+      "expected": {"separation_deg": 26.0, "within_thirty_degrees": true, "kenodromia": false},
+      "provenance": "Negative case on the explicit thirty-degree bound of the same definition."
+    },
+    {
+      "vector_id": "byz.v.epit.syndesmos_is_motion_relative",
+      "rule_ids": ["byz.epit.moon_syndesmos_definition"],
+      "inputs": {"chart": {"moon_daily_motion_deg": 13.2, "moon_elongation_from_sun_deg": 6.0}},
+      "expected": {"threshold_is_fixed_orb": false, "threshold_source": "the Moon's own day-and-night motion", "state": "in bond while she has not drawn off that amount", "loosing_state": "after she has drawn off the same degrees"},
+      "provenance": "CCAG VIII.3 p. 110.26-29; the definition is stated relative to the Moon's daily motion, not to a constant."
+    },
+    {
+      "vector_id": "byz.v.epit.byzantine_attribution_is_not_authorship",
+      "rule_ids": ["byz.epit.antiochus_dating_verdict_is_unreliable"],
+      "inputs": {"claim": "the Byzantine epitome states that Antiochus is later than Paul of Alexandria and Valens"},
+      "expected": {
+        "claim_repeated_as_fact": false,
+        "recorded_as": "evidence about Byzantine reading practice",
+        "refutation": "Porphyry cites Antiochus, so he is pre-third-century; the epitomator read Rhetorius' sixth-century paraphrase in which Valens and Paul were already interpolated",
+        "rules_re_attributed_to_antiochus": false
+      },
+      "provenance": "CCAG VIII.3 p. 111.2-3 with Boll's footnote 1."
+    },
+    {
+      "vector_id": "byz.v.epit.ptolemy_is_law_and_canon",
+      "rule_ids": ["byz.epit.ptolemy_canonised_as_law_and_rule"],
+      "inputs": {"request": "what standing does the epitome give the Tetrabiblos"},
+      "expected": {"verdict": "law and canon of the art for all who came after him", "ranked_above": ["Nechepso", "Petosiris", "Hermes"], "recapitulation_supplied_anyway": true, "stated_reason": "so as not to seem to omit the foundation"},
+      "provenance": "CCAG VIII.3 p. 93.1-15."
+    },
+    {
+      "vector_id": "byz.v.epit.experience_is_the_test",
+      "rule_ids": ["byz.epit.book_evaluation_requires_experience"],
+      "inputs": {"request": "how does the epitomator evaluate a book he has not verified"},
+      "expected": {"verdict": "he promises the same as the others, but I have not tested it by experience", "tests_named": ["peira (experience)", "logismoi (calculation)"], "possibility_that_authorities_fail_is_admitted": true},
+      "provenance": "CCAG VIII.3 p. 92.13-18."
+    }
+  ]
+}
