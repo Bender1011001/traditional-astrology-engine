@@ -196,3 +196,43 @@ nativity as quotable Greek.
 | Ptolemy (Boll/Boer, this stereotype reprint of the 1940 edition) | Yes, ordinary noise | **Ancient text: PD. This 1940 edition: unverified, flagged** | 7 rules |
 | Valens (Kroll 1908) | **No - total OCR failure** | Would be PD if usable | 0 rules; inventoried as a blocked lead only |
 | Riley's Valens translation (1990s) | Yes (it is a normal English PDF) | In copyright, modern | Location/orientation aid only, never quoted as authority |
+
+## Open question referred to the product owner (2026-08-02): the water triplicity
+
+A research pass proposed changing the LIVE engine's `PTOLEMAIC_TRIPLICITY`
+water-triangle day ruler from Mars to Venus. **The change was reverted, not
+applied**, and is recorded here instead, because it alters shipping behaviour and
+the decision is not a research call.
+
+The substance is real and worth a decision:
+
+- **Ptolemy's own text** (*Tetrabiblos* I.21) says of the watery triangle that
+  Mars has familiarity with it through Scorpio, "but since the signs are
+  feminine, the Moon by night and Venus by day, together with Mars, govern it."
+  Read straight, that gives **Venus by day, Moon by night**, with Mars as a
+  co-ruler of the triangle.
+- **Lilly's printed table** gives **Mars by day and Mars by night** for water.
+- **The engine currently holds** `("Mars", "Moon")` — Mars by day, Moon by night,
+  which matches *neither* authority exactly.
+
+The constant is named `PTOLEMAIC_TRIPLICITY` but its own comment reads
+"(Lilly Mode)", so the mismatch may be deliberate: the code may intend Lilly's
+scheme under a Ptolemaic label, in which case the day ruler should arguably be
+Mars (Lilly) rather than Venus (Ptolemy) — and the *night* ruler is then the
+part that diverges from Lilly instead.
+
+Why this is not a research-side fix:
+
+1. It feeds the Almuten Figuris scorer, so it can change the published Lord of
+   the Geniture for any day chart with planets in water signs.
+2. The three candidate tables disagree with each other, so "correcting" toward
+   one silently picks a side in a live product.
+3. The corpus convention elsewhere is to *show* such a fork rather than resolve
+   it (compare the Firmicus Sagittarius-bounds divergence recorded in
+   `delineation_rule_manifest.json`, where the engine keeps the consensus
+   reading and the outlier is disclosed).
+
+**Recommended resolution:** decide explicitly whether the constant means Ptolemy
+or Lilly, rename it accordingly, and — if both are wanted — carry both tables and
+disclose the fork the way the Hellenistic section already does for bounds and
+triplicities. No code change should be made on research authority alone.
