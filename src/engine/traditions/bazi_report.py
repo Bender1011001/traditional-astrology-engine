@@ -536,7 +536,7 @@ def build_report(birth: BirthInput) -> TraditionReport:
     facts = _facts(birth)
     report = TraditionReport(
         tradition_id="chinese_bazi",
-        display_name="BaZi 八字 — Full Reading (Ziping method)",
+        display_name="BaZi 八字 — Structural Analysis with Classical Clauses (Ziping method)",
         birth=birth.to_dict(),
     )
     _pillars(report, facts)
@@ -601,8 +601,19 @@ def _day_master(report: TraditionReport, facts: dict) -> None:
     )
     mc = facts.get("month_command")
     if mc:
+        rooted = mc.get("root_in_month_branch")
+        root_branches = mc.get("root_branches") or []
         s.notes.append(
-            f"Month command (得令): {json.dumps(mc, ensure_ascii=False)[:400]}"
+            f"Month command (得令): the month branch's season is "
+            f"**{mc.get('season_of_month_branch')}**, in which the Day Master "
+            f"stands in the state {mc.get('day_master_state')}. It is "
+            + ("rooted in the month branch itself"
+               if rooted else "not rooted in the month branch")
+            + (
+                f", with roots in the {', '.join(root_branches)} branch(es)"
+                if root_branches else ""
+            )
+            + f". {mc.get('support_assessment', '')}"
         )
     tally = facts.get("element_tally") or {}
     s.table = [{"Element": k, "Count": v} for k, v in tally.items()]

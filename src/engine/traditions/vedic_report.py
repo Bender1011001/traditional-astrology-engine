@@ -261,17 +261,10 @@ def _opening(report: TraditionReport, facts: dict, lagna: dict) -> None:
         f"Viṃśottarī daśā sequence below."
     )
     if lord_row:
-        text, why = _planet_in_bhava(lord, lord_row["house"])
-        if text:
-            d = _delineate(
-                f"jyotisha.phaladeepika.08.planet_in_bhava.{lord.lower()}",
-                text,
-                f"lagneśa {lord} in the {ORDINAL[lord_row['house']]} bhāva",
-            )
-            if d:
-                s.delineations.append(d)
-        elif why:
-            s.refusals.append(why)
+        s.notes.append(
+            f"{lord}'s own placement judgments are quoted in full in the graha "
+            "section below; the lagneśa-specific result from BPHS follows here."
+        )
         btext, brestrict, _deva = bhavesha_result(1, lord_row["house"])
         if btext:
             d = _delineate(
@@ -417,7 +410,12 @@ def _bhavas_section(
             )
         note += "."
         sub.notes.append(note)
-        if lord_row:
+        if lord_row and house == 1:
+            sub.notes.append(
+                "The lagneśa's BPHS result appears in the opening section and "
+                "is not repeated here."
+            )
+        elif lord_row:
             btext, brestrict, _deva = bhavesha_result(house, lord_row["house"])
             if btext:
                 d = _delineate(
@@ -444,21 +442,17 @@ def _bhavas_section(
                 )
         here = occupants.get(house, [])
         if here:
+            # One claim, one appearance: the occupant judgments are quoted in
+            # full in each graha's own section above. Repeating them here would
+            # inflate the report and make one source statement look like two
+            # corroborating witnesses.
             sub.notes.append(
-                "Occupied by " + ", ".join(g["graha"] for g in here) + "."
+                "Occupied by "
+                + ", ".join(g["graha"] for g in here)
+                + " — see "
+                + ("its judgment" if len(here) == 1 else "their judgments")
+                + " in the graha section above."
             )
-            for g in here:
-                text, why = _planet_in_bhava(g["graha"], house)
-                if text:
-                    d = _delineate(
-                        f"jyotisha.phaladeepika.08.planet_in_bhava.{g['graha'].lower()}",
-                        text,
-                        f"{g['graha']} occupying the {ORDINAL[house]} bhāva",
-                    )
-                    if d:
-                        sub.delineations.append(d)
-                elif why:
-                    sub.refusals.append(why)
         else:
             sub.notes.append(
                 "No graha occupies it; it is judged from its lord's condition alone."
@@ -475,6 +469,7 @@ def _yogas_section(report: TraditionReport, facts: dict) -> None:
         f"{len(yogas)} yoga(s) are formed. Each is listed with the placements "
         "that constitute it, so the claim can be checked rather than taken."
     )
+    fired_rule_ids: set[str] = set()
     yoga_rule_map = {
         "Pancha Mahapurusha": "jyotisha.phaladeepika.06.pancha_mahapurusha_yoga",
         "Kesari": "jyotisha.phaladeepika.06.kesari_and_sakata_yoga",
@@ -496,7 +491,14 @@ def _yogas_section(report: TraditionReport, facts: dict) -> None:
             (rid for key, rid in yoga_rule_map.items() if key.lower() in y["yoga"].lower()),
             None,
         )
-        if rule_id and rule_id in _rules_by_id():
+        if rule_id and rule_id in fired_rule_ids:
+            sub.notes.append(
+                "The classical judgment for this configuration is quoted under "
+                "the yoga above that first invoked it; one source statement is "
+                "not shown twice."
+            )
+        elif rule_id and rule_id in _rules_by_id():
+            fired_rule_ids.add(rule_id)
             rule = _rules_by_id()[rule_id]
             c = rule.get("conclusion", {}) or {}
             text = None

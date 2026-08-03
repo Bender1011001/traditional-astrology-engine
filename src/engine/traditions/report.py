@@ -14,13 +14,75 @@ Two rules the type enforces by construction:
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from typing import Any
+
+# ---------------------------------------------------------------------------
+# Clause-level output policy.
+#
+# The corpus-wide publication policy refuses lifespan/death claims about a
+# living person. Rule-level suppression alone proved insufficient: an ordinary
+# placement aphorism can smuggle "short-lived" into the report through a rule
+# whose CATEGORY is unobjectionable. So the policy is enforced semantically, on
+# every clause of every delineation, at construction time - Delineation is the
+# only type that can carry sourced text to the page, so redacting in its
+# __post_init__ closes every rendering path at once, including to_dict/JSON.
+#
+# Redaction is clause-level, not statement-level: the rest of the verse is
+# real sourced content and survives; only the refused clause is replaced, with
+# the topic named so the withholding is auditable.
+# ---------------------------------------------------------------------------
+
+REFUSED_TOPIC_PATTERNS: dict[str, re.Pattern[str]] = {
+    "longevity": re.compile(
+        r"\b(short[\s-]?lived|long[\s-]?lived|not\s+(be\s+)?long[\s-]?lived|"
+        r"long\s+lease\s+of\s+life|(span|length)\s+of\s+(his\s+)?life|"
+        r"longevity|lives?\s+to\s+(a\s+great\s+age|\d+)|"
+        r"full\s+span\s+of\s+years|medium\s+life)\b",
+        re.IGNORECASE,
+    ),
+    "death": re.compile(
+        r"\b(dies?\b|death|deceases?|does\s+not\s+(live|survive)|"
+        r"loss\s+of\s+life|end\s+of\s+(his|her|the)\s+life|maraka)\b",
+        re.IGNORECASE,
+    ),
+}
+_CLAUSE_SPLIT = re.compile(r"([;.!?]|\s+—\s+)")
+
+
+def redact_refused_topics(text: str) -> tuple[str, list[str]]:
+    """Replace clauses carrying refused topics; return (text, topics_redacted).
+
+    A clause is the span between clause punctuation. Splitting keeps the
+    delimiters so the surviving text reads naturally.
+    """
+    parts = _CLAUSE_SPLIT.split(text)
+    redacted: list[str] = []
+    out: list[str] = []
+    for part in parts:
+        hit = next(
+            (topic for topic, pattern in REFUSED_TOPIC_PATTERNS.items()
+             if pattern.search(part)),
+            None,
+        )
+        if hit and not _CLAUSE_SPLIT.fullmatch(part or " "):
+            out.append(f"[{hit} clause withheld per publication policy]")
+            if hit not in redacted:
+                redacted.append(hit)
+        else:
+            out.append(part)
+    return "".join(out), redacted
 
 
 @dataclass(frozen=True)
 class Delineation:
-    """One sourced statement, keyed to something actually computed in the chart."""
+    """One sourced statement, keyed to something actually computed in the chart.
+
+    Construction redacts refused-topic clauses (lifespan, death) and records
+    which topics were withheld - so no engine, renderer or serializer can leak
+    a refused clause, because the unredacted text never survives construction.
+    """
 
     text: str
     rule_id: str
@@ -28,6 +90,13 @@ class Delineation:
     evidence_grade: str
     trigger: str  # the computed fact that selected this rule
     caveat: str | None = None
+    topics_redacted: tuple[str, ...] = ()
+
+    def __post_init__(self) -> None:
+        clean, topics = redact_refused_topics(self.text)
+        if topics:
+            object.__setattr__(self, "text", clean)
+            object.__setattr__(self, "topics_redacted", tuple(topics))
 
     def to_dict(self) -> dict[str, Any]:
         payload = {
@@ -39,6 +108,8 @@ class Delineation:
         }
         if self.caveat:
             payload["caveat"] = self.caveat
+        if self.topics_redacted:
+            payload["topics_redacted"] = list(self.topics_redacted)
         return payload
 
 
@@ -140,6 +211,13 @@ def render_markdown(report: TraditionReport) -> str:
                 detail += f" · selected by: {d.trigger}"
             detail += f" · grade {d.evidence_grade}"
             lines.append(detail)
+            if d.topics_redacted:
+                lines.append(">")
+                lines.append(
+                    "> *The source also states a "
+                    + " and a ".join(d.topics_redacted)
+                    + " result here; it is withheld by publication policy.*"
+                )
             if d.caveat:
                 lines.append(">")
                 lines.append(f"> *{d.caveat}*")

@@ -345,32 +345,64 @@ def hyleg_candidates(
 def settle_hyleg(ledger: list[dict[str, Any]]) -> dict[str, Any]:
     """The first candidate in al-Qabisi's stated order that passes both gates.
 
-    His order of inspection IS the precedence, so the first full pass wins. If
-    nothing passes, the Ascendant is his stated default and is returned as such.
+    Candidate state is tri-valued: pass, fail, or UNKNOWN (not computed). An
+    uncomputed candidate earlier in the inspection order must never be treated
+    as a failure - unknown does not collapse into false. If any unknown
+    candidate precedes the first passing one, the settlement is CONDITIONAL and
+    says exactly what it is conditional on.
     """
+    unknown_before: list[str] = []
     for entry in ledger:
+        candidate = entry["candidate"]
+        if entry.get("longitude") is None:
+            # Not computed. Its eligibility is unknown, not false.
+            unknown_before.append(candidate)
+            continue
         if entry.get("eligible"):
-            return {
-                "hyleg": entry["candidate"],
+            result: dict[str, Any] = {
+                "hyleg": candidate,
                 "longitude": entry["longitude"],
-                "chosen_because": (
-                    "first candidate in al-Qabisi's own order of inspection to "
-                    "pass both the place test and the dignity-lord aspect gate"
-                ),
                 "beheld_by": entry.get("lords_that_behold_it", {}),
             }
+            if unknown_before:
+                result["status"] = "conditional"
+                result["conditional_on"] = list(unknown_before)
+                result["chosen_because"] = (
+                    "first COMPUTED candidate in al-Qabisi's order to pass both "
+                    "the place test and the dignity-lord aspect gate - but "
+                    + " and ".join(unknown_before)
+                    + (" precede it in his inspection order and were not "
+                       "computed, so this holds only if they do not qualify. "
+                       "An uncomputed candidate is unknown, not failed.")
+                )
+            else:
+                result["status"] = "settled"
+                result["chosen_because"] = (
+                    "first candidate in al-Qabisi's own order of inspection to "
+                    "pass both the place test and the dignity-lord aspect gate; "
+                    "every earlier candidate was computed and failed"
+                )
+            return result
     default = next(
         (e for e in ledger if e["candidate"] == "Ascendant"), None
     )
-    return {
+    result = {
         "hyleg": "Ascendant",
         "longitude": default["longitude"] if default else None,
+        "status": "conditional" if unknown_before else "settled",
         "chosen_because": (
-            "no candidate passed both gates; al-Qabisi's stated default is the "
-            "Ascendant degree itself"
+            "no computed candidate passed both gates; al-Qabisi's stated "
+            "default is the Ascendant degree itself"
         ),
         "beheld_by": default.get("lords_that_behold_it", {}) if default else {},
     }
+    if unknown_before:
+        result["conditional_on"] = list(unknown_before)
+        result["chosen_because"] += (
+            "; conditional, because " + " and ".join(unknown_before)
+            + " were never computed and their eligibility is unknown"
+        )
+    return result
 
 
 def kadkhudah_for(
