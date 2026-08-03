@@ -108,6 +108,26 @@
             "no worked natal chart with the author's own stated verdict was found in the inspected chapters (VI-VIII, XIX); the pack is a rule catalog, not a worked-example reproduction",
             "composer/engine wiring of the sourced rules onto computed facts (no engine or composer code was written in this research pass)"
           ]
+        },
+        {
+          "module_id": "bphs_parasara_delineation",
+          "name": "BPHS (1899 Subodhini recension): lord-in-bhava, dasa gradings, drishti quarters",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "jyotisha/source_audit.md",
+            "jyotisha/bphs_rule_manifest.json",
+            "jyotisha/bphs_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "independent Sanskrit review of every engine_translation_unreviewed rendering",
+            "recension identity: this printing calls itself the saramsa, claims 100 adhyayas, orders chapters Jaimini-inflected, and differs substantially from modern editions; collation against a second witness pending",
+            "12 of 144 lord-in-bhava cells genuinely absent from this printing; page-image gap at djvu 6135-6147 (Aries lagna, adhyaya 13); adhyaya 36 two-column interleave read at medium confidence; ~1,300 lines bound out of sequence in adhyaya 37",
+            "the text's quarter-strength drishti for every graha conflicts with the engine's flat Mars/Jupiter/Saturn special-aspect rule - recorded as an open fork, unresolved",
+            "no graha-in-bhava grid exists in this recension, so the Phaladeepika Sun gap remains open"
+          ]
         }
       ]
     },

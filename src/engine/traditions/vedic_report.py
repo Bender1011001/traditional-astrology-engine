@@ -31,6 +31,7 @@ RESEARCH_ROOT = (
     Path(__file__).resolve().parents[3] / "docs" / "research" / "multitradition"
 )
 DELINEATION_MANIFEST = RESEARCH_ROOT / "jyotisha" / "delineation_rule_manifest.json"
+BPHS_MANIFEST = RESEARCH_ROOT / "jyotisha" / "bphs_rule_manifest.json"
 
 ORDINAL = {
     1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th", 6: "6th",
@@ -62,7 +63,34 @@ def _manifest() -> dict[str, Any]:
 
 @lru_cache(maxsize=1)
 def _rules_by_id() -> dict[str, dict[str, Any]]:
-    return {r["rule_id"]: r for r in _manifest()["rules"]}
+    rules = {r["rule_id"]: r for r in _manifest()["rules"]}
+    if BPHS_MANIFEST.exists():
+        bphs = json.loads(BPHS_MANIFEST.read_text(encoding="utf-8"))
+        for r in bphs["rules"]:
+            rules[r["rule_id"]] = r
+    return rules
+
+
+def bhavesha_result(lorded_house: int, occupied_house: int) -> tuple[str | None, str | None, str | None]:
+    """BPHS Adhyaya 15: the lord of house N placed in house M.
+
+    Returns (text, suppression_reason, devanagari). A suppressed cell reports
+    the pack's reason instead of the text - the suppression happens at fire
+    time, in the one chart where it would otherwise read as a verdict.
+    """
+    rule = _rules_by_id().get(
+        f"jyotisha.bphs.a15.bhavesa_in_bhava.lord_{lorded_house:02d}"
+    )
+    if rule is None:
+        return None, None, None
+    c = rule.get("conclusion", {}) or {}
+    key = str(occupied_house)
+    restricted = (c.get("restricted_by_house") or {}).get(key)
+    if restricted:
+        return None, restricted.get("reason", "restricted"), None
+    text = (c.get("results_by_house") or {}).get(key)
+    deva = (c.get("devanagari_by_house") or {}).get(key)
+    return (str(text) if text else None), None, (str(deva) if deva else None)
 
 
 def _source_label(rule: dict[str, Any]) -> str:
@@ -196,6 +224,22 @@ def _opening(report: TraditionReport, facts: dict, lagna: dict) -> None:
                 s.delineations.append(d)
         elif why:
             s.refusals.append(why)
+        btext, brestrict, _deva = bhavesha_result(1, lord_row["house"])
+        if btext:
+            d = _delineate(
+                "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01",
+                btext,
+                f"lagneśa in the {ORDINAL[lord_row['house']]} bhāva (BPHS)",
+            )
+            if d:
+                s.delineations.append(d)
+        elif brestrict:
+            s.refusals.append(
+                "BPHS Adhyāya 15 does state a result for the lagneśa in the "
+                f"{ORDINAL[lord_row['house']]} bhāva, and it is withheld here: "
+                f"the pack marks that cell {brestrict!r} and forbids rendering "
+                "it as a claim about a living person."
+            )
 
 
 def _grahas_section(report: TraditionReport, facts: dict, grahas: list) -> None:
@@ -306,6 +350,31 @@ def _bhavas_section(
             )
         note += "."
         sub.notes.append(note)
+        if lord_row:
+            btext, brestrict, _deva = bhavesha_result(house, lord_row["house"])
+            if btext:
+                d = _delineate(
+                    f"jyotisha.bphs.a15.bhavesa_in_bhava.lord_{house:02d}",
+                    btext,
+                    f"lord of the {ORDINAL[house]} placed in the "
+                    f"{ORDINAL[lord_row['house']]} bhāva",
+                )
+                if d:
+                    sub.delineations.append(d)
+            elif brestrict:
+                sub.refusals.append(
+                    f"BPHS Adhyāya 15 states a result for the {ORDINAL[house]} "
+                    f"lord in the {ORDINAL[lord_row['house']]} bhāva and it is "
+                    f"withheld: the pack marks that cell {brestrict!r} and "
+                    "forbids rendering it as a claim about a living person."
+                )
+            else:
+                sub.refusals.append(
+                    f"BPHS Adhyāya 15's cell for the {ORDINAL[house]} lord in "
+                    f"the {ORDINAL[lord_row['house']]} bhāva is one of the 12 "
+                    "genuinely absent from this recension's printed text; "
+                    "nothing was imported from later editions to fill it."
+                )
         here = occupants.get(house, [])
         if here:
             sub.notes.append(
@@ -426,6 +495,51 @@ def _dasha_section(report: TraditionReport, facts: dict) -> None:
             )
             if d:
                 s.delineations.append(d)
+    running = maha.get("lord")
+    if running:
+        row = _graha_row(facts, running)
+        well_placed = None
+        placement_desc = ""
+        if row:
+            house = row["house"]
+            dignity = row["dignity"]
+            good_house = house in (1, 4, 5, 7, 9, 10, 11)
+            bad_house = house in (6, 8, 12)
+            good_dign = dignity in ("own sign", "exalted")
+            bad_dign = dignity == "debilitated"
+            placement_desc = (
+                f"{running} stands in the {ORDINAL[house]} bhāva, {dignity}"
+            )
+            if (good_house or good_dign) and not (bad_house or bad_dign):
+                well_placed = True
+            elif bad_house or bad_dign:
+                well_placed = False
+        for rid, applies, label in (
+            ("jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta", True, "general grade"),
+            ("jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed",
+             well_placed is True, "lord well placed"),
+            ("jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed",
+             well_placed is False, "lord badly placed"),
+        ):
+            if not applies:
+                continue
+            rule = _rules_by_id().get(rid)
+            if not rule:
+                continue
+            text = (rule.get("conclusion", {}).get("results_by_graha") or {}).get(
+                running
+            )
+            if not text:
+                continue
+            d = _delineate(
+                rid,
+                str(text),
+                f"{running} mahādaśā; {placement_desc} [{label}; well/badly "
+                "placed operationalized as kendra/trikoṇa/11th or own/exalted "
+                "vs duḥsthāna or debilitated]",
+            )
+            if d:
+                s.delineations.append(d)
     if not s.delineations:
         s.refusals.append(
             "No sourced signification for the running mahādaśā lord is encoded."
@@ -490,11 +604,23 @@ def _limits(report: TraditionReport, facts: dict) -> None:
         "corpus, at evidence grade B: the translation mediates, and the scan's "
         "own Devanāgarī is OCR-corrupted so it cannot independently control "
         "wording. Independent Sanskrit review is outstanding.",
-        "Bṛhat Parāśara Horā Śāstra — the root text this system is named for — is "
-        "NOT the source of any delineation here. Its available scan is unusable. "
-        "Every judgment above comes from Mantreśvara's later Phaladīpikā, and a "
-        "practitioner asking 'what does BPHS say' is owed the answer that this "
-        "report cannot tell them.",
+        "Bṛhat Parāśara Horā Śāstra now speaks in this report: Adhyāya 15's "
+        "lord-in-bhāva results and Adhyāya 36's daśā gradings are quoted from "
+        "the 1899 Subodhini printing (which titles itself the sārāṃśa - a "
+        "compiled recension of uncertain unity, ordered Jaimini-inflected, and "
+        "differing substantially from modern editions; every citation names "
+        "it). An earlier version of this note called that scan unusable, which "
+        "was false and is corrected: it is ordinary noisy Devanāgarī and it "
+        "reads. 12 of the 144 lord-in-bhāva cells are genuinely absent from "
+        "this printing and are reported as absent, not filled from later "
+        "editions.",
+        "The same BPHS recension grades EVERY graha's dṛṣṭi on all seven "
+        "houses (3/4/5/7/8/9/10) in quarter-strengths, where this engine "
+        "implements the received flat rule (all aspect the 7th; Mars adds "
+        "4/8, Jupiter 5/9, Saturn 3/10). The root text and the engine "
+        "disagree, the conflict is recorded in the corpus, and the flat rule "
+        "is retained here as the disclosed convention rather than silently "
+        "switching doctrine mid-report.",
         "Ṣaḍbala, Aṣṭakavarga and the wider vargas are not computed, so no "
         "strength-number or transit-scoring claim is made.",
         "No remedial measures (upāya), no gemstone, mantra or ritual prescription "

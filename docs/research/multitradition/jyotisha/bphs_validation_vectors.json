@@ -1,0 +1,5056 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-02",
+ "tradition_id": "indian_jyotisha",
+ "source_pack_id": "parasara_bphs_subodhini_1899_v1",
+ "status": "research_vectors_pending_independent_sanskrit_review; no vector in this file is a customer-facing prediction and the refusal vectors are assertions that nothing is rendered",
+ "source_ids": [
+  "jyotisha_parasara_bphs_subodhini_1899_egangotri"
+ ],
+ "vectors": [
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "He lives by his own body and his own arm; high-minded but exceedingly unsteady; two wives, or else reared in another man's house.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "He gains, and yet the man is afflicted; well-conducted, knowing dharma, self-respecting, surrounded by many women and dependants.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Prowess the equal of a lion's; possessed of every prosperity; self-respecting, two wives, intelligent, happy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Endowed with the happiness of father and of mother; many brothers; full of desire; endowed with good qualities and beauty.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Self-respecting; happiness from children only middling; irascible; one who gains admittance to the king's presence.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Prowess the equal of a lion's; possessed of every prosperity; self-respecting, two wives, intelligent, happy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Dispassionate, or living abroad, or poor — or else a king.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Accomplished in perfected (siddha) learning; a gambler, a thief, of great anger, given to excessive enjoyment of other men's wives.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Fortunate and dear to people; devoted to Visnu, ready of speech; endowed with children, wife and wealth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Endowed with the happiness of father and of mother; many brothers; full of desire; endowed with good qualities and beauty.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "He gains, and yet the man is afflicted; well-conducted, knowing dharma, self-respecting, surrounded by many women and dependants.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 1
+   },
+   "expected": {
+    "result_summary": "Accomplished in perfected (siddha) learning; a gambler, a thief, of great anger, given to excessive enjoyment of other men's wives.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 15-22, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h5_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "there is destruction of the first child",
+    "reason": "third_party_death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_01.h7_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_01"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "when the lord of the lagna is in the 7th, his wife does not live",
+    "reason": "third_party_death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "He has children, and is a thorn to his own family; wealthy, harsh, full of desire, intent on other people's business.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "Wealthy, and filled with pride; two wives, or even three.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "Bold, intelligent, endowed with good qualities; or else covetous and a reviler of the gods.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "Bold, intelligent, endowed with good qualities; or else covetous and a reviler of the gods.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "He certainly obtains wealth from an enemy; and from an enemy loss of wealth also follows; there is illness.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "A physician.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "He obtains land and goods for certain; happiness from the wife is slight; no happiness from an elder brother.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "Wealthy, industrious, capable; sickly in childhood, happy thereafter for the whole length of life.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "Full of desire, self-respecting, and learned; possessed of many women and much wealth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "Wealthy, industrious, capable; sickly in childhood, happy thereafter for the whole length of life.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": "Self-respecting, daring, but destitute of wealth; his livelihood comes from the king's house; no happiness from the eldest son.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 23-31, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h5_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 2
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h2_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "he is born childless",
+    "reason": "fertility_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h7_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "a goer to other men's wives; his wife becomes a courtesan and his mother too an adulteress",
+    "reason": "gendered_third_party_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_02.h10_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_02"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "he is born childless as well",
+    "reason": "fertility_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "Wealth won by his own arm; wasted for all his comforts, greatly diseased, daring, a servant of others.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "Stout; a taste for other men's wives and wealth; small in his undertakings, and not happy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "Bold, blessed with children, possessed of wealth, greatly delighted; he enjoys astonishing happiness.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "Always happy; rich in wealth and intelligent.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "Always happy; rich in wealth and intelligent.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "His brother is an enemy and very rich.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "He holds firm standing at the king's gate; or he is a thief, or one who goes to others; in childhood, hardship day after day.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "He holds firm standing at the king's gate; or he is a thief, or one who goes to others; in childhood, hardship day after day.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "The rise of his fortune comes through women.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "Always happy; rich in wealth and intelligent.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "Wealth won by his own arm; wasted for all his comforts, greatly diseased, daring, a servant of others.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 3
+   },
+   "expected": {
+    "result_summary": "The rise of his fortune comes through women.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 32-38, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h6_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "there is no happiness from maternal uncles; he desires enjoyment of his maternal uncle's wife",
+    "reason": "incest_adjacent_third_party_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h4_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his wife becomes exceedingly cruel",
+    "reason": "gendered_third_party_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h12_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his father is a great thief",
+    "reason": "third_party_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_03.h2_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_03"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "an obscure and abusive bodily epithet whose OCR reading is uncertain",
+    "reason": "sexual_defamation_and_uncertain_reading"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "Endowed with much learning; he throws away the wealth his father earned, and in an assembly he is as though dumb.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "Possessed of every prosperity, self-respecting, daring, given to trickery; surrounded by family, an enjoyer.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "The man is perpetually ill; generous, virtuous, a giver, with wealth won by his own arm.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "He becomes a counsellor and master of all wealth; clever, well-conducted, self-respecting, rich, dear to women, happy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "Happy in his fortune and dear to all people; devoted to Visnu, self-respecting, wealth won by his own arm.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "He has many brothers; irascible, a thief, a worker of malefic rites, evil-minded, though also high-spirited.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "Endowed with much learning; he throws away the wealth his father earned, and in an assembly he is as though dumb.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "The man suffers loss of comfort; happiness from the father is small.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "The man is honoured by the king; a master of alchemy, greatly delighted, he enjoys astonishing happiness.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "The man is perpetually ill; generous, virtuous, a giver, with wealth won by his own arm.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": "The man suffers loss of comfort; happiness from the father is small.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 39-46, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h9_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 4
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h12_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "he is impotent, or else born of an adulterous union",
+    "reason": "sexual_incapacity_and_illegitimacy_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_04.h8_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_04"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "he is impotent, or else born of an adulterous union",
+    "reason": "sexual_incapacity_and_illegitimacy_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "A great dissembler and slanderer; he never gave away so much as a clod of earth — what then is to be said of gold?",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "Many children, beyond doubt; troubled by cough and breathlessness; not happy; prone to anger, but possessed of wealth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "A great dissembler and slanderer; he never gave away so much as a clod of earth — what then is to be said of gold?",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "Long-lasting happiness from the mother; possessed of Laksmi and of good understanding; a minister, or else a preceptor.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "Momentary in his moods, harsh of speech, yet religious and intelligent.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "His son may turn to enmity; the son is an adopted one, or a taken son, or a son bought with money.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "Self-respecting and possessed of all religious observance; tall of frame, master of his own body, joined to devotion and a single splendour.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "Many children, beyond doubt; troubled by cough and breathlessness; not happy; prone to anger, but possessed of wealth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "His son becomes the equal of a king; or else an author of books, famous, the lamp of his line.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "His son becomes the equal of a king; or else an author of books, famous, the lamp of his line.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "Learned and dear to people; an author of books, exceedingly skilful, blessed with many children and much wealth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 5
+   },
+   "expected": {
+    "result_summary": "His son may turn to enmity; the son is an adopted one, or a taken son, or a son bought with money.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 47-54, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_05.h5_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_05"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "when the lord of the 5th is in the 5th, his son does not live",
+    "reason": "third_party_death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "He becomes famous; wealthy, virtuous, self-respecting, daring.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "Daring and renowned in his family; happy in foreign countries, eloquent, single-minded in his own work.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "Eyes red with anger; high-spirited, a slanderer, given to hatred, unsteady of mind, exceedingly wealthy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "Eyes red with anger; high-spirited, a slanderer, given to hatred, unsteady of mind, exceedingly wealthy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "Friends and wealth are unstable; possessed of compassion, happy, gentle, greatly clever in his own affairs.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "His own kinsmen behave as enemies; for certain he does not move about upon the earth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "He becomes famous; wealthy, virtuous, self-respecting, daring.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "Diseased, and an enemy of the wise; intent upon injury to living beings.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "A seller of timber and stone; in business sometimes loss, and sometimes indeed increase.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "Daring and renowned in his family; happy in foreign countries, eloquent, single-minded in his own work.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "He becomes famous; wealthy, virtuous, self-respecting, daring.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 6
+   },
+   "expected": {
+    "result_summary": "Diseased, and an enemy of the wise; intent upon injury to living beings.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 55-61, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h6_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "one of another jati (birth-group) becomes his friend",
+    "reason": "caste_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h7_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "destitute of children",
+    "reason": "fertility_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_06.h8_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_06"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "a goer to other men's wives",
+    "reason": "sexual_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Clever, steady, and observant; a wind-borne pain settles in the chest.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "An initiator of undertakings, but dilatory; his mind is wholly upon women.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Sometimes a daughter lives; and with effort a son too is born.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Endowed with every good quality, self-respecting, master of all wealth; always joined to gladness.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Diseased; prone to anger; nowhere does he find happiness.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Clever, steady, and observant; a wind-borne pain settles in the chest.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Diseased; prone to anger; nowhere does he find happiness.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "An initiator of undertakings, but dilatory; his mind is wholly upon women.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Righteous and joined to truth; only, he suffers from disease of the teeth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Sometimes a daughter lives; and with effort a son too is born.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": "Very poor and miserly; he lives by cloth, and is without wealth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 62-68, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h4_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 7
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h1_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "lustful after other men's wives",
+    "reason": "sexual_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h10_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his wife is not devoted to her husband",
+    "reason": "gendered_third_party_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h3_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his children are born dead",
+    "reason": "third_party_death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_07.h12_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_07"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his wife is a woman of the wandering/low sort",
+    "reason": "caste_and_gendered_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "Two wives are to be declared; always given to hostility toward Visnu; he suffers from ulcerous disease.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "His wealth is small; wealth once gone is not regained.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "A slanderer, destitute of kinsmen; and he is fearful.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "Increase does not come to him; property does not stay in the house; the man becomes firm of understanding.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "He is perpetually ill; in infancy he is afflicted by water, snakes and the like.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "Two wives are to be declared; always given to hostility toward Visnu; he suffers from ulcerous disease.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "An ascetic, a thief, a speaker of falsehood, intent upon reviling his teachers.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "A great sinner and an unbeliever; a taste for other men's wives and wealth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "A slanderer, destitute of kinsmen; and he is fearful.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "Increase does not come to him; property does not stay in the house; the man becomes firm of understanding.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": "He is perpetually ill; in infancy he is afflicted by water, snakes and the like.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 69-75, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h3_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 8
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h8_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his wife becomes attached to another",
+    "reason": "gendered_third_party_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h9_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "a killer of his own child, or else [his wife] barren",
+    "reason": "fertility_and_violence_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h4_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "the death of mother and father follows within a short time",
+    "reason": "third_party_death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_08.h2_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_08"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "he is born without strength of arm",
+    "reason": "bodily_incapacity_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "He follows his fortune always; wealthy, virtuous, full of desire, learned, dear to people.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "He follows his fortune always; wealthy, virtuous, full of desire, learned, dear to people.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "He becomes a counsellor or a commander of armies; meritorious, renowned, eloquent, daring, free from anger.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "Fortunate and dear to people; devoted to his teacher, self-respecting, steady, endowed with the qualities of the steady.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "Virtuous and famous; yet sometimes the work he wishes to do is not accomplished.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "Constantly possessed of wealth and grain; endowed with virtue and beauty; joined to the happiness of many brothers.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "He becomes a counsellor or a commander of armies; meritorious, renowned, eloquent, daring, free from anger.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "Fortunate and dear to people; devoted to his teacher, self-respecting, steady, endowed with the qualities of the steady.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": "For certain he is destitute of fortune; no happiness from a maternal uncle, and likewise none from an elder brother.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 76-81, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h1_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h6_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_09.h8_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_09"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 9
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "Endowed with the gift of poetry; sickly in childhood, happy thereafter, with increase of wealth day by day.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "High-spirited, virtuous, eloquent, joined to truth and dharma.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "High-spirited, virtuous, eloquent, joined to truth and dharma.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "Possessed of knowledge, comfort and prowess; devoted to the worship of teacher and god; righteous and joined to truth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "Wealthy and blessed with children; always joined to gladness, a speaker of truth, a happy man.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "He is oppressed on all sides by enemies; endowed with the quality of cleverness, yet nowhere is the man happy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "High-spirited, virtuous, eloquent, joined to truth and dharma.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "Possessed of knowledge, comfort and prowess; devoted to the worship of teacher and god; righteous and joined to truth.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "Wealthy and blessed with children; always joined to gladness, a speaker of truth, a happy man.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": "He is oppressed on all sides by enemies; endowed with the quality of cleverness, yet nowhere is the man happy.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 82-86, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h8_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_10.h9_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_10"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 10
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Wealthy, of sattvic temper, great; even-sighted, a great speaker, and always full of curiosity.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Endowed with manifold comforts; blessed with children and religious; a giver of every accomplishment.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Greatly devoted to places of pilgrimage; skilful in all undertakings; only, he suffers from colic.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Endowed with manifold comforts; blessed with children and religious; a giver of every accomplishment.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Endowed with manifold diseases; yet all comfort is his; a wanderer abroad and a servant of others.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Generous, virtuous, active; but certainly a fool.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Generous, virtuous, active; but certainly a fool.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Honoured by the king and master of wealth; clever, truthful, and joined to his own dharma.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Honoured by the king and master of wealth; clever, truthful, and joined to his own dharma.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "He certainly becomes eloquent; learning and poetry increase in him day by day.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": "Full of desire, with many lovers, momentary in his moods, and always dissolute.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 87-94, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h4_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 11
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h12_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "a maker of association with mlecchas (outsiders/barbarians)",
+    "reason": "ethnic_and_caste_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h7_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his wife does not live",
+    "reason": "third_party_death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_11.h8_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_11"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "his wife does not live",
+    "reason": "third_party_death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "There is no happiness from the wife; weak of body, afflicted with phlegmatic disease, deprived of wealth and learning.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "Endowed with devotion to Visnu; religious, kindly of speech, joined to every good quality.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "The man becomes a hater of wife, of friends, and of teachers; a nourisher of his own body only.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "Sinful and brooding on his mother's death; irascible, and grieved in his offspring.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "There is no happiness from the wife; weak of body, afflicted with phlegmatic disease, deprived of wealth and learning.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "Endowed with devotion to Visnu; religious, kindly of speech, joined to every good quality.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "The man becomes a hater of wife, of friends, and of teachers; a nourisher of his own body only.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "There is no happiness from children; he wears gems, rubies and pearls, and obtains a little.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "There is no happiness from children; he wears gems, rubies and pearls, and obtains a little.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": "Sinful and brooding on his mother's death; irascible, and grieved in his offspring.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 95-99, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h4_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h5_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5,
+    "lord_of_bhava": 12
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "absent_from_the_1899_subodhini_recension",
+    "must_not_be_filled_from": "modern BPHS recensions or from Phaladeepika"
+   },
+   "provenance": "Negative control: this recension gives no result for that cell and none may be invented."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h6_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "lustful after other men's wives",
+    "reason": "sexual_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhavesa_in_bhava.lord_12.h12_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhavesa_in_bhava.lord_12"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "lustful after other men's wives",
+    "reason": "sexual_defamation"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a15.bhava_results_weighted_by_strength",
+   "rule_ids": [
+    "jyotisha.bphs.a15.bhava_results_weighted_by_strength"
+   ],
+   "inputs": {
+    "configuration": "bhava_results_weighted_by_strength"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Thus, O brahmin, have the good and bad results of the bhavas been told to thee. The result of every one of them is to be declared by discrimination of strength and weakness. When a graha has attained full result, declare the result in full; at a half, a half; when short by a quarter, a quarter here."
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 100 and 103"
+  },
+  {
+   "vector_id": "bphs.a15.retrograde_and_own_fourth_full_result",
+   "rule_ids": [
+    "jyotisha.bphs.a15.retrograde_and_own_fourth_full_result"
+   ],
+   "inputs": {
+    "configuration": "retrograde_and_own_fourth_full_result"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "If retrograde, or in its own fourth, Mars gives its result; Mercury in the fourth, and Jupiter and the Moon and Venus in the fifth; the eclipse-node for the seventh, and for the fifth and the ninth; and the Moon gives its own result for the second when the Sun is at the equinox."
+   },
+   "provenance": "Adhyaya 15 (purva-khanda), slokas 101-102"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.saturn.offset3",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 3
+   },
+   "expected": {
+    "aspect_strength": "full"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.saturn.offset4",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 4
+   },
+   "expected": {
+    "aspect_strength": "one half"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.saturn.offset5",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 5
+   },
+   "expected": {
+    "aspect_strength": "one quarter"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.saturn.offset7",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 7
+   },
+   "expected": {
+    "aspect_strength": "three quarters"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.saturn.offset8",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 8
+   },
+   "expected": {
+    "aspect_strength": "one half"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.saturn.offset9",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 9
+   },
+   "expected": {
+    "aspect_strength": "one quarter"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.saturn.offset10",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 10
+   },
+   "expected": {
+    "aspect_strength": "full"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.jupiter.offset3",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 3
+   },
+   "expected": {
+    "aspect_strength": "three quarters"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.jupiter.offset4",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 4
+   },
+   "expected": {
+    "aspect_strength": "one quarter"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.jupiter.offset5",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 5
+   },
+   "expected": {
+    "aspect_strength": "full"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.jupiter.offset7",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 7
+   },
+   "expected": {
+    "aspect_strength": "one half"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.jupiter.offset8",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 8
+   },
+   "expected": {
+    "aspect_strength": "one quarter"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.jupiter.offset9",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 9
+   },
+   "expected": {
+    "aspect_strength": "full"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.jupiter.offset10",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 10
+   },
+   "expected": {
+    "aspect_strength": "three quarters"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.mars.offset3",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.mars"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 3
+   },
+   "expected": {
+    "aspect_strength": "one half"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.mars.offset4",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.mars"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 4
+   },
+   "expected": {
+    "aspect_strength": "full"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.mars.offset5",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.mars"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 5
+   },
+   "expected": {
+    "aspect_strength": "three quarters"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.mars.offset7",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.mars"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 7
+   },
+   "expected": {
+    "aspect_strength": "one quarter"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.mars.offset8",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.mars"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 8
+   },
+   "expected": {
+    "aspect_strength": "full"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.mars.offset9",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.mars"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 9
+   },
+   "expected": {
+    "aspect_strength": "three quarters"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.mars.offset10",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.mars"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 10
+   },
+   "expected": {
+    "aspect_strength": "one half"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.others.offset3",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.others"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 3
+   },
+   "expected": {
+    "aspect_strength": "one quarter"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.others.offset4",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.others"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 4
+   },
+   "expected": {
+    "aspect_strength": "three quarters"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.others.offset5",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.others"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 5
+   },
+   "expected": {
+    "aspect_strength": "one half"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.others.offset7",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.others"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 7
+   },
+   "expected": {
+    "aspect_strength": "full"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.others.offset8",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.others"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 8
+   },
+   "expected": {
+    "aspect_strength": "three quarters"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.others.offset9",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.others"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 9
+   },
+   "expected": {
+    "aspect_strength": "one half"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.drsti_pada_strength.others.offset10",
+   "rule_ids": [
+    "jyotisha.bphs.a04.drsti_pada_strength.others"
+   ],
+   "inputs": {
+    "house_offset_from_graha": 10
+   },
+   "expected": {
+    "aspect_strength": "one quarter"
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 23-29"
+  },
+  {
+   "vector_id": "bphs.a04.rasi_drsti",
+   "rule_ids": [
+    "jyotisha.bphs.a04.rasi_drsti"
+   ],
+   "inputs": {
+    "configuration": "rasi_drsti"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "A movable sign glances the fixed signs and a fixed sign the movable; each leaves aside the sign next to it and glances the remaining three. Aries, leaving Taurus aside, glances Leo, Scorpio and Aquarius; the dual signs glance one another — Gemini glances Virgo, Sagittarius and Pisces.",
+    "worked_examples_in_text": [
+     "Aries -> Leo, Scorpio, Aquarius",
+     "Cancer -> Scorpio, Aquarius, Taurus",
+     "Libra -> Aquarius, Taurus, Leo",
+     "Capricorn -> Taurus, Leo, Scorpio",
+     "Gemini -> Virgo, Sagittarius, Pisces"
+    ]
+   },
+   "provenance": "Adhyaya 4 (purva-khanda), slokas 2-18"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.aries",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.aries"
+   ],
+   "inputs": {
+    "configuration": "aries"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "A yoga arises between Saturn and Jupiter …; Jupiter, by dependence on another, is malefic …; Venus is directly the killer, marked with maraka-hood; Saturn and the rest, the malefic grahas, become killers. Thus are the good and evil results to be known for those born in Aries.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 14-16"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.taurus",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.taurus"
+   ],
+   "inputs": {
+    "configuration": "taurus"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Jupiter, Venus and the Moon are malefic; Saturn and the Sun are benefic; Saturn alone is directly the maker of raja-yoga. Jupiter and the rest are the malefics bearing the mark of the maraka; Mercury stands there [neutral].",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 17-18"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.gemini",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.gemini"
+   ],
+   "inputs": {
+    "configuration": "gemini"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Mars, Jupiter and the Sun are malefic; Venus alone is benefic. Jupiter's yoga with Saturn is as it was for Aries. The Moon here is not a killer.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 19-20"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.cancer",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.cancer"
+   ],
+   "inputs": {
+    "configuration": "cancer"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Venus and Mercury are malefic; Mars and Jupiter benefic; Mars alone is directly the yoga-karaka. Saturn is the killer; the others are called marakas.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 21-22"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.leo",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.leo"
+   ],
+   "inputs": {
+    "configuration": "leo"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Mercury and [Saturn] are malefic; Mars and Jupiter bring good. The mere conjunction of Jupiter and Venus is not auspicious here. Mercury and the rest are marked with maraka-hood.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 23-24"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.virgo",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.virgo"
+   ],
+   "inputs": {
+    "configuration": "virgo"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Mars, Jupiter and the Moon are malefic; Venus alone is benefic. Venus and Mercury together are the yoga-karakas. Venus is the killer; Mars and the rest are marakas.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 25-26"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.libra",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.libra"
+   ],
+   "inputs": {
+    "configuration": "libra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Jupiter, the Sun and Mars are malefic; Saturn and Mercury benefic. The Moon and its son [Mercury] become the makers of raja-yoga. Mars kills; Jupiter and the rest bear the mark of the maraka.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 27-28"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.scorpio",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.scorpio"
+   ],
+   "inputs": {
+    "configuration": "scorpio"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Mercury, Mars and Venus are malefic; Jupiter and the Moon benefic; the Sun and the Moon become the yoga-karakas. Jupiter is the killer; Mercury and the rest are called marakas.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 29-30"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.sagittarius",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.sagittarius"
+   ],
+   "inputs": {
+    "configuration": "sagittarius"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Venus alone is malefic; Mercury and the Sun are benefic. The yoga is from the Sun and Mercury. Saturn, the Sun's son, is the killer; Venus and the rest strike, marked with maraka-hood.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 31-32"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.capricorn",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.capricorn"
+   ],
+   "inputs": {
+    "configuration": "capricorn"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Mars, Jupiter and the Sun are malefic; Venus and Mercury benefic. Saturn is itself the killer, and Mars and the rest besides. Venus alone makes the good yoga.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 33-34"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.aquarius",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.aquarius"
+   ],
+   "inputs": {
+    "configuration": "aquarius"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Jupiter, the Moon and Mars are malefic; Venus, the preceptor of the daityas, alone is benefic. Mars, Venus and Jupiter make raja-yoga. Mars and the rest are killers, marked with maraka-hood.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 35-36"
+  },
+  {
+   "vector_id": "bphs.a13.functional_nature_by_lagna.pisces",
+   "rule_ids": [
+    "jyotisha.bphs.a13.functional_nature_by_lagna.pisces"
+   ],
+   "inputs": {
+    "configuration": "pisces"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Saturn, Venus and the Sun are malefic; Mars and the Moon are benefic. Mars is the cause in the yoga. Having regard to the marakas and the karakas, Saturn and Mercury, being malefic, strike.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 37-38"
+  },
+  {
+   "vector_id": "bphs.a13.maraka_general_rule",
+   "rule_ids": [
+    "jyotisha.bphs.a13.maraka_general_rule"
+   ],
+   "inputs": {
+    "configuration": "maraka_general_rule"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Following this sastra the wise should declare the marakas: apart from the Moon and the Sun, all are proclaimed marakas. In its own dasa and its own bhukti there is no death for men; some allow it in the dasa, but never in one's own bhukti.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 13 (purva-khanda), slokas 39-40"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.pancama_bhrgu_ksetra_sukra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.pancama_bhrgu_ksetra_sukra"
+   ],
+   "inputs": {
+    "configuration": "pancama_bhrgu_ksetra_sukra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The 5th falling in a sign of Venus and Venus joined to it, with Saturn joined to the 11th — lord of much wealth."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.pancama_saumya_naksatra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.pancama_saumya_naksatra"
+   ],
+   "inputs": {
+    "configuration": "pancama_saumya_naksatra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The 5th in a naksatra of Mercury with Mercury joined to it, and the Moon and Mars in the 11th — lord of much wealth."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.pancama_sani_ksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.pancama_sani_ksetra"
+   ],
+   "inputs": {
+    "configuration": "pancama_sani_ksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The 5th in a sign of Saturn with Saturn there, or Mercury standing in the 11th — lord of much wealth."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.pancama_ravi_ksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.pancama_ravi_ksetra"
+   ],
+   "inputs": {
+    "configuration": "pancama_ravi_ksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The 5th in the Sun's sign with the Sun joined to it, and Jupiter standing in the 11th — lord of much wealth."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.pancama_sani_ksetra_bhauma_labha",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.pancama_sani_ksetra_bhauma_labha"
+   ],
+   "inputs": {
+    "configuration": "pancama_sani_ksetra_bhauma_labha"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The 5th in a sign of Saturn with Saturn joined to it and Mars joined to the 11th — lord of much wealth."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.pancama_guru_ksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.pancama_guru_ksetra"
+   ],
+   "inputs": {
+    "configuration": "pancama_guru_ksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The 5th in a sign of Jupiter with Jupiter joined to it — lord of great wealth."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.lagna_bhanuksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.lagna_bhanuksetra"
+   ],
+   "inputs": {
+    "configuration": "lagna_bhanuksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna in the Sun's sign with the Sun placed there, joined to or aspected by Mars and Jupiter — wealthy."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.lagna_candraksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.lagna_candraksetra"
+   ],
+   "inputs": {
+    "configuration": "lagna_candraksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna in the Moon's sign with the Moon there, joined by Jupiter and Mars — the native born is wealthy."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.lagna_bhaumaksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.lagna_bhaumaksetra"
+   ],
+   "inputs": {
+    "configuration": "lagna_bhaumaksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna in a sign of Mars with Mars joined to it, joined to or aspected by the Moon, Venus and Saturn — the man becomes rich."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.lagna_guruksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.lagna_guruksetra"
+   ],
+   "inputs": {
+    "configuration": "lagna_guruksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna in a sign of Jupiter with Jupiter joined to it, joined to or aspected by Mercury and Mars — the native is a master of wealth."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.lagna_budhaksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.lagna_budhaksetra"
+   ],
+   "inputs": {
+    "configuration": "lagna_budhaksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna in a sign of Mercury with Mercury joined to it or aspecting, and Saturn and Venus joined or aspecting — the man born is wealthy."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.lagna_bhrguksetra",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.lagna_bhrguksetra"
+   ],
+   "inputs": {
+    "configuration": "lagna_bhrguksetra"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna in a sign of Venus with Venus joined to it, and Saturn and Mercury joined or aspecting — the man born is wealthy."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a30.dhana_yoga.dharmesa_buddhipa_conjunction",
+   "rule_ids": [
+    "jyotisha.bphs.a30.dhana_yoga.dharmesa_buddhipa_conjunction"
+   ],
+   "inputs": {
+    "configuration": "dharmesa_buddhipa_conjunction"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Whatever grahas are joined to or aspected by the lord of the 9th and the lord of the 5th are givers of happiness; those joined to the lord of the 8th and the lord of the 12th, and to the maraka lords, are givers of sorrow."
+   },
+   "provenance": "Adhyaya 30 (purva-khanda), slokas 1-14"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.lagnesa_in_12_and_12lord_in_lagna",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.lagnesa_in_12_and_12lord_in_lagna"
+   ],
+   "inputs": {
+    "configuration": "lagnesa_in_12_and_12lord_in_lagna"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lord of the lagna gone to the 12th and the lord of the 12th come to the lagna, joined to or aspected by a maraka lord — the man born is without wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.lagnesa_in_6_and_6lord_in_lagna",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.lagnesa_in_6_and_6lord_in_lagna"
+   ],
+   "inputs": {
+    "configuration": "lagnesa_in_6_and_6lord_in_lagna"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lord of the lagna gone to the 6th, or the lord of the 6th come to the lagna, the lagna lord aspected by a maraka lord — the native becomes poor, and conspicuously so.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.lagna_ketu_lagnesa_in_8",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.lagna_ketu_lagnesa_in_8"
+   ],
+   "inputs": {
+    "configuration": "lagna_ketu_lagnesa_in_8"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna joined by the Moon and Ketu, or the lagna lord gone to the 8th, joined to or aspected by a maraka lord — the native becomes poor.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.lagnesa_in_dusthana_with_papa",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.lagnesa_in_dusthana_with_papa"
+   ],
+   "inputs": {
+    "configuration": "lagnesa_in_dusthana_with_papa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna lord gone to the 6th, 8th or 12th and joined to a malefic, and joined to or aspected by a maraka lord — even one of royal line is without wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.lagnesa_with_6_8_12_lord_no_benefic",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.lagnesa_with_6_8_12_lord_no_benefic"
+   ],
+   "inputs": {
+    "configuration": "lagnesa_with_6_8_12_lord_no_benefic"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna lord joined to the lord of the 6th, 8th or 12th and aspected by malefics, and not aspected by benefics — he becomes destitute.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.mitresa_dharmesa_in_6_and_10",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.mitresa_dharmesa_in_6_and_10"
+   ],
+   "inputs": {
+    "configuration": "mitresa_dharmesa_in_6_and_10"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lord of the friendly house and the lord of the 9th standing respectively in the 6th and the 10th, and aspected by a maraka lord — the man born is without wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.papa_in_lagna_without_royal_lords",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.papa_in_lagna_without_royal_lords"
+   ],
+   "inputs": {
+    "configuration": "papa_in_lagna_without_royal_lords"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "A malefic in the lagna, without the lords of the 10th and the 9th, joined to or aspected by a maraka lord — the man born is without wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.bhavesa_in_8_12_6",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.bhavesa_in_8_12_6"
+   ],
+   "inputs": {
+    "configuration": "bhavesa_in_8_12_6"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Whichever bhava's lord stands in the 8th, 12th or 6th, and whichever bhava the lords of the 8th, 12th and 6th stand in — if aspected by malefics, or by Saturn, [the native] is overcome with sorrow, unsteady, and without wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.candra_navamsesa_with_marakesa",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.candra_navamsesa_with_marakesa"
+   ],
+   "inputs": {
+    "configuration": "candra_navamsesa_with_marakesa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lord of the navamsa the Moon occupies, joined to a maraka lord or gone to a maraka place — that man born is without wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.lagnesa_navamsesa_in_dusthana",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.lagnesa_navamsesa_in_dusthana"
+   ],
+   "inputs": {
+    "configuration": "lagnesa_navamsesa_in_dusthana"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lord of the navamsa of the lagna lord gone to the 12th, 6th or 8th, joined to or aspected by a maraka lord — that man born is without wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.mars_moon_in_2",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.mars_moon_in_2"
+   ],
+   "inputs": {
+    "configuration": "mars_moon_in_2"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Mars and the Moon standing in the 2nd are declared destroyers of wealth; aspected by Mercury they make great wealth. Saturn going there —",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.sun_in_2_aspected_by_saturn",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.sun_in_2_aspected_by_saturn"
+   ],
+   "inputs": {
+    "configuration": "sun_in_2_aspected_by_saturn"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The Sun there, always aspected by Saturn, produces destitution; unaspected by Saturn the same Sun makes one renowned and possessed of great wealth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.benefics_in_2_jupiter_aspected_by_mercury",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.benefics_in_2_jupiter_aspected_by_mercury"
+   ],
+   "inputs": {
+    "configuration": "benefics_in_2_jupiter_aspected_by_mercury"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Benefics gone to the 2nd bhava do indeed make much wealth; but Jupiter there, aspected by Mercury, makes the man destitute.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.mercury_in_2_aspected_by_moon",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.mercury_in_2_aspected_by_moon"
+   ],
+   "inputs": {
+    "configuration": "mercury_in_2_aspected_by_moon"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Mercury there, aspected by the Moon, certainly destroys everything one has; and by conjunctions with malefic grahas and the rest, poverty comes to men.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.dharmesa_buddhipa_not_aspecting",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.dharmesa_buddhipa_not_aspecting"
+   ],
+   "inputs": {
+    "configuration": "dharmesa_buddhipa_not_aspecting"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Whatever grahas are neither joined to nor aspected by the lord of the 9th and the lord of the 5th are givers of much sorrow; those joined in the 8th to the lord of the 12th, with a maraka lord, are givers of loss.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.benefics_and_malefics_exchanged_places",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.benefics_and_malefics_exchanged_places"
+   ],
+   "inputs": {
+    "configuration": "benefics_and_malefics_exchanged_places"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "When malefics have gone to the auspicious places and benefics to the malefic places, want of wealth arises; the child is distressed for food, obtains food only now and then, and is full of anxiety to deceive.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.karaka_or_lagna_2nd_12th",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.karaka_or_lagna_2nd_12th"
+   ],
+   "inputs": {
+    "configuration": "karaka_or_lagna_2nd_12th"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Counted from the karaka or from the lagna, [malefics] in the 8th and the 12th, with the glance of the lagna and the karaka — the man is joined to the affliction of poverty.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.twelfth_from_lagna_or_karaka",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.twelfth_from_lagna_or_karaka"
+   ],
+   "inputs": {
+    "configuration": "twelfth_from_lagna_or_karaka"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Whoever has [a graha] in the 12th from the lagna or from the karaka, with the glance of the lagna and the karaka — the man becomes a spendthrift.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.daridra_yoga.lagnesa_aspects_lagna_karakesa_aspects_karaka",
+   "rule_ids": [
+    "jyotisha.bphs.a31.daridra_yoga.lagnesa_aspects_lagna_karakesa_aspects_karaka"
+   ],
+   "inputs": {
+    "configuration": "lagnesa_aspects_lagna_karakesa_aspects_karaka"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lagna lord glancing the lagna and the karaka's lord glancing the karaka — even so, by preponderance, he is born a spender.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 1-20"
+  },
+  {
+   "vector_id": "bphs.a31.bandhana_yoga",
+   "rule_ids": [
+    "jyotisha.bphs.a31.bandhana_yoga"
+   ],
+   "inputs": {
+    "configuration": "bandhana_yoga"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "confinement, restraint, and bodily affliction",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 31 (purva-khanda), slokas 21-28"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "result_summary": "Jupiter's excellent dasa produces authority over broad villages, sons, prosperity, good fortune, a mine of virtues, dependants, and the splendour of a palanquin.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.ketu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Ketu"
+   },
+   "expected": {
+    "result_summary": "Ketu's excellent dasa produces victory, the gaining of wealth through fierce action, [favour of] a foreign ruler, fortune obtained, the beginning of undertakings, and the destruction of enemies.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.mars",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "result_summary": "Mars's excellent dasa produces the gaining of land, the coming of wealth, wisdom, clarity, boldness of mind, and younger brothers.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "result_summary": "Mercury's excellent dasa produces clothing, endless grain and increase, welfare, comfort, a house, victory over one's own connexions, and the coming of desired objects.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.moon",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "result_summary": "The Moon's excellent dasa produces good for the mother, tanks and the like, fields, gardens, fine seats, the favour of the best of the twice-born, and a splendid palanquin.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.rahu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Rahu"
+   },
+   "expected": {
+    "result_summary": "Rahu's excellent dasa produces every kind of welfare, great royal fortune, enterprise, journeys to holy places, and the increase of knowledge and influence.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Saturn"
+   },
+   "expected": {
+    "result_summary": "Saturn's excellent dasa produces splendour, discernment, sacrifices and such rites, fields and villages, leadership, much trade, and men skilful and eager.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.sun",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "result_summary": "The Sun's excellent dasa produces sons, understanding, wisdom, elevation of authority, knowledge and the coming of wealth, manliness, the attainment of comfort, and the favour of the lord.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_utkrsta.venus",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_utkrsta"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "result_summary": "Venus's excellent dasa gives comfort, the increase of good fortune, a palanquin, the eightfold lordship, the gaining of vehicles, garments and ornaments, the gain of elephants, horses and cattle, and friends.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "result_summary": "Jupiter's evil dasa gives great fear, disease, the fall of firmness, ruin of grain, affliction to sons and to the father, hunger and wasting.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.ketu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Ketu"
+   },
+   "expected": {
+    "result_summary": "Ketu's evil dasa gives extreme hardship, fruitless and harmful undertakings, pain at the heart, fever in the bones, trembling, the hatred of the twice-born, and exceedingly foolish action.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.mars",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "result_summary": "Mars when evil gives severe illness, quarrel, thieves, bondage, wounds, agitation and injury.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "result_summary": "Mercury's evil dasa gives going to a foreign country, agitation, the loss of one's own connexions, a mind bereft of wisdom, want of wealth, quarrel, and the ruin of land and property.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.moon",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "result_summary": "The Moon's evil dasa gives destruction of wealth, disease, loss of understanding, emaciation, distress and fevers.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.rahu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Rahu"
+   },
+   "expected": {
+    "result_summary": "Rahu's evil dasa gives fear of snakes, fear of poison, pain through all the limbs, blows, opposition, a fall, and the rise of affliction from enemies.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Saturn"
+   },
+   "expected": {
+    "result_summary": "Saturn when evil gives the administering of poison, loss of wealth, the rise of pain, the king's anger, work turned against one, unsteady effort, and affliction of the limbs.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.sun",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "result_summary": "The Sun's evil dasa produces fruitless effort, loss of wealth, disease, royal disturbance, the anger of the king, and danger to the father.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 5-80"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_papa.venus_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_papa"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "not_recovered_from_this_scan"
+   },
+   "provenance": "Negative control."
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "result_summary": "In exaltation or own sign, in a kendra, the 11th, a trikona, moolatrikona, in an exalted or own navamsa: gain of kingdom, great comfort, royal honour and renown, elephants and horses, worship of gods and brahmins, happiness of wife and children, vehicles and garments, success in sacrificial rites, and the hearing of Vedanta.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.ketu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Ketu"
+   },
+   "expected": {
+    "result_summary": "Not recovered: the Ketu section of this chapter (djvu lines 15352-15360) gives only the utkrsta/papa pair and no placement-conditioned expansion.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.mars",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "result_summary": "In deep exaltation, exaltation, moolatrikona, own sign, a kendra, trikona, the 11th or the 2nd, with full strength, aspected by benefics and in a benefic amsa: gain of kingdom, gain of land, gain of wealth and grain, royal honour, vehicles, garments and ornaments, the gain of a place in a foreign country, and the happiness of brothers. In a kendra or the 3rd and strong: gain of wealth through valour and victory in battle.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "result_summary": "In exaltation, own sign, a kendra, the 11th, a trikona or a friend's sign: great comfort, gain of wealth and grain, good fame and wealth, increase of knowledge, love of form, good works, increase of virtue, happiness of wife and children, bodily health, food with milk, and gain of wealth through trade. When aspected by benefics and lord of the 9th or 10th, the dasa is strong and gives its full result.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.moon",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "result_summary": "In exaltation or own sign, in a kendra, the 11th or a trikona, joined to a benefic and waxing and strong: gain of wealth and grain, auspicious acts in the house, a vehicle, the sight of the king, success in effort, the sidelong glance of Laksmi, fortune through friends, the gain of a kingdom, white garments, satisfaction in the gain of sons, and cattle in the house.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.rahu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Rahu"
+   },
+   "expected": {
+    "result_summary": "Rahu's exaltation is Taurus (Ketu's Scorpio), its moolatrikona Cancer, its own signs Gemini and Sagittarius, Virgo and Pisces being also called its houses: in its dasa then, much comfort, wealth and grain, what is desired through the favour of friends, vehicles, the birth of a son, the building of a new house, thoughts of dharma, great festivity, honour from a foreign king, garments and ornaments.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Saturn"
+   },
+   "expected": {
+    "result_summary": "In exaltation, own sign, a friend's sign, moolatrikona, the 9th, an exalted or own navamsa, the 3rd or the 11th: royal honour and splendour, good fame and gain of wealth, learning and disputation, elephants, vehicles and ornaments by the king's favour, it works a raja-yoga, great comfort as a commander, the marks of Laksmi's glance, gain of kingdom, and in the house auspicious wealth with wife and children.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.sun",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "result_summary": "In own moolatrikona, own sign, exaltation or deep exaltation, in a kendra, trikona or the 11th, and strong in the vargas: great comfort, gain of wealth, exceeding royal honour, horses and palanquins. Joined to the lord of the 5th it gives the gain of a son; related to the lord of the 2nd, prosperity of the household; related to the lord of the 4th, the gain of three vehicles.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.venus",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "result_summary": "In a trikona in Pisces: kingdom, wealth and household prosperity; marriage festivities, the welfare and splendour of children, it confers command of an army and the meeting of desired kinsmen; the regaining of a lost kingdom, and the gathering of cattle in the house. When Venus is lord of the 9th or 10th and stands in the lagna or the 4th, that dasa gives great comfort, lordship of a district or village, and abundance in works of merit such as temples and tanks.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 7-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_well_placed.ketu_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_well_placed"
+   ],
+   "inputs": {
+    "graha": "Ketu"
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "not_recovered_from_this_scan"
+   },
+   "provenance": "Negative control."
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "result_summary": "Debilitated, combust, joined to malefics, or in the 12th or 8th: fall from position, distress of mind, affliction to children, great fear, loss of cattle and wealth — though pilgrimage is obtained. The result is hard at the beginning; in the middle and at the end comfort, royal honour and splendour are attained.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.ketu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Ketu"
+   },
+   "expected": {
+    "result_summary": "Not recovered from this chapter.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.mars",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "result_summary": "Debilitated or in an evil house, destitute of strength, joined to malefics and aspected by malefics — that dasa is a giver of what is not desired.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "result_summary": "Joined to or aspected by malefics: the king's hostility, sickness of mind, quarrel with kinsmen, going abroad, service under others, strangury and great fear. In the 6th, 8th or 12th: ruin of gain, enjoyment and wealth, windy affliction, jaundice, fear of the king's officers, and ruin of crops, cattle and land.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.moon",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "result_summary": "In the 6th, 8th or 12th, weak and joined to malefics: the king's hostility, sorrow of mind, destruction of wealth and grain, emaciation of the mother, distress of mind, and illness. Weak in the 2nd or debilitated, loss of wealth follows.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.rahu",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Rahu"
+   },
+   "expected": {
+    "result_summary": "Joined to a malefic and to a maraka lord, or in a sign of debilitation: fall from position, sickness of mind, ruin of wife and sons, contemptible food, bodily affliction at the beginning of the dasa, and loss of wealth and grain; in the middle of the dasa comfort and gain of wealth through one's own wife; at the end hardship, fall from position and distress of mind.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Saturn"
+   },
+   "expected": {
+    "result_summary": "In the 6th, 8th or 12th, debilitated or combust: affliction from poison and weapons, fall from position, great fear, separation from father and mother, affliction to wife and children, work contrary to the king, what is not desired, and imprisonment.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.sun",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "result_summary": "Debilitated, in the 6th, 8th or 12th, weak, joined to malefics, joined to Rahu or Ketu, or joined to the lord of an evil house: great affliction, destruction of wealth and grain, the king's anger, exile, royal punishment, loss of wealth, fever, loss of fame, quarrel with kinsmen and friends, wandering, disease, hostility, fear of death, fear of thieves and of wounds, fear of the father's loss, and inauspiciousness in the house.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.venus",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "result_summary": "In the 6th, 8th or 12th, debilitated, or in the sign of the 12th: hatred of one's own kinsmen, affliction to the wife's people, loss of the fruit of business, loss of cows and buffaloes, affliction to wife and children, and separation from one's own kinsmen.",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 11-89"
+  },
+  {
+   "vector_id": "bphs.a36.vimsottari_mahadasa_lord_badly_placed.ketu_not_recovered",
+   "rule_ids": [
+    "jyotisha.bphs.a36.vimsottari_mahadasa_lord_badly_placed"
+   ],
+   "inputs": {
+    "graha": "Ketu"
+   },
+   "expected": {
+    "result_summary": null,
+    "reason": "not_recovered_from_this_scan"
+   },
+   "provenance": "Negative control."
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h1",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 1
+   },
+   "expected": {
+    "result_summary": "strength",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 1"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h2",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 2
+   },
+   "expected": {
+    "result_summary": "much wealth",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 2"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h3",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 3
+   },
+   "expected": {
+    "result_summary": "for the most part an evil result",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 3"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h4",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 4
+   },
+   "expected": {
+    "result_summary": "a dwelling",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 4"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h5",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 5
+   },
+   "expected": {
+    "result_summary": "learning and happiness",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 5"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h6",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 6
+   },
+   "expected": {
+    "result_summary": "fear arising from enemies",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 6"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h7",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 7
+   },
+   "expected": {
+    "result_summary": "what causes grief",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 7"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h8",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8
+   },
+   "expected": {
+    "result_summary": "[the text's word here is the death-result; not rendered]",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 8"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h9",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 9
+   },
+   "expected": {
+    "result_summary": "good and righteous works",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 9"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h10",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 10
+   },
+   "expected": {
+    "result_summary": "the mind, and the shelter of the king",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 10"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h11",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 11
+   },
+   "expected": {
+    "result_summary": "gain",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 11"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h12",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 12
+   },
+   "expected": {
+    "result_summary": "destruction of property, and hardship of many kinds",
+    "customer_rendered": false
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 90-91, cell for bhava 12"
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_result.h8_restricted",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_result"
+   ],
+   "inputs": {
+    "house_occupied_by_that_lord": 8,
+    "requested_output": "customer_reading"
+   },
+   "expected": {
+    "result_summary": null,
+    "output_policy": "refused",
+    "withheld_clause": "the dasa of the lord of the 8th brings about death for certain",
+    "reason": "death_claim"
+   },
+   "provenance": "Refusal control: the clause is retained in the manifest as historical testimony and must never be rendered about a living person."
+  },
+  {
+   "vector_id": "bphs.a36.bhavesa_dasa_conditioned_on_strength",
+   "rule_ids": [
+    "jyotisha.bphs.a36.bhavesa_dasa_conditioned_on_strength"
+   ],
+   "inputs": {
+    "configuration": "bhavesa_dasa_conditioned_on_strength"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lord of a bhava, possessed of strength and gone to its own house, or to exaltation, a trine or a benefic varga, surely produces the creature's result in full; when it stands in an enemy's or a debilitation place, and especially when it is weak, it produces the inauspicious result."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 92-93"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.pancamesa_and_dharmesa",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.pancamesa_and_dharmesa"
+   ],
+   "inputs": {
+    "configuration": "pancamesa_and_dharmesa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of the lord of the 5th, and that of the lord of the 9th, are declared exceedingly auspicious by the sages who know time."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.mantranatha_tapodhipa",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.mantranatha_tapodhipa"
+   ],
+   "inputs": {
+    "configuration": "mantranatha_tapodhipa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of the lord of the 9th together with the lord of the 5th is auspicious and gives kingdom and sons; and so, say the generous-minded, is the dasa of the lord of the 4th together with the lord of the 10th."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.graha_joined_to_pancamesa",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.graha_joined_to_pancamesa"
+   ],
+   "inputs": {
+    "configuration": "graha_joined_to_pancamesa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of a graha joined to the lord of the 5th gives good; the dasa of a lord joined to the lord of the 9th is supremely splendid."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.papa_drsta_kheta_rajya",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.papa_drsta_kheta_rajya"
+   ],
+   "inputs": {
+    "configuration": "papa_drsta_kheta_rajya"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of a graha aspected by a malefic gives a kingdom; the dasa of a graha joined to a benefic gives wealth; and with the lord of the 5th in the lagna, the dasa gives a kingdom."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.pancamesa_with_tapodhipa",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.pancamesa_with_tapodhipa"
+   ],
+   "inputs": {
+    "configuration": "pancamesa_with_tapodhipa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of the lord of the 9th together with the lord of the 5th gives kingdom, comfort and gain of wealth; and likewise the dasa of the lord of the 5th joined to the lord of the 10th is auspicious."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.manendra_with_pancamesa",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.manendra_with_pancamesa"
+   ],
+   "inputs": {
+    "configuration": "manendra_with_pancamesa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of the lord of the 10th joined to the lord of the 5th is auspicious; so is the dasa of the lord of the 9th together with the lord of the 4th; and so is the dasa of the lord of the 10th standing in the 5th."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.sasthasaptama_single_lord_in_10",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.sasthasaptama_single_lord_in_10"
+   ],
+   "inputs": {
+    "configuration": "sasthasaptama_single_lord_in_10"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "When one graha is lord of both the 6th and the 7th and stands in the 10th, its dasa is to be known as auspicious, and so is that of a graha joined to it."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.dvitiyasaptama_single_lord_in_4",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.dvitiyasaptama_single_lord_in_4"
+   ],
+   "inputs": {
+    "configuration": "dvitiyasaptama_single_lord_in_4"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "If one graha is lord of both the 2nd and the 7th and goes to the 4th, the dasa joined with it is to be known as auspicious, say the wise."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.dusthana_lords_with_pancamesa",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.dusthana_lords_with_pancamesa"
+   ],
+   "inputs": {
+    "configuration": "dusthana_lords_with_pancamesa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lords of the 6th, the 8th and the 12th, joined to the lord of the 5th — their dasa too is declared a giver of good by the best of poets."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.sukhesa_manesa_exchange",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.sukhesa_manesa_exchange"
+   ],
+   "inputs": {
+    "configuration": "sukhesa_manesa_exchange"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The lord of the 4th standing in the 10th and the lord of the 10th gone to the 4th — the dasa of both is auspicious, say those who know the science of light."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.four_lords_together",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.four_lords_together"
+   ],
+   "inputs": {
+    "configuration": "four_lords_together"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "If the lords of the 5th, the 10th, the 4th and the 9th are joined together anywhere at all, their dasa gives the fruit of a kingdom — and so, one may say, does that of the grahas joined with them."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.mantranatha_in_4_and_karmesa_in_4",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.mantranatha_in_4_and_karmesa_in_4"
+   ],
+   "inputs": {
+    "configuration": "mantranatha_in_4_and_karmesa_in_4"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of the lord of the 5th joined to the 4th is auspicious; the dasa of the lord of the 10th standing in the 4th gives a kingdom; and the dasa of a graha joined to those two, or aspected by them, gives a kingdom, say the learned who reflect on fate."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.buddhisa_of_the_tenth",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.buddhisa_of_the_tenth"
+   ],
+   "inputs": {
+    "configuration": "buddhisa_of_the_tenth"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "The dasa of the lord of the 5th from the 10th makes prosperity; the dasa of the lord of the 9th standing in the 10th gives a kingdom."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.benefic_lord_and_exalted_graha_in_a_bhava",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.benefic_lord_and_exalted_graha_in_a_bhava"
+   ],
+   "inputs": {
+    "configuration": "benefic_lord_and_exalted_graha_in_a_bhava"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "In whichever bhava there is a relation of a benefic lord and an exalted graha, in the dasa of that bhava there is exceeding and unbroken lordship."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.bhavesa_in_or_aspecting_its_own_wealth_sign",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.bhavesa_in_or_aspecting_its_own_wealth_sign"
+   ],
+   "inputs": {
+    "configuration": "bhavesa_in_or_aspecting_its_own_wealth_sign"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Whichever bhava's lord occupies or glances its own wealth-sign, at the time of that bhava's dasa there is very great gain of wealth."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.malefics_in_the_twelfth_from_a_bhava",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.malefics_in_the_twelfth_from_a_bhava"
+   ],
+   "inputs": {
+    "configuration": "malefics_in_the_twelfth_from_a_bhava"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Whatever stands in the 12th from a bhava brings destruction of wealth in its dasa; malefics in the trines from it bring the ruin of the self and of peace."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.dusthana_lords_in_trines_from_a_bhava",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.dusthana_lords_in_trines_from_a_bhava"
+   ],
+   "inputs": {
+    "configuration": "dusthana_lords_in_trines_from_a_bhava"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "When the lords of the 12th and 8th, or the Sun, the Moon and Saturn, are in the trines from a bhava, there is loss of children, affliction to the father and great distress of mind; where Ketu and Rahu meet there, affliction to children and loss of property, wandering abroad, trouble and fear at every step."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.malefics_in_6_or_8_from_a_bhava",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.malefics_in_6_or_8_from_a_bhava"
+   ],
+   "inputs": {
+    "configuration": "malefics_in_6_or_8_from_a_bhava"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Where malefic and debilitated grahas stand in the 6th and 8th from a bhava, there is repeated and scarcely bearable affliction, from disease or from the king."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.malefic_in_the_fourth_from_a_bhava",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.malefic_in_the_fourth_from_a_bhava"
+   ],
+   "inputs": {
+    "configuration": "malefic_in_the_fourth_from_a_bhava"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Where a malefic is in the 4th from a bhava, house and field are destroyed; if Mars, loss of cattle and the burning of the house; if Saturn, pain at the heart; if the Sun, the king's wrath; if Rahu, the carrying off of all one has, and fear from poison and thieves."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.rahu_in_the_tenth_from_a_bhava",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.rahu_in_the_tenth_from_a_bhava"
+   ],
+   "inputs": {
+    "configuration": "rahu_in_the_tenth_from_a_bhava"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Where Rahu is in the 10th from a bhava, there is pilgrimage to holy places."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.exalted_benefics_in_5_7_6_from_a_bhava",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.exalted_benefics_in_5_7_6_from_a_bhava"
+   ],
+   "inputs": {
+    "configuration": "exalted_benefics_in_5_7_6_from_a_bhava"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Learning, wealth, righteousness, good works, fame and success in manly effort follow where exalted benefic grahas are in the 5th, the 7th and the 6th from a bhava."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_combination.lords_of_9_10_1_together",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_combination.lords_of_9_10_1_together"
+   ],
+   "inputs": {
+    "configuration": "lords_of_9_10_1_together"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "In whichever place the lords of the 10th, the 9th and the lagna stand, the object of those bhavas is accomplished, and welfare follows according to the yoga."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 94-124"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_quality_grades.adhama",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_quality_grades"
+   ],
+   "inputs": {
+    "dasa_grade": "adhama"
+   },
+   "expected": {
+    "result_summary": "For a graha in the amsa of debilitation or of an enemy: 'the Lowest' — increaser of fear, trouble, disease and sorrow."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 127-137"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_quality_grades.madhya",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_quality_grades"
+   ],
+   "inputs": {
+    "dasa_grade": "madhya"
+   },
+   "expected": {
+    "result_summary": "For a graha come to a friend's sign or to exaltation by degrees: 'the Middle' — giver of wealth."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 127-137"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_quality_grades.purna",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_quality_grades"
+   ],
+   "inputs": {
+    "dasa_grade": "purna"
+   },
+   "expected": {
+    "result_summary": "For a graha merely exalted, or of superior strength: 'the Full' — giver of much lordship, though it also gives sickness."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 127-137"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_quality_grades.rikta",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_quality_grades"
+   ],
+   "inputs": {
+    "dasa_grade": "rikta"
+   },
+   "expected": {
+    "result_summary": "For a graha in deep debilitation and weak: 'the Empty' — giver of no fruit, and of disease and a hundred misfortunes."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 127-137"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_quality_grades.rohini",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_quality_grades"
+   ],
+   "inputs": {
+    "dasa_grade": "rohini"
+   },
+   "expected": {
+    "result_summary": "For a graha in the middle band between the end of debilitation and the degree of exaltation: 'the Ascending'."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 127-137"
+  },
+  {
+   "vector_id": "bphs.a36.dasa_quality_grades.sampurna",
+   "rule_ids": [
+    "jyotisha.bphs.a36.dasa_quality_grades"
+   ],
+   "inputs": {
+    "dasa_grade": "sampurna"
+   },
+   "expected": {
+    "result_summary": "For a graha in deep exaltation and of surpassing strength: 'the Complete' — giver of kingdom, enjoyment and good, and of the sidelong glance of Laksmi."
+   },
+   "provenance": "Adhyaya 36 (purva-khanda), slokas 127-137"
+  },
+  {
+   "vector_id": "bphs.a28.rajayoga_by_varga_dignity.parijata",
+   "rule_ids": [
+    "jyotisha.bphs.a28.rajayoga_by_varga_dignity.parijata"
+   ],
+   "inputs": {
+    "configuration": "parijata"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Standing in the Parijata [varga-dignity], a king who instructs the world.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 28 (purva-khanda), slokas 42-43"
+  },
+  {
+   "vector_id": "bphs.a28.rajayoga_by_varga_dignity.uttama",
+   "rule_ids": [
+    "jyotisha.bphs.a28.rajayoga_by_varga_dignity.uttama"
+   ],
+   "inputs": {
+    "configuration": "uttama"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "In the Uttama, a supreme king possessed of elephants, horses and chariots.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 28 (purva-khanda), slokas 42-43"
+  },
+  {
+   "vector_id": "bphs.a28.rajayoga_by_varga_dignity.gopura",
+   "rule_ids": [
+    "jyotisha.bphs.a28.rajayoga_by_varga_dignity.gopura"
+   ],
+   "inputs": {
+    "configuration": "gopura"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "In the Gopura, a tiger in beauty, his feet worshipped by kings.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 28 (purva-khanda), slokas 42-43"
+  },
+  {
+   "vector_id": "bphs.a28.rajayoga_by_varga_dignity.simhasana",
+   "rule_ids": [
+    "jyotisha.bphs.a28.rajayoga_by_varga_dignity.simhasana"
+   ],
+   "inputs": {
+    "configuration": "simhasana"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "In the Simhasana, a universal emperor, protector of the whole earth.",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 28 (purva-khanda), slokas 42-43"
+  },
+  {
+   "vector_id": "bphs.a28.kendra_kona_lord_yoga",
+   "rule_ids": [
+    "jyotisha.bphs.a28.kendra_kona_lord_yoga"
+   ],
+   "inputs": {
+    "configuration": "kendra_kona_lord_yoga"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "ministerial office, royal honour, and the kendra-kona conjunction as the general maker of raja-yoga",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 28 (purva-khanda), slokas 39-50"
+  },
+  {
+   "vector_id": "bphs.a29.rajayoga_from_atmakaraka_and_putrakaraka",
+   "rule_ids": [
+    "jyotisha.bphs.a29.rajayoga_from_atmakaraka_and_putrakaraka"
+   ],
+   "inputs": {
+    "configuration": "rajayoga_from_atmakaraka_and_putrakaraka"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "raja-yoga framed either from the Jaimini karakas or from the lords of the 1st and 5th",
+    "output_policy": "refused"
+   },
+   "provenance": "Adhyaya 29 (purva-khanda), slokas 1-4"
+  },
+  {
+   "vector_id": "bphs.a37.bhukti_quality.own_dvadasamsa_or_lord_in_own_drekkana",
+   "rule_ids": [
+    "jyotisha.bphs.a37.bhukti_quality.own_dvadasamsa_or_lord_in_own_drekkana"
+   ],
+   "inputs": {
+    "configuration": "own_dvadasamsa_or_lord_in_own_drekkana"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "When the lagna is in its own dvadasamsa, or its lord in its own drekkana, the sages who reflect on time call that bhukti auspicious."
+   },
+   "provenance": "Adhyaya 37 (purva-khanda), slokas 2-7"
+  },
+  {
+   "vector_id": "bphs.a37.bhukti_quality.own_or_friendly_trimsamsa",
+   "rule_ids": [
+    "jyotisha.bphs.a37.bhukti_quality.own_or_friendly_trimsamsa"
+   ],
+   "inputs": {
+    "configuration": "own_or_friendly_trimsamsa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "If placed in its own trimsamsa, or in a friend's trimsamsa, that bhukti is declared auspicious by the wise who know time."
+   },
+   "provenance": "Adhyaya 37 (purva-khanda), slokas 2-7"
+  },
+  {
+   "vector_id": "bphs.a37.bhukti_quality.friendly_navamsa_and_dvadasamsa",
+   "rule_ids": [
+    "jyotisha.bphs.a37.bhukti_quality.friendly_navamsa_and_dvadasamsa"
+   ],
+   "inputs": {
+    "configuration": "friendly_navamsa_and_dvadasamsa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Standing in a friend's sign and navamsa, and in a friend's dvadasamsa, that bhukti is declared auspicious."
+   },
+   "provenance": "Adhyaya 37 (purva-khanda), slokas 2-7"
+  },
+  {
+   "vector_id": "bphs.a37.bhukti_quality.fifth_lords_navamsa_and_dvadasamsa",
+   "rule_ids": [
+    "jyotisha.bphs.a37.bhukti_quality.fifth_lords_navamsa_and_dvadasamsa"
+   ],
+   "inputs": {
+    "configuration": "fifth_lords_navamsa_and_dvadasamsa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Standing in the sign and navamsa of the 5th, and in the dvadasamsa of the 5th, or in a friend's drekkana, that bhukti brings good."
+   },
+   "provenance": "Adhyaya 37 (purva-khanda), slokas 2-7"
+  },
+  {
+   "vector_id": "bphs.a37.bhukti_quality.ninth_lords_navamsa_and_dvadasamsa",
+   "rule_ids": [
+    "jyotisha.bphs.a37.bhukti_quality.ninth_lords_navamsa_and_dvadasamsa"
+   ],
+   "inputs": {
+    "configuration": "ninth_lords_navamsa_and_dvadasamsa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Standing in the sign and navamsa of those, and in the dvadasamsa of the 9th, or in Jupiter's drekkana, that bhukti brings good."
+   },
+   "provenance": "Adhyaya 37 (purva-khanda), slokas 2-7"
+  },
+  {
+   "vector_id": "bphs.a37.bhukti_quality.fourth_lords_navamsa_and_dvadasamsa",
+   "rule_ids": [
+    "jyotisha.bphs.a37.bhukti_quality.fourth_lords_navamsa_and_dvadasamsa"
+   ],
+   "inputs": {
+    "configuration": "fourth_lords_navamsa_and_dvadasamsa"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Standing in the sign and navamsa of the 4th, and in the dvadasamsa of the 4th, or in the drekkana of the 4th, that bhukti is auspicious."
+   },
+   "provenance": "Adhyaya 37 (purva-khanda), slokas 2-7"
+  },
+  {
+   "vector_id": "bphs.a37.antardasa_arithmetic",
+   "rule_ids": [
+    "jyotisha.bphs.a37.antardasa_arithmetic"
+   ],
+   "inputs": {
+    "configuration": "antardasa_arithmetic"
+   },
+   "expected": {
+    "customer_rendered": false,
+    "result_summary": "Multiply the [one] dasa by the [other] dasa and divide by ten; the quotient is months, and multiplied by thirty, days.",
+    "worked_example_in_text": "The text works it: the Sun's mahadasa being 6 years, the Sun's own antardasa within it is 6 x 6 = 36, divided by ten = 3 months and 18 days."
+   },
+   "provenance": "Adhyaya 37 (purva-khanda), slokas 1"
+  }
+ ]
+}

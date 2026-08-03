@@ -3139,6 +3139,26 @@
       "verified_scope": "Metadata (title, catalog date 1928) inspected; djvu.txt fetched to scratch space and read in full (not locally mirrored in sources/, since it is not usable for extraction). The English preface (roughly the first 200 lines), by editor V. Subrahmanya Sastri and describing this as a 'third edition', discusses manuscript collation (a Kankanhalli manuscript, 54-56 chapters, two chapters missing) and is useful edition-history context corroborating the multi-recension picture already noted in source_audit.md. The remaining approximately 25,000 lines are the Devanagari body rendered almost entirely as OCR noise (repeated punctuation and stray glyphs, not readable Devanagari), so this specific digitization is not usable for content extraction despite its readable preface.",
       "rights_note": "Archive.org licenseurl is not populated for this item at inspection time; the catalog date (1928) and press (Nirnaya Sagar) make it very likely public domain on the same basis as the 1907 edition registered above, but item-level rights were not independently re-confirmed beyond the catalog record.",
       "next_action": "Low priority relative to jyotisha_kalyanavarma_saravali_nirnayasagar_1907_archive, whose OCR is dramatically more legible. Retain only as a third-witness cross-check for the editor's own preface and manuscript-history claims (chapter count, missing chapters)."
+    },
+    {
+      "id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+      "tradition": "indian_jyotisha",
+      "branch": "parashari_natal",
+      "title": "Brihat Parashara Hora Shastra, Purva and Uttara Khanda, with Subodhini - legibility re-audit and delineation extraction",
+      "author": "Traditional attribution to Parashara; Sanskrit commentary by Jatashankar's son Sridhara; Uttara Khanda edited by Govinda Sharma Shastri",
+      "repository": "Nepal Sanskrit University/Balmeeki Campus digitization by eGangotri, hosted at Internet Archive; local copy at docs/research/multitradition/jyotisha/sources/bphs_subodhini_1899_djvu.txt",
+      "url": "https://archive.org/details/xpnh_brihat-parashara-hora-shastra-purva-uttara-khanda-subodhini-shridhar-jatash",
+      "source_type": "sanskrit_hindi_scan_and_ocr",
+      "archive_identifier": "xpnh_brihat-parashara-hora-shastra-purva-uttara-khanda-subodhini-shridhar-jatash",
+      "text_file": "bphs_subodhini_1899_djvu.txt",
+      "text_sha256": "edf836323aed641925dea689e0248a582b66238835ac55d8381c372b98ef1684",
+      "text_bytes": 2733337,
+      "edition": "Mumbai printing identified by the item as 1899; the running headers and colophons of the first half call it 'Brhatparasarahorasaramsa' and the publisher's preface claims 100 adhyayas across two khandas and states the work had never previously been printed",
+      "evidence_grade_target": "A",
+      "status": "full_text_inspected",
+      "verified_scope": "SUPERSEDES THE LEGIBILITY FINDING OF jyotisha_bphs_subodhini_1899_archive, WHICH IS LEFT UNMODIFIED AS THE EARLIER RECORD. The same file was re-read directly in Devanagari on 2026-08-02: 1,106,274 characters, 807,038 Devanagari codepoints, 100 question marks in the entire file, 37,266 lines, 463 lines carrying an adhyaya marker. The earlier verdict 'OCR is severely corrupted and cannot control wording' is wrong. The OCR is ordinary noisy Devanagari: ligatures garble in places, printed sloka numerals are occasionally misread, marginal library stamps and eGangotri notices are interleaved with verse, and page columns are sometimes interleaved - but continuous verse text is readable throughout the purva-khanda and 107 rules covering 132 of the 144 bhavesa-in-bhava cells of adhyaya 15 were transcribed from it directly. Specific losses located and named: adhyaya 13's Aries block straddles a page-image gap at djvu lines 6135-6147; the long two-column sragdhara verses of adhyaya 36 interleave their columns; and djvu lines 15871-17180 carry a block whose running headers number chapters 18 and 19, breaking the sequence of adhyaya 37 on either side of it.",
+      "rights_note": "Digitized pages state CC0/public domain, while Archive metadata has an empty rights field. The pack quotes the Sanskrit original and supplies its own unreviewed rendering rather than relying on any modern copyrighted translation, which is the practice the corpus defensibility standard prescribes for a public-domain original.",
+      "next_action": "Independent Sanskrit review of the 107 renderings in jyotisha/bphs_rule_manifest.json before any of them is promoted past research_only; then collate this recension's adhyaya order against the Sharma and Santhanam recensions verse by verse, since the two differ substantially and this pack refuses to fill this recension's gaps from theirs."
     }
   ]
 }

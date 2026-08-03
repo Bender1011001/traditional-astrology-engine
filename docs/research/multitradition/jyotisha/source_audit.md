@@ -423,3 +423,140 @@ Two consequences worth stating:
 Measured this pass: 2,341 words of Jyotisha delineation encoded against roughly
 440,000 words of fetched source across BPHS, both Saravali witnesses,
 Brihat Jataka and the untouched remainder of Phaladeepika.
+
+
+## CORRECTION 2026-08-02: BPHS is legible. The earlier verdict was false.
+
+The 2026-08-02 entry above and the registry entry
+`jyotisha_bphs_subodhini_1899_archive` both record the 1899 Subodhini BPHS scan
+as unusable - "OCR is severely corrupted and cannot control wording", and in the
+defensibility spec's worked-example table, "almost total failure (near-all `?`
+characters)". **That is wrong, and it was wrong when it was written.**
+
+Measured directly on the local mirror at
+`jyotisha/sources/bphs_subodhini_1899_djvu.txt`
+(sha256 `edf836323aed641925dea689e0248a582b66238835ac55d8381c372b98ef1684`):
+
+| Measure | Value |
+|---|---|
+| Characters | 1,106,274 |
+| Devanagari codepoints | 807,038 (73%) |
+| `?` characters in the entire file | 100 |
+| Lines | 37,266 |
+| Lines carrying an adhyaya marker | 463 |
+
+A file with 100 question marks in 1.1 million characters is not "near-all `?`".
+The earlier finding appears to have been produced from an impression of the
+file rather than from reading it, and it cost the corpus a root text for two
+audit passes. This is the fifth blocker of this exact shape in this corpus - a
+Nahuatl text, Arabic/Latin TEI, the Tibetan White Beryl, and BPHS twice - and
+the pattern is worth naming: **an "unreadable source" finding is a claim about
+the source, and the only evidence that can support it is quoted illegible
+lines.**
+
+### What the OCR is actually like
+
+Ordinary noisy Devanagari book OCR. Ligatures garble in places
+(`ग्रहप्राइभोवाध्यायः` for `ग्रहप्रादुर्भावाध्यायः`); printed sloka numerals are
+occasionally misread (adhyaya 15 prints its slokas 84-86 as `८७`, `८८`, `८६`);
+and library stamps ("Nepal Sanskrit University, Balmeeki Campus, Kathmandu"),
+eGangotri public-domain notices and page furniture are interleaved with verse.
+Against that, continuous verse text is readable throughout the purva-khanda,
+and every one of the 107 rules now in `bphs_rule_manifest.json` was transcribed
+from it by eye.
+
+### Where it genuinely does degrade, with evidence
+
+Three specific losses were located. None of them is general corruption.
+
+1. **A page-image gap inside adhyaya 13 (Aries lagna).** At djvu lines
+   6135-6147 the only surviving content is:
+
+   ```
+   6137 'छ '
+   6138 '® Nepal SanskritUniversity, Balmeeki Campus, Kathmandu '
+   6142 '८८-0. In Public Domain. Digitization by eGangotri '
+   6145 '0. बृहत्पाराशरहोरासारांशः । '
+   ```
+
+   Verse text is clean on both sides of it (line 6134 ends
+   `परतंत्रेण जीवस्य पापकः`, line 6148 resumes `…मोपि निश्चितम्`). The list of
+   Aries's functional benefics and malefics falls inside the gap. That rule is
+   marked `recovery: "partial"` and is not reconstructed.
+
+2. **Two-column interleave in adhyaya 36.** Each graha's `utkrsta` and `papa`
+   dasha results are the two halves of one long sragdhara verse printed in
+   facing columns, and the OCR reads across them. The graha names, the verse
+   numbers and the good/bad split survive unambiguously; the clause ORDER
+   inside each half is reconstructed. Both affected rules carry
+   `reading_confidence: "medium"` and say so in their exceptions.
+
+3. **An out-of-sequence block of ~1,300 lines.** Djvu lines 15871-17180 sit in
+   the middle of adhyaya 37 but carry running headers numbering their chapters
+   18 and 19 (`प्रश्नाध्यायः १८`, `अध्यायानुक्रमवर्णनाध्यायः १९`). Adhyaya 37's
+   own header resumes at line 17189. Something is bound or scanned out of order
+   here; it was not investigated further this pass because nothing was mined
+   from it.
+
+### What the recension actually is
+
+Not the BPHS a modern reader knows, and the pack says so everywhere. The
+running headers and colophons of the first half call it
+**`बृहत्पाराशरहोरासारांश`** - the *saramsa*, the essence or abridgement, of the
+Brhatparasarahora. The publisher's preface (djvu lines 260-340) claims the work
+runs to a hundred adhyayas in two khandas, states that it had *never before been
+printed*, and quotes the closing sloka `एवं होराशताध्याया सर्वपापप्रणाशिनी`. The
+purva-khanda's chapter order is Jaimini-inflected in a way the modern
+recensions are not: rasi-drsti at adhyaya 4, karakamsa-phala at 9, arudha at 11,
+upapada at 12. The uttara-khanda restarts its numbering at 1 and runs
+ashtakavarga, sadbala, ista-kasta, rasmi, lokayatra, ayurdaya, kalamsa and
+abdacharya.
+
+Practical consequence, and it is not a small one: **this pack's gaps are not
+necessarily BPHS's gaps.** Adhyaya 15 gives 132 of the 144 bhavesa-in-bhava
+cells; the missing twelve are missing from *this recension's printed text*, and
+the modern Sharma and Santhanam recensions do carry results for several of them.
+Nothing was imported to fill them.
+
+### What was extracted
+
+| Block | Adhyaya | Cells / rules |
+|---|---|---|
+| Bhavesa in bhava (lord of each bhava, in each bhava) | 15 | **132 of 144 cells** in 12 rules |
+| Governing proportionality qualifiers | 15, 36 | 3 rules |
+| Graded graha drsti (pada scale) | 4 | 4 rules, 28 offset cells |
+| Rasi drsti | 4 | 1 rule |
+| Functional nature by lagna | 13 | 12 rules (Aries partial) |
+| Maraka doctrine and its exemption | 13 | 1 rule |
+| Dhana yogas | 30 | 13 rules |
+| Daridra and bandhana yogas | 31 | 20 rules |
+| Raja yogas (varga ladder, kendra-kona, karaka-based) | 28, 29 | 6 rules |
+| Vimsottari mahadasa results, 4 conditions x 9 grahas | 36 | 4 rules, 34 graha cells |
+| Dasa of the lord of each bhava | 36 | 1 rule, 12 cells |
+| Dasa combinations and reckoning-from-a-bhava | 36 | 22 rules |
+| Named dasa quality grades (Sampurna...Adhama) | 36 | 1 rule, 6 grades |
+| Antardasa arithmetic and bhukti quality | 37 | 7 rules |
+
+**107 rules, 342 validation vectors** (every rule referenced by at least one),
+`customer_prediction: false` throughout, publication status `research_only`.
+
+### What is NOT in this recension
+
+The 9x12 **graha-in-bhava** grid that the priority order expected. It is not
+there. Adhyaya 14 is titled for the twelve bhavas but its content is compound
+conditional judgment (lord plus aspect plus co-tenant), not a clean
+graha-by-house grid, and no chapter in either khanda supplies one. The
+Phaladeepika Sun gap at houses 1-5, 7 and 8 therefore **cannot** be filled from
+BPHS in this edition, and no attempt was made to fill it. That is a negative
+result and it is worth as much as the positive ones: it means the corpus's
+graha-in-bhava coverage still depends on a single damaged Phaladeepika scan.
+
+### Volume
+
+8,607 words of English delineation rendering encoded this pass, against
+1,106,274 characters of BPHS source read or scanned. For comparison, the whole
+prior Jyotisha delineation layer stood at 2,341 words. The bhavesa block alone
+is roughly seven words of Sanskrit per cell and about twenty of rendering, which
+is denser than Phaladeepika's graha-in-bhava block and covers a technique
+(judging a house by where its lord went) that the engine can already compute for
+every chart it casts.
