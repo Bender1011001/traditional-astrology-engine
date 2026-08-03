@@ -544,7 +544,8 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _hidden(report, facts)
     _ten_gods(report, facts)
     _relations(report, facts)
-    _luck(report, facts)
+    _hour_fork_report(report, facts)
+    _luck(report, facts, birth.sex)
     _delineations(report, facts)
     _limits(report, facts)
     return report
@@ -708,19 +709,38 @@ def _relations(report: TraditionReport, facts: dict) -> None:
         s.notes.append("No branch relation in the encoded set is formed.")
 
 
-def _luck(report: TraditionReport, facts: dict) -> None:
+def _luck(report: TraditionReport, facts: dict, sex: str | None) -> None:
     s = report.add(ReportSection("Luck Pillars (大運)", level=2))
     lp = facts.get("luck_pillars") or {}
     s.notes.append(
         f"Luck pillars begin at age {lp.get('start_age')}. "
         f"{lp.get('direction_rule', '')}"
     )
-    s.refusals.append(
-        "Direction depends on the year stem's polarity combined with the "
-        "native's SEX, which this engine does not take as input. Both sequences "
-        "are therefore shown below and neither is asserted."
-    )
-    for direction, seq in (lp.get("sequences") or {}).items():
+    sequences = lp.get("sequences") or {}
+    resolved: str | None = None
+    if sex in ("male", "female"):
+        polarity = lp.get("year_stem_polarity")
+        # The rule the engine itself states: yang year + male, or yin year +
+        # female, runs forward; the complementary cases run reverse.
+        resolved = (
+            "forward"
+            if (polarity == "yang") == (sex == "male")
+            else "reverse"
+        )
+        s.notes.append(
+            f"Sex supplied ({sex}); with a {polarity}-stem year the direction "
+            f"resolves to **{resolved}** under the stated rule, and only that "
+            "sequence is asserted."
+        )
+    else:
+        s.refusals.append(
+            "MISSING INPUT, not doctrinal ambiguity: direction depends on the "
+            "year stem's polarity combined with the native's sex, which was "
+            "not supplied. Both sequences are shown; provide sex to resolve."
+        )
+    for direction, seq in sequences.items():
+        if resolved and direction != resolved:
+            continue
         sub = report.add(
             ReportSection(f"{direction.title()} sequence", level=3)
         )
@@ -817,3 +837,55 @@ def _limits(report: TraditionReport, facts: dict) -> None:
         "are the heart of Ziping judgment and the corpus does not yet hold a "
         "decision procedure for them from a controlling edition.",
     ])
+
+
+def _hour_fork_report(report: TraditionReport, facts: dict) -> None:
+    """The Chinese birth-time fork as a difference report, not a footnote.
+
+    When true-solar and clock time give different hour pillars, the system does
+    not possess one chart - it possesses two candidates. Everything invariant
+    is the stable core; this section lists exactly what changes, so the reader
+    does not have to track the fork mentally through the whole report.
+    """
+    cands = facts.get("hour_pillar_candidates") or {}
+    labels = {v["label"] for v in cands.values()}
+    if len(labels) <= 1:
+        return
+    from ..multitradition import bazi as _bazi
+
+    s = report.add(ReportSection("The Hour Fork — what actually changes", level=2))
+    solar = cands.get("true_solar_time", {})
+    clock = cands.get("clock_time", {})
+    day_stem = (facts.get("day_master") or {}).get("stem")
+    s.notes.append(
+        "The stable core - year, month and day pillars, the Day Master, month "
+        "command, and every branch relation not involving the hour - is "
+        "identical under both time conventions. The differences, exhaustively:"
+    )
+    rows = []
+    for name, cand in (("true solar time", solar), ("clock time", clock)):
+        branch = cand.get("branch", "")
+        stem = cand.get("stem", "")
+        ten_god = ""
+        if day_stem and stem:
+            try:
+                _key, glyph = _bazi.ten_god(day_stem, stem)
+                ten_god = glyph
+            except Exception:
+                ten_god = "?"
+        hidden = ", ".join(_bazi.HIDDEN_STEMS.get(branch, []))
+        rows.append({
+            "Basis": name,
+            "Hour pillar": cand.get("label", ""),
+            "Hour stem Ten God": ten_god,
+            "Hour branch hides": hidden or "—",
+            "Time": cand.get("time", ""),
+        })
+    s.table = rows
+    s.notes.append(
+        "Every hour-keyed judgment in this report therefore has two answers. "
+        "True solar time is listed first as the disclosed product convention - "
+        "practice is genuinely divided, and this is a convention, not a "
+        "historically resolved fact. Rectification against known life events "
+        "is how a practitioner would settle it; a birth record alone cannot."
+    )

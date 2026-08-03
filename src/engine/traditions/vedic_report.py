@@ -226,6 +226,13 @@ def build_report(birth: BirthInput) -> TraditionReport:
 
     _opening(report, facts, lagna)
     _grahas_section(report, facts, grahas)
+    # Synthesis runs over everything the graha sections fired; inserted after
+    # they are built but positioned right after the opening in the reading.
+    from .synthesis import synthesize
+
+    fired = [d for s in report.sections for d in s.delineations]
+    synthesis_section = synthesize(fired, facts, tradition="jyotisha")
+    report.sections.insert(1, synthesis_section)
     _bhavas_section(report, facts, houses, lordships, grahas)
     _yogas_section(report, facts)
     _dasha_section(report, facts)

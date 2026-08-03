@@ -87,7 +87,15 @@ class Disclosure:
 
 @dataclass(frozen=True)
 class BirthInput:
-    """A resolved birth moment. Timezone offset is explicit; nothing is guessed."""
+    """A resolved birth moment. Timezone offset is explicit; nothing is guessed.
+
+    The optional fields exist because several traditions REQUIRE them and their
+    absence is a different problem from doctrinal ambiguity (review finding 9):
+    BaZi luck-pillar direction and Zi Wei decade limits need the native's sex
+    under the traditions' own conventions; time-dependent structures need to
+    know how certain the recorded time is. None means "not supplied", and an
+    engine must say "missing input", never silently pick.
+    """
 
     name: str
     civil_date: date
@@ -96,6 +104,12 @@ class BirthInput:
     latitude: float
     longitude: float
     place_label: str
+    # Optional, tradition-specific. sex is the traditional male/female
+    # classification several systems key their arithmetic to - engines treat
+    # it as that technical input, nothing more.
+    sex: str | None = None                  # "male" | "female" | None
+    birth_time_certainty: str | None = None  # e.g. "exact", "rounded", "approximate"
+    time_source: str | None = None           # e.g. "birth certificate", "memory"
 
     @property
     def civil_datetime(self) -> datetime:
@@ -124,6 +138,10 @@ class BirthInput:
             "latitude": self.latitude,
             "longitude": self.longitude,
             "place_label": self.place_label,
+            **({"sex": self.sex} if self.sex else {}),
+            **({"birth_time_certainty": self.birth_time_certainty}
+               if self.birth_time_certainty else {}),
+            **({"time_source": self.time_source} if self.time_source else {}),
         }
 
 

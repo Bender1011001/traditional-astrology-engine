@@ -185,6 +185,90 @@ def _table_md(rows: list[dict[str, Any]]) -> list[str]:
     return out
 
 
+def render_layered(report: TraditionReport) -> str:
+    """Three outputs from one dataset (review finding 16).
+
+    Part I  READING - synthesis and structural notes; only supported
+                      conclusions, no audit language, no citations apparatus.
+    Part II EVIDENCE - every quoted delineation with citation, trigger,
+                      grade and table, grouped under its section.
+    Part III AUDIT  - refusals (with their categories), withheld content
+                      notices, method notes and configuration.
+
+    The evidence database stays relational; the reader is no longer asked to
+    process forty-two refusals before finding out what the system can say.
+    """
+    birth = report.birth
+    lines = [
+        f"# {report.display_name}",
+        "",
+        f"**{birth.get('name')}** — {birth.get('civil_date')} {birth.get('civil_time')} "
+        f"(UTC{birth.get('utc_offset_hours'):+g}), {birth.get('place_label')}",
+        "",
+        "## Part I — Reading",
+        "",
+    ]
+    for section in report.sections:
+        if not section.notes:
+            continue
+        lines.append("#" * min(section.level + 1, 4) + " " + section.title)
+        lines.append("")
+        for note in section.notes:
+            lines.append(note)
+            lines.append("")
+
+    lines += ["## Part II — Evidence", ""]
+    for section in report.sections:
+        if not section.delineations and not section.table:
+            continue
+        lines.append("#" * min(section.level + 1, 4) + " " + section.title)
+        lines.append("")
+        if section.table:
+            lines.extend(_table_md(section.table))
+            lines.append("")
+        for d in section.delineations:
+            lines.append(f"> {d.text}")
+            lines.append(">")
+            detail = f"> — {d.source}"
+            if d.trigger:
+                detail += f" · selected by: {d.trigger}"
+            detail += f" · grade {d.evidence_grade}"
+            lines.append(detail)
+            if d.topics_redacted:
+                lines.append(">")
+                lines.append(
+                    "> *The source also states a "
+                    + " and a ".join(d.topics_redacted)
+                    + " result here; it is withheld by publication policy.*"
+                )
+            if d.caveat:
+                lines.append(">")
+                lines.append(f"> *{d.caveat}*")
+            lines.append("")
+
+    lines += ["## Part III — Audit", ""]
+    any_refusal = False
+    for section in report.sections:
+        for refusal in section.refusals:
+            any_refusal = True
+            lines.append(f"- **{section.title}**: {refusal}")
+    if any_refusal:
+        lines.append("")
+    if report.method_notes:
+        lines.append("### Method and limits")
+        lines.append("")
+        for note in report.method_notes:
+            lines.append(f"- {note}")
+        lines.append("")
+    lines.append(
+        f"*{report.delineation_count} sourced delineations · "
+        f"{report.word_count:,} words. Every quoted judgment in Part II carries "
+        f"its rule id and source; everything the sources do not support is in "
+        f"Part III rather than filled in.*"
+    )
+    return "\n".join(lines)
+
+
 def render_markdown(report: TraditionReport) -> str:
     birth = report.birth
     lines = [

@@ -201,3 +201,103 @@ def test_no_raw_json_in_rendered_prose(vedic, bazi):
 
 def test_bazi_title_does_not_overclaim(bazi):
     assert "Full Reading" not in bazi.display_name
+
+
+# --- synthesis layer (review finding 19 / P2) --------------------------------
+
+
+def test_corroboration_requires_distinct_authors():
+    """One author quoted twice is one witness, never two."""
+    from src.engine.traditions.synthesis import synthesize
+
+    same_author = [
+        Delineation(text="wealthy and prosperous", rule_id="jyotisha.saravali.22.graha_in_rasi.sun",
+                    source="s", evidence_grade="B", trigger="Sun in Cancer"),
+        Delineation(text="endowed with riches", rule_id="jyotisha.saravali.30.graha_in_bhava.sun",
+                    source="s", evidence_grade="B", trigger="Sun in the 12th bhāva"),
+    ]
+    section = synthesize(same_author, None)
+    blob = " ".join(section.notes)
+    assert "Corroborated" not in blob
+    assert "Single-witness" in blob or "1 author" in blob
+
+
+def test_contradiction_is_reported_not_averaged():
+    from src.engine.traditions.synthesis import synthesize
+
+    conflict = [
+        Delineation(text="wealthy and prosperous", rule_id="jyotisha.saravali.22.graha_in_rasi.moon",
+                    source="s", evidence_grade="B", trigger="Moon in Cancer"),
+        Delineation(text="poor and devoid of wealth", rule_id="jyotisha.phaladeepika.08.planet_in_bhava.moon",
+                    source="s", evidence_grade="B", trigger="Moon in the 12th bhāva"),
+    ]
+    section = synthesize(conflict, None)
+    blob = " ".join(section.notes)
+    assert "CONTRADICTION" in blob
+    assert "No precedence rule in the corpus resolves this" in blob
+
+
+def test_vedic_synthesis_applies_the_sources_own_gates(vedic):
+    syn = next(s for s in vedic.sections if s.title == "Synthesis by Life Topic")
+    blob = " ".join(syn.notes)
+    # the gates are cited by sloka, which is what makes them sourced
+    assert "23.86" in blob or "24.23" in blob or "30.86" in blob
+    assert "invent" in blob or "unresolved" in blob or "own gates" in blob
+
+
+# --- three-layer rendering (review finding 16 / P3) --------------------------
+
+
+def test_layered_report_separates_reading_evidence_audit(vedic):
+    from src.engine.traditions.report import render_layered
+
+    md = render_layered(vedic)
+    i_reading = md.index("## Part I — Reading")
+    i_evidence = md.index("## Part II — Evidence")
+    i_audit = md.index("## Part III — Audit")
+    assert i_reading < i_evidence < i_audit
+    # no quoted evidence before Part II, no refusal notices before Part III
+    assert "> " not in md[:i_evidence]
+    assert "withheld:" not in md[:i_audit].replace(
+        "withheld per publication policy", ""
+    )
+
+
+# --- input forks (review finding 9 / P4) -------------------------------------
+
+
+def test_sex_input_resolves_bazi_luck_direction():
+    b = BirthInput(name="F", civil_date=date(1996, 8, 13), civil_time="07:18",
+                   utc_offset_hours=-7.0, latitude=38.2494, longitude=-122.04,
+                   place_label="F", sex="male")
+    report = build_bazi(b)
+    seqs = [s.title for s in report.sections if "sequence" in s.title]
+    assert seqs == ["Forward sequence"]
+    luck = next(s for s in report.sections if s.title.startswith("Luck"))
+    assert not luck.refusals
+
+
+def test_missing_sex_is_named_missing_input_not_doctrine(bazi):
+    luck = next(s for s in bazi.sections if s.title.startswith("Luck"))
+    assert any("MISSING INPUT" in r for r in luck.refusals)
+    seqs = [s.title for s in bazi.sections if "sequence" in s.title]
+    assert len(seqs) == 2
+
+
+def test_hour_fork_difference_report_exists(bazi):
+    fork = next(s for s in bazi.sections if "Hour Fork" in s.title)
+    assert len(fork.table) == 2
+    gods = {row["Hour stem Ten God"] for row in fork.table}
+    assert len(gods) == 2, "the fork must show the interpretive difference"
+
+
+def test_no_backspace_bytes_in_tradition_sources():
+    """A patch pipeline twice turned regex \b into literal backspace bytes,
+    producing patterns that compile and match nothing. Guard the whole tree."""
+    import pathlib
+
+    root = pathlib.Path("src/engine")
+    offenders = [
+        str(p) for p in root.rglob("*.py") if b"\x08" in p.read_bytes()
+    ]
+    assert not offenders, offenders
