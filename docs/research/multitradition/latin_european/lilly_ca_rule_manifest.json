@@ -1,0 +1,1962 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-03",
+ "tradition_id": "latin_european",
+ "school_id": "lilly_christian_astrology_1647",
+ "source_pack_id": "latin_european_lilly_ca1647_v1",
+ "source_edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+ "source_registry_ids": [
+  "latin_european_lilly_ca_1647_wellcome_archive",
+  "latin_european_lilly_ca_1647_bim_archive",
+  "latin_european_lilly_ca_1647_direct_extraction_2026_08"
+ ],
+ "implementation_status": "research_verified",
+ "publication_status": "research_only",
+ "evidence_note": "Extracted directly from William Lilly's Christian Astrology (London 1647, first edition), the governing English witness of the Latin-European horary/natal tradition, via two independent public-domain archive.org witnesses of the 1647 printing: the Wellcome Collection scan b30338724 (Public Domain Mark; OCR text layer pinned as sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa) and the British Library microfilm scan bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647 (OCR pinned as sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d). Christian Astrology was checked against the EEBO-TCP catalog (textcreationpartnership/Texts TCP.csv) and is NOT among the TCP transcriptions, so OCR witnesses are the best available machine text; both were probed and found legible for connected prose (early-modern spelling and long-s preserved in the BIM layer), while the two load-bearing numeric tables (the p.107 orb table and the p.115 fortitude/debility point table) are OCR-degraded in both layers and were therefore read digit-by-digit from pinned photographs of the 1647 pages (sources/ca1647_wellcome_leaf141_p107_orb_table.jpg sha256 5d752cfce2dae1f287f8b646f988ee7dd77d2456388c5d73c95c5d3302ec8090 and sources/ca1647_wellcome_leaf149_p115_point_table.jpg sha256 083de3958ca9145e69c05a6d116490bc9909642ff94fd9ed0441aff3fdd49601, both fetched from the Wellcome item's IIIF endpoint). Quotation policy: quotes are verbatim early-modern English with exactly two restorations - long-s OCR artifacts normalized to 's', and planet/sign sigils that the OCR renders as junk glyphs restored in square brackets from context; residual numeric OCR doubts are recorded inside the affected rule rather than silently resolved. rendering_grade is verbatim_early_modern_english throughout; no translation was needed or performed, and no modern edited edition (Regulus 1985 or later regularizations) was consulted or quoted. Horary-specific doctrine (considerations before judgment, perfection of questions) is carried with domain 'other' and an explicit scope_note rather than being passed off as natal. Death-timing, lifespan (Hyleg/Alcocoden), and criminal/moralizing fate-claims in CA are deliberately NOT extracted; see the refusal list in defensibility_spec.md. Cross-references against the al-Qabisi Arabic pack (islamicate/al_qabisi_rule_manifest.json) are recorded per-rule in conflicts_with, including the void-of-course CONCORDANCE (both authors state the any-planet, remainder-of-sign definition), the orb-doctrine conflict (flat 6-degree application vs per-planet moieties), the reception divergence (one-directional qabul vs Lilly's mutual reception), and the Ptolemaic-vs-Egyptian terms conflict.",
+ "rules": [
+  {
+   "rule_id": "lilly.ca1.aspect_inventory_and_quality",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "Of severall Termes, Aspects, words of Art (CA pp. 105-109)",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "classifying any aspect between two planets"
+   },
+   "conclusion": {
+    "quote": "You must understand amongst these Aspects, the Quadrate Aspect is a signe of imperfect emnity; and that the Opposition is an aspect or argument of perfect hatred [...] The Sextill and Trine aspects are arguments of Love, Unity and Friendship; but the [Trine] is more forcible [...] Conjunctions are good or bad, as the Planets in [conjunction] are friends or enemies to one another.",
+    "aspect_angles": {
+     "sextile": 60,
+     "square": 90,
+     "trine": 120,
+     "opposition": 180,
+     "conjunction": 0
+    },
+    "quality": {
+     "square": "imperfect enmity",
+     "opposition": "perfect hatred",
+     "sextile": "love/unity/friendship",
+     "trine": "love/unity/friendship, more forcible than sextile",
+     "conjunction": "good or bad according to the friendship of the two planets"
+    },
+    "note": "Opposition stated as 180 degrees, 'halfe the Circle'; conjunction as same degree and minute of a signe.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 106-107; txt lines ~7820-7860",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; square/opposition/sextile/trine quality passage read at these lines"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 106-107; txt offset ~1985000 region and p.106 text",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; same doctrine collated in the second witness"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.partill_platick",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "deciding whether an aspect is partill (exact) or platick (within orb-moiety)"
+   },
+   "conclusion": {
+    "quote": "Partill aspect is when two Planets are exactly so many degrees from each other as make a perfect aspect [...] A Platick Aspect is that which admits of the Orbs or Rayes of two Planets that signifie any matter: As if [Venus] be in the tenth degree of [Taurus], and [Saturn] in eighteen degrees of [Virgo], here [Venus] hath a Platick [trine], or is a Platick [trine] to [Saturn], because she is within the moity of both their Orbs; for the moity of [Saturn] his Rayes or Orbs is five, and of [Venus] 4, and the distance betwixt them and their perfect aspect is eight degrees.",
+    "predicate": {
+     "partill": "angular separation equals the perfect aspect exactly, by degree",
+     "platick": "abs(separation - perfect_aspect) <= moiety(orb(P1)) + moiety(orb(P2))"
+    },
+    "worked_example": {
+     "Venus": "10 Taurus",
+     "Saturn": "18 Virgo",
+     "aspect": "trine",
+     "distance_from_perfect": 8,
+     "moiety_saturn": 5,
+     "moiety_venus": 4,
+     "within_orb": true
+    },
+    "note": "The worked example uses Saturn orb 10 (moiety 5) and Venus orb 8 (moiety 4), consistent with the first column of the p.107 orb table.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.application_orb_and_types (al-Qabisi states a flat 6-degree application orb; Lilly computes application/separation reach from the sum of the two planets' orb-moieties)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 106-107; txt lines ~7850-7875",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; partill/platick passage with the Venus-Saturn moiety example"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 107; verified against sources/ca1647_wellcome_leaf141_p107_orb_table.jpg sha256 5d752cfce2dae1f287f8b646f988ee7dd77d2456388c5d73c95c5d3302ec8090",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; page photograph of p.107 read directly"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.orb_table",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects",
+    "table": "orbs of the planets, CA 1647 p. 107"
+   },
+   "conditions": {
+    "trigger": "assigning the orb (radius of rays) of any planet"
+   },
+   "conclusion": {
+    "quote": "here I will againe insert the Table of the quantity of their Orbs [...] they stand thus as I have found by the best Authors and my owne Experience. [...] I somtimes use the one, and sometimes the other, as my Memory best Remembereth them, and this without error.",
+    "orb_table_primary_deg_min": {
+     "Saturn": [
+      10,
+      0
+     ],
+     "Jupiter": [
+      12,
+      0
+     ],
+     "Mars": [
+      7,
+      30
+     ],
+     "Sun": [
+      17,
+      0
+     ],
+     "Venus": [
+      8,
+      0
+     ],
+     "Mercury": [
+      7,
+      0
+     ],
+     "Moon": [
+      12,
+      30
+     ]
+    },
+    "orb_table_alternate_deg_min": {
+     "Saturn": [
+      9,
+      0
+     ],
+     "Jupiter": [
+      9,
+      0
+     ],
+     "Mars": [
+      7,
+      0
+     ],
+     "Sun": [
+      15,
+      0
+     ],
+     "Venus": [
+      7,
+      0
+     ],
+     "Mercury": [
+      7,
+      0
+     ],
+     "Moon": [
+      12,
+      0
+     ]
+    },
+    "alternate_attributions": {
+     "Saturn": "According to others",
+     "Jupiter": "As some have wrote",
+     "Mars": "All consent",
+     "Sun": "Most say",
+     "Venus": "Many write but",
+     "Mercury": "All consent onely",
+     "Moon": "Generally but"
+    },
+    "usage": "Lilly declares he uses either column indifferently; the moiety (half-orb) of each planet is what enters platick-aspect, application and separation arithmetic.",
+    "internal_variation": "Jupiter's own chapter (CA p. 63) states 'His Radiation or Orbe, is nine degrees before and after any aspect', matching the alternate column, not the primary.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 5,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.application_orb_and_types (flat 6-degree orb of application in al-Qabisi vs per-planet orbs and moieties in Lilly)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter, orb table",
+     "location": "CA 1647 p. 107; page photograph sources/ca1647_wellcome_leaf141_p107_orb_table.jpg sha256 5d752cfce2dae1f287f8b646f988ee7dd77d2456388c5d73c95c5d3302ec8090",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; every digit of both columns read directly from the 1647 page photograph; both OCR text layers garble parts of this table and were NOT trusted for the digits"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter, orb table",
+     "location": "CA 1647 p. 107; txt lines ~7868-7880 (partially garbled)",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; OCR degradation of this table recorded honestly; values taken from the page image"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.application_three_ways",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "deciding whether one planet applies to another"
+   },
+   "conclusion": {
+    "quote": "Application of Planets is three severall wayes: First, when a Planet of more swift motion applies to one more slow and ponderous, they being both direct [...] Secondly, when both Planets are retrograde [...] this is an ill Application and an argument either suddenly perfecting, or breaking off the businesse [...] Thirdly, when a Planet is direct, and in fewer degrees, and a retrograde Planet being in more degrees of the Signe [...] this is an ill application.",
+    "application_modes": [
+     {
+      "mode": "both_direct",
+      "condition": "swifter planet in fewer degrees moves toward the slower",
+      "quality": "normal"
+     },
+     {
+      "mode": "both_retrograde",
+      "condition": "both planets retrograde and closing",
+      "quality": "ill; sudden perfection or breaking off"
+     },
+     {
+      "mode": "direct_meets_retrograde",
+      "condition": "direct planet in fewer degrees, retrograde planet in more degrees closing on it",
+      "quality": "ill; sudden alteration"
+     }
+    ],
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.application_orb_and_types (al-Qabisi defines application by the 6-degree rule and beholding signs; Lilly by motion classes and orb-moieties)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 107; page photograph leaf141 (lower half) and txt",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; read from the p.107 page photograph directly"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 107-109; txt lines ~7890-7935",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; same passage in the second witness"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.application_superiors_dexter_sinister",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "orienting an application, and naming an aspect dexter or sinister"
+   },
+   "conclusion": {
+    "quote": "the superiour Planets doe not apply to the inferiour (unlesse they be Retrograde), but the lighter to the more ponderous [...] this Aspect is called a Sinister [...] and it is an Aspect according to the succession of the Signes [...] and this is called a Dexter Aspect, and is against the order of Signes [...] Observe the dexter aspect is more forcible then the Sinister.",
+    "predicates": {
+     "applier": "the lighter (swifter) planet applies to the more ponderous; a superior planet applies to an inferior only when retrograde",
+     "sinister_aspect": "cast in the order of the signs",
+     "dexter_aspect": "cast against the order of the signs; more forcible than the sinister"
+    },
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 20,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 109; txt lines ~7935-7990",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; application-direction and dexter/sinister passage"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 108-109 with the aspect table of the signes",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; collated in the second witness"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.separation_and_moieties",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "deciding when two planets are separated, and when separation is complete"
+   },
+   "conclusion": {
+    "quote": "Separation, it is in the first place, when two Planets are departed but six minutes distance from each other [...] for every Planet that applies is allowed halfe his owne orbs and halfe the orbs of that Planet from whom he seperates: As if [Sun] and [Moon] be in any aspect, the [Moon] shall then be seperated from the [Sun], when she is fully distant from the [Sun] 7 degr. and 30 min. viz. half the orbs of the [Sun], and 6 degr. the moity of her owne orbes; in all 13 degr. and 30 minutes.",
+    "predicates": {
+     "separation_begins": "6 arc-minutes past the perfect aspect",
+     "separation_complete": "distance past perfection >= moiety(orb(P1)) + moiety(orb(P2))"
+    },
+    "worked_examples": [
+     {
+      "pair": [
+       "Jupiter",
+       "Saturn"
+      ],
+      "moieties": [
+       4.5,
+       4.5
+      ],
+      "complete_at_degrees": 9,
+      "note": "'the halfe of [Jupiter] his orbe is 4 degr. 30 min. and the halfe of [Saturn] his orbe is 4 degr. 30 min. added together they make 9 whole degrees' - uses the 9-degree alternate orbs for both"
+     },
+     {
+      "pair": [
+       "Sun",
+       "Moon"
+      ],
+      "moieties": [
+       7.5,
+       6.0
+      ],
+      "complete_at_degrees": 13.5,
+      "note": "uses Sun orb 15 (alternate column) and Moon orb 12"
+     }
+    ],
+    "timing_use": "degrees remaining until complete separation are converted to weeks, days, months or years by sign quality (moveable hastens, common lengthens, fixed longest) - stated as horary timing, quoted for doctrine only",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.application_orb_and_types (al-Qabisi: separation/inqita begins the moment the swifter passes the slower; Lilly: separation begins at 6 arc-minutes and completes only past the summed moieties)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 110; txt offset ~1994800-1996400 ('Separation, it is in the first place...')",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; full passage legible in this witness; both worked examples verbatim"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 110",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; collated in the second witness"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.prohibition",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "a third planet completes a conjunction or aspect with the target before the applying planet can"
+   },
+   "conclusion": {
+    "quote": "Prohibition is when two Planets that signifie the effecting or bringing to conclusion any thing demanded, are applying to an Aspect, and before they can come to a true Aspect, another Planet interposeth either his body or aspect, so that thereby the matter propounded is hindered and retarded; this is called Prohibition.",
+    "variants": {
+     "bodily_prohibition": "a swifter third planet overtakes and conjoins the target first ('Conjunctionall or Bodily prohibition'); example: Mars 7 Aries applying to Saturn 12 Aries, Sun at 6 Aries overtakes Mars and conjoins Saturn first",
+     "aspectal_prohibition": "the interposing planet completes a sextile/square/trine/opposition ray to the target first; example: Mars 7 Aries, Saturn 13 Aries(?), Sun 5 Gemini passes his dexter sextile to Saturn before Mars' conjunction"
+    },
+    "combustion_note": "'you must know that the combustion of any Planet is the greatest misfortune that can be' - stated inside the bodily-prohibition passage where the prohibiting body is the Sun",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 15,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.frustration_variants (Lilly's prohibition corresponds to al-Qabisi's i'tirad/obstruction family; al-Qabisi splits the phenomenon into i'tirad, fawt and qat' al-nur, which Lilly does not distinguish)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 110-111; txt offset ~1996400-1997400",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; definition and bodily example fully legible"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 111; txt lines ~8093-8115",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; aspectal variant collated (some digits OCR-degraded; degraded digits marked '?' above, not restored)"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.refranation",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "the applying planet turns retrograde before perfecting the aspect"
+   },
+   "conclusion": {
+    "quote": "There's another manner of Prohibition, by some more properly called Refrenation; as thus, [Saturn] in 12 degr. of [Aries], [Mars] in 7 degr. here [Mars] hastens to a [conjunction] of [Saturn], but before he comes to the tenth or eleventh degree of [Aries] he becomes Retrograde, and by that meanes refraines to come to a [conjunction] of [Saturn] who still moves forward in the Signe; nothing signified by the former [conjunction] will ever be effected.",
+    "predicate": "if the applying planet stations retrograde before perfection, the promised matter is void",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 15,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.frustration_variants (identical in substance to al-Qabisi's intikath/breaking-off)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 111; txt lines ~8114-8125",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; refranation passage with the Saturn/Mars example"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 111",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; collated in the second witness"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.translation_of_light",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art (p. 111) and perfection chapter (p. 126)",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "a lighter planet separates from one significator and applies to the other"
+   },
+   "conclusion": {
+    "quote": "Translation of light and nature is, when a light Planet seperates from a more weighty one, and presently joynes to another more heavy [...] Its done also as well by any Aspect as by [conjunction].",
+    "quote_perfection_form": "some one Planet or other doth separate himselfe from one of the Significators, of whom he is received either by House, Triplicity or Terme, and then this Planet doth apply to the other Significator by [conjunction] or aspect, before he meeteth with the [conjunction] or aspect of any other Planet, he then translates the force, influence and vertue of the first Significator to the other.",
+    "predicates": {
+     "form_book1": "translator separates from heavier planet A, presently joins heavier planet B, by body or any aspect",
+     "form_perfection_chapter": "adds two conditions: the translator must be RECEIVED by the planet it separates from (by house, triplicity or term), and must reach the second significator before meeting any other planet's ray"
+    },
+    "internal_variation": "Lilly's two statements differ: the Book 1 terms-of-art definition has no reception requirement; the perfection chapter adds it. Both are encoded; a consumer must choose and disclose.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 15,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.translation_and_collection_of_light (al-Qabisi's naql requires no reception; Lilly's perfection-chapter form requires the translator to be received by the first significator)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 111; txt lines ~8123-8150",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; short definition with the Saturn/Mars/[Sun?] worked placements"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. XXI (perfection of matters)",
+     "location": "CA 1647 p. 126; txt offset ~331900-333000",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; reception-conditioned form fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.collection_of_light",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. XXI (perfection of matters)",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "two significators that do not behold one another both aspect a heavier planet"
+   },
+   "conclusion": {
+    "quote": "Matters are also brought to perfection, when as the two principall Significators doe not behold one another, but both cast their severall Aspects to a more weighty Planet then themselves, and they both receive him in some of their essentiall dignities; then shall that Planet who thus collects both their Lights, bring the thing demanded to perfection [...] And this is called Collection.",
+    "predicates": {
+     "no_mutual_aspect": true,
+     "both_aspect_collector": true,
+     "collector_heavier": true,
+     "reception_required": "BOTH significators must receive the collector in some of their essential dignities"
+    },
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 15,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.translation_and_collection_of_light (al-Qabisi's radd al-nur has no reception condition and adds a second form via a planet transferring between their degrees; Lilly requires double reception of the collector)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. XXI (perfection of matters)",
+     "location": "CA 1647 p. 126; txt offset ~333000-334200",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; full passage legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.reception",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "reception"
+   },
+   "conditions": {
+    "trigger": "two significators stand in each other's essential dignities"
+   },
+   "conclusion": {
+    "quote": "Reception is when two Planets that are significators in any Question or matter, are in each others dignity; as [Sun] in [Aries], and [Mars] in [Leo]; here is reception of these two Planets by Houses; and certainly this is the strongest and best of all receptions. It may be by triplicity, terme or face, or any essentiall dignity.",
+    "quote_effect": "The use of this is much; for many times when as the effecting of a matter is denyed by the Aspects, or when the significators have no Aspect to each other, or when it seemes very doubtfull what is promised by [square] or [opposition] of the significators, yet if mutuall Reception happen betwixt the principall significators, the thing is brought to passe, and that without any great trouble, and suddenly to the content of both parties.",
+    "predicates": {
+     "reception_types_ranked": [
+      "domicile (strongest and best)",
+      "exaltation",
+      "triplicity",
+      "term",
+      "face",
+      "any essential dignity"
+     ],
+     "mutual_required_for_effect": true,
+     "effect": "perfects the matter even when aspects deny it, when there is no aspect, or when the aspect is square/opposition; without great trouble and to the content of both parties",
+     "worked_examples": [
+      {
+       "type": "domicile",
+       "placements": {
+        "Sun": "Aries",
+        "Mars": "Leo"
+       }
+      },
+      {
+       "type": "triplicity",
+       "placements": {
+        "Venus?": "Sagittarius",
+        "other": "Capricorn"
+       },
+       "condition": "if the Question or Nativity be by day",
+       "note": "planet sigils OCR-degraded in both witnesses; sign pair and by-day condition legible"
+      },
+      {
+       "type": "term",
+       "note": "each in the other's terms; degree numbers legible only partially (24 and 16), planets degraded - recorded, not restored"
+      }
+     ]
+    },
+    "point_table_link": "mutual reception by house scores +5 and reception by exaltation +4 in the p.115 table (see lilly.ca1.essential_dignity_points)",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 5,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.reception_and_return (al-Qabisi's qabul is one-directional - connecting with the lord of one's place - and includes 'return' to weakened planets; Lilly defines reception as the two significators standing in EACH OTHER'S dignities and grants the perfecting effect to mutual reception specifically)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 112; txt lines ~8164-8185",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; definition, ranking, effect and examples read at these lines"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 112",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; collated in the second witness"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.peregrine",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "dignity"
+   },
+   "conditions": {
+    "trigger": "a planet stands in degrees where it has no essential dignity"
+   },
+   "conclusion": {
+    "quote": "A Planet is then said to be Peregrine, when he is in the degrees of any Signe wherein he hath no essentiall dignity: As [Saturn] in the tenth degree of [Aries], that Signe being not his House, Exaltation, or of his Triplicity, or he having in that degree either Terme or Face, he is then said to be Peregrine; had he been in 27, 28, &c. of [Aries], he could not be termed Peregrine, because then he is in his owne Terme.",
+    "predicate": "peregrine = no domicile, exaltation, triplicity, term or face at the exact degree occupied; degree-sensitive because terms and faces divide the sign",
+    "horary_note": "the significator of a thief is almost ever the peregrine planet in an angle or the second house - horary use, quoted for completeness",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 20,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 112; txt lines ~8185-8200",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; full passage read"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 112",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; collated"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.void_of_course",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art (p. 112) and considerations (p. 122)",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "a planet separates and perfects no further aspect while in its sign"
+   },
+   "conclusion": {
+    "quote": "A Planet is voyd of course, when he is seperated from a Planet, nor doth forthwith, during his being in that Signe, apply to any other: This is most usually in the [Moon]; in judgements doe you carefully observe whether she be voyd of course yea or no; you shall seldome see a businesse goe handsomely forward when she is so.",
+    "quote_exception": "All manner of matters goe hardly on (except the principall significators be very strong) when the [Moon] is voyd of course; yet somewhat she performes if voyd of course, and be either in [Taurus], [Cancer], [Sagittarius] or [Pisces].",
+    "predicates": {
+     "definition": "separated from one planet and applying to no other for the remainder of its current sign",
+     "applies_to": "any planet, but 'most usually' observed of the Moon",
+     "exception_signs": [
+      "Taurus",
+      "Cancer",
+      "Sagittarius",
+      "Pisces"
+     ],
+     "override": "strong principal significators can carry a matter despite a void Moon"
+    },
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 5,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.void_of_course_and_feral (the core definitions AGREE - both are any-planet, remainder-of-sign definitions; recorded as concordance, not conflict. Lilly adds the Moon emphasis, the four exception signs, and the strong-significator override; al-Qabisi instead adds the distinct 'feral' condition, absent from Lilly)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 112; txt lines ~8200-8206 ('Pod of cours' sidenote = 'Void of course')",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; definition verbatim at these lines"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, considerations before judgment",
+     "location": "CA 1647 p. 122; txt offset ~322600-322900",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; exception-signs sentence verbatim"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.frustration",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "aspects"
+   },
+   "conditions": {
+    "trigger": "the heavier planet perfects another union before the swift applier arrives"
+   },
+   "conclusion": {
+    "quote": "Frustration is, when a swift Planet [would] corporally joyne with a more ponderous, but before they can come to [conjunction], the more weighty Planet is joyned to another, and so the [conjunction of] the first is frustrated [...] in Questions it signifies as much as our common Proverb, Two Dogges quarrell, a third gets the Bone.",
+    "worked_example": {
+     "Jupiter": "10 Aries (applying)",
+     "Mars": "12 Aries (target)",
+     "Saturn": "13 Aries",
+     "outcome": "Mars first perfects conjunction with Saturn; Jupiter's application is frustrated"
+    },
+    "predicate": "frustration = the target itself completes a different conjunction before the applying planet perfects",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 15,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch3.frustration_variants (closest to al-Qabisi's qat' al-nur family, but Lilly's mechanism is the target's own prior union, where al-Qabisi's qat' al-nur runs through a third planet's retrogradation)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 112-113; txt lines ~8207-8232",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; definition and example read; example digits legible"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 113",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; collated"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.hayz",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "sect"
+   },
+   "conditions": {
+    "trigger": "assessing whether a planet is in hayz"
+   },
+   "conclusion": {
+    "quote": "Hayz is, when a Masculine and Diurnall Planet is in the day time above the earth, and in a Masculine Signe, and so when a Feminine, Nocturnall Planet in the night is in a Feminine Signe and under the earth: in Questions it usually shewes the content of the Querent at time of the Question, when his significator is so found.",
+    "predicates": {
+     "diurnal_masculine_planet": "day chart AND above horizon AND masculine sign",
+     "nocturnal_feminine_planet": "night chart AND below horizon AND feminine sign"
+    },
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 20,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch1.halb_hayyiz_definition (al-Qabisi distinguishes halb (sect placement) from hayyiz (adding gender-of-sign); Lilly collapses the doctrine into the single term Hayz with the gendered-sign condition and adds the above/below-horizon requirement in a simplified day/night form)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 113; txt lines ~8232-8240",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; full passage read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.combustion",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "solar_condition"
+   },
+   "conditions": {
+    "trigger": "a planet is in the same sign as the Sun within 8 degrees 30 minutes"
+   },
+   "conclusion": {
+    "quote": "A Planet is said to be Combust of the [Sun], when in the same Signe where the [Sun] is in, he is not distant from the [Sun] eight degrees and thirty minutes, either before or after the [Sun] [...] you must observe a Planet is more afflicted when the [Sun] hastens to [conjunction] of him, then when the [Sun] recedes from him; in regard its the body of the [Sun] that doth afflict.",
+    "predicates": {
+     "orb_deg_min": [
+      8,
+      30
+     ],
+     "same_sign_required": true,
+     "applying_worse_than_separating": true,
+     "only_by_body": "combustion can only be by personal conjunction in one sign, not by any aspect (stated p. 114)",
+     "sun_never_combust": "all Planets may be in Combustion of the Sun, but he with none (p. 114)"
+    },
+    "lilly_own_opinion": "Lilly states he allows the moiety of the combust planet's OWN orb to show the time of combustion rather than the Sun's - 'by that rule [a planet] should not be combust before he is within four degrees and a half of the [Sun]. I know many are against this opinion.' Both the 8.30 rule and the own-moiety opinion are recorded; the 8.30 statement is the table rule.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 pp. 113-114; txt lines ~8244-8285",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; definition, examples, moiety opinion and body-only clause read"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.under_sunbeams",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "solar_condition"
+   },
+   "conditions": {
+    "trigger": "a planet within 17 degrees of the Sun but not combust"
+   },
+   "conclusion": {
+    "quote": "A Planet is said to be under the Sun-beames, untill he is fully elongated or distant from his body 17 degr. either before or after him.",
+    "predicates": {
+     "limit_degrees": 17
+    },
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 15,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 113; txt lines ~8260-8263",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; single sentence, fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.cazimi",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "solar_condition"
+   },
+   "conditions": {
+    "trigger": "a planet within 17 arc-minutes of the Sun's center"
+   },
+   "conclusion": {
+    "quote": "A Planet is in the heart of the Sunne, or in Cazimi, when he is not [distant] from him 17 min. [...] forward or backward, as [Sun] in 15.30, [Mercury] in 15.25 of [the same sign]: here [Mercury] is in Cazimi, and all Authors doe hold a Planet in Cazimi to be fortified thereby.",
+    "predicates": {
+     "limit_arc_minutes": 17,
+     "effect": "fortified; scores +5 in the p.115 accidental table"
+    },
+    "ocr_note": "the first number in the sentence is OCR-degraded ('19. min.' in one witness, '17.min.' later in the same sentence); the p.115 table and the 15.30/15.25 example are consistent with 17 arc-minutes, and 17 is the reading adopted, with the degradation recorded",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 15,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 113; txt lines ~8264-8270",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; passage read; numeric degradation recorded above"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.oriental_occidental",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "solar_condition"
+   },
+   "conditions": {
+    "trigger": "classifying a planet as oriental or occidental of the Sun"
+   },
+   "conclusion": {
+    "quote": "[Saturn], [Jupiter] and [Mars] are Orientall of the [Sun], from the time of their [conjunction] with him, untill they come to his [opposition]: from whence untill they come to [conjunction] againe, they are said to be Occidentall: to be Oriental is no other thing then to rise before the [Sun]: to be Occidentall is to be seen [above] the Horizon, or to set after the [Sun] is downe.",
+    "predicates": {
+     "superior_oriental": "from conjunction with the Sun until his opposition",
+     "superior_occidental": "from opposition until the next conjunction",
+     "mercury_venus": "cannot make sextile/square/trine/opposition to the Sun; oriental when in fewer degrees of the Sun's sign or the preceding sign, occidental when in more degrees or the subsequent sign",
+     "max_elongation": {
+      "Mercury": 28,
+      "Venus": 48,
+      "note": "'though some allow a few more'"
+     },
+     "moon": "Orientall of the Sun from her opposition to her conjunction, and Occidentall from the conjunction to opposition"
+    },
+    "ocr_note": "the Venus elongation digits are degraded in both witnesses ('.' and garbled); 48 is the reading consistent with astronomy and with Lilly's other statements, recorded as an editorial restoration, and the Moon clause's first term reads 'from the time of her [opposition]' by the sense of the passage ('she farre exceeds the Sunne in swiftnesse').",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 20,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 114; txt lines ~8285-8302",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; passage read; degradations recorded above"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.besieging",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "terms of art",
+    "topic_domain": "affliction"
+   },
+   "conditions": {
+    "trigger": "a planet placed between the bodies of Saturn and Mars"
+   },
+   "conclusion": {
+    "quote": "Besieging is, when any Planet is placed betwixt the bodies of the two Malevolent Planets [Saturn] and [Mars]: as [Saturn] in 18 [Aries], [Mars] in 10 of [Aries], [Venus] in 13: here Venus is besieged by the two infortunes, and it represents in questions, a Man going out of Gods blessing into the warme Sunne.",
+    "predicate": "bodily besiegement between Saturn and Mars in zodiacal order; scores -5 in the p.115 accidental table",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 20,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, terms-of-art chapter",
+     "location": "CA 1647 p. 114; txt lines ~8302-8310",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; definition and example fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.essential_dignity_points",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "A ready Table whereby to examine the Fortitudes and Debilities of the Planets",
+    "table": "CA 1647 p. 115, essential columns",
+    "topic_domain": "dignity_scoring"
+   },
+   "conditions": {
+    "trigger": "scoring a planet's essential dignity"
+   },
+   "conclusion": {
+    "quote": "A Planet in his owne house, or in mutual reception with another Planet by house, shall have Dignities 5. In his exaltation, or reception by exaltation 4. In his owne Triplicity 3. In his owne Terme 2. Decanate or Face 1. [Debilities:] In his Detriment 5. In his Fall 4. Peregrine 5.",
+    "scores": {
+     "domicile_or_mutual_reception_by_house": 5,
+     "exaltation_or_reception_by_exaltation": 4,
+     "own_triplicity": 3,
+     "own_term": 2,
+     "decanate_or_face": 1,
+     "detriment": -5,
+     "fall": -4,
+     "peregrine": -5
+    },
+    "cross_check": "the positive ladder 5/4/3/2/1 matches src/engine/multitradition/hellenistic.py's Lilly scoring, and matches al-Qabisi's dignity-power scoring stated seven centuries earlier (islam.qabisi.ch1.dignity_power_scoring); the mutual-reception clauses (reception by house scores as domicile, by exaltation as exaltation) are Lilly's table's own words",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 5,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, p. 115 table",
+     "location": "CA 1647 p. 115; every value read from the page photograph sources/ca1647_wellcome_leaf149_p115_point_table.jpg sha256 083de3958ca9145e69c05a6d116490bc9909642ff94fd9ed0441aff3fdd49601",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; all essential values verified against the 1647 page image"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, p. 115 table",
+     "location": "CA 1647 p. 115; txt lines ~8320-8350 (partially garbled)",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; OCR degradation of the digits recorded; digits taken from the page image"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.accidental_fortitude_points",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "p. 115 table",
+    "table": "CA 1647 p. 115, Accidentall Fortitudes column",
+    "topic_domain": "dignity_scoring"
+   },
+   "conditions": {
+    "trigger": "scoring a planet's accidental fortitudes"
+   },
+   "conclusion": {
+    "quote": "In the Mid-heaven or Ascendant 5. In the seventh, fourth & eleventh houses 4. In the second and fifth 3. In the ninth 2. In the third house 1. Direct (the [Sun] and [Moon] are alwayes so, as to them this is voyd) 4. Swift in motion 2. [Saturn] [Jupiter] [Mars] when Orientall 2. [Mercury] and [Venus] when Occidentall 2. The [Moon] encreasing, or when she is Occidentall 2. Free from Combustion and [Sun] Beams 5. In the heart of the [Sun], or Cazimi 5. In partill [conjunction] with [Jupiter] and [Venus] 5. In partill [conjunction] with [North Node] 4. In partill [trine] to [Jupiter] and [Venus] 4. In partill [sextile] to [Jupiter] and [Venus] 3. In [conjunction] with Cor Leonis, in 24 degr. [Leo] 6. Or in [conjunction] with Spica [Virgo mark], in 18 [Libra] 5.",
+    "scores": [
+     {
+      "condition": "in_mc_or_ascendant",
+      "points": 5
+     },
+     {
+      "condition": "in_7th_4th_or_11th",
+      "points": 4
+     },
+     {
+      "condition": "in_2nd_or_5th",
+      "points": 3
+     },
+     {
+      "condition": "in_9th",
+      "points": 2
+     },
+     {
+      "condition": "in_3rd",
+      "points": 1
+     },
+     {
+      "condition": "direct_in_motion",
+      "points": 4,
+      "note": "void for Sun and Moon, always direct"
+     },
+     {
+      "condition": "swift_in_motion",
+      "points": 2
+     },
+     {
+      "condition": "saturn_jupiter_mars_oriental",
+      "points": 2
+     },
+     {
+      "condition": "mercury_venus_occidental",
+      "points": 2
+     },
+     {
+      "condition": "moon_increasing_or_occidental",
+      "points": 2
+     },
+     {
+      "condition": "free_from_combustion_and_beams",
+      "points": 5
+     },
+     {
+      "condition": "cazimi",
+      "points": 5
+     },
+     {
+      "condition": "partile_conjunction_jupiter_or_venus",
+      "points": 5
+     },
+     {
+      "condition": "partile_conjunction_north_node",
+      "points": 4
+     },
+     {
+      "condition": "partile_trine_jupiter_or_venus",
+      "points": 4
+     },
+     {
+      "condition": "partile_sextile_jupiter_or_venus",
+      "points": 3
+     },
+     {
+      "condition": "conjunct_cor_leonis_regulus_24_leo",
+      "points": 6
+     },
+     {
+      "condition": "conjunct_spica_18_libra",
+      "points": 5
+     }
+    ],
+    "completeness": "all 18 fortitude rows of the 1647 printing are present, with every point value read from the page photograph",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 5,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, p. 115 table",
+     "location": "CA 1647 p. 115; page photograph sources/ca1647_wellcome_leaf149_p115_point_table.jpg sha256 083de3958ca9145e69c05a6d116490bc9909642ff94fd9ed0441aff3fdd49601",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; all 18 rows and values verified against the 1647 page image"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, p. 115 table",
+     "location": "CA 1647 pp. 115-116; txt lines ~8350-8390 (garbled)",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; OCR loses several digits; page image is controlling"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.accidental_debility_points",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "p. 115 table",
+    "table": "CA 1647 p. 115, Accidentall Debilities column",
+    "topic_domain": "dignity_scoring"
+   },
+   "conditions": {
+    "trigger": "scoring a planet's accidental debilities"
+   },
+   "conclusion": {
+    "quote": "In the twelfth House 5. In the eighth and sixth 2. Retrograde 5. Slow in motion 2. [Saturn] [Jupiter] [Mars] Occidentall 2. [Venus] [Mercury] Orientall 2. [Moon] decreasing in light 2. Combust of the [Sun] 5. Under the [Sun] Beames 4. Partill [conjunction] with [Saturn] or [Mars] 5. Partill [conjunction] with [South Node] 4. Besieged of [Saturn] and [Mars] 5. Partill [opposition] of [Saturn] or [Mars] 4. Partill [square] of [Saturn] or [Mars] 3. In [conjunction] with Caput Algol in 20 [Taurus], or within five degrees 5.",
+    "scores": [
+     {
+      "condition": "in_12th",
+      "points": -5
+     },
+     {
+      "condition": "in_8th_or_6th",
+      "points": -2,
+      "note": "the 1647 printing reads 2, verified from the page photograph; some later editions and modern tabulations print 4"
+     },
+     {
+      "condition": "retrograde",
+      "points": -5
+     },
+     {
+      "condition": "slow_in_motion",
+      "points": -2
+     },
+     {
+      "condition": "saturn_jupiter_mars_occidental",
+      "points": -2
+     },
+     {
+      "condition": "venus_mercury_oriental",
+      "points": -2
+     },
+     {
+      "condition": "moon_decreasing_in_light",
+      "points": -2
+     },
+     {
+      "condition": "combust",
+      "points": -5
+     },
+     {
+      "condition": "under_sunbeams",
+      "points": -4
+     },
+     {
+      "condition": "partile_conjunction_saturn_or_mars",
+      "points": -5
+     },
+     {
+      "condition": "partile_conjunction_south_node",
+      "points": -4
+     },
+     {
+      "condition": "besieged_by_saturn_and_mars",
+      "points": -5
+     },
+     {
+      "condition": "partile_opposition_saturn_or_mars",
+      "points": -4
+     },
+     {
+      "condition": "partile_square_saturn_or_mars",
+      "points": -3
+     },
+     {
+      "condition": "conjunct_caput_algol_20_taurus_orb_5",
+      "points": -5
+     }
+    ],
+    "completeness": "all 15 debility rows of the 1647 printing are present, with every point value read from the page photograph",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 5,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, p. 115 table",
+     "location": "CA 1647 p. 115; page photograph sources/ca1647_wellcome_leaf149_p115_point_table.jpg sha256 083de3958ca9145e69c05a6d116490bc9909642ff94fd9ed0441aff3fdd49601",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; all 15 rows and values verified against the 1647 page image"
+    },
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, p. 115 table",
+     "location": "CA 1647 pp. 115-116; txt lines ~8350-8390 (garbled)",
+     "verification": "Read in sources/ca1647_bim_djvu.txt sha256 f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d; OCR loses several digits; page image is controlling"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.terms_source_ptolemaic",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "planet chapters and the essential-dignity table (CA pp. 57-104)",
+    "topic_domain": "dignity"
+   },
+   "conditions": {
+    "trigger": "assigning term (bound) rulers"
+   },
+   "conclusion": {
+    "quote": "In the whole twelve Signs, Ptolomy assigneth him these degrees for his Termes [...] in all the twelve Signes he hath these degrees for his Termes, alotted him by Ptolomy.",
+    "predicate": "Lilly's term table is the Ptolemaic set, attributed by him to Ptolemy in each planet chapter (quoted here from the Mars and Saturn chapters)",
+    "note": "individual term-boundary digits in the OCR are partially degraded and were not re-keyed in this pass; only the attribution claim is encoded. The full Ptolemaic term table for scoring should be keyed from the p.104 table against the page images in a follow-up pass.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 30,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch1.egyptian_bounds_table (al-Qabisi transmits the Egyptian bounds, which this repository's engine reference tables also carry; Lilly explicitly uses Ptolemy's terms - the two term systems assign different rulers to many degree ranges, and a Lilly-mode scorer must not use the Egyptian bounds)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. VIII (Saturn) and ch. X (Mars)",
+     "location": "CA 1647 pp. 57-58 and 65-66; txt offsets ~169900 and ~189500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; attribution sentences fully legible in both chapters"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.saturn_nature",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. VIII, Of the Planet Saturne, and his signification",
+    "planet": "Saturn",
+    "topic_domain": "planet_nature"
+   },
+   "conditions": {
+    "trigger": "delineating Saturn generally, keyed to its dignity state",
+    "dignity_state_fork": "well dignified vs ill dignified"
+   },
+   "conclusion": {
+    "quote": "He is a Diurnall Planet, Cold and Dry (being farre removed from the heat of the Sun) and moyst Vapours, Melancholick, Earthly, Masculine, the greater Infortune, author of Solitarinesse, Malevolent, &c.",
+    "qualities": {
+     "hot_cold": "cold",
+     "moist_dry": "dry",
+     "humour": "melancholic",
+     "element": "earthly",
+     "gender": "masculine"
+    },
+    "sect": "diurnal",
+    "benefic_malefic": "greater infortune",
+    "manners_well_dignified_quote": "Then he is profound in Imagination, in his Acts severe, in words reserved, in speaking and giving very spare, in labour patient, in arguing or disputing grave, in obtaining the goods of this life studious and solicitous, in all manner of actions austere.",
+    "manners_ill_dignified_quote": "Then he is envious, covetous, jealous and mistrustfull, timorus, sordid, outwardly dissembling, sluggish, suspitious, stubborne, a contemner of women, a close lyar, malicious, murmuring, never contented, ever repining.",
+    "domiciles": {
+     "night_house": "Capricorn",
+     "day_house": "Aquarius"
+    },
+    "triplicity": "airy by day",
+    "retrograde_days": 140,
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. VIII",
+     "location": "CA 1647 pp. 57-59; txt offset ~168900-172600",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; nature, domiciles, triplicity and both manners paragraphs fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.jupiter_nature",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. IX, Of the Planet Jupiter, and his signification",
+    "planet": "Jupiter",
+    "topic_domain": "planet_nature"
+   },
+   "conditions": {
+    "trigger": "delineating Jupiter generally, keyed to its dignity state",
+    "dignity_state_fork": "well dignified vs ill dignified"
+   },
+   "conclusion": {
+    "quote": "He is a Diurnall, Masculine Planet, Temperately Hot and Moyst, Aiery, Sanguine, the greater Fortune, author of Temperance, Modesty, Sobriety, Justice.",
+    "qualities": {
+     "hot_cold": "temperately hot",
+     "moist_dry": "moist",
+     "humour": "sanguine",
+     "element": "airy",
+     "gender": "masculine"
+    },
+    "sect": "diurnal",
+    "benefic_malefic": "greater fortune",
+    "manners_well_dignified_quote": "Then is he Magnanimous, Faithfull, Bashfull, Aspiring in an honourable way at high matters, in all his actions a Lover of faire Dealing, desiring to benefit all men, doing Glorious things, Honourable and Religious, of sweet and affable Conversation, wonderfully indulgent to his Wife and Children, reverencing Aged men, a great Reliever of the Poore, full of Charity and Godlinesse, Liberall, hating all Sordid actions, Just, Wise, Prudent, Thankfull, Vertuous.",
+    "manners_ill_dignified_quote": "When [Jupiter] is unfortunate, then he wastes his Patrimony, suffers every one to cozen him, is Hypocritically Religious, Tenacious, and stiffe in maintaining false Tenents in Religion; he is Ignorant, Carelesse, nothing Delightfull in the love of his Friends.",
+    "orb_own_chapter": "His Radiation or Orbe, is nine degrees before and after any his aspect",
+    "planetary_hours": "Thursday, and rules the first hour after [Sun] rise, and the eighth",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. IX",
+     "location": "CA 1647 pp. 61-64; txt offset ~179700-186000",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; nature, manners, orb and weekday-hour sentences fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.mars_nature",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. X, Of the Planet Mars, and his severall significations",
+    "planet": "Mars",
+    "topic_domain": "planet_nature"
+   },
+   "conditions": {
+    "trigger": "delineating Mars generally, keyed to its dignity state",
+    "dignity_state_fork": "well dignified vs ill dignified"
+   },
+   "conclusion": {
+    "quote": "He is a Masculine, Nocturnall Planet, in nature hot and dry, cholerick and fiery, the lesser Infortune, author of Quarrels, Strifes, Contentions.",
+    "qualities": {
+     "hot_cold": "hot",
+     "moist_dry": "dry",
+     "humour": "choleric",
+     "element": "fiery",
+     "gender": "masculine"
+    },
+    "sect": "nocturnal",
+    "benefic_malefic": "lesser infortune",
+    "manners_well_dignified_quote": "In feats of Warre and Courage invincible, scorning any should exceed him, subject to no Reason, Bold, Confident, Immoveable, Contentious, challenging all Honour to themselves, Valiant, lovers of Warre and things pertaining thereunto, hazarding himselfe to all Perils.",
+    "manners_ill_dignified_quote": "Then he is a Pratler without modesty or honesty, a lover of Slaughter and Quarrels, Murder, Theevery, a promoter of Sedition, Frayes and Commotions, an Highway-Theefe, as wavering as the Wind, a Traytor, of turbulent Spirit, Perjured, Obscene, Rash, Inhumane, neither fearing God or caring for man, Unthankful, Trecherous, Oppressors, Ravenous, Cheaters, Furious, Violent.",
+    "domiciles": {
+     "day_house": "Aries",
+     "night_house": "Scorpio"
+    },
+    "exaltation": "28 Capricorn",
+    "fall": "28 Cancer",
+    "triplicity": "watery wholly (Cancer, Scorpio, Pisces)",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. X",
+     "location": "CA 1647 pp. 65-67; txt offset ~188100-192500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; nature, domicile/exaltation and both manners paragraphs fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.sun_nature",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. XI, Of the Sun, and his generall and particular significations",
+    "planet": "Sun",
+    "topic_domain": "planet_nature"
+   },
+   "conditions": {
+    "trigger": "delineating Sun generally, keyed to its dignity state",
+    "dignity_state_fork": "well dignified vs ill dignified"
+   },
+   "conclusion": {
+    "quote": "He is naturally Hot, Dry, but more temperate then [Mars]; is a Masculine, Diurnall Planet, Equivalent, if well dignified, to a Fortune.",
+    "qualities": {
+     "hot_cold": "hot (more temperate than Mars)",
+     "moist_dry": "dry",
+     "gender": "masculine"
+    },
+    "sect": "diurnal",
+    "benefic_malefic": "equivalent to a fortune if well dignified",
+    "manners_well_dignified_quote": "Very faithfull, keeping their Promises with all punctuality, a kind of itching desire to Rule and Sway where he comes: Prudent, and of incomparable Judgment; of great Majesty and Statelinesse, Industrious to acquire Honour and a large Patrimony, yet as willingly departing therewith againe [...] Affable, Tractable, and very humane to all people.",
+    "manners_ill_dignified_quote": "Then the Solar man is Arrogant and Proud, disdaining all men, cracking of his Pedegree, he is Pur-blind in Sight and Judgment, restlesse, troublesome, domineering, a meer vapour, expensive, foolish, endued with no gravity in words, or sobernesse in Actions, a Spend-thrift, wasting his Patrimony, and hanging on other mens charity.",
+    "exaltation": "19 Aries",
+    "fall": "19 Libra",
+    "triplicity": "fiery by day",
+    "terms": "He hath no degrees of the twelve Signs admitted him for his Termes",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. XI",
+     "location": "CA 1647 pp. 69-70; txt offset ~196500-200500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; nature, exaltation and both manners paragraphs fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.venus_nature",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. XII, Of the Planet Venus and her severall significations and nature",
+    "planet": "Venus",
+    "topic_domain": "planet_nature"
+   },
+   "conditions": {
+    "trigger": "delineating Venus generally, keyed to its dignity state",
+    "dignity_state_fork": "well dignified vs ill dignified"
+   },
+   "conclusion": {
+    "quote": "Shee is a Feminine Planet, temperately Cold and Moyst, Nocturnall, the lesser Fortune, author of Mirth and Jolity.",
+    "qualities": {
+     "hot_cold": "temperately cold",
+     "moist_dry": "moist",
+     "gender": "feminine"
+    },
+    "sect": "nocturnal",
+    "benefic_malefic": "lesser fortune",
+    "manners_well_dignified_quote": "Shee signifies a quiet man, not given to Law, Quarrel or Wrangling, not Vicious, Pleasant, Neat and Spruce, loving Mirth in his words and actions, cleanly in Apparel [...] prone to Venery, oft entangled in Love-matters, Musicall, delighting in Baths [...] a right vertuous Man or Woman.",
+    "manners_ill_dignified_quote": "Then he is Riotous, Expensive, wholly given to Loosnesse and Lewd companies of Women, nothing regarding his Reputation, coveting unlawful Beds, Incestuous, an Adulterer, Fantasticall, a meer Skip-jack, of no Faith, no Repute, no Credit.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. XII",
+     "location": "CA 1647 pp. 72-74; txt offset ~205200-209500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; nature and both manners paragraphs fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.mercury_nature",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. XIII, Of Mercury, and his signification, nature and property",
+    "planet": "Mercury",
+    "topic_domain": "planet_nature"
+   },
+   "conditions": {
+    "trigger": "delineating Mercury generally, keyed to its dignity state",
+    "dignity_state_fork": "well dignified vs ill dignified"
+   },
+   "conclusion": {
+    "quote": "but of his owne nature he is cold and dry, and therefore Melancholly; with the good he is good, with the evil Planets ill [...] if with a Masculine Planet, he becomes Masculine; if with a Feminine, then Feminine.",
+    "qualities": {
+     "hot_cold": "cold (of his own nature)",
+     "moist_dry": "dry",
+     "humour": "melancholic",
+     "gender": "convertible",
+     "convertible": true
+    },
+    "sect": "convertible (takes the nature of the planet configured with him)",
+    "benefic_malefic": "author of subtilty, tricks and devices, perjury (neutral, convertible)",
+    "manners_well_dignified_quote": "Being well dignified, he represents a man of a subtill and politick braine, intellect, and cogitation; an excellent disputant or Logician, arguing with learning and discretion, and using much eloquence in his speech, a searcher into all kinds of Mysteries, Learning, sharpe and witty, learning almost any thing without a Teacher; ambitious of being exquisite in every Science.",
+    "manners_ill_dignified_quote": "ill dignified: 'he is author of subtilty, tricks and devices, perjury, &c.' (the chapter's ill fork; the full ill-manners paragraph follows in the same chapter)",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. XIII",
+     "location": "CA 1647 pp. 76-77; txt offset ~213900-217500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; nature paragraph and well-dignified manners fully legible; ill fork quoted from the chapter's own words"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.moon_nature",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "natal",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "ch. XIV, Of the Moon, her properties and significations",
+    "planet": "Moon",
+    "topic_domain": "planet_nature"
+   },
+   "conditions": {
+    "trigger": "delineating Moon generally, keyed to its dignity state",
+    "dignity_state_fork": "well dignified vs ill dignified"
+   },
+   "conclusion": {
+    "quote": "She is a Feminine, Nocturnall Planet, Cold, Moyst and Flegmatique.",
+    "qualities": {
+     "hot_cold": "cold",
+     "moist_dry": "moist",
+     "humour": "phlegmatic",
+     "gender": "feminine"
+    },
+    "sect": "nocturnal",
+    "benefic_malefic": "neutral luminary; fortunate or unfortunate by condition",
+    "manners_well_dignified_quote": "She signifieth one of composed Manners, a soft, tender creature, a Lover of all honest and ingenuous Sciences, a Searcher of, and Delighter in Novelties, naturally propense to flit and shift his Habitation, unstedfast, wholly caring for the present Times, Timorous, Prodigal, and easily Frighted, however loving Peace, and to live free from the cares of this Life.",
+    "manners_ill_dignified_quote": "A meer Vagabond, idle Person, hating Labour, a Drunkard, a Sot, one of no Spirit.",
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 10,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. XIV",
+     "location": "CA 1647 pp. 80-81; txt offset ~222500-226500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; nature and both manners paragraphs fully legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.planetary_hours",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "calendar",
+   "scope": {
+    "branch": "general_doctrine",
+    "book": "1",
+    "chapter": "planet chapters (weekday/hour sidenotes)",
+    "topic_domain": "planetary_hours"
+   },
+   "conditions": {
+    "trigger": "assigning the planetary day and hour"
+   },
+   "conclusion": {
+    "quote": "Thursday, and rules the first hour after [Sun] rise, and the eighth; the length of the Planetary hour you must know by the rising of the [Sun], and a Table hereafter following.",
+    "predicates": {
+     "day_ruler_rules_first_hour_from_sunrise": true,
+     "same_ruler_returns_at_eighth_hour": true,
+     "hour_length": "unequal hours measured from sunrise (day length / 12), per the table Lilly references",
+     "weekday_rulers": {
+      "Jupiter": "Thursday",
+      "note": "each planet chapter carries its weekday the same way; Jupiter's sentence is the exemplar quoted"
+     }
+    },
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 25,
+   "exceptions": [],
+   "conflicts_with": [
+    "islam.qabisi.ch2.planetary_hour_sequence (same doctrine family; al-Qabisi gives the full Chaldean-order hour sequence, Lilly gives the day-ruler/first-and-eighth-hour form)"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. IX (Jupiter), weekday sidenote",
+     "location": "CA 1647 p. 63; txt offset ~181000-181400",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; sentence fully legible"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.considerations_before_judgment",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "other",
+   "scope": {
+    "branch": "horary",
+    "book": "1",
+    "chapter": "Considerations before Judgment (CA pp. 121-123)",
+    "topic_domain": "judgment_gates",
+    "scope_note": "HORARY-specific doctrine: these are gates on judging a horary question, not natal delineations. Domain set to 'other' accordingly; the Moon void-of-course clause is also cross-filed on lilly.ca1.void_of_course."
+   },
+   "conditions": {
+    "trigger": "before delivering judgment on a horary figure"
+   },
+   "conclusion": {
+    "quote": "the Question then shall be taken for radicall, or fit to be judged, when as the Lord of the hour at the time of proposing the Question, and erecting the Figure, and the Lord of the Ascendant or first House, are of one Triplicity, or be one, or of the same nature.",
+    "considerations": [
+     "radicality: lord of the hour agrees with lord of the ascendant (same planet, same triplicity, or same nature)",
+     "0-3 degrees ascending: judge not, unless the querent is very young and body/complexion agree",
+     "27-29 degrees ascending: judge not, unless the querent's age corresponds or the time is certain",
+     "Moon in late degrees of a sign, especially Gemini, Scorpio or Capricorn: not safe to judge",
+     "Moon in via combusta (last 15 degrees of Libra to first 15 degrees of Scorpio): not safe, 'as some say'",
+     "Moon void of course: matters go hardly on, except principal significators be very strong; somewhat performed in Taurus, Cancer, Sagittarius, Pisces",
+     "cusp of the 7th afflicted, or its lord retrograde/impedited (matter not of the 7th): the astrologer's judgment will give small content",
+     "Saturn in the ascendant, especially retrograde: the matter seldom comes to good; Saturn in the 7th corrupts the judgment of the astrologer",
+     "lord of the ascendant combust: neither question propounded will take, or the querent be regulated",
+     "lord of the 7th unfortunate, in fall, or in terms of the infortunes: the artist shall scarce give a solid judgment",
+     "testimonies of fortunes and infortunes equal: defer judgment"
+    ],
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 20,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, Considerations before Judgment",
+     "location": "CA 1647 pp. 121-123; txt offset ~320800-325500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; chapter read in full; every clause above corresponds to a legible sentence"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  },
+  {
+   "rule_id": "lilly.ca1.perfection_modes",
+   "tradition_id": "latin_european",
+   "school_id": "lilly_christian_astrology_1647",
+   "period": "1647 CE, London; English horary/natal synthesis of the medieval Latin tradition",
+   "domain": "other",
+   "scope": {
+    "branch": "horary",
+    "book": "1",
+    "chapter": "ch. XXI, To know whether a thing demanded will be brought to perfection (CA pp. 124-126)",
+    "topic_domain": "perfection",
+    "scope_note": "HORARY doctrine on how a matter perfects; encoded as 'other'. The aspect/reception machinery it exercises is the same machinery encoded in the natal-eligible rules above."
+   },
+   "conditions": {
+    "trigger": "judging whether the thing demanded shall be accomplished"
+   },
+   "conclusion": {
+    "quote": "First, by Conjunction, when as therefore you find the Lord of the Ascendant, and Lord of that house which signifies the thing demanded, hastening to a [conjunction], and in the first house, or in any Angle, and the significators meet with no prohibition or refrenation before they come to perfect [conjunction]; you may then judge, that the thing sought after shall be brought to passe.",
+    "modes": [
+     {
+      "mode": "conjunction",
+      "conditions": "significators hasten to conjunction in the first house or any angle, no prohibition or refranation; angles soonest, succedents slower, cadents with infinite loss of time"
+     },
+     {
+      "mode": "sextile_trine",
+      "conditions": "apply by partill sextile or trine out of good houses where essentially well dignified, no intervening malevolent aspect"
+     },
+     {
+      "mode": "square",
+      "conditions": "apply by square, provided each planet has dignity in the degrees where it stands and applies out of proper and good houses, otherwise not"
+     },
+     {
+      "mode": "opposition",
+      "conditions": "only with mutual reception by house out of friendly houses and the Moon translating; 'I have rarely seen any thing brought to perfection by this way'"
+     },
+     {
+      "mode": "translation",
+      "conditions": "see lilly.ca1.translation_of_light (perfection form, with reception)"
+     },
+     {
+      "mode": "collection",
+      "conditions": "see lilly.ca1.collection_of_light"
+     },
+     {
+      "mode": "dwelling_in_houses",
+      "conditions": "significator of the thing demanded casually posited in the ascendant"
+     }
+    ],
+    "rendering_grade": "verbatim_early_modern_english",
+    "customer_prediction": false
+   },
+   "priority": 20,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "latin_european_lilly_ca1647_wellcome_bim_ocr",
+     "work": "William Lilly, Christian Astrology (London, 1647, first edition)",
+     "section": "Book 1, ch. XXI",
+     "location": "CA 1647 pp. 124-126; txt offset ~328900-334500",
+     "verification": "Read in sources/ca1647_wellcome_djvu.txt sha256 7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa; chapter read in full; all seven modes legible"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; no customer output",
+   "review_status": "english_read_directly_by_engine_independent_specialist_review_pending"
+  }
+ ]
+}

@@ -20,6 +20,7 @@ EXPECTED_TRACK_IDS = {
     "japanese_sukuyodo",
     "byzantine_greek",
     "hellenistic_delineation",
+    "latin_european",
     "chinese_qizheng_siyu",
     "tibetan_white_beryl",
     "indian_jyotisha",
@@ -49,6 +50,7 @@ EXPECTED_AUDIT_DIRECTORIES = {
     "sukuyodo",
     "byzantine",
     "hellenistic",
+    "latin_european",
     "qizheng",
     "babylonian",
     "bazi",
@@ -73,7 +75,7 @@ EXPECTED_AUDIT_DIRECTORIES = {
 }
 
 EXPECTED_STATUS_COUNTS = {
-    "research_verified": 27,
+    "research_verified": 28,
     "source_limited": 55,
     "not_implemented": 3,
 }

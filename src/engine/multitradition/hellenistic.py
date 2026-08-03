@@ -324,6 +324,20 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
         ("Alcabitius", "Placidus", "Campanus", "Porphyry", "Whole sign"),
     )
     section.disclose(
+        DisclosureKind.FORK,
+        "Term table - a known blend, disclosed until the 1647 digits are keyed",
+        "The +2 term score in this section is currently awarded from the "
+        "EGYPTIAN bounds table, but Lilly prints PTOLEMAIC terms (CA p.104) - "
+        "the corpus's Lilly pack records this exact conflict and flags that a "
+        "Lilly-mode scorer must not use Egyptian bounds. The Ptolemaic term "
+        "digits have not yet been keyed from the pinned 1647 page photographs, "
+        "and taking them from a modern secondary table would violate the "
+        "house sourcing rules, so the blend is DISCLOSED rather than silently "
+        "half-fixed: any planet whose Egyptian and Ptolemaic term lords differ "
+        "may gain or lose 2 points against Lilly's own arithmetic.",
+        ("Ptolemaic terms per CA p.104, once keyed from the page photographs",),
+    )
+    section.disclose(
         DisclosureKind.SOURCE,
         "Numerical dignity",
         "Lilly's essential dignity scoring (+5 domicile, +4 exaltation, "

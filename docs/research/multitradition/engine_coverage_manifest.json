@@ -1824,6 +1824,38 @@
           ]
         }
       ]
+    },
+    {
+      "track_id": "latin_european",
+      "display_name": "Latin-European (Lilly, Christian Astrology 1647)",
+      "registry_tradition_ids": [
+        "latin_european"
+      ],
+      "source_audit": "latin_european/source_audit.md",
+      "overall_status": "research_verified",
+      "live_engine": false,
+      "customer_eligible": false,
+      "modules": [
+        {
+          "module_id": "lilly_christian_astrology_doctrine",
+          "name": "Lilly 1647: point table, orbs/moieties, reception, void of course",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "latin_european/source_audit.md",
+            "latin_european/lilly_ca_rule_manifest.json",
+            "latin_european/lilly_ca_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "Ptolemaic term digits (CA p.104) not yet keyed from the pinned page photographs; until then the live Latin scorer's Egyptian-bounds +2 is a DISCLOSED blend",
+            "CA Book 3 (temperament, worked nativity) unmined",
+            "independent specialist review before leaving research_only",
+            "notable 1647 reading verified by photograph: 8th/6th house = -2, not the commonly printed -4"
+          ]
+        }
+      ]
     }
   ]
 }

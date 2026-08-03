@@ -1,0 +1,1197 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-03",
+ "tradition_id": "latin_european",
+ "source_pack_id": "latin_european_lilly_ca1647_v1",
+ "status": "research_verified",
+ "source_ids": [
+  "latin_european_lilly_ca_1647_wellcome_archive",
+  "latin_european_lilly_ca_1647_bim_archive",
+  "latin_european_lilly_ca_1647_direct_extraction_2026_08"
+ ],
+ "vectors": [
+  {
+   "vector_id": "lilly.ca.vector.aspect_angles",
+   "rule_ids": [
+    "lilly.ca1.aspect_inventory_and_quality"
+   ],
+   "inputs": {
+    "operation": "aspect_angle_lookup"
+   },
+   "expected": {
+    "sextile": 60,
+    "square": 90,
+    "trine": 120,
+    "opposition": 180,
+    "conjunction": 0,
+    "square_quality": "imperfect enmity",
+    "opposition_quality": "perfect hatred"
+   },
+   "provenance": "CA 1647 pp. 106-107, terms-of-art chapter."
+  },
+  {
+   "vector_id": "lilly.ca.vector.platick_venus_saturn_trine",
+   "rule_ids": [
+    "lilly.ca1.partill_platick",
+    "lilly.ca1.orb_table"
+   ],
+   "inputs": {
+    "Venus": {
+     "lon_sign": "Taurus",
+     "deg": 10
+    },
+    "Saturn": {
+     "lon_sign": "Virgo",
+     "deg": 18
+    },
+    "aspect": "trine",
+    "orb_moiety_saturn": 5,
+    "orb_moiety_venus": 4
+   },
+   "expected": {
+    "distance_from_perfect_deg": 8,
+    "within_summed_moieties": true,
+    "classification": "platick trine"
+   },
+   "provenance": "Lilly's own worked example, CA 1647 p. 107; digits verified against page photograph leaf141."
+  },
+  {
+   "vector_id": "lilly.ca.vector.partill_definition",
+   "rule_ids": [
+    "lilly.ca1.partill_platick"
+   ],
+   "inputs": {
+    "planet_a": {
+     "sign": "Aries",
+     "deg": 9
+    },
+    "planet_b_offset_signs": 4,
+    "planet_b_deg": 9
+   },
+   "expected": {
+    "classification": "partill trine",
+    "reason": "exactly so many degrees as make a perfect aspect"
+   },
+   "provenance": "CA 1647 p. 106 ('as if [Mars] be in nine degrees of [Aries], and [...] in nine degrees of [Leo], this is a Partill [trine] aspect')."
+  },
+  {
+   "vector_id": "lilly.ca.vector.orb_table_primary",
+   "rule_ids": [
+    "lilly.ca1.orb_table"
+   ],
+   "inputs": {
+    "operation": "orb_lookup",
+    "column": "primary"
+   },
+   "expected": {
+    "Saturn_deg_min": [
+     10,
+     0
+    ],
+    "Jupiter_deg_min": [
+     12,
+     0
+    ],
+    "Mars_deg_min": [
+     7,
+     30
+    ],
+    "Sun_deg_min": [
+     17,
+     0
+    ],
+    "Venus_deg_min": [
+     8,
+     0
+    ],
+    "Mercury_deg_min": [
+     7,
+     0
+    ],
+    "Moon_deg_min": [
+     12,
+     30
+    ]
+   },
+   "provenance": "CA 1647 p. 107 orb table, first column; every digit read from page photograph leaf141 sha256 5d752cfc..."
+  },
+  {
+   "vector_id": "lilly.ca.vector.orb_table_alternate",
+   "rule_ids": [
+    "lilly.ca1.orb_table"
+   ],
+   "inputs": {
+    "operation": "orb_lookup",
+    "column": "alternate"
+   },
+   "expected": {
+    "Saturn_deg_min": [
+     9,
+     0
+    ],
+    "Jupiter_deg_min": [
+     9,
+     0
+    ],
+    "Mars_deg_min": [
+     7,
+     0
+    ],
+    "Sun_deg_min": [
+     15,
+     0
+    ],
+    "Venus_deg_min": [
+     7,
+     0
+    ],
+    "Mercury_deg_min": [
+     7,
+     0
+    ],
+    "Moon_deg_min": [
+     12,
+     0
+    ]
+   },
+   "provenance": "CA 1647 p. 107 orb table, second column; read from page photograph leaf141."
+  },
+  {
+   "vector_id": "lilly.ca.vector.orb_jupiter_chapter_matches_alternate",
+   "rule_ids": [
+    "lilly.ca1.orb_table",
+    "lilly.ca1.jupiter_nature"
+   ],
+   "inputs": {
+    "operation": "internal_consistency",
+    "jupiter_chapter_orb": 9
+   },
+   "expected": {
+    "matches_alternate_column": true,
+    "matches_primary_column": false,
+    "note": "internal variation recorded, not harmonized"
+   },
+   "provenance": "CA 1647 p. 63 (Jupiter chapter, 'His Radiation or Orbe, is nine degrees') vs p. 107 table."
+  },
+  {
+   "vector_id": "lilly.ca.vector.application_mode_classification",
+   "rule_ids": [
+    "lilly.ca1.application_three_ways"
+   ],
+   "inputs": {
+    "cases": [
+     {
+      "swift": {
+       "deg": 10,
+       "motion": "direct"
+      },
+      "slow": {
+       "deg": 15,
+       "motion": "direct"
+      }
+     },
+     {
+      "swift": {
+       "deg": 10,
+       "motion": "retrograde"
+      },
+      "slow": {
+       "deg": 9,
+       "motion": "retrograde"
+      }
+     },
+     {
+      "direct_planet": {
+       "deg": 15,
+       "motion": "direct"
+      },
+      "retro_planet": {
+       "deg": 17,
+       "motion": "retrograde"
+      }
+     }
+    ]
+   },
+   "expected": {
+    "classifications": [
+     "normal application",
+     "ill application (both retrograde)",
+     "ill application (retrograde closing on direct)"
+    ]
+   },
+   "provenance": "CA 1647 p. 107, the three ways of application with Lilly's own degree examples."
+  },
+  {
+   "vector_id": "lilly.ca.vector.superior_applies_only_retrograde",
+   "rule_ids": [
+    "lilly.ca1.application_superiors_dexter_sinister"
+   ],
+   "inputs": {
+    "Saturn": {
+     "sign": "Aries",
+     "deg": 10,
+     "motion": "direct"
+    },
+    "Venus": {
+     "sign": "Aries",
+     "deg": 7,
+     "motion": "direct"
+    }
+   },
+   "expected": {
+    "applier": "Venus",
+    "reason": "the lighter applies to the more ponderous; a superior applies to an inferior only when retrograde"
+   },
+   "provenance": "CA 1647 p. 109 with the Saturn 10 Aries / lighter-planet 7 Aries example."
+  },
+  {
+   "vector_id": "lilly.ca.vector.dexter_sinister_orientation",
+   "rule_ids": [
+    "lilly.ca1.application_superiors_dexter_sinister"
+   ],
+   "inputs": {
+    "planet_in": "Aries",
+    "sextile_targets": {
+     "sinister": "Gemini",
+     "dexter": "Aquarius"
+    }
+   },
+   "expected": {
+    "sinister_is_in_sign_order": true,
+    "dexter_is_against_sign_order": true,
+    "dexter_more_forcible": true
+   },
+   "provenance": "CA 1647 p. 109 ('when [Saturn] is in [Aries] and casteth his sextile... called a Sinister', dexter against the order of signs)."
+  },
+  {
+   "vector_id": "lilly.ca.vector.separation_sun_moon_complete",
+   "rule_ids": [
+    "lilly.ca1.separation_and_moieties"
+   ],
+   "inputs": {
+    "pair": [
+     "Sun",
+     "Moon"
+    ],
+    "sun_orb": 15,
+    "moon_orb": 12
+   },
+   "expected": {
+    "moiety_sum_deg": 13.5,
+    "separation_complete_at_deg_past_perfection": 13.5,
+    "stated_as": "7 degr. and 30 min. plus 6 degr., in all 13 degr. and 30 minutes"
+   },
+   "provenance": "Lilly's own arithmetic, CA 1647 p. 110."
+  },
+  {
+   "vector_id": "lilly.ca.vector.separation_jupiter_saturn_complete",
+   "rule_ids": [
+    "lilly.ca1.separation_and_moieties"
+   ],
+   "inputs": {
+    "pair": [
+     "Jupiter",
+     "Saturn"
+    ],
+    "jupiter_moiety": 4.5,
+    "saturn_moiety": 4.5
+   },
+   "expected": {
+    "separation_complete_at_deg_past_perfection": 9.0
+   },
+   "provenance": "Lilly's own arithmetic, CA 1647 p. 110 ('added together they make 9 whole degrees')."
+  },
+  {
+   "vector_id": "lilly.ca.vector.separation_begins_six_minutes",
+   "rule_ids": [
+    "lilly.ca1.separation_and_moieties"
+   ],
+   "inputs": {
+    "perfect_conjunction": {
+     "deg": 10,
+     "min": 25
+    },
+    "swift_planet_now": {
+     "deg": 10,
+     "min": 32
+    }
+   },
+   "expected": {
+    "separating": true,
+    "totally_separated": false
+   },
+   "provenance": "CA 1647 p. 110, the 10 degr. 25 min. Aries example: separation begins past six minutes, completes past the summed moieties."
+  },
+  {
+   "vector_id": "lilly.ca.vector.prohibition_bodily",
+   "rule_ids": [
+    "lilly.ca1.prohibition"
+   ],
+   "inputs": {
+    "Mars": {
+     "sign": "Aries",
+     "deg": 7
+    },
+    "Saturn": {
+     "sign": "Aries",
+     "deg": 12
+    },
+    "Sun": {
+     "sign": "Aries",
+     "deg": 6
+    }
+   },
+   "expected": {
+    "prohibited": true,
+    "prohibitor": "Sun",
+    "kind": "conjunctionall/bodily prohibition",
+    "mechanism": "the swifter Sun overtakes Mars and conjoins Saturn first"
+   },
+   "provenance": "Lilly's own example, CA 1647 pp. 110-111."
+  },
+  {
+   "vector_id": "lilly.ca.vector.refranation_mars_saturn",
+   "rule_ids": [
+    "lilly.ca1.refranation"
+   ],
+   "inputs": {
+    "Saturn": {
+     "sign": "Aries",
+     "deg": 12
+    },
+    "Mars": {
+     "sign": "Aries",
+     "deg": 7,
+     "stations_retrograde_before_deg": 11
+    }
+   },
+   "expected": {
+    "perfected": false,
+    "kind": "refranation",
+    "outcome": "nothing signified by the former conjunction will ever be effected"
+   },
+   "provenance": "Lilly's own example, CA 1647 p. 111."
+  },
+  {
+   "vector_id": "lilly.ca.vector.translation_two_forms",
+   "rule_ids": [
+    "lilly.ca1.translation_of_light"
+   ],
+   "inputs": {
+    "operation": "compare_definitions",
+    "book1_form": "no reception condition",
+    "perfection_form": "translator received by first significator (house/triplicity/term) and meets no other ray first"
+   },
+   "expected": {
+    "forms_differ": true,
+    "difference": "reception requirement present only in the perfection-chapter form"
+   },
+   "provenance": "CA 1647 p. 111 vs p. 126; both passages quoted in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.collection_requires_double_reception",
+   "rule_ids": [
+    "lilly.ca1.collection_of_light"
+   ],
+   "inputs": {
+    "sig_a_aspects_collector": true,
+    "sig_b_aspects_collector": true,
+    "collector_heavier": true,
+    "sig_a_receives_collector": true,
+    "sig_b_receives_collector": false
+   },
+   "expected": {
+    "collection_perfects": false,
+    "reason": "'they both receive him in some of their essentiall dignities' - both receptions required"
+   },
+   "provenance": "CA 1647 p. 126."
+  },
+  {
+   "vector_id": "lilly.ca.vector.reception_sun_aries_mars_leo",
+   "rule_ids": [
+    "lilly.ca1.reception"
+   ],
+   "inputs": {
+    "Sun": {
+     "sign": "Aries"
+    },
+    "Mars": {
+     "sign": "Leo"
+    }
+   },
+   "expected": {
+    "mutual_reception": true,
+    "type": "by houses (domicile)",
+    "rank": "strongest and best of all receptions"
+   },
+   "provenance": "Lilly's own example, CA 1647 p. 112."
+  },
+  {
+   "vector_id": "lilly.ca.vector.reception_effect_overrides_denial",
+   "rule_ids": [
+    "lilly.ca1.reception"
+   ],
+   "inputs": {
+    "aspect_between_significators": "none_or_square_or_opposition",
+    "mutual_reception": true
+   },
+   "expected": {
+    "matter_perfected": true,
+    "quality": "without any great trouble, and suddenly to the content of both parties"
+   },
+   "provenance": "CA 1647 p. 112, the effect paragraph."
+  },
+  {
+   "vector_id": "lilly.ca.vector.peregrine_saturn_10_aries",
+   "rule_ids": [
+    "lilly.ca1.peregrine"
+   ],
+   "inputs": {
+    "Saturn": {
+     "sign": "Aries",
+     "deg": 10
+    }
+   },
+   "expected": {
+    "peregrine": true,
+    "but_at_27_aries": {
+     "peregrine": false,
+     "reason": "his owne Terme"
+    }
+   },
+   "provenance": "Lilly's own example, CA 1647 p. 112."
+  },
+  {
+   "vector_id": "lilly.ca.vector.void_of_course_definition",
+   "rule_ids": [
+    "lilly.ca1.void_of_course"
+   ],
+   "inputs": {
+    "planet": "any",
+    "separated_from_last_aspect": true,
+    "applies_to_none_in_current_sign": true
+   },
+   "expected": {
+    "void_of_course": true,
+    "most_usual_in": "Moon"
+   },
+   "provenance": "CA 1647 p. 112; BIM witness lines ~8200-8206."
+  },
+  {
+   "vector_id": "lilly.ca.vector.void_moon_exception_signs",
+   "rule_ids": [
+    "lilly.ca1.void_of_course",
+    "lilly.ca1.considerations_before_judgment"
+   ],
+   "inputs": {
+    "Moon": {
+     "void_of_course": true,
+     "sign": "Taurus"
+    }
+   },
+   "expected": {
+    "somewhat_performed": true,
+    "exception_signs": [
+     "Taurus",
+     "Cancer",
+     "Sagittarius",
+     "Pisces"
+    ]
+   },
+   "provenance": "CA 1647 p. 122, considerations chapter."
+  },
+  {
+   "vector_id": "lilly.ca.vector.void_of_course_agrees_with_qabisi",
+   "rule_ids": [
+    "lilly.ca1.void_of_course"
+   ],
+   "inputs": {
+    "operation": "cross_tradition_comparison",
+    "qabisi_rule": "islam.qabisi.ch3.void_of_course_and_feral"
+   },
+   "expected": {
+    "definition_concordant": true,
+    "shared_form": "any planet; separated from one, applying to no other while in its sign",
+    "lilly_additions": [
+     "Moon emphasis",
+     "four exception signs",
+     "strong-significator override"
+    ],
+    "qabisi_addition": "the distinct feral (wahshi) condition"
+   },
+   "provenance": "Lilly CA 1647 p. 112 vs al-Qabisi Chapter III (islamicate/al_qabisi_rule_manifest.json)."
+  },
+  {
+   "vector_id": "lilly.ca.vector.frustration_jupiter_mars_saturn",
+   "rule_ids": [
+    "lilly.ca1.frustration"
+   ],
+   "inputs": {
+    "Jupiter": {
+     "sign": "Aries",
+     "deg": 10
+    },
+    "Mars": {
+     "sign": "Aries",
+     "deg": 12
+    },
+    "Saturn": {
+     "sign": "Aries",
+     "deg": 13
+    }
+   },
+   "expected": {
+    "frustrated_planet": "Jupiter",
+    "mechanism": "Mars first perfects conjunction with Saturn",
+    "proverb": "Two Dogges quarrell, a third gets the Bone"
+   },
+   "provenance": "Lilly's own example, CA 1647 pp. 112-113."
+  },
+  {
+   "vector_id": "lilly.ca.vector.hayz_conditions",
+   "rule_ids": [
+    "lilly.ca1.hayz"
+   ],
+   "inputs": {
+    "cases": [
+     {
+      "planet_sect": "diurnal",
+      "planet_gender": "masculine",
+      "chart": "day",
+      "above_horizon": true,
+      "sign_gender": "masculine"
+     },
+     {
+      "planet_sect": "nocturnal",
+      "planet_gender": "feminine",
+      "chart": "night",
+      "above_horizon": false,
+      "sign_gender": "feminine"
+     }
+    ]
+   },
+   "expected": {
+    "in_hayz": [
+     true,
+     true
+    ]
+   },
+   "provenance": "CA 1647 p. 113."
+  },
+  {
+   "vector_id": "lilly.ca.vector.combustion_examples",
+   "rule_ids": [
+    "lilly.ca1.combustion"
+   ],
+   "inputs": {
+    "cases": [
+     {
+      "planet": {
+       "sign": "Aries",
+       "deg": 10
+      },
+      "Sun": {
+       "sign": "Aries",
+       "deg": 18
+      }
+     },
+     {
+      "planet": {
+       "sign": "Aries",
+       "deg": 28
+      },
+      "Sun": {
+       "sign": "Aries",
+       "deg": 18
+      }
+     }
+    ],
+    "orb_deg_min": [
+     8,
+     30
+    ]
+   },
+   "expected": {
+    "combust": [
+     true,
+     true
+    ],
+    "applying_sun_worse": true,
+    "combustion_only_by_body": true,
+    "sun_never_combust": true
+   },
+   "provenance": "Lilly's own examples, CA 1647 pp. 113-114."
+  },
+  {
+   "vector_id": "lilly.ca.vector.under_beams_limit",
+   "rule_ids": [
+    "lilly.ca1.under_sunbeams"
+   ],
+   "inputs": {
+    "planet_sun_distance_deg": 16.9
+   },
+   "expected": {
+    "under_beams": true,
+    "clear_at_deg": 17
+   },
+   "provenance": "CA 1647 p. 113."
+  },
+  {
+   "vector_id": "lilly.ca.vector.cazimi_mercury",
+   "rule_ids": [
+    "lilly.ca1.cazimi"
+   ],
+   "inputs": {
+    "Sun": {
+     "deg": 15,
+     "min": 30
+    },
+    "Mercury": {
+     "deg": 15,
+     "min": 25
+    },
+    "limit_arc_min": 17
+   },
+   "expected": {
+    "cazimi": true,
+    "effect": "fortified"
+   },
+   "provenance": "Lilly's own example, CA 1647 p. 113."
+  },
+  {
+   "vector_id": "lilly.ca.vector.oriental_occidental_windows",
+   "rule_ids": [
+    "lilly.ca1.oriental_occidental"
+   ],
+   "inputs": {
+    "cases": [
+     {
+      "planet": "Saturn",
+      "phase": "between conjunction and opposition"
+     },
+     {
+      "planet": "Saturn",
+      "phase": "between opposition and next conjunction"
+     },
+     {
+      "planet": "Moon",
+      "phase": "between conjunction and opposition"
+     }
+    ]
+   },
+   "expected": {
+    "classifications": [
+     "oriental",
+     "occidental",
+     "occidental"
+    ],
+    "mercury_max_elongation_deg": 28
+   },
+   "provenance": "CA 1647 p. 114."
+  },
+  {
+   "vector_id": "lilly.ca.vector.besieging_venus",
+   "rule_ids": [
+    "lilly.ca1.besieging"
+   ],
+   "inputs": {
+    "Saturn": {
+     "sign": "Aries",
+     "deg": 18
+    },
+    "Mars": {
+     "sign": "Aries",
+     "deg": 10
+    },
+    "Venus": {
+     "sign": "Aries",
+     "deg": 13
+    }
+   },
+   "expected": {
+    "besieged": true,
+    "besieged_planet": "Venus"
+   },
+   "provenance": "Lilly's own example, CA 1647 p. 114."
+  },
+  {
+   "vector_id": "lilly.ca.vector.essential_points_ladder",
+   "rule_ids": [
+    "lilly.ca1.essential_dignity_points"
+   ],
+   "inputs": {
+    "operation": "score_lookup"
+   },
+   "expected": {
+    "domicile_or_mutual_reception_by_house": 5,
+    "exaltation_or_reception_by_exaltation": 4,
+    "triplicity": 3,
+    "term": 2,
+    "face": 1,
+    "detriment": -5,
+    "fall": -4,
+    "peregrine": -5
+   },
+   "provenance": "CA 1647 p. 115 table, verified against page photograph leaf149 sha256 083de395..."
+  },
+  {
+   "vector_id": "lilly.ca.vector.essential_ladder_matches_engine_and_qabisi",
+   "rule_ids": [
+    "lilly.ca1.essential_dignity_points"
+   ],
+   "inputs": {
+    "operation": "cross_check",
+    "targets": [
+     "src/engine/multitradition/hellenistic.py Lilly scoring",
+     "islam.qabisi.ch1.dignity_power_scoring"
+    ]
+   },
+   "expected": {
+    "positive_ladder_matches_engine": true,
+    "positive_ladder_matches_qabisi": true,
+    "note": "al-Qabisi states the same 5/4/3/2/1 ladder in Arabic c. seven centuries before Lilly; already recorded in the al-Qabisi pass"
+   },
+   "provenance": "CA 1647 p. 115 vs engine reference scoring and al-Qabisi Chapter I."
+  },
+  {
+   "vector_id": "lilly.ca.vector.accidental_fortitudes_complete",
+   "rule_ids": [
+    "lilly.ca1.accidental_fortitude_points"
+   ],
+   "inputs": {
+    "operation": "table_audit"
+   },
+   "expected": {
+    "row_count": 18,
+    "max_single_score": 6,
+    "max_single_condition": "conjunct Cor Leonis (Regulus) in 24 Leo",
+    "house_scores": {
+     "mc_or_asc": 5,
+     "7_4_11": 4,
+     "2_5": 3,
+     "9": 2,
+     "3": 1
+    }
+   },
+   "provenance": "CA 1647 p. 115, fortitude column; all 18 values read from page photograph leaf149."
+  },
+  {
+   "vector_id": "lilly.ca.vector.accidental_debilities_complete",
+   "rule_ids": [
+    "lilly.ca1.accidental_debility_points"
+   ],
+   "inputs": {
+    "operation": "table_audit"
+   },
+   "expected": {
+    "row_count": 15,
+    "twelfth_house": -5,
+    "eighth_and_sixth": -2,
+    "eighth_sixth_note": "the 1647 page reads 2; later tabulations sometimes print 4 - the witness reading is kept",
+    "retrograde": -5,
+    "combust": -5,
+    "under_beams": -4,
+    "algol_orb_deg": 5
+   },
+   "provenance": "CA 1647 p. 115, debility column; all 15 values read from page photograph leaf149."
+  },
+  {
+   "vector_id": "lilly.ca.vector.fixed_star_scores",
+   "rule_ids": [
+    "lilly.ca1.accidental_fortitude_points",
+    "lilly.ca1.accidental_debility_points"
+   ],
+   "inputs": {
+    "stars": {
+     "Cor Leonis (Regulus)": "24 Leo",
+     "Spica": "18 Libra",
+     "Caput Algol": "20 Taurus"
+    }
+   },
+   "expected": {
+    "regulus_points": 6,
+    "spica_points": 5,
+    "algol_points": -5,
+    "algol_orb": "within five degrees"
+   },
+   "provenance": "CA 1647 p. 115; 1647 star positions as printed."
+  },
+  {
+   "vector_id": "lilly.ca.vector.worked_scoring_jupiter_20",
+   "rule_ids": [
+    "lilly.ca1.accidental_fortitude_points",
+    "lilly.ca1.essential_dignity_points"
+   ],
+   "inputs": {
+    "figure": "CA Book 2 riches judgment",
+    "Jupiter": {
+     "essential": "exaltation 4(?)/tenth-house region",
+     "rows": [
+      "Exaltation 4",
+      "In the tenth House 5",
+      "Direct 4",
+      "Swift in motion 2",
+      "Free from Combustion 5"
+     ]
+    }
+   },
+   "expected": {
+    "total": 20,
+    "debilities": 0,
+    "lilly_states": "He hath no Debilities, either Accidentall or Essentiall"
+   },
+   "provenance": "Lilly's own scoring table, CA 1647 pp. 179-180 (Wellcome txt offset ~455300-455600); 4+5+4+2+5=20 reproduced exactly."
+  },
+  {
+   "vector_id": "lilly.ca.vector.worked_scoring_venus_net_18",
+   "rule_ids": [
+    "lilly.ca1.accidental_fortitude_points",
+    "lilly.ca1.accidental_debility_points"
+   ],
+   "inputs": {
+    "figure": "CA Book 2 riches judgment",
+    "Venus_fortitudes": [
+     "eleventh house 4",
+     "Direct 4",
+     "Swift 2",
+     "Occidentall of Sun 2",
+     "Free from Combustion 5",
+     "conj Regulus within six degrees 6"
+    ],
+    "Venus_debilities": [
+     "Peregrine 5"
+    ]
+   },
+   "expected": {
+    "fortitude_sum": 23,
+    "debility_sum": 5,
+    "net": 18
+   },
+   "provenance": "Lilly's own scoring, CA 1647 p. 180: 23 fortitudes, peregrine 5, collected total 18."
+  },
+  {
+   "vector_id": "lilly.ca.vector.worked_scoring_mercury_net_13",
+   "rule_ids": [
+    "lilly.ca1.accidental_fortitude_points",
+    "lilly.ca1.accidental_debility_points"
+   ],
+   "inputs": {
+    "figure": "CA Book 2 riches judgment",
+    "Mercury_fortitudes": [
+     "tenth house 5",
+     "Direct 4",
+     "Swift in motion 2",
+     "Occidentall 2",
+     "Free from Combustion 5"
+    ],
+    "Mercury_debilities": [
+     "Peregrine 5"
+    ]
+   },
+   "expected": {
+    "fortitude_sum": 18,
+    "debility_sum": 5,
+    "net": 13
+   },
+   "provenance": "Lilly's own scoring, CA 1647 p. 180; his collected table gives Mercury 13."
+  },
+  {
+   "vector_id": "lilly.ca.vector.worked_scoring_moon_net_5",
+   "rule_ids": [
+    "lilly.ca1.accidental_fortitude_points",
+    "lilly.ca1.accidental_debility_points"
+   ],
+   "inputs": {
+    "figure": "CA Book 2 riches judgment",
+    "Moon_fortitudes": [
+     "tenth house 5",
+     "Increasing in Light 2",
+     "Free from Combustion 5"
+    ],
+    "Moon_debilities": [
+     "Slow in motion 2",
+     "Peregrine 5"
+    ]
+   },
+   "expected": {
+    "fortitude_sum": 12,
+    "debility_sum": 7,
+    "net": 5
+   },
+   "provenance": "Lilly's own scoring, CA 1647 p. 180; collected table gives the Moon 5."
+  },
+  {
+   "vector_id": "lilly.ca.vector.worked_scoring_collected_totals",
+   "rule_ids": [
+    "lilly.ca1.accidental_fortitude_points",
+    "lilly.ca1.accidental_debility_points",
+    "lilly.ca1.essential_dignity_points"
+   ],
+   "inputs": {
+    "figure": "CA Book 2 riches judgment",
+    "operation": "collected_testimonies"
+   },
+   "expected": {
+    "Saturn": 8,
+    "Jupiter": 20,
+    "Mars": 9,
+    "Sun": 8,
+    "Venus": 18,
+    "Mercury": 13,
+    "Moon": 5,
+    "part_of_fortune": "5 debilities vs 3 fortitudes, weak by two testimonies",
+    "subtraction_doctrine": "having substracted the lesser number from the greater, make use of what remains"
+   },
+   "provenance": "Lilly's own collected table, CA 1647 pp. 180-181 (Wellcome txt offset ~458000-458550). OCR of some totals partially degraded; degraded cells were reproduced only where his per-planet arithmetic above confirms them."
+  },
+  {
+   "vector_id": "lilly.ca.vector.terms_attribution_ptolemy",
+   "rule_ids": [
+    "lilly.ca1.terms_source_ptolemaic"
+   ],
+   "inputs": {
+    "operation": "attribution_check"
+   },
+   "expected": {
+    "term_system": "Ptolemaic (per Lilly's explicit attribution)",
+    "egyptian_bounds_valid_for_lilly_mode": false
+   },
+   "provenance": "CA 1647 pp. 57-58 (Saturn) and 65-66 (Mars): 'alotted him by Ptolomy'. Conflict with islam.qabisi.ch1.egyptian_bounds_table recorded."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_saturn",
+   "rule_ids": [
+    "lilly.ca1.saturn_nature"
+   ],
+   "inputs": {
+    "planet": "Saturn",
+    "operation": "quality_lookup"
+   },
+   "expected": {
+    "hot_cold": "cold",
+    "moist_dry": "dry",
+    "humour": "melancholic",
+    "sect": "diurnal",
+    "class": "greater infortune"
+   },
+   "provenance": "CA 1647 Book 1 planet chapter for Saturn; nature sentence quoted verbatim in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_jupiter",
+   "rule_ids": [
+    "lilly.ca1.jupiter_nature"
+   ],
+   "inputs": {
+    "planet": "Jupiter",
+    "operation": "quality_lookup"
+   },
+   "expected": {
+    "hot_cold": "temperately hot",
+    "moist_dry": "moist",
+    "humour": "sanguine",
+    "sect": "diurnal",
+    "class": "greater fortune"
+   },
+   "provenance": "CA 1647 Book 1 planet chapter for Jupiter; nature sentence quoted verbatim in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_mars",
+   "rule_ids": [
+    "lilly.ca1.mars_nature"
+   ],
+   "inputs": {
+    "planet": "Mars",
+    "operation": "quality_lookup"
+   },
+   "expected": {
+    "hot_cold": "hot",
+    "moist_dry": "dry",
+    "humour": "choleric",
+    "sect": "nocturnal",
+    "class": "lesser infortune"
+   },
+   "provenance": "CA 1647 Book 1 planet chapter for Mars; nature sentence quoted verbatim in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_sun",
+   "rule_ids": [
+    "lilly.ca1.sun_nature"
+   ],
+   "inputs": {
+    "planet": "Sun",
+    "operation": "quality_lookup"
+   },
+   "expected": {
+    "hot_cold": "hot (more temperate than Mars)",
+    "moist_dry": "dry",
+    "sect": "diurnal",
+    "class": "equivalent to a fortune if well dignified"
+   },
+   "provenance": "CA 1647 Book 1 planet chapter for Sun; nature sentence quoted verbatim in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_venus",
+   "rule_ids": [
+    "lilly.ca1.venus_nature"
+   ],
+   "inputs": {
+    "planet": "Venus",
+    "operation": "quality_lookup"
+   },
+   "expected": {
+    "hot_cold": "temperately cold",
+    "moist_dry": "moist",
+    "sect": "nocturnal",
+    "class": "lesser fortune"
+   },
+   "provenance": "CA 1647 Book 1 planet chapter for Venus; nature sentence quoted verbatim in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_mercury",
+   "rule_ids": [
+    "lilly.ca1.mercury_nature"
+   ],
+   "inputs": {
+    "planet": "Mercury",
+    "operation": "quality_lookup"
+   },
+   "expected": {
+    "hot_cold": "cold (of his own nature)",
+    "moist_dry": "dry",
+    "humour": "melancholic",
+    "sect": "convertible",
+    "class": "convertible"
+   },
+   "provenance": "CA 1647 Book 1 planet chapter for Mercury; nature sentence quoted verbatim in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_moon",
+   "rule_ids": [
+    "lilly.ca1.moon_nature"
+   ],
+   "inputs": {
+    "planet": "Moon",
+    "operation": "quality_lookup"
+   },
+   "expected": {
+    "hot_cold": "cold",
+    "moist_dry": "moist",
+    "humour": "phlegmatic",
+    "sect": "nocturnal",
+    "class": "neutral luminary"
+   },
+   "provenance": "CA 1647 Book 1 planet chapter for Moon; nature sentence quoted verbatim in the rule."
+  },
+  {
+   "vector_id": "lilly.ca.vector.nature_fork_by_dignity",
+   "rule_ids": [
+    "lilly.ca1.saturn_nature",
+    "lilly.ca1.jupiter_nature"
+   ],
+   "inputs": {
+    "operation": "delineation_fork",
+    "dignity_state": [
+     "well_dignified",
+     "ill_dignified"
+    ]
+   },
+   "expected": {
+    "fork_exists": true,
+    "keyed_to": "essential dignity state of the planet",
+    "example": "Saturn well dignified: 'profound in Imagination... austere'; ill: 'envious, covetous... ever repining'"
+   },
+   "provenance": "CA 1647 pp. 58-59 and 62-63; both manners paragraphs quoted in the rules."
+  },
+  {
+   "vector_id": "lilly.ca.vector.planetary_hours_jupiter_thursday",
+   "rule_ids": [
+    "lilly.ca1.planetary_hours"
+   ],
+   "inputs": {
+    "planet": "Jupiter"
+   },
+   "expected": {
+    "weekday": "Thursday",
+    "rules_hours_from_sunrise": [
+     1,
+     8
+    ],
+    "hour_type": "unequal, measured from sunrise"
+   },
+   "provenance": "CA 1647 p. 63, Jupiter chapter weekday sidenote."
+  },
+  {
+   "vector_id": "lilly.ca.vector.considerations_radicality",
+   "rule_ids": [
+    "lilly.ca1.considerations_before_judgment"
+   ],
+   "inputs": {
+    "lord_of_hour": "Mars",
+    "ascendant_sign": "Scorpio"
+   },
+   "expected": {
+    "radical": true,
+    "reason": "Mars is lord of the hour and of the watery triplicity / sign ascending",
+    "domain_note": "horary gate, domain 'other'"
+   },
+   "provenance": "Lilly's own example, CA 1647 pp. 121-122."
+  },
+  {
+   "vector_id": "lilly.ca.vector.considerations_degree_gates",
+   "rule_ids": [
+    "lilly.ca1.considerations_before_judgment"
+   ],
+   "inputs": {
+    "cases": [
+     {
+      "asc_deg": 1.5,
+      "querent": "not young"
+     },
+     {
+      "asc_deg": 28,
+      "querent_age_matches": false
+     },
+     {
+      "moon": "27 Gemini"
+     },
+     {
+      "moon": "20 Libra"
+     }
+    ]
+   },
+   "expected": {
+    "judge": [
+     false,
+     false,
+     false,
+     false
+    ],
+    "via_combusta": "last 15 degrees of Libra through first 15 degrees of Scorpio"
+   },
+   "provenance": "CA 1647 p. 122."
+  },
+  {
+   "vector_id": "lilly.ca.vector.perfection_mode_inventory",
+   "rule_ids": [
+    "lilly.ca1.perfection_modes"
+   ],
+   "inputs": {
+    "operation": "mode_inventory"
+   },
+   "expected": {
+    "modes": [
+     "conjunction",
+     "sextile_trine",
+     "square_with_dignity",
+     "opposition_with_mutual_reception_rare",
+     "translation",
+     "collection",
+     "dwelling_in_houses"
+    ],
+    "square_condition": "each planet must have dignity in the degrees wherein they are",
+    "opposition_verdict": "rarely seen brought to perfection; the querent had been better the thing had been undone"
+   },
+   "provenance": "CA 1647 pp. 124-126."
+  }
+ ]
+}
