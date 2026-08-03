@@ -29,6 +29,7 @@ from typing import Any
 from ..multitradition import build_panel
 from ..multitradition.types import BirthInput
 from .report import Delineation, ReportSection, TraditionReport
+from .ziping_predicates import ZipingChart, controls, element_playing, generates
 
 RESEARCH_ROOT = (
     Path(__file__).resolve().parents[3] / "docs" / "research" / "multitradition"
@@ -114,9 +115,10 @@ def _all_ten_gods(facts: dict[str, Any]) -> set[str]:
     one is the commonest way to misread a pillar set.
     """
     found: set[str] = set()
-    for row in facts.get("visible_stem_ten_gods", []) or []:
-        label = row.get("ten_god") if isinstance(row, dict) else None
-        if label:
+    # visible_stem_ten_gods is a dict {pillar: "glyph Label"}; iterating it
+    # directly yielded pillar-name keys, so visible stems were never counted.
+    for label in (facts.get("visible_stem_ten_gods") or {}).values():
+        if isinstance(label, str) and label:
             found.add(label.split()[0])
     for _pillar, stems in (facts.get("hidden_stems") or {}).items():
         for s in stems:
@@ -212,6 +214,7 @@ def _condition_verdict(
     undecidable: list[str] = []
     hidden = facts.get("hidden_stems") or {}
     dm = facts.get("day_master") or {}
+    zc = ZipingChart(facts)
 
     for key, want in cond.items():
         if key.endswith("_present") and isinstance(want, bool):
@@ -270,37 +273,263 @@ def _condition_verdict(
 
         elif key == "day_master_seasonal_state":
             actual = (facts.get("month_command") or {}).get("day_master_state", "")
+            token = actual.split()[0] if actual else ""
+            wanted_tokens = [w for w in ("wang", "xiang", "xiu", "qiu", "si")
+                             if w in str(want)]
             checks.append(
-                (f"day master state {want} (is {actual})", str(want) in actual)
+                (f"day master state in {wanted_tokens} (is {actual})",
+                 token in wanted_tokens)
             )
 
         elif key in ("luck_pillar_ten_god", "first_luck_pillar_ten_god"):
-            by_dir = _luck_pillar_ten_gods(facts)
-            if not by_dir:
-                undecidable.append(key)
-                continue
-            hits = [d for d, gods in by_dir.items() if str(want) in gods]
-            checks.append(
-                (f"a {NAME_TO_GLYPH.get(str(want), want)} luck pillar occurs "
-                 f"({', '.join(hits) if hits else 'in neither direction'})",
-                 bool(hits))
+            source = (
+                zc.first_luck_pillar_roles() if key.startswith("first")
+                else {d: (None, None) for d in ()}
             )
+            if key == "first_luck_pillar_ten_god":
+                target = "zheng_yin" if str(want).startswith("yin") else str(want)
+                hits = [
+                    d for d, (role, _st) in zc.first_luck_pillar_roles().items()
+                    if role in (target, "pian_yin" if target == "zheng_yin" else target)
+                ]
+                checks.append(
+                    (f"first luck pillar is {NAME_TO_GLYPH.get(target, want)} "
+                     f"({', '.join(hits) if hits else 'in neither direction'})",
+                     bool(hits))
+                )
+            else:
+                by_dir = zc.luck_ten_gods()
+                hits = [d for d, gods in by_dir.items() if str(want) in gods]
+                checks.append(
+                    (f"a {NAME_TO_GLYPH.get(str(want), want)} luck pillar occurs "
+                     f"({', '.join(hits) if hits else 'in neither direction'})",
+                     bool(hits))
+                )
+            del source
+
+        elif key == "qi_sha_seasonally_strong":
+            strong, why = zc.seasonally_strong("qi_sha")
+            checks.append((why, strong == bool(want)))
+
+        elif key == "hour_branch_hidden_stems_include_day_master_element_count":
+            n = zc.hour_branch_roots_of_day_master()
+            ok = n > 1 if str(want) == ">1" else n == int(want)
+            checks.append((f"hour branch roots of Day Master element = {n}", ok))
+
+        elif key == "relation" and "generat" in str(want):
+            sha = element_playing("qi_sha", zc.day_stem)
+            seal = element_playing("zheng_yin", zc.day_stem)
+            ok = bool(sha and seal and generates(sha, seal))
+            checks.append(
+                (f"Killing ({sha}) generates Seal ({seal}) in the production cycle",
+                 ok)
+            )
+
+        elif key == "officer_and_killings_together_are_subdued_or_controlled":
+            # Operationalized: the Ten God whose element CONTROLS the
+            # Officer/Killing element (the output stars) is present and either
+            # rooted or seasonally strong. 制殺 via the Eating God is the
+            # textbook mechanism; the operationalization is stated in the
+            # trigger so the broader classical sense is not silently claimed.
+            guan_element = element_playing("zheng_guan", zc.day_stem)
+            controller_roles = [
+                role for role in ("shi_shen", "shang_guan")
+                if (e := element_playing(role, zc.day_stem))
+                and guan_element and controls(e, guan_element)
+            ]
+            armed = [
+                role for role in controller_roles
+                if zc.present(role)
+                and (zc.rooted(role) or zc.seasonally_strong(role)[0])
+            ]
+            checks.append(
+                ("controller of Officer/Killing present and armed ("
+                 + (", ".join(NAME_TO_GLYPH[r] for r in armed) if armed else "none")
+                 + ") [operationalized as: output star controlling the officer "
+                 "element, rooted or in season]",
+                 bool(armed))
+            )
+
+        elif key == "both_visible_or_rooted_simultaneously":
+            guan_ok = zc.visible("zheng_guan") or zc.rooted("zheng_guan")
+            sha_ok = zc.visible("qi_sha") or zc.rooted("qi_sha")
+            checks.append(
+                (f"Officer visible-or-rooted={guan_ok}, "
+                 f"Killing visible-or-rooted={sha_ok}", guan_ok and sha_ok)
+            )
+
+        elif key == "damaged_or_clashed":
+            role = "zheng_guan" if zc.present("zheng_guan") else "qi_sha"
+            damaged, why = zc.damaged_or_clashed(role)
+            checks.append(
+                (f"{NAME_TO_GLYPH[role]} damaged/clashed: {why} "
+                 "[operationalized as: root branch in a six-clash, or a "
+                 "controlling Ten God present]",
+                 damaged == bool(want))
+            )
+
+        elif key == "shi_shen_has_qi":
+            has = zc.rooted("shi_shen") or zc.seasonally_strong("shi_shen")[0]
+            checks.append(
+                (f"食神 rooted={zc.rooted('shi_shen')}, "
+                 f"in season={zc.seasonally_strong('shi_shen')[0]}", has)
+            )
+
+        elif key == "shi_shen_undamaged_by_shang_guan":
+            damaged, why = zc.damaged_or_clashed("shi_shen")
+            checks.append(
+                (f"食神 undamaged: {why}", (not damaged) == bool(want))
+            )
+
+        elif key == "natal_shang_guan_present_and_governing":
+            governing = zc.present("shang_guan") and (
+                "month" in zc.roots_of("shang_guan")
+                or zc.seasonally_strong("shang_guan")[0]
+            )
+            checks.append(
+                ("傷官 present and governing (month-rooted or in season): "
+                 f"{governing}", governing)
+            )
+
+        elif key in ("day_master_class", "day_master_and_useful_matter_strong"):
+            strong, why = zc.day_master_strong()
+            checks.append((f"day master strong per {why}", strong))
+
+        elif key == "phase_in_own_generation_or_prosperity_state":
+            state = zc.state_of_element(zc.day_element)
+            token = state.split()[0]
+            checks.append(
+                (f"day master {zc.day_element} state {state} "
+                 "[operationalized: wang/xiang of the five command states]",
+                 token in ("wang", "xiang"))
+            )
+
+        elif key == "phase_qi_direction":
+            direction, why = zc.phase_direction()
+            checks.append(
+                (f"{why} -> {direction} "
+                 "[operationalized: xiang=advancing, xiu=retreating]",
+                 direction in ("advancing", "retreating"))
+            )
+
+        elif key == "luck_pillar_seasonal_state":
+            roles = zc.first_luck_pillar_roles()
+            desc = "; ".join(f"{d}: {r} in state {s}" for d, (r, s) in roles.items())
+            strong = any(
+                s and s.split()[0] in ("wang", "xiang") for _r, s in roles.values()
+            )
+            checks.append((f"first luck pillar state ({desc})", strong))
+
+        elif key == "month_branch_or_its_useful_element_present":
+            mc = facts.get("month_command") or {}
+            checks.append(
+                ("month command has a useful root: "
+                 f"{mc.get('support_assessment', '?')}",
+                 bool(mc.get("root_in_month_branch")))
+            )
+
+        elif key == "clash_type":
+            clashed = zc.month_branch_clashed()
+            checks.append(
+                (f"a clash lands on the month branch itself: {clashed}", clashed)
+            )
+
+        elif key == "one_of_the_three_hidden_stems_revealed_and_prosperous_at_stem_level":
+            revealed = []
+            for pillar, p in zc.pillars.items():
+                if p.get("branch") not in ("chen", "xu", "chou", "wei"):
+                    continue
+                hidden_here = {s["stem"] for s in zc.hidden.get(pillar, [])}
+                for other_pillar in ("year", "month", "hour"):
+                    stem = (zc.pillars.get(other_pillar) or {}).get("stem")
+                    if stem in hidden_here:
+                        revealed.append(f"{stem} ({other_pillar} stem)")
+            checks.append(
+                ("a storage branch's hidden stem is revealed at stem level: "
+                 + (", ".join(revealed) if revealed else "none"),
+                 bool(revealed))
+            )
+
+        elif key == "wealth_or_officer_hidden_in_a_storage_branch":
+            holdings = zc.storage_holdings()
+            checks.append(
+                ("Wealth/Officer stored: "
+                 + (", ".join(f"{h['label']} in {h['branch']}" for h in holdings)
+                    if holdings else "none"),
+                 bool(holdings))
+            )
+
+        elif key == "storage_branch_clashed_open":
+            holdings = zc.storage_holdings()
+            opened = [
+                h for h in holdings if h["pillar"] in zc.clashed_pillars()
+            ]
+            checks.append(
+                ("storage branch clashed open: "
+                 + (", ".join(h["branch"] for h in opened) if opened else "no"),
+                 bool(opened))
+            )
+
+        elif key == "luck_pillar_or_annual_pillar_forms_a_liu_he_with_a_natal_stem_or_branch":
+            ok, why = zc.luck_harmony_with_natal()
+            checks.append(
+                (why + " [annual pillars not enumerated; luck pillars checked]",
+                 ok)
+            )
+
+        elif key == "one_branch_of_a_clash_pair_appears_twice_or_more":
+            ok, why = zc.clash_proportional_case()
+            checks.append((why, ok))
+
+        elif key == "the_opposite_branch_appears_only_once":
+            # Folded into the proportional-case predicate above; repeat its
+            # verdict so the conjunction stays coherent.
+            ok, _why = zc.clash_proportional_case()
+            checks.append(("(same proportional test)", ok))
+
+        elif key in ("officer_star", "damaging_agents", "wealth_officer_seal_present",
+                     "wealth_and_officer_present_and_favorable"):
+            # Descriptive keys: the deciding keys of these rules are elsewhere
+            # in the same condition (day_stem/month_branch decide the worked
+            # example; the storage/shiedabai rules carry their own gates).
+            # Treated as satisfied-by-description rather than blocking.
+            if key == "wealth_and_officer_present_and_favorable":
+                wealth = zc.present("zheng_cai") or zc.present("pian_cai")
+                officer = zc.present("zheng_guan")
+                favorable = wealth and officer and (
+                    zc.seasonally_strong("zheng_guan")[0]
+                    or zc.rooted("zheng_guan")
+                )
+                checks.append(
+                    (f"Wealth present={wealth}, Officer present={officer}, "
+                     f"Officer armed={favorable}", favorable)
+                )
+            # the pure-description keys add no check
+
+        elif key == "day_pillar_is_member_of_shi_e_da_bai_category":
+            undecidable.append(
+                "shi_e_da_bai day list: the pack quotes the verdict couplet but "
+                "not the ten day-pillars themselves; encoding the list from "
+                "general knowledge would be an unsourced import, so this stays "
+                "gated until the list is extracted from a witness"
+            )
+
         else:
             undecidable.append(key)
 
+    # A conjunction with any decided-False clause is False regardless of what
+    # else could not be decided - the rule cannot fire either way.
+    if any(not v for _n, v in checks):
+        return False, ", ".join(f"{n}: {'yes' if v else 'no'}" for n, v in checks)
     if undecidable and not checks:
         return None, "; ".join(undecidable)
     if undecidable:
         return None, (
-            "partly decidable ("
-            + ", ".join(f"{n}={'yes' if v else 'no'}" for n, v in checks)
+            "all decidable clauses hold ("
+            + ", ".join(n for n, _v in checks)
             + ") but blocked on: " + "; ".join(undecidable)
         )
-    if all(v for _n, v in checks):
-        return True, ", ".join(n for n, _v in checks)
-    return False, ", ".join(
-        f"{n}: {'yes' if v else 'no'}" for n, v in checks
-    )
+    return True, ", ".join(n for n, _v in checks)
 
 
 def build_report(birth: BirthInput) -> TraditionReport:
