@@ -389,3 +389,37 @@ artifact.
    which compute house only from the Lagna.
 7. Create the first golden calculation vectors from worked examples in the same
    editions, not from modern web calculators, once one is located.
+
+## Verified 2026-08-02: the Sun bhava gap is a real scan gap, not an assumption
+
+`delineation_rule_manifest.json` records `houses_not_recovered: [1,2,3,4,5,7,8]`
+for the Sun's planet-in-bhava rule. That claim has now been checked directly
+rather than trusted, because this corpus has repeatedly recorded blockers that
+turned out to be false.
+
+It holds. Adhyaya VIII begins at line 5690 of
+`delineation_phaladeepika_6945_djvu.txt`, and the text there opens mid-sentence
+("...he will be wandering without a wife and suffer humiliation. If the Sun
+should be in the 6th house..."). The printed page numbers on either side of the
+break run 61 then 84, so a physical page is missing from the scan itself. The
+Sun's earlier bhava results were on it.
+
+Everything after that point is present and legible: Moon, Mars, Mercury,
+Jupiter, Venus and Saturn each have all twelve houses, and Rahu continues past
+line 6120. Those are encoded at 12/12.
+
+Two consequences worth stating:
+
+1. The gap is NOT closable from this witness. It needs a different scan of
+   Phaladeepika, not a different author. Substituting Saravali's or
+   Brihat Jataka's Sun-in-bhava results would be a merge across authors and is
+   refused.
+2. The delineations themselves are genuinely terse - roughly ten words per
+   house-cell in the original - so a complete planet-in-bhava block yields only
+   about 800 words total. A full-length report cannot be built from this
+   technique alone; it needs the other blocks (graha in rasi, bhava-lord in
+   bhava, nakshatra results, dasa/antardasa pairs), which remain unmined.
+
+Measured this pass: 2,341 words of Jyotisha delineation encoded against roughly
+440,000 words of fetched source across BPHS, both Saravali witnesses,
+Brihat Jataka and the untouched remainder of Phaladeepika.
