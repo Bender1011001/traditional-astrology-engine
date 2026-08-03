@@ -32,6 +32,10 @@ RESEARCH_ROOT = (
 )
 DELINEATION_MANIFEST = RESEARCH_ROOT / "jyotisha" / "delineation_rule_manifest.json"
 BPHS_MANIFEST = RESEARCH_ROOT / "jyotisha" / "bphs_rule_manifest.json"
+EXTRA_MANIFESTS = (
+    RESEARCH_ROOT / "jyotisha" / "saravali_rule_manifest.json",
+    RESEARCH_ROOT / "jyotisha" / "brhajjataka_delineation_rule_manifest.json",
+)
 
 ORDINAL = {
     1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th", 6: "6th",
@@ -64,11 +68,55 @@ def _manifest() -> dict[str, Any]:
 @lru_cache(maxsize=1)
 def _rules_by_id() -> dict[str, dict[str, Any]]:
     rules = {r["rule_id"]: r for r in _manifest()["rules"]}
-    if BPHS_MANIFEST.exists():
-        bphs = json.loads(BPHS_MANIFEST.read_text(encoding="utf-8"))
-        for r in bphs["rules"]:
-            rules[r["rule_id"]] = r
+    for path in (BPHS_MANIFEST, *EXTRA_MANIFESTS):
+        if path.exists():
+            extra = json.loads(path.read_text(encoding="utf-8"))
+            for r in extra["rules"]:
+                rules[r["rule_id"]] = r
     return rules
+
+
+def cell_delineation(
+    rule_id: str, block: str, key: str, trigger: str
+) -> tuple[Delineation | None, str | None]:
+    """Read one delineation cell from a rule's results block.
+
+    Cells are either plain strings (Phaladipika/BPHS style) or dicts carrying
+    the Sanskrit, the rendering, the sloka, and possibly their own per-cell
+    output_policy. A cell that refuses itself yields a refusal string naming
+    the pack's reason - decided here, at fire time, in the one chart where it
+    would otherwise read as a verdict.
+    """
+    rule = _rules_by_id().get(rule_id)
+    if rule is None:
+        return None, None
+    cell = (rule.get("conclusion", {}).get(block) or {}).get(str(key))
+    if cell is None:
+        return None, None
+    if isinstance(cell, str):
+        return _delineate(rule_id, cell, trigger), None
+    if not isinstance(cell, dict):
+        return None, None
+    if str(cell.get("output_policy", "")).lower() == "refused":
+        reason = cell.get("output_policy_reason", "the pack refuses this cell")
+        return None, (
+            f"The source DOES state a result here ({trigger}) and it is "
+            f"withheld: {reason}."
+        )
+    text = cell.get("engine_rendering")
+    if not text:
+        return None, None
+    sloka = cell.get("sloka")
+    return _delineate(
+        rule_id, str(text),
+        trigger + (f" · śloka {sloka}" if sloka else ""),
+    ), None
+
+
+def graha_rasi_rules(graha: str) -> list[str]:
+    """Every author's graha-in-rasi rule for this graha, one voice each."""
+    suffix = f".graha_in_rasi.{graha.lower()}"
+    return sorted(rid for rid in _rules_by_id() if rid.endswith(suffix))
 
 
 def bhavesha_result(lorded_house: int, occupied_house: int) -> tuple[str | None, str | None, str | None]:
@@ -293,6 +341,15 @@ def _grahas_section(report: TraditionReport, facts: dict, grahas: list) -> None:
                 + " bhāva."
             )
         sub.notes.append(" ".join(bits))
+        for rid in graha_rasi_rules(g["graha"]):
+            d, refusal = cell_delineation(
+                rid, "results_by_rasi", g["rasi"],
+                f"{g['graha']} in {g['rasi']}",
+            )
+            if d:
+                sub.delineations.append(d)
+            elif refusal:
+                sub.refusals.append(refusal)
         text, why = _planet_in_bhava(g["graha"], g["house"])
         if text:
             d = _delineate(
@@ -304,6 +361,16 @@ def _grahas_section(report: TraditionReport, facts: dict, grahas: list) -> None:
                 sub.delineations.append(d)
         elif why:
             sub.refusals.append(why)
+        d, refusal = cell_delineation(
+            f"jyotisha.saravali.30.graha_in_bhava.{g['graha'].lower()}",
+            "results_by_house", str(g["house"]),
+            f"{g['graha']} in the {ORDINAL[g['house']]} bhāva (Saravali, "
+            "a second author kept as a separate voice)",
+        )
+        if d:
+            sub.delineations.append(d)
+        elif refusal:
+            sub.refusals.append(refusal)
 
 
 def _bhavas_section(
@@ -600,10 +667,20 @@ def _limits(report: TraditionReport, facts: dict) -> None:
         "computed here.",
         "Whole-sign bhāvas, which is the Parāśari norm. Śrīpati and other cusp "
         "systems would move grahas near a sign boundary into adjacent bhāvas.",
-        "Every delineation above is quoted from Phaladīpikā via the research "
-        "corpus, at evidence grade B: the translation mediates, and the scan's "
-        "own Devanāgarī is OCR-corrupted so it cannot independently control "
-        "wording. Independent Sanskrit review is outstanding.",
+        "Delineations are quoted from four witnesses, each kept as its own "
+        "voice and never merged: Phaladīpikā (grade B, translation-mediated), "
+        "BPHS 1899 Subodhini (Devanāgarī read directly), Saravali 1907 Nirnaya "
+        "Sagar (Devanāgarī read directly, with the edition's own printed "
+        "pāṭhabheda apparatus carried where it exists), and Bṛhajjātaka (grade "
+        "B via Aiyar 1905). Every Devanāgarī rendering is graded "
+        "engine_translation_unreviewed; independent Sanskrit review is "
+        "outstanding on all of it.",
+        "The second Saravali witness is corrupt at the akṣara level, so no "
+        "cross-witness collation could be established in either direction - "
+        "agreement is NOT claimed. Known scan gaps are reported in place: Mars "
+        "in Leo through Pisces is a lost leaf in the Saravali print, and "
+        "Rāhu/Ketu have no graha-in-rāśi chapters in either author - that is "
+        "the texts, not the mining.",
         "Bṛhat Parāśara Horā Śāstra now speaks in this report: Adhyāya 15's "
         "lord-in-bhāva results and Adhyāya 36's daśā gradings are quoted from "
         "the 1899 Subodhini printing (which titles itself the sārāṃśa - a "

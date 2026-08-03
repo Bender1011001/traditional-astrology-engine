@@ -560,3 +560,161 @@ is roughly seven words of Sanskrit per cell and about twenty of rendering, which
 is denser than Phaladeepika's graha-in-bhava block and covers a technique
 (judging a house by where its lord went) that the engine can already compute for
 every chart it casts.
+
+---
+
+## Saravali (Nirnaya Sagar 1907) and Brihat Jataka (Aiyar 1905) — delineation mining, 2026-08-02
+
+The previous pass flagged `delineation_saravali_nirnayasagara_1907_djvu.txt` as
+"legible, not yet mined, next highest-value task." This pass mined it.
+
+### Why this witness could be read directly
+
+366,411 characters, of which 291,940 are proper Devanagari code points and nine
+are OCR `?` failure markers. The sloka numbering runs continuously inside each
+adhyaya and the chapter colophons (`iti kalyanavarmaviracitayam saravalyam ...`)
+survive, so a passage can be located by chapter, by sloka and by line. That is
+good enough to read the Sanskrit and translate it, so that is what was done:
+every cell carries the Sanskrit it renders, the encoder's own rendering graded
+`engine_translation_unreviewed`, the adhyaya and sloka number, and a line range
+into the text. No modern copyrighted translation was consulted, quoted or
+paraphrased. The point is not that the rendering is authoritative; it is that a
+specialist can check it against the original in the same file.
+
+### What was extracted from Saravali
+
+| Block | Adhyaya | Cells |
+|---|---|---|
+| Sun in the twelve rasis, + 7 signs x 6 drsti variants, + svakshetra/uccha | 22 | 55 |
+| Moon in the twelve rasis, + all 12 signs x 6 drsti variants | 23 | 84 |
+| Moon in Taurus by half-sign (degree-conditioned) | 23 | 2 |
+| Gate on when a rasi result is realised in full | 23 | 1 |
+| Moon in each graha's navamsa x 6 aspecting grahas | 24 | 40 |
+| Vargottama / navamsa-strength gate; navamsa lord overrides the rasi result | 24 | 2 |
+| Yavana attribution of the whole drsti method | 24 | 1 |
+| Mars in the rasis (Aries-Cancer only; see gap) + 6 owner-groups x drsti | 25 | 37 |
+| Mercury in the twelve rasis + 7 owner-groups x 6 drsti | 26 | 54 |
+| Jupiter in the twelve rasis + 7 owner-groups x 6 drsti | 27 | 54 |
+| Venus in the twelve rasis + 7 owner-groups x 6 drsti | 28 | 54 |
+| Saturn in the twelve rasis + 7 owner-groups x 6 drsti | 29 | 54 |
+| **Graha in bhava, seven grahas x twelve bhavas, complete** | **30** | **84** |
+| Benefic/malefic bhava polarity with the 6/8/12 inversion | 30 | 1 |
+| What overrides a bhava result (yoga, drsti, uccha) | 30 | 1 |
+| Vimsottari mahadasa results, favourable and unfavourable halves | 40 | 14 |
+| What makes a dasa good or bad (dignity, bhava, combustion, retrogression) | 40 | 8 |
+| Where inside a dasa the result falls (sirsodaya / prsthodaya) | 40 | 1 |
+| Moon's mula dasa by rasi, attributed to the Yavanas | 40 | 15 |
+
+**87 rules, 563 validation vectors, 563 delineation cells, ~29,000 words**
+(Sanskrit plus rendering) in `saravali_rule_manifest.json` and
+`saravali_validation_vectors.json`. `customer_prediction: false` on every
+conclusion; publication status `research_only`.
+
+### The finding that matters most
+
+**Adhyaya 30 is a complete seven-graha by twelve-bhava table with no scan gap.**
+The BPHS audit immediately above concluded that the graha-in-bhava grid "is not
+there" in that recension and that "the corpus's graha-in-bhava coverage still
+depends on a single damaged Phaladeepika scan." It no longer does. Saravali 30
+gives all 84 cells, and gives them with sub-conditions the engine already
+computes: the Sun's 1st-house cell is refined by rasi (Cancer/Aries, Leo and
+Libra each get their own clause), the Moon's 1st-house cell splits on
+Cancer/Taurus/Aries versus the rest, the Moon's 6th and 8th split on full versus
+waned, and Saturn's 1st-house cell splits on exaltation-or-own-rasi versus
+everything else.
+
+This does **not** repair the Phaladipika Sun gap. That gap is a fact about that
+witness and stays recorded as one. Saravali is a second author, not a patch.
+Where Saravali 30 and Phaladipika VIII differ, that is a difference between
+Kalyanavarma and Mantreswara and must be rendered as two voices.
+
+### The Saravali gap, stated precisely
+
+Adhyaya 25 (Angarakacara) jumps from sloka 7 at txt line 3897 to sloka 34 at
+line 3911. That is a lost leaf, not a lost line. What is gone: Mars's plain
+results in Leo through Pisces, and the drsti set for Mars's own rasis (Aries and
+Scorpio). Those cells are recorded as `rasis_not_recovered` and were **not**
+filled in from Brihat Jataka, from Phaladipika, or from anywhere else.
+
+### Structural note: two different drsti schemes inside one book
+
+Adhyaya 23 (the Moon) gives drsti variants **sign by sign** — all twelve rasis
+get six aspecting-graha cells each, 72 cells. Adhyayas 22 and 25-29 give them
+**grouped by the owner of the rasi**: Mars in "a rasi of Venus" gets one cell
+covering both Taurus and Libra. This is not an encoding convenience, it is how
+Kalyanavarma organises the chapters, and it is flagged in the exceptions of
+every owner-grouped rule so that no one later mistakes the grouping for
+carelessness.
+
+### The second Saravali witness cannot carry a collation
+
+`delineation_saravali_2015313760_djvu.txt` was searched for ten distinctive
+strings drawn from passages encoded this pass (nighnanti, bhavan,
+sangramotkata, kulire, vikalanayana, rasiphalam, muladasa and others). Nine of
+the ten return zero hits and the tenth returns a mangled context. Its Devanagari
+OCR is corrupt at the aksara level and much of the file is a verse index rather
+than the text. **No genuine cross-witness disagreement could be established, in
+either direction, and none is claimed.** That is a limitation of the second
+witness, not evidence that the two witnesses agree.
+
+What the 1907 edition does supply is its own printed variant apparatus
+(pathabheda) at the foot of each page — for example at txt line 3302, the
+variant `budhena drste krsatanuh syat` against Adhyaya 22 sloka 22. Where such a
+variant bears on an encoded cell it is carried in that cell rather than
+discarded. This is a within-edition apparatus and is not the same thing as a
+collation of two witnesses; the corpus should not pretend otherwise.
+
+### What was extracted from Brihat Jataka
+
+Adhyaya XVIII (Rasisila) gives six grahas — Sun, Mars, Mercury, Jupiter, Venus,
+Saturn — across the twelve rasis, 72 cells, plus the twelve-lagna extract that
+Aiyar prints at the end of the chapter and explicitly attributes to
+**Satyacharya**, not to Varahamihira. **8 rules, 85 vectors**, all graded **B**,
+because the rendering that would drive judgment is Aiyar's 1905 English rather
+than the encoder's own reading of the printed Devanagari: this OCR carries only
+the English for these stanzas, so the delineation reaches the corpus through one
+nineteenth-century translator's choices. The IAST mula quoted beside each cell
+comes from the companion e-text `sources/brhajj_u.txt` and has **not** been
+collated line by line against the 1905 printing, which is the second reason for
+B and not A.
+
+Brihat Jataka Chapter I (txt lines ~2020-2210) is sign-shape and naksatra-list
+material and was deliberately not mined as delineation.
+
+The Moon is absent from Adhyaya XVIII. Varahamihira gives the Moon's rasi
+results through the aspect table of **Adhyaya XIX**, which states the same
+technique as Saravali Adhyaya 23. Adhyaya XIX is not yet mined and is the single
+highest-value remaining target in this corpus, because it is the first real
+opportunity to collate one delineation table across two named authors.
+
+### Refusals
+
+Socially harsh cells — caste (`sudra`, `vadhaki`, low-caste handicraft), gender
+(`stri-vapuh`, `stri-sattvam`), disability and impotence (`sanda`, `kliba`,
+`vikala`, `kubja`, blindness, leprosy), servitude (`dasa`, `presya`,
+`bhrtaka`), and the death of a parent or spouse — are encoded **verbatim**, with
+`output_policy: "refused"` on the cell and a `publication_limit` on the rule
+stating that they are never rendered as a claim about a living person. The whole
+Satyacharya lagna rule is refused: every one of its twelve cells ends in a mode
+of death. Saravali 40.11's Mars cell names sexual violence and homicide and is
+refused outright. Nothing was softened in the encoding; the refusal sits at the
+output boundary, which is where it belongs.
+
+### Worked examples
+
+Neither witness works an actual nativity in the chapters mined. Saravali 22-30
+and 40 and Brihat Jataka XVIII are rule statements throughout; the only
+concretely worked figure encountered anywhere in this pass is Brihat Jataka
+XXII.2, which walks a *constructed* configuration (Cancer rising with the Moon
+in it, Mars, Saturn, the Sun and Jupiter in their exaltations) to illustrate the
+definition of karaka planets. That is an illustrative diagram, not a nativity
+with a claimed native and a claimed outcome, and it is **not** a validation
+vector under DEFENSIBILITY requirement 4. It is recorded here so the next pass
+does not re-find it and mistake it for one.
+
+### Volume
+
+29,025 words of Sanskrit-plus-rendering encoded from Saravali and roughly 3,900
+words of English rendering from Brihat Jataka, against 366,411 plus 564,451
+characters of source read. Before this pass and the BPHS pass, the whole
+Jyotisha delineation layer stood at 2,341 words.

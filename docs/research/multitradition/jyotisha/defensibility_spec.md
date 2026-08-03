@@ -41,6 +41,20 @@ reasons like a Western chart wearing sidereal longitudes.
 | 23 | Rasi drishti (sign-to-sign aspect) taught inside the Parasari root text | BPHS Subodhini 1899 adhyaya 4, slokas 2-18 (`bphs_rule_manifest.json`) | `source_gated` — the recension teaches it in the main chapter sequence, which weakens the corpus's own Parasari/Jaimini partition; needs a doctrinal decision, not code |
 | 24 | Vimshottari mahadasha delineation from the root text, conditioned on the dasha lord's dignity | BPHS Subodhini 1899 adhyaya 36 (`bphs_rule_manifest.json`) | `source_gated` — utkrsta/papa couplets for all 9 grahas plus placement-conditioned expansions for 8 (Ketu absent); column-interleave in the scan limits clause order |
 | 25 | Antardasha quality from divisional placement (drekkana, dvadasamsa, trimsamsa) | BPHS Subodhini 1899 adhyaya 37, slokas 2-7 (`bphs_rule_manifest.json`) | `source_gated` — five of the six tests need vargas the engine does not compute (item 16) |
+| 26 | **Graha in rasi delineation text** (which the engine has computed since day one and had no text for) | Saravali Adhyayas 22, 23, 25-29 read in Devanagari (`saravali_rule_manifest.json`); Brhajjataka XVIII via Aiyar (`brhajjataka_delineation_rule_manifest.json`) | `source_gated` — 82 rasi cells from Saravali (Mars Leo-Pisces lost to a missing leaf) and 72 from Brhajjataka; independent Sanskrit review outstanding, no composer wiring written |
+| 27 | Graha-in-rasi modified by the graha aspecting it | Saravali 22, 25-29 (grouped by rasi owner) and 23 (sign by sign), 296 cells | `source_gated` — needs no new computation; the engine already emits drishti houses. Kalyanavarma attributes the method to "the elder Yavanas" (24.24) and that attribution is carried, not smoothed |
+| 28 | **Graha in bhava from a second, undamaged witness** | Saravali Adhyaya 30, all seven grahas x twelve bhavas, 84 cells, no scan gap | `source_gated` — this closes the coverage hole item 17 left (Phaladeepika's Sun row is 5/12) *as coverage*, but Saravali is a different author and is rendered as a separate voice, never merged into item 17 |
+| 29 | Moon in a navamsa, by the lord of that navamsa and the graha aspecting it | Saravali Adhyaya 24, 40 cells, plus the vargottama gate (24.22) and the navamsa-lord override (24.23) | `source_gated` — the engine already computes navamsa sign and vargottama; this is the first delineation text in the corpus keyed to item 6's own output |
+| 30 | Vimshottari mahadasha delineation from Saravali, gated on the dasha lord's condition | Saravali Adhyaya 40 (`saravali_rule_manifest.json`) | `source_gated` — favourable and unfavourable halves for each graha, plus eight condition gates (dignity, bhava, enemy rasi, combustion, retrogression) and a within-period timing rule (sirsodaya/prsthodaya) that is computable today |
+
+Items 26-30 are new as of 2026-08-02 (second pass, same day). They come from
+Kalyanavarma and Varahamihira, are held in their own manifests, and are not
+merged with items 17-19 (Mantresvara) or 20-25 (BPHS). Item 26 is the one that
+changes the shape of the gap: the engine has emitted every graha's rasi since it
+was written and the corpus had no classical text for it at all. Item 28 is the
+one that changes a recorded fact — the BPHS pass concluded that graha-in-bhava
+coverage "still depends on a single damaged Phaladeepika scan," and Saravali 30
+means it no longer does.
 
 Items 17-19 are new as of 2026-08-02 and were added rather than folded into
 items 7, 8 or 12, because those items are about calculation (mahadasha/
@@ -97,13 +111,35 @@ rendered unconditionally. This is the text making proportionality part of the
 rule, not a commentator softening it, and a reading that quotes a bhavesha cell
 flat has already departed from the source.
 
+Saravali states the same order in three places of its own, and all three are now
+encoded rather than paraphrased:
+
+- **23.86** — *rasipatau balayukte rasau ca balanvite tatha candre / rasiphalam
+  syat sakalam nicoccavidhina ca sancintyam*: the rasi result is realised **in
+  full** only when the rasi lord, the rasi and the graha are strong, and must
+  then be weighed again by exaltation and debilitation. Step 3 gates step 6's
+  input, not the other way round.
+- **24.23** — *tasya nirodho drsto yady amsapatir bali bhavati*: the rasi result
+  is **checked** if the navamsa lord is strong. This puts step 6 (navamsha)
+  above step 3 (D1 verdict) explicitly, in the author's own words, and it is the
+  strongest textual support this spec has for why item 6 is non-negotiable.
+- **30.86-87** — malefics strike down the bhava they occupy and benefics nourish
+  it, **inverted in the 6th, 8th and 12th**; and the whole bhava table is then
+  defeasible by yoga, by benefic or friendly drishti, and by exaltation. A
+  composer that prints a bhava line without running steps 3, 5 and 7 against it
+  has not executed Kalyanavarma's order.
+
+The practical consequence for the composer is that none of the 563 Saravali
+cells may be emitted as a flat sentence. Each is a candidate that the strength,
+navamsa and drishti steps either confirm, reduce or invert.
+
 ## Worked-example inventory
 
 | Source | Location | Contains | Usable now |
 |---|---|---|---|
-| Brhajjataka, Aiyar 1905 translation | registry `jyotisha_varahamihira_brhajjataka_aiyar_1905_archive` | worked illustrations in the commentary | **inspected 2026-08-02**: keyword search of the full OCR found only abstract calculation walkthroughs ("suppose the Sun's longitude to be..."), no natal chart with real birth data and a stated verdict. Page-image (non-OCR) inspection still not attempted. |
+| Brhajjataka, Aiyar 1905 translation | registry `jyotisha_varahamihira_brhajjataka_aiyar_1905_archive` | worked illustrations in the commentary | **inspected 2026-08-02**: keyword search of the full OCR found only abstract calculation walkthroughs ("suppose the Sun's longitude to be..."), no natal chart with real birth data and a stated verdict. Page-image (non-OCR) inspection still not attempted. **Second pass 2026-08-02**: Adhyaya XVIII read and encoded; still no nativity. The nearest thing found anywhere this pass is XXII.2, which walks a *constructed* configuration (Cancer rising with the Moon in it; Mars, Saturn, the Sun and Jupiter in exaltation) purely to illustrate the definition of karaka planets. That is an illustrative diagram with no native and no claimed outcome, and it is **not** a validation vector under requirement 4. Recorded so the next pass does not re-find it and mistake it for one. |
 | Saravali, Subrahmanya 1914 | registry `jyotisha_kalyanavarma_saravali_subrahmanya_1914_archive` | example applications | still needs page inspection; OCR remains too corrupted to read (mixed scripts, many misrecognitions) |
-| Saravali, Nirnaya Sagar Press 1907 | registry `jyotisha_kalyanavarma_saravali_nirnayasagar_1907_archive` (new 2026-08-02) | full Sanskrit text, chapter structure, any worked example | **discovered 2026-08-02**: first Saravali witness with legible Devanagari OCR (291,940/366,411 characters proper Devanagari, 9 failure marks); text proper not yet read for content - this is now the priority Saravali lead, ahead of the 1914 witness |
+| Saravali, Nirnaya Sagar Press 1907 | registry `jyotisha_kalyanavarma_saravali_nirnayasagar_1907_archive` | full Sanskrit text, chapter structure, any worked example | **READ 2026-08-02 (second pass)**: Adhyayas 22-30 and 40 read line by line in Devanagari and encoded (87 rules, 563 cells). Result for this inventory is **negative**: those chapters are rule statements throughout and work no nativity. Adhyayas 31-39 and 41-53 (including 40-41 dasha continuation, 44 stri-jataka, 51 nasta-jataka, 52 astakavarga) are **not yet read** and are where a worked figure would most plausibly sit — nasta-jataka in particular is a chapter about reconstructing an unknown birth, which is the genre most likely to carry one. |
 | Phaladeepika, Subrahmanya 1950 | registry `jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive` | worked yoga examples | **inspected 2026-08-02**: Adhyayas V-VIII and XIX read directly; all are rule catalogs (now in `delineation_rule_manifest.json`), no worked chart found. Adhyayas IX-XVIII and XX-XXVIII not yet inspected. |
 | BPHS Subodhini 1899 | registry `jyotisha_parasara_bphs_subodhini_1899_egangotri` (new 2026-08-02) | dasha and varga worked cases | **CORRECTED 2026-08-02**: the earlier "almost total `?` failure" verdict was wrong — the file has 100 question marks in 1,106,274 characters and 807,038 Devanagari codepoints, and reads. Worked material actually found: (a) adhyaya 37 sloka 1 gives the antardasha formula AND works it (Sun mahadasha 6 years, Sun antardasha within it 3 months 18 days) - directly checkable against the engine today, and the one BPHS claim in the pack needing no translation judgment; (b) adhyaya 36 slokas 8-10 work a Vimshottari balance from a stated Moon longitude; (c) adhyaya 28 slokas 44-48 name *natives* for the varga-dignity raja-yogas - Harishchandra, Bali, Yudhishthira, Shalivahana, Nagarjuna, "the Manus" - legendary and dynastic figures with no recoverable birth data, so inventory rather than test charts. |
 
@@ -169,6 +205,30 @@ reading pass is the next highest-value M3 task for this tradition.
   Adhyayas XI-XII were located and deliberately not mined for rules; their
   subject matter is marriage/progeny outcome for the native and falls under
   the two refusals immediately above and below.
+- **No mode-of-death delineation.** The twelve-lagna block Aiyar appends to
+  Brhajjataka XVIII — which he attributes to *Satyacharya*, not to Varahamihira —
+  ends every one of its twelve cells with how the native dies (by weapon, by
+  poison, by snake-bite, by drugs administered by women, by a fall, by fire).
+  The rule is encoded in full and refused in full:
+  `jyotisha.brhajjataka.18.lagna_rasi_satyacharya` carries
+  `output_policy: "refused"` on every cell. It is kept because a corpus that
+  drops the whole block cannot honestly claim to have read the chapter.
+- **No sexual-violence or homicide predicate, in any framing.** Saravali 40.11
+  states that in the Moon's mula-dasha with the Moon in a rasi of Mars the
+  native violates a maiden or kills a young woman. It is transcribed verbatim
+  and refused outright; it is not softened, not generalised into "conflict
+  around relationships", and not rendered in any customer-facing context.
+- **No disability, impotence or bodily-deformity delineation.** Saravali's rasi
+  and bhava tables use `sanda`, `kliba`, `napumsaka`, `vikala`, `kubja`,
+  `kana` (one-eyed), `badhira` (deaf), `muka` (mute), `kustha` (leprosy) and
+  `bhagandara` (fistula) as ordinary delineation vocabulary. Every such cell is
+  encoded verbatim with `output_policy: "refused"`. This extends, and uses the
+  same mechanism as, the `kliba` refusal already recorded for BPHS.
+- **No occupational-caste assignment.** Saravali 26.43 makes the native a
+  washerman, garland-maker or jeweller; 40.13 and 28.6 assign him a wife or a
+  likeness "of the slaughterer people" (`vadhaki`); Brhajjataka XVIII.11
+  assigns "the handicraft of men of low castes, such as shoe-making"; XVIII.14
+  makes Venus in Aries a `sudra`. All refused, all retained.
 
 ## Conventions requiring disclosure
 
@@ -182,6 +242,9 @@ reading pass is the next highest-value M3 task for this tradition.
 | BPHS recension | 1899 Subodhini (Mumbai), purva-khanda, self-titled *Brhatparasarahorasaramsa* | Sharma and Santhanam recensions differ substantially in chapter count, order and content; the 1899 preface itself claims 100 adhyayas in two khandas and claims first printing. Any BPHS quotation must name which recension it came from |
 | Graha drishti weighting | flat special aspects (Mars 4/7/8, Jupiter 5/7/9, Saturn 3/7/10) | BPHS adhyaya 4 grades every graha's glance on all seven of the 3rd, 4th, 5th, 7th, 8th, 9th and 10th, in quarters. The engine implements the flat rule; the root text does not teach it |
 | Node dignities | engine's current scheme | BPHS adhyaya 36 slokas 35-36 give Rahu exalted in Taurus, moolatrikona Cancer, owning Gemini, Sagittarius, Virgo and Pisces (Ketu exalted in Scorpio). Recorded, not adopted |
+| Saravali drishti-cell granularity | for Adhyayas 22 and 25-29 the encoded cell is keyed to the **owner** of the rasi, so both of a two-sign owner's rasis receive the same delineation | This is Kalyanavarma's own grouping, not an encoder's shortcut; Adhyaya 23 (the Moon) is keyed sign by sign instead. The two schemes sit in one book and the manifest flags which applies on every rule |
+| Saravali Moon-dasha rasi expansion | where 40.11-13 name an owner ("a house of Mars", "a rasi of Venus") the encoder expanded to both of that owner's rasis | The expansion is the encoder's and is named as such in the rule's exceptions. Scorpio has no statement of its own and inherits the Mars cell |
+| Brhajjataka rendering channel | Aiyar's 1905 English, graded B | The printed Devanagari of the 1905 edition is not in this OCR. The IAST mula quoted beside each cell comes from `sources/brhajj_u.txt` and is **not** collated against the print, which is why the grade is B and not A even though a Sanskrit text is shown |
 | Relative-house reckoning | house from the Lagna only | house from the Moon (chandra lagna) and house from the Sun are both classically used (Sunapha/Anapha/Durudhara/Kemadruma, Kesari/Sakata, Adhama/Sama/Varishtha, the Sun-relative Vesi/Vaasi cluster, and the kendra-from-Moon branch of Neechabhanga Rajayoga all require one or the other) but neither is computed by `vedic.py` today |
 
 ## Current implementation gap
@@ -193,8 +256,24 @@ defendable reading it needs, in order: **navamsha (6)**, antardasha (8), drishti
 As of 2026-08-02, a delineation-content layer for items 17-19 exists in
 `delineation_rule_manifest.json` (18 rules, sourced from Phaladeepika), and a
 second, larger layer for items 20-25 exists in `bphs_rule_manifest.json` (107
-rules, 342 validation vectors, sourced from BPHS itself). Neither is wired into
-`vedic.py` or the composer.
+rules, 342 validation vectors, sourced from BPHS itself). A third and fourth
+layer were added later the same day: `saravali_rule_manifest.json` (87 rules,
+563 validation vectors, 563 delineation cells, read directly from the 1907
+Devanagari) and `brhajjataka_delineation_rule_manifest.json` (8 rules, 85
+vectors, English-mediated, grade B). **None of the four is wired into
+`vedic.py` or the composer.**
+
+That last sentence is now the binding constraint rather than a footnote. The
+engine renders almost nothing not because the corpus is empty — it holds 645
+rules across the whole multitradition set and 202 of them are Jyotisha
+delineation — but because `vedic_report.py` reads exactly one file,
+`delineation_rule_manifest.json`, and looks up exactly one shape,
+`jyotisha.phaladeepika.08.planet_in_bhava.<graha>`. The Saravali manifest was
+authored to that shape deliberately: `results_by_house` keyed by house number as
+a string, `results_by_graha` keyed by the engine's own graha names. Wiring it is
+a loader change, not a re-encoding. Two shapes are new and need a small reader
+extension: `results_by_rasi` (keyed by English sign name) and the nested
+condition maps used by the dasha gates.
 
 The single largest change this pass makes is not a rule count. It is that
 `src/engine/traditions/vedic_report.py` currently tells the reader, in its own
@@ -227,5 +306,22 @@ The remaining blockers, in order of how much they cost:
    them has to be labelled a `configured_method` with the other named as its
    alternative.
 
+5. **The second Saravali witness is not usable for collation.** Ten distinctive
+   strings from passages encoded this pass were searched in
+   `delineation_saravali_2015313760_djvu.txt`; nine returned nothing and the
+   tenth returned a mangled context. No cross-witness disagreement could be
+   established **in either direction**, so none is recorded — and the absence of
+   recorded conflicts in `saravali_rule_manifest.json` must not be read as
+   evidence that the witnesses agree. The 1907 edition's own printed pathabheda
+   apparatus is carried where it bears on an encoded cell, but a within-edition
+   apparatus is not a collation.
+6. **Brhajjataka XIX is unmined and is the corpus's best collation target.**
+   Varahamihira XIX and Kalyanavarma 23 state the *same* technique — the Moon in
+   each rasi, modified by the graha aspecting it. Saravali 23 is encoded (84
+   cells); Brhajjataka XIX is not. Mining it would give this tradition its first
+   genuine two-author collation of a single delineation table, which is worth
+   more to a hostile reader than another hundred uncollated cells.
+
 Nothing in this pass changed the rendered panel. `customer_prediction` is false
-on all 107 conclusions and no engine code reads the new manifest.
+on all 107 BPHS conclusions, on all 87 Saravali conclusions and on all 8
+Brhajjataka conclusions, and no engine code reads any of the new manifests.

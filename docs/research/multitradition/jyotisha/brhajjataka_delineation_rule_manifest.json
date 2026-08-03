@@ -1,0 +1,1212 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-02",
+ "tradition_id": "indian_jyotisha",
+ "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+ "source_pack_id": "varahamihira_brhajjataka_aiyar_1905_delineation_v1",
+ "source_edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+ "source_registry_ids": [
+  "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+  "jyotisha_varahamihira_brhajjataka_gretil"
+ ],
+ "implementation_status": "not_implemented",
+ "publication_status": "research_only",
+ "evidence_note": "Varahamihira's Brihat Jataka, delineation layer, from N. Chidambaram Aiyar's 1905 English translation. Every rule here is graded B rather than A because the rendering that would drive judgment is Aiyar's English, not the encoder's own reading of the printed Devanagari: the 1905 OCR carries only Aiyar's English for these stanzas, so the delineation reaches the corpus through one nineteenth-century translator's choices. The IAST mula quoted beside each cell is from the companion e-text sources/brhajj_u.txt and has NOT been collated line by line against the 1905 printing, which is a second reason the grade is B and not A. Chapter I of this witness (txt lines ~2020-2210) is sign-shape and nakshatra-list material and is deliberately not mined as delineation. This pack is a THIRD Parasari-descended witness alongside Saravali and Phaladipika and is deliberately not merged with either.",
+ "rules": [
+  {
+   "rule_id": "jyotisha.brhajjataka.18.graha_in_rasi.sun",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "graha_in_rasi",
+    "graha": "Sun",
+    "chapter": "Adhyaya XVIII (Rasisila)",
+    "engine_facts_consumed": [
+     "graha rasi",
+     "dignity"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "equals",
+      "value": "Sun"
+     },
+     {
+      "fact": "rasi_of_graha",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "rasi_result_lookup",
+    "unit": "results_of_sun_by_the_rasi_it_occupies",
+    "customer_prediction": false,
+    "results_by_rasi": {
+     "Aries": {
+      "sanskrit_iast": "prathitaś caturo aṭano alpavittaḥ kriyage tv āyudhabhṛd vituṅgabhāge",
+      "engine_rendering": "Of wide-spread fame and ability, of wandering habits, possessed of small wealth, and one who carries weapons — when not in the exaltation degree.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.1a",
+      "customer_prediction": false
+     },
+     "Taurus": {
+      "sanskrit_iast": "gavi vastra sugandha paṇyajīvī vanitādviṭ kuśalaś ca",
+      "engine_rendering": "He will deal in clothes, perfumes and other articles, will hate women, and will be skilled in music, vocal and instrumental.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.1b",
+      "customer_prediction": false
+     },
+     "Gemini": {
+      "sanskrit_iast": "vidyā jyotiṣa vittavān mithunage bhānau",
+      "engine_rendering": "Learned in grammar, an astrologer, and wealthy.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.2a",
+      "customer_prediction": false
+     },
+     "Cancer": {
+      "sanskrit_iast": "kulīre sthite tīkṣṇo asvaḥ parakāryakṛc chramapathakleśaiś ca saṃyujyate",
+      "engine_rendering": "Independent and fierce, poor, doing the work of other people, and suffering the fatigue of journeys on foot.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.2a",
+      "customer_prediction": false
+     },
+     "Leo": {
+      "sanskrit_iast": "siṃhasthe vanaśailagokularatir vīryānvito ajñaḥ pumān",
+      "engine_rendering": "Fond of living in forests, mountains and cow-sheds, powerful, and a fool.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.2b",
+      "customer_prediction": false
+     },
+     "Virgo": {
+      "sanskrit_iast": "kanyāsthe lipilekhyakāvyagaṇitajñānānvitaḥ strīvapuḥ",
+      "engine_rendering": "Skilled in writing, painting, literary production, mathematics and worldly knowledge, and possessed of a body resembling a woman's.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.2b",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Libra": {
+      "sanskrit_iast": "jātas taulini sauṇḍiko adhvani rato hairaṇyako nīcakṛt",
+      "engine_rendering": "Fond of liquor or a manufacturer of it, of a wandering nature, an alchemist, and a doer of wicked deeds.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.3a",
+      "customer_prediction": false
+     },
+     "Scorpio": {
+      "sanskrit_iast": "krūraḥ sāhasiko viṣārjitadhanaḥ śastrāntago alisthite",
+      "engine_rendering": "Of a fierce nature, engaging thoughtlessly in work, earning money by acts connected with poison, and vastly learned in the use of arms.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.3a",
+      "customer_prediction": false
+     },
+     "Sagittarius": {
+      "sanskrit_iast": "satpūjyo dhanavān dhanurdharagate tīkṣṇo bhiṣak kāruko",
+      "engine_rendering": "Respected by sages, rich and independent, and learned in medicine and sculpture.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.3b",
+      "customer_prediction": false
+     },
+     "Capricorn": {
+      "sanskrit_iast": "nīco ajñaḥ kuvaṇiṅ mṛge alpadhanavāṃl labdho anyabhāgyair rataḥ",
+      "engine_rendering": "Engaging in deeds unsuited to his rank in life, ignorant, dealing in mean articles, of small wealth, avaricious, and enjoying the property of other men.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.3b",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Aquarius": {
+      "sanskrit_iast": "nīco ghaṭe tanayabhāgyaparicyuto asvaḥ",
+      "engine_rendering": "Engaging in deeds unsuited to his rank in life, poor, and having no sons and no property.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.4a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Pisces": {
+      "sanskrit_iast": "toyotthapaṇyavibhavo vanitādṛto antye",
+      "engine_rendering": "Becoming rich by dealing in the produce of water, and respected by women.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.4a",
+      "customer_prediction": false
+     }
+    }
+   },
+   "priority": null,
+   "exceptions": [
+    "Varahamihira states this graha by graha and frequently pairs the two rasis of one owner in a single clause; where he does, both rasis carry the same cell and the pairing is named in the quoted mula.",
+    "This is a THIRD independent Parasari-descended witness to graha-in-rasi, beside Saravali Adhyayas 22-29 and the Phaladipika pack. Where the three differ that is a difference between authors and must be shown as such, never averaged.",
+    "The Moon is not treated in this chapter; Brihat Jataka gives the Moon's rasi results through the aspect table of Adhyaya XIX, which is NOT yet mined and is recorded as the next target in source_audit.md.",
+    "Aiyar prints only English for these stanzas; the IAST mula beside each cell comes from the companion e-text and has not been collated against the printed Devanagari."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — Rasisila",
+     "location": "Stanzas 1-4; txt lines 10678-10748",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "refused; this cell carries a socially harsh clause (caste, gender, disability, servitude, or a mode of death) and is never rendered as a claim about a living person. It is retained verbatim so the corpus is not silently bowdlerised.",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  },
+  {
+   "rule_id": "jyotisha.brhajjataka.18.graha_in_rasi.mars",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "graha_in_rasi",
+    "graha": "Mars",
+    "chapter": "Adhyaya XVIII (Rasisila)",
+    "engine_facts_consumed": [
+     "graha rasi",
+     "dignity"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "equals",
+      "value": "Mars"
+     },
+     {
+      "fact": "rasi_of_graha",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "rasi_result_lookup",
+    "unit": "results_of_mars_by_the_rasi_it_occupies",
+    "customer_prediction": false,
+    "results_by_rasi": {
+     "Aries": {
+      "sanskrit_iast": "narapatisatkṛto aṭanaś camūpa vaṇik sadhanaḥ kṣatatanuś caura … kujaḥ svagṛhe",
+      "engine_rendering": "Respected by the king, of a wandering nature, a commander of armies, a trader, rich, with a body marked by wounds, a thief, and in the enjoyment of pleasures.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.5a",
+      "customer_prediction": false
+     },
+     "Scorpio": {
+      "sanskrit_iast": "… kujaḥ svagṛhe (Mars in either of its own rasis)",
+      "engine_rendering": "Respected by the king, of a wandering nature, a commander of armies, a trader, rich, with a body marked by wounds, a thief, and in the enjoyment of pleasures.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.5a",
+      "customer_prediction": false
+     },
+     "Taurus": {
+      "sanskrit_iast": "yuvatijitān suhṛtsu viṣamān paradārāratān kuhaka suveṣa bhīru … sitabhe",
+      "engine_rendering": "Subject to the influence of women, not open to the advice of friends, fond of the wives of other men, learned in the games of magic, adorning his person, timid, and of a rough body.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.5b",
+      "customer_prediction": false
+     },
+     "Libra": {
+      "sanskrit_iast": "… sitabhe (Mars in either rasi of Venus)",
+      "engine_rendering": "Subject to the influence of women, not open to the advice of friends, fond of the wives of other men, learned in the games of magic, adorning his person, timid, and of a rough body.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.5b",
+      "customer_prediction": false
+     },
+     "Gemini": {
+      "sanskrit_iast": "baudhe asahas tanayavān visuhṛt kṛtajño gāndharvayuddhakuśalaḥ kṛpaṇo abhayo arthī",
+      "engine_rendering": "Of bright appearance, having sons but no friends, helping others, skilled in music and in fighting, a niggard, fearless, and of a begging nature.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.6a",
+      "customer_prediction": false
+     },
+     "Virgo": {
+      "sanskrit_iast": "baudhe … (Mars in either rasi of Mercury)",
+      "engine_rendering": "Of bright appearance, having sons but no friends, helping others, skilled in music and in fighting, a niggard, fearless, and of a begging nature.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.6a",
+      "customer_prediction": false
+     },
+     "Cancer": {
+      "sanskrit_iast": "cāndre arthavān salilayānasamarjitasvaḥ prājñaś ca bhūmitanaye vikalaḥ khalaś ca",
+      "engine_rendering": "Rich, crossing seas and earning wealth, intelligent, of defective limbs, and wicked.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.6b",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Leo": {
+      "sanskrit_iast": "niḥsvaḥ kleśasaho vanāntaracaraḥ siṃhe alpadārātmajo",
+      "engine_rendering": "Poor, patiently bearing afflictions, wandering in the forests, fearless, and with few wives and children.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.7a",
+      "customer_prediction": false
+     },
+     "Sagittarius": {
+      "sanskrit_iast": "jaive naikaripur narendrasacivaḥ khyāto abhaya alpātmajaḥ",
+      "engine_rendering": "Having many enemies, the king's minister, of wide-spread fame, fearless, and with very few children.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.7a",
+      "customer_prediction": false
+     },
+     "Pisces": {
+      "sanskrit_iast": "jaive … (Mars in either rasi of Jupiter)",
+      "engine_rendering": "Having many enemies, the king's minister, of wide-spread fame, fearless, and with very few children.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.7a",
+      "customer_prediction": false
+     },
+     "Aquarius": {
+      "sanskrit_iast": "duḥkhārto vidhano aṭano anṛtaratas tīkṣṇaś ca kumbhasthite bhaume",
+      "engine_rendering": "Ever suffering grief, poor, wandering from place to place, a liar, independent and wicked.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.7b",
+      "customer_prediction": false
+     },
+     "Capricorn": {
+      "sanskrit_iast": "bhūridhanātmajo mṛgagate bhūpo athavā tatsamaḥ",
+      "engine_rendering": "Very rich, having many sons, and a king or the like of a king.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.7b",
+      "customer_prediction": false
+     }
+    }
+   },
+   "priority": null,
+   "exceptions": [
+    "Varahamihira states this graha by graha and frequently pairs the two rasis of one owner in a single clause; where he does, both rasis carry the same cell and the pairing is named in the quoted mula.",
+    "This is a THIRD independent Parasari-descended witness to graha-in-rasi, beside Saravali Adhyayas 22-29 and the Phaladipika pack. Where the three differ that is a difference between authors and must be shown as such, never averaged.",
+    "The Moon is not treated in this chapter; Brihat Jataka gives the Moon's rasi results through the aspect table of Adhyaya XIX, which is NOT yet mined and is recorded as the next target in source_audit.md.",
+    "Aiyar prints only English for these stanzas; the IAST mula beside each cell comes from the companion e-text and has not been collated against the printed Devanagari."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — Rasisila",
+     "location": "Stanzas 5-7; txt lines 10753-10793",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "refused; this cell carries a socially harsh clause (caste, gender, disability, servitude, or a mode of death) and is never rendered as a claim about a living person. It is retained verbatim so the corpus is not silently bowdlerised.",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  },
+  {
+   "rule_id": "jyotisha.brhajjataka.18.graha_in_rasi.mercury",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "graha_in_rasi",
+    "graha": "Mercury",
+    "chapter": "Adhyaya XVIII (Rasisila)",
+    "engine_facts_consumed": [
+     "graha rasi",
+     "dignity"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "equals",
+      "value": "Mercury"
+     },
+     {
+      "fact": "rasi_of_graha",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "rasi_result_lookup",
+    "unit": "results_of_mercury_by_the_rasi_it_occupies",
+    "customer_prediction": false,
+    "results_by_rasi": {
+     "Aries": {
+      "sanskrit_iast": "dyūtaṛṇapānarata nāstika caura niḥsvāḥ kustrīka kūṭakṛd asatyaratāḥ kujarkṣe",
+      "engine_rendering": "Fond of gambling, of running into debt and of liquor; an atheist, arguing against the spirit of the sastras, a thief, poor, with a mean wife, deceitful, a liar, and swerving from the path of rectitude.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.8a",
+      "customer_prediction": false
+     },
+     "Scorpio": {
+      "sanskrit_iast": "… kujarkṣe (Mercury in either rasi of Mars)",
+      "engine_rendering": "Fond of gambling, of running into debt and of liquor; an atheist, arguing against the spirit of the sastras, a thief, poor, with a mean wife, deceitful, a liar, and swerving from the path of rectitude.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.8a",
+      "customer_prediction": false
+     },
+     "Taurus": {
+      "sanskrit_iast": "ācārya bhūrisutadāradhanārjaneṣṭāḥ śaukre vadānya guru bhakti ratāś ca",
+      "engine_rendering": "A preacher, having many sons and wives, ever engaged in earning money, liberal in gift, and respectful to his preceptor.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.8b",
+      "customer_prediction": false
+     },
+     "Libra": {
+      "sanskrit_iast": "… śaukre (Mercury in either rasi of Venus)",
+      "engine_rendering": "A preacher, having many sons and wives, ever engaged in earning money, liberal in gift, and respectful to his preceptor.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.8b",
+      "customer_prediction": false
+     },
+     "Gemini": {
+      "sanskrit_iast": "vikatthanaḥ śāstrakalāvidagdhaḥ priyaṃvadaḥ saukhyaratas tṛtīye",
+      "engine_rendering": "Boastful, learned in the sciences and in music, dance and painting, of sweet speech, and living in comfort.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.9a",
+      "customer_prediction": false
+     },
+     "Cancer": {
+      "sanskrit_iast": "jalārjitasvaḥ svajanasya śatruḥ śaśāṅkaje śītakararkṣayukte",
+      "engine_rendering": "Earning money by works connected with water, and disliked by his kinsmen.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.9b",
+      "customer_prediction": false
+     },
+     "Leo": {
+      "sanskrit_iast": "strīdveṣyo vidhana sukhātmajo aṭano ajñaḥ strīlolaḥ svaparibhavo arkarāśige jñe",
+      "engine_rendering": "Disliked by women, poor, having neither comfort nor sons, wandering from place to place, ignorant, fond of women, and suffering disgrace.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.10a",
+      "customer_prediction": false
+     },
+     "Virgo": {
+      "sanskrit_iast": "tyāgī jñaḥ pracuraguṇaḥ sukhī kṣamāvān yuktijño vigatabhayaś ca ṣaṣṭharāśau",
+      "engine_rendering": "Liberal in gift, learned, possessing many virtues, living in comfort, of a patient nature, ingenious and fearless.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.10b",
+      "customer_prediction": false
+     },
+     "Capricorn": {
+      "sanskrit_iast": "parakarmakṛd asva śilpabuddhī ṛṇavān viṣṭikaro budhe arkajarkṣe",
+      "engine_rendering": "Working for other men, poor, a sculptor, running into debts, and working for no return.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.11a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Aquarius": {
+      "sanskrit_iast": "… arkajarkṣe (Mercury in either rasi of Saturn)",
+      "engine_rendering": "Working for other men, poor, a sculptor, running into debts, and working for no return.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.11a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Sagittarius": {
+      "sanskrit_iast": "nṛpasatkṛta paṇḍitāptavākyo navame",
+      "engine_rendering": "Respected by kings, and learned in the sciences and in the arts.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.11b",
+      "customer_prediction": false
+     },
+     "Pisces": {
+      "sanskrit_iast": "antye jitasevakāntyaśilpaḥ",
+      "engine_rendering": "Skilled in befriending other men, readily discovering the views of other people, and learned in the handicraft of men of low castes, such as shoe-making and the like.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.11b",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     }
+    }
+   },
+   "priority": null,
+   "exceptions": [
+    "Varahamihira states this graha by graha and frequently pairs the two rasis of one owner in a single clause; where he does, both rasis carry the same cell and the pairing is named in the quoted mula.",
+    "This is a THIRD independent Parasari-descended witness to graha-in-rasi, beside Saravali Adhyayas 22-29 and the Phaladipika pack. Where the three differ that is a difference between authors and must be shown as such, never averaged.",
+    "The Moon is not treated in this chapter; Brihat Jataka gives the Moon's rasi results through the aspect table of Adhyaya XIX, which is NOT yet mined and is recorded as the next target in source_audit.md.",
+    "Aiyar prints only English for these stanzas; the IAST mula beside each cell comes from the companion e-text and has not been collated against the printed Devanagari."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — Rasisila",
+     "location": "Stanzas 8-11; txt lines 10798-10852",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "refused; this cell carries a socially harsh clause (caste, gender, disability, servitude, or a mode of death) and is never rendered as a claim about a living person. It is retained verbatim so the corpus is not silently bowdlerised.",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  },
+  {
+   "rule_id": "jyotisha.brhajjataka.18.graha_in_rasi.jupiter",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "graha_in_rasi",
+    "graha": "Jupiter",
+    "chapter": "Adhyaya XVIII (Rasisila)",
+    "engine_facts_consumed": [
+     "graha rasi",
+     "dignity"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "equals",
+      "value": "Jupiter"
+     },
+     {
+      "fact": "rasi_of_graha",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "rasi_result_lookup",
+    "unit": "results_of_jupiter_by_the_rasi_it_occupies",
+    "customer_prediction": false,
+    "results_by_rasi": {
+     "Aries": {
+      "sanskrit_iast": "senānir bahuvittadāratanayo dātā subhṛtyaḥ kṣamī tejo dāraguṇānvitaḥ … kaujabhe",
+      "engine_rendering": "A commander of armies, very rich, with many wives and children, liberal in gift, with good servants, of a patient nature and bright appearance, happy with his wife, and of great fame.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.12a",
+      "customer_prediction": false
+     },
+     "Scorpio": {
+      "sanskrit_iast": "… kaujabhe (Jupiter in either rasi of Mars)",
+      "engine_rendering": "A commander of armies, very rich, with many wives and children, liberal in gift, with good servants, of a patient nature and bright appearance, happy with his wife, and of great fame.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.12a",
+      "customer_prediction": false
+     },
+     "Taurus": {
+      "sanskrit_iast": "kalpāṅgaḥ sadhana artha mitra tanayas tyāgī priyaḥ śaukrabhe",
+      "engine_rendering": "Free from disease, living in comfort, rich, having friends and sons, liberal in gift, and liked by all.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.12b",
+      "customer_prediction": false
+     },
+     "Libra": {
+      "sanskrit_iast": "… śaukrabhe (Jupiter in either rasi of Venus)",
+      "engine_rendering": "Free from disease, living in comfort, rich, having friends and sons, liberal in gift, and liked by all.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.12b",
+      "customer_prediction": false
+     },
+     "Gemini": {
+      "sanskrit_iast": "baudhe bhūriparicchada ātmaja suhṛt sācivyayuktaḥ sukhī",
+      "engine_rendering": "Having many clothes, houses, servants, sons and friends, a minister, and living in comfort.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.12b",
+      "customer_prediction": false
+     },
+     "Virgo": {
+      "sanskrit_iast": "baudhe … (Jupiter in either rasi of Mercury)",
+      "engine_rendering": "Having many clothes, houses, servants, sons and friends, a minister, and living in comfort.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.12b",
+      "customer_prediction": false
+     },
+     "Cancer": {
+      "sanskrit_iast": "cāndre ratna suta sva dāra vibhava prajñā sukhair anvitaḥ",
+      "engine_rendering": "Possessed of gems, sons, wealth, wife, influence, intelligence and comfort.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.13a",
+      "customer_prediction": false
+     },
+     "Leo": {
+      "sanskrit_iast": "siṃhe syād balanāyakaḥ suragurau proktaṃ ca yac candrabhe",
+      "engine_rendering": "All that is said of Jupiter in Cancer, and besides a commander of armies.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.13a",
+      "customer_prediction": false
+     },
+     "Sagittarius": {
+      "sanskrit_iast": "svarkṣe māṇḍaliko narendrasacivaḥ senāpatir vā dhanī",
+      "engine_rendering": "The ruler of a province, or a minister under a king, or the commander of armies, or very rich.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.13b",
+      "customer_prediction": false
+     },
+     "Pisces": {
+      "sanskrit_iast": "svarkṣe … (Jupiter in either of its own rasis)",
+      "engine_rendering": "The ruler of a province, or a minister under a king, or the commander of armies, or very rich.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.13b",
+      "customer_prediction": false
+     },
+     "Aquarius": {
+      "sanskrit_iast": "kumbhe karkaṭavat phalāni",
+      "engine_rendering": "The same results as for Jupiter in Cancer.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.13b",
+      "customer_prediction": false
+     },
+     "Capricorn": {
+      "sanskrit_iast": "makare nīco alpavitto asukhī",
+      "engine_rendering": "Doing deeds disgraceful to his rank in life, possessing very little wealth, and afflicted with grief.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.13b",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     }
+    }
+   },
+   "priority": null,
+   "exceptions": [
+    "Varahamihira states this graha by graha and frequently pairs the two rasis of one owner in a single clause; where he does, both rasis carry the same cell and the pairing is named in the quoted mula.",
+    "This is a THIRD independent Parasari-descended witness to graha-in-rasi, beside Saravali Adhyayas 22-29 and the Phaladipika pack. Where the three differ that is a difference between authors and must be shown as such, never averaged.",
+    "The Moon is not treated in this chapter; Brihat Jataka gives the Moon's rasi results through the aspect table of Adhyaya XIX, which is NOT yet mined and is recorded as the next target in source_audit.md.",
+    "Aiyar prints only English for these stanzas; the IAST mula beside each cell comes from the companion e-text and has not been collated against the printed Devanagari."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — Rasisila",
+     "location": "Stanzas 12-13; txt lines 10854-10891",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "refused; this cell carries a socially harsh clause (caste, gender, disability, servitude, or a mode of death) and is never rendered as a claim about a living person. It is retained verbatim so the corpus is not silently bowdlerised.",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  },
+  {
+   "rule_id": "jyotisha.brhajjataka.18.graha_in_rasi.venus",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "graha_in_rasi",
+    "graha": "Venus",
+    "chapter": "Adhyaya XVIII (Rasisila)",
+    "engine_facts_consumed": [
+     "graha rasi",
+     "dignity"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "equals",
+      "value": "Venus"
+     },
+     {
+      "fact": "rasi_of_graha",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "rasi_result_lookup",
+    "unit": "results_of_venus_by_the_rasi_it_occupies",
+    "customer_prediction": false,
+    "results_by_rasi": {
+     "Aries": {
+      "sanskrit_iast": "parayuvatiratas tadarthavādair hṛtavibhavaḥ kulapāṃsanaḥ kujarkṣe",
+      "engine_rendering": "Fond of the wives of other men, losing his property through their influence, and bringing disgrace upon his family.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.14a",
+      "customer_prediction": false
+     },
+     "Scorpio": {
+      "sanskrit_iast": "… kujarkṣe (Venus in either rasi of Mars)",
+      "engine_rendering": "Fond of the wives of other men, losing his property through their influence, and bringing disgrace upon his family.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.14a",
+      "customer_prediction": false
+     },
+     "Taurus": {
+      "sanskrit_iast": "svabalamatidhano narendrapūjyaḥ svajanavibhuḥ prathito abhayaḥ site sve",
+      "engine_rendering": "Acquiring wealth by his own powers and intelligence, liked by the king, an important person among his kinsmen, a man of fame, and fearless.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.14b",
+      "customer_prediction": false
+     },
+     "Libra": {
+      "sanskrit_iast": "… site sve (Venus in either of its own rasis)",
+      "engine_rendering": "Acquiring wealth by his own powers and intelligence, liked by the king, an important person among his kinsmen, a man of fame, and fearless.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.14b",
+      "customer_prediction": false
+     },
+     "Gemini": {
+      "sanskrit_iast": "nṛpakṛtyakaro arthavān kalāvin mithune",
+      "engine_rendering": "Doing the work of a king, rich, and learned in music.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.15a",
+      "customer_prediction": false
+     },
+     "Virgo": {
+      "sanskrit_iast": "ṣaṣṭhagate atinīcakarmā",
+      "engine_rendering": "Engaging in very low work.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.15a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Capricorn": {
+      "sanskrit_iast": "ravijarkṣagate amarāripūjye subhagaḥ strīvijito rataḥ kunāryyām",
+      "engine_rendering": "Liked by all, subject to the influence of women, and fond of mean women.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.15b",
+      "customer_prediction": false
+     },
+     "Aquarius": {
+      "sanskrit_iast": "ravijarkṣagate … (Venus in either rasi of Saturn)",
+      "engine_rendering": "Liked by all, subject to the influence of women, and fond of mean women.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.15b",
+      "customer_prediction": false
+     },
+     "Cancer": {
+      "sanskrit_iast": "dvibhāryo arthī bhīruḥ prabalamadaśokaś ca śaśibhe",
+      "engine_rendering": "Having two wives, a beggar, timid, very haughty, and suffering much grief.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.16a",
+      "customer_prediction": false
+     },
+     "Leo": {
+      "sanskrit_iast": "harau yoṣāptārthaḥ pravarayuvatir mandatanayaḥ",
+      "engine_rendering": "Acquiring money through women, having an excellent wife, and very few sons.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.16a",
+      "customer_prediction": false
+     },
+     "Sagittarius": {
+      "sanskrit_iast": "guṇaiḥ pūjyaḥ sasvas turagasahite dānavagurau",
+      "engine_rendering": "Possessed of excellent qualities, and rich.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.16b",
+      "customer_prediction": false
+     },
+     "Pisces": {
+      "sanskrit_iast": "jhaṣe vidvān āḍhyo nṛpajanitapūjo atisubhagaḥ",
+      "engine_rendering": "Learned, rich, respected by the king, and liked by all.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.16b",
+      "customer_prediction": false
+     }
+    }
+   },
+   "priority": null,
+   "exceptions": [
+    "Varahamihira states this graha by graha and frequently pairs the two rasis of one owner in a single clause; where he does, both rasis carry the same cell and the pairing is named in the quoted mula.",
+    "This is a THIRD independent Parasari-descended witness to graha-in-rasi, beside Saravali Adhyayas 22-29 and the Phaladipika pack. Where the three differ that is a difference between authors and must be shown as such, never averaged.",
+    "The Moon is not treated in this chapter; Brihat Jataka gives the Moon's rasi results through the aspect table of Adhyaya XIX, which is NOT yet mined and is recorded as the next target in source_audit.md.",
+    "Aiyar prints only English for these stanzas; the IAST mula beside each cell comes from the companion e-text and has not been collated against the printed Devanagari."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — Rasisila",
+     "location": "Stanzas 14-16; txt lines 10893-10927",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "refused; this cell carries a socially harsh clause (caste, gender, disability, servitude, or a mode of death) and is never rendered as a claim about a living person. It is retained verbatim so the corpus is not silently bowdlerised.",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  },
+  {
+   "rule_id": "jyotisha.brhajjataka.18.graha_in_rasi.saturn",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "graha_in_rasi",
+    "graha": "Saturn",
+    "chapter": "Adhyaya XVIII (Rasisila)",
+    "engine_facts_consumed": [
+     "graha rasi",
+     "dignity"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "equals",
+      "value": "Saturn"
+     },
+     {
+      "fact": "rasi_of_graha",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "rasi_result_lookup",
+    "unit": "results_of_saturn_by_the_rasi_it_occupies",
+    "customer_prediction": false,
+    "results_by_rasi": {
+     "Aries": {
+      "sanskrit_iast": "mūrkho aṭanaḥ kapaṭavān visuhṛd yame aje",
+      "engine_rendering": "A fool, wandering from place to place, a fop, and without friends.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.17a",
+      "customer_prediction": false
+     },
+     "Scorpio": {
+      "sanskrit_iast": "kīṭe tu bandhavadhabhāk capalo aghṛṇaś ca",
+      "engine_rendering": "Suffering imprisonment, receiving blows, indifferent to work, and merciless.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.17a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Gemini": {
+      "sanskrit_iast": "nihrīr … sukhārthatanayaḥ skhalitaś ca lekhye rakṣāpatir bhavati mukhyapatiś ca baudhe",
+      "engine_rendering": "Shameless, suffering grief, poor, without sons, a bad painter or writer, a constable, and a chief officer.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.17b",
+      "customer_prediction": false
+     },
+     "Virgo": {
+      "sanskrit_iast": "… baudhe (Saturn in either rasi of Mercury)",
+      "engine_rendering": "Shameless, suffering grief, poor, without sons, a bad painter or writer, a constable, and a chief officer.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.17b",
+      "customer_prediction": false
+     },
+     "Taurus": {
+      "sanskrit_iast": "varjyastrīṣṭo na bahuvibhavo bhūribhāryo vṛṣasthe",
+      "engine_rendering": "Fond of women of low caste, possessing small wealth, and having several wives.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.18a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Libra": {
+      "sanskrit_iast": "khyātaḥ svocce gaṇapurabalagrāmapūjyo arthavāṃś ca",
+      "engine_rendering": "A man of well-known fame, the chief of a party of men in a town, in an army or in a village, and wealthy.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.18a",
+      "customer_prediction": false
+     },
+     "Cancer": {
+      "sanskrit_iast": "karkiṇy asvo vikaladaśano mātṛhīno asuto ajñaḥ",
+      "engine_rendering": "Poor, having very few teeth, separated from his mother, without sons, and a fool.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.18a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Leo": {
+      "sanskrit_iast": "siṃhe anāryo bisukhatanayo viṣṭikṛt sūryaputre",
+      "engine_rendering": "Not deserving of respect, suffering grief, without sons, and a carrier of burdens.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.18a",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "socially harsh clause (caste, gender, disability, servitude or a mode of death); never rendered as a claim about a living person"
+     },
+     "Sagittarius": {
+      "sanskrit_iast": "svantaḥ pratyayito narendrabhavane satputrajāyādhano jīvakṣetragate arkaje purabalagrāmāgranetā athavā",
+      "engine_rendering": "He dies an excellent death; a faithful officer in the king's palace, with good sons and a good wife, possessed of good wealth, and the chief man in a town, in an army or in a village.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.19a",
+      "customer_prediction": false
+     },
+     "Pisces": {
+      "sanskrit_iast": "jīvakṣetragate arkaje … (Saturn in either rasi of Jupiter)",
+      "engine_rendering": "He dies an excellent death; a faithful officer in the king's palace, with good sons and a good wife, possessed of good wealth, and the chief man in a town, in an army or in a village.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.19a",
+      "customer_prediction": false
+     },
+     "Capricorn": {
+      "sanskrit_iast": "anyastrīdhanasaṃvṛtaḥ purabalagrāmāgraṇīr mandadṛk svakṣetre malinaḥ sthirārthavibhavo bhoktā ca",
+      "engine_rendering": "With the wives and property of other men, the head of a town, a village or an army, of weak eyes, dirty, indifferent to bathing, of permanent wealth and authority, and enjoying the property he has acquired.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.19b",
+      "customer_prediction": false
+     },
+     "Aquarius": {
+      "sanskrit_iast": "svakṣetre … (Saturn in either of its own rasis)",
+      "engine_rendering": "With the wives and property of other men, the head of a town, a village or an army, of weak eyes, dirty, indifferent to bathing, of permanent wealth and authority, and enjoying the property he has acquired.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "18.19b",
+      "customer_prediction": false
+     }
+    }
+   },
+   "priority": null,
+   "exceptions": [
+    "Varahamihira states this graha by graha and frequently pairs the two rasis of one owner in a single clause; where he does, both rasis carry the same cell and the pairing is named in the quoted mula.",
+    "This is a THIRD independent Parasari-descended witness to graha-in-rasi, beside Saravali Adhyayas 22-29 and the Phaladipika pack. Where the three differ that is a difference between authors and must be shown as such, never averaged.",
+    "The Moon is not treated in this chapter; Brihat Jataka gives the Moon's rasi results through the aspect table of Adhyaya XIX, which is NOT yet mined and is recorded as the next target in source_audit.md.",
+    "Aiyar prints only English for these stanzas; the IAST mula beside each cell comes from the companion e-text and has not been collated against the printed Devanagari."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — Rasisila",
+     "location": "Stanzas 17-19; txt lines 10929-10975",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "refused; this cell carries a socially harsh clause (caste, gender, disability, servitude, or a mode of death) and is never rendered as a claim about a living person. It is retained verbatim so the corpus is not silently bowdlerised.",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  },
+  {
+   "rule_id": "jyotisha.brhajjataka.18.lagna_rasi_satyacharya",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "results_of_the_rising_rasi",
+    "chapter": "Adhyaya XVIII, appended extract from Satyacharya",
+    "engine_facts_consumed": [
+     "lagna rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lagna_rasi",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "rasi_result_lookup",
+    "unit": "results_of_the_rising_rasi",
+    "customer_prediction": false,
+    "results_by_rasi": {
+     "Aries": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Disfigured fingers, of irascible temper, bringing on enmity, acting inconsistently with his views, of bilious and windy temperament, a niggard, suffering grief; separated when young from his parents and his preceptor; foolish sons; assisting his brothers and kinsmen; virtuous, travelling to foreign lands, engaging in useless work; marrying a woman of low caste, or a deceitful woman, or one of defective limbs, or one already married; obtaining friendly relations. Death by weapons, poison, bilious complaints, the people about him, fire, rain, imprisonment or a fall.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 1",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Taurus": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Large lips, cheeks, nose and forehead, of phlegmatic and windy temperament, liberal in gift, a spendthrift, having daughters and very few sons, ill-treating his parents, fond of work yet doing wicked deeds, earning much wealth, ever fond of his wife, and suffering from weapons. Death by weapons, ropes or animals, in foreign lands, through overwork, by water, by a spear, through want of exercise, or by quadrupeds.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 2",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Gemini": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Either of defective limbs or possessing extra limbs, of sweet speech, engaging in excellent works, of mixed temperament, of small understanding and small body, liked by his preceptor and by sages, with very few younger brothers, not of very active habits, putting other men to disgrace, of good qualities, anxious to engage in many works, virtuous and not wicked, earning and spending much, with several wives, and free from serious disease. Death by snake-bite, poison, animals or water.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 3",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Cancer": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "A man of no fixed principles, suffering from diseases of the genital organs, of a timid nature, grateful, of phlegmatic and windy temperament, of firm understanding, doing sinful actions, spending the property of others, haughty among his people, disgraced by his kinsmen, losing his children, engaging in important works in foreign lands, of imperfect speech, a master over other men, with an unequal wife, disgraced by his enemies, and respected by many. Death by a neck-ornament or a rope, by phlegmatic complaints, by fracture of bones, by sword-cut, or by dropsy.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 4",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Leo": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Severe, fond of animal food, of bilious temperament, dispelling destruction, supporting his family by various works, a niggard, liking people, of renown and of resignation; annoying his kinsmen, able and energetic, of a sinful nature, with several wives, and with a diseased waist, knees and teeth. Death by weapons, hurtful animals, poison, wood, disease, the creatures of water, or imprisonment.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 5",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Virgo": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Of sweet speech and bright appearance, with long legs and arms, of mixed temperament, of excellent beauty, receiving wounds, rich yet a niggard, attached to his kinsmen, with many daughters, on bad terms with his brothers and sisters, inclined to deeds of virtue, not earning much, and skilled in work. Death by quadrupeds, weapons, bilious attacks, grief, fire or rope.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 6",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Libra": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Of a rough body and harsh nature, of phlegmatic and windy temperament, beginning work thoughtlessly, of short neck, grateful, acquiring much wealth, famous for his liberality, serving under his preceptor, respected by his father and brothers, fond of travel, virtuous, concealing himself to escape trouble from his kinsmen, losing his wife, fond of fighting, and suffering grief. Death by a famous man, by his kinsmen, by mild quadrupeds, by calamity, by separation from what he desires, or by the fatigue of a journey.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 7",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Scorpio": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Of broad face and long belly, of harsh nature and bilious temperament, with brown eyes, slow yet of quick pace, a master over others, protecting a large family, hated by his kinsmen, spending much, with many children, not living in comfort, without enemies, losing his virtues, protecting oxen, falling into bad temper on account of his wife, yielding nothing to his enemies, having his own men for enemies, suffering many diseases, and surrendering to his foe from fear of the sword. Death by imprisonment, blows, sword-cut, bad diseases or fire.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 8",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Sagittarius": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Large limbs, teeth and nose, of phlegmatic and windy temperament, fleshy of thighs and arms, of defective nails, skilled in work, bold in fight, serving under men of low caste, deprived of his property by thieves, fire or the king, learned in the laws, respected by many, giving trouble to his brothers, working in foreign lands, liked by the king, indifferent to deeds of virtue, quarrelling with his wives, and with a diseased face. Death by quadrupeds, snakes, the king, or imprisonment.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 9",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Capricorn": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "A small nose, long face, arms and legs; of windy temperament and timid nature, engaging in work thoughtlessly, suffering imprisonment, with a small family and small wealth, a niggard, having daughters, without kinsmen, living in plenty, acquiring wealth by his valour through the king and by the forest, observing fasts, with a wife of low caste to whom he is attached, of large body, few hairs and weak knees, and suffering from diseases. Death by children, by the wind, by weapons, by the king, by poison, by a fall, by an elephant, by increase of bile, or by dyspepsia.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 10",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Aquarius": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Of inactive habits and harsh nature, the eldest in the family, of bilious and windy temperament, with a nose shaped like the sesamum flower, wasting his wealth, with many servants, hated by his kinsmen, preceptors, enemies and friends, fond of deeds of wickedness, acquiring much property, never spending on charity, assuming a show of virtue, worshipping the Devas, and suffering phlegmatic attacks affecting the chest. Death from pains in the belly, by vomiting, or by drugs administered by women.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 11",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     },
+     "Pisces": {
+      "sanskrit_iast": "(not in the mula; Aiyar prints this as an extract from Satyachariar's work on horoscopy, not as Varahamihira's own text)",
+      "engine_rendering": "Thick lips, fish-like eyes and a large nose, of phlegmatic and windy temperament, a sage, of disfigured skin and active habits, remarkable for his gain and loss, with good servants and kinsmen, disposed to deeds of virtue, with a good wife, helping his father, joining a woman of low deeds, and having bad enemies. Death by disease, corruption of the blood, snake-bite, the attack of a lion, by the chiefs of parties of men, by venereal disease, by drugs, by fasting, or by the fatigue of a journey.",
+      "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+      "sloka": "Adhyaya XVIII, Satyacharya extract, item 12",
+      "customer_prediction": false,
+      "output_policy": "refused",
+      "output_policy_reason": "every cell ends in a statement of the mode of the native's death, and several name caste and bodily deformity; never rendered as a claim about a living person"
+     }
+    }
+   },
+   "priority": null,
+   "exceptions": [
+    "Aiyar explicitly marks this block as extracted from SATYACHARYA, not as Varahamihira's text. It is retained under the Brihat Jataka pack because that is where the 1905 edition prints it, but it must be attributed to Satyacharya and never to Varahamihira.",
+    "Every one of the twelve cells closes with a mode of death. The whole rule is therefore refused for rendering; it is encoded so that the corpus records what the tradition actually says, including the parts a product cannot use."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — appended extract",
+     "location": "'The following have been extracted from Satyachariar's work on Horoscopy', items 1-12; txt lines 11002-11176",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "refused; this cell carries a socially harsh clause (caste, gender, disability, servitude, or a mode of death) and is never rendered as a claim about a living person. It is retained verbatim so the corpus is not silently bowdlerised.",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  },
+  {
+   "rule_id": "jyotisha.brhajjataka.18.lagna_takes_the_moons_results",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "varahamihira_brhajjataka_aiyar_1905_alignment",
+   "period": "varahamihira_text_english_mediated_aiyar_1905_edition",
+   "domain": "natal",
+   "scope": {
+    "work": "Brihat Jataka",
+    "technique": "transfer_of_moon_results_to_the_lagna",
+    "chapter": "Adhyaya XVIII (Rasisila)",
+    "engine_facts_consumed": [
+     "lagna rasi",
+     "house lordships",
+     "graha strength"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lagna_rasi",
+      "operator": "in",
+      "value": [
+       "Aries",
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo",
+       "Libra",
+       "Scorpio",
+       "Sagittarius",
+       "Capricorn",
+       "Aquarius",
+       "Pisces"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "method_rule",
+    "unit": "the_lagna_inherits_the_moons_rasi_and_aspect_results",
+    "customer_prediction": false,
+    "result": {
+     "sanskrit_iast": "śiśirakarasamāgamekṣaṇānāṃ sadṛśaṃ phalaṃ pravadanti lagnajātam / phalam adhikam idaṃ yad atra bhāvād bhavanabhanāthaguṇair vicintanīyam",
+     "engine_rendering": "The effects described for the several rasis when the Moon occupies them and is aspected by planets are declared for the rising sign as well; and the effect here is the greater. It is to be weighed by the qualities of the bhava, of its sign, and of its lord: if the rising sign and its lord are powerful the native will be of strong physique; if the 2nd house and its lord are powerful he will be rich; and so with the other bhavas.",
+     "rendering_grade": "aiyar_1905_english_translation_unreviewed",
+     "sloka": "18.20",
+     "customer_prediction": false
+    },
+    "engine_note": "This is doctrinally load-bearing and directly usable: it licenses applying a Moon-in-rasi table to the lagna rasi, and it makes bhava strength (lord placement and strength, both computed by the engine) the gate on every bhava result."
+   },
+   "priority": null,
+   "exceptions": [
+    "The transfer is from the MOON's rasi-plus-aspect results specifically, not from any graha's; a composer must not generalise it further than the text does."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+     "work": "Brihat Jataka",
+     "section": "Adhyaya XVIII — Rasisila",
+     "location": "Stanza 20 and its note; txt lines 10986-11000",
+     "verification": "english_translation_read_from_ocr (Aiyar 1905, clean Latin in this stretch); the IAST mula quoted beside each cell is taken from the companion e-text sources/brhajj_u.txt, which has NOT been collated line by line against the 1905 printing"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; the rendering is Aiyar's 1905 English, not the encoder's own reading of the Sanskrit, and must be shown with that attribution",
+   "review_status": "english_mediated_1905_edition_read; no independent Sanskrit review, and the IAST mula not collated against the printed Devanagari"
+  }
+ ]
+}

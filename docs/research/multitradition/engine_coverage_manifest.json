@@ -128,6 +128,29 @@
             "the text's quarter-strength drishti for every graha conflicts with the engine's flat Mars/Jupiter/Saturn special-aspect rule - recorded as an open fork, unresolved",
             "no graha-in-bhava grid exists in this recension, so the Phaladeepika Sun gap remains open"
           ]
+        },
+        {
+          "module_id": "saravali_brhajjataka_delineation",
+          "name": "Saravali (1907 Nirnaya Sagar) and Brhajjataka (Aiyar 1905) delineation packs",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "jyotisha/source_audit.md",
+            "jyotisha/saravali_rule_manifest.json",
+            "jyotisha/saravali_validation_vectors.json",
+            "jyotisha/brhajjataka_delineation_rule_manifest.json",
+            "jyotisha/brhajjataka_delineation_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "independent Sanskrit review of every engine_translation_unreviewed rendering",
+            "the second Saravali witness is corrupt at the aksara level, so no cross-witness collation exists in either direction; agreement is NOT claimed",
+            "Mars in Leo through Pisces is a lost leaf in the 1907 Saravali print (Adhyaya 25 jumps sloka 7 to 34); recorded as rasis_not_recovered, not filled",
+            "Rahu/Ketu have no graha-in-rasi chapters in either author",
+            "Saravali chapters 31-39 and 41-53 remain unmined (chapter 51 nashta-jataka is the likeliest home of a worked example)",
+            "Brhajjataka XIX flagged as the corpus's best two-author collation target"
+          ]
         }
       ]
     },
