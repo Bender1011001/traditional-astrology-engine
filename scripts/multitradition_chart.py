@@ -167,13 +167,28 @@ def render_text(panel: dict, full: bool, only: list[str] | None) -> str:
             lines.append("")
             continue
         lines.extend(_wrap(section["basis"], 92, "    "))
+        maturity = section.get("maturity")
+        if maturity:
+            from src.engine.multitradition.maturity import CATEGORY_LABEL
+            lines.append("")
+            lines.append(
+                f"    MATURITY ({maturity['assessed']}): "
+                + CATEGORY_LABEL.get(maturity["category"], maturity["category"])
+            )
+            for axis in ("source_readiness", "computational_readiness",
+                         "validation_coverage", "interpretation_readiness",
+                         "publication_readiness"):
+                lines.extend(_wrap(f"{axis}: {maturity[axis]}", 88, "      "))
         lines.append("")
 
         disclosures = section.get("disclosures", [])
         by_kind = {k: [d for d in disclosures if d["kind"] == k] for k in KIND_ORDER}
         for kind in KIND_ORDER:
             for d in by_kind[kind]:
-                lines.append(f"    [{KIND_LABEL[kind]}] {d['subject']}")
+                tag = KIND_LABEL[kind]
+                if d.get("category"):
+                    tag += f": {d['category']}"
+                lines.append(f"    [{tag}] {d['subject']}")
                 lines.extend(_wrap(d["detail"], 88, "        "))
                 if d.get("alternatives"):
                     lines.extend(
@@ -222,7 +237,14 @@ def render_text(panel: dict, full: bool, only: list[str] | None) -> str:
         )
     lines.append("=" * 96)
     lines.append(
-        f"  {len(panel['sections'])} traditions  ·  {refusals} explicit refusals  ·  "
+        "  " + panel.get(
+            "coverage_summary",
+            f"{len(panel['sections'])} modules",
+        )
+        + f"  ·  {refusals} explicit refusals"
+    )
+    lines.append(
+        "  "
         + ", ".join(f"{GRADE_LABEL.get(g, g)}: {n}" for g, n in sorted(grades.items()))
     )
     lines.append(

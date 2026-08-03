@@ -92,6 +92,8 @@ def build(birth: BirthInput, bazi_year: int | None = None) -> TraditionSection:
         "websites do state mewa and parkha arithmetic; they cite nothing, and "
         "taking a number from one would be indistinguishable from taking a wrong "
         "one.",
+    
+        category="translation_pending",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -99,6 +101,8 @@ def build(birth: BirthInput, bazi_year: int | None = None) -> TraditionSection:
         "Kag (obstacle-year) arithmetic, life-force calculations, and compatibility "
         "judgments depend on conventions the research pack has not fixed and are "
         "not asserted.",
+    
+        category="extraction_incomplete",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -106,6 +110,8 @@ def build(birth: BirthInput, bazi_year: int | None = None) -> TraditionSection:
         "The Phugpa pack can compute the Tibetan month and lunar day, but its own "
         "publication contract requires almanac conformance testing before dates are "
         "presented. This section therefore reports the year character only.",
+    
+        category="extraction_incomplete",
     )
 
     year = bazi_year if bazi_year is not None else birth.civil_date.year

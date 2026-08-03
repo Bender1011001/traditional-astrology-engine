@@ -164,6 +164,18 @@ def build_panel(birth: BirthInput) -> dict[str, Any]:
         },
         "sections": [section.to_dict() for section in sections],
     }
+    # Attach the multi-axis maturity assessment to each section, and generate
+    # the honest coverage summary FROM the table so the headline cannot claim
+    # more than the modules individually admit.
+    from .maturity import coverage_summary, maturity_of
+
+    for section_dict in panel["sections"]:
+        assessment = maturity_of(section_dict["tradition_id"])
+        if assessment:
+            section_dict["maturity"] = assessment
+    panel["coverage_summary"] = coverage_summary(
+        [s["tradition_id"] for s in panel["sections"]]
+    )
     # Convergence reads only what the sections already computed, so it runs last
     # and is guarded: a failure here must never cost the reader their sections.
     try:

@@ -1181,6 +1181,8 @@ def _disclose(section: TraditionSection) -> None:
         "No lifespan or longevity claim is made. Ayurdaya methods are "
         "recension-dependent and their branches disagree; length-of-life "
         "arithmetic is not asserted from this section.",
+    
+        category="policy_suppressed",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -1188,6 +1190,8 @@ def _disclose(section: TraditionSection) -> None:
         "No electional (muhurta) timing and no remedial prescription - gemstone, "
         "mantra, ritual, donation - is given. Those are prescriptive advice "
         "rather than historical delineation.",
+    
+        category="policy_suppressed",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -1195,6 +1199,8 @@ def _disclose(section: TraditionSection) -> None:
         "No caste, varna, or social-rank delineation is rendered as a claim "
         "about the reader, even where the classical sources state one. The "
         "material stays in the audit trace with its suppression reason.",
+    
+        category="policy_suppressed",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -1202,6 +1208,8 @@ def _disclose(section: TraditionSection) -> None:
         "No marriage-compatibility verdict (kuta / guna milan) is produced. It "
         "requires a second chart and its own source treatment, and is not a "
         "natal-reading output.",
+    
+        category="missing_user_input",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -1210,6 +1218,8 @@ def _disclose(section: TraditionSection) -> None:
         "recension-dependent and unsourced here - so no strength claim, yoga, "
         "or period judgment depending on either is made anywhere in this "
         "section.",
+    
+        category="calculation_unimplemented",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -1217,4 +1227,6 @@ def _disclose(section: TraditionSection) -> None:
         "This section reports calculation and structural condition only. "
         "Divisional charts beyond D1 and D9 are not computed, and moolatrikona "
         "boundaries are pending, so no claim resting on them is made.",
+    
+        category="extraction_incomplete",
     )

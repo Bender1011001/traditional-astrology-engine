@@ -349,6 +349,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "from contemporary Chinese ones. For a birth predating the modern profile "
         "the date below is the modern rule run backward, not the calendar that was "
         "in force.",
+    
+        category="source_unavailable",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -359,6 +361,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "which exist here, and the audit forbids relabeling a Chinese BaZi or Zi "
         "Wei result as Vietnamese. No sexagenary year name, no star chart and no "
         "personality claim is emitted here.",
+    
+        category="historically_unattested",
     )
 
     vn_civil_date = (bases.utc + timedelta(hours=VN_OFFSET_HOURS)).date()

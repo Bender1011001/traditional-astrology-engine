@@ -176,6 +176,8 @@ def build_hellenistic(birth: BirthInput, chart: Any) -> TraditionSection:
         "almuten example with it, six centuries before Lilly printed it. Lilly "
         "transmitted it; he did not originate it. The anachronism against Valens "
         "is real either way, which is why the refusal stands.",
+    
+        category="not_part_of_tradition",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -183,6 +185,8 @@ def build_hellenistic(birth: BirthInput, chart: Any) -> TraditionSection:
         "Lots beyond the Hermetic set, firdaria, and the expanded Arabic parts "
         "are not used here. They enter the tradition later and are reported in "
         "the Islamicate and Latin-European sections under their own authorities.",
+    
+        category="not_part_of_tradition",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -190,6 +194,8 @@ def build_hellenistic(birth: BirthInput, chart: Any) -> TraditionSection:
         "Hellenistic aphesis/hyleg doctrine survives in conflicting forms and the "
         "live report already demonstrates how badly the arithmetic behaves when "
         "branches disagree. Not asserted.",
+    
+        category="policy_suppressed",
     )
 
     sun_altitude = getattr(chart, "sun_altitude", 0.0)
@@ -340,6 +346,8 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
         "Horary is a mature Latin branch requiring a question and its moment, not "
         "a nativity. The engine supports it separately; nothing here answers a "
         "horary question from birth data.",
+    
+        category="not_part_of_tradition",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -348,6 +356,8 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
         "(Regiomontanus vs Placidus semi-arc, with or without latitude) changes "
         "results materially. The live report discloses its partial implementation; "
         "this panel section does not restate it as settled.",
+    
+        category="calculation_unimplemented",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -355,6 +365,8 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
         "Lilly himself doubts that hyleg, alcocoden and anareta can be selected "
         "with certainty. The live report publishes competing branches with their "
         "failures; a single number is not asserted.",
+    
+        category="policy_suppressed",
     )
 
     sun_altitude = getattr(chart, "sun_altitude", 0.0)
@@ -383,7 +395,9 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
             "Regiomontanus cusps could not be computed for this latitude. "
             "Quadrant systems degenerate near the polar circles; whole-sign "
             "topics remain available in the Hellenistic section.",
-        )
+        
+        category="calculation_unimplemented",
+    )
 
     scored = []
     for name in CLASSICAL:

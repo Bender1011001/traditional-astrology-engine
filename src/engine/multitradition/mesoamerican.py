@@ -77,6 +77,8 @@ def build_maya(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "Tzolk'in day-sign meanings are not asserted. The pack carries calendar "
         "arithmetic only; codical almanacs and living K'iche' daykeeping practice "
         "are separate source-limited modules.",
+    
+        category="policy_suppressed",
     )
     section.disclose(
         DisclosureKind.CONFIGURED_METHOD,
@@ -148,6 +150,8 @@ def build_nahua(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "Maya correlation merely because both traditions run 260-day counts. "
         "The cycle position below is therefore computed under a labeled "
         "non-historical fixture and must not be read as this person's day sign.",
+    
+        category="school_fork_unresolved",
     )
     section.disclose(
         DisclosureKind.SOURCE,

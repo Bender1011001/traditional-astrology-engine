@@ -664,6 +664,8 @@ def build(birth: BirthInput, chart: Any) -> TraditionSection:
         "because it is the tradition's own core method and omitting it would be "
         "a worse misrepresentation than showing it; the years are not computed, "
         "and no death claim is produced.",
+    
+        category="policy_suppressed",
     )
     section.disclose(
         DisclosureKind.CONFIGURED_METHOD,

@@ -381,7 +381,9 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
             + "), so the life palace is not determined and neither is anything "
             "downstream of it. This is the gate working, not a missing feature: "
             "a birth within a day or two of a new moon can land here.",
-        )
+        
+        category="school_fork_unresolved",
+    )
 
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -397,6 +399,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         )
         + " The palaces below are therefore an empty board: correct houses, with "
         "no main stars in them.",
+    
+        category="source_unavailable",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -407,6 +411,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "implementation_allowed_before_facsimile_collation to false. It is the "
         "only rule in the pack that forbids its own use outright, and it is not "
         "computed here even though the year stem is known.",
+    
+        category="translation_pending",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -416,6 +422,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "does not collect a sex input. The audit additionally requires a declared "
         "historical convention and a safe modern input mapping before that rule "
         "may run at all. Nothing here guesses it.",
+    
+        category="missing_user_input",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -424,6 +432,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "prose meaning before construction reproduces facsimile-backed worked "
         "charts, and the source audit warns that a list of isolated star keywords "
         "is not a reading. Everything below is a position, not a judgment.",
+    
+        category="policy_suppressed",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -431,6 +441,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "A different three-juan work in the Zhengtong Daozang shares the title "
         "Ziwei Doushu but differs in star names and construction. It is never used "
         "to fill a gap in this system, including the gaps named above.",
+    
+        category="not_part_of_tradition",
     )
     section.disclose(
         DisclosureKind.CONFIGURED_METHOD,

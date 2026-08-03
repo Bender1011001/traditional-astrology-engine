@@ -457,6 +457,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "assessment below states seasonal state and roots - the facts every "
         "school agrees precede those judgments - and draws a summary conclusion "
         "only where the testimony is unanimous.",
+    
+        category="extraction_incomplete",
     )
 
     stems, branches = _stems(), _branches()

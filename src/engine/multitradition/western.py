@@ -614,6 +614,8 @@ def _islamicate_disclose(
         "arithmetic because section 395 supplies neither node periods nor a "
         "major-duration table. The ordering and the equal sevenths below are "
         "therefore a sequence without a clock: no years, no ages, no dates.",
+    
+        category="extraction_incomplete",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -622,6 +624,8 @@ def _islamicate_disclose(
         "planet's joy. This section does not infer a complete judgment from "
         "them, cancel a debility, or change a planet's benefic or malefic "
         "nature - the pack forbids all three.",
+    
+        category="extraction_incomplete",
     )
     section.disclose(
         DisclosureKind.SOURCE,
@@ -643,6 +647,8 @@ def _islamicate_disclose(
         "Great Introduction and the Abbreviation stay different works, and "
         "al-Biruni is never backfilled from either author. Rule promotion "
         "waits on the critical apparatus and Arabic specialist review.",
+    
+        category="school_fork_unresolved",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -650,6 +656,8 @@ def _islamicate_disclose(
         "The pack marks itself interpretation-ineligible and historical-use "
         "only. The reading below reports classification, structure and "
         "attribution; it derives no life prediction, no timing, and no advice.",
+    
+        category="policy_suppressed",
     )
 
 
@@ -916,6 +924,8 @@ def build_medieval_jewish(
         "The Book of Nativities module remains source-limited: its rule and "
         "precedence extraction is not complete, so no natal doctrine specific to "
         "it is asserted here.",
+    
+        category="source_unread",
     )
 
     # Spec item 7. Ibn Ezra writes in Hebrew and coins Hebrew equivalents for

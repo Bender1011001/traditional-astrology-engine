@@ -201,6 +201,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "amount. The birth's civil day (JDN "
         f"{bases.julian_day_number}) is therefore reported as the withheld input, "
         "not converted.",
+    
+        category="school_fork_unresolved",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -209,6 +211,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "table, and any unnamed reign or locality are all rejected by the pack as "
         "chronology profiles. A profile whose model_id is not pharaonic_civil_365 "
         "fails closed rather than being coerced.",
+    
+        category="historically_unattested",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -218,6 +222,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "compatibility and recommendation as forbidden fields. A calendar position "
         "is not a witness-specific judgment, and no lucky/unlucky verdict is "
         "produced here even where a date is otherwise well formed.",
+    
+        category="historically_unattested",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -230,6 +236,8 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         "unknown evidence, not proof that the original calendar assigned those "
         "days no prognosis, so this section neither supplies a prognosis nor "
         "asserts that none existed.",
+    
+        category="source_unavailable",
     )
     section.disclose(
         DisclosureKind.CONFIGURED_METHOD,

@@ -40,6 +40,24 @@ class DisclosureKind(str, Enum):
     SOURCE = "source"
 
 
+# Refusals differ in meaning, and rendering them all with one label conceals
+# that. Each refusal names WHY, from this closed vocabulary, so a reader can
+# tell an absent genre from an unread source from a policy suppression - they
+# imply very different completeness and very different paths to resolution.
+REFUSAL_CATEGORIES = frozenset({
+    "not_part_of_tradition",     # the tradition has no such genre at all
+    "historically_unattested",   # the specific claim has no surviving witness
+    "source_unavailable",        # no usable witness has been acquired
+    "source_unread",             # acquired but not yet read/transcribed
+    "translation_pending",       # read, but rendering not yet reviewable
+    "extraction_incomplete",     # rules only partially encoded
+    "calculation_unimplemented", # method known, engine work not done
+    "missing_user_input",        # needs an input the schema does not carry
+    "school_fork_unresolved",    # competing doctrines, none selected
+    "policy_suppressed",         # computed/known but withheld by publication policy
+})
+
+
 @dataclass(frozen=True)
 class Disclosure:
     """One statement about how this section was produced, or what it will not say."""
@@ -48,6 +66,11 @@ class Disclosure:
     subject: str
     detail: str
     alternatives: tuple[str, ...] = ()
+    category: str | None = None  # for refusals: one of REFUSAL_CATEGORIES
+
+    def __post_init__(self) -> None:
+        if self.category is not None and self.category not in REFUSAL_CATEGORIES:
+            raise ValueError(f"Unknown refusal category: {self.category!r}")
 
     def to_dict(self) -> dict[str, Any]:
         payload: dict[str, Any] = {
@@ -57,6 +80,8 @@ class Disclosure:
         }
         if self.alternatives:
             payload["alternatives"] = list(self.alternatives)
+        if self.category:
+            payload["category"] = self.category
         return payload
 
 
@@ -121,8 +146,11 @@ class TraditionSection:
         subject: str,
         detail: str,
         alternatives: tuple[str, ...] = (),
+        category: str | None = None,
     ) -> None:
-        self.disclosures.append(Disclosure(kind, subject, detail, alternatives))
+        self.disclosures.append(
+            Disclosure(kind, subject, detail, alternatives, category)
+        )
 
     def to_dict(self) -> dict[str, Any]:
         payload: dict[str, Any] = {

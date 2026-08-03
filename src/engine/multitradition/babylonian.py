@@ -614,6 +614,8 @@ def _disclose(section: TraditionSection) -> None:
         "section is therefore not a personality reading and cannot be turned "
         "into one - any Babylonian character delineation is an invention, "
         "however ancient the vocabulary it borrows.",
+    
+        category="not_part_of_tradition",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -624,6 +626,8 @@ def _disclose(section: TraditionSection) -> None:
         "outright. A match therefore means only that the sky on this date "
         "satisfied an ancient protasis whose apodosis was addressed to a land "
         "or a king. It never means the omen applies to the native.",
+    
+        category="not_part_of_tradition",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -633,6 +637,8 @@ def _disclose(section: TraditionSection) -> None:
         "personal events, and the packs' own publication limits (suppressing "
         "violence, death, disaster, and ritual as present-day prediction) are "
         "carried through with each quotation.",
+    
+        category="policy_suppressed",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -643,6 +649,8 @@ def _disclose(section: TraditionSection) -> None:
         "They are listed as artifacts of specific tablets and are never applied "
         "to this or any other chart, and no judgment is built by analogy from "
         "the state omens.",
+    
+        category="not_part_of_tradition",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -651,6 +659,8 @@ def _disclose(section: TraditionSection) -> None:
         "9419, and manuscripts D, S, M, Y. Conflicting witnesses are reported "
         "separately with their `conflicts_with` links intact; they are never "
         "averaged into a single reading.",
+    
+        category="school_fork_unresolved",
     )
     section.disclose(
         DisclosureKind.REFUSAL,
@@ -659,6 +669,8 @@ def _disclose(section: TraditionSection) -> None:
         "alternatives. Commentary rules are keyed to a base omen rather than to "
         "a sky, so they are never matched independently and never overwrite the "
         "base omen text.",
+    
+        category="extraction_incomplete",
     )
     concordance = _manifest(CONCORDANCE)["summary"]
     section.disclose(
@@ -668,6 +680,8 @@ def _disclose(section: TraditionSection) -> None:
         f"{concordance['numbered_tablets']} numbered tablets are not exactly "
         "matched to a current CDLI record. No claim in this section rests on "
         "them, and their unresolved status is stated rather than smoothed over.",
+    
+        category="source_unread",
     )
     section.disclose(
         DisclosureKind.SOURCE,

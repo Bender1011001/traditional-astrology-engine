@@ -1849,3 +1849,45 @@ def test_al_qabisi_refuses_a_lifespan_and_settles_a_hyleg(
     for forbidden in ("years_of_life", "death_year", "will_die"):
         assert forbidden not in blob
     assert not section.get("reading")
+
+
+# --- refusal taxonomy and maturity axes (external review P1) ---------------
+
+
+def test_every_refusal_carries_a_specific_category(fairfield_panel: dict) -> None:
+    """One [REFUSES] label concealed nine different situations. No more:
+    every refusal must name which kind it is, from the closed vocabulary."""
+    from src.engine.multitradition.types import REFUSAL_CATEGORIES
+
+    unclassified = []
+    for section in fairfield_panel["sections"]:
+        for d in section.get("disclosures", []):
+            if d["kind"] != "refusal":
+                continue
+            category = d.get("category")
+            if category not in REFUSAL_CATEGORIES:
+                unclassified.append((section["tradition_id"], d["subject"]))
+    assert not unclassified, unclassified
+
+
+def test_every_section_carries_a_maturity_assessment(fairfield_panel: dict) -> None:
+    """Multi-axis maturity replaces the single label (review finding 2)."""
+    axes = (
+        "category", "source_readiness", "computational_readiness",
+        "validation_coverage", "interpretation_readiness",
+        "publication_readiness",
+    )
+    for section in fairfield_panel["sections"]:
+        maturity = section.get("maturity")
+        assert maturity, f"no maturity assessment: {section['tradition_id']}"
+        for axis in axes:
+            assert maturity.get(axis), (section["tradition_id"], axis)
+
+
+def test_coverage_summary_is_generated_not_asserted(fairfield_panel: dict) -> None:
+    """The headline is derived from the maturity table, so it cannot claim
+    fifteen comparable traditions while five of them are calendars."""
+    summary = fairfield_panel.get("coverage_summary", "")
+    assert "calendar" in summary
+    assert "natal report" in summary
+    assert "15 traditions" not in summary
