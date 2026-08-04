@@ -1,7 +1,153 @@
 # Japanese Sukuyōdō (宿曜道) source audit
 
-Status: source foundation established; bounded T1299 rule pack complete; not production approval
-Updated: 2026-08-02
+Status: source foundation established; bounded T1299 rule pack complete; Japanese
+reception layer acquired; not production approval
+Updated: 2026-08-04
+
+## Correction, 2026-08-04: the calendar block was overstated
+
+The 2026-08-02 pass closed with this sentence: *the text supplies no way to convert a
+civil date into the lunar day its birth-mansion procedure requires*, and it called that
+an access problem whose missing document was "a calendar." That much is still true. What
+was wrong was the next step, taken in the defensibility spec and in the manifest rule
+`sukuyo.natal.birth_mansion_requires_lunar_calendar`: that **no named regime was
+available**, and that the Japanese-side calendar question was open.
+
+It is not open. It has a name, an author, a date, and an epoch that two surviving
+documents independently confirm.
+
+| | |
+|---|---|
+| Regime | **符天暦 Futian li / Futenreki** |
+| Author | 曹士蒍 Cao Shiwei |
+| Produced | 780–783 CE, updated around 806 |
+| Epoch | 660 CE |
+| In Japan by | 891, catalogued as 唐七曜符天暦 in the *Nihonkoku genzai sho mokuroku* |
+| Used by | *sukuyōshi*, "through the Heian and Kamakura periods" |
+
+And the state calendar alongside it was the **宣明暦 Senmyō reki**, brought to Japan in
+859 and adopted from 862 — the calendar whose staleness Kamo no Yasunori complained of in
+the mid-tenth century, prompting the mission that brought a Futian li recension back in
+957. *Sukuyōshi* were not sealed off from it: they officially participated in state
+calendar production between 995 and 1038, and argued with court calendrical experts about
+eclipse prediction into the thirteenth century.
+
+**The epoch is checkable and it checks.** The 1113 horoscope *Sukuyō unmei kanroku* states
+that 165,428 days had elapsed since its calendar's epoch. Its subject was born 15 January
+1113. Under Julian reckoning that birth is JDN 2127596; less 165,428 days is JDN 1962168,
+which is **15 February 660**. The second horoscope, *Sukuyō go unroku*, gives 222,245
+days for a subject born in 1268; measured from that same epoch day it lands on 6 August
+1268, and a person born then is 44 turning 45 in 1312, which is what that document says.
+Two separately transmitted manuscripts, two centuries apart, reckon from one day. That
+arithmetic was recomputed here rather than taken on the source's word.
+
+**What is still missing, stated precisely.** The Futian li's own tables. It is a lost
+calendar, reconstructed from later citation and from exactly the elapsed-day counts
+above. So the block moves from
+
+> no named lunisolar regime exists for this tradition
+
+to
+
+> the regime is named, dated and authored, and its parameters are not retrieved.
+
+The checklist row stays `source_gated`. It does **not** become `computable`, and saying
+otherwise would be the opposite error to the one being corrected here.
+
+**Why this is written up rather than quietly patched.** This is the sixth false ceiling
+this corpus has retired. The governing rule is that a ceiling is never asserted without a
+documented hunt, and the 2026-08-02 statement asserted one — it declared the Japanese
+calendar question unanswerable on the strength of a search that had returned catalogue
+metadata and stopped. The article that answers it, Kotyk 2018, was **already named in
+that pass's own list of recorded-not-used leads**. The lead was written down and not
+followed.
+
+## Correction, 2026-08-04: the encoded text is not the text Japanese practice used
+
+Acquired in the same pass and more uncomfortable. Yano 2013 has demonstrated that the
+"mainland recension" of the *Xiuyao jing* preserved in the Taishō canon differs
+considerably from the "Japanese recension," which traces to the ninth century, which
+Kotyk judges best represents the original, and which **was exclusively used in the
+medieval period.**
+
+Every one of the 32 rules in `sukuyo_rule_manifest.json` is extracted from the mainland
+recension. They are a faithful reading of a text that Japanese *sukuyōshi* did not use in
+the form encoded. This is not fatal — the two are recensions of one work, and the single
+point where they can be compared here agrees, on which see the worked example below — but
+until they are collated, **no rule in this repository may be described as "what Japanese
+sukuyōshi used."** The acquisition target is named and is old enough to be tractable:
+*Sukuyōkyō shukusatsu* 宿曜経縮刷, 2 vols, the typeset Japanese recension edited by
+Wakita Bunshō 脇田文紹, 1897.
+
+## The worked example the track did not have
+
+The 2026-08-02 worked-example inventory recorded, correctly, that no dated Sukuyōdō
+consultation with a named subject was in the retrieved corpus, and that this was the
+track's real gap. It is no longer.
+
+In **961**, the *sukuyōshi* Hōzō 法蔵 (905–969) and the *onmyōji* Kamo no Yasunori
+(917–977) disputed the natal mansion (本命宿) and personal ritual day (本命日) of
+**Murakami Tennō** (926–967), born on the **second day of the sixth lunar month** of
+Enchō 4. Kamo no Yasunori applied the *Xiuyao jing* table — the schematic procedure this
+repository already encoded on 2026-08-02 — and got **柳** (Āśleṣā).
+
+The encoded rules reproduce it exactly. Month 6's full-moon mansion is 女, index 20 in the
+canonical order; (20 + (2 − 15)) mod 27 = 7; index 7 is 柳. A wrong entry in either the
+month table or the mansion order would have given a different mansion.
+
+Three things make it worth more than a passing check:
+
+1. It is the defensibility standard's requirement 4 satisfied for this track — a dated
+   historical consultation, a named subject, a stated result, reproduced.
+2. It is a cross-recension check. Kotyk's value comes from the *Japanese* recension
+   (*Sukuyōkyō shukusatsu* 1: 13–15); the engine's comes from the Taishō mainland
+   recension. They agree at the one point currently comparable.
+3. **It reproduces the position that lost.** A third party, Yoshino Nichizō, ruled for
+   Hōzō on the mansion — determined from *the nakṣatra in which the Moon was actually
+   lodged at birth*, not from the table — and for Kamo no Yasunori on the ritual day.
+   Hōzō's basis was the *first*, 759 version of the *Xiuyao jing*, which says the
+   corresponding mansion is always the one the Moon occupies. So the tradition's own
+   arbitration set the schematic table aside for the natal question, and Kotyk reports
+   that the observational method evidently became standard: the 1113 horoscope's lunar
+   position is not taken from the table.
+
+That is a method fork of the first order and it is now encoded as one. An implementation
+that emitted only the schematic mansion would be emitting the answer this tradition
+rejected. It is also, quietly, a warning about the split verdict: the mansion question
+went to the Buddhist astrologer and the day question to the yin-yang office, which is
+evidence that the two remained distinct competing offices — the boundary rule
+`sukuyo.boundary.sukuyodo_is_not_onmyodo` is unaffected, and no Onmyōdō source is admitted
+on the strength of it.
+
+## What a Sukuyōdō reading actually looks like — corrected
+
+The 2026-08-02 audit set expectations as *mansion-relational and calendrical*, "close to
+the opposite of a Western psychological chart reading," with no houses. That description
+is accurate for **T1299**. It is wrong for **Japanese practice**.
+
+The *Sukuyō unmei kanroku* is a concentric horoscope: earthly branches as the twelve
+Jupiter stations, the twelve zodiac signs with planetary rulers, nine planets (including
+Rāhu and Ketu-as-lunar-apogee) placed against the lunar stations, and an outer ring of
+**twelve places** — 壽命 lifespan, 財庫 wealth, 兄弟 brothers, 田宅 estate, 男女 children,
+奴僕 slaves, 夫妻 marriage, 疾病 illness, 遷移 travel, 官祿 career, 福德 fortune, 禍害
+disaster. Kotyk notes these themes are largely consistent with Hellenistic doctrine,
+reaching East Asia through Iranian intermediaries. The planetary values carry fractions
+and are more precise than the *Qiyao rangzai jue* ephemerides.
+
+So the tradition Japanese *sukuyōshi* practised had a place doctrine after all, and it is
+a distant descendant of the same Hellenistic apparatus the Western report already runs.
+No delineation attached to any place has been read, and none is encoded; the correction is
+structural only.
+
+## What was added in the 2026-08-04 pass
+
+- one hash-pinned scholarly witness (Kotyk 2018, 50pp PDF and a page-addressed extraction);
+- a separate `japanese_reception_rule_manifest.json` with **13 rules** — kept separate
+  from the T1299 pack precisely because the Chinese text and the Japanese practice are
+  different evidence;
+- **16 vectors**, four of them recomputed arithmetic rather than reported claims;
+- one new registry source;
+- the three corrections above.
 
 ## Disambiguation, stated first because everything depends on it
 
@@ -67,7 +213,9 @@ document is a calendar, not a translation.
 | 宿曜經 *Xiuyao jing / Sukuyōkyō* | T21 no. 1299 | the whole tradition: mansions, signs, weekdays, relations, election | complete text retrieved, hash-pinned, read directly; 32 rules extracted with page/column/line citations; three internal arithmetic checks and one printed worked example all pass | single unreviewed reader; CBETA transcription not collated against a facsimile; no calendar conversion in the text |
 | 七曜攘災決 *Qiyao rangzai jue* | T21 no. 1308 | planetary positions and apotropaic procedure | complete text retrieved and hash-pinned; structure and opening read | **28-mansion system with a different 命宿 definition**; its tables are printed as grids and CBETA's linearization of them is unusable as data; nothing encoded |
 | 梵天火羅九曜 *Bontenkara kuyō* | T21 no. 1311 | nine-luminary age cycle | complete text retrieved and hash-pinned; opening read | a third scheme again (28 mansions, 九曜 by year of life); registered as a contrast witness only; nothing encoded |
-| Japanese practice manuals (宿曜占文抄 etc.) | — | what Japanese sukuyōshi actually did | catalogue metadata only | not retrievable as text; this is the track's real Japanese-side gap |
+| Japanese practice manuals (宿曜占文抄 etc.) | — | what Japanese sukuyōshi actually did | catalogue metadata only | not retrievable as text; still the Japanese-side manuscript gap |
+| Kotyk, "Japanese Buddhist Astrology and Astral Magic," *JJRS* 45/1 (2018) | — | the Japanese reception layer: calendar regimes, the 961 birth-mansion debate, two dated horoscopes, the recension question | retrieved 2026-08-03, hash-pinned, read; 13 rules and 16 vectors extracted; two of its numerical claims recomputed and closing | **secondary scholarship, not a primary Japanese document** — everything from it is grade B, and the primary chain it cites (Momo 1969/1990, Yano 2013, *Ono ruihi shō*, *Asaba shō*) has not been opened |
+| *Sukuyōkyō shukusatsu* 宿曜経縮刷, ed. Wakita Bunshō, 1897 | — | the **Japanese recension** of the *Xiuyao jing*, i.e. the text medieval practice actually used | not acquired | named acquisition target; until it is collated against T1299 no rule here may be called "what sukuyōshi used" |
 
 ## The controlling text
 

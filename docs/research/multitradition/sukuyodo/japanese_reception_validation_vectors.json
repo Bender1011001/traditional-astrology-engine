@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "tradition_id": "japanese_sukuyodo",
+  "source_pack_id": "sukuyodo_japanese_reception_v1",
+  "status": "research_only; every arithmetic vector was computed in this pass rather than asserted, and every reportorial vector states plainly that it fixes a claim rather than a calculation",
+  "source_ids": [
+    "sukuyodo_kotyk_jjrs_45_1_2018",
+    "sukuyodo_xiuyao_jing_t1299_cbeta"
+  ],
+  "vectors": [
+    {
+      "vector_id": "sukuyo.jp.v.futian_li_named_and_dated",
+      "rule_ids": ["sukuyo.jp.futian_li_is_the_named_regime"],
+      "inputs": {
+        "question": "does a named lunisolar calendar regime exist for Sukuyodo practice"
+      },
+      "expected": {
+        "answer": "yes",
+        "regime_id": "futian_li",
+        "regime_name_cjk": "符天暦",
+        "author": "曹士蒍 Cao Shiwei",
+        "produced_between": [780, 783],
+        "updated_around": 806,
+        "used_by": "sukuyoshi through the Heian and Kamakura periods",
+        "retires_claim": "sukuyo.natal.birth_mansion_requires_lunar_calendar's statement that no named regime is available",
+        "does_not_retire": "the block itself; the regime's tables are still not in this repository",
+        "checklist_status_after": "source_gated"
+      },
+      "provenance": "Kotyk 2018, journal pp. 40 and 56, read in the hash-pinned PDF sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.epoch_from_the_1113_horoscope",
+      "rule_ids": ["sukuyo.jp.futian_li_epoch_is_660"],
+      "inputs": {
+        "birth_date_of_the_subject": "1113-01-15",
+        "calendar_of_that_date": "Julian",
+        "elapsed_days_stated_by_the_document": 165428
+      },
+      "expected": {
+        "birth_jdn": 2127596,
+        "epoch_jdn": 1962168,
+        "epoch_date_julian": "660-02-15",
+        "epoch_year": 660,
+        "agrees_with_source_statement": "the source says 'a start date of around 660'; the computation lands in February 660",
+        "computed_not_asserted": true
+      },
+      "provenance": "Elapsed-day figure from Kotyk 2018, journal p. 62. Julian-calendar JDN conversion computed in this pass: JDN(1113-01-15 Julian) = 2127596; 2127596 - 165428 = 1962168, which converts back to 15 February 660 Julian."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.epoch_from_the_1268_horoscope",
+      "rule_ids": ["sukuyo.jp.futian_li_epoch_is_660"],
+      "inputs": {
+        "elapsed_days_stated_by_the_document": 222245,
+        "epoch_jdn_taken_from_the_1113_horoscope": 1962168
+      },
+      "expected": {
+        "implied_birth_jdn": 2184413,
+        "implied_birth_date_julian": "1268-08-06",
+        "stated_birth_year_in_the_source": 1268,
+        "consistent": true,
+        "age_check": "a subject born 6 August 1268 is 44 in early 1312 and 44 turning 45 later that year, matching the source's 'forty-four or forty-five years old'",
+        "why_this_is_a_real_test": "the two documents are two centuries apart and were transmitted separately; a shared epoch day is not a result that a wrong epoch could produce by accident"
+      },
+      "provenance": "Elapsed-day figures from Kotyk 2018, journal p. 62 (165,428 for 1113; 222,245 for the Sukuyo go unroku, citing Momo 1990, 142). Forward conversion computed in this pass."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.two_horoscopes_daycount_difference_closes",
+      "rule_ids": ["sukuyo.jp.futian_li_epoch_is_660"],
+      "inputs": {
+        "count_a": 165428,
+        "count_b": 222245,
+        "date_a": "1113-01-15"
+      },
+      "expected": {
+        "difference_days": 56817,
+        "date_a_plus_difference_julian": "1268-08-06",
+        "closure": "the difference between the two stated counts carries the first subject's birth date exactly onto the second subject's derived birth date, which is the same statement as the shared epoch viewed from the other end",
+        "note": "the source's own rounding, '222,245 days equaling 608.89 modern years of 365 days', is reproduced: 222245 / 365 = 608.890"
+      },
+      "provenance": "Computed in this pass from the two figures Kotyk reports at journal p. 62."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.futian_li_catalogued_by_891",
+      "rule_ids": ["sukuyo.jp.futian_li_in_japan_by_891"],
+      "inputs": {
+        "catalogue": "Nihonkoku genzai sho mokuroku 日本国見在書目録",
+        "compiled_by": "Fujiwara Sukeyo 藤原佐世 (847-898)",
+        "compiled_in": 891
+      },
+      "expected": {
+        "entry_title": "唐七曜符天暦",
+        "conclusion": "the Futian li, at least in its seven-luminary form, was in Japan before 891",
+        "gap_to_first_recorded_practice": "roughly seventy years: the first Japanese calendrical specialist with it is Nichien, active in the 950s",
+        "arrival_date_known": false
+      },
+      "provenance": "Kotyk 2018, journal p. 41 note 4, citing the National Diet Library edition p. 33."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.senmyo_reki_dates",
+      "rule_ids": ["sukuyo.jp.senmyo_reki_is_the_state_calendar"],
+      "inputs": {
+        "question": "which calendar was the Japanese state calendar in the period of Sukuyodo practice, and is it the same as the astrologers' calendar"
+      },
+      "expected": {
+        "regime_id": "senmyo_reki",
+        "regime_name_cjk": "宣明暦",
+        "brought_to_japan": 859,
+        "adopted_from": 862,
+        "same_as_futian_li": false,
+        "sukuyoshi_in_state_calendar_production": {"from": 995, "to": 1038, "earliest_named": "Ninso"},
+        "engine_consequence": "two named regimes must be carried, and any emitted lunar date must say which one produced it"
+      },
+      "provenance": "Kotyk 2018, journal pp. 55 and 57, the latter citing Takada 1992, 42."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.nichien_dates",
+      "rule_ids": ["sukuyo.jp.nichien_transmission_953_957"],
+      "inputs": {
+        "agent": "Nichien 日延"
+      },
+      "expected": {
+        "departed": 953,
+        "returned": 957,
+        "elapsed_years": 4,
+        "destination": "Wuyue 吳越",
+        "acquired": ["a version of the Futian li", "ephemerides (licheng 立成)"],
+        "classified_in_the_nichu_reki_as": "Rokumeishi 禄命師, not Sukuyoshi",
+        "first_sukuyoshi_listed": "Hozo 法蔵 (905-969)"
+      },
+      "provenance": "Kotyk 2018, journal pp. 55-56, citing Yamashita 1990, 488-89 and the Nichu reki fasc. 13, 56."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.birth_mansion_procedure_is_regime_keyed",
+      "rule_ids": ["sukuyo.jp.birth_mansion_under_a_named_regime"],
+      "inputs": {
+        "civil_birth": "any real dated birth",
+        "regime_id": null
+      },
+      "expected": {
+        "emitted": false,
+        "reason": "regime_id is null; the procedure is defined only relative to a named regime",
+        "required_before_emission": [
+          "a regime_id from the declared candidate set",
+          "that regime's month numbering and intercalation rules",
+          "its day boundary and locality",
+          "the bright/dark fortnight convention of T1299 chapter 6",
+          "a valid date range"
+        ],
+        "formula_when_all_present": "mansion_index = (index_of_full_moon_mansion(lunar_month) + (lunar_day - 15)) mod 27"
+      },
+      "provenance": "T1299 T21.0394c28-0395a03 and T21.0395b01-b06 for the procedure; the regime keying is this pack's specification following Kotyk 2018 pp. 55-56."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.regime_gate_agrees",
+      "rule_ids": ["sukuyo.jp.regime_gate_requires_agreement"],
+      "inputs": {
+        "candidate_regimes": ["futian_li", "senmyo_reki"],
+        "hypothetical_lunar_dates": {"futian_li": {"month": 6, "day": 2}, "senmyo_reki": {"month": 6, "day": 2}},
+        "note": "hypothetical inputs; neither regime is implemented, so these values are supplied to exercise the gate, not derived from a calendar"
+      },
+      "expected": {
+        "mansion_per_regime": {"futian_li": "柳", "senmyo_reki": "柳"},
+        "agreement": true,
+        "emitted": true,
+        "required_disclosure": "the mansion was tested under both named regimes and did not move",
+        "label": "configured_method"
+      },
+      "provenance": "Gate behaviour specified by this pack; the mansion values are computed from the encoded T1299 table for lunar 6/2 and are the same value the 961 debate reports."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.regime_gate_refuses_on_disagreement",
+      "rule_ids": ["sukuyo.jp.regime_gate_requires_agreement"],
+      "inputs": {
+        "candidate_regimes": ["futian_li", "senmyo_reki"],
+        "hypothetical_lunar_dates": {"futian_li": {"month": 6, "day": 2}, "senmyo_reki": {"month": 6, "day": 3}},
+        "note": "hypothetical inputs constructed to differ by one lunar day, the smallest disagreement two regimes can have"
+      },
+      "expected": {
+        "mansion_per_regime": {"futian_li": "柳", "senmyo_reki": "星"},
+        "agreement": false,
+        "emitted": false,
+        "emitted_instead": "the disagreement itself: each regime, its lunar date, and the mansion it would give",
+        "why_one_day_matters": "the mansion advances one step per lunar day, so a single day of regime disagreement changes the anchor of the entire reading and every three-nine category derived from it"
+      },
+      "provenance": "Computed from the encoded T1299 canonical order: month 6 full-moon mansion 女 at index 20; day 2 gives index 7 = 柳, day 3 gives index 8 = 星."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.hozo_fork_is_preserved",
+      "rule_ids": ["sukuyo.jp.hozo_observational_fork"],
+      "inputs": {
+        "question": "which derivation of the natal mansion does this track report as the tradition's own"
+      },
+      "expected": {
+        "branches": [
+          {"branch": "schematic", "source": "the Xiuyao jing table (764 recension)", "advocate": "Kamo no Yasunori", "outcome_in_961": "set aside for the natal question"},
+          {"branch": "observational", "source": "the naksatra in which the Moon was actually lodged at birth, supported by the 759 version's statement", "advocate": "Hozo", "outcome_in_961": "upheld"}
+        ],
+        "adjudicator": "Yoshino Nichizo 吉野日蔵, in three fascicles",
+        "both_emitted_or_neither": true,
+        "averaging_forbidden": true,
+        "later_standard": "observational; the 1113 horoscope's lunar position is not from the Xiuyao jing table",
+        "contemporary_dissent_recorded": "Kanshin held that Hozo's conclusion had no received basis and came from his own views"
+      },
+      "provenance": "Kotyk 2018, journal pp. 56-57, citing Ono ruihi sho SZ 36: 85-86, Asaba sho TZ 9: 457b15-19, Gyorin sho T 2409, 76: 458c8-11, Sukuyokyo shukusatsu 2: 7, Yamashita 1990, 492-494."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.honmyo_nichi_split_verdict",
+      "rule_ids": ["sukuyo.jp.honmyo_nichi_is_sexagenary", "sukuyo.jp.hozo_observational_fork"],
+      "inputs": {
+        "case": "the 961 debate over Murakami Tenno",
+        "questions": ["natal asterism 本命宿", "ritual day 本命日"]
+      },
+      "expected": {
+        "verdict": {
+          "natal_asterism": "Hozo's explanation",
+          "ritual_day": "Kamo no Yasunori's explanation"
+        },
+        "split": true,
+        "boundary_unchanged": "sukuyo.boundary.sukuyodo_is_not_onmyodo still holds; two distinct offices argued and each carried one point, which is evidence of separation rather than merger",
+        "no_onmyodo_source_admitted": true
+      },
+      "provenance": "Kotyk 2018, journal p. 56."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.murakami_tenno_natal_mansion",
+      "rule_ids": ["sukuyo.jp.murakami_tenno_worked_example", "sukuyo.jp.birth_mansion_under_a_named_regime"],
+      "inputs": {
+        "subject": "Murakami Tenno (926-967)",
+        "lunar_month": 6,
+        "lunar_day": 2,
+        "reign_era": "Encho 4 (926)",
+        "sexagenary_day": "丁亥 tei gai",
+        "sexagenary_year": "丙戌 hei jutsu"
+      },
+      "expected": {
+        "full_moon_mansion_of_month_6": "女",
+        "canonical_index_of_that_mansion": 20,
+        "arithmetic": "(20 + (2 - 15)) mod 27 = 7",
+        "mansion_index": 7,
+        "mansion_cjk": "柳",
+        "sanskrit": "Aslesa",
+        "source_reported_value": "柳",
+        "match": true,
+        "what_this_validates": [
+          "the twelve-month full-moon mansion table",
+          "the canonical 27-mansion order beginning at 昴",
+          "the schematic birth-mansion formula"
+        ],
+        "standing_of_the_result": "it reproduces the position that LOST the 961 arbitration on the natal question, and is used as an encoding check rather than as the tradition's preferred answer"
+      },
+      "provenance": "Reported value from Kotyk 2018, journal p. 56, citing Sukuyokyo shukusatsu 1: 13-15. Engine value computed in this pass from the encoded T1299 month table (T21.0394c20-c28) and canonical order (T21.0388c08-0390c13)."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.recension_limitation_recorded",
+      "rule_ids": ["sukuyo.jp.japanese_recension_is_not_the_taisho_text"],
+      "inputs": {
+        "text_encoded_by_this_repository": "Taisho T21n1299, the mainland recension"
+      },
+      "expected": {
+        "text_used_in_medieval_japan": "the Japanese recension",
+        "same_work": true,
+        "considerably_different": true,
+        "authority": "Yano 2013, 226-50, as reported by Kotyk",
+        "consequence": "no rule in this repository may be described as 'what Japanese sukuyoshi used' until the two recensions are collated",
+        "acquisition_target": "Sukuyokyo shukusatsu 宿曜経縮刷, 2 vols, ed. Wakita Bunsho 脇田文紹, 1897",
+        "one_point_of_agreement_observed": "the month-6 day-2 table value 柳 agrees between the Japanese recension as Kotyk reports it and the mainland recension as encoded here"
+      },
+      "provenance": "Kotyk 2018, journal p. 40 note 3. The single agreement point is the Murakami vector above."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.twelve_places_inventory",
+      "rule_ids": ["sukuyo.jp.horoscopy_uses_twelve_places"],
+      "inputs": {
+        "document": "Sukuyo unmei kanroku 宿曜運命勘録",
+        "subject_birth": "15 January 1113",
+        "document_produced": "around 1152"
+      },
+      "expected": {
+        "place_count": 12,
+        "places": ["壽命位", "財庫位", "兄弟位", "田宅位", "男女位", "奴僕位", "夫妻位", "疾病位", "遷移位", "官祿位", "福德位", "禍害位"],
+        "planet_count": 9,
+        "includes_rahu_and_ketu": true,
+        "ketu_redefined_as": "the lunar apogee",
+        "correction_to_this_track": "the T1299 defensibility spec says a Sukuyodo reading is mansion-relational with no place doctrine; that is true of the Chinese source text and false of Japanese practice",
+        "delineations_encoded": 0
+      },
+      "provenance": "Kotyk 2018, journal pp. 62-64 with figure 14, citing Yano 2013, 192 and Ito 1980, 224."
+    },
+    {
+      "vector_id": "sukuyo.jp.v.dating_window_for_practice_claims",
+      "rule_ids": ["sukuyo.jp.sukuyodo_emerges_as_a_community_after_hozo"],
+      "inputs": {
+        "claim_form": "'Sukuyodo held X'"
+      },
+      "expected": {
+        "admissible_only_with": "a date",
+        "community_emergence_window": [969, 1020],
+        "text_present_in_japan_from": "before 891",
+        "gap_years_between_text_and_community": "roughly 80 to 130",
+        "peak_period": "Insei 1086-1185 and Kamakura 1185-1333",
+        "counter_pressure": "exclusion of sukuyoshi from court calendar and astronomy as those became the professional domain of the Kamo and Abe households"
+      },
+      "provenance": "Kotyk 2018, journal pp. 57-58, citing Toda 2007, 46; Yamashita 1990, 508-511; Akazawa 2007, 1003 and 1017."
+    }
+  ]
+}

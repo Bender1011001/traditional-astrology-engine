@@ -75,7 +75,7 @@ EXPECTED_AUDIT_DIRECTORIES = {
 }
 
 EXPECTED_STATUS_COUNTS = {
-    "research_verified": 29,
+    "research_verified": 31,
     "source_limited": 55,
     "not_implemented": 3,
 }

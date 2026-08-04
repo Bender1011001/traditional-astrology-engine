@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "tradition_id": "vietnamese_tu_vi",
+  "source_pack_id": "vietnam_tu_vi_phu_le_quy_don_v1",
+  "status": "research_only. Every vector resolves to a PTV_Lnnnn address in the hash-pinned line rendering, and every refusal vector asserts that nothing is emitted rather than that something is.",
+  "source_ids": [
+    "vietnam_phu_tu_vi_le_quy_don_archive_2017",
+    "vietnam_tu_vi_dong_a_nguyen_dong_hung_2026",
+    "vietnam_tu_vi_dau_so_tan_bien_bibliographic_witness"
+  ],
+  "vectors": [
+    {
+      "vector_id": "vietnam.tuvi.v.witness_identity",
+      "rule_ids": ["vietnam.tuvi.phu_is_a_vietnamese_language_delineation_source"],
+      "inputs": {"question": "what is this pack's controlling text and what does it cover"},
+      "expected": {
+        "title": "Phú Tử Vi Lê Quí Đôn",
+        "language": "Vietnamese",
+        "form": "lục bát verse",
+        "palace_sections": 12,
+        "appended_sections": ["Đoán sinh tử", "Số đàn bà, con gái"],
+        "supplies_delineation": true,
+        "supplies_construction": false,
+        "usable_line_range": "PTV_L0001-PTV_L0547",
+        "total_lines": 778
+      },
+      "provenance": "Section headings counted in phu_tu_vi_le_qui_don_lines.txt, sha256 e1f2b94094aae4035eac4646240efd7d40ba4bdb8d91da1998042f7c1f2c8dbd."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.attribution_is_hedged",
+      "rule_ids": ["vietnam.tuvi.attribution_to_le_quy_don_is_traditional"],
+      "inputs": {"proposed_description": "an eighteenth-century Vietnamese work by Lê Quý Đôn"},
+      "expected": {
+        "accepted": false,
+        "corrected_description": "a phú traditionally attributed to Lê Quý Đôn, known here through a 2017 transcription collated against a 1968 printing",
+        "earliest_dated_witness_held": 1968,
+        "held_at_first_hand": false,
+        "rights_conclusion": "unresolved; the pack rests nothing on the attribution being true"
+      },
+      "provenance": "Cover matter at PTV_L0014-L0016 and the transcriber's note at PTV_L0001-L0008."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.palace_order_reversal",
+      "rule_ids": ["vietnam.tuvi.palace_enumeration_is_reverse_of_the_chinese_order", "vietnam.boundary.vietnamese_tuvi_is_not_the_chinese_quanshu"],
+      "inputs": {
+        "vietnamese_sequence": ["Mệnh", "Phụ Mẫu", "Phúc Đức", "Điền Trạch", "Quan Lộc", "Nô Bộc", "Thiên Di", "Tật Ách", "Tài Bạch", "Tử Tức", "Phu Thê", "Huynh Đệ"],
+        "chinese_sequence": ["命", "兄弟", "夫妻", "子女", "財帛", "疾厄", "遷移", "奴僕", "官祿", "田宅", "福德", "父母"]
+      },
+      "expected": {
+        "position_map": {"2": 12, "3": 11, "4": 10, "5": 9, "6": 8, "7": 7, "8": 6, "9": 5, "10": 4, "11": 3, "12": 2},
+        "relation": "vietnamese[k] == chinese[14-k] for k in 2..12, with both sequences beginning at the life palace",
+        "exact_reversal": true,
+        "counterexamples": 0,
+        "second_palace_vietnamese": "Phụ Mẫu (parents)",
+        "second_palace_chinese": "兄弟 (siblings)"
+      },
+      "provenance": "Vietnamese sequence read from the ordinal words in PTV_L0021, L0111, L0126, L0259, L0280, L0307, L0326, L0359, L0396, L0425, L0452, L0487. Chinese sequence stated for comparison from general knowledge of the Quanshu enumeration and flagged in the rule as needing an edition pin."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.menh_cell_tu_vi",
+      "rule_ids": ["vietnam.tuvi.menh_palace_star_delineations"],
+      "inputs": {"palace": "Mệnh", "star": "Tử Vi"},
+      "expected": {
+        "line": "PTV_L0023",
+        "vietnamese_ocr": "Tử Vĩ trọng hậu dung hình.",
+        "vietnamese_normalised": "Tử Vi trọng hậu dung hình",
+        "engine_rendering": "Tử Vi: weighty and generous in bearing.",
+        "refused": false,
+        "rendering_is_unreviewed": true
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0023."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.menh_cell_tham_lang_is_refused",
+      "rule_ids": ["vietnam.tuvi.menh_palace_star_delineations"],
+      "inputs": {"palace": "Mệnh", "star": "Tham Lang"},
+      "expected": {
+        "line": "PTV_L0035-L0036",
+        "vietnamese_ocr": "Tham Lang tính bẩm thung dung. / Say miền gái đẹp, rượu nồng mùi ngon.",
+        "refused": true,
+        "rendered_to_reader": false,
+        "kept_in_trace": true,
+        "refusal_reason": "moralising sexual and appetite judgement about a person",
+        "demonstrates": "per-cell refusal inside an otherwise emittable palace, rather than refusing the whole palace"
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0035-L0036."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.menh_cell_count",
+      "rule_ids": ["vietnam.tuvi.menh_palace_star_delineations"],
+      "inputs": {"palace": "Mệnh", "range": "PTV_L0020-L0040"},
+      "expected": {"cells_encoded": 13, "cells_refused": 1, "cells_emittable_in_research": 12}
+    ,
+      "provenance": "Counted from the encoded cell list in tuvi_rule_manifest.json."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.tuan_triet_occurrences",
+      "rule_ids": ["vietnam.tuvi.tuan_and_triet_are_operative_agents"],
+      "inputs": {"terms": ["Tuần", "Triệt"]},
+      "expected": {
+        "occurrences": 3,
+        "lines": ["PTV_L0118", "PTV_L0176", "PTV_L0489"],
+        "palaces": ["Phụ Mẫu", "Phúc Đức", "Huynh Đệ"],
+        "operative_agents": true,
+        "placement_rule_available": false
+      },
+      "provenance": "String search over phu_tu_vi_le_qui_don_lines.txt, sha256 e1f2b94094aae4035eac4646240efd7d40ba4bdb8d91da1998042f7c1f2c8dbd."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.phuc_duc_is_mostly_tomb_geomancy",
+      "rule_ids": ["vietnam.tuvi.phuc_duc_palace_carries_tomb_geomancy"],
+      "inputs": {"palace": "Phúc Đức", "range": "PTV_L0125-L0257"},
+      "expected": {
+        "section_lines": 133,
+        "tomb_block_lines": 104,
+        "tomb_block_share": 0.78,
+        "longest_palace_section": true,
+        "transition_line": "PTV_L0155",
+        "closing_line": "PTV_L0257",
+        "apparatus_present": ["Trường Sinh as khởi tổ", "Thanh Long as long hành and long thủy on the left", "Bạch Hổ as hổ thủy on the right", "phân kim by branch characters", "dương mộ and âm mộ"],
+        "present_in_chinese_quanshu_fude_palace": false,
+        "caveat": "the absence claim is stated from general knowledge and is flagged in the rule as needing an edition pin"
+      },
+      "provenance": "Line counts computed over phu_tu_vi_le_qui_don_lines.txt; the tomb block runs PTV_L0154-L0257 inclusive."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.landform_table_entries",
+      "rule_ids": ["vietnam.tuvi.phuc_duc_star_landform_correspondence"],
+      "inputs": {"range": "PTV_L0236-L0255"},
+      "expected": {
+        "entries": 18,
+        "spot_checks": [
+          {"line": "PTV_L0238", "star": "Thiên Cơ", "assigned": "Mộc tinh"},
+          {"line": "PTV_L0239", "star": "Vũ Khúc", "assigned": "Kim tinh"},
+          {"line": "PTV_L0241", "star": "Liêm Trinh", "assigned": "Hỏa"},
+          {"line": "PTV_L0244", "star": "Phá Quân", "assigned": "Thủy"},
+          {"line": "PTV_L0248", "star": "Thiên Quan, Thiên Phúc", "assigned": "gần Phật, Thần"}
+        ],
+        "excluded_lines": ["PTV_L0249", "PTV_L0250", "PTV_L0251"],
+        "exclusion_reason": "corpse and killing clauses, handled by the refusal rules"
+      },
+      "provenance": "Read from phu_tu_vi_le_qui_don_lines.txt PTV_L0236-L0255."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.dien_trach_cells",
+      "rule_ids": ["vietnam.tuvi.dien_trach_palace_delineations"],
+      "inputs": {"palace": "Điền Trạch", "star": "Cự Môn"},
+      "expected": {
+        "line": "PTV_L0267-L0268",
+        "vietnamese_ocr": "Cự Môn tổ nghiệp tan tành. / Sinh ra đổi chác sau rành được yên.",
+        "engine_rendering": "Cự Môn: the ancestral estate is scattered; trading follows, and afterwards it settles.",
+        "refused": false,
+        "palace_cell_count": 9,
+        "palace_refused_cells": 0
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0258-L0278."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.quan_loc_cells",
+      "rule_ids": ["vietnam.tuvi.quan_loc_palace_delineations"],
+      "inputs": {"palace": "Quan Lộc", "star": "Liêm Trinh"},
+      "expected": {
+        "line": "PTV_L0290-L0291",
+        "vietnamese_ocr": "Liêm Trinh vũ chức, quyển cao. / Nhược bằng ngộ hãm , khỏi nào hình danh.",
+        "engine_rendering": "Liêm Trinh: military office and high authority; if fallen, no escape from punishment and reputation harm.",
+        "fork_structure": "miếu/hãm - a placement fork stated in the same couplet, which is the phú's standard device",
+        "palace_cell_count": 9
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0279-L0305."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.no_boc_class_clause_refused",
+      "rule_ids": ["vietnam.tuvi.no_boc_palace_delineations"],
+      "inputs": {"palace": "Nô Bộc", "line": "PTV_L0314-L0315"},
+      "expected": {
+        "vietnamese_ocr": "No thì nó ở hầu ônệ. / Đói thì nó bước chẳng mong nỗi gì.",
+        "refused": true,
+        "rendered_to_reader": false,
+        "refusal_reason": "a class judgement about servants presented as a claim about their character",
+        "palace_cell_count": 8,
+        "palace_refused_cells": 1
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0314-L0315."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.tai_bach_cells",
+      "rule_ids": ["vietnam.tuvi.tai_bach_palace_delineations"],
+      "inputs": {"palace": "Tài Bạch", "star": "Lộc Tồn with Hóa Lộc"},
+      "expected": {
+        "line": "PTV_L0414",
+        "vietnamese_ocr": "Lộc Tồn, Hóa Lộc giàu sang trăm đường.",
+        "engine_rendering": "Lộc Tồn and Hóa Lộc: wealth and rank in a hundred ways.",
+        "palace_cell_count": 10,
+        "financial_advice_permitted": false
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0395-L0423."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.lifespan_clause_refused",
+      "rule_ids": ["vietnam.tuvi.lifespan_clauses_are_refused"],
+      "inputs": {"palace": "Phúc Đức", "star": "Thiên Đồng, Thiên Lương, Tử Vi, Thiên Phủ"},
+      "expected": {
+        "line": "PTV_L0132-L0133",
+        "source_says": "a span above eighty or ninety",
+        "emitted_to_reader": null,
+        "refused": true,
+        "kept_in_trace": true,
+        "clauses_refused_in_this_block": 5,
+        "reason": "a lifespan number shown to a reader is a death prediction"
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0131-L0153."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.tat_ach_palace_refused_whole",
+      "rule_ids": ["vietnam.tuvi.tat_ach_palace_is_medical_and_refused"],
+      "inputs": {"palace": "Tật Ách", "any_star": true},
+      "expected": {
+        "emitted_cells": 0,
+        "refused_scope": "whole palace",
+        "range": "PTV_L0358-L0394",
+        "structural_statement_permitted": "that the tradition has an illness palace and reads it by star",
+        "cell_application_permitted": false,
+        "worst_case_cells_recorded": ["PTV_L0361 blindness", "PTV_L0364 madness"]
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0358-L0394."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.reproductive_and_gender_refusals",
+      "rule_ids": ["vietnam.tuvi.reproductive_marital_and_gender_clauses_are_refused"],
+      "inputs": {"sections": ["Tử Tức", "Phu Thê", "Huynh Đệ sexual clauses", "Số đàn bà con gái"]},
+      "expected": {
+        "emitted": 0,
+        "refused_blocks": 4,
+        "grounds": ["reproductive prediction", "sexual-morality judgement", "separate and subordinate procedure for women"],
+        "child_sex_prediction_line": "PTV_L0426-L0427",
+        "women_section_premise_line": "PTV_L0539",
+        "recorded_in_trace": true,
+        "deleted_from_trace": false
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0424-L0522 and PTV_L0535-L0547."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.death_timing_refused",
+      "rule_ids": ["vietnam.tuvi.death_timing_section_is_refused"],
+      "inputs": {"section": "Đoán sinh tử", "range": "PTV_L0523-L0534"},
+      "expected": {
+        "emitted": 0,
+        "refused": true,
+        "mechanism_recorded": "Thái Tuế and the annual cycle against the period palace, with great and small periods coinciding",
+        "source_purpose_line": "PTV_L0534",
+        "also_refused": ["PTV_L0338-L0339", "PTV_L0340-L0341"],
+        "timing_method_may_be_described": true,
+        "timing_method_may_be_run_for_death": false
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt PTV_L0523-L0534 and PTV_L0338-L0341."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.construction_fails_closed",
+      "rule_ids": ["vietnam.tuvi.no_chart_construction_in_this_witness"],
+      "inputs": {"request": "build a Vietnamese Tử Vi chart for a birth"},
+      "expected": {
+        "chart_emitted": false,
+        "reason": "no construction rule exists in this witness or anywhere in this repository for Vietnamese Tử Vi",
+        "missing": ["cung Mệnh from lunar month and hour", "cung Thân", "ngũ hành cục", "placement of Tử Vi", "northern and southern series origins", "placement of Tuần and Triệt"],
+        "chinese_procedure_substituted": false,
+        "ziwei_module_reused_under_a_vietnamese_label": false,
+        "named_acquisition_target": "the Lập thành section of Vân Đằng Thái Thứ Lang, Tử Vi Đẩu Số Tân Biên, Tín Đức Thư Xã, 1957"
+      },
+      "provenance": "Absence established by reading the whole witness; the acquisition target is named in the bibliographic witness, sha256 8f7e5159dccc879306edd8324323d995840ad36f6e45ec89eb0113b75e30f57b."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.labelling_boundary",
+      "rule_ids": ["vietnam.boundary.vietnamese_tuvi_is_not_the_chinese_quanshu"],
+      "inputs": {"candidate_output": "a delineation drawn from the Chinese Quanshu, labelled 'Vietnamese Tử Vi'"},
+      "expected": {
+        "permitted": false,
+        "required_label": "the lineage of each item, per item",
+        "shared_sources_with_ziwei_track": 0,
+        "shared_rules_with_ziwei_track": 0,
+        "shared_vectors_with_ziwei_track": 0,
+        "distinguishing_evidence_count": 4
+      },
+      "provenance": "Boundary asserted by this pack; the four distinguishing observations are the enumeration reversal, the tomb block, the Vietnamese verse form, and the Tuần/Triệt occurrences."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.dong_a_yields_no_technique",
+      "rule_ids": ["vietnam.tuvi.dong_a_is_reception_not_a_rulebook"],
+      "inputs": {"work": "Tử Vi Đông A (2026, CC0)", "searched_for": ["an sao", "cục", "vòng Tràng Sinh", "lập thành", "đại hạn", "tiểu hạn", "giờ Tý"]},
+      "expected": {
+        "construction_tables_found": 0,
+        "delineation_tables_found": 0,
+        "reception_statements_encoded": 2,
+        "rules_permitted_to_cite_it": ["vietnam.tuvi.dong_a_is_reception_not_a_rulebook"],
+        "evidence_grade": "E"
+      },
+      "provenance": "Diacritic-insensitive term counts over tu_vi_dong_a_djvu.txt, sha256 64d4ff067ae5c0d604eac901f534cf21a18b0fa38b6dbdaea6b36cac59722c8a: an sao 0, lập thành 0, đại hạn 0, tiểu hạn 0, giờ Tý 0, vòng Tràng Sinh 0."
+    },
+    {
+      "vector_id": "vietnam.tuvi.v.ocr_tail_excluded",
+      "rule_ids": ["vietnam.tuvi.ocr_tail_is_unusable"],
+      "inputs": {"range": "PTV_L0548-L0778"},
+      "expected": {
+        "lines_in_range": 231,
+        "share_of_witness": 0.3,
+        "rules_citing_this_range": 0,
+        "emended": false,
+        "sample_line": "PTV_L0553",
+        "verdict": "unrecoverable Vietnamese; recorded as a transcription defect and left unemended"
+      },
+      "provenance": "phu_tu_vi_le_qui_don_lines.txt, lines 548 to 778 of 778."
+    }
+  ]
+}

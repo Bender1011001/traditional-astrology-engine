@@ -1,0 +1,608 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "tradition_id": "japanese_sukuyodo",
+  "school_id": "heian_kamakura_sukuyoshi_practice",
+  "source_pack_id": "sukuyodo_japanese_reception_v1",
+  "source_edition_id": "kotyk_jjrs_45_1_2018",
+  "source_registry_ids": [
+    "sukuyodo_kotyk_jjrs_45_1_2018",
+    "sukuyodo_xiuyao_jing_t1299_cbeta",
+    "sukuyodo_qiyao_rangzai_jue_t1308_cbeta"
+  ],
+  "implementation_status": "not_implemented",
+  "publication_status": "research_only",
+  "evidence_note": "This pack is the Japanese reception layer that the T1299 pack declared missing. Its controlling witness is a modern scholarly article read directly in a hash-pinned PDF, not a primary Japanese manuscript, so its rules are grade B: they report what a specialist says the primary Japanese record contains, with the primary citations he gives carried through verbatim so a reviewer can go to them. Two of its claims - the Futian li epoch and the internal consistency of two dated horoscopes' elapsed-day counts - were recomputed here rather than taken on the article's word, and both close. The single most consequential correction this pack makes is that the birth-mansion refusal in sukuyo_rule_manifest.json was justified by 'no named lunisolar regime exists'; a named, dated regime does exist and is recorded here.",
+  "rules": [
+    {
+      "rule_id": "sukuyo.jp.futian_li_is_the_named_regime",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "heian_and_kamakura_japan_10th_to_14th_century",
+      "domain": "calendar",
+      "scope": {
+        "applies_to": "the calendar regime under which a Japanese Sukuyodo birth mansion was actually derived",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "question": "which lunisolar calendar did sukuyoshi use when they converted a birth into the lunar month and day that T1299's birth-mansion procedure requires",
+        "witness": "Kotyk 2018 states without hedging that the Futian li was used by the Sukuyoshi through the Heian and Kamakura periods, citing Momo 1969, 400-408"
+      },
+      "conclusion": {
+        "regime_id": "futian_li",
+        "regime_name_cjk": "符天暦",
+        "regime_name_ja": "Futenreki",
+        "author": "曹士蒍 Cao Shiwei",
+        "produced": "between 780 and 783 CE, updated around 806 CE",
+        "epoch_year": 660,
+        "relation_to_this_tradition": "the Qiyao rangzai jue (T1308) ephemerides were either taken from or based upon it, and it is the calendar the Japanese astrologer-monks worked in",
+        "status_change": "This retires the statement in sukuyo_rule_manifest.json rule sukuyo.natal.birth_mansion_requires_lunar_calendar that no named regime is available. A named, dated, authored regime is available. What is not available is its tables.",
+        "still_blocked": "The Futian li itself does not survive as a usable table set; it is reconstructed from later citations and from the elapsed-day counts in surviving horoscopes. The checklist row therefore stays source_gated and does not become computable.",
+        "customer_prediction": false
+      },
+      "priority": 90,
+      "exceptions": [
+        "Kotyk reports the Futian li as the calendar of Sukuyoshi practice, not as the Japanese state calendar. The state calendar was the Senmyo reki; see sukuyo.jp.senmyo_reki_is_the_state_calendar.",
+        "The date range 780-783 with an update around 806 is Kotyk's report of a reconstruction by Takesako 2016, not a dated colophon."
+      ],
+      "conflicts_with": ["sukuyo.jp.senmyo_reki_is_the_state_calendar"],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "Introduction (on Cao Shiwei) and History of the Sukuyodo",
+          "location": "journal p. 40 (pdf_page 4) for Cao Shiwei and the 780-783/806 dating; journal p. 56 (pdf_page 20) for 'The Futian li was used by the Sukuyoshi through the Heian and Kamakura periods (Momo 1969, 400-408)'",
+          "verification": "Read directly in the hash-pinned PDF (kotyk_jjrs_45_1_2018.pdf, sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (kotyk_jjrs_45_1_2018_text.txt, sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only. The regime may be named in a disclosure of method; it may not be used to emit a birth mansion until its parameters are implemented and tested.",
+      "review_status": "single_unreviewed_reader of a secondary source; the primary chain (Momo Hiroyuki 1969; Takesako 2016) has not been consulted"
+    },
+    {
+      "rule_id": "sukuyo.jp.futian_li_epoch_is_660",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "heian_and_kamakura_japan_10th_to_14th_century",
+      "domain": "calendar",
+      "scope": {
+        "applies_to": "the day-count epoch that Japanese Sukuyodo horoscopes reckon from",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "evidence_1": "the Sukuyo unmei kanroku, a horoscope for a man born 15 January 1113, states that 165,428 days have elapsed since the epoch of the calendar used",
+        "evidence_2": "the Sukuyo go unroku, for an individual born in 1268, states that 222,245 days have elapsed",
+        "claim_under_test": "both counts should resolve to the same epoch, and that epoch should be the year 660"
+      },
+      "conclusion": {
+        "epoch_year": 660,
+        "recomputed_here": true,
+        "epoch_jdn_implied_by_the_1113_horoscope": 1962168,
+        "epoch_julian_date_implied": "660-02-15 (Julian reckoning)",
+        "arithmetic": "JDN(1113-01-15, Julian) = 2127596; 2127596 - 165428 = 1962168 = 15 February 660 (Julian)",
+        "cross_check": "1962168 + 222245 = 2184413 = 6 August 1268 (Julian), a birth date consistent with a subject aged 44 or 45 in 1312. The difference of the two stated counts, 222245 - 165428 = 56817 days, carries 15 January 1113 forward to exactly 6 August 1268.",
+        "significance": "Two independently transmitted Japanese documents, 200 years apart, reckon from the same day. That is a stronger witness to the regime than either document alone, and it is checkable arithmetic rather than an assertion.",
+        "customer_prediction": false
+      },
+      "priority": 91,
+      "exceptions": [
+        "Kotyk gives the epoch as 'around 660' and does not state a day. The day 660-02-15 is this pack's arithmetic consequence of his two figures under Julian reckoning, not a figure he reports.",
+        "The 1268 birth date 6 August 1268 is likewise derived here, not reported. It is offered as a consistency check on the two counts, not as a claim about that individual.",
+        "Whether the horoscopes' 'days elapsed' is inclusive or exclusive of the epoch day would shift the epoch by one day; the sources as reported do not settle it."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "Horoscopy in Sukuyodo (the Sukuyo unmei kanroku)",
+          "location": "journal p. 62 (pdf_page 26): '165,428 days have elapsed since the epoch of the calendar that was used in the calculations, which indicates a start date of around 660. The year 660 is the epoch of the Futian li (Momo 1969, 404-406)'; and the parallel 222,245-day figure for the Sukuyo go unroku (Momo 1990, 142)",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679). The two day counts were recomputed against a Julian-calendar JDN implementation in this pass; the results are recorded in the vectors."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only. The epoch may be disclosed as part of a method statement; it does not by itself permit a lunar-date conversion, which needs the regime's month and intercalation rules as well.",
+      "review_status": "arithmetic recomputed here and closing; the underlying day counts rest on a single secondary reading"
+    },
+    {
+      "rule_id": "sukuyo.jp.futian_li_in_japan_by_891",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "heian_japan_9th_century",
+      "domain": "calendar",
+      "scope": {
+        "applies_to": "the earliest date by which the regime was physically present in Japan",
+        "birth_input_eligible": false,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "catalogue": "Nihonkoku genzai sho mokuroku 日本国見在書目録, a catalogue of books available in Japan compiled by Fujiwara Sukeyo 藤原佐世 (847-898) in 891",
+        "entry": "唐七曜符天暦 To shichiyo futenreki"
+      },
+      "conclusion": {
+        "earliest_presence": "before 891",
+        "qualification": "the catalogued item is the seven-luminary version, i.e. at least the earlier recension dealing with the seven visible planets (Sun and Moon included in the count)",
+        "unknown": "when it was brought to Japan is not recorded",
+        "why_it_matters": "the text needed to cast horoscopes was in Japan for roughly seventy years before anyone in Japan is recorded as practising horoscopy with it. Possession of the tables and possession of the craft are separate acquisitions, and the tradition's own institutional history shows the gap.",
+        "customer_prediction": false
+      },
+      "priority": 92,
+      "exceptions": [
+        "A catalogue entry is evidence of a title in a collection, not evidence of use."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "footnote 4",
+          "location": "journal p. 41 note 4 (pdf_page 5), citing the National Diet Library edition of the Nihonkoku genzai sho mokuroku, p. 33",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "single_unreviewed_reader of a secondary source"
+    },
+    {
+      "rule_id": "sukuyo.jp.senmyo_reki_is_the_state_calendar",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "heian_japan_from_862",
+      "domain": "calendar",
+      "scope": {
+        "applies_to": "the civil lunisolar calendar that a Japanese birth date of this period would have carried",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "regime": "Senmyo reki 宣明暦 (Chinese Xuanming li), brought to Japan in 859 and adopted from 862",
+        "reported_complaint": "around the mid-tenth century the Onmyoji Kamo no Yasunori 賀茂保憲 (917-977) held that it had been in use for well over a century and that the mainland had probably adopted a newer calendar"
+      },
+      "conclusion": {
+        "regime_id": "senmyo_reki",
+        "role": "the state calendar, i.e. the source of the civil lunar month-and-day that a Japanese birth record would state",
+        "distinct_from": "the Futian li, which is the astrologers' computational calendar",
+        "consequence_for_the_engine": "there are two named regimes in play, not one, and they are not interchangeable. A civil birth date is expressed in the Senmyo reki; the astrologer's own reckoning ran on the Futian li. Any implementation must say which it used.",
+        "institutional_note": "Sukuyoshi officially participated in state calendar production between 995 and 1038, the monk Ninso being likely the earliest to contribute from 995, and continued to argue with court calendrical experts about eclipse prediction into the thirteenth century. The two regimes were therefore in contact, not sealed off from each other.",
+        "customer_prediction": false
+      },
+      "priority": 93,
+      "exceptions": [
+        "Kotyk names the Senmyo reki as the state calendar and as the object of Kamo no Yasunori's complaint. He does not state that sukuyoshi derived birth mansions from it, and this rule does not claim he does.",
+        "The Senmyo reki remained Japan's calendar far beyond this period; its long service life is not evidence about Sukuyodo practice specifically."
+      ],
+      "conflicts_with": ["sukuyo.jp.futian_li_is_the_named_regime"],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal p. 55 (pdf_page 19) for the Senmyo reki, its 859 arrival and 862 adoption and Kamo no Yasunori's complaint; journal p. 57 (pdf_page 21) for sukuyoshi participation in state calendar production 995-1038 and the monk Ninso from 995 (Takada 1992, 42)",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "single_unreviewed_reader of a secondary source"
+    },
+    {
+      "rule_id": "sukuyo.jp.nichien_transmission_953_957",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "heian_japan_953_957",
+      "domain": "calendar",
+      "scope": {
+        "applies_to": "the transmission event that made horoscopy practicable in Japan",
+        "birth_input_eligible": false,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "cause": "Kamo no Yasunori's judgement that the Senmyo reki was stale, and his recommendation that a specialist be sent",
+        "agent": "the Tendai monk Nichien 日延, disciple of Ninkan 仁観 (d. 934), himself trained in calendrical science"
+      },
+      "conclusion": {
+        "departed": 953,
+        "destination": "the state of Wuyue 吳越",
+        "studied": "a version of the Futian li together with ephemerides (licheng 立成)",
+        "returned": 957,
+        "classification_note": "the early Kamakura Nichu reki 二中暦 lists Nichien not as a Sukuyoshi but as a Rokumeishi 禄命師, a master of fortune telling; the first Sukuyoshi it lists is Hozo 法蔵 (905-969)",
+        "why_it_matters": "the calendar regime and the professional practice arrive as one bundle and can be dated. This is the moment at which a Japanese Sukuyodo birth mansion becomes a thing that could be computed in Japan at all.",
+        "customer_prediction": false
+      },
+      "priority": 94,
+      "exceptions": [
+        "Kotyk notes Nichien's trip is detailed in a document dated to around 1053, roughly a century after the events."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal pp. 55-56 (pdf_pages 19-20), with footnote 17 on the c. 1053 document",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "single_unreviewed_reader of a secondary source"
+    },
+    {
+      "rule_id": "sukuyo.jp.birth_mansion_under_a_named_regime",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "heian_and_kamakura_japan_10th_to_14th_century",
+      "domain": "calendar",
+      "scope": {
+        "output": "本命宿 honmyo suku, the natal mansion, for a real dated birth",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "step_1": "convert the civil birth instant into a lunar month number and lunar day (1-30) under an explicitly named regime",
+        "step_2": "apply the T1299 schematic procedure encoded in sukuyo.natal.birth_mansion_primary_method and cross-checked by sukuyo.natal.birth_mansion_abbreviated_method",
+        "named_regime_candidates": ["futian_li", "senmyo_reki"],
+        "regime_must_be": "declared in the output, dated, and bounded by a valid date range"
+      },
+      "conclusion": {
+        "formula": "mansion_index = (index_of_full_moon_mansion(lunar_month) + (lunar_day - 15)) mod 27, over the canonical 27-order of sukuyo.mansion.canonical_order",
+        "keyed_by": "regime_id",
+        "engine_shape": "The panel's existing multi-regime lunisolar kernel is the correct driver: compute the lunar month and day under every candidate regime, then gate. This is the same pattern as CALENDAR_REGIMES in src/engine/multitradition/ziwei.py, where a chart is computed under each plausible meridian and emitted only on agreement.",
+        "difference_from_ziwei": "the ziwei gate varies the meridian within one calendar tradition; this gate varies the calendar system itself, which is a larger disagreement and must be disclosed as such rather than presented as a timezone nicety",
+        "status": "specified, not implemented. No regime's tables are in this repository.",
+        "customer_prediction": false
+      },
+      "priority": 95,
+      "exceptions": [
+        "The Futian li does not survive as a usable table set. Until a reconstruction is implemented and independently tested, this rule specifies a procedure that cannot be run.",
+        "The regime choice interacts with the bright/dark fortnight convention of T1299 chapter 6 (黒白月分), which is a separate unresolved question.",
+        "This rule is the schematic branch only. The observational branch is sukuyo.jp.hozo_observational_fork, and by the tradition's own adjudication the observational branch is the one that won."
+      ],
+      "conflicts_with": [
+        "sukuyo.natal.birth_mansion_requires_lunar_calendar",
+        "sukuyo.jp.hozo_observational_fork"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+          "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+          "section": "卷下, 二十七宿十二宮圖",
+          "location": "T21.0394c28-0395a03 and T21.0395b01-b06: the primary and abbreviated procedures",
+          "verification": "Read directly in the hash-pinned CBETA TEI transcription (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb)."
+        },
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal p. 56 (pdf_page 20), describing the Xiuyao jing table 'in which the twenty-seven naksatras are assigned to each day of the lunar calendar' and its use by Kamo no Yasunori in 961",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only. No birth mansion may be emitted to a customer under this rule until a regime's parameters are implemented, tested against an independent implementation, and disclosed in the output.",
+      "review_status": "specified but unimplemented; needs a Buddhist-astral-science specialist and a calendrical specialist"
+    },
+    {
+      "rule_id": "sukuyo.jp.regime_gate_requires_agreement",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "engine_policy_not_a_historical_claim",
+      "domain": "calendar",
+      "scope": {
+        "applies_to": "the engine's disclosure and refusal behaviour when candidate regimes disagree",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "procedure": "compute the lunar month and lunar day for the birth under every candidate regime in the declared set, then compare the resulting mansion index",
+        "candidate_set_must_be": "explicit, named, dated and bounded; an empty or single-element set is a configuration choice that must itself be disclosed"
+      },
+      "conclusion": {
+        "type": "configured_method",
+        "on_agreement": "emit the mansion, and disclose that it was tested across the named regimes and did not move",
+        "on_disagreement": "refuse the mansion and emit the disagreement itself - each regime, its lunar date, and the mansion it would give",
+        "rationale": "the birth mansion is the anchor of the entire tradition; a wrong anchor makes every downstream relationship wrong, and the wrongness is invisible to the reader",
+        "explicitly_a_product_choice": "The sources do not say to do this. Sukuyoshi worked in one regime and did not hedge. This gate is the engine's, it is labelled configured_method, and the alternative it rejects - picking one regime silently - is named.",
+        "prior_art_in_this_repository": "src/engine/multitradition/ziwei.py CALENDAR_REGIMES computes a chart under each plausible meridian and gates the reading on agreement, refusing when the chart month moves",
+        "customer_prediction": false
+      },
+      "priority": 96,
+      "exceptions": [
+        "Agreement across regimes is evidence of robustness, not of correctness. Two regimes can agree and both be wrong for a given birth.",
+        "This rule cannot run until at least one regime is implemented; today its only reachable branch is refusal."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal pp. 55-56 (pdf_pages 19-20): the article supplies the two named regimes this gate ranges over (Senmyo reki as state calendar, Futian li as the sukuyoshi's calendar) and the evidence that they coexisted in the same institutional setting",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679). The gating policy itself is not from the source and is labelled configured_method."
+        }
+      ],
+      "evidence_grade": "E",
+      "publication_limit": "research_only; and wherever this is ever rendered it must be labelled configured_method with its alternatives named, per the defensibility standard's third requirement",
+      "review_status": "engine policy, not a source claim; needs product review rather than specialist review"
+    },
+    {
+      "rule_id": "sukuyo.jp.hozo_observational_fork",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "japan_961_and_after",
+      "domain": "natal",
+      "scope": {
+        "output": "本命宿, derived observationally rather than from the schematic table",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "occasion": "in 961 the Sukuyoshi Hozo 法蔵 (905-969) debated the Onmyoji Kamo no Yasunori over the natal asterism of Murakami Tenno (926-967)",
+        "kamo_position": "use the Xiuyao jing table assigning the 27 naksatras to the days of the lunar calendar",
+        "hozo_position": "determine the natal asterism from the naksatra in which the Moon was actually lodged at the time of birth",
+        "hozo_textual_basis": "the first (759) version of the Xiuyao jing states that the corresponding naksatra is always the one in which the Moon is lodged"
+      },
+      "conclusion": {
+        "adjudication": "a third party, Yoshino Nichizo 吉野日蔵, judged the matter in three fascicles: the natal asterism by Hozo's explanation, the ritual day by Kamo no Yasunori's explanation",
+        "outcome": "the observational derivation won and, Kotyk reports, evidently became standard in Sukuyodo - the 1113 horoscope's lunar position is not taken from the Xiuyao jing table",
+        "fork_status": "This is a genuine method fork inside the tradition and it is preserved, not averaged. The schematic table and the observed lunar longitude will disagree for real births, because T1299 itself warns that the mansions are unequal in width.",
+        "consequence_for_the_engine": "an implementation that emits only the schematic mansion is emitting the position that the tradition's own arbitration set aside for the natal question, while continuing to use Kamo's sexagenary answer for the ritual day",
+        "recorded_dissent": "Kanshin 寛信 (1084-1153) wrote that he was unaware of the basis of Hozo's conclusion, that it was not received from a teacher's instruction, and that Hozo reached it by his own views. The winning method was contested as an innovation.",
+        "customer_prediction": false
+      },
+      "priority": 97,
+      "exceptions": [
+        "The observational branch needs a lunar longitude and a named 27-mansion boundary scheme. T1299 supplies neither; it says the mansions are wide and narrow and tells the reader to check against the sky.",
+        "Substituting a modern Jyotisha naksatra computed from a modern ephemeris is forbidden: different boundaries, different derivation, and it would silently reintroduce a 28th mansion. The refusal in sukuyo_rule_manifest.json stands.",
+        "Kotyk observes that Hozo was reasoning with Chinese lunar stations in practice while the astrological lore is Indian naksatra material; the two are not the same division of the sky."
+      ],
+      "conflicts_with": [
+        "sukuyo.natal.birth_mansion_primary_method",
+        "sukuyo.jp.birth_mansion_under_a_named_regime"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal pp. 56-57 (pdf_pages 20-21), citing Ono ruihi sho 小野類秘鈔 (SZ 36: 85-86) by Kanshin, Byakuho kusho (TZ 7: 297b1-c4, 334b8-35a26), Asaba sho (TZ 9: 457b15-19), Gyorin sho (T 2409, 76: 458c8-11), Sukuyokyo shukusatsu 2: 7, and Yamashita 1990, 492-494",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679). The primary documents named in this chain were not opened."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only. If a Sukuyodo section ever ships, it must state that the tradition's own arbitration preferred the observational mansion, and must not present a schematic mansion as the tradition's answer without saying so.",
+      "review_status": "single_unreviewed_reader of a secondary source; the Ono ruihi sho and Asaba sho passages have not been consulted"
+    },
+    {
+      "rule_id": "sukuyo.jp.honmyo_nichi_is_sexagenary",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "japan_961_and_after",
+      "domain": "timing",
+      "scope": {
+        "output": "本命日 honmyo nichi, the day on which the personal ritual is executed",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "subject_of_the_961_debate": "the second point at issue alongside the natal asterism",
+        "kamo_position": "Murakami Tenno was born in year 4 of Encho (926), a year that fell on hei jutsu 丙戌 in the sexagenary cycle; take hei jutsu as the ritual day",
+        "hozo_position": "take the actual sexagenary day of birth, tei gai 丁亥, being the second day of the sixth lunar month"
+      },
+      "conclusion": {
+        "adjudication": "Yoshino Nichizo determined the ritual day by Kamo no Yasunori's explanation",
+        "result": "the ritual day is reckoned sexagenary, and on this point the Onmyodo reckoning prevailed inside a Sukuyodo consultation",
+        "boundary_warning": "This does NOT merge the two traditions and does not license any Onmyodo source in this track. It records an adjudicated split: the mansion question went to the Sukuyoshi, the day question went to the Onmyoji. The boundary rule sukuyo.boundary.sukuyodo_is_not_onmyodo is unaffected - the two remained distinct offices arguing with each other, which is the opposite of a merger.",
+        "customer_prediction": false
+      },
+      "priority": 98,
+      "exceptions": [
+        "No sexagenary machinery may be imported into this pack from the onmyodo track on the strength of this rule. The rule records who won an argument, not a calculation this pack may run.",
+        "The two positions differ over whether the ritual day is keyed to the birth YEAR's sexagenary designation or the birth DAY's; the adjudication reportedly took the year-based answer."
+      ],
+      "conflicts_with": ["sukuyo.jp.hozo_observational_fork"],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal p. 56 (pdf_page 20)",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "single_unreviewed_reader of a secondary source"
+    },
+    {
+      "rule_id": "sukuyo.jp.murakami_tenno_worked_example",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "japan_961",
+      "domain": "natal",
+      "scope": {
+        "applies_to": "the only dated, named-subject birth-mansion determination available to this track",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "subject": "Murakami Tenno 村上天皇 (926-967)",
+        "birth": "the second day of the sixth lunar month of year 4 of the reign era Encho 延長 (926); the day is tei gai 丁亥",
+        "method_applied": "the Xiuyao jing table, i.e. the schematic branch this repository has already encoded",
+        "reported_result": "6/2 corresponds to Aslesa 柳, per Sukuyokyo shukusatsu 1: 13-15 as reported by Kotyk"
+      },
+      "conclusion": {
+        "engine_reproduces_it": true,
+        "engine_derivation": "the full-moon mansion of lunar month 6 is 女, at index 20 in the canonical 27-order; (20 + (2 - 15)) mod 27 = 7; index 7 is 柳",
+        "significance": "This is the defensibility standard's requirement 4 satisfied for this track: a dated historical consultation, with a named subject, whose stated result the encoded rules reproduce exactly. It is also a cross-witness on the encoding - it independently confirms both the month table and the canonical mansion order, since a wrong entry in either would give a different mansion.",
+        "what_it_does_not_prove": "It does not prove the schematic method is the tradition's preferred method. It reproduces the position that LOST the 961 arbitration on the natal question. That is precisely why it is useful: it shows the encoding is faithful to the table, and it shows the table is not the whole tradition.",
+        "customer_prediction": false
+      },
+      "priority": 99,
+      "exceptions": [
+        "The result 柳 is Kotyk's report of the Japanese recension's table (Sukuyokyo shukusatsu), while this repository's encoding is from the Taisho mainland recension. The agreement is therefore also weak evidence that the two recensions agree on this table - see sukuyo.jp.japanese_recension_is_not_the_taisho_text.",
+        "No civil-date conversion is involved or claimed: the lunar month and day are given directly by the source."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal p. 56 (pdf_page 20)",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        },
+        {
+          "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+          "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+          "section": "卷下, 二十七宿十二宮圖",
+          "location": "T21.0394c20-c28 (month table) and T21.0394c28-0395a03 (procedure)",
+          "verification": "Read directly in the hash-pinned CBETA TEI transcription (sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only. The example may be published as a validation result. Nothing about Murakami Tenno may be rendered as a reading.",
+      "review_status": "arithmetic reproduced here; the source report is a single unreviewed secondary reading"
+    },
+    {
+      "rule_id": "sukuyo.jp.japanese_recension_is_not_the_taisho_text",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "9th_century_onwards",
+      "domain": "other",
+      "scope": {
+        "applies_to": "the textual identity of everything this repository has encoded for this tradition",
+        "birth_input_eligible": false,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "finding": "Yano 2013 has demonstrated that the 'mainland recension' of the Xiuyao jing in the Taisho canon is considerably different from the 'Japanese recension'",
+        "japanese_recension": "traceable to the ninth century, brought by Japanese monks, and in Kotyk's judgement best representing the original version of the text",
+        "medieval_usage": "the Japanese recension 'was also exclusively used in the medieval period', which is why Kotyk cites the Sukuyokyo shukusatsu 宿曜経縮刷 (2 vols), a typeset version of the Japanese recension edited by Wakita Bunsho 脇田文紹 (1897)"
+      },
+      "conclusion": {
+        "consequence": "sukuyo_rule_manifest.json's 32 rules are extracted from the mainland recension. Japanese Sukuyodo practice used the other recension. The pack is therefore a faithful reading of a text that Japanese practitioners did not use in the form encoded.",
+        "severity": "This is a limitation of the same order as the missing calendar and it was not previously recorded. It is not fatal - the two recensions are versions of one work and the Murakami example agrees across them at the point tested - but no rule in this repository may be described as 'what Japanese sukuyoshi used' until the Japanese recension is collated against it.",
+        "acquisition_target": "Sukuyokyo shukusatsu, ed. Wakita Bunsho, 1897, 2 vols - an 1897 Japanese typeset edition, which is old enough that its rights position is likely favourable and which Kotyk cites by volume and page throughout",
+        "customer_prediction": false
+      },
+      "priority": 100,
+      "exceptions": [
+        "'Considerably different' is Kotyk's characterisation of Yano's demonstration; the specific divergences were not enumerated in the passage read, and Yano 2013 was not consulted.",
+        "The 1897 edition was not retrieved in this pass and is recorded as an acquisition target, not as a held source."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "footnote 3",
+          "location": "journal p. 40 note 3 (pdf_page 4), citing Yano 2013, 226-50",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only. This limitation must be stated in any disclosure of the Sukuyodo track's sources.",
+      "review_status": "single_unreviewed_reader of a secondary source; Yano 2013 not consulted"
+    },
+    {
+      "rule_id": "sukuyo.jp.horoscopy_uses_twelve_places",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "japan_1113_to_1312",
+      "domain": "natal",
+      "scope": {
+        "applies_to": "the actual shape of a Japanese Sukuyodo natal document",
+        "birth_input_eligible": true,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "witness": "the Sukuyo unmei kanroku 宿曜運命勘録, a horoscope with interpretation for a man born 15 January 1113, produced around 1152 when he was forty-one",
+        "second_witness": "the Sukuyo go unroku 宿曜御運録, produced around 1312 for an individual born in 1268"
+      },
+      "conclusion": {
+        "structure": "concentric circles: the twelve earthly branches serving as the twelve Jupiter stations, the twelve zodiac signs with their planetary rulers, the positions of nine planets against the lunar stations, and an outer ring of twelve places with their auspiciousness and the branches as directional markers",
+        "twelve_places": [
+          {"index": 1, "cjk": "壽命位", "gloss": "lifespan"},
+          {"index": 2, "cjk": "財庫位", "gloss": "wealth"},
+          {"index": 3, "cjk": "兄弟位", "gloss": "brothers"},
+          {"index": 4, "cjk": "田宅位", "gloss": "estate"},
+          {"index": 5, "cjk": "男女位", "gloss": "children"},
+          {"index": 6, "cjk": "奴僕位", "gloss": "slaves"},
+          {"index": 7, "cjk": "夫妻位", "gloss": "marriage"},
+          {"index": 8, "cjk": "疾病位", "gloss": "illness"},
+          {"index": 9, "cjk": "遷移位", "gloss": "travel"},
+          {"index": 10, "cjk": "官祿位", "gloss": "prosperity or career"},
+          {"index": 11, "cjk": "福德位", "gloss": "fortune"},
+          {"index": 12, "cjk": "禍害位", "gloss": "disaster"}
+        ],
+        "nine_planets": "the seven visible bodies plus Rahu and Ketu, the latter redefined in East Asian Buddhist astrology as the lunar apogee",
+        "why_this_matters_for_the_reading": "The T1299 pack's own summary of what a Sukuyodo reading looks like - mansion-relational and calendrical, with no place doctrine - describes the Chinese source text, not the Japanese practice. Japanese Sukuyodo horoscopy is place-based and its place themes are, as Kotyk notes, largely consistent with Hellenistic doctrine, reaching East Asia through Iranian intermediaries. The defensibility spec's picture of the reading is therefore incomplete and this rule records the correction.",
+        "precision_note": "the planetary values in the 1113 horoscope use fractions and are more precise than the Qiyao rangzai jue ephemerides, and the Moon's position is not taken from the Xiuyao jing table - consistent with Hozo's observational method having become standard",
+        "customer_prediction": false
+      },
+      "priority": 101,
+      "exceptions": [
+        "Neither horoscope was retrieved. Both are known here only through Kotyk's description and his reproduction of the 1113 chart in his figure 14.",
+        "The place names are given here as Kotyk transcribes them from the 1113 document. No delineation attached to any place is encoded, because none was read.",
+        "T1308 carries a comparable circular table but its zodiac-to-lunar-station alignment and its place names differ; the two may not be merged."
+      ],
+      "conflicts_with": ["sukuyo.boundary.t1308_is_a_28_mansion_system"],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "Horoscopy in Sukuyodo, with figure 14",
+          "location": "journal pp. 62-64 (pdf_pages 26-28), citing Yano 2013, 192; Momo 1990, 142; Nakayama 1969, 60; Ito 1980, 224",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only. The place list is a structural report; no place may be given a meaning in customer output on this evidence.",
+      "review_status": "single_unreviewed_reader of a secondary source; neither horoscope consulted directly"
+    },
+    {
+      "rule_id": "sukuyo.jp.sukuyodo_emerges_as_a_community_after_hozo",
+      "tradition_id": "japanese_sukuyodo",
+      "school_id": "heian_kamakura_sukuyoshi_practice",
+      "period": "japan_969_to_1333",
+      "domain": "other",
+      "scope": {
+        "applies_to": "the period over which a claim about 'Sukuyodo practice' is admissible at all",
+        "birth_input_eligible": false,
+        "interpretation_eligible": false
+      },
+      "conditions": {
+        "before": "in Hozo's own time Sukuyodo does not yet appear as an identifiable lineage or community; the -do suffix is likely in emulation of the long-established Onmyodo, and one of the first references to Sukuyodo itself is in Hozo's own report quoted in the Ono ruihi sho",
+        "after": "reference to 'Sukuyo' appears in the Genji monogatari, and the first references to Sukuyodo and Sukuyoshi in aristocrats' journals date to the early-to-mid eleventh century"
+      },
+      "conclusion": {
+        "emergence_window": "between Hozo's death in 969 and the first or second decade of the eleventh century",
+        "peak_activity": "the Insei (1086-1185) and Kamakura (1185-1333) periods",
+        "institutional_pressure": "there was a tendency to exclude sukuyoshi from calendar production and court astronomy as those sciences became the professional domain of the Kamo and Abe households, which were Onmyodo",
+        "consequence_for_this_repository": "a statement of the form 'Sukuyodo held X' is only admissible with a date attached. Before roughly 1000 there is no community to hold anything; the Chinese text existed in Japan for over a century before the practice did.",
+        "customer_prediction": false
+      },
+      "priority": 102,
+      "exceptions": [
+        "Sukuyoshi hailing primarily from Kofukuji became active among the aristocracy from the late tenth century, which slightly precedes the journal evidence; the emergence window is a range, not a date."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "kotyk_jjrs_45_1_2018",
+          "work": "Jeffrey Kotyk, 'Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo', Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+          "section": "History of the Sukuyodo",
+          "location": "journal pp. 57-58 (pdf_pages 21-22), citing Toda 2007, 46; Yamashita 1990, 508-511; Akazawa 2007, 1003 and 1017; Yuasa 2007",
+          "verification": "Read directly in the hash-pinned PDF (sha256 a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d) via its page-addressed extraction (sha256 07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679)."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "single_unreviewed_reader of a secondary source"
+    }
+  ]
+}

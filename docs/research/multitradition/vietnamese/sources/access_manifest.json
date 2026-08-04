@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "tradition_id": "vietnamese_tu_vi",
+  "pack_id": "vietnam_tu_vi_phu_le_quy_don_v1",
+  "purpose": "Hash-pinned access record for the Vietnamese-language Tu Vi witnesses acquired on 2026-08-03/04. Every rule citation in tuvi_rule_manifest.json resolves to a PTV_Lnnnn key in phu_tu_vi_le_qui_don_lines.txt.",
+  "why_this_track_needed_it": "The 2026-07-31 Vietnamese audit treated the track as calendar-only and recorded that a Tu Vi pack needs 'a named Vietnamese work, edition, date and lineage'. Tu Vi Dau So is the dominant living Vietnamese natal tradition and the audit's own capability map marked its chart construction source_limited for want of controlling editions. This pass acquired a Vietnamese-language delineation source, in verse, covering all twelve palaces.",
+  "artifacts": [
+    {
+      "file": "phu_tu_vi_le_qui_don.pdf",
+      "work": "Phú Tử Vi Lê Quí Đôn",
+      "archive_item": "PhuTV-LeQuiDon-DV",
+      "url": "https://archive.org/details/PhuTV-LeQuiDon-DV",
+      "download_url": "https://archive.org/download/PhuTV-LeQuiDon-DV/Ph%C3%BA%20T%E1%BB%ADVi%20L%C3%AAQuiD%C3%B4n-dv.pdf",
+      "uploader": "daovan2002@gmail.com",
+      "item_publicdate": "2017-07-31",
+      "language": "Vietnamese",
+      "retrieved_on": "2026-08-04",
+      "bytes": 5229163,
+      "sha256": "8ce6bd57ff8d1cb26473ead48b75f302609754db487cadc59ffb250247e202a1",
+      "role": "page images of the transcribed phú plus appended photographs of the 1968 printed book"
+    },
+    {
+      "file": "phu_tu_vi_le_qui_don_full_djvu.txt",
+      "derived_from": "the same archive item's OCR text layer",
+      "download_url": "https://archive.org/stream/PhuTV-LeQuiDon-DV/Ph%C3%BA+T%E1%BB%ADVi+L%C3%AAQuiD%C3%B4n-dv_djvu.txt",
+      "retrieved_on": "2026-08-04",
+      "bytes": 34057,
+      "sha256": "8dc0d55287b7c5e0f4922bca35b9a640b83cdd28f521f260529baa897d83e42d",
+      "role": "OCR text of the item",
+      "acquisition_note": "The Internet Archive metadata API redirected the direct _djvu.txt download to an HTTP 500. The text was taken from the item's /stream/ view and extracted from its <pre> block, which is the same OCR layer."
+    },
+    {
+      "file": "phu_tu_vi_le_qui_don_lines.txt",
+      "derived_from": "phu_tu_vi_le_qui_don_full_djvu.txt",
+      "description": "Line-addressed plain text. Key format PTV_L0021 = the twenty-first non-blank line of the OCR text. Blank lines dropped, surrounding whitespace stripped, no other change.",
+      "lines": 778,
+      "bytes": 40339,
+      "sha256": "e1f2b94094aae4035eac4646240efd7d40ba4bdb8d91da1998042f7c1f2c8dbd",
+      "role": "citation surface for every rule in tuvi_rule_manifest.json"
+    },
+    {
+      "file": "tu_vi_dong_a.pdf",
+      "work": "Tử Vi Đông A: Thiên Mệnh và Nhân Đạo",
+      "author": "Nguyễn Đông Hưng (Minh Hưng), MD",
+      "archive_item": "tu-vi-dong-a",
+      "url": "https://archive.org/details/tu-vi-dong-a",
+      "item_date": "2026-01-30",
+      "language": "Vietnamese",
+      "licenseurl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_on": "2026-08-03",
+      "bytes": 1637160,
+      "sha256": "b0b6f554ede5d66ca94adb048d95824564615cf12303031eee2e4a0164783796",
+      "role": "modern Vietnamese reception witness, openly licensed (CC0)",
+      "assessment": "Read. It is an essayistic cultural and philosophical study of Tu Vi as Tran-dynasty statecraft, not a technical manual. It contains no chart-construction table and no per-star delineation table. Two of its statements are usable as reception evidence and are encoded as such; nothing else in it is."
+    },
+    {
+      "file": "tu_vi_dong_a_djvu.txt",
+      "derived_from": "the same archive item's OCR text layer",
+      "retrieved_on": "2026-08-03",
+      "bytes": 238958,
+      "sha256": "64d4ff067ae5c0d604eac901f534cf21a18b0fa38b6dbdaea6b36cac59722c8a",
+      "role": "citation surface for the two reception rules"
+    },
+    {
+      "file": "phu_tu_vi_le_qui_don_djvu.txt",
+      "work": "bibliographic description page of the Internet Archive item tu-vi-dau-so-tan-bien-phu-tu-vi-le-qui-don",
+      "url": "https://archive.org/details/tu-vi-dau-so-tan-bien-phu-tu-vi-le-qui-don",
+      "retrieved_on": "2026-08-03",
+      "bytes": 1842,
+      "sha256": "8f7e5159dccc879306edd8324323d995840ad36f6e45ec89eb0113b75e30f57b",
+      "role": "bibliographic witness only",
+      "content": "Names the Vietnamese edition lineage: Vân Đằng Thái Thứ Lang, Tử Vi Đẩu Số Tân Biên, published by Tín Đức Thư Xã in 1957, 352 pages, in three parts - Lập thành (chart construction), Luận đoán 12 cung (judgement of the twelve palaces), Luận đoán Vận hạn (judgement of periods) - and a second book, Phú Tử Vi Lê Quí Đôn, collated against a 1968 printing. The item itself carries none of that book's text.",
+      "assessment": "This is the named edition the 2026-07-31 audit asked for. It is named and dated here but NOT held; acquiring Lập thành is what would unblock Vietnamese chart construction."
+    }
+  ],
+  "rights_note": {
+    "the_verse": "The phú is traditionally attributed to Lê Quý Đôn (1726-1784). If that attribution is sound the verse is long out of copyright. The attribution is traditional and is not established here; see rule vietnam.tuvi.attribution_to_le_quy_don_is_traditional.",
+    "the_transcription": "The stored text is one transcriber's 2017 recension, explicitly corrected against a 1968 printed book (Lương Quới Nhơn, Tử Vi Đẩu Số Thực Hành). The editorial layer - the corrections, the supplied missing passages, the note - is that transcriber's work and is 2017, not eighteenth century.",
+    "the_1968_book": "Lương Quới Nhơn's 1968 book is in copyright. The item appends photographs of its pages. Those photographs are not used: their OCR is unusable and the pack marks the tail unusable rather than guessing at it.",
+    "consequence": "Verse lines are quoted in research documents with line addresses. No product-facing reproduction is authorised by this manifest, and the rights position of the transcription layer is unresolved."
+  },
+  "attempted_and_failed": [
+    {
+      "target": "Vietnamese Tu Vi chart-construction manuals in retrievable full text (Vân Đằng Thái Thứ Lang, Tử Vi Đẩu Số Tân Biên 1957; Nguyễn Phát Lộc, Tử Vi Hàm Số; Thiên Lương, Tử Vi Nghiệm Lý)",
+      "date": "2026-08-03",
+      "searches_run": [
+        "archive.org advancedsearch: \"Van+Dang+Thai+Thu+Lang\" (224 hits, none relevant)",
+        "archive.org advancedsearch: \"Tu+Vi+Ham+So\" (564 hits, none relevant)",
+        "archive.org advancedsearch: \"Tu+Vi+Nghiem+Ly\" (722 hits, none relevant)",
+        "archive.org advancedsearch: \"tu+vi+dau+so+toan+thu\" (904 hits, none relevant)",
+        "archive.org advancedsearch: \"Nguyen+Phat+Loc+tu+vi\" (120 hits, none relevant)",
+        "archive.org advancedsearch on the Vietnamese string \"tử vi\" AND \"đẩu số\" (128 hits; the four Tu Vi items found were all followed up)"
+      ],
+      "result": "No openly retrievable full text of any named Vietnamese construction manual. The 1957 and 1968 books are present in the corpus only as bibliographic descriptions and as unreadable photographs.",
+      "consequence": "This pack encodes delineation, not construction, and rule vietnam.tuvi.no_chart_construction_in_this_witness makes the pack fail closed on chart construction rather than borrow the Chinese procedure.",
+      "would_unblock": "A legally usable copy of the Lập thành section of Tử Vi Đẩu Số Tân Biên, or any Vietnamese edition carrying a complete an sao table."
+    },
+    {
+      "target": "Han-Nom manuscript witnesses of Vietnamese 紫微 divination",
+      "date": "2026-08-03",
+      "queries": [
+        "https://thuvienkhxh-vass.contentdm.oclc.org/digital/api/search/collection/p20065coll27/searchterm/%E7%B4%AB%E5%BE%AE/maxRecords/20 - HTTP 200, totalResults 0",
+        "same endpoint, searchterm 'tu vi' - HTTP 200, totalResults 0",
+        "same endpoint, searchterm 'tuvi' - HTTP 200, totalResults 0",
+        "http://www.nomfoundation.org/nom-tools/Nom-Text-Collection - page inspected; its collections are Thắng Nghiêm and Phổ Nhân temple texts, the Digital Library of Han-Nom, Tale of Kiều, Lục Vân Tiên, Chinh Phụ Ngâm Khúc, Hồ Xuân Hương and History of Greater Vietnam. No divination, astrology, almanac or tử vi collection is listed."
+      ],
+      "result": "Zero hits in the Han-Nom institute's digital collection and no divinatory collection at the Nom Preservation Foundation. These are documented negative results from services that answered, not access failures.",
+      "consequence": "No Nom-script Vietnamese Tu Vi witness is claimed or cited. The classical-Nom layer of this tradition remains unevidenced in this repository.",
+      "would_unblock": "The Institute of Han-Nom Studies catalogue (hannom.org.vn) searched under its own subject headings for 星命 / 紫微 / bói toán, or a published catalogue of its divination holdings."
+    }
+  ],
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "interpretation_eligible": false,
+    "birth_reading_enabled": false,
+    "chart_construction_available": false,
+    "vietnamese_specialist_review_complete": false,
+    "second_independent_encoder": false
+  }
+}

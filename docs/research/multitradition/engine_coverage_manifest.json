@@ -1455,6 +1455,24 @@
             "Vietnamese review",
             "proof against substituting Chinese Zi Wei tables"
           ]
+        },
+        {
+          "module_id": "vietnamese_tuvi_delineation",
+          "name": "Tu Vi Dau So: the Le Qui Don phu, twelve palaces, and the Vietnamese-vs-Chinese divergences",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "vietnamese/source_audit.md",
+            "vietnamese/tuvi_rule_manifest.json",
+            "vietnamese/tuvi_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "DELINEATION WITHOUT CONSTRUCTION: the phu judges a chart it assumes already exists; no construction manual was retrievable, and the pack explicitly forbids reusing this repo's ziwei module under a Vietnamese label because the schools disagree on exactly those construction questions",
+            "the three Vietnamese-vs-Chinese divergences (reversed palace enumeration, ancestral-tomb geomancy in Phuc Duc, Tuan/Triet as named agents) rest on general knowledge of the Quanshu rather than a held edition; pinning one is the cheapest improvement",
+            "Van Dang Thai Thu Lang's Tu Vi Dau So Tan Bien (1957) with its Lap thanh construction section is bibliographically witnessed but not retrievable; six documented archive.org searches and a Han-Nom CONTENTdm query returned nothing"
+          ]
         }
       ]
     },
@@ -1673,6 +1691,25 @@
             "independent Classical Chinese and Buddhist-astral-science review plus blind second encoder",
             "Taisho facsimile for corrupt Rakshasa-day graphs and T1308 grid tables",
             "Japanese layer (Kozan-ji Sukuyo senmonsho or a dated kanmon) - this track is currently the Chinese text Sukuyodo read, not Sukuyodo practice"
+          ]
+        },
+        {
+          "module_id": "sukuyodo_japanese_reception",
+          "name": "Japanese reception: the named calendar regime, the 660 epoch, and a dated worked consultation",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "sukuyodo/source_audit.md",
+            "sukuyodo/japanese_reception_rule_manifest.json",
+            "sukuyodo/japanese_reception_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "the Futian li 符天暦 is NAMED, dated (780-783, updated c.806) and authored (Cao Shiwei) with epoch 660 - but its TABLES do not survive, so the birth mansion stays source_gated, not computable",
+            "the engine's multi-regime agreement gate for this track is an explicit product choice (configured_method): the Sukuyoshi worked in one regime and did not hedge",
+            "all 32 rules of the primary pack come from the Taisho mainland recension; Yano 2013 shows medieval Japanese practice used a materially different Japanese recension - acquisition target named (Sukuyokyo shukusatsu, Wakita Bunsho 1897)",
+            "the Murakami Tenno consultation reproduces the position that LOST the 961 arbitration: Yoshino Nichizo gave the mansion to Hozo's actual-Moon method, not the schematic table - preserved as a fork, not averaged"
           ]
         }
       ]

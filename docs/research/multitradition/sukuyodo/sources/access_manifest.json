@@ -1,8 +1,14 @@
 {
   "schema_version": 1,
-  "updated": "2026-08-02",
+  "updated": "2026-08-04",
   "tradition_id": "japanese_sukuyodo",
   "pack_id": "sukuyodo_xiuyao_jing_t1299_v1",
+  "calendar_regime_correction_2026_08_04": {
+    "what_the_track_used_to_say": "The birth mansion was refused 'for want of a named lunisolar calendar regime', and the 2026-08-02 audit called that an access problem with no named candidate.",
+    "what_is_now_established": "The regime is named. Kotyk 2018 states that the Futian li 符天暦, produced by Cao Shiwei between 780-783 and updated around 806, 'was used by the Sukuyoshi through the Heian and Kamakura periods', that it was catalogued in Japan by 891 in the Nihonkoku genzai sho mokuroku as 唐七曜符天暦, and that the Tendai monk Nichien departed in 953 and returned in 957 with a version of it after Kamo no Yasunori complained that the Senmyo reki 宣明暦 state calendar (brought 859, adopted 862) was over a century stale. Two dated Japanese horoscopes independently confirm its epoch: the 1113 horoscope states 165,428 elapsed days and the Sukuyo go unroku for a 1268 birth states 222,245, both giving 660.",
+    "what_is_still_missing": "The Futian li's own tables and parameters. The calendar is lost and is known through reconstruction (Takesako 2016) and through the elapsed-day counts in the surviving horoscopes. Naming the regime converts the block from 'no candidate exists' to 'the candidate is named and dated, its parameters are not retrieved'. The checklist row stays source_gated; it does not become computable.",
+    "why_this_is_recorded_here": "This is the sixth false ceiling this corpus has retired. The rule is that a ceiling is never asserted without a documented hunt, and the previous statement asserted one."
+  },
   "purpose": "Hash-pinned access record for the Taisho witnesses that this pack's rules cite. Every rule citation resolves to a line key in one of the *_lines.txt renderings recorded here.",
   "not_onmyodo": "Sukuyodo is the Buddhist astral tradition transmitted through Chinese Buddhist translation from Indian and Iranian material. It is not Onmyodo. The repository's separate `onmyodo/` track covers the yin-yang and five-phase court tradition of the Onmyoryo. No source, rule, or vector may cross between the two tracks.",
   "retrieval": {
@@ -81,6 +87,29 @@
       "bytes": 17246,
       "sha256": "e4f2e978c63ded912f163b6a06388ac7a6a6987b1bb124dd9fa4cd09e6e6ae47",
       "role": "citation surface"
+    },
+    {
+      "file": "kotyk_jjrs_45_1_2018.pdf",
+      "work": "Japanese Buddhist Astrology and Astral Magic: Mikkyo and Sukuyodo",
+      "author": "Jeffrey Kotyk",
+      "publication": "Japanese Journal of Religious Studies 45/1 (2018): 37-86",
+      "doi": "10.18874/jjrs.45.1.2018.37-86",
+      "publisher": "Nanzan Institute for Religion and Culture",
+      "retrieved_from": "https://archive.org/download/JJRS451Kotyk/JJRS%2045-1%20Kotyk.pdf",
+      "retrieved_on": "2026-08-03",
+      "format": "PDF 1.6, 50 pages",
+      "bytes": 51750130,
+      "sha256": "a3fcf19a0bd55d712c95923a1cbcc918722eca04c0ca4348b4adf06b69e2418d",
+      "role": "the Japanese reception layer: names the calendar regimes Sukuyoshi actually used, the 961 Hozo/Kamo no Yasunori birth-mansion debate and its adjudication, and two dated Japanese horoscopes with elapsed-day counts",
+      "rights_note": "Scholarly article, copyright 2018 Nanzan Institute for Religion and Culture, retrieved from an Internet Archive item. Cited and paraphrased for research; not reproduced as product content. Facts, dates and numerals extracted from it are not themselves copyrightable, but no extended quotation is carried into any customer surface."
+    },
+    {
+      "file": "kotyk_jjrs_45_1_2018_text.txt",
+      "derived_from": "kotyk_jjrs_45_1_2018.pdf",
+      "description": "Page-addressed text extraction. Markers of the form '=== pdf_page N ===' delimit PDF pages; PDF page N corresponds to journal page N+36 (pdf_page 1 = p. 37).",
+      "bytes": 115399,
+      "sha256": "07cca7aeeb21519d39ca1694c37e010b771cac92443be5f83c4f6f9f8d1b4679",
+      "role": "citation surface for every rule in japanese_reception_rule_manifest.json"
     }
   ],
   "attempted_and_failed": [
