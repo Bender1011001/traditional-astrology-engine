@@ -197,6 +197,73 @@ nativity as quotable Greek.
 | Valens (Kroll 1908) | **No - total OCR failure** | Would be PD if usable | 0 rules; inventoried as a blocked lead only |
 | Riley's Valens translation (1990s) | Yes (it is a normal English PDF) | In copyright, modern | Location/orientation aid only, never quoted as authority |
 
+## 4. The Mathesis delineation-at-volume pack (added 2026-08-03)
+
+A second extraction pass over the same two Firmicus volumes produced
+`mathesis_delineation_rule_manifest.json` (23 rules, 196 quoted Latin cells,
+~9,400 words of Latin with ~8,200 words of engine rendering) and
+`mathesis_delineation_validation_vectors.json` (37 vectors). No new source
+artifacts were fetched; the same SHA-256-pinned OCR files are the text of
+record, and every cell carries its own char offset and line anchor into them.
+
+**What was read and mined.**
+
+- **Book II.17-19** (vol. 1): the idle places, the place-priority pairs, and
+  the full twelve-place topical significations, including the Moon's 8th-place
+  night-only joy.
+- **Book III.2-7 and III.13** (vol. 1): the seven planet-in-place chapters -
+  the single largest block (107 house cells), sect-split throughout exactly as
+  Firmicus prints it (`per diem`/`per noctem` sub-cells).
+- **Book IV.9-15** (vol. 1): the Moon-flow doctrine - the Moon separating from
+  each planet and applying to another, split by lunar phase
+  (crescens/minuta) and often by sect, plus the void-of-application series
+  (`ad nullum feratur ... per vacuum`).
+- **Book IV.17** (vol. 1): the Lot of Fortune - both computations (platic
+  whole-sign and the by-degree method Firmicus tells the reader to follow),
+  its significations, the double ruler procedure (domicile lord AND bound lord
+  of the Lot's degree), and the verdict clause.
+- **Book V.2-6** (vol. 2): the Ascendant in the Egyptian bounds of each of the
+  five planets; Saturn in all twelve signs; Jupiter in the signs as far as the
+  text survives; the Mercury-in-dignities fragment; and the Moon in the
+  domicile/decan/bounds of each planet, phase-split.
+- **Book VI.3-22** (vol. 2): six precisely-stateable two-planet aspect cells
+  (Saturn-Jupiter in all four figures, Jupiter-Venus and Jupiter-Mercury
+  trines).
+
+**Textual findings worth recording.**
+
+1. **The great Book V lacuna, confirmed in the fetched copy.** V.3 (Saturn in
+   the signs) survives complete; V.4 (Jupiter) begins mid-chapter at Cancer
+   and breaks off after Capricorn; the parallel chapters for Mars, the Sun and
+   Venus in the signs are lost entirely; V.5 (Mercury) survives only as two
+   cells (the Sun's domicile/decan, Venus' bounds/decan) plus a
+   cross-reference to a lost earlier treatment of Mercury in the Moon's
+   domicile; V.6 (the Moon) survives complete. The encoded rules report these
+   as gaps that must not be filled from other authors.
+2. **Apparatus interleaving is the dominant OCR hazard in vol. 2.** Kroll's
+   critical apparatus is printed as page footnotes, and the OCR stream splices
+   it into the running text at every page break; several lemmata are split
+   mid-word across it ([Saturnus in Capricorno], [Saturnus in Piscibus],
+   [Horoscopus in finibus Mercurii]). Every affected quotation stops at the
+   last clean clause before the splice and says so in its cell notes.
+3. **The Dorotheus lineage of Book VI.** Kroll/Skutsch/Ziegler print the Greek
+   parallels from the Anonymous De planetis (CCAG II 159-180) beneath the
+   aspect chapters and cite Heeg's demonstration that both Firmicus and the
+   Anonymous descend from Dorotheus of Sidon - recorded in the aspect rule's
+   exceptions.
+4. **Editorial supplements followed as printed.** Angle-bracket supplements
+   (`<a>`, `<se>`, `<neque de maternis>`, the whole opening clause of the
+   Jupiter-bounds cell at V.2.5) are quoted as the edition prints them and
+   flagged in cell notes; marked lacunae (rows of asterisks) stop the
+   quotation.
+
+**Refusal handling.** 55 of the 196 cells are encoded faithfully but marked
+`output_policy: refused` (death timing/manner, lifespan numbers, servitude and
+child-exposure verdicts, disease/disability as fate, sexual defamation,
+criminal-conduct claims); where only one clause of an otherwise renderable
+cell is affected, the clause is quarantined in `restricted_clauses` instead
+and the rest of the cell stays renderable.
+
 ## Open question referred to the product owner (2026-08-02): the water triplicity
 
 A research pass proposed changing the LIVE engine's `PTOLEMAIC_TRIPLICITY`

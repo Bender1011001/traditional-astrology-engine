@@ -1756,6 +1756,25 @@
             "Ptolemy's Boll/Boer text is a reprint of the 1940 first edition, so its US copyright status is genuinely unverified rather than assumed clear",
             "Firmicus's own Sagittarius bounds diverge from his manuscript tradition's consensus; the engine follows the consensus and the fork is disclosed, not resolved"
           ]
+        },
+        {
+          "module_id": "mathesis_delineation_at_volume",
+          "name": "Firmicus Mathesis Books II-VI: planet-in-house grid, sign cells, sect and phase splits",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "hellenistic/source_audit.md",
+            "hellenistic/mathesis_delineation_rule_manifest.json",
+            "hellenistic/mathesis_delineation_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "independent Latin review of every engine_translation_unreviewed rendering",
+            "the great Book V lacuna: planet-in-sign survives ONLY for Saturn (12/12) and Jupiter (7/12); Mars/Sun/Venus lost entirely, Mercury a 2-cell fragment - cannot be sourced from Firmicus without fabrication, and a dedicated vector pins the engine to reporting the gap",
+            "vol. 2 OCR splices Kroll's apparatus into the running text at page breaks; affected quotes stop at the last clean clause, noted per cell",
+            "unmined remainders recorded in rule exceptions: Moon-flow targets, V.1 rising signs, remaining Book VI pairs, Book VIII decans; Book VII deliberately skipped (dominated by refused topics)"
+          ]
         }
       ]
     },

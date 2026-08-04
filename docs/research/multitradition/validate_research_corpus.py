@@ -1075,10 +1075,10 @@ def validate(root: Path) -> dict[str, Any]:
     coverage_status_counts = Counter(
         module["coverage_status"] for module in coverage_modules
     )
-    if len(coverage_tracks) != 27 or len(coverage_modules) != 86:
+    if len(coverage_tracks) != 27 or len(coverage_modules) != 87:
         raise ValueError("Global engine coverage inventory changed")
     if coverage_status_counts != Counter(
-        {"research_verified": 28, "source_limited": 55, "not_implemented": 3}
+        {"research_verified": 29, "source_limited": 55, "not_implemented": 3}
     ):
         raise ValueError("Global engine coverage status counts changed")
     if any(

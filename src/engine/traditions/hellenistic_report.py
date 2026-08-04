@@ -109,12 +109,34 @@ def _cell(
         )
     text = None
     sect_key = "by_day" if is_day else "by_night"
-    if isinstance(cell.get(sect_key), str):
-        text = cell[sect_key]
+    other_key = "by_night" if is_day else "by_day"
+    sub = cell.get(sect_key)
+    if isinstance(sub, dict):
+        # Sect-split sub-cells carry their own text and their own policy.
+        if str(sub.get("output_policy", "")).lower() == "refused":
+            return None, (
+                f"The source states a result here ({trigger}, "
+                f"{sect_key.replace('_', ' ')}) and it is withheld: "
+                f"{sub.get('output_policy_reason', 'the pack refuses this cell')}."
+            )
+        if isinstance(sub.get("engine_rendering"), str):
+            text = sub["engine_rendering"]
+            trigger += f" · {sect_key.replace('_', ' ')}"
+    elif isinstance(sub, str):
+        text = sub
         trigger += f" · {sect_key.replace('_', ' ')}"
     elif isinstance(cell.get("engine_rendering"), str):
         text = cell["engine_rendering"]
     if not text:
+        if cell.get(other_key) is not None and cell.get(sect_key) is None:
+            # Firmicus stated a result for the OTHER sect only. Silence here
+            # would look like a gap; the truth is a sect-conditional source.
+            return None, (
+                f"Firmicus differentiates by sect here ({trigger}) and states "
+                f"a result only for {'nocturnal' if is_day else 'diurnal'} "
+                "nativities; this chart is "
+                f"{'diurnal' if is_day else 'nocturnal'}, so nothing is quoted."
+            )
         return None, None
     return Delineation(
         text=text, rule_id=rule_id, source=_source_label(rule),

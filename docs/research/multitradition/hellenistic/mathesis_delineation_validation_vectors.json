@@ -1,0 +1,668 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-03",
+ "tradition_id": "hellenistic",
+ "source_pack_id": "hellenistic_mathesis_delineation_v1",
+ "status": "research_only",
+ "source_ids": [
+  "hellenistic_firmicus_mathesis_kroll_skutsch_1897_vol1",
+  "hellenistic_firmicus_mathesis_kroll_skutsch_ziegler_1913_vol2"
+ ],
+ "vectors": [
+  {
+   "vector_id": "hel.mathesis.b3.saturn.house1.day",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.saturn"
+   ],
+   "inputs": {
+    "planet": "Saturn",
+    "whole_sign_house": 1,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "1",
+    "selects": "by_day",
+    "latin_incipit": "Saturnus per diem in horoscopo partiliter constitutus, id es",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 230093 (line 5048); sect split as printed by Firmicus, Mathesis III.2"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.saturn.house6.plain",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.saturn"
+   ],
+   "inputs": {
+    "planet": "Saturn",
+    "whole_sign_house": 6,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "6",
+    "selects": "top_level_fallback_no_sect_split",
+    "latin_incipit": "In sexto loco Saturnus ab boroscopo constitutus omne patrimo",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 236682 (line 5203); no sect split printed for this place"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.jupiter.house7.day",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.jupiter"
+   ],
+   "inputs": {
+    "planet": "Jupiter",
+    "whole_sign_house": 7,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "7",
+    "selects": "by_day",
+    "latin_incipit": "In septimo loco luppiter ab horoscopo constitutus, id est in",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 261245 (line 5712); sect split as printed by Firmicus, Mathesis III.3"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.jupiter.house11.plain",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.jupiter"
+   ],
+   "inputs": {
+    "planet": "Jupiter",
+    "whole_sign_house": 11,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "11",
+    "selects": "top_level_fallback_no_sect_split",
+    "latin_incipit": "In undecimo loco luppiter ab horoscopo constitutus maximas d",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 265226 (line 5798); no sect split printed for this place"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.mars.house4.night",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.mars"
+   ],
+   "inputs": {
+    "planet": "Mars",
+    "whole_sign_house": 4,
+    "sect": "night"
+   },
+   "expected": {
+    "cell": "4",
+    "selects": "by_night",
+    "latin_incipit": "In quarto loco Mars ab horoscopo idest in IMC. [Mars] partil",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 274108 (line 5991); sect split as printed by Firmicus, Mathesis III.4"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.mars.house9.plain",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.mars"
+   ],
+   "inputs": {
+    "planet": "Mars",
+    "whole_sign_house": 9,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "9",
+    "selects": "top_level_fallback_no_sect_split",
+    "latin_incipit": "In nono loco Mars ab horoscopo constitutus bonus erit circa ",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 288382 (line 6277); no sect split printed for this place"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.sun.house10.day",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.sun"
+   ],
+   "inputs": {
+    "planet": "Sun",
+    "whole_sign_house": 10,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "10",
+    "selects": "by_day",
+    "latin_incipit": "In decimo loco Sol ab horoscopo partiliter constitutus in di",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 330500 (line 7149); sect split as printed by Firmicus, Mathesis III.5"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.sun.house9.plain",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.sun"
+   ],
+   "inputs": {
+    "planet": "Sun",
+    "whole_sign_house": 9,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "9",
+    "selects": "top_level_fallback_no_sect_split",
+    "latin_incipit": "In nono loco Sol ab horoscopo constitutus fabricatores deoru",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 329259 (line 7120); no sect split printed for this place"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.venus.house2.night",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.venus"
+   ],
+   "inputs": {
+    "planet": "Venus",
+    "whole_sign_house": 2,
+    "sect": "night"
+   },
+   "expected": {
+    "cell": "2",
+    "selects": "by_night",
+    "latin_incipit": "In secundo loco Venus ab horoscopo constituta si in nocturna",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 339762 (line 7344); sect split as printed by Firmicus, Mathesis III.6"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.venus.house5.plain",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.venus"
+   ],
+   "inputs": {
+    "planet": "Venus",
+    "whole_sign_house": 5,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "5",
+    "selects": "top_level_fallback_no_sect_split",
+    "latin_incipit": "In quinto loco Venus ab horoscopo constituta faciet bonos be",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 343146 (line 7414); no sect split printed for this place"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.mercury.house1.day",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.mercury"
+   ],
+   "inputs": {
+    "planet": "Mercury",
+    "whole_sign_house": 1,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "1",
+    "selects": "by_day",
+    "latin_incipit": "Mercurius in parte horoscopi partiliter constitutus in his, ",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 367299 (line 7926); sect split as printed by Firmicus, Mathesis III.7"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.mercury.house9.plain",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.mercury"
+   ],
+   "inputs": {
+    "planet": "Mercury",
+    "whole_sign_house": 9,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "9",
+    "selects": "top_level_fallback_no_sect_split",
+    "latin_incipit": "In nono loco Mercurius ab horoscopo constitutus, 18 25 <si> ",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 381665 (line 8221); no sect split printed for this place"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.moon.house1.night",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.moon"
+   ],
+   "inputs": {
+    "planet": "Moon",
+    "whole_sign_house": 1,
+    "sect": "night"
+   },
+   "expected": {
+    "cell": "1",
+    "selects": "by_night",
+    "latin_incipit": "Luna in horoscopo partiliter constituta in uocturna genitura",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 439459 (line 9483); sect split as printed by Firmicus, Mathesis III.13"
+  },
+  {
+   "vector_id": "hel.mathesis.b3.moon.house11.plain",
+   "rule_ids": [
+    "hel.mathesis.b3.planet_in_house.moon"
+   ],
+   "inputs": {
+    "planet": "Moon",
+    "whole_sign_house": 11,
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "11",
+    "selects": "top_level_fallback_no_sect_split",
+    "latin_incipit": "In XI. loco ab horoscopo Luna constituta haec decernit, quae",
+    "output_policy": "renderable",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from firmicus_mathesis_kroll_skutsch_1897_vol1_djvu.txt at char offset 447425 (line 9655); no sect split printed for this place"
+  },
+  {
+   "vector_id": "hel.mathesis.b2.places.house9",
+   "rule_ids": [
+    "hel.mathesis.b2.place_significations"
+   ],
+   "inputs": {
+    "whole_sign_house": 9
+   },
+   "expected": {
+    "cell": "9",
+    "latin_incipit": "Nonus locus in IX. ab horoscopo signo constituitur; cuius me",
+    "topic": "religion, sects, journeys abroad",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.1 OCR at char offset 155396 (line 3445), Mathesis II.19.10"
+  },
+  {
+   "vector_id": "hel.mathesis.b2.places.house12.restricted",
+   "rule_ids": [
+    "hel.mathesis.b2.place_significations"
+   ],
+   "inputs": {
+    "whole_sign_house": 12
+   },
+   "expected": {
+    "cell": "12",
+    "restricted_clauses_present": true,
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.1 OCR at char offset 157062; the servile clause is encoded but never rendered"
+  },
+  {
+   "vector_id": "hel.mathesis.b2.idle_places.house6",
+   "rule_ids": [
+    "hel.mathesis.b2.idle_places"
+   ],
+   "inputs": {
+    "whole_sign_house": 6
+   },
+   "expected": {
+    "classified": "idle_and_cast_down",
+    "basis": "aversion to the ascendant",
+    "customer_prediction": false
+   },
+   "provenance": "sliced from vol.1 OCR at char offset 146690, Mathesis II.17"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.fortune.sect_reversal",
+   "rule_ids": [
+    "hel.mathesis.b4.lot_of_fortune"
+   ],
+   "inputs": {
+    "sect": "night",
+    "lot": "fortune"
+   },
+   "expected": {
+    "count": "from the Moon to the Sun, projected from the ascendant",
+    "sect_reversal_applied": true,
+    "customer_prediction": false
+   },
+   "provenance": "formula sliced from vol.1 OCR at char offset 555271, Mathesis IV.17"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.fortune.ruler_judgment",
+   "rule_ids": [
+    "hel.mathesis.b4.lot_of_fortune"
+   ],
+   "inputs": {
+    "lot": "fortune",
+    "ruler_condition": "single lord, dignified, well placed"
+   },
+   "expected": {
+    "verdict": "felicem genituram decernit - a fortunate nativity",
+    "customer_prediction": false
+   },
+   "provenance": "verdict sliced from vol.1 OCR at char offset 558580, Mathesis IV.17"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.saturn.aries",
+   "rule_ids": [
+    "hel.mathesis.b5.planet_in_sign.saturn"
+   ],
+   "inputs": {
+    "planet": "Saturn",
+    "sign": "Aries"
+   },
+   "expected": {
+    "cell": "Aries",
+    "latin_incipit": "Saturnus in Ariete fuerit inventus, in prima aetate faciet m",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.2 OCR at char offset 253204 (line 4680), Mathesis V.3.2"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.saturn.libra.testimony_fork",
+   "rule_ids": [
+    "hel.mathesis.b5.planet_in_sign.saturn"
+   ],
+   "inputs": {
+    "planet": "Saturn",
+    "sign": "Libra",
+    "benefic_witness": false
+   },
+   "expected": {
+    "cell": "Libra",
+    "conditional_extension_selected": "no support of life; acquisitions easily lost",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.2 OCR at char offset 281751, Mathesis V.3.29-30; Firmicus conditions the whole judgment on benefic testimony"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.jupiter.virgo",
+   "rule_ids": [
+    "hel.mathesis.b5.planet_in_sign.jupiter"
+   ],
+   "inputs": {
+    "planet": "Jupiter",
+    "sign": "Virgo"
+   },
+   "expected": {
+    "cell": "Virgo",
+    "latin_incipit": "Quicunque lovem in Virgine habuerint, mundi honesti bene nut",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.2 OCR at char offset 318341 (line 5999), Mathesis V.4.14"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.jupiter.aries.lacuna",
+   "rule_ids": [
+    "hel.mathesis.b5.planet_in_sign.jupiter"
+   ],
+   "inputs": {
+    "planet": "Jupiter",
+    "sign": "Aries"
+   },
+   "expected": {
+    "cell": null,
+    "result": "no_delineation_textual_lacuna",
+    "must_not_fabricate": true,
+    "customer_prediction": false
+   },
+   "provenance": "Book V lacuna: V.4 as transmitted begins at Cancer; the engine must report the gap, not fill it (Kroll/Skutsch/Ziegler 1913, transition at the V.4.25-V.6.6 page, OCR line ~6246)"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.asc_bounds.mercury",
+   "rule_ids": [
+    "hel.mathesis.b5.ascendant_bound_lord"
+   ],
+   "inputs": {
+    "ascendant_bound_lord_egyptian": "Mercury"
+   },
+   "expected": {
+    "cell": "Mercury",
+    "latin_incipit": "scopus in finibus Mercurii fuerit inventus, faciet litterato",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.2 OCR at char offset 247233 (line 4563), Mathesis V.2.15"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.mercury.sun_dignity.night_refused",
+   "rule_ids": [
+    "hel.mathesis.b5.mercury_in_dignities_fragment"
+   ],
+   "inputs": {
+    "planet": "Mercury",
+    "dignity_host": "Sun",
+    "sect": "night"
+   },
+   "expected": {
+    "cell": "Sun",
+    "selects": "by_night",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "the nocturnal sub-cell decrees madness and sensory disability as fate; encoded from vol.2 OCR char offset 331111 and refused for output"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.moon.jupiter_bounds.waxing",
+   "rule_ids": [
+    "hel.mathesis.b5.moon_in_dignities"
+   ],
+   "inputs": {
+    "planet": "Moon",
+    "dignity_host": "Jupiter",
+    "lunar_phase": "waxing"
+   },
+   "expected": {
+    "cell": "Jupiter",
+    "latin_incipit": "Si Luna in finibus Io-3 15 vis vel in decano fuerit inventa,",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.2 OCR at char offset 335543, Mathesis V.6.3"
+  },
+  {
+   "vector_id": "hel.mathesis.b5.moon.venus_bounds.phase_fork",
+   "rule_ids": [
+    "hel.mathesis.b5.moon_in_dignities"
+   ],
+   "inputs": {
+    "planet": "Moon",
+    "dignity_host": "Venus",
+    "lunar_phase": "waning"
+   },
+   "expected": {
+    "cell": "Venus",
+    "selects": "waning",
+    "output_policy": "renderable",
+    "note": "the waxing counterpart is refused (sexual defamation)",
+    "customer_prediction": false
+   },
+   "provenance": "cells sliced from vol.2 OCR at char offsets 339398 and 339694, Mathesis V.6.8"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.flow.saturn_to_jupiter.waxing",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.from_saturn"
+   ],
+   "inputs": {
+    "moon_separating_from": "Saturn",
+    "moon_applying_to": "Jupiter",
+    "lunar_phase": "waxing"
+   },
+   "expected": {
+    "cell": "Jupiter",
+    "selects": "waxing",
+    "latin_incipit": "A Saturno defluens Luna si se lovis stellae coniunxerit vel ",
+    "customer_prediction": false
+   },
+   "provenance": "sub-cell sliced from vol.1 OCR at char offset 488319, Mathesis IV.9.2"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.flow.saturn_to_mars.refused",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.from_saturn"
+   ],
+   "inputs": {
+    "moon_separating_from": "Saturn",
+    "moon_applying_to": "Mars"
+   },
+   "expected": {
+    "cell": "Mars",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.1 OCR at char offset 489127; death-in-youth verdict encoded faithfully and refused for output"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.flow.jupiter_to_venus.waning",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.from_jupiter"
+   ],
+   "inputs": {
+    "moon_separating_from": "Jupiter",
+    "moon_applying_to": "Venus",
+    "lunar_phase": "waning"
+   },
+   "expected": {
+    "cell": "Venus",
+    "selects": "waning",
+    "latin_incipit": "nerem feratur minuta luminibus et sit <(in> principalibus ve",
+    "customer_prediction": false
+   },
+   "provenance": "sub-cell sliced from vol.1 OCR at char offset 498445, Mathesis IV.10.7"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.flow.mars_to_jupiter.waxing",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.from_mars"
+   ],
+   "inputs": {
+    "moon_separating_from": "Mars",
+    "moon_applying_to": "Jupiter",
+    "lunar_phase": "waxing"
+   },
+   "expected": {
+    "cell": "Jupiter",
+    "selects": "waxing",
+    "latin_incipit": "Luna plena vel crescens lumine ad lovem feratur in oportunis",
+    "customer_prediction": false
+   },
+   "provenance": "sub-cell sliced from vol.1 OCR at char offset 506880, Mathesis IV.11.8"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.flow.sun_to_venus.sect_fork",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.from_sun"
+   ],
+   "inputs": {
+    "moon_separating_from": "Sun",
+    "moon_applying_to": "Venus",
+    "sect": "night"
+   },
+   "expected": {
+    "cell": "Venus",
+    "selects": "by_night",
+    "output_policy": "renderable",
+    "note": "the diurnal counterpart is refused (reproductive certainty)",
+    "customer_prediction": false
+   },
+   "provenance": "sub-cells sliced from vol.1 OCR at char offsets 507927 and 509151, Mathesis IV.12.1-2"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.flow.venus_to_mercury.waxing",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.from_venus"
+   ],
+   "inputs": {
+    "moon_separating_from": "Venus",
+    "moon_applying_to": "Mercury",
+    "lunar_phase": "waxing"
+   },
+   "expected": {
+    "cell": "Mercury",
+    "selects": "waxing",
+    "latin_incipit": "defluens Luna si ad Mercurium feratur, si sit crescens vel p",
+    "customer_prediction": false
+   },
+   "provenance": "sub-cell sliced from vol.1 OCR at char offset 514771, Mathesis IV.13.1"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.flow.mercury_to_saturn.day",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.from_mercury"
+   ],
+   "inputs": {
+    "moon_separating_from": "Mercury",
+    "moon_applying_to": "Saturn",
+    "sect": "day",
+    "lunar_phase": "waxing"
+   },
+   "expected": {
+    "cell": "Saturn",
+    "selects": "by_day",
+    "restricted_clauses_present": true,
+    "customer_prediction": false
+   },
+   "provenance": "sub-cell sliced from vol.1 OCR at char offset 523434, Mathesis IV.14.1"
+  },
+  {
+   "vector_id": "hel.mathesis.b4.void.jupiter.phase_fork",
+   "rule_ids": [
+    "hel.mathesis.b4.moon_flow.void_of_application"
+   ],
+   "inputs": {
+    "moon_separating_from": "Jupiter",
+    "moon_applying_to": null,
+    "lunar_phase": "waning"
+   },
+   "expected": {
+    "cell": "Jupiter",
+    "selects": "waning",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "sub-cell sliced from vol.1 OCR at char offset 542418, Mathesis IV.15.3; the waxing counterpart is renderable"
+  },
+  {
+   "vector_id": "hel.mathesis.b6.saturn_jupiter.conjunction.day",
+   "rule_ids": [
+    "hel.mathesis.b6.aspect_pairs"
+   ],
+   "inputs": {
+    "aspect_pair": "saturn_jupiter.conjunction",
+    "sect": "day"
+   },
+   "expected": {
+    "cell": "saturn_jupiter.conjunction",
+    "sect_condition": "verdict strengthened by day",
+    "latin_incipit": "Si Saturnus et luppiter unum hospitium partis acceperint, et",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.2 OCR at char offset 460325, Mathesis VI.22.2"
+  },
+  {
+   "vector_id": "hel.mathesis.b6.saturn_jupiter.square.overcoming",
+   "rule_ids": [
+    "hel.mathesis.b6.aspect_pairs"
+   ],
+   "inputs": {
+    "aspect_pair": "saturn_jupiter.square",
+    "superior": "Saturn"
+   },
+   "expected": {
+    "cell": "saturn_jupiter.square",
+    "conditional_extension_selected": "the adverse verdict as quoted",
+    "customer_prediction": false
+   },
+   "provenance": "cell sliced from vol.2 OCR at char offset 383945, Mathesis VI.8.2-3; the dexter-overcoming fork is stated in the text"
+  }
+ ]
+}

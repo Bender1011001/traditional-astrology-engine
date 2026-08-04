@@ -368,3 +368,21 @@ def test_hellenistic_lists_undecided_rules_openly(hellenistic):
     blob = " ".join(undecided.notes)
     assert "doryphoria" in blob
     assert "hel.ptolemy.parents_same_sect_doryphoria_brilliance" in blob
+
+
+def test_mathesis_sect_split_cells_select_by_chart_sect(hellenistic):
+    """Saturn-in-8th differentiates by sect; a day chart must quote the
+    by-day sub-cell, and a cell stated only for the other sect must be
+    NOTED as sect-conditional rather than silently skipped."""
+    fired = {
+        d.rule_id: d.trigger
+        for s in hellenistic.sections for d in s.delineations
+    }
+    saturn = [t for r, t in fired.items()
+              if r == "hel.mathesis.b3.planet_in_house.saturn"]
+    assert saturn and "by day" in saturn[0]
+    all_refusals = " ".join(
+        r for s in hellenistic.sections for r in s.refusals
+    )
+    assert "only for nocturnal nativities" in all_refusals
+    assert "withheld" in all_refusals  # Sun-12's demeaning-status cell
