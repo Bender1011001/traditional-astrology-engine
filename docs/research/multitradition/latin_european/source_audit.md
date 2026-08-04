@@ -106,3 +106,21 @@ Recorded per-rule in `conflicts_with`, notably:
    unmined; Book 2's remaining worked figures likewise.
 3. Independent specialist review (early-modern English / history of astrology) before any rule
    leaves `research_only`.
+
+## 2026-08-03: the p.104 Ptolemaic terms are keyed - the named follow-up is closed
+
+The digits of "A Table of the Essentiall Dignities of the Planets according to
+Ptolomy" (CA p.104, leaf 138) were read from IIIF page photographs (full page
+plus three high-resolution crops, all hash-pinned in `sources/`), because both
+OCR text layers garble the table. All twelve term rows are monotone, close at
+30, and agree with the received Ptolemaic set. The same photograph confirms
+Lilly's triplicity column for the watery signs as Mars day AND night (the
+Cancer row prints Mars/Mars), corroborating the LILLY_TRIPLICITY table from
+the printed doctrine.
+
+Consequence in the engine: `build_latin_european`'s scorer no longer blends
+traditions. Its +2 now comes from `PTOLEMAIC_TERMS_LILLY1647` and its +3 from
+`LILLY_TRIPLICITY`; Egyptian bounds and Dorothean triplicities remain the
+Hellenistic section's. A discriminating regression test pins Aries 12.5° -
+Mercury by the Egyptian table, Venus by the Ptolemaic - so the blend cannot
+quietly return.

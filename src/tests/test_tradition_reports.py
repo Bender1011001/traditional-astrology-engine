@@ -301,3 +301,34 @@ def test_no_backspace_bytes_in_tradition_sources():
         str(p) for p in root.rglob("*.py") if b"\x08" in p.read_bytes()
     ]
     assert not offenders, offenders
+
+
+def test_lilly_scorer_uses_ptolemaic_terms_not_egyptian():
+    """CA p.104 prints Ptolemaic terms; awarding Lilly's +2 from Egyptian
+    bounds was a tradition blend. Aries 12.5 deg is a discriminating case:
+    Egyptian gives Mercury (Venus ends 12), Ptolemaic gives Venus (ends 14)."""
+    from src.engine.multitradition.hellenistic import _bound_ruler, _terms_for
+    from src.engine.reference_data import (
+        EGYPTIAN_TERMS,
+        PTOLEMAIC_TERMS_LILLY1647,
+    )
+
+    egyptian = _terms_for("Aries", EGYPTIAN_TERMS)
+    ptolemaic = _terms_for("Aries", PTOLEMAIC_TERMS_LILLY1647)
+    assert _bound_ruler("Aries", 12.5, {"Aries": egyptian}) == "Mercury"
+    assert _bound_ruler("Aries", 12.5, {"Aries": ptolemaic}) == "Venus"
+    # every row keyed from the photograph is monotone and closes at 30
+    for sign, rows in PTOLEMAIC_TERMS_LILLY1647.items():
+        ends = [end for _ruler, end in rows]
+        assert ends == sorted(ends) and ends[-1] == 30, sign
+
+
+def test_latin_section_scores_with_lillys_own_tables():
+    panel = build_panel(BIRTH)
+    latin = next(
+        s for s in panel["sections"] if s["tradition_id"] == "latin_european"
+    )
+    blob = str(latin["facts"])
+    assert "1647 p.104" in blob or "Lilly's table" in blob
+    subjects = [d["subject"] for d in latin["disclosures"]]
+    assert any("keyed from the 1647 photographs" in s for s in subjects)

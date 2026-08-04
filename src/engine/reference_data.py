@@ -105,6 +105,31 @@ LILLY_TRIPLICITY = {
     "Water": (PlanetName.MARS, PlanetName.MARS),
 }
 
+# Ptolemaic terms, keyed digit-by-digit from IIIF page photographs of the 1647
+# first edition of Lilly's Christian Astrology, p.104 ("A Table of the
+# Essentiall Dignities of the Planets according to Ptolomy") - Wellcome scan
+# b30338724, leaf 138, crops pinned in
+# docs/research/multitradition/latin_european/sources/. Both OCR text layers
+# garble this table; every value below was read from the photographs. All
+# twelve rows agree with the received Ptolemaic set. Cumulative END degrees,
+# same shape as EGYPTIAN_TERMS. A Lilly-mode scorer must use THIS table, not
+# the Egyptian bounds - blending them was the same error as the old hybrid
+# water triplicity.
+PTOLEMAIC_TERMS_LILLY1647 = {
+    Sign.ARIES: [(PlanetName.JUPITER, 6), (PlanetName.VENUS, 14), (PlanetName.MERCURY, 21), (PlanetName.MARS, 26), (PlanetName.SATURN, 30)],
+    Sign.TAURUS: [(PlanetName.VENUS, 8), (PlanetName.MERCURY, 15), (PlanetName.JUPITER, 22), (PlanetName.SATURN, 26), (PlanetName.MARS, 30)],
+    Sign.GEMINI: [(PlanetName.MERCURY, 7), (PlanetName.JUPITER, 14), (PlanetName.VENUS, 21), (PlanetName.SATURN, 25), (PlanetName.MARS, 30)],
+    Sign.CANCER: [(PlanetName.MARS, 6), (PlanetName.JUPITER, 13), (PlanetName.MERCURY, 20), (PlanetName.VENUS, 27), (PlanetName.SATURN, 30)],
+    Sign.LEO: [(PlanetName.SATURN, 6), (PlanetName.MERCURY, 13), (PlanetName.VENUS, 19), (PlanetName.JUPITER, 25), (PlanetName.MARS, 30)],
+    Sign.VIRGO: [(PlanetName.MERCURY, 7), (PlanetName.VENUS, 13), (PlanetName.JUPITER, 18), (PlanetName.SATURN, 24), (PlanetName.MARS, 30)],
+    Sign.LIBRA: [(PlanetName.SATURN, 6), (PlanetName.VENUS, 11), (PlanetName.JUPITER, 19), (PlanetName.MERCURY, 24), (PlanetName.MARS, 30)],
+    Sign.SCORPIO: [(PlanetName.MARS, 6), (PlanetName.JUPITER, 14), (PlanetName.VENUS, 21), (PlanetName.MERCURY, 27), (PlanetName.SATURN, 30)],
+    Sign.SAGITTARIUS: [(PlanetName.JUPITER, 8), (PlanetName.VENUS, 14), (PlanetName.MERCURY, 19), (PlanetName.SATURN, 25), (PlanetName.MARS, 30)],
+    Sign.CAPRICORN: [(PlanetName.VENUS, 6), (PlanetName.MERCURY, 12), (PlanetName.JUPITER, 19), (PlanetName.MARS, 25), (PlanetName.SATURN, 30)],
+    Sign.AQUARIUS: [(PlanetName.SATURN, 6), (PlanetName.MERCURY, 12), (PlanetName.VENUS, 20), (PlanetName.JUPITER, 25), (PlanetName.MARS, 30)],
+    Sign.PISCES: [(PlanetName.VENUS, 8), (PlanetName.JUPITER, 14), (PlanetName.MERCURY, 20), (PlanetName.MARS, 26), (PlanetName.SATURN, 30)],
+}
+
 # Legacy Export for backward compatibility (defaults to Dorothean in original code? No, original had dict with Sect keys)
 # The original code had: "Fire": {Sect.DAY: PlanetName.SUN, Sect.NIGHT: PlanetName.JUPITER}, which looked like Ptolemaic actually, but with limited keys.
 # Actually previously it was referenced as TRIPLICITY_RULERS in dignities.py as tuple (Day, Night, Part).

@@ -1,66 +1,106 @@
 {
- "schema_version": 1,
- "updated": "2026-08-03",
- "purpose": "Hash-pinned access record for the William Lilly, Christian Astrology (1647) witnesses used by lilly_ca_rule_manifest.json",
- "work": {
-  "author": "William Lilly (1602-1681)",
-  "title": "Christian Astrology modestly Treated of in three Books",
-  "edition": "London: printed by Tho. Brudenell for John Partridge and Humph. Blunden, 1647 (first edition)",
-  "rights": "published 1647; public domain worldwide. The Wellcome item carries an explicit Public Domain Mark 1.0.",
-  "tcp_check": "Not transcribed by EEBO-TCP: the textcreationpartnership/Texts catalog (TCP.csv, retrieved 2026-08-03) contains no Christian Astrology row for Wing L2215 among its Lilly entries; OCR text layers of the 1647 scans are therefore the best available machine text."
- },
- "research_only": true,
- "live_engine": false,
- "customer_output_eligible": false,
- "artifacts": [
-  {
-   "local_path": "sources/ca1647_wellcome_djvu.txt",
-   "role": "primary prose witness (long-s OCR'd as 'f'; tables degraded)",
-   "url": "https://archive.org/download/b30338724/b30338724_djvu.txt",
-   "item": "https://archive.org/details/b30338724 (Wellcome Collection scan, Public Domain Mark 1.0)",
-   "bytes": 2005702,
-   "sha256": "7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa",
-   "retrieved": "2026-08-03"
+  "schema_version": 1,
+  "updated": "2026-08-03",
+  "purpose": "Hash-pinned access record for the William Lilly, Christian Astrology (1647) witnesses used by lilly_ca_rule_manifest.json",
+  "work": {
+    "author": "William Lilly (1602-1681)",
+    "title": "Christian Astrology modestly Treated of in three Books",
+    "edition": "London: printed by Tho. Brudenell for John Partridge and Humph. Blunden, 1647 (first edition)",
+    "rights": "published 1647; public domain worldwide. The Wellcome item carries an explicit Public Domain Mark 1.0.",
+    "tcp_check": "Not transcribed by EEBO-TCP: the textcreationpartnership/Texts catalog (TCP.csv, retrieved 2026-08-03) contains no Christian Astrology row for Wing L2215 among its Lilly entries; OCR text layers of the 1647 scans are therefore the best available machine text."
   },
-  {
-   "local_path": "sources/ca1647_bim_djvu.txt",
-   "role": "second prose witness (preserves long-s; independent OCR of an independent 1647 copy)",
-   "url": "https://archive.org/download/bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647/bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647_djvu.txt",
-   "item": "https://archive.org/details/bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647 (British Library microfilm, Early English Books 1641-1700)",
-   "bytes": 1681858,
-   "sha256": "f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d",
-   "retrieved": "2026-08-03"
-  },
-  {
-   "local_path": "sources/ca1647_wellcome_leaf141_p107_orb_table.jpg",
-   "role": "page photograph of CA 1647 p. 107 (the orb/moiety table); controlling witness for every digit of both orb columns",
-   "url": "https://iiif.archive.org/iiif/b30338724$141/full/1600,/0/default.jpg",
-   "bytes": 663544,
-   "sha256": "5d752cfce2dae1f287f8b646f988ee7dd77d2456388c5d73c95c5d3302ec8090",
-   "retrieved": "2026-08-03"
-  },
-  {
-   "local_path": "sources/ca1647_wellcome_leaf149_p115_point_table.jpg",
-   "role": "page photograph of CA 1647 p. 115 (the fortitude/debility point table); controlling witness for all 8 essential and 33 accidental point values",
-   "url": "https://iiif.archive.org/iiif/b30338724$149/full/1600,/0/default.jpg",
-   "bytes": 629265,
-   "sha256": "083de3958ca9145e69c05a6d116490bc9909642ff94fd9ed0441aff3fdd49601",
-   "retrieved": "2026-08-03"
+  "research_only": true,
+  "live_engine": false,
+  "customer_output_eligible": false,
+  "artifacts": [
+    {
+      "local_path": "sources/ca1647_wellcome_djvu.txt",
+      "role": "primary prose witness (long-s OCR'd as 'f'; tables degraded)",
+      "url": "https://archive.org/download/b30338724/b30338724_djvu.txt",
+      "item": "https://archive.org/details/b30338724 (Wellcome Collection scan, Public Domain Mark 1.0)",
+      "bytes": 2005702,
+      "sha256": "7c08b55359c41049c5d43901b8da869a326f8eb852e4a30603a4b698533626aa",
+      "retrieved": "2026-08-03"
+    },
+    {
+      "local_path": "sources/ca1647_bim_djvu.txt",
+      "role": "second prose witness (preserves long-s; independent OCR of an independent 1647 copy)",
+      "url": "https://archive.org/download/bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647/bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647_djvu.txt",
+      "item": "https://archive.org/details/bim_early-english-books-1641-1700_christian-astrology-_lilly-william_1647 (British Library microfilm, Early English Books 1641-1700)",
+      "bytes": 1681858,
+      "sha256": "f661a0a140950cc53be09a8400ba87578f35b74b8724818b9f356cf6dd155e4d",
+      "retrieved": "2026-08-03"
+    },
+    {
+      "local_path": "sources/ca1647_wellcome_leaf141_p107_orb_table.jpg",
+      "role": "page photograph of CA 1647 p. 107 (the orb/moiety table); controlling witness for every digit of both orb columns",
+      "url": "https://iiif.archive.org/iiif/b30338724$141/full/1600,/0/default.jpg",
+      "bytes": 663544,
+      "sha256": "5d752cfce2dae1f287f8b646f988ee7dd77d2456388c5d73c95c5d3302ec8090",
+      "retrieved": "2026-08-03"
+    },
+    {
+      "local_path": "sources/ca1647_wellcome_leaf149_p115_point_table.jpg",
+      "role": "page photograph of CA 1647 p. 115 (the fortitude/debility point table); controlling witness for all 8 essential and 33 accidental point values",
+      "url": "https://iiif.archive.org/iiif/b30338724$149/full/1600,/0/default.jpg",
+      "bytes": 629265,
+      "sha256": "083de3958ca9145e69c05a6d116490bc9909642ff94fd9ed0441aff3fdd49601",
+      "retrieved": "2026-08-03"
+    },
+    {
+      "artifact_id": "ca1647_wellcome_leaf138_p104_term_table",
+      "file": "ca1647_wellcome_leaf138_p104_term_table.jpg",
+      "url": "https://iiif.archive.org/iiif/b30338724$138/full/1600,/0/default.jpg",
+      "bytes": 775319,
+      "sha256": "812098f030a57b5603ee79c39882bd7f3b02c54bb199ad7dac8dcb6a8aa58b58",
+      "note": "CA p.104 full page: A Table of the Essentiall Dignities according to Ptolomy. Used 2026-08-03 to key PTOLEMAIC_TERMS_LILLY1647 digit-by-digit and to confirm Lilly's water triplicity as Mars/Mars (Cancer row)."
+    },
+    {
+      "artifact_id": "p104_terms_crop_top",
+      "file": "p104_terms_crop_top.jpg",
+      "url": "https://iiif.archive.org/iiif/b30338724$138/pct:25,23,65,12/2400,/0/default.jpg",
+      "bytes": 253455,
+      "sha256": "e772cd387fdb083868900526310cc700a0ee7a23ae1a2b1db6f7b6a592388ca4",
+      "note": "High-res crop, term rows Aries-Cancer. Used 2026-08-03 to key PTOLEMAIC_TERMS_LILLY1647 digit-by-digit and to confirm Lilly's water triplicity as Mars/Mars (Cancer row)."
+    },
+    {
+      "artifact_id": "p104_terms_crop_bottom",
+      "file": "p104_terms_crop_bottom.jpg",
+      "url": "https://iiif.archive.org/iiif/b30338724$138/pct:25,34,65,12/2400,/0/default.jpg",
+      "bytes": 285193,
+      "sha256": "fba0156f238a9ecc17694ee74d2cca3b11f1434b07594123c94f8b6c2e70170f",
+      "note": "High-res crop, term rows Leo-Aquarius. Used 2026-08-03 to key PTOLEMAIC_TERMS_LILLY1647 digit-by-digit and to confirm Lilly's water triplicity as Mars/Mars (Cancer row)."
+    },
+    {
+      "artifact_id": "p104_terms_crop_pisces",
+      "file": "p104_terms_crop_pisces.jpg",
+      "url": "https://iiif.archive.org/iiif/b30338724$138/pct:25,44,65,5/2400,/0/default.jpg",
+      "bytes": 121323,
+      "sha256": "7e42617207f2b088bf37629184d9026cc1c304a9ab5699f8027b44c9d3f6ee8b",
+      "note": "High-res crop, Pisces term row and column totals. Used 2026-08-03 to key PTOLEMAIC_TERMS_LILLY1647 digit-by-digit and to confirm Lilly's water triplicity as Mars/Mars (Cancer row)."
+    },
+    {
+      "artifact_id": "ca1647_wellcome_leaf139_p105_term_table",
+      "file": "ca1647_wellcome_leaf139_p105_term_table.jpg",
+      "url": "https://iiif.archive.org/iiif/b30338724$139/full/1600,/0/default.jpg",
+      "bytes": 721538,
+      "sha256": "19da5678ba7ffc04a2c148483310796493bc9618ce61ad2247a6004e8f24798c",
+      "note": "CA p.105 facing page (table continuation check). Used 2026-08-03 to key PTOLEMAIC_TERMS_LILLY1647 digit-by-digit and to confirm Lilly's water triplicity as Mars/Mars (Cancer row)."
+    }
+  ],
+  "consulted_not_pinned": [
+    {
+      "what": "archive.org 1659 second-edition scans (b30328524_0001) and later-edition items",
+      "why_not": "the 1647 first edition is the controlling witness; the 1659 printing was not needed"
+    },
+    {
+      "what": "b30338724_djvu.xml (26 MB word-coordinate layer) and b30338724_page_numbers.json",
+      "why_not": "used transiently to map printed pages 107/115 to scan leaves 141/149; not needed at rest"
+    }
+  ],
+  "legibility_verdict": {
+    "connected_prose": "good in both witnesses; all doctrine passages quoted in the manifest were read whole, in both witnesses where cited",
+    "numeric_tables": "degraded in both OCR layers (planet sigils and column digits garbled); resolved by reading the two pinned page photographs digit-by-digit",
+    "evidence": "BIM layer renders the p.115 table with missing digits (e.g. txt lines ~8350-8390); Wellcome layer drops the debility digits into a garbled line ('00 4^ v-A 4^ <ui 4*'). Recorded honestly; the photographs are controlling."
   }
- ],
- "consulted_not_pinned": [
-  {
-   "what": "archive.org 1659 second-edition scans (b30328524_0001) and later-edition items",
-   "why_not": "the 1647 first edition is the controlling witness; the 1659 printing was not needed"
-  },
-  {
-   "what": "b30338724_djvu.xml (26 MB word-coordinate layer) and b30338724_page_numbers.json",
-   "why_not": "used transiently to map printed pages 107/115 to scan leaves 141/149; not needed at rest"
-  }
- ],
- "legibility_verdict": {
-  "connected_prose": "good in both witnesses; all doctrine passages quoted in the manifest were read whole, in both witnesses where cited",
-  "numeric_tables": "degraded in both OCR layers (planet sigils and column digits garbled); resolved by reading the two pinned page photographs digit-by-digit",
-  "evidence": "BIM layer renders the p.115 table with missing digits (e.g. txt lines ~8350-8390); Wellcome layer drops the debility digits into a garbled line ('00 4^ v-A 4^ <ui 4*'). Recorded honestly; the photographs are controlling."
- }
 }

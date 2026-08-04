@@ -28,7 +28,13 @@ from typing import Any
 
 import swisseph as swe
 
-from ..reference_data import DOROTHEAN_TRIPLICITY, EGYPTIAN_TERMS, PTOLEMAIC_TRIPLICITY
+from ..reference_data import (
+    DOROTHEAN_TRIPLICITY,
+    EGYPTIAN_TERMS,
+    LILLY_TRIPLICITY,
+    PTOLEMAIC_TERMS_LILLY1647,
+    PTOLEMAIC_TRIPLICITY,
+)
 from .types import BirthInput, DisclosureKind, EvidenceGrade, TraditionSection
 
 SIGNS = [
@@ -88,21 +94,26 @@ def _enum_value(item: Any) -> str:
 
 
 def _bounds_for(sign: str) -> list[tuple[str, float, float]]:
-    """Egyptian bounds as (ruler, start, end).
+    """Egyptian bounds as (ruler, start, end)."""
+    return _terms_for(sign, EGYPTIAN_TERMS)
+
+
+def _terms_for(sign: str, table: dict) -> list[tuple[str, float, float]]:
+    """Any cumulative-end term table as (ruler, start, end) triples.
 
     reference_data keys by Sign enum and stores cumulative END degrees only, so
-    the start of each bound is the previous entry's end.
+    the start of each term is the previous entry's end.
     """
     from ..models import Sign
 
     entries = None
-    for key, value in EGYPTIAN_TERMS.items():
+    for key, value in table.items():
         if _enum_value(key) == sign:
             entries = value
             break
     if entries is None:
         try:
-            entries = EGYPTIAN_TERMS[Sign(sign)]
+            entries = table[Sign(sign)]
         except Exception:  # noqa: BLE001
             return []
 
@@ -324,18 +335,18 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
         ("Alcabitius", "Placidus", "Campanus", "Porphyry", "Whole sign"),
     )
     section.disclose(
-        DisclosureKind.FORK,
-        "Term table - a known blend, disclosed until the 1647 digits are keyed",
-        "The +2 term score in this section is currently awarded from the "
-        "EGYPTIAN bounds table, but Lilly prints PTOLEMAIC terms (CA p.104) - "
-        "the corpus's Lilly pack records this exact conflict and flags that a "
-        "Lilly-mode scorer must not use Egyptian bounds. The Ptolemaic term "
-        "digits have not yet been keyed from the pinned 1647 page photographs, "
-        "and taking them from a modern secondary table would violate the "
-        "house sourcing rules, so the blend is DISCLOSED rather than silently "
-        "half-fixed: any planet whose Egyptian and Ptolemaic term lords differ "
-        "may gain or lose 2 points against Lilly's own arithmetic.",
-        ("Ptolemaic terms per CA p.104, once keyed from the page photographs",),
+        DisclosureKind.SOURCE,
+        "Term and triplicity tables keyed from the 1647 photographs",
+        "This scorer previously awarded its +2 from the Egyptian bounds and "
+        "its +3 from the Dorothean triplicities - two blends of other "
+        "traditions into a Lilly-mode score. Both are resolved from the pinned "
+        "IIIF photographs of Christian Astrology p.104 (Wellcome b30338724, "
+        "leaf 138): the +2 now uses the Ptolemaic terms keyed digit-by-digit "
+        "from the page (all twelve rows agree with the received Ptolemaic "
+        "set), and the +3 uses Lilly's own triplicity table, whose water row "
+        "the same photograph confirms as Mars by day AND night (the Cancer "
+        "row prints Mars/Mars). Egyptian bounds and Dorothean triplicities "
+        "remain exactly where they belong - in the Hellenistic section.",
     )
     section.disclose(
         DisclosureKind.SOURCE,
@@ -427,13 +438,13 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
         if EXALTATION.get(name, (None,))[0] == sign:
             score += 4
             held.append("exaltation +4")
-        if _triplicity(sign, is_day, DOROTHEAN_TRIPLICITY) == name:
+        if _triplicity(sign, is_day, LILLY_TRIPLICITY) == name:
             score += 3
-            held.append("triplicity +3")
-        bounds = _bounds_for(sign)
-        if _bound_ruler(sign, degree, {sign: bounds}) == name:
+            held.append("triplicity +3 (Lilly's table)")
+        terms = _terms_for(sign, PTOLEMAIC_TERMS_LILLY1647)
+        if _bound_ruler(sign, degree, {sign: terms}) == name:
             score += 2
-            held.append("bound +2")
+            held.append("term +2 (Ptolemaic, 1647 p.104)")
         if _face_ruler(planet.longitude) == name:
             score += 1
             held.append("face +1")
@@ -457,8 +468,11 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
         # The stacking reading also charges -5 to a planet that holds no dignity
         # even when it is in detriment or fall. Emitted alongside rather than
         # chosen, because practitioners and software genuinely differ.
+        # Tags may carry table provenance after the score ("triplicity +3
+        # (Lilly's table)"), so match the score anywhere, not at the end.
         holds_dignity = any(
-            tag.endswith(("+5", "+4", "+3", "+2", "+1")) for tag in held
+            any(mark in tag for mark in ("+5", "+4", "+3", "+2", "+1"))
+            for tag in held
         )
         score_stacking = score if peregrine else (
             score - 5 if not holds_dignity else score
@@ -490,13 +504,18 @@ def build_latin_european(birth: BirthInput, chart: Any) -> TraditionSection:
                          "bound +2, face +1, detriment -5, fall -4, peregrine -5",
         "third_party_comparison": {
             "compared_against": "GERMES 2.39 'Lilly classic' scoreset",
-            "agreement": "4 of 7 exact (Sun, Moon, Mercury, Venus)",
-            "divergence": "Mars, Jupiter and Saturn differ. Saturn's -9 there "
-                          "equals fall plus stacked peregrine, confirming that "
-                          "implementation stacks; Mars and Jupiter cannot be "
-                          "reconciled from its summary output alone, so its "
-                          "scoreset evidently differs from plain Lilly in ways "
-                          "not reverse-engineerable. Reported, not resolved.",
+            "agreement": "3 of 7 exact (Sun, Moon, Mercury)",
+            "divergence": "Venus diverges for a reason now precisely known: "
+                          "GERMES awards her the watery triplicity by day, "
+                          "which is DOROTHEUS' day ruler - Lilly's own 1647 "
+                          "table prints Mars for the watery trigon by day AND "
+                          "night (photograph-verified, CA p.104, Cancer row), "
+                          "so this scorer follows the 1647 page and GERMES "
+                          "follows the popular modern conflation. Saturn's -9 "
+                          "there equals fall plus stacked peregrine, "
+                          "confirming that implementation stacks; Mars and "
+                          "Jupiter cannot be reconciled from its summary "
+                          "output alone. Reported, not resolved.",
         },
     }
 

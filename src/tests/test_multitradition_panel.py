@@ -1754,14 +1754,24 @@ def test_hermetic_lots_reverse_by_sect(fairfield_panel: dict) -> None:
 def test_latin_dignity_matches_third_party_where_method_agrees(
     fairfield_panel: dict,
 ) -> None:
-    """Four of seven reproduce GERMES 2.39 exactly; divergence is documented."""
+    """Three of seven reproduce GERMES 2.39; Venus diverges BY DESIGN.
+
+    Venus previously matched GERMES at +4 because both awarded her the watery
+    triplicity by day - Dorotheus' ruler. Lilly's own 1647 table, keyed from
+    the pinned page photographs, prints Mars for the watery trigon day AND
+    night, so the Lilly-mode scorer now gives Venus +1 (face only) and the
+    GERMES match is knowingly broken. Matching a third party by blending
+    traditions is not agreement worth keeping.
+    """
     facts = _section(fairfield_panel, "latin_european")["facts"]
     scores = {p["body"]: p["essential_score"] for p in facts["lilly_essential_dignity"]}
     assert scores["Sun"] == 8
     assert scores["Moon"] == -5
     assert scores["Mercury"] == 9
-    assert scores["Venus"] == 4
+    assert scores["Venus"] == 1  # face +1 only; no Dorothean day-water +3
     assert "third_party_comparison" in facts
+    note = str(facts["third_party_comparison"])
+    assert "Dorotheus" in note or "DOROTHEUS" in note
 
 
 def test_peregrine_fork_emits_both_readings(fairfield_panel: dict) -> None:
