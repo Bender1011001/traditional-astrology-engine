@@ -332,3 +332,39 @@ def test_latin_section_scores_with_lillys_own_tables():
     assert "1647 p.104" in blob or "Lilly's table" in blob
     subjects = [d["subject"] for d in latin["disclosures"]]
     assert any("keyed from the 1647 photographs" in s for s in subjects)
+
+
+# --- hellenistic report engine (P5) ------------------------------------------
+
+
+@pytest.fixture(scope="module")
+def hellenistic():
+    from src.engine.traditions.hellenistic_report import build_report
+
+    return build_report(BIRTH)
+
+
+def test_hellenistic_fires_doctrine_only_on_real_conditions(hellenistic):
+    """Every fired rule's trigger must be a computed chart fact."""
+    fired = {
+        d.rule_id: d.trigger
+        for s in hellenistic.sections for d in s.delineations
+    }
+    # Mercury is domicile AND exalted in Virgo - both must fire on it
+    assert any("Mercury" in t and "domicile" in t for t in fired.values())
+    assert any("Mercury" in t and "exaltation" in t for t in fired.values())
+    # the diurnal trio fires because this IS a day chart
+    assert "hel.firmicus.sect_diurnal_trio_and_lacuna" in fired
+    # the fire-trigon rule fires because the sect light stands in Leo
+    assert "hel.ptolemy.triplicity_fire_sun_jupiter_mars_participant" in fired
+    # nothing fired the nocturnal-only rule on a day chart
+    assert "hel.firmicus.jupiter_no_joy_at_night" not in fired
+
+
+def test_hellenistic_lists_undecided_rules_openly(hellenistic):
+    undecided = next(
+        s for s in hellenistic.sections if "could not be decided" in s.title
+    )
+    blob = " ".join(undecided.notes)
+    assert "doryphoria" in blob
+    assert "hel.ptolemy.parents_same_sect_doryphoria_brilliance" in blob
