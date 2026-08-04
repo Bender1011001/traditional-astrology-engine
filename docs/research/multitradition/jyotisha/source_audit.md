@@ -718,3 +718,25 @@ does not re-find it and mistake it for one.
 words of English rendering from Brihat Jataka, against 366,411 plus 564,451
 characters of source read. Before this pass and the BPHS pass, the whole
 Jyotisha delineation layer stood at 2,341 words.
+
+## 2026-08-04: the Phaladipika Sun gap is CLOSED - it was a defective scan, not a lost page
+
+The 2026-08-02 verification established that Adhyaya VIII opens mid-sentence in
+`in.gov.ignca.6945` and that its printed page numbers jump 81 -> 84, and
+concluded correctly that the gap "needs a different SCAN, not a different
+author." A second witness has now supplied exactly that.
+
+`dli.ernet.507316` pp. 82-84 carry the whole of what the primary scan omits:
+p.82 the close of Adhyaya VII, the heading `|| astamo'dhyayah ||` and sloka 1
+(Sun in the 1st); p.83 slokas 2-3 (Sun in the 2nd through 7th); p.84 the 8th.
+All three were read directly from page images, not OCR.
+
+The Sun's planet-in-bhava rule therefore now carries **12/12 houses**, and
+`houses_not_recovered` is removed. This is a SCAN REPAIR: same work, same
+translator, a different photograph of the same edition. It is emphatically not
+the cross-author substitution the corpus forbids, and the rule records both the
+recovering witness and the defect in the primary one.
+
+Note on p.84: the 8th-house cell contains "he will not be long-lived". It is
+stored verbatim, and the engine's clause-level publication policy redacts the
+longevity clause at render time - which is where that judgment belongs.

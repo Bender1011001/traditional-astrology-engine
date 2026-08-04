@@ -5,7 +5,9 @@
   "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
   "source_pack_id": "mantreswara_phaladeepika_subrahmanya_1950_v1",
   "source_edition_id": "phaladeepika_ignca_scan_subrahmanya_sastri_1950_second_edition",
-  "source_registry_ids": ["jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive"],
+  "source_registry_ids": [
+    "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive"
+  ],
   "implementation_status": "not_implemented",
   "publication_status": "research_only",
   "evidence_note": "This is the Parasari (BPHS-descended) delineation layer, distinct from and not merged with the Jaimini sign-based track at docs/research/multitradition/jaimini/. Every rule below is paraphrased (not quoted at length) from V. Subrahmanya Sastri's 1950 second-edition English translation of Mantreswara's Phaladeepika (archive item in.gov.ignca.6945, registry jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive). That scan's title page states 'copyright registered' and the item's Archive metadata leaves the rights field empty, so this pack is treated exactly as the existing brhajjataka_planetary_rule_manifest.json treats Aiyar's 1905 Brhajjataka translation: internal alignment and paraphrase research, not a customer-facing quotation, pending a jurisdictional rights decision. The same scan carries Devanagari sloka text before each translated passage, but djvu OCR of that Devanagari is corrupted in this copy (mixed Latin/Devanagari misreads) and could not be used to control wording independently; no direct Sanskrit rendering is offered here, and none is claimed. Sloka numbers are read directly off the OCR's own 'Sloka N' labels adjacent to each passage and are corroborated against the printed table of contents and descriptive contents (both inspected), not invented. Chapter (Adhyaya) attributions for the yoga passages are read from the nearest running-header page marker ('Adh. V/VI/VII') in the same scan; where two chapters' headers appear within a few pages of a passage, both are named and the uncertainty is disclosed rather than silently resolved. Every planet-in-bhava and dasha-result table below is a paraphrase lookup, matching the compact 'directed_relationship_lookup' / lookup-table convention already used in brhajjataka_planetary_rule_manifest.json, rather than one rule object per clause. No numeric strength (Shadbala/Ashtakavarga), muhurta timing, remedial prescription, marriage-compatibility, or lifespan claim is encoded anywhere in this file, consistent with the tradition's refusal list. Progeny/children counts stated by the source for some houses and yogas are retained here as historical testimony (kind: topical_verdict) but are flagged output_policy: suppress-as-fertility-adjacent, matching the corpus's existing treatment of varna/caste material - retain in the research trace, never render as a claim about a living person's fertility. Nothing in this file is customer-eligible; customer_prediction is false throughout and no composer or engine code was written to consume it.",
@@ -16,19 +18,51 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Sun", "chapter": "Adhyaya VIII"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Sun"}, {"fact": "house_from_lagna", "operator": "in", "value": [6, 9, 10, 11, 12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Sun",
+        "chapter": "Adhyaya VIII"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Sun"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              6,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_the_sun_by_whole_sign_house_from_the_lagna",
         "results_by_house": {
-          "6": "loses wealth and friends; not long-lived; defective eyesight, or blind",
+          "6": "will become a King, famous, of good qualities, wealthy and victorious",
           "9": "loses his father; has children and relations; reveres gods and brahmins",
           "10": "sons, vehicles, praise, intelligence, wealth, strength and fame; becomes a king",
           "11": "very wealthy and long-lived; a king; without sorrow",
-          "12": "hates his father; defective eyesight; without wealth and children"
+          "12": "hates his father; defective eyesight; without wealth and children",
+          "1": "he will have very little hair; most inactive to do any work; angry and impetuous; tall in stature; proud; soiled eyes and a lean body; valiant, impatient and cruel-hearted",
+          "2": "devoid of learning, modesty and riches, and will be stammering",
+          "3": "strong, brave, wealthy and liberal, but inimical towards his relations",
+          "4": "no happiness, no relations, no lands, no friends and no house; he will serve the State and spend away his paternal property",
+          "5": "bereft of happiness, riches and children; intelligent, and will travel over forest regions",
+          "7": "will incur the displeasure of the sovereign",
+          "8": "the person born will lose his wealth and friends; he will not be long-lived and will have defective eye-sight or be blind"
         },
-        "houses_not_recovered": [1, 2, 3, 4, 5, 7, 8]
+        "recovery_note": "Houses 1-7 were recovered 2026-08-04 from a SECOND witness. The pack's primary scan (in.gov.ignca.6945) is physically defective: it jumps from leaf 117 (p.81, end of Adhyaya VII) straight to p.84, so printed pp.82-83 - which carry the Adhyaya VIII opening and slokas 1-3 - were never scanned. dli.ernet.507316 pp.82-83 supply them, read directly from page images. Same work, same translator, a different scan of it: this is a scan repair, NOT a cross-author substitution, which the corpus forbids.",
+        "recovery_source": "dli.ernet.507316, pp. 82-84 (page images)"
       },
       "priority": null,
       "exceptions": [
@@ -37,7 +71,13 @@
       ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII (effects of the Sun and other planets in the several bhavas from the Lagna)", "location": "Slokas 3(tail)-4; descriptive-contents entry '1-4' confirms full 12-house scope", "verification": "translation_inspected_ocr; embedded Devanagari present but OCR-corrupted and not independently checked"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII (effects of the Sun and other planets in the several bhavas from the Lagna)",
+          "location": "Slokas 3(tail)-4; descriptive-contents entry '1-4' confirms full 12-house scope",
+          "verification": "translation_inspected_ocr; embedded Devanagari present but OCR-corrupted and not independently checked"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; houses 1-5, 7 and 8 must not be filled in from any other tradition's convention or from memory - report them as not-yet-recovered, not as absent from the source",
@@ -49,8 +89,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Moon", "chapter": "Adhyaya VIII", "sloka_range": "5-7"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Moon"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Moon",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "5-7"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Moon"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_the_moon_by_whole_sign_house_from_the_lagna",
@@ -70,10 +142,18 @@
         }
       },
       "priority": null,
-      "exceptions": ["House-1 result is explicitly conditioned on waxing versus waning Moon; houses 2-12 are not conditioned on phase in this passage."],
+      "exceptions": [
+        "House-1 result is explicitly conditioned on waxing versus waning Moon; houses 2-12 are not conditioned on phase in this passage."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 5-7", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 5-7",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only",
@@ -85,8 +165,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Mars", "chapter": "Adhyaya VIII", "sloka_range": "8-10"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Mars"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Mars",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "8-10"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Mars"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_mars_by_whole_sign_house_from_the_lagna",
@@ -106,10 +218,18 @@
         }
       },
       "priority": null,
-      "exceptions": ["House 5's fuller clause ('unhappy, without children...') is retained with the children/progeny clause suppressed per this file's global fertility-adjacent output_policy."],
+      "exceptions": [
+        "House 5's fuller clause ('unhappy, without children...') is retained with the children/progeny clause suppressed per this file's global fertility-adjacent output_policy."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 8-10", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 8-10",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; house-5 progeny clause suppressed as fertility-adjacent, retained only as historical testimony",
@@ -121,8 +241,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Mercury", "chapter": "Adhyaya VIII", "sloka_range": "11-13"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Mercury"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Mercury",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "11-13"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Mercury"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_mercury_by_whole_sign_house_from_the_lagna",
@@ -145,7 +297,13 @@
       "exceptions": [],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 11-13", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 11-13",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only",
@@ -157,8 +315,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Jupiter", "chapter": "Adhyaya VIII", "sloka_range": "14-16"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Jupiter"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Jupiter",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "14-16"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Jupiter"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_jupiter_by_whole_sign_house_from_the_lagna",
@@ -178,10 +368,18 @@
         }
       },
       "priority": null,
-      "exceptions": ["Houses 1, 4, 5, 9, 11 and 12 all carry a progeny/children clause in the source; those clauses are retained only as historical testimony and are suppressed as fertility-adjacent for any customer-facing use, matching this file's global policy."],
+      "exceptions": [
+        "Houses 1, 4, 5, 9, 11 and 12 all carry a progeny/children clause in the source; those clauses are retained only as historical testimony and are suppressed as fertility-adjacent for any customer-facing use, matching this file's global policy."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 14-16(-17)", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 14-16(-17)",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; progeny clauses suppressed as fertility-adjacent",
@@ -193,8 +391,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Venus", "chapter": "Adhyaya VIII", "sloka_range": "17-19"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Venus"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Venus",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "17-19"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Venus"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_venus_by_whole_sign_house_from_the_lagna",
@@ -214,10 +444,18 @@
         }
       },
       "priority": null,
-      "exceptions": ["House 5's children clause suppressed as fertility-adjacent per this file's global policy."],
+      "exceptions": [
+        "House 5's children clause suppressed as fertility-adjacent per this file's global policy."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 17-19", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 17-19",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; house-5 progeny clause suppressed as fertility-adjacent",
@@ -229,8 +467,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Saturn", "chapter": "Adhyaya VIII", "sloka_range": "20-24"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Saturn"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Saturn",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "20-24"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Saturn"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_saturn_by_whole_sign_house_from_the_lagna",
@@ -258,7 +528,13 @@
       ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 20-24", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 20-24",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; house-5/9/12 progeny clauses suppressed as fertility-adjacent",
@@ -270,8 +546,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Rahu", "chapter": "Adhyaya VIII", "sloka_range": "25-27(33-35 OCR-mislabelled)"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Rahu"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Rahu",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "25-27(33-35 OCR-mislabelled)"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Rahu"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_rahu_by_whole_sign_house_from_the_lagna",
@@ -292,10 +600,18 @@
         "exception_clause": "if Rahu is associated with a benefic and occupies a good house (other than the 6th, 8th or 12th), the mahadasha (and, by the source's own extension, the placement) is read as favourable and prosperous rather than by the plain house-result above; the source also names Rahu in Kanya, Meena or Vrischika as conferring honour, happiness, lordship of lands and servants during Rahu's own dasha, though liable to be lost at its close"
       },
       "priority": null,
-      "exceptions": ["Houses 5, 8, 10 and 11 carry progeny/issue clauses, suppressed here as fertility-adjacent per this file's global policy."],
+      "exceptions": [
+        "Houses 5, 8, 10 and 11 carry progeny/issue clauses, suppressed here as fertility-adjacent per this file's global policy."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 25-27 (printed sloka numerals show OCR noise, e.g. '33', '35')", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 25-27 (printed sloka numerals show OCR noise, e.g. '33', '35')",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; progeny clauses suppressed as fertility-adjacent",
@@ -307,8 +623,40 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "graha_in_bhava_from_lagna", "graha": "Ketu", "chapter": "Adhyaya VIII", "sloka_range": "28-33"},
-      "conditions": {"all": [{"fact": "graha", "operator": "equals", "value": "Ketu"}, {"fact": "house_from_lagna", "operator": "in", "value": [1,2,3,4,5,6,7,8,9,10,11,12]}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "graha_in_bhava_from_lagna",
+        "graha": "Ketu",
+        "chapter": "Adhyaya VIII",
+        "sloka_range": "28-33"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "graha",
+            "operator": "equals",
+            "value": "Ketu"
+          },
+          {
+            "fact": "house_from_lagna",
+            "operator": "in",
+            "value": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          }
+        ]
+      },
       "conclusion": {
         "type": "house_result_lookup",
         "unit": "results_of_ketu_by_whole_sign_house_from_the_lagna",
@@ -328,10 +676,18 @@
         }
       },
       "priority": null,
-      "exceptions": ["House 5's children clause suppressed as fertility-adjacent per this file's global policy."],
+      "exceptions": [
+        "House 5's children clause suppressed as fertility-adjacent per this file's global policy."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VIII", "location": "Slokas 28-33", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VIII",
+          "location": "Slokas 28-33",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; house-5 progeny clause suppressed as fertility-adjacent",
@@ -343,20 +699,42 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "named_yoga_pancha_mahapurusha", "chapter": "Adhyaya VI"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "named_yoga_pancha_mahapurusha",
+        "chapter": "Adhyaya VI"
+      },
       "conditions": {
         "definition": "one of Mars, Mercury, Jupiter, Venus or Saturn occupies a kendra house (1st, 4th, 7th or 10th from the Lagna) identical with its own sign (swakshetra) or its exaltation sign (swoccha)",
-        "engine_facts_needed": ["graha dignity in {'own sign','exalted'}", "graha house_from_lagna in {1,4,7,10}"]
+        "engine_facts_needed": [
+          "graha dignity in {'own sign','exalted'}",
+          "graha house_from_lagna in {1,4,7,10}"
+        ]
       },
       "conclusion": {
         "type": "named_yoga_lookup",
         "unit": "the_five_mahapurusha_yogas",
         "yogas_by_graha": {
-          "Mars": {"name": "Ruchaka", "result": "a long face; acquires wealth by many daring deeds; brave; overcomes his enemies; powerful and arrogant; renowned for his merits; leader of an army; victorious in all his attempts"},
-          "Mercury": {"name": "Bhadra", "result": "gifted with long life and keen intellect; clean; praised by the learned; leads men; very rich; clever in addressing an assembly"},
-          "Jupiter": {"name": "Hamsa", "result": "a king extolled by the good; auspicious marks (Sankha, Padma, Matsya, Ankusa) on the hands and feet; a beautiful body; eats sumptuous food; of righteous disposition"},
-          "Venus": {"name": "Malavya", "result": "strong limbs; resolute; wealthy; endowed with wife, children (suppressed) and good fortune; prosperous, eats well, enjoys pleasures, commands good vehicles; famous and learned; unperturbed senses"},
-          "Saturn": {"name": "Sasa", "result": "extolled by all; good servants; strong; headman of a village or a king; wicked in disposition; has intrigues with women not his own; usurps others' wealth; happy"}
+          "Mars": {
+            "name": "Ruchaka",
+            "result": "a long face; acquires wealth by many daring deeds; brave; overcomes his enemies; powerful and arrogant; renowned for his merits; leader of an army; victorious in all his attempts"
+          },
+          "Mercury": {
+            "name": "Bhadra",
+            "result": "gifted with long life and keen intellect; clean; praised by the learned; leads men; very rich; clever in addressing an assembly"
+          },
+          "Jupiter": {
+            "name": "Hamsa",
+            "result": "a king extolled by the good; auspicious marks (Sankha, Padma, Matsya, Ankusa) on the hands and feet; a beautiful body; eats sumptuous food; of righteous disposition"
+          },
+          "Venus": {
+            "name": "Malavya",
+            "result": "strong limbs; resolute; wealthy; endowed with wife, children (suppressed) and good fortune; prosperous, eats well, enjoys pleasures, commands good vehicles; famous and learned; unperturbed senses"
+          },
+          "Saturn": {
+            "name": "Sasa",
+            "result": "extolled by all; good servants; strong; headman of a village or a king; wicked in disposition; has intrigues with women not his own; usurps others' wealth; happy"
+          }
         }
       },
       "priority": 5,
@@ -366,7 +744,13 @@
       ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 1 (definition), Sloka 3-4 (per-graha results)", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VI",
+          "location": "Sloka 1 (definition), Sloka 3-4 (per-graha results)",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; Venus/Malavya children clause suppressed as fertility-adjacent",
@@ -378,7 +762,11 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "named_yoga_moon_jupiter_relative_house", "chapter": "Adhyaya VI"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "named_yoga_moon_jupiter_relative_house",
+        "chapter": "Adhyaya VI"
+      },
       "conditions": {
         "kesari": "the Moon stands in a kendra house (1st, 4th, 7th or 10th) counted from Jupiter's own house",
         "sakata": "the Moon stands in the 12th, 8th or 6th house counted from Jupiter's own house",
@@ -395,7 +783,13 @@
       ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 14 (definitions), Slokas 16-17 (results)", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VI",
+          "location": "Sloka 14 (definitions), Slokas 16-17 (results)",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only",
@@ -407,7 +801,11 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "named_yoga_mahabhagya", "chapter": "Adhyaya VI"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "named_yoga_mahabhagya",
+        "chapter": "Adhyaya VI"
+      },
       "conditions": {
         "male_variant": "birth by day; Sun, Moon and Lagna all in odd signs (Aries, Gemini, Leo, Libra, Sagittarius, Aquarius)",
         "female_variant": "birth by night; Sun, Moon and Lagna all in even signs (Taurus, Cancer, Virgo, Scorpio, Capricorn, Pisces)"
@@ -418,10 +816,18 @@
         "female_result": "endowed with wealth, a long-lived husband, sons and grandsons; exceedingly lucky and well-behaved"
       },
       "priority": 7,
-      "exceptions": ["The source's own sex/day-night pairing is preserved as printed and is not generalised or reversed; the classical statement is retained even though the corpus does not otherwise use natal-chart sex as an interpretive variable elsewhere."],
+      "exceptions": [
+        "The source's own sex/day-night pairing is preserved as printed and is not generalised or reversed; the classical statement is retained even though the corpus does not otherwise use natal-chart sex as an interpretive variable elsewhere."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 13 ('X' in OCR) and Sloka 15", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VI",
+          "location": "Sloka 13 ('X' in OCR) and Sloka 15",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only",
@@ -433,7 +839,11 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "named_yoga_moon_relative_to_sun", "chapter": "Adhyaya VI"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "named_yoga_moon_relative_to_sun",
+        "chapter": "Adhyaya VI"
+      },
       "conditions": {
         "adhama": "the Moon occupies a kendra house (1st, 4th, 7th or 10th) counted from the Sun's own house",
         "sama": "the Moon occupies a panaphara house (2nd, 5th, 8th or 11th) counted from the Sun's own house",
@@ -444,10 +854,20 @@
         "graded_result": "wealth, vehicles, fame, happiness, knowledge, intellectual precision, modesty, ability, learning, liberality and enjoyment are at their lowest under Adhama, middling under Sama, and highest under Varishtha"
       },
       "priority": 8,
-      "exceptions": ["This is a notable inversion of the usual convention that a kendra is the strongest relative position: here a kendra relation to the Sun (the tightest angular relation, closest to conjunction/combustion risk for the Moon) is graded WORST, and the loosest relation (apoklima) is graded BEST. This is the source's own stated ranking, not a transcription error, and must not be silently 'corrected' toward the usual kendra-is-strongest convention."],
-      "conflicts_with": ["a generic assumption that kendra placement is always the strongest classification in every Jyotisha context"],
+      "exceptions": [
+        "This is a notable inversion of the usual convention that a kendra is the strongest relative position: here a kendra relation to the Sun (the tightest angular relation, closest to conjunction/combustion risk for the Moon) is graded WORST, and the loosest relation (apoklima) is graded BEST. This is the source's own stated ranking, not a transcription error, and must not be silently 'corrected' toward the usual kendra-is-strongest convention."
+      ],
+      "conflicts_with": [
+        "a generic assumption that kendra placement is always the strongest classification in every Jyotisha context"
+      ],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Sloka 14 (definitions), Sloka 18 (graded result)", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VI",
+          "location": "Sloka 14 (definitions), Sloka 18 (graded result)",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only",
@@ -459,7 +879,11 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "named_yoga_planets_relative_to_moon", "chapter": "Adhyaya V"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "named_yoga_planets_relative_to_moon",
+        "chapter": "Adhyaya V"
+      },
       "conditions": {
         "sunapha": "one or more grahas other than the Sun occupy the 2nd house counted from the Moon's own house",
         "anapha": "one or more grahas other than the Sun occupy the 12th house counted from the Moon's own house",
@@ -481,7 +905,13 @@
       ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya V", "location": "Sloka 5 (definitions), Slokas 6-7 (results)", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya V",
+          "location": "Sloka 5 (definitions), Slokas 6-7 (results)",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; not evaluable against the live engine until house-from-Moon is computed",
@@ -493,7 +923,11 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "named_yoga_benefic_malefic_flanking", "chapter": "Adhyaya VI"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "named_yoga_benefic_malefic_flanking",
+        "chapter": "Adhyaya VI"
+      },
       "conditions": {
         "subhavesi_papavesi": "benefic(s) [Subhavesi] or malefic(s) [Papavesi] other than the Moon occupy the 2nd house counted from the Sun",
         "subhavaasi_paapavaasi": "benefic(s) or malefic(s) other than the Moon occupy the 12th house counted from the Sun",
@@ -519,7 +953,13 @@
       ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI", "location": "Slokas 9-11", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VI",
+          "location": "Slokas 9-11",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; papakartari children clause suppressed as fertility-adjacent; Sun-relative sub-cases not evaluable against the live engine until house-from-Sun is computed",
@@ -531,7 +971,11 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "named_rajayoga_catalog", "chapter": "Adhyaya VI/VII boundary (running header 'Adh. VII' at the adjacent page)"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "named_rajayoga_catalog",
+        "chapter": "Adhyaya VI/VII boundary (running header 'Adh. VII' at the adjacent page)"
+      },
       "conditions": {
         "rajayoga_1": "malefics are posited in the 3rd, 6th and 11th houses counted from the house occupied by the lord of the Lagna, or from the house occupied by the lord of the Janma Rasi (the Moon's sign)",
         "rajayoga_2": "Mars and Mercury are conjoined in the 2nd house from the Lagna",
@@ -544,10 +988,18 @@
         "customer_prediction": false
       },
       "priority": 11,
-      "exceptions": ["Rajayoga 4's phrasing ('quartered in the 10th, 11th and the Lagna') is read as one graha occupying each of the three named houses, not all three grahas occupying one house together; a facsimile check should confirm this reading."],
+      "exceptions": [
+        "Rajayoga 4's phrasing ('quartered in the 10th, 11th and the Lagna') is read as one graha occupying each of the three named houses, not all three grahas occupying one house together; a facsimile check should confirm this reading."
+      ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI/VII boundary", "location": "Sloka 24", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VI/VII boundary",
+          "location": "Sloka 24",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only",
@@ -559,7 +1011,11 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "neechabhanga_debilitation_cancellation", "chapter": "Adhyaya VI/VII boundary (running header 'Adh. VII')"},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "neechabhanga_debilitation_cancellation",
+        "chapter": "Adhyaya VI/VII boundary (running header 'Adh. VII')"
+      },
       "conditions": {
         "trigger": "a graha occupies its own sign of debilitation (dignity = debilitated, per the engine's existing dignity computation)",
         "cancellation_test_any_of": [
@@ -585,9 +1041,17 @@
         "The kendra-from-Moon branch requires the same house-from-the-Moon reckoning flagged as missing under the Sunapha/Anapha rule above; it is not yet checkable against the live engine.",
         "This is the single most commonly cited 'exception' in popular Parasari practice (a planet in its fall is not automatically weak) and is flagged as the highest-value dignity-related composer addition in this pack."
       ],
-      "conflicts_with": ["a flat rule that a debilitated graha is always weak with no cancellation test applied"],
+      "conflicts_with": [
+        "a flat rule that a debilitated graha is always weak with no cancellation test applied"
+      ],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya VI/VII boundary", "location": "Slokas 25-29", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya VI/VII boundary",
+          "location": "Slokas 25-29",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only",
@@ -599,8 +1063,19 @@
       "school_id": "mantreswara_phaladeepika_subrahmanya_1950_alignment",
       "period": "mantreswara_text_translated_1950_second_edition",
       "domain": "natal",
-      "scope": {"work": "Phaladeepika", "technique": "vimshottari_mahadasha_general_signification", "chapter": "Adhyaya XIX"},
-      "conditions": {"all": [{"fact": "vimshottari_current.mahadasha.lord", "operator": "known"}]},
+      "scope": {
+        "work": "Phaladeepika",
+        "technique": "vimshottari_mahadasha_general_signification",
+        "chapter": "Adhyaya XIX"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "vimshottari_current.mahadasha.lord",
+            "operator": "known"
+          }
+        ]
+      },
       "conclusion": {
         "type": "graha_result_lookup",
         "unit": "general_results_during_each_graha_mahadasha_unconditioned_by_natal_placement_except_the_sun",
@@ -628,7 +1103,13 @@
       ],
       "conflicts_with": [],
       "source_passages": [
-        {"edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive", "work": "Phaladeepika", "section": "Adhyaya XIX", "location": "Slokas 5-6 (Sun), 7 (Moon), 9 (Mars), 10 (Mercury), 11 (Jupiter), 12 (Venus), 13 (Saturn), 14-16 (Rahu), 17 (Ketu)", "verification": "translation_inspected_ocr"}
+        {
+          "edition_id": "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+          "work": "Phaladeepika",
+          "section": "Adhyaya XIX",
+          "location": "Slokas 5-6 (Sun), 7 (Moon), 9 (Mars), 10 (Mercury), 11 (Jupiter), 12 (Venus), 13 (Saturn), 14-16 (Rahu), 17 (Ketu)",
+          "verification": "translation_inspected_ocr"
+        }
       ],
       "evidence_grade": "B",
       "publication_limit": "research_only; progeny clauses suppressed as fertility-adjacent",
