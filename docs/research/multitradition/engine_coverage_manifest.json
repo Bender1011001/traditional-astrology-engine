@@ -372,6 +372,24 @@
             "visibility model",
             "location and epoch fixtures"
           ]
+        },
+        {
+          "module_id": "babylonian_month_of_birth_menology",
+          "name": "Iqqur ipus §64 month-of-birth prognoses (CCP 3.8.1.A, Oracc)",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "babylonian/source_audit.md",
+            "babylonian/natal_omen_rule_manifest.json",
+            "babylonian/natal_omen_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "a menology, not a horoscopy: month-of-birth only, no chart is cast",
+            "the pack forbids inferring the negative from the abridged favourable-month list (II, III, V, VIII, XI, XII)",
+            "Labat 1965 not retrieved - queries recorded"
+          ]
         }
       ]
     },
@@ -728,6 +746,23 @@
             "language and regional lineage selection",
             "living-practice validation"
           ]
+        },
+        {
+          "module_id": "maya_year_bearer_prognostics",
+          "name": "Landa's four year-bearer prognostics with Bacab, verdict and remedy (Brasseur 1864)",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "maya/source_audit.md",
+            "maya/yearbearer_augury_rule_manifest.json",
+            "maya/yearbearer_augury_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "day-sign auguries (u mutil chuenil kin sansamal) NOT found: Kaua/Ixil are patron-restricted images, Codex Perez is lending-restricted, famsi.org returns 403 - five numbered search steps recorded, two live routes named (Bricker & Miram 2002; Penn Berendt copies)",
+            "year-bearer prognostics are keyed to the year, not the birth day - they qualify a nativity, they do not constitute one"
+          ]
         }
       ]
     },
@@ -791,6 +826,25 @@
             "community partnership",
             "regional and language identity",
             "consent and cultural review"
+          ]
+        },
+        {
+          "module_id": "nahua_correlation_candidates",
+          "name": "Six tonalpohualli correlation candidates with recomputed Caso fork",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "nahua/source_audit.md",
+            "nahua/correlation_candidates_manifest.json",
+            "nahua/correlation_rule_manifest.json",
+            "nahua/correlation_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "default_candidate stays null: the engine still refuses to name a day sign, but now for a DISCLOSED fork rather than an absent correlation",
+            "Caso's two anchors are mutually inconsistent by exactly one day (recomputed: 644 elapsed days from 8 Nov 1519 to 13 Aug 1521 project 1 Coatl back to 7 Cipactli, not 8 Ehecatl); his reported resolution is a noon day-start, which splits births before/after local noon onto different signs",
+            "Caso 1967/1971 primaries not retrieved - queries recorded"
           ]
         }
       ]
@@ -872,6 +926,25 @@
           "remaining_gates": [
             "surviving natal authority",
             "proof against importing Hellenistic houses and zodiac meanings"
+          ]
+        },
+        {
+          "module_id": "egyptian_sallier_iv_hemerology",
+          "name": "Papyrus Sallier IV day-prognoses via Chabas 1870, with an 18-entry natal layer",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "egyptian/source_audit.md",
+            "egyptian/hemerology_rule_manifest.json",
+            "egyptian/hemerology_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "ALL 18 birth prognoses predicate the native's death (crocodile, serpent, wounds, blindness, contagion) and carry output_policy refused - the track's blocker is now a STATED refusal, not an absent source",
+            "32 of ~104 day entries shipped: only the geometry-verified ones. The automated pass had two silent alignment bugs (a regex word-boundary dropping merged day cells, a fixed column threshold failing on odd pages); the rest are recoverable but were not shipped unverified",
+            "conversion convention: 365-day vague year, no intercalation; Chabas' own Coptic column was offered 'par simple curiosite' and is disclaimed",
+            "Cairo Calendar / pLeiden I 346 not found - exact queries recorded"
           ]
         }
       ]

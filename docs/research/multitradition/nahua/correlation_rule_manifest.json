@@ -1,0 +1,516 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "nahua_central_mexican",
+ "school_id": "tonalpohualli_correlation",
+ "source_pack_id": "nahua_correlation_candidates_v1",
+ "source_edition_id": "milbrath_trace_81_2022_plus_candidate_survey",
+ "source_registry_ids": [
+  "nahua_milbrath_trace_81_2022_veintena_yearbearer",
+  "nahua_azteccalendar_correlation_settings_tool",
+  "nahua_calmecac_correlation_survey_blog"
+ ],
+ "implementation_status": "research_verified",
+ "publication_status": "research_only",
+ "evidence_note": "Encodes the correlation candidates themselves, so that the seventy-two held Book 4 auguries can be placed against a birth under a named, disclosed configured_method with the fork shown. No default is introduced; the pack refuses when no candidate is selected.",
+ "rules": [
+  {
+   "rule_id": "nahua.correlation.no_default_candidate",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "candidate_selected": false
+   },
+   "conclusion": {
+    "result": "refused",
+    "reasoning": "the cycle arithmetic is validated but no correlation is inherited; one must be chosen, and a choice must be declared",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 200,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "milbrath_trace_81_2022",
+     "work": "Seasonal Cycles, Veintena Rituals, and Yearbearer Ceremonies in Central Mexico",
+     "section": "correlation of the Mexica and European calendars",
+     "location": "Trace 81 (2022): 247-280, correlation discussion",
+     "verification": "The article shows the correlation is a scholarly reconstruction resting on named anchors, not a datum inherited with the count."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Fail-closed rule.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  },
+  {
+   "rule_id": "nahua.correlation.candidate_anchor_form",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "candidate_has_anchor": true
+   },
+   "conclusion": {
+    "required_fields": [
+     "anchor_calendar",
+     "anchor_date",
+     "anchor_jdn",
+     "anchor_tonalpohualli_number",
+     "anchor_tonalpohualli_sign",
+     "anchor_cycle_position"
+    ],
+    "derivation": "cycle_position(date) = (anchor_cycle_position + jdn(date) - anchor_jdn) mod 260",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 190,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "milbrath_trace_81_2022",
+     "work": "Seasonal Cycles, Veintena Rituals, and Yearbearer Ceremonies in Central Mexico",
+     "section": "correlation of the Mexica and European calendars",
+     "location": "Trace 81 (2022), correlation discussion",
+     "verification": "Anchor form abstracted from the two anchors the article states; the derivation is arithmetic and was independently validated in this repository."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Structural rule.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  },
+  {
+   "rule_id": "nahua.correlation.caso_1521_anchor",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "candidate_id": "caso_1521_ce_coatl"
+   },
+   "conditions": {
+    "candidate_id": "caso_1521_ce_coatl"
+   },
+   "conclusion": {
+    "anchor_calendar": "julian",
+    "anchor_date": "1521-08-13",
+    "anchor_jdn": 2276828,
+    "anchor_day": "1 coatl",
+    "anchor_cycle_position": 104,
+    "anchor_year": "3 Calli",
+    "anchor_event": "the fall of Tenochtitlan",
+    "labelled": "configured_method",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [
+    "nahua.correlation.caso_1519_anchor"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "milbrath_trace_81_2022",
+     "work": "Seasonal Cycles, Veintena Rituals, and Yearbearer Ceremonies in Central Mexico",
+     "section": "correlation of the Mexica and European calendars",
+     "location": "Trace 81 (2022), correlation discussion",
+     "verification": "Article states 13 August 1521 Julian as day 1 Serpent in the year 3 House, crediting Caso 1967 and 1971."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research use; must be named whenever applied.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  },
+  {
+   "rule_id": "nahua.correlation.caso_1519_anchor",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "candidate_id": "caso_1519_ce_ehecatl"
+   },
+   "conditions": {
+    "candidate_id": "caso_1519_ce_ehecatl"
+   },
+   "conclusion": {
+    "anchor_calendar": "julian",
+    "anchor_date": "1519-11-08",
+    "anchor_jdn": 2276184,
+    "anchor_day": "8 ehecatl",
+    "anchor_cycle_position": 241,
+    "anchor_year": "1 Acatl",
+    "anchor_veintena": "Quecholli",
+    "anchor_day_of_veintena": 9,
+    "labelled": "configured_method",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [
+    "nahua.correlation.caso_1521_anchor"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "milbrath_trace_81_2022",
+     "work": "Seasonal Cycles, Veintena Rituals, and Yearbearer Ceremonies in Central Mexico",
+     "section": "correlation of the Mexica and European calendars",
+     "location": "Trace 81 (2022), correlation discussion",
+     "verification": "Article states 8 November 1519 Julian as day 8 Wind, ninth day of Quecholli, year 1 Reed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research use; must be named whenever applied.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  },
+  {
+   "rule_id": "nahua.correlation.caso_internal_one_day_fork",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "both_caso_anchors_applied": true
+   },
+   "conclusion": {
+    "elapsed_days": 644,
+    "elapsed_days_mod_260": 124,
+    "implied_1519_position": 240,
+    "implied_1519_day": "7 cipactli",
+    "recorded_1519_day": "8 ehecatl",
+    "offset_days": 1,
+    "engine_policy": "keep both, show the offset, never average",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 180,
+   "exceptions": [
+    "Never present either anchor without the other."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "milbrath_trace_81_2022",
+     "work": "Seasonal Cycles, Veintena Rituals, and Yearbearer Ceremonies in Central Mexico",
+     "section": "correlation of the Mexica and European calendars",
+     "location": "Trace 81 (2022), correlation discussion",
+     "verification": "Article names the inconsistency: counting back from 1521, the 1519 date should be 7 Crocodile, not 8 Wind. This repository recomputed it independently and obtained exactly 7 Cipactli, a one-day offset."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Fork disclosure; mandatory whenever a Caso anchor is applied.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  },
+  {
+   "rule_id": "nahua.correlation.caso_noon_day_start_resolution",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "fork_id": "caso_internal_one_day_disagreement"
+   },
+   "conclusion": {
+    "proposed_resolution": "the Mexica day began at noon rather than at midnight",
+    "consequence": "a single European calendar day can correspond to two adjacent tonalpohualli days depending on the time of the event",
+    "consequence_for_births": "a birth whose recorded time is before local noon and one after it fall on different tonalpohualli days under this resolution",
+    "status": "an author's proposed resolution, not an established fact",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 175,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "milbrath_trace_81_2022",
+     "work": "Seasonal Cycles, Veintena Rituals, and Yearbearer Ceremonies in Central Mexico",
+     "section": "correlation of the Mexica and European calendars",
+     "location": "Trace 81 (2022), correlation discussion",
+     "verification": "Article reports Caso's noon day-start proposal as the resolution of the inconsistency."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Must be disclosed as a proposal, never as a settled convention.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  },
+  {
+   "rule_id": "nahua.correlation.candidate_tena_xiuhpohualli_26_february",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false,
+    "candidate_id": "tena_xiuhpohualli_26_february"
+   },
+   "conditions": {
+    "candidate_id": "tena_xiuhpohualli_26_february"
+   },
+   "conclusion": {
+    "label": "Tena, 26 February year start",
+    "attributed_to": "Rafael Tena",
+    "anchor_statement": "The xiuhpohualli year begins on 26 February, on the day 1 Atlcahualo.",
+    "status": "anchor_incomplete_primary_publication_required",
+    "applicable_as_a_profile": false,
+    "notes": "The consulted survey reports the tonalpohualli count as displaced by seven days relative to Caso, and reports no secondary correction. Neither the displacement nor the year-start rule can be encoded as an anchor until Tena's own statement is obtained.",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "nahua_calmecac_correlation_survey_blog",
+     "work": "correlation survey consulted for the candidate set",
+     "section": "named correlations",
+     "location": "web page, read 2026-08-04",
+     "verification": "Candidate named and its year-start or anchor rule recorded verbatim; no primary publication was retrieved for it in this pass."
+    }
+   ],
+   "evidence_grade": "D",
+   "publication_limit": "Candidate enumeration only. Not applicable until its primary publication is obtained.",
+   "review_status": "Primary publication required before this candidate may be applied at all."
+  },
+  {
+   "rule_id": "nahua.correlation.candidate_nuttall_ochoa_equinox_intercalated",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false,
+    "candidate_id": "nuttall_ochoa_equinox_intercalated"
+   },
+   "conditions": {
+    "candidate_id": "nuttall_ochoa_equinox_intercalated"
+   },
+   "conclusion": {
+    "label": "Nuttall-Ochoa, equinox-locked with intercalation",
+    "attributed_to": "Zelia Nuttall, developed by Ruben Ochoa",
+    "anchor_statement": "Caso's 1 Coatl date is retained, an intercalary correction is applied, and 1 Cipactli is placed exactly one day after the observable spring equinox.",
+    "status": "rule_stated_but_not_reducible_to_a_fixed_anchor_without_the_primary_publication",
+    "applicable_as_a_profile": false,
+    "notes": "An observational rule, not a fixed day count: the anchor moves with the observed equinox, so it cannot be reduced to a single JDN offset. Recorded as a candidate family, not as an applicable profile.",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "nahua_calmecac_correlation_survey_blog",
+     "work": "correlation survey consulted for the candidate set",
+     "section": "named correlations",
+     "location": "web page, read 2026-08-04",
+     "verification": "Candidate named and its year-start or anchor rule recorded verbatim; no primary publication was retrieved for it in this pass."
+    }
+   ],
+   "evidence_grade": "D",
+   "publication_limit": "Candidate enumeration only. Not applicable until its primary publication is obtained.",
+   "review_status": "Primary publication required before this candidate may be applied at all."
+  },
+  {
+   "rule_id": "nahua.correlation.candidate_meza_fixed_cipactli_year_start",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false,
+    "candidate_id": "meza_fixed_cipactli_year_start"
+   },
+   "conditions": {
+    "candidate_id": "meza_fixed_cipactli_year_start"
+   },
+   "conclusion": {
+    "label": "Meza, fixed Cipactli year start",
+    "attributed_to": "Arturo Meza",
+    "anchor_statement": "The new year begins on the day Cipactli every year.",
+    "status": "structurally_incompatible_with_the_260_365_relationship",
+    "applicable_as_a_profile": false,
+    "notes": "A fixed Cipactli year start cannot hold across a 365-day year against a 260-day count, because 365 is not a multiple of 20. Recorded so the candidate set is complete and so the incompatibility is on the record.",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "nahua_calmecac_correlation_survey_blog",
+     "work": "correlation survey consulted for the candidate set",
+     "section": "named correlations",
+     "location": "web page, read 2026-08-04",
+     "verification": "Candidate named and its year-start or anchor rule recorded verbatim; no primary publication was retrieved for it in this pass."
+    }
+   ],
+   "evidence_grade": "D",
+   "publication_limit": "Candidate enumeration only. Not applicable until its primary publication is obtained.",
+   "review_status": "Primary publication required before this candidate may be applied at all."
+  },
+  {
+   "rule_id": "nahua.correlation.candidate_rodriguez_cortes_living_count",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false,
+    "candidate_id": "rodriguez_cortes_living_count"
+   },
+   "conditions": {
+    "candidate_id": "rodriguez_cortes_living_count"
+   },
+   "conclusion": {
+    "label": "Rodriguez Cortes, living Chiapas count",
+    "attributed_to": "Francisco Rodriguez Cortes",
+    "anchor_statement": "No published anchor was located in this pass.",
+    "status": "living_practice_requires_a_named_practitioner_partnership_not_a_source_route",
+    "applicable_as_a_profile": false,
+    "notes": "A contemporary count carried by a living practitioner. It cannot be adopted from a webpage; it would require that practitioner's own participation and consent.",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "nahua_azteccalendar_correlation_settings_tool",
+     "work": "correlation survey consulted for the candidate set",
+     "section": "named correlations",
+     "location": "web page, read 2026-08-04",
+     "verification": "Candidate named and its year-start or anchor rule recorded verbatim; no primary publication was retrieved for it in this pass."
+    }
+   ],
+   "evidence_grade": "D",
+   "publication_limit": "Candidate enumeration only. Not applicable until its primary publication is obtained.",
+   "review_status": "Primary publication required before this candidate may be applied at all."
+  },
+  {
+   "rule_id": "nahua.correlation.disclosure_when_applied",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "tonalpohualli_correlation",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "candidate_selected": true
+   },
+   "conclusion": {
+    "must_show": [
+     "the candidate id and label",
+     "its anchor statement",
+     "its evidence grade",
+     "the names of the alternatives not chosen",
+     "the one-day Caso fork where a Caso anchor is used"
+    ],
+    "labelled": "configured_method",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 185,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "milbrath_trace_81_2022",
+     "work": "Seasonal Cycles, Veintena Rituals, and Yearbearer Ceremonies in Central Mexico",
+     "section": "correlation of the Mexica and European calendars",
+     "location": "Trace 81 (2022), correlation discussion",
+     "verification": "Disclosure obligation follows from the article's own presentation of the correlation as a reconstruction with a known internal inconsistency."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Disclosure rule.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  },
+  {
+   "rule_id": "nahua.correlation.augury_application_gate",
+   "tradition_id": "nahua_central_mexican",
+   "school_id": "tonalpohualli_correlation",
+   "period": "postclassic_central_mexican_count_as_correlated_by_modern_scholarship",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "florentine_book4_augury_pack",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "applying_a_book4_augury_to_a_birth": true
+   },
+   "conclusion": {
+    "preconditions": [
+     "a candidate correlation is selected and disclosed",
+     "the calendar of the birth date is stated and converted through JDN",
+     "the source's own conditionality travels with the augury"
+    ],
+    "source_conditionality": "Book 4 states in its first chapter heading that the day-fortune is merited and can be forfeited through one's own negligence; the folios also show the operative sign being chosen by ritual and household means rather than fixed by the date of birth",
+    "consequence": "a trait table keyed to the birth day alone misstates the source",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 195,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "nahua_book4_augury_v1",
+     "work": "Florentine Codex Book 4 augury pack (this repository)",
+     "section": "scope_note and chapter 1 heading statement",
+     "location": "nahua/book4_augury_pack.json",
+     "verification": "Local pack read; its scope note and the chapter 1 conditionality statement were used to formulate this gate."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Gate rule; blocks the obvious misuse the correlation now makes technically possible.",
+   "review_status": "Anchors read from a peer-reviewed restatement; Caso 1967 and 1971 must be obtained and collated before promotion. Nahuatl and ethnohistorical review required."
+  }
+ ]
+}

@@ -1,0 +1,499 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "pharaonic_egyptian",
+ "pack_id": "egyptian_sallier_iv_hemerology_v1",
+ "kind": "passage_quotation_pack",
+ "publication_status": "research_only",
+ "translation_grade": "engine_translation_unreviewed",
+ "witness_manifest": "sources/access_manifest.json",
+ "rights_basis": "Quotes the 1870 French of Chabas' complete translation of Papyrus Sallier IV (public domain), from a hash-pinned OCR of the Bayerische Staatsbibliothek digitisation, with an independent English rendering. No modern copyrighted edition (Bakir 1966 and successors) is reproduced.",
+ "scope_note": "Thirty-two day entries whose day assignment was verified line-by-line against hOCR bounding boxes, of which eighteen carry an explicit birth prognosis. This is a hemerology of the 365-day civil year, not a horoscopy: the prognosis attaches to the civil day of birth alone and involves no celestial position. Accents are omitted from the French quotations because the retrieved OCR layer does not carry them reliably; the quotations are otherwise verbatim.",
+ "known_limits": {
+  "day_marks_not_encoded": "Chabas reproduces each day's three-part mark in hieroglyphs. The OCR layer cannot resolve them, so no per-day mark value is asserted here; only the mark system, which Chabas states in French prose, is encoded as rules.",
+  "orthography": "OCR-sourced French is unaccented and may carry residual character errors; the printed page and scan number are given for every entry so any claim can be checked against the facsimile.",
+  "lacunae": "Ellipses reproduce Chabas' own lacuna marks."
+ },
+ "entries": [
+  {
+   "entry_id": "egyptian.sallier4.thoth.23",
+   "civil_month": "thoth",
+   "civil_day": 23,
+   "witness": {
+    "scan_page": 34,
+    "printed_page": "26",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/34"
+   },
+   "french_chabas_1870": "Ne mets pas d'encens sur le feu en ce jour; ne tue pas de betail, pas de chevres, pas de canards; ne mange pas d'oie; cela a vecu. N'ecoute pas de chants joyeux en ce jour; le coeur de l'ennemi de Ra s'est affermi... sur les choses qu'il a faites pour ses enfants. Quiconque est ne ce jour-la, ne vit pas.",
+   "engine_rendering": "Put no incense on the fire on this day; kill no cattle, no goats, no ducks; eat no goose - that has lived. Listen to no joyful songs on this day; the heart of Ra's enemy has grown strong ... over the things he did to his children. Whoever is born on that day does not live.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "does_not_live",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.thoth.24",
+   "civil_month": "thoth",
+   "civil_day": 24,
+   "witness": {
+    "scan_page": 34,
+    "printed_page": "26",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/34"
+   },
+   "french_chabas_1870": "La majeste de Ra vogue a l'aide du vent, du coucher au lever. Ce fut dans cette circonstance qu'il monta dans son arche divine. Quiconque est ne ce jour-la meurt venere par les citoyens de Ptah-Ka-Ha (Memphis) de Sekhet, Naken, Nefer et Tum; ils seront heureux devant le dieu qui y reside, Ptah. Offrandes a son nom en ce jour.",
+   "engine_rendering": "The majesty of Ra sails with the help of the wind, from setting to rising. It was on that occasion that he went up into his divine bark. Whoever is born on that day dies revered by the citizens of Ptah-Ka-Ha (Memphis), of Sekhet, Naken, Nefer and Tum; they will be happy before the god who dwells there, Ptah. Offerings in his name on this day.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": "dies_revered_by_citizens_of_memphis",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.thoth.25",
+   "civil_month": "thoth",
+   "civil_day": 25,
+   "witness": {
+    "scan_page": 35,
+    "printed_page": "27",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/35"
+   },
+   "french_chabas_1870": "Ne sors pas de ta demeure au temps du soir. Ce fut le jour de la sortie de Sekhet vers la montagne de l'Orient. Les associes de Set tuerent toute espece de betail; ils se joignirent a lui; ils s'approcherent de lui; alors il s'exaspera sur-le-champ.",
+   "engine_rendering": "Do not leave your dwelling at evening time. That was the day of Sekhet's going forth toward the eastern mountain. Set's associates killed every kind of cattle; they joined him; they drew near him; then he was inflamed on the spot.",
+   "day_class_from_legend": "restricted",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.5",
+   "civil_month": "paophi",
+   "civil_day": 5,
+   "witness": {
+    "scan_page": 42,
+    "printed_page": "34",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/42"
+   },
+   "french_chabas_1870": "Ne sors de ta maison d'aucun cote en ce jour; ne t'approche d'aucune femme. Ce fut le jour ou se firent toutes les choses en la (divine) presence. La majeste de Mont fut satisfaite en ce jour. Quiconque est ne ce jour-la, meurt en faisant l'amour.",
+   "engine_rendering": "Go out of your house on no side on this day; approach no woman. That was the day when all things were done in the (divine) presence. The majesty of Mont was satisfied on this day. Whoever is born on that day dies making love.",
+   "day_class_from_legend": "restricted",
+   "birth_prognosis_id": "dies_in_intercourse",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.6",
+   "civil_month": "paophi",
+   "civil_day": 6,
+   "witness": {
+    "scan_page": 42,
+    "printed_page": "34",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/42"
+   },
+   "french_chabas_1870": "Jour de fete de Ra dans le ciel; les dieux sont en paix en la divine presence; les familles divines sont heureuses devant Ra. Quiconque est ne en ce jour meurt d'ivresse.",
+   "engine_rendering": "Day of Ra's festival in the sky; the gods are at peace in the divine presence; the divine families are happy before Ra. Whoever is born on this day dies of drunkenness.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": "dies_of_drunkenness",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.7",
+   "civil_month": "paophi",
+   "civil_day": 7,
+   "witness": {
+    "scan_page": 43,
+    "printed_page": "35",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/43"
+   },
+   "french_chabas_1870": "Ne fais absolument rien en lui (en ce jour); Ra est nuisible en lui. Quiconque nait ce jour-la mourra sur la pierre.",
+   "engine_rendering": "Do absolutely nothing in it (on this day); Ra is harmful in it. Whoever is born on that day will die upon the stone.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "dies_upon_the_stone",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.8",
+   "civil_month": "paophi",
+   "civil_day": 8,
+   "witness": {
+    "scan_page": 43,
+    "printed_page": "35",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/43"
+   },
+   "french_chabas_1870": "Quelque chose que tu voies en ce jour, ce sera heureux.",
+   "engine_rendering": "Whatever you may see on this day, it will be fortunate.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.9",
+   "civil_month": "paophi",
+   "civil_day": 9,
+   "witness": {
+    "scan_page": 43,
+    "printed_page": "35",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/43"
+   },
+   "french_chabas_1870": "Les dieux en fete se livrent a l'allegresse; l'ennemi de Ra est tombe. Celui qui est ne ce jour-la mourra de vieillesse.",
+   "engine_rendering": "The gods in festival give themselves over to rejoicing; the enemy of Ra has fallen. He who is born on that day will die of old age.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": "dies_of_old_age",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.23",
+   "civil_month": "paophi",
+   "civil_day": 23,
+   "witness": {
+    "scan_page": 50,
+    "printed_page": "42",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/50"
+   },
+   "french_chabas_1870": "Ne te baigne en aucune eau, ce jour-la; quiconque navigue sur le fleuve en ce jour, sera mis en pieces par la langue du crocodile. Quiconque est ne ce jour-la est tue par un crocodile.",
+   "engine_rendering": "Bathe in no water on that day; whoever sails on the river on this day will be torn to pieces by the tongue of the crocodile. Whoever is born on that day is killed by a crocodile.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "killed_by_a_crocodile",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.27",
+   "civil_month": "paophi",
+   "civil_day": 27,
+   "witness": {
+    "scan_page": 52,
+    "printed_page": "44",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/52"
+   },
+   "french_chabas_1870": "Ce fut le jour d'ouvrir les arcanes des temples et les ecrins a joyaux. Ne sors pas ce jour-la; ne t'applique a aucun travail, au coucher du soleil; quiconque nait ce jour-la, mourra par un serpent.",
+   "engine_rendering": "That was the day of opening the secret places of the temples and the jewel caskets. Do not go out on that day; apply yourself to no work at sunset; whoever is born on that day will die by a serpent.",
+   "day_class_from_legend": "restricted",
+   "birth_prognosis_id": "dies_by_a_serpent",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.28",
+   "civil_month": "paophi",
+   "civil_day": 28,
+   "witness": {
+    "scan_page": 52,
+    "printed_page": "44",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/52"
+   },
+   "french_chabas_1870": "Quelque chose que tu voies en ce jour, ce sera heureux.",
+   "engine_rendering": "Whatever you may see on this day, it will be fortunate.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.paophi.29",
+   "civil_month": "paophi",
+   "civil_day": 29,
+   "witness": {
+    "scan_page": 52,
+    "printed_page": "44",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/52"
+   },
+   "french_chabas_1870": "Quiconque est ne ce jour-la meurt venere de ses concitoyens.",
+   "engine_rendering": "Whoever is born on that day dies revered by his fellow citizens.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": "dies_revered_by_fellow_citizens",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.athyr.14",
+   "civil_month": "athyr",
+   "civil_day": 14,
+   "witness": {
+    "scan_page": 57,
+    "printed_page": "49",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/57"
+   },
+   "french_chabas_1870": "(Ne sors d'aucun cote) en ce jour. Les dieux voulurent... faire l'ennemi de... Celui qui nait ce jour-la meurt de blessures.",
+   "engine_rendering": "(Go out on no side) on this day. The gods wished ... to make the enemy of ... He who is born on that day dies of wounds.",
+   "day_class_from_legend": "restricted",
+   "birth_prognosis_id": "dies_of_wounds",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.athyr.16",
+   "civil_month": "athyr",
+   "civil_day": 16,
+   "witness": {
+    "scan_page": 57,
+    "printed_page": "49",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/57"
+   },
+   "french_chabas_1870": "Arrivee des Oerous superieurs et inferieurs a Abydos, versant des larmes; Isis et Nephthys se lamentent a voix haute devant eux pour Ounnefer. N'ecoute pas de chants joyeux en ce jour.",
+   "engine_rendering": "Arrival of the upper and lower Oerou at Abydos, shedding tears; Isis and Nephthys lament aloud before them for Wennefer. Listen to no joyful songs on this day.",
+   "day_class_from_legend": "restricted",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.athyr.19",
+   "civil_month": "athyr",
+   "civil_day": 19,
+   "witness": {
+    "scan_page": 58,
+    "printed_page": "50",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/58"
+   },
+   "french_chabas_1870": "Des tourbillons s'engendrent dans le ciel; ne navigue sur le fleuve ni en allant ni en revenant. En fait, ne (sors) pas du tout ce jour-la.",
+   "engine_rendering": "Whirlwinds are engendered in the sky; do not sail on the river, neither going nor returning. In fact, do not (go out) at all on that day.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.athyr.20",
+   "civil_month": "athyr",
+   "civil_day": 20,
+   "witness": {
+    "scan_page": 58,
+    "printed_page": "50",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/58"
+   },
+   "french_chabas_1870": "Sortie de Ba(r)is puissante... Quiconque est ne ce jour-la mourra de la contagion annuelle.",
+   "engine_rendering": "Going forth of mighty Ba(r)is ... Whoever is born on that day will die of the annual contagion.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "dies_of_the_annual_contagion",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.athyr.22",
+   "civil_month": "athyr",
+   "civil_day": 22,
+   "witness": {
+    "scan_page": 59,
+    "printed_page": "51",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/59"
+   },
+   "french_chabas_1870": "Fete de Shou fils de Ra; ce fut le jour dans lequel Neith le placa dans l'arche divine, ce jour-la.",
+   "engine_rendering": "Festival of Shu son of Ra; that was the day on which Neith placed him in the divine bark, on that day.",
+   "day_class_from_legend": "no_mark_preserved",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.athyr.23",
+   "civil_month": "athyr",
+   "civil_day": 23,
+   "witness": {
+    "scan_page": 59,
+    "printed_page": "51",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/59"
+   },
+   "french_chabas_1870": "C'est la (sortie) de Noun. Les dieux... depot de la Majeste de ce dieu, le fleuve n'etant pas grand. Celui qui est ne ce jour-la mourra sur le fleuve.",
+   "engine_rendering": "This is the (going forth) of Nun. The gods ... deposit of the Majesty of this god, the river not being great. He who is born on that day will die on the river.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "dies_on_the_river",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.2",
+   "civil_month": "choiak",
+   "civil_day": 2,
+   "witness": {
+    "scan_page": 63,
+    "printed_page": "55",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/63"
+   },
+   "french_chabas_1870": "Regarde n'importe quoi ce jour-la. Tous les dieux et toutes les deesses sont en fete au ciel, et en allegresse.",
+   "engine_rendering": "Look at anything at all on that day. All the gods and all the goddesses are in festival in the sky, and in rejoicing.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.3",
+   "civil_month": "choiak",
+   "civil_day": 3,
+   "witness": {
+    "scan_page": 63,
+    "printed_page": "55",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/63"
+   },
+   "french_chabas_1870": "Ne fais absolument rien en ce jour ou l'on boucha les oreilles d'Osiris dans son sanctuaire mysterieux; quiconque est ne ce jour-la, ses oreilles le feront mourir.",
+   "engine_rendering": "Do absolutely nothing on this day, on which the ears of Osiris were stopped up in his mysterious sanctuary; whoever is born on that day, his ears will be the death of him.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "his_ears_cause_his_death",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.7",
+   "civil_month": "choiak",
+   "civil_day": 7,
+   "witness": {
+    "scan_page": 65,
+    "printed_page": "57",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/65"
+   },
+   "french_chabas_1870": "Ce fut le jour de briser l'ennemi dans le monde entier. Quelque chose que tu voies, ce sera heureux ce jour-la.",
+   "engine_rendering": "That was the day of breaking the enemy in the whole world. Whatever you may see, it will be fortunate on that day.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.8",
+   "civil_month": "choiak",
+   "civil_day": 8,
+   "witness": {
+    "scan_page": 65,
+    "printed_page": "57",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/65"
+   },
+   "french_chabas_1870": "Quelque chose que tu voies en ce jour, ce sera heureux.",
+   "engine_rendering": "Whatever you may see on this day, it will be fortunate.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.10",
+   "civil_month": "choiak",
+   "civil_day": 10,
+   "witness": {
+    "scan_page": 65,
+    "printed_page": "57",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/65"
+   },
+   "french_chabas_1870": "Ce fut le jour de faire ce qu'on fait a la Majeste de Thoth; installation de la Majeste du Dieu devant les Oerous. Ces dieux furent avec Thoth a frapper l'ennemi Set par devant et par derriere, dans sa forteresse; la, il se fit un carnage furieux ce jour-la. Quiconque est ne ce jour-la, meurt (ayant a la main) du pain et de la liqueur haq a la bouche, et l'oeil dessus.",
+   "engine_rendering": "That was the day of doing what is done for the Majesty of Thoth; installation of the Majesty of the God before the Oerou. These gods were with Thoth in striking the enemy Set before and behind, in his fortress; there a furious carnage was made on that day. Whoever is born on that day dies (with in his hand) bread and haq-liquor at his mouth, and his eye upon it.",
+   "day_class_from_legend": "mixed",
+   "birth_prognosis_id": "dies_with_bread_and_haq_liquor_at_the_mouth",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.19",
+   "civil_month": "choiak",
+   "civil_day": 19,
+   "witness": {
+    "scan_page": 68,
+    "printed_page": "60",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/68"
+   },
+   "french_chabas_1870": "On goute les choses dans le lieu saint en ce jour. La deesse Nok fait... a Osiris devant la double excellente demeure. Ne goute ni dattes ni liqueur haq en ce jour...",
+   "engine_rendering": "Things are tasted in the holy place on this day. The goddess Nok does ... to Osiris before the double excellent dwelling. Taste neither dates nor haq-liquor on this day ...",
+   "day_class_from_legend": "restricted",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.20",
+   "civil_month": "choiak",
+   "civil_day": 20,
+   "witness": {
+    "scan_page": 68,
+    "printed_page": "60",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/68"
+   },
+   "french_chabas_1870": "Ne sors d'aucun cote en lui, ce jour-la. N'allume aucune huile, ce jour-la; ce fut le jour dans lequel on trouva l'auteur du massacre; alors on lui ota la vie dans... Quiconque est ne ce jour-la meurt aveugle.",
+   "engine_rendering": "Go out on no side in it, on that day. Light no oil on that day; that was the day on which the author of the massacre was found; then his life was taken from him in ... Whoever is born on that day dies blind.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "dies_blind",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.21",
+   "civil_month": "choiak",
+   "civil_day": 21,
+   "witness": {
+    "scan_page": 69,
+    "printed_page": "61",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/69"
+   },
+   "french_chabas_1870": "Ce fut le jour ou les Oerous de la mysterieuse demeure vinrent pour vivifier le Khou auguste. Ne sors pas hors de ta maison pendant la duree du jour.",
+   "engine_rendering": "That was the day when the Oerou of the mysterious dwelling came to give life to the august Khu. Do not go outside your house for the duration of the day.",
+   "day_class_from_legend": "restricted",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.22",
+   "civil_month": "choiak",
+   "civil_day": 22,
+   "witness": {
+    "scan_page": 69,
+    "printed_page": "61",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/69"
+   },
+   "french_chabas_1870": "Quelque chose que tu voies, ce sera heureux.",
+   "engine_rendering": "Whatever you may see, it will be fortunate.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.choiak.23",
+   "civil_month": "choiak",
+   "civil_day": 23,
+   "witness": {
+    "scan_page": 69,
+    "printed_page": "61",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/69"
+   },
+   "french_chabas_1870": "Ce fut pendant la nuit; ceux qui s'elevaient au ciel s'appliquerent a frapper et a infester... a la porte du chemin d'Horus defenseur de son pere. Quiconque regarde, leur oeil tombant sur lui, il devient aveugle sur-le-champ.",
+   "engine_rendering": "It was during the night; those who rose to the sky set about striking and infesting ... at the gate of the road of Horus, defender of his father. Whoever looks, their eye falling upon him, he becomes blind on the spot.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.tybi.2",
+   "civil_month": "tybi",
+   "civil_day": 2,
+   "witness": {
+    "scan_page": 73,
+    "printed_page": "65",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/73"
+   },
+   "french_chabas_1870": "Transmission de choses dans le lieu grand; transmission de gens dans la chapelle et dans la chambre du feu; delices pour la bouche des dieux; fruits de leur nourriture. Fais une fete dans ta maison.",
+   "engine_rendering": "Transmission of things in the great place; transmission of people in the chapel and in the chamber of fire; delights for the mouth of the gods; fruits of their food. Make a festival in your house.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": null,
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.tybi.4",
+   "civil_month": "tybi",
+   "civil_day": 4,
+   "witness": {
+    "scan_page": 73,
+    "printed_page": "65",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/73"
+   },
+   "french_chabas_1870": "Regarde toutes choses en ce jour, ce sera heureux. Quiconque nait ce jour-la, mourra le plus vieux de tous les gens de sa famille; il fera une vie longue et accueillera son pere.",
+   "engine_rendering": "Look at all things on this day, it will be fortunate. Whoever is born on that day will die the oldest of all the people of his family; he will make a long life and will receive his father.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": "dies_oldest_of_his_family_long_life",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.tybi.23",
+   "civil_month": "tybi",
+   "civil_day": 23,
+   "witness": {
+    "scan_page": 80,
+    "printed_page": "72",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/80"
+   },
+   "french_chabas_1870": "Quiconque est ne ce jour-la mourra apres une vie longue, et dans l'opulence.",
+   "engine_rendering": "Whoever is born on that day will die after a long life, and in opulence.",
+   "day_class_from_legend": "favourable",
+   "birth_prognosis_id": "dies_after_long_life_in_opulence",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  },
+  {
+   "entry_id": "egyptian.sallier4.pharmuthi.22",
+   "civil_month": "pharmuthi",
+   "civil_day": 22,
+   "witness": {
+    "scan_page": 102,
+    "printed_page": "94",
+    "url": "https://api.digitale-sammlungen.de/ocr/bsb10997368/102"
+   },
+   "french_chabas_1870": "Quiconque nait ce jour-la vit et meurt le meme jour. Ce fut le jour ou l'on frappa les iniquites parmi les enfants de la revolte.",
+   "engine_rendering": "Whoever is born on that day lives and dies on the same day. That was the day when iniquities were struck among the children of the revolt.",
+   "day_class_from_legend": "unlucky",
+   "birth_prognosis_id": "lives_and_dies_the_same_day",
+   "day_assignment_evidence": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+  }
+ ]
+}

@@ -1,0 +1,200 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "nahua_central_mexican",
+ "pack_id": "nahua_correlation_candidates_v1",
+ "kind": "correlation_candidate_manifest",
+ "publication_status": "research_only",
+ "purpose": "The Florentine Codex Book 4 augury pack in this directory holds seventy-two day-sign statements that cannot be applied to a birth because no civil-date correlation is approved. This manifest supplies the candidate correlations themselves, each with its anchor, its source and its evidence grade, so that the engine can apply one as a disclosed configured_method with the fork shown, rather than continuing to refuse for want of a candidate set.",
+ "default_candidate": null,
+ "product_boundary": {
+  "live_engine": false,
+  "customer_eligible": false,
+  "birth_reading_enabled": false,
+  "a_default_may_not_be_introduced_by_this_manifest": true
+ },
+ "candidates": [
+  {
+   "candidate_id": "caso_1521_ce_coatl",
+   "label": "Caso, fall-of-Tenochtitlan anchor",
+   "attributed_to": "Alfonso Caso (1967, Los calendarios prehispanicos; 1971, Calendrical Systems of Central Mexico)",
+   "anchor_statement": "13 August 1521 in the Julian calendar is the day 1 Coatl, in the year 3 Calli.",
+   "anchor_calendar": "julian",
+   "anchor_date_julian": "1521-08-13",
+   "anchor_jdn": 2276828,
+   "anchor_tonalpohualli": {
+    "number": 1,
+    "sign": "coatl",
+    "cycle_position": 104
+   },
+   "anchor_xiuhpohualli": {
+    "year": "3 Calli"
+   },
+   "evidence_grade": "B",
+   "restated_by": [
+    "nahua_milbrath_trace_81_2022_veintena_yearbearer",
+    "nahua_azteccalendar_correlation_settings_tool"
+   ],
+   "status": "primary_publication_not_yet_obtained_secondary_restatement_verified",
+   "notes": "The field default. The anchoring event is the fall of Tenochtitlan, a date recorded in colonial sources in both counts."
+  },
+  {
+   "candidate_id": "caso_1519_ce_ehecatl",
+   "label": "Caso, Spanish-entry anchor",
+   "attributed_to": "Alfonso Caso (1967, 1971)",
+   "anchor_statement": "8 November 1519 in the Julian calendar is the day 8 Ehecatl, the ninth day of Quecholli, in the year 1 Acatl.",
+   "anchor_calendar": "julian",
+   "anchor_date_julian": "1519-11-08",
+   "anchor_jdn": 2276184,
+   "anchor_tonalpohualli": {
+    "number": 8,
+    "sign": "ehecatl",
+    "cycle_position": 241
+   },
+   "anchor_xiuhpohualli": {
+    "year": "1 Acatl",
+    "veintena": "Quecholli",
+    "day_of_veintena": 9
+   },
+   "evidence_grade": "B",
+   "restated_by": [
+    "nahua_milbrath_trace_81_2022_veintena_yearbearer"
+   ],
+   "status": "primary_publication_not_yet_obtained_secondary_restatement_verified",
+   "notes": "Caso's second recorded anchor. It does not agree with the 1521 anchor; see the fork record."
+  },
+  {
+   "candidate_id": "tena_xiuhpohualli_26_february",
+   "label": "Tena, 26 February year start",
+   "attributed_to": "Rafael Tena",
+   "anchor_statement": "The xiuhpohualli year begins on 26 February, on the day 1 Atlcahualo.",
+   "anchor_calendar": "unstated_in_the_consulted_source",
+   "anchor_date_julian": null,
+   "anchor_jdn": null,
+   "anchor_tonalpohualli": null,
+   "anchor_xiuhpohualli": {
+    "veintena": "Atlcahualo",
+    "day_of_veintena": 1,
+    "civil_start": "26 February"
+   },
+   "evidence_grade": "D",
+   "restated_by": [
+    "nahua_calmecac_correlation_survey_blog"
+   ],
+   "status": "anchor_incomplete_primary_publication_required",
+   "notes": "The consulted survey reports the tonalpohualli count as displaced by seven days relative to Caso, and reports no secondary correction. Neither the displacement nor the year-start rule can be encoded as an anchor until Tena's own statement is obtained."
+  },
+  {
+   "candidate_id": "nuttall_ochoa_equinox_intercalated",
+   "label": "Nuttall-Ochoa, equinox-locked with intercalation",
+   "attributed_to": "Zelia Nuttall, developed by Ruben Ochoa",
+   "anchor_statement": "Caso's 1 Coatl date is retained, an intercalary correction is applied, and 1 Cipactli is placed exactly one day after the observable spring equinox.",
+   "anchor_calendar": "gregorian_observational",
+   "anchor_date_julian": null,
+   "anchor_jdn": null,
+   "anchor_tonalpohualli": {
+    "number": 1,
+    "sign": "cipactli",
+    "cycle_position": 0
+   },
+   "anchor_xiuhpohualli": null,
+   "evidence_grade": "D",
+   "restated_by": [
+    "nahua_calmecac_correlation_survey_blog"
+   ],
+   "status": "rule_stated_but_not_reducible_to_a_fixed_anchor_without_the_primary_publication",
+   "notes": "An observational rule, not a fixed day count: the anchor moves with the observed equinox, so it cannot be reduced to a single JDN offset. Recorded as a candidate family, not as an applicable profile."
+  },
+  {
+   "candidate_id": "meza_fixed_cipactli_year_start",
+   "label": "Meza, fixed Cipactli year start",
+   "attributed_to": "Arturo Meza",
+   "anchor_statement": "The new year begins on the day Cipactli every year.",
+   "anchor_calendar": null,
+   "anchor_date_julian": null,
+   "anchor_jdn": null,
+   "anchor_tonalpohualli": null,
+   "anchor_xiuhpohualli": null,
+   "evidence_grade": "D",
+   "restated_by": [
+    "nahua_calmecac_correlation_survey_blog"
+   ],
+   "status": "structurally_incompatible_with_the_260_365_relationship",
+   "notes": "A fixed Cipactli year start cannot hold across a 365-day year against a 260-day count, because 365 is not a multiple of 20. Recorded so the candidate set is complete and so the incompatibility is on the record."
+  },
+  {
+   "candidate_id": "rodriguez_cortes_living_count",
+   "label": "Rodriguez Cortes, living Chiapas count",
+   "attributed_to": "Francisco Rodriguez Cortes",
+   "anchor_statement": "No published anchor was located in this pass.",
+   "anchor_calendar": null,
+   "anchor_date_julian": null,
+   "anchor_jdn": null,
+   "anchor_tonalpohualli": null,
+   "anchor_xiuhpohualli": null,
+   "evidence_grade": "D",
+   "restated_by": [
+    "nahua_azteccalendar_correlation_settings_tool"
+   ],
+   "status": "living_practice_requires_a_named_practitioner_partnership_not_a_source_route",
+   "notes": "A contemporary count carried by a living practitioner. It cannot be adopted from a webpage; it would require that practitioner's own participation and consent."
+  }
+ ],
+ "forks": [
+  {
+   "fork_id": "caso_internal_one_day_disagreement",
+   "statement": "Caso's two anchors do not agree. Counting the 260-day cycle back from the 1521 anchor gives a different tonalpohualli day for 8 November 1519 than the day Caso records for it.",
+   "recomputation": {
+    "jdn_1521_anchor": 2276828,
+    "jdn_1519_anchor": 2276184,
+    "elapsed_days": 644,
+    "elapsed_days_mod_260": 124,
+    "cycle_position_of_1_coatl": 104,
+    "cycle_position_implied_for_1519": 240,
+    "implied_1519_day": "7 cipactli",
+    "cycle_position_recorded_for_1519": 241,
+    "recorded_1519_day": "8 ehecatl",
+    "offset_days": 1
+   },
+   "independent_check": "This repository recomputed the elapsed Julian day count and the 260-day positions from first principles and reproduced the discrepancy exactly: the 1521 anchor implies 7 Cipactli for 8 November 1519, while Caso records 8 Ehecatl. The offset is one day.",
+   "sources_own_resolution": "The consulted peer-reviewed restatement reports Caso's own resolution: that the Mexica day began at noon, so that one European calendar day can correspond to two adjacent tonalpohualli days depending on the time of the event.",
+   "engine_policy": "Both anchors are kept. A reading that applies one must name it, name the other, and state that the two differ by one day and why. Averaging them, or silently choosing one, is forbidden."
+  }
+ ],
+ "check_dates_available": {
+  "source": "nahua_milbrath_trace_81_2022_veintena_yearbearer",
+  "description": "Four Codex Borgia xiuhmolpilli dates are given in the same article in Julian reckoning and can be used to test any candidate that yields a day count.",
+  "dates": [
+   {
+    "aztec": "4 Calli 5 Ollin",
+    "julian": "1458-02-17"
+   },
+   {
+    "aztec": "4 Tochtli 5 Ehecatl",
+    "julian": "1471-02-14"
+   },
+   {
+    "aztec": "4 Acatl 5 Mazatl",
+    "julian": "1484-02-11"
+   },
+   {
+    "aztec": "4 Tecpatl 5 Malinalli",
+    "julian": "1497-02-07"
+   }
+  ],
+  "caveat": "These are year-bearer plus day-sign pairs reported by a modern author from Caso's tables; they test consistency with Caso, not independence from him."
+ },
+ "searches_run_for_further_candidates": [
+  "Caso 1939 correlation tonalpohualli Christian calendar '1 Cipactli' anchor date Sahagun 1521 Tenochtitlan fall day sign",
+  "Aztec/Mexica calendar correlation survey (calmecacanahuac)",
+  "azteccalendar.com correlation settings page",
+  "Redalyc/Trace 81 (2022) Milbrath, full text read for correlation statements"
+ ],
+ "still_to_obtain": [
+  "Caso, Alfonso. 1967. Los calendarios prehispanicos. UNAM.",
+  "Caso, Alfonso. 1971. Calendrical Systems of Central Mexico. HMAI 10-11: 333-48.",
+  "Tena, Rafael. El calendario mexica y la cronografia.",
+  "H. B. Nicholson's restatement of the Caso correlation, cited in the literature as the Caso-Nicholson correlation but not retrieved in this pass.",
+  "Hanns J. Prem's correlation papers, named in the field but not retrieved in this pass."
+ ]
+}

@@ -1,0 +1,570 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "pharaonic_egyptian",
+ "source_pack_id": "egyptian_sallier_iv_hemerology_v1",
+ "status": "research_only_refused_for_customer_output",
+ "source_ids": [
+  "egyptian_chabas_1870_sallier_iv_calendar_mdz",
+  "egyptian_bm_papyrus_sallier_iv"
+ ],
+ "vectors": [
+  {
+   "vector_id": "egyptian.hemerology.marks.three_signs",
+   "rule_ids": [
+    "egyptian.hemerology.mark_system.three_signs_per_day"
+   ],
+   "inputs": {
+    "operation": "describe_mark_system"
+   },
+   "expected": {
+    "signs_per_day": 3
+   },
+   "provenance": "Chabas p. 21: each day is marked with three signs."
+  },
+  {
+   "vector_id": "egyptian.hemerology.marks.colour",
+   "rule_ids": [
+    "egyptian.hemerology.mark_system.colour_semantics"
+   ],
+   "inputs": {
+    "operation": "classify_mark_colour",
+    "colour": "red"
+   },
+   "expected": {
+    "class": "unlucky"
+   },
+   "provenance": "Chabas p. 21: red marks are funestes."
+  },
+  {
+   "vector_id": "egyptian.hemerology.marks.colour_black",
+   "rule_ids": [
+    "egyptian.hemerology.mark_system.colour_semantics"
+   ],
+   "inputs": {
+    "operation": "classify_mark_colour",
+    "colour": "black"
+   },
+   "expected": {
+    "class": "favourable"
+   },
+   "provenance": "Chabas p. 21: the black mark is favourable."
+  },
+  {
+   "vector_id": "egyptian.hemerology.marks.red_types",
+   "rule_ids": [
+    "egyptian.hemerology.mark_system.two_distinct_red_signs"
+   ],
+   "inputs": {
+    "operation": "enumerate_red_signs"
+   },
+   "expected": {
+    "red_sign_types": [
+     "combat",
+     "station"
+    ],
+    "most_sinister": "combat"
+   },
+   "provenance": "Chabas p. 21: two red signs, combat the more sinister, above all tripled."
+  },
+  {
+   "vector_id": "egyptian.hemerology.marks.thirds",
+   "rule_ids": [
+    "egyptian.hemerology.mark_system.fractional_day_verdict"
+   ],
+   "inputs": {
+    "operation": "verdict_granularity"
+   },
+   "expected": {
+    "granularity": "thirds_of_a_day"
+   },
+   "provenance": "Chabas p. 22: two thirds fortunate, one third unlucky, and so on."
+  },
+  {
+   "vector_id": "egyptian.hemerology.marks.thoth23_conflict",
+   "rule_ids": [
+    "egyptian.hemerology.mark_system.mark_may_contradict_legend",
+    "egyptian.hemerology.natal.thoth.23"
+   ],
+   "inputs": {
+    "operation": "resolve_mark_legend_conflict",
+    "civil_month": "thoth",
+    "civil_day": 23
+   },
+   "expected": {
+    "fork_preserved": true,
+    "mark_reported": "most fortunate form, written in red",
+    "legend_reported": "prohibitions and a birth clause that the native does not live",
+    "averaged": false
+   },
+   "provenance": "Chabas p. 22 discusses 23 Thoth explicitly; the legend on p. 26 supplies the clause."
+  },
+  {
+   "vector_id": "egyptian.hemerology.conversion.fail_closed",
+   "rule_ids": [
+    "egyptian.hemerology.conversion.wandering_year_disclosure"
+   ],
+   "inputs": {
+    "operation": "convert_modern_date_to_civil_day",
+    "epoch_profile": null
+   },
+   "expected": {
+    "result": "refused",
+    "reason": "no declared epoch profile"
+   },
+   "provenance": "Chabas p. 23: the correspondence requires the exact date of the manuscript."
+  },
+  {
+   "vector_id": "egyptian.hemerology.conversion.coptic_anchor",
+   "rule_ids": [
+    "egyptian.hemerology.conversion.chabas_coptic_column"
+   ],
+   "inputs": {
+    "operation": "resolve_edition_gregorian_column",
+    "civil_month": "thoth",
+    "civil_day": 1
+   },
+   "expected": {
+    "gregorian_equivalent": "11 September",
+    "julian_equivalent": "29 August",
+    "basis": "coptic",
+    "labelled": "configured_method"
+   },
+   "provenance": "Chabas p. 23 states the anchor; the printed column reproduces it for every month."
+  },
+  {
+   "vector_id": "egyptian.hemerology.conversion.coptic_anchor_check",
+   "rule_ids": [
+    "egyptian.hemerology.conversion.chabas_coptic_column"
+   ],
+   "inputs": {
+    "operation": "resolve_edition_gregorian_column",
+    "civil_month": "paophi",
+    "civil_day": 1
+   },
+   "expected": {
+    "gregorian_equivalent": "11 October"
+   },
+   "provenance": "Printed column, scan 41: Paophi 1 = 11 October, exactly thirty days after Thoth 1."
+  },
+  {
+   "vector_id": "egyptian.hemerology.scope.outside_span",
+   "rule_ids": [
+    "egyptian.hemerology.scope.preserved_span"
+   ],
+   "inputs": {
+    "operation": "lookup_day",
+    "civil_month": "mesore",
+    "civil_day": 1
+   },
+   "expected": {
+    "result": "refused",
+    "reason": "outside the preserved span, which ends at 11 Pachons"
+   },
+   "provenance": "Chabas p. 7 and the end of the translation section."
+  },
+  {
+   "vector_id": "egyptian.hemerology.day_class.favourable_formula",
+   "rule_ids": [
+    "egyptian.hemerology.day_class.legend_verdict_vocabulary"
+   ],
+   "inputs": {
+    "operation": "classify_day_from_legend",
+    "civil_month": "paophi",
+    "civil_day": 8
+   },
+   "expected": {
+    "day_class": "favourable"
+   },
+   "provenance": "Scan 43: 'Quelque chose que tu voies en ce jour, ce sera heureux.'"
+  },
+  {
+   "vector_id": "egyptian.hemerology.day_class.prohibitive_formula",
+   "rule_ids": [
+    "egyptian.hemerology.day_class.legend_verdict_vocabulary"
+   ],
+   "inputs": {
+    "operation": "classify_day_from_legend",
+    "civil_month": "paophi",
+    "civil_day": 7
+   },
+   "expected": {
+    "day_class": "unlucky"
+   },
+   "provenance": "Scan 43: 'Ne fais absolument rien en lui (en ce jour); Ra est nuisible en lui.'"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.no_celestial_input",
+   "rule_ids": [
+    "egyptian.hemerology.natal.civil_day_only"
+   ],
+   "inputs": {
+    "operation": "required_inputs_for_birth_prognosis"
+   },
+   "expected": {
+    "civil_month": true,
+    "civil_day": true,
+    "planetary_positions": false,
+    "birth_hour": false
+   },
+   "provenance": "Every preserved birth clause is conditioned on the civil day alone."
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.all_death_clauses",
+   "rule_ids": [
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "summarise_birth_layer"
+   },
+   "expected": {
+    "clause_count": 18,
+    "clauses_predicating_death": 18,
+    "customer_output": "refused"
+   },
+   "provenance": "Eighteen clauses located and day-fixed across the preserved calendar."
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.thoth.23.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.thoth.23",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "thoth",
+    "civil_day": 23,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "does_not_live",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 34 (printed p. 26): Ne mets pas d'encens sur le feu en ce jour; ne tue pas de betail, pas de chevres, pas de canards; ne mange pas"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.thoth.24.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.thoth.24",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "thoth",
+    "civil_day": 24,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_revered_by_citizens_of_memphis",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 34 (printed p. 26): La majeste de Ra vogue a l'aide du vent, du coucher au lever. Ce fut dans cette circonstance qu'il monta dans "
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.paophi.5.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.paophi.5",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "paophi",
+    "civil_day": 5,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_in_intercourse",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 42 (printed p. 34): Ne sors de ta maison d'aucun cote en ce jour; ne t'approche d'aucune femme. Ce fut le jour ou se firent toutes"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.paophi.6.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.paophi.6",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "paophi",
+    "civil_day": 6,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_of_drunkenness",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 42 (printed p. 34): Jour de fete de Ra dans le ciel; les dieux sont en paix en la divine presence; les familles divines sont heure"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.paophi.7.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.paophi.7",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "paophi",
+    "civil_day": 7,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_upon_the_stone",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 43 (printed p. 35): Ne fais absolument rien en lui (en ce jour); Ra est nuisible en lui. Quiconque nait ce jour-la mourra sur la p"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.paophi.9.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.paophi.9",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "paophi",
+    "civil_day": 9,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_of_old_age",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 43 (printed p. 35): Les dieux en fete se livrent a l'allegresse; l'ennemi de Ra est tombe. Celui qui est ne ce jour-la mourra de v"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.paophi.23.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.paophi.23",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "paophi",
+    "civil_day": 23,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "killed_by_a_crocodile",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 50 (printed p. 42): Ne te baigne en aucune eau, ce jour-la; quiconque navigue sur le fleuve en ce jour, sera mis en pieces par la "
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.paophi.27.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.paophi.27",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "paophi",
+    "civil_day": 27,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_by_a_serpent",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 52 (printed p. 44): Ce fut le jour d'ouvrir les arcanes des temples et les ecrins a joyaux. Ne sors pas ce jour-la; ne t'applique "
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.paophi.29.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.paophi.29",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "paophi",
+    "civil_day": 29,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_revered_by_fellow_citizens",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 52 (printed p. 44): Quiconque est ne ce jour-la meurt venere de ses concitoyens."
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.athyr.14.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.athyr.14",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "athyr",
+    "civil_day": 14,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_of_wounds",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 57 (printed p. 49): (Ne sors d'aucun cote) en ce jour. Les dieux voulurent... faire l'ennemi de... Celui qui nait ce jour-la meurt"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.athyr.20.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.athyr.20",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "athyr",
+    "civil_day": 20,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_of_the_annual_contagion",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 58 (printed p. 50): Sortie de Ba(r)is puissante... Quiconque est ne ce jour-la mourra de la contagion annuelle."
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.athyr.23.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.athyr.23",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "athyr",
+    "civil_day": 23,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_on_the_river",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 59 (printed p. 51): C'est la (sortie) de Noun. Les dieux... depot de la Majeste de ce dieu, le fleuve n'etant pas grand. Celui qui"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.choiak.3.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.choiak.3",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "choiak",
+    "civil_day": 3,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "his_ears_cause_his_death",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 63 (printed p. 55): Ne fais absolument rien en ce jour ou l'on boucha les oreilles d'Osiris dans son sanctuaire mysterieux; quicon"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.choiak.10.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.choiak.10",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "choiak",
+    "civil_day": 10,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_with_bread_and_haq_liquor_at_the_mouth",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 65 (printed p. 57): Ce fut le jour de faire ce qu'on fait a la Majeste de Thoth; installation de la Majeste du Dieu devant les Oer"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.choiak.20.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.choiak.20",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "choiak",
+    "civil_day": 20,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_blind",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 68 (printed p. 60): Ne sors d'aucun cote en lui, ce jour-la. N'allume aucune huile, ce jour-la; ce fut le jour dans lequel on trou"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.tybi.4.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.tybi.4",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "tybi",
+    "civil_day": 4,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_oldest_of_his_family_long_life",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 73 (printed p. 65): Regarde toutes choses en ce jour, ce sera heureux. Quiconque nait ce jour-la, mourra le plus vieux de tous les"
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.tybi.23.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.tybi.23",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "tybi",
+    "civil_day": 23,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "dies_after_long_life_in_opulence",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 80 (printed p. 72): Quiconque est ne ce jour-la mourra apres une vie longue, et dans l'opulence."
+  },
+  {
+   "vector_id": "egyptian.hemerology.natal.pharmuthi.22.refused",
+   "rule_ids": [
+    "egyptian.hemerology.natal.pharmuthi.22",
+    "egyptian.hemerology.natal.all_clauses_are_death_clauses"
+   ],
+   "inputs": {
+    "operation": "apply_birth_prognosis",
+    "civil_month": "pharmuthi",
+    "civil_day": 22,
+    "epoch_profile": "declared"
+   },
+   "expected": {
+    "prognosis_id": "lives_and_dies_the_same_day",
+    "customer_output": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Chabas scan 102 (printed p. 94): Quiconque nait ce jour-la vit et meurt le meme jour. Ce fut le jour ou l'on frappa les iniquites parmi les enf"
+  }
+ ]
+}

@@ -1,0 +1,220 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "mesopotamian_babylonian",
+ "source_pack_id": "babylonian_iqqur_ipus_natal_v1",
+ "status": "research_only_refused_for_customer_output",
+ "source_ids": [
+  "babylonian_ccp_iqqur_ipus_serie_generale_a_p370904"
+ ],
+ "vectors": [
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.section64_list",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.section64_favourable_months"
+   ],
+   "inputs": {
+    "operation": "list_favourable_birth_months"
+   },
+   "expected": {
+    "favourable_months": [
+     2,
+     3,
+     5,
+     8,
+     11,
+     12
+    ],
+    "count": 6
+   },
+   "provenance": "CCP 3.8.1.A obverse 2': Ayyaru, Simanu, Abu, Arahsamna, Sabatu, Addaru."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.month_02",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.month_02_ayyaru",
+    "babylonian.iqqur_ipus.birth.customer_output_refused"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "babylonian_month_number": 2
+   },
+   "expected": {
+    "verdict": "favourable",
+    "customer_output": "refused"
+   },
+   "provenance": "Month ayyaru (2) is in the favourable list of section 64 in CCP 3.8.1.A obverse 2'."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.month_03",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.month_03_simanu",
+    "babylonian.iqqur_ipus.birth.customer_output_refused"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "babylonian_month_number": 3
+   },
+   "expected": {
+    "verdict": "favourable",
+    "customer_output": "refused"
+   },
+   "provenance": "Month simanu (3) is in the favourable list of section 64 in CCP 3.8.1.A obverse 2'."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.month_05",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.month_05_abu",
+    "babylonian.iqqur_ipus.birth.customer_output_refused"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "babylonian_month_number": 5
+   },
+   "expected": {
+    "verdict": "favourable",
+    "customer_output": "refused"
+   },
+   "provenance": "Month abu (5) is in the favourable list of section 64 in CCP 3.8.1.A obverse 2'."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.month_08",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.month_08_arahsamna",
+    "babylonian.iqqur_ipus.birth.customer_output_refused"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "babylonian_month_number": 8
+   },
+   "expected": {
+    "verdict": "favourable",
+    "customer_output": "refused"
+   },
+   "provenance": "Month arahsamna (8) is in the favourable list of section 64 in CCP 3.8.1.A obverse 2'."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.month_11",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.month_11_sabatu",
+    "babylonian.iqqur_ipus.birth.customer_output_refused"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "babylonian_month_number": 11
+   },
+   "expected": {
+    "verdict": "favourable",
+    "customer_output": "refused"
+   },
+   "provenance": "Month sabatu (11) is in the favourable list of section 64 in CCP 3.8.1.A obverse 2'."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.month_12",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.month_12_addaru",
+    "babylonian.iqqur_ipus.birth.customer_output_refused"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "babylonian_month_number": 12
+   },
+   "expected": {
+    "verdict": "favourable",
+    "customer_output": "refused"
+   },
+   "provenance": "Month addaru (12) is in the favourable list of section 64 in CCP 3.8.1.A obverse 2'."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.unlisted_month_silence",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.silence_is_not_a_verdict"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "babylonian_month_number": 7
+   },
+   "expected": {
+    "verdict": "not_stated_by_this_witness",
+    "unfavourable_asserted": false
+   },
+   "provenance": "Tasritu (VII) is absent from the section-64 list; the witness records only favourable months."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.no_celestial_input",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.month_only_no_celestial_input"
+   ],
+   "inputs": {
+    "operation": "required_inputs"
+   },
+   "expected": {
+    "babylonian_month": true,
+    "planetary_positions": false,
+    "birth_hour": false,
+    "day_of_month": false
+   },
+   "provenance": "Section 64's protasis carries no celestial or time-of-day condition."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.calendar_fail_closed",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.calendar_conversion_gate"
+   ],
+   "inputs": {
+    "operation": "judge_birth_month",
+    "modern_date": "1990-06-15",
+    "calendar_conversion_profile": null
+   },
+   "expected": {
+    "result": "refused",
+    "reason": "no declared Babylonian calendar conversion profile"
+   },
+   "provenance": "The table is keyed to Babylonian lunisolar months; no conversion is declared in this pack."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.witness.scope",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.witness.abridged_recension_scope"
+   ],
+   "inputs": {
+    "operation": "describe_witness"
+   },
+   "expected": {
+    "recension": "abridged_tabular_serie_generale",
+    "controlling_edition_open": false
+   },
+   "provenance": "Introduction and colophon of CCP 3.8.1.A."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.context.section62",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.context.section62_wife_into_house"
+   ],
+   "inputs": {
+    "operation": "read_adjacent_section",
+    "series_section": 62
+   },
+   "expected": {
+    "event": "he_introduces_his_wife_into_his_house",
+    "lacuna_present": true
+   },
+   "provenance": "CCP 3.8.1.A obverse 1'."
+  },
+  {
+   "vector_id": "babylonian.iqqur_ipus.birth.refusal",
+   "rule_ids": [
+    "babylonian.iqqur_ipus.birth.customer_output_refused"
+   ],
+   "inputs": {
+    "operation": "request_customer_birth_month_verdict",
+    "babylonian_month_number": 5
+   },
+   "expected": {
+    "decision": "refused",
+    "research_record_present": true
+   },
+   "provenance": "Product refusal recorded against CCP 3.8.1.A obverse 2'."
+  }
+ ]
+}

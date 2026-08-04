@@ -618,3 +618,69 @@ Build a non-consumer corpus validator before any reading generator:
 7. independent Assyriological and astronomical review.
 
 Only after that gate passes should the project decide whether the surviving rules support a meaningful personal reading, or only a historically faithful horoscope reconstruction.
+
+
+## 2026-08-04: a Babylonian birth layer outside the horoscopes
+
+The horoscope corpus in this directory is genuinely natal but records positions far
+more often than judgments. A second, quite different birth layer exists and was not
+in the corpus: the **month-of-birth** section of the menological series *Iqqur
+ipus*.
+
+**Found.** CCP 3.8.1.A, commentary on *Iqqur ipus*, serie generale, tablet
+**K.98 + MS 2226**, served by the Cuneiform Commentaries Project (Yale) through
+Oracc, project `ccpo`; editio princeps A. R. George, *Mesopotamian Incantations and
+Related Texts in the Schoyen Collection* (CDL Press, 2016), 169-172.
+
+- <https://ccp.yale.edu/P370904>, DOI `10079/tdz08zr`
+- Pinned as `sources/ccp_3_8_1_A_P370904.html`, 248,940 bytes, SHA-256
+  `23b667ed2eedb390ce8270849e05fb3fe7db880d4dcfc42832a50406905a99b7`
+
+Obverse line 2' carries transliteration and translation together:
+
+> `LU.TUR U.TU GU4 SIG4 NE APIN ZIZ SE SE`
+> "(If) a baby is born" (= *Iqqur ipus* section 64): (During the months of)
+> Ayyaru (II), Simanu (III), Abu (V), Arahsamna (VIII), Sabatu (XI), and Addaru
+> (XII), it is favorable.
+
+Encoded as `natal_omen_rule_manifest.json` (13 rules) and
+`natal_omen_validation_vectors.json` (13 vectors).
+
+### Three things the pack refuses to do with it
+
+1. **Infer the negative.** This witness is an abridged tabular recension that
+   records, for each section, only the months in which the act is favourable. Every
+   line of the obverse has that shape and none records an unfavourable month. So
+   the six unlisted months are **silence**, not a bad verdict, and complementing
+   the list is forbidden.
+2. **Convert a modern date.** The table is keyed to Babylonian lunisolar months.
+   Without a declared conversion profile including intercalation, the pack fails
+   closed.
+3. **Say it to a customer.** Recovered from a single abridged witness, without the
+   controlling edition, and with no attested apodosis about the person. The section
+   may state that the layer exists and which months it marks favourable; it may not
+   apply it.
+
+### Negative control, recorded so it is not re-run
+
+CCP 3.8.1.B, MLC 2627 (<https://ccp.yale.edu/P297024>, pinned,
+337,796 bytes, SHA-256
+`0f291ad6c22fb052e4c0bb91cc29ff8829b511b449c24a55466de81b6b1dfc7a`) was fetched
+specifically to look for a second witness to section 64. Its obverse column i was
+read in full: sections 1, 5, 7, 8, 9 and 10, all house construction, each with
+month-by-month outcomes. **No birth section.** CCP 3.8.1.D (P369364) and CCP
+3.8.2.A, serie mensuelle Tasritu (P461210) were also checked; the latter is a
+single-month recension covering house construction and gardening, with no birth
+section.
+
+### Still gated
+
+Labat 1965, *Un calendrier babylonien des travaux, des signes et des mois (series
+iqqur ipus)*, remains the controlling edition of the serie mensuelle, in which each
+month's prognoses are gathered under the month. It was not retrievable in open form
+in this pass, so no claim is made here about section 64's full wording there.
+Searches run: `ORACC "if a child is born" nativity omens Akkadian summa izbu OR
+"iqqur ipus" month of birth omen edition online`; `oracc "iqqur ipus" OR "birth
+omens" Akkadian "if a child is born" transliteration translation open access
+edition Labat calendrier`. The *summa izbu* series is a separate, teratological
+genre and is refused rather than gated.

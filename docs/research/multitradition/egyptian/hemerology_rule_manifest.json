@@ -1,0 +1,1226 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "pharaonic_egyptian",
+ "school_id": "sallier_iv_hemerology",
+ "source_pack_id": "egyptian_sallier_iv_hemerology_v1",
+ "source_edition_id": "chabas1870_sallier_iv_mdz_bsb10997368",
+ "source_registry_ids": [
+  "egyptian_chabas_1870_sallier_iv_calendar_mdz",
+  "egyptian_bm_papyrus_sallier_iv",
+  "egyptian_cpl_budge_1923_hieratic_papyri_second_series"
+ ],
+ "implementation_status": "research_verified",
+ "publication_status": "research_only",
+ "evidence_note": "Encodes the Sallier IV hemerology's own notation system, its editor's stated civil-calendar conversion convention, and the eighteen birth prognoses preserved in the witness. Every birth prognosis is a death clause and every one carries output_policy 'refused'. The pack exists so that the Egyptian section can state, with citations, what the tradition's surviving natal layer actually says and why the product will not say it.",
+ "rules": [
+  {
+   "rule_id": "egyptian.hemerology.mark_system.three_signs_per_day",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "omen",
+   "scope": {
+    "artefact": "sallier_iv_day_marks",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "every_day_marked": true,
+    "signs_per_day": 3
+   },
+   "conclusion": {
+    "signs_per_day": 3,
+    "all_favourable_form": "the good sign repeated three times",
+    "mixed_form": "the good sign combined with one or two unlucky signs",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section IV, the marks",
+     "location": "printed p. 21 (MDZ scan 29), bsb10997368",
+     "verification": "French prose inspected: 'Chaque jour est marque de trois signes; lorsqu'un jour est entierement favorable, il est note du signe bon, trois fois repete'."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research description of the source's own notation; never a customer statement.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.mark_system.colour_semantics",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "omen",
+   "scope": {
+    "artefact": "sallier_iv_day_marks",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "mark_colour": [
+     "black",
+     "red"
+    ]
+   },
+   "conclusion": {
+    "black": "favourable",
+    "red": "unlucky",
+    "mixed_day_marks_keep_their_own_colour": true,
+    "authors_rationale": "black assigned to Osiris as principle of good, red to Set as principle of evil and destruction, cited to Plutarch, De Iside et Osiride ch. 22",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section IV, the marks",
+     "location": "printed p. 21 (MDZ scan 29), bsb10997368",
+     "verification": "French prose inspected: 'la marque noire qui est favorable, et les marques rouges qui sont funestes'."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research description of the source's own notation; never a customer statement.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.mark_system.two_distinct_red_signs",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "omen",
+   "scope": {
+    "artefact": "sallier_iv_day_marks",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "mark_colour": "red"
+   },
+   "conclusion": {
+    "red_sign_types": [
+     "combat",
+     "station"
+    ],
+    "combat_gloss": "lutte, combat, dispute - referred by the editor to the great mythological war",
+    "station_gloss": "to stand upright - referred to episodes in which the evil principle went unchecked",
+    "most_sinister": "combat, above all when tripled",
+    "typical_effect": "prohibitions on going out, working, or giving oneself to joy fall on days marked with one of these",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section IV, the marks",
+     "location": "printed p. 21 (MDZ scan 29), bsb10997368",
+     "verification": "French prose inspected: the two red signs and the statement that combat is the more sinister, especially tripled."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research description of the source's own notation; never a customer statement.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.mark_system.fractional_day_verdict",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "omen",
+   "scope": {
+    "artefact": "sallier_iv_day_marks",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "mark_is_mixed": true
+   },
+   "conclusion": {
+    "grades": [
+     "tres-heureux",
+     "tres-funeste",
+     "tres-menacant",
+     "heureux pour les deux tiers du jour, funeste pour un tiers",
+     "menacant pour les deux tiers du jour et heureux pour un tiers"
+    ],
+    "granularity": "thirds_of_a_day",
+    "editor_choice": "the editor reproduces the marks in hieroglyphs rather than translating them",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section IV, the marks",
+     "location": "printed p. 22 (MDZ scan 30), bsb10997368",
+     "verification": "French prose inspected: the editor's stated values for the mark combinations, in thirds of a day."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research description of the source's own notation; never a customer statement.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.mark_system.mark_may_contradict_legend",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "omen",
+   "scope": {
+    "artefact": "sallier_iv_day_marks",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "mark_and_legend_disagree": true
+   },
+   "conclusion": {
+    "attested_case": "23 Thoth carries the most fortunate mark, but written in red, while its legend forbids incense, killing cattle and fowl, eating them, and joyful songs, and states that whoever is born that day does not live",
+    "editor_judgment": "the editor judges this a scribal error and keeps the red colour",
+    "engine_policy": "preserve both the mark and the legend; never average them, never silently adopt the editor's emendation",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [
+    "Do not treat the editor's emendation as the manuscript reading."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section IV, the marks",
+     "location": "printed p. 22 (MDZ scan 30), bsb10997368",
+     "verification": "French prose inspected: 'Le 23 Thoth avait la marque la plus heureuse mais, par exception, ecrite en rouge ... Evidemment le scribe a commis une de ces erreurs'."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Research description of the source's own notation; never a customer statement.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.conversion.wandering_year_disclosure",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "sallier_iv_calendar_frame",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "calendar": "egyptian_civil_365"
+   },
+   "conclusion": {
+    "year_length_days": 365,
+    "intercalation": false,
+    "drift": "one day every four years against the tropical year",
+    "consequence": "any correspondence between a Sallier day and a Julian or Gregorian day requires the exact date of the manuscript and a computation of where 1 Thoth then fell",
+    "engine_policy": "a civil-day prognosis may never be offered against a modern date without declaring the epoch assumption",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 120,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section IV, the calendar frame",
+     "location": "printed p. 23 (MDZ scan 31), bsb10997368",
+     "verification": "French prose inspected: the vague year, its four-year drift, and the explicit statement that the correspondence would require the manuscript's exact date."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Disclosure rule; the engine must fail closed without a declared epoch.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.conversion.chabas_coptic_column",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "sallier_iv_gregorian_column",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "reading_the_editions_gregorian_column": true
+   },
+   "conclusion": {
+    "anchor": "1 Thoth = 29 August Julian = 11 September Gregorian",
+    "basis": "the Coptic calendar, not a pharaonic chronology",
+    "editor_qualification": "the editor states he noted the dates 'par simple curiosite'",
+    "month_structure_assumed": "twelve months of thirty days",
+    "engine_policy": "this is a configured_method with a named alternative set; it is the convention of THIS edition and must be labelled as such",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 120,
+   "exceptions": [
+    "Never present the Coptic-anchored Gregorian date as the pharaonic date."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section IV, the calendar frame",
+     "location": "printed p. 23 (MDZ scan 31), bsb10997368",
+     "verification": "French prose inspected: 'j'ai note les dates d'apres le calendrier copte, dans lequel le 1er Thoth correspond au 29 aout Julien, soit le 11 septembre Gregorien'. The anchor was independently re-derived from the edition's own Gregorian column on seventeen pages and reproduced every printed month heading."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Disclosure rule; never presented as the ancient Egyptian date of the day.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.scope.preserved_span",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "papyrus_sallier_iv",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "witness": "papyrus_sallier_iv"
+   },
+   "conclusion": {
+    "opening": "mutilated; the first page has lost the initial groups of every line",
+    "last_preserved_indication": "11 Pachons",
+    "consequence": "no verdict may be asserted for a civil day outside the preserved span, and silence in this witness is not evidence of absence in the tradition",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 130,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section III, the manuscript",
+     "location": "printed p. 7 (MDZ scan 15), bsb10997368",
+     "verification": "French prose inspected: the cut opening page and the statement that the last indication of the calendar refers to day 11 of the month; the translation section indeed ends at 11 Pachons."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Scope statement; the engine must refuse days outside the preserved span.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.day_class.legend_verdict_vocabulary",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "omen",
+   "scope": {
+    "artefact": "sallier_iv_legends",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "legend_contains_a_verdict_formula": true
+   },
+   "conclusion": {
+    "favourable_formula": "Quelque chose que tu voies en ce jour, ce sera heureux",
+    "prohibitive_formula": "Ne fais absolument rien en ce jour",
+    "restrictive_formula": "Ne sors pas de ta maison / ne navigue pas / n'ecoute pas de chants joyeux",
+    "engine_policy": "day class is read from the legend text, never inferred from the hieroglyphic mark, which this edition does not translate",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 35 (MDZ scan 43), bsb10997368",
+     "verification": "Formulae observed verbatim across the geometry-verified pages, e.g. 8 Paophi and 28 Paophi carry the favourable formula and 7 Paophi the prohibitive one."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research description of the source's own notation; never a customer statement.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.civil_day_only",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clauses",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "input": "civil_month_and_day_of_birth"
+   },
+   "conclusion": {
+    "celestial_input_required": false,
+    "hour_of_birth_required": false,
+    "statement": "the birth prognosis in this witness is keyed to the civil day alone; no planet, star, decan or hour enters it",
+    "consequence": "this is a hemerology, not a horoscopy, and must never be presented as an Egyptian birth chart",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 140,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 26 (MDZ scan 34), bsb10997368",
+     "verification": "Every birth clause in the preserved calendar takes the form 'Quiconque est ne ce jour-la ...' with no celestial condition."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Structural statement; blocks any presentation of this pack as a natal chart.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.all_clauses_are_death_clauses",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clauses",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "clause_type": "birth_prognosis"
+   },
+   "conclusion": {
+    "attested_clause_count": 18,
+    "clauses_naming_death": 18,
+    "finding": "every preserved birth prognosis in this witness states that the native dies, and names the manner, the circumstance or the honour of the death",
+    "engine_policy": "the product refuses to output any of them to a customer; the section states the finding instead",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 150,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 26-94 (MDZ scan 34), bsb10997368",
+     "verification": "Eighteen birth clauses were located across the preserved calendar and each was fixed to its day by column geometry; all eighteen predicate death."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Refusal rule. The finding may be stated; no individual clause may be applied to a customer.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.thoth.23",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "thoth",
+    "civil_day": 23
+   },
+   "conditions": {
+    "civil_month": "thoth",
+    "civil_day": 23,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "does_not_live",
+    "source_quotation_fr": "Ne mets pas d'encens sur le feu en ce jour; ne tue pas de betail, pas de chevres, pas de canards; ne mange pas d'oie; cela a vecu. N'ecoute pas de chants joyeux en ce jour; le coeur de l'ennemi de Ra s'est affermi... sur les choses qu'il a faites pour ses enfants. Quiconque est ne ce jour-la, ne vit pas.",
+    "engine_rendering": "Put no incense on the fire on this day; kill no cattle, no goats, no ducks; eat no goose - that has lived. Listen to no joyful songs on this day; the heart of Ra's enemy has grown strong ... over the things he did to his children. Whoever is born on that day does not live.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 26 (MDZ scan 34), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.thoth.24",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "thoth",
+    "civil_day": 24
+   },
+   "conditions": {
+    "civil_month": "thoth",
+    "civil_day": 24,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_revered_by_citizens_of_memphis",
+    "source_quotation_fr": "La majeste de Ra vogue a l'aide du vent, du coucher au lever. Ce fut dans cette circonstance qu'il monta dans son arche divine. Quiconque est ne ce jour-la meurt venere par les citoyens de Ptah-Ka-Ha (Memphis) de Sekhet, Naken, Nefer et Tum; ils seront heureux devant le dieu qui y reside, Ptah. Offrandes a son nom en ce jour.",
+    "engine_rendering": "The majesty of Ra sails with the help of the wind, from setting to rising. It was on that occasion that he went up into his divine bark. Whoever is born on that day dies revered by the citizens of Ptah-Ka-Ha (Memphis), of Sekhet, Naken, Nefer and Tum; they will be happy before the god who dwells there, Ptah. Offerings in his name on this day.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "favourable",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 26 (MDZ scan 34), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.paophi.5",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "paophi",
+    "civil_day": 5
+   },
+   "conditions": {
+    "civil_month": "paophi",
+    "civil_day": 5,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_in_intercourse",
+    "source_quotation_fr": "Ne sors de ta maison d'aucun cote en ce jour; ne t'approche d'aucune femme. Ce fut le jour ou se firent toutes les choses en la (divine) presence. La majeste de Mont fut satisfaite en ce jour. Quiconque est ne ce jour-la, meurt en faisant l'amour.",
+    "engine_rendering": "Go out of your house on no side on this day; approach no woman. That was the day when all things were done in the (divine) presence. The majesty of Mont was satisfied on this day. Whoever is born on that day dies making love.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "restricted",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 34 (MDZ scan 42), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.paophi.6",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "paophi",
+    "civil_day": 6
+   },
+   "conditions": {
+    "civil_month": "paophi",
+    "civil_day": 6,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_of_drunkenness",
+    "source_quotation_fr": "Jour de fete de Ra dans le ciel; les dieux sont en paix en la divine presence; les familles divines sont heureuses devant Ra. Quiconque est ne en ce jour meurt d'ivresse.",
+    "engine_rendering": "Day of Ra's festival in the sky; the gods are at peace in the divine presence; the divine families are happy before Ra. Whoever is born on this day dies of drunkenness.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "favourable",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 34 (MDZ scan 42), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.paophi.7",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "paophi",
+    "civil_day": 7
+   },
+   "conditions": {
+    "civil_month": "paophi",
+    "civil_day": 7,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_upon_the_stone",
+    "source_quotation_fr": "Ne fais absolument rien en lui (en ce jour); Ra est nuisible en lui. Quiconque nait ce jour-la mourra sur la pierre.",
+    "engine_rendering": "Do absolutely nothing in it (on this day); Ra is harmful in it. Whoever is born on that day will die upon the stone.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 35 (MDZ scan 43), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.paophi.9",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "paophi",
+    "civil_day": 9
+   },
+   "conditions": {
+    "civil_month": "paophi",
+    "civil_day": 9,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_of_old_age",
+    "source_quotation_fr": "Les dieux en fete se livrent a l'allegresse; l'ennemi de Ra est tombe. Celui qui est ne ce jour-la mourra de vieillesse.",
+    "engine_rendering": "The gods in festival give themselves over to rejoicing; the enemy of Ra has fallen. He who is born on that day will die of old age.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "favourable",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 35 (MDZ scan 43), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.paophi.23",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "paophi",
+    "civil_day": 23
+   },
+   "conditions": {
+    "civil_month": "paophi",
+    "civil_day": 23,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "killed_by_a_crocodile",
+    "source_quotation_fr": "Ne te baigne en aucune eau, ce jour-la; quiconque navigue sur le fleuve en ce jour, sera mis en pieces par la langue du crocodile. Quiconque est ne ce jour-la est tue par un crocodile.",
+    "engine_rendering": "Bathe in no water on that day; whoever sails on the river on this day will be torn to pieces by the tongue of the crocodile. Whoever is born on that day is killed by a crocodile.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 42 (MDZ scan 50), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.paophi.27",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "paophi",
+    "civil_day": 27
+   },
+   "conditions": {
+    "civil_month": "paophi",
+    "civil_day": 27,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_by_a_serpent",
+    "source_quotation_fr": "Ce fut le jour d'ouvrir les arcanes des temples et les ecrins a joyaux. Ne sors pas ce jour-la; ne t'applique a aucun travail, au coucher du soleil; quiconque nait ce jour-la, mourra par un serpent.",
+    "engine_rendering": "That was the day of opening the secret places of the temples and the jewel caskets. Do not go out on that day; apply yourself to no work at sunset; whoever is born on that day will die by a serpent.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "restricted",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 44 (MDZ scan 52), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.paophi.29",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "paophi",
+    "civil_day": 29
+   },
+   "conditions": {
+    "civil_month": "paophi",
+    "civil_day": 29,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_revered_by_fellow_citizens",
+    "source_quotation_fr": "Quiconque est ne ce jour-la meurt venere de ses concitoyens.",
+    "engine_rendering": "Whoever is born on that day dies revered by his fellow citizens.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "favourable",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 44 (MDZ scan 52), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.athyr.14",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "athyr",
+    "civil_day": 14
+   },
+   "conditions": {
+    "civil_month": "athyr",
+    "civil_day": 14,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_of_wounds",
+    "source_quotation_fr": "(Ne sors d'aucun cote) en ce jour. Les dieux voulurent... faire l'ennemi de... Celui qui nait ce jour-la meurt de blessures.",
+    "engine_rendering": "(Go out on no side) on this day. The gods wished ... to make the enemy of ... He who is born on that day dies of wounds.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "restricted",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 49 (MDZ scan 57), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.athyr.20",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "athyr",
+    "civil_day": 20
+   },
+   "conditions": {
+    "civil_month": "athyr",
+    "civil_day": 20,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_of_the_annual_contagion",
+    "source_quotation_fr": "Sortie de Ba(r)is puissante... Quiconque est ne ce jour-la mourra de la contagion annuelle.",
+    "engine_rendering": "Going forth of mighty Ba(r)is ... Whoever is born on that day will die of the annual contagion.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 50 (MDZ scan 58), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.athyr.23",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "athyr",
+    "civil_day": 23
+   },
+   "conditions": {
+    "civil_month": "athyr",
+    "civil_day": 23,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_on_the_river",
+    "source_quotation_fr": "C'est la (sortie) de Noun. Les dieux... depot de la Majeste de ce dieu, le fleuve n'etant pas grand. Celui qui est ne ce jour-la mourra sur le fleuve.",
+    "engine_rendering": "This is the (going forth) of Nun. The gods ... deposit of the Majesty of this god, the river not being great. He who is born on that day will die on the river.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 51 (MDZ scan 59), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.choiak.3",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "choiak",
+    "civil_day": 3
+   },
+   "conditions": {
+    "civil_month": "choiak",
+    "civil_day": 3,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "his_ears_cause_his_death",
+    "source_quotation_fr": "Ne fais absolument rien en ce jour ou l'on boucha les oreilles d'Osiris dans son sanctuaire mysterieux; quiconque est ne ce jour-la, ses oreilles le feront mourir.",
+    "engine_rendering": "Do absolutely nothing on this day, on which the ears of Osiris were stopped up in his mysterious sanctuary; whoever is born on that day, his ears will be the death of him.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 55 (MDZ scan 63), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.choiak.10",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "choiak",
+    "civil_day": 10
+   },
+   "conditions": {
+    "civil_month": "choiak",
+    "civil_day": 10,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_with_bread_and_haq_liquor_at_the_mouth",
+    "source_quotation_fr": "Ce fut le jour de faire ce qu'on fait a la Majeste de Thoth; installation de la Majeste du Dieu devant les Oerous. Ces dieux furent avec Thoth a frapper l'ennemi Set par devant et par derriere, dans sa forteresse; la, il se fit un carnage furieux ce jour-la. Quiconque est ne ce jour-la, meurt (ayant a la main) du pain et de la liqueur haq a la bouche, et l'oeil dessus.",
+    "engine_rendering": "That was the day of doing what is done for the Majesty of Thoth; installation of the Majesty of the God before the Oerou. These gods were with Thoth in striking the enemy Set before and behind, in his fortress; there a furious carnage was made on that day. Whoever is born on that day dies (with in his hand) bread and haq-liquor at his mouth, and his eye upon it.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "mixed",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 57 (MDZ scan 65), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.choiak.20",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "choiak",
+    "civil_day": 20
+   },
+   "conditions": {
+    "civil_month": "choiak",
+    "civil_day": 20,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_blind",
+    "source_quotation_fr": "Ne sors d'aucun cote en lui, ce jour-la. N'allume aucune huile, ce jour-la; ce fut le jour dans lequel on trouva l'auteur du massacre; alors on lui ota la vie dans... Quiconque est ne ce jour-la meurt aveugle.",
+    "engine_rendering": "Go out on no side in it, on that day. Light no oil on that day; that was the day on which the author of the massacre was found; then his life was taken from him in ... Whoever is born on that day dies blind.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 60 (MDZ scan 68), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.tybi.4",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "tybi",
+    "civil_day": 4
+   },
+   "conditions": {
+    "civil_month": "tybi",
+    "civil_day": 4,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_oldest_of_his_family_long_life",
+    "source_quotation_fr": "Regarde toutes choses en ce jour, ce sera heureux. Quiconque nait ce jour-la, mourra le plus vieux de tous les gens de sa famille; il fera une vie longue et accueillera son pere.",
+    "engine_rendering": "Look at all things on this day, it will be fortunate. Whoever is born on that day will die the oldest of all the people of his family; he will make a long life and will receive his father.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "favourable",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 65 (MDZ scan 73), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.tybi.23",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "tybi",
+    "civil_day": 23
+   },
+   "conditions": {
+    "civil_month": "tybi",
+    "civil_day": 23,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "dies_after_long_life_in_opulence",
+    "source_quotation_fr": "Quiconque est ne ce jour-la mourra apres une vie longue, et dans l'opulence.",
+    "engine_rendering": "Whoever is born on that day will die after a long life, and in opulence.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "favourable",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 72 (MDZ scan 80), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  },
+  {
+   "rule_id": "egyptian.hemerology.natal.pharmuthi.22",
+   "tradition_id": "pharaonic_egyptian",
+   "school_id": "sallier_iv_hemerology",
+   "period": "ramesside_new_kingdom_hemerology_as_edited_1870",
+   "domain": "natal",
+   "scope": {
+    "artefact": "sallier_iv_birth_clause",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "civil_month": "pharmuthi",
+    "civil_day": 22
+   },
+   "conditions": {
+    "civil_month": "pharmuthi",
+    "civil_day": 22,
+    "epoch_profile_declared": true
+   },
+   "conclusion": {
+    "prognosis_id": "lives_and_dies_the_same_day",
+    "source_quotation_fr": "Quiconque nait ce jour-la vit et meurt le meme jour. Ce fut le jour ou l'on frappa les iniquites parmi les enfants de la revolte.",
+    "engine_rendering": "Whoever is born on that day lives and dies on the same day. That was the day when iniquities were struck among the children of the revolt.",
+    "translation_grade": "engine_translation_unreviewed",
+    "day_class_from_legend": "unlucky",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "chabas1870",
+     "work": "Le calendrier des jours fastes et nefastes de l'annee egyptienne (traduction complete du papyrus Sallier IV)",
+     "section": "Section V, translation",
+     "location": "printed p. 94 (MDZ scan 102), bsb10997368",
+     "verification": "Two-column hOCR bounding boxes were read directly: the day cell's baseline sits within 30px of the first line of this legend, and no intervening day cell exists. Where the cell preserved its Gregorian equivalent the Egyptian date was independently recomputed from Chabas' Coptic anchor and agreed."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Refused for customer output: a death prognosis. Research and historical display only.",
+   "review_status": "Day assignment verified against hOCR bounding boxes; Egyptological review and collation against the Budge 1923 facsimile plates still required."
+  }
+ ]
+}

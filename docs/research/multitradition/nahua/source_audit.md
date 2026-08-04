@@ -189,3 +189,75 @@ Current artifacts:
 - `calendar_rule_manifest.json`: eight atomic calendar/boundary rules;
 - `calendar_validation_vectors.json`: twelve positive, wraparound, negative, conversion, rejection, and output-boundary fixtures;
 - `validate_tonalpohualli_cycle.py`: executable 260-pair uniqueness, recurrence, trecena-head, vector-coverage, and product-boundary gate.
+
+
+## 2026-08-04: the correlation candidates were never hunted
+
+This track held 72 Florentine Book 4 auguries and refused to place a birth "because
+no approved epoch exists". Nobody had gone looking for the candidates. They are
+published and named.
+
+**Found.** Susan Milbrath, "Seasonal Cycles, Veintena Rituals, and Yearbearer
+Ceremonies in Central Mexico", *Trace* 81 (2022): 247-280, DOI
+`10.22134/trace.81.2022.142`, open full text at
+<https://www.redalyc.org/journal/4238/423872655010/html/>. It states Caso's two
+anchors and credits them to Caso 1967, *Los calendarios prehispanicos*, and Caso
+1971, "Calendrical Systems of Central Mexico", HMAI 10-11: 333-48.
+
+- **13 August 1521 Julian = 1 Coatl, year 3 Calli** (the fall of Tenochtitlan).
+- **8 November 1519 Julian = 8 Ehecatl, ninth day of Quecholli, year 1 Acatl.**
+
+### The fork, recomputed here from first principles
+
+The two anchors disagree. This repository converted both dates to Julian Day
+Numbers and both day-signs to positions in the 260-day cycle:
+
+- JDN 13 Aug 1521 = 2,276,828; JDN 8 Nov 1519 = 2,276,184; elapsed **644 days**.
+- 644 mod 260 = **124**.
+- 1 Coatl sits at cycle position 104; projecting back 124 gives position **240**,
+  which is **7 Cipactli** - not the 8 Ehecatl (position 241) that Caso records.
+
+The offset is exactly one day, which reproduces the discrepancy the article
+attributes to Caso, and Caso's own reported resolution is that the Mexica day began
+at **noon**, so one European day can map to two adjacent tonalpohualli days
+depending on the time of the event. For births this is not academic: a birth before
+local noon and one after fall on different day signs under that resolution.
+
+### What was encoded
+
+`correlation_candidates_manifest.json` - six candidates with anchors, evidence
+grades and blocking reasons: the two Caso anchors (grade B), Tena's 26 February
+year start, the Nuttall-Ochoa equinox-locked scheme, Meza's fixed Cipactli year
+start, and Francisco Rodriguez Cortes' living Chiapas count (all grade D, primary
+publications not retrieved). Plus `correlation_rule_manifest.json` (12 rules) and
+`correlation_validation_vectors.json` (12 vectors).
+
+`default_candidate` is `null` and stays null. The pack fails closed when no
+candidate is selected, and when one is selected it must be named alongside the
+alternatives it displaced and alongside the Caso fork.
+
+Two candidates are recorded as structurally unusable rather than merely ungated:
+the Nuttall-Ochoa scheme is an *observational* rule tied to the sighted equinox and
+so cannot be reduced to a fixed day offset, and a fixed Cipactli year start cannot
+hold across a 365-day year because 365 is not a multiple of 20.
+
+### The gate that now matters more
+
+`nahua.correlation.augury_application_gate`. A correlation makes it technically
+possible to render Book 4 as a birth-day trait table, and that would misstate the
+source. Book 4's first chapter heading says the day-fortune is *merited*
+(`qujmaceoaia`) and can be forfeited through one's own negligence
+(`tlatziviliz` / `floxura`), and folios 21r, 35v, 52v and 55v show the operative
+sign being assigned by ritual choice and household means rather than by the date of
+birth.
+
+### Still to obtain
+
+Caso 1967 and Caso 1971 themselves; Tena, *El calendario mexica y la cronografia*;
+Nuttall's papers; H. B. Nicholson's restatement (the pairing is cited in the field
+as the Caso-Nicholson correlation, and Nicholson's own statement was not retrieved
+in this pass); Hanns J. Prem's correlation papers. Searches run:
+`Caso 1939 correlation tonalpohualli Christian calendar "1 Cipactli" anchor date
+Sahagun 1521 Tenochtitlan fall day sign`; the calmecacanahuac correlation survey;
+the azteccalendar.com correlation settings page; and the Milbrath article read in
+full.

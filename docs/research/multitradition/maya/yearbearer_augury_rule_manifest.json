@@ -1,0 +1,479 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "maya",
+ "school_id": "landa_yucatec_yearbearer_augury",
+ "source_pack_id": "maya_landa_yearbearer_augury_v1",
+ "source_edition_id": "landa_brasseur_1864_archive_bub_gb_EicVAAAAQAAJ",
+ "source_registry_ids": [
+  "maya_landa_relacion_brasseur_1864_archive",
+  "maya_chilam_balam_kaua_facsimile_archive_restricted"
+ ],
+ "implementation_status": "research_verified",
+ "publication_status": "research_only",
+ "evidence_note": "Supplies the Maya track's first sourced judgment layer: the four year-bearer prognostics of Landa, quoted from a public-domain edition with its Spanish original, together with the rules that keep them conditional, communal and colonially framed. It also records, as a rule, that Landa carries no per-day-sign birth augury, so that the absence is a documented finding rather than an assumption.",
+ "rules": [
+  {
+   "rule_id": "maya.landa.yearbearer.four_dominical_letters",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "haab_new_year": true
+   },
+   "conclusion": {
+    "letters": [
+     "kan",
+     "muluc",
+     "ix",
+     "cauac"
+    ],
+    "each_letter_has": [
+     "a Bacab omen",
+     "a Uayeb image",
+     "a temple statue",
+     "a year verdict",
+     "a prescribed remedy"
+    ],
+    "bacabs": {
+     "kan": "Hobnil",
+     "muluc": "Canzicnal",
+     "ix": "Zac-Ciui",
+     "cauac": "Hozanek"
+    },
+    "uayeb_images": {
+     "kan": "Kan-u-Uayeyab",
+     "muluc": "Chac-u-Uayeyab",
+     "ix": "Zac-u-Uayeyab",
+     "cauac": "Ek-u-Uayeyab"
+    },
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 110,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Sections XXXIV-XXXVIII, new-year ceremonies",
+     "location": "Spanish column, printed p. 210-232",
+     "verification": "The four sections were read in the Spanish column; each names its letter, its Bacab omen, its Uayeb image and its verdict."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research and historical display only. A colonial friar's account of community year prognostics; never a personal prediction.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.yearbearer.kan_hobnil",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "year_bearer_letter": "kan"
+   },
+   "conditions": {
+    "year_bearer_letter": "kan"
+   },
+   "conclusion": {
+    "bacab": "Hobnil",
+    "direction_in_this_witness": "medio dia (south)",
+    "verdict": "good",
+    "source_quotation_es": "Dexando con las cerimonias hechas, echado el demonio, segun su engaño, este año tenian por bueno, porque reynava con la letra Kan el Bacab-Hobnil, del qual dezian no avia peccado como sus hermanos y por esso no les venian miserias en el.",
+    "engine_rendering": "Once the ceremonies were done and the demon cast out - so their delusion ran - they held this year for a good one, because with the letter Kan there reigned the Bacab Hobnil, of whom they said that he had not sinned as his brothers had, and that for this reason no miseries came upon them in it.",
+    "translation_grade": "engine_translation_unreviewed",
+    "qualification": "The witness immediately qualifies the verdict: because miseries nevertheless often occurred, services were prescribed so that when they did occur the blame could be laid on the services or their performers.",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Section on the new year of the letter Kan",
+     "location": "Spanish column, printed p. 215",
+     "verification": "Verdict sentence located in the Spanish column and quoted verbatim from the hash-pinned OCR text; the facing French column was read as a check on the sense."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research and historical display only. A colonial friar's account of community year prognostics; never a personal prediction.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.yearbearer.muluc_canzicnal",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "year_bearer_letter": "muluc"
+   },
+   "conditions": {
+    "year_bearer_letter": "muluc"
+   },
+   "conclusion": {
+    "bacab": "Canzicnal",
+    "direction_in_this_witness": "oriente (east)",
+    "verdict": "good",
+    "source_quotation_es": "Este año en que la letra Muluc era dominical y el Bacab Canziemal reynava, tenian por buen año, ca dezian que era este el mejor y mayor destos dioses Bacabes; y ansi le ponian en sus oraciones el primero.",
+    "engine_rendering": "This year, in which the letter Muluc was dominical and the Bacab Canzicnal reigned, they held for a good year, for they said that this was the best and greatest of these Bacab gods, and so they put him first in their prayers.",
+    "translation_grade": "engine_translation_unreviewed",
+    "qualification": "The same passage nevertheless names the year's miseries - little water, and maize throwing many shoots - and prescribes the idol Yax-Coc-Ahmut and its offerings as the remedy. The witness adds that they had many other miseries and bad signs, although the year was good, if they did not perform the prescribed services.",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Section on the new year of the letter Muluc",
+     "location": "Spanish column, printed p. 220",
+     "verification": "Verdict sentence located in the Spanish column and quoted verbatim from the hash-pinned OCR text; the facing French column was read as a check on the sense."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research and historical display only. A colonial friar's account of community year prognostics; never a personal prediction.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.yearbearer.ix_zac_ciui",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "year_bearer_letter": "ix"
+   },
+   "conditions": {
+    "year_bearer_letter": "ix"
+   },
+   "conclusion": {
+    "bacab": "Zac-Ciui",
+    "direction_in_this_witness": "norte (north)",
+    "verdict": "bad",
+    "source_quotation_es": "Tenian tambien un pronostico de que alguños de los que quisiessen ser señores no prevalescerian. Dezian ternian tambien langosta, y que se despoblarian muchos de sus pueblos de hambre.",
+    "engine_rendering": "They also had a prognostic that some of those who wished to be lords would not prevail. They said they would likewise have locusts, and that many of their towns would be depopulated by hunger.",
+    "translation_grade": "engine_translation_unreviewed",
+    "qualification": "The section is headed in the edition 'Sacrificios del año nuevo de la letra Yx. Pronosticos malos y modo de remediar sus efectos'. The facing French column expands the same prognostic: a year bad for bread but abundant in cotton, a great lack of water, days of excessive sun that would dry the maize fields, famine, and from famine thefts, and from thefts slavery, and hence discord and civil war, and changes among the lords or the priests.",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Section on the new year of the letter Ix",
+     "location": "Spanish column, printed p. 226",
+     "verification": "Verdict sentence located in the Spanish column and quoted verbatim from the hash-pinned OCR text; the facing French column was read as a check on the sense."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research and historical display only. A colonial friar's account of community year prognostics; never a personal prediction. Harsh clauses - mortality, famine, depopulation, war - are refused for customer output.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.yearbearer.cauac_hozanek",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "year_bearer_letter": "cauac"
+   },
+   "conditions": {
+    "year_bearer_letter": "cauac"
+   },
+   "conclusion": {
+    "bacab": "Hozanek",
+    "direction_in_this_witness": "medio dia (south) for the deposited image",
+    "verdict": "bad",
+    "source_quotation_es": "Este año en que la letra era Cauac y reynava el Bacab-Hozanek tenian, allende de la pronosticada mortandad, por ruyn, por que dezian les avian los muchos soles de matar los maizales, y comer las muchas hormigas lo que sembrassen y los paxaros, y porque esto no seria en todas partes avria en algunos comida, la qual avrian con gran trabajo.",
+    "engine_rendering": "This year, in which the letter was Cauac and the Bacab Hozanek reigned, they held - besides the mortality it was threatened with - for a wretched one, because they said the many suns would kill the maize fields, and the many ants and the birds would eat what they sowed; and because this would not be so everywhere, in some places there would be food, which they would have only with great labour.",
+    "translation_grade": "engine_translation_unreviewed",
+    "qualification": "The remedy prescribed is four idols named Chichac-Chob, Ek-Balam-Chac, Ahcan-Uolcab and Ahbuluc-Balam, with the fire ceremony described in the same section.",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Section on the new year of the letter Cauac",
+     "location": "Spanish column, printed p. 232",
+     "verification": "Verdict sentence located in the Spanish column and quoted verbatim from the hash-pinned OCR text; the facing French column was read as a check on the sense."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research and historical display only. A colonial friar's account of community year prognostics; never a personal prediction. Harsh clauses - mortality, famine, depopulation, war - are refused for customer output.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.yearbearer.verdict_never_without_its_remedy",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "rendering_a_year_verdict": true
+   },
+   "conclusion": {
+    "requirement": "the prescribed remedy stated in the same section must be reported with the verdict",
+    "reason": "in this witness no prognostic stands alone; each is paired with a prescribed observance, and the text explicitly says that when miseries came anyway the blame was laid on the observance",
+    "consequence": "a verdict quoted without its remedy converts a conditional ritual system into a fatalistic one, which the source does not support",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 150,
+   "exceptions": [
+    "Never present a Landa year verdict as an unconditional outcome."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Section on the new year of the letter Kan",
+     "location": "Spanish column, printed p. 215",
+     "verification": "The Kan section states that because miseries often occurred anyway, services were provided so the blame could fall on the services or their performers."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Structural rule; blocks a fatalistic misreading.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.yearbearer.scope_is_the_year_not_the_person",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "request": "apply_a_year_verdict_to_an_individual"
+   },
+   "conclusion": {
+    "decision": "refused",
+    "reasoning": "these are prognostics for the year and for the community - rain, maize, famine, mortality, locusts, war, succession among lords and priests - and the witness attaches none of them to a person born in the year",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 170,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Sections XXXV-XXXVIII",
+     "location": "Spanish column, printed p. 210-232",
+     "verification": "Every verdict in the four sections is about the year's crops, water, sickness and political order; none is about a native of the year."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Refusal rule.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.daysign.no_natal_augury_in_this_witness",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_relacion",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "searching_for": "per_day_sign_birth_augury"
+   },
+   "conclusion": {
+    "result": "absent_from_this_witness",
+    "what_landa_does_carry": [
+     "the twenty day names",
+     "the four year bearers and their prognostics",
+     "the eighteen months and their feasts",
+     "the katun prognostics of Buluc-Ahau and Bolon-Ahau"
+    ],
+    "where_the_day_auguries_are": "the colonial Yucatec day-augury lists known as u mutil chuenil kin sansamal, carried by the Books of Chilam Balam of Kaua and Ixil",
+    "access_state": "no open transcription of that section was located in this pass; see the search trail recorded in the source audit",
+    "engine_policy": "silence in Landa is not evidence that the tradition lacked day auguries; it is evidence that this witness is not the place to find them",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 160,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "whole work, searched",
+     "location": "Spanish column, printed p. passim",
+     "verification": "The full OCR text was searched for day-sign birth auguries; the work carries year-bearer and katun prognostics but no per-day-sign natal statement."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Negative result, recorded so the search is not silently repeated.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.yearbearer.directions_not_normalized",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_yearbearer_series",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "reading_the_direction_assignments": true
+   },
+   "conclusion": {
+    "observed": "the witness sends each Uayeb image to one quarter and deposits it at the next, so the directions rotate through the four-year cycle rather than sitting fixed to a letter",
+    "engine_policy": "reproduce the directions exactly as the witness states them for each section; do not normalise them into a single fixed letter-to-direction table",
+    "scholarly_state": "the direction assignments in Landa are a known crux and differ between reconstructions",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Sections XXXV-XXXVIII",
+     "location": "Spanish column, printed p. 211-232",
+     "verification": "Kan's image is carried to the southern heaps and left at the east; Muluc's is carried to the east and left at the north; Ix's is carried to the north; Cauac's is left at the south."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Disclosure rule.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.colonial_framing_must_be_shown",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "omen",
+   "scope": {
+    "artefact": "landa_relacion",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "quoting_landa": true
+   },
+   "conclusion": {
+    "requirement": "the source's own framing must be visible to the reader",
+    "framing": "Landa writes as a Franciscan describing what he regarded as demonic error; the Spanish calls the gods 'el demonio' throughout, and the same author burned the Maya books he describes",
+    "consequence": "quoting his content while silently deleting his framing presents a hostile colonial account as neutral ethnography",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 180,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Sections XXXV-XXXVIII and the chapter on the books",
+     "location": "Spanish column, printed p. 210-316",
+     "verification": "The Spanish column names the deities as 'el demonio' in every section quoted here, and the later chapter records that a great number of Maya books were found and destroyed."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Framing rule; mandatory whenever this source is quoted.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  },
+  {
+   "rule_id": "maya.landa.ocr_substitution_disclosure",
+   "tradition_id": "maya",
+   "school_id": "landa_yucatec_yearbearer_augury",
+   "period": "colonial_yucatec_sixteenth_century_as_edited_1864",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "landa_brasseur_1864_ocr",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "reading_names_from_the_ocr_layer": true
+   },
+   "conclusion": {
+    "known_substitutions": {
+     "Ix": "Fx / Yx",
+     "Yax-Coc-Ahmut": "Fax-Coc-Ahmut",
+     "Itzamna": "Fzamna / Yzamna",
+     "Canzicnal": "Canziemal / Canzienal"
+    },
+    "editors_own_note": "the 1864 editor records in a footnote that he could not verify the true orthography of the Muluc Bacab's name",
+    "engine_policy": "names restored in this pack are marked as restorations, and the OCR form is kept alongside",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "landa_brasseur_1864",
+     "work": "Relacion de las cosas de Yucatan (Brasseur de Bourbourg edition, Paris 1864)",
+     "section": "Sections XXXVI-XXXVII and editor's footnotes",
+     "location": "Spanish column, printed p. 218-226",
+     "verification": "Substitutions observed directly in the retrieved OCR text and reconciled against the facing French column and the editor's footnotes."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Data-quality disclosure.",
+   "review_status": "Spanish read from a hash-pinned public-domain OCR text; collation against Tozzer 1941 and Maya specialist review required. Contemporary Maya community review required before any public rendering."
+  }
+ ]
+}

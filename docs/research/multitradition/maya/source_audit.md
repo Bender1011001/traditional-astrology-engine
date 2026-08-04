@@ -211,3 +211,60 @@ collapsing them.
 Select one bounded, well-studied almanac such as page 19b. Encode images, numerals, intervals, glyph readings, and auguries from page-level scholarship. Have a Maya epigrapher reproduce the result before expanding.
 
 No personal reading generator should be built until both pilots pass and a living-practice partnership defines what, if anything, may responsibly be offered beyond historical reconstruction.
+
+
+## 2026-08-04: Landa supplies the first sourced Maya judgment layer
+
+**Found.** Diego de Landa, *Relacion de las cosas de Yucatan*, in Brasseur de
+Bourbourg's 1864 Paris edition, which prints the 16th-century Spanish with a
+facing French translation.
+
+- Item: <https://archive.org/details/bub_gb_EicVAAAAQAAJ>
+- Rights: **Public Domain Mark 1.0** on the item.
+- Text layer pinned as `sources/landa_brasseur_1864_djvu.txt`, 1,203,898 bytes,
+  SHA-256 `c2485f6c3c6abb52c9b1acf731ba36a349f1a42838d43adaff5637e6b96370d4`.
+
+Sections XXXIV-XXXVIII carry the new-year ceremonies and, for each of the four
+dominical letters, a Bacab omen, a Uayeb image, a temple statue, a **year
+verdict** and a **prescribed remedy**:
+
+| Letter | Bacab | Verdict |
+|---|---|---|
+| Kan | Hobnil | good - "no avia peccado como sus hermanos y por esso no les venian miserias en el" |
+| Muluc | Canzicnal | good - "el mejor y mayor destos dioses Bacabes"; but with named miseries and a remedy |
+| Ix | Zac-Ciui | bad - the section is headed "Pronosticos malos"; lack of water, excessive sun, famine, theft, slavery, war, changes among lords and priests, locusts, depopulation |
+| Cauac | Hozanek | bad - "por ruyn", besides the prognosticated mortality; suns kill the maize, ants and birds eat the sowing |
+
+Encoded as `yearbearer_augury_rule_manifest.json` (11 rules) and
+`yearbearer_augury_validation_vectors.json` (10 vectors). Harsh clauses carry
+`output_policy: refused`. Three structural rules travel with them: the verdict may
+never be rendered without its remedy, the verdicts are annual and communal and may
+not be applied to a person, and Landa's colonial framing must stay visible.
+
+OCR substitutions in this scan are recorded in the access manifest: Ix prints as
+"Fx"/"Yx", Yax-Coc-Ahmut as "Fax-Coc-Ahmut", Itzamna as "Fzamna"/"Yzamna". The
+1864 editor's own footnote records that he could not verify the orthography of the
+Muluc Bacab's name.
+
+### Day-sign auguries: not found, and exactly what was tried
+
+The target was the colonial Yucatec day-augury list *u mutil chuenil kin sansamal*
+- the per-day-sign auguries carried by the Books of Chilam Balam of Kaua and Ixil.
+It was not located in open transcription. The trail:
+
+1. `"Chilam Balam" Kaua "sansamal kin" OR "u mutil" day augury transcription open access Yucatec "utz" "lob" twenty day names born` - confirmed the term and that the section exists; surfaced no open transcription.
+2. `Chilam Balam Kaua Mani day auguries "sansamal" day list Yucatec transcription Bolles FAMSI` - no transcription.
+3. Internet Archive `title:("chilam balam")` (31 items) and `title:(chumayel)` (14 items), each inspected by metadata.
+   - `libro-de-chilam-balam-de-kaua` - patron-library collection, 15.7 MB PDF of manuscript images; OCR text layer only 27 kB, i.e. images of colonial handwriting, no transcription.
+   - `libro-de-chilam-balam-de-ixil` - patron-library collection, CC BY-NC-ND 4.0, same situation.
+   - `codexperezbookof0000unse` (Craine and Reindorp, *The Codex Perez and the Book of Chilam Balam of Mani*, 1979) - `access-restricted-item: true`, lending only, and in copyright.
+   - `bookofchilambala00hoil` (Gordon 1913, Chumayel) - open, but a photographic facsimile, and Chumayel is not the day-augury witness.
+4. FAMSI: `famsi.org/reports/96072/grammar/section29.htm` fetched and read - it carries the katun prophecy of Chilam Balam, explicitly **not** the day auguries. `famsi.org/research/bolles/` returned **HTTP 403**.
+5. Landa's own full text searched for a per-day-sign birth augury: absent. He carries the twenty day names, the four year bearers, the eighteen months, and the katun prognostics of Buluc-Ahau and Bolon-Ahau - no natal day augury. This negative is now encoded as a rule so the search is not silently repeated.
+
+**Two live routes remain, and neither is exhausted:** Bricker and Miram, *An
+Encounter of Two Worlds: The Book of Chilam Balam of Kaua* (Tulane, 2002), which
+edits the section but is in copyright; and the Berendt Linguistic Collection copies
+at the University of Pennsylvania, which are the open route and were not reached in
+this pass. The ceiling here is an access ceiling with a named next step, not an
+absence.

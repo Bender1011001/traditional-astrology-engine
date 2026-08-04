@@ -1,0 +1,550 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "mesopotamian_babylonian",
+ "school_id": "iqqur_ipus_menology",
+ "source_pack_id": "babylonian_iqqur_ipus_natal_v1",
+ "source_edition_id": "ccp_3_8_1_A_P370904_k98_ms2226",
+ "source_registry_ids": [
+  "babylonian_ccp_iqqur_ipus_serie_generale_a_p370904",
+  "babylonian_ccp_iqqur_ipus_serie_generale_b_p297024"
+ ],
+ "implementation_status": "research_verified",
+ "publication_status": "research_only",
+ "evidence_note": "Encodes the month-of-birth section of Iqqur ipus (section 64) from an open Oracc-served edition, together with the non-inference, calendar-gate and refusal rules that keep it from becoming a customer claim. This is the corpus's first non-horoscope Babylonian natal material; it is a menology, not a horoscopy, and the pack says so.",
+ "rules": [
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.section64_favourable_months",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "event": "a_baby_is_born",
+    "series_section": 64
+   },
+   "conclusion": {
+    "akkadian_protasis_transliteration": "LU.TUR U.TU",
+    "edition_translation": "“(If) a baby is born” (= Iqqur ipus §64)",
+    "engine_rendering": "If a child is born.",
+    "translation_grade": "engine_translation_unreviewed",
+    "favourable_months": [
+     2,
+     3,
+     5,
+     8,
+     11,
+     12
+    ],
+    "favourable_month_names": [
+     "ayyaru",
+     "simanu",
+     "abu",
+     "arahsamna",
+     "sabatu",
+     "addaru"
+    ],
+    "month_count_listed": 6,
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 110,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2'), K.98 + MS 2226",
+     "verification": "Transliteration 'LU.TUR U.TU GU4 SIG4 NE APIN ZIZ SE SE' read together with the edition's translation naming Ayyaru (II), Simanu (III), Abu (V), Arahsamna (VIII), Sabatu (XI) and Addaru (XII) as favourable."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research record only; never a customer statement about a person's birth month.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.month_02_ayyaru",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "babylonian_month_number": 2
+   },
+   "conditions": {
+    "event": "a_baby_is_born",
+    "babylonian_month_number": 2
+   },
+   "conclusion": {
+    "verdict": "favourable",
+    "month_name": "ayyaru",
+    "verdict_source": "listed among the favourable months of section 64 in this witness",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2'), K.98 + MS 2226",
+     "verification": "Month ayyaru (2) appears in the favourable list of section 64 in the edition's translation of this line."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research record only; never a customer statement about a person's birth month.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.month_03_simanu",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "babylonian_month_number": 3
+   },
+   "conditions": {
+    "event": "a_baby_is_born",
+    "babylonian_month_number": 3
+   },
+   "conclusion": {
+    "verdict": "favourable",
+    "month_name": "simanu",
+    "verdict_source": "listed among the favourable months of section 64 in this witness",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2'), K.98 + MS 2226",
+     "verification": "Month simanu (3) appears in the favourable list of section 64 in the edition's translation of this line."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research record only; never a customer statement about a person's birth month.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.month_05_abu",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "babylonian_month_number": 5
+   },
+   "conditions": {
+    "event": "a_baby_is_born",
+    "babylonian_month_number": 5
+   },
+   "conclusion": {
+    "verdict": "favourable",
+    "month_name": "abu",
+    "verdict_source": "listed among the favourable months of section 64 in this witness",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2'), K.98 + MS 2226",
+     "verification": "Month abu (5) appears in the favourable list of section 64 in the edition's translation of this line."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research record only; never a customer statement about a person's birth month.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.month_08_arahsamna",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "babylonian_month_number": 8
+   },
+   "conditions": {
+    "event": "a_baby_is_born",
+    "babylonian_month_number": 8
+   },
+   "conclusion": {
+    "verdict": "favourable",
+    "month_name": "arahsamna",
+    "verdict_source": "listed among the favourable months of section 64 in this witness",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2'), K.98 + MS 2226",
+     "verification": "Month arahsamna (8) appears in the favourable list of section 64 in the edition's translation of this line."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research record only; never a customer statement about a person's birth month.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.month_11_sabatu",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "babylonian_month_number": 11
+   },
+   "conditions": {
+    "event": "a_baby_is_born",
+    "babylonian_month_number": 11
+   },
+   "conclusion": {
+    "verdict": "favourable",
+    "month_name": "sabatu",
+    "verdict_source": "listed among the favourable months of section 64 in this witness",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2'), K.98 + MS 2226",
+     "verification": "Month sabatu (11) appears in the favourable list of section 64 in the edition's translation of this line."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research record only; never a customer statement about a person's birth month.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.month_12_addaru",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false,
+    "babylonian_month_number": 12
+   },
+   "conditions": {
+    "event": "a_baby_is_born",
+    "babylonian_month_number": 12
+   },
+   "conclusion": {
+    "verdict": "favourable",
+    "month_name": "addaru",
+    "verdict_source": "listed among the favourable months of section 64 in this witness",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2'), K.98 + MS 2226",
+     "verification": "Month addaru (12) appears in the favourable list of section 64 in the edition's translation of this line."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Research record only; never a customer statement about a person's birth month.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.silence_is_not_a_verdict",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "babylonian_month_number_not_in_favourable_list": true
+   },
+   "conclusion": {
+    "verdict": "not_stated_by_this_witness",
+    "unlisted_months": [
+     "nisannu",
+     "duuzu",
+     "elulu",
+     "tasritu",
+     "kislimu",
+     "tebetu"
+    ],
+    "reasoning": "this witness is an abridged tabular recension that records, for each section, the months in which the act is favourable; it does not record unfavourable verdicts, so a month's absence is silence and not a negative judgment",
+    "engine_policy": "never infer 'unfavourable' from absence",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 130,
+   "exceptions": [
+    "Do not complement the favourable list into an unfavourable list."
+   ],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse, whole table; introduction to the edition",
+     "verification": "Every line of the obverse table has the same shape - protasis, then the months in which it is favourable - and no line records an unfavourable month."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Non-inference rule; blocks a fabricated negative verdict.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.month_only_no_celestial_input",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "input": "babylonian_month_of_birth"
+   },
+   "conclusion": {
+    "celestial_input_required": false,
+    "day_of_month_required": false,
+    "hour_required": false,
+    "statement": "section 64 judges the birth by the month in which it happens; no planet, no zodiacal sign, no day and no hour enter it",
+    "relation_to_the_horoscopes": "this is a menology, structurally distinct from the Babylonian horoscope corpus already encoded in this repository, which does record celestial positions at birth",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 140,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2')",
+     "verification": "The protasis carries no celestial condition; the apodosis is a list of months."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Structural statement.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.calendar_conversion_gate",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "calendar",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "input": "modern_civil_date"
+   },
+   "conclusion": {
+    "required_before_use": "a declared Babylonian lunisolar calendar conversion, including the intercalation scheme and the month-name to month-number mapping",
+    "months_are": "Babylonian lunisolar months beginning with Nisannu (I)",
+    "engine_policy": "fail closed; a modern birth date has no Babylonian month until a conversion profile is declared and shown",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 150,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse, month names throughout the table",
+     "verification": "The table is keyed to the Babylonian month names, which the edition numbers I to XII."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Disclosure and fail-closed rule.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.witness.abridged_recension_scope",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "omen",
+   "scope": {
+    "artefact": "k98_ms2226",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "witness": "K.98 + MS 2226"
+   },
+   "conclusion": {
+    "form": "abridged tabular Iqqur ipus on the obverse; list of lucky days and commented protases on the reverse",
+    "self_description": "the colophon presents the tablet as a list of “Favorable days, which are good to accomplish any plan, and for a person to achieve any goal”, compiled from tablets that came from Babylon, together with twenty-five lines extracted from a mukallimtu-commentary",
+    "controlling_edition_not_open": "the serie mensuelle, in which each month's prognoses are gathered under the month, is edited by Labat 1965 and was not retrievable in open form during this pass",
+    "consequence": "no claim is made here about the full wording of section 64 in the serie mensuelle",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 120,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "introduction and colophon of the edition",
+     "verification": "Introduction and colophon read in the served edition."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Scope statement.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.context.section62_wife_into_house",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "omen",
+   "scope": {
+    "artefact": "iqqur_ipus_section_62",
+    "birth_input_eligible": false,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "event": "he_introduces_his_wife_into_his_house",
+    "series_section": 62
+   },
+   "conclusion": {
+    "edition_translation": "“(If) he introduces his wife in his house” (= Iqqur ipus §62)",
+    "favourable_months_partially_preserved": [
+     1,
+     8,
+     9,
+     11,
+     12
+    ],
+    "lacuna": "the edition marks a break in the month list",
+    "why_recorded": "the section immediately preceding the birth section shows the genre: Iqqur ipus judges the month for human life-events generally, and the birth section is one entry in that list, not a natal doctrine",
+    "customer_prediction": false,
+    "output_policy": "research_display_only"
+   },
+   "priority": 100,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 1' (o 1')",
+     "verification": "Line read in the served edition; the month list is partly lost and the edition marks it."
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "Genre context only.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  },
+  {
+   "rule_id": "babylonian.iqqur_ipus.birth.customer_output_refused",
+   "tradition_id": "mesopotamian_babylonian",
+   "school_id": "iqqur_ipus_menology",
+   "period": "first_millennium_bce_babylonian_and_assyrian_hemerology",
+   "domain": "natal",
+   "scope": {
+    "artefact": "iqqur_ipus_section_64",
+    "birth_input_eligible": true,
+    "interpretation_eligible": false
+   },
+   "conditions": {
+    "request": "state_a_customers_birth_month_verdict"
+   },
+   "conclusion": {
+    "decision": "refused",
+    "grounds": "the verdict is a favourability judgment on the act of being born in a month, recovered from a single abridged witness, without the controlling edition, and with no attested apodosis about the person; the corpus records it and does not say it",
+    "what_the_section_may_say": "that a month-of-birth layer exists in Babylonian menology, which months this witness marks favourable, and that the product declines to apply it",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "priority": 160,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "ccp_3_8_1_A_P370904",
+     "work": "Iqqur ipus, serie generale, abridged tabular recension",
+     "section": "obverse, abridged Iqqur ipus table",
+     "location": "obverse line 2' (o 2')",
+     "verification": "Refusal is a product decision recorded against the passage it refuses."
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "Refusal rule.",
+   "review_status": "Transliteration and translation read from the open CCP/Oracc edition; Assyriological review and collation against Labat 1965 and the Schoyen editio princeps still required."
+  }
+ ]
+}

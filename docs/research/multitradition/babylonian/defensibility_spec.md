@@ -1,7 +1,7 @@
 # Babylonian defensibility spec
 
 Status: governing spec for the Mesopotamian section  
-Updated: 2026-08-01  
+Updated: 2026-08-04  
 Standard: [../DEFENSIBILITY.md](../DEFENSIBILITY.md)
 
 This is the tradition where **requirement 5 (refusal) carries most of the weight**.
@@ -11,6 +11,13 @@ Babylonian personality reading — a genre the surviving corpus does not contain
 ## What the corpus actually is
 
 The encoded material divides into two kinds, and they answer different questions:
+
+3. **Menological birth omens** (*Iqqur ipus* section 64) — added 2026-08-04. A
+   third kind, and the one that changes the shape of this section: the tradition
+   *does* have a birth layer outside the horoscopes, and it judges the **month**
+   of birth, with no celestial datum at all. It is a menology, not a horoscopy.
+   The one open witness records only which months are favourable, so the pack
+   forbids inferring that the unlisted months are unfavourable.
 
 1. **Celestial omens** (Enuma Anu Enlil, the Neo-Assyrian royal reports) — the
    overwhelming majority. Protasis/apodosis pairs about **the king, the land, the
@@ -34,7 +41,10 @@ laconic — which is itself the most interesting true thing to say about it.
 | 4 | Applicable EAE omen protases for the sky at birth | EAE 20 witness pack (17 rules), EAE 16-21 commentary (22 rules) | `implemented` (zero orb; 0/72 matched for Fairfield - all protases presuppose an eclipse) |
 | 5 | Horoscope-format presentation matching Rochberg's text structure | corpus manifests, 31 horoscope records | `implemented` |
 | 6 | The 21 explicit judgment clauses, quoted as historical artifacts | Texts 1-28 judgment manifests | `implemented` |
-| 7 | Natal judgment synthesis | — | `refused`, see below |
+| 7 | Month-of-birth menology (*Iqqur ipus* section 64) | **CCP/Oracc edition of K.98 + MS 2226, open, hash-pinned** | `implemented` — the six favourable birth months encoded (13 rules, 13 vectors); all customer output refused |
+| 8 | The *serie mensuelle* wording of section 64 | Labat 1965, *Un calendrier babylonien des travaux, des signes et des mois* | `source_gated` — controlling edition not open |
+| 9 | Nativity omens of the *summa izbu* type | teratological, not astral | `refused` — a different genre, and one this product will not touch |
+| 10 | Natal judgment synthesis | — | `refused`, see below |
 
 ## Judgment hierarchy
 

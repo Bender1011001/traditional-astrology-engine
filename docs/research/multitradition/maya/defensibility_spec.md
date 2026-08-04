@@ -1,7 +1,7 @@
 # Maya defensibility spec
 
 Status: governing spec for the Maya section  
-Updated: 2026-08-01  
+Updated: 2026-08-04  
 Standard: [../DEFENSIBILITY.md](../DEFENSIBILITY.md)
 
 Two distinct adversaries: an epigrapher/archaeoastronomer, who will check the
@@ -21,8 +21,9 @@ epigrapher's to assign. Both must be satisfied, and they want different things.
 | 6 | Lunar series (glyphs C, D, E, X) | not encoded | `source_gated` |
 | 7 | 819-day count | not encoded | `source_gated` |
 | 8 | Venus cycle station | Dresden Codex Venus table (registry has INAH/SLUB/FAMSI facsimiles) | `source_gated` |
-| 9 | Day-sign meanings | Dresden codical almanacs; NMAI living-K'iche' material | `source_gated` — see refusals |
-| 10 | Year Bearer | varies by region and period | `source_gated` |
+| 9 | Day-sign meanings | Dresden codical almanacs; NMAI living-K'iche' material; the colonial Yucatec day-augury lists (*u mutil chuenil kin sansamal*) in the Chilam Balam of Kaua and Ixil | `source_gated` — no open transcription located; see the search trail in `source_audit.md` and the refusals below |
+| 10 | Year Bearer and its prognostic | **Landa, *Relacion de las cosas de Yucatan*, Brasseur 1864 edition, public domain, hash-pinned** | `implemented` — four letters, four Bacabs, four verdicts and their remedies encoded (11 rules, 10 vectors); harsh clauses refused for customer output |
+| 11 | Katun prognostics (Buluc-Ahau, Bolon-Ahau) | Landa, same edition | `source_gated` — present in the witness, not yet encoded |
 
 ## Judgment hierarchy
 
@@ -61,6 +62,16 @@ span, compare our output to both converters, publish the agreement rate.
 - **No Long Count for dates requiring the Extended Long Count** (negative days);
   the five-place profile rejects them.
 - **No conflation of Maya and Nahua 260-day counts.**
+- **No personal application of a year-bearer verdict.** Landa's four verdicts are
+  about the year's rain, maize, sickness, famine and political order. The witness
+  attaches none of them to a person born in the year, and neither will we.
+- **No Landa verdict without its remedy, and none without its framing.** Every
+  prognostic in that source is paired with a prescribed observance, and the text
+  says outright that when the miseries came anyway the blame was laid on the
+  observance. Quoting the verdict alone converts a conditional ritual system into
+  a fatalistic one. Landa is also a hostile witness who burned the books he
+  describes; deleting that framing would present a colonial account as neutral
+  ethnography.
 
 ## Conventions requiring disclosure
 

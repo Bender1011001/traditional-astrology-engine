@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "artifact_set_id": "babylonian_iqqur_ipus_ccp_witnesses",
+  "description": "Served HTML of the two CCP/Oracc Iqqur ipus commentary editions consulted for the month-of-birth layer. Pinned so that any later change to the served edition is detectable.",
+  "citation": "E. Frahm, E. Jimenez, M. Frazer and K. Wagensonner, Cuneiform Commentaries Project, 2013-2026; CCP 3.8.1.A accessed 4 August 2026 at https://ccp.yale.edu/P370904, DOI 10079/tdz08zr.",
+  "artifacts": [
+    {
+      "local_path": "sources/ccp_3_8_1_A_P370904.html",
+      "url": "https://ccp.yale.edu/P370904",
+      "bytes": 248940,
+      "sha256": "23b667ed2eedb390ce8270849e05fb3fe7db880d4dcfc42832a50406905a99b7",
+      "retrieved": "2026-08-04"
+    },
+    {
+      "local_path": "sources/ccp_3_8_1_B_P297024.html",
+      "url": "https://ccp.yale.edu/P297024",
+      "bytes": 337796,
+      "sha256": "0f291ad6c22fb052e4c0bb91cc29ff8829b511b449c24a55466de81b6b1dfc7a",
+      "retrieved": "2026-08-04"
+    }
+  ],
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "reading_output": false
+  }
+}

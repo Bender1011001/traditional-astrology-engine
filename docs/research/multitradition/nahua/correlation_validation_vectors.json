@@ -1,0 +1,225 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "nahua_central_mexican",
+ "source_pack_id": "nahua_correlation_candidates_v1",
+ "status": "research_only_no_default_correlation",
+ "source_ids": [
+  "nahua_milbrath_trace_81_2022_veintena_yearbearer",
+  "nahua_calmecac_correlation_survey_blog"
+ ],
+ "vectors": [
+  {
+   "vector_id": "nahua.correlation.refuse_without_candidate",
+   "rule_ids": [
+    "nahua.correlation.no_default_candidate"
+   ],
+   "inputs": {
+    "operation": "tonalpohualli_of_date",
+    "date": "1990-06-15",
+    "candidate_id": null
+   },
+   "expected": {
+    "result": "refused",
+    "reason": "no correlation candidate selected"
+   },
+   "provenance": "No correlation is inherited with the cycle arithmetic."
+  },
+  {
+   "vector_id": "nahua.correlation.anchor_form",
+   "rule_ids": [
+    "nahua.correlation.candidate_anchor_form"
+   ],
+   "inputs": {
+    "operation": "required_anchor_fields"
+   },
+   "expected": {
+    "fields": [
+     "anchor_calendar",
+     "anchor_date",
+     "anchor_jdn",
+     "anchor_tonalpohualli_number",
+     "anchor_tonalpohualli_sign",
+     "anchor_cycle_position"
+    ]
+   },
+   "provenance": "Abstracted from the two Caso anchors."
+  },
+  {
+   "vector_id": "nahua.correlation.caso1521_anchor_day",
+   "rule_ids": [
+    "nahua.correlation.caso_1521_anchor",
+    "nahua.correlation.candidate_anchor_form"
+   ],
+   "inputs": {
+    "operation": "tonalpohualli_of_date",
+    "calendar": "julian",
+    "date": "1521-08-13",
+    "candidate_id": "caso_1521_ce_coatl"
+   },
+   "expected": {
+    "number": 1,
+    "sign": "coatl",
+    "cycle_position": 104,
+    "jdn": 2276828
+   },
+   "provenance": "Caso's anchor as restated in Trace 81 (2022); JDN recomputed here."
+  },
+  {
+   "vector_id": "nahua.correlation.caso1519_anchor_day",
+   "rule_ids": [
+    "nahua.correlation.caso_1519_anchor",
+    "nahua.correlation.candidate_anchor_form"
+   ],
+   "inputs": {
+    "operation": "tonalpohualli_of_date",
+    "calendar": "julian",
+    "date": "1519-11-08",
+    "candidate_id": "caso_1519_ce_ehecatl"
+   },
+   "expected": {
+    "number": 8,
+    "sign": "ehecatl",
+    "cycle_position": 241,
+    "jdn": 2276184
+   },
+   "provenance": "Caso's second anchor as restated in Trace 81 (2022); JDN recomputed here."
+  },
+  {
+   "vector_id": "nahua.correlation.caso_fork_recomputed",
+   "rule_ids": [
+    "nahua.correlation.caso_internal_one_day_fork"
+   ],
+   "inputs": {
+    "operation": "project_anchor",
+    "from_candidate": "caso_1521_ce_coatl",
+    "to_calendar": "julian",
+    "to_date": "1519-11-08"
+   },
+   "expected": {
+    "elapsed_days": 644,
+    "elapsed_days_mod_260": 124,
+    "cycle_position": 240,
+    "number": 7,
+    "sign": "cipactli",
+    "disagrees_with_recorded": "8 ehecatl",
+    "offset_days": 1
+   },
+   "provenance": "Independently recomputed in this repository; reproduces the inconsistency the article attributes to Caso."
+  },
+  {
+   "vector_id": "nahua.correlation.noon_resolution",
+   "rule_ids": [
+    "nahua.correlation.caso_noon_day_start_resolution"
+   ],
+   "inputs": {
+    "operation": "resolve_fork",
+    "birth_time_local": "07:00"
+   },
+   "expected": {
+    "resolution_named": "mexica day began at noon",
+    "two_adjacent_days_possible": true,
+    "status": "proposal_not_established"
+   },
+   "provenance": "Caso's resolution as reported in Trace 81 (2022)."
+  },
+  {
+   "vector_id": "nahua.correlation.disclosure_required",
+   "rule_ids": [
+    "nahua.correlation.disclosure_when_applied"
+   ],
+   "inputs": {
+    "operation": "render_correlation_disclosure",
+    "candidate_id": "caso_1521_ce_coatl"
+   },
+   "expected": {
+    "shows_candidate": true,
+    "shows_anchor": true,
+    "shows_alternatives": true,
+    "shows_caso_fork": true,
+    "labelled": "configured_method"
+   },
+   "provenance": "Disclosure obligation derived from the article's own framing."
+  },
+  {
+   "vector_id": "nahua.correlation.augury_gate_blocks_trait_table",
+   "rule_ids": [
+    "nahua.correlation.augury_application_gate"
+   ],
+   "inputs": {
+    "operation": "apply_book4_augury_to_birth",
+    "candidate_id": "caso_1521_ce_coatl",
+    "render_as": "unconditional_trait_table"
+   },
+   "expected": {
+    "result": "refused",
+    "reason": "the source states the day-fortune is merited and can be forfeited"
+   },
+   "provenance": "Book 4 chapter 1 heading, held in this repository's augury pack."
+  },
+  {
+   "vector_id": "nahua.correlation.candidate_tena_xiuhpohualli_26_february.not_applicable",
+   "rule_ids": [
+    "nahua.correlation.candidate_tena_xiuhpohualli_26_february"
+   ],
+   "inputs": {
+    "operation": "select_candidate",
+    "candidate_id": "tena_xiuhpohualli_26_february"
+   },
+   "expected": {
+    "applicable_as_a_profile": false,
+    "evidence_grade": "D",
+    "blocking_reason": "anchor_incomplete_primary_publication_required"
+   },
+   "provenance": "Candidate enumerated from the consulted survey; primary publication not obtained."
+  },
+  {
+   "vector_id": "nahua.correlation.candidate_nuttall_ochoa_equinox_intercalated.not_applicable",
+   "rule_ids": [
+    "nahua.correlation.candidate_nuttall_ochoa_equinox_intercalated"
+   ],
+   "inputs": {
+    "operation": "select_candidate",
+    "candidate_id": "nuttall_ochoa_equinox_intercalated"
+   },
+   "expected": {
+    "applicable_as_a_profile": false,
+    "evidence_grade": "D",
+    "blocking_reason": "rule_stated_but_not_reducible_to_a_fixed_anchor_without_the_primary_publication"
+   },
+   "provenance": "Candidate enumerated from the consulted survey; primary publication not obtained."
+  },
+  {
+   "vector_id": "nahua.correlation.candidate_meza_fixed_cipactli_year_start.not_applicable",
+   "rule_ids": [
+    "nahua.correlation.candidate_meza_fixed_cipactli_year_start"
+   ],
+   "inputs": {
+    "operation": "select_candidate",
+    "candidate_id": "meza_fixed_cipactli_year_start"
+   },
+   "expected": {
+    "applicable_as_a_profile": false,
+    "evidence_grade": "D",
+    "blocking_reason": "structurally_incompatible_with_the_260_365_relationship"
+   },
+   "provenance": "Candidate enumerated from the consulted survey; primary publication not obtained."
+  },
+  {
+   "vector_id": "nahua.correlation.candidate_rodriguez_cortes_living_count.not_applicable",
+   "rule_ids": [
+    "nahua.correlation.candidate_rodriguez_cortes_living_count"
+   ],
+   "inputs": {
+    "operation": "select_candidate",
+    "candidate_id": "rodriguez_cortes_living_count"
+   },
+   "expected": {
+    "applicable_as_a_profile": false,
+    "evidence_grade": "D",
+    "blocking_reason": "living_practice_requires_a_named_practitioner_partnership_not_a_source_route"
+   },
+   "provenance": "Candidate enumerated from the consulted survey; primary publication not obtained."
+  }
+ ]
+}

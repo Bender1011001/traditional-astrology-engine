@@ -290,3 +290,82 @@ hemerology concordance is not. Current artifacts are:
   facts, plate map, inspected-page record, and interpretation boundaries;
 - `validate_budge_sallier_access.py`: source hash, plate-span, preservation, and
   nonlive product-boundary validation.
+
+
+## 2026-08-04: the Sallier IV translation was never missing
+
+This registry's own `next_action` for Papyrus Sallier IV asked for "a complete
+transcription and modern critical translation". A complete translation has existed
+since 1870, is public domain, and is served with an open OCR endpoint.
+
+**Found.** Francois Chabas, *Le calendrier des jours fastes et nefastes de l'annee
+egyptienne: traduction complete du papyrus Sallier IV* (Chalon-sur-Saone / Paris:
+Maisonneuve, 1870). Bayerische Staatsbibliothek digitisation `bsb10997368`,
+148 scans.
+
+- Viewer: <https://www.digitale-sammlungen.de/en/view/bsb10997368>
+- IIIF manifest: <https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb10997368/manifest>
+- Open hOCR endpoint, one call per scan: `https://api.digitale-sammlungen.de/ocr/bsb10997368/{page}`
+- Rights: text public domain; digitisation NoC-NC 1.0.
+
+Full-volume OCR assembled and hash-pinned as
+`sources/chabas1870_sallier_iv_mdz_ocr.txt`, 176,914 bytes, SHA-256
+`7d1dd7a29ad0f0367aeb0eb1da5d59c671fdfd3f12ebbdc42d01a7ab35ee8359`.
+
+### How the day assignments were fixed
+
+Chabas sets the translation in three columns: day number and Gregorian equivalent,
+the manuscript's mark in hieroglyphs, and the legend. Naive reading order scrambles
+them. The same hOCR endpoint carries per-line bounding boxes, so the columns were
+reconstructed geometrically: a day cell's baseline sits within about 30px of the
+first line of its own legend. Seventeen pages were verified this way
+(34, 35, 42, 43, 50, 52, 57, 58, 59, 63, 65, 67, 68, 69, 73, 80, 102).
+
+Two independent routes agreed on every verified page. Where a day cell preserved
+its Gregorian equivalent, the Egyptian month and day were recomputed from Chabas'
+own Coptic anchor (1 Thoth = 11 September Gregorian, twelve 30-day months) and
+compared with the printed day number. The anchor reproduced every printed month
+heading: Thoth 1 = 11 September, Paophi 1 = 11 October, Athyr 1 = 10 November,
+Choiak 1 = 10 December, Tybi 1 = 9 January, Mechir 5 = 12 February, Phamenoth 1 =
+10 March, Pharmuthi 1 = 9 April, Pachons 1 = 9 May.
+
+Two OCR bugs were found and fixed in the process, and both are worth recording
+because they were silent: a word-boundary assertion in the day-cell pattern
+rejected every merged cell such as "244 Octobre" (day 24, 4 October), and a fixed
+column threshold failed on odd pages, whose margins differ, discarding whole
+legends.
+
+### What was mined
+
+- `hemerology_day_corpus.json` - 32 geometry-verified day entries, quoted French
+  with an independent English rendering, 1,932 words.
+- `hemerology_rule_manifest.json` - 29 rules; `hemerology_validation_vectors.json`
+  - 32 vectors.
+- Eighteen birth prognoses, each fixed to its day: Thoth 23 and 24; Paophi 5, 6,
+  7, 9, 23, 27 and 29; Athyr 14, 20 and 23; Choiak 3, 10 and 20; Tybi 4 and 23;
+  Pharmuthi 22.
+
+**All eighteen predicate the native's death.** Every one carries
+`output_policy: refused`. The corpus records them; the product will not say them.
+
+### The conversion convention this edition assumes
+
+Chabas states it plainly on p. 23 and disclaims it in the same breath. The
+calendar is the 365-day vague year with no intercalation, drifting one day every
+four years, so a Julian or Gregorian correspondence "would require the exact date
+of our manuscript". Having not determined it, he notes the dates "par simple
+curiosite" from the **Coptic** calendar, in which 1 Thoth = 29 August Julian = 11
+September Gregorian. That is a `configured_method` and is labelled as one.
+
+### Not found, and what was tried
+
+The Cairo Calendar (pCairo 86637) and pLeiden I 346 remain gated. Searches run:
+`Chabas "calendrier des jours fastes et nefastes" 1870 archive.org Sallier`;
+Internet Archive advanced search `title:(calendrier jours fastes)` (1 hit, an
+unrelated 1908 Roman-law title) and `creator:(chabas)` (85 hits, no calendar
+volume); Gallica SRU for the same title (HTTP 403 from the SRU endpoint); MDZ PDF
+download endpoints under `daten.digitale-sammlungen.de` and
+`download.digitale-sammlungen.de` (both 404, so the OCR endpoint was used
+instead). Bakir 1966 and its successors are in copyright and no open edition was
+located. This is an access problem, not a language or rights problem, and it is
+recorded as such.

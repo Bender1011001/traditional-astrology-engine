@@ -1,0 +1,184 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "maya",
+ "source_pack_id": "maya_landa_yearbearer_augury_v1",
+ "status": "research_only_harsh_clauses_refused",
+ "source_ids": [
+  "maya_landa_relacion_brasseur_1864_archive"
+ ],
+ "vectors": [
+  {
+   "vector_id": "maya.landa.yearbearer.letter_set",
+   "rule_ids": [
+    "maya.landa.yearbearer.four_dominical_letters"
+   ],
+   "inputs": {
+    "operation": "list_year_bearers"
+   },
+   "expected": {
+    "letters": [
+     "kan",
+     "muluc",
+     "ix",
+     "cauac"
+    ],
+    "bacabs": [
+     "Hobnil",
+     "Canzicnal",
+     "Zac-Ciui",
+     "Hozanek"
+    ]
+   },
+   "provenance": "Landa 1864, sections XXXIV-XXXVIII."
+  },
+  {
+   "vector_id": "maya.landa.yearbearer.kan.verdict",
+   "rule_ids": [
+    "maya.landa.yearbearer.kan_hobnil",
+    "maya.landa.yearbearer.verdict_never_without_its_remedy"
+   ],
+   "inputs": {
+    "operation": "judge_year",
+    "year_bearer_letter": "kan"
+   },
+   "expected": {
+    "bacab": "Hobnil",
+    "verdict": "good",
+    "remedy_reported": true,
+    "customer_output": "research_display_only"
+   },
+   "provenance": "Landa 1864, Spanish column p. 215."
+  },
+  {
+   "vector_id": "maya.landa.yearbearer.muluc.verdict",
+   "rule_ids": [
+    "maya.landa.yearbearer.muluc_canzicnal",
+    "maya.landa.yearbearer.verdict_never_without_its_remedy"
+   ],
+   "inputs": {
+    "operation": "judge_year",
+    "year_bearer_letter": "muluc"
+   },
+   "expected": {
+    "bacab": "Canzicnal",
+    "verdict": "good",
+    "remedy_reported": true,
+    "customer_output": "research_display_only"
+   },
+   "provenance": "Landa 1864, Spanish column p. 220."
+  },
+  {
+   "vector_id": "maya.landa.yearbearer.ix.verdict",
+   "rule_ids": [
+    "maya.landa.yearbearer.ix_zac_ciui",
+    "maya.landa.yearbearer.verdict_never_without_its_remedy"
+   ],
+   "inputs": {
+    "operation": "judge_year",
+    "year_bearer_letter": "ix"
+   },
+   "expected": {
+    "bacab": "Zac-Ciui",
+    "verdict": "bad",
+    "remedy_reported": true,
+    "customer_output": "refused"
+   },
+   "provenance": "Landa 1864, Spanish column p. 226."
+  },
+  {
+   "vector_id": "maya.landa.yearbearer.cauac.verdict",
+   "rule_ids": [
+    "maya.landa.yearbearer.cauac_hozanek",
+    "maya.landa.yearbearer.verdict_never_without_its_remedy"
+   ],
+   "inputs": {
+    "operation": "judge_year",
+    "year_bearer_letter": "cauac"
+   },
+   "expected": {
+    "bacab": "Hozanek",
+    "verdict": "bad",
+    "remedy_reported": true,
+    "customer_output": "refused"
+   },
+   "provenance": "Landa 1864, Spanish column p. 232."
+  },
+  {
+   "vector_id": "maya.landa.yearbearer.refuse_personal_application",
+   "rule_ids": [
+    "maya.landa.yearbearer.scope_is_the_year_not_the_person"
+   ],
+   "inputs": {
+    "operation": "apply_year_verdict_to_person",
+    "year_bearer_letter": "cauac"
+   },
+   "expected": {
+    "decision": "refused",
+    "reason": "the verdicts are communal and annual, not natal"
+   },
+   "provenance": "No verdict in the four sections attaches to a native of the year."
+  },
+  {
+   "vector_id": "maya.landa.daysign.absent",
+   "rule_ids": [
+    "maya.landa.daysign.no_natal_augury_in_this_witness"
+   ],
+   "inputs": {
+    "operation": "lookup_day_sign_birth_augury",
+    "witness": "landa_relacion",
+    "day_sign": "imix"
+   },
+   "expected": {
+    "result": "absent_from_this_witness",
+    "absence_is_evidence_of_tradition_lacking_it": false
+   },
+   "provenance": "Full-text search of the hash-pinned Landa OCR."
+  },
+  {
+   "vector_id": "maya.landa.directions_preserved",
+   "rule_ids": [
+    "maya.landa.yearbearer.directions_not_normalized"
+   ],
+   "inputs": {
+    "operation": "report_direction",
+    "year_bearer_letter": "muluc"
+   },
+   "expected": {
+    "carried_to": "oriente (east)",
+    "normalised_table_emitted": false
+   },
+   "provenance": "Landa 1864 p. 219: the Muluc image is carried to the eastern heaps."
+  },
+  {
+   "vector_id": "maya.landa.framing_shown",
+   "rule_ids": [
+    "maya.landa.colonial_framing_must_be_shown"
+   ],
+   "inputs": {
+    "operation": "render_landa_quotation",
+    "year_bearer_letter": "kan"
+   },
+   "expected": {
+    "framing_note_present": true,
+    "author_described_as": "a Franciscan hostile witness"
+   },
+   "provenance": "The Spanish column names the deities as 'el demonio' throughout."
+  },
+  {
+   "vector_id": "maya.landa.ocr_substitutions",
+   "rule_ids": [
+    "maya.landa.ocr_substitution_disclosure"
+   ],
+   "inputs": {
+    "operation": "normalise_name",
+    "ocr_form": "Fx"
+   },
+   "expected": {
+    "restored": "Ix",
+    "ocr_form_retained": true
+   },
+   "provenance": "Observed directly in the retrieved OCR text layer."
+  }
+ ]
+}

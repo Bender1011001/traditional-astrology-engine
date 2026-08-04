@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-04",
+  "artifact_id": "landa_relacion_brasseur_1864_ocr_text",
+  "title": "Relation des choses de Yucatan / Relacion de las cosas de Yucatan (Brasseur de Bourbourg, Paris 1864)",
+  "rights": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/)",
+  "item_url": "https://archive.org/details/bub_gb_EicVAAAAQAAJ",
+  "download_url": "https://archive.org/download/bub_gb_EicVAAAAQAAJ/bub_gb_EicVAAAAQAAJ_djvu.txt",
+  "local_path": "sources/landa_brasseur_1864_djvu.txt",
+  "bytes": 1203898,
+  "sha256": "c2485f6c3c6abb52c9b1acf731ba36a349f1a42838d43adaff5637e6b96370d4",
+  "retrieved": "2026-08-04",
+  "companion_pdf": {
+    "url": "https://archive.org/download/bub_gb_EicVAAAAQAAJ/bub_gb_EicVAAAAQAAJ.pdf",
+    "bytes_reported_by_repository": 39203763,
+    "note": "Not downloaded; the OCR text layer was sufficient for the passages encoded."
+  },
+  "known_ocr_substitutions": {
+    "Ix": "printed as Fx or Yx in the OCR of this scan",
+    "Yax-Coc-Ahmut": "printed as Fax-Coc-Ahmut",
+    "Itzamna": "printed as Fzamna or Yzamna",
+    "Canzicnal": "printed variously as Canziemal, Canzienal; the editor's own footnote records that he could not verify the true orthography"
+  },
+  "product_boundary": {
+    "live_engine": false,
+    "customer_eligible": false,
+    "reading_output": false
+  }
+}

@@ -1,7 +1,7 @@
 # Nahua defensibility spec
 
 Status: governing spec for the Nahua section  
-Updated: 2026-08-01  
+Updated: 2026-08-04  
 Standard: [../DEFENSIBILITY.md](../DEFENSIBILITY.md)
 
 This tradition has an unusual shape: the **interpretation is better sourced than
@@ -18,7 +18,8 @@ That inversion decides the whole design.
 |---|---|---|---|
 | 1 | 13-by-20 cycle arithmetic | validated tonalpohualli pack | `implemented` |
 | 2 | Trecena identification and heads | validated pack (20 heads verified) | `implemented` |
-| 3 | Civil-date correlation | — | `refused` — no approved epoch exists |
+| 3 | Civil-date correlation candidate set and disclosure machinery | `correlation_candidates_manifest.json` - six named candidates, anchors, evidence grades, and the Caso one-day fork recomputed from first principles | `implemented` (12 rules, 12 vectors; no default is introduced and the pack fails closed when no candidate is selected) |
+| 3b | An *approved* correlation | Caso 1967 and Caso 1971 not yet obtained; Tena, Nuttall/Ochoa, Meza and the living Chiapas count all unretrieved at primary level | `source_gated` — the candidate set exists, the primary publications do not yet |
 | 4 | Day-sign auguries | **Florentine Codex Book 4, passage-addressable, public** | `implemented` (72 statements, all 20 trecenas, from 150 hash-pinned folios) |
 | 5 | Trecena-level auguries and patron deities | Florentine Codex Book 4 chapters | `implemented` (trecena headings and observances encoded; patron deities remain source_gated) |
 | 6 | Day/night lords, volatiles (birds) | Codex Borbonicus, Tonalamatl Aubin | `source_gated` |
@@ -27,19 +28,28 @@ That inversion decides the whole design.
 
 ## The design consequence
 
-Because item 3 is refused and item 4 is available, the honest product is **not**
-"here is your day sign." It is:
+This changed on 2026-08-04. Item 3 was previously recorded as refused "because no
+approved epoch exists" — but nobody had gone looking for the candidates. They are
+published, they are named, and they are now encoded: six of them, each with its
+anchor statement, its source and its evidence grade.
+
+So the honest product is no longer "we cannot tell you which one is yours." It is:
 
 > Here is what the Florentine Codex says about each of the twenty day signs, in
-> Sahagun's informants' own words with folio citations — and here is why we
-> cannot tell you which one is yours.
+> Sahagun's informants' own words with folio citations. Here are the six
+> published correlations that would place your birth in that count, the one we
+> applied, and the five we did not. Here is the one-day disagreement inside Caso's
+> own two anchors, which we recomputed and reproduce exactly.
 
-That is a genuinely defendable, genuinely interesting section, and it is more
-honest than every "Aztec astrology" product in existence, all of which silently
-invent a correlation.
+The correlation is a `configured_method` and is labelled as one. What remains
+gated is not the *existence* of a candidate but the *approval* of one, which needs
+Caso 1967 and 1971 in hand rather than a peer-reviewed restatement of them.
 
-If a correlation is ever approved, item 4 is already built and the section
-upgrades in place.
+The gate that matters more is `nahua.correlation.augury_application_gate`: even
+with a correlation applied, Book 4 may not be rendered as an unconditional trait
+table, because its own first chapter heading says the day-fortune is merited and
+can be forfeited, and its folios show the operative sign being chosen by ritual
+and household means rather than fixed by the date of birth.
 
 ## Judgment hierarchy
 
