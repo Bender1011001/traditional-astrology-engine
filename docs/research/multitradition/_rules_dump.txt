@@ -1,0 +1,405 @@
+{
+ "rule_id": "sukuyo.mansion.canonical_order",
+ "tradition_id": "japanese_sukuyodo",
+ "school_id": "amoghavajra_xiuyao_jing_yang_jingfeng_recension",
+ "period": "tang_chinese_translation_759_764_ce_as_received_in_heian_and_later_japan",
+ "domain": "calendar",
+ "scope": {
+  "series": "the 27 operative mansions in T1299's own order",
+  "birth_input_eligible": true,
+  "interpretation_eligible": false
+ },
+ "conditions": {
+  "origin": "the order in which chapter 2 (日宿直所生品第二) presents the mansion entries, with the catalogued-only 牛 removed",
+  "corroborated_by": "the fascicle-2 election almanac 二十七宿所為吉凶曆 presents the same order, and the three-nine worked enumeration in 三必祕要法 is a rotation of it"
+ },
+ "conclusion": {
+  "order": [
+   {
+    "index": 1,
+    "id": "m01",
+    "cjk": "昴"
+   },
+   {
+    "index": 2,
+    "id": "m02",
+    "cjk": "畢"
+   },
+   {
+    "index": 3,
+    "id": "m03",
+    "cjk": "觜"
+   },
+   {
+    "index": 4,
+    "id": "m04",
+    "cjk": "參"
+   },
+   {
+    "index": 5,
+    "id": "m05",
+    "cjk": "井"
+   },
+   {
+    "index": 6,
+    "id": "m06",
+    "cjk": "鬼"
+   },
+   {
+    "index": 7,
+    "id": "m07",
+    "cjk": "柳"
+   },
+   {
+    "index": 8,
+    "id": "m08",
+    "cjk": "星"
+   },
+   {
+    "index": 9,
+    "id": "m09",
+    "cjk": "張"
+   },
+   {
+    "index": 10,
+    "id": "m10",
+    "cjk": "翼"
+   },
+   {
+    "index": 11,
+    "id": "m11",
+    "cjk": "軫"
+   },
+   {
+    "index": 12,
+    "id": "m12",
+    "cjk": "角"
+   },
+   {
+    "index": 13,
+    "id": "m13",
+    "cjk": "亢"
+   },
+   {
+    "index": 14,
+    "id": "m14",
+    "cjk": "氐"
+   },
+   {
+    "index": 15,
+    "id": "m15",
+    "cjk": "房"
+   },
+   {
+    "index": 16,
+    "id": "m16",
+    "cjk": "心"
+   },
+   {
+    "index": 17,
+    "id": "m17",
+    "cjk": "尾"
+   },
+   {
+    "index": 18,
+    "id": "m18",
+    "cjk": "箕"
+   },
+   {
+    "index": 19,
+    "id": "m19",
+    "cjk": "斗"
+   },
+   {
+    "index": 20,
+    "id": "m20",
+    "cjk": "女"
+   },
+   {
+    "index": 21,
+    "id": "m21",
+    "cjk": "虛"
+   },
+   {
+    "index": 22,
+    "id": "m22",
+    "cjk": "危"
+   },
+   {
+    "index": 23,
+    "id": "m23",
+    "cjk": "室"
+   },
+   {
+    "index": 24,
+    "id": "m24",
+    "cjk": "壁"
+   },
+   {
+    "index": 25,
+    "id": "m25",
+    "cjk": "奎"
+   },
+   {
+    "index": 26,
+    "id": "m26",
+    "cjk": "婁"
+   },
+   {
+    "index": 27,
+    "id": "m27",
+    "cjk": "胃"
+   }
+  ],
+  "first": "昴",
+  "last": "胃",
+  "wraps": true,
+  "note": "The sequence begins at 昴 (Krttika), not at the Chinese lunar-lodge origin 角. This is the Indian nakshatra order as received, and it is what makes the three-nine rotation come out as the text states it.",
+  "customer_prediction": false
+ },
+ "priority": 20,
+ "exceptions": [],
+ "conflicts_with": [],
+ "source_passages": [
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷上, 日宿直所生品第二",
+   "location": "T21.0388c08-0390c13 (entries 昴圖 at T21n1299_p0388c08 through 胃圖 at _p0390c09)",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  },
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷下, 二十七宿所為吉凶曆",
+   "location": "T21.0395b23-0397a25",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  },
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷下, 三必祕要法",
+   "location": "T21.0397c02-c06 (T21n1299_p0397c02 .. _p0397c06)",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  }
+ ],
+ "evidence_grade": "A",
+ "publication_limit": "research_only; not renderable to a customer, not usable for prediction, and not quotable as product content until the CBETA non-commercial condition is cleared by rights review",
+ "review_status": "single_unreviewed_reader; requires an independent Classical Chinese reader and a Buddhist-astral-science specialist before promotion out of research_only"
+}
+{
+ "rule_id": "sukuyo.calendar.month_full_moon_mansion",
+ "tradition_id": "japanese_sukuyodo",
+ "school_id": "amoghavajra_xiuyao_jing_yang_jingfeng_recension",
+ "period": "tang_chinese_translation_759_764_ce_as_received_in_heian_and_later_japan",
+ "domain": "calendar",
+ "scope": {
+  "applies_to": "the twelve lunar months of the source's own calendar",
+  "birth_input_eligible": true,
+  "interpretation_eligible": false
+ },
+ "conditions": {
+  "principle": "西國皆以十五日望宿，為一月之名 — the Western Country (India) names each month after the mansion of its fifteenth-day full moon"
+ },
+ "conclusion": {
+  "table": [
+   {
+    "month": 1,
+    "full_moon_mansion": "翼"
+   },
+   {
+    "month": 2,
+    "full_moon_mansion": "角"
+   },
+   {
+    "month": 3,
+    "full_moon_mansion": "氐"
+   },
+   {
+    "month": 4,
+    "full_moon_mansion": "心"
+   },
+   {
+    "month": 5,
+    "full_moon_mansion": "箕"
+   },
+   {
+    "month": 6,
+    "full_moon_mansion": "女"
+   },
+   {
+    "month": 7,
+    "full_moon_mansion": "室"
+   },
+   {
+    "month": 8,
+    "full_moon_mansion": "婁"
+   },
+   {
+    "month": 9,
+    "full_moon_mansion": "昴"
+   },
+   {
+    "month": 10,
+    "full_moon_mansion": "觜"
+   },
+   {
+    "month": 11,
+    "full_moon_mansion": "鬼"
+   },
+   {
+    "month": 12,
+    "full_moon_mansion": "星"
+   }
+  ],
+  "closure_check": "the twelve steps between successive full-moon mansions, taken in the canonical 27-order, are [2,2,2,2,2,3,3,2,2,3,2,2] and sum to exactly 27",
+  "dependency": "every birth-mansion derivation in this pack starts from this table",
+  "caveat": "'month' here is a lunar month of the source's Indian-derived scheme. It is not a Gregorian month and not a Chinese civil month without an explicit conversion.",
+  "customer_prediction": false
+ },
+ "priority": 70,
+ "exceptions": [],
+ "conflicts_with": [],
+ "source_passages": [
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷下, 二十七宿十二宮圖",
+   "location": "T21.0394c20-c28 (T21n1299_p0394c20 .. _p0394c28)",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  }
+ ],
+ "evidence_grade": "A",
+ "publication_limit": "research_only; not renderable to a customer, not usable for prediction, and not quotable as product content until the CBETA non-commercial condition is cleared by rights review",
+ "review_status": "single_unreviewed_reader; requires an independent Classical Chinese reader and a Buddhist-astral-science specialist before promotion out of research_only"
+}
+{
+ "rule_id": "sukuyo.natal.birth_mansion_primary_method",
+ "tradition_id": "japanese_sukuyodo",
+ "school_id": "amoghavajra_xiuyao_jing_yang_jingfeng_recension",
+ "period": "tang_chinese_translation_759_764_ce_as_received_in_heian_and_later_japan",
+ "domain": "calendar",
+ "scope": {
+  "output": "本命宿 / 命宿 (the natal life mansion)",
+  "birth_input_eligible": true,
+  "interpretation_eligible": false
+ },
+ "conditions": {
+  "inputs": [
+   "lunar month of birth",
+   "lunar day of birth (1-30)"
+  ],
+  "procedure": "take the full-moon mansion of the birth month; for a birth day before the fifteenth count backwards from it, for a birth day after the fifteenth count forwards from it, stopping on the birth day"
+ },
+ "conclusion": {
+  "formula": "mansion_index = (index_of_full_moon_mansion + (lunar_day - 15)) mod 27",
+  "is_schematic": true,
+  "is_observational": false,
+  "note": "This assigns a mansion from the calendar day, not from an observed lunar longitude. The text keeps the observational route separate (see sukuyo.calendar.mansion_on_duty_conjunction_classes) and instructs the user to check the schematic result against the sky.",
+  "customer_prediction": false
+ },
+ "priority": 80,
+ "exceptions": [],
+ "conflicts_with": [],
+ "source_passages": [
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷下, 二十七宿十二宮圖",
+   "location": "T21.0394c28-0395a03 (T21n1299_p0394c28 .. _p0395a03)",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  },
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷下, 二十七宿十二宮圖",
+   "location": "T21.0395b01-b03 (T21n1299_p0395b01 .. _p0395b03): 夫欲求人所屬宿者…則求得彼人所屬宿也",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  }
+ ],
+ "evidence_grade": "A",
+ "publication_limit": "research_only; not renderable to a customer, not usable for prediction, and not quotable as product content until the CBETA non-commercial condition is cleared by rights review",
+ "review_status": "single_unreviewed_reader; requires an independent Classical Chinese reader and a Buddhist-astral-science specialist before promotion out of research_only"
+}
+{
+ "rule_id": "sukuyo.natal.birth_mansion_abbreviated_method",
+ "tradition_id": "japanese_sukuyodo",
+ "school_id": "amoghavajra_xiuyao_jing_yang_jingfeng_recension",
+ "period": "tang_chinese_translation_759_764_ce_as_received_in_heian_and_later_japan",
+ "domain": "calendar",
+ "scope": {
+  "output": "本命宿",
+  "birth_input_eligible": true,
+  "interpretation_eligible": false
+ },
+ "conditions": {
+  "label_in_source": "又法略算 ('another method, abbreviated reckoning')",
+  "procedure": "set down the birth-day number, notionally add thirteen (虛加十三), then count forward from the birth month's full-moon mansion until the count is exhausted"
+ },
+ "conclusion": {
+  "formula": "mansion_index = (index_of_full_moon_mansion + (lunar_day + 13 - 1)) mod 27",
+  "relation_to_primary": "algebraically identical to sukuyo.natal.birth_mansion_primary_method, since (d + 12) = (d - 15) + 27",
+  "verified": "exhaustively equal to the primary method across all 27 full-moon mansions x 30 lunar days = 810 cases",
+  "significance": "the text supplies its own redundancy check; an implementation that disagrees with either formula is wrong, and one that disagrees with only one of them is provably wrong",
+  "customer_prediction": false
+ },
+ "priority": 81,
+ "exceptions": [],
+ "conflicts_with": [],
+ "source_passages": [
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷下, 二十七宿十二宮圖",
+   "location": "T21.0395b04-b06 (T21n1299_p0395b04 .. _p0395b06)",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  }
+ ],
+ "evidence_grade": "A",
+ "publication_limit": "research_only; not renderable to a customer, not usable for prediction, and not quotable as product content until the CBETA non-commercial condition is cleared by rights review",
+ "review_status": "single_unreviewed_reader; requires an independent Classical Chinese reader and a Buddhist-astral-science specialist before promotion out of research_only"
+}
+{
+ "rule_id": "sukuyo.natal.birth_mansion_requires_lunar_calendar",
+ "tradition_id": "japanese_sukuyodo",
+ "school_id": "amoghavajra_xiuyao_jing_yang_jingfeng_recension",
+ "period": "tang_chinese_translation_759_764_ce_as_received_in_heian_and_later_japan",
+ "domain": "calendar",
+ "scope": {
+  "applies_to": "any attempt to compute a birth mansion from a modern civil date",
+  "birth_input_eligible": false,
+  "interpretation_eligible": false
+ },
+ "conditions": {
+  "observed": "T1299 supplies the mansion-from-lunar-day procedure and the month-naming table, and supplies no conversion from any civil calendar into that lunar month and day"
+ },
+ "conclusion": {
+  "status": "fail_closed",
+  "requirement": "a named, dated lunisolar calendar regime with an explicit month numbering, leap-month policy, day boundary and locality, plus a stated rule for which fortnight convention (黑白月分, chapter 6) applies",
+  "forbids": "substituting a modern Chinese, Japanese or Indian almanac, or a Gregorian date modulo 27, for the source's lunar day",
+  "consequence": "no birth mansion may be emitted for a customer until the regime is named and validated, exactly as the BaZi pack fails closed without a day-count anchor",
+  "customer_prediction": false
+ },
+ "priority": 82,
+ "exceptions": [],
+ "conflicts_with": [],
+ "source_passages": [
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷下, 二十七宿十二宮圖",
+   "location": "T21.0394c28-0395a03 and T21.0395b01-b06: the procedure, which presupposes 生月 and 生日 already expressed in the source's lunar scheme",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  },
+  {
+   "edition_id": "cbeta_taisho_p5_t21_2026_08_02",
+   "work": "T21n1299 文殊師利菩薩及諸仙所說吉凶時日善惡宿曜經 (Xiuyao jing / Sukuyokyo)",
+   "section": "卷上, 黑白月分品第六",
+   "location": "T21.0392c29-0393a22: the bright/dark fortnight chapter, which is a separate convention the procedure assumes",
+   "verification": "Read directly in the hash-pinned CBETA TEI transcription of the Taisho text (T21n1299.xml, sha256 259172d5f220aaa041617c35f62fced97fd2f64353ea700fd63684d27f29899b) via the line-addressed rendering T21n1299_lines.txt (sha256 efc2b8de7e6ecf2b93b153c5f5743b6732dfd917090d3842bc68cd50a48b6cdb). Chinese quoted verbatim in extraction_notes.md; the English rendering is a single unreviewed engine translation."
+  }
+ ],
+ "evidence_grade": "A",
+ "publication_limit": "research_only; not renderable to a customer, not usable for prediction, and not quotable as product content until the CBETA non-commercial condition is cleared by rights review",
+ "review_status": "single_unreviewed_reader; requires an independent Classical Chinese reader and a Buddhist-astral-science specialist before promotion out of research_only"
+}

@@ -242,12 +242,16 @@
           "implementation_state": "validated_research_artifact",
           "artifacts": [
             "ziwei/calculation_rule_manifest.json",
-            "ziwei/validation_vectors.json"
+            "ziwei/validation_vectors.json",
+            "ziwei/quanshu_full_rule_manifest.json",
+            "ziwei/quanshu_full_validation_vectors.json",
+            "ziwei/sources/access_manifest.json"
           ],
           "remaining_gates": [
-            "complete table transcription",
-            "calendar convention freeze",
-            "independent chart comparison"
+            "facsimile page-image collation of the five bureau grids and the brightness table",
+            "independent Chinese review of the 83-rule pack",
+            "a declared historical sex convention for the limit and cycle directions",
+            "independent chart comparison against a published chart of the same lineage"
           ]
         },
         {
@@ -258,12 +262,14 @@
           "coverage_status": "source_limited",
           "implementation_state": "source_design_only",
           "artifacts": [
-            "ziwei/source_audit.md"
+            "ziwei/source_audit.md",
+            "ziwei/defensibility_spec.md",
+            "ziwei/quanshu_full_rule_manifest.json"
           ],
           "remaining_gates": [
-            "named school and edition",
-            "complete primary text",
-            "Chinese review",
+            "Chinese review of the 420 encoded delineation cells",
+            "English rendering of the 166 cells quoted but not yet rendered",
+            "segmentation of the two marrow rhapsodies",
             "combination precedence"
           ]
         }

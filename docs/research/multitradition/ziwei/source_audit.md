@@ -203,3 +203,212 @@ The track remains `source_limited` if:
   vectors;
 - no Chinese-language reviewer approves the passage table; or
 - the interface implies a live Zi Wei reading while only Western is live.
+
+
+---
+
+# Addendum, 2026-08-04: the rest of the Quanshu
+
+Status change: still `source_limited` for reading, but the construction ceiling asserted
+above was **wrong**, and the error was one of scope rather than of judgment.
+
+## What the earlier audit missed
+
+The 2026-07-31 audit inspected one Wikisource page — juan 2 — and correctly listed what it
+saw, including "year-stem rules used to establish the five-phase bureau" and "placement
+sequences for the Purple Star and Northern/Southern Dipper stars". Seven rules were then
+extracted, and the engine built on them described its own output as "an empty board": no
+bureau, no Zi Wei, no main stars, no brightness.
+
+Both statements cannot be true, and the audit's was the accurate one. The tables were on
+the page the whole time. They are not printed as prose — the bureau day-tables and the
+brightness table are ASCII-art grids inside `<nowiki>` blocks, and the Tian Fu rule is a
+captioned diagram — so a prose-oriented pass over the same URL reads straight past them.
+
+Every juan has now been retrieved as raw wikitext, hash-pinned with its revision id, and
+recorded in `sources/access_manifest.json`.
+
+| Juan | Bytes | Revision | What it carries |
+|---|---|---|---|
+| toc | 3,091 | 850736 | Three-juan arrangement and section list |
+| 1 | 67,683 | 2665454 | Rhapsodies; the 37-star question-and-answer chapter; the two marrow rhapsodies; well-placed and broken configuration verses; named wealth/rank/poverty configurations |
+| 2 | 106,736 | 1963110 | The whole construction chapter, then the twelve topic-palace delineation chapters |
+| 3 | 36,720 | 2268626 | Order of judgment; limit precedence; Dipper split of a limit's halves; birth-hour caution; hidden-merit cancellation |
+
+## The bureau gate, opened
+
+The five-phase bureau is not a printed 10x12 grid anywhere. It is a **composition of two
+tables that are printed**, and the chapter performs the composition itself, once, in its
+opening paragraph:
+
+> 如甲生人安命在寅却起甲己之年丙为首，是丙寅丁卯炉中火，却去火局寻某日生期起紫微帝王
+
+A Jia-year birth with the life palace at Yin: the Five Tigers couplet 甲己之岁起丙寅 puts
+丙 at Yin, so the palace is 丙寅; the sixty-jiazi nayin song gives 丙寅丁卯炉中火, furnace
+fire; fire is the six bureau; and the birth day is then looked up in the fire table to
+place Zi Wei. The nayin song is printed in full immediately after the Five Tigers couplets
+— sixty pairs in thirty couplets, with no gap.
+
+The earlier pack held the Five Tigers table and forbade its use "until Chinese characters
+and pairings are collated". The characters are now recorded, and the chapter's own worked
+example exercises the Jia/Ji row end to end **inside the source**. The prohibition is
+narrowed rather than lifted: the table computes, and must always be shown with its
+derivation.
+
+## The Zi Wei day tables, and a rule recovered from them
+
+Five verses and five twelve-palace day grids are printed, one per bureau. They are not
+restatements of a formula the text supplies — the text supplies no formula. A closed form
+was therefore derived from them:
+
+> Let n be the bureau number and d the lunar day. Take k = ceil(d/n) and c = n·k − d.
+> Begin at Yin advanced by (k−1) palaces. If c is odd, retreat c palaces; if c is even,
+> advance c.
+
+Machine collation of that expression against all sixty printed cells, and against the ten
+day-one and day-two anchors the five verses state in words:
+
+| Bureau | Printed cells reproduced | Verse anchors reproduced |
+|---|---|---|
+| 水二局 | 12 / 12 | 2 / 2 |
+| 木三局 | 11 / 12 | 2 / 2 |
+| 金四局 | 11 / 12 | 2 / 2 |
+| 土五局 | 12 / 12 | 2 / 2 |
+| 火六局 | 12 / 12 | 2 / 2 |
+
+**58 of 60, and 10 of 10.** The two failures are isolated and both are self-revealing,
+because a bureau grid must partition the thirty days exactly once:
+
+- 木三局 at Yin prints 初三 初九. But 初九 already stands in the Chen cell and 初五 stands
+  nowhere at all. The printed 九 is a graphic slip for 五.
+- 金四局 at Hai prints only 初一, leaving the grid at 29 days. The missing day is 三十.
+
+Two further defects were found and repaired the same way, in the nayin song: 甲戊乙亥 for
+甲戌乙亥 (戊 is a stem and can never be a branch) and 戊戌已亥 for 戊戌己亥 (已 is not a
+stem). Both repairs are forced by the closed sexagenary cycle, not chosen.
+
+This is why the construction rules in the new pack carry evidence grade **C** rather than
+the earlier uniform D. C here means something narrow and checkable: *the transcription
+checks itself, so a transcription error in these tables is detectable rather than silent*.
+It does not mean collated, and it does not mean reviewed.
+
+## All fourteen main stars
+
+`安南北斗诸星诀` is two couplets. The first counts six stars backward from Zi Wei; the
+second counts eight forward from Tian Fu; and Tian Fu itself is fixed by the captioned
+`安天府图` as the reflection of Zi Wei in the Yin–Shen axis, with the caption's own worked
+case 如紫居丑则府居卯. Six plus eight is fourteen. The first couplet also closes its own
+circle — 空三复见紫微郎, and the skips do sum to twelve — which is what fixes 隔 and 空 as
+exclusive skips rather than inclusive counts.
+
+## The brightness table
+
+`廟旺得地利益平和不得地落陷`, seven columns against twelve branches, printed as a grid.
+Machine parse: **twelve rows, twenty stars in each, 240 cells, no repetition.** The single
+star absent from each row is always the one that structurally cannot occupy it — Lu Cun
+never in the four tomb branches, Qing Yang never in Yin/Si/Shen/Hai, Tuo Luo never in
+Zi/Mao/Wu/You — which matches this same chapter's placement rules for those three stars
+exactly. The table is complete, and its completeness is checkable without any outside
+witness.
+
+## A dated facsimile now exists
+
+The earlier audit's first pilot step was "acquire a dated facsimile of the same lineage".
+One has been located and hash-pinned:
+
+**新鋟希夷陳先生紫微斗數全書**, seven juan; 宋·陳摶撰, 明·潘希尹補, 楊一宇恭閲,
+書林葆和堂葉梓行; **明代南陽堂刊本**, catalogued 1600. Internet Archive item
+`20260506_20260506_1217`, 266 leaves at 300 ppi.
+
+Three consequences:
+
+1. The blanket statement "base facsimile unidentified" no longer holds. A named, dated,
+   publicly retrievable printing of this lineage exists.
+2. Its Tesseract `chi_sim` OCR layer is unusable — vertical woodblock Chinese defeats it
+   the way blackletter tables defeated both Lilly OCR layers. The remedy is the same one
+   that worked there: **page photographs**, retrievable individually at
+   `https://archive.org/download/20260506_20260506_1217/page/n{leaf}_w1200.jpg`. One page
+   was fetched and confirmed legible; locating the construction chapter among 266 leaves
+   is the outstanding work.
+3. The Ming printing is in **seven** juan; the Wikisource text is in three. The two
+   witnesses are differently divided, not merely differently printed, and any collation
+   must map sections rather than juan numbers.
+
+## Searches run, and what they returned
+
+| Query | Route | Result |
+|---|---|---|
+| 紫微斗數全書 page tree | `zh.wikisource.org` `action=raw` on the title and all three juan | All four pages retrieved, revisions pinned |
+| 紫微斗數全書 明刊本 / 善本 / 掃描 | WebSearch | Led to 書格 and to the Internet Archive items |
+| 紫微斗数全书 續道藏 / 古本 / 故宮珍本叢刊 | WebSearch | Identified the Nanyangtang printing and the 1607 萬曆續道藏 witness of the *homonym* |
+| shuge.org Nanyangtang record | Direct HTTPS | **403 Forbidden**, both via fetch tool and via curl with a browser user agent |
+| `紫微斗数全书`, `紫微斗數全書`, `紫微斗数`, `title:(紫微)` | Internet Archive advancedsearch API | Four searches; the Nanyangtang facsimile surfaced only on the fourth, catalogued under a Vietnamese romanised title |
+| Item file list and derivatives | Internet Archive metadata API | 853 MB image PDF, 432 MB JP2 zip, 143 KB DjVu text, hOCR, page index — the text derivatives were taken, the images were not |
+
+Not obtained: the 書格 record (403); the 故宮珍本叢刊 reprint; any HathiTrust copy; and the
+Daozang homonym's CTCW transcription, which is still not needed and still quarantined.
+
+## What is now encoded
+
+`quanshu_full_rule_manifest.json` and `quanshu_full_validation_vectors.json`, pack id
+`ziwei_quanshu_full_three_juan_wikisource_v1`: **83 rules, 100 vectors**, 46 rules at grade
+C and 37 at D, roughly **28,500 Han characters quoted verbatim**, and **193 delineation
+cells refused** by per-cell policy.
+
+The seven-rule `calculation_rule_manifest.json` is left untouched and unsuperseded. It is a
+different, narrower pack and the two coexist; the new pack re-states the Five Tigers rule
+under its own id with the characters recorded, and says so in the rule.
+
+## What is still true from the original audit
+
+Everything about lineage hygiene. The Daozang homonym is still a homonym. `全書`, `全集`
+and `捷覽` are still separate witnesses. Vietnamese Tử Vi is still a separate track. No
+school blend is authorised by anything above. And no customer Zi Wei reading is authorised:
+the delineation cells are research evidence with per-cell output policy, not a product.
+
+## Revised first pilot
+
+Steps 1 and 2 of the original pilot are now partly done and partly redirected:
+
+1. ~~Acquire a dated facsimile~~ — **done**; collate against its page images, starting with
+   the two defective grid cells.
+2. ~~Collate the construction section against Wikisource~~ — the transcription has been
+   collated **against itself**; against the facsimile it has not.
+3. Hand-calculate published charts from the same lineage — still open, and still the real
+   worked-example gap: this work prints no dated nativity.
+4. Independent Chinese review of all 83 rules — still open, and now much larger.
+5. A declared historical sex convention — still the blocker on every limit rule, on the
+   twelve-stage cycle, on the twelve gods, and on the decade and small limits.
+
+## Facsimile spot collation, leaf n100
+
+One page image was taken from the Nanyangtang scan and read directly, both to confirm the
+route works and to test the transcription against the print.
+
+**It works.** Leaf n100 renders as a fully legible two-page woodblock opening at 1400 px
+width — column rules, the 歌 / 曰 / 又 verse headers, individual characters and even a later
+hand's marginal annotations all read cleanly. The OCR layer for the same leaf is noise.
+This is the Lilly remedy applied to a Chinese witness, and it holds.
+
+The leaf carries the **太陰 entry of the life-palace chapter**: the tail of its palace
+couplets, then all three of its verse blocks. That is a navigational finding in itself —
+the construction chapter lies at a *lower* leaf number in this seven-juan arrangement, so
+the next pass should search roughly leaves 1–100 of 266 for the bureau grids.
+
+Five candidate variants against the Wikisource transcription came out of that one leaf:
+
+| Passage | Facsimile | Wikisource | Assessment |
+|---|---|---|---|
+| 太陰 palace couplets, Wu/Wei/Shen | 丁庚甲生人財官格 | 丁庚甲**入**生人财官格 | Spurious 入 in the transcription |
+| 入男命訣, verse 2 close | 列朝**紳** | 列朝**纲** | Real variant, both sensible |
+| 入男命訣, verse 4 open | **太陽**陷地惡星**沖** | **太阴**陷地恶星**中** | Runs the other way: the verse is in the Tai Yin chapter, so the *print* looks wrong here |
+| 入女命訣, verse 2 | 尅害夫君**壽又夭** | 克害夫君**又夭寿** | Word order |
+| 入限訣, verse 2 open | **添進財產**福非輕 | **添屋进财**福非轻 | Real variant |
+
+One leaf, five variants. The transcription is close to this printing and demonstrably not
+identical to it. That is the whole argument for collation rather than trust — and it is why
+the two defective bureau cells found by self-collation (木三局 at Yin, 金四局 at Hai) should
+be *re-read from the print* rather than silently patched from the closed form.
+
+These readings are candidates, not settled: they come from a single 1400-pixel render and
+each should be re-checked at full JP2 resolution before it changes an encoded cell.

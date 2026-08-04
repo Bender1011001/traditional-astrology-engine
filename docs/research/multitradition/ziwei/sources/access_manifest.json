@@ -1,0 +1,177 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-04",
+ "tradition_id": "ziwei_doushu",
+ "pack_id": "ziwei_quanshu_full_three_juan_wikisource_v1",
+ "purpose": "Hash-pinned access record for every witness the full Quanshu pack cites. The Wikisource wikitext files ARE the text the rules quote; the Nanyangtang files are the facsimile witness that collation is still owed to.",
+ "not_the_daozang_homonym": "A different three-juan work titled 紫微斗數 survives in the Zhengtong Daozang with different star names and a different construction method. No file here is from it and no rule in this pack may ever be filled from it.",
+ "retrieval": {
+  "date": "2026-08-04",
+  "method": "HTTPS GET of MediaWiki action=raw for the Wikisource pages, and of the Internet Archive download endpoints for the facsimile derivatives",
+  "reproduce": "Re-fetch each raw_url and compare sha256. Wikisource pages are mutable, so each artifact also records the revision id it was taken at; a hash mismatch means the page changed, not that the record is wrong."
+ },
+ "rights_note": {
+  "underlying_work": "The Ming/Qing Ziwei Doushu Quanshu is public domain.",
+  "wikisource_transcription": "CC BY-SA 4.0 under Wikimedia site terms. Quotation with passage addresses is within those terms; the pack quotes and cites rather than redistributing the transcription as product content.",
+  "facsimile_images": "The Internet Archive item is user-uploaded with no rights statement of its own. Only derivative metadata and the failed OCR layer are stored here; no page image is redistributed."
+ },
+ "collation_state": {
+  "self_collation_done": "The five bureau grids, the five bureau verses, the brightness grid and the nayin song were machine-collated against each other and against a closed-form rule derived from them.",
+  "printed_defects_located": [
+   {
+    "where": "木三局 grid, Yin cell",
+    "printed": "初三 初九",
+    "closed_form": "初三 初五",
+    "why_the_printed_reading_fails": "初九 already appears in the Chen cell, and 初五 appears nowhere; the grid must partition the thirty days exactly once."
+   },
+   {
+    "where": "金四局 grid, Hai cell",
+    "printed": "初一",
+    "closed_form": "初一 三十",
+    "why_the_printed_reading_fails": "The grid totals 29 days instead of 30; the missing day is 三十 and the closed form places it at Hai."
+   },
+   {
+    "where": "六十花甲子纳音歌, sixth couplet",
+    "printed": "甲戊乙亥",
+    "adopted": "甲戌乙亥",
+    "why_the_printed_reading_fails": "戊 is a stem and can never be a branch."
+   },
+   {
+    "where": "六十花甲子纳音歌, eighteenth couplet",
+    "printed": "戊戌已亥",
+    "adopted": "戊戌己亥",
+    "why_the_printed_reading_fails": "已 is not a stem."
+   }
+  ],
+  "facsimile_collation_outstanding": "None of the above has been checked against the Nanyangtang page images. That check is the single outstanding acquisition for this track.",
+  "facsimile_spot_collation": {
+   "leaf": "n100",
+   "image_url": "https://archive.org/download/20260506_20260506_1217/page/n100_w1400.jpg",
+   "bytes_fetched": 807701,
+   "what_the_leaf_shows": "A two-page opening carrying the 太陰 entry of the life-palace chapter: the tail of its palace couplets, then 太陰入男命吉凶訣, 太陰入女命吉凶訣 and 太陰入限吉凶訣 in full.",
+   "legibility": "Fully legible woodblock at this width. Column rules, verse headers (歌/曰/又) and individual characters all read cleanly, including a later hand's faint annotations in the margins. This is the same route that keyed Lilly's 1647 tables after both OCR layers garbled them, and it works here.",
+   "navigational_finding": "Leaf n100 sits inside the life-palace delineation chapter, so the construction chapter - the bureau grids, the Zi Wei day tables, the Tian Fu diagram and the brightness table - lies at a LOWER leaf number in this seven-juan arrangement. That narrows the search for the next pass to roughly leaves 1-100 of 266.",
+   "candidate_variants_against_the_wikisource_transcription": [
+    {
+     "passage": "太陰 palace couplets, Wu/Wei/Shen line",
+     "facsimile_reads": "午宮陷未申宮利益，丁庚甲生人財官格",
+     "wikisource_reads": "午宫陷未申宫利益，丁庚甲入生人财官格",
+     "assessment": "The transcription carries a spurious 入 that the print does not. A clear transcription error, and the kind this pack's grade-D delineation cells exist to expose."
+    },
+    {
+     "passage": "太陰入男命吉凶訣, second verse, closing line",
+     "facsimile_reads": "為官清顯列朝紳",
+     "wikisource_reads": "为官清显列朝纲",
+     "assessment": "紳 against 綱. Both make sense; a real textual variant rather than an obvious slip."
+    },
+    {
+     "passage": "太陰入男命吉凶訣, fourth verse, opening line",
+     "facsimile_reads": "太陽陷地惡星沖",
+     "wikisource_reads": "太阴陷地恶星中",
+     "assessment": "Two differences in one line, and the more interesting one runs the other way: the verse belongs to the Tai Yin chapter, so the FACSIMILE's 太陽 looks like the error and the transcription's 太陰 like the correct reading. Recorded as an open variant, not as a correction in either direction."
+    },
+    {
+     "passage": "太陰入女命吉凶訣, second verse",
+     "facsimile_reads": "尅害夫君壽又夭",
+     "wikisource_reads": "克害夫君又夭寿",
+     "assessment": "Same three characters in a different order. Refused content in either reading."
+    },
+    {
+     "passage": "太陰入限吉凶訣, second verse, opening line",
+     "facsimile_reads": "二限偏宜見太陰，添進財產福非輕",
+     "wikisource_reads": "二限偏宜见太阴，添屋进财福非轻",
+     "assessment": "添進財產 against 添屋進財. A real variant."
+    }
+   ],
+   "what_this_establishes": "One leaf, five candidate variants. The Wikisource transcription is close to this Ming printing but is demonstrably not identical to it, which is exactly why the construction tables must be collated rather than trusted - and exactly why the two defective bureau cells found by self-collation are worth re-reading from the print rather than silently patched.",
+   "caveat": "These readings are taken from a single 1400-pixel-wide render of a two-page opening. They are candidates for collation, not settled readings, and each should be re-checked at full JP2 resolution before any of them changes an encoded cell."
+  }
+ },
+ "artifacts": [
+  {
+   "file": "quanshu_toc.wikitext",
+   "work": "紫微斗數全書",
+   "page_title": "紫微斗數全書",
+   "url": "https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8",
+   "raw_url": "https://zh.wikisource.org/w/index.php?title=%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8&action=raw",
+   "wikisource_revid": 850736,
+   "wikisource_rev_timestamp": "2017-04-05T15:11:29Z",
+   "format": "MediaWiki raw wikitext",
+   "bytes": 3091,
+   "sha256": "d9ad732fc3e86c21e945ecfce4e8d24b1ad6d00ae464a377b0419a7b0b73d818",
+   "registry_id": "ziwei_doushu_quanshu_wikisource"
+  },
+  {
+   "file": "quanshu_juan1.wikitext",
+   "work": "紫微斗數全書",
+   "page_title": "紫微斗數全書/卷一",
+   "url": "https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%80",
+   "raw_url": "https://zh.wikisource.org/w/index.php?title=%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%80&action=raw",
+   "wikisource_revid": 2665454,
+   "wikisource_rev_timestamp": "2026-03-01T10:06:31Z",
+   "format": "MediaWiki raw wikitext",
+   "bytes": 67683,
+   "sha256": "d746ebc709db35567c6e1050a4c2dc5cec0d218355acb9ee1fe3db39b7f6aaff",
+   "registry_id": "ziwei_doushu_quanshu_juan1_wikisource"
+  },
+  {
+   "file": "quanshu_juan2.wikitext",
+   "work": "紫微斗數全書",
+   "page_title": "紫微斗數全書/卷二",
+   "url": "https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%BA%8C",
+   "raw_url": "https://zh.wikisource.org/w/index.php?title=%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%BA%8C&action=raw",
+   "wikisource_revid": 1963110,
+   "wikisource_rev_timestamp": "2020-09-04T14:06:27Z",
+   "format": "MediaWiki raw wikitext",
+   "bytes": 106736,
+   "sha256": "1e255c6ae99e6f89ae124ab342554ef1347fc8e68fb8908cba7290d1a38cbb72",
+   "registry_id": "ziwei_doushu_quanshu_juan2_wikisource"
+  },
+  {
+   "file": "quanshu_juan3.wikitext",
+   "work": "紫微斗數全書",
+   "page_title": "紫微斗數全書/卷三",
+   "url": "https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%89",
+   "raw_url": "https://zh.wikisource.org/w/index.php?title=%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%89&action=raw",
+   "wikisource_revid": 2268626,
+   "wikisource_rev_timestamp": "2023-03-15T10:18:42Z",
+   "format": "MediaWiki raw wikitext",
+   "bytes": 36720,
+   "sha256": "ed327a68253a89a6e8b2962932a16f75546826ffcdd2e9e4ac419ad0f389b03b",
+   "registry_id": "ziwei_doushu_quanshu_juan3_wikisource"
+  },
+  {
+   "file": "nanyangtang_ming_1600_djvu.txt",
+   "work": "新鋟希夷陳先生紫微斗數全書 (Ming Nanyangtang printing, 7 juan)",
+   "url": "https://archive.org/details/20260506_20260506_1217",
+   "download_base": "https://archive.org/download/20260506_20260506_1217/",
+   "page_image_pattern": "https://archive.org/download/20260506_20260506_1217/page/n{leaf}_w1200.jpg",
+   "bytes": 143445,
+   "sha256": "cadc657670593654db1d005943245318c249ad43cb773726342ba7d933a0c226",
+   "note": "Tesseract chi_sim DjVu text layer of the 266-leaf scan. Retained as evidence that the OCR route FAILS on this witness, not as usable text: the layer is almost entirely noise on vertical woodblock Chinese, exactly as the Lilly 1647 OCR layers were on blackletter tables.",
+   "registry_id": "ziwei_quanshu_nanyangtang_ming_facsimile_ia"
+  },
+  {
+   "file": "nanyangtang_ming_1600_page_numbers.json",
+   "work": "新鋟希夷陳先生紫微斗數全書 (Ming Nanyangtang printing, 7 juan)",
+   "url": "https://archive.org/details/20260506_20260506_1217",
+   "download_base": "https://archive.org/download/20260506_20260506_1217/",
+   "page_image_pattern": "https://archive.org/download/20260506_20260506_1217/page/n{leaf}_w1200.jpg",
+   "bytes": 45269,
+   "sha256": "6fd2bd8d462aeea1d313473eb43bf24fcb0c95223a766401f6f82ff58824795b",
+   "note": "Leaf index for the same scan: 266 leaves, all with empty printed page numbers, which is why locating a chapter requires page-image inspection rather than a text search.",
+   "registry_id": "ziwei_quanshu_nanyangtang_ming_facsimile_ia"
+  },
+  {
+   "file": "nanyangtang_ming_1600_ia_meta.xml",
+   "work": "新鋟希夷陳先生紫微斗數全書 (Ming Nanyangtang printing, 7 juan)",
+   "url": "https://archive.org/details/20260506_20260506_1217",
+   "download_base": "https://archive.org/download/20260506_20260506_1217/",
+   "page_image_pattern": "https://archive.org/download/20260506_20260506_1217/page/n{leaf}_w1200.jpg",
+   "bytes": 2198,
+   "sha256": "e431093c9c2ba8b1ca2748ea0c0e4a18e91c8890ace6a76c39b58443ecccba31",
+   "note": "Internet Archive item metadata carrying the edition statement: 新鋟希夷陳先生紫微斗數全書.七卷.宋.陳摶撰.明.潘希尹補.明代南陽堂刊本, printed 書林葆和堂葉梓行.",
+   "registry_id": "ziwei_quanshu_nanyangtang_ming_facsimile_ia"
+  }
+ ]
+}

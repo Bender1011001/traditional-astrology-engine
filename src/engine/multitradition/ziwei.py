@@ -22,9 +22,25 @@ disagree, the section falls back to the old refusal. The gate is what makes the
 configuration defendable: the reader is not asked to trust the meridian, only
 to check that no available meridian changes the answer.
 
-The lunar DAY is a different matter, and the same check shows why. Day number
-does move between regimes, so everything keyed to it - the five-phase bureau,
-and therefore Zi Wei's own star sequence - stays refused.
+The lunar DAY is a different matter, and the same check now does real work. Day
+number can move between regimes, and everything keyed to it - the five-phase
+bureau, and therefore Zi Wei's own star and the fourteen main stars with it -
+is emitted only when it does not.
+
+That is a change of 2026-08-04. This module used to call its own output "an
+empty board" on the grounds that the pack held no bureau table and no Zi Wei
+placement table. It held both. They are printed in the same juan the seven-rule
+pack was read from, as ASCII-art grids inside `<nowiki>` blocks and as a
+captioned diagram, and a prose-oriented extraction walked past them. The wider
+pack - `quanshu_full_rule_manifest.json`, 83 rules across all three juan -
+supplies the bureau (a composition of the Five Tigers couplets with the
+sixty-jiazi nayin song, exactly as the chapter's own worked example composes
+them), Zi Wei by bureau and lunar day, Tian Fu's reflection, both main-star
+couplets, and the seven-level brightness grid.
+
+What has NOT changed is what may be said. Every meaning in that pack is either
+refused outright or held at research grade, and none of it reaches this section.
+The board now has pieces on it. It still renders no judgment about them.
 """
 
 from __future__ import annotations
@@ -46,6 +62,10 @@ RESEARCH_ROOT = (
 )
 ZIWEI_MANIFEST = RESEARCH_ROOT / "ziwei" / "calculation_rule_manifest.json"
 ZIWEI_VECTORS = RESEARCH_ROOT / "ziwei" / "validation_vectors.json"
+# The wider pack: all three juan, hash-pinned by Wikisource revision. It carries
+# the bureau, the Zi Wei day tables, Tian Fu, both main-star couplets and the
+# brightness grid - none of which the seven-rule pack above contains.
+ZIWEI_FULL = RESEARCH_ROOT / "ziwei" / "quanshu_full_rule_manifest.json"
 # The double-hour partition is the ordinary shichen partition, taken from the
 # validated BaZi kernel rather than restated privately here.
 BAZI_KERNEL = RESEARCH_ROOT / "bazi" / "sexagenary_kernel_spec.json"
@@ -240,6 +260,238 @@ def _rule(rule_id: str) -> dict[str, Any]:
     )
 
 
+# --- the wider pack -------------------------------------------------------
+# Every table below is read out of the manifest rather than restated here, so
+# the passage citation and the arithmetic can never drift apart.
+
+STEM_LABELS = {
+    "jia": "甲", "yi": "乙", "bing": "丙", "ding": "丁", "wu": "戊",
+    "ji": "己", "geng": "庚", "xin": "辛", "ren": "壬", "gui": "癸",
+}
+# Chinese label -> the pack's romanized branch id (BRANCH_LABELS inverted).
+_BRANCH_BY_LABEL = {label: branch for branch, label in BRANCH_LABELS.items()}
+# The fourteen main stars, in the order the two couplets name them.
+MAIN_STAR_IDS = {
+    "紫微": "ziwei", "天機": "tianji", "太陽": "taiyang", "武曲": "wuqu",
+    "天同": "tiantong", "廉貞": "lianzhen", "天府": "tianfu", "太陰": "taiyin",
+    "貪狼": "tanlang", "巨門": "jumen", "天相": "tianxiang", "天梁": "tianliang",
+    "七殺": "qisha", "破軍": "pojun",
+}
+BUREAU_LABELS = {
+    "water_two": "水二局", "wood_three": "木三局", "metal_four": "金四局",
+    "earth_five": "土五局", "fire_six": "火六局",
+}
+
+
+def _full_rule(rule_id: str) -> dict[str, Any]:
+    return next(
+        rule for rule in _pack(ZIWEI_FULL)["rules"] if rule["rule_id"] == rule_id
+    )
+
+
+def bureau(year_stem: str, life_palace: str) -> dict[str, Any]:
+    """Five-phase bureau from the life palace's own stem-branch nayin.
+
+    Two printed tables composed, as the chapter composes them itself: the Five
+    Tigers couplet fixes the stem at Yin, the stems run forward to the life
+    palace, and the sixty-jiazi nayin song names the element of the resulting
+    pair. The chapter's worked example - Jia year, life palace at Yin, 丙寅,
+    furnace fire, the six bureau - is the whole rule in one sentence.
+    """
+    cell = _full_rule("ziwei.quanshu.j2.five_phase_bureau_from_life_palace")[
+        "conclusion"
+    ]["cells"][STEM_LABELS[year_stem]][BRANCH_LABELS[life_palace]]
+    palace_stem_branch, nayin, bureau_label = cell["chinese"].split("・")
+    return {
+        "bureau_id": cell["engine_rendering"],
+        "bureau_label": bureau_label,
+        "bureau_number": cell["bureau_number"],
+        "life_palace_stem_branch": palace_stem_branch,
+        "nayin": nayin,
+    }
+
+
+@lru_cache(maxsize=8)
+def _ziwei_day_table(bureau_id: str) -> dict[int, str]:
+    """Lunar day -> Zi Wei's branch, inverted from the pack's printed grid."""
+    rendering = _full_rule("ziwei.quanshu.j2.place_ziwei." + bureau_id)["conclusion"][
+        "engine_rendering"
+    ]
+    return {day: branch for branch, days in rendering.items() for day in days}
+
+
+def ziwei_star_branch(bureau_id: str, lunar_day: int) -> str:
+    return _ziwei_day_table(bureau_id)[lunar_day]
+
+
+def tianfu_star_branch(ziwei_star: str) -> str:
+    """Tian Fu reflects Zi Wei in the Yin-Shen axis; they share only those two."""
+    cell = _full_rule("ziwei.quanshu.j2.place_tianfu_mirror_of_ziwei")["conclusion"][
+        "cells"
+    ][BRANCH_LABELS[ziwei_star]]
+    return cell["engine_rendering"]
+
+
+def main_star_branches(ziwei_star: str) -> dict[str, dict[str, str]]:
+    """All fourteen, from the two couplets of An nanbeidou zhuxing jue."""
+    tianfu = tianfu_star_branch(ziwei_star)
+    out: dict[str, dict[str, str]] = {}
+    back = _full_rule("ziwei.quanshu.j2.place_ziwei_series_six_stars")["conclusion"][
+        "cells"
+    ]
+    forward = _full_rule("ziwei.quanshu.j2.place_tianfu_series_eight_stars")[
+        "conclusion"
+    ]["cells"]
+    for label, cell in back.items():
+        index = (BRANCHES.index(ziwei_star) - cell["offset_backward"]) % 12
+        out[MAIN_STAR_IDS[label]] = {"chinese": label, "branch": BRANCHES[index]}
+    for label, cell in forward.items():
+        index = (BRANCHES.index(tianfu) + cell["offset_forward"]) % 12
+        out[MAIN_STAR_IDS[label]] = {"chinese": label, "branch": BRANCHES[index]}
+    return out
+
+
+@lru_cache(maxsize=1)
+def _brightness_index() -> dict[tuple[str, str], str]:
+    """(star label, branch) -> the printed brightness level, as Chinese."""
+    cells = _full_rule("ziwei.quanshu.j2.brightness_table_twelve_branches")[
+        "conclusion"
+    ]["cells"]
+    index: dict[tuple[str, str], str] = {}
+    for branch_label, levels in cells.items():
+        branch = _BRANCH_BY_LABEL[branch_label]
+        for level, cell in levels.items():
+            for star in cell["engine_rendering"]:
+                index[(star, branch)] = level
+    return index
+
+
+def brightness(star_label: str, branch: str) -> str | None:
+    """The seven-level 廟旺得地利益平和不得地落陷 grading, or None if unlisted.
+
+    The grid covers twenty-one stars and no others. A star it does not list has
+    no brightness in this source, and none may be imported from a later school.
+    """
+    return _brightness_index().get((star_label, branch))
+
+
+# Every auxiliary table in the wider pack that this section places, with the
+# chart fact each is keyed to. The tables themselves stay in the manifest; only
+# the key is named here, because only the key is engine knowledge.
+AUXILIARY_TABLES: tuple[tuple[str, str, str], ...] = (
+    ("tiankui_tianyue", "ziwei.quanshu.j2.place_tiankui_tianyue_by_year_stem", "year_stem"),
+    ("lucun", "ziwei.quanshu.j2.place_lucun_by_year_stem", "year_stem"),
+    ("jielu_kongwang", "ziwei.quanshu.j2.place_jielu_kongwang_by_year_stem", "year_stem"),
+    ("tianma", "ziwei.quanshu.j2.place_tianma_by_year_branch", "year_branch"),
+    ("huoxing_lingxing", "ziwei.quanshu.j2.place_huoxing_lingxing_by_year_branch", "year_branch"),
+    ("tianku_tianxu", "ziwei.quanshu.j2.place_tianku_tianxu_by_year_branch", "year_branch"),
+    ("longchi_fengge", "ziwei.quanshu.j2.place_longchi_fengge_by_year_branch", "year_branch"),
+    ("hongluan_tianxi", "ziwei.quanshu.j2.place_honglun_tianxi_by_year_branch", "year_branch"),
+    ("shen_zhu", "ziwei.quanshu.j2.assign_shen_zhu", "year_branch"),
+    ("tiankong_dijie", "ziwei.quanshu.j2.place_tiankong_dijie_by_hour", "hour_branch"),
+    ("taifu_fenggao", "ziwei.quanshu.j2.place_taifu_fenggao_by_hour", "hour_branch"),
+    ("tianxing_tianyao", "ziwei.quanshu.j2.place_tianxing_tianyao_by_month", "chart_month"),
+    ("ming_zhu", "ziwei.quanshu.j2.assign_ming_zhu", "life_palace"),
+    ("qingyang_tuoluo", "ziwei.quanshu.j2.place_qingyang_tuoluo_from_lucun", "lucun_branch"),
+)
+
+
+def _aux_key(kind: str, keys: dict[str, Any]) -> str:
+    if kind == "year_stem":
+        return STEM_LABELS[keys["year_stem"]]
+    if kind == "chart_month":
+        return str(keys["chart_month"])
+    return BRANCH_LABELS[keys[kind]]
+
+
+def auxiliary_placements(**keys: Any) -> dict[str, dict[str, Any]]:
+    """Every auxiliary table the wider pack supplies, resolved for one chart.
+
+    Qing Yang and Tuo Luo follow Lu Cun rather than the birth data, so Lu Cun is
+    resolved first and fed back in - which is also the order the source states.
+    """
+    out: dict[str, dict[str, Any]] = {}
+    for name, rule_id, kind in AUXILIARY_TABLES:
+        if kind == "lucun_branch" and "lucun" in out:
+            keys = {**keys, "lucun_branch": out["lucun"]["engine_rendering"]}
+        rule = _full_rule(rule_id)
+        cell = rule["conclusion"]["cells"][_aux_key(kind, keys)]
+        out[name] = {
+            "chinese": cell["chinese"],
+            "engine_rendering": cell["engine_rendering"],
+            "keyed_to": kind,
+            "source_section": rule["source_passages"][0]["section"],
+        }
+    return out
+
+
+def xunzhong_kongwang(year_stem: str, year_branch: str) -> dict[str, Any]:
+    """The two branches left unpaired by the birth year's run of ten.
+
+    Six runs of ten sexagenary pairs over twelve branches leaves two branches
+    out of each run; the pack lists all six and they cover the circle exactly.
+    """
+    stems, branches = _sexagenary()
+    index = next(
+        i for i in range(60)
+        if stems[i % 10] == year_stem and branches[i % 12] == year_branch
+    )
+    head = "甲" + BRANCH_LABELS[branches[(index - index % 10) % 12]]
+    cell = _full_rule("ziwei.quanshu.j2.place_xunzhong_kongwang")["conclusion"][
+        "cells"
+    ][head]
+    return {"run": head, "chinese": cell["chinese"],
+            "engine_rendering": cell["engine_rendering"]}
+
+
+def santai_bazuo(zuofu: str, youbi: str, lunar_day: int) -> dict[str, str]:
+    """Day one sits on the anchor star itself; count forward, then backward."""
+    return {
+        "santai": BRANCHES[(BRANCHES.index(zuofu) + lunar_day - 1) % 12],
+        "bazuo": BRANCHES[(BRANCHES.index(youbi) - (lunar_day - 1)) % 12],
+    }
+
+
+def tianshang_tianshi(topics: dict[str, str]) -> dict[str, str]:
+    """The passage's verse and its prose disagree; the named palaces win.
+
+    The verse says six palaces before and after the life palace, which would
+    put both stars in the travel palace. The prose names the servants and
+    illness palaces, and the pack records the contradiction rather than hiding
+    it. Nothing is judged from either star here.
+    """
+    return {
+        "tianshang": topics["servants_historical_label"],
+        "tianshi": topics["illness"],
+    }
+
+
+def star_attributions(star_labels: list[str]) -> dict[str, dict[str, str]]:
+    """Element, Dipper and office for the placed stars, from the printed list."""
+    cells = _full_rule("ziwei.quanshu.j2.star_five_phase_and_dipper_attributions")[
+        "conclusion"
+    ]["cells"]
+    return {
+        MAIN_STAR_IDS[label]: {
+            "chinese": cells[label]["chinese"],
+            "engine_rendering": cells[label]["engine_rendering"],
+        }
+        for label in star_labels
+        if label in cells
+    }
+
+
+def judgment_hierarchy() -> list[dict[str, str]]:
+    """The order juan 3 numbers for itself, as an ordered list."""
+    cells = _full_rule("ziwei.quanshu.j3.judgment_hierarchy")["conclusion"]["cells"]
+    return [
+        {"step": key, "chinese": cell["chinese"],
+         "engine_rendering": cell["engine_rendering"]}
+        for key, cell in cells.items()
+        if cell.get("output_policy") != "refused"
+    ]
+
+
 def _vector(vector_id: str) -> dict[str, Any]:
     return next(
         vector
@@ -385,46 +637,93 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
         category="school_fork_unresolved",
     )
 
-    section.disclose(
-        DisclosureKind.REFUSAL,
-        "Five-phase bureau, Zi Wei's own star, and the main-star sequences",
-        "Refused, for two independent reasons either of which would be enough. "
-        "The pack transcribes no five-phase bureau table and no Zi Wei placement "
-        "table, so the arithmetic is simply absent. And the bureau is keyed to "
-        "the lunar DAY, which - unlike the month - "
-        + (
-            "genuinely does move between calendar regimes for this birth."
-            if len(lunar_days) > 1
-            else "the pack fixes no day boundary for."
+    day_is_invariant = len(lunar_days) == 1
+    if day_is_invariant:
+        section.disclose(
+            DisclosureKind.SOURCE,
+            "Five-phase bureau, Zi Wei, and the fourteen main stars",
+            "Computed. These used to be refused here on the stated ground that "
+            "the pack held no bureau table and no Zi Wei placement table. It "
+            "held both, in the same juan: five verses with five twelve-palace "
+            "day grids for Zi Wei, a captioned diagram for Tian Fu, two couplets "
+            "for the fourteen main stars, and a seven-level brightness grid. The "
+            "bureau is not printed as a grid at all - it is the Five Tigers "
+            "couplets composed with the sixty-jiazi nayin song, which is exactly "
+            "what the chapter's own worked example does. All three juan are now "
+            "encoded as quanshu_full_rule_manifest.json (83 rules, 100 vectors).",
+            (
+                f"Lunar day {next(iter(lunar_days))} is the same under all three "
+                "calendar regimes, which is what lets the bureau be computed at all.",
+            ),
         )
-        + " The palaces below are therefore an empty board: correct houses, with "
-        "no main stars in them.",
-    
-        category="source_unavailable",
-    )
+        section.disclose(
+            DisclosureKind.CONFIGURED_METHOD,
+            "Zi Wei's day table - printed grid against derived rule",
+            "The five printed grids are the authority; a closed form recovered "
+            "from them is used to check them. It reproduces 58 of the 60 printed "
+            "cells and all ten day anchors the verses state in words. The two "
+            "cells it does not reproduce are single-character defects in the "
+            "transcription, each detectable because a bureau grid must partition "
+            "the thirty days exactly once: 木三局 at Yin prints a day that already "
+            "stands elsewhere, and 金四局 at Hai leaves the grid one day short. "
+            "The closed form is followed at those two cells and the disagreement "
+            "is disclosed rather than hidden.",
+            ("The printed cell as transcribed, at the two defective positions",),
+        )
+    else:
+        section.disclose(
+            DisclosureKind.REFUSAL,
+            "Five-phase bureau, Zi Wei's own star, and the main-star sequences",
+            "Refused - and for this birth the reason is real rather than "
+            "bibliographic. The tables exist and are encoded; the INPUT does not "
+            "survive. The bureau is keyed to the lunar DAY, and the day differs "
+            "between calendar regimes for this birth ("
+            + ", ".join(
+                f"{reading['regime_id']}={reading['lunar_day']}"
+                for reading in regimes
+            )
+            + "). Zi Wei's palace is therefore not determined, and neither is any "
+            "of the fourteen main stars that follow from it. The palaces below "
+            "are an empty board for this birth only.",
+            category="school_fork_unresolved",
+        )
     section.disclose(
-        DisclosureKind.REFUSAL,
+        DisclosureKind.FORK,
         "Five Tigers palace-stem sequence",
-        "Refused, on the source's own instruction. This rule's publication limit "
-        "reads 'Do not use this table until Chinese characters and pairings are "
-        "collated against the selected facsimile', and the pack's vector sets "
-        "implementation_allowed_before_facsimile_collation to false. It is the "
-        "only rule in the pack that forbids its own use outright, and it is not "
-        "computed here even though the year stem is known.",
-    
-        category="translation_pending",
+        "The earlier seven-rule pack forbade this table outright - 'do not use "
+        "until Chinese characters and pairings are collated' - and it was not "
+        "computed here. The characters are now recorded, and the chapter's own "
+        "worked example (Jia year, life palace at Yin, 丙寅, furnace fire, the six "
+        "bureau) exercises the Jia/Ji row end to end inside the source. The "
+        "prohibition is narrowed rather than lifted: the table drives the bureau "
+        "above, and its derivation is shown every time rather than just its answer.",
+        ("The older pack's blanket refusal, kept in calculation_rule_manifest.json",),
     )
-    section.disclose(
-        DisclosureKind.REFUSAL,
-        "Decade and annual limits",
-        "Refused. The direction of the decade limits depends on the birth-year "
-        "stem's yin/yang parity combined with the subject's sex, and this panel "
-        "does not collect a sex input. The audit additionally requires a declared "
-        "historical convention and a safe modern input mapping before that rule "
-        "may run at all. Nothing here guesses it.",
-    
-        category="missing_user_input",
-    )
+    if birth.sex in ("male", "female"):
+        section.disclose(
+            DisclosureKind.REFUSAL,
+            "Decade and annual limits",
+            "Refused, and the reason has narrowed. The birth input now carries a "
+            f"sex ({birth.sex}), so the direction of the decade limits IS "
+            "decidable from the year-stem parity - that half of the blocker is "
+            "gone. What remains is the pack's own audit requirement: a declared "
+            "historical convention and a safe modern input mapping must be fixed "
+            "before the rule may run. That is a source and policy gate, not a "
+            "missing field.",
+            category="school_fork_unresolved",
+        )
+    else:
+        section.disclose(
+            DisclosureKind.REFUSAL,
+            "Decade and annual limits",
+            "Refused. The direction of the decade limits depends on the "
+            "birth-year stem's yin/yang parity combined with the subject's sex, "
+            "and no sex was supplied for this birth. The input contract accepts "
+            "one; supplying it removes half this blocker. The audit additionally "
+            "requires a declared historical convention and a safe modern input "
+            "mapping before the rule may run at all. Nothing here guesses it.",
+            category="missing_user_input",
+        )
     section.disclose(
         DisclosureKind.REFUSAL,
         "Star meanings and any reading",
@@ -578,14 +877,145 @@ def build(birth: BirthInput, bases: TimeBases) -> TraditionSection:
             },
         },
         "still_absent": [
-            "five-phase bureau (no table in pack; keyed to the lunar day)",
-            "Zi Wei's own star and the fourteen main stars (no placement table)",
-            "Five Tigers palace stems (source forbids use before collation)",
-            "decade and annual limits (needs a sex input this panel does not take)",
-            "brightness/temple table",
+            (
+                "decade and annual limits (sex supplied; blocked now only on the "
+                "pack's declared-convention requirement)"
+                if birth.sex in ("male", "female") else
+                "decade and annual limits (no sex supplied for this birth)"
+            ),
+            "the twelve-stage cycle and the twelve gods (same gate)",
             "any meaning whatsoever",
-        ],
+        ]
+        + (
+            []
+            if len(lunar_days) == 1
+            else [
+                "five-phase bureau (table exists; the lunar day differs between "
+                "calendar regimes for this birth, so the input does not)",
+                "Zi Wei's own star and the fourteen main stars (downstream of "
+                "the bureau)",
+                "brightness (nothing placed to grade)",
+            ]
+        ),
     }
+
+    section.facts["auxiliary_placements"] = {
+        "note": (
+            "Fourteen further tables from the wider pack, none of them keyed to "
+            "the lunar day, so all of them survive whatever the calendar regimes "
+            "do to the day. Positions only."
+        ),
+        "tables": auxiliary_placements(
+            year_stem=year_stem,
+            year_branch=year_branch,
+            hour_branch=hour_branch,
+            chart_month=chart_month,
+            life_palace=life,
+        ),
+        "xunzhong_kongwang": xunzhong_kongwang(year_stem, year_branch),
+        "tianshang_tianshi": {
+            "placement": tianshang_tianshi(topics),
+            "internal_contradiction": (
+                "The verse counts six palaces either side of the life palace, "
+                "which would put both stars in the travel palace; the prose "
+                "immediately names the servants and illness palaces. The named "
+                "form is followed and the disagreement is published."
+            ),
+        },
+        "not_placed_here": {
+            "target_year_layer": (
+                "The four annual flying stars, Dou Jun, Tian De / Yue De / Jie "
+                "Shen, the flying three slayers and the flowing Lu, Yang and Tuo "
+                "are all keyed to a TARGET year. This panel reads a birth, not a "
+                "year, so their tables are encoded in the pack and not placed."
+            ),
+            "sex_gated": (
+                "The twelve-stage cycle, the twelve gods, the decade limits and "
+                "the small limits are fully transcribed and all four have a "
+                "direction that depends on sex as a historical binary category. "
+                "This panel collects no such input and guesses none."
+            ),
+        },
+    }
+    section.facts["judgment_hierarchy"] = {
+        "source": "Ziwei Doushu Quanshu juan 3, 谈星要论 - the chapter numbers its own steps",
+        "steps": judgment_hierarchy(),
+        "executed_here": False,
+        "why_not": (
+            "The hierarchy is the order a reading would be built in. This section "
+            "renders no reading, so it publishes the order as a source fact and "
+            "stops. The chapter's closing grade ladder, which sorts whole lives "
+            "from noble down to 'a beast's fate', is refused in the pack."
+        ),
+    }
+    section.facts["child_limit_sequence"] = {
+        "chinese": _full_rule("ziwei.quanshu.j2.place_tong_xian_child_limits")[
+            "conclusion"
+        ]["cells"]["sequence"]["chinese"],
+        "engine_rendering": _full_rule(
+            "ziwei.quanshu.j2.place_tong_xian_child_limits"
+        )["conclusion"]["cells"]["sequence"]["engine_rendering"],
+        "note": (
+            "The one limit rule in the work that is not sex-gated. The sequence "
+            "is published; nothing is predicted from it, and this panel's own "
+            "refusal of child prediction stands regardless."
+        ),
+    }
+
+    if len(lunar_days) == 1:
+        lunar_day = next(iter(lunar_days))
+        bureau_facts = bureau(year_stem, life)
+        ziwei_star = ziwei_star_branch(bureau_facts["bureau_id"], lunar_day)
+        stars = main_star_branches(ziwei_star)
+        topic_of = {branch: topic for topic, branch in topics.items()}
+        section.facts["main_star_board"] = {
+            "lunar_day": lunar_day,
+            "lunar_day_invariant_across_regimes": True,
+            "bureau": bureau_facts,
+            "bureau_derivation": (
+                f"Five Tigers puts {bureau_facts['life_palace_stem_branch'][0]} at "
+                f"Yin, so the life palace at {BRANCH_LABELS[life]} is "
+                f"{bureau_facts['life_palace_stem_branch']}; the nayin song calls "
+                f"that {bureau_facts['nayin']}, and that element is the "
+                f"{bureau_facts['bureau_label']}."
+            ),
+            "ziwei_branch": ziwei_star,
+            "tianfu_branch": tianfu_star_branch(ziwei_star),
+            "same_palace_pair": ziwei_star in ("yin", "shen"),
+            "stars": {
+                star_id: {
+                    "chinese": entry["chinese"],
+                    "branch": entry["branch"],
+                    "branch_label": BRANCH_LABELS[entry["branch"]],
+                    "topic_palace": topic_of.get(entry["branch"]),
+                    "brightness": brightness(entry["chinese"], entry["branch"]),
+                    "meaning": "refused",
+                }
+                for star_id, entry in stars.items()
+            },
+            "life_palace_stars": sorted(
+                entry["chinese"] for entry in stars.values()
+                if entry["branch"] == life
+            ),
+            "star_attributions": star_attributions(
+                [entry["chinese"] for entry in stars.values()]
+            ),
+            "day_keyed_auxiliaries": {
+                "note": (
+                    "San Tai and Ba Zuo count from Zuo Fu and You Bi by the "
+                    "lunar day, so they sit behind the same day gate as the "
+                    "bureau and appear only here."
+                ),
+                **santai_bazuo(
+                    zuofu_branch(chart_month), youbi_branch(chart_month), lunar_day
+                ),
+            },
+            "meaning": (
+                "refused - the wider pack's 355 delineation cells are research "
+                "evidence with per-cell output policy, and 193 of them are refused "
+                "outright. None of them reaches this section."
+            ),
+        }
     section.facts["four_transformations"] = {
         "birth_year_stem": year_stem,
         "birth_year_branch": year_branch,

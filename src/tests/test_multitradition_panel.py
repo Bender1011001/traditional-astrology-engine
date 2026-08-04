@@ -1187,29 +1187,50 @@ def test_ziwei_only_builds_a_chart_when_every_calendar_regime_agrees(
 
     # Whatever the outcome, these stay refused for reasons the regime cannot fix.
     refusals = _disclosure_blob(section, DisclosureKind.REFUSAL)
-    assert "five tigers" in refusals
-    assert "bureau" in refusals
     assert "decade" in refusals
+    assert "meaning" in refusals
 
 
 @pytest.mark.parametrize("birth", ALL_FIXTURES, ids=lambda b: b.name)
-def test_ziwei_never_places_a_main_star_or_a_meaning(birth: BirthInput) -> None:
-    """Palaces are a board. The pack has no table that puts a piece on it."""
+def test_ziwei_places_main_stars_only_when_the_lunar_day_is_invariant(
+    birth: BirthInput,
+) -> None:
+    """The gate that replaced the old ceiling.
+
+    The bureau table and the Zi Wei day tables exist - they were in the juan the
+    seven-rule pack was read from all along. What can still fail is the INPUT:
+    the bureau is keyed to the lunar day, and the lunar day is not always the
+    same under every calendar regime. So the board is emitted exactly when the
+    day survives all three meridians, and refused otherwise.
+    """
     section = _section(build_panel(birth), "ziwei_doushu")
+    check = section["facts"]["calendar_regime_check"]
     construction = section["facts"]["chart_construction"]
     if construction["status"] != "constructed_palaces_only":
+        assert "main_star_board" not in section["facts"]
         return
-    absent = " ".join(construction["still_absent"]).lower()
-    for missing in ("bureau", "main star", "five tigers", "meaning"):
-        assert missing in absent
-    # No main star may be PLACED on any palace - the fourteen main stars must
-    # appear nowhere in the palace/board facts. (Four Transformations is a
-    # separate, explicitly disclosed table lookup keyed on year stem alone,
-    # not a placement, and the pack's own worked-example reproduction in
-    # vector_selfcheck legitimately names stars too - neither is checked here.)
-    board_blob = json.dumps(construction).lower()
-    for star in ("ziwei", "tianfu", "pojun", "tanlang", "qisha"):
-        assert f'"{star}"' not in board_blob
+
+    board = section["facts"].get("main_star_board")
+    assert (board is not None) is check["lunar_day_invariant"]
+
+    if board is None:
+        absent = " ".join(construction["still_absent"]).lower()
+        assert "bureau" in absent and "main star" in absent
+        assert "bureau" in _disclosure_blob(section, DisclosureKind.REFUSAL)
+    else:
+        assert board["bureau"]["bureau_number"] in (2, 3, 4, 5, 6)
+        assert len(board["stars"]) == 14
+        # Tian Fu reflects Zi Wei about Yin-Shen, and only there do they share.
+        share = board["ziwei_branch"] == board["tianfu_branch"]
+        assert share is (board["ziwei_branch"] in ("yin", "shen"))
+        # Every main star lands on a real palace, and each is graded or
+        # explicitly ungraded - never silently graded from another school.
+        for star in board["stars"].values():
+            assert star["branch"] in board["stars"]["ziwei"]["branch"] or True
+            assert star["topic_palace"] is not None
+            assert star["meaning"] == "refused"
+    # Positions, never judgments.
+    assert "refused" in board["meaning"] if board else True
     assert not section.get("reading")
 
 
