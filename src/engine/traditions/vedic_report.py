@@ -485,7 +485,7 @@ def _bhavas_section(
 
 
 def _strength_of(birth: BirthInput, facts: dict) -> dict[str, Any]:
-    """Sadbala and Ashtakavarga for this nativity, or an honest blank.
+    """Ṣaḍbala and Aṣṭakavarga for this nativity, or an honest blank.
 
     Wrapped because a strength failure must not take the report down with it:
     a chart that cannot be weighed is still a chart that can be read, and the
@@ -528,8 +528,8 @@ def _strength_of(birth: BirthInput, facts: dict) -> dict[str, Any]:
 def _strength_section(
     report: TraditionReport, facts: dict, strength: dict[str, Any]
 ) -> None:
-    """Shadbala and Ashtakavarga - the arbiter the text itself supplies."""
-    s = report.add(ReportSection("Strength: Sadbala and Ashtakavarga", level=2))
+    """Ṣaḍbala and Aṣṭakavarga - the arbiter the text itself supplies."""
+    s = report.add(ReportSection("Strength: Ṣaḍbala and Aṣṭakavarga", level=2))
     if strength.get("error"):
         s.refusals.append(
             "The strength of the grahas could not be computed for this "
@@ -541,8 +541,8 @@ def _strength_section(
     s.notes.append(
         "BPHS uttara 2 makes strength the arbiter: among the grahas that "
         "cause a yoga, the strongest of them is the one that gives its "
-        "result. Every figure below is in rupas, one rupa being sixty "
-        "virupas, as the 1899 printing writes them."
+        "result. Every figure below is in rūpas, one rūpa being sixty "
+        "virūpas, as the 1899 printing writes them."
     )
     for graha, v in pindas.items():
         pinda = v["sadbala_pinda"]
@@ -551,13 +551,13 @@ def _strength_section(
             continue
         verdict = "at or above" if v["meets_minimum"] else "below"
         s.notes.append(
-            f"- **{graha}** - {v['sadbala_pinda_rupas']} rupas, {verdict} the "
-            f"{v['required_minimum_virupas']:.0f}-virupa minimum this "
+            f"- **{graha}** — {v['sadbala_pinda_rupas']} rūpas, {verdict} the "
+            f"{v['required_minimum_virupas']:.0f}-virūpa minimum this "
             f"recension sets for the {v['minimum_class']} class."
         )
     s.notes.append(
         "The minima are this recension's, which groups the seven into three "
-        "classes at 6|32, 5|53 and 4|13 rupas. The modern handbooks give each "
+        "classes at 6|32, 5|53 and 4|13 rūpas. The modern handbooks give each "
         "graha its own figure and disagree with it; nothing here is "
         "normalised to them."
     )
@@ -566,7 +566,7 @@ def _strength_section(
     lords = prov.get("time_lords") or {}
     if any(lords.values()):
         s.notes.append(
-            "The time-lords this chart's kala-bala rests on: year "
+            "The time-lords this chart's kāla-bala rests on: year "
             f"{lords.get('varshesa')}, month {lords.get('masesa')}, day "
             f"{lords.get('dinesa')}, hora {lords.get('horesa')}."
         )
@@ -574,30 +574,30 @@ def _strength_section(
     av = strength.get("ashtakavarga")
     if not av:
         return
-    sub = report.add(ReportSection("Ashtakavarga", level=3))
+    sub = report.add(ReportSection("Aṣṭakavarga", level=3))
     sub.notes.append(
-        "Rekha is the scored mark and karana/bindu is the blank. Much popular "
+        "Rekhā is the scored mark and karaṇa/bindu is the blank. Much popular "
         "writing has this exactly backwards, and the chapter lists the blanks "
         "first, so a reader who takes the first list for the scoring list "
         "builds every table inverted."
     )
     sarva = av["sarvashtakavarga"]
     sub.notes.append(
-        f"Sarvashtakavarga totals {av['sarva_total']} rekhas across the twelve "
-        "rasis, which is the figure the seven tables must sum to."
+        f"Sarvāṣṭakavarga totals {av['sarva_total']} rekhās across the twelve "
+        "rāśis, which is the figure the seven tables must sum to."
     )
     ranked = sorted(sarva.items(), key=lambda kv: -kv[1])
     for rasi, n in ranked[:3]:
-        sub.notes.append(f"- {rasi}: {n} rekhas - {sarva_grade(n)}.")
+        sub.notes.append(f"- {rasi}: {n} rekhās — {sarva_grade(n)}.")
     weakest = ranked[-1]
     sub.notes.append(
-        f"- {weakest[0]}: {weakest[1]} rekhas - {sarva_grade(weakest[1])}, the "
-        "least supported rasi in this chart."
+        f"- {weakest[0]}: {weakest[1]} rekhās — {sarva_grade(weakest[1])}, the "
+        "least supported rāśi in this chart."
     )
     thin = [g for g, n in (av.get("own_varga_rekhas") or {}).items() if n < 4]
     if thin:
         sub.notes.append(
-            "Below four rekhas in its own varga, which the chapter marks for "
+            "Below four rekhās in its own varga, which the chapter marks for "
             "distress rather than comfort: " + ", ".join(sorted(thin)) + "."
         )
 
@@ -652,7 +652,7 @@ def _vargas_section(
         )
         vim = vimsopaka_bala(graha, lon, naisargika, rasi_index)
         sub.notes.append(
-            f"Vimsopaka (saptavarga): {vim['total_vishvas']:.2f} of 20 - "
+            f"Viṃśopaka (saptavarga): {vim['total_vishvas']:.2f} of 20 — "
             f"{vim['grade']}."
         )
         if graha == "Sun":
