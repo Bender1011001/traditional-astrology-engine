@@ -99,6 +99,14 @@ MATURITY: dict[str, dict[str, Any]] = {
         "interpretation_readiness": "developed - 38 sourced delineations, synthesis layer v1, and BPHS uttara 2.44 executed: competing yogas are ranked by Sadbala instead of being listed side by side",
         "publication_readiness": "research only",
     },
+    "jaimini": {
+        "category": NATAL_REPORT,
+        "source_readiness": "high - 116 rules from the Upadesa Sutras with the Sutrarthaprakasika, translations unreviewed",
+        "computational_readiness": "high - rasi drsti, argala with both disputed forks, chara karakas, arudha padas, karaka-kundali, the three special lagnas and the Varnada",
+        "validation_coverage": "the rasi drsti table reproduces Abhyankar's Ranade chart three times and his Lokur chart twice, five hits none of which is a Parasari aspect; the Patel chart discriminates the Rahu convention and the engine matches his stated Atmakaraka",
+        "interpretation_readiness": "developed - report engine reading from the karaka-kundali, with the karaka scheme and the chara dasa lengths both refused because the pack refuses them",
+        "publication_readiness": "research only",
+    },
     "chinese_bazi": {
         "category": NATAL_REPORT,
         "source_readiness": "moderate - Yuanhai Ziping/Sanming Tonghui transcriptions traceable to the Siku recension, uncollated",

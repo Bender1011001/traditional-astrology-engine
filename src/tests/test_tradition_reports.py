@@ -26,6 +26,9 @@ from src.engine.traditions.bazi_report import build_report as build_bazi
 from src.engine.traditions.islamicate_report import (
     build_report as build_islamicate,
 )
+from src.engine.traditions.jaimini_report import (
+    build_report as build_jaimini,
+)
 from src.engine.traditions.report import (
     Delineation,
     redact_refused_topics,
@@ -59,6 +62,11 @@ def bazi():
 @pytest.fixture(scope="module")
 def islamicate():
     return build_islamicate(BIRTH)
+
+
+@pytest.fixture(scope="module")
+def jaimini():
+    return build_jaimini(BIRTH)
 
 
 
@@ -301,13 +309,21 @@ def test_hour_fork_difference_report_exists(bazi):
 
 
 def test_no_backspace_bytes_in_tradition_sources():
-    """A patch pipeline twice turned regex \b into literal backspace bytes,
-    producing patterns that compile and match nothing. Guard the whole tree."""
+    r"""A patch pipeline turned regex \b into literal backspace bytes.
+
+    Three times now. The pattern still compiles and simply matches nothing,
+    so the failure is silent and looks like a passing feature. The guard
+    covered src/engine only, and the third occurrence landed in a TEST file -
+    where a dead guard is worse than none, because it reports success. Both
+    trees are checked now.
+    """
     import pathlib
 
-    root = pathlib.Path("src/engine")
     offenders = [
-        str(p) for p in root.rglob("*.py") if b"\x08" in p.read_bytes()
+        str(p)
+        for root in ("src/engine", "src/tests")
+        for p in pathlib.Path(root).rglob("*.py")
+        if b"\x08" in p.read_bytes()
     ]
     assert not offenders, offenders
 
@@ -484,3 +500,94 @@ def test_a_topic_chapter_reports_its_undecided_conditions(hellenistic):
     blob = " ".join(travel.notes)
     assert "cannot be decided" in blob
     assert "distribution" in blob
+
+
+# --- Jaimini -----------------------------------------------------------------
+
+
+def test_the_jaimini_report_reads_from_the_karaka_kundali(jaimini):
+    """Abhyankar's frame in all fourteen worked charts, not the birth lagna."""
+    opening = jaimini.sections[0]
+    blob = " ".join(opening.notes)
+    assert "karaka-kundali" in blob
+    assert "Atmakaraka" in blob
+
+
+def test_jaimini_refuses_the_karaka_scheme_by_default(jaimini):
+    """saptanam astanam va - the sutra leaves it open, so the engine does."""
+    karakas = next(
+        s for s in jaimini.sections if s.title == "The Chara Karakas"
+    )
+    assert any("rank one" in r for r in karakas.refusals)
+    titled = [n for n in karakas.notes if "Rank " in n]
+    assert titled, "no karakas were listed at all"
+    assert sum(1 for n in titled if "Atmakaraka" in n) == 1
+    assert all(
+        "untitled" in n for n in titled if "Rank 1:" not in n
+    ), "a karaka below rank one was titled without a declared scheme"
+
+
+def test_declaring_the_scheme_titles_every_rank():
+    declared = build_jaimini(BIRTH, karaka_scheme="eight")
+    karakas = next(
+        s for s in declared.sections if s.title == "The Chara Karakas"
+    )
+    titled = [n for n in karakas.notes if "Rank " in n]
+    assert titled
+    assert not any("untitled" in n for n in titled)
+    assert not any("rank one" in r for r in karakas.refusals)
+
+
+def test_jaimini_refuses_chara_dasa_lengths_but_gives_the_sequence(jaimini):
+    dasa = next(s for s in jaimini.sections if s.title == "Chara Dasa")
+    assert any("No period LENGTHS" in r for r in dasa.refusals)
+    assert any("→" in n for n in dasa.notes), "the sequence should still show"
+
+
+def test_the_varnada_is_shown_but_refused_for_reading(jaimini):
+    lagnas = next(
+        s for s in jaimini.sections if s.title == "The Special Lagnas"
+    )
+    blob = " ".join(lagnas.notes)
+    if "Varnada falls" in blob:
+        assert any("is NOT read" in r for r in lagnas.refusals)
+
+
+def test_jaimini_computes_the_special_lagnas_rather_than_refusing(jaimini):
+    """They need only sunrise, which this package already computes."""
+    lagnas = next(
+        s for s in jaimini.sections if s.title == "The Special Lagnas"
+    )
+    blob = " ".join(lagnas.notes)
+    assert "Hora Lagna" in blob
+    assert "Ghatika Lagna" in blob
+
+
+def test_jaimini_says_it_is_not_merged_with_the_parasari_reading(jaimini):
+    limits = next(s for s in jaimini.sections if "Does Not Claim" in s.title)
+    blob = " ".join(limits.notes) + " ".join(
+        d.text for d in limits.delineations
+    )
+    assert "Parasari" in blob or "Parāśari" in blob
+
+
+BAD_ORDINAL = re.compile(r"(?<!\d)[123]th\b")
+
+
+def test_jaimini_house_ordinals_are_well_formed(jaimini):
+    """A formatting slip once printed 'the 2th' and 'the 3th'.
+
+    The pattern must not fire on 11th, 12th or 13th, which are correct and
+    end in the same two letters.
+    """
+    assert BAD_ORDINAL.search("the 2th") and not BAD_ORDINAL.search("the 12th")
+    for section in jaimini.sections:
+        for note in section.notes:
+            assert not BAD_ORDINAL.search(note), note[:80]
+
+
+def test_no_report_repeats_a_word_from_a_glued_note(jaimini):
+    """'untitled, because untitled:' shipped once; guard the seam."""
+    for section in jaimini.sections:
+        for note in section.notes:
+            assert "untitled, because untitled" not in note

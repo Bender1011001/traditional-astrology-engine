@@ -31,6 +31,7 @@ REPORT_ENGINES = {
     "indian_jyotisha": "vedic_report",
     "bazi": "bazi_report",
     "islamicate_al_qabisi": "islamicate_report",
+    "jaimini": "jaimini_report",
 }
 
 
