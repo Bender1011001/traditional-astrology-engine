@@ -156,11 +156,11 @@ MATURITY: dict[str, dict[str, Any]] = {
         "publication_readiness": "research only",
     },
     "ziwei_doushu": {
-        "category": CONSTRUCTION,
+        "category": PARTIAL_JUDGMENT,
         "source_readiness": "low - grade-D transcription, base facsimile unidentified",
-        "computational_readiness": "partial - palaces and month/hour stars; no bureau, no main stars",
-        "validation_coverage": "all 10 pack vectors reproduce; calendar-regime invariance tested",
-        "interpretation_readiness": "none - the pack forbids meaning before facsimile collation",
+        "computational_readiness": "high - palaces, month/hour stars, the five-phase bureau, and all fourteen main stars with their brightness",
+        "validation_coverage": "all 10 pack vectors reproduce; calendar-regime invariance tested; the recovered Zi Wei closed form reproduces every cell of all five printed grids and all ten day-one and day-two anchors stated in words",
+        "interpretation_readiness": "partial - juan 2's life-palace entry is quoted for whatever holds the life palace, where the pack rendered it; most cells are transcribed and unrendered",
         "publication_readiness": "research only",
     },
     "vietnamese": {

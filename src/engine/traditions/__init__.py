@@ -32,6 +32,7 @@ REPORT_ENGINES = {
     "bazi": "bazi_report",
     "islamicate_al_qabisi": "islamicate_report",
     "jaimini": "jaimini_report",
+    "ziwei_doushu": "ziwei_report",
 }
 
 

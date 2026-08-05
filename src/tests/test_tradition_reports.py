@@ -29,6 +29,9 @@ from src.engine.traditions.islamicate_report import (
 from src.engine.traditions.jaimini_report import (
     build_report as build_jaimini,
 )
+from src.engine.traditions.ziwei_report import (
+    build_report as build_ziwei,
+)
 from src.engine.traditions.report import (
     Delineation,
     redact_refused_topics,
@@ -67,6 +70,11 @@ def islamicate():
 @pytest.fixture(scope="module")
 def jaimini():
     return build_jaimini(BIRTH)
+
+
+@pytest.fixture(scope="module")
+def ziwei():
+    return build_ziwei(BIRTH)
 
 
 
@@ -591,3 +599,92 @@ def test_no_report_repeats_a_word_from_a_glued_note(jaimini):
     for section in jaimini.sections:
         for note in section.notes:
             assert "untitled, because untitled" not in note
+
+
+# --- Zi Wei ------------------------------------------------------------------
+
+
+def test_the_ziwei_board_is_no_longer_empty(ziwei):
+    """The panel stopped at constructed_palaces_only - twelve empty palaces."""
+    stars = next(
+        s for s in ziwei.sections if s.title == "The Fourteen Main Stars"
+    )
+    blob = " ".join(stars.notes)
+    assert "紫微" in blob
+    assert "破軍" in blob
+    named = sum(1 for n in stars.notes if n.startswith("- **"))
+    assert named == 14, f"expected all fourteen listed, got {named}"
+
+
+def test_the_bureau_is_named_and_shown_as_a_derivation(ziwei):
+    stars = next(
+        s for s in ziwei.sections if s.title == "The Fourteen Main Stars"
+    )
+    blob = " ".join(stars.notes)
+    assert "局" in blob, "the five-phase bureau was not named"
+    assert "nowhere printed as a grid" in blob
+
+
+def test_a_disagreeing_calendar_never_yields_a_single_clean_board(ziwei):
+    """Choosing a meridian would manufacture certainty the engine lacks."""
+    calendar = next(
+        s for s in ziwei.sections
+        if s.title == "Which Calendar This Chart Assumes"
+    )
+    blob = " ".join(calendar.notes)
+    stars = next(
+        s for s in ziwei.sections if s.title == "The Fourteen Main Stars"
+    )
+    if "not** invariant" in blob:
+        assert stars.refusals, (
+            "the lunar day is disputed but no star placement was qualified"
+        )
+        assert any("moves with the calendar" in n for n in stars.notes)
+    else:
+        assert not any("moves with the calendar" in n for n in stars.notes)
+
+
+def test_every_regime_the_gate_ran_is_shown(ziwei):
+    calendar = next(
+        s for s in ziwei.sections
+        if s.title == "Which Calendar This Chart Assumes"
+    )
+    listed = [n for n in calendar.notes if n.startswith("- **")]
+    assert len(listed) >= 3, "the invariance gate ran on fewer regimes"
+
+
+def test_ziwei_delineations_are_quoted_with_their_source(ziwei):
+    for section in ziwei.sections:
+        for d in section.delineations:
+            assert d.rule_id.startswith("ziwei."), d.rule_id
+            assert "Quanshu" in d.source, d.source
+
+
+def test_untranslated_cells_are_reported_as_transcribed_not_missing(ziwei):
+    """The Chinese is on disk; calling it missing would be false."""
+    life = next(
+        s for s in ziwei.sections if s.title == "The Life Palace and Its Stars"
+    )
+    blob = " ".join(life.notes)
+    if "Transcribed but not rendered" in blob:
+        assert "different state from missing" in blob
+
+
+def test_the_ziwei_limits_name_the_evidence_grade(ziwei):
+    limits = next(s for s in ziwei.sections if "Does Not Claim" in s.title)
+    blob = " ".join(limits.notes)
+    assert "evidence grade" in blob
+    assert "unreviewed" in blob
+
+
+def test_no_report_engine_is_registered_without_being_importable():
+    """REPORT_ENGINES is the index; a stale name would fail silently."""
+    from importlib import import_module
+
+    from src.engine.traditions import REPORT_ENGINES
+
+    for tradition_id, module_name in REPORT_ENGINES.items():
+        module = import_module(
+            f".{module_name}", "src.engine.traditions"
+        )
+        assert hasattr(module, "build_report"), tradition_id
