@@ -16,6 +16,9 @@
     # machine-readable
     python scripts/multitradition_chart.py ... --json
 
+    # one FULL report per tradition, written as separate files
+    python scripts/multitradition_chart.py ... --reports out/
+
 Run with no arguments to use the built-in sample birth.
 
 Every section prints its evidence grade, and every disclosure the section made
@@ -37,6 +40,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.engine.multitradition import build_panel  # noqa: E402
 from src.engine.multitradition.types import BirthInput  # noqa: E402
+from src.engine.traditions import (  # noqa: E402
+    REPORT_ENGINES,
+    build_tradition_report,
+)
+from src.engine.traditions.report import render_layered  # noqa: E402
 
 GRADE_LABEL = {
     "live_engine": "LIVE ENGINE",
@@ -68,6 +76,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--full", action="store_true", help="print each section's raw facts")
     p.add_argument("--json", action="store_true", help="emit the whole panel as JSON")
     p.add_argument("--html", metavar="PATH", help="write a self-contained HTML page")
+    p.add_argument(
+        "--reports", metavar="DIR",
+        help="write one FULL report per tradition into DIR, as separate files",
+    )
     return p.parse_args(argv)
 
 
@@ -338,10 +350,65 @@ padding-top:1rem;margin-top:2rem}
     return "\n".join(parts)
 
 
+def write_reports(
+    birth: BirthInput, out_dir: str, only: list[str] | None
+) -> int:
+    """One FULL report per tradition, each written as its own file.
+
+    The panel is a comparison instrument - fifteen short sections on one
+    screen. These are the other thing: a complete reading per tradition, in
+    that tradition's own judgment order.
+
+    A tradition named with --only that has no engine yet is reported by name
+    rather than skipped, because a missing file is indistinguishable from a
+    tradition nobody has looked at, and several tracks in this corpus hold
+    rules while still waiting for an engine.
+    """
+    directory = Path(out_dir)
+    directory.mkdir(parents=True, exist_ok=True)
+    written: list[str] = []
+    failed: list[str] = []
+    for tradition_id in sorted(REPORT_ENGINES):
+        if only and tradition_id not in only:
+            continue
+        try:
+            report = build_tradition_report(tradition_id, birth)
+        except Exception as exc:  # one bad track must not stop the rest
+            failed.append(f"{tradition_id}: {type(exc).__name__}: {exc}")
+            continue
+        path = directory / f"{tradition_id}.md"
+        path.write_text(render_layered(report), encoding="utf-8")
+        written.append(
+            f"  {path}  ({len(report.sections)} sections, "
+            f"{report.delineation_count} delineations, "
+            f"{report.word_count:,} words)"
+        )
+
+    missing = sorted(set(only or []) - set(REPORT_ENGINES))
+    print(f"wrote {len(written)} report(s) to {directory}/")
+    for line in written:
+        print(line)
+    if missing:
+        print()
+        print("no report engine yet for: " + ", ".join(missing))
+        print(
+            "  (these tracks may still hold rules; what is missing is an "
+            "engine, not the sources)"
+        )
+    if failed:
+        print()
+        print("failed:")
+        for line in failed:
+            print(f"  {line}")
+    return 1 if (failed or missing) else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if args.reports:
+        return write_reports(birth_from(args), args.reports, args.only)
     panel = build_panel(birth_from(args))
 
     if args.json:

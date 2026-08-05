@@ -688,3 +688,34 @@ def test_no_report_engine_is_registered_without_being_importable():
             f".{module_name}", "src.engine.traditions"
         )
         assert hasattr(module, "build_report"), tradition_id
+
+
+def test_the_chart_tool_writes_one_report_per_tradition(tmp_path):
+    """The deliverable: one birth in, a separate full report per tradition."""
+    import sys
+
+    sys.path.insert(0, "scripts")
+    from multitradition_chart import write_reports
+
+    from src.engine.traditions import REPORT_ENGINES
+
+    code = write_reports(BIRTH, str(tmp_path), None)
+    assert code == 0
+    written = sorted(p.name for p in tmp_path.glob("*.md"))
+    assert written == sorted(f"{t}.md" for t in REPORT_ENGINES)
+    for path in tmp_path.glob("*.md"):
+        text = path.read_text(encoding="utf-8")
+        assert len(text.split()) > 200, path.name
+
+
+def test_a_tradition_without_an_engine_is_named_not_skipped(tmp_path):
+    """A missing file looks the same as a tradition nobody looked at."""
+    import sys
+
+    sys.path.insert(0, "scripts")
+    from multitradition_chart import write_reports
+
+    code = write_reports(BIRTH, str(tmp_path), ["babylonian", "jaimini"])
+    assert code == 1, "an unengined tradition must be reported, not ignored"
+    assert (tmp_path / "jaimini.md").exists()
+    assert not (tmp_path / "babylonian.md").exists()
