@@ -23,6 +23,9 @@ import pytest
 from src.engine.multitradition import build_panel
 from src.engine.multitradition.types import BirthInput
 from src.engine.traditions.bazi_report import build_report as build_bazi
+from src.engine.traditions.islamicate_report import (
+    build_report as build_islamicate,
+)
 from src.engine.traditions.report import (
     Delineation,
     redact_refused_topics,
@@ -51,6 +54,12 @@ def vedic():
 @pytest.fixture(scope="module")
 def bazi():
     return build_bazi(BIRTH)
+
+
+@pytest.fixture(scope="module")
+def islamicate():
+    return build_islamicate(BIRTH)
+
 
 
 # --- clause-level policy -----------------------------------------------------
@@ -386,3 +395,92 @@ def test_mathesis_sect_split_cells_select_by_chart_sect(hellenistic):
     )
     assert "only for nocturnal nativities" in all_refusals
     assert "withheld" in all_refusals  # Sun-12's demeaning-status cell
+
+
+# --- the Islamicate report ---------------------------------------------------
+
+
+def test_the_islamicate_report_actually_says_something(islamicate):
+    """Eighty-six mined rules had no engine at all until this report existed."""
+    assert islamicate.delineation_count >= 20
+    assert islamicate.word_count >= 1500
+    titles = [s.title for s in islamicate.sections]
+    for wanted in ("The Dignities, and Who Prevails", "The Lots",
+                   "The Hyleg and the Kadkhudah"):
+        assert wanted in titles
+
+
+def test_the_kadkhudah_years_are_refused_wherever_the_hyleg_is_reported(
+    islamicate,
+):
+    """Structure may be shown. A lifespan may not, and the pack agrees."""
+    hyleg = next(
+        s for s in islamicate.sections if s.title.startswith("The Hyleg")
+    )
+    assert any("YEARS are not given" in r for r in hyleg.refusals)
+    blob = " ".join(hyleg.notes) + " ".join(
+        d.text for d in hyleg.delineations
+    )
+    assert not LIFESPAN_LEAK.search(blob), (
+        "a lifespan phrase reached the hyleg section"
+    )
+
+
+def test_a_conditional_hyleg_says_what_it_is_conditional_on(islamicate):
+    """The uncomputed prenatal syzygy must not read as a failed candidate."""
+    hyleg = next(
+        s for s in islamicate.sections if s.title.startswith("The Hyleg")
+    )
+    blob = " ".join(hyleg.notes)
+    if "conditional" in blob:
+        assert "syzygy" in blob.lower()
+        assert "not a failed one" in blob
+
+
+def test_the_limits_section_does_not_disclaim_what_the_report_delivered(
+    islamicate,
+):
+    """al-Biruni's gated list names layers al-Qabisi's pack actually supplies."""
+    limits = next(
+        s for s in islamicate.sections if "Does Not Claim" in s.title
+    )
+    blob = " ".join(limits.notes).lower()
+    lots = next(s for s in islamicate.sections if s.title == "The Lots")
+    if lots.notes:
+        assert "al-qabisi introduction doctrine" not in blob
+
+
+def test_every_islamicate_delineation_carries_a_source_and_a_rule_id(
+    islamicate,
+):
+    for section in islamicate.sections:
+        for d in section.delineations:
+            assert d.rule_id and d.source, d.text[:60]
+
+
+# --- Valens now fires --------------------------------------------------------
+
+
+def test_valens_reaches_the_hellenistic_page(hellenistic):
+    """The module's docstring once said Valens contributes nothing."""
+    fired = [
+        d
+        for s in hellenistic.sections
+        for d in s.delineations
+        if "valens" in d.rule_id
+    ]
+    assert len(fired) >= 5, "the Valens pack loads but barely fires"
+
+
+def test_a_topic_chapter_reports_its_undecided_conditions(hellenistic):
+    """Valens gates travel on chronocrators this engine does not compute."""
+    travel = next(
+        (s for s in hellenistic.sections
+         if s.title.startswith("Foreign Travel")),
+        None,
+    )
+    if travel is None:
+        pytest.skip("no travel chapter is loaded in this pack")
+    blob = " ".join(travel.notes)
+    assert "cannot be decided" in blob
+    assert "distribution" in blob

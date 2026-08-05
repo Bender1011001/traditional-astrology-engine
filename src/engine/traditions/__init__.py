@@ -23,4 +23,34 @@ from __future__ import annotations
 
 from .report import ReportSection, TraditionReport, render_markdown
 
-__all__ = ["ReportSection", "TraditionReport", "render_markdown"]
+#: The traditions that have a full report engine, mapped to their module. Kept
+#: as names rather than imports so that adding a tradition does not make every
+#: importer of this package pay for every engine's manifests.
+REPORT_ENGINES = {
+    "hellenistic": "hellenistic_report",
+    "indian_jyotisha": "vedic_report",
+    "bazi": "bazi_report",
+    "islamicate_al_qabisi": "islamicate_report",
+}
+
+
+def build_tradition_report(tradition_id: str, birth, **kwargs):
+    """Build the full report for one tradition.
+
+    Raises KeyError for a tradition that has rules but no engine yet, which is
+    a real and reportable state: the corpus carries several such tracks, and
+    silently returning an empty report would hide them.
+    """
+    from importlib import import_module
+
+    module = import_module(f".{REPORT_ENGINES[tradition_id]}", __package__)
+    return module.build_report(birth, **kwargs)
+
+
+__all__ = [
+    "REPORT_ENGINES",
+    "ReportSection",
+    "TraditionReport",
+    "build_tradition_report",
+    "render_markdown",
+]

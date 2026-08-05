@@ -9,10 +9,14 @@ loaded WHEN PRESENT, so the report grows as extraction lands without an engine
 change. Firmicus' sect-splits are honoured: a cell that differentiates by day
 and by night is selected by the chart's actual sect.
 
-What this engine will not pretend: Valens contributes nothing (his OCR holds
-zero Greek codepoints), no worked nativity exists anywhere in the fetched
-Hellenistic corpus, and rules whose conditions the engine cannot decide are
-listed as undecided rather than fired because they sound apt.
+Valens now speaks too. His Anthologiae pack was mined from page images after
+the OCR proved to hold zero Greek codepoints, and his topical chapters on
+marriage and foreign travel are judged against the chart in his own vocabulary
+(see valens_facts). That judgment is tri-valued on purpose: he leans on a
+distribution of times this engine does not compute, so a rule gated on a
+chronocrator comes back undecided and is REPORTED undecided, never counted as
+ruled out. Rules whose conditions the engine cannot decide are listed as
+undecided rather than fired because they sound apt.
 """
 
 from __future__ import annotations
@@ -26,14 +30,30 @@ from ..multitradition import build_panel
 from ..multitradition.types import BirthInput
 from .report import Delineation, ReportSection, TraditionReport
 from .synthesis import synthesize
+from .valens_facts import CONFIGURED_METHODS, ValensChart, evaluate
 
 RESEARCH_ROOT = (
     Path(__file__).resolve().parents[3] / "docs" / "research" / "multitradition"
 )
-DOCTRINE_MANIFEST = RESEARCH_ROOT / "hellenistic" / "delineation_rule_manifest.json"
+HELLENISTIC_RESEARCH = RESEARCH_ROOT / "hellenistic"
+DOCTRINE_MANIFEST = HELLENISTIC_RESEARCH / "delineation_rule_manifest.json"
 MATHESIS_MANIFEST = (
-    RESEARCH_ROOT / "hellenistic" / "mathesis_delineation_rule_manifest.json"
+    HELLENISTIC_RESEARCH / "mathesis_delineation_rule_manifest.json"
 )
+VALENS_MANIFEST = (
+    HELLENISTIC_RESEARCH / "valens_delineation_rule_manifest.json"
+)
+
+
+def _manifest_paths() -> list[Path]:
+    """Every rule manifest in the Hellenistic research directory.
+
+    Globbed rather than listed so a new extraction pass is picked up without an
+    engine change; the two named packs are kept first so their ids win any tie.
+    """
+    named = [DOCTRINE_MANIFEST, MATHESIS_MANIFEST, VALENS_MANIFEST]
+    found = sorted(HELLENISTIC_RESEARCH.glob("*rule_manifest.json"))
+    return named + [p for p in found if p not in named]
 
 ORDINAL = {
     1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th", 6: "6th",
@@ -46,11 +66,11 @@ FIRE_SIGNS = {"Aries", "Leo", "Sagittarius"}
 @lru_cache(maxsize=1)
 def _rules_by_id() -> dict[str, dict[str, Any]]:
     rules: dict[str, dict[str, Any]] = {}
-    for path in (DOCTRINE_MANIFEST, MATHESIS_MANIFEST):
+    for path in _manifest_paths():
         if path.exists():
             data = json.loads(path.read_text(encoding="utf-8"))
-            for r in data["rules"]:
-                rules[r["rule_id"]] = r
+            for r in data.get("rules", []):
+                rules.setdefault(r["rule_id"], r)
     return rules
 
 
@@ -167,7 +187,15 @@ def build_report(birth: BirthInput) -> TraditionReport:
     _sect_section(report, facts, is_day, placements)
     _ascendant_section(report, facts)
     _planets_section(report, facts, is_day, placements)
-    _lots_section(report, facts)
+    _lots_section(report, facts, is_day)
+    _valens_doctrine_section(report, facts, is_day)
+    _valens_topic_section(
+        report, facts, "marriage", "Marriage, after Valens", "b2.marriage"
+    )
+    _valens_topic_section(
+        report, facts, "foreign travel", "Foreign Travel, after Valens",
+        "b2.travel",
+    )
     _undecided_section(report)
     fired = [d for s in report.sections for d in s.delineations]
     report.sections.insert(1, synthesize(fired, None, tradition="hellenistic"))
@@ -304,6 +332,12 @@ def _planets_section(
                 sub.delineations.append(d)
         # Mathesis cells (present once the extraction lands; sect-aware).
         planet_lower = p["body"].lower()
+        d = _fire(
+            f"hel.valens.b1.planet_nature.{planet_lower}",
+            f"{p['body']}'s nature, stated by Valens",
+        )
+        if d:
+            sub.delineations.append(d)
         for rid_pattern, block, key in (
             (f"hel.mathesis.b3.planet_in_house.{planet_lower}",
              "results_by_house", str(p["whole_sign_house"])),
@@ -322,7 +356,7 @@ def _planets_section(
                 sub.refusals.append(refusal)
 
 
-def _lots_section(report: TraditionReport, facts: dict) -> None:
+def _lots_section(report: TraditionReport, facts: dict, is_day: bool) -> None:
     s = report.add(ReportSection("The Hermetic Lots", level=2))
     lots = facts.get("lots", {})
     rows = []
@@ -341,6 +375,28 @@ def _lots_section(report: TraditionReport, facts: dict) -> None:
         "Fortune and Spirit reverse their formula by sect, which this chart's "
         "sect has already decided above."
     )
+    # Valens states the Lot of Fortune doctrine conditioned on sect; his rule
+    # carries conditions {chart.sect == day}, so fire it only when it matches.
+    lot_rule = _rules_by_id().get("hel.valens.b2.lot_of_fortune")
+    if lot_rule is not None:
+        want = None
+        for cond in (lot_rule.get("conditions", {}) or {}).get("all", []):
+            if cond.get("fact") == "chart.sect":
+                want = cond.get("value")
+        if want is None or want == ("day" if is_day else "night"):
+            d = _fire(
+                "hel.valens.b2.lot_of_fortune",
+                f"Valens' Lot of Fortune doctrine for a {'diurnal' if is_day else 'nocturnal'} chart",
+            )
+            if d:
+                s.delineations.append(d)
+        else:
+            s.refusals.append(
+                "Valens states his Lot of Fortune doctrine for "
+                f"{want} nativities; this chart is "
+                f"{'diurnal' if is_day else 'nocturnal'}, so his statement is "
+                "not quoted here rather than being applied across the sect line."
+            )
 
 
 def _undecided_section(report: TraditionReport) -> None:
@@ -394,3 +450,118 @@ def _limits(report: TraditionReport) -> None:
         "by condition, not points. The 5/4/3/2/1 table is al-Qabisi's and the "
         "scored version of this sky lives in the Latin-European section.",
     ])
+
+
+def _valens_topic_section(
+    report: TraditionReport, facts: dict, topic: str, title: str, tag: str
+) -> None:
+    """Judge Valens' topical chapter against this chart, tri-valued.
+
+    Everything he states as a condition is tested; what fires is quoted, what
+    the chart denies is counted, and what this engine cannot decide is named
+    fact by fact rather than being folded in among the denials.
+    """
+    chart = ValensChart(facts)
+    s = report.add(ReportSection(title, level=2))
+    denied = 0
+    undecided: dict[str, int] = {}
+    for rule_id, rule in sorted(_rules_by_id().items()):
+        if tag not in rule_id:
+            continue
+        conds = rule.get("conditions") or {}
+        flat = [
+            c for grp in conds.values() if isinstance(grp, list) for c in grp
+        ]
+        # Chapter headings and method statements are keyed on the topic itself
+        # rather than on the chart; they frame the section, they do not judge.
+        if any(
+            c.get("fact") in ("chapter.topic", "technique.step") for c in flat
+        ):
+            d = _fire(rule_id, f"Valens opens his chapter on {topic}")
+            if d:
+                s.delineations.append(d)
+            continue
+        verdict, unknowns = evaluate(rule, chart)
+        if verdict == "pass":
+            d = _fire(rule_id, _valens_trigger(rule))
+            if d:
+                s.delineations.append(d)
+            else:
+                s.refusals.append(
+                    f"{rule_id}: this chart meets Valens' conditions, but the "
+                    "pack withholds the statement from publication."
+                )
+        elif verdict == "fail":
+            denied += 1
+        else:
+            for fact_name in unknowns:
+                undecided[fact_name] = undecided.get(fact_name, 0) + 1
+
+    if not s.delineations and not undecided and not denied:
+        report.sections.remove(s)
+        return
+
+    n = len(s.delineations)
+    s.notes.insert(0, (
+        f"{n} of Valens' statements on {topic} "
+        f"{'is' if n == 1 else 'are'} met by this chart; {denied} "
+        f"{'is' if denied == 1 else 'are'} ruled out by it."
+    ))
+    if undecided:
+        top = sorted(undecided.items(), key=lambda kv: -kv[1])[:6]
+        s.notes.append(
+            f"{sum(undecided.values())} further conditions cannot be decided "
+            "here. This engine does not compute Valens' distribution of times, "
+            "so a rule gated on a chronocrator stays open instead of being "
+            "counted against the chart. Most often wanted: "
+            + ", ".join(f"{k} ({n})" for k, n in top) + "."
+        )
+    for method in sorted(chart.used_methods):
+        s.notes.append("configured_method - " + CONFIGURED_METHODS[method])
+
+
+def _valens_trigger(rule: dict) -> str:
+    """Name the conditions that let this rule fire."""
+    conds = rule.get("conditions") or {}
+    flat = [c for grp in conds.values() if isinstance(grp, list) for c in grp]
+    return "Valens' condition met: " + ", ".join(
+        c.get("fact", "?") for c in flat[:3]
+    )
+
+
+def _valens_doctrine_section(
+    report: TraditionReport, facts: dict, is_day: bool
+) -> None:
+    """Valens' method chapters, fired where the chart decides them.
+
+    His triplicity lords, trigons and chronocrator doctrine are chart-general
+    statements of method rather than per-placement cells, so they belong in
+    their own section instead of being scattered through the planets.
+    """
+    s = report.add(ReportSection("Valens on Method", level=2))
+    fired = 0
+    for rule_id, trigger in (
+        ("hel.valens.b2.triplicity_lords",
+         "Valens' own triplicity-lord assignment"),
+        ("hel.valens.b2.trigons", "Valens on the trigons"),
+        ("hel.valens.b2.lord_of_hour_or_lot",
+         "Valens on the lord of the hour and of the lot"),
+        ("hel.valens.b2.active_inactive_times.method",
+         "Valens on active and inactive times (chronocrators)"),
+        ("hel.valens.b1.combination.preface",
+         "Valens' preface to the planet-pair combinations"),
+    ):
+        d = _fire(rule_id, trigger)
+        if d:
+            s.delineations.append(d)
+            fired += 1
+    if not fired:
+        s.notes.append(
+            "No Valens method chapter is encoded in the loaded pack."
+        )
+        return
+    s.notes.insert(0, (
+        f"{fired} method statement(s) from the Anthologiae. These are the "
+        "tradition's own procedure, not per-placement delineation, so they are "
+        "stated once here rather than repeated under each planet."
+    ))

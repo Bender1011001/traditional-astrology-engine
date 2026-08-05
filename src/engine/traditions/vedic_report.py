@@ -24,6 +24,21 @@ from pathlib import Path
 from typing import Any
 
 from ..multitradition import build_panel
+from ..multitradition.jyotisha_strength import (
+    ashtakavarga,
+    sadbala,
+    sarva_grade,
+)
+from ..multitradition.jyotisha_strength_inputs import (
+    RASIS,
+    build_strength_inputs,
+    local_datetime,
+)
+from ..multitradition.jyotisha_varga import (
+    VARGA_PURPOSE,
+    all_vargas,
+    vimsopaka_bala,
+)
 from ..multitradition.types import BirthInput
 from .report import Delineation, ReportSection, TraditionReport
 
@@ -234,7 +249,10 @@ def build_report(birth: BirthInput) -> TraditionReport:
     synthesis_section = synthesize(fired, facts, tradition="jyotisha")
     report.sections.insert(1, synthesis_section)
     _bhavas_section(report, facts, houses, lordships, grahas)
-    _yogas_section(report, facts)
+    strength = _strength_of(birth, facts)
+    _strength_section(report, facts, strength)
+    _yogas_section(report, facts, strength)
+    _vargas_section(report, facts, grahas, strength)
     _dasha_section(report, facts)
     _navamsha_section(report, facts, grahas)
     _drishti_section(report, facts)
@@ -466,7 +484,273 @@ def _bhavas_section(
             )
 
 
-def _yogas_section(report: TraditionReport, facts: dict) -> None:
+def _strength_of(birth: BirthInput, facts: dict) -> dict[str, Any]:
+    """Sadbala and Ashtakavarga for this nativity, or an honest blank.
+
+    Wrapped because a strength failure must not take the report down with it:
+    a chart that cannot be weighed is still a chart that can be read, and the
+    section says so rather than the whole report vanishing.
+    """
+    try:
+        moment = local_datetime(
+            birth.civil_date, birth.civil_time, birth.utc_offset_hours
+        )
+        inputs, provenance = build_strength_inputs(
+            facts, moment, birth.latitude, birth.longitude
+        )
+        pindas = sadbala(inputs)
+        positions = {
+            row["graha"]: RASIS.index(row["rasi"])
+            for row in facts.get("grahas", [])
+            if row.get("graha")
+            in ("Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn")
+        }
+        lagna_rasi = (facts.get("lagna") or {}).get("rasi")
+        if lagna_rasi:
+            positions["Lagna"] = RASIS.index(lagna_rasi)
+        graha_rasis = {g: RASIS[i] for g, i in positions.items() if g != "Lagna"}
+        av = ashtakavarga(positions, graha_rasis) if lagna_rasi else None
+        return {
+            "sadbala": pindas,
+            "provenance": provenance,
+            "ashtakavarga": av,
+            "error": None,
+        }
+    except Exception as exc:  # the report survives a strength failure
+        return {
+            "sadbala": {},
+            "provenance": {},
+            "ashtakavarga": None,
+            "error": f"{type(exc).__name__}: {exc}",
+        }
+
+
+def _strength_section(
+    report: TraditionReport, facts: dict, strength: dict[str, Any]
+) -> None:
+    """Shadbala and Ashtakavarga - the arbiter the text itself supplies."""
+    s = report.add(ReportSection("Strength: Sadbala and Ashtakavarga", level=2))
+    if strength.get("error"):
+        s.refusals.append(
+            "The strength of the grahas could not be computed for this "
+            f"nativity: {strength['error']}. Nothing below is weighed."
+        )
+        return
+    pindas = strength["sadbala"]
+    prov = strength["provenance"]
+    s.notes.append(
+        "BPHS uttara 2 makes strength the arbiter: among the grahas that "
+        "cause a yoga, the strongest of them is the one that gives its "
+        "result. Every figure below is in rupas, one rupa being sixty "
+        "virupas, as the 1899 printing writes them."
+    )
+    for graha, v in pindas.items():
+        pinda = v["sadbala_pinda"]
+        if pinda is None:
+            s.notes.append(f"- **{graha}** - undecided; some limb has no input.")
+            continue
+        verdict = "at or above" if v["meets_minimum"] else "below"
+        s.notes.append(
+            f"- **{graha}** - {v['sadbala_pinda_rupas']} rupas, {verdict} the "
+            f"{v['required_minimum_virupas']:.0f}-virupa minimum this "
+            f"recension sets for the {v['minimum_class']} class."
+        )
+    s.notes.append(
+        "The minima are this recension's, which groups the seven into three "
+        "classes at 6|32, 5|53 and 4|13 rupas. The modern handbooks give each "
+        "graha its own figure and disagree with it; nothing here is "
+        "normalised to them."
+    )
+    for item in prov.get("withheld", []):
+        s.notes.append(f"Not supplied - {item}.")
+    lords = prov.get("time_lords") or {}
+    if any(lords.values()):
+        s.notes.append(
+            "The time-lords this chart's kala-bala rests on: year "
+            f"{lords.get('varshesa')}, month {lords.get('masesa')}, day "
+            f"{lords.get('dinesa')}, hora {lords.get('horesa')}."
+        )
+
+    av = strength.get("ashtakavarga")
+    if not av:
+        return
+    sub = report.add(ReportSection("Ashtakavarga", level=3))
+    sub.notes.append(
+        "Rekha is the scored mark and karana/bindu is the blank. Much popular "
+        "writing has this exactly backwards, and the chapter lists the blanks "
+        "first, so a reader who takes the first list for the scoring list "
+        "builds every table inverted."
+    )
+    sarva = av["sarvashtakavarga"]
+    sub.notes.append(
+        f"Sarvashtakavarga totals {av['sarva_total']} rekhas across the twelve "
+        "rasis, which is the figure the seven tables must sum to."
+    )
+    ranked = sorted(sarva.items(), key=lambda kv: -kv[1])
+    for rasi, n in ranked[:3]:
+        sub.notes.append(f"- {rasi}: {n} rekhas - {sarva_grade(n)}.")
+    weakest = ranked[-1]
+    sub.notes.append(
+        f"- {weakest[0]}: {weakest[1]} rekhas - {sarva_grade(weakest[1])}, the "
+        "least supported rasi in this chart."
+    )
+    thin = [g for g, n in (av.get("own_varga_rekhas") or {}).items() if n < 4]
+    if thin:
+        sub.notes.append(
+            "Below four rekhas in its own varga, which the chapter marks for "
+            "distress rather than comfort: " + ", ".join(sorted(thin)) + "."
+        )
+
+
+def _vargas_section(
+    report: TraditionReport,
+    facts: dict,
+    grahas: list,
+    strength: dict[str, Any],
+) -> None:
+    """The divisional charts, and the question each one answers.
+
+    The engine computed D1 and D9 and nothing else. A reader asked about work
+    and shown only those two has been handed the wrong instrument: the chapter
+    names D10 for career, D7 for children, D12 for parents, D4 for fortune.
+    """
+    s = report.add(ReportSection("Divisional Charts (Vargas)", level=2))
+    if not (facts.get("lagna") or {}).get("rasi"):
+        return
+    s.notes.append(
+        "Nine of the sixteen vargas have their computation rule read from "
+        "BPHS purva 3 and are given here. Six more - D16, D20, D24, D27, D40, "
+        "D45 - are named by the chapter but their defining slokas were not "
+        "read in the mining pass. They are unmined, not unavailable."
+    )
+    s.notes.append(
+        "What each answers: "
+        + "; ".join(f"{d} {p}" for d, p in VARGA_PURPOSE.items())
+        + "."
+    )
+    naisargika = facts.get("naisargika_relations", {}) or {}
+    rasi_index = {
+        row["graha"]: RASIS.index(row["rasi"])
+        for row in grahas
+        if row.get("rasi") and row.get("graha")
+    }
+    for row in grahas:
+        graha = row.get("graha")
+        if graha not in rasi_index or graha not in VIMSOPAKA_GRAHAS:
+            continue
+        lon = rasi_index[graha] * 30.0 + float(row["degree_in_sign"])
+        places = all_vargas(lon)
+        sub = report.add(ReportSection(f"{graha} across the vargas", level=3))
+        sub.notes.append(
+            ", ".join(
+                f"{d} {places[d]}"
+                for d in ("D1", "D2", "D3", "D4", "D7", "D9", "D10", "D12",
+                          "D60")
+                if d in places
+            )
+            + f"; D30 lord {places['D30']}."
+        )
+        vim = vimsopaka_bala(graha, lon, naisargika, rasi_index)
+        sub.notes.append(
+            f"Vimsopaka (saptavarga): {vim['total_vishvas']:.2f} of 20 - "
+            f"{vim['grade']}."
+        )
+        if graha == "Sun":
+            s.notes.append(vim["relation_disclosure"])
+    s.notes.append(
+        "Only the shadvarga and saptavarga vimsopaka schemes are offered. The "
+        "dasavarga and shodasavarga schemes need the six unmined vargas, and "
+        "a total computed without them would carry a precise-looking "
+        "denominator it had not earned."
+    )
+
+
+VIMSOPAKA_GRAHAS = (
+    "Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn",
+)
+
+
+def _pinda(strength: dict[str, Any] | None, graha: str) -> float | None:
+    if not strength:
+        return None
+    row = (strength.get("sadbala") or {}).get(graha)
+    return row.get("sadbala_pinda") if row else None
+
+
+def _adjudicate_yogas(
+    section: ReportSection, yogas: list, strength: dict[str, Any] | None
+) -> None:
+    """Execute BPHS uttara 2.44-45 across the whole set of yogas.
+
+    "Where many yogas are obtained, this is declared to be the rule" - the
+    strongest of the grahas causing them is the one whose result arrives. A
+    composer that lists every yoga side by side has detected them without
+    judging them, which is the step the text says not to skip.
+    """
+    causes: dict[str, list[str]] = {}
+    for y in yogas:
+        for graha in y.get("grahas", []) or []:
+            causes.setdefault(graha, []).append(y["yoga"])
+    weighed = {
+        g: _pinda(strength, g) for g in causes if _pinda(strength, g) is not None
+    }
+    if len(weighed) < 2:
+        if causes and not weighed:
+            section.notes.append(
+                "The text ranks these by strength, and the strength of the "
+                "grahas that cause them could not be computed here, so they "
+                "are listed unranked - which is a gap, not a reading."
+            )
+        return
+    order = sorted(weighed.items(), key=lambda kv: -kv[1])
+    top, top_value = order[0]
+    section.notes.append(
+        "BPHS uttara 2.44-45: among the grahas that cause a yoga, the "
+        "strongest of them is the one that gives its result. By Ṣaḍbala the "
+        "causes here rank "
+        + ", ".join(
+            f"{g} ({strength['sadbala'][g]['sadbala_pinda_rupas']})"
+            for g, _ in order
+        )
+        + f". So **{top}** carries this chart's yogas: "
+        + ", ".join(sorted(set(causes[top])))
+        + "."
+    )
+    unweighed = [g for g in causes if g not in weighed]
+    if unweighed:
+        section.notes.append(
+            "Left out of that ranking because their strength is undecided: "
+            + ", ".join(sorted(unweighed))
+            + ". They are not ranked last; they are not ranked at all."
+        )
+
+
+def _rank_within_yoga(
+    section: ReportSection, yoga: dict, strength: dict[str, Any] | None
+) -> None:
+    """Name the strongest cause of a single yoga, where it has more than one."""
+    grahas = yoga.get("grahas") or []
+    if len(grahas) < 2:
+        return
+    weighed = {g: _pinda(strength, g) for g in grahas}
+    if any(v is None for v in weighed.values()):
+        section.notes.append(
+            "The strongest of this yoga's causes cannot be named: "
+            + ", ".join(g for g, v in weighed.items() if v is None)
+            + " has no decidable Ṣaḍbala."
+        )
+        return
+    winner = max(weighed.items(), key=lambda kv: kv[1])[0]
+    section.notes.append(
+        f"- Of its causes, **{winner}** is the strongest by Ṣaḍbala "
+        f"({strength['sadbala'][winner]['sadbala_pinda_rupas']} rūpas), and by "
+        "uttara 2.44 it is the one that gives the result."
+    )
+
+
+def _yogas_section(
+    report: TraditionReport, facts: dict, strength: dict[str, Any] | None = None
+) -> None:
     s = report.add(ReportSection("Yogas Present in This Chart", level=2))
     yogas = facts.get("yogas") or []
     if not yogas:
@@ -489,11 +773,13 @@ def _yogas_section(report: TraditionReport, facts: dict) -> None:
         "Neechabhanga": "jyotisha.phaladeepika.neechabhanga_rajayoga",
         "Raja Yoga": "jyotisha.phaladeepika.four_rajayogas",
     }
+    _adjudicate_yogas(s, yogas, strength)
     for y in yogas:
         sub = report.add(ReportSection(y["yoga"], level=3))
         sub.notes.append(f"**{y.get('summary', '')}** Rule: {y.get('rule', '')}")
         for fact in y.get("constituent_facts", []):
             sub.notes.append(f"- {fact}")
+        _rank_within_yoga(sub, y, strength)
         rule_id = next(
             (rid for key, rid in yoga_rule_map.items() if key.lower() in y["yoga"].lower()),
             None,

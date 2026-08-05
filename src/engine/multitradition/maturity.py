@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from typing import Any
 
-ASSESSED = "2026-08-03"
+ASSESSED = "2026-08-05"
 
 # Category vocabulary - the honest coverage summary is grouped by these.
 NATAL_REPORT = "natal_report"
@@ -52,11 +52,11 @@ MATURITY: dict[str, dict[str, Any]] = {
         "publication_readiness": "customer-live",
     },
     "hellenistic": {
-        "category": PARTIAL_JUDGMENT,
-        "source_readiness": "mixed - Firmicus/Ptolemy packs strong; Valens OCR unusable (0 Greek codepoints in 1.1M chars)",
-        "computational_readiness": "high - sect, dignities, lots, whole-sign topics",
+        "category": NATAL_REPORT,
+        "source_readiness": "mixed - Firmicus/Ptolemy packs strong; Valens read from page images after the OCR proved to hold 0 Greek codepoints, Books I-II and part of IV mined, III and V-IX not",
+        "computational_readiness": "high - sect, dignities, lots, whole-sign topics, Valens' own Lot of Foreign Travel",
         "validation_coverage": "reference tables cross-checked against pack vectors",
-        "interpretation_readiness": "partial - 19 sourced rules, no report engine yet",
+        "interpretation_readiness": "developed - report engine; Valens' marriage and travel chapters judged tri-valued, undecided conditions named rather than counted against the chart",
         "publication_readiness": "research only",
     },
     "latin_european": {
@@ -76,11 +76,11 @@ MATURITY: dict[str, dict[str, Any]] = {
         "publication_readiness": "research only",
     },
     "islamicate_al_qabisi": {
-        "category": PARTIAL_JUDGMENT,
-        "source_readiness": "high - 54 rules from the Arabic TEI, translation unreviewed",
+        "category": NATAL_REPORT,
+        "source_readiness": "high - 71 rules from the Arabic TEI across chapters I-V, translation unreviewed",
         "computational_readiness": "high - profection, dignity scoring, firdaria, lots, hyleg chain (syzygy uncomputed)",
-        "validation_coverage": "al-Qabisi's own two worked examples reproduce exactly",
-        "interpretation_readiness": "partial - structure computed, delineation layer thin",
+        "validation_coverage": "al-Qabisi's own worked examples reproduce; 6 of 6 agree",
+        "interpretation_readiness": "developed - report engine in his own chapter order; kadkhudah years still refused",
         "publication_readiness": "research only",
     },
     "medieval_jewish": {
@@ -94,9 +94,9 @@ MATURITY: dict[str, dict[str, Any]] = {
     "indian_jyotisha": {
         "category": NATAL_REPORT,
         "source_readiness": "high - four witnesses (BPHS, Saravali, Brhajjataka, Phaladipika), translations unreviewed",
-        "computational_readiness": "high - grahas, bhavas, D9, drishti, yogas, Vimshottari",
-        "validation_coverage": "1,540 corpus vectors; no worked-example nativity found yet",
-        "interpretation_readiness": "developed - 40 sourced delineations on the reference chart; synthesis layer v1",
+        "computational_readiness": "high - grahas, bhavas, drishti, yogas, Vimshottari, nine vargas (D1-D4, D7, D9, D10, D12, D30, D60), full Sadbala and Ashtakavarga",
+        "validation_coverage": "1,540 corpus vectors; the 1899 recension's own worked Sadbala figures reproduce exactly (uccha 38|04, dig 49|01, paksha 47|05, natonnata 48|44, ayana 27|15, pindotpatti 91) and all eight ashtakavarga tables sum to 337",
+        "interpretation_readiness": "developed - 38 sourced delineations, synthesis layer v1, and BPHS uttara 2.44 executed: competing yogas are ranked by Sadbala instead of being listed side by side",
         "publication_readiness": "research only",
     },
     "chinese_bazi": {
