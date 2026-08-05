@@ -1,0 +1,743 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-05",
+  "tradition_id": "chinese_bazi",
+  "source_pack_id": "ziping_technique_v1",
+  "status": "research_verified",
+  "source_ids": [
+    "bazi_yuanhai_ziping_wanli_1600_local_page_images",
+    "bazi_sanming_tonghui_siku_quanshu_zhejiang_scan"
+  ],
+  "vectors": [
+    {
+      "vector_id": "bazi.ziping.yongshen.orch06_identify_useful_and_helper_first.v1",
+      "rule_ids": [
+        "bazi.ziping.yongshen.orch06_identify_useful_and_helper_first"
+      ],
+      "inputs": {
+        "any_chart": true,
+        "note": "This rule is a procedural gate, not a chart-shaped predicate; the vector asserts that the composer's step order includes a 用神 identification step before any verdict."
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The reading procedure must identify a useful god and its helper before drawing a verdict.",
+        "source_verdict_chinese": "但凡看命，要察柱中何者為用神，何者為助。",
+        "engine_behaviour_today": "does_not_fire — the engine performs no 用神 identification step, so the gate is unsatisfied for every chart"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.3-4, page image read directly. Procedural vector, not a source worked chart."
+    },
+    {
+      "vector_id": "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper.v1",
+      "rule_ids": [
+        "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper",
+        "bazi.ziping.yongshen.orch06_rescue_fails_when_day_master_controlled_and_weak"
+      ],
+      "inputs": {
+        "yongshen": "zheng_guan",
+        "yongshen_damaged": true,
+        "helper_of_yongshen_present": true,
+        "helper_itself_obstructed": false,
+        "day_master_controlled": false,
+        "day_master_weak": false
+      },
+      "expected": {
+        "fires": true,
+        "rule_that_fires": "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper",
+        "judgment": "The damaged Officer-as-useful-god is rescued; the configuration is mitigated.",
+        "source_verdict_chinese": "若見用神被傷，相助者有救，雖凶不死。",
+        "renderable_portion": "mitigated / rescued only; the 不死 clause is refused"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.4-5, page image read directly. Constructed from the rule's own stated conditions; the paired reversal rule is asserted not to fire."
+    },
+    {
+      "vector_id": "bazi.ziping.yongshen.orch06_rescue_fails.v1_negative",
+      "rule_ids": [
+        "bazi.ziping.yongshen.orch06_rescue_fails_when_day_master_controlled_and_weak"
+      ],
+      "inputs": {
+        "yongshen": "zheng_guan",
+        "yongshen_damaged": true,
+        "helper_of_yongshen_present": true,
+        "helper_itself_obstructed": true,
+        "day_master_controlled": true,
+        "day_master_weak": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The rescue is defeated: helper obstructed, day master both controlled and in decline.",
+        "source_verdict_chinese": "再相助者亦有阻，剋日主又衰，其死必矣。",
+        "renderable_portion": "none — the whole conclusion is refused; audit trace only"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.5-6, page image read directly. Contrast vector for the preceding rescue rule; the source states the two as a single reversing pair."
+    },
+    {
+      "vector_id": "bazi.ziping.dayun.orch06_luck_at_death_extinction.v1",
+      "rule_ids": [
+        "bazi.ziping.dayun.orch06_luck_at_death_extinction_meeting_destroyer"
+      ],
+      "inputs": {
+        "luck_or_annual_pillar_at_death_or_extinction_station": true,
+        "destroying_agent_met_again_in_the_same_period": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Compounded calamity in that period.",
+        "source_verdict_chinese": "歲運臨死絕之地，再逢破壞之神，必見重禍。",
+        "engine_behaviour_today": "undecidable — 流年 are not enumerated and the twelve-stage 死/絕 station table is not implemented"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.3, page image read directly. Constructed from the rule's own stated conditions."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v1_gengyin_positive",
+      "rule_ids": [
+        "bazi.ziping.geju.orch06_tianyuan_anlu_establishment",
+        "bazi.ziping.geju.orch06_tianyuan_anlu_gengyin_completion"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "geng",
+          "element": "metal",
+          "polarity": "yang"
+        },
+        "pillars": {
+          "day": {
+            "stem": "geng",
+            "branch": "yin_branch"
+          },
+          "year": {
+            "stem": "wu_stem",
+            "branch": "unspecified"
+          },
+          "month": {
+            "stem": "unspecified",
+            "branch": "unspecified"
+          },
+          "hour": {
+            "stem": "unspecified",
+            "branch": "unspecified"
+          }
+        },
+        "hidden_stems": {
+          "day": [
+            {
+              "stem": "jia",
+              "element": "wood",
+              "qi": "main"
+            },
+            {
+              "stem": "bing",
+              "element": "fire",
+              "qi": "middle"
+            },
+            {
+              "stem": "wu_stem",
+              "element": "earth",
+              "qi": "residual"
+            }
+          ]
+        },
+        "visible_stem_ten_gods": {
+          "year": "pian_yin"
+        },
+        "zheng_guan_absent_from_year_month_hour_stems": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "天元暗祿 is established (Geng day on Yin, Ding the Direct Officer absent at stem level) and completed by the Earth stem nourishing the Heaven-Origin.",
+        "source_verdict_chinese": "此格取庚寅、乙巳、丙申、己亥四日。如庚日取丁火為正官，年月時中不見丁，則無官矣。…歲月時中喜有戊己滋助天元。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF pages 91-92, page images read directly. Constructed from the rule's own stated conditions; the source gives the four day pillars but no full worked chart for Geng-Yin at this point."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v2_negative_officer_revealed",
+      "rule_ids": [
+        "bazi.ziping.geju.orch06_tianyuan_anlu_establishment"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "geng",
+          "element": "metal",
+          "polarity": "yang"
+        },
+        "pillars": {
+          "day": {
+            "stem": "geng",
+            "branch": "yin_branch"
+          },
+          "month": {
+            "stem": "ding",
+            "branch": "unspecified"
+          }
+        },
+        "visible_stem_ten_gods": {
+          "month": "zheng_guan"
+        },
+        "zheng_guan_absent_from_year_month_hour_stems": false
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "The pattern does not arise: the Officer Ding stands openly at the month stem, so there is no HIDDEN officer.",
+        "source_verdict_chinese": "年月時中不見丁，則無官矣。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF page 91, page image read directly. Negative vector constructed by inverting the source's own stated absence condition."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v3_yisi_remedy",
+      "rule_ids": [
+        "bazi.ziping.geju.orch06_tianyuan_anlu_yisi_defeat_and_remedy"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "yi",
+          "element": "wood",
+          "polarity": "yin"
+        },
+        "pillars": {
+          "day": {
+            "stem": "yi",
+            "branch": "si"
+          }
+        },
+        "hidden_stems": {
+          "day": [
+            {
+              "stem": "bing",
+              "element": "fire",
+              "qi": "main"
+            },
+            {
+              "stem": "geng",
+              "element": "metal",
+              "qi": "middle"
+            },
+            {
+              "stem": "wu_stem",
+              "element": "earth",
+              "qi": "residual"
+            }
+          ]
+        },
+        "ren_or_gui_or_hai_or_zi_present": true,
+        "xin_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The Yi-Si hidden-officer configuration is fine because Ren/Gui/Hai/Zi are present to take away the prosperous Bing Fire in Si, and the Seven Killings Xin is absent.",
+        "source_verdict_chinese": "其巳中原帶丙火旺，須壬癸亥子去其火氣方美。忌辛金七煞。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF pages 91-92, page images read directly. Constructed from the rule's own stated remedy condition."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v4_bingshen_jihai",
+      "rule_ids": [
+        "bazi.ziping.geju.orch06_tianyuan_anlu_bingshen_and_jihai"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "bing",
+          "element": "fire",
+          "polarity": "yang"
+        },
+        "pillars": {
+          "day": {
+            "stem": "bing",
+            "branch": "shen"
+          }
+        },
+        "hidden_stems": {
+          "day": [
+            {
+              "stem": "geng",
+              "element": "metal",
+              "qi": "main"
+            },
+            {
+              "stem": "ren",
+              "element": "water",
+              "qi": "middle"
+            },
+            {
+              "stem": "wu_stem",
+              "element": "earth",
+              "qi": "residual"
+            }
+          ]
+        },
+        "visible_stem_ten_gods": {
+          "year": "zheng_cai",
+          "month": "zheng_guan"
+        },
+        "wu_or_ji_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The Bing-Shen configuration is favourable: Metal as Wealth and Gui as Officer are welcomed, and the Hurting-Officer Earth stems are absent.",
+        "source_verdict_chinese": "丙申日喜庚辛財、癸水官、甲乙印，忌戊己傷官。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF page 92, page image read directly. Constructed from the rule's own stated conditions."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.orch06_sanqi_wealth_officer_seal.v1",
+      "rule_ids": [
+        "bazi.ziping.shensha.orch06_sanqi_wealth_officer_seal_complete"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "ding",
+          "element": "fire",
+          "polarity": "yin"
+        },
+        "zheng_cai_present": true,
+        "zheng_guan_present": true,
+        "zheng_yin_present": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Wealth, Officer and Seal are all present: the Ten-God sense of the Three Marvels is complete.",
+        "source_verdict_chinese": "財官印綬號三奇。三者兼全罕遇之。",
+        "renderable_portion": "the structural completeness only; the moralizing and status couplets are refused",
+        "cross_reference": "This is the same structural claim the corpus already hand-verified for the 譚論 chart in 三命通會 juan 12 (財官印俱旺). The two passages are independent witnesses to the same configuration being treated as a named, high-value structure."
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90, page image read directly. Constructed from the rule's own stated conditions; deliberately linked to the juan-12 譚論 worked chart already in bazi/worked_examples.json."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_shigan_lu_derivation_table.v1",
+      "rule_ids": [
+        "bazi.ziping.shensha.smt03a_shigan_lu_derivation_table"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "derivation_query": "lu_branch_of_day_master"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The lu branch of a jia day master is yin_branch.",
+        "source_verdict_chinese": "所以甲祿寅"
+      },
+      "provenance": "Constructed from the rule's own stated table (三命通會 卷三 論十干祿, PDF p.3)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_shigan_lu_derivation_table.v2",
+      "rule_ids": [
+        "bazi.ziping.shensha.smt03a_shigan_lu_derivation_table"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "wu_stem",
+          "element": "earth",
+          "polarity": "yang"
+        },
+        "derivation_query": "lu_branch_of_day_master"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "A wu day master has no proper lu branch; it is lodged (寄) in si, the branch of flourishing fire, by the principle of the child following the mother.",
+        "source_verdict_chinese": "戊寄巳……謂巳午乃火旺之鄉，子隨母得祿之義"
+      },
+      "provenance": "Constructed from the rule's own stated table (三命通會 卷三 論十干祿, PDF pp.3-4)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_no_lu_in_four_earth_branches.v1",
+      "rule_ids": [
+        "bazi.ziping.shensha.smt03a_no_lu_in_four_earth_branches"
+      ],
+      "inputs": {
+        "candidate_lu_branch": "chen",
+        "derivation_query": "is_any_stem_lu_here"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "No stem takes chen as its lu; chen is kuigang ground, and as one of the four seasonal branches it holds mixed qi.",
+        "source_verdict_chinese": "所以四宮無祿。又曰四季有雜氣，為祿不專，故不取。"
+      },
+      "provenance": "Constructed from the rule's own stated conditions (PDF p.4)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_jinyu_two_branches_after_lu.v1",
+      "rule_ids": [
+        "bazi.ziping.shensha.smt03a_jinyu_two_branches_after_lu"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "pillars": {
+          "day": {
+            "stem": "jia",
+            "branch": "zi"
+          }
+        },
+        "derivation_query": "jinyu_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "jia's lu is yin_branch; two branches forward is chen; therefore chen is the jinyu.",
+        "source_verdict_chinese": "如甲子人祿在寅，辰為金輿是也"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論金輿, PDF p.19."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words.v1",
+      "rule_ids": [
+        "bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "branches_present": [
+          "chou",
+          "hai"
+        ],
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "chou is xiang and hai is he; two of the four words are obtained, therefore noble. Note that the two obtained are the higher-ranked members of each pair (建不如向, 近不如合).",
+        "source_verdict_chinese": "四字中得兩字者貴"
+      },
+      "provenance": "Constructed from the rule's own worked example and threshold (PDF p.12)."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words.v2",
+      "rule_ids": [
+        "bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "branches_present": [
+          "yin_branch"
+        ],
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "Only jian is obtained. One of the four words is not two, so the nobility threshold is not met; and jian is expressly the weakest of the pair it belongs to.",
+        "source_verdict_chinese": "建不如向……四字中得兩字者貴"
+      },
+      "provenance": "Negative vector constructed from the rule's own threshold (PDF p.12)."
+    },
+    {
+      "vector_id": "bazi.ziping.rootedness.smt03a_ku_is_the_gathering_of_lu.v1",
+      "rule_ids": [
+        "bazi.ziping.rootedness.smt03a_ku_is_the_gathering_of_lu"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "branches_present": [
+          "hai",
+          "hai",
+          "wei"
+        ],
+        "hidden_stems": {
+          "wei": [
+            {
+              "stem": "ji",
+              "element": "earth",
+              "qi": "main"
+            },
+            {
+              "stem": "ding",
+              "element": "fire",
+              "qi": "middle"
+            },
+            {
+              "stem": "yi",
+              "element": "wood",
+              "qi": "residual"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Many hai plus wei: the storehouse of jia/yi is wei, so the lu is gathered and thick; the native is amply provided.",
+        "source_verdict_chinese": "如甲乙亥多而得未，乃祿厚豐足之人"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.13."
+    },
+    {
+      "vector_id": "bazi.ziping.rootedness.smt03a_he_is_the_crosswise_of_lu.v1",
+      "rule_ids": [
+        "bazi.ziping.rootedness.smt03a_he_is_the_crosswise_of_lu"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "branches_present": [
+          "hai"
+        ],
+        "lu_branch_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Hidden combination (暗合): the lu branch yin is absent but its six-harmony partner hai is present. This still counts as seeing the lu, and rules windfall fortune.",
+        "source_verdict_chinese": "無寅得亥謂之暗合。雖非見祿亦曰見祿，多主儻來之福。"
+      },
+      "provenance": "The source's own worked example, PDF pp.13-14."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong.v1",
+      "rule_ids": [
+        "bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "branches_present": [
+          "chou",
+          "mao"
+        ],
+        "lu_branch_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Empty flanking (虛拱): chou and mao flank the absent lu branch yin. This ranks above solid flanking and rules great wealth and nobility.",
+        "source_verdict_chinese": "不見寅而見丑卯在兩傍拱之，謂之虛拱……然拱實不若拱虛，主大富貴"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.14."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong.v2",
+      "rule_ids": [
+        "bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "branches_present": [
+          "chou",
+          "yin_branch",
+          "mao"
+        ],
+        "lu_branch_present": true
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "This is solid flanking (實拱), not empty flanking; the source expressly ranks it below, so the 大富貴 verdict of the empty-flanking rule must not fire.",
+        "source_verdict_chinese": "然拱實不若拱虛"
+      },
+      "provenance": "Negative vector built from the source's own contrast (PDF p.14)."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_jianlu_shengwang_vs_sijue.v1",
+      "rule_ids": [
+        "bazi.ziping.geju.smt03a_jianlu_shengwang_vs_sijue"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "month_branch": "yin_branch",
+        "day_master_seasonal_state": "wang",
+        "lu_branch_present": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Established lu in a flourishing state: the favourable branch of the rule applies (ease through life, sufficiency of wealth). The 死絕 clauses do not apply.",
+        "source_verdict_chinese": "夫建祿者，主人肌厚氣實，體格不清，一生安逸足財利，生旺自然"
+      },
+      "provenance": "Constructed from the rule's own stated split (PDF pp.12-13)."
+    },
+    {
+      "vector_id": "bazi.ziping.yongshen.smt03a_wuxing_first_lu_and_yima_second.v1",
+      "rule_ids": [
+        "bazi.ziping.yongshen.smt03a_wuxing_first_lu_and_yima_second"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "day_master_seasonal_state": "si",
+        "lu_branch_present": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The five agents are judged first and the day master is in death; the presence of lu may not by itself be reported as auspicious.",
+        "source_verdict_chinese": "先論五行，後看祿馬……凡人命帶祿，或吉或凶，或貴或賤，未可全靠便為吉論"
+      },
+      "provenance": "Constructed from the rule's own stated conditions (PDF pp.14-15)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_lu_wants_simple_not_crowded.v1",
+      "rule_ids": [
+        "bazi.ziping.shensha.smt03a_lu_wants_simple_not_crowded"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "lu_occurrence_count": 3,
+        "pian_yin_present": true
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "Lu is crowded (three occurrences) and the xiaoshen/pian yin is present; the configuration fails both stated requirements, so the favourable reading is withheld.",
+        "source_verdict_chinese": "要簡不要繁……不犯梟神為佳"
+      },
+      "provenance": "Negative vector built from the rule's own two requirements (PDF p.17)."
+    },
+    {
+      "vector_id": "bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui.v1",
+      "rule_ids": [
+        "bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "pillars": {
+          "year": {
+            "stem": "geng",
+            "branch": "yin_branch"
+          }
+        },
+        "visible_stem_ten_gods": {
+          "year": "qi_sha"
+        },
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "geng-yin for a jia day master is 'ghost at the head of lu', the red-mouth spirit; it rules disputes and punitive reprimand.",
+        "source_verdict_chinese": "有祿頭鬼為赤口煞，甲人見庚寅……主口舌刑責"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.10."
+    },
+    {
+      "vector_id": "bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui.v2",
+      "rule_ids": [
+        "bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "pillars": {
+          "year": {
+            "stem": "wu_stem",
+            "branch": "yin_branch"
+          }
+        },
+        "visible_stem_ten_gods": {
+          "year": "pian_cai"
+        },
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "wu-yin for a jia day master is 'wealth at the head of lu', the binding spirit; the native has wealth and repute.",
+        "source_verdict_chinese": "有祿頭財為綑縛煞，甲人見戊寅……主人富有聲望"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.9."
+    },
+    {
+      "vector_id": "bazi.ziping.tengod.smt03a_shishen_dai_lu_and_shishen_he_lu.v1",
+      "rule_ids": [
+        "bazi.ziping.tengod.smt03a_shishen_dai_lu_and_shishen_he_lu"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "ren",
+          "element": "water",
+          "polarity": "yang"
+        },
+        "pillars": {
+          "hour": {
+            "stem": "jia",
+            "branch": "yin_branch"
+          }
+        },
+        "visible_stem_ten_gods": {
+          "hour": "shi_shen"
+        }
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "jia is ren's eating god and yin is jia's own lu; this is 食神帶祿 and rules auspiciousness.",
+        "source_verdict_chinese": "有食神帶祿，壬食甲而得甲寅……主吉"
+      },
+      "provenance": "The source's own enumerated example, 三命通會 卷三 論十干祿, PDF p.9."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_xu_ziping_takes_wealth_as_the_horse.v1",
+      "rule_ids": [
+        "bazi.ziping.shensha.smt03a_xu_ziping_takes_wealth_as_the_horse"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "school": "xu_ziping",
+        "visible_stem_ten_gods": {
+          "month": "pian_cai"
+        }
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Under the Ziping reading, the wealth star itself is the 'horse'; the branch-derived post-horse table need not be consulted.",
+        "source_verdict_chinese": "徐子平以財為馬，亦是因古人之義，取剋處而名之耳"
+      },
+      "provenance": "Constructed from the rule's own statement (PDF p.16)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_yima_shengwang_versus_sijue.v1",
+      "rule_ids": [
+        "bazi.ziping.shensha.smt03a_yima_shengwang_versus_sijue"
+      ],
+      "inputs": {
+        "day_master": {
+          "stem": "jia",
+          "element": "wood",
+          "polarity": "yang"
+        },
+        "yima_branch_present": true,
+        "yima_state": "wang",
+        "lu_and_yima_same_branch": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Post-horse in flourishing and sharing a region with lu: the favourable branch applies (concentrated bearing, adaptable, much repute, fortune at ease).",
+        "source_verdict_chinese": "驛馬生旺，主人氣韻凝峻，通變趨時，平生多聲望……與祿同鄉，則福力優游"
+      },
+      "provenance": "Constructed from the rule's own stated conditions (PDF p.17)."
+    }
+  ]
+}

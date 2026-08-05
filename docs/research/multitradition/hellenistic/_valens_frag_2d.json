@@ -1,0 +1,2869 @@
+{
+ "fragment_id": "2d",
+ "assignment": "Vettius Valens, Anthologiae Liber II capp. 37-41 (with the tail of cap. 36 that runs onto printed p. 114), Kroll 1908 printed pp. 114-131 = PDF page indices 132-149",
+ "pages_read": [
+  132,
+  133,
+  134,
+  135,
+  136,
+  137
+ ],
+ "calibration_notes": [
+  "Fount trap kappa/chi: this Teubner Greek italic draws kappa almost as chi at scan resolution. All of kappa-initial vocabulary in II.37-41 (kleros, kyrios, kakopoioi, katholou, kentron, Kronos, kakodaimonon, kollesis) was resolved by lexicon, not by pixel, per the protocol. Genuine chi kept in chronon, tyches, psyche, schema, chorismous, cheiron, chera.",
+  "Iota subscript preserved: zodion / zodio, hypogeio, oikeio, to auto, he mesouranese, subjunctives in -e (diametrese, epimartyrese).",
+  "p.114 line 31: the printed text is 'ei de kai to zodion e blosyroteron'; the accented form in the image is ambiguous between the disjunctive e and the subjunctive e (with iota subscript). Sense requires the subjunctive of eimi, so it is transcribed as the subjunctive; Kroll's apparatus at that line records only blossyroteron V.",
+  "p.114 line 32: text prints epitaktikoteroi; Kroll's apparatus conjectures epiteuktikoteroi ('opinor'), recording -koteroi Va and -koteroi Vb. Both recorded in the rule's kroll_notes.",
+  "p.118 line 5: the manuscript form printed reads as moichainousi (they commit adultery); the alpha-iota ligature at scan resolution can be misread as alpha-lambda. Resolved by lexicon.",
+  "p.119 line 20: Valens writes 'houtos gar sympathes kai paranomos ho gamos krithesetai'. paranomos ('lawless') is what is printed and is retained; the sense of the sentence would suit paramonos ('enduring') and this is flagged as an unresolved reading, not emended.",
+  "p.118 lines 15 and 22 carry Kroll's own marks that are reproduced in the rules: three asterisks for a lacuna after hypotetagmenais (l.15) and an obelus before hysteros (l.22, apparatus: 'steiroi opinor, nisi praestat hysterousi').",
+  "Angle-bracketed supplements by Kroll that were encoded verbatim: <mete> at p.115 l.13, <syschematizomenos> at p.118 l.14, <eph'> at p.118 l.30, <lz'> <le'> <lth'> <m'> <ma'> chapter numerals throughout (Kroll supplies the chapter numbers).",
+  "No cell in this fragment was left partly read; every rule is graded A. Nothing in II.37-41 required a drop to C."
+ ],
+ "worked_nativities": [
+  {
+   "nativity_id": "valens.b2d.nativity.01",
+   "book_chapter": "Anthologiae II.36 (example series running onto p. 114)",
+   "pdf_page_index": 132,
+   "printed_page": 114,
+   "date_statement_greek": null,
+   "date_statement_rendering": "No date, hour or place given; Valens introduces the chart only as Ἄλλη ('another')",
+   "positions_as_printed": [
+    {
+     "body": "Sun",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "Ἥλιος Ἑρμῆς Ταύρῳ"
+    },
+    {
+     "body": "Mercury",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "Ἥλιος Ἑρμῆς Ταύρῳ"
+    },
+    {
+     "body": "Moon",
+     "sign": "Aquarius",
+     "degree": null,
+     "greek": "Σελήνη Ὑδροχόῳ"
+    },
+    {
+     "body": "Saturn",
+     "sign": "Aries",
+     "degree": null,
+     "greek": "Κρόνος Ἀφροδίτη Κριῷ"
+    },
+    {
+     "body": "Venus",
+     "sign": "Aries",
+     "degree": null,
+     "greek": "Κρόνος Ἀφροδίτη Κριῷ"
+    },
+    {
+     "body": "Jupiter",
+     "sign": "Virgo",
+     "degree": null,
+     "greek": "Ζεὺς Παρθένῳ"
+    },
+    {
+     "body": "Mars",
+     "sign": "Pisces",
+     "degree": null,
+     "greek": "Ἄρης Ἰχθύσιν"
+    },
+    {
+     "body": "Lot of Fortune",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "ὁ κλῆρος τῆς τύχης Ταύρῳ"
+    },
+    {
+     "body": "Lot of Daimon (lord)",
+     "sign": "Pisces",
+     "degree": null,
+     "greek": "ὁ κύριος τοῦ δαίμονος Ἰχθύσιν"
+    }
+   ],
+   "ascendant": {
+    "sign": "Leo",
+    "degree": null
+   },
+   "valens_verdict_greek": "ἡ κυρία Ἀφροδίτη Κριῷ σὺν Κρόνῳ· ὁ τοιοῦτος ἔσχε περὶ τὴν κεφαλὴν ἀλωπεκίαν καὶ περὶ τὸ σῶμα ἀλφοὺς καὶ λιχῆνας· ἦν γὰρ ὁ κύριος τοῦ δαίμονος Ἰχθύσιν.",
+   "valens_verdict_rendering": "The lady (of the lot) Venus in Aries with Saturn; such a man had alopecia about the head and white leprous patches and lichen-eruptions about the body; for the lord of the Daimon was in Pisces.",
+   "chart_reproducible": "positions_only",
+   "reproducibility_note": "Sign positions for all seven planets, Ascendant and both lots are given, but no date, hour or place; the chart cannot be recomputed, only re-read as printed. Apparatus at p.114 line 6 records Παρθένῳ Vb] Αἰγόκερῳ Va, so Jupiter's sign is contested between the two hands of the Marcianus."
+  },
+  {
+   "nativity_id": "valens.b2d.nativity.02",
+   "book_chapter": "Anthologiae II.36 (example series running onto p. 114)",
+   "pdf_page_index": 132,
+   "printed_page": 114,
+   "date_statement_greek": null,
+   "date_statement_rendering": "No date, hour or place given",
+   "positions_as_printed": [
+    {
+     "body": "Sun",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "Ἥλιος Ταύρῳ"
+    },
+    {
+     "body": "Mars",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "Ἄρης Ταύρῳ"
+    },
+    {
+     "body": "Moon",
+     "sign": "Virgo",
+     "degree": null,
+     "greek": "Σελήνη Παρθένῳ"
+    },
+    {
+     "body": "Saturn",
+     "sign": "Sagittarius",
+     "degree": null,
+     "greek": "Κρόνος Τοξότῃ"
+    },
+    {
+     "body": "Jupiter",
+     "sign": "Gemini",
+     "degree": null,
+     "greek": "Ζεὺς Διδύμοις"
+    },
+    {
+     "body": "Mercury",
+     "sign": "Aries",
+     "degree": null,
+     "greek": "Ἑρμῆς Ἀφροδίτη ὡροσκόπος Κριῷ"
+    },
+    {
+     "body": "Venus",
+     "sign": "Aries",
+     "degree": null,
+     "greek": "Ἑρμῆς Ἀφροδίτη ὡροσκόπος Κριῷ"
+    },
+    {
+     "body": "Lot of Fortune",
+     "sign": "Sagittarius",
+     "degree": null,
+     "greek": "ὁ κλῆρος τῆς τύχης Τοξότῃ"
+    },
+    {
+     "body": "Lord of Fortune",
+     "sign": "Gemini",
+     "degree": null,
+     "greek": "ὁ κύριος Διδύμοις"
+    },
+    {
+     "body": "Lot of Daimon",
+     "sign": "Leo",
+     "degree": null,
+     "greek": "ὁμοίως καὶ δαίμων Λέοντι"
+    },
+    {
+     "body": "Lord of Daimon",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "ὁ κύριος Ταύρῳ"
+    }
+   ],
+   "ascendant": {
+    "sign": "Aries",
+    "degree": null
+   },
+   "valens_verdict_greek": "γέγονεν ὁ τοιοῦτος γαλιάγκων.",
+   "valens_verdict_rendering": "Such a man was born γαλιάγκων (weasel-armed, i.e. with a withered or crooked arm).",
+   "chart_reproducible": "positions_only",
+   "reproducibility_note": "Signs only; no date or hour. Kroll's apparatus at line 6 (Παρθένῳ Vb] Αἰγόκερῳ Va) attaches to the Moon of this or the preceding chart."
+  },
+  {
+   "nativity_id": "valens.b2d.nativity.03",
+   "book_chapter": "Anthologiae II.36 (example series running onto p. 114)",
+   "pdf_page_index": 132,
+   "printed_page": 114,
+   "date_statement_greek": null,
+   "date_statement_rendering": "No date, hour or place given",
+   "positions_as_printed": [
+    {
+     "body": "Sun",
+     "sign": "Aries",
+     "degree": null,
+     "greek": "Ἥλιος Ἑρμῆς Κριῷ"
+    },
+    {
+     "body": "Mercury",
+     "sign": "Aries",
+     "degree": null,
+     "greek": "Ἥλιος Ἑρμῆς Κριῷ"
+    },
+    {
+     "body": "Moon",
+     "sign": "Pisces",
+     "degree": null,
+     "greek": "Σελήνη Ἰχθύσι"
+    },
+    {
+     "body": "Saturn",
+     "sign": "Aquarius",
+     "degree": null,
+     "greek": "Κρόνος ὡροσκόπος Ὑδροχόῳ"
+    },
+    {
+     "body": "Mars",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "Ἄρης Ἀφροδίτη Ταύρῳ"
+    },
+    {
+     "body": "Venus",
+     "sign": "Taurus",
+     "degree": null,
+     "greek": "Ἄρης Ἀφροδίτη Ταύρῳ"
+    },
+    {
+     "body": "Jupiter",
+     "sign": "Libra",
+     "degree": null,
+     "greek": "Ζεὺς Ζυγῷ"
+    },
+    {
+     "body": "Lot of Fortune",
+     "sign": "Pisces",
+     "degree": null,
+     "greek": "κλῆρος τύχης Ἰχθύσι"
+    },
+    {
+     "body": "Lot of Daimon",
+     "sign": "Capricorn",
+     "degree": null,
+     "greek": "κλῆρος δαίμονος Αἰγόκερῳ"
+    }
+   ],
+   "ascendant": {
+    "sign": "Aquarius",
+    "degree": null
+   },
+   "valens_verdict_greek": "ὁ τοιοῦτος θεόληπτος μανιώδης. ὁ κύριος τοῦ κλήρου Ζεὺς εἰς τὸν περὶ θεοῦ Ζυγόν, ὁ τοῦ δαίμονος κύριος Κρόνος ὡροσκόπῳ· εὑρέθη δὲ καὶ Ἀφροδίτη ἐν τῷ ὑπογείῳ.",
+   "valens_verdict_rendering": "Such a man was god-seized and manic. The lord of the lot, Jupiter, into Libra, the place concerning god; the lord of the Daimon, Saturn, on the Ascendant; and Venus too was found in the subterranean angle.",
+   "chart_reproducible": "positions_only",
+   "reproducibility_note": "Signs only, no date. Kroll's apparatus at line 14 gives Κρόνος κύριος V, i.e. the manuscript's word order at 'ὁ τοῦ δαίμονος κύριος Κρόνος'."
+  },
+  {
+   "nativity_id": "valens.b2d.nativity.04",
+   "book_chapter": "Anthologiae II.36 (example series running onto p. 114)",
+   "pdf_page_index": 132,
+   "printed_page": 114,
+   "date_statement_greek": null,
+   "date_statement_rendering": "No date, hour or place given",
+   "positions_as_printed": [
+    {
+     "body": "Sun",
+     "sign": "Leo",
+     "degree": null,
+     "greek": "Ἥλιος Ἑρμῆς Λέοντι"
+    },
+    {
+     "body": "Mercury",
+     "sign": "Leo",
+     "degree": null,
+     "greek": "Ἥλιος Ἑρμῆς Λέοντι"
+    },
+    {
+     "body": "Moon",
+     "sign": "Scorpio",
+     "degree": null,
+     "greek": "Σελήνη Σκορπίῳ"
+    },
+    {
+     "body": "Saturn",
+     "sign": "Aries",
+     "degree": null,
+     "greek": "Κρόνος ὡροσκόπος Κριῷ"
+    },
+    {
+     "body": "Jupiter",
+     "sign": "Pisces",
+     "degree": null,
+     "greek": "Ζεὺς Ἰχθύσιν"
+    },
+    {
+     "body": "Mars",
+     "sign": "Virgo",
+     "degree": null,
+     "greek": "Ἄρης Ἀφροδίτη Παρθένῳ"
+    },
+    {
+     "body": "Venus",
+     "sign": "Virgo",
+     "degree": null,
+     "greek": "Ἄρης Ἀφροδίτη Παρθένῳ"
+    },
+    {
+     "body": "Lot of Fortune",
+     "sign": "Capricorn",
+     "degree": null,
+     "greek": "κλῆρος τύχης Αἰγόκερῳ"
+    },
+    {
+     "body": "Lot of Daimon",
+     "sign": "Cancer",
+     "degree": null,
+     "greek": "δαίμων Καρκίνῳ"
+    }
+   ],
+   "ascendant": {
+    "sign": "Aries",
+    "degree": null
+   },
+   "valens_verdict_greek": "ὁ τοιοῦτος κυρτός.",
+   "valens_verdict_rendering": "Such a man was hunchbacked.",
+   "chart_reproducible": "positions_only",
+   "reproducibility_note": "Signs only; no date, hour or place."
+  }
+ ],
+ "unmined": "in progress",
+ "fragment_rules": [
+  {
+   "rule_id": "hel.valens.b2d.nativity.01",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.36",
+    "technique": "worked nativity, signs only",
+    "pdf_page_indices": [
+     132
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "chart.is_worked_example",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "chart.source",
+      "operator": "equals",
+      "value": "Anthologiae II.36 example series, p. 114"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "worked_nativity",
+    "greek": "ἡ κυρία Ἀφροδίτη Κριῷ σὺν Κρόνῳ· ὁ τοιοῦτος ἔσχε περὶ τὴν κεφαλὴν ἀλωπεκίαν καὶ περὶ τὸ σῶμα ἀλφοὺς καὶ λιχῆνας· ἦν γὰρ ὁ κύριος τοῦ δαίμονος Ἰχθύσιν.",
+    "engine_rendering": "The lady (of the lot) Venus in Aries with Saturn; such a man had alopecia about the head and white leprous patches and lichen-eruptions about the body; for the lord of the Daimon was in Pisces.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "assigns bodily deformity or chronic disease as fate; this product does not deliver deterministic statements about a person's body or health",
+    "nativity_id": "valens.b2d.nativity.01",
+    "positions_as_printed": [
+     {
+      "body": "Sun",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "Ἥλιος Ἑρμῆς Ταύρῳ"
+     },
+     {
+      "body": "Mercury",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "Ἥλιος Ἑρμῆς Ταύρῳ"
+     },
+     {
+      "body": "Moon",
+      "sign": "Aquarius",
+      "degree": null,
+      "greek": "Σελήνη Ὑδροχόῳ"
+     },
+     {
+      "body": "Saturn",
+      "sign": "Aries",
+      "degree": null,
+      "greek": "Κρόνος Ἀφροδίτη Κριῷ"
+     },
+     {
+      "body": "Venus",
+      "sign": "Aries",
+      "degree": null,
+      "greek": "Κρόνος Ἀφροδίτη Κριῷ"
+     },
+     {
+      "body": "Jupiter",
+      "sign": "Virgo",
+      "degree": null,
+      "greek": "Ζεὺς Παρθένῳ"
+     },
+     {
+      "body": "Mars",
+      "sign": "Pisces",
+      "degree": null,
+      "greek": "Ἄρης Ἰχθύσιν"
+     },
+     {
+      "body": "Lot of Fortune",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "ὁ κλῆρος τῆς τύχης Ταύρῳ"
+     },
+     {
+      "body": "Lot of Daimon (lord)",
+      "sign": "Pisces",
+      "degree": null,
+      "greek": "ὁ κύριος τοῦ δαίμονος Ἰχθύσιν"
+     }
+    ],
+    "ascendant": {
+     "sign": "Leo",
+     "degree": null
+    },
+    "chart_reproducible": "positions_only",
+    "reproducibility_note": "Sign positions for all seven planets, Ascendant and both lots are given, but no date, hour or place; the chart cannot be recomputed, only re-read as printed. Apparatus at p.114 line 6 records Παρθένῳ Vb] Αἰγόκερῳ Va, so Jupiter's sign is contested between the two hands of the Marcianus."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVI (end)",
+     "location": "Kroll 1908 p. 114 lines 1-18 (PDF page index 132)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2d.nativity.02",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.36",
+    "technique": "worked nativity, signs only",
+    "pdf_page_indices": [
+     132
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "chart.is_worked_example",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "chart.source",
+      "operator": "equals",
+      "value": "Anthologiae II.36 example series, p. 114"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "worked_nativity",
+    "greek": "γέγονεν ὁ τοιοῦτος γαλιάγκων.",
+    "engine_rendering": "Such a man was born γαλιάγκων (weasel-armed, i.e. with a withered or crooked arm).",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "assigns bodily deformity or chronic disease as fate; this product does not deliver deterministic statements about a person's body or health",
+    "nativity_id": "valens.b2d.nativity.02",
+    "positions_as_printed": [
+     {
+      "body": "Sun",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "Ἥλιος Ταύρῳ"
+     },
+     {
+      "body": "Mars",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "Ἄρης Ταύρῳ"
+     },
+     {
+      "body": "Moon",
+      "sign": "Virgo",
+      "degree": null,
+      "greek": "Σελήνη Παρθένῳ"
+     },
+     {
+      "body": "Saturn",
+      "sign": "Sagittarius",
+      "degree": null,
+      "greek": "Κρόνος Τοξότῃ"
+     },
+     {
+      "body": "Jupiter",
+      "sign": "Gemini",
+      "degree": null,
+      "greek": "Ζεὺς Διδύμοις"
+     },
+     {
+      "body": "Mercury",
+      "sign": "Aries",
+      "degree": null,
+      "greek": "Ἑρμῆς Ἀφροδίτη ὡροσκόπος Κριῷ"
+     },
+     {
+      "body": "Venus",
+      "sign": "Aries",
+      "degree": null,
+      "greek": "Ἑρμῆς Ἀφροδίτη ὡροσκόπος Κριῷ"
+     },
+     {
+      "body": "Lot of Fortune",
+      "sign": "Sagittarius",
+      "degree": null,
+      "greek": "ὁ κλῆρος τῆς τύχης Τοξότῃ"
+     },
+     {
+      "body": "Lord of Fortune",
+      "sign": "Gemini",
+      "degree": null,
+      "greek": "ὁ κύριος Διδύμοις"
+     },
+     {
+      "body": "Lot of Daimon",
+      "sign": "Leo",
+      "degree": null,
+      "greek": "ὁμοίως καὶ δαίμων Λέοντι"
+     },
+     {
+      "body": "Lord of Daimon",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "ὁ κύριος Ταύρῳ"
+     }
+    ],
+    "ascendant": {
+     "sign": "Aries",
+     "degree": null
+    },
+    "chart_reproducible": "positions_only",
+    "reproducibility_note": "Signs only; no date or hour. Kroll's apparatus at line 6 (Παρθένῳ Vb] Αἰγόκερῳ Va) attaches to the Moon of this or the preceding chart."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVI (end)",
+     "location": "Kroll 1908 p. 114 lines 1-18 (PDF page index 132)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2d.nativity.03",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.36",
+    "technique": "worked nativity, signs only",
+    "pdf_page_indices": [
+     132
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "chart.is_worked_example",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "chart.source",
+      "operator": "equals",
+      "value": "Anthologiae II.36 example series, p. 114"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "worked_nativity",
+    "greek": "ὁ τοιοῦτος θεόληπτος μανιώδης. ὁ κύριος τοῦ κλήρου Ζεὺς εἰς τὸν περὶ θεοῦ Ζυγόν, ὁ τοῦ δαίμονος κύριος Κρόνος ὡροσκόπῳ· εὑρέθη δὲ καὶ Ἀφροδίτη ἐν τῷ ὑπογείῳ.",
+    "engine_rendering": "Such a man was god-seized and manic. The lord of the lot, Jupiter, into Libra, the place concerning god; the lord of the Daimon, Saturn, on the Ascendant; and Venus too was found in the subterranean angle.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "assigns madness / divine possession as fate; this product does not deliver deterministic statements about a person's mental health",
+    "nativity_id": "valens.b2d.nativity.03",
+    "positions_as_printed": [
+     {
+      "body": "Sun",
+      "sign": "Aries",
+      "degree": null,
+      "greek": "Ἥλιος Ἑρμῆς Κριῷ"
+     },
+     {
+      "body": "Mercury",
+      "sign": "Aries",
+      "degree": null,
+      "greek": "Ἥλιος Ἑρμῆς Κριῷ"
+     },
+     {
+      "body": "Moon",
+      "sign": "Pisces",
+      "degree": null,
+      "greek": "Σελήνη Ἰχθύσι"
+     },
+     {
+      "body": "Saturn",
+      "sign": "Aquarius",
+      "degree": null,
+      "greek": "Κρόνος ὡροσκόπος Ὑδροχόῳ"
+     },
+     {
+      "body": "Mars",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "Ἄρης Ἀφροδίτη Ταύρῳ"
+     },
+     {
+      "body": "Venus",
+      "sign": "Taurus",
+      "degree": null,
+      "greek": "Ἄρης Ἀφροδίτη Ταύρῳ"
+     },
+     {
+      "body": "Jupiter",
+      "sign": "Libra",
+      "degree": null,
+      "greek": "Ζεὺς Ζυγῷ"
+     },
+     {
+      "body": "Lot of Fortune",
+      "sign": "Pisces",
+      "degree": null,
+      "greek": "κλῆρος τύχης Ἰχθύσι"
+     },
+     {
+      "body": "Lot of Daimon",
+      "sign": "Capricorn",
+      "degree": null,
+      "greek": "κλῆρος δαίμονος Αἰγόκερῳ"
+     }
+    ],
+    "ascendant": {
+     "sign": "Aquarius",
+     "degree": null
+    },
+    "chart_reproducible": "positions_only",
+    "reproducibility_note": "Signs only, no date. Kroll's apparatus at line 14 gives Κρόνος κύριος V, i.e. the manuscript's word order at 'ὁ τοῦ δαίμονος κύριος Κρόνος'."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVI (end)",
+     "location": "Kroll 1908 p. 114 lines 1-18 (PDF page index 132)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2d.nativity.04",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.36",
+    "technique": "worked nativity, signs only",
+    "pdf_page_indices": [
+     132
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "chart.is_worked_example",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "chart.source",
+      "operator": "equals",
+      "value": "Anthologiae II.36 example series, p. 114"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "worked_nativity",
+    "greek": "ὁ τοιοῦτος κυρτός.",
+    "engine_rendering": "Such a man was hunchbacked.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "assigns bodily deformity or chronic disease as fate; this product does not deliver deterministic statements about a person's body or health",
+    "nativity_id": "valens.b2d.nativity.04",
+    "positions_as_printed": [
+     {
+      "body": "Sun",
+      "sign": "Leo",
+      "degree": null,
+      "greek": "Ἥλιος Ἑρμῆς Λέοντι"
+     },
+     {
+      "body": "Mercury",
+      "sign": "Leo",
+      "degree": null,
+      "greek": "Ἥλιος Ἑρμῆς Λέοντι"
+     },
+     {
+      "body": "Moon",
+      "sign": "Scorpio",
+      "degree": null,
+      "greek": "Σελήνη Σκορπίῳ"
+     },
+     {
+      "body": "Saturn",
+      "sign": "Aries",
+      "degree": null,
+      "greek": "Κρόνος ὡροσκόπος Κριῷ"
+     },
+     {
+      "body": "Jupiter",
+      "sign": "Pisces",
+      "degree": null,
+      "greek": "Ζεὺς Ἰχθύσιν"
+     },
+     {
+      "body": "Mars",
+      "sign": "Virgo",
+      "degree": null,
+      "greek": "Ἄρης Ἀφροδίτη Παρθένῳ"
+     },
+     {
+      "body": "Venus",
+      "sign": "Virgo",
+      "degree": null,
+      "greek": "Ἄρης Ἀφροδίτη Παρθένῳ"
+     },
+     {
+      "body": "Lot of Fortune",
+      "sign": "Capricorn",
+      "degree": null,
+      "greek": "κλῆρος τύχης Αἰγόκερῳ"
+     },
+     {
+      "body": "Lot of Daimon",
+      "sign": "Cancer",
+      "degree": null,
+      "greek": "δαίμων Καρκίνῳ"
+     }
+    ],
+    "ascendant": {
+     "sign": "Aries",
+     "degree": null
+    },
+    "chart_reproducible": "positions_only",
+    "reproducibility_note": "Signs only; no date, hour or place."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVI (end)",
+     "location": "Kroll 1908 p. 114 lines 1-18 (PDF page index 132)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.chapter_heading",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     132
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "chapter.topic",
+      "operator": "equals",
+      "value": "marriage"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "chapter_heading",
+    "greek": "⟨λζ´.⟩ Περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας παντοῖαι θεωρίαι καὶ σχήματα παντοῖα.",
+    "engine_rendering": "(37.) On marriage and conjugal union and sexual well-being: observations of every kind and configurations of every kind.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 114 lines 19-20 (PDF page index 132)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.method",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     132
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "technique.step",
+      "operator": "equals",
+      "value": "locate the topic of marriage"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "method",
+    "greek": "Ὅσαι μὲν οὖν μοι ἀγωγαὶ διὰ πείρας ἔδοξαν ἀληθεύειν, ταύτας μετ᾽ ἐπιλύσεως προέταξα· νυνὶ δὲ καὶ τὸν περὶ γάμου τόπον ποικίλον μὲν ὑπάρχοντα, εὐκατάληπτον δὲ τοῖς γε νοῦν ἔχουσι διασαφήσω. ὁ περὶ γάμου τόπος καταλαμβάνεται μὲν φυσικῶς ἀπὸ τοῦ ζ´ ζῳδίου τοῦ ὡροσκόπου· προσβλέπειν δὲ δεῖ τὴν Ἀφροδίτην ὡς κεῖται μετὰ τίνων καὶ ὑπὸ τίνος ἢ τίνων μαρτυρεῖται ἢ δεσπόζεται.",
+    "engine_rendering": "Whatever procedures seemed to me by experience to tell the truth, these I have set out above with their solution; and now I shall make clear the topic concerning marriage also, which is intricate but easy to grasp for those at least who have understanding. The topic concerning marriage is taken naturally from the 7th sign from the Ascendant; and one must look at Venus, how she lies, with whom, and by whom or by which planets she is witnessed or ruled.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "steps": [
+     "take the 7th sign from the Ascendant as the natural place of marriage",
+     "examine Venus: her co-present planets, the planets that testify to her, and her ruler"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 114 lines 21-27 (PDF page index 132)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_tropical_bicorporeal_night",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     132
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.sign_modality",
+      "operator": "in",
+      "value": [
+       "tropical",
+       "bicorporeal"
+      ]
+     },
+     {
+      "fact": "venus.is_chrematizon",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "sect",
+      "operator": "equals",
+      "value": "night"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐν τροπικοῖς γὰρ ζῳδίοις οὖσα ἢ δισώμοις χρηματίζουσα μάλιστα ἐπὶ νυκτὸς πολυγάμους ποιεῖ καὶ πολυκοίνους, καὶ μάλιστα ἐὰν ὁ Ἑρμῆς αὐτῇ ὁμόσε τύχῃ, ἢ πολὺ μᾶλλον ἐὰν καὶ ὁ Ἄρης αὐτῇ ἐπιμαρτυρήσῃ· καὶ γὰρ εἰς παίδων ἀρρένων ἐπιπλοκὰς ἔρχονται. εἰ δὲ καὶ τὸ ζῴδιον ᾖ βλοσυρώτερον, πρὸς τὰς συνουσίας ἐπιτακτικώτεροι γίνονται.",
+    "engine_rendering": "For Venus in tropical signs, or doing business in bicorporeal ones, especially by night, makes people much-married and promiscuous, and especially if Mercury falls in the same place with her, or far more if Mars also testifies to her; for they come even to entanglements with male youths. And if the sign be of the fiercer sort, they become the more imperious towards intercourse.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "states illicit sexual conduct, defamation or criminal exposure as fate; not delivered to customers",
+    "kroll_notes": [
+     "p.114 app. l.31 βλοσσυρώτερον V",
+     "p.114 app. l.32 ἐπιτευκτικώτεροι opinor (-κώτεροι Va, -κότεροι Vb) — Kroll conjectures ἐπιτευκτικώτεροι for the printed ἐπιτακτικώτεροι",
+     "p.114 app. l.28 πολυκοίνους cf. 121,32"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 114 lines 27-32 (PDF page index 132)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_lord_afflicted",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.lord.condition",
+      "operator": "in",
+      "value": [
+       "under the beams",
+       "in the 6th or 12th",
+       "afflicted by a corrupter",
+       "badly placed"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν ἡ Ἀφροδίτη χρηματίζῃ, ὁ δὲ κύριος αὐτῆς δεδυκὼς ἢ κακοδαιμονῶν ἢ φθοροποιὸς αὐτὴν κακώσῃ ἢ φαύλως ᾖ κείμενος, ἀτυχεῖς περὶ τοὺς γάμους καὶ συναλλαγὰς ποιεῖ.",
+    "engine_rendering": "If Venus is doing business but her lord has set, or is in the place of the Bad Daimon, or a corrupting star afflicts her, or he lies in a base position, it makes people unlucky in marriages and in dealings.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.115 app. l.1 αὐτὸν V",
+     "p.115 app. l.2 φαῦλος V, ἀτυχὴς V"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 1-3 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.corrupter_rejects_venus",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.aspected_by",
+      "operator": "equals",
+      "value": "malefic in rejection (ἀθέτησις)"
+     },
+     {
+      "fact": "lord_of_house.aspected_by",
+      "operator": "equals",
+      "value": "malefic"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν δὲ αὐτὴν τὴν Ἀφροδίτην φθοροποιὸς ἀθετήσῃ μαρτυρήσας ἢ καὶ τὸν οἰκοδεσπότην μάλιστα, θανάτους γυναικῶν ποιήσει ἢ σίνη ἢ περιστάσεις. ἐὰν μὲν καλῶς ἔχωσι πρὸς τὴν γένεσιν, κληρονομίας ἐξ αὐτῶν· κακῶς δὲ κείμενοι πάθη καὶ λύπας.",
+    "engine_rendering": "But if a corrupting star rejects Venus herself by testifying to her, or especially the house-master too, it will produce deaths of wives, or injuries, or crises. If they stand well towards the nativity, inheritances from them; but lying badly, sufferings and griefs.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "states the death of the native's spouse or partner; this product does not deliver death predictions about a living person",
+    "kroll_notes": [
+     "p.115 app. l.6 ἐν πάθει Va corr. Vb"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 3-7 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.saturn_regards_western_venus",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.phase",
+      "operator": "equals",
+      "value": "western/occidental"
+     },
+     {
+      "fact": "saturn.aspects_venus",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Δυτικὴν Ἀφροδίτην Κρόνος ἐπιβλέπων κατὰ τὸ πλεῖστον ἀγάμους καὶ δυσσυναλλάκτους ποιεῖ.",
+    "engine_rendering": "Saturn looking upon a western Venus for the most part makes people unmarried and hard to deal with.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.115 app. l.9 δυσαναλλάκτους V"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 8-9 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_in_saturn_place_opposed",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.placement",
+      "operator": "in",
+      "value": [
+       "Saturn's sign",
+       "Saturn's bounds"
+      ]
+     },
+     {
+      "fact": "saturn.opposes_venus",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "venus.testified_by",
+      "operator": "equals",
+      "value": "none of Mars, Jupiter, Mercury"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν Ἀφροδίτη ἐν Κρόνου ζῳδίῳ τύχῃ ἢ καὶ ὁρίοις ἢ καὶ κατ᾽ ἰσοσκελῆ γραμμὴν ὑπὸ αὐτοῦ διαμετρηθῇ καὶ μήτε Ἄρης μήτε Ζεὺς αὐτῇ ἐπιμαρτυρήσῃ μήτε Ἑρμῆς ⟨μήτε⟩ συμπαρῶσιν αὐτῇ, παντελῶς ἔσονται χῆραι καὶ παρθένοι.",
+    "engine_rendering": "If Venus happens to be in Saturn's sign or bounds, or is opposed by him along an isosceles line, and neither Mars nor Jupiter testifies to her nor Mercury, ⟨nor⟩ are they co-present with her, they will be utterly widowed and virgin.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "⟨μήτε⟩ is Kroll's supplement, printed in angle brackets"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 9-13 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.saturn_opposes_venus_always",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "saturn.opposes_venus",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "πάντοτε δὲ διαμετρῶν Κρόνος Ἀφροδίτην σεσινωμένην γυναῖκα δίδωσιν ἢ στεῖραν· ὁμοίως καὶ γυναικὶ ἄνδρα.",
+    "engine_rendering": "And Saturn opposing Venus always gives a wife who is maimed or barren; and likewise to a woman such a husband.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "assigns bodily deformity or chronic disease as fate; this product does not deliver deterministic statements about a person's body or health"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 13-15 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.saturn_mc_opposes_venus",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "saturn.house",
+      "operator": "equals",
+      "value": "10"
+     },
+     {
+      "fact": "saturn.opposes_venus",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν δὲ Κρόνος μεσουρανήσῃ, διαμετρῇ δὲ τὴν Ἀφροδίτην, δούλην δίδωσι γυναῖκα.",
+    "engine_rendering": "But if Saturn culminates and opposes Venus, he gives a slave woman as wife.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "assigns enslavement or servile status to a person as fate; not delivered to customers"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 15-16 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_saturn_house_jupiter_mars",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.placement",
+      "operator": "equals",
+      "value": "Saturn's house"
+     },
+     {
+      "fact": "venus.testified_by",
+      "operator": "equals",
+      "value": "Jupiter"
+     },
+     {
+      "fact": "venus.applies_to",
+      "operator": "equals",
+      "value": "Saturn"
+     },
+     {
+      "fact": "venus.regarded_by",
+      "operator": "equals",
+      "value": "Mars"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν Ἀφροδίτη Κρόνου οἴκῳ οὖσα ὑπὸ Διὸς μαρτυρηθῇ ἢ ἀπορρέουσα Διὸς Κρόνῳ συνάπτῃ ἢ εἰς κόλλησιν αὐτοῦ ἔρχηται, βλέπηται δὲ ὑπὸ Ἄρεως, τροφοῖς αὐτῶν ἢ καθηγητῶν γυναιξὶν ἢ μητρυιαῖς ἢ πατέρων ἢ μητέρων ἀδελφαῖς ἢ ἀδελφοῖς ἐπιμίσγονται.",
+    "engine_rendering": "If Venus, being in Saturn's house, is witnessed by Jupiter, or, separating from Jupiter, applies to Saturn or comes into adherence with him, and is looked upon by Mars, they mingle with their own nurses, or the wives of their tutors, or stepmothers, or their fathers' or mothers' sisters or brothers.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "states illicit sexual conduct, defamation or criminal exposure as fate; not delivered to customers"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 16-20 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.lights_amplify_faults",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sun.co_testifies",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Ἡλίου δὲ αὐτοῖς συνεπιμαρτυρήσαντος ἢ τῇ Σελήνῃ ἔτι μᾶλλον τὰ ἁμαρτήματα περικυλίσει, μάλιστα τῆς Σελήνης μαρτυρούσης αὐτοῖς ἢ ὑπ᾽ αὐτῶν μαρτυρουμένης.",
+    "engine_rendering": "And if the Sun co-testifies to them, or to the Moon, it will roll the faults about them still more, especially when the Moon testifies to them or is testified to by them.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "states illicit sexual conduct, defamation or criminal exposure as fate; not delivered to customers",
+    "kroll_notes": [
+     "p.115 app. l.21 expectes ἁμαρτήμασιν αὐτοὺς"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 20-23 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_west_or_ic_with_saturn",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.house",
+      "operator": "in",
+      "value": [
+       "7",
+       "4"
+      ]
+     },
+     {
+      "fact": "venus.conjunct",
+      "operator": "equals",
+      "value": "Saturn"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Ἀφροδίτη ἐν τῷ δυτικῷ ζῳδίῳ μετὰ Κρόνου ἢ ἐν τῷ ὑπογείῳ κέντρῳ ἀγεννέσι γάμοις ἐπιμίξει ἢ καὶ ἐπ᾽ αὐτοῖς πένθη ποιήσει.",
+    "engine_rendering": "Venus in the setting sign with Saturn, or in the subterranean angle, will mingle them in low-born marriages, or will also make mournings over them.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.115 app. l.23 ἀγεννέσι V"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 23-24 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_with_saturn_older_partner",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.conjunct_or_ruled_by_or_overcome_by",
+      "operator": "equals",
+      "value": "Saturn"
+     },
+     {
+      "fact": "jupiter.testifies",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "καθόλου ὅσοι Ἀφροδίτην ἔχουσι σὺν Κρόνῳ ἢ καὶ οἰκοδεσποτοῦσαν αὐτοῦ ἢ καθυπερτεροῦσαν καὶ τὸν Δία τούτοις μαρτυροῦντα, πρεσβυτέραις ἐπιπλακήσονται ἢ καὶ ὑπερεχούσαις· ἐὰν δὲ γυναικὸς ᾖ, τὸ αὐτό.",
+    "engine_rendering": "In general, those who have Venus with Saturn, or ruling his house, or overcoming him, and Jupiter testifying to these, will be entangled with older women, or with women of superior station; and if it is a woman's chart, the same.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.115 app. ll.25 sq. οἰκοδεσποτοῦντα et καθυπερτεροῦντα V",
+     "l.27 ἐπιπιπλακήσονται V; γυναικὸς (sc. genitura)] γυναῖκα V"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 24-28 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.moon_venus_same_angle",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "moon.and_venus",
+      "operator": "equals",
+      "value": "same angle (ὁμόκεντροι)"
+     },
+     {
+      "fact": "jupiter_or_mars.testifies",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Σελήνη καὶ Ἀφροδίτη ὁμόκεντροι ἀδελφαῖς ἢ ἀδελφοῖς ἐπιπλέκονται μάλιστα Διὸς καὶ Ἄρεως ἐπιμαρτυρούντων.",
+    "engine_rendering": "Moon and Venus on the same angle: they become entangled with sisters or brothers, especially when Jupiter and Mars testify.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "states illicit sexual conduct, defamation or criminal exposure as fate; not delivered to customers"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 28-30 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.moon_venus_square_or_opposed",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "moon.aspect_to_venus",
+      "operator": "in",
+      "value": [
+       "square",
+       "opposition"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Σελήνη καὶ Ἀφροδίτη τετράγωνοι ἢ διάμετροι ζηλοτύπους ποιοῦσιν· Ἄρεως δὲ ἐπιμαρτυρήσαντος μείζων ἡ ἐπίτασις.",
+    "engine_rendering": "Moon and Venus in square or opposition make jealous people; and if Mars testifies, the intensity is greater.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 30-31 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.moon_venus_trine_own_house",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "moon.aspect_to_venus",
+      "operator": "in",
+      "value": [
+       "trine",
+       "square"
+      ]
+     },
+     {
+      "fact": "moon.in_own_house",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "both.angular",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Σελήνη Ἀφροδίτῃ τρίγωνος ἐν ἰδίῳ οἴκῳ ἢ τετράγωνος, μάλιστα ἐπίκεντροι, συγγενικοὺς δίδωσι γάμους, καὶ μᾶλλον Ἄρεως καὶ Διὸς μαρτυρησάντων.",
+    "engine_rendering": "The Moon trine to Venus in her own house, or square, and especially both angular, gives marriages within the kindred, and the more so when Mars and Jupiter testify.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.115 app. l.32 'numeros emendare (possis ἐπίκεντρος) otiosum duxi' — Kroll declines to emend the number/case"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 31-34 (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.sun_own_house_with_jupiter_venus",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     133
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sun.in_own_house_or_exaltation",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "sun.conjunct",
+      "operator": "in",
+      "value": [
+       "Jupiter",
+       "Venus"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Ἥλιος ἐν ἰδίῳ οἴκῳ ἢ ὑψώματι μετὰ Διὸς καὶ Ἀφροδίτης συγγενικῷ γάμῳ ζευγνύουσιν ἀπὸ πατρός·",
+    "engine_rendering": "The Sun in his own house or exaltation with Jupiter and Venus: they are yoked in a marriage within the kindred, on the father's side.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "pdf_page_indices_note": "printed p.115 line 34 running to p.116 line 1"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 115 lines 34- (PDF page index 133)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_own_house_jupiter_bounds",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.in_own_house_or_exaltation",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "venus.bounds_lord",
+      "operator": "equals",
+      "value": "Jupiter"
+     },
+     {
+      "fact": "venus.conjunct",
+      "operator": "in",
+      "value": [
+       "Mercury",
+       "Moon"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Ἀφροδίτη ἐν ἰδίῳ οἴκῳ ἢ ὑψώματι Διὸς [καὶ Ἀφροδίτης] ὁρίοις σὺν Ἑρμῇ καὶ Σελήνῃ συγγενικῷ γάμῳ ζευγνύουσιν ἀπὸ μητρός.",
+    "engine_rendering": "Venus in her own house or exaltation, in the bounds of Jupiter [and of Venus], with Mercury and the Moon: they are yoked in a marriage within the kindred, on the mother's side.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.116 app. l.2 'del. Vb aut V2; dele etiam Διὸς et adde ᾖ' — Kroll records that [καὶ Ἀφροδίτης] is deleted by the second hand and himself suggests deleting Διὸς and adding ᾖ"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 1-3 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_ic_with_moon",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.house",
+      "operator": "equals",
+      "value": "4"
+     },
+     {
+      "fact": "venus.conjunct_or_opposed_or_antiscia",
+      "operator": "equals",
+      "value": "Moon"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Ἀφροδίτη ἐν τῷ ὑπογείῳ κέντρῳ τυχοῦσα μετὰ Σελήνης ἢ καὶ εἰ διαμετρήσωσιν ἀλλήλας ἢ καὶ ἀντιμεσουρανήσωσιν, ἀδελφικοῖς ἢ συγγενικοῖς ζευγνύουσι προσώποις.",
+    "engine_rendering": "Venus falling in the subterranean angle with the Moon, or if they oppose one another, or occupy the opposite culminations, they are yoked to persons of their own brotherhood or kindred.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 3-6 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.saturn_decimates_venus",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "saturn.aspect_to_venus",
+      "operator": "in",
+      "value": [
+       "superior square (ἐπιδεκατεία)",
+       "opposition",
+       "conjunction",
+       "rulership"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "πάντοτε Κρόνος Ἀφροδίτην ἐπιδεκατεύων ἢ εἰ διαμετρήσει ἢ εἰ σὺν αὐτῇ τύχῃ ἢ οἰκοδεσποτεῖ αὐτῆς, ψύξει τοὺς γάμους ἢ ῥυπαίνει, καὶ μᾶλλον Ἑρμοῦ μαρτυροῦντος.",
+    "engine_rendering": "Always Saturn decimating Venus (overcoming her by superior square), or if he opposes her, or falls together with her, or rules her, will chill the marriages or defile them, and the more so when Mercury testifies.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.116 app. l.7 nempe διαμετρήσῃ et οἰκοδεσποτῇ"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 6-9 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.saturn_venus_epanaphora",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "saturn.and_venus",
+      "operator": "equals",
+      "value": "in a succedent place or on an angle"
+     },
+     {
+      "fact": "saturn.testifies_to_venus",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Κρόνος καὶ Ἀφροδίτη ἐν τῇ ἐπαναφορᾷ ἢ ἐπὶ κέντρῳ αὐτῇ μαρτυρῶν ποιεῖ αἰσχροὺς καὶ καταφερεῖς καὶ νεωτερίζοντας καὶ ἀναξίαις ἢ δούλαις ἐπιπλεκομένους, ὧν χάριν χειμασθήσονται, ἐὰν μή τις μεσεμβολῶν διακόψῃ τὴν κάκωσιν.",
+    "engine_rendering": "Saturn and Venus in the succedent place, or Saturn on an angle testifying to her, makes people shameful and lewd and revolutionary, entangled with unworthy or servile women, on whose account they will be storm-tossed, unless some planet interposing between cuts off the affliction.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "states illicit sexual conduct, defamation or criminal exposure as fate; not delivered to customers",
+    "technique_note": "μεσεμβόλησις — a planet interposed between two others breaks the affliction"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 9-12 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.jupiter_conceals",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "jupiter.testifies",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν δὲ ὁ τοῦ Διὸς μαρτυρῇ, πολλὰ καὶ τῶν ἀτακτημάτων κρυβήσεται καὶ οὐκ ἔσται αἰσχρά· ἐπιμιγήσονται γὰρ καὶ ὑπερεχούσαις γυναιξὶ καὶ ταῖς τῶν γνωρίμων καὶ οὐ πολυτεκνήσουσιν αἵ τε συνερχόμεναι αὐτοῖς στειρωθήσονται ἢ καὶ βραδέως συλλήψονται καὶ συλλαβοῦσαι διαφθεροῦσι· τὰ δ᾽ ὅμοια καὶ ἐπὶ θηλυκῆς γενέσεως νοείσθω.",
+    "engine_rendering": "But if Jupiter testifies, many even of the disorderly acts will be hidden and will not be shameful; for they will mingle with women of superior rank and with the wives of their acquaintances, and they will not have many children, and the women who come together with them will be made barren, or will conceive slowly, and having conceived will miscarry. Let the like be understood for a female nativity too.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "states sterility and miscarriage as fate; this product does not deliver deterministic statements about a person's fertility",
+    "kroll_notes": [
+     "p.116 app. l.13 ἀτακτημάτων V",
+     "l.15 πολυτεκνήσωσιν V"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 12-17 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.saturn_witness_venus_with_jupiter_mars",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "saturn.testifies_to_venus",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "venus.configured_with",
+      "operator": "in",
+      "value": [
+       "Jupiter",
+       "Mars"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Ἐὰν Κρόνος τῇ Ἀφροδίτῃ συμμαρτυρῇ ἢ ὁρίοις αὐτῆς ᾖ, αὐτὴ δὲ ἡ Ἀφροδίτη σὺν Διὶ καὶ Ἄρει σχηματισθῇ, προκοπὴ μὲν ἔσται διὰ τέκνου ἢ θηλυκοῦ προσώπου καὶ ὄψεται εὐτυχίας, τὸ δὲ τέλος διαμαρτήσει, ἐὰν μὴ ἐν ἰδίοις τύχωσιν οἴκοις ἢ ὑψώμασι χρηματίζοντες.",
+    "engine_rendering": "If Saturn co-testifies to Venus, or is in her bounds, but Venus herself is configured with Jupiter and Mars, there will be advancement through a child or a female person, and he will see good fortunes; but he will fail of the end, unless they happen to be doing business in their own houses or exaltations.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.116 app. l.18 αὐτῆς Va] αὐτοῦ Vb"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 18-22 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.moon_struck_by_jupiter_saturn_witness",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "moon.receives_ray_from",
+      "operator": "equals",
+      "value": "Jupiter"
+     },
+     {
+      "fact": "saturn.testifies_with_jupiter",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν ὑπὸ Διὸς Σελήνη ἀκτινοβοληθῇ ἢ συσχηματίζηται αὐτῷ, ὁ δὲ Κρόνος αὐτῇ σὺν τῷ Διὶ μαρτυρῇ, ἀναξίᾳ γυναικὶ καὶ ἀργυρωνήτῳ συνοικήσει· τὸ γὰρ ἀξίωμα ὁ Κρόνος βλάπτει.",
+    "engine_rendering": "If the Moon is ray-struck by Jupiter or configured with him, and Saturn testifies to her together with Jupiter, he will live with an unworthy woman, one bought with silver; for Saturn damages the rank.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "output_policy": "refused",
+    "output_policy_reason": "assigns enslavement or servile status to a person as fate; not delivered to customers"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 22-25 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_exalted_jupiter_witness",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "configuration.base",
+      "operator": "equals",
+      "value": "the preceding figure"
+     },
+     {
+      "fact": "venus.in_exaltation",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "venus.testified_by",
+      "operator": "equals",
+      "value": "Jupiter"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν δὲ ἐπὶ τούτου τοῦ σχήματος ἡ Ἀφροδίτη ἐν ὑψώματι ὑπάρχῃ ὑπὸ Διὸς μαρτυρουμένη, διὰ ταύτην ἐν προβιβασμοῖς καὶ ὑπάρξει γνωσθήσεται παρὰ μεγάλοις ἀνδράσιν.",
+    "engine_rendering": "But if in this same figure Venus is in her exaltation, witnessed by Jupiter, through her he will be known among great men, in promotions and in substance.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.116 app. l.27 nempe ⟨γενήσεται καὶ⟩ γν."
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 25-28 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.mercury_added_to_figure",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "configuration.base",
+      "operator": "equals",
+      "value": "the preceding figure"
+     },
+     {
+      "fact": "mercury.configured",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "ἐὰν δὲ καὶ Ἑρμῆς σχηματίζηται ἐπὶ τοῦδε τοῦ διαθέματος, πρακτικοὶ μὲν ἔσονται καὶ εὐεπίβολοι καὶ φρόνιμοι καὶ ἐπαφρόδιτοι, πολύκοιτοι δὲ καὶ ἐπὶ πολὺ ἀστατοῦντες περὶ τοὺς γάμους.",
+    "engine_rendering": "And if Mercury too is configured upon this same arrangement, they will be effective and enterprising and prudent and charming, but much-bedded and for the most part unstable about marriages.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "kroll_notes": [
+     "p.116 app. l.29 εὐεπίβουλοι V, πολυκίνητοι Va"
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 28-30 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.jupiter_regards_venus_general",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "jupiter.aspects_or_is_akin_to_venus",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "καθόλου δὲ Ζεὺς Ἀφροδίτην ἐπιθεωρῶν ἢ καὶ οἰκειούμενος αὐτῇ ἢ καὶ κατὰ μοῖραν σύμφωνος αὐτῇ εὐσυναλλάκτους ποιήσει καὶ ἀπὸ γυναικῶν ὠφελουμένους τάς τε γυναῖκας ἀπὸ ἀνδρῶν· κἂν κεκακωμένη ᾖ, ἐπικουρεῖται ὡς μὴ πάντα διασφάλλεσθαι.",
+    "engine_rendering": "In general Jupiter observing Venus, or being made akin to her, or in agreement with her by degree, will make people easy to deal with and benefited by women, and the women by men; and even if she is afflicted, she is helped so that not everything is overthrown.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 30-34 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  },
+  {
+   "rule_id": "hel.valens.b2.marriage.venus_angular_unafflicted",
+   "tradition_id": "hellenistic",
+   "school_id": "valens_anthologiae_greek",
+   "period": "written c. 150-175 CE, Antioch/Alexandria",
+   "domain": "natal",
+   "scope": {
+    "work": "Anthologiae",
+    "book_chapter": "Anthologiae II.37",
+    "technique": "marriage, union and sexual life (περὶ γάμου καὶ συναρμογῆς καὶ εὐπαθείας)",
+    "pdf_page_indices": [
+     134
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "venus.angular",
+      "operator": "equals",
+      "value": true
+     },
+     {
+      "fact": "venus.house",
+      "operator": "in",
+      "value": [
+       "1",
+       "10"
+      ]
+     },
+     {
+      "fact": "venus.afflicted_by_saturn",
+      "operator": "equals",
+      "value": false
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "delineation",
+    "greek": "Ἀφροδίτη ἐπίκεντρος οὖσα τῷ ὡροσκόπῳ μάλιστα ἢ τῷ μεσουρανήματι καὶ μὴ κεκακωμένη ὑπὸ Κρόνου εὐγάμους ποιεῖ, ὑπὸ Διὸς δὲ μαρτυρουμένη ἀντέχει ταῖς κακώσεσιν εἰς τὸ μὴ σφάλλεσθαι, συμπαθείας ποιοῦσα καὶ γάμους.",
+    "engine_rendering": "Venus angular, especially at the Ascendant or the Midheaven, and not afflicted by Saturn, makes people well-married; and being witnessed by Jupiter she holds out against the afflictions so as not to be tripped up, making sympathies and marriages.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "customer_prediction": false,
+    "pdf_page_indices_note": "p.116 line 35 to p.117 line 2"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+     "work": "Anthologiae",
+     "section": "Liber II cap. XXXVII",
+     "location": "Kroll 1908 p. 116 lines 35-36 (PDF page index 134)",
+     "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon per the mining protocol"
+    }
+   ],
+   "evidence_grade": "A",
+   "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+   "review_status": "engine_read_unreviewed"
+  }
+ ],
+ "fragment_vectors": [
+  {
+   "vector_id": "valens.b2d.nativity.01",
+   "rule_ids": [
+    "hel.valens.b2d.nativity.01"
+   ],
+   "inputs": {
+    "nativity_id": "valens.b2d.nativity.01",
+    "note": "worked chart printed at Kroll p.114"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.36",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2d.nativity.02",
+   "rule_ids": [
+    "hel.valens.b2d.nativity.02"
+   ],
+   "inputs": {
+    "nativity_id": "valens.b2d.nativity.02",
+    "note": "worked chart printed at Kroll p.114"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.36",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2d.nativity.03",
+   "rule_ids": [
+    "hel.valens.b2d.nativity.03"
+   ],
+   "inputs": {
+    "nativity_id": "valens.b2d.nativity.03",
+    "note": "worked chart printed at Kroll p.114"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.36",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2d.nativity.04",
+   "rule_ids": [
+    "hel.valens.b2d.nativity.04"
+   ],
+   "inputs": {
+    "nativity_id": "valens.b2d.nativity.04",
+    "note": "worked chart printed at Kroll p.114"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.36",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.chapter_heading",
+   "rule_ids": [
+    "hel.valens.b2.marriage.chapter_heading"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "chapter_heading"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.method",
+   "rule_ids": [
+    "hel.valens.b2.marriage.method"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "method"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_tropical_bicorporeal_night",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_tropical_bicorporeal_night"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_tropical_bicorporeal_night"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_lord_afflicted",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_lord_afflicted"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_lord_afflicted"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.corrupter_rejects_venus",
+   "rule_ids": [
+    "hel.valens.b2.marriage.corrupter_rejects_venus"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "corrupter_rejects_venus"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.saturn_regards_western_venus",
+   "rule_ids": [
+    "hel.valens.b2.marriage.saturn_regards_western_venus"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "saturn_regards_western_venus"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_in_saturn_place_opposed",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_in_saturn_place_opposed"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_in_saturn_place_opposed"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.saturn_opposes_venus_always",
+   "rule_ids": [
+    "hel.valens.b2.marriage.saturn_opposes_venus_always"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "saturn_opposes_venus_always"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.saturn_mc_opposes_venus",
+   "rule_ids": [
+    "hel.valens.b2.marriage.saturn_mc_opposes_venus"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "saturn_mc_opposes_venus"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_saturn_house_jupiter_mars",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_saturn_house_jupiter_mars"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_saturn_house_jupiter_mars"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.lights_amplify_faults",
+   "rule_ids": [
+    "hel.valens.b2.marriage.lights_amplify_faults"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "lights_amplify_faults"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_west_or_ic_with_saturn",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_west_or_ic_with_saturn"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_west_or_ic_with_saturn"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_with_saturn_older_partner",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_with_saturn_older_partner"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_with_saturn_older_partner"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.moon_venus_same_angle",
+   "rule_ids": [
+    "hel.valens.b2.marriage.moon_venus_same_angle"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "moon_venus_same_angle"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.moon_venus_square_or_opposed",
+   "rule_ids": [
+    "hel.valens.b2.marriage.moon_venus_square_or_opposed"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "moon_venus_square_or_opposed"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.moon_venus_trine_own_house",
+   "rule_ids": [
+    "hel.valens.b2.marriage.moon_venus_trine_own_house"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "moon_venus_trine_own_house"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.sun_own_house_with_jupiter_venus",
+   "rule_ids": [
+    "hel.valens.b2.marriage.sun_own_house_with_jupiter_venus"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "sun_own_house_with_jupiter_venus"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_own_house_jupiter_bounds",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_own_house_jupiter_bounds"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_own_house_jupiter_bounds"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_ic_with_moon",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_ic_with_moon"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_ic_with_moon"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.saturn_decimates_venus",
+   "rule_ids": [
+    "hel.valens.b2.marriage.saturn_decimates_venus"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "saturn_decimates_venus"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.saturn_venus_epanaphora",
+   "rule_ids": [
+    "hel.valens.b2.marriage.saturn_venus_epanaphora"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "saturn_venus_epanaphora"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.jupiter_conceals",
+   "rule_ids": [
+    "hel.valens.b2.marriage.jupiter_conceals"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "jupiter_conceals"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.saturn_witness_venus_with_jupiter_mars",
+   "rule_ids": [
+    "hel.valens.b2.marriage.saturn_witness_venus_with_jupiter_mars"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "saturn_witness_venus_with_jupiter_mars"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.moon_struck_by_jupiter_saturn_witness",
+   "rule_ids": [
+    "hel.valens.b2.marriage.moon_struck_by_jupiter_saturn_witness"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "moon_struck_by_jupiter_saturn_witness"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false,
+    "output_policy": "refused"
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_exalted_jupiter_witness",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_exalted_jupiter_witness"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_exalted_jupiter_witness"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.mercury_added_to_figure",
+   "rule_ids": [
+    "hel.valens.b2.marriage.mercury_added_to_figure"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "mercury_added_to_figure"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.jupiter_regards_venus_general",
+   "rule_ids": [
+    "hel.valens.b2.marriage.jupiter_regards_venus_general"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "jupiter_regards_venus_general"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  },
+  {
+   "vector_id": "valens.b2.marriage.venus_angular_unafflicted",
+   "rule_ids": [
+    "hel.valens.b2.marriage.venus_angular_unafflicted"
+   ],
+   "inputs": {
+    "technique": "marriage",
+    "case": "venus_angular_unafflicted"
+   },
+   "expected": {
+    "greek_present": true,
+    "section": "Anthologiae II.37",
+    "customer_prediction": false
+   },
+   "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+  }
+ ]
+}

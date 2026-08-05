@@ -1,0 +1,4022 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-05",
+ "tradition_id": "indian_jyotisha",
+ "school_id": "parasara_bphs_subodhini_1899",
+ "source_pack_id": "parasara_bphs_subodhini_1899_strength_v1",
+ "source_edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+ "source_registry_ids": [
+  "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+  "jyotisha_bphs_subodhini_1899_archive"
+ ],
+ "implementation_status": "not_implemented",
+ "publication_status": "research_only",
+ "evidence_note": "The STRENGTH MACHINERY of the Parasari track, read directly from the Sanskrit of the Brhatparasarahorasaramsa in the Subodhini (Nirnaya Sagara / eGangotri) 1899 printing. Two arithmetic systems are encoded here that the Jyotisha pack previously lacked entirely: SADBALA (uttara-khanda adhyaya 2, slokas 1-46) and ASHTAKAVARGA (uttara-khanda adhyaya 1 slokas 19-74, with the reductions and the pinda at purva-khanda adhyayas 17, 18, 19 and the significations at adhyaya 20). Both are ARITHMETIC, not delineation, so every rule is encoded as a computable procedure with explicit formulas, unit tables and, wherever the printing supplies one, the text's OWN worked numeric example carried as a validation vector. Nine of those worked examples were recomputed and reproduce the printed result exactly - including the Sun's complete sadbala assembly (sthana 4|18|4 + dig 0|49|1 + kala 3|5|49 + cheshta 0|27|15 + naisargika 1|0|0 = 9|40|9 rupas, then corrected by a quarter of the benefic drsti to 9|41|14) and the Sun's ashtakavarga pinda (graha-pinda 40 + rasi-pinda 51 = 91). Each of the eight bhinnashtakavarga tables was additionally checked by row-sum against its canonical total (48 / 49 / 39 / 54 / 56 / 52 / 39 for the seven grahas and 49 for the lagna, summing to the sarvashtakavarga 337). Every rendering is the encoder's own unreviewed translation of the quoted Devanagari and is graded engine_translation_unreviewed; the Devanagari is carried on every conclusion so a specialist can check the rendering rather than trust it. Where this recension's numbers diverge from the modern handbooks - the saptavargaja series, the required minimum strengths, and the placement of ayana-bala with cheshta-bala rather than inside kala-bala - the divergence is recorded as read and is NOT normalised. No engine code consumes this manifest; customer_prediction is false on every conclusion.",
+ "rules": [
+  {
+   "rule_id": "jyotisha.bphs.u02.sadbala.six_components",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sadbala_enumeration",
+    "chapter": "Uttara-khanda adhyaya 2 (Bhava-sadbaladi-varnana)",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "chart",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "system_definition",
+    "unit": "rupa (1 rupa = 60 virupas); the 1899 text writes every strength as a sexagesimal triple rupa|virupa|sub-virupa",
+    "customer_prediction": false,
+    "sanskrit": "तानि तु दृग्बलं ६ स्थानबलं १ दिग्बलं २ कालबलं ३ निसर्गबलं ४ चेष्टाबलं ५ इति बलानि षड्विधानि, तत्र स्थानादिपंचविधस्यैक्यतया दृग्बलस्यैव ऋणधनतया मुख्यत्वादादौ दृग्बलसाधनं वक्तुमाह",
+    "engine_rendering": "The strengths are six in kind: drik-bala (6), sthana-bala (1), dig-bala (2), kala-bala (3), naisargika-bala (4), cheshta-bala (5). Because the five beginning with sthana are summed together while drik-bala alone is signed (negative or positive), drik-bala is stated first.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "components": [
+     "sthana_bala",
+     "dig_bala",
+     "kala_bala",
+     "cheshta_bala",
+     "naisargika_bala",
+     "drik_bala"
+    ],
+    "additive_five": [
+     "sthana_bala",
+     "dig_bala",
+     "kala_bala",
+     "cheshta_bala",
+     "naisargika_bala"
+    ],
+    "signed_component": "drik_bala",
+    "assembly_note": "The five additive balas are summed; drik-bala is then applied as a signed correction (see jyotisha.bphs.u02.sadbala.pinda_assembly). This recension groups AYANA-bala with CHESHTA-bala as the fourth bala (uttara 2.20-24), NOT inside kala-bala as the modern handbooks do."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "modern_handbook_sadbala_schemes_place_ayana_bala_inside_kala_bala"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "commentary on slokas 1-2, page 42 of the printing (OCR lines 26018-26022)",
+     "verification": "read directly in Devanagari 2026-08-04 from tmp/acquire/texts/bphs_subodhini_1899_djvu.txt"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.drkbala.arc_to_drsti_value",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "drik_bala_graded_aspect_arithmetic",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 2-7",
+    "engine_facts_consumed": [
+     "sidereal longitude of every graha",
+     "sidereal longitude of every bhava"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "aspecting_graha_longitude",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "aspected_point_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "virupas of drsti (60 virupas = purna drsti)",
+    "customer_prediction": false,
+    "sanskrit": "दृश्याद्विशोध्य द्रष्टारं षड्भ्योऽधिकश्च कः भवेत् ॥ दिग्भ्यो विशोध्य द्वाभ्यां तु भागीकृत्य च ...",
+    "engine_rendering": "Subtract the aspecting graha from the aspected point. If the remainder exceeds six rasis, subtract it from ten rasis, reduce to degrees and divide by two; the quotient is the drsti.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "input": "d = (longitude of aspected point - longitude of aspecting graha) mod 360, in degrees",
+    "cases": [
+     {
+      "arc_rasis_over": 6,
+      "arc_deg_range": "180 < d <= 300",
+      "formula": "(300 - d) / 2",
+      "sanskrit_cue": "षडधिके ... दिग्भ्यो विशोध्य ... द्वाभ्यां"
+     },
+     {
+      "arc_rasis_over": 5,
+      "arc_deg_range": "150 < d <= 180",
+      "formula": "(d - 150) * 2",
+      "sanskrit_cue": "शराधिके ... राशिं विना ... द्विगुणिताः"
+     },
+     {
+      "arc_rasis_over": 4,
+      "arc_deg_range": "120 < d <= 150",
+      "formula": "150 - d",
+      "sanskrit_cue": "वेदाधिके ... भूतात् (५) त्यजेत्"
+     },
+     {
+      "arc_rasis_over": 3,
+      "arc_deg_range": "90 < d <= 120",
+      "formula": "(120 - d) / 2 + 30",
+      "sanskrit_cue": "त्रिभाधिके ... अर्णवेभ्यः (४) विशोध्य द्वाभ्यां ... त्रिंशद्युतम्"
+     },
+     {
+      "arc_rasis_over": 2,
+      "arc_deg_range": "60 < d <= 90",
+      "formula": "(d - 60) + 15",
+      "sanskrit_cue": "कराधिके ... राशिं विना ... तिथियुताः (१५)"
+     },
+     {
+      "arc_rasis_over": 1,
+      "arc_deg_range": "30 < d <= 60",
+      "formula": "(d - 30) / 2",
+      "sanskrit_cue": "रूपाधिके ... राशिं विहाय भागाः द्वाभ्यां विभाजिताः"
+     },
+     {
+      "arc_rasis_over": 0,
+      "arc_deg_range": "0 <= d <= 30, or d > 300",
+      "formula": "0",
+      "sanskrit_cue": "(no case stated; the text supplies no rule below one rasi or above ten)"
+     }
+    ],
+    "note": "This is the arithmetic behind the quarter-grading (pada/dvipada/tripada/purna) recorded at adhyaya 4 slokas 23-29 in bphs_rule_manifest.json. It is a CONTINUOUS function of the arc, not a flat special-aspect rule, and it therefore conflicts with the engine's current flat Mars 4/7/8, Jupiter 5/7/9, Saturn 3/7/10 scheme. The conflict is recorded, not resolved."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "jyotisha.bphs.a04.drsti_pada_strength.saturn",
+    "jyotisha.bphs.a04.drsti_pada_strength.jupiter",
+    "jyotisha.bphs.a04.drsti_pada_strength.mars",
+    "engine_flat_special_aspect_rule_in_vedic_py"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 2-7 with the Subodhini commentary and six numeric examples, pages 38-42 (OCR lines 25992-26090)",
+     "verification": "read directly in Devanagari 2026-08-04; all six of the text's own worked examples were recomputed and reproduce"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sthanabala.uccha",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sthana_bala_component_1_uccha_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 7-8",
+    "engine_facts_consumed": [
+     "sidereal longitude of the graha",
+     "debilitation degree of the graha"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "virupas, maximum 60",
+    "customer_prediction": false,
+    "sanskrit": "नीचोनं तु ग्रहं भागाधिके चक्राद्विशोधयेत् ॥ भागीकृत्य त्रिभिर्भक्तं फलमुच्चबलं भवेत् ॥ ८ ॥",
+    "engine_rendering": "Subtract the graha's debilitation point from the graha; if what remains exceeds six rasis, subtract it from the circle (twelve rasis); reduce to degrees and divide by three - the quotient is the uccha-bala.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "formula": "uccha_bala_virupas = min(arc, 360 - arc) / 3, where arc = (graha_longitude - debilitation_longitude) mod 360",
+    "worked_example": {
+     "graha": "Sun",
+     "graha_longitude_rasi_deg": "10|4|14",
+     "debilitation_longitude_rasi_deg": "6|10|0",
+     "arc_rasi_deg": "3|24|14",
+     "arc_degrees": "114|14",
+     "uccha_bala_virupas": "38|04"
+    },
+    "engine_note": "The engine already carries every graha's exaltation degree; the debilitation point is that degree plus 180."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 7-8 with commentary and worked example, pages 42-43 (OCR lines 26210-26220, 26282)",
+     "verification": "read directly in Devanagari 2026-08-04; the text's own Sun example recomputes to 38|04 virupas"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sthanabala.saptavargaja",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sthana_bala_component_2_saptavargaja_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 8-10",
+    "engine_facts_consumed": [
+     "graha rasi",
+     "graha navamsa",
+     "rasi lordship",
+     "naisargika friendship table"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "varga_lord_relationship",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "virupas per varga, summed over seven vargas",
+    "customer_prediction": false,
+    "sanskrit": "भूताब्धयः खरामाश्च नखास्तिथिर्दिशो युगाः ॥ १० ॥ ... मूलत्रिकोणस्वक्षेत्राधिमित्रमित्रसमारि-अधिशत्रुगृहस्थितानां क्रमशः भूताब्धि ४५ खराम ३० नख २० तिथि १५ दिक् १० युग ४ द्वि २ परिमितं बलं ग्राह्यम्",
+    "engine_rendering": "For a graha standing in the sign of a lord who is its moolatrikona, own sign, great friend, friend, neutral, enemy or great enemy, the strengths to be taken are respectively 45, 30, 20, 15, 10, 4 and 2. Where the varga place is the graha's own exaltation, the exaltation value is taken instead of the moolatrikona value.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "dignity_values_virupas": {
+     "uccha": 100,
+     "moolatrikona": 45,
+     "svaksetra": 30,
+     "adhimitra": 20,
+     "mitra": 15,
+     "sama": 10,
+     "satru": 4,
+     "adhisatru": 2
+    },
+    "vargas_named_in_this_recension": [
+     "kshetra (rasi, D1)",
+     "hora (D2)",
+     "drekkana (D3)",
+     "saptamsa (D7)",
+     "dvadasamsa (D12)",
+     "trimsamsa (D30)"
+    ],
+    "varga_count_note": "The compound is called SAPTA-vargaja (seven-fold) but the printed list in this scan names only six; NAVAMSA (D9) is absent from the OCR at this point although the commentary's own worked examples explicitly use the navamsa ('अयं वृश्चिकनवांशे वर्तमानः ... नवमांशविचारेण'). The seventh varga is therefore navamsa, restored from the commentary's own examples and flagged as a scan loss, not an emendation of doctrine.",
+    "moolatrikona_arcs": {
+     "Sun": {
+      "rasi": "Leo",
+      "moolatrikona_degrees": "0-20",
+      "own_sign_remainder_degrees": "20-30"
+     },
+     "Moon": {
+      "rasi": "Taurus",
+      "exaltation_degrees": "0-3",
+      "moolatrikona_degrees": "3-30"
+     },
+     "Mars": {
+      "rasi": "Aries",
+      "moolatrikona_degrees": "0-12",
+      "own_sign_remainder_degrees": "12-30"
+     },
+     "Mercury": {
+      "rasi": "Virgo",
+      "exaltation_degrees": "0-15",
+      "moolatrikona_degrees": "15-20",
+      "own_sign_remainder_degrees": "20-30"
+     },
+     "Jupiter": {
+      "rasi": "Sagittarius",
+      "moolatrikona_degrees": "0-10",
+      "own_sign_remainder_degrees": "10-30"
+     },
+     "Venus": {
+      "rasi": "Libra",
+      "moolatrikona_degrees": "0-15",
+      "own_sign_remainder_degrees": "15-30"
+     },
+     "Saturn": {
+      "rasi": "Aquarius",
+      "moolatrikona_degrees": "0-20",
+      "own_sign_remainder_degrees": "20-30"
+     }
+    },
+    "moolatrikona_note": "This closes the 'Moolatrikona boundaries: pending' row of the tradition's conventions table. The recension states each arc explicitly in the commentary to sloka 8.",
+    "divergence": "The modern handbook saptavargaja series is 45 / 30 / 22.5 / 15 / 7.5 / 3.75 / 1.875. This recension prints 45 / 30 / 20 / 15 / 10 / 4 / 2 and additionally assigns 100 to a varga place that is the graha's own exaltation. Both facts are recorded as read; neither is normalised to the handbooks."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "modern_handbook_saptavargaja_series_45_30_22.5_15_7.5_3.75_1.875"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 8-10 with commentary and seven worked dignity examples, pages 43-46 (OCR lines 26282-26380)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sthanabala.ojayugma",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sthana_bala_component_3_ojayugma_rasyamsa_bala",
+    "chapter": "Uttara-khanda adhyaya 2, sloka 10",
+    "engine_facts_consumed": [
+     "graha rasi parity",
+     "graha navamsa parity"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "virupas, 15 per qualifying place, maximum 30",
+    "customer_prediction": false,
+    "sanskrit": "द्वाविन्दुशुक्रौ युग्मांशे तिथिरोजांशगाः परे ॥ १० ॥",
+    "engine_rendering": "The two, the Moon and Venus, in an even amsa [and even rasi] receive fifteen; the rest, standing in an odd amsa [and odd rasi], likewise.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "table": {
+     "Moon": "15 in an even rasi, 15 in an even navamsa",
+     "Venus": "15 in an even rasi, 15 in an even navamsa",
+     "Sun": "15 in an odd rasi, 15 in an odd navamsa",
+     "Mars": "15 in an odd rasi, 15 in an odd navamsa",
+     "Mercury": "15 in an odd rasi, 15 in an odd navamsa",
+     "Jupiter": "15 in an odd rasi, 15 in an odd navamsa",
+     "Saturn": "15 in an odd rasi, 15 in an odd navamsa"
+    },
+    "otherwise": "zero for the place that does not qualify",
+    "note": "The commentary states that the extension from navamsa parity to RASI parity rests on other works ('ग्रन्थान्तरप्रामाण्यात्'), i.e. the recension itself is explicit that the rasi limb is imported. That attribution is carried, not smoothed."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "sloka 10 with commentary and both worked examples, page 46 (OCR lines 26490-26505)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sthanabala.kendradi",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sthana_bala_component_4_kendradi_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 10-11",
+    "engine_facts_consumed": [
+     "whole-sign house of each graha from the lagna"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house_of_graha_from_lagna",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "virupas",
+    "customer_prediction": false,
+    "sanskrit": "केन्द्रादिषु स्थिताः ... लभन्ते षष्टिं त्रिंशत् तिथिः क्रमात् ॥ ११ ॥",
+    "engine_rendering": "Grahas standing in kendra, panaphara and apoklima places obtain sixty, thirty and fifteen respectively.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "table": {
+     "kendra (1,4,7,10)": 60,
+     "panaphara (2,5,8,11)": 30,
+     "apoklima (3,6,9,12)": 15
+    },
+    "reckoned_from": "the lagna"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 10-11 with commentary and worked example, pages 46-47 (OCR lines 26575-26581)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sthanabala.drekkana",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sthana_bala_component_5_drekkana_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 11-12",
+    "engine_facts_consumed": [
+     "degree of the graha within its rasi"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_degree_in_rasi",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "virupas",
+    "customer_prediction": false,
+    "sanskrit": "आदिमध्यावसानेषु द्रेष्काणेषु स्थिताः क्रमात् ॥ ११ ॥ पुन्नपुंसकयोषाख्या ... तिथिबलं ग्रहाः ॥ स्वषड्वर्गगतास्त्रिंशत् एवं स्थानबलं विदुः ॥ १२ ॥",
+    "engine_rendering": "Grahas called male, neuter and female, standing respectively in the first, middle and last drekkana, give fifteen; those standing in their own shadvarga give thirty. Thus is the sthana-bala known.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "table": {
+     "male (Sun, Mars, Jupiter)": "15 in the first drekkana (0-10 degrees)",
+     "neuter (Mercury, Saturn)": "15 in the middle drekkana (10-20 degrees)",
+     "female (Moon, Venus)": "15 in the last drekkana (20-30 degrees)"
+    },
+    "otherwise": "zero",
+    "additional_clause": "a graha standing in its own shadvarga receives 30",
+    "closes": "the five components of sthana-bala are uccha, saptavargaja, ojayugma, kendradi and drekkana"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 11-12 with commentary and three worked examples, pages 47-48 (OCR lines 26582-26638)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.digbala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "dig_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 12-13",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha",
+     "longitude of bhava-madhya 1, 4, 7, 10"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "bhava_madhya_longitudes",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "virupas, maximum 60",
+    "customer_prediction": false,
+    "sanskrit": "अर्कात्कुजात्सुखं जीवाज्ज्ञाच्चास्तं लग्नमार्कितः ॥ मध्यलग्नं भृगोश्चंद्राद्धित्वा षड्भाधिके सति ॥ १३ ॥ चक्राद्विशोध्य रामाप्तं भागीकृत्य च तद्बलम् ॥",
+    "engine_rendering": "From the Sun and from Mars subtract the fourth; from Jupiter and Mercury the seventh; from Saturn the lagna; from Venus and the Moon the mid-heaven. If what remains exceeds six rasis, subtract it from the circle, reduce to degrees and divide by three - that is the strength.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "weak_point_subtracted": {
+     "Sun": "the 4th bhava",
+     "Mars": "the 4th bhava",
+     "Jupiter": "the 7th bhava",
+     "Mercury": "the 7th bhava",
+     "Saturn": "the lagna (1st bhava)",
+     "Moon": "the 10th bhava (madhya-lagna)",
+     "Venus": "the 10th bhava (madhya-lagna)"
+    },
+    "implied_strong_direction": {
+     "Sun": "10th",
+     "Mars": "10th",
+     "Jupiter": "1st",
+     "Mercury": "1st",
+     "Saturn": "7th",
+     "Moon": "4th",
+     "Venus": "4th"
+    },
+    "formula": "dig_bala_virupas = min(arc, 360 - arc) / 3, where arc = (graha_longitude - weak_point_longitude) mod 360",
+    "worked_example": {
+     "graha": "Sun",
+     "arc_degrees": "147|05",
+     "dig_bala_virupas": "49|01"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 12-13 with commentary and the Sun's worked example, pages 48-49 (OCR lines 26639-26684)",
+     "verification": "read directly in Devanagari 2026-08-04; 147|05 / 3 = 49|01|40 reproduces the printed 0|49|01"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.kalabala.natonnata",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "kala_bala_component_1_natonnata_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 14-15",
+    "engine_facts_consumed": [],
+    "engine_facts_MISSING": [
+     "local sunrise and sunset",
+     "ishta-kala in ghatis from sunrise",
+     "length of day and night in ghatis"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "ishta_kala_ghatis",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "half_day_length_ghatis",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "आमध्यान्हादधरात्रात् ... दिवा रात्रिरिति क्रमात् ॥ १४ ॥ अर्कभार्गवसूरीणां दिनजा नाड्यो गता दिवा ॥ भौमचंद्रशनीनां तु षष्टिभ्यो वर्जयेदिमाः ॥ १५ ॥",
+    "engine_rendering": "From midday to midnight take the nata; from midnight to midday take the unnata. The unnata nadis, doubled, are the day-strength of the Sun, Venus and Jupiter; those same figures subtracted from sixty are their night-strength. For Mars, the Moon and Saturn it is the other way about.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "procedure": [
+     "nata = |ishta_kala - half_day| in ghatis (measured from local apparent midday, or from midnight for a night birth)",
+     "unnata = 30 - nata (nata + unnata always sum to 30 ghatis)",
+     "diva_bala_virupas = 2 * unnata",
+     "for the Sun, Venus and Jupiter: natonnata_bala = diva_bala by day, (60 - diva_bala) by night",
+     "for Mars, the Moon and Saturn: natonnata_bala = (60 - diva_bala) by day, diva_bala by night",
+     "Mercury: always 60, in every case ('तस्य बुधस्य सदा सर्वकालं षष्टिरेव')"
+    ],
+    "worked_example": {
+     "ishta_ghati": "8|16",
+     "half_day_ghati": "13|54",
+     "nata": "5|38",
+     "unnata": "24|22",
+     "doubled": "48|44",
+     "sun_venus_jupiter_day_strength": "48|44",
+     "moon_mars_saturn_day_strength": "11|16"
+    },
+    "engine_gap": "vedic_report.py has no sunrise/sunset or ghati clock. This limb is unevaluable until it does."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 14-15 with commentary and worked example, pages 49-51 (OCR lines 26686-26747)",
+     "verification": "read directly in Devanagari 2026-08-04; 24|22 doubled = 48|44 and 60 - 48|44 = 11|16 both reproduce the printed figures"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.kalabala.paksha",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "kala_bala_component_2_paksha_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 16-17",
+    "engine_facts_consumed": [
+     "sidereal longitude of the Sun",
+     "sidereal longitude of the Moon"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sun_longitude",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "moon_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "चंद्रादर्कं विशोध्य च ॥ १६ ॥ अंगाधिके विशोध्यार्कात् भागीकृत्य त्रिभिर्भजेत् ॥ पक्षजं बलमिंदुज्ञशुक्रार्याणां तु षष्टितः ॥ १७ ॥",
+    "engine_rendering": "Subtract the Sun from the Moon; if the remainder exceeds six rasis subtract it from the circle, reduce to degrees and divide by three. That is the paksha-strength of the Moon, Mercury, Venus and Jupiter; for the others it is that figure taken from sixty.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "procedure": [
+     "arc = (moon_longitude - sun_longitude) mod 360",
+     "if arc > 180: arc = 360 - arc",
+     "paksha_bala_virupas = arc / 3, for the Moon, Mercury, Venus and Jupiter",
+     "paksha_bala_virupas = 60 - (arc / 3), for the Sun, Mars and Saturn"
+    ],
+    "worked_example": {
+     "moon_rasi_deg": "8|25|29",
+     "sun_rasi_deg": "10|4|14",
+     "remainder_rasi_deg": "10|21|15",
+     "after_subtraction_from_12": "1|8|45",
+     "degrees": "38|45",
+     "benefic_paksha_bala": "12|55",
+     "malefic_paksha_bala": "47|05"
+    },
+    "divergence": "This recension does NOT double the Moon's paksha-bala. Several modern handbooks do. Recorded as printed."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "modern_handbook_paksha_bala_doubling_for_the_moon"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 16-17 with commentary and worked example, pages 51-52 (OCR lines 26748-26805)",
+     "verification": "read directly in Devanagari 2026-08-04; 38|45 / 3 = 12|55 and 60 - 12|55 = 47|05, both reproducing the printed figures, and 47|05 is the Sun's paksha-bala in the chapter's own sadbala tally"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.kalabala.tribhaga",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "kala_bala_component_3_tribhaga_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 18-19",
+    "engine_facts_consumed": [],
+    "engine_facts_MISSING": [
+     "length of day and night",
+     "which sixth of the nychthemeron holds the birth"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "tribhaga_of_birth",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "हित्वान्येषामहोरात्रिं त्रिभागीकृत्य यत्र तु ॥ जन्मलग्नं तदंशाधिपते ... षष्टिबलं भवेत् ॥ १८ ॥ आधाने चित्प्रवेशे तु त्रिंशद्भूतार्णवा बलम् ... ज्ञार्कमन्देन्दुशुक्रारा: पतयः सर्वदा गुरुः ॥ १९ ॥",
+    "engine_rendering": "Divide day and night each into three; the lords of the six parts are in order Mercury, the Sun, Saturn, the Moon, Venus and Mars. Whichever part holds the birth lagna, its lord receives sixty. For a conception figure take thirty, for a chit-pravesa figure forty-five. Jupiter receives the full strength always.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "lords": {
+     "day_first_third": "Mercury",
+     "day_second_third": "Sun",
+     "day_last_third": "Saturn",
+     "night_first_third": "Moon",
+     "night_second_third": "Venus",
+     "night_last_third": "Mars"
+    },
+    "value": {
+     "natal (janma-lagna)": 60,
+     "adhana (conception)": 30,
+     "chit-pravesa": 45
+    },
+    "always": {
+     "Jupiter": 60
+    },
+    "others": 0,
+    "worked_example": {
+     "dinamana_ghati": "27|48",
+     "one_third": "9|16",
+     "birth_falls_in": "the second third of the day",
+     "lord": "Sun",
+     "sun_tribhaga_bala": "1|0|0 rupa (= 60 virupas)"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 18-19 with commentary and worked example, pages 52-53 (OCR lines 26807-26871)",
+     "verification": "read directly in Devanagari 2026-08-04; the Sun's 1|0|0 is the third term of the chapter's own kala-bala tally for the Sun"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.kalabala.varsha_masa_dina_hora",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "kala_bala_component_4_abda_masa_dina_hora_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 19-20",
+    "engine_facts_consumed": [],
+    "engine_facts_MISSING": [
+     "lord of the year",
+     "lord of the month",
+     "lord of the weekday",
+     "lord of the planetary hora at the moment of birth"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varsha_masa_dina_hora_lords",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "वर्षमासदिनेशानां तिथिस्त्रिंशच्छराणेवाः ॥ कालहोराधिपस्यैवं पूर्णं बलमुदाहृतम् ॥ २० ॥",
+    "engine_rendering": "To the lords of the year, the month and the day belong fifteen, thirty and forty-five; to the lord of the kala-hora the full strength. For a conception figure all four are taken at thirty.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "table": {
+     "lord of the year (varshesa)": 15,
+     "lord of the month (masesa)": 30,
+     "lord of the weekday (dinesa)": 45,
+     "lord of the hora (horesa)": 60
+    },
+    "adhana_variant": "all four halved to 30",
+    "others": 0,
+    "worked_example": {
+     "masapati": "Sun -> 30",
+     "dinapati": "Jupiter -> 45",
+     "horapati": "Mercury -> 60",
+     "sun_varshadi_bala": "0|30|0"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 19-20 with commentary and worked example, pages 53-54 (OCR lines 26859-26875, 26964)",
+     "verification": "read directly in Devanagari 2026-08-04; the Sun's 0|30|0 is the fourth term of the chapter's own kala-bala tally"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.kalabala.assembly",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "kala_bala_total",
+    "chapter": "Uttara-khanda adhyaya 2, sloka 20 commentary",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "kala_bala_components",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "एवं च खेः नतोन्नतबलं ०।४८।४४ पक्षबलं ०।४७।५ दिनरात्रिबलं १।०।० वर्षपत्यादिबलं ०।३०।० एतेषां चतुर्णां योगं जातं ... कालबलं सूर्यस्य ३।५।४९",
+    "engine_rendering": "Thus for the Sun: natonnata 0|48|44, paksha 0|47|5, day-and-night (tribhaga) 1|0|0, and the year-lord group 0|30|0. The sum of these four is the Sun's kala-bala, 3|5|49.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "components_in_this_recension": [
+     "natonnata_bala",
+     "paksha_bala",
+     "tribhaga_bala",
+     "varsha_masa_dina_hora_bala"
+    ],
+    "formula": "kala_bala = natonnata + paksha + tribhaga + varshadi",
+    "divergence": "This recension's kala-bala has FOUR limbs. The modern handbooks give kala-bala six or seven limbs by folding in ayana-bala and yuddha-bala; this text keeps ayana with cheshta (see the fourth bala) and treats yuddha as a separate correction. Recorded as printed."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "modern_handbook_kala_bala_schemes_with_six_or_seven_limbs"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "commentary on sloka 20, page 54 (OCR lines 26964-26969)",
+     "verification": "read directly in Devanagari 2026-08-04; 0|48|44 + 0|47|5 + 1|0|0 + 0|30|0 = 3|5|49 exactly, reproducing the printed total"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.ayanabala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "ayana_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 20-24 (grouped with cheshta as the fourth bala)",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha",
+     "the ayanamsa in force"
+    ],
+    "engine_facts_MISSING": [
+     "sayana (tropical) longitude",
+     "declination (kranti)"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "ayanamsa",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "सायनांशग्रहभुजराशीनिष्वब्धिनिसुरेः ... सूर्येहृत्वा क्रमाद्राशिभागः स्यादनुपाततः ॥ २२ ॥ राशित्रयमथो युंज्यान्मेषादिस्थेषु तेष्वथ ॥ तुलादिस्थेषु राश्यादौ त्रिराशिभ्यस्तु वर्जयेत् ॥ २३ ॥ चंद्रार्कयोर्विपरीतं स्यात्सदा युज्याद्बुधस्य तु ॥ भागीकृत्य त्रिभिर्भक्तं ग्रहाणामायनं बलम् ॥ २४ ॥ खेद्विगुणमेव स्यात्",
+    "engine_rendering": "Take the bhuja of the graha's sayana longitude in rasis; multiply by the khandas 45, 33 and 12 in order, dividing by thirty and carrying, to obtain the declination-arc. Then for grahas standing in Aries to Virgo add three rasis, and for those in Libra to Pisces subtract from three rasis; for the Moon and Saturn the reverse; for Mercury always add. Reduce to degrees and divide by three - that is the ayana-bala. For the Sun it is doubled.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "khandas": [
+     45,
+     33,
+     12
+    ],
+    "procedure": [
+     "sayana = sidereal_longitude + ayanamsa",
+     "bhuja = the arc of sayana measured to the nearest equinox (0 to 90 degrees)",
+     "apply the dhruvanka khandas 45, 33, 12 to successive 30-degree segments of the bhuja, dividing by 30 and carrying, to obtain the declination-arc in rasi/degree form",
+     "for the Sun, Mars, Jupiter and Venus: add 3 rasis if sayana lies in Aries..Virgo; subtract the arc from 3 rasis if in Libra..Pisces",
+     "for the Moon and Saturn: reverse the above",
+     "for Mercury: always add 3 rasis",
+     "reduce to degrees and divide by 3",
+     "double the result for the Sun"
+    ],
+    "worked_example": {
+     "graha": "Sun",
+     "sidereal": "10|4|14",
+     "ayanamsa": "22|1",
+     "sayana": "10|26|15",
+     "bhuja": "1|3|45",
+     "after_khandas": "1|19|7|30",
+     "sayana_in": "Libra..Pisces, so subtracted from 3 rasis",
+     "result_rasi_deg": "1|10|52|30",
+     "degrees": "40|52|30",
+     "divided_by_3": "13|37|30",
+     "doubled_for_sun": "27|15|00"
+    },
+    "note": "For the Sun this recension's fourth-bala cell IS the ayana-bala: the chapter's own sadbala tally lists the Sun's cheshta cell as 0|27|15, which is exactly the doubled ayana figure computed here.",
+    "engine_gap": "vedic_report.py computes sidereal longitudes only; the sayana longitude and its bhuja are not exposed. The ayanamsa is known (Lahiri), so this limb is one addition away from computable."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 20-24 with commentary and the Sun's worked example, pages 54-57 (OCR lines 26972-27058)",
+     "verification": "read directly in Devanagari 2026-08-04; 40|52|30 / 3 = 13|37|30 and doubled = 27|15|00, reproducing the printed figures"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.cheshtabala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "cheshta_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 26-30",
+    "engine_facts_consumed": [
+     "sidereal (sphuta) longitude of each graha",
+     "retrogradation flag"
+    ],
+    "engine_facts_MISSING": [
+     "madhyama (mean) longitude",
+     "sighrocca",
+     "daily motion in degrees"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "षष्टिर्वक्रगते वीर्यम् ... ॥ २६ ॥ मध्यमस्फुटविश्लेषदलयुक्तोनितं स्फुटात् ॥ २८ ॥ मध्यमे त्वधिके न्यूने शीघ्रादत्र असफुटं त्यजेत् चेष्टाकेन्द्रं भखेटानाम् ॥ २९ ॥ अंगाधिकेषु चक्रात्संशोध्य भागीकृत्य त्रिभिर्भजेत् ॥ सूर्यचंद्रौ सत्रिराशी तथा प्रोक्तविधिस्तथा ॥ ३० ॥",
+    "engine_rendering": "Half the difference of the mean and true graha is added to or subtracted from the mean according as the mean exceeds or falls short of the true; this is taken from the sighrocca, and the remainder is the cheshta-kendra of the star-grahas. For the Sun and Moon three rasis are joined. If the kendra exceeds six rasis subtract it from the circle, reduce to degrees and divide by three.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "gati_bala_table_virupas": {
+     "vakri (retrograde)": 60,
+     "sama / sarala (direct, even)": 30,
+     "with the Sun (astangata)": 15,
+     "with the Moon": 30,
+     "manda (slow)": 15,
+     "alpagati (slower than before)": 7.5,
+     "sighra (swift)": 45,
+     "atisighra (very swift)": 30
+    },
+    "procedure": [
+     "d = |madhyama - sphuta|; take half of it",
+     "if madhyama > sphuta, add that half to the madhyama; if madhyama < sphuta, subtract it",
+     "cheshta_kendra = sighrocca - (that corrected madhyama)",
+     "for the Sun and Moon, add three rasis to the cheshta_kendra",
+     "if cheshta_kendra > 6 rasis, subtract it from 12 rasis",
+     "cheshta_bala_virupas = (cheshta_kendra in degrees) / 3"
+    ],
+    "special_case_sun": "For the Sun the fourth bala is discharged by the ayana-bala (doubled); the chapter's own tally shows 0|27|15 in the Sun's cheshta cell, which is the doubled ayana figure.",
+    "ocr_note": "The commentary's Mars example (madhyama 0|16|40, sphuta 1|27|4, sighrocca 10|2|13) is damaged in this scan: the printed quotient 2|20 cannot be recovered from the printed intermediate 3|6|2. The PROCEDURE is legible; the example is not, and is recorded as unverified rather than silently repaired.",
+    "engine_gap": "vedic_report.py computes true longitudes and a retrogradation flag but no mean longitude and no sighrocca. Only the gati-bala table above is evaluable today."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 26-30 with commentary, pages 57-59 (OCR lines 27125-27203)",
+     "verification": "read directly in Devanagari 2026-08-04; procedure legible, the single numeric example damaged in this scan"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.yuddhabala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "yuddha_bala_planetary_war_correction",
+    "chapter": "Uttara-khanda adhyaya 2, sloka 25",
+    "engine_facts_consumed": [
+     "sidereal longitudes of all grahas"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "two_grahas_in_yuddha",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "युध्यतोर्ग्रहयोरथ ॥ विषंबलयोश्चापि निर्जितस्य बलं भवेत् ॥ २५ ॥ अपनीते योजिते तु जितस्य च बलं भवेत् ॥",
+    "engine_rendering": "Of two grahas that are at war and unequal in strength: the difference, taken away, is the strength of the vanquished; the same difference, added, is the strength of the victor.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "procedure": [
+     "difference = |bala_A - bala_B|",
+     "the graha with the greater strength is the victor: bala_victor += difference",
+     "the graha with the lesser strength is the vanquished: bala_vanquished -= difference"
+    ],
+    "note": "The recension does not print an orb for yuddha in this chapter; the conventional criterion (two star-grahas within one degree) is NOT stated here and must not be attributed to it."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "sloka 25 and its commentary, pages 56-57 (OCR lines 27051-27056, 27126-27127)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.naisargikabala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "naisargika_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 30-31",
+    "engine_facts_consumed": [
+     "graha identity only"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "constant_table",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "षष्टिरेकेषवः सप्तदश षड्विंशतिस्ततः ॥ ३१ ॥ चतुस्त्रिंशत्त्रिवेदांकाः सूर्यादीनां निसर्गजाः ॥ ... तत्र सूर्यस्य षष्टिः ६०, चंद्रस्य एकेषवः ५१, भौमस्य सप्तदश १७, बुधस्य षड्विंशतिः २६, गुरोश्च चतुस्त्रिंशत् ३४, शुक्रस्य त्रिवेदाः ४३, शनेः अंकाः ९",
+    "engine_rendering": "Sixty, fifty-one, seventeen, twenty-six, thirty-four, forty-three and nine are the natural strengths of the Sun and the rest.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "table_virupas": {
+     "Sun": 60,
+     "Moon": 51,
+     "Mars": 17,
+     "Mercury": 26,
+     "Jupiter": 34,
+     "Venus": 43,
+     "Saturn": 9
+    },
+    "note": "The values are the classical ratio 60 : 51.43 : 42.86 : 34.29 : 25.71 : 17.14 : 8.57 rounded to whole virupas by this printing. This limb needs no chart input at all and is computable today."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 30-31 with commentary, pages 59-60 (OCR lines 27198-27215)",
+     "verification": "read directly in Devanagari 2026-08-04; the Sun's 60 virupas = 1|0|0 rupa is the fifth term of the chapter's own sadbala tally for the Sun"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sadbala.pinda_assembly",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sadbala_pinda_assembly_and_drik_correction",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 32-33",
+    "engine_facts_consumed": [
+     "all five additive balas",
+     "drik-bala on the graha"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "five_additive_balas",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "शुभपापदृगब्ध्यंशयुतहीनानि तानि च ॥ ३२ ॥ षड्बलानि ग्रहाणां स्युरेवमेकीकृतानि तु ॥ ... एषां दृशां दृष्टीनां यः अब्ध्यंशः चतुर्थांशः तेन युतहीनानि",
+    "engine_rendering": "Those [five] strengths, increased or diminished by a QUARTER of the benefic or malefic aspect, and thus united, are the six strengths of the grahas.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "procedure": [
+     "sum the five additive balas: sthana + dig + kala + cheshta(or ayana) + naisargika",
+     "compute the total benefic drsti and the total malefic drsti falling on the graha, using jyotisha.bphs.u02.drkbala.arc_to_drsti_value",
+     "if benefic drsti exceeds malefic: add ONE QUARTER of the surplus",
+     "if malefic drsti exceeds benefic: subtract ONE QUARTER of the surplus",
+     "benefics for this purpose are counted from the Moon onward, malefics from the Sun onward, as the commentary states ('शुभाः चंद्रादयः पापाः रव्यादयः')"
+    ],
+    "worked_example": {
+     "graha": "Sun",
+     "sthana_bala": "4|18|4",
+     "dig_bala": "0|49|1",
+     "kala_bala": "3|5|49",
+     "cheshta_or_ayana_bala": "0|27|15",
+     "naisargika_bala": "1|0|0",
+     "sum_of_five": "9|40|9",
+     "net_benefic_drsti": "0|4|22",
+     "quarter_of_it": "0|1|5",
+     "sadbala_pinda": "9|41|14"
+    },
+    "verification": "The five terms sum to 9.66917 rupas = 9|40|9 exactly, and 9|40|9 + 0|1|5 = 9|41|14 exactly. Both printed figures are reproduced."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 32-33 with commentary and the Sun's full worked tally, page 60 (OCR lines 27250-27278)",
+     "verification": "read directly in Devanagari 2026-08-04 and recomputed to the printed result"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sadbala.required_minima",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sadbala_required_minimum_strengths",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 41-43",
+    "engine_facts_consumed": [
+     "the computed sadbala components"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sadbala_components",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "threshold_table",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "गुरुसौम्यरवीणां तु भूतषट्केन्दवो द्विज ॥ ४१ ॥ पंचाग्नयः खभूतानि करभूमिसुधाकराः ॥ खाम्नयश्च क्रमात्स्थानदिक्चेष्टासमयायने ॥ ४२ ॥ सितेन्द्वोरग्निचंद्राश्च खेषवः खाम्नयः शतम् ॥ चत्वारिंशत् क्रमाद्भौममन्दयोः षण्णव क्रमात् ॥ ४३ ॥ त्रिंशत्खवेदाः सप्तांगा नखाश्च बलिनो विदुः",
+    "engine_rendering": "For Jupiter, Mercury and the Sun the figures are 165, 35, 50, 112 and 30 in sthana, dig, cheshta, kala and ayana; for Venus and the Moon 133, 50, 30, 100 and 40; for Mars and Saturn 96, 30, 40, 67 and 20. Above these figures the graha is of full strength; at them it is strong.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "table": {
+     "Sun/Mercury/Jupiter": {
+      "sthana_virupas": 165,
+      "sthana_rupas": "2|45",
+      "dig_virupas": 35,
+      "cheshta_virupas": 50,
+      "kala_virupas": 112,
+      "kala_rupas": "1|52",
+      "ayana_virupas": 30,
+      "five_bala_total_virupas": 392,
+      "five_bala_total_rupas": "6|32"
+     },
+     "Moon/Venus": {
+      "sthana_virupas": 133,
+      "sthana_rupas": "2|13",
+      "dig_virupas": 50,
+      "cheshta_virupas": 30,
+      "kala_virupas": 100,
+      "kala_rupas": "1|40",
+      "ayana_virupas": 40,
+      "five_bala_total_virupas": 353,
+      "five_bala_total_rupas": "5|53"
+     },
+     "Mars/Saturn": {
+      "sthana_virupas": 96,
+      "sthana_rupas": "1|36",
+      "dig_virupas": 30,
+      "cheshta_virupas": 40,
+      "kala_virupas": 67,
+      "kala_rupas": "1|7",
+      "ayana_virupas": 20,
+      "five_bala_total_virupas": 253,
+      "five_bala_total_rupas": "4|13"
+     }
+    },
+    "drik_bala_has_no_minimum": true,
+    "why_no_drik_minimum": "The commentary states the reason explicitly: 'षष्ठस्य दृग्बलस्य नियता संख्या इतो नोक्ता ... तस्य स्थानविशेषोपलब्ध्या अनियतत्वात् ऋणधनसाधनीभूतत्वाच्च' - drik-bala has no fixed figure because it varies with the particular place and because it is the term that is added or subtracted.",
+    "divergence": "The modern handbook minima (Sun 5, Moon 6, Mars 5, Mercury 7, Jupiter 6.5, Venus 5.5, Saturn 5 rupas) DISAGREE with this recension, which groups the seven into three classes at 6|32, 5|53 and 4|13 rupas. Any product claiming 'BPHS says a graha is strong above N' must name its recension. Recorded as printed; not normalised."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [
+    "modern_handbook_sadbala_minima_sun_5_moon_6_mars_5_mercury_7_jupiter_6.5_venus_5.5_saturn_5"
+   ],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 41-43 with commentary and the printed nine-column table, pages 65-67 (OCR lines 27596-27683)",
+     "verification": "read directly in Devanagari 2026-08-04; each class total was recomputed from its five component minima (165+35+50+112+30=392=6|32; 133+50+30+100+40=353=5|53; 96+30+40+67+20=253=4|13) and reproduces the printed panchabala-samhati row exactly"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.bhavabala.lord_and_aspects",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhava_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 33-34",
+    "engine_facts_consumed": [
+     "bhava lordship",
+     "sadbala of each graha",
+     "drsti on each bhava",
+     "grahas occupying each bhava"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "bhava",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "bhava_lord_sadbala",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "शुभदृग्ब्ध्यंशयुतं ... हीनपापदृगब्ध्यंशैः ... स्वज्ञार्यदर्शनैः ॥ ३३ ॥ स्वामिबलं बलम् ॥ गुरुज्ञाभ्यां तु युक्तस्य पूर्णमेकं तु योजयेत् ॥ ३४ ॥ मंदाररवियुक्तस्य बलमेकेन वर्जितम् ॥",
+    "engine_rendering": "The strength of the lord, increased by a quarter of the benefic aspect and diminished by a quarter of the malefic aspect, and further increased by the aspects of Mercury and Jupiter upon the house itself, is the strength of the house. To a house conjoined by Jupiter or Mercury add one full rupa; from a house conjoined by Saturn, Mars or the Sun take one away.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "procedure": [
+     "start from the sadbala pinda of the bhava's lord",
+     "compute the benefic and malefic drsti falling on the BHAVA (not on the lord)",
+     "add a quarter of the surplus if benefic exceeds malefic; subtract a quarter if malefic exceeds benefic",
+     "add the drsti of Mercury and Jupiter upon the bhava",
+     "add 1 rupa (60 virupas) if Jupiter or Mercury occupies the bhava",
+     "subtract 1 rupa if Saturn, Mars or the Sun occupies the bhava"
+    ],
+    "worked_example": {
+     "bhava": "tanu (1st), Aries, at 0|6|3|42",
+     "lord": "Mars",
+     "lord_sadbala": "5|59|16",
+     "benefic_drsti_on_bhava": "1|20|24",
+     "malefic_drsti_on_bhava": "1|2|56",
+     "quarter_of_the_surplus": "0|6|52",
+     "after_drsti_correction": "6|6|8",
+     "mercury_jupiter_aspect": "0|50|41",
+     "bhava_bala": "6|56|49",
+     "conjunction_correction": "none applied - no Jupiter/Mercury and no Saturn/Mars/Sun in the bhava"
+    },
+    "verification": "5|59|16 + 0|6|52 = 6|6|8 and 6|6|8 + 0|50|41 = 6|56|49, both reproducing the printed figures."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 33-34 with commentary and the first-house worked example, pages 61-62 (OCR lines 27298-27370)",
+     "verification": "read directly in Devanagari 2026-08-04 and recomputed to the printed result"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.bhavabala.digbala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhava_dig_bala",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 36-38",
+    "engine_facts_consumed": [
+     "longitude of each bhava-madhya",
+     "rasi of each bhava"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "bhava_madhya",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "नृयुग्मज्ञकपाथोनचापपूर्वार्धकुंभभात् ॥ ३६ ॥ मृगचापपरार्धाख्यमेषसिंहवृषादपि ॥ अलेः कर्कटकाच्चापि मृगांत्यार्धाच्च मीनभात् ॥ ३७ ॥ अस्तं सुखं क्रमाल्लग्नं खं हित्वांगाधिके सति ॥ चक्राद्विशोध्य रामैश्च भजेद्भागीकृतं बलात् ॥ ३८ ॥",
+    "engine_rendering": "From the human signs subtract the seventh, from the quadruped the fourth, from the aquatic the lagna, from the insect sign the tenth. If more than six rasis remain, subtract from the circle, reduce to degrees and divide by three.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "classes": {
+     "nara (human)": {
+      "rasis": [
+       "Gemini",
+       "Virgo",
+       "Libra",
+       "Sagittarius (first half)",
+       "Aquarius"
+      ],
+      "subtract_bhava": "the 7th (asta)"
+     },
+     "chatushpada (quadruped)": {
+      "rasis": [
+       "Aries",
+       "Taurus",
+       "Leo",
+       "Sagittarius (second half)",
+       "Capricorn (first half)"
+      ],
+      "subtract_bhava": "the 4th (sukha)"
+     },
+     "jalachara (aquatic)": {
+      "rasis": [
+       "Cancer",
+       "Capricorn (second half)",
+       "Pisces"
+      ],
+      "subtract_bhava": "the lagna (1st)"
+     },
+     "keeta (insect)": {
+      "rasis": [
+       "Scorpio"
+      ],
+      "subtract_bhava": "the 10th (kha)"
+     }
+    },
+    "formula": "bhava_dig_bala_virupas = min(arc, 360 - arc) / 3, arc = (bhava_madhya - reference_bhava) mod 360",
+    "worked_example": {
+     "lagna": "0|6|4 in Aries (a quadruped sign)",
+     "reference": "the 4th bhava, Cancer, at 3|1|19",
+     "arc_rasi_deg": "9|4|45",
+     "after_subtraction_from_12": "2|25|15",
+     "degrees": "85|15",
+     "divided_by_3": "28|25",
+     "added_to_bhava_bala": "6|56|49 + 0|28|25 = 7|25|14"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 36-38 with commentary and worked example, pages 63-64 (OCR lines 27417-27476)",
+     "verification": "read directly in Devanagari 2026-08-04; 85|15 / 3 = 28|25 reproduces the printed figure"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.bhavabala.udaya_kala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhava_kala_bala_by_mode_of_rising",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 35-36",
+    "engine_facts_consumed": [
+     "rasi of each bhava",
+     "whether the birth is diurnal or nocturnal"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "bhava_rasi",
+      "operator": "exists",
+      "value": true
+     },
+     {
+      "fact": "sect",
+      "operator": "in",
+      "value": [
+       "day",
+       "night",
+       "twilight"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "दिवा शीर्षोदयाश्चैव संध्यायामुभयोदयम् ॥ ३५ ॥ नक्तं पृष्ठोदयाश्चैव बलाधिक्ये उदीरिताः ॥",
+    "engine_rendering": "By day the head-rising signs, at twilight the both-ways-rising sign, by night the back-rising signs are declared to be in excess of strength.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "sirshodaya_strong_by_day": [
+     "Gemini",
+     "Leo",
+     "Virgo",
+     "Libra",
+     "Scorpio",
+     "Aquarius"
+    ],
+    "prishthodaya_strong_by_night": [
+     "Aries",
+     "Taurus",
+     "Cancer",
+     "Sagittarius",
+     "Capricorn"
+    ],
+    "ubhayodaya_strong_at_twilight": [
+     "Pisces"
+    ],
+    "note": "The same sirshodaya/prishthodaya partition already appears in this corpus as Saravali's within-period timing rule for the dasa (saravali_rule_manifest.json). The two are independent witnesses to the same classification."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 35-36 with commentary and Hindi gloss, pages 62-63 (OCR lines 27374-27418)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.strongest_yoga_karaka_gives_the_result",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "judgment_rule_strength_decides_among_competing_yogas",
+    "chapter": "Uttara-khanda adhyaya 2, slokas 44-45",
+    "engine_facts_consumed": [
+     "sadbala of every graha",
+     "the set of yogas detected"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "multiple_yogas_present",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "judgment_rule",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "भावस्थानग्रहैः प्रोक्तयोगे ये योगहेतवः ॥ ४४ ॥ तेषां बलीयः कृतासां स एवास्य फलप्रदः ॥ योगेष्वाप्तेषु बहुषु न्याय एवं प्रकीर्तितः ॥ ४५ ॥",
+    "engine_rendering": "Among the grahas that cause the yoga stated by house, place and graha, the strongest of them is the very one that gives its result. Where many yogas are obtained, this is declared to be the rule.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "consequence": "A composer that lists every detected yoga in parallel has not executed this rule. Sadbala is the arbiter the text itself supplies for choosing among them, which is why the absence of sadbala from this engine was not a decorative gap: without it there is no principled way to rank yogas at all.",
+    "pairs_with": "adhyaya 15 sloka 100 (balabalavivekena sarvesam phalam adiset) and adhyaya 36 sloka 92, both already recorded in bphs_rule_manifest.json"
+   },
+   "priority": 1,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "slokas 44-45 with commentary, pages 67-68 (OCR lines 27641-27700)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u02.sadbala.units",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sadbala_units_and_notation",
+    "chapter": "Uttara-khanda adhyaya 2, throughout",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "sadbala_figures",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "notation_definition",
+    "unit": "rupa (1 rupa = 60 virupas)",
+    "customer_prediction": false,
+    "sanskrit": "(notational, established by the printing's own tallies rather than by a defining sloka)",
+    "engine_rendering": "Every strength in this chapter is printed as a sexagesimal triple. The leading place is the RUPA; one rupa is sixty VIRUPAS. Thus the Sun's naisargika-bala prints as 1|0|0 (= 60 virupas) and its dig-bala as 0|49|1 (= 49 virupas 1 sixtieth).",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rupa_in_virupas": 60,
+    "how_established": "The unit is not defined by a sloka; it is fixed by arithmetic. The Sun's five printed component figures (4|18|4, 0|49|1, 3|5|49, 0|27|15, 1|0|0) sum to the printed total 9|40|9 only if the places are read as rupa|virupa|sixtieth, and the naisargika value 60 virupas prints as 1|0|0. An implementation that reads the leading place as virupas will be wrong by a factor of sixty throughout.",
+    "engine_note": "vedic_report.py has no strength unit today. It should adopt virupas internally and render rupas, because the required-minimum table is printed in both."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 2",
+     "location": "commentary tallies at slokas 20 and 32, pages 54 and 60 (OCR lines 26964-26969, 27250-27278)",
+     "verification": "established by recomputation 2026-08-04, not by an explicit definition in the text; recorded as an inference and labelled as one"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.ashtakavarga.notation",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "ashtakavarga_notation_karana_bindu_versus_sthana_rekha",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 18-19 and 72",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "ashtakavarga_chart",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "notation_definition",
+    "unit": "one mark per (reference point, house) cell",
+    "customer_prediction": false,
+    "sanskrit": "करणं बिंदुवत् प्रोक्तं स्थानं रेखा तथोच्यते ॥ ७२ ॥ ... करणं शून्याकारं लिखेत् स्थानं रेखाकारं लिखेत्",
+    "engine_rendering": "The karana is stated to be like a dot; the sthana is called a line. That is: write the karana as a zero-shape and the sthana as a stroke-shape.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "definitions": {
+     "karana (= bindu, a dot/zero)": "the BLANK. It scores NOTHING.",
+     "sthana (= rekha, a stroke/line)": "the MARK. It scores ONE."
+    },
+    "warning": "This is the single most dangerous notational trap in the technique and this recension is explicit about it. In the Sanskrit and North-Indian convention BINDU means the ZERO (the dot standing for nought) and REKHA means the scored point. Much modern popular writing uses 'bindu' for the auspicious point, i.e. exactly backwards. This chapter enumerates the KARANAS (blanks) first, in slokas 19-45, and the STHANAS (rekhas) afterwards, in slokas 46-71; a reader who takes the first list for the scoring list will build every ashtakavarga inverted.",
+    "engine_note": "An implementation should store rekha counts (0-8 per house) and never use the word bindu without saying which sense it means."
+   },
+   "priority": 1,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 18-19, 46 and 72 with commentary, pages 11, 23 and 34 (OCR lines 24469, 24509, 25182, 25703-25723)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.sun",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_sun",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 46-48",
+    "varga_of": "Sun",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Sun"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 46-48",
+    "engine_rendering": "In the ashtakavarga of Sun, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Sun",
+      "Mars",
+      "Saturn"
+     ],
+     "2": [
+      "Sun",
+      "Mars",
+      "Saturn"
+     ],
+     "3": [
+      "Moon",
+      "Mercury",
+      "Lagna"
+     ],
+     "4": [
+      "Sun",
+      "Mars",
+      "Saturn",
+      "Lagna"
+     ],
+     "5": [
+      "Mercury",
+      "Jupiter"
+     ],
+     "6": [
+      "Moon",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Lagna"
+     ],
+     "7": [
+      "Sun",
+      "Mars",
+      "Saturn",
+      "Venus"
+     ],
+     "8": [
+      "Sun",
+      "Mars",
+      "Saturn"
+     ],
+     "9": [
+      "Sun",
+      "Mars",
+      "Saturn",
+      "Mercury",
+      "Jupiter"
+     ],
+     "10": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Saturn",
+      "Lagna"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Saturn",
+      "Lagna"
+     ],
+     "12": [
+      "Mercury",
+      "Venus",
+      "Lagna"
+     ]
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Moon": [
+      3,
+      6,
+      10,
+      11
+     ],
+     "Mars": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Mercury": [
+      3,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12
+     ],
+     "Jupiter": [
+      5,
+      6,
+      9,
+      11
+     ],
+     "Venus": [
+      6,
+      7,
+      12
+     ],
+     "Saturn": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Lagna": [
+      3,
+      4,
+      6,
+      10,
+      11,
+      12
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 48,
+    "verification": "The twelve house-rows sum to 48, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 46-48, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25182-25235",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 48"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.moon",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_moon",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 49-51",
+    "varga_of": "Moon",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Moon"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 49-51",
+    "engine_rendering": "In the ashtakavarga of Moon, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Moon",
+      "Mercury",
+      "Jupiter"
+     ],
+     "2": [
+      "Mars",
+      "Jupiter"
+     ],
+     "3": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "4": [
+      "Mercury",
+      "Jupiter",
+      "Venus"
+     ],
+     "5": [
+      "Mars",
+      "Mercury",
+      "Venus",
+      "Saturn"
+     ],
+     "6": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Saturn",
+      "Lagna"
+     ],
+     "7": [
+      "Sun",
+      "Moon",
+      "Mercury",
+      "Jupiter",
+      "Venus"
+     ],
+     "8": [
+      "Sun",
+      "Mercury",
+      "Jupiter"
+     ],
+     "9": [
+      "Moon",
+      "Venus"
+     ],
+     "10": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Lagna"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "12": []
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      3,
+      6,
+      7,
+      8,
+      10,
+      11
+     ],
+     "Moon": [
+      1,
+      3,
+      6,
+      7,
+      9,
+      10,
+      11
+     ],
+     "Mars": [
+      2,
+      3,
+      5,
+      6,
+      10,
+      11
+     ],
+     "Mercury": [
+      1,
+      3,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11
+     ],
+     "Jupiter": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      10,
+      11
+     ],
+     "Venus": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11
+     ],
+     "Saturn": [
+      3,
+      5,
+      6,
+      11
+     ],
+     "Lagna": [
+      3,
+      6,
+      10,
+      11
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 49,
+    "verification": "The twelve house-rows sum to 49, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 49-51, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25236-25299",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 49"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.mars",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_mars",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 52-53",
+    "varga_of": "Mars",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Mars"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 52-53",
+    "engine_rendering": "In the ashtakavarga of Mars, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Mars",
+      "Saturn",
+      "Lagna"
+     ],
+     "2": [
+      "Mars"
+     ],
+     "3": [
+      "Sun",
+      "Moon",
+      "Mercury",
+      "Lagna"
+     ],
+     "4": [
+      "Mars",
+      "Saturn"
+     ],
+     "5": [
+      "Sun",
+      "Mercury"
+     ],
+     "6": [
+      "Sun",
+      "Moon",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Lagna"
+     ],
+     "7": [
+      "Mars",
+      "Saturn"
+     ],
+     "8": [
+      "Mars",
+      "Venus",
+      "Saturn"
+     ],
+     "9": [
+      "Saturn"
+     ],
+     "10": [
+      "Sun",
+      "Mars",
+      "Jupiter",
+      "Saturn",
+      "Lagna"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "12": [
+      "Jupiter",
+      "Venus"
+     ]
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      3,
+      5,
+      6,
+      10,
+      11
+     ],
+     "Moon": [
+      3,
+      6,
+      11
+     ],
+     "Mars": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      10,
+      11
+     ],
+     "Mercury": [
+      3,
+      5,
+      6,
+      11
+     ],
+     "Jupiter": [
+      6,
+      10,
+      11,
+      12
+     ],
+     "Venus": [
+      6,
+      8,
+      11,
+      12
+     ],
+     "Saturn": [
+      1,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Lagna": [
+      1,
+      3,
+      6,
+      10,
+      11
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 39,
+    "verification": "The twelve house-rows sum to 39, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 52-53, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25352-25369",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 39"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.mercury",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_mercury",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 54-55",
+    "varga_of": "Mercury",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Mercury"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 54-55",
+    "engine_rendering": "In the ashtakavarga of Mercury, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Mars",
+      "Mercury",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "2": [
+      "Moon",
+      "Mars",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "3": [
+      "Mercury",
+      "Venus"
+     ],
+     "4": [
+      "Moon",
+      "Mars",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "5": [
+      "Sun",
+      "Mercury",
+      "Venus"
+     ],
+     "6": [
+      "Sun",
+      "Moon",
+      "Mercury",
+      "Jupiter",
+      "Lagna"
+     ],
+     "7": [
+      "Mars",
+      "Saturn"
+     ],
+     "8": [
+      "Moon",
+      "Mars",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "9": [
+      "Sun",
+      "Mars",
+      "Mercury",
+      "Venus",
+      "Saturn"
+     ],
+     "10": [
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Saturn",
+      "Lagna"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "12": [
+      "Sun",
+      "Mercury",
+      "Jupiter"
+     ]
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      5,
+      6,
+      9,
+      11,
+      12
+     ],
+     "Moon": [
+      2,
+      4,
+      6,
+      8,
+      10,
+      11
+     ],
+     "Mars": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Mercury": [
+      1,
+      3,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12
+     ],
+     "Jupiter": [
+      6,
+      8,
+      11,
+      12
+     ],
+     "Venus": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11
+     ],
+     "Saturn": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Lagna": [
+      1,
+      2,
+      4,
+      6,
+      8,
+      10,
+      11
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 54,
+    "verification": "The twelve house-rows sum to 54, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 54-55, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25402-25417",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 54"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.jupiter",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_jupiter",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 56-58",
+    "varga_of": "Jupiter",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Jupiter"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 56-58",
+    "engine_rendering": "In the ashtakavarga of Jupiter, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Sun",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Lagna"
+     ],
+     "2": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Lagna"
+     ],
+     "3": [
+      "Sun",
+      "Jupiter",
+      "Saturn"
+     ],
+     "4": [
+      "Sun",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Lagna"
+     ],
+     "5": [
+      "Moon",
+      "Mercury",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "6": [
+      "Mercury",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "7": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Jupiter",
+      "Lagna"
+     ],
+     "8": [
+      "Sun",
+      "Mars",
+      "Jupiter"
+     ],
+     "9": [
+      "Sun",
+      "Moon",
+      "Mercury",
+      "Venus",
+      "Lagna"
+     ],
+     "10": [
+      "Sun",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Lagna"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Lagna"
+     ],
+     "12": [
+      "Saturn"
+     ]
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Moon": [
+      2,
+      5,
+      7,
+      9,
+      11
+     ],
+     "Mars": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      10,
+      11
+     ],
+     "Mercury": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      9,
+      10,
+      11
+     ],
+     "Jupiter": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      10,
+      11
+     ],
+     "Venus": [
+      2,
+      5,
+      6,
+      9,
+      10,
+      11
+     ],
+     "Saturn": [
+      3,
+      5,
+      6,
+      12
+     ],
+     "Lagna": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 56,
+    "verification": "The twelve house-rows sum to 56, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 56-58, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25418-25455",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 56"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.venus",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_venus",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 59-61",
+    "varga_of": "Venus",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Venus"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 59-61",
+    "engine_rendering": "In the ashtakavarga of Venus, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Moon",
+      "Venus",
+      "Lagna"
+     ],
+     "2": [
+      "Moon",
+      "Venus",
+      "Lagna"
+     ],
+     "3": [
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "4": [
+      "Moon",
+      "Mars",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "5": [
+      "Moon",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "6": [
+      "Mars",
+      "Mercury"
+     ],
+     "7": [],
+     "8": [
+      "Sun",
+      "Moon",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "9": [
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "10": [
+      "Jupiter",
+      "Venus",
+      "Saturn"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "12": [
+      "Sun",
+      "Moon",
+      "Mars"
+     ]
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      8,
+      11,
+      12
+     ],
+     "Moon": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11,
+      12
+     ],
+     "Mars": [
+      3,
+      4,
+      6,
+      9,
+      11,
+      12
+     ],
+     "Mercury": [
+      3,
+      5,
+      6,
+      9,
+      11
+     ],
+     "Jupiter": [
+      5,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Venus": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Saturn": [
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11
+     ],
+     "Lagna": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 52,
+    "verification": "The twelve house-rows sum to 52, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 59-61, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25490-25504",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 52"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.saturn",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_saturn",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 62-63",
+    "varga_of": "Saturn",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Saturn"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 62-63",
+    "engine_rendering": "In the ashtakavarga of Saturn, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Sun",
+      "Lagna"
+     ],
+     "2": [
+      "Sun"
+     ],
+     "3": [
+      "Moon",
+      "Mars",
+      "Saturn",
+      "Lagna"
+     ],
+     "4": [
+      "Sun",
+      "Lagna"
+     ],
+     "5": [
+      "Mars",
+      "Jupiter",
+      "Saturn"
+     ],
+     "6": [
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "7": [
+      "Sun"
+     ],
+     "8": [
+      "Sun",
+      "Mercury"
+     ],
+     "9": [
+      "Mercury"
+     ],
+     "10": [
+      "Sun",
+      "Mars",
+      "Mercury",
+      "Lagna"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "12": [
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus"
+     ]
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      10,
+      11
+     ],
+     "Moon": [
+      3,
+      6,
+      11
+     ],
+     "Mars": [
+      3,
+      5,
+      6,
+      10,
+      11,
+      12
+     ],
+     "Mercury": [
+      6,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "Jupiter": [
+      5,
+      6,
+      11,
+      12
+     ],
+     "Venus": [
+      6,
+      11,
+      12
+     ],
+     "Saturn": [
+      3,
+      5,
+      6,
+      11
+     ],
+     "Lagna": [
+      1,
+      3,
+      4,
+      6,
+      10,
+      11
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 39,
+    "verification": "The twelve house-rows sum to 39, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 62-63, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25537-25547",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 39"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.lagna",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_of_lagna",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 68-71",
+    "varga_of": "Lagna",
+    "engine_facts_consumed": [
+     "rasi of every graha",
+     "rasi of the lagna",
+     "whole-sign house counting from any point"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_of",
+      "operator": "equals",
+      "value": "Lagna"
+     },
+     {
+      "fact": "reference_point",
+      "operator": "in",
+      "value": [
+       "Sun",
+       "Moon",
+       "Mars",
+       "Mercury",
+       "Jupiter",
+       "Venus",
+       "Saturn",
+       "Lagna"
+      ]
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas; each of the eight reference points contributes at most one per rasi",
+    "customer_prediction": false,
+    "sanskrit_cue": "स्थानप्रदाः / रेखाप्रदाः lists of Uttara-khanda adhyaya 1, slokas 68-71",
+    "engine_rendering": "In the ashtakavarga of Lagna, the reference points listed under each house are the ones that give a rekha to the rasi standing that many houses from themselves.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rekha_givers_by_house": {
+     "1": [
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn"
+     ],
+     "2": [
+      "Mercury",
+      "Jupiter",
+      "Venus"
+     ],
+     "3": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Venus",
+      "Saturn",
+      "Lagna"
+     ],
+     "4": [
+      "Sun",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn"
+     ],
+     "5": [
+      "Jupiter",
+      "Venus"
+     ],
+     "6": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Saturn",
+      "Lagna"
+     ],
+     "7": [
+      "Jupiter"
+     ],
+     "8": [
+      "Mercury",
+      "Venus"
+     ],
+     "9": [
+      "Jupiter",
+      "Venus"
+     ],
+     "10": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Saturn",
+      "Lagna"
+     ],
+     "11": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Saturn",
+      "Lagna"
+     ],
+     "12": [
+      "Sun",
+      "Moon"
+     ]
+    },
+    "rekha_houses_by_reference_point": {
+     "Sun": [
+      3,
+      4,
+      6,
+      10,
+      11,
+      12
+     ],
+     "Moon": [
+      3,
+      6,
+      10,
+      11,
+      12
+     ],
+     "Mars": [
+      1,
+      3,
+      6,
+      10,
+      11
+     ],
+     "Mercury": [
+      1,
+      2,
+      4,
+      6,
+      8,
+      10,
+      11
+     ],
+     "Jupiter": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+     ],
+     "Venus": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9
+     ],
+     "Saturn": [
+      1,
+      3,
+      4,
+      6,
+      10,
+      11
+     ],
+     "Lagna": [
+      3,
+      6,
+      10,
+      11
+     ]
+    },
+    "procedure": [
+     "for each reference point P in [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Lagna]",
+     "for each house offset h in rekha_houses_by_reference_point[P]",
+     "add one rekha to the rasi that stands h whole signs from P's own rasi (P's rasi counting as 1)"
+    ],
+    "total_rekhas": 49,
+    "verification": "The twelve house-rows sum to 49, which is this varga's canonical total; the eight tables of the seven grahas sum to 337, the sarvashtakavarga total."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 68-71, with the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss and the printed rekha-chakra, OCR lines 25698-25714",
+     "verification": "read directly in Devanagari 2026-08-04; the verse compounds, the Sanskrit prose expansion and the Hindi gloss were read against each other and the completed table was then checked by row-sum against the canonical total 49"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.bhinnashtakavarga.scan_damage_disclosure",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "bhinnashtakavarga_reading_uncertainties_in_this_scan",
+    "chapter": "Uttara-khanda adhyaya 1, slokas 46-71",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "bhinnashtakavarga_tables",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "provenance_disclosure",
+    "unit": "n/a",
+    "customer_prediction": false,
+    "engine_rendering": "Three cells in the eight tables were not directly legible in this scan and were settled by the row-sum, not by the ink. They are named here rather than concealed.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "uncertain_cells": [
+     {
+      "varga": "Jupiter",
+      "house": 9,
+      "issue": "the Hindi gloss lists only four givers (Venus, Sun, Moon, Mercury); the row-sum requires five, and the Sanskrit supports the Lagna as the fifth. The Lagna is therefore restored by arithmetic, not read.",
+      "resolution": "Sun, Moon, Mercury, Venus, Lagna"
+     },
+     {
+      "varga": "Venus",
+      "house": 4,
+      "issue": "the verse compound 'अर्कारा:' is ambiguous between arka (Sun) and arki (Saturn); the Hindi gloss prints the Sun, the row-sum and the neighbouring houses support Saturn.",
+      "resolution": "Saturn taken; the Hindi variant is recorded"
+     },
+     {
+      "varga": "Venus",
+      "house": 8,
+      "issue": "the verse compound admits Mars as a seventh giver; the Hindi gloss lists six and the row-sum requires six.",
+      "resolution": "Mars excluded"
+     }
+    ],
+    "method_note": "Every one of the eight tables was completed from the verse, cross-read against the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss, and then checked by row-sum. Where the three readings disagreed the disagreement is recorded above instead of being averaged away."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Uttara-khanda adhyaya 1",
+     "location": "slokas 56-61 and the accompanying printed chakras, pages 28-30 (OCR lines 25443-25535)",
+     "verification": "read directly in Devanagari 2026-08-04; the uncertainties are the encoder's, stated as such"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.u01.sarvashtakavarga",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "sarvashtakavarga",
+    "chapter": "Uttara-khanda adhyaya 1 (the seven tables) with the phala at purva-khanda adhyaya 20, slokas 81-86",
+    "engine_facts_consumed": [
+     "the seven bhinnashtakavarga tables"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "seven_bhinnashtakavargas",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas per rasi; 337 across the twelve",
+    "customer_prediction": false,
+    "sanskrit": "मेषादिभानां सकलाष्टवर्गे उत्पन्नरेखागणमेव कुर्यात् ॥ ... अष्टादश तत्त्वांतमितं कनिष्ठं त्रिंशदवसानं किल मध्यवीर्याः ॥ ८२ ॥ त्रिंशदधिकं तूत्तमवीर्यदाः स्युः शरीरसौख्यार्थयशोविशेषाः ॥ ८३ ॥",
+    "engine_rendering": "In the sarvashtakavarga of the signs from Aries onward one is to make simply the sum of the rekhas produced. From eighteen up to twenty-five is the least; up to thirty is middling strength; above thirty gives the highest strength, with distinction in body, comfort, wealth and repute.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "procedure": [
+     "for each rasi, add the rekhas that rasi holds in each of the SEVEN graha bhinnashtakavargas",
+     "the lagna's own ashtakavarga is NOT included in the sarva total",
+     "the twelve rasi totals sum to 337 (48+49+39+54+56+52+39)"
+    ],
+    "grades": {
+     "18 to 25 rekhas": "kanishtha (least)",
+     "25 to 30": "madhya (middling)",
+     "above 30": "uttama (highest)"
+    },
+    "further_rules": {
+     "eleventh_vs_tenth": "if the eleventh house has more rekhas than the tenth there is gain; if fewer, expenditure (sloka 84)",
+     "own_varga_below_four": "a graha with fewer than four rekhas in its OWN ashtakavarga brings distress; four or more, comfort (sloka 83b: 'स्वस्वाष्टवर्गे यदि वेदहीनाः क्लेशाय सौख्याय च वेदपुष्टाः')",
+     "quadrant_method": "sum the bhava totals in fours, clockwise, and the direction whose group has the greater sum is the auspicious one (slokas 86)"
+    },
+    "total_check": 337
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 20",
+     "location": "slokas 81-86, pages 132-134 (OCR lines 8631-8648)",
+     "verification": "read directly in Devanagari 2026-08-04; the 337 total is the sum of the seven tables encoded above and is a genuine arithmetic check on all seven"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p17.trikona_sodhana",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "trikona_sodhana_trinal_reduction",
+    "chapter": "Purva-khanda adhyaya 17",
+    "engine_facts_consumed": [
+     "a completed bhinnashtakavarga"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "bhinnashtakavarga",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas",
+    "customer_prediction": false,
+    "sanskrit": "राशिचक्रं यथाभागं निक्षिप्याष्टग्रहस्य च ॥ त्रिकोणशोधनं कुर्यादादौ सर्वेषु राशिषु ॥ १ ॥",
+    "engine_rendering": "Having set down the circle of signs in due measure for each of the eight, one should first perform the trinal reduction in all the signs.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "trikonas": [
+     [
+      "Aries",
+      "Leo",
+      "Sagittarius"
+     ],
+     [
+      "Taurus",
+      "Virgo",
+      "Capricorn"
+     ],
+     [
+      "Gemini",
+      "Libra",
+      "Aquarius"
+     ],
+     [
+      "Cancer",
+      "Scorpio",
+      "Pisces"
+     ]
+    ],
+    "procedure": [
+     "take each trine group of three rasis in turn, within ONE graha's ashtakavarga",
+     "CASE 1 - if any one of the three holds zero rekhas: perform NO reduction in that trine; leave all three figures standing",
+     "CASE 2 - if all three are equal: put zero in all three",
+     "CASE 3 - otherwise: subtract the SMALLEST of the three from all three"
+    ],
+    "worked_examples": [
+     {
+      "trine": "Taurus 2, Virgo 5, Capricorn 0",
+      "case": 1,
+      "result": "unchanged (2, 5, 0) - one member is zero"
+     },
+     {
+      "trine": "Gemini 4, Libra 6, Aquarius 5",
+      "case": 3,
+      "result": "Gemini 0, Libra 2, Aquarius 1"
+     },
+     {
+      "trine": "Cancer 3, Scorpio 4, Pisces 4",
+      "case": 3,
+      "result": "Cancer 0, Scorpio 1, Pisces 1"
+     },
+     {
+      "trine": "Taurus 5, Virgo 5, Capricorn 5",
+      "case": 2,
+      "result": "0, 0, 0"
+     }
+    ]
+   },
+   "priority": 1,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 17",
+     "location": "sloka 1 with the commentary's three enumerated cases and four worked examples, pages 117-122 (OCR lines 7862-8133)",
+     "verification": "read directly in Devanagari 2026-08-04; all four printed examples recompute correctly"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p18.ekadhipatya_sodhana",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "ekadhipatya_sodhana_reduction_for_single_lordship",
+    "chapter": "Purva-khanda adhyaya 18, slokas 1-5",
+    "engine_facts_consumed": [
+     "a trikona-reduced bhinnashtakavarga",
+     "rasi lordship",
+     "which rasis are occupied by a graha"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "trikona_sodhana_complete",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "rekhas",
+    "customer_prediction": false,
+    "sanskrit": "एवं त्रिकोणं संशोध्य पश्चादेकाधिपत्यता ॥ क्षेत्रद्वयं फलानि स्युस्तदा संशोधयेद्बुधः ॥ १ ॥ ... कुलीरसिंहयो राश्योः पृथक् क्षेत्रे पृथक् फलम् ॥ ५ ॥",
+    "engine_rendering": "Having thus reduced the trines, single-lordship follows. Where one lord holds two fields with figures, the wise should reduce. ... For the two signs Cancer and Leo the field is separate and the figure is separate.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "order": "trikona sodhana FIRST, then ekadhipatya sodhana - the text states the order explicitly",
+    "applies_to": "the six two-sign lords: Mars (Aries/Scorpio), Venus (Taurus/Libra), Mercury (Gemini/Virgo), Jupiter (Sagittarius/Pisces), Saturn (Capricorn/Aquarius)",
+    "exempt": "Cancer and Leo, whose lords own one sign each - no ekadhipatya reduction is performed on them (sloka 5)",
+    "cases": [
+     {
+      "case": 1,
+      "both_signs_occupied_by_a_graha": true,
+      "rule": "no reduction at all; both figures stand",
+      "sanskrit": "उभयोर्ग्रहसंयुक्ते न संशोध्यः कदाचन ॥ ४ ॥",
+      "worked": "Sun's ashtakavarga: Pisces occupied, 1; Sagittarius occupied, 2 - both stand"
+     },
+     {
+      "case": 2,
+      "both_signs_unoccupied": true,
+      "figures": "equal",
+      "rule": "put zero in BOTH",
+      "sanskrit": "उभयोर्ग्रहहीनाभ्यां समत्वं सकलं त्यजेत् ॥ ४ ॥",
+      "worked": "Venus's ashtakavarga: Taurus 1, Libra 1, neither occupied - both become 0"
+     },
+     {
+      "case": 3,
+      "both_signs_unoccupied": true,
+      "figures": "unequal",
+      "rule": "subtract the lesser from the greater; the remainder stands under the greater, zero under the lesser",
+      "worked": "Lagna's ashtakavarga: Taurus 3, Libra 1 - Taurus becomes 2, Libra becomes 0"
+     },
+     {
+      "case": 4,
+      "one_occupied": true,
+      "occupied_figure": "lower",
+      "rule": "subtract the occupied sign's (lower) figure from the unoccupied sign's (higher) figure; the remainder stands under the UNOCCUPIED sign; the occupied sign keeps its own figure",
+      "sanskrit": "क्षीणेन सह चान्यस्मिञ्छोधयेद्ग्रहवर्जिते ॥ ग्रहयुक्ते फले हीने ग्रहाभावे फलाधिके ॥ २ ॥"
+     },
+     {
+      "case": 5,
+      "one_occupied": true,
+      "occupied_figure": "higher",
+      "rule": "the occupied sign keeps its figure unchanged; put ZERO under the unoccupied sign",
+      "sanskrit": "फलाधिके ग्रहैर्युक्ते चान्यस्मिन्सर्वमुत्सृजेत् ॥ ३ ॥",
+      "worked": "Pisces occupied with 4, Sagittarius unoccupied and lower - Pisces stays 4, Sagittarius becomes 0"
+     },
+     {
+      "case": 6,
+      "one_occupied": true,
+      "figures": "equal",
+      "rule": "the occupied sign keeps its figure; the unoccupied sign becomes zero",
+      "sanskrit": "सग्रहा ग्रहतुल्यत्वात्सर्वं संशोध्यमग्रहात् ॥ ५ ॥",
+      "worked": "Aries (occupied) 3, Scorpio (unoccupied) 3 - Aries stays 3, Scorpio becomes 0"
+     },
+     {
+      "case": 7,
+      "one_figure_is_zero": true,
+      "rule": "both become zero"
+     }
+    ]
+   },
+   "priority": 2,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 18",
+     "location": "slokas 1-5 and the commentary's seven worked cases, pages 123-124 (OCR lines 8136-8187)",
+     "verification": "read directly in Devanagari 2026-08-04; all seven printed cases were transcribed, and the two the OCR damaged are flagged in the case list"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p19.pindotpatti",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "pindotpatti_rasi_pinda_graha_pinda_and_yoga_pinda",
+    "chapter": "Purva-khanda adhyaya 19, slokas 1-3",
+    "engine_facts_consumed": [
+     "the reduced bhinnashtakavarga",
+     "rasi of each graha"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "ekadhipatya_sodhana_complete",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "pinda (a pure number)",
+    "customer_prediction": false,
+    "sanskrit": "शोध्यावशेषं संस्थाप्य राशिमानेन वर्धयेत् ॥ ग्रहयुक्तेष्वपि तद्राशौ ग्रहमानेन वर्धयेत् ॥ १ ॥ गोसिंहौ दशगुणितौ वसुभिर्मिथुनालिनौ ॥ वणिग्मेषौ तु मुनिभिः कन्यकामकरौ शरैः ॥ शेषाः स्वमानगुणिता राशिमाना इमे क्रमात् ॥ २ ॥ जीवारशुक्रसौम्यानां दश वसु मुनि इन्द्रियैः क्रमात् ... शेषाणां ग्रहगुणैर्गुणयेत् पृथक् पृथक् कार्यः ॥ ३ ॥",
+    "engine_rendering": "Setting down what remains after the reductions, increase it by the measure of the sign; and in a sign occupied by grahas, increase it also by the measure of the graha. Taurus and Leo are multiplied by ten, Gemini and Scorpio by eight, Libra and Aries by seven, Virgo and Capricorn by five; the rest by their own number. For Jupiter, Mars, Venus and Mercury the figures are ten, eight, seven and five.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "rasi_gunaka": {
+     "Aries": 7,
+     "Taurus": 10,
+     "Gemini": 8,
+     "Cancer": 4,
+     "Leo": 10,
+     "Virgo": 5,
+     "Libra": 7,
+     "Scorpio": 8,
+     "Sagittarius": 9,
+     "Capricorn": 5,
+     "Aquarius": 11,
+     "Pisces": 12
+    },
+    "graha_gunaka": {
+     "Sun": 5,
+     "Moon": 5,
+     "Mars": 8,
+     "Mercury": 5,
+     "Jupiter": 10,
+     "Venus": 7,
+     "Saturn": 5
+    },
+    "procedure": [
+     "start from the figure standing under each rasi AFTER trikona and ekadhipatya sodhana",
+     "RASI PINDA: multiply each rasi's remaining figure by that rasi's gunaka and sum over the twelve",
+     "GRAHA PINDA: for each graha, multiply the figure standing under the rasi that graha OCCUPIES by that graha's gunaka; sum over the seven grahas",
+     "YOGA PINDA = rasi pinda + graha pinda"
+    ],
+    "worked_example": {
+     "varga": "the Sun's ashtakavarga",
+     "occupations": {
+      "Aquarius (figure 1)": [
+       "Sun x5 = 5",
+       "Jupiter x10 = 10"
+      ],
+      "Pisces (figure 1)": [
+       "Venus x7 = 7",
+       "Mars x8 = 8"
+      ],
+      "Sagittarius (figure 2)": [
+       "Moon x5 = 10"
+      ],
+      "Capricorn (figure 0)": [
+       "Saturn x5 = 0",
+       "Mercury x5 = 0"
+      ]
+     },
+     "graha_pinda": 40,
+     "rasi_terms": [
+      "Aquarius 1 x 11 = 11",
+      "Pisces 1 x 12 = 12",
+      "Leo 1 x 10 = 10",
+      "Sagittarius 2 x 9 = 18"
+     ],
+     "rasi_pinda": 51,
+     "yoga_pinda": 91
+    },
+    "verification": "5+10+7+8+10+0 = 40 and 11+12+10+18 = 51 and 40+51 = 91; all three printed figures reproduce exactly."
+   },
+   "priority": 3,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 19",
+     "location": "slokas 1-3 with the two printed gunaka charts and the fully worked Sun example, pages 124-125 (OCR lines 8190-8252)",
+     "verification": "read directly in Devanagari 2026-08-04 and recomputed to the printed result"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p20.ashtakavarga_significations",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "what_each_grahas_ashtakavarga_is_consulted_for",
+    "chapter": "Purva-khanda adhyaya 20, slokas 1-3",
+    "engine_facts_consumed": [
+     "the completed bhinnashtakavargas"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "bhinnashtakavarga",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "significations_lookup",
+    "unit": "n/a",
+    "customer_prediction": false,
+    "engine_rendering": "Which department of life each graha's own ashtakavarga is the instrument for.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "results_by_graha": {
+     "Sun": {
+      "sanskrit": "आत्मप्रभावशक्तिश्च पितुश्चिंता रवेः फलम् ॥ १ ॥",
+      "engine_rendering": "Self, influence and power, and consideration of the father, are the result of the Sun's [ashtakavarga]."
+     },
+     "Moon": {
+      "sanskrit": "मनोबुद्धिप्रसादं च मातुश्चिंतामृगांकतः ॥ १ ॥",
+      "engine_rendering": "Mind, intellect and its clarity, and consideration of the mother, from the Moon's."
+     },
+     "Mars": {
+      "sanskrit": "भ्रातृसत्त्वं गुणं भूमिं भौमेन तु विचिंतयेत् ॥ २ ॥",
+      "engine_rendering": "Brothers, courage, quality and land are to be considered by Mars's."
+     },
+     "Mercury": {
+      "sanskrit": "वाणिज्यकर्मशक्तिश्च बुधेन तु विचिंतयेत् ॥",
+      "engine_rendering": "Trade, work and capacity are to be considered by Mercury's."
+     },
+     "Jupiter": {
+      "sanskrit": "गुरुणा देहपुष्टिं च बुद्धिपुत्रार्थसंपदः ॥ ३ ॥",
+      "engine_rendering": "Bodily nourishment, and intellect, sons, wealth and prosperity, by Jupiter's."
+     },
+     "Venus": {
+      "sanskrit": "भृगोर्विवाहकर्माणि ...",
+      "engine_rendering": "Marriage and its observances from Venus's."
+     }
+    },
+    "saturn_note": "Saturn's clause is present in the chapter but damaged in this scan and is deliberately NOT reconstructed.",
+    "composer_note": "These are the questions the technique answers; they are not delineations about a reader and none is rendered."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 20",
+     "location": "slokas 1-3, page 125 (OCR lines 8255-8259)",
+     "verification": "read directly in Devanagari 2026-08-04; Saturn's clause damaged and left unreconstructed"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.ashtakavarga.pipeline_order",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "ashtakavarga_computation_pipeline_and_its_mandatory_order",
+    "chapter": "Uttara-khanda adhyaya 1 and purva-khanda adhyayas 17-20",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "ashtakavarga_requested",
+      "operator": "equals",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "n/a",
+    "customer_prediction": false,
+    "engine_rendering": "The order in which the recension itself performs the technique, which is not optional: the reductions change the figures the pinda is computed from, and performing them out of order silently produces a different chart.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "pipeline": [
+     "1. build each of the eight bhinnashtakavargas from its rekha table (uttara 1, slokas 46-71)",
+     "2. sum the SEVEN graha tables for the sarvashtakavarga; the lagna's table is kept separate",
+     "3. trikona sodhana on each graha's table (purva 17) - FIRST reduction",
+     "4. ekadhipatya sodhana on the result (purva 18) - SECOND reduction, and the text says 'पश्चात्', afterwards",
+     "5. pindotpatti from the twice-reduced figures (purva 19): rasi pinda, graha pinda, yoga pinda",
+     "6. read the significations (purva 20)"
+    ],
+    "warning": "The sarvashtakavarga is taken from the UNREDUCED tables; the pindas are taken from the REDUCED ones. A single implementation that reduces before summing will report a sarva total that is not 337."
+   },
+   "priority": 0,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyayas 17-19",
+     "location": "the chapter sequence and adhyaya 18 sloka 1's explicit 'पश्चादेकाधिपत्यता', pages 117-125",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  }
+ ]
+}

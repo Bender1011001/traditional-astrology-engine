@@ -1,0 +1,970 @@
+{
+  "fragment_id": "smt03a",
+  "source_file": "E:\\code.projects\\astrology\\tmp\\acquire\\pdfs\\sanming_tonghui_siku_zhejiang\\sanming_tonghui_juan03.pdf",
+  "pages_covered": "IN PROGRESS. PDF pages 1-19 rendered at zoom 5.0 and read directly. PDF pages 1-2 are Siku Quanshu front matter / blank.",
+  "chapters_seen": [
+    "論十干祿 — PDF page 3 (leaf 一 recto); juan 3 opens here",
+    "論金輿 — PDF page 19 (leaf 九 recto)"
+  ],
+  "fragment_rules": [
+    {
+      "rule_id": "bazi.ziping.shensha.smt03a_shigan_lu_derivation_table",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "shensha_lu_derivation",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "derivation_input": "day_or_year_stem",
+        "lu_branch_of_stem": {
+          "jia": "yin_branch",
+          "yi": "mao",
+          "bing": "si",
+          "ding": "wu_branch",
+          "wu_stem": "si (寄 lodged, not proper)",
+          "ji": "wu_branch (寄 lodged, not proper)",
+          "geng": "shen",
+          "xin": "you",
+          "ren": "hai",
+          "gui": "zi"
+        }
+      },
+      "conclusion": {
+        "judgment": "The lu (祿, prosperity/emolument position) of each of the ten stems is the branch of the same direction and same element as that stem; earth stems 戊/己 have no branch of their own and are lodged in 巳/午 with fire. The stated principle is that lu follows the place where the stem's qi is flourishing (祿隨旺行).",
+        "chinese": "祿爵祿也，當得勢而享，乃謂之祿。自始分十干十二支時，便以甲乙配同寅卯居東，丙丁配同巳午居南，庚辛配同申酉居西，壬癸配同亥子居北。十干就支神為祿，謂祿隨旺行。所以甲祿寅、乙祿卯、庚祿申、辛祿酉、壬祿亥、癸祿子、丙祿巳、丁祿午、戊寄巳、己寄午。謂巳午乃火旺之鄉，子隨母得祿之義。",
+        "engine_rendering": "Lu means rank-and-emolument: one must obtain position (勢) before one enjoys it, and that is what is called lu. From the moment the ten stems and twelve branches were first distinguished, jia and yi were paired with yin and mao and placed in the east; bing and ding paired with si and wu and placed in the south; geng and xin paired with shen and you and placed in the west; ren and gui paired with hai and zi and placed in the north. The ten stems take a branch-spirit as their lu, which is to say that lu travels with flourishing. Therefore jia's lu is yin, yi's lu is mao, geng's lu is shen, xin's lu is you, ren's lu is hai, gui's lu is zi, bing's lu is si, ding's lu is wu; wu is lodged in si and ji is lodged in wu — because si and wu are the region where fire flourishes, and this is the principle of the child obtaining its lu by following the mother.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "the engine does not compute a 祿 (lu) position at all; no shensha derivation table is present",
+          "the engine has no representation for 寄 (a stem lodged in a branch belonging to another element), which is what distinguishes 戊/己 lu from the other eight"
+        ]
+      },
+      "priority": 10,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF pages 3-4 (leaf 一 recto and verso), sanming_tonghui_juan03.pdf",
+          "verification": "Page images rendered at zoom 5.0 and read directly; block-printed kaishu fully legible."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; derivation table only, no customer-facing prediction attached",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.shensha.smt03a_no_lu_in_four_earth_branches",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "shensha_lu_derivation",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "candidate_lu_branch": "chen|xu|chou|wei",
+        "branch_class": "four_seasonal_earth_branches_四季"
+      },
+      "conclusion": {
+        "judgment": "No stem's lu falls in chen, xu, chou or wei. Two independent reasons are given: chen and xu are the kuigang, called 'border wastes and evil ground', so the lu-origin does not lodge there; chou and wei are the gate through which the tianyi noble spirit passes in and out, so the lu-origin avoids them. A third reason is given as an alternative saying: the four seasonal branches carry mixed qi (雜氣), so lu in them would not be exclusive, and therefore is not taken.",
+        "chinese": "內有辰戌丑未，辰戌為魁罡，名曰邊鄙惡地，祿元不寄；丑未乃天乙貴人出入之門，祿元避之。所以四宮無祿。又曰四季有雜氣，為祿不專，故不取。",
+        "engine_rendering": "Among them are chen, xu, chou and wei. Chen and xu are the kuigang, named the border-wastes and evil ground; the lu-origin does not lodge there. Chou and wei are the gate by which the tianyi noble one goes in and out; the lu-origin avoids them. Therefore these four palaces have no lu. It is also said: the four seasonal branches hold mixed qi, so lu there would not be exclusive, and for that reason it is not taken.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "the engine does not classify chen/xu/chou/wei as 四季 mixed-qi branches as a named category, though it does carry per-branch hidden stems with qi grades",
+          "no 魁罡 or 天乙貴人 derivation is computed"
+        ]
+      },
+      "priority": 10,
+      "exceptions": [
+        "The passage is about the lu table only; it does not say the four earth branches are useless generally — juan 3 elsewhere calls them 庫, the gathering place of lu."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF page 4 (leaf 一 verso), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.shensha.smt03a_jinyu_two_branches_after_lu",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "shensha_jinyu",
+        "chapter": "論金輿",
+        "juan": 3
+      },
+      "conditions": {
+        "jinyu_branch": "two branches forward from the stem's lu branch",
+        "worked_example": "jia's lu is yin_branch, therefore jia's jinyu is chen",
+        "best_position": "day_pillar|hour_pillar"
+      },
+      "conclusion": {
+        "judgment": "The jinyu (golden carriage) always sits two branches ahead of the lu. Its effect: the native is soft in nature, sincere in appearance, temperate in bearing; it is called the banner of lu-and-destiny and the ceremonial axe of the three powers. Encountering it on the day or hour pillar is best. The clause about what women and men respectively obtain from it is gendered and is refused.",
+        "chinese": "輿者車也，金者貴之之義。譬之君子居官得祿，須坐車以載之，故金輿常居祿前二辰。如甲子人祿在寅，辰為金輿是也。此煞乃祿命之旌旗，三才之節鉞，主人性柔貌愿，舉止溫克。婦人逢之，不富即貴；男子得之，多妻妾陰福相扶持。生日生時遇之為佳，骨肉平生安泰，得賢妻妾，子孫茂盛。如皇族多帶此煞，常格得之，身在無氣中生，主作贅。",
+        "engine_rendering": "Yu means carriage; jin (gold) carries the sense of nobility. Compare it to a gentleman who holds office and obtains emolument: he must sit in a carriage to be carried. Therefore the golden carriage always sits two branches ahead of the lu. For instance a jia-zi person's lu is in yin, so chen is the golden carriage. This spirit is the banner of lu-and-destiny and the ceremonial axe of the three powers. It makes the native soft in nature and sincere in countenance, temperate in bearing. [gendered clauses follow]. To meet it on the birth day or birth hour is excellent: kin and body are at peace through life. Imperial kinsmen often carry this spirit; when an ordinary structure obtains it, and the self is born amid qi-less ground, [refused].",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused",
+        "engine_missing_facts": [
+          "no 金輿 derivation computed; requires the lu table first",
+          "sex of the native is not an engine input, and the source's own predicate is sex-split"
+        ]
+      },
+      "priority": 20,
+      "exceptions": [
+        "The chapter head 論十干祿 at PDF p.3 already carries the inset gloss 「祿前二辰為金輿，喻人得祿須坐車也，故附於後」 forward-referencing this chapter."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論金輿",
+          "section": "論金輿",
+          "location": "PDF page 19 (leaf 九 recto), sanming_tonghui_juan03.pdf; inset cross-reference at PDF page 3 (leaf 一 recto)",
+          "verification": "Page images rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; gendered and status clauses refused at fire time",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "lu_pattern_scoring",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "lu_branch_present": "jian 建 — the lu branch itself",
+        "branch_before_lu_present": "xiang 向",
+        "branch_after_lu_present": "jin 近",
+        "liuhe_partner_of_lu_present": "he 合",
+        "threshold": "any two of the four words present"
+      },
+      "conclusion": {
+        "judgment": "Shen Zhi's scoring of the lu region uses four words — jian (the lu branch), xiang, jin, and he (the six-harmony partner of the lu branch). Ranked: jian is inferior to xiang, jin is inferior to he. Obtaining any two of the four is noble. Worked example: jia's lu is yin, so yin is jian, chou is xiang, mao is jin, hai is he.",
+        "chinese": "古人云：祿前二辰為背祿，後二辰為向。沈芝取建、向、近、合四字為貴。建不如向，近不如合。四字中得兩字者貴。如甲祿寅，以寅為建，丑為向，卯為近，亥為合，餘准此。",
+        "engine_rendering": "The ancients said: two branches ahead of the lu is 'turning the back on lu'; two branches behind is 'facing'. Shen Zhi takes the four words jian, xiang, jin and he as noble. Jian is not as good as xiang; jin is not as good as he. One who obtains two of the four words is noble. For example jia's lu is yin: yin is taken as jian, chou as xiang, mao as jin, hai as he. The rest follow this standard.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "no lu position, therefore no jian/xiang/jin/he classification",
+          "the engine has no notion of 'obtain N of M named positions' as a scoring threshold"
+        ]
+      },
+      "priority": 15,
+      "exceptions": [
+        "The opening sentence says 祿前二辰為背祿、後二辰為向 (two ahead = turning-the-back, two behind = facing), yet the worked example assigns 向 to chou, which is one branch behind yin, not two. Quoted as printed; the arithmetic of 向 is internally inconsistent in this recension. Compare 論金輿, which also uses 祿前二辰 and assigns chen to jia — confirming 前 counts forward in the branch cycle."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF page 12 (leaf 五 verso), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.rootedness.smt03a_ku_is_the_gathering_of_lu",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "rootedness_storehouse",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "storehouse_branch_of_stem": {
+          "jia": "wei",
+          "yi": "wei",
+          "bing": "xu",
+          "ding": "xu",
+          "wu_stem": "chen",
+          "ji": "chen",
+          "ren": "chen",
+          "gui": "chen",
+          "geng": "chou",
+          "xin": "chou"
+        },
+        "amplifier": "many branches of the stem's own lu/flourishing element also present"
+      },
+      "conclusion": {
+        "judgment": "The storehouse (庫) is where lu gathers. jia/yi store in wei, bing/ding in xu, wu/ji and ren/gui in chen, geng/xin in chou. If a jia or yi native has many hai and also obtains wei, the lu is thick and the native is amply provided.",
+        "chinese": "又曰庫者祿之聚，如甲乙在未，丙丁在戌，戊己壬癸在辰，庚辛在丑。如甲乙亥多而得未，乃祿厚豐足之人。",
+        "engine_rendering": "It is also said: the storehouse is the gathering of lu. Thus jia and yi lie in wei, bing and ding in xu, wu, ji, ren and gui in chen, geng and xin in chou. For example, if a jia or yi person has many hai and also obtains wei, this is a person of thick lu and ample sufficiency.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "the engine carries hidden stems with qi grade main/middle/residual, so wei-holding-yi and chen-holding-gui are representable, but it does not compute a 庫 (storehouse) membership predicate, nor treat a storehouse branch as a graded root",
+          "no count of how many branches of a given element are present (the 亥多 predicate) is computed"
+        ]
+      },
+      "priority": 10,
+      "exceptions": [
+        "This recension puts 戊己 in chen alongside 壬癸. That merges the earth storehouse with the water storehouse and does not follow the plain 三合 logic (which would put earth with fire in xu). Recorded as printed."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF page 13 (leaf 六 recto), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.rootedness.smt03a_he_is_the_crosswise_of_lu",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "rootedness_by_combination",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "lu_branch_present": true,
+        "liuhe_partner_of_lu_present": true,
+        "variant_ming_he": "lu branch present AND its six-harmony partner present",
+        "variant_an_he": "lu branch ABSENT but its six-harmony partner present"
+      },
+      "conclusion": {
+        "judgment": "Combination is the sideways/windfall form of lu. With the lu branch present plus its six-harmony partner it is 'manifest combination' (明合); with the lu branch absent and only the partner present it is 'hidden combination' (暗合). Even hidden combination counts as 'seeing the lu', and it mostly rules unexpected, windfall fortune.",
+        "chinese": "合者祿之橫，如甲祿寅而得亥謂之明合，無寅得亥謂之暗合。雖非見祿亦曰見祿，多主儻來之福。",
+        "engine_rendering": "Combination is the crosswise form of lu. Thus jia's lu is yin, and to obtain hai as well is called manifest combination; to have no yin but obtain hai is called hidden combination. Although this is not literally seeing the lu, it is still said to be seeing the lu, and it mostly rules fortune that arrives unlooked-for.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "the engine computes branch_relations.liu_he, but has no lu position to relate them to, and no 明合/暗合 distinction"
+        ]
+      },
+      "priority": 15,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF pages 13-14 (leaf 六 recto/verso), sanming_tonghui_juan03.pdf",
+          "verification": "Page images rendered at zoom 5.0 and read directly; the sentence runs across the leaf turn."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "geju_gonglu",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "xu_gong_虛拱": "lu branch ABSENT, but the branch before and the branch after the lu branch are both present, flanking the empty lu position",
+        "shi_gong_實拱": "lu branch PRESENT, and the branch before and after are also both present",
+        "preference": "xu_gong ranks above shi_gong"
+      },
+      "conclusion": {
+        "judgment": "Flanking (拱) is the honoured form of lu. Empty flanking — the two neighbours present with the lu branch itself missing — is superior to solid flanking, in which the lu branch is also present. Empty flanking rules great wealth and nobility. This is the mechanism underlying the gonglu (拱祿) pattern.",
+        "chinese": "拱者祿之尊，如甲祿居寅，不見寅而見丑卯在兩傍拱之，謂之虛拱；如甲人見寅，又見丑卯在兩傍，謂之實拱。然拱實不若拱虛，主大富貴。",
+        "engine_rendering": "Flanking is the honoured form of lu. Thus jia's lu resides in yin: if yin is not seen but chou and mao are seen on either side flanking it, this is called empty flanking. If a jia person sees yin, and also has chou and mao on either side, this is called solid flanking. Yet solid flanking is not the equal of empty flanking, which rules great wealth and nobility.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "no lu position, and no adjacency/flanking predicate over the four branch positions",
+          "the engine cannot express 'a branch is absent from the chart but its two neighbours are present'"
+        ]
+      },
+      "priority": 20,
+      "exceptions": [
+        "The text does not say whether the two flanking branches must be adjacent pillars or merely both present somewhere in the chart."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF page 14 (leaf 六 verso), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.geju.smt03a_jianlu_shengwang_vs_sijue",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "geju_jianlu",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "jianlu_present": true,
+        "split_condition": "day_master_seasonal_state",
+        "favourable_branch": "sheng|wang (生旺)",
+        "unfavourable_branch": "si|jue (死絕)"
+      },
+      "conclusion": {
+        "judgment": "The jianlu (established lu) native is thick-fleshed and solid in qi, of a structure that is not refined, easy through life and sufficient in wealth — this when the lu is in a birthing/flourishing state. When the lu is in death or extinction the qi turns turbid and the spirit slack. The character clauses attached to the 死絕 branch moralize and are refused.",
+        "chinese": "夫建祿者，主人肌厚氣實，體格不清，一生安逸足財利，生旺自然；死絕則氣濁神慢，孳孳為生，吝嗇猥鄙。",
+        "engine_rendering": "As for the established lu: it makes the native thick of flesh and solid in qi, of a bodily structure that is not clear, easy all his life and sufficient in wealth and profit — this is so of itself when it is in birth and flourishing. In death and extinction the qi is turbid and the spirit slack, [refused clauses follow].",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused",
+        "engine_missing_facts": [
+          "the engine computes day_master_seasonal_state but not the seasonal state of the lu branch itself",
+          "no 建祿格 recognition"
+        ]
+      },
+      "priority": 15,
+      "exceptions": [
+        "The 死絕 branch continues with a long list of 併 (co-occurrence with 元辰, 官符, 劫煞, 天中, 祿鬼, 倒食) each with a socio-economic verdict; those verdicts are moralizing/status judgments and are refused wholesale."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF pages 12-13 (leaf 五 verso to leaf 六 recto), sanming_tonghui_juan03.pdf",
+          "verification": "Page images rendered at zoom 5.0 and read directly; sentence runs across the leaf turn."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; character and status clauses refused at fire time",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.yongshen.smt03a_wuxing_first_lu_and_yima_second",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "judgment_precedence",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "judgment_order": "five_agents_first_then_lu_and_yima",
+        "five_agents_requirement": "sheng|wang",
+        "lu_and_yima_hazard": "shuai|jue"
+      },
+      "conclusion": {
+        "judgment": "Order of judgment is fixed: assess the five agents first, only then look at lu and yima. The five agents must be in birth or flourishing; lu and yima fear decline and extinction. Corollary in the same passage: a chart carrying lu may turn out auspicious or inauspicious, noble or base — the presence of lu alone may not be relied on as a verdict of good.",
+        "chinese": "先論五行，後看祿馬。五行要生旺，祿馬怕衰絕。……凡人命帶祿，或吉或凶，或貴或賤，未可全靠便為吉論。",
+        "engine_rendering": "First judge the five agents, afterwards look at lu and the post-horse. The five agents must be in birth and flourishing; lu and post-horse fear decline and extinction. … In general, when a person's destiny carries lu, it may be auspicious or inauspicious, noble or base; one may not rely on it wholesale and simply call it auspicious.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "the engine has no shensha layer at all, so it cannot express the ordering; but the ordering is exactly the guard the engine needs before it ever adds one"
+        ]
+      },
+      "priority": 5,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF pages 14-15 (leaf 六 verso to leaf 七 recto), sanming_tonghui_juan03.pdf",
+          "verification": "Page images rendered at zoom 5.0 and read directly. The 未可全靠 sentence is on PDF p.14; 先論五行後看祿馬 is on PDF p.15."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.shensha.smt03a_lu_wants_simple_not_crowded",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "shensha_lu_quality",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "lu_occurrences": "one (simple) is wanted; many (crowded) is not",
+        "lu_stem_must_not_injure_day_master": true,
+        "pian_yin_present": false
+      },
+      "conclusion": {
+        "judgment": "Seeing lu, one wants it simple and not crowded; the stem sitting on the lu must not turn back and injure the self (the day master); and the chart is best when it does not offend the xiaoshen (梟神, the devouring seal / pian yin).",
+        "chinese": "可見命之見祿，要簡不要繁，要祿干不返傷本主，不犯梟神為佳。",
+        "engine_rendering": "One may see that where a destiny sees lu, one wants it simple and not crowded; one wants the lu's stem not to turn back and injure the root-master; and it is best when it does not offend the owl-spirit.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "no lu position; no count of lu occurrences",
+          "the engine does compute pian_yin as a ten god (梟神 = 偏印), so the third clause is partly decidable once lu exists"
+        ]
+      },
+      "priority": 20,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF page 17 (leaf 八 recto), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "ten_god_on_lu_branch",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "lutou_cai_祿頭財": "a pillar whose branch is the day/year stem's lu branch and whose stem is that stem's wealth (財)",
+        "lutou_gui_祿頭鬼": "a pillar whose branch is the stem's lu branch and whose stem is the seven-killing/officer that controls it (鬼)",
+        "examples_cai": "jia sees wu-yin; yi sees ji-mao",
+        "examples_gui": "jia sees geng-yin; yi sees xin-mao"
+      },
+      "conclusion": {
+        "judgment": "When the stem standing on one's own lu branch is one's wealth, the configuration is named the binding-spirit (綑縛煞) and the native has wealth and repute. When the stem standing on one's own lu branch is one's controlling ghost, it is named the red-mouth spirit (赤口煞) and rules quarrels and punitive reprimand.",
+        "chinese": "有祿頭財為綑縛煞，甲人見戊寅，乙人見己卯之類，主人富有聲望。有祿頭鬼為赤口煞，甲人見庚寅，乙人見辛卯之類，主口舌刑責。",
+        "engine_rendering": "There is 'wealth at the head of lu', which is the binding spirit: a jia person seeing wu-yin, a yi person seeing ji-mao and the like — it rules a person wealthy and of reputation. There is 'ghost at the head of lu', which is the red-mouth spirit: a jia person seeing geng-yin, a yi person seeing xin-mao and the like — it rules disputes of the tongue and punitive reprimand.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "no lu position, so the engine cannot detect a pillar whose branch is the lu of the day master",
+          "the engine does compute visible_stem_ten_gods per pillar, so the ten-god half of both predicates is already decidable"
+        ]
+      },
+      "priority": 20,
+      "exceptions": [
+        "In the examples geng is jia's seven killings and xin is yi's seven killings; 鬼 here means the controlling officer of the same polarity."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF pages 9-10 (leaf 四 recto and verso), sanming_tonghui_juan03.pdf",
+          "verification": "Page images rendered at zoom 5.0 and read directly; the two clauses face each other across the leaf turn."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.tengod.smt03a_shishen_dai_lu_and_shishen_he_lu",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "shishen_seated_on_its_own_lu",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "shishen_dai_lu_食神帶祿": "the day master's eating-god stem appears sitting on that eating-god's own lu branch",
+        "enumerated_pillars_dai_lu": ["jia-yin (for a ren day master)", "yi-mao (for a gui day master)", "geng-shen (for a wu day master)", "xin-you (for a ji day master)"],
+        "shishen_he_lu_食神合祿": "enumerated eight pillars",
+        "enumerated_pillars_he_lu": ["bing-shen and bing-yin (for a jia day master)", "ding-wei and ding-mao (for a yi day master)", "ren-chen and ren-zi (for a geng day master)", "gui-si and gui-chou (for a xin day master)"]
+      },
+      "conclusion": {
+        "judgment": "Two named good configurations of the eating god relative to lu. In 食神帶祿 the eating god sits on its own lu branch; four pillars are enumerated and all rule auspiciousness. In 食神合祿 eight pillars are enumerated and all rule auspiciousness.",
+        "chinese": "有食神帶祿，壬食甲而得甲寅，癸食乙而得乙卯，戊食庚而得庚申，己食辛而得辛酉，主吉。有食神合祿，甲食丙得丙申丙寅，乙食丁得丁未丁卯，庚食壬得壬辰壬子，辛食癸得癸巳癸丑，八位俱主吉。",
+        "engine_rendering": "There is 'the eating god carrying lu': ren eats jia and obtains jia-yin; gui eats yi and obtains yi-mao; wu eats geng and obtains geng-shen; ji eats xin and obtains xin-you — these rule auspiciousness. There is 'the eating god combining with lu': jia eats bing and obtains bing-shen or bing-yin; yi eats ding and obtains ding-wei or ding-mao; geng eats ren and obtains ren-chen or ren-zi; xin eats gui and obtains gui-si or gui-chou — all eight positions rule auspiciousness.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "the engine computes shi_shen as a ten god per pillar but not whether that stem sits on its own lu branch",
+          "the 食神合祿 list is enumerated, not derived; the underlying rule is not stated on the page"
+        ]
+      },
+      "priority": 20,
+      "exceptions": [
+        "The 食神帶祿 list is exactly 'yang eats yang / yin eats yin, seated on the eater's lu'. The 食神合祿 list is not reducible to a single stated principle on the page; the second member of each pair (bing-yin, ding-mao, ren-zi, gui-chou) is the eating god sitting on the DAY MASTER's lu, while the first (bing-shen, ding-wei, ren-chen, gui-si) is not obviously derivable. Recorded as enumerated."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿",
+          "location": "PDF page 9 (leaf 四 recto), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.shensha.smt03a_yima_shengwang_versus_sijue",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "shensha_yima",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "yima_state": "sheng|wang versus si|jue",
+        "yima_with_lu_same_region": "祿同鄉 — lu and yima fall in the same branch",
+        "yima_clashed_by_sha": "與煞相衝併",
+        "yima_with_daoshi_or_lugui": "帶倒食祿鬼"
+      },
+      "conclusion": {
+        "judgment": "Cited from the Zhushen jing. When the post-horse is in birth or flourishing the native's qi and bearing are concentrated and lofty, adaptable and timely, with much repute through life. In death or extinction it makes a nature with a head but no tail, drifting and unsettled. When lu and the post-horse fall in the same region the power of fortune is at ease. When the post-horse is clashed by killings, or joined with the solitary spirit, the mourning-guest or the mourning-gate, it makes one who leaves his native place. The status and character verdicts on the unfavourable branch are refused.",
+        "chinese": "燭神經云：驛馬生旺，主人氣韻凝峻，通變趨時，平生多聲望；死絕則為性有頭無尾，或是或非，一生少成，漂泊不定。與祿同鄉，則福力優游；與煞相衝併，或孤神弔客喪門併者，離鄉背井之人。",
+        "engine_rendering": "The Zhushen jing says: when the post-horse is in birth and flourishing, it makes the native's qi and rhythm concentrated and lofty, penetrating change and moving with the times, with much repute through life. In death and extinction it makes a nature with a head and no tail, now this and now that, achieving little in a lifetime, drifting and unsettled. Where it shares a region with lu, the power of fortune is unhurried. Where it is clashed or joined by killings, or joined with the solitary spirit, the mourning guest or the mourning gate, it makes one who leaves his home village and turns his back on his own well.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused",
+        "engine_missing_facts": [
+          "no 驛馬 derivation computed",
+          "no 孤神 / 弔客 / 喪門 derivation computed",
+          "the engine has no per-shensha 生旺死絕 state"
+        ]
+      },
+      "priority": 25,
+      "exceptions": [
+        "The passage continues with further 併 verdicts (倒食祿鬼 → miserly; 食神衝併 → reputed) that moralize about wealth and class; refused."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿 (驛馬 subsection)",
+          "location": "PDF page 17 (leaf 八 recto), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; character and status clauses refused at fire time",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.shensha.smt03a_xu_ziping_takes_wealth_as_the_horse",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, compiled 1578), transmitted in the Qing-court Siku Quanshu recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "yima_reinterpreted_as_wealth",
+        "chapter": "論十干祿",
+        "juan": 3
+      },
+      "conditions": {
+        "school": "xu_ziping",
+        "yima_substitute": "cai (財 — the element the day master controls)",
+        "stated_ground": "the ancients named it from the place of control (剋處)"
+      },
+      "conclusion": {
+        "judgment": "Wan Minying reports that Xu Ziping takes wealth (財) as the 'horse', and states that this too follows the ancients' sense, because they named the horse from the place of controlling. This is the passage that licenses replacing the branch-derived post-horse with a ten-god predicate the engine already computes.",
+        "chinese": "徐子平以財為馬，亦是因古人之義，取剋處而名之耳。",
+        "engine_rendering": "Xu Ziping takes wealth as the horse; this too follows the ancients' sense, taking the place of control and naming it thus, that is all.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "none for this rule: zheng_cai and pian_cai are already computed per pillar, so the Ziping substitution is directly implementable where the branch-derived 驛馬 is not"
+        ]
+      },
+      "priority": 5,
+      "exceptions": [
+        "The surrounding argument (PDF p.16) also relaxes the branch derivation itself: 苟以三隅反，則理歸一揆，不必執寅午戌、申子辰寅 — one need not cling to the fixed sanhe-derived table."
+      ],
+      "conflicts_with": [
+        "bazi.ziping.shensha.smt03a_yima_shengwang_versus_sijue"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan03_pdf",
+          "work": "三命通會, 卷三, 論十干祿",
+          "section": "論十干祿 (驛馬 subsection)",
+          "location": "PDF page 16 (leaf 七 verso), sanming_tonghui_juan03.pdf",
+          "verification": "Page image rendered at zoom 5.0 and read directly."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    }
+  ],
+  "fragment_vectors": [
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_shigan_lu_derivation_table.v1",
+      "rule_ids": ["bazi.ziping.shensha.smt03a_shigan_lu_derivation_table"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "derivation_query": "lu_branch_of_day_master"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The lu branch of a jia day master is yin_branch.",
+        "source_verdict_chinese": "所以甲祿寅"
+      },
+      "provenance": "Constructed from the rule's own stated table (三命通會 卷三 論十干祿, PDF p.3)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_shigan_lu_derivation_table.v2",
+      "rule_ids": ["bazi.ziping.shensha.smt03a_shigan_lu_derivation_table"],
+      "inputs": {
+        "day_master": {"stem": "wu_stem", "element": "earth", "polarity": "yang"},
+        "derivation_query": "lu_branch_of_day_master"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "A wu day master has no proper lu branch; it is lodged (寄) in si, the branch of flourishing fire, by the principle of the child following the mother.",
+        "source_verdict_chinese": "戊寄巳……謂巳午乃火旺之鄉，子隨母得祿之義"
+      },
+      "provenance": "Constructed from the rule's own stated table (三命通會 卷三 論十干祿, PDF pp.3-4)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_no_lu_in_four_earth_branches.v1",
+      "rule_ids": ["bazi.ziping.shensha.smt03a_no_lu_in_four_earth_branches"],
+      "inputs": {
+        "candidate_lu_branch": "chen",
+        "derivation_query": "is_any_stem_lu_here"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "No stem takes chen as its lu; chen is kuigang ground, and as one of the four seasonal branches it holds mixed qi.",
+        "source_verdict_chinese": "所以四宮無祿。又曰四季有雜氣，為祿不專，故不取。"
+      },
+      "provenance": "Constructed from the rule's own stated conditions (PDF p.4)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_jinyu_two_branches_after_lu.v1",
+      "rule_ids": ["bazi.ziping.shensha.smt03a_jinyu_two_branches_after_lu"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "pillars": {"day": {"stem": "jia", "branch": "zi"}},
+        "derivation_query": "jinyu_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "jia's lu is yin_branch; two branches forward is chen; therefore chen is the jinyu.",
+        "source_verdict_chinese": "如甲子人祿在寅，辰為金輿是也"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論金輿, PDF p.19."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words.v1",
+      "rule_ids": ["bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "branches_present": ["chou", "hai"],
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "chou is xiang and hai is he; two of the four words are obtained, therefore noble. Note that the two obtained are the higher-ranked members of each pair (建不如向, 近不如合).",
+        "source_verdict_chinese": "四字中得兩字者貴"
+      },
+      "provenance": "Constructed from the rule's own worked example and threshold (PDF p.12)."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words.v2",
+      "rule_ids": ["bazi.ziping.geju.smt03a_jian_xiang_jin_he_four_words"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "branches_present": ["yin_branch"],
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "Only jian is obtained. One of the four words is not two, so the nobility threshold is not met; and jian is expressly the weakest of the pair it belongs to.",
+        "source_verdict_chinese": "建不如向……四字中得兩字者貴"
+      },
+      "provenance": "Negative vector constructed from the rule's own threshold (PDF p.12)."
+    },
+    {
+      "vector_id": "bazi.ziping.rootedness.smt03a_ku_is_the_gathering_of_lu.v1",
+      "rule_ids": ["bazi.ziping.rootedness.smt03a_ku_is_the_gathering_of_lu"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "branches_present": ["hai", "hai", "wei"],
+        "hidden_stems": {"wei": [{"stem": "ji", "element": "earth", "qi": "main"}, {"stem": "ding", "element": "fire", "qi": "middle"}, {"stem": "yi", "element": "wood", "qi": "residual"}]}
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Many hai plus wei: the storehouse of jia/yi is wei, so the lu is gathered and thick; the native is amply provided.",
+        "source_verdict_chinese": "如甲乙亥多而得未，乃祿厚豐足之人"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.13."
+    },
+    {
+      "vector_id": "bazi.ziping.rootedness.smt03a_he_is_the_crosswise_of_lu.v1",
+      "rule_ids": ["bazi.ziping.rootedness.smt03a_he_is_the_crosswise_of_lu"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "branches_present": ["hai"],
+        "lu_branch_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Hidden combination (暗合): the lu branch yin is absent but its six-harmony partner hai is present. This still counts as seeing the lu, and rules windfall fortune.",
+        "source_verdict_chinese": "無寅得亥謂之暗合。雖非見祿亦曰見祿，多主儻來之福。"
+      },
+      "provenance": "The source's own worked example, PDF pp.13-14."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong.v1",
+      "rule_ids": ["bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "branches_present": ["chou", "mao"],
+        "lu_branch_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Empty flanking (虛拱): chou and mao flank the absent lu branch yin. This ranks above solid flanking and rules great wealth and nobility.",
+        "source_verdict_chinese": "不見寅而見丑卯在兩傍拱之，謂之虛拱……然拱實不若拱虛，主大富貴"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.14."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong.v2",
+      "rule_ids": ["bazi.ziping.geju.smt03a_gonglu_xugong_beats_shigong"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "branches_present": ["chou", "yin_branch", "mao"],
+        "lu_branch_present": true
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "This is solid flanking (實拱), not empty flanking; the source expressly ranks it below, so the 大富貴 verdict of the empty-flanking rule must not fire.",
+        "source_verdict_chinese": "然拱實不若拱虛"
+      },
+      "provenance": "Negative vector built from the source's own contrast (PDF p.14)."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.smt03a_jianlu_shengwang_vs_sijue.v1",
+      "rule_ids": ["bazi.ziping.geju.smt03a_jianlu_shengwang_vs_sijue"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "month_branch": "yin_branch",
+        "day_master_seasonal_state": "wang",
+        "lu_branch_present": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Established lu in a flourishing state: the favourable branch of the rule applies (ease through life, sufficiency of wealth). The 死絕 clauses do not apply.",
+        "source_verdict_chinese": "夫建祿者，主人肌厚氣實，體格不清，一生安逸足財利，生旺自然"
+      },
+      "provenance": "Constructed from the rule's own stated split (PDF pp.12-13)."
+    },
+    {
+      "vector_id": "bazi.ziping.yongshen.smt03a_wuxing_first_lu_and_yima_second.v1",
+      "rule_ids": ["bazi.ziping.yongshen.smt03a_wuxing_first_lu_and_yima_second"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "day_master_seasonal_state": "si",
+        "lu_branch_present": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The five agents are judged first and the day master is in death; the presence of lu may not by itself be reported as auspicious.",
+        "source_verdict_chinese": "先論五行，後看祿馬……凡人命帶祿，或吉或凶，或貴或賤，未可全靠便為吉論"
+      },
+      "provenance": "Constructed from the rule's own stated conditions (PDF pp.14-15)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_lu_wants_simple_not_crowded.v1",
+      "rule_ids": ["bazi.ziping.shensha.smt03a_lu_wants_simple_not_crowded"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "lu_occurrence_count": 3,
+        "pian_yin_present": true
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "Lu is crowded (three occurrences) and the xiaoshen/pian yin is present; the configuration fails both stated requirements, so the favourable reading is withheld.",
+        "source_verdict_chinese": "要簡不要繁……不犯梟神為佳"
+      },
+      "provenance": "Negative vector built from the rule's own two requirements (PDF p.17)."
+    },
+    {
+      "vector_id": "bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui.v1",
+      "rule_ids": ["bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "pillars": {"year": {"stem": "geng", "branch": "yin_branch"}},
+        "visible_stem_ten_gods": {"year": "qi_sha"},
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "geng-yin for a jia day master is 'ghost at the head of lu', the red-mouth spirit; it rules disputes and punitive reprimand.",
+        "source_verdict_chinese": "有祿頭鬼為赤口煞，甲人見庚寅……主口舌刑責"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.10."
+    },
+    {
+      "vector_id": "bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui.v2",
+      "rule_ids": ["bazi.ziping.tengod.smt03a_lutou_cai_and_lutou_gui"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "pillars": {"year": {"stem": "wu_stem", "branch": "yin_branch"}},
+        "visible_stem_ten_gods": {"year": "pian_cai"},
+        "lu_branch": "yin_branch"
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "wu-yin for a jia day master is 'wealth at the head of lu', the binding spirit; the native has wealth and repute.",
+        "source_verdict_chinese": "有祿頭財為綑縛煞，甲人見戊寅……主人富有聲望"
+      },
+      "provenance": "The source's own worked example, 三命通會 卷三 論十干祿, PDF p.9."
+    },
+    {
+      "vector_id": "bazi.ziping.tengod.smt03a_shishen_dai_lu_and_shishen_he_lu.v1",
+      "rule_ids": ["bazi.ziping.tengod.smt03a_shishen_dai_lu_and_shishen_he_lu"],
+      "inputs": {
+        "day_master": {"stem": "ren", "element": "water", "polarity": "yang"},
+        "pillars": {"hour": {"stem": "jia", "branch": "yin_branch"}},
+        "visible_stem_ten_gods": {"hour": "shi_shen"}
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "jia is ren's eating god and yin is jia's own lu; this is 食神帶祿 and rules auspiciousness.",
+        "source_verdict_chinese": "有食神帶祿，壬食甲而得甲寅……主吉"
+      },
+      "provenance": "The source's own enumerated example, 三命通會 卷三 論十干祿, PDF p.9."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_xu_ziping_takes_wealth_as_the_horse.v1",
+      "rule_ids": ["bazi.ziping.shensha.smt03a_xu_ziping_takes_wealth_as_the_horse"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "school": "xu_ziping",
+        "visible_stem_ten_gods": {"month": "pian_cai"}
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Under the Ziping reading, the wealth star itself is the 'horse'; the branch-derived post-horse table need not be consulted.",
+        "source_verdict_chinese": "徐子平以財為馬，亦是因古人之義，取剋處而名之耳"
+      },
+      "provenance": "Constructed from the rule's own statement (PDF p.16)."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.smt03a_yima_shengwang_versus_sijue.v1",
+      "rule_ids": ["bazi.ziping.shensha.smt03a_yima_shengwang_versus_sijue"],
+      "inputs": {
+        "day_master": {"stem": "jia", "element": "wood", "polarity": "yang"},
+        "yima_branch_present": true,
+        "yima_state": "wang",
+        "lu_and_yima_same_branch": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Post-horse in flourishing and sharing a region with lu: the favourable branch applies (concentrated bearing, adaptable, much repute, fortune at ease).",
+        "source_verdict_chinese": "驛馬生旺，主人氣韻凝峻，通變趨時，平生多聲望……與祿同鄉，則福力優游"
+      },
+      "provenance": "Constructed from the rule's own stated conditions (PDF p.17)."
+    }
+  ],
+  "collation_notes": [
+    "Juan 3 of this Siku Quanshu (Zhejiang) recension does NOT open with 論人元司事 / 論月令 / 論日主. It opens with 論十干祿 (PDF p.3) and continues into 論金輿 (PDF p.19). The Ziping judgment apparatus proper is not yet in evidence at PDF p.19; this juan is, so far, a shensha juan organised around 祿 and its satellites.",
+    "The 祿 chapter is, structurally, the closest thing in these leaves to a rootedness doctrine: it names 庫 (storehouse) as 祿之聚, 合 (six-harmony) as 祿之橫, and 拱 (flanking) as 祿之尊. That is a three-way graded taxonomy of how a stem may 'have' its own branch without the branch being literally present — and it is exactly the shape the engine's 通根 gap needs.",
+    "The 庫 table in this recension reads 甲乙在未、丙丁在戌、戊己壬癸在辰、庚辛在丑, placing 戊己 in chen with 壬癸 rather than in xu with 丙丁. Flagged for collation against other recensions.",
+    "The 建/向/近/合 passage is internally inconsistent: it opens 祿前二辰為背祿、後二辰為向, then the worked example makes 向 = chou, one branch behind yin, not two. 論金輿 independently confirms 前 counts forward (甲祿寅, 前二辰 = 辰 = 金輿).",
+    "PDF p.16 contains an explicit relativising of the whole shensha layer: 苟以三隅反，則理歸一揆，不必執寅午戌、申子辰寅 — and then attributes to 徐子平 the substitution of 財 for 馬. Wan Minying is on record here treating the Ziping ten-god reading as the rationalised successor to the branch tables.",
+    "The 祿 typology on PDF pp.4-11 is a long enumerated table keyed on the exact stem-branch pillar (福星祿, 伏馬祿, 破祿, 正祿帶截路空亡, 長生祿, 喜神旺祿, 截路空亡祿, 進神祿, 交神祿, 天庫祿, 旺馬祿, 庫祿, 德合祿, 交羊刃祿, 伏羊刃祿, 大敗祿, 死鬼祿, 生成祿, 名位祿, 真祿, 進退真祿, 祿值會合, 食神帶祿, 食神合祿, 祿頭財, 祿頭鬼, 旬中祿, 天祿貴神, 干支合祿, 互換貴祿, 朝元祿, 朝元夾合, 祿入祿堂). Only the members carrying a stated derivation principle rather than a bare pillar list have been encoded; the bare-enumeration members are flagged here rather than expanded into dozens of low-value rules.",
+    "PDF pages 1-2 are Siku Quanshu front matter, not text."
+  ],
+  "juan_not_covered": "PDF pages 20-115 of the assigned range not yet reached at this checkpoint."
+}

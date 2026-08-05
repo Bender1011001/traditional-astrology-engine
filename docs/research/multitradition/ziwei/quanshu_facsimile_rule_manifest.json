@@ -1,0 +1,509 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-05",
+  "tradition_id": "ziwei_doushu",
+  "source_pack_id": "ziwei_quanshu_facsimile_v1",
+  "implementation_status": "research_verified",
+  "publication_status": "research_only",
+  "source_registry_ids": [
+    "ziwei_daozang_ctcw_juan2_access_failure",
+    "ziwei_doushu_quanshu_wikisource"
+  ],
+  "school_id": "ziwei_quanshu_nanyangtang",
+  "source_edition_id": "ziwei_doushu_quanshu_nanyangtang_ming_1600",
+  "evidence_note": "Kalyanavarma's Saravali, read directly from the Sanskrit of the Nirnaya Sagara Press 1907 Devanagari printing (public domain). Every conclusion cell carries the Sanskrit it renders, an engine_rendering graded 'engine_translation_unreviewed', the adhyaya and sloka number, and a line range into the OCR text so a specialist can go straight to the passage. No modern copyrighted translation was consulted or paraphrased; where the rendering is wrong it is wrong in a way that is checkable against the quoted original, which is the point. This is a SECOND Parasari-descended witness alongside the Phaladipika pack at delineation_rule_manifest.json and the BPHS work owned by another agent; the three are deliberately not merged. Saravali's own Adhyaya 30 graha-in-bhava table is an independent witness to Phaladipika Adhyaya VIII and must be rendered as its own voice. Kalyanavarma twice attributes his aspect-result and Moon-dasha tables to 'the elder Yavanas' (Adhyaya 24.24, 40.10); that self-attested Greek-derived layer is recorded rather than smoothed away. Socially harsh cells (caste, gender, disability, impotence, servitude, death of a parent or spouse) are encoded verbatim so the corpus is not silently bowdlerised, and carry output_policy 'refused' plus a publication_limit stating they are never rendered as a claim about a living person.",
+  "rules": [
+    {
+      "rule_id": "ziwei.facsimile.j6.mingtu.geng_yan",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_nanyangtang_ming_facsimile",
+      "period": "ming_nanyangtang_printing_of_ziwei_doushu_quanshu_seven_juan",
+      "domain": "natal",
+      "scope": {
+        "work": "新鏟希夷陳先生紫微斗數全書",
+        "juan": 6,
+        "chapter": "古今富貴貧賤嬭壽命圖",
+        "technique": "worked_nativity",
+        "technique_class": "worked_example",
+        "subject_heading_chinese": "耿弇之命",
+        "engine_facts_consumed": [
+          "lunar month",
+          "lunar day",
+          "hour branch",
+          "year stem",
+          "year branch"
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_identity",
+            "operator": "equals",
+            "value": "geng_yan"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "worked_nativity_chart",
+        "unit": "one_printed_nativity_with_the_compilers_own_construction_and_verdict",
+        "customer_prediction": false,
+        "subject": {
+          "heading_chinese": "耿弇之命",
+          "engine_rendering": "The nativity of Geng Yan.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "identification_note": "耿弇 (Geng Yan, 3-58 CE) was one of the Eastern Han founding generals of the Yuntai twenty-eight. The identification is the encoder's, from the printed name alone; the block gives no dynasty or office."
+        },
+        "birth_record": {
+          "chinese": "癸丑年三月初四辰時生",
+          "engine_rendering": "Born in the guichou year, third month, fourth day, chen double-hour.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "year_sexagenary": "癸丑",
+          "year_stem": "癸",
+          "year_branch": "丑",
+          "lunar_month": 3,
+          "lunar_day": 4,
+          "hour_branch": "辰",
+          "is_leap_month": false,
+          "sex_and_polarity_as_printed": "陰男",
+          "bureau_as_printed": "金四局",
+          "customer_prediction": false
+        },
+        "death_or_outcome_record": {
+          "chinese": "戊午年六十六歲五月初五故",
+          "engine_rendering": "Died in the wuwu year, aged sixty-six, on the fifth day of the fifth month.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "customer_prediction": false,
+          "output_policy": "refused",
+          "output_policy_reason": "death-timing record; retained as a historical worked-example datum for engine validation, never rendered as a claim about any living person"
+        },
+        "palace_axis": {
+          "life_palace_branch": "子",
+          "life_palace_label_chinese": "命垣",
+          "body_palace_branch": "申",
+          "body_palace_label_chinese": "身 (marked inside the 才帛 palace)",
+          "twelve_palaces_run": "reverse branch order from the life palace, as the work's own 安十二宮例 prescribes"
+        },
+        "palaces": {
+          "子": {
+            "palace_label_chinese": "命垣",
+            "stars": [
+              "破軍",
+              "祿存"
+            ],
+            "transformations": [
+              "祿 (circled, on 祿存)"
+            ],
+            "changsheng_stage": "衰",
+            "boshi_god": "博士",
+            "other_marks": [
+              "小限"
+            ]
+          },
+          "丑": {
+            "palace_label_chinese": "父母",
+            "stars": [
+              "天机",
+              "擎羊"
+            ],
+            "changsheng_stage": "旺",
+            "boshi_god": "官府",
+            "other_marks": []
+          },
+          "寅": {
+            "palace_label_chinese": "福德",
+            "stars": [
+              "紫微",
+              "天府"
+            ],
+            "changsheng_stage": "臨",
+            "boshi_god": "伏兵",
+            "other_marks": [
+              "流羊"
+            ],
+            "reading_note": "the 紫微/天府 pair sits at the foot of the bottom-row cell adjoining 田宅; the encoder assigns them to 寅 because the printed bureau 金四局 with lunar day 4 requires 紫微 at 寅 and the mirror rule then requires 天府 at 寅. Flagged as a reading, not a certainty."
+          },
+          "卯": {
+            "palace_label_chinese": "田宅 (printed 田地)",
+            "stars": [],
+            "changsheng_stage": "冠",
+            "boshi_god": "大耗",
+            "other_marks": []
+          },
+          "辰": {
+            "palace_label_chinese": "官祿",
+            "stars": [
+              "太陰"
+            ],
+            "changsheng_stage": "沐",
+            "boshi_god": "病符",
+            "other_marks": [
+              "天姚",
+              "火星",
+              "流陀"
+            ]
+          },
+          "巳": {
+            "palace_label_chinese": "奴僕",
+            "stars": [
+              "貪狼"
+            ],
+            "changsheng_stage": "長生",
+            "boshi_god": "喜神",
+            "other_marks": [
+              "龍池",
+              "八座",
+              "大限"
+            ]
+          },
+          "午": {
+            "palace_label_chinese": "遷移",
+            "stars": [
+              "廉貞",
+              "天相",
+              "左輔"
+            ],
+            "changsheng_stage": "養",
+            "boshi_god": "飛廉",
+            "other_marks": [
+              "文昌",
+              "太歲"
+            ]
+          },
+          "未": {
+            "palace_label_chinese": "疾厄",
+            "stars": [
+              "天梁"
+            ],
+            "changsheng_stage": "胎",
+            "boshi_god": "奏書",
+            "other_marks": [
+              "天虛",
+              "天空",
+              "天使"
+            ]
+          },
+          "申": {
+            "palace_label_chinese": "才帛",
+            "stars": [
+              "七殺",
+              "右弼",
+              "文曲"
+            ],
+            "changsheng_stage": "絕",
+            "boshi_god": "將軍",
+            "other_marks": [
+              "斗君",
+              "三台",
+              "鳳閣",
+              "身"
+            ]
+          },
+          "酉": {
+            "palace_label_chinese": "子女",
+            "stars": [
+              "天同"
+            ],
+            "changsheng_stage": "墓",
+            "boshi_god": "小耗",
+            "other_marks": [
+              "鈴星"
+            ]
+          },
+          "戌": {
+            "palace_label_chinese": "妻妾",
+            "stars": [
+              "武曲"
+            ],
+            "changsheng_stage": "死",
+            "boshi_god": "青龍",
+            "other_marks": [
+              "天刑"
+            ]
+          },
+          "亥": {
+            "palace_label_chinese": "兄弟",
+            "stars": [
+              "太陽"
+            ],
+            "changsheng_stage": "病",
+            "boshi_god": "力士",
+            "other_marks": [
+              "陀羅",
+              "天馬"
+            ]
+          }
+        },
+        "palace_grid_confidence": "the twelve palace labels, the twelve-stage marks and the 博士十二神 are read with confidence; individual star-to-cell assignments in the upper half of each cell are read at 300ppi from a woodblock and a few are inferred from the cell boundary rather than seen isolated - each such case is noted in the cell",
+        "judgment_text": {
+          "chinese": "破軍若在子午，官資清顯，至三公；又兼左右、昌曲加會，文武雙全富貴之命。大限到于天傷，有嫌巨門太歲，到午謂之沉馬，流羊當頭，小限冲太歲凶，故死。",
+          "engine_rendering": "If Pojun stands at Zi or Wu, the office is pure and eminent, reaching the Three Dukes; and with Zuofu and Youbi joined, and Wenchang and Wenqu meeting it, civil and martial are both complete - a nativity of wealth and rank. When the decade limit came to Tianshang, with the disliked Jumen and the year-lord, and it reached Wu, which is called the sunken horse, the flowing Qingyang stood over the head and the small limit clashed with the year-lord: inauspicious, and therefore he died.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "customer_prediction": false,
+          "output_policy": "refused",
+          "output_policy_reason": "death-timing clause and a rank verdict on a person; retained verbatim as historical text and as the compiler's own stated judgment for validation, never rendered as a claim about any living person"
+        },
+        "engine_recomputation_check": {
+          "performed_by": "encoder, from the printed birth record alone, without reference to the printed answers",
+          "life_palace": "month 3 counted from 寅 gives the month palace 辰; 辰 taken as the Zi hour and counted back to the 辰 hour gives 子 - matches the printed 命垣",
+          "body_palace": "the same count taken forward gives 申 - matches the printed 身 mark inside 才帛",
+          "bureau": "year stem 癸 under the Five Tigers rule starts 寅 at 甲寅, so the 子 palace carries the stem-branch 甲子, whose nayin is 海中金 - metal - giving 金四局, which is exactly what the block prints",
+          "ziwei": "金四局 with lunar day 4 gives 紫微 at 寅, and the mirror rule then gives 天府 at 寅; 廉貞 at 紫微+4 = 午 and 天相 at 午 both match the printed 遷移 cell",
+          "lucun": "year stem 癸 gives 祿存 at 子 - matches the printed 命垣 cell",
+          "twelve_stage_direction": "金四局 sets 長生 at 巳; the printed stages run 巳長生 辰沐浴 卯冠帶 寅臨官 丑帝旺 子衰 亥病 戌死 酉墓 申絕 未胎 午養, i.e. REVERSE - which settles empirically that this witness runs the cycle backward for a 陰男",
+          "boshi_direction": "博士 at 祿存 (子) and the twelve gods run backward - 亥力士 戌青龍 酉小耗 申將軍 未奏書 午飛廉 巳喜神 辰病符 卯大耗 寅伏兵 丑官府 - matching every printed cell",
+          "verdict": "every construction step the encoder could recompute reproduces the block. This chart is a genuine end-to-end validation vector for the bureau, the life and body palaces, Zi Wei placement, Lu Cun, the twelve-stage cycle and the twelve gods."
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "The printed death record gives an age of sixty-six; the historical Geng Yan died in 58 CE at about fifty-six. The block's own figure is recorded as printed and is not reconciled with the historical record.",
+        "The subject identification is the encoder's, from a bare personal name; the block gives no dynasty, office or dates.",
+        "ASSEMBLY: Assembled from 1 fragment files written incrementally by parallel mining agents. The fragment protocol exists because two earlier runs lost entire transcribed books when agents died holding work in context; every fragment is preserved beside this manifest."
+      ],
+      "conflicts_with": [
+        "ziwei.quanshu.j2.place_changsheng_twelve_stages"
+      ],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_quanshu_nanyangtang_ming_seven_juan_facsimile",
+          "work": "新鏟希夷陳先生紫微斗數全書",
+          "section": "卷之六 古今富貴貧賤嬭壽命圖",
+          "location": "right half of scan leaf index 0200 (the whole page is one chart)",
+          "verification": "woodblock_page_image_read_directly_at_300ppi, whole page and two magnified crops; the scan's OCR layer is unusable for this vertical woodblock print"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; the birth record and the palace grid are retained as engine-validation data, the judgment paragraph and the death record are refused as output and may be shown only as historical text beside the Chinese they render",
+      "review_status": "engine_translation_unreviewed; Classical Chinese read directly from the Ming Nanyangtang woodblock page images, no independent specialist review yet"
+    },
+    {
+      "rule_id": "ziwei.facsimile.j6.mingtu.kuai_wentong",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_nanyangtang_ming_facsimile",
+      "period": "ming_nanyangtang_printing_of_ziwei_doushu_quanshu_seven_juan",
+      "domain": "natal",
+      "scope": {
+        "work": "新鏟希夷陳先生紫微斗數全書",
+        "juan": 6,
+        "chapter": "古今富貴貧賤嬭壽命圖",
+        "technique": "worked_nativity",
+        "technique_class": "worked_example",
+        "subject_heading_chinese": "蒯文通命",
+        "engine_facts_consumed": [
+          "lunar month",
+          "lunar day",
+          "hour branch",
+          "year stem",
+          "year branch"
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_identity",
+            "operator": "equals",
+            "value": "kuai_wentong"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "worked_nativity_chart",
+        "unit": "one_printed_nativity_with_the_compilers_own_construction_and_verdict",
+        "customer_prediction": false,
+        "subject": {
+          "heading_chinese": "蒯文通命",
+          "engine_rendering": "The nativity of Kuai Wentong.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "identification_note": "蒯通, styled 文通, the Han-era persuader of Han Xin. Identification is the encoder's, from the printed name alone."
+        },
+        "birth_record": {
+          "chinese": "辛巳年四月二十七寅時生",
+          "engine_rendering": "Born in the xinsi year, fourth month, twenty-seventh day, yin double-hour.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "year_sexagenary": "辛巳",
+          "year_stem": "辛",
+          "year_branch": "巳",
+          "lunar_month": 4,
+          "lunar_day": 27,
+          "hour_branch": "寅",
+          "is_leap_month": false,
+          "sex_and_polarity_as_printed": "陰男",
+          "bureau_as_printed": "木三局",
+          "customer_prediction": false
+        },
+        "death_or_outcome_record": {
+          "chinese": "衰 乙巳年二十五歲二月初五故",
+          "engine_rendering": "In decline; died in the yisi year, aged twenty-five, on the fifth day of the second month.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "customer_prediction": false,
+          "output_policy": "refused",
+          "output_policy_reason": "death-timing record; retained as a historical worked-example datum for engine validation, never rendered as a claim about any living person"
+        },
+        "palace_axis": {
+          "life_palace_branch": "卯",
+          "life_palace_label_chinese": "命垣",
+          "body_palace_branch": "未",
+          "twelve_palaces_run": "reverse branch order from the life palace"
+        },
+        "palaces_partial": {
+          "reading_note": "this chart was read from the whole-page image only; the individual palace cells were not magnified. The stars visible on the page are listed below without confident cell assignment, and the cell-by-cell grid is recorded as OUTSTANDING rather than guessed.",
+          "stars_visible_on_the_page": [
+            "文昌",
+            "太陰",
+            "太陽",
+            "陀羅",
+            "天傷",
+            "天魁",
+            "左輔",
+            "右弼",
+            "天府",
+            "貪狼",
+            "巨門",
+            "天机",
+            "祿存",
+            "天空",
+            "天使",
+            "擎羊",
+            "天梁",
+            "紫微",
+            "天相",
+            "三台",
+            "鳳閣",
+            "天同",
+            "八座",
+            "太歲",
+            "天鉱",
+            "破軍",
+            "火星"
+          ],
+          "transformations_visible": [
+            "忌 (circled, on 文昌)",
+            "權 (circled, on 巨門)"
+          ],
+          "palace_labels_visible": [
+            "命垣",
+            "兄弟",
+            "妻妾",
+            "子女",
+            "才帛",
+            "疾厄",
+            "遷移",
+            "官祿",
+            "福德",
+            "父母"
+          ],
+          "boshi_gods_visible": [
+            "博士",
+            "力士",
+            "喜神"
+          ]
+        },
+        "judgment_text": {
+          "chinese": "雙祿朝垣，又兼巨机對宮相會，最善談兵。日月左右來宮加會，命垣應貴。大乙巳年二十五歲，太歲埋蛇，乙年太陰星化忌，故主凶亡。",
+          "engine_rendering": "A double Lu facing the palace, and Jumen and Tianji in the opposite palace meeting it: best of all at discoursing on war. Sun and Moon with Zuofu and Youbi coming into the palace and joining, so the life palace ought to be noble. In the great yisi year, at twenty-five, the year-lord was the buried snake, and in a yi year the star Taiyin takes the Ji transformation - therefore an inauspicious death.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "customer_prediction": false,
+          "output_policy": "refused",
+          "output_policy_reason": "death-timing clause and a rank verdict on a person; retained verbatim as historical text and as the compiler's own stated judgment for validation, never rendered as a claim about any living person"
+        },
+        "engine_recomputation_check": {
+          "performed_by": "encoder, from the printed birth record alone",
+          "life_palace": "month 4 counted from 寅 gives the month palace 巳; 巳 taken as the Zi hour and counted back to the 寅 hour gives 卯",
+          "body_palace": "the same count taken forward gives 未",
+          "bureau": "year stem 辛 under the Five Tigers rule starts 寅 at 庚寅, so the 卯 palace carries 辛卯; 庚寅辛卯 nayin is 松柏木 - wood - giving 木三局, which is exactly what the block prints",
+          "ziwei": "木三局 with lunar day 27 gives 紫微 at 戌 and the mirror rule then gives 天府 at 午",
+          "verdict": "the printed bureau is reproduced exactly from the printed birth data. The cell-level grid was not magnified, so the star placements are not yet checked for this chart."
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "The cell-by-cell palace grid for this chart is NOT yet transcribed; only the page-level star inventory is recorded. Magnified reading of scan leaf 0200, left half, remains outstanding."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_quanshu_nanyangtang_ming_seven_juan_facsimile",
+          "work": "新鏟希夷陳先生紫微斗數全書",
+          "section": "卷之六 古今富貴貧賤嬭壽命圖",
+          "location": "left half of scan leaf index 0200 (the whole page is one chart)",
+          "verification": "woodblock_page_image_read_directly_at_300ppi, whole-page image only; the scan's OCR layer is unusable for this vertical woodblock print"
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; the birth record is retained as engine-validation data, the judgment paragraph and the death record are refused as output and may be shown only as historical text beside the Chinese they render",
+      "review_status": "engine_translation_unreviewed; Classical Chinese read directly from the Ming Nanyangtang woodblock page images, no independent specialist review yet"
+    },
+    {
+      "rule_id": "ziwei.facsimile.j6.mingtu.gallery_exists_and_its_form",
+      "tradition_id": "ziwei_doushu",
+      "school_id": "quanshu_nanyangtang_ming_facsimile",
+      "period": "ming_nanyangtang_printing_of_ziwei_doushu_quanshu_seven_juan",
+      "domain": "natal",
+      "scope": {
+        "work": "新鏟希夷陳先生紫微斗數全書",
+        "juan": 6,
+        "chapter": "古今富貴貧賤嬭壽命圖",
+        "technique": "worked_example_inventory",
+        "technique_class": "bibliographic"
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "edition",
+            "operator": "equals",
+            "value": "ming_nanyangtang_seven_juan"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "source_fact",
+        "unit": "the_existence_form_and_extent_of_the_worked_nativity_gallery",
+        "customer_prediction": false,
+        "cells": {
+          "chapter_title": {
+            "chinese": "古今富貴貧賤嬭壽命圖",
+            "engine_rendering": "Chart-diagrams of the wealthy, the noble, the poor, the mean, the short-lived and the long-lived, of past and present.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "customer_prediction": false,
+            "leaf": "listed as the whole content of 陸卷 in the printed 目錄 at scan leaf 0003, left half"
+          },
+          "extent": {
+            "chinese": "卷之六",
+            "engine_rendering": "Juan six of the seven-juan printing consists of this gallery and nothing else; the centre-fold montage places it at scan leaves 187 to 255, roughly sixty-nine leaf-spreads, with one full chart per half-page.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "customer_prediction": false
+          },
+          "per_chart_form": {
+            "chinese": "陰男 金四局 癸丑年三月初四辰時生",
+            "engine_rendering": "Each chart prints: a heading naming the subject; the polarity-and-sex label; the five-phase bureau; a sexagenary birth year with lunar month, lunar day and double-hour; a twelve-palace grid carrying the star placements, the twelve-stage cycle mark and the twelve-god mark for every palace, with the decade limit and small limit flagged; a death or outcome record; and a judgment paragraph running across the foot of the page.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "customer_prediction": false
+          },
+          "correction_of_the_prior_finding": {
+            "chinese": "—",
+            "engine_rendering": "The corpus's prior finding, taken from a three-juan Wikisource transcription, that this work prints no dated worked nativity is wrong for this witness. The transcription simply lacks juan six.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "customer_prediction": false
+          }
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        "The leaf-range figure 187-255 is derived from a centre-fold sampling montage at six-leaf intervals, not from leaf-by-leaf inspection; the true first and last leaf of the juan may differ by a few leaves."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "ziwei_quanshu_nanyangtang_ming_seven_juan_facsimile",
+          "work": "新鏟希夷陳先生紫微斗數全書",
+          "section": "目錄 and 卷之六",
+          "location": "printed table of contents at scan leaf index 0003, left half; gallery sampled at scan leaves 0192-0252",
+          "verification": "woodblock_page_image_read_directly_at_300ppi plus a centre-fold montage across leaves 24-264 at six-leaf intervals"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; a bibliographic statement about the edition, carrying no judgment about any person",
+      "review_status": "engine_translation_unreviewed; read directly from the Ming Nanyangtang woodblock page images, no independent specialist review yet"
+    }
+  ]
+}

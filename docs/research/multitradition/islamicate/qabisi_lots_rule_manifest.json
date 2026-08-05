@@ -1,0 +1,1990 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-05",
+ "tradition_id": "islamicate_persian",
+ "school_id": "al_qabisi_mudkhal_arabic",
+ "source_pack_id": "islamicate_al_qabisi_lots_v1",
+ "source_edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+ "source_registry_ids": [
+  "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+  "islamicate_wurzburg_al_qabisi_introduction_tei"
+ ],
+ "implementation_status": "not_implemented",
+ "publication_status": "research_only",
+ "evidence_note": "Complete enumeration of the lots of al-Qabisi's Chapter V (jumal al-sihaam), read directly from the Arabic of the Wurzburg TEI witness. The Islamicate defensibility spec recorded this chapter as '~50 lots' and the engine reported them as sourced-but-not-enumerated; the Arabic actually gives 81, and they are all here: 48 natal lots across the twelve houses, 7 further lots 'much used by the practitioners of the judgments of the stars', 4 kingship and world-year lots including the two greatest lots for the duration of a reign, and 23 commodity-price lots. Every lot carries its Arabic name, its from-point, its to-point, the point it is cast from, whether al-Qabisi says it reverses by night, and whether it needs a house cusp or the Midheaven - which this section cannot compute, so those 7 are NAMED AS OMITTED rather than approximated. Five lots are cast from something other than the Ascendant (Saturn, Jupiter, Mercury, the Sun, the Moon) and are flagged, because an implementation that assumes the Ascendant everywhere will silently misplace them. Four attributed forks are preserved rather than merged into 'al-Qabisi says': Hermes against Valens on the marriage lot, al-Andarzaghar's second slaves lot which he says is to be used ALONGSIDE rather than instead, al-Andarzaghar's dissent on the nocturnal reversal of the friends lot, and Hermes against unnamed ancients on the enemies lot. 38 lots carry output_policy 'refused' - death and killing, imprisonment, illness and disability, progeny count and sex, paternity doubt, war, mundane and dynastic prediction, and the whole commodity-price block, whose weakness al-Qabisi himself flags in his own closing sentence. They are encoded and refused rather than skipped, because a pack that drops them cannot honestly claim to have read the chapter.",
+ "rules": [
+  {
+   "rule_id": "islam.qabisi.ch5.lot_projection_method",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "how_a_lot_is_cast",
+    "chapter": "Chapter V, paragraphs 1-2 (TEI lines 2-8)",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lot_formula",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "an ecliptic degree",
+    "customer_prediction": false,
+    "arabic": "وإذا قلنا في بعض السهام خذ من موضع كذا إلى موضع كذا وألقه من الطالع أو من موضع آخر وهو أن تزيد على ما بين الموضعين درج الطالع أو الدرج التي في ذلك البرج الذي تلقي منه ثمّ تلقي ذلك من أوّل برج الطالع أو من أوّل البرج الذي يلقى منه",
+    "engine_rendering": "When we say of some lot: take from such a place to such a place and cast it from the Ascendant or from another place - that means, add to what lies between the two places the degrees of the Ascendant, or the degrees within that sign from which you cast; then cast that from the beginning of the sign of the Ascendant, or from the beginning of the sign from which the casting is made.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "formula": "lot = (to_point - from_point + projection_point) mod 360",
+    "worked_example": {
+     "lot": "sahm al-sa'ada (Fortune)",
+     "arabic": "مثال ذلك عمل سهم السعادة فإنّك تأخذ ما بين الشمس والقمر وتلقيه من الطالع",
+     "formula": "(Moon - Sun + Ascendant) mod 360",
+     "note": "al-Qabisi gives the Fortune formula in the diurnal direction as his illustration of the method and does not state the nocturnal reversal here; he states 'wa-bi'l-layl mukhalifan' (and by night the contrary) individually on each lot that reverses. Lots where he does NOT say it are encoded as not reversing, because he is explicit and consistent about which ones do."
+    },
+    "night_reversal_marker": "بالليل مخالفا - 'and by night the contrary', i.e. swap the from-point and the to-point",
+    "engine_note": "The existing islamicate.py cast_lot() already implements this projection. What it lacked was the enumeration; this manifest supplies it."
+   },
+   "priority": 0,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "paragraphs 1-2, TEI lines 2-8, printed pages 140-141",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_01",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_1",
+    "chapter": "Chapter V, TEI lines 9-16",
+    "house": 1,
+    "arabic_heading": "البيت الأوّل",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 1
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 7,
+    "lots": [
+     {
+      "arabic_name": "سهم السعادة",
+      "transliteration": "sahm al-sa'ada",
+      "english_name": "Lot of Fortune",
+      "from_point": "Sun",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "the reversal is not stated at this place; it is the universally attested diurnal/nocturnal lot and al-Qabisi treats it as such elsewhere. Flagged as an encoder inference."
+     },
+     {
+      "arabic_name": "سهم الحياة",
+      "transliteration": "sahm al-hayat",
+      "english_name": "Lot of Life",
+      "from_point": "Jupiter",
+      "to_point": "Saturn",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الهيلاج",
+      "transliteration": "sahm al-hilaj",
+      "english_name": "Lot of the Hyleg",
+      "from_point": "the degree of the conjunction or opposition preceding the birth",
+      "to_point": "the degree of the Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "no night reversal is stated"
+     },
+     {
+      "arabic_name": "سهم الغيب",
+      "transliteration": "sahm al-ghayb",
+      "english_name": "Lot of the Unseen (Spirit)",
+      "from_point": "Moon",
+      "to_point": "Sun",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الحبّ والألفة",
+      "transliteration": "sahm al-hubb wa-l-ulfa",
+      "english_name": "Lot of Love and Concord",
+      "from_point": "the Lot of Fortune",
+      "to_point": "the Lot of the Unseen",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الثبات والبقاء وعماد الطالع وبهاء المولود ونمائه",
+      "transliteration": "sahm al-thabat wa-l-baqa'",
+      "english_name": "Lot of stability and permanence, the pillar of the Ascendant, and the splendour and growth of the native",
+      "from_point": "the Lot of Fortune",
+      "to_point": "the Lot of the Unseen",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "al-Qabisi says this lot is 'like the Lot of Love and Concord' - same formula, distinct name and signification. Recorded as its own entry rather than merged."
+     },
+     {
+      "arabic_name": "سهم الشجاعة والجرأة",
+      "transliteration": "sahm al-shaja'a wa-l-jur'a",
+      "english_name": "Lot of Courage and Boldness",
+      "from_point": "Mars",
+      "to_point": "the degree of the Lot of Fortune",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     }
+    ],
+    "cusp_dependent_count": 0,
+    "refused_count": 0
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الأوّل (TEI lines 9-16), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_02",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_2",
+    "chapter": "Chapter V, TEI lines 17-20",
+    "house": 2,
+    "arabic_heading": "البيت الثاني",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 2
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 3,
+    "lots": [
+     {
+      "arabic_name": "سهم المال",
+      "transliteration": "sahm al-mal",
+      "english_name": "Lot of Wealth",
+      "from_point": "the lord of the house of wealth",
+      "to_point": "the degree and minute of the house of wealth",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": true,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "requires the 2nd house CUSP. This section computes whole-sign places, not cusps, so the lot is NAMED AS OMITTED and is not approximated."
+     },
+     {
+      "arabic_name": "سهم الفقر وقلّة الحيلة",
+      "transliteration": "sahm al-faqr wa-qillat al-hila",
+      "english_name": "Lot of Poverty and Helplessness",
+      "from_point": "the Lot of the Unseen",
+      "to_point": "the Lot of Fortune",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الفلح والنصر والظفر",
+      "transliteration": "sahm al-falah wa-l-nasr wa-l-zafar",
+      "english_name": "Lot of Success, Victory and Triumph",
+      "from_point": "the Lot of the Unseen",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     }
+    ],
+    "cusp_dependent_count": 1,
+    "refused_count": 0
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الثاني (TEI lines 17-20), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_03",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_3",
+    "chapter": "Chapter V, TEI lines 21-24",
+    "house": 3,
+    "arabic_heading": "البيت الثالث",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 3
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 2,
+    "lots": [
+     {
+      "arabic_name": "سهم الإخوة",
+      "transliteration": "sahm al-ikhwa",
+      "english_name": "Lot of Brothers",
+      "from_point": "Saturn",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم موت الإخوة",
+      "transliteration": "sahm mawt al-ikhwa",
+      "english_name": "Lot of the Death of Brothers",
+      "from_point": "Sun",
+      "to_point": "Saturn",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: death timing for a third party. Encoded because a pack that drops it cannot claim to have read the chapter. al-Qabisi adds a condition: if Saturn is under the rays (tahta al-shu'a'), take by day from the Sun to Jupiter and by night the contrary."
+     }
+    ],
+    "cusp_dependent_count": 0,
+    "refused_count": 1
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الثالث (TEI lines 21-24), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_04",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_4",
+    "chapter": "Chapter V, TEI lines 25-35",
+    "house": 4,
+    "arabic_heading": "البيت الرابع",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 4
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 6,
+    "lots": [
+     {
+      "arabic_name": "سهم الآباء",
+      "transliteration": "sahm al-aba'",
+      "english_name": "Lot of Fathers",
+      "from_point": "Sun",
+      "to_point": "Saturn",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم موت الآباء",
+      "transliteration": "sahm mawt al-aba'",
+      "english_name": "Lot of the Death of Fathers",
+      "from_point": "Saturn",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: death timing for a third party."
+     },
+     {
+      "arabic_name": "سهم الأجداد",
+      "transliteration": "sahm al-ajdad",
+      "english_name": "Lot of Grandfathers",
+      "from_point": "the lord of the house of the Sun",
+      "to_point": "Saturn",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "al-Qabisi's own exception: if the Sun is in its own house or in one of Saturn's two houses, take by day from the Sun to Saturn and by night the contrary, cast from the Ascendant - and pay no regard to whether Saturn is visible or under the rays."
+     },
+     {
+      "arabic_name": "سهم العقارات والضياع",
+      "transliteration": "sahm al-'aqarat wa-l-diya'",
+      "english_name": "Lot of Real Estate and Landed Property",
+      "from_point": "Saturn",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم شرف المولود ومن يشكّ فيه لأبيه هو أم لا",
+      "transliteration": "sahm sharaf al-mawlud",
+      "english_name": "Lot of the nobility of the native, and of one about whom it is doubted whether he is his father's",
+      "from_point": "the degree of the Sun by day / the degree of the Moon by night",
+      "to_point": "the degree of the Sun's exaltation by day / the degree of the Moon's exaltation by night",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED for its paternity-doubt use, which is a claim about a living person's parentage. The nobility half is not separable in the source's own sentence, so the whole lot is refused. al-Qabisi's own rider: if by day the Sun is already in the degree of its exaltation, or by night the Moon in the degree of its own, the signification belongs to their degree and to the degree of the Ascendant."
+     },
+     {
+      "arabic_name": "سهم عواقب الأمور",
+      "transliteration": "sahm 'awaqib al-umur",
+      "english_name": "Lot of the Outcomes of Affairs",
+      "from_point": "Saturn",
+      "to_point": "the lord of the house of the conjunction or opposition",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "al-Qabisi says 'and the degrees of the Ascendant are added to it' rather than 'cast from the Ascendant' - the same operation stated in his other idiom."
+     }
+    ],
+    "cusp_dependent_count": 0,
+    "refused_count": 2
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الرابع (TEI lines 25-35), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_05",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_5",
+    "chapter": "Chapter V, TEI lines 36-43",
+    "house": 5,
+    "arabic_heading": "البيت الخامس",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 5
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 6,
+    "lots": [
+     {
+      "arabic_name": "سهم الولد",
+      "transliteration": "sahm al-walad",
+      "english_name": "Lot of Children",
+      "from_point": "Jupiter",
+      "to_point": "Saturn",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم [الوقت الذي يكون فيه الولد وعددهم]",
+      "transliteration": "sahm waqt al-walad",
+      "english_name": "Lot indicating the time at which a child comes, and their number, and whether the woman bears male or female",
+      "from_point": "Mars",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: progeny count and sex-of-offspring prediction about a living person. Same treatment this corpus already gives Phaladipika's progeny clauses."
+     },
+     {
+      "arabic_name": "سهم معرفة حال الولد الذكر",
+      "transliteration": "sahm hal al-walad al-dhakar",
+      "english_name": "Lot for knowing the condition of a male child",
+      "from_point": "Moon",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم معرفة حال الولد الأنثى",
+      "transliteration": "sahm hal al-walad al-untha",
+      "english_name": "Lot for knowing the condition of a female child",
+      "from_point": "Moon",
+      "to_point": "Venus",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم [يعرف به المولود المسؤول عنه ذكر هو أم أنثى]",
+      "transliteration": "sahm jins al-mawlud",
+      "english_name": "Lot by which is known whether the native asked about is male or female",
+      "from_point": "the lord of the house of the Moon",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: sex prediction."
+     },
+     {
+      "arabic_name": "سهم [يدلّ على الولد إذا بلغ المشتري إليه]",
+      "transliteration": "sahm bulugh al-mushtari",
+      "english_name": "Lot indicating the child when Jupiter reaches it",
+      "from_point": "Mars",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "the same formula as the second lot of this house; al-Qabisi lists it separately with a different use (a direction target rather than a natal indicator)."
+     }
+    ],
+    "cusp_dependent_count": 0,
+    "refused_count": 2
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الخامس (TEI lines 36-43), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_06",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_6",
+    "chapter": "Chapter V, TEI lines 44-47",
+    "house": 6,
+    "arabic_heading": "البيت السادس",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 6
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 3,
+    "lots": [
+     {
+      "arabic_name": "سهم المرض والزمانة",
+      "transliteration": "sahm al-marad wa-l-zamana",
+      "english_name": "Lot of Illness and Chronic Disability",
+      "from_point": "Saturn",
+      "to_point": "Mars",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: a health/disability claim about a living person."
+     },
+     {
+      "arabic_name": "سهم العبيد",
+      "transliteration": "sahm al-'abid",
+      "english_name": "Lot of Slaves and Servants",
+      "from_point": "Mercury",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم العبيد (للأندرزغر)",
+      "transliteration": "sahm al-'abid li-l-Andarzaghar",
+      "english_name": "Lot of Slaves and Servants, according to al-Andarzaghar",
+      "from_point": "Mercury",
+      "to_point": "the Lot of Fortune",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "attributed_to": "al-Andarzaghar",
+      "note": "An ATTRIBUTED FORK, preserved rather than merged. al-Qabisi adds al-Andarzaghar's own instruction: 'he said that both lots ought to be used together' (wa-qala yanbaghi an tasta'mil al-sahmani ma'an) - so the two are not alternatives to choose between."
+     }
+    ],
+    "cusp_dependent_count": 0,
+    "refused_count": 1
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت السادس (TEI lines 44-47), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_07",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_7",
+    "chapter": "Chapter V, TEI lines 48-53",
+    "house": 7,
+    "arabic_heading": "البيت السابع",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 7
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 5,
+    "lots": [
+     {
+      "arabic_name": "سهم تزويج الرجال",
+      "transliteration": "sahm tazwij al-rijal",
+      "english_name": "Lot of the Marriage of Men",
+      "from_point": "Sun",
+      "to_point": "Venus",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "al-Qabisi: 'and this lot is like the Lot of Reports (sahm al-akhbar)'."
+     },
+     {
+      "arabic_name": "سهم تزويج النساء لهرمس",
+      "transliteration": "sahm tazwij al-nisa' li-Hirmis",
+      "english_name": "Lot of the Marriage of Women, according to Hermes",
+      "from_point": "Venus",
+      "to_point": "Saturn",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "attributed_to": "Hermes",
+      "note": "al-Qabisi: 'and this lot agrees with the Lot of Agriculture (sahm al-filaha)'."
+     },
+     {
+      "arabic_name": "سهم تزويج النساء لواليس",
+      "transliteration": "sahm tazwij al-nisa' li-Walis",
+      "english_name": "Lot of the Marriage of Women, according to Valens",
+      "from_point": "Sun",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "attributed_to": "Valens (Walis)",
+      "note": "THE NAMED FORK. Hermes and Valens give different formulas for the same lot and al-Qabisi reports both without preferring either. Kept as two entries."
+     },
+     {
+      "arabic_name": "سهم اللذّة والشهوة",
+      "transliteration": "sahm al-ladhdha wa-l-shahwa",
+      "english_name": "Lot of Pleasure and Desire",
+      "from_point": "Venus",
+      "to_point": "the degree of the seventh",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": true,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "requires the 7th house CUSP; named as omitted, not approximated."
+     },
+     {
+      "arabic_name": "سهم العرس",
+      "transliteration": "sahm al-'urs",
+      "english_name": "Lot of the Wedding",
+      "from_point": "Saturn",
+      "to_point": "Venus",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     }
+    ],
+    "cusp_dependent_count": 1,
+    "refused_count": 0
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت السابع (TEI lines 48-53), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_08",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_8",
+    "chapter": "Chapter V, TEI lines 54-60",
+    "house": 8,
+    "arabic_heading": "البيت الثامن",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 8
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 4,
+    "lots": [
+     {
+      "arabic_name": "سهم الموت",
+      "transliteration": "sahm al-mawt",
+      "english_name": "Lot of Death",
+      "from_point": "Moon",
+      "to_point": "the degree and minute of the eighth house",
+      "cast_from": "the degree of Saturn",
+      "reverses_by_night": false,
+      "needs_house_cusp": true,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED. Also note the projection point: this lot is cast from SATURN, not from the Ascendant - one of only three in the chapter that are not cast from the Ascendant. Requires the 8th house cusp as well."
+     },
+     {
+      "arabic_name": "سهم الكوكب الذي يقتل",
+      "transliteration": "sahm al-kawkab alladhi yaqtul",
+      "english_name": "Lot of the Killing Planet",
+      "from_point": "the degree of the lord of the Ascendant",
+      "to_point": "the degree of the Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: killing-agency."
+     },
+     {
+      "arabic_name": "سهم السنة التي يخاف على المولود فيها الموت والفقر والمضرّة والشدّة",
+      "transliteration": "sahm al-sana allati yukhaf fiha al-mawt",
+      "english_name": "Lot of the year in which death, poverty, harm and hardship are feared for the native",
+      "from_point": "Saturn",
+      "to_point": "the lord of the house of the conjunction or opposition preceding the birth",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: death timing."
+     },
+     {
+      "arabic_name": "سهم الوثاق والسجن وهل ينجو منه أم لا",
+      "transliteration": "sahm al-wathaq wa-l-sijn",
+      "english_name": "Lot of bondage and prison, and whether he escapes it or not",
+      "from_point": "Saturn",
+      "to_point": "the Lot of Fortune",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: imprisonment verdict, the same refusal this corpus records for BPHS adhyaya 31's bandhana-yogas."
+     }
+    ],
+    "cusp_dependent_count": 1,
+    "refused_count": 4
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الثامن (TEI lines 54-60), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_09",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_9",
+    "chapter": "Chapter V, TEI lines 61-66",
+    "house": 9,
+    "arabic_heading": "البيت التاسع",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 9
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 3,
+    "lots": [
+     {
+      "arabic_name": "سهم السفر",
+      "transliteration": "sahm al-safar",
+      "english_name": "Lot of Travel",
+      "from_point": "the lord of the ninth house",
+      "to_point": "the degree and minute of the ninth house",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": true,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "requires the 9th house CUSP; named as omitted."
+     },
+     {
+      "arabic_name": "سهم المسير في الماء",
+      "transliteration": "sahm al-masir fi al-ma'",
+      "english_name": "Lot of Journeying by Water",
+      "from_point": "Saturn",
+      "to_point": "fifteen degrees of Cancer",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "al-Qabisi's own degenerate case: if Saturn is itself at 15 degrees of Cancer, then the degree of the lot is the degree of the Ascendant."
+     },
+     {
+      "arabic_name": "سهم الورع",
+      "transliteration": "sahm al-wara'",
+      "english_name": "Lot of Scrupulousness and Piety",
+      "from_point": "Moon",
+      "to_point": "Mercury",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     }
+    ],
+    "cusp_dependent_count": 1,
+    "refused_count": 0
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت التاسع (TEI lines 61-66), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_10",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_10",
+    "chapter": "Chapter V, TEI lines 67-73",
+    "house": 10,
+    "arabic_heading": "البيت العاشر",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 10
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 5,
+    "lots": [
+     {
+      "arabic_name": "سهم السلطان وأيّ عمل يعمل المولود",
+      "transliteration": "sahm al-sultan wa-ayy 'amal ya'mal al-mawlud",
+      "english_name": "Lot of authority, and of what work the native does",
+      "from_point": "Saturn",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الملك والسلطان",
+      "transliteration": "sahm al-mulk wa-l-sultan",
+      "english_name": "Lot of Kingship and Authority",
+      "from_point": "Mars",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "al-Qabisi adds: 'and it has another lot, like the Lot of Fathers' - i.e. a second formula identical to Sun-to-Saturn."
+     },
+     {
+      "arabic_name": "سهم العمل والسلطان لواليس",
+      "transliteration": "sahm al-'amal wa-l-sultan li-Walis",
+      "english_name": "Lot of work and authority, according to Valens",
+      "from_point": "Sun",
+      "to_point": "the degree of the Midheaven",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": true,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "attributed_to": "Valens (Walis)",
+      "note": "requires the MC as a computed degree; named as omitted in a whole-sign section."
+     },
+     {
+      "arabic_name": "سهم [يدلّ على أمر السلطان يكون أم لا]",
+      "transliteration": "sahm amr al-sultan",
+      "english_name": "Lot indicating whether the matter of authority will come to be",
+      "from_point": "Sun",
+      "to_point": "the degree of the Midheaven",
+      "cast_from": "Jupiter",
+      "reverses_by_night": false,
+      "needs_house_cusp": true,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "cast from JUPITER, not the Ascendant. Requires the MC."
+     },
+     {
+      "arabic_name": "سهم الأمّ",
+      "transliteration": "sahm al-umm",
+      "english_name": "Lot of the Mother",
+      "from_point": "Venus",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     }
+    ],
+    "cusp_dependent_count": 2,
+    "refused_count": 0
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت العاشر (TEI lines 67-73), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_11",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_11",
+    "chapter": "Chapter V, TEI lines 74-77",
+    "house": 11,
+    "arabic_heading": "البيت الحادي عشر",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 11
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 2,
+    "lots": [
+     {
+      "arabic_name": "سهم الأصدقاء",
+      "transliteration": "sahm al-asdiqa'",
+      "english_name": "Lot of Friends",
+      "from_point": "Moon",
+      "to_point": "Mercury",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "attributed_to": "al-Andarzaghar dissents on the nocturnal reversal",
+      "note": "al-Qabisi reports a fork: 'and al-Andarzaghar said it is taken by night the contrary'. So the day formula is agreed and the night behaviour is disputed. Recorded as a disagreement, not resolved."
+     },
+     {
+      "arabic_name": "سهم [يدلّ على كون الصداقة والعداوة]",
+      "transliteration": "sahm al-sadaqa wa-l-'adawa",
+      "english_name": "Lot indicating the existence of friendship and enmity",
+      "from_point": "the Lot of Fortune",
+      "to_point": "the Lot of the Unseen",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     }
+    ],
+    "cusp_dependent_count": 0,
+    "refused_count": 0
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الحادي عشر (TEI lines 74-77), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.house_12",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "named_lots_of_house_12",
+    "chapter": "Chapter V, TEI lines 78-80",
+    "house": 12,
+    "arabic_heading": "البيت الثاني عشر",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect (day or night)",
+     "domicile lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "house",
+      "operator": "equals",
+      "value": 12
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "lot_count": 2,
+    "lots": [
+     {
+      "arabic_name": "سهم الأعداء لهرمس",
+      "transliteration": "sahm al-a'da' li-Hirmis",
+      "english_name": "Lot of Enemies, according to Hermes",
+      "from_point": "the lord of the house of enemies",
+      "to_point": "the degree of the house of enemies",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": true,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "attributed_to": "Hermes",
+      "note": "requires the 12th house CUSP; named as omitted."
+     },
+     {
+      "arabic_name": "سهم الأعداء لبعض الأوائل",
+      "transliteration": "sahm al-a'da' li-ba'd al-awa'il",
+      "english_name": "Lot of Enemies, according to some of the ancients",
+      "from_point": "Saturn",
+      "to_point": "Mars",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "attributed_to": "ba'd al-awa'il (some of the ancients), unnamed"
+     }
+    ],
+    "cusp_dependent_count": 1,
+    "refused_count": 0
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "البيت الثاني عشر (TEI lines 78-80), printed pages 140-150",
+     "verification": "read directly in Arabic from wurzburg_tei/al_qabisi_introduction_arabic_tei.xml on 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.general_use",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "lots_much_used_by_astrologers_beyond_the_twelve_houses",
+    "chapter": "Chapter V, paragraph beginning wa-hahuna sihaam ukhar (TEI lines 81-91)",
+    "engine_facts_consumed": [
+     "planetary longitudes",
+     "Ascendant degree",
+     "sect"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lot_group",
+      "operator": "equals",
+      "value": "general_use"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "arabic": "وهاهنا سهام أخر يستعملها أصحاب أحكام النجوم كثيرا",
+    "engine_rendering": "And here are other lots which the practitioners of the judgments of the stars use much.",
+    "lot_count": 7,
+    "lots": [
+     {
+      "arabic_name": "سهم [كذب الخبر وصدق الخبر]",
+      "transliteration": "sahm sidq al-khabar",
+      "english_name": "Lot of the truth or falsehood of a report",
+      "from_point": "Mercury",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "al-Qabisi attaches a judgment rule rather than leaving the lot bare: the report is FALSE if the lot falls in a sign of crooked ascension or a tropical sign, or its lord is retrograde or corrupt, or the malefics aspect or conjoin it; TRUE if it falls with the benefics or in their houses or bounds, or they aspect it, or it falls in a sign of straight ascension."
+     },
+     {
+      "arabic_name": "سهم العقل وبعد الغور",
+      "transliteration": "sahm al-'aql wa-bu'd al-ghawr",
+      "english_name": "Lot of intellect and depth of understanding",
+      "from_point": "Saturn",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الحكمة",
+      "transliteration": "sahm al-hikma",
+      "english_name": "Lot of Wisdom",
+      "from_point": "Saturn",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم العلم",
+      "transliteration": "sahm al-'ilm",
+      "english_name": "Lot of Knowledge",
+      "from_point": "Moon",
+      "to_point": "Jupiter",
+      "cast_from": "Ascendant",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الحرب والقتال",
+      "transliteration": "sahm al-harb wa-l-qital",
+      "english_name": "Lot of War and Fighting",
+      "from_point": "Saturn",
+      "to_point": "Moon",
+      "cast_from": "Ascendant",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: war/political timing, the same refusal this spec already records for al-bust."
+     },
+     {
+      "arabic_name": "سهم الصلح في العساكر",
+      "transliteration": "sahm al-sulh fi al-'asakir",
+      "english_name": "Lot of Peace among Armies",
+      "from_point": "Moon",
+      "to_point": "Mercury",
+      "cast_from": "Mercury",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: military. Also cast from MERCURY rather than the Ascendant."
+     },
+     {
+      "arabic_name": "سهم النظر في تحويل السنة",
+      "transliteration": "sahm al-nazar fi tahwil al-sana",
+      "english_name": "Lot for examining the revolution of the year",
+      "from_point": "Moon",
+      "to_point": "Venus",
+      "cast_from": "the Sun",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "renderable_with_source",
+      "customer_prediction": false,
+      "note": "cast from the SUN, not the Ascendant."
+     }
+    ]
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "TEI lines 81-91, printed pages 148-150",
+     "verification": "read directly in Arabic 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.kingship_and_world_year",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "the_kingship_and_world_year_lots_including_the_two_greatest_lots",
+    "chapter": "Chapter V, TEI lines 92-119, printed pages 150-152",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lot_group",
+      "operator": "equals",
+      "value": "mundane_kingship"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "output_policy": "refused",
+    "arabic": "فإنّا نتبعها بعمل السهام التي تقع في تحويل سني العالم والقرانات الدالّة على أمور الملك وكم بقاء الملك",
+    "engine_rendering": "We follow them with the working of the lots that fall in the revolutions of the years of the world, and the conjunctions signifying the affairs of kingship, and how long the kingdom endures.",
+    "lot_count": 3,
+    "lots": [
+     {
+      "arabic_name": "سهم الملك والسلطان المستعمل في تحويل سني العالم",
+      "transliteration": "sahm al-mulk fi tahwil sini al-'alam",
+      "english_name": "Lot of kingship and authority used in the revolutions of the years of the world",
+      "from_point": "Mars",
+      "to_point": "Moon",
+      "cast_from": "the Ascendant of the conjunction signifying the transfer of the milla",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED: mundane/dynastic. al-Qabisi gives two further variants: (2) from the degree of the conjunction's Ascendant to the degree of the conjunction, cast from the degree of the revolution's Ascendant; (3) from the degree of the Sun to the Midheaven of the revolution, cast from the degree of Jupiter."
+     },
+     {
+      "arabic_name": "سهم مدّة الملك",
+      "transliteration": "sahm muddat al-mulk",
+      "english_name": "Lot of the duration of the kingdom",
+      "from_point": "Sun",
+      "to_point": "fifteen degrees of Leo",
+      "cast_from": "the Moon",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED. Taken at the moment of the king's accession, and it is a PAIR: then from the Moon to fifteen degrees of Cancer, cast from the Sun."
+     },
+     {
+      "arabic_name": "سهم آخر لمدّة قيام الملك",
+      "transliteration": "sahm akhar li-muddat qiyam al-mulk",
+      "english_name": "Another lot for the duration of the king's standing",
+      "from_point": "Jupiter",
+      "to_point": "Saturn",
+      "cast_from": "the Ascendant of the year-revolution in which the king rose",
+      "reverses_by_night": true,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false,
+      "note": "REFUSED. Three conditional variants are stated: (a) if Jupiter is in a bicorporeal sign, the revolution is diurnal and Jupiter is cadent from the angles, take from Saturn to Jupiter, add thirty degrees, and cast from the Ascendant; (b) if Saturn and Jupiter are in opposition and both cadent from the Ascendant, halve what comes out between them and cast from the Ascendant; (c) if Jupiter is in its exaltation and the revolution is nocturnal, reckon from it to Saturn and cast from the Ascendant."
+     }
+    ],
+    "two_greatest_lots": {
+     "arabic": "عمل السهمين الأعظمين المستخرج بهما مدّة قيام الملك",
+     "engine_rendering": "The working of the two greatest lots, by which the duration of the king's standing is extracted.",
+     "first_lot": "At the moment of the king's accession, see where the year has reached from the conjunction of the triplicity that signified the milla, reckoning every thirty degrees a year and every two and a half degrees a month. Note the sign and degree; that is the place from which the first lot is equated. Then erect the Ascendant of the revolution of the year in which the king rose, take from the ORIENTAL of Saturn and Jupiter with respect to the Sun in that year to the noted degree, and cast it from the Ascendant of the revolution.",
+     "second_lot": "See from the conjunction in which the king rose to what sign and degree the year has reached, reckoning every thirty degrees a year, on the day and month in which the king rose; that is the place of equation of the second lot. Then take from the OCCIDENTAL of Saturn and Jupiter with respect to the Sun to that noted place, and cast it from the Ascendant of the revolution.",
+     "both_same_condition": "If both are oriental or both occidental, take the first from Saturn and the second from Jupiter.",
+     "output_policy": "refused"
+    },
+    "why_encoded": "Encoded and refused, not skipped. The refusal list already bans mundane and dynastic prediction; the point of encoding is that a scholar can see the corpus knows the doctrine and has chosen not to render it, which is a different claim from not having it."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "TEI lines 92-119, printed pages 150-152",
+     "verification": "read directly in Arabic 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.commodity_prices",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "the_commodity_price_lots_of_the_world_year_revolution",
+    "chapter": "Chapter V, TEI lines 120-140, printed pages 152-154",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lot_group",
+      "operator": "equals",
+      "value": "commodity_prices"
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "lot_enumeration",
+    "unit": "an ecliptic degree per lot",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "output_policy": "refused",
+    "arabic": "وهاهنا سهام تستعمل في تحويل سني العالم يعرف بها ما يغلو من الأسعار وما يرخص",
+    "engine_rendering": "And here are lots used in the revolutions of the years of the world, by which is known what rises in price and what falls.",
+    "lot_count": 23,
+    "lots": [
+     {
+      "arabic_name": "سهم الطعام",
+      "transliteration": "sahm al-ta'am",
+      "english_name": "Lot of food",
+      "from_point": "Sun",
+      "to_point": "Mars",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الماء",
+      "transliteration": "sahm al-ma'",
+      "english_name": "Lot of water",
+      "from_point": "Moon",
+      "to_point": "Venus",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الشعير",
+      "transliteration": "sahm al-sha'ir",
+      "english_name": "Lot of barley",
+      "from_point": "Moon",
+      "to_point": "Jupiter",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الحمّص",
+      "transliteration": "sahm al-himmas",
+      "english_name": "Lot of chickpeas",
+      "from_point": "Venus",
+      "to_point": "Sun",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم العدس",
+      "transliteration": "sahm al-'adas",
+      "english_name": "Lot of lentils",
+      "from_point": "Mars",
+      "to_point": "Saturn",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الباقلاء",
+      "transliteration": "sahm al-baqila'",
+      "english_name": "Lot of broad beans",
+      "from_point": "Saturn",
+      "to_point": "Mars",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الماش",
+      "transliteration": "sahm al-mash",
+      "english_name": "Lot of mung beans",
+      "from_point": "Saturn",
+      "to_point": "Mars",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم التمر",
+      "transliteration": "sahm al-tamr",
+      "english_name": "Lot of dates",
+      "from_point": "Sun",
+      "to_point": "Venus",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم العسل",
+      "transliteration": "sahm al-'asal",
+      "english_name": "Lot of honey",
+      "from_point": "Moon",
+      "to_point": "Sun",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأرزّ",
+      "transliteration": "sahm al-aruzz",
+      "english_name": "Lot of rice",
+      "from_point": "Jupiter",
+      "to_point": "Saturn",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الزيتون",
+      "transliteration": "sahm al-zaytun",
+      "english_name": "Lot of olives",
+      "from_point": "Mercury",
+      "to_point": "Moon",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم العنب",
+      "transliteration": "sahm al-'inab",
+      "english_name": "Lot of grapes",
+      "from_point": "Saturn",
+      "to_point": "Venus",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم القطن",
+      "transliteration": "sahm al-qutn",
+      "english_name": "Lot of cotton",
+      "from_point": "Mercury",
+      "to_point": "Venus",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم السمسم",
+      "transliteration": "sahm al-simsim",
+      "english_name": "Lot of sesame",
+      "from_point": "Saturn",
+      "to_point": "Jupiter or Venus",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم البطّيخ",
+      "transliteration": "sahm al-bittikh",
+      "english_name": "Lot of melon",
+      "from_point": "Mercury",
+      "to_point": "Saturn",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأطعمة الحامضة",
+      "transliteration": "sahm al-at'ima al-hamida",
+      "english_name": "Lot of sour foods",
+      "from_point": "Saturn",
+      "to_point": "Mars",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأطعمة الحلوة",
+      "transliteration": "sahm al-at'ima al-hulwa",
+      "english_name": "Lot of sweet foods",
+      "from_point": "Sun",
+      "to_point": "Venus",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأطعمة الحرّيفة",
+      "transliteration": "sahm al-at'ima al-harrifa",
+      "english_name": "Lot of pungent foods",
+      "from_point": "Mars",
+      "to_point": "Saturn",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأطعمة المرّة",
+      "transliteration": "sahm al-at'ima al-murra",
+      "english_name": "Lot of bitter foods",
+      "from_point": "Mercury",
+      "to_point": "Saturn",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأدوية المسهلة الحلوة",
+      "transliteration": "sahm al-adwiya al-mushila al-hulwa",
+      "english_name": "Lot of sweet purgative medicines",
+      "from_point": "Sun",
+      "to_point": "Moon",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأدوية المسهلة الحامضة",
+      "transliteration": "sahm al-adwiya al-mushila al-hamida",
+      "english_name": "Lot of sour purgative medicines",
+      "from_point": "Saturn",
+      "to_point": "Jupiter",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم الأدوية المسهلة المالحة",
+      "transliteration": "sahm al-adwiya al-mushila al-maliha",
+      "english_name": "Lot of salty purgative medicines",
+      "from_point": "Mars",
+      "to_point": "Moon",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     },
+     {
+      "arabic_name": "سهم السموم",
+      "transliteration": "sahm al-sumum",
+      "english_name": "Lot of poisons",
+      "from_point": "al-Jawzahar (the lunar node)",
+      "to_point": "Saturn",
+      "cast_from": "the Ascendant of the year-revolution",
+      "reverses_by_night": false,
+      "needs_house_cusp": false,
+      "output_policy": "refused",
+      "customer_prediction": false
+     }
+    ],
+    "judgment_rule": {
+     "arabic": "فإن كان ذلك الكوكب في الرجوع أو الاحتراق أو موضع رديء رخص ذلك الشيء وإن كان في موضع قوّة أو وتد سيّما وسط السماء غلا ذلك الشيء وعزّ",
+     "engine_rendering": "Look to where the lot falls, in the house, exaltation, bound or triplicity of which planet. If that planet is retrograde, or combust, or in a bad place, that commodity falls in price; if it is in a place of strength or in an angle, especially the Midheaven, that commodity rises in price and becomes scarce. If the lord of that house arrives at the place of its fall, the commodity cheapens. And look to the aspect of the benefics and malefics to it, and to the Moon and its lord: if the benefics and the Moon aspect the lot, that commodity becomes plentiful; if the malefics aspect, it is spoiled.",
+     "output_policy": "refused"
+    },
+    "the_authors_own_caveat": {
+     "arabic": "وإنّما أتينا هذه السهام الأخيرة وإن كان القول فيها ضعيفا لئلّا نترك شيئا ممّا يجوز أن يكون مدخلا إلى صناعة أحكام النجوم إلّا أتينا به",
+     "engine_rendering": "We have given these last lots, even though the discourse concerning them is WEAK, so as not to leave out anything that may serve as an introduction to the art of the judgments of the stars.",
+     "note": "This is al-Qabisi's own assessment of his own material, preserved rather than invented. It does not soften the refusal - the refusal is ours and is about economic prediction - but it does mean the corpus is refusing something the author himself flagged."
+    },
+    "refusal_basis": "No commodity-price or economic prediction. Already in the islamicate refusal list."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "TEI lines 120-140, printed pages 152-154",
+     "verification": "read directly in Arabic 2026-08-05"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  },
+  {
+   "rule_id": "islam.qabisi.ch5.lots.inventory",
+   "tradition_id": "islamicate_persian",
+   "school_id": "al_qabisi_mudkhal_arabic",
+   "period": "al_qabisi_10th_century_arabic_text_wurzburg_tei_witness",
+   "domain": "natal",
+   "scope": {
+    "work": "al-Qabisi, al-Mudkhal, Chapter V",
+    "technique": "inventory_of_the_chapter_and_what_it_costs_to_compute",
+    "chapter": "Chapter V entire",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "lot_inventory",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "inventory",
+    "unit": "n/a",
+    "customer_prediction": false,
+    "rendering_grade": "engine_translation_unreviewed",
+    "total_lots_enumerated": 81,
+    "natal_house_lots": 48,
+    "general_use_lots": 7,
+    "kingship_lots": 4,
+    "commodity_lots": 23,
+    "needing_a_house_cusp_or_the_mc": 7,
+    "cusp_dependent_names": [
+     "sahm al-mal",
+     "sahm al-ladhdha wa-l-shahwa",
+     "sahm al-mawt",
+     "sahm al-safar",
+     "sahm al-'amal wa-l-sultan li-Walis",
+     "sahm amr al-sultan",
+     "sahm al-a'da' li-Hirmis"
+    ],
+    "refused_count": 38,
+    "not_cast_from_the_ascendant": [
+     "sahm al-mawt (cast from Saturn)",
+     "sahm amr al-sultan (cast from Jupiter)",
+     "sahm al-sulh fi al-'asakir (cast from Mercury)",
+     "sahm al-nazar fi tahwil al-sana (cast from the Sun)",
+     "sahm muddat al-mulk (cast from the Moon, then from the Sun)"
+    ],
+    "attributed_forks_preserved": [
+     "Hermes vs Valens on the Lot of the Marriage of Women",
+     "al-Andarzaghar's second Lot of Slaves, to be used ALONGSIDE al-Qabisi's",
+     "al-Andarzaghar's dissent on the nocturnal reversal of the Lot of Friends",
+     "Hermes vs 'some of the ancients' on the Lot of Enemies"
+    ],
+    "correction_to_the_spec": "The defensibility spec described this chapter as '~50 lots'. The Arabic gives 81, of which 48 are natal house lots. The undercount came from reading only the twelve-house block.",
+    "engine_note": "islamicate.py's named_lots() computes six. The 74 lots here that need neither a house cusp nor the MC are computable with what that module already receives."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+     "work": "al-Qabisi, Kitab al-mudkhal ila sina'at ahkam al-nujum, Chapter V (jumal al-sihaam)",
+     "section": "Chapter V",
+     "location": "entire chapter, TEI lines 1-140, printed pages 140-154",
+     "verification": "read directly in Arabic 2026-08-05 and counted"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; refused categories never rendered",
+   "review_status": "engine_translation_unreviewed; independent Arabic specialist review outstanding"
+  }
+ ]
+}

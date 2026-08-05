@@ -1,0 +1,1286 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-05",
+ "tradition_id": "indian_jyotisha",
+ "source_pack_id": "parasara_bphs_subodhini_1899_varga_v1",
+ "status": "research_vectors_awaiting_independent_sanskrit_review. Where the 1899 printing works its own example (D2, D4, D7, D10, D12, D30) the vector carries the printed input and the printed result, so a failure is a failure against the SOURCE. Where the example is damaged in the scan (D60) the vector carries the procedure only and says so.",
+ "source_ids": [
+  "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+  "jyotisha_bphs_subodhini_1899_archive"
+ ],
+ "required_expansion_before_implementation": [
+  "independent Sanskrit review of every cited sloka before any rule is promoted out of research_only",
+  "read purva-khanda adhyaya 3 slokas 66-76 and 79-87 to encode D16, D20, D24, D27, D40 and D45",
+  "settle sloka 126's adhimitra vishva value (20 or 18) against a second recension",
+  "settle whether the shodasavarga vishva series is defective in this printing or lost to the scan"
+ ],
+ "vectors": [
+  {
+   "vector_id": "bphs.p03.sodasavarga.d1",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D1"
+   },
+   "expected": {
+    "name": "kshetra / rasi",
+    "arc": "30 deg 00'",
+    "ordinal": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d2",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D2"
+   },
+   "expected": {
+    "name": "hora",
+    "arc": "15 deg 00'",
+    "ordinal": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d3",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D3"
+   },
+   "expected": {
+    "name": "drekkana",
+    "arc": "10 deg 00'",
+    "ordinal": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d4",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D4"
+   },
+   "expected": {
+    "name": "turyamsa (chaturthamsa)",
+    "arc": "7 deg 30'",
+    "ordinal": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d7",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D7"
+   },
+   "expected": {
+    "name": "saptamamsa",
+    "arc": "4 deg 17' 08.6\"",
+    "ordinal": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d9",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D9"
+   },
+   "expected": {
+    "name": "navamsa",
+    "arc": "3 deg 20'",
+    "ordinal": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d10",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D10"
+   },
+   "expected": {
+    "name": "dasamsa",
+    "arc": "3 deg 00'",
+    "ordinal": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d16",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D16"
+   },
+   "expected": {
+    "name": "shodasamsa (kalamsa)",
+    "arc": "1 deg 52' 30\"",
+    "ordinal": 8,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d20",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D20"
+   },
+   "expected": {
+    "name": "vimsamsa",
+    "arc": "1 deg 30'",
+    "ordinal": 9,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d24",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D24"
+   },
+   "expected": {
+    "name": "chaturvimsamsa (vedavanhi / siddhamsa)",
+    "arc": "1 deg 15'",
+    "ordinal": 10,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d27",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D27"
+   },
+   "expected": {
+    "name": "bhamsa (nakshatramsa)",
+    "arc": "1 deg 06' 40\"",
+    "ordinal": 11,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d30",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D30"
+   },
+   "expected": {
+    "name": "trimsamsa",
+    "arc": "unequal, see the trimsamsa rule",
+    "ordinal": 12,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d40",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D40"
+   },
+   "expected": {
+    "name": "khavedamsa",
+    "arc": "0 deg 45'",
+    "ordinal": 13,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d45",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D45"
+   },
+   "expected": {
+    "name": "akshavedamsa",
+    "arc": "0 deg 40'",
+    "ordinal": 14,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.sodasavarga.d60",
+   "rule_ids": [
+    "jyotisha.bphs.p03.sodasavarga.enumeration"
+   ],
+   "inputs": {
+    "varga": "D60"
+   },
+   "expected": {
+    "name": "shashtyamsa",
+    "arc": "0 deg 30'",
+    "ordinal": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 52-54"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d2.odd",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.hora_d2"
+   ],
+   "inputs": {
+    "rasi_parity": "odd",
+    "degree": 5
+   },
+   "expected": {
+    "hora_lord": "Sun",
+    "hora_rasi": "Leo",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 55-56"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d2.even",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.hora_d2"
+   ],
+   "inputs": {
+    "rasi_parity": "even",
+    "degree": 5
+   },
+   "expected": {
+    "hora_lord": "Moon",
+    "hora_rasi": "Cancer",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 55-56"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d3.0",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.drekkana_d3"
+   ],
+   "inputs": {
+    "degree_range": "0-10"
+   },
+   "expected": {
+    "drekkana_rasi": "same rasi",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 57-58"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d3.10",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.drekkana_d3"
+   ],
+   "inputs": {
+    "degree_range": "10-20"
+   },
+   "expected": {
+    "drekkana_rasi": "5th from it",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 57-58"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d3.20",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.drekkana_d3"
+   ],
+   "inputs": {
+    "degree_range": "20-30"
+   },
+   "expected": {
+    "drekkana_rasi": "9th from it",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 57-58"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d4.0_730",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.turyamsa_d4"
+   ],
+   "inputs": {
+    "degree_range": "0-7:30"
+   },
+   "expected": {
+    "turyamsa_rasi": "same rasi",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 59"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d4.730_15",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.turyamsa_d4"
+   ],
+   "inputs": {
+    "degree_range": "7:30-15"
+   },
+   "expected": {
+    "turyamsa_rasi": "4th from it",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 59"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d4.15_2230",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.turyamsa_d4"
+   ],
+   "inputs": {
+    "degree_range": "15-22:30"
+   },
+   "expected": {
+    "turyamsa_rasi": "7th from it",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 59"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d4.2230_30",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.turyamsa_d4"
+   ],
+   "inputs": {
+    "degree_range": "22:30-30"
+   },
+   "expected": {
+    "turyamsa_rasi": "10th from it",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 59"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d7.odd",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.saptamsa_d7"
+   ],
+   "inputs": {
+    "rasi_parity": "odd"
+   },
+   "expected": {
+    "count_from": "the rasi itself",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 60"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d7.even_worked",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.saptamsa_d7"
+   ],
+   "inputs": {
+    "lagna_rasi": "Cancer",
+    "degree": "8"
+   },
+   "expected": {
+    "count_from": "Capricorn (the 7th from Cancer)",
+    "saptamsa_rasi": "Pisces",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3, the commentary's own example"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d10.odd",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.dasamsa_d10"
+   ],
+   "inputs": {
+    "rasi_parity": "odd"
+   },
+   "expected": {
+    "count_from": "the rasi itself",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 64"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d10.even_worked",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.dasamsa_d10"
+   ],
+   "inputs": {
+    "lagna_rasi": "Cancer",
+    "degree": "8|4|5"
+   },
+   "expected": {
+    "count_from": "Pisces (the 9th from Cancer)",
+    "dasamsa_rasi": "Taurus",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3, the commentary's own example"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d12.from_sign_itself",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.dvadasamsa_d12"
+   ],
+   "inputs": {
+    "rasi": "any",
+    "parity": "odd or even"
+   },
+   "expected": {
+    "count_from": "the rasi itself",
+    "arc": "2 deg 30'",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 65"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d12.lords",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.dvadasamsa_d12"
+   ],
+   "inputs": {
+    "query": "dvadasamsa deities"
+   },
+   "expected": {
+    "cycle": [
+     "Ganesha",
+     "Ashvin",
+     "Yama",
+     "Ahi"
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 65"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.odd.0_5",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "odd",
+    "degree_range": "0-5"
+   },
+   "expected": {
+    "lord": "Mars",
+    "deity": "Vahni (fire)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.odd.5_10",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "odd",
+    "degree_range": "5-10"
+   },
+   "expected": {
+    "lord": "Saturn",
+    "deity": "Samira (wind)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.odd.10_18",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "odd",
+    "degree_range": "10-18"
+   },
+   "expected": {
+    "lord": "Jupiter",
+    "deity": "Sakra (Indra)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.odd.18_25",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "odd",
+    "degree_range": "18-25"
+   },
+   "expected": {
+    "lord": "Mercury",
+    "deity": "Kubera (dhanada)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.odd.25_30",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "odd",
+    "degree_range": "25-30"
+   },
+   "expected": {
+    "lord": "Venus",
+    "deity": "Jaladhara (Varuna)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.even.0_5",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "even",
+    "degree_range": "0-5"
+   },
+   "expected": {
+    "lord": "Venus",
+    "deity": "Jaladhara (Varuna)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.even.5_12",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "even",
+    "degree_range": "5-12"
+   },
+   "expected": {
+    "lord": "Mercury",
+    "deity": "Kubera",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.even.12_20",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "even",
+    "degree_range": "12-20"
+   },
+   "expected": {
+    "lord": "Jupiter",
+    "deity": "Sakra",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.even.20_25",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "even",
+    "degree_range": "20-25"
+   },
+   "expected": {
+    "lord": "Saturn",
+    "deity": "Samira",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d30.even.25_30",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.trimsamsa_d30"
+   ],
+   "inputs": {
+    "rasi_parity": "even",
+    "degree_range": "25-30"
+   },
+   "expected": {
+    "lord": "Mars",
+    "deity": "Vahni",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 77-78"
+  },
+  {
+   "vector_id": "bphs.p03.varga.d60.procedure",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.shashtyamsa_d60"
+   ],
+   "inputs": {
+    "graha_degrees_onward": "24|1"
+   },
+   "expected": {
+    "steps": [
+     "double",
+     "divide by 12",
+     "add 1",
+     "count forward in odd signs, backward in even"
+    ],
+    "arc": "0 deg 30'",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 sloka 90"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d1",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D1"
+   },
+   "expected": {
+    "answers": "देहस्य विज्ञानम् - knowledge of the body",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d2",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D2"
+   },
+   "expected": {
+    "answers": "संपदादिकम् - wealth and the like",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d3",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D3"
+   },
+   "expected": {
+    "answers": "भ्रातृजं सौख्यम् - happiness arising from brothers",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d4",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D4"
+   },
+   "expected": {
+    "answers": "भाग्यचिंतनम् - consideration of fortune",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d7",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D7"
+   },
+   "expected": {
+    "answers": "पुत्रपौत्रादिकानां चिंतनम् - consideration of sons, grandsons and the rest",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d9",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D9"
+   },
+   "expected": {
+    "answers": "कलत्राणाम् - of spouses",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d10",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D10"
+   },
+   "expected": {
+    "answers": "महत्फलम् - the great result (career, standing, deeds)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d12",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D12"
+   },
+   "expected": {
+    "answers": "पित्रोः - of the parents",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d16",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D16"
+   },
+   "expected": {
+    "answers": "सुखासुखस्य विज्ञानं वाहनानां तथैव च - knowledge of comfort and discomfort, and of vehicles",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d20",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D20"
+   },
+   "expected": {
+    "answers": "उपासनाया विज्ञानम् - knowledge of religious observance",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d24",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D24"
+   },
+   "expected": {
+    "answers": "विद्यायाः - of learning",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d27",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D27"
+   },
+   "expected": {
+    "answers": "भांडे च बलाबलम् - strength and weakness of the constitution",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d30",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D30"
+   },
+   "expected": {
+    "answers": "रिष्टफलम् - the evils / misfortunes",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d40",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D40"
+   },
+   "expected": {
+    "answers": "शुभाशुभम् - the auspicious and inauspicious",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d45",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D45"
+   },
+   "expected": {
+    "answers": "अखिलम् - everything",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.varga.purpose.d60",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.purposes"
+   ],
+   "inputs": {
+    "varga": "D60"
+   },
+   "expected": {
+    "answers": "अखिलमीक्षयेत् - one should examine everything; a cruel shashtyamsa lord destroys, a benefic one increases",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 103-108"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.scheme.shadvarga",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "scheme": "shadvarga (6)"
+   },
+   "expected": {
+    "weights": {
+     "D1": 6,
+     "D2": 2,
+     "D3": 4,
+     "D9": 5,
+     "D12": 2,
+     "D30": 1
+    },
+    "total": 20,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 119-125"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.scheme.saptavarga",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "scheme": "saptavarga (7)"
+   },
+   "expected": {
+    "weights": {
+     "D1": 5,
+     "D2": 2,
+     "D3": 3,
+     "D7": 2.5,
+     "D9": 4.5,
+     "D12": 2,
+     "D30": 1
+    },
+    "total": 20,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 119-125"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.scheme.dasavarga",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "scheme": "dasavarga (10)"
+   },
+   "expected": {
+    "weights": {
+     "D1": 3,
+     "D60": 5,
+     "the other eight": 1.5
+    },
+    "total": 20,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 119-125"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.scheme.shodasavarga",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "scheme": "shodasavarga (16)"
+   },
+   "expected": {
+    "weights": {
+     "D1": 3.5,
+     "D9": 3,
+     "D16": 2,
+     "D60": 4,
+     "the rest": 0.5
+    },
+    "total": 18.5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 119-125"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.dignity.exaltation",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "dignity": "exaltation / own sign (purna)"
+   },
+   "expected": {
+    "vishvas": 20,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 126-127"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.dignity.adhimitra",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "dignity": "adhimitra"
+   },
+   "expected": {
+    "vishvas": 20,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 126-127"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.dignity.mitra",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "dignity": "mitra"
+   },
+   "expected": {
+    "vishvas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 126-127"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.dignity.sama",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "dignity": "sama"
+   },
+   "expected": {
+    "vishvas": 10,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 126-127"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.dignity.satru",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "dignity": "satru"
+   },
+   "expected": {
+    "vishvas": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 126-127"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.dignity.adhisatru",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "dignity": "adhisatru"
+   },
+   "expected": {
+    "vishvas": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 126-127"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.grade.below_5",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "vishvas": "below 5"
+   },
+   "expected": {
+    "verdict": "no result at all (फलदो न हि)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 128-129"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.grade.5_to_10",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "vishvas": "5 to 10"
+   },
+   "expected": {
+    "verdict": "slight result (स्वल्पफलदम्)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 128-129"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.grade.above_10",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "vishvas": "above 10"
+   },
+   "expected": {
+    "verdict": "middling (मध्यमम्)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 128-129"
+  },
+  {
+   "vector_id": "bphs.p03.vimsopaka.grade.above_15",
+   "rule_ids": [
+    "jyotisha.bphs.p03.vimsopaka_bala"
+   ],
+   "inputs": {
+    "vishvas": "above 15"
+   },
+   "expected": {
+    "verdict": "full result (पूर्णफलदम्)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 128-129"
+  },
+  {
+   "vector_id": "bphs.p03.varga_tier.shadvarga",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga_tier_names"
+   ],
+   "inputs": {
+    "scheme": "shadvarga (2 to 7 dignified vargas)"
+   },
+   "expected": {
+    "tier_names": [
+     "kimshuka (2)",
+     "vyanjana (3)",
+     "chamara (4)",
+     "chatra (5)",
+     "kundala (6)",
+     "mukuta (7)"
+    ],
+    "output_policy": "refused_for_the_kingship_predicate",
+    "customer_prediction": false
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 92-100"
+  },
+  {
+   "vector_id": "bphs.p03.varga_tier.saptavarga",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga_tier_names"
+   ],
+   "inputs": {
+    "scheme": "saptavarga / dasavarga (2 to 10)"
+   },
+   "expected": {
+    "tier_names": [
+     "parijata (2)",
+     "uttama (3)",
+     "gopura (4)",
+     "simhasana (5)",
+     "paravata (6)",
+     "devaloka (7)",
+     "brahmaloka (8)",
+     "shakravahana (9)",
+     "shridhama (10)"
+    ],
+    "output_policy": "refused_for_the_kingship_predicate",
+    "customer_prediction": false
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 92-100"
+  },
+  {
+   "vector_id": "bphs.p03.varga_tier.shodasavarga",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga_tier_names"
+   ],
+   "inputs": {
+    "scheme": "shodasavarga (2 to 16)"
+   },
+   "expected": {
+    "tier_names": [
+     "bhedaka (2)",
+     "kusuma (3)",
+     "nagapushpa (4)",
+     "kanduka (5)",
+     "kerala (6)",
+     "kalpavriksha (7)",
+     "chandanavana (8)",
+     "purnachandra (9)",
+     "uchchaishrava (10)",
+     "dhanvantari (11)",
+     "suryakanta (12)",
+     "vidruma (13)",
+     "shakrasimhasana (14)",
+     "goloka (15)",
+     "shrivallabha (16)"
+    ],
+    "output_policy": "refused_for_the_kingship_predicate",
+    "customer_prediction": false
+   },
+   "provenance": "BPHS Subodhini 1899 purva 3 slokas 92-100"
+  },
+  {
+   "vector_id": "bphs.p03.varga.unmined",
+   "rule_ids": [
+    "jyotisha.bphs.p03.varga.unmined_disclosure"
+   ],
+   "inputs": {
+    "query": "which varga computation rules remain unread"
+   },
+   "expected": {
+    "unmined": [
+     "D16",
+     "D20",
+     "D24",
+     "D27",
+     "D40",
+     "D45"
+    ],
+    "blocked": false,
+    "reason": "unmined, not inaccessible - the pages are legible in the same scan",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "encoder's disclosure 2026-08-04"
+  }
+ ]
+}

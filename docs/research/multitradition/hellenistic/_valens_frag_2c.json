@@ -1,0 +1,1748 @@
+{
+  "fragment_id": "2c",
+  "assignment": "Vettius Valens Anthologiae Liber II capp. 27-36, Kroll 1908 printed pp. 94-114, PDF page indices 112-132",
+  "pages_read": [
+    112,
+    113,
+    114,
+    115,
+    116,
+    117
+  ],
+  "calibration_notes": [
+    "Kroll obelizes the title of II.27 itself: ⟨κζ´.⟩ Περὶ χρόνων ἐμπράκτων καὶ ἀπράκτων καὶ ζωῆς † τοῦ ἐκ τῶν κέντρων καὶ ἐπαναφορῶν (p. 94). The dagger stands immediately before τοῦ ἐκ τῶν κέντρων καὶ ἐπαναφορῶν, i.e. Kroll marks the genitive phrase as corrupt; the sense required is 'and of life, from the angles and the succedents'. Recorded verbatim in the rule.",
+    "II.28 p. 96 line 8: Kroll obelizes the word printed ἀλληλόσοά in 'δέδειχεν ἡμῖν † ἀλληλόσοά τε καὶ αὐτὸς ἰδίᾳ ἄλλα ἐξευρών'. Apparatus at l. 9 gives αὐτοίδια S; at l. 12 Kroll notes 'sequentia plurifariam corrupta'. Transcribed as printed, with the obelus.",
+    "II.29 p. 97 line 14: obelus in 'καὶ εἰ κακοποιοὶ πάλιν ἔχουσι τοὺς ἐπιμερισμοὺς † ἄστροις ἐμπίπτοντες ἢ τετράγωνοι'.",
+    "II.29 p. 98 line 35-36: Kroll prints asterisks for a lacuna, 'ἐὰν μή τινα τῶν κακοποιῶν ἔχῃ ἐναντίον * * τῶν ζῳδίων ἢ τῶν φώτων ἐὰν ἐπικείμενος εἴη, γίνονται ἔξοδοι'.",
+    "kappa/chi fount trap handled throughout by lexicon: the glyph read as χ in κακοποιοί, κύριος, κλῆρος, καθόλου, ἔκκεντρος, ἐπίκεντρος, ἀπόκλιμα, κέντρων, κίνησις, ζῳδίων is κ; genuine χ retained in χρόνων, τύχης, σχήματα, ψυχή, καθυπερτερέω(-χ- never), σχηματισθέντες.",
+    "Iota subscript preserved in ζῳδίων / ζῴδιον / ζῳδίῳ, τῷ, ᾧ, πίπτῃ, ἔχῃ."
+  ],
+  "worked_nativities": [],
+  "unmined": "none",
+  "fragment_rules": [
+    {
+      "rule_id": "hel.valens.b2.active_inactive_times.method",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.27",
+        "technique": "chronocrator determination; times of good and bad fortune taken from the ascensional times of the sign or the planet's cyclic period",
+        "pdf_page_indices": [
+          112
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "question",
+            "operator": "equals",
+            "value": "timing of fortune, misfortune, irregularity or successful action"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "method",
+        "chapter_title_greek": "⟨κζ´.⟩ Περὶ χρόνων ἐμπράκτων καὶ ἀπράκτων καὶ ζωῆς † τοῦ ἐκ τῶν κέντρων καὶ ἐπαναφορῶν.",
+        "chapter_title_rendering": "(27.) On active and inactive times, and of life † the (times) from the angles and the succedents. [Kroll obelizes the phrase after ζωῆς]",
+        "greek": "Οἱ δὲ χρόνοι καταληπτέοι ἔσονται τῆς εὐτυχίας ἢ δυστυχίας ἀνωμαλίας τε καὶ εὐπραξίας ἐκ τῆς ἑκάστου ζῳδίου ἀναφορᾶς ἢ τῆς τοῦ ἀστέρος κυκλικῆς περιόδου.",
+        "engine_rendering": "The times of good fortune or of misfortune, and of irregularity and of successful action, are to be grasped from the ascensional time of each sign, or from the cyclic period of the star.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "steps": [
+          "take the ascensional time (ἀναφορά) of the sign concerned, or",
+          "take the cyclic period (κυκλικὴ περίοδος) of the star concerned"
+        ],
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVII",
+          "location": "Kroll 1908 p. 94 lines 16-20 (chapter title and opening) (PDF page indices 112)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.active_inactive_times.significators",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.27",
+        "technique": "choice of significator by topic: life vs action and reputation",
+        "pdf_page_indices": [
+          112
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "topic_of_inquiry",
+            "operator": "in",
+            "value": [
+              "length_of_life",
+              "action_and_reputation"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "significator_selection",
+        "greek": "περὶ μὲν γὰρ χρόνων ζωῆς ζητοῦντας δεῖ προσέχειν τῷ ὡροσκόπῳ καὶ Σελήνῃ ἢ τῷ ζῳδίῳ, ἐφ᾽ ᾧ οἱ κύριοι πάρεισι, πρὸς δὲ πρᾶξιν καὶ δόξαν τῷ κλήρῳ τῆς τύχης καὶ δαίμονι καὶ Ἡλίῳ ἢ συνόδῳ ἢ πανσελήνῳ τῷ τε ὑψώματι καὶ τῷ τούτου κυρίῳ.",
+        "engine_rendering": "For those inquiring about the times of life one must attend to the Ascendant and the Moon, or to the sign in which their lords are present; but for action and reputation, to the Lot of Fortune and to Daimon and to the Sun, or to the (prenatal) conjunction or full moon, and to the exaltation and to the lord of that exaltation.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "significators_for_life": [
+          "Ascendant",
+          "Moon",
+          "the sign occupied by their lords"
+        ],
+        "significators_for_action_and_reputation": [
+          "Lot of Fortune",
+          "Lot of Daimon",
+          "Sun",
+          "prenatal syzygy (conjunction or full moon)",
+          "the exaltation",
+          "the lord of the exaltation"
+        ],
+        "customer_prediction": false,
+        "restricted_clauses": [
+          {
+            "greek": "περὶ μὲν γὰρ χρόνων ζωῆς ζητοῦντας δεῖ προσέχειν τῷ ὡροσκόπῳ καὶ Σελήνῃ",
+            "output_policy": "refused",
+            "output_policy_reason": "the length-of-life branch of this significator rule yields a number of years for a person; this product does not deliver lifespan predictions"
+          }
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVII",
+          "location": "Kroll 1908 p. 94 lines 20-24 (PDF page indices 112)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.active_inactive_times.order_of_rulership",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.27",
+        "technique": "order in which planets take rulership of the successive times, by angle / succedent / cadent",
+        "pdf_page_indices": [
+          112
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart_position",
+            "operator": "in",
+            "value": [
+              "angle",
+              "succedent",
+              "cadent"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "ordered_sequence",
+        "greek": "ἄρξουσι δὲ τοῦ πρώτου χρόνου κυριεύειν οἱ ἐπόντες πρώτῳ λόγῳ τῷ ὡροσκόπῳ, ἔπειτα οἱ ἐν τῷ μεσουρανήματι ἢ ἐν τῷ δύνοντι ἢ ἐν τῷ ὑπογείῳ. ἐὰν δὲ οἱ τόποι οὗτοι τύχωσι κενοί, οἱ ἐπὶ τῶν ἐπαναφορῶν· τούτων δὲ κενῶν τυχόντων οἱ ἐν τοῖς ἀποκλίμασι, καὶ εἰ μὴ τοσοῦτον σθένουσι, πλὴν τὰ πράγματα διοικονομήσουσι.",
+        "engine_rendering": "Those who are upon the Ascendant will begin, in the first reckoning, to rule the first time; then those in the Midheaven, or in the Descendant, or in the subterranean angle. But if these places happen to be empty, then those upon the succedents; and if these too are empty, those in the cadents — and even if they are not so strong, they will nevertheless administer the affairs.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "order": [
+          "planets on the Ascendant",
+          "planets on the Midheaven, Descendant or subterranean angle",
+          "planets on the succedent places (ἐπαναφοραί)",
+          "planets in the cadents (ἀποκλίματα) — weaker, but still administering affairs"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVII",
+          "location": "Kroll 1908 p. 94 lines 24-30 (PDF page indices 112)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.active_inactive_times.proportional_allotment",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.27",
+        "technique": "planets do not take the whole ascension or period but a share proportional to the part of the sign they hold",
+        "pdf_page_indices": [
+          112,
+          113
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planet_placement",
+            "operator": "in",
+            "value": [
+              "angular",
+              "succedent"
+            ]
+          },
+          {
+            "fact": "planet_condition",
+            "operator": "equals",
+            "value": "properly configured and found oriental"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "computation",
+        "greek": "πρότερον δὲ οἱ τοῦ ὡροσκόπου ἢ τοῦ μεσουρανήματος ἀπονενευκότες μεριοῦσιν, εἶθ᾽ οὕτως οἱ ἐν τοῖς λοιποῖς ἀποκλίμασιν· οὐ μέντοι τελέας τὰς ἀναφορὰς ἢ τὰς περιόδους, ἀλλ᾽ ὅσον μέρος τοῦ ζῳδίου διακατέχειν δύνανται, πρὸς ἀναλογίαν τοσοῦτον καὶ τῆς περιόδου καὶ τῆς ἀναφορᾶς. οἱ γὰρ ἐπὶ τῶν κέντρων ἢ τῶν ἐπαναφορῶν οἰκείως σχηματισθέντες τε καὶ ἀνατολικοὶ εὑρεθέντες, μάλιστα δὲ λόγον ἔχοντες πρὸς τὰ τῆς γενέσεως πράγματα ἅτινά ἐστιν, ἐπὰν τῶν προκειμένων τόπων δεσπόζωσι, καὶ τὴν τοῦ ζῳδίου ἀναφορὰν καὶ τὴν ἰδίαν περίοδον μεριοῦσιν ἢ τὴν ἐφ᾽ ὧν πάρεισι ζῳδίων οἱ κύριοι ἀναφορὰν καὶ περίοδον.",
+        "engine_rendering": "Those inclined away from the Ascendant or the Midheaven will distribute first, and after them those in the remaining cadents; not, however, the complete ascensions or periods, but as great a part of the sign as they are able to hold fast, so much of the period and of the ascension in proportion. For those on the angles or on the succedents who are properly configured and found oriental — and especially those having a bearing on whatever the affairs of the nativity are — whenever they are masters of the places set forth, will distribute both the ascension of the sign and their own period, or (in the case of the lords) the ascension and period of the signs in which they are present.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVII",
+          "location": "Kroll 1908 p. 94 line 30 - p. 95 line 10 (PDF page indices 112, 113)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.active_inactive_times.by_topic_place_and_lord",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.27",
+        "technique": "same method extended to every topical place and its lord; minor period of the lord first, then of the overlying planet, then the sign's ascension",
+        "pdf_page_indices": [
+          113
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "topic",
+            "operator": "in",
+            "value": [
+              "livelihood",
+              "siblings",
+              "parents",
+              "children"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "method",
+        "greek": "Ὁμοίως δὲ καὶ τοὺς λοιποὺς τόπους καὶ τοὺς δεσπότας ζητοῦντας δεῖ συγκρίνειν τοὺς χρόνους, οἷον περὶ βίου ἀδελφῶν γονέων τέκνων καὶ τὰ ἑξῆς, τοὺς καταβλάπτοντας ἀστέρας ἢ ὠφελοῦντας καὶ περὶ τίνων ἕκαστος δύναται ἀποτελεῖν, ἵνα μὴ περὶ τῶν αὐτῶν πλειστάκις γράφωμεν· πρόκεινται γὰρ αὐτῶν αἱ φύσεις, ὑπομιμνήσκομεν δὲ καὶ πάλιν ἐν τοῖς μετὰ ταῦτα. πρότερον μὲν οὖν χρὴ τοῦ κυρίου τὴν ἐλαχίστην περίοδον μερίζειν καὶ τὴν τοῦ ἐπικειμένου, εἶθ᾽ οὕτως τὴν ἀναφορὰν τοῦ ζῳδίου ἢ τὴν ἐφ᾽ ᾧ ὁ κύριος ἔπεστιν· ἄλλως τε καθὼς προείπαμεν σκοπεῖν τοὺς οἰκοδεσποτοῦντας τοῦ τριγώνου.",
+        "engine_rendering": "Likewise those inquiring into the remaining places and their masters must compare the times — for instance concerning livelihood, siblings, parents, children and so on — and which stars injure or benefit, and about what each is able to bring to completion, so that we may not write repeatedly about the same things; for their natures have been set out already, and we shall recall them again in what follows. First, then, one must distribute the least period of the lord and that of the overlying star, and after that the ascension of the sign, or of the sign upon which the lord stands; and besides, as we said before, to look to the rulers of the trigon.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "steps": [
+          "distribute the least period (ἐλαχίστη περίοδος) of the lord of the topical place",
+          "then the least period of the planet overlying that place",
+          "then the ascensional time of the sign, or of the sign the lord occupies",
+          "then consult the trigon rulers"
+        ],
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVII",
+          "location": "Kroll 1908 p. 95 lines 11-20 (PDF page indices 113)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.active_inactive_times.trigon_lords_verdict",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.27",
+        "technique": "judgement of the whole run of times by the placement of the two trigon lords, with the Lot of Fortune as the saving exception",
+        "pdf_page_indices": [
+          113
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "trigon_lords_placement",
+            "operator": "equals",
+            "value": "both well fallen"
+          },
+          {
+            "fact": "trigon_lords_placement",
+            "operator": "equals",
+            "value": "partly well fallen"
+          },
+          {
+            "fact": "trigon_lords_placement",
+            "operator": "equals",
+            "value": "both fallen away"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "verdict_branches",
+        "greek": "ἐὰν μὲν γὰρ ἀμφότεροι καλῶς πέσωσιν, ἐπίδοξα καὶ ἐπωφελῆ τὰ τῶν χρόνων γενήσεται· ἐὰν δὲ ἀπὸ μέρους, ὁμοίως· ἐὰν δὲ παραπέσωσιν, ἐξ ἀρχῆς μέχρι τέλους ἀνώμαλος ἡ γένεσις ἔσται ἢ λύπαις καὶ κινδύνοις περιτραπήσεται, ἐκτὸς εἰ μὴ ὁ κλῆρος τῆς τύχης ἢ ὁ τούτου κύριος οἰκείως σχηματισθεὶς ἐν εὐπορίᾳ καὶ δόξῃ κατὰ τὴν ἰδίαν ὑπόστασιν καταστήσει τὴν γένεσιν.",
+        "engine_rendering": "For if both fall well, the matters of the times will be glorious and profitable; if partly, likewise in part; but if they fall away, the nativity will be irregular from beginning to end, or will be overturned by griefs and dangers — unless the Lot of Fortune or its lord, being properly configured, establishes the nativity in prosperity and repute according to its own foundation.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "branches": {
+          "both_trigon_lords_well_placed": "ἐπίδοξα καὶ ἐπωφελῆ τὰ τῶν χρόνων — glorious and profitable times",
+          "partly": "ὁμοίως ἀπὸ μέρους — the same, but only in part",
+          "both_fallen_away": "ἀνώμαλος ἡ γένεσις ἐξ ἀρχῆς μέχρι τέλους — irregular from beginning to end, or overturned by griefs and dangers"
+        },
+        "exception_greek": "ἐκτὸς εἰ μὴ ὁ κλῆρος τῆς τύχης ἢ ὁ τούτου κύριος οἰκείως σχηματισθεὶς",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVII",
+          "location": "Kroll 1908 p. 95 lines 20-26 (PDF page indices 113)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.active_inactive_times.several_stars_one_sign",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.27",
+        "technique": "two or more planets in one sign; each period completes separately, the outcome is the blend; the sign's ascension operates alone and again with the period of the overlying star",
+        "pdf_page_indices": [
+          113
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_in_one_sign",
+            "operator": "greater_than_or_equal",
+            "value": 2
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "computation",
+        "greek": "ἐὰν δὲ δύο ἢ πλείους ἀστέρες ἐν ἑνὶ ζῳδίῳ τύχωσιν, ἑκάστου μὲν ⟨ἡ⟩ περίοδος κατὰ μόνας συμπληρουμένη ἐνεργήσει, τὸ δὲ ἀποτέλεσμα ἡ δύο ἢ τριῶν ἀστέρων σύγκρασις δηλώσει· ὁμοίως δὲ καὶ ἡ ἀναφορὰ τοῦ ζῳδίου συμπληρωθεῖσα κατὰ μόνας καὶ πάλιν σὺν τῇ περιόδῳ τοῦ ἐπικειμένου ἀστέρος ἢ τοῦ κυρίου ἐνεργήσει. ἐὰν δέ πως ἐκ τῶν ἀναφορῶν καὶ τῶν περιόδων οἱ τοιοῦτοι χρόνοι συντρέχωσιν ἢ ἀγαθοποιῶν ἢ κακοποιῶν ἀστέρων ἢ ζῳδίων, ἀμφότερα γενήσεται [οὐ] κατ᾽ ἐκεῖνον τὸν χρόνον τά τε φαῦλα καὶ τὰ ἀγαθά.",
+        "engine_rendering": "But if two or more stars happen to be in one sign, the period of each, completed by itself, will be operative, while the outcome will be shown by the blending of the two or three stars; and likewise the ascension of the sign, completed by itself and again together with the period of the overlying star or of the lord, will be operative. And if in some way, out of the ascensions and the periods, such times run together — whether of benefic or of malefic stars or signs — both will come about at that time, the bad things and the good.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "editorial_note": "Kroll brackets [οὐ] as an intrusion in the last clause.",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVII",
+          "location": "Kroll 1908 p. 95 lines 26-33 (PDF page indices 113)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel_hermippus.prior_authorities",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.28",
+        "technique": "the place of travel; what Petosiris and the 'famous king' (Nechepso) said, and Valens' judgement on it",
+        "pdf_page_indices": [
+          114
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "malefic_has_phasis_in_the_times",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "doctrine",
+        "chapter_title_greek": "⟨κη´.⟩ Περὶ ἀποδημίας ἐκ τῶν Ἑρμίππου.",
+        "chapter_title_rendering": "(28.) On travel abroad, from the works of Hermippus.",
+        "greek": "Τὸν περὶ ἀποδημίας τόπον δύσληπτον ὄντα οὔτε Πετόσιρις οὔτε ὁ γνώριμος βασιλεὺς ἐν τοῖς ὑπομνήμασιν ἑαυτῶν ἐξεῖπον, ἢ μόνον εἰς τὸν τόπον τοῦτον τοῦτο εἰρήκασιν· εἰς τοὺς χρόνους εἴ τις τῶν κακοποιῶν ἔχει φάσιν, ἐν ἀποδημίαις καὶ σκυλμοῖς ποιήσει τὴν γένεσιν. ὅ ἐστιν ἀληθές· περαιτέρω δὲ τούτων οὐδὲν ἄλλο εἰς τὸν περὶ ξένης τόπον ἔχουσιν.",
+        "engine_rendering": "The place concerning travel abroad, being hard to grasp, neither Petosiris nor the famous king declared in their own commentaries — or they said only this much about this place: if one of the malefics has a phasis at the times, it will make the nativity spent in travels and harassments. Which is true; but beyond this they have nothing else concerning the place of foreign parts.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "attribution": "Petosiris and ὁ γνώριμος βασιλεύς (the famous king, i.e. Nechepso); chapter drawn from Hermippus and from Abram (Ἄβραμος)",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVIII",
+          "location": "Kroll 1908 p. 96 lines 1-7 (chapter title and opening) (PDF page indices 114)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel_hermippus.configurations",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.28",
+        "technique": "Abram's theorems: the configurations that make a travelling nativity",
+        "pdf_page_indices": [
+          114
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "lights",
+            "operator": "equals",
+            "value": "setting"
+          },
+          {
+            "fact": "mars_regards_lot_of_fortune_into_cadent_of_mc",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "most_planets_in_the_subterranean_hemisphere",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "lord_of_fortune_in_lot_or_place_of_travel",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "mars_upon_or_regarding_lot_of_travel",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "ὁ δὲ θαυμασιώτατος Ἄβραμος ἐν τοῖς βιβλίοις αὐτοῦ τούτου τοῦ τόπου δέδειχεν ἡμῖν † ἀλληλόσοά τε καὶ αὐτὸς ἰδίᾳ ἄλλα ἐξευρών τε καὶ δοκιμάσας ἐπὶ τῶν ἀποδηματικῶν μάλιστα γενέσεων· αἵτινες ἔχουσι θεωρήματα τάδε. τὰ φῶτα δύνοντα, Ἄρης ἢ τὸν κλῆρον τῆς τύχης ὁρῶν εἰς τὸ ἀπόκλιμα τοῦ μεσουρανήματος ἢ τὴν Σελήνην ἢ τοὺς πλείστους τῶν ἀστέρων εἰς τὸ ὑπόγειον ἡμισφαίριον ἢ ⟨εἰ⟩ ὁ τῆς τύχης κύριος εἰς τὸν περὶ ξένης κλῆρον ἢ τὸν τόπον εὑρίσκοιτο ἢ καὶ διάμετρος πρὸς αὐτοὺς ἢ καὶ αὐτὴ ἡ τύχη πέσῃ, ὅπου ὁ κλῆρος ὁ περὶ ἀποδημίας, καὶ τῷ κλήρῳ δὲ Ἄρης ἢ ἐπικείμενος ἢ τὸν τόπον ὁρῶν, ἀποδηματικὰς ποιεῖ γενέσεις· ὁμοίως καὶ τὴν τύχην ἢ δαίμονα.",
+        "engine_rendering": "But the most admirable Abram in his books has shown us this place † [text corrupt] having himself also discovered other things privately and tested them especially upon travelling nativities; which have the following theorems. The lights setting; Mars, or (a planet) regarding the Lot of Fortune, into the cadent of the Midheaven; or the Moon, or most of the stars, into the subterranean hemisphere; or if the lord of Fortune should be found in the lot or the place of foreign parts, or in opposition to them; or if Fortune herself falls where the lot of travel is; and if Mars is either upon the lot or regarding the place — this makes travelling nativities; and likewise (regard) Fortune or Daimon.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXVIII",
+          "location": "Kroll 1908 p. 96 lines 7-18 (PDF page indices 114)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.lot_of_foreign_travel",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "formula for the Lot of Foreign Travel (ὁ περὶ ξένης κλῆρος)",
+        "pdf_page_indices": [
+          114
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "lot_computed",
+            "operator": "equals",
+            "value": "lot_of_foreign_travel"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "lot_formula",
+        "chapter_title_greek": "⟨κθ´.⟩ Περὶ ἀποδημίας.",
+        "chapter_title_rendering": "(29.) On travel abroad.",
+        "greek": "Ἀριθμεῖται δὲ ὁ περὶ ξένης κλῆρος ἀπὸ Κρόνου ἐπὶ Ἄρεα καὶ τὰ ἴσα ἀπὸ ὡροσκόπου.",
+        "engine_rendering": "The lot concerning foreign parts is counted from Saturn to Mars, and the same amount from the Ascendant.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "formula": {
+          "lot": "Lot of Foreign Travel / ὁ περὶ ξένης κλῆρος",
+          "from": "Saturn",
+          "to": "Mars",
+          "projected_from": "Ascendant",
+          "sect_reversal_stated": false,
+          "note": "Valens states one formula only; no day/night reversal is printed here."
+        },
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 96 lines 20-21 (chapter title and opening) (PDF page indices 114)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.abram_attribution",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "Valens' methodological statement: he adds his own observations and credits Abram rather than appropriating others' labours",
+        "pdf_page_indices": [
+          114
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "source_of_technique",
+            "operator": "equals",
+            "value": "Abram (Ἄβραμος)"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "attribution",
+        "greek": "καὶ ταῦτα μὲν τὰ θεωρήματα εὐκινήτους γενέσεις ποιεῖ· τίσι δὲ καὶ καιροῖς καὶ χρόνοις ἔσονται ⟨αἱ⟩ ἀποδημίαι ταῖς τοιαύταις γενέσεσι, τὰ σχήματα δηλώσει τὰ ὑπὸ Ἀβράμου λεγόμενα. προσυποτάξομεν δὲ καὶ τὰ ἐμοὶ αὐτῷ τηρηθέντα· μηδεὶς δὲ ἡμᾶς τῶν ἐντυγχανόντων μεμφέσθω, εἰ τοὺς ἑτέρων πόνους καὶ τηρήσεις μὴ ἰδιοποιοῦμεν ὥς τινες, μαρτυροῦμεν δὲ τοῖς ἀνδράσιν. ἔλθωμεν δὲ εἰς τὸ προκείμενον.",
+        "engine_rendering": "These theorems, then, make easily-moved nativities; but by what occasions and times the travels will come to such nativities, the configurations stated by Abram will show. And we shall subjoin also the things observed by me myself. Let none of our readers blame us if we do not, as some do, make other men's labours and observations our own, but bear witness to those men. Let us come to the matter before us.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 96 lines 21-27 (PDF page indices 114)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.distribution_from_daimon",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "Abram's distribution (ἐπιμερισμός) of the active times from the Lot of Daimon by the minor cycle of its lord",
+        "pdf_page_indices": [
+          114,
+          115
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "time_lord_system",
+            "operator": "equals",
+            "value": "distribution of active times from the Lot of Daimon"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "time_lord_procedure",
+        "greek": "Ἐπὶ γὰρ τῆς διαιρέσεως τῶν χρόνων τῶν πρακτικῶν κατὰ Ἄβραμον τῶν ἀπὸ τοῦ δαίμονος μεριζομένων (μερίζει γὰρ οὗτος), ὅπου δἂν ὁ κλῆρος ὁ περὶ δαίμονος πίπτῃ ἐπὶ γενέσεως, τοῦ ζῳδίου ὅπου εὑρίσκεται ὁ κλῆρος τὸν κύριον ὅρα, πόσων ἐτῶν τυγχάνει αὐτοῦ ὁ μικρὸς κύκλος, καὶ ταῦτα μέριζε εἰς τὰ ιβ´ ζῴδια ἀπ᾽ αὐτοῦ τοῦ δαίμονος ἀρχὴν ποιούμενος τοῦ μερισμοῦ κατὰ τὰ ἑξῆς ζῴδια· εἶτα ὅταν πληρωθῇ αὐτοῦ ὁ κύκλος, τὸν τοῦ ἑξῆς ζῳδίου τοῦ δαίμονος κύριον· πάλιν ὅρα, πόσων ἐτῶν αὐτοῦ ὁ κύκλος τυγχάνει, καὶ τούτου ὁμοίως μέριζε· καὶ τὸν ἑξῆς πάλιν, εἰ ἔχει ζωῆς ἔτη ἡ γένεσις ὑποκείμενα.",
+        "engine_rendering": "For in the division of the active times according to Abram, which are distributed from Daimon (for this lot distributes): wherever the lot of Daimon falls in the nativity, look at the lord of the sign in which the lot is found, of how many years its lesser cycle is, and distribute these over the twelve signs, making the beginning of the distribution from Daimon itself and going in the order of the signs. Then, when its cycle is fulfilled, take the lord of the sign next after Daimon; look again of how many years its cycle is, and distribute it likewise; and again the next, if the nativity has years of life still remaining to it.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "steps": [
+          "locate the Lot of Daimon in the nativity",
+          "take the lord of the sign in which Daimon falls",
+          "take that lord's lesser cycle (μικρὸς κύκλος) in years",
+          "distribute those years over the twelve signs beginning from the sign of Daimon, in zodiacal order",
+          "when the cycle is exhausted, take the lord of the sign next after Daimon and repeat",
+          "continue while the nativity still has years of life"
+        ],
+        "customer_prediction": false,
+        "output_policy_note": "The procedure itself is renderable; the closing clause εἰ ἔχει ζωῆς ἔτη ἡ γένεσις ὑποκείμενα presupposes a lifespan figure and is quarantined below.",
+        "restricted_clauses": [
+          {
+            "greek": "εἰ ἔχει ζωῆς ἔτη ἡ γένεσις ὑποκείμενα",
+            "output_policy": "refused",
+            "output_policy_reason": "presupposes an allotted number of years of life for the native; this product does not deliver lifespan predictions"
+          }
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 96 line 28 - p. 97 line 6 (PDF page indices 114, 115)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.epimerismos_gives_foreign_residence",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "when the distributed time falls on a sign or lot signifying travel, foreign residence (ξενιτεία) follows",
+        "pdf_page_indices": [
+          115
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "sign_holding_the_times",
+            "operator": "equals",
+            "value": "place indicative of travel"
+          },
+          {
+            "fact": "sign_holding_the_times",
+            "operator": "equals",
+            "value": "lot of travel, or its opposition or square"
+          },
+          {
+            "fact": "malefics_out_of_the_angles_in_the_signs_receiving_the_distribution",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "lord_of_the_distribution",
+            "operator": "in",
+            "value": [
+              "malefic out of the angles",
+              "malefic averted from the sign",
+              "malefic angular"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "εἰ τὸ ζῴδιον οὖν, ὅπου οἱ χρόνοι αὐτοῦ τυγχάνουσιν, ἔχει τόπον ἀποδημίας δηλωτικὸν ἢ τὸν περὶ ἀποδημίας κλῆρον ἢ τὸ διάμετρον αὐτοῦ ἢ τετράγωνον ἢ εἰς τὰ ζῴδια τὰ λαμβάνοντα ἀπ᾽ αὐτοῦ τὸν ἐπιμερισμὸν πίπτωσιν οἱ ἀστέρες ὕστεροι τῆς καταβολῆς μάλιστα κακοποιοὶ ἔκκεντροι, ξενιτείας παρέχουσιν. ὁ τοῦ ἐπιμερισμοῦ κύριος τοῦ ζῳδίου ἐὰν ἔκκεντρος ᾖ ἢ ἀπόστροφος τοῦ ζῳδίου κακοποιὸς ὤν, ξενιτείαν ἐπιποιεῖ· καὶ ἐὰν ἐπίκεντρος ᾖ, ποιήσει. καὶ εἰ κακοποιοὶ πάλιν ἔχουσι τοὺς ἐπιμερισμοὺς † ἄστροις ἐμπίπτοντες ἢ τετράγωνοι, ξενιτείας παρέχουσι.",
+        "engine_rendering": "If, then, the sign in which its times fall has a place indicative of travel, or the lot concerning travel, or the opposition or square of it; or if into the signs which receive the distribution from it there fall stars later than the foundation, especially malefics out of the angles — they furnish foreign residence. And the lord of the distribution of the sign, if it is out of the angles, or averted from the sign, being a malefic, produces foreign residence; and if it is angular, it will do so too. And if again malefics hold the distributions, † falling into the stars, or square, they furnish foreign residences.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 97 lines 6-15 (PDF page indices 115)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.benefic_taking_distribution",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "a benefic taking the distribution but found in opposition produces journeys and movements",
+        "pdf_page_indices": [
+          115
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planet_taking_the_distribution",
+            "operator": "equals",
+            "value": "benefic"
+          },
+          {
+            "fact": "position",
+            "operator": "equals",
+            "value": "found at the opposition in the nativity"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "ἐὰν δὲ ἀγαθοποιὸς αὐτὸν τὸν ἐπιμερισμὸν λάβῃ, εὑρεθῇ δὲ ἐπὶ τῆς γενέσεως τοῦ διαμέτρου, ἀποδημίας καὶ κινήσεις ἐμποιεῖ τῷ γεννωμένῳ.",
+        "engine_rendering": "But if a benefic takes the distribution itself, and is found at the opposition in the nativity, it produces journeys and movements for the native.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 97 lines 15-17 (PDF page indices 115)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.lords_of_signs_averted",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "lords of the signs holding the times, when averted, opposed, overcome or out of the angles, make the signs furnish foreign residence",
+        "pdf_page_indices": [
+          115
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "lord_of_sign_holding_times",
+            "operator": "in",
+            "value": [
+              "averted (ἀπόστροφος)",
+              "opposed (ἐναντίος)",
+              "overcome (καθυπερτερούμενος)",
+              "out of the angles (ἔκκεντρος)"
+            ]
+          },
+          {
+            "fact": "malefics_opposed_regarding_the_lights",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "Ἐπὰν οἱ κύριοι πάλιν τῶν ζῳδίων τοὺς χρόνους ἔχοντες ἢ τὴν ἐπιδιαίρεσιν ἀπόστροφοι τύχωσι τῶν ζῳδίων ἢ ἐναντίοι ἢ καθυπερτερούμενοι ἢ ἔκκεντροι, ξενιτείας παρέχουσι τὰ ζῴδια. ἐναντίων κακοποιῶν μάλιστα τὰ φῶτα θεωρούντων ἐν τοῖς σεληνιακοῖς ἢ ἡλιακοῖς τὰς ἀποδημίας ποιεῖ.",
+        "engine_rendering": "When again the lords of the signs which hold the times, or the subdivision, happen to be averted from the signs, or opposed, or overcome, or out of the angles, the signs furnish foreign residences. And with opposed malefics especially regarding the lights, it makes the journeys in the lunar or solar (periods).",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 97 lines 17-22 (PDF page indices 115)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.lord_of_sign_of_times",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "lord of the sign of the times out of the angles or opposite it makes movements or journeys; the lot of travel falling there or in its opposition or square",
+        "pdf_page_indices": [
+          115
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "lord_of_sign_of_times",
+            "operator": "in",
+            "value": [
+              "out of the angles",
+              "opposite that sign"
+            ]
+          },
+          {
+            "fact": "lot_of_travel",
+            "operator": "in",
+            "value": [
+              "in that sign",
+              "in its opposition",
+              "in its square"
+            ]
+          },
+          {
+            "fact": "lord_of_sign_of_times",
+            "operator": "in",
+            "value": [
+              "in its own place (ἰδιοτοπῇ)",
+              "in the squares"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation_with_negative_branch",
+        "greek": "ἐὰν τοῦ ζῳδίου ὅπου οἱ χρόνοι εἰσὶν ὁ κύριος ἔκκεντρος ᾖ ἢ ἐναντίος αὐτοῦ ᾖ, ἢ κινήσεις ἢ ἀποδημίας ποιεῖ, εἰ ὁ κλῆρος ὁ περὶ ἀποδημίας εἰς αὐτὸ πέσῃ ἢ εἰς τὸ διάμετρον αὐτοῦ ἢ τετράγωνον. ἐὰν δὲ ἰδιοτοπῇ ἢ ἐν τοῖς τετραγώνοις εὑρίσκηται, οὐ δίδωσιν ἀποδημίας.",
+        "engine_rendering": "If the lord of the sign in which the times are is out of the angles, or is opposite to it, it makes either movements or journeys — if the lot concerning travel falls into that sign, or into its opposition or square. But if it is in its own place, or is found in the squares, it does not give journeys.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 97 lines 22-26 (PDF page indices 115)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.mercury_and_venus_short_journeys",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "Mercury and Venus give not long journeys but swift returns",
+        "pdf_page_indices": [
+          115
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "time_lord",
+            "operator": "in",
+            "value": [
+              "Mercury",
+              "Venus"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "Ἑρμῆς μὲν οὖν καὶ Ἀφροδίτη οὐ δίδωσι μακρὰς ἀποδημίας, ἀλλὰ καὶ ταχείας τὰς ἐπανόδους.",
+        "engine_rendering": "Mercury, then, and Venus do not give long journeys, but rather swift returns.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 97 lines 26-28 (PDF page indices 115)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.two_lots_in_one_sign",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "Fortune and Daimon in one sign with the lot of travel opposed or square and a malefic on the place",
+        "pdf_page_indices": [
+          115
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "lot_of_fortune_and_lot_of_daimon",
+            "operator": "equals",
+            "value": "in one and the same sign"
+          },
+          {
+            "fact": "lot_of_travel",
+            "operator": "in",
+            "value": [
+              "opposed to that sign",
+              "square to that sign"
+            ]
+          },
+          {
+            "fact": "malefic_on_the_place",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "ἐὰν πίπτωσιν ἐν ἑνὶ ζῳδίῳ οἱ δύο κλῆροι, ὅ τε τῆς τύχης καὶ ὁ δαίμων, ἐναντίος δὲ ᾖ τῷ ζῳδίῳ ὁ περὶ ἀποδημίας κλῆρος ἢ τετράγωνος, ἐπῇ δὲ τῷ τόπῳ κακοποιός τις, ἐν ἀποδημίαις γίνονται οἱ γεννώμενοι. ὁμοίως καὶ τῷ ἀστέρι τῷ τοὺς χρόνους ἔχοντι ἢ ἐπὶ τοῦ κλήρου τῆς τύχης ἐφεστῶτι ⟨ἐναντίος⟩ ὁ τοῦ περὶ ἀποδημίας, κἂν οἱ δύο τόποι ὅ τε τῆς τύχης καὶ ὁ τοῦ δαίμονος ἐναντίοι πέσωσιν, ἢ κινήσεως αἴτιον τυγχάνει ἢ ἐν ἀποδημίαις ποιεῖ τὴν γένεσιν, μάλιστα [ἐὰν] ἐν τοῖς ἐκκέντροις ζῳδίοις.",
+        "engine_rendering": "If the two lots, that of Fortune and Daimon, fall in one sign, and the lot concerning travel is opposite to that sign or square to it, and some malefic is upon the place, the natives come to be in travels. Likewise if the lot of travel is opposite to the star that holds the times or to the star standing upon the Lot of Fortune; and if the two places, that of Fortune and that of Daimon, fall opposite, it is either a cause of movement or makes the nativity spent in travels — especially in the signs out of the angles.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 97 lines 28-35 (PDF page indices 115)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.no_travel_conditions",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "the conditions that withhold travel: lot of travel on the Ascendant/MC/succedent of MC, upper-earth signs holding the times except the 12th or 9th",
+        "pdf_page_indices": [
+          116
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "lot_of_travel",
+            "operator": "in",
+            "value": [
+              "Ascendant",
+              "Midheaven",
+              "succedent of the Midheaven"
+            ]
+          },
+          {
+            "fact": "signs_holding_the_times",
+            "operator": "equals",
+            "value": "above the earth, excluding the twelfth and ninth"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "negative_delineation",
+        "greek": "ἐὰν ὁ κλῆρος πάλιν ὁ περὶ ἀποδημίας εἰς τὸν ὡροσκόπον ἢ εἰς τὸ μεσουράνημα ἢ εἰς τὴν ἐπαναφορὰν τοῦ μεσουρανήματος πέσῃ μὴ ἀποδημητικῆς φύσει οὔσης τῆς γενέσεως ἢ τὰ προειρημένα σχήματα ἐχούσης, οὐ πολυαποδήμους ποιεῖ γενέσεις, σπανίως δὲ ἀποδημοῦσιν οἱ γεννώμενοι, μάλιστα μὴ ἔχοντες ἐναντίους κακοποιούς. καὶ ἐὰν τὰ ζῴδια τὰ ὑπέργεια τοὺς χρόνους ἔχῃ ἢ τῶν χρόνων τὴν ὑποδιαίρεσιν χωρὶς τοῦ δωδεκάτου ἢ ἐννάτου ζῳδίου, οὐ διδόασιν ἀποδημίας, τοῦ κλήρου μὴ εἰς τὸ αὐτὸ πίπτοντος μηδὲ ἐναντιουμένου κακοποιοῦ ἢ τῷ ζῳδίῳ ἐφεστῶτος χωρὶς ἀγαθοποιῶν.",
+        "engine_rendering": "If again the lot concerning travel falls on the Ascendant, or on the Midheaven, or on the succedent of the Midheaven, the nativity not being of a travelling nature nor having the aforesaid configurations, it does not make much-travelling nativities: the natives travel rarely, especially when they do not have malefics in opposition. And if the signs above the earth hold the times, or the subdivision of the times — excepting the twelfth or the ninth sign — they do not give journeys, provided the lot does not fall into the same place and no malefic is in opposition or standing upon the sign apart from benefics.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 98 lines 4-13 (PDF page indices 116)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.subterranean_places_frequent",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "subterranean places holding the times give travel; both lots with malefics upon or opposite give frequent journeys",
+        "pdf_page_indices": [
+          116
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "subterranean_places_hold_the_times",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "lot_of_fortune_and_lot_of_travel_have_malefics_upon_or_opposite",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "lot_of_fortune_and_lot_of_travel_together_in_the_subterranean_angle",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "Τὰ ὑπόγεια ἔχοντα τοὺς χρόνους δίδωσι, μάλιστα καὶ τοῦ περὶ ἀποδημίας κλήρου εἰς τὰ ὑπόγεια πίπτοντος. κἂν οἱ κλῆροι πάλιν ὅ τε τῆς τύχης καὶ ὁ περὶ ἀποδημίας κακοποιοὺς ἔχωσιν ἐφεστῶτας ἢ ἐναντίους, ἀποδημίας πυκνὰς παρέχουσιν. ἐὰν τῷ ζῳδίῳ τῷ τοὺς χρόνους ἔχοντι ἐναντίος τύχῃ ὁ τοῦ περὶ ξένης ὢν κύριος, ἐν ἀποδημίᾳ ποιήσει τὴν γένεσιν. ἐὰν δὲ τῷ κλήρῳ τῆς τύχης καὶ ὁ τοῦ περὶ ἀποδημίας ὁμοῦ πέσῃ εἰς τὸ ὑπόγειον κέντρον, πολυαποδήμους ποιεῖ, μάλιστα ὑπὸ κακοποιῶν θεωρούμενος ἢ κατεχόμενος ἢ ὑπὸ φωτός.",
+        "engine_rendering": "The subterranean places, holding the times, give (journeys), especially when the lot concerning travel also falls into the subterranean places. And if again the lots, that of Fortune and that concerning travel, have malefics standing upon them or in opposition, they furnish frequent journeys. If the lord of the place of foreign parts happens to be opposite the sign that holds the times, it will make the nativity spent in travel. And if the lot concerning travel falls together with the Lot of Fortune into the subterranean angle, it makes much-travelling natives, especially when regarded or held down by malefics, or by a light.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 98 lines 13-22 (PDF page indices 116)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.transient_journey",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "quarterly distributions and lesser distributions give a passing journey rather than emigration",
+        "pdf_page_indices": [
+          116
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "distribution",
+            "operator": "equals",
+            "value": "trimenial (τριμηνιαῖα) falling in a sign that was allotted"
+          },
+          {
+            "fact": "distribution",
+            "operator": "equals",
+            "value": "of a lesser (planet), or with Fortune opposite"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "ἐὰν εἴς τι τῶν ζῳδίων τῶν κληρωθέντων ἔχειν ἐπιμερισμοὺς τῶν χρόνων ἢ τριμηνιαῖα πίπτει, κινήσεις παρέχει, μάλιστα ἐὰν ἔχῃ ἐναντίον ἀστέρα κακοποιὸν ἢ τὰ φῶτα ἑστῶτα ὁμοίως καὶ τοῖς ὑπεργείοις τόποις τοῖς ἀποκεκλικόσιν ᾖ. εἰ ἐλάττων ἐπιμερισμὸς ἢ ἐναντίος τύχῃ, παροδικὴν ἀποδημίαν ἕξει ἡ γένεσις. καθυπέρτεροι δὲ ἀστέρες μάλιστα τοῖς ὑπογείοις οὖσι καθύγροις τοῖς ἔχουσιν ἐπιμερισμοὺς ἀποδημίας ποιοῦσι, μάλιστα ἐὰν ᾖ ἔχοντα τὰ φῶτα ἐπικείμενα τὰ ζῴδια ἢ κακοποιούς.",
+        "engine_rendering": "If into one of the signs allotted to hold the distributions of the times there falls also a three-month portion, it furnishes movements, especially if it has an opposing malefic star, or the lights standing likewise, and if it is among the places above the earth that are cadent. If the distribution is a lesser one, or Fortune is opposite, the nativity will have a passing journey. And stars overcoming, especially over the subterranean and moist signs that hold the distributions, make journeys — especially if the signs have the lights or malefics lying upon them.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 98 lines 22-29 (PDF page indices 116)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.annual_profection_reinforces",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "the configurations are more effective when the annual profection of the place also carries the motion of travel",
+        "pdf_page_indices": [
+          116
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "annual_profection_of_the_place",
+            "operator": "equals",
+            "value": "has a motion of travel"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation",
+        "greek": "Ἐξαιρέτως δὲ τὰ ὑποκείμενα σχήματα εὐεργέστερα ἔσται, εἰ ὁ καταγόμενος ἐνιαυτὸς τοῦ τόπου τῷ γεννωμένῳ κίνημα ἔχει ἀποδημίας εἴτε ἐκ καταβολῆς ἄνωθεν εἶεν ἔχοντες γενέσεις ἀποδημικὰς μάλιστα. ὅπου δ᾽ ἂν ὁ ἐπιμερισμὸς τῶν χρόνων πέσῃ τῶν καθολικῶν ἢ ⟨ἡ⟩ ὑποδιαίρεσις αὐτῶν, ἐκείνου [τε] τοῦ ζῳδίου ὁ κύριος εἴτε ἔκκεντρος ὢν εἴτε ἐπίκεντρος, ἐὰν μή τινα τῶν κακοποιῶν ἔχῃ ἐναντίον * * τῶν ζῳδίων ἢ τῶν φώτων ἐὰν ἐπικείμενος εἴη, γίνονται ἔξοδοι.",
+        "engine_rendering": "The underlying configurations will be especially more effective if the annual profection of the place carries for the native a motion of travel, whether they have from the beginning, from above, nativities that are travelling ones especially. And wherever the distribution of the general times falls, or their subdivision, the lord of that sign — whether out of the angles or angular — if it does not have some one of the malefics in opposition * * of the signs, or of the lights, if it should be lying upon it, departures come about.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "kroll_lacuna": "Kroll prints two asterisks for a lacuna after ἐναντίον (p. 98 l. 36).",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 98 lines 29-36 (PDF page indices 116)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.departures_and_delays",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "angular or cadent distributions give travelling departures; cadent distributions without opposition give only delay and unfulfilled intention",
+        "pdf_page_indices": [
+          117
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "planets_holding_the_distribution",
+            "operator": "in",
+            "value": [
+              "angular (ἐπίκεντροι)",
+              "cadent (ἀποκεκλικότες)"
+            ]
+          },
+          {
+            "fact": "distributions_fall_in_cadents_without_opposing_or_overcoming_sign",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "fact": "benefic_opposes_or_overcomes_the_malefics_that_hold_the_times",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation_with_negative_branch",
+        "greek": "ἐπὰν δὲ ἔχωσιν ἤτοι ἐπικέντρους ἤτοι ἀποκεκλικότας, διδόασιν ἀποδημητικὰς ἐξόδους· καὶ οἱ ἐφεστῶτες κακοποιοὶ τοῖς ζῳδίοις τοῖς ἀποκεκλικόσιν ἢ τοῖς ἔχουσι τοὺς χρόνους ἢ τὰς ὑποδιαιρέσεις ἀποδημίας διδόασι, τοῦ ἐνιαυτοῦ μάλιστα κίνημα ἔχοντος. ὅταν ὁ τοὺς χρόνους ἔχων εἰς τὸν περὶ ξένης τόπον ἢ κλῆρον ἐφεστὼς εὑρίσκηται ἢ τοῦ περὶ ξένης τόπου ὁ κύριος, ἀποδημίας παρέχει, μάλιστα εἰ κακοποιὸς ᾖ τῷ ἀφωτίστῳ τετράγωνος ἢ διάμετρος. ἐὰν οἱ ἐπιμερισμοὶ πάλιν τῶν χρόνων εἰς τὰ ἀποκλίματα πίπτωσι μὴ ἐχόντων ζῴδιον ἐναντίον ἢ καθυπερτεροῦν, οὐ παρέχουσιν ἀποδημίας, μελλησμὸν δὲ ἀποδημίας ὑπομενεῖ τις καὶ πρόθεσιν ἀσυντέλεστον. ὅταν τοῖς κακοποιοῖς τοὺς χρόνους ἢ τὸν ἐπιμερισμὸν ἔχουσιν ἀγαθοποιὸς ἐναντίος πίπτῃ ἢ καθυπερτερῇ ἢ συμπαρῶσιν ἐν τοῖς ὑπογείοις καὶ ἀποδημητικὸς ἐνιαυτὸς ἐμπέσῃ, μελλησμοὺς ἐμποιοῦσιν ἢ ἐγκοπὰς τῶν ἐξόδων.",
+        "engine_rendering": "When they have (the signs) either angular or cadent, they give travelling departures; and malefics standing upon the cadent signs, or upon those which hold the times or the subdivisions, give journeys, especially when the year has motion. When the star holding the times is found standing in the place or lot of foreign parts, or the lord of the place of foreign parts is, it furnishes journeys — especially if a malefic is square or opposite to the unilluminated one. If again the distributions of the times fall into the cadents, and they have no sign in opposition or overcoming, they do not furnish journeys: one will endure rather a postponement of travel and an intention left unaccomplished. When, with malefics holding the times or the distribution, a benefic falls opposite or overcomes, or they are present together in the subterranean places, and a travelling year falls in, they produce delays or checks of departures.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 99 lines 1-18 (PDF page indices 117)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.travel.mars_lord_of_both_lots",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.29",
+        "technique": "Mars as lord of both lots, averted or in moist signs; and Mars averted from the lots and lord of neither",
+        "pdf_page_indices": [
+          117
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "mars",
+            "operator": "equals",
+            "value": "lord of both lots and averted from the signs that give travel"
+          },
+          {
+            "fact": "mars",
+            "operator": "equals",
+            "value": "averted from the lot or from the place of foreign parts and lord of neither"
+          },
+          {
+            "fact": "benefics_upon_the_lots",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "delineation_with_negative_branch",
+        "greek": "ἐὰν ἡ τύχη εἰς τὸν περὶ ξένης τόπον ἐμπέσῃ ἢ πρὸς ἀλλήλους οἱ κλῆροι ἐναντίοι πίπτωσι κακοποιοῦ ἐφεστῶτος ἢ ἐναντίου, ἀποδημητικοὺς ποιεῖ μὴ συναναπλεκομένου, αὐτοῖς ἀγαθοποιοῦ ἢ ἐφεστῶτός τινος αὐτῶν. καὶ ἐὰν ὁ τῆς ξένης κύριος ἐναντίος [αὐτῷ ᾖ] αὐτῆς τύχῃ χωρὶς ἀγαθοποιῶν, Ἄρεως πάλιν ἐναντίου τῷ κλήρῳ τῆς τύχης ἢ τῷ περὶ ξένης πίπτοντος ἐφ᾽ ἑνὸς ἑστῶτος, ἐν ἀποδημίαις ποιεῖ ἱκαναῖς τὸν γεννώμενον. ἐὰν πάλιν Ἄρης ἀμφοτέρων τῶν κλήρων κύριος ὢν ἀπόστροφος πέσῃ τῶν ζῳδίων τῶν τὰς ἀποδημίας παρεχόντων ἢ εἰς κάθυγρα, ἀποδημητικὰς ποιεῖ τὰς γενέσεις. Ἄρης ἀπόστροφος τοῦ κλήρου ἢ τοῦ περὶ ξένης πεσὼν μηδενὸς αὐτῶν κύριος ὢν ἀποδημίας οὐ παρέχει, ἀλλὰ τὰ πλεῖστα ἐν πατρίδι διάγοντας ἢ μελλησμοὺς ἀποδημίας πάσχοντας. ὁμοίως καὶ ἐὰν οἱ κλῆροι ἀγαθοποιοὺς ἔχωσιν ἐφεστῶτας, οὐ ποιοῦσι φιλαποδήμους ἀλλὰ σπανίους.",
+        "engine_rendering": "If Fortune falls into the place of foreign parts, or the lots fall opposite to one another with a malefic standing upon or opposite, it makes travellers — provided no benefic is interwoven with them or standing upon one of them. And if the lord of the place of foreign parts happens to be opposite to it apart from benefics, and again with Mars opposite the Lot of Fortune or falling on the lot of foreign parts and standing on one of them, it makes the native spend his life in considerable travels. If again Mars, being lord of both lots, falls averted from the signs that furnish journeys, or into moist signs, it makes the nativities travelling ones. But Mars fallen averted from the lot or from the place of foreign parts, being lord of neither of them, does not furnish journeys, but rather natives who pass most of their time in their homeland or who suffer postponements of travel. Likewise if the lots have benefics standing upon them, they do not make travel-lovers but rare travellers.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. XXIX",
+          "location": "Kroll 1908 p. 99 lines 18-30 (PDF page indices 117)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    }
+  ],
+  "fragment_vectors": [
+    {
+      "vector_id": "valens.b2.c27.method",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.method"
+      ],
+      "inputs": {
+        "question": "timing of fortune, misfortune, irregularity or successful action"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.27",
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 94, PDF page index 112, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.significators",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.significators"
+      ],
+      "inputs": {
+        "topic_of_inquiry": "action_and_reputation"
+      },
+      "expected": {
+        "greek_present": true,
+        "significators_include": "Lot of Fortune",
+        "restricted_clause_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 94, PDF page index 112, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.order_ascendant_first",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.order_of_rulership"
+      ],
+      "inputs": {
+        "chart_position": "angle",
+        "note": "planets upon the Ascendant rule the first time"
+      },
+      "expected": {
+        "greek_present": true,
+        "first_in_order": "planets on the Ascendant",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 94, PDF page index 112, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.proportional_allotment",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.proportional_allotment"
+      ],
+      "inputs": {
+        "planet_placement": "angular",
+        "planet_condition": "properly configured and found oriental"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.27",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 pp. 94-95, PDF page indices 112-113, read from 300dpi page images"
+    },
+    {
+      "vector_id": "valens.b2.c27.by_topic",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.by_topic_place_and_lord"
+      ],
+      "inputs": {
+        "topic": "siblings"
+      },
+      "expected": {
+        "greek_present": true,
+        "first_step": "distribute the least period (ἐλαχίστη περίοδος) of the lord of the topical place",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 95, PDF page index 113, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.trigon_lords_both_fallen",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.trigon_lords_verdict"
+      ],
+      "inputs": {
+        "trigon_lords_placement": "both fallen away"
+      },
+      "expected": {
+        "greek_present": true,
+        "branch": "both_fallen_away",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 95, PDF page index 113, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.three_stars_one_sign",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.several_stars_one_sign"
+      ],
+      "inputs": {
+        "planets_in_one_sign": 3
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.27",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 95, PDF page index 113, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c28.prior_authorities",
+      "rule_ids": [
+        "hel.valens.b2.travel_hermippus.prior_authorities"
+      ],
+      "inputs": {
+        "malefic_has_phasis_in_the_times": true
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.28",
+        "attribution_names_petosiris": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c28.lights_setting",
+      "rule_ids": [
+        "hel.valens.b2.travel_hermippus.configurations"
+      ],
+      "inputs": {
+        "lights": "setting"
+      },
+      "expected": {
+        "greek_present": true,
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.lot_of_travel_formula",
+      "rule_ids": [
+        "hel.valens.b2.travel.lot_of_foreign_travel"
+      ],
+      "inputs": {
+        "lot_computed": "lot_of_foreign_travel"
+      },
+      "expected": {
+        "greek_present": true,
+        "formula_from": "Saturn",
+        "formula_to": "Mars",
+        "formula_projected_from": "Ascendant",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.abram_attribution",
+      "rule_ids": [
+        "hel.valens.b2.travel.abram_attribution"
+      ],
+      "inputs": {
+        "source_of_technique": "Abram (Ἄβραμος)"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.distribution_from_daimon",
+      "rule_ids": [
+        "hel.valens.b2.travel.distribution_from_daimon"
+      ],
+      "inputs": {
+        "time_lord_system": "distribution of active times from the Lot of Daimon"
+      },
+      "expected": {
+        "greek_present": true,
+        "step_count": 6,
+        "restricted_clause_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 pp. 96-97, PDF page indices 114-115, read from 300dpi page images"
+    },
+    {
+      "vector_id": "valens.b2.c29.epimerismos_xeniteia",
+      "rule_ids": [
+        "hel.valens.b2.travel.epimerismos_gives_foreign_residence"
+      ],
+      "inputs": {
+        "sign_holding_the_times": "lot of travel, or its opposition or square"
+      },
+      "expected": {
+        "greek_present": true,
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.benefic_distribution",
+      "rule_ids": [
+        "hel.valens.b2.travel.benefic_taking_distribution"
+      ],
+      "inputs": {
+        "planet_taking_the_distribution": "benefic",
+        "position": "found at the opposition in the nativity"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.lords_averted",
+      "rule_ids": [
+        "hel.valens.b2.travel.lords_of_signs_averted"
+      ],
+      "inputs": {
+        "lord_of_sign_holding_times": "averted (ἀπόστροφος)"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.lord_of_sign_of_times",
+      "rule_ids": [
+        "hel.valens.b2.travel.lord_of_sign_of_times"
+      ],
+      "inputs": {
+        "lord_of_sign_of_times": "in its own place (ἰδιοτοπῇ)"
+      },
+      "expected": {
+        "greek_present": true,
+        "negative_branch_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.mercury_venus",
+      "rule_ids": [
+        "hel.valens.b2.travel.mercury_and_venus_short_journeys"
+      ],
+      "inputs": {
+        "time_lord": "Venus"
+      },
+      "expected": {
+        "greek_present": true,
+        "outcome": "swift returns, not long journeys",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.two_lots_one_sign",
+      "rule_ids": [
+        "hel.valens.b2.travel.two_lots_in_one_sign"
+      ],
+      "inputs": {
+        "lot_of_fortune_and_lot_of_daimon": "in one and the same sign",
+        "lot_of_travel": "square to that sign",
+        "malefic_on_the_place": true
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.no_travel",
+      "rule_ids": [
+        "hel.valens.b2.travel.no_travel_conditions"
+      ],
+      "inputs": {
+        "lot_of_travel": "Midheaven"
+      },
+      "expected": {
+        "greek_present": true,
+        "type": "negative_delineation",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.subterranean_frequent",
+      "rule_ids": [
+        "hel.valens.b2.travel.subterranean_places_frequent"
+      ],
+      "inputs": {
+        "subterranean_places_hold_the_times": true
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.transient_journey",
+      "rule_ids": [
+        "hel.valens.b2.travel.transient_journey"
+      ],
+      "inputs": {
+        "distribution": "of a lesser (planet), or with Fortune opposite"
+      },
+      "expected": {
+        "greek_present": true,
+        "outcome": "παροδικὴ ἀποδημία — a passing journey",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.annual_profection",
+      "rule_ids": [
+        "hel.valens.b2.travel.annual_profection_reinforces"
+      ],
+      "inputs": {
+        "annual_profection_of_the_place": "has a motion of travel"
+      },
+      "expected": {
+        "greek_present": true,
+        "kroll_lacuna_recorded": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.delays",
+      "rule_ids": [
+        "hel.valens.b2.travel.departures_and_delays"
+      ],
+      "inputs": {
+        "distributions_fall_in_cadents_without_opposing_or_overcoming_sign": true
+      },
+      "expected": {
+        "greek_present": true,
+        "outcome": "μελλησμὸς ἀποδημίας — postponement of travel, intention unaccomplished",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 99, PDF page index 117, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.mars_both_lots",
+      "rule_ids": [
+        "hel.valens.b2.travel.mars_lord_of_both_lots"
+      ],
+      "inputs": {
+        "mars": "averted from the lot or from the place of foreign parts and lord of neither"
+      },
+      "expected": {
+        "greek_present": true,
+        "negative_branch_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 99, PDF page index 117, read from a 300dpi page image"
+    }
+  ]
+}

@@ -1,0 +1,4407 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-05",
+ "tradition_id": "indian_jyotisha",
+ "source_pack_id": "parasara_bphs_subodhini_1899_strength_v1",
+ "status": "research_vectors_awaiting_independent_sanskrit_review. The arithmetic vectors are stronger than the usual delineation vector: where the 1899 printing works its own example, the vector carries the printed inputs and the printed result, so a failure is a failure against the SOURCE and not against the encoder's reading of it. Every rendering remains engine_translation_unreviewed.",
+ "source_ids": [
+  "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+  "jyotisha_bphs_subodhini_1899_archive"
+ ],
+ "required_expansion_before_implementation": [
+  "independent Sanskrit review of every cited sloka before any rule is promoted out of research_only",
+  "the engine does not compute exact local sunrise/sunset, ghati-based ishta-kala, day and night length, or the sayana (tropical) longitude required by natonnata-bala, tribhaga-bala, varsha/masa/dina/hora-bala and ayana-bala; these four kala-bala limbs and ayana-bala are unevaluable until those inputs exist",
+  "the engine does not compute madhyama (mean) longitudes or sighrocca, which cheshta-bala requires",
+  "collate the saptavargaja values and the required-minimum table against the Sharma and Santhanam recensions, which print different numbers"
+ ],
+ "vectors": [
+  {
+   "vector_id": "bphs.u02.sadbala.six.enumeration",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sadbala.six_components"
+   ],
+   "inputs": {
+    "query": "which balas does this recension count"
+   },
+   "expected": {
+    "components": [
+     "sthana_bala",
+     "dig_bala",
+     "kala_bala",
+     "cheshta_bala",
+     "naisargika_bala",
+     "drik_bala"
+    ],
+    "signed_component": "drik_bala",
+    "count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on slokas 1-2"
+  },
+  {
+   "vector_id": "bphs.u02.drkbala.wk.6rasi",
+   "rule_ids": [
+    "jyotisha.bphs.u02.drkbala.arc_to_drsti_value"
+   ],
+   "inputs": {
+    "aspecting_rasi_deg": "3|5|2|1",
+    "aspected_rasi_deg": "9|7|5|43",
+    "arc_degrees": 182.0617
+   },
+   "expected": {
+    "drsti_virupas_sexagesimal": "58|58|09",
+    "case": "remainder over 6 rasis",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary example: Moon 3|5|2|1 aspecting Sun 9|7|5|43; remainder 6|2|3|42, from 10 rasis = 3|27|56|18 = 117|56|18 degrees, halved = 58|58|09"
+  },
+  {
+   "vector_id": "bphs.u02.drkbala.wk.5rasi",
+   "rule_ids": [
+    "jyotisha.bphs.u02.drkbala.arc_to_drsti_value"
+   ],
+   "inputs": {
+    "remainder_rasi_deg": "5|2|3|42"
+   },
+   "expected": {
+    "drsti_virupas_sexagesimal": "4|7|24",
+    "case": "remainder over 5 rasis",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2: drop the rasis, double 2|3|42 = 4|7|24"
+  },
+  {
+   "vector_id": "bphs.u02.drkbala.wk.4rasi",
+   "rule_ids": [
+    "jyotisha.bphs.u02.drkbala.arc_to_drsti_value"
+   ],
+   "inputs": {
+    "remainder_rasi_deg": "4|2|3|42"
+   },
+   "expected": {
+    "drsti_virupas_sexagesimal": "27|56|18",
+    "case": "remainder over 4 rasis",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2: 5 rasis minus 4|2|3|42 = 0|27|56|18"
+  },
+  {
+   "vector_id": "bphs.u02.drkbala.wk.3rasi",
+   "rule_ids": [
+    "jyotisha.bphs.u02.drkbala.arc_to_drsti_value"
+   ],
+   "inputs": {
+    "remainder_rasi_deg": "3|2|3|42"
+   },
+   "expected": {
+    "drsti_virupas_sexagesimal": "43|58|09",
+    "case": "remainder over 3 rasis",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2: 4 rasis minus 3|2|3|42 = 27|56|18, halved = 13|58|09, plus 30 = 43|58|09"
+  },
+  {
+   "vector_id": "bphs.u02.drkbala.wk.2rasi",
+   "rule_ids": [
+    "jyotisha.bphs.u02.drkbala.arc_to_drsti_value"
+   ],
+   "inputs": {
+    "remainder_rasi_deg": "2|2|3|42"
+   },
+   "expected": {
+    "drsti_virupas_sexagesimal": "17|3|42",
+    "case": "remainder over 2 rasis",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2: drop the rasis, 2|3|42 plus 15 = 17|3|42"
+  },
+  {
+   "vector_id": "bphs.u02.drkbala.wk.1rasi",
+   "rule_ids": [
+    "jyotisha.bphs.u02.drkbala.arc_to_drsti_value"
+   ],
+   "inputs": {
+    "remainder_rasi_deg": "1|20|0|0"
+   },
+   "expected": {
+    "drsti_virupas_sexagesimal": "10|0|0",
+    "case": "remainder over 1 rasi",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2: drop the rasi, 20 degrees halved = 10 virupas"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.uccha.sun_worked",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.uccha"
+   ],
+   "inputs": {
+    "graha": "Sun",
+    "graha_longitude_rasi_deg": "10|4|14",
+    "debilitation_longitude_rasi_deg": "6|10|0"
+   },
+   "expected": {
+    "arc_degrees": "114|14",
+    "uccha_bala_virupas": "38|04",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 8, the commentary's own numeric example"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.moolatrikona.sun",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "moolatrikona_arc": {
+     "rasi": "Leo",
+     "moolatrikona_degrees": "0-20",
+     "own_sign_remainder_degrees": "20-30"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 8 (moolatrikona arcs stated graha by graha)"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.moolatrikona.moon",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "moolatrikona_arc": {
+     "rasi": "Taurus",
+     "exaltation_degrees": "0-3",
+     "moolatrikona_degrees": "3-30"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 8 (moolatrikona arcs stated graha by graha)"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.moolatrikona.mars",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "moolatrikona_arc": {
+     "rasi": "Aries",
+     "moolatrikona_degrees": "0-12",
+     "own_sign_remainder_degrees": "12-30"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 8 (moolatrikona arcs stated graha by graha)"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.moolatrikona.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "moolatrikona_arc": {
+     "rasi": "Virgo",
+     "exaltation_degrees": "0-15",
+     "moolatrikona_degrees": "15-20",
+     "own_sign_remainder_degrees": "20-30"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 8 (moolatrikona arcs stated graha by graha)"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.moolatrikona.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "moolatrikona_arc": {
+     "rasi": "Sagittarius",
+     "moolatrikona_degrees": "0-10",
+     "own_sign_remainder_degrees": "10-30"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 8 (moolatrikona arcs stated graha by graha)"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.moolatrikona.venus",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "moolatrikona_arc": {
+     "rasi": "Libra",
+     "moolatrikona_degrees": "0-15",
+     "own_sign_remainder_degrees": "15-30"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 8 (moolatrikona arcs stated graha by graha)"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.moolatrikona.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "graha": "Saturn"
+   },
+   "expected": {
+    "moolatrikona_arc": {
+     "rasi": "Aquarius",
+     "moolatrikona_degrees": "0-20",
+     "own_sign_remainder_degrees": "20-30"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 8 (moolatrikona arcs stated graha by graha)"
+  },
+  {
+   "vector_id": "bphs.u02.saptavargaja.dignity_values",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.saptavargaja"
+   ],
+   "inputs": {
+    "query": "saptavargaja virupa values by dignity"
+   },
+   "expected": {
+    "dignity_values_virupas": {
+     "uccha": 100,
+     "moolatrikona": 45,
+     "svaksetra": 30,
+     "adhimitra": 20,
+     "mitra": 15,
+     "sama": 10,
+     "satru": 4,
+     "adhisatru": 2
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 10 and its commentary"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.ojayugma.moon_even",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.ojayugma"
+   ],
+   "inputs": {
+    "graha": "Moon",
+    "rasi_parity": "even",
+    "navamsa_parity": "even"
+   },
+   "expected": {
+    "ojayugma_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 10"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.ojayugma.sun_odd",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.ojayugma"
+   ],
+   "inputs": {
+    "graha": "Sun",
+    "rasi_parity": "odd",
+    "navamsa_parity": "odd"
+   },
+   "expected": {
+    "ojayugma_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 10"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 1
+   },
+   "expected": {
+    "kendradi_bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 4
+   },
+   "expected": {
+    "kendradi_bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 7
+   },
+   "expected": {
+    "kendradi_bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 10
+   },
+   "expected": {
+    "kendradi_bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 2
+   },
+   "expected": {
+    "kendradi_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 5
+   },
+   "expected": {
+    "kendradi_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 8
+   },
+   "expected": {
+    "kendradi_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 11
+   },
+   "expected": {
+    "kendradi_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 3
+   },
+   "expected": {
+    "kendradi_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 6
+   },
+   "expected": {
+    "kendradi_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 9
+   },
+   "expected": {
+    "kendradi_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.kendradi.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.kendradi"
+   ],
+   "inputs": {
+    "house_from_lagna": 12
+   },
+   "expected": {
+    "kendradi_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 11"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.drekkana.sun",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.drekkana"
+   ],
+   "inputs": {
+    "graha": "Sun",
+    "drekkana": "first"
+   },
+   "expected": {
+    "drekkana_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 11-12"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.drekkana.mars",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.drekkana"
+   ],
+   "inputs": {
+    "graha": "Mars",
+    "drekkana": "first"
+   },
+   "expected": {
+    "drekkana_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 11-12"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.drekkana.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.drekkana"
+   ],
+   "inputs": {
+    "graha": "Jupiter",
+    "drekkana": "first"
+   },
+   "expected": {
+    "drekkana_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 11-12"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.drekkana.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.drekkana"
+   ],
+   "inputs": {
+    "graha": "Mercury",
+    "drekkana": "middle"
+   },
+   "expected": {
+    "drekkana_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 11-12"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.drekkana.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.drekkana"
+   ],
+   "inputs": {
+    "graha": "Saturn",
+    "drekkana": "middle"
+   },
+   "expected": {
+    "drekkana_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 11-12"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.drekkana.moon",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.drekkana"
+   ],
+   "inputs": {
+    "graha": "Moon",
+    "drekkana": "last"
+   },
+   "expected": {
+    "drekkana_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 11-12"
+  },
+  {
+   "vector_id": "bphs.u02.sthanabala.drekkana.venus",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sthanabala.drekkana"
+   ],
+   "inputs": {
+    "graha": "Venus",
+    "drekkana": "last"
+   },
+   "expected": {
+    "drekkana_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 11-12"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.point.sun",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "subtract_bhava": "the 4th bhava",
+    "strongest_in_house": "10th",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 12-13"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.point.mars",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "subtract_bhava": "the 4th bhava",
+    "strongest_in_house": "10th",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 12-13"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.point.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "subtract_bhava": "the 7th bhava",
+    "strongest_in_house": "1st",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 12-13"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.point.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "subtract_bhava": "the 7th bhava",
+    "strongest_in_house": "1st",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 12-13"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.point.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Saturn"
+   },
+   "expected": {
+    "subtract_bhava": "the lagna (1st bhava)",
+    "strongest_in_house": "7th",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 12-13"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.point.moon",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "subtract_bhava": "the 10th bhava (madhya-lagna)",
+    "strongest_in_house": "4th",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 12-13"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.point.venus",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "subtract_bhava": "the 10th bhava (madhya-lagna)",
+    "strongest_in_house": "4th",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 12-13"
+  },
+  {
+   "vector_id": "bphs.u02.digbala.sun_worked",
+   "rule_ids": [
+    "jyotisha.bphs.u02.digbala"
+   ],
+   "inputs": {
+    "graha": "Sun",
+    "arc_degrees": "147|05"
+   },
+   "expected": {
+    "dig_bala_virupas": "49|01",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, the commentary's own Sun example"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.natonnata.worked",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.natonnata"
+   ],
+   "inputs": {
+    "ishta_ghati": "8|16",
+    "half_day_ghati": "13|54",
+    "birth": "day"
+   },
+   "expected": {
+    "nata_ghati": "5|38",
+    "unnata_ghati": "24|22",
+    "natonnata_bala_virupas": {
+     "Sun": "48|44",
+     "Venus": "48|44",
+     "Jupiter": "48|44",
+     "Moon": "11|16",
+     "Mars": "11|16",
+     "Saturn": "11|16",
+     "Mercury": "60|00"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on slokas 14-15, the printing's own example"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.natonnata.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.natonnata"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "natonnata_bala_virupas": 60,
+    "always": true,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 15"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.paksha.worked",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.paksha"
+   ],
+   "inputs": {
+    "moon_rasi_deg": "8|25|29",
+    "sun_rasi_deg": "10|4|14"
+   },
+   "expected": {
+    "elongation_degrees": "38|45",
+    "paksha_bala_virupas": {
+     "Moon": "12|55",
+     "Mercury": "12|55",
+     "Venus": "12|55",
+     "Jupiter": "12|55",
+     "Sun": "47|05",
+     "Mars": "47|05",
+     "Saturn": "47|05"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on slokas 16-17, the printing's own example"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.tribhaga.day_first_third",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.tribhaga"
+   ],
+   "inputs": {
+    "tribhaga": "day_first_third"
+   },
+   "expected": {
+    "lord": "Mercury",
+    "bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 19"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.tribhaga.day_second_third",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.tribhaga"
+   ],
+   "inputs": {
+    "tribhaga": "day_second_third"
+   },
+   "expected": {
+    "lord": "Sun",
+    "bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 19"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.tribhaga.day_last_third",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.tribhaga"
+   ],
+   "inputs": {
+    "tribhaga": "day_last_third"
+   },
+   "expected": {
+    "lord": "Saturn",
+    "bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 19"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.tribhaga.night_first_third",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.tribhaga"
+   ],
+   "inputs": {
+    "tribhaga": "night_first_third"
+   },
+   "expected": {
+    "lord": "Moon",
+    "bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 19"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.tribhaga.night_second_third",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.tribhaga"
+   ],
+   "inputs": {
+    "tribhaga": "night_second_third"
+   },
+   "expected": {
+    "lord": "Venus",
+    "bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 19"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.tribhaga.night_last_third",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.tribhaga"
+   ],
+   "inputs": {
+    "tribhaga": "night_last_third"
+   },
+   "expected": {
+    "lord": "Mars",
+    "bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 19"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.tribhaga.jupiter_always",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.tribhaga"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "bala_virupas": 60,
+    "always": true,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 19 ('सर्वदा गुरुः')"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.varshesa",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.varsha_masa_dina_hora"
+   ],
+   "inputs": {
+    "role": "varshesa"
+   },
+   "expected": {
+    "bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 19-20"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.masesa",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.varsha_masa_dina_hora"
+   ],
+   "inputs": {
+    "role": "masesa"
+   },
+   "expected": {
+    "bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 19-20"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.dinesa",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.varsha_masa_dina_hora"
+   ],
+   "inputs": {
+    "role": "dinesa"
+   },
+   "expected": {
+    "bala_virupas": 45,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 19-20"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.horesa",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.varsha_masa_dina_hora"
+   ],
+   "inputs": {
+    "role": "horesa"
+   },
+   "expected": {
+    "bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 19-20"
+  },
+  {
+   "vector_id": "bphs.u02.kalabala.assembly.sun_worked",
+   "rule_ids": [
+    "jyotisha.bphs.u02.kalabala.assembly"
+   ],
+   "inputs": {
+    "natonnata": "0|48|44",
+    "paksha": "0|47|5",
+    "tribhaga": "1|0|0",
+    "varshadi": "0|30|0"
+   },
+   "expected": {
+    "kala_bala_rupas": "3|5|49",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 20; arithmetic recomputed and exact"
+  },
+  {
+   "vector_id": "bphs.u02.ayanabala.sun_worked",
+   "rule_ids": [
+    "jyotisha.bphs.u02.ayanabala"
+   ],
+   "inputs": {
+    "graha": "Sun",
+    "sidereal_rasi_deg": "10|4|14",
+    "ayanamsa": "22|1"
+   },
+   "expected": {
+    "sayana_rasi_deg": "10|26|15",
+    "bhuja_rasi_deg": "1|3|45",
+    "ayana_bala_virupas_before_doubling": "13|37|30",
+    "ayana_bala_virupas": "27|15|00",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on slokas 21-24, the printing's own example"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.00",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "vakri (retrograde)"
+   },
+   "expected": {
+    "gati_bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.01",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "sama / sarala (direct, even)"
+   },
+   "expected": {
+    "gati_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.02",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "with the Sun (astangata)"
+   },
+   "expected": {
+    "gati_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.03",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "with the Moon"
+   },
+   "expected": {
+    "gati_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.04",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "manda (slow)"
+   },
+   "expected": {
+    "gati_bala_virupas": 15,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.05",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "alpagati (slower than before)"
+   },
+   "expected": {
+    "gati_bala_virupas": 7.5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.06",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "sighra (swift)"
+   },
+   "expected": {
+    "gati_bala_virupas": 45,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.cheshtabala.gati.07",
+   "rule_ids": [
+    "jyotisha.bphs.u02.cheshtabala"
+   ],
+   "inputs": {
+    "gati": "atisighra (very swift)"
+   },
+   "expected": {
+    "gati_bala_virupas": 30,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 26-27 (gati-bala table)"
+  },
+  {
+   "vector_id": "bphs.u02.yuddhabala.correction",
+   "rule_ids": [
+    "jyotisha.bphs.u02.yuddhabala"
+   ],
+   "inputs": {
+    "bala_a_rupas": 5.0,
+    "bala_b_rupas": 3.0
+   },
+   "expected": {
+    "victor": "A",
+    "victor_bala_rupas": 7.0,
+    "vanquished_bala_rupas": 1.0,
+    "difference_rupas": 2.0,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 sloka 25"
+  },
+  {
+   "vector_id": "bphs.u02.naisargikabala.sun",
+   "rule_ids": [
+    "jyotisha.bphs.u02.naisargikabala"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "naisargika_bala_virupas": 60,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 30-31"
+  },
+  {
+   "vector_id": "bphs.u02.naisargikabala.moon",
+   "rule_ids": [
+    "jyotisha.bphs.u02.naisargikabala"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "naisargika_bala_virupas": 51,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 30-31"
+  },
+  {
+   "vector_id": "bphs.u02.naisargikabala.mars",
+   "rule_ids": [
+    "jyotisha.bphs.u02.naisargikabala"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "naisargika_bala_virupas": 17,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 30-31"
+  },
+  {
+   "vector_id": "bphs.u02.naisargikabala.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.u02.naisargikabala"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "naisargika_bala_virupas": 26,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 30-31"
+  },
+  {
+   "vector_id": "bphs.u02.naisargikabala.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.u02.naisargikabala"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "naisargika_bala_virupas": 34,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 30-31"
+  },
+  {
+   "vector_id": "bphs.u02.naisargikabala.venus",
+   "rule_ids": [
+    "jyotisha.bphs.u02.naisargikabala"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "naisargika_bala_virupas": 43,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 30-31"
+  },
+  {
+   "vector_id": "bphs.u02.naisargikabala.saturn",
+   "rule_ids": [
+    "jyotisha.bphs.u02.naisargikabala"
+   ],
+   "inputs": {
+    "graha": "Saturn"
+   },
+   "expected": {
+    "naisargika_bala_virupas": 9,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 30-31"
+  },
+  {
+   "vector_id": "bphs.u02.sadbala.sun_full_worked_example",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sadbala.pinda_assembly"
+   ],
+   "inputs": {
+    "graha": "Sun",
+    "sthana_bala": "4|18|4",
+    "dig_bala": "0|49|1",
+    "kala_bala": "3|5|49",
+    "cheshta_or_ayana_bala": "0|27|15",
+    "naisargika_bala": "1|0|0",
+    "net_benefic_drsti": "0|4|22"
+   },
+   "expected": {
+    "sum_of_five_rupas": "9|40|9",
+    "drik_correction_rupas": "0|1|5",
+    "sadbala_pinda_rupas": "9|41|14",
+    "note": "the source's own arithmetic, recomputed and exact",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 32 - the chapter's fully worked sadbala for the Sun"
+  },
+  {
+   "vector_id": "bphs.u02.sadbala.minima.sun_mercury_jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sadbala.required_minima"
+   ],
+   "inputs": {
+    "graha_class": "Sun/Mercury/Jupiter"
+   },
+   "expected": {
+    "minima": {
+     "sthana_virupas": 165,
+     "sthana_rupas": "2|45",
+     "dig_virupas": 35,
+     "cheshta_virupas": 50,
+     "kala_virupas": 112,
+     "kala_rupas": "1|52",
+     "ayana_virupas": 30,
+     "five_bala_total_virupas": 392,
+     "five_bala_total_rupas": "6|32"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 41-43 and the printed table"
+  },
+  {
+   "vector_id": "bphs.u02.sadbala.minima.moon_venus",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sadbala.required_minima"
+   ],
+   "inputs": {
+    "graha_class": "Moon/Venus"
+   },
+   "expected": {
+    "minima": {
+     "sthana_virupas": 133,
+     "sthana_rupas": "2|13",
+     "dig_virupas": 50,
+     "cheshta_virupas": 30,
+     "kala_virupas": 100,
+     "kala_rupas": "1|40",
+     "ayana_virupas": 40,
+     "five_bala_total_virupas": 353,
+     "five_bala_total_rupas": "5|53"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 41-43 and the printed table"
+  },
+  {
+   "vector_id": "bphs.u02.sadbala.minima.mars_saturn",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sadbala.required_minima"
+   ],
+   "inputs": {
+    "graha_class": "Mars/Saturn"
+   },
+   "expected": {
+    "minima": {
+     "sthana_virupas": 96,
+     "sthana_rupas": "1|36",
+     "dig_virupas": 30,
+     "cheshta_virupas": 40,
+     "kala_virupas": 67,
+     "kala_rupas": "1|7",
+     "ayana_virupas": 20,
+     "five_bala_total_virupas": 253,
+     "five_bala_total_rupas": "4|13"
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 41-43 and the printed table"
+  },
+  {
+   "vector_id": "bphs.u02.sadbala.minima.drik_exempt",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sadbala.required_minima"
+   ],
+   "inputs": {
+    "component": "drik_bala"
+   },
+   "expected": {
+    "has_minimum": false,
+    "reason": "variable with place, and the signed term",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 43"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.tanu_worked",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.lord_and_aspects"
+   ],
+   "inputs": {
+    "bhava": 1,
+    "lord": "Mars",
+    "lord_sadbala_rupas": "5|59|16",
+    "net_benefic_drsti_quarter": "0|6|52",
+    "mercury_jupiter_aspect": "0|50|41"
+   },
+   "expected": {
+    "bhava_bala_rupas": "6|56|49",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, commentary on sloka 34 - the chapter's own first-house example"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.digbala.nara",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.digbala"
+   ],
+   "inputs": {
+    "bhava_class": "nara (human)"
+   },
+   "expected": {
+    "rasis": [
+     "Gemini",
+     "Virgo",
+     "Libra",
+     "Sagittarius (first half)",
+     "Aquarius"
+    ],
+    "subtract_bhava": "the 7th (asta)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 36-38"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.digbala.chatushpada",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.digbala"
+   ],
+   "inputs": {
+    "bhava_class": "chatushpada (quadruped)"
+   },
+   "expected": {
+    "rasis": [
+     "Aries",
+     "Taurus",
+     "Leo",
+     "Sagittarius (second half)",
+     "Capricorn (first half)"
+    ],
+    "subtract_bhava": "the 4th (sukha)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 36-38"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.digbala.jalachara",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.digbala"
+   ],
+   "inputs": {
+    "bhava_class": "jalachara (aquatic)"
+   },
+   "expected": {
+    "rasis": [
+     "Cancer",
+     "Capricorn (second half)",
+     "Pisces"
+    ],
+    "subtract_bhava": "the lagna (1st)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 36-38"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.digbala.keeta",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.digbala"
+   ],
+   "inputs": {
+    "bhava_class": "keeta (insect)"
+   },
+   "expected": {
+    "rasis": [
+     "Scorpio"
+    ],
+    "subtract_bhava": "the 10th (kha)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 36-38"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.udaya.day",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.udaya_kala"
+   ],
+   "inputs": {
+    "sect": "day"
+   },
+   "expected": {
+    "strong_rasis": [
+     "Gemini",
+     "Leo",
+     "Virgo",
+     "Libra",
+     "Scorpio",
+     "Aquarius"
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 35-36"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.udaya.night",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.udaya_kala"
+   ],
+   "inputs": {
+    "sect": "night"
+   },
+   "expected": {
+    "strong_rasis": [
+     "Aries",
+     "Taurus",
+     "Cancer",
+     "Sagittarius",
+     "Capricorn"
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 35-36"
+  },
+  {
+   "vector_id": "bphs.u02.bhavabala.udaya.twilight",
+   "rule_ids": [
+    "jyotisha.bphs.u02.bhavabala.udaya_kala"
+   ],
+   "inputs": {
+    "sect": "twilight"
+   },
+   "expected": {
+    "strong_rasis": [
+     "Pisces"
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 35-36"
+  },
+  {
+   "vector_id": "bphs.u02.judgment.strongest_yoga_karaka",
+   "rule_ids": [
+    "jyotisha.bphs.u02.strongest_yoga_karaka_gives_the_result"
+   ],
+   "inputs": {
+    "yogas_detected": 3,
+    "strongest_yoga_causing_graha": "the one with the highest sadbala pinda"
+   },
+   "expected": {
+    "result_giver": "the strongest of the yoga-causing grahas",
+    "forbidden": "emitting all detected yogas as parallel, equally weighted statements",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2 slokas 44-45"
+  },
+  {
+   "vector_id": "bphs.u02.sadbala.units.rupa_virupa",
+   "rule_ids": [
+    "jyotisha.bphs.u02.sadbala.units"
+   ],
+   "inputs": {
+    "printed": "1|0|0"
+   },
+   "expected": {
+    "virupas": 60,
+    "rupas": 1.0,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 2, established by recomputing the chapter's own tallies"
+  },
+  {
+   "vector_id": "bphs.u01.av.notation.bindu_is_blank",
+   "rule_ids": [
+    "jyotisha.bphs.u01.ashtakavarga.notation"
+   ],
+   "inputs": {
+    "term": "bindu / karana"
+   },
+   "expected": {
+    "scores": 0,
+    "means": "blank",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 sloka 72"
+  },
+  {
+   "vector_id": "bphs.u01.av.notation.rekha_is_mark",
+   "rule_ids": [
+    "jyotisha.bphs.u01.ashtakavarga.notation"
+   ],
+   "inputs": {
+    "term": "rekha / sthana"
+   },
+   "expected": {
+    "scores": 1,
+    "means": "scored point",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 sloka 72"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Saturn"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Saturn"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mercury",
+     "Lagna"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury",
+     "Jupiter"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Saturn",
+     "Venus"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Saturn"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Saturn",
+     "Mercury",
+     "Jupiter"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48 (Sun ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.sun.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.sun"
+   ],
+   "inputs": {
+    "varga_of": "Sun"
+   },
+   "expected": {
+    "total_rekhas": 48,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 46-48, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mercury",
+     "Jupiter"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Jupiter"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury",
+     "Jupiter",
+     "Venus"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Mercury",
+     "Venus",
+     "Saturn"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mercury",
+     "Jupiter",
+     "Venus"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mercury",
+     "Jupiter"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Venus"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 8,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [],
+    "rekha_count": 0,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51 (Moon ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.moon.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.moon"
+   ],
+   "inputs": {
+    "varga_of": "Moon"
+   },
+   "expected": {
+    "total_rekhas": 49,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 49-51, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars"
+    ],
+    "rekha_count": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mercury",
+     "Lagna"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Saturn"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mercury"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Saturn"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Venus",
+     "Saturn"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Saturn"
+    ],
+    "rekha_count": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Jupiter",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 8,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [
+     "Jupiter",
+     "Venus"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53 (Mars ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mars.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mars"
+   ],
+   "inputs": {
+    "varga_of": "Mars"
+   },
+   "expected": {
+    "total_rekhas": 39,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 52-53, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Mercury",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury",
+     "Venus"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mercury",
+     "Venus"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mercury",
+     "Jupiter",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Saturn"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Mercury",
+     "Venus",
+     "Saturn"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 8,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mercury",
+     "Jupiter"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55 (Mercury ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.mercury.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.mercury"
+   ],
+   "inputs": {
+    "varga_of": "Mercury"
+   },
+   "expected": {
+    "total_rekhas": 54,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 54-55, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Jupiter",
+     "Saturn"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mercury",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Jupiter",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Jupiter"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mercury",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [
+     "Saturn"
+    ],
+    "rekha_count": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58 (Jupiter ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.jupiter.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.jupiter"
+   ],
+   "inputs": {
+    "varga_of": "Jupiter"
+   },
+   "expected": {
+    "total_rekhas": 56,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 56-58, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Venus",
+     "Lagna"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Mercury"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [],
+    "rekha_count": 0,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Jupiter",
+     "Venus",
+     "Saturn"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 8,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61 (Venus ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.venus.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.venus"
+   ],
+   "inputs": {
+    "varga_of": "Venus"
+   },
+   "expected": {
+    "total_rekhas": 52,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 59-61, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Lagna"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun"
+    ],
+    "rekha_count": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Lagna"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Jupiter",
+     "Saturn"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun"
+    ],
+    "rekha_count": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mercury"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury"
+    ],
+    "rekha_count": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mars",
+     "Mercury",
+     "Lagna"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 8,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus"
+    ],
+    "rekha_count": 4,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63 (Saturn ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.saturn.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.saturn"
+   ],
+   "inputs": {
+    "varga_of": "Saturn"
+   },
+   "expected": {
+    "total_rekhas": 39,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 62-63, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h01",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 1
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 1)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h02",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 2
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury",
+     "Jupiter",
+     "Venus"
+    ],
+    "rekha_count": 3,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 2)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h03",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 3
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Venus",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 6,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 3)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h04",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 4
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Mercury",
+     "Jupiter",
+     "Venus",
+     "Saturn"
+    ],
+    "rekha_count": 5,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 4)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h05",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 5
+   },
+   "expected": {
+    "rekha_givers": [
+     "Jupiter",
+     "Venus"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 5)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h06",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 6
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 6)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h07",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 7
+   },
+   "expected": {
+    "rekha_givers": [
+     "Jupiter"
+    ],
+    "rekha_count": 1,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 7)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h08",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 8
+   },
+   "expected": {
+    "rekha_givers": [
+     "Mercury",
+     "Venus"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 8)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h09",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 9
+   },
+   "expected": {
+    "rekha_givers": [
+     "Jupiter",
+     "Venus"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 9)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h10",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 10
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 10)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h11",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 11
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon",
+     "Mars",
+     "Mercury",
+     "Jupiter",
+     "Saturn",
+     "Lagna"
+    ],
+    "rekha_count": 7,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 11)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.h12",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna",
+    "house": 12
+   },
+   "expected": {
+    "rekha_givers": [
+     "Sun",
+     "Moon"
+    ],
+    "rekha_count": 2,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71 (Lagna ashtakavarga, house 12)"
+  },
+  {
+   "vector_id": "bphs.u01.bav.lagna.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.lagna"
+   ],
+   "inputs": {
+    "varga_of": "Lagna"
+   },
+   "expected": {
+    "total_rekhas": 49,
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1 slokas 68-71, row-sum check"
+  },
+  {
+   "vector_id": "bphs.u01.bav.scan_damage.jupiter_h9",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.scan_damage_disclosure"
+   ],
+   "inputs": {
+    "varga": "Jupiter",
+    "house": 9
+   },
+   "expected": {
+    "issue": "Hindi gloss lists four; row-sum requires five",
+    "resolved_by": "row-sum arithmetic",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1, encoder's disclosure 2026-08-04"
+  },
+  {
+   "vector_id": "bphs.u01.bav.scan_damage.venus_h4_h8",
+   "rule_ids": [
+    "jyotisha.bphs.u01.bhinnashtakavarga.scan_damage_disclosure"
+   ],
+   "inputs": {
+    "varga": "Venus",
+    "houses": [
+     4,
+     8
+    ]
+   },
+   "expected": {
+    "issue": "ambiguous verse compounds arka/arki and a possible seventh giver",
+    "resolved_by": "row-sum arithmetic against the canonical total 52",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 uttara 1, encoder's disclosure 2026-08-04"
+  },
+  {
+   "vector_id": "bphs.u01.sav.total",
+   "rule_ids": [
+    "jyotisha.bphs.u01.sarvashtakavarga"
+   ],
+   "inputs": {
+    "sum_over": "the seven graha bhinnashtakavargas"
+   },
+   "expected": {
+    "total_rekhas": 337,
+    "excludes": "the lagna's own ashtakavarga",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899, sum of uttara 1's seven tables"
+  },
+  {
+   "vector_id": "bphs.u01.sav.grade.18",
+   "rule_ids": [
+    "jyotisha.bphs.u01.sarvashtakavarga"
+   ],
+   "inputs": {
+    "rekhas_in_rasi": 18
+   },
+   "expected": {
+    "grade": "kanishtha (least)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 82-83"
+  },
+  {
+   "vector_id": "bphs.u01.sav.grade.25",
+   "rule_ids": [
+    "jyotisha.bphs.u01.sarvashtakavarga"
+   ],
+   "inputs": {
+    "rekhas_in_rasi": 25
+   },
+   "expected": {
+    "grade": "madhya (middling)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 82-83"
+  },
+  {
+   "vector_id": "bphs.u01.sav.grade.31",
+   "rule_ids": [
+    "jyotisha.bphs.u01.sarvashtakavarga"
+   ],
+   "inputs": {
+    "rekhas_in_rasi": 31
+   },
+   "expected": {
+    "grade": "uttama (highest)",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 82-83"
+  },
+  {
+   "vector_id": "bphs.p17.trikona_sodhana.wk0",
+   "rule_ids": [
+    "jyotisha.bphs.p17.trikona_sodhana"
+   ],
+   "inputs": {
+    "trine_values": [
+     2,
+     5,
+     0
+    ]
+   },
+   "expected": {
+    "case": 1,
+    "result": [
+     2,
+     5,
+     0
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 17, the commentary's own worked examples"
+  },
+  {
+   "vector_id": "bphs.p17.trikona_sodhana.wk1",
+   "rule_ids": [
+    "jyotisha.bphs.p17.trikona_sodhana"
+   ],
+   "inputs": {
+    "trine_values": [
+     4,
+     6,
+     5
+    ]
+   },
+   "expected": {
+    "case": 3,
+    "result": [
+     0,
+     2,
+     1
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 17, the commentary's own worked examples"
+  },
+  {
+   "vector_id": "bphs.p17.trikona_sodhana.wk2",
+   "rule_ids": [
+    "jyotisha.bphs.p17.trikona_sodhana"
+   ],
+   "inputs": {
+    "trine_values": [
+     3,
+     4,
+     4
+    ]
+   },
+   "expected": {
+    "case": 3,
+    "result": [
+     0,
+     1,
+     1
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 17, the commentary's own worked examples"
+  },
+  {
+   "vector_id": "bphs.p17.trikona_sodhana.wk3",
+   "rule_ids": [
+    "jyotisha.bphs.p17.trikona_sodhana"
+   ],
+   "inputs": {
+    "trine_values": [
+     5,
+     5,
+     5
+    ]
+   },
+   "expected": {
+    "case": 2,
+    "result": [
+     0,
+     0,
+     0
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 17, the commentary's own worked examples"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.case1",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "case": 1,
+    "both_signs_occupied_by_a_graha": true
+   },
+   "expected": {
+    "rule": "no reduction at all; both figures stand",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 slokas 1-5"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.case2",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "case": 2,
+    "both_signs_unoccupied": true,
+    "figures": "equal"
+   },
+   "expected": {
+    "rule": "put zero in BOTH",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 slokas 1-5"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.case3",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "case": 3,
+    "both_signs_unoccupied": true,
+    "figures": "unequal"
+   },
+   "expected": {
+    "rule": "subtract the lesser from the greater; the remainder stands under the greater, zero under the lesser",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 slokas 1-5"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.case4",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "case": 4,
+    "one_occupied": true,
+    "occupied_figure": "lower"
+   },
+   "expected": {
+    "rule": "subtract the occupied sign's (lower) figure from the unoccupied sign's (higher) figure; the remainder stands under the UNOCCUPIED sign; the occupied sign keeps its own figure",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 slokas 1-5"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.case5",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "case": 5,
+    "one_occupied": true,
+    "occupied_figure": "higher"
+   },
+   "expected": {
+    "rule": "the occupied sign keeps its figure unchanged; put ZERO under the unoccupied sign",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 slokas 1-5"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.case6",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "case": 6,
+    "one_occupied": true,
+    "figures": "equal"
+   },
+   "expected": {
+    "rule": "the occupied sign keeps its figure; the unoccupied sign becomes zero",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 slokas 1-5"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.case7",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "case": 7,
+    "one_figure_is_zero": true
+   },
+   "expected": {
+    "rule": "both become zero",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 slokas 1-5"
+  },
+  {
+   "vector_id": "bphs.p18.ekadhipatya.cancer_leo_exempt",
+   "rule_ids": [
+    "jyotisha.bphs.p18.ekadhipatya_sodhana"
+   ],
+   "inputs": {
+    "rasis": [
+     "Cancer",
+     "Leo"
+    ]
+   },
+   "expected": {
+    "reduction_applied": false,
+    "reason": "single-sign lords",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 18 sloka 5"
+  },
+  {
+   "vector_id": "bphs.p19.pinda.rasi_gunaka",
+   "rule_ids": [
+    "jyotisha.bphs.p19.pindotpatti"
+   ],
+   "inputs": {
+    "table": "rasi gunaka"
+   },
+   "expected": {
+    "values": {
+     "Aries": 7,
+     "Taurus": 10,
+     "Gemini": 8,
+     "Cancer": 4,
+     "Leo": 10,
+     "Virgo": 5,
+     "Libra": 7,
+     "Scorpio": 8,
+     "Sagittarius": 9,
+     "Capricorn": 5,
+     "Aquarius": 11,
+     "Pisces": 12
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 19 sloka 2 and the printed rasi-gunaka chakra"
+  },
+  {
+   "vector_id": "bphs.p19.pinda.graha_gunaka",
+   "rule_ids": [
+    "jyotisha.bphs.p19.pindotpatti"
+   ],
+   "inputs": {
+    "table": "graha gunaka"
+   },
+   "expected": {
+    "values": {
+     "Sun": 5,
+     "Moon": 5,
+     "Mars": 8,
+     "Mercury": 5,
+     "Jupiter": 10,
+     "Venus": 7,
+     "Saturn": 5
+    },
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 19 sloka 3 and the printed graha-gunaka chakra"
+  },
+  {
+   "vector_id": "bphs.p19.pinda.sun_worked",
+   "rule_ids": [
+    "jyotisha.bphs.p19.pindotpatti"
+   ],
+   "inputs": {
+    "varga": "Sun",
+    "figures_after_sodhana": {
+     "Aquarius": 1,
+     "Pisces": 1,
+     "Leo": 1,
+     "Sagittarius": 2,
+     "Capricorn": 0
+    },
+    "occupations": {
+     "Aquarius": [
+      "Sun",
+      "Jupiter"
+     ],
+     "Pisces": [
+      "Venus",
+      "Mars"
+     ],
+     "Sagittarius": [
+      "Moon"
+     ],
+     "Capricorn": [
+      "Saturn",
+      "Mercury"
+     ]
+    }
+   },
+   "expected": {
+    "graha_pinda": 40,
+    "rasi_pinda": 51,
+    "yoga_pinda": 91,
+    "note": "the source's own arithmetic, recomputed and exact",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 19, the chapter's fully worked ashtakavarga pinda for the Sun"
+  },
+  {
+   "vector_id": "bphs.p20.av_signification.sun",
+   "rule_ids": [
+    "jyotisha.bphs.p20.ashtakavarga_significations"
+   ],
+   "inputs": {
+    "graha": "Sun"
+   },
+   "expected": {
+    "consulted_for": "Self, influence and power, and consideration of the father, are the result of the Sun's [ashtakavarga].",
+    "sanskrit": "आत्मप्रभावशक्तिश्च पितुश्चिंता रवेः फलम् ॥ १ ॥",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 1-3"
+  },
+  {
+   "vector_id": "bphs.p20.av_signification.moon",
+   "rule_ids": [
+    "jyotisha.bphs.p20.ashtakavarga_significations"
+   ],
+   "inputs": {
+    "graha": "Moon"
+   },
+   "expected": {
+    "consulted_for": "Mind, intellect and its clarity, and consideration of the mother, from the Moon's.",
+    "sanskrit": "मनोबुद्धिप्रसादं च मातुश्चिंतामृगांकतः ॥ १ ॥",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 1-3"
+  },
+  {
+   "vector_id": "bphs.p20.av_signification.mars",
+   "rule_ids": [
+    "jyotisha.bphs.p20.ashtakavarga_significations"
+   ],
+   "inputs": {
+    "graha": "Mars"
+   },
+   "expected": {
+    "consulted_for": "Brothers, courage, quality and land are to be considered by Mars's.",
+    "sanskrit": "भ्रातृसत्त्वं गुणं भूमिं भौमेन तु विचिंतयेत् ॥ २ ॥",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 1-3"
+  },
+  {
+   "vector_id": "bphs.p20.av_signification.mercury",
+   "rule_ids": [
+    "jyotisha.bphs.p20.ashtakavarga_significations"
+   ],
+   "inputs": {
+    "graha": "Mercury"
+   },
+   "expected": {
+    "consulted_for": "Trade, work and capacity are to be considered by Mercury's.",
+    "sanskrit": "वाणिज्यकर्मशक्तिश्च बुधेन तु विचिंतयेत् ॥",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 1-3"
+  },
+  {
+   "vector_id": "bphs.p20.av_signification.jupiter",
+   "rule_ids": [
+    "jyotisha.bphs.p20.ashtakavarga_significations"
+   ],
+   "inputs": {
+    "graha": "Jupiter"
+   },
+   "expected": {
+    "consulted_for": "Bodily nourishment, and intellect, sons, wealth and prosperity, by Jupiter's.",
+    "sanskrit": "गुरुणा देहपुष्टिं च बुद्धिपुत्रार्थसंपदः ॥ ३ ॥",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 1-3"
+  },
+  {
+   "vector_id": "bphs.p20.av_signification.venus",
+   "rule_ids": [
+    "jyotisha.bphs.p20.ashtakavarga_significations"
+   ],
+   "inputs": {
+    "graha": "Venus"
+   },
+   "expected": {
+    "consulted_for": "Marriage and its observances from Venus's.",
+    "sanskrit": "भृगोर्विवाहकर्माणि ...",
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899 purva 20 slokas 1-3"
+  },
+  {
+   "vector_id": "bphs.ashtakavarga.pipeline",
+   "rule_ids": [
+    "jyotisha.bphs.ashtakavarga.pipeline_order"
+   ],
+   "inputs": {
+    "query": "order of operations"
+   },
+   "expected": {
+    "order": [
+     "bhinnashtakavarga",
+     "sarvashtakavarga (unreduced)",
+     "trikona sodhana",
+     "ekadhipatya sodhana",
+     "pindotpatti",
+     "significations"
+    ],
+    "customer_prediction": false,
+    "output_policy": "renderable_with_source"
+   },
+   "provenance": "BPHS Subodhini 1899, chapter sequence uttara 1 and purva 17-20"
+  }
+ ]
+}

@@ -1,0 +1,1597 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-05",
+ "tradition_id": "islamicate_persian",
+ "source_pack_id": "islamicate_al_qabisi_lots_v1",
+ "status": "research_vectors_awaiting_independent_arabic_review. Each vector fixes one lot's from-point, to-point, projection point, night behaviour and output policy, so a mis-transcribed formula fails against the Arabic rather than against a paraphrase.",
+ "source_ids": [
+  "islamicate_wurzburg_al_qabisi_introduction_direct_extraction_2026_08",
+  "islamicate_wurzburg_al_qabisi_introduction_tei"
+ ],
+ "required_expansion_before_implementation": [
+  "independent Arabic specialist review before any rule leaves research_only",
+  "collate against the John of Seville Latin witness in the same directory, which was NOT used in this pass",
+  "the Lot of Fortune's nocturnal reversal is an encoder inference at this place in the text and should be confirmed"
+ ],
+ "vectors": [
+  {
+   "vector_id": "islam.qabisi.ch5.method.fortune",
+   "rule_ids": [
+    "islam.qabisi.ch5.lot_projection_method"
+   ],
+   "inputs": {
+    "from": "Sun",
+    "to": "Moon",
+    "project_from": "Ascendant"
+   },
+   "expected": {
+    "formula": "(Moon - Sun + Ascendant) mod 360",
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V para 2 (TEI lines 6-8)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h01.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_01"
+   ],
+   "inputs": {
+    "house": 1,
+    "lot": "sahm al-sa'ada"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الأوّل (TEI lines 9-16)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h01.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_01"
+   ],
+   "inputs": {
+    "house": 1,
+    "lot": "sahm al-hayat"
+   },
+   "expected": {
+    "from_point": "Jupiter",
+    "to_point": "Saturn",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الأوّل (TEI lines 9-16)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h01.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_01"
+   ],
+   "inputs": {
+    "house": 1,
+    "lot": "sahm al-hilaj"
+   },
+   "expected": {
+    "from_point": "the degree of the conjunction or opposition preceding the birth",
+    "to_point": "the degree of the Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الأوّل (TEI lines 9-16)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h01.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_01"
+   ],
+   "inputs": {
+    "house": 1,
+    "lot": "sahm al-ghayb"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Sun",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الأوّل (TEI lines 9-16)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h01.04",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_01"
+   ],
+   "inputs": {
+    "house": 1,
+    "lot": "sahm al-hubb wa-l-ulfa"
+   },
+   "expected": {
+    "from_point": "the Lot of Fortune",
+    "to_point": "the Lot of the Unseen",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الأوّل (TEI lines 9-16)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h01.05",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_01"
+   ],
+   "inputs": {
+    "house": 1,
+    "lot": "sahm al-thabat wa-l-baqa'"
+   },
+   "expected": {
+    "from_point": "the Lot of Fortune",
+    "to_point": "the Lot of the Unseen",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الأوّل (TEI lines 9-16)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h01.06",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_01"
+   ],
+   "inputs": {
+    "house": 1,
+    "lot": "sahm al-shaja'a wa-l-jur'a"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "the degree of the Lot of Fortune",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الأوّل (TEI lines 9-16)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h02.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_02"
+   ],
+   "inputs": {
+    "house": 2,
+    "lot": "sahm al-mal"
+   },
+   "expected": {
+    "from_point": "the lord of the house of wealth",
+    "to_point": "the degree and minute of the house of wealth",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثاني (TEI lines 17-20)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h02.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_02"
+   ],
+   "inputs": {
+    "house": 2,
+    "lot": "sahm al-faqr wa-qillat al-hila"
+   },
+   "expected": {
+    "from_point": "the Lot of the Unseen",
+    "to_point": "the Lot of Fortune",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثاني (TEI lines 17-20)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h02.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_02"
+   ],
+   "inputs": {
+    "house": 2,
+    "lot": "sahm al-falah wa-l-nasr wa-l-zafar"
+   },
+   "expected": {
+    "from_point": "the Lot of the Unseen",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثاني (TEI lines 17-20)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h03.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_03"
+   ],
+   "inputs": {
+    "house": 3,
+    "lot": "sahm al-ikhwa"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثالث (TEI lines 21-24)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h03.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_03"
+   ],
+   "inputs": {
+    "house": 3,
+    "lot": "sahm mawt al-ikhwa"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Saturn",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثالث (TEI lines 21-24)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h04.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_04"
+   ],
+   "inputs": {
+    "house": 4,
+    "lot": "sahm al-aba'"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Saturn",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الرابع (TEI lines 25-35)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h04.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_04"
+   ],
+   "inputs": {
+    "house": 4,
+    "lot": "sahm mawt al-aba'"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الرابع (TEI lines 25-35)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h04.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_04"
+   ],
+   "inputs": {
+    "house": 4,
+    "lot": "sahm al-ajdad"
+   },
+   "expected": {
+    "from_point": "the lord of the house of the Sun",
+    "to_point": "Saturn",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الرابع (TEI lines 25-35)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h04.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_04"
+   ],
+   "inputs": {
+    "house": 4,
+    "lot": "sahm al-'aqarat wa-l-diya'"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الرابع (TEI lines 25-35)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h04.04",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_04"
+   ],
+   "inputs": {
+    "house": 4,
+    "lot": "sahm sharaf al-mawlud"
+   },
+   "expected": {
+    "from_point": "the degree of the Sun by day / the degree of the Moon by night",
+    "to_point": "the degree of the Sun's exaltation by day / the degree of the Moon's exaltation by night",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الرابع (TEI lines 25-35)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h04.05",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_04"
+   ],
+   "inputs": {
+    "house": 4,
+    "lot": "sahm 'awaqib al-umur"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "the lord of the house of the conjunction or opposition",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الرابع (TEI lines 25-35)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h05.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_05"
+   ],
+   "inputs": {
+    "house": 5,
+    "lot": "sahm al-walad"
+   },
+   "expected": {
+    "from_point": "Jupiter",
+    "to_point": "Saturn",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الخامس (TEI lines 36-43)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h05.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_05"
+   ],
+   "inputs": {
+    "house": 5,
+    "lot": "sahm waqt al-walad"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الخامس (TEI lines 36-43)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h05.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_05"
+   ],
+   "inputs": {
+    "house": 5,
+    "lot": "sahm hal al-walad al-dhakar"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الخامس (TEI lines 36-43)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h05.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_05"
+   ],
+   "inputs": {
+    "house": 5,
+    "lot": "sahm hal al-walad al-untha"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Venus",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الخامس (TEI lines 36-43)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h05.04",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_05"
+   ],
+   "inputs": {
+    "house": 5,
+    "lot": "sahm jins al-mawlud"
+   },
+   "expected": {
+    "from_point": "the lord of the house of the Moon",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الخامس (TEI lines 36-43)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h05.05",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_05"
+   ],
+   "inputs": {
+    "house": 5,
+    "lot": "sahm bulugh al-mushtari"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الخامس (TEI lines 36-43)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h06.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_06"
+   ],
+   "inputs": {
+    "house": 6,
+    "lot": "sahm al-marad wa-l-zamana"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Mars",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السادس (TEI lines 44-47)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h06.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_06"
+   ],
+   "inputs": {
+    "house": 6,
+    "lot": "sahm al-'abid"
+   },
+   "expected": {
+    "from_point": "Mercury",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السادس (TEI lines 44-47)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h06.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_06"
+   ],
+   "inputs": {
+    "house": 6,
+    "lot": "sahm al-'abid li-l-Andarzaghar"
+   },
+   "expected": {
+    "from_point": "Mercury",
+    "to_point": "the Lot of Fortune",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السادس (TEI lines 44-47)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h07.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_07"
+   ],
+   "inputs": {
+    "house": 7,
+    "lot": "sahm tazwij al-rijal"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Venus",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السابع (TEI lines 48-53)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h07.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_07"
+   ],
+   "inputs": {
+    "house": 7,
+    "lot": "sahm tazwij al-nisa' li-Hirmis"
+   },
+   "expected": {
+    "from_point": "Venus",
+    "to_point": "Saturn",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السابع (TEI lines 48-53)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h07.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_07"
+   ],
+   "inputs": {
+    "house": 7,
+    "lot": "sahm tazwij al-nisa' li-Walis"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السابع (TEI lines 48-53)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h07.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_07"
+   ],
+   "inputs": {
+    "house": 7,
+    "lot": "sahm al-ladhdha wa-l-shahwa"
+   },
+   "expected": {
+    "from_point": "Venus",
+    "to_point": "the degree of the seventh",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السابع (TEI lines 48-53)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h07.04",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_07"
+   ],
+   "inputs": {
+    "house": 7,
+    "lot": "sahm al-'urs"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Venus",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت السابع (TEI lines 48-53)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h08.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_08"
+   ],
+   "inputs": {
+    "house": 8,
+    "lot": "sahm al-mawt"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "the degree and minute of the eighth house",
+    "cast_from": "the degree of Saturn",
+    "reverses_by_night": false,
+    "needs_house_cusp": true,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثامن (TEI lines 54-60)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h08.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_08"
+   ],
+   "inputs": {
+    "house": 8,
+    "lot": "sahm al-kawkab alladhi yaqtul"
+   },
+   "expected": {
+    "from_point": "the degree of the lord of the Ascendant",
+    "to_point": "the degree of the Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثامن (TEI lines 54-60)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h08.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_08"
+   ],
+   "inputs": {
+    "house": 8,
+    "lot": "sahm al-sana allati yukhaf fiha al-mawt"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "the lord of the house of the conjunction or opposition preceding the birth",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثامن (TEI lines 54-60)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h08.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_08"
+   ],
+   "inputs": {
+    "house": 8,
+    "lot": "sahm al-wathaq wa-l-sijn"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "the Lot of Fortune",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثامن (TEI lines 54-60)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h09.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_09"
+   ],
+   "inputs": {
+    "house": 9,
+    "lot": "sahm al-safar"
+   },
+   "expected": {
+    "from_point": "the lord of the ninth house",
+    "to_point": "the degree and minute of the ninth house",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت التاسع (TEI lines 61-66)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h09.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_09"
+   ],
+   "inputs": {
+    "house": 9,
+    "lot": "sahm al-masir fi al-ma'"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "fifteen degrees of Cancer",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت التاسع (TEI lines 61-66)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h09.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_09"
+   ],
+   "inputs": {
+    "house": 9,
+    "lot": "sahm al-wara'"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Mercury",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت التاسع (TEI lines 61-66)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h10.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_10"
+   ],
+   "inputs": {
+    "house": 10,
+    "lot": "sahm al-sultan wa-ayy 'amal ya'mal al-mawlud"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت العاشر (TEI lines 67-73)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h10.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_10"
+   ],
+   "inputs": {
+    "house": 10,
+    "lot": "sahm al-mulk wa-l-sultan"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت العاشر (TEI lines 67-73)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h10.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_10"
+   ],
+   "inputs": {
+    "house": 10,
+    "lot": "sahm al-'amal wa-l-sultan li-Walis"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "the degree of the Midheaven",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت العاشر (TEI lines 67-73)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h10.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_10"
+   ],
+   "inputs": {
+    "house": 10,
+    "lot": "sahm amr al-sultan"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "the degree of the Midheaven",
+    "cast_from": "Jupiter",
+    "reverses_by_night": false,
+    "needs_house_cusp": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت العاشر (TEI lines 67-73)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h10.04",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_10"
+   ],
+   "inputs": {
+    "house": 10,
+    "lot": "sahm al-umm"
+   },
+   "expected": {
+    "from_point": "Venus",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت العاشر (TEI lines 67-73)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h11.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_11"
+   ],
+   "inputs": {
+    "house": 11,
+    "lot": "sahm al-asdiqa'"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Mercury",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الحادي عشر (TEI lines 74-77)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h11.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_11"
+   ],
+   "inputs": {
+    "house": 11,
+    "lot": "sahm al-sadaqa wa-l-'adawa"
+   },
+   "expected": {
+    "from_point": "the Lot of Fortune",
+    "to_point": "the Lot of the Unseen",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الحادي عشر (TEI lines 74-77)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h12.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_12"
+   ],
+   "inputs": {
+    "house": 12,
+    "lot": "sahm al-a'da' li-Hirmis"
+   },
+   "expected": {
+    "from_point": "the lord of the house of enemies",
+    "to_point": "the degree of the house of enemies",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثاني عشر (TEI lines 78-80)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.h12.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.house_12"
+   ],
+   "inputs": {
+    "house": 12,
+    "lot": "sahm al-a'da' li-ba'd al-awa'il"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Mars",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "needs_house_cusp": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, البيت الثاني عشر (TEI lines 78-80)"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.gen.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.general_use"
+   ],
+   "inputs": {
+    "lot": "sahm sidq al-khabar"
+   },
+   "expected": {
+    "from_point": "Mercury",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 81-91"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.gen.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.general_use"
+   ],
+   "inputs": {
+    "lot": "sahm al-'aql wa-bu'd al-ghawr"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 81-91"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.gen.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.general_use"
+   ],
+   "inputs": {
+    "lot": "sahm al-hikma"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 81-91"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.gen.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.general_use"
+   ],
+   "inputs": {
+    "lot": "sahm al-'ilm"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Jupiter",
+    "cast_from": "Ascendant",
+    "reverses_by_night": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 81-91"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.gen.04",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.general_use"
+   ],
+   "inputs": {
+    "lot": "sahm al-harb wa-l-qital"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Moon",
+    "cast_from": "Ascendant",
+    "reverses_by_night": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 81-91"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.gen.05",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.general_use"
+   ],
+   "inputs": {
+    "lot": "sahm al-sulh fi al-'asakir"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Mercury",
+    "cast_from": "Mercury",
+    "reverses_by_night": false,
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 81-91"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.gen.06",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.general_use"
+   ],
+   "inputs": {
+    "lot": "sahm al-nazar fi tahwil al-sana"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Venus",
+    "cast_from": "the Sun",
+    "reverses_by_night": true,
+    "output_policy": "renderable_with_source",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 81-91"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.king.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.kingship_and_world_year"
+   ],
+   "inputs": {
+    "lot": "sahm al-mulk fi tahwil sini al-'alam"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "Moon",
+    "cast_from": "the Ascendant of the conjunction signifying the transfer of the milla",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 92-106"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.king.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.kingship_and_world_year"
+   ],
+   "inputs": {
+    "lot": "sahm muddat al-mulk"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "fifteen degrees of Leo",
+    "cast_from": "the Moon",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 92-106"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.king.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.kingship_and_world_year"
+   ],
+   "inputs": {
+    "lot": "sahm akhar li-muddat qiyam al-mulk"
+   },
+   "expected": {
+    "from_point": "Jupiter",
+    "to_point": "Saturn",
+    "cast_from": "the Ascendant of the year-revolution in which the king rose",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 92-106"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.king.two_greatest",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.kingship_and_world_year"
+   ],
+   "inputs": {
+    "lot": "al-sahmani al-a'zamani"
+   },
+   "expected": {
+    "first_from": "the oriental of Saturn and Jupiter with respect to the Sun",
+    "second_from": "the occidental of Saturn and Jupiter with respect to the Sun",
+    "tie_rule": "if both oriental or both occidental, first from Saturn and second from Jupiter",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 107-119"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.00",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-ta'am"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Mars",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.01",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-ma'"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Venus",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.02",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-sha'ir"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Jupiter",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.03",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-himmas"
+   },
+   "expected": {
+    "from_point": "Venus",
+    "to_point": "Sun",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.04",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-'adas"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "Saturn",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.05",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-baqila'"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Mars",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.06",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-mash"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Mars",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.07",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-tamr"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Venus",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.08",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-'asal"
+   },
+   "expected": {
+    "from_point": "Moon",
+    "to_point": "Sun",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.09",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-aruzz"
+   },
+   "expected": {
+    "from_point": "Jupiter",
+    "to_point": "Saturn",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.10",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-zaytun"
+   },
+   "expected": {
+    "from_point": "Mercury",
+    "to_point": "Moon",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.11",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-'inab"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Venus",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.12",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-qutn"
+   },
+   "expected": {
+    "from_point": "Mercury",
+    "to_point": "Venus",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.13",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-simsim"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Jupiter or Venus",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.14",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-bittikh"
+   },
+   "expected": {
+    "from_point": "Mercury",
+    "to_point": "Saturn",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.15",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-at'ima al-hamida"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Mars",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.16",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-at'ima al-hulwa"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Venus",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.17",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-at'ima al-harrifa"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "Saturn",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.18",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-at'ima al-murra"
+   },
+   "expected": {
+    "from_point": "Mercury",
+    "to_point": "Saturn",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.19",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-adwiya al-mushila al-hulwa"
+   },
+   "expected": {
+    "from_point": "Sun",
+    "to_point": "Moon",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.20",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-adwiya al-mushila al-hamida"
+   },
+   "expected": {
+    "from_point": "Saturn",
+    "to_point": "Jupiter",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.21",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-adwiya al-mushila al-maliha"
+   },
+   "expected": {
+    "from_point": "Mars",
+    "to_point": "Moon",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.lot.comm.22",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.commodity_prices"
+   ],
+   "inputs": {
+    "lot": "sahm al-sumum"
+   },
+   "expected": {
+    "from_point": "al-Jawzahar (the lunar node)",
+    "to_point": "Saturn",
+    "cast_from": "the Ascendant of the year-revolution",
+    "output_policy": "refused",
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, TEI lines 126-137"
+  },
+  {
+   "vector_id": "islam.qabisi.ch5.inventory.count",
+   "rule_ids": [
+    "islam.qabisi.ch5.lots.inventory"
+   ],
+   "inputs": {
+    "query": "how many lots does Chapter V enumerate"
+   },
+   "expected": {
+    "total": 81,
+    "natal_house_lots": 48,
+    "needing_cusps": 7,
+    "refused": 38,
+    "customer_prediction": false
+   },
+   "provenance": "al-Qabisi Ch. V, counted 2026-08-05"
+  }
+ ]
+}

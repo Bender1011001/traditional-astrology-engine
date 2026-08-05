@@ -740,3 +740,141 @@ recovering witness and the defect in the primary one.
 Note on p.84: the 8th-house cell contains "he will not be long-lived". It is
 stored verbatim, and the engine's clause-level publication policy redacts the
 longevity clause at render time - which is where that judgment belongs.
+
+## 2026-08-05: the strength machinery, read out of the same scan that was called unusable
+
+Until this date the Jyotisha pack held 202 delineation rules across four authors
+and **no strength machinery whatever**. That is not a coverage gap of the same
+kind as a missing chapter. Adhyaya 15 sloka 100 — *balabalavivekena sarvesam
+phalam adiset*, "the result of every one of them is to be declared by
+discrimination of strength and weakness" — was already transcribed in this
+corpus as the root text's own instruction, and there was nothing in the pack
+capable of obeying it. A Jyotishi cannot judge a chart without Shadbala and
+Ashtakavarga; the pack could read beautifully and weigh nothing.
+
+### Where it was
+
+In `tmp/acquire/texts/bphs_subodhini_1899_djvu.txt` — the file this corpus
+already held, and had already corrected once (the 2026-08-02 pass overturned an
+earlier "the scan is unreadable" verdict). That pass mined purva-khanda adhyayas
+4, 13, 15, 28-31, 36 and 37. It did not open the **uttara-khanda** at all, and it
+did not open purva-khanda adhyayas 3 or 17-20. Those are where the arithmetic
+lives:
+
+| Location | Contents | Encoded in |
+|---|---|---|
+| Uttara-khanda adhyaya 1, slokas 19-74 | ashtakavarga: the karana (blank) tables, then the sthana (rekha) tables, for all eight reference points; the pinda gunakas | `strength_rule_manifest.json` |
+| Uttara-khanda adhyaya 2, slokas 1-46 | **Shadbala entire**, with worked arithmetic | `strength_rule_manifest.json` |
+| Purva-khanda adhyaya 3, slokas 52-129 | the sixteen vargas, their computation, their purposes, the tier names, vimsopaka bala | `varga_rule_manifest.json` |
+| Purva-khanda adhyaya 17 | trikona sodhana | `strength_rule_manifest.json` |
+| Purva-khanda adhyaya 18 | ekadhipatya sodhana | `strength_rule_manifest.json` |
+| Purva-khanda adhyaya 19 | pindotpatti, with both gunaka charts and a worked pinda | `strength_rule_manifest.json` |
+| Purva-khanda adhyaya 20 | ashtakavarga significations and the sarvashtakavarga grades | `strength_rule_manifest.json` |
+
+The chapter map was found by locating the colophons (`...adhyayah`) rather than
+by keyword search, which is why two earlier passes missed it: the terms
+*shadbala* and *ashtakavarga* do occur in the purva-khanda's table of contents,
+but the chapters themselves sit past OCR line 24000, in a second khanda whose
+chapter numbering restarts at 1.
+
+### Why this material is stronger evidence than anything else in the pack
+
+It is arithmetic, and the 1899 printing **works its own examples**. Recomputed:
+
+| What | Source's printed figures | Result |
+|---|---|---|
+| Drsti value, six graded cases | six examples, e.g. arc 6/2/3/42 gives 58/58/09 | all six reproduce |
+| Uccha-bala of the Sun | 114 deg 14 min / 3 | 38/04 correct |
+| Dig-bala of the Sun | 147 deg 05 min / 3 | 0/49/01 correct |
+| Natonnata | unnata 24/22 doubled = 48/44; 60 less that = 11/16 | correct |
+| Paksha | elongation 38 deg 45 min / 3 = 12/55; 60 less that = 47/05 | correct |
+| Kala-bala of the Sun | 0/48/44 + 0/47/5 + 1/0/0 + 0/30/0 | = 3/5/49 correct |
+| Ayana-bala of the Sun | 40 deg 52 min 30 sec / 3 = 13/37/30, doubled | = 27/15 correct |
+| **Sadbala of the Sun, complete** | 4/18/4 + 0/49/1 + 3/5/49 + 0/27/15 + 1/0/0 | **= 9/40/9, plus quarter-drsti 0/1/5 = 9/41/14 correct** |
+| Bhava-bala, first house | 5/59/16 + 0/6/52 + 0/50/41 | = 6/56/49 correct; dig 85 deg 15 min / 3 = 28/25 correct |
+| Required minima, three classes | 165+35+50+112+30, 133+50+30+100+40, 96+30+40+67+20 | 392, 353, 253 virupas = 6/32, 5/53, 4/13 correct |
+| Trikona sodhana, four cases | e.g. 4, 6, 5 gives 0, 2, 1 | all four reproduce |
+| **Ashtakavarga pinda of the Sun** | graha-pinda 40, rasi-pinda 51 | **yoga-pinda 91 correct** |
+
+Each of the eight bhinnashtakavarga tables was closed independently by row-sum
+against its canonical total (Sun 48, Moon 49, Mars 39, Mercury 54, Jupiter 56,
+Venus 52, Saturn 39, Lagna 49; the seven graha tables summing to 337, the
+sarvashtakavarga total). That check caught three cells where the verse compound,
+the Subodhini's Sanskrit prose expansion and the Hindi bhasha gloss did not
+agree — Jupiter's ninth house and Venus's fourth and eighth. All three are named
+in the manifest with the reading taken and the reading rejected, rather than
+averaged into a table that looks clean.
+
+### The unit, which no sloka defines
+
+Every strength in uttara 2 prints as a sexagesimal triple. The leading place is
+the **rupa**, worth 60 virupas. No verse says so. It was established by
+arithmetic: the Sun's five printed components sum to the printed total only under
+that reading, and the naisargika value of 60 virupas prints as `1|0|0`. The rule
+recording this is graded `C` and states that it is an inference. An
+implementation that reads the leading place as virupas is wrong by a factor of
+sixty throughout, silently, in every chart.
+
+### The notation trap
+
+Uttara 1 sloka 72: *karanam bindu-vat proktam sthanam rekha tathocyate* — the
+karana is stated to be like a dot, the sthana is called a line; and the
+commentary adds *karanam sunyakaram likhet*, write the karana as a zero-shape.
+So **bindu = blank = 0** and **rekha = mark = 1** — and this chapter enumerates
+the BLANKS first (slokas 19-45) and the MARKS second (46-71). Much popular modern
+writing uses "bindu" for the scored point, i.e. exactly inverted. A reader who
+takes this chapter's first list for its scoring list builds every ashtakavarga
+backwards, and every row-sum still looks plausible. Encoded as a first-priority
+rule for that reason.
+
+### Four numeric divergences from the modern handbooks, published not normalised
+
+1. Saptavargaja weights 45 / 30 / **20** / 15 / **10** / **4** / **2** (handbooks:
+   45 / 30 / 22.5 / 15 / 7.5 / 3.75 / 1.875), plus a separate exaltation value of
+   **100** that the handbooks do not carry at all.
+2. Required minimum strengths in three classes (6/32, 5/53, 4/13 rupas), not seven
+   separate figures.
+3. The Moon's paksha-bala is **not** doubled.
+4. Ayana-bala belongs with **cheshta**, not with kala — so this recension's
+   kala-bala has four limbs, not six or seven.
+
+Any product asserting "BPHS says a graha is strong above N" without naming its
+recension is guessing, and this pass makes that checkable.
+
+### Moolatrikona, closed as a by-product
+
+The conventions table has carried "Moolatrikona boundaries: pending" since the
+spec was written. The commentary to uttara 2 sloka 8 states every arc explicitly,
+graha by graha, because saptavargaja-bala cannot be computed without them: Sun
+Leo 0-20, Moon Taurus 3-30 (0-3 being exaltation), Mars Aries 0-12, Mercury Virgo
+15-20 (0-15 exaltation), Jupiter Sagittarius 0-10, Venus Libra 0-15, Saturn
+Aquarius 0-20. Recorded and encoded.
+
+### What remains unmined in this chapter set
+
+- **Purva-khanda adhyaya 3, slokas 66-76 and 79-87** — the computation rules for
+  D16, D20, D24, D27, D40 and D45. Legible in the same scan; simply not read.
+  Reading them completes the dasavarga and shodasavarga vimsopaka schemes.
+- **Uttara-khanda adhyayas 3-16** — ishta-kashta phala (3), rasmi-phala (4),
+  lokayatra (5-9), ayurdaya (10-12), kalamsadi-phala (13), abdacharya /
+  varshaphala (14-15), masacharya (16). The varshaphala chapters in particular
+  are a complete annual-forecast system this corpus has not touched at all, and
+  they are long — adhyaya 14 alone runs past sloka 100.
+- **Purva-khanda adhyaya 20, slokas 4-80** — the ashtakavarga *phala* proper
+  (what each rekha count in each house of each varga means). Only the
+  significations (slokas 1-3) and the sarvashtakavarga grades (81-86) were taken.
+- **Uttara-khanda adhyaya 1, slokas 19-45** — the karana (blank) tables. Not
+  needed, since the sthana tables are their exact complement and were read
+  directly, but they are a second internal witness available for collation and
+  this pass did not use them.
+
+### Saravali and Brihat Jataka: still unopened
+
+Unchanged from 2026-08-02 and still the highest-value remaining Jyotisha targets.
+Saravali (Nirnaya Sagara 1907) adhyayas 31-39 and 41-53 remain unread, including
+**51 nasta-jataka** — the genre most likely to carry a worked nativity — and
+**52 astakavarga**, which would give this corpus its first two-author collation
+of an ashtakavarga table against the eight now encoded from BPHS. And
+`jp2/brihat_jataka_bhattotpala_vivrti_sitaram_jha_jp2.zip`, Bhattotpala's
+commentary and the classical authority on strength, was not opened in this pass
+either. None of the three is blocked. All three are unmined.

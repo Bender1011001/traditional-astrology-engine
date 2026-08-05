@@ -1,0 +1,1601 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-05",
+  "tradition_id": "hellenistic",
+  "source_pack_id": "valens_anthologiae_kroll1908_v1",
+  "status": "research_verified",
+  "source_ids": [
+    "hellenistic_valens_riley_translation_reading_aid",
+    "hellenistic_valens_anthologiae_kroll_1908"
+  ],
+  "vectors": [
+    {
+      "vector_id": "valens.b1.combination.preface",
+      "rule_ids": [
+        "hel.valens.b1.combination.preface"
+      ],
+      "inputs": {
+        "technique": "planet_pair_combination"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "pairs_printed": 19,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_jupiter",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_jupiter"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Jupiter"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Jupiter",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Mars",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_mercury",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_mercury"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Mercury"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Mercury",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_venus",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_venus"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Venus"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Venus",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37-38, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Moon",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Mars",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_venus",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_venus"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Venus"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Venus",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_mercury",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_mercury"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Mercury"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Mercury",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Mars",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 39-40, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_mercury",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_mercury"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Mercury"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Mercury",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.mercury_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.mercury_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Mercury",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Mercury",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.mercury_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.mercury_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Mercury",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Mercury",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.mercury_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.mercury_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Mercury",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Mercury",
+        "planet_b": "Mars",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.sun_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.sun_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Sun",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Sun",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40-41, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.trigons.fire",
+      "rule_ids": [
+        "hel.valens.b2.trigons"
+      ],
+      "inputs": {
+        "triplicity": "fire",
+        "signs": [
+          "Aries",
+          "Leo",
+          "Sagittarius"
+        ]
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.1",
+        "sect": "diurnal",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 55, PDF page index 73, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.triplicity_lords.water_night",
+      "rule_ids": [
+        "hel.valens.b2.triplicity_lords"
+      ],
+      "inputs": {
+        "triplicity": "water",
+        "sect": "night"
+      },
+      "expected": {
+        "greek_present": true,
+        "lords": [
+          "Mars",
+          "Venus",
+          "Moon"
+        ],
+        "section": "Anthologiae II.1",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 56 lines 9-12, PDF page index 74, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.triplicity_lords.air_day",
+      "rule_ids": [
+        "hel.valens.b2.triplicity_lords"
+      ],
+      "inputs": {
+        "triplicity": "air",
+        "sect": "day"
+      },
+      "expected": {
+        "greek_present": true,
+        "lords": [
+          "Saturn",
+          "Mercury",
+          "Jupiter"
+        ],
+        "section": "Anthologiae II.1",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 56 lines 5-8, PDF page index 74, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.method.day",
+      "rule_ids": [
+        "hel.valens.b2.c02.method"
+      ],
+      "inputs": {
+        "sect": "day",
+        "note": "sect light is the Sun"
+      },
+      "expected": {
+        "greek_present": true,
+        "significator": "Sun",
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 56 lines 19-30, PDF page index 74, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.sequence.first_bad_second_good",
+      "rule_ids": [
+        "hel.valens.b2.c02.lord_sequence_outcomes"
+      ],
+      "inputs": {
+        "first_lord": "cadent",
+        "second_lord": "angular"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 57 lines 1-6, PDF page index 75, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.inspect.taurus_day",
+      "rule_ids": [
+        "hel.valens.b2.c02.per_triplicity_inspection"
+      ],
+      "inputs": {
+        "sect": "day",
+        "sun_sign": "Taurus"
+      },
+      "expected": {
+        "greek_present": true,
+        "inspect": [
+          "Venus",
+          "Moon",
+          "Mars"
+        ],
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 57 lines 23-25, PDF page index 75, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.fortune_fallback.malefic_witness",
+      "rule_ids": [
+        "hel.valens.b2.c02.fortune_fallback"
+      ],
+      "inputs": {
+        "triplicity_lords": "all cadent",
+        "lot_of_fortune_and_lord": "badly fallen",
+        "witnesses": "malefics"
+      },
+      "expected": {
+        "greek_present": true,
+        "restricted_clause_present": true,
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 58 lines 12-14, PDF page index 76, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.saturn_day_benefic",
+      "rule_ids": [
+        "hel.valens.b2.c02.malefic_benefic_reversal"
+      ],
+      "inputs": {
+        "planet": "Saturn",
+        "sect": "day",
+        "rulership": true,
+        "witnesses": [
+          "Jupiter",
+          "Sun"
+        ]
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 58 lines 29-33, PDF page index 76, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.lot_of_fortune.day_formula",
+      "rule_ids": [
+        "hel.valens.b2.lot_of_fortune"
+      ],
+      "inputs": {
+        "sect": "day",
+        "note": "arc Sun to Moon projected from the Ascendant"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.3",
+        "attribution": "the King, book 13",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 59 lines 22-30, PDF page index 77, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.hour_lord.venus",
+      "rule_ids": [
+        "hel.valens.b2.lord_of_hour_or_lot"
+      ],
+      "inputs": {
+        "planet": "Venus",
+        "holds": "hour_or_lot"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 60 lines 23-26, PDF page index 78, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.hour_lord.moon",
+      "rule_ids": [
+        "hel.valens.b2.lord_of_hour_or_lot"
+      ],
+      "inputs": {
+        "planet": "Moon",
+        "holds": "hour_or_lot"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 61 lines 8-17, PDF page index 79, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c04.moon_mars_opposition",
+      "rule_ids": [
+        "hel.valens.b2.c04.moon_afflicted_by_malefics"
+      ],
+      "inputs": {
+        "moon_holds": "lot_of_fortune",
+        "mars": "opposition",
+        "benefics": "absent"
+      },
+      "expected": {
+        "output_policy": "refused",
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 61 lines 17-19, PDF page index 79, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c04.lifespan",
+      "rule_ids": [
+        "hel.valens.b2.c04.length_of_life_note"
+      ],
+      "inputs": {
+        "ascendant_lord": "under the sun beams / setting"
+      },
+      "expected": {
+        "output_policy": "refused",
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 62 lines 1-7, PDF page index 80, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.method",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.method"
+      ],
+      "inputs": {
+        "question": "timing of fortune, misfortune, irregularity or successful action"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.27",
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 94, PDF page index 112, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.significators",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.significators"
+      ],
+      "inputs": {
+        "topic_of_inquiry": "action_and_reputation"
+      },
+      "expected": {
+        "greek_present": true,
+        "significators_include": "Lot of Fortune",
+        "restricted_clause_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 94, PDF page index 112, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.order_ascendant_first",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.order_of_rulership"
+      ],
+      "inputs": {
+        "chart_position": "angle",
+        "note": "planets upon the Ascendant rule the first time"
+      },
+      "expected": {
+        "greek_present": true,
+        "first_in_order": "planets on the Ascendant",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 94, PDF page index 112, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.proportional_allotment",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.proportional_allotment"
+      ],
+      "inputs": {
+        "planet_placement": "angular",
+        "planet_condition": "properly configured and found oriental"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.27",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 pp. 94-95, PDF page indices 112-113, read from 300dpi page images"
+    },
+    {
+      "vector_id": "valens.b2.c27.by_topic",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.by_topic_place_and_lord"
+      ],
+      "inputs": {
+        "topic": "siblings"
+      },
+      "expected": {
+        "greek_present": true,
+        "first_step": "distribute the least period (ἐλαχίστη περίοδος) of the lord of the topical place",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 95, PDF page index 113, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.trigon_lords_both_fallen",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.trigon_lords_verdict"
+      ],
+      "inputs": {
+        "trigon_lords_placement": "both fallen away"
+      },
+      "expected": {
+        "greek_present": true,
+        "branch": "both_fallen_away",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 95, PDF page index 113, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c27.three_stars_one_sign",
+      "rule_ids": [
+        "hel.valens.b2.active_inactive_times.several_stars_one_sign"
+      ],
+      "inputs": {
+        "planets_in_one_sign": 3
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.27",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 95, PDF page index 113, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c28.prior_authorities",
+      "rule_ids": [
+        "hel.valens.b2.travel_hermippus.prior_authorities"
+      ],
+      "inputs": {
+        "malefic_has_phasis_in_the_times": true
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.28",
+        "attribution_names_petosiris": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c28.lights_setting",
+      "rule_ids": [
+        "hel.valens.b2.travel_hermippus.configurations"
+      ],
+      "inputs": {
+        "lights": "setting"
+      },
+      "expected": {
+        "greek_present": true,
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.lot_of_travel_formula",
+      "rule_ids": [
+        "hel.valens.b2.travel.lot_of_foreign_travel"
+      ],
+      "inputs": {
+        "lot_computed": "lot_of_foreign_travel"
+      },
+      "expected": {
+        "greek_present": true,
+        "formula_from": "Saturn",
+        "formula_to": "Mars",
+        "formula_projected_from": "Ascendant",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.abram_attribution",
+      "rule_ids": [
+        "hel.valens.b2.travel.abram_attribution"
+      ],
+      "inputs": {
+        "source_of_technique": "Abram (Ἄβραμος)"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 96, PDF page index 114, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.distribution_from_daimon",
+      "rule_ids": [
+        "hel.valens.b2.travel.distribution_from_daimon"
+      ],
+      "inputs": {
+        "time_lord_system": "distribution of active times from the Lot of Daimon"
+      },
+      "expected": {
+        "greek_present": true,
+        "step_count": 6,
+        "restricted_clause_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 pp. 96-97, PDF page indices 114-115, read from 300dpi page images"
+    },
+    {
+      "vector_id": "valens.b2.c29.epimerismos_xeniteia",
+      "rule_ids": [
+        "hel.valens.b2.travel.epimerismos_gives_foreign_residence"
+      ],
+      "inputs": {
+        "sign_holding_the_times": "lot of travel, or its opposition or square"
+      },
+      "expected": {
+        "greek_present": true,
+        "kroll_obelus": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.benefic_distribution",
+      "rule_ids": [
+        "hel.valens.b2.travel.benefic_taking_distribution"
+      ],
+      "inputs": {
+        "planet_taking_the_distribution": "benefic",
+        "position": "found at the opposition in the nativity"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.lords_averted",
+      "rule_ids": [
+        "hel.valens.b2.travel.lords_of_signs_averted"
+      ],
+      "inputs": {
+        "lord_of_sign_holding_times": "averted (ἀπόστροφος)"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.lord_of_sign_of_times",
+      "rule_ids": [
+        "hel.valens.b2.travel.lord_of_sign_of_times"
+      ],
+      "inputs": {
+        "lord_of_sign_of_times": "in its own place (ἰδιοτοπῇ)"
+      },
+      "expected": {
+        "greek_present": true,
+        "negative_branch_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.mercury_venus",
+      "rule_ids": [
+        "hel.valens.b2.travel.mercury_and_venus_short_journeys"
+      ],
+      "inputs": {
+        "time_lord": "Venus"
+      },
+      "expected": {
+        "greek_present": true,
+        "outcome": "swift returns, not long journeys",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.two_lots_one_sign",
+      "rule_ids": [
+        "hel.valens.b2.travel.two_lots_in_one_sign"
+      ],
+      "inputs": {
+        "lot_of_fortune_and_lot_of_daimon": "in one and the same sign",
+        "lot_of_travel": "square to that sign",
+        "malefic_on_the_place": true
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 97, PDF page index 115, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.no_travel",
+      "rule_ids": [
+        "hel.valens.b2.travel.no_travel_conditions"
+      ],
+      "inputs": {
+        "lot_of_travel": "Midheaven"
+      },
+      "expected": {
+        "greek_present": true,
+        "type": "negative_delineation",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.subterranean_frequent",
+      "rule_ids": [
+        "hel.valens.b2.travel.subterranean_places_frequent"
+      ],
+      "inputs": {
+        "subterranean_places_hold_the_times": true
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.29",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.transient_journey",
+      "rule_ids": [
+        "hel.valens.b2.travel.transient_journey"
+      ],
+      "inputs": {
+        "distribution": "of a lesser (planet), or with Fortune opposite"
+      },
+      "expected": {
+        "greek_present": true,
+        "outcome": "παροδικὴ ἀποδημία — a passing journey",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.annual_profection",
+      "rule_ids": [
+        "hel.valens.b2.travel.annual_profection_reinforces"
+      ],
+      "inputs": {
+        "annual_profection_of_the_place": "has a motion of travel"
+      },
+      "expected": {
+        "greek_present": true,
+        "kroll_lacuna_recorded": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 98, PDF page index 116, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.delays",
+      "rule_ids": [
+        "hel.valens.b2.travel.departures_and_delays"
+      ],
+      "inputs": {
+        "distributions_fall_in_cadents_without_opposing_or_overcoming_sign": true
+      },
+      "expected": {
+        "greek_present": true,
+        "outcome": "μελλησμὸς ἀποδημίας — postponement of travel, intention unaccomplished",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 99, PDF page index 117, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c29.mars_both_lots",
+      "rule_ids": [
+        "hel.valens.b2.travel.mars_lord_of_both_lots"
+      ],
+      "inputs": {
+        "mars": "averted from the lot or from the place of foreign parts and lord of neither"
+      },
+      "expected": {
+        "greek_present": true,
+        "negative_branch_present": true,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 99, PDF page index 117, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2d.nativity.01",
+      "rule_ids": [
+        "hel.valens.b2d.nativity.01"
+      ],
+      "inputs": {
+        "nativity_id": "valens.b2d.nativity.01",
+        "note": "worked chart printed at Kroll p.114"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.36",
+        "output_policy": "refused",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2d.nativity.02",
+      "rule_ids": [
+        "hel.valens.b2d.nativity.02"
+      ],
+      "inputs": {
+        "nativity_id": "valens.b2d.nativity.02",
+        "note": "worked chart printed at Kroll p.114"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.36",
+        "output_policy": "refused",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2d.nativity.03",
+      "rule_ids": [
+        "hel.valens.b2d.nativity.03"
+      ],
+      "inputs": {
+        "nativity_id": "valens.b2d.nativity.03",
+        "note": "worked chart printed at Kroll p.114"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.36",
+        "output_policy": "refused",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2d.nativity.04",
+      "rule_ids": [
+        "hel.valens.b2d.nativity.04"
+      ],
+      "inputs": {
+        "nativity_id": "valens.b2d.nativity.04",
+        "note": "worked chart printed at Kroll p.114"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.36",
+        "output_policy": "refused",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.chapter_heading",
+      "rule_ids": [
+        "hel.valens.b2.marriage.chapter_heading"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "chapter_heading"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.method",
+      "rule_ids": [
+        "hel.valens.b2.marriage.method"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "method"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_tropical_bicorporeal_night",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_tropical_bicorporeal_night"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_tropical_bicorporeal_night"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 114, PDF page index 132, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_lord_afflicted",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_lord_afflicted"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_lord_afflicted"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.corrupter_rejects_venus",
+      "rule_ids": [
+        "hel.valens.b2.marriage.corrupter_rejects_venus"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "corrupter_rejects_venus"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.saturn_regards_western_venus",
+      "rule_ids": [
+        "hel.valens.b2.marriage.saturn_regards_western_venus"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "saturn_regards_western_venus"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_in_saturn_place_opposed",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_in_saturn_place_opposed"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_in_saturn_place_opposed"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.saturn_opposes_venus_always",
+      "rule_ids": [
+        "hel.valens.b2.marriage.saturn_opposes_venus_always"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "saturn_opposes_venus_always"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.saturn_mc_opposes_venus",
+      "rule_ids": [
+        "hel.valens.b2.marriage.saturn_mc_opposes_venus"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "saturn_mc_opposes_venus"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_saturn_house_jupiter_mars",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_saturn_house_jupiter_mars"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_saturn_house_jupiter_mars"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.lights_amplify_faults",
+      "rule_ids": [
+        "hel.valens.b2.marriage.lights_amplify_faults"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "lights_amplify_faults"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_west_or_ic_with_saturn",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_west_or_ic_with_saturn"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_west_or_ic_with_saturn"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_with_saturn_older_partner",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_with_saturn_older_partner"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_with_saturn_older_partner"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.moon_venus_same_angle",
+      "rule_ids": [
+        "hel.valens.b2.marriage.moon_venus_same_angle"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "moon_venus_same_angle"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.moon_venus_square_or_opposed",
+      "rule_ids": [
+        "hel.valens.b2.marriage.moon_venus_square_or_opposed"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "moon_venus_square_or_opposed"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.moon_venus_trine_own_house",
+      "rule_ids": [
+        "hel.valens.b2.marriage.moon_venus_trine_own_house"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "moon_venus_trine_own_house"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.sun_own_house_with_jupiter_venus",
+      "rule_ids": [
+        "hel.valens.b2.marriage.sun_own_house_with_jupiter_venus"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "sun_own_house_with_jupiter_venus"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 115, PDF page index 133, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_own_house_jupiter_bounds",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_own_house_jupiter_bounds"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_own_house_jupiter_bounds"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_ic_with_moon",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_ic_with_moon"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_ic_with_moon"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.saturn_decimates_venus",
+      "rule_ids": [
+        "hel.valens.b2.marriage.saturn_decimates_venus"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "saturn_decimates_venus"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.saturn_venus_epanaphora",
+      "rule_ids": [
+        "hel.valens.b2.marriage.saturn_venus_epanaphora"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "saturn_venus_epanaphora"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.jupiter_conceals",
+      "rule_ids": [
+        "hel.valens.b2.marriage.jupiter_conceals"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "jupiter_conceals"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.saturn_witness_venus_with_jupiter_mars",
+      "rule_ids": [
+        "hel.valens.b2.marriage.saturn_witness_venus_with_jupiter_mars"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "saturn_witness_venus_with_jupiter_mars"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.moon_struck_by_jupiter_saturn_witness",
+      "rule_ids": [
+        "hel.valens.b2.marriage.moon_struck_by_jupiter_saturn_witness"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "moon_struck_by_jupiter_saturn_witness"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_exalted_jupiter_witness",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_exalted_jupiter_witness"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_exalted_jupiter_witness"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.mercury_added_to_figure",
+      "rule_ids": [
+        "hel.valens.b2.marriage.mercury_added_to_figure"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "mercury_added_to_figure"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.jupiter_regards_venus_general",
+      "rule_ids": [
+        "hel.valens.b2.marriage.jupiter_regards_venus_general"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "jupiter_regards_venus_general"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.marriage.venus_angular_unafflicted",
+      "rule_ids": [
+        "hel.valens.b2.marriage.venus_angular_unafflicted"
+      ],
+      "inputs": {
+        "technique": "marriage",
+        "case": "venus_angular_unafflicted"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.37",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 116, PDF page index 134, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.planet_nature.sun",
+      "rule_ids": [
+        "hel.valens.b1.planet_nature.sun"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "planet": "Sun",
+        "what_is_checked": "That the manifest reproduces Valens' stated nature for this planet at the cited passage. A fidelity pin read from a 300dpi page image, not a computation."
+      },
+      "expected": {
+        "greek_present": true,
+        "customer_prediction": false,
+        "section": "Anthologiae I.1"
+      },
+      "provenance": "Kroll 1908, Anthologiae I.1, read from a 300dpi page image; vector added during fragment assembly to close coverage."
+    },
+    {
+      "vector_id": "valens.b1.planet_nature.moon",
+      "rule_ids": [
+        "hel.valens.b1.planet_nature.moon"
+      ],
+      "inputs": {
+        "operation": "transcription_fidelity_check",
+        "planet": "Moon",
+        "what_is_checked": "That the manifest reproduces Valens' stated nature for this planet at the cited passage. A fidelity pin read from a 300dpi page image, not a computation."
+      },
+      "expected": {
+        "greek_present": true,
+        "customer_prediction": false,
+        "section": "Anthologiae I.1"
+      },
+      "provenance": "Kroll 1908, Anthologiae I.1, read from a 300dpi page image; vector added during fragment assembly to close coverage."
+    }
+  ]
+}

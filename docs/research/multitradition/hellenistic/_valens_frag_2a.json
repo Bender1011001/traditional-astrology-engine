@@ -1,0 +1,1288 @@
+{
+  "fragment_id": "2a",
+  "assignment": "Vettius Valens, Anthologiae Liber II capp. 1-16, Kroll 1908 printed pp. 54-79 = PDF page indices 72-97",
+  "pages_read": [
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83
+  ],
+  "calibration_notes": [
+    "The Teubner Greek italic draws kappa almost identically to chi at 300 dpi. All kappas were resolved by lexicon, not by pixel: kathholou, kakopoioi, kyrios, kleros, kakias, katharesis, etc. Genuine chi retained in chronon, tyches, psyche, schema, chrematistikois."
+  ],
+  "worked_nativities": [],
+  "unmined": "pending",
+  "fragment_rules": [
+    {
+      "rule_id": "hel.valens.b2.trigons",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.1",
+        "technique": "the four zodiacal triangles (trigona) and the two sects",
+        "pdf_page_indices": [
+          73,
+          74
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart.zodiac_triplicity",
+            "operator": "is_defined",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "doctrine_narrative",
+        "greek": "Τοῦ ζῳδιακοῦ κύκλου κατὰ διαφορὰν καὶ οἰκειότητα τεταγμένου εὕρομεν αἱρέσεις δύο, Ἡλίου τε καὶ Σελήνης, ἡμερινὴν καὶ νυκτερινήν. ὁ μὲν γὰρ Ἥλιος πυρώδης ὑπάρχων προσῳκειώθη Κριῷ Λέοντι Τοξότῃ, ὅπερ αὐτοῦ τρίγωνον προσωνομάσθη ἡμερινόν· ἔστι δὲ καὶ αὐτὸ φύσει πυρῶδες. Δία δὲ καὶ Κρόνον τῇ ἰδίᾳ αἱρέσει προσηρμόσατο συνεργοὺς καὶ φύλακας τῶν ὑπ᾽ αὐτοῦ τελουμένων, τὸν μὲν Δία ἀντίμιμον ἑαυτοῦ καὶ διάδοχον τῆς βασιλείας ἀγαθῶν αἱρέτην καὶ δόξης τε καὶ ζωῆς δοτῆρα, τὸν δὲ Κρόνον ὑπουργὸν κακίας καὶ ἐναντιωμάτων καὶ χρόνων ἀφαιρέτην. ἔστι μὲν οὖν τοῦ προκειμένου τριγώνου ἡμέρας μὲν δεσπότης Ἥλιος, νυκτὸς δὲ κατὰ διαδοχὴν ὁ τοῦ Διός, ἀμφοτέροις δὲ Κρόνος συνεργεῖ. Ἑξῆς δὲ τοῦ ἑπομένου τριγώνου γεώδους ὑπάρχοντος Ταύρου Παρθένου Αἰγόκερω Σελήνη περίγειος οὖσα τὴν οἰκοδεσποτείαν ἐκληρώσατο. ἔσχε δὲ συναιρετιστὰς Ἀφροδίτην καὶ Ἄρεα, Ἀφροδίτην μὲν εἰκότως εἰς τὸ εὐεργετεῖν καὶ δόξας καὶ χρόνους μερίζειν, Ἄρεα δὲ εἰς τὸ παραβλάπτειν τὰς γενέσεις. Ὁ μέντοι Ἑρμῆς κοινὸς ὑπάρχων ἐξαιρέτως ταῖς δυσὶν αἱρέσεσιν ἐξυπηρετεῖ πρός τε τὸ ἀγαθὸν ἢ φαῦλον καὶ πρὸς τὴν οἰκειότητα καὶ σχηματογραφίαν ἑκάστου ἀστέρος.",
+        "engine_rendering": "The zodiacal circle being ordered by difference and affinity, we found two sects, of the Sun and of the Moon, diurnal and nocturnal. The Sun, being fiery, was made proper to Aries, Leo and Sagittarius, which was named his diurnal triangle; and that triangle is itself fiery by nature. To his own sect he joined Jupiter and Saturn as co-workers and guardians of what is accomplished by him: Jupiter as his own counterpart and successor to the kingship, chooser of good things and giver of reputation and of life; Saturn as the servant of evil and of oppositions, and the taker-away of years. Of the aforesaid triangle, then, the master by day is the Sun, by night by succession Jupiter, and Saturn co-operates with both. Next, the following triangle being earthy - Taurus, Virgo, Capricorn - the Moon, being near the earth, obtained its rulership. She had as co-sect-members Venus and Mars: Venus fittingly for benefaction and for distributing reputations and times, but Mars for harming nativities. Mercury, however, being common, serves both sects especially, toward good or ill according to the affinity and configuration of each star.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "triangles": [
+          {
+            "element_greek": "πυρῶδες",
+            "element": "fiery",
+            "signs": [
+              "Aries",
+              "Leo",
+              "Sagittarius"
+            ],
+            "sect": "diurnal",
+            "primary_luminary": "Sun"
+          },
+          {
+            "element_greek": "γεῶδες",
+            "element": "earthy",
+            "signs": [
+              "Taurus",
+              "Virgo",
+              "Capricorn"
+            ],
+            "sect": "nocturnal",
+            "primary_luminary": "Moon"
+          },
+          {
+            "element_greek": "ἀερῶδες",
+            "element": "airy",
+            "signs": [
+              "Gemini",
+              "Libra",
+              "Aquarius"
+            ],
+            "sect": "diurnal-led",
+            "primary_luminary": null
+          },
+          {
+            "element_greek": "ὑδατῶδες",
+            "element": "watery",
+            "signs": [
+              "Cancer",
+              "Scorpio",
+              "Pisces"
+            ],
+            "sect": "nocturnal-led",
+            "primary_luminary": null
+          }
+        ],
+        "editorial_notes": [
+          "Kroll's apparatus at p. 55 line 16 records ἀντίτιμον as Radermacher's reading against the printed ἀντίμιμον."
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. I",
+          "location": "Kroll 1908 pp. 55-56 lines 10-15 (PDF page indices 73-74)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.triplicity_lords",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.1",
+        "technique": "triplicity rulers by sect - first, second and third lord",
+        "pdf_page_indices": [
+          73,
+          74
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart.sect",
+            "operator": "in",
+            "value": [
+              "day",
+              "night"
+            ]
+          },
+          {
+            "fact": "chart.triplicity_of_significator",
+            "operator": "is_defined",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "table",
+        "greek": "ἔστι μὲν οὖν τοῦ προκειμένου τριγώνου ἡμέρας μὲν δεσπότης Ἥλιος, νυκτὸς δὲ κατὰ διαδοχὴν ὁ τοῦ Διός, ἀμφοτέροις δὲ Κρόνος συνεργεῖ. — ὅθεν ἐπὶ μὲν νυκτὸς ἔσχεν τὴν προστασίαν ἡ Σελήνη, δευτέρῳ δὲ τόπῳ Ἀφροδίτη, τρίτῳ δὲ Ἄρης· ἐπὶ δὲ τῶν ἡμερινῶν προηγήσεται Ἀφροδίτη, συνεργήσει δευτέρῳ τόπῳ ἡ Σελήνη, τρίτῳ Ἄρης. — Ἑξῆς δὲ Διδύμων Ζυγοῦ Ὑδροχόου τριγώνου ἀερώδους δεσπόσει ἡμέρας Κρόνος, συνεργήσει δὲ δευτέρῳ τόπῳ Ἑρμῆς, τρίτῳ Ζεύς· νυκτὸς δὲ ὁ τοῦ Ἑρμοῦ προηγήσεται καὶ δευτέρῳ τόπῳ ὁ τοῦ Κρόνου καὶ τρίτῳ ὁ τοῦ Διός. — Ἑξῆς ὁμοίως Καρκίνου Σκορπίου Ἰχθύων τριγώνου ὑδατώδους ὁ τοῦ Ἄρεως τὴν οἰκοδεσποτίαν νυκτὸς ἐφέξει καὶ δευτέρῳ τόπῳ Ἀφροδίτη καὶ τρίτῳ Σελήνη· ἡμέρας δὲ ὁ τῆς Ἀφροδίτης προηγήσεται, μεθ᾽ ἣν ὁ τοῦ Ἄρεως καὶ τρίτη Σελήνη.",
+        "engine_rendering": "Of the fire triangle the master by day is the Sun, by night by succession Jupiter, and Saturn co-operates with both. In the earth triangle the Moon held the presidency by night, Venus in second place, Mars in third; but for day nativities Venus leads, the Moon co-operates in second place, Mars third. Next, of the airy triangle Gemini, Libra, Aquarius, Saturn is master by day, Mercury co-operates in second place, Jupiter third; by night Mercury leads, Saturn in second place, Jupiter third. Likewise of the watery triangle Cancer, Scorpio, Pisces, Mars holds the rulership by night, Venus in second place, the Moon third; but by day Venus leads, after her Mars, and the Moon third.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "table": {
+          "fire": {
+            "signs": [
+              "Aries",
+              "Leo",
+              "Sagittarius"
+            ],
+            "day": [
+              "Sun",
+              "Jupiter",
+              "Saturn"
+            ],
+            "night": [
+              "Jupiter",
+              "Sun",
+              "Saturn"
+            ],
+            "note_greek": "ἀμφοτέροις δὲ Κρόνος συνεργεῖ",
+            "note": "Valens names the Sun as day master and Jupiter as night master 'by succession'; Saturn is the participating third for both sects, not explicitly ordered second"
+          },
+          "earth": {
+            "signs": [
+              "Taurus",
+              "Virgo",
+              "Capricorn"
+            ],
+            "day": [
+              "Venus",
+              "Moon",
+              "Mars"
+            ],
+            "night": [
+              "Moon",
+              "Venus",
+              "Mars"
+            ],
+            "note_greek": "τρίτῳ δὲ Ἄρης",
+            "note": "Mars is the third (participating) lord in both sects"
+          },
+          "air": {
+            "signs": [
+              "Gemini",
+              "Libra",
+              "Aquarius"
+            ],
+            "day": [
+              "Saturn",
+              "Mercury",
+              "Jupiter"
+            ],
+            "night": [
+              "Mercury",
+              "Saturn",
+              "Jupiter"
+            ],
+            "note_greek": "τρίτῳ Ζεύς",
+            "note": "Jupiter is the third (participating) lord in both sects"
+          },
+          "water": {
+            "signs": [
+              "Cancer",
+              "Scorpio",
+              "Pisces"
+            ],
+            "day": [
+              "Venus",
+              "Mars",
+              "Moon"
+            ],
+            "night": [
+              "Mars",
+              "Venus",
+              "Moon"
+            ],
+            "note_greek": "τρίτη Σελήνη",
+            "note": "The Moon is the third (participating) lord in both sects"
+          }
+        },
+        "corroboration": "This table agrees cell-for-cell with the Dorothean triplicity-lord scheme the engine uses as default, except that for the fire triangle Valens phrases Saturn's role as co-worker to both sects rather than fixing him in the third slot of an ordered triad.",
+        "editorial_notes": [
+          "Kroll's apparatus at p. 56 line 9 records ὑδατώδους S] ἀερώδους M - the Marcianus wrongly calls the Cancer-Scorpio-Pisces triangle airy.",
+          "Apparatus p. 56 line 11: ὁ τῆς ♀ M] ♀ S."
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. I",
+          "location": "Kroll 1908 p. 55 line 18 - p. 56 line 15 (PDF page indices 73-74)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.c02.method",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.2",
+        "technique": "procedure for judging fortune from the triplicity lords of the sect light",
+        "pdf_page_indices": [
+          74,
+          75
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart.sect",
+            "operator": "in",
+            "value": [
+              "day",
+              "night"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "procedure",
+        "greek": "Τὴν δὲ τῶν προκειμένων τριγώνων διαίρεσιν καὶ εὐδαιμονίαν ἢ μετριότητα πρὸς τὴν ἑκάστου γένεσιν ὁρῶν δηλώσεις. ἐπὶ μὲν γὰρ τῶν ἡμέρας γεννωμένων σκοπεῖν δεήσει τὸν Ἥλιον, ἐν ποίῳ τριγώνῳ ὑπάρχει, καὶ τὸν καθ᾽ ὑπεροχὴν τούτου οἰκοδεσπότην καὶ τὸν τούτου συνεργόν, πότερόν ποτε ἐπίκεντρος ἢ ἐπαναφερόμενος ἢ ἀποκεκλικώς, ἀνατολικὸς ἢ δυτικός, ἢ ἐν οἰκείοις ζῳδίοις καὶ ὑπὸ τίνων μαρτυρεῖται, ἀγαθοποιῶν ἢ κακοποιῶν· καὶ οὕτως τὰς ἀποφάσεις ποιεῖσθαι. ἐὰν γὰρ ὡροσκοπῇ ἢ μεσουρανῇ ἢ καὶ ἐπί τινος ἑτέρου τῶν χρηματιστικῶν ζῳδίων τύχῃ, εὐτυχεῖς καὶ λαμπρὰς τὰς γενέσεις προδηλοῦσιν· ἐὰν δὲ ἐν ταῖς ἐπαναφοραῖς, μέσας· ἐν δὲ τοῖς ἀποκλίμασι ταπεινὰς καὶ δυστυχεῖς. χρὴ δὲ καὶ αὐτὸν τὸν Ἥλιον προσβλέπειν, ὅπως τέτευχε καὶ ὑπὸ τίνων μαρτυρεῖται. Ἐπὶ δὲ τῶν νυκτὸς γεννωμένων τὴν Σελήνην ὁμοίως σκοπεῖν δεήσει καὶ τὸν καθ᾽ ὑπεροχὴν τοῦ τριγώνου οἰκοδεσπότην καὶ τὸν τούτου ἐπίκοινον ὅπως ἐσχημάτισται, καθὼς πρόκειται.",
+        "engine_rendering": "You will declare the division of the aforesaid triangles, and prosperity or moderate fortune, by looking at each nativity. For those born by day it will be necessary to examine the Sun, in which triangle he is, and the predominant lord of that triangle and its co-worker: whether it is angular, succedent or cadent, eastern or western, or in its own signs, and by whom it is witnessed, benefics or malefics; and so to make the pronouncements. For if it is on the Ascendant or the Midheaven or happens to be in some other of the busy (profitable) signs, they foreshow fortunate and brilliant nativities; if in the succedents, middling; in the cadents, lowly and unfortunate. One must also look at the Sun himself, how he has fallen and by whom he is witnessed. For those born by night one must likewise examine the Moon and the predominant lord of the triangle and its partner, how it is configured, as set out above.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "steps": [
+          "Determine sect: day nativities take the Sun, night nativities the Moon, as the significator.",
+          "Find which triangle (triplicity) that light occupies.",
+          "Take the predominant (first) triplicity lord for the sect, and its co-worker (second/third lord).",
+          "Judge each: angular / succedent / cadent; oriental or occidental; in own sign or not; witnessed by benefics or malefics.",
+          "Angular or in a profitable sign = brilliant and fortunate; succedent = middling; cadent = lowly and unfortunate.",
+          "Also inspect the sect light itself and its witnesses."
+        ],
+        "grade_scale": {
+          "angular_or_chrematistikos": "εὐτυχεῖς καὶ λαμπράς",
+          "succedent": "μέσας",
+          "cadent": "ταπεινὰς καὶ δυστυχεῖς"
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. II",
+          "location": "Kroll 1908 p. 56 lines 16-34 (PDF page index 74)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.c02.lord_sequence_outcomes",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.2",
+        "technique": "first versus second triplicity lord well or badly placed - the sequence of life periods",
+        "pdf_page_indices": [
+          75
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "triplicity_lord.placement",
+            "operator": "is_defined",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "case_table",
+        "greek": "Ἐὰν μὲν γὰρ ὁ καθ᾽ ὑπεροχὴν οἰκοδεσπότης † ἐπὶ τῶν καλῶν κειμένων ἡμέρας ἢ νυκτὸς παραπέσῃ, ὁ δὲ κατὰ διαδοχὴν ἐπίκεντρος ἢ καλῶς σχηματιζόμενος ὑπάρχῃ, ὁ γεννώμενος ἐν πρώτοις χρόνοις ἀνωμαλίσας ἕως τῆς ἀναφορᾶς τοῦ ζῳδίου ἢ τῆς τοῦ χρόνου κυκλικῆς ἀποκαταστάσεως ἐξ ὑστέρου ἔμπρακτος ἔσται, πλὴν ἄστατος καὶ ἐπίφοβος διάξει. ἐὰν δὲ ὁ προηγούμενος οἰκοδεσπότης καλῶς πέσῃ, ὁ δὲ ἑπόμενος κακῶς, τοῖς πρώτοις καλῶς ἐξενεχθεὶς ἐξ ὑστέρου καθαιρεθήσεται ἀπὸ τοῦ τῆς ἀναφορᾶς τοῦ ζῳδίου χρόνου, ἐν ᾧ ὁ ἑπόμενος οἰκοδεσπότης παρέπεσεν. ἀκριβέστερον μὲν οὖν περὶ τῆς διακρίσεως τῶν χρόνων ἐν δέοντι καιρῷ δηλώσομεν. ἐὰν δ᾽ ἀμφότεροι καλῶς πέσωσι, τὰ τῆς εὐτυχίας παραμενεῖ καὶ ἔνδοξα γενήσεται, ἐκτὸς εἰ μὴ κακοποιὸς ἐναντιωθῇ ἢ καθυπερτερήσῃ † οὐδὲ μετατρέψει τὰ τῆς γενέσεως πράγματα. πᾶς δὲ ἀστὴρ οἰκοδεσποτήσας καὶ ἐν ἀποκλίσει ὑπάρχων ἐναντίος γενήσεται καὶ παραιρέτης· ἑτέροις γὰρ ὑποτασσομένους ποιεῖ, ἀνωμαλοῦντας ἢ δόξης καθαιρουμένους, σίνεσι καὶ πάθεσι καὶ καταιτιασμοῖς περιπίπτοντας ἢ ἐνδεεῖς τῷ βίῳ.",
+        "engine_rendering": "If the predominant lord falls away by day or by night, but the one that follows by succession is angular or well configured, the native, having been unstable in his first years until the ascension of the sign or the cyclic restoration of the period, will afterwards be effective, though he will pass his life unsteady and fearful. If the leading lord falls well but the following one badly, having been brought forth well in the first years he will afterwards be pulled down, from the time of the ascension of the sign in which the following lord fell away. We shall set out the discrimination of the periods more exactly at the proper place. If both fall well, the fortunate things will endure and glorious things will come about, unless a malefic opposes or overcomes - and then it will not overturn the affairs of the nativity. But every star that rules and is in a cadent place will be adverse and a taker-away; for it makes men subject to others, unstable or pulled down from repute, falling into injuries and afflictions and accusations, or lacking in livelihood.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "cases": [
+          {
+            "first_lord": "cadent/falling away",
+            "second_lord": "angular or well configured",
+            "outcome": "unstable early years, effective later"
+          },
+          {
+            "first_lord": "well placed",
+            "second_lord": "badly placed",
+            "outcome": "good beginning, later pulled down from the time of the following lord's sign"
+          },
+          {
+            "first_lord": "well placed",
+            "second_lord": "well placed",
+            "outcome": "enduring good fortune and glory unless a malefic opposes or overcomes"
+          },
+          {
+            "first_lord": "any",
+            "second_lord": "any",
+            "condition": "ruler in a cadent place",
+            "outcome": "adverse and a taker-away: subject to others, unstable, pulled down, injuries, accusations, want"
+          }
+        ],
+        "editorial_notes": [
+          "Kroll obelizes twice on this page: at p. 57 line 1 (οἰκοδεσπότης † ἐπὶ τῶν καλῶν κειμένων) and at p. 57 line 13 (ἢ καθυπερτερήσῃ † οὐδὲ μετατρέψει). Both obeli are reproduced in the Greek above.",
+          "Kroll's apparatus at line 1 says the phrase ἐπὶ - κειμένων is insiticia (interpolated) in his judgement, 'nisi fuit ἐπὶ τῶν ἡμ. ἢ ν. γεννωμένων'."
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. II",
+          "location": "Kroll 1908 p. 57 lines 1-18 (PDF page index 75)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon; the two obeli are as printed"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.c02.per_triplicity_inspection",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.2",
+        "technique": "which planets to inspect for each position of the sect light",
+        "pdf_page_indices": [
+          75
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "sect_light.sign",
+            "operator": "is_defined",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "lookup",
+        "greek": "Ἐὰν οὖν ἐπὶ τῶν ἡμέρας γεννωμένων εὑρεθῇ ὁ Ἥλιος Κριῷ Λέοντι Τοξότῃ, βέλτιον μὲν αὐτὸν ἐπίκεντρον εἶναι. εἰ δὲ ἐπὶ τῶν ἐπαναφορῶν καὶ τοὺς τούτου συναιρετιστὰς ὁμοίως * * Ἄρεος μὴ ἐναντιουμένου ἢ τετραγωνίζοντος, εὐτυχίας προδήλως ὁ τόπος κριθήσεται. ἐὰν δὲ ὦσιν ἐναλλάξ, τἀναντία γενήσεται. ἐὰν δὲ Ταύρῳ Παρθένῳ Αἰγόκερῳ εὑρεθῇ ὁ Ἥλιος ἡμέρας, ζητεῖν δεήσει πρώτῳ τόπῳ τὸν τῆς Ἀφροδίτης καὶ ἐκ δευτέρου τῆς Σελήνης καὶ ἐκ τοῦ τρίτου Ἄρεα πῶς σχηματίζονται καὶ ὑπὸ τίνων μαρτυροῦνται. ὁμοίως καὶ ἐν τῷ ἑπομένῳ τριγώνῳ Διδύμοις Ζυγῷ Ὑδροχόῳ τοῦ Ἡλίου εὑρεθέντος ἡμέρας προσβλέπειν τόν τε τοῦ Κρόνου καὶ τὸν τοῦ Ἑρμοῦ καὶ τὸν τοῦ Διός. τὸ δ᾽ αὐτὸ καὶ ἐπὶ τοῦ Καρκίνου Σκορπίου Ἰχθύων ἡμέρας Ἡλίου ἐπόντος τὸν τῆς Ἀφροδίτης καὶ τὸν τοῦ Ἄρεος προσβλέπειν καὶ τὸν τῆς Σελήνης εἰ ἔγκεντροι, καὶ οὕτως διακρίνοντας ἀποφαίνεσθαι. τῷ δ᾽ αὐτῷ λόγῳ καὶ νυκτὸς τὴν Σελήνην χρὴ προσβλέπειν.",
+        "engine_rendering": "If then in day nativities the Sun is found in Aries, Leo or Sagittarius, it is better that he be angular. But if in the succedents, and likewise his co-sect-members ... with Mars not opposing or squaring, the place will plainly be judged one of good fortune. If they are the other way about, the contrary will come to pass. If the Sun is found by day in Taurus, Virgo or Capricorn, one must look in first place for Venus, secondly for the Moon, and from the third for Mars, how they are configured and by whom they are witnessed. Likewise in the following triangle, Gemini, Libra, Aquarius, with the Sun found there by day, look at Saturn and Mercury and Jupiter. The same for Cancer, Scorpio, Pisces with the Sun there by day: look at Venus and at Mars, and at the Moon, whether they are angular, and so pronounce, discriminating. By the same reasoning one must look at the Moon by night.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "results_by_sign": {
+          "Aries": {
+            "greek": "ἐπὶ τῶν ἡμέρας γεννωμένων εὑρεθῇ ὁ Ἥλιος Κριῷ Λέοντι Τοξότῃ, βέλτιον μὲν αὐτὸν ἐπίκεντρον εἶναι",
+            "engine_rendering": "Day Sun in the fire triangle: he is better angular; inspect Jupiter and Saturn as co-sect-members, with Mars not opposing or squaring.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Sun",
+              "Jupiter",
+              "Saturn"
+            ]
+          },
+          "Leo": {
+            "greek": "Κριῷ Λέοντι Τοξότῃ",
+            "engine_rendering": "As Aries: fire triangle, day Sun; inspect Jupiter and Saturn.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Sun",
+              "Jupiter",
+              "Saturn"
+            ]
+          },
+          "Sagittarius": {
+            "greek": "Κριῷ Λέοντι Τοξότῃ",
+            "engine_rendering": "As Aries: fire triangle, day Sun; inspect Jupiter and Saturn.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Sun",
+              "Jupiter",
+              "Saturn"
+            ]
+          },
+          "Taurus": {
+            "greek": "ζητεῖν δεήσει πρώτῳ τόπῳ τὸν τῆς Ἀφροδίτης καὶ ἐκ δευτέρου τῆς Σελήνης καὶ ἐκ τοῦ τρίτου Ἄρεα",
+            "engine_rendering": "Day Sun in the earth triangle: seek Venus in first place, the Moon in second, Mars in third.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Venus",
+              "Moon",
+              "Mars"
+            ]
+          },
+          "Virgo": {
+            "greek": "Ταύρῳ Παρθένῳ Αἰγόκερῳ",
+            "engine_rendering": "As Taurus: Venus, then Moon, then Mars.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Venus",
+              "Moon",
+              "Mars"
+            ]
+          },
+          "Capricorn": {
+            "greek": "Ταύρῳ Παρθένῳ Αἰγόκερῳ",
+            "engine_rendering": "As Taurus: Venus, then Moon, then Mars.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Venus",
+              "Moon",
+              "Mars"
+            ]
+          },
+          "Gemini": {
+            "greek": "Διδύμοις Ζυγῷ Ὑδροχόῳ τοῦ Ἡλίου εὑρεθέντος ἡμέρας προσβλέπειν τόν τε τοῦ Κρόνου καὶ τὸν τοῦ Ἑρμοῦ καὶ τὸν τοῦ Διός",
+            "engine_rendering": "Day Sun in the air triangle: look at Saturn, Mercury and Jupiter.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Saturn",
+              "Mercury",
+              "Jupiter"
+            ]
+          },
+          "Libra": {
+            "greek": "Διδύμοις Ζυγῷ Ὑδροχόῳ",
+            "engine_rendering": "As Gemini: Saturn, Mercury, Jupiter.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Saturn",
+              "Mercury",
+              "Jupiter"
+            ]
+          },
+          "Aquarius": {
+            "greek": "Διδύμοις Ζυγῷ Ὑδροχόῳ",
+            "engine_rendering": "As Gemini: Saturn, Mercury, Jupiter.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Saturn",
+              "Mercury",
+              "Jupiter"
+            ]
+          },
+          "Cancer": {
+            "greek": "ἐπὶ τοῦ Καρκίνου Σκορπίου Ἰχθύων ἡμέρας Ἡλίου ἐπόντος τὸν τῆς Ἀφροδίτης καὶ τὸν τοῦ Ἄρεος προσβλέπειν καὶ τὸν τῆς Σελήνης εἰ ἔγκεντροι",
+            "engine_rendering": "Day Sun in the water triangle: look at Venus and Mars and the Moon, whether they are angular.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Venus",
+              "Mars",
+              "Moon"
+            ]
+          },
+          "Scorpio": {
+            "greek": "Καρκίνου Σκορπίου Ἰχθύων",
+            "engine_rendering": "As Cancer: Venus, Mars, Moon.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Venus",
+              "Mars",
+              "Moon"
+            ]
+          },
+          "Pisces": {
+            "greek": "Καρκίνου Σκορπίου Ἰχθύων",
+            "engine_rendering": "As Cancer: Venus, Mars, Moon.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.2",
+            "pdf_page_index": 75,
+            "printed_page": 57,
+            "customer_prediction": false,
+            "inspect": [
+              "Venus",
+              "Mars",
+              "Moon"
+            ]
+          }
+        },
+        "editorial_notes": [
+          "Kroll prints asterisks (* *) for a lacuna at p. 57 line 20; his apparatus notes 'excidit fere κειμένους ἀγαθοποιοὶ βλέποιεν'."
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. II",
+          "location": "Kroll 1908 p. 57 lines 18-32 (PDF page index 75)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon; lacuna asterisks as printed"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.c02.fortune_fallback",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.2",
+        "technique": "when the triplicity lords fall away, judge from the Lot of Fortune and its lord",
+        "pdf_page_indices": [
+          76
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "triplicity_lords.all_cadent",
+            "operator": "equals",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "case_table",
+        "greek": "Βέλτιον μὲν οὖν τοὺς ἡμερινοὺς ἐν ἰδίοις τριγώνοις ἐπικέντρους ἢ ἐν χρηματιστικοῖς τόποις εὑρίσκεσθαι καὶ τοὺς νυκτερινοὺς ὁμοίως· ἐὰν δὲ ἐν ἀλλοτρίοις τριγώνοις ἢ παρ᾽ αἵρεσιν, ἥττονα τὰ τῆς εὐδαιμονίας καὶ ἐπὶ φόβοις γενήσεται. τῶν οἰκοδεσποτῶν καὶ τῶν συνεργῶν παραπεπτωκότων σκοπεῖν δεήσει τὸν κλῆρον τῆς τύχης καὶ τὸν τούτου οἰκοδεσπότην. ἐὰν γὰρ ἐπίκεντροι καὶ ἐπαναφερόμενοι εὑρεθῶσιν ὑπὸ ἀγαθοποιῶν μαρτυρούμενοι, εὐτυχίας καὶ δόξης μέρος ἕξει ὁ γεννώμενος, ἀνωμαλίας δὲ κατὰ καιρὸν καὶ ἐναντιώματα ὑπομένων· πλὴν οὐκ ἀπορήσει. ἐὰν δὲ καὶ οὗτοι κακῶς πέσωσι, μέτρια καὶ σκληρότατα ⟨τὰ⟩ πράγματα κριθήσεται· δυσεπίτευκτοι γὰρ εἰς τὰς ἐπιβολάς, ἐνδεεῖς, κατάχρεοι, εἰς τὰ θεῖα βλασφημοῦντες. ἐὰν δὲ καὶ ὑπὸ κακοποιῶν μαρτυρηθῶσιν, ἐπίμοχθοι ἀλῆται αἰχμάλωτοι ὑποτακτικοὶ κακόβιοι ἐπισινεῖς ἐπικίνδυνοι. ἐὰν δέ πως τοῦ τε κλήρου καὶ τοῦ οἰκοδεσπότου κακῶς πεπτωκότων ἀγαθοποιοὶ ἐπιμαρτυρήσωσιν, ἐλεούμενοι διαζῶσιν ἢ ὑπὸ ἑτέρων προσλαμβανόμενοι κοσμίως κατά τινα χρόνον διανύουσιν ἢ πράξεων ἢ πίστεων ἢ δωρεῶν μεταλαμβάνοντες· πλὴν οὐκ ἀταράχως οὐδὲ ἀμέμπτως τὸν βίον διάξουσιν.",
+        "engine_rendering": "It is better that diurnal planets be found angular in their own triangles or in the profitable places, and likewise the nocturnal ones. But if they are in alien triangles or contrary to sect, the things of prosperity will be less and will be attended with fears. When the lords and the co-workers have fallen away, one must look to the Lot of Fortune and its lord. For if they are found angular or succedent and witnessed by benefics, the native will have a share of good fortune and repute, though enduring instability at times and oppositions; still, he will not be destitute. But if these too fall badly, his affairs will be judged middling and very harsh; for such are unsuccessful in their undertakings, in want, in debt, blaspheming against the divine. And if they are also witnessed by malefics: toilsome, wanderers, captives, subordinated, ill-living, injured, endangered. But if, the Lot and its lord having fallen badly, benefics bear witness, they live pitied, or taken up by others they pass a certain time decently, sharing in business or trusts or gifts; yet they will not pass their life untroubled or unblamed.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "restricted_clauses": [
+          {
+            "greek": "ἐπίμοχθοι ἀλῆται αἰχμάλωτοι ὑποτακτικοὶ κακόβιοι ἐπισινεῖς ἐπικίνδυνοι",
+            "output_policy": "refused",
+            "output_policy_reason": "decrees enslavement/captivity and bodily injury as fate; this product does not deliver such statements about a living person"
+          }
+        ],
+        "cases": [
+          {
+            "lot_and_lord": "angular or succedent, witnessed by benefics",
+            "outcome": "share of fortune and repute; periodic instability but not destitute"
+          },
+          {
+            "lot_and_lord": "badly fallen",
+            "outcome": "middling and very harsh affairs; unsuccessful, in want, in debt, blasphemous"
+          },
+          {
+            "lot_and_lord": "badly fallen and witnessed by malefics",
+            "outcome": "toilsome, wandering, captive, subordinate, ill-living, injured, endangered"
+          },
+          {
+            "lot_and_lord": "badly fallen but witnessed by benefics",
+            "outcome": "live pitied or supported by others; a decent interval; business, trusts, gifts; never untroubled"
+          }
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. II",
+          "location": "Kroll 1908 p. 58 lines 1-18 (PDF page index 76)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.c02.malefic_benefic_reversal",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.2",
+        "technique": "malefics as givers of good in their own sect; benefics behaving as malefics",
+        "pdf_page_indices": [
+          76,
+          77
+        ]
+      },
+      "conditions": {
+        "any": [
+          {
+            "fact": "planet.class",
+            "operator": "equals",
+            "value": "malefic"
+          },
+          {
+            "fact": "planet.class",
+            "operator": "equals",
+            "value": "benefic"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "case_table",
+        "greek": "Παντὸς οὖν οἰκοδεσπότου προσβλέπειν δεήσει τὰς μαρτυρίας καὶ τῶν σχηματισμῶν τὰς διαθέσεις, ἤτοι οἰκεῖαι ἢ καὶ ἐναντίαι ὑπάρχουσιν. ἐὰν γάρ πως ἐπὶ τῶν νυκτὸς γεννωμένων εὑρεθῇ ὁ τοῦ Κρόνου κατὰ διάμετρον ἢ τετράγωνον στάσιν, ἐναντιώματα καὶ καθαιρέσεις κινδύνους τε καὶ σίνη καὶ πάθη ἀποτελεῖ καὶ νωθροὺς περὶ τὰς ἐπιβολάς. ἐπὶ δὲ τῶν ἡμέρας ὁ τοῦ Ἄρεος θερμοὺς παραβόλους ἐπισφαλεῖς τοῖς πράγμασι καὶ τῷ βίῳ· γίνονται γὰρ ἐν συνοχῇ κρίσεσιν ἐπηρείαις τομαῖς καύσεσιν αἱμαγμοῖς πτώσεσιν. οἰκείως δὲ σχηματισθέντες καὶ ἰδίᾳ αἱρέσει πρακτικοὶ τυγχάνουσιν· ὅθεν οὐ πάντοτε κακοποιοὶ κριθήσονται, ἀλλὰ καὶ ἀγαθῶν δοτῆρες· καὶ μάλιστα [ὅταν] ὁ Κρόνος ἡμέρας λόγον ἔχων πρὸς τὴν οἰκοδεσποτίαν καλῶς τυχὼν ὑπὸ Διὸς καὶ Ἡλίου μαρτυρούμενος πολυκτήμονας ἐνδόξους ἀποτελεῖ, ἐκ θανατικῶν εὐεργετουμένους, θεμελίων σωμάτων κυρίους, ἐπιτρόπους ἀλλοτρίων πραγμάτων προεστῶτας. νυκτὸς δὲ καλῶς σχηματισθεὶς καὶ λόγον ἔχων οἰκοδεσποτίας παρεκτικὸς τῶν προκειμένων γενήσεται, τῶν δὲ περικτηθέντων ἀποβολὴ καὶ δόξης καθαίρεσις ἢ ἀτιμία γενήσεται. τὸ δ᾽ ὅμοιον καὶ ἐπὶ τοῦ Ἄρεος νοείσθω· νυκτὸς γὰρ ἡγεμονίας ἢ στρατηγίας καὶ δημοσίων τάξεις ὀχλικὰς ἐπιτρέπει, ἡμέρας δὲ τοῖς χρηματιστικοῖς τόποις ὑπάρχων τὰ μὲν προκείμενα ἀποτελεῖ, ἐναντιώμασι δὲ καὶ φόβοις καὶ ἀντιλογίαις περιτρέπει καὶ τὰς ἡγεμονίας † εἰς στασιώδεις καὶ ἐμφόβους· ἐπάγει γὰρ πολεμίων ἐφόδους πολλῶν καὶ ὄχλων ἐπαναστάσεις, λοιμὸν καὶ λιμὸν ἐπὶ πόλεων καὶ ἐπιφορὰς ἐμπρησμοὺς ἐπικινδύνους αἰτίας. Ὁμοίως καὶ οἱ ἀγαθοποιοὶ κακοποιῶν τρόπον ἐφέξουσιν, ἐπὰν οἰκοδεσποτοῦντες κακῶς πέσωσιν. ἐὰν δὲ καὶ ἐπίκεντροι τύχωσι τοῦ οἰκοδεσπότου ἀποκεκλικότος, ἐξασθενήσουσιν ἐν τῷ ἀγαθόν τι παρασχεῖν. ἐπὶ παντὸς εἴδους σκοπεῖν δεήσει τὸν οἰκοδεσπότην τοῦ οἰκοδεσπότου, ὅπως ἔτυχε καὶ ὑπὸ τίνων μαρτυρεῖται. ἐὰν γὰρ καὶ ὁ καθολικὸς οἰκοδεσπότης παραπέσῃ, ὁ δὲ τούτου κύριος καλῶς σχηματισθῇ, ἕξει βοήθειαν ὁ γεννώμενος καὶ ὑπόστασιν βίου καὶ δόξης κατὰ τὴν τοῦ ἀστέρος τοποθεσίαν.",
+        "engine_rendering": "For every lord one must look at the testimonies and the dispositions of the configurations, whether they are familiar or contrary. For if in night nativities Saturn is found in opposition or square, he produces oppositions and demolitions, dangers and injuries and afflictions, and men sluggish in their undertakings. In day nativities Mars makes men hot, reckless, precarious in their affairs and in life; for they fall into confinement, trials, insults, cuttings, cauterisations, bleedings, falls. But configured familiarly and in their own sect they turn out effective; whence they will not always be judged malefic but also givers of good things. Especially Saturn, having by day a share in the rulership, well placed and witnessed by Jupiter and the Sun, makes men owners of much and famous, benefited out of deaths, masters of foundations and of bodies, stewards set over the affairs of others. By night, well configured and having a share in the rulership, he will be productive of the aforesaid, but there will be loss of what was acquired and demolition of repute or dishonour. Understand the like of Mars: by night he grants commands or generalships and public appointments over crowds; by day, being in the profitable places, he accomplishes the aforesaid, but overturns them with oppositions and fears and disputes, and turns commands into seditious and fearful ones; for he brings on assaults of enemies and risings of crowds, plague and famine upon cities, and onsets, burnings, dangerous accusations. Likewise the benefics will hold the manner of malefics whenever they rule and fall badly. And if they are angular while their lord is cadent, they will be too weak to furnish any good. In every case one must examine the lord of the lord, how he has fallen and by whom he is witnessed. For if the universal lord falls away, but his own lord is well configured, the native will have help and a substance of livelihood and repute according to the position of that star.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "restricted_clauses": [
+          {
+            "greek": "γίνονται γὰρ ἐν συνοχῇ κρίσεσιν ἐπηρείαις τομαῖς καύσεσιν αἱμαγμοῖς πτώσεσιν",
+            "output_policy": "refused",
+            "output_policy_reason": "decrees surgery, burning, bleeding and imprisonment as fate; not delivered as a prediction about a living person"
+          }
+        ],
+        "editorial_notes": [
+          "Kroll brackets [ὅταν] at p. 58 line 29 as an intrusion.",
+          "Kroll obelizes at p. 59 line 7 (τὰς ἡγεμονίας † εἰς στασιώδεις); apparatus 'possis ποιεῖ vel δίδωσι'."
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. II",
+          "location": "Kroll 1908 p. 58 line 19 - p. 59 line 18 (PDF page indices 76-77)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.lot_of_fortune",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.3",
+        "technique": "Lot of Fortune - formula and its lord",
+        "pdf_page_indices": [
+          77,
+          78
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "chart.sect",
+            "operator": "equals",
+            "value": "day"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "lot_formula",
+        "greek": "Ἀκριβέστερον δὲ βουλόμενος τὸν περὶ εὐδαιμονίας τόπον βεβαιῶσαι ἐπάνειμι εἰς τὸν κλῆρον τῆς τύχης ὄντα ἀναγκαιότατον καὶ δυναστικὸν τόπον, καθὼς καὶ ὁ βασιλεὺς ἐναρχόμενος ἐν τῇ ιγ´ βίβλῳ μυστικῶς ἐδήλωσε λέγων· εἶτ᾽ ἐχομένως δεήσει τοῖς ἡμέρας γεννωμένοις σαφῶς ἀριθμεῖν ἀπὸ Ἡλίου ἐπὶ Σελήνην, ἔμπαλιν δὲ ἀφ᾽ ὡροσκόπου ἰσότητα τάσσειν καὶ τὸν ἀποβάντα τόπον συνορᾶν, οὗτινος τέτευχεν ἀστέρος καὶ τίς ἢ τίνες ἐπὶ τούτου πρόσεισι, τά τε τετράγωνα ἢ τρίγωνα παντάπασιν ὡς κατηστέρηται. ἐκ γὰρ τῆσδε τῆς τῶν τόπων συγγνώσεως πρόδηλα κρινεῖς τῶν γεννωμένων τὰ πράγματα. ὁμοίως δὲ καὶ ὁ Πετόσιρις ἐν τοῖς ὅροις ἐδήλωσε τὸν τόπον, ἄλλοι δ᾽ ἄλλως διαλαμβάνουσιν, ὃν καὶ ἡμεῖς ἐκθησόμεθα ἐν δέοντι καιρῷ καὶ ἄλλας ἀγωγὰς δηλούσας εἰς τὸν περὶ εὐδαιμονίας λόγον.",
+        "engine_rendering": "Wishing to establish more exactly the place concerning prosperity, I return to the Lot of Fortune, which is a most necessary and powerful place, as the King also, beginning in his thirteenth book, mystically declared, saying: then next it will be necessary, for those born by day, to count plainly from the Sun to the Moon, and to lay off the same amount in turn from the Ascendant, and to observe the place that results - which star has obtained it, and which one or ones approach it, and the squares and trines, entirely as it is starred. For from this understanding of the places you will judge plainly the affairs of the native. Petosiris likewise showed the place in the bounds, and others take it differently; we too shall set this out at the proper time, and other procedures bearing on the account of prosperity.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "formula": {
+          "day": "arc from Sun to Moon (in zodiacal order), projected from the Ascendant",
+          "night": "not given in this chapter - Valens here quotes the King's rule for day nativities only; he promises other procedures 'at the proper time'",
+          "greek_key": "ἀπὸ Ἡλίου ἐπὶ Σελήνην ... ἔμπαλιν δὲ ἀφ᾽ ὡροσκόπου ἰσότητα τάσσειν"
+        },
+        "lord_procedure": "Inspect which planet rules the resulting place, which planets are present there, and its squares and trines.",
+        "attribution": {
+          "source_greek": "ὁ βασιλεὺς ... ἐν τῇ ιγ´ βίβλῳ",
+          "source": "the King (Nechepso) book 13",
+          "kroll_note": "Kroll's apparatus at p. 59 lines 22-23 compares Val. III 14 (= fr. 19 Riess), Val. IX praef. and IX 1, and at line 29 says 'trimetrorum vestigia subesse videntur' - traces of iambic trimeters underlie the quotation, marking it as verse from the King."
+        },
+        "variants": [
+          {
+            "authority": "Petosiris",
+            "greek": "Πετόσιρις ἐν τοῖς ὅροις ἐδήλωσε τὸν τόπον",
+            "note": "Petosiris located the Lot by the bounds"
+          }
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. III",
+          "location": "Kroll 1908 p. 59 line 19 - p. 60 line 4 (PDF page indices 77-78)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image; the quotation is printed letter-spaced by Kroll to mark it as the King's words"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.lord_of_hour_or_lot",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.4",
+        "technique": "the planet that obtained the hour (Ascendant) or ruled the Lot",
+        "pdf_page_indices": [
+          78,
+          79,
+          80
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planet.rules",
+            "operator": "in",
+            "value": [
+              "ascendant",
+              "lot_of_fortune"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "lookup_by_planet",
+        "greek": "Περὶ τοῦ λαχόντος τὴν ὥραν ἢ τὸν κλῆρον ἀστέρος.",
+        "engine_rendering": "Concerning the star that obtained the hour or the Lot.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "results_by_planet": {
+          "Saturn": {
+            "greek": "Κρόνος τὴν ὥραν λαχὼν ἢ τὸν κλῆρον οἰκοδεσποτήσας μὴ ἐναντιουμένου τοῦ Ἄρεως· ὁ τοιοῦτος εὐδαιμονήσει περὶ τῆς ὑπὸ Κρόνου μεριζομένης πράξεως· ἐὰν δὲ ὑπὸ Διὸς μαρτυρηθῇ, διπλασίονα· ἐὰν δὲ Ἀφροδίτης, διὰ γυναικὸς ἢ ἀσπέρμου· ἐὰν δὲ ὁ τοῦ Ἄρεως αὐτῷ συνῇ ἢ ἐναντιωθῇ, ὁ τοιοῦτος ἐν ταραχαῖς καὶ ἐναντιώμασιν ἔσται· ἐὰν δὲ ὁ τοῦ Ἑρμοῦ αὐτῷ συνωροσκοπήσῃ, ὁ τοιοῦτος ταῖς ἀκοαῖς παραποδισθήσεται.",
+            "engine_rendering": "Saturn having obtained the hour or ruling the Lot, with Mars not opposing: such a man will prosper in the occupation apportioned by Saturn; if witnessed by Jupiter, doubly so; if by Venus, through a woman or through one without offspring; if Mars is with him or opposes, such a man will be in turmoil and oppositions; if Mercury rises with him, such a man will be impeded in his hearing.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.4",
+            "pdf_page_index": 78,
+            "printed_page": 60,
+            "customer_prediction": false
+          },
+          "Jupiter": {
+            "greek": "Ζεὺς τὴν ὥραν ἢ τὸν κλῆρον ὡροσκοπήσας εὐτυχεῖς ἄγαν ἀπὸ νεότητος ἀποτελεῖ· ἐὰν δὲ Ἄρης παρῇ ἢ ὁμόκεντρος ἢ τρίγωνος, ἐν λαμπραῖς στρατείαις προκόψει καὶ βίου περίκτησιν οἴσει· ἐὰν δὲ καὶ Κρόνος προσγένηται, ἐν ὑπεροχαῖς γίνονται· εἰ δὲ καὶ Ἀφροδίτη, ἔτι μᾶλλον· ἐὰν δὲ καὶ Ἑρμῆς, ἐν λήψεσι καὶ δόσεσι γίνονται.",
+            "engine_rendering": "Jupiter having the hour or the Lot on the Ascendant makes men exceedingly fortunate from youth; if Mars is present or in the same angle or trine, he will advance in brilliant campaigns and will bring an acquisition of livelihood; if Saturn is added, they come to be in positions of eminence; if Venus too, still more; if Mercury too, they come to be in receipts and disbursements.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.4",
+            "pdf_page_index": 78,
+            "printed_page": 60,
+            "customer_prediction": false
+          },
+          "Mars": {
+            "greek": "Ἄρης λαχὼν τὴν ὥραν ἢ τὸν κλῆρον ὡροσκοπῶν ποιεῖ ὅρμησιν ἐπὶ στρατείαν· ἐὰν δὲ καὶ Ζεὺς μαρτυρήσῃ, ἐν ἀξίᾳ προκόψει· ἐὰν δὲ καὶ Ἀφροδίτη, ἐν ἀξίαις οὐ ταῖς τυχούσαις γίνονται· ἐὰν δὲ καὶ Ἑρμῆς συμπαρῇ, μόνος παρακαταθήκην λαβὼν ἀρνήσεται· ἐὰν δὲ καὶ Ζεύς, ἀπὸ πολλῶν πολλὰ περικτήσεται, μετὰ δὲ τὸν θάνατον εἰς βασιλικὰ χωρήσει.",
+            "engine_rendering": "Mars having obtained the hour or the Lot on the Ascendant makes an impulse toward military service; if Jupiter also witnesses, he will advance in rank; if Venus too, they come to be in no ordinary ranks; if Mercury is present alone, having received a deposit he will deny it; if Jupiter too, he will acquire much from many, but after death it will pass to the royal treasury.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.4",
+            "pdf_page_index": 78,
+            "printed_page": 60,
+            "customer_prediction": false
+          },
+          "Venus": {
+            "greek": "Ἀφροδίτη τὴν ὥραν ἢ τὸν κλῆρον λαχοῦσα μεγάλα ἀγαθὰ σημαίνει καὶ μεγαλοδόξους ποιεῖ· ἐὰν δὲ συμπαρῇ Ἑρμῆς, μουσικοὺς ποιεῖ· τούτων οὕτως ἐχόντων Κρόνος διαμετρήσας αὐτοὺς ἢ καθυπερτερήσας ἐστέρησε τῶν ὑπαρχόντων.",
+            "engine_rendering": "Venus having obtained the hour or the Lot signifies great goods and makes men of great repute; if Mercury is present with her, she makes musicians; but these being so, Saturn opposing them or overcoming them deprived them of their possessions.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.4",
+            "pdf_page_index": 78,
+            "printed_page": 60,
+            "customer_prediction": false
+          },
+          "Mercury": {
+            "greek": "Ἑρμῆς τὴν ὥραν λαχὼν ἢ τὸν κλῆρον ὡροσκοπήσας ποιεῖ εὐτυχεῖς· ἐὰν δὲ καὶ ὁ τοῦ Διὸς συμπροσγένηται ἢ τετραγωνίσῃ, κριτηρίων καὶ πόλεων ἀρχὰς ἕξουσιν· ἐὰν δὲ καὶ ὁ τοῦ Κρόνου τοῖσδε συμπροσγένηται, διπλασίονας τάς τε ἀρχὰς καὶ τιμὰς καὶ τὰ ἀγαθὰ καὶ τὰς προκοπάς.",
+            "engine_rendering": "Mercury having obtained the hour or the Lot on the Ascendant makes men fortunate; if Jupiter is joined or squares, they will hold magistracies of law-courts and cities; if Saturn too is joined to these, the offices and honours and goods and advancements are doubled.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.4",
+            "pdf_page_index": 78,
+            "printed_page": 60,
+            "customer_prediction": false
+          },
+          "Sun": {
+            "greek": "Ἥλιος κληρωσάμενος τὴν ὥραν ἢ τὴν τύχην ὡροσκοπήσας, ἐὰν συμπαρῇ καὶ ὁ τοῦ Διὸς ἢ μαρτυρήσῃ τετράγωνος, ὁ γεννώμενος εὐτυχὴς ἔσται. ἐὰν δὲ καὶ ὁ τοῦ Ἑρμοῦ συμπαρῇ αὐτῷ, διὰ λόγων προκόψει· ἐὰν δὲ καὶ ὁ τοῦ Ἄρεως συμπαρῇ ἢ τετραγωνίσῃ σὺν τῷ τοῦ Διός, μέγας ἔσται καὶ κυριεύσει ζωῆς καὶ θανάτου. εἰ δὲ τούτων οὕτως ἐχόντων Κρόνος τετραγωνίσῃ ἢ διαμετρήσῃ, ἐν συμπτώμασι καὶ ζημίαις περιπεσοῦνται.",
+            "engine_rendering": "The Sun having obtained the hour, or Fortune being on the Ascendant: if Jupiter is present or witnesses by square, the native will be fortunate. If Mercury is present with him, he will advance through words; if Mars too is present or squares along with Jupiter, he will be great and will have power of life and death. But these being so, if Saturn squares or opposes, they will fall into calamities and losses.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.4",
+            "pdf_page_index": 79,
+            "printed_page": 61,
+            "customer_prediction": false
+          },
+          "Moon": {
+            "greek": "Σελήνη κληρωσαμένη τὴν ὥραν ἢ τὸν κλῆρον τῆς τύχης μεγάλους ποιεῖ, μάλιστα δὲ ἐν ἰδίῳ τριγώνῳ· ἐὰν δὲ καὶ ὁ τῆς Ἀφροδίτης συνῇ ἢ τετράγωνος τύχῃ, τιμῆς μεγάλης καταξιωθήσεται· ἐὰν δὲ καὶ ὁ τοῦ Ἄρεως σὺν τῇ Σελήνῃ τύχῃ, ζωῆς καὶ θανάτου κυριεύσει· ἐὰν δὲ ὁ τοῦ Κρόνου, πολλῶν χωρῶν ἡγήσεται· ἐὰν δὲ καὶ ὁ τοῦ Διὸς συμπαρῇ ἢ τετραγωνίσῃ, βασιλεῖς μεγάλοι ἔσονται· εἰ δὲ τούτων ἀπόντων ὁ τοῦ Ἑρμοῦ σὺν Σελήνῃ σχηματισθῇ, ἀπὸ λόγων καὶ ἐντρεχείας αἱ προκοπαὶ ἔσονται· ἐὰν δὲ καὶ ὁ τοῦ Ἄρεως συμπροσγένηται ἢ τετραγωνίσῃ, τυράννους μεγιστᾶνας ποιεῖ.",
+            "engine_rendering": "The Moon having obtained the hour or the Lot of Fortune makes men great, especially in her own triangle; if Venus is with her or squares, he will be deemed worthy of great honour; if Mars is with the Moon, he will have power of life and death; if Saturn, he will govern many territories; if Jupiter is present or squares, they will be great kings; if these are absent and Mercury is configured with the Moon, the advancements will be from speech and quickness; if Mars too is joined or squares, it makes tyrants and magnates.",
+            "rendering_grade": "engine_translation_unreviewed",
+            "section": "Anthologiae II.4",
+            "pdf_page_index": 79,
+            "printed_page": 61,
+            "customer_prediction": false
+          }
+        },
+        "editorial_notes": [
+          "Kroll's apparatus at p. 60 line 9 has 'non opus ⟨ὑπὸ⟩ Ἀφρ.'"
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. IV",
+          "location": "Kroll 1908 p. 60 line 5 - p. 61 line 17 (PDF page indices 78-79)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.c04.moon_afflicted_by_malefics",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.4",
+        "technique": "malefics opposing or squaring the Moon that holds the hour or the Lot",
+        "pdf_page_indices": [
+          79,
+          80
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "moon.holds",
+            "operator": "in",
+            "value": [
+              "hour",
+              "lot_of_fortune"
+            ]
+          },
+          {
+            "fact": "malefic.aspects_moon",
+            "operator": "in",
+            "value": [
+              "opposition",
+              "square",
+              "superior"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "case_table",
+        "greek": "ἐὰν δὲ διαμετρήσῃ ὁ Ἄρης τὴν Σελήνην ἐκτὸς τῶν ἀγαθοποιῶν, ἐκθέσιμα ποιεῖ· ἐὰν δὲ τῷ Ἄρει ἀγαθοποιὸς συμπαρῇ, ἐκτεθέντα τραφήσεται. τὸ δὲ ὅμοιον κἂν τετράγωνος φανῇ ἢ καὶ καθυπερτερῶν εὑρεθῇ, ἐν πλάναις ἢ ἀπαγωγαῖς ἢ καὶ ἀνωμαλίαις περιβάλλει· ἐὰν δὲ ὁ τῆς Ἀφροδίτης τετραγωνίσῃ κατὰ κέντρον, ἀδικοῦνται ὑπὸ γυναικῶν. ἐὰν δὲ Κρόνος συμπαρῇ ἐν ἀσελγεῖ ζῳδίῳ, καὶ πορνοβοσκήσουσιν· ἐὰν δὲ καὶ ὁ τοῦ Ἄρεως αὐτοῖς συμμαρτυρήσῃ, ἑτέροις τὰς γυναῖκας αὐτῶν μισθώσουσιν. ἐὰν δὲ ὁ τοῦ Κρόνου τὴν Σελήνην τετραγωνίσῃ ἢ διαμετρήσῃ κατ᾽ ἰσόγραμμον στάσιν τῷ τοῦ Κρόνου, ἀντίληψιν ἕξει τὸ γεννώμενον τῆς τροφῆς ⟨καὶ⟩ ἔκβλητον τῶν γονέων ἔσται. ἐὰν δὲ ὁ τοῦ Ἑρμοῦ τετράγωνος ἢ διάμετρος γένηται τῇ Σελήνῃ, ἐναντιόβουλοι καὶ ἐναντιογνώμονες γίνονται ἔν τε διαβολαῖς καὶ κατηγορίαις ἀπὸ ὑπερέχοντος γενήσονται. ἐὰν δὲ καὶ κακοποιὸς συμμαρτυρήσῃ ἢ συσχηματισθῇ, ἐν ἀσχημοσύναις καὶ κατακρίσεσι ποιήσει. ὁ δὲ τοῦ Διὸς ἀντικείμενος κατὰ μέρος τῇ Σελήνῃ στέρησιν τέκνων ποιεῖ καὶ ἐναντιώσεις ὑπερεχόντων.",
+        "engine_rendering": "If Mars opposes the Moon apart from the benefics, he makes exposed infants; but if a benefic is present with Mars, the exposed child will be reared. The like also if he appears in square or is found overcoming: he involves them in wanderings or arrests or instabilities. If Venus squares from an angle, they are wronged by women. If Saturn is present in a licentious sign, they will even keep brothels; and if Mars also bears witness with them, they will hire out their own wives to others. If Saturn squares or opposes the Moon in an equipollent position with Saturn, the child will need help for its rearing and will be cast out by its parents. If Mercury becomes square or opposite to the Moon, they become contrary in counsel and contrary in judgement, and will fall into slanders and accusations from someone in authority. And if a malefic also bears witness or is configured, it will bring about disgraces and condemnations. Jupiter set partly against the Moon makes deprivation of children and oppositions from those in authority.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused",
+        "output_policy_reason": "decrees exposure of infants, keeping of brothels, prostitution of the native's wife, and condemnation as fate; the Greek is preserved for research, but this product does not deliver such statements about a living person",
+        "editorial_notes": [
+          "Kroll's apparatus at p. 61 line 26 reads 'nempe Διός' - he suspects Διός for the second Κρόνου in κατ᾽ ἰσόγραμμον στάσιν τῷ τοῦ Κρόνου.",
+          "Apparatus p. 61 line 18: ἐκθέσει μάγοι· ἐὰν M - the Marcianus corrupts ἐκθέσιμα.",
+          "Apparatus p. 61 line 27: ἄκλητον MS against Kroll's ἔκβλητον."
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. IV",
+          "location": "Kroll 1908 p. 61 lines 17-32 and p. 62 line 1 (PDF page indices 79-80)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b2.c04.length_of_life_note",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae II.4",
+        "technique": "lord of the Ascendant as apportioner of the years of life",
+        "pdf_page_indices": [
+          80
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "ascendant_lord.placement",
+            "operator": "is_defined",
+            "value": true
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "doctrine",
+        "greek": "καθόλου δὲ οἱ κακοποιοὶ ἐφορῶντες τὰ φῶτα καὶ τὸν ὡροσκόπον χωρὶς ἀγαθοποιῶν ὀλιγοχρονίους ποιοῦσιν. ὁ κύριος τοῦ ὡροσκόπου ἐπιτόπως κείμενος ἢ ἰδίας αἱρέσεως μεριστὴς χρόνων ζωῆς γίνεται· εἰ δέ πως συσχηματίζηται τῷ δεσπότῃ τοῦ κλήρου, πολύγηρος γίνεται καὶ εὐτυχής· εἰ δὲ ὑπὸ δύσιν τύχῃ, ὀλιγοχρόνιος· εἰ δὲ κακοποιὸς συμπαρῇ ἢ καθυπερτερήσῃ τὴν Σελήνην, ἄχρηστα τὰ βρέφη ἔσονται.",
+        "engine_rendering": "Universally, malefics overseeing the lights and the Ascendant without benefics make men short-lived. The lord of the Ascendant, placed suitably or of its own sect, becomes the apportioner of the years of life; and if it is somehow configured with the master of the Lot, the man becomes long-aged and fortunate; but if it falls under the setting, short-lived; and if a malefic is present with the Moon or overcomes her, the infants will be useless.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused",
+        "output_policy_reason": "assigns length of life (short-lived / long-aged) and non-viability of infants; this product does not deliver length-of-life or death statements about a living person",
+        "technique_note": "This is Valens' earliest statement in Book II that the lord of the Ascendant is the μεριστὴς χρόνων ζωῆς - the apportioner of the years of life - and it is the hinge between the triplicity-lord doctrine and the longevity material of Books III and VI."
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber II cap. IV fin.",
+          "location": "Kroll 1908 p. 62 lines 1-7 (PDF page index 80)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    }
+  ],
+  "fragment_vectors": [
+    {
+      "vector_id": "valens.b2.trigons.fire",
+      "rule_ids": [
+        "hel.valens.b2.trigons"
+      ],
+      "inputs": {
+        "triplicity": "fire",
+        "signs": [
+          "Aries",
+          "Leo",
+          "Sagittarius"
+        ]
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.1",
+        "sect": "diurnal",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 55, PDF page index 73, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.triplicity_lords.water_night",
+      "rule_ids": [
+        "hel.valens.b2.triplicity_lords"
+      ],
+      "inputs": {
+        "triplicity": "water",
+        "sect": "night"
+      },
+      "expected": {
+        "greek_present": true,
+        "lords": [
+          "Mars",
+          "Venus",
+          "Moon"
+        ],
+        "section": "Anthologiae II.1",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 56 lines 9-12, PDF page index 74, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.triplicity_lords.air_day",
+      "rule_ids": [
+        "hel.valens.b2.triplicity_lords"
+      ],
+      "inputs": {
+        "triplicity": "air",
+        "sect": "day"
+      },
+      "expected": {
+        "greek_present": true,
+        "lords": [
+          "Saturn",
+          "Mercury",
+          "Jupiter"
+        ],
+        "section": "Anthologiae II.1",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 56 lines 5-8, PDF page index 74, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.method.day",
+      "rule_ids": [
+        "hel.valens.b2.c02.method"
+      ],
+      "inputs": {
+        "sect": "day",
+        "note": "sect light is the Sun"
+      },
+      "expected": {
+        "greek_present": true,
+        "significator": "Sun",
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 56 lines 19-30, PDF page index 74, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.sequence.first_bad_second_good",
+      "rule_ids": [
+        "hel.valens.b2.c02.lord_sequence_outcomes"
+      ],
+      "inputs": {
+        "first_lord": "cadent",
+        "second_lord": "angular"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 57 lines 1-6, PDF page index 75, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.inspect.taurus_day",
+      "rule_ids": [
+        "hel.valens.b2.c02.per_triplicity_inspection"
+      ],
+      "inputs": {
+        "sect": "day",
+        "sun_sign": "Taurus"
+      },
+      "expected": {
+        "greek_present": true,
+        "inspect": [
+          "Venus",
+          "Moon",
+          "Mars"
+        ],
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 57 lines 23-25, PDF page index 75, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.fortune_fallback.malefic_witness",
+      "rule_ids": [
+        "hel.valens.b2.c02.fortune_fallback"
+      ],
+      "inputs": {
+        "triplicity_lords": "all cadent",
+        "lot_of_fortune_and_lord": "badly fallen",
+        "witnesses": "malefics"
+      },
+      "expected": {
+        "greek_present": true,
+        "restricted_clause_present": true,
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 58 lines 12-14, PDF page index 76, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c02.saturn_day_benefic",
+      "rule_ids": [
+        "hel.valens.b2.c02.malefic_benefic_reversal"
+      ],
+      "inputs": {
+        "planet": "Saturn",
+        "sect": "day",
+        "rulership": true,
+        "witnesses": [
+          "Jupiter",
+          "Sun"
+        ]
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.2",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 58 lines 29-33, PDF page index 76, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.lot_of_fortune.day_formula",
+      "rule_ids": [
+        "hel.valens.b2.lot_of_fortune"
+      ],
+      "inputs": {
+        "sect": "day",
+        "note": "arc Sun to Moon projected from the Ascendant"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.3",
+        "attribution": "the King, book 13",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 59 lines 22-30, PDF page index 77, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.hour_lord.venus",
+      "rule_ids": [
+        "hel.valens.b2.lord_of_hour_or_lot"
+      ],
+      "inputs": {
+        "planet": "Venus",
+        "holds": "hour_or_lot"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 60 lines 23-26, PDF page index 78, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.hour_lord.moon",
+      "rule_ids": [
+        "hel.valens.b2.lord_of_hour_or_lot"
+      ],
+      "inputs": {
+        "planet": "Moon",
+        "holds": "hour_or_lot"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 61 lines 8-17, PDF page index 79, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c04.moon_mars_opposition",
+      "rule_ids": [
+        "hel.valens.b2.c04.moon_afflicted_by_malefics"
+      ],
+      "inputs": {
+        "moon_holds": "lot_of_fortune",
+        "mars": "opposition",
+        "benefics": "absent"
+      },
+      "expected": {
+        "output_policy": "refused",
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 61 lines 17-19, PDF page index 79, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b2.c04.lifespan",
+      "rule_ids": [
+        "hel.valens.b2.c04.length_of_life_note"
+      ],
+      "inputs": {
+        "ascendant_lord": "under the sun beams / setting"
+      },
+      "expected": {
+        "output_policy": "refused",
+        "greek_present": true,
+        "section": "Anthologiae II.4",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 62 lines 1-7, PDF page index 80, read from a 300dpi page image"
+    }
+  ]
+}

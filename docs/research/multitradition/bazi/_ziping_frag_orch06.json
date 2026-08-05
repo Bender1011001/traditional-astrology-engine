@@ -1,0 +1,645 @@
+{
+  "fragment_id": "orch06",
+  "source_file": "E:\\code.projects\\astrology\\tmp\\acquire\\pdfs\\sanming_tonghui_siku_zhejiang\\sanming_tonghui_juan06.pdf",
+  "pages_covered": "Orchestrator reconnaissance dive: PDF pages 88-92 rendered at zoom 4.5 and read in full; PDF pages 8, 90, 180 sampled at zoom 3.5 for the juan map. The rest of juan 6 is left to the smt06a/smt06b agents.",
+  "chapters_seen": [
+    "三奇 (Three Marvels) — running through PDF p88-90, closing with a 詩曰 couplet pair",
+    "天元暗祿 (Heaven-Origin Hidden Officer) — begins PDF p91 col.3, runs through p92"
+  ],
+  "fragment_rules": [
+    {
+      "rule_id": "bazi.ziping.yongshen.orch06_identify_useful_and_helper_first",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "yongshen_selection",
+        "chapter": "三奇",
+        "juan": 6,
+        "procedural": true,
+        "note": "This is the text's own general instruction for reading ANY chart, stated inside the 三奇 chapter as a 但凡看命 (whenever one reads a fate) aside. It is a procedure, not a delineation."
+      },
+      "conditions": {
+        "any_chart": true,
+        "step": "before any verdict, determine which agent in the four pillars is the 用神 (useful god) and which is its 助 (helper)"
+      },
+      "conclusion": {
+        "judgment": "The reading procedure requires first identifying, within the four pillars, which agent is the useful god and which is its helper; only then may a verdict be drawn.",
+        "chinese": "但凡看命，要察柱中何者為用神，何者為助。",
+        "engine_rendering": "But in every reading of a fate, one must examine, among the pillars, which is the useful god and which is the helper.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "The engine has no 用神 selection step at all. This passage supplies the REQUIREMENT and the vocabulary (用神 / 助) but not, by itself, a selection algorithm; the following rule supplies the test that the selection must satisfy.",
+          "No 'helper' (助) predicate exists: the engine can compute which Ten God generates the element playing a given role, which is the natural operationalization, but the text does not define 助 arithmetically here."
+        ]
+      },
+      "priority": 1,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 三奇",
+          "section": "三奇",
+          "location": "PDF page 90, column 3-4 (reading right to left), sanming_tonghui_juan06.pdf; running title 卷六 in the centre fold",
+          "verification": "Page image rendered at zoom 4.5 from the local Siku Quanshu / Zhejiang University Library scan and read directly by the engine; block-printed characters legible without ambiguity in this column."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; this is the procedural gate the defensibility spec's judgment hierarchy already requires, now with a citation. It does not by itself authorise a 用神 verdict.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "yongshen_damage_and_rescue",
+        "chapter": "三奇",
+        "juan": 6
+      },
+      "conditions": {
+        "yongshen_identified": true,
+        "yongshen_damaged": true,
+        "helper_of_yongshen_present": true
+      },
+      "conclusion": {
+        "judgment": "A damaged useful god that has a helper present is rescued: the configuration is inauspicious but not fatal. Where the officer-nobility is taken as the useful god, what it fears is meeting death, defeat and destruction.",
+        "chinese": "如官貴為用，忌見死敗破壞。若見用神被傷，相助者有救，雖凶不死。",
+        "engine_rendering": "If the Officer-nobility is taken as the useful god, it fears meeting the Death and Defeat stations and destruction. Should the useful god be seen to be injured, one that helps it brings rescue: though inauspicious, there is no death.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "judgment_survival_clause": {
+          "chinese": "雖凶不死",
+          "output_policy": "refused",
+          "reason": "The clause states a death/no-death outcome. Per the tradition's own refusal list in bazi/defensibility_spec.md, no lifespan or death-timing claim is renderable to a reader. The structural half of the rule (damaged useful god + helper present = rescued, the configuration is mitigated) is what a composer may use; the mortality clause is retained as historical quotation only."
+        },
+        "engine_missing_facts": [
+          "No 用神 is selected by the engine, so 'yongshen_damaged' cannot be evaluated. The engine DOES compute damaged_or_clashed(role) for any named Ten God (root branch in a six-clash, or a controlling Ten God present), so once a 用神 role is chosen the damage predicate is already available.",
+          "'死敗' names the 死 and 敗(沐浴) stations of the twelve-stage 生旺死絕 cycle applied to the useful god's element. The engine computes only the five 旺相休囚死 command states, not the twelve-stage cycle position of an arbitrary element against an arbitrary branch."
+        ]
+      },
+      "priority": 2,
+      "exceptions": [
+        "The immediately following clause (再相助者亦有阻，剋日主又衰，其死必矣) reverses the outcome when the day master is itself controlled and weakened; encoded separately as bazi.ziping.yongshen.orch06_rescue_fails_when_day_master_controlled_and_weak."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 三奇",
+          "section": "三奇",
+          "location": "PDF page 90, columns 4-5 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; characters legible."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; the mortality clause is never rendered. Only the structural verdict (mitigated / rescued) may be used, and only alongside a stated 用神 selection.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.yongshen.orch06_rescue_fails_when_day_master_controlled_and_weak",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "yongshen_damage_and_rescue",
+        "chapter": "三奇",
+        "juan": 6,
+        "pairs_with": "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper"
+      },
+      "conditions": {
+        "yongshen_damaged": true,
+        "helper_itself_obstructed": true,
+        "day_master_controlled": true,
+        "day_master_weak": true
+      },
+      "conclusion": {
+        "judgment": "Where the rescuing helper is itself obstructed, and the day master is additionally under control and weak, the rescue fails.",
+        "chinese": "再相助者亦有阻，剋日主又衰，其死必矣。",
+        "engine_rendering": "Should the one that would help be itself obstructed, and the day master be controlled and moreover in decline, then its death is certain.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "refused",
+        "refusal_reason": "The rule's entire conclusion is a death certainty (其死必矣). Per the refusal list it is retained as historical quotation only. Its structural content — that a rescue is defeated when the helper is itself obstructed AND the day master is both controlled and weak — is recorded for the audit trace, never for a reader.",
+        "engine_missing_facts": [
+          "No 用神 selection, therefore no helper and no obstruction-of-helper predicate.",
+          "'剋日主' (day master controlled) is computable: the engine can test whether a Ten God whose element controls the day-master element is present. '又衰' (and in decline) maps onto the engine's month_command.day_master_state, but the source does not say which of the five states counts as 衰."
+        ]
+      },
+      "priority": 3,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 三奇",
+          "section": "三奇",
+          "location": "PDF page 90, columns 5-6 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; characters legible."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "refused — never rendered to a reader in any form. Retained so the corpus is not silently bowdlerised and so the structural predicate is auditable.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.dayun.orch06_luck_at_death_extinction_meeting_destroyer",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "timing",
+      "scope": {
+        "branch": "natal",
+        "topic": "luck_and_annual_period_interaction",
+        "chapter": "三奇",
+        "juan": 6
+      },
+      "conditions": {
+        "luck_or_annual_pillar_at_death_or_extinction_station": true,
+        "destroying_agent_met_again_in_the_same_period": true
+      },
+      "conclusion": {
+        "judgment": "A luck or annual period standing at the Death or Extinction station, which then meets a destroying agent a second time, brings compounded calamity.",
+        "chinese": "歲運臨死絕之地，再逢破壞之神，必見重禍。",
+        "engine_rendering": "When the annual or luck period arrives at the ground of Death or Extinction, and there meets once more an agent of destruction, a doubled calamity will certainly be seen.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "流年 (annual pillars) are not enumerated by the engine at all; only 大運 luck pillars are emitted. The rule's 歲 half is therefore undecidable today.",
+          "死 and 絕 here are stations of the twelve-stage 生旺死絕 cycle for a named element against the period branch. The engine computes only the five-state 旺相休囚死 seasonal command, which shares the token 死 but is a different table — a live trap, and the reason this is named rather than silently mapped.",
+          "'破壞之神' (agent of destruction) is not defined arithmetically in this passage; the surrounding text glosses it by example (官貴明暗有傷 / 印星有損破耗)."
+        ]
+      },
+      "priority": 5,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 三奇",
+          "section": "三奇",
+          "location": "PDF page 90, column 3 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; characters legible."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; the engine cannot decide the annual half, and the 死/絕 station table is not implemented. Firing this rule today would be a false positive.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.geju.orch06_tianyuan_anlu_establishment",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "pattern_establishment",
+        "pattern": "天元暗祿 (Heaven-Origin Hidden Officer)",
+        "chapter": "天元暗祿",
+        "juan": 6,
+        "establishment_axis": "day_pillar_plus_absence_of_the_officer_at_stem_level"
+      },
+      "conditions": {
+        "day_pillar_in": ["geng_yin", "yi_si", "bing_shen", "ji_hai"],
+        "day_branch_hides_the_day_masters_zheng_guan": true,
+        "zheng_guan_absent_from_year_month_hour_stems": true
+      },
+      "conclusion": {
+        "judgment": "The 天元暗祿 pattern is taken from four day pillars — Geng-Yin, Yi-Si, Bing-Shen and Ji-Hai — in each of which the day branch conceals the day master's Direct Officer. The pattern depends on that Officer NOT appearing among the year, month and hour stems: if it did appear openly there would be no hidden officer, and the pattern would not arise.",
+        "chinese": "此格取庚寅、乙巳、丙申、己亥四日。如庚日取丁火為正官，年月時中不見丁，則無官矣。",
+        "engine_rendering": "This pattern is taken from the four days Geng-Yin, Yi-Si, Bing-Shen and Ji-Hai. Thus for a Geng day one takes Fire Ding as the Direct Officer; if Ding is not seen among the year, month and hour, then there is no [open] Officer.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "The engine has no 格局 layer, so no pattern can be established at all. Every predicate this rule needs, however, IS computed: the day pillar, the hidden stems of the day branch with their qi grade, and the Ten God of every visible stem. This rule is therefore encodable end-to-end the moment a pattern layer exists.",
+          "The engine's branch ids for the four day pillars are geng+yin_branch, yi+si, bing+shen, ji+hai."
+        ],
+        "orthographic_note": "The Siku Quanshu manuscript hand writes 己 in a form easily read as 巳; the printed sequence is 庚寅乙巳丙申巳亥, and the fourth day is read here as 己亥 because the text's own gloss on that day (巳亥日坐亥中長生甲木為官) requires a day master to whom 甲 is the Direct Officer, which is 己 and not 巳 (a branch, not a stem). The same hand writes 戊己 as 戊巳 two columns later. Recorded rather than silently corrected."
+      },
+      "priority": 10,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 天元暗祿",
+          "section": "天元暗祿",
+          "location": "PDF page 91, columns 3-5 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; the four day pillars are set out explicitly in one column."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; no pattern verdict is rendered while the defensibility spec keeps 格局 source_gated on school precedence, but the establishment test itself is now sourced to a named recension and a page image.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.geju.orch06_tianyuan_anlu_gengyin_completion",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "pattern_completion",
+        "pattern": "天元暗祿 (Heaven-Origin Hidden Officer)",
+        "day_pillar": "geng_yin",
+        "chapter": "天元暗祿",
+        "juan": 6
+      },
+      "conditions": {
+        "day_pillar": "geng_yin",
+        "pattern_established": "bazi.ziping.geju.orch06_tianyuan_anlu_establishment",
+        "earth_stems_wu_or_ji_in_year_month_or_hour": true,
+        "yi_and_ding_present_in_four_pillars": "preferred"
+      },
+      "conclusion": {
+        "judgment": "For the Geng-Yin day the pattern is completed by Earth stems (Wu or Ji) in year, month or hour nourishing the Heaven-Origin; seeing Yi and Ding in the four pillars is better still. The mechanism given is that Yin holds the nascent Fire qi which Geng, by controlling it, produces as its Officer, and that Jia's Prosperity-station is in Yin, Wood being the mother of Fire, so mother and child stand in succession.",
+        "chinese": "喜庚自坐寅，寅中有長生火氣，庚自剋出為官。甲祿在寅，木乃火之母，母子有相繼之理。歲月時中喜有戊己滋助天元，四柱見乙丁更佳。",
+        "engine_rendering": "One is glad that Geng sits of itself upon Yin, for within Yin there is the Fire qi at its Long-Life station, and Geng, controlling it, brings it out as its Officer. Jia's Prosperity lies in Yin, and Wood is the mother of Fire, so that mother and child stand in a relation of succession. In the year, month and hour one is glad to have Wu or Ji nourishing the Heaven-Origin; and to see Yi and Ding among the four pillars is better still.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "No pattern layer, therefore no 成格 test.",
+          "The 祿 (Prosperity/Rank station) table — 甲祿在寅 — is not implemented. It is a ten-row stem-to-branch table and is one of the concrete, small, closable gaps this passage exposes.",
+          "長生 (Long-Life station) of an element against a branch is likewise not implemented; the engine has only the five-state seasonal command."
+        ]
+      },
+      "priority": 11,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 天元暗祿",
+          "section": "天元暗祿",
+          "location": "PDF page 91, columns 5-8 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; characters legible."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.geju.orch06_tianyuan_anlu_yisi_defeat_and_remedy",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "pattern_defeat_and_remedy",
+        "pattern": "天元暗祿 (Heaven-Origin Hidden Officer)",
+        "day_pillar": "yi_si",
+        "chapter": "天元暗祿",
+        "juan": 6
+      },
+      "conditions": {
+        "day_pillar": "yi_si",
+        "geng_xu_repeated_and_revealed_at_stem_level": "welcomed",
+        "ren_or_gui_seal_present": "required_to_generate_and_assist",
+        "xin_seven_killings_present": "avoided",
+        "fire_from_bing_hidden_in_si_prosperous": true,
+        "ren_gui_hai_or_zi_present_to_remove_the_fire_qi": true
+      },
+      "conclusion": {
+        "judgment": "For the Yi-Si day, the concealed Metal at its Long-Life station acts as Officer and the Earth-Prosperity in Si as Wealth; the pillars welcome a further Geng-Xu drawn through openly, and want Ren or Gui as Seal to generate and assist, while Xin — the Seven Killings — is to be avoided. Because Si natively carries prosperous Bing Fire, Ren, Gui, Hai or Zi are required to take that Fire qi away before the configuration is fine.",
+        "chinese": "乙巳日坐長生之金為官，戊祿為財，柱喜再見庚戌引透，要壬癸印生助，忌辛金七煞。其巳中原帶丙火旺，須壬癸亥子去其火氣方美。",
+        "engine_rendering": "The Yi-Si day sits upon Metal at its Long-Life station, which serves as the Officer, and the Prosperity of Wu, which serves as the Wealth. The pillars are glad to see a further Geng-Xu drawn out openly, and require Ren or Gui as Seal to generate and assist; Metal Xin, the Seven Killings, is to be avoided. Since Si natively carries prosperous Bing Fire, one must have Ren, Gui, Hai or Zi to take that Fire qi away, and only then is it fine.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "No pattern layer, therefore no 破格 test.",
+          "'引透' (drawn out openly / revealed at stem level) is a real Ziping predicate the engine partly has: it already tests whether a storage branch's hidden stem is revealed at stem level. Generalising that to any branch would make this condition decidable.",
+          "The 祿 table (戊祿在巳) is not implemented.",
+          "This rule is the clearest single instance in the passage of a REMEDY (須…方美) rather than a plain defeat, and the engine has no representation for a remedied pattern — only fired / not fired."
+        ]
+      },
+      "priority": 12,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 天元暗祿",
+          "section": "天元暗祿",
+          "location": "PDF page 91 final column through PDF page 92, columns 1-3 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; the sentence spans the page turn and both halves were read."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.geju.orch06_tianyuan_anlu_bingshen_and_jihai",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "pattern_completion_and_defeat",
+        "pattern": "天元暗祿 (Heaven-Origin Hidden Officer)",
+        "day_pillars": ["bing_shen", "ji_hai"],
+        "chapter": "天元暗祿",
+        "juan": 6
+      },
+      "conditions": {
+        "day_pillar_in": ["bing_shen", "ji_hai"],
+        "bing_shen_welcomes": ["geng_xin_as_wealth", "gui_as_officer", "jia_yi_as_seal"],
+        "bing_shen_avoids": ["wu_ji_as_hurting_officer"],
+        "ji_hai_avoids": ["metal_hurting_the_officer"]
+      },
+      "conclusion": {
+        "judgment": "The Bing-Shen day welcomes Geng and Xin as Wealth, Gui as Officer and Jia or Yi as Seal, and avoids Wu and Ji, which hurt the Officer. The Ji-Hai day sits upon the Jia Wood at its Long-Life station within Hai, which serves as its Officer, and avoids Metal, which hurts that Officer.",
+        "chinese": "丙申日喜庚辛財、癸水官、甲乙印，忌戊己傷官。己亥日坐亥中長生甲木為官，忌金傷官。",
+        "engine_rendering": "The Bing-Shen day is glad of Geng and Xin as Wealth, of Water Gui as Officer, and of Jia and Yi as Seal; it shuns Wu and Ji, which hurt the Officer. The Ji-Hai day sits upon the Jia Wood at its Long-Life station within Hai, taken as its Officer; it shuns Metal, which hurts that Officer.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "engine_missing_facts": [
+          "No pattern layer. All the Ten God identifications here (庚辛=財 for a Bing day, 癸=官, 甲乙=印, 戊己=傷官) are already computed correctly by the engine's ten_god() table, so this rule is a direct consistency check on that table as well as a doctrine record.",
+          "'忌' (shuns / avoids) is the 忌神 vocabulary the defensibility spec's item 12 asks for, stated here per day pillar rather than as a general algorithm."
+        ]
+      },
+      "priority": 13,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 天元暗祿",
+          "section": "天元暗祿",
+          "location": "PDF page 92, columns 3-4 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; characters legible."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    },
+    {
+      "rule_id": "bazi.ziping.shensha.orch06_sanqi_wealth_officer_seal_complete",
+      "tradition_id": "chinese_bazi",
+      "school_id": "ziping_sanming_tonghui_siku_quanshu",
+      "period": "Ming (Wan Minying, 三命通會 compiled 1578), transmitted in the Qing-court 欽定四庫全書 recension",
+      "domain": "natal",
+      "scope": {
+        "branch": "natal",
+        "topic": "named_configuration",
+        "configuration": "三奇 (Three Marvels), Ten-God reading",
+        "chapter": "三奇",
+        "juan": 6
+      },
+      "conditions": {
+        "zheng_cai_or_pian_cai_present": true,
+        "zheng_guan_present": true,
+        "zheng_yin_or_pian_yin_present": true,
+        "all_three_complete_in_the_four_pillars": true
+      },
+      "conclusion": {
+        "judgment": "Wealth, Officer and Seal complete together in the four pillars are themselves called the Three Marvels; all three complete in one chart is rare.",
+        "chinese": "財官印綬號三奇。財官爵印號三奇，三者兼全罕遇之。",
+        "engine_rendering": "Wealth, Officer and Seal-ribbon are named the Three Marvels. Wealth, Officer, rank and Seal are named the Three Marvels; that all three should be complete together is rarely met with.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "output_policy": "research_only",
+        "judgment_social_clauses": {
+          "chinese": "文將英雄武將威，心性忠良綱紀大，滿門受蔭定光輝。年少科名魁眾。",
+          "output_policy": "refused",
+          "reason": "Moralizing and status delineation (loyal and good in nature, the whole household ennobled, early examination honours). Retained as historical quotation; never rendered as a claim about a living person."
+        },
+        "engine_missing_facts": [
+          "None for the structural half: the engine already computes presence of 正財/偏財, 正官 and 正印/偏印 from visible and hidden stems, so this configuration is decidable today.",
+          "The source's own 三奇 chapter ALSO carries a second, incompatible sense of 三奇 as a stem triad (甲食丙, 丙能生己 …, with an explicit day-and-hour enumeration on PDF p88). The two senses must not be merged; only the Ten-God sense is encoded here."
+        ]
+      },
+      "priority": 20,
+      "exceptions": [
+        "The same chapter's other sense of 三奇 (a stem triad with an enumerated day/hour list) is a different configuration under the same name and is deliberately not encoded in this rule."
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "sanming_tonghui_siku_zhejiang_juan06_pdf",
+          "work": "三命通會, 卷六, 三奇",
+          "section": "三奇, 詩曰 couplets",
+          "location": "PDF page 90, columns 6-9 (reading right to left), sanming_tonghui_juan06.pdf",
+          "verification": "Page image rendered at zoom 4.5 and read directly; the two 詩曰/又 couplet sets are legible."
+        }
+      ],
+      "evidence_grade": "B",
+      "publication_limit": "research_only; the moralizing and status cells are refused. Only the structural presence test may be used.",
+      "review_status": "page_image_read_by_engine_independent_classical_chinese_review_pending"
+    }
+  ],
+  "fragment_vectors": [
+    {
+      "vector_id": "bazi.ziping.yongshen.orch06_identify_useful_and_helper_first.v1",
+      "rule_ids": ["bazi.ziping.yongshen.orch06_identify_useful_and_helper_first"],
+      "inputs": {
+        "any_chart": true,
+        "note": "This rule is a procedural gate, not a chart-shaped predicate; the vector asserts that the composer's step order includes a 用神 identification step before any verdict."
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The reading procedure must identify a useful god and its helper before drawing a verdict.",
+        "source_verdict_chinese": "但凡看命，要察柱中何者為用神，何者為助。",
+        "engine_behaviour_today": "does_not_fire — the engine performs no 用神 identification step, so the gate is unsatisfied for every chart"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.3-4, page image read directly. Procedural vector, not a source worked chart."
+    },
+    {
+      "vector_id": "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper.v1",
+      "rule_ids": [
+        "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper",
+        "bazi.ziping.yongshen.orch06_rescue_fails_when_day_master_controlled_and_weak"
+      ],
+      "inputs": {
+        "yongshen": "zheng_guan",
+        "yongshen_damaged": true,
+        "helper_of_yongshen_present": true,
+        "helper_itself_obstructed": false,
+        "day_master_controlled": false,
+        "day_master_weak": false
+      },
+      "expected": {
+        "fires": true,
+        "rule_that_fires": "bazi.ziping.yongshen.orch06_damaged_useful_god_rescued_by_helper",
+        "judgment": "The damaged Officer-as-useful-god is rescued; the configuration is mitigated.",
+        "source_verdict_chinese": "若見用神被傷，相助者有救，雖凶不死。",
+        "renderable_portion": "mitigated / rescued only; the 不死 clause is refused"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.4-5, page image read directly. Constructed from the rule's own stated conditions; the paired reversal rule is asserted not to fire."
+    },
+    {
+      "vector_id": "bazi.ziping.yongshen.orch06_rescue_fails.v1_negative",
+      "rule_ids": ["bazi.ziping.yongshen.orch06_rescue_fails_when_day_master_controlled_and_weak"],
+      "inputs": {
+        "yongshen": "zheng_guan",
+        "yongshen_damaged": true,
+        "helper_of_yongshen_present": true,
+        "helper_itself_obstructed": true,
+        "day_master_controlled": true,
+        "day_master_weak": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The rescue is defeated: helper obstructed, day master both controlled and in decline.",
+        "source_verdict_chinese": "再相助者亦有阻，剋日主又衰，其死必矣。",
+        "renderable_portion": "none — the whole conclusion is refused; audit trace only"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.5-6, page image read directly. Contrast vector for the preceding rescue rule; the source states the two as a single reversing pair."
+    },
+    {
+      "vector_id": "bazi.ziping.dayun.orch06_luck_at_death_extinction.v1",
+      "rule_ids": ["bazi.ziping.dayun.orch06_luck_at_death_extinction_meeting_destroyer"],
+      "inputs": {
+        "luck_or_annual_pillar_at_death_or_extinction_station": true,
+        "destroying_agent_met_again_in_the_same_period": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Compounded calamity in that period.",
+        "source_verdict_chinese": "歲運臨死絕之地，再逢破壞之神，必見重禍。",
+        "engine_behaviour_today": "undecidable — 流年 are not enumerated and the twelve-stage 死/絕 station table is not implemented"
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90 col.3, page image read directly. Constructed from the rule's own stated conditions."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v1_gengyin_positive",
+      "rule_ids": [
+        "bazi.ziping.geju.orch06_tianyuan_anlu_establishment",
+        "bazi.ziping.geju.orch06_tianyuan_anlu_gengyin_completion"
+      ],
+      "inputs": {
+        "day_master": {"stem": "geng", "element": "metal", "polarity": "yang"},
+        "pillars": {
+          "day": {"stem": "geng", "branch": "yin_branch"},
+          "year": {"stem": "wu_stem", "branch": "unspecified"},
+          "month": {"stem": "unspecified", "branch": "unspecified"},
+          "hour": {"stem": "unspecified", "branch": "unspecified"}
+        },
+        "hidden_stems": {
+          "day": [
+            {"stem": "jia", "element": "wood", "qi": "main"},
+            {"stem": "bing", "element": "fire", "qi": "middle"},
+            {"stem": "wu_stem", "element": "earth", "qi": "residual"}
+          ]
+        },
+        "visible_stem_ten_gods": {"year": "pian_yin"},
+        "zheng_guan_absent_from_year_month_hour_stems": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "天元暗祿 is established (Geng day on Yin, Ding the Direct Officer absent at stem level) and completed by the Earth stem nourishing the Heaven-Origin.",
+        "source_verdict_chinese": "此格取庚寅、乙巳、丙申、己亥四日。如庚日取丁火為正官，年月時中不見丁，則無官矣。…歲月時中喜有戊己滋助天元。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF pages 91-92, page images read directly. Constructed from the rule's own stated conditions; the source gives the four day pillars but no full worked chart for Geng-Yin at this point."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v2_negative_officer_revealed",
+      "rule_ids": ["bazi.ziping.geju.orch06_tianyuan_anlu_establishment"],
+      "inputs": {
+        "day_master": {"stem": "geng", "element": "metal", "polarity": "yang"},
+        "pillars": {"day": {"stem": "geng", "branch": "yin_branch"}, "month": {"stem": "ding", "branch": "unspecified"}},
+        "visible_stem_ten_gods": {"month": "zheng_guan"},
+        "zheng_guan_absent_from_year_month_hour_stems": false
+      },
+      "expected": {
+        "fires": false,
+        "judgment": "The pattern does not arise: the Officer Ding stands openly at the month stem, so there is no HIDDEN officer.",
+        "source_verdict_chinese": "年月時中不見丁，則無官矣。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF page 91, page image read directly. Negative vector constructed by inverting the source's own stated absence condition."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v3_yisi_remedy",
+      "rule_ids": ["bazi.ziping.geju.orch06_tianyuan_anlu_yisi_defeat_and_remedy"],
+      "inputs": {
+        "day_master": {"stem": "yi", "element": "wood", "polarity": "yin"},
+        "pillars": {"day": {"stem": "yi", "branch": "si"}},
+        "hidden_stems": {
+          "day": [
+            {"stem": "bing", "element": "fire", "qi": "main"},
+            {"stem": "geng", "element": "metal", "qi": "middle"},
+            {"stem": "wu_stem", "element": "earth", "qi": "residual"}
+          ]
+        },
+        "ren_or_gui_or_hai_or_zi_present": true,
+        "xin_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The Yi-Si hidden-officer configuration is fine because Ren/Gui/Hai/Zi are present to take away the prosperous Bing Fire in Si, and the Seven Killings Xin is absent.",
+        "source_verdict_chinese": "其巳中原帶丙火旺，須壬癸亥子去其火氣方美。忌辛金七煞。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF pages 91-92, page images read directly. Constructed from the rule's own stated remedy condition."
+    },
+    {
+      "vector_id": "bazi.ziping.geju.orch06_tianyuan_anlu.v4_bingshen_jihai",
+      "rule_ids": ["bazi.ziping.geju.orch06_tianyuan_anlu_bingshen_and_jihai"],
+      "inputs": {
+        "day_master": {"stem": "bing", "element": "fire", "polarity": "yang"},
+        "pillars": {"day": {"stem": "bing", "branch": "shen"}},
+        "hidden_stems": {
+          "day": [
+            {"stem": "geng", "element": "metal", "qi": "main"},
+            {"stem": "ren", "element": "water", "qi": "middle"},
+            {"stem": "wu_stem", "element": "earth", "qi": "residual"}
+          ]
+        },
+        "visible_stem_ten_gods": {"year": "zheng_cai", "month": "zheng_guan"},
+        "wu_or_ji_present": false
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "The Bing-Shen configuration is favourable: Metal as Wealth and Gui as Officer are welcomed, and the Hurting-Officer Earth stems are absent.",
+        "source_verdict_chinese": "丙申日喜庚辛財、癸水官、甲乙印，忌戊己傷官。"
+      },
+      "provenance": "三命通會 卷六 天元暗祿, PDF page 92, page image read directly. Constructed from the rule's own stated conditions."
+    },
+    {
+      "vector_id": "bazi.ziping.shensha.orch06_sanqi_wealth_officer_seal.v1",
+      "rule_ids": ["bazi.ziping.shensha.orch06_sanqi_wealth_officer_seal_complete"],
+      "inputs": {
+        "day_master": {"stem": "ding", "element": "fire", "polarity": "yin"},
+        "zheng_cai_present": true,
+        "zheng_guan_present": true,
+        "zheng_yin_present": true
+      },
+      "expected": {
+        "fires": true,
+        "judgment": "Wealth, Officer and Seal are all present: the Ten-God sense of the Three Marvels is complete.",
+        "source_verdict_chinese": "財官印綬號三奇。三者兼全罕遇之。",
+        "renderable_portion": "the structural completeness only; the moralizing and status couplets are refused",
+        "cross_reference": "This is the same structural claim the corpus already hand-verified for the 譚論 chart in 三命通會 juan 12 (財官印俱旺). The two passages are independent witnesses to the same configuration being treated as a named, high-value structure."
+      },
+      "provenance": "三命通會 卷六 三奇, PDF page 90, page image read directly. Constructed from the rule's own stated conditions; deliberately linked to the juan-12 譚論 worked chart already in bazi/worked_examples.json."
+    }
+  ],
+  "collation_notes": [
+    "MAJOR FINDING — the worked-chart inventory is larger than the five juan-12 charts the corpus records. 三命通會 juan 6, PDF page 92 final columns, carries at least two NAMED Ming-official charts inside the 天元暗祿 chapter: 「…尚書 庚子 甲申 庚寅 丙戌」 (the surname reads as 間/閻 in this hand) and 「潘潢尚書 丙辰 丙申 壬辰 …」, the latter running onto the following page. Pan Huang (潘潢) was a Ming Minister of Revenue. These were not previously known to the corpus and are exactly the late-Ming-official material the Wikisource interpolation warning describes — but they sit here in the Qing-court Siku Quanshu recension, in a page image, in a technical chapter rather than an appended case list. The juan-6 agents should transcribe them fully.",
+    "ORTHOGRAPHY — this Siku Quanshu manuscript hand writes the stem 己 in a form indistinguishable at a glance from the branch 巳. 「庚寅乙巳丙申巳亥四日」 must be read 己亥 for the fourth day (the text's own gloss requires a day master to whom 甲 is Direct Officer), and 「戊巳滋助天元」 must be read 戊己. Anyone collating an OCR transcription of this recension against a page image will meet this systematically; it is a plausible source of silent corruption in the existing ctext-derived material.",
+    "The 三奇 chapter of juan 6 carries TWO incompatible senses of 三奇 under one heading: a Ten-God sense (財官印綬號三奇) and a stem-triad sense with an explicit day-and-hour enumeration (PDF p88: 甲食丙, 丙能生己… 為甲之財, 合辛為甲之官, 要月令及日時引旺為妙). A pack that merges them would be wrong twice over.",
+    "PDF p90's 用神 passage is the strongest single find of this reconnaissance: it is an explicit, general, procedural instruction (但凡看命, 'in every reading of a fate') that the useful god and its helper must be identified, followed by a damage/rescue/failure cascade. The defensibility spec records 用神 as source_gated for want of a source that states a procedure rather than a school opinion. This passage states a procedure. It does not, however, supply a SELECTION algorithm — it supplies the requirement, the vocabulary, and the damage/rescue tests. That distinction is preserved in the encoded rules."
+  ],
+  "juan_not_covered": "Orchestrator covered only PDF pages 88-92 of juan 6 (plus three sampled pages) as a reconnaissance dive to confirm the juan's value and prove the page-image workflow. The remaining 241 pages of juan 6 are assigned to the smt06a (pages 1-123) and smt06b (pages 124-246) agents; overlap on pages 88-92 is intentional and their transcriptions should be treated as independent witnesses to the same columns."
+}

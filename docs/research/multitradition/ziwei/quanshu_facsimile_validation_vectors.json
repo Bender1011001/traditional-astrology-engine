@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "updated": "2026-08-05",
+  "tradition_id": "ziwei_doushu",
+  "source_pack_id": "ziwei_quanshu_facsimile_v1",
+  "status": "research_verified",
+  "source_ids": [
+    "ziwei_daozang_ctcw_juan2_access_failure",
+    "ziwei_doushu_quanshu_wikisource"
+  ],
+  "vectors": [
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.geng_yan.vec1",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.geng_yan"
+      ],
+      "inputs": {
+        "year_stem": "癸",
+        "year_branch": "丑",
+        "lunar_month": 3,
+        "lunar_day": 4,
+        "hour_branch": "辰",
+        "is_leap_month": false
+      },
+      "expected": {
+        "life_palace_branch": "子",
+        "body_palace_branch": "申",
+        "bureau": "金四局"
+      },
+      "provenance": "卷之六, scan leaf 0200 right half: the block prints 陰男 金四局 癸丑年三月初四辰時生 with 命垣 in the 子 cell and 身 inside the 才帛 (申) cell"
+    },
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.geng_yan.vec2",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.geng_yan"
+      ],
+      "inputs": {
+        "bureau": "金四局",
+        "lunar_day": 4
+      },
+      "expected": {
+        "ziwei_branch": "寅",
+        "tianfu_branch": "寅",
+        "lianzhen_branch": "午",
+        "tianxiang_branch": "午"
+      },
+      "provenance": "卷之六, scan leaf 0200 right half: 廉貞 and 天相 stand in the printed 遷移 cell, which the reverse-order palace run places at 午"
+    },
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.geng_yan.vec3",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.geng_yan"
+      ],
+      "inputs": {
+        "year_stem": "癸"
+      },
+      "expected": {
+        "lucun_branch": "子"
+      },
+      "provenance": "卷之六, scan leaf 0200 right half: 祿存 is printed in the 命垣 cell, which is 子"
+    },
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.geng_yan.vec4",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.geng_yan"
+      ],
+      "inputs": {
+        "bureau": "金四局",
+        "sex_and_polarity": "陰男"
+      },
+      "expected": {
+        "changsheng_start_branch": "巳",
+        "direction": "reverse",
+        "stage_by_branch": {
+          "巳": "長生",
+          "辰": "沐浴",
+          "卯": "冠帶",
+          "寅": "臨官",
+          "丑": "帝旺",
+          "子": "衰",
+          "亥": "病",
+          "戌": "死",
+          "酉": "墓",
+          "申": "絕",
+          "未": "胎",
+          "午": "養"
+        }
+      },
+      "provenance": "卷之六, scan leaf 0200 right half: every one of the twelve printed cells carries its stage mark and they run backward from 巳"
+    },
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.geng_yan.vec5",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.geng_yan"
+      ],
+      "inputs": {
+        "lucun_branch": "子",
+        "sex_and_polarity": "陰男"
+      },
+      "expected": {
+        "direction": "reverse",
+        "boshi_god_by_branch": {
+          "子": "博士",
+          "亥": "力士",
+          "戌": "青龍",
+          "酉": "小耗",
+          "申": "將軍",
+          "未": "奏書",
+          "午": "飛廉",
+          "巳": "喜神",
+          "辰": "病符",
+          "卯": "大耗",
+          "寅": "伏兵",
+          "丑": "官府"
+        }
+      },
+      "provenance": "卷之六, scan leaf 0200 right half: the twelve gods are printed one per palace and run backward from 博士 at 祿存"
+    },
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.kuai_wentong.vec1",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.kuai_wentong"
+      ],
+      "inputs": {
+        "year_stem": "辛",
+        "year_branch": "巳",
+        "lunar_month": 4,
+        "lunar_day": 27,
+        "hour_branch": "寅",
+        "is_leap_month": false
+      },
+      "expected": {
+        "life_palace_branch": "卯",
+        "body_palace_branch": "未",
+        "bureau": "木三局"
+      },
+      "provenance": "卷之六, scan leaf 0200 left half: the block prints 陰男 木三局 辛巳年四月二十七寅時生"
+    },
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.kuai_wentong.vec2",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.kuai_wentong"
+      ],
+      "inputs": {
+        "bureau": "木三局",
+        "lunar_day": 27
+      },
+      "expected": {
+        "ziwei_branch": "戌",
+        "tianfu_branch": "午"
+      },
+      "provenance": "卷之六, scan leaf 0200 left half: recomputed from the printed bureau and lunar day; the printed cell assignment for this chart is not yet magnified, so this vector is a prediction the next magnified pass must confirm"
+    },
+    {
+      "vector_id": "ziwei.facsimile.j6.mingtu.gallery.vec1",
+      "rule_ids": [
+        "ziwei.facsimile.j6.mingtu.gallery_exists_and_its_form"
+      ],
+      "inputs": {
+        "edition": "ming_nanyangtang_seven_juan",
+        "juan": 6
+      },
+      "expected": {
+        "chapter_title": "古今富貴貧賤嬭壽命圖",
+        "contains_dated_worked_nativities": true,
+        "charts_per_half_page": 1
+      },
+      "provenance": "printed 目錄 at scan leaf 0003 left half, confirmed against the gallery pages themselves"
+    }
+  ]
+}

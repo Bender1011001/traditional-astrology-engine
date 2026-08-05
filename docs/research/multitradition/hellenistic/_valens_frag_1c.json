@@ -1,0 +1,1723 @@
+{
+  "fragment_id": "1c",
+  "assignment": "Anthologiae Liber I capp. 21-24, printed pp. 37-55, PDF page indices 55-72",
+  "pages_read": [
+    55,
+    56,
+    57,
+    58,
+    59
+  ],
+  "calibration_notes": [],
+  "worked_nativities": [],
+  "unmined": "in progress",
+  "fragment_rules": [
+    {
+      "rule_id": "hel.valens.b1.combination.preface",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων — chapter preface",
+        "pdf_page_indices": [
+          55
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "technique",
+            "operator": "equals",
+            "value": "planet_pair_combination"
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "chapter_preface",
+        "chapter_title_greek": "⟨κα´. Περὶ συμπαρουσίας καὶ συγκράσεως⟩",
+        "chapter_title_rendering": "⟨21. On co-presence and blending (of the planets)⟩ — the chapter heading is supplied by Kroll in angle brackets",
+        "greek": "Ὑποτάξωμεν δὲ καὶ τὰς συμπαρουσίας καὶ συγκράσεις ἑκάστου ἀστέρος.",
+        "engine_rendering": "Let us set out below also the co-presences and blendings of each star (planet).",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "editorial_note": "Kroll's apparatus at p.37: 'notandus ordo mirus, quod neque Marti neque Soli suus tribuitur locus' — the order is strange, and neither Mars nor the Sun is given a section of its own as leading planet. The chapter accordingly prints 19 of the 21 possible pairs; Mars+Sun and Mars+Moon are absent. Kroll further notes 'sermonem fortasse ab excerptore foedatum raro correxi' and compares Anon. Catal. II 159 (who excerpted this chapter) and Firm. VI f.74v.",
+        "pairs_printed": 19,
+        "pairs_absent": [
+          "Mars with Sun",
+          "Mars with Moon"
+        ]
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 37 lines 11-13 and apparatus (PDF page index 55)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.saturn_jupiter",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          55
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Saturn",
+              "Jupiter"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Saturn",
+        "planet_b": "Jupiter",
+        "planet_a_greek": "Κρόνος",
+        "planet_b_greek": "Ζεύς",
+        "valens_concord_verdict": "συμπαθεῖς (sympathetic)",
+        "greek": "Κρόνος μὲν οὖν καὶ Ζεὺς ὁμόσε ὑπάρχοντες συμπαθεῖς εἰσι πρὸς ἀλλήλους, ἀποτελοῦντες ὠφελείας ἐκ νεκρικῶν, εἰσποιήσεις, ἐγγαίων κτημάτων κυρίους, ἐπιτρόπους, ἀλλοτρίων διοικητάς, οἰκονομικούς, φιλολόγους.",
+        "engine_rendering": "Saturn and Jupiter, being in the same place, are sympathetic to one another, producing benefits from the dead, adoptions, masters of landed property, guardians/procurators, administrators of other people's affairs, good managers, lovers of learning.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Κρόνος μὲν οὖν καὶ Ζεὺς ὁμόσε ὑπάρχοντες συμπαθεῖς εἰσι πρὸς ἀλλήλους, ἀποτελοῦντες ὠφελείας ἐκ νεκρικῶν, εἰσποιήσεις, ἐγγαίων κτημάτων κυρίους, ἐπιτρόπους, ἀλλοτρίων διοικητάς, οἰκονομικούς, φιλολόγους.",
+          "engine_rendering": "Saturn and Jupiter, being in the same place, are sympathetic to one another, producing benefits from the dead, adoptions, masters of landed property, guardians/procurators, administrators of other people's affairs, good managers, lovers of learning.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Saturn with Jupiter",
+          "pdf_page_index": 55,
+          "printed_page": "37",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 37 lines 14-18 (PDF page index 55)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.saturn_mars",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          55
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Saturn",
+              "Mars"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Saturn",
+        "planet_b": "Mars",
+        "planet_a_greek": "Κρόνος",
+        "planet_b_greek": "Ἄρης",
+        "valens_concord_verdict": "ἐχθροί (enemies)",
+        "greek": "Κρόνος μὲν οὖν καὶ Ἄρης ἐχθροί, ἐναντιωμάτων καὶ καθαιρέσεων ποιητικοί. στάσεις γὰρ οἰκείων καὶ ἀνεννοησίας καὶ ἔχθρας ἐπάγουσι, δόλους καὶ ἐπιβουλὰς καὶ κακοποιίας καὶ κρίσεις· ἐκτὸς εἰ μὴ οἰκείοις ἢ χρηματιστικοῖς ζῳδίοις πεσόντες καὶ ὑπὸ ἀγαθοποιῶν μαρτυρηθέντες ἐπισήμους καὶ λαμπρὰς γενέσεις κατασκευάσωσιν· ἀβεβαίους δὲ περὶ τὴν εὐδαιμονίαν καὶ ἀδοκήτους κινδύνους ἢ προδοσίας.",
+        "engine_rendering": "Saturn and Mars are enemies, makers of oppositions and demolitions. For they bring on quarrels with kinsfolk, and thoughtlessness, and enmities, tricks and plots and malefactions and lawsuits — unless, falling in their own or in business-bearing signs and testified by the benefics, they construct distinguished and brilliant nativities; but even so unstable as regards prosperity, with unexpected dangers or betrayals.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Κρόνος μὲν οὖν καὶ Ἄρης ἐχθροί, ἐναντιωμάτων καὶ καθαιρέσεων ποιητικοί. στάσεις γὰρ οἰκείων καὶ ἀνεννοησίας καὶ ἔχθρας ἐπάγουσι, δόλους καὶ ἐπιβουλὰς καὶ κακοποιίας καὶ κρίσεις· ἐκτὸς εἰ μὴ οἰκείοις ἢ χρηματιστικοῖς ζῳδίοις πεσόντες καὶ ὑπὸ ἀγαθοποιῶν μαρτυρηθέντες ἐπισήμους καὶ λαμπρὰς γενέσεις κατασκευάσωσιν· ἀβεβαίους δὲ περὶ τὴν εὐδαιμονίαν καὶ ἀδοκήτους κινδύνους ἢ προδοσίας.",
+          "engine_rendering": "Saturn and Mars are enemies, makers of oppositions and demolitions. For they bring on quarrels with kinsfolk, and thoughtlessness, and enmities, tricks and plots and malefactions and lawsuits — unless, falling in their own or in business-bearing signs and testified by the benefics, they construct distinguished and brilliant nativities; but even so unstable as regards prosperity, with unexpected dangers or betrayals.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Saturn with Mars",
+          "pdf_page_index": 55,
+          "printed_page": "37",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [
+        {
+          "greek": "ἐκτὸς εἰ μὴ οἰκείοις ἢ χρηματιστικοῖς ζῳδίοις πεσόντες καὶ ὑπὸ ἀγαθοποιῶν μαρτυρηθέντες",
+          "engine_rendering": "unless they fall in their own or in business-bearing signs and are testified by the benefics"
+        }
+      ],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 37 lines 18-24 (PDF page index 55)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.saturn_mercury",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          55
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Saturn",
+              "Mercury"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Saturn",
+        "planet_b": "Mercury",
+        "planet_a_greek": "Κρόνος",
+        "planet_b_greek": "Ἑρμῆς",
+        "valens_concord_verdict": "σύμφωνοι (concordant)",
+        "greek": "Κρόνος μὲν οὖν καὶ Ἑρμῆς σύμφωνοι καὶ πρακτικοί· πλὴν διαβολὰς ἐπάγουσιν ἕνεκεν μυστικῶν, κρίσεις καὶ χρεωστίας, γραπτῶν τε καὶ ἀργυρικῶν χάριν ταραχάς, οὐκ ἀπόρους δὲ οὐδὲ ἀσυνέτους, πολυπείρους καὶ πολυΐστορας ἢ προγνωστικοὺς φιλομαθεῖς περιέργους, ἀποκρύφων μύστας, εὐσεβοῦντας εἰς τὸ θεῖον, δυσσυνειδήτους.",
+        "engine_rendering": "Saturn and Mercury are concordant and effective in action; except that they bring slanders on account of secret matters, lawsuits and debts, disturbances over documents and money; yet not resourceless nor unintelligent — much-experienced and much-learned, or prophetic, fond of learning, meddling with curious arts, initiates of hidden things, reverent toward the divine, uneasy in conscience.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Κρόνος μὲν οὖν καὶ Ἑρμῆς σύμφωνοι καὶ πρακτικοί· πλὴν διαβολὰς ἐπάγουσιν ἕνεκεν μυστικῶν, κρίσεις καὶ χρεωστίας, γραπτῶν τε καὶ ἀργυρικῶν χάριν ταραχάς, οὐκ ἀπόρους δὲ οὐδὲ ἀσυνέτους, πολυπείρους καὶ πολυΐστορας ἢ προγνωστικοὺς φιλομαθεῖς περιέργους, ἀποκρύφων μύστας, εὐσεβοῦντας εἰς τὸ θεῖον, δυσσυνειδήτους.",
+          "engine_rendering": "Saturn and Mercury are concordant and effective in action; except that they bring slanders on account of secret matters, lawsuits and debts, disturbances over documents and money; yet not resourceless nor unintelligent — much-experienced and much-learned, or prophetic, fond of learning, meddling with curious arts, initiates of hidden things, reverent toward the divine, uneasy in conscience.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Saturn with Mercury",
+          "pdf_page_index": 55,
+          "printed_page": "37",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 37 lines 25-30 (PDF page index 55)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.saturn_venus",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          55,
+          56
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Saturn",
+              "Venus"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Saturn",
+        "planet_b": "Venus",
+        "planet_a_greek": "Κρόνος",
+        "planet_b_greek": "Ἀφροδίτη",
+        "valens_concord_verdict": "σύμφωνοι περὶ τὰς πράξεις (concordant as to action)",
+        "greek": "Κρόνος μὲν οὖν καὶ Ἀφροδίτη σύμφωνοι περὶ τὰς πράξεις, εὐεπίβολοι περὶ τὰς πλοκὰς καὶ τὰς συναρμογάς, συμπαθεῖς καὶ ὠφέλιμοι οὐ μέχρι τέλους, ἀλλ' ἐπί τινας χρόνους· εἶθ' οὕτως ψόγους χωρισμοὺς καὶ ἀστασίας ἢ θανάτους ἀποτελοῦσι, πολλάκις δὲ καὶ ἀγεννέσιν ἢ καὶ δημοσίαις τὰς ἐπιπλοκὰς ποιουμένους καὶ βλάβαις ἢ κρίσεσι περιπίπτοντας.",
+        "engine_rendering": "Saturn and Venus are concordant as regards actions, apt at entanglements and unions, sympathetic and beneficial — but not to the end, only for certain periods; then in this way they produce reproaches, separations and instabilities, or deaths; and often men who form their liaisons with low-born or even public (prostituted) women, and who fall into damages or lawsuits.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Κρόνος μὲν οὖν καὶ Ἀφροδίτη σύμφωνοι περὶ τὰς πράξεις, εὐεπίβολοι περὶ τὰς πλοκὰς καὶ τὰς συναρμογάς, συμπαθεῖς καὶ ὠφέλιμοι οὐ μέχρι τέλους, ἀλλ' ἐπί τινας χρόνους· εἶθ' οὕτως ψόγους χωρισμοὺς καὶ ἀστασίας ἢ θανάτους ἀποτελοῦσι, πολλάκις δὲ καὶ ἀγεννέσιν ἢ καὶ δημοσίαις τὰς ἐπιπλοκὰς ποιουμένους καὶ βλάβαις ἢ κρίσεσι περιπίπτοντας.",
+          "engine_rendering": "Saturn and Venus are concordant as regards actions, apt at entanglements and unions, sympathetic and beneficial — but not to the end, only for certain periods; then in this way they produce reproaches, separations and instabilities, or deaths; and often men who form their liaisons with low-born or even public (prostituted) women, and who fall into damages or lawsuits.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Saturn with Venus",
+          "pdf_page_index": 55,
+          "printed_page": "37-38",
+          "customer_prediction": false,
+          "restricted_clauses": [
+            {
+              "greek": "εἶθ' οὕτως ψόγους χωρισμοὺς καὶ ἀστασίας ἢ θανάτους ἀποτελοῦσι",
+              "reason": "predicts deaths within the native's relationships; this product does not deliver death predictions about living persons"
+            },
+            {
+              "greek": "πολλάκις δὲ καὶ ἀγεννέσιν ἢ καὶ δημοσίαις τὰς ἐπιπλοκὰς ποιουμένους",
+              "reason": "sexual defamation of the native and of named classes of women"
+            }
+          ]
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 37-38 p.37 line 31 - p.38 line 5 (PDF page index 55)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.saturn_moon",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          56
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Saturn",
+              "Moon"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Saturn",
+        "planet_b": "Moon",
+        "planet_a_greek": "Κρόνος",
+        "planet_b_greek": "Σελήνη",
+        "valens_concord_verdict": "ὠφέλιμοι (beneficial)",
+        "greek": "Κρόνος μὲν οὖν καὶ Σελήνη ὠφέλιμοι, περιποιητικοὶ κτημάτων θεμελίων ναυκληρίας καὶ ἐκ θανατικῶν εὐεργετικοί, μάλιστα ἐπὰν ἡ Σελήνη τὸν ἐξ ἀνατολῆς δρόμον ποιουμένη τύχῃ καὶ ὑπὸ ἀγαθοποιῶν μαρτυρῆται· μειζόνων γὰρ συστάσεις καὶ δωρεὰς καὶ ἐχθρῶν καθαιρέσεις ἀποτελεῖ. πλὴν ἀβεβαίους τῇ κτήσει, εἰς δὲ τὸν περὶ γυναικὸς τόπον ἀστάτους καὶ ἐπιλύπους διά τινας χωρισμοὺς καὶ μίση καὶ πένθη. ἐπάγουσι δὲ καὶ σωματικὰ πάθη καὶ καταπτώσεις αἰφνιδίους καὶ ἡγεμονικῶν τόπων ἢ νεύρων ἀλγήσεις καὶ ἀναγκαίων προσώπων θανάτους.",
+        "engine_rendering": "Saturn and the Moon are beneficial, procurers of possessions, foundations, shipowning, and benefactors from legacies of the dead — especially when the Moon happens to be making her course from the east (waxing/oriental) and is testified by the benefics; for then it produces recommendations from greater persons, gifts, and the overthrow of enemies. But unstable in possession, and as regards the place concerning the wife unsettled and sorrowful through certain separations and hatreds and mournings. They also bring bodily sufferings and sudden collapses and pains of the governing parts or of the sinews, and deaths of necessary (close) persons.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Κρόνος μὲν οὖν καὶ Σελήνη ὠφέλιμοι, περιποιητικοὶ κτημάτων θεμελίων ναυκληρίας καὶ ἐκ θανατικῶν εὐεργετικοί, μάλιστα ἐπὰν ἡ Σελήνη τὸν ἐξ ἀνατολῆς δρόμον ποιουμένη τύχῃ καὶ ὑπὸ ἀγαθοποιῶν μαρτυρῆται· μειζόνων γὰρ συστάσεις καὶ δωρεὰς καὶ ἐχθρῶν καθαιρέσεις ἀποτελεῖ. πλὴν ἀβεβαίους τῇ κτήσει, εἰς δὲ τὸν περὶ γυναικὸς τόπον ἀστάτους καὶ ἐπιλύπους διά τινας χωρισμοὺς καὶ μίση καὶ πένθη. ἐπάγουσι δὲ καὶ σωματικὰ πάθη καὶ καταπτώσεις αἰφνιδίους καὶ ἡγεμονικῶν τόπων ἢ νεύρων ἀλγήσεις καὶ ἀναγκαίων προσώπων θανάτους.",
+          "engine_rendering": "Saturn and the Moon are beneficial, procurers of possessions, foundations, shipowning, and benefactors from legacies of the dead — especially when the Moon happens to be making her course from the east (waxing/oriental) and is testified by the benefics; for then it produces recommendations from greater persons, gifts, and the overthrow of enemies. But unstable in possession, and as regards the place concerning the wife unsettled and sorrowful through certain separations and hatreds and mournings. They also bring bodily sufferings and sudden collapses and pains of the governing parts or of the sinews, and deaths of necessary (close) persons.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Saturn with Moon",
+          "pdf_page_index": 56,
+          "printed_page": "38",
+          "customer_prediction": false,
+          "output_policy": "refused",
+          "output_policy_reason": "states deaths of the native's close kin and decrees bodily disease and sudden collapse as fate; this product does not deliver death or disease predictions about living persons"
+        },
+        "output_policy": "refused",
+        "output_policy_reason": "states deaths of the native's close kin and decrees bodily disease and sudden collapse as fate; this product does not deliver death or disease predictions about living persons"
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 38 lines 6-14 (PDF page index 56)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.saturn_sun",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          56
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Saturn",
+              "Sun"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Saturn",
+        "planet_b": "Sun",
+        "planet_a_greek": "Κρόνος",
+        "planet_b_greek": "Ἥλιος",
+        "valens_concord_verdict": "ἀσύμφωνοι (discordant)",
+        "greek": "Κρόνος μὲν οὖν καὶ Ἥλιος ἀσύμφωνοι, μετὰ φθόνων τὰς κτήσεις καὶ τὰς φιλίας παρεχόμενοι καὶ ἀφαιρούμενοι· ὅθεν ⟨οἱ⟩ ὑπὸ τὴν τοιαύτην στάσιν γεννηθέντες ἔχθρας λαθραίας πρὸς μείζονα πρόσωπα ⟨καὶ⟩ ἀπειλὰς ὑπομένοντες καὶ ὑπό τινων ἐπιβουλεύονται καὶ ἐπιφθόνως μέχρι τέλους τὸν βίον διάξουσιν. ὑποκριτικῶς δὲ φερόμενοι τῶν πλείστων περιγίνονται, πλὴν οὐκ ἄποροι καθίστανται, ἐπιτάραχοι δὲ καὶ ἀνεξίκακοι, ἐγκρατεῖς περὶ τὰς τῶν αἰτίων ἐπιφοράς.",
+        "engine_rendering": "Saturn and the Sun are discordant, furnishing possessions and friendships together with envy and then taking them away; whence those born under such a configuration, enduring secret enmities toward greater persons and threats, are plotted against by certain people and will pass their life enviously to the end. But behaving dissemblingly they get the better of most people; yet they are not left resourceless — rather turbulent and forbearing of ill, self-controlled under the onset of accusations.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Κρόνος μὲν οὖν καὶ Ἥλιος ἀσύμφωνοι, μετὰ φθόνων τὰς κτήσεις καὶ τὰς φιλίας παρεχόμενοι καὶ ἀφαιρούμενοι· ὅθεν ⟨οἱ⟩ ὑπὸ τὴν τοιαύτην στάσιν γεννηθέντες ἔχθρας λαθραίας πρὸς μείζονα πρόσωπα ⟨καὶ⟩ ἀπειλὰς ὑπομένοντες καὶ ὑπό τινων ἐπιβουλεύονται καὶ ἐπιφθόνως μέχρι τέλους τὸν βίον διάξουσιν. ὑποκριτικῶς δὲ φερόμενοι τῶν πλείστων περιγίνονται, πλὴν οὐκ ἄποροι καθίστανται, ἐπιτάραχοι δὲ καὶ ἀνεξίκακοι, ἐγκρατεῖς περὶ τὰς τῶν αἰτίων ἐπιφοράς.",
+          "engine_rendering": "Saturn and the Sun are discordant, furnishing possessions and friendships together with envy and then taking them away; whence those born under such a configuration, enduring secret enmities toward greater persons and threats, are plotted against by certain people and will pass their life enviously to the end. But behaving dissemblingly they get the better of most people; yet they are not left resourceless — rather turbulent and forbearing of ill, self-controlled under the onset of accusations.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Saturn with Sun",
+          "pdf_page_index": 56,
+          "printed_page": "38",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 38 lines 15-22 (PDF page index 56)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.jupiter_sun",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          56
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Jupiter",
+              "Sun"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Jupiter",
+        "planet_b": "Sun",
+        "planet_a_greek": "Ζεύς",
+        "planet_b_greek": "Ἥλιος",
+        "valens_concord_verdict": "λαμπροὶ ἐπίδοξοι (brilliant, of great repute)",
+        "greek": "Ζεὺς καὶ Ἥλιος ὁμόσε ἰόντες λαμπροὺς ἐπιδόξους ἀποτελοῦσιν, ἀρχικοὺς ἡγεμονικοὺς τυραννικοὺς πρακτικοὺς ὑπὸ ὄχλων τιμωμένους καὶ εὐφημουμένους, εὐπόρους δὲ καὶ πλουσίους καὶ μετὰ πλείστης φαντασίας διεξάγοντας· πλὴν κατά τινας χρόνους ἐν ἀνωμαλίαις καὶ φθόνοις, καὶ μάλιστα, ἐὰν καὶ ὁ ἀστὴρ ὑπὸ δύσιν εὑρεθῇ, φαντασίαις μείζοσι περιτρέψας οἴησιν ἀληθείας ἀπεργάζεται.",
+        "engine_rendering": "Jupiter and the Sun coming to the same place make men brilliant and of great repute, fit to rule, commanding, tyrannical, effective in action, honoured and acclaimed by crowds, well-off and rich and passing their life with the greatest display; except that at certain times they are in irregularities and envy — and especially, if the star (namely Jupiter, per Kroll's apparatus note at line 27) is found under the beams (setting), then, having turned him aside by greater fantasies, it produces a mere opinion of truth.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ζεὺς καὶ Ἥλιος ὁμόσε ἰόντες λαμπροὺς ἐπιδόξους ἀποτελοῦσιν, ἀρχικοὺς ἡγεμονικοὺς τυραννικοὺς πρακτικοὺς ὑπὸ ὄχλων τιμωμένους καὶ εὐφημουμένους, εὐπόρους δὲ καὶ πλουσίους καὶ μετὰ πλείστης φαντασίας διεξάγοντας· πλὴν κατά τινας χρόνους ἐν ἀνωμαλίαις καὶ φθόνοις, καὶ μάλιστα, ἐὰν καὶ ὁ ἀστὴρ ὑπὸ δύσιν εὑρεθῇ, φαντασίαις μείζοσι περιτρέψας οἴησιν ἀληθείας ἀπεργάζεται.",
+          "engine_rendering": "Jupiter and the Sun coming to the same place make men brilliant and of great repute, fit to rule, commanding, tyrannical, effective in action, honoured and acclaimed by crowds, well-off and rich and passing their life with the greatest display; except that at certain times they are in irregularities and envy — and especially, if the star (namely Jupiter, per Kroll's apparatus note at line 27) is found under the beams (setting), then, having turned him aside by greater fantasies, it produces a mere opinion of truth.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Jupiter with Sun",
+          "pdf_page_index": 56,
+          "printed_page": "38",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 38 lines 23-29 (PDF page index 56)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.jupiter_moon",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          56
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Jupiter",
+              "Moon"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Jupiter",
+        "planet_b": "Moon",
+        "planet_a_greek": "Ζεύς",
+        "planet_b_greek": "Σελήνη",
+        "valens_concord_verdict": "ἀγαθοὶ περικτητικοί (good, acquisitive)",
+        "greek": "Ζεὺς καὶ Σελήνη ἀγαθοὶ περικτητικοί, κόσμου καὶ σωμάτων δεσπότας ἀποτελοῦντες καὶ ἀρχὰς ἐπισήμους παρεχόμενοι, ἔκ τε γυναικῶν καὶ ἐπισήμων προσώπων ὠφελουμένους, ἀπὸ οἰκείων ἢ τέκνων εὐεργετουμένους καὶ δωρεῶν [ἢ] καὶ τιμῶν καταξιουμένους, χρηματοφύλακας ἢ πολλὰ δανειστικοὺς ἢ πιστευομένους καὶ θησαυρῶν εὑρετάς, εὐχρηματίστους.",
+        "engine_rendering": "Jupiter and the Moon are good and acquisitive, making men masters of ornament and of bodies (i.e. of slaves — so Kroll's apparatus at line 30, 'σωμάτων i.e. servorum') and furnishing distinguished offices; benefited by women and by distinguished persons, well-treated by kinsfolk or children, thought worthy of gifts and honours, keepers of money or great lenders or men entrusted with funds, and finders of treasures, prosperous in business.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ζεὺς καὶ Σελήνη ἀγαθοὶ περικτητικοί, κόσμου καὶ σωμάτων δεσπότας ἀποτελοῦντες καὶ ἀρχὰς ἐπισήμους παρεχόμενοι, ἔκ τε γυναικῶν καὶ ἐπισήμων προσώπων ὠφελουμένους, ἀπὸ οἰκείων ἢ τέκνων εὐεργετουμένους καὶ δωρεῶν [ἢ] καὶ τιμῶν καταξιουμένους, χρηματοφύλακας ἢ πολλὰ δανειστικοὺς ἢ πιστευομένους καὶ θησαυρῶν εὑρετάς, εὐχρηματίστους.",
+          "engine_rendering": "Jupiter and the Moon are good and acquisitive, making men masters of ornament and of bodies (i.e. of slaves — so Kroll's apparatus at line 30, 'σωμάτων i.e. servorum') and furnishing distinguished offices; benefited by women and by distinguished persons, well-treated by kinsfolk or children, thought worthy of gifts and honours, keepers of money or great lenders or men entrusted with funds, and finders of treasures, prosperous in business.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Jupiter with Moon",
+          "pdf_page_index": 56,
+          "printed_page": "38",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 38 lines 30-35 (PDF page index 56)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.jupiter_mars",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          57
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Jupiter",
+              "Mars"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Jupiter",
+        "planet_b": "Mars",
+        "planet_a_greek": "Ζεύς",
+        "planet_b_greek": "Ἄρης",
+        "valens_concord_verdict": "ἐπίδοξοι φαντασιώδεις (of repute, showy)",
+        "greek": "Ζεὺς ⟨καὶ⟩ Ἄρης ἐπιδόξους φαντασιώδεις, μειζόνων ἢ βασιλέων φίλους, στρατιωτικοὺς ἐπισήμους καὶ ὀψωνίων μετόχους, ἐν δημοσίοις ἢ στρατιωτικοῖς τὰς ἀναστροφὰς ποιουμένους καὶ τιμῆς καὶ δόξης καταξιουμένους, ἀνωμάλους δὲ τῷ βίῳ καὶ τῷ ἤθει καὶ τῶν κτηθέντων ἀποβολὰς ποιουμένους.",
+        "engine_rendering": "Jupiter ⟨and⟩ Mars make men of great repute and showy, friends of the great or of kings, distinguished soldiers and sharers in stipends, conducting their business in public or military affairs and thought worthy of honour and glory; but irregular in life and in character, and suffering losses of what they had acquired.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ζεὺς ⟨καὶ⟩ Ἄρης ἐπιδόξους φαντασιώδεις, μειζόνων ἢ βασιλέων φίλους, στρατιωτικοὺς ἐπισήμους καὶ ὀψωνίων μετόχους, ἐν δημοσίοις ἢ στρατιωτικοῖς τὰς ἀναστροφὰς ποιουμένους καὶ τιμῆς καὶ δόξης καταξιουμένους, ἀνωμάλους δὲ τῷ βίῳ καὶ τῷ ἤθει καὶ τῶν κτηθέντων ἀποβολὰς ποιουμένους.",
+          "engine_rendering": "Jupiter ⟨and⟩ Mars make men of great repute and showy, friends of the great or of kings, distinguished soldiers and sharers in stipends, conducting their business in public or military affairs and thought worthy of honour and glory; but irregular in life and in character, and suffering losses of what they had acquired.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Jupiter with Mars",
+          "pdf_page_index": 57,
+          "printed_page": "39",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 39 lines 1-5 (PDF page index 57)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.jupiter_venus",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          57
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Jupiter",
+              "Venus"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Jupiter",
+        "planet_b": "Venus",
+        "planet_a_greek": "Ζεύς",
+        "planet_b_greek": "Ἀφροδίτη",
+        "valens_concord_verdict": "ἀγαθοὶ σύμφωνοι (good, concordant)",
+        "greek": "Ζεὺς καὶ Ἀφροδίτη ἀγαθοὶ σύμφωνοι, περιποιητικοὶ δόξης καὶ ὠφελείας, ἐπάγοντες ἐπικτήσεις δωρεὰς κόσμους σωμάτων δεσποτείας τέκνων γονὰς ἀρχιερωσύνας προστασίας ὄχλων στεμματηφορίας χρυσοφορίας, ἀνδριάντων καὶ εἰκόνων καταξιουμένους, ἀνωμάλους δὲ περὶ γάμους καὶ τέκνα ἀποτελοῦσι.",
+        "engine_rendering": "Jupiter and Venus are good and concordant, procurers of glory and benefit, bringing acquisitions, gifts, ornaments, masteries of bodies (slaves), begettings of children, high priesthoods, presidencies over crowds, the wearing of crowns and of gold, men thought worthy of statues and portraits; but they make them irregular as regards marriages and children.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ζεὺς καὶ Ἀφροδίτη ἀγαθοὶ σύμφωνοι, περιποιητικοὶ δόξης καὶ ὠφελείας, ἐπάγοντες ἐπικτήσεις δωρεὰς κόσμους σωμάτων δεσποτείας τέκνων γονὰς ἀρχιερωσύνας προστασίας ὄχλων στεμματηφορίας χρυσοφορίας, ἀνδριάντων καὶ εἰκόνων καταξιουμένους, ἀνωμάλους δὲ περὶ γάμους καὶ τέκνα ἀποτελοῦσι.",
+          "engine_rendering": "Jupiter and Venus are good and concordant, procurers of glory and benefit, bringing acquisitions, gifts, ornaments, masteries of bodies (slaves), begettings of children, high priesthoods, presidencies over crowds, the wearing of crowns and of gold, men thought worthy of statues and portraits; but they make them irregular as regards marriages and children.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Jupiter with Venus",
+          "pdf_page_index": 57,
+          "printed_page": "39",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 39 lines 6-10 (PDF page index 57)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.jupiter_mercury",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          57
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Jupiter",
+              "Mercury"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Jupiter",
+        "planet_b": "Mercury",
+        "planet_a_greek": "Ζεύς",
+        "planet_b_greek": "Ἑρμῆς",
+        "valens_concord_verdict": "ἀγαθοὶ σύμφωνοι διοικητικοί (good, concordant, administrative)",
+        "greek": "Ζεὺς καὶ Ἑρμῆς ἀγαθοὶ σύμφωνοι διοικητικοί, πραγμάτων οἰκονόμους ἀποτελοῦντες ἔν τε πίστεσι καὶ χειρισμοῖς γινομένους, ἐπιτροπικούς, ἀπὸ λόγων ἢ ψήφων ἀναγομένους καὶ ἐν παιδείαις δοξαζομένους, πολυφίλους δὲ καὶ εὐσυστάτους, μισθῶν καὶ ὀψωνίων καταξιουμένους. ἐὰν δέ πως καὶ ἐν χρηματιστικοῖς ζῳδίοις εὑρεθῶσι, καὶ θησαυρῶν εὑρετὰς ποιοῦσιν ἢ ἐκ παραθηκῶν ὠφελουμένους δανειστικούς.",
+        "engine_rendering": "Jupiter and Mercury are good, concordant, administrative, making men stewards of affairs, engaged in trusts and in the handling of business, guardians/procurators, advanced by words or by accounts and honoured in learning, having many friends and well recommended, thought worthy of wages and stipends. And if somehow they are also found in business-bearing signs, they make men finders of treasures, or benefited from deposits, and money-lenders.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ζεὺς καὶ Ἑρμῆς ἀγαθοὶ σύμφωνοι διοικητικοί, πραγμάτων οἰκονόμους ἀποτελοῦντες ἔν τε πίστεσι καὶ χειρισμοῖς γινομένους, ἐπιτροπικούς, ἀπὸ λόγων ἢ ψήφων ἀναγομένους καὶ ἐν παιδείαις δοξαζομένους, πολυφίλους δὲ καὶ εὐσυστάτους, μισθῶν καὶ ὀψωνίων καταξιουμένους. ἐὰν δέ πως καὶ ἐν χρηματιστικοῖς ζῳδίοις εὑρεθῶσι, καὶ θησαυρῶν εὑρετὰς ποιοῦσιν ἢ ἐκ παραθηκῶν ὠφελουμένους δανειστικούς.",
+          "engine_rendering": "Jupiter and Mercury are good, concordant, administrative, making men stewards of affairs, engaged in trusts and in the handling of business, guardians/procurators, advanced by words or by accounts and honoured in learning, having many friends and well recommended, thought worthy of wages and stipends. And if somehow they are also found in business-bearing signs, they make men finders of treasures, or benefited from deposits, and money-lenders.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Jupiter with Mercury",
+          "pdf_page_index": 57,
+          "printed_page": "39",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 39 lines 11-17 (PDF page index 57)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.venus_sun",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          57
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Venus",
+              "Sun"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Venus",
+        "planet_b": "Sun",
+        "planet_a_greek": "Ἀφροδίτη",
+        "planet_b_greek": "Ἥλιος",
+        "valens_concord_verdict": "σύμφωνοι καὶ ἐπίδοξοι (concordant, of good repute)",
+        "greek": "Ἀφροδίτη καὶ Ἥλιος σύμφωνοι καὶ ἐπίδοξοι καὶ ἀγαθῶν δοτῆρες, συστάσεις ἀρρενικῶν καὶ θηλυκῶν ἐπάγοντες δωρεάς τε καὶ καταγραφάς, καὶ περὶ τὰς ἐπιβολὰς εὐεπιτεύκτους· ἔσθ' ὅτε μὲν οὖν καὶ προστασίας ἀναλαμβάνοντας ὀχλικὰς ἢ πίστεις καὶ ἑτέρων τόπων προεστῶτας καὶ ὀψωνίων καταξιουμένους, εἰς δὲ τὸν περὶ γυναικὸς καὶ τέκνων τόπον οὐκ ἀλύπους, καὶ μάλιστα ἐὰν ὑπὸ δύσιν τύχῃ ὁ ἀστήρ.",
+        "engine_rendering": "Venus and the Sun are concordant and of good repute and givers of good things, bringing recommendations of men and of women, and gifts and legacies/registrations, and successful in their undertakings; sometimes indeed taking up presidencies over crowds or positions of trust, presiding over other places and thought worthy of stipends; but as regards the place concerning wife and children not free from grief, and especially if the star happens to be under the beams (setting).",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἀφροδίτη καὶ Ἥλιος σύμφωνοι καὶ ἐπίδοξοι καὶ ἀγαθῶν δοτῆρες, συστάσεις ἀρρενικῶν καὶ θηλυκῶν ἐπάγοντες δωρεάς τε καὶ καταγραφάς, καὶ περὶ τὰς ἐπιβολὰς εὐεπιτεύκτους· ἔσθ' ὅτε μὲν οὖν καὶ προστασίας ἀναλαμβάνοντας ὀχλικὰς ἢ πίστεις καὶ ἑτέρων τόπων προεστῶτας καὶ ὀψωνίων καταξιουμένους, εἰς δὲ τὸν περὶ γυναικὸς καὶ τέκνων τόπον οὐκ ἀλύπους, καὶ μάλιστα ἐὰν ὑπὸ δύσιν τύχῃ ὁ ἀστήρ.",
+          "engine_rendering": "Venus and the Sun are concordant and of good repute and givers of good things, bringing recommendations of men and of women, and gifts and legacies/registrations, and successful in their undertakings; sometimes indeed taking up presidencies over crowds or positions of trust, presiding over other places and thought worthy of stipends; but as regards the place concerning wife and children not free from grief, and especially if the star happens to be under the beams (setting).",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Venus with Sun",
+          "pdf_page_index": 57,
+          "printed_page": "39",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 39 lines 18-24 (PDF page index 57)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.venus_moon",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          57
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Venus",
+              "Moon"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Venus",
+        "planet_b": "Moon",
+        "planet_a_greek": "Ἀφροδίτη",
+        "planet_b_greek": "Σελήνη",
+        "valens_concord_verdict": "ἀγαθοὶ μέν ... ἄστατοι δέ (good in part, unstable in part)",
+        "greek": "Ἀφροδίτη καὶ Σελήνη ἀγαθοὶ μὲν περὶ τὰς δόξας καὶ τὰς περικτήσεις καὶ περὶ τὰς τῶν πραγμάτων ἀφορμάς, περὶ δὲ τὰς συμβιώσεις καὶ φιλίας καὶ συναρμογὰς ἄστατοι, ἀντιζηλίας καὶ ἔχθρας ἐπιφέροντες καὶ συγγενικῶν ἢ φίλων κακουργίας ἢ ταραχάς· ὁμοίως δὲ καὶ εἰς τὸν περὶ τέκνων ἢ σωμάτων τόπον οὐκ ἀγαθοὶ ἀπαραμόνους τε τὰς κτήσεις παρεχόμενοι καὶ ψυχικὰς ἀνίας ἐπάγοντες.",
+        "engine_rendering": "Venus and the Moon are good as regards reputations and acquisitions and the starting-capital of affairs, but unstable as regards living together, friendships and unions, bringing on rivalries and enmities and the malice or disturbances of kinsfolk or friends; likewise as regards the place concerning children or bodies (slaves) they are not good, furnishing possessions that do not last and bringing on griefs of the soul.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἀφροδίτη καὶ Σελήνη ἀγαθοὶ μὲν περὶ τὰς δόξας καὶ τὰς περικτήσεις καὶ περὶ τὰς τῶν πραγμάτων ἀφορμάς, περὶ δὲ τὰς συμβιώσεις καὶ φιλίας καὶ συναρμογὰς ἄστατοι, ἀντιζηλίας καὶ ἔχθρας ἐπιφέροντες καὶ συγγενικῶν ἢ φίλων κακουργίας ἢ ταραχάς· ὁμοίως δὲ καὶ εἰς τὸν περὶ τέκνων ἢ σωμάτων τόπον οὐκ ἀγαθοὶ ἀπαραμόνους τε τὰς κτήσεις παρεχόμενοι καὶ ψυχικὰς ἀνίας ἐπάγοντες.",
+          "engine_rendering": "Venus and the Moon are good as regards reputations and acquisitions and the starting-capital of affairs, but unstable as regards living together, friendships and unions, bringing on rivalries and enmities and the malice or disturbances of kinsfolk or friends; likewise as regards the place concerning children or bodies (slaves) they are not good, furnishing possessions that do not last and bringing on griefs of the soul.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Venus with Moon",
+          "pdf_page_index": 57,
+          "printed_page": "39",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 39 lines 25-31 (PDF page index 57)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.venus_mars",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          57,
+          58
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Venus",
+              "Mars"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Venus",
+        "planet_b": "Mars",
+        "planet_a_greek": "Ἀφροδίτη",
+        "planet_b_greek": "Ἄρης",
+        "valens_concord_verdict": "ἀσύμφωνοι (discordant)",
+        "greek": "Ἀφροδίτη καὶ Ἄρης ἀσύμφωνοι· ἀστάτους γὰρ ταῖς γνώμαις καὶ ἀκρατεῖς ἀποτελοῦσι, ζηλοτύπους δὲ καὶ αὐτόχειρας, πολυφίλους δὲ ἢ ἐπιψόγους αἰσχροὺς εὐμετανοήτους καὶ ἀδιαφόρους ταῖς μίξεσιν ἀρρενικῶν τε καὶ θηλυκῶν, κακουργίας ἢ φαρμακείας ἐπιβόλους, οὔτε τοῖς καλοῖς οὔτε τοῖς φαύλοις ἐπιμένοντας, [οὔτε] περὶ τὰς φιλίας διαβαλλομένους καὶ κακολογουμένους, εὐδαπάνους ἀκροθιγεῖς περὶ τὰς πράξεις καὶ πολλῶν ἐπιθυμητάς, ὑπὸ θηλυκῶν ἀδικουμένους ἢ καὶ τούτων χάριν κρίσεις καὶ ταραχὰς καὶ χρεωστίας ὑπομένοντας.",
+        "engine_rendering": "Venus and Mars are discordant; for they make men unstable in judgement and incontinent, jealous and self-slayers (suicides), with many loves or blameworthy, shameful, quick to change their minds and indiscriminate in intercourse with males and females alike, inclined to malefaction or to poisoning/sorcery, persevering neither in good things nor in bad, slandered and evil-spoken-of about their loves, spendthrift, superficial in their undertakings and lusting after many things, wronged by women or falling on that account into lawsuits and disturbances and debts.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἀφροδίτη καὶ Ἄρης ἀσύμφωνοι· ἀστάτους γὰρ ταῖς γνώμαις καὶ ἀκρατεῖς ἀποτελοῦσι, ζηλοτύπους δὲ καὶ αὐτόχειρας, πολυφίλους δὲ ἢ ἐπιψόγους αἰσχροὺς εὐμετανοήτους καὶ ἀδιαφόρους ταῖς μίξεσιν ἀρρενικῶν τε καὶ θηλυκῶν, κακουργίας ἢ φαρμακείας ἐπιβόλους, οὔτε τοῖς καλοῖς οὔτε τοῖς φαύλοις ἐπιμένοντας, [οὔτε] περὶ τὰς φιλίας διαβαλλομένους καὶ κακολογουμένους, εὐδαπάνους ἀκροθιγεῖς περὶ τὰς πράξεις καὶ πολλῶν ἐπιθυμητάς, ὑπὸ θηλυκῶν ἀδικουμένους ἢ καὶ τούτων χάριν κρίσεις καὶ ταραχὰς καὶ χρεωστίας ὑπομένοντας.",
+          "engine_rendering": "Venus and Mars are discordant; for they make men unstable in judgement and incontinent, jealous and self-slayers (suicides), with many loves or blameworthy, shameful, quick to change their minds and indiscriminate in intercourse with males and females alike, inclined to malefaction or to poisoning/sorcery, persevering neither in good things nor in bad, slandered and evil-spoken-of about their loves, spendthrift, superficial in their undertakings and lusting after many things, wronged by women or falling on that account into lawsuits and disturbances and debts.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Venus with Mars",
+          "pdf_page_index": 57,
+          "printed_page": "39-40",
+          "customer_prediction": false,
+          "output_policy": "refused",
+          "output_policy_reason": "decrees self-killing (αὐτόχειρας), sexual defamation and indiscriminate intercourse, and poisoning as the native's fate; this product does not deliver self-harm, criminality or sexual-defamation predictions about a living person"
+        },
+        "output_policy": "refused",
+        "output_policy_reason": "decrees self-killing (αὐτόχειρας), sexual defamation and indiscriminate intercourse, and poisoning as the native's fate; this product does not deliver self-harm, criminality or sexual-defamation predictions about a living person"
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 39-40 p.39 line 32 - p.40 line 3 (PDF page index 57)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.venus_mercury",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          58
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Venus",
+              "Mercury"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Venus",
+        "planet_b": "Mercury",
+        "planet_a_greek": "Ἀφροδίτη",
+        "planet_b_greek": "Ἑρμῆς",
+        "valens_concord_verdict": "σύμφωνοι (concordant)",
+        "greek": "Ἀφροδίτη καὶ Ἑρμῆς σύμφωνοι· εὐομίλους γὰρ καὶ ἐπιχαρεῖς ποιοῦσι φιλοφίλους τε καὶ φιληδόνους καὶ περὶ παιδείαν καὶ σωφροσύνην τὸν νοῦν ἔχοντας καὶ τιμὰς καὶ δωρεὰς λαμβάνοντας· τοῖς δὲ ἐν μετρίᾳ τύχῃ καθεστηκόσι λήψεις καὶ ἀγορασμοὺς καὶ συναλλαγὰς ἀποτελοῦσι καὶ ἐπαίσχρον βίον μερίζουσιν· εἰς δὲ τὸν περὶ γυναικὸς τόπον ἀστάτους καὶ ἀδιαφόρους καὶ εὐμετανοήτους περὶ τὰς συμβολάς.",
+        "engine_rendering": "Venus and Mercury are concordant; for they make men good company and charming, fond of their friends and fond of pleasure, with their mind on education and self-control, and receiving honours and gifts; but for those established in middling fortune they produce receipts and purchases and exchanges, and they allot a shameful livelihood; and as regards the place concerning the wife, unstable and indiscriminate and quick to change their minds about contracts.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἀφροδίτη καὶ Ἑρμῆς σύμφωνοι· εὐομίλους γὰρ καὶ ἐπιχαρεῖς ποιοῦσι φιλοφίλους τε καὶ φιληδόνους καὶ περὶ παιδείαν καὶ σωφροσύνην τὸν νοῦν ἔχοντας καὶ τιμὰς καὶ δωρεὰς λαμβάνοντας· τοῖς δὲ ἐν μετρίᾳ τύχῃ καθεστηκόσι λήψεις καὶ ἀγορασμοὺς καὶ συναλλαγὰς ἀποτελοῦσι καὶ ἐπαίσχρον βίον μερίζουσιν· εἰς δὲ τὸν περὶ γυναικὸς τόπον ἀστάτους καὶ ἀδιαφόρους καὶ εὐμετανοήτους περὶ τὰς συμβολάς.",
+          "engine_rendering": "Venus and Mercury are concordant; for they make men good company and charming, fond of their friends and fond of pleasure, with their mind on education and self-control, and receiving honours and gifts; but for those established in middling fortune they produce receipts and purchases and exchanges, and they allot a shameful livelihood; and as regards the place concerning the wife, unstable and indiscriminate and quick to change their minds about contracts.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Venus with Mercury",
+          "pdf_page_index": 58,
+          "printed_page": "40",
+          "customer_prediction": false,
+          "restricted_clauses": [
+            {
+              "greek": "καὶ ἐπαίσχρον βίον μερίζουσιν",
+              "reason": "assigns a shameful (in Valens' idiom, prostituted) means of livelihood; sexual defamation of the native"
+            }
+          ]
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 40 lines 4-10 (PDF page index 58)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.mercury_sun",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          58
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Mercury",
+              "Sun"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Mercury",
+        "planet_b": "Sun",
+        "planet_a_greek": "Ἑρμῆς",
+        "planet_b_greek": "Ἥλιος",
+        "valens_concord_verdict": "μικτοί / ποικίλοι (mixed, versatile — no explicit σύμφωνοι/ἀσύμφωνοι verdict is printed)",
+        "greek": "Ἑρμῆς καὶ Ἥλιος πολυφίλους καὶ ὑποκριτικοὺς ποιοῦσι, ποικίλους δὲ καὶ ἐγκρατεῖς καὶ ἐν δημοσίοις τόποις τὰς ἀναστροφὰς ἔχοντας, καθαρίους περισσόφρονας κριτικούς, καλῶν ἐραστάς, πολυΐστορας, μύστας θείων, εὐεργετικοὺς φιλοσυνήθεις αὐτάρκεις θρασυδείλους, γενναίως τὰ καταπίπτοντα φέροντας, δυσεπιτεύκτους καὶ ἀνωμάλους περὶ τὸν βίον, ἐν ὑψοταπεινώμασι γινομένους, οὐκ ἀπόρους, ἀναβιβάζοντας δὲ κατὰ ⟨τὴν⟩ τῆς γενέσεως ὑπόστασιν.",
+        "engine_rendering": "Mercury and the Sun make men of many friends and dissembling, versatile and self-controlled, conducting their business in public places, clean/refined, over-clever, critical, lovers of the beautiful, much-learned, initiates of divine things, beneficent, fond of their intimates, self-sufficient, bold-and-cowardly by turns, bearing nobly what falls out against them, hard to succeed and irregular in life, subject to exaltations and humiliations, not resourceless, but rising according to the underlying substance of the nativity.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἑρμῆς καὶ Ἥλιος πολυφίλους καὶ ὑποκριτικοὺς ποιοῦσι, ποικίλους δὲ καὶ ἐγκρατεῖς καὶ ἐν δημοσίοις τόποις τὰς ἀναστροφὰς ἔχοντας, καθαρίους περισσόφρονας κριτικούς, καλῶν ἐραστάς, πολυΐστορας, μύστας θείων, εὐεργετικοὺς φιλοσυνήθεις αὐτάρκεις θρασυδείλους, γενναίως τὰ καταπίπτοντα φέροντας, δυσεπιτεύκτους καὶ ἀνωμάλους περὶ τὸν βίον, ἐν ὑψοταπεινώμασι γινομένους, οὐκ ἀπόρους, ἀναβιβάζοντας δὲ κατὰ ⟨τὴν⟩ τῆς γενέσεως ὑπόστασιν.",
+          "engine_rendering": "Mercury and the Sun make men of many friends and dissembling, versatile and self-controlled, conducting their business in public places, clean/refined, over-clever, critical, lovers of the beautiful, much-learned, initiates of divine things, beneficent, fond of their intimates, self-sufficient, bold-and-cowardly by turns, bearing nobly what falls out against them, hard to succeed and irregular in life, subject to exaltations and humiliations, not resourceless, but rising according to the underlying substance of the nativity.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Mercury with Sun",
+          "pdf_page_index": 58,
+          "printed_page": "40",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 40 lines 11-17 (PDF page index 58)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.mercury_moon",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          58
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Mercury",
+              "Moon"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Mercury",
+        "planet_b": "Moon",
+        "planet_a_greek": "Ἑρμῆς",
+        "planet_b_greek": "Σελήνη",
+        "valens_concord_verdict": "ἀγαθοί (good)",
+        "greek": "Ἑρμῆς καὶ Σελήνη ἀγαθοὶ περὶ τὰς συστάσεις καὶ δόξας ἀρρενικῶν τε καὶ θηλυκῶν καὶ περὶ τὴν τοῦ λόγου καὶ παιδείας δύναμιν καὶ περὶ τὰς λοιπὰς ἐγχειρήσεις καὶ συναλλαγὰς κοινωνικοὺς καὶ μηχανικοὺς καὶ πολυπείρους καὶ περιέργους ἀποτελοῦσι καὶ ἀπὸ μειζόνων τελῶν προβιβαζομένους πολυκινήτους καὶ ἀνεπιμόνους ταῖς πράξεσιν ἢ ταῖς γνώμαις πρὸς τὸ μέλλον ** γενναίους πρὸς τὰ φαῦλα, ἀνωμάλους δὲ [καὶ] περὶ τὸν βίον.",
+        "engine_rendering": "Mercury and the Moon are good as regards recommendations and reputations from males and females, and as regards the power of speech and of education, and as regards the remaining undertakings and exchanges; they make men sociable and inventive and much-experienced and curious, advanced by greater customs/revenues, much-moving and not persevering in their actions or in their judgements toward what is to come ** noble in the face of bad things, but irregular as regards their life.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἑρμῆς καὶ Σελήνη ἀγαθοὶ περὶ τὰς συστάσεις καὶ δόξας ἀρρενικῶν τε καὶ θηλυκῶν καὶ περὶ τὴν τοῦ λόγου καὶ παιδείας δύναμιν καὶ περὶ τὰς λοιπὰς ἐγχειρήσεις καὶ συναλλαγὰς κοινωνικοὺς καὶ μηχανικοὺς καὶ πολυπείρους καὶ περιέργους ἀποτελοῦσι καὶ ἀπὸ μειζόνων τελῶν προβιβαζομένους πολυκινήτους καὶ ἀνεπιμόνους ταῖς πράξεσιν ἢ ταῖς γνώμαις πρὸς τὸ μέλλον ** γενναίους πρὸς τὰ φαῦλα, ἀνωμάλους δὲ [καὶ] περὶ τὸν βίον.",
+          "engine_rendering": "Mercury and the Moon are good as regards recommendations and reputations from males and females, and as regards the power of speech and of education, and as regards the remaining undertakings and exchanges; they make men sociable and inventive and much-experienced and curious, advanced by greater customs/revenues, much-moving and not persevering in their actions or in their judgements toward what is to come ** noble in the face of bad things, but irregular as regards their life.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Mercury with Moon",
+          "pdf_page_index": 58,
+          "printed_page": "40",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 40 lines 18-24 (PDF page index 58)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.mercury_mars",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          58
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Mercury",
+              "Mars"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Mercury",
+        "planet_b": "Mars",
+        "planet_a_greek": "Ἑρμῆς",
+        "planet_b_greek": "Ἄρης",
+        "valens_concord_verdict": "οὐκ ἀγαθοί (not good)",
+        "greek": "Ἑρμῆς καὶ Ἄρης οὐκ ἀγαθοί, ἔχθρας κρίσεις ἐναντιώματα κακοτροπίας προδοσίας ἀποτελοῦντες ἀπό τε κρειττόνων ἢ ὑποτακτικῶν ἀδικουμένους· τινὰς μὲν οὖν ἀθλητικοὺς στρατιωτικοὺς ἢ καθηγεμόνας εὐεργετικοὺς περιέργους ποικίλως τὸν βίον περιερχομένους· γίνονται δὲ ἐν πλαστογραφίαις νοσφισμῶν ἁρπαγῆς συλήσεως χάριν, ἐγγύαις τε καὶ δάνεσι περιπίπτοντες περιβοησίας ἢ κρυβὰς ἀναδέχονται. ἐὰν δέ πως τὸ σχῆμα κακωθῇ, ἐν αἰτίαις γενόμενοι ἢ συνοχαῖς τῶν κτηθέντων ἀποβολὰς ἢ ἀφαιρέσεις ὑπομένουσιν.",
+        "engine_rendering": "Mercury and Mars are not good, producing enmities, lawsuits, oppositions, ill-conduct, betrayals, and men wronged both by their superiors and by their subordinates; some indeed they make athletes, soldiers, or leaders, beneficent, curious, going about their livelihood in varied ways; but they come to be involved in forgeries, for the sake of embezzlement, plunder and pillage, and falling into securities and loans they incur notoriety or concealments. And if somehow the figure is afflicted, coming into accusations or imprisonments they undergo losses or confiscations of what they had acquired.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἑρμῆς καὶ Ἄρης οὐκ ἀγαθοί, ἔχθρας κρίσεις ἐναντιώματα κακοτροπίας προδοσίας ἀποτελοῦντες ἀπό τε κρειττόνων ἢ ὑποτακτικῶν ἀδικουμένους· τινὰς μὲν οὖν ἀθλητικοὺς στρατιωτικοὺς ἢ καθηγεμόνας εὐεργετικοὺς περιέργους ποικίλως τὸν βίον περιερχομένους· γίνονται δὲ ἐν πλαστογραφίαις νοσφισμῶν ἁρπαγῆς συλήσεως χάριν, ἐγγύαις τε καὶ δάνεσι περιπίπτοντες περιβοησίας ἢ κρυβὰς ἀναδέχονται. ἐὰν δέ πως τὸ σχῆμα κακωθῇ, ἐν αἰτίαις γενόμενοι ἢ συνοχαῖς τῶν κτηθέντων ἀποβολὰς ἢ ἀφαιρέσεις ὑπομένουσιν.",
+          "engine_rendering": "Mercury and Mars are not good, producing enmities, lawsuits, oppositions, ill-conduct, betrayals, and men wronged both by their superiors and by their subordinates; some indeed they make athletes, soldiers, or leaders, beneficent, curious, going about their livelihood in varied ways; but they come to be involved in forgeries, for the sake of embezzlement, plunder and pillage, and falling into securities and loans they incur notoriety or concealments. And if somehow the figure is afflicted, coming into accusations or imprisonments they undergo losses or confiscations of what they had acquired.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Mercury with Mars",
+          "pdf_page_index": 58,
+          "printed_page": "40",
+          "customer_prediction": false,
+          "output_policy": "refused",
+          "output_policy_reason": "attributes forgery, embezzlement, plunder and imprisonment to the native as fate; this product does not deliver criminality predictions about a living person"
+        },
+        "output_policy": "refused",
+        "output_policy_reason": "attributes forgery, embezzlement, plunder and imprisonment to the native as fate; this product does not deliver criminality predictions about a living person"
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 40 lines 25-33 (PDF page index 58)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.combination.sun_moon",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {
+        "work": "Anthologiae",
+        "book_chapter": "Anthologiae I.21",
+        "technique": "συμπαρουσία καὶ σύγκρασις ἀστέρων (co-presence and blending of two planets)",
+        "pdf_page_indices": [
+          58,
+          59
+        ]
+      },
+      "conditions": {
+        "all": [
+          {
+            "fact": "planets_co_present",
+            "operator": "contains_all",
+            "value": [
+              "Sun",
+              "Moon"
+            ]
+          }
+        ]
+      },
+      "conclusion": {
+        "type": "planet_pair_combination",
+        "planet_a": "Sun",
+        "planet_b": "Moon",
+        "planet_a_greek": "Ἥλιος",
+        "planet_b_greek": "Σελήνη",
+        "valens_concord_verdict": "ἀγαθοί (good)",
+        "greek": "Ἥλιος καὶ Σελήνη ἀγαθοί· συστάσεις γὰρ μειζόνων καὶ δόξας περιποιοῦσι κτήσεις τε θεμελίων καὶ κτημάτων καὶ χρημάτων καὶ κόσμου καὶ πρὸς τὰς ἐπιβολὰς τῶν πραγμάτων εὐεπιτεύκτους καὶ ἐπωφελεῖς. ἐὰν δὲ ⟨ἡ⟩ ὑπόστασις μεγάλη εὑρεθῇ, γίνονται ἀρχικοὶ πόλεων, πραγμάτων προϊστάμενοι, ὄχλων προεστῶτες, εὐφαντασιώτατοι δωρηματικοὶ ἡγεμονικοὶ τυραννικοὶ ἀνυπότακτοι βασιλικὸν σχῆμα κεκτημένοι ἢ ἀπὸ μετρίας τύχης ἀναβιβαζόμενοι καὶ εὐδαίμονες γινόμενοι μακαρίζονται· πλὴν ἀνεπίμονον τὸ ἀγαθὸν τοῖς τοιούτοις ὑπάρχει διὰ τὸ τῆς Σελήνης μειωτικὸν σχῆμα.",
+        "engine_rendering": "The Sun and the Moon are good; for they procure recommendations from the great and reputations, and acquisitions of foundations and of property and of money and of ornament, and men successful and profitable in their undertakings of affairs. And if the underlying substance (of the nativity — so Kroll's apparatus, 'ὑπόστ. sc. geniturae') is found to be great, they become rulers of cities, presidents of affairs, leaders of crowds, most magnificent in display, munificent, commanding, tyrannical, insubordinate, possessed of a royal figure, or raised up from middling fortune and becoming prosperous they are called blessed; except that the good does not last for such men, because of the diminishing figure of the Moon.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "customer_prediction": false,
+        "combination": {
+          "greek": "Ἥλιος καὶ Σελήνη ἀγαθοί· συστάσεις γὰρ μειζόνων καὶ δόξας περιποιοῦσι κτήσεις τε θεμελίων καὶ κτημάτων καὶ χρημάτων καὶ κόσμου καὶ πρὸς τὰς ἐπιβολὰς τῶν πραγμάτων εὐεπιτεύκτους καὶ ἐπωφελεῖς. ἐὰν δὲ ⟨ἡ⟩ ὑπόστασις μεγάλη εὑρεθῇ, γίνονται ἀρχικοὶ πόλεων, πραγμάτων προϊστάμενοι, ὄχλων προεστῶτες, εὐφαντασιώτατοι δωρηματικοὶ ἡγεμονικοὶ τυραννικοὶ ἀνυπότακτοι βασιλικὸν σχῆμα κεκτημένοι ἢ ἀπὸ μετρίας τύχης ἀναβιβαζόμενοι καὶ εὐδαίμονες γινόμενοι μακαρίζονται· πλὴν ἀνεπίμονον τὸ ἀγαθὸν τοῖς τοιούτοις ὑπάρχει διὰ τὸ τῆς Σελήνης μειωτικὸν σχῆμα.",
+          "engine_rendering": "The Sun and the Moon are good; for they procure recommendations from the great and reputations, and acquisitions of foundations and of property and of money and of ornament, and men successful and profitable in their undertakings of affairs. And if the underlying substance (of the nativity — so Kroll's apparatus, 'ὑπόστ. sc. geniturae') is found to be great, they become rulers of cities, presidents of affairs, leaders of crowds, most magnificent in display, munificent, commanding, tyrannical, insubordinate, possessed of a royal figure, or raised up from middling fortune and becoming prosperous they are called blessed; except that the good does not last for such men, because of the diminishing figure of the Moon.",
+          "rendering_grade": "engine_translation_unreviewed",
+          "section": "Anthologiae I.21, Sun with Moon",
+          "pdf_page_index": 58,
+          "printed_page": "40-41",
+          "customer_prediction": false
+        }
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [
+        {
+          "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+          "work": "Anthologiae",
+          "section": "Liber I cap. XXI",
+          "location": "Kroll 1908 p. 40-41 p.40 line 34 - p.41 line 7 (PDF page index 58)",
+          "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon, not by pixel"
+        }
+      ],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    }
+  ],
+  "fragment_vectors": [
+    {
+      "vector_id": "valens.b1.combination.preface",
+      "rule_ids": [
+        "hel.valens.b1.combination.preface"
+      ],
+      "inputs": {
+        "technique": "planet_pair_combination"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "pairs_printed": 19,
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_jupiter",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_jupiter"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Jupiter"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Jupiter",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Mars",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_mercury",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_mercury"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Mercury"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Mercury",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_venus",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_venus"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Venus"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Venus",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 37-38, PDF page index 55, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Moon",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.saturn_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.saturn_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Saturn",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Saturn",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 38, PDF page index 56, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Mars",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_venus",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_venus"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Venus"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Venus",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.jupiter_mercury",
+      "rule_ids": [
+        "hel.valens.b1.combination.jupiter_mercury"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Jupiter",
+          "Mercury"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Jupiter",
+        "planet_b": "Mercury",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 39, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Mars",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 39-40, PDF page index 57, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.venus_mercury",
+      "rule_ids": [
+        "hel.valens.b1.combination.venus_mercury"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Venus",
+          "Mercury"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Venus",
+        "planet_b": "Mercury",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.mercury_sun",
+      "rule_ids": [
+        "hel.valens.b1.combination.mercury_sun"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Mercury",
+          "Sun"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Mercury",
+        "planet_b": "Sun",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.mercury_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.mercury_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Mercury",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Mercury",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.mercury_mars",
+      "rule_ids": [
+        "hel.valens.b1.combination.mercury_mars"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Mercury",
+          "Mars"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Mercury",
+        "planet_b": "Mars",
+        "customer_prediction": false,
+        "output_policy": "refused"
+      },
+      "provenance": "Kroll 1908 p. 40, PDF page index 58, read from a 300dpi page image"
+    },
+    {
+      "vector_id": "valens.b1.combination.sun_moon",
+      "rule_ids": [
+        "hel.valens.b1.combination.sun_moon"
+      ],
+      "inputs": {
+        "planets_co_present": [
+          "Sun",
+          "Moon"
+        ],
+        "note": "the two planets in the same sign / συμπαρουσία"
+      },
+      "expected": {
+        "greek_present": true,
+        "section": "Anthologiae I.21",
+        "planet_a": "Sun",
+        "planet_b": "Moon",
+        "customer_prediction": false
+      },
+      "provenance": "Kroll 1908 p. 40-41, PDF page index 58, read from a 300dpi page image"
+    }
+  ]
+}

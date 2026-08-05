@@ -1,151 +1,319 @@
 {
-  "schema_version": 1,
-  "updated": "2026-08-02",
-  "tradition_id": "indian_jyotisha",
-  "source_registry_ids": [
-    "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
-    "jyotisha_kalyanavarma_saravali_subrahmanya_1914_archive",
-    "jyotisha_kalyanavarma_saravali_nirnayasagar_1907_archive",
-    "jyotisha_kalyanavarma_saravali_nirnayasagar_1928_dli_archive",
-    "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
-    "jyotisha_bphs_subodhini_1899_archive"
-  ],
-  "status": "partially_encoded",
-  "notes": "2026-08-02 pass: Phaladeepika (Adhyayas V-VIII, XIX) and Aiyar's Brhajjataka translation were both searched broadly for worked-example markers (explicit birth data plus a stated verdict). Neither turned one up; both are rule catalogs, not worked-example collections, in the chapters inspected. That is itself a finding, not a gap glossed over - see the two updated inventory entries below. The BPHS 1899 witness was fetched to a local mirror and its OCR is confirmed (not merely suspected) unusable: of the full text, effectively none of the Devanagari/Hindi survived OCR as anything but literal '?' characters. A THIRD Saravali witness (Nirnaya Sagar Press, 1907, CC0) was located and is, for the first time in this corpus, legible Devanagari rather than corrupted OCR - it has not yet been read for content and is recorded as the next task, not as a worked-example find. No customer-facing chart is encoded anywhere in this file; extracted delineation RULES (as opposed to worked EXAMPLES) from Phaladeepika now live in delineation_rule_manifest.json, which is a separate document from this worked-example suite.",
-  "examples": [
-    {
-      "example_id": "jyotisha.brhajjataka.inventory",
-      "work": "Brhajjataka (Varahamihira), Aiyar 1905 translation",
-      "location": "Archive copy in registry; chapters I-II already passage-aligned for the rule packs",
-      "description": "Chapters I and II are already passage-aligned to the encoded calculation and planetary rule manifests, which makes this the most likely place to find illustrations the engine can reproduce. The commentary apparatus is where worked illustrations would appear.",
-      "author_judgment": {
-        "claims": [
-          {
-            "claim_id": "jyotisha.brhajjataka.pending",
-            "kind": "calculation_value",
-            "author_states": "2026-08-02: searched the full translation for 'for example', 'for instance', 'illustration', 'suppose', 'nativity of' and similar markers. Every hit found is an abstract calculation walkthrough (e.g. 'suppose the longitude of the Sun to be 115 degrees...' for hora/navamsa/Ashtakavarga arithmetic, already reflected in the existing calculation manifests), not a natal chart with real birth data and a stated interpretive verdict. No worked natal chart was located in the portions searched.",
-            "note": "Negative finding, not a placeholder: the search was performed, not merely planned. A page-image pass (rather than keyword search of the OCR) has still not been done and could recover an illustration the OCR garbled past keyword-searchability."
-          }
-        ]
-      },
-      "encoding_status": "inventory_only",
-      "blockers": [
-        "Keyword search of the OCR text found no worked chart; a page-image-level inspection (not keyword search) has not been performed and could still recover one.",
-        "Where a commentator supplies an example rather than Varahamihira, attribution must separate the two."
-      ]
-    },
-    {
-      "example_id": "jyotisha.bphs.dasha_inventory",
-      "work": "Brihat Parashara Hora Shastra, Subodhini 1899",
-      "location": "Local mirror: jyotisha/sources/bphs_subodhini_1899_djvu.txt (sha256 edf836323aed641925dea689e0248a582b66238835ac55d8381c372b98ef1684, matching the registry entry)",
-      "description": "BPHS dasha and varga chapters are the natural source for a Vimshottari worked example, which would test the engine's dasha start balance directly.",
-      "author_judgment": {
-        "claims": [
-          {
-            "claim_id": "jyotisha.bphs.pending",
-            "kind": "timing_period",
-            "author_states": "2026-08-02: the archive text file was fetched to a local mirror and inspected directly (not merely by metadata). The OCR is confirmed severely corrupted: a spot sample of roughly 2,000 characters contained essentially zero recoverable Devanagari or Hindi words, rendering almost entirely as literal '?' replacement characters. This is worse than the 1914 Saravali witness's 'mixed scripts, many misrecognitions' - it is closer to total OCR failure. No worked Vimshottari computation, or any other content, could be read from this OCR pass.",
-            "note": "This is a genuine access/digitization-quality blocker, not a rights blocker (the digitized pages carry a CC0/public-domain notice) and not a translation-gate question - per DEFENSIBILITY.md's four-row table this is squarely row 3, 'original not retrievable as usable text', even though the underlying page IMAGES are technically downloadable."
-          }
-        ]
-      },
-      "encoding_status": "inventory_only",
-      "blockers": [
-        "The BPHS recension audit already flags variance between recensions; a worked example must name which recension supplies it.",
-        "OCR-text-level inspection is now complete and confirms the text is unusable; only page-IMAGE-level inspection (reading scanned pages directly, not their OCR) could still recover content, and that has not been attempted."
-      ]
-    },
-    {
-      "example_id": "jyotisha.phaladeepika.chapter_inventory",
-      "work": "Phaladeepika (Mantreswara), Subrahmanya Sastri 1950 translation",
-      "location": "Archive item in.gov.ignca.6945; Adhyayas V-VIII (yogas, planet-in-bhava) and XIX (Vimshottari mahadasha results) inspected directly against the OCR text",
-      "description": "The chapters most likely to carry a worked chart in a classical delineation manual - the yoga catalog (V-VII), the planet-in-bhava chapter (VIII), and the dasha-results chapter (XIX) - were read directly, not sampled by keyword search alone, since a worked chart's numbers would not keyword-match. Adhyayas XI-XII (women's horoscope, children) were located but deliberately not mined for rules, since their subject matter (progeny counts, fertility) falls under this tradition's own safety limits on fertility/health claims.",
-      "author_judgment": {
-        "claims": [
-          {
-            "claim_id": "jyotisha.phaladeepika.no_worked_chart_found",
-            "kind": "topical_verdict",
-            "author_states": "Adhyayas V-VIII and XIX are entirely rule catalogs: named-yoga definitions and results (Pancha Mahapurusha, Kesari/Sakata, Mahabhagya, Adhama/Sama/Varishtha, Sunapha/Anapha/Durudhara/Kemadruma, Vesi/Vaasi/Kartari, the '4 Rajayogas', Neechabhanga Rajayoga), planet-in-bhava results for 12 houses across 8 of 9 grahas (Sun recovered for 5 of 12 houses only), and Vimshottari mahadasha significations for all 9 grahas - all now extracted into jyotisha/delineation_rule_manifest.json. None of these chapters presents a nativity with real or stated birth data, computed positions, and an author-given overall verdict of the kind Sloka-by-sloka rule catalogs do not provide. This is a negative finding about these specific chapters, not a claim that Phaladeepika as a whole contains no worked chart anywhere (Adhyayas IX-XVIII, XX-XXVIII were not inspected in this pass)."
-          }
-        ]
-      },
-      "encoding_status": "inventory_only",
-      "blockers": [
-        "Adhyayas IX-XVIII (rasi-as-lagna effects, kalatra bhava, women's horoscope, issue, longevity, death, rasi general effects, exit-from-the-world, planetary conjunctions) and XX-XXVIII (dasha subdivisions, Kalachakra dasha, Ashtakavarga, upagrahas, transits, miscellanea) were not inspected in this pass and could still contain a worked chart.",
-          "Delineation rules extracted from the chapters that WERE inspected are in jyotisha/delineation_rule_manifest.json, not in this file - this entry records only the worked-example search, which came back negative."
-      ]
-    },
-    {
-      "example_id": "jyotisha.saravali.legible_witness_discovered",
-      "work": "Saravali (Kalyanavarma), Nirnaya Sagar Press 1907 edition (ed. V. Subrahmanya Sastri)",
-      "location": "Archive item saravalisubrahmanyasastryv.nirnayasagarpress1907_202003_345_b; local mirror jyotisha/sources/delineation_saravali_nirnayasagara_1907_djvu.txt",
-      "description": "Both Saravali witnesses previously in this corpus (the 1914 Digital Library of India scan, and a 1928 'third edition' scan) have OCR too corrupted to read as running Devanagari text. This pass located and downloaded a third witness whose OCR is, for the first time, measurably legible: 291,940 of 366,411 characters are proper Devanagari code points and essentially none render as OCR-failure '?' marks. This is a discovery, not a completed extraction - the text proper (past the front-matter book-list pages) has not yet been read for chapters, slokas, or a worked example.",
-      "author_judgment": {
-        "claims": [
-          {
-            "claim_id": "jyotisha.saravali.witness_legible_not_yet_read",
-            "kind": "calculation_value",
-            "author_states": "Pending: read the Saravali text proper in this witness for chapter structure and any worked horoscope. Not yet performed.",
-            "note": "Placeholder claim recording the next inspection task, distinct from the negative Phaladeepika/Brhajjataka findings above; here the blocker that used to exist (illegible OCR) has been resolved by finding a better witness, and what remains is simply that nobody has read it yet."
-          }
-        ]
-      },
-      "encoding_status": "inventory_only",
-      "blockers": [
-        "Verse-level Sanskrit reading of this witness has not been performed in this pass.",
-        "Per DEFENSIBILITY.md's 'translation is not a gate for quotation' guidance, since the original is public domain and now legibly retrievable, direct rendering (graded engine_translation_unreviewed) is the correct next step rather than waiting for a modern translation - but it was not attempted here for lack of a confident independent Sanskrit reading in the time available this session."
-      ]
-    },
-    {
-      "example_id": "jyotisha.navamsha.selfcheck",
-      "work": "Classical navamsha rule, structural consequences",
-      "location": "BPHS varga chapters; the rule is stated identically across the standard texts",
-      "description": "The classical navamsha rule states that movable signs begin their D9 from themselves, fixed signs from the ninth sign, and dual signs from the fifth. Those three statements have mechanically checkable consequences, verified here without needing a worked chart: the division counts must balance and the three starting rules must hold exactly.",
-      "author_judgment": {
-        "claims": [
-          {
-            "claim_id": "jyotisha.navamsha.division_balance",
-            "kind": "calculation_value",
-            "author_states": "The 108 navamsha divisions distribute across the twelve signs exactly nine times each.",
-            "engine_field": "navamsha_division_balance",
-            "expected_value": true,
-            "comparison": "exact"
-          },
-          {
-            "claim_id": "jyotisha.navamsha.movable_from_self",
-            "kind": "calculation_value",
-            "author_states": "A movable sign begins its navamsha series from itself: the first navamsha of Aries is Aries.",
-            "engine_field": "navamsha_aries_first",
-            "expected_value": "Aries",
-            "comparison": "exact"
-          },
-          {
-            "claim_id": "jyotisha.navamsha.fixed_from_ninth",
-            "kind": "calculation_value",
-            "author_states": "A fixed sign begins from the ninth sign: the first navamsha of Taurus is Capricorn.",
-            "engine_field": "navamsha_taurus_first",
-            "expected_value": "Capricorn",
-            "comparison": "exact"
-          },
-          {
-            "claim_id": "jyotisha.navamsha.dual_from_fifth",
-            "kind": "calculation_value",
-            "author_states": "A dual sign begins from the fifth sign: the first navamsha of Gemini is Libra.",
-            "engine_field": "navamsha_gemini_first",
-            "expected_value": "Libra",
-            "comparison": "exact"
-          },
-          {
-            "claim_id": "jyotisha.navamsha.cycle_closes",
-            "kind": "calculation_value",
-            "author_states": "The series closes: the final navamsha of Pisces is Pisces.",
-            "engine_field": "navamsha_pisces_last",
-            "expected_value": "Pisces",
-            "comparison": "exact"
-          }
-        ]
-      },
-      "encoding_status": "comparable"
-    }
-  ]
+ "schema_version": 1,
+ "updated": "2026-08-05",
+ "tradition_id": "indian_jyotisha",
+ "source_registry_ids": [
+  "jyotisha_varahamihira_brhajjataka_aiyar_1905_archive",
+  "jyotisha_kalyanavarma_saravali_subrahmanya_1914_archive",
+  "jyotisha_kalyanavarma_saravali_nirnayasagar_1907_archive",
+  "jyotisha_kalyanavarma_saravali_nirnayasagar_1928_dli_archive",
+  "jyotisha_mantreswara_phaladeepika_subrahmanya_1950_archive",
+  "jyotisha_bphs_subodhini_1899_archive",
+  "jyotisha_parasara_bphs_subodhini_1899_egangotri"
+ ],
+ "status": "partially_encoded",
+ "notes": "2026-08-02 pass: Phaladeepika (Adhyayas V-VIII, XIX) and Aiyar's Brhajjataka translation were both searched broadly for worked-example markers (explicit birth data plus a stated verdict). Neither turned one up; both are rule catalogs, not worked-example collections, in the chapters inspected. That is itself a finding, not a gap glossed over - see the two updated inventory entries below. The BPHS 1899 witness was fetched to a local mirror and its OCR is confirmed (not merely suspected) unusable: of the full text, effectively none of the Devanagari/Hindi survived OCR as anything but literal '?' characters. A THIRD Saravali witness (Nirnaya Sagar Press, 1907, CC0) was located and is, for the first time in this corpus, legible Devanagari rather than corrupted OCR - it has not yet been read for content and is recorded as the next task, not as a worked-example find. No customer-facing chart is encoded anywhere in this file; extracted delineation RULES (as opposed to worked EXAMPLES) from Phaladeepika now live in delineation_rule_manifest.json, which is a separate document from this worked-example suite. 2026-08-05: three arithmetic suites added from the BPHS Subodhini 1899 own worked computations (sadbala of the Sun, ashtakavarga pinda of the Sun, and the eight bhinnashtakavarga row-sums). These are a different KIND of worked example from a judged nativity: the author is working his own arithmetic rather than judging a native, so there is no interpretive verdict to agree or disagree with - but there is also no translation judgment to dispute, and the engine either reproduces the printed number or it does not. Requirement 4 of the defensibility standard asks for the tradition own worked examples; these are the first in this tradition that are mechanically checkable end to end.",
+ "examples": [
+  {
+   "example_id": "jyotisha.brhajjataka.inventory",
+   "work": "Brhajjataka (Varahamihira), Aiyar 1905 translation",
+   "location": "Archive copy in registry; chapters I-II already passage-aligned for the rule packs",
+   "description": "Chapters I and II are already passage-aligned to the encoded calculation and planetary rule manifests, which makes this the most likely place to find illustrations the engine can reproduce. The commentary apparatus is where worked illustrations would appear.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "jyotisha.brhajjataka.pending",
+      "kind": "calculation_value",
+      "author_states": "2026-08-02: searched the full translation for 'for example', 'for instance', 'illustration', 'suppose', 'nativity of' and similar markers. Every hit found is an abstract calculation walkthrough (e.g. 'suppose the longitude of the Sun to be 115 degrees...' for hora/navamsa/Ashtakavarga arithmetic, already reflected in the existing calculation manifests), not a natal chart with real birth data and a stated interpretive verdict. No worked natal chart was located in the portions searched.",
+      "note": "Negative finding, not a placeholder: the search was performed, not merely planned. A page-image pass (rather than keyword search of the OCR) has still not been done and could recover an illustration the OCR garbled past keyword-searchability."
+     }
+    ]
+   },
+   "encoding_status": "inventory_only",
+   "blockers": [
+    "Keyword search of the OCR text found no worked chart; a page-image-level inspection (not keyword search) has not been performed and could still recover one.",
+    "Where a commentator supplies an example rather than Varahamihira, attribution must separate the two."
+   ]
+  },
+  {
+   "example_id": "jyotisha.bphs.dasha_inventory",
+   "work": "Brihat Parashara Hora Shastra, Subodhini 1899",
+   "location": "Local mirror: jyotisha/sources/bphs_subodhini_1899_djvu.txt (sha256 edf836323aed641925dea689e0248a582b66238835ac55d8381c372b98ef1684, matching the registry entry)",
+   "description": "BPHS dasha and varga chapters are the natural source for a Vimshottari worked example, which would test the engine's dasha start balance directly.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "jyotisha.bphs.pending",
+      "kind": "timing_period",
+      "author_states": "2026-08-02: the archive text file was fetched to a local mirror and inspected directly (not merely by metadata). The OCR is confirmed severely corrupted: a spot sample of roughly 2,000 characters contained essentially zero recoverable Devanagari or Hindi words, rendering almost entirely as literal '?' replacement characters. This is worse than the 1914 Saravali witness's 'mixed scripts, many misrecognitions' - it is closer to total OCR failure. No worked Vimshottari computation, or any other content, could be read from this OCR pass.",
+      "note": "This is a genuine access/digitization-quality blocker, not a rights blocker (the digitized pages carry a CC0/public-domain notice) and not a translation-gate question - per DEFENSIBILITY.md's four-row table this is squarely row 3, 'original not retrievable as usable text', even though the underlying page IMAGES are technically downloadable."
+     }
+    ]
+   },
+   "encoding_status": "inventory_only",
+   "blockers": [
+    "The BPHS recension audit already flags variance between recensions; a worked example must name which recension supplies it.",
+    "OCR-text-level inspection is now complete and confirms the text is unusable; only page-IMAGE-level inspection (reading scanned pages directly, not their OCR) could still recover content, and that has not been attempted."
+   ]
+  },
+  {
+   "example_id": "jyotisha.phaladeepika.chapter_inventory",
+   "work": "Phaladeepika (Mantreswara), Subrahmanya Sastri 1950 translation",
+   "location": "Archive item in.gov.ignca.6945; Adhyayas V-VIII (yogas, planet-in-bhava) and XIX (Vimshottari mahadasha results) inspected directly against the OCR text",
+   "description": "The chapters most likely to carry a worked chart in a classical delineation manual - the yoga catalog (V-VII), the planet-in-bhava chapter (VIII), and the dasha-results chapter (XIX) - were read directly, not sampled by keyword search alone, since a worked chart's numbers would not keyword-match. Adhyayas XI-XII (women's horoscope, children) were located but deliberately not mined for rules, since their subject matter (progeny counts, fertility) falls under this tradition's own safety limits on fertility/health claims.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "jyotisha.phaladeepika.no_worked_chart_found",
+      "kind": "topical_verdict",
+      "author_states": "Adhyayas V-VIII and XIX are entirely rule catalogs: named-yoga definitions and results (Pancha Mahapurusha, Kesari/Sakata, Mahabhagya, Adhama/Sama/Varishtha, Sunapha/Anapha/Durudhara/Kemadruma, Vesi/Vaasi/Kartari, the '4 Rajayogas', Neechabhanga Rajayoga), planet-in-bhava results for 12 houses across 8 of 9 grahas (Sun recovered for 5 of 12 houses only), and Vimshottari mahadasha significations for all 9 grahas - all now extracted into jyotisha/delineation_rule_manifest.json. None of these chapters presents a nativity with real or stated birth data, computed positions, and an author-given overall verdict of the kind Sloka-by-sloka rule catalogs do not provide. This is a negative finding about these specific chapters, not a claim that Phaladeepika as a whole contains no worked chart anywhere (Adhyayas IX-XVIII, XX-XXVIII were not inspected in this pass)."
+     }
+    ]
+   },
+   "encoding_status": "inventory_only",
+   "blockers": [
+    "Adhyayas IX-XVIII (rasi-as-lagna effects, kalatra bhava, women's horoscope, issue, longevity, death, rasi general effects, exit-from-the-world, planetary conjunctions) and XX-XXVIII (dasha subdivisions, Kalachakra dasha, Ashtakavarga, upagrahas, transits, miscellanea) were not inspected in this pass and could still contain a worked chart.",
+    "Delineation rules extracted from the chapters that WERE inspected are in jyotisha/delineation_rule_manifest.json, not in this file - this entry records only the worked-example search, which came back negative."
+   ]
+  },
+  {
+   "example_id": "jyotisha.saravali.legible_witness_discovered",
+   "work": "Saravali (Kalyanavarma), Nirnaya Sagar Press 1907 edition (ed. V. Subrahmanya Sastri)",
+   "location": "Archive item saravalisubrahmanyasastryv.nirnayasagarpress1907_202003_345_b; local mirror jyotisha/sources/delineation_saravali_nirnayasagara_1907_djvu.txt",
+   "description": "Both Saravali witnesses previously in this corpus (the 1914 Digital Library of India scan, and a 1928 'third edition' scan) have OCR too corrupted to read as running Devanagari text. This pass located and downloaded a third witness whose OCR is, for the first time, measurably legible: 291,940 of 366,411 characters are proper Devanagari code points and essentially none render as OCR-failure '?' marks. This is a discovery, not a completed extraction - the text proper (past the front-matter book-list pages) has not yet been read for chapters, slokas, or a worked example.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "jyotisha.saravali.witness_legible_not_yet_read",
+      "kind": "calculation_value",
+      "author_states": "Pending: read the Saravali text proper in this witness for chapter structure and any worked horoscope. Not yet performed.",
+      "note": "Placeholder claim recording the next inspection task, distinct from the negative Phaladeepika/Brhajjataka findings above; here the blocker that used to exist (illegible OCR) has been resolved by finding a better witness, and what remains is simply that nobody has read it yet."
+     }
+    ]
+   },
+   "encoding_status": "inventory_only",
+   "blockers": [
+    "Verse-level Sanskrit reading of this witness has not been performed in this pass.",
+    "Per DEFENSIBILITY.md's 'translation is not a gate for quotation' guidance, since the original is public domain and now legibly retrievable, direct rendering (graded engine_translation_unreviewed) is the correct next step rather than waiting for a modern translation - but it was not attempted here for lack of a confident independent Sanskrit reading in the time available this session."
+   ]
+  },
+  {
+   "example_id": "jyotisha.navamsha.selfcheck",
+   "work": "Classical navamsha rule, structural consequences",
+   "location": "BPHS varga chapters; the rule is stated identically across the standard texts",
+   "description": "The classical navamsha rule states that movable signs begin their D9 from themselves, fixed signs from the ninth sign, and dual signs from the fifth. Those three statements have mechanically checkable consequences, verified here without needing a worked chart: the division counts must balance and the three starting rules must hold exactly.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "jyotisha.navamsha.division_balance",
+      "kind": "calculation_value",
+      "author_states": "The 108 navamsha divisions distribute across the twelve signs exactly nine times each.",
+      "engine_field": "navamsha_division_balance",
+      "expected_value": true,
+      "comparison": "exact"
+     },
+     {
+      "claim_id": "jyotisha.navamsha.movable_from_self",
+      "kind": "calculation_value",
+      "author_states": "A movable sign begins its navamsha series from itself: the first navamsha of Aries is Aries.",
+      "engine_field": "navamsha_aries_first",
+      "expected_value": "Aries",
+      "comparison": "exact"
+     },
+     {
+      "claim_id": "jyotisha.navamsha.fixed_from_ninth",
+      "kind": "calculation_value",
+      "author_states": "A fixed sign begins from the ninth sign: the first navamsha of Taurus is Capricorn.",
+      "engine_field": "navamsha_taurus_first",
+      "expected_value": "Capricorn",
+      "comparison": "exact"
+     },
+     {
+      "claim_id": "jyotisha.navamsha.dual_from_fifth",
+      "kind": "calculation_value",
+      "author_states": "A dual sign begins from the fifth sign: the first navamsha of Gemini is Libra.",
+      "engine_field": "navamsha_gemini_first",
+      "expected_value": "Libra",
+      "comparison": "exact"
+     },
+     {
+      "claim_id": "jyotisha.navamsha.cycle_closes",
+      "kind": "calculation_value",
+      "author_states": "The series closes: the final navamsha of Pisces is Pisces.",
+      "engine_field": "navamsha_pisces_last",
+      "expected_value": "Pisces",
+      "comparison": "exact"
+     }
+    ]
+   },
+   "encoding_status": "comparable"
+  },
+  {
+   "example_id": "jyotisha.bphs.u02.sadbala_of_the_sun",
+   "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+   "location": "Uttara-khanda adhyaya 2, commentary on slokas 8-32, pages 42-60 of the 1899 printing",
+   "description": "The chapter does not merely state the sadbala formulas - it computes them for one specific chart and prints every intermediate. This is the first material in the Jyotisha pack that can be checked without any translation judgment at all: the numbers either come out or they do not. All of the following were recomputed from the printed inputs on 2026-08-04 and reproduce the printed outputs exactly. Unit throughout: rupa, virupa, sixtieth - one rupa being sixty virupas.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "bphs.u02.sun.uccha",
+      "kind": "calculation_value",
+      "author_states": "Sun at 10|4|14, debilitation at 6|10; arc 3|24|14 = 114 deg 14 min; divided by three, uccha-bala 38|04 virupas",
+      "expected_value": "38|04",
+      "comparison": "manual",
+      "note": "recomputed 2026-08-04: 114.2333 / 3 = 38.078 = 38|04|40; the printing gives 38|04"
+     },
+     {
+      "claim_id": "bphs.u02.sun.dig",
+      "kind": "calculation_value",
+      "author_states": "arc 147 deg 05 min divided by three gives the Sun dig-bala 0|49|01",
+      "expected_value": "0|49|01",
+      "comparison": "manual",
+      "note": "recomputed 2026-08-04: 147.0833 / 3 = 49.028 = 49|01|40"
+     },
+     {
+      "claim_id": "bphs.u02.sun.natonnata",
+      "kind": "calculation_value",
+      "author_states": "ishta 8|16, half-day 13|54; nata 5|38, unnata 24|22; doubled 48|44 is the day-strength of the Sun, Venus and Jupiter, and 60 less that, 11|16, is that of the Moon, Mars and Saturn",
+      "expected_value": "48|44",
+      "comparison": "manual"
+     },
+     {
+      "claim_id": "bphs.u02.sun.paksha",
+      "kind": "calculation_value",
+      "author_states": "Moon 8|25|29 less Sun 10|4|14 gives 10|21|15; from the circle 1|8|45 = 38 deg 45 min; divided by three, 12|55 for the benefics, and 60 less that, 47|05, for the Sun",
+      "expected_value": "47|05",
+      "comparison": "manual"
+     },
+     {
+      "claim_id": "bphs.u02.sun.kala_total",
+      "kind": "calculation_value",
+      "author_states": "natonnata 0|48|44 plus paksha 0|47|5 plus day-and-night 1|0|0 plus the year-lord group 0|30|0 is the Sun kala-bala, 3|5|49",
+      "expected_value": "3|5|49",
+      "comparison": "manual",
+      "note": "recomputed 2026-08-04: the four terms sum exactly"
+     },
+     {
+      "claim_id": "bphs.u02.sun.ayana",
+      "kind": "calculation_value",
+      "author_states": "sayana Sun 10|26|15, bhuja 1|3|45; after the khandas 45, 33, 12 and subtraction from three rasis, 1|10|52|30 = 40 deg 52 min 30 sec; divided by three 13|37|30; doubled for the Sun, 27|15",
+      "expected_value": "27|15",
+      "comparison": "manual"
+     },
+     {
+      "claim_id": "bphs.u02.sun.sadbala_pinda",
+      "kind": "calculation_value",
+      "author_states": "sthana 4|18|4, dig 0|49|1, kala 3|5|49, cheshta 0|27|15, naisargika 1|0|0; their sum 9|40|9; the benefic aspect on the Sun being 0|4|22 in surplus, a quarter of it 0|1|5 is added, giving the Sun sadbala 9|41|14",
+      "expected_value": "9|41|14",
+      "comparison": "manual",
+      "note": "THE central check. Recomputed 2026-08-04: the five components sum to 9.66917 rupas = 9|40|9, and the quarter-drsti correction gives 9|41|14. Both printed figures reproduce exactly."
+     },
+     {
+      "claim_id": "bphs.u02.bhava1.bala",
+      "kind": "calculation_value",
+      "author_states": "the first bhava lord Mars has sadbala 5|59|16; a quarter of the net benefic aspect on the bhava, 0|6|52, is added, giving 6|6|8; the aspect of Mercury and Jupiter 0|50|41 is added, giving the bhava-bala 6|56|49; its dig-bala, 85 deg 15 min divided by three = 28|25, brings it to 7|25|14",
+      "expected_value": "6|56|49",
+      "comparison": "manual"
+     },
+     {
+      "claim_id": "bphs.u02.minima",
+      "kind": "calculation_value",
+      "author_states": "the five component minima 165, 35, 50, 112, 30 for Jupiter, Mercury and the Sun; 133, 50, 30, 100, 40 for Venus and the Moon; 96, 30, 40, 67, 20 for Mars and Saturn; their sums being the panchabala-samhati 6|32, 5|53 and 4|13 rupas",
+      "expected_value": "392, 353, 253 virupas",
+      "comparison": "manual",
+      "note": "recomputed 2026-08-04: 392/60 = 6.533 = 6|32, 353/60 = 5.883 = 5|53, 253/60 = 4.217 = 4|13; all three reproduce the printed table row"
+     }
+    ]
+   },
+   "encoding_status": "judgment_encoded",
+   "blockers": [
+    "no engine code computes sadbala, so no mechanical comparison is possible yet",
+    "five limbs (natonnata, tribhaga, varsha/masa/dina/hora, ayana, cheshta proper) additionally need sunrise, a ghati clock, sayana longitude, mean longitude and sighrocca, none of which vedic_report.py produces",
+    "the author does not state the birth data of the chart he is working, only the resulting positions, so the figures cannot be recomputed from a datetime"
+   ]
+  },
+  {
+   "example_id": "jyotisha.bphs.p19.ashtakavarga_pinda_of_the_sun",
+   "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+   "location": "Purva-khanda adhyaya 19, commentary on slokas 1-3, page 125 of the 1899 printing",
+   "description": "The pindotpatti chapter works a complete ashtakavarga pinda for the Sun varga and prints both partial sums and the total. Needs no translation judgment; it is pure arithmetic over two printed gunaka tables.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "bphs.p19.sun.graha_pinda",
+      "kind": "calculation_value",
+      "author_states": "Aquarius holding the Sun and Jupiter with figure 1 gives 5 and 10; Pisces holding Venus and Mars with figure 1 gives 7 and 8; Sagittarius holding the Moon with figure 2 gives 10; Capricorn holding Saturn and Mercury with figure 0 gives nothing; the sum, the graha-pinda, is 40",
+      "expected_value": 40,
+      "comparison": "numeric_tolerance",
+      "tolerance": 0,
+      "note": "recomputed 2026-08-04: 5+10+7+8+10+0 = 40"
+     },
+     {
+      "claim_id": "bphs.p19.sun.rasi_pinda",
+      "kind": "calculation_value",
+      "author_states": "Aquarius 1 times 11, Pisces 1 times 12, Leo 1 times 10, Sagittarius 2 times 9; the sum, the rasi-pinda, is 51",
+      "expected_value": 51,
+      "comparison": "numeric_tolerance",
+      "tolerance": 0,
+      "note": "recomputed 2026-08-04: 11+12+10+18 = 51"
+     },
+     {
+      "claim_id": "bphs.p19.sun.yoga_pinda",
+      "kind": "calculation_value",
+      "author_states": "the union of the two, the yoga-pinda, is 91",
+      "expected_value": 91,
+      "comparison": "numeric_tolerance",
+      "tolerance": 0,
+      "note": "recomputed 2026-08-04: 40 + 51 = 91"
+     }
+    ]
+   },
+   "encoding_status": "judgment_encoded",
+   "blockers": [
+    "no engine code computes ashtakavarga, so no mechanical comparison is possible yet",
+    "the figures the pinda is taken from are post-sodhana, so trikona and ekadhipatya sodhana must be implemented first"
+   ]
+  },
+  {
+   "example_id": "jyotisha.bphs.u01.bhinnashtakavarga_row_sums",
+   "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+   "location": "Uttara-khanda adhyaya 1, slokas 46-71, pages 23-34 of the 1899 printing",
+   "description": "Not a worked chart but a self-checking table set, and it functions as the strongest internal verification in this pack. The eight rekha tables were read out of the verse, cross-read against the Subodhini Sanskrit prose expansion and the Hindi bhasha gloss, and then each was closed by row-sum against its canonical total. The check caught three disagreements between the three readings, all of which are named in the manifest.",
+   "author_judgment": {
+    "claims": [
+     {
+      "claim_id": "bphs.u01.bav.row_sums",
+      "kind": "calculation_value",
+      "author_states": "the twelve house-rows of each varga sum to Sun 48, Moon 49, Mars 39, Mercury 54, Jupiter 56, Venus 52, Saturn 39 and Lagna 49",
+      "expected_value": [
+       48,
+       49,
+       39,
+       54,
+       56,
+       52,
+       39,
+       49
+      ],
+      "comparison": "manual",
+      "note": "all eight verified 2026-08-04 against the tables as encoded"
+     },
+     {
+      "claim_id": "bphs.u01.sav.total",
+      "kind": "calculation_value",
+      "author_states": "the seven graha tables together give the sarvashtakavarga total",
+      "expected_value": 337,
+      "comparison": "numeric_tolerance",
+      "tolerance": 0,
+      "note": "48+49+39+54+56+52+39 = 337, verified 2026-08-04"
+     }
+    ]
+   },
+   "encoding_status": "judgment_encoded",
+   "blockers": [
+    "three cells (Jupiter 9th, Venus 4th and 8th) were settled by the row-sum rather than by legible ink and are named in jyotisha.bphs.u01.bhinnashtakavarga.scan_damage_disclosure",
+    "no second witness was collated; Saravali adhyaya 52 (astakavarga) is the obvious one and is unmined"
+   ]
+  }
+ ]
 }

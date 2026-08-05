@@ -1,0 +1,86 @@
+{
+  "fragment_id": "1a",
+  "assignment": "Vettius Valens, Anthologiae Liber I capp. 1-2 (Kroll 1908 pp. 1-14 = PDF page indices 19-32)",
+  "pages_read": [19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+  "calibration_notes": [
+    "SAVE 1 of N: seven planet natures (I.1) plus sect, plus the two general-doctrine paragraphs closing I.1. Signs (I.2) transcription in progress."
+  ],
+  "worked_nativities": [],
+  "unmined": "IN PROGRESS - I.2 signs Scorpio through Pisces (pdf 28-32) not yet encoded",
+  "fragment_rules": [
+    {
+      "rule_id": "hel.valens.b1.planet_nature.sun",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {"work": "Anthologiae", "book_chapter": "Anthologiae I.1", "technique": "planetary natures / significations", "pdf_page_indices": [19]},
+      "conditions": {"all": [{"fact": "planet", "operator": "equals", "value": "Sun"}]},
+      "conclusion": {
+        "type": "planet_nature",
+        "planet": "Sun",
+        "greek": "⟨Ὁ⟩ μὲν οὖν παντεπόπτης Ἥλιος, πυρώδης ὑπάρχων καὶ φῶς νοερόν, ψυχικῆς αἰσθήσεως ὄργανον, σημαίνει μὲν ἐπὶ γενέσεως βασιλείαν, ἡγεμονίαν, νοῦν, φρόνησιν, μορφήν, κίνησιν, ὕψος τύχης, θεῶν χρηματισμόν, κρίσιν, δημοσίωσιν, πρᾶξιν, προστασίαν ὀχλικήν, πατέρα, δεσπότην, φιλίαν, ἔνδοξα πρόσωπα, τιμὰς εἰκόνων ἀνδριάντων στεμμάτων, ἀρχιερατείας πατρίδος, ** τόπων· τῶν δὲ τοῦ σώματος μερῶν κυριεύει κεφαλῆς αἰσθητηρίων, ὀφθαλμοῦ δεξιοῦ, πλευρῶν καρδίας, πνευματικῆς ἤτοι αἰσθητικῆς κινήσεως, νεύρων· οὐσίας δὲ χρυσοῦ, καρπῶν δὲ σίτου καὶ κριθῶν· ἐστὶ δὲ τῆς ἡμερινῆς αἱρέσεως, τῇ μὲν χρόᾳ κάτοινος, τῇ δὲ γεύσει δριμύς.",
+        "engine_rendering": "The all-seeing Sun, being fiery and an intellectual light, an organ of the soul's perception, signifies at a nativity: kingship, rulership, mind, practical wisdom, form, motion, height of fortune, dealings with the gods, judgement, public office, action, leadership of crowds, the father, the master, friendship, distinguished persons, honours of images, statues and crowns, high priesthoods of the fatherland, ** of places. Of the parts of the body it rules the head, the sense-organs, the right eye, the sides, the heart, the pneumatic (that is, sensory) motion, the sinews. Of substances it rules gold; of crops, wheat and barley. It belongs to the diurnal sect; in colour it is wine-dark, in taste it is sharp.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "sect": "diurnal (ἡμερινῆς αἱρέσεως)",
+        "body_parts": ["head", "sense-organs", "right eye", "sides / ribs", "heart", "pneumatic-sensory motion", "sinews"],
+        "substances": ["gold"],
+        "crops": ["wheat", "barley"],
+        "colour": "κάτοινος (wine-dark; Kroll glosses 'vinosus colore')",
+        "taste": "δριμύς (sharp/pungent)",
+        "apparatus_notes": "Kroll p.1 app.: line 9 a lacuna before τόπων posited by Cumont, προστασίας supplied by Wendland; line 10 κιριεύει M; line 13 κάτοινος here 'vinosus colore'; line 14 Kroll queries ἐλλαμπομένη?, cf. Cleomedes 184,4",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [{
+        "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+        "work": "Anthologiae",
+        "section": "Liber I cap. I",
+        "location": "Kroll 1908 p. 1 lines 3-13 (PDF page index 19)",
+        "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+      }],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    },
+    {
+      "rule_id": "hel.valens.b1.planet_nature.moon",
+      "tradition_id": "hellenistic",
+      "school_id": "valens_anthologiae_greek",
+      "period": "written c. 150-175 CE, Antioch/Alexandria",
+      "domain": "natal",
+      "scope": {"work": "Anthologiae", "book_chapter": "Anthologiae I.1", "technique": "planetary natures / significations", "pdf_page_indices": [19]},
+      "conditions": {"all": [{"fact": "planet", "operator": "equals", "value": "Moon"}]},
+      "conclusion": {
+        "type": "planet_nature",
+        "planet": "Moon",
+        "greek": "⟨Ἡ⟩ δὲ Σελήνη γενομένη μὲν ἐκ τῆς ἀντανακλάσεως τοῦ ἡλιακοῦ φωτὸς καὶ νόθον φῶς κεκτημένη σημαίνει μὲν κατὰ γένεσιν ἀνθρώποις ζωήν, σῶμα, μητέρα, σύλληψιν, ⟨μορφήν⟩, πρόσωπον, θέαν, συμβίωσιν ἤτοι γάμον νομικόν, τροφόν, ἀδελφὸν μείζονα, οἰκουρίαν, βασίλισσαν, δέσποιναν, χρήματα, τύχην, πόλιν, ὄχλων συστροφήν, λήμματα, ἀναλώματα, οἰκίαν, πλοῖα, ξενιτείας, πλάνας· οὐ γὰρ εὐθείας παρέχει διὰ τὸν Καρκίνον. τῶν δὲ τοῦ σώματος μερῶν κυριεύει ὀφθαλμοῦ ἀριστεροῦ, στομάχου, μαζῶν, φύσης, σπληνῶν, μηνίγγων, μυελοῦ, ἔνθεν καὶ ὑδρωπικοὺς ἀποτελεῖ· οὐσίας δὲ ἀσήμου καὶ ὑέλου. ἐστὶ δὲ τῆς νυκτερινῆς αἱρέσεως, τῇ μὲν χρόᾳ πράσινος, τῇ δὲ γεύσει ἁλμυρά.",
+        "engine_rendering": "The Moon, arising from the reflection of the Sun's light and possessing a bastard light, signifies at a nativity for human beings: life, body, mother, conception, form, face, appearance, cohabitation that is lawful marriage, the nurse, the elder brother, housekeeping, the queen, the mistress, money, fortune, the city, the gathering of crowds, receipts, expenditures, the house, ships, travels abroad, wanderings - for she does not grant straight roads, because of Cancer. Of the parts of the body she rules the left eye, the stomach, the breasts, the bladder, the spleen, the meninges, the marrow, whence she also produces dropsical conditions. Of substances, silver (unstamped metal) and glass. She belongs to the nocturnal sect; in colour green, in taste salty.",
+        "rendering_grade": "engine_translation_unreviewed",
+        "sect": "nocturnal (νυκτερινῆς αἱρέσεως)",
+        "body_parts": ["left eye", "stomach", "breasts", "bladder", "spleen", "meninges", "marrow"],
+        "substances": ["unstamped silver (ἄσημον; Theophilus reads ἀργύρου)", "glass"],
+        "colour": "πράσινος (green)",
+        "taste": "ἁλμυρά (salty)",
+        "apparatus_notes": "Kroll p.1 app.: line 16 lacuna of IV letters before πρόσωπον, μορφὴν added by Boll from Rhetorius, where the sequence reads γάμον νομικὸν καὶ τροφόν, ἀδελφὸν μείζονα, μορφήν, πρόσωπον, θέαν...; line 17 Kroll queries ἀδελφήν?; line 20 εὐθείας scil. ὁδούς; Καρκίνος] Kroll: 'nam Cancer Lunae est domicilium'; 23 ἀσήμου] ἀργύρου Theophilus",
+        "customer_prediction": false
+      },
+      "priority": null,
+      "exceptions": [],
+      "conflicts_with": [],
+      "source_passages": [{
+        "edition_id": "hellenistic_valens_anthologiae_kroll_1908_page_images",
+        "work": "Anthologiae",
+        "section": "Liber I cap. I",
+        "location": "Kroll 1908 p. 1 lines 14-25 (PDF page index 19)",
+        "verification": "read from a 300dpi page image rendered with PyMuPDF from valens_anthologiae_kroll_1908_scan.pdf; Greek transcribed by eye from the image, kappa/chi resolved by lexicon"
+      }],
+      "evidence_grade": "A",
+      "publication_limit": "research_only; customer_prediction false; engine rendering is unreviewed",
+      "review_status": "engine_read_unreviewed"
+    }
+  ],
+  "fragment_vectors": []
+}

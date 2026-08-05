@@ -151,6 +151,26 @@
             "Saravali chapters 31-39 and 41-53 remain unmined (chapter 51 nashta-jataka is the likeliest home of a worked example)",
             "Brhajjataka XIX flagged as the corpus's best two-author collation target"
           ]
+        },
+        {
+          "module_id": "jyotisha_strength_and_vargas",
+          "name": "Shadbala, Ashtakavarga and the divisional charts",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "jyotisha/source_audit.md",
+            "jyotisha/strength_rule_manifest.json",
+            "jyotisha/strength_validation_vectors.json",
+            "jyotisha/varga_rule_manifest.json",
+            "jyotisha/varga_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "this closes the track's largest structural gap: it held thousands of delineation cells but NO strength machinery - it read well and weighed nothing",
+            "independent Sanskrit review outstanding on every engine_translation_unreviewed rendering",
+            "no engine wiring yet: the formulas are encoded as computable procedures but vedic_report.py does not run them"
+          ]
         }
       ]
     },
@@ -217,6 +237,24 @@
             "Chinese review",
             "complete combination and exception hierarchy"
           ]
+        },
+        {
+          "module_id": "ziping_technique_from_dated_editions",
+          "name": "Ziping technique from Sanming Tonghui (Siku) and Yuanhai Ziping (Ming 1600)",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "bazi/source_audit.md",
+            "bazi/ziping_technique_rule_manifest.json",
+            "bazi/ziping_technique_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "PARTIAL: fragments from Sanming Tonghui juan 3 and one orchestration pass only; the four gated rows (rootedness, strength class, pattern, useful god) are NOT yet closed",
+            "juan 1-2 and 4-12 remain unmined, including juan 12's five named Ming worked charts",
+            "the Ming Wanli 1600 Yuanhai Ziping collation against the anonymous Wikisource transcription is begun but incomplete"
+          ]
         }
       ]
     },
@@ -271,6 +309,23 @@
             "English rendering of the 166 cells quoted but not yet rendered",
             "segmentation of the two marrow rhapsodies",
             "combination precedence"
+          ]
+        },
+        {
+          "module_id": "quanshu_facsimile_collation",
+          "name": "Ziwei Doushu Quanshu: 1600 Nanyangtang facsimile collation and mingtu gallery",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "ziwei/source_audit.md",
+            "ziwei/quanshu_facsimile_rule_manifest.json",
+            "ziwei/quanshu_facsimile_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "PARTIAL: one fragment covering the juan 6 mingtu (worked chart) gallery; the seven-juan facsimile is otherwise unmined",
+            "the five bureau grids and brightness table have NOT yet been collated against the facsimile, so the two known print defects remain unverified"
           ]
         }
       ]
@@ -561,6 +616,24 @@
             "the ~50 individually named lots of Ch. V are sourced but not enumerated in the engine",
             "tasyir arcs need oblique ascension for the locality; only the 59'08\"/day rate is verified",
             "planetary condition doctrine (reception, translation/collection of light, refranation) sourced but not implemented"
+          ]
+        },
+        {
+          "module_id": "qabisi_named_lots",
+          "name": "al-Qabisi Chapter V: the named lots enumerated",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "islamicate/source_audit.md",
+            "islamicate/qabisi_lots_rule_manifest.json",
+            "islamicate/qabisi_lots_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "closes the engine's standing note that the ~50 named lots were sourced but not enumerated",
+            "house-cusp-dependent lots still need cusp computation the panel does not do",
+            "independent Arabic review outstanding"
           ]
         }
       ]
@@ -1929,6 +2002,26 @@
             "the great Book V lacuna: planet-in-sign survives ONLY for Saturn (12/12) and Jupiter (7/12); Mars/Sun/Venus lost entirely, Mercury a 2-cell fragment - cannot be sourced from Firmicus without fabrication, and a dedicated vector pins the engine to reporting the gap",
             "vol. 2 OCR splices Kroll's apparatus into the running text at page breaks; affected quotes stop at the last clean clause, noted per cell",
             "unmined remainders recorded in rule exceptions: Moon-flow targets, V.1 rising signs, remaining Book VI pairs, Book VIII decans; Book VII deliberately skipped (dominated by refused topics)"
+          ]
+        },
+        {
+          "module_id": "valens_anthologiae_delineation",
+          "name": "Valens Anthologiae: planet natures, places, chronocrators, worked nativities",
+          "input_kind": "birth_datetime_location",
+          "birth_input_eligible": true,
+          "coverage_status": "research_verified",
+          "implementation_state": "validated_research_artifact",
+          "artifacts": [
+            "hellenistic/source_audit.md",
+            "hellenistic/valens_delineation_rule_manifest.json",
+            "hellenistic/valens_delineation_validation_vectors.json"
+          ],
+          "remaining_gates": [
+            "PARTIAL: assembled from incremental fragments after two quota deaths; Books I-II and part of IV are mined, Books III and V-IX are NOT",
+            "4 worked nativities captured from II.36 but their date statements were not recovered, so no chart is yet reproducible end to end",
+            "calibration finding recorded: the Teubner Greek italic draws kappa almost identically to chi at 300dpi, and every kappa was resolved by lexicon rather than by pixel",
+            "Kroll's obelisks (daggers) at II.27 and II.28 are transcribed as printed, not silently emended",
+            "independent Greek review outstanding on every engine_translation_unreviewed rendering"
           ]
         }
       ]

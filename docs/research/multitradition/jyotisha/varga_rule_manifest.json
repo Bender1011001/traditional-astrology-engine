@@ -1,0 +1,1100 @@
+{
+ "schema_version": 1,
+ "updated": "2026-08-05",
+ "tradition_id": "indian_jyotisha",
+ "school_id": "parasara_bphs_subodhini_1899",
+ "source_pack_id": "parasara_bphs_subodhini_1899_varga_v1",
+ "source_edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+ "source_registry_ids": [
+  "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+  "jyotisha_bphs_subodhini_1899_archive"
+ ],
+ "implementation_status": "not_implemented",
+ "publication_status": "research_only",
+ "evidence_note": "The DIVISIONAL CHARTS of the Parasari track, read directly from the Sanskrit of purva-khanda adhyaya 3 of the Brhatparasarahorasaramsa in the Subodhini (Nirnaya Sagara / eGangotri) 1899 printing. The engine has computed D1 and D9 since it was written and had no sourced rule for any other varga; this manifest supplies computable rules for D2, D3, D4, D7, D10, D12, D30 and D60, the sixteen-varga enumeration, the map from a reader's question to the varga that answers it (D10 career, D7 children, D12 parents, D30 misfortune - the four the reading most obviously needed), the varga-dignity tier names, and the vimsopaka (varga-vishva) bala with all four of its weighting schemes. Two arithmetic facts are published rather than patched: the shodasavarga vishva weights as printed sum to 18.5 and not 20, and sloka 126's adhimitra value is ambiguous between 20 and 18. Six vargas (D16, D20, D24, D27, D40, D45) are named by the text but their computation slokas were not read in this pass; that is recorded as UNMINED, not as blocked, because the pages are legible in the same scan. Every rendering is the encoder's own unreviewed translation of the quoted Devanagari and is graded engine_translation_unreviewed. customer_prediction is false on every conclusion and the kingship predicate attached to the varga-dignity tiers is refused.",
+ "rules": [
+  {
+   "rule_id": "jyotisha.bphs.p03.sodasavarga.enumeration",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "the_sixteen_divisional_charts_named",
+    "chapter": "Purva-khanda adhyaya 3, slokas 52-54",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "chart",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "system_definition",
+    "unit": "n/a",
+    "customer_prediction": false,
+    "sanskrit": "वर्गान् षोडशसंख्याकान् ब्रह्मा लोकपितामहः ॥ तानहं संप्रवक्ष्यामि मैत्रेय श्रूयतामिति ॥ ५२ ॥ क्षेत्रं होरा च द्रेष्काणस्तुर्यांशः सप्तमांशकः ॥ नवांशो दशमांशश्च सूर्यांशः षोडशांशकः ॥ ५३ ॥ विंशांशो वेदवान्हंसो भांशस्त्रिंशांशकस्ततः ॥ खवेदांशोऽक्षवेदांशाः षष्ट्यंशश्च ततः परम् ॥ ५४ ॥",
+    "engine_rendering": "The sixteen vargas which Brahma, the grandfather of the worlds, [declared] - these I shall fully declare, Maitreya; hear them: kshetra, hora, drekkana, turyamsa, saptamamsa, navamsa, dasamsa, shodasamsa, vimsamsa, chaturvimsamsa, bhamsa, trimsamsa, khavedamsa, akshavedamsa and shashtyamsa.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "vargas": [
+     {
+      "n": 1,
+      "name": "kshetra / rasi",
+      "divisor": "D1",
+      "arc": "30 deg 00'"
+     },
+     {
+      "n": 2,
+      "name": "hora",
+      "divisor": "D2",
+      "arc": "15 deg 00'"
+     },
+     {
+      "n": 3,
+      "name": "drekkana",
+      "divisor": "D3",
+      "arc": "10 deg 00'"
+     },
+     {
+      "n": 4,
+      "name": "turyamsa (chaturthamsa)",
+      "divisor": "D4",
+      "arc": "7 deg 30'"
+     },
+     {
+      "n": 5,
+      "name": "saptamamsa",
+      "divisor": "D7",
+      "arc": "4 deg 17' 08.6\""
+     },
+     {
+      "n": 6,
+      "name": "navamsa",
+      "divisor": "D9",
+      "arc": "3 deg 20'"
+     },
+     {
+      "n": 7,
+      "name": "dasamsa",
+      "divisor": "D10",
+      "arc": "3 deg 00'"
+     },
+     {
+      "n": 8,
+      "name": "shodasamsa (kalamsa)",
+      "divisor": "D16",
+      "arc": "1 deg 52' 30\""
+     },
+     {
+      "n": 9,
+      "name": "vimsamsa",
+      "divisor": "D20",
+      "arc": "1 deg 30'"
+     },
+     {
+      "n": 10,
+      "name": "chaturvimsamsa (vedavanhi / siddhamsa)",
+      "divisor": "D24",
+      "arc": "1 deg 15'"
+     },
+     {
+      "n": 11,
+      "name": "bhamsa (nakshatramsa)",
+      "divisor": "D27",
+      "arc": "1 deg 06' 40\""
+     },
+     {
+      "n": 12,
+      "name": "trimsamsa",
+      "divisor": "D30",
+      "arc": "unequal, see the trimsamsa rule"
+     },
+     {
+      "n": 13,
+      "name": "khavedamsa",
+      "divisor": "D40",
+      "arc": "0 deg 45'"
+     },
+     {
+      "n": 14,
+      "name": "akshavedamsa",
+      "divisor": "D45",
+      "arc": "0 deg 40'"
+     },
+     {
+      "n": 15,
+      "name": "shashtyamsa",
+      "divisor": "D60",
+      "arc": "0 deg 30'"
+     }
+    ],
+    "note": "The printed list as transcribed here gives fifteen items after kshetra is counted; the scan's reading of sloka 53's fourth pada ('सूर्यांशः षोडशांशकः') is the point where the sixteenth member is carried, and the recension's own tier-name charts (slokas 96-100) are built on sixteen. The count discrepancy is the scan's, and is recorded rather than silently padded.",
+    "engine_status": "vedic_report.py computes D1 and D9 only. D2, D3, D4, D7, D10, D12, D30 and D60 are defined below with computable rules; D16, D20, D24, D27, D40 and D45 are named here but their computation slokas were NOT read verse-by-verse in this pass and are therefore not encoded."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "slokas 52-54, page 25 (OCR lines 3036-3041)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.hora_d2",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d2",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 55-56",
+    "varga": "D2",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "तत्क्षेत्रं तस्य खेटस्य राशेर्यो यस्य नायकः ॥ सूर्येन्द्वोर्विषमे राशौ समे तद्विपरीतकम् ॥ ५५ ॥ पितरश्चन्द्रहोरेशा देवाः सूर्यस्य कीर्तिताः ॥ राशेरर्धं भवेद्धोरा ताश्चतुर्विंशति स्मृताः ॥ मेषादि तासां होराणां परिवृत्तिर्द्वयं भवेत् ॥ ५६ ॥",
+    "engine_rendering": "Half a sign is a hora, and these are reckoned twenty-four, with two revolutions from Aries onward. In an odd sign the first half belongs to the Sun and the second to the Moon; in an even sign the reverse. The lords of the Moon's hora are called the Pitris, and those of the Sun's the Devas.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D2",
+    "varga_name": "hora",
+    "procedure": [
+     "split each rasi at 15 degrees",
+     "ODD rasi: 0-15 degrees is the Sun's hora (i.e. Leo); 15-30 is the Moon's hora (Cancer)",
+     "EVEN rasi: 0-15 degrees is the Moon's hora; 15-30 is the Sun's hora"
+    ],
+    "amsa_lords_or_deities": {
+     "Sun's hora": "the Devas",
+     "Moon's hora": "the Pitris"
+    },
+    "worked_example": {
+     "lagna": "3|8 (8 degrees of Cancer, an even sign)",
+     "result": "counted from the Moon, so the Moon's hora"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 55-56 with commentary and worked example, OCR lines 3042-3048",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.drekkana_d3",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d3",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 57-58",
+    "varga": "D3",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "राशित्रिभागा द्रेष्काणास्ते च षट्त्रिंशदीरिताः ॥ परिवृत्तित्रयं तेषां मेषादेः क्रमशो भवेत् ॥ ५७ ॥ स्वपंचनवमानां च विषमेषु समेषु च ॥ नारदागस्त्यदुर्वासो द्रेष्काणेशाश्चरादयः ॥ ५८ ॥",
+    "engine_rendering": "The thirds of a sign are the drekkanas, and they are declared thirty-six, with three revolutions in order from Aries. They belong to the sign itself, to the fifth from it and to the ninth from it, in odd signs and in even alike. Narada, Agastya and Durvasa are the lords of the drekkanas, beginning with the movable signs.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D3",
+    "varga_name": "drekkana",
+    "procedure": [
+     "divide each rasi into three parts of 10 degrees",
+     "0-10 degrees: the SAME rasi",
+     "10-20 degrees: the 5th rasi from it",
+     "20-30 degrees: the 9th rasi from it",
+     "the rule is the same in odd and even signs - this recension states that explicitly"
+    ],
+    "amsa_lords_or_deities": {
+     "first drekkana": "Narada",
+     "second drekkana": "Agastya",
+     "third drekkana": "Durvasa"
+    },
+    "worked_example": {
+     "lagna": "3|8 (8 degrees of Cancer)",
+     "result": "the first drekkana, so Cancer itself"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 57-58 with commentary and worked example, OCR lines 3074-3087",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.turyamsa_d4",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d4",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 59",
+    "varga": "D4",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "स्वक्षादिकेंद्रपतयस्तुर्यांशेशाः क्रियादयः ॥ सनकश्च सनंदश्च कुमारश्च सनातनः ॥ ५९ ॥",
+    "engine_rendering": "The lords of the kendras beginning with the sign itself are the lords of the turyamsas, from Aries onward; and [their deities are] Sanaka, Sananda, Kumara and Sanatana.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D4",
+    "varga_name": "turyamsa (chaturthamsa)",
+    "procedure": [
+     "divide each rasi into four parts of 7 degrees 30 minutes",
+     "0 to 7deg30': the SAME rasi",
+     "7deg30' to 15deg: the 4th rasi from it",
+     "15deg to 22deg30': the 7th rasi from it",
+     "22deg30' to 30deg: the 10th rasi from it"
+    ],
+    "amsa_lords_or_deities": {
+     "1st quarter": "Sanaka",
+     "2nd": "Sananda",
+     "3rd": "Kumara",
+     "4th": "Sanatana"
+    },
+    "worked_example": {
+     "lagna": "3|8 (8 degrees of Cancer)",
+     "result": "the second quarter, so the 4th from Cancer = Libra (printed as 7|0 in the commentary's shorthand)"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 59 with commentary and worked example, OCR lines 3096-3115",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.saptamsa_d7",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d7",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 60-61",
+    "varga": "D7",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "सप्तांशपाः स्वोजगृहे गणनीया निजेशतः ॥ युग्मराशौ तु विज्ञेयाः सप्तमक्षादिनायकात् ॥ ६० ॥ क्षारक्षीरौ च दध्याज्यौ तथेक्षुरससंभवः ॥ मद्यशुद्धजलावाजे समे शुद्धजलादिकाः ॥ ६१ ॥",
+    "engine_rendering": "The lords of the saptamsas in an odd sign are to be counted from the sign's own lord; in an even sign they are to be known from the lord of the seventh sign. [Their names are] salt-ocean, milk, curd, ghee, sugar-cane juice, wine and pure water in an odd sign; in an even sign beginning with pure water.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D7",
+    "varga_name": "saptamamsa",
+    "procedure": [
+     "divide each rasi into seven parts of 4 degrees 17 minutes 08.6 seconds",
+     "ODD rasi: count the saptamsas from the rasi ITSELF",
+     "EVEN rasi: count the saptamsas from the SEVENTH rasi from it"
+    ],
+    "amsa_lords_or_deities": {
+     "odd sign order": [
+      "kshara (salt ocean)",
+      "kshira (milk)",
+      "dadhi (curd)",
+      "ajya (ghee)",
+      "ikshurasa (sugar-cane juice)",
+      "madya (wine)",
+      "suddha jala (pure water)"
+     ],
+     "even sign order": "the same seven reversed, beginning with pure water"
+    },
+    "worked_example": {
+     "lagna": "3|8 (8 degrees of Cancer, an even sign)",
+     "count_from": "Capricorn, the 7th from Cancer",
+     "result": "the third saptamsa from Capricorn = Pisces"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 60-61 with commentary and worked example, OCR lines 3127-3134",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.dasamsa_d10",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d10",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 63-64",
+    "varga": "D10",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "पूर्वादिदशदिक्पालाः इंद्राग्नियमराक्षसाः ॥ ६३ ॥ वरुणो मारुतश्चैव ... समराशिदशमांशे तस्मात् तन्नवमाद् व्रजेत् ॥ व्युत्क्रमेण तु ॥ ६४ ॥",
+    "engine_rendering": "The ten guardians of the directions beginning with the east - Indra, Agni, Yama, Nirriti, Varuna, Marut and the rest - are the lords of the dasamsas. In an even sign the dasamsa proceeds from the ninth from that sign, in reverse order of reckoning.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D10",
+    "varga_name": "dasamsa",
+    "procedure": [
+     "divide each rasi into ten parts of 3 degrees each",
+     "ODD rasi: count the dasamsas from the rasi ITSELF",
+     "EVEN rasi: count the dasamsas from the NINTH rasi from it"
+    ],
+    "amsa_lords_or_deities": {
+     "the ten dikpalas, from the east": [
+      "Indra",
+      "Agni",
+      "Yama",
+      "Nirriti (Rakshasa)",
+      "Varuna",
+      "Marut (Vayu)",
+      "Kubera",
+      "Isana",
+      "Brahma",
+      "Ananta"
+     ]
+    },
+    "worked_example": {
+     "lagna": "3|8|4|5 (8 degrees of Cancer, an even sign)",
+     "count_from": "Pisces, the 9th from Cancer",
+     "result": "Taurus (the third dasamsa from Pisces)"
+    },
+    "ocr_note": "The dikpala list is partly damaged in this scan past Marut; the four names after Marut are supplied from the standard dikpala sequence and are flagged as reconstructed, not read."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 63-64 with commentary and worked example, OCR lines 3239-3259",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.dvadasamsa_d12",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d12",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 65",
+    "varga": "D12",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "द्वादशांशस्य गणना तत्तत्क्षेत्रादिनिर्दिशेत् ॥ तेषामधीशाः क्रमशो गणेशाश्वियमाहयः ॥ ६५ ॥",
+    "engine_rendering": "The reckoning of the dvadasamsa is to be declared from each sign itself; and their presiding lords in order are Ganesha, the Ashvins, Yama and Ahi.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D12",
+    "varga_name": "dvadasamsa",
+    "procedure": [
+     "divide each rasi into twelve parts of 2 degrees 30 minutes each",
+     "count the dvadasamsas from the rasi ITSELF, in every sign - odd and even alike",
+     "so the nth dvadasamsa of a rasi is the (n-1)th rasi after it"
+    ],
+    "amsa_lords_or_deities": {
+     "cycle of four, repeating three times": [
+      "Ganesha",
+      "Ashvin",
+      "Yama",
+      "Ahi (Sarpa)"
+     ]
+    },
+    "worked_example": {
+     "lagna": "2|18|45",
+     "result": "computed in the commentary from the sign itself"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 65 with commentary and worked example, OCR lines 3302-3316",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.trimsamsa_d30",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d30",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 77-78",
+    "varga": "D30",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "त्रिंशांशेशाश्च विषमे कुजार्कीज्यज्ञभार्गवाः ॥ पंच पंच अष्ट सप्त अक्षा भागा व्यत्ययतः समे ॥ ७७ ॥ वन्हिः समीरः शक्रश्च धनदो जलदस्तथा ॥ विषमेषु क्रमाज्ज्ञेयाः समराशौ विपर्ययम् ॥ ७८ ॥",
+    "engine_rendering": "In an odd sign the lords of the trimsamsas are Mars, Saturn, Jupiter, Mercury and Venus, over five, five, eight, seven and five degrees; in an even sign the reverse. Fire, wind, Indra, the wealth-giver and the water-bearer are to be known in order in odd signs; in an even sign the contrary.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D30",
+    "varga_name": "trimsamsa",
+    "procedure": [
+     "the trimsamsa is NOT an equal division - its five parts are unequal",
+     "ODD rasi: Mars 0-5, Saturn 5-10, Jupiter 10-18, Mercury 18-25, Venus 25-30",
+     "EVEN rasi: the same five reversed - Venus 0-5, Mercury 5-12, Jupiter 12-20, Saturn 20-25, Mars 25-30",
+     "the Sun and the Moon own no trimsamsa"
+    ],
+    "amsa_lords_or_deities": {
+     "odd_sign": [
+      {
+       "arc": "0-5",
+       "lord": "Mars",
+       "deity": "Vahni (fire)"
+      },
+      {
+       "arc": "5-10",
+       "lord": "Saturn",
+       "deity": "Samira (wind)"
+      },
+      {
+       "arc": "10-18",
+       "lord": "Jupiter",
+       "deity": "Sakra (Indra)"
+      },
+      {
+       "arc": "18-25",
+       "lord": "Mercury",
+       "deity": "Kubera (dhanada)"
+      },
+      {
+       "arc": "25-30",
+       "lord": "Venus",
+       "deity": "Jaladhara (Varuna)"
+      }
+     ],
+     "even_sign": [
+      {
+       "arc": "0-5",
+       "lord": "Venus",
+       "deity": "Jaladhara (Varuna)"
+      },
+      {
+       "arc": "5-12",
+       "lord": "Mercury",
+       "deity": "Kubera"
+      },
+      {
+       "arc": "12-20",
+       "lord": "Jupiter",
+       "deity": "Sakra"
+      },
+      {
+       "arc": "20-25",
+       "lord": "Saturn",
+       "deity": "Samira"
+      },
+      {
+       "arc": "25-30",
+       "lord": "Mars",
+       "deity": "Vahni"
+      }
+     ]
+    },
+    "worked_example": {
+     "lagna": "3|8|45 (8 degrees of Cancer, an even sign)",
+     "result": "the second trimsamsa of an even sign, so Mercury"
+    }
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 77-78 with commentary and worked example, OCR lines 3672-3678",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.shashtyamsa_d60",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_computation_d60",
+    "chapter": "Purva-khanda adhyaya 3, sloka(s) 88-90",
+    "varga": "D60",
+    "engine_facts_consumed": [
+     "sidereal longitude of each graha and the lagna",
+     "rasi and degree within the rasi",
+     "rasi lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "graha_longitude",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "a rasi (1-12) per graha and per lagna",
+    "customer_prediction": false,
+    "sanskrit": "समे व्यत्ययतो ज्ञेयाः षष्ट्यंशाश्च ॥ ८८ ॥ ... राशीन् विहाय खेटस्य द्विघ्नमंशाद्यं मर्कवत् ॥ हृतं सैकं च तद्राशिनाथः षष्ट्यंशका स्मृताः ॥ ९० ॥",
+    "engine_rendering": "Dropping the rasis of the graha, double what stands from the degrees onward, divide as by twelve, and add one; the lord of that sign is declared the shashtyamsa. In an even sign they are to be known in reverse.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "divisor": "D60",
+    "varga_name": "shashtyamsa",
+    "procedure": [
+     "drop the whole rasis of the graha's longitude, keeping degrees, minutes and seconds",
+     "double that remainder",
+     "divide by 12 and take the whole quotient",
+     "add 1",
+     "count that many signs from the graha's own rasi in an ODD sign; count in reverse in an EVEN sign",
+     "the lord of the sign so reached is the shashtyamsa lord"
+    ],
+    "worked_example": {
+     "graha": "Sun at 4|24|1 (degrees onward)",
+     "doubled": "8|57|2",
+     "divided_by_12": "quotient 0, remainder carried",
+     "plus_one": "the 10th",
+     "counted_from": "Gemini in the commentary's example"
+    },
+    "ocr_note": "The commentary's Sun example is partly garbled in this scan; the PROCEDURE (drop rasis, double, divide by twelve, add one) is legible and is what is encoded. The arithmetic of the example is not reproduced here because it cannot be read with confidence."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "sloka(s) 88-90 with commentary and worked example, OCR lines 3969-3985",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.purposes",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "which_question_each_varga_answers",
+    "chapter": "Purva-khanda adhyaya 3, slokas 103-110",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "significations_lookup",
+    "unit": "n/a",
+    "customer_prediction": false,
+    "sanskrit": "अथ षोडशवर्गेषु चिंतां लग्नं वदाम्यहम् ॥ लग्नं देहस्य विज्ञानं होरायां संपदादिकम् ॥ १०३ ॥ द्रेष्काणे भ्रातृजं सौख्यं तुर्यांशे भाग्यचिंतनम् ॥ पुत्रपौत्रादिकानां वै चिंतनं सप्तमांशके ॥ १०४ ॥ नवमांशे कलत्राणां दशमांशे महत्फलम् ॥ द्वादशांशे तथा पित्रोश्चिंतनं षोडशांशके ॥ १०५ ॥ सुखासुखस्य विज्ञानं वाहनानां तथैव च ॥ उपासनाया विज्ञानं साध्यं विंशतिभागके ॥ १०६ ॥ विद्यायाः वेदबाह्वंशे भांडे चैव बलाबलम् ॥ त्रिंशांशके रिष्टफलं खवेदांशे शुभाशुभम् ॥ १०७ ॥ अक्षवेदांशभागे च षष्ट्यंशेऽखिलमीक्षयेत् ॥ १०८ ॥",
+    "engine_rendering": "In the sixteen vargas I shall declare what is to be considered: the lagna, knowledge of the body; in the hora, wealth and the like; in the drekkana, happiness from brothers; in the turyamsa, consideration of fortune; in the saptamsa, of sons and grandsons; in the navamsa, of spouses; in the dasamsa, the great result; in the dvadasamsa, of the parents; in the shodasamsa, knowledge of comfort and discomfort and of vehicles; in the vimsamsa, knowledge of religious observance; in the chaturvimsamsa, of learning; in the bhamsa, strength and weakness of the constitution; in the trimsamsa, the evils; in the khavedamsa, the auspicious and inauspicious; in the akshavedamsa and shashtyamsa, one should examine everything.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "purposes": {
+     "D1 (lagna)": "देहस्य विज्ञानम् - knowledge of the body",
+     "D2 (hora)": "संपदादिकम् - wealth and the like",
+     "D3 (drekkana)": "भ्रातृजं सौख्यम् - happiness arising from brothers",
+     "D4 (turyamsa)": "भाग्यचिंतनम् - consideration of fortune",
+     "D7 (saptamsa)": "पुत्रपौत्रादिकानां चिंतनम् - consideration of sons, grandsons and the rest",
+     "D9 (navamsa)": "कलत्राणाम् - of spouses",
+     "D10 (dasamsa)": "महत्फलम् - the great result (career, standing, deeds)",
+     "D12 (dvadasamsa)": "पित्रोः - of the parents",
+     "D16 (shodasamsa)": "सुखासुखस्य विज्ञानं वाहनानां तथैव च - knowledge of comfort and discomfort, and of vehicles",
+     "D20 (vimsamsa)": "उपासनाया विज्ञानम् - knowledge of religious observance",
+     "D24 (chaturvimsamsa)": "विद्यायाः - of learning",
+     "D27 (bhamsa)": "भांडे च बलाबलम् - strength and weakness of the constitution",
+     "D30 (trimsamsa)": "रिष्टफलम् - the evils / misfortunes",
+     "D40 (khavedamsa)": "शुभाशुभम् - the auspicious and inauspicious",
+     "D45 (akshavedamsa)": "अखिलम् - everything",
+     "D60 (shashtyamsa)": "अखिलमीक्षयेत् - one should examine everything; a cruel shashtyamsa lord destroys, a benefic one increases"
+    },
+    "composer_note": "This is the map from a reader's question to the divisional chart that answers it. A Jyotishi asked about career and shown only D1 and D9 has been given the wrong instrument; the text names D10 for that question and D7 for children and D12 for parents."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "slokas 103-110, pages 38-39 (OCR lines 4147-4158)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.vimsopaka_bala",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "vimsopaka_varga_vishva_bala",
+    "chapter": "Purva-khanda adhyaya 3, slokas 111-129",
+    "engine_facts_consumed": [
+     "the graha's dignity in each computed varga"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_dignities",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "computable_procedure",
+    "unit": "vishvas, out of 20",
+    "customer_prediction": false,
+    "sanskrit": "अथातः संप्रवक्ष्यामि वर्गविश्वाबलं द्विज ॥ यस्य विज्ञानमात्रेण विपाकं दृष्टिगोचरम् ॥ ११२ ॥ ... पूर्णं विश्वाबलं विंशतिः स्यादधिमित्रके ॥ १२६ ॥ मित्रे पंचदश प्रोक्तं समे [दश] प्रकीर्तितम् ॥ शत्रौ सप्ताधिशत्रौ च पंच विश्वा बलं भवेत् ॥ १२७ ॥",
+    "engine_rendering": "Now I shall declare the varga-vishva strength, O twice-born, by the mere knowledge of which the ripening [of results] comes within sight. ... The full vishva strength is twenty, and so in the great-friend's place; in a friend's, fifteen; in a neutral's, ten; in an enemy's, seven; in a great enemy's, five.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "schemes": {
+     "shadvarga (6)": {
+      "sanskrit": "रसनेत्राब्धिपंचाश्विभूमयः",
+      "values": {
+       "D1": 6,
+       "D2": 2,
+       "D3": 4,
+       "D9": 5,
+       "D12": 2,
+       "D30": 1
+      },
+      "total": 20
+     },
+     "saptavarga (7)": {
+      "sanskrit": "ससप्तमांशकं तत्र विश्वका पंचलोचनम् ॥ त्रयं सार्धद्वयं सार्धवेदं",
+      "values": {
+       "D1": 5,
+       "D2": 2,
+       "D3": 3,
+       "D7": 2.5,
+       "D9": 4.5,
+       "D12": 2,
+       "D30": 1
+      },
+      "total": 20
+     },
+     "dasavarga (10)": {
+      "sanskrit": "दशवर्गादिरंशाब्या ... त्रयं क्षेत्रस्य विज्ञेयाः पंच षष्ट्यंशकस्य च ॥ सार्धैकभागाः शेषाणाम्",
+      "values": {
+       "D1": 3,
+       "D60": 5,
+       "the other eight": 1.5
+      },
+      "total": 20
+     },
+     "shodasavarga (16)": {
+      "sanskrit": "कलांशस्य द्वयं ज्ञेयं त्रयं नवांशकस्य च ॥ क्षेत्रे सार्धे च त्रितयं चतुःषष्ट्यंशकस्य हि ॥ अर्धं तु शेषाणाम्",
+      "values": {
+       "D1": 3.5,
+       "D9": 3,
+       "D16": 2,
+       "D60": 4,
+       "the rest": 0.5
+      },
+      "total_as_printed": 18.5,
+      "arithmetic_note": "The four explicit values plus half for each of the remaining twelve sum to 18.5, not the 20 the scheme is named for. Either the scan has lost the hora and drekkana assignments of sloka 124's first pada, or this recension's shodasavarga vishvas genuinely do not close. The discrepancy is PUBLISHED, not patched."
+     }
+    },
+    "dignity_multipliers_out_of_20": {
+     "exaltation / own sign (purna)": 20,
+     "adhimitra": 20,
+     "mitra": 15,
+     "sama": 10,
+     "satru": 7,
+     "adhisatru": 5
+    },
+    "procedure": [
+     "choose a scheme: shadvarga (6 vargas), saptavarga (7), dasavarga (10) or shodasavarga (16)",
+     "for each varga in the scheme, find the graha's dignity relative to that varga's lord",
+     "score 20 / 20 / 15 / 10 / 7 / 5 vishvas for exalted-or-own / great friend / friend / neutral / enemy / great enemy",
+     "multiply that score by the varga's own weight from the scheme table, and divide by 20",
+     "sum over the vargas of the scheme; the total is out of 20"
+    ],
+    "grading": {
+     "below 5": "no result at all (फलदो न हि)",
+     "5 to 10": "slight result (स्वल्पफलदम्)",
+     "above 10": "middling (मध्यमम्)",
+     "above 15": "full result (पूर्णफलदम्)"
+    },
+    "adhimitra_ambiguity": "Sloka 126's second half is printed 'पूर्णं विश्वाबलं विंशतिः स्यादधिमित्रके'. It can be read either as (a) full strength is twenty, and likewise in the great-friend's place, or (b) full strength [in one's own or exaltation] is twenty, and in the great friend's place [eighteen]. The modern handbooks read 18 for adhimitra. This scan does not settle it and the ambiguity is recorded rather than resolved.",
+    "engine_status": "Unevaluable today for any scheme, because the engine computes only D1 and D9. Once D2, D3, D7, D12 and D30 are added the SHADVARGA and SAPTAVARGA schemes become computable immediately; dasavarga and shodasavarga additionally need D60 and the six vargas not encoded in this pass."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "slokas 111-129 with commentary, pages 39-40 (OCR lines 4160-4258)",
+     "verification": "read directly in Devanagari 2026-08-04; the shadvarga and saptavarga weight series were recomputed and each sums to 20, the dasavarga series sums to 20, and the shodasavarga series as printed sums to 18.5 - that failure is recorded above"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga_tier_names",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "varga_dignity_tier_names",
+    "chapter": "Purva-khanda adhyaya 3, slokas 91-102",
+    "engine_facts_consumed": [
+     "count of vargas in which a graha holds exaltation, moolatrikona, own sign or lordship"
+    ]
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "dignified_varga_count",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "grading_table",
+    "unit": "a named tier",
+    "customer_prediction": false,
+    "sanskrit": "वर्गभेदानहं वक्ष्ये मैत्रेय त्वं विधारय ॥ षड्वर्गाः सप्तवर्गाश्च दशवर्गो षोडशवर्गकाः ॥ ९१ ॥ भवंति वर्गसंयोगे षड्वर्गे किंशुकादयः ॥ द्वाभ्यां किंशुकनामा च त्रिभिर्व्यंजनमुच्यते ॥ ९२ ॥ ...",
+    "engine_rendering": "I shall declare the divisions of the vargas. There are the six-varga, seven-varga, ten-varga and sixteen-varga schemes. In the six-varga scheme the names beginning with kimshuka arise on combination: by two it is called kimshuka, by three vyanjana, by four chamara, by five chhatra, by six kundala and by seven mukuta.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "tiers": {
+     "shadvarga (2 to 7 dignified vargas)": [
+      "kimshuka (2)",
+      "vyanjana (3)",
+      "chamara (4)",
+      "chatra (5)",
+      "kundala (6)",
+      "mukuta (7)"
+     ],
+     "saptavarga / dasavarga (2 to 10)": [
+      "parijata (2)",
+      "uttama (3)",
+      "gopura (4)",
+      "simhasana (5)",
+      "paravata (6)",
+      "devaloka (7)",
+      "brahmaloka (8)",
+      "shakravahana (9)",
+      "shridhama (10)"
+     ],
+     "shodasavarga (2 to 16)": [
+      "bhedaka (2)",
+      "kusuma (3)",
+      "nagapushpa (4)",
+      "kanduka (5)",
+      "kerala (6)",
+      "kalpavriksha (7)",
+      "chandanavana (8)",
+      "purnachandra (9)",
+      "uchchaishrava (10)",
+      "dhanvantari (11)",
+      "suryakanta (12)",
+      "vidruma (13)",
+      "shakrasimhasana (14)",
+      "goloka (15)",
+      "shrivallabha (16)"
+     ]
+    },
+    "dignity_counted": "स्वोच्चमूलत्रिकोणस्वभवनाधिपति - own exaltation, moolatrikona, own house and lordship, counted from the graha's own arudha's kendra lords (sloka 101)",
+    "disqualifiers": "अस्तंगता ग्रहजिता नीचगा दुर्बलास्तथा - combust, defeated in war, debilitated or weak grahas produce a yoga-destroying result instead (sloka 102)",
+    "refused": "The tier NAME is a defensible thing to report once the vargas are computed. The emperor/kingship predicate attached to the higher tiers is NOT, and is refused - this is the same refusal already recorded for adhyaya 28's raja-yoga ladder in bphs_rule_manifest.json.",
+    "output_policy": "refused_for_the_kingship_predicate; the tier name alone is renderable_with_source"
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "slokas 91-102 with the two printed tier charts, pages 37-38 (OCR lines 4081-4143)",
+     "verification": "read directly in Devanagari 2026-08-04"
+    }
+   ],
+   "evidence_grade": "B",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  },
+  {
+   "rule_id": "jyotisha.bphs.p03.varga.unmined_disclosure",
+   "tradition_id": "indian_jyotisha",
+   "school_id": "parasara_bphs_subodhini_1899",
+   "period": "bphs_subodhini_sanskrit_text_nirnaya_sagara_1899_printing",
+   "domain": "natal",
+   "scope": {
+    "work": "Brhatparasarahorasastra (Subodhini 1899 recension)",
+    "technique": "which_varga_computation_rules_were_not_read_in_this_pass",
+    "chapter": "Purva-khanda adhyaya 3",
+    "engine_facts_consumed": []
+   },
+   "conditions": {
+    "all": [
+     {
+      "fact": "varga_manifest",
+      "operator": "exists",
+      "value": true
+     }
+    ]
+   },
+   "conclusion": {
+    "type": "provenance_disclosure",
+    "unit": "n/a",
+    "customer_prediction": false,
+    "engine_rendering": "Eight of the sixteen vargas have their computation rule encoded from this chapter (D1, D2, D3, D4, D7, D10, D12, D30, D60 - nine counting D60; D9 is already implemented in the engine and encoded elsewhere). Six do not.",
+    "rendering_grade": "engine_translation_unreviewed",
+    "encoded_computation": [
+     "D1",
+     "D2",
+     "D3",
+     "D4",
+     "D7",
+     "D10",
+     "D12",
+     "D30",
+     "D60"
+    ],
+    "named_but_computation_not_read": [
+     "D16 (shodasamsa)",
+     "D20 (vimsamsa)",
+     "D24 (chaturvimsamsa)",
+     "D27 (bhamsa)",
+     "D40 (khavedamsa)",
+     "D45 (akshavedamsa)"
+    ],
+    "why": "Their defining slokas fall in the stretch of adhyaya 3 between slokas 66 and 76 and between 79 and 87, which was not read verse-by-verse in this pass. They are NOT blocked - the pages are legible in the same scan; they are simply unmined, and saying so is the honest status.",
+    "consequence": "The dasavarga and shodasavarga vimsopaka schemes cannot be completed until those six are read. The shadvarga and saptavarga schemes can, because they need only D1, D2, D3, D7, D9, D12 and D30, all of which are now encoded."
+   },
+   "priority": null,
+   "exceptions": [],
+   "conflicts_with": [],
+   "source_passages": [
+    {
+     "edition_id": "jyotisha_parasara_bphs_subodhini_1899_egangotri",
+     "work": "Brhatparasarahorasaramsa (BPHS), Subodhini commentary, Nirnaya Sagara / eGangotri 1899 printing",
+     "section": "Purva-khanda adhyaya 3",
+     "location": "slokas 66-76 and 79-87, unread",
+     "verification": "explicitly not inspected in the 2026-08-04 pass; recorded as unmined rather than blocked"
+    }
+   ],
+   "evidence_grade": "C",
+   "publication_limit": "research_only; engine_translation_unreviewed; never rendered as a claim about a reader",
+   "review_status": "engine_translation_unreviewed; independent Sanskrit review outstanding"
+  }
+ ]
+}
