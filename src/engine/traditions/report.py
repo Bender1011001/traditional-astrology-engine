@@ -198,14 +198,23 @@ def render_layered(report: TraditionReport) -> str:
     The evidence database stays relational; the reader is no longer asked to
     process forty-two refusals before finding out what the system can say.
     """
+    from .readiness import classify
+
     birth = report.birth
+    # What kind of document this is, decided by what it contains rather than
+    # by what the product category wishes it were. Seven documents under one
+    # "full reading" heading, when one of them delineates nothing, misleads by
+    # arrangement even when every sentence in them is true.
+    kind = classify(report)
     lines = [
         f"# {report.display_name}",
         "",
         f"**{birth.get('name')}** — {birth.get('civil_date')} {birth.get('civil_time')} "
         f"(UTC{birth.get('utc_offset_hours'):+g}), {birth.get('place_label')}",
         "",
-        "## Part I — Reading",
+        f"> **{kind.label}.** {kind.explanation}",
+        "",
+        f"## Part I — {kind.label}",
         "",
     ]
     for section in report.sections:

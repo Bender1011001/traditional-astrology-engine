@@ -291,13 +291,22 @@ def test_vedic_gates_are_cited_and_owned(vedic):
 def test_layered_report_separates_reading_evidence_audit(vedic):
     from src.engine.traditions.report import render_layered
 
+    from src.engine.traditions.readiness import classify
+
     md = render_layered(vedic)
-    i_reading = md.index("## Part I — Reading")
+    i_reading = md.index(f"## Part I — {classify(vedic).label}")
     i_evidence = md.index("## Part II — Evidence")
     i_audit = md.index("## Part III — Audit")
     assert i_reading < i_evidence < i_audit
-    # no quoted evidence before Part II, no refusal notices before Part III
-    assert "> " not in md[:i_evidence]
+    # No quoted EVIDENCE before Part II. The one blockquote allowed before it
+    # is the document-kind banner, which is a label on the whole file rather
+    # than a source speaking, and which exists precisely so a thin report
+    # cannot pass itself off as a reading.
+    before = [
+        line for line in md[:i_evidence].splitlines()
+        if not line.startswith("> **")
+    ]
+    assert not any(line.startswith("> ") for line in before)
     assert "withheld:" not in md[:i_audit].replace(
         "withheld per publication policy", ""
     )

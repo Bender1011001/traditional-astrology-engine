@@ -1,4 +1,5 @@
 import copy
+import re
 
 import pytest
 
@@ -425,7 +426,16 @@ def test_deterministic_report_is_complete_and_cited(chart_data):
     assert "The Direct Judgment" in report
     assert "The Blunt Conclusion" in report
     assert "The Life as a Whole" in report
-    assert "Ranked Forecast: 2026-2031" in report
+    # The ranked forecast covers one full 12-year profection cycle, so its
+    # heading is derived from the chart's own years rather than hard-coded.
+    forecast_heading = re.search(r"## Ranked Forecast: (\d{4})-(\d{4})", report)
+    assert forecast_heading, "ranked forecast section is missing"
+    first_year, last_year = int(forecast_heading.group(1)), int(forecast_heading.group(2))
+    assert last_year - first_year == 12, (
+        f"ranked forecast should span one 12-year profection cycle, got {first_year}-{last_year}"
+    )
+    # Long-range calendars must extend past the detailed cycle.
+    assert "The Full Profection Calendar" in report
     assert "it does not remain abstract" not in report
     assert "Because its ruler is lodged in house" not in report
     assert "The ruler sees its own place" not in report

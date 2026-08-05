@@ -167,3 +167,44 @@ def test_a_foreign_tradition_is_not_cited_as_this_one_s_method(reports):
     )
     assert "Saravali" not in blob
     assert "Sāravalī" not in blob
+
+
+# --- a document says what kind of document it is -----------------------------
+
+
+def test_a_report_with_no_delineation_is_not_called_a_reading(reports):
+    """Sukuyōdō quotes nothing about the native. Calling it a reading misleads."""
+    from src.engine.traditions.readiness import AUDIT, classify
+
+    got = classify(reports["sukuyodo"])
+    assert got.delineations == 0
+    assert got.kind == AUDIT
+    assert "not a reading" in got.explanation
+
+
+def test_an_unsettled_anchor_downgrades_the_document(reports):
+    """Zi Wei's board and BaZi's hour pillar do not settle on this chart."""
+    from src.engine.traditions.readiness import RECONSTRUCTION, classify
+
+    for tradition_id in ("ziwei_doushu", "bazi"):
+        got = classify(reports[tradition_id])
+        assert got.anchor_unsettled
+        assert got.kind == RECONSTRUCTION
+
+
+def test_the_developed_tracks_are_still_called_readings(reports):
+    """The classifier must not be so harsh that it says nothing."""
+    from src.engine.traditions.readiness import READING, classify
+
+    for tradition_id in ("indian_jyotisha", "hellenistic", "islamicate_al_qabisi"):
+        assert classify(reports[tradition_id]).kind == READING
+
+
+def test_the_rendered_document_carries_its_own_classification(reports):
+    """Seven files under one heading mislead by arrangement, not by sentence."""
+    from src.engine.traditions.readiness import classify
+    from src.engine.traditions.report import render_layered
+
+    for tradition_id, report in reports.items():
+        head = render_layered(report)[:600]
+        assert classify(report).label in head, tradition_id
