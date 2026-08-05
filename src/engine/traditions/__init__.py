@@ -33,6 +33,7 @@ REPORT_ENGINES = {
     "islamicate_al_qabisi": "islamicate_report",
     "jaimini": "jaimini_report",
     "ziwei_doushu": "ziwei_report",
+    "sukuyodo": "sukuyodo_report",
 }
 
 

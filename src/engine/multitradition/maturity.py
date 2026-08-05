@@ -115,6 +115,14 @@ MATURITY: dict[str, dict[str, Any]] = {
         "interpretation_readiness": "structural - strength/pattern/useful-god adjudication source-gated",
         "publication_readiness": "research only",
     },
+    "sukuyodo": {
+        "category": PARTIAL_JUDGMENT,
+        "source_readiness": "moderate - 45 rules from the mainland recension; the Japanese recension Sukuyodo actually used is uncollated",
+        "computational_readiness": "moderate - the 27 mansions, both birth-mansion formulas, the three-nine relations and the pada signs; the observational derivation and the twelve-place horoscopy are not implemented",
+        "validation_coverage": "Murakami Tenno's recorded birth mansion reproduces exactly (lunar month 6 day 2 gives 柳), independently confirming both the month table and the canonical order; the pada allotment and the three-nine closure are asserted as the 27-cycle proofs the text intends",
+        "interpretation_readiness": "partial - structure and relations computed; the natal clauses are not rendered",
+        "publication_readiness": "research only",
+    },
     "tibetan": {
         "category": CALENDAR,
         "source_readiness": "low for the elemental layer - White Beryl located and public domain, but the photostat defeats transcription",
