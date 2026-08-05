@@ -110,23 +110,112 @@ AUTHOR_OF_PREFIX = (
     ("bazi.delin.", "Yuanhai Ziping / Sanming Tonghui"),
     ("hel.firmicus.", "Firmicus Maternus (Mathesis)"),
     ("hel.ptolemy", "Ptolemy (Apotelesmatika)"),
+    ("hel.valens.", "Vettius Valens (Anthologiae)"),
+    ("hel.mathesis.", "Firmicus Maternus (Mathesis)"),
     ("islam.qabisi.", "al-Qabīsī (Mudkhal)"),
+    ("islamicate.al_biruni.", "al-Bīrūnī (Tafhīm)"),
+    ("jaimini.", "Jaimini (Upadeśa Sūtras, with the Sūtrārthaprakāśikā)"),
+    ("ziwei.", "Ziwei Doushu Quanshu"),
+    ("sukuyo.", "Sukuyōkyō (T1299)"),
 )
+
+#: Distinct authors, for corroboration purposes. Two clauses from one work are
+#: one witness however many rule ids they carry, and two recensions of one work
+#: are one authority - a distinction the corpus records and this map must not
+#: quietly undo by naming the same person twice.
+def work_of(rule_id: str) -> str:
+    """The WORK a rule comes from, which is not the same as its author.
+
+    Kept separate because the review found author, work, recension and rule
+    identity being conflated: Sāravalī quoted twice was being counted as "a
+    second author kept as a separate voice" in one place and as
+    single-witness testimony in another.
+    """
+    return rule_id.split(".")[1] if "." in rule_id else rule_id
 
 
 def author_of(rule_id: str) -> str:
     for prefix, author in AUTHOR_OF_PREFIX:
         if rule_id.startswith(prefix):
             return author
-    return rule_id.split(".")[0]
+    # Never surface a rule-id prefix as though it were a person. A report that
+    # said "Single-witness testimony from hel" shipped once.
+    return "an unattributed rule"
+
+
+#: Words that reverse or blunt the term that follows them. Without these the
+#: classifier reads "no sorrow" as sorrow and "little scorched by grief" as
+#: grief - both real misclassifications found in shipped reports.
+NEGATORS = re.compile(
+    r"\b(no|not|never|neither|nor|without|free from|devoid of|little|"
+    r"scarcely|hardly|barely|rarely|seldom|un\w+ed)\b",
+    re.IGNORECASE,
+)
+
+#: Text that states method rather than outcome. A chapter heading, a promise to
+#: return to a subject later, or a definition of where a topic is read from is
+#: not a prediction about anybody, and counting it as testimony was one of the
+#: review's findings.
+PROCEDURAL = re.compile(
+    r"\b(is taken (naturally )?from|I (shall |will )?(return|discuss|speak|set out)|"
+    r"concerning the|on (marriage|travel|the)|chapter|the topic (of|concerning)|"
+    r"as for the|these I have set out|it is necessary to (examine|inspect))\b",
+    re.IGNORECASE,
+)
+
+#: Constructions that qualify a judgment rather than making one. These are
+#: SYNTACTIC and therefore more reliable than vocabulary: a clause built on
+#: "even if X, then Y" is mitigating whatever words fill X and Y. The review
+#: found "even if she is afflicted, she is helped so that not everything is
+#: overthrown" classified flatly unfavourable, which it plainly is not.
+MITIGATING = re.compile(
+    r"\b(even if|even when|even though|although|though|unless|provided|"
+    r"so that not|yet (is|are|she|he|they)|but (is|are|still)|nevertheless|"
+    r"is helped|are helped|mitigat|tempered|somewhat)\b",
+    re.IGNORECASE,
+)
+
+#: How far ahead of a matched term a negator still governs it.
+NEGATION_WINDOW = 28
+
+
+def _negated(clause: str, at: int) -> bool:
+    """Whether a term at this offset sits inside a negation's scope."""
+    window = clause[max(0, at - NEGATION_WINDOW):at]
+    return bool(NEGATORS.search(window))
 
 
 def clause_polarity(clause: str) -> str:
-    fav = len(FAVOURABLE.findall(clause))
-    unfav = len(UNFAVOURABLE.findall(clause))
-    if fav > unfav:
+    """Coarse polarity, with negation respected and procedure excluded.
+
+    Returns one of favourable / unfavourable / mixed / mitigating /
+    procedural / descriptive. This is deliberately NOT used to derive verdicts any more -
+    see synthesize() - because respecting negation fixes the sign errors and
+    does nothing about a sentence carrying five separate predictions.
+    """
+    if PROCEDURAL.search(clause):
+        return "procedural"
+    if MITIGATING.search(clause):
+        return "mitigating"
+    fav = sum(
+        1 for m in FAVOURABLE.finditer(clause) if not _negated(clause, m.start())
+    )
+    unfav = sum(
+        1 for m in UNFAVOURABLE.finditer(clause) if not _negated(clause, m.start())
+    )
+    # A negated unfavourable term is a mild positive - "no sorrow" is good news
+    # - and a negated favourable term is the reverse.
+    fav += sum(
+        1 for m in UNFAVOURABLE.finditer(clause) if _negated(clause, m.start())
+    )
+    unfav += sum(
+        1 for m in FAVOURABLE.finditer(clause) if _negated(clause, m.start())
+    )
+    if fav and unfav:
+        return "mixed"
+    if fav:
         return "favourable"
-    if unfav > fav:
+    if unfav:
         return "unfavourable"
     return "descriptive"
 
@@ -138,12 +227,18 @@ def claims_from(delineations: list[Delineation]) -> list[Claim]:
             clause = clause.strip()
             if len(clause) < 4 or clause.startswith("["):
                 continue
+            polarity = clause_polarity(clause)
+            if polarity == "procedural":
+                # Method, not testimony. The review found chapter openings
+                # counted as marriage evidence and as the sole "Character"
+                # clause in a whole report.
+                continue
             for topic, pattern in TOPIC_PATTERNS.items():
                 if pattern.search(clause):
                     out.append(Claim(
                         text=clause,
                         topic=topic,
-                        polarity=clause_polarity(clause),
+                        polarity=polarity,
                         author=author_of(d.rule_id),
                         rule_id=d.rule_id,
                         trigger=d.trigger,
@@ -229,18 +324,36 @@ def synthesize(
     if facts is not None and tradition == "jyotisha":
         apply_saravali_gates(claims, facts)
 
-    section = ReportSection("Synthesis by Life Topic", level=2)
+    section = ReportSection("Topic Index — Matched Clauses", level=2)
     if not claims:
         section.notes.append("No fired delineation carries a taggable claim.")
         return section
 
     section.notes.append(
-        "Adjudication uses only precedence the sources themselves state "
-        "(Saravali 23.86, 24.23, 30.86-87 for this tradition). Agreement is "
-        "counted between DISTINCT authors - one author quoted twice is one "
-        "witness - and a contradiction no source resolves is reported as "
-        "unresolved, not silently averaged away."
+        "**This is an index, not a judgment.** It shows which quoted clauses "
+        "mention which life topic, and who said them. It does NOT adjudicate "
+        "between them, and nothing here should be read as the engine's "
+        "verdict on a topic."
     )
+    section.notes.append(
+        "The reason is specific and worth stating. A source sentence often "
+        "carries several separate predictions — *disliked by women, poor, "
+        "having neither comfort nor sons* is four claims, not one — and this "
+        "engine files the whole sentence under every topic that matches one "
+        "of them. Until those are split into atomic propositions, counting "
+        "clauses for and against a topic would be counting the same sentence "
+        "repeatedly under headings it only partly belongs to. So the counting "
+        "is not done."
+    )
+    if tradition == "jyotisha" and facts is not None:
+        section.notes.append(
+            "Sāravalī's own qualification rules (23.86 on strength, 24.23 on "
+            "the navāṃśa outranking D1, 30.86-87 on the duḥsthāna inversion) "
+            "are attached to the clauses they bear on, below. Note what that "
+            "means: they are one author's hierarchy, and where they qualify "
+            "another author's statement that is a tradition-level synthesis "
+            "choice, not the second author's own view."
+        )
 
     by_topic: dict[str, list[Claim]] = {}
     for claim in claims:
@@ -248,58 +361,31 @@ def synthesize(
 
     for topic in sorted(by_topic, key=lambda t: -len(by_topic[t])):
         topic_claims = by_topic[topic]
-        authors_fav = {c.author for c in topic_claims if c.polarity == "favourable"}
-        authors_unfav = {c.author for c in topic_claims if c.polarity == "unfavourable"}
-
-        lines = [f"**{topic.capitalize()}** — {len(topic_claims)} clause(s) from "
-                 f"{len({c.author for c in topic_claims})} author(s)."]
-
-        if len(authors_fav) >= 2 and not authors_unfav:
-            lines.append(
-                "Corroborated favourable: "
-                + "; ".join(sorted(authors_fav))
-                + " agree independently."
-            )
-        elif len(authors_unfav) >= 2 and not authors_fav:
-            lines.append(
-                "Corroborated unfavourable: "
-                + "; ".join(sorted(authors_unfav))
-                + " agree independently."
-            )
-        elif authors_fav and authors_unfav:
-            lines.append(
-                "CONTRADICTION: favourable testimony from "
-                + "; ".join(sorted(authors_fav))
-                + " against unfavourable testimony from "
-                + "; ".join(sorted(authors_unfav)) + "."
-            )
-            resolved = [c for c in topic_claims if c.qualifiers]
-            if resolved:
-                lines.append(
-                    "The sources' own gates bear on it: "
-                    + " ".join(q for c in resolved for q in c.qualifiers[:1])
-                )
-            else:
-                lines.append(
-                    "No precedence rule in the corpus resolves this. The "
-                    "conflict stands, and choosing a side would be the "
-                    "engine's invention, not the tradition's."
-                )
-        else:
-            single = sorted({c.author for c in topic_claims})
-            lines.append(
-                ("Single-witness testimony from " + "; ".join(single) + " - "
-                 "uncorroborated, not confirmed.")
-            )
-
+        authors = sorted({c.author for c in topic_claims})
+        lines = [
+            f"**{topic.title()}** — {len(topic_claims)} clause(s) "
+            f"from {len(authors)} source(s): {', '.join(authors)}."
+        ]
+        # Polarity is shown per clause and never aggregated. It is coarse -
+        # negation and mitigation are handled, composite sentences are not -
+        # and a total would imply a confidence the classifier has not earned.
         for claim in topic_claims:
-            marker = {"favourable": "+", "unfavourable": "−"}.get(claim.polarity, "·")
-            lines.append(
-                f"  {marker} {claim.text[:110]} — *{claim.author}*, "
-                f"selected by {claim.trigger.split('·')[0].strip()}"
+            marker = {
+                "favourable": "+", "unfavourable": "−",
+                "mixed": "±", "mitigating": "~",
+            }.get(claim.polarity, "·")
+            text = claim.text if len(claim.text) <= 160 else (
+                claim.text[:157].rstrip() + "…"
             )
-            for q in claim.qualifiers:
-                lines.append(f"      ↳ {q}")
+            lines.append(f"  {marker} {text} — {claim.author}")
+            for note in claim.qualifiers:
+                lines.append(f"      {note}")
         section.notes.append("\n".join(lines))
 
+    section.notes.append(
+        "Key: + favourable · − unfavourable · ± mixed · ~ mitigating · "
+        "· descriptive. Statements of method rather than outcome — chapter "
+        "openings, definitions of where a topic is read from — are excluded "
+        "from this index entirely; they are procedure, not testimony."
+    )
     return section

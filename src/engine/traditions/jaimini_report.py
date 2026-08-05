@@ -325,10 +325,12 @@ def _argala_section(report: TraditionReport, j: dict) -> None:
             sub.notes.append(
                 f"- From the 3rd: {', '.join(third['grahas'])} "
                 f"({len(third['malefics'])} malefic, "
-                f"{len(third['benefics'])} benefic). Forms on the "
-                "'three or more malefics' reading: "
-                f"{third['forms_on_three_or_more']}; on the 'malefics "
-                f"outnumber benefics' reading: {third['forms_on_outnumbering']}."
+                f"{len(third['benefics'])} benefic). On the 'three or more "
+                "malefics' reading it "
+                + ("forms" if third["forms_on_three_or_more"] else "does not form")
+                + "; on the 'malefics outnumber benefics' reading it "
+                + ("forms" if third["forms_on_outnumbering"] else "does not form")
+                + "."
             )
             sub.notes.append(third["reading_note"])
 

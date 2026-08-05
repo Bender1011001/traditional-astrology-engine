@@ -39,6 +39,16 @@ STEM_HANZI = {
     "ji": "己", "geng": "庚", "xin": "辛", "ren": "壬", "gui": "癸",
 }
 
+#: The pack's cell keys, named for a reader. Printing the keys themselves put
+#: field names like female_life_verses into a document meant for a human.
+CELL_NAMES = {
+    "core_nature": "the star's core nature",
+    "by_palace_pair": "its reading by palace pair",
+    "male_life_verses": "the verses for a male nativity",
+    "female_life_verses": "the verses for a female nativity",
+    "limit_verses": "the verses for the decade limits",
+}
+
 BRIGHTNESS_ENGLISH = {
     "庙": "temple", "旺": "prospering", "得地": "well placed",
     "利益": "benefiting", "平和": "neutral", "不得地": "ill placed",
@@ -306,7 +316,7 @@ def _life_palace_section(
         if untranslated:
             s.notes.append(
                 "Transcribed but not rendered for this star: "
-                + ", ".join(untranslated)
+                + ", ".join(CELL_NAMES.get(c, c) for c in untranslated)
                 + ". The Chinese is on disk; the rendering pass did not reach "
                 "it. That is a different state from missing, and the fixable "
                 "one."
@@ -325,6 +335,11 @@ def _transformations_section(report: TraditionReport, facts: dict) -> None:
         if fork.get("conventions_agree"):
             # The verdict is quoted from the pack, which does not terminate it.
             verdict = str(fork.get("verdict") or "").rstrip()
+            # The pack prefixes its verdict with a status token; that is data
+            # for a validator, not a sentence for a reader.
+            if verdict.startswith("empty -"):
+                verdict = verdict[len("empty -"):].strip()
+                verdict = verdict[:1].upper() + verdict[1:] if verdict else ""
             if verdict and verdict[-1] not in ".!?":
                 verdict += "."
             s.notes.append(
@@ -348,7 +363,9 @@ def _limits_section(
     s.notes.append(
         "Every rule behind this chart carries evidence grade "
         f"{profile.get('evidence_grade_of_every_rule')} and the pack's review "
-        f"status is {profile.get('review_status')}. The renderings from the "
+        "status is "
+        + str(profile.get("review_status", "")).replace("_", " ")
+        + ". The renderings from the "
         "Chinese are unreviewed."
     )
     s.notes.append(

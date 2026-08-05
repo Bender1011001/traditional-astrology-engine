@@ -501,8 +501,15 @@ def _condition_verdict(
                     or zc.rooted("zheng_guan")
                 )
                 checks.append(
-                    (f"Wealth present={wealth}, Officer present={officer}, "
-                     f"Officer armed={favorable}", favorable)
+                    (
+                        "Wealth "
+                        + ("present" if wealth else "absent")
+                        + ", Officer "
+                        + ("present" if officer else "absent")
+                        + ", Officer "
+                        + ("armed" if favorable else "unarmed"),
+                        favorable,
+                    )
                 )
             # the pure-description keys add no check
 
@@ -527,7 +534,8 @@ def _condition_verdict(
         return None, (
             "all decidable clauses hold ("
             + ", ".join(n for n, _v in checks)
-            + ") but blocked on: " + "; ".join(undecidable)
+            + ") but blocked on: "
+            + "; ".join(u.replace("_", " ") for u in undecidable)
         )
     return True, ", ".join(n for n, _v in checks)
 
@@ -793,7 +801,13 @@ def _delineations(report: TraditionReport, facts: dict) -> None:
             )
         elif verdict is None:
             undecided += 1
-            undecided_notes.append(f"`{rule['rule_id']}` — {why}")
+            scope = (rule.get("scope") or {})
+            label = (
+                scope.get("technique")
+                or scope.get("unit")
+                or rule.get("rule_id", "").split(".")[-1].replace("_", " ")
+            )
+            undecided_notes.append(f"{label} — {why}")
         else:
             skipped += 1
     s.notes.insert(

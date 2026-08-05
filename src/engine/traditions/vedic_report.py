@@ -303,7 +303,7 @@ def _opening(report: TraditionReport, facts: dict, lagna: dict) -> None:
             s.refusals.append(
                 "BPHS Adhyāya 15 does state a result for the lagneśa in the "
                 f"{ORDINAL[lord_row['house']]} bhāva, and it is withheld here: "
-                f"the pack marks that cell {brestrict!r} and forbids rendering "
+                f"the pack marks that cell {_readable(brestrict)} and forbids rendering "
                 "it as a claim about a living person."
             )
 
@@ -455,7 +455,7 @@ def _bhavas_section(
                 sub.refusals.append(
                     f"BPHS Adhyāya 15 states a result for the {ORDINAL[house]} "
                     f"lord in the {ORDINAL[lord_row['house']]} bhāva and it is "
-                    f"withheld: the pack marks that cell {brestrict!r} and "
+                    f"withheld: the pack marks that cell {_readable(brestrict)} and "
                     "forbids rendering it as a claim about a living person."
                 )
             else:
@@ -482,6 +482,15 @@ def _bhavas_section(
             sub.notes.append(
                 "No graha occupies it; it is judged from its lord's condition alone."
             )
+
+
+def _readable(token: object) -> str:
+    """A pack's policy tag, said in words.
+
+    These are category labels for a validator. Printed raw they put strings
+    like third_party_death_claim into a sentence a person reads.
+    """
+    return str(token).replace("_", " ")
 
 
 def _strength_of(birth: BirthInput, facts: dict) -> dict[str, Any]:

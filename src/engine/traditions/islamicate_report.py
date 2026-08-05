@@ -286,7 +286,8 @@ def _conditions_section(
     if mercury.get("gender"):
         s.notes.append(
             f"Mercury is resolved as {mercury['gender']} and "
-            f"{mercury.get('sect')} here, on the basis '{mercury.get('basis')}'."
+            f"{mercury.get('sect')} here, on the basis that he is "
+            + str(mercury.get("basis", "")).replace("_", " ") + "."
             + (
                 f" Al-Qabisi's own chapter differs: {mercury['al_qabisi_difference']}"
                 if mercury.get("al_qabisi_difference") else ""
@@ -405,11 +406,23 @@ def _hyleg_section(report: TraditionReport, qabisi: dict) -> None:
             "can be audited:"
         )
         for row in ledger:
+            place = row.get("whole_sign_place")
+            # A candidate this engine never computed has not been TESTED, and
+            # printing it as "not eligible; aspect gate failed" collapses
+            # not_computed into failed - which is precisely the distinction
+            # settle_hyleg exists to preserve. It must not be undone in prose.
+            if row.get("longitude") is None or place is None:
+                s.notes.append(
+                    f"- {row['candidate']}: **not computed** by this engine, "
+                    "so neither test was applied. This is not a failure — it "
+                    "is the reason the settlement above is conditional."
+                )
+                continue
             verdict = "eligible" if row.get("eligible") else "not eligible"
+            gate = "passed" if row.get("passes_aspect_gate") else "failed"
             s.notes.append(
-                f"- {row['candidate']}: place {row.get('whole_sign_place')}, "
-                f"{verdict} by place; aspect gate "
-                f"{'passed' if row.get('passes_aspect_gate') else 'failed'}."
+                f"- {row['candidate']}: place {place}, {verdict} by place; "
+                f"aspect gate {gate}."
             )
 
     forks = qabisi.get("kadkhudah_forks") or {}

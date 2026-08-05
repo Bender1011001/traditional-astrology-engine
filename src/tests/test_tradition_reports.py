@@ -243,8 +243,12 @@ def test_corroboration_requires_distinct_authors():
     ]
     section = synthesize(same_author, None)
     blob = " ".join(section.notes)
+    # Two clauses from Saravali are one witness however many rule ids they
+    # carry. The index reports the SOURCE COUNT and issues no verdict, because
+    # the verdicts rested on a contaminated topic router and were withdrawn.
     assert "Corroborated" not in blob
-    assert "Single-witness" in blob or "1 author" in blob
+    assert "1 source(s)" in blob
+    assert "Kalyāṇavarma" in blob
 
 
 def test_contradiction_is_reported_not_averaged():
@@ -258,16 +262,27 @@ def test_contradiction_is_reported_not_averaged():
     ]
     section = synthesize(conflict, None)
     blob = " ".join(section.notes)
-    assert "CONTRADICTION" in blob
-    assert "No precedence rule in the corpus resolves this" in blob
+    # Both clauses are still shown, attributed and signed, and the engine no
+    # longer declares a contradiction: whole composite sentences are routed
+    # into every matching topic, so a for-and-against count would be counting
+    # the same sentence under headings it only partly belongs to.
+    assert "CONTRADICTION" not in blob
+    assert "index, not a judgment" in blob
+    assert "Kalyāṇavarma" in blob and "Mantreśvara" in blob
+    assert "2 source(s)" in blob
 
 
-def test_vedic_synthesis_applies_the_sources_own_gates(vedic):
-    syn = next(s for s in vedic.sections if s.title == "Synthesis by Life Topic")
+def test_vedic_gates_are_cited_and_owned(vedic):
+    """Sāravalī's gates are still attached - and now say whose they are.
+
+    The review's point: applying one author's qualification rules to another
+    author's statement is a tradition-level synthesis choice, not "the sources'
+    own gates". The section must say which of the two it is doing.
+    """
+    syn = next(s for s in vedic.sections if "Topic Index" in s.title)
     blob = " ".join(syn.notes)
-    # the gates are cited by sloka, which is what makes them sourced
     assert "23.86" in blob or "24.23" in blob or "30.86" in blob
-    assert "invent" in blob or "unresolved" in blob or "own gates" in blob
+    assert "one author's hierarchy" in blob
 
 
 # --- three-layer rendering (review finding 16 / P3) --------------------------
@@ -400,7 +415,10 @@ def test_hellenistic_lists_undecided_rules_openly(hellenistic):
     )
     blob = " ".join(undecided.notes)
     assert "doryphoria" in blob
-    assert "hel.ptolemy.parents_same_sect_doryphoria_brilliance" in blob
+    # Named by what they need and who said them - NOT by rule id, which is an
+    # internal identifier and belongs in the audit layer.
+    assert "Ptolemy" in blob or "Apotelesmatika" in blob
+    assert "hel.ptolemy." not in blob
 
 
 def test_mathesis_sect_split_cells_select_by_chart_sect(hellenistic):

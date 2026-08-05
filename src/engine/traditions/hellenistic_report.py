@@ -248,13 +248,10 @@ def _sect_section(
 def _ascendant_section(report: TraditionReport, facts: dict) -> None:
     s = report.add(ReportSection("The Ascendant and the Twelve Topics", level=2))
     asc = facts.get("ascendant", {})
-    mc = facts.get("midheaven", {})
     s.notes.append(
         f"The Ascendant rises at **{asc.get('sign')} "
         f"{asc.get('degree_in_sign', 0):.2f}°**; whole-sign houses follow from "
-        f"it, which is the Hellenistic norm. The quadrant Midheaven falls at "
-        f"{mc.get('sign')} {mc.get('degree_in_sign', 0):.2f}° and is read as a "
-        "degree of eminence, not a cusp."
+        f"it, which is the Hellenistic norm. {_midheaven_clause(facts)}"
     )
 
 
@@ -399,8 +396,44 @@ def _lots_section(report: TraditionReport, facts: dict, is_day: bool) -> None:
             )
 
 
+def _midheaven_clause(facts: dict) -> str:
+    """Say where the quadrant Midheaven is, or that it was not computed.
+
+    This printed "falls at None 0.00°" for months. An uncomputed quantity
+    rendered in the grammar of a position is worse than an omission: the
+    reader has no way to tell it apart from a real degree.
+    """
+    mc = facts.get("midheaven") or {}
+    sign = mc.get("sign")
+    if not sign:
+        # The panel reports the MC as a bare degree elsewhere; where this
+        # engine has not resolved it to a sign, say so rather than print a
+        # placeholder in the shape of an answer.
+        degree = facts.get("midheaven_degree") or {}
+        if degree.get("sign"):
+            return (
+                f"The quadrant Midheaven falls in {degree['sign']} at "
+                f"{degree.get('degree_in_sign', 0):.2f}° and is read as a "
+                "degree of eminence, not a cusp."
+            )
+        return (
+            "The quadrant Midheaven is not computed in this section, so no "
+            "degree of eminence is stated."
+        )
+    return (
+        f"The quadrant Midheaven falls at {sign} "
+        f"{mc.get('degree_in_sign', 0):.2f}° and is read as a degree of "
+        "eminence, not a cusp."
+    )
+
+
 def _undecided_section(report: TraditionReport) -> None:
     s = report.add(ReportSection("Testimonies that could not be decided", level=2))
+    s.notes.append(
+        "Each of these is a real statement in the sources whose condition this "
+        "engine cannot yet evaluate. They are listed by what they need, not by "
+        "their internal identifiers, which belong in the audit."
+    )
     s.notes.append(
         "These sourced rules exist and were NOT fired, because deciding them "
         "needs a fact this engine does not yet compute. Listed so the omission "
@@ -418,7 +451,9 @@ def _undecided_section(report: TraditionReport) -> None:
          "engine states structurally but the rule words qualitatively"),
     ):
         if rid in _rules_by_id():
-            s.notes.append(f"- `{rid}` — {why}")
+            rule = _rules_by_id()[rid]
+            source = _source_label(rule)
+            s.notes.append(f"- From {source} — {why}.")
 
 
 def _limits(report: TraditionReport) -> None:
@@ -436,7 +471,7 @@ def _limits(report: TraditionReport) -> None:
             "this report currently fires doctrine rules only and will grow "
             "several hundred cells with no engine change when it lands."
         ),
-        "Valens contributes ZERO rules: his 1908 OCR contains no Greek "
+        "Valens' 1908 OCR contains no Greek "
         "codepoints in 1.1 million characters (verified by counting). Page "
         "images are the only route to his sect doctrine and to any worked "
         "nativity - none exists anywhere in the fetched Hellenistic corpus.",
@@ -514,10 +549,19 @@ def _valens_topic_section(
             "here. This engine does not compute Valens' distribution of times, "
             "so a rule gated on a chronocrator stays open instead of being "
             "counted against the chart. Most often wanted: "
-            + ", ".join(f"{k} ({n})" for k, n in top) + "."
+            + ", ".join(f"{_readable_fact(k)} ({n})" for k, n in top) + "."
         )
     for method in sorted(chart.used_methods):
         s.notes.append("configured_method - " + CONFIGURED_METHODS[method])
+
+
+def _readable_fact(name: str) -> str:
+    """Valens' condition names, as English rather than as field keys.
+
+    These are the engine's internal fact identifiers. Printing them told the
+    reader that "venus.aspected_by" was a thing Valens said.
+    """
+    return name.replace("_", " ").replace(".", " ")
 
 
 def _valens_trigger(rule: dict) -> str:
