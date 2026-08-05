@@ -151,12 +151,14 @@ def _opening(
     bsect = (biruni.get("sect") or {}) if biruni else {}
     if bsect.get("sun_arc_test_agrees_with_altitude") is not None:
         agrees = bsect["sun_arc_test_agrees_with_altitude"]
-        s.notes.append(
-            "Two independent tests of sect agree"
+        verdict = (
+            "Two independent tests of sect agree here"
             if agrees else
-            "The two tests of sect DISAGREE, which is reported rather than "
-            "settled by preference"
-            + ": the Sun's altitude, and the zodiacal arc against the "
+            "The two tests of sect DISAGREE here, which is reported rather "
+            "than settled by preference"
+        )
+        s.notes.append(
+            f"{verdict}: the Sun's altitude, and the zodiacal arc against the "
             "Ascendant-Descendant axis."
         )
     d = _fire(
@@ -328,10 +330,14 @@ def _lots_section(report: TraditionReport, qabisi: dict) -> None:
             f"{len(lots)} lot(s) are cast for this nativity. Each carries its "
             "own formula so the number can be checked rather than taken:"
         )
+        prose: list[str] = []
         for name, lot in list(lots.items())[:14]:
             if not isinstance(lot, dict):
-                # Some entries are the pack's own prose notes, not cast lots.
-                s.notes.append(f"- **{name}** — {lot}")
+                # Some entries are the pack's own prose notes rather than cast
+                # lots - typically a statement of which lots were NOT cast and
+                # why. They belong after the list, not disguised inside it
+                # with an internal key for a name.
+                prose.append(str(lot))
                 continue
             reversal = (
                 " (reversed by sect)" if lot.get("sect_reverses") else ""
@@ -340,6 +346,8 @@ def _lots_section(report: TraditionReport, qabisi: dict) -> None:
                 f"- **{name}** — {lot.get('degree', 0):.2f}° "
                 f"{lot.get('sign', '?')}; {lot.get('formula', '')}{reversal}."
             )
+        for line in prose:
+            s.notes.append(f"Not cast here — {line}")
     weak = _rules_by_id().get("islam.qabisi.ch5.commodity_price_lots_self_declared_weak")
     if weak is not None:
         s.notes.append(
@@ -465,7 +473,11 @@ def _time_section(report: TraditionReport, qabisi: dict) -> None:
 
     tasyir = qabisi.get("tasyir") or {}
     if tasyir.get("finding"):
-        s.notes.append(f"On the rate of direction — {tasyir['finding']}")
+        # Quoted from the pack, which does not always terminate its prose.
+        finding = str(tasyir["finding"]).rstrip()
+        if finding and finding[-1] not in ".!?":
+            finding += "."
+        s.notes.append(f"On the rate of direction — {finding}")
 
 
 def _selfcheck_section(report: TraditionReport, qabisi: dict) -> None:

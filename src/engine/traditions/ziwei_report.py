@@ -323,11 +323,14 @@ def _transformations_section(report: TraditionReport, facts: dict) -> None:
     )
     if fork:
         if fork.get("conventions_agree"):
+            # The verdict is quoted from the pack, which does not terminate it.
+            verdict = str(fork.get("verdict") or "").rstrip()
+            if verdict and verdict[-1] not in ".!?":
+                verdict += "."
             s.notes.append(
                 "The lunar-new-year and li chun conventions assign the same "
                 "sexagenary year to this birth, so the transformations do not "
-                "turn on which boundary is used. "
-                f"{fork.get('verdict', '')}"
+                f"turn on which boundary is used. {verdict}".rstrip()
             )
         else:
             s.refusals.append(

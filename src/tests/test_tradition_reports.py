@@ -719,3 +719,26 @@ def test_a_tradition_without_an_engine_is_named_not_skipped(tmp_path):
     assert code == 1, "an unengined tradition must be reported, not ignored"
     assert (tmp_path / "jaimini.md").exists()
     assert not (tmp_path / "babylonian.md").exists()
+
+
+def test_no_internal_key_is_printed_as_a_lot_name(islamicate):
+    """'_omitted_house_cusp_lots' once appeared in the list as if it were a lot."""
+    lots = next(s for s in islamicate.sections if s.title == "The Lots")
+    for note in lots.notes:
+        if note.startswith("- **"):
+            name = note.split("**")[1]
+            assert not name.startswith("_"), name
+            assert "_" not in name or " " in name, name
+
+
+def test_no_report_note_ends_mid_sentence(islamicate, jaimini, ziwei):
+    """A ternary once dropped the tail of a sentence onto the floor."""
+    for report in (islamicate, jaimini, ziwei):
+        for section in report.sections:
+            for note in section.notes:
+                stripped = note.rstrip()
+                if not stripped or stripped.startswith(("-", "**")):
+                    continue
+                assert stripped[-1] in ".:;!?\"'）)", (
+                    f"{report.tradition_id}: {stripped[-70:]!r}"
+                )
