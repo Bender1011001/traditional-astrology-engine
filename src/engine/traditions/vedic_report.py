@@ -930,10 +930,13 @@ def _navamsha_section(report: TraditionReport, facts: dict, grahas: list) -> Non
         }
         for g in grahas
     ]
-    s.refusals.append(
-        "Only D1 and D9 are computed. The wider ṣoḍaśavarga — D10 for career, D7 "
-        "for children, D12 for parents — is not, so no varga-specific judgment is "
-        "made on those topics."
+    s.notes.append(
+        "This section compares D1 against D9 only, because that is the pair "
+        "BPHS uses to test a dignity. The wider set — D10 for career, D7 for "
+        "children, D12 for parents, and six more — is computed in the "
+        "Divisional Charts section above. What is still absent is a "
+        "varga-specific *judgment* layer: the charts are cast, and no author's "
+        "delineation is keyed to them in this corpus yet."
     )
 
 

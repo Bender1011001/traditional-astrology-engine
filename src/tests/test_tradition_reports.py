@@ -742,3 +742,24 @@ def test_no_report_note_ends_mid_sentence(islamicate, jaimini, ziwei):
                 assert stripped[-1] in ".:;!?\"'）)", (
                     f"{report.tradition_id}: {stripped[-70:]!r}"
                 )
+
+
+def test_no_report_disclaims_a_capability_it_now_has(vedic):
+    """The navamsa section claimed only D1 and D9 exist, after nine landed.
+
+    A stale refusal is worse than a missing feature: it tells the reader the
+    engine cannot do something it just did, in the same document.
+    """
+    blob = " ".join(
+        n for s in vedic.sections for n in (s.notes + s.refusals)
+    )
+    if "Divisional Charts" in [s.title for s in vedic.sections]:
+        assert "Only D1 and D9 are computed" not in blob
+    vargas = next(
+        (s for s in vedic.sections if s.title == "Divisional Charts (Vargas)"),
+        None,
+    )
+    assert vargas is not None
+    listed = " ".join(vargas.notes)
+    for divisor in ("D7", "D10", "D12", "D30"):
+        assert divisor in listed, divisor
